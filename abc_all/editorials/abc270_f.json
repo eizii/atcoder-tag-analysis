@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc270_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc270/editorial/4879",
+      "text": "\\(N+2\\)\n頂点のグラフであって、最初どの\n\\(2\\)\n頂点の間にも辺が貼られていないようなものを考えます。これに対して、\n島\n\\(i\\)\nに空港を建設\n\\(\\leftrightarrow\\)\n頂点\n\\(i\\)\nと頂点\n\\(N+1\\)\nの間に辺を張る\n島\n\\(i\\)\nに港を建設\n\\(\\leftrightarrow\\)\n頂点\n\\(i\\)\nと頂点\n\\(N+2\\)\nの間に辺を張る\n島\n\\(A_i\\)\nと島\n\\(B_i\\)\nの間に道路を建設\n\\(\\leftrightarrow\\)\n頂点\n\\(A_i\\)\nと頂点\n\\(B_i\\)\nの間に辺を張る\nと対応させると、いくつかの交通手段を建設した後で島\n\\(U\\)\nから 島\n\\(V\\)\nまで移動できる事は対応する辺を追加した後で 頂点\n\\(U\\)\nと頂点\n\\(V\\)\nが同じ連結成分に属する事と同値である事が分かります。\nよって、どの島の間も移動できる事は頂点\n\\(1,2,\\ldots, N\\)\nが同じ連結成分に属することと同値になります。最小コストを達成する建設の仕方に対応する辺の張り方をした時の頂点\n\\(1,2,\\ldots, N\\)\nを含む連結成分を構成する頂点集合は\n\\(N+1, N+2\\)\nをそれぞれ含むか否かで\n\\(2^2=4\\)\n通り考えられます。よって、それぞれの場合に対して、連結にするための最小コストを求め、さらにそれらの最小値を取れば良いです。\n最終的な連結成分の頂点集合を固定して考えます。\nこの時、この問題は最小全域木を求める問題として考える事ができます。\n\\(N+2\\)\n頂点の重み付き無向グラフ\n\\(G\\)\nであって、建設できる交通手段に対応する辺とそのコストを重みとするようなものを考えます。\n最終的な連結成分が\n\\(N+2\\)\n頂点全体であった場合、\n求めたいコストの最小値は\n\\(G\\)\nの最小全域木の辺の重みの総和になります。\n連結成分の頂点集合が全体でない時は、最小コストを求める上で\n両端がその頂点集合に属しているような辺のみを考えればよく、\nその頂点集合によって誘導される\n\\(G\\)\nの部分グラフ（その固定した頂点集合に属する頂点と両端がその頂点集合に属しているような辺のみを考えたグラフ）\n\\(G'\\)\nにおける最小全域木の辺の重みの総和がその時の最小コストとなります。\nただし、\n\\(G'\\)\nが連結でない場合は 最小全域木を構成する事ができないため、コストは\n\\(+\\infty\\)\nとなります。\nよって、これらの最小値を取ることで答を求める事ができました。\nなお、頂点\n\\(N+1\\)\n,\n\\(N+2\\)\nは頂点\n\\(1,2,\\ldots, N\\)\nの全てと繋がっているため、最終的な答が\n\\(+\\infty\\)\nとなることはありません。\n\\(G\\)\nは\n\\(N+2\\)\n頂点\n\\(2N+M\\)\n辺のグラフであり、最小全域木はクラスカル法などを使うことで\n\\(O((N+M)\\log(N+M))\\)\nで求める事ができます。\nよって、十分高速にこの問題を解く事ができました。\nc++ による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/dsu>\n\nusing namespace std;\nusing namespace atcoder;\n\n#define INF (long long)3e+18\n\nint n,m;\nvector<tuple<long long,int,int> >e;\n\nlong long solve(void){\n\tlong long ret=0;\n\tsort(e.begin(),e.end());\n\tint sz=e.size();\n\t\n\tdsu d(n+3);\n\tfor(int i=0;i<sz;i++){\n\t\tif(!d.same(get<1>(e[i]),get<2>(e[i]))){\n\t\t\td.merge(get<1>(e[i]),get<2>(e[i]));\n\t \t\tret+=get<0>(e[i]);\n        \t}\n    }\n   \n\tif(d.size(1)<n)return INF;\n\treturn ret;\n}\n\n\n\nint main(void) {\n\n    cin>>n>>m;\n\n    vector<int> a(m),b(m);\n    vector<long long> x(n),y(n),z(m);\n\n\tfor(int i=0;i<n;i++)cin>>x[i];\n\tfor(int i=0;i<n;i++)cin>>y[i];\n\tfor(int i=0;i<m;i++){\n\t\tcin>>a[i]>>b[i]>>z[i];\n\t}\n\n\tlong long ans=INF;\n\tfor(int k=0;k<4;k++){\n\t\te.clear();\n\t\tif(k&1)for(int i=0;i<n;i++)e.push_back({x[i],i+1,n+1});\n\t\tif(k&2)for(int i=0;i<n;i++)e.push_back({y[i],i+1,n+2});\n\t\tfor(int i=0;i<m;i++)e.push_back({z[i],a[i],b[i]});\n\t\tans=min(ans,solve());\n\t}\n\tcout<<ans<<endl;\n\n}"
+      ],
+      "text_sha256": "b098412f27b7f9f209d651ce9fdc8be85562746788c6ffa219fb8466c794a778",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc270/abc270_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

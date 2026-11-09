@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc318_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc318/editorial/7066",
+      "text": "この問題は、bit DP によって解くことができます。\n状態の定義\n\\(\\mathrm{dp}[b]\\)\nを、\n\\(b\\)\nのうち立っているビットを\n\\(i_1,i_2,\\ldots,i_k\\)\nとしたとき、頂点\n\\(i_1,i_2,\\ldots,i_k\\)\nについてはその頂点を端点とする辺を選んでいる、またはその頂点を端点とする辺は選ばないことを決定した際の、選んだ辺の重みの総和の最大値\nと定義します。求めたいのは、\n\\(\\mathrm{dp}[2^N-1]\\)\nです。\n遷移方法\n\\(\\mathrm{dp}[b]\\)\nを、\n\\(b\\)\nの昇順に求めていきます。ある状態からの遷移は、次に追加する辺の候補を全て試し、その辺の端点二つが\n\\(b\\)\nに含まれない場合追加すればよいです。\nなお、\n\\(b\\)\nに含まれない最小の番号の頂点に着目することでより良い計算量で解くこともできます。実装例は後者になっています。\n実装例(C++)\n余談\nこの問題は多項式時間で解くこともできますが、アルゴリズムや実装の複雑さから、AtCoder の Rated で要求されることは基本的にないと考えられます。ジャッジは\nLibrary Checker\nにあるので、興味のある方は調べてみてください。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define rep(i, x) for(int i = 0; i < (x); i++)\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector d(n, vector(n, 0));\n\trep(i, n) {\n\t\tfor(int j = i + 1; j < n; j++) cin >> d[i][j];\n\t}\n\tvector dp(1 << n, 0ll);\n\trep(b, (1 << n) - 1) {\n\t\tint l = -1;\n\t\trep(i, n) if(!(b >> i & 1)) {\n\t\t\tl = i;\n\t\t\tbreak;\n\t\t}\n\t\trep(i, n) if(!(b >> i & 1)) {\n\t\t\tint nb = b | (1 << l) | (1 << i);\n\t\t\tdp[nb] = max(dp[nb], dp[b] + d[l][i]);\n\t\t}\n\t}\n\tcout << dp.back() << endl;\n}"
+      ],
+      "text_sha256": "9648d9eec1e0b844ae28ac46673836ce6e132aeca3cd29493d50d8dbe1ac596b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc318/abc318_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc318/editorial/7076",
+      "text": "辺を選べるだけ選ぶ方法は最大で\n\\(15 \\times 13 \\times 11 \\times 9 \\times 7 \\times 5 \\times 3 \\times 1 = 2027025\\)\n通りしかなく（\n\\(N = 15, 16\\)\nのどちらの場合もこの個数です）、全探索が可能です。\n実装例（Python）\nP.S. A, B, C の原案でした。",
+      "codes": [
+        "N = int(input())\nD = [[0 for j in range(N)] for i in range(N)]\nfor i in range(N - 1):\n    d = list(map(int, input().split()))\n    for j in range(i + 1, N):\n        D[i][j] = D[j][i] = d[j - i - 1]\n\n\ndef dfs(used):\n    if all(used):\n        return 0\n    v = used.index(False)\n    used[v] = True\n    ret = 0\n    for w in range(v + 1, N):\n        if not used[w]:\n            used[w] = True\n            ret = max(ret, D[v][w] + dfs(used))\n            used[w] = False\n    used[v] = False\n    return ret\n\n\nused = [False] * N\nans = 0\nif N % 2 == 0:\n    ans = dfs(used)\nelse:\n    for v in range(N):\n        used[v] = True\n        ans = max(ans, dfs(used))\n        used[v] = False\nprint(ans)"
+      ],
+      "text_sha256": "d30cada439212ee4cdd33cec2c24bac05ea620e4d9925433d6d0eaec237f8e84",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc318/abc318_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc381_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc381/editorial/11405",
+      "text": "与えられた文字列が 1122 文字列の\n\\(3\\)\nつの条件をみたしているかそれぞれ確認すれば良いです。\n\\(3\\)\nつめの条件は、\n\\(1,2\\)\nつめの条件がみたされている仮定のもとで、以下の\n\\(2\\)\n通りなどのようにも言い換えられるため、直接確認する代わりにそのことを確認しても良いです。\nなお、\n\\(S_i\\)\nで\n\\(S\\)\nの\n\\(i\\)\n文字目を表すものとします。\n\\(S_1,S_3,\\ldots, S_{|S|-1}\\)\nはすべて異なる。\n\\(S\\)\nの各文字\n\\(S_i\\)\nについて、\n\\(S\\)\nの中にその文字と一致するものはちょうど\n\\(2\\)\nつ存在する。\nすなわち、\n\\(1\\)\n以上\n\\(|S|\\)\n以下の任意の整数\n\\(i\\)\nについて、\n\\(S_i=S_j\\)\nとなる\n\\(j\\)\n\\((1\\leq j\\leq |S|)\\)\nはちょうど\n\\(2\\)\nつ存在する。\n計算量は元の方法では\n\\(O(\\lvert S\\rvert+C)\\)\nです。ここで、\n\\(C\\)\nは\n\\(S\\)\nに使われる候補となる文字の種類数であり、今回の問題では\n\\(C=26\\)\nとなります。言い換えた後の条件の確認には、ナイーブに実装したとき\n\\(\\Theta(\\lvert S\\rvert^2)\\)\nの計算量がかかりますが、今回は\n\\(\\lvert S\\rvert\\leq 100\\)\nのため時間的に問題ありません。よって、いずれの方法でも十分高速に判定を行うことができ、この問題を解くことができました。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tstring s;\n\tint cnt[26]={};\n\tbool flag=true;\n\n\tcin>>s;\n\tn=s.size();\n\tif(n%2==1)flag=false;\n\tif(flag){\n\t\tfor(int i=0;i<(n/2);i++){\n\t\t\tif(s[2*i]!=s[2*i+1])flag=false;\n\t\t}\n\t}\n\tif(flag){\n\t\tfor(int i=0;i<n;i++){\n\t\t\tcnt[s[i]-'a']++;\n\t\t}\n\t\tfor(int i=0;i<26;i++){\n\t\t\tif((cnt[i]!=0)&&(cnt[i]!=2))flag=false;\n\t\t}\n\t}\n\n\tif(flag)cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n\treturn 0;\n}",
+        "s=input()\nflag=True\n\nif len(s)%2==1:\n    flag=False\n\nif flag:\n    for i in range(len(s)//2):\n        if s[2*i]!=s[2*i+1]:\n            flag=False\n\ncnt=[0 for i in range(26)]\nif flag:\n    for i in range(len(s)):\n        cnt[ord(s[i])-ord('a')]+=1\n    for i in range(26):\n        if cnt[i]!=0 and cnt[i]!=2:\n            flag=False\n\nif flag:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "f7318aefc90e1552acead52b933ca9c9be82f1d318b8548c282f2df0d517bbc3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc381/abc381_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

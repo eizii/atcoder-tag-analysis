@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc411_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc411/editorial/13349",
+      "text": "問題文に従って、文字列\n\\(P\\)\nの長さが\n\\(L\\)\n以上であるかを判定すれば良いです。\nc++ の\nstd::string\nであれば、メンバ関数\nstd::size()\n、Python の\nstr\n型 であれば組み込み関数\nlen()\nなど、多くの文字列型には文字列の長さを求める関数が標準で用意されているため、それを用いて判定を行うことができます。\nこれと if 文を組み合わせることによってこの問題を解くことができます。\nc++ の実装例:\nPython の実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tstring p;\n\tint l;\n\n\tcin>>p;\n\tcin>>l;\n\n\tif(p.size()>=l)cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n\treturn 0;\n}",
+        "p=input()\nl=int(input())\nif len(p)>=l:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "a0461f2d460a8f6afb75f91783110920840d25cd85b78a8bb4e7e6d41b608063",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc411/abc411_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

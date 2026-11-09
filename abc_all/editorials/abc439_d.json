@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc439_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc439/editorial/14988",
+      "text": "原案: admin\nいったん次の条件だけを取り出して処理しましょう。\n\\(1 \\le i,j,k \\le N\\)\n\\(A_i : A_j : A_k = 7:5:3\\)\n\\(A\\)\nの各要素が正整数であることから、二番目の条件は次のように言い換えられます。\nある正整数\n\\(t\\)\nを用いて、\n\\(A_i=7t,A_j=5t,A_k=3t\\)\nと書ける。\nまた、\n\\(A_i,A_j,A_k\\)\nが相異なることも分かります。\nこの事実を使うと、次のような解法が出せます。\n\\(A\\)\nの各要素\n\\(A_l\\)\nに対して、次の事実が言える。\n\\(A_l\\)\nが\n\\(7\\)\nの倍数である時、\n\\(t=A_l/7\\)\nの場合で\n\\(i=l\\)\nとする権利がある。\n\\(A_l\\)\nが\n\\(5\\)\nの倍数である時、\n\\(t=A_l/5\\)\nの場合で\n\\(j=l\\)\nとする権利がある。\n\\(A_l\\)\nが\n\\(3\\)\nの倍数である時、\n\\(t=A_l/3\\)\nの場合で\n\\(k=l\\)\nとする権利がある。\n正当な\n\\((i,j,k)\\)\nの組に対して\n\\(A_i,A_j,A_k\\)\nは相異なることから、同一の\n\\(t\\)\nに対して\n\\(i\\)\nの候補の数、\n\\(j\\)\nの候補の数、\n\\(k\\)\nの候補の数をそのまま掛け合わせれば数え上げが完了する。\nこれで、以下の条件がない場合の数え上げは完了しました。\n\\(\\min(i,j,k)=j\\)\nまたは\n\\(\\max(i,j,k)=j\\)\nこの条件をどのように課せばよいでしょうか?\n扱いやすいよう、先ほどの数え上げをした上で以下に該当するものを引き去ることにします。\n\\(i,j,k\\)\nを値の昇順に並び替えた場合、\n\\(j\\)\nが\n\\(2\\)\n番目に来る。\n各\n\\(t\\)\nに対して次のようにすると、このケースも数え上げることができます。\n全ての\n\\(j\\)\nの候補について、その\n\\(j\\)\nの候補より小さい\n\\(i\\)\nの個数とその\n\\(j\\)\nの候補より大きい\n\\(k\\)\nの個数とを掛け合わせることで、\n\\(i<j<k\\)\nのケースを数え上げることができる。\n全ての\n\\(j\\)\nの候補について、その\n\\(j\\)\nの候補より小さい\n\\(k\\)\nの個数とその\n\\(j\\)\nの候補より大きい\n\\(i\\)\nの個数とを掛け合わせることで、\n\\(k<j<i\\)\nのケースを数え上げることができる。\nこれは、イベントソートの要領で実装可能です。\n答えが非常に大きくなり、\n\\(32\\)\nbit 整数では収まらないケースがあることに注意してください。答えは粗く見積もっても\n\\((3 \\times 10^5)^3\\)\n以下なので、\n\\(64\\)\nbit 符号付き整数には収まります。\nこの解法の時間計算量は\n\\(O(N \\log N)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing ll=long long;\nusing pl=pair<ll,ll>;\n\nll solve(vector<ll> &v7,vector<ll> &v5,vector<ll> &v3){\n  ll res=ssize(v7);\n  res*=ssize(v5);\n  res*=ssize(v3);\n  if(res==0){return 0;}\n\n  vector<pl> vp;\n  for(auto &nx : v7){vp.push_back({nx,7});}\n  for(auto &nx : v5){vp.push_back({nx,5});}\n  for(auto &nx : v3){vp.push_back({nx,3});}\n  sort(vp.begin(),vp.end());\n  ll p7=0,s7=v7.size();\n  ll p3=0,s3=v3.size();\n  for(auto &nx : vp){\n    if(nx.second==7){\n      p7++; s7--;\n    }\n    else if(nx.second==5){\n      res-=p7*s3;\n      res-=p3*s7;\n    }\n    else if(nx.second==3){\n      p3++; s3--;\n    }\n  }\n  return res;\n}\n\nint main(){\n  ll n;\n  cin >> n;\n  map<pl,vector<ll>> mp;\n  set<ll> tst;\n  for(ll i=0;i<n;i++){\n    ll a;\n    cin >> a;\n    if(a%7==0){\n      mp[{a/7,7}].push_back(i);\n      tst.insert(a/7);\n    }\n    if(a%5==0){mp[{a/5,5}].push_back(i);}\n    if(a%3==0){mp[{a/3,3}].push_back(i);}\n  }\n  ll res=0;\n  for(auto &nx : tst){\n    res+=solve(mp[{nx,7}],mp[{nx,5}],mp[{nx,3}]);\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "3cc732d0fb02ceaf2647b4e35400306440a83c2bd44ce3be0f22be90e5c033aa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc439/abc439_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc439/editorial/15004",
+      "text": "\\(\\max\\lbrace i,j,k\\rbrace=j\\) であるようなものをすべて数え上げることができれば、列を反転させてもう一度解き、答えを足せばよいです。\nそのような数え上げについて考えます。\n数え上げるべきものは、次の条件を満たす整数の \\(3\\) つ組 \\(i,j,k\\) です。\n\\(i\\lt j\\) かつ \\(k\\lt j\\)\n\\(\\dfrac{A _ i}3=\\dfrac{A _ k}7=\\dfrac{A _ j}5\\)\n正の整数で番号付けられた列 \\(T=(T _ 1,T _ 2,\\ldots),S=(S _ 1,S _ 2,\\ldots)\\) を用意し、はじめすべて \\(0\\) にしておきます。\n\\(i\\) の昇順に \\(A _ i\\) を見て、次の操作を行います。\n\\(A _ i\\) が \\(3\\) の倍数のとき、\\(T _ {A _ i/3}\\) を \\(1\\) 増やす。\n\\(A _ i\\) が \\(7\\) の倍数のとき、\\(S _ {A _ i/7}\\) を \\(1\\) 増やす。\n\\(A _ i\\) が \\(5\\) の倍数のとき、答えに \\(T _ {A _ i/5}S _ {A _ i/5}\\) を加える。\n列 \\(T,S\\) を連想配列などを用いて管理することで、この問題を \\(O(N\\log N)\\) 時間や \\(O(N)\\) 時間で解くことができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <map>\n#include <ranges>\n\nint main() {\n    using namespace std;\n    // i < j, k < j を数え上げる関数\n    const auto solve{[](const auto& seq) {\n        map<unsigned, unsigned> three, seven;\n        unsigned long ans{};\n        for (const auto x : seq) {\n            if (x % 3 == 0)\n                ++three[x / 3];\n            if (x % 7 == 0)\n                ++seven[x / 7];\n            if (x % 5 == 0)\n                ans += three.contains(x / 5) && seven.contains(x / 5) ? static_cast<unsigned long>(three[x / 5]) * seven[x / 5] : 0;\n        }\n        return ans;\n    }};\n    const auto A{views::istream<unsigned>(cin) | views::drop(1) | ranges::to<vector<unsigned>>()};\n    // 順方向と逆方向を解き、足し合わせる\n    cout << solve(A) + solve(A | views::reverse) << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "cf53fa65fcd973c2fafb519c5099464fea4e1027f88c2f0d27dda29dc9a1aa7e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc439/abc439_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

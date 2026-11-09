@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc467_b",
+  "title": "Keep the Change",
+  "contests": [
+    {
+      "contest_id": "abc467",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 39,
+  "raw_difficulty": -535,
+  "contest_id": "abc467",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc467/tasks/abc467_b",
+  "statement": "配点 : 200 点 問題文 高橋君は N 軒の店で買い物をしました。はじめ、高橋君は 10000 円持っていました。 i 軒目の店では A_i 円の商品を買って B_i 円支払いました。ここで A_i \\leq B_i が成り立ちます。そして、 S_i = keep の時、高橋君はお釣りを受け取らず、 S_i = take の場合、お釣りを受け取りました。 高橋君が全ての店でお釣りを受け取っていた場合に比べて損した金額を求めてください。厳密に述べると、 高橋君の最終的な所持金を X 円、 高橋君が全ての店でお釣りを受け取っていた場合の最終的な所持金を Y 円 とした時、 Y - X を求めてください。 制約 1 \\leq N \\leq 100 1 \\leq A_i \\leq B_i \\leq 100 S_i は keep または take N, A_i, B_i は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 B_1 S_1 A_2 B_2 S_2 \\vdots A_N B_N S_N 出力 高橋君が全ての店でお釣りを受け取っていた場合に比べて損した金額を出力せよ。 入力例 1 3\r\n1 2 keep\r\n3 6 take\r\n5 9 keep 出力例 1 5 高橋君の行動を説明すると次の通りです。 1 番目の店で 1 円の商品を買い、 2 円支払い、お釣りを受け取らなかった。 2 番目の店で 3 円の商品を買い、 6 円支払い、お釣りを受け取った。 3 番目の店で 5 円の商品を買い、 9 円支払い、お釣りを受け取らなかった。 入力例 2 8\r\n36 49 take\r\n38 73 keep\r\n27 85 take\r\n65 71 take\r\n52 86 keep\r\n48 60 keep\r\n37 98 keep\r\n5 38 keep 出力例 2 175",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 高橋君は N 軒の店で買い物をしました。はじめ、高橋君は 10000 円持っていました。 i 軒目の店では A_i 円の商品を買って B_i 円支払いました。ここで A_i \\leq B_i が成り立ちます。そして、 S_i = keep の時、高橋君はお釣りを受け取らず、 S_i = take の場合、お釣りを受け取りました。 高橋君が全ての店でお釣りを受け取っていた場合に比べて損した金額を求めてください。厳密に述べると、 高橋君の最終的な所持金を X 円、 高橋君が全ての店でお釣りを受け取っていた場合の最終的な所持金を Y 円 とした時、 Y - X を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 100 1 \\leq A_i \\leq B_i \\leq 100 S_i は keep または take N, A_i, B_i は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 B_1 S_1 A_2 B_2 S_2 \\vdots A_N B_N S_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 高橋君が全ての店でお釣りを受け取っていた場合に比べて損した金額を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\n1 2 keep\r\n3 6 take\r\n5 9 keep"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 5 高橋君の行動を説明すると次の通りです。 1 番目の店で 1 円の商品を買い、 2 円支払い、お釣りを受け取らなかった。 2 番目の店で 3 円の商品を買い、 6 円支払い、お釣りを受け取った。 3 番目の店で 5 円の商品を買い、 9 円支払い、お釣りを受け取らなかった。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 8\r\n36 49 take\r\n38 73 keep\r\n27 85 take\r\n65 71 take\r\n52 86 keep\r\n48 60 keep\r\n37 98 keep\r\n5 38 keep"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 175"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc467/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:54.104998+00:00",
+  "statement_sha256": "029bfa357350b4531dd705c75841e5e7b5a2aaa12c6baba2633abf1e76450a4b",
+  "editorials": []
+}

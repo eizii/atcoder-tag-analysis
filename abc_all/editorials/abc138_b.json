@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc138_b",
+  "editorials": [
+    {
+      "text": "B: Resistors in Parallel\n(原案: sheyasutaka, 準備・解説: evima)\n入出力例の説明では数式の分母\n1\nA1 +\n1\nA2 + . . . +\n1\nAN を分数のまま計算していますが、はじめから浮動小数\n点型を使って計算するのが簡単でしょう。あとは、for 文やその他の何らかの繰り返し処理を行う機構を用い\nて実装を行います。諸言語を代表してC++ とPython(3) での実装例を掲載します。\n1 #include <iomanip>\n2 #include <iostream>\n3 using namespace std;\n4\n5 int main(){\n6\nint N;\n7\ndouble ans = 0.0, A;\n8\ncin >> N;\n9\nfor(int i = 1; i <= N; ++i){\n10\ncin >> A;\n11\nans += 1.0 / A;\n12\n}\n13\nans = 1.0 / ans;\n14\ncout << setprecision(16) << ans << endl;\n15 }\n1 N = int(input())\n2 A = map(int, input().split())\n3 print('{:.16g}'.format(1 / sum(1 / x for x in A)))\n",
+      "text_sha256": "1d29e6a03e4b8e4092f4a74f09e9ab5e9d2f0244c2945302ea4817a258165339",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc138/abc138_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

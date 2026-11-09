@@ -1,0 +1,21 @@
+{
+  "problem_id": "abc294_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc294/editorial/5982",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n解法 1\n長さ \\(N\\) の配列を読み込み、先頭から順に見て偶数だけ出力すればよいです。\nある整数が偶数であるかは、\\(2\\) で割ったあまりが \\(0\\) と等しいかで判定するのがよいでしょう。\n解法 2\nまた、\\(A\\) から奇数を取り除いた配列を新しく作ることでもこの問題を解くことができます。\n解法 3\nまた、\\(N\\) 回整数を読み込み、読み込んだ整数が偶数ならそのまま出力することでも解くことができます。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\n    // 長さ N の配列\n    vector<int> A(N);\n    // 順に入力\n    for (auto&& a : A)\n        cin >> a;\n\n    for (const auto a : A) \n        // 2 で割ったあまりが 0 なら偶数\n        if (a % 2 == 0)\n            cout << a << \" \";\n    cout << endl;\n\n    return 0;\n}",
+        "N = int(input())\nA = list(map(int, input().split()))\n\nfor a in A:\n    # 2 で割ったあまりが 0 なら偶数\n    if a % 2 == 0:\n        print(a)",
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nusing namespace std;\n\nint main(){\n    int N;\n    cin >> N;\n    \n    // 長さ N の配列\n    vector<int> A(N);\n    // 順に入力\n    for (auto&& a : A)\n        cin >> a;\n\n    // 奇数を取り除いた配列を作る\n    vector<int> B{begin(A), remove_if(begin(A), end(A), [](auto i){return i % 2 != 0;})};\n    // 順に出力\n    for (const auto b : B)\n        cout << b << \" \";\n    cout << endl;\n\n    return 0;\n}",
+        "N = int(input())\nA = list(map(int, input().split()))\n\n# 偶数だけを取り出した配列を作り、出力\nprint(*[a for a in A if a % 2 == 0])",
+        "#include <iostream>\n\nusing namespace std;\n\nint main(){\n    int N;\n    cin >> N;\n\n    // N 回繰り返す\n    for (int i = 0; i < N; ++i){\n        int a;\n        cin >> a;\n        // 読み込んだ数が偶数なら出力\n        if (a % 2 == 0)\n            cout << a << \" \";\n    }\n    cout << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "7d53af3ccb601c24454fa1b58ec8438c42d212aa0eefd8fa430021310cfdf2ac",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc294/abc294_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

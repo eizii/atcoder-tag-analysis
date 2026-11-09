@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc144_f",
+  "editorials": [
+    {
+      "text": "F: Fork in the Road\n塞ぐ通路を決めた際(及び、通路を塞がないと決めた際) に部屋N に到達するまでの移動回数の期\n待値は、\ndpi = 部屋i から部屋N へ到達するまでの移動回数の期待値\nとdp テーブルを定義し、部屋番号について降順に計算して動的計画法を行うことで、時間計算量\nO (M) で計算することが出来ます。しかし、M 個の通路全てについてこの値を計算しようとすると、\n全体での時間計算量がO\n(\nM 2)\nとなり、間に合いません。\nここで、部屋i から出ていく通路を塞ぐことを考えます。このとき、塞ぐ通路の選択に依らず、\nj = i + 1, · · · , N についてdpj の値は変わりません。塞ぐ通路を選択する際は、dpi の値が最小とな\nるように決めるのが最適です。これは、部屋i から通路が伸びてる部屋の集合をSi と定義したとき、\n部屋arg max\nk∈Si\ndpk へ進む通路を塞ぐことで達成出来ます。則ち、部屋i から出ていく通路を塞ぐ際に\nは、これ以外の通路を塞いだ際のことを考慮する必要はありません。\n以上より、前述の動的計画法をN 回実行すれば最適解を求めることが出来ます。全体での時間計算\n量はO (NM) です。\nC++ による解答例:https://atcoder.jp/contests/abc144/submissions/8133816\n",
+      "text_sha256": "535c3d2ff5576a275d4fde99cb6c7c8818391322ccac5a1eaca29fd5bb6fd151",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc144/abc144_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

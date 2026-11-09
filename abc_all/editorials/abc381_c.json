@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc381_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc381/editorial/11413",
+      "text": "この問題はうまく全ての\n\\(11/22\\)\n文字列を調べる方法を発見できるかが鍵となります。\n答えを述べると、この問題は\n\\(11/22\\)\n文字列の中央の\n/\nに注目することがポイントです。すなわち、中央の\n/\nを決め打った時の左右の 1, 2 の広がりを調べることにします。アルゴリズムを説明すると次のようになります。\n答を管理する変数を\nans\nとする。はじめ\nans\n\\(= 0\\)\nである。\n\\(i = 1, 2, \\dots, N\\)\nの順に次の操作を行う。\n\\(S[i] =\\)\n/\nでない場合、何もしない。\n\\(S[i] =\\)\n/\nである場合、左右に連続する 1, 2 の長さを管理する変数を\n\\(d\\)\nとして(はじめ\n\\(d = 0\\)\nである)、次の一連の操作を繰り返す。\n\\(l = i - (d + 1), r = i + (d + 1)\\)\nとする。\n\\(1 \\leq l \\leq N\\)\nでない場合、繰り返しを終了する。\n\\(1 \\leq r \\leq N\\)\nでない場合、繰り返しを終了する。\n\\(S[l] =\\)\n1\nでない場合、繰り返しを終了する。\n\\(S[r] =\\)\n2\nでない場合、繰り返しを終了する。\nそうでない場合、両端についているのがそれぞれ\n1\n,\n2\nということになるので、\n\\(11/22\\)\n文字列としての条件を満たしていることになる。よって\n\\(d\\)\nを\n\\(d+1\\)\nに更新する。\n得られた\n\\(11/22\\)\n文字列の長さは\n\\(1 + 2d\\)\nであるから、\nans\nを\n\\(\\max(\\mathrm{ans}, 1 + 2d)\\)\nに更新する。\n最終的な\nans\nの値が答えとなる。\n計算量について考えます。この操作では\n\\(1\\)\n回の繰り返しにつき最悪\n\\(\\mathrm{O}(N)\\)\nの計算量が掛かるので\n\\(\\mathrm{O}(N^2)\\)\nになってしまうと考える方もいるかもしれませんが、実は計算量は\n\\(\\mathrm{O}(N)\\)\nで済みます。\nこれは次のようにして証明できます。アルゴリズム内で「一連の操作」と呼ばれている部分の回数が\n\\(\\mathrm{O}(N)\\)\nで抑えられれば計算量が\n\\(\\mathrm{O}(N)\\)\nであると言えるので、これを証明します。\n\\(1 \\leq j \\leq N\\)\nを満たす各\n\\(j\\)\nについて、\n\\(j\\)\nが\n\\(l\\)\nとして選ばれる回数を考えます。するとこれは、\n\\(i\\)\nが\n\\(j\\)\nから右を見て初めて現れる\n/\nである時に限られるので、\n\\(j\\)\nが\n\\(l\\)\nとして選ばれるのは高々\n\\(1\\)\n回です。よって各\n\\(j\\)\nについて高々\n\\(1\\)\n回しか\n\\(l\\)\nとして選ばれないため、「一連の操作」は高々\n\\(\\mathrm{O}(N)\\)\n回であることが言えます。以上により証明できました。\nよって上記のアルゴリズムは\n\\(\\mathrm{O}(N)\\)\nで動作して、これは十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n  int N;\n  string S;\n  cin >> N >> S;\n\n  int ans = 0;\n  for (int i = 0; i < N; i++) {\n    if (S[i] != '/') continue;\n    int d = 0;\n    while (true) {\n      int j = i - (d + 1);\n      int k = i + (d + 1);\n      if (!(0 <= j and j < N)) break;\n      if (!(0 <= k and k < N)) break;\n      if (S[j] != '1') break;\n      if (S[k] != '2') break;\n      d++;\n    }\n    ans = max(ans, 1 + d * 2);\n  }\n  cout << ans << \"\\n\";\n}"
+      ],
+      "text_sha256": "be7a65af37374d60d389e9bdfce081af0cec6c385f895318d090581a24193b8b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc381/abc381_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

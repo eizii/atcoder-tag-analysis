@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc103_b",
+  "title": "String Rotation",
+  "contests": [
+    {
+      "contest_id": "abc103",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 194,
+  "raw_difficulty": 110,
+  "contest_id": "abc103",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc103/tasks/abc103_b",
+  "statement": "配点 : 200 点 問題文 英小文字からなる文字列 S , T が与えられます。 S を回転させて T に一致させられるか判定してください。 すなわち、以下の操作を任意の回数繰り返して S を T に一致させられるか判定してください。 操作: S = S_1 S_2 ... S_{|S|} のとき、 S を S_{|S|} S_1 S_2 ... S_{|S|-1} に変更する ここで、 |X| は文字列 X の長さを表します。 制約 2 \\leq |S| \\leq 100 |S| = |T| S , T は英小文字からなる 入力 入力は以下の形式で標準入力から与えられる。 S T 出力 S を回転させて T に一致させられる場合は Yes 、一致させられない場合は No を出力せよ。 入力例 1 kyoto\r\ntokyo 出力例 1 Yes 1 回目の操作で kyoto が okyot になります 2 回目の操作で okyot が tokyo になります 入力例 2 abc\r\narc 出力例 2 No 何度操作を行っても abc と arc を一致させられません。 入力例 3 aaaaaaaaaaaaaaab\r\naaaaaaaaaaaaaaab 出力例 3 Yes",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英小文字からなる文字列 S , T が与えられます。 S を回転させて T に一致させられるか判定してください。 すなわち、以下の操作を任意の回数繰り返して S を T に一致させられるか判定してください。 操作: S = S_1 S_2 ... S_{|S|} のとき、 S を S_{|S|} S_1 S_2 ... S_{|S|-1} に変更する ここで、 |X| は文字列 X の長さを表します。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq |S| \\leq 100 |S| = |T| S , T は英小文字からなる"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S T"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 S を回転させて T に一致させられる場合は Yes 、一致させられない場合は No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 kyoto\r\ntokyo"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes 1 回目の操作で kyoto が okyot になります 2 回目の操作で okyot が tokyo になります"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 abc\r\narc"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No 何度操作を行っても abc と arc を一致させられません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 aaaaaaaaaaaaaaab\r\naaaaaaaaaaaaaaab"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc103/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:34:17.029506+00:00",
+  "statement_sha256": "8fc6526758e453c1f9c7770f86d4328966c777abaf6ff31893c04219f48b6b75",
+  "editorials": []
+}

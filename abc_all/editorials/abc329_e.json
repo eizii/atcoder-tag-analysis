@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc329_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc329/editorial/7724",
+      "text": "以下、文字列\n\\(S\\)\nの\n\\(i\\)\n文字目 (0-indexed) を\n\\(S_i\\)\nと表記します。\n操作を逆順に見ると、以下のような問題に変わります。\n\\(S\\)\nに対して以下の操作を繰り返し行うことで、\n\\(S\\)\nの文字を全て\n#\nにすることができるか判定せよ。\n全ての\n\\(j\\ (0 \\leq j < M)\\)\nに対して「\n\\(S_{i+j}=T_j\\)\nまたは\n\\(S_{i+j}= \\)\n#\n」を満たすような\n\\(i\\ (0 \\leq i < N-M+1)\\)\nを\n\\(1\\)\nつ選び、\n\\(S_i, S_{i+1}, \\dots, S_{i+M-1}\\)\nを全て\n#\nで置き換える。\n全ての\n\\(j\\ (0 \\leq j <M)\\)\nに対して「\n\\(S_{i+j}=T_j\\)\nまたは\n\\(S_{i+j}= \\)\n#\n」を満たすような\n\\(i\\)\nのことを「良い\n\\(i\\)\n」と呼びます。また、\n\\(S_i, S_{i+1}, \\dots, S_{i+M-1}\\)\nを全て\n#\nで置き換えることを単に「\n\\(i\\)\nに対して操作を行う」と呼びます。\nこの新しい問題は、以下のような簡単な貪欲法によって解くことができます。\n良い\n\\(i\\)\nであって、まだ操作を行ったことがないような\n\\(i\\)\nを探す。\nそのような\n\\(i\\)\nが存在するならば、その\n\\(i\\)\nに対して操作を行い、1. に戻る。存在しないならば、今\n\\(S\\)\nの文字が全て\n#\nになっているかどうかで答えを判定する。\n証明は、同じ\n\\(i\\)\nに対して\n\\(2\\)\n回以上操作を行う必要がないことと、良い\n\\(i\\)\nが存在するならば今すぐその\n\\(i\\)\nに対して操作をしても損しないことから従います。\nしかし、良い\n\\(i\\)\nを探すパートに毎回\n\\(O(N)\\)\nかけていては間に合いません。そこで、以下のようなアルゴリズムを用います。\nキュー\n\\(Q\\)\nを用意し、初期状態における良い\n\\(i\\)\nを全て\n\\(Q\\)\nに入れる。\n\\(Q\\)\nが空でない限り、以下を繰り返す。\n\\(Q\\)\nから要素を\n\\(1\\)\nつ取り出して\n\\(i'\\)\nとする。\n\\(i'\\)\nに対して操作をしたのち、この操作によって新たに良い\n\\(i\\)\nとなった\n\\(i\\)\nを全て\n\\(Q\\)\nに入れる。\n\\(S\\)\nの文字が全て\n#\nになったか確認する。\nキューから要素を取り出す回数は高々\n\\(N\\)\n回であり、\n\\(i'\\)\nへの操作によって新たに良い\n\\(i\\)\nとなりうるのは\n\\(i'-M+1, i'-M+2, \\dots, i'+M-1\\)\nの\n\\(O(M)\\)\n個であることから、\n\\(O(NM^2)\\)\nや\n\\(O(NM)\\)\nの計算量でこの問題を解くことができます。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, m;\n    string s, t;\n    cin >> n >> m >> s >> t;\n    vector<bool> used(n - m + 1);\n    queue<int> q;\n    auto check = [&](int i) {\n        if (used[i]) return;\n        bool ok = true;\n        for (int j = 0; j < m; j++) {\n            ok &= (s[i + j] == '#' or s[i + j] == t[j]);\n        }\n        if (ok) {\n            used[i] = true;\n            q.push(i);\n        }\n    };\n    for (int i = 0; i < n - m + 1; i++) check(i);\n    while (!q.empty()) {\n        int i = q.front();\n        q.pop();\n        for (int j = 0; j < m; j++) s[i + j] = '#';\n        for (int j = max(i - m + 1, 0); j <= min(i + m - 1, n - m); j++) {\n            check(j);\n        }\n    }\n    cout << (s == string(n, '#') ? \"Yes\" : \"No\") << endl;\n}"
+      ],
+      "text_sha256": "708518dafa5ca9124ffd1d5ea51a94ce0d08ffee6929da9d54e659e908dd23ff",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc329/abc329_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc329/editorial/7734",
+      "text": "以下 0-indexed とします。\n前から順番に bool 値を持つ DP を行います。\n\\(\\mathrm{dp}[i][j]\\)\n\\(:=\\)\n\\(X[0, i)\\)\nが\n\\(S[0, i)\\)\nに一致し、最も右側で操作をしたのが\n\\(X[i-j, i-j+M)\\)\nである、という状態が可能か\n便宜上\n\\(j=M\\)\nまで用意します。\n初期化は\n\\(\\mathrm{dp}[0][0]\\)\nのみ\n\\(\\mathrm{true}\\)\nとすればよいので、遷移を考えます。\nまず、\n\\(X[i, i+M)\\)\nで新たに操作を行う場合、\n\\(\\mathrm{dp}[i][j]\\)\nから\n\\(\\mathrm{dp}[i][0]\\)\nへ遷移をします。\n次に、既に行った操作より前に被らせるように\n\\(X[i-k, i-k+M)\\)\nで操作を行う場合、\n\\(\\mathrm{dp}[i][M]\\)\nから\n\\(\\mathrm{dp}[i][k]\\)\nへと遷移を行うことができます。\n最後に、\n\\(S_i = T_j\\)\nならば\n\\(\\mathrm{dp}[i][j]\\)\nから\n\\(\\mathrm{dp}[i+1][j+1]\\)\nへの遷移が行われます。\nよって\n\\(O(NM)\\)\nでこの問題を解くことができました。\nコード (C++, 18ms)",
+      "codes": [],
+      "text_sha256": "85e5635ee9f3ff9b083d62c30786c4e7c6491d72ce2c6313cc04f3063c7ceafb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc329/abc329_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc329/editorial/16140",
+      "text": "公式解説と同じように逆順に見て、以下のような問題を考えます。（下の文章は公式解説と同じです）\n\\({S}\\)\nに対して以下の操作を繰り返し行うことで\n\\({S}\\)\nの文字を全て\n#\nにすることができるか判定せよ。\n全ての\n\\({j (0≤j<M)}\\)\nに対して「\n\\({S_{i+j}=T_j}\\)\nまたは\n\\({S_{i+j}=}\\)\n#\n」を満たすような\n\\({i (0≤i<N−M+1)}\\)\nを\n\\({1}\\)\nつ選び、\n\\({S_i,S_{i+1},…,S_{i+M−1}}\\)\nを全て\n#\nで置き換える。\nこの新しい問題を、以下のような考え方で解きます。\nある\n\\(i\\)\nについてこの操作をした時に、新たに操作できるようになる位置がどこに増える可能性があるかを考えます。\n\\({S_{i...i+M-1}}\\)\nが\n#\nを含まないとき\nこのときは、\n\\({i}\\)\nの右側と左側の両側に増える可能性があります。\n\\({S_{i...i+M-1}}\\)\nが\n##CDE\nのように「1つ以上の\n#\n+文字列」となっているとき\nこのときは、\n\\({i}\\)\nの右側にのみ増える可能性があります。\n\\({S_{i...i+M-1}}\\)\nが\nABC##\nのように「文字列+1つ以上の\n#\n」となっているとき\nこのときは、\n\\({i}\\)\nの左側にのみ増える可能性があります。\n\\({S_{i...i+M-1}}\\)\nが\n##CD#\nのように「1つ以上の\n#\n+文字列+1つ以上の\n#\n」となっているとき\nこのときは、操作可能な位置は増えません。\n以上の考察から、次のようなアルゴリズムを導けます。\n\\({i=0,1,...,N-M-1,N-M}\\)\nの順に、\n\\({i}\\)\nについて操作が可能であれば操作を行う。\n\\({i=N-M,N-M-1,...,1,0}\\)\nの順に、\n\\({i}\\)\nについて操作が可能であれば操作を行う。\n\\({S}\\)\nの文字が全て\n#\nになったか確認する\n時間計算量は\n\\({O(NM)}\\)\nです。\nこの解法は\nuruzunyaa\nさんに教えてもらいました。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m;\n    string s, t;\n    cin >> n >> m >> s >> t;\n\n    auto replace = [&](int i) {\n      if (ranges::equal(s.substr(i, m), t, [](char a, char b){\n        return a==b || a=='#';\n      })){\n        for (int j=0; j<m; ++j) s[i+j]='#';\n      }\n    };\n    for (int i=0; i<=n-m; ++i) replace(i);\n    for (int i=n-m; i>=0; --i) replace(i);\n    cout << (s == string(n, '#') ? \"Yes\" : \"No\") << endl;\n}"
+      ],
+      "text_sha256": "121ca6e4251ddd6fe804c3aeb783db466eaa1f4f4a13d247d42cc239468d0c01",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc329/abc329_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

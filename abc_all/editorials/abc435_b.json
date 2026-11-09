@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc435_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc435/editorial/14730",
+      "text": "整数の組\n\\((l,r)\\)\n\\((1\\leq l\\leq r\\leq N)\\)\nが与えられた時に条件をみたすか判定することについて考えます。\n正整数\n\\(X,Y\\)\nについて、「\n\\(X\\)\nが\n\\(Y\\)\nの約数である」ことと、「\n\\(Y\\)\nを\n\\(X\\)\nで割った余りが\n\\(0\\)\nである」ことが同値であることに注意すると必要なステップは次の\n\\(2\\)\nつです。\n\\(S=A_l+A_{l+1}+\\cdots+A_r\\)\nを求める。\n各\n\\(l\\leq i\\leq r\\)\nについて、\n\\(S\\)\nを\n\\(A_i\\)\nで割った余りを求める。余りが\n\\(0\\)\nとなるような\n\\(i\\)\nが存在したならば\n\\((l,r)\\)\nは条件をみたさない。そうでないならば、条件をみたす。\n上記の\n\\(2\\)\nつは、どちらも for 文と基本演算だけで行うことができます。計算量は\n\\(O(N)\\)\nです。\n候補となる組\n\\((l,r)\\)\nの個数は\n\\(\\frac{N(N+1)}{2}\\)\nであり、for 文で列挙することができます。それぞれについて判定を行い、条件をみたすものの個数を数えれば良いです。時間計算量は\n\\(O(N^3)\\)\nとなり、本問題の制約下で十分高速です。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tint a[50]={};\n\tcin>>n;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>a[i];\n\t}\n\n\tint ans=0;\n\tfor(int i=0;i<n;i++){\n\t\tfor(int j=0;j<=i;j++){\n\t\t\tint s=0;\n\t\t\tfor(int k=j;k<=i;k++)s+=a[k];\n\t\t\tbool ok=true;\n\t\t\tfor(int k=j;k<=i;k++)if(s%a[k]==0)ok=false;\n\t\t\tif(ok)ans++;\n\t\t}\n\t}\n\tcout<<ans<<endl;\n\treturn 0;\n}",
+        "n=int(input())\na=list(map(int, input().split()))\nans=0\n\nfor i in range(n):\n    for j in range(i+1):\n        s=0\n        for k in range(j,i+1):\n            s+=a[k]\n        flag=True\n        for k in range(j,i+1):\n            if s%a[k]==0:\n                flag=False\n        if flag:\n            ans+=1\n\nprint(ans)"
+      ],
+      "text_sha256": "f676fec0006d15bd9f5b8797c3f9441188a4f317a72b0da87066fa9a6ace60b0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc435/abc435_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

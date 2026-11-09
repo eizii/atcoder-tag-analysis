@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc131_f",
+  "title": "Must Be Rectangular!",
+  "contests": [
+    {
+      "contest_id": "abc131",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1937,
+  "raw_difficulty": 1937,
+  "contest_id": "abc131",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc131/tasks/abc131_f",
+  "statement": "配点 : 600 点 問題文 2 次元平面上の N 個の点があり、 i 番目の点の座標は (x_i, y_i) です。 以下の操作を行える限り繰り返します。 座標 (a, b), (a, d), (c, b), (c, d) のうちちょうど 3 箇所に点が存在するような整数 a, b, c, d (a \\neq c, b \\neq d) を選び、残りの 1 箇所に点を追加する。 この操作は有限回しか行なうことができないことが証明できます。操作回数の最大値を求めてください。 制約 1 \\leq N \\leq 10^5 1 \\leq x_i, y_i \\leq 10^5 x_i \\neq x_j または y_i \\neq y_j (i \\neq j) 入力は全て整数である 入力 入力は以下の形式で標準入力から与えられる。 N x_1 y_1 : x_N y_N 出力 操作回数の最大値を出力せよ。 入力例 1 3\r\n1 1\r\n5 1\r\n5 5 出力例 1 1 a = 1, b = 1, c = 5, d = 5 とすると (1, 5) に点を追加することができます。これ以上操作を行うことはできないので、操作回数の最大値は 1 回です。 入力例 2 2\r\n10 10\r\n20 20 出力例 2 0 2 点しか点がないので操作を 1 回も行うことができません。 入力例 3 9\r\n1 1\r\n2 1\r\n3 1\r\n4 1\r\n5 1\r\n1 2\r\n1 3\r\n1 4\r\n1 5 出力例 3 16 a = 1, b = 1, c = i, d = j (2 \\leq i,j \\leq 5) の全てに対して操作を行うことができ、それ以上操作を行うことはできないので、操作回数の最大値は 16 回です。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 2 次元平面上の N 個の点があり、 i 番目の点の座標は (x_i, y_i) です。 以下の操作を行える限り繰り返します。 座標 (a, b), (a, d), (c, b), (c, d) のうちちょうど 3 箇所に点が存在するような整数 a, b, c, d (a \\neq c, b \\neq d) を選び、残りの 1 箇所に点を追加する。 この操作は有限回しか行なうことができないことが証明できます。操作回数の最大値を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 10^5 1 \\leq x_i, y_i \\leq 10^5 x_i \\neq x_j または y_i \\neq y_j (i \\neq j) 入力は全て整数である"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N x_1 y_1 : x_N y_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 操作回数の最大値を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\n1 1\r\n5 1\r\n5 5"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1 a = 1, b = 1, c = 5, d = 5 とすると (1, 5) に点を追加することができます。これ以上操作を行うことはできないので、操作回数の最大値は 1 回です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2\r\n10 10\r\n20 20"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0 2 点しか点がないので操作を 1 回も行うことができません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 9\r\n1 1\r\n2 1\r\n3 1\r\n4 1\r\n5 1\r\n1 2\r\n1 3\r\n1 4\r\n1 5"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 16 a = 1, b = 1, c = i, d = j (2 \\leq i,j \\leq 5) の全てに対して操作を行うことができ、それ以上操作を行うことはできないので、操作回数の最大値は 16 回です。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc131/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:34:52.297244+00:00",
+  "statement_sha256": "888970ae0bf21560087fb4cb28cf2a2c2a2f296b735d3d779903431fabd6d840",
+  "editorials": []
+}

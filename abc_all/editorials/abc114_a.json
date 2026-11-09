@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc114_a",
+  "editorials": [
+    {
+      "text": "A: 753\n正解までの道のりを細かく分割すると次の通りです。\n1. 標準入力から整数X を受け取る。\n2. X から何らかの方法で答えとなる文字列YES またはNO を得る。\n3. 得た文字列を標準出力に出す。\n手順1, 3 についてはpractice contest 問題A の言語別サンプルコードが参考になります。手順2 につい\nては、if 文、“or” に相当する論理演算子と比較演算子を使うのが最も素直ですが、他の手も考えられます。\nC++ による素直な実装例と、Python3 によるやや気取った実装例を示します。\n1 #include <iostream>\n2 using namespace std;\n3 int main(){\n4\nint X;\n5\ncin >> X;\n6\nstring ans;\n7\nif(X == 7 || X == 5 || X == 3){\n8\nans = \"YES\";\n9\n}else{\n10\nans = \"NO\";\n11\n}\n12\ncout << ans << endl;\n13 }\n1 print(['NO', 'YES'][[7, 5, 3].count(int(input()))])\n",
+      "text_sha256": "58ef82bb025faae90ae5a6f6e3a36103b94834e41249ed7e6176e3b5bcbb6bf1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc114/abc114_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

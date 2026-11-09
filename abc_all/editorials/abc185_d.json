@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc185_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc185/editorial/357",
+      "text": "マス目の中で白色のマスが連続しているところをひとまとめにしたとき\n\\(n\\)\n個になり、それぞれ\n\\(x_1, x_2, x_3, \\dots x_n\\)\n個の白マスを含むとします。\n幅\n\\(k\\)\nのハンコを作ったとき以下の事実が分かります\n\\(x\\)\nの中に\n\\(k\\)\nより小さい要素があると目標を達成することはできない\nそうでなければ目標は達成できる\nまた、達成できるとすると最小回数は\n\\(\\sum_i \\lceil \\frac{x_i}{k} \\rceil\\)\nです。 (\n\\(\\lceil y \\rceil\\)\nは\n\\(y\\)\n以上の最小の整数を表します)\nこの式は\n\\(k\\)\nに対して広義単調減少なので\n\\(k\\)\nは可能な限り大きいものを使うのがよいです。\nよって、\n\\(k\\)\nを、目標が達成できる最大である\n\\(\\min A_i\\)\nとして上記の式を計算するとこの問題が解けます。\n\\(x\\)\nを求めるのは、\n\\(A\\)\nをソートすると可能で、\n\\(x\\)\nの要素数は\n\\(O(M)\\)\nです。\n全体の計算量は、ソートがボトルネックとなって\n\\(O(M \\log(M))\\)\nです。",
+      "codes": [],
+      "text_sha256": "0ea474e287b636b3ee296aba41adb262b2e53b1a3b94ddbaf18106b7ade9c478",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc185/abc185_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

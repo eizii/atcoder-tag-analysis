@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc303_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc303/editorial/6444",
+      "text": "\\(\\mathrm{dp}_{i,j}\\) を「残っている袋の個数が \\(i\\) 個で、左端の袋が初め左から \\(j\\) 番目にあったものであるような状態から始めた場合の \\(X-Y\\) の最大値(高橋君の手番の場合)または \\(Y-X\\) の最大値(青木君の手番の場合)」とします。すると、操作後の袋の個数が \\(k\\) 個で、 \\(Z\\) 円をすぬけ君に支払うような操作に対応する遷移は次のようになります。 \\(\\mathrm{dp}_{i,j} = \\max_{j \\leq l \\leq i+j-k} (S(i,j) - S(k,l) - \\mathrm{dp}_{k,l}  - Z)\\) ただし、初め左から \\(b,b+1,\\ldots,b+a-1\\) 番目にあった袋に入っている金額の総和を \\(S(a,b)\\) 円とします。 これを素直に実装すると \\(\\mathrm{O}(N^3)\\) となってしまいますが、以下のように見なしてセグメント木やスライド最小値を用いることで \\(\\mathrm{O}(N^2 \\log N)\\) や \\(\\mathrm{O}(N^2)\\) で本問を解くことが出来ます。 \\(\\mathrm{dp}_{i,j} = S(i,j) - Z - \\min_{j \\leq l \\leq i+j-k}( S(k,l) +\\mathrm{dp}_{k,l} )\\)",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "60ab5d272f51d2107728229ee4dbcabed55df710fc1c62d36fce77543d719cc0"
+    }
+  ],
+  "status": "available"
+}

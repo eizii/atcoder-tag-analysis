@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc229_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc229/editorial/2949",
+      "text": "全ての非負整数\n\\(n\\)\nについて、「\n\\(A\\)\nの\n\\(10^n\\)\nの位」「\n\\(B\\)\nの\n\\(10^n\\)\nの位」が\n\\(9\\)\n以下であれば、繰り上がりは発生しません。\n逆に、ある非負整数\n\\(n\\)\nについて、「\n\\(A\\)\nの\n\\(10^n\\)\nの位」「\n\\(B\\)\nの\n\\(10^n\\)\nの位」が\n\\(10\\)\n以上であれば、繰り上がりが発生します。\n実装が楽な方針としては、下の位から順に検証していくという方法があります。具体的には以下のアルゴリズムを適用します。\n\\(A\\)\nを\n\\(10\\)\nで割った余りと\n\\(B\\)\nを\n\\(10\\)\nで割った余りの和を求める。これが\n\\(10\\)\n以上であれば、繰り上がりが発生するので\nHard\nと出力して終了する。\n\\(A,B\\)\nそれぞれを\n\\(10\\)\nで割る。(小数点以下は切り捨てる。)\n1,2 の操作を続け、\n\\(A,B\\)\nどちらかが\n\\(0\\)\nになっても繰り上がりが検出されなければ、繰り上がりは発生しないので\nEasy\nと出力して終了する。\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  long long a,b;\n  cin >> a >> b;\n  while(a>0 && b>0){\n    if((a%10)+(b%10)>=10){cout << \"Hard\\n\";return 0;}\n    a/=10;b/=10;\n  }\n  cout << \"Easy\\n\";\n}"
+      ],
+      "text_sha256": "b9f1f06062e636b52f0b8f5427d11f9ab9eed89aea3d6f3bf07e11456a2da3f9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc229/abc229_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

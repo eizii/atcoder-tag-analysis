@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc216_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc216/editorial/2558",
+      "text": "\\(N\\)\nの制約が\n\\(1000\\)\n以下と小さいので、\n\\(1 \\leq i \\lt j \\leq N\\)\nを満たすすべての整数対\n\\((i,j)\\)\nについて問題文中の条件を満たすか、すなわち\n\\(S_i=S_j\\)\nかつ\n\\(T_i=T_j\\)\nとなっているかを判定すればよいです。\n計算量は\n\\(S_i\\)\nの長さの総和を\n\\(X\\)\n、\n\\(T_i\\)\nの長さの総和を\n\\(Y\\)\nとして\n\\(O(N(X+Y))\\)\nとなります。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint N; cin >> N;\n\tvector<string> S(N),T(N);\n\tstring ans = \"No\";\n\tfor(int i=0; i<N; i++){\n\t\tcin >> S[i] >> T[i];\n\t\tfor(int j=0; j<i; j++){\n\t\t\tif(S[i]==S[j] && T[i]==T[j]) ans = \"Yes\";\n\t\t}\n\t}\n\tcout << ans << endl;\n}",
+        "N = int(input())\nS = ['']*N\nT = ['']*N\nfor i in range(N):\n    S[i],T[i] = map(str,input().split())\nans = 'No'\nfor i in range(N):\n    for j in range(i+1,N):\n        if S[i]==S[j] and T[i]==T[j]:\n            ans = 'Yes'\nprint(ans)"
+      ],
+      "text_sha256": "846bcbd861964de894ca57e0875d28e99f144b0803d35aff45ab7e2658db847e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc216/abc216_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc216/editorial/2570",
+      "text": "少しの考察をすると、より簡潔なソースコードで解くことができます。\n「\n\\(S_i=S_j\\)\nかつ\n\\(T_i=T_j\\)\n」は、入力の\n\\(i\\)\n行目と\n\\(j\\)\n行目が等しいということです。「整数対\n\\((i, j))\\)\nが存在する」とは、「重複がある」ということで、\nset\nに変換してサイズが\n\\(N\\)\n未満かどうかで判定できます。メモリの消費量は増えますが、メモリ制限には充分な余裕があります。\n実装例（Python）:",
+      "codes": [
+        "N = int(input())\nST = [input() for _ in range(N)]\n\nprint(\"Yes\" if len(set(ST))<N else \"No\")"
+      ],
+      "text_sha256": "0ee2310a8061122ebbbf02853f60081e023374bb491af2f4e0d1a32d53e1287b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc216/abc216_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

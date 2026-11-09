@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc447_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc447/editorial/16717",
+      "text": "まず、「\n\\(G\\)\nの連結成分の個数がちょうど\n\\(2\\)\nになる」という条件は、「\n\\(G\\)\nが非連結になる」という条件に変えることができます。これは元の条件よりも真に緩い条件ですが、削除する辺のコストの総和を最小化するという目的下において、連結成分の個数を\n\\(3\\)\n以上にすることを許しても得することはなく、故に最適解が変化しないからです。\n続いて、削除せず残す辺の方に着目することで、本問題を以下のように言い換えることができます。\n重み付き無向グラフ\n\\(G\\)\nが与えられる。\n\\(G\\)\nの辺のうちいくつかの辺を選ぶ。選んだ辺のみを残したとき\n\\(G\\)\nが連結に\nならない\nという条件のもと、選ぶ辺の重みの総和を最大でいくつにできるか？\nなお、元の問題の答えは\n\\(\\sum_{i=1}^{N} 2^i\\)\nからこの問題の答えを引いたものになります。\n一般にはこの問題は簡単ではありませんが、本問題では辺\n\\(i\\)\nの重みが\n\\(2^i\\)\nという特殊な形で表されることから、以下のような単純な貪欲法が正当になります。\n\\(G\\)\nに全く辺がない状態から始めて、\n\\(i=M,M-1,\\dots,1\\)\nの順に以下を行う：\n\\(G\\)\nに辺\n\\(i\\)\nを追加しても\n\\(G\\)\nが連結にならない場合、またその場合に限り、\n\\(G\\)\nに辺\n\\(i\\)\nを追加し、答えに\n\\(2^i\\)\nを加算する。\nよって、Union-Find などの連結性を管理するデータ構造を用いてこの貪欲法をシミュレーションすることで、本問題を解くことができます。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/dsu>\n#include <atcoder/modint>\n\nusing namespace std;\n\nusing mint = atcoder::modint998244353;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<int> u(m), v(m);\n    vector<mint> cost(m);\n    for (int i = 0; i < m; i++) {\n        cin >> u[i] >> v[i];\n        --u[i], --v[i];\n        cost[i] = (i ? cost[i - 1] * 2 : 2);\n    }\n\n    atcoder::dsu uf(n);\n    mint ans = 0;\n    int cnt = n;\n    for (int i = m - 1; i >= 0; i--) {\n        if (!uf.same(u[i], v[i])) {\n            if (cnt > 2) {\n                uf.merge(u[i], v[i]);\n                --cnt;\n            } else {\n                ans += cost[i];\n            }\n        }\n    }\n    cout << ans.val() << endl;\n}"
+      ],
+      "text_sha256": "da71bedfe8eaa083e560df0e46fd901e470e971184f3a4ead4c6697521312d9a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc447/abc447_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

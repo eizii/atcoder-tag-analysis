@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc213_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc213/editorial/2366",
+      "text": "行に関する操作と列に関する操作は互いに干渉しません。そのため行と列について独立に考えることができます。以下では上から何行目かについて考えますが、左から何列目かも同様に求めることができます。\nまず、操作によってカード同士の位置関係(どちらがより上にあるか、など)が変わることはありません。また、操作終了後には全ての行・列が数の書かれたカードを含みます。\nこのことから、操作終了後には、もともと最も上にあった数の書かれたカードが1行目に、2番目に上にあった数の書かれたカードが2行目に、……となることがわかります。\nしたがって元の問題は「\n\\(A_i\\)\nたちを、大小関係を保ったまま、値を小さくせよ」と読み替えることができました。\n例えば\n\\(A=(2,9,9,7,9,2,4)\\)\nであれば\n\\((1,4,4,3,4,1,2)\\)\nに変換せよ、という意味です。\nこれは「座標圧縮」と呼ばれる操作にほかなりません。したがって\n\\(O(N\\log N)\\)\nで問題が解けました。具体的な実装方法については各自で調べてください。\n実装例(Python)",
+      "codes": [
+        "H,W,N=map(int,input().split())\nX,Y=[],[]\nfor i in range(N):\n  x,y=map(int,input().split())\n  X.append(x)\n  Y.append(y)\n\nXdict = {x:i+1 for i,x in enumerate(sorted(list(set(X))))}\nYdict = {y:i+1 for i,y in enumerate(sorted(list(set(Y))))}\n\nfor i in range(N):\n  print(Xdict[X[i]], Ydict[Y[i]])"
+      ],
+      "text_sha256": "a126c02c76afd3acfd84c495bf4c1beaf6605dd4d4cbeb33ebc1b3e82e6537d1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc213/abc213_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

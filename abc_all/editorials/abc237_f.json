@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc237_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc237/editorial/3320",
+      "text": "\\(dp[i][a_1][a_2][a_3]  :=\\)\n長さが\n\\(i\\)\nで、長さ\n\\(j\\)\nの部分増加列の最後尾として考えられる最小値が\n\\(a_j\\)\nであるような数列がいくつあるか\nとすると、\n\\(dp\\)\nの状態数が\n\\(O(NM^3)\\)\nで、遷移が (愚直にやっても)\n\\(O(M)\\)\nなので、問題全体を\n\\(O(NM^4)\\)\nで解くことができます。\n\\(dp\\)\nの初期値や遷移が分からなければ下の実装例を参考にしてください。",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/all>\nusing namespace std;\nusing namespace atcoder;\ntypedef long long ll;\n#define rep(i,l,r) for(ll i=l;i<=r;i++)\nusing mint=modint998244353;\ntypedef vector<mint>vi;\ntypedef vector<vi>vvi;\ntypedef vector<vvi>vvvi;\ntypedef vector<vvvi>vvvvi;\n\nsigned main(){\n    ll n,m;cin>>n>>m;\n    vvvvi dp(n+1,vvvi(m+2,vvi(m+2,vi(m+2))));\n    dp[0][m+1][m+1][m+1] = 1;\n    rep(i,0,n-1)rep(a1,1,m+1)rep(a2,1,m+1)rep(a3,1,m+1){\n        rep(x,1,m){\n            //数列の i+1 項目の値を x とする\n            if(x<=a1)     dp[i+1][x][a2][a3] += dp[i][a1][a2][a3];\n            else if(x<=a2)dp[i+1][a1][x][a3] += dp[i][a1][a2][a3];\n            else if(x<=a3)dp[i+1][a1][a2][x] += dp[i][a1][a2][a3];\n        }\n    }\n    mint ans=0;\n    rep(a1,1,m)rep(a2,a1+1,m)rep(a3,a2+1,m)ans += dp[n][a1][a2][a3];\n    cout<<ans.val()<<endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "6e88155e8f663e5c63e0da9da4c396b71f932e64b8ea9ddb345bba0b323bcc67",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc237/abc237_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

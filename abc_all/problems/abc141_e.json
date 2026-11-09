@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc141_e",
+  "title": "Who Says a Pun?",
+  "contests": [
+    {
+      "contest_id": "abc141",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1459,
+  "raw_difficulty": 1459,
+  "contest_id": "abc141",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc141/tasks/abc141_e",
+  "statement": "配点 : 500 点 問題文 長さ N の文字列 S が与えられます。 非空文字列であって、 S の連続する部分文字列として重ならずに 2 回以上現れるもののうち、最長のものの長さを答えてください。 より厳密には、 l_1 + len \\leq l_2 S[l_1+i] = S[l_2+i] (i = 0, 1, ..., len - 1) を満たす整数 l_1 , l_2 ( 1 \\leq l_1, l_2 \\leq N - len + 1 ) が存在するような正整数 len の最大値を求めてください。そのような len が存在しないときは、 0 を出力してください。 制約 2 ≤ N ≤ 5 \\times 10^3 |S| = N S は英小文字から成る 入力 入力は以下の形式で標準入力から与えられる。 N S 出力 非空文字列であって、 S の連続する部分文字列として重ならずに 2 回以上現れるもののうち、最長のものの長さを出力せよ。そのような非空文字列が存在しないときは、 0 を出力せよ。 入力例 1 5\r\nababa 出力例 1 2 条件を満たす文字列として、 a , b , ab , ba が考えられます。これらの長さの最大値 2 が答えです。 aba は S の連続する部分文字列として 2 度現れますが、 l_1 + len \\leq l_2 を満たすような l_1 , l_2 が取れないことに注意してください。 入力例 2 2\r\nxy 出力例 2 0 条件を満たす非空文字列は存在しません。 入力例 3 13\r\nstrangeorange 出力例 3 5",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の文字列 S が与えられます。 非空文字列であって、 S の連続する部分文字列として重ならずに 2 回以上現れるもののうち、最長のものの長さを答えてください。 より厳密には、 l_1 + len \\leq l_2 S[l_1+i] = S[l_2+i] (i = 0, 1, ..., len - 1) を満たす整数 l_1 , l_2 ( 1 \\leq l_1, l_2 \\leq N - len + 1 ) が存在するような正整数 len の最大値を求めてください。そのような len が存在しないときは、 0 を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 ≤ N ≤ 5 \\times 10^3 |S| = N S は英小文字から成る"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 非空文字列であって、 S の連続する部分文字列として重ならずに 2 回以上現れるもののうち、最長のものの長さを出力せよ。そのような非空文字列が存在しないときは、 0 を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\nababa"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2 条件を満たす文字列として、 a , b , ab , ba が考えられます。これらの長さの最大値 2 が答えです。 aba は S の連続する部分文字列として 2 度現れますが、 l_1 + len \\leq l_2 を満たすような l_1 , l_2 が取れないことに注意してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2\r\nxy"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0 条件を満たす非空文字列は存在しません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 13\r\nstrangeorange"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 5"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc141/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:35:05.564119+00:00",
+  "statement_sha256": "a45b63aca3eb934a9ac7ee44357ff11ff83c432669853ec3976abe1d5e371313",
+  "editorials": []
+}

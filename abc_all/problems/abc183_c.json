@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc183_c",
+  "title": "Travel",
+  "contests": [
+    {
+      "contest_id": "abc183",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 335,
+  "raw_difficulty": 329,
+  "contest_id": "abc183",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc183/tasks/abc183_c",
+  "statement": "配点 : 300 点 問題文 N 個の都市があります。都市 i から都市 j へ移動するには T_{i,j} の時間がかかります。 都市 1 を出発し、全ての都市をちょうど 1 度ずつ訪問してから都市 1 に戻るような経路のうち、移動時間の合計がちょうど K になるようなものはいくつありますか？ 制約 2\\leq N \\leq 8 i\\neq j のとき 1\\leq T_{i,j} \\leq 10^8 T_{i,i}=0 T_{i,j}=T_{j,i} 1\\leq K \\leq 10^9 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N K T_{1,1} \\ldots T_{1,N} \\vdots T_{N,1} \\ldots T_{N,N} 出力 答えを整数で出力せよ。 入力例 1 4 330\r\n0 1 10 100\r\n1 0 20 200\r\n10 20 0 300\r\n100 200 300 0 出力例 1 2 都市 1 を出発し、全ての都市をちょうど 1 度ずつ訪問してから都市 1 に戻るような経路は、 1\\to 2\\to 3\\to 4\\to 1 1\\to 2\\to 4\\to 3\\to 1 1\\to 3\\to 2\\to 4\\to 1 1\\to 3\\to 4\\to 2\\to 1 1\\to 4\\to 2\\to 3\\to 1 1\\to 4\\to 3\\to 2\\to 1 の 6 通りがあります。それぞれの移動時間は、 421,511,330,511,330,421 なので、ちょうど 330 であるようなものは 2 通りです。 入力例 2 5 5\r\n0 1 1 1 1\r\n1 0 1 1 1\r\n1 1 0 1 1\r\n1 1 1 0 1\r\n1 1 1 1 0 出力例 2 24 どのような順で都市を訪問しても、移動時間の合計は 5 になります。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 個の都市があります。都市 i から都市 j へ移動するには T_{i,j} の時間がかかります。 都市 1 を出発し、全ての都市をちょうど 1 度ずつ訪問してから都市 1 に戻るような経路のうち、移動時間の合計がちょうど K になるようなものはいくつありますか？"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2\\leq N \\leq 8 i\\neq j のとき 1\\leq T_{i,j} \\leq 10^8 T_{i,i}=0 T_{i,j}=T_{j,i} 1\\leq K \\leq 10^9 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K T_{1,1} \\ldots T_{1,N} \\vdots T_{N,1} \\ldots T_{N,N}"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを整数で出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 330\r\n0 1 10 100\r\n1 0 20 200\r\n10 20 0 300\r\n100 200 300 0"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2 都市 1 を出発し、全ての都市をちょうど 1 度ずつ訪問してから都市 1 に戻るような経路は、 1\\to 2\\to 3\\to 4\\to 1 1\\to 2\\to 4\\to 3\\to 1 1\\to 3\\to 2\\to 4\\to 1 1\\to 3\\to 4\\to 2\\to 1 1\\to 4\\to 2\\to 3\\to 1 1\\to 4\\to 3\\to 2\\to 1 の 6 通りがあります。それぞれの移動時間は、 421,511,330,511,330,421 なので、ちょうど 330 であるようなものは 2 通りです。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5 5\r\n0 1 1 1 1\r\n1 0 1 1 1\r\n1 1 0 1 1\r\n1 1 1 0 1\r\n1 1 1 1 0"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 24 どのような順で都市を訪問しても、移動時間の合計は 5 になります。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc183/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:35:58.336537+00:00",
+  "statement_sha256": "3b74b24bad4a8532740213d2b38e8dd42d563b70fdab2f83fd695182e6bb564a",
+  "editorials": []
+}

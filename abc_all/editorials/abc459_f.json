@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc459_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc459/editorial/20507",
+      "text": "解説では 0-indexed とします。 \\(A_i\\) を \\(A_i-i\\) に置き換えることで、 \\(A\\) を狭義単調増加にする問題から \\(A\\) を広義単調増加にする問題に帰着させることができます。以降は \\(A\\) を広義単調増加にするために必要な操作回数の最小値を考えます。 操作後の最終的な \\(A\\) の形を \\(B\\) とします。この \\(B\\) は一意に定まります。 前から貪欲に操作することが明らかに最適なので、答えは \\(A\\) が広義単調増加でない間以下を繰り返すことで求めることができます： \\(A_i > A_{i+1}\\) を満たす最小の \\(i\\) を選び操作を行う。 また、操作として \\(i=0,1,\\ldots,N-2\\) が全て選ばれた場合、 \\(\\displaystyle S=\\sum_{i=0}^{N-1} A_i\\) として \\(\\displaystyle B_i=\\left\\lfloor\\frac{S+i}{N} \\right\\rfloor\\) となります。 したがって、以下の条件を満たす整数列 \\(C=(C_0,C_1,\\ldots,C_M)\\) が存在し、さらに \\(M\\) が最大という条件の元で \\(C\\) は一意に定まります： \\(0=C_0 < C_1 < \\ldots < C_M=N\\) \\(0\\le k <M,\\ i \\in [C_k,C_{k+1})\\) に対し、 \\(\\displaystyle S_k=\\sum_{j=C_k}^{C_{k+1}-1}A_j\\) として \\(\\displaystyle B_i=\\left\\lfloor \\frac{S_k+i-C_k}{C_{k+1}-C_k}\\right\\rfloor\\) 直感的には、 \\(C\\) で分割した各区間に対して \\(A\\) を均等にならし広義単調増加列にできる、ということです。 この \\(C\\) は \\(B\\) が広義単調増加にならない間前から貪欲に各区間をマージしていくことで構成することができます。 以上を適切に実装することでこの問題に正答することができます。計算量は \\(O(N)\\) です。 実装例(Python3)",
+      "codes": [
+        "from collections import deque\nimport sys\n\ninput = sys.stdin.readline\n\nfor _ in range(int(input())):\n    n = int(input())\n    a = list(map(int, input().split()))\n    for i in range(n):\n        a[i] -= i\n    d = deque()\n    for v in a:\n        now = (1, v)\n        while d:\n            tail = d[-1]\n            if (tail[1] + tail[0] - 1) // tail[0] <= now[1] // now[0]:\n                break\n            now = (now[0] + tail[0], now[1] + tail[1])\n            d.pop()\n        d.append(now)\n    b = []\n    for v in d:\n        len, s = v\n        for i in range(len):\n            b.append((s + i) // len)\n    for i in range(n - 1):\n        assert b[i] <= b[i + 1]\n    ans = 0\n    for i in range(n):\n        ans += i * (b[i] - a[i])\n    print(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "9cfedd9c8fd4f36e17d5d59c3468da01d9f37733c8ee77c270ff7e3778f9e30a"
+    }
+  ],
+  "status": "available"
+}

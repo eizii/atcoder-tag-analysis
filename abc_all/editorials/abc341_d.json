@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc341_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc341/editorial/9324",
+      "text": "\\(N\\)\n,\n\\(M\\)\nの最小公倍数を\n\\(L\\)\nとします。\nこのとき、\n\\(X\\)\n以下の正の整数であって\n\\(N\\)\nと\n\\(M\\)\nの両方で割り切れる数は\n\\(\\lfloor \\frac{X}{L}\\rfloor\\)\n個ある事から、\n\\(1\\)\n以上\n\\(X\\)\n以下の整数であって\n\\(N\\)\nと\n\\(M\\)\nのうちちょうど一方のみで割り切れる数は\n\\(\\lfloor \\frac{X}{N}\\rfloor+\\lfloor \\frac{X}{M}\\rfloor-2\\times \\lfloor \\frac{X}{L}\\rfloor\\)\n個です。\n加えて、この個数は\n\\(X\\)\nについて広義単調増加であるため、「問題の答えが\n\\(X\\)\n以下であること」と「\n\\(1\\)\n以上\n\\(X\\)\n以下の整数であって\n\\(N\\)\nと\n\\(M\\)\nのうちちょうど一方のみで割り切れる数が\n\\(K\\)\n個以上であること」、すなわち「\n\\(\\lfloor \\frac{X}{N}\\rfloor+\\lfloor \\frac{X}{M}\\rfloor-2\\times \\lfloor \\frac{X}{L}\\rfloor\\geq K\\)\nであること」が同値です。\nゆえにこれを用いて二分探索によってこの問題を解く事ができます。\n今回の問題の制約下で答えは必ず\n\\(2\\times 10^{18}\\)\n以下となるため、下限を\n\\(0\\)\n, 上限を\n\\(2\\times 10^{18}\\)\nとして二分探索を行えば良いです。\nより具体的には最初\n\\(L=0, R=2\\times 10^{18}\\)\nとして、\n\\(R-L\\geq 2\\)\nである限り、次の手順を繰り返し行えば良いです。\n\\(X=\\lfloor \\frac{L+R}{2}\\rfloor\\)\nとする。\n\\(\\lfloor \\frac{X}{N}\\rfloor+\\lfloor \\frac{X}{M}\\rfloor-2\\times \\lfloor \\frac{X}{L}\\rfloor\\geq K\\)\nならば\n\\(R=X\\)\n, そうでないならば\n\\(L=X\\)\nとする。\n最終的な\n\\(R\\)\nが答えとなります。\n\\(X\\)\nを固定した時、\n\\(\\lfloor \\frac{X}{N}\\rfloor+\\lfloor \\frac{X}{M}\\rfloor-2\\times \\lfloor \\frac{X}{L}\\rfloor\\geq K\\)\nの判定は\n\\(O(1)\\)\nで計算でき、繰り返し回数も高々\n\\(60\\)\n回であるため十分高速です。よって、この問題を解く事ができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nlong long gcd(long long x,long long y){\n\tif(x>y)swap(x,y);\n\tif(y%x==0)return x;\n\treturn gcd(y%x,x);\n}\n\nint main() {\n\tlong long n,m,x,k;\n\tcin>>n>>m>>k;\n\tx=(n*m)/gcd(n,m);\n\tlong long l=0,r=(long long)2e+18,mid,y;\n\twhile((l+1)<r){\n\t\tmid=(l+r)/2;\n\t\ty=(mid/n)+(mid/m)-2*(mid/x);\n\t\tif(y<k)l=mid;\n\t\telse r=mid;\n\t}\n\tcout<<r<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "4d3bdecb20b7cd91354ffcfea17ef67583c9c74ba8aceb17ff2335cff019d45d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc341/abc341_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc341/editorial/9334",
+      "text": "\\(N, M\\)\nをそれぞれ\n\\(\\text{GCD}(N, M)\\)\nで割って、\n\\(N\\)\nと\n\\(M\\)\nは互いに素であるものとします。\n「\n\\(N\\)\nと\n\\(M\\)\nのうちちょうど一方で割り切れる数の集合」は\n\\(N \\times M\\)\n周期になっていて、\n\\(1\\)\n周期に\n\\(N + M - 2\\)\n個の要素が含まれます。\n\\(S := N + M - 2\\)\nと定義します。\n周期的なので、\n\\(S\\)\nで割ったあまりを取って\n\\(1 \\le K \\le S\\)\nの場合を解けば良いです。これは、\n\\(N\\)\nの倍数の列と\n\\(M\\)\nの倍数の列をマージして\n\\(K\\)\n番目の要素を得る問題なので、\n\\(O(K)\\)\n時間で解くことができます。\n実装例 (Python)",
+      "codes": [
+        "from math import gcd\n\nN, M, K = map(int, input().split())\n# gcd で割る\nG = gcd(N, M)\nN //= G\nM //= G\n\nS = N + M - 2\nK -= 1\n\n# S で割る\nans = (K // S) * (N * M)\nK %= S\n\n# 答えを求める\nn = N\nm = M\nfor _ in range(K):\n    if n < m:\n        n += N\n    else:\n        m += M\nans += min(n, m)\n\n# gcd で割ったのを戻す\nprint(ans * G)"
+      ],
+      "text_sha256": "a7a63453a04e26555d921fdc3bd881bbac2cf02bf498ded85e805daedfa62a4c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc341/abc341_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

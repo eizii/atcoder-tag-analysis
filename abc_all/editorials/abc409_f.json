@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc409_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc409/editorial/13228",
+      "text": "この問題は，非連結であるような頂点のペアの集合を直接管理するのではなく，「非連結である可能性がある頂点のペアの集合」を考えることで解きやすくなります．\n距離が最小であるような頂点対を高速に取得できる優先度付きキュー\n\\(Q\\)\nを用意します．はじめ，頂点対\n\\((u,v)\\ (1\\leq u\\lt v\\leq N)\\)\nをすべて\n\\(Q\\)\nに追加しておきます．また，サイズが\n\\(N+Q\\)\nの Union-Find を用意し，頂点の連結性を高速に判定できるようにします．\nクエリ\n\\(1\\)\nでは，\n\\(Q\\)\nに\n\\((1,n), (2, n), \\ldots, (n-1,n)\\)\nを追加します．\nクエリ\n\\(2\\)\nでは，\n\\(Q\\)\nが空でない限り以下の操作を行います．\n距離が最小であるような\n\\((u,v)\\in Q\\)\nを取り出す．\n頂点\n\\(u,v\\)\nが連結であれば何もしない．\nそうでないとき，Union-Find で\n\\(u,v\\)\nを連結にする．\n\\(k=d(u,v)\\)\nとして，\n\\(Q\\)\nの距離が最小である頂点対\n\\((u',v')\\)\nが\n\\(k\\)\nと等しい限り，それを取り出してUnion-Find で\n\\(u',v'\\)\nを連結にする．この処理が終わった後，\n\\(k\\)\nを出力して，操作を終了する．\nクエリ\n\\(2\\)\nで何も出力されなかった場合，\n\\(G\\)\nの連結成分は\n\\(1\\)\nであるため，\n-1\nを出力します．\nクエリ\n\\(3\\)\nでは，頂点\n\\(u,v\\)\nが連結かどうかを Union-Find で判定します．\n計算量について，\n\\(Q\\)\nに追加される頂点対は\n\\(O((N+Q)^2)\\)\n個あるためこれがボトルネックとなり，計算量は\n\\(O((N+Q)^2\\log(N+Q))\\)\nです．\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nusing S = pair<int, int>;\n\n#include <atcoder/dsu>\nusing namespace atcoder;\n\nint d(S p, S q) { return abs(p.first - q.first) + abs(p.second - q.second); }\n\nint main() {\n  int N, Q;\n  cin >> N >> Q;\n\n  vector<S> xy;\n  for (int i = 0; i < N; i++) {\n    int x, y;\n    cin >> x >> y;\n    xy.push_back({x, y});\n  }\n\n  dsu uf(N + Q);\n\n  using T = array<int, 3>;\n  auto cmp = [](const T& a, const T& b) { return a[0] > b[0]; };\n  priority_queue<T, vector<T>, decltype(cmp)> pq(cmp);\n\n  for (int i = 0; i < N; i++) {\n    for (int j = i + 1; j < N; j++) {\n      pq.push({d(xy[i], xy[j]), i, j});\n    }\n  }\n\n  while (Q--) {\n    int t;\n    cin >> t;\n    if (t == 1) {\n      int x, y;\n      cin >> x >> y;\n      int n = xy.size();\n      xy.push_back({x, y});\n      for (int i = 0; i < n; i++) {\n        pq.push({d(xy[i], xy[n]), i, n});\n      }\n    }\n    if (t == 2) {\n      int ans = -1;\n      while (!pq.empty()) {\n        auto [mn, u, v] = pq.top();\n        pq.pop();\n        if (!uf.same(u, v)) {\n          ans = mn;\n          uf.merge(u, v);\n          while (!pq.empty()) {\n            auto [mn2, u2, v2] = pq.top();\n            if (mn2 != mn) break;\n            pq.pop();\n            uf.merge(u2, v2);\n          }\n          break;\n        }\n      }\n      cout << ans << endl;\n    }\n    if (t == 3) {\n      int u, v;\n      cin >> u >> v;\n      u--;\n      v--;\n      cout << (uf.same(u, v) ? \"Yes\" : \"No\") << endl;\n    }\n  }\n}"
+      ],
+      "text_sha256": "c86968ec8b84bb774920154cdfc2445e21a1f2640b6c6aa48ecb4638a9493cc5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc409/abc409_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc409/editorial/13265",
+      "text": "この問題を\n\\(O((N + Q)^2)\\)\n時間で解く方法を紹介します．\n現在の頂点数を\n\\(n\\)\nとして，連結成分の管理に\n\\(n\\)\n頂点の UnionFind を用います．\n連結成分間の距離の情報を，UnionFind のリーダーに集約して持たせると効率的になりそうです．そこで，\n\\(n \\times n\\)\nの配列\n\\(\\text{dist}\\)\nを，\n\\(i \\neq j\\)\nかつ\n\\(i\\)\nも\n\\(j\\)\nも UnionFind のリーダーなら，\n\\(\\text{dist}[i][j] = (\\)\n連結成分\n\\(i\\)\nと連結成分\n\\(j\\)\nの間の距離\n\\()\\)\nそうでないなら，\n\\(\\text{dist}[i][j] = \\infty\\)\nとなるように管理します．\n連結成分のマージは\n\\(O(N + Q)\\)\n回発生します．\n連結成分をマージするときの\n\\(\\text{dist}\\)\nの更新\n頂点を追加するときの\n\\(\\text{dist}\\)\nの更新\nは\n\\(O(n)\\)\n時間でできるので，あとは，\n\\(O(n)\\)\n時間で\n最小の距離\n\\(k\\)\nと，それを達成する連結成分の組を\n\\(1\\)\nつ発見\nができれば良いです．\nそこで，長さ\n\\(n\\)\nの配列\n\\(\\text{mn}\\)\nを，\n\\(i\\)\nが UnionFind のリーダーなら，\n\\(\\text{mn}[i] = \\min(\\text{dist}[i])\\)\nそうでないなら，\n\\(\\text{mn}[i] = \\infty\\)\nとなるように管理します．これを用いれば，\n最小の距離\n\\(k\\)\nと，それを達成する連結成分の組を\n\\(1\\)\nつ発見\n頂点を追加するときの\n\\(\\text{mn}\\)\nの更新\nは\n\\(O(n)\\)\n時間で可能です．一見，\n連結成分をマージするときの\n\\(\\text{mn}\\)\nの更新\nが\n\\(O(n)\\)\n時間でできないように見えますが，リーダー\n\\(a\\)\nとリーダー\n\\(b\\)\nをマージするときに変化する場所は\n\\(\\text{mn}[a], \\text{mn}[b]\\)\nの\n\\(2\\)\n箇所しかないため，これも\n\\(O(n)\\)\n時間で可能です．\n実装例 (C++, 89 ms)\nさらに，以下のように高速化を行うことができます．\n(1)\n\\(\\text{dist}\\)\nの定義を (連結成分) 対 (頂点) とすることで，更新箇所が減らせます．\n\\(i\\)\nが UnionFind のリーダーで，頂点\n\\(j\\)\nが連結成分\n\\(i\\)\nに含まれないなら，\n\\(\\text{dist}[i][j] = (\\)\n連結成分\n\\(i\\)\nと頂点\n\\(j\\)\nの間の距離\n\\()\\)\n\\(i\\)\nが UnionFind のリーダーで，頂点\n\\(j\\)\nが連結成分\n\\(i\\)\nに含まれるなら，\n\\(\\text{dist}[i][j] = \\infty\\)\n(2) 頂点\n\\(i, j\\ (i > j)\\)\n間の距離が\n\\(\\text{dist}[\\text{leader}(i)][j]\\)\nと\n\\(\\text{dist}[\\text{leader}(j)][i]\\)\nの\n\\(2\\)\n箇所で管理されていますが，これを\n\\(\\text{dist}[\\text{leader}(i)][j]\\)\nのみにします．さらに，UnionFind のリーダーを「連結成分の中で index が最大の頂点」とすることで，\n\\(\\text{dist}\\)\nの下三角部分しか必要なくなります．\n(1) と (2) により，ボトルネック部分がすべてシーケンシャルアクセスになります．\n実装例 (C++, 21 ms)\n(3) ボトルネック部分を AVX512 を用いてベクトル化することで，11 ms を達成することができます．\n実装例 (C++, 11 ms)",
+      "codes": [],
+      "text_sha256": "5bc71b9d2b0f8bf16141a1fff792d592ef137e256d00c9472f9cf56559dbc3e7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc409/abc409_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

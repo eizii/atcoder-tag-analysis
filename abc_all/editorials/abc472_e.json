@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc472_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc472/editorial/24429",
+      "text": "結論から言えば、以下のアルゴリズムが正当です。 全域木を \\(1\\) つとり、全域木に含まれるすべての辺 \\((u, v)\\) について \\(C_u \\ne C_v\\) となるように、頂点を \\(0, 1\\) で塗り分ける 全域木に含まれないようなすべての辺 \\((u, v)\\) について以下を確認する \\(C_u = C_v\\) であれば、全域木の \\((u, v)\\) パス上の頂点列を取ってくる。これが求めるものであるため、出力して終了する \\(C_u \\ne C_v\\) であれば無視する 終了していないのであれば、奇閉路は存在しない 証明 まず、このアルゴリズムで見つかった頂点列が条件を満たしていることを確認します。閉路をなしていることは簡単に確認できます。また、木のパスは \\(0, 1, \\dots, 1, 0\\) と色が交互に切り替わることから、両端が同じ色なら奇数頂点であることもわかります。 逆にこのアルゴリズムで見つからなかったとき、どの辺 \\((u, v)\\) も \\(C_u \\ne C_v\\) です。このとき、辺を移動するたびに常に色が切り替わるので、色 \\(0\\) からはじめてその頂点に戻ってくるような閉路は、どのようなものであっても偶数本の辺を移動しなければいけません。（ \\(1\\) でも同様です）よって、このグラフには奇閉路が存在しないことが示されました。 このような「奇閉路が存在しない \\(\\Leftrightarrow\\) \\(0,1\\) で塗り分けられる」ようなグラフのことを、 二部グラフ と呼びます。 実装例 簡単のために、いくらかの工夫をしています。まず、全域木の構築と色の一致判定を同時にしています。 また、全域木の \\((u, v)\\) パスを直接取るのではなく、 \\((u, 1)\\) パスと \\((v, 1)\\) パスをとったあと、後ろから見ていき、それらが分岐するまでの共通部分を削除するという方針を取っています。",
+      "codes": [
+        "def solve():\n    n, m = map(int, input().split())\n    g = [[] for _ in range(n)]\n    for i in range(m):\n        u, v = map(int, input().split())\n        g[u-1].append(v-1)\n        g[v-1].append(u-1)\n        \n    c = [-1] * n\n    p = [-1] * n\n    c[0] = 0\n    \n    st = [0]\n    while st:\n        u = st.pop()\n        for v in g[u]:\n            if c[v] == -1:\n                c[v] = c[u] ^ 1\n                p[v] = u\n                st.append(v)\n            elif c[u] == c[v]:\n                a, b = [], []\n                \n                x = u\n                while x != -1:\n                    a.append(x)\n                    x = p[x]\n    \n                x = v\n                while x != -1:\n                    b.append(x)\n                    x = p[x]\n    \n                while a[-1] == b[-1]:\n                    w = a.pop()\n                    b.pop()\n    \n                ans = a + [w] + b[::-1]\n                print(len(ans))\n                print(*[x+1 for x in ans])\n                return \n    \n    print(-1)\n    return \n\nt = int(input())\nfor i in range(t):\n    solve()\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "2a58a5b962bc75dbd2d1e9118ee07c5343a33342bc9b0a87136e0150f05e4652"
+    }
+  ],
+  "status": "available"
+}

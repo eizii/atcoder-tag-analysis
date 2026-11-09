@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc296_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc296/editorial/6080",
+      "text": "問題文にかかれている通り、\n\\(S\\)\nの中で同じ文字が連続する箇所があるとき答えは\nNo\n、そのような箇所がないとき答えは\nYes\nになります。\n\\(S\\)\nの中で同じ文字が連続する箇所を見つけたとき、その場で\nNo\nを出力してプログラムを終了させるような実装がわかりやすいでしょう。添字が適切な範囲を動いているか注意しましょう。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n;\n\tcin >> n;\n\tstring s;\n\tcin >> s;\n\tfor(int i=0;i<n-1;i++){\n\t\tif(s[i]==s[i+1]){\n\t\t\tcout << \"No\" << endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\tcout << \"Yes\" << endl;\n}",
+        "N=int(input())\nS=input()\nfor i in range(N-1):\n  if S[i]==S[i+1]:\n    print(\"No\")\n    exit()\nprint(\"Yes\")"
+      ],
+      "text_sha256": "29aab532e001fecaa40a2823cec4139d84bc1efeb40d9bf48e9206d6059737f9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc296/abc296_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

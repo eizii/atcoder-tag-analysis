@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc437_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc437/editorial/14891",
+      "text": "座標\n\\((x,y)\\)\nと\n\\(i\\)\n番目のクリスマスツリー\n\\((X_i,Y_i)\\)\nのマンハッタン距離は\n\\(|x-X_i|+|y-Y_i|\\)\nと表すことができます。この式を変形すると、以下のようになります。\n\\(\n\\begin{aligned}\n&\\phantom{=}|x-X_i|+|y-Y_i|\\\\\n&=\\max\\lbrace x-X_i,-(x-X_i) \\rbrace+\\max\\lbrace y-Y_i,-(y-Y_i) \\rbrace \\\\\n&= \\max\\lbrace x-X_i+y-Y_i,x-X_i-y+Y_i,-x+X_i+y-Y_i,-x+X_i-y+Y_i\\rbrace \\\\\n&= \\max\\lbrace \\max\\lbrace (x+y)-(X_i+Y_i),-(x+y)+(X_i+Y_i) \\rbrace,\\max\\lbrace (x-y)-(X_i-Y_i),-(x-y)+(X_i-Y_i) \\rbrace \\rbrace \\\\\n&=\\max \\lbrace \\left|(x+y)-(X_i+Y_i)\\right|,\\left|(x-y)-(X_i-Y_i)\\right| \\rbrace\n\\end{aligned}\n\\)\nこの式変形はマンハッタン距離の\n\\(45\\)\n度回転という名前で広く知られています。\nこの式変形により、クエリ\n\\(2\\)\nで求める値は\n\\(\n\\begin{aligned}\n&\\phantom{=}\\max_{L\\le i\\le R} (|x-X_i|+|y-Y_i|)\\\\\n&=\\max_{L\\le i\\le R}\\max \\lbrace \\left|(x+y)-(X_i+Y_i)\\right|,\\left|(x-y)-(X_i-Y_i)\\right| \\rbrace\\\\\n&=\\max \\left\\lbrace \\max_{L\\le i\\le R} \\left|(x+y)-(X_i+Y_i)\\right|,  \\max_{L\\le i\\le R} \\left|(x-y)-(X_i-Y_i)\\right|\\right\\rbrace\\\\\n\\end{aligned}\n\\)\nとなります。\n\\(U_i=X_i+Y_i,V_i=X_i-Y_i,u=x+y,v=x-y\\)\nとすると、\n\\(U,V,u,v\\)\nは全て入力から決まり、その中で\n\\(\\displaystyle \\max \\left\\lbrace \\max_{L\\le i\\le R} \\left|u-U_i\\right|,  \\max_{L\\le i\\le R} \\left|v-V_i\\right|\\right\\rbrace\\)\nを求める問題と捉えることができます。\nここで、\n\\(|u-U_i|\\)\nを最大にする\n\\(i\\)\nは\n\\(U_i\\)\nを最小または最大にします。したがって、\n\\(L\\)\n項目から\n\\(R\\)\n項目までの\n\\(U_i\\)\nの最小値・最大値を高速に計算することができればよく、これは Segment Tree を用いることでクエリ毎に\n\\(O(\\log N)\\)\n時間で達成することができます。\n\\(V_i\\)\nについても同様です。\n以上を適切に実装することでこの問題に正答することができます。計算量は\n\\(O(N+Q\\log N)\\)\nです。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#include <atcoder/all>\n\ntemplate <typename T>\nbool chmax(T &x, T y) {\n\tif (x < y) {\n\t\tx = y;\n\t\treturn true;\n\t}\n\treturn false;\n}\n\nlong op_min(long x, long y) { return min(x, y); }\nlong op_max(long x, long y) { return max(x, y); }\nconstexpr long INF = 1e18;\nlong e_min() { return INF; }\nlong e_max() { return -INF; }\n\nint main() {\n\tcin.tie(nullptr);\n\tios::sync_with_stdio(false);\n\n\tint n, que;\n\tcin >> n >> que;\n\tvector<long> u(n), v(n);\n\tfor (int i = 0; i < n; i++) {\n\t\tlong x, y;\n\t\tcin >> x >> y;\n\t\tu[i] = x + y, v[i] = x - y;\n\t}\n\tatcoder::segtree<long, op_min, e_min> u_min(u), v_min(v);\n\tatcoder::segtree<long, op_max, e_max> u_max(u), v_max(v);\n\twhile (que--) {\n\t\tint ty;\n\t\tcin >> ty;\n\t\tif (ty == 1) {\n\t\t\tint i;\n\t\t\tlong x, y;\n\t\t\tcin >> i >> x >> y;\n\t\t\ti--;\n\t\t\tu[i] = x + y, v[i] = x - y;\n\t\t\tu_min.set(i, u[i]);\n\t\t\tv_min.set(i, v[i]);\n\t\t\tu_max.set(i, u[i]);\n\t\t\tv_max.set(i, v[i]);\n\t\t} else {\n\t\t\tint l, r;\n\t\t\tlong x, y;\n\t\t\tcin >> l >> r >> x >> y;\n\t\t\tl--;\n\t\t\tlong u0 = x + y, v0 = x - y;\n\t\t\tlong ans = 0;\n\t\t\tchmax(ans, abs(u0 - u_min.prod(l, r)));\n\t\t\tchmax(ans, abs(v0 - v_min.prod(l, r)));\n\t\t\tchmax(ans, abs(u0 - u_max.prod(l, r)));\n\t\t\tchmax(ans, abs(v0 - v_max.prod(l, r)));\n\t\t\tcout << ans << '\\n';\n\t\t}\n\t}\n}"
+      ],
+      "text_sha256": "7025327e79b66c3cbbe7a87fa80c240710c6fbe18672c6cb7da34ccdae577ec9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc437/abc437_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc437/editorial/14904",
+      "text": "座標\n\\((x, y)\\)\nと\n\\(i\\)\n番目のクリスマスツリー\n\\((X_i, Y_i)\\)\nのマンハッタン距離は\n\\(|x - X_i| + |y - Y_i|\\)\nと表すことができます。  この式を変形すると、以下のようになります。\n\\[\n\\begin{aligned}\n|x - X_i| + |y - Y_i|\n&= \\max\\{x - X_i,\\,-(x - X_i)\\} + \\max\\{y - Y_i,\\,-(y - Y_i)\\} \\\\\n&= \\max\\{x - X_i + y - Y_i,\\; x - X_i - y + Y_i,\\; -x + X_i + y - Y_i,\\; -x + X_i - y + Y_i\\} \\\\\n\\end{aligned}\n\\]\nここから、\n\\(-X_i-Y_i, -X_i+Y_i, +X_i-Y_i, +X_i+Y_i\\)\nの\n\\(4\\)\n本のセグ木を持つことで、\n\\(x,y\\)\nとうまく組み合わせることにより最大値を求めることができます。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#include <atcoder/all>\nusing namespace atcoder;\nusing ll = long long;\n\n\ntemplate <typename T>\ninline bool chmax(T &a, T b) { return ((a < b) ? (a = b, true) : (false)); }\ntemplate <typename T>\ninline bool chmin(T &a, T b) { return ((a > b) ? (a = b, true) : (false)); }\n\n\nusing S = long long;\nconst S INF = 8e18;\nS op(S a, S b){ return std::max(a, b); }\nS e(){ return -INF; }\n\n\nint main(){\n    int N,Q;\n    cin>>N>>Q;\n    segtree<S, op, e>MM(N);\n    segtree<S, op, e>MP(N);\n    segtree<S, op, e>PM(N);\n    segtree<S, op, e>PP(N);\n    for(int i=0;i<N;i++){\n        int a,b;\n        cin>>a>>b;\n        MM.set(i,-a-b);\n        MP.set(i,-a+b);\n        PM.set(i,a-b);\n        PP.set(i,a+b);\n    }\n    while(Q--){\n        int t;\n        cin>>t;\n        if(t==1){\n            int i,a,b;\n            cin>>i>>a>>b;\n            i--;\n            MM.set(i,-a-b);\n            MP.set(i,-a+b);\n            PM.set(i,a-b);\n            PP.set(i,a+b);\n        }else{\n            int l,r,x,y;\n            cin>>l>>r>>x>>y;\n            l--;\n            ll ans=0;\n            chmax(ans,x+y+MM.prod(l,r));\n            chmax(ans,x-y+MP.prod(l,r));\n            chmax(ans,-x+y+PM.prod(l,r));\n            chmax(ans,-x-y+PP.prod(l,r));\n            cout<<ans<<endl;\n        }\n    }\n}"
+      ],
+      "text_sha256": "b8e1fdd33a07b62b083d39e81998e05e1ce42073b106bfc40721233a076de541",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc437/abc437_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

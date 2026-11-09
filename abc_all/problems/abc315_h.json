@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc315_h",
+  "title": "Typical Convolution Problem",
+  "contests": [
+    {
+      "contest_id": "abc315",
+      "problem_index": "Ex"
+    }
+  ],
+  "difficulty": 2807,
+  "raw_difficulty": 2807,
+  "contest_id": "abc315",
+  "problem_index": "Ex",
+  "url": "https://atcoder.jp/contests/abc315/tasks/abc315_h",
+  "statement": "配点 : 650 点 問題文 数列 (A_1, A_2, \\ldots , A_N) が与えられます。\r\n数列 (F_0, F_1, \\ldots , F_N) を以下の式により定義します。 F_0 = 1 F_n = A_n\\displaystyle\\sum_{i+j<n}F_iF_j (1 \\leq n \\leq N) F_1, \\ldots , F_N を 998244353 で割った余りを求めてください。 制約 1 \\leq N \\leq 2 \\times 10^5 0 \\leq A_i < 998244353 入力される値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N 出力 F_1, \\ldots , F_N を 998244353 で割った余りをこの順に空白区切りで出力せよ。 入力例 1 5\r\n1 2 3 4 5 出力例 1 1 6 48 496 6240 F_1 = A_1F_0F_0 = 1 です。 F_2 = A_2(F_0F_0+F_0F_1+F_1F_0) = 6 です。\r\n同様にして、 F_3 = 48, F_4 = 496, F_5 = 6240 がわかります。 入力例 2 3\r\n12345 678901 2345678 出力例 2 12345 790834943 85679169",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 数列 (A_1, A_2, \\ldots , A_N) が与えられます。\r\n数列 (F_0, F_1, \\ldots , F_N) を以下の式により定義します。 F_0 = 1 F_n = A_n\\displaystyle\\sum_{i+j<n}F_iF_j (1 \\leq n \\leq N) F_1, \\ldots , F_N を 998244353 で割った余りを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2 \\times 10^5 0 \\leq A_i < 998244353 入力される値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 F_1, \\ldots , F_N を 998244353 で割った余りをこの順に空白区切りで出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\n1 2 3 4 5"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1 6 48 496 6240 F_1 = A_1F_0F_0 = 1 です。 F_2 = A_2(F_0F_0+F_0F_1+F_1F_0) = 6 です。\r\n同様にして、 F_3 = 48, F_4 = 496, F_5 = 6240 がわかります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\r\n12345 678901 2345678"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 12345 790834943 85679169"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc315/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:44.477368+00:00",
+  "statement_sha256": "53e2b335910e23c31f83d94d1619b9d25693db45944b4e2d03d14a0de275cb1a",
+  "editorials": []
+}

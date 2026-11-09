@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc456_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc456/editorial/19771",
+      "text": "\\(3\\)\nつのサイコロの各面を区別することにすると、出目の出方は\n\\(6\\times 6\\times 6=216\\)\n通りあります。この\n\\(216\\)\n通りを全探索し、出目が\n\\(4,5,6\\)\nになっているかを判定しましょう。\n判定方法としては、出目の組み合わせ\n\\(6\\)\n通りを全て確かめる方法の他、「集合として一致しているか」「ソートして\n\\((4,5,6)\\)\nになるか」「積が\n\\(120\\)\nか」などもあります。\n言語によっては小数を出力する方法に注意してください。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int a[3][6];\n  for(int i=0; i<3; i++){\n    for(int j=0; j<6; j++) cin >> a[i][j];\n  }\n\n  int ans = 0;\n  for(int i=0; i<6; i++){\n    for(int j=0; j<6; j++){\n      for(int k=0; k<6; k++){\n        if(   (a[0][i]==4 && a[1][j]==5 && a[2][k]==6)\n           || (a[0][i]==4 && a[1][j]==6 && a[2][k]==5)\n           || (a[0][i]==5 && a[1][j]==4 && a[2][k]==6)\n           || (a[0][i]==5 && a[1][j]==6 && a[2][k]==4)\n           || (a[0][i]==6 && a[1][j]==4 && a[2][k]==5)\n           || (a[0][i]==6 && a[1][j]==5 && a[2][k]==4)){\n          ans++;\n        }\n      }\n    }\n  }\n  printf(\"%.10f\\n\", ans/216.0);\n}",
+        "A = []\nfor _ in range(3):\n  Ai = list(map(int, input().split()))\n  A.append(Ai)\n\nans = 0\nfor x in A[0]:\n  for y in A[1]:\n    for z in A[2]:\n      if sorted([x, y, z]) == [4, 5, 6]:\n        ans += 1\n\nprint(f\"{ans/216: .10f}\")"
+      ],
+      "text_sha256": "76afb96550227b92b6856f580994c2242c9b7e13ee5ded81c30e291e7a85b65c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc456/abc456_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc368_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc368/editorial/10729",
+      "text": "「体力が 1 以上である最も前の敵」を以下では単に「先頭の敵」と呼ぶことにします。\n先頭の敵の体力が\n\\(5\\)\n以上であるとき、現在の\n\\(T\\)\nの値によらず、次の\n\\(3\\)\n回の行動で先頭の敵の体力を\n\\(5\\)\n減らすことができます。先頭の敵の体力を\n\\(H\\)\nとすると、この3回1セットの行動は\n\\(\\lfloor\\frac{H}{5}\\rfloor\\)\nセット繰り返されます。この部分をまとめて処理し、残りを愚直にシミュレーションすることで、\n\\(O(N)\\)\nで答えを求めることができます。\n実装例(Python)",
+      "codes": [
+        "N = int(input())\nA = list(map(int,input().split()))\nT = 0\nfor a in A:\n  num = a//5\n  T += num*3\n  a -= num*5\n  while a>0:\n    T+=1\n    if T%3==0:\n      a-=3\n    else:\n      a-=1\n\nprint(T)"
+      ],
+      "text_sha256": "b6247535bf2ef339b6ddce6f55c04e00d40db7c40e5f6f67b7fae4315d10c0d7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc368/abc368_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

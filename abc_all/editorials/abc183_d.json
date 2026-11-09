@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc183_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc183/editorial/284",
+      "text": "各時刻で使われているお湯の量を直接求めようとすると\n\\(O(N)\\)\nかかるため、時刻の最大値 (\n\\(2\\times 10^5\\)\n) を\n\\(T\\)\nとして時間計算量\n\\(O(NT)\\)\nとなり、実行時間制限に間に合いません。\n直感的には「時刻\n\\(S_i\\)\nになったらお湯の使用量が\n\\(P_i\\)\n増え、時刻\n\\(T_i\\)\nになったら\n\\(P_i\\)\n減る」としてシミュレーションをすると良さそうです。実際に、\n\\(S_i, T_i\\)\nでソートすることでシミュレーションすることで\n\\(O(N\\log N)\\)\nで解くこともできますが、今回は時刻の最大値が小さいことを利用して、\nいもす法\nにより\n\\(O(N+T)\\)\nで解く方法の方が実装が容易です。\n\\(0\\)\nで初期化された配列\n\\(a\\)\nを用意します。各\n\\(i\\)\nに対し、\n\\(a[S_i] \\leftarrow a[S_i]+P_i\\)\n\\(a[T_i] \\leftarrow a[T_i]-P_i\\)\nとしたのち、配列\n\\(a\\)\nの累積和を取ると、時刻\n\\(X\\)\nに使われるお湯の量が\n\\(a[X]\\)\nになります。この配列の最大値が\n\\(W\\)\n以下であるかどうかを調べればよいです。\n回答例(C) いもす法\n回答例(C++) シミュレーション",
+      "codes": [],
+      "text_sha256": "6a49186f68ce0ff3e6e67e2b100f4cfaa16d4380cfbec40aefcead4c387ffd85",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc183/abc183_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc469_g",
+  "title": "K-nacci Operations",
+  "contests": [
+    {
+      "contest_id": "abc469",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2804,
+  "raw_difficulty": 2804,
+  "contest_id": "abc469",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc469/tasks/abc469_g",
+  "statement": "配点 : 575 点 問題文 a , b からなる K 個の文字列 S_1, S_2, \\ldots, S_K が与えられます。また、 i > K なる整数 i に対し、文字列 S_i を S_{i-1}, S_{i-2}, \\ldots, S_{i-K} をこの順に連結した文字列として定めます。 あなたは、文字列 T に対して以下の操作を行います。 |S_N| を S_N の長さとして、 j = 1, 2, \\ldots, |S_N| に対し以下の操作を順に行う。 S_N の j 文字目が a のとき、 T の先頭の文字を末尾に移動させる。 S_N の j 文字目が b のとき、 T 全体を反転させる。すなわち、 T の文字の並びを逆にする。 一連の操作を終えた後の文字列 T を求めてください。 制約 2 \\leq K \\leq 100 K は整数 S_i は a , b からなる空でない文字列 (1 \\leq i \\leq K) S_1, S_2, \\ldots, S_K の長さの和は 2 \\times 10^5 以下 1 \\leq N \\leq 10^{18} N は整数 T は英小文字からなる長さ 1 以上 2 \\times 10^5 以下の文字列 入力 入力は以下の形式で標準入力から与えられる。 K S_1 S_2 \\vdots S_K N T 出力 答えを出力せよ。 入力例 1 3\r\na\r\naa\r\nb\r\n5\r\nabc 出力例 1 cab S_1 = a 、 S_2 = aa 、 S_3 = b 、 S_4 = baaa 、 S_5 = baaabaa です。 操作によって文字列 T は abc → cba → bac → acb → cba → abc → bca → cab と変化するため、一連の操作を終えた後の文字列 T は cab となります。 入力例 2 2\r\na\r\nba\r\n6\r\nfibonacci 出力例 2 canobific 入力例 3 5\r\naba\r\na\r\nbb\r\nba\r\naab\r\n1000000000000000000\r\nabcba 出力例 3 aabcb",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 a , b からなる K 個の文字列 S_1, S_2, \\ldots, S_K が与えられます。また、 i > K なる整数 i に対し、文字列 S_i を S_{i-1}, S_{i-2}, \\ldots, S_{i-K} をこの順に連結した文字列として定めます。 あなたは、文字列 T に対して以下の操作を行います。 |S_N| を S_N の長さとして、 j = 1, 2, \\ldots, |S_N| に対し以下の操作を順に行う。 S_N の j 文字目が a のとき、 T の先頭の文字を末尾に移動させる。 S_N の j 文字目が b のとき、 T 全体を反転させる。すなわち、 T の文字の並びを逆にする。 一連の操作を終えた後の文字列 T を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq K \\leq 100 K は整数 S_i は a , b からなる空でない文字列 (1 \\leq i \\leq K) S_1, S_2, \\ldots, S_K の長さの和は 2 \\times 10^5 以下 1 \\leq N \\leq 10^{18} N は整数 T は英小文字からなる長さ 1 以上 2 \\times 10^5 以下の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 K S_1 S_2 \\vdots S_K N T"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\na\r\naa\r\nb\r\n5\r\nabc"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 cab S_1 = a 、 S_2 = aa 、 S_3 = b 、 S_4 = baaa 、 S_5 = baaabaa です。 操作によって文字列 T は abc → cba → bac → acb → cba → abc → bca → cab と変化するため、一連の操作を終えた後の文字列 T は cab となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2\r\na\r\nba\r\n6\r\nfibonacci"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 canobific"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 5\r\naba\r\na\r\nbb\r\nba\r\naab\r\n1000000000000000000\r\nabcba"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 aabcb"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc469/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:56.620623+00:00",
+  "statement_sha256": "0a26fa5bf2dc9dd5dd7b8df6e237a5cd4fcb122c2be6209eaf937593b4af31f0",
+  "editorials": []
+}

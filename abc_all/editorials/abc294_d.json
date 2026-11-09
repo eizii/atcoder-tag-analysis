@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc294_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc294/editorial/6005",
+      "text": "2 つの解法を紹介します。\n解法 1 (\nstd::set\nを使う解法)\n1 つ目は\nstd::set\nのような順序付き集合型を利用する方法です。\n具体的には、次の手順で「受付に呼ばれたが、まだ受付に行っていない人」の集合を管理しながらイベントを処理していきます。\ncalled\nを 「受付に呼ばれたが、まだ受付に行っていない人」の集合とする。はじめ\ncalled\nは空である。\nまた、\nlast\nを最後に呼ばれた人の番号とする。便宜上 はじめ\nlast\nは\n\\(0\\)\nとする。\nその後、イベントを順に処理する。イベントの種類に応じて次の処理を行う。\n1 種類目のイベントの場合、次に呼ばれるのは\nlast + 1\nである。よって\nlast\nに 1 を足したあとに\ncalled\nに\nlast\nを追加する。\n2 種類目のイベントの場合、\nx\nを\ncalled\nから削除する。\n3 種類目のイベントの場合、\ncalled\nの最小の要素が答えである。よってこれを出力する。\n上記の手順中、\ncalled\nに関する操作は「要素の追加」「要素の削除」「最小の要素の出力」です。\ncalled\nの実装に配列や list などを用いると、最悪ケースで時間計算量が\n\\(\\mathrm{O}(N^2)\\)\nかかり TLE してしまいますが、\nstd::set\nのような順序付き集合型を用いることで操作をすべて 1 回あたり\n\\(\\mathrm{O}(\\log N)\\)\nで行うことができるので、クエリ全体で\n\\(\\mathrm{O}(Q \\log N)\\)\nでこの問題を解くことができます。\n実装例 (C++,\n\\(\\mathrm{O}(Q \\log N)\\)\n)\n解法 2 (線形時間で解く方法)\nより計算量の良い解法として、時間計算量が\n\\(\\mathrm{O}(N + Q)\\)\nである解法も紹介します。\n問題の制約から、3 種類目のイベントで呼ばれる番号は広義単調増加するという性質を持ちます。\n証明：背理法で考えます。3 種類目のイベントで人\n\\(y\\)\nが呼ばれて、その後 人\n\\(x\\)\n\\((x < y)\\)\nが呼ばれたとします。すると、\n\\(y\\)\nが呼ばれた時点で、人\n\\(x\\)\nはすでに 1 回以上受付に呼ばれていて(1 回目の呼び出しは番号順であるため) かつ まだ受付に行っていないため、矛盾が発生します。\nよって、次のような手順で線形時間で解くアルゴリズムを構成できます。まず、最後に 3 種類目のイベントで読んだ人の番号を変数\nans\nで常に保持しておきます。そして、3 種類目のイベントが来るたびに、\nans\nの示す人が受付に行っていない人になるまで\nans\nの値をインクリメントして、得られる\nans\nの値を出力します。\nこの操作によって\nans\nのインクリメントされる回数は\n\\(\\min(N, Q)\\)\n回で抑えられるので、計算量は\n\\(\\mathrm{O}(N+  Q)\\)\nになります。\n実装例 (C++,\n\\(\\mathrm{O}(N + Q)\\)\n)",
+      "codes": [
+        "#include <iomanip>\n#include <iostream>\n#include <set>\n#include <vector>\nusing namespace std;\n\nint main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int N, Q;\n  cin >> N >> Q;\n\n  set<int> called;\n  int last = 0;\n  while (Q--) {\n    int event;\n    cin >> event;\n    if (event == 1) {\n      called.insert(++last);\n    } else if (event == 2) {\n      int x;\n      cin >> x;\n      called.erase(x);\n    } else {\n      cout << *begin(called) << \"\\n\";\n    }\n  }\n}",
+        "#include <iomanip>\n#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int N, Q;\n  cin >> N >> Q;\n  vector<int> gone(N + 1);\n  int ans = 1;\n  while (Q--) {\n    int event;\n    cin >> event;\n    if (event == 1) {\n      // do nothing\n    } else if (event == 2) {\n      int x;\n      cin >> x;\n      gone[x] = 1;\n    } else {\n      while (gone[ans]) ans++;\n      cout << ans << \"\\n\";\n    }\n  }\n}"
+      ],
+      "text_sha256": "27a6cda774a162619e98d949f31a1b50a52c2e0ad21bec1039315e9eda8f7c0a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc294/abc294_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

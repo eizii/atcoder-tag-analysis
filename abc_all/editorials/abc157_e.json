@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc157_e",
+  "editorials": [
+    {
+      "text": "E: Simple String Queries\n各文字(a, b, ..., z) 毎に文字列中に現れる場所の集合を管理することを考えます。\n例えば、set(平衡二分探索木) を使えば、type 1 のクエリはerase 関数とinsert 関数を用いてO (log N)\nで処理可能であり、type 2 のクエリは各文字ごとにlower bound 関数でlq 文字目以降初めて存在す\nる場所を求め、その値とrq を比較することにより、O (log N) で処理可能です。以上より、全体の時\n間計算量O ((Alphabet Size) Q log N) で処理可能です。\n他にも、Segment Tree や平方分割により各文字が各区間に表れる回数を管理したり、各区間に表れ\nる文字の集合を管理したりすることによって、クエリを高速に処理することも可能です。\n",
+      "text_sha256": "d3480063d58a7c5ed9f28306ee21f8b05ca0610f0c3660aa7b6f4d262f2c9b4c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc157/abc157_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

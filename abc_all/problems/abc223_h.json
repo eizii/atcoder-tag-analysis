@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc223_h",
+  "title": "Xor Query",
+  "contests": [
+    {
+      "contest_id": "abc223",
+      "problem_index": "H"
+    }
+  ],
+  "difficulty": 2771,
+  "raw_difficulty": 2771,
+  "contest_id": "abc223",
+  "problem_index": "H",
+  "url": "https://atcoder.jp/contests/abc223/tasks/abc223_h",
+  "statement": "配点 : 600 点 問題文 長さ N の正整数列 A = (A_1, \\dots, A_N) が与えられます。 Q 個のクエリを処理してください。 i \\, (1 \\leq i \\leq Q) 番目のクエリでは、 A_{L_i}, A_{L_i + 1}, \\dots, A_{R_i} から 1 つ以上の要素を選び、それらの排他的論理和を X_i にできるかどうか判定してください。 排他的論理和とは 整数 a, b のビットごとの排他的論理和 a\\ \\mathrm{xor}\\ b は、以下のように定義されます。 a\\ \\mathrm{xor}\\ b を二進表記した際の 2^k \\, (k \\geq 0) の位の数は、 a, b を二進表記した際の 2^k の位の数のうち一方のみが 1 であれば 1 、そうでなければ 0 である。 例えば、 3\\ \\mathrm{xor}\\ 5 = 6 となります（二進表記すると: 011\\ \\mathrm{xor}\\ 101 = 110 ）。 制約 1 \\leq N \\leq 4 \\times 10^5 1 \\leq Q \\leq 2 \\times 10^5 1 \\leq A_i \\lt 2^{60} 1 \\leq L_i \\leq R_i \\leq N 1 \\leq X_i \\lt 2^{60} 入力は全て整数である。 入力 入力は以下の形式で標準入力から与えられる。 N Q A_1 \\ldots A_N L_1 R_1 X_1 \\vdots L_Q R_Q X_Q 出力 Q 行にわたって出力せよ。 i \\, (1 \\leq i \\leq Q) 行目には、 A_{L_i}, A_{L_i + 1}, \\dots, A_{R_i} から 1 つ以上の要素を選び、それらの排他的論理和を X_i にできるならば Yes と、できないならば No と出力せよ。 入力例 1 5 2\r\n3 1 4 1 5\r\n1 3 7\r\n2 5 7 出力例 1 Yes\r\nNo 1 つ目のクエリでは、 A_1, A_3 を選ぶことで排他的論理和を 7 にすることができます。 2 つ目のクエリでは、どのように要素を選んでも排他的論理和を 7 にすることはできません。 入力例 2 10 10\r\n8 45 56 9 38 28 33 5 15 19\r\n10 10 53\r\n3 8 60\r\n1 10 29\r\n5 7 62\r\n3 7 51\r\n8 8 52\r\n1 4 60\r\n6 8 32\r\n4 8 58\r\n5 9 2 出力例 2 No\r\nNo\r\nYes\r\nNo\r\nYes\r\nNo\r\nNo\r\nNo\r\nYes\r\nYes",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の正整数列 A = (A_1, \\dots, A_N) が与えられます。 Q 個のクエリを処理してください。 i \\, (1 \\leq i \\leq Q) 番目のクエリでは、 A_{L_i}, A_{L_i + 1}, \\dots, A_{R_i} から 1 つ以上の要素を選び、それらの排他的論理和を X_i にできるかどうか判定してください。 排他的論理和とは 整数 a, b のビットごとの排他的論理和 a\\ \\mathrm{xor}\\ b は、以下のように定義されます。 a\\ \\mathrm{xor}\\ b を二進表記した際の 2^k \\, (k \\geq 0) の位の数は、 a, b を二進表記した際の 2^k の位の数のうち一方のみが 1 であれば 1 、そうでなければ 0 である。 例えば、 3\\ \\mathrm{xor}\\ 5 = 6 となります（二進表記すると: 011\\ \\mathrm{xor}\\ 101 = 110 ）。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 4 \\times 10^5 1 \\leq Q \\leq 2 \\times 10^5 1 \\leq A_i \\lt 2^{60} 1 \\leq L_i \\leq R_i \\leq N 1 \\leq X_i \\lt 2^{60} 入力は全て整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q A_1 \\ldots A_N L_1 R_1 X_1 \\vdots L_Q R_Q X_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行にわたって出力せよ。 i \\, (1 \\leq i \\leq Q) 行目には、 A_{L_i}, A_{L_i + 1}, \\dots, A_{R_i} から 1 つ以上の要素を選び、それらの排他的論理和を X_i にできるならば Yes と、できないならば No と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5 2\r\n3 1 4 1 5\r\n1 3 7\r\n2 5 7"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\r\nNo 1 つ目のクエリでは、 A_1, A_3 を選ぶことで排他的論理和を 7 にすることができます。 2 つ目のクエリでは、どのように要素を選んでも排他的論理和を 7 にすることはできません。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 10\r\n8 45 56 9 38 28 33 5 15 19\r\n10 10 53\r\n3 8 60\r\n1 10 29\r\n5 7 62\r\n3 7 51\r\n8 8 52\r\n1 4 60\r\n6 8 32\r\n4 8 58\r\n5 9 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No\r\nNo\r\nYes\r\nNo\r\nYes\r\nNo\r\nNo\r\nNo\r\nYes\r\nYes"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc223/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:48.751176+00:00",
+  "statement_sha256": "d033a98f359f0a1367614bea95b2c80e4f8500c4c2d6f4c1672c691807cc3be3",
+  "editorials": []
+}

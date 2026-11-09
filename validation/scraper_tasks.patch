@@ -1,0 +1,35 @@
+--- a/scraper/tasks.py
++++ b/scraper/tasks.py
+@@ -20,20 +20,21 @@
+     if ja is None:
+         raise RuntimeError(f"japanese statement not found: {task_id}")
+ 
+-    # 配点削除
+-    score = ja.find("p")
+-    if score:
+-        score.decompose()
+-
+     # タイトル抽出（<title>タグから取得。例: "A - Shout Everyday"）
+     title_tag = soup.find("title")
+     title = title_tag.get_text(strip=True) if title_tag else ""
+ 
+-    statement = ja.get_text("\n", strip=True)
+-
+-    # 「入力」以降を削除
+-    pos = statement.find("入力")
+-    if pos != -1:
+-        statement = statement[:pos].rstrip()
++    # 本文中の「入力」は残し、実際の見出しだけで区切る。
++    sections = ja.select(".part > section") or ja.find_all("section")
++    selected = []
++    for section in sections:
++        heading = section.find(["h2", "h3"])
++        label = heading.get_text(strip=True) if heading else ""
++        if label in {"入力", "出力"} or label.startswith(("入力例", "出力例")):
++            break
++        selected.append(section.get_text("\n", strip=True))
++    if not selected:
++        raise RuntimeError(f"problem statement sections not found: {task_id}")
++    statement = "\n".join(selected)
+ 
+     return {"task_id": task_id, "url": url, "title": title, "statement": statement}

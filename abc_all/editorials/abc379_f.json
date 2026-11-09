@@ -1,0 +1,45 @@
+{
+  "problem_id": "abc379_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc379/editorial/11309",
+      "text": "ビル\n\\(l,r\\ (l<r)\\)\nの両方から見えるビルの条件を考えます．自明な必要条件として\nビル\n\\(l\\)\nから見ることができること\nビル\n\\(r\\)\nより東にあること\nがあります．これは十分条件にもなっています．\n（証明）ビル\n\\(x\\ (x>r)\\)\nがビル\n\\(l\\)\nから見ることができるとき，定義からすべての\n\\(k\\ (l<k<x)\\)\nに対して\n\\(H_k < H_x\\)\nが成り立ちます．よって，すべての\n\\(k\\ (r<k<x)\\)\nに対して\n\\(H_k < H_x\\)\nが成り立つため，ビル\n\\(x\\)\nはビル\n\\(r\\)\nからみることができます．\nあとはこれを求める方法を考えます．\nABC372-D(Buildings)\nの解説で書いたように，ビル\n\\(l\\)\nから見ることができるビルの集合はスタックを用いることで管理することができます．本問題では，クエリを先読みしたうえで，ビル\n\\(l\\)\nから見えるビルの集合を管理しているタイミングで，集合に含まれる要素のうち\n\\(r\\)\nより大きいものを同時に求められるようにすれば良いです．これは fenwick tree を用いたり二分探索を用いることで実現できます．\n（fenwick tree）\n（二分探索）",
+      "codes": [
+        "from atcoder.fenwicktree import FenwickTree\n\nn, q = map(int, input().split())\nh = list(map(int, input().split()))\nquery = [[] for i in range(n)]\nfor i in range(q):\n    l, r = map(lambda x: int(x) - 1, input().split())\n    query[l].append((r, i))\n\nft = FenwickTree(n)\nstc = []\nans = [0] * q\nfor l in range(n - 1, -1, -1):\n    for r, i in query[l]:\n        ans[i] = ft.sum(r + 1, n)\n    while stc and h[stc[-1]] < h[l]:\n        ft.add(stc.pop(), -1)\n    stc.append(l)\n    ft.add(l, 1)\nprint(*ans, sep=\"\\n\")",
+        "import bisect\nn, q = map(int, input().split())\nh = list(map(int, input().split()))\nquery = [[] for i in range(n)]\nfor i in range(q):\n    l, r = map(lambda x: int(x) - 1, input().split())\n    query[l].append((r, i))\nans = [0] * q\nstc = []\nfor l in range(n - 1, -1, -1):\n    for r, i in query[l]:\n        ans[i] = bisect.bisect_left(stc, -r)\n    while stc and h[-stc[-1]] < h[l]:\n        stc.pop()\n    stc.append(-l)\nprint(*ans, sep=\"\\n\")"
+      ],
+      "text_sha256": "28479cf186aab80bced16a8deaed4c94c475ca29a018953e9df6f98b0a063746",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc379/abc379_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc379/editorial/11310",
+      "text": "オンラインで（クエリを先読みしないで）解くことができます．\n実装例",
+      "codes": [],
+      "text_sha256": "0cc5497a7c3ac26f066d27967842da702a104d7c9a4384214767799783b68203",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc379/abc379_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc379/editorial/11337",
+      "text": "ビル\n\\(l\\)\nから見えるビルを\n\\(a = (a_1, \\cdots, a_{|a|})\\ (a_1\\lt\\cdots\\lt a_{|a|})\\)\n、\n\\(r\\)\nから見えるビルを\n\\(b = (b_1, \\cdots, b_{|b|})\\ (b_1\\lt\\cdots\\lt b_{|b|})\\)\nとします。\n公式解説で述べられていた条件によれば、\n\\(a\\)\nと\n\\(b\\)\nに共通する要素の個数を数えればよいです。\nここで、見えるビルの列をスタックで管理することを考えると、共通する要素は\n\\(a\\)\nおよび\n\\(b\\)\nの suffix をなします。\n結局のところ、\n\\(l\\)\nに至るまでに\n\\(b\\)\nの suffix がどれくらい残るかが重要になります。\n\\(i = N, \\cdots, 1\\)\nの順で\n\\(H_i\\)\nをスタックに push するとして、\n\\(H_i\\)\nを push した直後のスタックのサイズを\n\\(c_i\\)\nとおきます。\n答えは\n\\(\\min_{l\\lt i\\le r} (c_i - 1)\\)\nです。\nこれは segtree によって容易に求められます。",
+      "codes": [],
+      "text_sha256": "ffd89a57a7b2b03daebe05124c10bf3589a67e866d2b6472c43dda3156cf699b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc379/abc379_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc379/editorial/11336",
+      "text": "\\(T_i=(\\)\nビル\n\\(i\\)\nが見えなくなるビル\n\\(j(1\\leq j\\leq i)\\)\nとしてありうる最大値\n\\((\\)\n存在しない場合は\n\\(-\\mathrm{inf}\\)\n\\())\\)\nとします。\n\\(T\\)\nは\n\\(j\\)\nの降順にビル\n\\(j\\)\nから見えるビルをstackなどで求める過程で\n\\(O(N)\\)\nで求まります。\n各クエリ\n\\(l_i,r_i\\)\nについて、答えは\n\\((T_{r_i+1},T_{r_i+2},\\dots,T_N)\\)\nに含まれる\n\\(l_i\\)\n未満の値の個数となり、これは MergeSortTree によって\n\\(O(\\log^2N)\\)\nで求めることができます。\n計算量は\n\\(O(N\\log N+Q\\log^2 N)\\)\nです。\n実装例(C++ 349ms)",
+      "codes": [],
+      "text_sha256": "d7743e8745a9ef9616868a14c52d17d32ae7a4bcd2d2397fc316413e0a9ac69a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc379/abc379_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc373_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc373/editorial/11040",
+      "text": "グラフの各連結成分について，そのうちの\n\\(1\\)\nつの頂点に書き込む値を決めると，その連結成分内のすべての頂点に書き込むべき値が確定します．ある頂点の値を決めると，それと辺でつながっている頂点の値が決まる，というのが連鎖的に起こるからです．よって，頂点を順番に見ていって，まだ値が確定していない頂点があったら，その頂点の値を適当な値（たとえば\n\\(0\\)\n）に固定し，その頂点と連結なすべての頂点の値を連鎖的に確定させる，ということを繰り返すことで，この問題を解くことができます．\nこのような処理の実装は，\n深さ優先探索 (DFS)\nや\n幅優先探索 (BFS)\nにより行えます．DFS による実装例を以下に示します．時間計算量は，\n\\(O(N+M)\\)\nです．",
+      "codes": [
+        "# 入力を読み込む\nN, M = map(int, input().split())\nG = [[] for _ in range(N)]\nfor _ in range(M):\n    u, v, w = map(int, input().split())\n    u -= 1\n    v -= 1\n    G[u].append((v, w))\n    G[v].append((u, -w))\n\nvisited = [False] * N  # 値が確定しているかどうか\nans = [0] * N  # 書き込む値\nfor i in range(N):\n    # すでに値が確定しているならばスキップ\n    if visited[i]:\n        continue\n    # 頂点 i の値を 0 に確定し，探索を始める\n    st = [i]\n    visited[i] = True\n    while st:\n        # いま頂点 u にいる\n        u = st.pop()\n        # 頂点 u に隣接する頂点 v を調べる\n        for v, w in G[u]:\n            if not visited[v]:\n                # まだ頂点 v の値が確定していないならば，頂点 u の値と整合的になるように，頂点 v の値を確定させる\n                visited[v] = True\n                ans[v] = ans[u] + w\n                st.append(v)\nprint(*ans)"
+      ],
+      "text_sha256": "4e089e57f38c85e30caffff64d5e6738a48b6eda6c1d2b4eab15b7624f58699b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc373/abc373_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc373/editorial/11068",
+      "text": "重み付きUnionFindを用いた解法を紹介します。\n参考：\nけんちょんさんの記事\n重み付きUnionFindは、\n通常のUnionFindと同じく、無向グラフの連結関係を管理する\n連結である2頂点の重みの差を求める\nことができます。この問題では、連結成分に含まれる頂点の中から親を一人決め、親の重みを0とし、他の頂点は親との重みの差で重みを決めることで解を構成することができるため、重み付きUnionFindで解くことができます。\nまた、重み付きUnionFindをテーマにした問題集が\nAtCoder NoviSteps\nに用意されています。重み付きUnionFindへの理解を深める良い練習になるでしょう。\n実装例(C++)\n提出コード(C++)\nhttps://atcoder.jp/contests/abc373/submissions/58292961",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\ntemplate<class Abel> struct WeightedUnionFind {\n     vector<int> par;\n     vector<int> rank;\n     vector<Abel> diff_weight;\n \n     WeightedUnionFind(int n = 1, Abel SUM_UNITY = 0) {\n         init(n, SUM_UNITY);\n     }\n \n     void init(int n = 1, Abel SUM_UNITY = 0) {\n         par.resize(n); rank.resize(n); diff_weight.resize(n);\n         for (int i = 0; i < n; ++i) par[i] = i, rank[i] = 0, diff_weight[i] = SUM_UNITY;\n     }\n \n     int root(int x) {\n         if (par[x] == x) {\n             return x;\n         }\n         else {\n             int r = root(par[x]);\n             diff_weight[x] += diff_weight[par[x]];\n             return par[x] = r;\n         }\n     }\n \n     Abel weight(int x) {\n         root(x);\n         return diff_weight[x];\n     }\n \n     bool issame(int x, int y) {\n         return root(x) == root(y);\n     }\n \n     bool merge(int x, int y, Abel w) {\n         w += weight(x); w -= weight(y);\n         x = root(x); y = root(y);\n         if (x == y) return false;\n         if (rank[x] < rank[y]) swap(x, y), w = -w;\n         if (rank[x] == rank[y]) ++rank[x];\n         par[y] = x;\n         diff_weight[y] = w;\n         return true;\n     }\n \n     Abel diff(int x, int y) {\n         return weight(y) - weight(x);\n     }\n };\n\nint main(){\n\tint n,m;cin >> n >> m;\n\tWeightedUnionFind<long long>uf(n);\n\tfor(int i = 0;i<m;i++){\n\t\tint u,v;\n\t\tlong long w;\n\t\tcin >> u >> v >> w;\n\t\tu--,v--;\n\t\tuf.merge(u,v,w);\n\t}\n\tfor(int i = 0;i<n;i++){\n\t\tcout << uf.weight(i) << \" \";\n\t}\n\tcout << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "c8a3138ec07afed9253ca1956d222a1c2ba9419485be795ac7eac7ad1068d7b6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc373/abc373_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

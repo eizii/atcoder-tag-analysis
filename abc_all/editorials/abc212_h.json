@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc212_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc212/editorial/2359",
+      "text": "問題名からも分かるようにこれはNim と呼ばれる有名な石取りゲームで、山にある石の数を \\(B_1,\\ldots ,B_M\\) とすると、 \\(B_1\\oplus \\cdots \\oplus B_M=0\\) となるとき後手必勝、そうでないとき先手必勝であることが知られています。ここで、 \\(\\oplus\\) は排他的論理和を表します。 ここで山の数 \\(M\\) を固定して考えます。また、長さ \\(2^{16}\\) の列 \\(C=(C_0,\\ldots, C_{2^{16}-1})\\) であって、 \\(A_j=i\\) となるような \\(j\\) が存在するならば \\(C_i=1\\) , そうでないならば \\(C_i=0\\) であるような列を考えます。 長さ \\(2^K\\) の \\(2\\) つの列 \\(X=(X_i), Y=(Y_i)\\) のxorについての畳み込み \\(Z=(Z_i)=X*Y\\) を \\[Z_k=\\displaystyle\\sum_{i\\oplus j=k}X_iY_j\\] で定めると、先手が勝てるような石の組の数は \\(C*C*\\cdots(M個)\\cdots*C\\) の第 \\(0\\) 要素以外の総和です。 上の畳み込みはアダマール変換を使う事で高速に計算できます。具体的にはアダマール変換を \\(H\\) で表して, \\(X'=(X_i')=H(X)\\) , \\(Y'=(Y_i')=H(Y)\\) , \\(Z'=(Z_i')=H(X*Y)\\) とすると、 \\(Z'_i=X'_iY'_i\\) が成り立ち、一般に \\(H(H(X))=X\\) が成り立つことから、 \\(X*Y=H((X_i'Y_i'))\\) として求めることができます。\nよって、今回の場合では \\(C=H(C')\\) とし、 \\(C*\\cdots *C=H(({C_i'}^M))\\) とすればよいです。 \\(M\\) についての固定を解いて、同じことを考えると、\n最終的な答えは \\(H(({C_i'}+{C_i'}^2\\cdots +{C_i'}^N))\\) の第 \\(0\\) 要素以外の総和として求めることができます。 \\({C_i'}+{C_i'}^2\\cdots +{C_i'}^N\\) の値は等比数列の和の公式を用いることで \\(C'_i\\) の値から \\(O(\\log N)\\) で求まります。ただし、 \\(C'_i\\equiv 0,1 \\pmod{998244353}\\) の場合に注意してください。 長さ \\(2^K\\) に対するアダマール変換は \\(O(K2^K)\\) で計算でき, 今回は \\(\\max(A_i)<2^K\\) であれば良い事から \\(m_A=\\max(A_i)\\) として、 \\(O(m_A\\log m_A)\\) でこの部分は計算できます。また、等比数列の和を求めるパートでは \\(O(m_A\\log N)\\) でしたから、全体で計算量は \\(O(m_A(\\log m_A+\\log N))\\) であり、十分高速にこの問題を解く事が出来ました。 C++による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define N (1<<16)\n#define K 16\n#define MOD 998244353\n#define ll long long\n#define rep(i, n) for(int i = 0; i < n; ++i)\n#define rep2(i, a, b) for(int i = a; i <= b; ++i)\n\nll modpow(ll x, int a) {\n\tx %= MOD;\n\tll re = 1;\n\twhile (a > 0) {\n\t\tif (a % 2 == 1)re = (re*x) % MOD;\n\t\tx = (x*x) % MOD;\n\t\ta /= 2;\n\t}\n\treturn re;\n}\n\nll inv(ll x) {\n\treturn modpow(x, MOD - 2);\n}\n\nll func(ll x, int n) {\n\tx %= MOD;\n\tif (x == 0)return (ll)0;\n\tif (x == 1)return (ll)n;\n\tll re = modpow(x, n) - 1;\n\tre = (re*x) % MOD;\n\tre = (re*inv(x - 1)) % MOD;\n\treturn re;\n}\n\n\nint main(void) {\n\tint p2[K];\n\tp2[0] = 1;\n\trep(i, K - 1)p2[i + 1] = p2[i] * 2;\n\tint n, k, d;\n\tll a[N];\n\trep(i, N)a[i] = 0;\n\tll x;\n\tll ans = 0;\n\n\tcin >> n >> k;\n\trep(i, k) {\n\t\tcin >> x;\n\t\ta[x] = 1;\n\t}\n\trep(kk, K) {\n\t\trep(i, p2[K - kk - 1]) {\n\t\t\td = p2[kk + 1] * i;\n\t\t\trep(j, p2[kk]) {\n\t\t\t\tx = (a[d + j] - a[d + p2[kk] + j] + MOD) % MOD;\n\t\t\t\ta[d + j] = (a[d + j] + a[d + p2[kk] + j]) % MOD;\n\t\t\t\ta[d + p2[kk] + j] = x;\n\t\t\t}\n\t\t}\n\t}\n\trep(i, N)a[i] = func(a[i], n);\n\trep(kk, K) {\n\t\trep(i, p2[K - kk - 1]) {\n\t\t\td = p2[kk + 1] * i;\n\t\t\trep(j, p2[kk]) {\n\t\t\t\tx = (a[d + j] - a[d + p2[kk] + j] + MOD) % MOD;\n\t\t\t\ta[d + j] = (a[d + j] + a[d + p2[kk] + j]) % MOD;\n\t\t\t\ta[d + p2[kk] + j] = x;\n\t\t\t}\n\t\t}\n\t}\n\n\trep2(i, 1, N - 1)ans += a[i];\n\tans %= MOD;\n\tans = (ans * (inv((ll)N))) % MOD;\n\tcout << ans << endl;\n\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "6f310c9a7caecb756c3fa3b1c429626d121d2afdc019f57b4b37822792b0154d"
+    }
+  ],
+  "status": "available"
+}

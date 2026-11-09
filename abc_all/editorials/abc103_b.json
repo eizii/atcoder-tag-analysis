@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc103_b",
+  "editorials": [
+    {
+      "text": "B: String Rotation\n|S| 回操作を行うと元に戻るので、0 回以上|S| −1 回以下の回数操作を行った後にT と一致するものがあ\nるか調べれば十分です。\nC++ 言語による解答例\n#include <iostream >\nusing\nnamespace\nstd;\nint main () {\nstring S, T; cin >> S >> T;\nbool ans = false;\nfor (int i = 0; i < S.size (); ++i) {\nif (S == T) {\nans = true;\nbreak;\n}\nS = S.back () + S.substr (0, S.size () -1);\n}\nif (ans) {\ncout << \"Yes\" << endl;\n}\nelse {\ncout << \"No\" << endl;\n}\n}\n",
+      "text_sha256": "56dfbf2d08b7e2a61805e649772facdd89f644d8124c5a9734e409a39e4d69bb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc103/abc103_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

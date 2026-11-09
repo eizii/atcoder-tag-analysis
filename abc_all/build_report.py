@@ -1,0 +1,122 @@
+"""Generate a readable status report without network or model APIs."""
+import csv
+from collect_statements import ROOT,load_json
+s=load_json(ROOT/"output/summary.json")
+coverage=load_json(ROOT/"source_coverage.json")
+v=load_json(ROOT/"output/verification.json")
+assert v["checks_passed"]
+missing=set(coverage["missing_editorial_problem_ids"])
+m=load_json(ROOT/"manifest.json")
+with (ROOT/"output/source_gaps.csv").open("w",encoding="utf-8-sig",newline="") as f:
+    writer=csv.DictWriter(f,fieldnames=["problem_id","contest_id","title","url","issue"])
+    writer.writeheader()
+    for p in m["problems"]:
+        if p["problem_id"] in missing:
+            r={k:p[k] for k in ["problem_id","contest_id","title","url"]}
+            r["issue"]="No per-problem editorial text; official statement was collected."
+            writer.writerow(r)
+text=f"""# ABC全問の収集・暫定タグ付与データ
+
+作成日：2026-11-05  
+対象：終了済みのABC001〜ABC482（ABC316は欠番）  
+データバージョン：{s['version']}  
+状態：問題収集は完了。タグ付与には未判定が残っている。
+
+## 結果
+
+| 項目 | 件数 |
+| --- | ---: |
+| 対象コンテスト | {s['contest_count']:,} |
+| 問題文を取得した問題 | {s['problem_count']:,} |
+| 公開問題一覧と照合した取得漏れ | 0 |
+| 暫定タグを1個以上付与した問題 | {s['tagged_problem_count']:,} |
+| 未判定のためタグが空の問題 | {s['unresolved_problem_count']:,} |
+| 個別確認で現行語彙に該当タグなしとした問題 | {s['no_matching_tag_after_review_count']:,} |
+| 問題とタグの対応 | {s['assigned_pairs']:,} |
+| 定義されたタグ | {s['taxonomy_count']:,} |
+| 使用されたタグ | {s['used_tags']:,} |
+| 未使用タグ | {s['unused_tags']:,} |
+| 問題別の解説本文がある問題 | {s['problems_with_editorials']:,} |
+| 問題別の解説本文がない問題 | {len(missing):,} |
+| このチャットで解法内容を追加確認した問題 | {s['assistant_semantic_reviewed_problems']:,} |
+| 外部AI APIの呼び出し | 0 |
+| 追加のAI API費用 | 0円 |
+
+**全問への適切なタグ付与が確定したデータではない。** タグのある問題も、自動付与と既存タグの継承が中心で、独立した人による正解ラベルの検証は未実施。未判定を別のタグで埋めず、全問題を一覧と行列に残している。
+
+## データを開く
+
+| ファイル | 内容 |
+| --- | --- |
+| [全問題一覧](output/problems.csv) | 1行1問題。{s['problem_count']:,}問すべてのタグと判定状態。空タグも保持。 |
+| [問題・タグ対応表](output/all_problems_tagged.csv) | {s['assigned_pairs']:,}組。付与方法、役割、確認状態、根拠URL。 |
+| [問題×266タグの行列](output/problem_tag_matrix.csv) | {s['problem_count']:,}行×266列。先頭列は問題ID。 |
+| [266タグの件数一覧](output/tag_catalog.csv) | タグID、正式名、対応問題数。未使用タグも保持。 |
+| [未判定問題](output/unresolved_problems.csv) | 現在の方法でタグを判断できなかった{s['unresolved_problem_count']:,}問。 |
+| [解説本文がない問題](output/source_gaps.csv) | 問題文は取得済みだが、問題別の解説本文を保持できなかった問題。 |
+| [集計値](output/summary.json) | 件数、付与方法、難易度帯、費用、版情報。 |
+| [整合性の検証結果](output/verification.json) | 問題ID、タグID、対応表、行列、件数の独立した照合。 |
+
+問題文・制約・入出力・サンプルは、各問題のJSONと元HTMLに保存した。解説とタグ根拠をまとめた詳細記録は、ローカルの <code>output/problems_tagged.jsonl</code> にある。
+
+## 収集範囲
+
+- 難易度による除外なし。2000未満は{s['difficulty_bands']['under_2000']:,}問、2000以上は{s['difficulty_bands']['2000_or_higher']:,}問、不明は{s['difficulty_bands']['unknown']:,}問。
+- ARCと共通の問題IDを持つ92問も、ABCに出題された問題として含む。
+- 元のチームデータでタグが空だった問題も除外しない。
+- ARC・AGCだけに出題された問題は対象に含めない。
+
+問題・コンテストの対応は [AtCoder Problemsの公開データ](https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/api.md) に基づく。問題番号を英字で推測せず、古い数字の問題IDとABC/ARC共通問題に対応した。ABC316の欠番は [ABC350 Aの公式問題文](https://atcoder.jp/contests/abc350/tasks/abc350_a) でも確認できる。
+
+## タグ付与の方法
+
+<code>tags.md</code>末尾の266項目を固定語彙として使用。コピーを<code>taxonomy.json</code>に保存し、タグIDをT001〜T266にそろえた。
+
+1. 全問に対し、解説中の手法名・典型実装・解法手順による自動付与を実行した。
+2. 従来の898問については、検証後修正案のタグを継承し、出典を区別した。
+3. 否定された手法、計算量不足の説明、参考資料などを検出できる範囲で除外した。
+4. 基本的な文字列操作には、語彙にある「文字列処理」を使う限定的な規則を適用した。
+5. {s['assistant_semantic_reviewed_problems']:,}問では、このチャットで内容を追加確認し、判定と理由を<code>semantic_reviews.json</code>に記録した。
+
+外部LLM APIによる全問の意味的な再判定ではない。規則では、前提知識・別解・補助・他問題の例示を完全には区別できない。自動付与の役割は原則<code>unresolved</code>とし、確認できた個別の役割だけを記録した。
+
+語彙外の例は、基本算術、単純な大小比較、条件分岐、単独の期待値計算、Alien DP、貪欲法など。単純な期待値計算を「期待値DP」へ置換する、といった付与は避けた。
+
+## 判定状態
+
+| tagging_status | 意味 |
+| --- | --- |
+| provisional_tagged | 暫定タグあり。検証済みとは限らない。 |
+| assistant_reviewed | このチャットで内容を追加確認。独立した人の評価ではない。 |
+| assistant_reviewed_no_matching_tag | 個別確認で固定266語彙に適切なタグなしと判断。理由を記録。 |
+| unresolved_no_supported_tag | 検出方法では判断できなかった。該当する手法がないという判定ではない。 |
+| unresolved_no_editorial_or_tag | 解説本文がなく、継承や他の根拠でも判断できなかった。 |
+
+今回の対応表では、独立レビュー前の候補であることを示すため、全付与を<code>needs_review=1</code>としている。従来のフラグと意味を混同せず、付与方法と根拠も確認する。
+
+## クラスタリングで使う際の注意
+
+- 行列の0は未付与であり、適用不能という正解ラベルではない。
+- 未判定と該当語彙なしを含む{s['untagged_problem_count']:,}問は全タグが0。保存されているが、現在のJaccard距離に新しい共起情報を与えない。
+- 未使用の{s['unused_tags']:,}タグは、Jaccard距離でクラスタリングする前に除外する。
+- 全問版と従来898問版では、問題範囲に加え、付与処理・解説の取得範囲も異なる。変化を問題数の効果だけに帰属させない。
+- 問題数の効果は、この全問版から同じ付与処理のまま対象問題を抽出して比較する。
+- 元の<code>hierarchical_clustering.py</code>は898問との一致と全問題の非ゼロ行を検査する。この全問版を直接渡すには、入力検証と未判定の扱いを調整する必要がある。
+- AtCompassと従来のクラスタリング結果は保持している。
+
+## 検証と再生成
+
+問題一覧の完全一致、一意な問題ID、266タグへの所属、重複のない対応、行列と対応表の一致、タグ頻度、本文ハッシュを検証した。旧HTML形式、制約・サンプル保持、旧PDFリンク、解説本文抽出、否定・参考文献・英語の部分一致を扱う7テストも実行した。これらは整合性の確認であり、全問のタグの意味的正しさの検証ではない。
+
+作業フォルダーから、以下で再生成できる。有料AI APIは呼び出さない。
+
+~~~powershell
+.\\.venv-clustering\\Scripts\\python.exe .\\abc_all\\tag_all.py
+.\\.venv-clustering\\Scripts\\python.exe .\\abc_all\\verify_dataset.py
+.\\.venv-clustering\\Scripts\\python.exe .\\abc_all\\build_report.py
+~~~
+
+タグ付与の入力は確定済みの<code>corpus_sources.jsonl</code>。問題・解説を再取得した場合は、入力スナップショットも更新してから再生成する。メタデータのハッシュ、取得元URL、本文ハッシュ、検出ルール、個別判定理由を保存している。
+"""
+(ROOT/"README.md").write_text(text,encoding="utf-8")
+print("README.md generated")

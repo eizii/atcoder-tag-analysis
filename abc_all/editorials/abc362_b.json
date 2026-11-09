@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc362_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc362/editorial/10395",
+      "text": "三角形\n\\(ABC\\)\nが直角三角形であることは，以下と同値です．（三平方の定理）\n\\(AB^2+BC^2=CA^2\\)\nまたは\n\\(BC^2+CA^2=AB^2\\)\nまたは\n\\(CA^2+AB^2=BC^2\\)\nが成り立つ\nよって，上の\n\\(3\\)\nつの式が成り立つかどうかを判定すればよいです．\n\\(AB^2\\)\nは\n\\((x_A-x_B)^2+(y_A-y_B)^2\\)\nとして求められます．",
+      "codes": [
+        "xA, yA = map(int, input().split())\nxB, yB = map(int, input().split())\nxC, yC = map(int, input().split())\n\nAB2 = (xA - xB) ** 2 + (yA - yB) ** 2\nBC2 = (xB - xC) ** 2 + (yB - yC) ** 2\nCA2 = (xC - xA) ** 2 + (yC - yA) ** 2\n\nif AB2 + BC2 == CA2 or BC2 + CA2 == AB2 or CA2 + AB2 == BC2:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "189b716233cb6883021cca006c61b3b10b7e8e54c7fa30ac2d97be590cd19a3b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc362/abc362_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

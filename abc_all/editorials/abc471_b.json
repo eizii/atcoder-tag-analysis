@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc471_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc471/editorial/23913",
+      "text": "\\(2\\) つの回答を同じとみなすことは、 \\(2\\) つの回答をともに全て小文字に変換したとき文字列として一致することと同値です。 よって、与えられる \\(S_i\\) を全て小文字に変換した上で、連想配列などを用いたり、愚直に1つずつ調べることで、各文字列の頻度を数えればよいです。 writer解(C++) writer解(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n;\n\tcin >> n;\n\tvector<string>s(n);\n\tfor(int i=0;i<n;i++)cin >> s[i];\n\t\n\tmap<string,int>count;\n\tfor(int i=0;i<n;i++){\n\t\tfor(int j=0;j<s[i].size();j++)if('A'<=s[i][j]&&s[i][j]<='Z')s[i][j]^=32;\n\t\tcount[s[i]]++;\n\t}\n\t\n\tint ans=0;\n\tfor(auto[k,v]:count)ans=max(ans,v);\n\tcout << ans << endl;\n}\n",
+        "from collections import Counter\nN=int(input())\nC=Counter([input().lower() for _ in range(N)])\nprint(max(C.values()))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "1f017082c148607a62a73aa43bbf6d30e6b9abfbfe4ab8abb9b4cef53583118c"
+    }
+  ],
+  "status": "available"
+}

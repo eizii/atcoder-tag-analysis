@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc324_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc324/editorial/7405",
+      "text": "実数\n\\(X\\)\nに対して、\n本問題の答えが\n\\(X\\)\n以上か？\nという判定問題が十分高速に解ければ、本問題の答えはこの判定問題の答えが真である最小の実数として、二分探索で（正解するために十分な精度まで）十分高速に求められます。\nよって、以下では実数\n\\(X\\)\nを固定して、この判定問題を解くことを考えます。\n本問題の答えが\n\\(X\\)\n以上であることは、\n頂点\n\\(1\\)\nから頂点\n\\(N\\)\nへのパスであって、美しさの総和をコストの総和で割った値が\n\\(X\\)\n以上のものが存在すること、\nすなわち、頂点\n\\(1\\)\nから頂点\n\\(N\\)\nへのパス（辺の番号の列）\n\\((i_1, i_2, \\ldots, i_l)\\)\nであって、\n\\[\n\\frac{\\sum_{k = 1}^l b_{i_k}} {\\sum_{k = 1}^l c_{i_k}} \\geq X\n\\]\nを満たすものが存在することと同値です。\nこの条件式は\n\\[\n\\sum_{k = 1}^l (b_{i_k} - c_{i_k}X) \\geq 0\n\\]\nと書き換えられるので、\n各辺についてその重みを\n\\(w_i \\coloneqq b_i - c_iX\\)\nで定めると、「本問題の答えが\n\\(X\\)\n以上」であることは、頂点\n\\(1\\)\nから頂点\n\\(N\\)\nへのパスであってそのパスの重み（パス上の辺の重みの総和）\n\\[\n\\sum_{k=1}^l w_{i_k} = \\sum_{k = 1}^l (b_{i_k} - c_{i_k}X) \n\\]\nが\n\\(0\\)\n以上のものが存在することと同値です。\nよって、所望の判定問題を解くには、頂点\n\\(1\\)\nから頂点\n\\(N\\)\nへのパスの重みとしてあり得る最大値を求め、その値が\n\\(0\\)\n以上かを判定すれば良いです。\n「頂点\n\\(1\\)\nから頂点\n\\(N\\)\nへのパスの重みとしてあり得る最大値」を求める問題は、最短経路問題と同様にして解くことができます。\n特に、本問題で与えられるグラフは頂点番号が小さい方から大きい方にのみ辺が張られた DAG であるため、\n頂点番号の小さい方から、\n\\(\\mathrm{dp}[i] := \\)\n（頂点\n\\(1\\)\nから頂点\n\\(i\\)\nまでのパスの重みとしてあり得る最大値）\nというテーブルを頂点番号\n\\(i\\)\nの小さい方から順に埋めていく、動的計画法によって\n\\(O(M)\\)\n時間で求めることができます。",
+      "codes": [],
+      "text_sha256": "fb9b3bfd5d8f5088e1c53b59186a43a36b86dc677e8bda9afc6d5f6ee090e734",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc324/abc324_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc324/editorial/7427",
+      "text": "既約分数\n\\(p/q\\)\n(\n\\(q\\le2\\times10^9\\)\n) であって\n\\(f(p/q)=0\\)\nを満たすものを見つける方針は\nhttps://atcoder.jp/contests/abc324/editorial/7412\nと同じです。\nStern–Brocot tree で探索する方法もあります。\n解説および類題については下記に載っています。\nhttps://rsk0315.hatenablog.com/entry/2023/04/17/022705\n計算量は、答えを\n\\(p/q\\)\nとして\n\\(O((N+M)\\log(q))\\)\n時間です。\nこちらの解説\nの反復回数と比べるとやや劣ってはいますが、十分に高速で汎用的な方法なので、覚えておいてもよいでしょう。",
+      "codes": [],
+      "text_sha256": "34189aa93fc624f0c652c858733597a790e13eaad4febec619d34dd0db912c1a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc324/abc324_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc324/editorial/7412",
+      "text": "この問題の答えは、既約分数として表したときに分母および分子がたかだか \\(2\\times10 ^ 9\\) であるような有理数として表すことができます。\nこの有理数の分子と分母の値を整数として得る方法について考えます。\nまず、実数の二分探索を用いて問題が解ける（つまり、実数に対して解との大小を求められる）場合、有理数との大小を適切に実装することができれば\nこの解説\nと同様の方法でこの問題の真の解を得ることができます。\nまた、この問題は Dinkelbach algorithm と呼ばれるアルゴリズムで解くこともできます。\nこの問題は、\\(\\displaystyle f(t)=\\max _ {P\\in S _ P}(B(P)-tC(P))\\) とすると \\(f(t)=0\\) となる \\(t\\) を求める問題に帰着されます。\nある正実数 \\(t\\) について解が \\(t\\) 以下であるということは、頂点 \\(1\\) から頂点 \\(N\\) までのパス全体の集合を \\(S _ P\\) として、\\(B(P)\\coloneqq \\) パス \\(P\\) に含まれる辺の美しさの合計 および \\(C(P)\\coloneqq \\) パス \\(P\\) に含まれる辺のコストの合計 について、次が成り立つことです。\n\\[\\max _ {P\\in S _ P}\\dfrac{B(P)}{C(P)}\\leq t\\]\nこれを変形すると、\n\\[\\begin{aligned}\n&\\max _ {P\\in S _ P}\\dfrac{B(P)}{C(P)}\\leq t\\\\\n\\iff&{} ^ \\forall P\\in S _ P.\\,\\dfrac{B(P)}{C(P)}\\leq t\\\\\n\\iff&{} ^ \\forall P\\in S _ P.\\,B(P)\\leq tC(P)\\qquad(\\because 1\\leq c _ i)\\\\\n\\iff&{} ^ \\forall P\\in S _ P.\\,B(P)-tC(P)\\leq0\\\\\n\\iff&\\max _ {P\\in S _ P}(B(P)-tC(P))\\leq0\n\\end{aligned}\\]\nとなります。\nここで、\\(t\\) を定めるごとに \\(f(t)\\) を与える \\(P\\) を得ることができます。\nこれを \\(P _ t\\) と書くことにします。\nDinkelbach algorithm は、\\(t\\) を適切な初期値にとり、\\(t\\leftarrow\\dfrac{B(P _ t)}{C(P _ t)}\\) で更新することを繰り返すことによって \\(f(t)=0\\) となる \\(t\\) を求める手法です（これは、\\(f(t)\\) の零点を近似するために Newton 法を用いていると見ることもできます）。\nこの問題の設定（を含む条件）のもとで、Dinkelbach algorithm は有限回の繰り返しで \\(f(t)=0\\) なる \\(t\\) に収束することが示されています。\nこの問題で用いられたテストケースでは、たかだか \\(5\\) 回の繰り返しで収束することが確かめられます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <ranges>\n#include <limits>\n#include <iomanip>\n\nint main() {\n    using namespace std;\n    \n    unsigned N, M;\n    cin >> N >> M;\n    vector<vector<tuple<unsigned, unsigned, unsigned>>> edges(N);\n    for (unsigned u, v, b, c; [[maybe_unused]] const auto _ : views::iota(0U, M)) {\n        cin >> u >> v >> b >> c;\n        edges[--u].emplace_back(--v, b, c);\n    }\n\n    // dp[i] := 頂点 i に到達するための (合計美しさ, 合計コスト) の中で 合計美しさ * y - 合計コスト * x が最大のもの\n    vector<pair<unsigned long, unsigned long>> dp(N, {0, numeric_limits<unsigned>::max()});\n    dp[0] = {0, 0};\n\n    // 配る DP で B(P_t) / C(P_t) を求める\n    const auto iteration{[N, &edges, &dp](unsigned long x, unsigned long y) -> pair<unsigned long, unsigned long>& {\n        for (const auto u : views::iota(0UL, N))\n            for (const auto&[u_b, u_c]{dp[u]}; const auto&[v, b, c] : edges[u])\n                if (dp[v].first * y + (u_c + c) * x < (u_b + b) * y + dp[v].second * x) // より大きければ更新\n                    dp[v] = {u_b + b, u_c + c};\n        return dp.back();\n    }};\n\n    pair<unsigned long, unsigned long> t{1, 0}, prev{};\n    auto&&[x, y]{t};\n    do\n        swap(t, prev = iteration(x, y));\n    while (t != prev); // 収束したらループを抜ける\n    \n    cout << fixed << setprecision(10) << static_cast<long double>(x) / y << endl;\n    \n    return 0;\n}"
+      ],
+      "text_sha256": "a55c5c8306939b026d3bbebcec0285eef0c0c9be6b92f8ad5bba3afa47b548dc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc324/abc324_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc355_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc355/editorial/10077",
+      "text": "すべての区間の組について共通部分を持つかどうか調べると\n\\(O(N^2)\\)\n時間かかり，実行時間制限に間に合いません．適切なアルゴリズムを用いて高速化する必要があります．\nここで，共通部分を持つ区間の組を数える代わりに，共通部分を持たない区間の組の個数\n\\(x\\)\nを求めて\n\\(N(N-1)/2\\)\nから引くことで答えを求めることにします（これは，「\n余事象を考える\n」という典型的な考え方です）．\n区間\n\\(i\\)\nの左にあって区間\n\\(i\\)\nと共通部分を持たない区間は，\n\\(r_j < l_i\\)\nを満たす区間\n\\(j\\)\nです．よって，各\n\\(i=1,2,\\dots,N\\)\nについて，\n\\(r_j < l_i\\)\nなる\n\\(j\\)\nの個数を求めると，その総和が求める\n\\(x\\)\nです．\nこれは，\n尺取り法\nというテクニックによって高速に計算することができます．\nまず，数列\n\\(L,R\\)\nを，それぞれ\n\\((l_1,l_2,\\dots,l_N),(r_1,r_2,\\dots,r_N)\\)\nを昇順に並べ替えたものとします．\n\\(i=1,2,\\dots,N\\)\nの順番に，\n\\(R_j < L_i\\)\nを満たす\n\\(j\\)\nの個数\n\\(c_i\\)\nを求めましょう．\n\\(R\\)\nが昇順に並んでいることから，\n\\(R_j < L_i\\)\nを満たす\n\\(j\\)\nは\n\\(1,2,\\dots,c_i\\)\nです．\nよって，次のようなアルゴリズムが考えられます．\n\\(i=1,2,\\dots,N\\)\nの順番に，次の操作を行う．\n\\(c \\leftarrow 1\\)\nとする．\n\\(R_c < L_i\\)\nである間，\n\\(c \\leftarrow c + 1\\)\nとする．\n\\(c_i \\leftarrow c-1\\)\nとする．\nこのアルゴリズムは，各\n\\(i\\)\nについてステップ 1.2 が最大で\n\\(N-1\\)\n回実行されるため，依然として全体で\n\\(O(N^2)\\)\n時間かかってしまいます．高速化にはさらなる考察が必要です．\nここで，重要な性質として，\n\\(L\\)\nが昇順に並んでいることから\n\\(c_i\\leq c_{i+1}\\)\nが各\n\\(i=1,2,\\dots,N-1\\)\nについて成り立ちます\nなぜならば，\n\\(R_{c_i} < L_i \\leq L_{i+1}\\)\nより，\n\\(R\\)\nの少なくとも\n\\(c_i\\)\n個は\n\\(L_{i+1}\\)\nより小さいからです．\nよって，\n\\(c_{i+1}\\)\nを求めるときに，\n\\(R_1,R_2,\\dots,\\)\nと\n\\(1\\)\nから順番に調べるのではなく，\n\\(R_{c_i},R_{c_i+1},\\dots\\)\nというように，探索を\n\\(c_i\\)\nからはじめても良いです．つまり，先程のアルゴリズムを次のように変更することができます．\n\\(c \\leftarrow 1\\)\nとする．\n\\(i=1,2,\\dots,N\\)\nの順番に，次の操作を行う．\n\\(R_c < L_i\\)\nである間，\n\\(c \\leftarrow c + 1\\)\nとする．\n\\(c_i \\leftarrow c-1\\)\nとする．\nこのアルゴリズムの計算量を調べましょう．ステップ 2.1 が実行されるたびに，\n\\(c\\)\nは\n\\(1\\)\n増えます．また，\n\\(c\\)\nはたかだか\n\\(N\\)\nです．よって，ステップ 2.1 はプログラム全体でたかだか\n\\(N-1\\)\n回しか実行されません．よって，このアルゴリズムの時間計算量は（ソートを除いて）\n\\(O(N)\\)\nであり，高速に動作します．\n実装例 (Python)",
+      "codes": [
+        "N = int(input())\nl = [0] * N\nr = [0] * N\nfor i in range(N):\n    l[i], r[i] = map(int, input().split())\nl.sort()\nr.sort()\n\nans = N * (N - 1) // 2\nj = 0\nfor i in range(N):\n    while r[j] < l[i]:\n        j += 1\n    ans -= j\nprint(ans)"
+      ],
+      "text_sha256": "5938e6b604349e2570d046e4a492fb4990be0e47d5a220c7a5c1f0fc0165d820",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc355/abc355_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc355/editorial/10090",
+      "text": "公式解説\nより考察が少ない代わりにやや高度なデータ構造を用いる解法を紹介します。\n\\(r_i\\)\nについてソートすることで、\n\\(r_1\\leq \\ldots\\leq r_N\\)\nであると仮定してよいです。\nこのとき、\n\\(i<j\\)\nについて、\n\\([l_i,r_i]\\)\nと\n\\([l_j,r_j]\\)\nが共通部分を持つための必要十分条件は、\n\\(l_j\\leq r_i\\)\nとなることです。よって、\n\\(j\\)\nを固定するごとに「\n\\(r_1,\\ldots,r_{j-1}\\)\nのうち、\n\\(l_j\\)\n以上のものは何個あるか？」が解ければよく、これは\n\\(j\\)\nの昇順に考えることで座標圧縮＋セグ木などにより\n\\(O(N\\log N)\\)\nで解けます。\nPythonでは sortedcontainers の SortedList を用いると実装が簡単です。\n実装例(Python)\n（この実装例は「\n\\(r\\)\nの昇順」ではなく「\n\\(l\\)\nの降順」で区間を見る実装になっていることに注意してください。全体を左右反転すると同じになります）",
+      "codes": [
+        "from sortedcontainers import SortedList\n\nN=int(input())\nLR=sorted([tuple(map(int,input().split())) for _ in range(N)])\nans=0\nS=SortedList()\nfor l,r in LR[::-1]:\n\tans+=S.bisect_right(r)\n\tS.add(l)\nprint(ans)"
+      ],
+      "text_sha256": "ce23b2a99ce934389738e955952a9ec00217bab9f48c0f7387816678c3167819",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc355/abc355_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

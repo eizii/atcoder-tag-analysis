@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc455_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc455/editorial/19235",
+      "text": "\\(A \\neq B\\)\nであるか、\n\\(B = C\\)\nであるかをそれぞれ判定すればよいです。\nC++ や Python では、\n\\(2\\)\nつの整数が異なることは\n!=\n、等しいことは\n==\n、\n\\(2\\)\nつの条件がともに満たされているかは\nand\nを用いて判定することができます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint a, b, c;\n\tcin >> a >> b >> c;\n\tif (a != b and b == c) cout << \"Yes\\n\";\n\telse cout << \"No\\n\";\n}",
+        "a, b, c = map(int, input().split())\nprint(\"Yes\" if a != b and b == c else \"No\")"
+      ],
+      "text_sha256": "4f7e3042f5fc2b5d95adade4ed95838ee492985ce5f0f12302eee4041bddbf0c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc455/abc455_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

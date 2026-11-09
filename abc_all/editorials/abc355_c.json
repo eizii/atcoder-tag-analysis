@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc355_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc355/editorial/10073",
+      "text": "横，縦，斜めの各列に対して，印がつけられているマスの個数を管理します．\n各ターンでは，数字が書かれているマスを含む列に対して，その列に含まれるマスの個数を更新します．Bingo を達成したかどうかの判定はそのマスが含まれる列のみをチェックすれば十分です．数字が書かれているマスを含む列は高々\n\\(4\\)\nしかないため，この更新は\n\\(O(1)\\)\nで行うことができます．\n全体の計算量は\n\\(O(N+T)\\)\nです．\n実装例",
+      "codes": [
+        "N, T = map(int, input().split())\nA = list(map(lambda x: int(x) - 1, input().split()))\nrow = [0] * N\ncol = [0] * N\ndiag = [0] * 2\n\nfor i in range(T):\n    x = A[i] // N\n    y = A[i] % N\n\n    # 横\n    row[x] += 1\n    if row[x] == N:\n        print(i + 1)\n        exit()\n\n    # 縦\n    col[y] += 1\n    if col[y] == N:\n        print(i + 1)\n        exit()\n\n    # 左上 - 右下 方向の斜め\n    if x == y:\n        diag[0] += 1\n        if diag[0] == N:\n            print(i + 1)\n            exit()\n\n    # 右上 - 左下 方向の斜め\n    if x + y == N - 1:\n        diag[1] += 1\n        if diag[1] == N:\n            print(i + 1)\n            exit()\n\nprint(-1)"
+      ],
+      "text_sha256": "8399ebde2a4d9fc72266f183f1241b3b979cced3e66e6702c59bfacba724117b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc355/abc355_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc355/editorial/10074",
+      "text": "各マスに対して，そのマスに印がつけられるターンを書き込みます（印がつけられない場合は\n\\(\\mathrm{inf}\\)\nを書き込むことにします）．このとき，ある列がビンゴを達成するターンは，その列に含まれるマスに書かれた数の最大値に等しいです．すべての列に対して，その列が何ターン目にビンゴを達成するかを求め，それらの最小値を答えればよいです．計算量は\n\\(O(N^2+T)\\)\nです．",
+      "codes": [
+        "N, T = map(int, input().split())\nA = list(map(lambda x: int(x) - 1, input().split()))\ninf = 1 << 30\nmat = [[inf] * N for i in range(N)]\n\nfor i in range(T):\n    x, y = A[i] // N, A[i] % N\n    mat[x][y] = i + 1\n\nans = inf\n\n# 横\nfor x in range(N):\n    mx = 0\n    for y in range(N):\n        mx = max(mx, mat[x][y])\n    ans = min(ans, mx)\n\n# 縦\nfor y in range(N):\n    mx = 0\n    for x in range(N):\n        mx = max(mx, mat[x][y])\n    ans = min(ans, mx)\n\n# 斜め\nfor x, y, dx, dy in [[0, 0, 1, 1], [0, N - 1, 1, -1]]:\n    mx = 0\n    for _ in range(N):\n        mx = max(mx, mat[x][y])\n        x += dx\n        y += dy\n    ans = min(ans, mx)\n\nif ans == inf:\n    ans = -1\nprint(ans)"
+      ],
+      "text_sha256": "4846614a7d985f4fb3e311ca1b900ecc18a02dc6bae258769d05bb19a6ae6e57",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc355/abc355_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

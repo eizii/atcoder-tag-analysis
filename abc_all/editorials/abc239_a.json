@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc239_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc239/editorial/3363",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\nこの問題は、入力を整数値として受け取り、問題文に記載されている通りに計算し、答えを出力することで解くことができます。\n言語・実装によっては、オーバーフローや出力形式に注意する必要がある場合があります。\n実装例(C)\n実装例(Python)",
+      "codes": [
+        "#include<stdio.h>\n#include<math.h>\n\nint main(){\n\tdouble h;\n\tscanf(\"%lf\",&h);\n\tprintf(\"%.9f\\n\",sqrt(h*(12800000+h)));\n}",
+        "import math\nH=int(input())\nprint(math.sqrt(H*(12800000+H)))"
+      ],
+      "text_sha256": "ecc04d829134401a6e12c68d7495a69d4a6171b3804b79e73c2b1d266afff7c3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc239/abc239_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

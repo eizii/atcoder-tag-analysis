@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc294_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc294/editorial/6004",
+      "text": "この問題の題名となっているアスキーアートとは、主に アスキーコードにある文字を利用してテキストで表現されたイラストのことをいいます。入力例 4 のような数十行に渡るイラスト表現は初期のインターネット掲示板で頻繁に用いられていました。\n参考 : Wikipedia\nさて、この問題は数列を適切な手順で文字列に変換することで解くことができます。\nC++ ではアスキーコードを利用する方法が簡単です。(\n参考:Wikipedia\n) アスキーコードを利用すると\n\\(n\\)\n番目の大文字アルファベットは\nという式で求めることができます。この仕組みを理解したうえで、for-loop を利用して適切に数列を文字列に変換していけばこの問題を解くことができます。\n実装例(C++)",
+      "codes": [
+        "char c = `A` + n - 1;",
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n  int H, W;\n  cin >> H >> W;\n  for (int i = 0; i < H; i++) {\n    string S(W, '.');\n    for (int j = 0; j < W; j++) {\n      int x;\n      cin >> x;\n      if (x != 0) S[j] = 'A' + x - 1;\n    }\n    cout << S << \"\\n\";\n  }\n}"
+      ],
+      "text_sha256": "41d355152f7b1d340d7b57cf601aa2132d37adc2b9d484b4f15d8068110cb24e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc294/abc294_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc294/editorial/6025",
+      "text": "ASCII コードを知らない/使えない場合にこの問題を解く方法について説明します（厳密には、C++ でも char に文字を入れる際に値が ASCII コードに対応しているとは限りません）。\n数字から文字への対応を自分で書いてしまうことで、文字コードを直接使うことなくこの問題を解くことができます。\nPython には\nstring.ascii_uppercase\nという大文字を順に並べた文字列もあります。",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nstring convert = \".ABCDEFGHIJKLMNOPQRSTUVWXYZ\";\n\nint main() {\n  int H, W;\n  cin >> H >> W;\n  for (int i = 0; i < H; i++) {\n    for (int j = 0; j < W; j++) {\n      int x;\n      cin >> x;\n      cout << convert[x];\n    }\n    cout << endl;\n  }\n}",
+        "import string\n\nconvert = '.' + string.ascii_uppercase\n\nH, W = map(int, input().split())\n\nfor i in range(H):\n  print(''.join(convert[int(a)] for a in input().split()))"
+      ],
+      "text_sha256": "f893f1fdcc0be4e492d7996df4e04d2bd2c6fe2f72b8525afecbcd13ca0444d2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc294/abc294_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

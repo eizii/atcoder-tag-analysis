@@ -1,0 +1,36 @@
+{
+  "problem_id": "abc214_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc214/editorial/2438",
+      "text": "まず、\n\\(\\mathrm{memo}_1=T_1, \\mathrm{memo}_{i+1}=\\mathrm{memo}_i+S_i\\)\nという漸化式で定められる\n\\(\\mathrm{memo}_i\\)\nが、高橋君が\n\\(1\\)\n番目のすぬけ君に直接渡した宝石が\n\\(i\\)\n番目のすぬけ君に初めて届く時刻です。\n\\(2,3, \\ldots ,N\\)\n番目のすぬけ君に直接渡した宝石が\n\\(i\\)\n番目のすぬけ君にいつ届くかについても同じように考えます。\nこれを愚直に実装することで\n\\(O(N^2)\\)\nで解けますが、実行時間に間に合わないため高速化を考えます。\nここですぬけ君が受け取る宝石の中で\n\\(2\\)\n番目以降の宝石は無視できることに注目して今までの\n\\(N\\)\n個の計算を一つにまとめると、以下のようなコードになります。\n少なくとも\n\\(2N\\)\n回ループを回さないといけないことに注意してください。\n実装例 (Python)\n実装例 (C++)",
+      "codes": [
+        "N = int(input())\nS = list(map(int, input().split()))\nT = list(map(int, input().split()))\nfor i in range(N*2):\n    T[(i+1)%N] = min(T[(i+1)%N], T[i%N] + S[i%N])\nfor ans in T:\n  print(ans)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N; cin >> N;\n    vector<int> S(N), T(N);\n    for(int i = 0; i < N; i++) cin >> S[i];\n    for(int i = 0; i < N; i++) cin >> T[i];\n    vector<int> memo = T;\n    for(int i = 0; i < N*2; i++) memo[(i+1)%N] = min(memo[(i+1)%N], memo[i%N] + S[i%N]);\n    for(int ans: memo) cout << ans << endl;\n}"
+      ],
+      "text_sha256": "82a05f43fa9ed7fbe7f0641379fa8cbcf00eac477f19b682dc59ad34009b012c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc214/abc214_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc214/editorial/2455",
+      "text": "\\(T_i\\)\nが最小値をとる\n\\(i\\)\nのうち\n\\(1\\)\nつをとって、それが\n\\(1\\)\n人目となるように番号を振り直します。そして\n\\(dp_1=T_1, dp_{i+1}= \\min(dp_i+S_i,T_{i+1})\\)\nという定義に従って計算した\n\\(dp_i\\)\nの値が新しい番号における答えとなります。\n証明\n\\(1\\)\n人目の答えが\n\\(dp_1\\)\nになるのは明らか。\n\\(i\\)\n人目の答えが\n\\(dp_i\\)\nのとき、\n\\((i+1)\\)\n人目の石は\n\\(i\\)\n人から受け取るか、高橋君から受け取るかなので、上述の更新式で与えられる\n\\(dp_{i+1}\\)\nが答えとなる。\n実装例",
+      "codes": [],
+      "text_sha256": "b469cabeda5b0e54473e8e79f4112f3cf7920b1c55574d043288c06a55e9575c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc214/abc214_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc214/editorial/2451",
+      "text": "この問題は、グラフの単一始点最短経路問題とみなすことができます。\n例えば入出力例1であれば、下図のグラフにおける、頂点”高橋”から各頂点への最短経路を求める問題となります。したがって、ダイクストラ法を用いて\n\\(O(N\\log N)\\)\nで解くことができました。",
+      "codes": [],
+      "text_sha256": "5f924de8f143a6e4b7769569a4ca20959bf8005fe1c27784f13a232af21bb4bb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc214/abc214_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

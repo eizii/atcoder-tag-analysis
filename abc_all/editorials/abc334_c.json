@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc334_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc334/editorial/8983",
+      "text": "まず、なくしていない色の靴下はその色同士で組を作るのが最適です。\nよって、色\n\\(A_1,A_2,\\dots,A_K\\)\nの靴下\n\\(1\\)\n枚ずつから\n\\(\\lfloor \\frac{K}{2} \\rfloor\\)\n組を作る問題と考えることができます。\n\\(K\\)\nが偶数のとき、\n\\((A_1,A_2),(A_3,A_4),\\dots,(A_{K-1},A_K)\\)\nというように（昇順に並べた列内で）隣接する色同士をペアにしていくのが直感的にも最適そうですが、実際に最適です。\n問題は\n\\(K\\)\nが奇数の時ですが、この場合はどの組にも含まれない唯一の色を全探索すれば、残る靴下から組を作る方法は\n\\(K\\)\nが偶数のときと同様になります。どの組にも含まれない唯一の色を固定したとき、残る靴下をうまく組にしたときの奇妙さの総和の最小値は単純に求めると\n\\(O(N)\\)\nかかり、全体で\n\\(O(N^2)\\)\nになってしまいます。そこで、\n\\(\\mathrm{presum}[2]=(A_2-A_1),\\mathrm{presum}[4]= (A_4-A_3)+(A_2-A_1), \\mathrm{presum}[6]=(A_6-A_5)+(A_4-A_3)+(A_2-A_1),\\dots\\)\nのように、先頭から順に組にして行ったときの奇妙さの総和を累積和として求め、末尾からの累積和も同様に求めておくことで、全体で\n\\(O(N)\\)\nで本問題を解くことができます。\nおまけ：\n\\(K\\)\nが奇数のとき、どの組にも含まれない唯一の色は全て試してももちろん良いですが、\n\\(A_1,A_3,A_5,\\dots,A_K\\)\nだけを探索しても良いです（証明は省略）。下記の実装例では、実装の簡略化のためこの事実を用いています。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, k;\n    cin >> n >> k;\n    vector<int> a(k);\n    for (int &i: a) cin >> i;\n    vector<int> pre(k + 1), suf(k + 1);\n    for (int i = 1; i <= k; i++) {\n        pre[i] = pre[i - 1];\n        if (i % 2 == 0) pre[i] += a[i - 1] - a[i - 2];\n    }\n    for (int i = k - 1; i >= 0; i--) {\n        suf[i] = suf[i + 1];\n        if ((k - i) % 2 == 0) suf[i] += a[i + 1] - a[i];\n    }\n    int ans = 1e9;\n    for (int i = 0; i <= k; i += 2) {\n        ans = min(ans, pre[i] + suf[i]);\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "cdebabe6d9338fffaf3d14a26f33153e3e89c583eeb559f04e59b360009ce9e7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc334/abc334_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

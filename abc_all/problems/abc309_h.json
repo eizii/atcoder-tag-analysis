@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc309_h",
+  "title": "Simple Path Counting Problem",
+  "contests": [
+    {
+      "contest_id": "abc309",
+      "problem_index": "Ex"
+    }
+  ],
+  "difficulty": 3029,
+  "raw_difficulty": 3029,
+  "contest_id": "abc309",
+  "problem_index": "Ex",
+  "url": "https://atcoder.jp/contests/abc309/tasks/abc309_h",
+  "statement": "配点 : 650 点 問題文 N 行 M 列のマス目があります。上から i 行目、左から j 列目のマスを (i,j) と呼ぶこととします。 長さ K の整数列 A=(A_1,A_2,\\dots,A_K) と長さ L の整数列 B=(B_1,B_2,\\dots,B_L) が与えられます。 1 \\le i \\le K,1 \\le j \\le L を満たす全ての整数の組 (i,j) に対して以下の問題を解き、その答えの総和を 998244353 で割ったあまりを求めてください。 はじめ (1,A_i) に駒が置かれている。以下の操作を N-1 回繰り返して駒を (N,B_j) に移動する方法の個数を求めよ。 今駒が置かれているマスを (p,q) とする。 (p+1,q-1),(p+1,q),(p+1,q+1) のいずれかに駒を移動する。ただし、マス目の外に出てはならない。 制約 1 \\le N \\le 10^9 1 \\le M,K,L \\le 10^5 1 \\le A_i,B_j \\le M 入力 入力は以下の形式で標準入力から与えられる。 N M K L A_1 A_2 \\dots A_K B_1 B_2 \\dots B_L 出力 答えを出力せよ。 入力例 1 3 4 1 2\r\n1\r\n1 2 出力例 1 4 (i,j)=(1,1) のとき、駒の移動方法は以下の 2 通りです。 (1,1) \\rightarrow (2,1) \\rightarrow (3,1) (1,1) \\rightarrow (2,2) \\rightarrow (3,1) (i,j)=(1,2) のとき、駒の移動方法は以下の 2 通りです。 (1,1) \\rightarrow (2,1) \\rightarrow (3,2) (1,1) \\rightarrow (2,2) \\rightarrow (3,2) よって、答えは 2 + 2 =4 です。 入力例 2 5 8 4 5\r\n3 1 4 1\r\n2 7 1 8 2 出力例 2 137 入力例 3 883671387 87719 10 12\r\n86879 64174 47274 41688 17713 50897 53989 7210 30894 5714\r\n60358 28835 48036 48450 67149 36558 35929 69025 77539 19195 60762 60721 出力例 3 941873621",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 行 M 列のマス目があります。上から i 行目、左から j 列目のマスを (i,j) と呼ぶこととします。 長さ K の整数列 A=(A_1,A_2,\\dots,A_K) と長さ L の整数列 B=(B_1,B_2,\\dots,B_L) が与えられます。 1 \\le i \\le K,1 \\le j \\le L を満たす全ての整数の組 (i,j) に対して以下の問題を解き、その答えの総和を 998244353 で割ったあまりを求めてください。 はじめ (1,A_i) に駒が置かれている。以下の操作を N-1 回繰り返して駒を (N,B_j) に移動する方法の個数を求めよ。 今駒が置かれているマスを (p,q) とする。 (p+1,q-1),(p+1,q),(p+1,q+1) のいずれかに駒を移動する。ただし、マス目の外に出てはならない。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\le N \\le 10^9 1 \\le M,K,L \\le 10^5 1 \\le A_i,B_j \\le M"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M K L A_1 A_2 \\dots A_K B_1 B_2 \\dots B_L"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 4 1 2\r\n1\r\n1 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 (i,j)=(1,1) のとき、駒の移動方法は以下の 2 通りです。 (1,1) \\rightarrow (2,1) \\rightarrow (3,1) (1,1) \\rightarrow (2,2) \\rightarrow (3,1) (i,j)=(1,2) のとき、駒の移動方法は以下の 2 通りです。 (1,1) \\rightarrow (2,1) \\rightarrow (3,2) (1,1) \\rightarrow (2,2) \\rightarrow (3,2) よって、答えは 2 + 2 =4 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5 8 4 5\r\n3 1 4 1\r\n2 7 1 8 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 137"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 883671387 87719 10 12\r\n86879 64174 47274 41688 17713 50897 53989 7210 30894 5714\r\n60358 28835 48036 48450 67149 36558 35929 69025 77539 19195 60762 60721"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 941873621"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc309/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:36.977827+00:00",
+  "statement_sha256": "31a8cfe0e6599f0099b1b177a40d029415d6277c837b2c8ec22386afa06f4a12",
+  "editorials": []
+}

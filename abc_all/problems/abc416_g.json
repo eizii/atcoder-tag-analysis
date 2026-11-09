@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc416_g",
+  "title": "Concat (1st)",
+  "contests": [
+    {
+      "contest_id": "abc416",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2542,
+  "raw_difficulty": 2542,
+  "contest_id": "abc416",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc416/tasks/abc416_g",
+  "statement": "配点 : 625 点 問題文 N 個の文字列 S_1,\\ldots,S_N が与えられます。 全ての要素が 1 以上 N 以下であるような長さ K の数列 (A_1,\\ldots,A_K) に対し、\r\n文字列 f(A_1,\\ldots,A_K) を S_{A_1}+S_{A_2}+\\dots+S_{A_K} と定めます。ここで + は文字列の連結を表します。 N^K 個の数列全てについての f(A_1,\\dots,A_K) のうち辞書順最小の文字列を求めてください。 制約 1\\leq N \\leq 10^5 1\\leq K \\leq 10^5 S_i は英小文字からなる長さ 10 以下の文字列 N,K は整数 入力 入力は以下の形式で標準入力から与えられる。 N K S_1 \\vdots S_N 出力 答えを出力せよ。 入力例 1 3 2\r\nabc\r\nxxx\r\nabc 出力例 1 abcabc f(1,1)= abcabc f(1,2)= abcxxx f(1,3)= abcabc f(2,1)= xxxabc f(2,2)= xxxxxx f(2,3)= xxxabc f(3,1)= abcabc f(3,2)= abcxxx f(3,3)= abcabc であり、これらのうち辞書順最小は abcabc です。 入力例 2 4 3\r\nabcd\r\nabc\r\nab\r\na 出力例 2 aaa 入力例 3 3 2\r\ncba\r\ncb\r\nc 出力例 3 cbac",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 個の文字列 S_1,\\ldots,S_N が与えられます。 全ての要素が 1 以上 N 以下であるような長さ K の数列 (A_1,\\ldots,A_K) に対し、\r\n文字列 f(A_1,\\ldots,A_K) を S_{A_1}+S_{A_2}+\\dots+S_{A_K} と定めます。ここで + は文字列の連結を表します。 N^K 個の数列全てについての f(A_1,\\dots,A_K) のうち辞書順最小の文字列を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N \\leq 10^5 1\\leq K \\leq 10^5 S_i は英小文字からなる長さ 10 以下の文字列 N,K は整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K S_1 \\vdots S_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 2\r\nabc\r\nxxx\r\nabc"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 abcabc f(1,1)= abcabc f(1,2)= abcxxx f(1,3)= abcabc f(2,1)= xxxabc f(2,2)= xxxxxx f(2,3)= xxxabc f(3,1)= abcabc f(3,2)= abcxxx f(3,3)= abcabc であり、これらのうち辞書順最小は abcabc です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4 3\r\nabcd\r\nabc\r\nab\r\na"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 aaa"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 3 2\r\ncba\r\ncb\r\nc"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 cbac"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc416/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:50.122000+00:00",
+  "statement_sha256": "4791873bf25e0d4b59545e541d9e86b9a52a10b391bdcd7dd4e17994e279aa85",
+  "editorials": []
+}

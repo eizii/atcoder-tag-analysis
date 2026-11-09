@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc252_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc252/editorial/3996",
+      "text": "条件は「食品\n\\(B_1, B_2, \\ldots, B_K\\)\nの中に、美味しさが\n\\(N\\)\n個の食品の中で最大（同率\n\\(1\\)\n位でも良い）であるようなものが存在するか？」と言い換えることができます。\nこれは、例えば次のようにして判定することができます。\n\\(N\\)\n個の食品の美味しさの最大値を求める。(これを\n\\(M\\)\nとする。)\n\\(j=1,2,\\ldots , K\\)\nについて、\n\\(A_{B_j}=M\\)\nであるかを調べる。\nそのような\n\\(j\\)\nが\n\\(1\\)\nつでも存在すれば\nYes\nであり、存在しなければ\nNo\nとなる。\nこれは for 文と if 文を用いて書くことができます。\n添字の範囲に注意してください。\nまた、\nYes\nを複数回出力したり、\nYes\nの後に\nNo\nを出力することが無いように注意してください。\nc++による実装例:\nPythonによる実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint n, k, m;\n\tint a[100], b[100];\n\n\tcin >> n >> k;\n\tfor (int i = 0; i < n; i++)cin >> a[i];\n\tfor (int i = 0; i < k; i++)cin >> b[i];\n\n\tm = -1;\n\tfor (int i = 0; i < n; i++)m = max(m, a[i]);\n\n\tfor (int i = 0; i < k; i++) {\n\t\tif (a[b[i] - 1] == m) {\n\t\t\tcout << \"Yes\" << endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\n\tcout << \"No\" << endl;\n\treturn 0;\n}",
+        "n,k= map(int, input().split())\na= list(map(int, input().split()))\nb= list(map(int, input().split()))\n\nm=max(a)\nflag=False\n\nfor i in range(k):\n\tif a[b[i]-1]==m:\n\t\tflag=True\n\nif flag:\n\tprint(\"Yes\")\nelse:\n\tprint(\"No\")"
+      ],
+      "text_sha256": "818690cc69e8d345ae98d7f2859a7016d67729df8176612399bbb0cb4349e2f1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc252/abc252_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

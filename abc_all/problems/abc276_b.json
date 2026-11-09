@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc276_b",
+  "title": "Adjacency List",
+  "contests": [
+    {
+      "contest_id": "abc276",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 143,
+  "raw_difficulty": -11,
+  "contest_id": "abc276",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc276/tasks/abc276_b",
+  "statement": "配点 : 200 点 問題文 1, \\dots, N と番号付けられた N 個の都市と、都市間を結ぶ M 本の道路があります。 i \\, (1 \\leq i \\leq M) 番目の道路は都市 A_i と都市 B_i を結んでいます。 以下の指示に従い、 N 行にわたって出力してください。 都市 i \\, (1 \\leq i \\leq N) と道路で直接結ばれた都市が d_i 個あるとし、それらを 昇順 に都市 a_{i, 1}, \\dots, a_{i, d_i} とおく。 i \\, (1 \\leq i \\leq N) 行目には、 d_i + 1 個の整数 d_i, a_{i, 1}, \\dots, a_{i, d_i} を、この順番で空白区切りで出力せよ。 制約 2 \\leq N \\leq 10^5 1 \\leq M \\leq 10^5 1 \\leq A_i \\lt B_i \\leq N \\, (1 \\leq i \\leq M) (i \\neq j) ならば (A_i, B_i) \\neq (A_j, B_j) 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M A_1 B_1 \\vdots A_M B_M 出力 問題文の指示に従い、 N 行にわたって出力せよ。 入力例 1 6 6\n3 6\n1 3\n5 6\n2 5\n1 2\n1 6 出力例 1 3 2 3 6\n2 1 5\n2 1 6\n0\n2 2 6\n3 1 3 5 都市 1 と道路で直接結ばれているのは都市 2, 3, 6 です。よって、 d_1 = 3, a_{1, 1} = 2, a_{1, 2} = 3, a_{1, 3} = 6 であるので、 1 行目には 3, 2, 3, 6 をこの順番で空白区切りで出力します。 a_{i, 1}, \\dots, a_{i, d_i} は昇順に並んでいなければならないことに注意してください。例えば、 1 行目に 3, 3, 2, 6 をこの順番で出力した場合、不正解となります。 入力例 2 5 10\n1 2\n1 3\n1 4\n1 5\n2 3\n2 4\n2 5\n3 4\n3 5\n4 5 出力例 2 4 2 3 4 5\n4 1 3 4 5\n4 1 2 4 5\n4 1 2 3 5\n4 1 2 3 4",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1, \\dots, N と番号付けられた N 個の都市と、都市間を結ぶ M 本の道路があります。 i \\, (1 \\leq i \\leq M) 番目の道路は都市 A_i と都市 B_i を結んでいます。 以下の指示に従い、 N 行にわたって出力してください。 都市 i \\, (1 \\leq i \\leq N) と道路で直接結ばれた都市が d_i 個あるとし、それらを 昇順 に都市 a_{i, 1}, \\dots, a_{i, d_i} とおく。 i \\, (1 \\leq i \\leq N) 行目には、 d_i + 1 個の整数 d_i, a_{i, 1}, \\dots, a_{i, d_i} を、この順番で空白区切りで出力せよ。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 10^5 1 \\leq M \\leq 10^5 1 \\leq A_i \\lt B_i \\leq N \\, (1 \\leq i \\leq M) (i \\neq j) ならば (A_i, B_i) \\neq (A_j, B_j) 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M A_1 B_1 \\vdots A_M B_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 問題文の指示に従い、 N 行にわたって出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 6 6\n3 6\n1 3\n5 6\n2 5\n1 2\n1 6"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3 2 3 6\n2 1 5\n2 1 6\n0\n2 2 6\n3 1 3 5 都市 1 と道路で直接結ばれているのは都市 2, 3, 6 です。よって、 d_1 = 3, a_{1, 1} = 2, a_{1, 2} = 3, a_{1, 3} = 6 であるので、 1 行目には 3, 2, 3, 6 をこの順番で空白区切りで出力します。 a_{i, 1}, \\dots, a_{i, d_i} は昇順に並んでいなければならないことに注意してください。例えば、 1 行目に 3, 3, 2, 6 をこの順番で出力した場合、不正解となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5 10\n1 2\n1 3\n1 4\n1 5\n2 3\n2 4\n2 5\n3 4\n3 5\n4 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 4 2 3 4 5\n4 1 3 4 5\n4 1 2 4 5\n4 1 2 3 5\n4 1 2 3 4"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc276/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:55.434180+00:00",
+  "statement_sha256": "4340469f75941ef274a1e1b3617e7fdecaeb4cb8139fbd2bafa8c4f4758e1d2d",
+  "editorials": []
+}

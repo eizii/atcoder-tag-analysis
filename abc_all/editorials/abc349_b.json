@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc349_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc349/editorial/9778",
+      "text": "まず，それぞれの文字が\n\\(S\\)\n中に現れる回数を調べます．\n長さ\n\\(26\\)\nの配列\n\\(\\mathrm{cnt}\\)\nを用意し，\n\\(i=1,2,\\dots,26\\)\nについて，\n\\(\\mathrm{cnt}[i] =\\)\n(アルファベットで\n\\(i\\)\n番目の文字が\n\\(S\\)\n中に現れる回数) とします．\n次に，\n\\(1\\)\n以上の整数\n\\(i\\)\nについて，\n\\(i\\)\nが\n\\(\\mathrm{cnt}\\)\nに現れる回数を調べます．\n長さ\n\\(100\\)\nの配列\n\\(\\mathrm{cnt2}\\)\nを用意し，\n\\(i=1,2,\\dots,100\\)\nについて，\n\\(\\mathrm{cnt2}[i] =\\)\n(\n\\(i\\)\nが\n\\(\\mathrm{cnt}\\)\n中に現れる回数) とします．\nこれらの処理のあと，\n\\(\\mathrm{cnt2}[i]\\)\nは，\n\\(S\\)\nにちょうど\n\\(i\\)\n回現れる文字の種類数に一致します．\nよって，\n\\(\\mathrm{cnt2}\\)\nの値がすべて\n\\(0\\)\nまたは\n\\(2\\)\nであるか調べることで，問題に答えることができます．\n実装例 (Python)",
+      "codes": [
+        "S = input()\ncnt = [0] * 26\nfor c in S:\n    cnt[ord(c) - ord(\"a\")] += 1\ncnt2 = [0] * 101\nfor c in cnt:\n    if c > 0:\n        cnt2[c] += 1\nprint(\"Yes\" if all(c in (0, 2) for c in cnt2) else \"No\")"
+      ],
+      "text_sha256": "0f906a69318cc69226242e4304f200efb4ea58edf61f77ecee530f1ad92ee660",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc349/abc349_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

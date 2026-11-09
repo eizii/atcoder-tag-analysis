@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc249_f",
+  "title": "Ignore Operations",
+  "contests": [
+    {
+      "contest_id": "abc249",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1786,
+  "raw_difficulty": 1786,
+  "contest_id": "abc249",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc249/tasks/abc249_f",
+  "statement": "配点 : 500 点 問題文 高橋君は整数 x を持っています。はじめ、 x = 0 です。 N 個の操作があります。 i \\, (1 \\leq i \\leq N) 個目の操作は整数 t_i, y_i を用いて以下のように表されます。 t_i = 1 のとき、 x を y_i で置き換える。 t_i = 2 のとき、 x を x + y_i で置き換える。 高橋君は 0 個以上 K 個以下の好きな個数の操作を無視することができます。残った操作を一度ずつ順序を変えずに行ったとき、最終的な x の値としてあり得る最大値を求めてください。 制約 1 \\leq N \\leq 2 \\times 10^5 0 \\leq K \\leq N t_i \\in \\{1,2\\} \\, (1 \\leq i \\leq N) |y_i| \\leq 10^9 \\, (1 \\leq i \\leq N) 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N K t_1 y_1 \\vdots t_N y_N 出力 答えを出力せよ。 入力例 1 5 1\n2 4\n2 -3\n1 2\n2 1\n2 -3 出力例 1 3 5 個目の操作を無視すると、 x は 0 \\rightarrow 4 \\rightarrow 1 \\rightarrow  2 \\rightarrow 3 と変化し、最終的な x の値は 3 となります。これが最大です。 入力例 2 1 0\n2 -1000000000 出力例 2 -1000000000 入力例 3 10 3\n2 3\n2 -1\n1 4\n2 -1\n2 5\n2 -9\n2 2\n1 -6\n2 5\n2 -3 出力例 3 15",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 高橋君は整数 x を持っています。はじめ、 x = 0 です。 N 個の操作があります。 i \\, (1 \\leq i \\leq N) 個目の操作は整数 t_i, y_i を用いて以下のように表されます。 t_i = 1 のとき、 x を y_i で置き換える。 t_i = 2 のとき、 x を x + y_i で置き換える。 高橋君は 0 個以上 K 個以下の好きな個数の操作を無視することができます。残った操作を一度ずつ順序を変えずに行ったとき、最終的な x の値としてあり得る最大値を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2 \\times 10^5 0 \\leq K \\leq N t_i \\in \\{1,2\\} \\, (1 \\leq i \\leq N) |y_i| \\leq 10^9 \\, (1 \\leq i \\leq N) 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K t_1 y_1 \\vdots t_N y_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5 1\n2 4\n2 -3\n1 2\n2 1\n2 -3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3 5 個目の操作を無視すると、 x は 0 \\rightarrow 4 \\rightarrow 1 \\rightarrow  2 \\rightarrow 3 と変化し、最終的な x の値は 3 となります。これが最大です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 1 0\n2 -1000000000"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 -1000000000"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10 3\n2 3\n2 -1\n1 4\n2 -1\n2 5\n2 -9\n2 2\n1 -6\n2 5\n2 -3"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 15"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc249/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:21.463184+00:00",
+  "statement_sha256": "c0886f152ab2b4401254052ef8dff31ce82173d27c1b5b96fc357ff5a3ea3439",
+  "editorials": []
+}

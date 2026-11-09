@@ -1,0 +1,38 @@
+{
+  "problem_id": "abc356_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc356/editorial/10126",
+      "text": "この解説では、以下の表現を用います。\n\\(x\\)\nの\n\\(j\\)\nbit 目 …\n\\(x\\)\nを\n\\(2\\)\n進法で記述した際の\n\\(2^j\\)\nの位\n\\(x\\)\nの\n\\(j\\)\nbit 目が立っている …\n\\(x\\)\nを\n\\(2\\)\n進法で記述した際の\n\\(2^j\\)\nの位が\n\\(1\\)\nである\n式を整理すると、次の通りに変形できます。\n\\(\\displaystyle \\sum_{k=0}^{N} \\rm{popcount}\\)\n\\((k \\mathbin{\\&} M) = \\)\n\\(\\displaystyle \\sum_{k=0}^{N}\\)\n\\(((k \\mathbin{\\&} M)\\)\nにて立っている bit の個数\n\\()\\)\n\\(\\displaystyle = \\sum_{k=0}^{N} \\sum_{j=0}^{\\infty}\\)\n\\(((k \\mathbin{\\&} M)\\)\nにて\n\\(j\\)\nbit 目が立っていれば\n\\(1\\)\n、立っていなければ\n\\(0\\)\n\\()\\)\n\\(\\displaystyle = \\sum_{j=0}^{\\infty} \\sum_{k=0}^{N}\\)\n\\(((k \\mathbin{\\&} M)\\)\nにて\n\\(j\\)\nbit 目が立っていれば\n\\(1\\)\n、立っていなければ\n\\(0\\)\n\\()\\)\n\\(((k \\mathbin{\\&} M)\\)\nにて\n\\(j\\)\nbit 目が立っていれば\n\\(1\\)\n、立っていなければ\n\\(0\\)\n\\()\\)\nを更に整理すると、次の通りに言い換えられます。\nもし\n\\(M\\)\nの\n\\(j\\)\nbit 目が立っていなければ、常に\n\\(0\\)\nもし\n\\(M\\)\nの\n\\(j\\)\nbit 目が立っていれば、次の通り\n\\(k\\)\nの\n\\(j\\)\nbit 目が立っていれば\n\\(1\\)\n\\(k\\)\nの\n\\(j\\)\nbit 目が立っていなければ\n\\(0\\)\nこの問題の制約内では、\n\\(M\\)\nの\n\\(60\\)\nbit 目とそれより上の位は常に\n\\(0\\)\nであることに注意すると、最終的に求める和は以下の手順で求めることができます。\n\\(j=0,1,\\dots,59\\)\nについて、以下を繰り返す。\n\\(M\\)\nの\n\\(j\\)\nbit 目が立っていなければ何もしない。\n\\(M\\)\nの\n\\(j\\)\nbit 目が立っていれば、\n\\(0\\)\n以上\n\\(N\\)\n以下の整数のうち\n\\(j\\)\nbit 目が立っているものの個数を答えに加算する。\nさて、後は以下の数え上げが出来ればこの問題に正解できます。\n\\(0\\)\n以上\n\\(N\\)\n以下の整数のうち\n\\(j\\)\nbit 目が立っているものの個数を求めよ。\n例えば\n\\(j=2\\)\nとして考えてみましょう。\n\\(2\\)\nbit 目が立っている整数は\n\\(4,5,6,7,12,13,14,15,20,21,22,23,28\\dots\\)\nです。\nこの例を観察すると、次の事実が分かります。\n\\(k\\)\nを非負整数とした際、\n\\(0\\)\n以上\n\\(k \\times 2^{j+1}\\)\n未満の整数のうち、\n\\(j\\)\nbit 目が立っているものは\n\\(k \\times 2^j\\)\n個ある。\nこれは、全ての非負整数\n\\(i\\)\nについて\n\\(i\\)\nの\n\\(j\\)\nbit 目と\n\\(i+2^{j+1}\\)\nの\n\\(j\\)\nbit 目は一致することと、\n\\(0\\)\n以上\n\\(2^{j+1}\\)\n未満の整数のうち\n\\(j\\)\nbit 目が立っているものは丁度\n\\(2^j\\)\n個あることを利用すると証明可能です。\nさらに、次のことも言えます。\n\\(k\\)\nを非負整数、\n\\(l\\)\nを\n\\(2^{j+1}\\)\n未満の整数としたとき、\n\\(k \\times 2^{j+1}\\)\n以上\n\\(k \\times 2^{j+1} + l\\)\n以下の整数のうち\n\\(j\\)\nbit 目が立っているものの数は以下の通りである。\n\\(l\\)\nが\n\\(2^j\\)\n未満のとき、\n\\(0\\)\n\\(l\\)\nが\n\\(2^j\\)\n以上のとき、\n\\(l - 2^j + 1\\)\nこのふたつを統合することで、\n\\(0\\)\n以上\n\\(N\\)\n以下の整数のうち\n\\(j\\)\nbit 目が立っているものの個数を求めることができます。\n以上より、この問題に正解することができました。\n真の値が\n\\(64\\)\nbit 整数型に収まらないケースがあるので、答えを\n\\(998244353\\)\nで割った余りを取る際に十分注意してください。\n実装例1 (C++):\nbit演算を駆使した実装は次の通りです。\n実装例2 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#define mod 998244353\n\nusing namespace std;\n\nlong long f(long long j,long long n){\n  long long p2=(1ll<<j); // 2^j\n  long long k=n/(2*p2);\n  long long res=k*p2;\n  long long l=n%(2*p2);\n  if(l>=p2){\n    res+=(l-p2+1);\n  }\n  return res;\n}\n\nint main(){\n  long long n,m;\n  cin >> n >> m;\n  long long res=0;\n  for(long long i=0;i<60;i++){\n    if(m&(1ll<<i)){\n      res+=f(i,n);\n      res%=mod;\n    }\n  }\n  cout << res << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n#define mod 998244353\n\nusing namespace std;\n\nlong long f(long long j,long long n){\n  long long res=((n>>(j+1))<<j);\n  if(n&(1ll<<j)){\n    res+=((n&((1ll<<j)-1))+1);\n  }\n  return res;\n}\n\nint main(){\n  long long n,m;\n  cin >> n >> m;\n  long long res=0;\n  for(long long i=0;i<60;i++){\n    if(m&(1ll<<i)){\n      res+=f(i,n);\n      res%=mod;\n    }\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "19d642019762a3d8c946080c76adc018c3785319e7f647edbd57907cad777a09",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc356/abc356_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc356/editorial/10133",
+      "text": "\\(\\displaystyle f(L,R)=\\sum _ {i = L} ^ R\\operatorname{popcount}(i\\mathop{\\&}M)\\) の値を求めやすいような整数の組 \\((L,R)\\) を用いてこの問題を解くことを考えます。\n\\((L,R)=(2 ^ ed,2^e(d+1)-1)\\) とすると、\\[\\operatorname{popcount}((L+i)\\mathop{\\&}M)+\\operatorname{popcount}((R-i)\\mathop{\\&}M)\\ (0\\leq i\\lt2 ^ e)\\] が \\(i\\) によらず一定であることがわかります。\nよって、このとき \\[f(L,R)=(\\operatorname{popcount}(L\\mathop{\\&}M)+\\operatorname{popcount}(R\\mathop{\\&}M))\\times2 ^ {e-1}\\] が成り立ちます。\nあとは、このような形の \\(f(L,R)\\) を用いて \\(f(0,N)\\) を求めればよいです。\nこれは、\nABC355 E - Guess the Sum\nと同じ形式ですが、最小回数である必要はないのでたかだか \\(2\\lceil\\log _ 2N\\rceil\\) 個の区間の和として表しても十分高速です。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <bit>\n#include <atcoder/modint>\n\nint main() {\n    using namespace std;\n    using modint = atcoder::static_modint<998244353>;\n    unsigned long N, M;\n    cin >> N >> M;\n    ++N;\n    modint ans{};\n    while(N){\n        const auto i{N & -N};\n        ans += modint::raw(popcount(M & N - i) + popcount(M & N - 1)) * i;\n        N ^= i;\n    }\n    cout << (ans / 2).val() << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "c53f0c74abd531c417e36545b8b000dfada6c0d481ef1d4a02c95864c0e65111",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc356/abc356_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc356/editorial/10138",
+      "text": "求める答えを\n\\(f(N,M)\\)\nとおきます。\n\\(f(0,M)=0\\)\nと\n\\(f(1,M)=M\\&1\\)\nは明らかです。以下\n\\(N\\geq 2\\)\nとします。\n\\(N\\)\nの最上位 bit の寄与を考えます。\n\\(N\\)\nの最上位 bit が\n\\(k\\)\nbit 目であるとします。（例えば\n\\(N=1100_{(2)}\\)\nなら\n\\(k=3\\)\n）\n下図のように3つの領域に分けて寄与を考えます。（左上の領域は必ず全て\n\\(0\\)\nなので考慮する必要はありません）\n右上の領域の寄与は\n\\(f(2^k-1,M)\\)\nであり、どの桁にもちょうど\n\\(2^{k-1}\\)\n個の\n\\(1\\)\nがあることから、この値は\n\\(\\mathrm{popcount}(M\\&(2^k-1))\\times 2^{k-1}\\)\nに等しくなります。\n左下の領域には\n\\(N-(2^k-1)\\)\n個の\n\\(1\\)\nがあります。よってこの領域の寄与は\n\\(M\\)\nの\n\\(k\\)\nbit 目が\n\\(1\\)\nのとき\n\\(N-(2^k-1)\\)\n、\n\\(0\\)\nのとき\n\\(0\\)\nです。\n右下の領域の寄与は\n\\(f(N-2^k,M)\\)\nです。再帰的に計算します。\n再帰するごとに第一引数の2進での桁が1つ以上減るので、全体で\n\\(O(\\log N)\\)\nで計算できます。",
+      "codes": [],
+      "text_sha256": "be3f2d6c61096ea45f7d312bf0a61f47d865e0e778e3fecad1ee53008fa63c4d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc356/abc356_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

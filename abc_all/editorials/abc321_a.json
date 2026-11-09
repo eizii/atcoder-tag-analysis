@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc321_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc321/editorial/7259",
+      "text": "方針1:\n\\(N\\)\nを各桁に分解する\n以下の方法で\n\\(N\\)\nを各桁に分解できます。\n最初、\n\\(D=[]\\)\nとする。\n\\(N>0\\)\nである間、以下を繰り返す。\n\\(D\\)\nの末尾に\n\\(N\\)\nを\n\\(10\\)\nで割った余りを追加する。\nその後、\n\\(N\\)\nを (\n\\(N\\)\nを\n\\(10\\)\nで割った商 ) に置き換える。\n最後に、\n\\(D\\)\n全体を反転する。\n例えば、\n\\(N=321\\)\nの場合以下のような動作になります。\n\\(D = []\\)\nから始める。\n\\(321>0\\)\nなので、\n\\(D\\)\nの末尾に\n\\(1\\)\nを追加し、\n\\(N\\)\nを\n\\(32\\)\nに置き換える。\n\\(D=[1]\\)\nとなる。\n\\(32>0\\)\nなので、\n\\(D\\)\nの末尾に\n\\(2\\)\nを追加し、\n\\(N\\)\nを\n\\(3\\)\nに置き換える。\n\\(D=[1,2]\\)\nとなる。\n\\(3>0\\)\nなので、\n\\(D\\)\nの末尾に\n\\(3\\)\nを追加し、\n\\(N\\)\nを\n\\(0\\)\nに置き換える。\n\\(D=[1,2,3]\\)\nとなる。\n\\(N=0\\)\nとなったので、ここで繰り返しを終了する。\n最後に\n\\(D\\)\nを反転し、\n\\(D=[3,2,1]\\)\nを得る。\nこの\n\\(D\\)\nを用いて問題文中の条件をループを使って判定することにより、この問題を解くことができます。\nなお、条件の判定は\n全ての\n\\(i\\)\nについて (\n\\(i\\)\n桁目 )\n\\(>\\)\n(\n\\(i+1\\)\n桁目 ) なら\nYes\nを、\nあるの\n\\(i\\)\nについて (\n\\(i\\)\n桁目 )\n\\(\\le\\)\n(\n\\(i+1\\)\n桁目 ) なら\nNo\nに変形するとよいです。\n実装例 (Python):\n方針2:\n\\(N\\)\nを文字列として受け取る\n何らかの方法で\n\\(N\\)\nを文字列として受け取れば、その文字列\n\\(i\\)\n文字目が\n\\(N\\)\nの上から\n\\(i\\)\n桁目になります。\nなので、その文字列を使って判定を行うと\n\\(N\\)\nを各桁に分解する必要がなくなります。\n実装例 (C++):",
+      "codes": [
+        "N = int(input())\nD = []\nwhile N>0:\n    D.append(N%10)\n    N //= 10\nD.reverse()\n\nfor i in range(1,len(D)):\n    if D[i-1]<=D[i]:\n        print(\"No\")\n        exit()\n\nprint(\"Yes\")",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  for(int i=1;i<s.size();i++){\n    if(s[i-1]<=s[i]){\n      cout << \"No\\n\";\n      return 0;\n    }\n  }\n  cout << \"Yes\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "14e0de2a7eeaa15bb2b971805a440079aa4ed7016bf501f2b83006406032c43c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc321/abc321_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

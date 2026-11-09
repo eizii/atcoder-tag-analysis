@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc224_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc224/editorial/2809",
+      "text": "この問題は、文字列を受け取り場合分けを行うという点で、\nABC215-A\nと共通しています。なので、同じようなコードでこの問題にも正解できないか考えます。\nこの問題の出力は、入力される文字の末尾によって決定されます。さらに言うと、最後の文字が\nr\nであれば\ner\n、\nt\nであれば\nist\nと出力することでこの問題に正解できることが分かります。\nよって、入力された文字列の最後の文字に着目して場合分けを行うのが今回の目標となります。\n言語によってその方法は異なりますが、例えば、C++を用いる場合は以下のコードでこの問題に正解できます。\nこのように、文字列の一部の文字のみに着目して場合分けを行うテクニックは、競技プログラミングにおいてより楽な実装を行うのに役立ちます。",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  if(s[s.size()-1]=='r'){cout << \"er\\n\";}\n  else{cout << \"ist\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "f2aa34b1ad0e79b1400f02cbe4717767c1226b0b4262c2a8b2ed31766159a3ce",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc224/abc224_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc224/editorial/2828",
+      "text": "正規表現を使用して文字列の末尾を抜き出すことができます。\nJavaScriptのように正規表現専用の構文を持つ言語もあります。\n正規表現の解説\n(er|ist)\n:\ner\nか\nist\nにマッチ\n$\n: 文字列の末尾を表す\n/~~~/m\n:\n$\nが改行前にもマッチするようにするモード\nhttps://atcoder.jp/contests/abc224/submissions/26784932",
+      "codes": [
+        "function Main(s) {\n    console.log(/(er|ist)$/m.exec(s)[1])\n}\nMain(require(\"fs\").readFileSync(\"/dev/stdin\", \"utf8\"))"
+      ],
+      "text_sha256": "d97e567a504e0873f5a5dec2b4c68d8f4c2aaad17e2f65f41bf7c7f871e048e2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc224/abc224_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

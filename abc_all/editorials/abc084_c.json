@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc084_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc084/editorial.pdf",
+      "text": "C:  Special Trains\n\n 駅j に開通式開始t 秒後に到着したとき、駅j + 1 に向かう列車に乗れるのが開通式開始何秒\n後かを考えると、次のようになります。\n ・t < Sj ならば開通式開始Sj 秒後\n ・そうでなく、t ％Fj = 0 ならば開通式開始t 秒後\n ・そうでないなら、開通式開始t + Fj −(t ％Fj) 秒後\n これに従い、全ての駅i から出発する場合に対してシミュレーションしてみると、O(N2) とな\nり、解くことができます。\n\n#include <cstdio >\nint N,C[500] ,S[500] ,F[500];\nint main ()\n{\n         scanf (\"%d\",&N);\n        for(int i=0;i<N-1;i++) scanf (\"%d%d%d\",&C[i],&S[i],&F[i]);\n        for(int i=0;i<N;i++)\n          {\n                  int t=0;\n                 for(int j=i;j<N-1;j++)\n                   {\n                        if(t<S[j])t=S[j];\n                          else if(t%F[j]==0);\n                          else t=t+F[j]-t%F[j];\n                         t+=C[j];\n                   }\n                 printf (\"%d\\n\",t);\n          }\n}\n\n\n\n\n\n                                         2",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "c97a07c5344df23f9c79f47553b8bdc5a29313adc21df4fea1888fb04b30baee"
+    }
+  ],
+  "status": "available"
+}

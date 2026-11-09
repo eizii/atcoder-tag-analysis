@@ -1,0 +1,396 @@
+            ABC 049 / ARC 065 解説
+
+
+                                    writer : hogloid
+
+                               2016 年12 月10 日
+
+
+
+  English Editorial starts on page 5.
+
+
+A : 居合を終え、青い絵を覆う
+
+ 文字を入力し、それがa, e, i, o, u のいずれかであるか判定すればよいです。
+
+if の中に5 つの条件を連ねる以外にも、以下のように母音全てを含む文字列がc を含むか判定することもで
+
+きます。
+
+                            C++ のコード例
+
+char c;
+
+cin >> c;
+
+const string vowel = "aeiou ";
+
+cout << vowel.find(c) == string :: npos ? "vowel" : "consonant" << endl;
+
+
+B : たてなが
+
+ この問題では、出力する画像をピクセルごとに求める方針でも解くことができますが、出力する画像の1, 2
+
+行目は元の画像の1 行目、3, 4 行目は元の画像の2 行目…のように、上の行から順に2 回出力を繰り返せばよ
+
+いです。
+
+                            C++ のコード例
+
+int h, w;
+
+cin >> h >> w;
+
+char buf [105];
+
+for (int i = 0; i < h; ++i) {
+
+  scanf ("%s", buf);
+
+  printf ("%s\n%s\n", buf , buf);
+
+}
+
+
+
+
+
+                                             1
+
+C : 白昼夢
+
+ 文字列S をdream, dreamer, erase, eraser に分解していくことを考えます。先頭から分解していこうとす
+
+ると、例えばdreamer まで読んだとき、dream で切るべきなのか、dreamer で切るべきなのか判定するこ
+
+とができません。(dreameraser はdream eraser と切らなければならないので、dreamer まで読んだときに
+
+dream で切らなければいけない場合が存在することが分かります)
+
+ 逆に、後ろから読んでみましょう。4 つの単語を後ろから読むと、それぞれmaerd, remaerd, esare, resare
+
+となります。この4 つの文字列は、ある文字列が他の文字列の接頭辞(preﬁx) になっていないため、後ろか
+
+ら読んで当てはまるものが見つかれば即座に分解するしかありません。(参考: 語頭符号) S を最終的に分解す
+
+ることができなかった場合NO を、そうでない場合YES を出力します。
+
+
+D : 連結
+
+ 配列ar で、都市i と都市j が道路で連結しているときar[i] = ar[j]、そうでないときar[i] ̸= ar[j] となる
+
+ようなものを取ります。これは、道路の辺を使い深さ優先探索をしたり、道路で直接結ばれた都市をつないだ
+
+Union-Find での根の都市の番号を取ることにより実現できます。
+
+ 同様に、配列br で、都市i と都市j が鉄道で連結しているときbr[i] = br[j]、そうでないときbr[i] ̸= br[j]
+
+となるようなものを取ります。
+
+ このとき、i とj が鉄道・道路の両方で連結している⇔ar[i] = ar[j] ∧br[i] = br[j] です。よって、各i に
+
+ついて、(ar[i], br[i]) のようにペアとし、同じペアがいくつ出てくるかを配列のソートや連想配列などを用い
+
+求めることで解くことができます。O(K + L + NlogN) です。
+
+
+E : へんなコンパス
+
+ まず、(xi, yi) 7→(xi + yi, xi −yi) と穴の座標を置き換えます。これは、平面を45 度回転させる操作に対
+
+応します。
+
+これにより、d(i, j) = max(|xi −xj|, |yi −yj|) となります。
+
+必須ではありませんが、この方が何かと実装が平易で済みます。
+
+ コンパスにより指される点の組を求めますが、コンパスの指す2 穴の間の距離D は常に不変なので、コン
+
+パスが指すことのできる穴の集合を求めれば、そこから距離D の頂点の数を求め総和を取り2 で割ることで
+
+答えが求まります。
+
+ コンパスが指すことのできる穴の集合S は、以下のように再帰的に求めることができます。
+
+
+
+
+
+                                             2
+
+                         擬似コード
+
+S := empty
+
+dfs(int v){ // 穴v をコンパスが指すことができると分かった
+
+  S にv を追加
+
+
+  S に追加されておらず、v から距離の穴D u それぞれについて{
+
+    dfs(u)
+
+  }
+
+}
+
+dfs(a)
+
+
+ここで、
+
+    • S に追加されておらず
+
+    • v から距離D の穴
+
+の2 の条件をともに満たす穴のみを列挙することでO(N) 回の操作になります。
+
+一つ目の条件が欠けていると、例えば変換後にxi = i/2, yi = (i mod 2) ∗1000000000 (割り算は切り捨て) と
+いった場合に、距離D の穴の組はO(N 2) 個あるため間に合いません。
+また、まだ追加されていない全ての頂点について調べる、などを行うと、これもやはりO(N 2) となってしま
+
+います。
+
+ 「まだS に追加されておらず、v から距離D の穴」を4 つの部分に分けてみましょう。
+
+    • (xv + D, yv −D)...(xv + D, yv + D) の間の点(v の右側)
+    • (xv −D, yv −D)...(xv −D, yv + D) の間の点(v の左側)
+    • (xv −D, yv + D)...(xv + D, yv + D) の間の点(v の上側)
+    • (xv −D, yv −D)...(xv + D, yv −D) の間の点(v の下側)
+
+さらに、順序集合(C++ ならstd::set) を使ってみましょう。順序をx での比較、同じならy での比較としま
+
+す。v の右側の穴を列挙するためには、(xv + D, yv −D) 以上(xv + D, yv + D) 以下の穴のみが条件を満た
+
+します。これらを1 つずつ走査していけばよいです。S にv が追加されたときに、この順序集合からも穴の座
+
+標を取り除いておけば、一つ目の条件も満たすことができます。左側も同様です。上側・下側の穴は、x, y の
+
+比較の順番を逆にした順序集合を持てば同様に実現できます。
+
+ コンパスが指すことのできる点から距離D の穴の数が求める処理が残っています。これは、穴を順序集合
+
+で持つ代わりに配列で持ち、ソートし、条件を満たす穴の範囲を二分探索で求め、範囲の長さについて加算す
+
+れば実現できます。先ほどの操作とは違い、条件を満たすものの数を重複なく数えなければいけないため、四
+
+隅の条件に注意してください。
+
+ 順序集合からの削除や、二分探索があるため、計算量はO(NlogN) となります。
+
+ おまけ: ソートとO(N) 回のUnion-Find の操作の他は線形で解くこともできます。
+
+
+
+
+
+                                             3
+
+F : シャッフル
+
+ まず、ri ≥rj, i < j なるj については、j 番目の操作を行っても行わなくても答えは変わりません。
+条件を満たすi のうち最大のものを取ると、k(i < k ≤j) 番目の操作によりシャッフルされる範囲は全てi 番
+
+目のシャッフルにより自由に並べ替えることができるためです。
+
+また、li = lj, ri > rj なるj も、同様にj 番目の操作を行っても行わなくても答えは変わりません。
+ これにより、答えの変わらない操作を取り除くことで、i < j のときli < lj, ri < rj を満たすよう操作の列
+
+を取ることができます。
+
+ 次に、シャッフルは部分文字列の配置を全て決めてしまう操作で、これを行うと状態が爆発してしまうた
+
+め、逐次的な操作に置き換えることを考えましょう。文字列を左から順に決めていくことを考えます。k 番目
+
+より左の文字列を決めたとき、
+
+    • どこまでがシャッフルされることになっているか(すなわち、自由に並べ替えることができるか)
+
+    • シャッフルされることになる部分文字列のうち、1 はいくつあるか
+
+を覚えておけば、1 か0 を置いていくことができます。なぜなら、シャッフルにより並べ方は自由になってし
+
+まうため、1 の数さえ覚えておけば大丈夫だからです。どこまでがシャッフルされることになっているか、は
+
+k により一意に決めることができます。li < k なる最大のi を取ったときのri です。これをrightendk と表
+
+します。
+
+ ここで、DP を考えてみましょう。
+
+dp[k][j] := k 番目より左の文字列は決め、S[k...rightendk] に1 がj 個あるときの、k 番目までの文字列の決
+
+め方の数
+
+とします。シャッフルされることになる文字列の中の1 の数をone とします。
+
+
+
+    •  li = k となるi があるとき、S[rightendk...ri] が新たにシャッフルすることになる部分に加わるので、
+     one = j + (S[rightendk...ri] の中の1 の数) とします。
+    • そうでないとき、one = j とします。
+
+  k 番目の文字を決めるとき、
+
+    • one > 0 なら1 を置くことに対応する状態遷移を書きます(dp[k + 1][one −1]+ = dp[k][j])。
+
+    • 同様に、全てが1 でないとき、0 を置く状態遷移を書きます(dp[k + 1][one]+ = dp[k][j])
+
+ 最終的な答えは、dp[N + 1][0] となります。
+
+ このDP では、ある文字がどの操作によってもシャッフルされないときを考慮していないため、そのような
+
+場合は「1 文字の部分をシャッフルする」(=実質的に何も行わない) ダミーの操作を加えたり、初めから文字
+
+列を切り分けてしまうことで対応できます。
+ 計算量はO(N 2) です。
+
+
+
+
+
+                                             4
+
+        ABC 049 / ARC 065 Rough Editorial
+
+
+                                    writer : hogloid
+
+                               2016 年12 月10 日
+
+
+
+A : UOIAUAI
+
+
+                          C++ Code Example
+
+char c;
+
+cin >> c;
+
+const string vowel = "aeiou ";
+
+cout << vowel.find(c) == string :: npos ? "vowel" : "consonant" << endl;
+
+
+B : Thin
+
+  Repeat each row twice.
+
+                          C++ Code Example
+
+int h, w;
+
+cin >> h >> w;
+
+char buf [105];
+
+for (int i = 0; i < h; ++i) {
+
+  scanf ("%s", buf);
+
+  printf ("%s\n%s\n", buf , buf);
+
+}
+
+
+C : Daydream
+
+  Reverse the strings. Then, the four words will be: maerd, remaerd, esare, resare. This way you can
+
+determine the composition greedily.
+
+
+
+
+
+                                             1
+
+D : Connectivity
+
+  Construct a graph with roads and ﬁnd the connected components in it. Then, you can assign values ai
+to each city i such that the cities p and q are reachable using roads iﬀap = aq. Similarly, deﬁne values
+bi for railways.
+
+  Then, a pair of two cities satisﬁes the conditions iﬀtheir (a, b) values are the same.
+
+
+E : Manhattan Compass
+
+  Let D be the distance between the two points initially pointed by the compass.
+
+ We have two things to do:
+
+    • Construct a graph with N vertices. Two vertices a and b are connected if the distance between
+
+     them is D. Find connected components in this graph.
+
+    • For each vertex a, count the number of vertices b such that the distance between a and b is D.
+
+  The latter is relatively easy, so we describe the former.
+
+  First rotate the entire plane by 45 degrees. Let dx, dy be the diﬀerence of x, y coordinates. Now we
+
+are intersted in a pair of points such that max(dx, dy) = D. To do this, we want to ﬁnd all pairs of
+
+points (a, b) such that
+
+    • xb −xa = D
+    • −D ≤yb −ya ≤D
+
+  Let’s sort the points by the pair (x, y) and renumber them. Then, for a ﬁxed a, the set of b that
+
+satisﬁes the conditions above will form an interval. Let [L, R] be this interval (the interval can be found
+
+using binary search). Then, we want to add edges a - L, a - L + 1, . . ., a - R.
+
+  Instead, it is equivalent to add edges a - L and L - L+1, L+1 - L+2, . . ., R−1 - R. This way, except
+
+for O(N) edges, each edge connect adjacent points, so if we compute all edges that connect adjacent
+
+points in a clever way, there will be O(N) edges in total.
+
+ We should do similar things after swapping x and y. After that, we get the desired graph.
+
+
+F : Shuﬄe
+
+   If li = lj, ri > rj, we can ignore the pair j. Thus, we can assume that M = N and for each i, li = i.
+
+  Let dp[L][R][c] be the number of strings we can obtain under the following state:
+
+    • We’ve ﬁxed all characters to the left of L.
+
+    • The characters in the range [L, R) are shuﬄed. c of them are 1.
+
+    • In the future, we will perform operations with li ≥L.
+
+ We compute the values as follows:
+
+
+
+                                             2
+
+    • When L = N, we’ve ﬁnished; the value is 1.
+
+    • If aL > R, we can extend the ”shuﬄed range”; change R to aL and increase c by the number of
+      ones in the interval [R, aL].
+    • Now consider two cases for the characters at L. If this is ’0’ (or ’1’), there are dp[L + 1][R][c] (or
+
+      dp[L+1][R][c−1]) ways to determine the rest. Thus dp[L][R][c] = dp[L+1][R][c]+dp[L+1][R][c−1].
+
+     (Make sure not to access invalid values)
+
+  This looks like an O(N 3) solution, but we can notice that for a ﬁxed L, only one R appears during the
+computation. Thus, we can ignore the value of R and it turns out to be an O(N 2) solution.
+
+
+
+
+
+                                             3

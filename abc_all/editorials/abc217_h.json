@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc217_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc217/editorial/2581",
+      "text": "まずはナイーブな DP を考えてみましょう。 \\(dp_{i, x} :=\\) \\(T_i\\) 秒後に \\(x\\) にいるときのダメージの最小値 とおくと、便宜上 \\(T_0  = 0\\) として次の遷移が求まります。 \\[\ndp_{i, x} =\n\\begin{cases}\n0 & i = 0 \\wedge x = 0 \\\\\n\\infty & i = 0 \\wedge x \\neq 0 \\\\\n\\displaystyle \\min_{ |y - x| \\leq T_i - T_{i-1} } dp_{i-1,y} + \\max(0, X_i - x)& i \\gt 0 \\wedge D_i = 0 \\\\\n\\displaystyle \\min_{ |y - x| \\leq T_i - T_{i-1} } dp_{i-1,y} + \\max(0, x - X_i) & i \\gt 0 \\wedge D_i = 1\n\\end{cases}\n\\] この DP を愚直に計算すれば \\(\\mathrm{O}(\\max(T)^2)\\) で求めることができますが当然 TLE してしまいます。 ここで、 DP テーブルの \\(i\\) の値を固定して、 \\(-T_i \\leq x \\leq T_i\\) の範囲において \\(xy\\) 座標上に \\((x, d_{i,x})\\) をプロットして線で結んでみましょう。すると、得られる線は \\(\\mathrm{O}(i)\\) 本の折れ線からなる凸関数になると思います。実際に \\(f_i(x) :=\\) \\(-T_i \\leq x \\leq T_i\\) の範囲において \\(f_i(x) = dp_{i,x}\\) を満たす関数 とおいて上記の DP を \\(f(x)\\) を使用した形に書き換えると次のようになり、帰納的に \\(f_i(x)\\) が \\(-T_i \\leq x \\leq T_i\\) の範囲で凸関数になるのが確認できると思います。 ( ここで \\((X_i-x)_{+}\\) は \\(\\max((X_i-x),0)\\) の意味です。) \\[\nf_i(x) = \n\\begin{cases}\n0 & i = 0 \\\\\n\\displaystyle (X_i - x)_{+} + \\min_{ |y - x| \\leq T_i - T_{i-1} } f_{i-1}(y) & i \\gt 0 \\wedge D_i = 0 \\\\\n\\displaystyle (x - X_i)_{+} + \\min_{ |y - x| \\leq T_i - T_{i-1} } f_{i-1}(y) &  i \\gt 0 \\wedge D_i = 0 \\\\\n\\end{cases}\n\\] このような DP は変化点を 2 個の優先度付きキュー で管理する Slope Trick と呼ばれる手法で高速に凸関数をシミュレートすることができます。 Slope Trick の解説記事は、日本語文献では maspy さんの記事 が非常に分かりやすく、AtCoder での出題例も多く含まれておりおすすめです。英語話者の方は Codeforces の記事 をご参照ください。 上記の通り Slope Trick に関する解説はすでに非常に素晴らしい文献が存在するのでここでは割愛します。以上よりこの問題を \\(\\mathrm{O}(N \\log N)\\) で解くことができました。 Python による実装は以下の通りです。 ( 以下の提出で AC するためには処理系に PyPy3 を選ぶ必要があります。)",
+      "codes": [
+        "import heapq\nimport sys\n\nL, R, addL, addR, miny = list(), list(), 0, 0, 0\n\ndef push_left(x):\n  heapq.heappush(L, -x + addL)\n\ndef push_right(x):\n  heapq.heappush(R, x - addR)\n\ndef top_left():\n  return -L[0] + addL\n\ndef top_right():\n  return R[0] + addR\n\ndef pop_left():\n  return -heapq.heappop(L) + addL\n\ndef pop_right():\n  return heapq.heappop(R) + addR\n\ndef add_xma(a):\n  global miny\n  if len(L) != 0:\n    miny += max(0, top_left() - a)\n  push_left(a)\n  push_right(pop_left())\n\ndef add_amx(a):\n  global miny\n  if len(R) != 0:\n    miny += max(0, a - top_right())\n  push_right(a)\n  push_left(pop_right())\n\n\nit = map(int, sys.stdin.buffer.read().split())\nN = next(it)\nL.extend([0] * (N + 10))\nR.extend([0] * (N + 10))\n\nt = 0\nfor T, D, X in zip(it, it, it):\n  addL -= T - t\n  addR += T - t\n  if D == 0:\n    add_amx(X)\n  else:\n    add_xma(X)\n  t = T\n\nprint(miny)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "a3a71132315133bf20dd8dd3ec6d1272f3c1bd575c3df99da73c3c0f93b9c0a1"
+    }
+  ],
+  "status": "available"
+}

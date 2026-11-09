@@ -1,0 +1,38 @@
+{
+  "problem_id": "abc334_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc334/editorial/8984",
+      "text": "まずは問題を単純化するため、\n\\(L\\)\nと\n\\(R\\)\nから\n\\(A\\)\nを引き、クリスマスツリーは座標が\n\\(M\\)\nの倍数である各地点に立っているものとします。\n座標が\n\\(kM\\)\nである地点に立っているクリスマスツリーの番号を\n\\(k\\)\nとします。「座標が\n\\(L\\)\n未満\nの地点にあるクリスマスツリーのうち一番東にあるものの番号」および「座標が\n\\(R\\)\n以下\nの地点にあるクリスマスツリーのうち一番東にあるものの番号」をそれぞれ\n\\(l, r\\)\nとすると、答えは\n\\(r-l\\)\nになります。\nあとは、ある\n\\(x\\)\nに対して「座標が\n\\(x\\)\n以下の地点にあるクリスマスツリーのうち一番東にあるものの番号」が求められればよいですが、これは\n\\(\\lfloor \\frac{x}{M} \\rfloor\\)\nという簡単な式で表されます。\n\\(x\\)\nが負の数であるときの\n\\(\\lfloor \\frac{x}{M} \\rfloor\\)\nの求め方は使用するプログラミング言語の仕様によって異なるため注意してください（例えば C++ においては単に\nx / M\nとするだけでは誤りです）。また、\n\\(\\frac{x}{M}\\)\nを浮動小数点数を用いて実数として計算した上で floor をとる、という方針は、用いる浮動小数点数の精度次第では誤差が原因で誤った値を返してしまうので注意してください。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nll floor(ll x, ll m) {\n    ll r = (x % m + m) % m;\n    return (x - r) / m;\n}\n\nint main() {\n    ll a, m, l, r;\n    cin >> a >> m >> l >> r;\n    l -= a, r -= a;\n    cout << floor(r, m) - floor(l - 1, m) << endl;\n}",
+        "a, m, l, r = map(int, input().split())\nl -= a\nr -= a\nprint(r // m - (l - 1) // m)"
+      ],
+      "text_sha256": "2f05d0351ed1beec21d3937188ade319de16c5da2f5dbe65fe0df74018942e8c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc334/abc334_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc334/editorial/8996",
+      "text": "便宜上、座標\n\\(A + kM\\)\nに立っているクリスマスツリーを番号\n\\(k\\)\nのクリスマスツリーと呼びます。番号\n\\(k\\)\nのクリスマスツリーが高橋君と青木君の間に立っている条件は\n\\[L \\leq A + kM \\leq R\\]\nです。求めるものは、この条件を満たす整数\n\\(k\\)\nの個数です。\n条件を式変形すると\n\\[\\begin{aligned}\n&\\phantom{\\iff} L \\leq A + kM \\leq R \\\\\n&\\iff \\frac{L - A}{M} \\leq k \\leq \\frac{R - A}{M} \\\\\n&\\iff \\left\\lceil \\frac{L - A}{M} \\right\\rceil \\leq k \\leq \\left\\lfloor \\frac{R - A}{M} \\right\\rfloor\n\\end{aligned}\\]\nとなります。ここで、実数\n\\(x\\)\nに対し\n\\(\\lfloor x \\rfloor\\)\nは\n\\(x\\)\n以下で最大の整数を、\n\\(\\lceil x \\rceil\\)\nは\n\\(x\\)\n以上で最小の整数を意味します。\nよって、条件を満たす\n\\(k\\)\nの個数は\n\\(\\displaystyle \\max \\left(0, \\left\\lfloor \\frac{R - A}{M} \\right\\rfloor - \\left\\lceil \\frac{L - A}{M} \\right\\rceil + 1\\right)\\)\nです。（今回の場合は単に\n\\(\\displaystyle \\left\\lfloor \\frac{R - A}{M} \\right\\rfloor - \\left\\lceil \\frac{L - A}{M} \\right\\rceil + 1\\)\nとしても正しいです）\n実装においては、\n\\(\\displaystyle \\left\\lceil \\frac{a}{b} \\right\\rceil = \\left\\lfloor  \\frac{a + b - 1}{b} \\right\\rfloor \\: \\)\n（\n\\(a, b\\)\nは整数、\n\\(b > 0\\)\n）を利用すると簡潔に書けます。（公式解説にあるように、C++ 等での\n/\nの仕様等には注意してください）\n参考リンク：\n整数と実数と不等号と切り上げと切り捨て - noshi91のメモ",
+      "codes": [],
+      "text_sha256": "6a92b9574873a363af2b7c4b8202fbfe3b78214298fe05473315edf47d0b4c75",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc334/abc334_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc334/editorial/13437",
+      "text": "Pythonの\nrange\nオブジェクトと、二分探索を行う標準ライブラリである\nbisect\nを用いる解法を紹介します。(\nbisect\nモジュールを知っていることを前提とします。)\nまず、この問題を二分探索で解くことを考えます。\n\\(A+kM\\)\nと表されるような地点は無数にありますが、今回の問題では\n\\(L,R\\)\nが\n\\(-{10}^{18}\\)\nから\n\\({10}^{18}\\)\nであることから、この範囲の条件を満たす座標をすべて配列に昇順に記録します。\nこのとき答えは\n(この配列に含まれるR以下の個数) - (この配列に含まれるL未満の個数)\nと表すことができ、先ほど作った配列を\n\\(X\\)\nとすると\nbisect_right(X,R)-bisect_left(X,L)\nのように計算することができます。\n上記の解法で問題となるのが配列\n\\(X\\)\nの要素数が最大で\n\\(2 \\times {10}^{18} + 1 \\)\n個になってしまうことで、これを実際に\nlist\nなどで持つのは現実的ではありません。\nここで、Pythonの\nrange\nオブジェクトを用います。Pythonの\nrange\nオブジェクトは等差数列を管理するシーケンス型であり、ランダムアクセスが可能です。内部では開始地点と終了地点、ステップの値を持っているだけなので、大きな等差数列について大きなメモリ空間を使うことなく管理することができます。\nまた、Pythonの\nbisect\nモジュールは、\nlen()\nでのサイズの取得ととランダムアクセスが可能ならば二分探索を行うことができます。\nよって、配列\n\\(X\\)\nを\nrange\nオブジェクトとして管理して、\nbisect\nモジュールで二分探索をすることで、この問題を解くことができます。\nrange\nオブジェクトのサイズを大きくしすぎる(\n\\(2^{63}\\)\n以上)と\nlen()\nを呼んだときに\nOverflowError\nが発生してしまいREとなってしまう点に注意してください。\n実装例(Python)",
+      "codes": [
+        "from bisect import bisect_left,bisect_right\nA,M,L,R = map(int,input().split())\nX = range(A-(2*10**18)*M,10**18+1,M)\nprint(bisect_right(X,R) - bisect_left(X,L))"
+      ],
+      "text_sha256": "7bd3f6e675cdb35cd2e990142e83e6afd85ef45e5ee4f6425853a6489bc61dfd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc334/abc334_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc162_d",
+  "editorials": [
+    {
+      "text": "D: RGB Triplets\n1 つ目の条件を満たす組の数は、S に含まれるR, G, B の数をそれぞれr, g, b としたときrgb\nです。\nこのうち2 つ目の条件を満たさない組がいくつあるかを考えます。j −i = k −j を満たすような\n組(i, j, k) の個数はO(N 2) です。よって、例えばi, j を固定するといった方法で、この全てを調\nべて、それが1 つ目の条件を満たしているかを確認すればいいです。このアルゴリズムの計算量は、\n後半の全探索がボトルネックになりO(N 2) です。\n",
+      "text_sha256": "684e2c1da4a548b000330960a0a0dd6c26094a28fa6574c7095eb4721ead8fea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc162/abc162_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

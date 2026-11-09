@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc221_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc221/editorial/2717",
+      "text": "\\(S\\)\nと\n\\(T\\)\nが一度も操作を行わない状態で一致しているか、および\n\\(i=1,2,\\ldots,(S\\)\nの長さ\n\\()-1\\)\nについて\n\\(S\\)\nの\n\\(i\\)\n文字目と\n\\(i+1\\)\n文字目を入れ替えた場合に\n\\(S\\)\nと\n\\(T\\)\nが一致するかをそれぞれ判定すればよいです。\n計算量は\n\\(N=(S\\)\nの長さ\n\\()\\)\nとして\n\\(O(N^2)\\)\nとなります。\n実装例 (Python)\nまた、工夫をすると計算量を\n\\(O(N)\\)\nまで落とすことも可能です。\n実装例 (C++)",
+      "codes": [
+        "S = list(input())\nT = list(input())\nans = \"No\"\nif S == T:\n    ans = \"Yes\"\nfor i in range(len(S)-1):\n    S[i],S[i+1] = S[i+1],S[i]\n    if S == T:\n        ans = \"Yes\"\n    S[i],S[i+1] = S[i+1],S[i]\nprint(ans)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    string S,T; cin >> S >> T;\n    string ans = \"No\";\n    if(S == T) ans = \"Yes\";\n    for(int i=0; i<S.size(); i++){\n        if(S[i] != T[i]){\n            if(0 < i){\n                swap(S[i-1],S[i]);\n                if(S == T) ans = \"Yes\";\n                swap(S[i-1],S[i]);\n            }\n            if(i+1 < S.size()){\n                swap(S[i],S[i+1]);\n                if(S == T) ans = \"Yes\";\n                swap(S[i],S[i+1]);\n            }\n            break;\n        }\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "60b20f8ec110699ed2947994e954d2a854f5ef896657ca7f654b3785dce765c1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc221/abc221_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

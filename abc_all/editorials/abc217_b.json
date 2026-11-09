@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc217_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc217/editorial/2583",
+      "text": "一番シンプルな方針としては候補の\n\\(4\\)\nつの文字列と\n入力で与えられたかの\n\\(4\\)\nつのフラグを持っておき、\n登場しなかった1つを出力すればよいです。\n文字列の比較の仕方としては、例えばc++であれば、\nstring型で持って文字列として比較\nchar[] 型等の配列に収めて 1文字ずつ比較\n等の方法がありますし、今回は\n\\(2\\)\n文字目だけが異なり、\nまた、\nABC\n,\nARC\n,\nAGC\n,\nAHC\n以外の入力は与えられない事から\n\\(2\\)\n文字目だけを比較しても良いです。\nよって for 文と if文を使って書く事が出来ます。\nC++による実装例:\nPythonによる実装例:\nちなみに、今回の\n\\(2\\)\n文字目だけ異なる事を利用した少しだけトリッキーな書き方として以下のようなものもあります。\n言語によっては使えない事もあるので注意してください。\nC++による別解:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tstring cand[4] = { \"ABC\", \"AGC\", \"AHC\", \"ARC\" };\n\tbool used[4] = {};\n\tstring str;\n\tfor (int i = 0; i < 3; i++) {\n\t\tcin >> str;\n\t\tfor (int j = 0; j < 4; j++) {\n\t\t\tif (cand[j] == str)used[j] = true;\n\t\t}\n\t}\n\tfor (int i = 0; i < 4; i++) {\n\t\tif (!used[i])cout << cand[i] << endl;\n\t}\n\treturn 0;\n}",
+        "cand=[\"ABC\",\"ARC\",\"AGC\",\"AHC\"]\nused=[True for i in range(4) ]\n\nfor i in range(3):\n    str=input()\n    for j in range(4):\n        if(str==cand[j]):\n            used[j]=False\n\nfor i in range(4):\n    if(used[i]):\n        print(cand[i])",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint k = 0 + 'B' + 'G' + 'H' + 'R';\n\tstring str;\n\tfor (int i = 0; i < 3; i++) {\n\t\tcin >> str;\n\t\tk -= str[1];\n\t}\n\tcout << \"A\" << (char)k << \"C\" << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "8e4f3496a6d26bcb2f7deb08786dfd19294ff128022821075a33fa793681b167",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc217/abc217_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc468_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc468/editorial/23476",
+      "text": "整数 \\(n\\) に対し \\(\\displaystyle H_n = \\sum_{k=1}^n\\frac1k\\) とします。 解法 \\(1\\) \\(n=0,1,\\ldots,N\\) に対し \\(\\displaystyle B_n=\\sum_{k=1}^n A_k\\) （累積和）とすると、 \\(\\displaystyle f(l,r)=\\frac{B_r-B_{l-1}}{r-l+1}\\) が成り立ちます。 したがって、求める値は以下のように式変形できます： \\[\n\\begin{aligned}\n&\\phantom{=}\\sum_{1\\le l\\le r\\le N} f(l,r)\\\\\n&=\\sum_{1\\le l\\le r\\le N}\\frac{B_r-B_{l-1}}{r-l+1}\\\\\n&=\\sum_{r=1}^N\\sum_{l=1}^r\\frac{B_r}{r-l+1}-\\sum_{l=1}^N\\sum_{r=l}^N\\frac{B_{l-1}}{r-l+1}\\\\\n&=\\sum_{r=1}^N H_rB_r - \\sum_{l=1}^N H_{N-l+1}B_{l-1}\\\\\n&=\\sum_{i=0}^N (H_i-H_{N-i})B_i\n\\end{aligned}\n\\] したがって、 \\(H_i\\) と \\(B_i\\) を事前に計算することで答えを計算することができます。 実装例(Python3) 解法 \\(2\\) 求める値は以下のように式変形できます： \\[\n\\begin{aligned}\n&\\phantom{=}\\sum_{1\\le l\\le r\\le N} f(l,r)\\\\\n&=\\sum_{1\\le l\\le r\\le N}\\sum_{i=l}^r\\frac{A_i}{r-l+1}\\\\\n&=\\sum_{1\\le l\\le i\\le r \\le N}\\frac{A_i}{r-l+1}\\\\\n&=\\sum_{i=1}^{N}A_i\\sum_{l=1}^i \\sum_{r=i}^{N}\\frac1{r-l+1}\\\\\n&=\\sum_{i=1}^{N}A_i\\sum_{l=1}^i (H_{N-l+1}-H_{i-l})\\\\\n&=\\sum_{i=1}^{N}A_i\\sum_{j=0}^{i-1} (H_{N-j}-H_{j})\n\\end{aligned}\n\\] \\(\\displaystyle \\sum_{j=0}^{i-1} (H_{N-j}-H_{j})\\) は \\(i\\) の昇順に計算できるので、答えもこの式から計算することができます。 実装例(Python3)",
+      "codes": [
+        "n = int(input())\na = list(map(int, input().split()))\nMOD = 998244353\nb = [0] * (n + 1)\nfor i in range(n):\n    b[i + 1] = (b[i] + a[i]) % MOD\nh = [0] * (n + 1)\nfor i in range(1, n + 1):\n    h[i] = (h[i - 1] + pow(i, MOD - 2, MOD)) % MOD\nans = 0\nfor i in range(n + 1):\n    ans += b[i] * (h[i] - h[n - i])\n    ans %= MOD\nprint(ans)\n",
+        "n = int(input())\na = list(map(int, input().split()))\nMOD = 998244353\nh = [0] * (n + 1)\nfor i in range(1, n + 1):\n    h[i] = (h[i - 1] + pow(i, MOD - 2, MOD)) % MOD\nans = 0\nres = 0\nfor i in range(n):\n    res += h[n - i] - h[i]\n    res %= MOD\n    ans += a[i] * res\n    ans %= MOD\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "eb291fd077d05a521a76a2e524f34e9af0085f2b5e2d7027b11c3f6f109729c7"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc436_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc436/editorial/14833",
+      "text": "本問題では、\n\\(N\\)\nが最大で\n\\(10^9\\)\nと大きいため、マス目の状態を単純に二次元配列として管理することはできません。したがって、今までに置いたブロックの位置をより効率的な方法で管理し、新たに置きたいブロックが既に存在するブロックと重なるかどうかを高速に判定できる必要があります。\n以下、マス\n\\((r,c)\\)\nを左上とする\n\\(2\\times 2\\)\nの領域を占めるブロックのことを、ブロック\n\\((r,c)\\)\nと呼びます。\nまず、ブロック同士の重なり判定に関して、以下の事実が成立します。\nブロック\n\\((r_1,c_1)\\)\nとブロック\n\\((r_2,c_2)\\)\nは、\n\\(|r_1-r_2|\\leq1\\)\nかつ\n\\(|c_1-c_2|\\leq1\\)\nである場合に、またその場合に限り重なる。\n特に、あるブロック\n\\((r,c)\\)\nが既に置かれている他のブロックと重なるかどうか判定したい場合、\n\\(r-1\\leq r' \\leq r+1, c-1\\leq c' \\leq c+1\\)\nを満たす\n\\(9\\)\n通りの組\n\\((r',c')\\)\nに対して、既に置かれているブロックの中にブロック\n\\((r',c')\\)\nがあるかどうか確認すればよいです。\n以上のことをふまえると、既に置いたブロックの位置を、何らかの「集合に対する要素の追加・存在判定を高速に行えるデータ構造」を用いて管理すればよいことがわかります。具体的には\nハッシュセット\nや\n平衡二分探索木\nなどのデータ構造が該当しますが、これらを自分で実装する必要は（ほとんどのプログラミング言語においては）なく、例えば C++ では\nstd::set\nや\nstd::unordered_set\n、Python では\nset\nが標準で組み込まれているため、それらを用いることで簡単に実装できます。\n実装の詳細は下記の実装例を参考にしてください。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, m;\n    cin >> n >> m;\n    set<pair<int, int>> st;\n    int ans = 0;\n    for (int i = 0; i < m; i++) {\n        int r, c;\n        cin >> r >> c;\n        bool ok = true;\n        for (int x = r - 1; x <= r + 1; x++) {\n            for (int y = c - 1; y <= c + 1; y++) {\n                if (st.contains({x, y})) ok = false;\n            }\n        }\n        if (ok) {\n            st.insert({r, c});\n            ++ans;\n        }\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "c8ad80801c1c4cbf394960ee3f7c79948841ffdf03724d0ba4bafd54669949f5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc436/abc436_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

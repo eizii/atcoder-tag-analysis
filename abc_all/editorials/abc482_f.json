@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc482_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc482/editorial/28017",
+      "text": "まず、 \\(N^t\\) の約数であることは \\(t\\) 個の \\(N\\) の約数の積で表せることと同値であることに注目します。すると、次の解法が浮かびます。 次のグラフを考える。 \\(0, 1, \\dots, M-1\\) を頂点とする。 \\(N\\) の各約数 \\(d\\) に対して \\(r \\to rd \\bmod M\\) に辺を張る。 このグラフ上で頂点 \\(1 \\bmod M\\) から BFS をして得られる頂点 \\(1 \\bmod M\\) からの距離が答えとなる。 しかしこの解法は \\(N\\) の約数の個数を \\(d(N)\\) としたとき \\(\\mathrm{O}(M d(N))\\) の計算量が掛かり非常に低速です。 そこで約数を掛ける操作を素因数ごとに掛ける操作に分解します。 \\(N\\) が素数 \\(p_0, p_1, \\dots, p_{D-1}\\) を用いて \\[N = \\prod_{i=0}^{D-1} p_i^{a_i}\\] と素因数分解できたとします。このとき \\(N\\) の約数は \\[p_0^{e_0} p_1^{e_1} \\cdots p_{D-1}^{e_{D-1}}, 0 \\leq e_i \\leq a_i\\] と表せます。言い換えると、約数を \\(1\\) 個掛ける操作は、次の \\(D\\) 段階に分けられます。 \\(e_0 \\in \\lbrace 0, \\dots, a_0 \\rbrace\\) を選び \\(p_0^{e_0}\\) を掛ける。 \\(e_1 \\in \\lbrace 0, \\dots, a_1 \\rbrace\\) を選び \\(p_0^{e_1}\\) を掛ける。 \\(\\vdots\\) \\(e_{D-1}\\in \\lbrace 0, \\dots, a_{D-1} \\rbrace\\) を選び \\(p_{D-1}^{e_{D-1}}\\) を掛ける。 この \\(D\\) 段階を \\(1\\) 周として考えて、最後の素因数を処理したら再び最初の素因数に戻ることにします。 この仕組みを用いましょう。グラフの頂点を \\((j,r)\\) で表します。これは、 現在の積を \\(M\\) で割った余りが \\(r\\) 次に処理する素因数が \\(p_j\\) という状態です。そして、各 \\(e=0,1,\\dots,a_j\\) に対して、 \\[(j, r) \\to ((j+1) \\bmod d, r p_j^e \\bmod M)\\] という辺を張ります。辺の長さについては次のように決めます。 \\(j=0\\) のときは、新しい \\(D\\) 段階の 1 周が始まるので辺重みを \\(1\\) とする。 \\(j \\neq 0\\) のときは辺重みを \\(0\\) とする。 このグラフ上で初期状態 \\((0, 1 \\bmod M)\\) から 01-BFS を行い、各 \\(r\\) に対して \\(\\min_j \\mathrm{dist}(j, r)\\) を求めれば答えを得られます。 計算量は \\(N\\) の重複付き素因数の個数が \\(\\mathrm{O}(\\log N)\\) で抑えられることから、素因数分解の計算量が \\(\\mathrm{O}(\\sqrt{N})\\) なのと合わせて \\(\\mathrm{O}(\\sqrt{N} + M \\log N)\\) で問題を解くことができて、これは十分高速です。 実装例 (PyPy または Codon) 細かい解法の差異によっては、同じ計算量であっても PyPy では定数倍が非常に重く通らないことがあるようです。高速な処理系である Codon の使用を推奨します。",
+      "codes": [
+        "import collections\nimport sys\n\nN, M = [int(x) for x in input().split()]\nif N == 1:\n    for m in range(M):\n        print(1 if m == 1 % M else -1)\n    sys.exit(0)\n\nf = []\nfor i in range(2, 10**8):\n    if i * i > N:\n        break\n    c = 0\n    while N % i == 0:\n        N //= i\n        c += 1\n    if c > 0:\n        f.append((i % M, c))\nif N != 1:\n    f.append((N % M, 1))\n    N = 1\n\ninf = 10**18\nd = [[inf] * M for i in range(len(f))]\nQ = collections.deque()\n\nd[0][1 % M] = 0\nQ.appendleft((0, 1 % M, 0))\nwhile len(Q):\n    i, j, dij = Q.popleft()\n    if d[i][j] != dij:\n        continue\n    ni = (i + 1) % len(f)\n    nd = dij + (1 if i == 0 else 0)\n    nj = j\n    for e in range(f[i][1] + 1):\n        if nd < d[ni][nj]:\n            d[ni][nj] = nd\n            if i == 0:\n                Q.append((ni, nj, nd))\n            else:\n                Q.appendleft((ni, nj, nd))\n        nj = nj * f[i][0] % M\n\nans = [inf] * M\nfor i in range(len(f)):\n    for j in range(M):\n        ans[j] = min(ans[j], max(1, d[i][j]))\nfor j in range(M):\n    if ans[j] == inf:\n        ans[j] = -1\nprint(\"\\n\".join(map(str, ans)))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "50cd0adffb69391e6207004ccaa90b1f600228759bb80fef8d6f9924091f8fd4"
+    }
+  ],
+  "status": "available"
+}

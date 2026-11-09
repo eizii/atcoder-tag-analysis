@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc417_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc417/editorial/13549",
+      "text": "\\(\\lbrack L,R\\rbrack\\) で \\(L\\) 以上 \\(R\\) 以下の整数全体を表すこととします。\n\\(\\displaystyle\\omega=(\\omega _ 1,\\omega _ 2,\\ldots,\\omega _ M)\\in\\Omega=\\prod _ {i=1} ^ M\\lbrack L _ i,R _ i\\rbrack\\) を \\(i\\) 回目 \\((1\\le i\\le M)\\) の操作が \\(\\omega _ i\\) である一連の操作に対応させます（どの \\(\\omega\\) も等しい確率で起こります）。\n標本空間を \\(\\Omega\\) とする確率変数 \\(X _ {i,j}\\ (0\\le i\\le M,1\\le j\\le N)\\) を \\(i\\) 回目の操作の直後に \\(j\\) 番目の皿に入っている石の個数として定めます（\\(i=0\\) のとき、\\(X _ {i,j}=A _ j\\) とします）。\n求めたいものは操作が終わったあと各皿に入っている石の個数の期待値 \\(E\\lbrack X _ {M,j}\\rbrack\\ (1\\le j\\le N)\\) です。\n\\(1\\le i\\le M\\) に対して、\\(X _ {i,j}\\) は\n\\(j\\notin\\lbrack L _ i,R _i\\rbrack\\) のとき \\(X _ {i,j}=X _ {i-1,j}\\)\n\\(j\\in\\lbrack L _ i,R _ i\\rbrack\\) かつ \\(\\omega _ i\\ne j\\) のとき \\(X _ {i,j}=0\\)\n\\(j\\in\\lbrack L _ i,R _ i\\rbrack\\) かつ \\(\\omega _ i=j\\) のとき \\(\\displaystyle X _ {i,j}=\\sum _ {k=L _ i} ^ {R _ i}X _ {i - 1,k}\\)\nです。\nここから \\(X _ {i.j}\\) の期待値について考えると、\n\\(j\\notin\\lbrack L _ i,R _i\\rbrack\\) のとき \\(E\\lbrack X _ {i,j}\\rbrack=E\\lbrack X _ {i-1,j}\\rbrack\\)\n\\(j\\in\\lbrack L _ i,R _i\\rbrack\\) のとき \\(\\displaystyle E\\lbrack X _ {i,j}\\rbrack=\\dfrac1{R _ i-L _ i+1}E\\left\\lbrack\\sum _ {k=L _ i} ^ {R _ i}X _ {i-1,k}\\right\\rbrack=\\dfrac1{R _ i-L _ i+1}\\sum _ {k=L _ i} ^ {R _ i}E\\lbrack X _ {i-1,k}\\rbrack\\)（期待値の線形性より）\nとなります。\nよって、\\(E\\lbrack X _ {i,j}\\rbrack\\ (1\\le j\\le N)\\) を区間和・区間代入を処理する遅延セグメント木で管理し、インラインで更新を行うことでこの問題を解くことができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <optional>\n#include <atcoder/lazysegtree>\n#include <atcoder/modint>\n\nint main() {\n    using namespace std;\n    using modint = atcoder::static_modint<998244353>;\n    // (区間の長さ, 区間の総和) を管理する遅延セグメント木\n    using segtree = atcoder::lazy_segtree<\n        pair<unsigned, modint>,\n        [](const auto& lhs, const auto& rhs){return make_pair(lhs.first + rhs.first, lhs.second + rhs.second);},\n        []{return pair<unsigned, modint>{};},\n        optional<modint>,\n        [](const auto& a, const auto& b){return a ? make_pair(b.first, b.first * *a) : b;},\n        [](const auto& a, const auto& b){return a ? a : b;},\n        []{return nullopt;}\n    >;\n\n    unsigned N, M;\n    cin >> N >> M;\n    segtree expected_value(N);\n    for (unsigned i{}, A; i < N; ++i) {\n        cin >> A;\n        expected_value.set(i, {1, A});\n    }\n    for (unsigned i{}, L, R; i < M; ++i) {\n        cin >> L >> R;\n        --L; // 0-indexed 半開区間にする\n        const auto sum{expected_value.prod(L, R).second}; // 区間の総和を求めて\n        expected_value.apply(L, R, sum / (R - L)); // 全体に代入\n    }\n\n    for (unsigned i{}; i < N; ++i)\n        cout << expected_value.get(i).second.val() << \" \";\n    cout << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "2b2414d60fd38133c40a359390fa27aae5738416e061be036462ddfe1429c3ef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc417/abc417_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc417/editorial/13582",
+      "text": "石が1個のとき「最終的に各皿に石がある確率を求めよ」という問題を考えます。このとき、問題の操作は明らかに区間平均となります。\n石が複数個あるとき、期待値の線形性から、「皿に石が何個あるか」は「皿に各石がある確率の期待値の総和」となります。\n区間平均操作は線形なので先に総和を取るとしてよく、最初の操作の前に和をとることで、結局\n\\(A\\)\nに対して区間平均操作を行うことと等しくなります。\n同じことを数式で\n\\(P_{x,i,j}\\)\nを、最初皿\n\\(x\\)\nにのみ石が\n\\(1\\)\n個ある状態から始めて\n\\(i\\)\n回目の操作後に皿\n\\(j\\)\nにある確率とします。このとき\n\\(P_{x,i,j}=\\frac{1}{R_i-L_i+1}\\sum_{k\\in[L_i,R_i]}P_{x,i-1,k}\\)\nとなります。\n\\(E_{i,j}\\)\nを、問題のとおりに皿に石がある状態から始めて\n\\(i\\)\n回目の操作後に皿\n\\(j\\)\nにある石の個数の期待値とします。期待値の線形性と\n\\(P\\)\nの漸化式から\n\\(E_{i,j}\\\\\n=\\sum_{x}A_xP_{x,i,j}\\\\\n=\\sum_{x}A_x\\frac{1}{R_i-L_i+1}\\sum_{k\\in[L_i,R_i]}P_{x,i-1,k}\\\\\n=\\frac{1}{R_i-L_i+1}\\sum_{k\\in[L_i,R_i]}\\sum_{x}A_xP_{x,i-1,k}\\\\\n=\\frac{1}{R_i-L_i+1}\\sum_{k\\in[L_i,R_i]}E_{i-1,k}\\)\nとなります。また、定義から\n\\(E_{0,j}=A_j\\)\nです。",
+      "codes": [],
+      "text_sha256": "d2ded2dbbe2b06b68caeb80157529d33bb99dda0a87139fe0a65c2f6ffdfd8e2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc417/abc417_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

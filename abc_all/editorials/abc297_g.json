@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc297_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc297/editorial/6172",
+      "text": "本解説では\ngrundy 数\nの理解を前提とします。知らない方は、以前のABC でも取り扱われていますのでそちらを参照ください。\n(類題 :\nABC255-G\n)\nゲームの問題では、実験をしてみるのが有効な場合が多いです。\nこの問題でも実験をしてみると、\n\\(x\\)\nの grundy 数\n\\(f(x)\\)\nが以下であることが予想できます。\n\\[\\lfloor \\frac{x\\bmod {(L+R)}}{L}\\big\\rfloor\\]\nこの予想が正しいとすれば、本問題は\n\\(\\mathrm{O}(N)\\)\nで解けます。（実装例は後述）\n以下ではこの予想が正しいことを証明します。\n(1)\n\\(x < L+R\\)\nのとき\n\\(0\\leq x <L\\)\nでは操作ができないので\n\\(f(x)=0\\)\nです。\n\\(L\\leq x <2L\\)\nでは\n\\(x < L+R\\)\nより\n\\(x-R < L\\)\nなので grundy 数が\n\\(0\\)\nの局面に遷移できます。また\n\\( x - L < L\\)\nより grundy 数が\n\\(1\\)\nの局面には遷移できません。よって\n\\(f(x)=1\\)\nです。\n\\(2L\\leq x <3L\\)\nでは\n\\(x < L+R\\)\nより\n\\(x-R < L\\)\nなので grundy 数が\n\\(0\\)\nの局面に遷移できます。さらに\n\\(2L \\leq x < 3L\\)\nより\n\\(L\\leq x - L < 2L\\)\nより grundy 数が\n\\(1\\)\nの局面にも遷移できます。また\n\\( x -L<2L\\)\nより grundy 数が\n\\(2\\)\nの局面には遷移できません。よって\n\\(f(x)=2\\)\nです。\n以上の議論を同様に繰り返すことで、\n\\(x<L+R\\)\nでは\n\\(f(x)=\\lfloor \\frac{x}{L}\\big\\rfloor\\)\nが成り立つことが示せました。\n(2)\n\\( L+R\\leq x < 2(L+R)\\)\nのとき\n\\(L+R\\leq x < L+R+L\\)\nのとき、\n\\(L\\leq x-R<2L\\)\n、\n\\(R\\leq x-L<L+R\\)\nより grundy 数が\n\\(0\\)\nの局面に遷移できないことが分かります。よって\n\\(f(x)= 0 \\)\nです。\n\\(L+R+L\\leq x < L+R+2L\\)\nのときも同様の議論により grundy 数が\n\\(0\\)\nの局面には遷移できるが\n\\(1\\)\nの局面には遷移できないことがわかります。よって\n\\(f(x)=1\\)\nです。\n同様の議論が\n\\( L+R\\leq x < 2(L+R)\\)\nを満たす全ての\n\\(x\\)\nについて成り立ちます。よって\n\\( L+R\\leq x < 2(L+R)\\)\nでは\n\\(f(x)=\\lfloor \\frac{x\\bmod {(L+R)}}{L}\\big\\rfloor\\)\nが成り立ちます。\n(3) 一般の場合\n\\(2(L+R)\\leq x\\)\nの場合、grundy 数\n\\(f(x)\\)\nは今回の場合\n\\(f(x-R),f(x-R+1),\\ldots,f(x-L)\\)\nにしか依存しないことを用いると、(2) より一般の場合について\n\\(f(x)=\\lfloor \\frac{x\\bmod {(L+R)}}{L}\\big\\rfloor\\)\nが成立していることが言えます。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint f(int x, int l, int r) {\n    return (x % (l + r)) / l;\n}\n\nbool solve(vector<int>& v, int l, int r) {\n    int fold = 0;\n    for(const auto u : v) fold ^= f(u, l, r);\n    return fold != 0;\n}\n\nint main() {\n    int n, l, r;\n    cin >> n >> l >> r;\n    vector<int> a(n);\n    for(auto& v : a) cin >> v;\n    cout << (solve(a, l, r) ? \"First\\n\" : \"Second\\n\");\n}"
+      ],
+      "text_sha256": "460e712b61467dcb27ffe18c02e41d7d3f9f26f7fad8b140360c24c9f2ba981f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc297/abc297_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

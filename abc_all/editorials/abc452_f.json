@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc452_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc452/editorial/18361",
+      "text": "\\(f(k)\\) を \\((P _ l,P _ {l+1},\\ldots,P _ r)\\) の転倒数が \\(k\\) 以下であるような \\((l,r)\\) の個数と定めます。\n求めるものは \\(f(k)-f(k-1)\\) なので、\\(P\\) および \\(k\\) が与えられたときに \\(f\\) を十分高速に求められればよいです。\n\\((P _ l,P _ {l+1},\\ldots,P _ r)\\) の転倒数が \\(X\\) であるとき、\\((P _ {l+1},P _ {l+2},\\ldots,P _ r)\\) の転倒数は \\(X-\\bigl(P _ l\\gt P _ i\\) なる \\(i=l+1,l+2\\ldots,r\\) の個数\\(\\bigr)\\) になります。\nまた、\\((P _ l,P _ {l+1},\\ldots,P _ r)\\) の転倒数が \\(X\\) であるとき、\\((P _ l,P _ {l+1},\\ldots,P _ {r-1})\\) の転倒数は \\(X-\\bigl(P _ r\\lt P _ i\\) なる \\(i=l,l+1\\ldots,r-1\\) の個数\\(\\bigr)\\) になります。\nよって、\\((P _ l,P _ {l+1},\\ldots,P _ r)\\) の転倒数が \\(k\\) 以下であるとき、\\((P _ {l+1},P _ {l+2},\\ldots,P _ r)\\) や \\((P _ l,P _ {l+1},\\ldots,P _ {r-1})\\) の転倒数も \\(k\\) 以下になります。\nこのことから、上の関係を使って計算することで尺取り法を用いて各 \\(l\\) に対する条件を満たす \\(r\\) の最大値を高速に求めることができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <ranges>\n#include <atcoder/fenwicktree>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    unsigned long K;\n    cin >> N >> K;\n    vector<unsigned> P(N);\n    for (auto&& p : P) {\n        cin >> p;\n        --p;\n    }\n\n    // f(K) を求める関数\n    const auto solve{[N, &P](unsigned long K) {\n        atcoder::fenwick_tree<unsigned> bit(N); // 一点更新区間和を求める\n        unsigned long now{}; // 現在の転倒数\n        unsigned long ans{}; // 条件を満たす区間の総数\n        for (unsigned l{}, r{}; l < N; ++l) { // 尺取り法を行う\n            if (r < l) r = l; // 空なら i と同時に進めておく\n            while (r < N && now + bit.sum(P[r], N) <= K) { // 追加しても転倒数が K を越えないなら\n                now += bit.sum(P[r], N); // r を追加する\n                bit.add(P[r], 1);\n                ++r;\n            }\n            ans += r - l; // 左端が l である条件を満たす区間は r - l 個\n            now -= bit.sum(0, P[l]); // l を外す\n            bit.add(P[l], -1);\n        }\n        return ans;\n    }};\n\n    cout << solve(K) - (K ? solve(K - 1) : 0) << endl; // f(K) - f(K - 1) が答え\n    return 0;\n}"
+      ],
+      "text_sha256": "40731de4a050f380a81e3eadd5b2bf0dd5f549a67d5d22e39cb5396ee858dea9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc452/abc452_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

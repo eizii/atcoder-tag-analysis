@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc293_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc293/editorial/5954",
+      "text": "\\(N\\)\n本のロープをグラフの\n\\(N\\)\n個の頂点とし、ロープ\n\\(a\\)\nと\n\\(b\\)\nを結ぶことを 頂点\n\\(a\\)\nと頂点\n\\(b\\)\nを結ぶ辺に対応させると、元の問題は次のようなグラフ上の問題に言い換えることができます。\n\\(N\\)\n頂点\n\\(M\\)\n辺のグラフがあり、\n\\(i\\)\n番目の辺は頂点\n\\(A_i\\)\nと頂点\n\\(C_i\\)\nを結んでいる。また、各頂点の次数は\n\\(2\\)\n以下である。グラフの各連結成分はサイクルまたはパスとなるが、これらの個数をそれぞれ求めよ。\n連結成分がサイクルをなすことは連結成分内のすべての頂点の次数が\n\\(2\\)\nであることと同値であるため、あらかじめ各頂点の次数を記録しておき、各連結成分に対してその連結成分がサイクルとなるかを BFS などを用いて判定することで\n\\(O(N+M)\\)\nでこの問題を解くことができました。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tvector<vector<int>> graph(n, vector<int>());\n\tvector<int> deg(n);\n\tfor (int i = 0; i < m; i++) {\n\t\tint a, c;\n\t\tchar b, d;\n\t\tcin >> a >> b >> c >> d;\n\t\ta--; c--;\n\t\tgraph[a].push_back(c);\n\t\tgraph[c].push_back(a);\n\t\tdeg[a]++; deg[c]++;\n\t}\n\tint x = 0, y = 0;\n\tvector<bool> used(n);\n\tfor (int i = 0; i < n; i++) {\n\t\tif (!used[i]) {\n\t\t\tqueue<int> que;\n\t\t\tused[i] = true;\n\t\t\tque.push(i);\n\t\t\tbool f = true;\n\t\t\twhile (!que.empty()) {\n\t\t\t\tint q = que.front(); que.pop();\n\t\t\t\tif (deg[q] != 2) f = false;\n\t\t\t\tfor (int v : graph[q]) {\n\t\t\t\t\tif (!used[v]) {\n\t\t\t\t\t\tque.push(v);\n\t\t\t\t\t\tused[v] = true;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t\tif (f) x++;\n\t\t\telse y++;\n\t\t}\n\t}\n\tcout << x << ' ' << y << '\\n';\n}"
+      ],
+      "text_sha256": "bd630ea3e834f515317cb1e2c6a02c2254c174fa085d0e164668879fe4fd6be9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc293/abc293_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

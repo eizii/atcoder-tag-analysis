@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc380_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc380/editorial/11360",
+      "text": "解法1: 文字列を辿って解析する\n最初、文字列は\n|\nから始まります。\nこの最初の文字を無視したうえで、以下のように文字列を辿るとこの問題に正解できます。\n変数\n\\(c=0\\)\nを用意する。\n-\nが来たら変数\n\\(c\\)\nに\n\\(1\\)\n加算する。\n|\nが来たら\n\\(A_i=\\)\n(現在の)\n\\(c\\)\nであることがわかるので、それを記録した上で\n\\(c=0\\)\nと初期化する。\n実装例 (C++):\n解法2:\n|\nの位置から解析する\n|\nがある位置を\n\\(X_1,X_2,\\dots\\)\n文字目としましょう。このとき、\n\\(A_i = X_{i+1}-X_{i}-1\\)\nです。\n例えば\n\\(S=\\)\n|-|-|-|------|\nのとき\n\\(X=(1,3,5,7,14)\\)\nで、\n\\(S\\)\nは確かに\n\\(A=(1,1,1,6)\\)\nから生成された文字列です。\nこれより、\n\\(X\\)\nが求まれば\n\\(A\\)\nも容易に求まり、\n\\(X\\)\nは for ループにより求めることができます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  int c=0;\n  vector<int> a;\n  for(int i=1;i<s.size();i++){\n    if(s[i]=='-'){\n      c++;\n    }\n    else{\n      a.push_back(c);\n      c=0;\n    }\n  }\n  for(int i=0;i<a.size();i++){\n    if(i){cout << \" \";}\n    cout << a[i];\n  }cout << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  vector<int> x;\n  for(int i=0;i<s.size();i++){\n    if(s[i]=='|'){x.push_back(i);}\n  }\n  for(int i=1;i<x.size();i++){\n    if(i>1){cout << \" \";}\n    cout << x[i]-x[i-1]-1;\n  }cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "07b99acbb0b84ad5b8ea5a4959e73dbb68eeb44f189725b4e8b03610d17a3f5a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc380/abc380_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc338_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc338/editorial/9171",
+      "text": "\\(v_i=\\)\n（橋\n\\(i\\)\nを封鎖したときのツアーの長さの最小値）とおいて、この\n\\(v_i\\)\nを全ての\n\\(i=1,2,\\dots,M\\)\nについて求めることを考えます。\nツアーは、島\n\\(X_1\\rightarrow X_2,X_2\\rightarrow X_3,\\dots,X_{M-1}\\rightarrow X_M\\)\nという\n\\(M-1\\)\n個の移動に分解されます。これらの移動は互いに独立なので、順番に\n\\(1\\)\nつずつ見ていって、それぞれの移動の寄与分を各\n\\(v_i\\)\nに足していけばよいです。\n今、ある島\n\\(a\\)\nからある島\n\\(b\\)\nへの移動について考えているとします。島\n\\(a\\)\nから島\n\\(b\\)\nまで（同じ橋を複数回渡ることなく）移動する方法は、\n\\(a\\rightarrow a+1\\rightarrow a+2\\rightarrow \\dots \\rightarrow b\\)\nと行く方法と\n\\(a\\rightarrow a-1\\rightarrow a-2\\rightarrow \\dots \\rightarrow b\\)\nと行く方法の\n\\(2\\)\n通りがあります。前者で行ったときに通る橋の集合を\n\\(S\\)\n、後者で行ったときに通る橋の集合を\n\\(T\\)\nとおきます。ここで、\n\\(S\\)\nと\n\\(T\\)\nは共通する要素を持たず、和集合は橋全体の集合と一致します。\n封鎖する橋がどちらの集合に属するかによって、以下の\n\\(2\\)\nパターンが考えられます。\n封鎖する橋が\n\\(S\\)\nに属する場合: 橋集合\n\\(T\\)\nを使って移動するので、移動の長さは\n\\(|T|\\)\nになる。（集合\n\\(X\\)\nの要素数を\n\\(|X|\\)\nと表記しています）\n封鎖する橋が\n\\(T\\)\nに属する場合: 橋集合\n\\(S\\)\nを使って移動するので、移動の長さは\n\\(|S|\\)\nになる。\nよって、各\n\\(i\\in S\\)\nに対して\n\\(v_i\\)\nに\n\\(|T|\\)\nを加算し、各\n\\(i\\in T\\)\nに対して\n\\(v_i\\)\nに\n\\(|S|\\)\nを加算すればよいです。前述の通りこの操作は全部で\n\\(M-1\\)\n回行う必要があるので、愚直にやっていては間に合いません。そこで、\n\\(v\\)\nの代わりにその差分配列\n\\(v'\\)\n（\n\\(v'_i=v_i-v_{i-1}\\)\nと定義される配列）を管理することを考えると、「\n\\(v_l,v_{l+1},\\dots,v_r\\)\nに\n\\(x\\)\nを加算する」という操作は「\n\\(v'_{l}\\)\nに\n\\(x\\)\nを加算し、\n\\(v'_{r+1}\\)\nに\n\\(-x\\)\nを加算する」という操作に置き換わるので、各操作\n\\(O(1)\\)\nで実行可能になります。\n\\(M-1\\)\n個の移動全てについてこれを行ったあと、\n\\(v'\\)\nの累積和を取ることで目的の配列\n\\(v\\)\nが得られます。この手法は俗に imos 法と呼ばれます。\n全体の計算量は\n\\(O(N)\\)\nです。実装の際は、加算する対象が\n\\(\\dots,v_{N-1},v_N,v_1,v_2,\\dots\\)\nのように\n\\(v_N,v_1\\)\nを跨いでいる場合の処理に気をつけてください。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<int> x(m);\n    for (int &i: x) {\n        cin >> i;\n        --i;\n    }\n    vector<ll> v(n + 1);\n    auto dist = [&](int from, int to) {\n        if (from <= to) return to - from;\n        else return to + n - from;\n    };\n    auto add = [&](int from, int to, int num) {\n        if (from <= to) {\n            v[from] += num;\n            v[to] -= num;\n        } else {\n            v[from] += num;\n            v[n] -= num;\n            v[0] += num;\n            v[to] -= num;\n        }\n    };\n    for (int i = 0; i < m - 1; i++) {\n        add(x[i], x[i + 1], dist(x[i + 1], x[i]));\n        add(x[i + 1], x[i], dist(x[i], x[i + 1]));\n    }\n    ll ans = 1LL << 60;\n    for (int i = 0; i < n; i++) {\n        v[i + 1] += v[i];\n        ans = min(ans, v[i]);\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "16e42d989bce2c9f5194a0c13875825a9b03482775aad60aa7cd2369dd718dac",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc338/abc338_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc338/editorial/9186",
+      "text": "以下では，島\n\\(i\\)\nと島\n\\(j\\)\nの距離を，\n\\(dist(i, j)\\)\nと，また\n\\(x\\)\n本目の橋のことを橋\n\\(x\\)\nと表記します．\n封鎖する橋を全探索し，それぞれの橋を封鎖した際のツアーの長さを，すべての橋に対して計算することを考えます．\nまず橋\n\\(N\\)\nを封鎖する際のツアーの長さを愚直に計算します．この場合は，\n\\(dist(i, i + 1) = |X_i - X_{i+1}|\\)\nなので，これは\n\\(\\sum_{1 \\leq i \\leq M - 1}|X_i - X_{i+1}|\\)\nと計算することで，\n\\(O(M)\\)\nでできます．\n次に，橋\n\\(N\\)\n以外を封鎖した場合のツアーの長さの計算ですが，封鎖する橋の番号を変えるとツアーの長さの計算がやや煩雑になります．この場合，封鎖する橋の番号は常に\n\\(N\\)\nとする代わりに，\nすべての島および橋の番号を同じ値だけ増やしたことにする\n（ただし，島\n\\(N+1, N+2, \\dots\\)\nは島\n\\(1, 2, \\dots\\)\nと考える）と，ツアーの長さの計算を行いやすくなります．\nすべての島および橋の番号を\n\\(1\\)\nずつ増やしながら，ツアーの長さの値を順番に計算していくことを考えます．先述の通り，封鎖している橋はすべて\n\\(N\\)\nであるとみなすため，ツアーの長さの計算方法は常に\n\\(\\sum_{1 \\leq i \\leq M - 1}|X_i - X_{i+1}|\\)\nであり，各\n\\(X_i\\)\nが変化していくことになります．\n\\(X_i\\)\nの値は\n基本的に\nすべて\n\\(1\\)\nずつ増えるため，\n\\(|X_i - X_{i + 1}|\\)\nの値は\n基本的には\n変わりません．しかし，\n\\(X_i\\)\nが元々\n\\(N\\)\nであった場合のみ，\n\\(X_i\\)\nの値が\n\\(1\\)\nに変化するため，この場合だけは\n\\(|X_i - X_{i+1}|\\)\nの値が変化します．したがって，ツアーの長さの計算を行う際は，この部分のみを更新していけばよいです（※）．\n問題は（※）の計算量ですが，すべての場合についてのツアーの長さの計算を行う過程で，各\n\\(i\\)\nに対して，\n\\(X_i\\)\nの値が\n\\(N\\)\nから\n\\(1\\)\nに変化するのは，\n\\(1\\)\n回のみです．したがって，（※）は全体で\n\\(O(M)\\)\nで実行できます．\nしたがって，この問題は\n\\(O(N+M)\\)\nで解くことができます．\n実装例（C++）",
+      "codes": [],
+      "text_sha256": "e1619170e336b823595931b3cd510d507b8e17e2e1ec8e76b16c9d70191c750f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc338/abc338_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

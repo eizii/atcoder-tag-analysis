@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc414_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc414/editorial/13453",
+      "text": "人\n\\(i\\)\nが高橋君の配信を最初から最後まで見るためには，以下の二つを同時に満たす必要があります．\n\\(L\\)\n時よりも前（\n\\(L\\)\n時ちょうども含む）から配信を見ることができる\n\\(R\\)\n時よりも後（\n\\(R\\)\n時ちょうども含む）まで配信を見ることができる\nこれを数式で表すと\n\\(X_i\\leq L\\)\nかつ\n\\(R\\leq Y_i\\)\nです．したがって，これを満たす\n\\(i\\)\nの個数を数えればよいです．\n実装例（Python）\n実装例（c++）",
+      "codes": [
+        "N, L, R = map(int, input().split())\nans = 0\nfor i in range(N):\n    x, y = map(int, input().split())\n    if x <= L and R <= y:\n        ans += 1\n\nprint(ans)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int N, L, R, ans = 0;\n  cin >> N >> L >> R;\n  for (int i = 0; i < N; i++) {\n    int X, Y;\n    cin >> X >> Y;\n    if (X <= L && R <= Y) ans++;\n  }\n  cout << ans << endl;\n}"
+      ],
+      "text_sha256": "f876e70dab96bc92ddfd81483d8faf6ef09b3e647e573d65b451717fb43890a0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc414/abc414_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc414/editorial/13687",
+      "text": "注：ツイート内のE問題の解説は誤りです。\nhttps://x.com/kyopro_friends/status/1944032441515020378",
+      "codes": [],
+      "text_sha256": "7211b2042198a7f148b80079c045ae48fedda69bfec7c15dded8eb2461622f40",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc414/abc414_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

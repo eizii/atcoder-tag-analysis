@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc342_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc342/editorial/9401",
+      "text": "この問題には様々な方針が考えられますが、簡単な方針としては、for 文を用いて\n\\(i=1,2,\\ldots,N\\)\n番目の文字について、それ以外の文字と相異なるかを判定するというものが考えられます。文字が異なるかの判定には if 文を用いると良いでしょう。\nまた、各文字について調べるためには2 重の for 文が必要となります。実装例を参考にし、分からない場合は使っている言語のリファレンスも参考にしてください。\n以下に、C++ 言語による正解例を記載します。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    string s;\n    cin >> s;\n    int n = s.size();\n    for(int i = 0; i < n; i++){\n        bool diff = true; \n        for(int j = 0; j < n; j++){\n            if(i != j and s[i] == s[j]) diff = false;\n        }\n        if(diff == true) cout << i + 1 << endl;\n    }\n}"
+      ],
+      "text_sha256": "545f79557af55c5c8a71d2d30f4f33973311b63a70979f2a9e86bdc4bb55f7bb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc342/abc342_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc342/editorial/9404",
+      "text": "\\(S\\)\nのうち共通である\n\\(n-1\\)\n文字は、先頭\n\\(3\\)\n文字における多数派の文字と同じであることがわかります。先頭\n\\(3\\)\n文字における多数派は、先頭\n\\(2\\)\n文字が共通であればその文字、そうでなければ\n\\(3\\)\n文字目の文字です。\n提出 #50615439",
+      "codes": [
+        "s = input()\nn = len(s)\nmajority = s[0] if s[0] == s[1] else s[2]\nfor i in range(n):\n    if s[i] != majority:\n        print(i + 1)\n        break"
+      ],
+      "text_sha256": "2543fe4a6724ade52a2ec62f9a008c301362f0d61ef222256e8a99bda48aee6e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc342/abc342_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

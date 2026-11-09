@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc003_1",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc003/editorial.pdf",
+      "text": "A問題問題概要\n\n• 整数Nが与えられる。\n• 青木君の給料は、N(≦100)面ダイスを振った\n 時に出た値×10000である。\n• 青木君の給料の期待値を求めなさい。\n\f\n   A問題解き方の流れ\n\n• まず標準入力から整数を読み取る\n  – 解らない場合は標準入力の方法をチェック！\n• 受け取った数字から、期待値を算出する\n• 算出した期待値を出力する\n\n\n\n• 標準入力・標準出力が解らない人はこちらから\n  – http://practice.contest.atcoder.jp/tasks/practice_1\n\f\n     A問題解説\n\n• それぞれの目の出る確率は1/N\n  – これらに対する期待値の和を取ってあげれば良\n   い。\n  – 例えば、4なら、1が1/4, 2が1/4、3が1/4、4が1/4\n  – よって、平均の目の値は2.5\n\f\n     A問題解説\n\n• もう少し高速化したい場合\n  – 平均の求め方を変える\n         • 1～Nまでの平均をループで求める\n          – N回の計算が必要\n         • 1とNの真ん中の値を取る\n          – 足し算して割るだけ\n          – (1+N)/2と書いた時に、整数のまま演算してしまうことに注意\n             » (1+N)/2.0で小数にするなり、(1+N)*10000/2にするなりで\n         回避可能。",
+      "codes": [],
+      "source": "official_pdf_letter_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "602abe99abaafa0d4205ef301abf524b14e7b38e4785c06a52e356558094dc9c"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc269_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc269/editorial/4845",
+      "text": "基本的には、正方形グリッドやグラフで連結成分の数を求める問題と同じです。\nいくつか日本語の参考記事を挙げます。\nグラフの連結成分の個数を求めるアルゴリズム\nDFS (深さ優先探索) 超入門！ 〜 グラフ・アルゴリズムの世界への入口 〜【後編】 4-2. 連結成分の個数\nConnect Cities(ABL-C)\nおよび\nConnect Cities 解説 by Mitsubachi\nでは、六角形のグリッドの場合はどう対応すればよいでしょうか？\n実は、問題文に大きなヒントがあります。\nマス\n\\((i,j)\\)\nは以下の\n\\(6\\)\nつのマスと隣接します。\n\\((i−1,j−1)\\)\n\\((i−1,j)\\)\n\\((i,j−1)\\)\n\\((i,j+1)\\)\n\\((i+1,j)\\)\n\\((i+1,j+1)\\)\nつまり、正方形のグリッドで用いた\n\\(4\\)\n近傍や\n\\(8\\)\n近傍の隣接関係をこちらに換えて同じように実装すればよいのです。\nこの問題では、座標が負にもなりうることに注意してください。 (正の範囲で取り扱いたい場合は、\n\\(X_i,Y_i\\)\nに適当な定数を足せばよいです。)\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/dsu>\n\nusing namespace std;\nusing namespace atcoder;\n\nint mem[2010][2010]={0};\n\nint dx6[6]={-1,-1,0,0,1,1};\nint dy6[6]={-1,0,-1,1,0,1};\n\nint main(){\n  int n;\n  cin >> n;\n  dsu uf(n+1);\n  vector<int> x(n+1),y(n+1);\n  for(int i=1;i<=n;i++){\n    cin >> x[i] >> y[i];\n    x[i]+=1005;y[i]+=1005;\n    mem[x[i]][y[i]]=i;\n  }\n  for(int i=1;i<=n;i++){\n    for(int k=0;k<6;k++){\n      int nx=x[i]+dx6[k];\n      int ny=y[i]+dy6[k];\n      if(mem[nx][ny]>0){\n        uf.merge(i,mem[nx][ny]);\n      }\n    }\n  }\n  int res=0;\n  for(int i=1;i<=n;i++){\n    if(uf.leader(i)==i){res++;}\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "ff3b98d7ab436427116dbdaf9cc7511afcc322347603298938f761304dbbb857",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc269/abc269_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc269/editorial/4860",
+      "text": "https://twitter.com/kyopro_friends/status/1571133784799744000\n(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",
+      "codes": [],
+      "text_sha256": "2d5ef06ee3eede787b6606e9ddf9c5ea742012c4e2a414555673655d0efc32fa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc269/abc269_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

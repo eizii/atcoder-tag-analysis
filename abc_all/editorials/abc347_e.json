@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc347_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc347/editorial/9698",
+      "text": "毎クエリ愚直に加算すると実行時間に間に合いません。本問題では全てのクエリ終了後の\n\\(A\\)\nのみが求まればよいので、\n\\(i\\)\n番目の要素に対する加算をまとめて行うことを考えましょう。\n各\n\\(i\\)\nについて、\n\\(S\\)\nに\n\\(i\\)\nが追加されるタイミングを管理し、\n\\(S\\)\nから\n\\(i\\)\nが削除されるタイミングで\n\\(i\\)\nに対する加算をまとめて行いましょう。\n\\(i\\)\nが\n\\(L_i\\)\n回目に追加され、\n\\(j\\)\n回目に削除されたとします。このとき、\n\\(L_i\\)\n回目のクエリ時の\n\\(|S|\\)\nから\n\\(j-1\\)\n回目のクエリ時の\n\\(|S|\\)\nの合計を加算したいです。これは、各クエリ時の\n\\(|S|\\)\nを累積和で管理することで行えます。\n最後のクエリ処理後に\n\\(S\\)\nに入っている要素に対する加算を忘れないように注意してください。",
+      "codes": [],
+      "text_sha256": "d14d8fa4f828f95744646c4e030688a24393e58dbc9511ce6681af353ce13fd1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc347/abc347_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc347/editorial/9717",
+      "text": "以下では、クエリの添字を 0-indexed とします。\nすなわち、クエリを\n\\(\\langle x_0, x_1, \\dots, x_{Q-1}\\rangle\\)\nとします。\nクエリを\n\\(b\\)\n個ごとに分割することを考えます。\n分割の\n\\(i\\)\nブロック目は\n\\(\\langle x_{bi}, x_{bi+1}, \\dots, x_{bi+(b-1)}\\rangle\\)\nです。\n\\(i\\)\nブロック目に含まれる整数の集合を\n\\(S_i = \\{x_{bi}, x_{bi+1}, \\dots, x_{bi+(b-1)}\\}\\)\nとすると、\n\\(|S_i| \\le b\\)\nです。\n\\(i\\)\nブロック目に含まれない値\n\\(j\\notin S_i\\)\nに関しては、\n\\(i\\)\nブロック目のクエリの処理前後の\n\\(A_j\\)\nの差が共通なので、それを\n\\(d_i\\)\nとおきます。\n\\(i\\)\nブロック目の各クエリに対して、下記を行います。\n\\(d_i\\)\nにその時点での\n\\(|S|\\)\nを加算する。\n各\n\\(j\\in S\\wedge S_i\\)\nに対して、\n\\(A_j\\)\nに\n\\(|S|\\)\nを加算する。\n\\(i\\)\nブロック目の各クエリを処理し終えたら、各\n\\(j\\in \\{1, 2, \\dots, N\\}\\smallsetminus S_i\\)\nに対して\n\\(A_j\\)\nに\n\\(d_i\\)\nを加算します。\n各ブロックに対して\n\\(O((b^2+N)\\cdot \\frac Qb) = O(Q(b+N/b))\\)\n時間で処理できるため、\n\\(b = \\Theta(\\sqrt N)\\)\nとすると、全体で\n\\(O(Q\\sqrt N)\\)\n時間となります。",
+      "codes": [],
+      "text_sha256": "87c26b676574f8708778c0ae31712767b9fceee494542b557b387809f0031419",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc347/abc347_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

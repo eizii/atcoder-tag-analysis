@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc227_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc227/editorial/2914",
+      "text": "大きい方から \\(K\\) 番目の整数を固定し、その値を \\(X\\) とします。 DP を用いて、 \\(X\\) 以上の整数が書かれたマスを \\(k\\) 個通った時の \\(X\\) 以上の整数の和の最小値を各マスについて管理します。 \\(1\\) 回の DP の計算量は \\(O(HWK)\\) なので、全体の計算量は \\(O(H^2W^2K)\\) です。 \\(X\\) の書かれたマスが複数ある場合の処理に注意してください。 実装例 (C++) bonus: \\(O(H^2W^2)\\)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n#define rep(i,n) for(int i = 0; i < n; i++)\nvoid chmin(ll&a,ll b){if(a>b)a=b;}\nconst ll inf = 1001001001001001001;\n\nint main(){\n    int h, w, K; cin >> h >> w >> K;\n    vector<vector<int>> grid(h, vector<int>(w));\n    rep(i, h) rep(j, w) cin >> grid[i][j];\n    ll ans = inf;\n    for(auto y : grid) for(auto x : y) {\n        vector<vector<vector<ll>>> dp(K + 1, vector<vector<ll>>(h, vector<ll>(w, inf)));\n        if(grid[0][0] >= x) dp[1][0][0] = grid[0][0];\n        if(grid[0][0] <= x) dp[0][0][0] = 0;\n        rep(i, K + 1) rep(j, h) rep(k, w) {\n            if(j != h - 1){\n                if(i != K && grid[j + 1][k] >= x) chmin(dp[i + 1][j + 1][k], dp[i][j][k] + grid[j + 1][k]);\n                if(grid[j + 1][k] <= x) chmin(dp[i][j + 1][k], dp[i][j][k]);\n            }\n            if(k != w - 1){\n                if(i != K && grid[j][k + 1] >= x) chmin(dp[i + 1][j][k + 1], dp[i][j][k] + grid[j][k + 1]);\n                if(grid[j][k + 1] <= x) chmin(dp[i][j][k + 1], dp[i][j][k]);\n            }\n        }\n        chmin(ans, dp[K][h - 1][w - 1]);\n    }\n    cout << ans << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "538cf848344698f4802ce9eac4f1571f603c6374d368bad745ff61fef20b9e4b"
+    }
+  ],
+  "status": "available"
+}

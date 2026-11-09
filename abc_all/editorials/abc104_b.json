@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc104_b",
+  "editorials": [
+    {
+      "text": "B: AcCepted\n「先頭から3 文字目から最後から2 文字目までにC がちょうど1 個現れ、それ以外の文字はすべて小文字\nである」という内容を正確に実装することにほぼ終始します（「それ以外の文字」に先頭から2 文字目と最後\nの文字も含まれることに注意）。\n素直に実装するには、for 文を用いてすべての文字のcase（大文字か小文字か）を確かめます。一つ一つの文\n字が大文字か小文字かを判定するには、言語ごとに用意されたメソッドを使うか、ASCII コードでの文字の\n並び順を利用します。C++ による実装例を示します。\n1 #include <iostream>\n2 using namespace std;\n3 int main(){\n4\nstring S;\n5\ncin >> S;\n6\nint L = S.size();\n7\nstring ans = \"AC\";\n8\nif(S[0] != 'A'){\n9\nans = \"WA\";\n10\n}\n11\nint cnt = 0;\n12\nfor(int i = 1; i < L; ++i){\n13\nif(isupper(S[i])){\n14\nif(i == 1 || i == L - 1 || S[i] != 'C'){\n15\nans = \"WA\";\n16\n}\n17\n++cnt;\n18\n}\n19\n}\n20\nif(cnt != 1){\n21\nans = \"WA\";\n22\n}\n23\ncout << ans << endl;\n24 }\n",
+      "text_sha256": "6b5afd738c8c5828ffed8e1e14ced84b6264921eaad0758ed43eabef465a2764",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc104/abc104_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc287_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc287/editorial/5635",
+      "text": "\\(d_{i,j}\\) が \\(i\\) から \\(j\\) への経路が存在するかを \\(01\\) で表すものとし、与えられた各辺 \\((a_i,b_i)\\) に対して \\(d_{a_i,b_i}=1\\) とした状態から始めてワーシャルフロイド法を適用することにします。ここで、最も外側のループの \\(x\\) 回目が終わった時点では、 \\(d_{i,j}\\) は番号が \\(x\\) 以下の頂点と \\(i,j\\) のみを用いる \\(i\\) から \\(j\\) への経路の有無に等しいです(類題 https://atcoder.jp/contests/abc208/tasks/abc208_d )。このため、最も外側のループの各時点でクエリに対する処理をすることで \\(\\mathrm{O}(N^3 + NQ)\\) で答えを求めることが出来ます。 ここで、 \\(d_{i,j}\\) をbitsetで管理して下のように更新することで \\(\\frac{1}{64}\\) 倍の高速化がされ、十分高速になります。 余談 今回とほぼ同様の方法(違いはbitsetをin-placeに更新せず、すべて \\(0\\) のものに or 演算をする)で次のような問題に対する行列累乗を \\(\\frac{1}{64}\\) 倍高速化出来ることが知られています。 \\(N\\) 頂点の有向グラフが与えられる。各頂点 \\(s\\) について、 \\(s\\) からちょうど \\(K\\) 回移動した先の頂点としてあり得るものすべてを \\(\\mathrm{O}(N^3 \\log K)\\) で求めよ。 問題例 https://onlinejudge.u-aizu.ac.jp/challenges/sources/VPC/Tuatpc/3286",
+      "codes": [
+        "for(int i=0;i<N;i++){\n\tfor(int j=0;j<N;j++){\n\t\tif(d[j][i])d[j] |= d[i];\n\t}\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "c35175e57fd811f430708da1efb332837f93679da10f99e5c2b51636f69edaf7"
+    }
+  ],
+  "status": "available"
+}

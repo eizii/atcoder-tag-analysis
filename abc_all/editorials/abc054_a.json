@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc054_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc054/editorial.pdf",
+      "text": "A:  One Card Poker\n\n    2 つの整数を入力として受け取り、条件文を用いてプレイヤーの勝敗判定を行い、適切な出力を行えば良いで\n す。勝敗判定の際に、厄介となる点は1 の扱いです。1 を特別扱いして条件文で場合分けする方針でも解くことは\n 可能です。より簡単な方法として、1 を14 として扱うと勝敗判定を整数の大小判定で行う事ができます。\n\n\n  C++のコード例\n\n\n 1 int main(void){\n\n 2     int a,b;\n\n 3     cin >> a >> b;\n\n\n 4\n\n 5     if(a==1) a+=13;\n\n 6     if(b==1) b+=13;\n\n\n 7\n\n 8     if(a>b)\n\n 9         cout << \"Alice\" << endl;\n\n10     else if(a<b)\n\n11         cout << \"Bob\" << endl;\n\n12     else\n\n13         cout << \"Draw\" << endl;\n\n\n14\n\n15     return 0;\n\n16 }",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "1c80e96fcac7f07cab3a5c46c3026b9d96255d79ce8d8286a47cd6175eb73211"
+    }
+  ],
+  "status": "available"
+}

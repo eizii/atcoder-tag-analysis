@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc246_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc246/editorial/3700",
+      "text": "解法1. 2点間の距離を利用して解く\n点\n\\((0,0)\\)\nと点\n\\((A,B)\\)\nの距離を\n\\(d\\)\nとすると、\n\\(\\left( \\frac{A}{d}, \\frac{B}{d} \\right)\\)\nが答えです。\nここで、\n\\(d=\\sqrt{A^2+B^2}\\)\nです。\n実装例(C++):\n解法2. 偏角を求めて解く\n「点\n\\((0,0)\\)\nと点\n\\((1,0)\\)\nを結ぶ線分」と「点\n\\((0,0)\\)\nと点\n\\((A,B)\\)\nを結ぶ線分」がなす角を\n\\(\\theta\\)\nとすると、答えは\n\\((\\cos \\theta, \\sin \\theta)\\)\nとなります。\nこの問題は、\natan2\nを利用して解くことができます。\n実装例(C++):\n注記\n小数を出力する際、出力形式に注意しましょう。以下のサンプルコードでは、次のように出力されます。\n\\(1\\)\n行目: 特に形式を指定せず出力する。出力すべき桁数が不足する可能性がある。\n\\(2\\)\n行目: 有効数字\n\\(12\\)\n桁出力する。\n\\(3\\)\n行目: 小数点以下を固定で\n\\(12\\)\n桁出力する。\nサンプルコード(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int x,y;\n  cin >> x >> y;\n  int d2=x*x+y*y;\n  double d=d2;\n  d=sqrt(d);\n  double dx=x,dy=y;\n  cout << dx/d << ' ' << dy/d << '\\n';\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int x,y;\n  cin >> x >> y;\n  double theta=atan2((double)y,(double)x);\n  cout << cos(theta) << ' ' << sin(theta) << '\\n';\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  double x=123.456789012345678;\n  cout << x << '\\n';                          // 123.457\n  cout << std::setprecision(12) << x << '\\n'; // 123.456789012\n  printf(\"%.12lf\\n\",x);                       // 123.456789012346\n}"
+      ],
+      "text_sha256": "566bf8d98669cbea4adb118de828742301aee9531b5dabd07e501c2fff5a1962",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc246/abc246_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

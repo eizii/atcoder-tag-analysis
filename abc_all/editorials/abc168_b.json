@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc168_b",
+  "editorials": [
+    {
+      "text": "B: ... (Triples Dots)\n長さがK 以下かどうか判定し，上回っていれば問題文通りの文字列操作を行ってから出力すれば\nいいです．\nPHP にはtruncate というそのものずばりな機能があり，これを使うのも手です．\nListing 2\nC++ での実装例\n1 #include <iostream>\n2 using std::cin;\n3 using std::cout;\n4\n5 #include <string>\n6 using std::string;\n7\n8 int main(void) {\n9\nint k;\n10\nstring s;\n11\n12\ncin >> k;\n13\ncin >> s;\n14\n15\nif (s.size() > k) {\n16\ns = s.substr(0, k) + \"...\";\n17\n}\n18\n19\ncout << s << '\\n';\n20\n21\nreturn 0;\n22 }\nListing 3\nPython3 での実装例\n1 k = int(input())\n2 s = input()\n3\n4 if len(s) > k:\n5\ns = s[:k] + \"...\"\n6\n7 print(s)\n",
+      "text_sha256": "c502ef23503dc7adc44eb69e10d3a405fc1b0613526e69811bfc35ba81923b71",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc168/abc168_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

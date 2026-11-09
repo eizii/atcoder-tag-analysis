@@ -1,0 +1,31 @@
+{
+  "problem_id": "abc456_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc456/editorial/19772",
+      "text": "\\(S\\)\nの長さを\n\\(|S|\\)\n、\n\\(S\\)\nの\n\\(i\\)\n文字目を\n\\(S_i\\)\nと表します。\nもし全ての\n\\(i\\)\nで\n\\(S_i\\neq S_{i+1}\\)\nなら、全ての部分文字列が条件を満たします。よって求める答えは\n\\(\\frac{|S|(|S|+1)}{2}\\)\nです。（先頭と末尾を含む文字と文字の間\n\\(|S|+1\\)\n箇所から異なる\n\\(2\\)\n箇所を選ぶ方法と、選んだ\n\\(2\\)\n箇所の間の部分文字列が\n\\(1\\)\n対\n\\(1\\)\nに対応します）\n\\(S_i=S_{i+1}\\)\nとなる箇所が存在すれば、\n\\(i,i+1\\)\nを同時に選ぶことはできません。よって、\n\\(i\\)\n文字目までと\n\\(i+1\\)\n文字目以降に文字列を分割し、\n\\(2\\)\nつの文字列について答えを求めその和が答えとなります。\nなお、\n\\(S\\)\nの部分文字列は\n\\(\\frac{|S|(|S|+1)}{2}\\)\n個であることから、答えは\n\\(2^{63}\\)\n以下であり、64 bit 整数で計算すれば剰余は最後に取るだけで十分です。\n以上より\n\\(O(|S|)\\)\nでこの問題を解くことができました。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "S = abac  のとき\n\n  |a|b|a|c|\n  ^ ^ ^ ^ ^  ← この 5 箇所から2箇所選ぶ方法と部分文字列が 1 対 1 対応",
+        "S = abbcabcbaaabc  のとき\n    ab|bcabcba|a|abc\n    3 +  28 + 1 + 6 = 38",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n\n  long long ans = 0;\n  int start_i = 0;\n  for(int i=0; i<s.size(); i++){\n    if(i+1 == s.size() || s[i] == s[i+1]){\n      ans += (long long) (i - start_i + 1) * (i - start_i + 2) / 2;\n      start_i = i + 1;\n    }\n  }\n  cout << ans % 998244353 << endl;\n}",
+        "S = input()\nstart_i = 0\nans = 0\nfor i, c in enumerate(S):\n  if i+1 == len(S) or S[i+1] == c:\n    ans += (i - start_i + 1) * (i - start_i + 2) // 2\n    start_i = i + 1\nprint(ans % 998244353)"
+      ],
+      "text_sha256": "ce991b01c1f4b555993b8de6926c417a4eb598a78e6768173370e0bc9507c1c4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc456/abc456_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc456/editorial/19893",
+      "text": "この問題では、同じ文字が隣接しないような極大な区間全てに対して、区間の長さを\n\\(k\\)\nとして\n\\(\\frac{k(k+1)}{2}\\)\nを足し合わせたものが答えです。\nこれは、全ての連続する同じ文字の間に\n,\nを挿入したのち、文字列を\n,\nで分割したときの各部分文字列について同様の計算を行うことで計算ができます。\nところで、全ての連続する\na\nの間に\n,\nを挿入する操作は文字列に対して出現する（出現位置に被りのない）\naa\nを\na,a\nで置き換える操作を\n\\(2\\)\n回行うことにより可能です。（このような置き換えは Python の\nreplace\nなどが対応します。）詳細は以下の実装例も参照ください。\n以上によりこの問題を解くことができます。\n（実装例: python）",
+      "codes": [
+        "s = input()\nfor c in \"abc\":\n    s = s.replace(c + c, c + \",\" + c)  # 一度目のreplaceで \"aaaaaa...\" が \"a,aa,aa,a...\" になる\n    s = s.replace(c + c, c + \",\" + c)  # 二度目のreplaceで \"a,aa,aa,a...\" が \"a,a,a,a,a,a...\" になる\ns = s.split(\",\")\nans = 0\nfor t in s:\n    m = len(t)\n    ans += m * (m+1) // 2\nprint(ans % 998244353)"
+      ],
+      "text_sha256": "422052dd3c9fc7c274be39f534bb090256c7b10424e199aebec317c807bd1a11",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc456/abc456_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

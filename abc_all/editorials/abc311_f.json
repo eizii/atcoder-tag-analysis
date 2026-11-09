@@ -1,0 +1,40 @@
+{
+  "problem_id": "abc311_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/6822",
+      "text": "ひとまず、入力を整理することを考えます。\n入力のうち、あるマス\n\\((i,j)\\)\nが 黒 である場合、完成した美しいグリッドでは マス\n\\((i+1,j)\\)\n、マス\n\\((i+1,j+1)\\)\nも 黒 である必要があります。\nなので、この条件に従って入力を改変してしまいましょう。下の例では左の入力を右のものに改変します。\n改変した後にできたグリッドは必ず美しくなることがわかります。\nいくつかの入力に対してこの改変を試せば、解法が見えやすくなるかもしれません。\n結局、美しいグリッドとはどのようなものでしょうか？\n以下が美しいグリッドである必要十分条件です。\n全ての\n\\(c\\)\nについて、\n\\(i-j=c\\)\nを満たすマス\n\\((i,j)\\)\nを\n\\(i\\)\nの昇順に並べることを考える。\nこのとき、先頭のいくつか (\n\\(0\\)\n個でもよい ) のマスが白であり、残りのマスが黒である。\n黒マスの中で最も\n\\(j\\)\nが小さいもの (最も左にあるもの) に着目し、そのマスの\n\\(j\\)\nの値を\n\\(L_c\\)\nとすると、\n\\(L = (L_{-M+1},L_{-M+2},\\dots,L_{N-1})\\)\nは広義単調減少となる。\n言葉では少し分かりづらいですが、直感的には左上から右下の方向に斜めに見ることにして、この斜線を上から下に降ろしていく時に、白と黒との境界線が右から左に移動していくような感じです。\nここに元々黒いマスの条件を追加し、動的計画法で解くことを考えましょう。\n\\(c = -M+1, -M+2 , \\dots, N-1\\)\nの順に以下の DP テーブルを作ります。\n\\(dp[c][j] = \\)\n(\n\\(i-j=c\\)\nを満たすマスに着目した際、マス\n\\((j+c,j)\\)\nとそれより右のマスが 黒 である時のグリッドの種類数 ) を考えます。\nなお、便宜上グリッドは右方向と下方向には無限に広いものとし、\n\\(i \\ge N+1\\)\nまたは\n\\(j \\ge M+1\\)\nを満たすマス\n\\((i,j)\\)\nは全て 黒 であるとして取り扱います。このようにしても答えは変化しません。\nまた、便宜上\n\\(dp[-M][M+1]=1, dp[-M][j]=0\\)\n(\n\\(1 \\le j \\le M\\)\n) と初期化します。\nまず、\n\\(dp[c][j] = \\sum^{M+1}_{k=j} dp[c-1][k]\\)\nとする。これは、累積和により\n\\(j\\)\n全体で時間計算量\n\\(O(M)\\)\nで実行可能である。\n次に、マス\n\\((j+c,j)\\)\nが存在しない (\n\\(j+c \\le 0\\)\nである場合) 場合、\n\\(dp[c][j]=0\\)\nとする。\n最後に、改変した入力においてマス\n\\((i,j)\\)\nが 黒 なら\n\\(dp[c][j+1]=0\\)\nとする。\n答えは\n\\(\\sum^{M+1}_{j=1} dp[N-1][j]\\)\nです。\nこの解法により、この問題を時間計算量\n\\(O(NM)\\)\nで解くことができます。\n実装例 (C++):",
+      "codes": [
+        "....#.      ....#.\n  ......      ....##\n  .#....  ->  .#..##\n  ......      .##.##\n  ......      .#####",
+        "#include<bits/stdc++.h>\n#define mod 998244353\n\nusing namespace std;\n\nint main(){\n  long long n,m;\n  cin >> n >> m;\n  vector<string> s(n);\n  for(auto &nx : s){cin >> nx;}\n\n  for(int i=0;i<n;i++){\n    for(int j=0;j<m;j++){\n      if(s[i][j]=='#'){\n        if(i!=(n-1)){s[i+1][j]='#';}\n        if(i!=(n-1) && j!=(m-1)){s[i+1][j+1]='#';}\n      }\n    }\n  }\n  vector<long long> dp(m+1,0);\n  dp[m]=1;\n  for(int c=-m+1;c<=n-1;c++){\n    for(int j=m-1;j>=0;j--){\n      dp[j]+=dp[j+1];\n      dp[j]%=mod;\n    }\n    for(int j=0;j<m;j++){\n      int i=j+c;\n      if(i<0){dp[j]=0;}\n      else if(i>=n || s[i][j]=='#'){dp[j+1]=0;}\n    }\n  }\n  long long res=0;\n  for(auto &nx : dp){res+=nx;res%=mod;}\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "3c586aa545da4a35351bb29651307f105302b62fd15aabfdb1934a3f03b1d35d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc311/abc311_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/6835",
+      "text": "元の問題は、あるマスを黒く塗った時その「下と右下」を黒く塗るというものでしたが、これを「下と右」に変えた問題を考えてみます。\n変更後の問題は\n\\(dp[i][j]=\\)\n\\(i\\)\n行目まで塗り方を決めて、美しいグリッドであり、マス\n\\((i,j)\\)\nを白く、マス\n\\((i,j+1)\\)\nを黒く塗るようなものの個数\nとして、\n\\(dp[i][j]=\\sum_{k\\geq j} dp[i-1][k]\\)\nのようなDPにより解くことができます。これは累積和をとりながらDPすることで\n\\(O(NM)\\)\nで求めることができます。\n元の問題もほとんど同様に解くことができます。\n与えられたグリッドを、左上角を下に押し込むように、次のように斜めに変形します\nこうすると「下と右下」という条件は「下と右」という条件になるため、先に述べた問題と全く同じようにして解くことができます。",
+      "codes": [
+        "#...#\n.....\n.....\n.....\n#....\n\n  ↓\n\n    #\n   ..\n  ...\n ....\n#....\n....\n...\n..\n#"
+      ],
+      "text_sha256": "5a0e71f17cb78b905d8893aaeaea673c7d1946c07f2447183178ffed762a514d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc311/abc311_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/7720",
+      "text": "\\(N,M \\leq 10^5\\)\nかつグリッド全体ではなく\n\\(K\\leq 10^5\\)\n個の黒いマスの 位置が与えられている場合でも高速に解くことができる方法を解説します．\nkyopro_friendsさんの解説\nと同様にグリッドをずらして考えます．さらに下と右に黒埋めておきます．(実はこの解法では右に埋める操作は必要ありません)\nこれは\n\\(A_i\\leq C_i\\leq B_i\\)\nとなる 単調増加数列\n\\(C\\)\nの個数を求められれば解くことができます．\nこの例では，\n1列目は\n\\(1\\leq C_1 \\leq 5\\)\n2列目は\n\\(3\\leq C_2 \\leq 6\\)\n3列目は\n\\(5\\leq C_3 \\leq 7\\)\n4列目は\n\\(7\\leq C_4 \\leq 8\\)\n5列目は\n\\(9\\leq C_5 \\leq 9\\)\nとなる単調増加数列\n\\(C\\)\nが数えられれば良いです．\nこのような数え上げは\n\\(\\textrm{O}(K+(N+M)\\log^2(N+M))\\)\nで計算することができます．\n解説\n実装例",
+      "codes": [
+        "....#          #          #\n...#.         ..         .#\n..#..   →    .#.    →   .##\n.#.#.       ....       ..##\n#...#      ..###      ..###\n           ....       ..##\n           .#.        .##\n           ..         .#\n           #          #"
+      ],
+      "text_sha256": "d6f7aa4be7318ca406d3db0da919d0cbe3b919c7ed687c828b90ee7f8e79604d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc311/abc311_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

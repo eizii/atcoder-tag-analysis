@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc331_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc331/editorial/7804",
+      "text": "答えは次の通りです。\n\\(y\\)\n年\n\\(m\\)\n月\n\\(d\\)\n日が年末であれば\n\\(y+1\\)\n年\n\\(1\\)\n月\n\\(1\\)\n日\n\\(y\\)\n年\n\\(m\\)\n月\n\\(d\\)\n日が年末でない月末であれば\n\\(y\\)\n年\n\\(m+1\\)\n月\n\\(1\\)\n日\n\\(y\\)\n年\n\\(m\\)\n月\n\\(d\\)\n日が月末でなければ\n\\(y\\)\n年\n\\(m\\)\n月\n\\(d+1\\)\n日\nこれらのどれにあたるかどうかを if 文を用いて判定しましょう。\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "M, D = map(int,input().split())\ny, m, d = map(int,input().split())\n\nif d == D and m == M:\n  print(y+1, 1, 1)\nelif d == D:\n  print(y, m+1, 1)\nelse:\n  print(y, m, d+1)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int M, D, y, m, d;\n  cin >> M >> D >> y >> m >> d;\n  if(m==M && d==D){\n    cout << y+1 << ' ' << 1 << ' ' << 1 << endl;\n  }else if(d==D){\n    cout << y << ' ' << m+1 << ' ' << 1 << endl;\n  }else{\n    cout << y << ' ' << m << ' ' << d+1 << endl;\n  }\n}"
+      ],
+      "text_sha256": "db5626bbf59b773670e7f83b1101643ccaed8514c5a942a53232dde0203f9808",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc331/abc331_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc331/editorial/7884",
+      "text": "場合分けが必要ない解法について解説します。\n\\(y\\) 年 \\(m\\) 月 \\(d\\) 日が、\\(0\\) 年 \\(1\\) 月 \\(1\\) 日から数えて何日めかについて考えます。\n\\(1\\) 年は \\(M\\times D\\) 日なので、これは \\(y\\times M\\times D+(m-1)\\times D+(d-1)\\) 日です。\n逆に、\\(0\\) 年 \\(1\\) 月 \\(1\\) 日から数えて \\(X\\) 日めの日の日付は \\(\\left\\lfloor\\dfrac X{MD}\\right\\rfloor\\) 年 \\(\\left\\lfloor\\dfrac XD\\right\\rfloor\\%\\,M+1\\) 月 \\(X\\,\\%\\,D+1\\) 日です。\nただし、\\(a\\,\\%\\,b\\) で \\(a\\) を \\(b\\) で割ったあまりを表すこととします。\nこれは、\\(X\\) を \\(D\\) で割った商とあまり \\(X=qD+r\\) を等式 \\(X=(y\\times M+(m-1))\\times D+(d-1)\\) と比較することなどで求めることができます。\nあとは、これを計算することで答えを求めることができます。",
+      "codes": [
+        "M, D = map(int, input().split())\ny, m, d = map(int, input().split())\n\nday = (y * M + (m - 1)) * D + (d - 1)\nday += 1\n\nprint(day // D // M, day // D % M + 1, day % D + 1)"
+      ],
+      "text_sha256": "2e9d4eee8001bde3e27f5789df0b83c1fb8fab484e5c169b96cc1a6842d3a5f6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc331/abc331_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

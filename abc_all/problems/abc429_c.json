@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc429_c",
+  "title": "Odd One Subsequence",
+  "contests": [
+    {
+      "contest_id": "abc429",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 201,
+  "raw_difficulty": 125,
+  "contest_id": "abc429",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc429/tasks/abc429_c",
+  "statement": "配点 : 300 点 問題文 長さ N の整数列 A=(A_1,A_2,\\ldots,A_N) が与えられます。 1\\leq i<j<k\\leq N をみたす整数の組 (i,j,k) であって、\n次の条件をみたすものの個数を求めてください。 A_i,A_j,A_k の中にちょうど 2 種類の値が含まれる。すなわち、 A_i,A_j,A_k の中のいずれか 2 つは等しく、残りの 1 つは異なる。 制約 3 \\leq N \\leq 2\\times 10^5 1 \\leq A_i \\leq N 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N 出力 条件をみたす整数の組の個数を出力せよ。 入力例 1 5\n3 2 5 2 2 出力例 1 6 例えば、 (i,j,k)=(1,2,4) は、 A_1=3 , A_2=2 , A_4=2 の中に 2,3 のちょうど 2 種類の値が含まれるため、条件をみたします。 これを含めて、 (i,j,k)=(1,2,4),(1,2,5),(1,4,5),(2,3,4),(2,3,5),(3,4,5) の 6 組が条件をみたします。 よって、 6 を出力します。 入力例 2 3\n1 1 1 出力例 2 0 条件をみたす組が存在しない可能性もあります。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の整数列 A=(A_1,A_2,\\ldots,A_N) が与えられます。 1\\leq i<j<k\\leq N をみたす整数の組 (i,j,k) であって、\n次の条件をみたすものの個数を求めてください。 A_i,A_j,A_k の中にちょうど 2 種類の値が含まれる。すなわち、 A_i,A_j,A_k の中のいずれか 2 つは等しく、残りの 1 つは異なる。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 3 \\leq N \\leq 2\\times 10^5 1 \\leq A_i \\leq N 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 条件をみたす整数の組の個数を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\n3 2 5 2 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 6 例えば、 (i,j,k)=(1,2,4) は、 A_1=3 , A_2=2 , A_4=2 の中に 2,3 のちょうど 2 種類の値が含まれるため、条件をみたします。 これを含めて、 (i,j,k)=(1,2,4),(1,2,5),(1,4,5),(2,3,4),(2,3,5),(3,4,5) の 6 組が条件をみたします。 よって、 6 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\n1 1 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0 条件をみたす組が存在しない可能性もあります。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc429/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:06.340117+00:00",
+  "statement_sha256": "709d35392f1d40a88b34e36de04f48ef3b334bab2c234b1ee6d7294ae1b09528",
+  "editorials": []
+}

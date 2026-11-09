@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc249_c",
+  "title": "Just K",
+  "contests": [
+    {
+      "contest_id": "abc249",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 528,
+  "raw_difficulty": 528,
+  "contest_id": "abc249",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc249/tasks/abc249_c",
+  "statement": "配点 : 300 点 問題文 英小文字のみからなる N 個の文字列 S_1,S_2,\\dots,S_N が与えられます。 S_1,S_2,\\dots,S_N から文字列を好きな個数選ぶことを考えます。 このとき、「選んだ文字列の中でちょうど K 個の文字列に登場する英小文字」の種類数としてあり得る最大値を求めてください。 制約 1 \\le N \\le 15 1 \\le K \\le N N,K は整数 S_i は英小文字からなる空でない文字列である。 1 \\le i \\le N を満たす整数 i に対し、 S_i に同じ文字は 2 個以上含まれない。 i \\neq j ならば S_i \\neq S_j である。 入力 入力は以下の形式で標準入力から与えられる。 N K S_1 S_2 \\vdots S_N 出力 答えを出力せよ。 入力例 1 4 2\r\nabi\r\naef\r\nbc\r\nacg 出力例 1 3 S_1,S_3,S_4 を選んだ場合、 a , b , c がちょうど 2 個の文字列に含まれます。 4 個以上の文字がちょうど 2 個の文字列に含まれるような選び方は存在しないため、答えは 3 です。 入力例 2 2 2\r\na\r\nb 出力例 2 0 同じ文字列を複数回選ぶことはできません。 入力例 3 5 2\r\nabpqxyz\r\naz\r\npq\r\nbc\r\ncy 出力例 3 7",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英小文字のみからなる N 個の文字列 S_1,S_2,\\dots,S_N が与えられます。 S_1,S_2,\\dots,S_N から文字列を好きな個数選ぶことを考えます。 このとき、「選んだ文字列の中でちょうど K 個の文字列に登場する英小文字」の種類数としてあり得る最大値を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\le N \\le 15 1 \\le K \\le N N,K は整数 S_i は英小文字からなる空でない文字列である。 1 \\le i \\le N を満たす整数 i に対し、 S_i に同じ文字は 2 個以上含まれない。 i \\neq j ならば S_i \\neq S_j である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K S_1 S_2 \\vdots S_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 2\r\nabi\r\naef\r\nbc\r\nacg"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3 S_1,S_3,S_4 を選んだ場合、 a , b , c がちょうど 2 個の文字列に含まれます。 4 個以上の文字がちょうど 2 個の文字列に含まれるような選び方は存在しないため、答えは 3 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2 2\r\na\r\nb"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0 同じ文字列を複数回選ぶことはできません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 5 2\r\nabpqxyz\r\naz\r\npq\r\nbc\r\ncy"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 7"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc249/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:21.456435+00:00",
+  "statement_sha256": "3879b3f022bff1afc3b914e871f528c4bd6d3f09e3d0b3d6f3b2976b0e9cc949",
+  "editorials": []
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc266_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc266/editorial/4699",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\n文字列の長さは、 c++ では\ns.size()\n、python では\nlen(s)\nで取得できます。多くの言語では 0-indexed が採用されていることには注意してください。\n実装例(c++):\n実装例(python):",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    string s;\n    cin >> s;\n    cout << s[(s.size() + 1) / 2 - 1] << endl;\n}",
+        "s = input()\nprint(s[(len(s) + 1) // 2 - 1])"
+      ],
+      "text_sha256": "b39d10bcaf26d968fbf416f5ccc601ed47503d02fb85cc9cb95a51ad3a3408e3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc266/abc266_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

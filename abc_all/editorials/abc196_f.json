@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc196_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc196/editorial/949",
+      "text": "この問題は、 \\(S\\) から長さ \\(|T|\\) の部分文字列を取り出したときの \\(T\\) とのハミング距離を最小化する問題と見ることができます。 すなわち、 \\(s_i\\) を \\(S\\) の \\(i\\) 文字目、 \\(t_i\\) を \\(T\\) の \\(i\\) 文字目、 \\(\\oplus\\) を XOR の演算子として、 \\(\\displaystyle \\min_{0 ≤ i ≤ |S| - |T|} \\sum_{j=1}^{|T|}(s_{i + j} \\oplus t_j)\\) が答えになります。 \\(\\displaystyle \\sum_{j=1}^{|T|}(s_{i + j} \\oplus t_j)\\) を全ての \\(i\\) について求めることを考えてみましょう。 愚直に求めると計算量が \\(\\Theta(|S||T|)\\) になり TLE してしまいますが、式が畳み込みのような形になっていることに注目し、 \\(T\\) を左右反転して \\(\\displaystyle \\sum_{j=1}^{|T|}(s_{i + j} \\oplus t_{|T|-1-j})\\) とします。 以下 \\(T\\) は左右反転しておくものとします。 \\(S\\) と \\(T\\) の以下の式により畳み込んだものを \\(C = (c_2, c_3, \\dots, c_{|S|+|T|})\\) とすると、 \\[\nc_i = \\sum_{i=j+k}s_j \\oplus t_k\n\\] です。ここで、 \\(c_{i+|T|-1} = \\displaystyle \\sum_{j=1}^{|T|}(s_{i + j} \\oplus t_{|T|-1-j})\\) であるので、この畳み込みを高速に求めればこの問題を解くことができます。 畳み込みの XOR の部分が掛け算であれば高速フーリエ変換による畳み込みが使えるので、XOR を掛け算に分解します。 \\[\nc_i = \\sum_{i=j+k}s_j(1 - t_k) + \\sum_{i=j+k}(1 - s_j)t_k\n\\] これで、高速フーリエ変換を利用して \\(C\\) を \\(O((|S| + |T|) \\log(|S| + |T|))\\) で求められるので、この問題を解くことができました。 実装には AC-Library の convolution を利用できます。 回答例 (C++) 回答例 (Python)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <atcoder/convolution>\n#include <atcoder/modint>\nusing namespace std;\nusing Modint = atcoder::modint998244353;\nconst int INF = numeric_limits<int>::max() / 2;\nvoid chmin(int& a, int b){ if(a > b) a = b; }\n\nint main(){\n    string S, T;\n    cin >> S >> T;\n    reverse(T.begin(), T.end());\n    const int N = S.size(), M = T.size();\n    vector<Modint> s1(N), s2(N), t1(N), t2(N);\n    for(int i = 0; i < N; i++) (S[i] == '0' ? s1 : s2)[i] = 1;\n    for(int i = 0; i < M; i++) (T[i] == '0' ? t1 : t2)[i] = 1;\n    s1 = atcoder::convolution(s1, t2);\n    s2 = atcoder::convolution(s2, t1);\n    int ans = INF;\n    for(int i = M - 1; i < N; i++) chmin(ans, s1[i].val() + s2[i].val());\n    cout << ans << endl;\n}\n",
+        "import numpy as np\n\nS = input()\nT = input()\nN = len(S)\nM = len(T)\n\nS1 = np.array(list(map(int, S)))\nS2 = 1 - S1\nT1 = np.array(list(map(int, reversed(T))))\nT2 = 1 - T1\n\ndef conv(f, g):\n    siz = len(f) + len(g) - 1\n    siz = 1 << (siz - 1).bit_length()\n    f = np.fft.rfft(f, siz)\n    g = np.fft.rfft(g, siz)\n    f *= g\n    f = np.fft.irfft(f, siz)\n    return np.rint(f).astype(np.int32)\n\nA = conv(S1, T2) + conv(S2, T1)\nprint(np.min(A[M - 1 : N]))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "ec89830baa7d4ea8fea4c10b1a43e66fd8c106b3959d5372fb02939d74b68ba9"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc208_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc208/editorial/2188",
+      "text": "問題で与えられた操作を愚直に行うと、最大で\n\\(K = 10^{18}\\)\n回の操作が必要になりTLEしてしまうので、適切な考察により計算量を改善する必要があります。\n全員に配る回数は全部で何回になるかを考えると、\n\\(K \\times t\\)\nが\n\\(N\\)\nを超えないような最大の\n\\(t\\)\nが答えになります。この\n\\(t\\)\nは\n\\[K \\times t \\leq N \\iff t \\leq \\frac{N}{K}\\]\nより、\n\\(N\\)\nを\n\\(K\\)\nで切り捨て除算した値\n\\(\\left \\lfloor \\frac{N}{K} \\right \\rfloor\\)\nになります。\n以上より全員に配る部分は高速に操作することが出来ました。残りのお菓子の個数は\n\\(K' = N - K \\times \\left \\lfloor \\frac{N}{K} \\right \\rfloor\\)\n個で、この\n\\(K'\\)\n個を番号の小さい\n\\(K'\\)\n人に配ればこの問題を解くことが出来ます。\n実装方法はいくつかありますが、ここでは他の問題でも使える\n\\(\\mathrm{O}(N \\log N)\\)\nのアルゴリズムを説明します。\n新たに配列\norder\nを宣言して、\n\\(1,2,\\ldots,N\\)\nを追加する。\n\\(i \\lt j\\)\nならば\n\\(\\mathrm{a} \\lbrack i \\rbrack \\lt \\mathrm{a} \\lbrack j \\rbrack\\)\nになるように比較関数を定義して、配列\norder\nをソートする。\n配列\norder\nの先頭\n\\(K'\\)\n項の添え字に対応する要素が求める要素である。\n以上のアルゴリズムにより、\n\\(a_i\\)\nの小さい\n\\(K'\\)\n人が誰かを高速に求めることが出来ました。\nこれは余談ですが、 Quick Select や Median of Medians などの選択アルゴリズムを使用すると\n\\(\\mathrm{O}(N)\\)\nでの計算が可能になります。興味がある方は調べてみると勉強になると思います。\nC++ と Python による実装例は次の通りです。 Python の場合はナイーブな実装と定数倍の良い実装の二つを載せています。(解説では 1-indexed で説明した部分が 0-indexed で実装されている点に留意してください。)\nC++\nPython",
+      "codes": [
+        "#include <algorithm>\n#include <iostream>\n#include <numeric>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int N;\n  long long K;\n  cin >> N >> K;\n\n  vector<int> a(N);\n  for (auto& x : a) cin >> x;\n\n  vector<int> order(N);\n  iota(begin(order), end(order), 0);\n  sort(begin(order), end(order), [&](int i, int j) { return a[i] < a[j]; });\n\n  vector<long long> answer(N, K / N);\n  for(int i = 0; i < K % N; i++) answer[order[i]]++;\n\n  for(auto&x : answer) cout << x << \"\\n\";\n}",
+        "# ナイーブな実装\nN, K = map(int,input().split())\na = list(map(int,input().split()))\n\nclass C:\n  def __init__(self, i):\n    self.id = i\n  def __lt__(self, other):\n    return a[self.id] < a[other.id]\n\norder = [C(i) for i in range(N)]\norder.sort()\n\nanswer = [K // N for i in range(N)]\nfor i in range(K % N):\n  answer[order[i].id] += 1\nfor x in answer:\n  print(x)",
+        "# 定数倍の良い実装\nN, K = map(int,input().split())\na = list(map(int,input().split()))\n\norder = [(a[i] << 32) + i for i in range(N)]\norder.sort()\n\nanswer = [K // N for i in range(N)]\nfor i in range(K % N):\n  answer[order[i] & ((1 << 32) - 1)] += 1\nfor x in answer:\n  print(x)"
+      ],
+      "text_sha256": "5cdd0d8252ed386ad7a7234b32944adbe399445581828f0cc058f56fd87ceadb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc208/abc208_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

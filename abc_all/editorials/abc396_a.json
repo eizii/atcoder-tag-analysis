@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc396_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc396/editorial/12381",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nまず、「より厳密は、」以降に書かれている「\n\\(1\\)\n以上\n\\(N-2\\)\n以下の整数\n\\(i\\)\nであって、\n\\(A_i=A_{i+1}=A_{i+2}\\)\nを満たすものが存在するか判定」することを考えます。\n多くのプログラミング言語は 0-indexed 、つまり配列で\n\\(A\\)\nを持ったときの先頭の項が\n\\(A[1]\\)\nではなく\n\\(A[0]\\)\nであるので、この条件はプログラムで書く際には「\n\\(0\\)\n以上\n\\(N-2\\)\n未満の整数\n\\(i\\)\nであって、\n\\(A_i=A_{i+1}=A_{i+2}\\)\nを満たすものが存在するか判定」することになります。\nこの判定は for 文を用いて行うことができます。\n実際にプログラムを作成する方法についてはいくつか方法がありますが、例えば for 文で\n\\(i\\)\nを順に探索していく際に\n条件を満たす\n\\(i\\)\nが見つかった時点で\nYes\nを出力し、プログラムを終了する。 for 文が終わった段階でプログラムが終了していないということは答えは\nNo\nなので、\nNo\nを出力する。\n関数・メソッドとして判定部分を実装する。そのような\n\\(i\\)\nが見つかった時点で\nYes\n(または True など\nYes\nに相当するもの) を返す。for 文が終わった段階で関数内の処理が続いているということは答えは\nNo\nなので、\nNo\n(または False など\nNo\nに相当するもの) を返す。\nなどの方法が簡潔でプログラムも短くなります。\n以下はそれぞれの方法でプログラムを書いた場合の C++・Python のサンプルコードです。\n実装例(C++)\n実装例(Python)\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> a(n);\n\tfor (int i = 0; i < n; i++) {\n\t\tcin >> a[i];\n\t}\n\tfor (int i = 0; i < n - 2; i++) {\n\t\tif (a[i] == a[i + 1] && a[i + 1] == a[i + 2]) {\n\t\t\tcout << \"Yes\" << endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\tcout << \"No\" << endl;\n\treturn 0;\n}",
+        "n = int(input())\na = list(map(int, input().split()))\nfor i in range(n - 2):\n    if a[i] == a[i + 1] == a[i + 2]:\n        print(\"Yes\")\n        exit()\nprint(\"No\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\nbool judge(int n, vector<int> a) {\n\tfor (int i = 0; i < n - 2; i++) {\n\t\tif (a[i] == a[i + 1] && a[i + 1] == a[i + 2]) {\n\t\t\treturn true;\n\t\t}\n\t}\n\treturn false;\n}\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> a(n);\n\tfor (int i = 0; i < n; i++) {\n\t\tcin >> a[i];\n\t}\n\tif (judge(n, a)) {\n\t\tcout << \"Yes\" << endl;\n\t} else {\n\t\tcout << \"No\" << endl;\n\t}\n\treturn 0;\n}",
+        "def judge(n, a):\n    for i in range(n - 2):\n        if a[i] == a[i + 1] == a[i + 2]:\n            return True\n    return False\n\n\nn = int(input())\na = list(map(int, input().split()))\nif judge(n, a):\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "0a320a345506d7ff8cdd493fdcb1f904249249353eefca0aeddd045f6094f514",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc396/abc396_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

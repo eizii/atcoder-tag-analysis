@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc265_f",
+  "title": "Manhattan Cafe",
+  "contests": [
+    {
+      "contest_id": "abc265",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 2290,
+  "raw_difficulty": 2290,
+  "contest_id": "abc265",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc265/tasks/abc265_f",
+  "statement": "配点 : 500 点 問題文 N 次元空間上の 2 点 x=(x_1, x_2, \\dots, x_N) , y = (y_1, y_2, \\dots, y_N) のマンハッタン距離 d(x,y) は次の式で定義されます。 \\displaystyle d(x,y)=\\sum_{i=1}^n \\vert x_i - y_i \\vert また、座標成分 x_1, x_2, \\dots, x_N がすべて整数であるような点 x=(x_1, x_2, \\dots, x_N) を格子点と呼びます。 N 次元空間上の格子点 p=(p_1, p_2, \\dots, p_N) , q = (q_1, q_2, \\dots, q_N) が与えられます。 d(p,r) \\leq D かつ d(q,r) \\leq D であるような格子点 r としてあり得るものは全部で何個ありますか？答えを 998244353 で割ったあまりを求めてください。 制約 1 \\leq N \\leq 100 0 \\leq D \\leq 1000 -1000 \\leq p_i, q_i \\leq 1000 入力される値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N D p_1 p_2 \\dots p_N q_1 q_2 \\dots q_N 出力 答えを出力せよ。 入力例 1 1 5\n0\n3 出力例 1 8 N=1 の場合は 1 次元空間、すなわち数直線上の点に関する問題になります。 条件を満たす点は -2,-1,0,1,2,3,4,5 の 8 個です。 入力例 2 3 10\n2 6 5\n2 1 2 出力例 2 632 入力例 3 10 100\n3 1 4 1 5 9 2 6 5 3\n2 7 1 8 2 8 1 8 2 8 出力例 3 145428186",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 次元空間上の 2 点 x=(x_1, x_2, \\dots, x_N) , y = (y_1, y_2, \\dots, y_N) のマンハッタン距離 d(x,y) は次の式で定義されます。 \\displaystyle d(x,y)=\\sum_{i=1}^n \\vert x_i - y_i \\vert また、座標成分 x_1, x_2, \\dots, x_N がすべて整数であるような点 x=(x_1, x_2, \\dots, x_N) を格子点と呼びます。 N 次元空間上の格子点 p=(p_1, p_2, \\dots, p_N) , q = (q_1, q_2, \\dots, q_N) が与えられます。 d(p,r) \\leq D かつ d(q,r) \\leq D であるような格子点 r としてあり得るものは全部で何個ありますか？答えを 998244353 で割ったあまりを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 100 0 \\leq D \\leq 1000 -1000 \\leq p_i, q_i \\leq 1000 入力される値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N D p_1 p_2 \\dots p_N q_1 q_2 \\dots q_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 1 5\n0\n3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 8 N=1 の場合は 1 次元空間、すなわち数直線上の点に関する問題になります。 条件を満たす点は -2,-1,0,1,2,3,4,5 の 8 個です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 10\n2 6 5\n2 1 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 632"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10 100\n3 1 4 1 5 9 2 6 5 3\n2 7 1 8 2 8 1 8 2 8"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 145428186"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc265/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:41.767792+00:00",
+  "statement_sha256": "22d6c7db8ed12b436a9477f7077ea1fdee583b704950708e5054a5fb5fa0f276",
+  "editorials": []
+}

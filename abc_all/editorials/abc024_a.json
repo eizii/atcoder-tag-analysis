@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc024_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc024/editorial.pdf",
+      "text": "A:動物園\n\f\n       A-問題概要\n\n●動物園の入場料の情報が与えられる\n\n   –  子供1人 A 円\n\n   –  大人1人 B 円\n\n   –  K人以上の団体は1人当たりC円引\n\n\n●子供S人、大人T人の団体が支払わなければなら\n ない入場料はいくらか求めよ\n\f\n       A-問題概要\n\n●団体の人数がK以上かK未満かで場合分けして\n 計算する\n\n\n●人数がK以上の時\n\n   –   入場料＝A*S + B*T – C*(S+T)\n●人数がK未満の時\n\n   –   入場料＝A*S + B*T\n\f\n         A-注意\n\n●この手の問題は「以上」か「超える」か注意し\n ましょう\n\n\n●実装時に < と ≦ を間違えてWrongAnswerとい\n うのはもったいないです\n\f\n ABC024解説",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "2209f3af84c6e4ee14ee3ce90eb7afee55d854054a4c6723bf300560b8498ae6"
+    }
+  ],
+  "status": "available"
+}

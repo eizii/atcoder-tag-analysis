@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc424_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc424/editorial/13920",
+      "text": "三角形 ABC が二等辺三角形であることの必要十分条件は、「\n\\(a=b\\)\n,\n\\(b=c\\)\n,\n\\(c=a\\)\nのうち少なくとも\n\\(1\\)\nつが成り立つ」ことです。\nこれは if 文を用いて実装することができます。\nC++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main(void){\n\tint a,b,c;\n\tcin>>a>>b>>c;\n\tif((a==b)|(b==c)|(c==a))cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n\treturn 0;\n}",
+        "a,b,c=map(int, input().split())\n\nif a==b or b==c or c==a:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "cc2a47460e0c6f3e051a068c149e1e06a34e8d12d8b32070bb3f15532b4bfb4b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc424/abc424_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

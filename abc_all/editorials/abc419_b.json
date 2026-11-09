@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc419_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc419/editorial/13666",
+      "text": "この問題は、多重集合に対して\n\\(1\\)\nつの要素を追加、最小値の取得・削除を行うことにより解くことができます。\nこの操作は、優先度付きキューと呼ばれるデータ構造を用いて行うことができます。優先度付きキューは競技プログラミングにおいてメジャーな多くの言語に標準ライブラリとして存在しています。\nまた、この問題では制約が十分小さいため、愚直な方法でこの問題を解くこともできます。\n例えば、\n\\(C_i\\)\nを現時点での袋の中に入っている\n\\(i\\)\nが書かれたボールの個数としてデータを持ち更新していく方法や、袋の中に入っているボールの多重集合を優先度付きキューではなく単に列として管理するような解法が考えられます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint q;\n\tcin >> q;\n\tpriority_queue<int, vector<int>, greater<>> pq;\n\twhile (q--) {\n\t\tint type;\n\t\tcin >> type;\n\t\tif (type == 1) {\n\t\t\tint x;\n\t\t\tcin >> x;\n\t\t\tpq.push(x);\n\t\t}\n\t\telse {\n\t\t\tint x = pq.top(); pq.pop();\n\t\t\tcout << x << '\\n';\n\t\t}\n\t}\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint q;\n\tcin >> q;\n\tvector<int> c(101);\n\twhile (q--) {\n\t\tint type;\n\t\tcin >> type;\n\t\tif (type == 1) {\n\t\t\tint x;\n\t\t\tcin >> x;\n\t\t\tc[x]++;\n\t\t}\n\t\telse {\n\t\t\tfor (int i = 1; i <= 100; i++) {\n\t\t\t\tif (c[i] > 0) {\n\t\t\t\t\tc[i]--;\n\t\t\t\t\tcout << i << '\\n';\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
+      ],
+      "text_sha256": "27e23fe5231b173586115aab2d98c69c488fedca925aaa37ad50d0adc17f803a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc419/abc419_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

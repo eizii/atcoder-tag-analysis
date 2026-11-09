@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc404_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc404/editorial/12867",
+      "text": "唐突ですが、\n\\(\\sum_{j=l}^{r} A_j = S_i\\)\nという制約は扱いづらいため、\n\\(B(k) = \\sum_{i=1}^{k} A_i\\)\nと置き換えましょう。\nすると、\n\\(\\sum_{j=l}^{r} A_j = S_i\\)\nという制約は\n\\(B_{r} - B_{l-1} = S\\)\nという形に置き換わります。\nここで、改めて数列に課されている制約を\n\\(B\\)\nを使って整理します。\n\\(B_{R_i} - B_{L_i-1} = S_i\\)\n(\n\\(1 \\le i \\le M\\)\n)\n\\(B_{j} - B_{j-1} \\ge 1\\)\n(\n\\(1 \\le j \\le N\\)\n)\nこの制約を更に加工し、等号を不等号にします。\n\\(B_{R_i} - B_{L_i-1} \\ge S_i\\)\n(\n\\(1 \\le i \\le M\\)\n)\n\\(B_{R_i} - B_{L_i-1} \\le S_i\\)\n(\n\\(1 \\le i \\le M\\)\n)\n\\(B_{j} - B_{j-1} \\ge 1\\)\n(\n\\(1 \\le j \\le N\\)\n)\nさて、解くべき問題は、次の線形計画問題として表現されます。\n\\[\n\\begin{aligned}\n&\\text{minimize} & & B_N \\\\\n&\\text{subject to} & & B_{R_i} - B_{L_i-1} \\ge S_i \\ ( 1 \\le i \\le M ) \\\\\n& & & B_{R_i} - B_{L_i-1} \\le S_i \\ ( 1 \\le i \\le M ) \\\\\n& & & B_{j} - B_{j-1} \\ge 1\\ ( 1 \\le j \\le N ) \\\\\n& & & B_0 = 0\n\\end{aligned}\n\\]\nここで、全ての制約式が\n\\(B_i + c \\ge B_j\\)\nの形で表現されることに注目します。これは特別な解きやすい形の線形計画問題で、\n牛ゲー\nと呼ばれます。\n解説1\n解説2\n解説3\n解説4\n解説5\n( これが 牛ゲー と呼ばれている理由は、このテクニックが浸透するに至った問題が「牛を並べる問題」であったからです。\n移植1\n移植2\n)\n牛ゲーそのものの目的関数は「特定の変数の最大化」ですが、線形計画問題を以下のように設定すれば問題ありません。\nこの問題の答えは以下の線形計画問題の最適解の目的関数の\n\\(-1\\)\n倍となります。\n\\[\n\\begin{aligned}\n&\\text{maximize} & & B_0 \\\\\n&\\text{subject to} & & B_{R_i} - B_{L_i-1} \\ge S_i \\ ( 1 \\le i \\le M ) \\\\\n& & & B_{R_i} - B_{L_i-1} \\le S_i \\ ( 1 \\le i \\le M ) \\\\\n& & & B_{j} - B_{j-1} \\ge 1\\ ( 1 \\le j \\le N ) \\\\\n& & & B_N = 0 \\\\\n\\end{aligned}\n\\]\nあとは、この問題の形に従い適切なグラフを構築して Bellman-Ford 法で最短経路問題を解くと、この問題に正解できます。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long n,m;\n  cin >> n >> m;\n  vector<long long> l(m),r(m),s(m);\n  for(long long i=0;i<m;i++){\n    cin >> l[i] >> r[i] >> s[i];\n  }\n\n  vector<array<long long,3>> eg;\n  for(long long i=1;i<=n;i++){\n    eg.push_back({i,i-1,-1});\n  }\n  for(long long i=0;i<m;i++){\n    eg.push_back({r[i],l[i]-1,-s[i]});\n    eg.push_back({l[i]-1,r[i],s[i]});\n  }\n\n  // for(auto &nx : eg){\n  //   cout << nx[0] << \" -> \" << nx[1] << \" : \" << nx[2] << \"\\n\";\n  // }\n\n  vector<long long> d(n+1,8e18);\n  d[n]=0;\n  bool upd;\n  for(long long tr=0;tr<2*(n+m)+5;tr++){\n    upd=false;\n    for(auto &nx : eg){\n      long long nd=d[nx[0]]+nx[2];\n      if(d[nx[1]] > nd){\n        d[nx[1]]=nd;\n        upd=true;\n      }\n    }\n  }\n  \n  if(upd){cout << \"-1\\n\"; return 0;}\n  cout << -d[0] << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "2a924746b3f273cf0345ece5190395c1d937bc07f25df711a3b0b16d4832e1cd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc404/abc404_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

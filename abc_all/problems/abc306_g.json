@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc306_g",
+  "title": "Return to 1",
+  "contests": [
+    {
+      "contest_id": "abc306",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2563,
+  "raw_difficulty": 2563,
+  "contest_id": "abc306",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc306/tasks/abc306_g",
+  "statement": "配点 : 600 点 問題文 N 頂点 M 辺の有向グラフがあります。\n頂点には 1 から N までの番号が付けられていて、 i 番目の辺は頂点 U_i から頂点 V_i に向かって伸びています。 あなたは今頂点 1 にいます。\n以下の行動をちょうど 10^{10^{100}} 回繰り返して頂点 1 に戻ってくることが可能かどうか判定してください。 今いる頂点から伸びている辺を 1 つ選び、その辺が伸びている先の頂点に移動する。 T 個のテストケースが与えられるので、それぞれについて解いてください。 制約 入力は全て整数 1\\leq T \\leq 2\\times 10^5 2\\leq N \\leq 2\\times 10^5 1\\leq M \\leq 2\\times 10^5 全てのテストケースにおける N の総和は 2 \\times 10^5 以下 全てのテストケースにおける M の総和は 2 \\times 10^5 以下 1 \\leq U_i, V_i \\leq N U_i \\neq V_i i\\neq j ならば (U_i,V_i) \\neq (U_j,V_j) 入力 入力は以下の形式で標準入力から与えられる。\nここで \\text{test}_i は i 番目のテストケースを意味する。 T \\text{test}_1 \\text{test}_2 \\vdots \\text{test}_T 各テストケースは以下の形式で与えられる。 N M U_1 V_1 U_2 V_2 \\vdots U_M V_M 出力 T 行出力せよ。 i\\ (1\\leq i \\leq T) 行目には、 i 番目のテストケースにおいて問題文中の行動をちょうど 10^{10^{100}} 回繰り返して頂点 1 に戻ってくることが可能ならば Yes を、\nそうでないならば No を出力せよ。 入力例 1 4\n2 2\n1 2\n2 1\n3 3\n1 2\n2 3\n3 1\n7 10\n1 6\n6 3\n1 4\n5 1\n7 1\n4 5\n2 1\n4 7\n2 7\n4 3\n7 11\n1 6\n6 3\n1 4\n5 1\n7 1\n4 5\n2 1\n4 7\n2 7\n4 3\n3 7 出力例 1 Yes\nNo\nNo\nYes 1 番目のテストケースについて、 頂点 1 \\rightarrow 2 \\rightarrow 1 \\rightarrow \\dots という移動を繰り返す以外の選択肢はありません。\nこのとき、 10^{10^{100}} 回の移動をした時点で頂点 1 にいるので、答えは Yes です。 2 番目のテストケースについて、 頂点 1 \\rightarrow 2 \\rightarrow 3 \\rightarrow 1 \\rightarrow \\dots という移動を繰り返す以外の選択肢はありません。\n  このとき、 10^{10^{100}} 回の移動をした時点で頂点 2 にいるので、答えは No です。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 頂点 M 辺の有向グラフがあります。\n頂点には 1 から N までの番号が付けられていて、 i 番目の辺は頂点 U_i から頂点 V_i に向かって伸びています。 あなたは今頂点 1 にいます。\n以下の行動をちょうど 10^{10^{100}} 回繰り返して頂点 1 に戻ってくることが可能かどうか判定してください。 今いる頂点から伸びている辺を 1 つ選び、その辺が伸びている先の頂点に移動する。 T 個のテストケースが与えられるので、それぞれについて解いてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 入力は全て整数 1\\leq T \\leq 2\\times 10^5 2\\leq N \\leq 2\\times 10^5 1\\leq M \\leq 2\\times 10^5 全てのテストケースにおける N の総和は 2 \\times 10^5 以下 全てのテストケースにおける M の総和は 2 \\times 10^5 以下 1 \\leq U_i, V_i \\leq N U_i \\neq V_i i\\neq j ならば (U_i,V_i) \\neq (U_j,V_j)"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。\nここで \\text{test}_i は i 番目のテストケースを意味する。 T \\text{test}_1 \\text{test}_2 \\vdots \\text{test}_T 各テストケースは以下の形式で与えられる。 N M U_1 V_1 U_2 V_2 \\vdots U_M V_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 T 行出力せよ。 i\\ (1\\leq i \\leq T) 行目には、 i 番目のテストケースにおいて問題文中の行動をちょうど 10^{10^{100}} 回繰り返して頂点 1 に戻ってくることが可能ならば Yes を、\nそうでないならば No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\n2 2\n1 2\n2 1\n3 3\n1 2\n2 3\n3 1\n7 10\n1 6\n6 3\n1 4\n5 1\n7 1\n4 5\n2 1\n4 7\n2 7\n4 3\n7 11\n1 6\n6 3\n1 4\n5 1\n7 1\n4 5\n2 1\n4 7\n2 7\n4 3\n3 7"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\nNo\nNo\nYes 1 番目のテストケースについて、 頂点 1 \\rightarrow 2 \\rightarrow 1 \\rightarrow \\dots という移動を繰り返す以外の選択肢はありません。\nこのとき、 10^{10^{100}} 回の移動をした時点で頂点 1 にいるので、答えは Yes です。 2 番目のテストケースについて、 頂点 1 \\rightarrow 2 \\rightarrow 3 \\rightarrow 1 \\rightarrow \\dots という移動を繰り返す以外の選択肢はありません。\n  このとき、 10^{10^{100}} 回の移動をした時点で頂点 2 にいるので、答えは No です。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc306/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:33.200197+00:00",
+  "statement_sha256": "aac310725f59bdfe9a19a78bf48f9411df30ef2d719abc473c426e22608bac8c",
+  "editorials": []
+}

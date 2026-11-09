@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc166_c",
+  "editorials": [
+    {
+      "text": "C. Peaks\nグラフの問題であるので隣接リストでグラフを表現するといった実装もありますが、今回はそれを\n用いない方法を紹介します。「展望台i から一本の道を使って辿り着けるどんな展望台よりも展望台i\nの方が標高が高い」ことは、「展望台i から一本の道を使って辿り着ける展望台の標高の最大値より\nも展望台i の標高が高い」ことと等しいです。このことを利用すると、展望台i から一本の道を使っ\nて辿り着ける展望台の標高の最大値を求めることで答えを求めることができます。\n以下が、c++ のサンプルコードです。\n1 #include<iostream>\n2 #include<algorithm>\n3 using namespace std;\n4 #define N 100010\n5 int main(){\n6\nint n,m,h[N],ma[N];\n7\ncin>>n>>m;\n8\nfor(int i=1;i<=n;i++){\n9\ncin>>h[i];\n10\nma[i]=0;\n11\n}\n12\nfor(int i=0;i<m;i++){\n13\nint a,b;\n14\ncin>>a>>b;\n15\nma[a]=max(ma[a],h[b]);\n16\nma[b]=max(ma[b],h[a]);\n17\n}\n18\nint ans=0;\n19\nfor(int i=1;i<=n;i++){\n20\nans+=h[i]>ma[i];\n21\n}\n22\ncout<<ans<<endl;\n23 }\n",
+      "text_sha256": "fc8a55d66e097d990a878d18ac7a7182f978581a37af1c8dc7dc16c6a2ad8875",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc166/abc166_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

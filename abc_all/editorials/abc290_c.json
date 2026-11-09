@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc290_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc290/editorial/5756",
+      "text": "全ての非負整数\n\\(x\\)\nについて以下が成り立ちます。\n\\(MEX\\)\nを\n\\(x+1\\)\n以上にするには\n\\(x\\)\nを\n\\(B\\)\nの要素として選ぶ必要があります。逆に、要素が重複しても\n\\(MEX\\)\nには影響しないため、\n\\(x\\)\nを\n\\(2\\)\nつ以上選ぶメリットはありません。\nこのことから、次のアルゴリズムが成立する。\n\\(i=0,1,\\dots,K-1\\)\nまで、以下を繰り返す。\nもし\n\\(A\\)\nに\n\\(i\\)\nが含まれる場合、それを選び出す。これにより、答えが\n\\(i+1\\)\n以上となることが確定する。\nそうでない場合、\n\\(MEX\\)\nの値を\n\\(i\\)\nより大きくすることはできないため、答えが\n\\(i\\)\nであると判明して終了する。\n上記が終了しても答えが判明しなかった場合、\n\\(B\\)\nを\n\\((0,1,\\dots,K-1)\\)\nの並べ替えとすることができているので、答えは\n\\(K\\)\nである。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,k;\n  cin >> n >> k;\n  set<int> st;\n  for(int i=0;i<n;i++){\n    int a;\n    cin >> a;\n    st.insert(a);\n  }\n  for(int i=0;i<k;i++){\n    if(st.find(i)==st.end()){\n      cout << i << \"\\n\";\n      return 0;\n    }\n  }\n  cout << k << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "a0c1c83f0fdaae34bc0c5185577a5e63f09fb2f01b1e1c61150580093c1a1623",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc290/abc290_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc066_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc077/editorial.pdf",
+      "text": "A : ringring\n\n   a + b とb + c とa + c の中で一番小さいものを出力する問題です。以下の実\n  装例では、かわりにa, b, c の中で最も大きいものを求めて、a + b + c から引\n  いています。\n\n 1  #include <stdio.h>\n 2\n 3  int main (){\n 4    int a, b, c;\n 5    scanf(\"%d␣%d␣%d\", &a, &b, &c);\n 6    int max=a;\n 7    if(b>max) max=b;\n 8    if(c>max) max=c;\n 9    printf(\"%d\\n\", a+b+c-max);\n10    return 0;\n11  }\n\n\n  B : ss\n\n  偶文字列かどうかを調べるためには、文字列の前半と後半が全く同じかどう\n  かを調べれば良いです。\n   偶文字列の長さは必ず偶数長なので、偶数の文字列についてのみ調べれば\n  十分です。最長のものを探しているので、長さ|S| −2 の文字列、長さ|S| −4\n\n\n                                    1\n\f\n  の文字列、…という順に調べて、条件に合うものが見つかった時にその長さ\n  を出力すると答えが求まります。\n\n 1  #include <stdio.h>\n 2  #include <string.h>\n 3\n 4  int main (){\n 5    char str [222];\n 6    scanf(\"%s\", str);\n 7    int n=strlen(str);\n 8    for(int i=n-2; i; i -=2){\n 9      if(strncmp(str , str+i/2, i/2) ==0){\n10        printf(\"%d\\n\" ,i);\n11        return 0;\n12       }\n13    }\n14    return 0;\n15  }",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "3339ee87c888c976d3677ff9dadd779c6e8c40759a28f73665a4f93db836024c"
+    }
+  ],
+  "status": "available"
+}

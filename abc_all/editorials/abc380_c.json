@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc380_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc380/editorial/11357",
+      "text": "「\n\\(K\\)\n番目の\n1\nの塊」と「その直前の\n0\nの塊」を入れ替えたものが答えとなります。\nしたがって、以下のアルゴリズムにより問題を解くことができます\n0\nと\n1\nの境界で文字列を分割\n\\(K\\)\n番目の\n1\nの塊とその前の塊を入れ替える\n文字列を連結する\n入力例1：\n実装例(Python)",
+      "codes": [
+        "010011100011001\n↓ split\n0 1 00 111 000 11 00 1\n↓ swap\n0 1 00 111 11 000 00 1\n↓ join\n010011111000001",
+        "N,K = map(int,input().split())\nS = input()\n\n# split\nidx = [0] + [i for i in range(1,N) if S[i-1]!=S[i]] + [N]\nsplited_S = [S[idx[i]:idx[i+1]] for i in range(len(idx)-1)]\n\n# swap\nif S[0] == '0':\n  kth_1_idx = 2*K-1\nelse:\n  kth_1_idx = 2*K-2\n\nsplited_S[kth_1_idx-1], splited_S[kth_1_idx] = splited_S[kth_1_idx], splited_S[kth_1_idx-1]\n\n# join\nT = \"\".join(splited_S)\n\nprint(T)"
+      ],
+      "text_sha256": "fe420d4039e15f0851b35fecdcea21d96c0a7c6fbf5081433022c093d9e5c113",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc380/abc380_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc015_2",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc015/editorial.pdf",
+      "text": "B問題 高橋くんの集計\n\n  問題概要 1.\n  アルゴリズム 2.\n\n\n\n\n\n2014/11/22                            ©AtCoder Inc. All rights reserved.                                      99\n\f\nB問題 問題概要\n\n• N個の整数が与えられる\n• 0以外の整数の平均値を出力しなさい\n\n\n\n\n\n2014/11/22                                                                                            10\n\f\nB問題 アルゴリズム\n\n• 入力\n   – 整数Nを受け取る\n   – 数列Aの数字をN個受け取る\n          • 受け取り方は複数いくつかある\n           – 1行纏めて受け取って、スペースでsplitする\n           – 1つずつ受け取る\n          • 言語によって受け取りやすい書き方が違う！\n          • 詳しくはpracticeで確認しよう！\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2014/11/22                                                                                            11\n\f\nB問題 アルゴリズム\n\n• 処理\n   – やるべきことは２つ！\n          • バグの総数を調べる\n           – こちらはforループを回して足し算をしていくだけ\n          • バグが存在するソフトウェアの個数を調べる\n           – こちらは、ifなどで判定してカウントする\n   – この２つが出来れば、あとは平均を取る！\n          • 切り上げることに注意！\n          • 切り上げる方法も多数\n           – あまりが0でなかった場合、答えに1を足す\n           – 一つの計算式で表すことも可能\n                » (sum + count – 1)/ count\n\n\n\n\n\n2014/11/22                                                                                            12\n\f\nB問題 アルゴリズム\n\n• 出力\n   – A問題と同じく、答えを出力するだけ\n   – Print(ret)みたいな感じ\n\n\n\n\n\n2014/11/22                                                                                            13",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "9df77b7b782fbdc3d62a4c618a1ba96b6788bf926babb278d7242fd3f120700f"
+    }
+  ],
+  "status": "available"
+}

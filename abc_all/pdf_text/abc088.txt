@@ -1,0 +1,149 @@
+     Atcoder Beginner Contest 088 解説
+
+            問題作成者：E869120, square1001
+
+
+               平成30 年2 月18 日
+
+                For International Readers: English editorial starts from page 5.
+
+A: Infinite Coins
+  500 円硬貨が無限枚あるので, 使う 1 円硬貨を最小化することを考えます.
+  𝑁 円を超えないようにできるだけ多くの 500 円硬貨を使うと 1 円硬貨の枚数は最小化されます.
+そのとき, 500 円硬貨は 「𝑁 を 500 で割ったときの商」 枚使われることになります.
+  この場合、使用する 1 円硬貨の枚数は 𝑁 を 500 で割ったあまりになるので、これが持っている 𝑁
+円硬貨の枚数 𝐴 以下であれば “Yes”, そうでなけでば “No” と出力します.
+
+
+サンプルコード (C++)
+  https://beta.atcoder.jp/contests/abc088/submissions/2105041
+
+B: Card Game for Two
+  それぞれのプレイヤーは, 自分のターンのときに, 今選べるカードの中で最大の数が書かれているものを
+取るという戦略をとると, 自分の得点を最大化できます.
+  𝑎 の値を大きい順に 𝑎1, 𝑎2, … , 𝑎𝑁 となるように並べ替えるとき, 𝑎1 + 𝑎3 + 𝑎5 + 𝑎7 + ⋯ が Alice
+の得点となり, 𝑎2 + 𝑎4 + 𝑎6 + 𝑎8 + ⋯ が Bob の得点となります.
+  数列を小さい順・大きい順に並べ替える操作は 「ソート (sorting)」 といい, ほとんどのプログラミン
+グ言語において数列のソートをする関数はあります. 存在しない場合でも, バブルソートなどの方法を使っ
+て数列をソートすることもできます.
+
+
+サンプルコード (C++)：
+  https://beta.atcoder.jp/contests/abc088/submissions/2105068
+
+C: Takahashi’s Information
+  高橋君の情報が正しい場合を考えます. (𝑎1,𝑎2, 𝑎3, 𝑏1, 𝑏2, 𝑏3) = (𝑝1,𝑝2, 𝑝3, 𝑞1, 𝑞2, 𝑞3) の値の組
+み合わせが条件に沿っているならば, 任意の数 𝑥 に対して, (𝑎1, 𝑎2, 𝑎3, 𝑏1, 𝑏2, 𝑏3) = (𝑝1 + 𝑥, 𝑝2 +
+𝑥, 𝑝3 + 𝑥, 𝑞1 −𝑥, 𝑞2 −𝑥, 𝑞3 −𝑥) の値の組み合わせが正しいです. なぜなら, 𝑝𝑖+ 𝑞𝑗= (𝑝𝑖+ 𝑥) −
+(𝑞𝑗+ 𝑥) が成立するので, 𝑎𝑖+ 𝑏𝑗 の値はどの  (𝑖, 𝑗) に対しても変化しないからです.
+ 高橋君の情報が正しい場合, 𝑥 を適切な値に設定することで, 𝑎1 = 0 にすることができます. した
+がって, 高橋君の情報が正しいかどうか判定するとき 𝑎1 = 0 を仮定して考えてもよいです. 𝑎1 の値が
+決まると, 𝑏1, 𝑏2, 𝑏3 の値も決まります. 具体的には, 𝑏𝑖= 𝑐1,𝑖−𝑎1 とすればよいです. 𝑏1 の値が決ま
+ると, 𝑎𝑖= 𝑐𝑖,1 −𝑏1 を利用して 𝑎2, 𝑎3 の値も決めることができます.
+ 最終的に得られた 𝑎1, 𝑎2, 𝑎3, 𝑏1, 𝑏2, 𝑏3 の値に対して, 𝑐𝑖,𝑗= 𝑎𝑖+ 𝑏𝑗 が成立していれば高橋君の
+情報が正しく, そうでない場合高橋君の情報は間違っています.
+
+D: Grid Repainting
+  まず, 「けぬす君」 が移動するルートがあらかじめ決まっている時, すぬけ君は最大で何マス変更でき
+るかについて考えます.
+  最初に考えるべきは, 各マスについてどのような操作ができるかです. 「けぬす君」が通るマス・通らない
+マスそれぞれについて、何の色にすべきかという条件は, 以下のようになります。
+ 1. 「けぬす君」が通るマスは、絶対に白でなければならない.
+ 2. 「けぬす君」が通らないマスは, 白と黒のどちらでも良い.
+  まず, マスの色を黒から白に変更することはできないので, 1. よりすぬけ君の通るルートに 「最初の色」
+が黒であるマスが存在してはならず, すぬけ君の通るルートに含まれる 「最初の色が白のマス」 を黒に変
+えると 1. に反するので, これらのマスは変更することができません.
+  また, 「けぬす君」 が通らないマスにおける変更回数の合計の最大値は, 2. より最終的な色は何で
+も良いため, けぬす君の通らない白いマスの色をすべて黒に変更することができるので,（けぬす君が通ら
+ない白いマスの個数）になります.
+  したがって, すぬけ君が変更できるマスの個数の最大値は, (けぬす君が通らない白いマスの個数) =
+(マス目全体の白いマスの個数) – (けぬす君が通る白いマスの個数) となります.
+  実際の問題では, けぬす君はマス (𝐻, 𝑊) に白いマスだけを通ってたどり着くことができればどんなルー
+トをたどっても良いです. しかし, 「変更する回数」 = 「色を変更できる白いマスの個数」 を最大化する
+ので, すなわち 「色を変更できない白いマスの個数」 を最小化したいです.
+  「色を変更できない白いマスの個数」 は, (けぬす君が通る白いマスの個数) と等しいので、「けぬす
+君は (1,1) から (𝐻, 𝑊) に行くために最低何回の白いマスを通る必要があるか」 という問題を解けば,
+この問題は解けます. 言い換えると 「けぬす君が白いマスだけを通って移動するとき, 最小で何マスを使
+って (1, 1) から (𝐻, 𝑊) に移動できるか」 という問題になります. (このような経路が存在しない場合,
+ゲームクリアすることはできない)
+  この問題は辺の重みがすべて1 であるグラフの最短経路問題に帰着することができるので, 幅優先探
+ 索を用いれば, 計算量 𝑂(𝐻𝑊) で解くことができます.
+
+   Atcoder Beginner Contest 088 Editorial
+
+              Problem Setters：E869120, square1001
+
+
+               平成30 年2 月18 日
+
+
+A: Infinite Coins
+  There are infinite number of 500-yen coins. So, to minimize the number of 1-
+yen coins, he has to maximize the number of 500-yen coins. In this case the number
+of 500-yen coin is “the quotient when 𝑁 is divided by 500”.
+   In this case, the number of 1-yen coins is “the remainder when 𝑁 is divided by
+500”, so you should check if the remainder when 𝑁 is divided by 500 is greater than
+𝐴 or not.
+
+
+Sample Code (C++)
+  https://beta.atcoder.jp/contests/abc088/submissions/2105041
+
+B: Card Game for Two
+    If the player takes a strategy which chooses a card with maximum number
+among all selectable cards in each turn, the final score will be maximized.
+  Now, let’s rearrange the sequence 𝑎, that 𝑎1, 𝑎2, 𝑎3, … , 𝑎𝑁 will be in decreasing
+order. Alice’s score will be 𝑎1 + 𝑎3 + 𝑎5 + 𝑎7 + ⋯, and Bob’s score will be 𝑎2 + 𝑎4 +
+𝑎6 + 𝑎8 + ⋯. Therefore, the difference of Alice’s score and Bob’s score will be 𝑎1 −
+𝑎2 + 𝑎3 −𝑎4 + 𝑎5 −𝑎6 + 𝑎7 −𝑎8 + ⋯.
+   Rearranging sequence in increasing order or decreasing order is called “sorting”.
+Sorting is the basic algorithm in computer science, and most programming language
+has sorting function. If you don’t use programming language that doesn’t have
+sorting function, you can implement sorting algorithm like Bubble Sort.
+
+
+Sample Code (C++)：
+  https://beta.atcoder.jp/contests/abc088/submissions/2105068
+
+C: Takahashi’s Information
+    If Takahashi’s information  is correct, there exists a combination of numbers
+(𝑎1,𝑎2, 𝑎3, 𝑏1, 𝑏2, 𝑏3) = (𝑝1, 𝑝2, 𝑝3, 𝑞1, 𝑞2, 𝑞3) that satisfies 𝑎𝑖+ 𝑏𝑗= 𝑐𝑖,𝑗 for all  (𝑖, 𝑗). And in
+this case, for any number 𝑥 , (𝑎1,𝑎2, 𝑎3, 𝑏1, 𝑏2, 𝑏3) = (𝑝1 + 𝑥, 𝑝2 + 𝑥, 𝑝3 + 𝑥, 𝑞1 −𝑥, 𝑞2 −
+𝑥, 𝑞3 −𝑥) also satisfies 𝑎𝑖+ 𝑏𝑗= 𝑐𝑖,𝑗, because 𝑝𝑖+ 𝑞𝑗= (𝑝𝑖+ 𝑥) + (𝑞𝑗−𝑥) holds.
+   So, if Takahashi’s information is correct, you can set 𝑎1 = 0  if you choose number
+𝑥 properly. Therefore, if you only want to judge whether Takahashi’s information is
+correct, deciding “𝑎1 = 0” is okay. Then, you can get the values of 𝑏1, 𝑏2, 𝑏3, because
+𝑏𝑖= 𝑐1,𝑖−𝑎1 therefore you can set 𝑏𝑖= 𝑐1,𝑖. And then, if you have the value of 𝑏1,
+you can get the values of 𝑎2, 𝑎3 because 𝑎𝑖= 𝑐𝑖,1 −𝑏𝑖 holds.
+  Now you got the values of 𝑎1, 𝑎2, 𝑎3, 𝑏1, 𝑏2, 𝑏3. Finally, Takahashi’s information is
+correct if and only if 𝑎𝑖+ 𝑏𝑗= 𝑐𝑖,𝑗 holds for all  (𝑖, 𝑗) so you can check it easily.
+
+D: Grid Repainting
+   At first, let’s think about the maximum number of cells that Snuke changes, when
+the route Kenus moves is already decided.
+   In this case, to achieve the maximum number of cells that Snuke changes, Snuke
+should change cells as follows:
+ a.   If the cell is belonged to the Kenus’s route, the cell must be white. Thus, it is
+     not valid route if at least one of cell is black at first because the color of black
+       cell cannot be changed. And, if it is white, it should remain white so Snuke
+     cannot change the color of cells in this route.
+ b.   If the cell is not belonged to the Kenus’s route, any color is OK. So, if the cell
+       is white, Snuke should change the color of the cell (from white to black) to
+     achieve maximum number of cells that he changes.
+   Therefore, the maximum number of cells that Snuke changes is (The number of
+white cells that are not belonged to the Kenus’s route), and this is equal to (The
+number of white cells in the grid) – (The number of white cells that are
+belonged to the Kenus’s route).
+   Finally, the first easier problem was solved. But unfortunately, the real problem
+is: Kenus’s route is not decided, and Snuke can decide it.
+  Snuke want to minimize the number of white cells that are belonged to the
+Kenus’s route. In addition, the number of white cell that are belonged to the Kenus’s
+route is equal to the number of cells that Kenus passes, because all cell that Kenus
+passes should be white.
+   So, now the problem is simple. The minimum number of white cells Kenus passes
+is equal to the result of the problem: “You are given a grid and each cell is black or
+white. You move from (1,1) to (𝐻, 𝑊) but you can’t pass black cells. If you can
+move one cell left, right, up or down, what is the minimum number of cell you
+pass?”.
+   This is a typical problem of “shortest path problem”. You can use Breadth-First
+Search (BFS) and solvable in 𝑂(𝐻𝑊) time complexity.

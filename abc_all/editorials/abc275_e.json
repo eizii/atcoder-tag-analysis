@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc275_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc275/editorial/5116",
+      "text": "\\(\\mathrm{dp}[i][j]\\)\nを、ルーレットを\n\\(i\\)\n回回したときにマス\n\\(j\\)\nにいる確率と定義した動的計画法で解くことが出来ます。\n遷移時に\n\\(\\text{mod } 998244353\\)\n上での\n\\(\\frac{1}{M}\\)\nを計算する必要がありますが、低速な言語だと毎回これを計算していると間に合わないため、前計算しておく必要があります。\n前計算を行った場合、動的計画法の状態数が\n\\(\\mathrm{O}(NK)\\)\n、各状態の遷移回数が\n\\(\\mathrm{O}(M)\\)\nなので計算量は\n\\(\\mathrm{O}(NMK+ \\log \\mathrm{mod})\\)\n(ここで\n\\(\\mathrm{mod}=998244353\\)\n) です。\n実装例(c++):",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\nusing namespace std;\n\nusing mint = atcoder::modint998244353;\n\nint main() {\n    int n, m, k;\n    cin >> n >> m >> k;\n    vector dp(k + 1, vector(n + 1, mint(0)));\n    mint m_inv = mint(1) / m;\n    dp[0][0] = 1;\n    for(int i = 0; i < k; i++) {\n        for(int j = 0; j <= n; j++) {\n            if(j == n) {\n                dp[i + 1][j] += dp[i][j];\n                continue;\n            }\n            for(int l = 1; l <= m; l++) {\n                int nx = j + l;\n                if(nx > n) nx = n - (nx - n);\n                dp[i + 1][nx] += dp[i][j] * m_inv;\n            }\n        }\n    }\n    cout << dp.back().back().val() << endl;\n}"
+      ],
+      "text_sha256": "d93dde2cc8b14a854b9ec66e47573b2bfd45f30ffe0b5c6d31436192382bd74c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc275/abc275_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc275/editorial/5154",
+      "text": "この解法ではdp[i][j] = (マスjからi回以内の移動でゴールできる確率)とします。\n(今回の実装例では回数に関する変数を使わずに記述しています。)\n遷移の式をみるとdp[i]の各要素はdp[i - 1]内の一定幅の部分和として表すことができるので、畳み込みによって遷移を計算できることがわかります。\nPythonライブラリのnumpyを用いれば、1回の遷移が1回の関数呼び出しのみで書けるので実装が楽です。\n実装例\n畳み込みの部分に数論変換などを使えば\n\\(O\\left(K(N + M)\\log(N + M)\\right)\\)\nで解くことも可能ですが、この問題の制約でその必要はないでしょう。",
+      "codes": [],
+      "text_sha256": "9077d30e3a72b17e6878e617bcf00567f269a3afb61933a35c6c02932752b846",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc275/abc275_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

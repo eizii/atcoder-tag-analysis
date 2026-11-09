@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc201_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc201/editorial/1829",
+      "text": "前提として、各人は一度までしか移動させる必要がありません。そのため、この問題は各人に対して左端に動かす/右端に動かす/自由に移動させる/一度も移動させないの \\(4\\) ステータスを割り振る問題に等しいです。これを踏まえた上で問題に対してアプローチをしていきます。 まず始めに、一度も移動させない人の順序付き集合 \\(S=(S_1,S_2,\\ldots,S_k)\\) を決め打ってみましょう。ここで、 \\(S_1 \\lt S_2 \\lt \\cdots \\lt S_k\\) が成り立っているものとします。このとき、以下のことが言えます。 人 \\(i\\) が始め左から \\(\\text{pos}[i]\\) 番目にいるとする。このとき、 \\(\\text{pos}[S_1] \\lt \\text{pos}[S_2] \\lt \\cdots \\lt \\text{pos}[S_k]\\) が成り立つ必要がある。 \\(S\\) に含まれる人は一度も移動しないので、これは明らかです。 さらに考察を進めると、以下の \\(3\\) つが成り立つことが分かります。 \\(S_1 \\lt i \\lt S_k\\) , \\(i \\notin S\\) を満たす人 \\(i\\) には、コスト \\(A_i\\) を払って好きな位置に移動させる操作を割り振る必要がある。 \\(i \\lt S_1\\) を満たす人 \\(i\\) には、コスト \\(A_i\\) を払って好きな位置に移動させる操作かコスト \\(B_i\\) を払って左端に移動させる操作のいずれかを割り振ることができる。 \\(S_k \\lt i\\) を満たす人 \\(i\\) には、コスト \\(A_i\\) を払って好きな位置に移動させる操作かコスト \\(C_i\\) を払って右端に移動させる操作のいずれかを割り振ることができる。 これらを踏まえ、 \\(\\text{dp}[i]:=(S\\) に含まれる人の番号の最大値が \\(i\\) である場合において、番号が \\(i\\) 以下の人々を昇順に並び替えるのにかかる合計コストの最小値 \\()\\) と定義した動的計画法を行います。遷移は以下の通りです。 \\[\ndp[i]:=\\min(\\sum_{j=1}^{i-1}\\min(A_j,B_j),\\ \\min_{j \\lt i,\\ pos[j] \\lt pos[i]}(dp[j]+\\sum_{k=j+1}^{i-1}A_k))\n\\] 上記の dp は愚直に行うと \\(O(N^2)\\) かかりますが、セグメント木と累積和により \\(O(N \\log N)\\) に高速化することができます。 このような dp を行った上で、 \\(\\min_{1 \\leq i \\leq N}(dp[i]+\\sum_{j=i+1}^{N} \\min(A_j,C_j))\\) が答えとなります。よってこの問題を解くことができました。 なお、最適解において \\(S\\) は空になりません。 \\(S\\) が空である場合、ある整数 \\(i\\ (0 \\leq i \\leq N)\\) が存在して \\(j \\leq i\\) を満たす人 \\(j\\) にはコスト \\(A_j\\) を払って好きな位置に移動させる操作かコスト \\(B_j\\) を払って左端に移動させる操作のいずれかが割り振られている \\(i \\lt j\\) を満たす人 \\(j\\) にはコスト \\(A_j\\) を払って好きな位置に移動させる操作かコスト \\(C_j\\) を払って右端に移動させる操作のいずれかが割り振られている 状態になります。このとき、人 \\(i\\) か人 \\(i+1\\) のうち存在する方 (複数いる場合は片方) を \\(S\\) に追加することで、 \\(S\\) が空である場合より合計コストを真に小さくすることが可能です。 解答例 (C++) 解答例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/all>\nusing namespace std;\nusing namespace atcoder;\nusing ll = long long;\nconst ll inf = (1ll<<60);\n\nll op(ll a,ll b){\n    return min(a,b);\n}\n\nll e(){\n    return inf;\n}\n\nint main(){\n    int N; cin >> N;\n    vector<int> P(N),A(N),B(N),C(N),pos(N+1);\n    for(int i=0; i<N; i++){\n        cin >> P[i];\n        pos[P[i]] = i+1;\n    }\n    for(int i=0; i<N; i++) cin >> A[i] >> B[i] >> C[i];\n    vector<ll> dp(N+1,inf),Asum(N+1),Bsum(N+1),Csum(N+1);\n    segtree<ll,op,e> seg(N+1);\n    ll ans = inf;\n    for(int i=0; i<N; i++){\n        Asum[i+1] = Asum[i]+A[i];\n        Bsum[i+1] = Bsum[i]+min(B[i],A[i]);\n        Csum[i+1] = Csum[i]+min(C[i],A[i]);\n    }\n    for(int i=1; i<=N; i++){\n        dp[i] = min(Bsum[i-1],seg.prod(0,pos[i])+Asum[i-1]);\n        ans = min(ans, dp[i]+Csum[N]-Csum[i]);\n        seg.set(pos[i],dp[i]-Asum[i]);\n    }\n    cout << ans << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "b7c80ade45c89da903a9d5589bf63d22e8bb83944a5922d4ea120806407ae380"
+    }
+  ],
+  "status": "available"
+}

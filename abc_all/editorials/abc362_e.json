@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc362_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc362/editorial/10399",
+      "text": "長さ\n\\(1\\)\nの部分列はすべて等差数列であり，全部で\n\\(N\\)\n個あります．これはあらかじめ数えておきます．以降，長さ\n\\(2\\)\n以上の等差数列の数え上げを考えます．\n\\(O(N^4)\\)\n時間の解法\n以下の状態を持つ DP を考えます．\n\\(\\mathrm{dp}[i][j][l] \\coloneqq\\)\n初項\n\\(A_i\\)\n，第2項\n\\(A_j\\)\n，長さ\n\\(l\\,(l \\geq 2)\\)\nであるような等差数列の個数\n\\(i\\)\nの降順に見ていき，初項\n\\(A_i\\)\nを固定します．第2項\n\\(A_j\\,(i<j)\\)\nと長さ\n\\(l\\)\nを全探索します．\n\\(l=2\\)\nの場合は\n\\((A_i,A_j)\\)\nが長さ\n\\(2\\)\nの等差数列なので，\n\\(\\mathrm{dp}[i][j][2]\\)\nに\n\\(1\\)\nを足します．\n\\(l\\geq 3\\)\nの場合は，更に第3項\n\\(A_k\\,(j<k)\\)\nを全探索します．\n\\(A_k-A_j=A_j-A_i\\)\nのとき，初項\n\\(A_i\\)\n，第2項\n\\(A_j\\)\n，長さ\n\\(l\\)\nの等差数列は，初項\n\\(A_j\\)\n，第2項\n\\(A_k\\)\n，長さ\n\\(l-1\\)\nの等差数列の先頭に\n\\(A_i\\)\nを追加したものとなっています．よって，\n\\(\\mathrm{dp}[i][j][l]\\)\nに\n\\(\\mathrm{dp}[j][k][l-1]\\)\nを足します．\n状態数\n\\(O(N^3)\\)\nに対して遷移が\n\\(O(N)\\)\nなので，全体で計算量は\n\\(O(N^4)\\)\nです．本問題の制約に対しては十分高速に動作します．\n実装例 (PyPy)\n\\(O(N^3)\\)\n時間の解法\n上の解法は更に高速化することができます．以下の状態を持つ DP を考えます．\n\\(\\mathrm{dp}[i][l][d] \\coloneqq\\)\n初項\n\\(A_i\\)\n，長さ\n\\(l\\,(l \\geq 2)\\)\n，公差\n\\(d\\)\nであるような等差数列の個数\n\\(i\\)\nの降順に見ていき，初項\n\\(A_i\\)\nを固定します．第2項\n\\(A_j\\,(i<j)\\)\nと長さ\n\\(l\\)\nを全探索します．このとき，公差は\n\\(d\\coloneqq A_j-A_i\\)\nと定まります．\n\\(l=2\\)\nの場合は\n\\((A_i,A_j)\\)\nが長さ\n\\(2\\)\nの等差数列なので，\n\\(\\mathrm{dp}[i][2][d]\\)\nに\n\\(1\\)\nを足します．\n\\(l\\geq 3\\)\nの場合，初項\n\\(A_i\\)\n，長さ\n\\(l\\)\n，公差\n\\(d\\)\nの等差数列は，初項\n\\(A_j\\)\n，長さ\n\\(l-1\\)\n，公差\n\\(d\\)\nの等差数列の先頭に\n\\(A_i\\)\nを追加したものとなっています．よって，\n\\(\\mathrm{dp}[i][l][d]\\)\nに\n\\(\\mathrm{dp}[j][l-1][d]\\)\nを足します．\n公差\n\\(d\\)\nは\n\\(10^9\\)\n程度の大きな値を取りうるため，\n\\(d\\)\nに関する添字は連想配列で持てばよいです．C++ で\nmap\nを使用した場合，時間計算量は\n\\(O(N^3\\log N)\\)\nとなります．\nまたは，各\n\\(i\\)\nについてあり得る公差をあらかじめ列挙して座標圧縮しておけば，\n\\(d\\)\nに関する添字を配列で持つことができます．この場合，時間計算量は\n\\(O(N^3)\\)\nです．\n実装例 (PyPy，座標圧縮)",
+      "codes": [],
+      "text_sha256": "96cbe399085d51ecca64b647d07fcd6ffd12c7df15fedbc9fe6af065f7c143d0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc362/abc362_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc362/editorial/10424",
+      "text": "注：\n公式解説\nの\n\\(O(N^3)\\)\n解法と本質的には等価です\n\\(\\mathrm{dp}[i][k][d]\\)\n= 長さ\n\\(k(\\geq2)\\)\nの等差数列で、公差が\n\\(d\\)\nで、末尾が\n\\(A_i\\)\nのものの個数\nとします。求める答えは\n\\(k\\)\nごとに\n\\(\\sum_{i,d}\\mathrm{dp}[i][k][d]\\)\nとなることから、このDPテーブルが全て埋められれば\n\\(\\tilde{O}(N^3)\\)\nで答えを求めることができます。（\n\\(i,k\\)\nごとに、\n\\(\\mathrm{dp}[i][k][d]\\neq 0\\)\nとなる\n\\(d\\)\nは\n\\(O(N)\\)\n個しかないことに注意してください）\n\\(\\mathrm{dp}[*][2][*]\\)\nは全探索により明らかに\n\\(\\tilde{O}(N^2)\\)\nで全て求めることができます。\n\\(k>2\\)\nのとき\n\\(\\mathrm{dp}[i][k][*]\\)\nは、末尾から\n\\(2\\)\n番目の要素がどこから来たかを考えるもらうDPにより\nと\n\\(i\\)\nの昇順に計算することができます。\n\\(i,k\\)\nごとに\n\\(dp[i][k][*]\\)\nを\n\\(\\tilde{O}(N)\\)\nで計算できることから、DPテーブル全体を求めることは\n\\(\\tilde{O}(N^3)\\)\nででき、元の問題は\n\\(\\tilde{O}(N^3)\\)\nで解けました。\n実装例(Python)",
+      "codes": [
+        "for j in 1 to i-1:\n  dp[i][k][A[i]-A[j]] += dp[j][k-1][A[i]-A[j]]"
+      ],
+      "text_sha256": "ce4b64187a99ab7bf6864a2dbb31cd4f296aeca5d60233dac2bf560f675709f6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc362/abc362_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

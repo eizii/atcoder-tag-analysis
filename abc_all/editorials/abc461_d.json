@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc461_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc461/editorial/20145",
+      "text": "抜き出す長方領域の上辺と下辺を固定した問題を時間計算量\n\\(O(W)\\)\nで解き、全体で時間計算量\n\\(O(H^2W)\\)\nで解くことを考えましょう。\n上辺と下辺を固定した際の\n\\(j\\)\n列目の累積和を\n\\(A_j\\)\nとします。また、\n\\(B_j=A_1+A_2+\\dots+A_j\\)\nとします。これらは、適切な予計算の下で時間計算量\n\\(O(W)\\)\nで求められます。\n\\(B_r-B_l\\)\nが\n\\(l+1\\)\n列目から\n\\(r\\)\n列目までの長方領域に書き込まれた整数の和に対応するので、数えるべきは\n\\(B_r-B_l = K\\)\nかつ\n\\(0 \\le l < r \\le W\\)\nなる\n\\((l,r)\\)\nの組の個数です ( ただし\n\\(B_0=0\\)\nとします )。\n\\(B_r-B_l \\ge K\\)\nなる組の数から\n\\(B_r-B_l > K\\)\nなる組の数を引くことにすると見通しがよいです。\n全ての\n\\(j\\)\nについて\n\\(A_j \\ge 0\\)\nであることから\n\\(B\\)\nは (広義) 単調増加なので、両方の問題について\n\\(l\\)\nが増加するにつれてありうる最小の\n\\(r\\)\nも (広義) 単調増加します。そして、最小の\n\\(r\\)\n以上\n\\(W\\)\n以下の全ての整数が\n\\(r\\)\nとして適切であることも分かります。\nよって、両方の問題はどちらも尺取り法を利用して解くことができます。尺取り法の\n\\(1\\)\n回あたりの時間計算量は\n\\(O(W)\\)\nです。\n時間計算量は\n\\(O(H^2W)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing ll=long long;\n\nll subp(vector<ll> &a,ll k){\n  ll n=a.size();\n  ll r1=0,r2=0,res=0;\n  for(ll l=0;l+1<n;l++){\n    r1=max(r1,l+1); r2=max(r2,l+1);\n    while(r1<n && a[r1]-a[l]<k){r1++;}\n    while(r2<n && a[r2]-a[l]<=k){r2++;}\n    res+=(r2-r1);\n  }\n  return res;\n}\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  long long h,w,k;\n  cin >> h >> w >> k;\n  vector<vector<ll>> a(h+1,vector<ll>(w+1,0));\n  for(ll i=1;i<=h;i++){\n    string s;\n    cin >> s;\n    for(ll j=1;j<=w;j++){\n      if(s[j-1]=='1'){a[i][j]=1;}\n    }\n  }\n  for(ll i=1;i<=h;i++){\n    for(ll j=1;j<=w;j++){\n      a[i][j]+=a[i-1][j];\n    }\n  }\n\n  ll res=0;\n  for(ll u=1;u<=h;u++){\n    for(ll d=u;d<=h;d++){\n      vector<ll> b(w+1,0);\n      for(ll j=1;j<=w;j++){\n        b[j]=b[j-1]+(a[d][j]-a[u-1][j]);\n      }\n      res+=subp(b,k);\n    }\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "8a750d559f9203bfa595d8dca19608e6304cb7c39875c302e72de7a53fa861ae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc461/abc461_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

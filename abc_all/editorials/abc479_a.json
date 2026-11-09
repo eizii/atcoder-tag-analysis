@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc479_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc479/editorial/27129",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは practice contest の問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。 また、プログラミングコンテストの問題に慣れていない方は、 AtCoder Beginners Selection の問題をいくつか解いてみることをおすすめします。 この問題で行うべきは以下の 2 つです。 標準入力から \\(N,A_1,A_2,\\dots,A_N\\) を受け取る \\(A_1+A_3+\\dots\\) を求め、答えを標準出力へと出力する。 1. については、 \\(N\\) を受け取った後に \\(A\\) を for ループなどで受け取ることで実現可能です。 2. についても、 for ループを公差 \\(2\\) で回すことで実現可能です。なお、配列の添え字を \\(0\\) 始めで管理している場合は求めるべきものが偶数項目の和になることに注意してください。 実装例 (C++): 原案: physics0523",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int n;\n  cin >> n;\n  vector<int> a(n);\n  for(auto &nx : a){cin >> nx;}\n  int res=0;\n  for(int i=0;i<n;i+=2){res+=a[i];}\n  cout << res << \"\\n\";\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "0c888420f0d9fe4a443d0770432c8d5d92392ae213f4b88ce416154698a48781"
+    }
+  ],
+  "status": "available"
+}

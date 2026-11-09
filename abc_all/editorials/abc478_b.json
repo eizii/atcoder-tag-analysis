@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc478_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc478/editorial/26499",
+      "text": "相異なる \\(3\\) 種類のトッピングを選ぶ方法を全て試せばよいです。\n実装の際には価格が \\(1\\) から \\(N\\) であることに注意してください。 実装例(Python) 別解：上の解法の計算量は \\(\\Theta(N^3)\\) 時間ですが、選ぶ \\(3\\) 種類のトッピングを \\(2\\) 種類と \\(1\\) 種類に分けて考えるなどの方法で \\(\\Theta(N^2)\\) 時間でも解くことができます。 実装例(Python)",
+      "codes": [
+        "N, V = map(int, input().split())\nW = list(map(int, input().split()))\nans = 0\nfor i in range(N):\n  for j in range(i + 1, N):\n    for k in range(j + 1, N):\n      if i + j + k + 3 <= V and ans < W[i] + W[j] + W[k]:\n        ans = W[i] + W[j] + W[k]\nprint(ans)\n",
+        "N, V = map(int, input().split())\nW = list(map(int, input().split()))\nA = [-1000000000] * V\nans = 0\nfor k in range(N):\n  for v in range(V):\n    if v + k + 1 <= V:\n      ans = max(ans, A[v] + W[k])\n  for i in range(k):\n    v = i + k + 2\n    if v < V:\n      A[v] = max(A[v], W[i] + W[k])\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "2ed8df36bea38276a887a60f14981a093684d32473c57d35ba693ff4678034a7"
+    }
+  ],
+  "status": "available"
+}

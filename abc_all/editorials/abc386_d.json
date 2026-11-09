@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc386_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc386/editorial/11699",
+      "text": "条件を言い換えましょう．マス\n\\((x,y)\\)\nが黒のとき，一つ目の条件からマス\n\\((x,1),(x,2),\\ldots,(x,y)\\)\nはすべて黒色である必要があります．さらに マス\n\\((x,j)\\)\nが黒色のとき，二つ目の条件からマス\n\\((1,j),(2,j),\\ldots,(x,j)\\)\nはすべて黒色である必要があります．よって， マス\n\\((x,y)\\)\nが黒のとき，マス\n\\((x,y)\\)\nより左上にあるマス（マス\n\\((i,j)\\ (1\\leq i\\leq x,1\\leq j\\leq y)\\)\n）はすべて黒色である必要があります．\nこれを踏まえたうえで，条件を満たすことができる必要十分条件は次のようになります．\n\\(C_i=\\texttt{W}, C_j=\\texttt{B},X_i\\leq X_j,Y_i\\leq Y_j\\)\nとなる\n\\((i,j)\\)\nが存在しない．\n必要条件は上の議論から明らかです．十分条件は以下のように構成することができます．\nマス\n\\((x,y)\\)\nについて，\n\\(x\\leq X_i\\)\nかつ\n\\(y\\leq Y_i\\)\nかつ\n\\(C_i=\\texttt{B}\\)\nを満たす\n\\(i\\)\nが存在するとき黒に， そうでないとき白で塗る\n判定方法について考えます．愚直に調べると\n\\(O(M^2)\\)\nかかってしまい間に合いません．すでに塗られているマスを\n\\((X_i,Y_i)\\)\nの辞書順にソートします．そうすると，\n\\(X_i\\leq X_j\\ (i\\lt j)\\)\n（かつ\n\\(X_i=X_j\\)\nのとき\n\\(Y_i\\lt Y_j\\)\n）が成り立つため，条件は\n\\(C_i=\\texttt{W}, C_j=\\texttt{B},Y_i\\leq Y_j\\)\nとなる\n\\((i,j)\\ (i\\lt j)\\)\nが存在しない．\nのように言い換えることができます．これは，\n\\(i\\)\nの昇順に見ていきながら\n\\(C_i=\\texttt{W}\\)\nであるような\n\\(i\\)\nの\n\\(Y_i\\)\nの最小値を管理することで判定することができます．",
+      "codes": [
+        "N, M = map(int, input().split())\nxyc = []\nfor i in range(M):\n    x, y, c = input().split()\n    xyc.append((int(x), int(y), c))\nxyc.sort()\nmin_y = 1 << 30\nans = \"Yes\"\nfor x, y, c in xyc:\n    if c == \"W\":\n        min_y = min(min_y, y)\n    else:\n        if y >= min_y:\n            ans = \"No\"\nprint(ans)"
+      ],
+      "text_sha256": "1ce5357a4e7c56f85d968e74cd793fb52b9c3f1b773acfeaca936d7f0e179001",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc386/abc386_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

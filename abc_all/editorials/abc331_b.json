@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc331_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc331/editorial/7805",
+      "text": "必要な卵の個数が高々\n\\(100\\)\n個であることから、どのパックも高々\n\\(100\\)\n個買えば十分です。よって、各パックを買う個数を\n\\(0\\)\nから\n\\(100\\)\nまで全探索することでこの問題を解くことができます。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int n, s, m, l;\n  cin >> n >> s >> m >> l;\n\n  int ans = 100000000;\n  for(int a=0; a<=100; a++){\n    for(int b=0; b<=100; b++){\n      for(int c=0; c<=100; c++){\n        if(a*6 + b*8 + c*12 >= n){\n          ans=min(ans, a*s + b*m + c*l);\n        }\n      }\n    }\n  }\n  cout << ans << endl;\n}",
+        "N, S, M, L = map(int,input().split())\n\nans = 10**8\nfor a in range(101):\n  for b in range(101):\n    for c in range(101):\n      if a*6 + b*8 + c*12 >= N:\n        ans = min(ans, a*S + b*M + c*L)\n\nprint(ans)"
+      ],
+      "text_sha256": "37cb57f1796aee6bea062cb6fabaf4a83b392606bd00d260ca724d2636adc91b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc331/abc331_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

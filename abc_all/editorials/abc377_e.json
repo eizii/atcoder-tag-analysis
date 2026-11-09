@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc377_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc377/editorial/11238",
+      "text": "頂点 \\(1,\\) 頂点 \\(2,\\ldots,\\) 頂点 \\(N\\) からなり、\\(i\\to P _ i\\ (1\\leq i\\leq N)\\) の \\(N\\) 辺がある有向グラフを考えます。\nこのグラフにおいて、\\(i\\) から \\(k\\) 回進んだ頂点を \\(P ^ k _ i\\) と呼ぶことにします（どの頂点についてもその頂点から出る辺は \\(1\\) 本のみであるため、これは一意に定まります）。\n求める答えは \\((P ^ {2 ^ K} _ i) _ i\\) です（証明は省略しますが、\\(K\\) についての帰納法で示すのが平易だと思います）。\n有向グラフはいくつかのサイクルに分けることができます。\nそれぞれのサイクルについて、\\(2 ^ K\\) をそのサイクルの長さで割った余りを考えれば最終的な値を求めることができます。\nサイクルの個数を \\(M\\) として時間計算量は \\(O(N+M\\log K)\\) となります。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <atcoder/math>\n#include <iostream>\n#include <vector>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    unsigned long K;\n    cin >> N >> K;\n    vector<unsigned> P(N);\n    for (auto &p : P) {\n        cin >> p;\n        --p;\n    }\n\n    // 求める順列\n    vector<unsigned> ans(N);\n    // used[i] := i に対する答えをすでに求めていれば true\n    basic_string used(N, false);\n    for (unsigned i{}; i < N; ++i) if (!used[i]) {\n        // i を含むサイクルを求める\n        vector<unsigned> cycle;\n        {\n            unsigned j{i};\n            while (!used[j]) {\n                used[j] = true;\n                cycle.push_back(j);\n                j = P[j];\n            }\n        }\n        // サイクルに対して答えを求める\n        const auto cycle_length{size(cycle)};\n        const auto shift{atcoder::pow_mod(2, K, cycle_length)};\n        for (unsigned j{}; j < cycle_length; ++j)\n            ans[cycle[j]] = cycle[(j + shift) % cycle_length];\n    }\n    \n    for (const auto p : ans)\n        cout << p + 1 << \" \";\n    cout << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "adddbcca3dfbcb1fa85411ee830cd6e5b1752e438f6fb54994394f63934a17b6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc377/abc377_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc377/editorial/11282",
+      "text": "以下では\n\\((1, \\dots, N)\\)\nの順列のことを単に順列と呼びます。また、順列\n\\(P\\)\nに対して、\n\\(P_i\\)\nのことを\n\\(P(i)\\)\nとも書くことにします。\n順列\n\\(P, Q\\)\nに対して、\n\\(R(i) = Q(P(i)) \\: (1 \\leq i \\leq N)\\)\nを満たす順列\n\\(R\\)\nのことを、\n\\(Q\\)\nと\n\\(P\\)\nの「積」だと思って\n\\(QP\\)\nと書くことにします。この積は結合則を満たします。\n本問の操作は、\n\\(P\\)\nを\n\\(P^2 \\: (= PP)\\)\nで置き換えることとみなせます。この見方をすると、操作のたびに\n\\(P, P^2, P^4, P^8, \\dots\\)\nと置き換わっていき、特に\n\\(K\\)\n回の操作後に\n\\(P^{2^K}\\)\nとなっていることがわかりやすいと思います。\nこの考え方の背景には\n対称群\nがあります。競技プログラミングで出題される順列の問題には、対称群の考え方が活用できることも多いです。\nおすすめ記事：\n競プロ er のための群論 (swap と順列と対称群) （箱星さん）",
+      "codes": [],
+      "text_sha256": "8584e8b7880801bb9695a9158f9d32fb3fd34e3bb34dd419a6007ff4586c6710",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc377/abc377_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc377/editorial/11242",
+      "text": "全体で \\(O(N)\\) 時間で解く方法について解説します。\n各サイクルについて、その長さを \\(m\\) として \\(O(m)\\) 時間で答えを求められればよいです。\nこれは次の \\(2\\) つの方針で実現できます。\n事前に \\(O(N)\\) 時間で \\(\\varphi(1),\\varphi(2),\\ldots,\\varphi(N)\\) を求めておき、\\(2 ^ K\\bmod m\\) を \\(O(\\log\\varphi(m))\\) 時間で求める\n\\(2 ^ k\\bmod m\\) がたかだか \\(m+1\\) 回で重複するため、周期性を利用して \\(2 ^ K\\bmod m\\) を \\(O(m)\\) 時間で求める\nどちらの方針でも全体で \\(O(N)\\) 時間となります。\n実装例は以下のようになります。\nこの実装例では、ひとつめの方針で実装を行っています。",
+      "codes": [
+        "#include <atcoder/math>\n#include <iostream>\n#include <vector>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    unsigned long K;\n    cin >> N >> K;\n\n    // φ(1), φ(2), ..., φ(N) を O(N) 時間で求める\n    vector<unsigned> sieve(N + 1, 1), least_prime_factor(N + 1), primes, totient(N + 1, 1);\n    for (unsigned i{2}; i <= N; ++i) {\n        if (sieve[i]) {\n            primes.push_back(i);\n            least_prime_factor[i] = i;\n            totient[i] = i - 1;\n        }\n        for (const auto &p : primes) {\n            if (i * p > N)\n                break;\n            sieve[i * p] = false;\n            least_prime_factor[i * p] = p;\n            if (least_prime_factor[i] == p) {\n                totient[i * p] = totient[i] * p;\n                break;\n            }\n            totient[i * p] = totient[i] * (p - 1);\n        }\n    }\n\n    vector<unsigned> P(N);\n    for (auto &p : P) {\n        cin >> p;\n        --p;\n    }\n\n    // 2^K mod m を O(m) 時間で求める\n    const auto safe_fast_pow{[&totient](unsigned a, unsigned long K, unsigned m) {\n        return atcoder::pow_mod(a, min(K, K % totient[m] + totient[m]), m);\n    }};\n\n    vector<unsigned> ans(N), used(N);\n    for (unsigned i{}; i < N; ++i) if (!used[i]) {\n        vector<unsigned> cycle;\n        {\n            unsigned j{i};\n            while (!used[j]) {\n                used[j] = 1;\n                cycle.push_back(j);\n                j = P[j];\n            }\n        }\n        const auto cycle_length{size(cycle)};\n        const auto shift{safe_fast_pow(2, K, cycle_length)};\n        for (unsigned j{}; j < cycle_length; ++j)\n            ans[cycle[j]] = cycle[(j + shift) % cycle_length];\n    }\n    for (const auto p : ans)\n        cout << p + 1 << \" \";\n    cout << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "ea0eea745ac20e438ef62fcbf4b2affee30bf1f1c3450424603dbb7b031e30ef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc377/abc377_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc217_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc217/editorial/2578",
+      "text": "\\(2\\)\n番目のクエリを処理するには「\n\\(x\\)\n超過で最小の切られた地点」「\n\\(x\\)\n未満で最大の切られた地点」の 2 つの要素を高速に取得できればよいです。よってこの問題を解くには次の 3 つのクエリを処理するデータ構造を使用すればよいとわかります。\n集合\n\\(S\\)\nに\n\\(x\\)\nを追加\n\\(S\\)\nに属する\n\\(x\\)\nより大きい要素のうち最小の要素を取得\n\\(S\\)\nに属する\n\\(x\\)\nより小さい要素のうち最大の要素を取得\nこのようなクエリは順序付き集合を管理することで高速に処理することができます。順序付き集合とは一定の順序を持って管理された集合のことで、この問題の場合は数値の大小によって要素を順序付けた集合を管理すればよいです。実装は一般には平衡二分探索木や B-Tree と呼ばれるデータ構造によって行われます。\n主要な言語の多くでは順序付き集合が STL に存在するので上記のクエリを高速に処理することができます。たとえば C++ では\nstd::set\nと呼ばれるデータ構造があり、以下に説明する方法で 上記の 3 つのクエリを (要素数を\n\\(n\\)\nとして) すべて\n\\(\\mathrm{O}(\\log n)\\)\nで処理することができます。\nただし、Python の場合は STL に順序付き集合が実装されておらず、自分で何らかのデータ構造を持ち出す必要があります。実装方法はさまざまですが、たとえば座標圧縮と Segment Tree / Fenwick Tree を利用して順序付き集合をシミュレートすればこちらもクエリ\n\\(1\\)\n回あたり\n\\(\\mathrm{O}(\\log n)\\)\nで解くことができます。   Python で順序付き集合を管理する方法はいくつかの個人ブログで解説がなされているので「std::set python 競プロ」などの単語で検索してみてください。 ( おすすめの方法を知っている方はユーザー解説で解説していただけると多くの方の勉強になると思います。 )\n以上の方法によりこの問題を\n\\(\\mathrm{O}(Q \\log Q)\\)\nで解くことができました。\n別解として、\nABC214-D : Sum of Max\nと同様にクエリを逆から見て切られた状態から Union-Find で結合していく方法もあります。また、 Van Emde Boas tree や Y-fast trie などの高度なデータ構造を使用することで\n\\(\\mathrm{O}(Q \\log \\log \\max(x))\\)\nで解くこともできます。",
+      "codes": [
+        "#include <iostream>\n#include <set>\nusing namespace std;\n\nint main() {\n  // set<int> 型のオブジェクト st を生成\n  set<int> st;\n\n  // s に 3 を挿入 \n  st.insert(3);\n  // s に 5 を挿入\n  st.insert(5);\n\n  // 4 以上の要素のうち最小の要素のイテレータを取得\n  auto it = st.lower_bound(4); \n  // it の示す要素を出力\n  cout << *it << endl;  // 5 を出力\n  // it の1つ前のイテレータの示す要素を出力\n  cout << *prev(it) << endl; // 3 を出力\n}"
+      ],
+      "text_sha256": "a56fee4b72120426c3e54554a3e0597f3439d18d9231544d29010c815d094615",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc217/abc217_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc217/editorial/3825",
+      "text": "word size\n\\(w\\)\nに対して\n\\(O(L/w+Q)\\)\n時間のアルゴリズムを書きます。\n前提知識\nこの解説\nの後半で言及されているデータ構造を使います。これにより、\n\\(A\\subseteq \\{0, 1, \\dots, L\\}\\)\nに対して\n\\(S \\gets A\\)\nで初期化\n\\(O(L/w+|A|)\\)\n時間\n\\(S \\gets S \\setminus \\{i\\}\\)\nで更新 (remove)\nならし\n\\(O(1)\\)\n時間\n与えられた\n\\(i\\)\nに対して\n\\(\\max\\,\\{j\\in S\\mid j\\lt i\\}\\)\nを求める (predecessor)\n与えられた\n\\(i\\)\nに対して\n\\(\\min\\,\\{j\\in S\\mid j\\gt i\\}\\)\nを求める (successor)\nこれらもならし\n\\(O(1)\\)\n時間\nができます。\n解法\nまず、クエリを先読みして、\n1\nのクエリで聞かれる\n\\(p\\)\nたちからなる集合を\n\\(P\\)\nとし、\n\\(S \\gets P \\cup \\{0, L\\}\\)\nで初期化します。\nクエリを後ろから順に見て、\n1\nのクエリに対しては remove を、\n2\nのクエリに対しては predecessor と successor を用いることで、一つあたり (amortized)\n\\(O(1)\\)\n時間で処理できます。\n提出コード",
+      "codes": [],
+      "text_sha256": "2e9aa2e26fc0ff1feacce41a90512d176f00408644f1c45452f3b4a8ec011cf4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc217/abc217_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

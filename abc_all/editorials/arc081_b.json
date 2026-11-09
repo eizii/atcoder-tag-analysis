@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc081_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc081/editorial.pdf",
+      "text": "D: Coloring Dominoes\n\n ドミノの並べ方は，縦2 × 横1 のドミノを1 個並べるか(X) ，縦1 × 横2 のドミノを2 個縦に並べるか(Y ) のど\n\nちらかを，横につなげたような並べ方になります．\n\n\n\n\n\n 左から順にドミノを塗ることを考えます．縦に2 個ドミノが並んでいる箇所については，この2 個を同時に塗ります．\n\n 一番左の箇所については，\n\n   • X: 3 通り\n\n   • Y : 6 通り\n\nの塗り方があります．\n\n\n\n\n\n また，それ以外の箇所については，それより左の箇所がすべて塗られているとしたとき，\n\n   • X (すぐ左がX): 2 通り\n\n   • X (すぐ左がY ): 1 通り\n\n   • Y (すぐ左がX): 2 通り\n\n   • Y (すぐ左がY ): 3 通り\n\nの塗り方があります．\n\n\n\n\n\n                                                   2\n\f\n よって，ドミノの並べ方を判定した上で，左から順に上の規則で並べ方の個数を求めていけばよいです．",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "37693e58329e78b5d37fe35effff8a282b7da4ec45dd3d8a10735c3d9792d9b3"
+    }
+  ],
+  "status": "available"
+}

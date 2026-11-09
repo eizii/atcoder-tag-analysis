@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc266_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc266/editorial/4659",
+      "text": "実は次が成り立ちます：\n異なる\n\\(2\\)\n点\n\\(A=(A_x,A_y),B=(B_x,B_y)\\)\nに対し、\n\\(\\angle AOB\\)\nは、\n\\(A_xB_y-A_yB_x>0\\)\nのとき\n\\(180\\)\n度未満であり、\n\\(\\leq 0\\)\nのとき\n\\(180\\)\n度以上である。ただし、角度は反時計回りに測るものとする。\nこのことの証明は、外積(cross product)を用いるのが一般的です。\nこの事実を用いると、以下のように\n\\(C-B\\)\nと\n\\(A-B\\)\nを用いて、角\n\\(B\\)\nの大きさが\n\\(180\\)\n度未満であるかどうかを判定することができます。\n別の方法として、\n\\(B-A\\)\nと\n\\(C-B\\)\nにより判定することもできます。",
+      "codes": [],
+      "text_sha256": "236e9bd09dc76f24a071c64eba7d03f803ac6eb9e7c4b8393f702634f9cf55ec",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc266/abc266_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc266/editorial/4717",
+      "text": "四角形が凸であるということは、\n\\(4\\)\n点の凸包 (\nhttps://ja.wikipedia.org/wiki/%E5%87%B8%E5%8C%85\n) が四角形と一致することと同値です。\nよって\n\\(4\\)\n点の凸包を求め、頂点数が\n\\(4\\)\nであるかを確認すればよいです。\n\\(N\\)\n点の凸包は\n\\(O \\left( N \\log N \\right)\\)\nで求めることができるので、これでもこの問題を解くことができます。",
+      "codes": [],
+      "text_sha256": "9b440ed1c7a906aa395711f9788c72838f936c5bc1aaa9bd0f5d1befcbbadc6e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc266/abc266_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc266/editorial/4723",
+      "text": "問題文の条件のもとで、以下が成立します。\n「四角形が凸である」\n⇔「四角形の2本の対角線が交わる」\n⇔「四角形の2本の対角線の両方において、対角線に使われない2点が対角線 (を延長した直線) の異なる側にある」\nまた、2点\n\\((x_0, y_0), (x_1, y_1)\\)\nが直線\n\\(f(x, y) = 0\\)\nの異なる側にあるかは、\n\\(f(x_0, y_0)\\)\nと\n\\(f(x_1, y_1)\\)\nの符号が異なるかを見ることで判定できます。\nよって、2本の対角線それぞれについてこの判定を行うことで解くことができます。\nなお、2点\n\\((x_0, y_0), (x_1, y_1)\\)\nを通る直線の方程式として\n\\((x_1 - x_0)(y - y_0) = (y_1 - y_0)(x - x_0)\\)\nを使うと、場合分けの必要がありません。\n実装例 (Python)",
+      "codes": [
+        "X = []\nY = []\nfor _ in range(4):\n    x, y = map(int, input().split())\n    X.append(x)\n    Y.append(y)\n\n\ndef f0(x, y):  # 1 本目の対角線 (方程式の右辺が 0 になるようにした場合の左辺)\n    return (X[2] - X[0]) * (y - Y[0]) - (Y[2] - Y[0]) * (x - X[0])\n\n\ndef f1(x, y):  # 2 本目の対角線 (方程式の右辺が 0 になるようにした場合の左辺)\n    return (X[3] - X[1]) * (y - Y[1]) - (Y[3] - Y[1]) * (x - X[1])\n\n\ndef sgn(x):  # x の符号が正なら 1、負なら -1、0 なら 0 を返す\n    if x == 0:\n        return 0\n    return x // abs(x)\n\n\nif sgn(f0(X[1], Y[1])) != sgn(f0(X[3], Y[3])) and sgn(f1(X[0], Y[0])) != sgn(f1(X[2], Y[2])):\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "3bec39880d7d79efc63b33036c0d132994726621b402aa2edb8f69579268c945",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc266/abc266_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

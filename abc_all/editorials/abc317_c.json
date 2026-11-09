@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc317_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc317/editorial/7025",
+      "text": "この問題はDFSにより解くことができます。\n現在いる街、すでに行ったことのある街の集合、今までに通った道の長さの合計を保持しながら、まだ行ったことのない街へ移動するDFSをします。\n計算量は\n\\(O(N N!)\\)\nであり、十分高速に動作します。\nなお競技プログラミングにおいては、実装の簡略化などの理由で、持つべき状態をDFSの引数として渡すかわりにグローバル変数を更新するような実装がしばしばなされます。\n実装例(Python)\n実装例(C)",
+      "codes": [
+        "N,M=map(int,input().split())\nE=[[0]*(N+1) for _ in range(N+1)]\nfor _ in range(M):\n  a,b,c=map(int,input().split())\n  E[a][b]=c\n  E[b][a]=c\n\nans=0\nused=[False]*(N+1)\n\ndef dfs(v,s):\n  global ans\n  used[v]=True\n  if s>ans: ans=s\n  for i in range(1,N+1):\n    if not used[i] and E[v][i]:\n      dfs(i,s+E[v][i])\n  used[v]=False\n\nfor i in range(1,N+1):\n  dfs(i,0)\n\nprint(ans)",
+        "#include<stdio.h>\n#define max(p,q)((p)>(q)?(p):(q))\n\nint n,m;\nint e[11][11];\nint used[11];\nint ans;\nvoid dfs(int v,int sum){\n\tused[v]=1;\n\tans=max(ans,sum);\n\tfor(int i=1;i<=n;i++)if(!used[i]&&e[v][i])dfs(i,sum+e[v][i]);\n\tused[v]=0;\n}\n\nint main(){\n\tscanf(\"%d%d\",&n,&m);\n\tfor(int i=0;i<m;i++){\n\t\tint a,b,c;\n\t\tscanf(\"%d%d%d\",&a,&b,&c);\n\t\te[a][b]=e[b][a]=c;\n\t}\n\tfor(int i=1;i<=n;i++)dfs(i,0);\n\tprintf(\"%d\\n\",ans);\n}"
+      ],
+      "text_sha256": "5d54f063f997a9aa37bca86fd99c9602d08b4d0f855f79b5c8d3fb279f37cbec",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc317/abc317_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

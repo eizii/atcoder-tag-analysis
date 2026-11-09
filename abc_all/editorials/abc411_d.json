@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc411_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc411/editorial/13359",
+      "text": "長さが\n\\(O(N)\\)\nの文字列のコピーには\n\\(O(N)\\)\nの時間がかかってしまうため、各クエリで指示される操作をそのまま愚直にシミュレーションすることはできません。永続配列などのデータ構造を用いた解法も考えられますが、ここではより実装が簡単な解法を説明します。\n簡単のため、以降サーバーのことを PC\n\\(0\\)\nと呼ぶことにします。\n前から\n\\(t\\)\n番目までのクエリを処理し終えた段階での PC\n\\(i\\)\nの文字列を\n\\(f(t, i)\\ (0\\leq t\\leq Q, 0\\leq i\\leq N)\\)\nと表記します。\n各種類のクエリの内容をこの\n\\(f\\)\nを用いて整理すると、以下のようになります。\n任意の\n\\(t\\ (1\\leq t\\leq Q)\\)\nについて、\n\\(t\\)\n番目のクエリが、\n1 p\nのとき：\n\\(f(t, p)=f(t-1, 0)\\)\n、\n\\(f(t,i)=f(t-1,i)\\ (i\\neq p)\\)\n2 p s\nのとき：\n\\(f(t, p)=f(t-1, p)+s\\)\n、\n\\(f(t,i)=f(t-1,i)\\ (i\\neq p)\\)\n（ただしここでの\n\\(+\\)\nは文字列の連結を表す）\n3 p\nのとき：\n\\(f(t, 0)=f(t-1, p)\\)\n、\n\\(f(t,i)=f(t-1,i)\\ (i\\neq 0)\\)\n今求めたいのは\n\\(f(Q, 0)\\)\nの値ですから、上記の関係式を\n\\(t=Q,Q-1,\\dots,1\\)\nの順に繰り返し適応していけば（すなわちクエリを後ろから順に見ていけば）、最終的にはある\n\\(i\\)\nに対する\n\\(f(0, i)\\)\nを求める問題に帰着されます。この問題の答えは空文字列だとわかっていますから、その時点で求値が完了します。\nより具体的にアルゴリズムを記述すると、以下の通りです。\n\\(t=Q, i=0,\\mathrm{ans}=\\)\n(空文字列) とする。\n\\(\\mathrm{query}_t=\\)\n1 p\nかつ\n\\(i=p\\)\nならば、\n\\(i\\leftarrow 0\\)\nと更新する。\n\\(\\mathrm{query}_t=\\)\n2 p s\nかつ\n\\(i=p\\)\nならば、\n\\(\\mathrm{ans}\\leftarrow s+\\mathrm{ans}\\)\nと更新する。\n\\(\\mathrm{query}_t=\\)\n3 p\nかつ\n\\(i=0\\)\nならば、\n\\(i\\leftarrow p\\)\nと更新する。\n\\(t\\leftarrow t-1\\)\nと更新する。\n\\(t=0\\)\nならばアルゴリズムを終了する。そうでないならば 2. に戻る。\nこのアルゴリズムは\n\\(O(Q+\\sum |s|)\\)\n時間で動作します。\n実装上の注意\n：C++ や Python を含む多くの言語では、3. の操作を単に\nans = s + ans\nと実装してしまうと、\nans\nをコピーするコストが余計にかかってしまい、計算量が悪化します。よって、\nans\nの値を管理する代わりに、\nans\nをリバースした文字列\nrev(ans)\nの値を管理し（この場合 3. の操作は\nrev(ans) += rev(s)\nと実装できます）、一番最後にもう一度リバースして元の\nans\nの値を求めるとよいです。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, q;\n    cin >> n >> q;\n    vector<int> op(q), p(q);\n    vector<string> s(q);\n    for (int i = 0; i < q; i++) {\n        cin >> op[i] >> p[i];\n        if (op[i] == 2) {\n            cin >> s[i];\n            reverse(s[i].begin(), s[i].end());\n        }\n    }\n\n    string ans;\n    int i = 0;\n    for (int t = q - 1; t >= 0; t--) {\n        if (op[t] == 1) {\n            if (i == p[t]) {\n                i = 0;\n            }\n        } else if (op[t] == 2) {\n            if (i == p[t]) {\n                ans += s[t];\n            }\n        } else {\n            if (i == 0) {\n                i = p[t];\n            }\n        }\n    }\n    reverse(ans.begin(), ans.end());\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "42765f30051ca1c1e2f38eefe6c37a13a1b01585e347c0b7e3ceddee496d765c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc411/abc411_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

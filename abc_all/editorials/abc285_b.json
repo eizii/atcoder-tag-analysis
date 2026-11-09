@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc285_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc285/editorial/5528",
+      "text": "競技プログラミングにおいて、問題の題意が問題文のみでは多少読み取りづらいような問題もあります。個人的にはこの問題もその一例だと思います。\nそのような場合、サンプルの説明文を参照しましょう。問題の要求を理解することが簡単になることがあります。\n制約が\n\\(N \\le 5000\\)\nと小さいので、各\n\\(i\\)\nに対して\n\\(O(N)\\)\n回程度の計算量をかけてもよいことが分かります。\nなので、以下のように素直にループを回す解法が成立します。\n\\(i=1,2,\\dots,N-1\\)\nについて、以下を繰り返す。\n\\(j=1,2,\\dots\\)\nについて、以下を繰り返す。\n\\(i+j > N\\)\nのとき、\n\\(i\\)\nに対する答えは\n\\(j-1\\)\nで確定する。\n\\(S_j = S_{j+i}\\)\nのとき、\n\\(i\\)\nに対する答えは\n\\(j-1\\)\nで確定する。\n上のどちらでもない場合、\n\\(j\\)\nループを続行する。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  string s;\n  cin >> n >> s;\n  for(int i=1;i<n;i++){\n    for(int j=1;j<=n;j++){\n      if(i+j>n){cout << j-1 << \"\\n\";break;}\n      if(s[j-1]==s[j+i-1]){cout << j-1 << \"\\n\";break;}\n    }\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "fd835fcfffe766617517538995b03231f78940d0024f94db4db2871f066b8a3f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc285/abc285_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc468_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc468/editorial/23735",
+      "text": "あるマスが監視されていない条件は「そのマスと距離が \\(D\\) 以下のマスにガードマンがいない」です。したがって、各マスに対しそのマスと距離が \\(D\\) 以下のマスにガードマンがいないかを愚直に判定することでガードマンに監視されていないマスの個数を求めることができます。 実装例(Python3) Bonus：制約を \\(1\\le D\\le N\\le 5\\times 10^5\\) で解いてみてください。(ABC - C 程度)",
+      "codes": [
+        "m, d = map(int, input().split())\ns = input()\nans = 0\nfor x in range(m):\n    ok = False\n    for i in range(m):\n        ok |= s[i] == \"G\" and abs(x - i) <= d\n    ans += not ok\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "dd3214b90c80d614830c7280d9c9059b6b0866796fe719735d4d7aac6c848dc3"
+    }
+  ],
+  "status": "available"
+}

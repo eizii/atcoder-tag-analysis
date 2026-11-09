@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc465_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc465/editorial/22418",
+      "text": "まず、操作を以下のように言い換えます。\n\\(A=()\\)\nとする。\n\\(k=1,2,\\ldots,N\\)\nに対し、以下の操作を行う：\n\\(A\\)\nの末尾に\n\\(k\\)\nを追加する。\n\\(S_k=\\)\no\nの場合、\n\\(A\\)\nを反転する。\nまた、反転した回数\n\\(c\\)\nを保存すると、毎回反転するのではなく最後にまとめて反転することで以下のようにして\n\\(A\\)\nを求めることができます：\n\\(A=(),c=0\\)\nとする。\n\\(k=1,2,\\ldots,N\\)\nに対し、以下の操作を行う：\n\\(c\\)\nが偶数なら\n\\(A\\)\nの末尾に、奇数なら\n\\(A\\)\nの先頭に\n\\(k\\)\nを追加する。\n\\(S_k=\\)\no\nの場合、\n\\(c\\)\nに\n\\(1\\)\n加算する。\n\\(c\\)\nが奇数の場合、\n\\(A\\)\nを反転する。\nこのアルゴリズムは先頭に追加した要素を別の配列として保持するなどして\n\\(O(N)\\)\n時間で動作します。\n以上を適切に実装することでこの問題に正答することができます。\n実装例(Python3)",
+      "codes": [
+        "n = int(input())\ns = input()\na, b = [], []\nrev = False\nfor i in range(n):\n    if rev:\n        a.append(i + 1)\n    else:\n        b.append(i + 1)\n    if s[i] == \"o\":\n        rev ^= True\nans = a[::-1] + b\nif rev:\n    ans = ans[::-1]\nprint(*ans)"
+      ],
+      "text_sha256": "4159bfe61a267e36ff8215b719c689249c58a41730336fd3de2a9e474af95013",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc465/abc465_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

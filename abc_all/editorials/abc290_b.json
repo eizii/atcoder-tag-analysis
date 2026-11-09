@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc290_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc290/editorial/5755",
+      "text": "サンプルの説明文のような流れを素直に実装するとこの問題に正解することができます。\n具体的には、文字列を前から見て先頭から\n\\(K+1\\)\n個目以降の\no\nを\nx\nに書き換えることになります。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,k;\n  string s;\n  cin >> n >> k >> s;\n  for(auto &nx : s){\n    if(nx=='o'){\n      if(k<=0){nx='x';}\n      k--;\n    }\n  }\n  cout << s << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "5875155b997d3c2172d55886e93bbd2333c2f30e308e50a47a9177f20ba084b6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc290/abc290_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

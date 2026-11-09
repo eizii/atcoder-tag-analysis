@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc134_b",
+  "editorials": [
+    {
+      "text": "B: Golden Apple\n1 人の監視員を配置すると連続した2D + 1 本のりんごの木を監視できます。前から順に詰めて配置する\n(例えば最初の監視員には1, 2, ..., 2D + 1 番目の木を監視させる) のが最適なので、答えはN を2D + 1 で\n割った切り上げになります。一般的に、整数A, B に対してA\nB の切り上げはA+B−1\nB\nの商と等しいです。し\nたがって、今回の場合はN+2D\n2D+1 の商が答えになります。C++ での実装例を以下に挙げます。\n1 #include <bits/stdc++.h>\n2\n3 using namespace std;\n4\n5 int main() {\n6\nint N, D; cin >> N >> D;\n7\nint ans = (N + D * 2) / (D * 2 + 1);\n8\ncout << ans << endl;\n9 }\n",
+      "text_sha256": "a1b2f659bf0c02901d12c2d4e0aa2f4f1364254c4ce6fddf1aff08726b512245",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc134/abc134_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

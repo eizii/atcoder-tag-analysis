@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc270_g",
+  "title": "Sequence in mod P",
+  "contests": [
+    {
+      "contest_id": "abc270",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2220,
+  "raw_difficulty": 2220,
+  "contest_id": "abc270",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc270/tasks/abc270_g",
+  "statement": "配点 : 600 点 問題文 次の漸化式で定められる数列 X=(X_0,X_1,\\ldots) があります。 X_i = \\left\\{\n\\begin{array}{ll}\nS & (i = 0)\\\\\n(A X_{i-1}+B) \\bmod P & (i \\geq 1)\n\\end{array}\n\\right. X_i=G となる i が存在するか判定し、存在するならばそのような最小の i を求めてください。 ここで、 x \\bmod y は、 x を y で割ったあまり(最小非負剰余)を表すものとします。 1 ファイルにつき T 個のテストケースが与えられます。 制約 1 \\leq T \\leq 100 2 \\leq P \\leq 10^9 P は素数 0\\leq A,B,S,G < P 入力に含まれる値は全て整数である 入力 入力は以下の形式で標準入力から与えられる。 T \\mathrm{case}_1 \\mathrm{case}_2 \\vdots \\mathrm{case}_T 各テストケースは以下の形式で与えられる。 P A B S G 出力 T 行出力せよ。 t 行目には、 \\mathrm{case}_t について、 X_i=G となる最小の i を出力せよ。そのような i が存在しないならかわりに -1 を出力せよ。 入力例 1 3\n5 2 1 1 0\n5 2 2 3 0\n11 1 1 0 10 出力例 1 3\n-1\n10 1 番目のケースについて、 X=(1,3,2,0,\\ldots) であることから、 X_i=0 となる最小の i は 3 です。 2 番目のケースについて、 X=(3,3,3,3,\\ldots) であることから、 X_i=0 となる i は存在しません。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 次の漸化式で定められる数列 X=(X_0,X_1,\\ldots) があります。 X_i = \\left\\{\n\\begin{array}{ll}\nS & (i = 0)\\\\\n(A X_{i-1}+B) \\bmod P & (i \\geq 1)\n\\end{array}\n\\right. X_i=G となる i が存在するか判定し、存在するならばそのような最小の i を求めてください。 ここで、 x \\bmod y は、 x を y で割ったあまり(最小非負剰余)を表すものとします。 1 ファイルにつき T 個のテストケースが与えられます。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq T \\leq 100 2 \\leq P \\leq 10^9 P は素数 0\\leq A,B,S,G < P 入力に含まれる値は全て整数である"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 T \\mathrm{case}_1 \\mathrm{case}_2 \\vdots \\mathrm{case}_T 各テストケースは以下の形式で与えられる。 P A B S G"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 T 行出力せよ。 t 行目には、 \\mathrm{case}_t について、 X_i=G となる最小の i を出力せよ。そのような i が存在しないならかわりに -1 を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\n5 2 1 1 0\n5 2 2 3 0\n11 1 1 0 10"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3\n-1\n10 1 番目のケースについて、 X=(1,3,2,0,\\ldots) であることから、 X_i=0 となる最小の i は 3 です。 2 番目のケースについて、 X=(3,3,3,3,\\ldots) であることから、 X_i=0 となる i は存在しません。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc270/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:47.923691+00:00",
+  "statement_sha256": "fee77b7f3ee8390c45100bcb20a505fcdf189ee38dd01bce672f146d93a60837",
+  "editorials": []
+}

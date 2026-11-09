@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc179_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc179/editorial/121",
+      "text": "まず、素朴な解法としては、\n\\(f_i\\)\n:= マス\n\\(i\\)\nまで移動する方法の個数と置いて、各場所\n\\(i\\)\nについてすべての移動を試す動的計画法が考えられますが、時間計算量\n\\(\\mathrm{O}(N^2)\\)\nとなります。\n移動方法が少ない区間の和 (\n\\(S = \\cup [l_j, r_j]\\)\n)として書けることを利用した高速化を考えます。いわゆる配る DP, 貰う DP のどちらでも解くことができますが、今回は配る DP に基づいて説明します。\n今、\n\\(f_i\\)\nまでの値が正しく求まっているとしましょう。\n\\(i\\)\nから遷移するとき、すべての\n\\(d  \\in S\\)\nについて\n\\(f_{i+d}\\)\nに\n\\(f_i\\)\nを足す操作を行います。\nこのとき\n\\(f\\)\nの隣同士の差が\n\\(O(K)\\)\n箇所でしか変化しないことを利用したいです。これは\n\\(a_i = f_{i} - f_{i-1}\\)\nと置いて各\n\\(j\\)\nについて\n\\(a_{i + l_j} := a_{i + l_j} + f_i, a_{i + r_j + 1} := a_{i + r_j + 1} - f_i\\)\nという操作を行い、\n\\(f_i = f_{i-1} + a_i\\)\nで\n\\(f\\)\nを復元することで高速化できます。\n時間計算量は\n\\(\\mathrm{O}(KN)\\)\nです。\nなお、遷移が少ない区間の和で表わせなくともこの制約の下で\n\\(\\mathrm{O}(N \\log N)\\)\nで解けることが知られています。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "15b88543a07904581806ee349dbbbb81c23ba1c4e6ffebf53ba54e6d76dc8660",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc179/abc179_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

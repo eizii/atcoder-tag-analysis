@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc184_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc184/editorial/352",
+      "text": "テレポーターがなければこの問題は\n幅優先探索\nで解くことができるので、幅優先探索をすることを考えます。\n同じ文字のテレポーター間全てに辺を張って幅優先探索をすると、辺の数が最大で\n\\(\\dfrac{(HW)^2}{2} \\simeq 8 \\times 10^{12}\\)\n本程度になるため、 TLE してしまいます。\nそこで、以下のように幅優先探索を行います。\nテレポーター a, b, …, z がある場所のリストをあらかじめ作っておく\n幅優先探索で、初めてテレポーター X のある場所に来た場合、他のテレポーター X への辺が張られているとして幅優先探索を行う\n幅優先探索で、テレポーター X のある場所に来たが初めてではない場合、通常の幅優先探索を行う\nこれで、\n\\(O(HW)\\)\nでこの問題を解くことができます。\n回答例 (C++) :\nhttps://atcoder.jp/contests/abc184/submissions/18300509\n回答例 (Python) :\nhttps://atcoder.jp/contests/abc184/submissions/18299994\nまた、超頂点 a, b,  …, z を用意し、テレポーター X のある場所から超頂点 X にコスト 1 の辺を張り、超頂点 X からテレポーター X のある場所にコスト 0 の辺を張り、01BFS をすることでも、\n\\(O(HW)\\)\nで解くことができます。\n回答例 (C++) :\nhttps://atcoder.jp/contests/abc184/submissions/18300674\n回答例 (Python) :\nhttps://atcoder.jp/contests/abc184/submissions/18299832",
+      "codes": [],
+      "text_sha256": "687824c9cfc2ec9ed37991b5bfbfc0f37c82bcc0c1bf312580c4d988e1fdd78f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc184/abc184_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

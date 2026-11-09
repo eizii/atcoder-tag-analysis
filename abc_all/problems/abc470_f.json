@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc470_f",
+  "title": "Googol Swaps",
+  "contests": [
+    {
+      "contest_id": "abc470",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1604,
+  "raw_difficulty": 1604,
+  "contest_id": "abc470",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc470/tasks/abc470_f",
+  "statement": "配点 : 500 点 問題文 英小文字からなる長さ N の文字列 S が与えられます。 以下の操作を ちょうど 10^{100} 回実行したあとの S としてあり得るものの個数を 998244353 で割ったあまりを求めてください。 1 以上 M 以下の整数 i をひとつ選び、 S の A_i 文字目と B_i 文字目を入れ替える。 制約 N, M は整数 2 \\leq N \\leq 2 \\times 10^5 1 \\leq M \\leq 2 \\times 10^5 S は英小文字からなる長さ N の文字列 A_i, B_i は整数 1 \\leq A_i < B_i \\leq N (A_1, B_1), \\dots, (A_M, B_M) は相異なる 入力 入力は以下の形式で標準入力から与えられる。 N M S A_1 B_1 \\vdots A_M B_M 出力 答えを出力せよ。 入力例 1 5 3\nmiria\n1 3\n2 5\n4 5 出力例 1 6 最終的な S として、以下の 6 通りがあり得ます。 marii mirai miria ramii rimai rimia 入力例 2 6 6\nyiwayi\n1 2\n1 3\n2 3\n4 5\n4 6\n5 6 出力例 2 18 入力例 3 29 25\nhexakosioihexekontahexaphobia\n1 2\n1 4\n1 6\n1 8\n1 15\n1 16\n2 3\n3 4\n4 20\n5 6\n5 8\n8 22\n8 23\n9 15\n9 17\n11 21\n12 20\n13 19\n14 29\n15 28\n16 17\n18 19\n18 21\n19 20\n20 21 出力例 3 346192062",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英小文字からなる長さ N の文字列 S が与えられます。 以下の操作を ちょうど 10^{100} 回実行したあとの S としてあり得るものの個数を 998244353 で割ったあまりを求めてください。 1 以上 M 以下の整数 i をひとつ選び、 S の A_i 文字目と B_i 文字目を入れ替える。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 N, M は整数 2 \\leq N \\leq 2 \\times 10^5 1 \\leq M \\leq 2 \\times 10^5 S は英小文字からなる長さ N の文字列 A_i, B_i は整数 1 \\leq A_i < B_i \\leq N (A_1, B_1), \\dots, (A_M, B_M) は相異なる"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M S A_1 B_1 \\vdots A_M B_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5 3\nmiria\n1 3\n2 5\n4 5"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 6 最終的な S として、以下の 6 通りがあり得ます。 marii mirai miria ramii rimai rimia"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 6 6\nyiwayi\n1 2\n1 3\n2 3\n4 5\n4 6\n5 6"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 18"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 29 25\nhexakosioihexekontahexaphobia\n1 2\n1 4\n1 6\n1 8\n1 15\n1 16\n2 3\n3 4\n4 20\n5 6\n5 8\n8 22\n8 23\n9 15\n9 17\n11 21\n12 20\n13 19\n14 29\n15 28\n16 17\n18 19\n18 21\n19 20\n20 21"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 346192062"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc470/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:57.893745+00:00",
+  "statement_sha256": "2669611eb614098f06a8c37cc3d86a789e628aaa9b52d587e3e66e5875452d94",
+  "editorials": []
+}

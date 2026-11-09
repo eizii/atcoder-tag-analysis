@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc429_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc429/editorial/14284",
+      "text": "危険な頂点\n\\(V\\)\nに対して、安全な頂点のうちその頂点から近い（必要な移動時間が短い）方から順に\n\\(2\\)\nつを\n\\(U,U'\\)\nとすると、求めたい値は\n\\(U\\)\nから\n\\(V\\)\nへの移動時間と\n\\(U'\\)\nから\n\\(V\\)\nへの移動時間の総和と等しくなります。これは、\n\\(U\\to V\\to U'\\)\nという移動が条件をみたしているため求める値はそれ以下であり、それ未満の移動方法が存在する時、\n\\(U,U'\\)\nが近い方から\n\\(2\\)\nつという条件に反することから従います。\nよって、すべての頂点\n\\(V\\)\nについて、安全な頂点のうち近い方から\n\\(2\\)\nつと、それらの頂点から\n\\(V\\)\nへ の必要な移動時間（以下、距離とします）がわかれば良いです。\nすべての辺の重み（移動時間）は\n\\(1\\)\nであるため、幅優先探索 (BFS) で求めることができますが、通常の探索と比較して次の\n\\(2\\)\n点に注意する必要があります。\n始点の候補が複数存在する。\n各頂点について、始点からの最短距離だけではなく、\n\\(2\\)\n番目に近い頂点からの距離も記録する必要がある。\n\\(1\\)\nつめについては、例えば、もう\n\\(1\\)\nつ別の頂点が存在し（超頂点）が存在し、そこからすべての安全な頂点へ重み\n\\(0\\)\nの辺が伸びていると考えることができます。実装方針によっては、単に BFS で最初に調べる頂点を複数に変更するだけで良いこともあります。\n\\(2\\)\nつめについては、BFS における、「一度到達（探索）した頂点は再び調べない。」という条件を「\n\\(2\\)\nつの異なる頂点から到達（探索）した頂点はそれ以降調べない。」という条件に書き換えれば良いです。よって、各頂点ごとに訪ねたことがあるか無いかを管理（更新）する代わりに、「どの始点からも訪ねられたことがない」、「頂点\n\\(u\\)\nからのみ訪ねられた」、「\n\\(2\\)\nつ以上の始点から訪ねられたことがある」のいずれの状態であるかを管理するようにすれば良いです。\nまた、このとき、BFS において（キューなどで）管理する情報として、「到達した頂点」と「始点からその頂点までの距離」に加えて、「始点」（どの安全な頂点を始点とした経路か）の情報も必要になることに注意してください。\nこのようにして、すべての頂点\n\\(V\\)\nについて、安全な頂点のうち近い方から\n\\(2\\)\nつと、それらの頂点から\n\\(V\\)\nへ の距離が求まれば、特に危険な頂点について\n\\(2\\)\nつの距離の総和として答えを求めることができます。\n必要な時間計算量は\n\\(O(N+M)\\)\nであり、十分高速です。よって、この問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nstruct path_info{\n\tint from,to;\n\tint dist;\n};\n\nint main() {\n\tint n,m,u,v;\n\tstring s;\n\t\n\tcin>>n>>m;\n\n\tvector<vector<int> >e(n);\n\tvector<vector<int> >f(n,vector<int>(2,-1));\n\tvector<vector<int> >d(n,vector<int>(2,-1));\n\tqueue<path_info>q;\n\n\trep(i,m){\n\t\tcin>>u>>v;\n\t\te[u-1].push_back(v-1);\n\t\te[v-1].push_back(u-1);\n\t}\n\tcin>>s;\n\trep(i,n){\n\t\tif(s[i]=='S'){\n\t\t\tf[i][0]=i;\n\t\t\td[i][0]=0;\n\t\t\tq.push({i,i,0});\n\t\t}\n\t}\n\n\twhile(!q.empty()){\n\t\tpath_info tmp=q.front();\n\t\tq.pop();\n\t\tint u=tmp.from;\n\t\tint v=tmp.to;\n\t\tint sz=e[v].size();\n\t\trep(i,sz){\n\t\t\tif(f[e[v][i]][0]==-1){\n\t\t\t\tf[e[v][i]][0]=u;\n\t\t\t\td[e[v][i]][0]=tmp.dist+1;\n\t\t\t\tq.push({u,e[v][i],tmp.dist+1});\n\t\t\t}\n\t\t\telse if((f[e[v][i]][1]==-1)&&(f[e[v][i]][0]!=u)){\n\t\t\t\tf[e[v][i]][1]=u;\n\t\t\t\td[e[v][i]][1]=tmp.dist+1;\n\t\t\t\tq.push({u,e[v][i],tmp.dist+1});\n\t\t\t}\n\t\t}\n\t}\n\n\trep(i,n){\n\t\tif(s[i]=='D')cout<<(d[i][0]+d[i][1])<<endl;\n\t}\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "3bed713737c3c7352a00e4e8275135bd7b7c829c72a3d527cc8a30994a0d415a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc429/abc429_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc429/editorial/14261",
+      "text": "color coding\nと呼ばれる手法を用いてこの問題を解く方法を解説します。\n公式解説のような top2 を持つ BFS は一般に実装が複雑になることが多いです。しかし、color coding を用いると計算量は公式解説より劣るものの実装が比較的楽になります。\ncolor coding は以下のようなアルゴリズムです：\n安全な頂点を\n\\(2\\)\nつのグループにランダムに分ける。\n各危険な頂点に対しそれぞれの安全な頂点のグループに属する頂点との距離の最小値を求め、暫定的な答えを\n\\(2\\)\nつのグループとのそれぞれの距離の最小値の和で更新する。\n上記のアルゴリズムは乱択アルゴリズムですが、このアルゴリズムが成功するときはその危険な頂点から近い top2 の安全な頂点がそれぞれ別のグループに属するときなので\n\\(\\displaystyle \\frac12\\)\nです。したがって、\n\\(D\\)\n回試行して全ての危険な頂点（\n\\(X\\)\n個とする）に対して正しい答えが求まる確率はおよそ\n\\(\\displaystyle \\left(1-\\frac1{2^D}\\right)^X\\)\nであると見積もることができます。この値は\n\\(X=2\\times 10^5,D=30\\)\nの場合で\n\\(0.999814\\)\n程度なので、\n\\(30\\)\n回ほど試すことで非常に高い確率で正しい答えを求めることができます。\nしかし、上記のアルゴリズムは乱択アルゴリズムで正しい答えが求まらない可能性がありますが、グループ分けを以下のように行うことで脱乱択できます。\n\\(k=1,2,\\ldots,\\lceil \\log_2 N\\rceil\\)\nに対して以下のようにグループ分けを行う。\n頂点番号を二進数で表した時の\n\\(k\\)\nビット目が\n\\(0\\)\nか\n\\(1\\)\nかでグループ分けし、暫定的な答えを計算する。\n以上を適切に実装することでこの問題に正答することができます。計算量は\n\\(O(N\\log N)\\)\nです。\n実装例(Python3)",
+      "codes": [
+        "import sys\nfrom collections import deque\n\ninput = sys.stdin.readline\nn, m = map(int, input().split())\ng = [[] for _ in range(n)]\nfor _ in range(m):\n    u, v = map(int, input().split())\n    u, v = u - 1, v - 1\n    g[u].append(v)\n    g[v].append(u)\ns = input()\nok, ng = [], []\nfor i in range(n):\n    if s[i] == \"S\":\n        ok.append(i)\n    else:\n        ng.append(i)\nINF = 10**9\n\n\ndef f(l):\n    d = [INF] * n\n    q = deque()\n    for x in l:\n        d[x] = 0\n        q.append(x)\n    while q:\n        x = q.popleft()\n        for i in g[x]:\n            if d[i] != INF:\n                continue\n            d[i] = d[x] + 1\n            q.append(i)\n    return d\n\n\nans = [INF] * len(ng)\nfor k in range(20):\n    c1, c2 = [], []\n    for x in ok:\n        if (x >> k) & 1:\n            c2.append(x)\n        else:\n            c1.append(x)\n    d1, d2 = f(c1), f(c2)\n    for i in range(len(ng)):\n        x = ng[i]\n        ans[i] = min(ans[i], d1[x] + d2[x])\nfor v in ans:\n    print(v)"
+      ],
+      "text_sha256": "15c0d33a54083708b338b66d6d75a1edcd7181cf62bf33d82ef4f28a0f3d579d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc429/abc429_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

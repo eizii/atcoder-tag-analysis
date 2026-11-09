@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc480_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc480/editorial/27230",
+      "text": "\\(B\\) の累積和を \\(T\\) とします。即ち \\(T_i = B_1+\\dots+B_i\\) と定めます。このとき、 \\(B_L+\\dots+B_R=T_R-T_{L-1}\\) となります。よって。「 \\(i\\) が与えられる。 \\(T_i\\) を求めよ」という問題を解くことができれば元の問題に答えることができます。 \\(A\\) の累積和を \\(S\\) とします。即ち \\(S_i=A_1+\\dots+A_i\\) と定めます。この時、 \\(T_i\\) は \\(S\\) の区間和と \\(A\\) の区間和の \\(2\\) つの部分に分解することができます。 図： \\(A=(1,2,3,4,5,6)\\) のとき よって、この分解を行うことができれば、予め \\(S\\) の累積和を求めておくことで問題に高速に答えることができます。 分解を行うには、 \\(i\\) の左にある上図の黒い仕切り線の位置、即ち \\(B\\) の生成手順の各ステップでの \\(B\\) の長さのが分かれば良く、 \\((0,1,3,6,\\dots)\\) から二分探索するなどの方法で \\(O(\\log N)\\) で求めることができます。 以上により \\(O(N+Q\\log N)\\) でこの問題を解くことができました。 Writer解 (Python)",
+      "codes": [
+        "import bisect\nN,Q=map(int,input().split())\nA=list(map(int,input().split()))\n\nS=[0]\nfor a in A: S.append(S[-1]+a)\nT=[(0,0)]\nfor i,s in enumerate(S[1:], 1):\n  ti,tt=T[-1]\n  T.append((ti+i, tt+s))\n\ndef f(X):\n  i=bisect.bisect_right(T,(X,10**18))-1\n  ti,tt=T[i]\n  return tt+S[X-ti]\n\nfor _ in range(Q):\n  L,R=map(int,input().split())\n  print(f(R)-f(L-1))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "c35658b62ccbedc37cb34680ece5bef4d066a6cfb8e7e945e3bcd29de734aacb"
+    }
+  ],
+  "status": "available"
+}

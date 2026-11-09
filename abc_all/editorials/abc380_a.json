@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc380_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc380/editorial/11359",
+      "text": "解法1: 各桁に何が何文字含まれるか数える\n整数\n\\(N\\)\nの各桁を取り出す方法は色々ありますが、次のアルゴリズムが最も基本的です。\n\\(N>0\\)\nである限り、以下を繰り返す。\n\\(N\\)\nを\n\\(10\\)\nで割った余りを記録する。その後、\n\\(N\\)\nを\n\\(10\\)\nで割って小数点以下を切り捨てる。\nこのとき、記録された数が\n\\(N\\)\nの各桁である。\n例えば\n\\(380\\)\nなら以下のように動作します。\n\\(380\\)\nを\n\\(10\\)\nで割った余りは\n\\(0\\)\nであり、\n\\(380\\)\nを\n\\(10\\)\nで割って小数点以下を切り捨てると\n\\(38\\)\nとなる。\n\\(38\\)\nを\n\\(10\\)\nで割った余りは\n\\(8\\)\nであり、\n\\(38\\)\nを\n\\(10\\)\nで割って小数点以下を切り捨てると\n\\(3\\)\nとなる。\n\\(3\\)\nを\n\\(10\\)\nで割った余りは\n\\(3\\)\nであり、\n\\(3\\)\nを\n\\(10\\)\nで割って小数点以下を切り捨てると\n\\(0\\)\nとなる。\nこれで、\n\\(380\\)\nの各桁\n\\(3,8,0\\)\nを得ることができました。\n一連の流れは、 while 文を用いると簡潔に書くことができます。\nこうしてどの数字が何桁含まれるかを数えた後、問題文中の条件を満たすか判定すればよいです。 これを実現するには、バケットソートの要領で実装すると容易です。\n実装例 (C++):\n解法2: 各桁をソートして 122333 と一致するか判定\n出力が\nYes\nになることと、\n\\(N\\)\nの各桁を並べ替えた時に\n\\(122333\\)\nになることとは同値です。\nそのため、「\n\\(N\\)\nを文字列として受け取る」「\n\\(N\\)\nを受け取った後文字列に変換する」といった行為をした後、「文字列中の文字を昇順(小さい方から大きい方に)ソートし、\n\\(122333\\)\nと一致するか判定」ということをしてもこの問題に正解できます。\n実装例1 (C++):\n実装例2 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  vector<int> mem(10,0);\n  while(n>0){\n    mem[n%10]++;\n    n/=10;\n  }\n  if(mem[1]==1 && mem[2]==2 && mem[3]==3){\n    cout << \"Yes\\n\";\n  }\n  else{\n    cout << \"No\\n\";\n  }\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  string s=to_string(n);\n  sort(s.begin(),s.end());\n  if(s==\"122333\"){cout << \"Yes\\n\";}\n  else{cout << \"No\\n\";}\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  sort(s.begin(),s.end());\n  if(s==\"122333\"){cout << \"Yes\\n\";}\n  else{cout << \"No\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "7105797ed45a1618c813431dd7ff5c89888d70b07151420421ccc24917b35eff",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc380/abc380_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

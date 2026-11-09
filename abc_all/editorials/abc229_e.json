@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc229_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc229/editorial/2958",
+      "text": "この問題では連結成分を扱うので Union-Find を使いたいですが、Union-Find では辺の追加はできるものの辺の削除はできません。\nここで、クエリ系の問題の常套手段である「逆から処理する」というテクニックを思い出すと、おおむね問題が以下のように言い換えられます。\n頂点\n\\(N,N-1,\\ldots,1\\)\nを順番にグラフに追加していく。\n頂点\n\\(i\\)\nを追加すると同時に、\n\\(i\\)\nと\n\\(j(j\\gt i)\\)\nを結ぶ辺もグラフに追加する。\n頂点\n\\(i\\)\nまで追加したときのグラフの連結成分の個数は？\nこれは Union-Find を用いて容易に求めることができます。\nなお、Union-Find は ACL の\ndsu\nというライブラリを用いると便利です。\n下の実装例も参考にしてください。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n#include<atcoder/all>\nusing namespace atcoder;\ntypedef long long ll;\n\nsigned main(){\n    ll n,m;cin>>n>>m;\n    vector<vector<ll>>v(n+1);\n    while(m--){\n        ll a,b;cin>>a>>b;\n        v[a].push_back(b);\n    }\n    dsu d(n+1);\n    vector<ll>res={0}; //頂点 N まで消した時の答えは必ず 0\n    ll ans = 0; // 今の連結成分の数\n    for(ll i=n;i>=2;i--){\n        ans++; //頂点 i を追加\n        for(auto j:v[i]){\n            if(!d.same(i,j)){\n                d.merge(i,j);\n                ans--; //非連結の頂点同士を繋げたとき、連結成分の数は 1 減る\n            }\n        }\n        res.push_back(ans);\n    }\n    reverse(res.begin(),res.end());\n    for(auto x:res)cout<<x<<endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "ff79700c5c7764de52412e6c054c52c48b8cc7d7a0ba1a1fe15fc42c25d9c525",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc229/abc229_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

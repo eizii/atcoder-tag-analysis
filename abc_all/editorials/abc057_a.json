@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc057_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc057/editorial.pdf",
+      "text": "A:  Remaining Time\n\n    2 つの整数A とB を入力として受け取ります。基本的に、コンテストの開始時刻は、A + B 時となります。\n A + B < 24 の場合は当日の時刻ですが、A + B ≥24 の場合は翌日の時刻となるため、A + B から24 を引く必要\n があります。また、0 ≤B ≤23 よりコンテストの開始時刻が翌々日以降の時刻になることはないのでこれで十分\n です。なお、時刻を24 で割った余り(mod 24) として扱うと処理が簡単になります。\n\n\n  C++のコード例(24 で割った余りを利用)\n\n\n\n1 int main(void){\n\n2     int A,B;\n\n3     cin >> A >> B;\n\n4     cout << (A+B)%24 << endl;\n\n5     return 0;\n6 }",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "2a4aaff0c5d549ec733885b68c82afb005ea300fb4cd67fbc91c395e4e3720df"
+    }
+  ],
+  "status": "available"
+}

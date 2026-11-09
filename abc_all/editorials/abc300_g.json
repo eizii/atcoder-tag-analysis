@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc300_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6275",
+      "text": "ヒント: この問題の最後のサンプルは最大ケースです。 サンプルに最大ケースが入っている場合、そこから何らかの情報を読み取ったり最大ケースに対して正解できるかの判定が(提出前に)行えたりします。 この問題の場合、最大ケースの答えが \\(2 \\times 10^9\\) 程度であることが分かります。ここから 全探索することはやや無謀である (例えば) 半分全列挙のような、効率的な探索ができたら実行時間制限に間に合いそうだ という予想を得ます。ここでは半分全列挙を実現することを考えます。どのようにすればよいでしょうか ? 配列 \\(U=(1),V=(1)\\) を用意します。 \\(2\\) 以上 \\(P\\) 以下の全ての素数 \\(q\\) について、以下を繰り返す。 \\(U,V\\) のうち小さい方を \\(W\\) とし、 \\(W\\) に次のような操作を施す。 \\(W\\) の各要素に \\(q\\) のべき乗を掛けたものであって、値が \\(N\\) 以下のものを全て \\(W\\) に追加する。 最後に、半分全列挙におけるマージの要領で \\(U,V\\) の各配列から \\(1\\) 要素ずつ選択して掛けた時に \\(N\\) 以下となるような組の数を数え上げる。 つまり、 \\(P\\) 以下の素因数を適切に \\(2\\) つの集合に分けた上で、各集合内の素因数しか持たない数を列挙し、最後にそれらをマージして和集合内の素因数しか持たない数を数え上げています。 この解法の計算量を机上で見積もるのは困難ですが、実際に実装して最大ケースを試すと \\(|U|,|V| \\le 5 \\times 10^6\\) 程度で済むことがわかり、これらをソートして半分全列挙におけるマージをしても十分高速なことが分かります。 実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nvoid step(vector<long long> &a,long long p,long long mxm){\n  long long sz=a.size();\n  for(long long i=0;i<sz;i++){\n    long long ad=a[i];\n    while(1){\n      ad*=p;\n      if(ad>mxm){break;}\n      a.push_back(ad);\n    }\n  }\n}\n\nint main(){\n  vector<long long> pl={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};\n  long long n,p;\n  cin >> n >> p;\n  while(p<pl.back()){pl.pop_back();}\n\n  vector<long long> u={1},v={1};\n  for(auto &nx : pl){\n    if(u.size()<v.size()){step(u,nx,n);}\n    else{step(v,nx,n);}\n  }\n  // cerr << u.size() << \" \" << v.size() << \"\\n\";\n\n  sort(u.begin(),u.end());\n  sort(v.begin(),v.end());\n  long long res=0,j=v.size()-1;\n  for(long long i=0;i<u.size();i++){\n    long long mv=(n/u[i]);\n    while(j>=0 && mv<v[j]){j--;}\n    if(j<0){break;}\n    res+=(j+1);\n  }\n  cout << res << \"\\n\";\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "c129bcde783639c4890fceb6cc99f2b4899c989f6d85d0e7244df0f0a89b5eef"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc146_d",
+  "editorials": [
+    {
+      "text": "D: Coloring Edges on Tree writer: beet\nまず、色数の最小値K がいくつになるかを考えます。任意の頂点v について、deg(v) ≤K を満\nたす必要があります(deg(v) は頂点v の次数を表します)。\n実は、K = max\nv\ndeg(v) となるような色の塗り分けが存在します。まず、頂点を一つ選び、それを\n根としてG を根付き木にします。根から幅優先探索を行います。各頂点では、その子との間の辺の\n色を順番に決めていきます。このとき、その頂点を端点に持つ辺の色としてまだ使われていない色の\n中で最小のものを使うようにすると、その値はK を超えないことがわかります。\n構築を終えた後、出力の際には連想配列などを用いることができます。以下はC++ による解答例\nです。https://atcoder.jp/contests/abc146/submissions/8600549\n",
+      "text_sha256": "20321552b29694a626dbbf0becc40dd971c3ad17672cab5c37c39f8a231ec248",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc146/abc146_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

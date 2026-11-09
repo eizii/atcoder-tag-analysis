@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc340_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc340/editorial/9254",
+      "text": "問題で求められていることを平易な言葉で言い直すと「\n\\(A\\)\nから始めて、\n\\(D\\)\nずつ値を大きくしながら\n\\(B\\)\nまで出力せよ」となります。for 文または while 文を適切に用いることで実装できます。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main(){\n  int a, b, d;\n  cin >> a >> b >> d;\n  for(int n=a; n<=b; n+=d){\n    cout << n << (n==b?'\\n':' ');\n  }\n}",
+        "A,B,D = map(int,input().split())\nprint(*range(A,B+1,D))"
+      ],
+      "text_sha256": "7a3d99574970f09987f71b0b49a012ac32b01f0c80d72f7708aa073dd77f8c22",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc340/abc340_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

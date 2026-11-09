@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc308_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc308/editorial/6704",
+      "text": "\\(i\\)\n番目の皿の値段を求めることを考えます。\nこれは、\n\\(j=1,2,\\ldots,M\\)\nの順に\n\\(C_i=D_j\\)\nか判定し、\n\\(C_i=D_j\\)\nなる\n\\(j\\)\nが存在すれば\n\\(P_j\\)\n円、存在しない場合\n\\(P_0\\)\n円と求めることができます。\nこれを全ての\n\\(i\\)\nに対して行うことで、\n\\(\\mathrm{O}(NM)\\)\nでこの問題を解くことができます。\nまた、例えば c++ では\nstd::map\nのようなデータ構造を使うことでより良い計算量で解くこともできます。\n実装例(Python):",
+      "codes": [
+        "n, m = map(int, input().split())\nc = list(input().split())\nd = list(input().split())\np = list(map(int, input().split()))\nans = 0\nfor v in c:\n    price = p[0]\n    for j in range(m):\n        if v == d[j]:\n            price = p[j + 1]\n            break\n    ans += price\nprint(ans)"
+      ],
+      "text_sha256": "ca3aa97f04a2275eebad5cb11f511cc0744cd8eb99064862f678970e45214e59",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc308/abc308_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

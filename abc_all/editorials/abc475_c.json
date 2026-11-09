@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc475_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc475/editorial/25534",
+      "text": "訪れる街の集合は \\(S\\) を含む区間になります。すなわち、 \\(l \\leq S \\leq r\\) を満たす整数 \\(l, r\\) が存在し、訪れる街の集合は番号が \\(l\\) 以上 \\(r\\) 以下の街の集合となります。 \\(l, r\\) を決め打ったときの移動距離として考えられる最小値を求めます。この最小値が \\(L\\) 以下となる \\(l, r\\) について、 \\(r - l + 1\\) の最大値を求めればよいです。 街 \\(l\\) と街 \\(S\\) の距離を \\(X\\) 、街 \\(S\\) と街 \\(r\\) の距離を \\(Y\\) とします。 街 \\(l\\) を訪れた後に街 \\(r\\) を訪れるとき移動距離の最小値は \\(2X + Y\\) 、街 \\(r\\) を訪れた後に街 \\(l\\) を訪れるとき移動距離の最小値は \\(X + 2Y\\) となるため、移動距離として考えられる最小値は \\(\\min(2X + Y, X + 2Y)\\) です。 累積和や前計算などで \\(X, Y\\) を \\(O(1)\\) 時間で求めれば全体で \\(O(N^2)\\) 時間となります。 また、 \\(l\\) が増えると許容される \\(r\\) は広義単調増加するという単調性を利用すれば、尺取り法を用いて \\(O(N)\\) 時間で解くこともできます。 実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n\tll n, s, L;\n\tcin >> n >> s >> L;\n\ts--;\n\tvector<ll> a(n - 1);\n\tfor (auto& e : a) cin >> e;\n\tint ans = 1;\n\tvector<ll> p(n);\n\tfor (int i = 0; i < n - 1; i++) p[i + 1] = p[i] + a[i];\n\tfor (int l = 0; l <= s; l++) {\n\t\tfor (int r = s; r < n; r++) {\n\t\t\tll x = p[s] - p[l], y = p[r] - p[s];\n\t\t\tif (min(2 * x + y, x + 2 * y) <= L) ans = max(ans, r - l + 1);\n\t\t}\n\t}\n\tcout << ans << '\\n';\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "783bba4d7f6f62f7ac79b0bb46eafb7c24a297a20254e82a1a6b6d42b0be39b2"
+    }
+  ],
+  "status": "available"
+}

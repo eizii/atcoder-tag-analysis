@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc443_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc443/editorial/15177",
+      "text": "for ループを用いて、\n\\(i\\)\n年後に\n\\(N+i\\)\n個の豆を食べることをシミュレーションすることでこの問題に正解できます。\n実装例 (C++):\nでは、この解法が成立するのは一体なぜでしょうか？\nこの問題の制約は\n\\(1 \\le N,K \\le 10^8\\)\nです。\nなので、\n\\(1\\)\n歳から始めて\n\\(10^8\\)\n個以上の豆を食べるまでが最も年数がかかるケースです。\n一方、\n\\(1\\)\n歳から始めて\n\\(10^5\\)\n年間豆を食べ続けた時、食べる豆の個数は約\n\\(5 \\times 10^9\\)\n個となります。\nよって、\n\\(K\\)\n個以上の豆を食べるということは必ず\n\\(10^5\\)\n年後までに訪れることになります。\nループを\n\\(10^5\\)\n回回すということは、プログラムを実行すれば実行時間制限の 2 秒 に対して十分高速に実現可能です。",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,k;\n  cin >> n >> k;\n  for(int i=0;;i++){\n    k-=(n+i);\n    if(k<=0){\n      cout << i << \"\\n\";\n      break;\n    }\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "92c340b36fc25d6838ca80fd727f3c7ccc63c28954a3405be8b85ecf6115e240",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc443/abc443_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc443/editorial/15181",
+      "text": "必要な年数で二分探索することで、\n\\(N,K\\)\nがより大きな場合でもこの問題を解くことが出来ます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing ll=long long;\n\nint main(){\n  ll n,k;\n  cin >> n >> k;\n  ll lef=0,rig=1e9;\n  while(lef<=rig){\n    ll mid=(lef+rig)/2;\n    ll cur=((n+(n+mid))*(mid+1))/2;\n    if(cur<k){lef=mid+1;}\n    else{rig=mid-1;}\n  }\n  cout << lef << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "407d8a5966437409d600607f4be0d0f3e3f9fa5d6144625b794a2372d3783d3a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc443/abc443_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

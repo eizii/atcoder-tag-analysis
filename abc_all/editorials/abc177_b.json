@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc177_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc177/editorial/87",
+      "text": "人の手でこの問題を解くときには、「この部分とこの部分が似てそうだからここを重ねたら良さそう！」みたいに考えるかと思いますが、そうした考えをプログラムに落とし込むのは難しいです。\n今回は、\n\\(S\\)\n,\n\\(T\\)\nの文字数に関する制約があまり大きくないので、\n\\(S\\)\nの何文字目と\n\\(T\\)\nの\n\\(1\\)\n文字目を重ねるかを全探索しても、十分間に合います。全てのパターンにおいて、変更の必要な文字数を求め、その最小値を答えることで、今回の問題を解くことが出来ます。\n計算量は、\n\\(S\\)\nの何文字目に重ねるかのパターンが\n\\(O(|S|)\\)\n、それぞれのパターンにおいて、何文字変更しなければならないかを求めるのに必要な計算量は、\n\\(T\\)\n文字分なので\n\\(O|T|)\\)\nとなり、あわせて\n\\(O(|S||T|)\\)\nとなります。（\n\\(|S|\\)\nは、\n\\(S\\)\nの文字数とします。）\n回答例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n\tstring S, T;\n\tcin >> S >> T;\n\n\t//答えansを仮置きする。\n\t//これが十分に大きくないと不正解となるので、\n\t//この値なら絶対に正しい答えが出る、という値を仮置きすること\n\tint ans = T.size();\n\n\t//Sの何文字目から調べるかを全探索する\n\tfor (int start = 0; start <= S.size() - T.size(); start++)\n\t{\n\t\tint diff = 0;\n\t\tfor (int i = 0; i < T.size(); i++)\n\t\t{\n\t\t\tif (T[i] != S[start + i]) {\n\t\t\t\tdiff++;\n\t\t\t}\n\t\t}\n\t\tans = min(ans, diff);\n\t}\n\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "b34146e66d3493dba348c8c21603a8d98d86b91fed6891bcbb115dc3fca0fb3e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc177/abc177_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

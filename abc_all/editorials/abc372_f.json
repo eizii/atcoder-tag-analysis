@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc372_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc372/editorial/10969",
+      "text": "「\n\\(\\mathrm{dp}[i][j]=\\)\n\\(i\\)\n回の移動で頂点\n\\(j\\)\nにいる移動方法の数」という dp を考えます．\nここで，\n\\(N=8,M=2,(X_1,Y_1)=(3,7),(X_2,Y_2)=(4,3)\\)\nの場合の遷移の様子を図示してみます．（辺\n\\(1\\)\nから\n\\(7\\)\nは赤色，辺\n\\(8\\)\nから\n\\(10\\)\nは青色で塗っています．）\n下の段を左に少しずらしてみます．\nこうしてみると，多くの頂点\n\\(v\\ (\\geq 2)\\)\nでは\n\\(\\mathrm{dp}[i+1][v]=\\mathrm{dp}[i][v-1]\\)\nが成り立っています．すなわち\n\\(\\mathrm{dp}[i]\\)\nと\n\\(\\mathrm{dp}[i+1]\\)\nの列は，\n\\(1\\)\nつ左シフトすることでほとんど同じになります．\nこのことを利用して，dp の配列を各\n\\(i\\)\nごとに作るのではなく配列を使いまわすことで計算量を削減することができます．\n\\(\\mathrm{dp}[i]\\)\nと（左シフトした）\n\\(\\mathrm{dp}[i+1]\\)\nでは\n\\(O(M)\\)\n箇所しか違わないため，計算量は\n\\(O(N+MK)\\)\nになります．\nこのように，必要なところだけ配列を更新して使いまわす dp は inline dp と呼ばれています．\n以下の実装例では，最初に\n\\(N+K\\)\nのメモリを確保しておき，\n\\(\\mathrm{dp}[i]\\)\nを\n\\(K-i\\)\nから\n\\(K-i+(N-1)\\)\n番目の要素に対応させています．",
+      "codes": [
+        "n, m, k = map(int, input().split())\nxy = []\nfor i in range(m):\n    x, y = map(lambda x: int(x) - 1, input().split())\n    xy.append((x, y))\n\nmod = 998244353\ndp = [0] * (n + k)\nleft = k\ndp[k] = 1\nfor _ in range(k):\n    add = []\n    for x, y in xy:\n        add.append((y, dp[left + x]))\n    left -= 1\n    dp[left] = dp[left + n]\n    for y, val in add:\n        dp[y + left] += val\n        dp[y + left] %= mod\n\nprint(sum(dp[:n]) % mod)"
+      ],
+      "text_sha256": "606fb21cdcf67b8d865997e4b3909ecade93d317df6ca91a0d187addb004eb8f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc372/abc372_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc372/editorial/10978",
+      "text": "グラフを縮約することで解くことができます．入次数および出次数が\n\\(1\\)\nである頂点を縮約することで，\n\\(O(M)\\)\n頂点\n\\(O(M)\\)\n辺の重み付き有向グラフを作ります．このグラフ上で，「\n\\(\\mathrm{dp}[i][j]=\\)\n\\(i\\)\n回の移動で頂点\n\\(j\\)\nにいる移動方法の数」という dp を考えると，状態数が\n\\(O(MK)\\)\nとなって間に合います．縮約辺の途中で移動が終わる場合や，縮約したグラフに頂点\n\\(1\\)\nが含まれない場合，\n\\(M=0\\)\nの場合の処理などに注意してください．",
+      "codes": [
+        "n, m, k = map(int, input().split())\nif m == 0:\n    print(1)\n    exit()\nedges = []\ns = set([0])\nfor i in range(m):\n    x, y = map(lambda x: int(x) - 1, input().split())\n    s.add(x)\n    s.add(y)\n    edges.append((x, y))\n\ns = sorted(list(s))\nd = {}\nsz = len(s)\nfor i in range(sz):\n    d[s[i]] = i\nedge = [[] for i in range(sz)]\nfor i in range(sz):\n    edge[i].append(((i + 1) % sz, (s[(i + 1) % sz] - s[i]) % n))\nfor x, y in edges:\n    edge[d[x]].append((d[y], 1))\n\nmod = 998244353\ndp = [[0] * sz for i in range(k)]\ndp[0][0] = 1\nans = 0\nfor i in range(k):\n    for v in range(sz):\n        for to, w in edge[v]:\n            if i + w >= k:\n                ans += dp[i][v]\n                ans %= mod\n            else:\n                dp[i + w][to] += dp[i][v]\n                dp[i + w][to] %= mod\n\nprint(ans)"
+      ],
+      "text_sha256": "3a876e166da6f7c303c7ff547e149a08b1a7404bd5bfb76c98f22fec6c76ed6f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc372/abc372_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

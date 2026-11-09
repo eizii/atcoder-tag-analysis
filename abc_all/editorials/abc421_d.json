@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc421_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc421/editorial/13779",
+      "text": "この問題は工夫したシミュレーションにより解くことができます。\nまずは次の問題を考えます。\n問題(★)「高橋君は\n\\((R_t,C_t)\\)\nから方向\n\\(D_t\\)\nへ、青木君は\n\\((R_a,C_a)\\)\nから方向\n\\(D_a\\)\nへ、\n\\(1\\)\n回の行動で\n\\(1\\)\nマスずつ移動します。\n\\(1\\)\n回以上行動した後、二人が同じマスいることがあるか判定し、あるなら最小行動回数を求めてください」\nこの問題の答えは\n\\(D_t=D_a\\)\nのケースに注意しつつ、移動回数\n\\(X\\)\nに関する連立方程式\n\\(\\begin{cases}\nR_t+X r'_t=R_a+Xr'_a\\\\\nC_t+Xc'_t=C_a+Xc'_a\n\\end{cases}\\)\nを解くことで\n\\(O(1)\\)\nで求めることができます。（\n\\(r'_d, c'_d\\)\nは 方向\n\\(D_d\\)\nに\n\\(1\\)\n回移動したときのマスの番号の変化を表す）\n元の問題に戻ります。青木君と高橋君がそれぞれ一定の方向に移動し続けている間は、問題(★)によりまとめて計算することができます。よって元の問題は\n\\(O(M+L)\\)\n個の問題(★)を解くことで答えを求めることができ、計算量は\n\\(O(M+L)\\)\nとなります。\n例えば高橋君の移動が\nLLLUURRRR\nであり、青木君の移動が\nDUUUUUULL\nであるとき、以下のような\n\\(5\\)\nつの区間に分けて考えればよいです。",
+      "codes": [],
+      "text_sha256": "3da5b516a072555c41a9acba68e435f3057139b77fdb4ea382b2b342a5504b26",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc421/abc421_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc421/editorial/13800",
+      "text": "公式解説のように区間に分けた後、次の問題を解けばよいです。\n高橋君は\n\\((R_t, C_t)\\)\nから\n\\(D_t\\)\nへ、青木君は\n\\((R_a, C_a)\\)\nから\n\\(D_a\\)\nへ\n\\(1\\)\n回の行動で\n\\(1\\)\nマスごとに移動することを\n\\(T\\)\n回繰り返します。\n移動後に高橋君と青木君の位置が一致する回数を求めてください。\nまた、\n\\(T\\)\n回移動後の高橋君と青木君の座標を求めてください。\n大変な（しかしこれでも正しい）解法としては、\n\\(D_t, D_a\\)\nがそれぞれ\n\\(4\\)\n通りあるため、\n\\(4^2=16\\)\n通りすべてについて1つ1つ記述することです。しかし、これではバグを多く埋め込みやすいです。\n次のように実装を工夫すると少し楽になると思います。\n\\(1\\)\n回の移動の変化を考える\n\\(1\\)\n回移動で座標が、高橋君は\n\\(((dr)_t, (dc)_t)\\)\nだけ変化し、青木君は\n\\(((dr)_a, (dc)_a)\\)\nだけ変化するとします。\n\\((dr)_t, (dc)_t\\)\nは次のように表されます（\n\\((dr)_a, (dc)_a\\)\nも同様です）\n\\[\n(dr)_t =\n\\begin{cases}\n-1 & (D_t = `U`)\\\\\n1 & (D_t = `D`)\\\\\n0 & (他)\n\\end{cases}\n\\]\n\\[\n(dc)_t =\n\\begin{cases}\n-1 & (D_t = `L`)\\\\\n1 & (D_t = `R`)\\\\\n0 & (他)\n\\end{cases}\n\\]\n「\n\\(x\\)\n回移動後、高橋君と青木君の座標が一致している」という条件は次の連立方程式で表されます。\n\\[\n\\begin{cases}\nR_t + x (dr)_t = R_a + x (dr)_a\\\\\nC_t + x (dc)_t = C_a + x (dc)_a\n\\end{cases}\n\\]\n変形すると\n\\[\n\\begin{cases}\nR_t - R_a = x ((dr)_a - (dr)_t)\\\\\nC_t - C_a = x ((dc)_a - (dc)_t)\n\\end{cases}\n\\]\nです。\n\\(1 \\le x \\le T\\)\nを満たす整数\n\\(x\\)\nであって、この連立方程式を満たすものの個数を数え上げればよいです。\n\\((dr)_a - (dr)_t = 0\\)\nの場合\n1個目の条件は\n\\(R_t = R_a\\)\nとなるため、これが満たされてなかったら条件を満たす\n\\(x\\)\nは存在しません。そうでなかったら、すべての\n\\(x\\)\nについて満たされます。\n\\((dr)_a - (dr)_t \\ne 0\\)\nの場合\n\\[ x = \\frac{R_t - R_a}{(dr)_a - (dr)_t}\\]\nと求められます。もしこれが整数でない、すなわち、\n\\(R_t - R_a\\)\nが\n\\((dr)_a - (dr)_t\\)\nで割り切れない場合、条件を満たす\n\\(x\\)\nは存在しません。\nそうでない場合、\n\\(x\\)\nは整数となります。ここで\n\\(1 \\le x \\le T\\)\nでなかったら、条件を満たす\n\\(x\\)\nは存在しません。\n\\(1 \\le x \\le T\\)\nであったら、その\n\\(x\\)\nのみが条件を満たす\n\\(x\\)\nの\n候補\nになります。\n以上のことを\n\\(2\\)\n番目の方程式にも行い、\n「すべての\n\\(x\\)\nについて条件が満たされる」なら\n\\(T\\)\n個\n「ある\n\\(1\\le x\\le T\\)\nがあり、\n\\(x\\)\nのみで条件を満たす」なら\n\\(1\\)\n個\n「条件を満たす\n\\(x\\)\nが存在しない」なら\n\\(0\\)\n個\nというふうになります。\n擬似コードとしては\nこのようになります。\n「\n\\(T\\)\n回移動後の高橋君と青木君の座標」についてはそれぞれ\n\\[(R_t + T (dr)_t, C_t + T(dc)_t)\\]\n\\[(R_a + T (dr)_a, C_a + T(dc)_a)\\]\nとなるため、簡単に求められます。",
+      "codes": [
+        "f(rt,ra,ct,ca,dtr,dtc,dar,dac,T) {\n\tis_all_ok_r = 0\n\tis_all_ok_c = 0\n\tr_value = -1\n\tc_value = -1\n\t\n\tif (dra - drt == 0) {\n\t\tif (rt - ra != 0) {\n\t\t\treturn 0\n\t\t} else {\n\t\t\tis_all_ok_r = 1\n\t\t}\n\t} else {\n\t\tif ((rt - ra) % (dra - drt) != 0) {\n\t\t\treturn 0\n\t\t} else {\n\t\t\tr_value = (rt - ra) / (dra - drt)\n\t\t\tif (not (1 <= r_value and r_value <= T)) {\n\t\t\t\treturn 0\n\t\t\t}\n\t\t}\n\t}\n\t\n\tif (dca - dct == 0) {\n\t\tif (ct - ca != 0) {\n\t\t\treturn 0\n\t\t} else {\n\t\t\tis_all_ok_c = 1\n\t\t}\n\t} else {\n\t\tif ((ct - ca) % (dca - dct) != 0) {\n\t\t\treturn 0\n\t\t} else {\n\t\t\tc_value = (ct - ca) / (dca - dct)\n\t\t\tif (not (1 <= c_value and c_value <= T)) {\n\t\t\t\treturn 0\n\t\t\t}\n\t\t}\n\t}\n\n\tif (is_all_ok_r == 1) {\n\t\tif (is_all_ok_c == 1) {\n\t\t\treturn T;\n\t\t} else {\n\t\t\treturn 1;\n\t\t}\n\t} else {\n\t\tif (is_all_ok_c == 1) {\n\t\t\treturn 1;\n\t\t}else {\n\t\t\tif (r_value == c_value) {\n\t\t\t\treturn 1;\n\t\t\t} else {\n\t\t\t\treturn 0;\n\t\t\t}\n\t\t}\n\t}\n\n}"
+      ],
+      "text_sha256": "f2072b7c64143caa350329c9c4ce223dc6706aee512aab9ca3cad7b22f686f3e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc421/abc421_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc421/editorial/13801",
+      "text": "公式解説の後半部分の方法により,\n\\(M=L=1\\)\nの問題が解ければ良いです。\n\\(S_1'=T_1'\\)\nの時\n\\((R_t,C_t)=(R_a,C_a)\\)\nならば答えは\n\\(A_1(=B_1)\\)\nであり, そうでなければ答えは\n\\(0\\)\nです.\n\\(S_1'\\neq T_1'\\)\nの時\n二人の座標のマンハッタン距離\n\\(|R_t-R_a|+|C_t-C_a|\\)\nを\n\\(d\\)\nとすると, 二人が出会うならばそれは丁度\n\\(d/2\\)\n回の移動の後です. よって,\n\\(d\\)\nが偶数.\n\\(0<d/2\\le A_1(=B_1).\\)\n二人の\n\\(d/2\\)\n回の移動後の座標が等しい.\nの\n\\(3\\)\n条件が全て満たされるならば答えは\n\\(1\\)\nでそうでない時答えは\n\\(0\\)\nです.",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing ll =long long;\nint main(){\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n\n    ll C_t,R_t,C_a,R_a,N,M,L;\n    cin>>R_t>>C_t>>R_a>>C_a>>N>>M>>L;\n    deque<array<ll,3>> S,T;\n\n    /// 文字を方向に変換しつつ入力を受け取る---ここから---\n    for(int i=0;i<M;i++){\n        char s;\n        ll a;\n        cin>>s>>a;\n        if(s=='U')S.push_back({a,-1,0});\n        else if(s=='D')S.push_back({a,1,0});\n        else if(s=='R')S.push_back({a,0,1});\n        else S.push_back({a,0,-1});\n    }\n    for(int i=0;i<L;i++){\n        char s;\n        ll a;\n        cin>>s>>a;\n        if(s=='U')T.push_back({a,-1,0});\n        else if(s=='D')T.push_back({a,1,0});\n        else if(s=='R')T.push_back({a,0,1});\n        else T.push_back({a,0,-1});\n    }\n    /// 文字を方向に変換しつつ入力を受け取る---ここまで---\n\n    ll an=0;\n    while(S.size()>0){\n\n        /// 同じ方向に移動する部分を抜き出す--ここから--\n        auto [a,dR_t,dC_t]=S.front();\n        auto [b,dR_a,dC_a]=T.front();\n        S.pop_front();\n        T.pop_front();\n        if(a<b){\n            T.push_front({b-a,dR_a,dC_a});\n            b=a;\n        }\n        if(a>b){\n            S.push_front({a-b,dR_t,dC_t});\n            a=b;\n        }\n        /// 同じ方向に移動する部分を抜き出す--ここまで--\n\n\n        //移動方向が同じケース\n        if(dR_t==dR_a&&dC_t==dC_a){\n            if(R_t==R_a&&C_t==C_a){\n                an+=a;\n            }\n        }\n        \n        else{\n            ll d=abs(R_t-R_a)+abs(C_t-C_a);//マンハッタン距離\n            if(\n                d%2==0&&\n                0<d&&d/2<=a&&\n                R_t+dR_t*(d/2)==R_a+dR_a*(d/2)&&C_t+dC_t*(d/2)==C_a+dC_a*(d/2) //d/2回移動後の座標一致\n            )an++;\n        }\n        \n        // 動いた先を求める.  \n        R_t+=dR_t*a;\n        C_t+=dC_t*a;\n        R_a+=dR_a*a;\n        C_a+=dC_a*a;\n    }\n    cout<<an<<\"\\n\";\n}"
+      ],
+      "text_sha256": "b34a779814833ab04d4110d1519c92ef5c40405fd981fbf031f6a2428e5abd54",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc421/abc421_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

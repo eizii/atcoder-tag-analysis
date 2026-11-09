@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc192_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc192/editorial/722",
+      "text": "問題文に指定された通りの条件が満たされているか1文字ずつ確かめましょう。多くの言語では、配列などは\n\\(0\\)\n-indexedであるため、問題文で指定された偶奇と添字のindexの偶奇との対応に注意が必要です。\n実装例(C++)\n実装例(python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tstring s;\n\tcin >> s;\n\tint len=s.length();\n\tbool is_unreadable=true;\n\tfor(int i=0;i<len;i++){\n\t\tif(i%2==0){\n\t\t\tif(!islower(s[i]))is_unreadable=false;\n\t\t}else{\n\t\t\tif(!isupper(s[i]))is_unreadable=false;\n\t\t}\n\t}\n\tif(is_unreadable)cout << \"Yes\";\n\telse cout << \"No\";\n}",
+        "S = input()\nis_unreadable = all([c.islower() if i%2==0 else c.isupper() for i,c in enumerate(S)])\nif is_unreadable:\n\tprint(\"Yes\")\nelse:\n\tprint(\"No\")"
+      ],
+      "text_sha256": "bb0cc007c99f92acf33c419e246a6eb77ff75da0830f877c273dc8c965d5d545",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc192/abc192_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,250 @@
+               ABC 080 解説
+
+
+                                    writer: namonakiacc
+
+                   平成29 年12 月3 日
+
+
+
+  For international readers: English Editorial starts at page 4.
+
+
+A:  Parking
+
+ プラン1 を選んで駐車した場合、駐車料金はA × N 円となり、プラン2 を選んで駐車した場
+合、駐車料金はB 円となるので、A × N とB の小さいほうを出力するとよいです。
+
+#include <cstdio >
+int N,A,B;
+int main ()
+{
+         scanf ("%d%d%d",&N,&A,&B);
+        if(N*A<=B)printf ("%d\n",N*A);
+         else printf ("%d\n",B);
+}
+
+
+
+B:  Harshad Number
+
+  f(N) の計算方法だが、例えば以下の方法が考えられる。
+  1: t = N、c = 0 とする。
+  2: c に、t を10 で割った余りを加算する。
+  3: t に、t を10 で割った商を代入する。
+  4: t > 0 ならば2 に戻る。そうでないなら終了する。このときc = f(N) となる。
+  f(N) を求めた後、N がf(N) で割り切れるかを判定すればよい。
+
+#include <cstdio >
+int N;
+int main ()
+{
+         scanf ("%d",&N);
+         int t=N,c=0;
+        while(t>0)c+=t%10,t/=10;
+        if(N%c==0) puts ("Yes ");
+         else puts ("No");
+}
+
+
+
+
+
+                                         1
+
+C:  Shopping Street
+
+ 店を営業する時間帯の組み合わせは210 −1 = 1023 通りなため、これら全ての場合において利
+益を計算し、最大値を出力するとよいです。
+
+#include <cstdio >
+int N;
+int F[100][14];
+int P[100][15];
+int main ()
+{
+         scanf ("%d",&N);
+        for(int i=0;i<N;i++)
+          {
+                 for(int j=0;j <10;j++) scanf ("%d",&F[i][j]);
+          }
+        for(int i=0;i<N;i++) for(int j=0;j <11;j++) scanf ("%d",&P[i][j]);
+         int res =-(1<<30);
+        for(int b=1;b<(1 < <10);b++)
+          {
+                  int cc=0;
+                 for(int i=0;i<N;i++)
+                   {
+                          int c=0;
+                         for(int j=0;j <10;j++)if((b>>j&1)&&F[i][j])c++;
+                         cc+=P[i][c];
+                   }
+                 if(res <cc)res=cc;
+          }
+         printf ("%d\n",res);
+}
+
+
+
+
+
+                                         2
+
+D:  Recording
+
+ 録画機をあるチャンネルの時刻S から時刻T までの録画に使用すると、時刻S −0.5 から時
+刻T まで他のチャンネルの録画に使用できませんが、このとき時刻S −0.5 から時刻T まで録
+画機を使用していると考えることとします。
+ まず、同じチャンネルの連続した番組は同じ録画機で一緒に録画した方が録画機の使用時間が
+短くなるので、そのように考えます。すると、個々のチャンネルにおいて、録画機を使用する時間
+を最小にできます。
+ その後、各時間において、いくつの録画機が使用中であるかを考えると、その最大値が答えと
+なります。
+
+#include <cstdio >
+int N,C;
+int s[100000] ,t[100000] ,c[100000];
+int sm [200002];
+int tt [200002];
+int main ()
+{
+         scanf ("%d%d",&N,&C);
+        for(int i=0;i<N;i++)
+                 scanf ("%d%d%d",&s[i],&t[i],&c[i]);
+        for(int i=1;i<=C;i++)
+          {
+                 for(int j=0;j <200002;j++)tt[j]=0;
+                 for(int j=0;j<N;j++)if(c[j]==i)tt[s[j]*2 -1]++ ,tt[t[j]*2]--;
+                 for(int j=1;j <200002;j++)tt[j]+=tt[j -1];
+                 for(int j=0;j <200002;j++)if(tt[j]>0)sm[j]++;
+          }
+         int mx=0;
+        for(int j=0;j <200002;j++)if(mx <sm[j])mx=sm[j];
+         printf ("%d\n",mx);
+}
+
+
+
+
+
+                                         3
+
+A:  Parking
+
+ When you choose plan 1 ,the fee will be A × N yen,and when you choose plan 2, the fee will
+be B yen.
+  So,it is good to print the smaller of A × N and B.
+
+#include <cstdio >
+int N,A,B;
+int main ()
+{
+         scanf ("%d%d%d",&N,&A,&B);
+        if(N*A<=B)printf ("%d\n",N*A);
+         else printf ("%d\n",B);
+}
+
+
+
+B:  Harshad Number
+
+  For example,f(N) can be calculated as such.
+  1: Set t = N,c = 0.
+  2: Add to c ,the remainder of t divided by 10.
+  3: Substitute the quotient of t divided by 10 ,for t.
+  4: If t > 0,go 2. If t = 0,quit. Then c = f(N).
+  After that, it is good to check is N can be divided by f(N) or not.
+
+#include <cstdio >
+int N;
+int main ()
+{
+         scanf ("%d",&N);
+         int t=N,c=0;
+        while(t>0)c+=t%10,t/=10;
+        if(N%c==0) puts ("Yes ");
+         else puts ("No");
+}
+
+
+
+
+
+                                         4
+
+C:  Shopping Street
+
+  There are 210 −1 = 1023 pattern to decide how to open a shop,so it is good to calculate proﬁt
+in every pattern and print the maximum one.
+
+#include <cstdio >
+int N;
+int F[100][14];
+int P[100][15];
+int main ()
+{
+         scanf ("%d",&N);
+        for(int i=0;i<N;i++)
+          {
+                 for(int j=0;j <10;j++) scanf ("%d",&F[i][j]);
+          }
+        for(int i=0;i<N;i++) for(int j=0;j <11;j++) scanf ("%d",&P[i][j]);
+         int res =-(1<<30);
+        for(int b=1;b<(1 < <10);b++)
+          {
+                  int cc=0;
+                 for(int i=0;i<N;i++)
+                   {
+                          int c=0;
+                         for(int j=0;j <10;j++)if((b>>j&1)&&F[i][j])c++;
+                         cc+=P[i][c];
+                   }
+                 if(res <cc)res=cc;
+          }
+         printf ("%d\n",res);
+}
+
+
+
+
+
+                                         5
+
+D:  Recording
+
+ When you use recorder from time S to time T in a channel,this recorder can not record other
+channel from time S −0.5 to time T ,so it is OK to think as using the recorder from time S −0.5
+to time T.
+  First,continuous program from the same channel should be better to record together in the
+same recorder,so think as such.Then,the time of using the recorder will be shortest in every
+channel.
+  After that,considering which number of record is need at every time.Then,the maximum num-
+ber of that is the answer.
+
+#include <cstdio >
+int N,C;
+int s[100000] ,t[100000] ,c[100000];
+int sm [200002];
+int tt [200002];
+int main ()
+{
+         scanf ("%d%d",&N,&C);
+        for(int i=0;i<N;i++)
+                 scanf ("%d%d%d",&s[i],&t[i],&c[i]);
+        for(int i=1;i<=C;i++)
+          {
+                 for(int j=0;j <200002;j++)tt[j]=0;
+                 for(int j=0;j<N;j++)if(c[j]==i)tt[s[j]*2 -1]++ ,tt[t[j]*2]--;
+                 for(int j=1;j <200002;j++)tt[j]+=tt[j -1];
+                 for(int j=0;j <200002;j++)if(tt[j]>0)sm[j]++;
+          }
+         int mx=0;
+        for(int j=0;j <200002;j++)if(mx <sm[j])mx=sm[j];
+         printf ("%d\n",mx);
+}
+
+
+
+
+
+                                         6

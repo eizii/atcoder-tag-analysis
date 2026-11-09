@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc331_f",
+  "title": "Palindrome Query",
+  "contests": [
+    {
+      "contest_id": "abc331",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1666,
+  "raw_difficulty": 1666,
+  "contest_id": "abc331",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc331/tasks/abc331_f",
+  "statement": "配点 : 525 点 問題文 英小文字からなる長さ N の文字列 S が与えられます。 以下で説明されるクエリを与えられる順に Q 個処理してください。 クエリは次の 2 種類のいずれかです。 1 x c : S の x 文字目を英小文字 c に変更する。 2 L R : S の L 文字目から R 文字目までからなる部分文字列が回文であるならば Yes を、そうでないならば No を出力する。 制約 1 \\leq N \\leq 10^6 1 \\leq Q \\leq 10^5 S は英小文字からなる長さ N の文字列 1 \\leq x \\leq N c は英小文字 1 \\leq L \\leq R \\leq N N, Q, x, L, R は整数 入力 入力は以下の形式で標準入力から与えられる。ここで \\text{query}_i は i 番目に処理するクエリである。 N Q S \\text{query}_1 \\text{query}_2 \\vdots \\text{query}_Q 各クエリは以下のいずれかの形式で与えられる。 1 x c 2 L R 出力 問題文の指示に従ってクエリへの答えを改行区切りで出力せよ。 入力例 1 7 8\r\nabcbacb\r\n2 1 5\r\n2 4 7\r\n2 2 2\r\n1 5 c\r\n2 1 5\r\n2 4 7\r\n1 4 c\r\n2 3 6 出力例 1 Yes\r\nNo\r\nYes\r\nNo\r\nYes\r\nYes はじめ、 S = abcbacb です。 1 番目のクエリについて、 S の 1 文字目から 5 文字目までからなる文字列は abcba で、これは回文です。よって Yes を出力します。 2 番目のクエリについて、 S の 4 文字目から 7 文字目までからなる文字列は bacb で、これは回文ではありません。よって No を出力します。 3 番目のクエリについて、 S の 2 文字目から 2 文字目までからなる文字列は b で、これは回文です。よって Yes を出力します。 4 番目のクエリについて、 S の 5 文字目を c に変更します。 S は abcbccb になります。 5 番目のクエリについて、 S の 1 文字目から 5 文字目までからなる文字列は abcbc で、これは回文ではありません。よって No を出力します。 6 番目のクエリについて、 S の 4 文字目から 7 文字目までからなる文字列は bccb で、これは回文です。よって Yes を出力します。 7 番目のクエリについて、 S の 4 文字目を c に変更します。 S は abccccb になります。 8 番目のクエリについて、 S の 3 文字目から 6 文字目までからなる文字列は cccc で、これは回文です。よって Yes を出力します。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英小文字からなる長さ N の文字列 S が与えられます。 以下で説明されるクエリを与えられる順に Q 個処理してください。 クエリは次の 2 種類のいずれかです。 1 x c : S の x 文字目を英小文字 c に変更する。 2 L R : S の L 文字目から R 文字目までからなる部分文字列が回文であるならば Yes を、そうでないならば No を出力する。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 10^6 1 \\leq Q \\leq 10^5 S は英小文字からなる長さ N の文字列 1 \\leq x \\leq N c は英小文字 1 \\leq L \\leq R \\leq N N, Q, x, L, R は整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。ここで \\text{query}_i は i 番目に処理するクエリである。 N Q S \\text{query}_1 \\text{query}_2 \\vdots \\text{query}_Q 各クエリは以下のいずれかの形式で与えられる。 1 x c 2 L R"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 問題文の指示に従ってクエリへの答えを改行区切りで出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 7 8\r\nabcbacb\r\n2 1 5\r\n2 4 7\r\n2 2 2\r\n1 5 c\r\n2 1 5\r\n2 4 7\r\n1 4 c\r\n2 3 6"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\r\nNo\r\nYes\r\nNo\r\nYes\r\nYes はじめ、 S = abcbacb です。 1 番目のクエリについて、 S の 1 文字目から 5 文字目までからなる文字列は abcba で、これは回文です。よって Yes を出力します。 2 番目のクエリについて、 S の 4 文字目から 7 文字目までからなる文字列は bacb で、これは回文ではありません。よって No を出力します。 3 番目のクエリについて、 S の 2 文字目から 2 文字目までからなる文字列は b で、これは回文です。よって Yes を出力します。 4 番目のクエリについて、 S の 5 文字目を c に変更します。 S は abcbccb になります。 5 番目のクエリについて、 S の 1 文字目から 5 文字目までからなる文字列は abcbc で、これは回文ではありません。よって No を出力します。 6 番目のクエリについて、 S の 4 文字目から 7 文字目までからなる文字列は bccb で、これは回文です。よって Yes を出力します。 7 番目のクエリについて、 S の 4 文字目を c に変更します。 S は abccccb になります。 8 番目のクエリについて、 S の 3 文字目から 6 文字目までからなる文字列は cccc で、これは回文です。よって Yes を出力します。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc331/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:03.262724+00:00",
+  "statement_sha256": "80d9d46d752a3dfa82f511eaeb28036a61f50d35b5e4d954e432e860a0ae2a75",
+  "editorials": []
+}

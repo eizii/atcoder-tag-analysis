@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc119_b",
+  "editorials": [
+    {
+      "text": "B: Digital Gifts\n親戚の人数が2 人、3 人などと固定されていれば問題A と大差ありませんが、実際の親戚の人数N は2\n以上10 以下と固定されておらず、それに対応するために何らかの「ループ機構」を使うことになります。そ\nの代表例がfor 文で、この問題でもfor 文を使うのが素直でしょう。以下、プログラムで答えを求めるための\n機械的な手順を述べます。\nまず標準入力からN の値を読み込み、ans という値を宣言して0 で初期化します。そして次に述べる処\n理をN 回繰り返すと、最終的にans に求めたい値が入ります。i 回目の処理(1 ≤i ≤N) は次の通りです:\n「標準入力から小数xi (整数も小数の一種と考えられる) と文字列ui を読み込む。ui = JPY ならans にxi\nを足す。ui = BTC ならans にxi × 380000.0 を足す」。\nこれをPython3 で実装したコードが以下です。\n1 N = int(input())\n2 rate = 380000.0\n3 ans = 0.0\n4 for i in range(N):\n5\nx, u = input().split()\n6\nx = float(x)\n7\nans += x * rate if u == 'BTC' else x\n8 print('{:.11f}'.format(ans))\nなお、小数を出力する際は基本的に桁数を多めに(最低でも10 桁) 持たせることを勧めます。言語と問題\nによっては、小数を出力する際の標準の桁数に頼ると精度が足りないことがあるためです。\n",
+      "text_sha256": "d76c1ba5d8901ffa9dd12c099efbdf511d6727011b9f846075d1f79669825c90",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc119/abc119_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc358_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc358/editorial/10221",
+      "text": "各ポップコーン売り場について訪れるか訪れないか決めることを考えます。訪れるポップコーン売り場の選び方は\n\\(2^N\\)\n通りであり、本問題の制約下ではこれは最大で\n\\(10^3\\)\n通りなので、容易に全通り試すことができます。具体的には、訪れるポップコーン売り場の選び方それぞれに対して、その選び方で全ての味のポップコーンを買えるか判定し、買えるならば選んだ売り場の数を\n\\(x\\)\nとして\n\\(\\mathrm{ans} \\leftarrow \\min(\\mathrm{ans},x)\\)\nと更新する、という処理を行えば良いです。\nあとは実装の問題です。本問題のように「\n\\(N\\)\n個のものそれぞれについて選ぶか選ばないかを決める\n\\(2^N\\)\n通りを全探索する」という状況では、\nbit 全探索\nと呼ばれる手法がその実装の容易さから広く用いられています。これは、「\n\\(0,1,\\dots,N-1\\)\nの番号がついた\n\\(N\\)\n個のものから\n\\(x_1,x_2\\dots,x_k\\)\nの\n\\(k\\)\n個を選ぶ」という状態を「\n\\(2\\)\n進数表記で\n\\(x_1,x_2,\\dots,x_k\\)\n桁目が\n\\(1\\)\nであるような整数」に対応させると、\n\\(N\\)\n個のものからいくつかのものを選ぶ\n\\(2^N\\)\n通りが\n\\(0\\)\n以上\n\\(2^N-1\\)\n以下の整数と一対一に対応するので、選び方を全探索する代わりに整数の方を全探索すればよい（そしてこれは簡単な for 文で実現できる）というものです。\n整数から選び方を復元するには「整数\n\\(x,k\\)\nに対して、\n\\(x\\)\nを\n\\(2\\)\n進数表記したときの\n\\(k\\)\n桁目を求める」という操作が必要になりますが、これはほとんどのプログラミング言語の備わるビット演算の機能を用いて簡単に実装できます。詳細は下記の実装例も参考にしてください。\n実装例  (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<string> s(n);\n    for (int i = 0; i < n; i++) {\n        cin >> s[i];\n    }\n    int ans = n;\n    for (int bit = 0; bit < (1 << n); bit++) {\n        vector<bool> exist(m);\n        int cnt = 0;\n        for (int i = 0; i < n; i++) {\n            if (bit >> i & 1) {\n                ++cnt;\n                for (int j = 0; j < m; j++) {\n                    if (s[i][j] == 'o') exist[j] = true;\n                }\n            }\n        }\n        bool all_exist = true;\n        for (int j = 0; j < m; j++) {\n            if (!exist[j]) all_exist = false;\n        }\n        if (all_exist) ans = min(ans, cnt);\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "0082f0b4e40e94998621fcc7f465fe5a892a9a1eb0fb03e9ae4f5f721a7f18c1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc358/abc358_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

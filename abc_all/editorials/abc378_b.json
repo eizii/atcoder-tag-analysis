@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc378_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc378/editorial/11285",
+      "text": "「日付を\n\\(q\\)\nで割って\n\\(r\\)\nあまる日」は，日付がある非負整数\n\\(a\\)\nを用いて\n\\(aq+r\\)\nで表されるような日です．よって，\n\\(d \\leq aq + r\\)\nとなる最小の\n\\(a\\)\nを求めればよいです．\n\\(d\\)\nを\n\\(q\\)\nで割った商を\n\\(b\\)\n，あまりを\n\\(c\\)\nとします．すると，\n\\(d=bq + c\\)\nと表されます．\n\\(c\\)\nと\n\\(r\\)\nの大小関係で場合分けします．\n\\(c \\leq r\\)\nのとき，\n\\(d = bq+c \\leq aq+r\\)\nとなる最小の\n\\(a\\)\nは\n\\(a=b\\)\nです．よって，答えは\n\\(bq+r\\)\nです．\n\\(c > r\\)\nのとき，\n\\(d=bq+c \\leq aq+r\\)\nとなる最小の\n\\(a\\)\nは\n\\(a = b+1\\)\nです．よって，答えは\n\\((b+1)q+r\\)\nです．\n実装例 (Python)\n実装例 (C++)",
+      "codes": [
+        "N = int(input())\nq = [0] * N\nr = [0] * N\nfor i in range(N):\n    q[i], r[i] = map(int, input().split())\nQ = int(input())\nfor _ in range(Q):\n    t, d = map(int, input().split())\n    t -= 1\n    b, c = divmod(d, q[t])\n    a = b if c <= r[t] else b + 1\n    ans = a * q[t] + r[t]\n    print(ans)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    vector<int> q(N), r(N);\n    for (int i = 0; i < N; ++i) cin >> q[i] >> r[i];\n    int Q;\n    cin >> Q;\n    while (Q--) {\n        int t, d;\n        cin >> t >> d;\n        --t;\n        int b = d / q[t], c = d % q[t];\n        int a = c <= r[t] ? b : b + 1;\n        int ans = a * q[t] + r[t];\n        cout << ans << \"\\n\";\n    }\n}"
+      ],
+      "text_sha256": "8cd8a108ffbfd83b1d59d5ceaf9f7a83e42f2af4f6d6189f18768adc2084dc32",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc378/abc378_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc378/editorial/11303",
+      "text": "日付を\n\\(q\\)\nで割ったあまりが\n\\(r\\)\nであるような日に回収される種類のゴミが\n\\(d\\)\n日に出された場合を考えます。\n\\(d\\)\n日から何日後に回収されるかを考えると、この日数は\n\\(r - d\\)\nを\n\\(q\\)\nで割ったあまりと一致します。ここで、\n\\(r - d\\)\nが負の場合もあまりは\n\\(0\\)\n以上であるとします。（例えば、\n\\(-9\\)\nを\n\\(7\\)\nで割ったあまりは\n\\(5\\)\nです。）よって、答えは\n\\(d + (r - d) \\bmod q\\)\nです。\nfor ループを用いてこの処理を\n\\(Q\\)\n回行えば元の問題が解けます。C++ などの言語ではあまりの計算に注意してください。（\na % b\nの代わりに\n(a % b + b) % b\nなどとする必要があります。）\n実装例 (Python):",
+      "codes": [
+        "N = int(input())\nq, r = [0] * N, [0] * N\nfor i in range(N):\n    q[i], r[i] = map(int, input().split())\nQ = int(input())\nfor _ in range(Q):\n    t, d = map(int, input().split())\n    print(d + (r[t - 1] - d) % q[t - 1])"
+      ],
+      "text_sha256": "975f2943fb77ec8ebd65c6aca1d984b0bb2a792a8cc5e57a602014685faac218",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc378/abc378_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

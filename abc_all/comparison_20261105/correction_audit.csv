@@ -1,0 +1,853 @@
+﻿problem_id,title,tag_id,tag,change,reason,before_methods,previous_context,evidence_urls
+abc035_d,トレジャーハント,T208,Floyd-Warshall 法,removed,negative_or_infeasible_context,editorial_name_rule,った • これは最短経路問題と呼ばれる有名問題 部分点(50点) • 以下の2 種類の最短距離を全て求めよう! 1. 頂点1 から、頂点i への最短距離 2. 頂点i から、頂点1 への最短距離 • ワーシャルフロイド法を使うとO(N3) • ダイクストラ法を使うとO(NMlogN) 満点(100点) 考察 • 部分点と同様、以下の2 種類の最短距離を求めたい 1. 頂点1 から、頂点i への最短距離 2. 頂点i から、頂点1 への最短距離 • 種類1 はダイクストラ法により高速に求められる • 種類2 で全ての頂点から調べては間,https://img.atcoder.jp/abc035/editorial.pdf
+abc057_c,Digits in Multiplication,T264,剰余,added,positive_context_or_fallback_changed,,,
+arc074_a,Chocolate Bar,T065,全探索,added,negative_or_infeasible_context,,,
+arc074_b,3N Numbers,T077,ソート,added,positive_context_or_fallback_changed,,,
+abc120_d,Decayed Bridges,T111,アッカーマン関数,removed,inverse_ackermann_complexity_background,editorial_name_rule,find(v): 頂点v が属するグループ番号を得る(O(α(n))) size(v): 頂点v が属するグループと同じグループに属する頂点数を得る(O(1)) ここで、n は管理する頂点数、α はアッカーマン関数の逆関数ですが、O(α(n)) はO(1) とほとんど変わりま せん,
+abc123_d,Cake 123,T064,二分探索,removed,references_or_related_problem_section,editorial_name_rule,解法 #4 – 二分探索で O(Klogmax) まず、「上から K 番目の美味しさにランクインするボーダーの値」 を求めることを考えます,
+abc126_e,1 or 2,T111,アッカーマン関数,removed,inverse_ackermann_complexity_background,editorial_name_rule,ここで、α はアッカーマン関数の逆関数ですが、非 常に小さいため、ほとんど定数と同じと考えて構いません,
+abc127_c,Prison,T060,数え上げ,added,positive_context_or_fallback_changed,,,
+abc137_e,Coins Respawn,T187,Dijkstra 法,added,positive_context_or_fallback_changed,,,
+abc137_f,Polynomial Construction,T212,Gauss 消去と連立一次方程式,added,positive_context_or_fallback_changed,,,
+abc146_f,Sugoroku,T187,Dijkstra 法,added,positive_context_or_fallback_changed,,,
+abc146_f,Sugoroku,T245,RMQ,added,positive_context_or_fallback_changed,,,
+abc176_e,Bomber,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"rn true;
+    }
+    return false;
+}
+ 
+int H, W, M;
+set<i_i> st;
+ 
+void input() {
+    cin >> H >> W >> M;
+    for(int i = 0; i < M; i++) {
+       ",https://atcoder.jp/contests/abc176/editorial/66
+abc177_f,I hate Shortest Path Problem,T055,最短経路,removed,title_only_not_solution_evidence,explicit_title_rule,I hate Shortest Path Problem,https://atcoder.jp/contests/abc177/tasks/abc177_f
+abc181_d,Hachi,T008,Map / 連想配列,removed,code_not_in_directly_executable_scope,editorial_code_rule,")
+    else:
+        print(""No"")
+    exit()
+
+cnt = Counter(n)
+
+for i in range(112, 1000, 8):
+    if not Counter(str(i)) - cnt:
+        print(""Yes"")
+ ",https://atcoder.jp/contests/abc181/editorial/259
+abc185_e,Sequence Matching,T118,マッチング,removed,title_only_not_solution_evidence,explicit_title_rule,Sequence Matching,https://atcoder.jp/contests/abc185/tasks/abc185_e
+abc190_c,Bowls and Dishes,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule," balls in itertools.product(*choice):
+    balls = set(balls)
+    cnt = sum(A in balls and B in balls for A, B in cond)
+    if ans < cnt:
+       ",https://atcoder.jp/contests/abc190/editorial/626
+abc199_d,RGB Coloring 2,T111,アッカーマン関数,removed,inverse_ackermann_complexity_background,editorial_name_rule,"よって二部グラフ判定や、連結成分判定をAtCoder Library のdsuで行った場合、 \(\mathcal{O}(\alpha(N) N^22^N)\) (但し、アッカーマン関数を \(A\) とした時、 \(\alpha(x)\) は \(A(x,x)\) の逆関数) で解くことが出来ます",https://atcoder.jp/contests/abc199/editorial/1184
+abc205_b,Permutation Check,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"int N;
+cin >> N;
+auto A = unordered_set<int>();
+rep(i, N) {
+	int x;
+	cin >> x;
+	A.emplace(x);
+}
+A.Distinct().Count() == N",https://atcoder.jp/contests/abc205/editorial/2088
+abc206_b,Savings,T076,シミュレーション,added,positive_context_or_fallback_changed,,,
+abc208_d,Shortest Path Queries 2,T055,最短経路,removed,title_only_not_solution_evidence,explicit_title_rule,Shortest Path Queries 2,https://atcoder.jp/contests/abc208/tasks/abc208_d
+abc212_d,Querying Multiset ,T009,Multiset,removed,title_only_not_solution_evidence,explicit_title_rule,Querying Multiset ,https://atcoder.jp/contests/abc212/tasks/abc212_d
+abc213_a,Bitwise Exclusive Or,T117,ビット演算,removed,title_only_not_solution_evidence,explicit_title_rule,Bitwise Exclusive Or,https://atcoder.jp/contests/abc213/tasks/abc213_a
+abc216_g,01Sequence,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"os(N);
+    for (int i=0; i<N; i++)
+        ST_pos.set(i, i);
+    for (int i: I)
+    {
+        //  書き込まなければならない1の個数
+        int n = X[i]-ST_sum.p",https://atcoder.jp/contests/abc216/editorial/2569
+abc218_g,Game on Tree 2,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"nclude <bits/stdc++.h>
+using namespace std;
+
+multiset<int> S,T; // 常に S.size()==T.size() or S.size()==T.size()+1
+void eval(){
+    if(S.size()){
+",https://atcoder.jp/contests/abc218/editorial/2607
+abc219_a,AtCoder Quiz 2,T064,二分探索,removed,code_not_in_directly_executable_scope,editorial_code_rule,"
+    vector<int> A = {40, 70, 90};
+    auto itr = upper_bound(begin(A), end(A), X);
+    if (itr != end(A)) {
+        cout << *itr - X << '\n';
+    } els",https://atcoder.jp/contests/abc219/editorial/2655
+abc222_f,Expensive Expense,T003,Segment Tree,removed,example_of_general_class_not_application,editorial_name_rule,競技プログラミングにおける抽象化の例としては AtCoder Library の Segment Tree などが挙げられます,https://atcoder.jp/contests/abc222/editorial/2749
+abc222_f,Expensive Expense,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"dren of c):
+    # d を根とする部分木の寄与のみ取り除く
+    exc_d = set(children of c) - d
+    mc2 = [max(m[d], D[d]) + (cost of edge d-c) for d in exc_d]
+    dv ",https://atcoder.jp/contests/abc222/editorial/2749
+abc222_h,Beautiful Binary Tree,T091,Catalan 数,removed,example_of_general_class_not_application | references_or_related_problem_section | worked_example_not_target_problem,editorial_name_rule,"例題:カタラン数 カタラン数 \(1,1,2,5,14,\dots\) の一般項を反転公式を使って求めてみましょう",https://atcoder.jp/contests/abc222/editorial/2742
+abc222_h,Beautiful Binary Tree,T127,多項式・形式的べき級数,removed,references_or_related_problem_section | worked_example_not_target_problem,editorial_name_rule,"maspy, 形式的べき級数解説 日本人が形式的冪級数を学びたい場合、真っ先に読むべきホームページです",https://atcoder.jp/contests/abc222/editorial/2742
+abc224_e,Integers on Grid,T008,Map / 連想配列,removed,code_not_in_directly_executable_scope,editorial_code_rule,";
+int rmax[200005], cmax[200005];
+int dp[200005];
+map<int, vector<int> > mp;
+
+int main(void)
+{
+  cin >> h >> w >> n;
+  for(int i = 1; i <= n; i+",https://atcoder.jp/contests/abc224/editorial/2814
+abc225_a,Distinct Strings,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"ing S; cin >> S;
+    sort(S.begin(),S.end());
+    set<string> s;
+    do{
+        s.insert(S);
+    }while(next_permutation(S.begin(),S.end()));
+ ",https://atcoder.jp/contests/abc225/editorial/2843
+abc225_a,Distinct Strings,T077,ソート,removed,code_not_in_directly_executable_scope,editorial_code_rule,"ace std;
+
+int main(){
+    string S; cin >> S;
+    sort(S.begin(),S.end());
+    set<string> s;
+    do{
+        s.insert(S);
+    }while(next_permut",https://atcoder.jp/contests/abc225/editorial/2843
+abc227_g,Divisors of Binomial Coefficient,T177,二項係数,removed,title_only_not_solution_evidence,explicit_title_rule,Divisors of Binomial Coefficient,https://atcoder.jp/contests/abc227/tasks/abc227_g
+abc233_f,Swap and Sort,T077,ソート,removed,title_only_not_solution_evidence,explicit_title_rule,Swap and Sort,https://atcoder.jp/contests/abc233/tasks/abc233_f
+abc238_e,Range Sums,T111,アッカーマン関数,removed,inverse_ackermann_complexity_background,editorial_name_rule,ここで、関数 \(α\) はアッカーマン関数の逆関数を表します,https://atcoder.jp/contests/abc238/editorial/3360
+abc242_f,Black and White Rooks,T177,二項係数,added,positive_context_or_fallback_changed,,,
+abc243_d,Moves on Binary Tree,T076,シミュレーション,added,positive_context_or_fallback_changed,,,
+abc245_b,Mex,T154,MEX,removed,title_only_not_solution_evidence,explicit_title_rule,Mex,https://atcoder.jp/contests/abc245/tasks/abc245_b
+abc247_e,Max Min,T065,全探索,added,positive_context_or_fallback_changed,,,
+abc255_g,Constrained Nim,T037,Nim,removed,title_only_not_solution_evidence,explicit_title_rule,Constrained Nim,https://atcoder.jp/contests/abc255/tasks/abc255_g
+abc256_a,2^N,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"0) {
+        int A = sc.nextInt();
+        bitset.set(0);
+        for (int i = bitset.length(); (i = bitset.previousSetBit(i - 1)) >= 0; ) { // ",https://atcoder.jp/contests/abc256/editorial/4159
+abc256_a,2^N,T065,全探索,removed,shared_unsegmented_editorial,editorial_name_rule,C問題 - Filling 3x3 array まずは、素直に全探索をすることを考えます,https://atcoder.jp/contests/abc256/editorial/4159
+abc256_a,2^N,T067,深さ優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,"まず、関数 \(\mathrm{dfs}(x, y, A, h, w)\) を次のように定義します",https://atcoder.jp/contests/abc256/editorial/4159
+abc256_a,2^N,T075,imos 法,removed,shared_unsegmented_editorial,editorial_name_rule,\(T_{L_i}\) から \(T_{R_i - 1}\) に \(1\) を加算する \(T_i\) の値を得る 簡単な方法としては imos法 があります | \(T_{L_i}\) から \(T_{R_i - 1}\) に \(1\) を加算する \(T_i\) の値を得る 簡単な方法としては imos法 があります | \(T_{L_i}\) から \(T_{R_i - 1}\) に \(1\) を加算する \(T_i\) の値を得る 簡単な方法としては imos法 があります,https://atcoder.jp/contests/abc256/editorial/4159
+abc256_a,2^N,T086,累積和,removed,shared_unsegmented_editorial,editorial_name_rule,また、 \(\sum_{j=i}^{N} A_j\) という形は後ろから累積和を取る形となっているので、累積和を取りながら計算することで高速化できます,https://atcoder.jp/contests/abc256/editorial/4159
+abc256_b,Batters,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"0) {
+        int A = sc.nextInt();
+        bitset.set(0);
+        for (int i = bitset.length(); (i = bitset.previousSetBit(i - 1)) >= 0; ) { // ",https://atcoder.jp/contests/abc256/editorial/4159
+abc256_b,Batters,T065,全探索,removed,shared_unsegmented_editorial,editorial_name_rule,C問題 - Filling 3x3 array まずは、素直に全探索をすることを考えます,https://atcoder.jp/contests/abc256/editorial/4159
+abc256_b,Batters,T067,深さ優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,"まず、関数 \(\mathrm{dfs}(x, y, A, h, w)\) を次のように定義します",https://atcoder.jp/contests/abc256/editorial/4159
+abc256_b,Batters,T075,imos 法,removed,shared_unsegmented_editorial,editorial_name_rule,\(T_{L_i}\) から \(T_{R_i - 1}\) に \(1\) を加算する \(T_i\) の値を得る 簡単な方法としては imos法 があります | \(T_{L_i}\) から \(T_{R_i - 1}\) に \(1\) を加算する \(T_i\) の値を得る 簡単な方法としては imos法 があります | \(T_{L_i}\) から \(T_{R_i - 1}\) に \(1\) を加算する \(T_i\) の値を得る 簡単な方法としては imos法 があります,https://atcoder.jp/contests/abc256/editorial/4159
+abc256_c,Filling 3x3 array,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"0) {
+        int A = sc.nextInt();
+        bitset.set(0);
+        for (int i = bitset.length(); (i = bitset.previousSetBit(i - 1)) >= 0; ) { // ",https://atcoder.jp/contests/abc256/editorial/4159
+abc256_c,Filling 3x3 array,T075,imos 法,removed,shared_unsegmented_editorial,editorial_name_rule,\(T_{L_i}\) から \(T_{R_i - 1}\) に \(1\) を加算する \(T_i\) の値を得る 簡単な方法としては imos法 があります | \(T_{L_i}\) から \(T_{R_i - 1}\) に \(1\) を加算する \(T_i\) の値を得る 簡単な方法としては imos法 があります | \(T_{L_i}\) から \(T_{R_i - 1}\) に \(1\) を加算する \(T_i\) の値を得る 簡単な方法としては imos法 があります,https://atcoder.jp/contests/abc256/editorial/4159
+abc256_c,Filling 3x3 array,T086,累積和,removed,shared_unsegmented_editorial,editorial_name_rule,また、 \(\sum_{j=i}^{N} A_j\) という形は後ろから累積和を取る形となっているので、累積和を取りながら計算することで高速化できます,https://atcoder.jp/contests/abc256/editorial/4159
+abc256_d,Union of Interval,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"0) {
+        int A = sc.nextInt();
+        bitset.set(0);
+        for (int i = bitset.length(); (i = bitset.previousSetBit(i - 1)) >= 0; ) { // ",https://atcoder.jp/contests/abc256/editorial/4159
+abc256_d,Union of Interval,T065,全探索,removed,shared_unsegmented_editorial,editorial_name_rule,C問題 - Filling 3x3 array まずは、素直に全探索をすることを考えます,https://atcoder.jp/contests/abc256/editorial/4159
+abc256_d,Union of Interval,T067,深さ優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,"まず、関数 \(\mathrm{dfs}(x, y, A, h, w)\) を次のように定義します",https://atcoder.jp/contests/abc256/editorial/4159
+abc256_e,Takahashi's Anguish,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"0) {
+        int A = sc.nextInt();
+        bitset.set(0);
+        for (int i = bitset.length(); (i = bitset.previousSetBit(i - 1)) >= 0; ) { // ",https://atcoder.jp/contests/abc256/editorial/4159
+abc256_e,Takahashi's Anguish,T067,深さ優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,"まず、関数 \(\mathrm{dfs}(x, y, A, h, w)\) を次のように定義します",https://atcoder.jp/contests/abc256/editorial/4159
+abc256_e,Takahashi's Anguish,T075,imos 法,removed,shared_unsegmented_editorial,editorial_name_rule,\(T_{L_i}\) から \(T_{R_i - 1}\) に \(1\) を加算する \(T_i\) の値を得る 簡単な方法としては imos法 があります | \(T_{L_i}\) から \(T_{R_i - 1}\) に \(1\) を加算する \(T_i\) の値を得る 簡単な方法としては imos法 があります | \(T_{L_i}\) から \(T_{R_i - 1}\) に \(1\) を加算する \(T_i\) の値を得る 簡単な方法としては imos法 があります,https://atcoder.jp/contests/abc256/editorial/4159
+abc256_e,Takahashi's Anguish,T086,累積和,removed,shared_unsegmented_editorial,editorial_name_rule,また、 \(\sum_{j=i}^{N} A_j\) という形は後ろから累積和を取る形となっているので、累積和を取りながら計算することで高速化できます,https://atcoder.jp/contests/abc256/editorial/4159
+abc257_a,A to Z String 2,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"
+          reachable.clear();
+          reachable.set(start);
+          bfs.add(start);
+          while(!bfs.isEmpty()) {
+            int from =",https://atcoder.jp/contests/abc257/editorial/4191
+abc257_a,A to Z String 2,T052,強連結成分分解,removed,shared_unsegmented_editorial,editorial_name_rule,具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです | 具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_a,A to Z String 2,T055,最短経路,removed,shared_unsegmented_editorial,editorial_name_rule,方針3: 最短経路問題に帰着する 辺を追加していき、 \(i\) 番目までに追加した辺だけで辿れるか否か判定する問題は、有名な解き方が存在します,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_a,A to Z String 2,T064,二分探索,removed,shared_unsegmented_editorial,editorial_name_rule,これは、 \(W\) が昇順に並んでいるならば、二分探索を用いて判定することができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_a,A to Z String 2,T065,全探索,removed,shared_unsegmented_editorial,editorial_name_rule,\(O(N^3 \log S)\) 解法 始点を全探索します,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_a,A to Z String 2,T066,幅優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,この時、幅優先探索を用いれば \(O(N^2)\) でその頂点から全ての頂点に辿り着くか判定することができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_a,A to Z String 2,T077,ソート,removed,shared_unsegmented_editorial,editorial_code_rule | solution_description_rule,"archは同一キーの場合の答えが規定されないので、隙間を空けて被らないようにする
+        .sorted()
+        .toArray();
+      int[] adult = IntStream.range(0, N)
+        .filter(i -> S[i]  | 分かります。 従って、 \(X\) を減らしていくシミュレーションをすることでこの問題を解くことができます。 計算量は \(W\) を降順に並び替える部分がボトルネックとなり、 \(O(N \log N)\) です。 実装上は、 \(W\) を降順に並び替えるのではなく昇順に並び替えても構いません。 直接答えを求めることもできます。 \(X\) ",https://atcoder.jp/contests/abc257/editorial/4191
+abc257_a,A to Z String 2,T187,Dijkstra 法,removed,shared_unsegmented_editorial,editorial_name_rule,最短距離問題としてよく使われるDijkstra法は冪等半環に対して適用できるので、この半環を用いて最短距離を解くことができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_a,A to Z String 2,T201,連結成分分解,removed,shared_unsegmented_editorial,editorial_name_rule,具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_a,A to Z String 2,T208,Floyd-Warshall 法,removed,shared_unsegmented_editorial,editorial_name_rule,計算量は全点間最短距離問題がボトルネックとなり、Dijkstra法、Floyd-Warshall法ともに \(O(N^3)\) です,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_b,1D Pawn,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"
+          reachable.clear();
+          reachable.set(start);
+          bfs.add(start);
+          while(!bfs.isEmpty()) {
+            int from =",https://atcoder.jp/contests/abc257/editorial/4191
+abc257_b,1D Pawn,T052,強連結成分分解,removed,shared_unsegmented_editorial,editorial_name_rule,具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです | 具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_b,1D Pawn,T055,最短経路,removed,shared_unsegmented_editorial,editorial_name_rule,方針3: 最短経路問題に帰着する 辺を追加していき、 \(i\) 番目までに追加した辺だけで辿れるか否か判定する問題は、有名な解き方が存在します,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_b,1D Pawn,T064,二分探索,removed,shared_unsegmented_editorial,editorial_name_rule,これは、 \(W\) が昇順に並んでいるならば、二分探索を用いて判定することができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_b,1D Pawn,T065,全探索,removed,shared_unsegmented_editorial,editorial_name_rule,\(O(N^3 \log S)\) 解法 始点を全探索します,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_b,1D Pawn,T066,幅優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,この時、幅優先探索を用いれば \(O(N^2)\) でその頂点から全ての頂点に辿り着くか判定することができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_b,1D Pawn,T077,ソート,removed,shared_unsegmented_editorial,editorial_code_rule | solution_description_rule,"archは同一キーの場合の答えが規定されないので、隙間を空けて被らないようにする
+        .sorted()
+        .toArray();
+      int[] adult = IntStream.range(0, N)
+        .filter(i -> S[i]  | 分かります。 従って、 \(X\) を減らしていくシミュレーションをすることでこの問題を解くことができます。 計算量は \(W\) を降順に並び替える部分がボトルネックとなり、 \(O(N \log N)\) です。 実装上は、 \(W\) を降順に並び替えるのではなく昇順に並び替えても構いません。 直接答えを求めることもできます。 \(X\) ",https://atcoder.jp/contests/abc257/editorial/4191
+abc257_b,1D Pawn,T187,Dijkstra 法,removed,shared_unsegmented_editorial,editorial_name_rule,最短距離問題としてよく使われるDijkstra法は冪等半環に対して適用できるので、この半環を用いて最短距離を解くことができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_b,1D Pawn,T201,連結成分分解,removed,shared_unsegmented_editorial,editorial_name_rule,具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_b,1D Pawn,T208,Floyd-Warshall 法,removed,shared_unsegmented_editorial,editorial_name_rule,計算量は全点間最短距離問題がボトルネックとなり、Dijkstra法、Floyd-Warshall法ともに \(O(N^3)\) です,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_c,Robot Takahashi ,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"
+          reachable.clear();
+          reachable.set(start);
+          bfs.add(start);
+          while(!bfs.isEmpty()) {
+            int from =",https://atcoder.jp/contests/abc257/editorial/4191
+abc257_c,Robot Takahashi ,T052,強連結成分分解,removed,shared_unsegmented_editorial,editorial_name_rule,具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです | 具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_c,Robot Takahashi ,T055,最短経路,removed,shared_unsegmented_editorial,editorial_name_rule,方針3: 最短経路問題に帰着する 辺を追加していき、 \(i\) 番目までに追加した辺だけで辿れるか否か判定する問題は、有名な解き方が存在します,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_c,Robot Takahashi ,T065,全探索,removed,shared_unsegmented_editorial,editorial_name_rule,\(O(N^3 \log S)\) 解法 始点を全探索します,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_c,Robot Takahashi ,T066,幅優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,この時、幅優先探索を用いれば \(O(N^2)\) でその頂点から全ての頂点に辿り着くか判定することができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_c,Robot Takahashi ,T076,シミュレーション,removed,shared_unsegmented_editorial,editorial_name_rule,B問題 - 1D Pawn 実際にシミュレーションをして求めてみましょう,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_c,Robot Takahashi ,T187,Dijkstra 法,removed,shared_unsegmented_editorial,editorial_name_rule,最短距離問題としてよく使われるDijkstra法は冪等半環に対して適用できるので、この半環を用いて最短距離を解くことができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_c,Robot Takahashi ,T201,連結成分分解,removed,shared_unsegmented_editorial,editorial_name_rule,具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_c,Robot Takahashi ,T208,Floyd-Warshall 法,removed,shared_unsegmented_editorial,editorial_name_rule,計算量は全点間最短距離問題がボトルネックとなり、Dijkstra法、Floyd-Warshall法ともに \(O(N^3)\) です,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_d,Jumping Takahashi 2,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"
+          reachable.clear();
+          reachable.set(start);
+          bfs.add(start);
+          while(!bfs.isEmpty()) {
+            int from =",https://atcoder.jp/contests/abc257/editorial/4191
+abc257_d,Jumping Takahashi 2,T076,シミュレーション,removed,shared_unsegmented_editorial,editorial_name_rule,B問題 - 1D Pawn 実際にシミュレーションをして求めてみましょう,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_d,Jumping Takahashi 2,T077,ソート,removed,shared_unsegmented_editorial,editorial_code_rule | solution_description_rule,"archは同一キーの場合の答えが規定されないので、隙間を空けて被らないようにする
+        .sorted()
+        .toArray();
+      int[] adult = IntStream.range(0, N)
+        .filter(i -> S[i]  | 分かります。 従って、 \(X\) を減らしていくシミュレーションをすることでこの問題を解くことができます。 計算量は \(W\) を降順に並び替える部分がボトルネックとなり、 \(O(N \log N)\) です。 実装上は、 \(W\) を降順に並び替えるのではなく昇順に並び替えても構いません。 直接答えを求めることもできます。 \(X\) ",https://atcoder.jp/contests/abc257/editorial/4191
+abc257_e,Addition and Multiplication 2,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"
+          reachable.clear();
+          reachable.set(start);
+          bfs.add(start);
+          while(!bfs.isEmpty()) {
+            int from =",https://atcoder.jp/contests/abc257/editorial/4191
+abc257_e,Addition and Multiplication 2,T052,強連結成分分解,removed,shared_unsegmented_editorial,editorial_name_rule,具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです | 具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_e,Addition and Multiplication 2,T055,最短経路,removed,shared_unsegmented_editorial,editorial_name_rule,方針3: 最短経路問題に帰着する 辺を追加していき、 \(i\) 番目までに追加した辺だけで辿れるか否か判定する問題は、有名な解き方が存在します,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_e,Addition and Multiplication 2,T064,二分探索,removed,shared_unsegmented_editorial,editorial_name_rule,これは、 \(W\) が昇順に並んでいるならば、二分探索を用いて判定することができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_e,Addition and Multiplication 2,T065,全探索,removed,shared_unsegmented_editorial,editorial_name_rule,\(O(N^3 \log S)\) 解法 始点を全探索します,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_e,Addition and Multiplication 2,T066,幅優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,この時、幅優先探索を用いれば \(O(N^2)\) でその頂点から全ての頂点に辿り着くか判定することができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_e,Addition and Multiplication 2,T076,シミュレーション,removed,shared_unsegmented_editorial,editorial_name_rule,B問題 - 1D Pawn 実際にシミュレーションをして求めてみましょう,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_e,Addition and Multiplication 2,T077,ソート,removed,shared_unsegmented_editorial,editorial_code_rule | solution_description_rule,"archは同一キーの場合の答えが規定されないので、隙間を空けて被らないようにする
+        .sorted()
+        .toArray();
+      int[] adult = IntStream.range(0, N)
+        .filter(i -> S[i]  | 分かります。 従って、 \(X\) を減らしていくシミュレーションをすることでこの問題を解くことができます。 計算量は \(W\) を降順に並び替える部分がボトルネックとなり、 \(O(N \log N)\) です。 実装上は、 \(W\) を降順に並び替えるのではなく昇順に並び替えても構いません。 直接答えを求めることもできます。 \(X\) ",https://atcoder.jp/contests/abc257/editorial/4191
+abc257_e,Addition and Multiplication 2,T187,Dijkstra 法,removed,shared_unsegmented_editorial,editorial_name_rule,最短距離問題としてよく使われるDijkstra法は冪等半環に対して適用できるので、この半環を用いて最短距離を解くことができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_e,Addition and Multiplication 2,T201,連結成分分解,removed,shared_unsegmented_editorial,editorial_name_rule,具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_e,Addition and Multiplication 2,T208,Floyd-Warshall 法,removed,shared_unsegmented_editorial,editorial_name_rule,計算量は全点間最短距離問題がボトルネックとなり、Dijkstra法、Floyd-Warshall法ともに \(O(N^3)\) です,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_f,Teleporter Setting ,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"
+          reachable.clear();
+          reachable.set(start);
+          bfs.add(start);
+          while(!bfs.isEmpty()) {
+            int from =",https://atcoder.jp/contests/abc257/editorial/4191
+abc257_f,Teleporter Setting ,T052,強連結成分分解,removed,shared_unsegmented_editorial,editorial_name_rule,具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです | 具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_f,Teleporter Setting ,T055,最短経路,removed,shared_unsegmented_editorial,editorial_name_rule,方針3: 最短経路問題に帰着する 辺を追加していき、 \(i\) 番目までに追加した辺だけで辿れるか否か判定する問題は、有名な解き方が存在します,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_f,Teleporter Setting ,T064,二分探索,removed,shared_unsegmented_editorial,editorial_name_rule,これは、 \(W\) が昇順に並んでいるならば、二分探索を用いて判定することができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_f,Teleporter Setting ,T065,全探索,removed,shared_unsegmented_editorial,editorial_name_rule,\(O(N^3 \log S)\) 解法 始点を全探索します,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_f,Teleporter Setting ,T076,シミュレーション,removed,shared_unsegmented_editorial,editorial_name_rule,B問題 - 1D Pawn 実際にシミュレーションをして求めてみましょう,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_f,Teleporter Setting ,T077,ソート,removed,shared_unsegmented_editorial,editorial_code_rule | solution_description_rule,"archは同一キーの場合の答えが規定されないので、隙間を空けて被らないようにする
+        .sorted()
+        .toArray();
+      int[] adult = IntStream.range(0, N)
+        .filter(i -> S[i]  | 分かります。 従って、 \(X\) を減らしていくシミュレーションをすることでこの問題を解くことができます。 計算量は \(W\) を降順に並び替える部分がボトルネックとなり、 \(O(N \log N)\) です。 実装上は、 \(W\) を降順に並び替えるのではなく昇順に並び替えても構いません。 直接答えを求めることもできます。 \(X\) ",https://atcoder.jp/contests/abc257/editorial/4191
+abc257_f,Teleporter Setting ,T187,Dijkstra 法,removed,shared_unsegmented_editorial,editorial_name_rule,最短距離問題としてよく使われるDijkstra法は冪等半環に対して適用できるので、この半環を用いて最短距離を解くことができます,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_f,Teleporter Setting ,T201,連結成分分解,removed,shared_unsegmented_editorial,editorial_name_rule,具体的には、グラフを強連結成分分解したとき、始点は必ず最も前の強連結成分に属するはずです,https://atcoder.jp/contests/abc257/editorial/4191
+abc257_f,Teleporter Setting ,T208,Floyd-Warshall 法,removed,shared_unsegmented_editorial,editorial_name_rule,計算量は全点間最短距離問題がボトルネックとなり、Dijkstra法、Floyd-Warshall法ともに \(O(N^3)\) です,https://atcoder.jp/contests/abc257/editorial/4191
+abc258_a,When?,T069,Suffix Array,removed,shared_unsegmented_editorial,editorial_name_rule,AtCoder Library にもある文字列アルゴリズムの一つに、Suffix Arrayというものがあります,https://atcoder.jp/contests/abc258/editorial/4257
+abc258_a,When?,T086,累積和,removed,shared_unsegmented_editorial,editorial_name_rule,ここで \(\sum_{i=1}^{x} (A_i + B_i)\) は累積和から \(O(1)\) で求まるので、各 \(x\) に対して \(O(1)\) で必要な時間が求まり、全体 \(O(N)\) で解くことができます,https://atcoder.jp/contests/abc258/editorial/4257
+abc258_b,Number Box,T086,累積和,removed,shared_unsegmented_editorial,editorial_name_rule,ここで \(\sum_{i=1}^{x} (A_i + B_i)\) は累積和から \(O(1)\) で求まるので、各 \(x\) に対して \(O(1)\) で必要な時間が求まり、全体 \(O(N)\) で解くことができます,https://atcoder.jp/contests/abc258/editorial/4257
+abc258_c,Rotation,T069,Suffix Array,removed,shared_unsegmented_editorial,editorial_name_rule,AtCoder Library にもある文字列アルゴリズムの一つに、Suffix Arrayというものがあります,https://atcoder.jp/contests/abc258/editorial/4257
+abc258_c,Rotation,T086,累積和,removed,shared_unsegmented_editorial,editorial_name_rule,ここで \(\sum_{i=1}^{x} (A_i + B_i)\) は累積和から \(O(1)\) で求まるので、各 \(x\) に対して \(O(1)\) で必要な時間が求まり、全体 \(O(N)\) で解くことができます,https://atcoder.jp/contests/abc258/editorial/4257
+abc258_d,Trophy,T069,Suffix Array,removed,shared_unsegmented_editorial,editorial_name_rule,AtCoder Library にもある文字列アルゴリズムの一つに、Suffix Arrayというものがあります,https://atcoder.jp/contests/abc258/editorial/4257
+abc258_e,Packing Potatoes,T069,Suffix Array,removed,shared_unsegmented_editorial,editorial_name_rule,AtCoder Library にもある文字列アルゴリズムの一つに、Suffix Arrayというものがあります,https://atcoder.jp/contests/abc258/editorial/4257
+abc258_g,Triangle,T069,Suffix Array,removed,shared_unsegmented_editorial,editorial_name_rule,AtCoder Library にもある文字列アルゴリズムの一つに、Suffix Arrayというものがあります,https://atcoder.jp/contests/abc258/editorial/4257
+abc258_g,Triangle,T086,累積和,removed,shared_unsegmented_editorial,editorial_name_rule,ここで \(\sum_{i=1}^{x} (A_i + B_i)\) は累積和から \(O(1)\) で求まるので、各 \(x\) に対して \(O(1)\) で必要な時間が求まり、全体 \(O(N)\) で解くことができます,https://atcoder.jp/contests/abc258/editorial/4257
+abc259_a,Growth Record,T005,Union-Find,removed,shared_unsegmented_editorial,editorial_name_rule,これは円 \(s\) と円 \(t\) が連結か否かが分かればよく、幅優先探索やUnion-Find法などで \(O(N^2)\) で求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_a,Growth Record,T055,最短経路,removed,shared_unsegmented_editorial,editorial_name_rule,余談: 実は最短経路も求まる この問題で点 \(s\) から点 \(t\) に到達可能なとき、実はその最短経路も求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_a,Growth Record,T066,幅優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,これは円 \(s\) と円 \(t\) が連結か否かが分かればよく、幅優先探索やUnion-Find法などで \(O(N^2)\) で求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_a,Growth Record,T187,Dijkstra 法,removed,shared_unsegmented_editorial,editorial_name_rule,このように構成したグラフは交点が \(O(N^2)\) 個、辺が \(O(N^2)\) 個の重み付きグラフとなるのでdijkstra法などを用いて計算量 \(O(N^2 \log N)\) などで解くことができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_b,Counterclockwise Rotation,T005,Union-Find,removed,shared_unsegmented_editorial,editorial_name_rule,これは円 \(s\) と円 \(t\) が連結か否かが分かればよく、幅優先探索やUnion-Find法などで \(O(N^2)\) で求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_b,Counterclockwise Rotation,T055,最短経路,removed,shared_unsegmented_editorial,editorial_name_rule,余談: 実は最短経路も求まる この問題で点 \(s\) から点 \(t\) に到達可能なとき、実はその最短経路も求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_b,Counterclockwise Rotation,T066,幅優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,これは円 \(s\) と円 \(t\) が連結か否かが分かればよく、幅優先探索やUnion-Find法などで \(O(N^2)\) で求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_b,Counterclockwise Rotation,T187,Dijkstra 法,removed,shared_unsegmented_editorial,editorial_name_rule,このように構成したグラフは交点が \(O(N^2)\) 個、辺が \(O(N^2)\) 個の重み付きグラフとなるのでdijkstra法などを用いて計算量 \(O(N^2 \log N)\) などで解くことができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_c,XX to XXX,T005,Union-Find,removed,shared_unsegmented_editorial,editorial_name_rule,これは円 \(s\) と円 \(t\) が連結か否かが分かればよく、幅優先探索やUnion-Find法などで \(O(N^2)\) で求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_c,XX to XXX,T055,最短経路,removed,shared_unsegmented_editorial,editorial_name_rule,余談: 実は最短経路も求まる この問題で点 \(s\) から点 \(t\) に到達可能なとき、実はその最短経路も求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_c,XX to XXX,T066,幅優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,これは円 \(s\) と円 \(t\) が連結か否かが分かればよく、幅優先探索やUnion-Find法などで \(O(N^2)\) で求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_c,XX to XXX,T187,Dijkstra 法,removed,shared_unsegmented_editorial,editorial_name_rule,このように構成したグラフは交点が \(O(N^2)\) 個、辺が \(O(N^2)\) 個の重み付きグラフとなるのでdijkstra法などを用いて計算量 \(O(N^2 \log N)\) などで解くことができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_d,Circumferences,T055,最短経路,removed,shared_unsegmented_editorial,editorial_name_rule,余談: 実は最短経路も求まる この問題で点 \(s\) から点 \(t\) に到達可能なとき、実はその最短経路も求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_d,Circumferences,T187,Dijkstra 法,removed,shared_unsegmented_editorial,editorial_name_rule,このように構成したグラフは交点が \(O(N^2)\) 個、辺が \(O(N^2)\) 個の重み付きグラフとなるのでdijkstra法などを用いて計算量 \(O(N^2 \log N)\) などで解くことができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_e,LCM on Whiteboard,T005,Union-Find,removed,shared_unsegmented_editorial,editorial_name_rule,これは円 \(s\) と円 \(t\) が連結か否かが分かればよく、幅優先探索やUnion-Find法などで \(O(N^2)\) で求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_e,LCM on Whiteboard,T055,最短経路,removed,shared_unsegmented_editorial,editorial_name_rule,余談: 実は最短経路も求まる この問題で点 \(s\) から点 \(t\) に到達可能なとき、実はその最短経路も求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_e,LCM on Whiteboard,T066,幅優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,これは円 \(s\) と円 \(t\) が連結か否かが分かればよく、幅優先探索やUnion-Find法などで \(O(N^2)\) で求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_e,LCM on Whiteboard,T187,Dijkstra 法,removed,shared_unsegmented_editorial,editorial_name_rule,このように構成したグラフは交点が \(O(N^2)\) 個、辺が \(O(N^2)\) 個の重み付きグラフとなるのでdijkstra法などを用いて計算量 \(O(N^2 \log N)\) などで解くことができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_f,Select Edges,T005,Union-Find,removed,shared_unsegmented_editorial,editorial_name_rule,これは円 \(s\) と円 \(t\) が連結か否かが分かればよく、幅優先探索やUnion-Find法などで \(O(N^2)\) で求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_f,Select Edges,T055,最短経路,removed,shared_unsegmented_editorial,editorial_name_rule,余談: 実は最短経路も求まる この問題で点 \(s\) から点 \(t\) に到達可能なとき、実はその最短経路も求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_f,Select Edges,T066,幅優先探索,removed,shared_unsegmented_editorial,editorial_name_rule,これは円 \(s\) と円 \(t\) が連結か否かが分かればよく、幅優先探索やUnion-Find法などで \(O(N^2)\) で求めることができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc259_f,Select Edges,T187,Dijkstra 法,removed,shared_unsegmented_editorial,editorial_name_rule,このように構成したグラフは交点が \(O(N^2)\) 個、辺が \(O(N^2)\) 個の重み付きグラフとなるのでdijkstra法などを用いて計算量 \(O(N^2 \log N)\) などで解くことができます,https://atcoder.jp/contests/abc259/editorial/4433
+abc260_a,A Unique Letter,T011,Queue,removed,shared_unsegmented_editorial,editorial_name_rule,一番上のカードに書かれた整数の値を得る 一番上にカードを一つ重ねる 山にあるカードの枚数を得る 山にあるカードを列挙する これら全ての機能を満たすものとしては動的配列やキューがあるので、これを用いて実装すると良いでしょう,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_a,A Unique Letter,T030,行列累乗,removed,shared_unsegmented_editorial,editorial_name_rule,左辺はそのまま行列累乗をしても \(O(\log n)\) 時間で解けるので、十分高速です,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_a,A Unique Letter,T070,Trie,removed,shared_unsegmented_editorial,editorial_name_rule,実はこの部分はPredecessor Dictionary Problemと呼ばれており、van Emde Boas Treeやy-fast Trieを用いることで \(O(N \log \log N)\) に改善することができます,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_a,A Unique Letter,T076,シミュレーション,removed,shared_unsegmented_editorial,editorial_name_rule,参考 D問題 - Draw Your Cards 実際にシミュレーションする方法で解いてみましょう,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_a,A Unique Letter,T081,分割統治,removed,shared_unsegmented_editorial,editorial_name_rule,このように、半群であれば演算の順番を変えることができるので、前後で分割して計算し、それを合体させる分割統治法が利用できます,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_a,A Unique Letter,T136,線形代数,removed,shared_unsegmented_editorial,editorial_name_rule,このような方法はBlack Box Linear Algebraと呼ばれており、色々と高速化に役立つので興味があれば調べてみると良いです,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_b,Better Students Are Needed!,T011,Queue,removed,shared_unsegmented_editorial,editorial_name_rule,一番上のカードに書かれた整数の値を得る 一番上にカードを一つ重ねる 山にあるカードの枚数を得る 山にあるカードを列挙する これら全ての機能を満たすものとしては動的配列やキューがあるので、これを用いて実装すると良いでしょう,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_b,Better Students Are Needed!,T030,行列累乗,removed,shared_unsegmented_editorial,editorial_name_rule,左辺はそのまま行列累乗をしても \(O(\log n)\) 時間で解けるので、十分高速です,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_b,Better Students Are Needed!,T070,Trie,removed,shared_unsegmented_editorial,editorial_name_rule,実はこの部分はPredecessor Dictionary Problemと呼ばれており、van Emde Boas Treeやy-fast Trieを用いることで \(O(N \log \log N)\) に改善することができます,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_b,Better Students Are Needed!,T076,シミュレーション,removed,shared_unsegmented_editorial,editorial_name_rule,参考 D問題 - Draw Your Cards 実際にシミュレーションする方法で解いてみましょう,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_b,Better Students Are Needed!,T081,分割統治,removed,shared_unsegmented_editorial,editorial_name_rule,このように、半群であれば演算の順番を変えることができるので、前後で分割して計算し、それを合体させる分割統治法が利用できます,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_b,Better Students Are Needed!,T136,線形代数,removed,shared_unsegmented_editorial,editorial_name_rule,このような方法はBlack Box Linear Algebraと呼ばれており、色々と高速化に役立つので興味があれば調べてみると良いです,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_c,Changing Jewels,T011,Queue,removed,shared_unsegmented_editorial,editorial_name_rule,一番上のカードに書かれた整数の値を得る 一番上にカードを一つ重ねる 山にあるカードの枚数を得る 山にあるカードを列挙する これら全ての機能を満たすものとしては動的配列やキューがあるので、これを用いて実装すると良いでしょう,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_c,Changing Jewels,T070,Trie,removed,shared_unsegmented_editorial,editorial_name_rule,実はこの部分はPredecessor Dictionary Problemと呼ばれており、van Emde Boas Treeやy-fast Trieを用いることで \(O(N \log \log N)\) に改善することができます,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_c,Changing Jewels,T077,ソート,removed,shared_unsegmented_editorial,editorial_code_rule | editorial_name_rule,"B問題 - Better Students Are Needed! 適切にソートをする問題です |  = 0;i < N;++ i) candidate.add(i);
+      candidate.sort((l, r) -> Integer.compare(A[r], A[l]));
+      candidate.subList(X, N).sort(Comparator.natu",https://atcoder.jp/contests/abc260/editorial/4488
+abc260_c,Changing Jewels,T081,分割統治,removed,shared_unsegmented_editorial,editorial_name_rule,このように、半群であれば演算の順番を変えることができるので、前後で分割して計算し、それを合体させる分割統治法が利用できます,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_c,Changing Jewels,T136,線形代数,removed,shared_unsegmented_editorial,editorial_name_rule,このような方法はBlack Box Linear Algebraと呼ばれており、色々と高速化に役立つので興味があれば調べてみると良いです,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_d,Draw Your Cards,T011,Queue,removed,shared_unsegmented_editorial,editorial_name_rule,一番上のカードに書かれた整数の値を得る 一番上にカードを一つ重ねる 山にあるカードの枚数を得る 山にあるカードを列挙する これら全ての機能を満たすものとしては動的配列やキューがあるので、これを用いて実装すると良いでしょう,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_d,Draw Your Cards,T030,行列累乗,removed,shared_unsegmented_editorial,editorial_name_rule,左辺はそのまま行列累乗をしても \(O(\log n)\) 時間で解けるので、十分高速です,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_d,Draw Your Cards,T070,Trie,removed,shared_unsegmented_editorial,editorial_name_rule,実はこの部分はPredecessor Dictionary Problemと呼ばれており、van Emde Boas Treeやy-fast Trieを用いることで \(O(N \log \log N)\) に改善することができます,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_d,Draw Your Cards,T077,ソート,removed,shared_unsegmented_editorial,editorial_code_rule | editorial_name_rule,"B問題 - Better Students Are Needed! 適切にソートをする問題です |  = 0;i < N;++ i) candidate.add(i);
+      candidate.sort((l, r) -> Integer.compare(A[r], A[l]));
+      candidate.subList(X, N).sort(Comparator.natu",https://atcoder.jp/contests/abc260/editorial/4488
+abc260_d,Draw Your Cards,T081,分割統治,removed,shared_unsegmented_editorial,editorial_name_rule,このように、半群であれば演算の順番を変えることができるので、前後で分割して計算し、それを合体させる分割統治法が利用できます,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_d,Draw Your Cards,T136,線形代数,removed,shared_unsegmented_editorial,editorial_name_rule,このような方法はBlack Box Linear Algebraと呼ばれており、色々と高速化に役立つので興味があれば調べてみると良いです,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_e,At Least One,T011,Queue,removed,shared_unsegmented_editorial,editorial_name_rule,一番上のカードに書かれた整数の値を得る 一番上にカードを一つ重ねる 山にあるカードの枚数を得る 山にあるカードを列挙する これら全ての機能を満たすものとしては動的配列やキューがあるので、これを用いて実装すると良いでしょう,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_e,At Least One,T030,行列累乗,removed,shared_unsegmented_editorial,editorial_name_rule,左辺はそのまま行列累乗をしても \(O(\log n)\) 時間で解けるので、十分高速です,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_e,At Least One,T070,Trie,removed,shared_unsegmented_editorial,editorial_name_rule,実はこの部分はPredecessor Dictionary Problemと呼ばれており、van Emde Boas Treeやy-fast Trieを用いることで \(O(N \log \log N)\) に改善することができます,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_e,At Least One,T076,シミュレーション,removed,shared_unsegmented_editorial,editorial_name_rule,参考 D問題 - Draw Your Cards 実際にシミュレーションする方法で解いてみましょう,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_e,At Least One,T077,ソート,removed,shared_unsegmented_editorial,editorial_code_rule | editorial_name_rule,"B問題 - Better Students Are Needed! 適切にソートをする問題です |  = 0;i < N;++ i) candidate.add(i);
+      candidate.sort((l, r) -> Integer.compare(A[r], A[l]));
+      candidate.subList(X, N).sort(Comparator.natu",https://atcoder.jp/contests/abc260/editorial/4488
+abc260_e,At Least One,T081,分割統治,removed,shared_unsegmented_editorial,editorial_name_rule,このように、半群であれば演算の順番を変えることができるので、前後で分割して計算し、それを合体させる分割統治法が利用できます,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_e,At Least One,T136,線形代数,removed,shared_unsegmented_editorial,editorial_name_rule,このような方法はBlack Box Linear Algebraと呼ばれており、色々と高速化に役立つので興味があれば調べてみると良いです,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_f,Find 4-cycle,T011,Queue,removed,shared_unsegmented_editorial,editorial_name_rule,一番上のカードに書かれた整数の値を得る 一番上にカードを一つ重ねる 山にあるカードの枚数を得る 山にあるカードを列挙する これら全ての機能を満たすものとしては動的配列やキューがあるので、これを用いて実装すると良いでしょう,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_f,Find 4-cycle,T030,行列累乗,removed,shared_unsegmented_editorial,editorial_name_rule,左辺はそのまま行列累乗をしても \(O(\log n)\) 時間で解けるので、十分高速です,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_f,Find 4-cycle,T070,Trie,removed,shared_unsegmented_editorial,editorial_name_rule,実はこの部分はPredecessor Dictionary Problemと呼ばれており、van Emde Boas Treeやy-fast Trieを用いることで \(O(N \log \log N)\) に改善することができます,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_f,Find 4-cycle,T076,シミュレーション,removed,shared_unsegmented_editorial,editorial_name_rule,参考 D問題 - Draw Your Cards 実際にシミュレーションする方法で解いてみましょう,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_f,Find 4-cycle,T077,ソート,removed,shared_unsegmented_editorial,editorial_code_rule | editorial_name_rule,"B問題 - Better Students Are Needed! 適切にソートをする問題です |  = 0;i < N;++ i) candidate.add(i);
+      candidate.sort((l, r) -> Integer.compare(A[r], A[l]));
+      candidate.subList(X, N).sort(Comparator.natu",https://atcoder.jp/contests/abc260/editorial/4488
+abc260_f,Find 4-cycle,T081,分割統治,removed,shared_unsegmented_editorial,editorial_name_rule,このように、半群であれば演算の順番を変えることができるので、前後で分割して計算し、それを合体させる分割統治法が利用できます,https://atcoder.jp/contests/abc260/editorial/4488
+abc260_f,Find 4-cycle,T136,線形代数,removed,shared_unsegmented_editorial,editorial_name_rule,このような方法はBlack Box Linear Algebraと呼ばれており、色々と高速化に役立つので興味があれば調べてみると良いです,https://atcoder.jp/contests/abc260/editorial/4488
+abc261_a,Intersection,T022,基礎DP / 動的計画法入門,removed,shared_unsegmented_editorial,editorial_name_rule,この \(dp\) は次のように遷移します,https://atcoder.jp/contests/abc261/editorial/4499
+abc261_a,Intersection,T264,剰余,removed,shared_unsegmented_editorial,solution_description_rule,"。 W は文字コード \(87\) 、 L は文字コード \(76\) 、 D は文字コード \(68\) です。 これらを \(3\) で割った余りはそれぞれ \(0, 1, 2\) なので、次のような判定方法が存在します。 \(A_{i, j} + A_{j, i} \equiv 1 \pmod 3\) かつ、その時に限り表は矛盾していない。 ",https://atcoder.jp/contests/abc261/editorial/4499
+abc261_b,Tournament Result,T022,基礎DP / 動的計画法入門,removed,shared_unsegmented_editorial,editorial_name_rule,この \(dp\) は次のように遷移します,https://atcoder.jp/contests/abc261/editorial/4499
+abc261_b,Tournament Result,T264,剰余,removed,shared_unsegmented_editorial,solution_description_rule,"。 W は文字コード \(87\) 、 L は文字コード \(76\) 、 D は文字コード \(68\) です。 これらを \(3\) で割った余りはそれぞれ \(0, 1, 2\) なので、次のような判定方法が存在します。 \(A_{i, j} + A_{j, i} \equiv 1 \pmod 3\) かつ、その時に限り表は矛盾していない。 ",https://atcoder.jp/contests/abc261/editorial/4499
+abc261_c,NewFolder(1),T022,基礎DP / 動的計画法入門,removed,shared_unsegmented_editorial,editorial_name_rule,この \(dp\) は次のように遷移します,https://atcoder.jp/contests/abc261/editorial/4499
+abc261_c,NewFolder(1),T264,剰余,removed,shared_unsegmented_editorial,solution_description_rule,"。 W は文字コード \(87\) 、 L は文字コード \(76\) 、 D は文字コード \(68\) です。 これらを \(3\) で割った余りはそれぞれ \(0, 1, 2\) なので、次のような判定方法が存在します。 \(A_{i, j} + A_{j, i} \equiv 1 \pmod 3\) かつ、その時に限り表は矛盾していない。 ",https://atcoder.jp/contests/abc261/editorial/4499
+abc261_d,Flipping and Bonus,T264,剰余,removed,shared_unsegmented_editorial,solution_description_rule,"。 W は文字コード \(87\) 、 L は文字コード \(76\) 、 D は文字コード \(68\) です。 これらを \(3\) で割った余りはそれぞれ \(0, 1, 2\) なので、次のような判定方法が存在します。 \(A_{i, j} + A_{j, i} \equiv 1 \pmod 3\) かつ、その時に限り表は矛盾していない。 ",https://atcoder.jp/contests/abc261/editorial/4499
+abc261_e,Many Operations,T022,基礎DP / 動的計画法入門,removed,shared_unsegmented_editorial,editorial_name_rule,この \(dp\) は次のように遷移します,https://atcoder.jp/contests/abc261/editorial/4499
+abc261_e,Many Operations,T264,剰余,removed,shared_unsegmented_editorial,solution_description_rule,"。 W は文字コード \(87\) 、 L は文字コード \(76\) 、 D は文字コード \(68\) です。 これらを \(3\) で割った余りはそれぞれ \(0, 1, 2\) なので、次のような判定方法が存在します。 \(A_{i, j} + A_{j, i} \equiv 1 \pmod 3\) かつ、その時に限り表は矛盾していない。 ",https://atcoder.jp/contests/abc261/editorial/4499
+abc261_f,Sorting Color Balls,T022,基礎DP / 動的計画法入門,removed,shared_unsegmented_editorial,editorial_name_rule,この \(dp\) は次のように遷移します,https://atcoder.jp/contests/abc261/editorial/4499
+abc261_f,Sorting Color Balls,T264,剰余,removed,shared_unsegmented_editorial,solution_description_rule,"。 W は文字コード \(87\) 、 L は文字コード \(76\) 、 D は文字コード \(68\) です。 これらを \(3\) で割った余りはそれぞれ \(0, 1, 2\) なので、次のような判定方法が存在します。 \(A_{i, j} + A_{j, i} \equiv 1 \pmod 3\) かつ、その時に限り表は矛盾していない。 ",https://atcoder.jp/contests/abc261/editorial/4499
+abc262_a,World Cup,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"c.nextInt() - 1; // 0-indexedに直す
+        graph[U].set(V);
+        graph[V].set(U); // 無向辺なので、U-VとV-Uの両方の辺を追加
+      }
+      int ans = 0; // 答えを格納",https://atcoder.jp/contests/abc262/editorial/4539
+abc262_a,World Cup,T022,基礎DP / 動的計画法入門,removed,shared_unsegmented_editorial,editorial_name_rule,そこで、次のような状態を持つ動的計画法を考えることができます,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_a,World Cup,T060,数え上げ,removed,shared_unsegmented_editorial,editorial_name_rule,従って、このようなものは \(\mathrm{tr}(G^3)\) で数え上げることができます,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_a,World Cup,T159,モンゴメリ乗算,removed,shared_unsegmented_editorial,editorial_name_rule,掛け算を高速化する手法としては、Montgomery multiplicationやBarrett Reductionと呼ばれる方法が存在します,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_b,Triangle (Easier),T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"c.nextInt() - 1; // 0-indexedに直す
+        graph[U].set(V);
+        graph[V].set(U); // 無向辺なので、U-VとV-Uの両方の辺を追加
+      }
+      int ans = 0; // 答えを格納",https://atcoder.jp/contests/abc262/editorial/4539
+abc262_b,Triangle (Easier),T022,基礎DP / 動的計画法入門,removed,shared_unsegmented_editorial,editorial_name_rule,そこで、次のような状態を持つ動的計画法を考えることができます,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_b,Triangle (Easier),T060,数え上げ,removed,shared_unsegmented_editorial,editorial_name_rule,従って、このようなものは \(\mathrm{tr}(G^3)\) で数え上げることができます,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_b,Triangle (Easier),T159,モンゴメリ乗算,removed,shared_unsegmented_editorial,editorial_name_rule,掛け算を高速化する手法としては、Montgomery multiplicationやBarrett Reductionと呼ばれる方法が存在します,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_b,Triangle (Easier),T264,剰余,removed,shared_unsegmented_editorial,solution_description_rule,ています。 A問題 B問題 C問題 D問題 作成中 A問題 - World Cup \(Y\) から順に数字を増やしていき、 \(4\) で割った余りが \(2\) になった値を出力すると答えが求まります。 あるいは、直接計算で求めることもできます。 答えから \(2\) を引いた値は、 \(Y-2\) 以上の最小の \(4\) の倍数を求める問題,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_c,Min Max Pair,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"c.nextInt() - 1; // 0-indexedに直す
+        graph[U].set(V);
+        graph[V].set(U); // 無向辺なので、U-VとV-Uの両方の辺を追加
+      }
+      int ans = 0; // 答えを格納",https://atcoder.jp/contests/abc262/editorial/4539
+abc262_c,Min Max Pair,T022,基礎DP / 動的計画法入門,removed,shared_unsegmented_editorial,editorial_name_rule,そこで、次のような状態を持つ動的計画法を考えることができます,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_c,Min Max Pair,T060,数え上げ,removed,shared_unsegmented_editorial,editorial_name_rule,従って、このようなものは \(\mathrm{tr}(G^3)\) で数え上げることができます,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_c,Min Max Pair,T159,モンゴメリ乗算,removed,shared_unsegmented_editorial,editorial_name_rule,掛け算を高速化する手法としては、Montgomery multiplicationやBarrett Reductionと呼ばれる方法が存在します,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_c,Min Max Pair,T264,剰余,removed,shared_unsegmented_editorial,solution_description_rule,ています。 A問題 B問題 C問題 D問題 作成中 A問題 - World Cup \(Y\) から順に数字を増やしていき、 \(4\) で割った余りが \(2\) になった値を出力すると答えが求まります。 あるいは、直接計算で求めることもできます。 答えから \(2\) を引いた値は、 \(Y-2\) 以上の最小の \(4\) の倍数を求める問題,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_d,I Hate Non-integer Number,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"c.nextInt() - 1; // 0-indexedに直す
+        graph[U].set(V);
+        graph[V].set(U); // 無向辺なので、U-VとV-Uの両方の辺を追加
+      }
+      int ans = 0; // 答えを格納",https://atcoder.jp/contests/abc262/editorial/4539
+abc262_d,I Hate Non-integer Number,T060,数え上げ,removed,shared_unsegmented_editorial,editorial_name_rule,従って、このようなものは \(\mathrm{tr}(G^3)\) で数え上げることができます,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_d,I Hate Non-integer Number,T159,モンゴメリ乗算,removed,shared_unsegmented_editorial,editorial_name_rule,掛け算を高速化する手法としては、Montgomery multiplicationやBarrett Reductionと呼ばれる方法が存在します,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_e,Red and Blue Graph,T012,Set,removed,shared_unsegmented_editorial,editorial_code_rule,"c.nextInt() - 1; // 0-indexedに直す
+        graph[U].set(V);
+        graph[V].set(U); // 無向辺なので、U-VとV-Uの両方の辺を追加
+      }
+      int ans = 0; // 答えを格納",https://atcoder.jp/contests/abc262/editorial/4539
+abc262_e,Red and Blue Graph,T022,基礎DP / 動的計画法入門,removed,shared_unsegmented_editorial,editorial_name_rule,そこで、次のような状態を持つ動的計画法を考えることができます,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_e,Red and Blue Graph,T060,数え上げ,removed,shared_unsegmented_editorial,editorial_name_rule,従って、このようなものは \(\mathrm{tr}(G^3)\) で数え上げることができます,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_e,Red and Blue Graph,T159,モンゴメリ乗算,removed,shared_unsegmented_editorial,editorial_name_rule,掛け算を高速化する手法としては、Montgomery multiplicationやBarrett Reductionと呼ばれる方法が存在します,https://atcoder.jp/contests/abc262/editorial/4539
+abc262_g,LIS with Stack,T013,Stack,removed,title_only_not_solution_evidence,explicit_title_rule,LIS with Stack,https://atcoder.jp/contests/abc262/tasks/abc262_g
+abc262_g,LIS with Stack,T224,LIS,removed,title_only_not_solution_evidence,explicit_title_rule,LIS with Stack,https://atcoder.jp/contests/abc262/tasks/abc262_g
+abc269_h,Antichain,T003,Segment Tree,removed,preface_before_explicit_solution_heading,editorial_name_rule,考えてみましょう) よって、例えばデータを行きがけ順に並べ替えて Segment Tree などのデータ構造に載せることで、木のパス上のデータの情報の取得・更新クエリを \(\mathrm{O}(\log N)\) 個の列への取得・更新クエリに変換できます,https://atcoder.jp/contests/abc269/editorial/4838
+abc269_h,Antichain,T054,LCA,removed,preface_before_explicit_solution_heading,editorial_name_rule,さらに LCA と組み合わせると、任意の 2 頂点 \(u-v\) 間のパスを \(\mathrm{O}(\log N)\) 本の heavy path に分解することができます,https://atcoder.jp/contests/abc269/editorial/4838
+abc269_h,Antichain,T062,ヒューリスティック,removed,preface_before_explicit_solution_heading,editorial_name_rule,参考: CodeForces の記事 コンテストで HLD を利用するケースはもう 1 つ代表的なものがあり、与えられた木に対して、いわゆる マージテク (Weighted-Union Heuristic) を行う場合が挙げられます,https://atcoder.jp/contests/abc269/editorial/4838
+abc273_a,A Recursive Function,T022,基礎DP / 動的計画法入門,added,positive_context_or_fallback_changed,,,
+abc275_g,Infinite Knapsack,T150,ナップサック問題,removed,title_only_not_solution_evidence,explicit_title_rule,Infinite Knapsack,https://atcoder.jp/contests/abc275/tasks/abc275_g
+abc277_c,Ladder Takahashi,T007,Deque,removed,code_not_in_directly_executable_scope,editorial_code_rule,"t(i);
+			}
+		}
+	}
+	cout << *S.rbegin() << '\n';
+}
+from collections import defaultdict, deque
+
+n = int(input())
+graph = defaultdict(list)
+for _ in range(n) :
+	a, b = map(int, input().",https://atcoder.jp/contests/abc277/editorial/5209
+abc280_b,Inverse Prefix Sum,T086,累積和,removed,title_only_not_solution_evidence,explicit_title_rule,Inverse Prefix Sum,https://atcoder.jp/contests/abc280/tasks/abc280_b
+abc281_h,Alchemy,T132,畳み込み,removed,code_not_in_directly_executable_scope,editorial_code_rule,"-l==1)return {1,a[l]};
+
+	int m = (l+r)/2;
+	return convolution(dc(l,m),dc(m,r));
+
+}
+
+//引数のgはf(x)(1+a_2 x)...(1+a_{l-1} x)
+//(1+a_l x)(1+a_{l+1} x)...(1+a",https://atcoder.jp/contests/abc281/editorial/5371
+abc281_f,Xor Minimization,T059,XOR,removed,title_only_not_solution_evidence,explicit_title_rule,Xor Minimization | Xor Minimization,https://atcoder.jp/contests/abc281/tasks/abc281_f
+abc282_f,Union of Two Sets,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"set<pair<int, int>> s;
+
+void f(int L, int R) {
+  if (L == R) {
+    s.insert(make_pair(L, R));
+",https://atcoder.jp/contests/abc282/editorial/5519
+abc284_c,Count Connected Components,T011,Queue,removed,code_not_in_directly_executable_scope,editorial_code_rule,"k(u);
+  }
+
+  int ans = 0;
+  vector<int> vis(N);
+  queue<int> Q;
+  for (int i = 0; i < N; i++) {
+    if (vis[i]) continue;
+    ans++, vis[i] = true",https://atcoder.jp/contests/abc284/editorial/5479
+abc286_h,Don't Swim,T077,ソート,removed,code_not_in_directly_executable_scope,editorial_code_rule,"ll(vector<point> ps) {
+    int n = ps.size();
+    sort(ps.begin(), ps.end());
+    vector<point> ret;
+    for(auto p : ps) {
+        while((int)re",https://atcoder.jp/contests/abc286/editorial/5568
+abc292_e,Transitivity,T076,シミュレーション,added,positive_context_or_fallback_changed,,,
+abc296_h,Unite,T008,Map / 連想配列,removed,code_not_in_directly_executable_scope,editorial_code_rule,"(int)1e+9
+
+int n,m;
+vector<vector<int> >state[M];
+map<vector<int>,int>rev[M];
+vector<int>tmp;
+
+void make_state(int cut,int k,bool pre,int nxt){
+",https://atcoder.jp/contests/abc296/editorial/6119
+abc297_f,Minimum Bounding Box 2,T132,畳み込み,removed,code_not_in_directly_executable_scope,editorial_code_rule,"actInv[i];
+    pow_c *= c;
+  }
+  vector<mint> h = convolution(f, g);
+  h.erase(h.begin(), h.end() - n);
+  for (int i = 0; i < n; i++) {
+    h[i] *= Fact",https://atcoder.jp/contests/abc297/editorial/6198
+abc297_f,Minimum Bounding Box 2,T236,モジュラ逆元,removed,code_not_in_directly_executable_scope,editorial_code_rule," {
+    FactInv.resize(n);
+    mint x = Fact[n - 1].inv();
+    for (int i = n - 1; i >= sz; i--) {
+      FactInv[i] = x;
+      x *= mint::raw(i);
+",https://atcoder.jp/contests/abc297/editorial/6198
+abc299_h,Dice Sum Infinity,T236,モジュラ逆元,removed,code_not_in_directly_executable_scope,editorial_code_rule,"   modint x;
+        const modint d{modint::raw(6).inv()};
+        vector<modint> den{1, -d * 7, 0, 0, 0, 0, 0, d};
+        c[0] = calc_linear(ve",https://atcoder.jp/contests/abc299/editorial/6260
+abc300_h,Fibonacci: Revisited,T197,Fibonacci 数,removed,title_only_not_solution_evidence,explicit_title_rule,Fibonacci: Revisited,https://atcoder.jp/contests/abc300/tasks/abc300_h
+abc301_h,Difference of Distance,T008,Map / 連想配列,removed,code_not_in_directly_executable_scope,editorial_code_rule,"<int, int>>> G;
+    vector<int> in, out, low;
+    unordered_map<int, int> bridge;
+    
+    void dfs(int u, int p, int &k) {
+        in[u] = low[u] = k++;
+",https://atcoder.jp/contests/abc301/editorial/6344
+abc304_h,Constrained Topological Sort,T049,トポロジカルソート,removed,title_only_not_solution_evidence,explicit_title_rule,Constrained Topological Sort,https://atcoder.jp/contests/abc304/tasks/abc304_h
+abc304_h,Constrained Topological Sort,T077,ソート,removed,title_only_not_solution_evidence,explicit_title_rule,Constrained Topological Sort,https://atcoder.jp/contests/abc304/tasks/abc304_h
+abc306_e,Best Performances,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"bits/stdc++.h>
+
+using namespace std;
+
+int k;
+multiset<int> x,y;
+long long s;
+
+void balance(){
+  while(x.size()<k){
+    auto iy=y.end();iy--;
+   ",https://atcoder.jp/contests/abc306/editorial/6607
+abc310_d,Peaceful Teams,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"作ったとき、相性の悪い選手の組がいない
+    // O(2^N N^2/w) 時間
+    bitset<1024> possible_team;
+    for(unsigned i{}; i < 1U << N; ++i){
+        unsigned m{};
+      ",https://atcoder.jp/contests/abc310/editorial/6783
+abc312_d,Count Bracket Sequences,T132,畳み込み,removed,code_not_in_directly_executable_scope,editorial_code_rule,"// 上部分の計算
+    if (!upper.empty())
+        upper = atcoder::convolution(upper, binomial);
+
+    // 上下の結果を足し合わせる
+    if (lower.size() < upper.size())
+        swap(l",https://atcoder.jp/contests/abc312/editorial/6850
+abc317_f,Nim,T037,Nim,removed,title_only_not_solution_evidence,explicit_title_rule,Nim,https://atcoder.jp/contests/abc317/tasks/abc317_f
+abc318_d,General Weighted Max Matching,T118,マッチング,removed,title_only_not_solution_evidence,explicit_title_rule,General Weighted Max Matching,https://atcoder.jp/contests/abc318/tasks/abc318_d
+abc324_g,Generate Arrays,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"g value_type = std::pair<unsigned, unsigned>;
+    std::set<value_type> original, small, large;
+
+    // 中央値を計算できるように大小の set の大きさを揃える
+    void balance(",https://atcoder.jp/contests/abc324/editorial/7399
+abc328_e,Modulo MST,T053,最小全域木,removed,title_only_not_solution_evidence,explicit_title_rule,Modulo MST,https://atcoder.jp/contests/abc328/tasks/abc328_e
+abc330_e,Mex and Update,T064,二分探索,removed,code_not_in_directly_executable_scope,editorial_code_rule,");
+		if(l == r) return true;
+		auto itr = prev(st.upper_bound({l, TINF}));
+		return itr->first <= l and r <= itr->second;
+	}
+
+	//[x, x + 1) is covered?
+",https://atcoder.jp/contests/abc330/editorial/7754
+abc335_g,Discrete Logarithm Problems,T189,離散対数,removed,title_only_not_solution_evidence,explicit_title_rule,Discrete Logarithm Problems,https://atcoder.jp/contests/abc335/tasks/abc335_g
+abc336_e,Digit Sum Divisible,T008,Map / 連想配列,removed,code_not_in_directly_executable_scope,editorial_code_rule," f(n, s, r, m) := n 以下で、桁和が s で、m で割って r あまるものの個数
+map<ll, ll> mem[130][130][130];  // mem[s][r][m][n] にメモ
+ll f(ll n, int s, int r, int m)
+{
+  if",https://atcoder.jp/contests/abc336/editorial/9094
+abc350_c,Sort,T077,ソート,removed,title_only_not_solution_evidence,explicit_title_rule,Sort,https://atcoder.jp/contests/abc350/tasks/abc350_c
+abc350_g,Mediator,T011,Queue,removed,code_not_in_directly_executable_scope,editorial_code_rule," vector<int> vis(n,0);
+  vector<int> res(n,-1);
+  queue<int> q;
+  for(int i=0;i<n;i++){
+    if(vis[i]){continue;}
+    vis[i]=1;
+    q.push(i);
+   ",https://atcoder.jp/contests/abc350/editorial/9821
+abc352_g,Socks 3,T132,畳み込み,removed,code_not_in_directly_executable_scope,editorial_code_rule,"rn {1, a[l]};
+    int m = (l + r) / 2;
+    return convolution(prod(a, l, m), prod(a, m, r));
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> a(",https://atcoder.jp/contests/abc352/editorial/9921
+abc367_e,Permute K times,T226,Farach-Colton and Bender LCA,removed,references_or_related_problem_section,editorial_name_rule,"参考文献 [1]: Bender, Michael A., and Martın Farach-Colton. “The level ancestor problem simplified.” Theoretical Computer Science 321, no. 1 (2004): 5–12. 日本語解説記事もあります",https://atcoder.jp/contests/abc367/editorial/10719
+abc370_g,Divisible by 3,T135,素数定理,removed,prime_number_theorem_complexity_bound | references_or_related_problem_section,editorial_name_rule,\(2 \leq x \leq N^{\frac{1}{4}}\) のとき 素数は素数定理より \(\mathrm{O}\left(\frac{N^{\frac{1}{4}}}{\log N}\right)\) 個あり、DP テーブルのサイズは \(\mathrm{O}(\sqrt{N})\) なので合計 \(\mathrm{O}\left(\frac{N^{\frac{3}{4}}}{\log N}\ri,https://atcoder.jp/contests/abc370/editorial/10869
+abc372_e,K-th Largest Connected Components,T077,ソート,removed,code_not_in_directly_executable_scope,editorial_code_rule,"ber[x] += self.member[y]
+        self.member[x] = sorted(self.member[x], reverse=True)[:10]
+
+
+N, Q = map(int, input().split())
+uf = UnionFind(N + 1",https://atcoder.jp/contests/abc372/editorial/10967
+abc373_f,Knapsack with Diminishing Values,T150,ナップサック問題,removed,title_only_not_solution_evidence,explicit_title_rule,Knapsack with Diminishing Values,https://atcoder.jp/contests/abc373/tasks/abc373_f
+abc378_d,Count Simple Paths,T080,再帰関数,added,positive_context_or_fallback_changed,,,
+abc379_e,Sum of All Substrings,T171,多倍長整数,added,positive_context_or_fallback_changed,,,
+abc380_e,1D Bucket Tool,T111,アッカーマン関数,removed,inverse_ackermann_complexity_background,editorial_name_rule,( \(\alpha\) は逆アッカーマン関数) writer解(C),https://atcoder.jp/contests/abc380/editorial/11356
+abc380_e,1D Bucket Tool,T140,逆アッカーマン関数,removed,inverse_ackermann_complexity_background,editorial_name_rule,( \(\alpha\) は逆アッカーマン関数) writer解(C),https://atcoder.jp/contests/abc380/editorial/11356
+abc381_g,Fibonacci Product,T197,Fibonacci 数,removed,title_only_not_solution_evidence,explicit_title_rule,Fibonacci Product,https://atcoder.jp/contests/abc381/tasks/abc381_g
+abc383_e,Sum of Max Matching,T111,アッカーマン関数,removed,inverse_ackermann_complexity_background,editorial_name_rule,どで適切に行うことができ、また辺を重みで一度ソートするため、計算量は \(\mathrm{O}(M\log M+(N+M) \alpha (N))\) となります( \( \alpha(N)\) は逆アッカーマン関数),https://atcoder.jp/contests/abc383/editorial/11542
+abc383_e,Sum of Max Matching,T140,逆アッカーマン関数,removed,inverse_ackermann_complexity_background,editorial_name_rule,などで適切に行うことができ、また辺を重みで一度ソートするため、計算量は \(\mathrm{O}(M\log M+(N+M) \alpha (N))\) となります( \( \alpha(N)\) は逆アッカーマン関数),https://atcoder.jp/contests/abc383/editorial/11542
+abc384_e,Takahashi is Slime 2,T011,Queue,added,positive_context_or_fallback_changed,,,
+abc384_e,Takahashi is Slime 2,T064,二分探索,added,positive_context_or_fallback_changed,,,
+abc384_g,Abs Sum,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"x[0] // w) % 2 == 0 else -x[1]))
+
+s = sorted(list(set(A + B)))
+d = {}
+sz = len(s)
+for i in range(sz):
+    d[s[i]] = i
+a = [d[i] for i in A]
+b = ",https://atcoder.jp/contests/abc384/editorial/11548
+abc386_a,Full House 2,T008,Map / 連想配列,removed,code_not_in_directly_executable_scope,editorial_code_rule,"ts/stdc++.h>
+
+using namespace std;
+
+int main(){
+  map<int,int> m1,m2;
+  for(int i=0;i<4;i++){
+    int a;
+    cin >> a;
+    m1[a]++;
+  }
+  for(au",https://atcoder.jp/contests/abc386/editorial/11692
+abc387_g,Prime Circuit,T236,モジュラ逆元,removed,code_not_in_directly_executable_scope,editorial_code_rule,"= V;
+    n /= 2, k *= 2;
+  }
+  return (P[0] * Q[0].inv()).pre(f.size());
+}
+
+template <typename mint>
+vector<FormalPowerSeries<mint>> inner(const ",https://atcoder.jp/contests/abc387/editorial/11727
+abc389_c,Snake Queue,T011,Queue,removed,title_only_not_solution_evidence,explicit_title_rule,Snake Queue,https://atcoder.jp/contests/abc389/tasks/abc389_c
+abc392_g,Fine Triplets,T196,FFT,removed,code_not_in_directly_executable_scope,editorial_code_rule,"
+f = [0]*(M+1)*2
+for a in A: f[a]=1
+
+g = F.ifft(F.fft(f,1<<21)**2)
+
+res = 0
+for v in A:
+  res += int(g[2*v]+0.5)
+  res -= 1
+
+res //= 2
+print(res",https://atcoder.jp/contests/abc392/editorial/12175
+abc394_g,Dense Buildings,T111,アッカーマン関数,removed,inverse_ackermann_complexity_background,editorial_name_rule,ここで、 \(\alpha(n)\) はアッカーマン関数の逆関数を表します,https://atcoder.jp/contests/abc394/editorial/12282
+abc399_c,Make it Forest,T111,アッカーマン関数,removed,inverse_ackermann_complexity_background,editorial_name_rule,計算量は \(\mathrm{O}(N + M)\) や \(\mathrm{O}((N+M) \alpha(N))\) ( \(\alpha(N)\) はアッカーマン関数の逆関数) 程度で十分高速です,https://atcoder.jp/contests/abc399/editorial/12559
+abc399_f,Range Power Sum,T132,畳み込み,removed,code_not_in_directly_executable_scope,editorial_code_rule,"}
+void multiply(poly &f, const poly &g) {
+    f = atcoder::convolution(f, g);
+    f.resize(k + 1);
+}
+
+int main() {
+    int n;
+    std::cin >> n >> k;
+
+    mint a",https://atcoder.jp/contests/abc399/editorial/12577
+abc407_f,Sums of Sliding Window Maximum,T083,尺取り法,removed,title_only_not_solution_evidence,explicit_title_rule,Sums of Sliding Window Maximum,https://atcoder.jp/contests/abc407/tasks/abc407_f
+abc418_f,We're teapots,T008,Map / 連想配列,removed,code_not_in_directly_executable_scope,editorial_code_rule,"{
+		x[1][1] = noadj(n-3, r-1);
+	}
+	
+	return x;
+}
+
+map<ll, ll> stidx; // set of i such that a_i != -1
+void solve () {
+	segtree<Mat, seg_op, seg_e",https://atcoder.jp/contests/abc418/editorial/13626
+abc418_f,We're teapots,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"(*it).second; --it;
+
+				stidx.erase(it);
+				seg.set(x, unity);
+				if (ihigh < n) seg.set(ihigh, lenmat(ihigh - ilow, vhigh - vlow));
+				
+			",https://atcoder.jp/contests/abc418/editorial/13626
+abc418_f,We're teapots,T236,モジュラ逆元,removed,code_not_in_directly_executable_scope,editorial_code_rule,"{
+		frac[i] = frac[i-1] * i;
+	}
+	invf[n] = frac[n].inv();
+	for (ll i = n; i >= 1; i--) {
+		invf[i-1] = invf[i] * i;
+	}
+}
+mint ncr (ll n, ll r) {
+",https://atcoder.jp/contests/abc418/editorial/13626
+abc421_b,Fibonacci Reversed,T197,Fibonacci 数,removed,title_only_not_solution_evidence,explicit_title_rule,Fibonacci Reversed,https://atcoder.jp/contests/abc421/tasks/abc421_b
+abc422_f,Eat and Ride,T187,Dijkstra 法,added,positive_context_or_fallback_changed,,,
+abc425_g,Sum of Min of XOR,T059,XOR,removed,title_only_not_solution_evidence,explicit_title_rule,Sum of Min of XOR | Sum of Min of XOR,https://atcoder.jp/contests/abc425/tasks/abc425_g
+abc426_a,OS Versions,T008,Map / 連想配列,removed,code_not_in_directly_executable_scope,editorial_code_rule,"ts/stdc++.h>
+
+using namespace std;
+
+int main(){
+  map<string,int> mp;
+  mp[""Ocelot""]=1;
+  mp[""Serval""]=2;
+  mp[""Lynx""]=3;
+
+  string x,y;
+  cin >",https://atcoder.jp/contests/abc426/editorial/14140
+abc426_c,Upgrade Required,T003,Segment Tree,removed,code_not_in_directly_executable_scope,editorial_code_rule,"q;
+  vector<S> v(n+1,{1,1});
+  v[0]={0,1};
+  lazy_segtree<S, op, e, F, mapping, composition, id> seg(v);
+
+  while(q--){
+    ll x,y;
+    cin >> x >> ",https://atcoder.jp/contests/abc426/editorial/14144
+abc426_g,Range Knapsack Query,T150,ナップサック問題,removed,title_only_not_solution_evidence,explicit_title_rule,Range Knapsack Query,https://atcoder.jp/contests/abc426/tasks/abc426_g
+abc430_g,Range Set Modifying Query,T002,Lazy Segment Tree,removed,code_not_in_directly_executable_scope | references_or_related_problem_section,editorial_code_rule,"=(f.ooo&g.aaa)|g.ooo;
+	return ret;
+}
+
+// atcoder::lazy_segtree のメンバ関数 all_apply を以下のように変更
+void all_apply(int k, F f) {
+    d[k] = mapping(f, d[k]);
+    ",https://atcoder.jp/contests/abc430/editorial/14300
+abc430_g,Range Set Modifying Query,T064,二分探索,removed,references_or_related_problem_section,editorial_name_rule,この遅延セグメントツリーの上で二分探索することで真に影響を受ける区間を列挙することができます,https://atcoder.jp/contests/abc430/editorial/14300
+abc430_g,Range Set Modifying Query,T117,ビット演算,removed,code_not_in_directly_executable_scope | references_or_related_problem_section,editorial_code_rule,"l
+		return {0,0,0,0,true};
+	}
+	S ret=x;
+	ret.max-=__builtin_popcountll(ret.aaa&~f.aaa);
+	ret.aaa&=f.aaa;
+	ret.ooo&=f.aaa;
+	ret.max+=__builtin_popcountll(~ret.",https://atcoder.jp/contests/abc430/editorial/14300
+abc432_e,Clamp,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,";
+    now.first += 1;
+    now.second += x;
+    st.set(x, now);
+}
+
+void del(int x) {
+    auto now = st.get(x);
+    now.first -= 1;
+    now.second",https://atcoder.jp/contests/abc432/editorial/14572
+abc432_f,Candy Redistribution,T077,ソート,removed,code_not_in_directly_executable_scope,editorial_code_rule,"LL << vi);
+
+			if (subsum[cb] == 0) break;
+		}
+
+		sort(v.begin(), v.end());
+		ll carry = a[v[0].second] - avg;
+		for (ll i = 1; i < v.size(); i++",https://atcoder.jp/contests/abc432/editorial/14577
+abc438_f,Sum of Mex,T154,MEX,removed,title_only_not_solution_evidence,explicit_title_rule,Sum of Mex,https://atcoder.jp/contests/abc438/tasks/abc438_f
+abc440_f,Egoism,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,";
+			leaf[a[i]].cnt2 += 1;
+			whole2++;
+		}
+		seg.set(a[i], leaf[a[i]]);
+	}
+	
+	for (ll qi = 0; qi < q; qi++) {
+		ll w, x, y;
+		cin >> w >> x >> ",https://atcoder.jp/contests/abc440/editorial/15032
+abc440_g,Haunted House,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"assign(h*w, 0);
+		vx[k].assign(h*w, 0);
+
+		vector<set<ll> > tu(h*w), td(h*w);
+		for (ll i = 0; i < h; i++) {
+			for (ll j = 0; j < w; j++) {
+			",https://atcoder.jp/contests/abc440/editorial/15033
+abc440_g,Haunted House,T077,ソート,removed,code_not_in_directly_executable_scope,editorial_code_rule,"u];
+					dv0[k][v].push_back({sum, u});
+				}
+				sort(   dv0[k][v].begin(), dv0[k][v].end()); // LOG
+				reverse(dv0[k][v].begin(), dv0[k][v].en",https://atcoder.jp/contests/abc440/editorial/15033
+abc442_d,Swap and Range Sum,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"cin >> x;
+			x--;
+			swap(a[x], a[x + 1]);
+			seg.set(x, a[x]);
+			seg.set(x + 1, a[x + 1]);
+		} else {
+			int l, r; cin >> l >> r;
+			l--;
+			c",https://atcoder.jp/contests/abc442/editorial/15152
+abc442_g,Lightweight Knapsack,T150,ナップサック問題,removed,title_only_not_solution_evidence,explicit_title_rule,Lightweight Knapsack,https://atcoder.jp/contests/abc442/tasks/abc442_g
+abc446_b,Greedy Draft,T012,Set,removed,code_not_in_directly_executable_scope,editorial_code_rule,"n, m = map(int, input().split())
+
+used = set()
+for i in range(n):
+	len = int(input())
+	x = 0
+	draftlist = list(map(int, input().split()",https://atcoder.jp/contests/abc446/editorial/16369
+abc447_g,Div. 1 & Div. 2,T077,ソート,removed,code_not_in_directly_executable_scope,editorial_code_rule,"    copy(b.begin(), b.end(), c.begin() + SZ);
+    sort(c.rbegin(), c.rend());
+    S res;
+    int it = 0;
+    for (int i = 0; i < SZ; i++) {
+     ",https://atcoder.jp/contests/abc447/editorial/16718
+abc451_e,Tree Distance,T077,ソート,added,positive_context_or_fallback_changed,,,
+abc458_g,Children Yearn for the Evil Kindergarten,T007,Deque,removed,code_not_in_directly_executable_scope,editorial_code_rule,"egin(), a.end());
+}
+
+template<class T>
+T& atback (deque<T> &a, int idx) {
+	return a.at((int)a.size() - 1 - idx);
+}
+
+
+bool func (const ll m) {
+	if ",https://atcoder.jp/contests/abc458/editorial/20460
+abc458_g,Children Yearn for the Evil Kindergarten,T077,ソート,removed,code_not_in_directly_executable_scope,editorial_code_rule,"
+template<class T>
+void sortall (vector<T> &a) {
+	sort(a.begin(), a.end());
+}
+
+template<class T>
+T& atback (deque<T> &a, int idx) {
+	return a.at(",https://atcoder.jp/contests/abc458/editorial/20460
+abc459_e,Select from Subtrees,T236,モジュラ逆元,removed,code_not_in_directly_executable_scope,editorial_code_rule,"	rep(i,d[k]){
+			ans*=mint(s-i);
+			ans*=mint(i+1).inv();
+		}
+	}
+	return (s-d[k]);
+}
+
+int main(void){
+	int n,x;
+
+	cin>>n;
+	for(int i=1;i<n;i++){
+",https://atcoder.jp/contests/abc459/editorial/20979
+abc465_g,Sum of Mex of Mod of Linear,T154,MEX,removed,title_only_not_solution_evidence,explicit_title_rule,Sum of Mex of Mod of Linear,https://atcoder.jp/contests/abc465/tasks/abc465_g
+abc470_e,Concentration,T022,基礎DP / 動的計画法入門,added,negative_or_infeasible_context,,,
+abc470_f,Googol Swaps,T005,Union-Find,removed,code_not_in_directly_executable_scope,editorial_code_rule,"
+		ll sz;
+	};
+	vector<DSUnode> dnodes;
+
+	public:
+	dsu (const ll n_): n(n_) {
+		dnodes.resize(n);
+		for (ll i = 0; i < n; i++) {
+			dnodes[i] = {p",https://atcoder.jp/contests/abc470/editorial/23854
+abc470_f,Googol Swaps,T008,Map / 連想配列,removed,code_not_in_directly_executable_scope,editorial_code_rule," i < m; i++) {
+		g.unite(a[i], b[i]);
+	}
+
+	vector<map<char, ll>> cnts(n); // cnts[v][c] := count of i s.t. g.find(i) == v && s[i] == c
+	bool has",https://atcoder.jp/contests/abc470/editorial/23854
+abc470_f,Googol Swaps,T236,モジュラ逆元,removed,code_not_in_directly_executable_scope,editorial_code_rule,"{
+		frac[i] = frac[i-1] * i;
+	}
+	invf[n] = frac[n].inv();
+	for (ll i = n; i >= 1; i--) {
+		invf[i-1] = invf[i] * i;
+	}
+	assert(invf[0] == 1);
+}
+m",https://atcoder.jp/contests/abc470/editorial/23854
+abc470_g,Σex,T008,Map / 連想配列,removed,code_not_in_directly_executable_scope,editorial_code_rule,"-> ll {
+		return (p.second - p.first) * val;
+	};
+	map<P, ll> slopes;
+	ll sum = 0;
+	for (ll i = 0; i <= n; i++) {
+		slopes.insert({{i, i+1}, i});",https://atcoder.jp/contests/abc470/editorial/23879
+abc471_g,Caeser Syllables,T132,畳み込み,removed,code_not_in_directly_executable_scope,editorial_code_rule,"^0
+	for (ll i = 0; i < k; i++) {
+		vector<ll> p = convolution(rarr[i], s);
+
+		rsarr[i].assign(k, 0);
+		for (ll v = 0; v < (ll)p.size(); v++) {
+			rsarr[",https://atcoder.jp/contests/abc471/editorial/24208
+abc476_g,Increasing Popcount,T105,Sperner の定理,removed,reference_link_title_only,editorial_name_rule,LYM 不等式などに関しては次の記事を参照してください: Sperner の定理 - AtCoderInfo 実装例(Python3),https://atcoder.jp/contests/abc476/editorial/25751
+abc481_d,Autopilot,T007,Deque,removed,code_not_in_directly_executable_scope,editorial_code_rule,"i][0].second = 0;
+		}
+	}
+
+	vector<ll> d(n, INF);
+	deque<P> que;
+	d[s] = 0;
+	que.push_front({d[s], s});
+	while (!que.empty()) {
+		P p = que.front()",https://atcoder.jp/contests/abc481/editorial/27926
+abc481_f,Evil Shortest Path,T055,最短経路,removed,title_only_not_solution_evidence,explicit_title_rule,Evil Shortest Path,https://atcoder.jp/contests/abc481/tasks/abc481_f
+abc481_g,Half-Baked,T077,ソート,removed,code_not_in_directly_executable_scope,editorial_code_rule," = {a[i], i*2+0};
+		c[i*2+1] = {b[i], i*2+1};
+	}
+	sort(c.begin(), c.end());
+
+	vector<vector<mint>> cl(n*2), cm(n*2), cr(n*2);
+	for (ll i = 0; i <",https://atcoder.jp/contests/abc481/editorial/27925
+abc481_g,Half-Baked,T132,畳み込み,removed,code_not_in_directly_executable_scope,editorial_code_rule,"vector<mint> &l, const vector<mint> &r) {
+	return convolution(l, r);
+}
+vector<mint> operator+ (const vector<mint> &l, const vector<mint> &r) {
+	vector<m",https://atcoder.jp/contests/abc481/editorial/27925
+abc481_g,Half-Baked,T236,モジュラ逆元,removed,code_not_in_directly_executable_scope,editorial_code_rule," &x) {
+	assert(x[0] != 0);
+	vector<mint> y = {x[0].inv()};
+	ll k = 1;
+
+	while (k < (ll)x.size()) {
+		vector<mint> xx(k*2);
+		for (ll i = 0; i < k",https://atcoder.jp/contests/abc481/editorial/27925

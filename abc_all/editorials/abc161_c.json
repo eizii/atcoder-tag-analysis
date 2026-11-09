@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc161_c",
+  "editorials": [
+    {
+      "text": "C: Replacing Integer\nx がK 以上のとき、操作を行うことでx −K となります。すなわち、N からN/K 回操作を行う\nことで、整数はN をK で割った余りとなります。\nN をK で割った余りをt とします。t に操作を行うと、K −t となります。K −t に操作を行う\nと、t に戻るだけです。すなわちK 以下の値として取りうるものはt とK −t のいずれかのみとな\nります。\nよって答えはt とK −t のうち小さい方、すなわちN をK で割った余りと、K −(NをKで割っ\nた余り) のうち小さい方です。\n",
+      "text_sha256": "9d53629f06e722339dbd9774bf5e9a9f0984dc477c4d360abd778b2171c363eb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc161/abc161_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

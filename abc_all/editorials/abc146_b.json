@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc146_b",
+  "editorials": [
+    {
+      "text": "B: ROT N\nまず元の文字がアルファベットの何番目の文字かを0-indexed で求め、それにN を加えて26 で\n割った余りを求めると、出力するべき文字が分かります。\n1 #include<stdio.h>\n2 #include<string.h>\n3 int main(){\n4\nint n;\n5\nchar s[10010];\n6\nscanf(\"%d␣%s\",&n,s);\n7\nint len=strlen(s);\n8\nfor(int i=0;i<len;i++){\n9\nint x=s[i]-'A';\n10\nx=(x+n)%26;\n11\nputchar('A'+x);\n12\n}\n13\nputchar('\\n');\n14 }\n",
+      "text_sha256": "8ee18ce6f4364ff4cf33a12543b66471e463e7ae40ea4f5ae759909ce30b6e86",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc146/abc146_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

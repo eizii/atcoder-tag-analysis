@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc343_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc343/editorial/9431",
+      "text": "2 重 for 文などを用いて、\n\\(i = 1,2, \\ldots, N\\)\nの順にどの頂点が頂点\n\\(i\\)\nと直接結ばれているか判定すればよいです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<vector<int>> a(n, vector<int>(n));\n    for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) cin >> a[i][j];\n    for (int i = 0; i < n; i++) {\n        vector<int> v;\n        for (int j = 0; j < n; j++) if (a[i][j]) v.push_back(j + 1);\n        int sz = v.size();\n        for (int j = 0; j < sz; j++) {\n            cout << v[j];\n            if (j != sz - 1) cout << ' ';\n        }\n        cout << '\\n';\n    }\n}"
+      ],
+      "text_sha256": "b3657d4f5901e931bc5342d5bd82fc2debff56839cebdfb5ce4ff1a071887cb6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc343/abc343_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

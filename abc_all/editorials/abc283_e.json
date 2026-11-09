@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc283_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc283/editorial/5433",
+      "text": "操作は可換で、同一の\n\\(i\\)\nに対して操作を\n\\(2\\)\n回行うと元の状態に戻るので、各\n\\(i\\)\nに対して操作を行うのは高々\n\\(1\\)\n回としてよいです。\n孤立した要素が存在しなくなるように、各\n\\(i\\)\nに対して操作を行うかを\n\\(i\\)\nについて昇順に考えていきましょう。\n\\(i\\)\n行目に対して操作を行うかどうかを確定したとき、\n\\(i-1\\)\n行目の要素についてそれらの要素が孤立した要素となるかが確定します。また、それより上の行については、\n\\(1,2, \\ldots, i-1\\)\n行目に対する操作は孤立した要素が存在しないように行われていることから孤立した要素は存在しません。\nまた、\n\\(i-1\\)\n行目の要素が孤立した要素となるかは\n\\(i-2,i-1,i\\)\n行目の要素にしか依存しません。\nここで、\n\\(dp_{i,j,k}\\)\nを\n\\(i\\)\n行目までについて操作を行うかを確定して、\n\\(j\\)\nを\n\\(i-1\\)\n行目に対して操作を行ったか、\n\\(k\\)\nを\n\\(i\\)\n行目に対して操作を行ったかを表す flag としたときに\n\\(i-1\\)\n行目までに孤立した要素が存在しなくなるという条件を満たすために必要な操作回数の最小値とします。\nすると、上に述べたことからこの設定による動的計画法で本問題を解くことができますが、\n\\(H\\)\n行目の要素が孤立した要素とならないよう\n\\(dp_{i,j,k}\\)\nにおいて\n\\(i = H\\)\nのときは\n\\(i\\)\n行目についても孤立した要素が存在しないようにする、あるいは答えを求める際に適切な\n\\((j,k)\\)\nの組に対してのみ\n\\(dp_{H,j,k}\\)\nの 最小値を取るなどの工夫が必要です。\nこの動的計画法は状態数が\n\\(O(H)\\)\n、遷移が\n\\(O(W)\\)\nの計算量で行えるので本問題を\n\\(O(HW)\\)\nの計算量で解くことができました。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#define rep(i, n) for (int i = 0; i < (n); i++)\nusing namespace std;\nconstexpr int inf = 1000000010;\ntemplate<class T, class U> inline bool chmin(T &a, const U &b) { if (a > b) { a = b; return true; } return false; }\n\nint main() {\n\tint h, w;\n\tcin >> h >> w;\n\tvector<vector<int>> a(h, vector<int>(w));\n\trep(i, h) rep(j, w) cin >> a[i][j];\n\tvector<vector<vector<int>>> dp(h, vector<vector<int>>(2, vector<int>(2, inf)));\n\tdp[0][0][0] = 0;\n\tdp[0][0][1] = 1;\n\tfor (int i = 1; i < h; i++) {\n\t\trep(j, 2) {\n\t\t\trep(k, 2) {\n\t\t\t\trep(l, 2) {\n\t\t\t\t\tvector<int> x(w, -1);\n\t\t\t\t\tif (i != 1) x = a[i - 2];\n\t\t\t\t\tif (j) rep(m, w) x[m] = 1 - x[m];\n\t\t\t\t\tvector<int> y = a[i - 1];\n\t\t\t\t\tif (k) rep(m, w) y[m] = 1 - y[m];\n\t\t\t\t\tvector<int> z = a[i];\n\t\t\t\t\tif (l) rep(m, w) z[m] = 1 - z[m];\n\t\t\t\t\tbool ok = true;\n\t\t\t\t\trep(m, w) if (x[m] != y[m] && y[m] != z[m] && (m == 0 || y[m] != y[m - 1]) && (m == w - 1 || y[m] != y[m + 1])) ok = false;\n\t\t\t\t\tif (i == h - 1) {\n\t\t\t\t\t\trep(m, w) if (z[m] != y[m] && (m == 0 || z[m] != z[m - 1]) && (m == w - 1 || z[m] != z[m + 1])) ok = false;\n\t\t\t\t\t}\n\t\t\t\t\tif (ok) chmin(dp[i][k][l], dp[i - 1][j][k] + l);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tint ans = inf;\n\trep(j, 2) rep(k, 2) chmin(ans, dp[h - 1][j][k]);\n\tcout << (ans == inf ? -1 : ans) << '\\n';\n}"
+      ],
+      "text_sha256": "39f7cf3c271d62cff51257da2a73fc50db7629e13e9a0a5c7f4cfdd689694157",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc283/abc283_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

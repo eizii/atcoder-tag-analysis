@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc198_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc198/editorial/241",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nこの問題では、お菓子は互いに区別できないので、\n\\(A\\)\n君と\n\\(B\\)\n君にそれぞれ何個ずつのお菓子をわけたかを考えればよいです。\n\\(A\\)\n君にわけるお菓子の個数として考えられるのは、\n\\(1\\)\n個から\n\\(N-1\\)\n個までの\n\\(N-1\\)\n通りです。これは\n\\(N=1\\)\nのときも成り立ちます。よって、標準入力から整数を受け取り、\n\\(1\\)\nを引いた値を出力すればよいです。\n回答例(Python)\n回答例(C++)\n回答例(C)",
+      "codes": [
+        "N = int(input())\nprint(N-1)",
+        "#include <iostream>\nusing namespace std;\n\nint main(){\n\tint N;\n\tcin >> N;\n\tcout << N-1;\n}",
+        "#include<stdio.h>\n\nint main(){\n\tint N;\n\tscanf(\"%d\", &N);\n\tprintf(\"%d\", N-1);\n}"
+      ],
+      "text_sha256": "1d7895a3f82cdcae9d58de9d389fae0c0237fed59396daa948db0573c4a5e3f2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc198/abc198_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

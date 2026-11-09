@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc252_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc252/editorial/3998",
+      "text": "公式\nF - Bread\n解説\nby\nmechanicalpenciI\nまず、問題を少し限定して\n\\(L=A_1+A_2+\\ldots +A_N\\)\nの時にかかる最小コストを求めることを考えます。\nこれは順序を逆にすることで、長さ\n\\(A_1\\)\n,\n\\(\\ldots\\)\n,\n\\(A_N\\)\nのパンから始めて、長さ\n\\(x\\)\nのパンと長さ\n\\(y\\)\nのパンをコスト\n\\(x+y\\)\nを払って繋げる問題として見ることができます。\nこのとき、 多重集合\n\\(S=\\{ A_1,A_2,\\ldots,A_N \\}\\)\nから始めて次の操作を\n\\(N-1\\)\n回繰り返した時にかかるコストの総和が元の問題のコストの最小値となります。\n\\(S\\)\nの要素のうち、小さい方から\n\\(2\\)\nつ取り出し\n\\(s_1,s_2\\)\nとする。コスト\n\\(s_1+s_2\\)\nを払って長さ\n\\(s_1\\)\nのパンと長さ\n\\(s_2\\)\nのパンを繋げる。その後、\n\\(S\\)\nから\n\\(s_1, s_2\\)\nを取り除き、\n\\(s_1+s_2\\)\nを\n\\(S\\)\nに追加する。\n\\(S\\)\nの要素数は\n\\(1\\)\n回でちょうど\n\\(1\\)\nつずつ減少するため、このような操作ができることは明らかです。このようにした時、最小となる証明を以下に載せます。\n\\(L=A_1+A_2+\\cdots+A_N\\)\nのときの最小値についてはこれで示されました。\n\\(L>A_1+A_2+\\cdots+A_N\\)\nのときについては、\n\\(B_1+B_2+\\cdots+B_M=L-(A_1+A_2+\\cdots+A_N)\\)\n,\n\\(B_i>0\\)\nとなるような整数の組\n\\((B_1,B_2,\\ldots, B_M)\\)\nにわたって、長さ\n\\(A_1, A_2,\\ldots,A_N, B_1,B_2,\\ldots, B_M\\)\nのパンを繋げる時の最小値を求める必要があります。\n結論としては\n\\(M=1\\)\n,\n\\(B_1=L-(A_1+A_2+\\cdots+A_N)\\)\nのときにコストは最小となります。\nこれを示すためには、\n\\(A_1,A_2,\\ldots, A_N\\)\nを繋げるために必要な最小コストが\n\\(A_1+A_2,A_3,A_4, \\ldots, A_N\\)\nを繋げるために必要な最小コスト以上になる事を示せば十分です。\n前者に対応する木を考え、\n\\(A_1\\)\n,\n\\(A_2\\)\nのうち浅い方(同じ深さの場合はどちらでもよい) の頂点の葉の重みを\n\\(A_1+A_2\\)\nに書き換える。その祖先の重みもあわせて書き換える。\nもう一方の葉を取り除き、その親のもう\n\\(1\\)\nつの子の頂点の重みを\n\\(X\\)\nとする。もう\n\\(1\\)\nつの子の頂点も取り除き、親の重みを\n\\(X\\)\nに書き換える。その祖先の重みもあわせて書き換える。\nという操作を行うと、この木に対応するコストは元の木に対するコスト以下となります。一方で、これは\n\\(A_1+A_2,A_3,A_4, \\ldots, A_N\\)\nを繋げるために必要な最小コスト以上であるため、\n示したいことが示されました。\nさて、このアルゴリズムは優先度付きキューなどを用いることで\n\\(O(N\\log N)\\)\nで実装できます。よって、十分高速にこの問題を解くことができました。\nc++による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint n;\n\tpriority_queue<long long, vector<long long>, greater<long long> >pq;\n\tlong long x, y, l;\n\tlong long ans = 0;\n\n\tcin >> n >> l;\n\tfor (int i = 0; i < n; i++) {\n\t\tcin >> x;\n\t\tl -= x;\n\t\tpq.push(x);\n\t}\n\n\tif (l > 0) {\n\t\tpq.push(l);\n\t\tn++;\n\t}\n\tfor (int i = 0; i < (n - 1); i++) {\n\t\tx = pq.top();\n\t\tpq.pop();\n\t\ty = pq.top();\n\t\tpq.pop();\n\t\tans += x + y;\n\t\tpq.push(x + y);\n\t}\n\n\tcout << ans << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "205410ac05a6dae3e140e9cc0c3576fb011ebe60c669560f0a725cdbfdc26155",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc252/abc252_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc291_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc291/editorial/5819",
+      "text": "答えを求めるためには、\n\\(S\\)\nの文字を\n\\(1\\)\n文字ずつ見ていって大文字かどうかを判定すれば良いです。大文字であるかを判定するにはすでに用意されている標準ライブラリやメソッドを用いれば良いです。\n標準ライブラリやメソッドを用いる方法については言語次第ですが、例えば c++ であれば関数\nstd::isupper\n, Python であれば文字列に対する isupper メソッドなどを使用する事ができます。\nまた、char型 に対して大小比較を行う時、比較はその文字に対応する文字コードの比較によって行われますが、多くの文字コードにおいては大文字と小文字の文字コードはそれぞれまとまっている(例えば、ASCIIやUnicode では\nA\n-\nZ\nは\n\\(65\\)\n-\n\\(90\\)\n,\na\n-\nz\nは\n\\(97\\)\n-\n\\(122\\)\nに対応しています)ため、文字列\n\\(S\\)\nの各文字\n\\(S_i\\)\nに対する条件を 「 ‘A’\n\\(\\leq S_i\\)\nかつ\n\\(S_i\\leq\\)\n‘Z’」 として判定すれば大文字の判定を行う事ができます。\nこれらの方法によって、この問題を解く事ができます。\nc++ による実装例 1 :\nc++ による実装例 2 :\nPython による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tstring s;\n\n\tcin>>s;\n\tn=s.size();\n\tfor(int i=0;i<n;i++){\n\t    if(isupper(s[i])){\n                cout<<(i+1)<<endl;\n            }\n\t}\n\n\treturn 0;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tstring s;\n\n\tcin>>s;\n\tn=s.size();\n\tfor(int i=0;i<n;i++){\n\t    if(('A'<=s[i])&&(s[i]<='Z')){\n                cout<<(i+1)<<endl;\n            }\n\t}\n\n\treturn 0;\n}",
+        "s=input()\n\nfor i in range(len(s)):\n    if(s[i].isupper()):\n        print(i+1)"
+      ],
+      "text_sha256": "5de19f1b80a220ee686e57d35aded55ed75480642f935936fa813b502d182511",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc291/abc291_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

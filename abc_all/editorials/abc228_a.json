@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc228_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc228/editorial/2933",
+      "text": "\\(S \\lt T\\)\nのとき、\n\\(S \\leq X \\lt T\\)\nならば答えは\nYes\nであり、そうでなければ\nNo\nです。\n\\(T \\lt S\\)\nのとき、\n\\(X \\lt T\\)\nまたは\n\\(S \\leq X\\)\nならば答えは\nYes\nであり、そうでなければ\nNo\nです。\n以上を if などを用いて実装すると以下のようになります。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int s, t, x;\n    cin >> s >> t >> x;\n    if (s < t) {\n        cout << (s <= x and x < t ? \"Yes\" : \"No\") << '\\n';\n    } else {\n        cout << (x < t or s <= x ? \"Yes\" : \"No\") << '\\n';\n    }\n}",
+        "s, t, x = map(int, input().split())\nif s < t:\n    print(\"Yes\" if s <= x < t else \"No\")\nelse:\n    print(\"Yes\" if x < t or s <= x else \"No\")"
+      ],
+      "text_sha256": "05d597ebcaac73fcd2f8301e751424cacdd5977cb9a79e29432b051cd6671e73",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc228/abc228_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc424_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc424/editorial/13858",
+      "text": "この問題は答えを二分探索することで解くことができます。\nまずは次の問題を考えます。\n問題1：袋の中に長さ\n\\(A\\)\nの棒\n\\(1\\)\n本が入っている。棒の長さを全て\n\\(D\\)\n以下にするためには何回の操作が必要か？\n袋の中の棒の長さとしてあり得るものは\n\\(\\frac{A}{2^k}\\)\nの形のものに限られることから、\n\\(\\frac{A}{2^k}\\leq D\\)\nを満たす最小の整数\n\\(k\\)\nを用いてこの問題の答えは、\n\\(2^k-1\\)\nとなります。\n問題2：袋の中に長さ\n\\(A_1,\\ldots,A_N\\)\nの\n\\(N\\)\n本の棒が入っている。棒の長さを全て\n\\(D\\)\n以下にするためには何回の操作が必要か？\n各棒について独立に問題1を解くことでこの問題を解くことができます。\n問題3：袋の中に\n\\(A_1,\\ldots,A_N\\)\nの\n\\(N\\)\n本の棒が入っている。\n\\(K\\)\n回の操作を行ったあと最も長い棒の長さは？\nこの問題は答えを二分探索することで問題2に帰着されます。\n問題4：袋の中に\n\\(A_1,\\ldots,A_N\\)\nの\n\\(N\\)\n本の棒が入っている。\n\\(K\\)\n回の操作を行ったあと長い方から\n\\(X\\)\n番目の棒の長さは？\nまず問題3の答えを求めます。これにより、各棒がどのような長さになったかがわかります。操作後の棒の長さの種類数は高々\n\\(N+1\\)\n種類であるため、長さごとに数を数えることで答えを求めることができます。\n計算の過程で登場する数は適切な実装の下、全て64bit浮動小数点数型で正確に表すことができ、誤差なく計算することができます。",
+      "codes": [],
+      "text_sha256": "b824d3af421e2646435c3a0ac25d327b518d2b3dce485202c8605ccb0b7a6156",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc424/abc424_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc424/editorial/13878",
+      "text": "\\(A\\)\nを入力時点で\n\\(2^{30}\\)\n倍して問題を解き，出力のときに求めた値を\n\\(2^{30}\\)\nで割った値を出力することで，出力以外はすべて 64bit 整数で扱うことができます．（理由：元の問題の答えは，\n\\(N+K\\lt 2^{30}\\)\nよりある整数\n\\(n\\)\nを用いて\n\\(n/{2^{30}}\\)\nと表されるため．）",
+      "codes": [
+        "def solve():\n    N, K, X = map(int, input().split())\n    A = list(map(int, input().split()))\n    A = [i << 30 for i in A]\n\n    def calc(mid):\n        cnt = 0\n        for i in A:\n            c = 1\n            while i > mid:\n                c *= 2\n                i //= 2\n            cnt += c - 1\n            cnt = min(cnt, K)\n        return cnt\n\n    ok, ng = 1 << 60, 0\n    while abs(ok - ng) > 1:\n        mid = (ok + ng) // 2\n        if calc(mid) < K:\n            ok = mid\n        else:\n            ng = mid\n\n    B = []\n    rem = K - calc(ok)\n\n    for i in A:\n        c = 1\n        while i > ok:\n            c *= 2\n            i //= 2\n        if i != ok:\n            B.append((i, c))\n        else:\n            c1 = min(rem, c)\n            c2 = c - c1\n            B.append((i // 2, 2 * c1))\n            B.append((i, c2))\n            rem -= c1\n\n    B.sort(reverse=True)\n    for v, c in B:\n        X -= c\n        if X <= 0:\n            print(\"{:.20f}\".format(v / (1 << 30)))\n            return\n\n\nfor _ in range(int(input())):\n    solve()"
+      ],
+      "text_sha256": "6219cb0ebcd3155c2d3132f0149fb82fa3549d67cd674a4558cc03e478c313db",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc424/abc424_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc424/editorial/13905",
+      "text": "操作の途中のどの瞬間においても、棒の長さはたかだか \\(N+1\\) 種類しかありません。\n同じ長さの棒を適切にまとめて管理し、操作もまとめて行うことでこの問題を十分高速に解くことができます。\n優先度付きキューなどで長さと本数の組を管理することで、現在最も長い棒をすべて（もしくは一部を）半分にすることが \\(O(\\log N)\\) 時間で行えます。\n最も長い棒をすべて半分にする操作がたかだか \\(N\\lfloor\\log _ 2(K+1)\\rfloor\\) 回しか行われないことが示せます。\nすべての棒の長さにわずかな摂動を加えたとすることで、どの棒の長さおよびそれらの \\(2 ^ k\\) 倍もすべて異なると仮定して構いません。\n初期状態における棒をひとつ選び、その長さを \\(L\\) とします。\\(L\\) 由来の長さ \\(L,\\dfrac L2,\\dfrac L4,\\ldots\\) に対して行われた操作が \\(n\\) 回であるとすると、実際に半分にした回数は \\(2 ^ n-1\\) 回となります。\nこれが \\(K\\) 以下でなければならないので、\\(n\\le\\lfloor\\log _ 2(K+1)\\rfloor\\) となります。\n初期状態の \\(N\\) 本の棒についてこれを足すことで、合計の操作回数が \\(N\\lfloor\\log _ 2(K+1)\\rfloor\\) 回以下と評価できます（より精密に評価を行うことで \\(O(N(\\log K-\\log N))\\) 回と評価することができます）。\nよって、同じ長さの棒に対する操作をまとめて行うことで \\(O(N\\log N\\log K)\\) 時間で最終的な棒の長さの分布が得られます。\nあとは得られた分布に対して探索を行えばよく、\\(O(N)\\) 時間や \\(O(N\\log N)\\) 時間などで可能です。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <iomanip>\n#include <queue>\n\nint main() {\n    using namespace std;\n    cout << setprecision(15);\n    unsigned T;\n    cin >> T;\n    for (unsigned t{}; t < T; ++t) []{\n        unsigned N, K, X;\n        cin >> N >> K >> X;\n        // (長さ, 本数) を管理する priority_queue\n        priority_queue<pair<double, unsigned>> pq;\n        for (unsigned i{}; i < N; ++i) {\n            double a;\n            cin >> a;\n            pq.emplace(a, 1); // はじめ、長さ a が 1 本ある（重複があっても気にしない）\n        }\n\n        // 操作を行う\n        while (K) {\n            const auto [a, count]{pq.top()};\n            pq.pop();\n            if (K <= count) { // ここで終わりなら\n                pq.emplace(a / 2, K * 2); // 途中まで操作して\n                pq.emplace(a, count - K); // いくつか残る\n                K = 0;\n                break;\n            } // そうでなければ\n            pq.emplace(a / 2, count * 2); // 全部半分になる\n            K -= count;\n        }\n\n        // 大きいほうから X 番目を求める\n        while (X) {\n            const auto [a, count]{pq.top()};\n            pq.pop();\n            if (X <= count) {\n                cout << a << '\\n';\n                break;\n            }\n            X -= count;\n        }\n    }();\n    return 0;\n}"
+      ],
+      "text_sha256": "7c7eb6d33fd56a8bf9475b5a5632d19da84f49afb3c902e672c0a2127f802987",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc424/abc424_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

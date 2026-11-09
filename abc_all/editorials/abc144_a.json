@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc144_a",
+  "editorials": [
+    {
+      "text": "A: 9x9\nA, B がともに9 以下であるかどうかで場合分けをすればよいです。複数の条件を満たすかどうか\nの判断には論理積(AND) 演算子を用います。以下はC 言語での実装例です。\n1 #include<stdio.h>\n2 int main(){\n3\nint a,b;\n4\nscanf(\"%d%d\",&a,&b);\n5\nif(a<=9 && b<=9)printf(\"%d\\n\",a*b);\n6\nelse printf(\"-1\\n\");\n7 }\n",
+      "text_sha256": "8905d2be5c411075438b46692c2ee7e86d0d08e9093de664bba73ede0f25438c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc144/abc144_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc186_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc186/editorial/402",
+      "text": "入力をソートして\n\\(A_1\\leq\\ldots\\leq A_N\\)\nとして良いです。このとき\n\\(i<j\\)\nに対して\n\\(|A_i-A_j| = A_j-A_i\\)\nとなります。\n各\n\\(i\\)\nについて\n\\(\\sum_{j=i+1}^{N}|A_i-A_j|=(\\sum_{j=i+1}^{N}A_j)-(N-i)A_i\\)\nとなり、これは予め\n\\(A\\)\nの累積和を計算しておくことでそれぞれ\n\\(O(1)\\)\nで求めることができます。よって\n\\(O(N\\log N)\\)\nでこの問題が解けました。",
+      "codes": [],
+      "text_sha256": "3e482147edcac602dee9b05008841320664a672addcab569b5f047e4a84bcffc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc186/abc186_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

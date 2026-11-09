@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc236_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc236/editorial/3277",
+      "text": "\\(T_i \\, (1 \\leq i \\leq M)\\)\nからなる文字列の集合を\n\\(T\\)\nとおきます。\n\\(i \\, (1 \\leq i \\leq N)\\)\n番目の答えが Yes であることは、\n\\(S_i\\)\nが\n\\(T\\)\nに属することと同値です。\nC++ であれば\nstd::set\n、Python であれば\nset\nを用いて実装することができます。\n実装例 (C++) :\n実装例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<string> s(n), t(m);\n    for (string& x : s) {\n        cin >> x;\n    }\n    for (string& x : t) {\n        cin >> x;\n    }\n    set<string> rapid(t.begin(), t.end());\n    for (const string& x : s) {\n        cout << (rapid.count(x) ? \"Yes\" : \"No\") << '\\n';\n    }\n}",
+        "n, m = map(int, input().split())\ns = input().split()\nt = set(input().split())\nfor x in s:\n    print(\"Yes\" if x in t else \"No\")"
+      ],
+      "text_sha256": "3b5eed3fac499348e866f3df7df3f6c2d1362860695fac507041da6caaba8283",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc236/abc236_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

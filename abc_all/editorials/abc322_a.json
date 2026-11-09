@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc322_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc322/editorial/7300",
+      "text": "この問題は文字列の扱いと for 文のような繰り返し文の扱いができるかを問うている問題です。\n問題文を読むと、この問題では次の条件を満たす最小の整数\n\\(n\\)\nが聞かれているとわかります。 (存在しない場合は\n\\(-1\\)\nを出力)\n\\(1 \\leq n \\leq N - 2\\)\n\\(S\\)\nの\n\\(n\\)\n文字目は\nA\n\\(S\\)\nの\n\\(n + 1\\)\n文字目は\nB\n\\(S\\)\nの\n\\(n + 2\\)\n文字目は\nC\nよって、for 文で\n\\(n\\)\nを\n\\(1, 2, \\dots, N-2\\)\nまで走査して、各\n\\(n\\)\nについて条件を満たすかを判定していけばよいです。また、\n\\(S\\)\nの\n\\(n\\)\n文字目が何であるかは多くのプログラミング言語では\nS[n]\nのような配列添え字演算子を利用すれば取得することができます。\nC++, Python による実装例は次の通りです。(実装例を読む際、文字列型の先頭の文字が\nS[0]\nで始まる影響で\n\\(n\\)\nの値が\n\\(1\\)\nずれているのに注意してください。)\nC++\nPython",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n  int N;\n  string S;\n  cin >> N >> S;\n  int ans = -1;\n  for (int i = 0; i < N - 2; i++) {\n    if (S[i] == 'A' and S[i + 1] == 'B' and S[i + 2] == 'C') {\n      ans = i + 1;\n      break;\n    }\n  }\n  cout << ans << endl;\n}",
+        "N = int(input())\nS = input()\nans = -1\nfor i in range(N-2):\n    if S[i] == 'A' and S[i+1] == 'B' and S[i+2] == 'C':\n        ans = i + 1\n        break\nprint(ans)"
+      ],
+      "text_sha256": "02a0de6eea3e124cecc549c0078a169b24e7fcf4ae3fd071aa6c85fe83033241",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc322/abc322_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

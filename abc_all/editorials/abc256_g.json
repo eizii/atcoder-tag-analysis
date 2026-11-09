@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc256_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc256/editorial/4130",
+      "text": "各辺上にある白い石の個数を固定した問題を考えます。すなわち「どの辺上にも白い石が \\(k\\) 個あるような石の置き方は何通りあるか？」という問題を \\(k=0,1,\\ldots,D+1\\) のそれぞれについて解きます。 最初にある頂点に石をおき、時計回り \\(D\\) 個ずつ石の置き方を決めていくことで、次のようなDPを考えることができます。 \\({\\rm DP}_c[i][j]=\\text{最初に置いた石の色が }c \\text{ で、}i\\text{ 番目の辺まで石を置いて、最後に置いた石の色が }j \\text{ となる方法の数}\\) 求める答えは \\({\\rm DP}_{\\rm white}[N][{\\rm white}]+{\\rm DP}_{\\rm black}[N][{\\rm black}]\\) になります。 このDPの遷移は \\(i\\) に依存しないため、行列累乗により \\(O(\\log N)\\) で \\({\\rm DP}_{*}[N][*]\\) を求めることができます。 以上により \\(O(D\\log N)\\) でこの問題が解けました。 実装例(C++) (※この実装例は \\(O(D\\log N+D\\log {\\rm MOD})\\) ですが、適切な実装により \\(O(D\\log N)\\) にできます)",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "e7fdc1a54c92db07ca3f3f5263aff50c592926b81fde6791e7058e491166abb2"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc339_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc339/editorial/9209",
+      "text": "はじめにバスに乗っている乗客の人数を\n\\(x\\)\n人とします。\n\\(i\\)\n回目の停車での乗客の乗り降りの直後の乗客の人数は\n\\(x + \\displaystyle\\sum_{k = 1}^{i} A_k\\)\n人です。\nよって条件を整理すると、各\n\\(0 \\leq i \\leq N\\)\nについて\n\\(x + \\displaystyle\\sum_{k = 1}^{i} A_k \\geq 0\\)\nが成り立つという条件下での\n\\(x + \\displaystyle\\sum_{k = 1}^{N} A_k\\)\nの最小値が本問題の答えとなります(\n\\(i = 0\\)\nのときは\n\\(\\displaystyle\\sum_{k = 1}^{i} A_k = 0\\)\nとしています)。\n各\n\\(0 \\leq i \\leq N\\)\nについて\n\\(x + \\displaystyle\\sum_{k = 1}^{i} A_k \\geq 0\\)\nが成り立つことは\n\\(\\min(x + \\displaystyle\\sum_{k = 1}^{i} A_k) \\geq 0\\)\nが成り立つことと同値で、\n\\(\\min(x + \\displaystyle\\sum_{k = 1}^{i} A_k)  = x + \\min(\\displaystyle\\sum_{k = 1}^{i} A_k)\\)\nより\n\\(m \\coloneqq \\min(\\displaystyle\\sum_{k = 1}^{i} A_k)\\)\nとして\n\\(x + m \\geq 0\\)\nのもとで\n\\(x + \\displaystyle\\sum_{k = 1}^{N} A_k\\)\nを最小化すればよいことがわかります。\nこれは\n\\(x = -m\\)\nととればよく、\n\\(m\\)\nの値は累積和の要領で線形時間で計算できます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<ll> a(n);\n    for (ll &e : a) cin >> e;\n    ll m = 0, sum = 0;\n    for (ll e : a) sum += e, m = min(m, sum);\n    cout << sum - m << '\\n';\n}"
+      ],
+      "text_sha256": "7f3d7921ef513ed6014e2acf446f2b9548a30f15ff9fda2b55be9f4c7063fed2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc339/abc339_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc339/editorial/9213",
+      "text": "最初の時点で0人乗っていたとしてシミュレーションします。\nもしシミュレーションの過程でバスに乗っている人数が負になった場合、”実はバスにはもっと人が乗っていた”と思うことで、その時点でバスに乗っている人数は0だったことにします。\n例えば\n\\(A=(1,-2,2,-1,-2,3)\\)\nのときシミュレーションは次のように進行します：\n最初、バスに乗っている人数は0である\n1人乗ってきて、バスに乗っている人数は1になる\n2人降りて、バスに乗っている人数は-1になってしまう。”実はバスにはもっと人が乗っていた”ことにして、バスに乗っている人数は0になったことにする\n2人乗ってきて、バスに乗っている人数は2になる\n1人降りて、バスに乗っている人数は1になる\n2人降りて、バスに乗っている人数は-1になってしまう。”実はバスにはもっと人が乗っていた”ことにして、バスに乗っている人数は0になったことにする\n3人乗ってきて、バスに乗っている人数は3になる\nこのようにして最後までシミュレーションし終えたときの人数が答えです。なぜなら、これ以上人数を減らすと”実はバスにはもっと人が乗っていた”を最後に発動したタイミングの人数が負になってしまうためです。\n実装例(Python)",
+      "codes": [
+        "input()\ncrr=0\nfor a in map(int,input().split()):\n  crr=max(crr+a,0)\nprint(crr)"
+      ],
+      "text_sha256": "519a49a1d9272ac9c658ef35a4120db0dd9bbca03f505f7b1bb23399b9c313ab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc339/abc339_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

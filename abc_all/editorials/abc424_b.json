@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc424_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc424/editorial/13931",
+      "text": "誰がどの問題を解いたかの情報を管理することを考えます。\n具体的には、\n\\(1\\leq i\\leq N\\)\n,\n\\(1\\leq j\\leq M\\)\nをみたす整数の組\n\\((i,j)\\)\nについて、人\n\\(i\\)\nが問題\n\\(j\\)\nを解いたかどうかを管理するフラグの配列を用意します。最初、すべてのフラグは False です。\nまた、それぞれの人について、その人が全ての問題を解いたことを記録したかのフラグも用意します。こちらのフラグも最初すべて False です。\n最後に、実際に出力する、全ての問題を解いた人を解いたタイミングが早い順番に並べた順に並べるためのリスト (vector) を用意します。\n\\(K\\)\n個のイベントそれぞれについて順番に、次のことを繰り返します。\n人\n\\(A_i\\)\nが問題\n\\(B_j\\)\nを解いたフラグを True に変更します。\nそれぞれの人について、その人がすべての問題を解いたか確認します。人\n\\(i\\)\nがすべての問題を解いており、そのことを記録したかのフラグが False のとき、出力用リストに人\n\\(i\\)\nを追加し、人\n\\(i\\)\nについて記録したかのフラグを True に変更します。\n最後に、リストに記録された人の番号を空白区切りで出力すれば良いです。\nなお、毎度すべてのフラグを確認する上記の手順の計算量は\n\\(O(KNM)\\)\nとなりますが、同じイベントは\n\\(2\\)\n回以上起きないことから、\n\\(K\\leq NM\\)\nであり、計算量は特に\n\\(O(N^2M^2)\\)\nとなります。今回の問題の制約下では十分に高速です。\n実際には、次のように高速化することができます。\n\\(i\\)\n番目のイベントのタイミングで新しくすべての問題を解く可能性があるのは人\n\\(A_i\\)\nのみであるので、フラグを確認するのは人\n\\(A_i\\)\nのみについてでよい。このとき、計算量は\n\\(O(KM)\\)\nとなる。\n同じイベントが\n\\(2\\)\n回以上起きないことから、それぞれの人がどの問題を解いたかを管理する必要はなく、解いた問題数だけ管理すれば良い。このとき、計算量は\n\\(O(K)\\)\nとなる。（空間計算量は愚直に行った場合\n\\(O(N)\\)\nとなる。）\nc++ による実装例（愚直な解法）:\nc++ による実装例（\n\\(O(K)\\)\n解法）:\nPython による実装例（愚直な解法）:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main(void){\n\tint n,m,k;\n\tint a,b,cnt;\n\tbool solved[10][10]={};\n\tbool recorded[10]={};\n\tvector<int>ans;\n\n\tcin>>n>>m>>k;\n\tfor(int ievent=0;ievent<k;ievent++){\n\t\tcin>>a>>b;\n\t\tsolved[a-1][b-1]=true;\n\t\tfor(int i=0;i<n;i++){\n\t\t\tcnt=0;\n\t\t\tfor(int j=0;j<m;j++){\n\t\t\t\tif(solved[i][j])cnt++;\n\t\t\t}\n\t\t\tif((cnt==m)&&(!recorded[i])){\n\t\t\t\tans.push_back(i+1);\n\t\t\t\trecorded[i]=true;\n\t\t\t}\n\t\t}\n\t}\n\n\tint sz=ans.size();\n\tfor(int i=0;i<sz;i++){\n\t\tcout<<ans[i];\n\t\tif(i<(sz-1))cout<<\" \";\n\t\telse cout<<endl;\n\t}\n\treturn 0;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint n,m,k;\n\tint a,b;\n\tint cnt[10]={};\n\tvector<int>ans;\n\n\tcin>>n>>m>>k;\n\tfor(int i=0;i<k;i++){\n\t\tcin>>a>>b;\n\t\tcnt[a-1]++;\n\t\tif(cnt[a-1]==m)ans.push_back(a);\n\t}\n\n\tint sz=ans.size();\n\tfor(int i=0;i<sz;i++){\n\t\tcout<<ans[i];\n\t\tif(i<(sz-1))cout<<\" \";\n\t\telse cout<<endl;\n\t}\n\treturn 0;\n}",
+        "n,m,k=map(int, input().split())\n\nsolved=[[False for j in range(m)]for i in range(n)]\nrecorded=[False for i in range(n)]\nans=[]\n\nfor ievent in range(k):\n    a,b=map(int, input().split())\n    solved[a-1][b-1]=True\n    for i in range(n):\n        cnt=0\n        for j in range(m):\n            if solved[i][j]:\n                cnt+=1\n        if cnt==m and recorded[i]==False:\n            ans.append(i+1)\n            recorded[i]=True\n\nprint(*ans)"
+      ],
+      "text_sha256": "43df9102a28c28d1ce5051ce1661e1d83aa20d74738228d1be93f14a18dfb7ad",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc424/abc424_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

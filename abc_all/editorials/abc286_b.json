@@ -1,0 +1,31 @@
+{
+  "problem_id": "abc286_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5586",
+      "text": "この問題は、文字列を扱う問題です。文字列の操作は競プロで頻出なので、解けなかった方はぜひ学んでみましょう。\nna\nを\nnya\nで置き換える操作は、例えば以下の方法で実現できます。\nfor ループを用いて\nna\nを\n\\(1\\)\nつ見つける。\n見つけた\nna\nの\nn\nと\na\nの間に\ny\nを挿入する。\n上記の方法を\nna\nが見つからなくなるまで繰り返せばよいです。文字列の挿入には\n.insert()\nが c++ でも python でも使えます。\n計算量を考えます。\n.insert()\nを\n\\(1\\)\n回行うのにかかる計算量は\n\\(\\mathrm{O}(N)\\)\nなので、全体で\n\\(\\mathrm{O}(N^2)\\)\nとなります。\n実装例(c++):\n実装例(Python):\n聡明な読者の方はお気づきかもしれませんが、この問題は実は\n\\(\\mathrm{O}(N)\\)\nで解くこともできます。\n配列やリストの都合上、末尾に追加するのは高速ですが、途中に挿入するのは遅いので、末尾への追加のみを用いて上の方法を行いたいです。これは以下の実装例に示す方針で可能です。\n実装例(Python):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    string s;\n    cin >> n >> s;\n    while(true) {\n        bool fin = 1;\n        for(int i = 0; i < (int)s.size() - 1; i++) {\n            if(s.substr(i, 2) == \"na\") {\n                s.insert(s.begin() + i + 1, 'y');\n                fin = 0;\n                break;\n            }\n        }\n        if(fin) break;\n    }\n    cout << s << endl;\n}",
+        "n = int(input())\ns = list(input())\nwhile True:\n    fin = 1\n    for i in range(len(s) - 1):\n        if s[i] == \"n\" and s[i + 1] == \"a\":\n            s.insert(i + 1, \"y\")\n            fin = 0\n            break\n    if fin:\n        break\nprint(\"\".join(s))",
+        "n = int(input())\ns = list(input())\nans = []\nfor i in range(n):\n    if i >= 1 and ans[-1] == \"n\" and s[i] == \"a\":\n        ans.append(\"y\")\n    ans.append(s[i])\nprint(\"\".join(ans))"
+      ],
+      "text_sha256": "66e1614e61ea360a4ea4d2d2088f5c5453a3a8e3fc22fa9657d57ea0cbb65727",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc286/abc286_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5589",
+      "text": "公式解説では、言語に備わった関数を用いない実装方針を説明しましたが、いくつかの言語では文字を置き換えてくれる便利な関数が存在します。このような関数を知っていると実装が楽なこともあります。\n実装例(c++):\n実装例(Python):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    string s;\n    cin >> n >> s;\n    cout << regex_replace(s, regex(\"na\"), \"nya\") << endl;\n}",
+        "input()\nprint(input().replace(\"na\", \"nya\"))"
+      ],
+      "text_sha256": "5efe028708c4079a16b6e5e3c41ac0c7a40bc54c1658694885e1cacab3ec3de3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc286/abc286_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

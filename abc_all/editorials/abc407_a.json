@@ -1,0 +1,22 @@
+{
+  "problem_id": "abc407_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc407/editorial/13102",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nC++入門 AtCoder Programming Guide for beginners (APG4b)\nは、競技プログラミングのための C++ 入門用コンテンツです。\nPython入門 AtCoder Programming Guide for beginners (APG4bPython)\nは、競技プログラミングのための Python 入門用コンテンツです。\n大きく分けて、次の \\(2\\) つの方針があります。\n浮動小数点数（float や double, Decimal など）の演算を用いる方法\n整数の演算のみを用いる方法\n\\(2\\) つの方針それぞれについて解説します。\n1. 浮動小数点数の演算を用いる方法\n浮動小数点数を扱うことができる多くの言語には、「四捨五入を行う」もしくはそれに類する処理を行う関数があります。\nこの問題は、そのような関数を使うことで解くことができます。\n浮動小数点数どうしの四則演算には一般に誤差が含まれますが、今回の問題の制約のもとで（自然な実装を行えば）正しい答えを求められることが示せます。\n割り算の結果、\\(\\dfrac AB\\) の小数部分が \\(\\dfrac12\\) 未満なのに結果の小数部分が \\(\\dfrac12\\) 以上になったり、その逆が起きたりすると誤った答えが出てしまいます（入力に含まれる誤差を考えなければ、round 関数は正確な値を返します）。\n\\(A,B\\) は多くの浮動小数点数で正確に表現できるため、誤差が生じうるのは割り算のみです。\n（IEEE 754 に従っていれば）浮動小数点数の割り算は真の値を正しく丸めたものが得られることが保証されています。\nここから、特に割り算の結果の真の値とある浮動小数点数 \\(\\alpha\\) の間に別の浮動小数点数がある場合、結果が \\(\\alpha\\) に丸められることはないことが示せます。\n制約の範囲内で \\(\\dfrac AB\\) と整数 \\(n\\) に対する \\(n+\\dfrac 12\\) との間には必ず別の浮動小数点数が（十分な仮数部の長さがあれば）存在することが示せるので、常に正しい答えが得られることが示せます。\n実装例は以下のようになります。\n2. 整数の演算のみを用いる方法\n\\(\\dfrac AB\\) に最も近い整数は、\\(\\dfrac AB+\\dfrac12\\) 以下の最大の整数です。\n整数を整数で割った値を切り捨てて整数にしたものを求める方法は多くのプログラミング言語に用意されているため、\\(\\dfrac AB+\\dfrac12=\\dfrac{2A+B}{2B}\\) を切り捨てて整数にしたものを求めればよいです。\n実装例は以下のようになります。\n\\(\\left\\lfloor\\dfrac{\\lfloor a/b\\rfloor}c\\right\\rfloor=\\left\\lfloor\\dfrac a{bc}\\right\\rfloor\\) や、\\(\\left\\lfloor\\dfrac{ab+c}a\\right\\rfloor=b+\\left\\lfloor\\dfrac ca\\right\\rfloor\\) などを用いることで（ここで、\\(\\lfloor x\\rfloor\\) は \\(x\\) 以下の最大の整数です）、次のような実装でも正しい答えが得られることが示せます。",
+      "codes": [
+        "#include <iostream>\n#include <cmath>\n\nusing namespace std;\n\nint main() {\n    int A, B;\n    cin >> A >> B;\n\n    // A / B を四捨五入して整数にしたものを出力\n    cout << round(static_cast<double>(A) / B) << endl;\n\n    return 0;\n}",
+        "A, B = map(int, input().split())\n\n# A / B を四捨五入して整数にしたものを出力\nprint(round(A / B))",
+        "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    int A, B;\n    cin >> A >> B;\n\n    // (2A + B) / 2B を切り捨てたものが答え\n    cout << (2 * A + B) / (2 * B) << endl;\n\n    return 0;\n}",
+        "A, B = map(int, input().split())\n\n# (2A + B) / 2B を切り捨てたものが答え\nprint((2 * A + B) // (2 * B))",
+        "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    int A, B;\n    cin >> A >> B;\n\n    // (A + B / 2) / B を切り捨てたものが答え\n    cout << (A + B / 2) / B << endl;\n\n    return 0;\n}",
+        "A, B = map(int, input().split())\n\n# (A + B / 2) / B を切り捨てたものが答え\nprint((A + B // 2) // B)"
+      ],
+      "text_sha256": "3686553c4ae5c7e658276c8ee42fe0162dc1a871ed4069fcf9dc59e83d960ad4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc407/abc407_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

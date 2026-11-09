@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc242_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc242/editorial/3519",
+      "text": "結論として、出力すべき文字列、すなわち\n\\(S\\)\nの各文字を並び替えて得られる文字列\n\\(S'\\)\nのうち辞書順で最小のものは、\n\\(S\\)\nの各文字を昇順に並び替えて得られる文字列です。\n理由を説明します。\n\\(S\\)\nの各文字を並び替えて得られる文字列\n\\(S' = S'_1 S'_2 \\ldots S'_N\\)\nにおいて、\n\\(S'_i \\gt S'_{i+1}\\)\nが成り立つような\n\\(i\\ (1 \\leq i \\leq N-1)\\)\nが存在したとしましょう。するとこのとき、\n\\(S'_i\\)\nと\n\\(S'_{i+1}\\)\nを入れ替えて得られる文字列は\n\\(S'\\)\nよりも辞書順に真に小さいです。\nそのため\n\\(S = S_1 S_2 \\ldots S_N\\)\nに対して、「\n\\(S_i \\gt S_{i+1}\\)\nなる\n\\(i\\)\nについて\n\\(S_i\\)\nと\n\\(S_{i+1}\\)\nを入れ替える」という操作を\n\\(S_i \\gt S_{i+1}\\)\nなる\n\\(i\\)\nが存在しなくなるまで繰り返すことで辞書順で最小の並び替え\n\\(T\\)\nを得ることができます。\nこのとき、\n\\(T\\)\nは\n\\(S\\)\nの各文字を昇順で並び替えて得られる文字列に等しいです。\nよってこの問題は、「文字列\n\\(S\\)\nの各文字を昇順に並び替えて出力せよ」という問題に等しいです。\n\\(S\\)\nを昇順に並び替えること自体は、多くのプログラミング言語において標準ライブラリとして実装されている sort 関数等を用いることで\n\\(O(N \\log N)\\)\nで行うことができ、高速です。\n実装例 (C++)\nPython を使用する場合、文字列に対して sorted 関数を用いるとそれが list 型に変換されてしまうことに注意してください。\n実装例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tstring S; cin >> S;\n\tsort(S.begin(),S.end());\n\tcout << S << endl;\n}",
+        "s = input()\nprint(''.join(sorted(s)))"
+      ],
+      "text_sha256": "75bf394cb1684b0303f07333253bd82ff581b70f3f6fb79168a57e46797e7aff",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc242/abc242_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc242/editorial/3570",
+      "text": "\\(S'\\)\nは\n\\(S\\)\nの並び替えであるので、各英小文字の文字数は同数です。\nまた、公式解説にも載っているように、\n\\(S'\\)\nは\n\\(S\\)\nの各文字を昇順に並び替えたものです。\n従って、\n\\(c=\\)\na\n,\nb\n,…\nz\nの順番に\n\\(c\\)\nを\n\\(S\\)\nに含まれる数だけ出力するという操作をすることでこの問題を解くことができます。計算量は\n\\(O(N)\\)\nです。\n実装例 (Java)\nまた、最初に各文字が\n\\(S\\)\nに何回ずつ登場するかを保持する配列を持っておくことでより高速に解くことができます。\n実装例 (Java)",
+      "codes": [
+        "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        char[] s = sc.next().toCharArray();\n        for (int i = 0; i < 26; i++) {\n            for (char c : s) {\n                if ('a' + i == c) {\n                    System.out.print(c);\n                }\n            }\n        }\n        sc.close();\n    }\n}",
+        "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        char[] s = sc.next().toCharArray();\n        int[] a = new int[26];\n        for (char c : s) {\n            a[c - 'a']++;\n        }\n        for (int i = 0; i < 26; i++) {\n            for (int j = 0; j < a[i]; j++) {\n                System.out.print((char) ('a' + i));\n            }\n        }\n        sc.close();\n    }\n}"
+      ],
+      "text_sha256": "1cbce1fe4df1b81c10d7aaed9ed53635283b5b0ff8a74179c49612826badbf24",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc242/abc242_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

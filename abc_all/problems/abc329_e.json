@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc329_e",
+  "title": "Stamp",
+  "contests": [
+    {
+      "contest_id": "abc329",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1539,
+  "raw_difficulty": 1539,
+  "contest_id": "abc329",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc329/tasks/abc329_e",
+  "statement": "配点 : 475 点 問題文 英大文字からなる長さ N の文字列 S と、英大文字からなる長さ M\\ (\\leq N) の文字列 T が与えられます。 # のみからなる長さ N の文字列 X があります。\n以下の操作を好きな回数行うことで、 X を S に一致させることができるか判定してください。 X の中から連続する M 文字を選び、 T で置き換える。 制約 1 \\leq N \\leq 2\\times 10^5 1 \\leq M \\leq \\min(N, 5 ) S は英大文字からなる長さ N の文字列 T は英大文字からなる長さ M の文字列 入力 入力は以下の形式で標準入力から与えられる。 N M S T 出力 X を S に一致させることができるならば Yes を、できないならば No を出力せよ。 入力例 1 7 3\nABCBABC\nABC 出力例 1 Yes 以下、 X の l 文字目から r 文字目までの部分を X[l:r] と表記します。 次のように操作を行うことで、 X を S に一致させることができます。 X[3:5] を T で置き換える。 X= ##ABC## になる。 X[1:3] を T で置き換える。 X= ABCBC## になる。 X[5:7] を T で置き換える。 X= ABCBABC になる。 入力例 2 7 3\nABBCABC\nABC 出力例 2 No どのように操作を行っても、 X を S に一致させることはできません。 入力例 3 12 2\nXYXXYXXYYYXY\nXY 出力例 3 Yes",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英大文字からなる長さ N の文字列 S と、英大文字からなる長さ M\\ (\\leq N) の文字列 T が与えられます。 # のみからなる長さ N の文字列 X があります。\n以下の操作を好きな回数行うことで、 X を S に一致させることができるか判定してください。 X の中から連続する M 文字を選び、 T で置き換える。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2\\times 10^5 1 \\leq M \\leq \\min(N, 5 ) S は英大文字からなる長さ N の文字列 T は英大文字からなる長さ M の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M S T"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 X を S に一致させることができるならば Yes を、できないならば No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 7 3\nABCBABC\nABC"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes 以下、 X の l 文字目から r 文字目までの部分を X[l:r] と表記します。 次のように操作を行うことで、 X を S に一致させることができます。 X[3:5] を T で置き換える。 X= ##ABC## になる。 X[1:3] を T で置き換える。 X= ABCBC## になる。 X[5:7] を T で置き換える。 X= ABCBABC になる。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 7 3\nABBCABC\nABC"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No どのように操作を行っても、 X を S に一致させることはできません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 12 2\nXYXXYXXYYYXY\nXY"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc329/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:00.730386+00:00",
+  "statement_sha256": "0af515b311e0e5a55968634c125cb697fd2d01635b6ed8df908c9bd027011195",
+  "editorials": []
+}

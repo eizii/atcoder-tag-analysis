@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc466_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc466/editorial/22630",
+      "text": "\\(0,1,\\ldots,X-1\\) の各整数を \\(M\\) で割ったあまりに置き換えることを考えます。 \\(M\\) 個の連続する整数ごとにあまり \\(0,1,\\ldots,M-1\\) がそれぞれ \\(1\\) 回ずつ現れます。したがって、 \\(0,1,\\ldots,M-1\\) という並びが \\(\\displaystyle \\left\\lfloor \\frac{X}{M}\\right\\rfloor\\) 回現れ、さらにあまりの部分として \\(0,1,\\ldots,X\\bmod M-1\\) が1回現れます。 したがって、現在の値の集合を \\([0,x)\\) が \\(k\\) 個、という形で多重集合として持つと、 \\(1\\) 回 \\(\\bmod\\) の演算を作用させる度に各区間は \\(2\\) つ以下の区間の和として表すことができます。 このシミュレーションは各区間を priority queue で保持し、さらに終端 \\(x\\) が同じ区間をまとめて操作することで高速に動作します。 計算量解析： \\(1\\) 回 \\(\\bmod \\ M\\) の演算を作用させると、 \\([0,x)\\) は \\([0,M)\\) と \\(\\displaystyle \\left[0,x \\bmod M \\right)\\) になります。 \\([0,M)\\) は全ての区間で共通です。また、 \\(x \\bmod M\\) の値は \\(x\\) または \\(\\displaystyle \\frac x2\\) 未満なので、 \\([0,M)\\) を除いて考えた場合 \\(1\\) つの区間から生成される区間は \\(O(\\log x)\\) 個です。 各作用で \\([0,M)\\) が出てくることを加味すると、priority queue の中の区間の個数は最大で \\(\\displaystyle O\\left(N \\right)\\) であると評価できます。したがって、全体の計算量は \\(O(N\\log N\\log X)\\) となります。 以上を適切に実装することでこの問題に正答することができます。 実装例(C++) 実装例(Python3)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nvoid solve() {\n\tint n;\n\tlong x;\n\tcin >> n >> x;\n\tvector<long> a(n);\n\tfor (long &v : a) cin >> v;\n\tpriority_queue<pair<long, long>> pq;\n\tpq.push({x + 1, 1});\n\tfor (long v : a) {\n\t\twhile (!pq.empty() && pq.top().first > v) {\n\t\t\tauto [val, cnt] = pq.top();\n\t\t\tpq.pop();\n\t\t\twhile (!pq.empty() && pq.top().first == val) {\n\t\t\t\tcnt += pq.top().second;\n\t\t\t\tpq.pop();\n\t\t\t}\n\t\t\tpq.push({v, val / v * cnt});\n\t\t\tif (val % v != 0) pq.push({val % v, cnt});\n\t\t}\n\t}\n\tlong ans = -1;\n\twhile (!pq.empty()) {\n\t\tans += pq.top().second;\n\t\tpq.pop();\n\t}\n\tcout << ans << '\\n';\n}\nint main() {\n\tios::sync_with_stdio(false);\n\tcin.tie(nullptr);\n\tint t;\n\tcin >> t;\n\twhile (t--) solve();\n}\n",
+        "import sys\nfrom heapq import heappush, heappop\n\n\ninput = sys.stdin.readline\n\n\nfor _ in range(int(input())):\n    n, x = map(int, input().split())\n    a = list(map(int, input().split()))\n    pq = [(-(x + 1), 1)]\n    for v in a:\n        while pq and -pq[0][0] > v:\n            val, cnt = heappop(pq)\n            val = -val\n            while pq and -pq[0][0] == val:\n                cnt += heappop(pq)[1]\n            heappush(pq, (-v, (val // v) * cnt))\n            if val % v:\n                heappush(pq, (-(val % v), cnt))\n    ans = -1\n    while pq:\n        ans += heappop(pq)[1]\n    print(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "dbb8edfab5ae6d4e11f32e3e889255afd2ecdc80804cfef7f910d6edb0a374d7"
+    }
+  ],
+  "status": "available"
+}

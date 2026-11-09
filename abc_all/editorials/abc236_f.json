@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc236_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc236/editorial/3287",
+      "text": "次の貪欲なアルゴリズムによって、この問題に正解できます。\nまず、スパイスを値段の昇順にソートします。つまり、\n\\(c_{p_1} \\leq c_{p_2} \\leq \\cdots \\leq c_{p_{2^N-1}}\\)\nとなるように\n\\((1, 2, \\ldots, 2^N-1)\\)\nの順列\n\\((p_1, p_2, \\ldots, p_{2^N-1})\\)\nを定めます。\nまた、\n\\(S\\)\nを空集合とします。\nその後、\n\\(i = 1, 2, \\ldots, 2^N-1\\)\nの順に、次を行います：\n\\(S\\)\nの要素から辛さ\n\\(p_i\\)\nを作れるか、つまり、\n\\(p_i = x_1 \\oplus x_2 \\oplus  \\cdots \\oplus x_m\\)\nとなる\n\\(x_1, x_2, \\ldots, x_m \\in S\\)\nが存在するかを判定します。\n\\(S\\)\nの要素から\n\\(p_i\\)\nを作れない場合は、\n\\(S\\)\nに\n\\(p_i\\)\nを追加します。\n最後に、\n\\(C(S) := \\sum_{i \\in S} c_i\\)\nを答えとして出力します。\n\\(S\\)\nの要素から\n\\(p_i\\)\nを作れるかの判定には、\n\\(1, 2, \\ldots, 2^N-1\\)\nそれぞれについて\n\\(b[i] := \\)\n(\n\\(S\\)\nに現在含まれる要素から辛さ\n\\(i\\)\nが作れるか？ true / false)\nを保持し、\n\\(S\\)\nに要素を追加するたびに\n\\(\\mathrm{O}(2^N)\\)\n時間で\n\\(b\\)\nを更新していけば良いです。\nまた、\n\\(S\\)\nから\n\\(m\\)\n種類の辛さ\n\\(a_1, a_2, \\ldots, a_m\\)\nを作れるとき、\n上記のアルゴリズムで\n\\(S\\)\nに\n\\(x\\)\nが追加されると、新たに\n\\(m+1\\)\n種類の辛さ\n\\(x, x  \\oplus a_1, x \\oplus a_2, \\ldots, x \\oplus a_m\\)\nが作れるようになり、\n\\(S \\cup \\lbrace x\\rbrace\\)\nからは\n\\(2m+1\\)\n種類の辛さを作れるようになります。\n\\(S\\)\nに要素を追加するたびに、作れる辛さの種類は元の\n\\(m\\)\n種類から\n\\(2m+1\\)\n種類に増えるので、上記のアルゴリズムで\n\\(S\\)\nにスパイスを追加する回数は\n\\(N\\)\n回です。\n以上より、この問題を\n\\(\\mathrm{O}(N\\cdot 2^N)\\)\n時間で解くことができます。\nアルゴリズムの正当性\n上記のアルゴリズムで正しい答えが求められることを以下で示します。\n\\(S\\)\nの要素から\n\\(1, 2, \\ldots, 2^N-1\\)\nをすべて作れるとき、\n\\(S\\)\nを\n良い集合\nということにします。\n上記のアルゴリズムで、\n\\(p_1, p_2, \\ldots, p_{i-1}\\)\nについては\n\\(S\\)\nに追加するかをすでに決定済みで、\n\\(p_i\\)\nを\n\\(S\\)\nに追加するかをこれから決める場面を考えます。次の\n\\(2\\)\nつを示します。\n\\(S\\)\nにすでに含まれる要素から\n\\(p_i\\)\nを作れるときは、\n\\(p_i\\)\nを\n\\(S\\)\nに追加しなくてもよい\n\\(S\\)\nにすでに含まれる要素から\n\\(p_i\\)\nを作れないときは、\n\\(p_i\\)\nを\n\\(S\\)\nに追加しても損をしない\n1. の証明\nある\n\\(x_1, x_2, \\ldots, x_m \\in S\\)\nによって、\n\\(p_i = x_1 \\oplus x_2 \\oplus \\cdots \\oplus x_m\\)\nと表されるとします。\nもし仮にその場で\n\\(p_i\\)\nを\n\\(S\\)\nに追加し、さらにその後\n\\(p_{i+1}, p_{i+2}, \\ldots, p_{2^N-1}\\)\nのうちのいくつかが\n\\(S\\)\nに追加されて良い集合\n\\(\\hat{S}\\)\nが完成したとします。\n\\(\\hat{S}\\)\nは良い集合なので、任意の\n\\(z = 1, 2, \\ldots, 2^N-1\\)\nに対して、\nある\n\\(y_1, y_2, \\ldots, y_n \\in \\hat{S}\\)\nが存在して、\n\\(z = y_1 \\oplus y_2 \\oplus \\cdots \\oplus y_n\\)\nと表せます。\nここでもし、\n\\(y_1, y_2, \\ldots, y_n\\)\nの中に\n\\(p_i\\)\nがあったとしても（一般性を失うことなく\n\\(y_1 = p_i\\)\nとする）、\n\\[z = p_i \\oplus y_2 \\oplus \\cdots \\oplus y_n =\nx_1 \\oplus x_2 \\oplus \\cdots \\oplus x_m \\oplus y_2 \\oplus y_3 \\oplus y_n\\]\nとなり、\n\\(p_i\\)\nを用いずに\n\\(S \\setminus \\lbrace p_i \\rbrace\\)\nの要素だけから\n\\(z\\)\nを作ることができます。\nつまり、\n\\(\\hat{S} \\setminus \\lbrace p_i \\rbrace\\)\nも良い集合です。\nよって、\n\\(S\\)\nにすでに含まれる要素から\n\\(p_i\\)\nを作れるときは、\n\\(p_i\\)\nを\n\\(S\\)\nに追加しなくてもよいことがわかります。\n2. の証明\n\\(S\\)\nの要素から\n\\(p_i\\)\nを作れないと仮定します。\nもし仮に\n\\(p_i\\)\nを\n\\(S\\)\nに追加しないことにし、さらにその後\n\\(p_{i+1}, p_{i+2}, \\ldots, p_{2^N-1}\\)\nのうちのいくつかが\n\\(S\\)\nに追加されて、良い集合\n\\(\\hat{S}\\)\nが完成したとします。\n\\(\\hat{S}\\)\nは良い集合なので、ある\n\\(x_1, x_2, \\ldots, x_m \\in \\hat{S}\\)\nによって、\n\\(p_i = x_1 \\oplus x_2 \\oplus \\cdots \\oplus x_m\\)\nと表せます。\nこのとき、\n\\[x_1 = p_1 \\oplus x_2 \\oplus x_3 \\oplus \\cdots \\oplus x_m \\]\nが成り立ちます。\nまた、\n\\(p_i\\)\nは\n\\(S\\)\nの要素からは作れないと仮定したので、\n\\(x_1, x_2, \\ldots, x_m\\)\nのうち少なくとも一つは\n\\(S\\)\nに含まれません。\n一般性を失わず\n\\(x_1 \\not\\in S\\)\nとします。\n\\(\\hat{S}\\)\nは良い集合なので、任意の\n\\(z = 1, 2, \\ldots, 2^N-1\\)\nに対して、\nある\n\\(y_1, y_2, \\ldots, y_n \\in \\hat{S}\\)\nが存在して、\n\\(z = y_1 \\oplus y_2 \\oplus \\cdots \\oplus y_n\\)\nと表せます。\nここでもし、\n\\(y_1, y_2, \\ldots, y_n\\)\nの中に\n\\(x_1\\)\nがあったとしても（一般性を失うことなく\n\\(y_1 = x_1\\)\nとする）、\n\\[z = x_1 \\oplus y_2 \\oplus \\cdots \\oplus y_n = p_i \\oplus x_2 \\oplus \\cdots \\oplus x_m \\oplus y_2 \\oplus y_3 \\oplus y_n\\]\nとなり、\n\\((\\hat{S} \\cup \\lbrace p_i \\rbrace) \\setminus \\lbrace x_1 \\rbrace\\)\nの要素だけで\n\\(z\\)\nを作ることができます。\nつまり、\n\\((\\hat{S} \\cup \\lbrace p_i \\rbrace) \\setminus \\lbrace x_1 \\rbrace\\)\nも良い集合です。\nまた、\n\\(x_1 \\not\\in S\\)\nより\n\\(c_{p_i} \\leq c_{x_1}\\)\nが成り立つので、\n\\(C((\\hat{S} \\cup \\lbrace p_i \\rbrace) \\setminus \\lbrace x_1 \\rbrace) \\leq C(\\hat{S})\\)\nです。\nしたがって、\n\\(S\\)\nにすでに含まれる要素から\n\\(p_i\\)\nを作れないときは、\n\\(p_i\\)\nを\n\\(S\\)\nに追加しても損をしないことがわかります。",
+      "codes": [],
+      "text_sha256": "de8906730345ca7e90d0a44e50c58af0a0ecf0b29a3f0e1599fb2c41b65c998f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc236/abc236_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc236/editorial/3312",
+      "text": "公式解説の方針において、\n\\(S\\)\nの要素から辛さ\n\\(p_i\\)\nを作れるかを判定するパートがあり、この周辺についての別解を紹介します。\n\\(S\\)\nの要素から辛さ\n\\(p_i\\)\nを作れる必要十分条件は\n\\(S\\)\nについて基底を取った際、それらのxorを組み合わせて\n\\(p_i\\)\nが得られることです。この判定は\n\\(S\\)\nの基底をbasesとして以下のような疑似コードで行えます。\n\\(S\\)\nの基底は最初は空集合として、上の疑似コード(の10行目の部分)においてelseに分岐した際にbasesにnowを入れることで管理できます。",
+      "codes": [
+        "def can_make(n):\n    now = n\n\n    for base in bases:\n        now = min(now, now ^ base)\n\n    if now == 0:\n        return True\n    else:\n        bases.append(now)\n        return False"
+      ],
+      "text_sha256": "45bba0a5b6be5bc14ce8324279b9bdbe2154c17d74dab894b4d12215f842c6c2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc236/abc236_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc236/editorial/3418",
+      "text": "掃き出し法によって基底を求めているのだと捉えるとコードが書きやすかったので、誰かの役に立てばと思いメモを貼っておきます。\n\\(N\\)\n桁の\n\\(2\\)\n進数は、\n\\(\\mathbb F_2\\)\nを成分とする\n\\(N\\)\n次元のベクトルとみることができます。この見方をしたとき、本問は\n\\((2^N-1)\\)\n本のベクトルから何本かを選んで、ベクトル空間の基底をつくる問題といえます。\nベクトル空間の生成元たちが与えられているとき、そこからいくつかのベクトルを選んで基底をつくる方法としては、掃き出し法が有名です。\n詳細は略しますが、本問でいえば、\n\\((2^N-1)\\)\n行\n\\(N\\)\n列の行列を考えて、前進消去といわれる操作を行うことにより、すでに基底に採用されたベクトルから生成されるベクトルを消去していきます。\nそして、最後まで消去されなかった\n\\(N\\)\n本のベクトルが基底というわけです。\nところで、本問では基底であれば何でもよいというわけではなく、その中でも特に価格が最も安くなるような選び方をしなければなりません。\nそのために、あらかじめ行の入れ替えを行い、価格の安いベクトルほど若い行番号となるようにソートしておきます。そして、若い行番号から順に貪欲に採用していけばよいというのは、公式解説などにあるとおりです。\nこのとき、上から順に処理していってある対角線上の成分が\n\\(0\\)\nになってしまっているときも、その行で右の方を見て\n\\(0\\)\nでない成分があれば、その行は採用しなければなりません。これは、掃き出し法の言葉で言えば、横方向のピボット選択をして、今採用した行でビットが立っている最も上位の桁をピボットとしていることになります。\nこれをコードにすると次のようになります（D言語）。\nj\nが行列の行番号に相当し、\nts[j]\nが初めにその行にあったベクトル、\nxs[j]\nが現在（前進消去の影響を受けて）その行に書いてあるベクトルです。\nhttps://atcoder.jp/contests/abc236/submissions/29327488",
+      "codes": [
+        "import std;\nvoid main(){\n  int n = readln.chomp.to!int;\n  long[] cs = [0L] ~ readln.chomp.split.to!(long[]);\n    // cs[t]: 番号tのスパイスの値段 ※0始まり\n\t\n  int[] ts = (1<<n).iota.array;\n  ts.sort!((a, b) => cs[a] < cs[b]);\n    // ts[j]: j番目に安いスパイスの番号\n\t\n  int[] xs = (1<<n).iota.array;\n    // xs[t]: 番号tのスパイスが現在持っているビットパターン\n\t\n  long ans;\n  foreach(j, t; ts){\n    if(xs[t] == 0) continue;\n    ans += cs[t];\n    foreach(t2; ts[j + 1 .. $]) xs[t2] = min(xs[t2], xs[t2] ^ xs[t]);\n      // 掃き出し法の要領で，未検討のスパイスのビットパターンを更新する\n    }\n  ans.writeln;\n}"
+      ],
+      "text_sha256": "4aeeb41923e46750e6b3bbb35f52e6e278bacbb18ebbc5c7a7a3156ae04a7e0f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc236/abc236_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

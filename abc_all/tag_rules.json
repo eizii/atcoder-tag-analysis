@@ -1,0 +1,1139 @@
+{
+  "version": "abc-all-evidence-rules-v2",
+  "note": "Name and implementation evidence creates provisional tags, not confirmed applicability.",
+  "aliases": {
+    "T001": [
+      "Binary Indexed Tree",
+      "Fenwick Tree",
+      "Fenwick木",
+      "BIT木",
+      "Binary-Indexed-Tree",
+      "フェニック木"
+    ],
+    "T002": [
+      "Lazy Segment Tree",
+      "遅延セグメント木",
+      "遅延評価セグメント木",
+      "遅延伝播セグメント木"
+    ],
+    "T003": [
+      "Segment Tree",
+      "セグメント木",
+      "セグ木"
+    ],
+    "T004": [
+      "Sparse Table",
+      "スパーステーブル"
+    ],
+    "T005": [
+      "Union-Find",
+      "UnionFind",
+      "Union Find",
+      "Disjoint Set Union",
+      "DSU"
+    ],
+    "T006": [
+      "Wavelet Matrix",
+      "WaveletMatrix",
+      "ウェーブレット行列"
+    ],
+    "T007": [
+      "Deque",
+      "両端キュー"
+    ],
+    "T008": [
+      "連想配列",
+      "ハッシュマップ",
+      "hash map",
+      "unordered_map"
+    ],
+    "T009": [
+      "Multiset",
+      "多重集合"
+    ],
+    "T010": [
+      "Priority Queue",
+      "優先度付きキュー",
+      "優先順位付きキュー",
+      "ヒープ"
+    ],
+    "T011": [
+      "Queue",
+      "キュー"
+    ],
+    "T012": [
+      "平衡二分探索木のset",
+      "ordered set",
+      "unordered_set"
+    ],
+    "T013": [
+      "Stack",
+      "スタック"
+    ],
+    "T014": [
+      "平衡二分探索木",
+      "平衡二分木",
+      "balanced binary search tree"
+    ],
+    "T015": [
+      "永続データ構造",
+      "永続配列",
+      "永続セグメント木",
+      "persistent segment tree"
+    ],
+    "T016": [
+      "Convex Hull Trick",
+      "Li Chao Tree",
+      "Li Chao",
+      "CHT"
+    ],
+    "T017": [
+      "bit DP",
+      "bitDP",
+      "bitmask DP",
+      "ビットDP",
+      "集合DP",
+      "部分集合DP",
+      "部分集合 DP"
+    ],
+    "T018": [
+      "きたまさ法",
+      "Kitamasa"
+    ],
+    "T019": [
+      "インラインDP"
+    ],
+    "T020": [
+      "全方位木DP",
+      "全方位DP",
+      "rerooting"
+    ],
+    "T021": [
+      "区間DP",
+      "区間 DP",
+      "interval DP"
+    ],
+    "T022": [
+      "動的計画法",
+      "Dynamic Programming",
+      "DP"
+    ],
+    "T023": [
+      "戻すDP"
+    ],
+    "T024": [
+      "挿入DP"
+    ],
+    "T025": [
+      "文字列DP",
+      "文字列 DP"
+    ],
+    "T026": [
+      "期待値DP",
+      "期待値 DP"
+    ],
+    "T027": [
+      "木DP",
+      "木 DP",
+      "tree DP"
+    ],
+    "T028": [
+      "桁DP",
+      "桁 DP",
+      "digit DP"
+    ],
+    "T029": [
+      "確率DP",
+      "確率 DP"
+    ],
+    "T030": [
+      "行列累乗",
+      "行列の累乗",
+      "行列のべき乗",
+      "matrix exponentiation"
+    ],
+    "T031": [
+      "二部マッチング",
+      "二部最大マッチング",
+      "bipartite matching"
+    ],
+    "T032": [
+      "最大流",
+      "最大フロー",
+      "maximum flow",
+      "max flow",
+      "maxflow"
+    ],
+    "T033": [
+      "最小カット",
+      "minimum cut",
+      "min-cut"
+    ],
+    "T034": [
+      "最小費用流",
+      "最小費用最大流",
+      "min cost flow",
+      "min-cost flow"
+    ],
+    "T035": [
+      "燃やす埋める",
+      "燃やす・埋める"
+    ],
+    "T036": [
+      "Grundy数",
+      "Grundy 数",
+      "Grundy",
+      "Sprague-Grundy"
+    ],
+    "T037": [
+      "Nim",
+      "ニム"
+    ],
+    "T038": [
+      "ミニマックス法",
+      "ミニマックス",
+      "minimax"
+    ],
+    "T039": [
+      "後退解析",
+      "retrograde analysis"
+    ],
+    "T041": [
+      "ボロノイ",
+      "Voronoi",
+      "ドロネー",
+      "Delaunay"
+    ],
+    "T042": [
+      "三次元幾何",
+      "3次元幾何"
+    ],
+    "T043": [
+      "偏角ソート",
+      "argument sort"
+    ],
+    "T044": [
+      "凸包",
+      "convex hull"
+    ],
+    "T045": [
+      "HLD",
+      "HL分解",
+      "重軽分解",
+      "Heavy-Light Decomposition"
+    ],
+    "T046": [
+      "DFS木",
+      "DFS 木",
+      "深さ優先探索木"
+    ],
+    "T047": [
+      "オイラーツアー",
+      "Euler Tour"
+    ],
+    "T048": [
+      "オイラー路",
+      "オイラーパス",
+      "オイラー閉路",
+      "Eulerian path",
+      "Eulerian circuit"
+    ],
+    "T049": [
+      "トポロジカルソート",
+      "topological sort"
+    ],
+    "T050": [
+      "二重辺連結成分分解",
+      "二辺連結成分分解",
+      "二重辺連結"
+    ],
+    "T051": [
+      "二重頂点連結成分分解",
+      "二重頂点連結",
+      "二頂点連結"
+    ],
+    "T052": [
+      "強連結成分分解",
+      "強連結成分",
+      "SCC",
+      "strongly connected component"
+    ],
+    "T053": [
+      "最小全域木",
+      "minimum spanning tree",
+      "MST"
+    ],
+    "T054": [
+      "最小共通祖先",
+      "最深共通祖先",
+      "LCA",
+      "lowest common ancestor"
+    ],
+    "T055": [
+      "最短経路",
+      "最短路",
+      "shortest path"
+    ],
+    "T056": [
+      "木の同型判定",
+      "tree isomorphism"
+    ],
+    "T057": [
+      "行列木定理",
+      "Kirchhoff"
+    ],
+    "T058": [
+      "重心分解",
+      "centroid decomposition"
+    ],
+    "T059": [
+      "XOR",
+      "排他的論理和",
+      "xor"
+    ],
+    "T060": [
+      "数え上げ"
+    ],
+    "T061": [
+      "bit全探索",
+      "bit 全探索",
+      "ビット全探索",
+      "部分集合全探索"
+    ],
+    "T062": [
+      "ヒューリスティック",
+      "heuristic"
+    ],
+    "T063": [
+      "三分探索",
+      "ternary search"
+    ],
+    "T064": [
+      "二分探索",
+      "二分検索",
+      "binary search"
+    ],
+    "T065": [
+      "全探索",
+      "総当たり",
+      "総当り",
+      "全列挙",
+      "brute force",
+      "brute-force",
+      "exhaustive search"
+    ],
+    "T066": [
+      "幅優先探索",
+      "幅優先捜索",
+      "BFS",
+      "breadth-first search"
+    ],
+    "T067": [
+      "深さ優先探索",
+      "DFS",
+      "depth-first search"
+    ],
+    "T068": [
+      "Manacher",
+      "マンチャー"
+    ],
+    "T069": [
+      "Suffix Array",
+      "SuffixArray",
+      "接尾辞配列"
+    ],
+    "T070": [
+      "Trie",
+      "トライ木"
+    ],
+    "T071": [
+      "Z-Algorithm",
+      "Z Algorithm",
+      "Z algorithm",
+      "Zアルゴリズム"
+    ],
+    "T072": [
+      "Rolling Hash",
+      "ローリングハッシュ",
+      "文字列ハッシュ"
+    ],
+    "T073": [
+      "文字列処理",
+      "文字列の処理"
+    ],
+    "T074": [
+      "構文解析",
+      "parser",
+      "パーサ"
+    ],
+    "T075": [
+      "imos法",
+      "imos 法",
+      "いもす法",
+      "Imos"
+    ],
+    "T076": [
+      "シミュレーション",
+      "simulation"
+    ],
+    "T077": [
+      "ソート",
+      "sort",
+      "sorting"
+    ],
+    "T078": [
+      "ダブリング",
+      "doubling",
+      "binary lifting"
+    ],
+    "T079": [
+      "乱択アルゴリズム",
+      "ランダム化アルゴリズム",
+      "randomized algorithm"
+    ],
+    "T080": [
+      "再帰関数",
+      "再帰的",
+      "再帰呼び出し"
+    ],
+    "T081": [
+      "分割統治",
+      "divide and conquer"
+    ],
+    "T082": [
+      "半分全列挙",
+      "meet in the middle",
+      "meet-in-the-middle"
+    ],
+    "T083": [
+      "尺取り法",
+      "しゃくとり法",
+      "two pointers",
+      "two-pointers",
+      "sliding window"
+    ],
+    "T084": [
+      "平方分割",
+      "sqrt decomposition",
+      "square root decomposition"
+    ],
+    "T085": [
+      "座標圧縮",
+      "coordinate compression"
+    ],
+    "T086": [
+      "累積和",
+      "prefix sum",
+      "prefix-sum"
+    ],
+    "T087": [
+      "AND畳み込み",
+      "AND 畳み込み"
+    ],
+    "T088": [
+      "Bergeの定理",
+      "Berge の定理"
+    ],
+    "T089": [
+      "Binary Trie",
+      "二進トライ",
+      "二分トライ"
+    ],
+    "T090": [
+      "Bézout",
+      "Bezout",
+      "ベズー"
+    ],
+    "T091": [
+      "Catalan数",
+      "Catalan 数",
+      "カタラン数"
+    ],
+    "T092": [
+      "Color Coding",
+      "Color-Coding",
+      "color coding"
+    ],
+    "T093": [
+      "Cycle Lemma",
+      "サイクル補題"
+    ],
+    "T094": [
+      "Dilworth",
+      "ディルワース"
+    ],
+    "T095": [
+      "Disjoint Sparse Table"
+    ],
+    "T096": [
+      "Erdos-Gallai",
+      "Erdős-Gallai",
+      "エルデシュ・ガライ"
+    ],
+    "T097": [
+      "Euclid",
+      "ユークリッドの互除法",
+      "Euclidean algorithm"
+    ],
+    "T098": [
+      "totient",
+      "トーシェント",
+      "オイラーのφ",
+      "Eulerのφ"
+    ],
+    "T099": [
+      "Fermat",
+      "フェルマーの小定理"
+    ],
+    "T100": [
+      "Havel-Hakimi",
+      "Havel–Hakimi"
+    ],
+    "T101": [
+      "LYM不等式",
+      "LYM 不等式"
+    ],
+    "T102": [
+      "Narayana",
+      "ナラヤナ"
+    ],
+    "T103": [
+      "OR畳み込み",
+      "OR 畳み込み"
+    ],
+    "T104": [
+      "Schwartz-Zippel",
+      "Schwartz–Zippel"
+    ],
+    "T105": [
+      "Sperner",
+      "スペルナー"
+    ],
+    "T106": [
+      "Sqrt Tree"
+    ],
+    "T107": [
+      "Walsh-Hadamard",
+      "アダマール変換",
+      "Hadamard transform"
+    ],
+    "T108": [
+      "XOR畳み込み",
+      "XOR 畳み込み"
+    ],
+    "T109": [
+      "min-plus畳み込み",
+      "min-plus 畳み込み"
+    ],
+    "T110": [
+      "parking function"
+    ],
+    "T111": [
+      "アッカーマン関数",
+      "Ackermann function"
+    ],
+    "T112": [
+      "ゼータ変換",
+      "zeta transform"
+    ],
+    "T114": [
+      "トーナメント"
+    ],
+    "T115": [
+      "ハミルトンサイクル",
+      "ハミルトン閉路",
+      "Hamiltonian cycle"
+    ],
+    "T116": [
+      "ハミルトンパス",
+      "Hamiltonian path"
+    ],
+    "T117": [
+      "ビット演算",
+      "bit演算",
+      "ビットシフト",
+      "bitwise"
+    ],
+    "T118": [
+      "マッチング",
+      "matching"
+    ],
+    "T119": [
+      "メビウス変換",
+      "メビウス反転",
+      "Möbius",
+      "Mobius"
+    ],
+    "T120": [
+      "モノイド",
+      "monoid"
+    ],
+    "T122": [
+      "中国剰余定理",
+      "Chinese remainder theorem"
+    ],
+    "T123": [
+      "区間クエリ",
+      "range query"
+    ],
+    "T124": [
+      "原始根",
+      "primitive root"
+    ],
+    "T125": [
+      "合同式"
+    ],
+    "T126": [
+      "固有値",
+      "固有ベクトル",
+      "eigenvalue",
+      "eigenvector"
+    ],
+    "T127": [
+      "形式的べき級数",
+      "formal power series",
+      "FPS"
+    ],
+    "T128": [
+      "括弧列",
+      "括弧の対応"
+    ],
+    "T129": [
+      "有限体",
+      "finite field"
+    ],
+    "T131": [
+      "次数列",
+      "degree sequence"
+    ],
+    "T132": [
+      "畳み込み",
+      "convolution"
+    ],
+    "T133": [
+      "矩形クエリ",
+      "長方形クエリ"
+    ],
+    "T134": [
+      "素因数分解",
+      "prime factorization"
+    ],
+    "T135": [
+      "素数定理",
+      "prime number theorem"
+    ],
+    "T136": [
+      "線形代数",
+      "linear algebra"
+    ],
+    "T138": [
+      "転置原理"
+    ],
+    "T139": [
+      "辺彩色",
+      "edge coloring"
+    ],
+    "T140": [
+      "逆アッカーマン"
+    ],
+    "T141": [
+      "辺連結性",
+      "点連結性"
+    ],
+    "T142": [
+      "集合関数"
+    ],
+    "T143": [
+      "順序集合"
+    ],
+    "T144": [
+      "0-1 BFS",
+      "01BFS",
+      "0-1BFS",
+      "01 BFS"
+    ],
+    "T145": [
+      "連分数",
+      "continued fraction"
+    ],
+    "T147": [
+      "分割統治DP",
+      "分割統治 DP"
+    ],
+    "T148": [
+      "半平面交差"
+    ],
+    "T149": [
+      "整数因数分解",
+      "Pollard",
+      "ポラード"
+    ],
+    "T150": [
+      "ナップサック",
+      "knapsack"
+    ],
+    "T151": [
+      "Knuth 最適化",
+      "Knuth optimization"
+    ],
+    "T152": [
+      "クラウト法",
+      "Crout"
+    ],
+    "T153": [
+      "格子点を持たない多角形"
+    ],
+    "T154": [
+      "MEX",
+      "最小未出現値"
+    ],
+    "T155": [
+      "マンハッタン距離",
+      "Manhattan distance"
+    ],
+    "T156": [
+      "MPM 最大流",
+      "MPM algorithm"
+    ],
+    "T157": [
+      "最小包含円",
+      "smallest enclosing circle"
+    ],
+    "T158": [
+      "ミンコフスキー和",
+      "Minkowski sum"
+    ],
+    "T159": [
+      "モンゴメリ乗算",
+      "Montgomery"
+    ],
+    "T160": [
+      "約数の個数",
+      "約数和",
+      "約数の総和"
+    ],
+    "T161": [
+      "点の位置判定",
+      "内外判定"
+    ],
+    "T162": [
+      "素数判定",
+      "primality test"
+    ],
+    "T163": [
+      "次善最小全域木",
+      "second best spanning tree"
+    ],
+    "T164": [
+      "焼きなまし法",
+      "simulated annealing"
+    ],
+    "T165": [
+      "Stars and Bars",
+      "stars-and-bars",
+      "仕切りと玉"
+    ],
+    "T166": [
+      "強連結方向付け"
+    ],
+    "T167": [
+      "Floyd の循環検出",
+      "Floydの循環検出"
+    ],
+    "T168": [
+      "15パズル"
+    ],
+    "T169": [
+      "2-SAT",
+      "2SAT"
+    ],
+    "T170": [
+      "Aho-Corasick",
+      "Aho Corasick",
+      "AC法"
+    ],
+    "T171": [
+      "多倍長整数",
+      "多倍長演算",
+      "big integer"
+    ],
+    "T172": [
+      "単純多角形の面積",
+      "多角形の面積"
+    ],
+    "T173": [
+      "ハンガリアン法",
+      "Hungarian"
+    ],
+    "T174": [
+      "平衡三進法",
+      "balanced ternary"
+    ],
+    "T175": [
+      "Bellman-Ford",
+      "ベルマンフォード",
+      "ベルマン・フォード"
+    ],
+    "T176": [
+      "二分累乗法",
+      "繰り返し二乗法",
+      "繰り返し自乗法",
+      "binary exponentiation"
+    ],
+    "T177": [
+      "二項係数",
+      "binomial coefficient"
+    ],
+    "T178": [
+      "二部グラフ判定",
+      "二部グラフかどうか",
+      "bipartite check"
+    ],
+    "T179": [
+      "Burnside",
+      "Pólya",
+      "Polya",
+      "バーンサイド"
+    ],
+    "T180": [
+      "凸多角形への点包含"
+    ],
+    "T181": [
+      "線分交差判定",
+      "線分の交差判定",
+      "線分の交差"
+    ],
+    "T182": [
+      "閉路検出",
+      "サイクル検出",
+      "cycle detection"
+    ],
+    "T183": [
+      "円と円の交点"
+    ],
+    "T184": [
+      "円と直線の交点"
+    ],
+    "T185": [
+      "共通接線"
+    ],
+    "T186": [
+      "ラベル付きグラフの数え上げ"
+    ],
+    "T187": [
+      "Dijkstra",
+      "ダイクストラ"
+    ],
+    "T188": [
+      "疎グラフ向け Dijkstra"
+    ],
+    "T189": [
+      "離散対数",
+      "discrete logarithm"
+    ],
+    "T190": [
+      "離散冪根"
+    ],
+    "T191": [
+      "壊れたプロファイルDP",
+      "profile DP"
+    ],
+    "T192": [
+      "D’Esopo-Pape",
+      "D'Esopo-Pape"
+    ],
+    "T193": [
+      "部分マスク列挙",
+      "submask"
+    ],
+    "T194": [
+      "拡張 Euclid",
+      "拡張Euclid",
+      "拡張ユークリッド",
+      "extended Euclidean"
+    ],
+    "T195": [
+      "p を法とした階乗"
+    ],
+    "T196": [
+      "FFT",
+      "NTT",
+      "高速フーリエ変換",
+      "高速数論変換"
+    ],
+    "T197": [
+      "Fibonacci",
+      "フィボナッチ"
+    ],
+    "T198": [
+      "関節点",
+      "articulation point"
+    ],
+    "T199": [
+      "オンライン橋検出"
+    ],
+    "T200": [
+      "橋検出",
+      "bridge finding"
+    ],
+    "T201": [
+      "連結成分分解"
+    ],
+    "T202": [
+      "階乗の素因数指数",
+      "ルジャンドルの公式"
+    ],
+    "T203": [
+      "負閉路検出",
+      "negative cycle detection"
+    ],
+    "T204": [
+      "平面グラフの面探索"
+    ],
+    "T205": [
+      "線分の直線方程式"
+    ],
+    "T206": [
+      "最大ゼロ部分行列"
+    ],
+    "T207": [
+      "最近点対",
+      "closest pair"
+    ],
+    "T208": [
+      "Floyd-Warshall",
+      "ワーシャルフロイド",
+      "フロイドワーシャル"
+    ],
+    "T209": [
+      "需要付きフロー"
+    ],
+    "T210": [
+      "任意グラフ上のゲーム"
+    ],
+    "T211": [
+      "Gauss 消去と行列式"
+    ],
+    "T212": [
+      "Gauss",
+      "ガウス消去",
+      "掃き出し法",
+      "連立一次方程式"
+    ],
+    "T213": [
+      "k組合せ列挙"
+    ],
+    "T214": [
+      "Gray code",
+      "グレイコード"
+    ],
+    "T215": [
+      "Simpson",
+      "シンプソン積分"
+    ],
+    "T216": [
+      "直線の交点"
+    ],
+    "T217": [
+      "線分集合の交差"
+    ],
+    "T218": [
+      "Josephus",
+      "ヨセフス"
+    ],
+    "T219": [
+      "線形時間選択"
+    ],
+    "T220": [
+      "線分和集合の長さ"
+    ],
+    "T221": [
+      "線形合同方程式"
+    ],
+    "T222": [
+      "Diophantine",
+      "ディオファントス"
+    ],
+    "T223": [
+      "線形篩",
+      "linear sieve"
+    ],
+    "T224": [
+      "最長増加部分列",
+      "LIS",
+      "longest increasing subsequence"
+    ],
+    "T225": [
+      "Binary Lifting LCA"
+    ],
+    "T226": [
+      "Farach-Colton",
+      "Farach Colton"
+    ],
+    "T227": [
+      "Tarjan オフライン LCA",
+      "Tarjan offline LCA"
+    ],
+    "T228": [
+      "Lyndon",
+      "リンドン分解"
+    ],
+    "T229": [
+      "Dinic",
+      "ダイニック"
+    ],
+    "T230": [
+      "Ford-Fulkerson",
+      "Edmonds-Karp",
+      "フォード・ファルカーソン"
+    ],
+    "T231": [
+      "Push-Relabel",
+      "プッシュリラベル"
+    ],
+    "T232": [
+      "改良 Push-Relabel"
+    ],
+    "T233": [
+      "Kruskal",
+      "クラスカル"
+    ],
+    "T234": [
+      "Prim",
+      "プリム"
+    ],
+    "T235": [
+      "最小スタック",
+      "最小キュー"
+    ],
+    "T236": [
+      "モジュラ逆元",
+      "modular inverse",
+      "逆元"
+    ],
+    "T237": [
+      "Newton法",
+      "Newton 法",
+      "ニュートン法"
+    ],
+    "T238": [
+      "固定長パス数",
+      "固定長最短路"
+    ],
+    "T239": [
+      "締切付きスケジューリング"
+    ],
+    "T240": [
+      "三角形の符号付き面積",
+      "外積",
+      "符号付面積",
+      "符号付き面積"
+    ],
+    "T241": [
+      "Pickの定理",
+      "Pick の定理",
+      "ピックの定理"
+    ],
+    "T242": [
+      "Bishop 配置"
+    ],
+    "T243": [
+      "KMP",
+      "Knuth-Morris"
+    ],
+    "T244": [
+      "Prüfer",
+      "Prufer",
+      "プリューファー"
+    ],
+    "T245": [
+      "RMQ",
+      "区間最小値"
+    ],
+    "T246": [
+      "Rabin-Karp",
+      "ラビンカープ"
+    ],
+    "T247": [
+      "Randomized Heap"
+    ],
+    "T248": [
+      "行列の階数",
+      "matrix rank"
+    ],
+    "T249": [
+      "1台機械スケジューリング"
+    ],
+    "T250": [
+      "2台機械スケジューリング"
+    ],
+    "T251": [
+      "交差線分対探索"
+    ],
+    "T252": [
+      "最大部分列和",
+      "最大連続部分列和",
+      "Kadane"
+    ],
+    "T253": [
+      "エラトステネスの篩",
+      "エラトステネス",
+      "sieve of Eratosthenes"
+    ],
+    "T254": [
+      "LCA による RMQ"
+    ],
+    "T255": [
+      "Suffix Automaton",
+      "接尾辞オートマトン"
+    ],
+    "T256": [
+      "Suffix Tree",
+      "接尾辞木"
+    ],
+    "T257": [
+      "包除原理",
+      "inclusion-exclusion"
+    ],
+    "T258": [
+      "Stern-Brocot",
+      "Farey",
+      "スターンブロコット",
+      "ファレイ"
+    ],
+    "T259": [
+      "Treap",
+      "トレープ"
+    ],
+    "T260": [
+      "木の塗り分け"
+    ],
+    "T261": [
+      "垂直分割"
+    ],
+    "T262": [
+      "部分和問題",
+      "subset sum"
+    ],
+    "T263": [
+      "LCS",
+      "最長共通部分列",
+      "longest common subsequence"
+    ],
+    "T264": [
+      "剰余演算",
+      "余りを求める",
+      "modulo operation"
+    ],
+    "T265": [
+      "一般マッチング",
+      "general matching",
+      "Blossom"
+    ],
+    "T266": [
+      "平面走査",
+      "plane sweep",
+      "sweep line"
+    ]
+  }
+}

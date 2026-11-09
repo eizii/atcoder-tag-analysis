@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc287_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc287/editorial/5606",
+      "text": "想定解 : 二重ループを用いて実装する\nそれぞれの\n\\(i = 1, 2, \\dots, N\\)\nについて、\n\\(j = 1, 2, \\dots, M\\)\nを全て試し、\n\\(S_i\\)\nの末尾\n\\(3\\)\n文字が\n\\(T_j\\)\nと一致するかどうかを判定することで正解することができます。\n変数\ncount\nを\n0\nで初期化し、\n\\(i = 1, 2, \\dots, N\\)\nそれぞれに対して、以下の処理を行います。\n真偽値変数\nfound\nを\nfalse\nで初期化する。これは条件を満たす\n\\(j\\)\nが見つかったかどうかを表す。\n\\(j = 1, 2, \\dots, M\\)\nに対して、以下の処理を行う。\n\\(S_i\\)\nの末尾\n\\(3\\)\n文字が\n\\(T_j\\)\nと一致しているなら、\nfound\nに\ntrue\nを代入する。\nfound\nの値が\ntrue\nなら\ncount\nの値を\n1\n増やす。\n文字列\nS\nの末尾\n\\(3\\)\n文字を得る方法は言語に応じて様々です。C++ なら\nS.substr(S.size() - 3)\n(\nS.size() == 6\nなので\nS.substr(3)\nと等価) とし、Python なら\nS[-3:]\nとすればよいです。\n実装例 (C++)\n実装例 (Python)\n別解 1 : 二分探索で\n\\(T_j\\)\nを見つける\nこちらは少し高度な内容です。\n\\(T_1, T_2, \\dots, T_M\\)\nを辞書順で昇順に並べ替えておくと、これらの中に指定された文字列が存在するかどうかを\n\\(O(\\log M)\\)\nで検索することができます。制約が\n\\(1 \\leq N, M \\leq 2\\times 10^5\\)\nと大きくなった場合、想定解では実行時間制限に間に合いませんが、この方法なら余裕を持って間に合います。\n実装例 (C++)\n別解 2 : 入力の特性を利用する\n\\(S_i\\)\nは\n\\(0\\)\n以上\n\\(10^6\\)\n未満の整数に対応し、\n\\(T_j\\)\nは\n\\(0\\)\n以上\n\\(10^3\\)\n未満の整数に対応しています。\n\\(S_i\\)\nが表す整数を\n\\(S_i'\\)\n、\n\\(T_j\\)\nが表す整数を\n\\(T_j'\\)\nとおくと、\n\\(S_i\\)\nの末尾\n\\(3\\)\n文字が\n\\(T_j\\)\nに一致することは\n\\(S_i'\\)\nを\n\\(10^3\\)\nで割ったあまりが\n\\(T_j'\\)\nに等しいことと同値です。よって、\n\\(k = 0, 1, \\dots, 10^3 - 1\\)\nに対し、\n\\(T_j' = k\\)\nとなる\n\\(j\\)\nが存在するかどうかを求めておくことで、各\n\\(i\\)\nに対し条件を満たす\n\\(j\\)\nが存在するかどうかを定数時間で求めることができます。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<string> s(n), t(m);\n    for (int i = 0; i < n; ++i) {\n        cin >> s[i];\n    }\n    for (int j = 0; j < m; ++j) {\n        cin >> t[j];\n    }\n    int answer = 0;\n    for (int i = 0; i < n; ++i) {\n        string suffix = s[i].substr(3);\n        bool match = false;\n        for (int j = 0; j < m; ++j) {\n            if (suffix == t[j]) {\n                match = true;\n            }\n        }\n        if (match) {\n            answer += 1;\n        }\n    }\n    cout << answer << '\\n';\n    return 0;\n}",
+        "n, m = map(int, input().split())\ns = [input() for _ in range(n)]\nt = [input() for _ in range(m)]\nanswer = 0\nfor i in range(n):\n  found = False\n  for j in range(m):\n    if s[i][-3:] == t[j]:\n      found = True\n  if found:\n    answer += 1\nprint(answer)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<string> s(n), t(m);\n    for (int i = 0; i < n; ++i) {\n        cin >> s[i];\n    }\n    for (int j = 0; j < m; ++j) {\n        cin >> t[j];\n    }\n    sort(begin(t), end(t));\n    int answer = 0;\n    for (int i = 0; i < n; ++i) {\n        if (binary_search(begin(t), end(t), s[i].substr(3))) {\n            answer += 1;\n        }\n    }\n    cout << answer << '\\n';\n    return 0;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<int> s(n);\n    array<bool, 1000> exist = {};\n    for (int i = 0; i < n; ++i) {\n        cin >> s[i];\n    }\n    for (int j = 0; j < m; ++j) {\n        int t;\n        cin >> t;\n        exist[t] = true;\n    }\n    int answer = 0;\n    for (int i = 0; i < n; ++i) {\n        if (exist[s[i] % 1000]) {\n            answer += 1;\n        }\n    }\n    cout << answer << '\\n';\n    return 0;\n}"
+      ],
+      "text_sha256": "d74c62b23f34d2449b3704c1415a38e3d21095bfc3083d2b972ebd1583431842",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc287/abc287_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

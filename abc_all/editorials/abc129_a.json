@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc129_a",
+  "editorials": [
+    {
+      "text": "A: Airplane\n3 つの空港を順に巡る方法は6 通りあるので、全て試しその最小値を求めればよいです。ただし、3 つのコ\nストのうち2 つの和の形をしていることを踏まえると、3 つの和から最大値を引くことでも答えを求めること\nができます。\n実装例をソースコード1 に示します。\nListing 1\n実装例\n1 #include <bits/stdc++.h>\n2 using namespace std;\n3\n4 int main() {\n5\nint P, Q, R;\n6\ncin >> P >> Q >> R;\n7\ncout << P + Q + R - max({P, Q, R}) << endl;\n8\nreturn 0;\n9 }\n",
+      "text_sha256": "80c12508eec9e167227c33b07981a1b23ec14dfa48d0912b91c5172140570627",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc129/abc129_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

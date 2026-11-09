@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc211_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc211/editorial/2287",
+      "text": "動的計画法(DP)を用います。\n\\(dp[i][j]\\)\nを、「\n\\(S\\)\nの\n\\(i\\)\n文字目までを使って、\nchokudai\nの\n\\(j\\)\n文字目まで選択する方法」と定義します。\nここで、\n\\(N=|S|\\)\n,\n\\(T= \\)\nchokudai\nとして、以下の漸化式が成り立ちます。\n\\(\\displaystyle dp[i][j] =\n \\begin{cases} 1 & ( j = 0)\n\\\\0  & ( i=0 , 1 \\leq j \\leq 8)\n \\\\dp[i-1][j]& ( 1 \\leq i \\leq N , 1\\leq j \\leq 8,  S[i] \\neq T[j] ) \n \\\\dp[i-1][j] + dp[i-1][j-1]  & (1 \\leq i \\leq N , 1\\leq j \\leq 8,  S[i] = T[j])\\end{cases}\\)\n\\(j=0\\)\nのとき\n「\nchokudai\nの\n\\(0\\)\n文字目まで選択する」というのは、下線を全く引いていないことを表します。つまり\n\\(1\\)\n通りです。\n\\( i=0 , 1 \\leq j \\leq 8\\)\nのとき\n「\n\\(S\\)\nの\n\\(0\\)\n文字目までを使う」すなわち「\n\\(S\\)\nからまだ\n\\(1\\)\n文字も使っていない」時に、「\nchokudai\nの\n\\(j (j \\geq 1)\\)\n文字目まで選択する」ことはできません。つまり\n\\(0\\)\n通りです。\n\\(1 \\leq i \\leq N , 1\\leq j \\leq 8\\)\nのとき\n\\(S[i] \\neq T[j]\\)\nのとき\n「\n\\(S\\)\nの\n\\(i\\)\n文字目までを使って、\n\\(T\\)\nの\n\\(j\\)\n文字目まで選択する方法」を考えていますが、\n\\(S\\)\nの\n\\(i\\)\n文字目と\n\\(T\\)\nの\n\\(j\\)\n文字目が異なるので、\n\\(S\\)\nの\n\\(i\\)\n文字目に下線を引くことはありえません。よって「\n\\(S\\)\nの\n\\((i-1)\\)\n文字目までを使って、\n\\(T\\)\nの\n\\(j\\)\n文字目まで選択する方法」の場合の数と等しいです。つまり\n\\(dp[i-1][j]\\)\n通りです。\n\\(S[i] = T[j]\\)\nのとき\n\\(S\\)\nの\n\\(i\\)\n文字目に下線を引かない時\n先程の議論から、これは\n\\(dp[i-1][j]\\)\n通りです。\n\\(S\\)\nの\n\\(i\\)\n文字目に下線を引く時\nこれは、「\n\\(S\\)\nの\n\\((i-1)\\)\n文字目までを使って、\n\\(T\\)\nの\n\\((j-1)\\)\n文字目まで選択する方法」の場合の数と等しいです。つまり\n\\(dp[i-1][j-1]\\)\n通りです。\nまとめると、\n\\(dp[i-1][j] + dp[i-1][j-1]\\)\n通りです。\nfor文の\n\\(2\\)\n重ループを用いて、\n\\(i, j\\)\nが小さい順に\n\\(dp[i][j]\\)\nを全て求めることができます。\n最終的な答えは\n\\(dp[N][8]\\)\nです。\nこのアルゴリズムの計算量は\n\\(O(N)\\)\nで、十分高速です。",
+      "codes": [],
+      "text_sha256": "56f64fc6afa0c62ca8463584588d02dc2963e89a33d818f2020266e7caff4206",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc211/abc211_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

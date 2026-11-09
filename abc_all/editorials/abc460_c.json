@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc460_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc460/editorial/21026",
+      "text": "ネタはより軽いものに交換しても損しないため、軽いものから順に使っていくことにして構いません。\n寿司に使うネタの重さを\n\\(b_1 \\leq b_2 \\leq \\ldots \\leq b_t\\)\nとし、重さ\n\\(b_i\\)\nのネタと組み合わせるシャリの重さを\n\\(a_i\\)\nとしたとき、\n\\(a_1 \\leq a_2 \\leq \\ldots \\leq a_t\\)\nとしてよいです。これは、\n\\(a_i > a_{i + 1}\\)\nであるとき\n\\(2a_i \\geq b_i\\)\nかつ\n\\(2a_{i + 1} \\geq b_{i + 1}\\)\nならば\n\\(2a_{i+1} \\geq b_i\\)\nかつ\n\\(2a_i \\geq b_{i+1}\\)\nであることから、\n\\(a_i > a_{i + 1}\\)\nなる\n\\(i\\)\nが存在する限り\n\\(a_i\\)\nと\n\\(a_{i + 1}\\)\nを swap する操作を行い続けてよいことから従います。\n従って、ネタを軽い方から順に見ていき、組み合わせることのできるシャリが存在するならば実際に組み合わせる貪欲法が正当です。\nこれは\n\\(A, B\\)\nをソートして尺取り法の要領で実装することができます。ソートがボトルネックとなり、時間計算量は\n\\(O(N \\log N + M \\log M)\\)\nです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tvector<int> a(n), b(m);\n\tfor (int i = 0; i < n; i++) cin >> a[i];\n\tfor (int i = 0; i < m; i++) cin >> b[i];\n\tsort(a.begin(), a.end());\n\tsort(b.begin(), b.end());\n\tint x = 0, ans = 0;\n\tfor (int i = 0; i < m; i++) {\n\t\twhile (x < n && a[x] * 2 < b[i]) x++;\n\t\tif (x < n) {\n\t\t\tx++;\n\t\t\tans++;\n\t\t}\n\t}\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "46a1c96b1ad7fcad97a97e7ba609edaa5c973268a387ab0ee6d63349963837e9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc460/abc460_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc163_a",
+  "editorials": [
+    {
+      "text": "A. Circle Pond\n(円の周長) = (円の半径) * 2 * (円周率)\nの式より、答えを求めることができます。以下に、今回の問題の注意点をあげておきます。\n円周率の求め方\nあらかじめ定数として宣言しておいたり、言語によっては標準ライブラリから求めることもできま\nす。(今回は誤差の許容範囲が広いので、実は3.14 まで求めておけば十分です)。\n浮動小数点数の出力\nこれは言語によって仕様が異なるため一概には言えませんが、整数型への自動的な丸めの発生等に\n注意しながら実装してください。\n以下が、c++ のサンプルコードです。\n1 #include <iostream>\n2 #include <math.h>\n3 #include <iomanip>\n4\n5 int main(){\n6\nint R;\n7\nstd::cin>>R;\n8\n9\nconst double pi=acos(-1.0);\n10\n11\ndouble answer=2*R*pi;\n12\n13\nstd::cout<<std::setprecision(20)<<std::fixed<<answer<<std::endl;\n\n14\n15\nreturn 0;\n16 }\n以下が、Python のサンプルコードです。\n1 print(int(input())*6.3)\n",
+      "text_sha256": "5c877c31fe979849ed176b60c74eba69d8cc5e3cea689b4e8a5df85dfd461fa8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc163/abc163_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

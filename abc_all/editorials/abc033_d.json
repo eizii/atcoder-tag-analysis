@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc033_d",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc033/editorial.pdf",
+      "text": "D問題三角形の分類\n\n  問題概要1.\n  アルゴリズム2.\n\n\n\n\n\n                                     ©AtCoder Inc. All rights reserved.                                     15\n\f\nD問題問題概要\n\n• 座標平面上の点(x[i],y[i]) がN個与えられる。\n• N個のうち3つ選んで三角形を作ったとき、それが鋭\n 角三角形、直角三角形、鈍角三角形になるものを、\n それぞれ数える。\n• N ≦2,000\n• 部分点: N ≦100\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     16\n\f\nD問題アルゴリズム\n\n• 部分点解法\n• 3点を全部選んで角度を計算する\n• 角度が0°より大きく90°より小さいか、90°に等し\n いか、90°より大きく180°より小さいかの3種類を\n 分類できればよいので、内積を使ってもよい\n• ベクトル(a,b)と(c,d)のなす角θが\n   – 0° < θ < 90°のときac+bd > 0\n   – θ = 90°のときac+bd = 0\n   – 90° < θ < 180° のときac+bd < 0\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     17\n\f\nD問題アルゴリズム\n\n• さっきの方法だと計算量はO(N^3)\n• 部分点は間に合うが、満点はとれない\n• これ以上早く計算するには、複数の三角形をまとめ\n て数える必要がある\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     18\n\f\nD問題アルゴリズム\n\n• 三角形の特徴に注目する\n\n\n\n\n• 直角三角形は、1個が直角、他は鋭角\n• 鈍角三角形は、1個が鈍角、他は鋭角\n• 直角、鈍角となる∠ABCの組の個数を求めれば、直\n 角三角形、鈍角三角形の個数が分かり、全体から\n 引くと鋭角三角形の個数も計算できる。\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     19\n\f\nD問題アルゴリズム\n\n• ∠ABCのBの部分を固定して、A,Cの組を数えること\n にする\n\n\n\n\n\n• ある点から他の全ての点に対して半直線を引くとこ\n うなる(プログラムでは、角度だけをもてばよい。角\n 度はatan2等で計算できる。)\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     20\n\f\nD問題アルゴリズム\n\n• これらの角度をソートし、左側を固定する\n   – どこまでが90°未満だろう？\n   – どこまでが90°だろう？\n   – どこまでが180°未満だろう？\n• これらは二分探索やしゃくとり法でまとめて高速に\n 計算できる。二分探索ではO(N log N)、尺取だと\n  O(N)\n• ただし環状になっているので、角度の扱いは少し複\n 雑で気をつける必要がある。(2周分配列をもったり、\n 内積・外積で求めると楽かもしれない)\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     21\n\f\nD問題アルゴリズム\n\n• 全体をまとめると\n   – 一点選ぶ\n   – そこから他の全て点へのベクトルの角度を求め、ソートす\n   る。\n   – 二分探索やしゃくとり法で鈍角、直角の個数を数える\n   – 鋭角三角形の個数を、全体から鈍角、直角の個数を引く\n   ことで求める\n• 計算量は合計でO(N^2 logn) (しゃくとり法の場合)\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     22\n\f\nD問題アルゴリズム\n\n• 注意\n• 2つのベクトルのなす角度が非常に小さかったり、非\n 常に90°に近かったり、非常に180°に近かったり\n することがある。\n例1: (-10000,-10000), (-10000,-9999),(10000,10000)\n例2: (-10000,-10000), (-9999,10000),(10000,9999)\n例3: (-10000,-10000), (1,0),(10000,10000)\n• 浮動小数で計算する人は注意が必要\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     23",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "735ecda58a23dcc6063fb793c26d66d3ab2540a29dd30de7f785793136f940ba"
+    }
+  ],
+  "status": "available"
+}

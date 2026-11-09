@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc356_d",
+  "title": "Masked Popcount",
+  "contests": [
+    {
+      "contest_id": "abc356",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 886,
+  "raw_difficulty": 886,
+  "contest_id": "abc356",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc356/tasks/abc356_d",
+  "statement": "配点 : 400 点 問題文 整数 N,M が与えられるので、 \\displaystyle \\sum_{k=0}^{N} \\rm{popcount} (k \\mathbin{\\&} M) を 998244353 で割った余りを求めてください。 ただし、 \\mathbin{\\&} はビット単位 \\rm{AND} 演算を表します。 ビット単位 \\rm{AND} 演算とは？ 非負整数 a と非負整数 b とのビット単位 \\rm{AND} 演算の結果 x = a \\mathbin{\\&} b は次のように定義されます。 x は全ての非負整数 k について以下の条件を満たすただ 1 つの非負整数である。 a を 2 進法で書き下した際の 2^k の位と b を 2 進法で書き下した際の 2^k の位が共に 1 なら、 x を 2 進法で書き下した際の 2^k の位は 1 である。 そうでないとき、 x を 2 進法で書き下した際の 2^k の位は 0 である。 例えば 3=11_{(2)}, 5=101_{(2)} なので、 3 \\mathbin{\\&} 5 = 1 となります。 \\rm{popcount} とは？ \\rm{popcount} (x) は、 x を 2 進法で書き下した際に登場する 1 の個数を表します。 例えば 13=1101_{(2)} なので、 \\rm{popcount} (13) = 3 となります。 制約 N は 0 以上 2^{60} 未満の整数 M は 0 以上 2^{60} 未満の整数 入力 入力は以下の形式で標準入力から与えられる。 N M 出力 答えを整数として出力せよ。 入力例 1 4 3 出力例 1 4 \\rm{popcount} (0\\mathbin{\\&}3) = 0 \\rm{popcount} (1\\mathbin{\\&}3) = 1 \\rm{popcount} (2\\mathbin{\\&}3) = 1 \\rm{popcount} (3\\mathbin{\\&}3) = 2 \\rm{popcount} (4\\mathbin{\\&}3) = 0 であり、これらの和は 4 です。 入力例 2 0 0 出力例 2 0 N=0 である場合や M=0 である場合もあります。 入力例 3 1152921504606846975 1152921504606846975 出力例 3 499791890 998244353 で割った余りを求めることに注意してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 整数 N,M が与えられるので、 \\displaystyle \\sum_{k=0}^{N} \\rm{popcount} (k \\mathbin{\\&} M) を 998244353 で割った余りを求めてください。 ただし、 \\mathbin{\\&} はビット単位 \\rm{AND} 演算を表します。 ビット単位 \\rm{AND} 演算とは？ 非負整数 a と非負整数 b とのビット単位 \\rm{AND} 演算の結果 x = a \\mathbin{\\&} b は次のように定義されます。 x は全ての非負整数 k について以下の条件を満たすただ 1 つの非負整数である。 a を 2 進法で書き下した際の 2^k の位と b を 2 進法で書き下した際の 2^k の位が共に 1 なら、 x を 2 進法で書き下した際の 2^k の位は 1 である。 そうでないとき、 x を 2 進法で書き下した際の 2^k の位は 0 である。 例えば 3=11_{(2)}, 5=101_{(2)} なので、 3 \\mathbin{\\&} 5 = 1 となります。 \\rm{popcount} とは？ \\rm{popcount} (x) は、 x を 2 進法で書き下した際に登場する 1 の個数を表します。 例えば 13=1101_{(2)} なので、 \\rm{popcount} (13) = 3 となります。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 N は 0 以上 2^{60} 未満の整数 M は 0 以上 2^{60} 未満の整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを整数として出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 \\rm{popcount} (0\\mathbin{\\&}3) = 0 \\rm{popcount} (1\\mathbin{\\&}3) = 1 \\rm{popcount} (2\\mathbin{\\&}3) = 1 \\rm{popcount} (3\\mathbin{\\&}3) = 2 \\rm{popcount} (4\\mathbin{\\&}3) = 0 であり、これらの和は 4 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 0 0"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0 N=0 である場合や M=0 である場合もあります。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1152921504606846975 1152921504606846975"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 499791890 998244353 で割った余りを求めることに注意してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc356/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:34.642959+00:00",
+  "statement_sha256": "fba07a4899d2ccfe3c94784e8208f6ddc25e1002ae375d371869501d6be065a3",
+  "editorials": []
+}

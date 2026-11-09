@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc194_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc194/editorial/827",
+      "text": "答えは、\n\\(A\\)\nの連続する\n\\(M\\)\n要素であって\n\\(i\\)\nを\n\\(1\\)\nつも含まないようなものが存在するような最小の非負整数\n\\(i\\)\nです。\n\\(\\mathrm{pos}_i\\)\n:\n\\(A_j = i\\)\nとなるような\n\\(j\\)\nを昇順に入れた配列\nを計算しておけば、\n\\(i\\)\nの昇順に、\n\\(\\mathrm{pos}_{i, j} - \\mathrm{pos}_{i, j - 1} > M\\)\nとなるような\n\\(j\\)\nが存在するかを判定すればよいです。ただし端は注意が必要です。別途処理するか、最初に\n\\(\\mathrm{pos}\\)\nに\n\\(0\\)\nと\n\\(N + 1\\)\nも入れるとよいです。\n計算量は\n\\(O(N)\\)\nです。",
+      "codes": [],
+      "text_sha256": "1e395ad87962e7265d8306f0a4c48efe5e7ea39032ceb7dd4b79368a09503a3f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc194/abc194_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc194/editorial/869",
+      "text": "各\n\\(x \\in \\lbrace 0, .. N - 1 \\rbrace\\)\nに対して現在の\n\\(x\\)\nの登場回数\ncount[x]\nを管理しながら長さ\n\\(M\\)\nの部分文字列（連結な部分列）を左から順に訪問していき、その過程で\ncount[x] == 0\nになる時刻が存在するような最小の\n\\(x\\)\nが答えです。部分列を動かす際の\ncount\nの更新と\ncount[x] == 0\nなる\n\\(x\\)\nの発見は必要な箇所だけを見れば定数時間で行えますので、全体で\n\\(\\Theta ( N )\\)\n時間で処理できます。",
+      "codes": [],
+      "text_sha256": "ecbac8b0c654519cef4f5c53e566ad7b23a6ef1cf41d579ed58f200089d691b8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc194/abc194_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

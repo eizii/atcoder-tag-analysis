@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc081_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc086/editorial.pdf",
+      "text": "A: Placing Marbles\n\n それぞれの文字が1 か0 かを判定して1 の数を数えればよいです．マスの数は高々3 つなので，for 文を使わなくて\nも簡単に実装できます．\n\n#include <iostream>\n\n#include <string>\n\nusing namespace std;\n\nint ans;\n\nstring s;\n\nint main(){\n\n    cin >> s;\n\n    if(s[0]=='1') ans++;\n    if(s[1]=='1') ans++;\n\n    if(s[2]=='1') ans++;\n\n    cout << ans << endl;\n\n}\n\n\n\n\n\n                                                   1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "3fd49cd233b6ab1485404b2575c8d462ce0bfb17eb58fdca7d5676252be15451"
+    }
+  ],
+  "status": "available"
+}

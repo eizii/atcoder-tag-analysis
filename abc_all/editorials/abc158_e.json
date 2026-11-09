@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc158_e",
+  "editorials": [
+    {
+      "text": "E: Divisible Substring\nまず、左端を固定して実際にP で割った余りを計算しながら右側を伸ばしていくことで、O(N 2)\nで答えを求めることができます。\n例えば文字列の左右を固定した場合にP で割った余りを計算できないか、定式化を考えてみま\nしょう。\nUi := S[i : N] (S のi 文字目以降) を評価した整数と置きます。便宜上、UN+1 = 0 とします。\n(この時点ではまだmod P で考えていません)\nこのとき、S のi 文字目からj 文字目を評価した整数は、Ui−Uj+1\n10j+1−i と表せます。(1 ≤i ≤j ≤N)\nここで、P と10 が互いに素かどうかが重要です。P = 2, 5 の場合は右端がP で割り切れるかど\nうかのみで決まるので、O(N) で解けます。\nP̸ = 2, 5 とします。このとき、Ui−Uj+1\n10j+1−i がP で割り切れることは、Ui −Uj+1 がP で割り切れる\nことと同値です。よって、右側からUi mod P を計算し、現在x mod P であるようなj が何個あ\nるかを配列やmap で管理しておくことで、O(N + P) でこの問題が解けました。(今回はP が小さ\nいですが、P が大きい場合はmap を使いましょう)\n",
+      "text_sha256": "de155c42584c588157a62f1ee009040dc746d4900dd8dfe26ad6e8b36962dde0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc158/abc158_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

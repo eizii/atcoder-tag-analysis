@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc190_f",
+  "title": "Shift and Inversions",
+  "contests": [
+    {
+      "contest_id": "abc190",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1321,
+  "raw_difficulty": 1321,
+  "contest_id": "abc190",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc190/tasks/abc190_f",
+  "statement": "配点 : 600 点 問題文 0, 1, 2, \\dots, N - 1 を並び替えた数列 A = [a_0, a_1, a_2, \\dots, a_{N-1}] が与えられます。 k = 0, 1, 2, \\dots, N - 1 のそれぞれについて、 b_i = a_{i+k \\bmod N} で定義される数列 B = [b_0, b_1, b_2, \\dots, b_{N-1}] の転倒数を求めてください。 転倒数とは 数列 A = [a_0, a_1, a_2, \\dots, a_{N-1}] の転倒数とは、 i < j かつ a_i > a_j を満たす添字の組 (i, j) の個数のことです。 制約 入力は全て整数 2 ≤ N ≤ 3 \\times 10^5 a_0, a_1, a_2, \\dots, a_{N-1} は 0, 1, 2, \\dots, N - 1 の並び替えである 入力 入力は以下の形式で標準入力から与えられる。 N a_0 a_1 a_2 \\cdots a_{N-1} 出力 N 行出力せよ。 i + 1 行目には、 k = i としたときの答えを出力せよ。 入力例 1 4\r\n0 1 2 3 出力例 1 0\r\n3\r\n4\r\n3 A = [0, 1, 2, 3] です。 k = 0 のとき、 B = [0, 1, 2, 3] の転倒数は 0 です。 k = 1 のとき、 B = [1, 2, 3, 0] の転倒数は 3 です。 k = 2 のとき、 B = [2, 3, 0, 1] の転倒数は 4 です。 k = 3 のとき、 B = [3, 0, 1, 2] の転倒数は 3 です。 入力例 2 10\r\n0 3 1 5 4 2 9 6 8 7 出力例 2 9\r\n18\r\n21\r\n28\r\n27\r\n28\r\n33\r\n24\r\n21\r\n14",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 0, 1, 2, \\dots, N - 1 を並び替えた数列 A = [a_0, a_1, a_2, \\dots, a_{N-1}] が与えられます。 k = 0, 1, 2, \\dots, N - 1 のそれぞれについて、 b_i = a_{i+k \\bmod N} で定義される数列 B = [b_0, b_1, b_2, \\dots, b_{N-1}] の転倒数を求めてください。 転倒数とは 数列 A = [a_0, a_1, a_2, \\dots, a_{N-1}] の転倒数とは、 i < j かつ a_i > a_j を満たす添字の組 (i, j) の個数のことです。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 入力は全て整数 2 ≤ N ≤ 3 \\times 10^5 a_0, a_1, a_2, \\dots, a_{N-1} は 0, 1, 2, \\dots, N - 1 の並び替えである"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N a_0 a_1 a_2 \\cdots a_{N-1}"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N 行出力せよ。 i + 1 行目には、 k = i としたときの答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\r\n0 1 2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 0\r\n3\r\n4\r\n3 A = [0, 1, 2, 3] です。 k = 0 のとき、 B = [0, 1, 2, 3] の転倒数は 0 です。 k = 1 のとき、 B = [1, 2, 3, 0] の転倒数は 3 です。 k = 2 のとき、 B = [2, 3, 0, 1] の転倒数は 4 です。 k = 3 のとき、 B = [3, 0, 1, 2] の転倒数は 3 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10\r\n0 3 1 5 4 2 9 6 8 7"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 9\r\n18\r\n21\r\n28\r\n27\r\n28\r\n33\r\n24\r\n21\r\n14"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc190/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:07.014526+00:00",
+  "statement_sha256": "135f1421343641ac62f1a59d8cd0e81e49812dcf62cfd3330e29083acf56720a",
+  "editorials": []
+}

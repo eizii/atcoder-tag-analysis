@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc061_b",
+  "title": "Counting Roads",
+  "contests": [
+    {
+      "contest_id": "abc061",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 193,
+  "raw_difficulty": 108,
+  "contest_id": "abc061",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc061/tasks/abc061_b",
+  "statement": "配点 : 200 点 問題文 N 個の都市があり、 M 本の道路があります。 i(1≦i≦M) 番目の道路は、都市 a_i と 都市 b_i (1≦a_i,b_i≦N) を双方向に結んでいます。 同じ 2 つの都市を結ぶ道路は、 1 本とは限りません。 各都市から他の都市に向けて、何本の道路が伸びているか求めてください。 制約 2≦N,M≦50 1≦a_i,b_i≦N a_i ≠ b_i 入力は全て整数である。 入力 入力は以下の形式で標準入力から与えられる。 N M a_1 b_1 : a_M b_M 出力 答えを N 行に出力せよ。 i(1≦i≦N) 行目には、都市 i から他の都市に向けて、何本の道路が伸びているかを出力せよ。 入力例 1 4 3\r\n1 2\r\n2 3\r\n1 4 出力例 1 2\r\n2\r\n1\r\n1 都市 1 からは 1 番目と 3 番目の道路が伸びています。 都市 2 からは 1 番目と 2 番目の道路が伸びています。 都市 3 からは 2 番目の道路が伸びています。 都市 4 からは 3 番目の道路が伸びています。 入力例 2 2 5\r\n1 2\r\n2 1\r\n1 2\r\n2 1\r\n1 2 出力例 2 5\r\n5 入力例 3 8 8\r\n1 2\r\n3 4\r\n1 5\r\n2 8\r\n3 7\r\n5 2\r\n4 1\r\n6 8 出力例 3 3\r\n3\r\n2\r\n2\r\n2\r\n1\r\n1\r\n2",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 個の都市があり、 M 本の道路があります。 i(1≦i≦M) 番目の道路は、都市 a_i と 都市 b_i (1≦a_i,b_i≦N) を双方向に結んでいます。 同じ 2 つの都市を結ぶ道路は、 1 本とは限りません。 各都市から他の都市に向けて、何本の道路が伸びているか求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2≦N,M≦50 1≦a_i,b_i≦N a_i ≠ b_i 入力は全て整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M a_1 b_1 : a_M b_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを N 行に出力せよ。 i(1≦i≦N) 行目には、都市 i から他の都市に向けて、何本の道路が伸びているかを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 3\r\n1 2\r\n2 3\r\n1 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2\r\n2\r\n1\r\n1 都市 1 からは 1 番目と 3 番目の道路が伸びています。 都市 2 からは 1 番目と 2 番目の道路が伸びています。 都市 3 からは 2 番目の道路が伸びています。 都市 4 からは 3 番目の道路が伸びています。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2 5\r\n1 2\r\n2 1\r\n1 2\r\n2 1\r\n1 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 5\r\n5"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 8 8\r\n1 2\r\n3 4\r\n1 5\r\n2 8\r\n3 7\r\n5 2\r\n4 1\r\n6 8"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 3\r\n3\r\n2\r\n2\r\n2\r\n1\r\n1\r\n2"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc061/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:33:45.754236+00:00",
+  "statement_sha256": "3b1d0580cd67b8950866cdfe25bfc3ddf087c54ff8fd00bfb21bcc43e3263d34",
+  "editorials": []
+}

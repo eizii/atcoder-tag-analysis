@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc471_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc471/editorial/24210",
+      "text": "時刻 \\(t_0\\) に残量 \\(w_0\\) で挿入したバッテリーについて，時刻 \\(t\\) における残量は \\(w = \\min(w_0 + (t - t_0),\\ V)\\) です．これは， \\(u_0 := w_0 - t_0\\) とおいて \\(w = \\min(t + u_0,\\ V)\\) と式変形できます． 時刻 \\(t\\) を固定したとき， \\(\\min(t + u_0,\\ V)\\) は \\(u_0\\) に対して広義単調増加です．また，ある時点で残量が等しい \\(2\\) バッテリーは，それ以降の任意の時刻でも残量が等しいことから，残量が等しいバッテリーたちの内からは \\(u_0\\) が大きいほうを優先して選ぶとしてよいです． このとき，タイプ \\(2\\) のクエリでは \\(u_0\\) が大きいほうのバッテリーを貪欲に選んで排出します． 以上より，「 \\(u_0\\) の値を追加」「 \\(u_0\\) の最大値を取得・削除」の \\(2\\) 通りの処理を行えばよく，これは優先度付きキューによって実装できます．時間計算量は \\(O(Q \\log Q)\\) となり，十分高速です． 実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\n#include <vector>\nusing std::vector;\nusing std::pair;\n#include <map>\nusing std::map;\nusing std::max;\nusing std::min;\n#include <queue>\nusing std::priority_queue;\nusing std::greater;\n\n\n#ifdef DEBUG\nconst int debug = 1;\n#else\nconst int debug = 0;\n#endif\n\nusing ll = int64_t;\nusing P = pair<ll, ll>;\n\nconst ll FOD = 998244353;\n#include <atcoder/modint>\nusing mint = atcoder::modint998244353;\n#include <atcoder/convolution>\nusing atcoder::convolution;\n\nll q, v;\n\n\ninline void output (const ll x) {\n\tcout << x << \"\\n\";\n}\n\nvoid solve() {\n\tpriority_queue<ll, vector<ll> > que;\n\n\tfor (ll qi = 0; qi < q; qi++) {\n\t\tll type;\n\t\tcin >> type;\n\t\tif (type == 1) {\n\t\t\t// type 1 (insert)\n\t\t\tll t, w;\n\t\t\tcin >> t >> w;\n\n\t\t\tque.push(w - t);\n\t\t} else {\n\t\t\t// type 2 (pop)\n\t\t\tll t;\n\t\t\tcin >> t;\n\n\t\t\tif (que.empty()) {\n\t\t\t\tcout << \"-1\" << \"\\n\";\n\t\t\t} else {\n\t\t\t\tll w0 = que.top();\n\t\t\t\tque.pop();\n\n\t\t\t\tll ans = min(w0 + t, v);\n\t\t\t\tcout << ans << \"\\n\";\n\t\t\t}\n\t\t}\n\t}\n\n\treturn;\n}\n\nint main (void) {\n\tstd::cin.tie(nullptr);\n\tstd::ios_base::sync_with_stdio(false);\n\n\tcin >> q >> v;\n\n\t\n\tsolve();\n\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "fdb007fa87a18fbfcf5e95b97d255f2a90a2a2d47518ac9a6d6366d89be5be08"
+    }
+  ],
+  "status": "available"
+}

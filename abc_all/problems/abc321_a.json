@@ -1,0 +1,72 @@
+{
+  "problem_id": "abc321_a",
+  "title": "321-like Checker",
+  "contests": [
+    {
+      "contest_id": "abc321",
+      "problem_index": "A"
+    }
+  ],
+  "difficulty": 22,
+  "raw_difficulty": -754,
+  "contest_id": "abc321",
+  "problem_index": "A",
+  "url": "https://atcoder.jp/contests/abc321/tasks/abc321_a",
+  "statement": "配点 : 100 点 問題文 以下の条件を満たす正整数 x を 321-like Number と呼びます。 x の各桁を上から見ると狭義単調減少になっている。 すなわち、 x が d 桁の整数だとすると、 1 \\le i < d を満たす全ての整数 i について以下の条件を満たす。 ( x の上から i 桁目 ) > ( x の上から i+1 桁目 ) なお、 1 桁の正整数は必ず 321-like Number であることに注意してください。 例えば、 321,96410,1 は 321-like Number ですが、 123,2109,86411 は 321-like Number ではありません。 N が入力として与えられるので、 N が 321-like Number なら Yes 、そうでないなら No と出力してください。 制約 入力は全て整数 1 \\le N \\le 99999 入力 入力は以下の形式で標準入力から与えられる。 N 出力 N が 321-like Number なら Yes 、そうでないなら No と出力せよ。 入力例 1 321 出力例 1 Yes N=321 に対して、以下が成り立ちます。 上から 1 桁目の 3 は上から 2 桁目の 2 より大きい。 上から 2 桁目の 2 は上から 3 桁目の 1 より大きい。 以上より、 321 は 321-like Number です。 入力例 2 123 出力例 2 No N=123 について、例えば以下が成り立ちます。 上から 1 桁目の 1 は上から 2 桁目の 2 より大きくない。 このことから、 123 は 321-like Number ではありません。 入力例 3 1 出力例 3 Yes 入力例 4 86411 出力例 4 No",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 以下の条件を満たす正整数 x を 321-like Number と呼びます。 x の各桁を上から見ると狭義単調減少になっている。 すなわち、 x が d 桁の整数だとすると、 1 \\le i < d を満たす全ての整数 i について以下の条件を満たす。 ( x の上から i 桁目 ) > ( x の上から i+1 桁目 ) なお、 1 桁の正整数は必ず 321-like Number であることに注意してください。 例えば、 321,96410,1 は 321-like Number ですが、 123,2109,86411 は 321-like Number ではありません。 N が入力として与えられるので、 N が 321-like Number なら Yes 、そうでないなら No と出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 入力は全て整数 1 \\le N \\le 99999"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N が 321-like Number なら Yes 、そうでないなら No と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 321"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes N=321 に対して、以下が成り立ちます。 上から 1 桁目の 3 は上から 2 桁目の 2 より大きい。 上から 2 桁目の 2 は上から 3 桁目の 1 より大きい。 以上より、 321 は 321-like Number です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 123"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No N=123 について、例えば以下が成り立ちます。 上から 1 桁目の 1 は上から 2 桁目の 2 より大きくない。 このことから、 123 は 321-like Number ではありません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes"
+    },
+    {
+      "heading": "入力例 4",
+      "text": "入力例 4 86411"
+    },
+    {
+      "heading": "出力例 4",
+      "text": "出力例 4 No"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc321/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:50.751758+00:00",
+  "statement_sha256": "760b18e6d2f41e2262607d8af3a163218289815376f29f1b5af09983de688b10",
+  "editorials": []
+}

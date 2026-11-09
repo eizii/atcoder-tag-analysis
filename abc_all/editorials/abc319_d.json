@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc319_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc319/editorial/7115",
+      "text": "次の問題について考えてみましょう。\n高橋くんが文章を幅\n\\(W\\)\nのウィンドウに表示しようとしたとき、最低でも何行必要ですか？ただし、\n\\(L _ i\\leq W\\)\nです。\n単語を先頭から貪欲に（改行する必要がなければ改行せずに）配置するのが最適です。\nある単語で改行する必要がないのに改行した最適解があるとします。\nその単語以降を\n\\(k\\)\n行以内に収めることができる場合、その単語で改行しなくても\n\\(k\\)\n行以内に収めることができます。\nよって、改行する必要がないところで改行をしない最適解があることが示されました。\nよって、この問題は\n\\(O(N)\\)\n時間で解くことができます。\nこの問題の答えを\n\\(f(W)\\)\nとすると、\n\\(f(W)\\leq M\\)\nであるような最小の\n\\(W\\)\nが元の問題の答えです。\n\\(f\\!\\left(-1+\\sum _ i(1+L _ i)\\right)=1\\)\nなので、答えは\n\\(\\max _ iL _ i\\)\n以上\n\\(-1+\\sum _ i(1+L _ i)\\)\n以下です。\n\\(f(W)\\)\nは単調減少する関数なので、二分探索でこの問題を解くことができました。\n時間計算量は\n\\(O(N\\log\\sum L _ i)\\)\nになります。\n実装例は以下のようになります。\n実装の際は、すべての単語の先頭にあらかじめ空白をつけておき、単語の間に間隔を開ける必要がないようにしておくとシンプルになるかもしれません（この場合、答えが\n\\(1\\)\nずれることに注意してください）。\nC++20 以降では、\nstd::ranges::partition_point\n関数に\nranges::iota_view\nと判定関数を渡すことで二分探索を行うことができます。\nこの関数を用いる際、判定関数は先頭から\ntrue\n→\nfalse\nの順番になっている必要があります。",
+      "codes": [
+        "#include <vector>\n#include <algorithm>\n#include <iostream>\n#include <ranges>\n#include <numeric>\n\nint main() {\n    using namespace std;\n\n    int N, M;\n    cin >> N >> M;\n    vector<long> L(N);\n    for (int i = 0; i < N; ++i) {\n        cin >> L[i];\n        ++L[i]; // 先頭に空白をつけておく\n    }\n\n    long lower = ranges::max(L) - 1; // 答えは max L[i] 以上\n    long upper = reduce(begin(L), end(L)); // 答えは ∑ L[i] 以下\n\n    // 二分探索\n    while (lower + 1 < upper) {\n        long middle = (lower + upper) / 2;\n\n        int rows = 1; // 今の行数\n        long length = 0; // 先頭から何文字目か\n        for (int i = 0; i < N; ++i) {\n            length += L[i]; // 行の末尾に追加してみる\n            if (length > middle) { // はみ出たら\n                ++rows; // 改行して\n                length = L[i]; // 先頭に追加\n            }\n        }\n\n        if (rows > M) // 縦幅が足りていなければ\n            lower = middle; // 答えは middle より大きい\n        else // 足りていれば\n            upper = middle; // 答えは middle 以下\n    }\n\n    // 答えから 1 を引いて出力\n    cout << upper - 1 << endl;\n\n    return 0;\n}",
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <ranges>\n#include <numeric>\n\nint main() {\n    using namespace std;\n\n    unsigned N, M;\n    cin >> N >> M;\n    vector<unsigned long> L(N);\n    for(auto&& l : L){\n        cin >> l;\n        ++l; // 先頭に空白を加えておく\n    }\n\n    // 二分探索の判定関数\n    // 答えが W より大のとき true を返す\n    // => false を返す最小の値が答え\n    const auto check{[L, M](unsigned long W) -> bool {\n        unsigned long length = 0;\n        unsigned rows = 1;\n        for (const auto l : L) {\n            length += l;\n            if (length > W) {\n                ++rows;\n                length = l;\n            }\n        }\n        return rows > M;\n    }};\n\n    // ranges::partition_point(r, f) は、範囲 r のうち f が false を返す先頭の要素を求める\n    // (ただし、r は f によって区分化されている(f が true を返す要素は f が false を返すどの要素よりも前にある)必要がある)\n    // 答えから 1 を引いて出力\n    cout << *ranges::partition_point(views::iota(ranges::max(L), reduce(begin(L), end(L))), check) - 1 << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "0af5169acebea78d34c8324729d852c4ba1572ad6aba4f1af48cdf3cd19fd2d0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc319/abc319_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

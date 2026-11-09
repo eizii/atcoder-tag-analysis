@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc373_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc373/editorial/11042",
+      "text": "この問題では for文と文字列の長さの取得が要求されています。\nfor文で\n\\(i=1,2,\\ldots 12\\)\nについて以下の操作を繰り返すことで答えを得られます。\n文字列を入力する\nその文字列の長さが\n\\(i\\)\nと等しければ答えに\n\\(1\\)\nを加算する。\n実際に実装する際は、言語に合わせて文字列の長さの取得などを用いる必要があります。\nC++の場合文字列は\nstd::string\nを用い、\nstd::string s\nに対して\ns\nの長さの取得は\ns.size()\nとすることでできます。\nPythonの場合は\ns\nの長さを取得は\nlen(s)\nでできます。\n実装例(C++):\n実装例(Python3):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int ans = 0;\n    for (int i = 1; i <= 12; ++i) {\n        string s;\n        cin >> s;  // 文字列 s の入力\n        if ((int)s.size() == i) {  // 長さが i と等しいか判定\n            ans++; // 等しい場合は答えに 1 加算\n        }\n    }\n    cout << ans << endl;\n}",
+        "ans = 0\n\nfor i in range(1, 12 + 1):\n    s = input()  # 文字列 s の入力\n    if len(s) == i:  # 長さが i と等しいか判定\n        ans += 1  # 等しい場合は答えに 1 加算\n\nprint(ans)"
+      ],
+      "text_sha256": "6d1dd34c41c60166348d3e72152f69dff6a4cff79afb0131a94609d948380815",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc373/abc373_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

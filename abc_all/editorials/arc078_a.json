@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc078_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc078/editorial.pdf",
+      "text": "C : Splitting Pile\n\n N 枚のカードに書かれた数の総和をX とする．カードの山の先頭i 枚のカードに書かれた数の\n\n総和がxi であったとすると，残ったカードたちに書かれた数の和yi はX −xi であり，|yi −xi|\nは|X −2xi| となる．\n  1 からN −1 までの全てのi について|X −2xi| を試せばよい．これはO(N) で実行可能であ\n\nり，十分高速である．\n\n#include <algorithm>\n\n#include <iostream>\n\n#include <vector>\n\nusing namespace std;\n\nint main(){\n\n    int n;\n\n    long long X=0,x=0,ans=1000000000000000000LL;\n\n    cin>>n;\n\n    vector<long long> a(n);\n\n    for(int i=0;i<n;i++){\n\n        cin>>a[i];\n\n        X+=a[i];\n\n    }\n\n    for(int i=0;i<n;i++){\n\n        x+=a[i];\n\n        if(i+1<n)ans=min(ans,abs(X-2*x));\n\n    }\n\n    cout<<ans<<endl;\n\n}\n\n\n\n\n\n                                        3",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "a832cf66abcd28e5a5769e3dfbb08f8000a56d05c759f60a41838337398e2c25"
+    }
+  ],
+  "status": "available"
+}

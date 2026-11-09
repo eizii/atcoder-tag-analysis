@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc437_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc437/editorial/14898",
+      "text": "実装方針\n求めるものをかみ砕くと、以下のようにして実装できます。\n各行について、その行にある\n\\(W\\)\n個の値のうち\n\\(B\\)\nに入っているものの個数 (\n\\(r_i\\)\nとおく) を求める。\n\\(r_1, \\dots, r_H\\)\nの最大値が答え。\nある値が\n\\(B\\)\nに入っているかどうかの判定は、\n\\(B\\)\nの要素\n\\(N\\)\n個をそれぞれ見て、探している値と等しいものが見つかれば Yes、すべて見ても見つからなければ No とすれば判定できます。\nこれをある行にある\n\\(W\\)\n個の値それぞれについて判定し、\n\\(r_i = 0\\)\nで初期化した変数\n\\(r_i\\)\nに対して存在する値ごとに\n\\(1\\)\n増やせば、その行について求める個数が得られます。\n以上のことを、ループや条件分岐といった言語機能を使って適切に実装することでこの問題を解くことができます。多重ループの実装に注意してください。\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::max;\n\nint main (void) {\n\t// 入力\n\tint h, w, n;\n\tcin >> h >> w >> n;\n\tint a[h][w];\n\tfor (int i = 0; i < h; i++) {\n\t\tfor (int j = 0; j < w; j++) {\n\t\t\tcin >> a[i][j];\n\t\t}\n\t}\n\tint b[n];\n\tfor (int i = 0; i < n; i++) {\n\t\tcin >> b[i];\n\t}\n\t\n\t// 答えを求め、変数 ans に記録\n\tint ans = 0;\n\tint rowcount[h]; \n\tfor (int i = 0; i < h; i++) {\n\t\t// 行 i における答えを求める (rowcount[i])\n\t\trowcount[i] = 0;\n\t\tfor (int j = 0; j < w; j++) {\n\t\t\tbool isfound = false; // a[i][j] が b に入っているとき true\n\t\t\tfor (int k = 0; k < n; k++) {\n\t\t\t\tif (b[k] == a[i][j]) isfound = true;\n\t\t\t}\n\t\t\tif (isfound) {\n\t\t\t\trowcount[i] += 1;\n\t\t\t}\n\t\t}\n\t\t// ans を更新する\n\t\tans = max(ans, rowcount[i]);\n\t}\n\n\t// 出力\n\tcout << ans << \"\\n\";\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "a7702853c0e57399607ad3bf4c2c86061c8fbed42fadd9c8a9c2750c01d0bb0a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc437/abc437_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

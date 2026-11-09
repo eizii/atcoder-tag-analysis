@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc083_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc088/editorial.pdf",
+      "text": "B: Some Sums\n\n N 以下の整数の各桁の和を求め、適切に場合分けをして足し合わせてやればよいです。\n\n#include <stdio . h>\n\n int main ()\n\n{\n\n          int n ,  a , b ;\n\n         scanf (”%d%d%d” , &n , &a , &b ) ;\n\n          int  r = 0;\n\n           fo r  ( int   i = 1;   i <= n ;  i++)\n\n          {\n\n                    int  c = 0 ,  t =  i ;\n\n                     fo r  ( int   j = 0;   j < 5;  j++)c +=  t % 10 ,  t /= 10;\n\n                                    i f  ( a <= c&&c <= b) r +=  i ;\n\n          }\n\n         p r i n t f (”%d\\n” ,  r ) ;\n\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "ec46da0a4c146288c363173dd6fb5d256586754eceaa10d5303bbd948d82690a"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc204_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc204/editorial/1991",
+      "text": "スタート地点を固定したときゴール地点にできる都市の個数を数えることを考えてみましょう。\nゴール地点にできる都市は、スタート地点からいくつかの道路を使って到達できるような都市です。そのような都市は、DFSやBFSなどの探索アルゴリズムを用いて求めることができます。この際、既にチェックした頂点を2度以上調べないようにすることで、\n\\(O(N+M)\\)\nで求めることができます。\nどの都市をスタート地点とするか\n\\(N\\)\n通り全てを試すことで、全体で\n\\(O(N(N+M))\\)\nで問題が解けました。\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "# おまじない\nimport sys\nsys.setrecursionlimit(10000)\n\n# 入力の読み込み\nN,M=map(int,input().split())\nG=[[] for i in range(N)]\n# G[i] は都市iから道路で直接繋がっている都市のリスト\nfor i in range(M):\n  A,B=map(int,input().split())\n  G[A-1].append(B-1)\n\n# dfs\ndef dfs(v):\n  if temp[v]: return  # 同じ頂点を2度以上調べないためのreturn\n  temp[v]=True\n  for vv in G[v]: dfs(vv)\n\nans=0\n\n# 都市iからスタートする場合\nfor i in range(N):\n\ttemp=[False]*N\n\t# temp[j] は都市jに到達可能かどうかを表す\n\tdfs(i)\n\tans+=sum(temp)\n\nprint(ans)",
+        "#include<bits/stdc++.h>\nusing namespace std;\nconst int MAX_N=2000;\n\nvector<vector<int>>G;\nbool temp[MAX_N];\nvoid dfs(int v){\n\tif(temp[v])return;\n\ttemp[v]=true;\n\tfor(auto vv:G[v])dfs(vv);\n}\n\nint main(){\n\tint N,M;\n\tcin >> N >> M;\n\tG.resize(N);\n\tfor(int i=0;i<M;i++){\n\t\tint a,b;\n\t\tcin >> a >> b;\n\t\tG[a-1].push_back(b-1);\n\t}\n\n\tint ans=0;\n\tfor(int i=0;i<N;i++){\n\t\tfor(int j=0;j<N;j++)temp[j]=false;\n\t\tdfs(i);\n\t\tfor(int j=0;j<N;j++)if(temp[j])ans++;\n\t}\n\t\n\tcout << ans;\n}"
+      ],
+      "text_sha256": "b7c0d451ead72060051fa594705419a5a7a48ba7bdea4f718baf7b7bff8a92f9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc204/abc204_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc204/editorial/2043",
+      "text": "強連結成分分解してDAG(有向非巡回グラフ)に変換します。\nDAG上での到達判定は頂点\n\\(u\\)\nから到達できるかという情報を\n\\(N\\)\n個保持しておけばDPで\n\\(O(N(N+M))\\)\nで求めることができました。\nC++の\nstd::bitset\nや.NETの\nSystem.Collections.BitArray\nなどで到達できるかを保持すると高速化が望めます。",
+      "codes": [],
+      "text_sha256": "1311c59f0da390619253b08f7c3b1035fcb99be6a3fd0766b66edaa1d4a736b1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc204/abc204_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc444_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc444/editorial/15690",
+      "text": "原案：admin\nこの問題は尺取法により解くことができます。\n\\(L\\)\nを固定した問題\n\\(L\\)\nを固定したとき、どのような\n\\(R\\)\nが条件を満たすか考えます。\nもし\n\\((L,R)\\)\nが条件を満たさないなら、ある\n\\(i,j\\)\nが存在して、\n\\(L\\leq i < j \\leq R\\)\nかつ\n\\(|A_i-A_j|<D\\)\nとなります。この\n\\((i,j)\\)\nが反例となり、どのような\n\\(\\alpha \\geq 1\\)\nに対しても\n\\((L,R+\\alpha)\\)\nは条件を満たしません。\nすなわち、ある\n\\(f(L)\\)\nが存在し、\n\\((L,L),(L,L+1),\\dots,(L,f(L))\\)\nは条件を満たし、\n\\((L,f(L)+1),\\dots,(L,N)\\)\nは条件を満たさないことになります。\n全ての\n\\(L\\)\nでの\n\\(f(L)\\)\nを求める\n\\(f(L)\\)\nがわかっているとき\n\\(f(L+1)\\)\nを求めることを考えます。\n\\((L,f(L))\\)\nが条件を満たすため、そこから対象となる組が減った\n\\((L+1,f(L))\\)\nも条件を満たします。即ち\n\\(f(L)\\leq f(L+1)\\)\nであり、\n\\(f(L+1)\\)\nを求めるには\n\\(f(L)\\)\nの”続き”から確認をすれば十分です。よって、以下の擬似コードに示すような尺取法を行うことができます。\n擬似コード\n判定問題を高速に解く\nこの尺取法が高速に動作するためには、判定問題「\n\\((L,R)\\)\nが条件を満たすか？」を高速に判定する必要があります。\n\\((L,R-1)\\)\nが条件を満たすとき、\n\\((L,R)\\)\nが条件を満たすための必要十分条件は、全ての\n\\(L \\leq i < R\\)\nに対して\n\\(|A_i-A_R| \\geq D\\)\nとなることです。このことは「\n\\(A_L,\\dots,A_{R-1}\\)\nのうち\n\\(A_R\\)\n以上の最小の要素が\n\\(A_R+D\\)\n以上かつ、\n\\(A_R\\)\n以下の最大の要素が\n\\(A_R-D\\)\n以下であること」と同値です。\nよって、以下ができるデータ構造があれば十分です\n要素の追加\n要素の削除\n\\(x\\)\n以上の最小の要素の取得\n\\(x\\)\n以下の最大の要素の取得\nこれらは ordered set を用いることでいずれも\n\\(O(\\log N)\\)\n時間で行えるため、\n\\(O(N\\log N)\\)\nでこの問題が解けました。\n実装例(C++)",
+      "codes": [
+        "ans = 0\nR = 1\nfor L in 1..N:\n  while (L, R) が条件を満たす:\n    R <- R+1\n  //(L,L),...(L,R-1)が条件を満たす\n  ans <- ans+(R-L)",
+        "#include<bits/stdc++.h>\nusing namespace std;\nusing ll=long long;\n\nint main(){\n\tint n,d;\n\tcin >> n >> d;\n\tvector<int>a(n);\n\tfor(auto&x:a)cin >> x;\n\t\n\tll ans=0;\n\tset<ll>s({(ll)-1e9,(ll)2e9});\n\tint r=0;\n\tfor(int l=0;l<n;l++){\n\t\twhile(r<n){\n\t\t\tauto it=s.lower_bound(a[r]);\n\t\t\tif(*it-a[r]<d)break;\n\t\t\tit--;\n\t\t\tif(a[r]-*it<d)break;\n\t\t\ts.insert(a[r]);\n\t\t\tr++;\n\t\t}\n\t\tans+=r-l;\n\t\ts.erase(a[l]);\n\t}\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "5fcbad890d80904b84999c4d2172666a08d3a87eaae1c5949305b5c5642523d7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc444/abc444_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

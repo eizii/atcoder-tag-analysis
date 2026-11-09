@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc211_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc211/editorial/2286",
+      "text": "色々な解法が考えられますが、\nNo\nとなる条件を考えるのが簡単だと思います。\nNo\nとなる条件は\n\\(S_i = S_j (i \\neq j)\\)\nなる\n\\( (i, j)\\)\nが存在する\nことです。\nこの方針で実装すると、以下のようになります。\nC++による実装例:",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nsigned main(){\n    vector<string>s(4);\n    for(int i=0;i<=3;i++)cin>>s[i];\n    for(int i=0;i<=3;i++){\n        for(int j=0;j<=3;j++){\n            if(i!=j && s[i]==s[j]){\n                cout<<\"No\"<<endl;\n                return 0;//プログラムを終了する\n            }\n        }\n    }\n    cout<<\"Yes\"<<endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "cf9dd21ac51e8ed2b513ec14e9f0ba042355c972488ccb516a0b4b1ada14d482",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc211/abc211_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

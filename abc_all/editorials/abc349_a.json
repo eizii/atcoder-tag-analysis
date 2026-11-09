@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc349_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc349/editorial/9777",
+      "text": "\\(N\\)\n人の持ち点の合計は常に\n\\(0\\)\nになります．よって，人\n\\(N\\)\nの持ち点を\n\\(A_N\\)\nとすると\n\\(A_1+A_2+\\ldots+A_{N-1}+A_N=0\\)\nが成り立ち，\n\\(A_N=-(A_1+A_2+\\ldots+A_{N-1})\\)\nです．\n\\(N-1\\)\n人の持ち点を受け取り，それらの合計を\n\\(-1\\)\n倍した値を出力すればよいです．\n実装例 (c++)\n実装例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main()\n{\n  int N;\n  cin >> N;\n  vector<int> A(N - 1);\n  int sum = 0;\n  for (int i = 0; i < N - 1; i++)\n  {\n    cin >> A[i];\n    sum += A[i];\n  }\n  cout << -sum << endl;\n}",
+        "N = int(input())\nA = list(map(int, input().split()))\nprint(-sum(A))"
+      ],
+      "text_sha256": "cf6fc6966074091846478b67f71ac2e447f3337b7376796200d036238ab6357b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc349/abc349_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

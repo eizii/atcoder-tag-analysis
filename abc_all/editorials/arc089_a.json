@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc089_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc089/editorial.pdf",
+      "text": "C: Traveling\n\n  t0 = 0, (x0, y0) = (0, 0) と置きます。各0 以上N −1 以下のi について、時刻ti に場所(xi, yi) にいた後、\n時刻ti+1 に場所(xi+1, yi+1) にいることができるか、を判定して、どれか一つでも不可能ならNo を、全て可\n能ならYes を出力すれば良いです。\n\n\n                                             1\n\f\n この判定は、t := ti+1 −ti, d := abs(xi −xi+1) + abs(yi −yi+1) とおくと、d ≤t ∧t%2 = d%2 で判定で\nきます。(d ≤t でないと不可能なのは明らか、毎秒x + y の偶奇は変わるので2 で割ったあまりは一致する\n\n必要がある。逆にd, t がこれを満たすなら実際に条件のように動くことが可能)",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "6ece09143bacd9db98c299236c0ccabc76396d7383c6e0e4cf4b990d1488d741"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc359_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc359/editorial/10260",
+      "text": "木の次数列\n\\(d=(d_1,\\ldots,d_N)\\)\nとしてあり得る整数列は以下を満たすものです。\n\\(d_i \\geq 1\\)\n\\(\\sum_{i=1}^N d_i = 2N-2\\)\n（補足：この事実は、プリューファーコードを考えることで直ちに従います。または、総和の条件から\n\\(d_i=1\\)\nを満たす頂点が必ず存在することから、そのような頂点\n\\(i\\)\nとそれ以外の頂点の辺を取り除くことを考えて、帰納法を回すことでも示せます。）\nこの条件を満たす任意の列は木の次数列としてあり得るので、上の条件を満たす列にたいするコストの最小値を考えればよいです。\nこれは、今回のコストの増加分が\n\\(d_i\\)\nの値に対して単調増加なことから、貪欲法を行うことで解くことが出来ます。\n（補足：貪欲法の正当性は凸関数同士の畳み込みを考えれば示せます。）\n具体的には、はじめ全ての\n\\(i\\)\nについて\n\\(d_i=1\\)\nで初期化し、\n\\(d_i\\)\nを\n\\(1\\)\n増やしたときのコストの増加分が最小となるような\n\\(i\\)\nについて\n\\(d_i\\)\nを\n\\(1\\)\n増やすことを\n\\(N-2\\)\n回繰り返せばよいです。\n更にこの貪欲法は priority_queue などを使うことで高速化できて、\n\\(\\mathrm{O}(N\\log N)\\)\nで動作します。",
+      "codes": [],
+      "text_sha256": "798513daa664fa56d3abfed5b07e5a543de920ecb1bcb0dde6c0b9ccc52ad7c0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc359/abc359_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

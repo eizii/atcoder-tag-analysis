@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc456_g",
+  "title": "Count Holidays",
+  "contests": [
+    {
+      "contest_id": "abc456",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2488,
+  "raw_difficulty": 2488,
+  "contest_id": "abc456",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc456/tasks/abc456_g",
+  "statement": "配点 : 600 点 問題文 高橋君はこれから N 日間についての勤務予定を、各日を勤務日か休日のどちらかに設定することで作成しようとしています。 勤務に関する条件を表す長さ N の文字列 S が与えられます。 S の i 文字目が x のとき i 日目は必ず勤務日にしなければなりません。 . のとき i 日目は勤務日と休日のどちらにすることもできます。 条件を満たす勤務予定は S に含まれる . の個数を q としたとき全部で 2^q 通り考えられます。 k=1,2,\\dots,N について次の問題を解いてください。 条件を満たす勤務予定 2^q 通りのうち、最長の連続する休日がちょうど k 日であるような決め方の総数を 998244353 で割ったあまりを求めてください。 制約 N は 1 以上 2 \\times 10^5 以下の整数 S は . , x からなる長さ N の文字列 入力 入力は以下の形式で標準入力から与えられる。 N S 出力 N 行出力せよ。 i 行目には k=i のときの答えを出力せよ。 入力例 1 5\n.x... 出力例 1 9\n4\n2\n0\n0 休日を o で表すとき、条件を満たす勤務予定はそれぞれ以下のようになります。 k=1 ： oxxxx , oxoxx , oxoxo , oxxox , oxxxo , xxoxx , xxoxo , xxxox , xxxxo k=2 ： oxoox , oxxoo , xxoox , xxxoo k=3 ： oxooo , xxooo 入力例 2 7\n....... 出力例 2 33\n47\n27\n12\n5\n2\n1 入力例 3 20\n.....x...x.......... 出力例 3 9359\n75312\n94664\n46840\n23680\n7168\n3072\n1280\n512\n256\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 高橋君はこれから N 日間についての勤務予定を、各日を勤務日か休日のどちらかに設定することで作成しようとしています。 勤務に関する条件を表す長さ N の文字列 S が与えられます。 S の i 文字目が x のとき i 日目は必ず勤務日にしなければなりません。 . のとき i 日目は勤務日と休日のどちらにすることもできます。 条件を満たす勤務予定は S に含まれる . の個数を q としたとき全部で 2^q 通り考えられます。 k=1,2,\\dots,N について次の問題を解いてください。 条件を満たす勤務予定 2^q 通りのうち、最長の連続する休日がちょうど k 日であるような決め方の総数を 998244353 で割ったあまりを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 N は 1 以上 2 \\times 10^5 以下の整数 S は . , x からなる長さ N の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N 行出力せよ。 i 行目には k=i のときの答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\n.x..."
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 9\n4\n2\n0\n0 休日を o で表すとき、条件を満たす勤務予定はそれぞれ以下のようになります。 k=1 ： oxxxx , oxoxx , oxoxo , oxxox , oxxxo , xxoxx , xxoxo , xxxox , xxxxo k=2 ： oxoox , oxxoo , xxoox , xxxoo k=3 ： oxooo , xxooo"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 7\n......."
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 33\n47\n27\n12\n5\n2\n1"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 20\n.....x...x.........."
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 9359\n75312\n94664\n46840\n23680\n7168\n3072\n1280\n512\n256\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc456/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:40.314318+00:00",
+  "statement_sha256": "a19c2bb12d10c2af34255678881058ebc103601d005ab0016e0d7e788923acd3",
+  "editorials": []
+}

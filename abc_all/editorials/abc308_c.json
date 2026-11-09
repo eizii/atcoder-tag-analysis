@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc308_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc308/editorial/6689",
+      "text": "まず、二人の人の成功率を比較する関数を設計しましょう。ここで、問題文で言われた通りに\n\\(\\frac{A_i}{A_i+B_i}\\)\nと\n\\(\\frac{A_j}{A_j+B_j}\\)\nの大小を浮動小数点型を用いて比較するのは、誤差の関係上危険です。実際、\ndouble\nを用いた大小比較による解法は落ちるケースが複数入っています。\nここでは、\n\\(\\frac{A_i}{A_i+B_i}<\\frac{A_j}{A_j+B_j}\\)\nの分母を払ってあげて、\n\\({A_i}{(A_j+B_j)}<{A_j}{(A_i+B_i)}\\)\nかどうかを判定することにすれば、整数型を用いて大小比較をすることができます。（なお、\n\\({A_i}{(A_j+B_j)}\\)\nは 32bit 整数型に収まらないため 64bit 整数型を用いる必要があります。）\n以上のように設計した関数を、標準ライブラリなどのソート関数に渡してあげればよいです。しかし、あと一つ注意点があります。これは、 C++ の標準ライブラリ\nstd::sort\nは\n安定ソート(Wikipedia)\nでないことです。そのため、比較関数が同率の場合ソートの前後で順序が入れ替わってしまう可能性があります。\nこの解決策としては、安定ソートである\nstd::stable_sort\nを用いるか、\n\\({A_i}{(A_j+B_j)}={A_j}{(A_i+B_i)}\\)\nの場合\n\\(i<j\\)\nであるかという判定を比較関数に加えればよいです。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<pair<int, int>> ab;\n    for(int i = 0; i < n; i++) {\n        int a, b;\n        cin >> a >> b;\n        ab.emplace_back(a, a + b);\n    }\n    vector<int> p(n);\n    iota(p.begin(), p.end(), 0);\n    auto f = [&](int i, int j) {\n        auto [ai, aj] = ab[i];\n        auto [bi, bj] = ab[j];\n        return (long long)ai * bj > (long long)aj * bi;\n    };\n    stable_sort(p.begin(), p.end(), f);\n    for(int i = 0; i < n; i++) cout << p[i] + 1 << \" \\n\"[i == n - 1];\n}"
+      ],
+      "text_sha256": "5be97cf4bc27b4e8a90dcf4014ef6c0017eccb6d07bb4671bbacdf7e2cbf2a59",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc308/abc308_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc308/editorial/6722",
+      "text": "Python での実装例をいくつか紹介します。\nソートのキーを渡す方法\n公式解説\nと同様に、ソートのキーを渡したい場合、 Python では\ncmp_to_key\n関数を使うことで実装できます。\n2 つの要素を比較する cmp 関数では、比較結果を\n1\n、\n0\n、\n-1\nで返し、 sort 関数の key に入れる際には\ncmp_to_key(cmp)\nとします。\nAC コード\nPyPy 3（cmp_to_key を使用）\n精度を上げて比較する方法\n多倍長整数を使う方法\n普通に\na / (a + b)\nをソートすると、浮動小数点数の精度が足りずに WA になってしまいます。\nWA\n コード\nPyPy 3（浮動小数点数で比較）\nPython では多倍長整数が扱えるので、十分な桁数を保持すれば良いです。例えば、\n10 ** 100\nを掛けて比較すると良いです。PyPy の場合タプルの比較は遅いことが知られているので、\n(x, i)\nの代わりに\nx * 10 ** 6 + i\nなどとして「一次元化」してソートする方法もあります。\nAC コード\nPyPy 3（\n10 ** 100\nを掛けて比較）\nAC コード\nPyPy 3（\n10 ** 100\nを掛けて比較、一次元化）\nDecimal を使う方法\n入力を Decimal で受け取ると浮動小数点数より精度を上げることができます。ただし Decimal は PyPy では遅くなるので TLE に注意です。\nAC コード\nPython 3（精度 100 桁で Decimal を使用）\nTLE コード\nPyPy 3（精度 100 桁で Decimal を使用）\n\\(10 ^ {18}\\)\n以下に埋め込む方法\n\\(\\displaystyle \\frac{a}{a+b}\\)\nのソートは、逆数にして\n\\(1\\)\nを引くことで\n\\(\\displaystyle \\frac{b}{a}\\)\nのソートと等価になります。これにはいくつかの方法が知られていますが、商が\n\\(1\\)\nより大きいか小さいかで場合分けすることで、\n\\(0\\le a,b \\le 10^9 \\)\nのとき、商を\n\\(-10^{18}\\)\nから\n\\(10^{18}\\)\n程度の区間に（順序を保って）自然に埋め込むことができます。なお、途中計算で\n\\(O(N)\\)\n回程度\n\\(10^{18}\\)\nを超える整数を扱う必要がありますが、比較の際には\n\\(64\\)\nbit に収まっているので、実行時間のボトルネックにはなりづらいです。\n詳細は\nngtkana さんのブログ\nの「行列式ではなく傾きを使う方法」にまとめて頂いたので参考にしてください。\nAC コード\nPyPy 3 （\n\\(10^{18}\\)\n以下に埋め込む方法）",
+      "codes": [
+        "from functools import cmp_to_key\ndef cmp(a, b):\n    x, y, i = a\n    xx, yy, ii = b\n    s = x * yy - y * xx\n    return 1 if s > 0 else -1 if s < 0 else 0\n\nN = int(input())\nX = []\nfor i in range(N):\n    a, b = map(int, input().split())\n    X.append((-a, a + b, i))\n\nX.sort(key = cmp_to_key(cmp))\nprint(*[i + 1 for x, y, i in X])"
+      ],
+      "text_sha256": "ed508e3f6fa7d0e397ad949ad0cdad48d8763435cc0ea1d2b3645d276e90d14e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc308/abc308_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc308/editorial/6720",
+      "text": "公式解説\nの解法の具体的な実装は言語によって比較的大きく変わりうるため、 他言語での実装例を掲載しておきます。\n(Python,\nhttps://atcoder.jp/contests/abc308/submissions/43071823\n)",
+      "codes": [
+        "class Frac:\n    def __init__(self, a, b):\n        self.a, self.b = a, b\n    \n    def __lt__(self, other):\n        return self.a * other.b < self.b * other.a\n\nN = int(input())\nA, B = [0], [0]\nfor i in range(N):\n    a, b = map(int, input().split())\n    A.append(a)\n    B.append(b)\nl = sorted(range(1, N + 1), key=lambda i: Frac(-A[i], A[i] + B[i]))\nprint(' '.join(map(str, l)))"
+      ],
+      "text_sha256": "239aff22db88cf678dde81785fc927cbbd8b46fa9a8343d8a06aa0f75cc5b0c9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc308/abc308_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc308/editorial/6723",
+      "text": "double で落ちること\n倍精度浮動小数点数の精度は2進53桁です。したがって、\n\\(\\epsilon< 2^{-53}\\)\nであるとき、\n\\(x\\)\nと\n\\((1+\\epsilon)x\\)\nを倍精度浮動小数点数に変換したものは等しくなる可能性があります。（詳しい人向けの注釈：非正規化数などは考えません）\n実際、異なる 2 数\n\\(\\displaystyle\\frac{165580141}{267914296},\\frac{433494437}{701408733}\\)\nを倍精度浮動小数点数に変換すると同じ値になることが確かめられます。したがって、この問題を倍精度浮動小数点数を用いて解くことはできません。\nlong double で通ること\nAtCoderのC++におけるlong doubleは、仮数部が(ケチbitなしの)64bitの拡張倍精度浮動小数点数、すなわち精度は2進64桁です。したがって、\n\\(\\epsilon > 2^{-63}\\)\nのとき、\n\\(x\\)\nと\n\\((1+\\epsilon)x\\)\nをlong doubleに変換したものが等しくなることはありません。（詳しい人向けの注釈：非正規化数などは考えません）\n正の整数\n\\(A,B,C,D\\)\nに対して\n\\(\\frac{A}{B}\\neq\\frac{C}{D}\\)\nのとき、\n\\(|\\frac{A}{B}-\\frac{C}{D}|=\\frac{1}{BD}|AD-BC|\\geq\\frac{1}{BD}\\)\nであることから、今回の制約では、異なる 2 数の比は\n\\(1+ 2^{-62}\\)\n以上です。よってそのような 2 数をlong doubleに変換したとき同じ値になることはありません。\nまた、\n\\(\\frac{A}{B}\\)\nをlong doubleで表す際には(普通の実装では)除算が一度だけ行われるため、倍精度浮動小数点数など同様にIEEEの「四則演算は正確である（要約）」という規格に従っていれば、等しい値がlong doubleに変換したとき異なる値になることもありません。\nよって、long doubleを用いればこの問題を解くことができます。\n10^20を掛ける\nと通ること\n上で述べた通り、異なる 2 数\n\\(\\frac{A}{B},\\frac{C}{D}\\)\nの差の絶対値は\n\\(\\frac{1}{BD}\\)\n以上であることから、今回の制約では全体を\n\\(10^{20}\\)\n倍すると、異なる 2 数の差は\n\\(1\\)\nより大きくなります。よってそのような\n\\(2\\)\n数を整数で計算したとき同じ値になることはありません。（\n\\(x-y\\geq 1\\Rightarrow \\lfloor x\\rfloor - \\lfloor y \\rfloor \\geq 1\\)\nであるため）",
+      "codes": [],
+      "text_sha256": "6c5adb490e23c6b50e18fffabd4fbe3714400634637f18e0ca4a6c70f1a04f3a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc308/abc308_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

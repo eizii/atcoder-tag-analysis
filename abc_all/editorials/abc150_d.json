@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc150_d",
+  "editorials": [
+    {
+      "text": "D.SemiCommonMultiple(writer : yuma000)\nX がA の半公倍数である条件は、以下のように言い換えられます。\n• 　任意のk(1 ≤k ≤N) に対して、X = (ak/2) ∗(2p + 1) を満たす負でない整数p が存在\nする。\nX がak/2 の奇数倍であることから、これは以下のような二つの条件に分割できます。\n• 任意のk(1 ≤k ≤N) に対して、X はak/2 の倍数である。\n• 任意のk(1 ≤k ≤N) に対して、X が2 で割り切れる回数とak/2 が2 で割り切れる回数は\n同じである。\nai が2 で割り切れる回数とaj が2 で割り切れる回数が異なるようなi, j が存在するとき、条件を\n満たすX はありません。\nそのようなi, j が存在しないときについて考えます。a1/2, a2/2, ..., aN/2 の最小公倍数をT とし\nます。すると、T を奇数倍したものが条件を満たすので、条件を満たすX の個数が求まります。\n",
+      "text_sha256": "ea9cf219ed27ebe89a720b0014d77f0faa480934ff51cb2b185016654728c2ae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc150/abc150_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

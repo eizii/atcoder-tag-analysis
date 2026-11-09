@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc435_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc435/editorial/14707",
+      "text": "原案：\nynymxiaolongbao\nあるドミノが右に倒れる場合、そのドミノより左にあるドミノは全て倒れています。\nよって「現時点でどのドミノまで倒れることが確定しているか」を保持しながら、左端から順に倒れるかどうかを判定していけばよいです。\n実装例(Python)",
+      "codes": [
+        "N=int(input())\nA=list(map(int,input().split()))\n\n# 座標が crr 未満のドミノは倒れることが確定している\ncrr=1\nfor i in range(N):\n  # 座標 i にあるドミノが倒れるかどうか判定\n  if i>=crr:\n    print(i)\n    exit()\n  crr=max(crr, i+A[i])\n\nprint(N)"
+      ],
+      "text_sha256": "603dc33d5db5e25da936bff1dc6e05072f76d70d2e44bb1910f212b697b6d709",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc435/abc435_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

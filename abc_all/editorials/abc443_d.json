@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc443_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc443/editorial/15179",
+      "text": "まず、操作を行う前に、ある特定の駒に注目してみましょう。\n\\(i\\)\n列目の\n\\(R_i\\)\n行目に駒があることで、他の駒にはどのような影響が出るでしょうか？\n駒は上にしか動けないことに注意すると、以下の事実を導くことができます。\n\\(j\\)\n列目にある駒は、\n\\(R_i+|j-i|\\)\n行目かそれより上に存在しなければならない。\n例えば、\n\\(5\\)\n列目の\n\\(7\\)\n行目に駒があるとき、\n\\(\\dots\\)\n\\(3\\)\n列目にある駒は\n\\(9\\)\n行目かそれより上に存在しなければならない。\n\\(4\\)\n列目にある駒は\n\\(8\\)\n行目かそれより上に存在しなければならない。\n\\(5\\)\n列目にある駒は\n\\(7\\)\n行目かそれより上に存在しなければならない。\n\\(6\\)\n列目にある駒は\n\\(8\\)\n行目かそれより上に存在しなければならない。\n\\(7\\)\n列目にある駒は\n\\(9\\)\n行目かそれより上に存在しなければならない。\n\\(\\dots\\)\nというような制約がかかることになります。\nそして、このような制約を全ての列について高速に伝播させるためには、以下の手順を取ればよいです。\nまず、\n\\(i=2,3,\\dots,N\\)\nについて順に、以下を行う。\n\\(R_i = \\min(R_i,R_{i-1}+1)\\)\nに更新する。\n次に、\n\\(i=N-1,N-2,\\dots,1\\)\nについて順に、以下を行う。\n\\(R_i = \\min(R_i,R_{i+1}+1)\\)\nに更新する。\nこうすることで、全ての駒について、その駒から生じる制約を全ての列に伝播することができることが分かります。\nそして、実は、上記の手順で更新した\n\\(R_i\\)\nが、最終的に各列の駒が存在する最適 ( 操作回数が最小となる ) な行となります。よって、更新前の\n\\(R\\)\nの総和から更新後の\n\\(R\\)\nの総和を引いた値を出力することでこの問題に正解できます。\n証明:\n上記の議論より、\n\\(i\\)\n列目の駒が\n\\(R_i\\)\n行目かそれより上にある必要性は導かれました。よって、現時点での\n\\(R\\)\nに従って駒を配置すれば条件を満たすこと、即ち、\n\\(R\\)\nの全ての隣接要素の差が\n\\(1\\)\n以下となることを示せば十分性が示されて証明が完了します。\n最初のループが完了した際、 全ての\n\\(i=2,3,\\dots,N\\)\nについて、\n\\(R_{i-1}+1 \\ge R_i\\)\nが満たされます。\nでは、\n\\(2\\)\n回目のループを追跡しましょう。\n\\(i=N-1,N-2,\\dots,1\\)\nの順で進行する。\n\\(R_i = \\min(R_i,R_{i+1}+1)\\)\nという操作に着目する。\nもし\n\\(R_i\\)\nがこの操作により更新された場合、\n\\(R_i = R_{i+1}+1\\)\nに更新されているため、\n\\(R_i\\)\nと\n\\(R_{i+1}\\)\nとの差は\n\\(1\\)\nである。\nもし\n\\(R_i\\)\nがこの操作により更新されなかった場合、操作後の時点で\n\\(R_i \\le R_{i+1}+1\\)\nとなっている。但し、最初のループの時点で\n\\(R_i +1 \\ge R_{i+1}\\)\nとなっており、その後\n\\(2\\)\n回目のループで\n\\(R_{i+1}\\)\nが更新されたとしても\n\\(R_{i+1}\\)\nは小さくなるだけなのでこの不等式は揺るがない。よって、\n\\(2\\)\nつの不等式を統合すると\n\\(R_{i+1}-1 \\le R_i \\le R_{i+1}+1\\)\nが得られ、\n\\(R_i\\)\nと\n\\(R_{i+1}\\)\nとの差が高々\n\\(1\\)\nであると分かる。\n以上より、\n\\(2\\)\n回のループを回した後の\n\\(R\\)\nに従った駒の配置は問題文中の条件を満たすことが分かり、証明が完了しました。\n本解法の時間計算量は\n\\(O(N)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing ll=long long;\n\nint main(){\n  ll t;\n  cin >> t;\n  while(t--){\n    ll n,s=0;\n    cin >> n;\n    vector<ll> r(n);\n    for(auto &nx : r){\n      cin >> nx;\n      s+=nx;\n    }\n    for(ll i=1;i<n;i++){ r[i]=min(r[i],r[i-1]+1); }\n    for(ll i=n-2;i>=0;i--){ r[i]=min(r[i],r[i+1]+1); }\n    for(auto &nx : r){ s-=nx; }\n    cout << s << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "d22689d31ab66e5637c0e486c1f639442178100068ce70bd82b52620634205b0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc443/abc443_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc443/editorial/15588",
+      "text": "この問題は最短路双対（俗に言う牛ゲー）の形になっています。\n各コマの位置に対応する頂点\n\\(1, \\dots, N\\)\nに加え、値\n\\(0\\)\nを表す超頂点を合わせた\n\\(N+1\\)\n点について、次のように辺を張ります。そうして得られたグラフについて、超頂点からの距離を計算すれば最適解が得られます。\n超頂点から、各頂点\n\\(i = 1,\\dots,n\\)\nに重み\n\\(R_i\\)\nの辺を張る\n各\n\\(i = 1,\\dots,n\\)\nについて、頂点\n\\(i\\)\nから、頂点\n\\(i+1\\)\n, 頂点\n\\(i-1\\)\nに重み 1 の辺を張る\nダイクストラ法で解こうとすると、\nsounansya さんの解説\nと同じ実装になります。",
+      "codes": [],
+      "text_sha256": "3fcf52cab6658f09ff6926fb92f4d7d031ee7dbc343afe8bbd87dfc8a15caa4f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc443/abc443_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc443/editorial/15585",
+      "text": "まず、最も上にある駒を動かす必要はありません。また、最も上にある駒の左右の駒は少なくとも最も上にある駒の一つ下の行まで持ってくる必要があります。\nこの考察を繰り返すと、上にある駒から順番に左右の駒を自身の一つ下の行まで持ってくる操作を繰り返すことでこの問題に正答できることが分かります。駒の場所は各操作によって変わりますが、優先度付きキューなどを用いてこのシミュレーションを実装することができます。\n計算量は\n\\(O(N \\log N)\\)\nで、公式解説よりは計算量が劣りますがこちらの解法の方が自然に思いつきやすいと思います。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint t;\n\tcin >> t;\n\twhile (t--) {\n\t\tint n;\n\t\tcin >> n;\n\t\tvector<int> r(n);\n\t\tfor (int &v : r) cin >> v;\n\t\tusing pli = pair<long, int>;\n\t\tpriority_queue<pli, vector<pli>, greater<pli>> pq; // {a[i], i} のペアを a[i] の昇順で持つ\n\t\tfor (int i = 0; i < n; i++) pq.push({r[i], i});\n\t\tvector<int> a = r;\n\t\twhile (!pq.empty()) {\n\t\t\tconst auto [ai, i] = pq.top();\n\t\t\tpq.pop();\n\t\t\tif (a[i] != ai) continue; // 優先度付きキューに残っている古い情報が取り出された場合すぐに捨てる\n\t\t\tif (i != 0 && a[i - 1] > a[i] + 1) {\n\t\t\t\ta[i - 1] = a[i] + 1;\n\t\t\t\tpq.push({a[i - 1], i - 1});\n\t\t\t}\n\t\t\tif (i != n - 1 && a[i + 1] > a[i] + 1) {\n\t\t\t\ta[i + 1] = a[i] + 1;\n\t\t\t\tpq.push({a[i + 1], i + 1});\n\t\t\t}\n\t\t}\n\t\tlong ans = 0;\n\t\tfor (int i = 0; i < n; i++) ans += r[i] - a[i];\n\t\tcout << ans << '\\n';\n\t}\n}"
+      ],
+      "text_sha256": "46b53db227324b3edf4e335e54ef580e87dce4ac256d90e4f7bc71aee459eb49",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc443/abc443_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

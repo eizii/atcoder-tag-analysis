@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc397_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc397/editorial/12451",
+      "text": "\\(S\\)\nを前から見て行って，今見ている場所までの文字列が条件を満たすような最小の操作回数を考えます．\n次に現れる必要がある文字\n\\(t\\)\n（最初は\n\\(t=\\)\ni\n）を管理しながら，\n\\(S\\)\nを前から見ていきます．\n\\(S\\)\nの今見ている文字が，\n\\(t\\)\nに一致するならば，すでに条件を満たします．\n\\(t\\)\nを反転させて（\ni\nならば\no\nに，\no\nならば\ni\nにする），\n\\(S\\)\nの次の文字を見ます．\n\\(S\\)\nの今見ている文字が，\n\\(t\\)\nと異なるならば，\n\\(t\\)\nを今見ている文字の前に挿入する必要があります．この操作によって，今見ている文字までの条件が満たされます．このとき，答えに\n\\(1\\)\nを足し，\n\\(t\\)\nを変えずに\n\\(S\\)\nの次の文字を見ます．\n最後に，\n\\(S\\)\nの最後の文字が\ni\nならば，その後ろに\no\nを挿入する必要があるので，答えに\n\\(1\\)\nを足します．\n実装例 (Python)\n実装例 (C++)",
+      "codes": [
+        "S = input()\nans = 0\ntarget = 'i'\nfor c in S:\n    if c == target:\n        target = 'o' if target == 'i' else 'i'\n    else:\n        ans += 1\nif target == 'o':\n    ans += 1\nprint(ans)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string S;\n    cin >> S;\n    int ans = 0;\n    char target = 'i';\n    for (char c : S) {\n        if (c == target) {\n            target = target == 'i' ? 'o' : 'i';\n        } else {\n            ++ans;\n        }\n    }\n    if (target == 'o') ++ans;\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "7a2f8c2d8618a91fca5ef9423ffcc8eb325533f43319852d17d7d4503d3b4ee0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc397/abc397_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc397/editorial/12460",
+      "text": "以下の条件を満たす最小の正整数\n\\(c\\)\nを\n\\(c_0\\)\nとします。\n\\(T\\)\nを\nio\nを\n\\(c\\)\n回繰り返した文字列とすると、\n\\(S\\)\nは\n\\(T\\)\nの（連続とは限らない）部分列となっている。 …\n\\((\\star)\\)\nすると、求める答えは\n\\(S\\)\nの長さを\n\\(N\\)\nとして\n\\(2c_0-N\\)\nとなることが分かります。これは、\n\\(S\\)\nは\n\\(T\\)\nの（連続とは限らない）部分列となっていれば何回かの操作で\n\\(S\\)\nを\n\\(T\\)\nにすることができる。\n\\(T\\)\nは問題文中の条件を満たす。\nことから従います。\nよって、\n\\(c\\)\nを\n\\(1\\)\nから昇順に試していき、\n\\((\\star)\\)\nの条件を満たすかを順番に確かめていけば良いです。\n実装例(Python3)",
+      "codes": [
+        "def is_subsequence(s, t):\n    it = iter(t)\n    return all(c in it for c in s)\n\n\ns = input()\nc = 1\nwhile True:\n    t = \"io\" * c\n    if is_subsequence(s, t):\n        print(2 * c - len(s))\n        break\n    c += 1"
+      ],
+      "text_sha256": "c59868513532d4cdeb9be630c0c8ca36307343166b062c57105e4181085d5880",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc397/abc397_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc234_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc234/editorial/3223",
+      "text": "\\(S\\)\nの空でない、連続した部分列\n\\(S'\\)\nを並び替えて得られる文字列の種類数は、\n\\(S'\\)\nにおける各アルファベットの出現数のみに依存します。\nそのためこの問題を動的計画法に落とし込む際には\n何番目のアルファベットまでを使ったか\n合計で何文字を使ったか\nの\n\\(2\\)\nつを状態に持つことが重要であり、故に以下のような動的計画法を考えることが有効です。\n\\(\\text{dp}_{i,j}:=(\\)\nアルファベットの昇順で\n\\(i\\)\n番目のアルファベットまでを使い、使った文字数の合計が\n\\(j\\)\nであるような\n\\(S\\)\nの部分列、およびその並び替えの個数\n\\()\\)\nそしてその遷移は、\n\\(S\\)\nにおける\na\nから\nz\nまでのアルファベットの出現数をそれぞれ\n\\(\\text{freq}_1,\\text{freq}_2,\\ldots,\\text{freq}_{26}\\)\nとして以下のようになります。\n\\(\\text{dp}_{i,j} = \\sum_{k=0}^{\\min(j,\\text{freq}_i)} \\text{dp}_{i-1,j-k} \\times \\binom{j}{k}\\)\n計算量は一見すると\n\\(σ=26\\)\n,\n\\(N\\)\nを\n\\(S\\)\nの長さとして\n\\(O(σN^2)\\)\nかかっていそうですが、\n\\(\\text{dp}_{i,j}\\)\nへの遷移にかかる計算量が高々\n\\(O(\\text{freq}_i)\\)\nであることを踏まえると合計での計算量は高々\n\\(O(\\sum_{i=1}^{26} \\text{freq}_i \\times N)=O((\\sum_{i=1}^{26} \\text{freq}_i) \\times N)=O(N \\times N)=O(N^2)\\)\nとなります。\n求める答えは\n\\(\\sum_{i=1}^{N} \\text{dp}_{26,i}\\)\nです。\n実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nusing ll = long long;\n\nconst ll MAX = 5010, MOD = 998244353;\n\nvector<ll> fac,finv,inv;\n\nvoid binom_init() {\n    fac.resize(MAX);\n    finv.resize(MAX);\n    inv.resize(MAX);\n    fac[0] = fac[1] = 1;\n    inv[1] = 1;\n    finv[0] = finv[1] = 1;\n    for(int i=2; i<MAX; i++){\n        fac[i] = fac[i-1]*i%MOD;\n        inv[i] = MOD-MOD/i*inv[MOD%i]%MOD;\n        finv[i] = finv[i-1]*inv[i]%MOD;\n    }\n}\n\nll binom(ll n, ll r){\n    if(n<r || n<0 || r<0) return 0;\n    return fac[n]*finv[r]%MOD*finv[n-r]%MOD;\n}\n\nint main(){\n    binom_init();\n    string S; cin >> S;\n    int N = S.size();\n    vector<int> freq(26);\n    for(auto el: S) freq[el-'a']++;\n    vector<vector<ll>> dp(27,vector<ll>(N+1));\n    dp[0][0] = 1;\n    for(int i=0; i<26; i++){\n        for(int j=0; j<=N; j++){\n            for(int k=0; k<=min(j,freq[i]); k++){\n                dp[i+1][j] += dp[i][j-k]*binom(j,k);\n                dp[i+1][j] %= MOD;\n            }\n        }\n    }\n    ll ans = 0;\n    for(int i=1; i<=N; i++){\n        ans += dp[26][i];\n        ans %= MOD;\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "1cee56f82d2d6b9d1d2551d9d0e9864cd3da14b6a815d4ba4434df99aafe9b43",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc234/abc234_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc234/editorial/3237",
+      "text": "$N= |S|$ として $O(N \\log N)$ で解く方法を紹介します。\n初めに、 $S$ がどの文字を何個含んでいるかのみが重要なので、各文字の出現回数を数えます。 $\\sigma _{c}$ を文字 $c$ の個数とします。\na\nから順に部分文字列が含む文字の個数を決めていくとします。ここで、ある文字を $i$ 個選んだとします。この時、「部分文字列を並び替えてできる文字列の数」を「同じ文字を区別した場合に部分文字列を並び替えてできる文字列の数」で割った値は $\\frac{1}{i!}$ 倍されます。( $6$ 人のグループを $1,2,3$ 人のグループに分ける際の式である $\\frac{6!}{1!2!3!}$ における分母のようなイメージです。)\nよって、以下の多項式を掛け合わせたものの式の $i > 0$ について、 $x^i$ の係数に $i!$ をかけたものの総和が答えとなります。ここで、 $0!=1$ とします。\n$\\left( \\frac{1}{0!} x^0 + \\frac{1}{1!} x^1 + \\cdots + \\frac{1}{\\sigma _{c}!} x^{\\sigma _{c}} \\right)$ $($ $c=$\na\n,\nb\n, $\\cdots$ ,\nz\n$)$\n計算量は $O(N \\log N)$ です。実装の際はACLのconvolutionを使うと楽です。\n実装例",
+      "codes": [],
+      "text_sha256": "8b57104ce554fb980c41f219ce56b73abee5af0f1f1c42d243169ef8fbab2c95",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc234/abc234_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

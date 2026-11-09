@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc268_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc268/editorial/4779",
+      "text": "カウンタが\n\\(0\\)\nの状態から始め、\n\\(A, B, C, D, E\\)\nの順に見ていき、今までにまだ登場していない整数が登場するたびにカウンタの値を\n\\(1\\)\n増やすという方法で、種類数を数えます。\nつまり、カウンタが\n\\(0\\)\nの状態からはじめ、下記の手順を行います、\n（\n\\(A\\)\nに対応する処理として）カウンタの値を\n\\(1\\)\n増やす。\n\\(B\\)\nが\n\\(A\\)\nと異なるならば、カウンタの値を\n\\(1\\)\n増やす。\n\\(C\\)\nが\n\\(A, B\\)\nのいずれとも異なるならば、カウンタの値を\n\\(1\\)\n増やす\n\\(D\\)\nが\n\\(A, B, C\\)\nのいずれとも異なるならば、カウンタの値を\n\\(1\\)\n増やす。\n\\(E\\)\nが\n\\(A, B, C, D\\)\nのいずれとも異なるならば、カウンタの値を\n\\(1\\)\n増やす。\n最終的なカウンタの値が出力すべき答えとなります。\n上記の「〜ならば、」の部分は、プログラミング言語の標準的な機能である条件分岐（ if 文など）によって実現できます。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(void)\n{\n  int a, b, c, d, e;\n  cin >> a >> b >> c >> d >> e;\n  \n  int ans = 0;\n  ans++;\n  if(b != a) ans++;\n  if(c != a && c != b) ans++;\n  if(d != a && d != b && d != c) ans++;\n  if(e != a && e != b && e != c && e != d) ans++;\n  \n  cout << ans << endl;\n  return 0;\n}"
+      ],
+      "text_sha256": "7441c9f8bff42d51e4852be7b93681803abd81761755664f3fbff22a91701e46",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc268/abc268_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc268/editorial/16473",
+      "text": "こういう種類数を求める問題は\nset\nを用いるとよいです．",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  set<int>st;\n  for(int i=0;i<5;i++){\n    int a;\n    cin>>a;\n    st.insert(a);\n  }\n  cout<<st.size()<<endl;\n}"
+      ],
+      "text_sha256": "7ecd7b6bbb3a06575db4510e07f4edec3bb96001e1b5e3cdbebe526c35be03a7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc268/abc268_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

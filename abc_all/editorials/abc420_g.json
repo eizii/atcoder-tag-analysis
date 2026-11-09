@@ -1,0 +1,55 @@
+{
+  "problem_id": "abc420_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc420/editorial/13733",
+      "text": "\\(m = \\sqrt{n^2+n+X}\\)\nとします。\n\\(m \\geq 0 \\)\nという条件下で、この式は以下のように同値変形できます。\n\\[\n\\begin{aligned}\n&\\phantom{\\Leftrightarrow} m = \\sqrt{n^2+n+X}\\\\\n&\\Leftrightarrow m^2=n^2+n+X\\\\\n&\\Leftrightarrow (2m+2n+1)(2m-2n-1)=4X-1\\\\\n\\end{aligned}\n\\]\nしたがって、\n\\(4X-1\\)\nの（負も含む）約数\n\\(d\\)\n全てに対して\n\\(\\displaystyle 2m+2n+1=d,\\ 2m-2n-1=\\frac{4X-1}d\\)\nと\n\\(m \\geq 0\\)\nを満たす整数の組\n\\((n,m)\\)\nが存在するか判定し、解が存在するような\n\\(n\\)\nを全て列挙すれば良いです。\n以上を適切に実装することでこの問題に正答することができます。計算量は\n\\(O(\\sqrt X)\\)\nです。\n実装例(Python3)",
+      "codes": [
+        "x = int(input())\nans = []\nc = 4 * x - 1\n\ndef add(d):\n    ans.append((d - c // d - 2) // 4)\n\nd = -1\nwhile d * d <= abs(c):\n    d += 2\n    if c % d != 0:\n        continue\n    add(d), add(-d)\n    add(c // d), add(-c // d)\nans = sorted(list(set(ans)))\nprint(len(ans))\nprint(*ans)"
+      ],
+      "text_sha256": "ab4908fbf36a92c04c0e63321bbfd1aae74f4333a0facfa7e1dce80567cd5b63",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc420/abc420_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc420/editorial/13753",
+      "text": "\\(a\\)\nは整数として、\n\\[\\sqrt{n^2+n+X}=n+a\\]\n\\[\\Leftrightarrow n^2+n+X=(n+a)^2\\]\n\\[\\Leftrightarrow n+X=2na+a^2\\]\n\\[\\Leftrightarrow X-a^2=(2a-1)n\\]\n\\[\\Leftrightarrow \\displaystyle n=\\frac{X-a^2}{2a-1}=\\frac{X-\\frac{1}{4}}{2a-1}-\\frac{2a+1}{4}\\]\n\\[\\Leftrightarrow \\displaystyle 4n=\\frac{4X-1}{2a-1}-(2a+1)\\]\nよって、後は公式解説同様、\n\\(4X-1\\)\nの負の数も含む、すべての約数\n\\(d\\)\nについて、\n\\(2a-1=d\\)\nなる\n\\(a\\)\nが存在し、\n\\(\\displaystyle \\frac{4X-1}{2a-1}-(2a+1)\\)\nが\n\\(4\\)\nの倍数かを判定すればよいため、すべての\n\\(n\\)\nを\n\\(O(\\sqrt{X})\\)\nで列挙することができます。",
+      "codes": [],
+      "text_sha256": "f944c1ce9f91aa77026c2137cae227cfb4f5783560e4a4d0422359f46705267a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc420/abc420_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc420/editorial/13755",
+      "text": "\\(\\sqrt{n^2+n+X}=m\\)\nの両辺を2乗し\n\\(n^2+n+X=m^2\\)\nを考えます。一般に、この手の問題は項の数が少なかったり、変数の次数が揃っていた方が嬉しくなります。そこで「平方完成」をすることで1次の項を消すことを考えます。\n\\((n+\\frac{1}{2})^2+X-\\frac{1}{4}=m^2\\)\nここでは整数になるかどうかみたいな話をしているので、分数が出てくるのは嫌です。そこで全てが整数になるように両辺を4倍します。\n\\((2n+1)^2+4X-1=4m^2\\)\nあとは移項して公式解説同様に因数分解すればよいです。",
+      "codes": [],
+      "text_sha256": "182981696901d67d3e5a80a0370c044e87ff32d34aa23475adc57ee85af26212",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc420/abc420_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc420/editorial/13757",
+      "text": "\\(n\\) が条件を満たすなら \\(-n-1\\) も条件を満たすことから、\\(n\\ge0\\) の条件を課した解を列挙すればよいです。\n整数 \\(k\\) について \\(\\sqrt{n ^ 2+n+X}=n+k\\) が成り立っているとして式を整理します。\n\\(n+k\\ge0\\) かつ \\(n ^ 2+n+X=n ^ 2+2kn+k ^ 2\\) となって、第 \\(2\\) 式を \\(n\\) について解くと \\(n=\\dfrac{X-k ^ 2}{2k-1}\\) となります。\n\\(n\\ge0,n+k\\ge0\\) より \\(n(n+k)(2k-1) ^ 2\\ge0\\) となるので、\\((X-k ^ 2)(X+k(k-1))\\ge0\\) を得ます。\n\\(X\\gt0\\) のとき、\\(X+k(k-1)\\gt0\\) なので \\(X-k ^ 2\\ge0\\) でなければならず、\\(-\\sqrt X\\le k\\le\\sqrt X\\) が必要です。\n\\(X\\lt0\\) のとき、\\(X-k ^ 2\\lt0\\) なので \\(X+k(k-1)\\le0\\) でなければならず、\\(\\dfrac{1-\\sqrt{1-4X}}2\\le k\\le\\dfrac{1+\\sqrt{1-4X}}2\\) が必要です。\n\\(X=0\\) のとき、\\(-k ^ 3(k-1)\\ge0\\) より、\\(k=0,1\\) が必要です。\n以上より、\\(-\\sqrt{|X|}\\le k\\le1+\\sqrt{|X|}\\) の範囲を探索すれば十分であることがわかります。\nよって、この範囲の \\(k\\) に対して \\(\\dfrac{X-k ^ 2}{2k-1}\\) が条件を満たすか判定すればこの問題を解くことができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <cmath>\n#include <vector>\n#include <algorithm>\n\nint main(){\n    using namespace std;\n    long X;\n    cin >> X;\n    \n    // 探索する k の範囲\n    // abs(X) は double で正確に表現できるので、この平方根の小数点以下を切り捨てた値も正確に得られる\n    long bound = sqrt(abs(X)) + 1;\n    \n    vector<long> ans;\n    for (long k{-bound + 1}; k <= bound; ++k)\n        if ((X - k * k) % (2 * k - 1) == 0) { // 割り切れることが必要\n            // n ≧ 0 かつ n + k ≧ 0 なら OK\n            auto n = (X - k * k) / (2 * k - 1);\n            if (n >= 0 && n + k >= 0) {\n                ans.emplace_back(n);\n                ans.emplace_back(-n - 1);\n            }\n        }\n        \n    ranges::sort(ans);\n    \n    cout << size(ans) << endl;\n    for (const auto n : ans)\n        cout << n << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "22a25ff34bd47ed0b37dbbd31535c96bb573ec27d6d691a06885cc462d42bb53",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc420/abc420_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc420/editorial/13778",
+      "text": "整数\n\\(n, -10^{14}\\leq X\\leq 10^{14}\\)\nに対して\n\\(n^2+n+X\\)\nが平方数になるとします.\nこのとき上界として以下が得られます.\n\\[n^2+n+X \\leq |n|^2+|n|+10^{14} \\leq (|n|+10^7)^2 \\]\nさらに下界として以下が得られます.\n\\(|n|\\leq10^7\\)\nのとき\n\\[(|n|-|n|)^2=0\\leq n^2+n+X\\]\n\\(|n|\\gt10^7\\)\nのとき\n\\[\n\\begin{aligned}\n(|n|-10^7)^2 \n&= |n|^2 - 2\\cdot 10^7  |n| + 10^{14} \\\\\n&= |n|^2 - |n| - (2\\cdot 10^7 - 1) |n| + 10^{14} \\\\\n&\\leq |n|^2 - |n| - (2\\cdot 10^7 - 1) (10^7+1) + 10^{14} \\\\\n&= |n|^2 - |n| -  10^{14} -10^7+1\\\\\n&\\lt n^2+n+X\n\\end{aligned}\n\\]\nよってある整数\n\\(-10^7\\leq k\\leq 10^7\\)\nが存在し,\n\\(n^2+n+X =(|n|+k)^2\\)\nを満たします.\nこれを解くと\n\\(n=\\dfrac{k^2-X}{1\\pm2k}\\)\nが得られます.\nしたがってこの範囲の\n\\(k\\)\nに対し条件を満たすか調べれば解くことができます. (\n\\((n+k)^2=(-n-k)^2\\)\nであることを考えれば実際には\n\\(\\pm\\)\nの両方の符号を調べる必要はなく, 片方について全て調べれば十分です. )",
+      "codes": [],
+      "text_sha256": "1097d57a1ff3aec5ba3210d6189ad465ab872f9a8fffdc661903c4cae0d9db2f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc420/abc420_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc202_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc202/editorial/1859",
+      "text": "\\(i\\)\nを固定したときに、\n\\(A_i = B_{C_j}\\)\nとなる\n\\(j\\)\nの個数が高速に求められればよいです。これを前もって計算しておく方法を考えます。\n\\(B_k\\)\nの値は\n\\(1\\)\n以上\n\\(N\\)\n以下であるので、長さ\n\\(N\\)\n程度の配列\n\\(\\mathrm{count}_x\\)\nを用意し、\n\\(j\\)\nの値を全て試すことによって、各\n\\(1 \\leq x \\leq N\\)\nについて\n\\(B_{C_j} = x\\)\nとなる\n\\(j\\)\nの個数を\n\\(\\mathrm{count}_x\\)\nとして保持しておくことが出来ます。\n各\n\\(i\\)\nについて\n\\(\\mathrm{count}_{A_i}\\)\nを足し合わせたものが答えとなります。答えは最大で\n\\(N^2\\)\nになるため、\n\\(32\\)\nbit 整数に収まらないことに注意してください。\nこのように、「同じような処理を何度も行う」ような問題においては、「前もって計算しておく」という方法がうまくいくことがしばしばあります。\nC++ での実装例：\nRust での実装例：",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n\nint main() {\n    int N;\n    std::cin >> N;\n    std::vector<int> A(N), B(N), C(N);\n    for (auto& x : A) {\n        std::cin >> x;\n        x -= 1;\n    }\n    for (auto& x : B) {\n        std::cin >> x;\n        x -= 1;\n    }\n    for (auto& x : C) {\n        std::cin >> x;\n        x -= 1;\n    }\n    std::vector<int> count(N);\n    for (int j = 0; j < N; ++j) {\n        count[B[C[j]]] += 1;\n    }\n    long long ans = 0;\n    for (int i = 0; i < N; ++i) {\n        ans += count[A[i]];\n    }\n    std::cout << ans << '\\n';\n}",
+        "use proconio::{input, marker::Usize1};\n\nfn main() {\n    input! {\n        n: usize,\n        a: [Usize1; n],\n        b: [Usize1; n],\n        c: [Usize1; n],\n    }\n    let mut count = vec![0; n];\n    for x in c {\n        count[b[x]] += 1;\n    }\n    println! {\n        \"{}\", \n        a.into_iter()\n            .map(|x| count[x])\n            .sum::<u64>()\n    }\n}"
+      ],
+      "text_sha256": "823a1a3c9bdb8fd67f358fcb5cb2ee862a53c2bf37c1f5a0b741a0c2be916e07",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc202/abc202_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

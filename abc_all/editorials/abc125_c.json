@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc125_c",
+  "editorials": [
+    {
+      "text": "C: GCD on Blackboard\n方針としては、Ai を書き換えることにした場合の最大公約数の最大値Mi を全て求めることを高速に行い、\nMi の最大値を出力します。\nまず、Ai を書き換える場合、残りのN −1 個の最大公約数に書き換えれば、「整数Ai を書き換える」操作\nは「整数Ai を消す」操作と等価になります。\nさらに、整数X と整数Y の最大公約数をgcd(X, Y ) と表すことすると、gcd は結合則が成り立ちます。\nすなわち、任意の整数X, Y, Z についてgcd(gcd(X, Y ), Z) = gcd(X, gcd(Y, Z)) です。簡単に言えば、gcd\nには「どこから計算しても結果は変わらない性質」があります*1(例えば、整数や行列同士の加算や乗算もそう\nですが、減算は前から計算しなければなりません) このとき、次のテクニックが使えます。i = 1, 2, ..., N + 1\nについて、L(i), R(i) を次のように定義します。\nL(i) := A1, A2, ..., Ai−1の最大公約数\nR(i) := Ai, Ai+1, ..., ANの最大公約数\n便宜上、L(0) = R(N + 1) = 0 とし、全ての整数X に対してgcd(0, X) = gcd(X, 0) = X とすることとし\nます。すると、Ai を書き換える(すなわち、Ai を消す) ことにした場合、残りのN −1 個の整数の最大公約\n数Mi はMi = gcd(L(i), R(i + 1)) になります。さらに、L(i), R(i) は次の漸化式を計算することで高速に\nO(NlogA1 + NlogAN) で求められます*2。\nL(0) = 0\nL(i + 1) = gcd(L(i), A(i))\nR(N + 1) = 0\nR(i) = gcd(R(i + 1), A(i))\nM1, M2, ..., MN が求まれば、答えはこれらの最大値max(M1, M2, ..., MN) になります。全体として計算量\nはO(NlogA1 + NlogAN) となります。\n",
+      "text_sha256": "2fa1d55de1958bd01181a527323d30443d29d00c931a05aa33e2e446d0d8d1ea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc125/abc125_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

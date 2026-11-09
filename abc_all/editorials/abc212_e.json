@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc212_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc212/editorial/2357",
+      "text": "動的計画法でこの問題を解くことを考えます。\n\\(dp[i][j]=(A_0=0\\)\nかつ\n\\(A_i=j\\)\nであるような都市の列\n\\((A_0, \\ldots A_i)\\)\nであって、各\n\\(0\\leq i'\\leq i-1\\)\nについて、\n\\(A_{i'}\\)\nと\n\\(A_{i'+1}\\)\nが道でつながっているようなものの数）とします。\nすると、\n\\(dp[0][0]=1\\)\n,\n\\(dp[0][1]=\\cdots=dp[0][N]=0\\)\nであり、\n\\(dp[i+1][j]\\)\nは\n\\(S_j=\\{j'|都市j と都市j 'は道でつながっている\\}\\)\nを用いて、\n\\[dp[i+1][j]=\\displaystyle\\sum_{j'\\in S_j}dp[i][j']\\]\nと書く事が出来ます。\nしかしこれをそのまま計算すると、\n\\(O(N^2K)\\)\nの計算量がかかり、時間制限に引っかかってしまいます。そこで、 これを\n\\(S'_j=\\{j'|都市j と都市j 'は道でつながっていない\\}\\)\nを用いて、\n\\[dp[i+1][j]=\\displaystyle\\sum_{j'=1}^Ndp[i][j']-\\displaystyle\\sum_{j'\\in S_j}dp[i][j']\\]\nと書きかえてみます。\n第\n\\(1\\)\n項は\n\\(j\\)\nによらないため、各\n\\(i\\)\nごとに一度計算すればよく、計算には\n\\(1\\)\n回当たり\n\\(O(N)\\)\nがかかります。 第\n\\(2\\)\n項は\n\\(S'_j\\)\nの要素数がすべての\n\\(j\\)\nについてあわせて\n\\(2M+N\\)\n個しか無い事からこちらも各\n\\(i\\)\nについて\n\\(O(N+M)\\)\nで計算できます。\n\\((j\\)\n自身が含まれることに注意）\nよってこの場合は\n\\(i\\to i+1\\)\nの遷移が\n\\(O(N+M)\\)\nで行えるため、全体で\n\\(O((N+M)K)\\)\nであり、求めたいものは\n\\(dp[K][1]\\)\nであるため、これでこの問題を解く事が出来ました。\nC++による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define N 6000\n#define MOD 998244353\n#define ll long long\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nint main(void) {\n\tint n, m, k, u, v, sz;\n\tvector<int>e[N];\n\tll x, y, z, s;\n\tll dp[N];\n\tll dp2[N];\n\n\tcin >> n >> m >> k;\n\trep(i, m) {\n\t\tcin >> u >> v;\n\t\te[u - 1].push_back(v - 1);\n\t\te[v - 1].push_back(u - 1);\n\t}\n\n\trep(i, n)dp[i] = (ll)0;\n\tdp[0] = (ll)1;\n\n\trep(i, k) {\n\t\ts = (ll)0;\n\t\trep(j, n)s += dp[j];\n\t\trep(j, n) {\n\t\t\tdp2[j] = s - dp[j];\n\t\t\tsz = e[j].size();\n\t\t\trep(ii, sz)dp2[j] -= dp[e[j][ii]];\n\t\t\tdp2[j] %= MOD;\n\t\t}\n\t\trep(j, n)dp[j] = dp2[j];\n\t}\n\n\tcout << dp[0] << endl;\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "8f448de5dd785a98a68a0aab17a8004c9e0a04987c7767e35ad404c9bf7d9c60",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc212/abc212_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

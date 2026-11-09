@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc375_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc375/editorial/11140",
+      "text": "\\(S \\coloneqq \\displaystyle\\sum_{i = 1}^{N} B_i\\)\nとおきます。\n\\(S\\)\nが\n\\(3\\)\nの倍数でないとき、答えは\n\\(-1\\)\nです。以下、\n\\(S\\)\nが\n\\(3\\)\nの倍数であると仮定します。\n\\(S\\)\nの値が小さいことを利用して動的計画法を行います。\n\\(dp_{i, x, y, z}\\)\nを人\n\\(1, 2, \\ldots, i\\)\nまでの所属チームを確定させて、チーム\n\\(1, 2, 3\\)\nの強さがそれぞれ\n\\(x, y, z\\)\nであるときの所属したチームを変えた人数の最小値（そのようなことが起きないときは\n\\(\\infty\\)\n） として定義します。\nこの dp を素朴に行うと実行時間制限に間に合いませんが、人\n\\(1, 2, \\ldots , i\\)\nの強さの和を考えると\n\\(i, x, y\\)\nから\n\\(z\\)\nは一意に定まることに注目すると（より厳密には、\n\\(i, x, y\\)\nが定まっているとき\n\\(dp_{i,x ,y, z} \\neq \\infty\\)\nなる\n\\(z\\)\nは高々一意であることを利用します）、添え字として\n\\(z\\)\nは持つ必要がないことがわかります。\n以上をまとめると、\n\\(dp_{i, x, y}\\)\nを人\n\\(1, 2, \\ldots, i\\)\nまでの所属チームを確定させて、チーム\n\\(1, 2\\)\nの強さがそれぞれ\n\\(x, y\\)\nであるときの所属したチームを変えた人数の最小値とした動的計画法により答えが計算できることがわかります。\n求める答えは\n\\(dp_{N,\\frac{S}{3},\\frac{S}{3}}\\)\nであるため、dp の添え字\n\\(x, y\\)\nとしては\n\\(\\frac{S}{3}\\)\nまでを考えれば十分であることに注意してください（\n\\(S\\)\nまでを計算する方針では、他の部分の定数倍によっては間に合わない可能性があります）。\nまた、\n\\(1 \\leq B_i\\)\nを利用すると、添え字として\n\\(i\\)\nを省略する方針を取ることもできます。この場合はさらに定数倍に気を付ける必要があります。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#define rep(i, n) for (int i = 0; i < (n); i++)\ntemplate<class T, class U> inline bool chmin(T& a, const U& b) { if (a > b) { a = b; return true; } return false; }\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> a(n), b(n);\n\trep(i, n) cin >> a[i] >> b[i];\n\tint sum = accumulate(b.begin(), b.end(), 0);\n\tif (sum % 3 != 0) {\n\t\tcout << \"-1\\n\";\n\t\treturn 0;\n\t}\n\tint A = 501;\n\tint inf = 1000000000;\n\tvector<vector<int>> dp(A, vector<int>(A, inf));\n\tdp[0][0] = 0;\n\trep(i, n) {\n\t\tvector<vector<int>> ep(A, vector<int>(A, inf));\n\t\tint e = b[i];\n\t\trep(j, A) {\n\t\t\trep(k, A) {\n\t\t\t\tif (a[i] == 1) {\n\t\t\t\t\tif (j + e < A) chmin(ep[j + e][k], dp[j][k]);\n\t\t\t\t\tif (k + e < A) chmin(ep[j][k + e], dp[j][k] + 1);\n\t\t\t\t\tchmin(ep[j][k], dp[j][k] + 1);\n\t\t\t\t}\n\t\t\t\telse if (a[i] == 2) {\n\t\t\t\t\tif (j + e < A) chmin(ep[j + e][k], dp[j][k] + 1);\n\t\t\t\t\tif (k + e < A) chmin(ep[j][k + e], dp[j][k]);\n\t\t\t\t\tchmin(ep[j][k], dp[j][k] + 1);\n\t\t\t\t}\n\t\t\t\telse {\n\t\t\t\t\tif (j + e < A) chmin(ep[j + e][k], dp[j][k] + 1);\n\t\t\t\t\tif (k + e < A) chmin(ep[j][k + e], dp[j][k] + 1);\n\t\t\t\t\tchmin(ep[j][k], dp[j][k]);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tdp = move(ep);\n\t}\n\tint res = dp[sum / 3][sum / 3];\n\tcout << (res == inf ? -1 : res) << '\\n';\n}"
+      ],
+      "text_sha256": "54978478cda2fc077f9d8e0188a7f9930fc78b1b4a03b921e2544b81c3044bb8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc375/abc375_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

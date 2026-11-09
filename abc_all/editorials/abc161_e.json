@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc161_e",
+  "editorials": [
+    {
+      "text": "E:Yutori\nある期間内に働く日数を最大化するためには、前から貪欲に働く日を決めるのが最適です。した\nがって前から貪欲に働く日を決めた場合を考えることで「x 回目に働く日はL[x] 日目以降」とい\nう配列L を求めることができます。同様に後ろから貪欲に働く日を決めた場合を考えることで「x\n回目に働く日はR[x] 日目以前」という配列R を求めることができます。i 日目に必ず働くのは、\nL[x] = R[x] = i となるx が存在するときそのときに限るので、この問題はO(N) で解けました。\n",
+      "text_sha256": "00e4ce26a81b680a111712811f4a56bb4603ed736e19d1a57df0da0238c39307",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc161/abc161_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

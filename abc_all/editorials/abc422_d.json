@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc422_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc422/editorial/13821",
+      "text": "答えを先に述べます。答えは次の C++ のコード片で表されるアルゴリズムにより計算できます。\n(証明)\n\\(K\\)\nが\n\\(2^N\\)\nで割り切れる場合とそうでない場合で場合分けして考えます。\n1.\n\\(K\\)\nが\n\\(2^N\\)\nで割り切れる場合\n\\(K\\)\nが\n\\(2^N\\)\nで割り切れる場合、\n\\(B\\)\nを\n\\(\\frac{K}{2^N}\\)\nが\n\\(2^N\\)\n個並んだ数列とすればアンバランスさ\n\\(0\\)\nを達成できて、これが最小です。上記のアルゴリズムが\n\\(\\frac{K}{2^N}\\)\nが\n\\(2^N\\)\n並んだ数列を生成することが確認できるため、問題は起こりません。\n2.\n\\(K\\)\nが\n\\(2^N\\)\nで割り切れない場合\n\\(K\\)\nが\n\\(2^N\\)\nで割り切れない場合、 アンバランスさ\n\\(0\\)\nを達成することはできません。つまり、少なくともアンバランスさは\n\\(1\\)\n以上です。\n逆に、上記のアルゴリズムがアンバランスさ\n\\(1\\)\nを達成することが証明できます。\n証明の概要は次の通りです。上記のアルゴリズムでは数列の長さを\n\\(1, 2, \\dots, 2^N\\)\nと倍々にしていて、これは問題文中の操作の逆操作になっています。つまり、「操作過程で出てくる数列\nans\nに含まれる値の最大値と最小値の差」の最大値がアンバランスさになります。\nここで補題として、\nans\nに含まれる値の最大値と最小値の差は常に\n\\(1\\)\n以下であることが証明できます。\n補題の証明方針は次の通りです。\nans\nに含まれる値の最大値と最小値の差が\n\\(1\\)\n以下である場合は次の 3 通りのいずれかです。また、初期状態は A です。\nA: (最大値) = (最小値) である場合\nB: ある整数\n\\(m\\)\nを用いて (最大値)\n\\(= 2m+1\\)\n, (最小値)\n\\(=2m\\)\nと表せる場合\nC: ある整数\n\\(m\\)\nを用いて (最大値)\n\\(= 2m\\)\n, (最小値)\n\\(=2m-1\\)\nと表せる場合\nこの時、A,B,C の状態から 1 回操作した後も A,B,C いずれかの状態になることが証明できます。(詳細は省略しますが場合分けにより示せます。なお、\na\nから\na / 2\nと\na - a / 2\nを得る操作は\n\\(a\\)\nから\n\\(\\lfloor a/2 \\rfloor\\)\nと\n\\(\\lceil a/2 \\rceil\\)\nを計算する操作である点に注意します。) よって補題が示されました。\n以上より、アルゴリズムで得られる数列のアンバランスさは\n\\(1\\)\nであることが証明できたので、これが求めたい答えとなります。\n計算量は\n\\(\\mathrm{O}(2^N)\\)\nで十分高速です。\n実装例(C++)",
+      "codes": [
+        "vector<int> ans{K};\nfor (int n = 0; n < N; n++) {\n  vector<int> nxt;\n  for (int a : ans) {\n    nxt.push_back(a / 2);\n    nxt.push_back(a - a / 2);\n  }\n  ans = nxt;\n}",
+        "#include <algorithm>\n#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int N, K;\n  cin >> N >> K;\n  vector<int> ans{K};\n  for (int n = 0; n < N; n++) {\n    vector<int> nxt;\n    for (int a : ans) {\n      nxt.push_back(a / 2);\n      nxt.push_back(a - a / 2);\n    }\n    ans = nxt;\n  }\n  int max = *max_element(begin(ans), end(ans));\n  int min = *min_element(begin(ans), end(ans));\n  cout << max - min << \"\\n\";\n  for (int i = 0; i < (int)ans.size(); i++) {\n    cout << ans[i] << \" \\n\"[i + 1 == (int)ans.size()];\n  }\n}"
+      ],
+      "text_sha256": "b3de76116faf7c871c6797e414ff9e8a32f0d3f66043c0271e63af972704b1b8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc422/abc422_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc422/editorial/13840",
+      "text": "以下のように構築することもできます。\n\\(A\\)\nの要素を全て\n\\(\\displaystyle \\left\\lfloor\\frac{K}{2^N}\\right\\rfloor\\)\nにし、\n\\(K\\)\nを\n\\(K \\bmod 2^N\\)\nに置き換える。\n\\(k=0,1,\\ldots,K-1\\)\nに対し、\n\\(\\displaystyle A_{\\left\\lfloor 2^N\\times \\frac{k}{K}\\right\\rfloor}\\)\nに\n\\(1\\)\n加算する。\n実装例(Python3)",
+      "codes": [
+        "n, k = map(int, input().split())\na = [k >> n] * (1 << n)\nk %= 1 << n\nfor i in range(k):\n    a[(i << n) // k] += 1\nprint(1 if k else 0)\nprint(*a)"
+      ],
+      "text_sha256": "4a97688a823c4dfd7274181c8ed81adad37239653359745c98c2fe9a0f5dbfbd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc422/abc422_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

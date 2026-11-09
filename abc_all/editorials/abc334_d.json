@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc334_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc334/editorial/8986",
+      "text": "ソリの番号を付け替えても答えは変わらないので、\n\\((R_1,R_2, \\ldots, R_N)\\)\nが昇順にソートされているとしてよいです。\nこの仮定の下で\n\\(m\\)\n台のソリを引くとき、そのソリは\n\\(1,2,\\ldots, m\\)\nとしてよいので、この問題は\n\\(R_1 + R_2 + \\ldots + R_m \\leq X\\)\nなる最大の\n\\(m\\)\nを求めることに帰着できます。\nこれは累積和、すなわち各\n\\(i\\)\nに対する\n\\(R_1 + R_2 + \\ldots + R_i\\)\nの値を前計算しておき、この数列に対して二分探索を行うことで答えを求めることができます。\n数列のソートに\n\\(O(N \\log N)\\)\n、各クエリで\n\\(O(\\log N)\\)\nの時間計算量となるので、全体として\n\\(O((N+Q) \\log N)\\)\nの時間計算量でこの問題を解くことができます。\nまた、この問題ではクエリを先読みすることができるので、クエリを\n\\(X\\)\nの昇順にソートし、尺取り法の要領で答えを求めることもできます。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n#define rep(i, n) for (ll i = 0; i < (n); i++)\nusing namespace std;\nusing ll = long long;\n\nint main() {\n\tint n, q;\n\tcin >> n >> q;\n\tvector<ll> r(n);\n\trep(i, n) cin >> r[i];\n\tsort(r.begin(), r.end());\n\tvector<ll> s(n + 1);\n\trep(i, n) s[i + 1] = s[i] + r[i];\n\twhile (q--) {\n\t\tll x;\n\t\tcin >> x;\n\t\tcout << upper_bound(s.begin(), s.end(), x) - s.begin() - 1 << endl;\n\t}\n}"
+      ],
+      "text_sha256": "1e93aa67eb68ab3fe8a3dacaec68977e6c4256b9458d06ff097c8871a3866642",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc334/abc334_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

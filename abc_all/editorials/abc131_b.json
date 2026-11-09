@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc131_b",
+  "editorials": [
+    {
+      "text": "B. Bite Eating(writer : yuma000)\nN 個のりんごのおいしさは、L,L + 1,L + 2,...,L + N −1 です。また、この中から、最もおいしさの絶対値\nの小さいりんごを食べるのが、最適なので、そのりんごを除いた全てのりんごのおいしさの和を出力すればい\nいことが分かります。\n以下が、C++ のサンプルコードです。\n1\n#include<iostream>\n2\nusing namespace std;\n3\n4\nint main() {\n5\n6\nint N,A;\n7\ncin>>N>>A;\n8\n9\nint L=A;\n10\nint R=A+N-1;\n11\n12\nint eat;\n13\nif(R<=0)eat=R;\n14\nelse if(L>=0)eat=L;\n15\nelse eat=0;\n16\n17\nint answer=(R+L)*(R-L+1)/2-eat;\n18\n19\ncout<<answer<<endl;\n20\n21\nreturn 0;\n22\n23\n}\n",
+      "text_sha256": "d1e1b3939b0a7f678354cf026a96ac8a94f06e00bb57a9cb785c6d596ff35e9a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc131/abc131_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

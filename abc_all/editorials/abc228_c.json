@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc228_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc228/editorial/2943",
+      "text": "\\(i\\)\n番目の生徒が\n\\(4\\)\n日目終了時点で上位\n\\(K\\)\n位に入っている可能性があることは、\n\\(4\\)\n日目の試験において\n\\(i\\)\n番目の生徒が\n\\(300\\)\n点、他の生徒が\n\\(0\\)\n点をとったときに\n\\(i\\)\n番目の生徒が上位\n\\(K\\)\n位に入っていることと同値です。\n\\(i\\)\n番目の生徒の\n\\(3\\)\n日目終了時点での合計点を\n\\(S_i\\)\nとおきます。\nまた、\n\\(S_1, \\dots, S_N\\)\nのうち\n\\(K\\)\n番目に大きいものを\n\\(T\\)\nとおきます。\n\\(S_i + 300 \\geq T\\)\nなら\n\\(i\\)\n番目の生徒に対する答えは\nYes\nであり、そうでなければ\nNo\nです。\n実装例 (C++) :\n実装例 (Python) :\n上記のコードは、大きい方から\n\\(K\\)\n番目の値を求めるために配列をソートしているので、最悪計算量は\n\\(\\Theta (N \\log N)\\)\nです。しかし、選択アルゴリズムを用いることで、計算量を\n\\(O(N)\\)\nに落とすことができます。\nC++ であれば、\nstd::nth_element\nを使うことができます :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, k;\n    cin >> n >> k;\n    k -= 1;\n    vector<int> p(n);\n    for (int& x : p) {\n        int a, b, c;\n        cin >> a >> b >> c;\n        x = a + b + c;\n    }\n    vector<int> q = p;\n    sort(begin(q), end(q), greater<>());\n    for (int x : p) {\n        cout << (x + 300 >= q[k] ? \"Yes\" : \"No\") << '\\n';\n    }\n}",
+        "n, k = map(int, input().split())\ns = [0] * n;\nfor i in range(n):\n  s[i] = sum(map(int, input().split()))\nt = sorted(s, reverse=True)[k - 1];\nfor x in s:\n  print(\"Yes\" if x + 300 >= t else \"No\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, k;\n    cin >> n >> k;\n    k -= 1;\n    vector<int> p(n);\n    for (int& x : p) {\n        int a, b, c;\n        cin >> a >> b >> c;\n        x = a + b + c;\n    }\n    vector<int> q = p;\n    nth_element(begin(q), begin(q) + k, end(q), greater<>());\n    for (int x : p) {\n        cout << (x + 300 >= q[k] ? \"Yes\" : \"No\") << '\\n';\n    }\n}"
+      ],
+      "text_sha256": "26f2d15537dbdbb5e447dea9d50a46e261a103589807ce6711577ab94226c29c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc228/abc228_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

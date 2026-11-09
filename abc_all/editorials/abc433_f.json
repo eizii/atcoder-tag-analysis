@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc433_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc433/editorial/14594",
+      "text": "1122文字列\n\\(T\\)\nの\n\\(\\displaystyle \\frac{|T|}2\\)\n文字目を\n\\(S\\)\nの\n\\(i\\)\n文字目に固定した場合の答えを求めることを考えます。 （この問題を部分問題と呼びます。）\n\\(i=1,2,\\ldots,|S|\\)\nに対するこの値の総和がこの問題の答えとなることが分かります。\n\\(S\\)\nの\n\\(i\\)\n文字目より左にある数字\n\\(S_i\\)\nの個数を\n\\(p\\)\n、\n\\(S\\)\nの\n\\(i\\)\n文字目より右にある数字\n\\(S_i+1\\)\nの個数を\n\\(q\\)\nとします。この\n\\(p,q\\)\nは事前に累積和を計算することで高速に計算することができます。また、このとき部分問題の答えは\n\\(\\displaystyle \\binom{p+q}{p+1}\\)\nと表すことができます。\n証明\n\\(1\\)\n：\n1122文字列の長さを\n\\(2k\\)\nとして固定すると、\n\\(\\displaystyle \\frac{|T|}2\\)\n文字目が固定されていることから\n\\(p\\)\n文字の中から\n\\(k-1\\)\n文字、\n\\(q\\)\n文字の中から\n\\(k\\)\n文字選ぶ必要があります。したがって、部分問題の答えは\n\\[\\begin{aligned} \n&\\phantom{=} \\sum_{k\\geq 1} \\binom{p}{k-1}\\binom{q}k\\\\\n&= \\sum_{k\\geq 1} \\binom{p}{k-1}\\binom{q}{q-k}\\\\\n&=\\sum_{k_1+k_2=q-1}\\binom{p}{k_1}\\binom{q}{k_2}\\\\\n&=\\left[x^{q-1}\\right]\\left(\\sum_{k_1\\geq 0}\\binom{p}{k_1}x^{k_1}\\right)\\left(\\sum_{k_2\\geq 0}\\binom{q}{k_2}x^{k_2}\\right)\\\\\n&=\\left[x^{q-1}\\right] (1+x)^{p+q}\\\\\n&=\\binom{p+q}{q-1}=\\binom{p+q}{p+1}\n \\end{aligned}\\]\nとなります（この式変形はヴァンデルモンドの畳み込みと呼ばれます）。\n証明\n\\(2\\)\n：\n\\(p,q\\)\nに数えられている添字の集合をそれぞれ\n\\(X,Y\\)\nとします（\n\\(|X|=p,|Y|=q\\)\nが成立します）。\n\\(X \\cup Y\\)\nからちょうど\n\\(p+1\\)\n個の要素を選び、\n\\(X\\)\nの要素のうち選ばれなかった添字、\n\\(Y\\)\nの要素のうち選ばれた添字、\n\\(i\\)\nを合わせた添字集合からなる文字列を\n\\(T'\\)\nとします。すると、\n\\(T'\\)\nは 1122文字列 となり、さらに\n\\(p+1\\)\n個の選び方と 1122文字列 は一対一に対応します。したがって、部分問題の答えは\n\\(\\displaystyle \\binom{p+q}{p+1}\\)\nとなります。\n以上より、\n\\(i=1,2,\\ldots,N\\)\nに対して上記の\n\\(p,q\\)\nを求め、求めた\n\\(p,q\\)\nに対し\n\\(\\displaystyle \\binom{p+q}{p+1}\\)\nの総和を計算すればこの問題を解くことができます。累積和や二項係数の前計算は\n\\(O(|S|)\\)\n時間でできるので、全体の計算量も\n\\(O(|S|)\\)\nとなります。\n以上を適切に実装することでこの問題に正答することができます。\n実装例(Python3)",
+      "codes": [
+        "MOD = 998244353\nINF = 2_000_000 + 2025\n\nfact = [0] * (INF + 1)\nfinv = [0] * (INF + 1)\nfact[0] = 1\nfor i in range(1, INF + 1):\n    fact[i] = fact[i - 1] * i % MOD\nfinv[INF] = pow(fact[INF], MOD - 2, MOD)\nfor i in range(INF, 0, -1):\n    finv[i - 1] = finv[i] * i % MOD\n\ndef comb(n, k):\n    if n < 0 or k < 0 or n < k:\n        return 0\n    return fact[n] * finv[k] % MOD * finv[n - k] % MOD\n\ns = [ord(c) - ord('0') for c in input()]\nn = len(s)\nd = [[0] * (n + 1) for _ in range(10)]\nfor i in range(n):\n    for j in range(10):\n        d[j][i + 1] = d[j][i]\n    d[s[i]][i + 1] += 1\nans = 0\nfor i in range(n - 1):\n    if s[i] == 9:\n        continue\n    p = d[s[i]][i + 1] - 1\n    q = d[s[i] + 1][n] - d[s[i] + 1][i + 1]\n    ans = (ans + comb(p + q, p + 1)) % MOD\nprint(ans)"
+      ],
+      "text_sha256": "e887074d7e86537098f58f3b095cef407f2d40bb8ae4b7cb4b9fdbd14ca49bab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc433/abc433_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

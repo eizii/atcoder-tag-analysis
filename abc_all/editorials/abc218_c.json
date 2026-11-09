@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc218_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc218/editorial/2598",
+      "text": "\\(S\\)\nと\n\\(T\\)\nに含まれる\n#\nの個数が異なる場合、答えは明らかに\nNo\nです。そうでない場合を考えます。\n\\(S\\)\nに対して\n\\(90\\)\n度回転を何回行うか\n\\(4\\)\n通りを全探索します。回転操作を施したあとのものを改めて\n\\(S\\)\nと呼ぶと、平行移動で\n\\(S\\)\nと\n\\(T\\)\nを一致させられるかどうかを判定すればよいです。\n両者が一致するためには、\n\\(S\\)\nの最も左上のマスと\n\\(T\\)\nの最も左上のマスが一致することが必要であり、そのようなマスを求めることで平行移動量は一意に決まるため、平行移動により実際に一致するか判定すれば十分です。\n以上により\n\\(O(N^2)\\)\nで求めることができました。\n実装例(Python)\nなお、回転回数と平行移動量を全探索し、\n\\(S\\)\nの各マスと\n\\(T\\)\nの各マスの対応を確かめるような愚直な\n\\(O(N^4)\\)\nの解法も、\n\\(S\\)\nの\n#\nのマスをリストなどで持ち、一致しないことがわかった時点で比較を打ち切ることで、\n\\(O(N^3)\\)\nに改善することができるため、実行時間制限に間に合わせることができます。\nなお、回転回数と平行移動量を全探索し、\n\\(S\\)\nの各マスと\n\\(T\\)\nの各マスの対応を確かめるような愚直な\n\\(O(N^4)\\)\nの解法も、\n\\(S\\)\nの\n#\nのマスをリストなどで持ち\nシャッフルし\n、一致しないことがわかった時点で比較を打ち切ることで、十分高速に動作します。（expected\n\\(O(N^2)\\)\nに見えますが未証明です）\n実装例(Python)",
+      "codes": [
+        "def rot(S):\n\treturn list(zip(*S[::-1]))\n\ndef find_left_top(S):\n\tfor i in range(N):\n\t\tfor j in range(N):\n\t\t\tif S[i][j]=='#':\n\t\t\t\treturn i,j\n\ndef is_same(S,T):\n\tSi,Sj = find_left_top(S)\n\tTi,Tj = find_left_top(T)\n\toffset_i = Ti-Si\n\toffset_j = Tj-Sj\n\tfor i in range(N):\n\t\tfor j in range(N):\n\t\t\tii = i+offset_i\n\t\t\tjj = j+offset_j\n\t\t\tif 0<=ii<N and 0<=jj<N:\n\t\t\t\tif S[i][j]!=T[ii][jj]: return False\n\t\t\telse:\n\t\t\t\tif S[i][j]=='#': return False\n\treturn True\n\nN = int(input())\nS = [input() for _ in range(N)]\nT = [input() for _ in range(N)]\n\ncntS = sum(1 for i in range(N) for j in range(N) if S[i][j]=='#')\ncntT = sum(1 for i in range(N) for j in range(N) if T[i][j]=='#')\n\nif cntS != cntT:\n\tprint(\"No\")\n\texit()\n\nfor _ in range(4):\n\tif is_same(S,T):\n\t\tprint(\"Yes\")\n\t\texit()\n\tS = rot(S)\nprint(\"No\")",
+        "import random\nN = int(input())\nS = [input() for _ in range(N)]\nT = [input() for _ in range(N)]\n\nS_list = list((i,j) for i in range(N) for j in range(N) if S[i][j]=='#')\ncntT = sum(1 for i in range(N) for j in range(N) if T[i][j]=='#')\n\nif len(S_list)!=cntT :\n\tprint(\"No\")\n\texit()\n\n# シャッフル\nrandom.shuffle(S_list)\n\nfor _ in range(4):\n\tfor i in range(-N+1,N):\n\t\tfor j in range(-N+1,N):\n\t\t\tflag=True\n\t\t\tfor x,y in S_list:\n\t\t\t\tif not (0<=x+i<N and 0<=y+j<N and T[x+i][y+j]=='#'):\n\t\t\t\t\tflag=False\n\t\t\t\t\tbreak  # <--重要\n\t\t\tif flag:\n\t\t\t\tprint(\"Yes\")\n\t\t\t\texit()\n\t# rot\n\tS_list = [(y,N-1-x) for x,y in S_list]\nprint(\"No\")"
+      ],
+      "text_sha256": "1af7495deeb4ff77cb27f60be2160ee5176b8a108feb9bf8ff493c26d67649e1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc218/abc218_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc218/editorial/2637",
+      "text": "このような問題では、グリッドの状態を\n#\nの位置の集合として持つと楽になることがあります。\n平行移動は、各要素から値を足し引きするだけで良く、範囲外アクセスを気にする必要が無くなります。90度の回転は、各要素\n\\((x, y)\\)\nを\n\\((y, -x)\\)\nに置き換えるだけです。一致の判定には言語の機能を利用することができて、要素数を\n\\(n\\)\nとして、\n\\(O(n\\log n)\\)\nや\n\\(O(n)\\)\nで実装されていることが期待できます。\n実装例（Python）:",
+      "codes": [
+        "N = int(input())\n\n# グリッドを読み込んで#の位置の集合を返す\ndef read():\n  S = set()\n  for y in range(N):\n    l = input()\n    for x in range(N):\n      if l[x]==\"#\":\n        S.add((x, y))\n  return S\n\nS = read()\nT = read()\n\nfor _ in range(4):\n  # 最も左（複数あればそのうちで最も上）の#を(0, 0)の位置にする\n  mx, my = min(S)\n  S = set((x-mx, y-my) for x, y in S)\n  mx, my = min(T)\n  T = set((x-mx, y-my) for x, y in T)\n\n  if S==T:\n    print(\"Yes\")\n    exit(0)\n\n  # Tを回転\n  T = set((y, -x) for x, y in T)\n\nprint(\"No\")"
+      ],
+      "text_sha256": "43f56443751c0100145fe733d26857d7f4f9ef50d44fd3691ea536d4851fb079",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc218/abc218_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

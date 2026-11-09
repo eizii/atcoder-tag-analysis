@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc351_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc351/editorial/9876",
+      "text": "この問題は文字列処理と for 文の使い方を問うている問題です。この問題が解けなかった人は文字列の使い方を復習してみましょう。\nこの問題はグリッド全体を走査して\n\\(A\\)\nと\n\\(B\\)\nで異なる文字を発見することで解くことが出来ます。具体的には、次のアルゴリズムを実装するとよいです。\n\\(i = 1, 2, \\dots, N\\)\nの順に次の操作を行う。\n\\(j = 1, 2, \\dots, N\\)\nの順に次の操作を行う。\n\\(A_{i, j}\\)\nと\n\\(B_{i, j}\\)\nが同じ文字かどうか調べる。\n同じ文字だった場合は何もしない。\n異なる文字だった場合は\n\\((i, j)\\)\nを出力して全ての操作を終了する。\n計算量は\n\\(\\mathrm{O}(N^2)\\)\nで十分高速です。\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int N;\n  cin >> N;\n  vector<string> A(N), B(N);\n  for (auto& s : A) cin >> s;\n  for (auto& s : B) cin >> s;\n  for (int i = 0; i < N; i++) {\n    for (int j = 0; j < N; j++) {\n      if (A[i][j] != B[i][j]) {\n        cout << i + 1 << \" \" << j + 1 << endl;\n        return 0;\n      }\n    }\n  }\n}"
+      ],
+      "text_sha256": "72d290f4dc14d9f0cd2f8988461e8edd76fcd4a9b0bc853d31473a2b36dfbd68",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc351/abc351_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

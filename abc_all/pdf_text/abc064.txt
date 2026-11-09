@@ -1,0 +1,166 @@
+AtCoder Beginner Contest 064 解説
+
+       問題作成者: E869120 / square1001
+
+                      2017/6/10
+
+     [[ For international readers: English editorial starts at page 5. ]]
+
+
+
+A 問題：RGB Cards
+
+  3 つの1 桁の整数 𝑟, 𝑔, 𝑏 をこの順に並べた数は 100𝑟+ 10𝑔+ 𝑏 となります。
+ これが4 の倍数か判定するだけです。「𝑛 が4 の倍数」 は 「𝑛 を4 で割った余りが0」 であるのと同
+じなので、多くのプログラミング言語では n % 4 == 0 が true であれば “Yes”, false であれば “No”
+と出力することで正解が得られます。
+
+
+サンプルコード (C++)
+
+B 問題：Traveling AtCoDeer Problem
+
+ 最適な移動方法の一つは、座標の小さい順にプレゼントを配り、寄り道をしないということです。すると、
+移動距離は (一番右の家の座標) – (一番左の家の座標) となり、これは max(𝑎1, 𝑎2, 𝑎3, … , 𝑎𝑁) −
+min(𝑎1,𝑎2, 𝑎3, … , 𝑎𝑁) と等しいです。
+  Max とmin の値は、条件分岐を使って 𝑂(𝑛) で計算することができます。
+
+
+サンプルコード (C++)
+
+C 問題：Colorful Leaderboard
+
+ まず、全員のレートが3199 以内であることを考えてみましょう。
+ 灰、茶、緑、水、青、黄、橙、赤色をその順に0, 1, 2, 3, 4, 5, 6, 7 と番号付けることにします。そ
+のとき、色番号  𝑖 の人のレートを 𝑟 としたとき、400𝑖≤𝑟< 400(𝑖+ 1) を満たします。例えば、色番
+号5 (=黄色) の人のレートは、400×5=2000 以上 400×6=2400 未満 となります。
+ 次に、「色番号  𝑖 の人がいるか」 というのを確かめることにします。これは、400𝑖≤𝑎𝑗< 400(𝑖+ 1)
+を満たすような 𝑗 が存在するならば色番号  𝑖 の人はいます。また、そうでなければいません。
+ これを 0 ≤𝑖≤7 の範囲で全探索すると、計算量 𝑂(𝑛) で色の種類数を求めることができます。
+  次に、レート3200 以上の人が存在することを考えてみましょう。レート3200 以上の人は、色を自由
+に設定することが可能なので、当然設定によっては色の種類数は変動してきます。
+ そこで、レート3200 以上の人を 𝑛 人、レート3199 以下の人に対する色の種類数を 𝑐 とします。
+そのとき、最大値 / 最小値 は次のようになります。
+
+
+1. 最大値
+ レート3200 以上の人 𝑛 人がすべて違う色を設定し、かつどの人も 灰 / 茶 / 緑 / 水 / 青 /
+黄 / 橙 / 赤色 を設定している場合、𝑛+ 𝑐 種類の色ができます。また、変えられる色が 𝑛 個しかな
+いので、これが最大であることが分かります。
+
+
+2. 最小値
+    a. 𝑐≥1 のとき
+     レート3199 以下の人が1 人以上いるので、このうち1 人の色をX とすると、レート3200 以
+    上の人が全員色X に設定すれば色の種類数は 𝑐 種類 となります。
+    b. 𝑐= 0 のとき
+     この場合、全員がレート3200 以上であるということになります。人が1 人以上で色の種類数
+    が0 種類であることはあり得ないので、a. は成り立ちません。また、最適解はこの場合全員が同
+    じ色を選んだ時に色の種類数は1 種類となります。
+
+
+よって、この問題は計算量 𝑂(𝑛) で解くことができます。
+
+D 問題：Insertion
+
+ 文字列 𝑠 が括弧列である ⇔ 文字列 𝑠 の  ‘(‘ の個数と  ‘)’ の個数が同じかつ任意の接頭辞に
+おいても  ‘(‘ の個数が  ‘)’ の個数以上である が成り立つ。
+ ただし、接頭辞とは 𝑠 の最初の 𝑥 文字 (0 ≤𝑥≤|𝑠|) のことである。(|𝑠| = (𝑠の長さ))
+  𝑑𝑖 を 𝑠 の最初の  𝑖 文字に含まれる  ‘(‘ の個数 – ‘)’ の個数 とし、𝑥= min(𝑑0, 𝑑1, … , 𝑑𝑛) とす
+るとき、’(‘ や  ‘)’ を挿入した時に 𝑑|𝑠| = 0 かつ 𝑥= 0 となればよい。
+  そこで、’(‘ を1 つ挿入すると 𝑑|𝑠| が1 増え、𝑥 が 0 または1 増える。’)’ を1 つ挿入すると 𝑑|𝑠| が
+1 減り、𝑥 が0 または1 減る。そこで、次の4 つの操作のいずれかをして、𝑎= 0 かつ 𝑏= 0 となるよう
+にすることを考える。 (𝑎= 𝑑|𝑠|, 𝑏= 𝑥 に対応している)
+ a. 𝑎 を1 増加させる。
+ b. 𝑎 を1 増加させ、𝑏 を1 増加させる。
+ c.  𝑎 を1 減少させる。
+ d. 𝑎 を1 減少させ、𝑏 を1 減少させる。
+ まず、𝑏≤0 の状態から 𝑏= 0 にしなければならないので、b. の操作を −𝑏 回行うことにする。d.
+の操作を1 回やるとb. の操作を1 回してもとに戻り、それ以外に方法はないので無駄になる。そのとき、
+𝑎 の値が (元の 𝑎) + 𝑏 となっており、𝑎≥𝑏 より現在の 𝑎 は0 以上になっている。𝑎= 0 にするため
+には c. の操作を (元の 𝑎 ) + 𝑏 回行わなければならない。よって、挿入回数が 𝑎−2𝑏= 𝑑|𝑠| −𝑥
+回未満になることがないことが分かる。
+ そこで一番左に  ‘(‘ を −𝑥 個、一番右に  ‘)’ を 𝑑|𝑠| −𝑥 個挿入すると  𝑑|𝑠| −2𝑥 回の挿入でで
+きるので、先ほどの証明より文字数が最小であることが分かる。また、その中で辞書順最小も達成できる。
+ よって、この問題は 𝑂(|𝑠|) で解くことができた。
+
+AtCoder Beginner Contest 064 Editorial
+
+          Problem Setter: E869120 / square1001
+
+                      2017/6/10
+
+A: RGB Cards
+
+  The number that AtCoDeer reads is 100𝑎+ 10𝑏+ 𝑐. You can calculate with the
+remainder of 100𝑎+ 10𝑏+ 𝑐 divided by 4.
+
+
+C++ code example:
+
+B: Traveling AtCoDeer Problem
+
+  One of the optimal way of delivering gifts is to move house in ascending order. In
+this case, the moving distance is (rightmost house coordinate) – (leftmost one), is
+equal to max(𝑎1, 𝑎2, … , 𝑎𝑛) −min⁡(𝑎1, 𝑎2, … , 𝑎𝑛).
+
+
+C++ code example:
+
+C: Rating Colors
+
+  Let 𝑥 the number of people who rating is more or equal to 3200, and let 𝑐 the
+number of different colors whose rating is less than 3200.
+
+
+  𝑥 can calculate with the number of  𝑖 that satisfies 𝑎𝑖≥3200 , and 𝑐  is the
+number of  𝑖⁡ (0 ≤𝑖≤7) that at least one 𝑗 exists that satisfies 400𝑖≤𝑎𝑗< 400(𝑖+
+1), because the color of rating (less than 3200) can identify with the quotient of 𝑎𝑖
+divided by 400.
+
+
+ Maximum value / Minimum value can calculate as following method:
+
+
+1. Maximum value
+   The optimal way is setting distinct colors in people whose rating is more or
+equal to 3200, and also setting color is different from gray, brown, green, cyan,
+blue, yellow, orange, and red. The number of different colors will be 𝑥+ 𝑐.
+
+
+2. Minimum value
+    a. Case 𝒄≥𝟏
+       In this case, there exist a person X who rating is below 3200. The optimal
+     way is setting same color as person X, for all people whose rating is more or
+      equal to 3200. The number of different colors will be 𝑐.
+   b. Case 𝒄= 𝟎
+       This pattern is tricky. For the constraints 𝑛≥1, if all people select same color,
+       the number of different colors will be 1. This is the optimal way.
+
+D: Insertion
+
+  For a string 𝑆 that consist from ‘(‘ and ‘)’, 𝑆 is a correct bracket sequence if and
+only if 𝑆 includes exactly same number of ‘(‘ and ‘)’, and the number of ‘(‘ is large
+or equal to the number of ‘)’ for all prefix.
+
+
+  Let 𝑑𝑖 = (the number of ‘(‘ in 𝑖-th prefix) – (the number of ‘)’ in 𝑖-th prefix). 𝑖-
+th prefix is the prefix with length 𝑖. The objective is to be 𝑑𝑠= 0 and 𝑥= 0, with
+some insertion of ‘(‘ and ‘)’.
+
+
+   If you insert ‘(‘, 𝑑|𝑠| increases by 1 and 𝑥 increases by 0 or 1. If you insert ‘)’, 𝑑|𝑠|
+decreases by 1 and 𝑥 decreases by 0 or 1. In the constraints 𝑥≤0, 𝑑|𝑠| −𝑥≥0, if
+you can do all 4 operations freely and independently (𝑑|𝑠|+= 1, 𝑑|𝑠|+= 1 and 𝑥+= 1,
+𝑑|𝑠|−= 1, 𝑑|𝑠|−= 1 and 𝑥−= 1), the optimal way is operating 𝑑|𝑠|+= 1, 𝑥+= 1 for −𝑥
+times, and operating 𝑑|𝑠|−= 1  for  𝑑|𝑠| −𝑥 times, so the minimum number  of
+operation is 𝑑|𝑠| −2𝑥 times.
+
+  Therefore, the lower bound of number of insertion is 𝑑|𝑠| −2𝑥 times, and you can
+achieve in following way:
+   1.  Insert ‘(‘ in the leftmost place −𝑥 times.
+   2.  Insert ‘)’ in the rightmost place 𝑑|𝑠| −𝑥 times.
+
+  The total number of insertion is 𝑑|𝑠| −2𝑥, and it is same as the lower bound that
+already proved. So, this is the minimum insertion. And this is also lexicographically
+smallest.

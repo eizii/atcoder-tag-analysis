@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc098_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc098/editorial.pdf",
+      "text": "C : Attention\n\n 西からi 番目の人がリーダーになった際、向く方向を変える必要のある人は、西からj(j < i) 番\n目に並んでいて西を向いている人と、西からj(j > i) 番目に並んでいて東を向いている人です。\n ここで、「ある範囲に存在する西(東) を向いている人の人数」は、累積和を使うと、前処理O(N)\n時間、1 クエリあたりO(N) 時間で求められます。\n よって、まず最初にO(N) 時間で累積和を求めておくと、各人について、その人がリーダーに\nなった際に向く方向を変える必要のある人の人数を求めることがO(1) 時間ででき、合計O(N) 時\n\n間で全員分求まります。あとはその中で最小値を求めればよいです。\n\n\n\n\n\n                                         3",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "d3ee830662495241ebadaf74a6098ed68d7408116a0b890a1ca2604621890dec"
+    }
+  ],
+  "status": "available"
+}

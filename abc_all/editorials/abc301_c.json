@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc301_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc301/editorial/6339",
+      "text": "@\nがないバージョンの問題では、\n\\(S,T\\)\nで各文字の個数が全て一致しているとき\nYes\n、そうでないとき\nNo\nが答えとなります。\n@\nがあるバージョンでも同様に、\n@\nを適切に置き換えることで各文字の個数を一致させることができるかどうかを考えます。\n予め\n\\(S,T\\)\nに含まれる\n@\nの個数を求めておきます。その後、\natcoder\nの各文字について\n\\(S,T\\)\nに含まれる個数をそれぞれ求め、少ない方の個数が多い方の個数と等しくなるように\n@\nを置き換えます（実際に文字列を置き換える必要はなく、個数だけ増減させれば良いです）。これらの操作の過程で\n@\nが不足した場合答えは\nNo\nとなります。\n（文字の個数を等しくするためには少ない方の個数が多い方の個数以上になるように増やす必要があることと、\n@\nはできるだけ消費しない方が良いことから、このような置き換え方法が最善であることがわかります）\n最後まで\n@\nが不足することなく操作を行えた場合、\natcoder\n以外の他の英小文字についても\n\\(S,T\\)\nに含まれる個数が全て等しい場合\nYes\n、そうでないとき\nNo\nとなります。\n実装例(Python)\n実装例(C)",
+      "codes": [],
+      "text_sha256": "1a301bf14b7c546cd3ba38db21f3f64430b0ed75e6f1a94f66f684898b8e9a9a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc301/abc301_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc301/editorial/6352",
+      "text": "\\(S\\)\n及び\n\\(T\\)\nの長さを\n\\(N\\)\nとします．\nこの問題は，以下のように言い換えることができます．\n\\(S\\)\nの\n\\(i\\)\n文字目\n\\(S_i\\)\nと\n\\(T\\)\nの\n\\(j\\)\n文字目\n\\(T_j\\)\nは，以下の条件の少なくとも\n\\(1\\)\nつを満たす場合に限りペアになることができる．すべての文字が余らないように\n\\(N\\)\n組のペアを作ることができるかを判定せよ．\n\\(S_i = T_j\\)\n．\n\\(S_i = \\)\n@\nであり，かつ\n\\(T_j\\)\nが\na\n,\nt\n,\nc\n,\no\n,\nd\n,\ne\n,\nr\nのいずれかである．\n\\(T_j = \\)\n@\nであり，かつ\n\\(S_i\\)\nが\na\n,\nt\n,\nc\n,\no\n,\nd\n,\ne\n,\nr\nのいずれかである．\nこれは，最大二部マッチング問題として考えることができます．\n\\(S\\)\nと\n\\(T\\)\nの各文字を表す頂点を用意して，ペアになれる文字の間に辺を張ったグラフを用意すれば， Hopcroft-Karp のアルゴリズムなどを用いることでこの問題を解くことができます．\nしかし，そのまま辺を張ると辺の本数が\n\\(\\Theta(N^2)\\)\nとなりこの問題の制約では実行時間制限に間に合いません．文字種類が十分少ないことを利用して，\n\\(S\\)\n側，\n\\(T\\)\n側それぞれで同じ文字の頂点をまとめることで高速に解くことができます．\n解答例(PyPy3):\nhttps://atcoder.jp/contests/abc301/submissions/41394540",
+      "codes": [],
+      "text_sha256": "1ee41cb97b9db353ddcb504255018957dd6f016711b9a62747cf0b6aa5598680",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc301/abc301_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

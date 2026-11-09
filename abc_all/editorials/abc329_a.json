@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc329_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc329/editorial/7726",
+      "text": "問題文の指示に従って、\n\\(S\\)\nの各文字と空白を交互に出力すればよいです。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tfor (int i = 0; i < s.size() - 1; i++) cout << s[i] << ' ';\n\tcout << s.back() << endl;\n}"
+      ],
+      "text_sha256": "9355d7b377131601b464939213847347d09f575db9e156cb6ea6e23ef6d89fc2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc329/abc329_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

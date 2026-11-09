@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc301_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc301/editorial/6334",
+      "text": "問題文に書かれている手順通りに操作を行いましょう。細かな実装方法にはいくつかバリエーションがあります。\n問題文の指示に忠実な実装方法は例えば以下の通りです。\n実装例(Python)\n手順1と2で配列をそれぞれ調べるのは二度手間です。手順2を一度も行わなかったときに繰り返しを抜けるようにすると例えば以下のようになります。\n実装例(Python)\nさらに少し考えると、直前に挿入操作を行った続きから調べれることにすれば、配列を一度調べれば十分であることがわかります。\n実装例(Python)\n手順2で挿入するべき数列の最初の1項だけを挿入することにしても正しく動作します。\n実装例(Python)\n実装例(C++)\n実行時間について\n以上の実装では実際に元の数列に数を挿入していますが、多くの言語でこの処理には「挿入位置より後ろに存在する要素の個数」に比例する時間がかかります。このため、最悪の場合に処理全体でかかる時間は、出力する数列の長さを\n\\(M\\)\nとして\n\\(\\Omega(N^2+M)\\)\nとなります。数列に数を挿入するのではなく、答えとなる新たな数列を先頭から順に構築することにすると全体で\n\\(O(M)\\)\n時間で行うことができます。C 問題以降に挑む際は、処理にかかる計算量を意識するようにしましょう。\n実装例(Python)\n(新たな配列を構築)\n実装例(C)\n(答えの配列を保持せず、逐次出力)",
+      "codes": [],
+      "text_sha256": "d9ae367b8347dfa267fb9549324f0c34e7acbbc5e3f8e632ba2f18305ccd1b4f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc301/abc301_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc301/editorial/6349",
+      "text": "与えられた手順の代わりに次を行っても同じ出力が得られます。\n\\(A_1\\)\nを出力する。\n\\(A_1 < A_2\\)\nなら、\n\\(A_1 + 1, A_1 + 2, \\ldots, A_2 - 1\\)\nをこの順に出力する。そうでないなら、\n\\(A_1 - 1, A_1 - 2, \\ldots, A_2 + 1\\)\nをこの順に出力する。（\n\\(A_2 - A_1 = \\pm 1\\)\nのときは何も出力されない。）\n\\(A_2\\)\nを出力する。\n上と同様に、\n\\(A_2\\)\nと\n\\(A_3\\)\nの間の数を出力する。\n\\(A_3\\)\nを出力する。\n\\(\\vdots\\)\n\\(A_{N-1}\\)\nを出力する。\n上と同様に、\n\\(A_{N-1}\\)\nと\n\\(A_N\\)\nの間の数を出力する。\n\\(A_N\\)\nを出力する。\n実装例（Python）",
+      "codes": [
+        "N, A = int(input()), list(map(int, input().split()))\nfor i in range(N - 1):\n    print(A[i], end=' ')\n    if A[i] < A[i + 1]:\n        for x in range(A[i] + 1, A[i + 1]):\n            print(x, end=' ')\n    else:\n        for x in range(A[i] - 1, A[i + 1], -1):\n            print(x, end=' ')\nprint(A[-1])"
+      ],
+      "text_sha256": "663b308f4fe02141e65aba240e093a69e0071f7140b1c4d3630b0466c9fbe7f3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc301/abc301_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

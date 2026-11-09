@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc317_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc317/editorial/7031",
+      "text": "まず、各空きマスが視線に入っているマスかどうかがわかっている時を考えます。その場合、問われている内容は「グリッドがあり、通れるマスと通れないマスがある時の\n\\(S\\)\nから\n\\(G\\)\nへの最短路は？」といった最短路問題になります。そして、グリッド上の最短路問題は幅優先探索で\n\\(\\mathrm{O}(HW)\\)\nで解くことができます。(グリッド上の最短路問題や幅優先探索(BFS) は\nABC007 C\nに詳しいのでそちらも参考にしてください)\nこのような情報を踏まえると、元の問題は次のような方針で解けばよいことがわかります。\nはじめに、全ての空きマスについて視線に入っているかどうかを判定する。\nその後、前述の幅優先探索で\n\\(S\\)\n,\n\\(G\\)\n間の最短路を計算する。\n1 番目の「全ての空きマスについて視線に入っているかどうかを判定」の方法を説明します。これは以下の手順で計算すればよいです。\n\\(H\\times W\\)\nの 2 次元配列\nviewed\nを、\nviewed[i][j]\nが 「マス\n\\((i, j)\\)\nが視線に入っている空きマスか？」を意味する 2 次元配列とする。\nviewed\nの要素ははじめ全て falseである。\n全ての人に対して、その人の視線に入っているマスの\nviewed[i][j]\nを true にする。\n上記のアルゴリズムは一見すると\n\\(3\\)\n乗オーダー掛かるように見えますが、あるマスに視線を向ける人の人数は高々 4 人なので、全ての\nview[i][j]\nは最大でも 4 回しか true を代入されないことから、適切に実装すれば計算量が\n\\(\\mathrm{O}(HW)\\)\nに抑えられるとわかります。\nこの部分の実装についても付記します。 人の向きは 4 種類ありますが、4種類全てを別々に実装すると実装量がかさばる上にバグの原因にもなるのでお勧めしません。そこで、コードを共通化することで本質部分の実装を 1 回で済ませる方法を以下で解説します。\nはじめに 4 種類の人、およびその人が向いている方向を配列に格納します。(例えば下の例では、\ndirection[0]\nは\nv\nで、\n\\((dx[0], dy[0]) = (1, 0)\\)\nと対応している。ここで\n\\(x\\)\nは下方向,\n\\(y\\)\nは右方向)\nこのような\ndirection, dx, dy\nを用いて視線に入っているマスを調べることで、1 個の実装を 4 種類全ての判定に使い回すことができます。\nこのように、共通化したコードを書くことによって、類似した計算が複数回登場するアルゴリズムの計算部分を 1 回の実装で済ませて実装量を減らすのは重要なテクニックです。E 問題を正確に通したい人は是非身に付けましょう。\nC++ による実装例は次の通りです。\n実装例 (C++)",
+      "codes": [
+        "const string direction = \"v>^<\";\n  const vector<int> dx{1, 0, -1, 0};\n  const vector<int> dy{0, 1, 0, -1};",
+        "vector viewed(H, vector(W, 0));\n  for (int k = 0; k < 4; k++) {\n    for (int i = 0; i < H; i++) {\n      for (int j = 0; j < W; j++) {\n        if (g[i][j] != direction[k]) continue;\n        int x = i, y = j;\n        while (1) {\n          x += dx[k], y += dy[k];\n          if (!(0 <= x and x < H and 0 <= y and y < W) or g[x][y] != '.') break;\n          viewed[x][y] = 1;\n        }\n      }\n    }\n  }",
+        "#include <iostream>\n#include <queue>\n#include <string>\n#include <utility>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int H, W;\n  cin >> H >> W;\n  vector<string> g(H);\n  for (auto& x : g) cin >> x;\n\n  const vector<int> dx{1, 0, -1, 0};\n  const vector<int> dy{0, 1, 0, -1};\n  const string direction = \"v>^<\";\n  auto in = [&](int h, int w) -> bool {\n    return 0 <= h and h < H and 0 <= w and w < W;\n  };\n  auto is_obstacle = [&](char c) -> bool {\n    return c == '#' or direction.find(c) != string::npos;\n  };\n\n  int Sh = -1, Sw = -1, Gh = -1, Gw = -1;\n  for (int i = 0; i < H; i++) {\n    for (int j = 0; j < W; j++) {\n      if (g[i][j] == 'S') Sh = i, Sw = j;\n      if (g[i][j] == 'G') Gh = i, Gw = j;\n    }\n  }\n\n  vector viewed(H, vector(W, 0));\n  for (int k = 0; k < 4; k++) {\n    for (int i = 0; i < H; i++) {\n      for (int j = 0; j < W; j++) {\n        if (g[i][j] != direction[k]) continue;\n        int x = i, y = j;\n        while (1) {\n          x += dx[k], y += dy[k];\n          if (!in(x, y) or is_obstacle(g[x][y])) break;\n          viewed[x][y] = 1;\n        }\n      }\n    }\n  }\n\n  vector d(H, vector(W, -1));\n  queue<pair<int, int>> Q;\n  auto add = [&](int h, int w, int x) {\n    if (d[h][w] == -1) d[h][w] = x, Q.emplace(h, w);\n  };\n  add(Sh, Sw, 0);\n  while (!Q.empty()) {\n    auto [h, w] = Q.front();\n    Q.pop();\n    for (int k = 0; k < 4; k++) {\n      int x = h + dx[k];\n      int y = w + dy[k];\n      if (!in(x, y) or is_obstacle(g[x][y])) continue;\n      if (viewed[x][y]) continue;\n      add(x, y, d[h][w] + 1);\n    }\n  }\n  cout << d[Gh][Gw] << endl;\n}"
+      ],
+      "text_sha256": "9c3fe935485b87e60bcf7815ae92a6f8b9231951f037b69e1514cc0d9d82b973",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc317/abc317_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

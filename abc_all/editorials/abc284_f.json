@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc284_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5469",
+      "text": "この問題は様々な文字列アルゴリズムによって解くことができますが、本解説では、AtCoder Library にも実装されている Z algorithm を用いた解法を説明します。\n以下、文字列は\n0-indexed\nで扱います（すなわち、先頭を\n\\(0\\)\n文字目とします）。\nZ algorithm とは\n文字列\n\\(S\\)\nが与えられる。\n\\(S\\)\nの\n\\(i\\)\n文字目以降のみを取り出した文字列を\n\\(S[i:]\\)\nとおく。\n\\(0\\)\n以上\n\\(|S|\\)\n未満の全ての\n\\(i\\)\nに対して、\n\\(S\\)\nと\n\\(S[i:]\\)\nの最大共通接頭辞の長さ (\n\\(S\\)\nと\n\\(S[i:]\\)\nが先頭から何文字一致しているか) を求めよ。\nZ algorithm は、上の問題を\n\\(O(|S|)\\)\nで解くアルゴリズムです。アルゴリズムの詳細については\nAtCoder Library の実装\nや\nすぬけさんによる解説\nなどをご参照ください。\n本問題の解法\n以下、文字列\n\\(S\\)\nに対して、\n\\(S\\)\nを反転させた文字列を\n\\(\\mathrm{rev}(S)\\)\nと表記します。\n\\(S\\)\nの\n\\(l\\)\n文字目から\n\\(r-1\\)\n文字目までの部分文字列  (\n\\(l=r\\)\nの場合は空文字列) を\n\\(S[l:r]\\)\nと表記します。\n\\(S\\)\nと\n\\(S[i:]\\)\nの最大共通接頭辞の長さを\n\\(Z(S)[i]\\)\nと表記します。また、便宜上\n\\(Z(S)[|S|]=0\\)\nとします。\nまずは問題文の条件を言い換えます。以下の\n\\(4\\)\nつの条件は全て同値です (証明は簡単です)。\nある\n\\(S,i\\ (0\\leq i \\leq N)\\)\nが存在して、\n\\(f_i(S)=T\\)\nある\n\\(i\\ (0\\leq i \\leq N)\\)\nが存在して、\n\\(T[0:i]=\\mathrm{rev}(T[N:N+i])\\)\nかつ\n\\(T[N+i:2N]=\\mathrm{rev}(T[i:N])\\)\n\\(A=T[0:N],B=\\mathrm{rev}(T[N:2N])\\)\nとおいたとき、\nある\n\\(i\\ (0\\leq i \\leq N)\\)\nが存在して、\n\\(A[0:i]=B[N-i:N]\\)\nかつ\n\\(A[i:N]=B[0:N-i]\\)\n\\(A\\)\nと\n\\(B\\)\nをこの順に連結した文字列を\n\\(X\\)\n、\n\\(B\\)\nと\n\\(A\\)\nをこの順に連結した文字列を\n\\(Y\\)\nとおいたとき、\nある\n\\(i\\ (0\\leq i \\leq N)\\)\nが存在して、\n\\(Z(X)[2N-i]=i\\)\nかつ\n\\(Z(Y)[N+i]=N-i\\)\n最後の条件は、\n\\(X\\)\nと\n\\(Y\\)\nに対して Z algorithm を用いて\n\\(Z(X)\\)\nと\n\\(Z(Y)\\)\nを予め求めておくことによって、各\n\\(i\\)\nに対して\n\\(O(1)\\)\nで判定できます。よって、この問題を\n\\(O(N)\\)\nで解くことができました。\nなお、冒頭に述べた通り、rolling hash、suffix array、MP などのその他の文字列アルゴリズムを用いることによっても、\n\\(O(N)\\)\nでこの問題を解くことができます。rolling hash を用いる場合は hash 値の衝突に注意してください。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/string>\n\nusing namespace std;\nusing namespace atcoder;\n\nint main() {\n    int n;\n    cin >> n;\n    string t;\n    cin >> t;\n    \n    string a = t.substr(0, n);\n    string b = t.substr(n);\n    reverse(b.begin(), b.end());\n    \n    string x = a + b;\n    vector<int> za_x = z_algorithm(x);\n    za_x.push_back(0);\n    \n    string y = b + a;\n    vector<int> za_y = z_algorithm(y);\n    za_y.push_back(0);\n    \n    for (int i = 0; i <= n; i++) {\n        if(za_x[2 * n - i] < i) continue;\n        if(za_y[n + i] < n - i) continue;\n        cout << t.substr(0, i) + t.substr(n + i) << endl;\n        cout << i << endl;\n        return 0;\n    }\n    \n    cout << -1 << endl;\n}"
+      ],
+      "text_sha256": "468082da6b18868a48f00e68296084a37928ccaa9839b6149d7bc6cf1ffc2cb1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5513",
+      "text": "https://twitter.com/kyopro_friends/status/1611950973215465472\n（ツイート中に「ABC285」とありますが、ABC284の誤りです）",
+      "codes": [],
+      "text_sha256": "d6a193d4f5c4d762057ec3c18a8d494ec0fccd9272b0454820b0506934e6e038",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc367_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc367/editorial/10704",
+      "text": "解法1. 実は上手く行く解法\nC++ の場合は、\ndouble\n型として\n\\(X\\)\nを受け取り特に書式設定をせずそのまま出力すればこの問題に正解できます。これは、過剰な\n0\nを末尾に出力しない仕組みになっているからです。他のプログラミング言語にも、これに類する機能が存在する場合があります。\nとはいえ、この手法は常に使える方法ではありません。他の方法も考えましょう。\n実装例 (C++):\n解法2. 文字列の問題として処理する\n\\(X\\)\nを文字列として受け取り、以下の処理を施して出力することでこの問題に正解できます。\n末尾が\n0\nである限り、その文字を削除することを繰り返す。\nその後、末尾が\n.\nであればそれも削除する。\nこの方法は、入力に必ず小数点が存在するおかげで「末尾が\n0\nである限り、その文字を削除することを繰り返す。」ということが行われている限りそこは小数点以下にある過剰な末尾の\n0\nであることからうまく行きます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  double x;\n  cin >> x;\n  cout << x << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string x;\n  cin >> x;\n  while(x.back()=='0'){x.pop_back();}\n  if(x.back()=='.'){x.pop_back();}\n  cout << x << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "24d27123ba14757e2e4af8771efc79d48e943cdc90f8c543a77ca9b0ea7ceffc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc367/abc367_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

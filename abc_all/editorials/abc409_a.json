@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc409_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc409/editorial/13226",
+      "text": "高橋君と青木君がともに\n\\(i\\)\n番目の商品を欲しがっているということは，\n\\(T_i,A_i\\)\nがともに\no\nであるということと同じです．したがって，\n\\(T_i=A_i\\)\n=\no\nであるような\n\\(i\\)\nが存在するかどうかを\n\\(i=1,2,\\ldots,N\\)\nに対して順番に調べることでこの問題を解くことができます．\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int N;\n  cin >> N;\n  string A, T;\n  cin >> A >> T;\n  for (int i = 0; i < N; i++) {\n    if (T[i] == 'o' && A[i] == 'o') {\n      cout << \"Yes\" << endl;\n      return 0;\n    }\n  }\n  cout << \"No\" << endl;\n}",
+        "N = int(input())\nA = input()\nT = input()\n\nfor i in range(N):\n    if T[i] == A[i] == \"o\":\n        print(\"Yes\")\n        exit()\n\nprint(\"No\")"
+      ],
+      "text_sha256": "4466a03c973710ba1eedeabda976831e5e64cc4df62779add5f634ac5e35afa7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc409/abc409_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

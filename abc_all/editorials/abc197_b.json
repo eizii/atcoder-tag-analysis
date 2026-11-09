@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc197_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc197/editorial/998",
+      "text": "マス\n\\((X, Y)\\)\nから上下左右各方向について、マス目の外に出るか障害物の置かれているマスに到達するまでのマス目の数を数えればよいです。\n解答例 (C++)\nこの解答例では\n\\(4\\)\n方向数える際にマス\n\\((X, Y)\\)\nを各\n\\(1\\)\n回、合計\n\\(4\\)\n回数えてしまう実装になっているので、初期値を\n\\(-3\\)\nにして結果的に\n\\(1\\)\n回だけ数えるようにしています。",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tint h = ri();\n\tint w = ri();\n\tint x = ri() - 1;\n\tint y = ri() - 1;\n\tstd::string s[h];\n\tfor (auto &i : s) std::cin >> i;\n\t\n\tint cnt = -3;\n\tfor (int i = x; i < h && s[i][y] != '#'; i++) cnt++;\n\tfor (int i = x; i >= 0 && s[i][y] != '#'; i--) cnt++;\n\tfor (int j = y; j < w && s[x][j] != '#'; j++) cnt++;\n\tfor (int j = y; j >= 0 && s[x][j] != '#'; j--) cnt++;\n\tprintf(\"%d\\n\", cnt);\n\treturn 0;\n}"
+      ],
+      "text_sha256": "f52a9231c7707c8f15942b09a8df71ff0500061fb85b95265306ed1b88981321",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc197/abc197_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

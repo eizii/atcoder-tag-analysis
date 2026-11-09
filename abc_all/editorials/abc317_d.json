@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc317_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc317/editorial/7043",
+      "text": "まず、各選挙区について「あと何人の青木派を鞍替えさせれば 議席を獲得できるか？」を計算します。これは\n\\(X_i\\)\nと\n\\(Y_i\\)\nの大小で場合分けを行うと、\n\\(X_i \\gt Y_i\\)\nのとき：すでに高橋派が多数派なので、\n\\(0\\)\n人\n\\(X_i \\lt Y_i\\)\nのとき：高橋派が\n\\(\\frac{X_i + Y_i + 1}{2}\\)\n人以上にならないと多数派にならないので、\n\\(\\frac{X_i + Y_i + 1}{2} - X_i = \\frac{Y_i - X_i + 1}{2}\\)\n人\nになります。この人数を\n\\(W_i\\)\nとおきます。\nまた、\n\\(S = \\sum_{i=1}^n Z_i\\)\nとします。\n\\(S, W_i\\)\nを使うとこの問題は次のように読み替えられます。\n\\(N\\)\n個の選挙区がある。\n\\(i\\)\n番目の選挙区では高橋君は\n\\(W_i\\)\n人鞍替えさせると\n\\(Z_i\\)\n議席を得られる。\n高橋君が\n\\(\\frac{S+1}{2}\\)\n議席以上を獲得するには何人鞍替えさせればよいか？\nこの問題は ナップサック問題と同じ構造をしています。そのため ナップサック問題と同様に動的計画法で\n\\(\\mathrm{O}(NS)\\)\nで解くことができます。具体的には、DP テーブル\n\\(\\mathrm{dp}\\)\nを\n\\(\\mathrm{dp}[n]\\)\n:ちょうど\n\\(n\\)\n議席得られるのに必要な鞍替えする人の人数 (ちょうど\n\\(n\\)\n議席得られることがありえない場合は\n\\(\\infty\\)\n)\nと定義して動的計画法を行えばよいです。手続き的に説明すると次のようになります。\n\\(\\mathrm{dp}\\)\nを長さ\n\\(S+1\\)\nの配列とする。はじめ\n\\(\\mathrm{dp}[0] = 0\\)\nで、それ以外のマスは\n\\(\\infty\\)\nで初期化されている。\n\\(i=1, 2, \\dots, N\\)\nの順に次の操作を行う。\n\\(n=S, S-1, \\dots, Z_i\\)\nの順に次の操作を行う。\n\\(\\mathrm{dp}[n]\\)\nを\n\\(\\min(\\mathrm{dp}[n], \\mathrm{dp}[n-Z_i] + W_i)\\)\nに更新する。\n操作後の DP テーブルのうち\n\\(\\mathrm{dp}[(S+1)/2], \\mathrm{dp}[(S+1)/2 + 1], \\dots, \\mathrm{dp}[S]\\)\nに書かれている値の最小値が問題の答えとなる。\n計算量は\n\\(\\mathrm{O}(N \\sum_{i=1}^N S_i)\\)\nで十分高速です。\n実装例 (C++)",
+      "codes": [
+        "#include <algorithm>\n#include <iostream>\n#include <numeric>\n#include <vector>\nusing namespace std;\n\nint main() {\n  long long inf = 1e18;\n\n  int N;\n  cin >> N;\n  vector<int> X(N), Y(N), Z(N);\n  for (int i = 0; i < N; i++) cin >> X[i] >> Y[i] >> Z[i];\n\n  int z_sum = accumulate(begin(Z), end(Z), 0);\n  vector<long long> dp(z_sum + 1, inf);\n  dp[0] = 0;\n  for (int i = 0; i < N; i++) {\n    int x = X[i], y = Y[i], z = Z[i];\n    int w = max(0, (x + y) / 2 + 1 - x);\n    for (int j = z_sum; j >= z; j--) {\n      dp[j] = min(dp[j], dp[j - z] + w);\n    }\n  }\n\n  long long ans = inf;\n  for (int j = z_sum / 2 + 1; j <= z_sum; j++) ans = min(ans, dp[j]);\n  cout << ans << endl;\n}"
+      ],
+      "text_sha256": "a5e0e9b6afda765afd671f6e592515ce914ace788014b9a9c609833bf6884f6d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc317/abc317_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

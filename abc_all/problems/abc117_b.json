@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc117_b",
+  "title": "Polygon",
+  "contests": [
+    {
+      "contest_id": "abc117",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 45,
+  "raw_difficulty": -475,
+  "contest_id": "abc117",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc117/tasks/abc117_b",
+  "statement": "配点 : 200 点 問題文 2 次元平面上に辺の長さがそれぞれ L_1, L_2, ..., L_N の N 角形(凸多角形でなくてもよい)が描けるかを判定してください。 ここで、次の定理を利用しても構いません。 定理 : 一番長い辺が他の N-1 辺の長さの合計よりも真に短い場合に限り、条件を満たす N 角形が描ける。 制約 入力は全て整数である。 3 \\leq N \\leq 10 1 \\leq L_i \\leq 100 入力 入力は以下の形式で標準入力から与えられる。 N L_1 L_2 ... L_N 出力 条件を満たす N 角形が描けるなら Yes 、そうでないなら No を出力せよ。 入力例 1 4\r\n3 8 5 1 出力例 1 Yes 8 < 9 = 3 + 5 + 1 なので、定理より 2 次元平面上に条件を満たす N 角形が描けます。 入力例 2 4\r\n3 8 4 1 出力例 2 No 8 \\geq 8 = 3 + 4 + 1 なので、定理より 2 次元平面上に条件を満たす N 角形は描けません。 入力例 3 10\r\n1 8 10 5 8 12 34 100 11 3 出力例 3 No",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 2 次元平面上に辺の長さがそれぞれ L_1, L_2, ..., L_N の N 角形(凸多角形でなくてもよい)が描けるかを判定してください。 ここで、次の定理を利用しても構いません。 定理 : 一番長い辺が他の N-1 辺の長さの合計よりも真に短い場合に限り、条件を満たす N 角形が描ける。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 入力は全て整数である。 3 \\leq N \\leq 10 1 \\leq L_i \\leq 100"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N L_1 L_2 ... L_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 条件を満たす N 角形が描けるなら Yes 、そうでないなら No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\r\n3 8 5 1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes 8 < 9 = 3 + 5 + 1 なので、定理より 2 次元平面上に条件を満たす N 角形が描けます。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4\r\n3 8 4 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No 8 \\geq 8 = 3 + 4 + 1 なので、定理より 2 次元平面上に条件を満たす N 角形は描けません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10\r\n1 8 10 5 8 12 34 100 11 3"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 No"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc117/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:34:34.720838+00:00",
+  "statement_sha256": "f337be931a6f4a71e4222f9590210c734db99b4e4827b6c1bcd1ac8a8d9abc01",
+  "editorials": []
+}

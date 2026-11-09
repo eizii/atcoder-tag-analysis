@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc385_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc385/editorial/11653",
+      "text": "まずは、サンタクロースの移動をシミュレーションする問題を考えます。\nこの問題は、サンタクロースの現在の座標を保持し、\n\\(T\\)\nの\n\\(i\\)\n文字目が何の文字であるかと、移動先のマスが通行可能であるかどうかに応じて条件分岐をして現在の座標を更新してくことで求められます。\n擬似コード\n通過・到達する家の個数を考えます。同じ家を複数回数えないようにするためには、家のあるマスに到達した時点で、到達した家の個数のカウントを1増やし、その家を破壊するのが単純な方法でしょう。\n実装例(Python)",
+      "codes": [
+        "X,Y=サンタクロースの初期座標\nfor i in 1..N:\n  if T[i]=='U' and S[X-1][Y]!='#': X-=1\n  if T[i]=='D' and S[X+1][Y]!='#': X+=1\n  if T[i]=='L' and S[X][Y-1]!='#': Y-=1\n  if T[i]=='R' and S[X][Y+1]!='#': Y+=1\n\nprint(X,Y)",
+        "H,W,X,Y = map(int,input().split())\nS = [list(input()) for _ in range(H)]\nT = input()\n\nX-=1\nY-=1\nans=0\nfor c in T:\n  if c=='U' and S[X-1][Y]!='#': X-=1\n  if c=='D' and S[X+1][Y]!='#': X+=1\n  if c=='L' and S[X][Y-1]!='#': Y-=1\n  if c=='R' and S[X][Y+1]!='#': Y+=1\n  if S[X][Y]=='@':\n    ans+=1\n    S[X][Y]='.'\n\nprint(X+1,Y+1,ans)"
+      ],
+      "text_sha256": "89200b52681d16c38cd802d79732b12331f31bc16625842d21f4ad0db641f61e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc385/abc385_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

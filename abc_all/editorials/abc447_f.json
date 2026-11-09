@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc447_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc447/editorial/16458",
+      "text": "パスグラフは（問題文同様）長さを\n頂点数\nで表すことにします。（一般的に辺の数とする事が多いので注意してください）\n\\(x = 1\\)\nのときは長さ\n\\(3\\)\nのパスです。これは、頂点数が\n\\(3\\)\n以上の木には常に含まれます。よって以下では\n\\(x \\ge 2\\)\nのみ考えます。\nある木\n\\(T\\)\nに「長さ\n\\(x\\)\nのムカデグラフが含まれる」ことと「長さ\n\\(x\\)\nのパスグラフであって、次数列\n\\(d \\ge (3, 4, \\dots ,4, 3)\\)\nとなるものが存在する」ことは同値です。よって、これが含まれるかどうかを考えます。\n解法 1\n木 DP をします。頂点\n\\(v\\)\nについて\n\\(dp[v] =\\)\n\\(v\\)\nを\n終点\nとする\n\\(v\\)\nの部分木内のパスであって、次数列\n\\(d \\ge (3, 4, \\dots)\\)\nを満たすようなパスの長さの最大値\nを管理します。\nこの値は葉から順に更新することができます。具体的には、\n\\(\\text{deg}[v] \\ge 4\\)\nのとき\n自分を始点とすること、および子からつなげることができます。\nよって\n\\(\\displaystyle dp[v] = \\max \\left( \\max_{u \\in \\text{ch}[v]}(dp[u]) + 1, 1 \\right)\\)\nです。\n\\(\\text{deg}[v] = 3\\)\nのとき\n自分を始点とすることのみできます。よって\n\\(dp[v] = 1\\)\nです。\n\\(\\text{deg}[v] \\le 2\\)\nのとき\n\\(dp[v] = 0\\)\nです。\n答えは DP で管理している値を利用して、各頂点\n\\(v\\)\nについて\n頂点\n\\(v\\)\nがパスの端点となる場合\n頂点\n\\(v\\)\nがパスの折り返し地点となる場合\nそれぞれについて最大値をもとめて、答えを更新すればよいです。計算量は\n\\(O(N)\\)\nです。\n実装例\n(PyPy) （この実装例では簡単のために\n\\(O(N \\log N)\\)\nとなっています）\n解法 2\n葉の次数が\n\\(3\\)\n以上かつ葉でない頂点の次数が\n\\(4\\)\n以上の木を「よい木」と呼ぶことにします。よい木における「長さ\n\\(x\\)\nのムカデグラフ」の\n\\(x\\)\nの最大値は、木の直径と一致します。\nよって、元の木に部分グラフとして含まれるような、すべての「極大なよい木」を考えればよいです。\n次数\n\\(4\\)\n以上は高々\n\\(1\\)\n回、次数\n\\(3\\)\nの頂点は高々\n\\(3\\)\n回しか極大なよい木に出現しないため、極大なよい木の合計頂点数は\n\\(O(N)\\)\nで抑えられます。よって、そのすべてについて直径を求めれば、計算量は\n\\(O(N)\\)\nです。",
+      "codes": [],
+      "text_sha256": "07e3da3502ecfa92597f4350097b371271cb071649ecc4b20e7bd2595781d19b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc447/abc447_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc447/editorial/16742",
+      "text": "ムカデグラフのベースとなるパスの端点のことを、そのムカデグラフの端点と呼ぶことにします。\nこの問題を「根がバーチャルである根付き木」を管理する抽象化全方位木DPライブラリを用いて解きます。\n根がバーチャルである根付き木に対して、「根を含まず、根の直接の子を端点の一方とする部分ムカデグラフの大きさの最大値」の情報を持ちます。\n根がバーチャルな根付き木同士のマージはmaxで行え、根とそのバーチャルな親の追加は、根の次数で場合分けすることで実装できます。\n実装イメージ",
+      "codes": [
+        "using vtree=int;\nusing tree=int;\nvtree merge_vtree(vtree x, vtree y){\n\t//根がバーチャルな根付き木同士をマージする関数\n\treturn max(x,y);\n}\n\nvtree add_e(vtree x, edge&e){\n\t//根がバーチャルな根付き木に、根となる頂点と、その頂点から新たなバーチャルな根への辺を追加する\n\tif(deg[e.from]>=4)return x+1;\n\tif(deg[e.from]>=3)return 1;\n\treturn 0;\n}\n\ntree add_v(vtree x, int vi){\n\t//根がバーチャルな根付き木に、根となる頂点を追加する\n\tif(deg[vi]>=3)return x+1;\n\tif(deg[vi]>=2)return 1;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "6f86836bbb2aabfeede3c9b6df1646a2773e0862825bbfb13965aa60ef458745",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc447/abc447_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

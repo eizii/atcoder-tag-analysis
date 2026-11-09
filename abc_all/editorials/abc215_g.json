@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc215_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc215/editorial/2497",
+      "text": "列全体でのキャンディの種類数を \\(C\\) 種類とします。\n一般性を失わず、色 \\(1\\) から色 \\(C\\) までのキャンディのみが存在すると仮定します。\n明らかに、答えはキャンディの並び順によらず、各色のキャンディが何個ずつあるかのみによって定まります。 \\(i = 1, 2, \\ldots, C\\) について、色 \\(i\\) のキャンディの個数を \\(n_i\\) で表します。 高橋君が選ぶキャンディの個数 \\(K\\) を固定し、高橋君が選んだ \\(K\\) 個のキャンディに含まれる色の種類数の期待値を求めることを以下で考えます。 \\(i = 1, 2, \\ldots, C\\) について、確率変数 \\(X_i\\) を、高橋君が選んだ \\(K\\) 個のキャンディの中に色 \\(i\\) のキャンディが \\(1\\) 個以上含まれているとき \\(X_i = 1\\) 、そうでないとき \\(X_i = 0\\) となる確率変数とします。 このとき、 \\(K\\) 個のキャンディに含まれる色の種類数は \\(\\sum_{i = 1}^C X_i\\) と表せます。その期待値 \\(E\\lbrack \\sum_{i=1}^C X\\rbrack\\) がいま求めたい値です。 期待値の線形性より、 \\(E\\lbrack \\sum_{i=1}^C X \\rbrack = \\sum_{i=1}^C E\\lbrack X_i \\rbrack\\) です。また、 \\(E\\lbrack X_i \\rbrack\\) は確率変数 \\(X_i\\) の定義より「 \\(K\\) 個のキャンディの中に色 \\(i\\) のキャンディが \\(1\\) 個以上含まれている確率」と等しいので、 \\(E\\lbrack X_i \\rbrack = \\lbrace \\binom{N}{K} - \\binom{N-n_i}{K} \\rbrace / \\binom{N}{K}\\) です。 よって、 \\(E\\lbrack \\sum_{i=1}^C X \\rbrack = \\sum_{i=1}^C E\\lbrack X_i \\rbrack = \\sum_{i=1}^C \\lbrace \\binom{N}{K} - \\binom{N-n_i}{K} \\rbrace / \\binom{N}{K}\\) となり、 \\(E\\lbrack \\sum_{i=1}^C X\\rbrack\\) を求めることは \\(\\sum_{i=1}^C \\lbrace \\binom{N}{K} - \\binom{N-n_i}{K} \\rbrace\\) を求めることに帰着されます。 キャンディの種類数 \\(C\\) は最大で \\(N\\) となるため、この和を愚直に計算すると最悪で \\(\\mathrm{\\Theta}(N)\\) の計算時間がかかります。\n一つの \\(K\\) に対して最悪で \\(\\mathrm{\\Theta}(N)\\) 時間かかるので、すべての \\(K = 1, 2, \\ldots, N\\) に対してこれを行うと最悪で \\(\\mathrm{\\Theta}(N^2)\\) 時間かかり、実行制限時間に間に合いません。 そこで、 \\(\\sum_{i=1}^C \\lbrace \\binom{N}{K} - \\binom{N-n_i}{K} \\rbrace\\) をより高速に求めることを考えます。 \\(N\\) は入力で与えられる定数であり、 \\(K\\) はいま固定しているので、 \\(\\binom{N}{K} - \\binom{N-n_i}{K}\\) の値は \\(n_i\\) の値にのみ依存します。つまり、 \\(n_i = n_j\\) ならば、 \\(\\binom{N}{K} - \\binom{N-n_i}{K} = \\binom{N}{K} - \\binom{N-n_j}{K}\\) が成り立ちます。\nこのことに注目し、 \\(n_i\\) が等しい色 \\(i\\) どうしをまとめます。つまり、 \\(n_i = x\\) となる整数 \\(1 \\leq i \\leq C\\) の個数を \\(a_x\\) とおき、 \\(\\sum_{i=1}^C \\lbrace \\binom{N}{K} - \\binom{N-n_i}{K} \\rbrace = \\sum_{x = 1}^N a_x  \\lbrace \\binom{N}{K} - \\binom{N-x}{K} \\rbrace\\) と表します。 ここで、キャンディの総数が \\(N = a_1 + 2 a_2 + 3 a_3 + \\cdots N a_N\\) と表せることを考えると、 \\(a_1, a_2, \\ldots, a_N\\) のうち、正の値をとるものは \\(\\mathrm{O}(\\sqrt{N})\\) 個しかありません。（正の値をとるものの個数を \\(M\\) 個とすると、 \\(N = a_1 + 2 a_2 + 3 a_3 + \\cdots N a_N \\geq 1 + 2 + 3 + \\cdots + M\\) よりわかります。） よって、 \\(\\sum_{x = 1}^N a_x  \\lbrace \\binom{N}{K} - \\binom{N-x}{K} \\rbrace\\) は、 \\(\\mathrm{O}(\\sqrt{N})\\) 個の項の和として \\(\\mathrm{O}(\\sqrt{N})\\) 時間で計算できます。 一つの \\(K\\) について \\(\\mathrm{O}(\\sqrt{N})\\) 時間で答えを計算できるので、これを \\(K = 1, 2, \\ldots, N\\) のそれぞれの場合で行うことで、 \\(\\mathrm{O}(N\\sqrt{N})\\) 時間でこの問題を解くことできます。",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "e9f9e3d5f3c50549c87a3cab141033c2df876b0f4a36dd6b1a60758bbeb4447a"
+    }
+  ],
+  "status": "available"
+}

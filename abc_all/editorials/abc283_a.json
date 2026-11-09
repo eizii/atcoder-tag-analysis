@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc283_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc283/editorial/5440",
+      "text": "答えを\n\\(1\\)\nで初期化し、for 文などを用いて答えに\n\\(A\\)\nをかけるという操作を\n\\(B\\)\n回行えばよいです。\n言語によっては\n\\(A^B\\)\nを直接計算できる演算子や関数が存在するので、それを用いてもよいです。\n実装例\nC++\nPython\n注意\nC++ における\nstd::pow\n関数は float や double などの浮動小数点数型に対応した関数であるため、本問題の制約下では正答を得ることができますが、例えば以下のような大きいケースでは誤差が生じる可能性があることに注意してください。\n例（\n\\(3^{38} = 1350851717672992089\\)\nですが、このコードは\n\\(1350851717672992000\\)\nを出力します。）",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n\tint a, b;\n\tcin >> a >> b;\n\tint ans = 1;\n\tfor (int i = 0; i < b; i++) ans *= a;\n\tcout << ans << '\\n';\n}",
+        "a, b = map(int, input().split());\nprint(a ** b);",
+        "a, b = map(int, input().split());\nprint(pow(a, b));",
+        "#include <iostream>\n#include <cmath>\nusing namespace std;\ntypedef long long ll;\n\nint main() {\n\tll ans = pow(3, 38);\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "f18e79fbd0571ea28e956f18533e907199c27f578dc69a6ef790d76778fa9f23",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc283/abc283_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

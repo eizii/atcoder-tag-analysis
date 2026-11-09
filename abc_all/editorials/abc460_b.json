@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc460_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc460/editorial/21008",
+      "text": "\\(2\\)\n円の中心間距離を\n\\(D\\)\nとします。この時、\n\\(2\\)\n円が共有点を持つ条件は\n\\[|R_1 - R_2| \\leq D \\leq R_1 + R_2\\]\nとなります。\n参考：2つの円の位置関係(高校数学の美しい物語)\n\\(D = \\sqrt{(X_1 - X_2)^2 + (Y_1 - Y_2)^2}\\)\nなので\n\\[|R_1 - R_2| \\leq \\sqrt{(X_1 - X_2)^2 + (Y_1 - Y_2)^2} \\leq R_1 + R_2\\]\nという式の真偽を評価すればこの問題を解くことが出来ます。しかし、上式を実際に計算すると誤差の影響で誤って答えが出る可能性があります。そこで、各項は非負であり両辺を 2 乗しても真偽が変化しないことを利用して、各辺を 2 乗した\n\\[(R_1 - R_2)^2 \\leq (X_1 - X_2)^2 + (Y_1 - Y_2)^2 \\leq (R_1 + R_2)^2\\]\nという式を評価すれば整数のみを利用して誤差なく式を評価できます。\n計算量は\n\\(\\mathrm{O}(1)\\)\nで十分高速です。\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n  int T;\n  cin >> T;\n  while (T--) {\n    long long x1, y1, r1, x2, y2, r2;\n    cin >> x1 >> y1 >> r1 >> x2 >> y2 >> r2;\n    auto sq = [](long long x) { return x * x; };\n    auto L = sq(r1 - r2);\n    auto M = sq(x1 - x2) + sq(y1 - y2);\n    auto R = sq(r1 + r2);\n    cout << (L <= M and M <= R ? \"Yes\" : \"No\") << \"\\n\";\n  }\n}"
+      ],
+      "text_sha256": "6f4480c086ec051e5e5eb6b322f7ff61d7cfc7e0967fd55f7180cb7de7a99528",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc460/abc460_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc460/editorial/21038",
+      "text": "中心どうしの距離を\n\\(D\\)\nとすると、\n\\(2\\)\n円が共有点を持つ条件は以下と同値です。\n\\(3\\)\n辺の長さがそれぞれ\n\\(D,R_1,R_2\\)\nである三角形（面積\n\\(0\\)\nも含む）が存在するか\nつまり、\n\\(2 \\cdot max(D,R_1,R_2) \\le  D+R_1+R_2\\)\nを判定すればよいです。",
+      "codes": [],
+      "text_sha256": "9ef22e4f69c6c638a2b5c0d97bd3903254849a063e6671d52b31bf11932b772e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc460/abc460_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc297_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc297/editorial/6175",
+      "text": "縦は独立なので、\n\\(H=1\\)\nの場合が解ければよいです。この問題は貪欲法で解くことができます。\n具体的には、\n\\(S\\)\nを左から見ていき、\nT\nが\n\\(2\\)\n個連続しているならば\nPC\nで置き換えるという操作を行えばよいです。正当性は、\nPC\nで置き換える操作の回数の上界を達成できることから従います。（\nT\nが\n\\(K\\)\n個連続しているとき、操作は高々\n\\(\\lfloor\\frac{K}{2}\\rfloor\\)\n回しか行えませんが、上述のアルゴリズムはこの上界を達成しています。）\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int h, w;\n    cin >> h >> w;\n    for(int i = 0; i < h; i++) {\n        string s;\n        cin >> s;\n        for(int j = 0; j < w - 1; j++) {\n            if(s[j] == 'T' and s[j + 1] == 'T') {\n                s[j] = 'P';\n                s[j + 1] = 'C';\n            }\n        }\n        cout << s << endl;\n    }\n}"
+      ],
+      "text_sha256": "baba3f8009834fdf8652fa066d843ab5eef1621ac426ba1a1e2d625da6c3978c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc297/abc297_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc297/editorial/6177",
+      "text": "「指定した文字列または正規表現にマッチする全ての部分文字列を置換する」標準ライブラリ（C++ の regex_replace など）を使えば、\n公式解説\nの各行に対する処理が一度の関数呼び出しで完了します。\n実装例（Python）",
+      "codes": [
+        "H, W = map(int, input().split())\nfor _ in range(H):\n    print(input().replace('TT', 'PC'))"
+      ],
+      "text_sha256": "d29e18b27a693b5b72aaa48ccd7bdab0aa6e21d64d2148fd659dd13da90849ee",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc297/abc297_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

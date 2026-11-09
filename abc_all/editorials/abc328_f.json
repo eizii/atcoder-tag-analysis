@@ -1,0 +1,38 @@
+{
+  "problem_id": "abc328_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc328/editorial/7656",
+      "text": "本問題を解くには、\n\\(3\\)\nつ組\n\\((a_i, b_i, d_i)\\)\nを\n\\(i = 1, 2, \\ldots, Q\\)\nの順に見て問題文中の操作を実際にシミュレーションする過程で、各\n\\(3\\)\nつ組を処理する際に下記の\n\\(2\\)\n種類の操作が高速に行えれば良いです。\n操作 A：今までに課された制約から、\n\\(X_{a_i}- X_{b_i}\\)\nの値が一意に限定されるかを判定し、限定されるならその値は何かを求める。\n操作 B：\n\\(X_{a_i} - X_{b_i} = d_i\\)\nという制約を新たに課す。\n以下、操作 A や操作 B を行うクエリを高速に処理するという問題を考えます。\nただし、矛盾が生じる（すべての制約を同時に満たす数列\n\\(X\\)\nが存在しなくなる）ような制約の組み合わせは課さないものとします。\n結論を述べると、これは以下で簡単に導入する\n重み付き Union-Find\nなどと呼ばれるデータ構造によって実現可能です。\nまず、操作 A を下記のより簡単な操作 A’ に置き換えた場合、つまり、操作 A’ と操作 B を行うクエリを高速に処理する問題を考えてみます。\n操作 A’：今までに課された制約から、\n\\(X_{a_i}- X_{b_i}\\)\nの値が一意に限定されるかを判定する（具体的にどの値に限定されるかを求める必要はない）。\nこれは通常のUnion-Find を用いて可能です。\n具体的には、数列\n\\(X\\)\nの\n\\(N\\)\n個の要素\n\\(X_1, X_2, \\ldots, X_N\\)\nに対応する\n\\(N\\)\n個の頂点\n\\(1, 2, \\ldots, N\\)\nを管理する Union-Find を用いて、\n操作 B のたびに頂点\n\\(a_i, b_i\\)\nを辺で結び、\n操作 A’ では頂点\n\\(a_i, b_i\\)\nが同じ連結成分に属するかどうかを判定すれば良いです。\nこれを操作 A を行えるように改良するには、上で用いた通常の Union-Find に、下記で定める長さ\n\\(N\\)\nの数列\n\\(W = (W_1, W_2, \\ldots, W_N)\\)\nの情報を持たせて管理すれば良いです。\n\\(W_v \\coloneqq \\)\n（ Union-Find 上での 頂点\n\\(v\\)\nの親頂点を\n\\(p\\)\nとするときの、\n\\(X_p - X_v\\)\nとして一意に限定される値）\nただし、\n\\(v\\)\nの親頂点が存在しない場合は\n\\(W_v \\coloneqq 0\\)\nとする。\n例えば、操作 A の処理で UnionFind 上で頂点\n\\(a_i, b_i\\)\nが同じ連結成分に属する場合、\n\\(X_{a_i} - X_{b_i}\\)\nとして一意に限定される値を求めるには、\nUnionFind 上で頂点\n\\(a_i, b_i\\)\nそれぞれから、それらが属する有向木の根\n\\(r\\)\nへのパス\n\\(a_i = u_1 \\rightarrow u_2 \\rightarrow \\cdots \\rightarrow u_x = r\\)\nと\n\\(b_i = v_1 \\rightarrow v_2 \\rightarrow \\cdots \\rightarrow v_y = r\\)\nをたどり、\n\\[\n(W_{v_1} + W_{v_2} + \\cdots + W_{v_{y-1}}) - (W_{u_1} + W_{u_2} + \\cdots + W_{u_{x-1}})\n\\]\nを求めれば良いです。（UnionFind の管理において union by rank や パス圧縮等を適切に行えば、たどるべきパスの長さは十分短く、計算時間は十分高速です。）\n通常の Union-Find に上記の\n\\(W\\)\nの情報を加え、Union-Find自体の更新に対応して\n\\(W\\)\nも随時変更するようにしたものが、重み付き Union-Find などと呼ばれています。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\ntypedef long long ll;\nusing namespace std;\n\nll n, Q;\nll parent[200001], weight[200001];\n\nint root(int i){\n\tif(parent[i] == i) return i;\n\tint r = root(parent[i]);\n\tweight[i] = weight[parent[i]] + weight[i];\n\treturn parent[i] = r;\n}\nbool unite(int i, int j, ll x){\n\tint root_i = root(i), root_j = root(j);\n\tif(root_i == root_j) return weight[j]-weight[i] == x;\n\tparent[root_i] = root_j;\n\tweight[root_i] = weight[j]-weight[i]-x;\n\treturn true;\n}\n\nint main(void)\n{\n\tcin >> n >> Q;\n\tfor(int i = 1; i <= n; i++) parent[i] = i, weight[i] = 0;\n\t\n\tll a, b, d;\n\tfor(int i = 1; i <= Q; i++){\n\t\tcin >> a >> b >> d;\n\t\tif(unite(a, b, d)) cout << i << \" \";\n\t}\n\tcout << endl;\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "8d8f49c6685f757a03a989f2a218a1c8e357badee109cdeb2a938957284fda3c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc328/abc328_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc328/editorial/7679",
+      "text": "公式解説\nと異なり、重み付きUnionFindを使わない解法です。\n3 つ組 (\n\\(a_i\\)\n​,\n\\(b_i\\)\n​,\n\\(d_i\\)\n​) を\n\\( i=1,2,\\dots,Q\\)\nの順に見て、\n\\(a_i\\)\nと\n\\(b_i\\)\nが非連結だった場合に\n\\(a_i\\)\nと\n\\(b_i\\)\nを辺で結ぶことにします。すると、この操作を行った\n\\(i\\)\nは出力すべき答えに含まれます。\nそのような\n\\(i\\)\nだけを用いて構築したグラフの各連結成分に対し、ひとつの頂点からBFSなどをして各頂点に対する\n\\(X\\)\nの値のうちvalidなものを一つ定めることができます。\n最後にもう一度クエリを見て、\n\\( i=1,2,\\dots,Q\\)\nのうち\n\\(X\\)\nの値のつじつまが合っているものを出力すれば良いです。\n実装例",
+      "codes": [],
+      "text_sha256": "577452d9a1a1dde3f7886c7413597eca7af7c2f1ffbf8ae9da8288de8c09f1b5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc328/abc328_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc328/editorial/7674",
+      "text": "Union find の亜種として、Quick find と呼ばれているものがあり、これを使うと計算量に log がつく代わりに、特に今回の場合に実装がたいへん易しくなります。\n（このあたりのお名前、信頼できる資料が見つからなく、自信がありませんため、ご存じの方は教えていただけると幸いです。）\nQuick find について\nQuick find は union find 同様、\n\\([0, N[\\)\nの集合分割を管理します。この集合分割の各要素を今後、グループと呼びます。\n各グループに対して leader を定め、\nleader[i]\n:\ni\nの属するグループのリーダー\nmembers[i]\nリーダー\ni\nの属するグループ。リーダーでない場合は空\nを管理し、union-by-size により更新します。すると\nunion\nはクエリ数\n\\(Q\\)\nとして\n\\(O(Q + N \\log N)\\)\n時間で実行できます。\n差分管理について\n各要素について、それとリーダーとの差分を管理すると良いです。",
+      "codes": [
+        "struct QuickFind {\n    leader: Vec<usize>,\n    members: Vec<Vec<usize>>,\n}",
+        "struct QuickFind {\n    leader: Vec<usize>,\n    members: Vec<Vec<usize>>,\n    diff: Vec<i64>,\n}"
+      ],
+      "text_sha256": "fcb8662a7c154935682359919512380237b312d506ca70b0aef2991909eed1f1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc328/abc328_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc275_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc275/editorial/5129",
+      "text": "基本的には, 問題文の指示通り,\n\\((A*B*C-D*E*F)\\%998244353\\)\nの値を求めれば良いです。\nここで、気をつけなければならない点はオーバーフローについてです。c++等の言語の整数型変数では, 扱える範囲が決まっており, その範囲を超えた数値を扱おうとすると, 想定外の挙動をする事があります。\n\\(64\\)\nbit符号付き整数型では,\n\\(2^{63}-1=9,223,372,036,854,775,807\\simeq 9\\times 10^{18}\\)\n程度までしか扱えないため, 今回のような計算においては途中でその値を超えないように計算を行う必要があります。\n一般に非負整数\n\\(A,B\\)\nおよび正整数\n\\(M\\)\nについて、\n\\((A*B)\\%M=((A\\%M)*(B\\%M))\\%M\\)\nが成り立つ事に注意すれば, 計算前に各変数について,\n\\(998244353\\)\nで割ったあまりを求めた後に積を取れば良いと分かります。\nまた、先に余りを取っているので最後に差分を取る時, 負の値になり得ることに注意してください。この場合は\n\\(998244353\\)\nを足すことで正しい答を得る事ができます。\nc++ による実装例 :\nPython の場合はオーバーフローは起きません。\nただし、桁数に従って計算時間は増加していくため、そういった事が問題になる場合には注意が必要です。\nPython による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nconst int mod=998244353;\n\nint main() {\n  long long a,b,c,d,e,f;\n  long long x,y,ans;\n\n  cin >> a >> b >> c >> d >> e >> f;\n\n  x=((a%mod)*(b%mod))%mod;\n  x=(x*(c%mod))%mod;\n  y=((d%mod)*(e%mod))%mod;\n  y=(y*(f%mod))%mod;\n\n  ans=(x+mod-y)%mod;\n\n  cout << ans <<endl;\n  return 0;\n}",
+        "a,b,c,d,e,f=map(int, input().split())\nprint((a*b*c-d*e*f)%998244353)"
+      ],
+      "text_sha256": "35e707deac2d1009df106db38925abe6ddf640327f8ecc9d99908c215ebb4cef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc275/abc275_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

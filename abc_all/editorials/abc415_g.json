@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc415_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc415/editorial/13491",
+      "text": "\\(D_i=A_i-B_i\\) 、 \\(K=\\max_i A_i\\) と定義します。 まず、 \\(A_i\\) の値が等しい \\(i\\) が複数存在する場合、そのうち \\(B_i\\) が最大であるもの（の一つ）以外は使うメリットがないため、削除してしまって問題ありません。これにより、 \\(M\\leq K\\) とすることができます。 問題を整理して逆から捉えると、以下のようになります： 最初、スコアは \\(N\\) である。 好きな整数 \\(x\\ (0\\leq x\\leq N)\\) を選ぶ。その後、以下を繰り返し行う。 \\(x\\geq B_i\\) かつ \\(x+D_i\\leq N\\) であるような \\(i\\) を選んで、 \\(x\\) に \\(D_i\\) を加算し、スコアに \\(B_i\\) を加算する。 スコアの最大値を求めよ。 これは重み \\(D_i\\) 、価値 \\(B_i\\) 、容量 \\(N\\) の個数制限なしナップサック問題に近く（実際 \\(x\\geq K\\) となったあとは完全にナップサック問題と一致します）、通常のナップサック問題にも用いられるテクニックを使って解くことができます。以下ナップサック問題に準えて、ある \\(i\\) に対して一回操作を行うことを、アイテム \\(i\\) を一つ用いる、と表現します。 \\(\\frac{B_i}{D_i}\\) の値が最大であるような \\(i\\) (の一つ) を \\(i'\\) とおきます。実は、アイテム \\(i'\\) 以外で使用したアイテムに対する \\(D_i\\) の総和（同じアイテムを複数回用いた場合複数回カウントする）が \\(K(K+1)\\) 未満であるような最適解が存在することが示せます。 証明 使用した  $i'$ 以外のアイテムに対する $D_i$ の総和が $K(K+1)$ 以上だと仮定する。 まず、操作の過程において $x$ が最初に $K$ 以上になったタイミングについて考える。最初の $x$ を $K$ より大きくするメリットはないので、このときの $x$ は $K$ 以上 $2K$ 未満と仮定してよく、これ以降の操作について $x\\geq B_i$ という条件を気にする必要はない。 仮定より、これ以降に使用した  $i'$ 以外のアイテムに対する $D_i$ の総和は $K(K+1)-(2K-1)=K(K-1)+1$ 以上であり、特に使用した個数は $K$ 以上である。これらのアイテムのうち最初の $j$ 個に対する$D_i$ の総和を $S_j\\ (0\\leq j\\leq K)$ とおく。鳩の巣原理より、$S_l\\equiv S_r\\ (\\bmod\\ D_{i'})$ なる $0\\leq l < r\\leq K$ が存在する。$l+1,l+2,\\dots,r$ 個目のアイテムを使用する代わりに、アイテム $i'$ を $\\frac{S_r-S_l}{D_{i'}}$ 個使用することにして損しない。 よって、 \\(x<K(K+1)\\) の範囲内では通常のナップサック問題と同様の DP を行ったのち、それ以降についてはアイテム \\(i'\\) を使えるだけ使うことのみを考えて計算すればよいです。 計算量は \\(O(M+K^3)\\) です。 実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nconst int MAX_A = 310;\n\nint main() {\n    ll n;\n    int m;\n    cin >> n >> m;\n    vector<int> mx_b(MAX_A);\n    for (int i = 0; i < m; i++) {\n        int a, b;\n        cin >> a >> b;\n        mx_b[a] = max(mx_b[a], b);\n    }\n    vector<pair<int, int>> ls;\n    for (int i = 0; i < MAX_A; i++) {\n        if (mx_b[i]) {\n            ls.emplace_back(i - mx_b[i], mx_b[i]);\n        }\n    }\n    int sz = MAX_A * (MAX_A + 1) + 10;\n    vector<int> dp(sz);\n    for (int i = 0; i < dp.size(); i++) {\n        for (auto [w, v]: ls) {\n            if (i < v or i + w >= dp.size()) continue;\n            dp[i + w] = max(dp[i + w], dp[i] + v);\n        }\n    }\n    if (n < dp.size()) {\n        cout << n + dp[n] << endl;\n        return 0;\n    }\n    for (int i = 1; i < ls.size(); i++) {\n        if (ls[0].second * ls[i].first < ls[0].first * ls[i].second) {\n            swap(ls[0], ls[i]);\n        }\n    }\n    auto [w, v] = ls[0];\n    ll ans = 0;\n    for (int i = MAX_A; i < dp.size(); i++) {\n        ll now = dp[i] + (n - i) / w * v;\n        ans = max(ans, now);\n    }\n    cout << n + ans << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "c15db9023a42554e1e9d461c0eb02ff2976c6148f233d17bdf7f7dc5806178c0"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc063_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc075/editorial.pdf",
+      "text": "B: Varied\n\n  いくつかの方針が考えられます。\n\n      • ループを二重に組み合わせ、1 ≤i < j ≤|S| であるような添字のペア(i, j) すべてについてSi とSj\n     が異なるか確認する（|S| が大きいと遅くなりますが、今回は|S| ≤26 であり問題ありません*1）\n\n      • S に含まれる文字をアルファベット順にソートし、同じ文字が二つ隣り合わないか確認する\n\n      • 26 種類の文字それぞれについてS での出現回数を数え、どの文字の出現回数も1 以下であるか確認\n\n    する\n\n  以下に、最初の方針のC++ での実装の例を示します。\n\n\n\n 1 #include <algorithm>\n\n 2 #include <iostream>\n\n 3 using namespace std;\n\n\n 4\n\n 5 int main(){\n\n 6     string S;\n\n 7     cin >> S;\n\n 8     int N = S.size();\n\n 9     string ans = \"yes\";\n\n10     for(int i = 0; i < N; ++i){\n\n11         for(int j = i + 1; j < N; ++j){\n\n12             if(S[i] == S[j]){\n\n13                 ans = \"no\";\n\n14             }\n\n15         }\n\n16     }\n\n17     cout << ans << endl;\n\n18 }\n\n\n\n\n\n       *1 この問題の制約に反しますが、仮に|S| = 105 であったとすると、実行制限時間の2 秒に間に合わないでしょう。余談ですが、\n     鳩の巣原理より|S| > 26 のときに直ちにno と出力すれば、そのような長さの入力に対しても実行が間に合います。\n\n\n                                               2",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "841718f5dfc368101790ae664b5688cd7d70955b34be1bb30c6e4e122fccf48b"
+    }
+  ],
+  "status": "available"
+}

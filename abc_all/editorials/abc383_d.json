@@ -1,0 +1,53 @@
+{
+  "problem_id": "abc383_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc383/editorial/11508",
+      "text": "整数\n\\(M\\)\nが素数\n\\(p_1,\\ldots,p_k\\)\nを用いて\n\\(p_1^{r_1}\\times p_2^{r2}\\times \\ldots\\times p_k^{r_k}\\)\nと素因数分解されるとき、\n\\(M\\)\nの約数の個数は\n\\((r_1+1)(r_2+1)\\ldots(r_k+1)\\)\nとなることが知られています。\nこの事実を用いると、素数\n\\(p\\)\nを用いて\n\\(p^8\\)\nと表される正整数のうち\n\\(N\\)\n以下のものの個数と、異なる素数\n\\(p,q\\)\nを用いて\n\\(p^2q^2\\)\nと表される正整数のうち\n\\(N\\)\n以下のものの個数が分かればよいです。\nまず、前者は簡単です。素数を小さい順に見ていき、\n\\(8\\)\n乗が\n\\(N\\)\nを超えたところで打ち切ればよいです。\n後者について考えます。まず、\n\\(p,q\\)\nについては\n\\(\\mathrm{O}(\\sqrt{N})\\)\n以下の素数のみ考えればよいです。\n\\(p\\)\nを昇順に全探索していきます。このとき、\n\\(p^2q^2\\leq N\\)\nなる\n\\(q\\)\nの最大値は単調に減少していくので、尺取り法を用いることで、\n\\(\\mathrm{O}(\\sqrt{N})\\)\n以下の素数の個数に対して線形時間でこの問題を解くことが出来ます。",
+      "codes": [],
+      "text_sha256": "22d2af902f49acf32eaef4b2e03e7dd5d9235d3192767b64f814f6090c8671fe",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc383/abc383_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc383/editorial/11549",
+      "text": "公式解説にもあるように、相異なる素数\n\\(p, q\\)\nを用いて\n\\(p^{8}\\)\nもしくは\n\\(p^{2}q^{2}\\)\nと表せるものが答えです。\nこれらはどちらも平方数です。(一般に、正の約数の数が奇数であることと平方数であることは同値です。)\nよって、\n\\(\\sqrt{N}\\)\n以下の整数全てに対して素因数分解をして、それらが\n\\(p^{4}\\)\nもしくは\n\\(pq\\)\nという形で表せるかを判断したら良いです。\n\\(p^{4}\\)\nであることは約数の数が\n\\(5\\)\n個であることと同値です。\n\\(pq\\)\nであることは約数の数が\n\\(4\\)\n個かつ、\n\\(1\\)\nでも\n\\(pq\\)\nでもない二つの素数が互いに素であることと同値です。\nこれを実装すれば良いです。\n実装例 c++ 1420ms\nとても遅いです。なぜなら、時間/空間計算量ともに\n\\(O(\\sqrt{N}\\log{N})\\)\nであるからです。実際にはそれぞれの数について、以下の値があれば判定ができます。\n最小の素因数\n約数の数\nよって、空間計算量が\n\\(\\Theta(\\sqrt{N})\\)\nに抑えられます。\n実装例 c++ 96ms",
+      "codes": [],
+      "text_sha256": "b411fbaf6dafb3b334dcf9bb3749b399dfbfe61cd9db6b7983f265345a904691",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc383/abc383_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc383/editorial/11553",
+      "text": "公式解説にもあるように、相異なる素数\n\\(p,q\\)\nを用いて\n\\(p^8\\)\nもしくは\n\\(p^2q^2\\)\nと表せるものが答えです。\n入力例2を見ると、答えは最大でも\n\\(407073\\)\nであることがわかります。よって、全列挙が可能です。\n\\(p,q\\)\nを全探索します。ただし、\n\\(p,q\\)\nは素数です。\n\\(p^2q^2 \\leq N\\)\nより、\n\\(p,q \\leq \\sqrt{N}\\)\nなので、\n\\(\\sqrt{N}\\)\n以下の素数を列挙できれば、\n\\(p,q\\)\nを全探索することで答えを求めることができます。\n素数の列挙はエラトステネスの篩と呼ばれるアルゴリズムを用いて行うことができます。（「素数列挙　競プロ」などで検索することですぐに見つけることができるため、コンテスト中に知らなかったとしてもこの情報にたどり着くことは可能です）\n解法をまとめます。\nエラトステネスの篩を用いて、\n\\(\\sqrt{N}\\)\n以下の素数を列挙する。（ただし実際には実装の簡略化のため、\n\\(\\sqrt{N}\\)\nを計算せずに\n\\(10^6\\)\n以下の素数を列挙する）\n\\(2\\)\n重ループを用いて\n\\(p,q\\)\nを全探索する。\n\\(p^2q^2\\)\nが\n\\(N\\)\n以下であるとき答えに\n\\(1\\)\nを加算する。\n\\(p^8\\)\nが\n\\(N\\)\n以下であるときにも答えに\n\\(1\\)\nを加算する。ただし、オーバーフローに注意。\n実装は以下のようになります。\nなお、エラトステネスの篩は定期的に使用機会のあるアルゴリズムなので、ライブラリ化しておくとよいでしょう。（以下をコピペしても大丈夫です）\n提出コード(8ms)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n//この問題で扱う整数は最大4×10^12であり、int型の上限を超えるため、long longを用いる。\n//実装の簡略化のためlong longをllとして使えるようにする。（以下、llという型はlong long型と同じ）\nusing ll = long long;\n\n//コピペする場合はここから～\n//Era(n)を呼んだ後、isprime[i]=iが素数かどうか　となっている。\nvector < bool > isprime;\n//返り値は素数のリスト。\nvector < ll > Era(int n) {\n\tisprime.resize(n, true);\n\tvector < ll > res;\n\tisprime[0] = false;\n\tisprime[1] = false;\n\tfor(ll i = 2; i < n; ++i) isprime[i] = true;\n\tfor(ll i = 2; i < n; ++i) {\n\t\tif(isprime[i]) {\n\t\t\tres.push_back(i);\n\t\t\tfor(ll j = i * 2; j < n; j += i) isprime[j] = false;\n\t\t}\n\t}\n\treturn res;\n}\n//コピペする場合は～ここまで\n\nint main(){\n\tll n;\n\tcin >> n;\n\tvector<ll> v = Era(1000005);\n\tll ans{};\n\tfor(ll p:v){\n\t\tif(p*p*p*p>n)break;\n\t\t//オーバーフロー対策\n\t\tif(p<100){\n\t\t\t//pow関数は誤差が出ることに注意。8乗程度ならこうやって書いた方が安全（ただし数え間違いの危険はある）\n\t\t\tif(p*p*p*p*p*p*p*p<=n)ans++;\n\t\t}\n\t\tfor(ll q:v){\n\t\t\tif(q<=p)continue;\n\t\t\tif(p*p*q*q<=n){\n\t\t\t\tans++;\n\t\t\t}\n\t\t\telse{\n\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\t}\n\tcout << ans << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "42c42f00f3fc4bd58f57da871cac9b0be494c4ff5d7bcbf80fae5e4299779ced",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc383/abc383_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc383/editorial/11550",
+      "text": "⚠️ 発展的な内容を含みます。\n\\(\\gdef\\floor#1{\\lfloor#1\\rfloor}\\)\n\\(n\\)\n以下の素数の個数を\n\\(\\pi(n)\\)\nと書きます。また、\n\\(S(n)\\)\nを下記で定義します。\n\\[S(n) = \\{1, 2, \\dots, \\floor{\\sqrt{n}}\\} \\cup \\{\\floor{n/1}, \\floor{n/2}, \\dots, \\floor{n/\\floor{\\sqrt{n}}}\\}.\\]\n前提として、与えられた\n\\(n\\)\nに対して、各\n\\(i \\in S(n)\\)\nにおける\n\\(\\pi(i)\\)\nを求めるのは（全体で）\n\\(O(n^{2/3})\\)\n時間や\n\\(O(n^{2/3}/\\log(n)^{1/3})\\)\n時間で可能です。\nsee also\n:\n関連スライド\n\\(p^8\\le N\\)\nなる素数の個数は愚直に求めても\n\\(O(N^{1/8})\\)\n時間なので、無視できます。\n\\(p^2 q^2 \\le N\\)\n(\n\\(p\\lt q\\)\n) なる素数のペアに関して考えます。\n\\(p\\)\nを固定したとき、\n\\(p\\lt q\\le \\sqrt{N}/p\\)\nであるので、\n\\(p\\)\n以下の素数と\n\\(\\sqrt{N}/p\\)\n以下の素数を数えられればよいです。\n\\(q\\)\nの整数性などから、\n\\(\\pi(\\floor{\\floor{\\sqrt{N}}/p}) - \\pi(p)\\)\nに等しいです。\nnote\n:\n\\(i\\)\n番目の素数\n\\(p_i\\)\nに対して\n\\(\\pi(p_i) = i\\)\nなので、\n\\(\\pi(p)\\)\nの項は簡単に求められます。\nよって、各\n\\(i\\in S(\\floor{\\sqrt{N}})\\)\nにおける\n\\(\\pi(i)\\)\nを求めておけばよく、これは\n\\(O(\\floor{\\sqrt{N}}^{2/3}) = O(N^{1/3})\\)\n時間で可能です。\n\\(p\\lt q\\)\nなので\n\\(p\\lt N^{1/4}\\)\nの範囲で和を取ればよく、（上記の前処理により各項は\n\\(O(1)\\)\n時間で求められるので、前処理の計算量に応じて）全体で\n\\(O(N^{1/3})\\)\n時間や\n\\(O(N^{1/3}/\\log(N)^{1/3})\\)\n時間などになります。\n提出 #60552451\n, 1 ms",
+      "codes": [],
+      "text_sha256": "a9fd7b56054fc4cb54d8cfe965dee0757f75fd9599d620468a6898d2d8a49af4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc383/abc383_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc383/editorial/11595",
+      "text": "エラトステネスの篩のライブラリに、素因数分解を同時に行う仕組みがあれば、公式解説での尺取り法を使わずに個数を計算することができます。\n具体的には、\n\\(p^2q^2\\)\nパートで、\n\\(\\sqrt{n}\\)\n以下の整数をすべて素因数分解し、素因数が互いに異なる\n\\(2\\)\n個の素数から成るものを数えればよいです。\n素因数分解を同時に行うエラトステネスの篩の実装については、以下の記事が参考になります。(他者の外部記事になります)\nエラトステネスの篩の活用法を総特集！ 4-1. 高速素因数分解 - Qiita\npython実装例",
+      "codes": [],
+      "text_sha256": "3422f554b45e590fa82514b2ddae843164fd920cc8860280a2eb3e68d7df1095",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc383/abc383_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

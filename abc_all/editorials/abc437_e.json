@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc437_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc437/editorial/14880",
+      "text": "\\(A_1, A_2, \\ldots,A_N\\)\nを辞書順に並べ替えよという問題で，Trie （トライ木）を使って解けます．\n\\(A_1, \\ldots, A_N\\)\nをキーとした Trie を作ります．ただし，同じ数列は同じ Trie のノードに対応するようにします．親ノード\n\\(v\\)\nから値\n\\(x_i\\)\nの子ノードがすでにあればそれを再利用し，なければ新しいノード\n\\(u\\)\nを作って辺\n\\(v\\stackrel{x_i}{\\longrightarrow} u\\)\nを追加するようにします．子ノードの情報は連想配列（C++ の map，Python の dict）などで管理します．また，各ノードにはどの数列が対応するかも記録しておきます．\nこの Trie 上で DFS をすれば答えが求まります．あるノードから複数の辺が出る場合には，辺の値が小さい順に潜るようにすればよいです．DFS でノードにたどり着いたら，そのノードに対応する数列の添え字を答えの配列に昇順で追加します．",
+      "codes": [
+        "import sys\n\nsys.setrecursionlimit(300100)\n\nn = int(input())\nG = [{} for i in range(n + 1)]\nvs = [[] for i in range(n + 1)]\npos = [-1] * (n + 1) # 数列 A_i がどのノードに属しているか\npos[0] = 0\ntmp = 1\nfor i in range(1, n + 1):\n    p, y = map(int, input().split())\n    if y not in G[pos[p]]:\n        G[pos[p]][y] = tmp\n        tmp += 1\n    pos[i] = G[pos[p]][y]\n    vs[pos[i]].append(i)\n\nans = []\n\n\ndef dfs(i):\n    global ans\n    ans += vs[i]\n    for j in sorted(list(G[i].keys())):\n        dfs(G[i][j])\n\n\ndfs(0)\nprint(*ans)"
+      ],
+      "text_sha256": "5d53f28155f906cad50df6eefb354b7cba1dc9b7df6fa2bf3043ed1fb1aa1aff",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc437/abc437_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc423_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc423/editorial/13873",
+      "text": "実装方針\n\\(A_i\\)\nの倍数であるという条件を「条件\n\\(i\\)\n」と呼ぶことにします．\n\\(N\\)\n個の条件からなる全体集合に対して部分集合\n\\(S \\in \\{1, \\dots, N\\}\\)\nを考えます．\n各部分集合\n\\(S\\)\nについて，\n\\(S\\)\nに属する条件は満たし，\nかつ他の条件は満たさない\nという条件を「一致条件\n\\(S\\)\n」と呼ぶことにします．\nこのとき，すべての部分集合についてその一致条件を満たす\n\\(1\\)\n以上\n\\(Y\\)\n以下の整数の個数が求まれば，\n\\(|S| = M\\)\nである部分集合\n\\(S\\)\nすべてについてその合計を求めることで答えが求まります．\nここで，部分集合\n\\(T\\)\nについて，\n\\(T\\)\nに属する条件は満たし，\n他の条件は満たしても満たさなくてもよい\nという条件を「部分条件\n\\(T\\)\n」と呼ぶことにします．\n部分条件は一致条件よりも考えやすく，部分条件\n\\(\\{i_1, \\dots, i_k\\}\\)\nは「\n\\(A_{i_1}, \\dots, A_{i_k}\\)\nの最小公倍数の倍数である」と簡潔に言い換えられます．この最小公倍数を\n\\(x\\)\nとおくと，この部分条件を満たす\n\\(1\\)\n以上\n\\(Y\\)\n以下の整数の個数は\n\\(\\lfloor \\frac{Y}{x} \\rfloor\\)\nで得られます．最小公倍数を求める際，\n\\(Y\\)\nを上回るならば\n\\(Y+1\\)\nとして扱う，できる限り乗算ではなく除算を使って判定・計算するといった工夫をすることで，オーバーフローの危険を避けられます．\n各部分条件を満たすものの個数が求まったら，これをゼータ変換の逆変換 (メビウス変換といいます) にかけることによって各一致条件を満たすものの個数が求まり，よって答えが求まります．これは，簡潔にいえば「条件\n\\(1, \\dots, k\\)\nについては一致条件，条件\n\\(k+1, \\dots, N\\)\nについては部分条件」というような条件の持ち方をし，部分条件から\n\\(1\\)\nつずつ一致条件に移していく形で計算することができます．\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n\ntypedef long long int ll;\n\n\nll n, m, y;\nll a[21];\nll zeta[1LL << 21];\n\nll mygcd (ll l, ll r) {\n\tif (r == 0) return l;\n\treturn mygcd(r, l % r);\n}\n\nint main (void) {\n\tcin >> n >> m >> y;\n\tfor (ll i = 0; i < n; i++) {\n\t\tcin >> a[i];\n\t}\n\n\tfor (ll b = 0; !(b >> n); b++) {\n\t\tll prod = 1;\n\t\tfor (ll j = 0; j < n; j++) {\n\t\t\tif (b & (1LL << j)) {\n\t\t\t\tll g = mygcd(prod, a[j]);\n\t\t\t\tif ((prod / g) > y / a[j]) {\n\t\t\t\t\tprod = y+1;\n\t\t\t\t\tbreak;\n\t\t\t\t} else {\n\t\t\t\t\tprod = (prod / g) * a[j];\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tzeta[b] = y / prod;\n\t}\n\n\t// zeta[01] <- mobius(zeta[*1])\n\tfor (ll bi = 0; bi < n; bi++) {\n\t\tfor (ll b = 0; !(b >> n); b++) {\n\t\t\t// [0] <- [*] - [1]\n\t\t\tif (!(b & (1LL << bi))) {\n\t\t\t\tzeta[b] = zeta[b] - zeta[b | (1LL << bi)];\n\t\t\t}\n\t\t}\n\t}\n\n\tll ans[n+1];\n\tfor (ll i = 0; i <= n; i++) {\n\t\tans[i] = 0;\n\t}\n\tfor (ll b = 0; !(b >> n); b++) {\n\t\tll cnt = 0;\n\t\tfor (ll j = 0; j < n; j++) {\n\t\t\tif (b & (1LL << j)) {\n\t\t\t\tcnt++;\n\t\t\t}\n\t\t}\n\t\tans[cnt] += zeta[b];\n\t}\n\n\tcout << ans[m] << \"\\n\";\n\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "6af05893e9bd79e6c993df11becb61db102fabf0fe39f324d4c4d0e35fcbc28c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc423/abc423_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc423/editorial/13876",
+      "text": "\\(S\\subset\\{1,\\ldots,N\\}\\)\nについて、\n\\(C(S)\\)\nを「\n一致\n条件\n\\(S\\)\nを満たす\n\\(1\\)\n以上\n\\(Y\\)\n以下の整数の個数」、\n\\(D(S)\\)\nを「\n部分\n条件\n\\(S\\)\nを満たす\n\\(1\\)\n以上\n\\(Y\\)\n以下の整数の個数」と定義します（一致条件、部分条件については公式解説を参照してください）。\nすると、包除原理より、\n\\( C(S)= \\sum_{S\\subset T\\subset\\{1,\\ldots,N\\}} (-1)^{|T\\setminus S|}\\times D(T) \\)\nが成り立つので、\n\\( \\begin{aligned}  (ちょうどM種類のセミが大量発生する年の回数)&=\\sum_{S\\subset\\{1,\\ldots,N\\},|S|=M}C(S)\\\\&=\\sum_{S\\subset\\{1,\\ldots,N\\},|S|=M}\\left(\\sum_{S\\subset T\\subset\\{1,\\ldots,N\\}} (-1)^{|T\\setminus S|}\\times D(T) \\right)\\\\&=\\sum_{T\\subset\\{1,\\ldots,N\\}}\\left(\\sum_{S\\subset T,|S|=M}(-1)^{|T\\setminus S|}\\times D(T)\\right)\\\\&=\\sum_{T\\subset\\{1,\\ldots,N\\}}(-1)^{|T|-M}\\times D(T)\\times\\left(\\sum_{S\\subset T,|S|=M}1\\right)\\\\&=\\sum_{T\\subset\\{1,\\ldots,N\\}}(-1)^{|T|-M}\\times D(T)\\times\\binom{|T|}{M} \\end{aligned} \\)\nが成り立ちます。\nしたがって、\n\\(D(T)\\)\nの計算がボトルネックとなり、時間計算量\n\\(\\Omicron(2^N\\log Y)\\)\nでこの問題を解くことができます。\nちなみに、上記の式変形をせずに\n\\(\\sum_{S\\subset\\{1,\\ldots,N\\},|S|=M}\\left(\\sum_{S\\subset T\\subset\\{1,\\ldots,N\\}} (-1)^{|T\\setminus S|}\\times D(T) \\right)\\)\nを直接計算する方針だと\n\\(\\binom{N}{M}\\times2^{N-M}\\)\n回の加算が必要になりますが、これは制約上最大でも\n\\(635043840\\)\n回なので、高速な言語ならこちらの方針でも実行時間制限に間に合うと思われます。",
+      "codes": [],
+      "text_sha256": "60c732f8b3fe33c1bed6957b0dea1e407a85cf140e4c8d467f6902f98f989dcf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc423/abc423_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

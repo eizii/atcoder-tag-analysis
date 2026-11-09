@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc363_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc363/editorial/10441",
+      "text": "まずはじめに、条件を満たす\n\\(S\\)\nがどのようなパターンからなるのかを考えてみます。\n\\(a\\)\nを\n\\(10\\)\n進表記した文字列を反転させてできる数を\n\\(\\mathrm{rev}(a)\\)\nと表すと、次の\n\\(3\\)\n通りからなることがわかります。\nN\nx*rev(x)\nx*(式)*rev(x)\nここで実は\n\\(2\\)\n番目のパターンは考慮しなくてよいです。なぜならば、\nx*rev(x)\nが問題文の条件を満たす時は\nx*1*rev(x)\nもまた問題文の条件を満たすため、\n\\(3\\)\n番目のパターンで事足りるからです。\nよって\nN\nと\nx*(式)*rev(x)\nの 2 パターンだけを考慮すればよいことがわかりました。\nまた、細かい事実として次のようなこともわかります。\n\\(x = 1\\)\nのケースは考慮しなくてよい。なぜならば、\n1*(式)*1\nが問題文の条件を満たす時は\n(式)\nもまた条件を満たすからである。\n\\(x \\gt \\sqrt{N}\\)\nのケースは考慮しなくてよい。なぜならば、\n\\(x \\gt \\sqrt{N}\\)\nかつ\nx*(式)*rev(x)\nが問題文の条件を満たす時は\n\\(\\mathrm{rev}(x) \\leq \\sqrt{N}\\)\nであり\nrev(x)*(式)*x\nもまた条件を満たすからである。\nこの事実を利用すると、関数\n\\(f\\)\nを\n\\(f(n)\\)\n: (\n\\(N = n\\)\nとしたときに問題文の条件を満たす文字列が存在すればそれを返し、存在しなければ空文字列を返す関数)\nと定義した時、\n\\(f\\)\n内部で次の一連の処理を行えばよいことがわかります。\n\\(n\\)\nが\n\\(0\\)\nを各桁に含まない回文数である場合は\nn\nを返す。\nそうでない場合、\n\\(x=2, 3, \\dots, \\lfloor \\sqrt{n} \\rfloor\\)\nの順に走査を行い、以下の処理を行う。\n\\(n \\bmod{x} = 0\\)\nかつ\n\\(x\\)\nが\n\\(0\\)\nを各桁に含まない場合、以下の処理を行う。\n\\(y = \\mathrm{rev}(x)\\)\nとする。\n\\(\\frac{n}{x}\\bmod{y} = 0\\)\nかつ\n\\(f(\\frac{n}{xy})\\)\nが空文字列でない場合は、\nx*\n\\(f(\\frac{n}{xy})\\)\n*y\nを返り値として return する。\n空文字列を返り値として return する。\n計算量を考えます。上記の内容をそのまま実装すると同じ引数の関数が複数回呼び出されて計算量が評価しづらいですが、\n\\(f\\)\nをメモ化再帰することにすると、\n\\(f(n)\\)\nとして呼び出されるものは\n\\(n\\)\nが\n\\(N\\)\nの約数の場合に限られることを利用すれば、かなり大雑把な評価をしても\n\\(\\mathrm{O}(\\sqrt{N} \\times (N の約数の個数))\\)\n程度で抑えられます。この計算量評価は定数倍が非常に軽いことと、実際は呼び出されない引数が多いことを考えると、この実装で十分に高速に動作することがわかります。(実装によっては\n\\(\\mathrm{O}((N の約数の個数)^2)\\)\n程度で抑えることもできます)\n実装例 (Python)",
+      "codes": [
+        "import functools\nimport math\n\n\n@functools.cache\ndef f(N):\n    if not \"0\" in str(N) and str(N) == str(N)[::-1]:\n        return str(N)\n    for x in range(2, math.isqrt(N) + 1):\n        if N % x == 0 and not \"0\" in str(x):\n            y = int(str(x)[::-1])\n            if N // x % y == 0 and len(f(N // x // y)) != 0:\n                return str(x) + \"*\" + f(N // x // y) + \"*\" + str(y)\n    return \"\"\n\n\nN = int(input())\nprint(\"-1\" if len(f(N)) == 0 else f(N))"
+      ],
+      "text_sha256": "65eb44e339c22cc1633629da6c12412689eb95a7273bdcc408902b83cf67ba17",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc363/abc363_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,41 @@
+{
+  "problem_id": "abc317_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc317/editorial/7024",
+      "text": "\\(A_1,\\ldots,A_N\\)\nを並び替えても答えは変わらないので、ソートすることで\n\\(A_1<\\ldots< A_N\\)\nであるとしてよいです。\nもし隣接する\n\\(2\\)\n項の差が\n\\(2\\)\nである箇所があれば、その間の数が答えです。答えが一意に定まるという条件から、必ずそのような箇所がちょうど\n\\(1\\)\n箇所存在します。\nこの解法の計算量は\n\\(O(N\\log N)\\)\nです。\n実装例(Python)\n実装例(C++)\n少し工夫するとソートすることなく\n\\(O(N)\\)\nでこの問題を解くこともできます。考えてみましょう。\n（ヒント：\n\\(A_i\\)\nの最小値を全体から引くと、値がとりうる範囲が\n\\(0\\)\nから\n\\(N\\)\nになります）",
+      "codes": [
+        "N = int(input())\nA = sorted(list(map(int,input().split())))\nfor i in range(N-1):\n  if A[i+1] - A[i] == 2:\n    print(A[i] + 1)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  vector<int> a(n);\n  for(auto &x:a) cin >> x;\n  sort(a.begin(), a.end());\n  for(int i=0; i<n-1; i++){\n    if(a[i+1] - a[i] == 2){\n      cout << a[i]+1 << endl;\n    }\n  }\n}"
+      ],
+      "text_sha256": "899a089caccda42f33209adabc33a12a72a6b6d48e6b1fba49848843595ef01e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc317/abc317_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc317/editorial/7035",
+      "text": "ナオヒロくんがいま持っている整数の最小値と最大値がわかれば、はじめ持っていた整数がすべてわかります。\n最小値を \\(A _ {\\mathrm{min}}\\) 、最大値を \\(A _ {\\mathrm{max}}\\) とします。\n長さ \\(L=A _ {\\mathrm{max}}-A _ {\\mathrm{min}}+1(=N+1)\\) の配列を使って、ナオヒロくんがはじめ持っていた整数のうちどの整数をいま持っているかを調べることができます。\nこの配列を順に調べることで、なくした整数が何であるかがわかります。\n時間計算量は \\(O(N)\\) になります。\n実装例は以下のようになります。",
+      "codes": [
+        "N = int(input()) # N を読み込む\n*A, = map(int, input().split()) # A を読み込む\n\nmin_A = min(A) # A の最小値を計算\n\n# 小さいほうから i 番目の整数を持っているか調べる (0 ≤ i ≤ N)\nnow_have = [False for i in range(N + 1)]\n\nfor a in A:\n  # 整数 a は小さいほうから a - min_A 番目 (はじめが 0 )\n  now_have[a - min_A] = True\n\nfor i in range(N + 1):\n  if not now_have[i]: # 持っていない整数がなくした整数\n    print(i + min_A)",
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N; // N を読み込む\n    vector<int> A(N);\n    for (auto &&a : A)\n        cin >> a; // A を読み込む\n\n    int min_A = ranges::min(A); // A の最小値を計算\n\n    vector<bool> now_have(N, false); // 今持っている整数を調べる\n    for (int a : A)\n        now_have[a - min_A] = true; // a - min_A 番目は持っている\n\n    for (int i = 0; i < N; ++i)\n        if (!now_have[i]) // 持っていない整数がなくした整数\n            cout << i + min_A << endl;\n    \n    return 0;\n}"
+      ],
+      "text_sha256": "f511e2e52a29a40a0676548b899c20ba1f4e9b23e7287440eff2637269fd0853",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc317/abc317_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc317/editorial/7036",
+      "text": "（この解説は少し発展的な解説です。この問題の標準的な解説より少し難しい表現があります。）\n時間計算量を \\(O(N)\\) としたままワードサイズの整数を定数個だけ使うようにしても、この問題を解くことができます（\\(N\\) および \\(A _ i\\) は \\(1\\) ワードに収まる大きさとし、\\(N\\) および \\(A _ i\\) の値を適当な変数に入力するのに追加で \\(O(1)\\) ワードの空間しか必要としないとします）。\nナオヒロくんが現在持っている整数の最大値と最小値がわかれば、もともと持っていた整数が何であるかがわかります。\nもともと持っていた整数と、現在持っている整数に対する何らかの値がわかれば、なくした整数が何であるかわかる場合があります。\n例えば、次のような値がわかるとなくした整数が何であるかわかります。\n和\n積\n積を素数 \\(P(\\gt A _ i)\\) で割った余り\nビット単位 XOR\nここで、特にビット単位 XOR は \\(1\\) ワードに収まる大きさになります。\n（積を素数 \\(P\\) で割った余りも \\(O(N)\\) 時間とワードサイズの整数定数個で計算することができますが、なくした整数を特定するために追加で \\(O(N)\\) 時間もしくは \\(O(\\log P)\\) 時間が必要になります。また、和も \\(O(N)\\) 時間とワードサイズの整数定数個で計算することができます。）\n（\\(1\\) ワードに収まる）整数 \\(L,R\\ (0\\leq L\\leq R)\\) について、\\(L\\) 以上 \\(R\\) 未満の整数全体のビット単位 XOR は定数時間で求められます。\n\\(L\\) 以上 \\(R\\) 未満の整数全体のビット単位 XOR を \\(f(L,R)\\) で表すこととします。\n\\(f(L,R)=f(0,L)\\operatorname{xor}f(0,R)\\) が成り立ちます（ビット単位 XOR が可換で結合的であることと、\\(a\\operatorname{xor}a=0\\) および \\(0\\operatorname{xor}a=a\\operatorname{xor}0=a\\) であることを使えば示すことができます）。\nまた、非負整数 \\(n\\) について \\(f(0,4n)=0\\) が成り立つことも示せます（帰納法を使い、下 \\(2\\) ビットとそれ以外に分けることで示すことができます）。\nよって、\\(f(0,L)=f(0,L)\\operatorname{xor}f(0,4\\lfloor L/4\\rfloor)=f(4\\lfloor L/4\\rfloor,L)\\) が成り立ちます。\nこれはたかだか \\(3\\) つの整数の xor なので、定数時間で求められます。\nよって、ナオヒロくんが持っていた整数全体のビット単位 XOR は、ナオヒロくんが持っていた整数の最小値と最大値がわかれば \\(O(1)\\) 時間で求めることができます。\nナオヒロくんが現在持っている整数全体のビット単位 XOR は \\(O(N)\\) 時間と \\(O(1)\\) ワードぶんの空間計算量で求められるため、これらと併せて答えを得ることができました。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N; // N を読み込む\n    int min_A = 1000, max_A = 0, xor_A = 0, A; // A の最小値, 最大値, 総 xor\n    while (N--) {\n        cin >> A;\n        min_A = min(A, min_A);\n        max_A = max(A, max_A);\n        xor_A ^= A;\n    }\n\n    ++max_A; // 半開区間にする\n    while (max_A % 4 != 0)\n        xor_A ^= --max_A; // 全体の xor から [0, max_A + 1) の xor を除く\n\n    while (min_A % 4 != 0)\n        xor_A ^= --min_A; // 全体の xor から [0, min_A) の xor を除く\n\n    cout << xor_A << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "e2a2ca18074099cd2c60c3a25a94a00e369525a16cebc6ad97545e9cabed4f4b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc317/abc317_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc179_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc179/editorial/115",
+      "text": "\\(A_i\\)\nの取りうる値は\n\\(M\\)\n通りしかありません。したがって、途中からは同じ数列を繰り返します。\n繰り返しが始まるまでの項数とその和\n繰り返しの項数とその和\nを計算しておき、繰り返しに入るまでの和、繰り返し部分の和、繰り返し1周に満たない最後の部分の和、の3つに分けて計算することで、\n\\(O(M)\\)\nで解けました。繰り返しに入る前に\n\\(N\\)\n項目に到達するケースに注意してください。\n\\( \\)\n例：\n\\(M=449, A_1=2,N=1000\\)\nのとき\n\\(A=\\{2,4,16,256,431,324,359,18,324,359,\\ldots\\}\\)\nであり\n繰り返しが始まるまでの部分 ……\n\\(\\{2,4,16,256,431\\}\\)\n繰り返し部分……\n\\(\\{324,359,18\\}\\)\nなので、\n\\(1000\\)\n項目までの和は\n\\((2+4+16+256+431) + (324+359+18)\\times 331 + (324+359)\\)\nと求められます。",
+      "codes": [],
+      "text_sha256": "2889db798456e43806a0f0e373ef38531ab90eb3066027310726312f4a918b2b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc179/abc179_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc179/editorial/10199",
+      "text": "\\(0 \\le i \\lt M\\)\nについて「\n\\(i\\)\nから開始して\n\\(2^d\\)\n回関数を作用させたときに、経由した値の総和と最終的な値は何になるか」はダブリングを用いて計算可能です。したがって繰り返し二乗法による累乗の計算などと同様の管理を行うことでこの問題を解くことができます。",
+      "codes": [],
+      "text_sha256": "475521bdca2f9edf2d11b71eb55b194b5d9a10c54123c4499eee65fce2b75e8e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc179/abc179_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc281_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc281/editorial/5366",
+      "text": "次のような動的計画法を考えます。\n\\(\\mathrm{dp}_{i,j,k}\\)\n:\n\\(a_1,\\ldots,a_i\\)\nから\n\\(j\\)\n個が選ばれていて、総和を\n\\(D\\)\nで割った余りが\n\\(k\\)\nであるようなときの総和の最大値(不可能なら\n\\(-1\\)\n)\nすると、答えは\n\\(\\mathrm{dp}_{N,K,0}\\)\nです。\n遷移は、\n\\(a_i\\)\nを選ぶ場合と選ばない場合を考えます。前者では\n\\(j\\)\nが\n\\(1\\)\n増え、\n\\(k\\)\nも\n\\(a_i\\)\nの値に応じて変わります。後者では\n\\(j,k\\)\nがともに変わりません。\nより詳細には実装例を参考にしてください。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N,K,D;\n\tcin>>N>>K>>D;\n\t\n\tvector<int> a(N);\n\tfor(int i=0;i<N;i++)cin>>a[i];\n\t\n\tvector dp(N+1,vector(K+1,vector<long long>(D,-1)));\n\tdp[0][0][0] = 0;\n\t\n\tfor(int i=0;i<N;i++){\n\t\tfor(int j=0;j<K+1;j++){\n\t\t\tfor(int k=0;k<D;k++){\n\t\t\t\tif(dp[i][j][k]==-1)continue;\n\t\t\t\t\n\t\t\t\t//a_i を選ばない場合の遷移\n\t\t\t\tdp[i+1][j][k] = max(dp[i+1][j][k],dp[i][j][k]);\n\t\t\t\t\n\t\t\t\t//a_i を選ぶ場合の遷移\n\t\t\t\tif(j!=K){\n\t\t\t\t\tdp[i+1][j+1][(k+a[i])%D] = max(dp[i+1][j+1][(k+a[i])%D],dp[i][j][k] + a[i]);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\t\n\tcout<<dp[N][K][0]<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "4652fc00f0a4e0f405af2c88e77f8348c76ce2b24ffb71b12b90c932ac159d91",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc281/abc281_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

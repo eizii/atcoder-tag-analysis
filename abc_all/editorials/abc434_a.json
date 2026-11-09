@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc434_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc434/editorial/14667",
+      "text": "問題原案: admin\n求めるべきは、\n\\(1000W < nB\\)\nなる最小の整数\n\\(n\\)\nです。\nこれを求めるための方針のうちいくつかは以下の通りです。\nfor ループを回す。\n\\(\\displaystyle \\frac{1000W}{B} < n\\)\nと変形する。変形した結果、\n\\(\\displaystyle \\left \\lfloor \\frac{1000W}{B} \\right \\rfloor + 1\\)\nが答えである。 (\n\\(\\lfloor x \\rfloor\\)\nは\n\\(x\\)\nの小数点以下切り捨て)\n実装例1 (C++):\n実装例2 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int w,b;\n  cin >> w >> b;\n  for(int n=1;;n++){\n    if(1000*w < n*b){cout << n << \"\\n\"; break;}\n  }\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int w,b;\n  cin >> w >> b;\n  cout << (1000*w/b)+1 << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "fcbeb9d678885ef5ecfbb039c303817068d8870f92c3f2004df16ef587b6d34c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc434/abc434_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

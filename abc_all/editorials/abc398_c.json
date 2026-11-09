@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc398_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc398/editorial/12482",
+      "text": "それぞれの人に対し、自分以外に同じ数を持っている人がいるかを調べる以下のような実装では計算量が\n\\(\\Theta(N^2)\\)\nとなり、TLE (実行時間制限超過) になります。なお、見た目上は2重for文になっていない、filter や all などの関数・メソッドを使う実装も同様の計算量となることに注意してください。\n次のような連想配列を考えます。\n\\(\\mathrm{dict}[v]=v を持っている人の番号の集合\\)\nこの連想配列は\n\\(O(N\\log N)\\)\nで構築することができます。この連想配列において、集合の大きさが\n\\(1\\)\nであることが、その人以外に同じ数を持っている人がいないことと同値です。よって、連想配列の中身を走査することで、\n\\(O(N\\log N)\\)\nで答えを求めることができます。\n実装例(Python)",
+      "codes": [
+        "for i in 1..N:\n  ok = true\n  for j in 1..N:\n    if i != j and A[i] == A[j]:\n      ok = false\n  if ok:\n    ...",
+        "from collections import defaultdict\n\nN=int(input())\nA=list(map(int,input().split()))\n\nd=defaultdict(list)\nfor i,a in enumerate(A):\n  d[a].append(i)\n\nfor key in sorted(d, reverse=True):\n  if len(d[key])==1:\n    print(d[key][0]+1)\n    exit()\n\nprint(-1)"
+      ],
+      "text_sha256": "495937e2adbb2da440afa6a4a003ac85d811de1150644a1e2f3c20d58d78de24",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc398/abc398_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

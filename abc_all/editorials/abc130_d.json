@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc130_d",
+  "editorials": [
+    {
+      "text": "D. Enough Arrays(writer : yuma000)\n有り得る部分列の左端と右端を列挙して、それぞれの区間和がK 以上かを確かめる方法では、O(N 2) か\nかってしまいます(累積和を用いることで、区間和はO(1) で求まります)。よって、もっと効率の良い解法を\n見つける必要があります。\nS(l, r) = ∑l\nr Ak としたとき、\n• 　S(a, b) < S(a, b + 1)\n• 　S(a, b) > S(a + 1, b)\nが成り立ちます。\nつまり、ここから\n• 　あるl, r に対して、S(l, r) >= K ならば、全てのx(x >= r) に対して、S(l, x) >= K である。\nといえます。つまり、部分列の左端l を固定したとき、S(l, r) >= K を満たすような最小のr を見つける\nことができれば、部分列の左端がl の時に、条件を満たすものの個数を求めることができます。(具体的には、\nN −r + 1 です。)\n具体的にr を求める方法としては\n• 　尺取り法(O(N))\n• 　二分探索(O(NlogN))\nが挙げられるので、そのどちらかで実装すればよいです(個人的には尺取り法の方が計算量も少なく、実装も\n軽いと思うので、おすすめです)。\n以下が、尺取り法のコードです。\n1 #include<bits/stdc++.h>\n2 using namespace std;\n3\n4 int main(){\n5\nint N;long long int K;\n6\ncin>>N>>K;\n7\nvector<long long int>A(N);\n8\nfor(int i=0;i<N;++i){\n9\ncin>>A[i];\n10\n}\n11\nlong long int answer=0;\n12\nlong long int sum=0;\n13\n14\nint r=0;\n15\nfor(int l=0;l<N;++l){\n16\n17\nwhile(sum<K){\n18\nif(r==N)break;\n\n19\nelse{\n20\nsum+=A[r];\n21\nr++;\n22\n}\n23\n}\n24\nif(sum<K)break;\n25\nanswer+=N-r+1;\n26\nsum-=A[l];\n27\n}\n28\ncout<<answer<<endl;\n29\nreturn 0;\n30 }\n",
+      "text_sha256": "fba3b439ad4e4caf9a7da0830299adcb576e7c9dd2c64ef7ef11fda113dc0171",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc130/abc130_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

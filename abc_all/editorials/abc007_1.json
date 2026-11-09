@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc007_1",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc007/editorial.pdf",
+      "text": "A問題 植木算\n\n\n\n\n\n2014/4/19                             ©AtCoder Inc. All rights reserved.                                      33\n\f\nA問題 概要\n\n• 一直線に木が並んでいる\n• 木の本数が与えられる\n• 隣り合う木々の間の数を数えなさい\n\n\n\n\n\n2014/4/19                                                                                               4\n\f\nA問題 アルゴリズム\n\n• 基本的なプログラムの流れ\n   – 標準入力から、必要な入力を受け取る\n          • 今回の場合は、木の本数を表す整数nを受け取る\n   – 問題で与えられた処理を行う\n          • 今回は、整数nに対して、木の間の数を算出する\n   – 標準出力へ、答えを出力する\n\n\n\n\n\n2014/4/19                                                                                               5\n\f\nA問題 アルゴリズム\n\n• 入力\n   – 1つの数字を、標準入力から受け取る\n          • Cであれば、scanf(“%d”, &n); など\n          • C++であれば、cin >> n;\n          • 入力の受け取り方は、下記の練習問題に記載があります。\n           – AtCoderで使用可能な殆どの言語に対して、入出力の方法が記述さ\n               れています。http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2014/4/19                                                                                               6\n\f\nA問題 アルゴリズム\n\n• アルゴリズム\n   – 木がN本あるとき(N≧1) 木の間はN-1箇所ある\n   – Nを読み込んでN-1を出力すると正解\n\n\n\n\n\n2014/4/19                                                                                               7\n\f\nA問題 アルゴリズム\n\n• 具体的な処理\n   – int ret = N – 1;\n   – N = N-1;\n   – N--;\n   – --N;\n   – 好きなのでいいです！\n          • もちろん出力時にN-1を出力するのもOK\n          • 私は入力された整数を変更したくない派なので、１番目を推奨し\n     ています。\n\n\n\n\n\n2014/4/19                                                                                               8\n\f\nA問題 アルゴリズム\n\n• 出力\n   – 求めた答えを、標準出力より出力する。\n   – 言語によって違います。\n          • printf(“%d¥n”, N); (C)\n          • cout << “YES” << endl; (C++)\n          • System.out.println(“YES”); (Java)\n          • 各言語の標準出力は、下記の練習問題に記載があります。\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2014/4/19                                                                                               9",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "8ee1eb03f8ffceb561d780bec46b2de7f9d0720035f7d2f8b02a036ec4233587"
+    }
+  ],
+  "status": "available"
+}

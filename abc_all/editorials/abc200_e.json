@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc200_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc200/editorial/1247",
+      "text": "この問題の解き方には色々な方針がありますが、そのうちの\n\\(1\\)\nつを紹介します。\nまず、「綺麗さ」+「おいしさ」+「人気度」\n\\(=X\\)\nとし、\n\\(3\\)\n以上\n\\(3N\\)\n以下の各整数\n\\(k\\)\nについて、\n\\(X=k\\)\nであるようなケーキがいくつあるかを求めます。\nこれは、\n\\(\\{1,2, \\dots , N\\}\\)\nから整数を\n\\(1\\)\nつ選ぶということを\n\\(3\\)\n度繰り返し、選んだ整数の総和が\n\\(k\\)\nとなる場合の数はいくつか、という問題の答えと一致します。\nこの問題は、dp[何回整数を選んだか][総和]={場合の数} という形の動的計画法で解くことができます。これを愚直に実装すると\n\\(O(N^2)\\)\nとなってしまいますが、\n\\(dp[i][j]\\)\nの遷移先が\n\\(dp[i+1][j+1],dp[i+1][j+2], \\dots dp[i+1][j+N]\\)\nという区間になるので、累積和によって\n\\(O(N)\\)\nに高速化できます。\nこれにより、左から\n\\(K\\)\n番目のケーキの\n\\(X\\)\nの値が分かりました。そこから先は、そのケーキの「綺麗さ」の値を仮定する\n\\(O(N)\\)\nのループによりこの問題を解くことができます。\n具体的には、あるケーキの\n\\(X\\)\nの値と「綺麗さ」の値がわかれば、とりうる「おいしさ」の値はひとつの区間をなすので、その区間を「綺麗さ」ごとに求めていくようなループになります。詳しくは実装例も参照してください。\n以上より、この問題を\n\\(O(N)\\)\nで解くことができました。\nC++による実装例:\nBONUS! この問題は、もう少し大きな制約でも解くことも、たくさんのケーキに対する問い合わせが来るような問題を解くこともできます。是非、いろいろな解法を検討してみてください。",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  long long k;\n  cin >> n >> k;\n  long long dp[4][3000005]={0};\n  dp[0][0]=1;\n  for(int i=0;i<3;i++){\n    for(int j=0;j<=i*n;j++){\n      dp[i+1][j+1]+=dp[i][j];\n      dp[i+1][j+n+1]-=dp[i][j];\n    }\n    for(int j=1;j<=(i+1)*n;j++){\n      dp[i+1][j]+=dp[i+1][j-1];\n    }\n  }\n  \n  int x;\n  for(int i=3;i<=3*n;i++){\n    if(k<=dp[3][i]){x=i;break;}\n    else{k-=dp[3][i];}\n  }\n  for(int i=1;i<=n;i++){\n    int jmi=max(1,x-i-n);\n    int jma=min(n,x-i-1);\n    if(jmi>jma){continue;}\n    if(k>(jma-jmi+1)){k-=(jma-jmi+1);continue;}\n    int y=jmi+k-1;\n    int z=x-i-y;\n    cout << i << ' ' << y << ' ' << z << '\\n';\n    return 0;\n  }\n}"
+      ],
+      "text_sha256": "c3a49631b53c3d40d091ed070c18764a82cde8deba7d8fd1f6e9c3cf75ace46e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc200/abc200_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc200/editorial/1552",
+      "text": "ここでは、OEISを用いた解法を紹介します。\n便宜上、この解説では「綺麗さ」「おいしさ」「人気度」の値を本文中の値よりも\n\\(1\\)\n低いものとして扱います。\nすなわち、各パラメータは\n\\(0\\)\n以上\n\\(N-1\\)\n以下の値をとるものとします。\nまず、\n\\(S\\)\nを固定したとき、「綺麗さ」+「おいしさ」+「人気度」\n\\(=S\\)\nを満たすケーキの個数を\n\\(f(N,S)\\)\nとします。\nまた、\n\\(T\\)\nを固定したとき、「おいしさ」+「人気度」\n\\(=T\\)\nとなるケーキの個数を\n\\(g(N,T)\\)\nとします。\nここで、\n\\(f(N,S)\\)\nと\n\\(g(N,T)\\)\nを十分高速に求めることができれば、この問題は十分高速に解くことができます。\n具体的には、次の手順で解くことができます。\n\\(0≦k≦3N-3\\)\nを満たす全ての\n\\(k\\)\nについて、\n\\(f(N,k)\\)\nを求める\n1.の情報から「綺麗さ」+「おいしさ」+「人気度」の値\n\\(S\\)\nを求める\n\\(0≦k≦N-1\\)\nを満たす全ての\n\\(k\\)\nについて、\n\\(g(N,S-k)\\)\nを求める\n3.の情報から「綺麗さ」の値\n\\(c\\)\nを求める\n「おいしさ」+「人気度」\n\\(=S-c\\)\nを満たすケーキを全て調べ、適切なケーキを選ぶ\n\\(f(N,S)\\)\nと\n\\(g(N,T)\\)\nを小さい値で実験します。\nすると、例えば\n\\(f(5,0),\\dots f(5,12)\\)\nは\n\\(1, 3, 6,10,15,18,19,18,15,10, 6, 3, 1\\)\nとなり、これをそのままOEISで検索すると\nA109439\nがヒットします。\nこれによって、\n\\[\nf(N,S)\n =\n  \\begin{cases}\n    (S+1)(S+2)/2 & (0≦S<N) \\\\\n    (9N-3N^2+6NS-6S-2S^2-4)/2  & (N≦S≦2N-3) \\\\\n    (3N-S-1)(3N-S-2)/2 & (2N-3<S≦3N-3) \\\\\n  \\end{cases}\n\\]\nであることが分かります。\nまた、\n\\(g(N, T)\\)\nは実験から\n\\(\\min(T+1, 2N-1-T)\\)\nとなることが分かります。\nよって、\n\\(O(N)\\)\nでこの問題を解くことができました。",
+      "codes": [],
+      "text_sha256": "80bea673470ab368f52ee13412d5da7b904574c713915f64741a66ebf31d00e5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc200/abc200_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

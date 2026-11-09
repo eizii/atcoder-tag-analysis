@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc184_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc184/editorial/338",
+      "text": "for 文などでループを回して、問題文の通りに点数を計算すれば AC が得られます。\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(){\n    int n, x;\n    string s;\n    cin >> n >> x >> s;\n    for(char c : s){\n        if(c == 'o') x++;\n        else if(x) x--;\n    }\n    cout << x << endl;\n}",
+        "N, X = map(int, input().split())\nS = input()\nfor s in S:\n    if s == 'o':\n        X += 1\n    elif X:\n        X -= 1\nprint(X)"
+      ],
+      "text_sha256": "bbb6fa4d2b0d2dc1f1fb8e2e9fcb4257036c2d2d6a66cc4b37da469efc653b4d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc184/abc184_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

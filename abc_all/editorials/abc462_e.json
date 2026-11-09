@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc462_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc462/editorial/21400",
+      "text": "まず、対称性より\n\\(X,Y\\)\nをそれぞれ\n\\(|X|,|Y|\\)\nに置き換えても答えは変わりません。以降は\n\\(X,Y\\geq 0\\)\nの場合を考えます。\n求める答えを\n\\(f_{A,B}(X,Y)\\)\nとします。\n\\(X+Y\\)\nが奇数の場合、奇数回目に\n\\((X\\pm 1,Y)\\)\nまたは\n\\((X,Y\\pm 1)\\)\nから\n\\((X,Y)\\)\nに移動します。\nコストの総和が最小となる移動方法を一つ取ると、\n\\(x=0,X\\)\nと\n\\(y=0,Y\\)\nでそれぞれ適切に折り返すことでコストの総和を変えずに最後の移動を\n\\((X-1,Y)\\)\nまたは\n\\((X,Y-1)\\)\nから\n\\((X,Y)\\)\nへの移動に限定できます。\nしたがって、\n\\(f_{A,B}(X,Y)=\\min(f_{A,B}(X-1,Y)+A,f_{A,B}(X,Y-1)+B)\\)\nが成り立ちます。この式を用いることで\n\\(X+Y\\)\nが偶数の場合に帰着できます。以降は\n\\(X+Y\\)\nが偶数の場合を考えます。\n\\(X+Y\\)\nが偶数の場合、移動回数も偶数になります。したがって、移動回数を\n\\(2K(\\geq X+Y)\\)\n回とします。このとき、奇数回目の操作と偶数回目の操作の回数は同じなので、\n\\(A,B\\)\nに対称性が生まれます。また、x 座標と y 座標を入れ替える操作を行なっても答えが変わらないことを考えると、\n\\(A > B,X>Y\\)\nである場合にそれぞれ\n\\(A,B\\)\n、\n\\(X,Y\\)\nをそれぞれ swap することで\n\\(A\\le B,X\\le Y\\)\nの場合に帰着できます。以降は\n\\(A\\le B,X\\le Y\\)\nも仮定します。\n\\(Y\\)\nと\n\\(K\\)\nの大小関係で場合分けをします。\n[1]\n\\(K\\le Y\\)\nのとき\n\\(2K\\geq X+Y\\)\nより、\n\\(K\\)\nの範囲は\n\\(\\displaystyle \\frac{X+Y}2\\le K\\le Y\\)\nとなります。\n\\(A\\le B\\)\nより、\n\\(2K\\)\n回の移動の中でコスト\n\\(A\\)\nの移動をできる限り多く行なった方が良いです。しかし、y 座標を増やす移動はコスト\n\\(A\\)\nでは\n\\(K\\)\n回しかできないため最低でも\n\\(K-X\\)\n回以上はコスト\n\\(B\\)\nの移動を行う必要があります。逆に、\n\\(K-X\\)\n回コスト\n\\(B\\)\nの移動を行うことでコマを座標\n\\((X,Y)\\)\nに移動させることができるので、コストの総和の最小値は\n\\(g(K)=2KA+(Y-K)(B-A)\\)\nとなります。\nこの関数は一次関数であるため、定義域の端で必ず最小値を取ります。したがって、この場合の最小値は\n\\(\\displaystyle \\min\\left(g\\left(\\frac{X+Y}2\\right),g(Y) \\right)\\)\nです。\n[2]\n\\(Y\\le K\\)\nのとき\n\\(2K\\)\n回全てコスト\n\\(A\\)\nの移動を行うことでコマを座標\n\\((X,Y)\\)\nに移動させることができます。したがってコストの総和の最小値は\n\\(2KA\\)\nと書けます。明らかに\n\\(K=Y\\)\nの場合が最適であり、これは既に [1] で議論済みです。\n[1], [2] より、求める答えは\n\\(g(K)=2KA+(Y-K)(B-A)\\)\nに対する\n\\(\\displaystyle \\min\\left(g\\left(\\frac{X+Y}2\\right),g(Y) \\right)\\)\nです。\n以上を適切に実装することでこの問題に正答することができます。計算量はテストケース毎に\n\\(O(1)\\)\nです。\n実装例(Python3)",
+      "codes": [
+        "input = __import__(\"sys\").stdin.readline\n\n\ndef solve(a, b, x, y):\n    assert (x + y) % 2 == 0\n    if a > b:\n        a, b = b, a\n    if x > y:\n        x, y = y, x\n    return min(2 * a * y, a * (x + y) + (b - a) * (y - x) // 2)\n\n\nfor _ in range(int(input())):\n    a, b, x, y = map(int, input().split())\n    x, y = abs(x), abs(y)\n    if (x + y) % 2 == 1:\n        print(min(solve(a, b, x - 1, y) + a, solve(a, b, x, y - 1) + b))\n    else:\n        print(solve(a, b, x, y))"
+      ],
+      "text_sha256": "1d180d0c76e781cb981463e90ee3d37d13f4636cf04a267ccc44e05b8734274b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc462/abc462_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

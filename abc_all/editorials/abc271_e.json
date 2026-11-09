@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc271_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc271/editorial/4924",
+      "text": "次のような動的計画法を考えます。\n\\(\\text{dp}[i][u] :=\\)\n都市\n\\(1\\)\nから都市\n\\(u\\)\nへ行く経路であって、通る道の番号を並べた列が\n\\((E_1, \\dots, E_i)\\)\nの部分列になるようなものに対する、通る道の長さの合計の最小値。\n\\(i\\)\nが大きくなるにつれて、通る道の番号を並べた列が\n\\((E_1, \\dots, E_i)\\)\nの部分列になるような経路は増えていきます。\n\\(i = k\\)\nのときと\n\\(i = k+1\\)\nのときを比較すると、新たに次のような経路が増えます。\n\\(i=k\\)\nのときの経路であって、頂点\n\\(A_{E_{k + 1}}\\)\nを終端とするものを考える。このような経路において、さらに辺\n\\(E_{k+1}\\)\nを通ったような経路。\nよって、動的計画法の遷移は次のようにすればよいです。\nまず、\n\\(\\text{dp}[i + 1][u] :=\\text{dp}[i][u]\\)\nと初期化する。\n次に、\n\\(\\text{dp}[i + 1][B_{E_{i + 1}}]\\)\nを\n\\(\\min(\\text{dp}[i + 1][B_{E_{i + 1}}], \\text{dp}[i][A_{E_{i + 1}}] + C_{E_{i + 1}})\\)\nで置き換える。\nこれを計算するのに大きさ\n\\(NK\\)\nの配列を用意する必要はありません。大きさ\n\\(N\\)\nの配列を用意し、それを使い回して in-place に更新することができます。\n計算量は\n\\(O(N + M + K)\\)\nです。\n実装例 (C++)",
+      "codes": [],
+      "text_sha256": "d54a1a15cd75581370874d94abfbf7ec553b62cd2878f810df0d8cb2702dcf23",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc271/abc271_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

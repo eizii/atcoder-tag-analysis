@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc329_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc329/editorial/7729",
+      "text": "箱に入っているボールの色の集合を管理しておき、操作に応じて各集合を更新していくことを考えます。\n問題文で与えられた通りに操作を行うと、各クエリで箱\n\\(b\\)\nに入っているボールの色の集合の要素数は最大で箱\n\\(a\\)\nに入っているボールの数だけ増える可能性があり、このまま実装すると TLE してしまいます。\nそこで、各クエリでする操作は箱\n\\(b\\)\nのボールをすべて箱\n\\(a\\)\nに移し、箱\n\\(a\\)\nと箱\n\\(b\\)\nを交換することと等しいことを利用します。\n箱\n\\(a\\)\nと箱\n\\(b\\)\nのうち箱に入っているボールの色の個数が少ない方を多い方に移し、必要に応じて箱を交換することを考えます。\nそのようにすると、各ボールについて、そのボールが移されたときに同じ箱に入っているボールの個数は\n\\(2\\)\n倍以上になるため\n\\(O(\\log N)\\)\n回しかボールの移動は発生せず、全体としてボールの移動は\n\\(O(N \\log N)\\)\n回しか発生しないことがわかります。\n箱の交換は index を適切に管理する、あるいは C++ における\nstd::swap\nや\nstd::move\nなどを利用することで定数時間で行えます。\n以下の実装例では箱に入っているボールの個数ではなく種類数でどちらを移すか比較していますが、同様の原理で計算量が評価できます。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <set>\nusing namespace std;\n\nint main() {\n\tint n, q;\n\tcin >> n >> q;\n\tvector<set<int>> st(n);\n\tfor (int i = 0; i < n; i++) {\n\t\tint c;\n\t\tcin >> c;\n\t\tst[i].insert(c);\n\t}\n\twhile (q--) {\n\t\tint a, b;\n\t\tcin >> a >> b;\n\t\ta--; b--;\n\t\tif (st[a].size() < st[b].size()) {\n\t\t\tfor (int i : st[a]) st[b].insert(i);\n\t\t\tst[a].clear();\n\t\t\tcout << st[b].size() << '\\n';\n\t\t}\n\t\telse {\n\t\t\tfor (int i : st[b]) st[a].insert(i);\n\t\t\tst[b].clear();\n\t\t\tcout << st[a].size() << '\\n';\n\t\t\tswap(st[a], st[b]);\n\t\t}\n\t}\n}"
+      ],
+      "text_sha256": "8ead24cbd6e0559d397033304f01445d0d6851e50901b6f6cb29ca3e2dde9e36",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc329/abc329_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

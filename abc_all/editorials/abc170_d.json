@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc170_d",
+  "editorials": [
+    {
+      "text": "D: Not Divisible\nエラトステネスの篩と同様の処理を, 数列A の要素についてのみ行います.\nサイズAmax のbool 配列dp を用意し, true で初期化します.dp[i] =true のとき, i より小さいi の約\n数がA に存在しないことを表します. 数列の要素を昇順に見ます.x が数列A に含まれているとき,\nx より大きいx の倍数y について, dp[y] をfalse に変更します.\n同じ値について処理を複数回行わないように実装すると, 調和級数を用いた解析により, 時間計算量\nがO (Amax log Amax + N log N) であることが分かります.\n同じ値が複数存在する場合に, それらを答えに含めないことに注意してください.\n",
+      "text_sha256": "ea0a2f8a0f8210356bea7c83cb30952b3b047bf8c62c7d962b2076fafe53f3ae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc170/abc170_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc109_b",
+  "editorials": [
+    {
+      "text": "B: Shiritori\n問題文の条件を言い換えると、次のようになります。\n1. 1 ≤i ≤n −1 を満たす各i についてWi の最後の文字とWi+1 の最初の文字が等しい\n2. 1 ≤i < j ≤n を満たす各i, j についてWi̸ = Wj\nこれをC++ で実装した例を以下に示します。\n#include <iostream >\n#include <vector >\nusing\nnamespace\nstd;\nbool\nsolve(const vector <string >& W) {\nconst int n = W.size ();\n// condition 1\nfor (int i = 0; i < n-1; ++i) {\nif (W[i]. back () != W[i+1]. front ()) {\nreturn\nfalse;\n}\n}\n// condition 2\nfor (int i = 0; i < n; ++i) {\nfor (int j = i+1; j < n; ++j) {\nif (W[i] == W[j]) {\nreturn\nfalse;\n}\n}\n}\nreturn\ntrue;\n}\nvector <string > input () {\nint n; cin >> n;\nvector <string > W(n);\nfor (int i = 0; i < n; ++i) {\ncin >> W[i];\n}\nreturn W;\n}\n\nint main () {\nconst vector <string > W = input ();\nif (solve(W)) {\ncout << \"Yes\" << endl;\n}\nelse {\ncout << \"No\" << endl;\n}\n}\n余談: std::set を用いてより高速に判定することもできますが、今回の場合はこれで十分です。\n",
+      "text_sha256": "461c31524030d36bc00c90b7bdea1f8896e5ad6046a61c8cb379b9230c449b53",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc109/abc109_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

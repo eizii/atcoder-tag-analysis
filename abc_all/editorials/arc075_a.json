@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc075_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc075/editorial.pdf",
+      "text": "C: Bugged\n\n方針1: 「正攻法」\n\n すべての問題の配点の合計をS とします。\n\n    • S が10 の倍数でない場合、S が画面に表示される最大の成績です。\n\n    • S が10 の倍数である場合、画面に0 でない成績を表示させるためには一問以上の問題で不正解する必\n\n   要があります。もし、配点が10 の倍数でないような問題が一問以上存在するなら、それらのうち配点\n\n   が最も低い一問のみで不正解することで、画面に表示される最大の成績を得られます。配点が10 の倍\n\n   数でないような問題が一問も存在しない場合は、画面に0 が表示されることを防げません。\n\n\n方針2: 「オーバーキル」\n 動的計画法を用いて、「解いた問題の配点の合計」として可能性のあるすべての値を時間計算量O(N ∑si)\n\nで列挙することができます（詳細は省きます）。これは、答えを求めるのに十分過ぎる情報です。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "1dc6d2b3a990fbd9fcbe0c3f87b59a3744325f9b740857e672e6187f321bcc8c"
+    }
+  ],
+  "status": "available"
+}

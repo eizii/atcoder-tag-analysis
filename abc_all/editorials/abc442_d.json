@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc442_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc442/editorial/15135",
+      "text": "\\(A\\)\nの累積和をとった数列を\n\\(S=(S_0,S_1,\\dots,S_N)\\)\nとおきます。すなわち、\n\\(S_i =A_1 + \\dots + A_i\\)\nです。\n\\(A_x\\)\nと\n\\(A_{x+1}\\)\nの値を入れ替えたとき、\n\\(S\\)\nの各要素の値がどのように変化するか考えます。まず、\n\\(S_i\\ (i < x)\\)\nの値は明らかに変化しません。加えて、\n\\(A_x + A_{x+1}\\)\nの値が変化しないことから、\n\\(S_i\\ (i \\geq x+1)\\)\nの値もまた変化しません。よって、値が変化するのは\n\\(S_{x}\\)\nのみであり、変化後の値は\n\\(S_{x-1}\\)\nに（値を入れ替えた後の）\n\\(A_{x}\\)\nを足すことで簡単に求まります。\nしたがって、これを用いて\n\\(A\\)\nとともに\n\\(S\\)\nも同時に管理すれば、\n\\(2\\)\n種類目のクエリに対しては\n\\(S_r - S_{l-1}\\)\nを求めて出力するのみとなり、クエリ毎\n\\(O(1)\\)\nで本問題を解くことができます。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, q;\n    cin >> n >> q;\n    vector<int> a(n), s(n + 1);\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        s[i + 1] = s[i] + a[i];\n    }\n    while (q--) {\n        int t;\n        cin >> t;\n        if (t == 1) {\n            int x;\n            cin >> x;\n            --x;\n            swap(a[x], a[x + 1]);\n            s[x + 1] = s[x] + a[x];\n        } else {\n            int l, r;\n            cin >> l >> r;\n            --l;\n            cout << s[r] - s[l] << '\\n';\n        }\n    }\n}"
+      ],
+      "text_sha256": "33484ef91286926f3cc94a06bbba0875f68b36700e173506897556d25d0437ba",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc442/abc442_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc442/editorial/15152",
+      "text": "1 x\nのクエリは次のように分解できます。\n\\(v \\leftarrow A_x, w \\leftarrow A_{x+1}\\)\nとする。\n\\(A_x \\leftarrow w\\)\nとする\n\\(A_{x+1} \\leftarrow v\\)\nとする\n一点変更が 2 回行われています。\n2 x\nのクエリは区間和クエリです。\nよって、\n一点変更\nと\n区間和取得\nのクエリが高速に処理できるデータ構造があればよいです。BIT（フェニック木） やセグメント木を使うと、どちらのクエリも\n\\(O(\\log N)\\)\n時間で実現できます。\n時間計算量は\n\\(O((N+Q)\\log N)\\)\n、空間計算量は\n\\(O(N)\\)\nです。\nBIT とセグメント木のどちらも ACL (AtCoder Library) にあります。\nBIT を使うコード例\nセグメント木を使うコード例\n前計算が\n\\(O(N)\\)\n時間で行えるため、時間計算量は\n\\(O(Q \\log N + N)\\)\nです。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n#include<atcoder/fenwicktree>\n\nint main() {\n\tios_base::sync_with_stdio(false);\n\tcin.tie(NULL);\n\t\n\tint n, q;\n\tcin >> n >> q;\n\tvector<int> a(n);\n\tfor (int i=0; i<n; i++) {\n\t\tcin >> a[i];\n\t}\n\n\tatcoder::fenwick_tree<int> fw(n);\n\tfor (int i=0; i<n; i++) {\n\t\tfw.add(i, + a[i]);\n\t}\n\n\twhile(q--) {\n\t\tint t; cin >> t;\n\t\tif (t == 1) {\n\t\t\tint x; cin >> x;\n\t\t\tx--;\n\t\t\tfw.add(x, - a[x]);\n\t\t\tfw.add(x + 1, - a[x + 1]);\n\t\t\tswap(a[x], a[x + 1]);\n\t\t\tfw.add(x, + a[x]);\n\t\t\tfw.add(x + 1, + a[x + 1]);\n\t\t} else {\n\t\t\tint l, r; cin >> l >> r;\n\t\t\tl--;\n\t\t\tcout << fw.sum(l, r) << '\\n';\n\t\t}\n\t}\n}",
+        "#include<bits/stdc++.h>\nusing namespace std;\n#include<atcoder/segtree>\n\nint op(int a, int b) { return a + b; }\nint e() { return 0; }\n\nint main() {\n\tios_base::sync_with_stdio(false);\n\tcin.tie(NULL);\n\t\n\tint n, q;\n\tcin >> n >> q;\n\tvector<int> a(n);\n\tfor (int i=0; i<n; i++) {\n\t\tcin >> a[i];\n\t}\n\n\tatcoder::segtree<int,op,e> seg(a);\n\n\twhile(q--) {\n\t\tint t; cin >> t;\n\t\tif (t == 1) {\n\t\t\tint x; cin >> x;\n\t\t\tx--;\n\t\t\tswap(a[x], a[x + 1]);\n\t\t\tseg.set(x, a[x]);\n\t\t\tseg.set(x + 1, a[x + 1]);\n\t\t} else {\n\t\t\tint l, r; cin >> l >> r;\n\t\t\tl--;\n\t\t\tcout << seg.prod(l, r) << '\\n';\n\t\t}\n\t}\n}"
+      ],
+      "text_sha256": "ebb031f491dcf57f17f45a3251aa4a995abba67e57617242f8fc647c1a957368",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc442/abc442_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

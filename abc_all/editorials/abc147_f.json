@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc147_f",
+  "editorials": [
+    {
+      "text": "F: Sum Diﬀerence\nS とT の和は一定であるので、S −T = S −(U −S) = S ∗2 −U (U は全ての和) より、差の代\nわりにS の和として考えられるものの個数を求めれば良いです。\nまず、D = 0 の場合、X がN 個あります。X = 0 のとき、和は0 のみです。X̸ = 0 のとき、和\nは0, X, · · · N ∗X のN + 1 通りです。\n以下ではD̸ = 0 の場合を考えます。D < 0 の場合は、S とT の寄与を入れ替えることを考える\nと、X = −X, D = −D として解いても同じことがわかるので、D > 0 とします。\nS 側がk(0 ≤k ≤N) 個の元から成るとします。数列X + i ∗D(0 ≤i < N) の和はk ∗X + I ∗D\n(I はi の和) の形をしており、0 + 1 + · · · + (k −1) ≤I ≤(N −k) + (N −k + 1) · · · + (N −1) を\n満たしますが、この範囲の全ての整数を取ることができます。\nつまり、各k についてmod D で同じ整数から成る連続した区間を成しており、これらの和集合が\n求める答えとなります。これはk ∗X mod D ごとに区間をソートしておくと求めることができます。\n以上の時間計算量はO(NlogN) であり、十分高速です。(答えのオーダーはO(N 3) です)\n",
+      "text_sha256": "5e92970cadbb14b97fe42c9c9bc3882676b60c0874d53e8d7b3fbfe4fd866131",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc147/abc147_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

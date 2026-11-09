@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc051_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc051/editorial.pdf",
+      "text": "C:  Back and Forth\n\n  まず、点s = (sx, sy) から点t = (tx, ty) への経路について考えます。問題文の条件より、点s と点t を除いた全\n ての格子点で交わらない4 つの経路を見つける必要があります。この条件から、図1 で示すような点s = (sx, sy)\n と点t = (tx, ty) のそれぞれ上下左右に距離1 進んだ点は必ず訪れる必要があります。そうでなければ、先に述べ\n た4 つの経路の条件に反してしまうからです。\n  次に、図1 で示した点s の周辺の4 点から点t の周辺の4 点への交差しない4 つの経路を見つけることを考え\n ます。このとき、図2 のような4 つの経路を見つけることができ、これらの経路は全て最短距離になっています。\n なぜなら、s の周辺の4 点からt の周辺の4 点へ結ぶ移動は右移動と上移動で行えるからです。あとは、4 つの経\n 路を合体させ、s →t →s →t →s と移動するような文字列を出力すれば良いです。\n\n\n\n\n                                             t                                                                    t\n\n\n\n                     s                                                s\n\n\n\n\n\n                 図1:                                図2:\n\n\n  C++のコード例\n\n\n\n 1 int main(void){\n\n 2     int sx,sy,tx,ty;\n\n 3     cin >> sx >> sy >> tx >> ty;\n\n\n\n                                                  2\n\f\n 4     const int dx=tx-sx,dy=ty-sy;\n\n\n 5\n\n 6     // Path 1\n\n 7     cout << string(dy,’U’) << string(dx,’R’);\n\n\n 8\n\n 9     // Path 2\n\n10     cout << string(dy,’D’) << string(dx,’L’);\n\n\n11\n\n12     // Path 3\n\n13     cout << ’L’ << string(dy+1,’U’) << string(dx+1,’R’) << ’D’;\n\n\n14\n\n15     // Path 4\n\n16     cout << ’R’ << string(dy+1,’D’) << string(dx+1,’L’) << ’U’;\n\n\n17\n\n18     // EndLine\n\n19     cout << endl;\n\n20     return 0;\n\n21 }",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "84ee18247d10ff3c2412e1b969e559be574a27ebe3c98c1f3a6c7c6fef8746b9"
+    }
+  ],
+  "status": "available"
+}

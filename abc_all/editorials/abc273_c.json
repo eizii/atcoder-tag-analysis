@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc273_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc273/editorial/5018",
+      "text": "\\(A\\)\nがどの整数をそれぞれ何個含むかという情報を求めます。\n具体的には、\n\\(((v_1, f_1), (v_2, f_2), (v_3, f_3), \\ldots, (v_n, f_n))\\)\nという列であって、\n\\(A\\)\nは整数\n\\(v_i\\)\nを ちょうど\n\\(f_i\\)\n個含む。\n\\(v_1 \\gt v_2 \\gt \\cdots \\gt v_n \\gt 0\\)\n\\(\\sum_{i = 1}^n f_i = N\\)\nを満たすようなものを求めます。\n例えば、\n\\(A = (100, 200, 200, 100, 300, 100)\\)\nであれば、\n\\(100\\)\nを\n\\(3\\)\n個、\n\\(200\\)\nを\n\\(2\\)\n個、\n\\(300\\)\nを\n\\(1\\)\n個含むので、\n\\(((v_1, f_1), (v_2, f_2), (v_3, f_3)) = ((300, 1), (200, 2), (100, 3))\\)\nです。\n\\(((v_1, f_1), (v_2, f_2), (v_3, f_3), \\ldots, (v_n, f_n))\\)\nを得るには、\n\\(A\\)\nがどの整数をそれぞれ何個含むかを調べ、それを\n\\(v_i\\)\nの降順に並べる必要がありますが、これは連想配列を用いることで実現できます。\n\\(i = 1, 2, \\ldots, n\\)\nについて、\n\\(A\\)\nに含まれる整数のうち\n\\(v_i\\)\nより大きいものは\n\\(v_1, v_2, \\ldots, v_{i-1}\\)\nの\n\\(i-1\\)\n種類ですので、\n\\(K = 0, 1, 2, \\ldots, n-1\\)\nについて、\n\\(K\\)\nに関する問題の答えは\n\\(f_{K+1}\\)\nであり、\n\\(K = n, n+1, \\ldots, N-1\\)\nについて、\n\\(K\\)\nに関する問題の答えは\n\\(0\\)\nです。\n以上をまとめると、本問題に正解するには、まず連想配列等を用いて\n\\(((v_1, f_1), (v_2, f_2), (v_3, f_3), \\ldots, (v_n, f_n))\\)\nを求め、\n\\(f_1, f_2, \\ldots, f_n\\)\nをこの順に出力した後、\n\\(N-n\\)\n個の\n\\(0\\)\nを出力すれば良いです。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <map>\nusing namespace std;\n\nint main(void)\n{\n  int n, a;\n  map<int, int> mp;\n  \n  cin >> n;\n  for(int i = 1; i <= n; i++) cin >> a, mp[a]++;\n\n  for(auto it = mp.rbegin(); it != mp.rend(); it++) cout << it->second << \"\\n\";\n  for(int i = 1; i <= n - (int)mp.size(); i++) cout << 0 << \"\\n\";\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "9df4a5d104897aebed8d8c156894ce1ca0cb35758e1c35e3c35eae5ec7e44186",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc273/abc273_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

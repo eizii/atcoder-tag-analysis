@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc051_d",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc051/editorial.pdf",
+      "text": "D:  Candidates of No Shortest Paths\n\n    まず、edge(i, j) を頂点i とj を結ぶ辺のコスト、dist(i, j) を頂点i から頂点j までの最短距離とします。最短\n 経路の候補となる辺を求めるために、全頂点間の最短経路を求める必要があります。これは、ワーシャルフロイド\n 法(時間計算量O(N 3)) やダイクストラ法(時間計算量O(NM log N)) を使って求めることができます。\n  次に、頂点i と頂点j を結ぶ辺が頂点s から頂点t への最短経路に含まれるとき、次の式が成り立ちます。\n\n         dist(s, i) + edge(i, j) + dist(j, t) = dist(s, t)                                                             (1)\n\n  式(1) を満たさない場合、この辺を使った経路は頂点s から頂点t への最短経路とならないことが分かります。し\n たがって、頂点s, t の組を全探索を行い、式(1) を満たす頂点s, t の組が1 つでもあれば、その辺はある最短経路\n に含まれます。各辺に対してこのチェックを行うことにより、時間計算量O(MN 2) で答えを求めることができ、\n 間に合います。\n\n  なお、さらに時間計算量を減らすことができます。全頂点間の最短距離が求まっているため、最短経路の判定に\n\n  式(2) を使うことができます。\n\n         dist(s, i) + edge(i, j) = dist(s, j)                                                                        (2)\n\n この場合、頂点s を全探索すれば良いので、時間計算量O(MN) で答えを求めることができます。\n  また、ある頂点s からダイクストラ法を行い、その最短経路木に含まれる辺は当然ながら最短経路に含まれま\n す。全頂点を1 回ずつ始点にしたダイクストラ法を行い、その最短経路木に含まれる辺をチェックすることでも、\n 答えを求めることが可能です。(証明略)\n  C++のコード例\n\n\n\n 1 int main(void){\n\n 2     const int inf = 100000000;\n\n\n                                                  3\n\f\n 3\n\n 4     int n,m;\n\n 5     cin >> n >> m;\n\n\n 6\n\n 7     int a[1000],b[1000],c[1000],dist[100][100];\n\n\n 8\n\n 9     for(int i = 0; i < m; ++i){\n\n10         cin >> a[i] >> b[i] >> c[i];\n\n11         a[i]--,b[i]--;\n\n12     }\n\n\n13\n\n14     for(int i = 0; i < n; ++i){\n\n15         for(int j = 0; j < n; ++j){\n\n16             if(i==j)\n\n17                 dist[i][j]=0;\n\n18             else\n\n19                 dist[i][j]=inf;\n\n20         }\n\n21     }\n\n\n22\n\n23     for(int i = 0; i < m; ++i){\n\n24         dist[a[i]][b[i]]=min(dist[a[i]][b[i]],c[i]);\n\n25         dist[b[i]][a[i]]=min(dist[b[i]][a[i]],c[i]);\n\n26     }\n\n\n27\n\n28     for(int k = 0; k < n; ++k){\n29         for(int i = 0; i < n; ++i){\n\n30             for(int j = 0; j < n; ++j){\n\n31                 dist[i][j]=min(dist[i][j],dist[i][k]+dist[k][j]);\n\n32             }\n\n33         }\n\n34     }\n\n\n35\n\n36     int ans=m;\n\n37     for(int i = 0; i < m; ++i){\n\n38         bool shortest=false;\n\n39         for(int j = 0; j < n; ++j) if(dist[j][a[i]]+c[i]==dist[j][b[i]]) shortest=true;\n\n40         if(shortest==true){\n\n41             ans=ans-1;\n\n42         }\n\n43     }\n\n\n44\n\n45     cout << ans << endl;\n\n46 }\n\n\n\n                                                  4",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "b602ce414164f67a30518a19e6628f5d3c9ebc8fde0ce1f0bf970a96adf56b52"
+    }
+  ],
+  "status": "available"
+}

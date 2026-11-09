@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc373_d",
+  "source_url": "https://atcoder.jp/contests/abc373/tasks/abc373_d?lang=ja",
+  "statement": "問題文\nN\n頂点\nM\n辺の有向グラフが与えられます。\nj\n番目の有向辺は頂点\nu_j\nから頂点\nv_j\nに向かっており、重み\nw_j\nを持っています。\n各頂点に\n-10^{18}\n以上\n10^{18}\n以下の整数を書き込む方法であって、次の条件を満たすものを\n1\nつ見つけてください。\n頂点\ni\nに書き込まれている値を\nx_i\nとする。すべての辺\nj=1,2,\\dots,M\nについて、\nx_{v_j} - x_{u_j} = w_j\nが成り立つ。\n与えられる入力について、条件を満たす書き込み方が少なくとも\n1\nつ存在することが保証されます。\n制約\n2 \\leq N \\leq 2 \\times 10^5\n1 \\leq M \\leq \\min\\{2 \\times 10^5,N(N-1)/2\\}\n1 \\leq u_j, v_j \\leq N\nu_j \\neq v_j\ni \\neq j\nなら\n(u_i,v_i) \\neq (u_j,v_j)\nかつ\n(u_i,v_i) \\neq (v_j,u_j)\n|w_j| \\leq 10^9\n入力はすべて整数\n条件を満たす書き込み方が少なくとも\n1\nつ存在する",
+  "html_sha256": "05300733d1612d6209a3dfa5b70dd3834113f325e5849ace5b4630445ef99b7a",
+  "extractor": "section_headings_v1"
+}

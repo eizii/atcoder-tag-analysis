@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc468_c",
+  "title": "Between P and Q",
+  "contests": [
+    {
+      "contest_id": "abc468",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 298,
+  "raw_difficulty": 282,
+  "contest_id": "abc468",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc468/tasks/abc468_c",
+  "statement": "配点 : 300 点 問題文 整数 N と (1,2,\\ldots,N) を並び替えた整数列 P=(P_1,P_2,\\ldots, P_N),Q=(Q_1,Q_2,\\ldots,Q_N) が与えられます。 (1,2,\\ldots,N) を並び替えた整数列であって辞書順で P より大きく Q より小さいものがいくつあるか求めてください。 整数列の辞書順とは？ 整数列 S = (S_1,S_2,\\ldots,S_{|S|}) が整数列 T = (T_1,T_2,\\ldots,T_{|T|}) より 辞書順で小さい とは、下記の 1. と 2. のどちらかが成り立つことを言います。\r\nここで、 |S|, |T| はそれぞれ S, T の長さを表します。 |S| \\lt |T| かつ (S_1,S_2,\\ldots,S_{|S|}) = (T_1,T_2,\\ldots,T_{|S|}) 。 ある整数 1 \\leq i \\leq \\min\\lbrace |S|, |T| \\rbrace が存在して、下記の 2 つがともに成り立つ。 (S_1,S_2,\\ldots,S_{i-1}) = (T_1,T_2,\\ldots,T_{i-1}) S_i が T_i より（数として）小さい。 制約 1\\le N\\le 10 P,Q は (1,2,\\ldots,N) を並び替えた整数列 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N P_1 P_2 \\ldots P_N Q_1 Q_2 \\ldots Q_N 出力 答えを出力せよ。 入力例 1 3\r\n1 3 2\r\n3 1 2 出力例 1 2 (2,1,3),(2,3,1) の 2 つが条件を満たします。したがって、 2 を出力してください。 入力例 2 5\r\n5 4 2 1 3\r\n5 1 2 3 4 出力例 2 0 条件を満たす (1,2,3,4,5) を並び替えた整数列は存在しません。 入力例 3 7\r\n3 6 5 2 7 1 4\r\n4 1 5 7 2 3 6 出力例 3 223",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 整数 N と (1,2,\\ldots,N) を並び替えた整数列 P=(P_1,P_2,\\ldots, P_N),Q=(Q_1,Q_2,\\ldots,Q_N) が与えられます。 (1,2,\\ldots,N) を並び替えた整数列であって辞書順で P より大きく Q より小さいものがいくつあるか求めてください。 整数列の辞書順とは？ 整数列 S = (S_1,S_2,\\ldots,S_{|S|}) が整数列 T = (T_1,T_2,\\ldots,T_{|T|}) より 辞書順で小さい とは、下記の 1. と 2. のどちらかが成り立つことを言います。\r\nここで、 |S|, |T| はそれぞれ S, T の長さを表します。 |S| \\lt |T| かつ (S_1,S_2,\\ldots,S_{|S|}) = (T_1,T_2,\\ldots,T_{|S|}) 。 ある整数 1 \\leq i \\leq \\min\\lbrace |S|, |T| \\rbrace が存在して、下記の 2 つがともに成り立つ。 (S_1,S_2,\\ldots,S_{i-1}) = (T_1,T_2,\\ldots,T_{i-1}) S_i が T_i より（数として）小さい。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\le N\\le 10 P,Q は (1,2,\\ldots,N) を並び替えた整数列 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N P_1 P_2 \\ldots P_N Q_1 Q_2 \\ldots Q_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\n1 3 2\r\n3 1 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2 (2,1,3),(2,3,1) の 2 つが条件を満たします。したがって、 2 を出力してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5\r\n5 4 2 1 3\r\n5 1 2 3 4"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0 条件を満たす (1,2,3,4,5) を並び替えた整数列は存在しません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 7\r\n3 6 5 2 7 1 4\r\n4 1 5 7 2 3 6"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 223"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc468/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:55.379572+00:00",
+  "statement_sha256": "949fbcabb3a9fc82e481b278ad0dd80355a93a4684ee2be720a59057c5250bde",
+  "editorials": []
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc163_f",
+  "editorials": [
+    {
+      "text": "F: path pass i\n各色について、その色を一度も通らないようなパスを数え上げることができればよいです。以降、\n頂点v と頂点w を結ぶ単純パスを、Pv,w と表します。\n適当な頂点を根としてDFS を行います。頂点v では、それぞれの子u に対して以下を計算します。\n• u を根とする部分木の中で、u から色がcv であるような頂点を一度も通らずに移動できる頂\n点の数\n頂点v を根とする部分木に含まれる頂点の集合をSv とすると、上記の値は以下の式で表すことが\nできます。(2020/4/20 修正)\n|Su| −\n∑\nw∈Su,cw=cv,f(Pv,w)=2\n|Sw|\nただし、f(Pv,w) = |{x | x ∈Pv,w, cx = cv}| とします。\n各色について\n∑\nw∈Su,cw=cv,f(Pv,w)=2\n|Sw| の値を計算することを考えます。\nこれは、頂点v に入った時点での値Xv を保持しておき、出るときにXv + |Sv| で更新すればよい\nことがわかります。\n詳しくは実装例を確認してください。計算量はO(N) です。\n実装例: https://atcoder.jp/contests/abc163/submissions/12125379\n",
+      "text_sha256": "42dd7a59a4574dd787aec5c55f2ce87fd07bbe768800ab7db298df6f862f8df7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc163/abc163_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

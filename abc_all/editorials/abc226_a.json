@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc226_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc226/editorial/2888",
+      "text": "この問題を解く方針は大きく分けて 2つあります。\n\\(1\\)\nつは、文字列として読み取り、\n.\n(小数点) の前までを整数に変換、小数第一位、文字列としては\n.\nの直後あるいは最後から\n\\(3\\)\n文字目が\n\\(5\\)\n以上ならば\n\\(1\\)\nを加える、という方法です。\nもう\n\\(1\\)\nつは、言語によりますが、それぞれの言語に準備されている四捨五入用のライブラリを用いるものです。境界、すなわち小数点以下が\n\\(0.5\\)\nのとき挙動が定まっていない or 適切でない、あるいは分からない時は十分小さい正数(この場合では\n\\(0.0005\\)\nなど)を加えることで 回避することができます。\nPythonだとこの操作を行わないと\n\\(0.5\\)\nに対する丸めに失敗し、WAになるので気を付けてください。\nc++による実装例(1つめの方針):\nc++による実装例(2つめの方針):\npythonによる実装例(2つめの方針):",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nint main(void) {\n\tstring X;\n\tint a;\n\tint ans = 0;\n\n\tcin >> X;\n\tint n = X.size();\n\trep(i, n - 4) {\n\t\ta = (int)(X[i] - '0');\n\t\tans = 10 * ans + a;\n\t}\n\tif (X[n - 3] >= '5')ans++;\n\tcout << ans << endl;\n\treturn 0;\n}",
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main(void) {\n\tdouble a;\n\tcin >> a;\n\tcout << (int)round(a+0.0005) << endl;\n        //cout << (int)round(a) << endl; でも良い\n\treturn 0;\n}",
+        "x=float(input())\nprint(int(round(x+0.0005,0)))"
+      ],
+      "text_sha256": "9201ebe421c15496b5b1d7d8e5ca5ff06ba94966337ca8db65a1480a9d80ad90",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc226/abc226_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

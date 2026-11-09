@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc222_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc222/editorial/2739",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\n「入力を文字列として受け取り、長さが\n\\(4\\)\nになるまで先頭に\n0\nを加える」というような実装をしてもよいですが、多くの言語では出力関数に適切なフォーマットを指定することでこの問題の目的を達成することができます。\n実装例(C)\n実装例(Python)",
+      "codes": [
+        "#include<stdio.h>\n\nint main(){\n\tint n;\n\tscanf(\"%d\",&n);\n\tprintf(\"%04d\\n\",n);\n}",
+        "N=int(input())\nprint(f\"{N:04d}\")"
+      ],
+      "text_sha256": "e822e7a41dc239707a5844fd088253b4381aafe3ae2e269da16dd39534eb08ed",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc222/abc222_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

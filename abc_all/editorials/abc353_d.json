@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc353_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc353/editorial/9958",
+      "text": "\\(f(x,y)\\)\nを扱いやすい形に言い換えます。\n\\(y\\)\nを文字列として解釈したときの長さを\n\\(\\mathrm{len}(y)\\)\nとすると、\n\\(f(x,y) = 10^{\\mathrm{len}(y)} x + y\\)\nです。\n各\n\\(i\\)\nについて、\n\\(f(*,A_i)\\)\nという形での\n\\(A_i\\)\nの寄与と\n\\(f(A_i, *)\\)\nという形での\n\\(A_i\\)\nの寄与を求めましょう。\n前者は簡単です。\n\\(f(*,A_i)\\)\nでは\n\\(A_i\\)\nはそのまま加算されるので、答えには\n\\((i-1)A_i\\)\n寄与します。\n後者を考えます。\n\\(i < j\\)\nかつ\n\\(\\mathrm{len}(A_j) = k\\)\nなる\n\\(j\\)\nの個数を\n\\(d_k\\)\nとすると、寄与は\n\\(\\sum_{k=1}^{10} d_k 10^{k} A_i\\)\nです。\n\\(d_k\\)\nの更新は各\n\\(i\\)\nについて定数時間で行える（実装例も参考にしてください）ので、\n\\(A\\)\nの最大値を\n\\(M\\)\nとすれば 後者の寄与も各\n\\(i\\)\nについて\n\\(\\mathrm{O}(\\log M)\\)\nで計算できます。\n以上より、答えを\n\\(\\mathrm{O}(N\\log M)\\)\nで求めることができました。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include \"atcoder/modint\"\n\nusing namespace std;\nusing ll = long long;\nusing mint = atcoder::modint998244353;\n\nint main() {\n  int n;\n  cin >> n;\n  vector<int> a(n);\n  for(auto &v : a) cin >> v;\n  vector<int> d(11);\n  for(int i = 0; i < n; i++) {\n    d[to_string(a[i]).size()]++;\n  }\n  mint res = 0;\n  vector<mint> p10(11, 1);\n  for(int i = 1; i <= 10; i++) p10[i] = p10[i - 1] * 10;\n  for(int i = 0; i < n; i++) {\n    res += mint(a[i]) * i;\n    d[to_string(a[i]).size()]--;\n    for(int j = 1; j <= 10; j++) {\n      res += p10[j] * a[i] * d[j];\n    }\n  }\n  cout << res.val() << endl;\n}"
+      ],
+      "text_sha256": "b5316ff2090468127c1d6a1b329db562b32c6b870ff713a3150dc1ecc660a595",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc353/abc353_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc353/editorial/9974",
+      "text": "\\(\\displaystyle\\sum _ {1\\leq i\\lt j\\leq N}f(A _ i,A _ j)\\)  を、\\(j\\) を固定して考えることによって整理します。\n公式解説の \\(\\operatorname{len}(y)\\coloneqq y\\) を十進法で表したときの長さ と、これによる \\(f\\) の表式 \\(f(x,y)=y+x\\times10 ^ {\\operatorname{len}(y)}\\) を利用します。\n\\[\\begin{aligned}\n&\\sum _ {1\\leq i\\lt j\\leq N}f(A _ i,A _ j)\\\\\n=&\\sum _ {1\\leq j\\leq N}\\sum _ {1\\leq i\\lt j}f(A _ i,A _ j)\\\\\n=&\\sum _ {1\\leq j\\leq N}\\sum _ {1\\leq i\\lt j}(A _ j+A _ i\\times10 ^ {\\operatorname{len}(A _ j)})\\\\\n=&\\sum _ {1\\leq j\\leq N}\\left((j-1)A _ j+10 ^ {\\operatorname{len}(A _ j)}\\sum _ {1\\leq i\\lt j}A _ i\\right)\n\\end{aligned}\\]\nつまり、\\(j\\ (1\\leq j\\leq N)\\) について、\\(f(A _ i,A _ j)\\ (1\\leq i\\lt j)\\) の総和は\n\\(A _ j\\) を \\(j-1\\) 個加えたもの（\\(f(A _ i,A _ j)\\) の下 \\(\\operatorname{len}(A _ j)\\) 桁の部分の総和）\n\\(\\displaystyle\\sum _ {1\\leq i\\lt j}A _ i\\) を \\(10 ^ {\\operatorname{len}(A _ j)}\\) 倍したもの（\\(f(A _ i,A _ j)\\) の \\(\\operatorname{len}(A _ j)\\) 桁より上の部分の総和）\nの和として計算できます。\nここから、以下のようなアルゴリズムを考えることができます。\nはじめ、\\(S=0,\\operatorname{ans}=0\\) とする。\n\\(i=1,2,\\ldots,N\\) に対して、以下を行う。\n\\(\\operatorname{ans}\\) に \\((i-1)A _ i\\) を加算する。\n\\(\\operatorname{len}(A _ i)\\) を求め、\\(\\operatorname{ans}\\) に \\(10 ^ {\\operatorname{len}(A _ i)}S\\) を加算する。\n\\(S\\) に \\(A _ i\\) を加算する。\n繰り返しが終了したあとの \\(\\operatorname{ans}\\) の値が求める答えになります。\n時間計算量は、\\(\\operatorname{len}(A _ i)\\) や \\(10 ^ {\\operatorname{len}(A _ i)}\\) を求めるところで \\(\\displaystyle O(\\log\\log A _ i)\\) などの時間がかかるので、全体で \\(O(N\\log\\log\\max _ i A _ i)\\) などになります（公式解説とは \\(\\operatorname{len}(A _ i)\\) を求める方法が違うだけで、どちらも同じ時間計算量のオーダーで実装ができます）。\n\\(A\\) の値が定数ワードに収まるという前提のもと、実装例の方針では空間計算量は \\(O(\\log\\log\\max _ iA _ i)\\) ワードになります。整数をうまく詰めたり \\(\\operatorname{len}(A _ i)\\) を求める時間計算量の悪化を許すことで、全体で \\(O(1)\\) ワードにすることもできます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <array>\n#include <ranges>\n#include <atcoder/modint>\n\nint main() {\n    using namespace std;\n    using modint = atcoder::static_modint<998244353>;\n    unsigned N;\n    cin >> N;\n    modint ans{}, prefix_sum{};\n    for (unsigned i{}, A; i < N; ++i) {\n        cin >> A;\n        // 10^k <= A であるような最大の 10^k を求める\n        unsigned pow_ten_floor{1};\n        for (const auto pow_ten : array<unsigned, 4>{10, 100, 10000, 100000000} | views::reverse)\n            if (A / pow_ten >= pow_ten_floor)\n                pow_ten_floor *= pow_ten;\n        \n        // 答えに A[i] * i + 10^(k+1)S を足す\n        ans += modint::raw(A) * i + prefix_sum * pow_ten_floor * 10;\n        \n        // S に A[i] を足す\n        prefix_sum += A;\n    }\n    cout << ans.val() << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "7c6b0e4addf4f76aeeae80fcb8bd18dc394707b34596422ac0c05eee83bbd70d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc353/abc353_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc353/editorial/9977",
+      "text": "公式解説\nとほとんど同じですが、\n\\(A_i\\)\nを逆順に走査して\n\\(\\sum_{j=i+1}^N 10^{\\text{len}(A_j)}\\)\nを保持すると楽です。\n実装例：（Python）",
+      "codes": [
+        "N = int(input())\nA = list(map(int, input().split()))\nMOD = 998244353\n\nans, m, s = 0, 0, 0\nfor a in A[::-1]:\n    ans += a * m + s\n    m += 10 ** len(str(a))\n    s += a\nprint(ans % MOD)"
+      ],
+      "text_sha256": "05a1b5f9b7ccd360f3f176029c6af53f79967058f8ad79da2b5a4d91113ec255",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc353/abc353_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

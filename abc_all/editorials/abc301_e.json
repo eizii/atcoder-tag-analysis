@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc301_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc301/editorial/6343",
+      "text": "お菓子マスの個数を\n\\(N\\)\nとします。\n移動の途中に訪れるお菓子マスの集合を\n\\(S\\)\nとしたとき、\n\\(2^N\\)\n通り全ての\n\\(S\\)\nについて、「\n\\(S\\)\nに含まれるお菓子マスを全て訪れた上で最終的にゴールマスにいるために必要な最小の移動回数」を求めることを考えます。これはお菓子マスを頂点とした巡回セールスマン問題の一種として捉えられます。よって、任意のお菓子マスのペアに関して「一方のお菓子マスから他方のお菓子マスに行くのに必要な最小の移動回数」が分かっていれば、bit DP によって\n\\(O(2^NN^2)\\)\nで求めることができます。bit DP による巡回セールスマン問題の解法を知らない方は、\nABC180-E\nの解説等をご参照ください。\n残された課題は、任意のお菓子マスのペアに関して「一方のお菓子マスから他方のお菓子マスに行くのに必要な最小の移動回数」を求めることです。これは、各お菓子マスについてそのお菓子マスを始点としたグリッド上の BFS を行うことで、\n\\(O(NHW)\\)\nで求めることができます。\nよって、本問題を\n\\(O(NHW + 2^NN^2)\\)\nで解くことができました。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nconst int inf = 1000000000;\n\nbool chmin(int &a, int b) {\n    if (a > b) {\n        a = b;\n        return true;\n    }\n    return false;\n}\n\nconst int dx[4] = {1, 0, -1, 0};\nconst int dy[4] = {0, 1, 0, -1};\n\n// (si, sj) からの距離をテーブルにして返す\n// 到達できないならば inf\nvector<vector<int>> dist(int h, int w, const vector<string> &a, int si, int sj) {\n    vector res(h, vector<int>(w, inf));\n    res[si][sj] = 0;\n    queue<pair<int, int>> q;\n    q.emplace(si, sj);\n    while (!q.empty()) {\n        auto [i, j] = q.front();\n        q.pop();\n        for (int k = 0; k < 4; k++) {\n            int ni = i + dx[k];\n            int nj = j + dy[k];\n            if (ni < 0 or ni >= h or nj < 0 or nj >= w) continue;\n            if (a[ni][nj] == '#') continue;\n            if (chmin(res[ni][nj], res[i][j] + 1)) q.emplace(ni, nj);\n        }\n    }\n    return res;\n}\n\nint main() {\n    int h, w, t;\n    cin >> h >> w >> t;\n    vector<string> a(h);\n    int si, sj, gi, gj;\n    vector<pair<int, int>> ls;\n    for (int i = 0; i < h; i++) {\n        cin >> a[i];\n        for (int j = 0; j < w; j++) {\n            if (a[i][j] == 'S') si = i, sj = j;\n            if (a[i][j] == 'G') gi = i, gj = j;\n            if (a[i][j] == 'o') ls.emplace_back(i, j);\n        }\n    }\n    int cnt = ls.size();\n    \n    vector d(cnt, vector<vector<int>>()); // d[i] : i 個目のお菓子マスを始点とする距離テーブル\n    for (int i = 0; i < cnt; i++) d[i] = dist(h, w, a, ls[i].first, ls[i].second);\n    \n    vector dp(1 << cnt, vector<int>(cnt, inf));\n    for (int i = 0; i < cnt; i++) dp[1 << i][i] = d[i][si][sj];\n    for (int s = 1; s < (1 << cnt); s++) {\n        for (int last = 0; last < cnt; last++) {\n            if (dp[s][last] == inf) continue;\n            for (int nx = 0; nx < cnt; nx++) {\n                if (s >> nx & 1) continue;\n                chmin(dp[s | 1 << nx][nx], dp[s][last] + d[last][ls[nx].first][ls[nx].second]);\n            }\n        }\n    }\n    \n    int ans = -1;\n    if (dist(h, w, a, si, sj)[gi][gj] <= t) ans = 0;\n    for (int s = 1; s < (1 << cnt); s++) {\n        for (int last = 0; last < cnt; last++) {\n            if (dp[s][last] + d[last][gi][gj] <= t) {\n                int now = 0;\n                for (int i = 0; i < cnt; i++) if (s >> i & 1) ++now;\n                ans = max(ans, now);\n            }\n        }\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "676d3dcbda24320011f31c5affab2380a32a5ce336e4c44ff465051426bcbbb3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc301/abc301_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

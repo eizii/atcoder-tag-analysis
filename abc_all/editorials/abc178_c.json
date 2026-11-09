@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc178_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc178/editorial/104",
+      "text": "\\(0 \\leq A_i \\leq 9\\)\nなる長さ\n\\(N\\)\nの整数列\n\\(\\{A\\}\\)\n全体について考えます。\n\\(A_i=0\\)\nなる\n\\(i\\)\nが存在しないような\n\\(\\{A\\}\\)\nは、\n\\(9^N\\)\n通りあります。\n\\(A_i=9\\)\nなる\n\\(i\\)\nが存在しないような\n\\(\\{A\\}\\)\nは、\n\\(9^N\\)\n通りあります。\n\\(A_i=0\\)\nなる\n\\(i\\)\nと\n\\(A_i=9\\)\nなる\n\\(i\\)\nがともに存在しないような\n\\(\\{A\\}\\)\nは、\n\\(8^N\\)\n通りあります。\n\\(A_i=0\\)\nなる\n\\(i\\)\nと\n\\(A_i=9\\)\nなる\n\\(i\\)\nの少なくとも一方が存在しないような\n\\(\\{A\\}\\)\nは、\n\\(9^N+9^N-8^N\\)\n通りあります。\n\\(\\{A\\}\\)\nは、\n\\(10^N\\)\n通りあります。\n\\(A_i=0\\)\nなる\n\\(i\\)\nと\n\\(A_i=9\\)\nなる\n\\(i\\)\nがともに存在するような\n\\(\\{A\\}\\)\nは、\n\\(10^N-9^N-9^N+8^N\\)\n通りあります。\n答えは\n\\(10^N-9^N-9^N+8^N\\)\nです。\nこの解法は包除原理の適用であるといえます。\n包除原理はより難易度の高い問題を解く際にも活躍します。\n解答例（C++）",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\nconst ll mod=1000000007;\n\nll powmod(ll x,ll y){\n    ll res=1;\n    for(ll i=0;i<y;i++){\n      res=res*x%mod;\n    }\n    return res;\n}\nint main(){\n    ll n;\n    cin>>n;\n    ll ans=powmod(10,n)-powmod(9,n)-powmod(9,n)+powmod(8,n);\n    ans%=mod;\n    ans=(ans+mod)%mod;\n    cout<<ans<<\"\\n\";\n}"
+      ],
+      "text_sha256": "11af757adcdf3699ab3c36cedfacfa80cb3cbabd491069df9e2b6eb20b8671fc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc178/abc178_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

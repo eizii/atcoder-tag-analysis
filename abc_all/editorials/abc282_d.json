@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc282_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc282/editorial/5397",
+      "text": "[1] グラフ\n\\(G\\)\nが連結な場合\nまず、\n\\(G\\)\nが二部グラフかどうかを判定します。\n二部グラフである場合は、さらに、同じ色の頂点同士を結ぶ辺がないように各頂点を黒と白で塗り分けます。\nこれは、深さ優先探索などのグラフ探索アルゴリズムによって\n\\(O(N + M)\\)\n時間で行えます。\n具体的には、まず\n\\(1\\)\nつの頂点を黒で塗り、それに隣接する頂点を白で塗り、さらにそれらに隣接する頂点を黒で塗り…と繰り返していけば良いです。また、その過程で同色に塗った頂点同士が隣接した場合は、\n\\(G\\)\nが二部グラフではないと判定できます。\n\\(G\\)\nが二部グラフではない場合は、それに辺を\n\\(1\\)\n本追加して得られるグラフも二部グラフではないので、本問題の答えは\n\\(0\\)\nです。\n\\(G\\)\nが二部グラフである場合は、辺で結んでも二部グラフであり続けるような頂点のペアは、異なる色で塗られた頂点のペアです。\nよって、頂点のペアの個数\n\\(N(N-1)/2\\)\nから、同じ色で塗られた頂点同士のペアの個数と、初めから辺で結ばれている頂点のペアの個数\n\\(M\\)\nを引いたものが答えです。\n[2] グラフ\n\\(G\\)\nが連結とは限らない場合\nまず、それぞれの連結成分について、「[1] グラフ\n\\(G\\)\nが連結な場合」で述べたように二部グラフかの判定と頂点の塗り分けを行います。\nどれか一つの連結成分が二部グラフでなかった場合、\n\\(G\\)\n全体も二部グラフではないので、本問題の答えは\n\\(0\\)\nです。\n以下、すべての連結成分が二部グラフの場合を考えます。\n同じ連結成分に属する頂点のペアについては、「[1] グラフ\n\\(G\\)\nが連結な場合」で述べた通りです。\n一方、異なる連結成分に属する頂点同士のペアについては、その間に辺を追加して得られるグラフは必ず二部グラフとなります。\n（例えば、連結成分\n\\(A\\)\nの黒い頂点と連結成分\n\\(B\\)\nの黒い頂点を辺で結ぶ場合、連結成分\n\\(B\\)\nの白と黒を反転すれば、辺を追加後のグラフに対する色分けが得られます。）\nよって、辺で結ぶことで二部グラフでなくなってしまうような頂点のペアとは、同じ連結成分に属する同じ色の頂点同士のペアです。\n以上より本問題の答えは、頂点のペアの個数\n\\(N(N-1)/2\\)\nから、各連結成分の同じ色に塗られた頂点同士のペアの個数を引き、さらに、初めから辺で結ばれている頂点のペアの個数\n\\(M\\)\nを引いた\n\\[\n\\frac{N(N-1)}{2} - \\sum_{i = 1}^C \\big(\\frac{B_i(B_i-1)}{2} + \\frac{W_i(W_i-1)}{2}\\big) - M\n\\]\nです。ここで、\n\\(C\\)\nは連結成分の個数であり、\n\\(B_i, W_i\\)\nは\n\\(i\\)\n番目の連結成分で黒、白に塗られた頂点の個数です。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <utility>\nusing namespace std;\ntypedef long long ll;\ntypedef pair<ll, ll> P;\n\nll n, m;\nvector<int> G[200005];\nint color[200005];\n\nP dfs(int v, int p, int c){\n  P ret = P(0, 0);\n  color[v] = c;\n  \n  if(c == 1) ret.first++;\n  else ret.second++;\n  \n  for(auto u : G[v]){\n    if(u == p || color[u] == -c) continue;\n    if(color[u] == c) return P(-1, -1);\n    P res = dfs(u, v, -c);\n    if(res.first == -1) return P(-1, -1);\n    ret.first += res.first, ret.second += res.second;\n  }\n  return ret;\n}\n\nint main(void)\n{\n  cin >> n >> m;\n  int u, v;\n  for(int i = 1; i <= m; i++){\n    cin >> u >> v;\n    G[u].push_back(v);\n    G[v].push_back(u);\n  }\n  \n  ll ans = n*(n-1)/2 - m;\n  for(int i = 1; i <= n; i++){\n    if(!color[i]){\n      P res = dfs(i, -1, 1);\n      if(res.first == -1){\n        cout << 0 << endl;\n        return 0;\n      }\n      ans -= res.first * (res.first-1) / 2;\n      ans -= res.second * (res.second-1) / 2;\n    }\n  }\n  cout << ans << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "63c1d1b70dc7c2f9e21cb57fb9555f9900c645a332bbe3ee57ba1a988c797878",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc282/abc282_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

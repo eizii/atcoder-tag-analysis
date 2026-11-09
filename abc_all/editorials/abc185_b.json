@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc185_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc185/editorial/407",
+      "text": "問題文に従って、各カフェに到着した時と出発したときのバッテリー残量を全て計算することができます。\n解答例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tint n = ri();\n\tint m = ri();\n\tint t = ri();\n\tint last_time = 0;\n\tint cur = n;\n\tbool res = true;\n\tfor (int i = 0; i <= m; i++) {\n\t\tint a = i < m ? ri() : t;\n\t\tint b = i < m ? ri() : t;\n\t\tcur -= a - last_time;\n\t\tif (cur <= 0) res = false;\n\t\tcur = std::min(n, cur + b - a);\n\t\tlast_time = b;\n\t}\n\tputs(res ? \"Yes\" : \"No\");\n\treturn 0;\n}"
+      ],
+      "text_sha256": "e04a5b0e069e32ebe121d62755862c98519fdc3bed44c66dde32d2e76345b164",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc185/abc185_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

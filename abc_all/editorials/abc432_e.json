@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc432_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc432/editorial/14572",
+      "text": "まず、\n\\(l > r\\)\nであるようなクエリについては、どんな整数\n\\(x\\)\nに対しても\n\\( \\max(l, \\min(r, x))=l\\)\nが成り立つため、単に\n\\(l\\times N\\)\nを出力すればよいです。以下\n\\(l\\leq r\\)\nを仮定します。\n\\(\\max(l, \\min(r, A_i))\\)\nという式の値について観察すると、以下のように\n\\(A_i\\)\nの値の範囲に応じた単純な形に書き表せることがわかります。\n\\[\n\\max(l, \\min(r, A_i))=\n\\left\\{\n\\begin{array}{cl}\nl & (A_i < l) \\\\\nA_i & (l \\leq A_i \\leq r) \\\\\nr & (r < A_i)\n\\end{array}\n\\right.\n\\]\nしたがって、\n\\(A_i=j\\)\nを満たす\n\\(i\\)\nの個数を\n\\(C_j\\)\nとおき、また数列の要素として現れうる最大値を\n\\(K\\)\nとおくと、\n\\[\n\\displaystyle\n\\begin{aligned}\n\\sum_{1\\leq i\\leq N} \\max(l, \\min(r, A_i))\n&= \\sum_{1\\leq j\\leq K} C_j \\cdot \\max(l, \\min(r, j)) \\\\\n&= \\sum_{1\\leq j\\leq l-1} C_j \\cdot l + \\sum_{l\\leq j\\leq r} C_j \\cdot j + \\sum_{r+1\\leq j\\leq K} C_j \\cdot r \\\\\n&= \\left(\\sum_{1\\leq j\\leq l-1} C_j\\right) \\cdot l + \\sum_{l\\leq j\\leq r} C_j \\cdot j +\\left (\\sum_{r+1\\leq j\\leq K} C_j\\right) \\cdot r \\\\\n\\end{aligned}\n\\]\nというように変形することができます。\n数列\n\\(A\\)\nに加えて数列\n\\(C=(C_1,C_2,\\dots,C_K)\\)\nを管理することを考えます。与えられる更新クエリおよび求値クエリを高速に処理するためには、\n\\(C\\)\nに対する以下の操作を高速に処理できればよいです：\nある\n\\(j\\)\nに対し、\n\\(C_j\\)\nの値を変更する。\nある\n\\(l, r\\)\nに対し、\n\\(\\displaystyle \\sum_{l\\leq j\\leq r}C_j\\)\nの値を計算する。\nある\n\\(l, r\\)\nに対し、\n\\(\\displaystyle \\sum_{l\\leq j\\leq r}C_j\\cdot j\\)\nの値を計算する。\nこれはセグメント木 (Segment Tree) と呼ばれるデータ構造によって実現することが可能です。詳細は下記の実装例および\nAC Library (Segtree) のドキュメント\nを参考にしてください。\n計算量は\n\\(O(N+Q\\log K)\\)\nです。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/segtree>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing ll = long long;\n\n/*\n  First element: Sum of C_j\n  Second element: Sum of C_j \\dot j\n*/\nusing S = pair<int, ll>;\n\nS op(const S &a, const S &b) {\n    return {a.first + b.first, a.second + b.second};\n}\n\nS e() {\n    return {0, 0};\n}\n\nconst int C = 500010;\nsegtree<S, op, e> st(C);\n\nvoid add(int x) {\n    auto now = st.get(x);\n    now.first += 1;\n    now.second += x;\n    st.set(x, now);\n}\n\nvoid del(int x) {\n    auto now = st.get(x);\n    now.first -= 1;\n    now.second -= x;\n    st.set(x, now);\n}\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, q;\n    cin >> n >> q;\n    vector<int> a(n);\n    for (int &i: a) {\n        cin >> i;\n        add(i);\n    }\n    while (q--) {\n        int t;\n        cin >> t;\n        if (t == 1) {\n            int x, y;\n            cin >> x >> y;\n            --x;\n            del(a[x]);\n            a[x] = y;\n            add(a[x]);\n        } else {\n            int l, r;\n            cin >> l >> r;\n            ll ans = 0;\n            if (l > r) {\n                ans = (ll) l * n;\n            } else {\n                ans += (ll) l * st.prod(0, l).first;\n                ans += st.prod(l, r + 1).second;\n                ans += (ll) r * st.prod(r + 1, C).first;\n            }\n            cout << ans << '\\n';\n        }\n    }\n}"
+      ],
+      "text_sha256": "de7d12bc2147d7b8e9bd8ccdccdc111835dae5fb95983b655a23ad254bbfdba3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc432/abc432_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

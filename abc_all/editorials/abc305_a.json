@@ -1,0 +1,22 @@
+{
+  "problem_id": "abc305_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc305/editorial/6533",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n計算がメインの解法と探索がメインの解法の \\(2\\) つを解説します。\nこれら以外の正しい解法も存在します。\n解法 1\n計算がメインの解法です。\n全体を \\(5\\) で割って考えると、「\\(x=\\dfrac N5\\) に最も近い整数を求める」ことになります。\nこれは \\(x\\) を小数部分で四捨五入することで求められます。\nよって、答えは「 \\(N\\) を \\(5\\) で割ったあと四捨五入して整数にし、それを \\(5\\) 倍したもの」です。\nこれをプログラムにすることで正解することができます。\n\\(\\dfrac N5\\) を浮動小数点数に変換する際に誤差が発生していますが、この問題の制約では正しい答えを出力することが証明できます。\nまた、次のように計算することで整数のまま（誤差を生じさせず）処理することもできます。\nこの式が正しいことの証明は省略します（ヒント：四捨五入 \\(=\\dfrac12\\) を足して切り捨て）。\n解法 2\n探索がメインの解法です。\n答えの候補は \\(0,5,10,\\ldots,100\\) の \\(21\\) 個です。\nこれらを全てチェックして、\\(N\\) との差がいちばん小さいものを出力することでこの問題を解くことができます。",
+      "codes": [
+        "N = int(input())\nprint(round(N / 5) * 5)",
+        "#include <iostream>\n#include <cmath>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    cout << int(round(N / 5.0)) * 5 << endl;\n    return 0;\n}",
+        "N = int(input())\nprint(((N + 2) // 5) * 5)",
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    cout << ((N + 2) / 5) * 5 << endl;\n    return 0;\n}",
+        "N = int(input())\n\nans = 100\nfor i in range(0, 101, 5):\n    if abs(N - ans) > abs(N - i):\n        ans = i\n\nprint(ans)",
+        "#include <iostream>\n#include <cmath>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\n    int ans = 100;\n\n    for (int i = 0; i <= 100; i += 5) {\n        if (abs(N - ans) > abs(N - i)) {\n            ans = i;\n        }\n    }\n\n    cout << ans << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "df92c10d4d3b52331e19211c714ea5bbe2788df2da4686265a790a27553afb74",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc305/abc305_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

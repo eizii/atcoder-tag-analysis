@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc339_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc339/editorial/9210",
+      "text": "\\(dp_{i,j}\\)\nを隣接する\n\\(2\\)\n項の差の絶対値が\n\\(D\\)\n以下かつ末尾が\n\\(j\\)\nであるような\n\\((A_1, A_2, \\dots, A_i)\\)\nの部分列の長さの最大値とします。\nこのとき、\n\\( dp_{i,j} = \\begin{cases} \\displaystyle\\max_{k \\in [A_i-D, A_i + D]} dp_{i - 1, k} + 1 & (j = A_i) \\\\ dp_{i-1,j} & (j \\neq A_i) \\end{cases}\\)\nが成立します。この式に従って dp 配列を計算すると、正しい答えは得られますが時間計算量および空間計算量が\n\\(\\Theta(N^2)\\)\nとなってしまいます。\nそこで、\n\\(dp_{i - 1,j}\\)\nと\n\\(dp_{i,j}\\)\nの値がほとんどの\n\\(j\\)\nで一致することを用いて高速化を行います。\n\\(dp_{i,j}\\)\nを 各\n\\((i,j)\\)\nについて陽に持つのではなく配列の使い回しをすることで、上の dp は\n\\(1\\)\n次元配列\n\\(dp\\)\nを持ち、\n\\(i = 1, 2, \\ldots, N\\)\nの順で\n\\(dp_j\\)\nを\n\\(\\displaystyle\\max_{k \\in [A_i-D, A_i + D]} dp_k + 1\\)\nで置き換えるというように書き換えられます。\nこれで空間計算量は\n\\(O(N)\\)\nとなりました。時間計算量は max を愚直に計算すると\n\\(\\Theta(N^2)\\)\nのままですが、区間 max 一点更新の segtree を用いることで\n\\(O(N \\log N)\\)\nとなります。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#include <atcoder/all>\n\nint op(int a, int b) { return max(a, b); }\nint e() { return 0; }\n\nconst int A = 500010;\n\nint main() {\n    int n, d;\n    cin >> n >> d;\n    vector<int> a(n);\n    for (int &e : a) cin >> e;\n    atcoder::segtree<int, op, e> seg(A);\n    for (int e : a) {\n        int l = max(0, e - d);\n        int r = min(A - 1, e + d);\n        int mx = seg.prod(l, r + 1);\n        seg.set(e, mx + 1);\n    }\n    cout << seg.all_prod() << '\\n';\n}"
+      ],
+      "text_sha256": "ca1aaeb3031594efa263234b92edc9770cf8126b472dca98cb914a6b7230cad2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc339/abc339_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

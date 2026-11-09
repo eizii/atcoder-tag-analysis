@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc278_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5231",
+      "text": "最初にすべての要素に \\(0\\) が代入されたと考えて、最後の代入からの差分を保持することを考えます。\n与えられるクエリは次のように言い換えられます。\nこれまでの差分をすべて消して \\(0\\) にし、最後に代入された値を \\(x\\) に変更する。\n\\(i\\) 番目の差分に \\(x\\) を加える。\n最後に代入された値に \\(i\\) 番目の差分を加え、出力する。\n1番目のクエリで差分の値が変わる場所の個数は、直前の代入以降の2番目のクエリの個数を超えません。\nよって、「差分が \\(0\\) でない箇所」を持っておくことで、全体で \\(O(N+Q)\\) 時間でこの問題を解くことができます。\nまた、長さ \\(N\\) の列に区間更新・一点取得を行うセグメント木があれば、それを直接用いることで \\(O(N+Q\\log N)\\) 時間でこの問題を解くことができます（\n実装例\n）。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <numeric>\n\nint main() {\n    using namespace std;\n    \n    unsigned N;\n    cin >> N;\n\n    // 列を base からの差分で管理\n    vector<unsigned long> A(N);\n    unsigned base{};\n\n    for (auto &&a : A)cin >> a;\n    A.emplace(begin(A));\n\n    // 差分が 0 でないかもしれない場所\n    // はじめは 1, ..., N すべて\n    vector<unsigned> added_index(N);\n    iota(begin(added_index), end(added_index), 1U);\n    \n    unsigned Q;\n    cin >> Q;\n\n    for (unsigned _{}; _ < Q; ++_) {\n        unsigned type;\n        cin >> type;\n        if (type == 1) {\n            // 差分が 0 でないところを消去\n            while (!empty(added_index)) {\n                A[added_index.back()] = 0;\n                added_index.pop_back();\n            }\n            cin >> base;\n        } else if (type == 2) {\n            // index 番目の差分に加える\n            unsigned index, value;\n            cin >> index >> value;\n            A[index] += value;\n            added_index.emplace_back(index);\n        } else {\n            // base に index 番目の差分を加える\n            unsigned index;\n            cin >> index;\n            cout << base + A[index] << endl;\n        }\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "04db08f929779f8d34a0039323163ba394d8705a9675dfc41755b612a5687130",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5235",
+      "text": "この問題は \\((\\)値\\(,\\) 最後に更新された時間\\()\\) の組を管理することでも解くことができます。\n列 \\(S=\\big((A _ i,t _ i)\\big) _ i\\) と組 \\(x=(x _ v,x _ t)\\) を管理します。\n列 \\(S\\) を \\(S=\\big((A _ i,0)\\big)   _ i\\) で、\\(x\\) を \\(x=(0,0)\\) で初期化しておきます。\n処理しているクエリの番号を \\(q\\) として、クエリごとに次のような処理をすればよいです。\n\\(x\\leftarrow(x _ q,q)\\) とする。\n\\(t _ {i _ q}\\lt x _ t\\) なら、\\(A _ {i _ q}\\leftarrow x _ q\\) とする。そうでなければ、\\(A _ {i _ q}\\leftarrow A _ {i _ q}+x _ q\\) とする。そののち、\\(t _ {i _ q}\\leftarrow q\\) とする。\n\\(t _ {i _ q}\\lt x _ t\\) なら、\\(x _ v\\) を出力する。そうでなければ、\\(A _ {i _ q}+x _ v\\) を出力する。\n時間計算量は \\(O(N+Q)\\) です。\n実装は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <utility>\n\nint main() {\n    using namespace std;\n\n    unsigned N;\n    cin >> N;\n\n    // 列を base からの差分と最終更新時刻を管理\n    vector<pair<unsigned long, unsigned>> A(N);\n    pair<unsigned, unsigned> base{};\n\n    for (auto &&[a, _] : A)cin >> a;\n    A.emplace(begin(A));\n\n    unsigned Q;\n    cin >> Q;\n\n    for (unsigned q{1}; q <= Q; ++q) {\n        unsigned type;\n        cin >> type;\n        if (type == 1) {\n            // base を読み込み、時刻を更新\n            cin >> base.first;\n            base.second = q;\n        } else if (type == 2) {\n            // index 番目の差分に加え、時刻を更新\n            unsigned index, value;\n            cin >> index >> value;\n            if (A[index].second < base.second)A[index].first = value;\n            else A[index].first += value;\n            A[index].second = q;\n        } else {\n            // base に index 番目の差分を加える\n            unsigned index;\n            cin >> index;\n            if (A[index].second < base.second)cout << base.first << endl;\n            else cout << base.first + A[index].first << endl;\n        }\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "5cd87bb2f933471c9f8391ea43d5d79455750a96aa269fbe9c9f879cd75cf4a2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5251",
+      "text": "C++の\nmap<int, int> M\nは、\ni\nが\nM\nに含まれないとき、\nM[i]==0\nとなります。これを利用すると簡潔に解くことができます。\nhttps://atcoder.jp/contests/abc278/editorial/5231\nと同様に、\nbase\nからの差分で列を管理することにします。\ni\n番目の差分を\nM[i]\nとします。 2のクエリで\ni\nが現れていないときは差分が0なので、\nM[i]==0\nとなることは都合が良いです。\nbase = 0\n、\nM[i] = A[i]\nと初期化します\n1のクエリでは、\nbase = x\nとし、\nM\nを初期化します\n2のクエリでは、\nM[i] += x\nとします\n3のクエリでは、\nbase + M[i]\nを出力します\nM.clear()\nの計算量はそのときの要素数を\n\\(n\\)\nとして\n\\(O(n)\\)\nであり、\nM\nに値が追加されうる2のクエリの個数は\n\\(N\\)\n未満なので、全ての\nM.clear()\nの計算量を合計しても\n\\(O(N)\\)\nです。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <map>\nusing namespace std;\n\nint main()\n{\n    int N;\n    cin>>N;\n    vector<int> A(N);\n    for (int &a: A)\n        cin>>a;\n\n    int base = 0;\n    map<int, long long> M;\n    for (int i=0; i<N; i++)\n        M[i] = A[i];\n\n    int Q;\n    cin>>Q;\n    for (int q=0; q<Q; q++)\n    {\n        int t;\n        cin>>t;\n        if (t==1)\n        {\n            int x;\n            cin>>x;\n            base = x;\n            M.clear();\n        }\n        if (t==2)\n        {\n            int i, x;\n            cin>>i>>x;\n            M[i-1] += x;\n        }\n        if (t==3)\n        {\n            int i;\n            cin>>i;\n            cout<<base+M[i-1]<<endl;\n        }\n    }\n}"
+      ],
+      "text_sha256": "f5f0c1276b64d83f6b91f020d891f20e1107bc829a4318ff5886892119df726f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

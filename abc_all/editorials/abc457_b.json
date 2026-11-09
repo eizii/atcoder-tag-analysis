@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc457_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc457/editorial/20081",
+      "text": "「可変長配列」の練習問題です。\nPython の\nlist\nや  C++ の\nvector\nは標準で「可変長配列」として動作し、メモリを動的に\n（必要な時に必要なだけ）確保することができます。\nもし\n\\(N \\times M\\)\nの（固定長）配列を用意しようとすると、たとえば\n\\(L = (10^5 , 1, 1, \\ldots , 1)\\)\nのようなパターンで、\n\\(10^5\\)\n行\n\\(10^5\\)\n列の二次元配列が必要となってしまいます。これは\nMLE\nとなるでしょう。\nしかし、可変長配列を用いて各数列を必要な長さだけ保持すれば、要素数の総和（\n\\(L_i\\)\nの総和）が制約から\n\\(2 \\times 10^5\\)\n以下であるため、メモリ内でデータを管理することができます。\n詳しくは実装例を参照してください。\nPython の実装例\nC++ の実装例",
+      "codes": [
+        "n = int(input())\na = []\nfor _ in range(n):\n    row = list(map(int, input().split()))\n    a.append(row[1:]) # 必要な長さ分だけ追加すればよい\n\nx, y = map(int, input().split())\nprint(a[x-1][y-1])",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n; cin >> n;\n\n    vector<vector<int>> a(n);\n    for (int i=0; i<n; i++) {\n        int l; cin >> l;\n        a[i].resize(l); // 必要な長さだけ確保しておく\n        for (int j=0; j<l; j++) {\n            cin >> a[i][j];\n        }\n    }\n    \n    int x, y; cin >> x >> y;\n    cout << a[x-1][y-1] << endl;\n    \n    return 0;\n}"
+      ],
+      "text_sha256": "a9c462ecdeeeb4d8c4ab80aa2121ed886ad0c36ff6cd2fa9c801137ff819059c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc457/abc457_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

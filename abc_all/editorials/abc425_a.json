@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc425_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc425/editorial/13990",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nこの問題は for 文を用いて解くことができます。具体的には、以下の手順に基づいて答えを求めることができます：\n変数\n\\(ans\\)\nを用意し、最初\n\\(0\\)\nで初期化する。\n\\(i=1,2,\\ldots,N\\)\nに対し\n\\(ans\\)\nに\n\\((-1)^i\\times i^3\\)\nを足す。\n\\(ans\\)\nに求める答えが格納されているので、\n\\(ans\\)\nの値を出力する。\n以上を適切に実装することでこの問題に正答することができます。\n実装例(Python3)\n実装例(C++)\nまた、\n\\(\\displaystyle \\sum_{i=1}^N (-1)^i\\times i^3=\\frac{(-1)^N(4N^3+6N^2-1)+1}8\\)\nが成り立つので、この式を元に計算することもできます。\n実装例(Python3)",
+      "codes": [
+        "N = int(input())\nans = 0\nfor i in range(1, N + 1):\n    if i % 2 == 0:\n        ans += i * i * i\n    else:\n        ans -= i * i * i\nprint(ans)",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint N;\n\tcin >> N;\n\tint ans = 0;\n\tfor (int i = 1; i <= N; i++) {\n\t\tif (i % 2 == 0) {\n\t\t\tans += i * i * i;\n\t\t} else {\n\t\t\tans -= i * i * i;\n\t\t}\n\t}\n\tcout << ans << endl;\n}",
+        "N = int(input())\nprint(((-1) ** N * (4 * N**3 + 6 * N**2 - 1) + 1) // 8)"
+      ],
+      "text_sha256": "59f7b834b4e3aa7cf62459b4381744a0f1219e1192665580ac64d41c32a4d783",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc425/abc425_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

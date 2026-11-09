@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc328_f",
+  "source_url": "https://atcoder.jp/contests/abc328/tasks/abc328_f?lang=ja",
+  "statement": "問題文\nQ\n個の整数の\n3\nつ組\n(a_1, b_1, d_1), (a_2, b_2, d_2), \\ldots, (a_Q, b_Q, d_Q)\nが与えられます。\n集合\n\\lbrace 1, 2, \\ldots, Q\\rbrace\nの部分集合\nS\nが\n良い集合\nであることを、\r\n下記の条件を満たす長さ\nN\nの整数列\n(X_1, X_2, \\ldots, X_N)\nが存在することと定めます。\nすべての\ni \\in S\nについて、\nX_{a_i} - X_{b_i} = d_i\nが成り立つ。\nS\nが空集合である状態から始め、\ni = 1, 2, \\ldots, Q\nの順に下記の操作を行います。\nもし\nS \\cup \\lbrace i \\rbrace\nが良い集合なら、\nS\nを\nS \\cup \\lbrace i \\rbrace\nで置き換える。\n最終的な\nS\nのすべての要素を\n昇順に\n出力してください。\n制約\n入力される値はすべて整数\n1 \\leq N, Q \\leq 2 \\times 10^5\n1 \\leq a_i, b_i \\leq N\n-10^9 \\leq d_i \\leq 10^9",
+  "html_sha256": "682981fe49175f56ab2190cdb63ed8c0a9a985bb4daab142c6173dadbe0bea9c",
+  "extractor": "section_headings_v1"
+}

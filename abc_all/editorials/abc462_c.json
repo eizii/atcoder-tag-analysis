@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc462_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc462/editorial/21406",
+      "text": "点\n\\(i\\)\nが条件を満たすことは\n\\(j\\neq i\\)\nに対し\n\\(X_j < X_i\\)\nならば\n\\(Y_j > Y_i\\)\nが成り立つことと同値です。\nしたがって、\n\\(N\\)\n個の点を\n\\(X\\)\nの昇順にソートした時に、全ての\n\\(1\\le j < i\\)\nに対し\n\\(Y_j > Y_i\\)\nが成り立つような\n\\(1\\le i\\le N\\)\nの個数を求めれば良いです。\nこれは以下のアルゴリズムで答えを求めることができます：\n\\((X_i,Y_i)\\)\nを\n\\(X_i\\)\nの昇順にソートする。\n\\(\\text{ans}=0,Y_{\\text{min}}=N+1\\)\nとする。それぞれ条件を満たす\n\\(i\\)\nの個数、\n\\(j<i\\)\nに対する\n\\(Y_j\\)\nの最小値を意味する。\n\\(i=1,2,\\ldots,N\\)\nに対して以下を行う：\n\\(Y_{\\text{min}} > Y_i\\)\nならば\n\\(\\text{ans}\\)\nに\n\\(1\\)\nを足す。\n\\(Y_{\\text{min}}\\)\nを\n\\(\\min(Y_{\\text{min}},Y_i)\\)\nに更新する。\n\\(\\text{ans}\\)\nが求める答えである。\n以上のアルゴリズムを適切に実装することでこの問題に正答することができます。計算量は\n\\(O(N\\log N)\\)\nです。\n実装例(Python3)",
+      "codes": [
+        "import sys\n\ninput = sys.stdin.readline\nn = int(input())\nxy = []\nfor i in range(n):\n    x, y = map(int, input().split())\n    xy.append((x - 1, y - 1))\nxy.sort()\nmin_val = n\nans = 0\nfor x, y in xy:\n    min_val = min(min_val, y)\n    ans += min_val == y\nprint(ans)"
+      ],
+      "text_sha256": "2a4f73c7d706d55c6f4db727181f8f6898f347d509c66e3ed5ae3c1d703e050d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc462/abc462_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc196_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc196/editorial/946",
+      "text": "\\(N < 10^{12}\\)\nという制約なので、\n\\(1\\)\n以上\n\\(N\\)\n以下の全ての整数について、繰り返しになっているか判定すると TLE になってしまいます。\nしかし、繰り返される整数の側は高々\n\\(6\\)\n桁であるため、繰り返される整数を全探索することができます。\n時間計算量は\n\\(O(\\sqrt N)\\)\nです。\nその他、繰り返される整数を二分探索すれば\n\\(O(\\log N)\\)\nで、二分探索せずとも\n\\(O(1)\\)\nで求めることができます。\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\nusing ll = long long;\n\nint main(){\n    ll N;\n    cin >> N;\n    for(ll i = 1; ; i++) if(stoll(to_string(i) + to_string(i)) > N){\n        cout << i - 1 << endl;\n        return 0;\n    }\n}",
+        "N = int(input())\nfor i in range(1, 1000001):\n    if int(str(i) * 2) > N:\n        print(i - 1)\n        exit()"
+      ],
+      "text_sha256": "69205fc3f6508ce14fb5a5a8a8148fe31049b82f0cc0cbc1fc7537f2b76d2201",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc196/abc196_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

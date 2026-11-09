@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc093_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc094/editorial.pdf",
+      "text": "B: Small and Large Integers\n\n 出力すべき範囲を適切に記述し、その範囲の整数をすべて出力すればよいです。A 以上B 以下の整数が\n\n2K 個未満の場合に注意しましょう。\n\n#include <stdio . h>\n\n#include <vector>\n\n#include <algorithm>\n\nusing namespace  std ;\n\n int main ()\n\n{\n\n          int  a , b ,  k ;\n\n         scanf (”%d%d%d” , &a , &b , &k ) ;\n\n                 f o r  ( int   i = a ;   i <= min(b ,  a + k −1 ) ;  i++)p r i n t f (”%d\\n” ,   i ) ;\n\n                 f o r  ( int   i = max(b −k + 1 ,  a + k ) ;   i <= b ;  i++)p r i n t f (”%d\\n” ,   i ) ;\n\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "1d74e9b794be43bf655f33fdfcf91cabaf2cc463947dbf0ce36c46d1a6fdd05e"
+    }
+  ],
+  "status": "available"
+}

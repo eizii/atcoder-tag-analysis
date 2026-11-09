@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc218_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc218/editorial/2605",
+      "text": "左下の頂点と右上の頂点を決めると長方形が一意に定まることを利用します。\nまず、左下の頂点と右上の頂点の組を全探索し、それぞれに対応する左上と右下の頂点が\n\\(N\\)\n個の点に含まれるかを判定します。ある点が\n\\(N\\)\n個の点に含まれているかの判定は、事前に点をソートしておくことで、二分探索を用いて\n\\(O(\\log N)\\)\nで求められます。事前に座標圧縮しておくと\n\\(O(1)\\)\nで求めることもできます。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n; cin >> n;\n    vector<pair<int,int>> v(n);\n    for(int i = 0; i < n; i++) cin >> v[i].first >> v[i].second;\n    sort(v.begin(), v.end());\n    int ans = 0;\n    for(int i = 0; i < n; i++) for(int j = 0; j < n; j++) if(v[i].first < v[j].first && v[i].second < v[j].second) {\n        if(binary_search(v.begin(), v.end(), make_pair(v[i].first, v[j].second)) && binary_search(v.begin(), v.end(), make_pair(v[j].first, v[i].second))) ans++;\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "1c6d05c28ef27468b0c07f1f84e72a6e943e0b12d016eb94c727de5be7d40e8a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc218/abc218_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc218/editorial/2636",
+      "text": "この問題は\n\\(O(N \\sqrt N)\\)\nでも解くことができます。\n長方形の\n\\(2\\)\nつの\n\\(y\\)\n座標を\n\\(y_1, y_2\\)\nと固定したとき、長方形の個数は、\n\\((x, y_1),(x,y_2)\\)\nの\n\\(2\\)\n点があるような\n\\(x\\)\nの個数を\n\\(K\\)\nとして、\n\\(\\dfrac{K(K-1)}{2}\\)\n個です。\nこれを踏まえると、\n\\(N\\)\n個の点を\n\\(x\\)\n座標でグループ分けし、同じグループから\n\\((y_1, y_2)\\)\nを選んでそれぞれの出現回数を数えることで、\n\\(O(N^2)\\)\nで解くことができます。\n回答例 (Python)\nまた、各グループの大きさが\n\\(\\sqrt N\\)\n以下であれば、上のアルゴリズムは\n\\(O(N\\sqrt N)\\)\nになります。そこで、大きさが\n\\(\\sqrt N\\)\nより大きいグループについては別の方法で数えます。\nグループを\n\\(G_x\\)\nと書くことにします。\n\\(|G_{x_1}| > \\sqrt N\\)\nであるような\n\\(x\\)\n座標\n\\(x_1\\)\nと、そうとは限らない\n\\(x_2\\)\nを固定すると、長方形の個数は、\n\\(K = |G_{x_1} \\cap G_{x_2}|\\)\nとして、\n\\(\\dfrac{K(K-1)}{2}\\)\n個です。\n\\(2\\)\nつのグループの積集合の大きさは\n\\(G_{x_1}\\)\n側で前計算をしておくことによって、\n\\(O(|G_{x_2}|)\\)\nで計算することができ、\n\\(x_2\\)\nを全探索したとき、\n\\(x_1\\)\nごとに\n\\(O(N)\\)\nで長方形の個数を計算できます。\n\\(|G_x| > \\sqrt N\\)\nであるようなグループの個数は\n\\(\\sqrt N\\)\n以下なので、全体で\n\\(O(N \\sqrt N)\\)\nで解くことができました。\n回答例 (C++)",
+      "codes": [],
+      "text_sha256": "d4a370f5f6a6ee596d49ed72c7d091bc27b569743eb9c38c7f62b8006b1f4402",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc218/abc218_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc218/editorial/14888",
+      "text": "\\(O(N\\sqrt{N})\\)\n時間の別解を紹介します。\n座標圧縮により\n\\(1 \\leq x_i \\leq N, 1 \\leq y_i \\leq N\\)\nとしてよいです。\n左側が\n\\(1, \\dots, N\\)\nの\n\\(N\\)\n頂点、右側が\n\\(\\overline{1}, \\dots, \\overline{N}\\)\nの\n\\(N\\)\n頂点からなる二部グラフを考え、座標平面上の点\n\\((x_i, y_i)\\)\nを、二部グラフ上での辺\n\\((x_i, \\overline{y_i})\\)\nに対応させます。すると、座標平面上での辺が軸に平行な長方形は、二部グラフ上での\n\\(C_4\\)\n（長さ\n\\(4\\)\nのサイクル）に対応します。よって、\nグラフ上の\n\\(C_4\\)\nを数え上げるアルゴリズム\nを用いて\n\\(O(N\\sqrt{N})\\)\n時間で解くことができます。",
+      "codes": [],
+      "text_sha256": "258702f572b7701d9ecd63baa8377237dd78f42799dcf4ce705a32b8d106daab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc218/abc218_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

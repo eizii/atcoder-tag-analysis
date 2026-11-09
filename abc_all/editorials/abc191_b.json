@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc191_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc191/editorial/613",
+      "text": "問題文の通りに実装することで正解を得られます。\n\\(X\\)\nと等しい要素はスキップしながら出力するという方針をとってもよいかもしれません。\n解答例 (C++)\n解答例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tint n = ri();\n\tint x = ri();\n\tint a[n];\n\tfor (auto &i : a) i = ri();\n\t\n\tbool beginning = true;\n\tfor (int i = 0; i < n; i++) {\n\t\tif (a[i] == x) continue;\n\t\tif (beginning) beginning = false;\n\t\telse printf(\" \");\n\t\tprintf(\"%d\", a[i]);\n\t}\n\tputs(\"\");\n\treturn 0;\n}",
+        "n, x = map(int, input().split())\na = list(map(int, input().split()))\nprint(\" \".join([str(i) for i in a if i != x]))"
+      ],
+      "text_sha256": "a8084c108c299fa754db8451eb296220e005989e93924b31831e9f2fe8179347",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc191/abc191_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

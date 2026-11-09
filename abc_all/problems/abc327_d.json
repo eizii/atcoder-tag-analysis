@@ -1,0 +1,72 @@
+{
+  "problem_id": "abc327_d",
+  "title": "Good Tuple Problem",
+  "contests": [
+    {
+      "contest_id": "abc327",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 709,
+  "raw_difficulty": 709,
+  "contest_id": "abc327",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc327/tasks/abc327_d",
+  "statement": "配点 : 400 点 問題文 N 以下の正整数からなる長さ M の数列の組 (S, T) = ((S_1, S_2, \\dots, S_M), (T_1, T_2, \\dots, T_M)) が 良い数列の組である とは、 (S, T) が次の条件を満たすことを言います。 0,1 からなる長さ N の数列 X = (X_1, X_2, \\dots, X_N) であって次の条件を満たすものが存在する。 i=1, 2, \\dots, M それぞれについて、 X_{S_i} \\neq X_{T_i} が成立する。 N 以下の正整数からなる長さ M の数列の組 (A, B) = ((A_1, A_2, \\dots, A_M), (B_1, B_2, \\dots, B_M)) が与えられます。 (A, B) が良い数列の組である場合は Yes を、そうでない場合は No を出力してください。 制約 1 \\leq N, M \\leq 2 \\times 10^5 1 \\leq A_i, B_i \\leq N 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M A_1 A_2 \\dots A_M B_1 B_2 \\dots B_M 出力 (A, B) が良い数列の組である場合は Yes を、そうでない場合は No を出力せよ。 入力例 1 3 2\r\n1 2\r\n2 3 出力例 1 Yes X=(0,1,0) とすると、 X は 0,1 からなる長さ N の数列で、 X_{A_1} \\neq X_{B_1} かつ X_{A_2} \\neq X_{B_2} を満たします。 よって、 (A,B) は良い数列の組としての条件を満たしています。 入力例 2 3 3\r\n1 2 3\r\n2 3 1 出力例 2 No 条件を満たすような数列 X は存在しないので、 (A, B) は良い数列の組ではありません。 入力例 3 10 1\r\n1\r\n1 出力例 3 No 入力例 4 7 8\r\n1 6 2 7 5 4 2 2\r\n3 2 7 2 1 2 3 3 出力例 4 Yes",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 以下の正整数からなる長さ M の数列の組 (S, T) = ((S_1, S_2, \\dots, S_M), (T_1, T_2, \\dots, T_M)) が 良い数列の組である とは、 (S, T) が次の条件を満たすことを言います。 0,1 からなる長さ N の数列 X = (X_1, X_2, \\dots, X_N) であって次の条件を満たすものが存在する。 i=1, 2, \\dots, M それぞれについて、 X_{S_i} \\neq X_{T_i} が成立する。 N 以下の正整数からなる長さ M の数列の組 (A, B) = ((A_1, A_2, \\dots, A_M), (B_1, B_2, \\dots, B_M)) が与えられます。 (A, B) が良い数列の組である場合は Yes を、そうでない場合は No を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N, M \\leq 2 \\times 10^5 1 \\leq A_i, B_i \\leq N 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M A_1 A_2 \\dots A_M B_1 B_2 \\dots B_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 (A, B) が良い数列の組である場合は Yes を、そうでない場合は No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 2\r\n1 2\r\n2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes X=(0,1,0) とすると、 X は 0,1 からなる長さ N の数列で、 X_{A_1} \\neq X_{B_1} かつ X_{A_2} \\neq X_{B_2} を満たします。 よって、 (A,B) は良い数列の組としての条件を満たしています。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 3\r\n1 2 3\r\n2 3 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No 条件を満たすような数列 X は存在しないので、 (A, B) は良い数列の組ではありません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10 1\r\n1\r\n1"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 No"
+    },
+    {
+      "heading": "入力例 4",
+      "text": "入力例 4 7 8\r\n1 6 2 7 5 4 2 2\r\n3 2 7 2 1 2 3 3"
+    },
+    {
+      "heading": "出力例 4",
+      "text": "出力例 4 Yes"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc327/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:58.294753+00:00",
+  "statement_sha256": "1b4cb8d839001c47e8fc1b064ca72bc13ee5a621d6f884ceccfc5771d9332ae5",
+  "editorials": []
+}

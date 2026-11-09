@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc099_d",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc099/editorial.pdf",
+      "text": "D:  Good Grid\n\n   (i + j)%3 = 0, 1, 2 の場合の色の組み合わせを全列挙すると、最大で30 × 29 × 28 = 24360 通\nりです。\n これら全ての組み合わせにおいて、全てのマスを確認すると時間内に正解を得ることができま\nせん。\n そこで、(i + j)%3 = 0, 1, 2 の場合それぞれにおいて、どの色で最初に塗られているマスがいく\nつあるかをあらかじめ計算しておくと、この部分がO(C) となり、時間内に正解を得ることがで\nきます。\n\n#include <cstdio >\n#define rep(i,n) for(int i=0;i<n;i++)\n\nint N,C,X;\nint D[30][39];\nint t[3][30];\n\nint main ()\n{\n         scanf (\"%d%d\",&N,&C);\n        rep(i,C)rep(j,C)scanf (\"%d\",&D[i][j]);\n        rep(i,N)rep(j,N)scanf (\"%d\",&X),t[(i+j)%3][X -1]++;\n         int res =1<<30;\n        rep(i,C)rep(j,C)if(i!=j)rep(k,C)if(i!=k&&j!=k)\n          {\n                  int tt=0;\n                rep(l,C)tt+=D[l][i]*t[0][l];\n                rep(l,C)tt+=D[l][j]*t[1][l];\n                rep(l,C)tt+=D[l][k]*t[2][l];\n                 if(tt <res)res=tt;\n\n\n                                         2\n\f\n          }\n        printf (\"%d\\n\",res);\n}\n\n\n\n\n\n                                         3",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "6af943a4d8af457238f2f9af63ed104acac1408dd82b879e5a6b143b975506a7"
+    }
+  ],
+  "status": "available"
+}

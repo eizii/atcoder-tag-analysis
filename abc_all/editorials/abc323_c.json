@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc323_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc323/editorial/7355",
+      "text": "まず、各プレイヤーの現在の総合得点を計算しましょう。これは入力を読み込み、for 文で各問題を解いたかを確認することで可能です。\n次に、条件を満たすために必要な問題数を各プレイヤーについて求めましょう。\nここで、以下が成立します。\nプレイヤー\n\\(i\\)\nが解く問題数を最小化するために解くべき問題は、まだ解いてない問題のうち点数が高い順に何個かである。\nこれは、上の条件を満たさない選び方の場合、ある選んでない問題が存在して、選んだ問題の一つより点数が高いため、選ぶかを入れ替えることによって総合得点が増加することから従います。\nよって、各プレイヤーについて解いてない問題を点数の降順に並び替え、他の全プレイヤーの総合得点よりも高くなるまで解いてない問題を順に解くという方法を実装すればよいです。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define rep(i, x) for(int i = 0; i < (x); i++)\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tvector<int> a(m);\n\trep(i, m) cin >> a[i];\n\tvector<string> s(n);\n\trep(i, n) cin >> s[i];\n\tvector<int> now_sc(n);\n\trep(i, n) now_sc[i] = i + 1;\n\trep(i, n) rep(j, m) if(s[i][j] == 'o') now_sc[i] += a[j];\n\tint mx = *max_element(now_sc.begin(), now_sc.end());\n\trep(i, n) {\n\t\tvector<int> nokori;\n\t\trep(j, m) if(s[i][j] == 'x') nokori.push_back(a[j]);\n\t\tsort(nokori.rbegin(), nokori.rend());\n\t\tint ans = 0;\n\t\twhile(now_sc[i] < mx) {\n\t\t\tnow_sc[i] += nokori[ans++];\n\t\t}\n\t\tcout << ans << endl;\n\t}\n}"
+      ],
+      "text_sha256": "ddfb410f7da169586b6c2f65201fb6cb36c02b7d0bab2d49d9f86889f4ff88a0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc323/abc323_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,378 @@
+             ARC084/ABC077 解説
+
+
+                          DEGwer
+
+                               2017/11/04
+
+
+
+               For International Readers: English editorial starts on page 5.
+
+
+A: Accepted...?
+
+ 改行を無視して6 文字を読み込み、1 文字目と6 文字目、2 文字目と5 文字目、3 文字目と4
+文字目がそれぞれ等しいかどうかを調べればよいです。
+
+ 以下の実装では、1 文字目から3 文字目までを配列a に、4 文字目から6 文字目までを配列b
+に、それぞれ読み込んでいます。
+
+#include <stdio . h>
+
+ int main ()
+{
+
+         char  a [ 1 0 ] , b [ 1 0 ] ;
+
+         scanf (”%s%s ” , a , b ) ;
+                  i f  ( a [ 0 ] == b [ 2 ] && a [ 1 ] == b [ 1 ] && a [ 2 ] == b [ 0 ] ) p r i n t f (”YES\n ” ) ;
+           e l s e  p r i n t f (”NO\n ” ) ;
+}
+
+
+
+
+
+                                          1
+
+B: Diﬀerent Distribution
+
+ 答えの候補を小さい順に試していきます。i2 がn を初めて超えたときの、(i −1)2 が答えです。
+
+#include <stdio . h>
+
+ int main ()
+{
+
+          int num;
+
+         scanf (”%d” , &num) ;
+
+                 f o r  ( int   i = 1 ; ;  i++)
+          {
+                                    i f  ( i ∗i > num)
+                    {
+                          p r i n t f (”%d\n” ,  ( i −1)∗( i −1 ) ) ;
+
+                          break ;
+                    }
+
+          }
+
+}
+
+
+
+C: Snuke Festival
+
+  Ai < Bj < Ck なる組(i, j, k) の個数を数える問題です。j を固定すれば、求める個数はAi < Bj
+なるi の個数と、Bj < Ck なるk の個数の積となります。
+ よって、全てのj に対し、上述のi, k の個数を数えて掛け合わせ、足し合わせればよいです。
+ では、i の個数やk の個数はどのように求めればいいでしょうか？　愚直に配列をすべて見る
+と、O(N 2) となり間に合いません。
+ 配列A, C をあらかじめソートしておきます。すると、i やk の個数は、二分探索を用いて求めるこ
+とができます。C++ の場合、標準ライブラリに用意されているlower bound 関数やupper bound
+関数を用いるのが良いでしょう。
+
+ 時間計算量はO(NlogN) となり、間に合います。
+
+
+D: Small Multiple
+
+ 全ての正整数は、1 から始めて、以下の2 つの操作を繰り返すことで作ることができます。
+
+   • 今の数に1 を足す。このとき、各桁の和は1 増える。(1 の位が9 のときはこの限りではあ
+   りませんが、この問題を解くにあたっては考慮しなくていいことをあとで示します)
+
+   • 今の数を10 倍する。このとき、各桁の和は変わらない。
+
+ さて、全ての正整数を頂点とし、以上の操作の「今の数」から「新しい数」に辺をはったグラフ
+
+を考えます。求めるべきは、1 からK の倍数のうちのいずれかへの、このグラフ上での最短経路
+長に1 を足したものです。
+
+
+
+
+                                          2
+
+ このままでは頂点数は無限ですが、辺のはられ方を考えれば、各正整数に対応する頂点たちは
+
+modK で同一視できることが分かります。よって、各頂点をmodK で同一視したK 頂点のグラ
+フ上で、1 から0 への最短路を求めればよく、これは01BFS を用いることでO(K) 時間で求める
+ことができます。1 の位が9 の整数に1 を足す遷移は、最短路のアルゴリズムを思い出せば行き
+先の頂点がすでに訪れられていることがわかるので、特別に扱う必要はありません。
+
+ なお、01BFS とは、deque (両端キュー) を用意し、コスト0 の辺の遷移はdeque の先頭に、1
+の辺の遷移はdeque の末尾に要素を追加することによる、幅優先探索のアルゴリズムです。
+
+
+E: Finite Encyclopedia of Integer Sequences
+
+ 数列に使える整数の種類数K が偶数の場合、最初の整数がK/2 以下である数列とK/2 + 1 以
+上である数列の個数は等しいので、答えはK/2 の後にK がN −1 個続いた数列になります。以
+下K が奇数の場合を考えます。
+  (K +1)/2 がN 個続いた数列(これをB とおく) の前にある数列の個数と、後ろにある数列の個
+数の差はいくつでしょうか？　ある数列X がB の前にあるとき、X の各要素Xi をK + 1 −Xi
+で置き換えれば、X がB の接頭辞でない限りは、B の後ろにきます。逆に、ある数列X がB の
+後ろにあるとき、同様に置き換えれば、X がB の接頭辞でない限りは、B の前にきます。
+ よって、B の接頭辞以外の数列についてはB の前にある数列と後ろにある数列の間で一対一対
+応が成り立つため、B の前後の数列の個数の差は、B の接頭辞の個数、すなわちN −1 になりま
+す。すなわち、求める数列は、B の⌊N−12 ⌋個前にある数列になります。
+ さて、これはどのように求めればいいでしょうか？　1 個前の数列を得る操作は、
+
+   • 末尾が1 の場合、取り除く
+
+   • 末尾が1 でない場合、その整数を1 減らし、さらにN 文字になるまで末尾にK を付け加
+   える
+
+ という操作です。これはならしO(1) 時間で実装できるので、この問題をO(N) 時間で解くこと
+ができました。
+
+
+F: XorShift
+
+ 与えられた2 進数たちを、F2 上の多項式として見ます。すなわち、2 進数akak−1 . . . a1a0 を、
+多項式akxk + ak−1xk−1 + . . . + a1x + a0 と同一視し、さらにその係数はmod2 で見ることにし
+ます。
+
+ 操作を多項式の言葉に翻訳します。数を2 倍することは多項式をx 倍することに、数同士のxor
+を取ることは多項式同士の和を取ることに対応します。
+
+ 多項式を2 つとってきます。次数の大きいほうをP 、小さいほうをQ として、その次数の差
+をd とします。Q をd 回x 倍し、P と足し合わせることで、P より次数の低い多項式を作ること
+ができます。こうしてできた多項式を新しいP として(適宜P, Q を入れ替えて) 同様の操作を続
+けるアルゴリズムは、ユークリッドの互除法にほかなりません。すなわち、2 つの多項式のGCD
+を黒板に書くことができます。
+
+ これを繰り返せば、最初に黒板に書かれた多項式たちすべてのGCD である多項式P を黒板に
+書くことができます。また、全ての多項式はP を因子に持ち、操作によってその性質が崩される
+
+
+                                         3
+
+ことはないため、黒板に書ける多項式はP の倍数のみです。さらに、x 倍をする操作と和を取る
+操作を適切に繰り返せば、P の任意の多項式倍を黒板に書くことができます。よって、黒板に書け
+る多項式はP の倍多項式全てです。
+ この多項式たちの中で、2 進数として見てX 以下のものの個数を数えましょう。P の次数をd
+とします。P の倍多項式のd 次以上の係数がすべて定まれば、残りの係数は一意に定まります。d
+次以上の部分がX のd 次以上の部分より(2 進数としてみて) 小さいようなものに対しては、ちょ
+うど1 個のP の倍多項式が定まります。等しいものに対しては、そのd −1 次以下の係数を実際
+に求め(これは高次の係数から順に決めて行くことで求められます)、X より小さいかどうかを調
+べればよいです。
+ 時間計算量は、GCD は1 回あたりO(d2) 時間で求められ(ただし、d は与えられる整数の桁
+数)、O(Nd2) となります。また、bitset などを用いてxor を並列的に計算することで、(m = 32
+または64 として) O(Nd2/m) 時間で計算することも可能です。
+
+
+
+
+
+                                         4
+
+            ARC084/ABC077 Editorial
+
+
+                          DEGwer
+
+                               2017/11/04
+
+
+
+A: Accepted...?
+
+
+#include <stdio . h>
+
+ int main ()
+{
+
+         char  a [ 1 0 ] , b [ 1 0 ] ;
+
+         scanf (”%s%s ” , a , b ) ;
+                  i f  ( a [ 0 ] == b [ 2 ] && a [ 1 ] == b [ 1 ] && a [ 2 ] == b [ 0 ] ) p r i n t f (”YES\n ” ) ;
+           e l s e  p r i n t f (”NO\n ” ) ;
+}
+
+
+
+
+
+                                          1
+
+B: Diﬀerent Distribution
+
+
+#include <stdio . h>
+
+ int main ()
+{
+
+          int num;
+
+         scanf (”%d” , &num) ;
+
+           fo r  ( int   i = 1 ; ;  i++)
+          {
+                                    i f  ( i ∗i > num)
+                    {
+                          p r i n t f (”%d\n” ,  ( i −1)∗( i −1 ) ) ;
+
+                          break ;
+                    }
+
+          }
+
+}
+
+
+
+
+
+                                          2
+
+C: Snuke Festival
+
+ We want to compute the number of triplets (i, j, k) such that Ai < Bj < Ck.  If we ﬁx j, the
+number of such triplets is the product of the number of i such that Ai < Bj and the number of
+k such that Bj < Ck. Therefore, for each j, we compute the number of i, k mentioned above,
+and we can get the answer.
+
+ How can we compute the number of such i (or k) for all j? Straightforward solution works in
+O(N 2) and too slow.
+
+  Let’s sort A, C in advance. Then, the number of such i (or k) can be computed using a binary
+
+search.
+
+  This solution works in O(NlogN) time.
+
+
+
+
+
+                                         3
+
+D: Small Multiple
+
+  All positive integers can be obtained by performing the following two types of operations to 1
+
+zero or more times:
+
+   • Add 1. By this operation, the sum of digits increases by one (unless the last digit is 9, but
+
+      this is not important).
+
+   • Multiply the current number by 10. The sum of digits remains the same.
+
+
+  Construct a graph with inﬁnite number of vertices. Each vertex corresponds to a positive
+
+integer. In this graph,
+
+   • For each x, we add an edge from x to x + 1 with cost 1.
+
+   • For each x, we add an edge from x to 10x with cost 0.
+
+
+  The answer is (the shortest distance from 1 to one of multiples of K in this graph) plus one.
+ We can compree this graph to K vertices. When x ≡y (mod K), assume that x and y are
+
+the same vertex. Then, in this graph, the answer is the shortest distance from 1 to 0, plus one.
+
+  This can be done in O(K) by 01-bfs (a variant of Dijkstra’s algorithm, when all costs are 0 or
+
+1, you can use a deque instead of priority queue).
+
+  Note: Isn’t the trouble with ’9’ important? Suppose that the algorithm above ﬁnds an invalid
+
+solution that contains a digit ”10” at position i. However, due to the periodicity of powers of
+tens, (when K is comprime to 10) we can ﬁnd another j such that 10i and 10j are the same in
+
+modulo K, so we can move one digit from i to j. Even when K is not coprime to 10, we can
+
+make it periodic by attaching suﬃcient number of zeroes at the end.
+
+
+
+
+
+                                         4
+
+E: Finite Encyclopedia of Integer Sequences
+
+   If K is even, exactly half of sequences starts with an integer K/2 or less. Thus, the answer is
+K/2 followed by N −1 occurrences of K.
+  Suppose that K is odd. Let B be a sequence that contains N occurrences of (K + 1)/2 (this
+
+is very close to the middle). What is the diﬀerence between the number of sequences before B
+
+and after B?
+  For a sequence X, let f(X) be a sequence such that Xi in X is replaced with K + 1 −Xi.
+This is almost an bijection from a sequence after B to a sequence before B. The only exception
+happens for preﬁxes of B. Therefore, the diﬀerence is N −1 (the number of non-trivial preﬁxes
+
+of B), and B is the ceil(X/2) + floor(N/2)-th sequence.
+ We start with B, and repeat the following operation ⌊N−12  ⌋times:
+
+   • If the current sequence ends with 1, remove it.
+
+   • Otherwise, decrement the last element by 1, and while the sequence contains less than N
+
+      elements, attach K at the end.
+
+  This operation takes O(1) on average, so the amortized complexity of this solution is O(N).
+
+
+
+
+
+                                         5
+
+F: XorShift
+
+  Let’s interpret the given binary numbers as polynomials on F2. That is, a binary number
+akak−1 . . . a1a0 corresponds to a polynomial akxk+ak−1xk−1+. . .+a1x+a0, here the coeﬃcients
+are computed modulo 2.
+
+  You can perform the following operations for the polynomials:
+
+   • Multiply a polynomial by x. (corresponds to ”double”)
+
+   • Compute the sum of two polynomials. (corresponds to ”xor”)
+
+  Let P, Q be two given polynomials, and suppose that degP > degQ. By computing P ′ =
+P + (Q ∗xdegP −degQ), you can get a polynomial whose degree is smaller than P. Then, you can
+repeat the same operation for two polynomials P ′ and Q (when necessary, you swap P and Q).
+This is similar to Euclid’s algorithm, and you will eventually get gcd(P, Q).
+  Let G be the GCD of all given polynomials. As we see above, we can write G on the blackboard.
+
+Then, by using the two types of operations properly, you can write all multiples of G (H is a
+multiple of G if H can be written as H = H′G using some polynomial H′). On the other hand,
+
+all polynomials on the blackboard are always divisible by G.
+
+  Therefore, we want to compute the number of polynomials P such that:
+
+   • P is a multiple of G.
+
+   • P is less than or equal to X (as a binary number).
+
+
+  Let d = degG and D = degX.  If we know all coeﬃcients of a polynomial except for the last
+
+(least signiﬁcant) d coeﬃcients, we can uniquely determine the remaining d coeﬃcients to make
+it a multiple of G. Therefore, if the ﬁrst D −d + 1 coeﬃcients of P are smaller than that of G
+(as a binary number), we can uniquely determine P.  If the ﬁrst D −d + 1 coeﬃcients are the
+
+same, we compute the remaining d coeﬃcients and compare it with X.
+   It takes O(d2) time per one gcd computation (where d is the number of digits), thus the
+complexity of this solution is O(Nd2). This is fast enough. You can also use bitsets to achieve
+O(Nd2/m) (m = 32or64).
+
+
+
+
+
+                                         6

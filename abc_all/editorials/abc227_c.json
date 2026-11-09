@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc227_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc227/editorial/2906",
+      "text": "\\(A,B,C\\)\nの順に値を決めて全探索することを考えます。\n\\(A\\leq B \\leq C\\)\nの条件から、\n\\(A\\)\nが取りうる値の範囲は\n\\(1\\leq A\\leq \\sqrt[3]{N}\\)\nです。また同様に、\n\\(A\\)\nを決めたとき\n\\(B\\)\nが取りうる値の範囲は\n\\(A\\leq B \\leq \\sqrt{\\frac{N}{A}}\\)\nであり、\n\\(A,B\\)\nを決めたとき\n\\(C\\)\nが取りうる値の範囲は\n\\(B \\leq C \\leq \\frac{N}{AB}\\)\nです。\nこれを愚直に行う次のような擬似コードにより、条件を満たす組を全て求めて数えることができます。\n擬似コード1(\nTLE\n)\nこの疑似コードにおいて、最も内側にある\n\\(C\\)\nに関するループが実行される回数は明らかに\n\\(\\left\\lfloor\\frac{N}{AB}\\right\\rfloor-B+1\\)\n回です。したがって、次のように書き換えることができます。\n擬似コード2\n実はこの擬似コード2は\n\\(O(N^{2/3})\\)\nで動作し、ACを得ることができます。\nなお、実装時には誤差に注意してください。\n実装例(C)\n実装例(Python)\n以下では計算量が\n\\(O(N^{2/3})\\)\nになることの説明を行います。\n適当な仮定の下、擬似コード2の計算量のオーダーは、4行目の実行回数、すなわちループ回数に一致します。またループ回数は明らかに\n\\(\\displaystyle \\sum _{A=1}^{\\sqrt[3]{N}} \\left(\\sqrt{\\frac{N}{A}}-A+1 \\right)\\)\nです。\n総和を取る対象を\n\\(A\\)\nの関数とみなすと単調減少であることから\n\\(\\displaystyle \\sum _{A=2}^{\\sqrt[3]{N}} \\left(\\sqrt{\\frac{N}{A}}-A+1 \\right) \\leq \\int_{1}^{\\sqrt[3]{N}}\\left(\\sqrt{\\frac{N}{A}}-A+1 \\right)dA\\)\nとなります。（左辺のAの下限が2であることに注意）\n（調和級数のオーダーを積分で見積もるときと同様の変形です。図を描いて確認してみましょう）\n右辺の積分を計算すると\n\\(O(N^{2/3})\\)\nになることがわかります。したがって\n\\(\\displaystyle \\sum _{A=1}^{\\sqrt[3]{N}} \\left(\\sqrt{\\frac{N}{A}}-A+1 \\right) \\leq \\left(\\sqrt{\\frac{N}{1}}-1+1 \\right)+O(N^{2/3})=O(N^{2/3})\\)\nとなり、示せました。",
+      "codes": [
+        "ans=0\nfor A=1 to pow(N,1/3)\n\tfor B=A to pow(N/A,1/2)\n\t\tfor C=B to N/(A*B)\n\t\t\tans+=1\nprint(ans)",
+        "ans=0\nfor A=1 to pow(N,1/3)\n\tfor B=A to pow(N/A,1/2)\n\t\tans+=floor(N/(A*B))-B+1\nprint(ans)"
+      ],
+      "text_sha256": "b32e93f3b4247a6f626e7160b88459759b274beaf3123d635a2cce690fd87d12",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc227/abc227_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc227/editorial/2927",
+      "text": "(ユーザー解説の気持ちで書いています)\n\\(C\\)\nについての境界条件を正確に詰めたくない場合は、以下のように実装するという手もあります。\n\\(A,B\\)\n全探索は本解説と同じですが、\n\\(C\\)\nの上限を探索する際に\n\\(\\max (B,\\lfloor \\frac{N}{A*B} \\rfloor -5) \\)\nから始める(おおよその上限のアタリを付けて細かなところを実際に探索していく方針です)ことで一番内側のループの実行時間を定数時間とすることができます。",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long n,cnt=0;\n  cin >> n;\n  for(long long a=1;a*a*a<=n;a++){\n    for(long long b=a;a*b*b<=n;b++){\n      long long uc;\n      for(long long c=max(b,(n/(a*b))-5);;c++){\n        if(a*b*c<=n){uc=c;}else{break;}\n      }\n      //cerr << a << ' ' << b << ' ' << uc << '\\n';\n      cnt+=(uc-b+1);\n    }\n  }\n  cout << cnt << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "95fda8abc9ac26bf9d5e1bd68c6caec163a1b623013c698d62c0d9a574acebe1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc227/abc227_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

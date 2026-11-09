@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc096_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc096/editorial.pdf",
+      "text": "B – Maximum Sum\n\n   𝐴, 𝐵, 𝐶 は正の数なので, 「一番大きい数を 2 倍することを 𝐾 回繰り返す」 という方法が、最終的\n\nな 𝐴+ 𝐵+ 𝐶 の値を最大化する方法です. 証明は以下のようになります.\n\n\n   - 𝐾= 1 の時は, 数 𝑝 を 2 倍すると数の合計が 𝑝 増えるので明らか\n\n   - 𝐾= 2 の時は, 一番大きな数を 2 倍してもこの数が 3 つの数の中で一番大きいのに変わりは\n\n    ないから, 𝐾= 1 の時の状態に持っていける. 残り 2 回のときの増分を最大化しながら 残り 1\n\n    回の時の増分も最大化できるので, 自明にこの方法が最適.\n\n   - 𝐾≥3 のときも同様に, 帰納的に示せる.\n\n\n  また, よく考えてみると, この方法では操作で選ぶのはすべて 1 つの整数に限られます. これは\n\n 𝐴, 𝐵, 𝐶 の中で最大の整数なので, 𝐴+ 𝐵+ 𝐶+ max(𝐴, 𝐵, 𝐶) × (2𝐾−1) が答えとなります.\n\n\nソースコード (C++)：https://beta.atcoder.jp/contests/abc096/submissions/2456285\n\nソースコード (Java)：https://beta.atcoder.jp/contests/abc096/submissions/2457147",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "1e5afcaff05a5a4b13e0be46a93be2a06aee0775ca1170cd4caa2856c16f822f"
+    }
+  ],
+  "status": "available"
+}

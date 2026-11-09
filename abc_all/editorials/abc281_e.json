@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc281_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc281/editorial/5368",
+      "text": "各\n\\(i\\)\nごとに\n\\(A_i, \\dots, A_{i+M-1}\\)\nを実際にソートしていては、実行時間制限に間に合いません。そこで、\n\\(i\\)\nを\n\\(1\\)\n増やしても、\n\\(A_i, \\dots, A_{i+M-1}\\)\nを昇順にソートしたときの先頭\n\\(K\\)\n項はさほど変わらないことに注目してみます。\n\\(A_i, \\dots, A_{i+M-1}\\)\nのうち小さい方から\n\\(K\\)\n個の値からなる多重集合を\n\\(L\\)\n、それ以外の値からなる多重集合を\n\\(R\\)\nとおきます。答えは\n\\(L\\)\nに属する値の総和なので、\n\\(i\\)\nを\n\\(1\\)\n増やしたときに高速に\n\\(L, R\\)\nを更新することができればよいです。\n\\(L, R\\)\nの定義は次の条件が全て成り立つことと同値です :\n\\(|L| = K\\)\n\\(L \\cup R = \\{A_i, \\dots, A_{i+M-1}\\}\\)\n\\(\\max L \\leq \\min R\\)\n\\(i\\)\nを\n\\(1\\)\n増やしたとき、\n\\(A_i\\)\nが取り除かれ、\n\\(A_{i+M}\\)\nが追加されます。一旦\n\\(|L| = K\\)\nの条件を忘れて、他の二つが保たれるように処理を行うと、\n\\(A_i\\)\nが\n\\(L, R\\)\nのどちらに属するか判定し、その集合から\n\\(A_i\\)\nを取り除く。\n\\(A_{i+M} \\lt \\max L\\)\nなら\n\\(L\\)\nに、そうでないなら\n\\(R\\)\nに\n\\(A_{i+M}\\)\nを追加する。\nとなります。これらの処理の後、\n\\(|L| = K\\)\nは保証されませんが、\n\\(K - 1 \\leq |L| \\leq K+1\\)\nが成り立っているので、\n\\(L\\)\nから\n\\(R\\)\n、\n\\(R\\)\nから\n\\(L\\)\nに高々\n\\(1\\)\n個の要素を移動することにより\n\\(|L| = K\\)\nを成り立たせることができます。\n以上の操作は、順序集合を管理することのできるデータ構造を用いて各\n\\(O(\\log N)\\)\nで実現できます。\n\\(i = 1\\)\nの場合の\n\\(L, R\\)\nを求めたあと、順番に\n\\(i\\)\nの値を増やしていくことにより、元の問題を\n\\(O(N \\log N)\\)\nで解くことができました。",
+      "codes": [],
+      "text_sha256": "74d2f7d10a75d7ac27faf1da25390b06e6856b70f658b2e79b1761a59236e3e9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc281/abc281_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc281/editorial/5386",
+      "text": "類題として\nARC 074 B\nがあります。\nさて、これらの問題では値を求めたい区間の形が決まっていますが、発展的なクエリ問題として以下のようなものを考えます。\n長さ\n\\(n\\)\nの整数列\n\\(a = (a_0, \\dots, a_{n-1})\\)\nと\n\\(q\\)\n個のクエリ\n\\(([l_i, r_i), k_i)\\)\nが与えられます。各クエリに対して、\n\\((a_{l_i}, \\dots, a_{r_i-1})\\)\nを昇順に並べたときの先頭\n\\(k\\)\n個の和を答えてください。\n\\(\\gdef\\angled#1{\\langle#1\\rangle}\\)\nこれは、\n\\(\\langle O(n\\log(n)), O(\\log(n))\\rangle\\)\nや\n\\(\\angled{O(n\\log(\\max a)), O(\\log(\\max a)}\\)\nで解くことができます（\n\\(\\angled{f(n), g(n)}\\)\nは前処理\n\\(f(n)\\)\n時間、クエリあたり\n\\(g(n)\\)\n時間を意味します）。\nwavelet matrix の\n\\(k\\)\n-最小値クエリに似た処理を行えばよいです。本来の wavelet matrix に加えて、wavelet matrix の段数分の累積和を同時に管理することで実現可能です。\n関連しそうな解説\nwavelet matrix のクエリは「点\n\\((i, a_i)\\)\n(\n\\(0\\le i<n\\)\n) が与えられる。\n\\(L\\le i<R\\)\nかつ\n\\(D\\le a_i<U\\)\nを満たす点の個数は？」「\n\\(L\\le i<R\\)\nを満たす点のうち下から\n\\(k\\)\n個目の y 座標は？」などの形式に言い換えられますが、前述のデータ構造のクエリは「点\n\\((i, a_i)\\)\n(\n\\(0\\le i<n\\)\n) が与えられる。各点には重み\n\\(w_i\\)\nがついている。\n\\(L\\le i < R\\)\nかつ\n\\(D\\le a_i<U\\)\nを満たす点の重みの総和は？」「\n\\(L\\le i<R\\)\nを満たす点のうち下から\n\\(k\\)\n個の重みの総和は？」などの形式に言い換えられます。\nこの\n\\(a_i\\)\nを wavelet matrix で管理し、重み\n\\(w_i\\)\n（を適切に並べ替えたもの）の累積和を別途管理します。\n\\(a_i\\)\nは整数ですが、\n\\(w_i\\)\nは整数ではなくてもよいです。\n適切に並べ替える必要があるので、モノイドの性質を持つだけでは無理ですが、可換群（累積和ではなく disjoint sparse table などを使うと逆元を仮定しなくてよくなるので、可換モノイド）であれば扱えます。",
+      "codes": [],
+      "text_sha256": "302cfcc32ed1bf18e6dc50bc2872267beb41055b82a4fe91c4632f375ee46aa1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc281/abc281_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc281/editorial/5387",
+      "text": "\\(j\\in\\{i, i+1, \\dots, i+M-1\\}\\)\nを、\n\\(A_j\\)\nの値によって小さい方から\n\\(K\\)\n個選んだものを\n\\(L_i\\)\n、残りを\n\\(R_i = \\{i, i+1, \\dots, i+M-1\\}\\setminus L_i\\)\nとします。\nすなわち、\n\\(L_i \\cup R_i = \\{i, i+1, \\dots, i+M-1\\}\\)\n\\(|L_i| = K\\)\n\\(\\max\\, \\{A_j \\mid j\\in L_i\\} \\le \\min\\, \\{A_j \\mid j\\in R_i\\}\\)\nとします。\n\\(\\max\\, \\{A_j \\mid j \\in L_i\\} = \\min\\, \\{A_j\\mid j\\in R_i\\}\\)\nとなるときの分割の仕方は任意ですが、実装上は\n\\(j\\)\nの値が小さい方を\n\\(L_i\\)\nに入れるのが楽でしょう。\nさて、4 本のセグ木を用います。\nsum0\n:\n\\(j\\in L_i\\)\nのとき\n\\(\\text{\\texttt{sum0}}[j] = 1\\)\n、そうでないとき\n\\(\\text{\\texttt{sum0}}[j] = 0\\)\n。区間和を管理する。\nsum1\n:\n\\(j\\in L_i\\)\nのとき\n\\(\\text{\\texttt{sum1}}[j] = A_i\\)\n、そうでないとき\n\\(\\text{\\texttt{sum1}}[j] = 0\\)\n。区間和を管理する。\nused\n:\n\\(j\\in L_i\\)\nのとき\n\\(\\text{\\texttt{used}}[j] = (A_i, i)\\)\n、そうでないとき\n\\(\\text{\\texttt{used}}[j] = (-\\infty, i)\\)\n。区間最大値を管理する。\nunused\n:\n\\(j\\in  R_i\\)\nのとき\n\\(\\text{\\texttt{unused}}[j] = (A_i, i)\\)\n、そうでないとき\n\\(\\text{\\texttt{unused}}[j] = (\\infty, i)\\)\n。区間最小値を管理する。\n\\((L_i, R_i)\\)\nから\n\\((L_{i+1}, R_{i+1})\\)\nを求める際には、\n\\(i\\notin L_{i+1}\\)\nなので、\n\\(\\text{\\texttt{sum0}}[i] \\gets 0\\)\nなどとします。\n\\(i+M \\in R_{i+1}\\)\nなので、\n\\(\\text{\\texttt{sum1}}[i+M] \\gets 1\\)\nなどとします。\nまた、\nused\nにおける最大値を求めることで、どれを\n\\(R_{i+1}\\)\nに移すべきか（あるいは\nunused\nの最小値によって、どれを\n\\(L_{i+1}\\)\nに移すべきか）がわかります。\n\\(M = K\\)\nのケースは別途処理すると楽になるかもしれません。\n提出 #37192377\n上記のようにセグ木を用いて優先度つきキューを実装すると、添字などに関連するクエリも処理できるようになります。覚えておくと「普通のヒープだと○○のせいでうまくいかないな」となったときに対処しやすくなるかもしれません。\n関連：\nhttps://rsk0315.hatenablog.com/entry/2022/01/13/233015",
+      "codes": [],
+      "text_sha256": "31b8ee308b1f8c9f274a4a86cc383bc6dd949088b4242f6f331d3036a2b0ce93",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc281/abc281_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc436_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc436/editorial/14832",
+      "text": "繰り返しおよび条件分岐を用いて、問題文に書かれていることをそのまま丁寧に実装すればよいです。二次元配列の作り方、配列外参照などに注意してください。\n詳細は下記の実装例 (C++, Python) を参考にしてください。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector a(n, vector<int>(n));\n    int r = 0, c = n / 2, x = 1;\n    a[r][c] = x;\n    while (x < n * n) {\n        int nr = (r - 1 + n) % n, nc = (c + 1) % n;\n        if (a[nr][nc] != 0) {\n            nr = (r + 1) % n;\n            nc = c;\n        }\n        a[nr][nc] = ++x;\n        r = nr, c = nc;\n    }\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < n; j++) {\n            cout << a[i][j] << (j == n - 1 ? '\\n' : ' ');\n        }\n    }\n}",
+        "n = int(input())\na = [[0] * n for _ in range(n)]\n\nr = 0\nc = n // 2\nx = 1\n\na[r][c] = x\n\nwhile x < n * n:\n    nr = (r - 1 + n) % n\n    nc = (c + 1) % n\n\n    if a[nr][nc] != 0:\n        nr = (r + 1) % n\n        nc = c\n    \n    x += 1\n    a[nr][nc] = x\n    \n    r = nr\n    c = nc\n\nfor i in range(n):\n    print(\" \".join(str(j) for j in a[i]))"
+      ],
+      "text_sha256": "b15ff591cdf8a88096cefbfb30529f8ad1e9b6ccf36fe75f875c3031fe1e3574",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc436/abc436_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

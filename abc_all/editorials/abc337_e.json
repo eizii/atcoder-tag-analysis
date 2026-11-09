@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc337_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc337/editorial/9140",
+      "text": "呼ぶ人数が\n\\(M\\)\n人のとき、翌日に各友人がお腹を壊したかの情報\n\\(S\\)\nが取りえるのは高々\n\\(2^M\\)\n通りなので、\n\\(N\\)\n通り考えられる腐ったジュースの番号を\n\\(S\\)\nの情報から一意に識別するには\n\\(2^M \\geq N\\)\n、つまり、\n\\(M \\geq \\left\\lceil \\log_2 N \\right\\rceil\\)\nが必要です。\n反対に、呼ぶ人数は\n\\(b \\coloneqq \\left\\lceil \\log_2 N\\right\\rceil\\)\n人で十分です。実際に、以下に述べる手順によって\n\\(b\\)\n人の友人を利用して腐ったジュースを特定できます。\n便宜上、ジュースの番号と友人の番号を\n\\(0\\)\nから起算し、それぞれ\n\\(0, 1, 2, \\ldots, N-1\\)\nと\n\\(0, 1, 2, \\ldots, b-1\\)\nとします。\nこのとき、\n\\(2^b-1 \\geq N-1\\)\nなので、すべてのジュースの番号は\n\\(b\\)\n桁の二進数で表現できます。\nその各桁を最下桁から順に\n\\(0, 1, 2, \\ldots, b-1\\)\nビット目と番号づけます。\nそして、下記の通りに各友人に飲ませるジュースの組み合わせを決定します。\n友人\n\\(i = 0, 1, 2, \\ldots, b-1\\)\nとジュース\n\\(j = 0, 1, 2, \\ldots, N-1\\)\nの各組\n\\((i, j)\\)\nについて、\n\\(i\\)\n番目の友人には、ジュースの番号\n\\(j\\)\nの二進数表現における\n\\(i\\)\nビット目が立っているとき、かつ、そのときに限り\n\\(j\\)\n番目のジュースを飲ませる。\nこのとき、腐ったジュースの番号\n\\(X\\)\nの二進数表現の\n\\(0 ,1, 2, \\ldots, b-1\\)\n桁目と、文字列\n\\(S\\)\nの\n\\(0, 1, 2, \\ldots, b-1\\)\n文字目（先頭の文字を\n\\(0\\)\n文字目とする）が一致し、\n\\(X\\)\nを\n\\(S\\)\nから一意に特定できます。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main(void){\n  int n;\n  cin >> n;\n  \n  int b = 0;\n  while((1<<b) < n) b++;\n  cout << b << endl;\n  \n  for(int i = 0; i < b; i++){\n    vector<int> avec;\n    for(int j = 0; j < n; j++) if(j & (1<<i)) avec.push_back(j+1);\n    cout << avec.size() << \" \";\n    for(auto a : avec) cout << a << \" \";\n    cout << endl;\n  }\n  \n  string s;\n  cin >> s;\n  \n  int ans = 0;\n  for(int i = 0; i < b; i++) if(s[i] == '1') ans |= 1<<i;\n  cout << ans+1 << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "1c7f2be626455a327cf464fb798d60b99143a16bd540d938c2f1f93b20e6dc25",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc337/abc337_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

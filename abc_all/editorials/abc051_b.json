@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc051_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc051/editorial.pdf",
+      "text": "B:  Sum of Three Integers\n\n  まず、変数X, Y, Z の組を全探索して、X + Y + Z = S となる組を数え上げることを考えます。各変数を0 か\n らK まで回す3 重ループだと、時間計算量はO(K3) となります。ただし、K の上限は2500 であるため、このま\n までは間に合いません。\n\n  そこで、X + Y + Z = S に注目します。変数X とY が決まると、変数Z の値はS −X −Y に決まります。こ\n れを利用すると、変数X, Y の組を全探索して、変数Z の値が0 以上かつK 以下であるような組を数えると、答\n えが求まります。この解法の時間計算量は、O(K2) となるため間に合います。\n  C++のコード例\n\n\n\n1 int main(void){\n2     int K,S;\n\n3     cin >> K >> S;\n\n\n4\n\n\n\n                                                  1\n\f\n 5     int ans = 0;\n\n\n 6\n\n 7     for(int x = 0; x <= K; ++x){\n\n 8         for(int y = 0; y <= K; ++y){\n\n 9             int z = S - x - y;\n\n10             if(0 <= z and z <= K){\n\n11                 ans = ans + 1;\n\n12             }\n\n13         }\n\n14     }\n\n\n15\n\n16     cout << ans << endl;\n\n17     return 0;\n\n18 }",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "dcfd2607e5448060aa254dda74b2b25cc56874f0de9b74100d1e2c93c8da8035"
+    }
+  ],
+  "status": "available"
+}

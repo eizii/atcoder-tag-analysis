@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc284_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5466",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nfor 文を用いて、問題文で指示された通りの操作をすれば良いです。実装の方法は、以下の実装例をご参照ください。\nC++\nPython\nなお Python では、配列の添字に\n\\(-i\\)\nを指定すると後ろから\n\\(i\\)\n番目の要素にアクセスできる機能があり、本実装例ではその機能を用いています。",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector <string> s(n);\n    for (int i = 0; i < n; i++) cin >> s[i];\n    for (int i = n - 1; i >= 0; i--) cout << s[i] << endl;\n}",
+        "n = int(input())\n\ns = []\n\nfor i in range(n):\n    si = input()\n    s.append(si)\n  \nfor i in range(n):\n    print(s[-(i + 1)])"
+      ],
+      "text_sha256": "8d684dd6995c5f11114070ee769fe0bc7e90933ee64edcd648720b87146e92ea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5513",
+      "text": "https://twitter.com/kyopro_friends/status/1611950973215465472\n（ツイート中に「ABC285」とありますが、ABC284の誤りです）",
+      "codes": [],
+      "text_sha256": "d6a193d4f5c4d762057ec3c18a8d494ec0fccd9272b0454820b0506934e6e038",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

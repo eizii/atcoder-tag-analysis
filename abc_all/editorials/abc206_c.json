@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc206_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc206/editorial/2096",
+      "text": "今回の問題は、\nABC200-C\nの類題です。解けなかった方にとって、この問題が手掛かりになるかもしれません。\n\\(A_i \\neq A_j\\)\nとなるような整数組をどう数えればよいでしょうか？\nこの問題では、\n\\(N \\le 3 \\times 10^5\\)\nなので、愚直にループを回して数えていくようでは間に合いません。なので、効率的な解法を考える必要があります。\n方針は色々と考えられますが、そのうちの\n\\(2\\)\nつを紹介します。\n方針1\n整数組\n\\((i,j)\\)\n(\n\\(1 \\le i < j \\le N\\)\n) は\n\\(\\frac{N \\times (N-1)}{2}\\)\n個存在しますが、それらから\n\\(A_i=A_j\\)\nとなるものを引き去ることを考えます。\nまず、数列をソートする。\nその後、整数が連続して何個存在するか数える。\n例えば、ソート後の数列\n\\(A'=(2,2,3,4,4,4)\\)\nなら、\n\\(2\\)\nが\n\\(2\\)\nつ、\n\\(3\\)\nが\n\\(1\\)\nつ、\n\\(4\\)\nが\n\\(3\\)\nつ存在します。\n最後に、全ての数列\n\\(A'\\)\nに含まれる整数\n\\(p\\)\nについて、\n\\(p\\)\nが\n\\(q\\)\n個含まれるなら、答えから\n\\(\\frac{q \\times (q-1)}{2}\\)\nを減算する。  これは、\n\\(A_i=A_j=p\\)\nとなる整数組\n\\((i,j)\\)\n(\n\\(i < j\\)\n) の個数である。\nこの式は、\n\\(q=0,1\\)\nの場合でも成立することに注意してください。\n例えば、\n\\(A'=(2,2,3,4,4,4)\\)\nなら、\n\\(\\frac{6 \\times 5}{2} - \\frac{2 \\times 1}{2} - \\frac{3 \\times 2}{2} = 11\\)\nとなります。\n方針2\nまず、全ての\n\\(i\\)\n(\n\\(1 \\le i \\le N\\)\n) について、以下の値\n\\(X\\)\nを足し合わせる。\n数列\n\\(A\\)\nに\n\\(A_i\\)\nと等しい項が\n\\(k\\)\n個含まれるならば、\n\\(X=N-k\\)\nその後、足し合わせた値を\n\\(2\\)\nで割って、出力する。\nそのままの値では、条件を満たす全ての整数組\n\\((i,j)\\)\nについて、同じ組を丁度\n\\(2\\)\n回数えることになってしまいます。\n例えば、\n\\(A=(2,2,3,4,4,4)\\)\nなら、\n\\(\\{(6-2)+(6-2)+(6-1)+(6-3)+(6-3)+(6-3)\\} / 2 = 11\\)\nとなります。\n「数列\n\\(A\\)\nに\n\\(A_i\\)\nと等しい項がいくつ含まれるか？」の部分では、方針1のように数列をソートして求めても、(C++における) map などのデータ構造を使ってバケットソートの要領で数えてもよいです。(今回の問題では、\n\\(A_i \\le 10^9\\)\nという制約であることに注意する必要があります。)\n計算量は、用いるデータ構造にも依存しますが、\n\\(O(N)\\)\nや\n\\(O(N \\log N)\\)\nとなり、この問題を解くのには十分高速です。\nなお、今回の問題では、答えの最大値が\n\\(32\\)\nbit 整数型に収まらないことに注意してください。(\n\\(64\\)\nbit 符号付き整数型には収まります。)\nC++による実装例(res1に方針1による解、res2に方針2による解を格納します):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long n;\n  cin >> n;\n  vector<int> a(n);\n  for(auto &nx : a){cin >> nx;}\n  long long res1=(n*(n-1)/2),res2=0;\n  \n  map<int,long long> mp;\n  for(int i=0;i<n;i++){mp[a[i]]++;}\n  for(int i=0;i<n;i++){res2+=(n-mp[a[i]]);}\n  res2/=2;\n  \n  sort(a.begin(),a.end());\n  a.push_back(-1);\n  long long cnt=1;\n  for(int i=0;i<n;i++){\n    if(a[i]!=a[i+1]){\n      res1-=((cnt*(cnt-1))/2);\n      cnt=1;\n    }\n    else{cnt++;}\n  }\n  assert(res1==res2);\n  cout << res1 << '\\n';\n  //cout << res2 << '\\n';\n}"
+      ],
+      "text_sha256": "7a5eb65f2dbf9923bd85945384eb0943de83f47c6bfe7ef1d9f1b3a9d6f948c0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc206/abc206_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

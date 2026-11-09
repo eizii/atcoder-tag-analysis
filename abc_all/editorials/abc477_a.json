@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc477_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc477/editorial/26404",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは practice contest の問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。 また、プログラミングコンテストの問題に慣れていない方は、 AtCoder Beginners Selection の問題をいくつか解いてみることをおすすめします。 信号機の色として現れるのは B Y R の三種類のみです。よって if 文 を持ちいて、 \\(3\\) 通りの場合わけをすれば良いです。 C++ では string と char は区別します。 string は \" で囲い、 char は ' で囲います。どちらで受け取りおよび判定しても良いですが、揃えるように気をつけてください。 実装例 (C++) 実装例 (PyPy)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  char c; cin >> c;\n  if (c == 'B'){\n      cout << 'Y' << endl;\n  }else if (c == 'Y'){\n      cout << 'R' << endl;\n  }else{\n      cout << 'B' << endl;\n  }\n}\n",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  string c; cin >> c;\n  if (c == \"B\"){\n      cout << 'Y' << endl;\n  }else if (c == \"Y\"){\n      cout << 'R' << endl;\n  }else{\n      cout << 'B' << endl;\n  }\n}\n",
+        "c = input()\n\nif c == \"B\":\n    print(\"Y\")\nelif c == \"Y\":\n    print(\"R\")\nelse:\n    print(\"B\")\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "c05e99f3e641501c908a9c04a0ac98922872b3b079aa4c84cec992145febd8cd"
+    }
+  ],
+  "status": "available"
+}

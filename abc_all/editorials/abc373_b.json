@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc373_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc373/editorial/11043",
+      "text": "文字\n\\(c\\)\nに対して、\n\\(c\\)\nに対応するキーが配置されている座標を\n\\(X_c\\)\nとします。\nこの時、求めるべき値は\n\\(|X_A-X_B|+|X_B-X_C|+\\ldots+|X_Y-X_Z|\\)\nです。\n実際に\n\\(S\\)\nから\n\\(X\\)\nを求めることができれば、for文を用いて求めるべき値を計算できます。\n一般的なプログラミング言語では配列は非負整数を用いて要素を指定し、文字では要素を指定できません。\nこの問題の実装の際は、\n\\(A\\)\nに対応する数を\n\\(0\\)\n、\n\\(B\\)\nに対応する数を\n\\(1\\)\n、\n\\(\\ldots\\)\n\\(Z\\)\nに対応する数を\n\\(25\\)\nとすることで先ほど示した\n\\(X\\)\nを配列として管理することができます。\n他にも、文字型をキーとした連想配列などを用いることもできます。\n実装例(C++):\n実装例(Python3):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    vector<int> x(26);\n    for (int i = 0; i < 26; ++i)\n        x[s[i] - 'A'] = i;\n    int ans = 0;\n    for (int i = 0; i < 25; ++i)\n        ans += abs(x[i] - x[i + 1]);\n    cout << ans << endl;\n}",
+        "s = input()\nx = [0] * 26\nfor i in range(26):\n    x[ord(s[i]) - ord(\"A\")] = i\nans = 0\nfor i in range(25):\n    ans += abs(x[i] - x[i + 1])\nprint(ans)"
+      ],
+      "text_sha256": "55ded47a995d4b61479ec55d3389937a5e8b2b8b5471176488fa77f167255103",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc373/abc373_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc466_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc466/editorial/22608",
+      "text": "以下では、2つの解法を紹介します。 解法1: 操作を後ろからさかのぼる解法 \\(i\\) 回目の操作で置かれたコマが最後まで残っている必要十分条件は　は、 \\(i+1\\) 回目以降の操作において、 \\(R_i\\) 行目にも \\(C_i\\) 列目にも一度もコマが置かれていないことです。 これは、操作を逆順、すなわち \\(M\\) 回目から \\(1\\) 回目の順に戻るように見ると、それまでに見た操作の中で \\(R_i\\) 行目または \\(C_i\\) 列目にコマを置く操作が存在するならばその操作で置かれたコマは最後まで残らず、そうでないならば残るということになります。これより、各行・各列においてその行（列）にコマを置く操作が行われたかを管理しつつ、操作を \\(M\\) 回目から \\(1\\) 回目まで順に確認することによって、最後に残るコマを列挙、特にその個数を求めることができます。時間計算量は \\(O(M)\\) であり、十分高速です。 解法2: 各行、各列に置かれたコマを管理する方法 操作の途中の任意のタイミングにおいて、各行・各列には高々 \\(1\\) つのコマしか置かれていないことに注意すると、各行・各列ごとに、その行にコマが置かれていない、あるいは置かれているならばどの操作によるコマが置かれているかを配列によって管理することができます。また、このことから \\(1\\) 回の操作によって取り除かれるコマは高々 \\(2\\) つであり、それぞれの操作のシミュレーションを定数時間で行うことができます。 この場合も計算量は \\(O(M)\\) ないし実装方針によっては \\(O(N+M)\\) となります。いずれの場合でも十分高速です。 C++ による実装例（解法1）: C++ による実装例（解法2）:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define N 300000\n#define M 300000\n\nint main(void){\n\tint n,m,ans=0;\n\tint r[M],c[M];\n\tbool rused[N+1]={},cused[N+1]={};\n\n\tcin>>n>>m;\n\tfor(int i=0;i<m;i++){\n\t\tcin>>r[i]>>c[i];\n\t}\n\tfor(int i=m-1;i>=0;i--){\n\t\tif((!rused[r[i]])&&(!cused[c[i]]))ans++;\n\t\trused[r[i]]=true;\n\t\tcused[c[i]]=true;\n\t}\n\tcout<<ans<<endl;\n\treturn 0;\n}\n",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define N 300000\n#define M 300000\n\nint main(void){\n\tint n,m,idx,ans=0;\n\tint r[M+1],c[M+1];\n\tint rplace[N+1]={},cplace[N+1]={};\n\n\tcin>>n>>m;\n\tfor(int i=1;i<=m;i++){\n\t\tcin>>r[i]>>c[i];\n\t\tif(rplace[r[i]]>0){\n\t\t\tidx=rplace[r[i]];\n\t\t\trplace[r[idx]]=0;\n\t\t\tcplace[c[idx]]=0;\n\t\t\tans--;\n\t\t}\n\t\tif(cplace[c[i]]>0){\n\t\t\tidx=cplace[c[i]];\n\t\t\trplace[r[idx]]=0;\n\t\t\tcplace[c[idx]]=0;\n\t\t\tans--;\n\t\t}\n\t\trplace[r[i]]=i;\n\t\tcplace[c[i]]=i;\n\t\tans++;\n\t}\n\t\n\tcout<<ans<<endl;\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "2ebd4c4a30cb346034f95a99c20e49dbc520b571996cda7f61671f01b867cbd6"
+    }
+  ],
+  "status": "available"
+}

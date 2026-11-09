@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc267_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc267/editorial/4728",
+      "text": "この問題は、C 問題と違いあり得る部分列が\n\\(\\binom{N}{M}\\)\n個あるため、全ての部分列を愚直に試す解法は到底通りそうにありません。\nなので、動的計画法を行います。定義は以下の通りです。\n・\n\\(\\mathrm{dp}[i][j]:=\\)\n\\(A_i\\)\nまでのうち、すでに\n\\(j\\)\n個の要素を\n\\(B\\)\nの要素として選んだときの\n\\(\\displaystyle \\sum_{k=1}^{j} k \\times B_k\\)\nの最大値\n遷移は、以下のように行われます。\n\\(\\mathrm{dp}[i][j]=\\max(\\mathrm{dp}[i-1][j],\\mathrm{dp}[i-1][j-1]+j \\times A_i)\\)\n\\(\\mathrm{dp}[i-1][j]\\)\nは\n\\(A_i\\)\nを\n\\(B\\)\nの要素として選ばなかった場合であり、\n\\(\\mathrm{dp}[i-1][j-1]+j \\times A_i\\)\nは\n\\(A_i\\)\nを\n\\(B\\)\nの\n\\(j\\)\n番目の要素として選んだ場合となります。\n答えは\n\\(\\mathrm{dp}[N][M]\\)\nとなります。計算量は\n\\(\\mathrm{O}(NM)\\)\nです。\nこの問題についても、解が 32 bit 型整数の範囲内に収まらないことと解が負になり得ること、\n\\(i > j\\)\nの場合の\n\\(\\mathrm{dp}[i][j]\\)\nの扱いに注意してください。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nlong long dp[2001][2001];\nint main(){\n  int n,m;\n  cin>>n>>m;\n  vector<long long> a(n);\n  for(int i=0;i<n;i++) cin>>a[i];\n  dp[0][0]=0;\n  dp[0][1]=-1000000000000000000ll;\n  for(int i=1;i<=n;i++){\n    for(int j=0;j<=n;j++){\n      if(j==0) dp[i][0]=0;\n      else if(j>i) dp[i][j]=-1000000000000000000ll;\n      else dp[i][j]=max(dp[i-1][j],dp[i-1][j-1]+a[i-1]*j);\n    }\n  }\n  cout<<dp[n][m]<<endl;\n}"
+      ],
+      "text_sha256": "4a109839675c9e6345a6f173fbc793132dfdf2cc8deda74f307fe9d374bba2a1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc267/abc267_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

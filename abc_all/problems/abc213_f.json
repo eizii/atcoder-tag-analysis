@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc213_f",
+  "title": "Common Prefixes",
+  "contests": [
+    {
+      "contest_id": "abc213",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 2215,
+  "raw_difficulty": 2215,
+  "contest_id": "abc213",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc213/tasks/abc213_f",
+  "statement": "配点 : 500 点 問題文 2 つの文字列 X,Y に対して、その 類似度 f(X,Y) を、 X と Y を先頭から見て一致している文字数とします。 例えば abc と axbc の類似度は 1 、 aaa と aaaa の類似度は 3 です。 長さ N の文字列 S が与えられます。 S の i 文字目以降からなる文字列を S_i とします。 k=1,\\ldots,N のそれぞれについて、 f(S_k,S_1)+f(S_k,S_2)+\\ldots+f(S_k,S_N) を求めてください。 制約 1 \\leq N \\leq 10^6 S は英小文字のみからなる長さ N の文字列 入力 入力は以下の形式で標準入力から与えられる。 N S 出力 N 行出力せよ。 i 行目には k=i の問題の答えを出力せよ。 入力例 1 3\r\nabb 出力例 1 3\r\n3\r\n2 S_1,S_2,S_3 はそれぞれ abb , bb , b です。 k=1 のとき f(S_1,S_1)+f(S_1,S_2)+f(S_1,S_3)=3+0+0=3 k=2 のとき f(S_2,S_1)+f(S_2,S_2)+f(S_2,S_3)=0+2+1=3 k=3 のとき f(S_3,S_1)+f(S_3,S_2)+f(S_3,S_3)=0+1+1=2 入力例 2 11\r\nmississippi 出力例 2 11\r\n16\r\n14\r\n12\r\n13\r\n11\r\n9\r\n7\r\n4\r\n3\r\n4",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 2 つの文字列 X,Y に対して、その 類似度 f(X,Y) を、 X と Y を先頭から見て一致している文字数とします。 例えば abc と axbc の類似度は 1 、 aaa と aaaa の類似度は 3 です。 長さ N の文字列 S が与えられます。 S の i 文字目以降からなる文字列を S_i とします。 k=1,\\ldots,N のそれぞれについて、 f(S_k,S_1)+f(S_k,S_2)+\\ldots+f(S_k,S_N) を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 10^6 S は英小文字のみからなる長さ N の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N 行出力せよ。 i 行目には k=i の問題の答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\nabb"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3\r\n3\r\n2 S_1,S_2,S_3 はそれぞれ abb , bb , b です。 k=1 のとき f(S_1,S_1)+f(S_1,S_2)+f(S_1,S_3)=3+0+0=3 k=2 のとき f(S_2,S_1)+f(S_2,S_2)+f(S_2,S_3)=0+2+1=3 k=3 のとき f(S_3,S_1)+f(S_3,S_2)+f(S_3,S_3)=0+1+1=2"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 11\r\nmississippi"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 11\r\n16\r\n14\r\n12\r\n13\r\n11\r\n9\r\n7\r\n4\r\n3\r\n4"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc213/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:36.158741+00:00",
+  "statement_sha256": "89e43b0d87c89084a29cbeff9557b640acce30e7450aaee3ff5327842441eeb2",
+  "editorials": []
+}

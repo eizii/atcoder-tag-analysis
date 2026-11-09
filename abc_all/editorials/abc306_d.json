@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc306_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc306/editorial/6606",
+      "text": "動的計画法でこの問題を解くことを考えます。すると、どのような情報を保持するべきでしょうか？\n結論から言うと、以下の DP テーブルを作成することでこの問題を解くことができます。\n\\(dp[\\)\n料理\n\\(i\\)\n\\(][\\)\n高橋くんの状態\n\\(j\\)\n\\(]\\)\n料理\n\\(i\\)\nまでの料理を食べるか下げてもらうか選択した時に、高橋くんの状態が\n\\(j\\)\n(\n\\(0\\)\n… 高橋くんがお腹を壊していない、\n\\(1\\)\n… 高橋くんがお腹を壊している ) である時の、食べた料理の美味しさの総和の最大値\nこの問題が解けなかった方は、上で 「どのような DP テーブルを作れば解けるか」を示したので、「 DP テーブルの遷移はどうするべきか」を考えて実装してみてください。動的計画法の良い練習になります。\n実装例(C++):",
+      "codes": [
+        "// 実装例では料理を 0-indexed で取り扱っていることに注意\n  // DP テーブルの初期化\n  for(long long i=0;i<=n;i++){\n    dp[i][0]=-4e18; // dp[i][0] = -∞\n    dp[i][1]=-4e18; // dp[i][1] = -∞\n  }\n  dp[0][0]=0; // 最初、高橋くんはお腹を壊していない\n\n  for(long long i=0;i<n;i++){\n    // i 番目の料理を食べる場合の遷移\n    if(x[i]==0){\n      dp[i+1][0]=max(dp[i][0],max(dp[i][0],dp[i][1])+y[i]);\n    }\n    else{\n      dp[i+1][1]=max(dp[i][1],dp[i][0]+y[i]);\n    }\n    // i 番目の料理を食べない場合の遷移\n    dp[i+1][0]=max(dp[i+1][0],dp[i][0]);\n    dp[i+1][1]=max(dp[i+1][1],dp[i][1]);\n  }",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nlong long dp[300005][2];\n\nint main(){\n  long long n;\n  cin >> n;\n  vector<long long> x(n),y(n);\n  for(long long i=0;i<n;i++){\n    cin >> x[i] >> y[i];\n  }\n\n  for(long long i=0;i<=n;i++){\n    dp[i][0]=-4e18;\n    dp[i][1]=-4e18;\n  }\n  dp[0][0]=0;\n\n  for(long long i=0;i<n;i++){\n    if(x[i]==0){\n      dp[i+1][0]=max(dp[i][0],max(dp[i][0],dp[i][1])+y[i]);\n    }\n    else{\n      dp[i+1][1]=max(dp[i][1],dp[i][0]+y[i]);\n    }\n\n    dp[i+1][0]=max(dp[i+1][0],dp[i][0]);\n    dp[i+1][1]=max(dp[i+1][1],dp[i][1]);\n  }\n  cout << max(dp[n][0],dp[n][1]) << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "8b4268a878c9a19b000473bb121afabf9562a059bf713ea612530907da952ce1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc306/abc306_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

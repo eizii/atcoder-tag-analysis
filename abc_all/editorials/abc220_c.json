@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc220_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc220/editorial/2683",
+      "text": "求める答えを\n\\(K\\)\nと書きます。\n\\(sumA= \\sum_{i=1}^{N} A_i\\)\nと書きます。\n\\(\\{B_1 , \\dots ,  B_K\\}\\)\nは、\n\\(A\\)\n全体をいくつか (\n\\(p\\)\n個とします ) 連結したあと、\n\\(A\\)\nの先頭のいくつかの項 (\n\\(q\\)\n項とします ) を連結した形をしています。\nただし、\n\\(p \\geq 0, 1 \\leq q \\leq N\\)\nとします。\n\\(p,q\\)\nを求めましょう。\n\\(p\\)\nは、\n\\(  p={ \\lfloor \\frac{X}{sumA} \\rfloor}\\)\nで求まります。\n\\(q\\)\nは、愚直に\n\\(A_i\\)\nを足していくことで計算量\n\\(O(N)\\)\nで求まります。\n\\(K=p \\times N+q\\)\nとして答えが求まるので、\n以上よりこの問題を解くことができました。\nC++ の実装例を示します。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nsigned main(){\n    ll n;cin>>n;\n    vector<ll> a(n);\n    for(int i=0;i<=n-1;i++)cin>>a[i];\n    ll x;cin>>x;\n\n    ll sum=0;\n    for(ll val:a)sum+=val;\n    ll P = x / sum;\n    ll sumb = P * sum;\n    ll ans = P * n;\n\n    for(ll val:a){\n        sumb += val;\n        ans++;\n        if(sumb > x){\n            cout<< ans <<endl;\n            return 0;\n        }\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "c10d02a6ec5b2e2f67248e42c24041acca081c6c3e9909c841f8de74c3cbf638",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc220/abc220_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

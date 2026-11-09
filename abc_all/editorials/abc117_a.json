@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc117_a",
+  "editorials": [
+    {
+      "text": "A: Entrance Examination\n答えをt とすると、問題文よりX × t = T が成り立つので、これを解くとt = T\nX が得られます。これを\nC++ で実装すると次のようになります。小数点以下3 桁以上出力しなければならないことに注意してくだ\nさい。\n#include <bits/stdc ++.h>\nusing\nnamespace\nstd;\nint main () {\nint T, X; cin >> T >> X;\ndouble ans = double(T) / X;\ncout << fixed\n<< setprecision (10) << ans << endl;\n}\n",
+      "text_sha256": "f67a387b104383c6cac7ccc3f6714be05ec951d9c9fe9ec948af2185714cca8f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc117/abc117_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

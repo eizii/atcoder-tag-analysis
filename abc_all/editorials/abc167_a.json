@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc167_a",
+  "editorials": [
+    {
+      "text": "A: Registration\nT の最後の1 文字を消去して得られる文字列がS と一致していれば答えはYes であり, そうでな\nければNo です.\n以下はC++ での実装例です.\n1 #include <bits/stdc++.h>\n2 using namespace std;\n3\n4 string S, T;\n5 void input() {\n6\ncin >> S >> T;\n7 }\n8\n9 void solve() {\n10\nT.pop_back();\n11\nif(S == T) cout << \"Yes\" << endl;\n12\nelse cout << \"No\" << endl;\n13 }\n14\n15 int main() {\n16\ninput();\n17\nsolve();\n18\nreturn 0;\n19 }\n",
+      "text_sha256": "73d8c39bc9772f385673b43164081a6ccedf247c7beca0d242e60e0810926895",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc167/abc167_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

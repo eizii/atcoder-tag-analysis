@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc456_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc456/editorial/19773",
+      "text": "この問題は DP により解くことができます。\n\\(S\\)\nの長さを\n\\(|S|\\)\n、\n\\(S\\)\nの\n\\(i\\)\n文字目を\n\\(S_i\\)\nと表します。\n\\(\\mathrm{DP}[i][x]\\)\nを「\n\\(S\\)\nの\n\\(i\\)\n文字目までからなる部分列のうち、末尾が\n\\(x\\)\nであるものの個数」とします。\nもらう DP の遷移を考えます。例として\n\\(\\mathrm{DP}[i][\\text{a}]\\)\nを求めることを考えます。\n\\(S_i \\neq \\text{a}\\)\nのとき、\n\\(S_i\\)\nを使うことはできません。よって\n\\(\\mathrm{DP}[i][\\text{a}]=\\mathrm{DP}[i-1][\\text{a}]\\)\nです。\n\\(S_i=\\text{a}\\)\nのとき、\n\\(S_i\\)\nを使わないケースが\n\\(\\mathrm{DP}[i-1][\\text{a}]\\)\n通り、\n\\(S_i\\)\nを使う長さ\n\\(2\\)\n以上の部分列では\n\\(S_i\\)\nの前が\na\nであってはならないので\n\\(\\mathrm{DP}[i-1][\\text{b}]+\\mathrm{DP}[i-1][\\text{c}]\\)\n通り、\n\\(S_i\\)\nを使う長さ\n\\(1\\)\nの部分列が\n\\(1\\)\n通りとなります。\n一般に\n\\(\\mathrm{DP}[i][x]=\\begin{cases}\n\\mathrm{DP}[i-1][x] &  S_i \\neq x \\\\\n\\mathrm{DP}[i-1][\\text{a}]+\\mathrm{DP}[i-1][\\text{b}]+\\mathrm{DP}[i-1][\\text{c}]+1 &  S_i = x\n\\end{cases}\\)\nとなります。以上より\n\\(O(|S|)\\)\nでこの問題を解くことができました。\nこの DP では、\n\\(\\mathrm{DP}[i-1]\\)\nと\n\\(\\mathrm{DP}[i]\\)\nで違いがあるのは\n\\(\\mathrm{DP}[i][S_i]\\)\nのみです。よって\n\\(i\\)\nを添え字に持つことなく実装することができます。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/modint>\nusing namespace std;\nusing mint = atcoder::modint998244353;\n\nint main(){\n  string s;\n  cin >> s;\n  map<char, mint>dp;\n  for(char c: s){\n    dp[c] = dp['a'] + dp['b'] + dp['c'] + 1;\n  }\n\n  mint ans = 0;\n  for(auto[k, v]: dp){\n    ans += v;\n  }\n  cout << ans.val() << endl;\n}",
+        "from collections import defaultdict\nS = input()\ndp = defaultdict(int)\nfor c in S:\n  dp[c] = (dp['a'] + dp['b'] + dp['c'] + 1) % 998244353\n\nprint(sum(dp.values()) % 998244353)"
+      ],
+      "text_sha256": "37d7827a9801ee5d6345d7b55b08bf805d552c7c8295f09d8059b6e8d5cfa605",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc456/abc456_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

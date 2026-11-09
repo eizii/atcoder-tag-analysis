@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc056_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc070/editorial.pdf",
+      "text": "A: HonestOrDishonest\n\n  a =′ H′, b =′ H′ の場合は′H′ を、a =′ H′, b =′ D′ の場合は′D′ を、a =′ D′, b =′ H′ の場合は′D′ を、\na =′ D′, b =′ D′ の場合は′H′ を出力すればよいです。コードにすると次のようになります。\n\nint main (){\n         char a,b;\n         cin >> a >> b;\n        if(a==’H’ && b==’H’) cout << ’H’;\n        if(a==’H’ && b==’D’) cout << ’D’;\n        if(a==’D’ && b==’H’) cout << ’D’;\n        if(a==’D’ && b==’D’) cout << ’H’;\n         return 0;\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "884bdc2d3a8938f46fa8b40d38eabe63ebe2ce491e50c702321ef515ed4dcfb0"
+    }
+  ],
+  "status": "available"
+}

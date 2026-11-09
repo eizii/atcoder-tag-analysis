@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc225_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc225/editorial/2833",
+      "text": "文字列の連結を \\(\\oplus\\) で書きます。 本問題は一見正しそうな嘘解法(正しくない解法)が多いと思うので、まず嘘解法とその反例を紹介したいと思います。 嘘解法例1 \\((S_1, \\ldots,S_N)\\) を、 \\(S_i \\leq S_{i+1}\\) を満たすようにソートする。 先頭 \\(K\\) 項を繋げたものが答えである。 で正しくは bab ですが、 bba と出力されてしまいます。 嘘解法例2 \\((S_1, \\ldots,S_N)\\) を、 \\(S_i \\oplus S_{i+1} \\leq S_{i+1}\\oplus S_i\\) を満たすようにソートする。 先頭 \\(K\\) 項を繋げたものが答えである。 で正しくは b ですが、 ba と出力されてしまいます。 嘘解法例3 \\((S_1, \\ldots,S_N)\\) を、 \\(S_i \\oplus S_{i+1} \\leq S_{i+1}\\oplus S_i\\) を満たすようにソートする。 \\(dp[i][j] := (S_1,\\ldots,S_i)\\) から \\(j\\) 個選んで連結したときの辞書順最小の文字列 と dp を定義して、 \\(dp[i][j] = \\min(dp[i-1][j],dp[i-1][j-1] \\oplus S_i)\\) と遷移する。 \\(dp[N][K]\\) が答えである。 で正しくは baab ですが、 baaba と出力されてしまいます。 嘘解法例4 \\((S_1, \\ldots,S_N)\\) を、 \\(S_i \\oplus S_{i+1} \\leq S_{i+1}\\oplus S_i\\) を満たすようにソートする。 \\(dp[i][j] := (S_1,\\ldots,S_i)\\) から \\(j\\) 個選んで連結したときの辞書順最小の文字列 と dp を定義して、 \\(dp[i][j] = \\min(dp[i-1][j], \\underset{k \\lt i}{\\min}(dp[k][j-1] \\oplus S_i))\\) と遷移する。 \\(dp[N][K]\\) が答えである。 で正しくは bbababb ですが、 bbababbab と出力されてしまいます。 正しい解法 「好きな順序で」という条件を取り除くために \\((S_1,\\ldots,S_N)\\) を予め並べ替えることを考えましょう。 並び替え後には全ての \\(i,j(i\\lt j)\\) において \\(S_i \\oplus S_j \\leq S_j \\oplus S_i\\) が成り立っていれば良いです。 このような並び替えは常に存在し、また、隣接項の swap を繰り返すことのみで所望の並び替えを得られます。 なぜ？ 文字列 \\(A,B\\) の比較を考えます。 ここで、文字列を \\(26\\) 進法表記の整数 \\(a,b\\) とみなすと、 \\(A \\oplus B \\lt B \\oplus A\\) \\(\\Leftrightarrow a \\times 26^{|B|} + b \\lt  b \\times 26^{|A|} + a\\) \\(\\displaystyle \\Leftrightarrow \\frac{a}{26^{|A|} -1} \\lt \\frac{b}{26^{|B|} -1}\\) と変形され、各文字列のみに依存する数による並び替えで良いことがわかりました。 よってまず、 \\((S_1, \\ldots,S_N)\\) を、 \\(S_i \\oplus S_{i+1} \\leq S_{i+1}\\oplus S_i\\) を満たすようにソートします。 そのうえで \\(dp[i][j] := (S_i,\\ldots,S_N)\\) から \\(j\\) 個選んで連結したときの辞書順最小の文字列 と dp を定義すると、 \\(dp[i][j] = \\min(dp[i+1][j], S_i \\oplus dp[i+1][j-1])\\) という遷移が成り立ちます。 なぜ？ \\(dp[i][j]\\) を求めることを考えます。 \\(S_i\\) を使わないとき、 \\(dp[i][j] = dp[i+1][j]\\) です。 \\(S_i\\) を使うとき、 \\(dp[i][j] = S_i \\oplus dp[i+1][j-1]\\) です。 \\(dp[1][K]\\) が答えです。\n計算量は \\(O(NK^2 \\max|S_i|)\\) です。",
+      "codes": [
+        "2 2\nb\nba\n",
+        "2 1\nb\nba\n",
+        "3 2\nbaa\nba\nb\n",
+        "4 3\nbbaba\nbba\nb\nb\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "9d6b6db4055a5ed6f4d783f84da8f5b4d6e7b59cfde9e5cbce1014a40068273b"
+    }
+  ],
+  "status": "available"
+}

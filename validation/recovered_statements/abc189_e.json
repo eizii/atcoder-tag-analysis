@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc189_e",
+  "source_url": "https://atcoder.jp/contests/abc189/tasks/abc189_e?lang=ja",
+  "statement": "問題文\n2\n次元平面に\nN\n個の駒が置かれています。駒には\n1\nから\nN\nまでの番号が付いており、駒\ni\nが置かれている座標は\n(X_i,Y_i)\nです。複数の駒が同じ座標に置かれている可能性もあります。\nM\n個の操作\n\\mathrm{op}_1, \\ldots, \\mathrm{op}_M\nを順に行います。操作は\n4\n種類あり、入力形式と操作の内容は以下の通りです。\n1\n：全ての駒を、原点を中心に時計回りに\n90\n度回転させた位置に移動する\n2\n：全ての駒を、原点を中心に反時計回りに\n90\n度回転させた位置に移動する\n3 p\n：全ての駒を、直線\nx=p\nについて対称な位置に移動する\n4 p\n：全ての駒を、直線\ny=p\nについて対称な位置に移動する\nクエリが\nQ\n個与えられます。\ni\n番目のクエリでは\n2\nつの整数\nA_i,B_i\nが与えられるので、\nA_i\n個目の操作を行った直後に駒\nB_i\nがある座標を出力してください。ここで、\n1\n個目の操作の直前を「\n0\n個目の操作の直後」とみなします。\n制約\n入力は全て整数\n1 \\leq N \\leq 2\\times 10^5\n1 \\leq M \\leq 2\\times 10^5\n1 \\leq Q \\leq 2\\times 10^5\n-10^9 \\leq X_i,Y_i \\leq 10^9\n\\mathrm{op}_i\nは\n4\nつの操作の種類のいずれかの入力形式に従う\n3 p\n及び\n4 p\nの操作において\n-10^9 \\leq p \\leq 10^9\n0 \\leq A_i \\leq M\n1 \\leq B_i \\leq N",
+  "html_sha256": "afe5d74c4640cd560c8fbf8d53d482d7f4eb1f27f1fe2c129783f185ed4ad6bf",
+  "extractor": "section_headings_v1"
+}

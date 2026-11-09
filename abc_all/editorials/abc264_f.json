@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc264_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4588",
+      "text": "以下では、\n\\((1, 1)\\)\nから\n\\((H, W)\\)\nへ\n白いマス\nのみからなる移動経路を作る最小費用を求めます。\n黒いマスのみからなる場合の最小費用も同様の方法で求めることができるので、両者の最小値を本問題の答えとして出力すれば良いです。\nまず、操作を複数回行う場合、その順番は結果に影響しません。\nまた、同じ行（または列）に対して操作を\n\\(2\\)\n回行うと、その行（または列）の状態は元に戻ります。\nよって、私たちが実際に決定するのは、各行と各列について「操作を\n\\(0\\)\n回行うか\n\\(1\\)\n回行うか」です。\n実は、\n\\(1\\)\n行目を反転するかを決め、通りたい移動経路\n\\(1\\)\nつを選ぶと、選んだ経路のすべてのマスを白色にするためにはどの行および列を反転しなければならないかが一意に定まります。\n実際にマス\n\\((1, 1)\\)\nから\n\\(1\\)\nマスずつ移動しながら、白いマスのみからなる移動経路を\n\\(1\\)\nつ作ることを考えます。その過程では、反転しなければならないことが確定した行および列を随時反転していきます。\n具体的には以下の手順を考えます。\nまず、\n\\(R_1\\)\n円払って\n\\(1\\)\n行目を反転しても良い。\nその後、\n\\((1, 1)\\)\nの現在の色が黒なら、\n\\(C_1\\)\n円払って\n\\(1\\)\n列目を反転する。\n次に、マス\n\\((1, 1)\\)\nに立ち、次に進む方向として、右または下の好きな向きを向く。\n以降、\n\\((H, W)\\)\nに到達するまで以下を繰り返す。\n現在いるマスを\n\\((i, j)\\)\nとし、現在向いている向きに\n\\(1\\)\nマス進んだ先のマスを\n\\((i', j')\\)\nとする。\n\\((i', j')\\)\nの現在の色が黒ならば、\n現在下を向いているなら\n\\(R_{i'}\\)\n円払って\n\\(i'\\)\n行目を反転する。\n現在右を向いているなら\n\\(C_{j'}\\)\n円払って\n\\(j'\\)\n列目を反転する。\n\\((i, j)\\)\nから\n\\((i', j')\\)\nに移動し、次に進む方向として、右または下の好きな向きを向く。\n白いマスのみからなる移動経路を作る最小費用を求めるには、\n上記の手順でマス\n\\((H, W)\\)\nに到達までにかかる最小費用を求めれば良いです。\nこれを動的計画法（ DP ）によって求めます。\nDP の状態としては、現在いるマス\n\\((i, j)\\)\nと現在の向き\n\\(d\\)\nに加え、\n上記の手順 2. で「\n\\((i', j')\\)\nの現在の色」を取得するための情報が必要です。\n\\((i', j')\\)\nは以前に行われた\n\\(i'\\)\n行目または\n\\(j'\\)\n列目への操作によって、初期状態と比べて色が反転している可能性があります。\n\\((i', j')\\)\nがすでに反転されているかを知るには、\n現在向いている行（または列）\n（すなわち、いま右を向いているなら\n\\(i\\)\n行目、現在下を向いているなら\n\\(j\\)\n列目）に対して今までに反転操作を行っているかわかれば十分です。\n以上を踏まえて、下記のDP テーブルによる DP を行います。\n\\(\\mathrm{dp}[i][j][d][l] := \\)\n（現在マス\n\\((i, j)\\)\nに\n\\(d (=\\)\n右 or 下\n\\()\\)\nの向きで立っており、現在向いている行（または列）に対して\n\\(l (=0\\)\nor\n\\(1)\\)\n回の操作を行っているときの、現在までにかかった合計費用としてあり得る最小値）\n各状態からは、現在の向きに\n\\(1\\)\nマス進んだ後つぎにどちらの向きを向くかという\n\\(2\\)\nつの選択肢に対応した\n\\(2\\)\n本の遷移を行えば良いです。\n以下に、C++ 言語による正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#define inf 1e18\nusing namespace std;\ntypedef long long ll;\n\nll h, w;\nll r[2005], c[2005];\nchar a[2005][2005];\nll dp[2005][2005][2][2];\nll di[2] = {1, 0}, dj[2] = {0, 1};\n\nll solve()\n{\n  for(int i = 1; i <= h; i++) for(int j = 1; j <= w; j++){\n    for(int d = 0; d <= 1; d++) for(int f = 0; f <= 1; f++){\n      dp[i][j][d][f] = inf;\n    }\n  }\n  for(int r1 = 0; r1 <= 1; r1++){\n    int c1 = (a[1][1]^r1);\n    dp[1][1][0][c1] = r1*r[1] + c1*c[1];\n    dp[1][1][1][r1] = r1*r[1] + c1*c[1];\n  }\n  \n  for(int i = 1; i <= h; i++){\n    for(int j = 1; j <= w; j++){\n      for(int d = 0; d <= 1; d++){\n        for(int l = 0; l <= 1; l++){\n          int ni = i + di[d], nj = j + dj[d];\n          if(ni > h || nj > w) continue;\n          \n          int flip = a[ni][nj]^l, cost = 0;\n          if(d == 0) cost = r[ni]*flip;\n          else cost = c[nj]*flip;\n          \n          for(int nd = 0; nd <= 1; nd++){\n            int nl = l;\n            if(d != nd) nl = flip;\n            dp[ni][nj][nd][nl] = min(dp[ni][nj][nd][nl], dp[i][j][d][l] + cost);\n          }\n        }\n      }\n    }\n  }\n\n  ll ret = inf;\n  for(int d = 0; d <= 1; d++) for(int f = 0; f <= 1; f++) ret = min(ret, dp[h][w][d][f]);\n  return ret;\n}\n\nint main(void)\n{\n  cin >> h >> w;\n  for(int i = 1; i <= h; i++) cin >> r[i];\n  for(int i = 1; i <= w; i++) cin >> c[i];\n  for(int i = 1; i <= h; i++) for(int j = 1; j <= w; j++) cin >> a[i][j], a[i][j] -= '0';\n\n  ll ans = solve();\n  for(int i = 1; i <= h; i++) for(int j = 1; j <= w; j++) a[i][j] ^= 1;\n  ans = min(ans, solve());\n  cout << ans << endl;\n\n  return 0;\n}"
+      ],
+      "text_sha256": "b97bfd59b1d6608d773f2f153a2675f771aaf2f033d59c43f1153c398645f2a9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc264/abc264_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4601",
+      "text": "方針は\n公式解説\nとほとんど同様ですが、DPテーブルの状態の持ち方を\n\\(DP[i][j][x][y]=\\)\n現在マス\n\\((i,j)\\)\nにいて、行\n\\(i\\)\nの反転を\n\\(x\\)\n回、列\n\\(j\\)\nの反転を\n\\(y\\)\n回行った時の、現在までの最小費用\nとしても解くことができます。\n上から下へ移動するときは行の反転のみ、左から右へ移動するときは列の反転のみを行うことができます。\n実装例(C)\n（この実装例では上で述べた\n\\(x,y\\)\nの代わりに\n\\(k:=2y+x\\)\nを状態に持っています）",
+      "codes": [],
+      "text_sha256": "662a36a5e783c8de18e1f0cad7a8994b88167fa38d78412bfeeb34f6c64a34b2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc264/abc264_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

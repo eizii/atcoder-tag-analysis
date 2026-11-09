@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc378_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc378/editorial/11289",
+      "text": "数列の区間の和は，\n累積和\nによって表現するのが典型です．数列\n\\(A\\)\nの（\n\\(\\mathrm{mod}\\;M\\)\nでの）累積和を\n\\(S_i = (A_1+A_2+\\dots+A_i) \\mathbin{\\mathrm{mod}} M\\)\nとします．すると，求める値は\n\\[\n\\sum_{1 \\leq l \\leq r \\leq N} \\left( \\left(\\sum_{l \\leq i \\leq r} A_i\\right) \\mathbin{\\mathrm{mod}} M \\right) = \\sum_{1 \\leq l \\leq r \\leq N} (S_r - S_{l-1}) \\mathbin{\\mathrm{mod}} M\n\\]\nと書けます．ここで，\n\\(S_0\\coloneqq 0\\)\nとしました．\nここで，\n\\(0 \\leq S_{l-1},S_r < M\\)\nであることを用いると，\n\\[\n(S_r - S_{l-1}) \\mathbin{\\mathrm{mod}} M = S_r - S_{l-1} + \\begin{cases} 0 & (S_{l-1} \\leq S_r) \\\\ M & (S_{l-1} > S_r)\\end{cases}\n\\]\nというふうに，\n\\(\\mathrm{mod}\\)\nを含まない形で書けます．\n\\(X_r = \\)\n（\n\\(S_{l-1} > S_r\\)\nである\n\\(l=1,2,\\dots,r\\)\nの個数）と定義して，先程の変形を使うと，求める値は\n\\[\n\\sum_{r=1}^N \\sum_{l=1}^r (S_r - S_{l-1}) \\mathbin{\\mathrm{mod}} M = \\sum_{r=1}^N \\left( S_r \\times r - \\sum_{l=1}^r S_{l-1} + M \\times X_r \\right)\n\\]\nと書けます．\n\\(\\sum_{l=1}^r S_{l-1}\\)\nは\n\\(S\\)\nの累積和であり，簡単に求められます．あとは，\n\\(X_r\\)\nを各\n\\(r=1,2,\\dots,N\\)\nについて高速に求められれば，答えを上の式で計算できます．\n\\(X_r\\)\nは，\nFenwick tree\nを用いて高速に計算できます．Fenwick tree は，数列\n\\(B=(B_1,B_2,\\dots,B_M)\\)\nに対して，以下の操作をどちらも\n\\(O(\\log M)\\)\n時間で行えるデータ構造です．\n\\(i,x\\)\nが与えられたとき，\n\\(B_i \\leftarrow B_i+x\\)\nと更新する\n\\(l,r\\)\nが与えられたとき，\n\\(B_l + B_{l+1} + \\dots + B_r\\)\nを計算する\nここで，\n\\(B_x\\)\nを「\n\\(S_{l-1}=x\\)\nとなる\n\\(l\\)\nの個数」とすれば，\n\\(X_r\\)\nは次のアルゴリズムで計算できます．\n\\(B_x = 0\\)\nで初期化する\n\\(r=0,1,\\dots,N\\)\nについて以下を行う\n\\(X_r = B_{S_r + 1} + B_{S_r + 2} + \\dots B_{M-1}\\)\nを計算する\n\\(B_{S_r}\\)\nに\n\\(1\\)\nを足す\nFenwick Tree は AtCoder Library で提供されているので，それを使うのが便利です．\n全体の時間計算量は\n\\(O(N\\log M + M)\\)\nです．\n実装例 (Python)",
+      "codes": [
+        "from itertools import accumulate\nfrom atcoder.fenwicktree import FenwickTree\n\n\nN, M = map(int, input().split())\nA = list(map(int, input().split()))\nS = [0] + [x % M for x in accumulate(A)]\nft = FenwickTree(M)\ns = 0\nans = 0\nfor r in range(N + 1):\n    ans += S[r] * r - s + ft.sum(S[r] + 1, M) * M\n    s += S[r]\n    ft.add(S[r], 1)\nprint(ans)"
+      ],
+      "text_sha256": "9dc1c1ba5d59fae33a8618d95ec3a8fb22934592055f91616b0aeb9552759347",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc378/abc378_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc378/editorial/11305",
+      "text": "\\[\\mathrm{ans}(L, R) = \\sum_{L \\le l \\le r \\le R} \\left(\\left(\\sum_{l \\le i \\le r} A_i\\right) \\bmod{M}\\right)\\]\nとすると，求めたい答えは\n\\(\\mathrm{ans}(1, N)\\)\nです．\nこれを分割統治で求めます．\n\\(L = R = i\\)\nのときは\n\\(\\mathrm{ans}(i, i) = A_i \\bmod{M}\\)\nです．\n\\(L < R\\)\nのときは，\n\\(m = \\left\\lfloor\\frac{L + R}{2}\\right\\rfloor\\)\nとして，\n\\[\\mathrm{ans}(L, R) = \\mathrm{ans}(L, m) + \\mathrm{ans}(m + 1, R) + \\sum_{L \\le l \\le m < r \\le R} \\left(\\left(\\sum_{l \\le i \\le r} A_i\\right) \\bmod{M}\\right)\\]\nを計算すればよいです．\n前\n\\(2\\)\n項は再帰すればよいので，最後の項が（高速に）計算できれば十分です．\n最後の項の対象となる区間\n\\([l, r]\\)\nは，\n\\(m\\)\nを基準にして\n\\([l, m]\\)\nと\n\\([m + 1, r]\\)\nに分けられます．\nしたがって，\n\\(2\\)\nつの累積和\n\\[ a_l = \\left(\\sum_{l \\le i \\le m} A_i \\right) \\bmod{M}, \\quad b_r = \\left(\\sum_{m < i \\le r} A_i \\right) \\bmod{M} \\]\nを用いて，\n\\[ \\left(\\left(\\sum_{l \\le i \\le r} A_i\\right) \\bmod{M}\\right) = \\begin{cases} a_l + b_r & (a_l + b_r < M)\\\\ a_l + b_r - M & (a_l + b_r \\ge M) \\end{cases}\\]\nと書くことができます．\nこれを\n\\(L \\le l \\le m < r \\le R\\)\nに渡って足し合わせるので，各要素が足される回数を考えると，求めたいものは\n\\[(R - m) \\cdot \\sum_{L \\le l \\le m} a_l + (m - L + 1) \\cdot \\sum_{m < r \\le R} b_r - \\#\\{\\, (l, r) \\mid L \\le l \\le m < r \\le R,~a_l + b_r \\ge M \\,\\} \\cdot M\\]\nとなります．（\n\\(\\#\\{\\cdots\\}\\)\nは集合\n\\(\\{\\cdots\\}\\)\nの要素数を表す．）\n前\n\\(2\\)\n項は素朴に\n\\(\\mathrm{O}(R - L)\\)\n時間で計算でき，また最後の項は\n\\(a_l, b_r\\)\nをそれぞれソートすれば尺取り法で\n\\(\\mathrm{O}(R - L)\\)\n時間で計算できます．\n再帰するたびに区間の長さは半分程度になるので，再帰の深さは\n\\(\\mathrm{O}(\\log N)\\)\nです．\nまた，各深さでのボトルネックは累積和をソートする部分なので，全体の計算量は\n\\(\\mathrm{O}(N (\\log N)^2)\\)\nです．\n実装例\n(C, 191 ms)",
+      "codes": [],
+      "text_sha256": "52e50ef870d0a98dbc4b1bcd28e557d3f43384647957636a78715b5e8bfb8e0c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc378/abc378_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

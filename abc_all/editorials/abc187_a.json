@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc187_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc187/editorial/483",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「\nWelcome to AtCoder\n」をお試しください。言語ごとに解答例が掲載されています。\nこの問題では\n\\(A\\)\nと\n\\(B\\)\nを入力し、\n\\(A\\)\nと\n\\(B\\)\nの各桁の和のうち大きい方を出力すれば良いです。\n\\(A, B\\)\nを文字列として受け取ると各桁の和の計算が簡単になります。\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint S(string n){\n    return (n[0] - '0') + (n[1] - '0') + (n[2] - '0');\n}\nint main(){\n    string A, B;\n    cin >> A >> B;\n    cout << max(S(A), S(B)) << endl;\n}",
+        "A, B = input().split()\nA = int(A[0]) + int(A[1]) + int(A[2])\nB = int(B[0]) + int(B[1]) + int(B[2])\nprint(max(A, B))"
+      ],
+      "text_sha256": "48ba85533c94505bb7145b96eab1a216aca8f03df1a1a6004d8ac31d1ddf4c33",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc187/abc187_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

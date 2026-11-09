@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc335_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc335/editorial/9025",
+      "text": "\\(x+y+z\\leq N\\)\nであることから\n\\(x,y,z \\leq N\\)\nの範囲を調べれば十分です。組を辞書順で小さい方から求めるためには\n\\(x,y,z\\)\nの順に昇順にループすれば良いです。\n実装例(Python)\nおまけ：\n\\(N=21\\)\nのとき、条件を満たす組は\n\\(\\binom{21+3}{3}=2024\\)\n個あります。Happy New Year!",
+      "codes": [
+        "N=int(input())\n\nfor x in range(N+1):\n  for y in range(N+1):\n    for z in range(N+1):\n      if x+y+z<=N:\n        print(x,y,z)"
+      ],
+      "text_sha256": "c71666a9a3ca1b0f4b29b8592e3b8f2daabb786c0414f453936f4ce64aab380e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc335/abc335_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

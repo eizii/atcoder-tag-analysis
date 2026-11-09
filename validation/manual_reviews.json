@@ -1,0 +1,1425 @@
+[
+  {
+    "problem_id": "abc396_b",
+    "tag_id": "T013",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "カードの追加・取り出しはLIFOのpush/popに対応する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc396/editorial/12389"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc435_c",
+    "tag_id": "T083",
+    "status": "needs_review",
+    "role": "ambiguous",
+    "reason": "解説は到達可能な右端を更新する単方向走査。典型的な区間伸縮としての尺取り法との対応は定義次第。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc435/editorial/14707"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc435_c",
+    "tag_id": "T076",
+    "status": "add_supported",
+    "role": "primary",
+    "reason": "倒れる範囲の右端を管理し左から順に処理するO(N)のシミュレーション。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc435/editorial/14707"
+    ],
+    "apply": true,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc411_c",
+    "tag_id": "T003",
+    "status": "supported_existing",
+    "role": "alternative",
+    "reason": "区間の両端色と黒区間数を合成するモノイドをSegment Treeに載せる別解がある。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc411/editorial/13379"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc295_c",
+    "tag_id": "T008",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "色ごとの個数を連想配列で数え、各個数の半分を足す。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc295/editorial/6047"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc220_c",
+    "tag_id": "T086",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "全体和で周期分を除いた後、先頭からの累積和で残りの到達位置を求める。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc220/editorial/2683"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc408_c",
+    "tag_id": "T075",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "各砲台の区間に加算する差分更新で全城壁の被覆数を求める。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc408/editorial/13165"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc408_c",
+    "tag_id": "T086",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "差分配列の累積和で各城壁の被覆数を復元する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc408/editorial/13165"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc343_d",
+    "tag_id": "T008",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "得点をキー、人数を値とする連想配列で種類数を管理する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc343/editorial/9434"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc343_d",
+    "tag_id": "T009",
+    "status": "supported_existing",
+    "role": "concept",
+    "reason": "得点の多重集合というモデルは解説にある。実装でstd::multisetを使用することまでは示していない。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc343/editorial/9434"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc437_d",
+    "tag_id": "T064",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "ソート済み列で各値の境界をlower_boundで求める。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc437/editorial/14901"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc437_d",
+    "tag_id": "T077",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "絶対値和を左右の区間に分けるために値をソートする。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc437/editorial/14901"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc437_d",
+    "tag_id": "T086",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "境界の前後の要素和を前後の累積和から求める。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc437/editorial/14901"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc182_d",
+    "tag_id": "T086",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "各段階の累積変位と累積変位の最大値をO(N)で管理する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc182/editorial/291"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc264_d",
+    "tag_id": "T001",
+    "status": "supported_existing",
+    "role": "alternative",
+    "reason": "転倒数をFenwick Treeで数える別解。固定7文字の制約で実行可能。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc264/editorial/4582"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc264_d",
+    "tag_id": "T008",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "BFSで文字列状態の訪問・距離を連想配列で管理する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc264/editorial/4582"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc264_d",
+    "tag_id": "T011",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "等コストの交換状態のBFSの待ち行列を管理する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc264/editorial/4582"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc264_d",
+    "tag_id": "T066",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "並べ替え文字列を頂点、隣接交換を辺とする最短手数をBFSで求める。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc264/editorial/4582"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc383_c",
+    "tag_id": "T066",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "全加湿器を始点とする多始点BFSで距離D以内のマスを数える。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc383/editorial/11544"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc448_d",
+    "tag_id": "T012",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "根からの現在のパスに現れた値をSetに入れ、DFSから戻るときに削除する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc448/editorial/16747"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc448_d",
+    "tag_id": "T047",
+    "status": "needs_review",
+    "role": "reference",
+    "reason": "解説ではEuler Tourを発展的話題として紹介している。説明された解法はDFSの進入・退出時の状態管理であり、独立タグとしての付与基準を要確認。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc448/editorial/16747"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc448_d",
+    "tag_id": "T067",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "根からDFSし、進入時にパスの値を追加、退出時に戻して全頂点の答えを求める。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc448/editorial/16747"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc404_d",
+    "tag_id": "T067",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "訪問回数0/1/2の選択木をDFSで列挙し動物の訪問回数を管理する解説がある。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc404/editorial/12873",
+      "https://atcoder.jp/contests/abc404/editorial/12874"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc404_d",
+    "tag_id": "T065",
+    "status": "add_supported",
+    "role": "primary",
+    "reason": "各動物園の訪問回数0/1/2を3^N通り列挙する全探索が主解。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc404/editorial/12860"
+    ],
+    "apply": true,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc219_d",
+    "tag_id": "T150",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "各弁当の採用/不採用と2種類の個数を状態にする0/1ナップサック型DP。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc219/editorial/2651"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc334_e",
+    "tag_id": "T005",
+    "status": "supported_existing",
+    "role": "alternative",
+    "reason": "緑の連結成分をUnion-Findで管理して赤マスを追加する効果を数える。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc334/editorial/8987"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc334_e",
+    "tag_id": "T066",
+    "status": "supported_existing",
+    "role": "alternative",
+    "reason": "緑の連結成分のラベル付けにBFSを使う解法が明記される。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc334/editorial/8987"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc334_e",
+    "tag_id": "T067",
+    "status": "supported_existing",
+    "role": "alternative",
+    "reason": "緑の連結成分のラベル付けにDFSを使う解法が明記される。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc334/editorial/8987"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc334_e",
+    "tag_id": "T236",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "赤マス数で割った期待値を素数法で出力するため逆元を用いる。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc334/editorial/8987"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc311_d",
+    "tag_id": "T011",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "マスと移動方向の状態をBFSのキューで管理する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc311/editorial/6821",
+      "https://atcoder.jp/contests/abc311/editorial/6834"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc311_d",
+    "tag_id": "T066",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "マスと直前の方向の状態グラフをBFSで探索する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc311/editorial/6821",
+      "https://atcoder.jp/contests/abc311/editorial/6834"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc311_d",
+    "tag_id": "T067",
+    "status": "supported_existing",
+    "role": "alternative",
+    "reason": "停止位置を状態にしたDFSによる探索の別解が説明される。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc311/editorial/6821",
+      "https://atcoder.jp/contests/abc311/editorial/6834"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc261_d",
+    "tag_id": "T022",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "投げた回数と現在の連続表の回数を状態にし、獲得額の最大値をDPで更新する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc261/editorial/4483"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc379_c",
+    "tag_id": "T077",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "石のあるマスを位置順にソートして到達可能性を確認する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc379/editorial/11323"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc379_c",
+    "tag_id": "T086",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "位置ごとの石の累積個数を使い、各接頭区間に必要な石があるか判定する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc379/editorial/11323"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc443_e",
+    "tag_id": "T022",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "行と列の到達可能性を状態にして下から上へDPする。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc443/editorial/15178"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc443_e",
+    "tag_id": "T086",
+    "status": "needs_review",
+    "role": "unsubstantiated",
+    "reason": "解説は列ごとの最下段の壁を前計算する。累積和を用いる具体的な別実装の根拠は今回のレビューでは確認できていない。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc443/editorial/15178"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc285_e",
+    "tag_id": "T022",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "休日を一つ固定し、現在までの曜日と連続平日数の状態で生産量をDPする。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc285/editorial/5530"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc359_d",
+    "tag_id": "T025",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "直前K-1文字を状態とした文字列DPで回文を作らない置換数を数える。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc359/editorial/10265"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc270_d",
+    "tag_id": "T022",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "残り石数に対し先手が取れる最大数をDPする。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc270/editorial/4850"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc270_d",
+    "tag_id": "T038",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "相手の最適応手を考慮しn-DP[n-A_i]を最大化する零和ゲームのミニマックスに対応する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc270/editorial/4850"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc411_e",
+    "tag_id": "T026",
+    "status": "needs_review",
+    "role": "ambiguous",
+    "reason": "解説は最大値の累積確率を独立確率の積で計算する。期待値を状態としたDPは示されず、期待値計算と期待値DPの区別が必要。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc411/editorial/13361"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc411_e",
+    "tag_id": "T064",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "実装のlower_boundで各面の値をソート済みの座標に対応付ける。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc411/editorial/13361"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc411_e",
+    "tag_id": "T077",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "全ての面の値をソートし、最大値の累積確率を小さい値から更新する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc411/editorial/13361"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc411_e",
+    "tag_id": "T085",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "重複を除いた面の値のリストとlower_boundによる座標圧縮を行う。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc411/editorial/13361"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc411_e",
+    "tag_id": "T236",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "確率の積の更新と6^Nによる除算に法上の逆元を用いる。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc411/editorial/13361"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc356_e",
+    "tag_id": "T086",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "値の出現回数の累積和により商が一定になる区間の要素数を求める。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc356/editorial/10116"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc271_f",
+    "tag_id": "T008",
+    "status": "supported_existing",
+    "role": "alternative",
+    "reason": "推定補足: 片側のXOR頻度をハッシュ連想配列で集計する解法が解説にある。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc271/editorial/4925",
+      "https://atcoder.jp/contests/abc271/editorial/4948"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc271_f",
+    "tag_id": "T059",
+    "status": "supported_existing",
+    "role": "concept",
+    "reason": "経路上のXORを左右で合成してゼロになる組を数える。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc271/editorial/4925",
+      "https://atcoder.jp/contests/abc271/editorial/4948"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc271_f",
+    "tag_id": "T064",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "左右のXOR値をソートし二分探索で一致する頻度を得る主解がある。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc271/editorial/4925",
+      "https://atcoder.jp/contests/abc271/editorial/4948"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc271_f",
+    "tag_id": "T067",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "対角線までの経路をDFSで列挙する別解がある。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc271/editorial/4925",
+      "https://atcoder.jp/contests/abc271/editorial/4948"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc271_f",
+    "tag_id": "T082",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "左上側と右下側から対角線までをそれぞれ列挙して突き合わせる半分全列挙。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc271/editorial/4925",
+      "https://atcoder.jp/contests/abc271/editorial/4948"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc186_f",
+    "tag_id": "T001",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "各列で障害物が登場したかをFenwick Treeで管理し重複到達分を数える。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc186/editorial/400"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc186_f",
+    "tag_id": "T003",
+    "status": "supported_existing",
+    "role": "alternative",
+    "reason": "同じ更新・区間個数計算をSegment Treeで管理する方法が明記される。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc186/editorial/400"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc186_f",
+    "tag_id": "T086",
+    "status": "needs_review",
+    "role": "unsubstantiated",
+    "reason": "区間集計はFenwick Tree/Segment Treeで説明される。独立した累積和タグを付ける実装根拠は今回未確認。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc186/editorial/400"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc387_f",
+    "tag_id": "T005",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "実装でUnion-Findを用い閉路の同値頂点を縮約する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc387/editorial/11834"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc387_f",
+    "tag_id": "T027",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "閉路を縮約した根付き木で頂点値と子の値を状態とする木DP。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc387/editorial/11834"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc387_f",
+    "tag_id": "T067",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "子のDP値をDFSで先に計算する実装。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc387/editorial/11834"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc387_f",
+    "tag_id": "T086",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "子のDP値の累積和で各値以下の総数を高速化する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc387/editorial/11834"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc427_f",
+    "tag_id": "T008",
+    "status": "supported_existing",
+    "role": "alternative",
+    "reason": "推定別解: 左右の列挙結果を剰余の頻度Mapで突き合わせられる。解説の掲載コードはソートと二分探索。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc427/editorial/14195"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc427_f",
+    "tag_id": "T064",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "upper_bound/lower_boundで剰余の一致数を求める。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc427/editorial/14195"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc427_f",
+    "tag_id": "T077",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "半分ずつ列挙した剰余列をソートする。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc427/editorial/14195"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc427_f",
+    "tag_id": "T082",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "長さ60を半分に分け、隣接制約を満たす部分列を列挙して合成する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc427/editorial/14195"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc427_f",
+    "tag_id": "T197",
+    "status": "supported_existing",
+    "role": "analysis_concept",
+    "reason": "フィボナッチ数は隣接禁止の部分列数と列挙計算量の評価に使われる。主な解法は半分全列挙。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc427/editorial/14195"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc334_f",
+    "tag_id": "T003",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "直前K個のDP値の最小値をSegment Treeで求める。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc334/editorial/8982"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc334_f",
+    "tag_id": "T022",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "補充位置を選択するDPを行う。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc334/editorial/8982"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc334_f",
+    "tag_id": "T083",
+    "status": "needs_review",
+    "role": "ambiguous",
+    "reason": "解説はスライド最小値によるDP高速化。一般の尺取り法と同じタグとして扱う定義は要確認。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc334/editorial/8982"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc311_f",
+    "tag_id": "T022",
+    "status": "supported_existing",
+    "role": "primary",
+    "reason": "境界位置の単調性を状態とするDPで塗り方を数える。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc311/editorial/6822"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc311_f",
+    "tag_id": "T086",
+    "status": "supported_existing",
+    "role": "supporting",
+    "reason": "前のDP行の接尾累積和で遷移の総和をO(M)で求める。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc311/editorial/6822"
+    ],
+    "apply": false,
+    "selection": "stratified_sample",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc353_g",
+    "tag_id": "T016",
+    "status": "add_supported",
+    "role": "alternative",
+    "reason": "各時刻の利得関数を区間直線として追加するLi Chao Tree別解が記述されている。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc353/editorial/9984"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc312_g",
+    "tag_id": "T058",
+    "status": "add_supported",
+    "role": "alternative",
+    "reason": "距離分布を求める重心分解の別解。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc312/editorial/6872"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc312_g",
+    "tag_id": "T196",
+    "status": "add_supported",
+    "role": "alternative",
+    "reason": "重心分解で得た距離頻度をFFTで畳み込む別解。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc312/editorial/6872"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc312_g",
+    "tag_id": "T132",
+    "status": "add_supported",
+    "role": "supporting",
+    "reason": "距離頻度の多項式の畳み込みを用いる。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc312/editorial/6872"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc429_e",
+    "tag_id": "T092",
+    "status": "add_supported",
+    "role": "alternative",
+    "reason": "安全頂点の色分けと複数回のBFSによるColor Coding別解。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc429/editorial/14261"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc327_d",
+    "tag_id": "T178",
+    "status": "add_supported",
+    "role": "primary",
+    "reason": "辺の両端が異なる色になる二部グラフ判定に帰着する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc327/editorial/7578"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc327_d",
+    "tag_id": "T169",
+    "status": "add_supported",
+    "role": "alternative",
+    "reason": "辺の両端が異なる真偽値になる条件を2-SATの節で表す別解。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc327/editorial/7595"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc282_d",
+    "tag_id": "T178",
+    "status": "add_supported",
+    "role": "primary",
+    "reason": "連結成分を二色に塗り、二部グラフか判定して追加可能な辺を数える。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc282/editorial/5397"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc401_f",
+    "tag_id": "T196",
+    "status": "add_supported",
+    "role": "alternative",
+    "reason": "二つの木の離心度の頻度列をFFTで畳み込む別解。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc401/editorial/12704"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc401_f",
+    "tag_id": "T132",
+    "status": "add_supported",
+    "role": "supporting",
+    "reason": "離心度の和の頻度計算に畳み込みを用いる。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc401/editorial/12704"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc199_d",
+    "tag_id": "T178",
+    "status": "add_supported",
+    "role": "alternative",
+    "reason": "一色の頂点集合を固定し、残りの誘導部分グラフの二部性を判定する別解。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc199/editorial/1173"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc213_e",
+    "tag_id": "T144",
+    "status": "add_supported",
+    "role": "primary",
+    "reason": "通常移動を重み0、パンチを重み1とした0-1 BFS。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc213/editorial/2397"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc400_d",
+    "tag_id": "T144",
+    "status": "add_supported",
+    "role": "primary",
+    "reason": "移動を重み0、キックを重み1とした0-1 BFS。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc400/editorial/12630"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc400_d",
+    "tag_id": "T007",
+    "status": "add_supported",
+    "role": "supporting",
+    "reason": "0-1 BFSの実装にdequeを使うことが明記されている。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc400/editorial/12630"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc400_d",
+    "tag_id": "T187",
+    "status": "add_supported",
+    "role": "alternative",
+    "reason": "非負重みの最短路としてDijkstraを使う別解も記述されている。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc400/editorial/12630"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc434_e",
+    "tag_id": "T031",
+    "status": "add_supported",
+    "role": "alternative",
+    "reason": "ウサギと座標の対応を二部マッチング・最大流で求める別解。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc434/editorial/14684"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc178_d",
+    "tag_id": "T165",
+    "status": "add_supported",
+    "role": "alternative",
+    "reason": "各項を3以上とする和の分割をStars and Barsで二項係数に変換する別解。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc178/editorial/2430"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc266_c",
+    "tag_id": "T240",
+    "status": "add_supported",
+    "role": "supporting",
+    "reason": "連続する辺の外積の符号、すなわち三角形の符号付き面積で向きを判定する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc266/editorial/4659"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc266_c",
+    "tag_id": "T181",
+    "status": "add_supported",
+    "role": "alternative",
+    "reason": "二本の対角線が内部で交差することを判定する別解。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc266/editorial/4723"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc282_f",
+    "tag_id": "T004",
+    "status": "add_supported",
+    "role": "primary",
+    "reason": "長さが2の冪の区間を前処理し、重なりを許す二区間で答える通常のSparse Table構成。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc282/editorial/5403"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc213_e",
+    "tag_id": "T066",
+    "status": "refine_existing",
+    "role": "parent",
+    "reason": "通常のBFSから、実際に用いる0-1 BFSへ分類の粒度を揃える。BFSとの親子関係は残る。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc213/editorial/2397"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc400_d",
+    "tag_id": "T066",
+    "status": "refine_existing",
+    "role": "parent",
+    "reason": "通常のBFSから、実際に用いる0-1 BFSへ分類の粒度を揃える。BFSとの親子関係は残る。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc400/editorial/12630"
+    ],
+    "apply": true,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc413_g",
+    "tag_id": "T033",
+    "status": "concept_related",
+    "role": "concept",
+    "reason": "最小カットは平面双対への帰着の説明であり、実行する手続きは連結性の探索。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc413/editorial/13403"
+    ],
+    "apply": false,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc434_e",
+    "tag_id": "T118",
+    "status": "concept_related",
+    "role": "parent",
+    "reason": "具体的な二部マッチングを付与し、一般のマッチングは親概念として扱う。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc434/editorial/14684"
+    ],
+    "apply": false,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc367_e",
+    "tag_id": "T226",
+    "status": "rejected_candidate",
+    "role": "reference",
+    "reason": "引用されているのはlevel ancestorの手法であり、このLCAタグと同一ではない。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc367/editorial/10719"
+    ],
+    "apply": false,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc237_e",
+    "tag_id": "T230",
+    "status": "rejected_candidate",
+    "role": "reference",
+    "reason": "ベルマンフォード中の文字列一致。Ford-Fulkersonによる最大流の解法ではない。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc237/editorial/3339"
+    ],
+    "apply": false,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc237_e",
+    "tag_id": "T175",
+    "status": "rejected_candidate",
+    "role": "reference",
+    "reason": "Bellman-Fordは計算量が大きい比較対象として言及されている。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc237/editorial/3339"
+    ],
+    "apply": false,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc386_f",
+    "tag_id": "T263",
+    "status": "rejected_candidate",
+    "role": "reference",
+    "reason": "LCSは参考資料での言及。置換も許す編集距離をLCSと同一視できない。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc386/editorial/11701"
+    ],
+    "apply": false,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc246_f",
+    "tag_id": "T112",
+    "status": "needs_review",
+    "role": "alternative",
+    "reason": "ゼータ変換の別解の記述はあるが、26文字の2^26状態と実行資源の確認が必要。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc246/editorial/3727"
+    ],
+    "apply": false,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc199_d",
+    "tag_id": "T103",
+    "status": "needs_review",
+    "role": "alternative",
+    "reason": "多項式OR畳み込みの別解はある。計算量・タグ定義を独立レビューしてから採用する。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc199/editorial/1184"
+    ],
+    "apply": false,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc199_d",
+    "tag_id": "T112",
+    "status": "needs_review",
+    "role": "supporting",
+    "reason": "OR畳み込み別解のゼータ変換。別解全体の独立確認待ち。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc199/editorial/1184"
+    ],
+    "apply": false,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  },
+  {
+    "problem_id": "abc199_d",
+    "tag_id": "T119",
+    "status": "needs_review",
+    "role": "supporting",
+    "reason": "OR畳み込み別解のメビウス変換。別解全体の独立確認待ち。",
+    "evidence_urls": [
+      "https://atcoder.jp/contests/abc199/editorial/1184"
+    ],
+    "apply": false,
+    "selection": "targeted_review",
+    "reviewer": "assistant",
+    "independent_human_review": false
+  }
+]

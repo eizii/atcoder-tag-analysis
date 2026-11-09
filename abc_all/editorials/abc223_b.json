@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc223_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc223/editorial/2776",
+      "text": "\\(S\\)\nの長さを\n\\(N\\)\nとします。また、\n\\(S\\)\nの\n\\(i \\, (1 \\leq i \\leq N)\\)\n番目の文字を\n\\(S_i\\)\nで表します。\n右シフトを\n\\(1\\)\n回行うことは、左シフト を\n\\(N-1\\)\n回行うことと同じです。そのため、左シフトのみを行うとしてよいです。さらに、左シフトを\n\\(N\\)\n回行うと元の文字列に戻るため、左シフトを行う回数は\n\\(0\\)\n回以上\n\\(N-1\\)\n回以下であるとしてよいです。\n左シフトを\n\\(k \\, (1 \\leq k \\leq N - 1)\\)\n回行って得られる文字列は\n\\(S_{k+1} \\ldots S_{N} S_1 \\ldots S_{k}\\)\nと表せます。得られる文字列（高々\n\\(N\\)\n通り）を列挙し、その中で辞書順最小 / 最大のものを求めればよいです。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    int n = size(s);\n    vector<string> v(n);\n    for (int i = 0; i < n; ++i) {\n        v[i] = s.substr(i, n - i) + s.substr(0, i);\n    }\n    cout << *min_element(begin(v), end(v)) << '\\n';\n    cout << *max_element(begin(v), end(v)) << '\\n';\n}",
+        "s = input()\nn = len(s)\nv = []\nfor k in range(0, n):\n  v.append(s[k:n] + s[0:k])\nprint(min(v))\nprint(max(v))"
+      ],
+      "text_sha256": "dbbb22f2f1b670e110b5d44aa1ddab049e07f200feb9466c852e35f61ba9f558",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc223/abc223_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

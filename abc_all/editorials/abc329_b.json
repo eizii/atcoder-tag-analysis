@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc329_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc329/editorial/7727",
+      "text": "まず、\n\\(A_1, A_2, \\ldots, A_N\\)\nの最大値を求めましょう。\n求まった最大値を\n\\(M\\)\nとして、\n\\(A_1, A_2, \\ldots, A_N\\)\nの中で\n\\(M\\)\nと等しくない要素全体に対する最大値を求めればよいです。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> a(n);\n\tfor (int i = 0; i < n; i++) cin >> a[i];\n\tint m = *max_element(a.begin(), a.end());\n\tint ans = 0;\n\tfor (int e : a) if (e != m) ans = max(ans, e);\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "7b7568a8909cd71d965cb57f552ab60bb42c3fb2296ee8dfd657a2f8878fab94",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc329/abc329_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

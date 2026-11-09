@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc324_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc324/editorial/7407",
+      "text": "各\n\\(S_i\\)\nに対して、\n\\(S_i\\)\nに部分列として含まれる\n\\(T\\)\nの最長の接頭辞の長さを\n\\(A_i\\)\n、\n\\(S_i\\)\nに部分列として含まれる\n\\(T\\)\nの最長の接尾辞の長さを\n\\(B_i\\)\nと定め、まず数列\n\\(A = (A_1, A_2, \\ldots, A_N)\\)\nと数列\n\\(B = (B_1, B_2, \\ldots, B_N)\\)\nを計算します。\nある\n\\(i\\)\nについて\n\\(A_i\\)\nを計算するには、\n\\(S_i\\)\nを 先頭の文字から順に見ていき、\n\\(T\\)\nの文字が先頭何文字まで\n\\(S_i\\)\nの中に現れるかを求めれば良いです。\nより具体的には、\nまず最初の\n目標の文字\nを\n\\(T\\)\nの\n\\(1\\)\n文字目\n\\(T_1\\)\nに設定して、\n\\(S_i\\)\nを先頭から順に見ていきます。\n\\(S_i\\)\nを見ていく過程で目標の文字\n\\(T_1\\)\nが現れたら、目標の文字を\n\\(T\\)\nの\n\\(2\\)\n文字目\n\\(T_2\\)\nに変更して、\n\\(S_i\\)\nの続きを見ていきます。\nその過程でまた目標の文字\n\\(T_2\\)\nを見つけたら、目標の文字を\n\\(T\\)\nの\n\\(3\\)\n文字目\n\\(T_3\\)\nに変更して、\n\\(S_i\\)\nの続きを見ていきます。\n\\(\\cdots\\)\nという手順を行い、\n\\(S_i\\)\nを全て調べ終わるまでに、目標の文字を見つけた回数を\n\\(A_i\\)\nとすれば良いです。\nこの手順では、\n\\(S_i\\)\nを先頭から\n\\(1\\)\n回走査するので、かかる時間は\n\\(O(|S_i|)\\)\nです。よって、この方法で数列\n\\(A\\)\n全体を求めるのにかかる時間は\n\\(O(\\sum_{i = 1}^N |S_i|)\\)\nと評価できますが、\n\\(\\sum_{i = 1}^N |S_i| \\leq 5 \\times 10^5\\)\nなので、十分高速です。\n数列\n\\(B\\)\nを求めるには、各文字列\n\\(S_i\\)\nと\n\\(T\\)\nを前後反転したのち、数列\n\\(A\\)\nを求めたのと同様の処理をすれば良いです。\nまた、\n\\(B_i = j\\)\nとなるような\n\\(i\\)\nの個数を\n\\(C_j\\)\nとして定め、\n数列\n\\(C = (C_0, C_1, \\ldots, C_{|T|})\\)\nを、\n\\(O(N)\\)\n時間で前計算しておきます。\n以上の準備をもとに本題に入ります。\n\\(1\\)\n以上\n\\(N\\)\n以下の整数のペア\n\\((i, j)\\)\nが問題文中の条件を満たす、つまり、\n\\(S_i\\)\nと\n\\(S_j\\)\nを連結した文字列が\n\\(T\\)\nを部分列として含むとき、ペア\n\\((i, j)\\)\nを\n良いペア\nと呼ぶことにし、本問題の答えである、良いペアの個数を数えましょう。\nまず、\n\\(i\\)\nを固定したときの、\n\\((i, j)\\)\nが良いペアとなる\n\\(j\\)\nの個数を求めることを考えます。\n\\((i, j)\\)\nが良いペアであることは、\n\\(A_i + B_j \\geq |T|\\)\nと同値なので、\n\\((i, j)\\)\nが良いペアとなる\n\\(j\\)\nは、\n\\(B_j\\)\nが\n\\(l_i \\coloneqq |T| - A_i\\)\n以上であるような\n\\(j\\)\nです。\nそして、\n\\(B_j\\)\nが\n\\(l_i\\)\n以上であるような\n\\(j\\)\nの個数は、数列\n\\(C\\)\nを用いて\n\\(\\sum_{k = l_i}^{|T|} C_k\\)\nと表せます。\nよって、これを全ての\n\\(i\\)\nについて足し合わせることで、本問題の答えは\n\\[\\sum_{i = 1}^N \\sum_{k = l_i}^{|T|} C_k \\tag{1}\\]\nと得られます。上式 (1) で和をとる項の個数は\n\\[\n\\begin{aligned}\n\\sum_{i = 1}^N (|T| - l_i + 1)\n= \\sum_{i = 1}^N (|T| - (|T| - A_i)+ 1)\n= \\sum_{i = 1}^N A_i + N\n\\leq \\sum_{i = 1}^N |S_i| + N \n\\leq 5 \\times 10^5 + 5 \\times 10^5\n\\end{aligned}\n\\]\nと十分小さいので、式 (1) を、たとえば\n\\(2\\)\nつのシグマ記号に対応した\n\\(2\\)\n重ループなどで愚直に計算しても十分高速です。\n以下に、C++ 言語による正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <algorithm>\nusing namespace std;\ntypedef long long ll;\n\nll n;\nstring s[500001], t;\nll a[500001], b[500001], c[500001];\n\nll calc(const string &s, const string &t)\n{\n  ll g = 0;\n  for(auto c : s){\n    if(g >= (int)t.size()) break;\n    if(c == t[g]) g++;\n  }\n  return g;\n}\n\nint main(void){\n  cin >> n >> t;\n  for(int i = 1; i <= n; i++) cin >> s[i];\n  \n  for(int i = 1; i <= n; i++) a[i] = calc(s[i], t);\n  reverse(t.begin(), t.end());\n  for(int i = 1; i <= n; i++){\n    reverse(s[i].begin(), s[i].end());\n    b[i] = calc(s[i], t);\n    c[b[i]]++;\n  }\n  \n  ll ans = 0;\n  for(int i = 1; i <= n; i++){\n    ll l = (ll)t.size() - a[i];\n    for(int j = l; j <= t.size(); j++){\n      ans += c[j];\n    }\n  }\n  cout << ans << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "6251f4b96de38d2fa43e8ffe11516843929279436d25e69c57b2dbb8a08ca990",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc324/abc324_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

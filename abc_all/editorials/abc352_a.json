@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc352_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc352/editorial/9918",
+      "text": "高橋君は\n\\(X < Y\\)\nのときは上り列車に、\n\\(X > Y\\)\nのときは下り列車に乗車します。\n\\(X < Y\\)\nのときは\n\\(X < Z < Y\\)\nであることが、\n\\(X > Y\\)\nのときは\n\\(X > Z > Y\\)\nであることが高橋君が乗っている電車が駅\n\\(Z\\)\nに停車することがあることの必要十分条件となります。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, x, y, z;\n    cin >> n >> x >> y >> z;\n    if (x < z && z < y) cout << \"Yes\\n\";\n    else if (y < z && z < x) cout << \"Yes\\n\";\n    else cout << \"No\\n\";\n}"
+      ],
+      "text_sha256": "491c8902962808748ac0411013922cbec0c77159a7d40428dd44011291f8e695",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc352/abc352_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

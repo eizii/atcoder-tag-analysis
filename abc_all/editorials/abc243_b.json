@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc243_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc243/editorial/3541",
+      "text": "この問題は for 文の練習問題です。for 文の使い方に慣れておらずこの問題を解けなかった方は、この問題の解法を理解して for 文をうまく使えるようになりましょう。\n問題文で求められているものは次の\n\\(2\\)\nつでした。\n\\(A_i = B_i\\)\nを満たす整数\n\\(i\\)\nの個数。\n\\(A_i = B_j, i \\neq j\\)\nを満たす整数の組\n\\((i, j)\\)\nの個数。\nこのうち 1. は次のような for 文によって計算できます。計算量は\n\\(N\\)\n回の for-loop が回るので\n\\(\\mathrm{O}(N)\\)\nです。\n次に 2. ですが、こちらは\n\\(i,j\\)\nを添え字とした 2 重の for-loop によって計算することができます。\nこのように for を 2 重にするのがポイントです。\n計算量を考えます。外側のループが\n\\(N\\)\n回で、内側のループも\n\\(N\\)\n回回るので、最も内側の if 文は\n\\(N^2\\)\n回評価されます。よって計算量は\n\\(\\mathrm{O}(N^2)\\)\nとなります。\nこの問題は\n\\(N \\leq 1000\\)\nなので、\n\\(\\mathrm{O}(N^2)\\)\nならばAC するのに十分高速に動作します。(一般に\n\\(\\mathrm{O}\\)\nの中身が\n\\(10^7\\)\n以下ならば十分余裕を持って AC できると言われています。) よってこの問題を解くことができました。\n以下に Python での実装例を貼ります。\nまた、より高速な解法として、連想配列を利用した\n\\(\\mathrm{O}(N)\\)\nでの解法もあります。解法を簡潔に説明すると、 B の要素を連想配列で記録して「\n\\(x\\)\nが\n\\(B\\)\nのどの位置に含まれているか？」を 計算量\n\\(\\mathrm{O}(1)\\)\nで取得できるようにすることで、先ほどの 2 重ループを 1 重で済ませる、という解法です。\nC 問題以降の正解を目指す方はこちらの解法も思いつけるようになるとよいでしょう。\n以下に Python での\n\\(\\mathrm{O}(N)\\)\n解法の実装例を貼ります。",
+      "codes": [
+        "for i in range(N):\n  if A[i] == B[i]:\n    answer1 += 1",
+        "for i in range(N):\n  for j in range(N):\n    if A[i] == B[j] and i != j:\n      answer2 += 1",
+        "N = int(input())\nA = list(map(int, input().split()))\nB = list(map(int, input().split()))\n\nanswer1 = 0\nanswer2 = 0\n\nfor i in range(N):\n  if A[i] == B[i]:\n    answer1 += 1\n\nfor i in range(N):\n  for j in range(N):\n    if A[i] == B[j] and i != j:\n      answer2 += 1\n\nprint(answer1, answer2, sep=\"\\n\")",
+        "N = int(input())\nA = list(map(int, input().split()))\nB = list(map(int, input().split()))\n\nanswer1 = 0\nanswer2 = 0\n\nB_dict = dict()\nfor i, b_i in enumerate(B):\n  B_dict[b_i] = i\n\nfor i in range(N):\n  if A[i] == B[i]:\n    answer1 += 1\n\nfor i in range(N):\n  if A[i] in B_dict:\n    if B_dict[A[i]] != i:\n      answer2 += 1\n\nprint(answer1, answer2, sep=\"\\n\")"
+      ],
+      "text_sha256": "6aef99b701b06b49dbfb5358e8940cfeec51808da0d28f90afdf50ac2d054d39",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc243/abc243_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

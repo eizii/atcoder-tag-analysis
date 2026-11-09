@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc370_c",
+  "title": "Word Ladder",
+  "contests": [
+    {
+      "contest_id": "abc370",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 228,
+  "raw_difficulty": 176,
+  "contest_id": "abc370",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc370/tasks/abc370_c",
+  "statement": "配点 : 300 点 問題文 英小文字からなる文字列 S, T が与えられます。ここで、 S と T の長さは等しいです。 X を空の配列とし、以下の操作を S と T が等しくなるまで繰り返します。 S の文字を 1 文字書き換え、 X の末尾に S を追加する。 こうして得られる文字列の配列 X のうち要素数最小のものを求めてください。要素数最小のものが複数考えられる場合は、そのうち辞書順最小のものを求めてください。 文字列の配列の辞書順とは 長さ N の文字列 S = S_1 S_2 \\ldots S_N が長さ N の文字列 T = T_1 T_2 \\ldots T_N より 辞書順で小さい とは、ある整数 1 \\leq i \\leq N が存在して下記の 2 つがともに成り立つことをいいます。 S_1 S_2 \\ldots S_{i-1} = T_1 T_2 \\ldots T_{i-1} S_i が T_i よりアルファベット順で早い。 要素数 M の文字列の配列 X = (X_1,X_2,\\ldots,X_M) が要素数 M の文字列の配列 Y = (Y_1,Y_2,\\ldots,Y_M) より 辞書順で小さい とは、ある整数 1 \\leq j \\leq M が存在して下記の 2 つがともに成り立つことをいいます。 (X_1,X_2,\\ldots,X_{j-1}) = (Y_1,Y_2,\\ldots,Y_{j-1}) X_j が Y_j より辞書順で小さい。 制約 S, T は英小文字からなる長さ 1 以上 100 以下の文字列 S と T の長さは等しい 入力 入力は以下の形式で標準入力から与えられる。 S T 出力 答えの要素数を M として M + 1 行出力せよ。 1 行目には M の値を出力せよ。 i + 1 (1 \\leq i \\leq M) 行目には答えの i 番目の要素を出力せよ。 入力例 1 adbe\r\nbcbc 出力例 1 3\r\nacbe\r\nacbc\r\nbcbc はじめ、 S = adbe です。 以下のように操作することで、 X = ( acbe , acbc , bcbc ) とすることができます。 S を acbe に書き換え、 X の末尾に acbe を追加する。 S を acbc に書き換え、 X の末尾に acbc を追加する。 S を bcbc に書き換え、 X の末尾に bcbc を追加する。 入力例 2 abcde\r\nabcde 出力例 2 0 入力例 3 afwgebrw\r\noarbrenq 出力例 3 8\r\naawgebrw\r\naargebrw\r\naarbebrw\r\naarbebnw\r\naarbebnq\r\naarbeenq\r\naarbrenq\r\noarbrenq",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英小文字からなる文字列 S, T が与えられます。ここで、 S と T の長さは等しいです。 X を空の配列とし、以下の操作を S と T が等しくなるまで繰り返します。 S の文字を 1 文字書き換え、 X の末尾に S を追加する。 こうして得られる文字列の配列 X のうち要素数最小のものを求めてください。要素数最小のものが複数考えられる場合は、そのうち辞書順最小のものを求めてください。 文字列の配列の辞書順とは 長さ N の文字列 S = S_1 S_2 \\ldots S_N が長さ N の文字列 T = T_1 T_2 \\ldots T_N より 辞書順で小さい とは、ある整数 1 \\leq i \\leq N が存在して下記の 2 つがともに成り立つことをいいます。 S_1 S_2 \\ldots S_{i-1} = T_1 T_2 \\ldots T_{i-1} S_i が T_i よりアルファベット順で早い。 要素数 M の文字列の配列 X = (X_1,X_2,\\ldots,X_M) が要素数 M の文字列の配列 Y = (Y_1,Y_2,\\ldots,Y_M) より 辞書順で小さい とは、ある整数 1 \\leq j \\leq M が存在して下記の 2 つがともに成り立つことをいいます。 (X_1,X_2,\\ldots,X_{j-1}) = (Y_1,Y_2,\\ldots,Y_{j-1}) X_j が Y_j より辞書順で小さい。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 S, T は英小文字からなる長さ 1 以上 100 以下の文字列 S と T の長さは等しい"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S T"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えの要素数を M として M + 1 行出力せよ。 1 行目には M の値を出力せよ。 i + 1 (1 \\leq i \\leq M) 行目には答えの i 番目の要素を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 adbe\r\nbcbc"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3\r\nacbe\r\nacbc\r\nbcbc はじめ、 S = adbe です。 以下のように操作することで、 X = ( acbe , acbc , bcbc ) とすることができます。 S を acbe に書き換え、 X の末尾に acbe を追加する。 S を acbc に書き換え、 X の末尾に acbc を追加する。 S を bcbc に書き換え、 X の末尾に bcbc を追加する。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 abcde\r\nabcde"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 afwgebrw\r\noarbrenq"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 8\r\naawgebrw\r\naargebrw\r\naarbebrw\r\naarbebnw\r\naarbebnq\r\naarbeenq\r\naarbrenq\r\noarbrenq"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc370/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:52.232366+00:00",
+  "statement_sha256": "9d8f65ae115d0e28971b56289b0d9b938b33d75595e53f3dda3eef5206654820",
+  "editorials": []
+}

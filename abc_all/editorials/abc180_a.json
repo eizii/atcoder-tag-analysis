@@ -1,0 +1,31 @@
+{
+  "problem_id": "abc180_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc180/editorial/225",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practicecontest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nこの問題では、「Welcome to AtCoder」と同様に、\n\\(N\\)\n,\n\\(A\\)\n,\n\\(B\\)\nの\n\\(3\\)\nつの入力を数値として受け取り、\n\\(N-A+B\\)\nの計算結果を出力すればよいです。\n回答例(Python)\n回答例(C++)\n回答例©",
+      "codes": [
+        "N, A, B = map(int,input().split())\nprint(N-A+B)",
+        "#include <iostream>\nusing namespace std;\n\nint main(){\n\tint N, A, B;\n\tcin >> N >> A >> B;\n\tcout << N-A+B << endl;\n}",
+        "#include<stdio.h>\n\nint main(){\n\tint N, A, B;\n\tscanf(\"%d %d %d\", &N, &A, &B);\n\tprintf(\"%d\", N-A+B);\n}"
+      ],
+      "text_sha256": "6490ab149b30eca3c259f180a996092dcde115f9dc1e531fff1b87960372303b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc180/abc180_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc180/editorial/2262",
+      "text": "この解説は、C++ に入門したばかりの中高生レベルを想定して、考察の方法、コードの書き方の解説をします。\n考察としては、入力\n\\(N,A,B\\)\nを受け取り、\n\\(N-A+B\\)\nを答えとして出力すれば良いです。\nコード例 (\n実際の提出のリンクはこちら\n)\nまた、以下のように書くこともできます。\nコード例 (\n実際の提出のリンクはこちら\n)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    // int 型の変数(箱)を3つ作る\n    int N, A, B;\n\n    // cin で入力を順番に受け取ることができる。「>>」で区切ること（<<ではない）\n    cin >> N >> A >> B;\n\n    // 求める答えは N - A + B である。answer という変数(箱)を用意して、これに計算結果を入れる\n    int answer = N - A + B;\n\n    // cout を使うと答えを出力することが出来る。「<<」で区切ること（>>ではない）\n    // endl で改行する。\n    cout << answer << endl;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N, A, B;\n\n    cin >> N >> A >> B;\n\n    // この様に、直接計算結果を cout で出力することも出来る\n    cout <<  N - A + B << endl;\n}"
+      ],
+      "text_sha256": "ead92fad7145b016cdd714d8d4ee395d72fc8a90125f929b215a236dff15024f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc180/abc180_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

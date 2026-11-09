@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc382_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc382/editorial/11474",
+      "text": "「現在の\n\\(S\\)\nの中で最も右の位置にある\n@\nを探し、それを\n.\nに置き換える」という処理を\n\\(D\\)\n回行えばよいです。\n具体的な実装方法は下記の実装例 (C++, Python) を参考にしてください。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, d;\n    string s;\n    cin >> n >> d >> s;\n    for (int i = 0; i < d; i++) {\n        for (int j = n - 1; j >= 0; j--) {\n            if (s[j] == '@') {\n                s[j] = '.';\n                break;\n            }\n        }\n    }\n    cout << s << endl;\n}",
+        "n, d = map(int, input().split())\ns = input()\nfor i in range(d):\n    for j in range(n):\n        if s[n - 1 - j] == '@':\n            s = s[:n - 1 - j] + \".\" + s[n - j:]\n            break\nprint(s)"
+      ],
+      "text_sha256": "145537cdc5b07fa5d55148effd3bcbb2799bdd94c137fe0f551f3590bafbac90",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc382/abc382_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

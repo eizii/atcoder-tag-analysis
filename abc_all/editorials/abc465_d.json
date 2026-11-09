@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc465_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc465/editorial/22416",
+      "text": "ある整数からある整数に置き換えることが可能な場合に辺を結んだグラフを考えると、以下のように木になることが分かります（以下の画像は\n\\(K=3\\)\nの場合です）。無向グラフなのは操作に可逆性があるためです。\nしたがって、根付き木の LCA を求めるアルゴリズムと同じ要領で、以下のアルゴリズムで答えを再帰的に求めることができます：\n\\(X=Y\\)\nである場合：答えは\n\\(0\\)\nである。\n\\(X<Y\\)\nである場合：答えは\n\\((X,Y)\\)\nが\n\\(\\displaystyle \\left(X,\\left\\lfloor \\frac YK\\right\\rfloor \\right)\\)\nである場合の答えに\n\\(1\\)\n足した値である。\n\\(X>Y\\)\nである場合：答えは\n\\((X,Y)\\)\nが\n\\(\\displaystyle \\left(\\left\\lfloor \\frac XK\\right\\rfloor,Y \\right)\\)\nである場合の答えに\n\\(1\\)\n足した値である。\n以上をそのまま実装することでこの問題に正答することができます。計算量はテストケース毎に\n\\(\\displaystyle O\\left(\\frac{\\log X+\\log Y}{\\log K}\\right)\\)\nです。\n実装例(Python3)",
+      "codes": [
+        "input = __import__(\"sys\").stdin.readline\n\nfor _ in range(int(input())):\n    x, y, k = map(int, input().split())\n    ans = 0\n    while x != y:\n        if x < y:\n            x, y = y, x\n        x //= k\n        ans += 1\n    print(ans)"
+      ],
+      "text_sha256": "40deeeed42b0bdb1d34d39ab465384e9c9ed23095839bcb72c97b6338bee7d3f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc465/abc465_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc465/editorial/22572",
+      "text": "問題文に記載された操作は、\n\\(K\\)\n進数を考えることでそれぞれ次のように言い換えることが可能です。\n\\(x\\)\nを\n\\(K\\)\n進数で表現したときの末尾の桁を取り除く\n\\(x\\)\nの\n\\(K\\)\n進数表現の末尾桁に好きな\n\\(0\\)\n以上\n\\(K\\)\n未満の数を追加する\nこのように言い換えると、次のように操作を行うことが最適であることが言えます。\n\\(x\\)\nの\n\\(K\\)\n進数表現が\n\\(Y\\)\nの\n\\(K\\)\n進数表現のprefixとなるまで、末尾桁を取り除く操作を行う。その後、\n\\(x\\)\nと\n\\(Y\\)\nが一致するまで末尾桁に数を追加する操作を行う。\n最適性は、\n\\(X\\)\nと\n\\(Y\\)\nのprefixで一致しない数については必ず削除操作で取り除く必要があることからこの回数が下界であることが示せます。\nしたがって、\n\\(X, Y\\)\nの\n\\(K\\)\n進数表現をそれぞれ求めた桁数を\n\\(x_s, y_s\\)\n、prefixで一致する桁数を\n\\(p\\)\nとして、\n\\((x_s - p) + (y_s - p)\\)\nが答えとなります。\n下の実装例では、\n\\(K\\)\n進数での表現をC++の\nvector<long long>\nとして管理しています。\n実装例（C++）",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n#define rep(i, n) for (ll i=0; i<(n); i++)\n#define all(x) (x).begin(), (x).end()\n\n// x を base 進法で表した桁列を返す\nvector<ll> to_digits(ll x, ll base) {\n    assert(base > 1);\n    vector<ll> result;\n    while (x > 0) {\n        result.emplace_back(x % base);\n        x /= base;\n    }\n    reverse(all(result));\n    return result;\n}\n\nvoid solve() {\n    ll x,y,k; cin >> x >> y >> k;\n    vector<ll> a = to_digits(x, k);\n    vector<ll> b = to_digits(y, k);\n    ll pre = 0;\n    rep(i, min(a.size(), b.size())) {\n        if (a[i] != b[i]) break;\n        pre++;\n    }\n    ll ans = (a.size() - pre) + (b.size() - pre);\n    cout << ans << '\\n';\n}\n\nint main() {\n    int t; cin >> t;\n    rep(i, t) solve();\n}"
+      ],
+      "text_sha256": "1bb0a4e4ee573af4ff47b885646d41fd0bdc722d43e8aa2c84a6ab4f0d54d93f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc465/abc465_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

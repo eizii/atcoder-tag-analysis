@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc025_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc025/editorial.pdf",
+      "text": "問題A – 25個の文字列\n\f\n問題概要\n\n• 長さ 5 の文字列 𝑆 と整数 𝑁 が与えられます。\n• 𝑆 に含まれる文字を 2 回選び、長さ 2 の文字列を作成します。\n• 考えられうる 25 通りの文字列のうち、辞書順で 𝑁 番目の文字列を\n 出力してください。\n\n\n• 1 ≦𝑁≦25\n• 𝑆 には 5 種類のアルファベットが使用されており、それらは昇順に並\n んでいる。\n\f\n解法\n\n• 25 通りすべての文字列を生成し、ソートをすることで解くことができ\n ます。\n\n\n• ですが、実際にはソートしなくても答えを計算することができます。\n\n• 答えの文字列を 𝑋 とし、𝑁−1 を 5 で割った商と余りをそれぞれ 𝐴 と\n 𝐵 としたとき、 𝑋 の 1 文字目は 𝑆 の 𝐴+ 1 文字目、 𝑋 の 2 文字目は\n 𝑆 の 𝐵+ 1 文字目となります (𝑆 内の文字は昇順に並んでいるため)。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "e43c61bd63ac245f7db81cf2999ba36c14a71afdc1fcc7c36f9b06d9333e1c83"
+    }
+  ],
+  "status": "available"
+}

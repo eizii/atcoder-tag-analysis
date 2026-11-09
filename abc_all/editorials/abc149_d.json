@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc149_d",
+  "editorials": [
+    {
+      "text": "D: Prediction and Restriction(writer : yuma000)\nまず前提として、a 回目にこちらが出す手とb 回目にこちらが出す手は、a mod K != b mod K\nならば、独立に選べます(どちらかの選択がもう片方の選択に制限を与えることはない)。\nN 回のじゃんけんを、mod K によってK 個のグループに分けることを考えます。この時、各グ\nループに対して、以下のsub 問題を解くことができれば、この問題を解くことができます。\n• sub 問題このグループに属するじゃんけんで、最大何点とれるか？ただし、連続で同じ手を出\nすことはできない。\n以下が、sub 問題への解法です。\n解法1(DP)\n前から順に、前回にどんな手を出したかを保持しておきながらDP をします。各sub 問題に対して\nの時間計算量はO(N/K) なので、トータルでの時間計算量はO(N) です。\n解法2(貪欲法)\n貪欲法でも解けます(こっちの方が実装は楽です)。具体的には前から順に、\n• 勝てるならば勝てる手を出す。\n• (前回自分が出した手の制限のせいで) 勝てない場合は、次の手の邪魔にならない手を出す。\n以上のようにすることで最適な解が求まります。\n",
+      "text_sha256": "29046314098f59da193941245fd74ac709b5f063161d7174bbabecfe8b339d96",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc149/abc149_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

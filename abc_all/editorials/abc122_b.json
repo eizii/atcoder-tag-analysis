@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc122_b",
+  "editorials": [
+    {
+      "text": "B: ATCoder\n文字列S の長さをN とします。S の部分文字列は、空文字列以外にN + (N −1) + (N −2) + ... + 1 =\nN(N + 1)/2 個存在します(S の1 文字目から始まるものがN 個、2 文字目から始まるものがN −1 個、\n. . .、N 文字目から始まるものが1 個。なお、中身が同じでもS の異なる位置から取り出された部分文字列は\n別として数えています)。\nこの問題ではN ≤10 であり、この個数は最大で10(10 + 1)/2 = 55 です。これらをすべて調べて、その\nうち最も長いACGT 文字列の長さを報告してほしいという問題です(より効率的に解くこともできますが不\n必要です)。Python3 による実装例をもってこの解説の残りとします。\n1 S = input()\n2 N = len(S)\n3 ans = 0\n4 for i in range(N):\n5\nfor j in range(i, N):\n6\nif all('ACGT'.count(c) == 1 for c in S[i : j + 1]):\n7\nans = max(ans, j - i + 1)\n8 print(ans)\n",
+      "text_sha256": "8d2bc5c1b054d9fdf73255dcd94b72d82ff66a07167831a967133fffb4090378",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc122/abc122_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

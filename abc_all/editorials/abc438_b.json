@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc438_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc438/editorial/14921",
+      "text": "\\(S\\)\nの長さ\n\\(M\\)\nの部分文字列全てに対して、その位置と\n\\(T\\)\nを一致させるのに必要な操作回数を求めることを考えます。\n\\(S\\)\nから取り出した長さ\n\\(M\\)\nの部分文字列を\n\\(S'\\)\nとして、\n\\(f(c_1,c_2)\\)\nを「文字\n\\(c_1\\)\nを\n\\(c_2\\)\nにするために必要な操作回数」とすると操作回数の合計は\n\\(\\displaystyle \\sum_{k=1}^M f(T_k,S'_k)\\)\nと表すことができます。\nまた、\n\\(f(c_1,c_2)\\)\nは以下のように計算できます：\n\\(c_1,c_2\\)\nを一桁の整数として見た値を\n\\(x_1,x_2\\)\nとする。\nもし\n\\(x_1 \\le x_2\\)\nなら\n\\(f(c_1,c_2) = x_2-x_1\\)\nである。\n\\(x_1 > x_2\\)\nなら\n\\(f(c_1,c_2) = x_2-x_1+10\\)\nである。\nこの\n\\(f\\)\nは\n\\(f(c_1,c_2) = (x_2-x_1) \\bmod 10\\)\nと表すこともできます。（ただしこの式をそのまま実装すると C++ などでは負の数の剰余演算の都合上正しい答えを返さないことに注意してください）\n以上を適切に実装することでこの問題に正答することができます。\n実装例(Python3)",
+      "codes": [
+        "n, m = map(int, input().split())\ns = input()\nt = input()\nans = 10**9\nfor st in range(n - m + 1):\n    res = 0\n    for i in range(m):\n        res += (int(s[st + i]) - int(t[i])) % 10\n    ans = min(ans, res)\nprint(ans)"
+      ],
+      "text_sha256": "254bb7ad42f0f730c17c5c463805d561b335986bab63bfa469c67cc4da9aac7d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc438/abc438_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

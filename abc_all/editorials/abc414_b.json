@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc414_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc414/editorial/13440",
+      "text": "はじめに入力をすべて受け取り，\n\\(l_i\\)\nの総和（すなわち\n\\(S\\)\nの長さ）が\n\\(100\\)\nより大きければ\nToo Long\nと出力し，\n\\(100\\)\n以下ならば 各\n\\(i\\)\nに対して\n\\(c_i\\)\nを\n\\(l_i\\)\n回出力することでこの問題を解くことができます．\nただし，オーバーフローには十分気を付けてください．例えば c++ で\nlong long\nを用いて\n\\(l_i\\)\nの総和を次のように求めようとすると Wrong Answer になります．\nこれを回避するには，例えば\nsum\nの総和を求めるループの部分で，\nsum\nが\n\\(100\\)\nを超えた瞬間に即座に打ち切ればよいです．\n実装例（c++）\nPython などのオーバーフローを気にしなくて良い言語はそのまま書いても良いです．\n実装例（Python）",
+      "codes": [
+        "long long sum = 0;\nfor (int i = 0; i < N; i++) {\n  char c;\n  long long l;\n  cin >> c >> l;\n  sum += l;\n}\nif (sum > 100) {\n  cout << \"Too Long\";\n} else {\n  // S を出力\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n  int N;\n  vector<pair<char, ll>> P;\n  cin >> N;\n  ll sum = 0;\n  for (int i = 0; i < N; i++) {\n    char c;\n    ll L;\n    cin >> c >> L;\n    sum += L;\n    if (sum > 100) {\n      cout << \"Too Long\" << endl;\n      return 0;\n    }\n    P.push_back({c, L});\n  }\n  for (auto [c, l] : P) {\n    while (l--) cout << c;\n  }\n  cout << endl;\n}",
+        "N = int(input())\nP = []\nfor i in range(N):\n    c, l = input().split()\n    P.append([c, int(l)])\nif sum(map(lambda x: x[1], P)) > 100:\n    print(\"Too Long\")\nelse:\n    S = \"\"\n    for c, l in P:\n        S += c * l\n    print(S)"
+      ],
+      "text_sha256": "66954d6d7261687a678464e0b4dca8a5e7888c688d6bc4fe802cac9cf85f55e5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc414/abc414_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc414/editorial/13687",
+      "text": "注：ツイート内のE問題の解説は誤りです。\nhttps://x.com/kyopro_friends/status/1944032441515020378",
+      "codes": [],
+      "text_sha256": "7211b2042198a7f148b80079c045ae48fedda69bfec7c15dded8eb2461622f40",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc414/abc414_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

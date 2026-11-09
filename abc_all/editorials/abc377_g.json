@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc377_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc377/editorial/11244",
+      "text": "以下のような動的計画法を考えます。\n\\(d_k[T]=(\\)\n空文字列、\n\\(S_1,S_2,\\ldots,S_{k-1}\\)\nのうち\n\\(T\\)\nが接頭辞であるような文字列の長さの最小値、ただし存在しないなら\n\\(\\infty\\)\n\\()\\)\n\\(k=0\\)\nでは\n\\(T\\)\nが空文字列なら\n\\(d_0[T]=0\\)\n、空文字列でないなら\n\\(d_0[T]=\\infty\\)\nとします。\n\\(d_{k-1}\\)\nから\n\\(d_k\\)\nへの遷移を考えると、\n\\(i=1,2,\\ldots,|S_k|\\)\nに対し\n\\(d_{k}[S_k[:i]] \\leftarrow \\min(d_{k}[S_k[:i]] , |S_k|)\\)\nとなります。ここで、\n\\(S_k[:i]\\)\nは\n\\(S_k\\)\nの\n\\(i\\)\n文字目までの文字列です。\nこの文字列を直接添字に持つと TLE してしまいますが、 Trie として木で持ちながら in-place に更新することで空間計算量\n\\(\\displaystyle O\\left(\\sum_{k=1}^N |S_k| \\right)\\)\nで値を持つことができます。Trie として持つと上で示した遷移は各\n\\(k\\)\nに対して根から探索することで\n\\(\\displaystyle O(|S_k|)\\)\nで更新できます。\n問題の答えは\n\\(\\displaystyle \\min_{0\\le i\\le |S_k|} \\left(|S_k|+d_{k-1}[S_{k}[:i]]-2i \\right) \\)\nですが、 この値も\n\\(d_{k-1}\\)\nから\n\\(d_k\\)\nへの更新と同じ要領で計算できます。\n以上を適切に実装することでこの問題を解くことができます。\n実装例 (Python3)",
+      "codes": [
+        "d = [0]\nINF = 10**9\nto = [[-1 for i in range(26)]]\nfor _ in range(int(input())):\n    s = input()\n    n = len(s)\n    ans = n\n    now = 0\n    for i in range(1, n + 1):\n        si = ord(s[i - 1]) - ord(\"a\")\n        if to[now][si] == -1:\n            to[now][si] = len(to)\n            to.append([-1 for _ in range(26)])\n            d.append(INF)\n        now = to[now][si]\n        ans = min(ans, d[now] + n - 2 * i)\n        d[now] = min(d[now], n)\n    print(ans)"
+      ],
+      "text_sha256": "4b9d834ad9782ba4024cf9463fb7ab24e78455e26d0d204d386b6334cf09d722",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc377/abc377_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc377/editorial/11249",
+      "text": "\\(S_k\\)\nの長さを\n\\(l_k\\)\nとします。\n\\(k\\)\n番目を見るとき、前から\n\\(c\\)\n文字が一致するものが\n\\(S_1\\)\nから\n\\(S_{k-1}\\)\nまでに出現していたら、それらのうち最も短いものの長さを\n\\(l_{min}\\)\nとして\n\\(l_k + l_{min} - 2c\\)\nを達成できます。\n既に現われた接頭辞をすべてハッシュ化し、それらのうち最も短いものの長さを dict で管理すれば、すべての\n\\(c\\)\nについて調べても間に合います。\nハッシュはローリングハッシュやランダムベクトルとの内積を取る方法などがあります。\n実装例\n（Python）",
+      "codes": [],
+      "text_sha256": "4032c71f924c4dc164a8beb691f47f403d73e4b72f58149a5fb199461d250866",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc377/abc377_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc421_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc421/editorial/13787",
+      "text": "連結リストに似たアルゴリズムを用います。\n具体的には、現在の\n\\(A\\)\nの中に現れるそれぞれの値\n\\(i\\)\nについて、\n\\(A\\)\nの中で\n\\(i\\)\nの直後に現れる値（\n\\(i\\)\nが末尾にあるならば\n\\(-1\\)\n）を\n\\(\\text{next}_i\\)\nと定義し、これを管理することを考えます。\nはじめ、\n\\(A\\)\nの中に現れる値は\n\\(0\\)\nのみであり、\n\\(\\text{next}_0=-1\\)\nです。\n\\(1\\)\n種類目のクエリ、すなわち値\n\\(x\\)\nの直後に値\n\\(i\\)\nを挿入する操作について考えます。\n\\(i\\)\nを挿入する前の\n\\(\\text{next}_x\\)\nの値を\n\\(y\\)\nとおくと、元々\n\\(\\dots\\rightarrow x\\rightarrow y\\rightarrow \\dots\\)\nとなっていた所が\n\\(\\dots\\rightarrow x\\rightarrow i\\rightarrow y\\rightarrow \\dots\\)\nというように変化するわけですから、\n\\(\\text{next}_x\\)\nの値が\n\\(i\\)\nに、\n\\(\\text{next}_i\\)\nの値が\n\\(y\\)\nにそれぞれ更新され、逆にそれ以外の更新はありません。\n\\(2\\)\n種類目のクエリ、すなわち値\n\\(x\\)\nと値\n\\(y\\)\nの間にある値の合計を出力し、それらを削除するという操作について考えます。\nまず、\n\\(A\\)\nの中で\n\\(x\\)\nが\n\\(y\\)\nよりも先に現れると分かっている場合について考えます。この場合、\n\\(x\\)\nから始めて\n\\(x\\rightarrow \\text{next}_x \\rightarrow \\text{next}_{\\text{next}_x} \\rightarrow \\dots\\)\nというように辿っていき、\n\\(y\\)\nに到達するまで続ければ、\n\\(x\\)\nと\n\\(y\\)\nの間にある要素が全てわかります。その後これらの要素を削除するためには、単に\n\\(\\text{next}_x\\)\nの値を\n\\(y\\)\nに更新すればよいです。削除される要素の数に比例する計算量がかかりますが、要素の追加が高々\n\\(Q\\)\n回しか起こらないことから、削除される要素の数も合計で高々\n\\(Q\\)\n個に抑えられます。\n\\(A\\)\nの中で\n\\(y\\)\nが\n\\(x\\)\nよりも先に現れると分かっている場合も、同様に\n\\(y\\)\nから始めて\n\\(y\\rightarrow \\text{next}_y \\rightarrow \\text{next}_{\\text{next}_y} \\rightarrow \\dots\\)\nと辿っていけばよいです。\n問題は、実際には\n\\(A\\)\nの中で\n\\(x\\)\nと\n\\(y\\)\nのどちらが先に現れるのか分からないことです。しかし、\n\\(x\\rightarrow \\text{next}_x \\rightarrow \\text{next}_{\\text{next}_x} \\rightarrow \\dots\\)\nと辿っていく過程と\n\\(y\\rightarrow \\text{next}_y \\rightarrow \\text{next}_{\\text{next}_y} \\rightarrow \\dots\\)\nと辿っていく過程を\n\\(1\\)\nステップずつ交互に進めていき、前者が\n\\(y\\)\nに到達した or 後者が\n\\(x\\)\nに到達したタイミングで打ち切れば、削除される要素数の\n\\(2\\)\n倍程度のステップ数で済むことになり、全体の計算量を変わらず\n\\(O(Q)\\)\nに抑えることができます。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int q;\n    cin >> q;\n    vector<int> next(q + 1);\n    next[0] = -1;\n    for (int i = 1; i <= q; i++) {\n        int t;\n        cin >> t;\n        if (t == 1) {\n            int x;\n            cin >> x;\n            next[i] = next[x];\n            next[x] = i;\n        } else {\n            int x, y;\n            cin >> x >> y;\n            int cx = x, cy = y;\n            long long sx = 0, sy = 0;\n            while (true) {\n                if (next[cx] != -1) {\n                    cx = next[cx];\n                    if (cx == y) {\n                        cout << sx << '\\n';\n                        next[x] = y;\n                        break;\n                    } else {\n                        sx += cx;\n                    }\n                }\n                if (next[cy] != -1) {\n                    cy = next[cy];\n                    if (cy == x) {\n                        cout << sy << '\\n';\n                        next[y] = x;\n                        break;\n                    } else {\n                        sy += cy;\n                    }\n                }\n            }\n        }\n    }\n}"
+      ],
+      "text_sha256": "15948d8276714eefb3443c53aec0685fbc501e2182906fa985fb945ebc85d914",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc421/abc421_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc421/editorial/13802",
+      "text": "以下のようにして得られる数列\n\\(B\\)\nを考えます．\nはじめ\n\\(B=(0)\\)\nである．\n\\(i=1,\\dots,Q\\)\nに対して順に，\n\\(i\\)\n番目のクエリに応じて以下の操作を行う．\nクエリが\n1 x\nのとき，\n\\(B\\)\nの\n\\(x\\)\nの直後に\n\\(i\\)\nを挿入する．\nクエリが\n2 x y\nのとき，何もしない．\n\\(B\\)\nは stack などにより計算できます．\n\\(B\\)\nの要素である\n\\(i\\)\nに対し，\n\\(P_i\\)\nを\n\\(B_{P_i}=i\\)\nを満たす整数とします．\nこのとき元の問題は以下のように言い換えられます．\n長さ\n\\(Q+1\\)\nの数列\n\\(V\\)\nがあり，はじめ\n\\(V=(0,0,\\dots,0)\\)\nである．\n\\(i=1,\\dots,Q\\)\nに対して順に，\n\\(i\\)\n番目のクエリに応じて以下の操作を行う．\nクエリが\n1 x\nのとき，\n\\(V_{P_i}=i\\)\nとする．\nクエリが\n2 x y\nのとき，\n\\(p=\\min(P_x,P_y),q=\\max(P_x,P_y)\\)\nとして\n\\(V_{p+1}+V_{p+2}+\\cdots+V_{q-1}\\)\nを出力し，\n\\(V_{p+1},V_{p+2},\\dots,V_{q-1}\\)\nをすべて\n\\(0\\)\nにする．\n遅延セグメント木を用いたり，\n\\(V\\)\nのうち\n\\(0\\)\nでない要素の位置を管理したりすることで\n\\(O(Q\\log Q)\\)\n時間などで解くことができます．\n実装例(C++, 遅延セグメント木)\n実装例(C++, std::set)\n実装例(C++, セグメント木)",
+      "codes": [],
+      "text_sha256": "5bc7f8faaaf9c88655072cf8c4d4b02d1a25b1c1d0519cb50ff4345cd3b9026d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc421/abc421_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

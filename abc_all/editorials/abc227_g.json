@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc227_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc227/editorial/2909",
+      "text": "正の整数 \\(M\\) が \\(M=\\prod_i p_i^{e_i}\\) と素因数分解されるとき、 \\(M\\) の正の約数の個数は \\(\\prod_i (e_i+1)\\) 個です。したがって、 \\(\\binom{N}{K}\\) が 素因数分解できれば答えを求めることができます。 等式 \\( \\displaystyle \\binom{N}{K}=\\frac{N(N-1)\\dots(N-K+1)}{1\\cdot 2 \\cdot \\cdots \\cdot K}\\) より、分母の \\(1,2,\\ldots,K\\) と分子の \\(N-K+1,\\ldots,N-1,N\\) の \\(2K\\) 個の数が素因数分解できれば、 \\( \\binom{N}{K}\\) の素因数分解の結果もわかります。これを高速に求めることを考えます。 \\(1,2,\\ldots,K\\) の素因数分解は、エラトステネスの篩のように、次のようにして求めることができます。 擬似コード このアルゴリズムの計算量はエラトステネスの篩同様に \\(O(K\\log\\log K)\\) です。 計算量解析 まず、$p$ を固定したとき $5$ ～ $8$ 行目の計算量を考えます。while文が $n$ 回以上実行されるような $i$ は高々 $\\left\\lfloor \\frac{K}{p^n}\\right\\rfloor $ 個であるため、計算量は$\\sum_{n=1}^{\\infty} \\frac{K}{p^n}=\\frac{K}{p-1}$ で抑えられます。したがって、$p$ が $K$ 以下の素数全体を動いたときの計算量は$ \\sum_{p\\leq K, p:\\text{prime}} \\frac{K}{p-1}=O(K\\log\\log K)$ となります。 \\(N-K+1,\\ldots,N-1,N\\) の素因数分解もほとんど同様に行うことができます。試し割りによる素因数分解と同様に、 \\(\\sqrt{N}\\) までの素数で割ったあとに残っている値は素数であることを利用します。 擬似コード このアルゴリズムの計算量は、 \\(M=\\max(\\sqrt{N},K)\\) として、素数列挙にかかる時間も含めて \\(O(M\\log\\log M)\\) です。 これらの結果からもとの問題の答えを求めることは容易です。 なお、適切に処理順序を入れ替えることで、各数の素因数分解の結果を保持する必要はなくなります。 実装例(C++) 実装例(Python)",
+      "codes": [
+        "primes=[2,3,5,...]  // K以下の素数\nA=[0,1,2,...,K]  // A[i] = i\ndivisors=[[],[],...,[]]\nfor p in primes\n\tfor i=p to K step p\n\t\twhile A[i]%p==0\n\t\t\tdivisors[i].append(p)\n\t\t\tA[i]/=p\n",
+        "for p in primes  // sqrt(N) 以下の素数\n\tfor i in {N-K+1以上N以下のpの倍数}\n\t\twhile A[i]%p==0\n\t\t\tdivisors[i].append(p)\n\t\t\tA[i]/=p\nfor i=N-K+1 to N\n\tif A[i]!=1\n\t\tdivisors[i].append(A[i])\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "0e917f6ed8cefb05959a4ae9332307e42193eb3fe9b44474ca5ce9663220ed62"
+    }
+  ],
+  "status": "available"
+}

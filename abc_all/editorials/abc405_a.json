@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc405_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13006",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n\\(2\\)\nつの整数\n\\(R,X\\)\n（ただし\n\\(X\\)\nは\n\\(1\\)\nまたは\n\\(2\\)\n）が与えられるので、\n\\(X\\)\nの値および\n\\(R\\)\nの値の範囲に応じて適切に\nYes\nと\nNo\nのいずれかを出力する問題です。\nこの問題を解くプログラムを作成するためには、整数の\n入出力\nおよび\n条件分岐\nという\n\\(2\\)\nつの要素が必要になります。条件分岐のパートについては、まず\n\\(X\\)\nの値（\n\\(1\\)\nor\n\\(2\\)\n）で条件分岐をしたのち、それぞれの分岐先においてさらに\n\\(R\\)\nの値の範囲で条件分岐を行う\n二重の条件分岐\nを用いると、論理構造が明確なプログラムを書くことができます。\nそれぞれの要素を実際にどのようにプログラム上で表現するかは使用するプログラミング言語によって異なるため、下記の実装例 (C++, Python)  や、使用している言語のチュートリアルなどをご参照ください。\n特に、ある変数\n\\(x\\)\nの値が\n\\(A\\)\n以上\n\\(B\\)\n以下であるかを判定したいとき、Python では\nA <= x <= B\nと書けるのに対し、C++ では\nA <= x && x <= B\nや\nA <= x and x <= B\nなどと書く必要があることに注意してください。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int r, x;\n    cin >> r >> x;\n    if (x == 1) {\n        if (1600 <= r and r <= 2999) {\n            cout << \"Yes\" << endl;\n        } else {\n            cout << \"No\" << endl;\n        }\n    } else {\n        if (1200 <= r and r <= 2399) {\n            cout << \"Yes\" << endl;\n        } else {\n            cout << \"No\" << endl;\n        }\n    }\n}",
+        "r, x = map(int, input().split())\nif x == 1:\n  if 1600 <= r <= 2999:\n    print(\"Yes\")\n  else:\n    print(\"No\")\nelse:\n  if 1200 <= r <= 2399:\n    print(\"Yes\")\n  else:\n    print(\"No\")"
+      ],
+      "text_sha256": "7118e7a48d91fcc35f2a51b02ef3a6dd9622e0f711c3e29178db8847503c1e83",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

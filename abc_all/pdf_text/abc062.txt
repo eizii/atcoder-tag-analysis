@@ -1,0 +1,394 @@
+         ABC #062 / ARC #074 Editorial
+
+
+                                    writer : sugim48
+
+                                  2017/05/20
+
+
+
+                  For International Readers: English editorial starts on page 5.
+
+
+A: Grouping
+                                                                       (12 )
+ すべての(x, y) のペアについてYes / No を記録しておく方法では，  2 = 66 通りの場合分けが必要にな
+り，大変です．代わりに，グループに1, 2, 3 と番号を振っておき，各1 ≤x ≤12 ごとにx が属するグループ
+
+の番号を記録しておけば，x, y が属するグループの番号を比較することでYes / No は簡単に判定できます．
+
+                            C++ のコード例
+
+int main () {
+
+         int a[] = {0, 1, 3, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1};
+         // 配列の添字は0 から始まるので，a[0] は0 にしている．
+
+         int x, y; cin >> x >> y;
+
+         cout << (a[x] == a[y] ? "Yes" : "No") << endl;
+
+}
+
+
+B: Picture Frame
+
+ 最初に，縦H + 2 行，横W + 2 列の文字配列b を用意し，# で埋めておきます．次に，各1 ≤i ≤H,
+1 ≤j ≤W ごとにai,j をbi+1,j+1 へコピーします．最後に，配列b の内容を出力すればよいです．
+
+ ちなみに，迷路などが入力として与えられたとき，この問題のようにあらかじめ外壁で囲んでおくと，その
+
+後の実装が簡単になることがあります．
+
+                            C++ のコード例
+
+char a[100][101] , b[102][102];
+
+
+int main () {
+
+         int H, W; cin >> H >> W;
+
+         for (int i = 0; i < H; i++)
+
+                 scanf ("%s", a[i]);
+
+
+
+                                             1
+
+         for (int i = 0; i < H + 2; i++)
+
+                  for (int j = 0; j < W + 2; j++)
+
+                         b[i][j] = ’#’;
+
+
+         for (int i = 0; i < H; i++)
+
+                  for (int j = 0; j < W; j++)
+
+                         b[i + 1][j + 1] = a[i][j];
+
+
+         for (int i = 0; i < H + 2; i++) {
+
+                  for (int j = 0; j < W + 2; j++)
+
+                          cout << b[i][j];
+
+                 cout << endl;
+
+          }
+
+}
+
+
+C : Chocolate Bar
+
+ 分割の方法は次図の4 ケースを考えれば十分です．
+
+
+
+
+
+ 左の2 ケースについて答えを求める方法があれば，H, W を入れ替えて同じ方法を用いることで右の2
+
+ケースについても答えを求められます．これら2 通りの答えの最小値が全体の答えとなります．
+
+ では，左の2 ケースについて答えを求める方法を考えましょう．まず，長方形A の縦幅h (1 ≤h ≤H −1)
+を全探索します．105 オーダーの計算回数ならば，TLE の心配はありません．これで，長方形A の面積SA
+はSA = hW と決まります．あとは，下半分の長方形を長方形B, C へ分割する方法を決めればよいです．
+ 下半分の長方形を分割する方法は，縦2 つに分割するケースと，横2 つに分割するケースがあります．こ
+
+れらはどちらも試すことにしましょう．ここでは，横2 つに分割するケースを説明します．先程と同様に，長
+方形B の横幅を全探索したいところですが，全体で1010 オーダーの計算回数となり，TLE してしまいます．
+
+実は，Smax −Smin をできるだけ小さくするためには，下半分の長方形もできるだけ均等に分割するのがよ
+いことが示せます．できるだけ均等に分割しようとすると，長方形B の横幅w はw = ⌊W/2⌋となります．
+
+すると，長方形B の面積SB はSB = (H −h)w，長方形C の面積SC はSC = (H −h)(W −w) と決まり
+ます．SA, SB, SC がすべて決まったので，この分割におけるSmax −Smin が求まります．以上すべての分
+割におけるSmax −Smin の最小値が，左の2 ケースについての答えです．
+
+
+
+
+
+                                             2
+
+D : 3N Numbers
+
+ 数列a のうち，取り除くN 要素を黒色で，a′ の前半N 要素を赤色で，a′ の後半N 要素を青色で表示す
+
+ることにします．例えば，数列(8, 2, 2, 7, 4, 6, 5, 3, 8) の最適解は(8, 2, 2, 7, 4, 6, 5, 3, 8) となります．
+
+ 次の条件が成り立つような整数k をN ≤k ≤2N の範囲で全探索することにします．
+
+    • a の前半k 要素は黒色または赤色のみで，a の後半3N −k 要素は黒色または青色のみである．
+
+各k について答えを求められれば，それらの最大値が全体の答えとなります．では，各k について答えを求
+
+める方法を考えていきましょう．
+
+  k をひとつ固定します．このとき，a の前半k 要素のうち，ちょうどN 要素が赤色で，残りの要素が黒色です．
+
+同様に，a の後半3N−k 要素のうち，ちょうどN 要素が青色で，残りの要素が黒色です．ここで，赤い要素の選
+
+び方と青い要素の選び方は独立であることに注意してください．答えは(赤い要素の総和)−(青い要素の総和)
+
+の最大値なので，(赤い要素の総和) をできるだけ大きくし，(青い要素の総和) をできるだけ小さくすればよ
+
+いことが分かります．以降は，(赤い要素の総和) の最大値の求め方のみを考えることにします．
+
+ (赤い要素の総和) をできるだけ大きくするためには，a の前半k 要素のうち大きい方からN 要素を赤くす
+
+ればよいです．これは，a の前半k 要素を大きい順にソートし，前半N 要素の総和を求めれば，可能ではあ
+ります．しかし，この方法をすべてのk (N ≤k ≤2N) について行うと，全体の計算量はO(N 2 log N) と
+
+なってTLE してしまいます．すべてのk について，a の前半k 要素のうち大きい方からN 要素の総和を求
+
+める効率的な方法はないでしょうか？
+
+ これは，優先度付きキューと呼ばれるデータ構造を用いて簡単に行うことができます．優先度付きキュー
+
+は，「要素のpush」「最小要素のpop」がともにO(log N) 時間で行えるキューです．あらかじめ，キューにa
+
+の前半N 要素をpush しておきます．また，現在キューに入っている要素の総和を保持しておきます．以降，
+
+k をN から2N までインクリメントしていきますが，a の前半k 要素のうち大きい方からN 要素がキュー
+
+に入っている状態を常に保つことにします．これは，要素ak をキューにpush した後，キューの最小要素を
+pop すれば可能です．また，現在キューに入っている要素の総和も，push / pop された要素の分だけ足し引
+
+きすれば，保持できます．以上の方法で，すべてのk について(赤い要素の総和) がO(N log N) 時間で求ま
+
+ります．
+
+ 同様にして，すべてのk について(青い要素の総和) を求めておけば，あとは各k について
+
+(赤い要素の総和) −(青い要素の総和) を計算し，それらの最大値を取れば全体の答えが求まります．
+
+
+E : RGB Sequence
+
+ この問題はO(N 3 + N 2M) 時間のDP で解けます．
+
+ 左から順番にマスの色を塗っていくことにします．既に色を塗ったマスのうち，最も右にある赤いマスの
+
+index (1-origin) をr とします．ただし，赤いマスが存在しなければr = 0 とします．同様に，緑のマス，青
+
+いマスについてもそれぞれg, b を定義します．この状態に対応する色の履歴の通り数をdp[r][g][b] とします．
+
+ まず，DP の遷移を考えます．k = max{r, g, b} とすると，次に色を塗るマスのindex はk + 1 であること
+
+が分かります．このマスに赤/ 緑/ 青のどれを塗るかによって，それぞれr / g / b がk + 1 へ変わりま
+
+す．例えば，このマスに赤を塗ることに対応する遷移は，dp[k+1][g][b] += dp[r][g][b] となります．
+
+
+                                             3
+
+ 次に，条件が成り立たない配色を数え上げない方法について考えます．区間[li, ri] に対する条件のチェッ
+クは，max{r, g, b} = ri のタイミングで行うことにします．説明のため，r < g < b(= ri) とすると，「区間
+[li, ri] にちょうどxi 色含まれる」という条件は，li とr, g の大小関係の条件で表せます．例えば，xi = 2 の
+場合，r < li かつli ≤g でなければなりません．このような条件が成り立たないようなdp[r][g][b] は0 にし
+
+てしまえばよいです．
+
+
+F : Lotus Leaves
+
+ この問題は，グラフの最小カット問題に帰着できます．以降は，グラフの作り方を説明します．
+
+ グラフの頂点は，始点s，終点t，赤い頂点1, 2, ..., H，青い頂点1, 2, ..., W です．赤い頂点y (1 ≤y ≤H)
+
+は，カエルが行y のどこかのマスにいる，という状態を表します．同様に，青い頂点x (1 ≤x ≤W) は，カ
+
+エルが列x のどこかのマスにいる，という状態を表します．よって，マスS が(ys, xs) のとき，始点s から
+赤い頂点ys と青い頂点xs へ，それぞれ容量∞の有向辺を張ります．同様に，マスT が(yt, xt) のとき，
+赤い頂点yt と青い頂点xt から終点t へ，それぞれ容量∞の有向辺を張ります．さらに，それぞれの蓮の葉
+(y, x) について，赤い頂点y と青い頂点x の間に，容量1 の無向辺を張ります．この無向辺は，カエルが葉
+
+(y, x) で行y 内の移動と列x 内の移動を切り替えられる，ということを表します．
+
+ 以上のグラフにおいて，s →t 間の最小カットが問題の答えとなります．これは，s →t 間の最大フローと
+
+一致するので，Ford-Fulkerson のアルゴリズムなどで求まります．
+
+
+
+
+
+                                             4
+
+         ABC #062 / ARC #074 Editorial
+
+
+                                    writer : sugim48
+
+                                  2017/05/20
+
+
+
+
+
+A: Grouping
+
+
+                          C++ Code Example
+
+int main () {
+
+         int a[] = {0, 1, 3, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1};
+
+         int x, y; cin >> x >> y;
+
+         cout << (a[x] == a[y] ? "Yes" : "No") << endl;
+
+}
+
+
+B: Picture Frame
+
+
+                          C++ Code Example
+
+char a[100][101] , b[102][102];
+
+
+int main () {
+
+         int H, W; cin >> H >> W;
+
+         for (int i = 0; i < H; i++)
+
+                 scanf ("%s", a[i]);
+
+
+         for (int i = 0; i < H + 2; i++)
+
+                  for (int j = 0; j < W + 2; j++)
+
+                         b[i][j] = ’#’;
+
+
+         for (int i = 0; i < H; i++)
+
+                  for (int j = 0; j < W; j++)
+
+                         b[i + 1][j + 1] = a[i][j];
+
+
+
+                                             1
+
+         for (int i = 0; i < H + 2; i++) {
+
+                  for (int j = 0; j < W + 2; j++)
+
+                          cout << b[i][j];
+
+                 cout << endl;
+
+          }
+
+}
+
+
+C : Chocolate Bar
+
+  There are four cases:
+
+
+
+
+
+  In the ﬁrst two cases, we ﬁx the height h of the rectangle A (and try all possible values of h).
+
+  The diﬀerence between B and C should be as small as possible. In the ﬁrst case, the heights of B
+
+and C should be floor((H −h)/2) and ceil((H −h)/2), and in the second case, the widths of B and C
+
+should be floor(W/2) and ceil(W/2).
+
+  The last two cases are similar to the ﬁrst two cases.
+
+
+D : 3N Numbers
+
+  Let’s color the removed elements black, the ﬁrst N elements of a′ red, and the last N elements of
+a′ blue. For example, one optimal solution for the sequence (8, 2, 2, 7, 4, 6, 5, 3, 8) can be represented as
+
+(8, 2, 2, 7, 4, 6, 5, 3, 8).
+
+  There exists an integer k(N ≤k ≤2N) such that:
+
+    • The ﬁrst k elements of a are either red or black.
+
+    • The last 3N −k elements of a are either blue or black.
+
+  Fix such an integer k. Obviously, we should choose the largest N integers from the ﬁrst k elements
+
+as red elements, and the smallest N integers from the last 3N −k elements as blue elements. For each
+
+k(N ≤k ≤2N), we compute the sum of the largest N integers among a1, . . . , ak. This is a well-known
+
+task, and it can be done in O(NlogN) using priority queue. Similarly, we can compute the sum of blue
+
+elements for each k, and the answer is the maximum of red minus blue.
+
+
+
+
+
+                                             2
+
+E : RGB Sequence
+
+ We color the squares from left to right. Deﬁne dp[r][g][b] as the number of ways to color the ﬁrst
+
+k = max{r, g, b} squares, such that:
+
+    • The last square we painted red is the r-th square (1-based). r = 0 if no square was painted red.
+
+    • The last square we painted green is the g-th square.
+
+    • The last square we painted blue is the b-th square.
+
+    • There’s no contradiction in the ﬁrst k squares:  if ri ≤k, the number of diﬀerent colors in the
+      range [li, ri] must be exactly xi.
+
+  The transitions will be  like ”dp[k+1][g][b] += dp[r][g][b], dp[r][k+1][b] += dp[r][g][b],
+
+dp[r][g][k+1] += dp[r][g][b]”.    However,  when  dp[r][g][b]  is  contradictory,  we  should  do
+
+”dp[r][g][b] = 0;” instead.
+  This solution works in O(N 3 + N 2M).
+
+
+F : Lotus Leaves
+
+  Convert the grid into a bipartite graph. We should see the cell (i, j) as an edge that connects the i-th
+
+red vertex and the j-th blue vertex. Then, a path of the frog is a path in this bipartite graph.
+
+ We want to cut S and T by removing leaves (i.e., edges in the bipartite graph). The answer is the
+
+minimum s-t cut of the following graph:
+
+    • The vertices are s, t, red vertices 1, 2, ..., H，and blue vertices 1, 2, ..., W.
+
+    • If S = (xs, ys), add an edge between s and the xs-th red vertex, and an edge between s and the
+      ys-th blue vertex, each with inﬁnite capacity.
+    • If T = (xt, yt), add an edge between t and the xt-th red vertex, and an edge between t and the
+       yt-th blue vertex, each with inﬁnite capacity.
+    • For each leaf (x, y), add an edge between the x-th red vertex and the y-th blue vertex with capacity
+
+       1.
+
+
+
+
+
+                                             3

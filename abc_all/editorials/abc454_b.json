@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc454_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc454/editorial/19119",
+      "text": "まずは質問を整理しましょう。着られている服の番号\n\\(F_1, F_2, \\dots, F_N\\)\nの重複を取り除いてできる集合\n\\(S\\)\nを考えます。この時、\n質問\n\\(1\\)\nの答えは\n\\(|S| = N\\)\nであることと等価で、\n質問\n\\(2\\)\nの答えは\n\\(|S| = M\\)\nであることと等価です。\nここで\n\\(|S|\\)\nは集合のサイズを意味します。よって\n\\(S\\)\nのサイズを求めればこの問題を解くことが出来ます。\nたいていのプログラミング言語には集合を扱うデータ構造が存在します。例えば C++ であれば\nstd::set\n型、Python では\nset\n型が集合を扱う型です。これらを使えばスムーズに実装できます。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <set>\nusing namespace std;\n\nint main() {\n  int N, M;\n  cin >> N >> M;\n  set<int> S;\n  for (int i = 0; i < N; i++) {\n    int F;\n    cin >> F;\n    S.insert(F);\n  }\n  cout << ((int)S.size() == N ? \"Yes\" : \"No\") << \"\\n\";\n  cout << ((int)S.size() == M ? \"Yes\" : \"No\") << \"\\n\";\n}"
+      ],
+      "text_sha256": "8a1019da328788150c301dbd268c4c57814969e234ecfc594590c07f2fc32444",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc454/abc454_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

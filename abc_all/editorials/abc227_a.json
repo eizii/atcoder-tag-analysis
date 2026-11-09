@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc227_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc227/editorial/2910",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「\nWelcome to AtCoder\n」をお試しください。言語ごとに解答例が掲載されています。\n\\(N\\)\nがとても大きい場合、答えは\n\\(A+K-1\\)\nです。実際には番号が\n\\(N+1\\)\n以上の人は存在しないので、\n\\(N\\)\nで割った余りを求めます。また、番号が\n\\(0\\)\nの人が存在しないことにも注意してください。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main(){\n    int n, k, a; cin >> n >> k >> a;\n    int ans = (a + k - 1) % n;\n    if(ans == 0) ans = n;\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "e5854a32d4e9d050049b0da6048942467aed114af683fba29312369135fc5ff5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc227/abc227_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

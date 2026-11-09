@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc477_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc477/editorial/25849",
+      "text": "クエリ \\(1\\) は「タイルが置かれているかどうか」の bool 列を切り替えることで \\(O(1)\\) で処理できそうです。 しかし、クエリ \\(2\\) は愚直には「すべてのマスについて、タイルが置かれているか確認し、置かれていないのであれば色を塗り替える」ことが必要です。これにより色が変わるタイルは、最悪 \\(\\Theta  (N)\\) あり、簡単には \\(\\Theta(NQ)\\) です。 上のアルゴリズムで無駄な点を考えてみましょう。これは「毎回色を塗り直している」点です。結果として欲しいものは、最終的な色だけですから、これさえ計算できれば良いです。 様々な方法がありますが、直感的な方法としては クエリを前から見て、「最後にタイルが覆われているか」を求める。 クエリを後ろから見て、色を塗るクエリが来たとき、「まだ色が塗られていない」かつ「タイルに覆われていない」マスにだけ色をぬる ができれば、各マスについて、一度だけ色を塗ることができます。これは、具体的には次のようにすると実現できます。 「まだ色が塗られていない」かつ「タイルに覆われていない」マスの集合 \\(S\\) を管理して、 後ろから クエリを見る。 タイプ \\(1\\) タイルの状態を変化させる。もし \\(S\\) の集合を変化させるのであれば、 \\(S\\) を更新する。 タイプ \\(2\\) \\(S\\) の要素すべてに色を塗り、集合 \\(S\\) を空にする。 とすれば良いです。計算量は、集合の挿入・削除を \\(O(1)\\) とすれば \\(O(Q + N)\\) です。 実装例 (PyPy)",
+      "codes": [
+        "n, q = map(int, input().split())\n\nqry = [(2, \"a\")]\ntile = [0] * n\nfor i in range(q):\n    t, x = input().split()\n    if t == \"1\":\n        x = int(x) - 1\n        tile[x] ^= 1\n        qry.append((1, x))\n    else:\n        qry.append((2, x))\n\ns = set(i for i in range(n) if tile[i] == 0)\nans = [\"\"] * n\nfor t, x in reversed(qry):\n    if t == 1:\n        if tile[x] == 0 and ans[x] == \"\":\n            s.remove(x)\n        if tile[x] and ans[x] == \"\":\n            s.add(x)\n        tile[x] ^= 1\n    else:\n        for i in s:\n            ans[i] = x\n        s.clear()\n\nprint(\"\".join(ans))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "ab90775e184c25dee8c2d74a23dab373e34933e901abdb8bd286e1e488aee12a"
+    }
+  ],
+  "status": "available"
+}

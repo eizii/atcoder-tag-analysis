@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc271_b",
+  "title": "Maintain Multiple Sequences",
+  "contests": [
+    {
+      "contest_id": "abc271",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 97,
+  "raw_difficulty": -166,
+  "contest_id": "abc271",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc271/tasks/abc271_b",
+  "statement": "配点 : 200 点 問題文 整数からなる数列が N 個あります。 i \\, (1 \\leq i \\leq N) 番目の数列は L_i 項からなり、 i 番目の数列の第 j \\, (1 \\leq j \\leq L_i) 項 は a_{i, j} です。 Q 個のクエリが与えられます。 k \\, (1 \\leq k \\leq Q) 番目のクエリでは、整数 s_k, t_k が与えられるので、 s_k 番目の数列の第 t_k 項を求めてください。 制約 1 \\leq N, Q \\leq 2 \\times 10^5 L_i \\geq 1 \\, (1 \\leq i \\leq N) \\sum_{i=1}^N L_i \\leq 2 \\times 10^5 1 \\leq a_{i, j} \\leq 10^9 \\, (1 \\leq i \\leq N, 1 \\leq j \\leq L_i) 1 \\leq s_k \\leq N, 1 \\leq t_k \\leq L_{s_k} \\, (1 \\leq k \\leq Q) 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N Q L_1 a_{1, 1} \\ldots a_{1, L_1} \\vdots L_N a_{N, 1} \\ldots a_{N, L_N} s_1 t_1 \\vdots s_Q t_Q 出力 Q 行出力せよ。 k \\, (1 \\leq k \\leq Q) 行目には、 k 番目のクエリに対する答えを出力せよ。 入力例 1 2 2\n3 1 4 7\n2 5 9\n1 3\n2 1 出力例 1 7\n5 1 番目の数列は (1, 4, 7) 、 2 番目の数列は (5, 9) です。 それぞれのクエリに対する答えは次のようになります。 1 番目の数列の第 3 項は 7 です。 2 番目の数列の第 1 項は 5 です。 入力例 2 3 4\n4 128 741 239 901\n2 1 1\n3 314 159 26535\n1 1\n2 2\n3 3\n1 4 出力例 2 128\n1\n26535\n901",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 整数からなる数列が N 個あります。 i \\, (1 \\leq i \\leq N) 番目の数列は L_i 項からなり、 i 番目の数列の第 j \\, (1 \\leq j \\leq L_i) 項 は a_{i, j} です。 Q 個のクエリが与えられます。 k \\, (1 \\leq k \\leq Q) 番目のクエリでは、整数 s_k, t_k が与えられるので、 s_k 番目の数列の第 t_k 項を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N, Q \\leq 2 \\times 10^5 L_i \\geq 1 \\, (1 \\leq i \\leq N) \\sum_{i=1}^N L_i \\leq 2 \\times 10^5 1 \\leq a_{i, j} \\leq 10^9 \\, (1 \\leq i \\leq N, 1 \\leq j \\leq L_i) 1 \\leq s_k \\leq N, 1 \\leq t_k \\leq L_{s_k} \\, (1 \\leq k \\leq Q) 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q L_1 a_{1, 1} \\ldots a_{1, L_1} \\vdots L_N a_{N, 1} \\ldots a_{N, L_N} s_1 t_1 \\vdots s_Q t_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 k \\, (1 \\leq k \\leq Q) 行目には、 k 番目のクエリに対する答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2 2\n3 1 4 7\n2 5 9\n1 3\n2 1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 7\n5 1 番目の数列は (1, 4, 7) 、 2 番目の数列は (5, 9) です。 それぞれのクエリに対する答えは次のようになります。 1 番目の数列の第 3 項は 7 です。 2 番目の数列の第 1 項は 5 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 4\n4 128 741 239 901\n2 1 1\n3 314 159 26535\n1 1\n2 2\n3 3\n1 4"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 128\n1\n26535\n901"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc271/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:49.212327+00:00",
+  "statement_sha256": "41c70e57947a28469cc8be44af57ee741c5743b720db0f48130a33c9ab93ff6a",
+  "editorials": []
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc415_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc415/editorial/13490",
+      "text": "以下の事実が重要です。\n移動の過程でマス\n\\((i,j)\\)\nを訪れる場合、マス\n\\((i,j)\\)\nでコインを回収しご飯を買うのは、移動経路によらず常に\n\\(i+j-1\\)\n日目である。\n証明は、\n\\(1\\)\n回の移動のたびに\n\\(i+j\\)\nの値がちょうど\n\\(1\\)\nだけ増加することから従います。\nよって、\n\\(B_{i,j}=A_{i,j}-P_{i+j-1}\\)\nと定義すると、以下のように問題を言い換えることができます。\nマス\n\\((i,j)\\)\nを訪れると\n\\(B_{i,j}\\)\n円を得る（\n\\(B_{i,j}<0\\)\nの場合、\n\\(-B_{i,j}\\)\n円を失う）。右または下への移動を繰り返すことで、所持金が負になることなく\n\\((1,1)\\)\nから\n\\((N,N)\\)\nまで移動したいとき、最初に何円以上持っている必要があるか？\n以下のように DP を定義します。\n\\(\\mathrm{dp}_{i,j}:\\)\nスタート地点がマス\n\\((i,j)\\)\nで、所持金が負になることなく\n\\((H,W)\\)\nまで移動したいとき、最初の所持金（マス\n\\((i,j)\\)\nで\n\\(B_{i,j}\\)\n円を得る\n前\nの所持金）として必要な金額の最小値\nこの DP は\n\\(i,j\\)\nの降順に求めていくことができます。具体的な遷移は以下の通りです：\n\\(\\mathrm{dp}_{H,W}=\\max\\{0,-B_{H,W}\\}\\)\n\\(\\mathrm{dp}_{i,j}= \\max\\{0,\\min\\{\\mathrm{dp}_{i+1,j},\\mathrm{dp}_{i,j+1}\\}-B_{i,j}\\}\\quad((i,j) \\neq (H,W))\\)\nただし便宜上、\n\\(i>H\\)\nまたは\n\\(j>W\\)\nのとき\n\\(\\mathrm{dp}_{i,j}=\\infty\\)\nと定義します。\n計算量は\n\\(O(HW)\\)\nです。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int h, w;\n    cin >> h >> w;\n    vector a(h, vector<int>(w));\n    for (int i = 0; i < h; i++) {\n        for (int j = 0; j < w; j++) {\n            cin >> a[i][j];\n        }\n    }\n    vector<int> p(h + w - 1);\n    for (int &i: p) cin >> i;\n    vector dp(h, vector<ll>(w, 1e18));\n    dp[h - 1][w - 1] = 0;\n    for (int i = h - 1; i >= 0; i--) {\n        for (int j = w - 1; j >= 0; j--) {\n            if (i + 1 < h) dp[i][j] = min(dp[i][j], dp[i + 1][j]);\n            if (j + 1 < w) dp[i][j] = min(dp[i][j], dp[i][j + 1]);\n            dp[i][j] += p[i + j] - a[i][j];\n            dp[i][j] = max(dp[i][j], 0LL);\n        }\n    }\n    cout << dp[0][0] << endl;\n}"
+      ],
+      "text_sha256": "afedfa76dafad6049f8b59a9870e782b96cf2b6d4d322427cf43349ac48ba57b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc415/abc415_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc415/editorial/13559",
+      "text": "注：after_contestケースが追加され、以下に述べる解法はTLEするようになりました。\nコインを持たずに移動を開始し、コインが不足したらその時点でどこかから借金してくることにします。\n\\(\\mathrm{dp}[i,j]=\\)\nマス\n\\((i,j)\\)\nから移動する直前の、最小の借金額\nというDPをしたくなりますが、これは正しくありません。\nなぜなら、(借金額,現在の所持金)が(1,0)よりも(2,100000)の方が良いことがあり得るからです。\nそのため、現在の所持金も考慮して\n\\(\\mathrm{dp}[i,j]=\\)\nマス\n\\((i,j)\\)\nから移動する直前の、(借金額,所持金)の一番いい状態\nとしたくなりますが、「一番いい状態」を決めるのは困難です。そこでさらに\n\\(\\mathrm{dp}[i,j]=\\)\nマス\n\\((i,j)\\)\nから移動する直前の、(借金額,所持金)の一番いい状態としてありえるもの全ての集合\nとします。所持金が同じならば借金額は小さい方がよく、借金額が同じならば所持金は大きい方がよいです。このような(借金額,所持金)たちは以下の記事に書かれた方法で高速に操作が可能です。\nhttps://topcoder-g-hatena-ne-jp.jag-icpc.org/skyaozora/20141216.html\n集合\n\\(\\mathrm{dp}[i,j]\\)\nの要素数は十分小さいため（←\n偽\n）、この問題を高速に解くことができます。\n実装例(C++)\n実際には「全ての\n\\(i,j\\)\nで集合\n\\(\\mathrm{dp}[i,j]\\)\nの大きさが\n\\(\\Theta(ij)\\)\n程度の大きさとなる」ような入力が存在するため、そのような入力に対するこの解法の計算量は\n\\(\\Omega(H^2W^2)\\)\nとなりTLEするケースが存在します。",
+      "codes": [],
+      "text_sha256": "e66d234c563edb170a110c77df9c6f9c916db9c646c2b842adb6ab191d42b8a0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc415/abc415_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

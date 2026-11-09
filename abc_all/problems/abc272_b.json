@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc272_b",
+  "title": "Everyone is Friends",
+  "contests": [
+    {
+      "contest_id": "abc272",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 139,
+  "raw_difficulty": -24,
+  "contest_id": "abc272",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc272/tasks/abc272_b",
+  "statement": "配点 : 200 点 問題文 1,2,\\ldots,N の番号がついた N 人の人がいます。 M 回の舞踏会が行われました。 i (1\\leq i \\leq M) 回目の舞踏会には k_i 人が参加し、参加した人は人 x_{i,1},x_{i,2},\\ldots,x_{i,k_i} でした。 どの二人も少なくとも 1 回同じ舞踏会に参加したか判定してください。 制約 2\\leq N \\leq 100 1\\leq M \\leq 100 2\\leq k_i \\leq N 1\\leq x_{i,1}<x_{i,2}<\\ldots < x_{i,k_i}\\leq N 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M k_1 x_{1,1} x_{1,2} \\ldots x_{1,k_1} \\vdots k_M x_{M,1} x_{M,2} \\ldots x_{M,k_M} 出力 どの二人も少なくとも 1 回同じ舞踏会に参加した場合 Yes を、そうでない場合 No を出力せよ。 入力例 1 3 3\r\n2 1 2\r\n2 2 3\r\n2 1 3 出力例 1 Yes 人 1 と人 2 は共に 1 回目の舞踏会に参加しています。 人 2 と人 3 は共に 2 回目の舞踏会に参加しています。 人 1 と人 3 は共に 3 回目の舞踏会に参加しています。 以上よりどの二人も少なくとも 1 回同じ舞踏会に参加したので、答えは Yes です。 入力例 2 4 2\r\n3 1 2 4\r\n3 2 3 4 出力例 2 No 人 1 と人 3 は 1 回も同じ舞踏会に参加していないので、答えは No です。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1,2,\\ldots,N の番号がついた N 人の人がいます。 M 回の舞踏会が行われました。 i (1\\leq i \\leq M) 回目の舞踏会には k_i 人が参加し、参加した人は人 x_{i,1},x_{i,2},\\ldots,x_{i,k_i} でした。 どの二人も少なくとも 1 回同じ舞踏会に参加したか判定してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2\\leq N \\leq 100 1\\leq M \\leq 100 2\\leq k_i \\leq N 1\\leq x_{i,1}<x_{i,2}<\\ldots < x_{i,k_i}\\leq N 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M k_1 x_{1,1} x_{1,2} \\ldots x_{1,k_1} \\vdots k_M x_{M,1} x_{M,2} \\ldots x_{M,k_M}"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 どの二人も少なくとも 1 回同じ舞踏会に参加した場合 Yes を、そうでない場合 No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 3\r\n2 1 2\r\n2 2 3\r\n2 1 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes 人 1 と人 2 は共に 1 回目の舞踏会に参加しています。 人 2 と人 3 は共に 2 回目の舞踏会に参加しています。 人 1 と人 3 は共に 3 回目の舞踏会に参加しています。 以上よりどの二人も少なくとも 1 回同じ舞踏会に参加したので、答えは Yes です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4 2\r\n3 1 2 4\r\n3 2 3 4"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No 人 1 と人 3 は 1 回も同じ舞踏会に参加していないので、答えは No です。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc272/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:50.456007+00:00",
+  "statement_sha256": "a5eb569ee4210b7ce519405504c37456bd635636346789f5d1b159ed3551589f",
+  "editorials": []
+}

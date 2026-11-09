@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc392_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc392/editorial/12148",
+      "text": "\\(S=\\sum_i K_i\\)\nとします。\nあらかじめ、各サイコロ\n\\(i\\)\nについて\n\\(\\mathrm{count}_i[X]=サイコロ i の面のうち、Xが書かれているものの個数\\)\nという連想配列を用意します。これは全ての\n\\(i\\)\nについて合計で\n\\(O(S\\log S)\\)\n時間でできます。\n\\(2\\)\nつのサイコロ\n\\(i,j\\)\nを振ったときに同じ目が出る確率を考えます。これは、サイコロ\n\\(i\\)\nの各目\n\\(X\\)\nに対してサイコロ\n\\(j\\)\nが\n\\(X\\)\nの面を何個持つかがわかればよいため、連想配列\n\\(\\mathrm{count}_j\\)\nを用いることで\n\\(O(K_i \\log K_j)\\)\n時間で求めることができます。\nよって\n\\(2\\)\nつのサイコロの選び方を全探索することで、\n\\(\\sum_{i,j} O(K_i \\log K_j)=O(NS\\log S)\\)\n時間で答えを求めることができます。",
+      "codes": [],
+      "text_sha256": "027afa7516dd5a570c48e0addc4234b704ed6e8bf9a9a685ce0f649daf8269c6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc392/abc392_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc392/editorial/12213",
+      "text": "基本的には公式解説と同様になります。\nそれぞれのサイコロ\n\\(i\\)\nに対して\n\\(1\\)\n以上\n\\(\\max{A}\\)\n以下の\n\\(j\\)\nの目が何回出てくるかを連想配列ではなく二次元配列として\n\\(C_{ij}\\)\n所持しておきます。\nサイコロ\n\\(i_1,i_2\\)\nを振った時に同じ目が出る場合の数は\n\\(\\sum_{j=1}^{\\max{A}}  C_{i_1j}C_{i_2j}\\)\nとなり、この合計に対して\n\\(K_iK_j\\)\nを割ることによりそれぞれの組み合わせの答えを導くことができます。\nこれを全てのサイコロの組み合わせで計算すると\n\\(O(N^2 \\max{A})\\)\nとなり、おおよそ\n\\(10^9\\)\nの計算量となり時間制限超過が予測されます。\nしかし十分に高速な処理の上では表記上\n\\(10^9\\)\n以上となっても制限時間内に十分間に合わせることは可能であり、全てのサイコロの組み合わせで\n\\(O(N^2)\\)\nに対して2倍の定数倍高速化ができていることに加え、ボトルネックになっている\n\\(O(\\max{A})\\)\n部分の計算は乗算と加算一回ずつの非常に軽い動作であるため、C++などの高速な言語を用いることで間に合わせることができるほか、上記の総和の計算式はPythonの場合numpyのdot関数での高速化が可能です。\nこれらを利用すると制限時間超過すると思われる計算量に対しても制限時間内に対して十分な速さで解答することができます。\nNumpyのdotによる実装例 :\nhttps://atcoder.jp/contests/abc392/submissions/62584682",
+      "codes": [],
+      "text_sha256": "1a2a760b0e17c23ba0a00487dcb1dc624b5af92792f15fe7d80edddbb048eb92",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc392/abc392_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

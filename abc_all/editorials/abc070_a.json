@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc070_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc070/editorial.pdf",
+      "text": "A:  Palindromic Number\n\n  整数N を文字列として入力を受け取ります。N は3 桁の正整数であるため、100 の位の数字と1 の位の数字が\n 一致すれば、回文数となります。最後に、回文数である場合は「Yes」、そうでない場合は「No」を出力します。\n\n\n  C++のコード例\n\n\n\n1 int main(void) {\n\n2     string N;\n\n3     cin >> N;\n\n4     if (N[0] == N[2])\n\n5         cout << \"Yes\" << endl;\n\n6     else\n\n7         cout << \"No\" << endl;\n8     return 0;\n\n9 }\n\n\n\n\n\n                                                  1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "dc093a53106ea0524f8e97931e55b0de45a5a3dbde46663c870f2a54ddc57de8"
+    }
+  ],
+  "status": "available"
+}

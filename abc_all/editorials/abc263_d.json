@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc263_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4549",
+      "text": "数列\n\\(A'=(A_1,A_2,\\ldots,A_k)\\)\nにたいして\n\\(x \\leq k\\)\nなる\n\\(x\\)\nを選んで操作を行ったときの\n\\(A'\\)\nの総和の最小値を\n\\(f(k)\\)\nとします。\nまた、数列\n\\(A''=(A_{N-k+1},\\ldots,A_N)\\)\nにたいして\n\\(y \\leq k\\)\nなる\n\\(y\\)\nを選んで操作を行ったときの\n\\(A''\\)\nの総和の最小値を\n\\(g(k)\\)\nとします。\n\\(f(0),f(1),\\ldots,f(N),g(0),g(1),\\ldots, g(N)\\)\nが列挙できれば、答えは\n\\(\\mathrm{min} f(i) + g(N-i)\\)\nで求められます。\n\\(g\\)\nについても同様なので、以下では\n\\(f\\)\nの求め方を考えます。\n\\(f(0)=0\\)\nです。\n\\(f(k)\\)\nまで求まっているときに\n\\(f(k+1)\\)\nが高速に求まればよいです。\n\\(x<k+1\\)\nかどうかで場合分けをします。\n\\(x<k+1\\)\nのとき\n総和の最小値は\n\\(f(k) + A_{k+1}\\)\nです。\n\\(x=k+1\\)\nのとき\n総和の最小値は\n\\(L(k+1)\\)\nです。\nよって\n\\(f(k+1) = \\mathrm{min}(f(k) + A_{k+1}, L(k+1))\\)\nと求められました。\n以上よりこの問題を\n\\(\\mathrm{O}(N)\\)\nで解くことができました。",
+      "codes": [],
+      "text_sha256": "0fcddd78a55fa73b2320dde445491701b293c655bc322e04fe9079192bce9361",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4551",
+      "text": "\\({\\rm cum}[k]=\\sum_{i=1}^{k}A[i]\\)\nと累積和を定めます。問題文中の\n\\(y\\)\nを\n\\(N-y\\)\nに置き換えることで、求める答えは\n\\(\\displaystyle \\min_{0\\leq x \\leq y \\leq N} (Lx+({\\rm cum}[y]-{\\rm cum}[x])+R(N-y))\\)\nとなります。  この式を変形していきます。\n\\(\\displaystyle\n\\min_{0\\leq x \\leq y \\leq N} (Lx+({\\rm cum}[y]-{\\rm cum}[x])+R(N-y))\\\\\n=RN+\\min_{0\\leq x \\leq y \\leq N} (Lx-{\\rm cum}[x]+{\\rm cum}[y]-Ry)\\\\\n=RN+\\min_{0\\leq x \\leq N} (Lx-{\\rm cum}[x]+\\min_{x\\leq y \\leq N}({\\rm cum}[y]-Ry))\\)\nここで、\n\\(\\min_{x\\leq y \\leq N}({\\rm cum}[y]-Ry)\\)\nの部分は\n\\(y\\)\nについての累積minなので、全ての\n\\(x\\)\nについてを\n\\(O(N)\\)\nで列挙することができます。\nしたがって、各\n\\(x\\)\nについて\n\\(Lx-{\\rm cum}[x]+\\min_{x\\leq y \\leq N}({\\rm cum}[y]-Ry)\\)\nを\n\\(O(1)\\)\nで求めることができ、そのminは\n\\(O(N)\\)\nで求められます。\n今回の問題であれば、元の問題の”意味”に基づいて問題を分割し、公式解説の方針を得る方が多くの人にとって理解しやすいものだと思いますが、この解説のように、機械的に数式を変形することで問題を解くというアプローチも身につけておくと役立つことがあるかもしれません。",
+      "codes": [],
+      "text_sha256": "e9e02eaa4141285e6da9e35dcd9f9efbe4f5277f2f39fb8388591bdad5741d98",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4576",
+      "text": "\\(L\\)\nを選ぶ区間，\n\\(A_i\\)\nを選ぶ区間,\n\\(R\\)\nを選ぶ区間に分割する問題とみなしてよいです．\nここで，dp[場所][1つ前の要素をどの区間に分類したか]という状態のdpを考えると，\n\\(\\mathrm{O}(N)\\)\n時間で素直な漸化式で答えが求まります．",
+      "codes": [],
+      "text_sha256": "bcfbdd8e79b8467315a9ba9a173bcc31cb549734458b1cde9b22653e445e1967",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

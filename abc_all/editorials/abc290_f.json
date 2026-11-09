@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc290_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc290/editorial/5768",
+      "text": "まず、良い木が存在するための必要十分条件は \\(\\displaystyle \\sum_{i=1}^{N} X_i = 2N-2\\) です。 証明 $N$ 頂点の木にはちょうど $N-1$ 本の辺が含まれ、かつ $1$ つの辺は次数の総和に $2$ 寄与することから、必要性は明らかです。また、後述するように「直径が最大となる良い木」を具体的に構築できるため、十分性も示されます。 良い木が存在するとき、その直径の最大値を考えましょう。直径に含まれる頂点は両端点を除いて次数が \\(2\\) 以上であることから、次数が \\(2\\) 以上の頂点の個数を \\(K\\) としたとき、 \\(K+1\\) は解の上界です。逆に、直径が \\(K+1\\) となる良い木が必ず存在します。具体的には、 \\(X_i\\geq 2\\) を満たす頂点 \\(i\\) たちを適当な順序で一列に並べて、隣接する頂点間に辺を張ることでパスを作る 「 \\(X_i\\geq 2\\) を満たす頂点 \\(i\\) であって、次数が \\(X_i\\) に満たないものがあるならば、 \\(X_j=1\\) を満たしまだ辺が張られていない頂点 \\(j\\) を \\(1\\) つ持ってきて、頂点 \\(i,j\\) の間に辺を張る」ことを繰り返す ( \\(\\displaystyle \\sum_{i=1}^{N} X_i = 2N-2\\) より、この操作は \\(X_j=1\\) を満たす頂点 \\(j\\) をちょうど使い切る) ことで構築できます ( ヒント の図も参考にしてください)。よって、良い木が存在するような \\(X\\) の集合を \\(S\\) とすると、 \\(\\begin{aligned}\n\\sum_{X\\in S} f(X)\n&= \\sum_{X\\in S} ((X\\ \\text{に含まれる 2 以上の整数の個数}) +1)\\\\\n&= |S| + \\sum_{X\\in S} (X\\ \\text{に含まれる 2 以上の整数の個数})\\\\\n&= |S| + \\sum_{i=1}^{N} (X_i\\geq 2\\ \\text{を満たす}\\ X \\in S\\ \\text{の個数})\\\\\n&=|S|+(X_1\\geq 2\\ \\text{を満たす}\\ X \\in S\\ \\text{の個数})\\times N\\\\\n&=(\\sum_{i=1}^{N} X_i = 2N-2\\ \\text{を満たす正整数列}\\ X\\ \\text{の個数})+(\\sum_{i=1}^{N} X_i = 2N-2\\land X_1\\geq 2\\ \\text{を満たす正整数列}\\ X\\ \\text{の個数})\\times N\\\\\n&=(\\sum_{i=1}^{N} X_i = N-2\\ \\text{を満たす非負整数列}\\ X\\ \\text{の個数})+(\\sum_{i=1}^{N} X_i = N-3\\ \\text{を満たす非負整数列}\\ X\\ \\text{の個数})\\times N\\\\\n&= \\binom{(N-2)+(N-1)}{N-1}+\\binom{(N-3)+(N-1)}{N-1}\\times N\\\\\n&= \\binom{2N-3}{N-1}+\\binom{2N-4}{N-1}\\times N\n\\end{aligned}\\) となるため、階乗とその逆元の値を前計算しておくことで、 \\(1\\) テストケースあたり \\(O(1)\\) でこの問題を解くことができます。 想定解 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/modint>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing mint = modint998244353;\n\nconst int C = 2000010;\nvector<mint> fact(C), ifact(C);\n\nmint binom(int n, int k) {\n    if (k < 0 or k > n) return 0;\n    return fact[n] * ifact[k] * ifact[n - k];\n}\n\nint main() {\n    fact[0] = 1;\n    for (int i = 1; i < C; i++) fact[i] = fact[i - 1] * i;\n    ifact[C - 1] = fact[C - 1].inv();\n    for (int i = C - 2; i >= 0; i--) ifact[i] = ifact[i + 1] * (i + 1);\n    \n    int t;\n    cin >> t;\n    while (t--) {\n        int n;\n        cin >> n;\n        mint ans = binom(2 * n - 3, n - 1) + binom(2 * n - 4, n - 1) * n;\n        cout << ans.val() << '\\n';\n    }\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "459bb3add7c83543ed9256752f22b2f167fce19fd0271960033f1997d21f6444"
+    }
+  ],
+  "status": "available"
+}

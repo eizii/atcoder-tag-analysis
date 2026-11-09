@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc441_b",
+  "title": "Two Languages",
+  "contests": [
+    {
+      "contest_id": "abc441",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 70,
+  "raw_difficulty": -298,
+  "contest_id": "abc441",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc441/tasks/abc441_b",
+  "statement": "配点 : 200 点 問題文 AtCoder 国の公用語は、高橋語と青木語の 2 つの言語です。 高橋語と青木語は、どちらもその言語に含まれる単語を表記するのに英小文字の一部を使います。\r\n高橋語では長さ N の文字列 S に含まれる文字のみを使い、青木語では長さ M の文字列 T に含まれる文字のみを使います。 AtCoder 国の公用語に含まれる Q 個の単語 w _ 1,w _ 2,\\ldots,w _ Q が与えられます。\r\nそれぞれの単語について、その単語に含まれる文字からその単語が次のうちどれに該当するか判定してください。 高橋語の単語であることが確定する 青木語の単語であることが確定する どちらともいえない 制約 1\\le N\\le26 1\\le M\\le26 S は英小文字からなる長さ N の文字列 S に含まれる文字は先頭からアルファベット順で昇順に並んでいる S に含まれる文字はすべて異なる T は英小文字からなる長さ M の文字列 T に含まれる文字は先頭からアルファベット順で昇順に並んでいる T に含まれる文字はすべて異なる 1\\le Q\\le100 w _ i は英小文字からなる長さ 1 以上 100 以下の文字列 (1\\le i\\le Q) w _ i は高橋語か青木語のどちらかの単語 (1\\le i\\le Q) N,M,Q は整数 入力 入力は以下の形式で標準入力から与えられる。 N M S T Q w _ 1 w _ 2 \\vdots w _ Q 出力 Q 行にわたって出力せよ。 i 行目には、 w _ i が高橋語の単語であることが確定するなら Takahashi 、青木語の単語であることが確定するなら Aoki 、どちらとも確定しないなら Unknown と出力せよ。 入力例 1 6 5\r\nahikst\r\naikot\r\n5\r\nasahi\r\nokita\r\nkiai\r\nhash\r\nit 出力例 1 Takahashi\r\nAoki\r\nUnknown\r\nTakahashi\r\nUnknown 例えば、 a , s , h , i はすべて高橋語で使われる文字で、 h は青木語で使われる文字ではないので asahi は高橋語の単語であることが確定します。\r\nよって、 1 行目には Takahashi と出力してください。 i および t はどちらも高橋語でも青木語でも使われる文字なので it は高橋語の単語であるとも青木語の単語であるとも確定しません。\r\nよって、 5 行目には Unknown と出力してください。 入力例 2 7 6\r\nahiknst\r\nahikos\r\n5\r\nkioki\r\nohiki\r\ntashi\r\nnishi\r\nkashi 出力例 2 Aoki\r\nAoki\r\nTakahashi\r\nTakahashi\r\nUnknown o は高橋語で使われる文字ではないので、はじめ 2 つの単語は青木語の単語であることが確定します。\r\nよって、 1 行目と 2 行目には Aoki と出力してください。 t や n は青木語で使われる文字ではないので、続く 2 つの単語は高橋語の単語であることが確定します。\r\nよって、 3 行目と 4 行目には Takahashi と出力してください。 はじめ 4 つの単語については、末尾が shi なら高橋語、末尾が ki なら青木語という法則がありますが、 k , a , s , h , i はいずれも高橋語と青木語の両方で使われる文字なので kashi がどちらの言語の単語であるかを使われている文字から確定させることはできません。\r\nよって、 5 行目には Unknown と出力してください。 入力例 3 13 11\r\ndefghiqsvwxyz\r\nacejmoqrtwx\r\n15\r\nqhsqzhd\r\njcareec\r\nwwqxqew\r\nwxqxwex\r\njxxrtwa\r\ntrtqjxe\r\nsqyggse\r\nxxqwxew\r\nxewwxxw\r\nwwqxwex\r\nxqqxqwq\r\nqxxexxe\r\nteqeroc\r\neeeqqee\r\nvxdevyy 出力例 3 Takahashi\r\nAoki\r\nUnknown\r\nUnknown\r\nAoki\r\nAoki\r\nTakahashi\r\nUnknown\r\nUnknown\r\nUnknown\r\nUnknown\r\nUnknown\r\nAoki\r\nUnknown\r\nTakahashi",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 AtCoder 国の公用語は、高橋語と青木語の 2 つの言語です。 高橋語と青木語は、どちらもその言語に含まれる単語を表記するのに英小文字の一部を使います。\r\n高橋語では長さ N の文字列 S に含まれる文字のみを使い、青木語では長さ M の文字列 T に含まれる文字のみを使います。 AtCoder 国の公用語に含まれる Q 個の単語 w _ 1,w _ 2,\\ldots,w _ Q が与えられます。\r\nそれぞれの単語について、その単語に含まれる文字からその単語が次のうちどれに該当するか判定してください。 高橋語の単語であることが確定する 青木語の単語であることが確定する どちらともいえない"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\le N\\le26 1\\le M\\le26 S は英小文字からなる長さ N の文字列 S に含まれる文字は先頭からアルファベット順で昇順に並んでいる S に含まれる文字はすべて異なる T は英小文字からなる長さ M の文字列 T に含まれる文字は先頭からアルファベット順で昇順に並んでいる T に含まれる文字はすべて異なる 1\\le Q\\le100 w _ i は英小文字からなる長さ 1 以上 100 以下の文字列 (1\\le i\\le Q) w _ i は高橋語か青木語のどちらかの単語 (1\\le i\\le Q) N,M,Q は整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M S T Q w _ 1 w _ 2 \\vdots w _ Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行にわたって出力せよ。 i 行目には、 w _ i が高橋語の単語であることが確定するなら Takahashi 、青木語の単語であることが確定するなら Aoki 、どちらとも確定しないなら Unknown と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 6 5\r\nahikst\r\naikot\r\n5\r\nasahi\r\nokita\r\nkiai\r\nhash\r\nit"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Takahashi\r\nAoki\r\nUnknown\r\nTakahashi\r\nUnknown 例えば、 a , s , h , i はすべて高橋語で使われる文字で、 h は青木語で使われる文字ではないので asahi は高橋語の単語であることが確定します。\r\nよって、 1 行目には Takahashi と出力してください。 i および t はどちらも高橋語でも青木語でも使われる文字なので it は高橋語の単語であるとも青木語の単語であるとも確定しません。\r\nよって、 5 行目には Unknown と出力してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 7 6\r\nahiknst\r\nahikos\r\n5\r\nkioki\r\nohiki\r\ntashi\r\nnishi\r\nkashi"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 Aoki\r\nAoki\r\nTakahashi\r\nTakahashi\r\nUnknown o は高橋語で使われる文字ではないので、はじめ 2 つの単語は青木語の単語であることが確定します。\r\nよって、 1 行目と 2 行目には Aoki と出力してください。 t や n は青木語で使われる文字ではないので、続く 2 つの単語は高橋語の単語であることが確定します。\r\nよって、 3 行目と 4 行目には Takahashi と出力してください。 はじめ 4 つの単語については、末尾が shi なら高橋語、末尾が ki なら青木語という法則がありますが、 k , a , s , h , i はいずれも高橋語と青木語の両方で使われる文字なので kashi がどちらの言語の単語であるかを使われている文字から確定させることはできません。\r\nよって、 5 行目には Unknown と出力してください。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 13 11\r\ndefghiqsvwxyz\r\nacejmoqrtwx\r\n15\r\nqhsqzhd\r\njcareec\r\nwwqxqew\r\nwxqxwex\r\njxxrtwa\r\ntrtqjxe\r\nsqyggse\r\nxxqwxew\r\nxewwxxw\r\nwwqxwex\r\nxqqxqwq\r\nqxxexxe\r\nteqeroc\r\neeeqqee\r\nvxdevyy"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Takahashi\r\nAoki\r\nUnknown\r\nUnknown\r\nAoki\r\nAoki\r\nTakahashi\r\nUnknown\r\nUnknown\r\nUnknown\r\nUnknown\r\nUnknown\r\nAoki\r\nUnknown\r\nTakahashi"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc441/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:21.450275+00:00",
+  "statement_sha256": "8f37deef65411c6648ea6ace6c738bd642dff5425899cf3b0b9664d69700c77a",
+  "editorials": []
+}

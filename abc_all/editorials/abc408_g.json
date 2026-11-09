@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc408_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc408/editorial/13160",
+      "text": "まず、条件を満たす最小の \\(q\\) を取った時に、 \\(q\\neq 1\\) なら対応する \\(p\\) は一つに定まります。 証明 簡単のために $\\displaystyle \\frac{A}{B} < \\frac CD \\le 1$ の場合を考えます。 条件を満たす最小の $q>1$ に対し $\\displaystyle \\frac pq,\\ \\frac{p+1}q$ が両方条件を満たすと仮定すると、 $\\displaystyle \\frac pq < \\frac p{q-1} <\\frac{p+1}q$ が成立するので $q$ が $q-1$ の場合も条件を満たすことから背理法より従います。 よって、 \\(q\\) を求めるのではなく最小の \\(q\\) を持つ \\((p,q)\\) の組を求めることを考えます。ただし、便宜上 \\(q=1\\) の時は \\(p\\) が最小になるように取ることにします。この問題を \\(\\displaystyle f\\left( \\frac AB,\\frac CD\\right) = (p,q)\\) と表記します。 ここで、 \\(\\displaystyle f\\left( \\frac AB,\\frac CD\\right)\\) は以下のアルゴリズムで再帰的に求めることができます。 \\(\\displaystyle  n=\\left\\lfloor \\frac AB\\right\\rfloor\\) とする。 \\(\\displaystyle (p,q) = f\\left(\\frac AB - n, \\frac CD - n\\right) \\) に対し \\(\\displaystyle f\\left( \\frac AB,\\frac CD\\right)=(p+nq,q)\\) となるので、これにより \\(\\displaystyle \\frac AB<1\\) の場合に帰着させることができる。 もし \\(\\displaystyle \\frac CD > 1\\) なら \\(q=1\\) が条件を満たすので \\(\\displaystyle f\\left( \\frac AB,\\frac CD\\right)=(1,1)\\) となる。 \\(\\displaystyle \\frac CD\\le 1\\) の場合、 \\(\\displaystyle (p,q)= f\\left( \\frac DC,\\frac BA\\right)\\) として \\(\\displaystyle f\\left( \\frac AB,\\frac CD\\right)=(q,p)\\) が成り立つことを使い小さいケースに帰着させる。 有理数の連分数展開を考えることでこれらのステップは \\(O(\\log \\max\\lbrace A,B,C,D\\rbrace)\\) ステップで終了することが分かります。 以上を適切に実装することでこの問題を解くことができます。計算量は各テストケース毎に \\(O(\\log \\max\\lbrace A,B,C,D\\rbrace)\\) です。 実装例(Python3) 実装例(C++)",
+      "codes": [
+        "import sys\ninput = sys.stdin.readline\n\ndef solve(a, b, c, d):\n    n = a // b\n    a -= n * b\n    c -= n * d\n    if c > d:\n        return n + 1, 1\n    p, q = solve(d, c, b, a)\n    return p * n + q, p\n\nfor _ in range(int(input())):\n    a, b, c, d = map(int, input().split())\n    p, q = solve(a, b, c, d)\n    print(q)\n",
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\npair<ll, ll> solve(ll a, ll b, ll c, ll d) {\n\tll n = a / b;\n\ta -= n * b, c -= n * d;\n\tif (c > d)\n\t\treturn {n + 1, 1};\n\tauto [p, q] = solve(d, c, b, a);\n\treturn {p * n + q, p};\n}\nint main() {\n\tcin.tie(nullptr);\n\tios::sync_with_stdio(false);\n\tint t;\n\tcin >> t;\n\twhile (t--) {\n\t\tll a, b, c, d;\n\t\tcin >> a >> b >> c >> d;\n\t\tauto [p, q] = solve(a, b, c, d);\n\t\tcout << q << '\\n';\n\t}\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "cb0ba64c1bc43aea95538a737e6f5057b28ce2005cb45b99e3e4d3e474831028"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc360_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc360/editorial/10321",
+      "text": "条件を整理すると、\n\\(1\\)\n以上\n\\(N\\)\n以下の整数\n\\(i,j(i \\neq j)\\)\nが\n\\(S_i=\\)\n1\nかつ\n\\(S_j=\\)\n0\nかつ\n\\( 0 < X_j-X_i \\leq 2 \\times T\\)\nを満たすとき、蟻\n\\(i\\)\nと蟻\n\\(j\\)\nはすれ違います。\nこのような\n\\((i,j)\\)\nの組の個数を求める必要があります。\n\\(X\\)\nを昇順に並び替え、同時に対応する\n\\(S\\)\nも並び替えても答えは変わらないため、並び替えたとします。\n\\(S_i=\\)\n1\nである\n\\(i\\)\nの\n\\(X_i\\)\nを取り出した列を\n\\(A\\)\nとし、\n\\(S_i=\\)\n0\nである\n\\(i\\)\nの\n\\(X_i\\)\nを取り出した列を\n\\(B\\)\nとします。\nこのとき、\n\\(A\\)\nも\n\\(B\\)\nも昇順とします。\nある\n\\(i\\)\nに対して\n\\(B_j > A_i\\)\nなる\n\\(j\\)\nの最小値は\n\\(i\\)\nが増加するにつれて単調に増加します。また、同時に\n\\(B_j-A_i \\leq 2 \\times T\\)\nを満たす\n\\(j\\)\nの最大値も\n\\(i\\)\nが増加するにつれて単調に増加します。以上から尺取り法を用いることで、各\n\\(i\\)\nに対して条件を満たす\n\\(j\\)\nの数を求めることができます。そして、これらの総和を求めることで答えを得られます。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n    int n;\n    ll t;\n    cin >> n >> t;\n    string s;\n    cin >> s;\n    vector<ll> x1, x2;\n    for (int i = 0; i < n; ++i) {\n        ll x;\n        cin >> x;\n        if (s[i] == '1')\n            x1.push_back(x);\n        else\n            x2.push_back(x);\n    }\n    sort(x1.begin(), x1.end());\n    sort(x2.begin(), x2.end());\n    int l = 0, r = 0;\n    ll ans = 0;\n    for (int i = 0; i < (int)x1.size(); ++i) {\n        while (l < (int)x2.size() && x2[l] < x1[i]) l++;\n        while (r < (int)x2.size() && x2[r] <= x1[i] + 2 * t) r++;\n        ans += r - l;\n    }\n    cout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "bcfcaf4a3b44e979125b658b022884538ea678604a3667cd75a0a246812daa51",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc360/abc360_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc360/editorial/10328",
+      "text": "初期の状態で蟻の位置が昇順に並んでいるとき、左から\n\\(i\\)\n番目の蟻を\n\\(i\\)\nとします。\n蟻を左から順番に並べたときのリストの転置数を考えると、蟻同士がすれ違うたびに転置数は\n\\(1\\)\nだけ増加します。\nすなわち、これを時刻\n\\((T+0.1)\\)\nまで進めたときの蟻の位置の順番のリストの転置数は、蟻同士がすれ違う回数と一致します。\nよって、Fenwick Treeなどを用いて\n\\(O(N \\log N)\\)\nで答えを求めることができます。",
+      "codes": [],
+      "text_sha256": "653e9667347a89021542ba1677d8bdf38ac944b0fb83df5591a54a6e32d208f4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc360/abc360_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

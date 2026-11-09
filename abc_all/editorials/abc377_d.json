@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc377_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc377/editorial/11226",
+      "text": "まず、重要な事実として整数の組\n\\((l,r)\\)\nが条件を満たすなら\n\\((l+1,r)\\)\nも条件を満たします。これにより、以下の条件を満たす\n\\(d_r\\)\nが存在します：\n\\(r\\)\nを固定した際に\n\\((l,r)\\)\nが条件を満たすような\n\\(l\\)\nは\n\\(d_r\\)\n以上\n\\(r\\)\n以下の整数のみである。\nこの\n\\(d_r\\)\nが各\n\\(r\\)\nに対し求まれば、求める答えは\n\\(\\displaystyle \\sum_{r=1}^M \\left(r-d_r+1 \\right)\\)\nとなります。以下ではこの\n\\(d_r\\)\nを求めることを考えます。\n\\(d_{r-1}\\)\nが求まっていると仮定して\n\\(d_r\\)\nを求めることを考えます。もし\n\\(R_i=r\\)\nを満たす\n\\(i\\)\nが存在しない場合、新しく制約は増えないので\n\\(d_r=d_{r-1}\\)\nとなります。そのような\n\\(i\\)\nが存在する場合、\n\\(R_i=r\\)\nを満たす\n\\(i\\)\nに対する\n\\(L_i\\)\nの最大値を\n\\(L_{\\max}\\)\nとすると\n\\(d_r=\\max(d_{r-1},L_{\\max}+1)\\)\nとなります。\nこの漸化式にしたがって\n\\(d_1\\)\nから順に求めていくことで\n\\(d_r\\)\nを求めることができます。\n以上を適切に実装することでこの問題を解くことができます。計算量は\n\\(O(N+M)\\)\nとなります。\n提出例 (Python3)",
+      "codes": [
+        "N, M = map(int, input().split())\nd = [1 for i in range(M + 1)]\nfor _ in range(N):\n    L, R = map(int, input().split())\n    d[R] = max(d[R], L + 1)\nfor r in range(1, M + 1):\n    d[r] = max(d[r], d[r - 1])\nans = 0\nfor r in range(1, M + 1):\n    ans += r - d[r] + 1\nprint(ans)"
+      ],
+      "text_sha256": "16dab607afb613b3bdb00913bfb38f272912093df1298c917b88db289c61083c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc377/abc377_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

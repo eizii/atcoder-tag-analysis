@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc311_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/6823",
+      "text": "前書き: この問題に \\(300^3 \\times \\log_2(300) \\approx 2.2 \\times 10^8\\) といった時間計算量で正解するには、定数倍にかなり気を遣わなければならないか不可能かのどちらかです。なので、この解説ではなるべく \\(300^3\\) の計算量でこの問題を解くことを考えます。実際、この計算量で解くことが可能です。 \\(1 \\le A_i \\le 300\\) という特徴的な制約に着目してみましょう。 \\(f(R) = \\) ( \\(R\\) 内のマスに書かれた整数の総和 ) \\(\\times\\) ( \\(R\\) 内のマスに書かれた整数の最小値 ) と書き表せることを思い出しましょう。 思い切って、 \\(2\\) つめの項である \\(R\\) 内のマスに書かれた整数の最小値 \\(m\\) を固定することを考えてみましょう。この時、固定の仕方は \\(1\\) から \\(300\\) までの \\(300\\) 通り試せば十分です。 更に、長方領域のうち最も下の行も固定してしまいましょう。これは \\(N\\) 通り試せば十分です。 ここで、以下の値を考えます。 \\(H_{i,j} = \\) ( \\(i\\) 行目を最も下の行としたときに、最小値が \\(m\\) 以上であるという条件のもとで \\(j\\) 列目をどれだけ上に伸ばせるか? ) この \\(H_{i,j}\\) が大きい順に列を ( \\(M\\) 回 ) 追加していくことを考えます。 ある列を追加した時に、その左右に連続して既に追加されている列の極大な広がりに着目します。このとき、それらの列は ( \\(j\\) 列目がボトルネックとなって) 必ず \\(H_{i,j}\\) だけ上に伸ばせ、またそれを超えて上に伸ばすことはできません。 このとき、極大な長方領域に含まれる整数の和は二次元累積和によって \\(O(1)\\) で取得可能であり、長方領域に含まれる整数の最小値は \\(m\\) 以上です。 これにより、最小値が \\(m\\) 以上となる極大な領域を調べ尽くすことができます。 「左右に連続して既に追加されている列の極大な広がりに着目する」を連結リストの要領で処理したり、列を \\(H_{i,j}\\) の降順にソートする際に \\(H_{i,j} = H_{i-1,j}+1\\) または \\(H_{i,j}=0\\) が成り立つことを利用したりすると、余計な \\(\\log\\) が付くことを回避できます。詳細は実装例も参照してください。 以上から、この問題を \\(O(NM \\max A_i)\\) で解くことができます。 実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint sum2d(int fx,int fy,int tx,int ty,vector<vector<int>> &s){\n  if(fx>tx || fy>ty){return 0;}\n  if(fx==0 && fy==0){return s[tx][ty];}\n  else if(fx==0){\n    return s[tx][ty]-s[tx][fy-1];\n  }\n  else if(fy==0){\n    return s[tx][ty]-s[fx-1][ty];\n  }\n  else{\n    return s[tx][ty]-s[tx][fy-1]-s[fx-1][ty]+s[fx-1][fy-1];\n  }\n}\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int n,m;\n  cin >> n >> m;\n  vector<vector<int>> a(n,vector<int>(m));\n  for(int i=0;i<n;i++){\n    for(int j=0;j<m;j++){\n      cin >> a[i][j];\n    }\n  }\n  vector<vector<int>> s=a;\n  for(int i=1;i<n;i++){\n    for(int j=0;j<m;j++){s[i][j]+=s[i-1][j];}\n  }\n  for(int i=0;i<n;i++){\n    for(int j=1;j<m;j++){s[i][j]+=s[i][j-1];}\n  }\n\n  long long res=0;\n  for(int mi=1;mi<=300;mi++){\n    vector<pair<int,int>> vp(m);\n    for(int i=0;i<m;i++){\n      vp[i].first=0;\n      vp[i].second=i;\n    }\n\n    for(int i=0;i<n;i++){\n      vector<pair<int,int>> top,bot;\n      for(auto &nx : vp){\n        if(a[i][nx.second]>=mi){\n          top.push_back({nx.first+1,nx.second});\n        }\n        else{\n          bot.push_back({0,nx.second});\n        }\n      }\n      vp.clear();\n      for(auto &nx : top){vp.push_back(nx);}\n      for(auto &nx : bot){vp.push_back(nx);}\n\n      vector<int> lef(m),rig(m);\n      for(int j=0;j<m;j++){\n        lef[j]=j-1;\n        rig[j]=j+1;\n      }\n\n      for(auto &nx : vp){\n        int cl=lef[nx.second];\n        int cr=rig[nx.second];\n        if(cl>=0){rig[cl]=cr;}\n        if(cr<m){lef[cr]=cl;}\n        long long cf=sum2d(i-nx.first+1,cl+1,i,cr-1,s);\n        cf*=mi;\n        res=max(res,cf);\n      }\n    }\n  }\n  cout << res << \"\\n\";\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "2fb6be9f8d4b87d69a4feb38619e62d0f2aefb1bfca11270bcf3c47cf8724f94"
+    }
+  ],
+  "status": "available"
+}

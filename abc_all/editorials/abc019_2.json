@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc019_2",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc019/editorial.pdf",
+      "text": "B問題 高橋くんと文字列圧縮\n\n  問題概要 1.\n  アルゴリズム 2.\n\n\n\n\n\n2015/2/28                             ©AtCoder Inc. All rights reserved.                                      66\n\f\nB問題 問題概要\n\n• 英小文字からなる文字列 s が与えられる．\n•  s を連続する文字とその長さをつなげた文字列に変\n 換せよ．\n• 制約\n   – 0 ≦ |s| ≦ 100000\n\n\n\n\n\n2015/2/28                                                                                               7\n\f\nB問題 アルゴリズム\n\n• 問題文通りに文字列を分解，文字と長さへ変換して\n つなげても大丈夫です．\n• 数字を文字列に変換するには，C++なら\n  stringstream， Java なら String.valueOf が便利です．\n\n\n\n\n\n2015/2/28                                                                                               8\n\f\nB問題 アルゴリズム\n\n• その他に，最初の文字から続く部分を文字と長さへ\n 変換し，答えの文字列にくっつけて，s の次の文字\n へ進む，という処理を繰り返す方法もあります．\n   – 分解とかをしないので楽かも．答えの文字列を t とおくと，\n          int seek=0;\n         while(seek<|s|){\n                 int startPos=seek;//開始位置\n             while(seek<n && s[seek]==s[startPos]) ++seek;\n       //同じ文字がどこまで続くか探す\n               t+=s[startPos];\n               t+=itos(seek-startPos);\n           }\n    (itosは整数から文字列への変換関数とします)\n\n\n\n2015/2/28                                                                                               9",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "669dc704cdab7afa7b40f32c4233c27498b6b2eb11ccf384394c7b71959ee68f"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc395_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc395/editorial/12343",
+      "text": "この問題は、与えられたグラフをもとに別のグラフを構成し、そのグラフ上での最短距離を求めることで解くことができます（このような問題は俗に「拡張ダイクストラ」と呼ばれることがあります）。\n\\(2N\\) 頂点 \\(N+2M\\) 辺の重み付き有向グラフであって、次のようなものを考えます（\\(2N\\) 個の頂点をそれぞれ頂点 \\(1,\\ldots,\\) 頂点 \\(2N\\) と呼ぶこととします）。\n与えられたグラフの辺 \\((u,v)\\) に対して、重み \\(1\\) の辺 \\((u,v)\\) および重み \\(1\\) の辺 \\((v+N,u+N)\\) が存在する。\n重み \\(X\\) の辺 \\((u,u+N)\\) および重み \\(X\\) の辺 \\((u+N,u)\\) が存在する。\n上記の辺以外は存在しない。\nこのグラフにおける頂点 \\(1\\) から頂点 \\(N\\) への最短距離と頂点 \\(1\\) から頂点 \\(2N\\) への最短距離のうち大きくないほうが答えとなります（頂点を \\(1\\) つ加え、頂点 \\(N\\) および \\(2N\\) からその頂点へ重み \\(0\\) の辺を伸ばすことで \\(2\\) 頂点間の最短距離として答えを求めることもできます）。\nこのグラフは、組 \\((\\)今いる頂点 \\(,\\) 辺の反転を行った回数の偶奇\\()\\) を頂点としていると考えることもできます。\nこのグラフ上でダイクストラ法を行うことで、この問題を十分高速に解くことができます。\n\\(\\min\\lbrace N,X\\rbrace+1\\) 個のバケットを用意することで、全体の時間計算量を \\(\\Theta(N+M)\\) 時間とすることもできます。\n実装例は以下のようになります。\n実装例では最短距離を求めるのにダイクストラ法を用いています。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <utility>\n#include <queue>\n\nint main() {\n    using namespace std;\n    unsigned N, M, X;\n    cin >> N >> M >> X;\n\n    vector<vector<pair<unsigned, unsigned>>> edges(2 * N);\n    \n    // もとのグラフでの反転に対応する辺\n    for (unsigned i{}; i < N; ++i) {\n        edges[i].emplace_back(i + N, X);\n        edges[i + N].emplace_back(i, X);\n    }\n\n    // もとのグラフの辺をたどることに対応する辺\n    for (unsigned i{}, u, v; i < M; ++i) {\n        cin >> u >> v;\n        --u;\n        --v;\n        edges[u].emplace_back(v, 1);\n        edges[v + N].emplace_back(u + N, 1);\n    }\n\n    // ダイクストラ法で最短距離を求める\n    priority_queue<pair<unsigned long, unsigned>, vector<pair<unsigned long, unsigned>>, greater<>> pq;\n    pq.emplace(0, 0);\n    vector distance(2 * N, 5UL * N * X);\n    while (!empty(pq)) {\n        const auto [dist, vertex]{pq.top()};\n        pq.pop();\n        if (distance[vertex] < dist)\n            continue;\n        for (const auto& [next, cost] : edges[vertex]) if (distance[next] > dist + cost)\n            pq.emplace(distance[next] = dist + cost, next);\n    }\n\n    // 頂点 N と頂点 2N への最短距離のうち大きくないほうが答え\n    cout << min(distance[N - 1], distance[2 * N - 1]) << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "d256f80900395435139a3534e0b09b3d660555f1af83e0a68cfdb330a4b2e177",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc395/abc395_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

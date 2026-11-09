@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc284_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5478",
+      "text": "この問題のように、 1 つの入力に複数のテストケースが含まれるような入力は\nマルチテストケース\nと呼ばれます。\nマルチテストケースは、1 つの入力にたくさんのテストケースを入れることで、テストケース自体の量を増やしたり入力ファイル数を減らす目的で主に利用されます。\nマルチテストケースの問題で要求される実装は通常の問題とほとんど変わりません。唯一違う点は、普通は\n\\(1\\)\n回だけ問題を解く処理を行うところを、\n\\(T\\)\n回 問題を解く処理を行うコードに変える必要があるところです。これは for 文を利用すれば以下のように実装できます。\nまた、上の書き方ではスコープ(波括弧で区切られた部分)の入れ子が深くなって読みづらいと感じる方もいると思います。そのような方には、別案として次のコードのように解答部分を関数として切り分けた実装をお勧めします。\n以上のようなコードを書いた後に、通常の問題と同様のコードをコメント部分に書いていけばよいです。\n次に、各テストケースごとに問題を解く部分を説明します。これは for 文を利用すれば解くことができます。具体的には、以下の手続きを実装すればよいです。\n\\(N\\)\nを入力から受け取る。\n答えに相当する変数\n\\(\\mathrm{ans}\\)\nを用意する。\n\\(\\mathrm{ans}\\)\nははじめ\n\\(0\\)\nである。\n\\(N\\)\n個の整数を for 文などを利用してで入力から受け取る。各整数について、読み取った数が奇数, すなわち 2 で割り切れない数ならば\n\\(\\mathrm{ans}\\)\nに\n\\(1\\)\nを加える。\n最終的な\n\\(\\mathrm{ans}\\)\nの値が答えとなる。\n時間計算量は\n\\(\\mathrm{O}(N)\\)\nです。1 つの入力あたりの時間計算量は\n\\(\\mathrm{O}(TN)\\)\nになり、これは十分高速です。",
+      "codes": [
+        "int main() {\n  int T;\n  cin >> T;\n  for(int t = 0; t < T; t++) {\n    // ここで問題を解く\n  }\n}",
+        "void solve() {\n  // ここで問題を解く\n}\n\nint main() {\n  int T;\n  cin >> T;\n  for(int t = 0; t < T; t++) solve();\n}"
+      ],
+      "text_sha256": "09260c3e167ef4dc5b7f0200204a3aa29d6e257ab125fb73ef77f0b5eeeb3c52",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5515",
+      "text": "注意\nこの解説文は、問題そのものの解説ではなく、マルチテストケース問題一般に対して言及するものです。また、やや発展的な内容であり、茶色以上を想定読者として書かれています。\n要約\n競技プログラミングにおいては、グローバルに変数を置くことがよくあります。マルチテストケースの問題を解く際は、グローバル変数の初期化忘れに注意しましょう。\n例\nABC275D『D - Yet Another Recursive Function』\nを改題した以下のような問題を考えます。\n\\(2\\)\n以上の整数\n\\(N,A,B\\)\nが与えられます。\n\\(f_{A,B}\\)\nを次のように定めるとき、\n\\(f_{A,B}(N)\\)\nを求めてください。\n\\(f_{A,B}(k)=\\begin{cases}\n1 && k=0\\\\\nf_{A,B}(\\left\\lfloor\\frac{k}{A}\\right\\rfloor)+f_{A,B}(\\left\\lfloor\\frac{k}{B}\\right\\rfloor) && k\\geq 1\n\\end{cases}\\)\nこの問題は、以下のようなメモ化再帰で解くことができます。\nこの例題をマルチテストケースにした問題に対して、以下のような実装ではWAになります。\nメモをした連想配列\nmemo\nを初期化し忘れ、前のテストケースの結果を参照してしまうことが原因です。対応策としては、\nsolve()\nの中で初期化を行うことや、メモの key を\n\\((a,b,k)\\)\nの組にすることが考えられます。\nグローバルに変数を置かないことが最も有効な対策の一つですが、競技プログラミングにおいては、実装にかかる量・時間とのトレードオフを理由に「グローバル変数を”気をつけて”使う」というのが一般的です。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nmap<long long, long long>memo;\nlong long f(long long a, long long b, long long k){\n  if(k==0)return 1;\n  if(memo.count(k))return memo[k];\n  memo[k]=f(a,b,k/a)+f(a,b,k/b);\n  return memo[k];\n}\n\nint main(){\n  long long n,a,b;\n  cin >> n >> a >> b;\n  cout << f(a,b,n) << endl;\n}",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nmap<long long, long long>memo;\nlong long f(long long a, long long b, long long k){\n  if(k==0)return 1;\n  if(memo.count(k))return memo[k];\n  memo[k]=f(a,b,k/a)+f(a,b,k/b);\n  return memo[k];\n}\n\nvoid solve(){\n  long long n,a,b;\n  cin >> n >> a >> b;\n  cout << f(a,b,n) << endl;\n}\n\nint main(){\n  int t;\n  cin >> t;\n  while(t--)solve();\n}"
+      ],
+      "text_sha256": "ed5758f24bfdda5faaf24726d02e6b5aaecc8b3a202637c076a9118060aba36e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5513",
+      "text": "https://twitter.com/kyopro_friends/status/1611950973215465472\n（ツイート中に「ABC285」とありますが、ABC284の誤りです）",
+      "codes": [],
+      "text_sha256": "d6a193d4f5c4d762057ec3c18a8d494ec0fccd9272b0454820b0506934e6e038",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

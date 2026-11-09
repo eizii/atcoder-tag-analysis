@@ -1,0 +1,21 @@
+{
+  "problem_id": "abc359_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc359/editorial/10263",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nC++入門 AtCoder Programming Guide for beginners (APG4b)\nは、競技プログラミングのための C++ 入門用コンテンツです。\n1. 素朴な解法\nこの問題は、次のような手順をプログラムすることで解くことができます。\n答えとなる整数の変数 \\(\\operatorname{ans}\\) を作り、値を \\(0\\) とする。\n標準入力から \\(N\\) を入力する。\n次の操作を \\(N\\) 回繰り返す。\n標準入力から文字列を受け取る。\n受け取った文字列が\nTakahashi\nと等しければ、\\(\\operatorname{ans}\\) の値を \\(1\\) 増やす。\n\\(\\operatorname{ans}\\) の値を出力する。\nfor 文による繰り返しや if 文による条件分岐を適切に用いると、この手順を正しくプログラムすることができます。\n実装例は以下のようになります。\nC++ での実装例\nPython での実装例\n2. 少し工夫した解法\nこの問題の答えは、「入力の中に含まれる\nT\nの個数」や「入力の中に含まれる\ns\nの個数」のように言い換えることができます。\n入力全体をまとめて扱ったり、文字列の中に特定の文字が含まれる個数を求めたりすることが簡単な言語では、この方針を選ぶことで実装が楽になる場合があります。\nHaskell での実装例\nPython での実装例\nBash での実装例",
+      "codes": [
+        "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    // Takahashi と等しい個数のカウンタ\n    int ans = 0;\n\n    int N;\n    cin >> N;\n\n    for (int i = 0; i < N; i++) {\n        string S;\n        cin >> S;\n        // S が Takahashi と等しかったら、カウンタの値を増やす\n        if (S == \"Takahashi\") {\n            ans++;\n        }\n    }\n\n    // カウンタの値を出力\n    cout << ans << endl;\n\n    return 0;\n}",
+        "# Takahashi と等しい個数のカウンタ\nans = 0\n\nN = int(input())\n\nfor _ in range(N):\n    S = input()\n    # S が Takahashi と等しかったら、カウンタの値を増やす\n    if S == 'Takahashi':\n        ans += 1\n\n# カウンタの値を出力\nprint(ans)",
+        "main = interact $ show . length . filter ('T' ==)",
+        "print(open(0).read().count('T'))",
+        "grep T | wc -l"
+      ],
+      "text_sha256": "e9981f213d1bf2a18d8566ff0438e36231c2625402e25461786e7b7be2a0fd2d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc359/abc359_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

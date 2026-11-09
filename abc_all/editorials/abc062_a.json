@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc062_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc074/editorial.pdf",
+      "text": "A: Grouping\n                                                                       (12 )\n すべての(x, y) のペアについてYes / No を記録しておく方法では，  2 = 66 通りの場合分けが必要にな\nり，大変です．代わりに，グループに1, 2, 3 と番号を振っておき，各1 ≤x ≤12 ごとにx が属するグループ\n\nの番号を記録しておけば，x, y が属するグループの番号を比較することでYes / No は簡単に判定できます．\n\n                            C++ のコード例\n\nint main () {\n\n         int a[] = {0, 1, 3, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1};\n         // 配列の添字は0 から始まるので，a[0] は0 にしている．\n\n         int x, y; cin >> x >> y;\n\n         cout << (a[x] == a[y] ? \"Yes\" : \"No\") << endl;\n\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "a9698d24c62b204573b1b5a0e02da2a43beff7be7eb9a7dd5966184dea42e1f4"
+    }
+  ],
+  "status": "available"
+}

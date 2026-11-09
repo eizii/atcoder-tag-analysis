@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc130_c",
+  "editorials": [
+    {
+      "text": "C: Rectangle Cutting\n与えられた点(x, y) と長方形の中心を両方通るような直線で長方形を切って二つの部分に分けるとき、大\nきくない方の面積は全体の半分の面積になり、これが最大です。また、中心を通らないような直線で切った場\n合、中心を含む方の部分の面積の方が大きくなります。\n以上の考察から、与えられた点が長方形の中心でない場合は問題文の条件を満たす切り方は一意に定まりま\nす。そうでないなら、どの直線に沿って長方形を切っても、できる両方の部分の面積は等しくなるので、以下\nのようにして答えを求めることができます。\n1 #include<stdio.h>\n2 #include<vector>\n3 #include<algorithm>\n4 using namespace std;\n5 typedef long long ll;\n6 int main()\n7 {\n8\nint a, b, x, y;\n9\nscanf(\"%d%d%d%d\", &a, &b, &x, &y);\n10\nprintf(\"%lf %d\\n\", double(a)*double(b) / 2, x + x == a&&y + y == b);\n11 }\n",
+      "text_sha256": "d0a71cd11dd0ce3ff4d160ca0890f1673134197fc5ab03217a843569b8140477",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc130/abc130_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

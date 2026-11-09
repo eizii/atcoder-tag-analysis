@@ -1,0 +1,14 @@
+{
+  "problem_id": "arc060_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc044/editorial/4962",
+      "text": "\\(f(b, n) = s\\) を満たす \\(b (\\geq 2)\\) がどのような条件を満たすのか考えます。 \\(n\\) を \\(b\\) 進法で表したとき、 \\(b^i\\) の位の数字を \\(a_i\\) とおくと、 \\(n = a_0 \\cdot b^0 + a_1 \\cdot b^1 + \\cdots + a_k \\cdot b^k\\) \\(s = a_0 + a_1 + \\cdots + a_k\\) がともに成り立つはずです。\nこの \\(2\\) 式の差をとると \\(\\begin{aligned}\nn - s &= a_1 (b^1 - 1) + a_2 (b^2 - 1) + \\cdots + a_k (b^k - 1) \\\\\n&= (b - 1) \\{ a_1 + a_2 (b + 1) + \\cdots + a_k(b^{k-1} + b^{k-2} + \\cdots + 1) \\}\n\\end{aligned}\\) となります。\nつまり、 \\(b-1\\) は \\(n-s\\) の約数でなければなりません。 したがって、 \\(|n-s|\\) の正の約数 \\(d\\) を用いて \\(d + 1\\) と表せる数のみが答えの候補になります。あとは \\(f(d + 1, n) = s\\) が成り立つもののうち、最小の数を答えればよいです。 ただし、 \\(n - s = 0\\) の場合はどのような整数も約数になるため、例外として扱う必要があります。このときの答えは \\(n+1\\) です。 理由 $(n \\bmod b) = n - b \\times \\lfloor{ \\frac{n}{b} \\rfloor}$ のため、帰納的に $f(b, n) \\leq n$ が成り立ちます。\n特に $2 \\leq b \\lt n$ であれば、\n$f(b, n) \\leq   n - (b - 1) \\times \\lfloor{ \\frac{n}{b} \\rfloor} \\lt n$ です。 したがって $n = s$ のとき、$n$ 以下の整数 $b (\\geq 2)$ は必ず $f(b, n) \\lt n = s$ を満たします。 約数列挙がボトルネックとなり、時間計算量は \\(\\mathrm{O}(\\sqrt{N})\\) です。 実装例 (C++)",
+      "codes": [],
+      "source": "user_web",
+      "official_status": "user",
+      "text_sha256": "5fe07c77cb80b18cd22db616534ce028398ccc2fa63f0b89d7378078f697fd87"
+    }
+  ],
+  "status": "available"
+}

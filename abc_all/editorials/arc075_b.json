@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc075_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc075/editorial.pdf",
+      "text": "D: Widespread\n\n「残りの体力が最も多い魔物を中心に爆発を起こすことを繰り返す」のは最適な戦略ではありますが、この\n\n戦略を素直にシミュレートしてしまうと、例えば体力109 の魔物が105 体存在してA = 2, B = 1 の場合に\n\n長大な時間を要します。\n\n\n 整数T に対し、enough(T) を「T 回以内の爆発ですべての魔物を消すことは可能か？」という問いの答\n\nえ(Yes またはNo) とします。このとき、求めたい答えはenough(T) = Yes であるようなT の最小値です。\n\nenough は単調性を持つ(enough(X) = Yes であればX ≤Y のときenough(Y ) = Yes) ため、この最小値\nを二分探索*2で求めることができます。\n\n\n 定められたT の値に対してenough(T) を判定するには、爆発を起こすことを以下のように捉え直すとよい\n\nでしょう:「すべての魔物の体力をB ずつ減らし、魔物を一体選んでその体力をさらにA −B 減らす」。\n\nすると、T 回の爆発を起こすことは、すべての魔物の体力をB × T ずつ減らし、その上でT 回にわたっ\n\nて一体の魔物の体力をA −B 減らすこと（以下、この行為を「追加ダメージを与える」と表現します）\n\nと同等です。すべての魔物を消すには、体力がB × T より高い魔物i それぞれに対して追加ダメージを\n\n⌈(hi −B × T)/(A −B)⌉回与える必要があり（⌈x⌉はx 以上の最小の整数を表します）、この回数の合計が\nT 以下であればenough(T) = Yes、合計がT を超える場合はenough(T) = No と判定できます。\n\n\n 以上により、一つのT の値に対するenough(T) の判定を時間計算量O(N) で行うことができ、この解法\n\nの全体の時間計算量はO(N log(hmax/B)) となります。\n\n\n\n   *2 二分探索自体の説明は省きます。例えば、日本語版Wikipedia の当該記事に詳細な記述があります。\n\n\n                                             3",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "97c56099c63f662f49d9a0a5a5af52925e7437f192d451eb780ff140dadf71ff"
+    }
+  ],
+  "status": "available"
+}

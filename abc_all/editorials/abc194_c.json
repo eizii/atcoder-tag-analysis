@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc194_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc194/editorial/826",
+      "text": "求める式をそのまま計算すると時間計算量が\n\\(\\Theta(N^2)\\)\nとなって TLE になります。\n解法\n\\(1\\)\n\\(|A_i| \\le 200\\)\nという制約を利用します。\n\\(N\\)\nは大きくても出現する値の種類数は小さいので、同じ値の要素をまとめて処理します。\nまず\n\\(\\mathrm{cnt}_i : A\\)\nに\n\\(i\\)\nが何個出現するか\nという数列を計算します。添字が負になる可能性があるため、実際の実装ではすべての添字に\n\\(200\\)\nを足すなどすると良いでしょう。\nそして各\n\\(i, j (-200 \\le i \\lt j \\le 200)\\)\nについて\n\\(\\mathrm{cnt}_i  \\times \\mathrm{cnt}_j \\times |i - j|^2\\)\nを求めて足せば答えです。\n同じ値同士は差の\n\\(2\\)\n乗が\n\\(0\\)\nなので答えに影響せず、処理する必要がありません。\n答えが32 bit整数型に収まらない可能性があることに注意して、64 bit整数型などを用いて計算してください。\n時間計算量は\n\\(O(N + (\\max |A_i|)^2)\\)\nです。\n解法\n\\(2\\)\n\\(|A_i| \\le 200\\)\nという制約を利用せずとも高速に求めることができます。\n\\(\\sum_{i = 2}^n \\sum_{j = 1}^{i - 1} (A_i - A_j)^2\\)\n\\( = \\frac{1}{2}(\\sum_{i = 1}^n \\sum_{j = 1}^{n} (A_i - A_j)^2)\\)\n\\(((A_i - A_i)^2 = 0\\)\nなので\n\\()\\)\n\\( = \\frac{1}{2}(\\sum_{i = 1}^n \\sum_{j = 1}^{n} (A_i^2 + A_j^2 - 2A_iA_j))\\)\n\\( = \\frac{1}{2}(2N \\sum_{i = 1}^n A_i^2 -2 \\sum_{i = 1}^n (A_i \\sum_{j = 1}^n A_j))\\)\n\\( = N\\sum_{i = 1}^n A_i^2 - (\\sum_{i = 1}^n A_i)^2\\)\nと変形でき、最後の式は\n\\(O(N)\\)\nで計算できます。\n同様に32 bit整数型のオーバーフローには注意してください。",
+      "codes": [],
+      "text_sha256": "b08da91cd746e1b732c02baeafdb34fcb2c6860f975a9c4f0498c592ad518d31",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc194/abc194_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

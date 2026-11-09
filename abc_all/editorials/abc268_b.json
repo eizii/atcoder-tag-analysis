@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc268_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc268/editorial/4780",
+      "text": "\\(S\\)\nの長さ\n\\(|S|\\)\nが\n\\(T\\)\nの長さ\n\\(|T|\\)\nより長い場合は、\n\\(S\\)\nは\n\\(T\\)\nの接頭辞とはなり得ないため、答えは\nNo\nです。\n以下、\n\\(|S| \\leq |T|\\)\nとします。\n\\(S\\)\nが\n\\(T\\)\nの接頭辞であることは、\n\\(S\\)\nが\n\\(T\\)\nの先頭\n\\(|S|\\)\n文字と等しいこと等価です。\nよって、\n\\(S = S_1S_2\\ldots S_{|S|}\\)\nが\n\\(T = T_1T_2\\ldots T_{|T|}\\)\nの接頭辞かを調べるには、\nすべての\n\\(i = 1, 2, \\ldots, |S|\\)\nで\n\\(S_i = T_i\\)\nが成立しているかを調べれば良いです。\n「すべての\n\\(i\\)\n」を走査するのには、プログラミング言語の標準的な機能である繰り返しの機能（ for 文など）を用いることができます。\n使用するプログラミング言語によっては、\n文字列の\n\\(1\\)\n文字目が\n\\(1\\)\nではなく\n\\(0\\)\nで添字づけされていることに注意してください。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(void)\n{\n  string s, t;\n  cin >> s >> t;\n  \n  if(s.size() > t.size()){\n    cout << \"No\" << endl;\n    return 0;\n  }\n  \n  for(int i = 0; i < (int)s.size(); i++){\n    if(s[i] != t[i]){\n      cout << \"No\" << endl;\n      return 0;\n    }\n  }\n  cout << \"Yes\" << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "4366156b7cad320531c33a45d9b94b46ef33830804292a5e8e670913f4059ca3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc268/abc268_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

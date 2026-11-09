@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc172_b",
+  "editorials": [
+    {
+      "text": "B: Minor Change\n(解説: evima)\n問題文は厳密を期してやや堅苦しく書かれていますが、平たくいえば「S とT は何か所が異なる\nか？」という内容に過ぎません。\n主な課題は、二つの文字列の長さが一定でない上に大きいことです。「if 文」の扱いはBeginner\nContest の問題A でも要求されますが、今回の問題も\nif length(S) >= 100 and S[99] != T[99] then ans += 1\nといった行を20 万行並べて理論上は解くことができます。しかし、ソースコードが数百万文字以\n上の長さになり、AtCoder に提出できません(提出可能な最大長は52 万文字程度です)。\n20 万行のif 文を不要にするには、「for 文」と呼ばれるループ構造を使うのが最も素直です。\nif S[i] != T[i] then ans += 1 という処理をfor ループ内でi = 0, i = 1, . . . , i = (S の長さ)−1\nのそれぞれに対して実行させれば、一個のif 文で済みます。「for 文」の言語ごとの詳細は検索エンジ\nンで「[言語名] for」などと検索することで得られるはずです。\nC++, Python での実装例(後者は「for 文」以外のアプローチの例として):\n1 #include <iostream>\n2 using namespace std;\n3\n4 int main(){\n5\nstring S, T;\n6\ncin >> S >> T;\n7\nint N = S.size(), ans = 0;\n8\nfor(int i = 0; i < N; ++i){\n9\nif(S[i] != T[i]) ++ans;\n10\n}\n11\ncout << ans << endl;\n12 }\n1 S, T = input(), input()\n2 print(len(list(filter(lambda i: S[i] != T[i], range(len(S))))))\n",
+      "text_sha256": "c8ce9e77c6c611c46debb791a142fbe5d0b2b4e9c4bdcfb6f871089eb7221800",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc172/abc172_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc191_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc191/editorial/610",
+      "text": "(特別な前計算などはせずに) 各町\n\\(i\\)\nごとに答えを求めます。\n町\n\\(i\\)\nから出発する、かかる時間が最小の正しい散歩経路は以下のどちらかです。\n町\n\\(i\\)\nから町\n\\(i\\)\n自身への道路を通るだけ\n町\n\\(i\\)\nから町\n\\(j (j \\neq i)\\)\nに最短距離で行き、また町\n\\(i\\)\nに最短距離で帰ってくる\n前者のコストは自明なので後者の最小コストを考えます。\n町\n\\(i\\)\nを始点にダイクストラ法を使うと、町\n\\(i\\)\nから各町\n\\(j\\)\nへの距離が求まります。また、すべての道路の向きを反転したグラフで同様に町\n\\(i\\)\nからダイクストラ法を使うと、元のグラフで各町\n\\(j\\)\nから町\n\\(i\\)\nへの最小コストが求まります。\nこれらを使えば答えを求めることができます。\n以上を各\n\\(i\\)\nについて行うので計算量は\n\\(O(N(N + M\\log(M)))\\)\nです。",
+      "codes": [],
+      "text_sha256": "921e0a41f1b8e85fba4a24e25aee00232d884640b3e6d3c2ae6529d681cfeb9d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc191/abc191_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc191/editorial/947",
+      "text": "町\n\\(i\\)\nから出発するような、かかる時間が最小の正しい散歩経路は以下のどちらかです。\n町\n\\(i\\)\nから町\n\\(i\\)\n自身への道路を通るだけ\n町\n\\(i\\)\nから町\n\\(j(j≠i)\\)\nに最短距離で行き、また町\n\\(i\\)\nに最短距離で帰ってくる\n前者のコストは自明なので後者の最小コストを考えます。これは全頂点対についての最短距離が求まっていれば、\n\\(j\\)\nを全探索することで町ごとに\n\\(O(N)\\)\nで求めることができます。\n各町を始点としたダイクストラ法を行うことで、全頂点対についての最短距離を\n\\(O(N(N+M\\log M))\\)\nで求めることができるので、この問題は全体で\n\\(O(N(N+M\\log M) + N^2) = O(N(N+M\\log M))\\)\nで解けました。",
+      "codes": [],
+      "text_sha256": "ef91b60e518b8f2f35c28f3e752857ce638814971236fabf16ca4a55f0f54e18",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc191/abc191_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

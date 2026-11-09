@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc348_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc348/editorial/9728",
+      "text": "この問題ではすべての点の組についてその距離を求めて、それぞれの点からの距離の最大値とその最大値を達成する番号が最小の点を求めることが問われています。\n2点間のユークリッド距離を求めるのは、問題文にある式通りに計算することで行えます。ただし、ユークリッド距離の大小とユークリッド距離の\n\\(2\\)\n乗の大小は変わらないので、この問題ではユークリッド距離の\n\\(2\\)\n乗を管理することでが整数のみでの実装が可能です。\n距離の最大値を達成する番号が最小の点を求めるには、例えば、番号が小さい順に見て行って最大値が更新されたら点の番号も更新するというような方法で行うことができます。\n詳しくは実装例を参考にしてください。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int n;\n  cin >> n;\n  vector<int> x(n), y(n);\n  for (int i = 0; i < n; ++i) {\n    cin >> x[i] >> y[i];\n  }\n\n  for (int i = 0; i < n; ++i) {\n    int max_dist = 0; //距離の2乗の最大値\n    int idx = -1;     //距離が最大になる点の番号(0-indexed)\n    for (int j = 0; j < n; ++j) {\n      int dist = (x[i] - x[j]) * (x[i] - x[j]) +\n                 (y[i] - y[j]) * (y[i] - y[j]); // 点i,jの距離の2乗\n      if (max_dist < dist) {\n        // 距離の最大値が更新された場合\n        max_dist = dist;\n        idx = j;\n      }\n    }\n    cout << idx + 1 << endl;\n  }\n}"
+      ],
+      "text_sha256": "149c6f4ce29c370f4f94a09065c7c15374ef23c99e4e522a5fed9ce91e23e6f6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc348/abc348_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

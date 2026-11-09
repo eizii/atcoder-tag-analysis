@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc394_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc394/editorial/12278",
+      "text": "文字列の列を文字の長さの昇順にソートできればよいです。\n一例として、ソートの比較関数を文字列の長さの比較として定めるような方法があります。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<string> s(n);\n\tfor (int i = 0; i < n; i++) cin >> s[i];\n\tsort(s.begin(), s.end(), [](string x, string y) { return x.size() < y.size(); });\n\tstring ans = \"\";\n\tfor (int i = 0; i < n; i++) ans += s[i];\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "e464214f6cfb90ff6676ebbaf761dfe2bb8d1c9f3c16b2dd0abea9ed4dacc2b9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc394/abc394_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

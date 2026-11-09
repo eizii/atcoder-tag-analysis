@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc414_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc414/editorial/13450",
+      "text": "条件の言い換え\n「\n\\(a \\bmod b = c\\)\n」という条件があることから，条件を満たす整数の組は\n\\((a,b,a \\bmod b)\\)\nの形で表せます．\nそこで，\n\\((a,b,c)\\)\nに関する条件を\n\\((a,b)\\)\nに関する条件に言い換えて，それを満たす\n\\((a,b)\\)\nを数え上げることを考えます．\n\\(a < b\\)\nの場合は，\n\\(c = a \\bmod b = a\\)\nとなるので，「\n\\(a,b,c\\)\nが相異なる」という条件に必ず反します．\n逆に，\n\\(a > b\\)\nの場合は，\n\\(c = a \\bmod b < b\\)\nとなるので，「\n\\(a,b,c\\)\nが相異なる」という条件は必ず満たされます．\nまた，\n\\(c = a \\bmod b\\)\nが正であることは，\n\\(a\\)\nが\n\\(b\\)\nの倍数でないことで言い換えられます．\nしたがって，以下を満たす整数の組\n\\((a,b)\\)\nの個数を数えればよいです．\n\\(1 \\leq b < a \\leq N\\)\n\\(a\\)\nは\n\\(b\\)\nの倍数でない\n数え上げ\n\\(b \\in \\{1, \\dots, N\\}\\)\nを特定の値に固定したとき，条件を満たすような\n\\(a\\)\nの個数を\n\\(f(N, b)\\)\nとおきます．\n\\(b+1\\)\n以上\n\\(N\\)\n以下の整数は\n\\(N-b\\)\n個あり，そのうち\n\\(b\\)\nの倍数は\n\\(\\lfloor \\frac{N}{b} \\rfloor - 1\\)\n個あるので，\n\\(f(N,b) = (N - b) - (\\lfloor \\frac{N}{b} \\rfloor - 1)\\)\nとわかります．\nよって，求める値は\n\\(b = 1, \\dots, N\\)\nに対する\n\\(f(N,b)\\)\nの総和，つまり\n\\[\\sum_{b = 1}^{N} \\left(N - b + 1 - \\left\\lfloor \\frac{N}{b} \\right\\rfloor\\right )\\]\nと表せます．\n高速化\n\\(N \\leq 10^{12}\\)\nという制約下において，上の式を愚直に計算すると間に合わないでしょう．\n上の式を，以下のように\n\\(2\\)\nつの項に分けて考えます．\n\\[\\sum_{b = 1}^{N} \\left(N - b + 1 \\right) -  \\sum_{b=1}^N \\left\\lfloor \\frac{N}{b} \\right\\rfloor\\]\n第 1 項\n第\n\\(1\\)\n項は，開いてみると\n\\(N + (N-1) + \\dots + 2 + 1\\)\nという形をしています．これは等差数列の和であり，その値は\n\\(\\displaystyle\\frac{N(N+1)}{2}\\)\nと簡潔に書けます．\n第 2 項\n第\n\\(2\\)\n項について考えます．\n\\(\\displaystyle\\left\\lfloor \\frac{N}{b} \\right\\rfloor\\)\nの値を観察すると，\n\\(b > \\sqrt{N}\\)\nのときは\n\\(\\displaystyle\\left\\lfloor \\frac{N}{b} \\right\\rfloor < \\sqrt{N}\\)\nであることから，\n\\(\\displaystyle\\left\\lfloor \\frac{N}{b} \\right\\rfloor\\)\nの値は高々\n\\(2 \\sqrt{N}\\)\n種類の値しかとらないことがわかります．\nそこで，以下のように\n\\(2\\)\n段階に分けて計算することを考えます．\n\\(k = 1, \\cdots, \\lfloor \\sqrt{N} \\rfloor\\)\nに対しては，\n\\(\\displaystyle\\left\\lfloor \\frac{N}{b} \\right\\rfloor = k\\)\nであるような\n\\(b\\)\nの範囲を求め(方法は後述)，それらの\n\\(b\\)\nについてまとめて和を計算する．\n上でカバーしなかった\n\\(b\\)\nについては，個別に\n\\(\\displaystyle\\left\\lfloor \\frac{N}{b} \\right\\rfloor\\)\nを計算して足し合わせる．\n前半の段階でカバーされない\n\\(b\\)\nは，\n\\(\\displaystyle\\left\\lfloor \\frac{N}{b} \\right\\rfloor \\geq \\displaystyle\\left\\lfloor \\sqrt{N} \\right\\rfloor + 1\\)\nを満たすことから，\n\\[ \\frac{N}{b} \\geq \\displaystyle\\left\\lfloor \\frac{N}{b} \\right\\rfloor \\geq \\displaystyle\\left\\lfloor \\sqrt{N} \\right\\rfloor + 1 > \\sqrt{N} \\]\nより\n\\(b < \\sqrt{N}\\)\nを満たします．よって，後半の段階で扱われる\n\\(b\\)\nは\n\\(\\lfloor \\sqrt{N} \\rfloor\\)\n以下のもののみとわかり，前半・後半ともに\n\\(O(\\sqrt{N})\\)\n時間で計算できます．\n\\(N\\)\nの値が大きいので，計算途中でオーバーフローする危険性に十分注意して実装する必要があります．また，今回の問題では必要ありませんが，多倍長整数で非常に大きな数値をそのまま持つと四則演算程度の計算でも重くなるので，適宜 mod をとりながら計算する必要があります．\n\\(\\displaystyle\\left\\lfloor \\frac{N}{b} \\right\\rfloor = k\\)\nを満たす整数\n\\(b\\)\nの範囲\n\\(\\displaystyle\\left\\lfloor \\frac{N}{b} \\right\\rfloor = k\\)\nを満たす整数\n\\(b\\)\nの範囲は，式変形によって\n\\[\n\\begin{aligned}\n\\displaystyle\\left\\lfloor \\frac{N}{b} \\right\\rfloor = k &\\Longleftrightarrow k \\leq \\frac{N}{b} < k+1 \\\\\n&\\Longleftrightarrow \\frac{N}{k+1} < b \\leq \\frac{N}{k} \\\\\n&\\Longleftrightarrow \\left\\lfloor\\frac{N}{k+1}\\right\\rfloor + 1 \\leq b \\leq \\left\\lfloor\\frac{N}{k}\\right\\rfloor\n\\end{aligned}\n\\]\nと求まります．\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\n#include <cstdio>\n#include <string>\n#include <vector>\n#include <array>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\nusing std::string;\nusing std::to_string;\nusing std::pair;\nusing std::make_pair;\nusing std::vector;\nusing std::min;\nusing std::max;\nusing std::array;\n\n#include <atcoder/all>\nusing mint = atcoder::modint998244353;\n\ntypedef long long int ll;\n\nll n;\n\nvoid solve () {\n\tmint fsum = 0; // will be the sum of floor(n/b) (1 <= b <= n)\n\n\tll prevk = -1;\n\tll idx = 1;\n\twhile (true) {\n\t\t// floor(n/k) == idx\n\t\t// <=> idx <= n/k < idx+1\n\t\t// <=> n/(idx+1) < k <= n/idx\n\t\t// <=> floor(n/(idx+1)) + 1 <= k <= floor(n/idx)\n\n\t\tll l = n / (idx+1) + 1;\n\t\tll r = n / idx;\n\n\t\tif (l <= r) fsum += (mint)(r-l+1) * (mint)idx;\n\n\t\tprevk = l;\n\t\tif (prevk <= n / prevk) break;\n\n\t\tidx++;\n\t}\n\twhile (--prevk >= 1) {\n\t\tfsum += (mint)(n / prevk);\n\t}\n\n\tmint ans = 0; // the sum of (n-b+1) - floor(n/b)\n\tans += (mint)n * (mint)(n+1) / (mint)2;\n\tans -= fsum;\n\n\tcout << ans.val() << \"\\n\";\n\treturn;\n}\n\nint main (void) {\n\tstd::ios_base::sync_with_stdio(false);\n\tcin.tie(nullptr);\n\t\n\tcin >> n;\n\n\tsolve();\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "9f1f24c59f07dca84f8efa64db6a0a862789feb3b1dfbdd7372a3b1489a7b054",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc414/abc414_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc414/editorial/13455",
+      "text": "以下を満たす整数の組\n\\((a, b)\\)\nの個数を数えれば良いです。\n\\(2 \\leq b < a \\leq N\\)\n\\(a\\)\nは\n\\(b\\)\nの倍数でない\nよって、\n\\(X\\)\n:\n\\(2 \\leq b < a \\leq N\\)\nを満たす\n\\((a, b)\\)\nの個数\n\\(Y\\)\n:\n\\(2 \\leq b < a \\leq N\\)\nかつ\n\\(b\\)\nが\n\\(a\\)\nを割り切るような\n\\((a, b)\\)\nの個数\nとしたとき答えは\n\\(X - Y\\)\nです。\n\\(X\\)\nは\n\\(2 \\ldots N\\)\nから相異なる整数を\n\\(2\\)\nつ選ぶ場合の数に等しいので\n\\(X = _{N-1}C_2\\)\nとなります。\n\\(Y\\)\nを計算することを考えます。\n\\(Y\\)\nは以下を満たす整数の組\n\\((a, b, k)\\)\nの個数に等しいです。\n\\(a = b \\cdot k\\)\n\\(a \\leq N\\)\n\\(2 \\leq b, k\\)\nここで、これらの条件について\n\\(b\\)\nと\n\\(k\\)\nに対称性があることがわかります。厳密に言うと、\n\\((a, b, k) = (p, q, r)\\)\nが条件を満たすなら\n\\(q\\)\nと\n\\(r\\)\nを入れ替えた\n\\((a, b, k) = (p, r, q)\\)\nも条件を満たします。\nよって、上記の条件を満たす\n\\((a, b, k)\\)\nのうち\n\\(b < k\\)\nを満たすものの個数を\n\\(2\\)\n倍し、それに\n\\(b = k\\)\nを満たすものの個数を足せば\n\\(Y\\)\nが求まります。これは、\n\\(b = 2 \\ldots \\lfloor \\sqrt N \\rfloor\\)\nについてそれぞれ対応する\n\\(k\\)\nの個数を計算することで\n\\(O(\\sqrt N)\\)\n時間で計算できます。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n#include <atcoder/modint>\nusing mint = atcoder::modint998244353;\n\nint main() {\n    ll N;\n    cin >> N;\n    mint ans = (mint) (N - 1) * (N - 2) / 2;\n    for (ll b = 2; b * b <= N; ++b) {\n        ans -= (N / b - b) * 2 + 1;\n    }\n    cout << ans.val() << endl;\n}"
+      ],
+      "text_sha256": "2ff15db91cefae8282460ae9f263c5a74f9f84f02fcc6ff5c77d51d1462f6fc5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc414/abc414_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc414/editorial/13687",
+      "text": "注：ツイート内のE問題の解説は誤りです。\nhttps://x.com/kyopro_friends/status/1944032441515020378",
+      "codes": [],
+      "text_sha256": "7211b2042198a7f148b80079c045ae48fedda69bfec7c15dded8eb2461622f40",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc414/abc414_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

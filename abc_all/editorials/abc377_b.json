@@ -1,0 +1,31 @@
+{
+  "problem_id": "abc377_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc377/editorial/11232",
+      "text": "この問題は、次の \\(2\\) つの方針で解くことができます。\nそれぞれのマスについて、どのコマからも取られないか判定する\nそれぞれのコマについて、取ることができるマスを計算する\nそれぞれの方針について解説します。\n1. マスごとに取られないか判定する\nあるマスがどれかのコマによって取られるということは、同じ行にコマがあるか、同じ列にコマがあるということです。\nこの条件を実装し、すべてのマスについて確認を行うことでこの問題を解くことができます。\n実装例は以下のようになります。\n2. コマごとに取れるマスを計算する\n空のマス目を用意し、それぞれのコマについて同じ行のマスと同じ列のマスを塗ることを考えます。\nこの操作が終わったあと塗られていないマスの個数が答えです。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <array>\n#include <iostream>\n\nusing namespace std;\n\n// マス (i, j) にコマを置くことができるか判定する\nbool check_square(const array<array<bool, 8>, 8> &board, int i, int j) {\n    for (int k = 0; k < 8; k++) {\n        // すでに同じ行にコマが置かれていたら、コマを置くことはできない\n        if (board[i][k]) {\n            return false;\n        }\n    }\n    for (int k = 0; k < 8; k++) {\n        // すでに同じ列にコマが置かれていたら、コマを置くことはできない\n        if (board[k][j]) {\n            return false;\n        }\n    }\n    return true;\n}\n\nint main() {\n    array<array<bool, 8>, 8> board;\n    for (int i = 0; i < 8; i++) {\n        for (int j = 0; j < 8; j++) {\n            char c;\n            cin >> c;\n            board[i][j] = c == '#';\n        }\n    }\n\n    int ans = 0;\n\n    // それぞれのマスについて、\n    for (int i = 0; i < 8; i++) {\n        for (int j = 0; j < 8; j++) {\n            // コマが置けるなら答えを 1 増やす\n            if (check_square(board, i, j)) {\n                ans++;\n            }\n        }\n    }\n\n    cout << ans << endl;\n\n    return 0;\n}",
+        "# マス (i, j) にコマを置くことができるか判定する\ndef check_square(board, i, j):\n    for b in board[i]:\n        # すでに同じ行にコマが置かれていたら、コマを置くことはできない\n        if b:\n            return False\n\n    for row in board:\n        # すでに同じ列にコマが置かれていたら、コマを置くことはできない\n        if row[j]:\n            return False\n    return True\n\nboard = [[c == '#' for c in input()] for i in range(8)]\n\nans = 0\n\n# それぞれのマスについて、\nfor i in range(8):\n    for j in range(8):\n        # コマが置けるなら答えを 1 増やす\n        if check_square(board, i, j):\n            ans += 1\n\nprint(ans)",
+        "#include <algorithm>\n#include <array>\n#include <iostream>\n#include <ranges>\n\nusing namespace std;\n\nint main() {\n    array<array<bool, 8>, 8> board;\n    for (int i = 0; i < 8; i++) {\n        for (int j = 0; j < 8; j++) {\n            char c;\n            cin >> c;\n            board[i][j] = c == '#';\n        }\n    }\n\n    // 置くことができるマスを求める\n    array<array<bool, 8>, 8> safe{};\n    // はじめすべて true で初期化\n    ranges::fill(safe | views::join, true);\n\n    for (int i = 0; i < 8; i++) {\n        for (int j = 0; j < 8; j++) {\n            // コマが置かれていたら、\n            if (board[i][j] == 1) {\n                // 同じ行のマスに置くことはできない\n                for (int k = 0; k < 8; k++) {\n                    safe[i][k] = false;\n                }\n                // 同じ列のマスに置くことはできない\n                for (int k = 0; k < 8; k++) {\n                    safe[k][j] = false;\n                }\n            }\n        }\n    }\n\n    // 置くことができるマスの合計を出力\n    cout << ranges::count(safe | views::join, true) << endl;\n    return 0;\n}",
+        "board = [[c == '#' for c in input()] for i in range(8)]\n\n# 置くことができるマスを求める\n# はじめすべて true で初期化\nsafe = [[True for i in range(8)] for j in range(8)]\n\nfor i, row in enumerate(board):\n    for j, b in enumerate(row):\n        # コマが置かれていたら、\n        if b:\n            for k in range(8):\n                # 同じ行のマスに置くことはできない\n                safe[i][k] = False\n                # 同じ列のマスに置くことはできない\n                safe[k][j] = False\n\n# 置くことができるマスの合計を出力\nprint(sum(+f for row in safe for f in row))"
+      ],
+      "text_sha256": "91ad6315d5760c7a88f7540b35a5b9324cf395c8d98c021b0c7cd56a2f790f94",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc377/abc377_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc377/editorial/11233",
+      "text": "置くことができるマスの構造について考察を進めることで、この問題をより高速に解くこともできます。\n置くことができるマスは、その行にコマが置かれておらず、その列にコマが置かれていないマスです。\nよって、そのようなマスの個数は \\((\\)コマが置かれていない行の数\\()\\times(\\)コマが置かれていない列の数\\()\\) に等しいです。\nあとは、これを実装することでマス目の大きさを \\(N\\times N\\) として \\(O(N ^ 2)\\) 時間でこの問題を解くことができます。",
+      "codes": [
+        "#include <algorithm>\n#include <array>\n#include <iostream>\n\nusing namespace std;\n\nint main() {\n    // 各行・各列にコマがあるか\n    // はじめはすべて false にしておく\n    array<bool, 8> row{}, column{};\n\n    for (int i = 0; i < 8; ++i) {\n        for (int j = 0; j < 8; ++j) {\n            char c;\n            cin >> c;\n            // コマが置かれていたら\n            if (c == '#') {\n                // 対応する行と列を true に\n                row[i] = true;\n                column[j] = true;\n            }\n        }\n    }\n\n    // false の行数 × false の列数 が答え\n    cout << ranges::count(row, false) * ranges::count(column, false) << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "14a229e86023654d7fc587453486854cf72fb109db804145b455146748688893",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc377/abc377_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

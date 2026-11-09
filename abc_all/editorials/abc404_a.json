@@ -1,0 +1,21 @@
+{
+  "problem_id": "abc404_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc404/editorial/12865",
+      "text": "解法1. 文字を固定し、その文字が\n\\(S\\)\nに含まれているか調べる\n\\(S\\)\nに含まれていない文字として\na\n,\nb\n, …\nz\nを順に仮定して、それが\n\\(S\\)\nに含まれているか判定すればよいです。\n実装例 (C++) :\n解法2. バケットソートを利用する\n\\({\\rm bucket}[x] = \\)\n{\n\\(x\\)\nが\n\\(S\\)\n中に存在するなら\n\\(1\\)\n、そうでないなら\n\\(0\\)\n} という配列を作り、\n\\({\\rm bucket}[x] = 0\\)\nであるような\n\\(x\\)\nを探してそれを出力すればよいです。\n実装例 (C++) :\n解法3. ある要素の存在を判定できる関数を使う\n例えば C++ では\nstring\n型の\n.find\nを利用するとある文字が文字列中に含まれるかどうかを判定することができます。\nしかし、文字列の長さに比例する計算量を要するため、非常に長い文字列に対して何度も使うと (例えば、長さ\n\\(10^6\\)\nの文字列に対して\n\\(10^6\\)\n回呼ぶなど) 実行時間がかかる場合があることに注意してください。\n実装例 (C++) :\n解法4. ソートして比較する\n文字列\n\\(S\\)\n中の文字をソートしたものと、文字列\n\\(L=\\)\nabcdefghijklmnopqrstuvwxyz\nとを先頭から見比べることで、\n\\(S\\)\nに存在しない文字を探すことができます。\n実装例 (C++) :\n解法5:\nabcdefghijklmnopqrstuvwxyz\nを後ろに付けてソートする\n\\(S\\)\nの後ろに\nabcdefghijklmnopqrstuvwxyz\nを付けてから\n\\(S\\)\n中の文字をソートします。更に、先頭と末尾に\n*\nを補っておきます。\nすると、元々\n\\(S\\)\n中に含まれなかった文字は改変後の文字列にちょうど\n\\(1\\)\n度だけ含まれるはずであり、このとき、その文字は両側をその文字とは違う文字で挟まれるはずです。\nこれを利用してもこの問題に正解できます。\n実装例 (C++) :\n答えが必ず存在することの証明\nこの問題には答えが必ず\n\\(1\\)\nつ以上証明します。なぜでしょうか?",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  for(char c='a';c<='z';c++){\n    bool ok=true;\n    for(int i=0;i<s.size();i++){\n      if(s[i]==c){ok=false;}\n    }\n    if(ok){\n      cout << c << \"\\n\";\n      return 0;\n    }\n  }\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  vector<int> bucket(26,0);\n  for(auto &nx : s){\n    bucket[nx-'a']=1;\n  }\n  for(char c='a';c<='z';c++){\n    if(bucket[c-'a']==0){\n      cout << c << \"\\n\";\n      return 0;\n    }\n  }\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  for(char c='a';c<='z';c++){\n    if(s.find(c)==std::string::npos){\n      cout << c << \"\\n\";\n      return 0;\n    }\n  }\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  sort(s.begin(),s.end());\n  s.push_back('*');\n  string l=\"abcdefghijklmnopqrstuvwxyz\";\n  int p=0;\n  for(int i=0;;i++){\n    if(s[p]!=l[i]){\n      cout << l[i] << \"\\n\";\n      return 0;\n    }\n    while(s[p]==l[i]){\n      p++;\n    }\n  }\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  string l=\"abcdefghijklmnopqrstuvwxyz\";\n  for(auto &nx : l){\n    s.push_back(nx);\n  }\n  sort(s.begin(),s.end());\n  s=\"*\"+s+\"*\";\n  for(int i=1;;i++){\n    if(s[i-1]!=s[i] && s[i]!=s[i+1]){\n      cout << s[i] << \"\\n\";\n      return 0;\n    }\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "51b2b515c657040025af7c3edd53fe4ad4b3d189b64f24c07ff55683a10b3b16",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc404/abc404_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

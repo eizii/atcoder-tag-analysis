@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc224_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc224/editorial/2811",
+      "text": "与えられたマス目が問題文の条件を満たすかどうかを実際に確認することで、この問題を解くことができます。\nつまり、\n\\(1 \\leq i_1 < i_2 \\leq H\\)\nおよび\n\\(1 \\leq j_1 < j_2 \\leq W\\)\nを満たすすべての整数の組\n\\((i_1, i_2, j_1, j_2)\\)\nについて、\n\\(A_{i_1, j_1} + A_{i_2, j_2} \\leq A_{i_2, j_1} + A_{i_1, j_2}\\)\nが成り立つかどうかを実際に確認します。\nある整数の組\n\\((i_1, i_2, j_1, j_2)\\)\nが\n\\(A_{i_1, j_1} + A_{i_2, j_2} \\leq A_{i_2, j_1} + A_{i_1, j_2}\\)\nを満たすかどうかの判定にはプログラミング言語の条件分岐の機能を用いることができます（例えば C++言語では if 文がこれを実現します）。\nまた、この判定を対象となる整数の組のすべてに対して行うためには、プログラミング言語の繰り返しの機能を用いることができます（例えば C++言語では for 文がこれを実現します）。\nこの解法の時間計算量は\n\\(\\mathrm{O}(N^4)\\)\nです。\n以下に、C++言語による実装例を記載します。\n問題文の条件を満たす（答えが\nYes\nとなる）行列\n\\(A\\)\nは Monge 配列や Monge 行列と呼ばれ、\n\\(A\\)\nが Monge 行列であることは下記の条件と同値であることが知られていいます。\n\\(1 \\leq i \\leq H-1\\)\nおよび\n\\(1 \\leq j \\leq W-1\\)\nを満たすすべての整数の組\n\\((i, j)\\)\nについて、\n\\(A_{i,  j} + A_{i+1, j+1} \\leq A_{i+1, j} + A_{i, j+1}\\)\nが成り立つ。\nしたがって、与えられたマス目が上記の条件を満たすかどうかを判定することで、\n\\(\\mathrm{O}(N^2)\\)\n時間でこの問題を解くこともできます。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(void)\n{\n  int h, w;\n  int a[51][51];\n\n  cin >> h >> w;\n  for(int i = 1; i <= h; i++){\n    for(int j = 1; j <= w; j++){\n      cin >> a[i][j];\n    }\n  }\n\n  for(int i_1 = 1; i_1 <= h; i_1++){\n    for(int i_2 = i_1+1; i_2 <= h; i_2++){\n      for(int j_1 = 1; j_1 <= w; j_1++){\n        for(int j_2 = j_1+1; j_2 <= w; j_2++){\n          if(a[i_1][j_1] + a[i_2][j_2] > a[i_2][j_1] + a[i_1][j_2]){\n            cout << \"No\" << endl;\n            return 0;\n          }\n        }\n      }\n    }\n  }\n\n  cout << \"Yes\" << endl;\n\n  return 0;\n}"
+      ],
+      "text_sha256": "4ca87544faa1b8b5bbda0b72e79b9360ee0f46021989de48f908568a0967aaa8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc224/abc224_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

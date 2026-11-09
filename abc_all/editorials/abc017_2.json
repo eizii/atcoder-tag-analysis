@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc017_2",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc017/editorial.pdf",
+      "text": "問題B – choku 語\n\f\n問題概要\n\n• 文字列𝑆がchoku 語(ch,o,k,u を組み合わせてできる文字列)である\n か判定せよ。\n\n\n• 1 ≦|𝑆| ≦50\n\f\n解法\n\n• c,h,o,k,u 以外の文字が登場すれば、choku 語ではないことがわかり\n ます。\n• 問題はch が正しく登場しているかについてですが、これは、「c の直\n 後にh があるか」と「h の直前にc があるか」をすべてのc,h につい\n て判定することができます。\n• 他にもいくつか判定する方法があります。\n\f\n備考\n\n• この問題は文字列の問題です。\n• 1 文字ずつ読み込んだ場合、改行記号を文字列に含めてしまう場合\n があります。\n• また、文字列長が与えられないので、終端符号か否かを判定する必\n 要があります。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "7615e8a4c24c8f246b28d9c6f9f55468349cca75a2c6725cad96d495cbd05ed5"
+    }
+  ],
+  "status": "available"
+}

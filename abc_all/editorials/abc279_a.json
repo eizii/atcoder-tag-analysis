@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc279_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5287",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nこの問題は、for 文を用いて、以下の処理を実装することで解くことができます。\n\\(S\\)\nの中に含まれるそれぞれの文字\n\\(c\\)\nに対して、\n\\(c\\)\nが\nv\nなら答えに\n\\(1\\)\nを加算する\n\\(c\\)\nが\nw\nなら答えに\n\\(2\\)\nを加算する\n多くの言語には、このような「文字列や配列の中に含まれる要素を順番に1つずつ見ていく」操作をするための言語機能が用意されており、C++ では\n範囲 for 文\nと呼ばれています (foreach 文などと呼ばれている言語もあります)。\n以下、C++ と Python における実装例を示します。\nC++\nPython",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    int ans = 0;\n    for (char c: s) {\n        if (c == 'v') {\n            ans += 1;\n        } else {\n            ans += 2;\n        }\n    }\n    cout << ans << endl;\n}",
+        "s = input()\n\nans = 0\nfor c in s:\n    if c == 'v':\n        ans += 1\n    else:\n        ans += 2\n        \nprint(ans)"
+      ],
+      "text_sha256": "b5aa671fbf30eb3e62e1e55e31b8e8801833cdeb11859c07703baa37c01a2c2c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc279/abc279_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

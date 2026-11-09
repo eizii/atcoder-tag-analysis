@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc203_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc203/editorial/1948",
+      "text": "サイコロの目は\n\\(a\\)\n,\n\\(b\\)\n,\n\\(c\\)\nの\n\\(3\\)\nつなので、基本的には\n\\(a=b\\)\nならば\n\\(c\\)\nを、\n\\(b=c\\)\nならば\n\\(a\\)\nを、\n\\(c=a\\)\nならば\n\\(b\\)\nを、 いずれでもないならば\n\\(0\\)\nを出力すればよいです。\nただし、ゾロ目の時、すなわち\n\\(a=b=c\\)\nのときに間違えて\n\\(3\\)\n回出力するのを避けるために、 else (elif) 文を使う等する必要があります。\n以上をまとめると以下のように条件分岐を用いて書く事が出来ます。\nC++による実装例:\nPythonによる実装例:",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(void){\n\tint a, b, c;\n\tcin >> a >> b >> c;\n\tif (a == b) cout << c << endl;\n\telse if (b == c) cout << a << endl;\n\telse if (c == a) cout << b << endl;\n\telse cout << 0 << endl;\n\treturn 0;\n}",
+        "a, b, c = map(int, input().split())\n\nif a==b: print(c)\nelif b==c: print(a)\nelif c==a: print(b)\nelse: print(0)"
+      ],
+      "text_sha256": "3692a30f20d8f6823d66b2436b7f2315a2bf0149ec61429bfbf82fd7f7765783",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc203/abc203_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc203/editorial/1969",
+      "text": "$a,b,c$ のうち、ある $2$ つの目が同じ場合、もう $1$ つの目は $a \\oplus b \\oplus c$ であることを使うと、答えが $0$ でない場合の処理を簡潔に書くことができます。 ( $A \\oplus B$ は $A$ と $B$ の排他的論理和を表します。)\nこれは $X \\oplus X = 0$ であることより分かります。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  vector<int> v(3);\n  cin>>v[0]>>v[1]>>v[2];\n  sort(v.begin(),v.end());\n\n  if(v[0]!=v[1]&&v[1]!=v[2]){\n    cout<<0<<endl;\n  }\n  else{\n    //(a^b)でaとbの排他的論理和を表す\n    cout<<(v[0]^v[1]^v[2])<<endl;\n  }\n}"
+      ],
+      "text_sha256": "0b53dd205665da1370541bf36bac3dd7c22f607a2e6f002f74e46632a4d08d83",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc203/abc203_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

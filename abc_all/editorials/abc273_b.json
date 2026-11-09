@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc273_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc273/editorial/5033",
+      "text": "\\(10^k\\)\nの位以下を四捨五入する賢明な方法を考えてみましょう。\nまず、\n\\(10^k\\)\nの位以下を四捨五入する際に、\n\\(10^{k-1}\\)\nの位以下は気にしなくてよいことが分かります。\n理由:\n\\(10^k\\)\nの位が\n\\(4\\)\n以下ならば切り捨て、\n\\(5\\)\n以上ならば切り上げとなるからです。(メモ: 問題文の四捨五入の定義は一般的なそれと一致します。)\nそこで、\n\\(X\\)\nの\n\\(10^k\\)\nの位以下を四捨五入する際に、次の手順が成り立ちます。\nまず、\n\\(X\\)\nを\n\\(10^k\\)\nで割る。(小数点以下切り捨て)\nこれにより、\n\\(10^k\\)\nの位が\n\\(1\\)\nの位となり、\n\\(10^{k-1}\\)\nの位以下の情報については一旦失われます。\n\\(X\\)\nの\n\\(1\\)\nの位を\n\\(m\\)\n(\n\\(=X\\)\nを\n\\(10\\)\nで割った余り)  とします。\nもし\n\\(m \\le 4\\)\nなら、\n\\(X\\)\nから\n\\(m\\)\nを引いたのち\n\\(X\\)\nを\n\\(10^k\\)\n倍する。 (この操作後、切り捨てが実現します)\nそうでない (\n\\(m \\ge 5\\)\n) なら、\n\\(X\\)\nに\n\\(10-m\\)\nを足したのち\n\\(X\\)\nを\n\\(10^k\\)\n倍する。 (この操作後、切り上げが実現します)\n以上の操作の双方で、操作後に\n\\(X\\)\nの\n\\(10^k\\)\nの位以下がすべて\n\\(0\\)\nになることに留意してください。\nこれを実装すればこの問題に正解できます。なお、以上の操作は全て整数型で完結させることができます。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long x,k;\n  cin >> x >> k;\n  long long pow10=1;\n  for(long long i=0;i<k;i++){\n    x/=pow10;\n    long long m=(x%10);\n    if(m<=4){x-=m;}\n    else{x+=(10-m);}\n    x*=pow10;\n    pow10*=10;\n  }\n  cout << x << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "6ae49b67b25ec3bd6f6286ba36c673bc7e3ed542d1a7a83261f0dabd2a6f68ef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc273/abc273_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc273/editorial/5056",
+      "text": "別解を紹介します。\n\\(X\\)\nを桁ごとに配列に入れ、長さ\n\\(N\\)\nの整数列だと思うことにします。\nすると、数列の末尾から順に四捨五入と繰り上がりの処理を行えばよく、これは筆算と同じ要領で求められます。\n計算量は\n\\(O(\\log X)\\)\nです。",
+      "codes": [
+        "X, K = input().split()\nX = list(map(int, list(\"0\" + X))) # Xを桁ごとに分けてリストにする\nK = int(K)\nN = len(X)\nif K >= N: print(0)# 自明に0になる答え\nelse:\n  for i in reversed(range(N - K, N)):\n    if X[i] >= 5: X[i - 1] += 1 # 繰り上がり\n    X[i] = 0 # 四捨五入のどちらであってもこの桁は0になる\n  for i in reversed(range(1, N - K)):\n    if X[i] >= 10: X[i - 1] += 1 # 繰り上がり\n    X[i] %= 10 # この桁に入るのは勿論一桁\n  for start in range(N): # 先頭の0は除外する\n    if X[start] != 0: break\n  for i in range(start, N): print(X[i], end=\"\")"
+      ],
+      "text_sha256": "6522bd6e68a611262674d5ee54136d03bfda38f3cb347d28d25f8f71f578042e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc273/abc273_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc273/editorial/5060",
+      "text": "条件分岐を陽にせずに四捨五入する方法の紹介です。\n\\[\n\\gdef\\round#1#2{\\mathrm{round}(#1, #2)}\n\\gdef\\dfloor#1#2{\\mathrm{floor}(#1, #2)}\n\\gdef\\floor#1{\\lfloor#1\\rfloor}\n\\gdef\\Floor#1{\\left\\lfloor#1\\right\\rfloor}\n\\gdef\\ceil#1{\\lceil#1\\rceil}\n\\gdef\\Ceil#1{\\left\\lceil#1\\right\\rceil}\n\\]\ntl;dr\n\\(x\\)\nを\n\\(10^i\\)\nの位以下を四捨五入する関数を\n\\(\\round{x}{i}\\)\nと書くとすると、\n\\[\n\\round{x}{i} = \\Floor{\\frac{x+5\\cdot 10^i}{10^{i+1}}}\\cdot 10^{i+1}\n\\]\nが成り立つ。\nまた、問題全体の答えは\n\\[\n\\Floor{\\frac{X+\\floor{10^K/9}\\cdot 5}{10^K}}\\cdot 10^K\n\\]\nと書ける。\n導出\n簡単のため、まず\n\\(1 = 10^0\\)\nの位以下を四捨五入する場合を考えます。\n\\(10^i\\)\nの位以下を切り捨てる関数を\n\\(\\dfloor{x}{i}\\)\nと書くとすると、\n\\[\n\\dfloor{10a+b}{0} = \\begin{cases}\n10\\cdot a, & \\text{if}~0\\le b < 10; \\\\\n10\\cdot(a+1), & \\text{if}~10\\le b < 20; \\\\\n\\quad\\vdots\n\\end{cases}\n\\]\nです。これを利用し、\n\\[\n\\begin{aligned}\n\\round{10a+b}{0}\n &= \\begin{cases}\n10\\cdot a, & \\text{if}~{-5}\\le b < 5; \\\\\n10\\cdot(a+1), & \\text{if}~5\\le b < 15; \\\\\n\\quad\\vdots\n\\end{cases} \\\\\n&= \\begin{cases}\n10\\cdot a, & \\text{if}~0\\le b+5 < 10; \\\\\n10\\cdot(a+1), & \\text{if}~10\\le b+5 < 20; \\\\\n\\quad\\vdots\n\\end{cases} \\\\\n&= \\dfloor{10a+b+5}{0}\n\\end{aligned}\n\\]\nと書けます。\nここで、\n\\(\\dfloor{x}{0} = \\Floor{\\frac{x}{10}}\\cdot 10\\)\nであり、多くの言語で整数型の除算で\nx / 10 * 10\nのように書けます。\n直感的な話としては、「切り捨て除算の値は、入力の値が\n\\(10\\)\n変わるごとに変わる。四捨五入の際も、入力が\n\\(10\\)\n変わるごとに変わるので、値を適切にずらすことで（実装が簡単な）切り捨て除算で書けるようにしたい」といった感じです。\n一般の場合も同様にして、\n\\[\n\\round{x}{i} = \\dfloor{x+5\\cdot 10^i}{i}=\\Floor{\\frac{x+5\\cdot 10^i}{10^{i+1}}}\\cdot 10^{i+1}\n\\]\nと書けます。\n関連する話\n\\(x\\)\nを\n\\(y\\)\nで割った値の切り上げ\n\\(\\ceil{x/y}\\)\nを\n(x + y - 1) / y\nと書くのは比較的有名・頻出ですが、これと同じ発想です。\n全体をループなしで解く話\ncf.\nhttps://twitter.com/kenkenokkuu/status/1581477531277893633\n\\(X = a\\cdot 10^K + \\underbrace{44\\dots 44}_{K~\\text{digits}}\\)\nのとき\n\\(a\\cdot 10^K\\)\n、\n\\(X = a\\cdot 10^K + \\underbrace{44\\dots 45}_{K~\\text{digits}}\\)\nのとき\n\\((a+1)\\cdot 10^K\\)\nとなることを考えると、\n\\(\\underbrace{55\\dots 55}_{K~\\text{digits}}\\)\nの下駄を履かせればよいとわかります。この値は\n\\(\\floor{10^K/9}\\cdot 5\\)\nと書けるため、\n\\[\n\\Floor{\\frac{X+\\floor{10^K/9}\\cdot 5}{10^K}}\\cdot 10^K\n\\]\nと書けます。",
+      "codes": [],
+      "text_sha256": "d0fd6d01efeac7a0c14d8a290c389d642230f098bd000f4ed8c6a01dbd3ef23f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc273/abc273_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

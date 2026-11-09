@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc402_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc402/editorial/12713",
+      "text": "マス\n\\((i,j)\\)\nに数字\n\\(A_{i,j}\\)\nではなく整数\n\\(A_{i,j}10^{2N-i-j}\\)\nが書かれているとすると、スコアはコマが通ったマスに書かれている整数の総和を\n\\(M\\)\nで割ったあまりとなります。以降はマス\n\\((i,j)\\)\nに数字\n\\(A_{i,j}\\)\nではなく整数\n\\(A_{i,j}10^{2N-i-j}\\)\nが書かれているとします。\nコマをマス\n\\((1,1)\\)\nからマス\n\\((N,N)\\)\nへ動かす際に、マス\n\\((1,N),(2,N-1),\\ldots,(N,1)\\)\nのどれかちょうど\n\\(1\\)\nつを必ず通ることに着目します。\nコマがマス\n\\((k,N+1-k)\\)\nを通るとすると、スコアは\nマス\n\\((1,1)\\)\nからマス\n\\((k,N+1-k)\\)\nへ到達するまでにコマが通ったマスに書かれた整数の総和（マス\n\\((k,N+1-k)\\)\nを含む）\n\\(\\ldots(\\text{A})\\)\nマス\n\\((k,N+1-k)\\)\nからマス\n\\((N,N)\\)\nへ到達するまでにコマが通ったマスに書かれた整数の総和（マス\n\\((k,N+1-k)\\)\nを含まない）\n\\(\\ldots(\\text{B})\\)\nの\n\\(2\\)\nつの値の和を\n\\(M\\)\nで割ったあまりとなります。\n\\((\\text{A})\\)\nとしてあり得る値を\n\\(M\\)\nで割ったあまりの集合を\n\\(S_1\\)\n、\n\\((\\text{B})\\)\nとしてあり得る値を\n\\(M\\)\nで割ったあまりの集合を\n\\(S_2\\)\nとすると、スコアの最大値は\n\\(\\displaystyle \\max_{x\\in S_1,y\\in S_2}((x+y)\\ \\text{mod}\\ M)\\)\nとなります。\nここで、\n\\(x\\in S_1\\)\nを固定すると、\n\\((x+y)\\ \\text{mod}\\ M\\)\nを最大化する\n\\(y\\in S_2\\)\nは\n\\(S_2\\)\nの\n\\(M-x\\)\n未満の最大の要素です（そのような\n\\(y\\)\nが存在しない場合は\n\\(S_2\\)\nの最大の要素）。このような\n\\(y\\)\nは二分探索で高速に求めることができます。\n以上のアルゴリズムを全ての\n\\(1\\le k\\le N\\)\nに対して適用することで答えを求めることができます。計算量は\n\\(O(N2^N)\\)\n時間です。\n実装例(Python3)",
+      "codes": [
+        "from bisect import bisect_left\n\nn, m = map(int, input().split())\na = [list(map(int, input().split())) for _ in range(n)]\nfor i in range(n):\n    for j in range(n):\n        a[i][j] *= pow(10, n - 1 - i + n - 1 - j, m)\n        a[i][j] %= m\nnn = 1 << (n - 1)\ng1 = [[] for _ in range(n)]\nfor bit in range(nn):\n    s = 0\n    x, y = 0, 0\n    for i in range(n - 1):\n        s += a[x][y]\n        if (bit >> i) & 1:\n            x += 1\n        else:\n            y += 1\n    s += a[x][y]\n    s %= m\n    g1[x].append(s)\ng2 = [[] for _ in range(n)]\nfor bit in range(nn):\n    s = 0\n    x, y = n - 1, n - 1\n    for i in range(n - 1):\n        s += a[x][y]\n        if (bit >> i) & 1:\n            x -= 1\n        else:\n            y -= 1\n    s %= m\n    g2[x].append(s)\nans = 0\nfor r1, r2 in zip(g1, g2):\n    r2.sort()\n    for v in r1:\n        idx = bisect_left(r2, m - v) - 1\n        ans = max(ans, (v + r2[idx]) % m)\nprint(ans)"
+      ],
+      "text_sha256": "1503e50071cc4390259b4987382ad84d38d9aa6d33f9b3e292e5404e780d4559",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc402/abc402_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc332_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc332/editorial/7893",
+      "text": "グリッド A の現在の状態は、\n現在\n\\(i\\)\n行目にある行が初期状態での何行目に当たるかを表す順列\n\\(P = (P_1, P_2, \\ldots, P_H)\\)\nと、\n現在\n\\(j\\)\n列目にある列が初期状態での何列目に当たるかを表す順列\n\\(Q = (Q_1,Q_2, \\ldots, Q_W)\\)\nの組\n\\((P, Q)\\)\nで表せます。\n初期状態では、\n\\(P = (1, 2, \\ldots, H), Q = (1, 2, \\ldots, W)\\)\nであり、\n隣接する行・列の入れ替え操作は、それぞれ\n\\(P, Q\\)\n上の隣接する\n\\(2\\)\nつの要素の入れ替えに対応します。\nまた、\n\\((P, Q)\\)\nの情報から、現在のグリッドのマス\n\\((i, j)\\)\nに書かれた整数は、初期状態のグリッドでマス\n\\((P_i, Q_j)\\)\nに書かれていた整数だと解ります。\n例えば、入出力例１の説明文では、\n\\[\n\\begin{aligned}\n&P = (1, 2, 3, 4), Q = (1, 2, 3, 4, 5)\\\\\n\\rightarrow &P = (1, 2, 3, 4), Q = (1, 2, 3, 5, 4)\\\\\n\\rightarrow &P = (1, 3, 2, 4), Q = (1, 2, 3, 5, 4)\\\\\n\\rightarrow &P = (1, 3, 2, 4), Q = (1, 3, 2, 5, 4)\\\\\n\\end{aligned}\n\\]\nと状態\n\\((P, Q)\\)\nが変化します。\nグリッドの全状態数は、\n\\(P\\)\nとしてあり得る\n\\((1, 2, \\ldots, H)\\)\nの順列\n\\(H!\\)\n通り、\n\\(Q\\)\nとしてあり得る\n\\((1, 2, \\ldots, W)\\)\nの順列\n\\(W!\\)\n通りの組の総数\n\\(H!W! \\leq 5!\\times 5! = 14400\\)\nと、\n十分小さいのでそれらを全探索することで実行制限時間内に本問題の答えを得ることができます。\nつまり、\n\\((1, 2, \\ldots, H)\\)\nの順列\n\\(P\\)\nと、\n\\((1, 2, \\ldots, W)\\)\nの順列\n\\(Q\\)\nの組\n\\((P, Q)\\)\nとしてあり得るもの\n\\(H!W!\\)\n通りそれぞれについて、下記の処理を行います。\nまず、今調べている\n\\((P, Q)\\)\nにおいて、グリッド A がグリッド B と一致しているか判定する。\nもし一致しているなら、初期状態からその\n\\((P, Q)\\)\nに到達するための最小操作回数を計算する。\nそして、上で計算した最小操作回数の中の最小値を出力すれば良いです。\nただし、グリッド A がグリッド B と一致するような状態\n\\((P, Q)\\)\nが一つもなかった場合は、グリッド A とグリッド B を一致させることはできないので、\n-1\nを出力します。\nまた、今調べている\n\\((P, Q)\\)\nに、初期状態から到達するための最小操作回数は、\n初期状態の数列\n\\((1, 2, \\ldots, H)\\)\nを、隣接する\n\\(2\\)\n項を入れ替える操作を繰り返して所望の順列\n\\(P\\)\nに作り替えるための最小操作回数と、\n初期状態の数列\n\\((1, 2, \\ldots, W)\\)\nに、隣接する\n\\(2\\)\n項を入れ替える操作を繰り返して所望の順列\n\\(Q\\)\nに作り替えるための最小操作回数\nの和ですが、\n一般に、数列\n\\((1, 2, \\ldots, N)\\)\nを、隣接する\n\\(2\\)\n項 を入れ替える操作を繰り返して所望の順列\n\\(A = (A_1, A_2, \\ldots, A_N)\\)\nに作り替えるための最小操作回数は、\n順列\n\\(A\\)\nの\n転倒数\n、つまり、\n\\(1 \\leq i \\lt j \\leq N\\)\nかつ\n\\(A_i \\gt A_j\\)\nを満たす組\n\\((i, j)\\)\nの個数\nとして与えられるので、\n初期状態から状態\n\\((P, Q)\\)\nに到達するための最小操作回数を求めるには、\n\\(P\\)\nの転倒数と\n\\(Q\\)\nの転倒数の和を求めれば良いです。\nまた別解として、上で用いた状態\n\\((P, Q)\\)\nや、グリッド A そのものの情報（\n\\(HW\\)\n個の整数の並び）をキーとして幅優先探索( BFS )を行う方法でも、本問題に正解することができます。\n以下に、C++言語による本問題の正解例（順列全探索による解法）を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <algorithm>\nusing namespace std;\nconst int inf = 1000000000;\n\nint main(void)\n{\n  int h, w, a[6][6], b[6][6];\n  cin >> h >> w;\n  for(int i = 1; i <= h; i++) for(int j = 1; j <= w; j++) cin >> a[i][j];\n  for(int i = 1; i <= h; i++) for(int j = 1; j <= w; j++) cin >> b[i][j];\n  \n  int p[6], q[6];\n  for(int i = 1; i <= h; i++) p[i] = i;\n  for(int i = 1; i <= w; i++) q[i] = i;\n  \n  int ans = inf;\n  do{\n    do{\n      \n      bool match = true;\n      for(int i = 1; i <= h; i++) for(int j = 1; j <= w; j++){\n        if(a[p[i]][q[j]] != b[i][j]) match = false;\n      }\n      if(!match) continue;\n      \n      int pinv = 0, qinv = 0;\n      for(int i = 1; i <= h; i++) for(int j = 1; j <= h; j++) if(i < j && p[i] > p[j]) pinv++;\n      for(int i = 1; i <= w; i++) for(int j = 1; j <= w; j++) if(i < j && q[i] > q[j]) qinv++;\n      ans = min(ans, pinv+qinv);\n      \n    }while(next_permutation(q+1, q+w+1));\n  }while(next_permutation(p+1, p+h+1));\n  \n  if(ans == inf) cout << -1 << endl;\n  else cout << ans << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "27295910b0ec7fbdf2ce6b6b5f6e0fbfa2ef2f5df0083701af017ce897d446df",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc332/abc332_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc332/editorial/7922",
+      "text": "到達しうる状態の数が少ないため、幅優先探索を行うこともできます。以下の実装では、盤面全体をそのまま状態として扱っています。\n実装例（Python）",
+      "codes": [
+        "from collections import deque\nfrom copy import deepcopy\n\n\ndef to_tuple(a):\n    return tuple(tuple(r) for r in a)\n\n\nH, W = map(int, input().split())\nA = [list(map(int, input().split())) for _ in range(H)]\nB = [list(map(int, input().split())) for _ in range(H)]\n\nd = {to_tuple(A): 0}\nq = deque([A])\nwhile len(q) > 0:\n    a = q.popleft()\n    for i in range(H - 1):\n        b = deepcopy(a)\n        b[i], b[i + 1] = b[i + 1], b[i]\n        if to_tuple(b) not in d:\n            d[to_tuple(b)] = d[to_tuple(a)] + 1\n            q.append(b)\n    for j in range(W - 1):\n        b = deepcopy(a)\n        for i in range(H):\n            b[i][j], b[i][j + 1] = b[i][j + 1], b[i][j]\n        if to_tuple(b) not in d:\n            d[to_tuple(b)] = d[to_tuple(a)] + 1\n            q.append(b)\nprint(d[to_tuple(B)] if to_tuple(B) in d else -1)"
+      ],
+      "text_sha256": "547c61994c50f565ae50a5b5de5578e717c734d1432c9a88d01edacb7a615cf8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc332/abc332_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,31 @@
+{
+  "problem_id": "abc323_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc323/editorial/7350",
+      "text": "この問題を解くには、文字列などで入力を受け取り、\no\nの個数を数えることで勝ち数を各プレイヤーについて求め、問題文の条件に沿ってプレイヤー番号を並び替えればよいです。\nここでの実装上の課題は、プレイヤー番号の並び替えですが、例えば以下の\n\\(3\\)\n種類の方針が考えられます。\nペア（勝ち数、プレイヤー番号）を勝ち数の降順、プレイヤー番号の昇順になるように比較関数を設計してソートする。\nペア（勝ち数、プレイヤー番号\n\\(\\times -1\\)\n）をペアの辞書順の降順にソートする。\n勝ち数を比較し、プレイヤー番号を\nstd::stable_sort\n等の安定ソートを用いて並び替える。（詳細は、\nABC308-C 解説\n等も参考にしてください）\n実装例も参考にしてください。\n実装例（C++,\n\\(1\\)\n番目の方針）：\n実装例（C++,\n\\(2\\)\n番目の方針）：\n実装例（C++,\n\\(3\\)\n番目の方針）：",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<pair<int, int>> win(n);\n\tfor(int i = 0; i < n; i++) {\n\t\tstring s;\n\t\tcin >> s;\n\t\twin[i] = {count(s.begin(), s.end(), 'o'), i};\n\t}\n\tauto cmp = [](pair<int, int> a, pair<int, int> b) {\n\t\tif(a.first != b.first) return a.first > b.first;\n\t\treturn a.second < b.second;\n\t};\n\tsort(win.begin(), win.end(), cmp);\n\tvector<int> ans(n);\n\tfor(int i = 0; i < n; i++) ans[i] = win[i].second + 1;\n\tfor(int i = 0; i < n; i++) cout << ans[i] << \" \\n\"[i == n - 1];\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<pair<int, int>> win(n);\n\tfor(int i = 0; i < n; i++) {\n\t\tstring s;\n\t\tcin >> s;\n\t\twin[i] = {count(s.begin(), s.end(), 'o'), -i};\n\t}\n\tsort(win.rbegin(), win.rend());\n\tvector<int> ans(n);\n\tfor(int i = 0; i < n; i++) ans[i] = -win[i].second + 1;\n\tfor(int i = 0; i < n; i++) cout << ans[i] << \" \\n\"[i == n - 1];\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> win(n), p(n);\n\tiota(p.begin(), p.end(), 0);\n\tfor(int i = 0; i < n; i++) {\n\t\tstring s;\n\t\tcin >> s;\n\t\twin[i] = count(s.begin(), s.end(), 'o');\n\t}\n\tauto cmp = [&](int i, int j) {\n\t\treturn win[i] > win[j];\n\t};\n\tstable_sort(p.begin(), p.end(), cmp);\n\tfor(int i = 0; i < n; i++) cout << p[i] + 1 << \" \\n\"[i == n - 1];\n}"
+      ],
+      "text_sha256": "5ff0ddc3ae1a1cfe28569ef5ad5409093a2a3890e4c214564991b5fd7256dbc7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc323/abc323_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc323/editorial/7366",
+      "text": "各プレイヤーの勝ち数として取りうる値は\n\\(0\\)\n以上\n\\(N-1\\)\n以下の\n\\(N\\)\n個の整数です。そこで、各整数についてバケツを用意することを考えます。\n各プレイヤーは、勝ち数のバケツにプレイヤー番号を入れます。全プレイヤーが番号を入れ終わったあと、\n\\(i=N-1, N-2, \\cdots, 0\\)\nの順に、\n\\(i\\)\nのバケツに含まれる番号を小さい順に出力すればよいです。\nこのようにしてソートする方法は\nバケットソート\nと呼ばれます。この問題の場合、ソートにかかる時間・空間計算量はともに\n\\(O(N)\\)\nです。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\t// 入力を受け取る\n\tint n;\n\tcin >> n;\n\n\tvector<string> c(n);\n\tfor (int i=0; i<n; i++){\n\t\tcin >> c[i];\n\t}\n\n\t// 各人についての勝ち数を求める\n\tvector<int> wins(n);\n\tfor (int i=0; i<n; i++){\n\t\tfor (int j=0; j<n; j++){\n\t\t\tif (c[i][j] == 'o'){\n\t\t\t\twins[i] += 1;\n\t\t\t}\n\t\t}\n\t}\n\n\t// 勝ち数は, 0 以上 n-1 以下の整数しか取りえない\n\t// bucket[i] は勝ち数 i の番号をすべて入れる\n\tvector bucket(n, vector<int>(0));\n\tfor (int i=0; i<n; i++){\n\t\tbucket[wins[i]].push_back(i);\n\t}\n\n\t// さきほど, 番号の小さい順に bucket に入れたので,\n\t// bucket[i] の中身は, すでに番号の小さい順になっている.\n\t// 勝ち数の多い方から, bucket[i] の中身を出力していけばよい\n\tfor (int i=n-1; i>=0; i--){\n\t\tfor (int j: bucket[i]){\n\t\t\tcout << j+1 << ' ';\n\t\t}\n\t}\n\tcout << '\\n';\n}",
+        "# 入力を受け取る\nn = int(input())\ns = [input() for i in range(n)]\n\n# 各人についての勝ち数を求める\nwins = [0] * n\nfor i in range(n):\n\tfor j in range(n):\n\t\tif s[i][j] == 'o':\n\t\t\twins[i] += 1\n\n# 勝ち数は, 0 以上 n-1 以下の整数しか取りえない\n# bucket[i] は勝ち数 i の番号をすべて入れる\nbucket = [[] for i in range(n)]\nfor i in range(n):\n\tbucket[wins[i]].append(i)\n\n# さきほど, 番号の小さい順に bucket に入れたので,\n# bucket[i] の中身は, すでに番号の小さい順になっている.\n# 勝ち数の多い方から, bucket[i] の中身を答え ans に追加する\nans = []\nfor i in range(n-1,-1,-1):\n\tfor j in bucket[i]:\n\t\tans.append(j+1)\n\n# 答えを出力\nprint(*ans)"
+      ],
+      "text_sha256": "c3f343a42d9ff81d5f79b2b08964a0e69a86a4d4ea36383fa2cb98ce17d0fe57",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc323/abc323_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

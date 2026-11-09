@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc156_c",
+  "editorials": [
+    {
+      "text": "C: Rally\n(原案: namonakiacc, 準備・解説: gazelle)\n人が住んでいる座標の中で、最も小さいものをL、最も大きいものをR とします。このとき、\nx < L またはR < x となるような座標x で集会を開くケースを考える必要はありません。というの\nも、そのようなケースでは、座標L やR で集会を開くときと比べて参加するために消費する体力が\n小さくなることはないからです。\n厳密には、例えばx = R + d (d > 0) と書ける座標x で集会を開く場合、i 番目の人が集会に参加\nするために消費する体力は、\n(Xi −(R + d))2 = ((R + d) −Xi)2 = (R −Xi)2 + d(R −Xi) + d2\nとなり、最右辺の第2 項は非負、第3 項は正であることから、座標R で集会を開くときに比べて、\n真に消費する体力が増えます。x < L となるような座標x で集会を開く場合も同様です。\nこのアイデアを元に、集会開催場所の候補として調べる必要のある座標を高々100 個まで減らすこ\nとができます。集会の開催場所を1 つ固定したとき、N 人が消費する体力の総和はO(N) 回の演算\nで計算することが可能です。よって、残った開催場所の候補全てを調べて、最も消費する体力の総和\nが小さいものを見つけるアルゴリズムが、十分高速に動作します。\nListing 4 にC++ による解法の実装例を示します。\nなお入力制約を考慮すると、入力によっては多少実行時間が遅くなる可能性はありますが、Listing\n5 のように少しシンプルに書くことが可能です。\nListing 4\nC++ による実装例\n1 #include<bits/stdc++.h>\n2 using namespace std;\n3 #define rep(i, c) for(int i = 0; i < (int)c; i++)\n4 const int inf = 1000000000; // 10^9\n5\n6 int main() {\n7\nint N;\n8\ncin >> N;\n9\nvector<int> X(N);\n10\nrep(i, N) cin >> X[i];\n11\nint L = X[0], R = X[0];\n12\nrep(i, N) {\n13\nL = min(L, X[i]);\n14\nR = max(R, X[i]);\n15\n}\n16\nint ans = inf;\n17\nfor(int i = L; i <= R; i++) {\n\n18\nint cost = 0;\n19\nrep(j, N) cost += (X[j] - i) * (X[j] - i);\n20\nans = min(ans, cost);\n21\n}\n22\ncout << ans << endl;\n23\nreturn 0;\n24 }\nListing 5\nC++ による実装例2\n1 #include<bits/stdc++.h>\n2 using namespace std;\n3 #define rep(i, c) for(int i = 0; i < (int)c; i++)\n4 const int inf = 1000000000; // 10^9\n5\n6 int main() {\n7\nint N;\n8\ncin >> N;\n9\nvector<int> X(N);\n10\nrep(i, N) cin >> X[i];\n11\nint ans = inf;\n12\nfor(int i = 1; i <= 100; i++) { // L やR の計算が不要\n13\nint cost = 0;\n14\nrep(j, N) cost += (X[j] - i) * (X[j] - i);\n15\nans = min(ans, cost);\n16\n}\n17\ncout << ans << endl;\n18\nreturn 0;\n19 }\n",
+      "text_sha256": "52305e86b3fa16f8f9282117ff5ae222ae3285ba0ced80fa30b604346b210bf9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc156/abc156_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

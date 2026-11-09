@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc438_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc438/editorial/14947",
+      "text": "まず、最終的な\n\\(|A|\\)\nの値は操作の順番によって変わりません。したがって、可能な操作が複数ある場合は前から順番に消していくように制限して実際に操作をシミュレーションすることを考えます。\nこの操作を愚直に行うと最悪計算量が\n\\(O(N^2)\\)\nとなり TLE (実行時間制限超過) となります。このシミュレーションを高速に行うことを考えます。\nここで使えるデータ構造が\nスタック\nと呼ばれるものになります。スタックを用いると、シミュレーションは以下のように行うことができます：\nスタック\n\\(Q\\)\nを用意する。\n\\(i=1,2,\\ldots,N\\)\nに対して以下の操作を行う。\n\\(Q\\)\nの末尾に\n\\(A_i\\)\nを追加する。\n\\(Q\\)\nの末尾\n\\(4\\)\nつが全て同じ要素である場合、\n\\(Q\\)\nの末尾から要素を削除する操作を\n\\(4\\)\n回行う。\n上の操作を全て行なった後の\n\\(Q\\)\nに入っている要素数が求める答えである。\nスタックの末尾への追加・削除は\n\\(O(1)\\)\n時間で行うことができるので、全体として\n\\(O(N)\\)\n時間でこの問題を解くことができます。\n以上を適切に実装することでこの問題に正答することができます。\n実装例(Python3)",
+      "codes": [
+        "n = int(input())\nq = []\nfor v in list(map(int, input().split())):\n    q.append(v)\n    if len(q) >= 4 and q[-1] == q[-2] == q[-3] == q[-4]:\n        for i in range(4):\n            q.pop()\nprint(len(q))"
+      ],
+      "text_sha256": "1d289816d84cbef68420de20ea7aa66c94700e458010f43f3e197dcaa55b7a57",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc438/abc438_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

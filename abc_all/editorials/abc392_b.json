@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc392_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc392/editorial/12174",
+      "text": "解法1: バケットソートの要領で実装する\nバケットソート\nの要領でこの問題の実装をすることができます。\n\\(bucket[x]=0\\)\nで初期化された配列を用意した上で、\n\\(A\\)\nに値\n\\(x\\)\nが出現したときに\n\\(bucket[x]=1\\)\nと変更します。\nその後、\n\\(i=1,2,\\dots,N\\)\nについて\n\\(bucket[i]=0\\)\nなら挙げるべき整数として\n\\(i\\)\nを追加します。\n実装例 (C++):\n解法2:\n\\(A\\)\nをソートして調べる\n\\(A\\)\nを昇順ソートした上で、次の通りにすることでこの問題に正解できます。\n\\(p = 1\\)\nとする。\n\\(i = 1,2,\\dots,N\\)\nについて、次を繰り返す。\n\\(p \\le M\\)\nかつ\n\\(A_p = i\\)\nである時、\n\\(p\\)\nに\n\\(1\\)\n加算する。\nそうでない時、挙げるべき整数に\n\\(i\\)\nを追加する。\n例えば、\n\\(N=6, M=3, A=(1,2,5)\\)\nであるとき、次のように動作します。\n\\(p=1\\)\nとする。\n\\(i=1\\)\nについて、\n\\(A_p = A_1 = 1\\)\nなので、\n\\(p\\)\nを\n\\(2\\)\nとする。\n\\(i=2\\)\nについて、\n\\(A_p = A_2 = 2\\)\nなので、\n\\(p\\)\nを\n\\(3\\)\nとする。\n\\(i=3\\)\nについて、\n\\(A_p = A_3 = 5 \\neq 3\\)\nなので、\n\\(3\\)\nを挙げる。\n\\(i=4\\)\nについて、\n\\(A_p = A_3 = 5 \\neq 4\\)\nなので、\n\\(4\\)\nを挙げる。\n\\(i=5\\)\nについて、\n\\(A_p = A_3 = 5\\)\nなので、\n\\(p\\)\nを\n\\(4\\)\nとする。\n\\(i=6\\)\nについて、\n\\(p = 4 > M = 3\\)\nなので、\n\\(6\\)\nを挙げる。\nこの解法は\n\\(A\\)\nが相異なることで成り立っています。もし\n\\(A\\)\n中に重複がある場合に対応するには、この解法を修正する必要があります。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,m;\n  cin >> n >> m;\n  vector<int> bk(n+1,0);\n  for(int i=0;i<m;i++){\n    int a;\n    cin >> a;\n    bk[a]=1;\n  }\n  vector<int> res;\n  for(int i=1;i<=n;i++){\n    if(bk[i]==0){\n      res.push_back(i);\n    }\n  }\n  cout << res.size() << \"\\n\";\n  for(int i=0;i<res.size();i++){\n    if(i){cout << \" \";}\n    cout << res[i];\n  }cout << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,m;\n  cin >> n >> m;\n  vector<int> a(m);\n  for(auto &nx : a){cin >> nx;}\n  sort(a.begin(),a.end());\n  int p=0;\n  vector<int> res;\n  for(int i=1;i<=n;i++){\n    if(p>m){res.push_back(i);}\n    else if(a[p]!=i){res.push_back(i);}\n    else{p++;}\n  }\n  cout << res.size() << \"\\n\";\n  for(int i=0;i<res.size();i++){\n    if(i){cout << \" \";}\n    cout << res[i];\n  }cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "db7a67ed3f352705d8cb128033286a6e5b1078a6ab864cb7ad8b776a884b77b6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc392/abc392_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,170 @@
+{
+  "as_of": "2026-11-05",
+  "annotation_policy": "uniform_automatic",
+  "distance": "jaccard",
+  "linkage": "average",
+  "distance_cut": 0.7,
+  "taxonomy_count": 266,
+  "unknown_difficulty_problems": 23,
+  "datasets": {
+    "under_2000": {
+      "problem_count": 2473,
+      "tagged_problem_count": 1693,
+      "untagged_problem_count": 780,
+      "assigned_pairs": 3670,
+      "active_tags": 139,
+      "unused_tags": 127,
+      "tags_support_1": 26,
+      "tags_support_2": 14,
+      "tags_support_1_or_2": 40,
+      "tags_support_at_least_3": 99,
+      "clusters": 127,
+      "visible_clusters": 106,
+      "singleton_tag_clusters": 116,
+      "multi_tag_clusters": 11,
+      "cophenetic_correlation": 0.890352236782579,
+      "silhouette": 0.06333558228933174
+    },
+    "all_known": {
+      "problem_count": 2989,
+      "tagged_problem_count": 2179,
+      "untagged_problem_count": 810,
+      "assigned_pairs": 5078,
+      "active_tags": 157,
+      "unused_tags": 109,
+      "tags_support_1": 16,
+      "tags_support_2": 14,
+      "tags_support_1_or_2": 30,
+      "tags_support_at_least_3": 127,
+      "clusters": 148,
+      "visible_clusters": 132,
+      "singleton_tag_clusters": 140,
+      "multi_tag_clusters": 8,
+      "cophenetic_correlation": 0.8630923158596936,
+      "silhouette": 0.03511034418632956
+    },
+    "all_difficulties": {
+      "problem_count": 3012,
+      "tagged_problem_count": 2189,
+      "untagged_problem_count": 823,
+      "assigned_pairs": 5089,
+      "active_tags": 157,
+      "unused_tags": 109,
+      "tags_support_1": 16,
+      "tags_support_2": 14,
+      "tags_support_1_or_2": 30,
+      "tags_support_at_least_3": 127,
+      "clusters": 148,
+      "visible_clusters": 132,
+      "singleton_tag_clusters": 140,
+      "multi_tag_clusters": 8,
+      "cophenetic_correlation": 0.8631090160939229,
+      "silhouette": 0.03511034418632956
+    }
+  },
+  "common_tag_stability": {
+    "common_tags": 139,
+    "ari_restricting_complete_clusterings": 0.6082339005051445,
+    "ari_reclustering_only_common_tags": 0.6082339005051445,
+    "co_clustered_pairs_under_2000": 13,
+    "co_clustered_pairs_all": 10,
+    "co_clustered_pairs_retained": 7,
+    "pairs_split": 6,
+    "pairs_joined": 3,
+    "mean_absolute_jaccard_distance_change": 0.0027835964917948164
+  },
+  "equal_size_sampling": {
+    "active_tags": {
+      "mean": 153.63333333333333,
+      "minimum": 150,
+      "maximum": 157
+    },
+    "tags_support_at_least_3": {
+      "mean": 118.8,
+      "minimum": 113,
+      "maximum": 123
+    },
+    "tags_support_1_or_2": {
+      "mean": 34.833333333333336,
+      "minimum": 28,
+      "maximum": 41
+    },
+    "high_difficulty_problems": {
+      "mean": 426.76666666666665,
+      "minimum": 416,
+      "maximum": 450
+    }
+  },
+  "hybrid_sensitivity": {
+    "under_2000": {
+      "problem_count": 2473,
+      "tagged_problem_count": 1742,
+      "untagged_problem_count": 731,
+      "assigned_pairs": 4127,
+      "active_tags": 150,
+      "unused_tags": 116,
+      "tags_support_1": 30,
+      "tags_support_2": 10,
+      "tags_support_1_or_2": 40,
+      "tags_support_at_least_3": 110,
+      "clusters": 137,
+      "visible_clusters": 112,
+      "singleton_tag_clusters": 125,
+      "multi_tag_clusters": 12,
+      "cophenetic_correlation": 0.8898509957291288,
+      "silhouette": 0.07014145077871613
+    },
+    "all_difficulties": {
+      "problem_count": 3012,
+      "tagged_problem_count": 2238,
+      "untagged_problem_count": 774,
+      "assigned_pairs": 5545,
+      "active_tags": 167,
+      "unused_tags": 99,
+      "tags_support_1": 20,
+      "tags_support_2": 12,
+      "tags_support_1_or_2": 32,
+      "tags_support_at_least_3": 135,
+      "clusters": 158,
+      "visible_clusters": 139,
+      "singleton_tag_clusters": 150,
+      "multi_tag_clusters": 8,
+      "cophenetic_correlation": 0.8778600547228479,
+      "silhouette": 0.040562724472452634
+    }
+  },
+  "correction_audit": {
+    "previous_pairs": 5813,
+    "corrected_pairs": 5545,
+    "removed_pairs": 289,
+    "added_pairs": 21,
+    "changed_problems": 156,
+    "confirmed_ackermann_removals": 8,
+    "confirmed_montgomery_removals": 5,
+    "confirmed_additional_background_removals": 3,
+    "note": "Not every removed pair is a proven error: conservative source/code/title policy can also withhold valid alternatives."
+  },
+  "paid_api_calls": 0,
+  "independent_human_review": false,
+  "protected_input_sha256": {
+    "C:\\Users\\ejham\\大学授業\\atcoder_tagtuke\\all_problems.csv": "ef84cd9cdfe70f0238962c62514eec15b9d91d81ba549141f323f1a9ada31751",
+    "C:\\Users\\ejham\\大学授業\\atcoder_tagtuke\\tags.md": "faf14c793ec71a30df5b2bd23a5f4b9878d0350e013d09a14f9147f8ae9bb4b6",
+    "C:\\Users\\ejham\\大学授業\\atcoder_tagtuke\\abc_all\\output\\summary.json": "5c2825b085845199419bbb164638397c90c4d26b6635766f34792024fbde3d0b",
+    "C:\\Users\\ejham\\大学授業\\atcoder_tagtuke\\abc_all\\output\\problem_tag_matrix.csv": "71608db43b097de29c20aadae17f5bea0d6dd39c1cd39c87e253f655e725710a",
+    "C:\\Users\\ejham\\大学授業\\atcoder_tagtuke\\abc_all\\output\\problems_tagged.jsonl": "272c5af54cc88d93e84b4c8b2bbab77942ac69de466470eb6e0df914731daa17"
+  },
+  "checks": {
+    "common_problem_vectors_identical": true,
+    "old_inputs_preserved": true,
+    "confirmed_false_tags_removed": true
+  },
+  "input_sha256": {
+    "taxonomy.json": "b3ef7280852ba3b9ba8b33e1c5e3e45af2ee9dfae6534787f9307825f6bcfaa0",
+    "tag_rules.json": "8185eecf0d46bd2ff6833917a12d96ca5b499b23f1eeb7d9fe77c1a51b573132",
+    "evidence_scope.py": "3e0e1fe9f90796e3dabb3856d54824a152bff05f0478a2402ec507ba2c5ee14d",
+    "tag_all.py": "477b2acb26c879ecdf0d4779a4d91b41b2c3f3514060d1dc573616303ccfc68f",
+    "compare_difficulty.py": "eafd14cf880764139ff0fdd2f45ef00af17fabd7c4be6048fd3380ce9755fa1e",
+    "corpus_sources.jsonl": "10b22497419b479e3196a7e11e7b098cc645060218cca887d98108833906b952",
+    "output_v2_uniform\\problem_tag_matrix.csv": "9ad2057a8f1c5a2f4e2c2f9427f534dd71f437adc6187dc4018ce128ba7fa850"
+  }
+}

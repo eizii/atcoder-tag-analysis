@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc237_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc237/editorial/3341",
+      "text": "順列 \\(P_i\\) について \\(P_i\\leq x\\) ならば \\(A_i=0\\) 、 \\(P_i\\geq x+1\\) ならば \\(A_i=1\\) とした \\(01\\) 列 \\(A\\) を用意し、これがクエリによってどう変更されるか考えます。 もし、 \\(x=K-1\\) としたときと \\(x=K\\) としたときについて、すべてのクエリを処理した後の \\(01\\) 列が分かれば、その差分から \\(P_i=k\\) である \\(i\\) を求めることができます。具体的には前者では \\(0\\) , 後者では \\(1\\) であるような場所が \\(1\\) つだけ存在し、その場所が \\(P_i=k\\) であるようindex \\(i\\) の場所です。 クエリについて、まず \\(C_i=1\\) , すなわち昇順にソートするものを考えます。 \\(A_{L_i}, A_{L_i+1}, \\ldots ,A_{R_i}\\) に \\(0\\) が \\(a\\) 個、 \\(1\\) が \\(b\\) 個 \\((a+b=R_i-L_i+1)\\) 含まれていたとします。このとき \\(P_j\\) \\((L_i\\leq j\\leq R_i)\\) の具体的な値が何であったかに関わらず、ソート後の順列に対応する \\(01\\) 列のこの範囲には \\(a\\) 個の \\(0\\) と \\(b\\) 個の \\(1\\) が、この順で並びます。すなわち、 \\(0,0,\\ldots, (a個),\\ldots,0,1,1,,\\ldots, (b個),\\ldots,1\\) となります。これは次の操作と同値です。 \\(S=A_{L_i}+A_{L_i+1}+\\cdots +A_{R_i}\\) を求める。 \\(A_{L_i}, A_{L_i+1}, \\ldots ,A_{R_i-S}\\) の値を一括して \\(0\\) に変更する。 \\(A_{R_i-S+1}, A_{R_i-S+2}, \\ldots ,A_{R_i}\\) の値を一括して \\(1\\) に変更する。 同様にして、 \\(C_i=2\\) , すなわち降順にソートする操作も \\(01\\) 列に対しては、 \\(S=A_{L_i}+A_{L_i+1}+\\cdots +A_{R_i}\\) を求める。 \\(A_{L_i}, A_{L_i+1}, \\ldots ,A_{L_i+S-1}\\) の値を一括して \\(1\\) に変更する。 \\(A_{L_i+S}, A_{L_i+S+1}, \\ldots ,A_{R_i}\\) の値を一括して \\(0\\) に変更する。 という操作と同値である事が分かります。 これらの操作は遅延セグメント木によって行うことができます。\nよって、初期状態の順列から \\(01\\) 列を構成し、遅延セグメント木の上でクエリによる更新操作を行い、最終的な \\(01\\) 列についてその差分を調べれば良いです。計算量は最初の構築および最後の差分検索に \\(O(N)\\) , 更新はクエリごとに \\(O(\\log N)\\) であるため全体で \\(O(N+Q\\log N)\\) であり、十分高速です。よって、この問題を解く事が出来ました。 c++による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/lazysegtree>\n\nusing namespace std;\nusing namespace atcoder;\n\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nstruct S { \tint sz, val; };\n\nstruct F { int k; };\n\nS op(S l, S r) { return S{ l.sz + r.sz,l.val + r.val }; }\n\nS e() { return S{ 0,0 }; }\n\nS mapping(F f, S s) {\n\tif (f.k >= 0)return S{ s.sz,(f.k)*(s.sz) };\n\telse return s;\n}\n\nF composition(F l, F r) {\n\tif (l.k >= 0)return F{ l.k };\n\telse return F{ r.k };\n}\n\nF id() { return F{ -1 }; }\n\n\nint main() {\n\tint n, q, k;\n\tint c, l, r;\n\tint x, y;\n\t\n\tcin >> n >> q >> k;\n  \n    vector<S> a(n), b(n);\n  \n\trep(i, n) {\n\t\tcin >> x;\n\t\tif (x < k)a[i] = { 1,0 };\n\t\telse a[i] = { 1,1 };\n\t\tif (x <= k)b[i] = { 1,0 };\n\t\telse b[i] = { 1,1 };\n\t}\n\n\tlazy_segtree<S, op, e, F, mapping, composition, id> sega(a);\n\tlazy_segtree<S, op, e, F, mapping, composition, id> segb(b);\n\n\trep(i, q) {\n\t\tcin >> c >> l >> r;\n\t\tl--;\n\t\tx = sega.prod(l, r).val;\n\t\ty = segb.prod(l, r).val;\n\t\tif (c == 1) {\n\t\t\tsega.apply(l, r - x, F{ 0 });\n\t\t\tsega.apply(r - x, r, F{ 1 });\n\t\t\tsegb.apply(l, r - y, F{ 0 });\n\t\t\tsegb.apply(r - y, r, F{ 1 });\n\t\t}\n\t\telse {\n\t\t\tsega.apply(l, l + x, F{ 1 });\n\t\t\tsega.apply(l + x, r, F{ 0 });\n\t\t\tsegb.apply(l, l + y, F{ 1 });\n\t\t\tsegb.apply(l + y, r, F{ 0 });\n\t\t}\n\t}\n\n\trep(i, n)if (sega.get(i).val != segb.get(i).val)cout << i + 1 << endl;\n\n\treturn 0;\n}\n\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "43cb32daf796ab2e33989cb983be0101ddbc82fc80a7055469f6186b7c3e8ca4"
+    }
+  ],
+  "status": "available"
+}

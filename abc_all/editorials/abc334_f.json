@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc334_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc334/editorial/8982",
+      "text": "以下、子供\n\\(i\\)\nの家のことを単に家\n\\(i\\)\nと表記します。各\n\\(1\\leq i < N\\)\nについて、子供\n\\(i\\)\nにプレゼントを配ってから子供\n\\(i+1\\)\nにプレゼントを配るまでの移動として考えるべきは以下の\n\\(2\\)\n通りのみです。\n家\n\\(i\\)\nから家\n\\(i+1\\)\nへ直接向かう。\n家\n\\(i\\)\nから一度サンタさんの家に戻ってプレゼントを補充したあと、そこから家\n\\(i+1\\)\nへ向かう。\n後者の移動を選択する\n\\(i\\)\nの集合に（便宜上）\n\\(0, N\\)\nを追加して得られる集合の要素を昇順に並べた列を\n\\(t_1,t_2,\\dots,t_l\\)\nとします。このとき、「サンタさんは同時に\n\\(K\\)\n個までしかプレゼントを持てない」という条件は、「各\n\\(1 \\leq j < l\\)\nについて、\n\\(t_{j+1}-t_j <= K\\)\n」という条件と同値です。よって、上述した\n\\(2\\)\n通りの移動における後者の移動距離から前者の移動距離を引いたものを\n\\(d_i\\)\nとおくと、本問題は以下のような問題に帰着されます。\n実数列\n\\(d_1,d_2,\\dots,d_{N-1}\\)\nが与えられる。ここから、選んだ項同士の間隔が\n\\(K\\)\nを超えないようにいくつかの項を選ぶとき、選んだ項の総和の最小値を求めよ。\nこれは、\n\\(\\mathrm{dp}[i]=\\)\n「\n\\(i\\)\n番目までの項から、\n\\(i\\)\n番目を含むいくつかの項を間隔が\n\\(K\\)\nを超えないように選ぶとき、選んだ項の総和の最小値」と定義すると、\n\\(\\mathrm{dp}[i]\\)\nの値を求めるのに必要な値は基本的には\n\\(\\mathrm{dp}[i-K], \\mathrm{dp}[i-K+1],\\dots, \\mathrm{dp}[i-1]\\)\nの最小値なので、segment tree やスライド最小値などを用いて\n\\(O(N \\log N)\\)\nないしは\n\\(O(N)\\)\nの計算量でこの問題を解くことができます。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/segtree>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing ll = long long;\n\ndouble dist(int x1, int y1, int x2, int y2) {\n    int dx = x2 - x1;\n    int dy = y2 - y1;\n    return sqrt((ll) dx * dx + (ll) dy * dy);\n}\n\nusing S = double;\n\nS op(S a, S b) { return min(a, b); }\n\nS e() { return 1e18; }\n\nint main() {\n    int n, k, sx, sy;\n    cin >> n >> k >> sx >> sy;\n    vector<int> x(n), y(n);\n    for (int i = 0; i < n; i++) cin >> x[i] >> y[i];\n    x.push_back(sx), y.push_back(sy);\n    double ans = dist(sx, sy, x[0], y[0]);\n    vector<double> d(n);\n    for (int i = 0; i < n; i++) {\n        double dir = dist(x[i], y[i], x[i + 1], y[i + 1]);\n        double ret = dist(x[i], y[i], sx, sy) + dist(sx, sy, x[i + 1], y[i + 1]);\n        ans += dir;\n        d[i] = ret - dir;\n    }\n    segtree<S, op, e> dp(n + 1);\n    dp.set(0, 0);\n    for (int i = 1; i <= n; i++) {\n        dp.set(i, dp.prod(max(0, i - k), i) + d[i - 1]);\n    }\n    ans += dp.get(n);\n    cout << fixed << setprecision(15) << ans << endl;\n}"
+      ],
+      "text_sha256": "403f2d7e31aad4a5a47984154cb68aa33eeec1135053963a781eb8a886e670a7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc334/abc334_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc334/editorial/8981",
+      "text": "サンタの家を出るときは、必ずプレゼントを\n\\(K\\)\n個持っているとして良いです。\nDP[n][x]=n番目の家にプレゼントを配った直後に、まだプレゼントをx個持っている状態で、それまでに余分に移動した距離の最小値\nというDPを考えます。ここで「余分に移動した距離」とは、スタート後に一度もサンタの家に戻らずに家1から家nに順に訪れるときの移動距離と、実際の移動距離の差を表します。\n\\(\\min_x DP[N][x]\\)\nが分かれば問題に答えることができます。\nDPの遷移は、\n\\(DP[n+1][x]=DP[n][x+1]\\)\n\\(DP[n+1][K]=\\min_xDP[n][x]+\\alpha_n\\)\nとなります。（\n\\(\\alpha_n\\)\nは、家nから家n+1に直接移動するときの距離と、サンタの家を経由するときの距離の差）\n添字を適切に振り直すことで、nからn+1への遷移はin-placeに行うことができ、スライド最小値によりDP[n][*]のminを持つことでO(1)で行えます。よって、全体でO(N)で問題に答えることができます。",
+      "codes": [],
+      "text_sha256": "e677d3093a54ae4b09095a77314c0da56503687ab6d9358f3a44ab774a3f178a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc334/abc334_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

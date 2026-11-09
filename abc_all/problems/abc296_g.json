@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc296_g",
+  "title": "Polygon and Points",
+  "contests": [
+    {
+      "contest_id": "abc296",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2241,
+  "raw_difficulty": 2241,
+  "contest_id": "abc296",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc296/tasks/abc296_g",
+  "statement": "配点 : 600 点 問題文 x 軸の正の向きを右、 y 軸の正の向きを上とする 2 次元座標平面上に、凸 N 角形 S があります。 S の頂点の座標は、反時計回りに (X_1,Y_1),\\ldots,(X_N,Y_N) です。 Q 個の点 (A_i,B_i) について、それぞれ S の内部・外部・境界上のいずれにあるか求めてください。 制約 3 \\leq N \\leq 2\\times 10^5 1 \\leq Q \\leq 2\\times 10^5 -10^9 \\leq X_i,Y_i,A_i,B_i \\leq 10^9 S は狭義凸 N 角形である。すなわち、全ての内角は 180 度未満である。 (X_1,Y_1),\\ldots,(X_N,Y_N) は S の頂点を反時計回りに列挙したものである。 入力は全て整数である。 入力 入力は以下の形式で標準入力から与えられる。 N X_1 Y_1 \\vdots X_N Y_N Q A_1 B_1 \\vdots A_Q B_Q 出力 Q 行出力せよ。 i 行目には、 (A_i,B_i) が S の内部(境界含まず)にあるとき IN 、外部(境界含まず)にあるとき OUT 、境界上にあるとき ON と出力せよ。 入力例 1 4\n0 4\n-2 2\n-1 0\n3 1\n3\n-1 3\n0 2\n2 0 出力例 1 ON\nIN\nOUT S 及び 与えられた 3 個の点は下図の通りです。 1 番目の点は S の境界上、 2 番目の点は内部、 3 番目の点は外部にあります。 入力例 2 3\n0 0\n1 0\n0 1\n3\n0 0\n1 0\n0 1 出力例 2 ON\nON\nON",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 x 軸の正の向きを右、 y 軸の正の向きを上とする 2 次元座標平面上に、凸 N 角形 S があります。 S の頂点の座標は、反時計回りに (X_1,Y_1),\\ldots,(X_N,Y_N) です。 Q 個の点 (A_i,B_i) について、それぞれ S の内部・外部・境界上のいずれにあるか求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 3 \\leq N \\leq 2\\times 10^5 1 \\leq Q \\leq 2\\times 10^5 -10^9 \\leq X_i,Y_i,A_i,B_i \\leq 10^9 S は狭義凸 N 角形である。すなわち、全ての内角は 180 度未満である。 (X_1,Y_1),\\ldots,(X_N,Y_N) は S の頂点を反時計回りに列挙したものである。 入力は全て整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N X_1 Y_1 \\vdots X_N Y_N Q A_1 B_1 \\vdots A_Q B_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 i 行目には、 (A_i,B_i) が S の内部(境界含まず)にあるとき IN 、外部(境界含まず)にあるとき OUT 、境界上にあるとき ON と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\n0 4\n-2 2\n-1 0\n3 1\n3\n-1 3\n0 2\n2 0"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 ON\nIN\nOUT S 及び 与えられた 3 個の点は下図の通りです。 1 番目の点は S の境界上、 2 番目の点は内部、 3 番目の点は外部にあります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\n0 0\n1 0\n0 1\n3\n0 0\n1 0\n0 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 ON\nON\nON"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc296/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:20.839488+00:00",
+  "statement_sha256": "e338e6c9978dcbf5a25fe1d740841e00ea3c8c4db5a3f4a93adf7197eeefe6e1",
+  "editorials": []
+}

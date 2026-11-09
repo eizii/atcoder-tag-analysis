@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc354_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc354/editorial/10002",
+      "text": "\\(2\\)\n次元平面にデータをプロットすると、直感的に理解することができます。\n以下は入出力例 1 のデータをプロットしたものです。\nカード\n\\(x, y\\)\nについて\n\\(A_x > A_y\\)\nかつ\n\\(C_x < C_y\\)\nであることは、上の図のように\n\\(2\\)\n次元平面にプロットしたときに、カード\n\\(x\\)\nに対応する点がカード\n\\(y\\)\nに対応する点の右下にあることと言い換えられます。入出力例 1 では、カード\n\\(3\\)\nに対応する点はカード\n\\(1\\)\nに対応する点の右下にあります。\n最後まで消されないカードの条件を考えてみます。上の議論から、自分の点の右下に点がないようなカードは最後まで消されません。逆に、そうでないカードは必ず消されます。\n「自分の点の右下に点がない」カードの集合は以下のように求めることができます。コストの小さい点、つまり下の点から順に見ていって、ここまでの最大の強さを更新するもの (一番右にあるもの) のみを答えに入れるイメージです。(最大の強さを更新しないということは、自分よりコストが小さく強さが大きいカードがある、つまり自分より右下にカードがあることに対応します。)\nカードを\n\\(C_i\\)\nを基準に昇順ソートする。はじめ\n\\(v = 0\\)\nとし、\n\\(S\\)\nは空集合とする。\n\\(i = 1, 2, \\cdots ,N\\)\nの順に、\n\\(A_i > v\\)\nであれば\n\\(S\\)\nに\n\\(i\\)\n番目のカードを追加して\n\\(v\\)\nを\n\\(A_i\\)\nに更新する。\n最終的な\n\\(S\\)\nが求めるものである。\n入出力例 1 では以下のようになります。\nカードの順は\n\\(C_i\\)\nの昇順に\n\\(2, 3, 1\\)\nとなる。\n\\(A_2 (= 1) > v (= 0)\\)\nより、\n\\(S\\)\nにカード\n\\(2\\)\nを追加して\n\\(v = 1\\)\nとする。\n\\(A_3 (= 3) > v (= 1)\\)\nより、\n\\(S\\)\nにカード\n\\(3\\)\nを追加して\n\\(v = 3\\)\nとする。\n\\(A_1 (= 2) < v (= 3)\\)\nより、カード\n\\(1\\)\nは\n\\(S\\)\nに追加されない。\n最終的に\n\\(S = \\{ 2, 3 \\}\\)\nである。\n例えば C++ では以下のように実装できます。計算量はソートがボトルネックで\n\\(O(N \\log N)\\)\nです。",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nstruct Card {\n    int a;\n    int c;\n    int index;\n};\n\nint main() {\n    // 入力\n    int n;\n    cin >> n;\n    vector<Card> cards(n);\n    for (int i = 0; i < n; ++i) {\n        int a, c;\n        cin >> a >> c;\n        cards[i] = {a, c, i};\n    }\n    \n    // C[i] の昇順にソート\n    sort(cards.begin(), cards.end(), [&](const auto &l, const auto &r) {\n        return l.c < r.c;\n    });\n    \n    // 答えを求める計算\n    vector<int> ans;\n    int v = 0;\n    for (int i = 0; i < n; ++i) {\n        if (cards[i].a > v) {\n            v = cards[i].a;\n            ans.push_back(cards[i].index);\n        }\n    }\n    sort(ans.begin(), ans.end());\n    \n    // 出力\n    const int m = (int)ans.size();\n    cout << m << endl;\n    for (int i = 0; i < m; ++i) {\n        cout << ans[i] + 1;\n        if (i == m - 1) {\n            cout << endl;\n        } else {\n            cout << ' ';\n        }\n    }\n}"
+      ],
+      "text_sha256": "460c9002f2516695b5d617ec9656a7702830a8cad754419ccce3faead871dabb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc354/abc354_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

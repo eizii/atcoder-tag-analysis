@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc195_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc195/editorial/837",
+      "text": "コンマの打たれる位置ごとに個数を数えます。\n下から\n\\(3\\)\n桁目と\n\\(4\\)\n桁目の間に打たれるコンマは、\n\\(1000\\)\n以上の全ての数に対し\n\\(1\\)\n個ずつあります。したがって、その個数は、\n\\(N\\geq 1000\\)\nのとき\n\\(N-999\\)\n個、そうでないとき\n\\(0\\)\n個です。\n同様に、下から\n\\(6\\)\n桁目と\n\\(7\\)\n桁目の間に打たれるコンマは、\n\\(1000000\\)\n以上の全ての数に対し\n\\(1\\)\n個ずつあります。したがって、その個数は、\n\\(N\\geq 1000000\\)\nのとき\n\\(N-999999\\)\n個、そうでないとき\n\\(0\\)\n個です。\n以下同様にして全てのコンマの個数を求めることができます。\n回答例(Python)",
+      "codes": [
+        "n=int(input())\nans=0\n\nif n>=1000: ans+=n-999\nif n>=1000000: ans+=n-999999\nif n>=1000000000: ans+=n-999999999\nif n>=1000000000000: ans+=n-999999999999\nif n>=1000000000000000: ans+=n-999999999999999\n\nprint(ans)"
+      ],
+      "text_sha256": "aa27d8d3d1ba7d6cc0b87e67dfb8a3bc60a1fb1d41fdb31866de362e17f2efaf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc195/abc195_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc195/editorial/1029",
+      "text": "方針は\n公式解説\nと同じで、実装の Tips を紹介します。\n公式では if 文を使って\nと実装していますが、 max 関数を使って\nと実装することができます。\nmax(a, b)\nの返り値はa,bのうち大きい方ですが、片方を 0 に指定して\nmax(a, 0)\nとすることで、a が正ならば a, 負ならば 0 にすることができます。\n0 以外にも 適当な数 t を指定して、このしきい値以下の場合は t にするテクは、ちょっとしたところで覚えておくと良いでしょう。\nまた、max ではなく min 関数を使うことで、下限ではなく上限を行うこともできます。",
+      "codes": [
+        "if (n>=1'000) ans += n-999;\nif (n>=1'000'000) ans += n-999'999;\nif (n>=1'000'000'000) ans += n-999'999'999;",
+        "ans += max(0LL, n - 999);\nans += max(0LL, n - 999'999);\nans += max(0LL, n - 999'999'999);"
+      ],
+      "text_sha256": "7e3d0b9b760a65f746fa1c2d8dc5bd2597c1ae2f9c20dc68f1aabfeb68dba14e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc195/abc195_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

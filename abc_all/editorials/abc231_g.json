@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc231_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc231/editorial/3051",
+      "text": "確率変数 \\(X\\) の期待値を \\(E[X]\\) と表すことにします。 \\(K\\) 回の操作のうち箱 \\(i\\) が選ばれた回数を表す確率変数を \\(X_i\\) とすると、求めるものは \\(E[\\prod_i (A_i+X_i)]\\) です。期待値の線形性から、これは単項式に分解することができます。例えば、 \\(N=2\\) の場合は \\(E[(A_1+X_1)(A_2+X_2)]=E[A_1A_2]+E[A_1X_2]+E[X_1A_2]+E[X_1X_2]\\) と分解して考えます。 ここで、操作の対称性から、任意の相異なる \\(n\\) 個のindex \\(i_1,\\ldots,i_n\\) に対して \\(E[\\prod_{j=1}^{n} X_{i_j}]=E[\\prod_{i=1}^{n} X_i]\\) が成り立ちます。したがって \\[E\\left[\\prod_{i=1}^{N} (A_i+X_i)\\right]=\\sum_{n=0}^{N}S_{N,n}(A_1,\\ldots,A_N)E\\left[\\prod_{i=1}^{N-n}X_i\\right]\\] となります。ただし、 \\(S_{N,n}\\) は \\(N\\) 変数の \\(n\\) 次基本対称式とします。 以上より、全ての \\(n\\) についての \\(S_{N,n}(A_1,\\ldots,A_N)\\) と \\(E\\left[\\prod_{i=1}^{n}X_i\\right]\\) を高速に求めることができれば元の問題に答えることができます。 基本対称式の値の計算 \\(DP[i][j]=S_{i,j}(A_1,\\ldots,A_i)\\) とすると、 \\(DP[i+1][j]=DP[i][j]+DP[i][j-1]A_{i+1}\\) となることから、DPにより、全ての \\(n\\) に対する値を \\(O(N^2)\\) で容易に計算できます。 多項式で解釈するほうが好みであれば \\(S_{N,n}(A_1,\\ldots,A_N)=[X^n]\\prod_{i=1}^{N}(1+A_iX)\\) を計算しているとみなせます。 期待値の計算 確率変数 \\(X_{i,j}\\) を、 \\(j\\) 回目の操作で箱 \\(i\\) が選ばれたとき \\(1\\) 、そうでないとき \\(0\\) とします。 \\(X_i=\\sum_{j=1}^{K}X_{i,j}\\) なので、先ほどと同様に式を展開して単項式に分解することで \\[E\\left[\\prod_{i=1}^{n}X_i\\right]=\\sum_{j_1,\\ldots,j_n}E\\left[\\prod_{i=1}^{n}X_{i,j_i}\\right]\\] となります。また、確率変数の意味から、 \\(i_1\\neq i_2\\) のとき、 \\(X_{i_1,j}X_{i_2,j}=0\\) となることに注意すると \\[E\\left[\\prod_{i=1}^{n}X_{i,j_i}\\right]=\n\\begin{cases}\n\\left(\\frac{1}{N}\\right)^n & j_i \\text{ が相異なる }\\\\\n0 & \\text{そうでないとき}\\\\\n\\end{cases}\\] となります。したがって、 \\[E\\left[\\prod_{i=1}^{n}X_i\\right]=\\left(\\prod_{i=1}^{n}(K+1-i)\\right)\\left(\\frac{1}{N}\\right)^n\\] となり、 \\(n\\) の昇順に計算することで、全ての \\(n\\) に対してを \\(O(N)\\) で求めることができます。 Bonus: \\(O(N(\\log N)^2)\\) で解いてみましょう。",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "dfee903b1338e6b0797dd92f39263979639987aa60ec45a2ada470ebff80fbae"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc214_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc214/editorial/2440",
+      "text": "まず、印をつけた文字が隣り合ってはいけないという制約を外した以下の問題を考えてみましょう。\n\\(S\\)\nの空文字列でない部分文字列の個数を求めよ。ただし、部分文字列とは元の文字列から\n\\(0\\)\n文字以上取り除き残った文字を元の順番で並べたものである。\nここで重要なのは、異なる削除の方法によって同じ部分文字列が得られる可能性があるということです。この重複を避けながら部分文字列を数え上げる”部分列DP”と呼ばれる手法を紹介します。\n以下のようなDPを考えます。\n\\(dp_i\\)\n:= 文字列\n\\(S\\)\nの\n\\(1\\)\n文字目から\n\\(i\\)\n文字目までの部分から得られる部分文字列のうち\n\\(i\\)\n文字目は必ず使うようなものの個数\nただし、空文字列に対応して\n\\(dp_0=1\\)\nとします。遷移は次のようになります。\n\\(dp_i = \\sum_{j=0}^{i-1} dp_j\\)\nこのままでは同じ部分文字列を重複して数えてしまうので、遷移を以下のようにします。\n\\(k\\)\nを\n\\(S_i=S_k\\)\nかつ\n\\(k<i\\)\nを満たす最大の整数として（存在しない場合\n\\(k=0\\)\n）、\n\\(dp_i=\\sum_{j=k}^{i-1}dp_j\\)\n直感的には\n\\(S_k=S_i\\)\nならば、ある\n\\(j(<k)\\)\nについて\n\\(S_j\\)\nのすぐ後に\n\\(S_i\\)\nをつなげるのは無駄（\n\\(S_j\\)\nの後に\n\\(S_k\\)\nをつなげればよい）なので重複を避けるため禁止します。実はこの工夫だけで重複せずに全ての部分文字列を数え上げることができます。\n計算量は一見\n\\(O(|S|^2)\\)\nに見えますが、文字の種類数を\n\\(σ\\)\nとしたとき、累積和を用いれば\n\\(O(|S|)\\)\n、用いなくとも\n\\(O(σ|S|)\\)\nで十分高速です。\nこの発想で元の問題を解くことができます。\n\\(dp_0=1\\)\n、\n\\(dp_1=0\\)\nとします。漸化式は以下です。\n\\(k\\)\nを\n\\(S_i=S_k\\)\nかつ\n\\(k<i\\)\nを満たす最大の整数として（存在しない場合\n\\(k=0\\)\n）、\n\\(dp_{i+1}=\\sum_{j=k}^{i-1}dp_j\\)\n実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    string S; cin >> S;\n    int N = S.size();\n    vector<long long> dp(N+2); dp[0] = 1;\n    for(int i = 0; i < N; i++){\n        for(int j = i-1; ; j--){\n            dp[i+2] = (dp[i+2] + dp[j+1]) % 1000000007;\n            if(j == -1 || S[j] == S[i]) break;\n        }\n    }\n    long long ans=0;\n    for(int i = 2; i < N+2; i++) ans += dp[i];\n    cout << ans%1000000007 << endl;\n}"
+      ],
+      "text_sha256": "cc5a2110a1b3f88419a95cc2a2ea4abb5f5125d8b8236b1da644592aaeb72a8d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc214/abc214_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

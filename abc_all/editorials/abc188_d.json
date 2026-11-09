@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc188_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc188/editorial/346",
+      "text": "すぬけプライムは毎日加入及び脱退ができるので、その日支払う料金が\n\\(C\\)\n円を超えそうならサブスクリプションを利用し、超えないなら利用しないようにするのが最適です。\nそこで、\n\\(s[i]=\\)\n( すぬけプライムを利用しない場合の\n\\(i\\)\n日目に支払う料金 )\nを求めたいです。\n\\(i\\)\nの範囲が小さければ\nいもす法\nで求めることができますが、今回は\n\\(i\\)\nの範囲が大きいので、なにか工夫する必要があります。\n例えば、以下のようにすれば良いです。\n\\(a_i\\)\n日目から\n\\(b_i\\)\n日目まで利用する\n\\(c_i\\)\n円のサービスを、\n\\(a_i - 1\\)\n日目と\n\\(a_i\\)\n日目 の間に料金が\n\\(c_i\\)\n円上がるイベントが起こる\n\\(b_i\\)\n日目と\n\\(b_i + 1\\)\n日目 の間に料金が\n\\(c_i\\)\n円下がるイベントが起こる\nと言い換え、これらのイベントを時間でソートします。\nそして、 イベントを前から見ていきながら、今何日目を見ているのか と 現在の料金 の変数を更新していくと、 この問題を\n\\(O(N\\log N)\\)\nで解くことができます。\nまた、\n\\(a_i\\)\nと\n\\(b_i\\)\nを座標圧縮し、いもす法を適用できるようにする方法もあります。\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = int64_t;\n\nint main(){\n    ll N, C;\n    cin >> N >> C;\n    vector<pair<ll, ll>> event;\n    for(ll i = 0; i < N; i++){\n        ll a, b, c;\n        cin >> a >> b >> c;\n        event.emplace_back(a - 1, c);\n        event.emplace_back(b, -c);\n    }\n    sort(event.begin(), event.end());\n    ll ans = 0, fee = 0, t = 0;\n    for(auto [x, y] : event){\n        if(x != t){\n            ans += min(C, fee) * (x - t);\n            t = x;\n        }\n        fee += y;\n    }\n    cout << ans << endl;\n}",
+        "N, C = map(int, input().split())\nevent = []\nfor i in range(N):\n    a, b, c = map(int, input().split())\n    a -= 1\n    event.append((a, c))\n    event.append((b, -c))\n\nevent.sort()\nans = 0\nfee = 0\nt = 0\nfor x, y in event:\n    if x != t:\n        ans += min(C, fee) * (x - t)\n        t = x\n    fee += y\n\nprint(ans)"
+      ],
+      "text_sha256": "a5c0413194f1bdb870ddb34d2a97a27f6668d9c54b5863fba9e4ccc875a686e4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc188/abc188_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

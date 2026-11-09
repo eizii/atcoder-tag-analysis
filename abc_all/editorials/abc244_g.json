@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc244_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc244/editorial/3600",
+      "text": "与えられたグラフが適当な頂点 \\(r\\) を根とする根つき木であるとし、 \\(S = s_1s_2\\ldots s_N\\) に関する良いパス、すなわち、すべての頂点 \\(v\\) について「 \\(A\\) に含まれる \\(v\\) の個数の偶奇」と「 \\(s_v\\) の偶奇」が等しいようなパス \\(A\\) を以下で構成します。\nもし与えられたグラフが木でなければ、適当な全域木をとることで木の場合に帰着できます。 各頂点 \\(v = 1, 2, \\ldots, N\\) について、列 \\(A_v\\) を次のように再帰的に定義します。 \\(v\\) が子を持たないとき、 \\(A_v := (v)\\) 、すなわち、 \\(A_v\\) は \\(v\\) のみからなる長さ \\(1\\) の列とする。 \\(v\\) が子 \\(c_1, c_2, \\ldots, c_k\\) を持つとき、 \\(A_v := (v) + A_{c_1}  + B_{c_1} + (v) + A_{c_2} + B_{c_2} + (v)  + \\cdots + (v) + A_{c_k} + B_{c_k} + (v)\\) とする。 ここで、 \\(+\\) は列どうしの連結を表し、列 \\(B_{c_i}\\) は、 「 \\(A_{c_i}\\) に含まれる \\(c_i\\) の個数の偶奇」と「 \\(s_{c_i}\\) の偶奇」が一致するとき、 \\(B_{c_i} := ()\\) とし、 一致しないとき、 \\(B_{c_i} := (v, c_i)\\) とします。 このとき、すべての頂点 \\(v = 1, 2, \\ldots, N\\) について、 \\(A_v\\) は下記の \\(4\\) つの条件を満たすことが帰納法によって証明できます。 \\(A_v\\) はパスである。 \\(A_v\\) の先頭要素と末尾要素は \\(v\\) である。 \\(v\\) の子孫（ \\(v\\) 自身を含む）の個数を \\(n\\) とすると、 \\(A_v\\) の長さは \\(4n-3\\) 以下である。 \\(v\\) を除く \\(v\\) のすべての子孫 \\(d\\) について「 \\(A_v\\) に含まれる \\(d\\) の個数の偶奇」と「 \\(s_d\\) の偶奇」が一致する。 よって、根 \\(r\\) に対応する列 \\(A_r\\) は長さ \\(4N-3\\) 以下のパスであり、その末尾要素は \\(r\\) 、さらに \\(r\\) 以外のすべての頂点 \\(v\\) については「 \\(A_r \\) に含まれる \\(v\\) の個数の偶奇」と「 \\(s_v\\) の偶奇」が一致します。 したがって、 もし「 \\(A_r\\) に含まれる \\(r\\) の個数の偶奇」と「 \\(s_r\\) の偶奇」も一致していれば \\(A_r\\) が、 もし一致していなければ、 \\(r\\) に隣接する適当な頂点 \\(u\\) について \\(A_r + (u, r, u)\\) が、 \\(S\\) に関する長さ \\(4N\\) 以下の良いパスとなるため、これを出力することで本問題に正解できます。 C++ 言語による正解例を以下に記載します。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint n, m;\nvector<int> G[100005];\nchar s[100005];\nbool used[100005];\nvector<int> ans;\n\nvoid dfs(int v)\n{\n  used[v] = true;\n  ans.push_back(v), s[v] ^= 1;\n  for(auto u : G[v]){\n    if(used[u]) continue;\n    dfs(u);\n    ans.push_back(v), s[v] ^= 1;\n    if(s[u] == 1){\n      ans.push_back(u), s[u] ^= 1;\n      ans.push_back(v), s[v] ^= 1;\n    }\n  }\n}\n\nint main(void)\n{\n  cin >> n >> m;\n  int u, v;\n  for(int i = 1; i <= m; i++){\n    cin >> u >> v;\n    G[u].push_back(v);\n    G[v].push_back(u);\n  }\n  for(int i = 1; i <= n; i++) cin >> s[i], s[i] -= '0';\n\n  dfs(1);\n  if(s[1] == 1){\n    ans.push_back(G[1][0]);\n    ans.push_back(1);\n    ans.push_back(G[1][0]);\n  }\n  \n  cout << ans.size() << endl;\n  for(auto x : ans) cout << x << \" \";\n  cout << endl;\n\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "ea3037cb1f525f940a3da4e052732efa998766a4e7313e82b60d5f37d89e0fdf"
+    }
+  ],
+  "status": "available"
+}

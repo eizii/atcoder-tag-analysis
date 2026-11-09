@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc387_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc387/editorial/11831",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n新年あけましておめでとうございます。\n簡単な入出力および四則演算の実装を問う問題です。\n整数\n\\(A, B\\)\nを入力として受け取り、\n\\((A+B)\\times(A+B)\\)\nを計算し、\n計算結果を出力する\nというプロセスを、お好みのプログラミング言語を用いて実装すればよいです。\nC++, Python における実装方法については下記の実装例を参考にしてください。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << (a + b) * (a + b) << endl;\n}",
+        "a, b = map(int, input().split())\nprint((a + b) * (a + b))"
+      ],
+      "text_sha256": "5a3a0fa09453fc683f185948d6ec9357ecc9c5736c2711dc78cad8569682d275",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc387/abc387_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

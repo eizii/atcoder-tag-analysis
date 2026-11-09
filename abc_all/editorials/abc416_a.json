@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc416_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc416/editorial/13534",
+      "text": "for 文を用いて\n\\(S\\)\nの\n\\(L\\)\n文字目から\n\\(R\\)\n文字目までを順に調べましょう。\nx\nが含まれれば、その時点で\nNo\nを出力して即座にプログラムを終了すると実装が容易です。\n多くのプログラミング言語では、文字列や配列の添字は\n\\(0\\)\nから始まることに注意してください。\n実装例(Python)\nこの他、「～の全てが～か？」などの判定を行うことができるメソッドを用いたり、文字列として比較するなどの方法により、for文を明示的に使うことなく解くこともできます。\n実装例(Python)\n実装例(Python)",
+      "codes": [
+        "N, L, R = map(int,input().split())\nS = input()\nfor i in range(L-1, R):\n  if S[i] == 'x':\n    print(\"No\")\n    exit()\n\nprint(\"Yes\")",
+        "N, L, R = map(int,input().split())\nS = input()\nif all(c == 'o' for c in S[L-1:R]):\n  print(\"Yes\")\nelse:\n  print(\"No\")",
+        "N, L, R = map(int,input().split())\nS = input()\nif S[L-1:R] == \"o\" * (R-L+1):\n  print(\"Yes\")\nelse:\n  print(\"No\")"
+      ],
+      "text_sha256": "fdd2fbc1f65c92359724171638346e98f44252a47d1b5a82e5bed7dcaa5f4a98",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc416/abc416_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

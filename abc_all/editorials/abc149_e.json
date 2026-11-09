@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc149_e",
+  "editorials": [
+    {
+      "text": "E: Handshake(writer : yuma000)\nもちろん、もっとも上がる幸福度が高い握手から順番にM 回することで、最終的な幸福度を最大に\nできます。が、愚直に実装すると間に合いません。以下でこれを効率的に求める方法を解説します。\n解法1(二分探索を使った解法)\nまず、増える幸福度が、ある定数X 以上になる握手の方法が何通りあるか、を求めることを考えま\nす。左手で握手する人を先に決めたとき、右手で握手できる人が何人いるかは累積和を用いることで\nO(1) で求まるのでトータルでO(N) で計算できます。\n後は、X を二分探索することで、M 通り以上の握手ができる最小のX が求まるので、もう一度累\n積和を用いて最終的な幸福度が計算できます。時間計算量はO(NlogN) です。\n解法2(高速フーリエ変換)(おまけ)\nAi ≤100, 000 という条件から、高速フーリエ変換(以下FFT) でも解けます。FFT の詳細につい\nては、以下のページをご覧ください。\nhttps://atcoder.jp/contests/atc001/tasks/fft_c\n具体的には、\n• i 番目の要素にパワーi の人の人数が格納されている配列を二つ用意する。\n• それらの配列を畳み込む。(FFT をすることで、時間計算量O(max(Ai)log(max(Ai)) ででき\nます。)\nという風にすることで、増える幸福度ごとの通り数が分かります。後はそれを増える幸福度が高い順\nに加えていくことで、この問題を解くことができます。\n",
+      "text_sha256": "f85a856db70d7aff84b20009ad814b9bc922b0d6ae9c1cb83d6d8dbdafaa4e1e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc149/abc149_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

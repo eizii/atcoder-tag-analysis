@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc187_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc187/editorial/484",
+      "text": "\\(2\\)\n点\n\\((a, b), (c, d)\\)\nを通る直線の傾きは\n\\(\\frac{b-d}{a-c}\\)\nで定義されます。  (\n\\(N\\)\n個の点の\n\\(x\\)\n座標は相異なるため、\n\\(0\\)\n割りの心配はありません。)\n全ての点の組について直線の傾きを調べ、\n\\(-1\\)\n以上\n\\(1\\)\n以下のものの個数を数えると、 AC を得ることができます。\n回答例 (C++)\n回答例 (Python)\nBONUS :\n\\(O(N \\log N)\\)\nの計算量で解いてみましょう。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main(){\n    int N;\n    cin >> N;\n    vector<pair<int, int>> A(N);\n    for(auto& [x, y] : A) cin >> x >> y;\n    int ans = 0;\n    for(int i = 0; i < N; i++) for(int j = i + 1; j < N; j++){\n        auto [x1, y1] = A[i];\n        auto [x2, y2] = A[j];\n        if(abs(y1 - y2) <= abs(x1 - x2)) ans++;\n    }\n    cout << ans << endl;\n}",
+        "N = int(input())\nA = [tuple(map(int, input().split())) for i in range(N)]\nans = 0\nfor i in range(N):\n    for j in range(i):\n        if abs(A[i][1] - A[j][1]) <= abs(A[i][0] - A[j][0]):\n            ans += 1\nprint(ans)"
+      ],
+      "text_sha256": "10e88e3555cca0ceb8c76a519c4b7c83cd336e7dd00454a3882834b6dd4b8620",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc187/abc187_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

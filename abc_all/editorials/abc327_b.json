@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc327_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc327/editorial/7567",
+      "text": "はじめに、方針の大枠として「\n\\(A\\)\nを全探索する」という方針を取ることにします。つまり、\n適切な範囲について\n\\(A\\)\nを全探索して、各\n\\(A\\)\nについて\n\\(A^A = B\\)\nを満たすかを調べる。\nというアルゴリズムを考えます。ここで問題になるのは、\n「適切な範囲」とはどのような範囲か？\n\\(A^A = B\\)\nをどのように判定するのか？\nという 2 点です。順に解説します。\nまず、「適切な範囲」について説明します。\n\\(A^A\\)\nは\n\\(A\\)\nが大きくなればなるほど\n\\(A^A\\)\nの値も大きくなっていくような性質を持ちます。よって、\n\\(B\\)\nの範囲が\n\\(1\\)\n以上\n\\(10^{18}\\)\n以下であることも踏まえると、次の事実が分かります。\n\\(x\\)\nを\n\\(x^x = 1\\)\nを満たす実数、\n\\(y\\)\nを\n\\(y^y = 10^{18}\\)\nを満たす実数としたとき、\n\\(A\\)\nは\n\\(x \\leq A \\leq y\\)\nを満たす範囲だけ調べればよい。\nつまり、\n\\(A\\)\nは適切に上限・下限を定めてその範囲を調べればよいということがわかります。\n上限・下限を計算します。まず、下限は\n\\(1^1 = 1\\)\nより\n\\(1\\)\nです。\n\\(A\\)\nの上限を考えてみます。これは実験して確かめるのが楽で、\n\\[15^{15} = 437893890380859375 \\simeq 4.38 \\times 10^{17}\\]\n\\[16^{16} = 18446744073709551616 \\simeq 1.84 \\times 10^{19} \\]\nであることから、\n\\(y^y = 10^{18}\\)\nを満たす\n\\(y\\)\nは\n\\(15\\)\nと\n\\(16\\)\nの間にあり、\n\\(A\\)\nの上限は\n\\(15\\)\nに設定すればよいことがわかります。\nなお、\n\\(A\\)\nの上限を適切に決めずに探索すると、言語型によってはオーバーフローして判定が適切に行われなくなる問題が起こります。\n次に、\n\\(A^A = B\\)\nを判定する方法を説明します。\n言語によっては\npow\n関数 (C++ の\nstd::pow\nや Python の\nmath.pow\n) を使うのが分かりやすそうですが、実はこのような関数を使うと浮動小数点数型(小数の型のこと)に起因する誤差が発生します。\n例えば\n\\(15^{15}\\)\nを\npow\nを使ったやり方と整数型を使ったやり方の 2 通りで計算したのが次のプログラムおよび実行結果です。\nプログラム\n実行結果\n\\(15^{15} = 437893890380859375\\)\nなので、前者の方法では誤差が発生していることが分かります。\nこのような問題を避けるために、巨大な整数に関する計算は小数を避けて整数型で計算するようにしましょう。\n以上の点を踏まえて実装することでこの問題を解くことが出来ます。C++ による実装例は次の通りです。",
+      "codes": [
+        "#include <cmath>\n#include <iostream>\nusing namespace std;\n\nint main() {\n  {\n    long long x = pow(15, 15);\n    cout << x << endl;\n  }\n  {\n    long long x = 1;\n    for (int i = 0; i < 15; i++) x *= 15;\n    cout << x << endl;\n  }\n}",
+        "437893890380859392\n437893890380859375",
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n  long long B;\n  cin >> B;\n  for (int A = 1; A <= 15; A++) {\n    long long x = 1;\n    for (int i = 0; i < A; i++) x *= A;\n    if (x == B) {\n      cout << A << endl;\n      exit(0);\n    }\n  }\n  cout << \"-1\" << endl;\n}"
+      ],
+      "text_sha256": "e94da84574f4f170c9cbae4bad3aac876f16524b3c504ca5e06a0e7884cc952e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc327/abc327_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc327/editorial/7594",
+      "text": "まず\n\\(A=1\\)\nが解になるのは\n\\(B=1\\)\nのときのみなので予め処理しておきます．\n\\(A=2,3,\\dots\\)\nに対し，\n\\(B\\)\nを\n\\(A\\)\nで割り切れるだけ割ります．\n\\(B\\)\nが\n\\(A\\)\nで割り切れた回数を\n\\(X\\)\n，\n\\(B\\)\nを\n\\(A\\)\nで\n\\(X\\)\n回割った値を\n\\(Y\\)\nとすれば\n\\(B=A^XY\\)\nであり，\n\\(Y\\)\nは\n\\(A\\)\nで割り切れないので，\n\\(A^A=B\\)\nであるための必要十分条件は\n\\(X=A,Y=1\\)\nであることがわかります．\n\\(X,Y\\)\nは実際に割れば各\n\\(A\\)\nについてそれぞれ計算量\n\\(O(\\log B)\\)\nで求められます．\nなお公式解説では実験した上で\n\\(A\\)\nの上限として\n\\(15\\)\nを取っていますが，この方針であればもう少し雑に評価して\n\\(15\\)\nより大きくとっても 64 bit 整数で問題なく動きます．",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n  long long B;\n  cin >> B;\n  if (B == 1) {\n    cout << 1 << endl;\n    return;\n  }\n  for (int A = 2; A <= 20; A++) {\n    int x = 0;\n    long long y = B;\n    while (y % A == 0) x++, y /= A;\n    if (x == A && y == 1) {\n      cout << A << endl;\n      return;\n    }\n  }\n  cout << \"-1\" << endl;\n}\n\nint main() {\n  solve();\n}"
+      ],
+      "text_sha256": "265b31b43db85cff5510134021cf7424e051ac82df21e3789db1ba80e6b0e478",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc327/abc327_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

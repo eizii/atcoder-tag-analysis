@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc450_f",
+  "title": "Strongly Connected 2",
+  "contests": [
+    {
+      "contest_id": "abc450",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1967,
+  "raw_difficulty": 1967,
+  "contest_id": "abc450",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc450/tasks/abc450_f",
+  "statement": "配点 : 525 点 問題文 辺と頂点に番号がついた N 頂点 N-1+M 辺の有向グラフがあります。 1 \\leq i \\leq M に対し辺 i は頂点 X_i から頂点 Y_i への有向辺であり、 1 \\leq i \\leq N-1 に対し辺 M+i は頂点 i+1 から頂点 i への有向辺です。 辺 1,2,\\dots,M のうちいくつか( 0 個でもよい) の辺を選ぶ方法は 2^M 通りありますが、そのうち選んだ辺を削除したあとのグラフが強連結となるものは何通りありますか。 998244353 で割った余りを求めてください。 制約 2 \\leq N \\leq 2\\times 10^5 1 \\leq M \\leq 2\\times 10^5 1 \\leq X_i < Y_i \\leq N 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M X_1 Y_1 X_2 Y_2 \\vdots X_M Y_M 出力 答えを出力せよ。 入力例 1 4 3\r\n1 4\r\n1 3\r\n2 4 出力例 1 5 選ぶ辺の番号の集合が \\{\\}, \\{1\\},\\{2\\},\\{3\\},\\{2,3\\} の 5 通りのいずれかであるとき、グラフは強連結となります。 入力例 2 10 11\r\n1 4\r\n1 4\r\n3 9\r\n2 5\r\n3 4\r\n9 10\r\n6 9\r\n4 10\r\n1 3\r\n8 10\r\n4 7 出力例 2 1297 与えられるグラフは多重辺を持つことがあります。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 辺と頂点に番号がついた N 頂点 N-1+M 辺の有向グラフがあります。 1 \\leq i \\leq M に対し辺 i は頂点 X_i から頂点 Y_i への有向辺であり、 1 \\leq i \\leq N-1 に対し辺 M+i は頂点 i+1 から頂点 i への有向辺です。 辺 1,2,\\dots,M のうちいくつか( 0 個でもよい) の辺を選ぶ方法は 2^M 通りありますが、そのうち選んだ辺を削除したあとのグラフが強連結となるものは何通りありますか。 998244353 で割った余りを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 2\\times 10^5 1 \\leq M \\leq 2\\times 10^5 1 \\leq X_i < Y_i \\leq N 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M X_1 Y_1 X_2 Y_2 \\vdots X_M Y_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 3\r\n1 4\r\n1 3\r\n2 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 5 選ぶ辺の番号の集合が \\{\\}, \\{1\\},\\{2\\},\\{3\\},\\{2,3\\} の 5 通りのいずれかであるとき、グラフは強連結となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 11\r\n1 4\r\n1 4\r\n3 9\r\n2 5\r\n3 4\r\n9 10\r\n6 9\r\n4 10\r\n1 3\r\n8 10\r\n4 7"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1297 与えられるグラフは多重辺を持つことがあります。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc450/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:32.711779+00:00",
+  "statement_sha256": "67dcacacd89f1ba7e6e6cb27fea709e6aec17e7bf96a7913bc45045188bf5023",
+  "editorials": []
+}

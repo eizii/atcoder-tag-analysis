@@ -1,0 +1,68 @@
+{
+  "problem_id": "abc471_g",
+  "title": "Caeser Syllables",
+  "contests": [
+    {
+      "contest_id": "abc471",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2464,
+  "raw_difficulty": 2464,
+  "contest_id": "abc471",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc471/tasks/abc471_g",
+  "statement": "配点 : 600 点 問題文 0 から K-1 までの番号で表される K 種類の記号があります。 各記号は、母音であるか母音でないかのいずれかです。 V_j = 1 のとき記号 j は 母音 であり、 V_j = 0 のとき記号 j は母音ではありません。 ある記号列の 音節数 を、その記号列における母音のみからなる連続部分列として極大なものの個数とします。形式的には、長さ N の記号列 (a_1, \\dots, a_N) の音節数を、 1 \\leq l \\leq r \\leq N を満たす整数の組 (l,r) であって以下をすべて満たすものの個数とします。 記号 a_l, \\dots, a_r はすべて母音である。 l > 1 ならば、記号 a_{l-1} は母音でない。 r < N ならば、記号 a_{r+1} は母音でない。 長さ N の数列 A = (A_1, \\dots, A_N) が与えられます。 k = 0, \\dots, K-1 について、以下の問題に答えてください。 長さ N の記号列 A' = (A'_1, \\dots, A'_N) を、 A'_i := (A_i + k) \\bmod K として定める。このとき、 A' の音節数はいくつか？ 入力の形式 今回の問題の入力は特殊な形式で行われます。 標準入力からは A_1, \\dots, A_N の代わりに整数 \\mathrm{seed}, M, b_1, \\dots, b_M が与えられます。\nこのとき、以下の疑似コードで表される計算によって A_1, \\dots, A_N を復元してください。 なお、疑似コード中の変数はすべて符号なし 64bit 整数であるものとします。\nまた、 s \\oplus t は s,t の bitwise XOR (排他的論理和) を、 s \\gg t は \\lfloor s / 2^t \\rfloor (右シフト演算) を、 s \\ll t は s \\times 2^t (左シフト演算) を表すものとします。 \\mathrm{state} \\leftarrow \\mathrm{seed} for i = 1, \\dots, N :\n    if i \\leq M : A_i \\leftarrow b_i else: x \\leftarrow \\left( ((\\mathrm{state} \\gg 18) \\oplus \\mathrm{state}) \\gg 27 \\right) \\bmod 2^{32} r \\leftarrow \\mathrm{state} \\gg 59 y \\leftarrow \\left( (x \\gg r) + (x \\ll (32-r)) \\right) \\bmod 2^{32} A_i \\leftarrow y \\bmod K \\mathrm{state} \\leftarrow (\\mathrm{state} \\times 6364136223846793005 + 2026081520260815) \\bmod 2^{64} 制約 1 \\leq N \\leq 7 \\times 10^6 1 \\leq K \\leq 2300 0 \\leq A_i \\leq K-1 ( 1 \\leq i \\leq N ) V_j \\in \\{0,1\\} ( 0 \\leq j \\leq K-1 ) 0 \\leq \\mathrm{seed} \\leq 2^{60} - 1 1 \\leq M \\leq \\min(N, 10^5) 0 \\leq b_i \\leq K-1 ( 1 \\leq i \\leq M ) 入力される値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N K \\mathrm{seed} M b_1 b_2 \\cdots b_M V_0 V_1 \\cdots V_{K-1} 出力 K 行出力せよ。 m 行目 ( 1 \\leq m \\leq K ) には、 k = m-1 のときの答えを出力せよ。 入力例 1 4 6 12233445577788999 4\n4 2 4 1\n1 1 0 0 1 0 出力例 1 2\n0\n1\n2\n1\n2 この入力例において A = (4,2,4,1) です。 k = 0 のとき A' = (4,2,4,1) であり、このときの音節数は 2 です。 k = 1 のとき A' = (5,3,5,2) であり、このときの音節数は 0 です。 k = 2 のとき A' = (0,4,0,3) であり、このときの音節数は 1 です。 k = 3 のとき A' = (1,5,1,4) であり、このときの音節数は 2 です。 k = 4 のとき A' = (2,0,2,5) であり、このときの音節数は 1 です。 k = 5 のとき A' = (3,1,3,0) であり、このときの音節数は 2 です。 入力例 2 15 12 998154573227378904 2\n5 6\n0 0 1 1 0 1 0 0 1 1 0 1 出力例 2 4\n4\n3\n3\n3\n4\n4\n4\n3\n3\n3\n4 この入力例において A = (5, 6, 0, 6, 8, 8, 8, 3, 0, 2, 3, 7, 3, 2, 5) です。 入力例 3 7000000 15 409873722375451899 3\n7 0 4\n1 0 1 1 1 0 1 1 1 0 1 0 1 0 0 出力例 3 1680078\n1681239\n1679837\n1680730\n1680470\n1679454\n1679615\n1679371\n1681263\n1679670\n1680218\n1680010\n1680211\n1680521\n1681744",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 0 から K-1 までの番号で表される K 種類の記号があります。 各記号は、母音であるか母音でないかのいずれかです。 V_j = 1 のとき記号 j は 母音 であり、 V_j = 0 のとき記号 j は母音ではありません。 ある記号列の 音節数 を、その記号列における母音のみからなる連続部分列として極大なものの個数とします。形式的には、長さ N の記号列 (a_1, \\dots, a_N) の音節数を、 1 \\leq l \\leq r \\leq N を満たす整数の組 (l,r) であって以下をすべて満たすものの個数とします。 記号 a_l, \\dots, a_r はすべて母音である。 l > 1 ならば、記号 a_{l-1} は母音でない。 r < N ならば、記号 a_{r+1} は母音でない。 長さ N の数列 A = (A_1, \\dots, A_N) が与えられます。 k = 0, \\dots, K-1 について、以下の問題に答えてください。 長さ N の記号列 A' = (A'_1, \\dots, A'_N) を、 A'_i := (A_i + k) \\bmod K として定める。このとき、 A' の音節数はいくつか？"
+    },
+    {
+      "heading": "入力の形式",
+      "text": "入力の形式 今回の問題の入力は特殊な形式で行われます。 標準入力からは A_1, \\dots, A_N の代わりに整数 \\mathrm{seed}, M, b_1, \\dots, b_M が与えられます。\nこのとき、以下の疑似コードで表される計算によって A_1, \\dots, A_N を復元してください。 なお、疑似コード中の変数はすべて符号なし 64bit 整数であるものとします。\nまた、 s \\oplus t は s,t の bitwise XOR (排他的論理和) を、 s \\gg t は \\lfloor s / 2^t \\rfloor (右シフト演算) を、 s \\ll t は s \\times 2^t (左シフト演算) を表すものとします。 \\mathrm{state} \\leftarrow \\mathrm{seed} for i = 1, \\dots, N :\n    if i \\leq M : A_i \\leftarrow b_i else: x \\leftarrow \\left( ((\\mathrm{state} \\gg 18) \\oplus \\mathrm{state}) \\gg 27 \\right) \\bmod 2^{32} r \\leftarrow \\mathrm{state} \\gg 59 y \\leftarrow \\left( (x \\gg r) + (x \\ll (32-r)) \\right) \\bmod 2^{32} A_i \\leftarrow y \\bmod K \\mathrm{state} \\leftarrow (\\mathrm{state} \\times 6364136223846793005 + 2026081520260815) \\bmod 2^{64}"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 7 \\times 10^6 1 \\leq K \\leq 2300 0 \\leq A_i \\leq K-1 ( 1 \\leq i \\leq N ) V_j \\in \\{0,1\\} ( 0 \\leq j \\leq K-1 ) 0 \\leq \\mathrm{seed} \\leq 2^{60} - 1 1 \\leq M \\leq \\min(N, 10^5) 0 \\leq b_i \\leq K-1 ( 1 \\leq i \\leq M ) 入力される値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K \\mathrm{seed} M b_1 b_2 \\cdots b_M V_0 V_1 \\cdots V_{K-1}"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 K 行出力せよ。 m 行目 ( 1 \\leq m \\leq K ) には、 k = m-1 のときの答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 6 12233445577788999 4\n4 2 4 1\n1 1 0 0 1 0"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2\n0\n1\n2\n1\n2 この入力例において A = (4,2,4,1) です。 k = 0 のとき A' = (4,2,4,1) であり、このときの音節数は 2 です。 k = 1 のとき A' = (5,3,5,2) であり、このときの音節数は 0 です。 k = 2 のとき A' = (0,4,0,3) であり、このときの音節数は 1 です。 k = 3 のとき A' = (1,5,1,4) であり、このときの音節数は 2 です。 k = 4 のとき A' = (2,0,2,5) であり、このときの音節数は 1 です。 k = 5 のとき A' = (3,1,3,0) であり、このときの音節数は 2 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 15 12 998154573227378904 2\n5 6\n0 0 1 1 0 1 0 0 1 1 0 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 4\n4\n3\n3\n3\n4\n4\n4\n3\n3\n3\n4 この入力例において A = (5, 6, 0, 6, 8, 8, 8, 3, 0, 2, 3, 7, 3, 2, 5) です。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 7000000 15 409873722375451899 3\n7 0 4\n1 0 1 1 1 0 1 1 1 0 1 0 1 0 0"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 1680078\n1681239\n1679837\n1680730\n1680470\n1679454\n1679615\n1679371\n1681263\n1679670\n1680218\n1680010\n1680211\n1680521\n1681744"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc471/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:59.154622+00:00",
+  "statement_sha256": "cde8b7ed691df27f980ba381ada7b3ba62487c0af91b46a33966c79f2f074d5e",
+  "editorials": []
+}

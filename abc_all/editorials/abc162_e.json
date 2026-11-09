@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc162_e",
+  "editorials": [
+    {
+      "text": "E: sum of gcd of tuples (hard)\n各数列{Ai} に対して最大公約数を計算していては間に合いません。そこで、1 ≤X ≤K に対し\nて「gcd(A1, ..., AN) = X となる数列{Ai} がいくつあるか？」という問題を考えます。これが解け\nれば元の問題にも答えることが出来ます。\n最大公約数がX の倍数であるための必要十分条件は、A1, ..., AN が全てX の倍数であることで\nす。そのような数列は⌊K\nX ⌋N 個あります。\nぴったりX であるための必要十分条件は、「X の倍数であり、かつ、2X, 3X, ... ではない」です。X\nが大きい方から順に計算していくことによって、2X, 3X, ... の個数を引いて求めることができます。\n計算量はO(K log K + K log N) です。\n",
+      "text_sha256": "b3f783ac216c306baf5f65f122fe01282a6d6accd345a538733baa4efc63689c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc162/abc162_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

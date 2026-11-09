@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc217_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc217/editorial/2575",
+      "text": "この問題は文字列を辞書順比較する方法を聞いている問題です。\n文字列同士を比較するアルゴリズムを実装しても AC することはできますが、問題文にもある通り、多くのプログラミング言語では文字列比較を行う関数は標準ライブラリに実装されているのでそちらを使う方が簡明です。もしも自分の使っている言語で文字列を比較する方法がわからない場合は、各言語のリファレンスを参照するなどして勉強してみましょう。\nC, C++, Python における実装例は以下の通りです。\nC\nC++\nPython",
+      "codes": [
+        "#include <stdio.h>\n#include <string.h>\nchar S[32], T[32];\n\nint main() {\n  scanf(\"%s %s\", S, T);\n  if (strcmp(S, T) < 0) {\n    printf(\"Yes\\n\");\n  } else {\n    printf(\"No\\n\");\n  }\n}",
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n  string S, T;\n  cin >> S >> T;\n  cout << (S < T ? \"Yes\" : \"No\") << endl;\n}",
+        "S, T = input().split()\nprint(\"Yes\" if S < T else \"No\")"
+      ],
+      "text_sha256": "40e5ec7119e56c12e05fdf6bb84cea0d206440714750986b3d7e644305c0dc04",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc217/abc217_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

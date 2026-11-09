@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc417_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc417/editorial/13570",
+      "text": "\\(M\\)\n回の操作を順にシミュレーションすることを考えます。\n\\(k\\)\n回目の操作のシミュレーションは、例えば以下のように行うことができます。\n空列\n\\(A'=()\\)\nを用意します。また、\n\\(k\\)\n回目の操作において、すでに要素の削除を行ったかを管理するフラグ\n\\(F_k\\)\nを用意します。最初、\n\\(F_k=\\mathrm{False}\\)\nです。\n以下の手続きを\n\\(i=1,2,\\ldots,\\lvert A\\rvert\\)\nについて行います。ここで、\n\\(\\lvert A\\rvert\\)\nは、\n\\(k\\)\n回目の操作を行う直前の時点における、\n\\(A\\)\nの長さです。\n\\(A_i=B_k\\)\nかつ\n\\(F_k=\\mathrm{False}\\)\nならば、\n\\(F_k\\)\nを\n\\(\\mathrm{True}\\)\nに変更し、\n\\(A_j\\)\nを\n\\(A'\\)\nに\n追加しない\n。\nそうでないとき、\n\\(A'\\)\nの末尾に\n\\(A_i\\)\nを追加する。\nこのようにして得られた\n\\(A'\\)\nが操作後の\n\\(A\\)\nにあたるため、\n\\(A\\)\nを\n\\(A'\\)\nに置き換え、次の\n\\(k\\)\nについて同様のことを繰り返すことで、\n\\(M\\)\n回の操作をシミュレーションすることができます。\n最後に\n\\(M\\)\n回の操作のシミュレーション後の\n\\(A\\)\nを出力形式に従って出力すれば良いです。よって、この問題を解くことができました。\nなお、余談ですが、この解法の時間計算量は\n\\(O(NM)\\)\nです。今回の制約下では十分高速ですが、別の解法を用いれば、\n\\(O(N+M\\log \\min(N,M))\\)\nなどのより高速な手法で解くこともできます。\nC++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint n,m,x;\n\tbool flag;\n\tvector<int>a,nxt;\n\n\tcin>>n>>m;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>x;\n\t\ta.push_back(x);\n\t}\n\n\tfor(int i=0;i<m;i++){\n\t\tcin>>x;\n\t\tflag=true;\n\t\tn=a.size();\n\t\tnxt.clear();\n\t\tfor(int j=0;j<n;j++){\n\t\t\tif((a[j]==x)&&flag)flag=false;\n\t\t\telse nxt.push_back(a[j]);\n\t\t}\n\t\ta=nxt;\n\t}\n\n\tn=a.size();\n\tfor(int i=0;i<n;i++){\n\t\tcout<<a[i];\n\t\tif(i<(n-1))cout<<\" \";\n\t\telse cout<<endl;\n\t}\n\treturn 0;\n}",
+        "n,m=map(int, input().split())\na=list(map(int, input().split()))\nb=list(map(int, input().split()))\n\nfor x in b:\n    nxt=[]\n    flag=True\n    for y in a:\n        if x==y and flag:\n            flag=False\n        else:\n            nxt.append(y)\n    a=nxt\n    \nprint(*a)"
+      ],
+      "text_sha256": "7153afb1ed34344a6a76d72bf28e4a4a3214d70f60c63a5df65df09abda70ea6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc417/abc417_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

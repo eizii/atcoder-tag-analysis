@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc424_f",
+  "title": " Adding Chords",
+  "contests": [
+    {
+      "contest_id": "abc424",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1521,
+  "raw_difficulty": 1521,
+  "contest_id": "abc424",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc424/tasks/abc424_f",
+  "statement": "配点 : 525 点 問題文 円周上に等間隔に N 個の点があり、時計回りに 1,2,\\dots,N と番号がついています。 以下の形式のクエリが Q 個与えられるので順に処理してください。 点 A_i と点 B_i を結ぶ線分を書く。ただし、この線分が既に書かれている線分と交わる場合は書かない。 ここで、 2Q 個の整数 A_1,\\ldots,A_Q,B_1,\\ldots,B_Q は相異なることが保証されます。 各線分が書かれたかどうか答えてください。 制約 2 \\leq N \\leq 10^6 1 \\leq Q \\leq 3\\times 10^5 1 \\leq A_i < B_i \\leq N 2Q 個の整数 A_1,\\ldots,A_Q,B_1,\\ldots,B_Q は相異なる 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N Q A_1 B_1 A_2 B_2 \\vdots A_Q B_Q 出力 Q 行出力せよ。 i 行目には、 i 番目のクエリにおいて線分が書かれたとき Yes 、書かれなかったとき No と出力せよ。 入力例 1 8 3\n1 5\n2 7\n3 4 出力例 1 Yes\nNo\nYes クエリにより図のように線分が書かれます。 1 番目のクエリで、点 1 と点 5 を結ぶ線分が書かれる。 2 番目のクエリで、点 2 と点 7 を結ぶ線分は、 1 番目のクエリで書いた線分と交わるので書かない。 3 番目のクエリで、点 3 と点 4 を結ぶ線分が書かれる。 入力例 2 999999 4\n123456 987654\n888888 999999\n1 3\n2 777777 出力例 2 Yes\nNo\nYes\nNo",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 円周上に等間隔に N 個の点があり、時計回りに 1,2,\\dots,N と番号がついています。 以下の形式のクエリが Q 個与えられるので順に処理してください。 点 A_i と点 B_i を結ぶ線分を書く。ただし、この線分が既に書かれている線分と交わる場合は書かない。 ここで、 2Q 個の整数 A_1,\\ldots,A_Q,B_1,\\ldots,B_Q は相異なることが保証されます。 各線分が書かれたかどうか答えてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 10^6 1 \\leq Q \\leq 3\\times 10^5 1 \\leq A_i < B_i \\leq N 2Q 個の整数 A_1,\\ldots,A_Q,B_1,\\ldots,B_Q は相異なる 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q A_1 B_1 A_2 B_2 \\vdots A_Q B_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 i 行目には、 i 番目のクエリにおいて線分が書かれたとき Yes 、書かれなかったとき No と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 8 3\n1 5\n2 7\n3 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\nNo\nYes クエリにより図のように線分が書かれます。 1 番目のクエリで、点 1 と点 5 を結ぶ線分が書かれる。 2 番目のクエリで、点 2 と点 7 を結ぶ線分は、 1 番目のクエリで書いた線分と交わるので書かない。 3 番目のクエリで、点 3 と点 4 を結ぶ線分が書かれる。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 999999 4\n123456 987654\n888888 999999\n1 3\n2 777777"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 Yes\nNo\nYes\nNo"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc424/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:00.095337+00:00",
+  "statement_sha256": "95d6eee07b789f6e1e0f235c43ba05307acd40ca168b6197bfe9151f36c7aef3",
+  "editorials": []
+}

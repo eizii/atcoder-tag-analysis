@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc294_e",
+  "title": "2xN Grid",
+  "contests": [
+    {
+      "contest_id": "abc294",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 792,
+  "raw_difficulty": 792,
+  "contest_id": "abc294",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc294/tasks/abc294_e",
+  "statement": "配点 : 500 点 問題文 2 行 L 列のマス目があります。\r\n上から i 行目 (i\\in\\lbrace1,2\\rbrace) 、左から j 列目 (1\\leq j\\leq L) のマス目を (i,j) で表します。 (i,j) には整数 x _ {i,j} が書かれています。 x _ {1,j}=x _ {2,j} であるような整数 j の個数を求めてください。 ただし、 x _ {i,j} の情報は (x _ {1,1},x _ {1,2},\\ldots,x _ {1,L}) と (x _ {2,1},x _ {2,2},\\ldots,x _ {2,L}) をそれぞれ連長圧縮した、長さ N _ 1 の列 ((v _ {1,1},l _ {1,1}),\\ldots,(v _ {1,N _ 1},l _ {1,N _ 1})) と長さ N _ 2 の列 ((v _ {2,1},l _ {2,1}),\\ldots,(v _ {2,N _ 2},l _ {2,N _ 2})) として与えられます。 ここで、列 A の連長圧縮とは、 A の要素 v _ i と正整数 l _ i の組 (v _ i,l _ i) の列であって、次の操作で得られるものです。 A を異なる要素が隣り合っている部分で分割する。 分割した各列 B _ 1,B _ 2,\\ldots,B _ k に対して、 v _ i を B _ i の要素、 l _ i を B _ i の長さとする。 制約 1\\leq L\\leq 10 ^ {12} 1\\leq N _ 1,N _ 2\\leq 10 ^ 5 1\\leq v _ {i,j}\\leq 10 ^ 9\\ (i\\in\\lbrace1,2\\rbrace,1\\leq j\\leq N _ i) 1\\leq l _ {i,j}\\leq L\\ (i\\in\\lbrace1,2\\rbrace,1\\leq j\\leq N _ i) v _ {i,j}\\neq v _ {i,j+1}\\ (i\\in\\lbrace1,2\\rbrace,1\\leq j\\lt N _ i) l _ {i,1}+l _ {i,2}+\\cdots+l _ {i,N _ i}=L\\ (i\\in\\lbrace1,2\\rbrace) 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 L N _ 1 N _ 2 v _ {1,1} l _ {1,1} v _ {1,2} l _ {1,2} \\vdots v _ {1,N _ 1} l _ {1,N _ 1} v _ {2,1} l _ {2,1} v _ {2,2} l _ {2,2} \\vdots v _ {2,N _ 2} l _ {2,N _ 2} 出力 答えを 1 行で出力せよ。 入力例 1 8 4 3\r\n1 2\r\n3 2\r\n2 3\r\n3 1\r\n1 4\r\n2 1\r\n3 3 出力例 1 4 マス目は以下の図のようになっています。 x _ {1,j}=x _ {2,j} となるような整数 j は、 j=1,2,5,8 の 4 つなので、出力すべき値は 4 です。 入力例 2 10000000000 1 1\r\n1 10000000000\r\n1 10000000000 出力例 2 10000000000 答えが 32\\operatorname{bit} 整数に収まらない場合があることに注意してください。 入力例 3 1000 4 7\r\n19 79\r\n33 463\r\n19 178\r\n33 280\r\n19 255\r\n33 92\r\n34 25\r\n19 96\r\n12 11\r\n19 490\r\n33 31 出力例 3 380",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 2 行 L 列のマス目があります。\r\n上から i 行目 (i\\in\\lbrace1,2\\rbrace) 、左から j 列目 (1\\leq j\\leq L) のマス目を (i,j) で表します。 (i,j) には整数 x _ {i,j} が書かれています。 x _ {1,j}=x _ {2,j} であるような整数 j の個数を求めてください。 ただし、 x _ {i,j} の情報は (x _ {1,1},x _ {1,2},\\ldots,x _ {1,L}) と (x _ {2,1},x _ {2,2},\\ldots,x _ {2,L}) をそれぞれ連長圧縮した、長さ N _ 1 の列 ((v _ {1,1},l _ {1,1}),\\ldots,(v _ {1,N _ 1},l _ {1,N _ 1})) と長さ N _ 2 の列 ((v _ {2,1},l _ {2,1}),\\ldots,(v _ {2,N _ 2},l _ {2,N _ 2})) として与えられます。 ここで、列 A の連長圧縮とは、 A の要素 v _ i と正整数 l _ i の組 (v _ i,l _ i) の列であって、次の操作で得られるものです。 A を異なる要素が隣り合っている部分で分割する。 分割した各列 B _ 1,B _ 2,\\ldots,B _ k に対して、 v _ i を B _ i の要素、 l _ i を B _ i の長さとする。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq L\\leq 10 ^ {12} 1\\leq N _ 1,N _ 2\\leq 10 ^ 5 1\\leq v _ {i,j}\\leq 10 ^ 9\\ (i\\in\\lbrace1,2\\rbrace,1\\leq j\\leq N _ i) 1\\leq l _ {i,j}\\leq L\\ (i\\in\\lbrace1,2\\rbrace,1\\leq j\\leq N _ i) v _ {i,j}\\neq v _ {i,j+1}\\ (i\\in\\lbrace1,2\\rbrace,1\\leq j\\lt N _ i) l _ {i,1}+l _ {i,2}+\\cdots+l _ {i,N _ i}=L\\ (i\\in\\lbrace1,2\\rbrace) 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 L N _ 1 N _ 2 v _ {1,1} l _ {1,1} v _ {1,2} l _ {1,2} \\vdots v _ {1,N _ 1} l _ {1,N _ 1} v _ {2,1} l _ {2,1} v _ {2,2} l _ {2,2} \\vdots v _ {2,N _ 2} l _ {2,N _ 2}"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを 1 行で出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 8 4 3\r\n1 2\r\n3 2\r\n2 3\r\n3 1\r\n1 4\r\n2 1\r\n3 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 マス目は以下の図のようになっています。 x _ {1,j}=x _ {2,j} となるような整数 j は、 j=1,2,5,8 の 4 つなので、出力すべき値は 4 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10000000000 1 1\r\n1 10000000000\r\n1 10000000000"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 10000000000 答えが 32\\operatorname{bit} 整数に収まらない場合があることに注意してください。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1000 4 7\r\n19 79\r\n33 463\r\n19 178\r\n33 280\r\n19 255\r\n33 92\r\n34 25\r\n19 96\r\n12 11\r\n19 490\r\n33 31"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 380"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc294/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:18.158137+00:00",
+  "statement_sha256": "f92cd74bf30575ac8f054ae732935739486dce89d66956ddbf5216feaaf41e58",
+  "editorials": []
+}

@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc450_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc450/editorial/17278",
+      "text": "原案:vwxyz\n問題文の条件を全ての\n\\(a,b,c\\)\nについて愚直に調べればよいです。\n①答えに対応する文字型変数に最初\nNo\nを代入し、条件を満たすものがあれば\nYes\nに変更して最後に出力する\n②答えに対応するbool型変数に false を代入し、条件を満たすものがあれば true に変更して、最後に場合分けして答えを出力する\n③条件を満たすものがあれば\nYes\nを出力してプログラムを終了し、最後に\nNo\nを出力する\nなどの方法があります。\nそれぞれにメリットとデメリットがあるので、問題や状況に応じて実装方針を適切に選べるように、いろんな書き方を引き出しとして持っておくとよいです。\nPythonではbreakとelseを組み合わせる方法もありますが、今回のように 3 重ループ内で使う場合は実装が直感的ではなくなる場合があり、あまりおすすめはできません。（一応、④として実装例を載せておきます。）\nPythonの実装例①\nPythonの実装例②\nPythonの実装例③\nPythonの実装例④",
+      "codes": [
+        "N=int(input())\nC=[[None]*(i+1)+list(map(int,input().split())) for i in range(N-1)]\nans=\"No\"\nfor a in range(N):\n    for b in range(a+1,N):\n        for c in range(b+1,N):\n            if C[a][b]+C[b][c]<C[a][c]:\n                ans=\"Yes\"\nprint(ans)",
+        "N=int(input())\nC=[[None]*(i+1)+list(map(int,input().split())) for i in range(N-1)]\nbl=False\nfor a in range(N):\n    for b in range(a+1,N):\n        for c in range(b+1,N):\n            if C[a][b]+C[b][c]<C[a][c]:\n                bl=True\nif bl:\n    print(\"Yes\")\nelse:\n    print(\"No\")",
+        "N=int(input())\nC=[[None]*(i+1)+list(map(int,input().split())) for i in range(N-1)]\nfor a in range(N):\n    for b in range(a+1,N):\n        for c in range(b+1,N):\n            if C[a][b]+C[b][c]<C[a][c]:\n                print(\"Yes\")\n                exit()\nprint(\"No\")",
+        "N=int(input())\nC=[[None]*(i+1)+list(map(int,input().split())) for i in range(N-1)]\nans=\"No\"\nfor a in range(N):\n    for b in range(a+1,N):\n        for c in range(b+1,N):\n            if C[a][b]+C[b][c]<C[a][c]:\n                print(\"Yes\")\n                break\n        else:\n            continue\n        break\n    else:\n        continue\n    break\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "feb4aac2c322646f42735b22028527729fce6c2443901f5a6cb8656d9f6c1535",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc450/abc450_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

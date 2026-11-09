@@ -1,0 +1,64 @@
+{
+  "problem_id": "arc089_b",
+  "title": "Checker",
+  "contests": [
+    {
+      "contest_id": "abc086",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 1797,
+  "raw_difficulty": 1797,
+  "contest_id": "abc086",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc086/tasks/arc089_b",
+  "statement": "配点 : 500 点 問題文 シカのAtCoDeerくんは無限に広がる二次元グリッドを一辺が K の市松模様で塗ろうと考えています。\r\nただし、一辺が K の市松模様とは、各マスが白か黒で塗られたパターンであって、各色の各連結成分が K × K の正方形となっているようなものです。\r\n例えば以下は一辺が 3 の市松模様の例です。 AtCoDeerくんは N 個の希望を持っています。 i 個目の希望は、 x_i,y_i,c_i で表されます。\r\nこれは、 c_i が B ならマス (x_i,y_i) を黒で塗る、 W なら白で塗ることを意味しています。\r\n同時に最大でいくつの希望を叶えることが出来るか答えてください。 制約 1 ≤ N ≤ 10^5 1 ≤ K ≤ 1000 0 ≤ x_i ≤ 10^9 0 ≤ y_i ≤ 10^9 i ≠ j なら (x_i,y_i) ≠ (x_j,y_j) c_i は B または W N,K,x_i,y_i は整数 入力 入力は以下の形式で標準入力から与えられる。 N K x_1 y_1 c_1 x_2 y_2 c_2 : x_N y_N c_N 出力 同時に叶えられる希望の個数の最大値を出力せよ。 入力例 1 4 3\r\n0 1 W\r\n1 2 W\r\n5 3 B\r\n5 4 B 出力例 1 4 上であげた例のように塗ればすべての希望を同時に叶えることができます。 入力例 2 2 1000\r\n0 0 B\r\n0 1 W 出力例 2 2 入力例 3 6 2\r\n1 2 B\r\n2 1 W\r\n2 2 B\r\n1 0 B\r\n0 6 W\r\n4 5 W 出力例 3 4",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 シカのAtCoDeerくんは無限に広がる二次元グリッドを一辺が K の市松模様で塗ろうと考えています。\r\nただし、一辺が K の市松模様とは、各マスが白か黒で塗られたパターンであって、各色の各連結成分が K × K の正方形となっているようなものです。\r\n例えば以下は一辺が 3 の市松模様の例です。 AtCoDeerくんは N 個の希望を持っています。 i 個目の希望は、 x_i,y_i,c_i で表されます。\r\nこれは、 c_i が B ならマス (x_i,y_i) を黒で塗る、 W なら白で塗ることを意味しています。\r\n同時に最大でいくつの希望を叶えることが出来るか答えてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 ≤ N ≤ 10^5 1 ≤ K ≤ 1000 0 ≤ x_i ≤ 10^9 0 ≤ y_i ≤ 10^9 i ≠ j なら (x_i,y_i) ≠ (x_j,y_j) c_i は B または W N,K,x_i,y_i は整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K x_1 y_1 c_1 x_2 y_2 c_2 : x_N y_N c_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 同時に叶えられる希望の個数の最大値を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 3\r\n0 1 W\r\n1 2 W\r\n5 3 B\r\n5 4 B"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 上であげた例のように塗ればすべての希望を同時に叶えることができます。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2 1000\r\n0 0 B\r\n0 1 W"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 2"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 6 2\r\n1 2 B\r\n2 1 W\r\n2 2 B\r\n1 0 B\r\n0 6 W\r\n4 5 W"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 4"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc086/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:33:55.807155+00:00",
+  "statement_sha256": "74baaf2e8c4235df7f3ab9505d1971cdd37b650ab8c19484411a06b3b4462811",
+  "editorials": []
+}

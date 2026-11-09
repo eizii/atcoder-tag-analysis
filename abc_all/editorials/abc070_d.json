@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc070_d",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc070/editorial.pdf",
+      "text": "D:  Transit Tree Path\n\n  まず、与えられたグラフの性質について考えてみます。与えられたグラフは閉路がない連結グラフであるため、\n\n 異なる任意の2 頂点間の最短経路は1 通りに定まります。次に、全ての質問クエリで求める最短経路は頂点K を\n 経由しています。したがって、各質問クエリの答えは頂点xj から頂点K までの最短経路+ 頂点K から頂点\n   yj までの最短経路となります。このことから、頂点K から全ての頂点への最短経路を前計算することにより、各\n 質問クエリを効率良く処理することが可能です。\n\n  頂点K から全ての頂点への最短経路を前計算する方法として、頂点K からDFS をするのが簡単です。実装と\n しては、以下の再帰関数についてDFS(K, −1, 0) と呼ぶことで頂点K から全ての頂点への最短経路を前計算でき\n ます。\n\n     1: procedure DFS(現在の頂点v, v の親p, 現在の距離d)\n     2:  頂点K から頂点v までの距離はd\n     3:    for 頂点i: 頂点v に隣接しているかつ未訪問do\n     4:          if i = p の場合then\n\n     5:         continue\n\n     6:      end if\n     7:       DFS(i, v, d+ 頂点v と頂点i の間の辺のコスト)\n\n     8:   end for\n\n     9:    return\n\n    10: end procedure\n\n\n  また、グラフの頂点数がN ≤105 と大きいため、隣接行列でグラフを持つと空間計算量がO(N 2) となりMLE\n します。そこで、隣接リストを利用して実装することにより、空間計算量がO(N) に抑えることができます。実装\n はC++のコード例を参考にしてください。\n  以上をまとめると、グラフを隣接リストで管理して、頂点K からDFS をすることにより、頂点K から全ての\n 頂点への最短経路を前計算します。そのあと、各質問クエリに対して、頂点K から頂点xj までの最短経路と頂\n 点K から頂点yj までの最短経路の和を出力します。この解法の時間計算量はO(N + Q) となり、十分間に合い\n ます。\n\n\n   C++のコード例（頂点番号を0-indexed とする）\n\n\n\n 1 using ll = long long;\n\n 2 const int limit = 100010;\n\n 3 using edge = struct {int to; ll cost;};\n\n 4 vector<edge> tree[limit];\n\n 5 ll depth[limit];\n\n\n 6\n\n 7 void dfs(int v, int p, ll d) {\n\n 8     depth[v] = d;\n\n 9     for (auto &e : tree[v]) {\n\n10         if (e.to == p) continue;\n\n11         dfs(e.to, v, d + e.cost);\n\n12     }\n\n13 }\n\n\n                                                  5\n\f\n14\n\n15 int main(void) {\n\n16     int n;\n\n17     cin >> n;\n\n\n18\n\n19     for (int i = 0; i < n - 1; ++i) {\n\n20         int a, b, c;\n\n21         cin >> a >> b >> c;\n\n22         a--, b--;\n\n23         tree[a].push_back({b, c});\n\n24         tree[b].push_back({a, c});\n\n25     }\n\n\n26\n\n27     int q, k;\n\n28     cin >> q >> k;\n\n29     k--;\n\n\n30\n\n31     dfs(k, -1, 0);\n\n32     for (int i = 0; i < q; ++i) {\n\n33         int x, y;\n\n34         cin >> x >> y;\n\n35         x--, y--;\n\n36         cout << depth[x] + depth[y] << endl;\n\n37     }\n\n\n38\n\n39     return 0;\n40 }\n\n\n\n\n\n                                                  6",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "975cbf8cc9a6b1e7f34a648e323008c9eef7358d0fd8874ddc09286034ab4d37"
+    }
+  ],
+  "status": "available"
+}

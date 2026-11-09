@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc407_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc407/editorial/13105",
+      "text": "以下では\n\\(S\\)\nの長さを\n\\(N\\)\nとおきます。\n\\(t\\)\nの文字数は、ボタン A を押すと\n\\(1\\)\n増えて、ボタン B を押すと変化しません。\nなので、ボタン A を押す回数は\n\\(N\\)\n回とわかります。\n以下の行動の前後では\n\\(t\\)\nは変化しないので、以下の行動は行わないとしても操作回数の最小値は悪化しません。\nボタン A を最初に押すよりも前に、ボタン B を押す。\nボタン B を\n\\(10\\)\n回連続で押す。\n\\(1 \\leq i \\leq N\\)\nについて、\n\\(i\\)\n回目にボタン A を押してから次にボタン A を押すまでのあいだに何回ボタン B を押すかを\n\\(b_i\\)\nとおくと、上の議論から\n\\(0 \\leq b_i \\leq 9\\)\nとしてよいです。\nこのとき、\n\\(t\\)\nの\n\\(j\\)\n文字目が\n\\(S_j\\)\nになるのは、\n\\((b_j + \\dots + b_N) \\bmod 10 = S_j\\)\nになるときです。\n\\(j=N\\)\nのときは\n\\(b_N = S_j\\)\nとなるので、\n\\(j<N\\)\nのときについて考えます。\n\\(j+1\\)\n文字目について同様の式を立てると\n\\((b_{j+1} + \\dots + b_N) \\bmod 10 = S_{j+1}\\)\nとなり、さきほどの式からこの式を引くことで\n\\(b_j \\equiv S_{j} - S_{j+1}\\ \\pmod{10}\\)\nが分かります。\nこれを満たす\n\\(b_i\\)\nであって\n\\(0 \\leq b_i \\leq 9\\)\nの範囲にあるものは、\n\\((10 + S_{j} - S_{j+1}) \\bmod 10\\)\nで求まります。\nしたがって、上で求めた\n\\(b_j\\)\nの値を\n\\(1 \\leq j \\leq N\\)\nについて足し合わせ、さらに\n\\(N\\)\nを加えた値が答えとなります。\nC++ での実装例を以下に示します。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <vector>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\nusing std::string;\n\n\nint main(void){\n\tstring s;\n\tcin >> s;\n\n\tint sum = 0;\n\tint n = s.size();\n\tfor (int i = n-1; i >= 0; i--) {\n\t\tint v = s[i] - '0';\n\t\tint u = ((i < n-1) ? (s[i+1] - '0') : 0);\n\t\tint b = (10 + v - u) % 10;\n\t\tsum += b;\n\t}\n\n\tint ans = sum + n;\n\tcout << ans << \"\\n\";\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "66a91f3917a039b8694dd848f0f5958fe1d9505c9bf968cc4d222bce3eda935c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc407/abc407_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc232_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc232/editorial/3146",
+      "text": "マス\n\\((i, j)\\)\nから歩き初めたとき、立ち止まるまでに通ることのできるマスの個数の最大値を\n\\(f(i, j)\\)\nとおきます。\n便宜上、\n\\((i, j)\\)\nが壁であるか、グリッドの外を表す場合は\n\\(f(i, j) = 0\\)\nとします。すると、空きマス\n\\((i, j)\\)\nに対し、以下の関係が成り立ちます。\n\\(f(i, j) = \\max (f(i + 1, j), f(i, j + 1)) + 1\\)\nよって、\n\\(i, j\\)\nの大きい順に\n\\(f(i, j)\\)\nを確定させていくことができます。\n\\(f(1, 1)\\)\nが答えとなります。\n問題文や解説では 1-indexed で考えていましたが、以下の実装例では 0-indexed になっていることに注意してください。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int n, m;\n  cin >> n >> m;\n  vector c(n, vector<char>(m));\n  for (auto& v : c) {\n    for (char& x : v) {\n      cin >> x;\n    }\n  }\n  vector f(n + 1, vector<int>(m + 1));\n  for (int i = n - 1; i >= 0; --i) {\n    for (int j = m - 1; j >= 0; --j) {\n      if (c[i][j] == '#') continue;\n      f[i][j] = max(f[i + 1][j], f[i][j + 1]) + 1;\n    }\n  }\n  cout << f[0][0] << '\\n';\n}"
+      ],
+      "text_sha256": "c2d49ae9fee64480639b387c971bc4546e94f800677d65f2051bc6904e3d963a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc232/abc232_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

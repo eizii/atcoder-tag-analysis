@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc313_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc313/editorial/6910",
+      "text": "まず\n\\(N = K + 1\\)\nの時の解法を説明します。以下では\n\\(s_i\\)\nはクエリに対するジャッジの解答とします。\n\\(i\\)\n回目のクエリでは\n\\((i, i+1, \\dots, i+K-1)\\)\nをクエリで投げます (値が\n\\(N\\)\n以上になったらその都度\n\\(N\\)\nを引く) 例えば\n\\(N=4,K=3\\)\nでは以下のようなクエリを投げます。\n\\[\n\\begin{aligned}\nA_1 + A_2 + A_3 &= s_1\\\\\nA_2 + A_3 + A_4 &= s_2\\\\\nA_3 + A_4 + A_1 &= s_3\\\\\nA_4 + A_1 + A_2 &= s_4\\\\\n\\end{aligned}\n\\]\n\\(N\\)\n回のクエリにおいて\n\\(A_1, A_2, \\dots, A_N\\)\nは左辺に\n\\(K\\)\n回登場します。ここで\n\\(K\\)\nは奇数なので、\n\\(A_1 + A_2 + \\dots +A_N\\)\nの偶奇は\n\\(s_1 + s_2 + \\dots + s_N\\)\nの偶奇と一致します。よって、両辺の総和を取ることで\n\\(A_1 + A_2 + \\dots + A_N\\)\nの偶奇を決定できます。\nここから適切に差を取ることで\n\\(A_1, A_2, \\dots, A_N\\)\nの偶奇を 1 個ずつ全て決定できます。たとえば\n\\(N=4, K=3\\)\nの場合、\n\\[A_4 = (A_1 + A_2 + A_3 + A_4) - (A_1 + A_2 + A_3)\\]\nなので\n\\(A_4\\)\nの偶奇は\n\\(A_1 + A_2 + A_3 + A_4\\)\nの偶奇と\n\\(s_1\\)\nから決定できます。(\n\\(A_1, A_2, A_3\\)\nも同様です) 以上より\n\\(N=K+1\\)\nの場合は解くことができました。\n実はこの解法をそのまま応用すると\n\\(N\\)\nが一般の場合でも解くことができます。はじめに\n\\(N=K+1\\)\nの場合と同様に\n\\(K+1\\)\n回かけて\n\\(A_1, A_2, \\dots, A_{K+1}\\)\nを特定します。その後、\n\\(i = K+2, K+3, \\dots, N\\)\nについて、\n\\(i\\)\n回目のクエリでは\n\\((1, 2, \\dots, K-1, i)\\)\nを投げます。すると、\n\\[\n\\begin{aligned}\nA_i = s_i - (A_1 + A_2 + \\dots + A_{K-1})\n\\end{aligned}\n\\]\nなので\n\\(A_i\\)\nの偶奇が\n\\(A_1, A_2, \\dots, A_{K-1}, s_i\\)\nから決定できます。これを繰り返すことで\n\\(A\\)\nの全ての要素を特定できます。\n以上よりこの問題を\n\\(N\\)\n回のクエリで解くことができました。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nvoid out(vector<int> v) {\n  for (unsigned i = 0; i < v.size(); i++) {\n    cout << v[i] << \" \\n\"[i + 1 == v.size()];\n  }\n}\nint main() {\n  int N, K;\n  cin >> N >> K;\n  auto send = [&](vector<int> v) {\n    for (auto& x : v) x++;\n    cout << \"? \", out(v);\n    cout.flush();\n    int x;\n    cin >> x;\n    return x;\n  };\n  vector<int> ans(N);\n  {\n    int r = 0;\n    for (int i = 0; i < K + 1; i++) {\n      vector<int> v;\n      for (int j = 0; j < K + 1; j++)\n        if (i != j) v.push_back(j);\n      ans[i] = send(v);\n      r ^= ans[i];\n    }\n    for (int i = 0; i < K + 1; i++) ans[i] ^= r;\n  }\n  {\n    vector<int> v(K);\n    int s = 0;\n    for (int i = 0; i < K - 1; i++) v[i] = i, s ^= ans[i];\n    for (int i = K + 1; i < N; i++) {\n      v.back() = i;\n      int t = send(v);\n      ans[i] = s ^ t;\n    }\n  }\n  cout << \"! \", out(ans);\n  cout.flush();\n}"
+      ],
+      "text_sha256": "7ff36d7aae636ae004fda87fa670e907e284f9d4d85a7fe7252d98709c2bc25e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc313/abc313_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc313/editorial/6921",
+      "text": "\\(1\\)\n回以上質問を行い、各\n\\(i\\)\nについて\n\\(A_1 - A_i\\)\nの偶奇がわかっているとします。このとき、\n\\(A_1\\)\nの値を決めれば数列\n\\(A\\)\nが決まり、\n\\(A_1\\)\nの値は\n\\(K\\)\nが奇数であるため\n\\(A_1\\)\nと\n\\(KA_1\\)\nの偶奇が一致することより、適当な質問の答えから得られます。\nしたがって、頂点に\n\\(1\\)\nから\n\\(N\\)\nまでの番号が付いた連結な\n\\(N\\)\n頂点のグラフであって、頂点\n\\(i\\)\nと頂点\n\\(j\\)\nの間に辺が存在するならば\n\\(A_i - A_j\\)\nの偶奇がわかっているようなグラフが構成できればよいです。\nそのような方法はいくつかありますが、以下では一例を紹介します。\n\\(1 \\leq i < K\\)\nを満たす各\n\\(i\\)\nについて\n\\(A_1 + A_2 + \\ldots + A_{i-1} + A_{i+1} + \\ldots+ A_{K+1}\\)\nの偶奇、\n\\(K \\leq i \\leq N\\)\nを満たす各\n\\(i\\)\nについて\n\\(A_1 + A_2 + \\ldots + A_{K-1} + A_i\\)\nの偶奇を質問すると、差分を取ることにより\n\\(1 \\leq i \\leq N\\)\nを満たす各\n\\(i\\)\nについて\n\\(A_K - A_i\\)\nの偶奇がわかるので、\n\\(i\\)\nと\n\\(K\\)\nを結ぶ辺が存在するグラフを考えることで目的のものが得られました。",
+      "codes": [],
+      "text_sha256": "c13c54b4f3fdba5b4d6dcc39b4e61cdc073b344c937f17631da8fba733b045c3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc313/abc313_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

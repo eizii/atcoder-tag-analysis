@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc367_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc367/editorial/10706",
+      "text": "便宜上、休憩所\n\\(k\\)\nの番号を\n\\(k-1\\)\nに取り換えて、\n\\(0\\)\nから\n\\(N-1\\)\nまでの番号で取り扱います。\n以下のような配列を考えてみましょう。\n\\(R_i=\\)\n( 休憩所\n\\(0\\)\nから出発して、\n\\(i\\)\n番目の休憩所として休憩所\n\\(i \\% N\\)\nに到着するまでにかかる歩数を\n\\(M\\)\nで割った余り ) とします。 これを\n\\(i\\)\nが\n\\(0\\)\nから\n\\(2N-1\\)\nまで計算しておきます。\n例えば、\n\\(A=(1,2,3,4),M=6\\)\nとすると\n\\(R=(0,1,3,0,4,5,1,4)\\)\nとなります。\n\\(s\\)\nから\n\\(t\\)\nまで歩く (\n\\(s \\neq t\\)\n) のにかかる最小の歩数が\n\\(M\\)\nの倍数であるのはどのような場合でしょうか?\n\\(s<t\\)\nのとき、\n\\(R_s = R_t\\)\nであることが求める条件です。\nこれは、\n\\(R_{N+s}=R_{N+t}\\)\nと同値です。\n\\(s>t\\)\nのとき、\n\\(R_s = R_{N+t}\\)\nであることが求める条件です。\nこれらを踏まえて、以下の問題が解ければよいことになります。\n\\(i=N,N+1,\\dots,2N-1\\)\nについて、以下の答えを足し合わせよ。\n\\(R_{i-N+1},R_{i-N+2},\\dots,R_{i-1}\\)\nの中に、\n\\(R_i\\)\nと等しい要素は何個ありますか?\n直感的には、休憩所\n\\(i \\% N\\)\nへと時計回りに歩いた時、歩数が\n\\(M\\)\nの倍数となるものを\n\\(i=N,N+1,\\dots,2N-1\\)\nについて足し合わせています。\nこの問題は、次のようにして解くことができます。\nまず、\n\\(R_0\\)\nから\n\\(R_{N-1}\\)\nにおいて\n\\(0\\)\nから\n\\(M-1\\)\nまでの\n\\(k\\)\nの出現頻度を 記録した配列を\n\\(B=(B[0],B[1],\\dots,B[M-1])\\)\nとする。\n\\(i = N,N+1,\\dots,2N-1\\)\nについて以下を繰り返す。\n\\(B[R_{i-N}]\\)\nから\n\\(1\\)\n減算する。\nこれにより、現在の\n\\(B\\)\nは\n\\(i-N+1\\)\nから\n\\(i-1\\)\nまでの頻度を管理する配列となる。\n答えに\n\\(B[R_{i}]\\)\nを加算する。\n\\(B[R_{i}]\\)\nに\n\\(1\\)\n加算する。\nこれにより、現在の\n\\(B\\)\nは\n\\(i-N+1\\)\nから\n\\(i\\)\nまでの頻度を管理する配列となる。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int n,m;\n  cin >> n >> m;\n  vector<int> a(n);\n  for(auto &nx : a){cin >> nx;}\n  vector<int> r={0};\n  for(int i=0;i<2*n;i++){\n    r.push_back((r.back()+a[i%n])%m);\n  }\n  vector<int> b(m,0);\n  for(int i=0;i<n;i++){b[r[i]]++;}\n  long long res=0;\n  for(int i=n;i<2*n;i++){\n    b[r[i-n]]--;\n    res+=b[r[i]];\n    b[r[i]]++;\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "51a07eaabc5f3f392b2ed0865e9414e0cc1a7fddf7ecf88ec8a2163e310ecb1b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc367/abc367_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc367/editorial/10714",
+      "text": "公式解説と同様にして、以下の問題を解きます。\n\\(i=N, N+1, \\cdots, 2N-1\\)\nについて、以下の答えを足し合わせよ。\n\\(R_{i-N+1}, R_{i-N+2}, \\cdots, R_{i-1}\\)\nの中に、\n\\(R_i\\)\nと等しい要素は何個ありますか？\n準備\nまず、各\n\\(x=0,1,\\cdots, M-1\\)\nについて、\n\\(x\\)\nに関する空のリスト\n\\(\\mathrm{bucket}(x)\\)\nを用意します。\n次に、\n\\(i=0,1,\\cdots, 2N-1\\)\nの順に、\n\\(i\\)\nを\n\\(\\mathrm{bucket}(R_i)\\)\nの末尾に追加します。\nこれで、各\n\\(\\mathrm{bucket}(x)\\)\nは、\n\\(R_i = x\\)\nとなる\n\\(i\\)\nが小さい順に入っています。\n問題に答える\n次のクエリに高速に答えます。\n\\(R_{i-N+1}, R_{i-N+2}, \\cdots, R_{i-1}\\)\nの中に、\n\\(R_i\\)\nと等しい要素は何個ありますか？\nこれは次のように言い換えることができます。\n\\(\\mathrm{bucket}(R_i)\\)\nの中で、\n\\((i-N+1)\\)\n以上\n\\((i-1)\\)\n以下の要素は何個ありますか？\nこれは以下のように答えることができます。\n\\(r\\)\nは\n\\(\\mathrm{bucket}(R_i)\\)\nの中で\n\\((i-1)\\)\n以下の要素の個数とする。\n\\(l\\)\nは\n\\(\\mathrm{bucket}(R_i)\\)\nの中で\n\\((i-N)\\)\n以下の要素の個数とする。\n\\(\\mathrm{bucket}(R_i)\\)\nの中で\n\\((i-N+1)\\)\n以上\n\\((i-1)\\)\n以下の要素は\n\\((r-l)\\)\n個である。\n\\(\\mathrm{bucket}(x)\\)\nは小さい順に値が入っているので、二分探索を用いて\n\\(r, l\\)\nを高速に求めることができ、各クエリに\n\\(O(\\log N)\\)\n時間で答えることができます。\nしたがって、この問題は全体で時間計算量\n\\(O(M + N \\log N)\\)\nで解くことができます。\n公式解説は時間計算量が\n\\(O(M+N)\\)\nなので、公式解説の解法の方がより効率的ですが、いま紹介した解法でも十分高速に AC することができます。\nshobonvipの実装 (C++, 98ms)\nshobonvipの実装 (Pypy3, 282ms)",
+      "codes": [],
+      "text_sha256": "e5d429fff9166995535e7bd77ea1e9da66f455d24cb0f493025dbe928d145e0e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc367/abc367_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc367/editorial/10715",
+      "text": "本解説では、添字を\n\\(1\\)\nずらして\n\\(A _ 0, \\dots, A _ { n - 1 }\\)\nにします。\n数列\n\\(B  = (B _ 0, \\dots, B _ { n - 1 }, B _ n)\\)\nを\n\\(B _ i = \\sum _ { j \\lt i } A _ j\\)\nで定義すると答えは\n\\[\n\\left \\lbrace (i, j) \\middle |\n\\begin{array}{l}\n0 \\le i < j \\lt n, \\\\\nB _ i = B _ j  \\pmod M\n\\end{array}\n\\right \\rbrace\n\n+\n\n\\left \\lbrace (i, j) \\middle |\n\\begin{array}{l}\n0 \\le i < j \\lt n, \\\\\nB _ j = B _ n + B _ i  \\pmod M\n\\end{array}\n\\right \\rbrace\n\\]\nに等しいので、あらかじめ\n\\(A\\)\nの総和を\n\\(M\\)\nで割ったあまりを求めておくことで、\n\\(A\\)\nを順に\n\\(1\\)\n回走査して求めることができます。\n提出:\nRust 12 ms",
+      "codes": [
+        "use proconio::input;\n\nfn main() {\n    input! {\n        n: usize,\n        m: usize,\n        a: [usize; n],\n    }\n    let sum = a.iter().sum::<usize>() % m;\n    let mut prefix = 0;\n    let mut count = vec![0; m];\n    let mut ans = 0usize;\n    for &x in &a {\n        prefix = (prefix + x) % m;\n        ans += count[prefix];\n        ans += count[(prefix + m - sum) % m];\n        count[prefix] += 1;\n    }\n    println!(\"{ans}\");\n}"
+      ],
+      "text_sha256": "9c0fbdcb59a4ba6cc27c6b7aa5442ef21b4f2c50f5fde9b32bce0bc999bff07a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc367/abc367_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

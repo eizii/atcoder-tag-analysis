@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc147_b",
+  "editorials": [
+    {
+      "text": "B: Palindrome-philia\nS の長さをN とします。S の長さは変えられないため、S の0 文字目(最初の文字) とN −1 文\n字目(最後の文字) が一致していなければそのうちの一方をもう一方に合わせ、1 文字目とN −2 文\n字目が一致していなければそのうちの一方をもう一方に合わせ、. . .、文字列の中心までこれを繰り\n返すのが最適です。for, while などの構文を使って実装するのが一般的でしょう。以下、C 言語での\n実装例を挙げます。\n1 #include <stdio.h>\n2 #include <string.h>\n3 char s[101];\n4 int main(void) {\n5\nscanf(\"%s\", s);\n6\nint res = 0;\n7\nint n = strlen(s);\n8\nfor (int i = 0; i < n; i++) {\n9\nif (s[i] != s[n - 1 - i]) res++;\n10\n}\n11\nprintf(\"%d\\n\", res / 2);\n12 }\n",
+      "text_sha256": "86fa74a2ac9e7080e3c0f211775afc01d6bebff1cbd2c761d461b24ad67ca7f2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc147/abc147_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

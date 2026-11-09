@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc390_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc390/editorial/12052",
+      "text": "この問題は、各ビタミン\n\\(i\\)\n\\((1\\leq i\\leq 3)\\)\nについて、「摂取カロリーの合計が\n\\(j\\)\n\\((0\\leq j\\leq X)\\)\n以下となるように食べ物を選んで食べた時のビタミン\n\\(i\\)\nの摂取量の最大値（他のビタミンについては考慮しない）」を動的計画法によって、あらかじめ求めておくことによって解くことができます。\n最初に、「摂取カロリーの合計が\nちょうど\n\\(j\\)\nとなるように食べ物を選んで食べた時のビタミン\n\\(i\\)\nの摂取量の最大値」の計算を行います。\n\\(dp_i[k][j]\\)\n\\((1\\leq i\\leq 3,~0\\leq j\\leq X,~0\\leq k\\leq N)\\)\nで、「\n\\(1\\)\n個目から\n\\(k\\)\n個目までの食べ物の中から摂取カロリーの合計が\nちょうど\n\\(j\\)\nとなるように食べ物を選んで食べた時のビタミン\n\\(i\\)\nの摂取量の最大値（できない場合は\n\\(-\\infty\\)\n）」を表すとします。\nまず、\n\\(dp_i[0][0]=0\\)\n,\n\\(dp_i[0][j]=-1\\)\n\\((1\\leq j\\leq X)\\)\nです。\n次に、食べ物\n\\(k\\)\n\\((1\\leq k\\leq N)\\)\nがビタミン\n\\(i\\)\nを含まないならば\n\\(dp_i[k][j]=dp_i[k-1][j]\\)\nです。含むならば、食べるか食べないかの選択によって、\n\\(dp_i[k][j]=\\max(dp_i[k-1][j],dp_i[k-1][j-C_k]+A_k)\\)\n\\((C_k\\leq j)\\)\nとなります。\n\\(j\\leq c_k\\)\nについては\n\\(dp_i[k][j]=dp_i[k-1][j]\\)\nとなります。\nこのように更新を繰り返した時の、\n\\(dp_i[N][j]\\)\nが求めたいものです。\n次に、「摂取カロリーの合計が\n\\(j\\)\n\\((0\\leq j\\leq X)\\)\n以下となるように食べ物を選んで食べた時のビタミン\n\\(i\\)\nの摂取量の最大値」\n\\(M_{i,j}\\)\nは、\n\\(M_{i,j}=\\displaystyle\\max_{0\\leq j'\\leq j} dp_i[N][j']\\)\nと書くことができます。\nこれは、\n\\(M_{i,0}=dp_i[N][0]\\)\n,\n\\(M_{i,j}=\\max(M_{i,j-1},dp_i[N][j])\\)\nとして逐次的に計算することができます。\n最後に、ビタミン\n\\(i\\)\n\\((1\\leq i\\leq 3)\\)\nの摂取のために食べる食べ物のカロリーの合計が\n\\(s_i\\)\n以下である時の\n「ビタミン\n\\(1,2,3\\)\nのうちもっとも摂取量が少ないものの摂取量」は\n\\(\\min(M_{1,s_1}, M_{2,s_2}, M_{3,s_3} )\\)\nで与えられるため、求めたい値は\n\\[\n\\max_{s_1+s_2+s_3=X} \\min(M_{1,s_1}, M_{2,s_2}, M_{3,s_3} )\n\\]\nです。\n\\( \\min(M_{1,s_1}, M_{2,s_2}, M_{3,s_3} )\\)\nを最大化する組み合わせ\n\\((s_1,s_2,s_3)=(S_1,S_2,S_3)\\)\nは貪欲法によって、求めることができます。\n具体的には、\n\\(S_1=S_2=S_3=0\\)\nから始めて次の操作をちょうど\n\\(X\\)\n回繰り返します。\n\\(M_{1,S_1}\\)\n,\n\\(M_{2,S_2}\\)\n,\n\\(M_{3,S_3}\\)\nを比較する。\nその中で一番小さいものが\n\\(M_{i,S_i}\\)\nであったとき、\n\\(S_i\\)\nを\n\\(1\\)\n増加させる。\n最も小さいものが複数ある場合はその中からどれを選んでも良い。\n求まった\n\\((S_1,S_2,S_3)\\)\nに対する値\n\\(\\min(M_{1,S_1}, M_{2,S_2}, M_{3,S_3} )\\)\nが最終的な答えとなります。\n時間計算量は全体で\n\\(O(NX)\\)\nであり、十分高速です。\nよって、この問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define M 5000\n#define INF (int)2e+9\n\nint main(void){\n\tint n,x,v,a,c;\n\tint dp[3][M+1]={};\n\tfor(int i=0;i<3;i++){\n\t\tfor(int j=0;j<M;j++){\n\t\t\tdp[i][j+1]=-INF;\n\t\t}\n\t}\n\n\tcin>>n>>x;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>v>>a>>c;\n\t\tfor(int j=x;j>=c;j--){\n\t\t\tdp[v-1][j]=max(dp[v-1][j],dp[v-1][j-c]+a);\n\t\t}\n\t}\n\tfor(int i=0;i<3;i++){\n\t\tfor(int j=0;j<x;j++){\n\t\t\tdp[i][j+1]=max(dp[i][j],dp[i][j+1]);\n\t\t}\n\t}\n\n\tint idx[3]={0,0,0};\n\tfor(int i=0;i<x;i++){\n\t\tif((dp[0][idx[0]]<=dp[1][idx[1]])&&(dp[0][idx[0]]<=dp[2][idx[2]]))idx[0]++;\n\t\telse if((dp[1][idx[1]]<=dp[0][idx[0]])&&(dp[1][idx[1]]<=dp[2][idx[2]]))idx[1]++;\n\t\telse idx[2]++;\n\t}\n\tcout<<min(dp[0][idx[0]],min(dp[1][idx[1]],dp[2][idx[2]]))<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "efba70063a905f5068a41d138c00835586d2f2aaa3f62edd3a2a95c80b9192c2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc390/abc390_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

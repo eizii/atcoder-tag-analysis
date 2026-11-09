@@ -1,0 +1,72 @@
+{
+  "problem_id": "abc109_b",
+  "title": "Shiritori",
+  "contests": [
+    {
+      "contest_id": "abc109",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 186,
+  "raw_difficulty": 93,
+  "contest_id": "abc109",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc109/tasks/abc109_b",
+  "statement": "配点 : 200 点 問題文 高橋くんは今日も 1 人でしりとりの練習をしています。 しりとりとは以下のルールで遊ばれるゲームです。 はじめ、好きな単語を発言する 以降、次の条件を満たす単語を発言することを繰り返す その単語はまだ発言していない単語である その単語の先頭の文字は直前に発言した単語の末尾の文字と一致する 高橋くんは、 10 秒間にできるだけ多くの単語を発言する練習をしています。 高橋くんが発言した単語の個数 N と i 番目に発言した単語 W_i が与えられるので、どの発言もしりとりのルールを守っていたかを判定してください。 制約 N は 2 \\leq N \\leq 100 を満たす整数である W_i は英小文字からなる長さ 1 以上 10 以下の文字列である 入力 入力は以下の形式で標準入力から与えられる。 N W_1 W_2 : W_N 出力 高橋くんのどの発言もしりとりのルールを守っていたなら Yes 、そうでなければ No を出力せよ。 入力例 1 4\r\nhoge\r\nenglish\r\nhoge\r\nenigma 出力例 1 No hoge が複数回発言されているのでしりとりのルールを守っていません。 入力例 2 9\r\nbasic\r\nc\r\ncpp\r\nphp\r\npython\r\nnadesico\r\nocaml\r\nlua\r\nassembly 出力例 2 Yes 入力例 3 8\r\na\r\naa\r\naaa\r\naaaa\r\naaaaa\r\naaaaaa\r\naaa\r\naaaaaaa 出力例 3 No 入力例 4 3\r\nabc\r\narc\r\nagc 出力例 4 No",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 高橋くんは今日も 1 人でしりとりの練習をしています。 しりとりとは以下のルールで遊ばれるゲームです。 はじめ、好きな単語を発言する 以降、次の条件を満たす単語を発言することを繰り返す その単語はまだ発言していない単語である その単語の先頭の文字は直前に発言した単語の末尾の文字と一致する 高橋くんは、 10 秒間にできるだけ多くの単語を発言する練習をしています。 高橋くんが発言した単語の個数 N と i 番目に発言した単語 W_i が与えられるので、どの発言もしりとりのルールを守っていたかを判定してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 N は 2 \\leq N \\leq 100 を満たす整数である W_i は英小文字からなる長さ 1 以上 10 以下の文字列である"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N W_1 W_2 : W_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 高橋くんのどの発言もしりとりのルールを守っていたなら Yes 、そうでなければ No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\r\nhoge\r\nenglish\r\nhoge\r\nenigma"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 No hoge が複数回発言されているのでしりとりのルールを守っていません。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 9\r\nbasic\r\nc\r\ncpp\r\nphp\r\npython\r\nnadesico\r\nocaml\r\nlua\r\nassembly"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 Yes"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 8\r\na\r\naa\r\naaa\r\naaaa\r\naaaaa\r\naaaaaa\r\naaa\r\naaaaaaa"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 No"
+    },
+    {
+      "heading": "入力例 4",
+      "text": "入力例 4 3\r\nabc\r\narc\r\nagc"
+    },
+    {
+      "heading": "出力例 4",
+      "text": "出力例 4 No"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc109/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:34:24.562110+00:00",
+  "statement_sha256": "2c3a37749460188ded538a9337bfaa2146b1e893f3a993073b3fb58f982bf5cc",
+  "editorials": []
+}

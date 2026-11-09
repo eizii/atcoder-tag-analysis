@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc217_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc217/editorial/2576",
+      "text": "この問題のように順列\n\\(P = (p_1, p_2,\\dots, p_N)\\)\nに対して\n\\(q_{p_i} = i\\)\nを満たす順列\n\\(Q = (q_1, q_2, \\dots,q_N)\\)\nのことを\n逆置換\nと呼びます。\n逆置換を使用するアルゴリズムは実は数多くあります。 例えば\n\\(P\\)\nがあったときに 「\n\\(i\\)\nは\n\\(P\\)\nの中で何番目にありますか？」というクエリがたくさん飛んでくるケースを考えましょう。このとき、単純に\n\\(P\\)\nを前から走査すると\n\\(\\mathrm{O}(N)\\)\nかかってしまいますが、逆置換をあらかじめ計算しておくと\n\\(q_i\\)\nが答えになるのでクエリを\n\\(\\mathrm{O}(1)\\)\nで処理することができます。\n実装方法はわかってしまえばシンプルで、\n\\(1 \\leq i \\leq N\\)\nに対して\nQ[P[i]] = i\nとすればよいです。\n\\(Q\\)\nを昇順に埋めていないので少し非直感的ですが、このアルゴリズムによって\n\\(P\\)\nの要素が取り得るすべての値\n\\(i\\)\n\\((1 \\leq i \\leq N)\\)\nに対して\n\\(Q_i\\)\nを埋めることができていることから正当性が確かめられます。\n別解として連想配列などのデータ構造を使用しても AC することができます。\nC++. Python による実装は以下の通りです。\nC++\nPython",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\n#define rep(i, n) for (int i = 0; i < (n); i++)\n\nint main() {\n  int N;\n  cin >> N;\n  vector<int> p(N), q(N);\n  for (auto& x : p) cin >> x, --x;\n  rep(i, N) q[p[i]] = i;\n  rep(i, N) cout << q[i] + 1 << \" \\n\"[i == N - 1];\n}",
+        "N = int(input())\nP = [0] + list(map(int, input().split()))\nQ = [-1] * (N + 1)\nfor i in range(1, N + 1):\n  Q[P[i]] = i\nprint(\" \".join(map(str, Q[1:])))"
+      ],
+      "text_sha256": "64193fdca36fe24deadfa19722ab672d1c958033f67240f43d373ef9cbf3665e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc217/abc217_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc217/editorial/3738",
+      "text": "※ これは大袈裟な解法です。\n順列の suffix array が逆順列になることを知っていると、suffix array を貼れば済むと気づきます。suffix array は\nACL にもある\nので貼りやすいです。\n提出コード：\nhttps://atcoder.jp/contests/abc217/submissions/30739857",
+      "codes": [],
+      "text_sha256": "578961574793a2976e97cb294f43675ac8d3e25860e093c8bdbb0e50337d4f18",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc217/abc217_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

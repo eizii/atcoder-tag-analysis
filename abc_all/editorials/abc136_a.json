@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc136_a",
+  "editorials": [
+    {
+      "text": "A: Transfer\n容器1 にはあとA −B ミリリットルまで入れることができます。よって、容器2 から移す水の量(ミリ\nリットル) はA −B とC の小さい方になります。したがって、容器2 に残る水の量はC −min(A −B, C)\nミリリットルになります。C++ 言語での実装例を以下に示します。\n1 #include <bits/stdc++.h>\n2\n3 using namespace std;\n4\n5 int main() {\n6\nint A, B, C; cin >> A >> B >> C;\n7\nint cap = A - B;\n8\nint use = min(C, cap);\n9\nint ans = C - use;\n10\ncout << ans;\n11 }\n",
+      "text_sha256": "6dde7db9ba6c88b214fa882d81f3c340b201a091d551c6869b3d83bafee17612",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc136/abc136_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

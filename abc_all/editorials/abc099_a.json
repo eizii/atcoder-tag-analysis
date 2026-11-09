@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc099_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc099/editorial.pdf",
+      "text": "A: ABD\n\n  1 回目から999 回目のコンテストの名前は‘ABC‘ から始まり、1000 回目から1998 回目のコ\nンテストの名前は‘ABD‘ から始まります。\n よって、N ≤999 ならば‘ABC‘、そうでないならば‘ABD‘ を出力するとよいです。\n\n#include <cstdio >\nint N;\nint main ()\n{\n         scanf (\"%d\",&N);\n         if(N <=999) puts (\"ABC \");\n         else puts (\"ABD \");\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "1254a958a34095a67353f83971186114a0a26120306d033f08e279d2522c5097"
+    }
+  ],
+  "status": "available"
+}

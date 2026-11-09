@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc250_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc250/editorial/3896",
+      "text": "まず、いくつか重要な観察を示します。\n素因数分解の一意性から、この問題は「条件を満たす\n\\(k\\)\nの個数を数える」問題から「条件を満たす\n\\((p,q)\\)\nの組の個数を数える」問題へと言い換えることができます。\nこの問題の制約は\n\\(N \\le 10^{18}\\)\nであるので、\n\\(q \\le 10^6\\)\nが成立します。\nなぜなら、もし\n\\(q > 10^6\\)\nであった場合、\n\\(pq^3 > 10^{18} \\ge N\\)\nとなってしまいます。\nさらに、\n\\(p<q\\)\nという制約が課されているため、\n\\(p \\le 10^6\\)\nも成立します。\nこの観察から、\n\\(10^6\\)\n以下の素数表 (これは、エラトステネスの篩などを利用して求められます) から答えが求められないか考えます。\nここで、以下の解法が成立します。\nまず、素数表から\n\\(p\\)\nにあたる素数を決め打つ。\n次に、その\n\\(p\\)\nに対して\n\\(pq^3 \\le N\\)\nを満たす素数\n\\(q\\)\nの最大値\n\\(Q\\)\nを求める。\nここで、\n\\(p\\)\nより大きく\n\\(Q\\)\n以下である全ての素数\n\\(r\\)\nについて、\n\\(pr^3 \\le N\\)\nとなるので、この数を条件を満たす\n\\((p,q)\\)\nの組の個数に加える。\n例えば、\n\\(N=256\\)\nである場合に、\n\\(p=2\\)\nを決め打った場合\n\\(Q=5\\)\nであるが、\n\\(2 \\times 3^3 \\le 256\\)\nと\n\\(2 \\times 5^3 \\le 256\\)\nはどちらも成立する。\n以上の流れを\n\\(10^6\\)\n以下の全ての素数\n\\(p\\)\nに対して行う。\n\\(Q\\)\nを求める部分について、\n\\(p\\)\nごとにそれぞれ素数表を二分探索をしてもよいですが、\n\\(p\\)\nが小さい方から調べていく際に\n\\(Q\\)\nは(広義)単調減少することを利用して尺取り法のような方法で求めることもできます。\n素数表を作る部分を除いた計算量は、\n\\(\\sqrt[3]{N}\\)\n以下の素数の個数を\n\\(P\\)\nとし、\n\\(O(P)\\)\nまたは\n\\(O(P \\log P)\\)\nです。\n\\(pq^3\\)\nを求める際にひとつ注意するべきことがあります。実装によっては\n\\(p,q \\approx 10^6\\)\nすなわち\n\\(pq^3 \\approx 10^{24}\\)\n程度となる計算を行う必要がある可能性があります。この場合、 64bit 整数でも収まらないので先に double 型などの浮動小数点を扱える実数型で大まかに値の大きさを見積もっておき、その後詳細な値を調べるテクニックがあります。詳しくは実装例の関数 f を参照してください。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n#define MAXP 1000005\n\nvector<long long> prime_list;\nvoid construct_plist(){\n  vector<bool> fl(MAXP,false);\n  for(int i=2;i<MAXP;i++){\n    if(fl[i]){continue;}\n    prime_list.push_back(i);\n    for(int j=i;j<MAXP;j+=i){fl[j]=true;}\n  }\n}\n\nlong long f(long long p,long long q){\n  double est=1;\n  est=(q*q*q);\n  est*=p;\n  if(est>4e18){return 4e18;}\n  return p*q*q*q;\n}\n\nint main(){\n  construct_plist();\n  long long n;\n  cin >> n;\n  long long res=0;\n  int sz=prime_list.size();\n  int q=sz-1;\n  for(int p=0;p<sz;p++){\n    while(p<q && f(prime_list[p],prime_list[q])>n){q--;}\n    if(p>=q){break;}\n    res+=(q-p);\n  }\n  cout << res << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "9d987a7754cb420b7287a5829b2f158ce32bf909fb9e025e4a7c94e91a4b91ee",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc250/abc250_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc250/editorial/3950",
+      "text": "公式解説の方法では\n\\(pq^3\\)\nの値が64bit整数で収まらない可能性があり、やや面倒です。\n代わりに、次のような解法を使えばより簡単な方針で解くことができます。\nまず、素数表から\n\\(q\\)\nにあたる整数を決め打つ。\n次に、条件を満たす\n\\(p\\)\nの値を考える。これは、\n\\([1, \\min(q-1, \\frac{N}{q^3})]\\)\nを満たす素数全てである。\nここで、\n\\([1, \\min(q-1, \\frac{N}{q^3})]\\)\nを満たす素数の個数は、素数の個数の累積和を用いれば\n\\(O(1)\\)\nで計算できる。\n以上の流れを\n\\(N^{\\frac{1}{3}}\\)\n以下の全ての素数\n\\(q\\)\nに対して行う。\n素数の整数性から、\n\\(\\frac{N}{q^3}\\)\nは端数を切り捨てても構いません(つまり、整数型で扱っても問題ありません)。\nこれにより、演算中の全ての値が\n\\(N\\)\n以下に収まります。\n実装例(C++):",
+      "codes": [
+        "#include<algorithm>\n#include<cmath>\n#include<iostream>\n#include<vector>\n/**\nmax以下の素数を昇順に列挙します。\n計算量はO(max)です。\n制約: 0≦max≦10^9\n*/\nstd::vector<int> getPrimes(int max) {\n  std::vector<int> primes;\n  std::vector<int> lpf(max + 1, 0);\n  for (int i = 2;i <= max;++ i) {\n    if (lpf[i] == 0) {\n      lpf[i] = i;\n      primes.push_back(i);\n    }\n    for (int p : primes) {\n      int mul = p * i;\n      if (mul > max || p > lpf[i]) break; // ベルトラン＝チェビシェフの定理より、p*iはmaxの2倍以下\n      lpf[mul] = p;\n    }\n  }\n  return primes;\n}\n\nint main() {\n  long long N;\n  std::cin >> N;\n  int cbrtN = std::cbrt(N);\n  std::vector<int> primes = getPrimes(cbrtN);\n  std::vector<int> cumsum(1, 0); // cumsum[i]はi以下の素数の個数を持つ\n  cumsum.reserve(cbrtN + 1);\n  for (int i = 1, pi = 0, p = 2;i <= cbrtN;++ i) {\n    int last = cumsum[cumsum.size() - 1];\n    if (i == p) {\n      ++ last;\n      ++ pi;\n      p = pi >= (int)primes.size() ? cbrtN + 1 : primes[pi];\n    }\n    cumsum.push_back(last);\n  }\n  long long ans = 0;\n  for (int q : primes) {\n    int pMax = (int)std::min(q - 1LL, N / q / q / q);\n    ans += cumsum[pMax];\n  }\n  std::cout << ans << std::endl;\n}"
+      ],
+      "text_sha256": "6245cbfeb3ec2ba31d6557717c847ffb3fa266a0f938c66dd8a01085841672c0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc250/abc250_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

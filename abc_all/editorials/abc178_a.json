@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc178_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc178/editorial/103",
+      "text": "問題文で指示された通りに、if文を使って条件分岐を行うことで正解することができます。\n条件分岐を行う解答例（C++）\nまた、\n\\(x=0\\)\nのとき\n\\(1\\)\nで\n\\(x=1\\)\nのとき\n\\(0\\)\nになるような数式を使う方法もあります。\n数式を使う解答例（C++）\n\\(1-x\\)\nの他に、not\n\\(x\\)\n、\n\\(x\\)\nxor\n\\(1\\)\nなどが考えられます。\nnot は否定、xor は排他的論理和を表します。",
+      "codes": [
+        "#include<iostream>\nusing namespace std;\n\nint main(){\n    int x;\n    cin>>x;\n    if(x==0)cout<<1<<\"\\n\";\n    if(x==1)cout<<0<<\"\\n\";\n}",
+        "#include<iostream>\nusing namespace std;\n\nint main(){\n    int x;\n    cin>>x;\n    cout<<1-x<<\"\\n\";\n}"
+      ],
+      "text_sha256": "d79d84093bef2d2fdee03c361ce699750928e6a1f35362060332d9fb66c6d06e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc178/abc178_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

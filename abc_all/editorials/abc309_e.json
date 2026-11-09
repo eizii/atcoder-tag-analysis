@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc309_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc309/editorial/6748",
+      "text": "\\(\\mathrm{dp}_i\\)\nを「人\n\\(i\\)\nは最大で何代先まで補償対象者か」とします。ただし、人\n\\(i\\)\n自身が最後ならば\n\\(\\mathrm{dp}_i = 0\\)\n、人\n\\(i\\)\nが保障対象者でないならば\n\\(\\mathrm{dp}_i =-1\\)\nです。\nここで、\n\\(m_i\\)\nを\n\\(x_j=i\\)\nを満たす\n\\(j\\)\nに対する\n\\(y_j\\)\nの最大値(存在しなければ\n\\(-1\\)\nとすると、\n\\(\\mathrm{dp}_i = \\max(m_i, \\mathrm{dp}_{p_i}-1 )\\)\nです(\n\\(i=1\\)\nの時は\n\\(p_i\\)\nが定まらないので前者のみ)。これを\n\\(i\\)\nの昇順に求め、\n\\(\\mathrm{dp}_i  \\geq 0\\)\nを満たす\n\\(i\\)\nの個数を出力することで正答できます。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\t\nint main() {\n    \n\tint N,M;\n\tcin>>N>>M;\n\t\n\tvector<int> p(N);\n\t\n\tfor(int i=1;i<N;i++){\n\t\tcin>>p[i];\n\t\tp[i]--;\n\t}\n\t\n\tvector<int> dp(N,-1);\n\t\n\tfor(int i=0;i<M;i++){\n\t\tint x,y;\n\t\tcin>>x>>y;\n\t\tx--;\n\t\tdp[x] = max(dp[x],y);\n\t}\n\t\n\tfor(int i=1;i<N;i++){\n\t\tdp[i] = max(dp[i],dp[p[i]]-1);\n\t}\n\t\n\tint ans = 0;\n\tfor(int i=0;i<N;i++){\n\t\tif(dp[i]>=0)ans++;\n\t}\n\t\n\tcout<<ans<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "22bc35b96fb64b8f8a0812082e1ed54b08c89bd1e94d92e7ab500844b45e2dcc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc309/abc309_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

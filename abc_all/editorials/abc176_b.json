@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc176_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc176/editorial/63",
+      "text": "(この解説は、\nkyopro_friends\nさんのpdf版解説の移植となります。)\n\\(N\\)\nを文字列として読み込み、各桁の数の和が\n\\(9\\)\nの倍数になるかどうかを判定します。\nC言語での実装例\nなお、多倍長整数を扱うことのできるPythonなどの言語では、\n\\(N\\)\nが\n\\(9\\)\nの倍数であるかどうかを直接判定することもできます。\nPythonでの実装例",
+      "codes": [
+        "char s[200010];\nint main(){\n    scanf(\"%s\",s);\n    int len=strlen(s);\n    int sum=0;\n    for(int i=0;i<len;i++)sum+=s[i]-'0';\n    if(sum%9==0){\n        puts(\"Yes\");\n    }else{\n        puts(\"No\");\n    }\n}",
+        "N=int(input())\nif N%9 == 0:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "98061256a3989fc99ebb115a095e77538f58741b49062cb7ae3d5da61e5dd48c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc176/abc176_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,54 @@
+{
+  "problem_id": "abc269_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc269/editorial/4846",
+      "text": "この問題には様々な方針があります。但し実装量に大きな差があるので楽な方針を考えましょう。\nサンプル\n\\(1\\)\nの\n\\(6\\)\nつ目の質問に着目します。\nグリッドの各行ごとに考えてみましょう。グリッドは以下のようでした。\nまず、各行ごとの和を求めます。各行ごとに非零な要素は公差\n\\(2\\)\nの等差数列をなすので、等差数列の和の公式を用いて計算できます。\nまた、グリッドがチェッカー模様を成すことから、各行ごとの最も左の非零な要素は (存在するなら) 取り出された各行の\n\\(1\\)\n要素目か\n\\(2\\)\n要素目です。(最も右のものも同様です。)\n次に、行ごとにまとめた後のことを検討します。まず奇数行目に着目しましょう。\n奇数行目について以下が成り立ちます:\n各行ごとの非零な要素の数を\n\\(x\\)\nとすると、行ごとの値の総和は公差\n\\(2 \\times x \\times M\\)\nの等差数列になります。(\n\\(x=0\\)\nでも成り立ちます)\n理由は、非零な要素がある列について、各列の値が公差\n\\(2 \\times M\\)\nの等差数列を成すからです。\n以下のように、偶数行目についても同様です。\nよって、\n\\(A_i\\)\n行目と\n\\(A_i+1\\)\n行目の\n\\(C_i\\)\n列目から\n\\(D_i\\)\n列目に関する情報を計算した後、\n\\(A_i\\)\n行目から\n\\(B_i\\)\n行目までの和を取るという方針がとれます。\n実装上のポイントとして、等差数列の和を取る操作を何度も行うことになるので、このように何度も行う操作は関数として取り出して書いておくと実装の軽減に繋がります。\n実装例(C++):",
+      "codes": [
+        "1  0  3  0\n  0  6  0  8\n  9  0 11  0\n  0 14  0 16\n 17  0 19  0",
+        "1  0  3  0\n  9  0 11  0\n 17  0 19  0",
+        "0  6  0  8\n  0 14  0 16",
+        "#include<bits/stdc++.h>\n#define mod 998244353\n#define inv2 499122177 // inverse of 2\n\nusing namespace std;\n\n// A_1 = fir\n// A_i = fir + (i-1) * d\n// return A_1 + A_2 + ... + A_{num}\nlong long arithmetic_sum(long long fir,long long d,long long num){\n  long long las=(fir+(num-1)*d)%mod;\n  long long res=(fir+las)%mod;\n  res*=num;res%=mod;\n  res*=inv2;res%=mod;\n  return res;\n}\n\nusing pl=pair<long long,long long>;\n\nlong long n,m;\npl row_data(long long x,long long l,long long r){\n  if((x+l)%2){l++;}\n  if((x+r)%2){r--;}\n  if(l>r){return {0,0};}\n\n  long long mi=((x-1)*m+l)%mod;\n  long long num=1+(r-l)/2;\n  long long sum=arithmetic_sum(mi,2,num);\n\n  num*=2;num%=mod;\n  num*=m;num%=mod;\n  return {sum,num};\n}\n\nint main(){\n  int q;\n  cin >> n >> m >> q;\n  for(int i=0;i<q;i++){\n    long long a,b,c,d;\n    cin >> a >> b >> c >> d;\n\n    pl r1=row_data(a,c,d);\n    pl r2=row_data(a+1,c,d);\n    long long c1=(b-a+1)/2 + (b-a+1)%2;\n    long long c2=(b-a+1)/2;\n    long long res=0;\n    res+=arithmetic_sum(r1.first,r1.second,c1);res%=mod;\n    res+=arithmetic_sum(r2.first,r2.second,c2);res%=mod;\n    cout << res << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "cf6b89b05299318ffafc44c07142f6586fe71c7972eb65731b3b1e144953ad3b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc269/abc269_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc269/editorial/4853",
+      "text": "\\(A_i,B_i,C_i,D_i\\)\nが与えられる質問の答えを、以下\n\\(f(A_i,B_i,C_i,D_i)\\)\nと書きます。また、\n\\(A>B\\)\nもしくは\n\\(C>D\\)\nのとき\n\\(f(A,B,C,D)=0\\)\nとします。\n対称性に着目した別解を紹介します。\n\\(B-A\\)\nと\n\\(D-C\\)\nの偶奇が一致している場合、\n\\(f(A,B,C,D)\\)\nを簡単に求められます。\n対称性から正整数が書かれたマスの値の平均が\n\\((\\frac{A+B}{2}-1)\\times M + \\frac{C+D}{2}\\)\nと求まります。正整数が書かれたマスの個数を数えるのも容易なので、\n\\(f(A,B,C,D)\\)\nを求められました。\n\\(B-A\\)\nと\n\\(D-C\\)\nの偶奇が異なる場合を考えます。\n\\(D-C\\)\nが奇数の場合、恒等式\n\\[f(A,B,C,D)=f(A,B,C,D-1)+f(A,B,D,D)\\]\nを用います。\n恒等式の右辺の\n\\(f\\)\nではどちらも\n\\(B-A,D-C\\)\nの偶奇が一致しているので、右辺は先述の方法で求められます。よって\n\\(f(A,B,C,D)\\)\nも求まります。\n\\(D-C\\)\nが偶数の場合、恒等式\n\\[f(A,B,C,D)=f(A,B-1,C,D)+f(B,B,C,D)\\]\nを用いると同様の手法で計算できます。\n実装例(c++):",
+      "codes": [
+        "#include <bits/stdc++.h>\n\n#include <atcoder/modint>\n\nusing namespace std;\nusing mint = atcoder::modint998244353;\nusing ll = long long;\n\nint n, m;\nmint f(int a, int b, int c, int d) {\n    if(a > b or c > d) return 0;\n    if(((b - a) ^ (d - c)) & 1) {\n        if((d - c) & 1)\n            return f(a, b, c, d - 1) + f(a, b, d, d);\n        else\n            return f(a, b - 1, c, d) + f(b, b, c, d);\n    }\n    mint ave = (mint(a + b) / 2 - 1) * m + mint(c + d) / 2;\n    mint cnt = (ll)(b - a + 1) * (d - c + 1) / 2;\n    if(!((b - a) & 1) and !((a + c) & 1)) cnt++;\n    return ave * cnt;\n}\n\nint main() {\n    cin >> n >> m;\n    int q;\n    cin >> q;\n    while(q--) {\n        int a, b, c, d;\n        cin >> a >> b >> c >> d;\n        cout << f(a, b, c, d).val() << endl;\n    }\n}"
+      ],
+      "text_sha256": "4b0884af24cf396dfd596bc34b27242f6ab7ac4f921a7ad143f475c887111a71",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc269/abc269_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc269/editorial/4856",
+      "text": "以下のグリッドの和を求めることを考えてみます。\n奇数行のゼロでないグリッドを抜き出すと、\nとなります。以下ではこのグリッドを元グリッドと呼び、この合計値を求め、偶数行については別途考えることとします。\n元グリッド全体の平均値が求まれば、元グリッドのマス数に書かれている数字の和は (平均値) x (元グリッドのマス数)で求めることができます。\nさて、元グリッド全体の平均値をO(1)で求めるためにはどのように計算すればよいでしょうか？\nまず各行の平均値を求めてみましょう。初項a、末項l、項数nの等差数列の和はn(a + l)/2であることから、平均値は(a + l) / 2であることがわかります。\nの場合だと、(3 + 9) / 2 = 6が平均値です。\n次に各行の平均値の平均値ですが、\nで見ていくと、やはりこれも等差数列になっているため、(a + l) / 2で求めることができます。この例だと(2 + 18) / 2 = 10が平均値であり、これが元グリッド全体の平均値です。\n結局、元グリッドの左上、右上、左下、右下の４つのマスの数字の平均値がグリッド全体の平均値となります。\nさらに言うと(元グリッドの左上の数字) +(元グリッドの 右下の数字) = (元グリッドの右上の数字) +(元グリッドの 左下の数字) が成立するため、\n元グリッド全体の平均値は(元グリッドの左上の数字)+(元グリッドの右下の数字) / 2で求めることができます。\n上記のグリッドの例で言えば(1 + 19) / 2 = 10が平均値です。この性質はどのような元グリッドでも成立します。\n左上と右下のマスがどこにあたるかはmod2に気をつけながら求めれば、元グリッドのマス数を求めることができます。さらに定義どおり左上と右下の値を計算することで、元グリッド全体の平均値を求めることができます。\n同様の議論は偶数行についても成立するので、それらの合計が答えです。\n実装例(Rust)\nhttps://atcoder.jp/contests/abc269/submissions/34942209",
+      "codes": [
+        "1  0  3  0\n  0  6  0  8\n  9  0 11  0\n  0 14  0 16\n 17  0 19  0",
+        "1  3 \n  9  11\n 17 19",
+        "3 5 7 9",
+        "2 \n 10 \n 18"
+      ],
+      "text_sha256": "47244d69c90a6be610cd560aeeaa3f9553b2740079fc7cfd15bef3d2e80c7078",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc269/abc269_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc269/editorial/4860",
+      "text": "https://twitter.com/kyopro_friends/status/1571133784799744000\n(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",
+      "codes": [],
+      "text_sha256": "2d5ef06ee3eede787b6606e9ddf9c5ea742012c4e2a414555673655d0efc32fa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc269/abc269_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

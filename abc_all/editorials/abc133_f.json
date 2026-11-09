@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc133_f",
+  "editorials": [
+    {
+      "text": "F: Colorful Tree\n与えられた木を、頂点1 を根とする根付き木とみなします。また、任意の頂点w に対し、根から頂点w まで\nの距離をdistw とします。このとき、二頂点u.v 間の距離はu, v の最近共通祖先(英語版Wikipedia の記事)\nをa としてdistu + distv −2dista と書けます。よって、各問i に対して次の二つの部分問題を解けばよいこ\nとになります。\n1. 二頂点ui, vi の最近共通祖先ai を求める。\n2. 色xi のすべての辺の長さがyi に変更されたときのdistui, distvi, distai を求める。\n部分問題1 は有名問題です。以下、よく知られている解法を紹介します。任意の頂点w に対し、par(w, 0)\nをw、par(w, 1) をw の親、par(w, 2) をw の親の親、. . . とします(根の親は根とします)。まず、事前にす\nべての頂点w と整数i = 0, 1, . . . , ⌊log2 N⌋に対してpar(w, 2i) を求めておきます。これは、par(w, 2i+1) =\npar(par(w, 2i), 2i) に注意するとO(N log N) 時間で行えます。また、すべての頂点w に対してその深さ\ndepthw (根までの辺数) も事前に求めておきます。これらを元に、以下のようにして二頂点ui, vi の最近共通\n祖先をそれぞれO(log N) 時間で求めることができます。\n1. a = ui, b = vi とする。\n2. deptha < depthb ならb = par(b, depthb −deptha)、そうでなければa = par(a, deptha −depthb) と\nする。\n3. a = b ならa を返す。\n4. i = ⌊log2 N⌋, ⌊log2 N⌋−1, . . . , 1, 0 に対してこの順に次を行う: par(a, 2i)̸ = par(b, 2i) ならa =\npar(a, 2i), b = par(b, 2i) とし、そうでなければ何もしない。\n5. par(a, 1) を返す。\n部分問題2 を解くには、まず事前にすべての頂点w に対して辺の長さが変更される前のdistw を求めてお\nきます。色xi のすべての辺の長さがyi に変更されると、distw はnum(xi, w) × yi −sum(xi, w) だけ増加\nします。ここでnum(xi, w) は根と頂点w の間に存在する色xi の辺の数、sum(xi, w) はそれらの辺の元の\n長さの総和です。\nnum(xi, w), sum(xi, w) を求めるには、まず木のN −1 本の辺をDFS を行う際に通過する順に並べたリ\nスト(オイラーツアー) を作ります。例えば、入力例1 の木に対するオイラーツアーの例は次のようになりま\nす: +e1, +e3, −e3, +e4, −e4, −e1, +e2, −e2。ここで、i 番目の辺を根から遠ざかる方向にたどる際に+ei、根\nに近づく方向にたどる際に−ei と表記しています。このリストのei をi 番目の辺の元の長さで置き換えた数\n列を考えると、w とw の親を結ぶ辺がj 番目の辺であるとして、この数列の先頭から+ej に対応する要素ま\nでの和が根とw の間に存在する辺の元の長さの総和と一致します。この数列を順序を保ったまま辺の色ごと\nに分割し、事前に先頭から各要素までの和を計算しておけば、色xi と頂点w が指定された際にsum(xi, w)\nを二分探索によりO(log N) 時間で求めることができます。num(xi, w) についても同様です。\n以上の処理を行えば、合計O((N + Q) log N) 時間ですべての問いを処理することができます。\n\nABC 133 Editorial\ndrafear, yosupo, potetisensei, yuma000, camypaper, evima\nJuly 7, 2019\n",
+      "text_sha256": "81907a5dcd7c5c957b2e0888e63b40b2f09b6f5db71807c6e9130f703e56bda6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc133/abc133_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

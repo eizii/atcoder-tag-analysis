@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc119_a",
+  "editorials": [
+    {
+      "text": "A: Still TBD\n正解までの道のりを細かく分割すると次の通りです。\n1. 標準入力から文字列s を受け取る。(または、別の何らかの形で入力を受け取る。)\n2. s が表す日付が2019/04/30 以前であるか判定し、答えとなる文字列Heisei またはTBD を得る。\n3. 得た文字列を標準出力に出力する。\n手順1, 3 についてはpractice contest 問題A の言語別サンプルコードが参考になります。手順2 につい\nては、まずif 文などの何らかの条件分岐を行う機構を用いる必要があります。それに加えて、s と文字列\n2019/04/30 を辞書式の順序で直接比較するのが一つの手です。文字列を辞書式順序で比較する機能は現代の\n多くの言語に標準で実装されており、「自前」で実装する必要はありません。Python3 での実装例を示します。\n1 S = input()\n2 print('Heisei' if S <= '2019/04/30' else 'TBD')\n言語によっては、入力をはじめから整数と文字の並びとして受け取り、「月」の部分が4 以下であるか否か\nを判定するという方針も大いに考えられます。C++ での実装例を示します。\n1 #include <iostream>\n2 using namespace std;\n3 int main(){\n4\nint y, m, d;\n5\nchar c1, c2;\n6\ncin >> y >> c1 >> m >> c2 >> d;\n7\ncout << (m <= 4 ? \"Heisei\" : \"TBD\") << endl;\n8 }\n",
+      "text_sha256": "7f5d8424910f061ead7d414410e51552ea180260a00fbf50393038a64c2572a3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc119/abc119_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

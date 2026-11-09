@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc294_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc294/editorial/5990",
+      "text": "\\(A=(a _ 1,\\ldots,a _ l)\\) を連長圧縮した列 \\(\\widetilde{A}=(x _ i,l _ i) _ {1\\leq i\\leq n}\\) に対して、\\(I _ A=(I _ {A,i}) _ {0\\leq i\\leq n}=\\left(\\displaystyle\\sum _ {1\\leq j\\leq i}l _ j\\right) _ {0\\leq i\\leq n}\\) と定めます。\nすると、\\(j=1,2,\\ldots,n\\) に対して、\\(I _ {A,j-1}\\lt i\\leq I _ {A,j}\\) を満たす \\(i\\) に対する \\(a _ i\\) の値はすべて等しいです。\n\\(1,2\\) 行めの数列を表す列 \\(R _ 1,R _ 2\\) に対して、\\(I _ {R _ 1},I _ {R _ 2}\\) をマージしたソート済み列を \\(I=(I _ 0,\\ldots,I _ {N _ 1+N _ 2+1})\\) とします。\nこのとき、\\(j=1,2,\\ldots N _ 1+N _ 2+1\\) に対して、\\(I _ {j-1}\\lt i\\leq I _ j\\) を満たす \\(i\\) に対する \\((R _ {1,i},R _ {2,i})\\) の値はすべて等しいです。\nよって、各 \\(I _ j\\) に対して、\\(R _ {1,I _ j}=R _ {2,I _ j}\\) のときに答えに \\(I _ j-I _ {j-1}\\) を加えることでこの問題を解くことができました。\n時間計算量は \\(O(N _ 1+N _ 2)\\) です。\n実装例は以下のようになります。\n以下の実装では、非負整数 \\(i,j\\) について、\\(i=j\\iff i\\operatorname{xor}j=0\\) が成り立つことを利用しています。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n\n    unsigned long L;\n    unsigned N, M;\n    cin >> L >> N >> M;\n\n    vector<pair<unsigned long, unsigned>> A(N), B(M);\n    for (auto&&[l, v] : A)\n        cin >> v >> l;\n    for (auto&&[l, v] : B)\n        cin >> v >> l;\n    A.emplace(begin(A));\n    B.emplace(begin(B));\n\n    for (unsigned i{}; i < N; ++i) {\n        A[i + 1].first += A[i].first;\n        A[i].second ^= A[i + 1].second;\n    }\n    for (unsigned i{}; i < M; ++i) {\n        B[i + 1].first += B[i].first;\n        B[i].second ^= B[i + 1].second;\n    }\n\n    vector<pair<unsigned long, unsigned>> C(N + M + 2);\n    merge(begin(A), end(A), begin(B), end(B), begin(C));\n\n    for (unsigned i{}; i < N + M + 1; ++i) {\n        C[i].first = C[i + 1].first - C[i].first;\n        C[i + 1].second ^= C[i].second;\n    }\n    C.pop_back();\n\n    unsigned long ans{};\n    for (const auto&[l, c] : C)\n        if (c == 0)\n            ans += l;\n\n    cout << ans << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "f6d54260a6e8e8079a96d14d2f328bfb3c52dc2c902475569476b48d292909f2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc294/abc294_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc294/editorial/6008",
+      "text": "一言で述べると、二つの行をそれぞれ左から右へと見ていけば線形時間で答えを求められます。\nより詳しくアルゴリズムを述べると、以下の通りです。\n\\(ans = 0, i = 1, j = 1\\)\nと初期化する。\n\\(i \\leq N\\)\nかつ\n\\(j \\leq M\\)\nである限り、以下の一連の手順を繰り返す。\n二つの「ブロック」\n\\((a_i, b_i), (c_j, d_j)\\)\nを検討する。もし\n\\(a_i = c_j\\)\nなら、\n\\(ans\\)\nにこれらのブロックの「共通部分」の長さを足す。\nもしブロック\n\\((a_i, b_i)\\)\nの右端がブロック\n\\((c_j, d_j)\\)\nの右端より左側にあるなら、\n\\(i\\)\nに\n\\(1\\)\nを足す。そうでないなら、\n\\(j\\)\nに\n\\(1\\)\nを足す。\n\\(ans\\)\nを出力する。\n実装例（Python）",
+      "codes": [
+        "L, N, M = map(int, input().split())\nA = [list(map(int, input().split())) for i in range(N)]\nB = [list(map(int, input().split())) for i in range(M)]\nans, i, j, p, q = 0, 0, 0, 0, 0\nwhile i < N and j < M:\n    if A[i][0] == B[j][0]:\n        ans += min(p + A[i][1], q + B[j][1]) - max(p, q)\n    if p + A[i][1] < q + B[j][1]:\n        p += A[i][1]\n        i += 1\n    else:\n        q += B[j][1]\n        j += 1\nprint(ans)"
+      ],
+      "text_sha256": "a2bb562de88b2d32a3943a5ac59c18819a40dc6a1d529d9365d37bbd9707e88d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc294/abc294_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

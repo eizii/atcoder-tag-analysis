@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc472_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc472/editorial/24788",
+      "text": "実際にシミュレーションします。 シミュレーションする上では直近 \\(M\\) 日間で食べたおやつのカロリーの総和が高速に求められればよく、差分更新すると簡潔に実装できます。 実装例(C++) 実装例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n  int N, M;\n  long long K;\n  cin >> N >> M >> K;\n  vector<int> A(N);\n  for (auto &v : A) cin >> v;\n  long long sum = 0;\n  for (int i = 0; i < N; i++) {\n    if (i >= M) sum -= A[i - M];\n    if (sum + A[i] <= K) {\n      sum += A[i];\n      cout << \"Yes\\n\";\n    } else {\n      A[i] = 0;\n      cout << \"No\\n\";\n    }\n  }\n}\n",
+        "N, M, K = map(int, input().split())\nA = list(map(int, input().split()))\ns = 0\nfor i in range(N):\n  if i >= M:\n    s -= A[i - M]\n  if s + A[i] <= K:\n    s += A[i]\n    print(\"Yes\")\n  else:\n    A[i] = 0\n    print(\"No\")\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "25687c768af2359ee3fea3b75beb5dbc5630265037fce327114ae2699664be03"
+    }
+  ],
+  "status": "available"
+}

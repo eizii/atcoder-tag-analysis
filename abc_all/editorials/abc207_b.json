@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc207_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc207/editorial/2143",
+      "text": "実は、高橋くんの目標が達成可能な場合必要な操作回数の最小値は\n\\(A\\)\n以下になります。その理由を説明します。\nまずはじめに、問題文中の操作や高橋くんの目標を数式で表してみましょう。高橋くんが\n\\(x\\)\n回目の操作を行ったあと、箱の中のボールの個数はそれぞれ以下の通りになっています。\n水色のボールの個数\n\\(\\cdots\\)\n\\(A+Bx\\)\n赤色のボールの個数\n\\(\\cdots\\)\n\\(Cx\\)\nまた、高橋くんの目標が達成されるためには、以下が成り立っている必要があります。\n(水色のボールの個数)\n\\(\\leq D \\times\\)\n(赤色のボールの個数)\nよってこの問題は以下のように表すことができます。\n\\(A+Bx \\leq D \\times Cx\\)\nを満たすような非負整数\n\\(x\\)\nは存在するか。存在するなら、そのような\n\\(x\\)\nの最小値を求めよ。\n\\(A+Bx \\leq D \\times Cx\\)\nを式変形してみましょう。\n\\[\nA+Bx \\leq D \\times Cx \\\\\n\\Leftrightarrow A \\leq (CDx-Bx) \\\\\n\\Leftrightarrow A \\leq (CD-B)x\n\\]\n明らかに、\n\\(CD-B\\)\nが非正であるなら高橋くんの目標は達成されません。そうでない場合、\n\\(x\\)\nは\n\\(\\frac{A}{CD-B}\\)\nの切り上げとなります。\n\\(CD-B\\)\nは正整数ですから、\n\\(x\\)\nの値は\n\\(A\\)\n以下となります。\n故に必要な操作回数の最小値が\n\\(A\\)\n以下になることが示されました。このように、答えの上限を見積もることは非常に重要です。\n実装の際は以下のように\n\\(Θ(A)\\)\n回のループを回して判定すればよいです。オーバーフローには注意しましょう。\n実装例 (C++)\nなお、次のように\n\\(O(1)\\)\n回の計算で答えを求めることも可能です。\n実装例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    long long A,B,C,D; cin >> A >> B >> C >> D;\n    long long blue = A, red = 0;\n    for(int i = 1; i <= A; i++){\n        blue += B;\n        red += C;\n        if(blue <= D*red){\n            cout << i << endl;\n            return 0;\n        }\n    }\n    cout << -1 << endl;\n}",
+        "A,B,C,D = map(int,input().split())\nans = -1\ndiff = C*D-B\nif 0 < diff:\n    ans = (A+diff-1)//diff\nprint(ans)"
+      ],
+      "text_sha256": "51389fd2b030e1f795b960440d821e3ea3fe9648cc10c7f9b79371c2413123e8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc207/abc207_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

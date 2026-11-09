@@ -1,0 +1,21 @@
+{
+  "problem_id": "abc264_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4581",
+      "text": "プログラミングの学習 / AtCoder を始めたばかりの方へ\nプログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか試すことをおすすめします。\nC++入門 AtCoder Programming Guide for beginners (APG4b)\nは、競技プログラマー向けのC++入門用コンテンツです。\nまた、プログラミングコンテストに慣れてきた方向けに、以下のコンテンツも常設されています。\n競プロ典型 90 問\nでは、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\nAtCoder Library Practice Contest\nでは、AtCoderで使用可能な発展的なアルゴリズム等を取り扱うライブラリである\nAtCoder Library\nを使う練習をすることができます。\n解法1. 7個の if 文で解く方法\n例えば、\n\\(L \\le 4 \\le R\\)\nであれば、\natcoder\nのうち\n\\(4\\)\n文字目である\no\nを出力する必要があります。\nこれと同様の考えを続けて\n\\(7\\)\n個の if 文を用いてこの問題に正解できます。\n実装例(C++):\n解法2. 解法1にループを導入する\n先ほどの\n\\(7\\)\nつの if 文を ループでまとめて取り扱うことを考えます。\n\\(S=\\)\natcoder\nと定義して、\n\\(L \\le i \\le R\\)\nなら\n\\(S\\)\nの\n\\(i\\)\n文字目を出力することを\n\\(i\\)\nが小さい方から繰り返せばよいです。\n言語によっては文字列の先頭が\n\\(0\\)\n文字目であったり\n\\(1\\)\n文字目であったりする点に注意してください。例えば C++ の\nstring\n型は先頭が\n\\(0\\)\n文字目です。\n実装例(C++):\n解法3. ループを\n\\(L\\)\n文字目から\n\\(R\\)\n文字目まで回す\n\\(L\\)\n文字目から\n\\(R\\)\n文字目まで回すようなループを使って以下のように出力することもできます。\n実装例(C++):\n解法4.\nsubstr\n等の文字列を取り扱う機能を活用する\nC++ の\nstring\n型には\nsubstr\nという機能があります。\n(\nstring\n型の変数).substr(\n\\(x\\)\n,\n\\(y\\)\n) とすることで、先頭から\n\\(x\\)\n文字目を始点として\n\\(y\\)\n文字の部分文字列を取り出すことができます。\n再度になりますが、 C++ では\nstring\n型の先頭の文字は\n\\(0\\)\n文字目であることに注意してください。\n実装例1(C++):\n実装例2(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int l,r;\n  cin >> l >> r;\n  if(l<=1 && 1<=r){cout << 'a';}\n  if(l<=2 && 2<=r){cout << 't';}\n  if(l<=3 && 3<=r){cout << 'c';}\n  if(l<=4 && 4<=r){cout << 'o';}\n  if(l<=5 && 5<=r){cout << 'd';}\n  if(l<=6 && 6<=r){cout << 'e';}\n  if(l<=7 && 7<=r){cout << 'r';}\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int l,r;\n  cin >> l >> r;\n  string s=\"atcoder\";\n  for(int i=1;i<=7;i++){\n    if(l<=i && i<=r){cout << s[i-1];}\n  }\n  cout << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int l,r;\n  cin >> l >> r;\n  string s=\"atcoder\";\n  for(int i=l;i<=r;i++){\n    cout << s[i-1];\n  }\n  cout << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int l,r;\n  cin >> l >> r;\n  string s=\"atcoder\";\n  cout << s.substr(l-1,r-l+1) << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int l,r;\n  cin >> l >> r;\n  cout << ((string)\"atcoder\").substr(l-1,r-l+1) << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "ebe6de12870babb7687321ff83ef78f9579fdc9e81f4d716c391ba70a733fef7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc264/abc264_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

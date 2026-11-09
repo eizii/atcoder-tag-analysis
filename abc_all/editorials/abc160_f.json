@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc160_f",
+  "editorials": [
+    {
+      "text": "F: Distributing Integers\n頂点1 を根とする根付き木として考えます。以下のような値を定義します、\ndpv = 頂点v を根とする部分木のみを考えたときの、頂点v に1 が書かれるような整数の書き方の数\nこれは、以下の漸化式に従って、ボトムアップに計算することができます。\ndpv = (sizev −1)! ∏\nu∈ch(v)\ndpu\nsizeu!\n後は、上記の木dp を元に全方位木dp を行うことで、O(N) でこの問題を解くことができます。\n",
+      "text_sha256": "824f2b3f53bc6a4577f502a2288f63e8f7db9d4c1fcf8c1e07fb6cabb6827d56",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc160/abc160_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

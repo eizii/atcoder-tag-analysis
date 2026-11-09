@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc207_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc207/editorial/2153",
+      "text": "この問題には様々な解法がありますが、そのうちの \\(1\\) つを紹介します。 点集合 \\(X=\\{(x_1,y_1),(x_2,y_2),\\ldots,(x_k,y_k)\\}\\) を \\(x\\) 軸方向に \\(q\\) , \\(y\\) 軸方向に \\(r\\) 移動させたとき、 \\(X\\) の重心、すなわち \\((\\frac{\\sum_{i=1}^{k}x_i}{k},\\frac{\\sum_{i=1}^{k}y_i}{k})\\) も \\(x\\) 軸方向に \\(q\\) , \\(y\\) 軸方向に \\(r\\) 移動します。 よって \\(S\\) , \\(T\\) に含まれる各点についてそれぞれ \\(S\\) の重心、 \\(T\\) の重心からの相対的な位置関係を求めることで平行移動の影響を無視することができ、故にこれらの位置関係が回転移動のみによって一致するかを判定すればよいです。 判定の際は \\((a_1,b_1)\\) と対応させる点 \\((c_i,d_i)\\) を \\(i=1,2,\\ldots,N\\) について全探索すればよく、計算量は \\(O(N^2\\log N)\\) や \\(O(N^3)\\) となります。 \\((a_1,b_1)\\) が重心と一致する場合の処理には気をつけましょう。 実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N; cin >> N;\n    vector<double> a(N),b(N),c(N),d(N);\n    for(int _=0; _<2; _++){\n        for(int i=0; i<N; i++) cin >> a[i] >> b[i];\n        int x = 0, y = 0;\n        for(int i=0; i<N; i++){\n            x += a[i];\n            y += b[i];\n            a[i] *= N;\n            b[i] *= N;\n        }\n        for(int i=0; i<N; i++){\n            a[i] -= x;\n            b[i] -= y;\n        }\n        swap(a,c);\n        swap(b,d);\n    }\n    for(int i=0; i<N; i++){\n        if(a[i]!=0 || b[i]!=0){\n            swap(a[i],a[0]);\n            swap(b[i],b[0]);\n        }\n    }\n    string ans = \"No\";\n    const double eps = 1e-6;\n    for(int i=0; i<N; i++){\n        double angle = atan2(d[i],c[i])-atan2(b[0],a[0]);\n        bool flag = true;\n        for(int j=0; j<N; j++){\n            double A = a[j]*cos(angle)-b[j]*sin(angle);\n            double B = a[j]*sin(angle)+b[j]*cos(angle);\n            bool flag2 = false;\n            for(int k=0; k<N; k++){\n                if(std::abs(A-c[k])<=eps && std::abs(B-d[k])<=eps) flag2 = true;\n            }\n            flag &= flag2;\n        }\n        if(flag) ans = \"Yes\";\n    }\n    cout << ans << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "0fa3f960553ba67b7147a6b443ae35dc92e1ed4cc7eb2056cc6f043a9e6a2d05"
+    }
+  ],
+  "status": "available"
+}

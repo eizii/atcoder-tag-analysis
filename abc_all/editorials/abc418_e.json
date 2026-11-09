@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc418_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc418/editorial/13627",
+      "text": "大まかな方針\nまず，平行な辺の組が何通りあるかを数えることを考える．これは，\n\\(\\frac{N(N-1)}{2}\\)\n通りある\n\\(2\\)\n点の選び方それぞれについてその傾きを計算し，ありうるすべての傾きの値\n\\(x\\)\nについて以下を行えばよい．\n傾きが\n\\(x\\)\nであるような\n\\(2\\)\n点の選び方の個数を\n\\(c_x\\)\nとする．このとき，\n\\(\\frac{c_x(c_x-1)}{2}\\)\nを答えに加える．\nここで，平行四辺形であるような台形は\n\\(2\\)\n回，そうでない台形は\n\\(1\\)\n回数えられている．したがって，平行四辺形の個数を答えから引く必要がある．これは，\n\\(2\\)\nつの対角線の中点が一致することが平行四辺形であることと同値なので，\n\\(\\frac{N(N-1)}{2}\\)\n通りある\n\\(2\\)\n点の選び方それぞれについてその中点を計算し，ありうるすべての中点の値\n\\(y\\)\nについて以下を行えばよい．\n中点が\n\\(y\\)\nであるような\n\\(2\\)\n点の選び方の個数を\n\\(d_y\\)\nとする．このとき，\n\\(\\frac{d_y(d_y-1)}{2}\\)\nを答えから引く．\nこれによって，すべての台形がちょうど\n\\(1\\)\n回ずつ数えられた状態になり，正しい答えが得られる．\n実装\n傾きを浮動小数点数で計算した場合，計算誤差によって一致判定を誤る可能性があるほか，\n\\(1/0\\)\nや\n\\(-1/0\\)\nの計算に困難が生じる．有理数の形式で計算すれば，一致判定が容易である．\n詳細は以下の実装例を参照してほしい．\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\n#include <cstdio>\n#include <vector>\n#include <array>\n#include <set>\n#include <map>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\nusing std::pair;\nusing std::make_pair;\nusing std::vector;\nusing std::min;\nusing std::max;\nusing std::array;\nusing std::set;\nusing std::map;\n\n#include <atcoder/all>\nusing mint = atcoder::modint998244353;\nusing atcoder::segtree;\n\ntypedef long long int ll;\n\nll n;\nvector<ll> x, y;\n\nll mygcd (ll a, ll b) {\n\tif (b == 0) return a;\n\treturn mygcd(b, a % b);\n}\nll myabs (ll x) {\n\treturn (x >= 0) ? x : (-x);\n}\n\nvector<pair<ll, ll> > slopes;\nvector<pair<ll, ll> > centers;\nll countsamepair (const vector<pair<ll, ll> > &vec) {\n\tll sum = 0;\n\tll idx = 0;\n\twhile (idx < vec.size()) {\n\t\tll j = idx;\n\t\twhile (j < vec.size() && vec[j] == vec[idx]) j++;\n\n\t\tll len = j - idx;\n\t\tsum += len * (len-1) / 2;\n\n\t\tidx = j;\n\t}\n\treturn sum;\n}\nvoid solve () {\n\tfor (ll i = 0; i < n; i++) {\n\t\tfor (ll j = i+1; j < n; j++) {\n\t\t\t// slope\n\t\t\tll px = x[j] - x[i];\n\t\t\tll py = y[j] - y[i];\n\n\t\t\tif (px == 0) {\n\t\t\t\tpx = 0;\n\t\t\t\tpy = 1;\n\t\t\t} else if (py == 0) {\n\t\t\t\tpx = 1;\n\t\t\t\tpy = 0;\n\t\t\t} else {\n\t\t\t\tif (px < 0) {\n\t\t\t\t\tpx *= -1;\n\t\t\t\t\tpy *= -1;\n\t\t\t\t}\n\t\t\t\tll g = mygcd(myabs(px), myabs(py));\n\t\t\t\tpx /= g;\n\t\t\t\tpy /= g;\n\t\t\t}\n\n\t\t\tslopes.push_back({px, py});\n\n\t\t\t// center\n\t\t\tcenters.push_back({x[i]+x[j], y[i]+y[j]});\n\t\t}\n\t}\n\n\tll ans = 0;\n\tsort(slopes.begin(), slopes.end());\n\tans += countsamepair(slopes);\n\tsort(centers.begin(), centers.end());\n\tans -= countsamepair(centers);\n\n\tcout << ans << \"\\n\";\n\n\t\n\treturn;\n}\n\nint main (void) {\n\tstd::ios_base::sync_with_stdio(false);\n\tcin.tie(nullptr);\n\t\n\tcin >> n;\n\tx.resize(n);\n\ty.resize(n);\n\tfor (ll i = 0; i < n; i++) {\n\t\tcin >> x[i] >> y[i];\n\t}\n\n\tsolve();\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "fda0cbf060f12d2634f2942d29f0bce73cbe3ae48382f622e2d3f6536298954a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc418/abc418_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc418/editorial/13633",
+      "text": "公式解説の方針では、平行四辺形を数える必要がありますが、それを別の方法で数えます。\n対辺が平行であり、かつ長さが同じことは、平行四辺形である必要十分条件なので、各辺について長さと角度を計算しておき、 dict を用いることで計算できます。\n平行四辺形\n\\(1\\)\nつあたり\n\\(2\\)\n回カウントされることに注意してください。",
+      "codes": [],
+      "text_sha256": "d6dad81e007f68c8c7c4a21a9a405095f5670cf326a3e4662181256646435338",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc418/abc418_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc418/editorial/13657",
+      "text": "実は、（それなりに自明でないプロセスを経て）下記の命題が成り立つことが示せます。\nLemma 1\n:\n\\(0\\)\nでない任意の整数\n\\(|a|, |b|, |c|, |d|\\le 2^{26}\\)\nに対し、\n\\[\n\\frac ab\\ne\\frac cd \\implies a\\oslash b \\ne c\\oslash d\n\\]\nが成り立つ。\nProof\n.\nこちら\nに書きました。\n\\(\\square\\)\nここで、\n\\(\\oslash\\)\nは\ndouble\n型における除算を表すとし、丸めモードはデフォルトの tiesToEven とします。\nすなわち、無限精度での計算で比が等しくならないペアについては、\ndouble\nで扱っても等しくならない（誤差によってたまたま等しくなってしまうことがない）ということです。\nまた、\n\\(a/b=c/d\\)\nならば\n\\(a\\oslash b = c\\oslash d\\)\nなので、無限精度で比が等しいペアを等しくないとしてしまうこともないです（こちらを示すのは容易です）。\n公式解説\nの方法を参考にして、\ndouble\nを用いることにした自然な実装では\n\\((x_i-x_j)\\oslash(y_i-y_j)\\)\nのようなものを計算すると思います。今回の制約においては、\n\\(x_i-x_j\\)\nや\n\\(y_i-y_j\\)\nは絶対値が\n\\(2\\cdot 10^7\\)\n以下の整数であるので、\n\\(0\\)\n除算の扱いに注意すれば Lemma 1 の前提が成り立ちます。\nnote\n:\n\\(2\\cdot 10^7 \\lt 6.7\\cdot 10^7 \\lt 2^{26} = 67108864\\)\nが成り立ちます。\nよって、\n提出 #68473579\nのように\ndouble\n(\nf64\n) 型を使った実装は正当です。\nf64\nが\nBTreeMap\nの key として使えないことから\nOrderedFloat\nを使っていますが、誤差関連の事情とは関係ありません。\nこのような種類の補題を予め知っておくのは、よっぽど浮動小数点型に興味がある人でないと厳しいと思いますし、ましてやわざわざコンテスト中に示すようなものでもないですから、初心者がまず身につけるべきなのは整数型に帰着して解く癖だとは思います。\n一方で、いざ浮動小数点型が避けられない問題が出たときに、誤った直感により妥当でない操作をしてしまう人もしばしば見かけます。復習などの際に適度に浮動小数点型の勉強をするのは（頻出アルゴリズムなどよりは優先度は低いですが）ありだと思います。",
+      "codes": [],
+      "text_sha256": "552d59c04f9580eaae8e71186d1757ab6f90ebbc01bd78940d2a705cb28bc1f9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc418/abc418_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

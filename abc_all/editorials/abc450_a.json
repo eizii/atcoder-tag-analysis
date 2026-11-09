@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc450_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc450/editorial/17730",
+      "text": "原案：admin\n問題文の指示通り、数を降順に出力しながら間にカンマを入れればよいです。末尾に余分なカンマをつけないように注意してください。出力した数字が 1 のときだけ場合分けするのが自然でしょう。\n実装例 (C++)\n実装例 (Python)\nPython では join メソッドを用いることでも簡潔に実装することができます。\n実装例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  for(int i=n; i>=1; i--){\n    cout << i;\n    if(i!=1){\n      cout << ',';\n    }\n  }\n}",
+        "N = int(input())\nfor i in range(N, 0, -1):\n  print(i, end=\"\")\n  if i!=1:\n    print(\",\", end=\"\")",
+        "N = int(input())\nnum_strings = [str(i) for i in range(N, 0, -1)]\nprint(\",\".join(num_strings))"
+      ],
+      "text_sha256": "9528947dae3459a0313f540822a6f8c4c9ff3c7e54d3271e7592c569c473dd4b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc450/abc450_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

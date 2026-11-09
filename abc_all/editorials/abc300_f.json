@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc300_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6274",
+      "text": "\\(T\\)\nの中で最も長く\no\nが連続するような部分の先頭の文字を全探索できればこの問題に正解できます ( が、当然\n\\(NM\\)\n通りを素直に全探索することはできません )。\n以下の補題を示しましょう。\n最も長く\no\nが連続するような部分の先頭の文字が\n\\(N\\)\n文字目以前であるような最適解が存在する。\nある最適解に着目したとき、最も長く\no\nが連続するような部分の先頭の文字が\n\\(N+1\\)\n文字目以降にあったとします。この時、全ての変更について\n\\(i\\)\n文字目を変更した場合は(存在すれば)\n\\(i-N\\)\n文字目を変更するように改めます。\nすると、最も長く\no\nが連続するような部分の先頭の文字が\n\\(N\\)\n文字前に移動した最適解が得られます。これを繰り返すことで補題を証明できます。\n今、問題は以下に帰着されました。\n全ての\n\\(i=1,2,\\dots,N\\)\nについて以下の問題を解け。\n\\(T\\)\nの\n\\(i\\)\n文字目を始点としてなるだけ多くの\no\nを連続させたい。可能な最大の長さを求めよ。\nこの問題は以下のようにして解くことができます。\n可能な最も遠い終点の位置を二分探索する。\n二分探索の判定は、始点と終点の間にある\nx\nの数が\n\\(K\\)\n以下かどうかで調べられる。\n上記の二分探索を実現するにあたって 「\n\\(T\\)\nの\n\\(i\\)\n文字目までに\nx\nは何個含まれるか? 」の質問に高速に解答したくなりますが、これは\n\\(T\\)\nの周期性と累積和を使えば\n\\(O(1)\\)\nで実現可能です。詳しくは実装例も参照してください。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nlong long f(long long x,long long n,vector<long long> &rw){\n  long long res=(x/n)*rw[n];\n  long long rem=x%n;\n  res+=rw[rem];\n  return res;\n}\n\nint main(){\n  long long n,m,k;\n  string s;\n  cin >> n >> m >> k >> s;\n  \n  vector<long long> rw(n+1,0);\n  for(long long i=0;i<n;i++){\n    rw[i+1]=rw[i];\n    if(s[i]=='x'){rw[i+1]++;}\n  }\n\n  long long res=0;\n  for(long long i=1;i<=n;i++){\n    long long fbeg=f(i-1,n,rw);\n    long long l=i,r=n*m;\n    while(l<=r){\n      long long te=(l+r)/2;\n      if(f(te,n,rw)-fbeg<=k){l=te+1;}\n      else{r=te-1;}\n    }\n    res=max(r-i+1,res);\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "834446f54e5ef7285d2b4c1e25be2d55591c7317cba84f9b7e5edb88fe760099",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc300/abc300_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6298",
+      "text": "分かりやすさのため、\n\\(S\\)\nは0-indexedで扱います。\no\nのみからなる連続部分文字列の長さとして達成可能な最大値を取る区間を\n\\([l, r)\\)\nとします。\nこの時、\n\\(0 \\leq l < N\\)\nとしても一般性を失いません\n*1\n。\nそこで、\n\\(l\\)\nを全探索することとします。\nこの時、以下の長さ\n\\(N+1\\)\nの補助配列を作ることで\n\\(O(1)\\)\nで\n\\(r\\)\nを見つけることができます。\n\\(C_i\\)\n:\n\\([0, i)\\)\n文字目に含まれる\nx\nの個数(すなわち累積和)\n\\(M_i\\)\n:\nx\nを\n\\(i\\)\n個まで\no\nに変えることができる時、先頭から最大何文字まで\no\nが連続するか\nまず、\n\\(C_N - C_l > K\\)\nだとします。この時、\n\\(r < N\\)\nであることが分かり、この場合は\n\\(r=M_{K + C_l}\\)\nとなります。\n次に、\n\\(C_N - C_l \\leq K\\)\nだとします。この時、まず長さ\n\\(N-l\\)\nを伸ばすことで右端に到達し、次に\n\\(\\frac{K-(C_N - C_l)}{C_N}\\)\n個の\n\\(S\\)\nを覆い、最後に残りを埋めます。\nこれは、残りの変換回数を\n\\(t (=K-(C_N - C_l) \\bmod C_N)\\)\nとすると\n\\(M_t\\)\nがそのまま答えとなります。\nこの計算で答えが\n\\(NM-l\\)\nを超える時、それは全部\no\nにできたということなので\n\\(NM-l\\)\nで\n\\(\\min\\)\nを取ることを忘れないでください。\n*1\n仮に\n\\(l \\geq N\\)\nだとすると、\n\\([l-N, r-N)\\)\nも同じ文字列を参照するので答えが変わらない",
+      "codes": [
+        "import java.util.*\n\nfun main() {\n  val sc = Scanner(System.`in`)\n  val N = sc.nextInt()\n  val M = sc.nextInt()\n  val K = sc.nextLong()\n  val S = sc.next()\n  \n  val cumsum = IntArray(N + 1) // cumsum[i]: [0, i)の区間に含まれる'x'の個数\n  val maxuse = IntArray(N + 1) // maxuse[i]: 'x'をi個まで'o'に変える時、先頭から'o'が最大何個連続するか\n  for (i in 1..N) {\n    cumsum[i] = cumsum[i - 1] + if (S[i - 1] == 'x') 1 else 0\n    maxuse[cumsum[i]] = i\n  }\n  val xCount = cumsum[N] // Sに含まれる'x'の個数\n  println((0 until N).map { l -> // lを左端として、右端をどこまで伸ばせるか\n    val toRight = xCount - cumsum[l] // 右端まで行く為に変える'x'の個数\n    if (toRight > K) maxuse[(K + cumsum[l]).toInt()] - l.toLong() // 右端に行けないなら、答えはmaxuseから求まる\n    else {\n      val repeat = (K - toRight) / xCount // 完全に覆えるSの個数\n      N - l + Math.min(N * (M - 1L), N * repeat + maxuse[(K - toRight - xCount * repeat).toInt()])\n    }\n  }.max()!!)\n}"
+      ],
+      "text_sha256": "c70bf3921edc45d8539bf95bc994eae056ab275352219bb1570aed4d143ea0ac",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc300/abc300_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6282",
+      "text": "公式解説\nとほとんど同じですが、二分探索と始点の全探索の順序を逆にすることもできます。この場合、始点が左端の場合のみ\nx\nを素直に数えれば、以降は始点を一つずつ動かした際に新しく区間に入る一文字と出ていく一文字に注目するだけで個数を計算できます。\n実装例 (Python)",
+      "codes": [
+        "N, M, K = map(int, input().split())\nS = input()\nlo, hi = K, N * M + 1\nwhile lo + 1 < hi:\n    mi = (lo + hi) // 2\n    x = S.count('x') * (mi // N) + S[: mi % N].count('x')\n    ok = False\n    for i in range(N):\n        ok |= x <= K\n        if mi + i >= N * M:\n            break\n        x += S[(mi + i) % N] == 'x'\n        x -= S[i] == 'x'\n    if ok:\n        lo = mi\n    else:\n        hi = mi\nprint(lo)"
+      ],
+      "text_sha256": "c10b8f71eca6b59688caba88ab977f46550a95fcbaf34d1c955a8498cd712feb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc300/abc300_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

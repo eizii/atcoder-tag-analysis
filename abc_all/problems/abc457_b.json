@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc457_b",
+  "title": "Arrays",
+  "contests": [
+    {
+      "contest_id": "abc457",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 45,
+  "raw_difficulty": -478,
+  "contest_id": "abc457",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc457/tasks/abc457_b",
+  "statement": "配点 : 200 点 問題文 N 個の数列 A_1, A_2, \\ldots, A_N が与えられます。 数列 A_i の長さは L_i であり A_i = (A_{i,1}, A_{i,2}, \\ldots, A_{i,L_i}) です。 その後、整数 X, Y が与えられます。 A_{X,Y} の値を出力してください。 制約 1 \\le N \\le 2 \\times 10^5 1 \\le L_i L_i の総和は 2 \\times 10^5 以下 1 \\le A_{i,j} \\le 1000 1 \\le X \\le N 1 \\le Y \\le L_X 入力される値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N L_1 A_{1,1} A_{1,2} \\ldots A_{1,L_1} L_2 A_{2,1} A_{2,2} \\ldots A_{2,L_2} \\vdots L_N A_{N,1} A_{N,2} \\ldots A_{N,L_N} X Y 出力 A_{X,Y} の値を出力せよ。 入力例 1 3\n3 10 20 30\n1 7\n4 5 6 7 8\n3 4 出力例 1 8 (A_1, A_2, A_3) = ((10,20,30), (7), (5,6, 7,8)) です。 A_3 = (5, 6, 7, 8) であり、 A_{3,4} = 8 なので 8 を出力してください。 入力例 2 4\n2 9 1\n3 8 2 6\n1 5\n2 4 3\n2 2 出力例 2 2 A_2 = (8, 2, 6) なので、 A_{2,2} = 2 です。 入力例 3 1\n5 100 200 300 400 500\n1 5 出力例 3 500",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 個の数列 A_1, A_2, \\ldots, A_N が与えられます。 数列 A_i の長さは L_i であり A_i = (A_{i,1}, A_{i,2}, \\ldots, A_{i,L_i}) です。 その後、整数 X, Y が与えられます。 A_{X,Y} の値を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\le N \\le 2 \\times 10^5 1 \\le L_i L_i の総和は 2 \\times 10^5 以下 1 \\le A_{i,j} \\le 1000 1 \\le X \\le N 1 \\le Y \\le L_X 入力される値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N L_1 A_{1,1} A_{1,2} \\ldots A_{1,L_1} L_2 A_{2,1} A_{2,2} \\ldots A_{2,L_2} \\vdots L_N A_{N,1} A_{N,2} \\ldots A_{N,L_N} X Y"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 A_{X,Y} の値を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\n3 10 20 30\n1 7\n4 5 6 7 8\n3 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 8 (A_1, A_2, A_3) = ((10,20,30), (7), (5,6, 7,8)) です。 A_3 = (5, 6, 7, 8) であり、 A_{3,4} = 8 なので 8 を出力してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4\n2 9 1\n3 8 2 6\n1 5\n2 4 3\n2 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 2 A_2 = (8, 2, 6) なので、 A_{2,2} = 2 です。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1\n5 100 200 300 400 500\n1 5"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 500"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc457/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:41.496750+00:00",
+  "statement_sha256": "de50c866b793440597e33685d6c8eed248b401759906ad578f5a1662d7a35bbb",
+  "editorials": []
+}

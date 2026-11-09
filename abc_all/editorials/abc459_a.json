@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc459_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc459/editorial/20921",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nこの問題は文字列\nHelloWorld\nの\n\\(X\\)\n文字目を削除することで解くことができます。\n文字列の\n\\(X\\)\n文字目を削除する方法は色々ありますが、for 文と if 文を使うと以下のように作ることができます：\n\\(S=\\)\nHelloWorld\n、\n\\(T\\)\nを空文字列とする。\n\\(i=1,2,\\ldots,10\\)\nの順に以下を行う：\n\\(i\\neq X\\)\nならば\n\\(T\\)\nの末尾に\n\\(S_i\\)\nを連結する。\n\\(T\\)\nが求める答えである。\nこのように\n\\(T\\)\nを作っていくと、\n\\(S\\)\nの\n\\(X\\)\n文字目だけ飛ばされるので結果として\nHelloWorld\nの\n\\(X\\)\n文字目のみを削除した文字列が得られます。\n他にも、例えば C++ であれば文字列\n\\(S\\)\nに対し\nS.erase(S.begin() + x)\nとすることで\n\\(S\\)\nの\n\\(x\\)\n文字目（ただし 0-indexed）を削除することができ、そのような方法を使っても正解を得ることができます。\n実装例(Python3)\n実装例(C++)",
+      "codes": [
+        "x = int(input()) - 1\ns = \"HelloWorld\"\nt = \"\"\nfor i in range(10):\n    if i != x:\n        t += s[i]\nprint(t)",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint x;\n\tcin >> x;\n\tx--;\n\tstring s = \"HelloWorld\";\n\ts.erase(s.begin() + x);\n\tcout << s << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "2aa4fe675be393f5f340f39e53062384eedf9018e50478cd672f25fe5aea5dfe",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc459/abc459_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

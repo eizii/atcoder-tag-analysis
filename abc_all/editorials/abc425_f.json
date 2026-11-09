@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc425_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc425/editorial/14075",
+      "text": "操作を逆から見て，\n\\(T\\)\nから一文字ずつ削除していくことで 空文字列にする方法を数えることにします．\n残った文字の位置を集合で持つことにします．今残っている位置が\n\\(S=\\lbrace S_1,S_2,\\ldots,S_k\\rbrace\\ (1\\leq S_1\\lt S_2\\lt \\ldots\\lt S_k\\leq N)\\)\nだったとします．文字列から文字を削除することは，ある\n\\(i\\)\nを選んで\n\\(S\\)\nから\n\\(S_i\\)\nを削除することに対応します．\nただし，削除した結果同じ文字列になってしまうことがあります．例えば，\n\\(T\\)\nが\nabcade\nで\n\\(S=\\lbrace 1, 4, 6\\rbrace\\)\nのとき，\n\\(S\\)\nから\n\\(1\\)\nを削除しても\n\\(4\\)\nを削除しても残った文字列は\nae\nとなってしまいます．この重複を避けるためには，例えば以下のように制限すればよいです．\n\\(i\\geq 2\\)\nかつ\n\\(T_{S_{i-1}}=T_{S_{i}}\\)\nのとき，\n\\(S\\)\nから\n\\(S_i\\)\n（右側）を削除していけない．（すなわち，同じ文字が連続して残っている区間では左から順に削除する．）\nこのような遷移の制限のもと，bit DP でこの問題を解くことができます．計算量は\n\\(O(N2^N)\\)\nです．",
+      "codes": [
+        "mod = 998244353\n\nn = int(input())\nt = input()\ndp = [0] * (1 << n)\ndp[(1 << n) - 1] = 1\nfor bit in range((1 << n) - 1, -1, -1):\n    dp[bit] %= mod\n    pre = \"?\"\n    for i in range(n):\n        if (bit >> i) & 1:\n            if pre != t[i]:\n                dp[bit ^ (1 << i)] += dp[bit]\n            pre = t[i]\n\nprint(dp[0])"
+      ],
+      "text_sha256": "0a521f7cc2d32612dbfa8e4af90f7ccf392ea0c90f910268d89d65a4a1c6258b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc425/abc425_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc425/editorial/14091",
+      "text": "「同じ文字が連続してる場合、後ろにある文字を消すことが出来ない」という条件で\n\\(T\\)\nから\n\\(1\\)\n文字ずつ消していく手順を数えればよいです。\n\\(T\\)\nの先頭に文字\n^\nを追加した上で、「連続する\n\\(2\\)\n文字\n\\(x,y\\)\nであって\n\\(x \\ne y\\)\nであるものを選び、\n\\(x\\)\nに置き換える」という操作を\n\\(1\\)\n文字になるまで行う手順を数える問題に言い換えます。（もっと一般に 「\n\\(f(x,y)\\)\nに置き換える」と思ってもよいです。）\nこれは区間 dp により\n\\(O(N^3 k^2)\\)\n（\n\\(k\\)\nは文字種とする）で解くことが出来ます。（\n\\(f(x,y)=x\\)\nであることを利用すると\n\\(O(N^3)\\)\nに出来ます。）\n（イメージとしては、操作を表す二分木とそのトポロジカル順の個数を数える、と考えるとよいです。）\n\\(O(N^3 k^2)\\)\n解\n\\(O(N^3)\\)\n解",
+      "codes": [],
+      "text_sha256": "c4bfd6f36c5eba62afcb756c4fc5cc5c421d87e257383236b7ebdd2d2a210cfe",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc425/abc425_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

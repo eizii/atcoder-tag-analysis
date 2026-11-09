@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc287_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc287/editorial/5608",
+      "text": "必要条件の列挙\n与えられたグラフがパスグラフであるための必要条件を列挙していきます。\nまず、定義より辺の本数は\n\\(N-1\\)\n本でなければなりません。しかし、これだけでは以下のようなグラフも該当してしまいます。\nこの反例を見ると、\n\\(3\\)\n本以上の辺が出ている頂点が存在してはならないことに気づくでしょう。そこで、「全ての頂点の次数が\n\\(2\\)\n以下」という条件を加えてみます。\nしかし、これだけでは正解することはできません。以下のようなグラフが反例となります。\nよって、連結性も条件に加えなければなりません。これにより\n辺がちょうど\n\\(N-1\\)\n本\n全ての頂点の次数が\n\\(2\\)\n以下\nグラフが連結\nという\n\\(3\\)\nつの必要条件が揃いましたが、実はこれが十分条件でもあることが示せます。\n十分性の確認\nグラフが前述の\n\\(3\\)\nつの条件を全て満たすとき、次数\n\\(1\\)\nの頂点がちょうど\n\\(2\\)\nつ存在します。これは、(\n\\(N \\geq 2\\)\nと連結性より) 次数\n\\(0\\)\nの頂点が存在せず、次数の総和が辺の本数の\n\\(2\\)\n倍、すなわち\n\\(2N-2\\)\nであることからわかります。\n次数\n\\(1\\)\nの頂点を\n\\(s, t\\)\nとします。\n\\(s\\)\nからスタートし、未訪問の頂点に移動することを繰り返すとき、以下の\n\\(3\\)\nつが成り立ちます。\n次数の条件より、\n\\(t\\)\n以外の頂点にいるとき、必ずちょうど\n\\(1\\)\nつの行き先が存在する\n\\(t\\)\nに到着した後はどこへも移動できない\n連結性より、\n\\(t\\)\nに到着した時点で全ての頂点を訪問し終わっている\n訪れた順番に頂点の番号を並べた列を\n\\(v_1, v_2, \\dots, v_N\\)\nとおくと、\n\\(v_i, v_{i+1}\\)\n間には必ず辺があり、\n\\(|i - j| \\geq 2\\)\nのとき\n\\(v_i, v_j\\)\nを結ぶ辺は存在しません。よって、グラフがパスグラフであることが確認できました。\n以上から、\n\\(3\\)\nつの条件をそれぞれ判定することで、この問題を\n\\(O(N + M)\\)\nで解くことができます。連結性の判定には、DFS や BFS、Union Find などを用いればよいです。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<vector<int>> graph(n);\n    for (int i = 0; i < m; ++i) {\n        int u, v;\n        cin >> u >> v;\n        u -= 1;\n        v -= 1;\n        graph[u].push_back(v);\n        graph[v].push_back(u);\n    }\n    if (m != n - 1) {\n        cout << \"No\\n\";\n        return 0;\n    }\n    for (int i = 0; i < n; ++i) {\n        if (graph[i].size() > 2) {\n            cout << \"No\\n\";\n            return 0;\n        }\n    }\n    vector<bool> reach(n);\n    queue<int> que;\n    reach[0] = true;\n    que.push(0);\n    while (not que.empty()) {\n        const int u = que.front();\n        que.pop();\n        for (const int v : graph[u]) {\n            if (not reach[v]) {\n                reach[v] = true;\n                que.push(v);\n            }\n        }\n    }\n    for (int i = 0; i < n; ++i) {\n        if (!reach[i]) {\n            cout << \"No\\n\";\n            return 0;\n        }\n    }\n    cout << \"Yes\\n\";\n    return 0;\n}"
+      ],
+      "text_sha256": "324d05a03b19c95f2cddc3745932813faaadd60fff6e7dd22f4ce94484b948b5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc287/abc287_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc317_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc317/editorial/7030",
+      "text": "この問題は for 文のような繰り返し文をうまく使えるかを聞いている問題です。for 文に関する情報を知りたい人は\nAPG4b の記事\nなどを参考にしてみてください。\nこの問題は、\n\\(H + P_i \\geq X\\)\nを満たすような\n\\(i\\)\nのうち最小の整数が聞かれています。これは配列に\n\\(P_1, P_2, \\dots, P_N\\)\nを格納した後に for 文を利用して配列の要素を\n\\(1\\)\n個ずつ読み取っていくことで条件を満たす\n\\(i\\)\nを発見できます。\nC++ と Python による実装例は以下の通りです。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\nint main() {\n  int N, H, X, P[111];\n  cin >> N >> H >> X;\n  for (int n = 1; n <= N; n++) cin >> P[n];\n  for (int n = 1; n <= N; n++) {\n    if (H + P[n] >= X) {\n      cout << n << endl;\n      break;\n    }\n  }\n}",
+        "N, H, X = map(int, input().split())\nP = [*map(int, input().split())]\nfor n in range(N):\n    if H+P[n] >= X:\n        print(n+1)\n        exit(0)"
+      ],
+      "text_sha256": "01fb8d2d684115ff5d2b7dcdbb834e5df0e098f84867e8e986c61ead05725a44",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc317/abc317_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc317/editorial/7044",
+      "text": "二分探索\nが使えます。モンスターが一匹しかいない今回の設定では不要でした（傷薬の入力に時間がかかるので全体としては速くなっていません）が、モンスターが数十万匹いたとするとこれが最も簡単な解法になるでしょう。\n実装例 (Python)\nP.S. A, B, E の原案でした。",
+      "codes": [
+        "import bisect\n\nN, H, X = map(int, input().split())\nP = list(map(int, input().split()))\nprint(bisect.bisect_left(P, X - H) + 1)"
+      ],
+      "text_sha256": "4bbd5867ec14026ec4b16df56dc91da5c38bab77f181279aed13a05d9f3bbd00",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc317/abc317_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

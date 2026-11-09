@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc187_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc187/editorial/485",
+      "text": "不満な文字列\n\\(T\\)\nは\n\\(S_1, S_2, \\dots, S_N\\)\nのいずれかと一致することから、不満な文字列があるとすれば\n\\(S_1, S_2, \\dots, S_N\\)\nの中に存在します。\nしたがって、\n\\(S_1, S_2, \\dots, S_N\\)\nの各\n\\(S\\)\nについて、\n!\n\\({}+S\\)\nが\n\\(S_1, S_2, \\dots, S_N\\)\nの中に含まれるかを調べれば良いです。\nこれは、 HashSet (unordered_set) などを用いることによって、効率的に判定できます。\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <string>\n#include <unordered_set>\nusing namespace std;\n\nint main(){\n    int N;\n    cin >> N;\n    vector<string> S(N);\n    for(string& s : S) cin >> s;\n    unordered_set<string> h(S.begin(), S.end());\n    for(string& s : S) if(h.count('!' + s)){\n        cout << s << endl;\n        return 0;\n    }\n    cout << \"satisfiable\" << endl;\n}",
+        "N = int(input())\nS = set(input() for i in range(N))\nfor s in S:\n    if \"!\" + s in S:\n        print(s)\n        exit()\nprint(\"satisfiable\")"
+      ],
+      "text_sha256": "84ee51f5c26d0a2c813e3bb84c79ca60891994fcb106abcbd7766190c6dcaf05",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc187/abc187_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

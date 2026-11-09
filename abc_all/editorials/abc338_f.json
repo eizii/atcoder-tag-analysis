@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc338_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc338/editorial/9170",
+      "text": "頂点\n\\(i\\)\nから頂点\n\\(j\\)\nまでの最短経路の長さを\n\\(d_{i,j}\\)\nとおきます。このとき、答えは\n\\((1,2,\\dots,N)\\)\nの順列\n\\((p_1,p_2,\\dots,p_N)\\)\n全てに対する\n\\(d_{p_1,p_2}+d_{p_2,p_3}+\\dots+d_{p_{N-1},p_N}\\)\nの最小値と一致します。\n以下の動的計画法を考えます。\n\\(\\mathrm{dp}[S][i]\\)\n: 任意の頂点から始まって頂点\n\\(i\\)\nで終わるようなウォークのうち、通る頂点の集合が\n\\(S\\)\nであるようなものに対する通る辺の重みの総和の最小値\n遷移としては、まだ訪れていない頂点のうち次に訪れる頂点\n\\(j\\)\nを全探索して、\n\\(\\mathrm{dp}[S\\cup \\{j\\}][j]\\leftarrow \\min\\{\\mathrm{dp}[S\\cup \\{j\\}][j],\\mathrm{dp}[S][i]+d_{i,j}\\}\\)\nとすればよいです。\nよって、Floyd-Warshall 法などを用いて全ての\n\\(i,j\\)\nに対する\n\\(d_{i,j}\\)\nを前計算しておくことで、全体として\n\\(O(N^3+2^NN^2)\\)\nなどの計算量で解くことができます。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nconst int inf = 1 << 30;\n\nvoid chmin(int &a, int b) { a = min(a, b); }\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector d(n, vector<int>(n, inf));\n    for (int i = 0; i < n; i++) d[i][i] = 0;\n    for (int i = 0; i < m; i++) {\n        int u, v, w;\n        cin >> u >> v >> w;\n        --u, --v;\n        d[u][v] = w;\n    }\n    for (int k = 0; k < n; k++) {\n        for (int i = 0; i < n; i++) {\n            for (int j = 0; j < n; j++) {\n                if (d[i][k] == inf or d[k][j] == inf) continue;\n                chmin(d[i][j], d[i][k] + d[k][j]);\n            }\n        }\n    }\n    vector dp(1 << n, vector<int>(n, inf));\n    for (int i = 0; i < n; i++) dp[1 << i][i] = 0;\n    for (int bit = 1; bit < (1 << n) - 1; bit++) {\n        for (int i = 0; i < n; i++) {\n            if (~bit >> i & 1) continue;\n            if (dp[bit][i] == inf) continue;\n            for (int j = 0; j < n; j++) {\n                if (bit >> j & 1) continue;\n                if (d[i][j] == inf) continue;\n                chmin(dp[bit | 1 << j][j], dp[bit][i] + d[i][j]);\n            }\n        }\n    }\n    int ans = inf;\n    for (int i = 0; i < n; i++) {\n        chmin(ans, dp[(1 << n) - 1][i]);\n    }\n    if (ans == inf) cout << \"No\" << endl;\n    else cout << ans << endl;\n}"
+      ],
+      "text_sha256": "72ef7a5ad39d75c688fafdf74ec423899d597b23a1f2e41fd430c7ad4d63c372",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc338/abc338_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

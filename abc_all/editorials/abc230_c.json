@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc230_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc230/editorial/3014",
+      "text": "まず、1つ目の操作、\n\\(\\max(1-A,1-B)\\leq k\\leq \\min(N-A,N-B)\\)\nをみたす全ての整数\n\\(k\\)\nについて、\n\\((A+k,B+k)\\)\nを黒く塗る。\nで塗られるマスについて考えます。\nこれを愚直にシミュレーションしようとすると塗られるマスが最大\n\\(10^{18}\\)\n個もあることになり、これは時間制限に間に合いません。そこで、この条件を言いかえることを考えます。\nまず、これは、\n\\(1-A\\leq k \\leq  N-A\\)\nかつ\n\\(1-B \\leq k \\leq  N-B\\)\nをみたす全ての整数\n\\(k\\)\nについて、\n\\((A+k,B+k)\\)\nを黒く塗る。\nと同値であり、すなわち、\n\\(1\\leq A+k \\leq  N\\)\nかつ\n\\(1 \\leq B+k \\leq  N\\)\nをみたす全ての整数\n\\(k\\)\nについて、\n\\((A+k,B+k)\\)\nを黒く塗る。\nと言い換えられます。\n実際に知りたいのは\n\\(P\\leq i \\leq Q\\)\n,\n\\(R\\leq j \\leq S\\)\nの範囲であり、\n\\(1\\leq P\\leq Q \\leq N\\)\n,\n\\(1\\leq R\\leq S \\leq N\\)\nより、この操作を\n\\(P\\leq A+k \\leq  Q\\)\nかつ\n\\(R \\leq B+k \\leq  S\\)\nをみたす全ての整数\n\\(k\\)\nについて、\n\\((A+k,B+k)\\)\nを黒く塗る。\nと書き換えても答えは変わりません。これを先の議論と逆の順番で戻して、\n\\(\\max(P-A,R-B)\\leq k\\leq \\min(Q-A,S-B)\\)\nをみたす全ての整数\n\\(k\\)\nについて、\n\\((A+k,B+k)\\)\nを黒く塗る。\nとすることができます。\n\\(2\\)\nつめの操作についても同様に、\n\\(\\max(1-A,B-N)\\leq k\\leq \\min(N-A,B-1)\\)\nをみたす全ての整数\n\\(k\\)\nについて、\n\\((A+k,B-k)\\)\nを黒く塗る。\nを、\n\\(\\max(P-A,B-S)\\leq k\\leq \\min(Q-A,B-R)\\)\nをみたす全ての整数\n\\(k\\)\nについて、\n\\((A+k,B-k)\\)\nを黒く塗る。\nと書き換えられます。\nこれをシミュレーションで行う事を考えます。\nそれぞれの操作は高々\n\\(\\min(Q-P+1,S-R+1)\\)\n回しか行われず、\nこれは明らかに\n\\(3\\times 10^5\\)\n以下です。（実際は より厳しく、\n\\([\\sqrt{300000}]=547\\)\n回以下と評価できます。 ）\nよってこのシミュレーションは時間内に行う事ができ、この問題を解く事が出来ました。c++ などで 、シミュレーションしたい範囲を固定長二次元配列等で持つと\n\\(300000\\times 300000\\)\nだけ必要になり、メモリ制限を超えてしまうので注意してください。\n別解\n\\(1\\)\nつめの操作の言いかえ、\n\\(1\\leq A+k \\leq  N\\)\nかつ\n\\(1 \\leq B+k \\leq  N\\)\nをみたす全ての整数\n\\(k\\)\nについて、\n\\((A+k,B+k)\\)\nを黒く塗る。\nはさらに、\n\\(1\\leq i \\leq  N\\)\nかつ\n\\(1 \\leq j \\leq  N\\)\nかつ\n\\(i-j=A-B\\)\nをみたす全ての整数の組\n\\((i,j)\\)\nについて、マス\n\\((i,j)\\)\nを黒く塗る。\nと同値です。同様に\n\\(2\\)\nつめの操作は、\n\\(1\\leq i \\leq  N\\)\nかつ\n\\(1 \\leq j \\leq  N\\)\nかつ\n\\(i+j=A+B\\)\nをみたす全ての整数の組\n\\((i,j)\\)\nについて、マス\n\\((i,j)\\)\nを黒く塗る。\nと同値です。\nこのことを使うと、\n\\(P\\leq i\\leq Q\\)\n,\n\\(R\\leq j\\leq S\\)\nをみたす各\n\\((i,j)\\)\nについて、\n\\(i-j=A-B\\)\nまたは\n\\(i+j=A+B\\)\nの少なくとも一方をみたすかどうかを調べ、みたすならば\n#\nを、みたさないならば\n.\nを出力すればよいことが分かります。こちらの方が実装は少し簡単になります。\nc++による実装例:\nc++による実装例(別解):",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main(void) {\n\tlong long n, a, b;\n\tlong long p, q, r, s;\n\tlong long x, y;\n\tstring str = \"\";\n\tvector<string>ans;\n\n\tcin >> n >> a >> b;\n\tcin >> p >> q >> r >> s;\n\n\tfor (long long i = 0; i < (s - r + 1); i++)str += '.';\n\tfor (long long i = 0; i < (q - p + 1); i++)ans.push_back(str);\n\n\n\tx = max(p - a, r - b);\n\ty = min(q - a, s - b);\n\tfor (long long i = x; i <= y; i++)ans[a + i - p][b + i - r] = '#';\n\n\tx = max(p - a, b - s);\n\ty = min(q - a, b - r);\n\tfor (long long i = x; i <= y; i++)ans[a + i - p][b - i - r] = '#';\n\n\n\tfor (long long i = 0; i < (q - p + 1); i++)cout << ans[i] << endl;\n\n\treturn 0;\n}",
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main(void) {\n\tlong long n, a, b;\n\tlong long p, q, r, s;\n\n\tcin >> n >> a >> b;\n\tcin >> p >> q >> r >> s;\n\n\tfor (long long i = p; i <= q; i++) {\n\t\tfor (long long j = r; j <= s; j++) {\n\t\t\tif ((i - j) == (a - b))cout << '#';\n\t\t\telse if ((i + j) == (a + b))cout << '#';\n\t\t\telse cout << \".\";\n\t\t}\n\t\tcout << endl;\n\t}\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "1612255beeade5ff980188a5bda8bbadd6d01368b3599295aaeca8be279b0fbf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc230/abc230_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc230/editorial/3025",
+      "text": "問題文に数式がごちゃごちゃと登場してよくわからないときは、とりあえず図を描いてみましょう。\n以下の図は\nという入力に対応するマスの塗り方です。\n問題文からこの図をイメージすることができなかった方は、この図を見ながらもう一度考え直してみると良いかもしれません。",
+      "codes": [
+        "10 6 4\n7 9 6 9"
+      ],
+      "text_sha256": "90b2925fa57b7e64252acdff01434f939df2d98852a93824be9cbd9929d49e86",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc230/abc230_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

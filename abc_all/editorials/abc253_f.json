@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc253_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc253/editorial/4025",
+      "text": "1 l r x\nの形式のクエリを\n加算クエリ\n、\n2 i x\nの形式のクエリを\n代入クエリ\nと呼ぶことにします。\n\\(q\\)\n番目のクエリで\n\\((i, j)\\)\nの値を求めるとします。\n\\(i\\)\n行目に対する代入クエリとしては、その時点で最新のものだけ考えればよいです。そのクエリが\n\\(q'\\)\n番目であり、代入される値が\n\\(x\\)\nであるとすると、求めるべき値は次のようになります。\n\\(x\\)\nと\n\\(q'+1, \\dots, q\\)\n番目のクエリで\n\\(j\\)\n列目に加算される値を足し合わせたもの。\n\\(1, 2, \\dots, k\\)\n番目のクエリで\n\\(j\\)\n列目に加算される値を\n\\(S_{k, j}\\)\nとおくと、\n\\(x + S_{q, j} - S_{q', j}\\)\nが答えとなります。\n以上より\n\\(S_{k, j}\\)\nを求める問題に帰着されるので、以下の問題を解くことができればよいです。\nはじめに、数列\n\\(S\\)\nを\n\\(S = (0, \\dots, 0)\\)\nで初期化する。\n以下の形式のクエリを処理する。\n\\(S_l, \\dots, S_r\\)\nに\n\\(x\\)\nを加算する。\n\\(S_j\\)\nを出力する。\n\\(S\\)\nではなく\n\\(S\\)\nの差分を管理する問題に言い換えると次のようになります。\nはじめに、数列\n\\(S'\\)\nを\n\\(S' = (0, \\dots, 0)\\)\nで初期化する。\n以下の形式のクエリを処理する。\n\\(S'_l\\)\nに\n\\(x\\)\nを、\n\\(S'_{r+1}\\)\nに\n\\(-x\\)\nを加算する。\n\\(S'_1 + \\dots + S'_j\\)\nを出力する。\nこれはフェニック木と呼ばれるデータ構造を用いて効率的に解くことができます。実装には AtCoder Library の\natcoder::fenwick_tree\nを用いると便利です。全体の計算量は\n\\(O(N + M + Q \\log M)\\)\nとなります。\n実装例 (C++)",
+      "codes": [],
+      "text_sha256": "e5e5673f590c88e4ffa0f52db1c531d024849de612701c47e240a20d5411642c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc253/abc253_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc253/editorial/4041",
+      "text": "この問題は\nクエリ平方分割\nでも解くことができます。\nまずクエリを\n\\(\\sqrt Q\\)\n個の区画に分割し、各区画において「タイプ\n\\(1\\)\nによって\n\\(j\\)\n列目に足された数の総和」 を前計算しておきましょう。これは imos 法で\n\\(O(Q + M\\sqrt Q)\\)\nで出来ます。\n次にタイプ\n\\(3\\)\nを順番に処理していきます。\nこの時、「\n\\(i\\)\n行目に最後にタイプ\n\\(2\\)\nが適用されたのは0-indexedで何番目のクエリか(なければ\n\\(-1\\)\n)」を示す数列\n\\(Last_i\\)\nを用意し、更新しながら処理します。\nタイプ\n\\(3\\)\nの\n\\(Query_k\\)\nに対する答えを\n\\(ans\\)\nとします。  次の手順で\n\\(ans\\)\nが求まります。\n0.\n\\(ans = 0\\)\nとおく。\n1.\n\\(Last_i \\neq -1\\)\nであれば\n\\(ans\\)\nに\n\\(X_{Last_i}\\)\nを加算する。\n2.\n\\(Query_{Last_i}\\)\nから\n\\(Query_k\\)\nにかけてタイプ\n\\(1\\)\nを処理し、その総和を\n\\(ans\\)\nに加算する。これは、前計算を部分的に利用すれば\n\\(O(\\sqrt Q)\\)\nで出来る。\nしたがって、この問題を\n\\(O((Q+ M\\sqrt Q)+Q \\sqrt Q) = O((Q+M)\\sqrt Q)\\)\nで解くことができました。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "9f06779901a9cfb1b0751a10f6c6f2f41480e6e00d9d6beb2e2c536d63d78acc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc253/abc253_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc253/editorial/4049",
+      "text": "公式解説を一工夫することで、オンラインクエリでこの問題を解くことができます。\n今回の問題の場合、公式解説では前もって出力クエリが何処で呼ばれるかを求めているのでオフラインクエリとなります。\n\\(R_i\\)\nを、現時点で\n\\(i\\)\n行目が最後に置き換えられたときのクエリの行番号\n\\(q\\)\n及び\n\\(x\\)\nの組\n\\((q, x)\\)\nとします。初め、\n\\(R_i=(0, 0)\\)\nです。\nまた、\n\\(S_i\\)\nを、クエリを\n\\(i\\)\n個捌いた時点で、加算クエリによって列に加えられた値を管理する数列とします。\nこれは公式解説の\n\\(S_i\\)\nと同じ定義であり、\n\\(S_{k, j}\\)\nは\n\\(1, 2, \\ldots, k\\)\n番目のクエリで\n\\(j\\)\n列目に加算される値を足し合わせたものとなります。初め、\n\\(S_0=(0,\\ldots,0)\\)\nとします。\n各クエリに対して、以下の操作が十分に高速に計算できるのならば、この問題をオンラインクエリで解くことができます。\nクエリ1\n\\(S_q \\leftarrow S_{q-1}+(\\underbrace{0,\\ldots,0}_{l-1個},\\underbrace{x,\\ldots,x}_{r-l+1個},\\underbrace{0,\\ldots,0}_{M-r個})\\)\nクエリ2\n\\(S_q \\leftarrow S_{q-1}\\)\n\\(R_i \\leftarrow (q, x)\\)\nクエリ3\n\\(S_q \\leftarrow S_{q-1}\\)\n\\((t, v) = R_i\\)\n\\(v + S_{q, j} - S_{t, j}\\)\nを出力\n\\(R_i\\)\nは配列で実装すれば\n\\(O(1)\\)\n時間なので、\n\\(S_i\\)\nが高速に動けば良いことが分かります。\nここで\n\\(S_i\\)\nに永続双対セグメント木を用いれば、区間加算及び一点取得がどちらも\n\\(O(\\log M)\\)\n時間であることから、全体\n\\(O(N+M+Q\\log M)\\)\n時間で解けることが分かります。平衡二分探索木などを用いて\n\\(O(Q(\\log N + \\log M))\\)\n時間で解くこともできます。\nなお、\n\\(+\\)\nは逆元を持つことから、双対セグメント木を差分を持ったセグメント木で代替するテクニックが使えます。公式解説でフェニック木を用いているのはこの手法によるものです。",
+      "codes": [],
+      "text_sha256": "2917f724e9f622dd3c71ce11364ee7f06b7089585ac8c5523c0bbb37496cc6b5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc253/abc253_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

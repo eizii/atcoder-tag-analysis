@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc213_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc213/editorial/2397",
+      "text": "この問題は01BFSで解くことができます。\n必要になった時点で初めてパンチを繰り出すことにすると、塀を破壊する\n\\(2 \\times 2\\)\n領域は、高橋君が今いるマスに隣接しているとしてよいです。\n高橋君が下図の\n\\(T\\)\nにいるとき、パンチを\n\\(1\\)\n回繰り出すことで、区画の元の状態によらず\n*\nのいずれかに移動することができます。\nしたがって、徒歩による上下左右への移動をコスト\n\\(0\\)\n、パンチを繰り出した直後の\n*\nのいずれかへの移動をコスト\n\\(1\\)\nとして、01BFSによりこの問題を解くことができました。計算量は\n\\(O(HW)\\)\nです。\n類題：\nABC176D『Wizard in Maze』",
+      "codes": [
+        ".***.\n*****\n**T**\n*****\n.***."
+      ],
+      "text_sha256": "5aa7907f10f442e428d9705ef046ed39a84fe0eb03328692f4b5fcd998067758",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc213/abc213_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

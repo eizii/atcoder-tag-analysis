@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc293_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc293/editorial/5946",
+      "text": "\\(N\\)\n人それぞれがすでに番号を呼ばれたかどうかをブーリアン型配列等に記憶しながら、\n\\(N\\)\n人の行動を人\n\\(1\\)\n、人\n\\(2\\)\n、\n\\(\\ldots\\)\n、\n人\n\\(N\\)\nの順に実際にシミュレーションするプログラムを書くことで本問題に正解できます。\n以下に、C++ 言語による正解例を記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint n;\nint a[200001];\nbool b[200001];\n\nint main(void)\n{\n  cin >> n;\n  for(int i = 1; i <= n; i++) cin >> a[i];\n  for(int i = 1; i <= n; i++) if(!b[i]) b[a[i]] = true;\n  \n  int k = 0;\n  for(int i = 1; i <= n; i++) if(!b[i]) k++;\n  cout << k << endl;\n  for(int i = 1; i <= n; i++) if(!b[i]) cout << i << \" \";\n  cout << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "c742c24fb61a334435a2f6ef27e4527da3e85fa195856b160f16b5a5b6f8ba98",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc293/abc293_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc399_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc399/editorial/12559",
+      "text": "最適に辺を削除した時に、削除せずに残すことが可能な辺の本数に注目しましょう。\n与えられるグラフが\n\\(K\\)\n個の連結成分\n\\(C_1, C_2, \\dots, C_K\\)\nに分かれているとします。この時、各\n\\(C_i\\)\nごとに\n\\(|C_i| - 1\\)\n本の辺を残すことができて、これが最大です。よって、残すことができる辺の本数の最大は、\n\\(\\sum_{i=1}^K C_i = N\\)\nであることも合わせると、\n\\[\n\\begin{aligned}\n&\\sum_{i=1}^K \\left(\\vert C_i \\vert - 1\\right) \\\\\n&= \\sum_{i=1}^K \\vert C_i \\vert - \\sum_{i=1}^K 1 \\\\\n&= N - K\n\\end{aligned}\n\\]\nとなります。これが残すことができる辺の本数の最大なので、元のグラフを森にするために削除すべき辺の本数の最小値は\n\\[M - (N - K)\\]\nとなります。よって、連結成分の個数\n\\(K\\)\nが求まればこの問題を解くことができるとわかりました。\n連結成分の個数を数える問題は\nABC284 の C 問題\nですでに取り上げました。上記の問題の解説を読めばわかる通り、連結成分の個数は DFS や BFS などのグラフ探索アルゴリズムか素集合データ構造(Union-Find) を用いれば高速に個数を求めることができます。\n以上の考察によりこの問題を解くことができました。計算量は\n\\(\\mathrm{O}(N + M)\\)\nや\n\\(\\mathrm{O}((N+M) \\alpha(N))\\)\n(\n\\(\\alpha(N)\\)\nはアッカーマン関数の逆関数) 程度で十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n#include \"atcoder/dsu.hpp\"\n\nint main() {\n  int N, M;\n  cin >> N >> M;\n  atcoder::dsu uf(N);\n  int K = N;\n  for (int i = 0; i < M; i++) {\n    int u, v;\n    cin >> u >> v;\n    --u, --v;\n    if (!uf.same(u, v)) uf.merge(u, v), K--;\n  }\n  cout << M - (N - K) << \"\\n\";\n}"
+      ],
+      "text_sha256": "ffdba273da5c76adf01be24ca6c58ca1f9a5020258d8e280add921a157df0e53",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc399/abc399_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

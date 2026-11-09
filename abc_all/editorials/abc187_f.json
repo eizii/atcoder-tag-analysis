@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc187_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc187/editorial/488",
+      "text": "このグラフの頂点集合を\n\\(V\\)\n、\n\\(V\\)\nの空でない部分集合を\n\\(S\\)\n、\n\\(S\\)\nによる\n誘導部分グラフ\nを\n\\(G[S]\\)\n、\n\\(G[S]\\)\nをこの問題の入力としたときの答えを\n\\(f(S)\\)\nとします。\n求めたいものは\n\\(f(V)\\)\nですが、\n\\(f(V)\\)\nを求めるには\n\\(f(S)\\)\nの値が全て必要になるので、\n\\(f(S)\\)\nの値を全て求めることを考えます。\n\\(f(S)\\)\nは\n\\(G[S]\\)\nが完全グラフになっていれば\n\\(f(S)=1\\)\n、そうでなければ、\n\\(\\displaystyle \\min_{T \\subset S}f(T)+f(S \\setminus T)\\)\nによって求まります。\nしたがって、下位集合から順に\n\\(f(S)\\)\nを決定していくことができます。\n計算量について考えてみましょう。\n\\(G[S]\\)\nが完全グラフになっているかどうかは、 全ての\n\\(S\\)\nについて\n\\(O(2^N N^2)\\)\nで求めることができます。\n問題は\n\\(\\displaystyle \\min_{T \\subset S}f(T)+f(S \\setminus T)\\)\nの部分です。\n\\(T\\)\nを\n\\(V\\)\nの部分集合の範囲で動かすと、全ての\n\\(S\\)\nについて\n\\(O(2^N \\cdot 2^N)=O(4^N)\\)\nになってしまいますが、\n\\(T\\)\nが動くのは\n\\(S\\)\nの部分集合の範囲なので、\n\\[\n\\sum_{S \\subset V} 2^{|S|}=3^N\n\\]\nより、全ての\n\\(S\\)\nについて\n\\(O(3^N)\\)\nであることが分かります。\nこの計算は、\n\\(V\\)\nの各要素が独立に\n\\(S\\)\nと\n\\(T\\)\nに含まれる\n\\(S\\)\nにのみ含まれる\n両方含まれない\nの\n\\(3\\)\nつを選べることからも分かります。\n回答例 (C++) :\nhttps://atcoder.jp/contests/abc187/submissions/19103570\n回答例 (Python) :\nhttps://atcoder.jp/contests/abc187/submissions/19103577\nこの問題は、\n直接繋がれている\n\\(2\\)\nつの頂点は同じ色で塗って良い (違う色だったら辺を削除する)\n直接繋がれていない\n\\(2\\)\nつの頂点は同じ色で塗ってはならない\nとすると、補グラフの彩色数の問題であることがわかります。\nグラフの彩色数の問題は\n\\(O(2^NN)\\)\nで解けるアルゴリズムが知られているので、この問題も\n\\(O(2^NN)\\)\nで解くことができます。\n関連資料 :\nhttps://www.slideshare.net/wata_orz/ss-12131479",
+      "codes": [],
+      "text_sha256": "fc2308f5f1db740d9af81eb4f53cacbf678a0a01702c6ac3255d9d0e6e09efc7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc187/abc187_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

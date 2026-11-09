@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc370_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc370/editorial/10858",
+      "text": "説明のため、問題を次のように言い換えます。\n地点\n\\(1, 2, \\dots, N+1\\)\nがこの順に並んでいる。\n地点をいくつか選んで「区切り」を入れる。ただし、\n地点\n\\(1, N+1\\)\nには必ず区切りを入れる必要がある。\n地点\n\\(i, j\\)\nに区切りがあってその間に区切りが無いとする。このとき\n\\(\\sum_{k=i}^{j-1} A_k\\)\nは\n\\(K\\)\nと等しくない必要がある。\n条件を満たす区切りの入れ方は何通りか？\n\\((\\text{mod }998244353)\\)\nこのように言い換えることで\n\\(\\mathrm{O}(N^2)\\)\nの動的計画法を立てることができます。すなわち、\n\\(dp[i]\\)\n: 左から見て行って、最後に区切りを入れたのが地点\n\\(i\\)\nである通り数\nとすると、初期状態は\n\\(dp[1] = 1\\)\n、答えは\n\\(dp[N + 1]\\)\nで遷移が\n\\[dp[n] = \\sum_{1 \\leq m \\lt n} \\left(0\\text{ if }\\sum_{k=m}^{n-1} A_i = K \\text{ else } dp[m] \\right)\\]\nになることが確認できます。\nこの DP を高速化します。\n\\(A\\)\nの累積和テーブル\n\\(B\\)\nを\n\\(B_i = \\sum_{j = 1}^i A_j\\)\nとして定義します。すると上記の DP の遷移は\n\\[\n\\begin{aligned}\ndp[n] &= \\sum_{1 \\leq m \\lt n} \\left(0\\text{ if } B_{n-1} - B_{m-1} = K \\text{ else } dp[m] \\right) \\\\\n&= \\sum_{1 \\leq m \\lt n, B_{m-1} \\neq B_{n-1} - K} dp[m]\n\\end{aligned}\n\\]\nと表現できます。これは言い換えると、\n\\(dp[m]\\)\nが\n\\(dp[n]\\)\nに寄与するかどうかは\n\\(B_{m-1}\\)\nの値によってのみ決まるということです。\nそこで、DP テーブルを連想配列(C++ の\nstd::map\n) を用いて管理します。すなわち、連想配列\n\\(M\\)\nを\n\\(M[x]\\)\n:\n\\(B_{m-1} = x\\)\nであるような\n\\(m\\)\nに対する\n\\(dp[m]\\)\nの総和\nとします。また、別途\n\\(dp[m]\\)\nの総和も変数\n\\(all\\)\nに管理します。このようにすることで、DP の遷移は\n\\[dp[n] = all - M[B_{n-1} - K]\\]\nとなるため高速に計算できるようになり、\n\\(M\\)\nや\n\\(all\\)\nの更新も同様に高速に処理できます。\n以上の内容を適切に実装することで、この問題を\n\\(\\mathrm{O}(N \\log N)\\)\nあるいは\n\\(\\mathrm{O}(N)\\)\nで解くことが出来て、これは十分高速です。\nC++ による実装例は次の通りです。",
+      "codes": [
+        "#include <iostream>\n#include <map>\n#include <vector>\nusing namespace std;\n\n#include \"atcoder/modint.hpp\"\nusing mint = atcoder::modint998244353;\n\nint main() {\n  long long N, K;\n  cin >> N >> K;\n  vector<long long> A(N);\n  for (auto& a : A) cin >> a;\n\n  map<long long, mint> M;\n  M[0] = 1;\n  mint all = 1;\n  long long acc = 0;\n\n  for (int i = 0; i < N; i++) {\n    acc += A[i];\n    long long ban = acc - K;\n    mint cur = all - M[ban];\n    M[acc] += cur, all += cur;\n    if (i + 1 == N) cout << cur.val() << \"\\n\";\n  }\n}"
+      ],
+      "text_sha256": "847ee7d31c60bb03d45198b6b1f3eb8d8f3bc19664a9d721627800a429388076",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc370/abc370_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

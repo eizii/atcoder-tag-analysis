@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc325_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc325/editorial/7477",
+      "text": "この問題はセンサを頂点として、上下左右に隣接しているセンサの間に辺を張ったときのグラフの連結成分の個数を求める問題です。\nグラフの連結成分の個数は以下のようにすることで時間計算量\n\\(O(HW)\\)\nで求めることができます。\n答えを\n\\(0\\)\nで初期化する。\n未訪問の頂点がある限り、以下を繰り返す。\n未訪問の頂点を\n\\(1\\)\nつ選ぶ。\nその頂点から DFS や BFS を行うことで、その頂点と同じ連結成分にある頂点をすべて訪問する。\n答えに\n\\(1\\)\nを加算する。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\ntemplate<class T> using P = pair<T, T>;\nint dx[] = { 1,0,-1,0,1,1,-1,-1 }; int dy[] = { 0,1,0,-1,1,-1,1,-1 };\n\nint main() {\n\tint h, w;\n\tcin >> h >> w;\n\tvector<vector<char>> s(h, vector<char>(w));\n\tfor (int i = 0; i < h; i++) for (int j = 0; j < w; j++) cin >> s[i][j];\n\tint ans = 0;\n\tvector<vector<bool>> used(h, vector<bool>(w));\n\tfor (int i = 0; i < h; i++) {\n\t\tfor (int j = 0; j < w; j++) {\n\t\t\tif (s[i][j] == '.' or used[i][j]) continue;\n\t\t\tqueue<P<int>> que;\n\t\t\tque.push({ i,j });\n\t\t\twhile (!que.empty()) {\n\t\t\t\tP<int> p = que.front(); que.pop();\n\t\t\t\tint x = p.first, y = p.second;\n\t\t\t\tfor (int d = 0; d < 8; d++) {\n\t\t\t\t\tint nx = x + dx[d];\n\t\t\t\t\tint ny = y + dy[d];\n\t\t\t\t\tif (0 <= nx && nx < h && 0 <= ny && ny < w && s[nx][ny] == '#' && !used[nx][ny]) {\n\t\t\t\t\t\tused[nx][ny] = true;\n\t\t\t\t\t\tque.push({ nx,ny });\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t\tans++;\n\t\t}\n\t}\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "5045dae5e5aaebb11c2c2972daa7840918c4fa76e44d76ccce6492ee795cf286",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc325/abc325_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

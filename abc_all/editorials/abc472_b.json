@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc472_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc472/editorial/24787",
+      "text": "端から \\(i\\) 番目の切れ込みで棒を折ったとき、できる \\(2\\) 本の棒の長さは \\(L_1+L_2+\\cdots+L_i\\) と \\(L_{i+1}+L_{i+2}+\\cdots+L_N\\) です。 すべての切れ込みについてこの長さと差の絶対値を計算し、それらの最小値を出力すればよいです。 （今回の制約では一つずつ足す方針で十分ですが、累積和や差分更新を利用することでより高速に解くことができます。） 実装例(C++) 実装例(Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n  int N;\n  cin >> N;\n  vector<int> L(N);\n  for (int &l : L) cin >> l;\n  int ans = 1000000000;\n  for (int i = 1; i < N; i++) {\n    int sum_l = 0, sum_r = 0;\n    for (int j = 0; j < i; j++) sum_l += L[j];\n    for (int j = i; j < N; j++) sum_r += L[j];\n    ans = min(ans, abs(sum_l - sum_r));\n  }\n  cout << ans << endl;\n}\n",
+        "N = int(input())\nL = list(map(int, input().split()))\nans = min(abs(sum(L[:i]) - sum(L[i:])) for i in range(1, N))\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "02695517173bf787e0cea0c919027d6415359dbff2688854a4c56e8533bb8bd9"
+    }
+  ],
+  "status": "available"
+}

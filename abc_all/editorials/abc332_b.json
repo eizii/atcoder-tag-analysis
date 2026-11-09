@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc332_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc332/editorial/7899",
+      "text": "グラスとマグカップにに入っている水の量をそれぞれ\n\\(x\\)\nml,\n\\(y\\)\nmlとしたときに、\n\\(1\\)\n回の操作で水の量がどのように変化するか考えます。\nまず、\n\\(x=G\\)\nのとき、\n\\(x=0\\)\nに変更します。\nそうでなく\n\\(y=0\\)\nならば\n\\(y=M\\)\nに変更します。\n上のいずれでもないとき、マグカップからグラスに水を移しますが、移す水の量はマグカップに入っている水の量\n\\(y\\)\nmlとグラスを水で満たすために必要な水の量\n\\((G-x)\\)\nml のうち小さい方です。よって、\n\\(z=\\min(y,G-x)\\)\nとして\n\\(x\\)\nを\n\\(z\\)\n増加させ、\n\\(y\\)\nを\n\\(z\\)\n減少させれば良いです。\nあとは、\n\\(x=0\\)\n,\n\\(y=0\\)\nから始めて\n\\(1,2,\\ldots,K\\)\n回目の操作の後でどのように変化するかを順に求めていけば良いです。\n\\(K\\leq 100\\)\nなので十分高速にこのシミュレーションを行うことができます。\nよってこの問題を解くことができました。\nc++ による実装例:\npython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint k,g,m;\n\tint x=0,y=0,z;\n\tcin>>k>>g>>m;\n\tfor(int i=0;i<k;i++){\n\t\tif (x==g)x=0;\n\t\telse if(y==0)y=m;\n\t\telse{\n\t\t\tz=min(g-x,y);\n\t\t\tx+=z,y-=z;\n\t\t}\n\t}\n\tcout<<x<<\" \"<<y<<endl;\n\treturn 0;\n}",
+        "k,g,m=map(int, input().split())\nx,y=0,0\n\nfor i in range(k):\n    if x==g:\n      x=0\n    elif y==0:\n      y=m\n    else:\n      z=min(y,g-x)\n      x,y=x+z,y-z\n\nprint(str(x)+\" \"+str(y))"
+      ],
+      "text_sha256": "dc66ab0604e821056acb5a13dcca63a9f5709941bf095f93a37083ff8af8e52f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc332/abc332_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc332/editorial/7919",
+      "text": "「マグカップが空になるかグラスが水で満たされるまで、マグカップからグラスに水を移す」のは、\n\\(1\\)\nml ずつ移しても間に合います。\n実装例（Python）",
+      "codes": [
+        "K, G, M = map(int, input().split())\ng, m = 0, 0\nfor _ in range(K):\n    if g == G:\n        g = 0\n    elif m == 0:\n        m = M\n    else:\n        while m > 0 and g < G:\n            m -= 1\n            g += 1\nprint(g, m)"
+      ],
+      "text_sha256": "4c982d07ea3d4d7be034c95a9fde0502f1b328ce59262baa0bb39eb130eb7595",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc332/abc332_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

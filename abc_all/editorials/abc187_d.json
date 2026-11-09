@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc187_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc187/editorial/486",
+      "text": "高橋氏が青木氏より多く票を獲得するためには、高橋氏の得る票数を増やし、青木氏の得る票数を減らすことが重要です。\nそこで、\n\\(X={}\\)\n(高橋氏の得る票数)\n\\(-\\)\n(青木氏の得る票数) と定義すると、\n\\(i\\)\n番目の町で新たに演説をすると\n\\(X\\)\nは\n\\(2A_i+B_i\\)\n増える\n\\(X>0\\)\nになると高橋氏が青木氏より多く票を獲得する\nということが分かります。\nしたがって、\n\\(X>0\\)\nになるまで\n\\(2A_i+B_i\\)\nが大きい町から順に演説を行えば良いです。\n時間計算量は\n\\(O(N \\log N)\\)\nです。\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\nusing ll = int64_t;\n\nint main(){\n    ll N;\n    cin >> N;\n    ll X = 0;\n    vector<ll> x(N);\n    for(ll i = 0; i < N; i++){\n        ll A, B;\n        cin >> A >> B;\n        X -= A;\n        x[i] = A + A + B;\n    }\n    sort(x.begin(), x.end());\n    ll ans = 0;\n    while(X <= 0){\n        X += x.back();\n        x.pop_back();\n        ans++;\n    }\n    cout << ans << endl;\n}",
+        "N = int(input())\nX = 0\nx = []\nfor i in range(N):\n    A, B = map(int, input().split())\n    X -= A\n    x.append(A + A + B)\nx.sort()\nans = 0\nwhile X <= 0:\n    X += x.pop()\n    ans += 1\nprint(ans)"
+      ],
+      "text_sha256": "729cec53d2420158be4ba4c99e693e7a1388f73884ac2d2f53d7c09f861e1b56",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc187/abc187_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

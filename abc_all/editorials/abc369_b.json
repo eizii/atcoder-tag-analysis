@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc369_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc369/editorial/10833",
+      "text": "左手と右手が現在それぞれどの鍵盤の上にあるかを管理しながら、\n\\(1,2,\\dots,N\\)\n回目に押す鍵盤を順番に見ていって、手の移動が必要になったタイミングでその移動の疲労度を順次答えに加算していけばよいです。\n下記の実装例では、長さ\n\\(2\\)\nの配列\n\\(\\text{pos}\\)\nを用意し、\n\\(pos[0], pos[1]\\)\nがそれぞれ左手、右手の現在の位置を管理するようにしています。 また、それぞれの手の位置の初期値を\n\\(-1\\)\nとし、\n\\(-1\\)\nから他の鍵盤への移動の際には疲労度を答えに加算しないことで、「演奏開始前に適切な位置（その手で最初に押す鍵盤の位置）に手を置く」という動作を実現しています。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> pos = {-1, -1};  // 0: left, 1: right\n    int ans = 0;\n    for (int i = 0; i < n; i++) {\n        int a;\n        char s;\n        cin >> a >> s;\n        int hand = (s == 'R');\n        if (pos[hand] != -1) ans += abs(pos[hand] - a);\n        pos[hand] = a;\n    }\n    cout << ans << endl;\n}",
+        "n = int(input())\npos = [-1, -1]   # 0: left, 1: right\nans = 0\nfor i in range(n):\n    a, s = input().split()\n    a = int(a)\n    hand = (0 if s == 'L' else 1)\n    if pos[hand] != -1:\n        ans += abs(pos[hand] - a)\n    pos[hand] = a\nprint(ans)"
+      ],
+      "text_sha256": "331d08791658b4c35cfc9b2166028e12966f2b699433209602b4ce19f60857ea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc369/abc369_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

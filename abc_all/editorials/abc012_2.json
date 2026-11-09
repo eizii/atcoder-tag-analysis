@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc012_2",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc012/editorial.pdf",
+      "text": "B問題入浴時間\n\n  問題概要 1.\n  アルゴリズム 2.\n\n\n\n\n\n2023/1/20                             ©AtCoder Inc. All rights reserved.                                    1010\n\f\nB問題問題概要\n\n• 秒数Nが与えられる。\n• HH:MM:SSのフォーマットに変換しなさい。\n\n\n• 制約\n• 0 ≦N ≦86399\n\n\n\n\n\n2023/1/20                                                                                             11\n\f\nB問題アルゴリズム\n\n• 入力\n   – 整数Nを受け取る\n          • 解らない場合はpracticeで確認しよう！\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2023/1/20                                                                                             12\n\f\nB問題アルゴリズム\n\n• 処理\n   – 秒数から、時間、分、秒のフォーマットに変換する\n   – やり方は複数存在する\n          • 各言語の標準ライブラリについている、時刻への変換機能を使う\n           – 高級な言語であれば大体ついてる\n                » C# だとDateTimeとか\n          • 時間、分、秒をそれぞれ計算して求める。\n           – 時間→N / 3600\n           – 分→(N / 60) % 60\n           – 秒→ N % 60\n           – フォーマットを合わせるのも自分でやる必要あり\n\n\n\n\n\n2023/1/20                                                                                             13\n\f\nB問題アルゴリズム\n\n• 出力\n   – A問題と同じく、答えを出力するだけ\n          • Print(S)みたいな感じ\n   – H, M, Sを自力求めた場合はちょっと大変？\n          • Print(H + “:” + M + “:” + S) みたいな感じ？\n           – これだと、たとえば0:13:8のように、二ケタ表示にならない。\n          • これの解決法も二つに分かれる\n           – 標準ライブラリを使う\n                » 言語ごとに違うので調べてみよう！\n           – 自力でフォーマットをそろえる\n                » H, M, Sをそれぞれ文字列にする\n                » 各文字列が2文字以下だったら、2文字になるまで先頭に0をつける\n                » あとは:でつなぐだけ。\n\n\n\n\n2023/1/20                                                                                             14",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "8df6a146ea7e39436ab61b9db44b2fa498fa1be5cad85e56902b1ea4058bb5f3"
+    }
+  ],
+  "status": "available"
+}

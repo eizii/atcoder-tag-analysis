@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc212_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc212/editorial/2355",
+      "text": "まず単純に比較する事を考えると、これは\n\\(NM\\)\n個の組について差分を取って比較する必要があり、今回の制約下では最大\n\\(4\\times 10^{10}\\)\n回行う必要があるためこれは間に合いません。\nそこで、まず\n\\(2\\)\nつの数列をソートします。入力された数列や集合について、順序が意味を持たないものについてはとりあえずソートして単調性を付加することによって解きやすくなることがあります。少なくとも入力される個数に対してソートができないことは現状では少なく、元の問題が解けるならばソートした後の入力についても解けるはずなので、そのような場合を考えることによって損をすることは無いです。\nさて、ソートした後のものを考えます。\nすなわち、\n\\(A_1\\leq A_2\\cdots \\leq A_N\\)\n,\n\\(B_1\\leq B_2\\cdots \\leq B_M\\)\nが成り立っているとします。このとき、\n\\(i=1,2,\\ldots,N\\)\nについて順に\n\\(\\lvert A_i-B_j\\rvert\\)\nが最小となるような\n\\(j\\)\nを探すことを考えます。\n\\(A_i\\leq B_j\\)\nであるならば任意の\n\\(j< j'\\)\nについて\n\\(\\lvert A_i-B_j\\rvert=B_j-A_i\\leq B_{j'}-A_i=\\lvert A_i-B_{j'}\\rvert\\)\nが成り立つため\n\\(j\\)\nより大きい\n\\(j'\\)\nについて試す必要はありません。これで少し減らせた気分がしますが、\n\\(A_i>B_N\\)\nであるとき、結局すべて試すことになるため、これでは足りません。ここで、逆も使えることが肝要な点です。すなわち、\n\\(B_j\\leq A_i<B_{j+1}\\)\nとなったとすると、\n\\(j'\\leq j\\)\nについては\n\\(\\lvert A_{i+1}-B_{j'} \\rvert=A_{i+1}-B_{j'}\\geq A_{i+1}-B_{j}\\geq A_i-B_j=\\lvert A_i-B_j\\rvert\\)\nより調べる必要がありません。\nこれをまとめると\n\\(A_1\\)\nと\n\\(B_1\\)\nから始めて次の操作を繰り返せば答えが求まる事が分かります。\n\\(\\lvert A_i-B_j\\rvert\\)\nの値が今までに調べた差分のいずれよりも小さければ暫定的な答えを変更する。\nその後、\n\\(A_i\\)\nと\n\\(B_j\\)\nを比較する。\n\\(A_i> B_j\\)\nならば\n\\(B_j\\)\nを\n\\(B_{j+1}\\)\nに変えて次の操作を行う。\n\\(A_i\\leq B_j\\)\nであるならば\n\\(j<j'\\)\nであるような\n\\(j'\\)\nについて\n\\(\\lvert A_{i}-B_{j'}\\rvert\\)\nを調べる必要はない。さらに\n\\(A_{i+1}\\)\nについても\n\\(j'<j\\)\nであるような\n\\(j'\\)\nについて\n\\(\\lvert A_{i+1}-B_{j'}\\rvert\\)\nの値を調べる必要はないため、\n\\(A_{i+1}\\)\nと\n\\(B_j\\)\nについて次の操作を行う。\n\\(i>N\\)\nまたは\n\\(j>M\\)\nとなったならば操作を終了する。\nさて、この場合の計算量を考えると、操作の度に\n\\(i+j\\)\nの値が\n\\(1\\)\nつずつ増えています。よって操作回数は高々\n\\(N+M-1\\)\n回です。各操作は\n\\(O(1)\\)\nで行えるため、この部分については\n\\(O(N+M)\\)\nで行う事ができ、最初のソートとあわせて、\n\\(O(N\\log N+M\\log M)\\)\nでこの問題は解けました。\nC++による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define N 200010\n#define INF 1010000000\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nint main(void) {\n\tint n, m;\n\tint a[N];\n\tint b[N];\n\tint ans = INF;\n\tcin >> n >> m;\n\trep(i, n)cin >> a[i];\n\trep(i, m)cin >> b[i];\n\tsort(a, a + n);\n\tsort(b, b + m);\n\tint x = 0;\n\tint y = 0;\n\twhile ((x < n) && (y < m)) {\n\t\tans = min(ans, abs(a[x] - b[y]));\n\t\tif (a[x] > b[y])y++;\n\t\telse x++;\n\t}\n\tcout << ans << endl;\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "df8a6e5e36704c3ffaee3dc5075f48976a19a55d841da60ede6fca0505d9d3bb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc212/abc212_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc212/editorial/2644",
+      "text": "二分探索やlower_boundなどを使わない解法を紹介します。\n$\\left( A_i,1 \\right),\\left( B_i,2 \\right)$ の $N+M$ 個のpairからなる配列 $C$ を用意し、これを $1$ 番目の値でsortします。タイブレークは $2$ 番目の値に従ってsortします。\n次に、隣り合う $C$ のpairについて、 $2$ 番目の値が異なるならば $1$ 番目の値の差を計算し、それらの最小値を出力するという方針を考えます。\n実は、この方針で正解することができます。この解法の正当性を考えます。初めに、 $A_i$ は全て異なるとして構いません。 $B_i$ についても同様です。(これは簡潔に正当性を確認するためで、実装ではこれが成り立ってなくても問題ありません)\nまず、 $A_i=B_j \\left( = V \\right)$ となるような $\\left(i,j \\right)$ が存在するとします。このとき答えは明らかに $0$ です。また、 $C$ には $\\left(V,1 \\right),\\left(V,2 \\right)$ が存在しており、これらは上のsortの方法だと隣り合うので最初の方針だと $0$ を出力します。よってこの場合は正解できます。\nそうでない場合、ある $i,j$ について $|A_i-B_j|$ が最小になるとします。対照性より $A_i < B_j$ として構いません。ここで、 $A_i < A_k < B_j$ もしくは $A_i < B_k < B_j$ となるような $k$ が存在するとします。このとき、前者なら $|A_k - B_j| < |A_i-B_j|$ となり後者なら $|A_i - B_k| < |A_i-B_j|$ となるのでこのような $i,j$ は最適ではありません。\n同様に考えることで、最適な値を取る $A_i,B_j$ について $A_i$ と $B_j$ の間となる値は $A,B$ の中に存在しないことが示せます。よって、 $C$ の隣接するpairのみに着目することで十分であり、最初の方針に正当性が成り立ちます。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int n,m;\n  cin>>n>>m;\n\n  vector<pair<int,int>> v;\n  for(int i=0;i<n;i++){\n    int a;\n    cin>>a;\n    v.emplace_back(a,1);\n  }\n  for(int i=0;i<m;i++){\n    int b;\n    cin>>b;\n    v.emplace_back(b,2);\n  }\n \n  sort(v.begin(),v.end());\n \n  int ans=2e9;\n  for(int i=0;i<n+m-1;i++){\n    if(v[i].second!=v[i+1].second){\n      ans=min(ans,v[i+1].first-v[i].first);\n    }\n  }\n  cout<<ans<<endl;\n}"
+      ],
+      "text_sha256": "bbe349fda759e481a0e2a667a2fdcf1bc920b34504de07feb7d92ea832d23730",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc212/abc212_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

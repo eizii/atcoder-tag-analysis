@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc418_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc418/editorial/13622",
+      "text": "まずは文字列\n\\(S\\)\nが美しい文字列である条件を発見しましょう。\nこの手の文字列や数列に対して操作を行う問題に取り組む場合は、\n不変量\n(操作の前後で変わらない何らかの値) を探すアプローチが有効になることが多いです。\nこれを踏まえて操作を観察します。\n0\nの個数に注目しましょう。\n00\nを\n1\nに変化させると、\n0\nの個数は 2 個減る。\n01\nを\n0\nに変化させると、\n0\nの個数は変わらない。\n10\nを\n0\nに変化させると、\n0\nの個数は変わらない。\n11\nを\n1\nに変化させると、\n0\nの個数は変わらない。\n操作によって\n\\(0\\)\nの個数は変わらないか 2 個減ることがわかります。ここから、\n操作によって\n0\nの個数の偶奇は不変である\nということが発見できます。\n\\(S\\)\nが美しい文字列であるためには最終的に\n\\(S=\\)\n1\nである必要があります。\n1\nは\n0\nを偶数個含む文字列です。よって上記の不変量を踏まえると、\n\\(S\\)\nが\n0\nを偶数個含む非空な文字列であれば美しい文字列であり、\n\\(S\\)\nが\n0\nを奇数個含む非空な文字列であれば美しい文字列ではない\nということが証明できます。以上より美しい文字列の条件を数え上げやすい形に言い換えることが出来ました。\n次は\n\\(T\\)\nに部分文字列として含まれる美しい文字列、すなわち\n0\nを偶数個含む非空な文字列の個数を数えましょう。\n\\(S\\)\nの\n\\(i\\)\n文字目から\n\\(j\\)\n文字目をまでを取り出してできる文字列を\n\\(S[i,j]\\)\nと表します。DP の状態を次のように置きます。\n\\(\\mathrm{dp}_{r,0}\\)\n:\n\\(S[1,r], S[2,r], \\dots, S[r,r]\\)\nのうち\n0\nを偶数個含む文字列の個数\n\\(\\mathrm{dp}_{r,1}\\)\n:\n\\(S[1,r], S[2,r], \\dots, S[r,r]\\)\nのうち\n0\nを奇数個含む文字列の個数\nこのように定義すると、\n\\(\\mathrm{dp}_{r,0}, \\mathrm{dp}_{r,1}\\)\nおよび\n\\(S_{r+1}\\)\nの文字の種類から\n\\(\\mathrm{dp}_{r+1,0}, \\mathrm{dp}_{r+1,1}\\)\nを計算できることがわかります。また、問題の答えは\n\\(\\sum_{r=1}^N \\mathrm{dp}_{r,0}\\)\nです。\nよってこの問題を動的計画法で\n\\(\\mathrm{O}(N)\\)\nで解くことが出来て、これは十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nconstexpr int nmax = 2e5 + 10;\nint dp[nmax][2];\n\nint main() {\n  int N;\n  string S;\n  cin >> N >> S;\n  for (int r = 1; r <= N; r++) {\n    if (S[r - 1] == '0') {\n      dp[r][0] = dp[r - 1][1];\n      dp[r][1] = dp[r - 1][0] + 1;\n    } else {\n      dp[r][0] = dp[r - 1][0] + 1;\n      dp[r][1] = dp[r - 1][1];\n    }\n  }\n  long long ans = 0;\n  for (int r = 1; r <= N; r++) ans += dp[r][0];\n  cout << ans << \"\\n\";\n}"
+      ],
+      "text_sha256": "c7befecb40e6146f2b9cc9d563c08bd24a7f40eae28442d3abdfd9ced6ff216e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc418/abc418_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc335_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc335/editorial/9037",
+      "text": "まず、グラフが連結であることから、\n\\(1\\)\nから\n\\(N\\)\nへのパスが存在します。このことから、最大スコアが\n\\(0\\)\n以上であることが分かります。\nそうすると、考慮するべきはスコアが正であるようなパスです。ここから、頂点\n\\(u\\)\nと頂点\n\\(v\\)\nを結ぶ辺について以下のような考察が導けます。\n\\(A_u < A_v\\)\nなら、この辺を\n\\(u \\rightarrow v\\)\nの向きに通る場合のみ考えればよい。\n\\(A_u > A_v\\)\nなら、 (\n\\(u,v\\)\nを入れ替えて ) 上の場合と同様に処理すればよい。\n\\(A_u = A_v\\)\nなら、この辺はどちら向きにも通りうる。\n以下のような DP を考えます。\n\\(dp[v] = \\)\n{ 頂点\n\\(1\\)\nから頂点\n\\(v\\)\nへのパスの暫定最高スコア }\n実は、以下のことが言えます。\n\\(A_u = A_v\\)\nなる辺\n\\(u - v\\)\nのみを残したグラフを\n\\(G\\)\nとする。このとき、\n\\(G\\)\n上で同じ連結成分に属する頂点たちはひとつの頂点として同一視してよい。\n例えば、\n\\(A_p < A_q = A_r < A_s\\)\n辺\n\\(p - q\\)\nが存在する。\n頂点\n\\(q,r\\)\nが\n\\(G\\)\n上で同じ連結成分に属する。\n辺\n\\(r - s\\)\nが存在する。\nなる頂点\n\\(p,q,r,s\\)\nについて、\n\\(p \\rightarrow q  \\rightarrow \\dots \\rightarrow r  \\rightarrow s\\)\nパスを\n\\(S\\)\nの単調増加性を崩さないように通ることができます。\n\\(q\\)\nから\n\\(r\\)\nへの移動には\n\\(G\\)\n上の\n\\(q,r\\)\nが属する連結成分の全域木をひとつ取り、そこに含まれる辺を用いればよいです。\nさて、頂点同一視の後残るものは\n\\(A_u < A_v\\)\nなる辺\n\\(u - v\\)\nのみです。\nこのとき、先ほど述べた\n\\(dp\\)\nは\n\\(A_u < A_v\\)\nなる辺\n\\(u - v\\)\nを\n\\(A_u\\)\nの小さい順に遷移させれば求めることができます。 ( 解くべき問題が、 DAG 上の最長経路問題となっています。 )\n遷移を行う際、先ほど行った頂点同一視を忘れないよう注意してください。頂点同一視は、 UnionFind などを用いて管理することができます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nstruct UnionFind {\n  vector<int> data;\n  UnionFind(int size) : data(size, -1) { }\n  bool unionSet(int x, int y) {\n    x = root(x); y = root(y);\n    if (x != y) {\n      if (data[y] < data[x]) swap(x, y);\n      data[x] += data[y]; data[y] = x;\n    }\n    return x != y;\n  }\n  bool findSet(int x, int y) {\n    return root(x) == root(y);\n  }\n  int root(int x) {\n    return data[x] < 0 ? x : data[x] = root(data[x]);\n  }\n  int size(int x) {\n    return -data[root(x)];\n  }\n};\n\nint main(){\n  int n,m;\n  cin >> n >> m;\n  vector<int> a(n);\n  for(auto &nx : a){cin >> nx;}\n  UnionFind uf(n);\n  vector<vector<pair<int,int>>> vp(200005);\n  for(int i=0;i<m;i++){\n    int u,v;\n    cin >> u >> v;\n    u--;v--;\n    if(a[u]>a[v]){swap(u,v);}\n    if(a[u]==a[v]){uf.unionSet(u,v);}\n    else{vp[a[u]].push_back({u,v});}\n  }\n\n  vector<int> dp(200005,-1e9);\n  dp[uf.root(0)]=1;\n  for(auto &nx : vp){\n    for(auto [u,v] : nx){\n      u=uf.root(u);\n      v=uf.root(v);\n      if(dp[u]>0){\n        dp[v]=max(dp[v],dp[u]+1);\n      }\n    }\n  }\n  cout << max(0,dp[uf.root(n-1)]) << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "cbe671e3ef1c2bbdcd48be1072f7b368a8cdb45acf49c5e18c6810c7e7f0c477",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc335/abc335_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc335/editorial/9054",
+      "text": "ダイクストラ法は、辺の重みが非負のときに始点からの最短距離を求める次のようなアルゴリズムです。\nダイクストラ法の正当性の証明と同様に考えれば、この問題では次のようなアルゴリズムが正当だと分かります。\nダイクストラ法と同様の実装により、このアルゴリズムは十分高速に動作します。\n例えばペア\n(A[v], 頂点 v のスコアの(-1)倍)\nをキーとして優先度つきキューを使えばよいです。",
+      "codes": [
+        "while 距離が未確定の頂点がある:\n    未確定の頂点のうち距離が最小の頂点の距離を確定する\n    その頂点と辺で結ばれた頂点の距離を更新する",
+        "while スコアが未確定の頂点がある:\n    未確定の頂点 v のうち A[v] が最も小さく、その中でスコアが最大の頂点のスコアを確定する\n    その頂点と辺で結ばれた頂点のスコアを更新する"
+      ],
+      "text_sha256": "3906bfc4228f45be020c450d2a6e7ef50d55709b6cb447e53a672c9b19711cd6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc335/abc335_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

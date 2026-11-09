@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc413_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13405",
+      "text": "クエリを処理する中で、\n\\(A\\)\nの長さは最大で\n\\(2 \\times 10^{14}\\)\nになります。そのため、\n\\(A\\)\nをそのまま配列として保持することは難しいです。\nここで追加クエリごとの\n\\((c,x)\\)\nの組を列として保持することで\n\\(A\\)\nを管理する方法があります。あるいは、\n\\(A\\)\nを連長圧縮(ランレングス圧縮)をした列で管理すると考えても良いです。\n\\(A\\)\nに対して削除クエリを行う方法を考えます。\n\\(A\\)\nの先頭から順に\n\\((c,x)\\)\nの組を見ていき、\n\\(c \\leq k\\)\nの時は整数の削除し再び先頭から削除する操作を続け、\n\\( c > k\\)\nの時は先頭の整数の組を\n\\((c-k,x)\\)\nに置き換え削除をやめます。\nこの操作を通して整数\n\\(x\\)\nを\n\\(i\\)\n個削除した情報を得られるため、容易に削除した数の総和を求めることができます。\n追加クエリでは整数の組は\n\\(1\\)\n個追加され、一連削除クエリでは高々追加された整数の組の数しか削除せず、各クエリでは高々\n\\(1\\)\nつの整数の組に対して変更の操作を行います。そのため、時間計算量\n\\(\\mathrm{O}(Q)\\)\nで解くことができました。\n出力する整数の最大値は\n\\(10^{18}\\)\nと 32 bit整数型ではオーバーフローしてしまうため実装の際は注意する必要があります。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\nint main() {\n    int q;\n    cin >> q;\n    // 追加クエリを順に que で管理する\n    queue<pair<ll, ll>> que;\n    while (q--) {\n        int t;\n        cin >> t;\n        if (t == 1) {\n            ll c, x;\n            cin >> c >> x;\n            que.emplace(c, x); // (c,x) を追加\n        } else {\n            ll k;\n            cin >> k;\n            ll ans = 0;\n            // 先頭から (c,x) を順に見ていく。\n            while (!que.empty() && que.front().first <= k) {\n                // 先頭を削除し和を加算する\n                ans += que.front().first * que.front().second;\n                k -= que.front().first;\n                que.pop();\n            }\n            if (k != 0) {\n                // 先頭の(c,x)について c>k なので (c-k,x)で置き換える\n                que.front().first -= k;\n                ans += k * que.front().second;\n            }\n            cout << ans << '\\n';\n        }\n    }\n}"
+      ],
+      "text_sha256": "e5e9f18c87ab05dc86f152d205deaf3ba684b79f6ba1365001c283297546ec6f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

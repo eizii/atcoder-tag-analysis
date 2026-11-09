@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc124_a",
+  "editorials": [
+    {
+      "text": "A: Buttons\n大きい方のボタンを選んで押すことを2 回繰り返すのが最適です。基本的には同じボタンを押しますが、\nA = B のときは両方のボタンを1 回ずつ押すのが最適なので、注意する必要があります。\n実装では、以下の3 つのパターンについて場合分けすると比較的簡単に書くことができます。\n• A > B の場合: A + (A −1) が答えになります。\n• A < B の場合: B + (B −1) が答えになります。\n• A = B の場合: A + B が答えになります。\nC++ での実装例を以下に示します。\n#include <bits/stdc ++.h>\nusing\nnamespace\nstd;\nint main () {\nint A, B; cin >> A >> B;\nint ans;\nif (A > B) {\nans = A + (A -1);\n}\nelse if (B > A) {\nans = B + (B -1);\n}\nelse {\nans = A + B;\n}\ncout << ans << endl;\n}\n",
+      "text_sha256": "ceb9c0490aff03cf97102ac501a7422bb36ec347c5f7872c6ab2b503a301241e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc124/abc124_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

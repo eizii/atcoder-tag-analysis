@@ -1,0 +1,42 @@
+{
+  "problem_id": "abc333_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc333/editorial/7948",
+      "text": "可読性のため、以下\n\\(p=\\frac{1}{2}\\)\nとします。\n動的計画法によりこの問題を解きます。\n\\(\\mathrm{dp}[i][j]\\)\nを、今列に\n\\(i\\)\n人いるときに、先頭から\n\\(j\\)\n番目の人が最後に残る確率と定義します。求めたいものは\n\\(\\mathrm{dp}[N][1],\\ldots,\\mathrm{dp}[N][N]\\)\nです。\ndp テーブルを\n\\(i\\)\nの昇順に埋めましょう。\n列に\n\\(i\\)\n人いるとき、先頭から\n\\(k\\)\n番目の人が列から取り除かれるとします。このような確率は、現在から\n\\(k\\)\n回目の操作で初めて人が取り除かれる確率、現在から\n\\(k + i\\)\n回目の操作で初めて人が取り除かれる確率、現在から\n\\(k +2 i\\)\n回目の操作で初めて人が取り除かれる確率、\n\\(\\ldots\\)\nを足し合わせればよく、\n\\[p^{k}(1 + p ^ i + p^{2i}+\\ldots) = \\frac{p^{k}}{1-p^i}\\]\nと求めることができます。 (ここで無限等比級数の和の公式を用いました）\nこの式を用いることで、この問題を\n\\(\\mathrm{O}(N^3)\\)\nで解くことができますが、高速化が必要です。\n遷移の形を具体的に見てみましょう。例えば\n\\(i=4\\)\nのときを貰う DP によって考えると、以下のようになっています。（なお、以下では便利のため 0-indexed で考えています。）(また、各項に共通の係数である\n\\(\\frac{p}{1-p^i}\\)\nは省略しています。)\n\\(\\mathrm{dp}[5][0] =  \\mathrm{dp}[4][3]p^1 + \\mathrm{dp}[4][2] p^2+ \\mathrm{dp}[4][1] p^3 + \\mathrm{dp}[4][0] p^4 \\)\n\\(\\mathrm{dp}[5][1] = \\mathrm{dp}[4][0] p^0+ \\mathrm{dp}[4][3] p^2+ \\mathrm{dp}[4][2] p^3 + \\mathrm{dp}[4][1] p^4 \\)\n\\(\\mathrm{dp}[5][2] = \\mathrm{dp}[4][1] p^0+ \\mathrm{dp}[4][0] p^1+ \\mathrm{dp}[4][3] p^3 + \\mathrm{dp}[4][2] p^4 \\)\n\\(\\vdots\\)\nこの遷移の式を眺めると、\n\\(\\mathrm{dp}[i+1][j]\\)\nに加算される値と\n\\(\\mathrm{dp}[i+1][j+1]\\)\nに加算される値が似た形をしていることが分かります。\n実際、\n\\(p^{i}\\)\nの項以外は、\n\\(\\mathrm{dp}[i+1][j+1]\\)\nに加算される値が\n\\(\\mathrm{dp}[i+1][j]\\)\nに加算される値の\n\\(p\\)\n倍となっています。\n以上より、\n\\(\\mathrm{dp}[i+1][j]\\)\nが分かっていれば適当な処理により\n\\(\\mathrm{dp}[i+1][j+1]\\)\nの項は\n\\(\\mathrm{O}(1)\\)\nで求められます。（実装例も参考にしてください。）\n\\(\\mathrm{dp}[i+1][0]\\)\nは愚直に\n\\(\\mathrm{O}(N)\\)\nかけて求めて、\n\\(\\mathrm{dp}[i+1][j+1]\\)\nは\n\\(\\mathrm{O}(1)\\)\nで求めることで、この問題は\n\\(\\mathrm{O}(N^2)\\)\nで解けます。\n実装例",
+      "codes": [],
+      "text_sha256": "3de3de7c62c8351a72fa57f9abf605de7733b292510f8d86500fe6da3531225f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc333/abc333_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc333/editorial/8001",
+      "text": "\\(O(N^2)\\)\n時間で解く別解を説明したあと，\n\\(O(N\\log^2N)\\)\n時間に高速化する方法を説明します．\n[1]\n\\(O(N^2)\\)\n時間で解く別解\n\\(i\\)\n番目の人が勝つ確率を dp 等を使わず直接数式にしましょう．\nまず，本問のゲームを次のように言い換えます．\n当たりまたは外れが確率\n\\(1/2\\)\nで出るくじを引き，\n結果によらず列の末尾に移動する．\n全員が 1 回以上当たりくじを引くまで繰り返す．\n最後に当たりを引いた人が，人\n\\(i\\)\nである確率を求めよ．\n人\n\\(i\\)\nがちょうど\n\\(k\\)\n回目で当たりくじを引き，それが全員の中で最後である確率を\n\\(p_k\\)\nとします．\n\\(p_k\\)\nは次のような値を全員についてかけたものになります．\n人\n\\(i\\)\n：\n\\(k-1\\)\n回まで外れ，\n\\(k\\)\n回目が当たりである確率\n\\(2^{-k}\\)\n.\n初期位置で人\n\\(i\\)\nよりも左に居る人：最初の\n\\(k\\)\n回以内に当たりくじを引く確率\n\\(1-2^{-k}\\)\n.\n初期位置で人\n\\(i\\)\nよりも右に居る人：最初の\n\\(k-1\\)\n回以内に当たりくじを引く確率\n\\(1-2^{-k+1}\\)\n．\nしたがって，\n\\[p_k = 2^{-k}\\cdot (1-2^{-k})^{i-1}\\cdot (1-2^{-k+1})^{N-i}\\]\nとなります．したがって多項式\n\\(f_i\\)\nを\n\\[f_i = \\frac12x\\cdot \\biggl(1-\\frac12 x\\biggr)^{i-1}\\cdot (1-x)^{N-i}\\]\nにより定めれば，人\n\\(i\\)\nに対する答は\n\\(\\sum_{k=1}^{\\infty}f_i(2^{-k})\\)\nとなります．\n\\(j>0\\)\nに対して\n\\(c_j = \\sum_{k=0}^{\\infty}(2^{-kj})\\)\nにより\n\\(c_j\\)\nを定めれば，答は\n\\(\\sum_{j=1}^N([x^j]f_i(x))\\cdot c_j\\)\nと書けます．\n\\(f_i(x)\\)\nから\n\\(f_{i+1}(x)\\)\nを求める計算が低次の多項式を掛けて割る操作で\n\\(O(N)\\)\n時間で計算できるので，\n\\(f_1, \\ldots, f_N\\)\nのすべてを合計\n\\(O(N^2)\\)\n時間で計算でき，本問を解くことができます．\n解答例（コンテスト中実装）：\nhttps://atcoder.jp/contests/abc333/submissions/48572822\n[2]\n\\(O(N\\log^2N)\\)\n時間での解法\n最後の\n\\(\\sum_{j=1}^N([x^j]f_i(x))\\cdot c_j\\)\nは，適切に多項式\n\\(g\\)\nを定義すれば\n\\([x^N]f_i(x)g(x)\\)\nと書けます．\n結局，おおよそ次のようにかけることが分かります：\n\\(1\\)\n次式\n\\(L_1(x), \\ldots, L_N(x), R_1(x), \\ldots, R_N(x)\\)\nが与えられる．\n\\(N\\)\n次式\n\\(g(x)\\)\nも与えられる．\n各\n\\(i\\)\nに対して\n\\([x^N] L_1(x)\\cdots L_{i-1}(x) g(x) R_{i+1}(x)\\cdots R_N(x)\\)\nを求めよ．\nこれは典型的な分割統治法により\n\\(O(N\\log^2N)\\)\n時間で解けます．次の解説記事の「パターン 2」を参考にしてください．\nhttps://maspypy.com/%e5%88%86%e5%89%b2%e7%b5%b1%e6%b2%bbfft-%e3%81%ae%e3%82%88%e3%81%8f%e3%81%82%e3%82%8b%e5%bd%a2%e3%81%ae%e3%81%b2%e3%81%a8%e3%81%a4\n（注：やや慣れている人向けの解説になっていて，ABC rated レベルだとかなり難しいと思います．\nhttps://atcoder.jp/contests/abc281/tasks/abc281_h\nの解説等も参考になるかもしれません．）\n今回は\n\\(L_i(x)\\)\nや\n\\(R_i(x)\\)\nがすべての\n\\(i\\)\nに対して同じであり，その\n\\(n\\)\n個の積を\n\\(O(n)\\)\n時間で計算できるため，いくらか実装が易しくなると思います（区間積の bottom up な計算が不要）．\n解答例：\nhttps://atcoder.jp/contests/abc333/submissions/48605939",
+      "codes": [],
+      "text_sha256": "dd12cf7b8d7615908f12c96883fd07f12ec170ddd7d57b2f703ea38312373ee7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc333/abc333_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc333/editorial/8003",
+      "text": "人\n\\(i\\)\nについては最初に\n\\(i-1\\)\n回操作を行うことで人\n\\(1\\)\nについての問題に帰着できます。この過程で\n\\(a\\)\n人減る確率 (\n\\(0 \\leq a \\leq i - 1\\)\n) は、\n\\(\\displaystyle \\frac{\\binom{i-1}{a}}{2^{i-1}}\\)\nです。\n\\(\\mathrm{dp}_n\\)\nを、\n\\(n\\)\n人から始めたとき人\n\\(i\\)\nが勝つ確率とします。\n\\(\\mathrm{dp}_1 = 1\\)\nです。また\n\\(n \\geq 2\\)\nにおいて\n\\(\\displaystyle \\mathrm{dp}_n =  \\sum_{i=1}^{n - 1} \\frac{\\binom{n-1}{n-i}}{2^n - 1}  \\mathrm{dp_i}\\)\nです。\n先程の帰着から、 人\n\\(i\\)\nについての答えは\n\\(\\displaystyle \\sum_{a=0}^{i-1} \\frac{\\binom{i-1}{a}}{2^{i-1}}\\mathrm{dp}_{n - a}\\)\nです。\n以上は、適切に逆元を前計算して式の通りに計算すれば、いずれも\n\\(O(n^2)\\)\nで計算できます。",
+      "codes": [],
+      "text_sha256": "436365931ea231604a7bde9554ef798913a0afc0f542c8644e4b209f0e862144",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc333/abc333_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc333/editorial/8002",
+      "text": "\\(f(n, k) :=\\)\n列に\n\\(n\\)\n人いるとき、（0-indexed で）先頭から\n\\(k\\)\n番目の人が最後に残る確率 とします。（この DP 定義は公式解説と同様です）\n\\(0\\)\n番目の人が最後に残るためには、最初の操作で取り除かれない必要があります。このときこの人は\n\\(n-1\\)\n番目に移動するので、\n\\[f(n, 0) = \\frac{1}{2} f(n, n-1) \\tag{1}\\]\nが成立します。\n他の人（\n\\(k\\)\n番目）については、その人が初めて\n\\(0\\)\n番目に移動するまでに取り除かれる人数\n\\(j\\)\nで場合分けすることで、\n\\[f(n, k) = \\sum_{j = 0}^k \\frac{1}{2^k} \\binom{k}{j} f(n-j, 0) \\quad (k \\neq 0) \\tag{2}\\]\nが得られます。これを愚直に実装すると\n\\(\\Theta(N^3)\\)\nの DP になります。\n高速化のためにさらに変形します。\n\\((2)\\)\n式で\n\\(k = n - 1\\)\nとしたものと\n\\((1)\\)\n式を連立することにより\n\\[f(n, 0) = \\frac{1}{2^n - 1} \\sum_{j=1}^{n-1} \\binom{n-1}{j} f(n-j, 0) \\tag{3}\\]\nが得られます。\n\\((3)\\)\nを利用することで、\n\\(n = 1, 2, \\ldots, N\\)\nに対する\n\\(f(n, 0)\\)\nを\n\\(O(N^2)\\)\nの DP で求めることができます。これが求まれば、\n\\((2)\\)\nから\n\\(k = 0, 1, \\ldots, N - 1\\)\nに対する\n\\(f(N, k)\\)\nを\n\\(O(N^2)\\)\nの DP で求めることができます。以上より全体\n\\(O(N^2)\\)\nで解くことができました。",
+      "codes": [],
+      "text_sha256": "71920f6c152851f7d0ff665fd8c6c5efa50686930fb0cfdb1cf40422c1a55c41",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc333/abc333_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

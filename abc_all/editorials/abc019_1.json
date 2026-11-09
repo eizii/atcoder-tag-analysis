@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc019_1",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc019/editorial.pdf",
+      "text": "A問題 高橋くんと年齢\n\n  問題概要 1.\n  アルゴリズム 2.\n\n\n\n\n\n2015/2/28                             ©AtCoder Inc. All rights reserved.                                      33\n\f\nA問題 問題概要\n\n• 3つの整数が与えられる．\n• それらの中央値を求めよ．\n• 制約\n   – 1 ≦ (与えられるそれぞれの整数) ≦ 1000\n\n\n\n\n\n2015/2/28                                                                                               4\n\f\nA問題 アルゴリズム\n\n• 解法1\n   – 3つの整数を配列にしてソートします．\n   – 2番目の値を答えます．\n          • C++ なら，int ar[3]={a,b,c}; sort(ar,ar+3); とし， ar[1] が答え\n          • また，以下のように a<=b<=c と並べて，bを答えにすることもでき\n     ます\n\n                if(a>b) swap(a,b);\n                if(b>c) swap(b,c);\n                if(a>b) swap(a,b);\n• 解法2\n   – 3つの整数のうち，最大値でも最小値でもないものを探し\n   てその値を答えます．\n\n\n\n\n2015/2/28                                                                                               5",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "e4846a81185742af1d60124d57f120b47fd61a847351cab07f0f3aa1061499e6"
+    }
+  ],
+  "status": "available"
+}

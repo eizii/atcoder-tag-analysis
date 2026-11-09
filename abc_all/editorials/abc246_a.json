@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc246_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc246/editorial/3704",
+      "text": "入力で与えられた\n\\(3\\)\n点\n\\((x_1, y_1), (x_2, y_2), (x_3, y_3)\\)\nに対し、長方形の残る\n\\(1\\)\n点\n\\((x_{\\mathrm{ans}}, y_{\\mathrm{ans}})\\)\nを求める方法を考えます。\nまず、\n\\(x_{\\mathrm{ans}}\\)\nを求めます。\n\\(x_1, x_2, x_3\\)\nは問題文中にある長方形の異なる\n\\(3\\)\n頂点の\n\\(x\\)\n座標であることから、\n\\(x_1, x_2, x_3\\)\nのうちどれか\n\\(2\\)\nつは等しいです。そして、残る\n\\(1\\)\nつは他の\n\\(2\\)\nつとは異なる値であり、これが\n\\(x_{\\mathrm{ans}}\\)\nと等しいです。\nすなわち、\n\\(x_1 = x_2\\)\n、\n\\(x_2 = x_3\\)\n、\n\\(x_3 = x_1\\)\nのうちちょうど\n\\(1\\)\nつが成り立ち、\n\\(x_1 = x_2\\)\nのとき、\n\\(x_{\\mathrm{ans}} = x_3\\)\n\\(x_2 = x_3\\)\nのとき、\n\\(x_{\\mathrm{ans}} = x_1\\)\n\\(x_3 = x_1\\)\nのとき、\n\\(x_{\\mathrm{ans}} = x_2\\)\nです。\n\\(y_{\\mathrm{ans}}\\)\nについても同様に、\n\\(y_1 = y_2\\)\n、\n\\(y_2 = y_3\\)\n、\n\\(y_3 = y_1\\)\nのうちちょうど\n\\(1\\)\nつが成り立ち、\n\\(y_1 = y_2\\)\nのとき、\n\\(y_{\\mathrm{ans}} = y_3\\)\n\\(y_2 = y_3\\)\nのとき、\n\\(y_{\\mathrm{ans}} = y_1\\)\n\\(y_3 = y_1\\)\nのとき、\n\\(y_{\\mathrm{ans}} = y_2\\)\nです。\nよって、与えられた\n\\((x_1, y_1), (x_2, y_2), (x_3, y_3)\\)\nに対して、上記にしたがって\n\\(x_{\\mathrm{ans}}, y_{\\mathrm{ans}}\\)\nを計算して出力することでこの問題に正解できます。\n「\n\\(x_1 = x_2\\)\nのとき」に該当するかなどの判定には、プログラミング言語の標準的な機能である条件分岐の機能（ if 文など）を用いることができます。\nC++ 言語による正解例を以下に記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(void)\n{\n  int x_1, x_2, x_3, y_1, y_2, y_3, x_ans, y_ans;\n  \n  cin >> x_1 >> y_1;\n  cin >> x_2 >> y_2;  \n  cin >> x_3 >> y_3;\n  \n  if(x_1 == x_2) x_ans = x_3;\n  if(x_2 == x_3) x_ans = x_1;  \n  if(x_3 == x_1) x_ans = x_2;  \n  \n  if(y_1 == y_2) y_ans = y_3;\n  if(y_2 == y_3) y_ans = y_1;  \n  if(y_3 == y_1) y_ans = y_2;\n  \n  cout << x_ans << \" \" << y_ans << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "c4c3bc457931a482d8d8ec960e00792c503f4ddd5f0bb9f66d7e7c29cb3dc27d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc246/abc246_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc246/editorial/3720",
+      "text": "ユーザー解説です\n排他的論理和を用いることで場合分けが不要になり、実装を簡略化することが可能です。\n\\(x,y\\)\nそれぞれについて入力の排他的論理和が答えと一致します。\n同様のテクニックを以前の問題で解説していますので、詳しくは\nhttps://atcoder.jp/contests/abc236/editorial/3313\nをご覧ください。\n実装例 (C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    vector<int> x(3), y(3);\n    cin >> x[0] >> y[0] >> x[1] >> y[1] >> x[2] >> y[2];\n    cout << (x[0] ^ x[1] ^ x[2]) << \" \" << (y[0] ^ y[1] ^ y[2]) << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "83f61a380bba55a941603d95ff9873c9cc110241a1958af491f7be899f60ed1d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc246/abc246_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

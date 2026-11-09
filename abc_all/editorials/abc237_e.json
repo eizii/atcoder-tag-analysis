@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc237_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc237/editorial/3339",
+      "text": "まず、楽しさの\n\\(-1\\)\n倍をコストとみなすことで、問題文は次のような最短経路の問題に言い換えることができます。\n\\(N\\)\n頂点\n\\(2M\\)\n辺の有向グラフが与えられる。\n各頂点には頂点ごとに標高\n\\(H_i\\)\nという値が定まっている。\n各\n\\(1\\leq i\\leq M\\)\nについて、\n\\((U_i,V_i)\\)\nの標高の高い方, 低い方をぞれぞれ\n\\(X_i\\)\n,\n\\(Y_i\\)\nとして、頂点\n\\(X_i\\)\nから頂点\n\\(Y_i\\)\nにはコスト\n\\((H_{Y_i}-H_{X_i}) (\\leq 0)\\)\nの辺が、頂点\n\\(Y_i\\)\nから頂点\n\\(X_i\\)\nにはコスト\n\\(2(H_{X_i}-H_{Y_i}) (\\geq0)\\)\nの辺が、張られている。\n(辺を通じてどの頂点からどの頂点へも移動可能である)\n頂点\n\\(1\\)\nからの最小移動コスト(負にもなり得る)が最小となる頂点のその最小移動コストを求めよ。(=各頂点について頂点\n\\(1\\)\nからの最小移動コストを求め、全頂点の中でその最小値を求めよ。)\nこの問題に直接ダイクストラ法を用いることはできません。\nなぜなら、このグラフはコストが負の辺が含まれているからです。\n一方で、ベルマンフォード法では計算量が\n\\(O(NM)\\)\nとなり間に合いません。そこで、ポテンシャルを用いてこの問題をダイクストラ法が適用できる形にすることを考えます。\n具体的には、高橋君に対して (楽しさ)+(現在いる地点の標高) という量を考えます。各広場について、その広場で移動を終えた時のその値の最大値が求まれば、その値からその広場の標高を差し引いた値を広場ごとに出して、最大を取れば答えが求まります。よって、 (楽しさ)+(現在いる地点の標高) の\n\\(-1\\)\n倍をコストとみなして、次のような問題に言い換えます。\n\\(N\\)\n頂点\n\\(2M\\)\n辺の有向グラフが与えられる。\n各頂点には頂点ごとに標高\n\\(H_i\\)\nという値が定まっている。\n各\n\\(1\\leq i\\leq M\\)\nについて、\n\\((U_i,V_i)\\)\nの標高の高い方, 低い方をぞれぞれ\n\\(X_i\\)\n,\n\\(Y_i\\)\nとして、頂点\n\\(X_i\\)\nから頂点\n\\(Y_i\\)\nにはコスト\n\\(0\\)\nの辺が、頂点\n\\(Y_i\\)\nから頂点\n\\(X_i\\)\nにはコスト\n\\((H_{X_i}-H_{Y_i}) (\\geq0)\\)\nの辺が、張られている。\n(辺を通じてどの頂点からどの頂点へも移動可能である)\n各頂点について頂点\n\\(1\\)\nからの最小移動コストに\n\\(H_i\\)\nを加えたものを求め、全頂点の中でその最小値を求めよ。\nこの問題はダイクストラ法によって頂点\n\\(1\\)\nから各頂点への最短経路を求め、そのコストに\n\\(H_i\\)\nを加えたものについての max を取れば良いです。よって、\n\\(O(N\\log M)\\)\nでこの問題を解く事が出来ました。\nc++による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define N 200010\n#define INF (long long)2e+18\n\nusing namespace std;\n\nint main(void) {\n\tint n, m;\n\tlong long h[N];\n\tvector<pair<int, long long> >e[N];\n\n\tpriority_queue<pair<long long, int> >pq;\n\tpair<long long, int> p;\n\tlong long d[N];\n\n\tint k, x, y;\n\tlong long ans;\n\n\tcin >> n >> m;\n\tfor (int i = 0; i < n; i++)cin >> h[i];\n\tfor (int i = 0; i < m; i++) {\n\t\tcin >> x >> y;\n\t\tx--;\n\t\ty--;\n\t\te[x].push_back({ y,max(h[y] - h[x],(long long)0) });\n\t\te[y].push_back({ x,max(h[x] - h[y],(long long)0) });\n\t}\n\n\tfor (int i = 0; i < n; i++)d[i] = INF;\n\td[0] = 0;\n\tans = 0;\n\tpq.push({ -d[0],0 });\n\n\tfor (int i = 0; i < n; i++) {\n\t\t\tp = pq.top();\n\t\twhile (d[p.second] < -p.first) {\n\t\t\t\tpq.pop();\n\t\t\t\tp = pq.top();\n\t\t}\n\t\tpq.pop();\n\t\tk = p.second;\n\t\tans = max(ans, h[0] - h[k] - d[k]);\n\t\tfor (int i = 0; i < e[k].size(); i++) {\n\t\t\tif (d[e[k][i].first] > (d[k] + e[k][i].second)) {\n\t\t\t\td[e[k][i].first] = d[k] + e[k][i].second;\n\t\t\t\tpq.push({ -d[e[k][i].first],e[k][i].first });\n\t\t\t}\n\t\t}\n\t}\n\n\tcout << ans << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "cbed0821573ab7c9bc7a117502d77e5c587377480d7c28299337b689a10db37a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc237/abc237_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc237/editorial/3346",
+      "text": "広場\n\\(1\\)\nから広場\n\\(i\\)\nまでの、ある移動経路について考えます。  ​\nこの経路を構成する「より高い場所へ行く移動」「より低い場所へ行くか標高の変化しない移動」「すべての移動」について、移動前後の広場間の標高差の絶対値の総和をそれぞれ\n\\(U_i, D_i, d_i\\)\nとします。 すると以下の2式が成立します。\n\\(d_i = U_i + D_i \\)\n\\(H_i - H_1 = U_i - D_i \\)\n広場\n\\(i\\)\nで行動を終えた場合の楽しさを\n\\(P_i\\)\nとすると、\n\\(P_i = D_i - 2U_i = -\\frac{1}{2}d_i -  \\frac{3}{2}(H_i - H_1)\\)\nと表され、これは\n\\(d_i\\)\nが最小となるような移動経路を考えたときに最大値をとります (＊) 。\nよって、広場を頂点、坂を辺、広場間の標高差の絶対値を辺のコストとしたグラフを構成し、ダイクストラ法で点\n\\(1\\)\nから各頂点への最短距離を求めて\n\\(d_1, d_2, \\ldots, d_n\\)\nとして、上記の式から\n\\(\\max_{i}{P_i}\\)\nを計算することで解けます。\n(＊) このことは以下の直感的な考察と合致します:「目的地が固定なら、どこかで多く下ったらその分どこかで多く上らねばならず、多く動いた分の楽しさの和は負なのだから、結局上りも下りもなるべくしないほうが良さそう」",
+      "codes": [],
+      "text_sha256": "f3d3792362ef788e60116a349ed50f63423fb4a0dedb87d9b2e238c43b7f3386",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc237/abc237_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,46 @@
+{
+  "problem_id": "abc267_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc267/editorial/4711",
+      "text": "解説では主に C++ のコードを用いて説明しますが、最後に Python での実装例も掲載しています。\n\\(S\\)\nの一文字目が\n1\nなら答えは\nNo\nです。以下では\n\\(S\\)\nの一文字目が\n0\nの場合を考えます。\nまず、全ての列について、その列に立っているピンが存在するかどうか求めます。C++ での実装は以下のようになります。\n問題文ではピンの番号は 1-indexed ですが、コードでは 0-indexed になっているので混乱してしまう人がいるかもしれません。その場合は、次のようにするとミスを防ぐことができます。\nその後、問題文の条件を満たすような二つの列を全探索します。\nこれは二重 for-loop を用いて書くことができます。\n二つの列の間にピンが全て倒れている列があるかどうか調べるには、三つ目の for 文を if ブロックの中に追加します。\nC++ において\nreturn 0;\nという文は\nmain()\n関数での処理を終了し\n0\nを返すという意味を持ちます。これにより、条件を満たす二つの列が一組見つかった段階で\nYes\nを出力し実行を終了することができます。これがなければ、\nYes\nが複数回出力される可能性があります。\n最後に、条件を満たす二つの列が見つからなかった場合に\nNo\nを出力するコードを追加します。全てをまとめると次のようなコードになります。\n実装例 (Python) :",
+      "codes": [
+        "string s;\ncin >> s;\n\narray<bool, 7> column = {};\ncolumn[0] = (s[6] == '1');\ncolumn[1] = (s[3] == '1');\ncolumn[2] = (s[1] == '1') or (s[7] == '1');\ncolumn[3] = (s[0] == '1') or (s[4] == '1');\ncolumn[4] = (s[2] == '1') or (s[8] == '1');\ncolumn[5] = (s[5] == '1');\ncolumn[6] = (s[9] == '1');",
+        "string s;\ncin >> s;\ns = '$' + s // s の先頭に適当な一文字を追加する\n\narray<bool, 7> column = {};\ncolumn[0] = (s[7] == '1');\ncolumn[1] = (s[4] == '1');\ncolumn[2] = (s[2] == '1') or (s[8] == '1');\ncolumn[3] = (s[1] == '1') or (s[5] == '1');\ncolumn[4] = (s[3] == '1') or (s[9] == '1');\ncolumn[5] = (s[6] == '1');\ncolumn[6] = (s[10] == '1');",
+        "for (int i = 0; i < 7; ++i) {\n    for (int j = 0; j < i; ++j) {\n        if (column[i] and column[j]) {\n            // それぞれの列に立っているピンが存在するなら、\n            // その間にピンが全て倒れている列があるかどうか調べる\n        }\n    }\n}",
+        "for (int k = j + 1; k < i; ++k) {\n    if (!column[k]) {\n        cout << \"Yes\\n\";\n        return 0;\n    }\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    s = '$' + s;\n    if (s[1] == '1') {\n        cout << \"No\\n\";\n    } else {\n        array<bool, 7> column = {};\n        column[0] = (s[7] == '1');\n        column[1] = (s[4] == '1');\n        column[2] = (s[2] == '1') or (s[8] == '1');\n        column[3] = (s[1] == '1') or (s[5] == '1');\n        column[4] = (s[3] == '1') or (s[9] == '1');\n        column[5] = (s[6] == '1');\n        column[6] = (s[10] == '1');\n        for (int i = 0; i < 7; ++i) {\n            for (int j = 0; j < i; ++j) {\n                if (column[i] and column[j]) {\n                    for (int k = j + 1; k < i; ++k) {\n                        if (!column[k]) {\n                            cout << \"Yes\\n\";\n                            return 0;\n                        }\n                    }\n                }\n            }\n        }\n        cout << \"No\\n\";\n    }\n    return 0;\n}",
+        "def search(column):\n  for i in range(7):\n    for j in range(i):\n      if column[i] and column[j] :\n        for k in range(j + 1, i):\n          if not column[k]:\n            return 'Yes'\n  return 'No'\n\ns = input()\ns = '$' + s\n\nif s[1] == '1':\n  print('No')\nelse:\n  column = [False] * 7\n  column[0] = (s[7] == '1');\n  column[1] = (s[4] == '1');\n  column[2] = (s[2] == '1') or (s[8] == '1');\n  column[3] = (s[1] == '1') or (s[5] == '1');\n  column[4] = (s[3] == '1') or (s[9] == '1');\n  column[5] = (s[6] == '1');\n  column[6] = (s[10] == '1');\n  print(search(column))"
+      ],
+      "text_sha256": "4788d7213c1da4e063e077cf2e4af746df931e4cc9e87b099235b5b1bcfd12f7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc267/abc267_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc267/editorial/4740",
+      "text": "C++での軽い実装方法を紹介します。\nset<int> pln\nでピンが立っている列がどれかを管理しています。(C++ の\nset\nについては\ncpprefjp - C++日本語リファレンス - set\nを参照)\nset<int>\nは同一要素の重複を禁じるので、\nset<int>\nに含まれる最小要素を\n\\(m\\)\n、最大要素を\n\\(M\\)\nとしたとき、(\nset<int>\nの大きさ) =\n\\(M-m+1\\)\nが成り立つことと\nset<int>\nの中身が\n\\(\\{ m,m+1,\\dots,M \\}\\)\nであることとは同値です。",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  if(s[0]=='1'){cout << \"No\\n\";return 0;}\n  vector<int> line={4,3,5,2,4,6,1,3,5,7};\n  set<int> pln;\n  for(int i=0;i<10;i++){\n    if(s[i]=='1'){pln.insert(line[i]);}\n  }\n  if(pln.empty()){cout << \"No\\n\";return 0;}\n  int mn=(*pln.begin()), mx=(*pln.rbegin());\n  if(mx-mn+1 != pln.size()){cout << \"Yes\\n\";}\n  else{cout << \"No\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "35c5fe01281ca09a3899a43110fdd5372c8eaa7418aeeab2ba0c938178ab2d30",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc267/abc267_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc267/editorial/4759",
+      "text": "split の判定をビット演算で行う方法を紹介します。\n予め、「\n\\(i\\)\n番目のレーンにピンがあれば\n\\(i\\)\n-bit 目が\n1\n、そうでなければ\n0\n」を表す整数を作っておきます。レーンのどちらを\n\\(0\\)\n番目とするかはどちらでもよいですが、以下の例ではレーンの左側とビット表現の左側が対応するようにしています。\nたとえば、サンプル 1 の例では以下のようになります。\nこのビット表現において、\n1\nが連なる部分が 2 つ以上あれば\nYes\n、そうでなければ\nNo\nです（\ns[0]\nについては別で処理する）。\n上記の整数を\na\nとおくと、\na == 0\nのとき\nNo\nなので、以下\na > 0\nとします。\na\nのうち最も右にある\n1\nのみからなる整数は\na & -a\nと表せることが知られています。たとえば、\na\nのビット表現が\n0010110\nのとき\na & -a\nのビット表現は\n0000010\nです。\nそこで、\na\nにこの\na & -a\nを足すと、一番右にある連なる\n1\nたちが（繰り上がりによって）一つの\n1\nになります。\na\nが\n0010110\nのとき\na + (a & -a)\nは\n0011000\n、\n0111011\nのとき\n0111100\nなどです。\nさて、この時点で\n1\nがちょうど一つであれば、元々の\n1\nの連なりがちょうど一つであったこと（元問題の Yes/No の条件）に相当するので、それを判定したいです。これは、2 の冪乗であることと同値です（\na > 0\nなので\na + (a & -a) > 0\nに注意）。\nb = a + (a & -a)\nとし、\nb\nが 2 の冪乗かを判定します。これは、\nb & (b - 1)\nが\n0\nかを判定すればよいです（C++ のような言語では、演算子の優先順位のせいで\n(b & (b - 1)) == 0\nのように書く必要があります）。\nなお、\na == 0\nのとき\nb == 0\nであり、\n0 & (0 - 1) == 0\nなので、\na > 0\nかどうかで分けなくても同じ値を得られます。よって、以下のように求められます。\n提出 #34585798, Rust\n提出 #34585697, C++\n初めて見た人は、以下が成り立つ理由を確認しておくとよいでしょう。\na > 0\nのとき、\na & -a\nは、\na\nのうち最も右の\n1\nのみからなる整数となる。\na & (a - 1)\nは、\na\nが 2 の冪乗のとき、およびそのときに限り\n0\nとなる。",
+      "codes": [
+        "# ピン（入力で与えられる）\n0101110101",
+        "# レーン\nx o x o\n o o o\n  o x\n   x",
+        "# ビット表現（これを計算しておく）\n0111011"
+      ],
+      "text_sha256": "abf75937bf830cb8ddda505c1a211758a137fd15a1902165b62e3e05f0281efe",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc267/abc267_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

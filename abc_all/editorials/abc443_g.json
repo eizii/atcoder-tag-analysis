@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc443_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc443/editorial/15138",
+      "text": "\\(k < (Ak+B) \\bmod M\\) という条件を同値変形します。 \\[\n\\begin{aligned}\n&\\phantom{\\iff} k < (Ak+B) \\bmod M\\\\\n&\\iff k+1 \\le Ak+B-M\\left\\lfloor\\frac{Ak+B}M \\right\\rfloor \\\\\n&\\iff \\left\\lfloor\\frac{Ak+B}M \\right\\rfloor \\le \\frac{(A-1)k+(B-1)}M\\\\\n&\\iff \\left\\lfloor\\frac{Ak+B}M \\right\\rfloor \\le \\left\\lfloor\\frac{(A-1)k+(B-1)}M\\right\\rfloor\\\\\n\\end{aligned}\n\\] ここで、最後の式変形は実数 \\(x\\) と整数 \\(X\\) に対し \\(X \\le x\\) と \\(X \\le \\left\\lfloor x\\right\\rfloor\\) が同値になることを利用しています。 また、 \\(\\displaystyle \\left\\lfloor\\frac{Ak+B}M \\right\\rfloor-\\left\\lfloor\\frac{(A-1)k+(B-1)}M \\right\\rfloor\\) の取りうる値が \\(0\\) または \\(1\\) のみであることを利用すると、条件を満たす \\(k\\) の個数は \\(\\displaystyle N-\\sum_{k=0}^{N-1} \\left(\\left\\lfloor\\frac{Ak+B}M \\right\\rfloor-\\left\\lfloor\\frac{(A-1)k+(B-1)}M \\right\\rfloor\\right)\\) と表せることが分かります。この値は floor sum アルゴリズムを用いることで \\(O(\\log M )\\) 時間で計算することができます。 以上を適切に実装することでこの問題に正答することができます。計算量はテストケース毎に \\(O(\\log M)\\) です。 実装例(Python3)",
+      "codes": [
+        "import sys\ninput = sys.stdin.readline\n\ndef floor_sum(n, m, a, b):\n    a1, a2 = a // m, a % m\n    s = n * (n - 1) // 2 * a1\n    b1, b2 = b // m, b % m\n    if a2 == 0:\n        return s + b1 * n\n    k = (a2 * (n - 1) + b2) // m\n    return s + n * (k + b1) - floor_sum(k, a2, m, m + a2 - b2 - 1)\n\nfor _ in range(int(input())):\n    n, m, a, b = map(int, input().split())\n    print(n - floor_sum(n, m, a, b) + floor_sum(n, m, a - 1, b - 1))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "ec7b41287639e8e7df965d655e51b6b3745fac238633194f98792be99859e834"
+    }
+  ],
+  "status": "available"
+}

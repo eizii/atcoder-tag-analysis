@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc239_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc239/editorial/3389",
+      "text": "問題文をナイーブな全探索で実装する、すなわち\n\\((x, y)\\)\nを広い範囲から列挙して\n\\((x_1, y_1)\\)\nからの距離も\n\\((x_2, y_2)\\)\nからの距離も\n\\(\\sqrt{5}\\)\nになる点があるか調べると次のようなコードになると思います。\nしかしこれは計算量が (\n\\(x\\)\nの範囲)\n\\(\\times\\)\n(\n\\(y\\)\nの範囲) となってしまうため TLE してしまいます。\nこれはこの問題に限らず重要な話ですが、\n困った時はサンプルを図に書いて考察する\nのが問題を解く上で大事です。さっそく図を書いてみましょう。\nサンプル\n\\(1\\)\nにおいて、\n\\((x_1, y_1)\\)\nおよび\n\\((x_1, y_1)\\)\nから距離\n\\(\\sqrt{5}\\)\nの格子点を丸、\n\\((x_2, y_2)\\)\nおよび\n\\((x_2,y_2)\\)\nから距離\n\\(\\sqrt{5}\\)\nの格子点を三角で示したのが以下の図になります。\n図を描いて考えると、どうやら調べる必要があるのは 「\n\\((x_1, y_1)\\)\nを中心とした\n\\(4 \\times 4\\)\n四方に含まれる点」だけでよいことが分かると思います。なぜならば、その範囲の外の点は距離が\n\\(3\\)\n以上になり、\n\\(\\sqrt{5}\\)\nを超えてしまうからです。\n探索範囲を改善したプログラムは以下の通りです。このプログラムは十分高速に動作するのでこれで AC することができます。",
+      "codes": [
+        "# 距離の 2 乗を計算する関数\ndef dist_sq(a, b, c, d):\n  return (a - c) ** 2 + (b - d) ** 2\n\n# 答えを求める関数\ndef solve(x1, y1, x2, y2):\n  for x in range(-2 * 10 ** 9, 2 * 10 ** 9 + 1):\n    for y in range(-2 * 10 ** 9, 2 * 10 ** 9 + 1):\n      if dist_sq(x, y, x1, y1) == dist_sq(x, y, x2, y2) == 5:\n        return \"Yes\"\n  return \"No\"",
+        "# 距離の 2 乗を計算する関数\ndef dist_sq(a, b, c, d):\n  return (a - c) ** 2 + (b - d) ** 2\n\n# 答えを求める関数\ndef solve(x1, y1, x2, y2):\n  for x in range(x1 - 2, x1 + 3):\n    for y in range(y1 - 2, y1 + 3):\n      if dist_sq(x, y, x1, y1) == dist_sq(x, y, x2, y2) == 5:\n        return \"Yes\"\n  return \"No\"\n\n\nx1, y1, x2, y2 = map(int, input().split())\nprint(solve(x1, y1, x2, y2))"
+      ],
+      "text_sha256": "48d68ab6bac51078ca62fd088c6c715d5178bd18da7aa57c4be24463dca10456",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc239/abc239_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc239/editorial/3403",
+      "text": "この問題は「\n\\((x_1,y_1)\\)\nからナイトで\n\\(2\\)\n手動いて\n\\((x_2,y_2)\\)\nに移動できますか？」という問題だと思うことができます。したがって、ナイトの移動方法\n\\(8\\)\n通りを\n\\(1\\)\n手目\n\\(2\\)\n手目それぞれ全探索することで解けます。",
+      "codes": [
+        "x1,y1,x2,y2=map(int,input().split())\nmoves=[(1,2),(2,1),(-1,2),(-2,1),(1,-2),(2,-1),(-1,-2),(-2,-1)]\n\nfor move1 in moves:\n  for move2 in moves:\n    if x1+move1[0]+move2[0]==x2 and y1+move1[1]+move2[1]==y2:\n      print(\"Yes\")\n      exit()\n\nprint(\"No\")"
+      ],
+      "text_sha256": "7f65aa3d864e28d2d27f0d576a6771136d65c6594d0694e20cb61ed92f7984e7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc239/abc239_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

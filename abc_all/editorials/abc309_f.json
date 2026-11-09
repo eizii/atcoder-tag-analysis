@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc309_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc309/editorial/6749",
+      "text": "各箱に対して回転を行って\n\\(h_i \\leq w_i \\leq d_i\\)\nとした上で\n\\(h_i \\lt h_j, w_i \\lt w_j, d_i \\lt d_j\\)\nを満たす\n\\((i,j)\\)\nが存在するかを判定、としても答えが変わらない(他の順番で高さ・幅・奥行きが上回る時、上記順番でも上回るため)のでそのようにします。また、大小関係にしか影響がないことから高さ・幅・奥行きごとに座標圧縮を行ってどの値も\n\\(1\\)\n以上\n\\(N\\)\n以下にします。\nまず、\n\\(h_i\\)\nが相異なる場合の解法を示します。各箱を\n\\(h_i\\)\nの昇順にソートして\n\\(i\\)\nの昇順になんらかの処理をすることにすると、「\n\\(j\\)\n番目の箱に対する処理をしている時点で、今まで処理をした任意の箱\n\\(i\\)\nに対して\n\\(h_j \\gt h_i\\)\n」が成り立ちます。これを生かし、以下のようにすると条件を満たす\n\\((i,j)\\)\nの存在判定が可能です。\n一点更新と区間最小値取得が出来るサイズ\n\\(N\\)\nのセグメント木を用意する。\n\\(i\\)\nの昇順に次の処理を行う。\nセグ木の添え字が\n\\(w_i\\)\n未満の区間の最小値が\n\\(d_j\\)\n未満ならば、\nYes\nとする。\nセグ木の添え字が\n\\(w_i\\)\nのところの値が\n\\(d_i\\)\nより大きいならば、\n\\(d_i\\)\nに置き換える。\n本問では\n\\(h_i\\)\nが相異なるとは限らないため、このままだと\n\\(h_i=h_j, w_i\\lt w_j, d_i \\lt d_j\\)\nの場合に誤判定を起こしてしまいます。そこで、\n\\((h_i,w_i,d_i)\\)\nの組を\n\\(h_i\\)\nについて昇順に、\n\\(h_i\\)\nが等しい場合は\n\\(w_i\\)\nについて\n降順\nになるようにソートをすることで誤判定を防ぐことが出来、実質的に\n\\(h_i\\)\nが相異なる場合と同様に本問を解くことが出来ます。",
+      "codes": [],
+      "text_sha256": "8575ec008213ae67a0c1b0ad9b9863c431b2abf7a6749bf46ea29c1c78da41bc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc309/abc309_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc309/editorial/6764",
+      "text": "公式解説\nでは次の通り述べられています\n本問では\n\\(h_i\\)\nが相異なるとは限らないため、このままだと\n\\(h_i=h_j, w_i\\lt w_j, d_i \\lt d_j\\)\nの場合に誤判定を起こしてしまいます。そこで、\n\\((h_i,w_i,d_i)\\)\nの組を\n\\(h_i\\)\nについて昇順に、\n\\(h_i\\)\nが等しい場合は\n\\(w_i\\)\nについて\n降順\nになるようにソートをすることで誤判定を防ぐことが出来、実質的に\n\\(h_i\\)\nが相異なる場合と同様に本問を解くことが出来ます。\nこの部分は単に、prodとsetを別々にやることで解決できます。\n本質部分の実装例(python)",
+      "codes": [
+        "d=defaultdict(list)\nfor x,y,z in hako_list:\n\td[x].append((y,z))\nfor x,yz_list in sorted(d.items()):\n\tfor y,z in yz_list :\n\t\tif seg.prod(0,y)<z:\n\t\t\tprint(\"Yes\")\n\t\t\texit()\n\tfor y,z in yz_list :\n\t\tif z<seg.get(y):\n\t\t\tseg.set(y,z)"
+      ],
+      "text_sha256": "d38344bdd8b3b53280c4f4407506f8a4bf8c6ed883c091eec837a7b2e516477a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc309/abc309_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

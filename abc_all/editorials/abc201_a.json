@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc201_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc201/editorial/1823",
+      "text": "解法1\n\\((A_1,A_2,A_3)\\)\nの並び替えは\n\\(6\\)\n通りあります。それぞれについて等差数列になっているかを判定することで、この問題を解くことができます。\n解答例 (C++)\nまた、\n\\((a,b,c)\\)\nが等差数列である場合\n\\((c,b,a)\\)\nも等差数列になることを利用して、場合分けを\n\\(3\\)\n通りに減らすことも可能です。\n解答例 (Python)\n解法2\n等差数列\n\\((a,b,c)\\)\nは、広義単調増加/減少である必要があります。なぜなら\n\\((b-a)\\)\nと\n\\((c-b)\\)\nの正/負/零が一致している必要があるからです。そのため\n\\((A_1,A_2,A_3)\\)\nを数列として受け取った上で昇順ないし降順にソートし、等差数列になっているかを判定するとより楽に AC することができます。\n解答例 (C++)\n解答例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int A1,A2,A3; cin >> A1 >> A2 >> A3;\n    string ans = \"No\";\n    //(A1,A2,A3)\n    if(A3-A2 == A2-A1) ans = \"Yes\";\n    //(A1,A3,A2)\n    if(A2-A3 == A3-A1) ans = \"Yes\";\n    //(A2,A1,A3)\n    if(A3-A1 == A1-A2) ans = \"Yes\";\n    //(A2,A3,A1)\n    if(A1-A3 == A3-A2) ans = \"Yes\";\n    //(A3,A1,A2)\n    if(A2-A1 == A1-A3) ans = \"Yes\";\n    //(A3,A2,A1)\n    if(A1-A2 == A2-A3) ans = \"Yes\";\n    cout << ans << endl;\n}",
+        "A1,A2,A3 = map(int,input().split())\nans = \"No\"\n#(A1,A2,A3)\nif A3-A2 == A2-A1:\n    ans = \"Yes\"\n#(A1,A3,A2)\nif A2-A3 == A3-A1:\n    ans = \"Yes\"\n#(A2,A1,A3)\nif A3-A1 == A1-A2:\n    ans = \"Yes\"\nprint(ans)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    vector<int> A(3);\n    cin >> A[0] >> A[1] >> A[2];\n    sort(A.begin(),A.end());\n    string ans = \"No\";\n    if(A[2]-A[1] == A[1]-A[0]) ans = \"Yes\";\n    cout << ans << endl;\n}",
+        "A = list(map(int,input().split()))\nA.sort()\nans = \"No\"\nif A[2]-A[1] == A[1]-A[0]:\n  ans = \"Yes\"\nprint(ans)"
+      ],
+      "text_sha256": "6f7e08f50ca851212851a697ee3254df885c394f56ccdd8652c649041edd2f26",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc201/abc201_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

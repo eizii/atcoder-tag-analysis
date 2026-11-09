@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc128_b",
+  "editorials": [
+    {
+      "text": "B: Guidebook\n多くのプログラミング言語では、string 型の配列を標準ライブラリのソート関数(例: C++ のstd::sort)\nによって辞書順に並べることができます。\n問題文に合うようにレストランを並べるには、C++ でいうpair 型を利用すると簡単に実装できます。具\n体的には、pair<pair<string,int>,int> の配列を用意し、レストランの情報を格納します。ﬁrst.ﬁrst (1\n番目のソート基準) にstring 型で市名を入れ、ﬁrst.second (2 番目のソート基準) にint 型で点数の−1 倍を\n入れ(点数が高い順に並べたいので)、second (3 番目のソート基準) にレストランの番号を入れます。\nこのpair 型をソートした後、i 番目の要素のsecond には、本でi 番目に紹介するレストランの番号が格\n納されています。\npair 型がない言語などでは、まだ本で紹介されていないレストランのうち市名が辞書順で最も早く、その中\nで最も点数が高いレストランを順次ループを回して探していくことでも求めることができます。この場合は計\n算量はO(N 2) となります。これでも間に合います。\nC++ での実装例は以下の通りです(include 等は省いています)。\nchar in[120];\npair<pair<string,int>,int> p[110];\nint main(){\nint a;scanf(\"%d\",&a);\nfor(int i=0;i<a;i++){\nint t;scanf(\"%s%d\",in,&t);\nstring tmp=in;\np[i]=make_pair(make_pair(in,-t),i);\n}\nstd::sort(p,p+a);\nfor(int i=0;i<a;i++)printf(\"%d\\n\",p[i].second+1);\n}\n",
+      "text_sha256": "56adf18828b6ce2a23a3d3f3ad96fb8e12117bec4cf3eb8015f7452c43f24556",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc128/abc128_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc329_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc329/editorial/7719",
+      "text": "\\(S\\)\nの空でない部分文字列\n\\(O(N^2)\\)\n通りを全て列挙していては間に合わないので、代わりに「\n\\(1\\)\n種類の文字のみからなる文字列のうち、\n\\(S\\)\nの部分文字列であるものの数を数える」という方針を考えます。\n\\(c=\\)\na\n,\nb\n,\n\\(\\dots\\)\n,\nz\n、\n\\(l=1,2,\\dots\\)\nに対して、\n\\(c\\)\nが\n\\(k\\)\n文字連なってできる文字列を\n\\(\\text{str}(c,k)\\)\nとします。\n\\(S\\)\nの中で文字\n\\(c\\)\nが連続する回数の最大値を\n\\(M(c)\\)\nとおくと、\n\\(\\text{str}(c,k)\\)\nが\n\\(S\\)\nの部分文字列であるための必要十分条件は\n\\(k \\leq M(c)\\)\nですから、求める答えは\n\\(M(\\)\na\n\\()+M(\\)\nb\n\\()+\\dots+M(\\)\nz\n\\()\\)\nと表されます。\nあとは、\n\\(M(c)\\)\nの値を高速に求められれば良いです。これは、以下のようなアルゴリズムによって求められます。\n各\n\\(c\\)\nについて、\n\\(M(c)=0\\)\nと初期化する。\n\\(l=r=1\\)\nとする。\n\\(S\\)\nの\n\\(r\\)\n文字目と\n\\(r+1\\)\n文字目が同じ文字である限り、\n\\(r\\)\nに\n\\(1\\)\nを足し続ける。なお、このとき\n\\(S\\)\nの\n\\(l\\)\n文字目から\n\\(r\\)\n文字目までは全て同じ文字である。\n\\(S\\)\nの\n\\(l\\)\n文字目を\n\\(c\\)\nとしたとき、\n\\(M(c) \\leftarrow \\max(M(c), r-l+1)\\)\nと更新する。\n\\(l,r\\)\nを\n\\(r+1\\)\nで更新する。\n\\(l > N\\)\nとなったらアルゴリズムを終了する。そうでなければ 2. に戻る。\nこのアルゴリズムは\n\\(O(N)\\)\nで動作し、十分高速です。\nなお、このアルゴリズムは\nランレングス圧縮\nと呼ばれる有名なアルゴリズムとほぼ同等ですので、知らなかった方はぜひ調べてみてください。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    string s;\n    cin >> n >> s;\n    vector<int> mx(26);\n    int l = 0;\n    while (l < n) {\n        int r = l + 1;\n        while (r < n and s[l] == s[r]) ++r;\n        int c = s[l] - 'a';\n        mx[c] = max(mx[c], r - l);\n        l = r;\n    }\n    int ans = 0;\n    for (int i = 0; i < 26; i++) {\n        ans += mx[i];\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "2058501a39d5fadd45aea249421e1e2149dd379602c8a50425a63d4e5ed1799d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc329/abc329_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

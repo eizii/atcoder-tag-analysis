@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc324_c",
+  "title": "Error Correction",
+  "contests": [
+    {
+      "contest_id": "abc324",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 637,
+  "raw_difficulty": 637,
+  "contest_id": "abc324",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc324/tasks/abc324_c",
+  "statement": "配点 : 300 点 問題文 高橋君は英小文字からなる文字列 T を青木君に向けて送りました。その結果、青木君は英小文字からなる文字列 T' を受信しました。 T' は T から一部が変更されてしまっている可能性があり、具体的には、下記の 4 つのうちのちょうど 1 つが成り立つことがわかっています。 T' は、 T と等しい。 T' は、 T のいずれか 1 つの位置（先頭と末尾も含む）に英小文字を 1 つ挿入して得られる文字列である。 T' は、 T からある 1 文字を削除して得られる文字列である。 T' は、 T のある 1 文字を別の英小文字に変更して得られる文字列である。 青木君が受信した文字列 T' と、英小文字からなる N 個の文字列 S_1, S_2, \\ldots, S_N が入力として与えられるので、 S_1, S_2, \\ldots, S_N のうち、高橋君が送った文字列 T と等しい可能性があるものをすべて求めてください。 制約 N は整数 1 \\leq N \\leq 5 \\times 10^5 S_i と T' は英小文字からなる長さ 1 以上 5 \\times 10^5 以下の文字列 S_1, S_2, \\ldots, S_N の長さの総和は 5 \\times 10^5 以下 入力 入力は以下の形式で標準入力から与えられる。 N T' S_1 S_2 \\vdots S_N 出力 S_1, S_2, \\ldots, S_N のうち T と等しい可能性があるものすべての添字を 昇順に 並べた列を (i_1, i_2, \\ldots, i_K) とする。\r\nこの列の長さ K および列自体を、下記の形式にしたがって出力せよ。 K i_1 i_2 \\ldots i_K 入力例 1 5 ababc\r\nababc\r\nbabc\r\nabacbc\r\nabdbc\r\nabbac 出力例 1 4\r\n1 2 3 4 S_1, S_2, \\ldots, S_5 のうち、 T と等しい可能性があるものは S_1, S_2, S_3, S_4 の 4 つであることが下記の通りわかります。 S_1 は T と等しい可能性があります。なぜなら、 T' = ababc は S_1 = ababc と等しいからです。 S_2 は T と等しい可能性があります。なぜなら、 T' = ababc は S_2 = babc の先頭に文字 a を挿入して得られる文字列だからです。 S_3 は T と等しい可能性があります。なぜなら、 T' = ababc は S_3 = abacbc から 4 文字目の c を削除して得られる文字列だからです。 S_4 は T と等しい可能性があります。なぜなら、 T' = ababc は S_4 = abdbc の 3 文字目の d を b に変更して得られる文字列だからです。 S_5 は T と等しい可能性はありません。なぜなら、 S_5 = abbac を T としたとき、 T' = ababc は問題文中の 4 つの条件をいずれも満たさないからです。 入力例 2 1 aoki\r\ntakahashi 出力例 2 0 入力例 3 9 atcoder\r\natoder\r\natcode\r\nathqcoder\r\natcoder\r\ntacoder\r\njttcoder\r\natoder\r\natceoder\r\natcoer 出力例 3 6\r\n1 2 4 7 8 9",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 高橋君は英小文字からなる文字列 T を青木君に向けて送りました。その結果、青木君は英小文字からなる文字列 T' を受信しました。 T' は T から一部が変更されてしまっている可能性があり、具体的には、下記の 4 つのうちのちょうど 1 つが成り立つことがわかっています。 T' は、 T と等しい。 T' は、 T のいずれか 1 つの位置（先頭と末尾も含む）に英小文字を 1 つ挿入して得られる文字列である。 T' は、 T からある 1 文字を削除して得られる文字列である。 T' は、 T のある 1 文字を別の英小文字に変更して得られる文字列である。 青木君が受信した文字列 T' と、英小文字からなる N 個の文字列 S_1, S_2, \\ldots, S_N が入力として与えられるので、 S_1, S_2, \\ldots, S_N のうち、高橋君が送った文字列 T と等しい可能性があるものをすべて求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 N は整数 1 \\leq N \\leq 5 \\times 10^5 S_i と T' は英小文字からなる長さ 1 以上 5 \\times 10^5 以下の文字列 S_1, S_2, \\ldots, S_N の長さの総和は 5 \\times 10^5 以下"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N T' S_1 S_2 \\vdots S_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 S_1, S_2, \\ldots, S_N のうち T と等しい可能性があるものすべての添字を 昇順に 並べた列を (i_1, i_2, \\ldots, i_K) とする。\r\nこの列の長さ K および列自体を、下記の形式にしたがって出力せよ。 K i_1 i_2 \\ldots i_K"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5 ababc\r\nababc\r\nbabc\r\nabacbc\r\nabdbc\r\nabbac"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4\r\n1 2 3 4 S_1, S_2, \\ldots, S_5 のうち、 T と等しい可能性があるものは S_1, S_2, S_3, S_4 の 4 つであることが下記の通りわかります。 S_1 は T と等しい可能性があります。なぜなら、 T' = ababc は S_1 = ababc と等しいからです。 S_2 は T と等しい可能性があります。なぜなら、 T' = ababc は S_2 = babc の先頭に文字 a を挿入して得られる文字列だからです。 S_3 は T と等しい可能性があります。なぜなら、 T' = ababc は S_3 = abacbc から 4 文字目の c を削除して得られる文字列だからです。 S_4 は T と等しい可能性があります。なぜなら、 T' = ababc は S_4 = abdbc の 3 文字目の d を b に変更して得られる文字列だからです。 S_5 は T と等しい可能性はありません。なぜなら、 S_5 = abbac を T としたとき、 T' = ababc は問題文中の 4 つの条件をいずれも満たさないからです。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 1 aoki\r\ntakahashi"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 9 atcoder\r\natoder\r\natcode\r\nathqcoder\r\natcoder\r\ntacoder\r\njttcoder\r\natoder\r\natceoder\r\natcoer"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 6\r\n1 2 4 7 8 9"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc324/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:54.736135+00:00",
+  "statement_sha256": "cf22441872200f50306ce583e0fc97db3e10a899627366eb56206819f301f74f",
+  "editorials": []
+}

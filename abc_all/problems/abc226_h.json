@@ -1,0 +1,68 @@
+{
+  "problem_id": "abc226_h",
+  "title": "Random Kth Max",
+  "contests": [
+    {
+      "contest_id": "abc226",
+      "problem_index": "H"
+    }
+  ],
+  "difficulty": 2813,
+  "raw_difficulty": 2813,
+  "contest_id": "abc226",
+  "problem_index": "H",
+  "url": "https://atcoder.jp/contests/abc226/tasks/abc226_h",
+  "statement": "配点 : 600 点 問題文 N 個の連続確率変数 X_1,X_2,\\dots,X_N があり、 X_i は \\lbrack L_i, R_i \\rbrack の範囲を取る連続一様分布に従います。 N 個の確率変数のうち大きい方から K 番目の値の期待値を E とします。注記に述べるように E \\bmod {998244353} を出力してください。 注記 この問題で E は必ず有理数になることが証明できます。また、この問題の制約下では、 E を既約分数 \\frac{y}{x} で表したときに x が 998244353 で割り切れないことが保証されます。 このとき xz \\equiv y \\pmod{998244353} を満たすような 0 以上 998244352 以下の整数 z が一意に定まります。この z を E \\bmod {998244353} として出力してください。 制約 1 \\leq N \\leq 50 1 \\leq K \\leq N 0 \\leq L_i \\lt R_i \\leq 100 入力はすべて整数である。 入力 入力は以下の形式で標準入力から与えられる。 N K L_1 R_1 L_2 R_2 \\vdots L_N R_N 出力 E \\bmod {998244353} を出力せよ。 入力例 1 1 1\r\n0 2 出力例 1 1 \\lbrack 0, 2 \\rbrack 上の連続一様分布に従う確率変数の値の期待値が求める答えです。よって 1 を出力します。 入力例 2 2 2\r\n0 2\r\n1 3 出力例 2 707089751 答えを有理数で表すと \\frac{23}{24} になります。 707089751 \\times 24 \\equiv 23 \\pmod{998244353} なので 707089751 を出力します。 入力例 3 10 5\r\n35 48\r\n44 64\r\n47 59\r\n39 97\r\n36 37\r\n4 91\r\n38 82\r\n20 84\r\n38 50\r\n39 69 出力例 3 810056397",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 個の連続確率変数 X_1,X_2,\\dots,X_N があり、 X_i は \\lbrack L_i, R_i \\rbrack の範囲を取る連続一様分布に従います。 N 個の確率変数のうち大きい方から K 番目の値の期待値を E とします。注記に述べるように E \\bmod {998244353} を出力してください。"
+    },
+    {
+      "heading": "注記",
+      "text": "注記 この問題で E は必ず有理数になることが証明できます。また、この問題の制約下では、 E を既約分数 \\frac{y}{x} で表したときに x が 998244353 で割り切れないことが保証されます。 このとき xz \\equiv y \\pmod{998244353} を満たすような 0 以上 998244352 以下の整数 z が一意に定まります。この z を E \\bmod {998244353} として出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 50 1 \\leq K \\leq N 0 \\leq L_i \\lt R_i \\leq 100 入力はすべて整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K L_1 R_1 L_2 R_2 \\vdots L_N R_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 E \\bmod {998244353} を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 1 1\r\n0 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1 \\lbrack 0, 2 \\rbrack 上の連続一様分布に従う確率変数の値の期待値が求める答えです。よって 1 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2 2\r\n0 2\r\n1 3"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 707089751 答えを有理数で表すと \\frac{23}{24} になります。 707089751 \\times 24 \\equiv 23 \\pmod{998244353} なので 707089751 を出力します。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10 5\r\n35 48\r\n44 64\r\n47 59\r\n39 97\r\n36 37\r\n4 91\r\n38 82\r\n20 84\r\n38 50\r\n39 69"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 810056397"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc226/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:52.577265+00:00",
+  "statement_sha256": "3c4b8511103ed5746c59cc065e5caff3c60fcb7521bf984368c96e3a456b6834",
+  "editorials": []
+}

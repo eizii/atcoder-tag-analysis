@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc298_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc298/editorial/6197",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」( https://atcoder.jp/contests/practice/ ) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。 また、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」( https://atcoder.jp/contests/abs ) の問題をいくつか試すことをおすすめします。 「競プロ典型 90 問」( https://atcoder.jp/contests/typical90 ) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。 「C++入門 AtCoder Programming Guide for beginners (APG4b)」( https://atcoder.jp/contests/APG4b ) は、競技プログラマー向けのC++入門用コンテンツです。 \\(2\\) つの条件を満たすかどうかを表す変数をそれぞれ \\(f1,f2\\) などとし、これらがともに \\(true\\) ならば Yes と、そうでなければ No と出力することにします(このようにすることで、 \\(2\\) つある条件を独立に扱うことが出来ます)。 \\(1\\) つ目の条件「『良』と評価した面接官が少なくとも \\(1\\) 人いる」は、 \\(f1\\) が \\(false\\) の状態から始め、 \\(S\\) の各文字に対し「その文字が o ならば \\(f1\\) を \\(true\\) にする」という処理をすることで判定出来ます。これは、C++では以下のようになります。 \\(2\\) つ目の条件「『不可』と評価した面接官がいない」は、 \\(f2\\) が \\(true\\) の状態から始め、 \\(S\\) の各文字に対し「その文字が x ならば \\(f2\\) を \\(false\\) にする」という処理をすることで判定出来ます。これは、C++では以下のようになります。 以上を組み合わせ、冒頭で述べたように \\(f1,f2\\) をもとに出力を行えば正解が得られます。 実装例 (C++)",
+      "codes": [
+        "bool f1 = false;\nfor(int i=0;i<N;i++){\n\tif(S[i]=='o')f1 = true;\n}\n",
+        "bool f2 = true;\nfor(int i=0;i<N;i++){\n\tif(S[i]=='x')f2 = false;\n}\n",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N;\n\tcin>>N;\n\t\n\tstring S;\n\tcin>>S;\n\t\n\tbool f1 = false;\n\tfor(int i=0;i<N;i++){\n\t\tif(S[i]=='o')f1 = true;\n\t}\n\t\n\tbool f2 = true;\n\tfor(int i=0;i<N;i++){\n\t\tif(S[i]=='x')f2 = false;\n\t}\n\t\n\tif(f1&&f2)cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n\t\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "8f353abb7f9c3e2300edf6859634d7fc374cd29e9f04570a7390f6bbcfe4b4d0"
+    }
+  ],
+  "status": "available"
+}

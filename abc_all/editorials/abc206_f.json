@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc206_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc206/editorial/2100",
+      "text": "この問題は、ヒントを次々に出していく形で解説します。ヒントを見る際は、次のヒントに進む前に現在のヒントから得た情報を考察してみてください。 必要な前提知識 この問題を解くためには、ゲーム理論での「Grundy数」の知識が必要です。Grundy数に関する問題は競技プログラミングにおいて頻出なので、必要な知識はインターネット上の文献などを参照することができます。 以降、Grundy数についてこの問題を解くのに必要な知識は既知のものとして解説を進めます。なので、Grundy数に関する知識をなるだけ理解した上でもとの問題を再度考えてから解説の続きを読むことを強くおすすめします。 hint 1 ひとまず、初めにゲームは区間 $[1,100)$ の中で行われていると考えてよいです。ここで、 Alice が初手として区間をひとつ選択するとどのようなことが起きるか考えてみましょう。 hint 2 Alice が初手において区間 $[X,Y)$ を選択したとします。このとき、ゲームは独立した $2$ つのゲームに分かれます。片方のゲームは区間 $[1,X)$ 上で、もう片方のゲームは $[Y,100)$ で行われます(もちろん、区間の選び方によっては片方あるいは両方のゲームは潰れてしまいます)。ここで、Grundy数のある性質を思い出します。 hint 3 hint 2で示したように、あるゲームの内部で区間をひとつ選択した場合、元のゲームは独立した $2$ つのゲームに分かれます。 ここで、分割されたゲームを併合したときのGrundy数は、併合されるゲームのGrundy数の $XOR$ で表されるという性質を生かすことができます。 また、あるゲームの中に選べる区間がひとつも含まれない場合のGrundy数は $0$ となります。 また、考えうるゲームの区間の数は高々 $100^2$ 通り、そして各ゲームから一手進める方法は高々 $100$ 通りであることも言えます。 ここまでの情報があれば、ある方針をとるには十分であることに気づくことができるでしょう。 解法 以下のようなDPを考えます。 \\(dp[X,Y)=\\) (区間 \\([X,Y)\\) で行われるゲームのGrundy数) このDPは、メモ化再帰によって実装できます。 \\([X,Y)\\) の内部でひとつ区間を選んだ時に起こりうる遷移(ゲームの分割)をすべて行った上で、それらの \\(mex\\) をGrundy数の定義通りに計算し、最後にゲーム全体を表す \\([1,100)\\) のGrundy数が \\(0\\) かどうか判定すればよいです。全体の計算量は \\(O(TNS^2)\\) ( \\(S\\) は最初のゲームの区間の大きさで、今回の問題では \\(S=100\\) とすることができます)となり、この問題を解くには十分高速です。 C++による実装例:",
+      "codes": [
+        "#include<bits/stdc++.h>\n \nusing namespace std;\nusing pi=pair<int,int>;\n \nint grundy(int l,int r,vector<vector<int>> &dp,vector<pi> &seg){\n  if(l>=r){return 0;}\n  if(dp[l][r]!=-1){return dp[l][r];}\n  vector<bool> kh(128,false);\n  for(auto &nx : seg){\n    if(l<=nx.first && nx.second<=r){\n      kh[grundy(l,nx.first,dp,seg)^grundy(nx.second,r,dp,seg)]=true;\n    }\n  }\n  for(int i=0;;i++){\n    if(!kh[i]){dp[l][r]=i;break;}\n  }\n  return dp[l][r];\n}\n \nint main(){\n  int t;\n  cin >> t;\n  for(int cs=1;cs<=t;cs++){\n    int n;\n    cin >> n;\n    vector<pi> seg(n);\n    for(int i=0;i<n;i++){\n      cin >> seg[i].first >> seg[i].second;\n      seg[i].first--;seg[i].second--;\n    }\n    vector<vector<int>> dp(100,vector<int>(100,-1));\n    if(grundy(0,99,dp,seg)){cout << \"Alice\\n\";}else{cout << \"Bob\\n\";}\n  }\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "f7cbd4b35d86e2e08fc9c5314d163ec3c12dd5ae7c30ad1e693eac605b057495"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc464_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc464/editorial/22266",
+      "text": "\\(X_i\\)\nで上書きするのではなく\n\\(i\\)\nで上書きすると考えてみましょう。これが解ければ、最後に\n\\(i\\)\nを\n\\(X_i\\)\nと書き直すことでこの問題を解くことができます。\nさて、操作終了時に\n\\((r, c)\\)\nに書かれる数は「\n\\(r \\le R_i, c \\le C_i\\)\nであるような\n\\(i\\)\nのうち、最も大きな\n\\(i\\)\n」であるはずです。これを求めるには、以下のような問題が解ければよいはずです。\nグリッドのいくつかのマスに数字を書き込む。その後、すべてのマスについて「自分の右下の長方形領域に書かれている数のうち、最大の値」を求める\nこれは、二次元 imos 法を右下から左上に向かって適用していくことで求めることができます。計算量は\n\\(O(HW + Q)\\)\nです。\n実装例(PyPy)",
+      "codes": [
+        "h, w, q = map(int, input().split())\n\na = [[0] * w for i in range(h)]\nxs = [\"A\"]\nfor i in range(1, q + 1):\n    r, c, x = input().split()\n    xs.append(x)\n    a[int(r)-1][int(c)-1] = i\n\nfor r in range(h - 1, -1, -1):\n    for c in range(w - 1, -1, -1):\n        if r != 0: a[r-1][c] = max(a[r][c], a[r-1][c])\n        if c != 0: a[r][c-1] = max(a[r][c], a[r][c-1])\n\nfor r in range(h):\n    print(\"\".join(xs[a[r][c]] for c in range(w)))"
+      ],
+      "text_sha256": "2e203982385b538dd53b97e2f87f212e6cbd65ed56cfcb730de0ae9bb616e59d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc464/abc464_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc464/editorial/22277",
+      "text": "操作を逆順に見ることにすると、各操作は「左上のマスを\n\\((1,1)\\)\n、右下のマスを\n\\((R_i,C_i)\\)\nとする長方形に含まれるマスのうち、\nまだ一度も上書きされていないマス\nを英大文字\n\\(X_i\\)\nで上書きする」という操作になります。\nここで、操作の制約より、あるマス\n\\((x,y)\\)\nが上書きされているとき、\n\\(a\\leq x,b\\leq y\\)\nを満たすマス\n\\((a,b)\\)\nもすべて上書きされていることになります。\nよって、上書きを以下の疑似コードのように愚直に行うことにすると、（いったん時間計算量を無視すれば）正しく答えが求まることがわかります。\n次に、この疑似コードの各処理が実行される回数について考えると、以下のようになります。\n4行目：各\n\\(i(1\\leq i\\leq Q)\\)\nについて高々1回しか実行されないため、全体で\n\\(\\Omicron(Q)\\)\n回\n6行目：この処理が行われうるのはマス\n\\((x,y+1)\\)\nが上書きされた直後のみであるため、全体で\n\\(\\Omicron(HW)\\)\n回\n7行目：各マスについて高々1回しか実行されないため、全体で\n\\(\\Omicron(HW)\\)\n回\nしたがって、全体での時間計算量が\n\\(\\Omicron(HW+Q)\\)\nとなっているため、以上の解法でこの問題を解くことができます。",
+      "codes": [
+        "// P[x][y] : マス(x,y)が何回目の操作で上書きされたか（まだ上書きされていないなら0）\nfor (int i = Q; i >= 1; i--) {\n    for (int x = R[i]; x >= 1; x--) {\n        if (P[x][C[i]] != 0) break;\n        for (int y = C[i]; y >= 1; y--) {\n            if (P[x][y] != 0) break;\n            P[x][y] = i;\n        }\n    }\n}"
+      ],
+      "text_sha256": "c6957a4f73405769363825b24ed8532f5d6fe360b4bf00d1e9586f5651c0d52f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc464/abc464_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

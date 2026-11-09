@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc215_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc215/editorial/2484",
+      "text": "この解説では、以下の\n\\(2\\)\nつの解法を取り扱います。\n探索による解法\nnext_permutation を利用する解法\n1. 探索による解法\n各文字を並べ替えて作ることが可能な文字列を列挙することを考えます。\n基本的な方針として、文字の並べ替えを\n\\((1,2,\\dots,|S|)\\)\nの順列を列挙していくのに似た方針で行うことが出来ます。\nこの方針で進めるならば、再帰による実装が楽でしょう。\n\\(S\\)\n中のまだ使われていない文字から\n\\(1\\)\n文字選び、それを探索中の文字列の末尾に挿入することを再帰的に行えばよいです。文字の使用不使用の状況を管理するのは、整数の bit 表現を利用するとよいです。\n文字列の列挙が終われば、最後にソートして重複を削除すれば答えを求めることが出来ます。\n実装例(C++):\n2. next_permutation を利用する解法\n実は、何らかの順列を与えると、辞書順で次の順列を求める next_permutation というアルゴリズムが存在します。\n今回は next_permutation の内部の解説は省略しますが、このアルゴリズムは要素に重複があっても動作し、さらに C++ では標準ライブラリ内に実装されています。\nこれを利用することにより、非常に簡潔な記述で順列の列挙が可能となります。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint l;\nstring s,t;\nvector<string> res;\n\nvoid find(int fl){\n  if(fl==0){\n    res.push_back(t);\n    return;\n  }\n  for(int i=0;i<l;i++){\n    if(fl&(1<<i)){\n      t.push_back(s[i]);\n      find(fl^(1<<i));\n      t.pop_back();\n    }\n  }\n}\n\nint main(){\n  int k;\n  cin >> s >> k;\n  l=s.size();\n  find((1<<l)-1);\n  sort(res.begin(),res.end());\n  unique(res.begin(),res.end());\n  cout << res[k-1] << '\\n';\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  int k;\n  cin >> s >> k;\n  sort(s.begin(),s.end());\n  while(k>1){\n    next_permutation(s.begin(),s.end());\n    k--;\n  }\n  cout << s << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "f7149ce9046dfb5ebda6ffa5662ae7b67f57c98805d140ca0f9808a72bce6fc3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc215/abc215_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

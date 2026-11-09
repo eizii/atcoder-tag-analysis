@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc279_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5284",
+      "text": "タイプ\n\\(1\\)\nの操作は集合同士を併合する操作、すなわち Union-Find で実行可能な操作そのものです。なので、 Union-Find を活用してこの問題を解くという方針が立ちます。\nまず、ボールについては高々\n\\(N+Q\\)\n番のものまでしか考えなくてよいです。また、タイプ\n\\(1\\)\nの操作はボールの集合同士の併合なので、\n\\(N+Q\\)\n要素の Union-Find を用意しておけばボールの追加への対応が十分可能そうです。\n問題となるのはタイプ\n\\(3\\)\nの操作です。「ボールが沢山集まっている集合」が入っている箱が目まぐるしく変わる可能性がある (例えば、\n\\(10^5\\)\n個程度のボールを箱\n\\(1\\)\nに集めてそれらを箱\n\\(2,3,\\dots\\)\nへ動かしていくような操作が行われる場合) ので、「各ボールがどの箱に入っているか」の情報を毎回付け替えていては TLE してしまいます。\nそこで、「どのボールの集合がどの箱に入っているか」という形で情報を保持したいという方針が立ちます。各ボールごとではなくボールの集合でまとめてボールの移動を行えば計算量を少なく抑えられそうです。\nでは、この方針を実現していきましょう。\n鍵となるのは、 Union-Find の代表元を返す機能です。\nACL\nでいう\ndsu の leader の機能\nです。\n以下の情報を管理していくことを考えます。\n\\(ld[x] = \\)\n箱\n\\(x\\)\nに入っている集合の代表元。但し、箱\n\\(x\\)\nが空である場合は\n\\(-1\\)\nとする。\n\\(inv[y] = \\)\n代表元が\n\\(y\\)\nである集合がどの箱に入っているか。但し、代表元が\n\\(y\\)\nである集合がない場合の値は不定である。\nタイプ\n\\(1\\)\n:\n箱\n\\(Y\\)\nが空であれば、何もしなくてよい。\nそうでなく箱\n\\(X\\)\nが空であれば、以下の手順で箱\n\\(Y\\)\nの中身を箱\n\\(X\\)\nに移すことができる。\n\\(ld[X]=ld[Y]\\)\nとする。これは箱\n\\(Y\\)\nに入っていた集合を箱\n\\(X\\)\nに移動させることに対応する。\n\\(inv[ld[X]]=X\\)\nとする。\n\\(ld[Y]=-1\\)\nとする。これは箱\n\\(Y\\)\nを空にすることに対応する。\nそうでない場合、\n\\(X,Y\\)\n双方に少なくとも\n\\(1\\)\n個のボールが入っているので、以下の手順を踏む。\n代表元が\n\\(ld[X]\\)\nであるボールの集合と代表元が\n\\(ld[Y]\\)\nであるボールの集合とを併合し、その集合の代表元を新たに\n\\(ld[X]\\)\nとする。\n\\(inv[ld[X]]=X\\)\nとする。\n\\(ld[Y]=-1\\)\nとする。\nタイプ\n\\(2\\)\n:\n新たに入れるボールの番号を\n\\(b\\)\nとする。\n箱\n\\(X\\)\nが空なら、\n\\(ld[X]=b, inv[ld[X]]=X\\)\nとする。\nそうでない場合、代表元が\n\\(ld[X]\\)\nであるボールの集合と代表元が\n\\(b\\)\nであるボールの集合とを併合し、その集合の代表元を新たに\n\\(ld[X]\\)\nとする。その後、\n\\(inv[ld[X]]=X\\)\nとする。\nタイプ\n\\(3\\)\n:\nボール\n\\(X\\)\nが含まれるボールの集合の代表元を\n\\(tg\\)\nとすると、\n\\(inv[tg]\\)\nを答える。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/dsu>\n\nusing namespace std;\nusing namespace atcoder;\n\nint main(){\n  int n,q;\n  cin >> n >> q;\n \n  dsu uf(n+q+5);\n  int balls=n;\n \n  vector<int> ld(n+1,-1);\n  vector<int> inv(n+q+5);\n  for(int i=1;i<=n;i++){\n    ld[i]=i;\n    inv[ld[i]]=i;\n  }\n \n  for(int tr=0;tr<q;tr++){\n    int typ;\n    cin >> typ;\n    if(typ==1){\n      int x,y;\n      cin >> x >> y;\n      if(ld[y]==-1){continue;}\n      else if(ld[x]==-1){\n        ld[x]=ld[y];\n        inv[ld[x]]=x;\n        ld[y]=-1;\n      }\n      else{\n        uf.merge(ld[x],ld[y]);\n        ld[x]=uf.leader(ld[x]);\n        inv[ld[x]]=x;\n        ld[y]=-1;\n      }\n    }\n    if(typ==2){\n      int x;\n      cin >> x;\n      balls++;\n      if(ld[x]==-1){\n        ld[x]=balls;\n        inv[ld[x]]=x;\n      }\n      else{\n        uf.merge(ld[x],balls);\n        ld[x]=uf.leader(balls);\n        inv[ld[x]]=x;\n      }\n    }\n    if(typ==3){\n      int x;\n      cin >> x;\n      int tg=uf.leader(x);\n      cout << inv[tg] << \"\\n\";\n    }\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "44507881339094d20c3cf5dce7a0780ca878e5f1716d967feb1ea540bec20851",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc279/abc279_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5318",
+      "text": "ボールと箱をどちらも Union-Find-Tree のノードだと考えましょう。はじめ\n\\(1 \\leq a \\leq N\\)\nに対し箱\n\\(a\\)\nに対応するノードとボール\n\\(a\\)\nに対応するノードがマージされているものとします。\nこのとき各操作は以下の様に解釈できます。\n箱\n\\(X\\)\nに対応するノードと箱\n\\(Y\\)\nに対応するノードをマージする。その後、箱\n\\(Y\\)\nに対応するノードを独立させる。\nボール\n\\(k + 1\\)\nに対応するノードと箱\n\\(X\\)\nに対応するノードをマージする。\nボール\n\\(X\\)\nの連結成分内に (必ずただ\n\\(1\\)\nつある) 箱のノードを答える。\nクエリに答えるために、通常の Union-Find-Tree で持つ情報に、以下の情報を追加して持ちます。\nその連結成分内に存在する箱のノードはどれか？\n箱ノードを独立させる部分は実際には新しいノードを作るのが簡単です。\n以上の操作の計算量は全て通常の Union-Find-Tree の計算量と同じです。\nC++ 実装例",
+      "codes": [],
+      "text_sha256": "d69210e6ca8a0f26005bea42a2d25c885ffd694f9681516cb877b7ab4535667b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc279/abc279_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

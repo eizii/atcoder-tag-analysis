@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc238_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc238/editorial/3361",
+      "text": "\\(N\\) 人の人を円環から除かれる順に並べた列を \\((P_1,P_2,\\ldots,P_{N-1},P_N)\\) としましょう。ここで \\(P_N\\) は最後まで除かれない人のことを指します。すると明らかに、 \\(P\\) は \\((1,2,\\ldots,N)\\) の順列となります。 \\(P\\) を逆順に見ていくことを考えます。すると、この問題は何もない円環上に人 \\(P_N\\) 、人 \\(P_{N-1}\\) 、 \\(\\cdots\\) 、人 \\(P_1\\) をこの順に配置していく問題となります。形式化すると以下の通りです。 何もない円環上に人 \\(P_N\\) 、人 \\(P_{N-1}\\) 、 \\(\\cdots\\) 、人 \\(P_1\\) をこの順に配置していく。 この際配置された人は「時計回り！」か「反時計回り！」かのどちらかを叫ぶ必要があり、前者を叫んだ場合は配置された人から見て（配置済みの人のうち）時計回りの方向に隣である人は反時計回りの方向を向いている必要がある。後者も同様である。そして、コストに配置された人からその人までの距離が加算される。 あり得るすべての配置手順（ \\(P\\) の内容 + 各人がどちらの向きを叫んだか）について合計コストを求め、その総和を \\(N!\\) で割った上で \\(\\mod 998244353\\) で出力せよ。 \\(\\text{num}[l][r]\\) を、人 \\(l\\) と人 \\(r\\) が配置済みであり、かつその間には人が一人も配置されていないような状態から人 \\(l+1\\) 、人 \\(l+2\\) 、 \\(\\cdots\\) 、人 \\(r-1\\) を配置していく手順の個数と定義します。 同様に、 \\(\\text{cost}[l][r]\\) を、人 \\(l\\) と人 \\(r\\) が配置済みであり、かつその間には人が一人も配置されていないような状態から人 \\(l+1\\) 、人 \\(l+2\\) 、 \\(\\cdots\\) 、人 \\(r-1\\) を配置していく際にかかる合計コストの総和と定義します。 すると、遷移は以下のようになります。イメージとしては、人 \\(l+1\\) 、人 \\(l+2\\) 、 \\(\\cdots\\) 、人 \\(r-1\\) の中で一番最初に配置する人を決め打って行くような形です。 \\(\\text{num}[l][r] = \\sum_{i=l+1}^{r-1} (\\text{num}[l][i] \\times \\text{num}[i][r] \\times c1 \\times \\binom{r-l-2}{i-l-1})\\) \\(\\text{cost}[l][r] = \\sum_{i=l+1}^{r-1} ((\\text{num}[l][i] \\times \\text{num}[i][r] \\times c2+\\text{num}[l][i] \\times \\text{cost}[i][r] \\times c1+\\text{cost}[l][i] \\times \\text{num}[i][r] \\times c1) \\times \\binom{r-l-2}{i-l-1})\\) ここで、 \\(c1\\) は「 \\(S_l\\) が R である」と「 \\(S_r\\) が L である」のうち真であるものの個数であり、また \\(c2\\) は \\(S_l\\) が R であるならば \\(i-l\\) を加算し、 \\(S_r\\) が L であるならば \\(r-i\\) を加算したものの合計です。 計算量は \\(O(N^3)\\) となります。 実装例 (Python)",
+      "codes": [
+        "MAX = int(1e5)\nMOD = 998244353\nfac = [0]*MAX\nfinv = [0]*MAX\ninv = [0]*MAX\nfac[0] = fac[1] = finv[0] = finv[1] = inv[1] = 1\nfor i in range(2,MAX):\n    fac[i] = fac[i-1]*i%MOD\n    inv[i] = MOD-inv[MOD%i]*(MOD//i)%MOD\n    finv[i] = finv[i-1]*inv[i]%MOD\ndef binom(n,k):\n    if n<0 or k<0 or n<k:\n        return 0\n    return fac[n]*finv[k]%MOD*finv[n-k]%MOD\n\nN = int(input())\nS = input()\nnum = [[0]*(N) for _ in range(N)]\ncost = [[0]*(N) for _ in range(N)]\nfor i in range(N):\n    num[i][(i+1)%N] = 1\nfor d in range(1,N+1):\n    for l in range(N):\n        r = (l+d)%N\n        i = (l+1)%N\n        while i != r:\n            c1 = 0\n            if S[l] == 'R': c1 += 1\n            if S[r] == 'L': c1 += 1\n            c2 = 0\n            if S[l] == 'R': c2 += (i-l)%N\n            if S[r] == 'L': c2 += (r-i)%N\n            num[l][r] += num[l][i]*num[i][r]%MOD*c1%MOD*binom((r-l-2)%N,(i-l-1)%N)%MOD\n            cost[l][r] += (num[l][i]*num[i][r]%MOD*c2%MOD+num[l][i]*cost[i][r]%MOD*c1%MOD+cost[l][i]*num[i][r]%MOD*c1%MOD)*binom((r-l-2)%N,(i-l-1)%N)%MOD\n            num[l][r] %= MOD\n            cost[l][r] %= MOD\n            i = (i+1)%N\nans = 0\nfor i in range(N):\n    ans += cost[i][i]\n    ans %= MOD\nans *= finv[N]\nans %= MOD\nprint(ans)\n\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "7603f383a483344f05206f5307b30925486a2f14e3820fe445ee4671c630dd6d"
+    }
+  ],
+  "status": "available"
+}

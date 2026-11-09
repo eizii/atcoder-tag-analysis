@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc233_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc233/editorial/3184",
+      "text": "部分長方形ごとに問題を(再帰的に)分割して解き、全体の答えを DP で計算することを考えます。 全ての \\(A \\times B\\) の部分長方形について、その中のブロックを体力 \\(C=\\max(A,B)\\) で全て破壊できます。なぜなら、その部分長方形を完全に含む \\(C \\times C\\) の正方形を選択することができるからです。 では、この部分長方形を消費体力 \\(C-1\\) 以下で破壊する方法はあるでしょうか? よく考えると、以下が成立することが分かります。 \\(A \\times B\\) の部分長方形内の全てのブロックを消費体力 \\(C-1\\) 以下で破壊できる場合、その部分長方形内には空行または空列が存在し、その空行または空列を跨ぐ操作を全く行わずにブロックを破壊できる。 この性質から、部分長方形に空行または空列が存在する場合は、その行または列で区切って再帰的により小さい問題を解けばよいことが分かります。 これより、この問題は \\(O(N^5)\\) や \\(O(N^6)\\) で解くことができます。一見 TLE しそうな計算量ですが、定数倍が非常に小さいので高速な言語であれば \\(O(N^6)\\) でも十分間に合います。詳しい実装方法は実装例を参照してください。 実装例(C++): 余談: この問題で強いテストケースはどのように作ればよいでしょうか? ランダムなケースを適当に作れば答えが \\(N\\) に近いものばかりとなってしまいます。例えば、あるマスを \\(\\frac{1}{2}\\) の確率で # とするような作り方では、たいていの場合で答えが \\(N\\) となってしまいます。 ひとつの作り方としては、疎なグリッドのケースをたくさん入れておくということです。これにより、答えが \\(N\\) から離れたケースを作ることができます。 また、もうひとつの作り方として、操作を逆向きに行ってみるという方法もあります。具体的には以下です。 正方領域を \\(1\\) つ選ぶ。 選んだ正方領域に、適当な密度でブロックを配置する。選んだ正方領域を全てブロックで埋めてもよいし、選んだ正方領域のごく一部のみにブロックを置いてもよい。 1. と 2. を何度か繰り返す。 これを、選ぶ正方領域の大きさや数、領域を埋める密度をいろいろなパラメータをとるようにすることによって、ある程度まで強いテストケースを作ることができます。",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint dp[51][51][51][51];\nvector<string> s;\n\nint rep(int lx,int ly,int rx,int ry){\n  if(lx>rx){return 0;}\n  if(ly>ry){return 0;}\n  if(dp[lx][ly][rx][ry]<1000){return dp[lx][ly][rx][ry];}\n  dp[lx][ly][rx][ry]=max(ry-ly+1,rx-lx+1);\n  for(int i=lx;i<=rx;i++){\n    bool ok=true;\n    for(int j=ly;j<=ry;j++){\n      if(s[i][j]=='#'){ok=false;break;}\n    }\n    if(ok){\n      dp[lx][ly][rx][ry]=min(dp[lx][ly][rx][ry],rep(lx,ly,i-1,ry)+rep(i+1,ly,rx,ry));\n    }\n  }\n  for(int i=ly;i<=ry;i++){\n    bool ok=true;\n    for(int j=lx;j<=rx;j++){\n      if(s[j][i]=='#'){ok=false;break;}\n    }\n    if(ok){\n      dp[lx][ly][rx][ry]=min(dp[lx][ly][rx][ry],rep(lx,ly,rx,i-1)+rep(lx,i+1,rx,ry));\n    }\n  }\n  return dp[lx][ly][rx][ry];\n}\n\nint main(){\n  int n;\n  cin >> n;\n  for(int i=0;i<n;i++){\n    for(int j=0;j<n;j++){\n      for(int k=0;k<n;k++){\n        for(int l=0;l<n;l++){dp[i][j][k][l]=100000;}\n      }\n    }\n  }\n  s.resize(n);\n  for(int i=0;i<n;i++){cin >> s[i];}\n  cout << rep(0,0,n-1,n-1) << '\\n';\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "f64d69e93123266fbde94891347b1f996d287d7a8ca133e77499e0ff195b24a2"
+    }
+  ],
+  "status": "available"
+}

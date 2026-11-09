@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc477_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc477/editorial/26405",
+      "text": "各人 \\(i\\) について「一線を画す」かどうかを判定することを考えましょう。 これは、問題文にある通り、すべての \\(j ~ (i \\ne j)\\) について、 \\(|X_i - X_j| \\ge D\\) が成り立つかどうか、を判定すれば良いです。 これは for文 を用いて、すべての \\(j\\) を見て、この条件を「守らない人がいるかどうか」を判定すれば良いです。（詳しくは実装例を見た方がわかりやすいでしょう） そして、これをすべての \\(i\\) について、計算すれば良いので、これも同様に for 文で処理できます。 実装例 (C++) Python では all や any を用いることで、いくらか簡単に記述できます。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  int n, d; cin >> n >> d;\n  vector<int> x(n);\n  for (int i=0; i<n; i++) cin >> x[i];\n  \n  vector<int> p;\n  for (int i=0; i<n; i++){\n      bool ok = true;\n      for (int j=0; j<n; j++){\n          if (i != j){\n              if (abs(x[i] - x[j]) < d) ok = false; // 条件を満たさない人がいる\n          }\n      }\n      if (ok) p.push_back(i + 1);\n  }\n  cout << p.size() << endl;\n  for (auto e : p) cout << e << \" \";\n  cout << endl;\n}\n",
+        "n, d = map(int, input().split())\nx = list(map(int, input().split()))\np = []\nfor i in range(n):\n    if all(i == j or abs(x[i] - x[j]) >= d for j in range(n)):\n        p.append(i + 1)\nprint(len(p))\nprint(*p)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "c9b2235eac45d97cb6cfb15de9950bfd8eed17096b9a0222717cda8f809df6d5"
+    }
+  ],
+  "status": "available"
+}

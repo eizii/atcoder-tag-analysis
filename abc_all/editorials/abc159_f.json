@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc159_f",
+  "editorials": [
+    {
+      "text": "F: Knapsack for All Segments\n求めたい合計値は、\nax1 + ax2 + · · · + axk = S, L ≤x1 < x2 < · · · < xk ≤R をみたすような(L, x1, x2, . . . , xk, R) の\n組の個数\nと言い換えることができます。\n　これは\ndp[i][s][t] = i 番目までみて、選んだ要素の和がs で、\nL をまだ決めていない状態の場合の数(t = 0 のとき)\nL は決めたがR はまだ決めていない状態の場合の数(t = 1 のとき)\nL もR も決まっている状態の場合の数(t = 2 のとき)\nと定めて動的計画法を用いると、時間計算量、空間計算量ともにO(NS) で計算することができます。\n求めるものはdp[N][S][2] です。\n遷移等については実装例を参考にしてください。https://atcoder.jp/contests/abc159/submissions/11096062\n",
+      "text_sha256": "94193657a63175985ebae4784bbd22dd3e5f63235b5bf467061d2c8456605beb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc159/abc159_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

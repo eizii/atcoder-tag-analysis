@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc327_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc327/editorial/7563",
+      "text": "for 文による繰り返しなどを用いて与えられた\n\\(3\\)\nつの条件をみたしているか判定すれば良いです。\n判定は、例えば\n\\(1\\)\nから\n\\(9\\)\nの数字に対してその数字が登場したかのフラグを管理・更新しながら、各行・各列などの調べる必要のある範囲を走査することによって行うことができます。\n各条件に対して各マスは 高々\n\\(1\\)\n回しか参照しないため、愚直に実装しても十分間に合います。よってこの問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint a[9][9];\n\tint b[9];\n\tbool flag=true;\n\tfor(int i=0;i<9;i++)for(int j=0;j<9;j++)cin>>a[i][j];\n\tfor(int i=0;i<9;i++){\n        for(int k=0;k<9;k++)b[k]=0;\n\t\tfor(int j=0;j<9;j++)b[a[i][j]-1]++;\n\t\tfor(int k=0;k<9;k++)if(b[k]!=1)flag=false;\n\t}\n    for(int j=0;j<9;j++){\n        for(int k=0;k<9;k++)b[k]=0;\n\t\tfor(int i=0;i<9;i++)b[a[i][j]-1]++;\n\t\tfor(int k=0;k<9;k++)if(b[k]!=1)flag=false;\n    }\n\tfor(int i=0;i<9;i+=3){\n\t\tfor(int j=0;j<9;j+=3){\n\t\t\tfor(int k=0;k<9;k++)b[k]=0;\n\t\t\tfor(int ii=0;ii<3;ii++){\n\t\t\t\tfor(int jj=0;jj<3;jj++){\n\t\t\t\t\tb[a[i+ii][j+jj]-1]++;\n\t\t\t\t}\n\t\t\t}\n\t\t\tfor(int k=0;k<9;k++)if(b[k]!=1)flag=false;\n\t\t}\n\t}\n\tif(flag)cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "a6a2449933efa63966cf13346f81c96fb027f8b4e71220a36d49a7f48be8b666",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc327/abc327_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc327/editorial/7589",
+      "text": "SageMathという言語には数独を解くライブラリがあるため、それを使用して解くことも可能です。\n正しい仕様は\n公式のリファレンス\nをご覧ください。\n仕様として、以下のように\nsolve\n関数を使い、イテレーションを進めると正しい解が出るようになっています。\nまたこの関数は、どう頑張っても完成しない数独が渡されたとき、\nStopIteration\nエラーが発生します。\nそのため、以下のようにしてイテレーションが止まるか判定することでこの問題を簡潔に解くことが可能です。\n実装例(SageMath,686ms)",
+      "codes": [
+        "next(S.solve())",
+        "next(S.solve(),None) is None",
+        "print(\"No\" if next(Sudoku(\"\".join(\"\".join(input().split()) for i in range(9))).solve(),None) is None else \"Yes\")"
+      ],
+      "text_sha256": "5c689f7777e935452fa5c5e72b04aa9033b3111c64fe992b22287a0d2165c2c1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc327/abc327_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc155_c",
+  "editorials": [
+    {
+      "text": "C: Poll\nPython やC# などにおける連想配列を使って，各文字列の出現回数を数えてから，最大値をとる\nものを昇順に出力すればよいです．\nstd::map の内部ではキーが昇順になるよう要素がソートされているので，イテレータを.begin()\nから順に見ることで，キーを昇順に見ることができます．\nC++ での実装例は次のとおりです．\n1 #include <iostream>\n2 using std::cin;\n3 using std::cout;\n4 using std::endl;\n5\n6 #include <map>\n7 using std::map;\n8\n9 #include <string>\n10 using std::string;\n11\n12 map<string, int> memo;\n13\n14 int main (void) {\n15\nint n;\n16\n17\nscanf(\"%lld\", &n);\n18\nfor (int i = 0; i < n; i++) {\n19\nstring s;\n20\ncin >> s;\n21\n22\nmemo[s] += 1;\n23\n}\n24\n25\n26\nint maxv = 0;\n27\nfor (const auto& x : memo) {\n28\nint v = x.second;\n29\nif (v > maxv) maxv = v;\n30\n}\n31\nfor (auto it = memo.begin(); it != memo.end(); it++) {\n32\nif (it->second == maxv) {\n33\ncout << it->first << endl;\n\n34\n}\n35\n}\n36\n37\nreturn 0;\n38 }\n",
+      "text_sha256": "a2c0215b99904f1a89b96384d7565060a2d411b2ce9100e620b462652589227c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc155/abc155_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

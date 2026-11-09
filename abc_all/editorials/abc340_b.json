@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc340_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc340/editorial/9253",
+      "text": "この問題は配列(リスト)を適切に使うことで答えを求めることができます。\n以下には Python, C++, C での実装例を載せます。他の言語のほとんどはこれらのいずれかと同様に実装することができます。\nPython では、リスト\n\\(A\\)\nの末尾に要素\n\\(x\\)\nを追加することは\nA.append(x)\nででき、リスト\n\\(A\\)\nの末尾から\n\\(x\\)\n番目の要素の値を得ることは\nA[-x]\nによりできます。\nC++では、vector\n\\(A\\)\nの末尾に要素\n\\(x\\)\nを追加することは\nA.push_back(x)\nででき、vector\n\\(A\\)\nの末尾から\n\\(x\\)\n番目の要素の値を得ることは\nA[A.size()-x]\nによりできます。\nC では、C++ の vector のようなものはないので、ありえる要素数の最大値 (この問題では\n\\(Q\\)\nの最大値である\n\\(100\\)\n) より長い固定長配列を最初から確保しておき、要素数は自分で管理するのが実装が最も単純でしょう。",
+      "codes": [
+        "Q=int(input())\nA=[]\nfor _ in range(Q):\n  t,x=map(int,input().split())\n  if t==1:\n    A.append(x)\n  else:\n    print(A[-x])",
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  int Q;\n  cin >> Q;\n  vector<int>A;\n  for(int i=0;i<Q;i++){\n    int t,x;\n    cin >> t >> x;\n    if(t==1){\n      A.push_back(x);\n    }else{\n      cout << A[A.size()-x] << endl;\n    }\n  }\n}",
+        "#include<stdio.h>\nint main(){\n  int Q;\n  scanf(\"%d\",&Q);\n  int A[101];\n  int size=0;\n  for(int i=0;i<Q;i++){\n    int t,x;\n    scanf(\"%d%d\",&t,&x);\n    if(t==1){\n      A[size]=x;\n      size++;\n    }else{\n      printf(\"%d\\n\",A[size-x]);\n    }\n  }\n}"
+      ],
+      "text_sha256": "4390d8d3455b779f150eb9f7d06c2c096ad0c0d06d9c8922d6ebf42bfeaa8494",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc340/abc340_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc340/editorial/9262",
+      "text": "C++ において、ランダムアクセスイテレータ（\nvector\nや\nstring\nの\n.begin()\n.end()\nなどがその例です）は配列のように添字によるアクセスを使って要素を参照することができます。\n負の値を使ってアクセスすることでそのイテレータの \\(k\\) 個前の要素を参照することができるため、\\(2\\) 番目のクエリでは\n.end()\nが返すイテレータに対して \\(x\\) 個前の要素を出力することでこの問題を解くことができます。\n実装例は以下のようになります。\nA.end()\nの値を使い回すと、再確保が起こった場合にイテレータが無効になることに注意してください（実装例のように毎回\nA.end()\nを呼び出すか、事前に十分な領域を確保することで防ぐことができます）。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\nint main() {\n    unsigned Q;\n    cin >> Q;\n\n    vector<unsigned> A; \n    for (unsigned i = 0; i < Q; ++i) {\n        unsigned type;\n        cin >> type;\n        if (type == 1) { // 1 種類目のクエリでは\n            unsigned value;\n            cin >> value;\n            A.emplace_back(value); // A の末尾に値を追加\n        } else { // 2 種類目のクエリでは\n            int value;\n            cin >> value;\n            cout << A.end()[-value] << endl; // A の後ろから value 番目の値を出力\n        }\n    }\n    \n    return 0;\n}"
+      ],
+      "text_sha256": "e38481238f3962fd2fb76b1f32bde83a3b7af9db2e6a5a8b9ec74051ae83413e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc340/abc340_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

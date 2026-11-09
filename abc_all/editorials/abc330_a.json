@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc330_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc330/editorial/7750",
+      "text": "この問題は、ループによって全参加者の得点を読み込み、それぞれ\n\\(L\\)\n以上であるかどうか判断することで正解できます。\n実装例 (Python):\n実装例 (C++):",
+      "codes": [
+        "n,l = map(int,input().split())\na = list(map(int,input().split()))\nok = 0\n\nfor x in a:\n    if x >= l:\n        ok += 1\n\nprint(ok)",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,l;\n  cin >> n >> l;\n  int ok=0;\n  for(int i=0;i<n;i++){\n    int a;\n    cin >> a;\n    if(a>=l){ok++;}\n  }\n  cout << ok << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "1e8ba1afd795ccc7aa4ff947caafb297d4b67cf5a28481789a2ab16f60e6af9f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc330/abc330_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

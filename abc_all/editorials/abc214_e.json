@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc214_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc214/editorial/2431",
+      "text": "箱の番号の昇順に入れるボールを決定していく、以下のようなシミュレーションを考えます。\n全ての\n\\(1\\)\n以上\n\\(10^9\\)\n以下の整数\n\\(i\\)\nに対して、以下の操作を行う。\n(A)\n\\(L_j=i\\)\nである全ての整数\n\\(j\\)\nについて、ボール\n\\(j\\)\nを「箱に入れてもいいボールのリスト」に入れる。\n(B)「箱に入れてもいいボールのリスト」から、ボールをどれか\n\\(1\\)\nつ決め、これを\n\\(k\\)\nとする。ボール\n\\(k\\)\nを箱\n\\(i\\)\nに入れ、リストからボール\n\\(k\\)\nを削除する。\n(C) 「箱に入れてもいいボールのリスト」に\n\\(R_j \\le i\\)\nなるボールが残っていれば、ボールを全て入れることはできない。\n\\(i=10^9\\)\nまで操作を行い、全てのボールが箱に入っていれば、それが条件を満たすボールの入れ方である。\nでは、このシミュレーションの (B) の部分は、どう決めれば最適でしょうか?\n実は、リストに残っているボールのうち\n\\(R_j\\)\nが最小であるボール\n\\(j\\)\nを箱に入れると必ず最適にボールを箱に入れることができます。なぜなら、\n\\(R_j\\)\nが最小でないボールを箱に入れた時と比べて、その後の (C) の部分の条件が厳しくなることはないからです。\n「\n\\(R_j\\)\nが最小であるボールを\n\\(1\\)\nつ選んで取り出す」という操作は、 priority_queue などを使うと実現可能です。また、この問題では実際に箱への入れ方を求める必要はないので、ボールをリストに追加する際に\n\\(R_j\\)\nの値だけを管理すればよいです。\nまた、冒頭のシミュレーションを愚直に行うと TLE してしまいますが、「リストが空になったタイミングで、次に (A) の操作によってリストが空でなくなるタイミングまで\n\\(i\\)\nを飛ばす」という改善によってこれを免れることが可能です。これには set を用いる、もしくは予めソートされた\n\\(L\\)\nの配列を二分探索する という方法があります。\n以上より、この問題を時間計算量\n\\(O(N \\log N)\\)\n程度で解くことが出来ました。",
+      "codes": [
+        "#include<bits/stdc++.h>\n#define inf 1000000007\n\nusing namespace std;\nusing pi=pair<int,int>;\n\nint main(){\n  int t;\n  cin >> t;\n  while(t>0){\n    t--;\n    int n;\n    cin >> n;\n    vector<pi> seg(n);\n    map<int,vector<int>> g;\n    set<int> st;\n    for(int i=0;i<n;i++){\n      cin >> seg[i].first >> seg[i].second;\n      g[seg[i].first].push_back(seg[i].second);\n      st.insert(seg[i].first);\n    }\n    st.insert(inf);\n    int i=(*st.begin());\n    priority_queue<int,vector<int>,greater<int>> pq;\n    bool fl=true;\n    while(i<=1000000000){\n      for(auto &nx : g[i]){pq.push(nx);}\n      int od=pq.top();\n      pq.pop();\n      if(pq.empty()){i=(*st.lower_bound(i+1));}\n      else{\n        if(pq.top()<=i){fl=false;break;}\n        i++;\n      }\n    }\n    if(!pq.empty()){fl=false;}\n    if(fl){cout << \"Yes\\n\";}else{cout << \"No\\n\";}\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "f206d0a49487ca7a670431919e767d0e9ac407508ca620971fcc54bd382d9780",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc214/abc214_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

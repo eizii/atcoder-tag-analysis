@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc384_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc384/editorial/11612",
+      "text": "この問題は、for 文や if 文を適切に使うことで解くことができます。\n読み込んだ \\(N,R\\) の値をもとに、以下のようなアルゴリズムを実装すればこの問題を解くことができます。\n\\(N\\) 回以下を繰り返す。\n入力から \\(D,A\\) を受け取り、\\(D\\) の値によって以下のどちらかを行う。\n\\(D=1\\) のとき、現在の \\(R\\) が \\(1600\\leq R\\leq2799\\) を満たすなら、\\(R\\leftarrow R+A\\) と更新する。\n\\(D=2\\) のとき、現在の \\(R\\) が \\(1200\\leq R\\leq2399\\) を満たすなら、\\(R\\leftarrow R+A\\) と更新する。\n実装例は以下のようになります。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n    int N, R;\n    cin >> N >> R;\n    \n    for (int i = 0; i < N; i++) {\n        int division, score;\n        cin >> division >> score;\n\n        if (division == 1) // Div. 1 なら\n            // Div. 1 の条件をもとに、更新対象ならレーティングを更新\n            if (1600 <= R && R <= 2799)\n                R += score;\n\n        if (division == 2) // Div. 2 なら\n            // Div. 2 の条件をもとに、更新対象ならレーティングを更新\n            if (1200 <= R && R <= 2399)\n                R += score;\n    }\n\n    // 最終的なレーティングを出力\n    cout << R << endl;\n    return 0;\n}",
+        "N, R = map(int, input().split())\n\nfor i in range(N):\n    D, A = map(int, input().split())\n    if D == 1:  # Div. 1 なら\n        # Div. 1 の条件をもとに、更新対象ならレーティングを更新\n        if 1600 <= R <= 2799:\n            R += A\n    if D == 2:  # Div. 2 なら\n        # Div. 2 の条件をもとに、更新対象ならレーティングを更新\n        if 1200 <= R <= 2399:\n            R += A\n\n# 最終的なレーティングを出力\nprint(R)"
+      ],
+      "text_sha256": "8de6a1d4785f7681086ad6d83837f4e975cdef80039be372fbe75f5f7bf12758",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc384/abc384_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

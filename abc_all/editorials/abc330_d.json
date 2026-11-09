@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc330_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc330/editorial/7751",
+      "text": "ひとつ三つ組の例をとって観察してみましょう。\n「マスのうち、丁度\n\\(2\\)\nつが同じ行にある」「マスのうち、丁度\n\\(2\\)\nつが同じ列にある」という条件から、このどちらにも当てはまるマスが丁度\n\\(1\\)\nつあることが分かります。例の中では、右下の\no\nがそれにあたります。\nこのマス\n\\(s\\)\nを決め打つ (全探索する) ことを考えましょう。残りの\n\\(2\\)\nマスはどのように選ぶことができるでしょうか?\n結論としては、以下のような選び方をすることになります。\n\\(s\\)\nと同じ行にある\n\\(s\\)\n以外の\no\nマスを丁度\n\\(1\\)\nつ選ぶ\n\\(s\\)\nと同じ列にある\n\\(s\\)\n以外の\no\nマスを丁度\n\\(1\\)\nつ選ぶ\nこのような選び方の数は、 (\n\\(s\\)\nと同じ行にある\n\\(s\\)\n以外の\no\nマスの個数 )\n\\(\\times\\)\n(\n\\(s\\)\nと同じ列にある\n\\(s\\)\n以外の\no\nマスの個数 ) で求めることができます。\nこれは、あらかじめ各行各列の\no\nマスの数を数えておくことで高速に求めることができます。\n実装例 (C++):",
+      "codes": [
+        "......o\n.......\n.o....o",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  vector<string> s(n);\n  vector<long long> bi(n,0),bj(n,0);\n  for(int i=0;i<n;i++){\n    cin >> s[i];\n    for(int j=0;j<n;j++){\n      if(s[i][j]=='o'){\n        bi[i]++;\n        bj[j]++;\n      }\n    }\n  }\n\n  long long res=0;\n  for(int i=0;i<n;i++){\n    for(int j=0;j<n;j++){\n      if(s[i][j]=='o'){\n        res+=(bi[i]-1)*(bj[j]-1);\n      }\n    }\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "05ebb75e37810e51bfef1e572780d00114df54662dc19539715e70c38c668b8a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc330/abc330_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

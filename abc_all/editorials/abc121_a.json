@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc121_a",
+  "editorials": [
+    {
+      "text": "A: Cells\n”残る白色のマス目の数は行や列の選び方によらない” ことを信じると、例えば後ろからh 行w 列を選んで\n黒色で塗りつぶした場合の白マス数を数えれば良いです。このときの白マス数は(H −h) × (W −w) です。\n他の考え方もあります。初めにh 行選んで黒く塗りつぶし、次にw 列選んで黒く塗りつぶすことを考えま\nす。すると、初めにh 行選んで黒く塗りつぶされる白マス数はh × W になります。その後にw 列選んで黒\nく塗りつぶされる白マス数は、1 列選ぶたびにH −h 個の白マスが塗りつぶされるので(H −h) × w になり\nます。初め、白マスはH × W 個あったので、答えはHW −hW −(H −h)w になります。\n”残る白色のマス目の数は行や列の選び方によらない” ことの直感的な証明を述べます。選ばれなかった行、\n列の数はそれぞれH −h 行、W −w 列です。選ばれなかった各行、各列に対して1 つの白マスが対応するの\nで、答えは(H −h) × (W −w) になります。\nC++ での実装例を以下に挙げます。\n#include <bits/stdc ++.h>\nusing\nnamespace\nstd;\nint main () {\nint H, W; cin >> H >> W;\nint h, w; cin >> h >> w;\nint ans = (H - h) * (W - w);\ncout << ans << endl;\n}\n",
+      "text_sha256": "fe7659e55a3b4b7c79541d88f2e3b4c82a53dfc68d156e834f9d01f7b624c7ee",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc121/abc121_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc216_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc216/editorial/2468",
+      "text": "魔法\n\\(A\\)\nで追加されるボールの色は毎回異なるとします。\nまた、魔法\n\\(B\\)\nでは色が保存されたままボールが複製されるとします。\nさて、\n\\(S\\)\nの\n\\(i\\)\n文字目が\nA\nで、このとき青いボールを追加したとしましょう。\n\\(S\\)\nの\n\\(i+1\\)\n文字目以降に含まれる\nB\nの数を\n\\(k\\)\n個とすると、最終的に青いボールは\n\\(2^k\\)\n個になります。\nよって、\n\\(N=2^p+2^q+2^r+\\cdots\\)\nと分解すれば、それに基づいて(長さが\n\\(120\\)\n以下とは限らないものの)\n\\(S\\)\nを構築できます。\nしたがって、以下のようにすることで構築が可能です。\n\\(ans\\)\nを、\nB\nを\n\\(60\\)\n個繋げた文字列とする。\n\\(N\\)\nの二進表記を\n\\(A\\)\nとする。\n\\(A\\)\nの上の桁から順番に見ていき、以下の操作を行う。\n\\(2^k\\)\nの桁が\n1\nならば、\n\\(ans\\)\nの、後ろに\nB\nが\n\\(k\\)\n個ある場所に\nA\nを挿入する\n\\(10^{18} \\lt 2^{60}\\)\nなので、\n\\(A\\)\nの桁数は\n\\(60\\)\n以下です。\nしたがって\n\\(ans\\)\nの長さは\n\\(120\\)\n以下で、条件を満たします。\nC++での実装例：",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nsigned main(){\n    ll n;cin>>n;\n    const ll len=60;\n    auto a=bitset<len>(n);\n    string ans(len,'B');\n    for(ll i=len-1;i>=0;i--){\n        if(a[i]==1){\n            ans.insert(ans.size()-i,\"A\");\n        }\n    }\n    cout<<ans<<endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "8de753a4ede64af7cc461256c30f415bfab6435c2c2de2bf2cc6070240cf7927",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc216/abc216_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc216/editorial/2503",
+      "text": "別解を紹介します。\nまず、操作を逆順に見ていきます。\n\\(N\\)\nが奇数ならば魔法\n\\(A\\)\nの逆操作、\n\\(N\\)\nが偶数ならば魔法\n\\(B\\)\nの逆操作を行うということを繰り返すと、最終的に\n\\(N\\)\nは\n\\(0\\)\nになります。\nここで、魔法\n\\(A\\)\nの逆操作とは\n\\(N\\)\nから\n\\(1\\)\n引くこと、操作\n\\(B\\)\nの逆操作とは\n\\(N\\)\nを\n\\(2\\)\nで割ることを意味します。\n実装例（C++）",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    long long n; cin >> n;\n    string ans;\n    while(n > 0){\n        if(n % 2){\n            ans += 'A'; n--;\n        }\n        else{\n            ans += 'B'; n /= 2;\n        }\n    }\n    reverse(ans.begin(), ans.end());\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "e86d7b482fd397739c578423c6174d07d58161349a86909eb411bf6034b27c89",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc216/abc216_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

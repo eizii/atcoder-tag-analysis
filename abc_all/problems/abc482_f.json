@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc482_f",
+  "title": "Mod M Divisor",
+  "contests": [
+    {
+      "contest_id": "abc482",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 2277,
+  "raw_difficulty": 2277,
+  "contest_id": "abc482",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc482/tasks/abc482_f",
+  "statement": "配点 : 525 点 問題文 正整数 N, M が与えられます。 k = 0, 1, \\dots, M-1 について次の問題を解いてください。 以下の条件を満たす正整数 t が存在するかを判定してください。また、存在する場合は最小値を求めてください。 N^t の正の約数 x であって、 x \\equiv k \\pmod{M} となるものが存在する。 制約 1 \\leq N \\leq 10^{14} 1 \\leq M \\leq 4 \\times 10^5 N, M は整数 入力 入力は以下の形式で標準入力から与えられる。 N M 出力 M 行出力せよ。 i 行目には、 k=i-1 について問題文の条件を満たす正整数 t が存在する場合はその最小値を、存在しない場合は -1 を出力せよ。 入力例 1 6 7 出力例 1 -1\r\n1\r\n1\r\n1\r\n2\r\n2\r\n1 例えば k=3 の時、 x=3 は N^1=6 の約数であり、かつ x\\equiv k \\pmod{M} を満たすので、問題文の条件を満たす最小の正整数 t は t=1 です。 入力例 2 4 8 出力例 2 2\r\n1\r\n1\r\n-1\r\n1\r\n-1\r\n-1\r\n-1 入力例 3 1 5 出力例 3 -1\r\n1\r\n-1\r\n-1\r\n-1",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 正整数 N, M が与えられます。 k = 0, 1, \\dots, M-1 について次の問題を解いてください。 以下の条件を満たす正整数 t が存在するかを判定してください。また、存在する場合は最小値を求めてください。 N^t の正の約数 x であって、 x \\equiv k \\pmod{M} となるものが存在する。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 10^{14} 1 \\leq M \\leq 4 \\times 10^5 N, M は整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 M 行出力せよ。 i 行目には、 k=i-1 について問題文の条件を満たす正整数 t が存在する場合はその最小値を、存在しない場合は -1 を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 6 7"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 -1\r\n1\r\n1\r\n1\r\n2\r\n2\r\n1 例えば k=3 の時、 x=3 は N^1=6 の約数であり、かつ x\\equiv k \\pmod{M} を満たすので、問題文の条件を満たす最小の正整数 t は t=1 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4 8"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 2\r\n1\r\n1\r\n-1\r\n1\r\n-1\r\n-1\r\n-1"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1 5"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 -1\r\n1\r\n-1\r\n-1\r\n-1"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc482/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:42:12.916019+00:00",
+  "statement_sha256": "6f202d055c241156d53190f4be73d9ba23eef8081b674678746cce37c41712ad",
+  "editorials": []
+}

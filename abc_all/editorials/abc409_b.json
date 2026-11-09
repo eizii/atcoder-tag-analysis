@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc409_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc409/editorial/13201",
+      "text": "解法 1\n\\(x\\)\nはたかだか\n\\(N\\)\nなので，\n\\(x=0,1,\\dots,N\\)\nのそれぞれについて，\n\\(A\\)\nに現れる\n\\(x\\)\nの個数を数えて，それが\n\\(x\\)\n以上となる最大の\n\\(x\\)\nを出力すればよいです．\n時間計算量は\n\\(O(N^2)\\)\nです．\n実装例 (Python)\n実装例 (C++)\n解法 2\nまず，\n\\(A\\)\nを要素の降順に並べ替えて，\n\\(A_1 \\geq A_2 \\geq \\dots \\geq A_N\\)\nとします．これは\nソート\nと呼ばれる操作であり，多くの言語で標準機能として実装されています（C++ では\nstd::sort\n, Python では\nsort\n関数が利用できます）．\nこのように並べ替えると，各\n\\(1 \\leq i \\leq N\\)\nについて，\n\\(A_i\\)\n以上の要素が\n\\(i\\)\n個以上現れることになります．なぜならば，\n\\(A_1,\\dots,A_i\\)\nはすべて\n\\(A_i\\)\n以上だからです．\nよって，\n\\(x\\)\n以上の要素が\n\\(x\\)\n個以上現れる最大の\n\\(x\\)\nは，\n\\(A_x \\geq x\\)\nが成り立つ最大の\n\\(x\\)\nであり，\n\\(A_x\\)\nを順番に見ていくことで求めることができます．\n時間計算量はソートがボトルネックとなり\n\\(O(N \\log N)\\)\nです．本問題の制約では解法 1 でも十分高速ですが，解法 2 は\n\\(N\\)\nが\n\\(10^6\\)\n程度でも高速に動作します．\n実装例 (Python)\n実装例 (C++)",
+      "codes": [
+        "N = int(input())\nA = list(map(int, input().split()))\nfor x in range(N, -1, -1):\n    count = 0\n    for a in A:\n        if a >= x:\n            count += 1\n    if count >= x:\n        print(x)\n        break",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    vector<int> A(N);\n    for (auto& x : A) cin >> x;\n    for (int x = N; x >= 0; --x) {\n        int count = 0;\n        for (auto a : A) {\n            if (a >= x) ++count;\n        }\n        if (count >= x) {\n            cout << x << endl;\n            break;\n        }\n    }\n}",
+        "N = int(input())\nA = list(map(int, input().split()))\nA.sort(reverse=True)\nfor x in range(N, 0, -1):\n    if A[x - 1] >= x:\n        print(x)\n        break\nelse:\n    print(0)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    vector<int> A(N);\n    for (auto& x : A) cin >> x;\n    sort(A.rbegin(), A.rend());\n    for (int x = N; x > 0; --x) {\n        if (A[x - 1] >= x) {\n            cout << x << endl;\n            return 0;\n        }\n    }\n    cout << 0 << endl;\n}"
+      ],
+      "text_sha256": "e294288bf4d4753fb44092f02fa79077f843b3b8683c68e39519cb62bc37c08c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc409/abc409_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

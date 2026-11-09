@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc346_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc346/editorial/9641",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n入出力、四則演算、配列、for 文を用いた繰り返し処理などの基礎的な言語機能の使い方を問う問題です。問題文の指示に従って、数列\n\\(A\\)\nを入力として受け取り、数列\n\\(B\\)\nを計算し、\n\\(B\\)\nを出力してください。\n具体的な実装方法は下記の実装例 (C++, Python) を参考にしてください。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n    }\n    for (int i = 0; i < n - 1; i++) {\n        int b = a[i] * a[i + 1];\n        cout << b << (i + 1 < n ? ' ' : '\\n');\n    }\n}",
+        "n = int(input())\na = list(map(int, input().split()))\nb = []\nfor i in range(n - 1):\n    b.append(a[i] * a[i + 1])\nprint(*b)"
+      ],
+      "text_sha256": "746e0306b507d274c87c1d5d2d906352f5210bd0456a663309118231076a6f5e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc346/abc346_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

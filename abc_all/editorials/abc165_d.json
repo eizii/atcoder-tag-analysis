@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc165_d",
+  "editorials": [
+    {
+      "text": "D: Floor Function\nf(x) = floor(Ax/B) −A × floor(x/B) とします。\nf(x + B) = f(x) であることは実際に代入することで容易に分かります。なので、0 ≤x ≤B −1\nの場合のみを考えます。\nこのとき、f(x) = floor(Ax/B) −A × floor(x/B) = floor(Ax/B) で、floor(Ax/B) は広義単\n調増加なので、与えられた制約(0 ≤x ≤B −1, 0 ≤x ≤N) の中で最も大きいx について、f(x)\nが求める最大値です。\nよって、答えはf(min(B −1, N)) です。\n",
+      "text_sha256": "609d097496f049482a0b0cd313a87d49e04e0b7a261411141c0fa768047139bb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc165/abc165_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

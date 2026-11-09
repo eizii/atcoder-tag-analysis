@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc352_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc352/editorial/9919",
+      "text": "問題文中における\n\\(a\\)\nの値を全探索することを考えます。\nすなわち、\n\\(a=1,2,\\dots,N-K+1\\)\nそれぞれについて以下の値を求めたいです。\n\\(\\{P_{i_1},P_{i_2},\\dots,P_{i_K}\\}=\\{a,a+1,\\dots,a+K-1\\}\\)\nとなるように\n\\(i_1 < i_2 < \\dots < i_K\\)\nを選んだときの\n\\(i_K-i_1\\)\nの値\nここで、数列\n\\(Q=(Q_1,Q_2,\\dots,Q_N)\\)\nを、\n\\(Q_j=(P_i=j\\)\nを満たす\n\\(i\\)\nの値\n\\()\\)\nと定義します。\n\\(P\\)\nが\n\\((1,2,\\dots,N)\\)\nの順列であるとき、\n\\(Q\\)\nもまた\n\\((1,2,\\dots,N)\\)\nの順列です。\nすると、上記の値は以下のように言い換えられます。\n\\(Q_a,Q_{a+1},\\dots,Q_{a+K-1}\\)\nの最大値と最小値の差\n\\(a\\)\nの昇順にこの値を求めることを考えます。集合\n\\(\\{Q_a,Q_{a+1},\\dots,Q_{a+K-1}\\}\\)\nは\n\\(a\\)\nを\n\\(1\\)\n増やしたとき\n\\(1\\)\n要素分しか変化しない（\n\\(Q_a\\)\nが抜けて\n\\(Q_{a+K}\\)\nが入る）ことから、以下のようなデータ構造\n\\(D\\)\nがあれば良いことがわかります。\n\\(D\\)\nは集合を管理するデータ構造であり、以下の操作を高速に（\n\\(O(N)\\)\nより速く）処理できる。\n\\(D\\)\nに要素を\n\\(1\\)\nつ追加する。\n\\(D\\)\nから要素を\n\\(1\\)\nつ削除する。\n\\(D\\)\nに現在含まれる要素の最大値と最小値を取得する。\nこれらの要件を満たせるデータ構造の一つが平衡二分探索木であり、C++ の\nstd::set\nなどが該当します。\nstd::set\nを用いた場合の実装の詳細は下記の実装例を参考にしてください。他の言語における実装については各言語のリファレンス等を参照してください。\n実装例 (C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, k;\n    cin >> n >> k;\n    vector<int> q(n);\n    for (int i = 0; i < n; i++) {\n        int p;\n        cin >> p;\n        --p;\n        q[p] = i;\n    }\n    set<int> st;\n    for (int i = 0; i < k; i++) {\n        st.insert(q[i]);\n    }\n    // *st.rbegin() : 最大値の取得\n    // *st.begin() : 最小値の取得\n    int ans = *st.rbegin() - *st.begin();\n    for (int i = k; i < n; i++) {\n        st.erase(q[i - k]);\n        st.insert(q[i]);\n        ans = min(ans, *st.rbegin() - *st.begin());\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "d2b513b776e008c9deb87b83af3cbeaa020f8c147e1a2a5099b47a5752550041",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc352/abc352_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc352/editorial/9912",
+      "text": "各\n\\(i=1,2,\\ldots,N-K+1\\)\nに対して以下の値を求め，それの最小値が答えになります．\n\\(j=i,i+1,\\ldots,i+K-1\\)\nの中で\n\\(P\\)\nの中で最も右に登場するものの添え字を\n\\(idx_R\\)\n，最も左に登場するものの添え字を\n\\(idx_L\\)\nとしたとき，\n\\(idx_R-idx_L\\)\n順列\n\\(Q\\)\nを\n\\(P\\)\nの逆順列（各\n\\(i\\)\nに対して\n\\(P_{Q_i}=i\\)\nが成り立つ）とすると，\n\\(idx_R,idx_L\\)\nはそれぞれ\n\\(\\underset{i\\leq j\\leq i+K-1}{\\max}Q_j, \\underset{i\\leq j\\leq i+K-1}{\\min}Q_j\\)\nになります．スライド最小値というアルゴリズムを用いると，すべての\n\\(i\\)\nに対する\n\\(\\underset{i\\leq j\\leq i+K-1}{\\max}Q_j\\)\nや\n\\(\\underset{i\\leq j\\leq i+K-1}{\\min}Q_j\\)\nを\n\\(O(N)\\)\nで求めることができます．\n実装例 (Python)",
+      "codes": [],
+      "text_sha256": "0b1d6b42f47e2f1e6bf0deedd4593e82bcb0fb28d5e7f85173e37a1fef3e4bc9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc352/abc352_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

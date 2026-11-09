@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc321_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc321/editorial/7266",
+      "text": "以下、\n\\(B\\)\nが昇順にソートされていることを仮定します。\n各\n\\(i\\ (1 \\leq i \\leq N)\\)\nについて、\n\\(i\\)\n種類目の主菜を用いた定食の価格の総和、すなわち\n\\(\\displaystyle \\sum_{j=1}^{M} \\min(A_i+B_j, P)\\)\nを高速に求めることを考えます。\n\\(B_j < P-A_i\\)\nを満たす最大の\n\\(j\\)\n（存在しない場合は\n\\(0\\)\n）を\n\\(k_i\\)\nとおきます。このとき、求める値は、\n\\[\n\\begin{aligned}\n\\displaystyle \n\\sum_{j=1}^{M} \\min(A_i+B_j, P) \n&= \\sum_{j=1}^{k_i} (A_i+B_j) +  \\sum_{j=k_i+1}^{M} P \\\\\n &=k_iA_i + \\sum_{j=1}^{k_i} B_j + (M-k_i)P\n\\end{aligned}\n\\]\nと表せます。\n\\(k_i\\)\nの値は二分探索を用いて、\n\\(\\displaystyle  \\sum_{j=1}^{k_i} B_j\\)\nの値は累積和を用いて高速に計算可能です。\nよって、本問題を\n\\(O(N\\log N)\\)\nで解くことができました。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint main() {\n    int n, m, p;\n    cin >> n >> m >> p;\n    vector<int> a(n), b(m);\n    for (int &i: a) cin >> i;\n    for (int &i: b) cin >> i;\n    sort(b.begin(), b.end());\n    vector<ll> b_sum(m + 1);\n    for (int i = 0; i < m; i++) {\n        b_sum[i + 1] = b_sum[i] + b[i];\n    }\n    ll ans = 0;\n    for (int i: a) {\n        int lb = lower_bound(b.begin(), b.end(), p - i) - b.begin();\n        ans += (ll) i * lb;\n        ans += b_sum[lb];\n        ans += (ll) p * (m - lb);\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "3fdc23c7eeb8d0044e60bc325d542b6c06b89d932c7fcf5ad1f9dfd558364a59",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc321/abc321_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc364_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc364/editorial/10545",
+      "text": "以下のような\n問題A\nと\n問題B\nを考えます。\n問題A\n\\(N\\)\n個の料理を好きな順で並べ、その順で食べていく。ただし、食べた料理の甘さの合計が\n\\(X\\)\nより大きくなるとその時点で食べるのをやめる。食べる料理の個数の最小値はいくつか？\n問題B\n\\(N\\)\n個の料理を好きな順で並べ、その順で食べていく。ただし、食べた料理のしょっぱさの合計が\n\\(Y\\)\nより大きくなるとその時点で食べるのをやめる。食べる料理の個数の最小値はいくつか？\n料理の並べ方を固定すると、元の問題で食べるのをやめる条件を満たしているとき 問題A と 問題B のどちらかで食べるのをやめる条件を満たし、問題A と 問題B のどちらかで食べるのをやめる条件を満たしているとき元の問題でも食べるのをやめる条件を満たしています。\n前者の事実から\n\\(\\min\\)\n(問題A の答え, 問題Bの答え)\n\\(\\leq\\)\n(本問題の答え) が従い、後者の事実から (本問題の答え)\n\\(\\leq\\)\n(問題A の答え) と (本問題の答え)\n\\(\\leq\\)\n(問題B の答え)が従うので、本問題の答えは 問題A と 問題B の最小値に等しいです。\nしたがって 問題A と 問題B が解ければよいですが、これはそれぞれ\n\\(A_i\\)\nと\n\\(B_i\\)\nの降順にソートして順に食べていくことが最小値を達成するために最適な行動の一つとなります。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n\tll n, x, y;\n\tcin >> n >> x >> y;\n\tvector<ll> a(n), b(n);\n\tfor (int i = 0; i < n; i++) cin >> a[i];\n\tfor (int i = 0; i < n; i++) cin >> b[i];\n\tsort(a.begin(), a.end(), greater<>());\n\tsort(b.begin(), b.end(), greater<>());\n\tint c1 = 0, c2 = 0;\n\tll sx = 0, sy = 0;\n\tfor (int i = 0; i < n; i++) {\n\t\tsx += a[i];\n\t\tc1++;\n\t\tif (sx > x) break;\n\t}\n\tfor (int i = 0; i < n; i++) {\n\t\tsy += b[i];\n\t\tc2++;\n\t\tif (sy > y) break;\n\t}\n\tcout << min(c1, c2) << '\\n';\n}"
+      ],
+      "text_sha256": "43a1151731c11f1c955627f647a353597a0841f907971a90073d9c8ea5d6e700",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc364/abc364_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

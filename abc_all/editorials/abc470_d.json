@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc470_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc470/editorial/23875",
+      "text": "実装 順列 \\(P\\) を置換 \\(\\begin{pmatrix} 1 & 2 & \\dots & N \\\\ P_1 & P_2 & \\dots & P_N \\end{pmatrix}\\) と同一視するとき，種類 \\(2\\) のクエリは \\(P\\) をその逆置換 \\(P^{-1} = \\begin{pmatrix} P_1 & P_2 & \\dots & P_N \\\\ 1 & 2 & \\dots & N \\end{pmatrix}\\) に置き換える操作といえます． 現在の \\(P,\\ P^{-1}\\) の値を管理することを考えます．このとき，各クエリは以下のように処理できます． 種類 \\(1\\) のクエリにおいて， \\(P\\) の要素に対する変更は \\(P_x, P_y\\) の swap のみであり， \\(P^{-1}\\) の要素に対する変更は \\(P^{-1}_{P_x}, P^{-1}_{P_y}\\) の swap のみ． \\((P^{-1})^{-1} = P\\) より，種類 \\(2\\) のクエリは単に \\(P,\\ P^{-1}\\) を swap すればよい．これは愚直に swap しなくとも， \\(2\\) つの順列のどちらを \\(P\\) として扱うかを切り替える形で実装できる． 時間計算量は前処理 \\(\\Theta(N)\\) ，クエリごとに \\(\\Theta(1)\\) ，出力に \\(\\Theta(N)\\) です． 実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\n#include <vector>\nusing std::vector;\nusing std::pair;\n#include <map>\nusing std::map;\n#include <array>\nusing std::array;\n\nusing std::max;\nusing std::min;\nusing std::swap;\n\n#ifdef DEBUG\nconst int debug = 1;\n#else\nconst int debug = 0;\n#endif\n\nusing ll = int64_t;\nusing P = pair<ll, ll>;\n\nll n, q;\nvector<ll> a;\n\n\n\nvoid solve () {\n\tvector<ll> pq[2];\n\tpq[0] = a;\n\tpq[1].resize(n);\n\tfor (ll i = 0; i < n; i++) {\n\t\tpq[1][a[i]] = i;\n\t}\n\tll pi = 0;\n\n\tfor (ll qi = 0; qi < q; qi++) {\n\t\tll qt;\n\t\tcin >> qt;\n\t\tif (qt == 1) {\n\t\t\tll x, y;\n\t\t\tcin >> x >> y;\n\t\t\t--x;\n\t\t\t--y;\n\n\t\t\t// type 1 (swap)\n\t\t\tll px = pq[pi][x];\n\t\t\tll py = pq[pi][y];\n\t\t\tswap(pq[pi  ][x ], pq[pi  ][y ]);\n\t\t\tswap(pq[pi^1][px], pq[pi^1][py]);\n\n\t\t} else {\n\t\t\t// type 2 (inverse)\n\t\t\tpi ^= 1;\n\n\t\t}\n\t}\n\n\tfor (ll i = 0; i < n; i++) {\n\t\tif (i > 0) { cout << \" \"; }\n\t\tcout << (pq[pi][i] + 1);\n\t}\n\tcout << \"\\n\";\n\treturn;\n}\n\nint main (void) {\n\tstd::cin.tie(nullptr);\n\tstd::ios_base::sync_with_stdio(false);\n\n\tcin >> n >> q;\n\ta.resize(n);\n\tfor (ll i = 0; i < n; i++) {\n\t\tcin >> a[i];\n\t\ta[i]--;\n\t}\n\t\n\tsolve();\n\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "6054e715ec8cee36d35351906fbd8bab9be0636e4a3a05ac71e976e787f963bd"
+    }
+  ],
+  "status": "available"
+}

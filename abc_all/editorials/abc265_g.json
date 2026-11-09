@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc265_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc265/editorial/4586",
+      "text": "この問題は遅延セグメントツリーを用いて \\(O(N+Q\\log N)\\) で解くことができます。 より基本的な類題： ACL practice contest L『Lazy Segment Tree』 遅延セグメントツリーの各ノードは、対応する区間についての以下の \\(6\\) つの情報を持ちます： \\(0\\) の個数 \\(1\\) の個数 \\(2\\) の個数 \\(1,0\\) の個数（すなわち、 \\(i<j\\) かつ \\(A_i=1\\) かつ \\(A_j=0\\) を満たす \\((i,j)\\) の組の個数） \\(2,0\\) の個数 \\(2,1\\) の個数 作用素は次の情報を持ちます： \\(0,1,2\\) をそれぞれ何に置き換えるか ノードの prod やクエリの処理の方法の詳細は以下の実装例を参照してください。 実装例(C++, ACL) 実装例(Python)",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "cd7f7ef228b2efcf578d7dfcac3cd4164b40276ee895043eea5c6b5bee310ebf"
+    }
+  ],
+  "status": "available"
+}

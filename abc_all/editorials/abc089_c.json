@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc089_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc089/editorial.pdf",
+      "text": "C:  March\n\n  ‘M‘ から始まる名前の人がm 人、‘A‘ から始まる名前の人がa 人、‘R‘ から始まる名前の人が\nr 人、‘C‘ から始まる名前の人がc 人、‘H‘ から始まる名前の人がh 人いるとします。\n 例えば、「‘M‘ から始まる名前の人」と「‘A‘ から始まる名前の人」と「‘R‘ から始まる名前の\n人」の3 人を選ぶ方法は、m × a × r 通りです。\n  3 人を選ぶとき、3 人の名前の頭文字の組み合わせは高々10 通りとなります。\n よって、m, a, r, c, h を求めた後、10 通りの組み合わせ全てを試せばよいです。\n\n#include <cstdio >\n#include <iostream >\nusing namespace std;\ntypedef long long ll;\n\nstring s;\nint N;\nll m,a,r,c,h;\nll D[5];\nint P[10]={0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,2};\nint Q[10]={1 ,1 ,1 ,2 ,2 ,3 ,2 ,2 ,3 ,3};\nint R[10]={2 ,3 ,4 ,3 ,4 ,4 ,3 ,4 ,4 ,4};\nint main ()\n{\n         scanf (\"%d\",&N);\n        for(int i=0;i<N;i++)\n          {\n                  cin >>s;\n                 if(s[0]== ’M’)m++;\n                 if(s[0]== ’A’)a++;\n                 if(s[0]== ’R’)r++;\n                 if(s[0]== ’C’)c++;\n                 if(s[0]== ’H’)h++;\n          }\n        D[0]=m,D[1]=a,D[2]=r,D[3]=c,D[4]=h;\n         ll res =0;\n        for(int d=0;d <10;d++)\n                res+=D[P[d]]*D[Q[d]]*D[R[d]];\n         printf (\"% lld\\n\",res);\n}\n\n\n\n\n\n                                         2",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "d499764629b18029b0191cb1acbece4d686bcbd3fdc1f1afdfe1cdb0b62ad80f"
+    }
+  ],
+  "status": "available"
+}

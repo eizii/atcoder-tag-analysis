@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc199_c",
+  "title": "IPFL",
+  "contests": [
+    {
+      "contest_id": "abc199",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 436,
+  "raw_difficulty": 436,
+  "contest_id": "abc199",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc199/tasks/abc199_c",
+  "statement": "配点 : 300 点 問題文 長さ 2N の文字列 S があります。 この文字列に対して Q 個のクエリが与えられます。 i 番目のクエリでは 3 つの整数 T_i, A_i, B_i が与えられるので、以下の処理をします。 T_i = 1 のとき : S の A_i 文字目と B_i 文字目を入れ替える T_i = 2 のとき : S の前半 N 文字と後半 N 文字を入れ替える( A_i, B_i の値は用いない) 例えば S が FLIP のときにこのクエリを処理すると、 S は IPFL となる。 これら Q 個のクエリを与えられた順に全て処理した後の S を出力してください。 制約 1 \\le N \\le 2 \\times 10^5 S は長さ 2N の英大文字のみからなる文字列 1 \\le Q \\le 3 \\times 10^5 T_i は 1 または 2 T_i = 1 のとき、 1 \\le A_i \\lt B_i \\le 2N T_i = 2 のとき、 A_i = B_i = 0 入力 入力は以下の形式で標準入力から与えられる。 N S Q T_1 A_1 B_1 T_2 A_2 B_2 T_3 A_3 B_3 \\hspace{21pt} \\vdots T_Q A_Q B_Q 出力 クエリ処理後の S を出力せよ。 入力例 1 2\r\nFLIP\r\n2\r\n2 0 0\r\n1 1 4 出力例 1 LPFI 1 番目のクエリでは S の前半 N 文字と後半 N 文字を入れ替えるため、 S は IPFL となります。 2 番目のクエリでは S の 1 文字目と 4 文字目を入れ替えるため、 S は LPFI となります。 入力例 2 2\r\nFLIP\r\n6\r\n1 1 3\r\n2 0 0\r\n1 1 2\r\n1 2 3\r\n2 0 0\r\n1 1 4 出力例 2 ILPF",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ 2N の文字列 S があります。 この文字列に対して Q 個のクエリが与えられます。 i 番目のクエリでは 3 つの整数 T_i, A_i, B_i が与えられるので、以下の処理をします。 T_i = 1 のとき : S の A_i 文字目と B_i 文字目を入れ替える T_i = 2 のとき : S の前半 N 文字と後半 N 文字を入れ替える( A_i, B_i の値は用いない) 例えば S が FLIP のときにこのクエリを処理すると、 S は IPFL となる。 これら Q 個のクエリを与えられた順に全て処理した後の S を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\le N \\le 2 \\times 10^5 S は長さ 2N の英大文字のみからなる文字列 1 \\le Q \\le 3 \\times 10^5 T_i は 1 または 2 T_i = 1 のとき、 1 \\le A_i \\lt B_i \\le 2N T_i = 2 のとき、 A_i = B_i = 0"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S Q T_1 A_1 B_1 T_2 A_2 B_2 T_3 A_3 B_3 \\hspace{21pt} \\vdots T_Q A_Q B_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 クエリ処理後の S を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2\r\nFLIP\r\n2\r\n2 0 0\r\n1 1 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 LPFI 1 番目のクエリでは S の前半 N 文字と後半 N 文字を入れ替えるため、 S は IPFL となります。 2 番目のクエリでは S の 1 文字目と 4 文字目を入れ替えるため、 S は LPFI となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2\r\nFLIP\r\n6\r\n1 1 3\r\n2 0 0\r\n1 1 2\r\n1 2 3\r\n2 0 0\r\n1 1 4"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 ILPF"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc199/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:19.150565+00:00",
+  "statement_sha256": "e12fb41c70e4252c0b275b6d87c40f215d2d07a6d59bc5ea71ff0ae6a8f88d5a",
+  "editorials": []
+}

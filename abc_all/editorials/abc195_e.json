@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc195_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc195/editorial/886",
+      "text": "\\(N-1\\)\nラウンド目が終了した時点で高橋君に勝ち目があるかを考えてみましょう。この時点での\n\\(T\\)\nを\n\\(10\\)\n進法の数とみなし\n\\(7\\)\nで割ったあまりを\n\\(r\\)\nとします。また、文字\n\\(S_N\\)\nを数と同一視します。\n\\(X_N\\)\nが\nT\nのとき、\n\\(10r\\)\nか\n\\(10r+S_N\\)\nのどちらかが\n\\(7\\)\nの倍数であれば高橋君の勝ちです。\n\\(X_N\\)\nが\nA\nのとき、\n\\(10r\\)\nと\n\\(10r+S_N\\)\nがともに\n\\(7\\)\nの倍数であれば高橋君の勝ちです。\nこのように、後ろから考えることで、次のようなDPができることがわかります。\ndp[i]=次の条件を満たす数\n\\(r\\)\nの集合\n条件：\n\\(i\\)\nラウンド目が終了した時点で、\n\\(T\\)\nを\n\\(7\\)\nで割ったあまりが\n\\(r\\)\nであるとき、ここからゲームを続けると高橋君が勝つ\n初期状態は\n\\( dp[N]=\\{0\\}\\)\nであり、遷移は\n\\(X_i\\)\nが\nT\nのとき\n\\(dp[i-1]=\\{ r \\mid (10r \\bmod 7) \\in dp[i] \\ \\text{または}\\ (10r+S_i \\bmod 7) \\in dp[i]\\}\\)\n\\(X_i\\)\nが\nA\nのとき\n\\(dp[i-1]=\\{ r \\mid (10r \\bmod 7) \\in dp[i]\\ \\text{ かつ}\\ (10r+S_i \\bmod 7) \\in dp[i]\\}\\)\nとなります。\n最終的に\n\\(0 \\in dp[0]\\)\nなら高橋君の勝ち、そうでなければ青木君の勝ちです。計算量は\n\\(O(N)\\)\nです。",
+      "codes": [],
+      "text_sha256": "37f8c7731b2d487f3a5c6fd094f7eea054386faec4288adc0182ec39fab40511",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc195/abc195_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

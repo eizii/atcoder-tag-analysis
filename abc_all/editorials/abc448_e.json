@@ -1,0 +1,66 @@
+{
+  "problem_id": "abc448_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc448/editorial/16749",
+      "text": "\\(\\lfloor N/M \\rfloor\\)\nを\n\\(10007\\)\nで割った余りを求めるために必要な情報はなんでしょうか？\n\\(N\\)\nを\n\\(M \\times 10007\\)\nで割った余りが分かっていれば十分です。この値を\n\\(r\\)\nとして、答えは\n\\(\\lfloor r/M \\rfloor\\)\nとなります。\nなお、制約より\n\\(M \\times 10007 \\le 10^9\\)\nなので、\n\\({\\rm mod}\\ (M \\times 10007)\\)\nを求めるにあたって\n\\(64\\)\nbit 符号付き整数型程度の桁数の整数型を使えば安全であることも分かります。\nここで、\n\\(1\\)\nを\n\\(k\\)\n個並べた\nレピュニット\nを\n\\(R_k\\)\nと書きます。例えば、\n\\(R_5=11111\\)\nです。\n求めるべきは次を\n\\(M \\times 10007\\)\nで割った余りです。\n\\(\\displaystyle \\sum_{i=1}^{N} c_i \\times R_{l_i} \\times 10^{\\sum_{j=i+1}^{N} l_j}\\)\nレピュニット以外の部分に関しては容易で、問題はレピュニットです。\nレピュニットを\n\\({\\rm mod}\\ X\\)\n上で求める方法として\n\\(R_k = \\displaystyle \\frac{10^{k}-1}{9}\\)\nを利用する方法もあります(頻出です)が、今回は\n\\({\\rm mod}\\ (M \\times 10007)\\)\nで\n\\(9\\)\nの逆元が取れない場合があるためこの方法は使えません。どうすればよいでしょうか？\n今回は、\nダブリング\nと呼ばれる手法を用います。\nダブリングとは、以下の手法です。\nサイズ\n\\(2^k\\)\nについて問題を解いた結果から、サイズ\n\\(2^{k+1}\\)\nについて問題を解いた結果を得る行為を、十分大きな\n\\(k\\)\nに到達するまで繰り返す。\nサイズ\n\\(n\\)\nについて問題を解いた結果を得たい場合、\n\\(n = 2^a+2^b+2^c+\\dots\\)\nと (二進表記を利用するなどして) 分解した上で、2べきのサイズについて問題を解いた結果を組み合わせてサイズ\n\\(n\\)\nについて問題を解いた結果を得る。\n詳しくは、以下の記事も参考にしてください。他にも、インターネット上に参考となる記事がたくさんあります。\nダブリングの基本概念とその応用\n【競技プログラミング】ダブリングまとめ\nAtCoderダブリング問題総まとめ（中３女子しらべ）\n[競プロ用]ダブリングまとめ\n今回は、以下の要領でダブリングを適用可能です。\n\\(R_1 = 1\\)\nから始める。\n\\(1 \\le k < 30\\)\nについて\n\\(R_{2^k} = R_{2^{k-1}} \\times 10^{2^{k-1}} + R_{2^{k-1}}\\)\nと得る。\n\\(R_{2^k}\\)\nを組み合わせて\n\\(R_n\\)\nを得る際に、\n\\(R_s\\)\nが既知だとすると\n\\(R_{s+2^k} = R_s \\times 10^{2^k} + R_{2^k}\\)\nと得ることができる。\nこうすると、\n\\({\\rm mod}\\ (M \\times 10007)\\)\n上での逆元計算をすることなくレピュニットを\n\\(M \\times 10007\\)\nで割った余りを求めることができます。\nあとは、先ほど示した値を求めることでこの問題に正解できます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing ll=long long;\n\nll mod;\n\nll power(ll a,ll b){ // a^b\n  ll res=1,cur=a;\n  while(b>0){\n    if(b&1ll){\n      res*=cur; res%=mod;\n    }\n    cur*=cur; cur%=mod;\n    b>>=1;\n  }\n  return res;\n}\n\nint main(){\n  ll k,m;\n  cin >> k >> m;\n  mod=(m*10007);\n  vector<ll> c(k),l(k);\n  for(ll i=0;i<k;i++){\n    cin >> c[i] >> l[i];\n  }\n\n  vector<ll> pow_keep(30); // 10^{2^d}\n  pow_keep[0]=10;\n  for(ll d=1;d<30;d++){\n    pow_keep[d]=(pow_keep[d-1]*pow_keep[d-1])%mod;\n  }\n\n  vector<ll> Rpow2(30);\n  Rpow2[0]=1;\n  for(ll d=1;d<30;d++){\n    Rpow2[d]=(Rpow2[d-1]*pow_keep[d-1]+Rpow2[d-1])%mod;\n  }\n\n  ll res=0;\n  ll dgt=0;\n  for(ll i=k-1;i>=0;i--){\n    ll ce=(c[i]*power(10,dgt))%mod;\n    ll R=0;\n    for(ll d=29;d>=0;d--){\n      if(l[i]&(1ll<<d)){\n        R=(R*pow_keep[d]+Rpow2[d])%mod;\n      }\n    }\n    res+=ce*R; res%=mod;\n    dgt+=l[i];\n  }\n  cout << res/m << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "2d8a1ead0aa45e8eb38fdff5fcd9a8ffe7fa5ea25ee6bcafdb18c08b74ad2684",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc448/abc448_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc448/editorial/16999",
+      "text": "\\(N\\)\nを\n\\(10007M\\)\nで割った商を\n\\(q\\)\n、余りを\n\\(r\\)\nとします。すなわち\n\\(N = 10007M \\cdot q + r\\)\nです。両辺を\n\\(M\\)\nで割った商をとると\n\\(\\lfloor \\frac{N}{M} \\rfloor = 10007q + \\lfloor \\frac{r}{M} \\rfloor\\)\nとなります。\n\\(0 \\leq r < 10007M\\)\nより\n\\(0 \\leq \\lfloor \\frac{r}{M} \\rfloor < 10007\\)\nであるため、\n\\(\\lfloor \\frac{N}{M} \\rfloor\\)\nを\n\\(10007\\)\nで割った余りは\n\\(\\lfloor \\frac{r}{M} \\rfloor\\)\nです。",
+      "codes": [],
+      "text_sha256": "ef4d3a04e1a1a6082688ecbf76fb5469acd28924f0d66685490c1fbcc72f18d3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc448/abc448_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc448/editorial/17000",
+      "text": "\\(N\\)\nを\n\\(M\\)\nで割った余りを\n\\(r\\)\nとすると、\n\\(\\lfloor \\frac{N}{M} \\rfloor= \\frac{N - r}{M}\\)\nです。\n\\(r\\)\nを公式解説と同じ方法で求めた後、\n\\(\\frac{N - r}{M} \\bmod 10007\\)\nを求めます。\n\\(M\\)\nの制約より、乗法逆元を用いて求められます。",
+      "codes": [],
+      "text_sha256": "4dfdf95cb719478e39aab11b2faa00d54e51c4e38872d9ef3acc45df3ab64dc3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc448/abc448_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc448/editorial/16996",
+      "text": "公式解説の内容を前提とします。目標は、\n\\(1\\)\nを\n\\(n\\)\n個並べたレピュニットを\n\\(R_n\\)\nとするとき、\n\\(R_n\\)\nを\n\\(10007 \\times M\\)\nで割った余りを高速に計算することです。\n以降、法を\n\\(10007 \\times M\\)\nとします。ここで、\n\\(R_{n+1} = 10 \\times R_n + 1\\)\nが成立します。\nよって、\n\\(\\begin{pmatrix}R_{n+1} \\\\ 1\\end{pmatrix} =\\begin{pmatrix}10 & 1 \\\\0 & 1\\end{pmatrix}\\begin{pmatrix}R_{n} \\\\ 1\\end{pmatrix} \\)\nが成立します。\n後は、\n\\(\\begin{pmatrix}10 & 1 \\\\0 & 1\\end{pmatrix}^X\\)\nを求めればよく、これは繰り返し二乗法の要領で\n\\(O(\\log X)\\)\nで求めることができます。よって、この問題を解くことができました。",
+      "codes": [],
+      "text_sha256": "bc5f04429e4d1c99dfb48c42b094a87c62db4a7e8b1a40cf6b4d71c65a3a5120",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc448/abc448_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc448/editorial/16775",
+      "text": "公式解説では\n\\(\\displaystyle R_k=\\sum_{i=0}^{k-1}10^k\\)\nを\n\\(M\\times 10007\\)\nで割ったあまりを前計算をして求めていますが、前計算をせずに簡単に計算する方法を紹介します。\n\\(\\displaystyle f(N,x)=\\sum_{i=0}^{N-1}x^i\\)\nとします。求めたい値は\n\\(f(k,10)\\)\nです。\nまず\n\\(N=0\\)\nの場合\n\\(f(0,x)=0\\)\nです。\nまた、\n\\(N\\)\nが奇数の場合は\n\\(i=0\\)\nのみ別で考えることで\n\\(f(N,x)=1+xf(N-1,x)\\)\nとなります。\nさらに、\n\\(N\\)\nが偶数の場合は\n\\(i\\)\nの偶奇を分けて考えることで\n\\[\n\\begin{aligned}\n&\\phantom{=} f(N,x)\\\\\n&=\\sum_{i=0}^{N-1}x^i\\\\\n&=\\sum_{i=0}^{N/2-1}x^{2i}+\\sum_{i=0}^{N/2-1}x^{2i+1}\\\\\n&=(1+x)\\sum_{i=0}^{N/2-1}x^{2i}\\\\\n&=(1+x)f\\left(N/2,x^2\\right)\n\\end{aligned}\n\\]\nが分かります。\n以上を適宜\n\\(\\text{mod}\\)\nを取りながら再帰的に計算することで\n\\(f(k,10)\\)\nの値を求めることができます。計算量はダブリングと同じく\n\\(O(\\log k)\\)\nです。\n実装例(Python3)",
+      "codes": [
+        "k, m = map(int, input().split())\nmod = 10007 * m\n\ndef f(n, x):\n    if n == 0:\n        return 0\n    if n % 2:\n        return (1 + x * f(n - 1, x)) % mod\n    return (1 + x) * f(n // 2, x * x % mod) % mod\n\nans = 0\nfor i in range(k):\n    c, l = map(int, input().split())\n    ans = (pow(10, l, mod) * ans + c * f(l, 10)) % mod\nprint(ans // m)"
+      ],
+      "text_sha256": "1951fbabf5176e001e0c1a2eb6d178c81137ff53e39ec71582027b10e385789c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc448/abc448_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc448/editorial/16983",
+      "text": "公式解説\nの前の方の内容をまとめると、求めたいものは\n\\(N = \\displaystyle \\sum_{i=1}^{K} c_i \\times \\frac{10^{l_i}-1}{9} \\times 10^{\\sum_{j=i+1}^{K} l_j}\\)\nを\n\\(10007M\\)\nで割った余り\n\\(r\\)\nであり、\n\\(\\lfloor r / M \\rfloor\\)\nが答えです。ここで、\n\\(r\\)\nは「\n\\(9N = \\displaystyle \\sum_{i=1}^{K} c_i \\times (10^{l_i}-1) \\times 10^{\\sum_{j=i+1}^{K} l_j}\\)\nを\n\\(9×10007M\\)\nで割った余り」を\n\\(9\\)\nで割った商に一致します。よって、\n\\(10\\)\nの累乗を\n\\(9×10007M\\)\nで割った余りが高速に求められればよく、これは言語によっては標準ライブラリの関数で行えます。（ただし、この場合もけっきょく標準ライブラリの中でダブリングなどの処理を行うことになります。）\n実装例（Python）",
+      "codes": [
+        "K, M = map(int, input().split())\nmod = 9 * 10007 * M\nc, l = [0] * K, [0] * K\nfor i in range(K):\n    c[i], l[i] = map(int, input().split())\nans, s = 0, 0\nfor i in range(K - 1, -1, -1):\n    ans += c[i] * (pow(10, l[i], mod) - 1) * pow(10, s, mod)\n    s += l[i]\nprint(ans % mod // 9 // M)"
+      ],
+      "text_sha256": "5924a68e8ebb74f1ce779950f9f015f2f8986be131ce7c13ecf0cf7576ae0aaf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc448/abc448_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

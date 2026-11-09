@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc158_d",
+  "editorials": [
+    {
+      "text": "D: String Formation\n問題文の通りに直接シミュレーションするだけでは反転クエリが高速に処理できず、O((N + Q)2)\nとなり遅いです。\nTi = 1 のとき実際に文字列を操作するのではなく、現在どちら側が先頭かという情報を持っておけ\nば、Ti = 2 のクエリでもその情報を考慮することで、位置関係を保ったままシミュレーションできま\nす。最後に全体を反転する必要がある場合に気をつけてください。\nここで、C + + などで普通の文字列型の先頭に追加する操作は計算量が悪いため、dequeue で文字\n列を管理するか、左右で分けて文字列を保持し最後に適切に連結するといった方法で対処できます。\n",
+      "text_sha256": "173d47d62bee0e46f6760608e117fdf7053d916bf0d829326a47a7069a32c81c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc158/abc158_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

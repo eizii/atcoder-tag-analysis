@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc375_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc375/editorial/11141",
+      "text": "すべての操作を愚直に行うと、置き換えの回数は合計で\n\\(\\Theta(N^3)\\)\n回となってしまいます。そこで、操作の性質に注目して置き換えを高速に行うことを考えましょう。\n\\(x, y\\)\nが\n\\(i\\)\n以上\n\\(N + 1 - i\\)\n以下であるとき、マス\n\\((y, N + 1 - x)\\)\nの色はマス\n\\((x, y)\\)\nの色で置き換えられますが、この置き換えは\n\\(i\\)\nに依存しないことに注目します。また、\n\\(x, y\\)\nが\n\\(i\\)\n以上\n\\(N + 1 - i\\)\n以下であることと\n\\(y, N + 1 - x\\)\nが\n\\(i\\)\n以上\n\\(N + 1 - i\\)\n以下であることは同値です。\n元のマス\n\\((x, y)\\)\nは操作後ではどのマスに対応しているか考えましょう（すべての操作は\n\\(\\lbrace 1,2,\\ldots, N \\rbrace^2\\)\n上の全単射と捉えることができ、これによる対応を考えています）。\n上の議論から、\n\\(x, y\\)\nが\n\\(i\\)\n以上\n\\(N + 1 - i\\)\n以下であるとき操作によって元のマス\n\\((x, y)\\)\nが対応するマスは\n\\((x, y) \\to (y, N + 1 - x) \\to (N + 1 - x, N + 1 - y) \\to (N + 1 - y, x) \\to (x, y) \\to \\cdots\\)\nと変化していきます。\nしたがって、\n\\(x, y\\)\nが\n\\(i\\)\n以上\n\\(N + 1 - i\\)\n以下であるような\n\\(i\\)\nの個数を\n\\(c\\)\nとおくと、\n\\((x, y) \\mapsto (y, N + 1 - x)\\)\nというような操作を\n\\(c\\)\n回行った後のマスが元のマス\n\\((x, y)\\)\nと対応するマスであり、この操作は\n\\(4\\)\n回行うことで元に戻るので\n\\(c\\)\nを\n\\(4\\)\nで割った余りを取り、高々\n\\(3\\)\n回の操作を行うことで操作前と操作後のマスの対応がわかります（操作はグリッドの中央を中心とした回転だと捉えられるので、このように考えると直感的な理解が簡単になるでしょう）。\n\\(c\\)\nの値は具体的に\n\\(\\min(x, N + 1 - x, y, N + 1 - y)\\)\nと書け、すべてのマスに対し定数回の計算を行うことで操作後のマスとの対応が得られたので、全体として\n\\(O(N^2)\\)\n時間で計算できます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define rep(i, n) for (int i = 0; i < (n); i++)\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<vector<char>> a(n, vector<char>(n));\n\trep(i, n) rep(j, n) cin >> a[i][j];\n\tvector<vector<char>> ans(n, vector<char>(n));\n\trep(i, n) rep(j, n) {\n\t\tint d = min({ i + 1, j + 1, n - i, n - j });\n\t\tint ni = i, nj = j;\n\t\trep(_, d % 4) {\n\t\t\tint ti = nj, tj = n - 1 - ni;\n\t\t\tni = ti, nj = tj;\n\t\t}\n\t\tans[ni][nj] = a[i][j];\n\t}\n\trep(i, n) {\n\t\trep(j, n) {\n\t\t\tcout << ans[i][j];\n\t\t}\n\t\tcout << '\\n';\n\t}\n}"
+      ],
+      "text_sha256": "0fad82e8d7be819b9d437a475d352a6a46ed0e8cffa7dbdac68584efaf92b122",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc375/abc375_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

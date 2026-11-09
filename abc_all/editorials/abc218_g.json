@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc218_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc218/editorial/2607",
+      "text": "頂点 \\(1\\) を根とすると、駒は葉に向かって移動するだけなので、ゲーム終了時点での駒の位置によってそれまでに通った頂点とその中央値が一意に定まります。 全ての葉に対して、その頂点でゲームが終了したときの中央値を求めることさえできれば、木DPでこの問題が解けます。 よって DFS をしながら以下の処理が高速にできれば良いです。 数の（多重）集合 \\(S\\) に \\(X\\) を追加する。 \\(S\\) から \\(X\\) を削除する。 \\(S\\) の中央値を求める。 以下の2つの手法が考えられます。 1. BIT上の二分探索解 あらかじめ座標圧縮しておくことで、追加クエリと削除クエリは一点加算、中央値を求めるクエリは BIT 上の二分探索に置き換えられます。\n計算量は \\(O(NlogN)\\) または \\(O(Nlog^2N)\\) です。 2. std::multiset解 小さい方半分と大きい方半分を管理する \\(2\\) つの multiset を用意します。常に要素数が半分ずつとなるようにすることで、クエリあたり \\(O(logN)\\) で処理できます。\n以下の実装例はこちらの方針です。\n計算量は \\(O(NlogN)\\) です。 実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nmultiset<int> S,T; // 常に S.size()==T.size() or S.size()==T.size()+1\nvoid eval(){\n    if(S.size()){\n        auto itr = S.end(); itr--;\n        T.insert(*itr); S.erase(itr);\n    }\n    while(S.size() < T.size()){\n        S.insert(*T.begin()); T.erase(T.begin());\n    }\n}\nint val(){\n    auto itr = S.end(); itr--;\n    if(S.size()==T.size()+1)return *itr;\n    return (*itr+*T.begin())/2;\n}\nvoid erase(int x){\n    auto itr = S.end(); itr--;\n    if(*itr < x) T.erase(T.lower_bound(x));\n    else S.erase(S.lower_bound(x));\n}\n\nint main(){\n    int n; cin >> n;\n    vector<int> A(n); for(int i = 0; i < n; i++) cin >> A[i];\n    vector<int> dp(n);\n    vector<vector<int>> g(n);\n    for(int i = 0; i < n-1; i++){\n        int a, b; cin >> a >> b; a--; b--;\n        g[a].push_back(b); g[b].push_back(a);\n    }\n    function<void(int,int,int)> dfs=[&](int i,int p,int d){\n        S.insert(A[i]); eval();\n        int mi = 1000000005, ma = 0;\n        for(int x : g[i]) if(x != p) {\n            dfs(x, i, d+1);\n            mi = min(mi,dp[x]); ma = max(ma,dp[x]);\n        }\n        if(ma == 0) dp[i] = val();\n        else if(d&1) dp[i] = mi;\n        else dp[i] = ma;\n        erase(A[i]); eval();\n    }; dfs(0,-1,0);\n    cout << dp[0] << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "2d221ff3c81b51c28d2a4452441a352812b378a1ef221c6a3d0600af03fb26c6"
+    }
+  ],
+  "status": "available"
+}

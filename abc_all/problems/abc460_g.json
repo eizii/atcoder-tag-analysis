@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc460_g",
+  "title": "Vertex Flip Query",
+  "contests": [
+    {
+      "contest_id": "abc460",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2838,
+  "raw_difficulty": 2838,
+  "contest_id": "abc460",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc460/tasks/abc460_g",
+  "statement": "配点 : 650 点 問題文 頂点に 1 から N の番号がついた N 頂点の木があります。 i 本目の辺は頂点 a_i と頂点 b_i を結ぶ辺です。頂点 i には重み W_i と色 C_i \\in \\lbrace 0,1 \\rbrace が設定されています。 クエリを Q 個処理してください。クエリは以下の 3 種類のいずれかです。 1 v ：頂点 v について C_v を 1-C_v に変更する。 2 v x ：頂点 v について W_v を W_v + x に変更する。 3 v ：頂点 v の色を c とする。頂点 v から色が c である頂点のみを通って到達可能な頂点（頂点 v 自身も含む）全てについての重みの総和を出力する。 制約 1 \\leq N \\leq 3 \\times 10^5 1 \\leq Q \\leq 2 \\times 10^5 1 \\leq W_i \\leq 10^9 C_i \\in \\lbrace 0,1 \\rbrace 1 \\leq a_i \\lt b_i \\leq N 入力されるグラフは木 1 \\leq v \\leq N 1 \\leq x \\leq 10^9 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。ここで \\mathrm{query}_i は i 番目のクエリを意味する。 N Q W_1 W_2 \\dots W_N C_1 C_2 \\dots C_N a_1 b_1 a_2 b_2 \\vdots a_{N-1} b_{N-1} \\mathrm{query}_1 \\mathrm{query}_2 \\vdots \\mathrm{query}_Q 各クエリは以下の形式のいずれかで与えられる。 1 v 2 v x 3 v 出力 与えられた 3 種類目のクエリの個数を m として、 m 行出力せよ。 i 行目には i 番目に与えられた 3 種類目のクエリの答えを 1 行で出力せよ。 入力例 1 5 9\n1 10 100 1000 10000\n0 0 0 0 0\n1 2\n2 3\n3 4\n2 5\n3 1\n1 2\n3 1\n3 2\n3 3\n1 3\n1 2\n2 1 1\n3 5 出力例 1 11111\n1\n10\n1100\n10012 例えば 1 番目のクエリでは、頂点 1 から色が 0 である頂点のみを通って到達可能な頂点の集合は \\lbrace 1,2,3,4,5 \\rbrace です。 入力例 2 10 25\n1 10 100 1000 10000 100000 1000000 10000000 100000000 1000000000\n0 1 0 0 0 1 0 0 0 0\n1 2\n1 3\n2 4\n4 5\n4 6\n2 7\n5 8\n8 9\n6 10\n3 4\n1 8\n2 6 100000\n3 3\n1 3\n1 7\n1 7\n1 7\n3 8\n2 1 1\n2 6 100000\n2 8 10000000\n1 5\n2 5 10000\n1 9\n2 7 1000000\n1 7\n2 10 1000000000\n1 9\n1 6\n1 9\n1 1\n3 7\n2 5 10000\n3 6 出力例 2 110011000\n101\n10000000\n2000000\n2000301000",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 頂点に 1 から N の番号がついた N 頂点の木があります。 i 本目の辺は頂点 a_i と頂点 b_i を結ぶ辺です。頂点 i には重み W_i と色 C_i \\in \\lbrace 0,1 \\rbrace が設定されています。 クエリを Q 個処理してください。クエリは以下の 3 種類のいずれかです。 1 v ：頂点 v について C_v を 1-C_v に変更する。 2 v x ：頂点 v について W_v を W_v + x に変更する。 3 v ：頂点 v の色を c とする。頂点 v から色が c である頂点のみを通って到達可能な頂点（頂点 v 自身も含む）全てについての重みの総和を出力する。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 3 \\times 10^5 1 \\leq Q \\leq 2 \\times 10^5 1 \\leq W_i \\leq 10^9 C_i \\in \\lbrace 0,1 \\rbrace 1 \\leq a_i \\lt b_i \\leq N 入力されるグラフは木 1 \\leq v \\leq N 1 \\leq x \\leq 10^9 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。ここで \\mathrm{query}_i は i 番目のクエリを意味する。 N Q W_1 W_2 \\dots W_N C_1 C_2 \\dots C_N a_1 b_1 a_2 b_2 \\vdots a_{N-1} b_{N-1} \\mathrm{query}_1 \\mathrm{query}_2 \\vdots \\mathrm{query}_Q 各クエリは以下の形式のいずれかで与えられる。 1 v 2 v x 3 v"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 与えられた 3 種類目のクエリの個数を m として、 m 行出力せよ。 i 行目には i 番目に与えられた 3 種類目のクエリの答えを 1 行で出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5 9\n1 10 100 1000 10000\n0 0 0 0 0\n1 2\n2 3\n3 4\n2 5\n3 1\n1 2\n3 1\n3 2\n3 3\n1 3\n1 2\n2 1 1\n3 5"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 11111\n1\n10\n1100\n10012 例えば 1 番目のクエリでは、頂点 1 から色が 0 である頂点のみを通って到達可能な頂点の集合は \\lbrace 1,2,3,4,5 \\rbrace です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 25\n1 10 100 1000 10000 100000 1000000 10000000 100000000 1000000000\n0 1 0 0 0 1 0 0 0 0\n1 2\n1 3\n2 4\n4 5\n4 6\n2 7\n5 8\n8 9\n6 10\n3 4\n1 8\n2 6 100000\n3 3\n1 3\n1 7\n1 7\n1 7\n3 8\n2 1 1\n2 6 100000\n2 8 10000000\n1 5\n2 5 10000\n1 9\n2 7 1000000\n1 7\n2 10 1000000000\n1 9\n1 6\n1 9\n1 1\n3 7\n2 5 10000\n3 6"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 110011000\n101\n10000000\n2000000\n2000301000"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc460/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:45.328177+00:00",
+  "statement_sha256": "92020954219c354c46a980e81be7a36d17bfaeb0bfc9c2cc8c7eef6a82de56e9",
+  "editorials": []
+}

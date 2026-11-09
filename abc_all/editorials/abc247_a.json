@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc247_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc247/editorial/3709",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\n文字列\n\\(S\\)\nの\n\\(i\\)\n文字目を\n\\(S_i\\)\nと表すことにします。\nこの問題で出力するべき文字列を\n\\(T\\)\nとすると、\n\\(T\\)\nは次のようになります。\n\\(T_1=\\)\n0\n\\(T_2=S_1\\)\n\\(T_3=S_2\\)\n\\(T_4=S_3\\)\n実際にこのような文字列\n\\(T\\)\nを作り出力すればよいです。多くの言語では文字列\n\\(S\\)\nの\n\\(i\\)\n番目の文字は\nS[i]\nと書くことで得ることができます。ただし、添字(\ns[i]\nの\ni\nのこと)は\n\\(0\\)\nから始まる言語が多いことに注意してください。\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  string S;\n  cin >> S;\n  string T(4,0);\n  T[0]='0';\n  T[1]=S[0];\n  T[2]=S[1];\n  T[3]=S[2];\n  cout << T;\n}"
+      ],
+      "text_sha256": "69c6406f5f081ab3d387b040fffb758e0941933af2a7556901aef21010f4f446",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc247/abc247_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

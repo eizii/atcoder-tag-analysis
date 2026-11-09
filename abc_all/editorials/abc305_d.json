@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc305_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc305/editorial/6541",
+      "text": "\\(f(x)\\coloneqq\\) 睡眠記録を取り始めてから \\(x\\) 分後までに何分寝たか \\(\\ (0\\leq x\\leq A _ N)\\)\nを求めることができたら、クエリの答えは \\(f(r _ i)-f(l _ i)\\) として計算できます。\n\\(f(x)\\) は \\(A _ i\\leq x\\leq A _ {i+1}\\) の範囲では一次関数になっていることに注意すると、次のような方針で \\(f(x)\\) の値が高速に求められます。\n事前に \\(f(A _ i)\\ (1\\leq i\\leq N)\\) の値をすべて求めておく。\n\\(A _ j\\leq x\\leq A _ {j+1}\\) となるような \\(j\\) を求める。\n\\(f(A _ j),f(A _ {j+1})\\) の値から \\(f(x)\\) の値を求める。\n\\(f(A _ i)\\ (1\\leq i\\leq N)\\) の値は、\\(i\\) の昇順に計算することで全体で \\(O(N)\\) 時間で求められます。\n\\(A _ j\\leq x\\leq A _ {j+1}\\) であるような \\(j\\) は二分探索を使って \\(O(\\log N)\\) 時間で求められます。\n\\(f(x)=f(A _ j)+(x-A _ j)\\dfrac{f(A _ {j+1})-f(A _ j)}{A _ {j+1}-A _ j}\\) の計算は定数時間で可能です。\nよって、この問題を \\(O(N+Q\\log N)\\) 時間で解くことができました。\nクエリを先読みしてソートすることで \\(O(N+Q\\log Q)\\) 時間で解くこともできます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n\n    unsigned N;\n    cin >> N;\n    vector<unsigned> A(N), fA(N);\n    for (auto &&a : A)\n        cin >> a;\n\n    // fA[i] := A[i] 分までに何分寝たか\n    for (unsigned i = 1; i < N; ++i)\n        if (i % 2 == 0)\n            fA[i] = fA[i - 1] + A[i] - A[i - 1];\n        else\n            fA[i] = fA[i - 1];\n\n    unsigned Q;\n    cin >> Q;\n\n    // f(x) := x 分までに何分寝たか\n    auto f{[&A, &fA](auto x) -> unsigned {\n        const auto j = upper_bound(begin(A) + 1, end(A), x) - begin(A) - 1;\n        return fA[j] + (fA[j + 1] - fA[j]) / (A[j + 1] - A[j]) * (x - A[j]);\n    }};\n    for (unsigned i = 0; i < Q; ++i) {\n        unsigned l, r;\n        cin >> l >> r;\n        cout << f(r) - f(l) << endl;\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "0cebd24d2be72fe5c35c08a0f29cacbdab3f7fb543a882648611aa198bed9938",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc305/abc305_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

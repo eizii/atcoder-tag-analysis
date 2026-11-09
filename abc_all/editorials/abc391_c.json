@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc391_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc391/editorial/12084",
+      "text": "この問題は\nそれぞれの鳩がどの巣にいるか\nそれぞれの巣に鳩が何匹いるか\n鳩が複数いる巣が何個あるか\nを管理することで解くことができます．鳩\n\\(i\\)\nがいる巣を\n\\(\\mathrm{pos}[i]\\)\n，巣\n\\(i\\)\nにいる鳩の数を\n\\(\\mathrm{cnt}[i]\\)\n，鳩が複数いる巣の数を\n\\(\\mathrm{ans}\\)\nとします．クエリ\n\\(2\\)\nでは\n\\(\\mathrm{ans}\\)\nを出力すればよいです．\nクエリ\n\\(1\\)\nについて考えます．鳩\n\\(P\\)\nの移動によって\n\\(\\mathrm{ans}\\)\nが変わるのは以下の\n\\(2\\)\nつが考えられます．\nもともと鳩\n\\(P\\)\nがいた巣にいる鳩の数が\n\\(2\\)\nから\n\\(1\\)\nに減ったとき\n鳩\n\\(P\\)\nが巣\n\\(H\\)\nに移動したあとに，巣\n\\(H\\)\nにいる鳩の数が\n\\(1\\)\nから\n\\(2\\)\nに増えたとき\nこれを踏まえたうえで，鳩\n\\(P\\)\nの移動に応じて\n\\(\\mathrm{pos}, \\mathrm{cnt}, \\mathrm{ans}\\)\nを変更すればよいです．詳しくは実装例をご覧ください．",
+      "codes": [
+        "N, Q = map(int, input().split())\nans = 0\ncnt = [0] + [1] * N\npos = list(range(N + 1))\nfor i in range(Q):\n    query = list(map(int, input().split()))\n    if query[0] == 1:\n        P, H = query[1:]\n        # 鳩 P は移動する前は巣 pos[P] にいる\n        # 鳩 P が移動することで 巣 pos[P] にいる鳩の数が 2 から 1 に減る場合, ans を 1 減らす\n        if cnt[pos[P]] == 2:\n            ans -= 1\n        # 巣 pos[P] の鳩の数を 1 減らす\n        cnt[pos[P]] -= 1\n\n        # 鳩 P がいる巣を H に変更する\n        pos[P] = H\n        # 巣 H の鳩の数を 1 増やす\n        cnt[pos[P]] += 1\n        # 鳩 P が移動することで 巣 H にいる鳩の数が 1 から 2 に増える場合，ans を 1 増やす\n        if cnt[pos[P]] == 2:\n            ans += 1\n    else:\n        print(ans)"
+      ],
+      "text_sha256": "888351eb837fd5d1ba3814c603bd881265e7ccbd65b3242b5f582dd54f4cba3d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc391/abc391_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

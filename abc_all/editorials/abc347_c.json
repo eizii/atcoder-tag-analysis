@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc347_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc347/editorial/9694",
+      "text": "はじめに、一週間の何日目かが重要なので、\n\\(D_i\\)\nは\n\\(A+B\\)\nで割ったあまりで置き換えておきます。\nこの操作によって得られた\n\\(D\\)\nを、重複を除いて昇順にソートします。このようにして得られた列を\n\\(E=(E_1,E_2,\\ldots,E_k)\\)\nとします。\nこのとき、本問題の答えが\nYes\nとなることは、以下の条件と同値です。\nある\n\\(i\\ (1\\leq i \\leq k)\\)\nが存在して、\n\\((E_{i+1}-E_i) \\bmod (A+B) > B\\)\nを満たす。ただし\n\\(E_{k+1}\\)\nは\n\\(E_1\\)\nを意味する。\n証明は、ある\n\\(i\\)\nについて\n\\(E_i\\)\nが\n\\(1\\)\n週間の\n\\(A\\)\n日目（休日の最終日）であると仮定しても問題ないことから従います。（そうでない場合で条件を満たす場合、\n\\(E_i\\)\nを休日の最終日としても条件を満たすため）\n以上の処理は\n\\(\\mathrm{O}(N\\log N)\\)\nで行えます。",
+      "codes": [],
+      "text_sha256": "0075872da13d01e930a6d666d9bb7e7393e2c03d915dd1cfd94536a897415e29",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc347/abc347_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

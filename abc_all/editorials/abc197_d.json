@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc197_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc197/editorial/996",
+      "text": "\\(p_0\\)\nと\n\\(p_{\\frac{N}{2}}\\)\nの中点を\n\\(q\\)\nとすると、\n\\(p_0, p_1, p_2, \\dots, p_{N - 1}\\)\nは全て\n\\(q\\)\nを中心とする\n\\(1\\)\nつの円上に乗っているという性質があります。\nまた、角\n\\(p_0qp_1 = \\frac{360^\\circ}{N} = \\frac{2 \\pi}{N}\\)\nです。(\n\\(p_0, p_1, p_2, \\dots, p_{N - 1}\\)\nが円上に均等に乗っていることを考えるとよいです)\nよって、\n\\(p_1\\)\nの座標は以下のように求められます。\n\\(q\\)\nの座標を求める\n\\(q\\)\nから見た\n\\(p_0\\)\nの”方位”を求める(C++ における\natan2\n関数や Python における\nmath.atan2\n関数を使うと実現できる)\n求めた方位を\n\\( \\frac{2 \\pi}{N}\\)\nだけ反時計回りにずらし、\n\\(q\\)\nから見た\n\\(p_1\\)\nの”方位”を求める\n\\(p_1\\)\nの\n\\(\\mathrm{x}, \\mathrm{y}\\)\n座標を求める (\n\\(\\sin, \\cos\\)\n関数を使うと”方位”から\n\\(x, y\\)\nが求まります)\natan2\n関数とは\nC++ の\natan2\n関数もPython の\nmath.atan2\n関数も基本的に同じものです\n\\(x, y\\)\nを引数にとり (\nただし\n\\(y, x\\)\nの順にとるので注意\n)、ベクトル\n\\((x, y)\\)\nの指す”向き”を返します\n向きは右向き\n\\((\\mathrm{x}\\)\n軸の正の向き\n\\()\\)\nを\n\\(0\\)\nとし、反時計回りを正とするラジアンで返されます\n例えば\n\\(\\mathrm{atan2}(0, 3) = 0\\)\nです。\n\\((x = 3, y = 0\\)\nなので右向きだから\n\\()\\)\nまた、\n\\(\\mathrm{atan2}(2, 0) = \\frac{\\pi}{2}\\)\nです。\n\\((x = 0, y = 2\\)\nは上方向、つまり右方向から\n\\(\\frac{\\pi}{2}\\)\nだけ反時計回りに回した方向だから\n\\()\\)\nただし、\n\\(2\\pi\\)\nで\n\\(1\\)\n周するので返される値は\n\\((-\\pi, \\pi]\\)\nの範囲と決まっています。この問題ではこれはあまり考えなくてもよいです\n\\((\\mathrm{x}, \\mathrm{y}\\)\n座標を復元する際の\n\\(\\sin, \\cos\\)\n関数も\n\\(2\\pi\\)\nの周期を持ち、引数の範囲に制限はないので\n\\()\\)",
+      "codes": [],
+      "text_sha256": "cdbcd355c9ed792da52c87f4371b6b6c705202e20fca7d893ceea0539b9c10af",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc197/abc197_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc197/editorial/1025",
+      "text": "言語によっては複素数が扱えるので、複素平面で考えると楽に解けます。\n\\(p_0 = x_0+y_0i\\)\n、\n\\(p_{\\frac{N}{2}} = x_{\\frac{N}{2}}+y_{\\frac{N}{2}}i\\)\n、\n\\(o=\\frac{1}{2}\\left(p_0+p_{\\frac{N}{2}}\\right)\\)\n、長さが\n\\(1\\)\nで偏角が\n\\(\\frac{2\\pi}{N}\\)\nの複素数を\n\\(r\\)\nとすると、答えは\n\\(p=(p_0-o)r+o\\)\nです。\nPythonでの例。",
+      "codes": [
+        "import math, cmath\n\nN = int(input())\nx0, y0 = map(float, input().split())\nxN2, yN2 = map(float, input().split())\n\np0 = complex(x0, y0)\npN2 = complex(xN2, yN2)\no = (p0+pN2)/2\nr = cmath.rect(1, 2*math.pi/N)\na = (p0-o)*r+o\n\nprint(\"%.10f %.10f\"%(a.real, a.imag))"
+      ],
+      "text_sha256": "caee38f25aea7c478d7ab1f4de0e64e837d49d7f58ec1b60a5d1b47803d73a32",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc197/abc197_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc197/editorial/1030",
+      "text": "C++ で複素数クラス(complex) を用いた回答例です。\n入力の2つの点を a, b として、その中点を m とします。\na - m で m から a へ伸びるベクトルが得られ、それを\n\\(2\\pi/n\\)\nだけ回転したベクトルを m に足すと、目的の解が得られます。\n長さ r, 角度 t の複素数は\npolar(r, t)\nを用いて得ることができます。",
+      "codes": [
+        "int main() {\n    int n;\n    double x, y;\n    complex<double> a, b;\n    \n    cin >> n;\n    cin >> x >> y; a = { x, y };\n    cin >> x >> y; b = { x, y };\n\n    auto m = (a + b) / 2.0;\n\n    auto res = m + (a - m) * polar(1.0, M_PI*2.0/n);\n\n    cout << setprecision(9) << res.real() << \" \" << res.imag() << endl;\n}"
+      ],
+      "text_sha256": "cdf8778d7198c9c50b5b72987c5cae1e9a4c89776924137789b54146e321aca7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc197/abc197_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

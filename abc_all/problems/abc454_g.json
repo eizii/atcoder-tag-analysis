@@ -1,0 +1,68 @@
+{
+  "problem_id": "abc454_g",
+  "title": "Mode in the Subtree",
+  "contests": [
+    {
+      "contest_id": "abc454",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2253,
+  "raw_difficulty": 2253,
+  "contest_id": "abc454",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc454/tasks/abc454_g",
+  "statement": "配点 : 625 点 問題文 頂点に 1 から N の番号がついた N 頂点の根付き木が与えられます。頂点 1 が根で、頂点 i の親は頂点 p_i です( p_i \\lt i )。 各頂点には色が塗られていて、頂点 i は色 c_i で塗られています( 1 \\leq c_i \\leq N )。 v = 1, 2, \\dots, N について次の問題を解いてください。 f_i を「頂点 v の部分木に含まれる頂点のうち色 i で塗られた頂点の個数」とします。 数列 (f_1, f_2, \\dots, f_N) に含まれる値の最大値 m 、および f_i = m であるような N 以下の正整数 i の個数 k を求めてください。 入出力の形式 今回の問題の入出力は特殊な形式で行われます。 入力の形式 標準入力からは整数 N に加えて整数 \\mathrm{seed}, M, F および q_2, q_3, \\dots, q_M , d_1, d_2, \\dots, d_M が与えられます。この時、以下の擬似コードで表される計算によって p_2, p_3, \\dots, p_N および c_1, c_2, \\dots, c_N を復元してください。(ここで 2^31 は 2^{31}=2147483648 を意味します。また、 \\mathrm{state} は変数である点、および \\mathrm{state} の計算に 64 bit 整数型が必要である点に注意してください。) state = seed\r\n\r\nfor i=2 to N:\r\n  if i <= M:\r\n    p[i] = q[i]\r\n  else:\r\n    p[i] = (state mod (i-1)) + 1\r\n    state = (state * 1103515245 + 12345) mod 2^31\r\n\r\nfor i=1 to N:\r\n  if i <= M:\r\n    c[i] = d[i]\r\n  else:\r\n    c[i] = (state mod F) + 1\r\n    state = (state * 1103515245 + 12345) mod 2^31 出力の形式 v=i の時の m,k をそれぞれ m_i, k_i とおきます。 \\left(\\displaystyle \\sum_{i=1}^N (m_i \\oplus i)\\times (k_i \\oplus i)\\right) \\bmod 998244353 を出力してください。ここで \\oplus はビットごとの排他的論理和を意味します。計算過程でのオーバーフローに注意してください。 制約 2 \\leq N \\leq 2.5 \\times 10^6 1 \\leq p_i \\lt i 1 \\leq c_i \\leq N 1 \\leq \\mathrm{seed} \\lt 2^{31} 2 \\leq M \\leq \\min(N, 10^5) 1 \\leq F \\leq N 1 \\leq q_i \\lt i 1 \\leq d_i \\leq N 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N \\mathrm{seed} M F q_2 q_3 \\dots q_M d_1 d_2 \\dots d_M 出力 \\left(\\displaystyle \\sum_{i=1}^N (m_i \\oplus i)\\times (k_i \\oplus i)\\right) \\bmod 998244353 を出力せよ。 入力例 1 4 454 4 2\r\n1 2 2\r\n1 2 2 3 出力例 1 29 i=1 : m_1=2,k_1=1, (m_1 \\oplus 1) \\times (k_1 \\oplus 1) = 0 i=2 : m_2=2,k_2=1, (m_2 \\oplus 2) \\times (k_2 \\oplus 2) = 0 i=3 : m_3=1,k_3=1, (m_3 \\oplus 3) \\times (k_3 \\oplus 3) = 4 i=4 : m_4=1,k_4=1, (m_4 \\oplus 4) \\times (k_4 \\oplus 4) = 25 です。よって 0+0+4+25=29 を出力します。 入力例 2 6 123 2 2\r\n1\r\n1 2 出力例 2 101 このテストケースにおける p_i, c_i の値は次の通りです。 p = (1, 2, 1, 2, 3) c = (1, 2, 2, 1, 2, 1) 入力例 3 15 1 4 5\r\n1 2 3\r\n5 3 1 3 出力例 3 1199 このテストケースにおける p_i, c_i の値は次の通りです。 p = (1, 2, 3, 2, 1, 4, 7, 6, 5, 10, 1, 10, 2, 8) c = (5, 3, 1, 3, 4, 2, 2, 2, 4, 2, 2, 5, 3, 5, 3)",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 頂点に 1 から N の番号がついた N 頂点の根付き木が与えられます。頂点 1 が根で、頂点 i の親は頂点 p_i です( p_i \\lt i )。 各頂点には色が塗られていて、頂点 i は色 c_i で塗られています( 1 \\leq c_i \\leq N )。 v = 1, 2, \\dots, N について次の問題を解いてください。 f_i を「頂点 v の部分木に含まれる頂点のうち色 i で塗られた頂点の個数」とします。 数列 (f_1, f_2, \\dots, f_N) に含まれる値の最大値 m 、および f_i = m であるような N 以下の正整数 i の個数 k を求めてください。"
+    },
+    {
+      "heading": "入出力の形式",
+      "text": "入出力の形式 今回の問題の入出力は特殊な形式で行われます。 入力の形式 標準入力からは整数 N に加えて整数 \\mathrm{seed}, M, F および q_2, q_3, \\dots, q_M , d_1, d_2, \\dots, d_M が与えられます。この時、以下の擬似コードで表される計算によって p_2, p_3, \\dots, p_N および c_1, c_2, \\dots, c_N を復元してください。(ここで 2^31 は 2^{31}=2147483648 を意味します。また、 \\mathrm{state} は変数である点、および \\mathrm{state} の計算に 64 bit 整数型が必要である点に注意してください。) state = seed\r\n\r\nfor i=2 to N:\r\n  if i <= M:\r\n    p[i] = q[i]\r\n  else:\r\n    p[i] = (state mod (i-1)) + 1\r\n    state = (state * 1103515245 + 12345) mod 2^31\r\n\r\nfor i=1 to N:\r\n  if i <= M:\r\n    c[i] = d[i]\r\n  else:\r\n    c[i] = (state mod F) + 1\r\n    state = (state * 1103515245 + 12345) mod 2^31 出力の形式 v=i の時の m,k をそれぞれ m_i, k_i とおきます。 \\left(\\displaystyle \\sum_{i=1}^N (m_i \\oplus i)\\times (k_i \\oplus i)\\right) \\bmod 998244353 を出力してください。ここで \\oplus はビットごとの排他的論理和を意味します。計算過程でのオーバーフローに注意してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 2.5 \\times 10^6 1 \\leq p_i \\lt i 1 \\leq c_i \\leq N 1 \\leq \\mathrm{seed} \\lt 2^{31} 2 \\leq M \\leq \\min(N, 10^5) 1 \\leq F \\leq N 1 \\leq q_i \\lt i 1 \\leq d_i \\leq N 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N \\mathrm{seed} M F q_2 q_3 \\dots q_M d_1 d_2 \\dots d_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 \\left(\\displaystyle \\sum_{i=1}^N (m_i \\oplus i)\\times (k_i \\oplus i)\\right) \\bmod 998244353 を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 454 4 2\r\n1 2 2\r\n1 2 2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 29 i=1 : m_1=2,k_1=1, (m_1 \\oplus 1) \\times (k_1 \\oplus 1) = 0 i=2 : m_2=2,k_2=1, (m_2 \\oplus 2) \\times (k_2 \\oplus 2) = 0 i=3 : m_3=1,k_3=1, (m_3 \\oplus 3) \\times (k_3 \\oplus 3) = 4 i=4 : m_4=1,k_4=1, (m_4 \\oplus 4) \\times (k_4 \\oplus 4) = 25 です。よって 0+0+4+25=29 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 6 123 2 2\r\n1\r\n1 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 101 このテストケースにおける p_i, c_i の値は次の通りです。 p = (1, 2, 1, 2, 3) c = (1, 2, 2, 1, 2, 1)"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 15 1 4 5\r\n1 2 3\r\n5 3 1 3"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 1199 このテストケースにおける p_i, c_i の値は次の通りです。 p = (1, 2, 3, 2, 1, 4, 7, 6, 5, 10, 1, 10, 2, 8) c = (5, 3, 1, 3, 4, 2, 2, 2, 4, 2, 2, 5, 3, 5, 3)"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc454/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:37.766089+00:00",
+  "statement_sha256": "beabe0bd9b30f9387b7cc6f643c7155e49acb36f3fece0855f2c219b7912e7ad",
+  "editorials": []
+}

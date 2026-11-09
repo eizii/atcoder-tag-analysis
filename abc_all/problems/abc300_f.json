@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc300_f",
+  "title": "More Holidays",
+  "contests": [
+    {
+      "contest_id": "abc300",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1846,
+  "raw_difficulty": 1846,
+  "contest_id": "abc300",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc300/tasks/abc300_f",
+  "statement": "配点 : 500 点 問題文 o と x からなる長さ N の文字列 S と、整数 M,K が与えられます。 S には少なくとも 1 つの x が含まれることが保証されます。 S を M 個連結して得られる長さ NM の文字列を T とします。 T に含まれる x のうち丁度 K 個を選んで o に変えることを考えます。 あなたの目標は、変更後の T に o のみからなるできるだけ長い連続部分文字列が含まれるようにすることです。 o のみからなる連続部分文字列の長さとして達成可能な最大値を求めてください。 制約 N,M,K は整数 1 \\le N \\le 3 \\times 10^5 1 \\le M \\le 10^9 x を文字列 T に含まれる x の総数としたとき、 1 \\le K \\le x S は o と x からなる長さ N の文字列 S には少なくとも 1 つの x が含まれる 入力 入力は以下の形式で標準入力から与えられる。 N M K S 出力 答えを整数として出力せよ。 入力例 1 10 1 2\nooxxooooox 出力例 1 9 S= ooxxooooox 、 T= ooxxooooox です。 3 文字目と 4 文字目の x を o に変更することにより、変更後の T= ooooooooox となります。 このとき o のみからなる長さ 9 の連続部分文字列が得られ、これが達成可能な最大値です。 入力例 2 5 3 4\noxxox 出力例 2 8 S= oxxox 、 T= oxxoxoxxoxoxxox です。 5,7,8,10 文字目の x を o に変更することにより、変更後の T= oxxooooooooxxox となります。 このとき o のみからなる長さ 8 の連続部分文字列が得られ、これが達成可能な最大値です。 入力例 3 30 1000000000 9982443530\noxoxooxoxoxooxoxooxxxoxxxooxox 出力例 3 19964887064",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 o と x からなる長さ N の文字列 S と、整数 M,K が与えられます。 S には少なくとも 1 つの x が含まれることが保証されます。 S を M 個連結して得られる長さ NM の文字列を T とします。 T に含まれる x のうち丁度 K 個を選んで o に変えることを考えます。 あなたの目標は、変更後の T に o のみからなるできるだけ長い連続部分文字列が含まれるようにすることです。 o のみからなる連続部分文字列の長さとして達成可能な最大値を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 N,M,K は整数 1 \\le N \\le 3 \\times 10^5 1 \\le M \\le 10^9 x を文字列 T に含まれる x の総数としたとき、 1 \\le K \\le x S は o と x からなる長さ N の文字列 S には少なくとも 1 つの x が含まれる"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M K S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを整数として出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 10 1 2\nooxxooooox"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 9 S= ooxxooooox 、 T= ooxxooooox です。 3 文字目と 4 文字目の x を o に変更することにより、変更後の T= ooooooooox となります。 このとき o のみからなる長さ 9 の連続部分文字列が得られ、これが達成可能な最大値です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5 3 4\noxxox"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 8 S= oxxox 、 T= oxxoxoxxoxoxxox です。 5,7,8,10 文字目の x を o に変更することにより、変更後の T= oxxooooooooxxox となります。 このとき o のみからなる長さ 8 の連続部分文字列が得られ、これが達成可能な最大値です。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 30 1000000000 9982443530\noxoxooxoxoxooxoxooxxxoxxxooxox"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 19964887064"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc300/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:25.742424+00:00",
+  "statement_sha256": "b7f36c233ce9d3491b2222c511799cd714df722fb964f87be121bf8fe2112d53",
+  "editorials": []
+}

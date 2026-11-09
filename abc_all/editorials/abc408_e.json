@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc408_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc408/editorial/13159",
+      "text": "辺のラベル\n\\(w\\)\nが\n\\( w\\ \\mathrm{OR}\\ x=x\\)\nを満たす辺のみを通って頂点\n\\(1\\)\nから頂点\n\\(N\\)\nまで到達できるか？という判定問題を考えます。この判定問題が Yes になる\n\\(x\\)\nの集合を\n\\(X\\)\nとすると、\n\\(\\min X\\)\nが問題の答えとなります。\nここで、\n\\(x\\in X\\)\nなら\n\\(x\\ \\mathrm{OR}\\ 2^k \\in X\\)\nが成立することを考えると、以下のような貪欲法が正当であることが分かります。\n\\(x=2^{30}-1\\)\nとする。この\n\\(x\\)\nは\n\\(x\\in X\\)\nを満たす。\n\\(k=29,28,\\ldots,0\\)\nの順に以下の操作を行う。\n\\(x\\)\nの\n\\(k\\)\nビット目を\n\\(0\\)\nにできるか調べる。つまり、\n\\(x'=x-2^k\\)\nが\n\\(X\\)\nに含まれるか判定し、含まれるなら\n\\(x\\)\nを\n\\(x'\\)\nに置き換える。含まれないなら何もしない。\n各判定問題は DSU などを使って解くことができます。\n以上を適切に実装することでこの問題を解くことができます。計算量は\n\\(O((N+M)\\alpha(N)\\log \\max_i w_i)\\)\nや\n\\(O((N+M)\\log \\max_i w_i)\\)\nです。\n実装例(Python3)",
+      "codes": [
+        "from atcoder import dsu\n\nn, m = map(int, input().split())\na = [()] * m\nfor i in range(m):\n    u, v, w = map(int, input().split())\n    a[i] = (u - 1, v - 1, w)\nx = (1 << 30) - 1\nfor k in range(29, -1, -1):\n    x ^= 1 << k\n    d = dsu.DSU(n)\n    for u, v, w in a:\n        if (x | w) == x:\n            d.merge(u, v)\n    if not d.same(0, n - 1):\n        x |= 1 << k\nprint(x)"
+      ],
+      "text_sha256": "fa0cd69262b085be99dfb1ee7185d720ca8b5cadae679f86c6c77d00ce5ff0ea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc408/abc408_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

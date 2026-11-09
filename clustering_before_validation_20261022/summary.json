@@ -1,0 +1,96 @@
+{
+  "problem_count": 898,
+  "taxonomy_count": 266,
+  "assigned_pairs": 1720,
+  "used_tags": 104,
+  "unused_tags": 162,
+  "tags_with_1_or_2_problems": 38,
+  "review_pairs_removed": 73,
+  "problems_losing_all_tags_after_review_exclusion": 46,
+  "distance": "Jaccard",
+  "linkage": "average (UPGMA)",
+  "optimal_leaf_ordering": true,
+  "default_distance_threshold": 0.9,
+  "review_sensitivity": {
+    "common_tags": 104,
+    "tags_losing_all_evidence": [],
+    "adjusted_rand_index": 0.9705912498535786,
+    "changed_cocluster_pairs": 3,
+    "changed_tags": 4
+  },
+  "models": [
+    {
+      "key": "all",
+      "min_support": 1,
+      "threshold": 0.9,
+      "tag_count": 104,
+      "cluster_count": 70,
+      "multi_tag_clusters": 23,
+      "singleton_clusters": 47,
+      "silhouette": 0.08350336321015536,
+      "cophenetic_correlation": 0.9193843341936261,
+      "best_silhouette_cut_observed": {
+        "threshold": 0.8666666666666667,
+        "tag_count": 104,
+        "cluster_count": 76,
+        "multi_tag_clusters": 23,
+        "singleton_clusters": 53,
+        "silhouette": 0.0951835886380087
+      }
+    },
+    {
+      "key": "min3",
+      "min_support": 3,
+      "threshold": 0.9,
+      "tag_count": 66,
+      "cluster_count": 46,
+      "multi_tag_clusters": 15,
+      "singleton_clusters": 31,
+      "silhouette": 0.08018632097067104,
+      "cophenetic_correlation": 0.8793528126570443,
+      "best_silhouette_cut_observed": {
+        "threshold": 0.9393939393939394,
+        "tag_count": 66,
+        "cluster_count": 36,
+        "multi_tag_clusters": 20,
+        "singleton_clusters": 16,
+        "silhouette": 0.08616578854192118
+      }
+    },
+    {
+      "key": "review_excluded",
+      "min_support": 1,
+      "threshold": 0.9,
+      "tag_count": 104,
+      "cluster_count": 69,
+      "multi_tag_clusters": 23,
+      "singleton_clusters": 46,
+      "silhouette": 0.09076430628758897,
+      "cophenetic_correlation": 0.9293396586573063,
+      "best_silhouette_cut_observed": {
+        "threshold": 0.8668777655989932,
+        "tag_count": 104,
+        "cluster_count": 75,
+        "multi_tag_clusters": 24,
+        "singleton_clusters": 51,
+        "silhouette": 0.10302645766729689
+      }
+    }
+  ],
+  "runtime": {
+    "python": "3.9.13",
+    "numpy": "2.0.2",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.4",
+    "scikit_learn": "1.6.1",
+    "plot_font": "Yu Gothic"
+  },
+  "source_sha256": {
+    "all_problems.csv": "ef84cd9cdfe70f0238962c62514eec15b9d91d81ba549141f323f1a9ada31751",
+    "tags.md": "faf14c793ec71a30df5b2bd23a5f4b9878d0350e013d09a14f9147f8ae9bb4b6",
+    "problem_tag_matrix.csv": "efb70df0a3de23d01f85a4b6cfc08819ef2c37197da5eae4becc5d7fdcf3a419",
+    "all_problems_tagged.csv": "86f852873e6c81fc8d1864b861edade8deb2ae30f1efefcbda46e571a51b02b5",
+    "tag_catalog.csv": "dcc966e483f1172e73983cbe92f22ba1af88f1bc15b89a5494066e56f8ce7828"
+  },
+  "validation": "all checks passed"
+}

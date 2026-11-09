@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc406_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc406/editorial/13046",
+      "text": "同じクエリが\n\\(2\\)\nつ以上あるとき、\n\\(2\\)\n回目以降のクエリの答えは常に\n\\(0\\)\nとなります。したがって、今までに存在したクエリを管理することで同じクエリは\n\\(2\\)\nつ以上存在しない場合に帰着されます。\nこのような帰着を行うと、各行および列に対してはじめその行や列に存在したゴミの番号および各ゴミが捨てられたか管理し、クエリが与えられたときには与えられた行や列にはじめ存在した各ゴミに対して愚直に捨てられているか判定する方法が十分高速です。\nこれは、はじめマス\n\\((x, y)\\)\nにあったゴミに対して\n\\(x\\)\n行目に対応するクエリおよび\n\\(y\\)\n列目に対応するクエリの\n\\(2\\)\n回しか判定が行われないことからわかります。\n各行および列に対してはじめその行や列に存在したゴミの番号を管理する列を作るのは\n\\(O(H + W + N)\\)\n時間ででき、\n\\(Q\\)\n個のクエリを合計\n\\(O(N + Q)\\)\n時間で処理できるため全体として時間計算量は\n\\(O(H + W + N + Q)\\)\nです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint h, w, n;\n\tcin >> h >> w >> n;\n\tvector a(h + 1, vector<int>());\n\tvector b(w + 1, vector<int>());\n\tvector<bool> ux(h + 1), uy(w + 1); // 各行, 列にクエリが与えられたか\n\tvector<bool> used(n); // 各ゴミが捨てられたか\n\tfor (int i = 0; i < n; i++) {\n\t\tint x, y;\n\t\tcin >> x >> y;\n\t\ta[x].push_back(i);\n\t\tb[y].push_back(i);\n\t}\n\tint q;\n\tcin >> q;\n\twhile (q--) {\n\t\tint t;\n\t\tcin >> t;\n\t\tif (t == 1) {\n\t\t\tint x;\n\t\t\tcin >> x;\n\t\t\tif (ux[x]) cout << 0 << '\\n';\n\t\t\telse {\n\t\t\t\tint ans = 0;\n\t\t\t\tfor (int e : a[x]) {\n\t\t\t\t\tif (!used[e]) {\n\t\t\t\t\t\tused[e] = true;\n\t\t\t\t\t\tans++;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tux[x] = true;\n\t\t\t\tcout << ans << '\\n';\n\t\t\t}\n\t\t}\n\t\telse {\n\t\t\tint y;\n\t\t\tcin >> y;\n\t\t\tif (uy[y]) cout << 0 << '\\n';\n\t\t\telse {\n\t\t\t\tint ans = 0;\n\t\t\t\tfor (int e : b[y]) {\n\t\t\t\t\tif (!used[e]) {\n\t\t\t\t\t\tused[e] = true;\n\t\t\t\t\t\tans++;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tuy[y] = true;\n\t\t\t\tcout << ans << '\\n';\n\t\t\t}\n\t\t}\n\t}\n}"
+      ],
+      "text_sha256": "e08d487ca6a0409c8af28c30331acd1d871548e756b4d37a16cb844af06ab4fd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc406/abc406_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

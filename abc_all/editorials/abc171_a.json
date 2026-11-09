@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc171_a",
+  "editorials": [
+    {
+      "text": "A: αlphabet\n(解説: evima)\nプログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\n「practice contest」(https://atcoder.jp/contests/practice/) の問題A「はじめてのあっと\nこーだー」をお試しください。言語ごとに解答例が掲載されています。\n今回の問題を解くためには、以下の4 つの要素が必要です。\n1. 標準入力からの文字の読み込み\n2. 文字α が大文字か小文字かの判定\n3. 上記の判定結果に基づく処理の分岐\n4. 標準出力への文字の出力\nこのうち要素1, 4 は「はじめての～」でカバーされたとして(その問題では正確には文字ではな\nく文字列の入出力が扱われていますが、文字1 個も長さ1 の文字列と考えられます)、残りの要素\n2, 3 について述べます。\n2. 現代の多くの言語には、この判定を行う機能がisUpperCase, islower などといった名前で\nあらかじめ実装されています。検索エンジンで「[言語名] 大文字小文字判定」などと検索するこ\nとでそのような機能、またはその代わりとなる手法を発見できるはずです。(AtCoder では数十の\n言語が利用可能であり、ここでそれらについて網羅的に述べるにはこのPDF は狭すぎます。)\n3. ほとんどの言語で「if 文」または類似の構文が利用可能であり、また多くの言語に「条件演算\n子」または類似の要素が存在します。上記と同様に、「[言語名] if」「[言語名] 条件」などと検索す\nることで、その言語で利用可能な構文などの情報が手に入るはずです。\n\nPython での実装例:\n1 a = input()\n2 print('A' if a.islower() else 'a')\nRuby での実装例(2. で述べたisUpperCase のような標準機能が存在しない言語の例として):\n1 a = gets.chomp\n2 if a == a.upcase\n3\nputs 'A'\n4 else\n5\nputs 'a'\n6 end\n",
+      "text_sha256": "b81a6979dd3646597c75b4dc3cb28f33c5623dae54fee90b5a6ca3f66ef68391",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc171/abc171_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

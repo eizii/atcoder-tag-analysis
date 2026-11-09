@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc181_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc181/editorial/243",
+      "text": "\\(2\\)\n日周期で白い服と黒い服が入れ替わるので、\n\\(N\\)\nを\n\\(2\\)\nで割った余りが\n\\(0\\)\nなら\nWhite\nを、\n\\(1\\)\nなら\nBlack\nを出力すれば良いです。\n多くの言語で、\n\\(N\\)\nを\n\\(2\\)\nで割った余りは、剰余の演算子\n%\nを使って\nN % 2\nとしたり、ビット毎のAND演算子\n&\nを使って\nN & 1\nとすると計算できます。\nこの結果に応じて、条件分岐などで\nBlack\nか\nWhite\nを出力すると、 AC が得られます。\n回答例 (C++)\n回答例 (Python)\n回答例 (C)\n回答例 (dc)",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(){\n    int n;\n    cin >> n;\n    if(n % 2 == 1) cout << \"Black\" << endl;\n    else cout << \"White\" << endl;\n}",
+        "n = int(input())\nprint(\"Black\" if n % 2 == 1 else \"White\")",
+        "#include <stdio.h>\n\nint main(){\n    int n;\n    scanf(\"%d\", &n);\n    puts(n & 1 ? \"Black\" : \"White\");\n}",
+        "[White][Black]?2%1=_rp"
+      ],
+      "text_sha256": "b4cf89ba9cb989bf4030a94268a98cde0def709b3daf91bb8c569cecfa0db2ef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc181/abc181_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

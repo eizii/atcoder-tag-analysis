@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc105_c",
+  "editorials": [
+    {
+      "text": "C: Base -2 Number\nN の−2 進表記の(−2)i の桁に現れる整数をSi とします。このとき、S0 以外の決め方がN を2 で割っ\nたあまりに影響することはないので、S0 はN が奇数の時1 で、そうでないとき0 にする必要があります。\nS0, S1 以外の決め方がN を4 で割ったあまりに影響することはないので、S0 が決まっている状況下では\nS1 も決まります。このようにして、順次各々のSi の値を決めて行くことができます。また、−2 進K 桁の\n数が表すことのできる整数の範囲を考えれば、この繰り返しは高々O(log N) 回で終了することも分かり、こ\nの問題を解くことができます。\n",
+      "text_sha256": "ecfa808b8579a146490dc41fd92f243ec8056ebec2307acc1bebfdb62e365a95",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc105/abc105_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

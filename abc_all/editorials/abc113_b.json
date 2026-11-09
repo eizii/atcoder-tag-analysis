@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc113_b",
+  "editorials": [
+    {
+      "text": "B:\nPalace\n地点i の平均気温はT −Hi × 0.006 度なので、各地点の平均気温を計算し、それらの中から平\n均気温がA 度に最も近い点を求めるとよいです。\n気温は整数ではありませんが、気温を1000 倍して計算すると浮動小数点型を用いなくても答え\nを求めることができます。\n#include <cstdio >\nint N,T,A,X;\nint main ()\n{\nscanf (\"%d%d%d\",&N,&T,&A);\nint res =0;\nint cc=1<<30;\nfor(int i=1;i<=N;i++)\n{\nscanf (\"%d\",&X);\nint d=(T*1000 -X*6)-A*1000;\nif(d<0)d=-d;\nif(cc >d)cc=d,res=i;\n}\nprintf (\"%d\\n\",res);\n}\n",
+      "text_sha256": "b3c0038cbf2f57b63c295c476ef61abc2e0262874ed18dbf3664de39201cb7d5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc113/abc113_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

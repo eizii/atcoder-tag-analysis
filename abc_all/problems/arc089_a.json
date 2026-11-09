@@ -1,0 +1,64 @@
+{
+  "problem_id": "arc089_a",
+  "title": "Traveling",
+  "contests": [
+    {
+      "contest_id": "abc086",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 397,
+  "raw_difficulty": 397,
+  "contest_id": "abc086",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc086/tasks/arc089_a",
+  "statement": "配点 : 300 点 問題文 シカのAtCoDeerくんは二次元平面上で旅行をしようとしています。\r\nAtCoDeerくんの旅行プランでは、時刻 0 に 点 (0,0) を出発し、 1 以上 N 以下の各 i に対し、時刻 t_i に 点 (x_i,y_i) を訪れる予定です。 AtCoDeerくんが時刻 t に 点 (x,y) にいる時、 時刻 t+1 には 点 (x+1,y) , (x-1,y) , (x,y+1) , (x,y-1) のうちいずれかに存在することができます。 その場にとどまることは出来ない ことに注意してください。\r\nAtCoDeerくんの旅行プランが実行可能かどうか判定してください。 制約 1 ≤ N ≤ 10^5 0 ≤ x_i ≤ 10^5 0 ≤ y_i ≤ 10^5 1 ≤ t_i ≤ 10^5 t_i < t_{i+1} ( 1 ≤ i ≤ N-1 ) 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N t_1 x_1 y_1 t_2 x_2 y_2 : t_N x_N y_N 出力 旅行プランが実行可能なら Yes を、不可能なら No を出力してください。 入力例 1 2\r\n3 1 2\r\n6 1 1 出力例 1 Yes 例えば、 (0,0) , (0,1) , (1,1) , (1,2) , (1,1) , (1,0) , (1,1) と移動すればよいです。 入力例 2 1\r\n2 100 100 出力例 2 No (0,0) にいる状態から 2 秒後に (100,100) にいるのは不可能です。 入力例 3 2\r\n5 1 1\r\n100 1 1 出力例 3 No",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 シカのAtCoDeerくんは二次元平面上で旅行をしようとしています。\r\nAtCoDeerくんの旅行プランでは、時刻 0 に 点 (0,0) を出発し、 1 以上 N 以下の各 i に対し、時刻 t_i に 点 (x_i,y_i) を訪れる予定です。 AtCoDeerくんが時刻 t に 点 (x,y) にいる時、 時刻 t+1 には 点 (x+1,y) , (x-1,y) , (x,y+1) , (x,y-1) のうちいずれかに存在することができます。 その場にとどまることは出来ない ことに注意してください。\r\nAtCoDeerくんの旅行プランが実行可能かどうか判定してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 ≤ N ≤ 10^5 0 ≤ x_i ≤ 10^5 0 ≤ y_i ≤ 10^5 1 ≤ t_i ≤ 10^5 t_i < t_{i+1} ( 1 ≤ i ≤ N-1 ) 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N t_1 x_1 y_1 t_2 x_2 y_2 : t_N x_N y_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 旅行プランが実行可能なら Yes を、不可能なら No を出力してください。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2\r\n3 1 2\r\n6 1 1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes 例えば、 (0,0) , (0,1) , (1,1) , (1,2) , (1,1) , (1,0) , (1,1) と移動すればよいです。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 1\r\n2 100 100"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No (0,0) にいる状態から 2 秒後に (100,100) にいるのは不可能です。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 2\r\n5 1 1\r\n100 1 1"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 No"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc086/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:33:55.804156+00:00",
+  "statement_sha256": "0d1ab29437ca1be10e37ca119d5512236f51b1e75248da37ebb4d682314af61b",
+  "editorials": []
+}

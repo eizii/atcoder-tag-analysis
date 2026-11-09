@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc223_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc223/editorial/2773",
+      "text": "いくつかの解法が考えられますが、そのうちの\n\\(1\\)\nつを紹介します。\nまず、\n\\(2\\)\nつの火がぶつかる時刻\n\\(T\\)\nを求めます。これは以下のように表されます。\n\\(T=\\frac{1}{2}\\sum_{i=1}^{N}\\frac{A_i}{B_i}\\)\n次に、左の火が時刻\n\\(T\\)\nにおいてどの地点に到達しているかを求めます。\n他にも両端からシミュレーションをしていく解法や二分探索を用いた解法も考えられます。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n; cin >> n;\n    vector<double> a(n), b(n);\n    for(int i = 0; i < n; i++) cin >> a[i] >> b[i];\n    double t = 0, ans = 0;\n    for(int i = 0; i < n; i++) t += a[i] / b[i];\n    t /= 2;\n    for(int i = 0; i < n; i++){\n        ans += min(a[i], t * b[i]);\n        t -= min(a[i] / b[i], t);\n    }\n    cout << fixed << setprecision(15);\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "ce88a173c5044f1b8a48df3543eac99548356e22d87c9283702a987d8a630fe8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc223/abc223_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

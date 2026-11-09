@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc435_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc435/editorial/14729",
+      "text": "for 文を用いて\n\\(1\\)\nから\n\\(N\\)\nまでの総和を求めることができます。\nまたは、\n\\(1+2+\\cdots+N=\\frac{N(N+1)}{2}\\)\nを用いて、答えを求めることもできます。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, ans=0;\n\tcin >> n;\n\tfor(int i=1;i<=n;i++){\n\t\tans+=i;\n\t}\n\tcout << ans << endl;\n\treturn 0;\n}",
+        "n=int(input())\nans=0\n\nfor i in range(1,n+1):\n    ans+=i\n\nprint(ans)"
+      ],
+      "text_sha256": "81203564a8cf5c243068c33bd8fe012afde0a02df23022633f5d8c8fc2e5c5cd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc435/abc435_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

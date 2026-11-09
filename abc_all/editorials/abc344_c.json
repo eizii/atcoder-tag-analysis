@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc344_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc344/editorial/9486",
+      "text": "\\(A,B,C\\)\nからそれぞれ\n\\(1\\)\n個ずつ要素を選ぶ方法は\n\\(N\\times M \\times L\\)\n通りであり、\n\\(N,M,L\\leq 100\\)\nの制約下では高々\n\\(10^6\\)\n通りです。よって、予めこれらを全て計算して set などで保持しておくことで、各質問に\n\\(O(\\log NML)\\)\nで答えることができます。\n実装例(Python)",
+      "codes": [
+        "input()\nA=list(map(int,input().split()))\ninput()\nB=list(map(int,input().split()))\ninput()\nC=list(map(int,input().split()))\n\nS=set()\nfor a in A:\n  for b in B:\n    for c in C:\n      S.add(a+b+c)\n\ninput()\nX=list(map(int,input().split()))\n\nfor x in X:\n  if x in S:\n    print(\"Yes\")\n  else:\n    print(\"No\")"
+      ],
+      "text_sha256": "bec869d1e2452312e41847ec76224995d897dd5ccca05681ac58e94037f0f6d9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc344/abc344_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc344/editorial/9488",
+      "text": "空間のオーバーヘッドを無視した場合、連続する \\(3\\times10 ^ 8+1\\operatorname{bit}\\) を直接管理できればこの問題を解くことができます（\\(3\\times10 ^ 8+1\\operatorname{bit}\\) は約 \\(37.5\\operatorname{MB}\\) で、メモリ制限に対して余裕があります）。\nC++ などでは\nstd::bitset\nなどを使うことで余計な空間をほとんど使うことなく連続するビットを扱うことができます。\n時間計算量は \\(O(NML+Q)\\) となります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <bitset>\n\nint main() {\n    using namespace std;\n\n    unsigned N, M, L;\n    cin >> N;\n    vector<unsigned> A(N);\n    for (auto &&a : A)\n        cin >> a;\n    cin >> M;\n    vector<unsigned> B(M);\n    for (auto &&b : B)\n        cin >> b;\n    cin >> L;\n    vector<unsigned> C(L);\n    for (auto &&c : C)\n        cin >> c;\n\n    // 連続する 3e8 + 1 bit を用意して\n    // A[i] + B[j] + C[k] として出現する値かどうかを管理\n    bitset<300000001> possible;\n    for (const auto a : A)\n        for (const auto b : B)\n            for (const auto c : C)\n                possible[a + b + c] = true;\n\n    unsigned Q;\n    cin >> Q;\n    for (unsigned i = 0, x; i < Q; ++i) {\n        cin >> x;\n        cout << (possible[x] ? \"Yes\" : \"No\") << endl;\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "259a79585d782e5086decfe8c3b7b88e4efd92dc9bea3ab1f04cd46efc7c9622",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc344/abc344_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

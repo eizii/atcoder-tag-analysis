@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc323_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc323/editorial/7348",
+      "text": "サイズ\n\\(S\\)\nのスライムのタイプを\n\\(S\\)\nの約数である最大の奇数として定めます。(すなわち\n\\(S\\)\nを\n\\(2\\)\nで割れる限り割り続けた後に得られる数です。)この時、合成前と合成後のスライムのタイプは同じであることから、あるタイプのスライムを用いて行った合成はそれ以外のタイプのスライムの数を変えず、スライムの合成はタイプごとに独立に考えることができることがわかります。\nタイプ\n\\(d\\)\nのスライムのサイズは\n\\(d\\)\n,\n\\(2d\\)\n,\n\\(4d\\)\n,\n\\(\\ldots\\)\n,\n\\(2^kd\\)\n,\n\\(\\ldots\\)\nです。\n\\(k=0,1,2,\\ldots\\)\nについて、サイズ\n\\(2^kd\\)\nのスライムが\n\\(A_k\\)\n匹 (\n\\(A_k=0\\)\nもあり得る) いたとします。この時、タイプ\n\\(d\\)\nのスライムの(多重)集合に対してその\n価値\nを\n\\(A_0+2A_1+4A_2+\\cdots 2^kA_k+\\cdots\\)\nで定めます。この価値は合成の前後で不変です。\nここで、タイプ\n\\(d\\)\nのスライムの集合であって価値が\n\\(v\\)\nであるようなもののうちスライムの匹数が最小となるようなものを考えます。このとき(タイプ\n\\(d\\)\nの)どのサイズのスライムも高々\n\\(1\\)\n匹しか存在しません。なぜなら、そうでないときその集合の中から\n\\(2\\)\n匹を選んで合成を行い、価値を変えずに匹数を真に減少させることができるからです。そしてそのような集合は一意に定まります。なぜなら、そのような集合は、各要素が\n\\(0\\)\nか\n\\(1\\)\nであるような整数の列\n\\((A_0,A_1,\\ldots,A_k,\\ldots)\\)\nであって、\n\\(v=A_0+2A_1+4A_2+\\cdots 2^kA_k+\\cdots\\)\nをみたすようなものと\n\\(1\\)\n対\n\\(1\\)\nに対応しますが、これは\n\\(2\\)\n進数表示の一意性からただ\n\\(1\\)\nつ存在するからです。最後に、これは価値\n\\(v\\)\nのスライムの集合から合成を繰り返す事によって達成可能です。なぜなら先に述べたように、タイプ\n\\(d\\)\nのスライムについてこれ以上合成を繰り返すことができなくなるまで合成を行った場合、操作の順番によらず必ずこの集合の行き着くためです。合成のたびにスライムが\n\\(1\\)\n匹ずつ減少することから有限回で操作が終わる事も保証されています。\nゆえに、行うことはそのタイプのスライムが\n\\(1\\)\n匹以上存在するようなタイプについて、価値を計算し、それを\n\\(2\\)\n進表記したときに\n\\(1\\)\nであるbit の数の和を計算することです。これは mapなどでタイプの価値を管理することで、各タイプの価値の値の計算に\n\\(O(N(\\log N+\\log \\max(S_i)))\\)\n, 各タイプにおけるスライムの最小匹数の計算に\n\\(O(N(\\log\\max(S_i)+\\log \\max(C_i) ))\\)\nであるため、計算量は\n\\(O(N(\\log N+\\log \\max(S_i)+\\log \\max(C_i)))\\)\nとなります。\n補足\n上での説明の帰着として、スライムの(多重)集合が与えられたときそれぞれの集合から合成を行えなくなるまで行った後の集合は合成を行った順番によらず一意であり、その時スライムの数が最小となります。サイズ\n\\(x\\)\n以上のスライムの合成によって、サイズ\n\\(x\\)\n以下のスライムが新しく作られることはないため、スライムのサイズが小さい方から順に合成していくシミュレーションを行うことで、答えを求めることができます。順序付き集合や順序付きキューなど適当なデータ構造を使う事によって、\n\\(O(N(\\log \\max(S_i)+\\log \\max(C_i))\\log(N(\\log \\max(S_i)+\\log \\max(C_i)))\\)\nで答えを求めることができます。計算量は上の方針と比べて少し悪いですが、定数倍が悪い方針でなければ十分ACを獲得することができます。\nc++ による実装例:\nc++ による実装例 (補足の方針):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint n,x,ans=0;\n\tlong long y;\n\tmap<int,long long>mp;\n\tmap<int,long long>::iterator itr;\n\tcin>>n;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>x>>y;\n\t\twhile((x&1)==0){\n\t\t\tx>>=1,y<<=1;\n\t\t}\n\t\tmp[x]+=y;\n\t}\n\titr=mp.begin();\n\twhile(itr!=mp.end()){\n\t\ty=(*itr).second;\n\t\twhile(y>0){\n\t\t\tif(y&1)ans++;\n\t\t\ty>>=1;\n\t\t}\n\t\titr++;\n\t}\n\tcout<<ans<<endl;\n\treturn 0;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint n,ans=0;\n\tlong long x,y;\n\tmap<long long,long long>mp;\n\tmap<long long,long long>::iterator itr;\n\tcin>>n;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>x>>y;\n\t\tmp[x]+=y;\n\t}\n\titr=mp.begin();\n\twhile(itr!=mp.end()){\n\t  x=(*itr).first, y=(*itr).second;\n\t\tif(y>1)mp[2*x]+=(y/2);\n\t\tif(y&1)ans++;\n\t\titr++;\n\t}\n\tcout<<ans<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "4a532624956d66dc0d69e7da397d7a2b8d527c829f745660d730fbe85a207f0a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc323/abc323_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc323/editorial/7364",
+      "text": "公式解説\nとほぼ同様ですが、\n価値\nを直接整数で管理し、 popcount （\n\\(2\\)\n進法で\n\\(1\\)\nが立っている箇所の個数を調べる関数）を使うとより簡単かつ高速な実装ができます。\n本問ではタイプごとの価値は\n\\(2\\times\\mathrm{max }(S_i)\\times \\mathrm{max}(C_i)=2\\times 10^{18}<2^{61}\\)\n未満なので、\n\\(64\\)\nビット整数で表せます。この範囲内では、\n\\(n\\)\nの popcount は\n\\(O(\\log\\log n)\\)\nなどで計算できます。全体の計算量は\nDict\nや\npopcount\nの計算量によって、\n\\(O(N\\log N)\\)\nや\n\\(O(N\\log\\log N)\\)\nなどになります。",
+      "codes": [],
+      "text_sha256": "58a40037b3c5cf6ee872ddd03eeebcc7ada0921911eb5d39fd449726f2deeead",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc323/abc323_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

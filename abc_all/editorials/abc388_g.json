@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc388_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc388/editorial/11904",
+      "text": "E 問題の この解説 の第二方針を使います。\n（与えられた餅列の後に無限に大きな餅が無限に続いているとし、連続する \\(K\\) 個の餅をすべて上段にして \\(K\\) 個の鏡餅を作るために必要な下段のインデックスの最小値について考えます。） \\(B _ i\\coloneqq i\\) 番目の餅を上段の餅として使うときの、下段の餅としてありえる最小のインデックス \\((1\\leq i\\leq N)\\) と定めます。 すると、クエリ \\((L,R)\\) に対する答えは \\(\\displaystyle L+K-1+\\max\\left\\lbrace\\max _ {L\\leq i\\lt L+K}\\lbrace B _ i-i\\rbrace,K\\right\\rbrace\\leq R\\) を満たす最大の \\(K\\) です。\n左辺は \\(K\\) について単調なので、\\(B _ i-i\\) をセグメント木などで管理し、二分探索を行うことでこの問題を解くことができます。 時間計算量は \\(O(N+Q\\log N)\\) などになります。 実装例は以下のようになります。\nセグメント木上の二分探索を行っており、時間計算量は \\(O(N+Q\\log N)\\) 時間です。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <atcoder/segtree>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    cin >> N;\n\n    vector<unsigned> A(N);\n    for (auto&& a : A)\n        cin >> a;\n\n    // (区間の長さ, B[i] - i の最大値) を持つセグメント木\n    using value_type = pair<unsigned, unsigned>;\n    atcoder::segtree<value_type, [](const auto& lhs, const auto& rhs) {\n        const auto& [left_length, left_distance_max]{lhs};\n        const auto& [right_length, right_distance_max]{rhs};\n        return value_type{left_length + right_length, max(left_distance_max, right_distance_max)};\n    }, [] { return value_type{}; }> segment_tree{\n        [N](const auto& seq) {\n            vector<value_type> result(N);\n            // B[i] を求める 全体で Θ(N) 時間\n            for (unsigned i{}, j{}; i < N; ++i) {\n                while (j < N && seq[i] * 2 > seq[j]) ++j;\n                result[i] = {1, j - i};\n            }\n            return result;\n        }(A)\n    };\n\n    unsigned Q;\n    cin >> Q;\n\n    for (unsigned i{}; i < Q; ++i) {\n        unsigned L, R;\n        cin >> L >> R;\n        --L;\n        // 右端が R 以下になる最大の [L, L+K) を求める\n        cout << segment_tree.max_right(L, [L, R](const auto& itv) {\n            const auto& [length, distance]{itv};\n            return L + length + max(distance, length) <= R;\n        }) - L << endl;\n    }\n\n    return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "0c30000cac3c978223dd5ab2495884d43183c41e12120a9b8bfc4ead1100a46a"
+    }
+  ],
+  "status": "available"
+}

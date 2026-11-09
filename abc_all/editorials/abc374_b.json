@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc374_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc374/editorial/11097",
+      "text": "実装する方法はいくつか考えられますが、例えば次のようなアルゴリズムで答えを求めることができます。\n以下では、\n\\(|S|,|T|\\)\nでそれぞれ\n\\(S,T\\)\nの長さを、\n\\(S_i,T_i\\)\nでそれぞれ\n\\(S,T\\)\nの\n\\(i\\)\n文字目を表すものとします。\n\\(S\\)\nの長さと\n\\(T\\)\nの長さのうち小さい方を\n\\(N\\)\nとおく。すなわち、\n\\(N=\\min(|S|,|T|)\\)\nとする。\n\\(i=1,2,\\ldots,N\\)\nについて、順に\n\\(S_i\\)\nと\n\\(T_i\\)\nが等しいか判定する。等しくないならば\n\\(i\\)\nを出力して終了する。\n2. で終了しなかったとき、すなわち\n\\(i=1,2,\\ldots,N\\)\nすべてについて\n\\(S_i=T_i\\)\nであったとき、\n\\(|S|=|T|(=N)\\)\nならば\n\\(0\\)\nを、そうでないならば\n\\(N+1\\)\nを出力して終了する。\nこのとき、\n\\(S\\)\nと\n\\(T\\)\nが等しいならば\n\\(0\\)\nを、そうでないとき異なっている文字のうち先頭のものを出力できます。\n\\(3.\\)\nにおいて\n\\(|S|\\neq |T|\\)\nのとき、\n\\(N\\)\nの定義より、\n\\(S\\)\n,\n\\(T\\)\nのちょうど一方にのみ\n\\(N+1\\)\n文字目が存在することに注意してください。\nこれは for文, if 文を用いて実装することができます。\nよって、この問題を解くことができました。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main(void){\n\tstring s,t;\n\tcin>>s;\n\tcin>>t;\n\tint n = min(s.size(),t.size());\n\tfor(int i=0;i<n;i++){\n\t\tif(s[i]!=t[i]){\n\t\t\tcout<<(i+1)<<endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\tif(s.size()!=t.size())cout<<(n+1)<<endl;\n\telse cout<<0<<endl;\n\treturn 0;\n}",
+        "s=input()\nt=input()\nn=min(len(s),len(t))\nif s==t:\n    print(0)\nelif s[:n]==t[:n]:\n    print(n+1)\nelse:\n    for i in range(n):\n        if s[i]!=t[i]:\n            print(i+1)\n            break"
+      ],
+      "text_sha256": "dfe05326eeda4c1862ea8d210cee2e8fbaee27871b2fb1c0303b07bbb76a1a34",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc374/abc374_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

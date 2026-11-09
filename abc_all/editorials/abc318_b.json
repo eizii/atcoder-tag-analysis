@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc318_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc318/editorial/7072",
+      "text": "問題文の制約から、\n\\(0\\leq x\\leq 100\\)\nかつ\n\\(0\\leq y\\leq 100\\)\n以外の領域について考える必要はなく、また、整数の組\n\\((i,j)\\)\n\\((1\\leq i\\leq 100, 1\\leq j\\leq 100)\\)\nについて、\n\\(i-1\\leq x\\leq i\\)\nかつ\n\\(j-1\\leq y\\leq j\\)\nの領域は各シートによって完全に覆われているか全く覆われていないかのどちらかです。よって、次のような問題を解くことを考えれば良いです。\n\\(100\\times 100\\)\nのマス目があり、上から\n\\(i\\)\n行目かつ左から\n\\(j\\)\n列目をマス\n\\((i,j)\\)\nとよぶことにします。また、最初の時点で全てのマスは白く塗られているとします。\n\\(1\\leq k\\leq N\\)\nの順に、\n\\(i\\)\n回目の操作では、\n\\(A_k\\leq i\\leq B_k-1\\)\nかつ\n\\(C_k\\leq j\\leq D_k-1\\)\nをみたす整数の組\n\\((i,j)\\)\nについて、マス\n\\((i,j)\\)\nを黒く塗ることを行います。\n\\(N\\)\n回の操作の後で黒く塗られているマスの個数を求めてください。\nこれは for 文を用いることによって実際に塗る操作をシミュレーションすることができ、for文とif文を用いて最終的に黒く塗られているマスの個数を数えることで答えを求めることができます。\nシミュレーションに必要な計算回数は、愚直に行っても\n\\(N\\times (100\\times 100)\\leq 10^6\\)\n程度であるため、十分高速にこの問題を解くことができます。よってこの問題を解くことができました。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int n,a,b,c,d,ans=0;\n  bool g[100][100]={};\n\n  cin>>n;\n  for(int k=0;k<n;k++){\n    cin>>a>>b>>c>>d;\n    for(int i=a;i<b;i++)for(int j=c;j<d;j++)g[i][j]=true;\n  }\n\n  for(int i=0;i<100;i++)for(int j=0;j<100;j++)if(g[i][j])ans++;\n  cout<<ans<<endl;\n\n\treturn 0;\n}",
+        "n=int(input())\ng=[[False for i in range(100)]for i in range(100)]\n\nfor k in range(n):\n    a,b,c,d=map(int, input().split())\n    for i in range(a,b):\n        for j in range(c,d):\n            g[i][j]=True\n\nans=0\nfor i in range(100):\n    for j in range(100):\n        if g[i][j]==True:\n            ans+=1\nprint(ans)"
+      ],
+      "text_sha256": "45f346ca25d5e4da53b5fb727daea9c34f610d177827114d5649edb8fc2cb715",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc318/abc318_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc318/editorial/7092",
+      "text": "この問題は、2次元imos法を用いることで\n\\(O(N+\\max(A_i) \\max(B_i))\\)\nで解くことができます。\n028 - Cluttered Paper（★4）\nにおいて、\n\\(k\\geq1\\)\nとなるマスの個数を求めると考えるのが良いでしょう。\nC++による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n, ans = 0;\n    cin >> n;\n    vector<vector<int>> imos(101,vector<int>(101,0));\n    for(int i=0;i<n;i++){\n        int a, b, c, d;\n        cin >> a >> b >> c >> d;\n        imos[a][c]++;\n        imos[a][d]--;\n        imos[b][c]--;\n        imos[b][d]++;\n    }\n    for(int i=0;i<101;i++) for(int j=0;j<100;j++) imos[i][j+1] += imos[i][j];\n    for(int i=0;i<100;i++) for(int j=0;j<101;j++) imos[i+1][j] += imos[i][j];\n    for(int i=0;i<100;i++) for(int j=0;j<100;j++) if(imos[i][j]>0) ans++;\n    cout << ans << '\\n';\n    return 0;\n}"
+      ],
+      "text_sha256": "efab9d0a185c94e8f3aeca3ca63c854e8a138d5de8c0e937f071774370e42061",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc318/abc318_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

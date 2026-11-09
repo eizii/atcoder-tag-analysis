@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc387_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc387/editorial/11834",
+      "text": "頂点が\n\\(1,2,\\dots,N\\)\nであり、各\n\\(i\\ (1\\leq i\\leq N)\\)\nについて\n\\(A_i\\rightarrow i\\)\nの辺を張ってできるグラフについて考えます。求めたいのは、このグラフ上の各頂点に\n\\(1\\)\n以上\n\\(M\\)\n以下の整数を書き込む方法であって、\n\\(i\\rightarrow j\\)\nの辺があるならば （\n\\(i\\)\nに書き込まれた値）\n\\(\\geq\\)\n（\n\\(j\\)\nに書き込まれた値）を満たすようなものの数です。このグラフの各連結成分は、\n\\(1\\)\nつのサイクルとそのサイクル上の各頂点を根とした根付き木からなります。（このようなグラフは functional graph や俗になもりグラフなどと呼ばれます。）\nグラフの各連結成分は（条件を満たすように値を書き込む上で）互いに干渉しないので、各連結成分について答えを求め、それらをかけ合わせれば良いです。以下、グラフが連結であることを仮定します。\nサイクル上に含まれる頂点については\n\\(x_i \\leq x_{A_i}\\leq x_{A_{A_i}}\\leq \\dots \\leq x_i\\)\nのような循環した大小制約が生じるため、結局同じサイクル上の頂点には全て同じ値を書き込む必要があります。ゆえに、サイクル上の全ての頂点を\n\\(1\\)\nつの頂点にまとめて縮約することができ、このときグラフは\n\\(1\\)\nつの根付き木になります。\nこの根付き木において、以下のような DP を行います：\n\\(\\mathrm{dp}_{i, j}=\\)\n（\n\\(i\\)\nを根とする部分木内の各頂点に条件を満たすように値を書き込む方法であって、\n\\(i\\)\nに書き込まれる値が\n\\(j\\)\nであるようなものの数）\nこの DP は葉から順番に計算できます。頂点\n\\(i\\)\nの子供の集合を\n\\(C_i\\)\nとすると、\n\\(\\mathrm{dp}_{i, j}= \\displaystyle \\prod_{c\\in C_i} \\sum_{k=1}^{j} \\mathrm{dp}_{c, k}\\)\nです。この式をそのまま用いて愚直に計算すると全体で\n\\(O(N^3)\\)\nになりますが、累積和を用いることで簡単に\n\\(O(N^2)\\)\nに改善することができます。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\n#include <atcoder/dsu>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing mint = modint998244353;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<int> a(n);\n    vector<vector<int>> ch(n);\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        --a[i];\n        ch[a[i]].push_back(i);\n    }\n    vector<bool> in_cycle(n);\n    vector<vector<int>> cycles;\n    dsu uf(n);\n    for (int i = 0; i < n; i++) {\n        if (uf.same(i, a[i])) {\n            cycles.emplace_back();\n            int now = a[i];\n            do {\n                in_cycle[now] = true;\n                cycles.back().push_back(now);\n                now = a[now];\n            } while (now != a[i]);\n        } else {\n            uf.merge(i, a[i]);\n        }\n    }\n    vector dp(n, vector<mint>(m, 1));\n    auto dfs = [&](auto &dfs, int i) -> void {\n        for (int j: ch[i]) {\n            if (in_cycle[j]) continue;\n            dfs(dfs, j);\n            mint sum = 0;\n            for (int k = 0; k < m; k++) {\n                sum += dp[j][k];\n                dp[i][k] *= sum;\n            }\n        }\n    };\n    mint ans = 1;\n    for (auto cycle: cycles) {\n        vector<mint> prod(m, 1);\n        for (int i: cycle) {\n            dfs(dfs, i);\n            for (int j = 0; j < m; j++) prod[j] *= dp[i][j];\n        }\n        mint sum = 0;\n        for (int j = 0; j < m; j++) sum += prod[j];\n        ans *= sum;\n    }\n    cout << ans.val() << endl;\n}"
+      ],
+      "text_sha256": "0a9c005f499472c51b6d351006abb8bb7d1eb80ae82537a516c4f7ca09594115",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc387/abc387_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

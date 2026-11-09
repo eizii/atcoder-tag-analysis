@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc296_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc296/editorial/6115",
+      "text": "\\(X\\)\nが\n\\(2\\)\nつの\n\\(1\\)\n以上\n\\(N\\)\n以下の整数\n\\(a,b\\)\nの積で表されるという条件について、\n\\(a\\leq b\\)\nであるという要請を加えても条件をみらす整数の集合は変わらず、したがって、答えも変わりません。\n以下、この要請を加えた上で問題を考えます。\n答えとなる\n\\(X\\)\nを\n\\(1\\)\n以上\n\\(N\\)\n以下の整数\n\\(a,b\\)\n\\((a\\leq b)\\)\nの積で表した時の、\n\\(a\\)\nの候補としてあり得るものを考えたとき、\n\\(a>\\lceil \\sqrt M\\rceil\\)\nであるようなものについては考える必要はありません。\nなぜなら、\n\\(\\lceil \\sqrt M\\rceil<a\\leq b\\)\nより、\n\\(M\\leq \\lceil \\sqrt M\\rceil^2<ab\\)\nとなり、このような\n\\(2\\)\n数の積が答えとなる事はないからです。\n次に、\n\\(a\\)\nを固定した時の\n\\(b\\)\nの値について考えます。\n\\(M\\leq ab\\)\nという条件から、\n\\(b\\geq \\frac{M}{a}\\)\nが必要となります。\nここで、\n\\(\\frac{M}{a}>N\\)\nならば、その\n\\(a\\)\nに対応する条件をみたす\n\\(b\\)\nは存在しません。\n逆に、\n\\(\\frac{M}{a}\\leq N\\)\nの時、\n\\(N\\)\nが整数である事から\n\\(\\left\\lceil \\frac{M}{a} \\right\\rceil\\leq N\\)\nであり、\n少なくとも\n\\(b=\\left\\lceil \\frac{M}{a} \\right\\rceil\\)\nとした時の\n\\(a,b\\)\nは条件をみたします。\nさらに、\n\\(a(>0)\\)\nを固定した時、\n\\(ab\\)\nは\n\\(b\\)\nについて単調増加である事から、\n\\(b>\\left\\lceil \\frac{M}{a} \\right\\rceil\\)\nならば\n\\(M\\leq a\\cdot \\left\\lceil \\frac{M}{a} \\right\\rceil<ab\\)\nであることから、これも答えとなり得ません。\nよって、答えと\nなる\n\\(X\\)\nの候補は\n\\(1\\leq a\\leq  \\lceil \\sqrt{M}\\rceil\\)\nについて、\n\\(b=\\left\\lceil \\frac{M}{a} \\right\\rceil\\)\nとした時の\n\\(ab\\)\nの値となります。\n計算量について、各\n\\(a\\)\nに対する値は\n\\(O(1)\\)\nで計算できるため全体で\n\\(O(\\sqrt{M})\\)\nであり、\n\\(M\\leq 10^{12}\\)\nより十分高速です。\nよって、この問題を解く事ができました。\nc++による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define INF (long long)2e+18\n\nint main() {\n\tlong long n,m,x,ans=INF;\n\tcin>>n>>m;\n\tfor(long long i=1;i<=n;i++){\n\t\tx=(m+i-1)/i;\n\t\tif(x<=n)ans=min(ans,i*x);\n\t\tif(i>x)break;\n\t}\n\tif(ans==INF)cout<<-1<<endl;\n\telse cout<<ans<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "3859e361f4042f79f591f9c8c0965fba1c159e647aa121779f98ae52e07781bb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc296/abc296_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

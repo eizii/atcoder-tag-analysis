@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc428_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc428/editorial/14245",
+      "text": "考察\n\\(C + x\\)\nの桁数が\n\\(d\\)\nであるときを考えます．このとき，\n\\(x\\)\nの範囲は以下の\n\\(2\\)\n範囲の共通部分として得られます．\n\\(1 \\leq x \\leq D\\)\n\\(10^{d-1} - C \\leq x \\leq 10^d - 1 - C\\)\n\\(L = \\mathrm{max}(1, 10^{d-1} - C),\\ R = \\mathrm{min}(D, 10^d - 1 - C)\\)\nとおいたとき，\n\\(L > R\\)\nであればそのような\n\\(x\\)\nは存在せず，\n\\(L \\leq R\\)\nであれば\n\\(L \\leq x \\leq R\\)\nが範囲です．\n\\(C + x\\)\nの桁数が\n\\(d\\)\nのときを考えているので，\n\\(f(C, C+x) = C \\times 10^d + (C+x)\\)\nとなります．したがって，\n\\(C \\times 10^d + C + L\\)\n以上\n\\(C \\times 10^d + C + R\\)\n以下の範囲にある平方数の個数がこの範囲の答えになります．\n\\(k\\)\n以下の正の平方数の個数は\n\\(\\lfloor \\sqrt{k} \\rfloor\\)\nなので，求める答えは\n\\(\\lfloor \\sqrt{C \\times 10^d + C + R} \\rfloor - \\lfloor \\sqrt{C \\times 10^d + C + L - 1} \\rfloor\\)\nとなります．\n\\(\\lfloor \\sqrt{k} \\rfloor\\)\nを求めるにあたっては，二分探索で求めるよりも\nstd::sqrt\n関数を利用するほうが高速です．\n以上の計算を\n\\(d = 1, \\dots, \\lfloor \\log_{10} (C+D) \\rfloor + 1\\)\nに対して行い，答えを足し合わせることで，全体の答えが求まります．\n平方根の計算が定数時間として，時間計算量は\n\\(O(\\log(C+D))\\)\nとなり，十分高速です．\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::min;\nusing std::max;\n#include <cmath>\n\ntypedef long long int ll;\n\n// floor(sqrt(x))\nll f (ll x) {\n\tll y = sqrt(x);\n\twhile (y * y > x) y--;\n\twhile ((y+1) * (y+1) <= x) y++;\n\treturn y;\n}\nll solve (ll c, ll d) {\n\tll ans = 0;\n\n\tll xmin = 1, xmax = 9, cshift = 10;\n\twhile (xmin <= c + d) {\n\t\tll l = max(xmin, c + 1);\n\t\tll r = min(xmax, c + d);\n\n\t\tif (l <= r) {\n\t\t\tll vl = c * cshift + l;\n\t\t\tll vr = c * cshift + r;\n\n\t\t\tans += (f(vr) - f(vl - 1));\n\t\t}\n\n\t\txmin = xmin * 10;\n\t\txmax = (xmax + 1) * 10 - 1;\n\t\tcshift *= 10;\n\t}\n\n\treturn ans;\n}\n\nint main (void) {\n\tll T;\n\tcin >> T;\n\n\tfor (ll ti = 0; ti < T; ti++) {\n\t\tll c, d;\n\t\tcin >> c >> d;\n\n\t\tll ans = solve(c, d);\n\t\tcout << ans << \"\\n\";\n\t}\n\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "d04c3b6032f5f8dec66cec45982467405d234f35683ed46e7eee2193f2f3ac78",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc428/abc428_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

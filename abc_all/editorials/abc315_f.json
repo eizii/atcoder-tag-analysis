@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc315_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc315/editorial/6993",
+      "text": "例えば、\n\\(100\\)\n個のチェックポイントを無視したとしましょう。\nこの時\n\\(2^{99} \\approx 10^{30}\\)\nのペナルティが発生しますが、愚直に全てのチェックポイントを回ったとしても距離の総和は\n\\(N \\times 10^5\\)\n以内で収まるので、この数の無視をするのは明らかに無駄であることが分かります。\nこの時、以下の DP が成立します:\ndp[最後に通ったチェックポイント][無視したチェックポイントの数] = {距離の総和の最小値}\n二つ目の添字 は\n\\(100\\)\n未満しか考慮しなくて良いことに注意してください。\n\\(dp[1][0]=0\\)\n、その他のテーブルの値は\n\\(\\infty\\)\nに初期化され、答えは 「\n\\(dp[N][i]\\)\nに\n\\(i\\)\n個のチェックポイントを無視した際のペナルティを足したもの」の最小値となります。\nこのことから、考慮する無視の回数の上限を\n\\(C\\)\nとしたとき、時間計算量\n\\(O(NC^2)\\)\nでこの問題に正解できます。\n(\n\\(C=100\\)\nとするとギリギリになる可能性がありますが、もう少しよい見積をすると実行時間に余裕を持って AC できます。 )\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n \nusing namespace std;\nusing pi=pair<int,int>;\n \nlong double dist(pi a,pi b){\n  int dx=a.first-b.first;\n  int dy=a.second-b.second;\n  int ss=dx*dx+dy*dy;\n  return sqrt((long double)ss);\n}\n \nlong double lg=8.0e18;\n \nint main(){\n  int n;\n  cin >> n;\n  vector<pi> vp(n);\n  for(int i=0;i<n;i++){\n    cin >> vp[i].first >> vp[i].second;\n  }\n \n  vector<vector<long double>> dp(n,vector<long double>(60,lg));\n  dp[0][0]=0.0;\n  for(int i=1;i<n;i++){\n    for(int j=i-1;j>=0;j--){\n      int skip=i-j-1;\n      for(int k=0;(k+skip)<60;k++){\n        dp[i][k+skip]=min(dp[i][k+skip],dp[j][k]+dist(vp[j],vp[i]));\n      }\n    }\n  }\n \n  long double res=lg;\n  for(int i=0;i<60;i++){\n    long double pen=0.0;\n    if(i>0){\n      pen=pow(2.0,(long double)(i-1));\n    }\n    res=min(res,dp[n-1][i]+pen);\n  }\n \n  printf(\"%.6Lf\\n\",res);\n  return 0;\n}"
+      ],
+      "text_sha256": "c9c567ebf2c86739e6588f60c88f1656ff4bb0db16aed0d25646be669e3bce9d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc315/abc315_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

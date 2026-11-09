@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc311_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/6817",
+      "text": "この問題は文字列型を適切に走査することができるかを聞いている問題です。\n問題文を手続き的に言い換えると次のようになります。\n「\nA\nが出現したか」「\nB\nが出現したか」「\nC\nが出現したか」を True/False のフラグで管理する。はじめ 3 つのフラグは\nFalse\nの状態である。\n\\(i=1, 2, \\dots, N\\)\nの順に for-loop を回す。for-loop 内では次の操作を行う。\n\\(S\\)\nの\n\\(i\\)\n番目の文字を\n\\(x\\)\nとする。「\nx\nが出現したか」に対応するフラグを\nTrue\nにする。\n3 つのフラグ全てが初めて True になったとき、答えは\n\\(i\\)\nである。よって\n\\(i\\)\nを出力して for-loop から抜ける。\nこのアルゴリズムは (文字列の長さ)\n\\(\\leq 100\\)\n回のステップ数しか掛からないアルゴリズムなので十分高速ですから、これをそのまま実装すればよいです。実装に関しては、C++ や Python では文字列の\n\\(i\\)\n文字目 (ただしこの\n\\(i\\)\nは\n\\(0\\)\n始まり) を\nS[i]\nで取得できることを知っていれば、for-loop を利用して実装することができます。\n実装例 (Python 3)\nいくつか別の解法もあるので簡単に紹介します。\n1 つは現れた文字を集合型\nset\nで管理する方法です。\nA\n,\nB\n,\nC\nすべてが現れているということは、既に現れた文字が 3 種類であることと同値です。よって、上述のアルゴリズムのうち、\n\\(i\\)\nが答えかどうかを判定する部分で「現れた文字集合のサイズが\n\\(3\\)\nであるか？」を判定すればよいです。\n実装例 (Python 3)\n別の方針もあります。\n\\(a, b, c\\)\nを次のように置きます。\nA\nが初めて登場する位置を\n\\(a\\)\n,\nB\nが初めて登場する位置を\n\\(b\\)\n,\nC\nが初めて登場する位置を\n\\(c\\)\nこのとき、実は答えは\n\\(\\max\\lbrace a,b,c\\rbrace\\)\nになります。よって\n\\(a, b, c\\)\nを計算して\n\\(\\max\\)\nを取れば答えを計算できます。\n\\(a,b,c\\)\nは C++ や Python の文字列型のメンバ関数\nfind\nを利用すれば容易に実装できます。\n実装例 (Python 3)",
+      "codes": [
+        "N = int(input())\nS = input()\n\nexist_a, exist_b, exist_c = False, False, False\n\nfor i in range(N):\n  if S[i] == 'A': exist_a = True\n  if S[i] == 'B': exist_b = True\n  if S[i] == 'C': exist_c = True\n  if exist_a and exist_b and exist_c:\n    print(i + 1)\n    break",
+        "N = int(input())\nS = input()\nA = set()\nfor i in range(N):\n  A.add(S[i])\n  if len(A) == 3:\n    print(i + 1)\n    break",
+        "N = int(input())\nS = input()\nprint(max(S.find(c)for c in \"ABC\") + 1)"
+      ],
+      "text_sha256": "0614ff12283632f5f7462f840920c7e297f0664106cc8b2354a202a502aaf1e4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc311/abc311_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

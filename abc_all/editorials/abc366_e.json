@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc366_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc366/editorial/10640",
+      "text": "本問題は\n尺取り法\nの練習問題です．以下の解説では，尺取り法を知っていることを前提とします．\n\\(f(x) = \\displaystyle \\sum_{i=1}^N |x-x_i|,\\,g(y) = \\displaystyle \\sum_{i=1}^N |y-y_i|\\)\nと定義します．すると，答えは\n\\(f(x) + g(y) \\leq D\\)\nを満たす\n\\((x,y)\\)\nの個数になります．\n座標の絶対値の最大値を\n\\(M\\)\nとします．\n\\(|x| > M + D\\)\nまたは\n\\(|y| > M + D\\)\nのとき，\n\\(f(x),g(y)>D\\)\nなので，\n\\(|x|,|y| \\leq M + D\\)\nを満たす\n\\((x,y)\\)\nのみ考えればよいです．\n答えを求めるには，以下の2つの問題が高速に解ければよいです．\n\\(|x|,|y| \\leq M+D\\)\nを満たす\n\\(x,y\\)\nに対して\n\\(f(x),g(y)\\)\nを求める\n\\(|x| \\leq M+D\\)\nを満たす\n\\(x\\)\nに対して，\n\\(f(x)+g(y) \\leq D\\)\nを満たす\n\\(y\\)\nの個数を求め，その総和を求める\n順に説明します．\n問題1の解法\n\\(f(x)\\)\nを求める方法を説明します．\n\\((x_1,x_2,\\dots,x_N)\\)\nをソートしておき，\n\\(x_1\\leq x_2 \\leq \\dots \\leq x_N\\)\nとします．\nまず，\n\\(x=-(M+D)\\)\nに対し，\n\\(f(x)\\)\nを愚直に求めます．\n次に，\n\\(f(x-1)\\)\nが求められているときに\n\\(f(x)\\)\nを求めます．差分を考えると，\n\\(f(x)\\)\nは「\n\\(f(x-1)\\)\n\\(+\\)\n(\n\\(x_i< x\\)\nを満たす\n\\(i\\)\nの個数)\n\\(-\\)\n(\n\\(x_i \\geq x\\)\nを満たす\n\\(i\\)\nの個数) 」と表されます．(\n\\(x_i < x\\)\nを満たす\n\\(i\\)\nの個数) は\n\\(x\\)\nについて単調増加であるため，尺取り法を用いて高速に求めることができます．\n問題2の解法\n2つの長さ\n\\(2(M+D)+1\\)\nの数列\n\\(F=(f(-(M+D)), f(-(M+D)+1),\\dots, f(M+D))\\)\nと\n\\(G=(g(-(M+D)), g(-(M+D)+1),\\dots, g(M+D))\\)\nを用意します．また，これらを昇順にソートします．\n\\(i=2(M+D)+1,2(M+D),\\dots,1\\)\nの順に，\n\\(F_i + G_j \\leq D\\)\nを満たす\n\\(j\\)\nの個数を求めます．\n\\(D-F_i\\)\nは単調増加であるため，不等式を満たす\n\\(j\\)\nの個数も単調増加であり，尺取り法を用いて高速に求めることができます．\n問題1, 2ともにソートがボトルネックとなり，時間計算量は\n\\(O(N \\log N + (M+D) \\log (M+D))\\)\nです．\n実装例 (Python)",
+      "codes": [
+        "N, D = map(int, input().split())\nx = [0] * N\ny = [0] * N\nfor i in range(N):\n    x[i], y[i] = map(int, input().split())\nM = 2 * 10**6\n\n\ndef calc(xs):\n    xsum = [0] * (2 * M + 1)\n    xs.sort()\n    i = 0\n    xsum[-M] = sum(xs) + N * M\n    for x in range(-M + 1, M + 1):\n        while i < N and xs[i] < x:\n            i += 1\n        xsum[x] = xsum[x - 1] + 2 * i - N\n    return xsum\n\n\nxsum = calc(x)\nysum = calc(y)\nxsum.sort()\nysum.sort()\nans = 0\nj = 0\nfor i in range(2 * M + 1)[::-1]:\n    while j < 2 * M + 1 and xsum[i] + ysum[j] <= D:\n        j += 1\n    ans += j\nprint(ans)"
+      ],
+      "text_sha256": "b42c32ebe54df8fae46d714977b2941b4e178fc9e1b2d849d096931eca1fedbd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc366/abc366_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

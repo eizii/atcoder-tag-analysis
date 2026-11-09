@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc274_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc274/editorial/5078",
+      "text": "この問題の原案はキーエンスから提供されました。\nこの問題は for 文をうまく使いこなせば解くことができます。この問題を解けなかった方は、この問題の解法を理解して for 文の使い方を理解しましょう。\nfor 文とは、ループ構造、すなわち同じ処理を所定の条件を満たすまで繰り返し行うアルゴリズムを記述するための構文です。\n特に\nfor(int i = 0; i < N; i++)\n(Python では\nfor i in range(N)\n) という文は for 文の中でも良く使われます。これを利用すると\n\\(i=0, 1, \\dots, N-1\\)\nすべての場合について同じ処理を適用することができるので、長さ\n\\(N\\)\nの配列に何らかの処理を行う場合に用いることができます。例えば\nABC272A\nのように「\n\\(A_0, A_1, \\dots, A_{N-1}\\)\nの総和を求める」という問題は for 文を利用して次のように解くことができます。\nfor 文の少し応用的な使い方として、 for 文を入れ子のように組み合わせて、 2 重ループや 3 重ループなどのループが入れ子になった構造のアルゴリズムを記述するというものが挙げられます。\nこの問題は\n\\(C_{i,j}\\)\nが\n#\nであるような整数\n\\(i\\)\nの個数を数える問題でした。これは変数\n\\(i, j\\)\nに対して 2 重ループを回せば計算することができて、これは以下のコードのように先の\nfor(int i = 0; i < N; i++)\nという形の for 文を入れ子状に組み合わせれば記述することができます。\n計算量は\n\\(\\mathrm{O}(N^2)\\)\nで、これは十分高速です。よってこの問題を解くことができました。\nfor\n文の入れ子を作るのをテーマとした問題は過去の B 問題でも何度か登場しています。この問題を解くのに苦労した方は次の過去問も解いてみるとよいでしょう。\n過去問その1\nその2\n実装例 (C++)",
+      "codes": [
+        "// A : 長さ N の int 型の配列\nint s = 0;\nfor(int i = 0; i < N; i++){\n  s += A[i];\n}",
+        "// C : サイズ H x W の char 型の 2 次元配列\nvector<int> ans(W);\nfor (int i = 0; i < H; i++) {\n  for (int j = 0; j < W; j++) {\n    if (C[i][j] == '#') ans[j]++;\n  }\n}",
+        "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nint main() {\n  int H, W;\n  cin >> H >> W;\n  vector<string> C(H);\n  for (int i = 0; i < H; i++) cin >> C[i];\n  vector<int> ans(W);\n  for (int i = 0; i < H; i++) {\n    for (int j = 0; j < W; j++) {\n      if (C[i][j] == '#') ans[j]++;\n    }\n  }\n  for (int j = 0; j < W; j++) cout << ans[j] << \" \\n\"[j == W - 1];\n}"
+      ],
+      "text_sha256": "77ea2a9b1a774a244a35335f3c5dcafc02e43ced647276985af60a5737b321be",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc274/abc274_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

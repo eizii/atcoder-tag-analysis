@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc200_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc200/editorial/1243",
+      "text": "西暦\n\\(N\\)\n年は\n\\(\\lfloor \\frac{N+99}{100} \\rfloor\\)\n世紀(ただし、\n\\(\\lfloor x \\rfloor\\)\nで\n\\(x\\)\nの小数点以下切り捨て) なので、これを出力すればよいです。\nPythonによる実装例:\n他にも、以下のような言い回しがあります。\n「\n\\(N\\)\n円が(最小で)\n\\(100\\)\n円玉\n\\(X\\)\n枚で払えるとき、西暦\n\\(N\\)\n年は\n\\(X\\)\n世紀」\nこれをもとに、\n\\(N\\)\nが\n\\(100\\)\nの倍数のときだけ場合分けして実装することも可能です。\nJavaによる実装例:",
+      "codes": [
+        "import math\n\nn = int(input())\nprint(math.floor((n+99)/100))",
+        "import java.util.Scanner;\n \npublic class Main{\n  public static void main(String[] args){\n    Scanner scanner = new Scanner(System.in);\n    int n=scanner.nextInt();\n    if(n%100==0){System.out.println(n/100);}\n    else{System.out.println((n/100)+1);}\n  }\n}"
+      ],
+      "text_sha256": "7a10961eed721576dda00563a455fa209fa84a032f0c820a9287bf73a2339acd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc200/abc200_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

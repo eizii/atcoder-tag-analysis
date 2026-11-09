@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc177_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc177/editorial/86",
+      "text": "高橋君が\n\\(T\\)\n分後に到着出来るかどうかを求めるには、高橋くんが何分で到着出来るかを求めてしまえば、あとは比較をするだけで解くことが出来ます。\n高橋君が到着するまでの時間は整数にはなりません。多くのプログラミング言語では、整数同士で割り算を行うと、小数部分が切り捨てられ、整数となります。今回の問題では、答えが切り捨てられててしまうと、例えば、D = 11, T = 5, S = 2などの場合において、正しい答えを得ることが出来ません。\nここで、double型などを使って小数として計算すると、\n今回の問題では\n誤差が出ないため、正しく解くことが出来ます。\n(誤差についての説明は、回答例の下で行います)\n回答例(C++)\n今回の問題で要求はされませんが、最終的に答えが整数になる場合でも、演算の途中で小数になってしまう場合には、答えが微妙にズレてしまう場合があります。\n例えば、1÷3×3を計算しようとした時に、1÷3の時点で0.3333となり、それを3倍しても0.9999のようにしかならない、というイメージです。\n（厳密な説明を知りたい場合は、「浮動小数点数」や「浮動小数点演算」で検索してみてください）\nこれを避けるために、普段から小数を使わない問題の解き方を覚えておくと、今後の問題が解きやすくなるかも知れません。\n今回の問題では、\n高橋君が何分で到着出来るかではなく、高橋くんが\n\\(T\\)\n分で何メートル移動出来るか\nを求めてあげることで、割り算ではなく掛け算の演算となり、整数演算のみで問題を解くことが出来ます。移動できる距離がDメートル以上であれば、高橋君は待ち合わせに間に合うことが出来ます。\n回答例(C++)",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n\t//入力を受け取る\n\tint D, T, S;\n\tcin >> D >> T >> S;\n\n\t//高橋君の移動時間を計算する\n\tdouble time = (double)D / S;\n\n\t//Tとtimeの大小関係に応じて出力をする\n\tif (T >= time) {\n\t\tcout << \"Yes\" << endl;\n\t}\n\telse {\n\t\tcout << \"No\" << endl;\n\t}\n}",
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n\t//入力を受け取る\n\tint D, T, S;\n\tcin >> D >> T >> S;\n\n\t//高橋君の移動時間を計算する\n\tint dist = S * T;\n\n\t//Dとdistの大小関係に応じて出力をする\n\tif (dist >= D) {\n\t\tcout << \"Yes\" << endl;\n\t}\n\telse {\n\t\tcout << \"No\" << endl;\n\t}\n}"
+      ],
+      "text_sha256": "43a9a902b2e5a44860be7688738d5127db882a39c5dc18ac412936113ee8db81",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc177/abc177_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc305_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc305/editorial/6539",
+      "text": "まず、問題文に登場する「警備されている頂点」の条件、\n頂点\n\\(v\\)\nと頂点\n\\(p_i\\)\n​ の距離が\n\\(h_i\\)\n以下であるような警備員\n\\(i\\)\nが少なくとも 1 人存在する。\nを理解しやすい設定に言い換えてみましょう。すると、次のようになります。\n警備員は今いる頂点から隣接する頂点に体力を\n\\(1\\)\n消費して移動することができるとする。また、警備員は体力が\n\\(0\\)\nになると動けなくなる。\nこのとき、「警備されている頂点」とは、\n\\(v\\)\nにたどり着ける警備員が存在するような頂点のことを言う。\nこのように問題を適切に言い換えると見通しが良くなります。\n\\(d_i\\)\nを「頂点\n\\(i\\)\nに辿り着いた警備員の体力の最大値(ただし誰も警備員がたどり着けない場合は\n\\(-1\\)\n)」と定義します。\n\\(d_1, d_2, \\dots, d_N\\)\nを全て計算できればこの問題を解くことができます。\n\\(d_1, d_2, \\dots, d_N\\)\nは実は以下のアルゴリズムで計算できます。\n\\(x_1, x_2, \\dots, x_N\\)\nを\n\\(d_i\\)\nの暫定値を保存する配列とする。\n\\(x_i\\)\nは\n\\(p_i\\)\nに警備員がいる場合はその警備員の体力で、そうでない場合は\n\\(-1\\)\nで初期化されている。\n次の手順を\n\\(N\\)\n回行い、\n\\(d_{i}\\)\nの値を 1 頂点ずつ確定させていく。\nまだ\n\\(d_i\\)\nが確定していない頂点のうち、\n\\(x_i\\)\nの値が最も大きい頂点を\n\\(v\\)\nとする。\nまず、\n\\(d_v = x_v\\)\nとして、\n\\(d_v\\)\nの値を確定済みにする。\nそして、\n\\(v\\)\nに隣接する頂点\n\\(u\\)\nについて以下の操作を行う。\n\\(u\\)\nが\n\\(d_u\\)\nが確定していない頂点である場合、\n\\(x_u\\)\nを\n\\(\\max(x_u, x_v - 1)\\)\nに置き換える。\n正当性は帰納法を利用すれば証明できます。(詳細は略しますが、ダイクストラ法の正当性の証明と同様の方法で証明することができるので、わからない方はまずダイクストラ法を勉強してみましょう。)\nこのアルゴリズムは、ナイーブな実装をすると\n\\(x_i\\)\n最大の要素を発見するのに\n\\(\\mathrm{O}(N)\\)\nかかるので\n\\(\\mathrm{O}(N^2)\\)\nの時間計算量になってしまいます。そこで、\n\\(x_i\\)\n最大の要素の管理にヒープやセグメント木などのデータ構造を利用することで、計算量を\n\\(\\mathrm{O}((N + M) \\log (N + M))\\)\nに落とすことができます。これは AC するのに十分高速です。 (グラフの辺重みが全て 1 なのを利用してアルゴリズムに工夫を加えることで計算量を\n\\(\\mathrm{O}(N + M)\\)\nに落とすこともできます。)\nところで、この問題は実は最短路問題の正負を反転させた構造を持っています。また、上記のアルゴリズムはダイクストラ法の正負を反転させたようなアルゴリズムになっています。このような事実を利用して、適切にグラフを構築して最短路問題に帰着させるという別解も考えられます。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <queue>\n#include <utility>\n#include <vector>\nusing namespace std;\n\nint main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\n  int N, M, K;\n  cin >> N >> M >> K;\n  vector<vector<int>> g(N);\n  for (int i = 0; i < M; i++) {\n    int a, b;\n    cin >> a >> b, --a, --b;\n    g[a].push_back(b), g[b].push_back(a);\n  }\n  vector<int> p(K), h(K);\n  for (int i = 0; i < K; i++) cin >> p[i] >> h[i], p[i]--;\n\n  vector<int> d(N, -1);\n  priority_queue<pair<int, int>> Q;\n\n  auto add = [&](int v, int x) {\n    if (d[v] < x) Q.emplace(d[v] = x, v);\n  };\n  for (int i = 0; i < K; i++) add(p[i], h[i]);\n  while (Q.size()) {\n    auto [x, v] = Q.top();\n    Q.pop();\n    if (d[v] != x) continue;\n    for (auto& u : g[v]) add(u, d[v] - 1);\n  }\n  vector<int> ans;\n  for (int i = 0; i < N; i++)\n    if (d[i] >= 0) ans.push_back(i + 1);\n\n  cout << ans.size() << \"\\n\";\n  for (int i = 0; i < (int)ans.size(); i++)\n    cout << ans[i] << \" \\n\"[i + 1 == (int)ans.size()];\n}"
+      ],
+      "text_sha256": "4c0082bf6171f35d783c290c8e82fd2c65e01a22caf2847121414153c63aa532",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc305/abc305_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc465_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc465/editorial/22565",
+      "text": "解法 1\n\\(\\displaystyle B \\times \\frac{2}{3}\\)\nの値を浮動小数点数として求め，\n\\(A\\)\nと大小比較すれば判定できます．\n実装例 (Python):\n実装例 (C++):\n解法 2\n\\(\\displaystyle A > B \\times \\frac{2}{3}\\)\nの両辺を\n\\(3\\)\n倍して\n\\(A \\times 3 > B \\times 2\\)\nと同値変形することで，浮動小数点数に頼ることなく整数のみを使って判定できます．\n実装例 (Python):\n実装例 (C++):\n余談\n\\(A\\)\nは整数なので，\n\\(\\displaystyle A > B \\times \\frac{2}{3}\\)\nは\n\\(\\displaystyle A > \\lfloor \\frac{2B}{3} \\rfloor\\)\nと同値です．そのため，問題文中の式をそのまま切り捨て除算で実装しても正答になります．\n\\(\\displaystyle A = B \\times \\frac{2}{3}\\)\nは満たさないが，\n\\(\\displaystyle A = \\lfloor \\frac{2B}{3} \\rfloor\\)\nは満たすような\n\\(A,B\\)\nの一例を挙げてください．\n\\(\\displaystyle A < B \\times \\frac{2}{3}\\)\nは満たすが，\n\\(\\displaystyle A < \\lfloor \\frac{2B}{3} \\rfloor\\)\nは満たさないような\n\\(A,B\\)\nの一例を挙げてください．\n上の\n\\(2\\)\nつについて，\n\\(1\\)\n番目の式と\n\\(2\\)\n番目の式を逆にしても存在しますか？",
+      "codes": [
+        "a, b = map(int, input().split())\n\nif (a > b*2/3):\n  print(\"Yes\")\nelse:\n  print(\"No\")",
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\n\nint main (void) {\n\tint a, b;\n\tcin >> a >> b;\n\n\tif ((double)a > (double)b * 2 / 3) {\n\t\tcout << \"Yes\" << \"\\n\";\n\t} else {\n\t\tcout << \"No\" << \"\\n\";\n\t}\n\n\treturn 0;\n}",
+        "a, b = map(int, input().split())\n\nif (a*3 > b*2):\n  print(\"Yes\")\nelse:\n  print(\"No\")",
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\n\nint main (void) {\n\tint a, b;\n\tcin >> a >> b;\n\n\tif (3 * a > 2 * b) {\n\t\tcout << \"Yes\" << \"\\n\";\n\t} else {\n\t\tcout << \"No\" << \"\\n\";\n\t}\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "ed5fcae33289fe2b914a7b48835638056d1231d7820b0e5d00867e45e9b6bb3b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc465/abc465_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

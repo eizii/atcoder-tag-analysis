@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc404_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc404/editorial/12866",
+      "text": "まず、豆の移動は「現在最も後ろにある豆を動かす」を繰り返すものとして構いません。\n理由: 前にある豆を先に動かしてから後ろにある豆を動かすとき、これらの操作を逆にしても損しません。\nまた、豆を動かす際、複数の茶碗に分けて入れる必要もありません。\n理由: 豆を分けて入れる操作をひとつ選び、豆をどこかひとつにまとめて入れても損しません。\nこのもとで本問題を考察しましょう。\nまず、一番前にある豆を茶碗\n\\(0\\)\nに落とすまでに何手かかるかを考えます。\n豆を移動するにあたって、次の性質が成り立ちます。\nある豆を連続して移動させることを考える。\n茶碗\n\\(r\\)\nから始めて\n\\(k\\)\n手連続で豆を移動させると、移動後に豆が存在しうる茶碗は区間を成す。\n厳密には、ある\n\\(l\\)\nが存在して、移動後に豆が存在しうるのは茶碗\n\\(l,l+1,\\dots,r\\)\nとなる。\n一番前にある豆が茶碗\n\\(x\\)\nにあるとき、この豆を茶碗\n\\(0\\)\nに移動させるための最短手数は次のように求められます。\n最初、豆が存在しうる茶碗の区間は\n\\([x,x]\\)\nである。\n\\(k\\)\n手で豆が存在しうる茶碗の区間が\n\\([l,r]\\)\nのとき、\n\\(k+1\\)\n手で豆が存在しうる茶碗の区間は\n\\([{\\rm min}_{i=l}^{r} (i-C_i) , r]\\)\nとなる。\nこれを、豆が茶碗\n\\(0\\)\nに到達しうる状態になるまで続ける。\nこれで、一番前にある豆に必要な移動回数は分かりました。\nでは、一番前にある豆以外に必要な移動回数はどう考えれば良いでしょうか?\nこの場合、豆を「ひとつ前の豆が存在する茶碗」まで到達させればよいです。というのも、その豆を動かしてひとつ前の豆が存在する茶碗まで到達させれば、そこにある豆とまとめてひとつの豆だと思って動かせばその豆のことを忘れることができます。\n移動回数は高々\n\\(N-1\\)\n回 (一番後ろの茶碗から豆を除去することを繰り返せば達成可能です) であることに注意すると答えは高々\n\\(N-1\\)\nとなり、愚直にシミュレーションしても時間計算量\n\\(O(N^2)\\)\nでこの問題に正解できます。\nsegment tree 等で高速化すれば時間計算量\n\\(O(N \\log N)\\)\nで解けます。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int n;\n  cin >> n;\n  vector<int> c(n),a(n);\n  for(int i=1;i<n;i++){cin >> c[i];}\n  for(int i=1;i<n;i++){cin >> a[i];}\n  int res=0;\n  int pre=0;\n  for(int i=1;i<n;i++){\n    if(a[i]){\n      int l=i,r=i;\n      while(pre<l){\n        res++;\n        int nl=l;\n        for(int j=l;j<=r;j++){\n          nl=min(nl,j-c[j]);\n        }\n        l=nl;\n      }\n      pre=i;\n    }\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "24eddc13950cea1c3ef3e8da25b0a15fdbe009f6f15f4ca4744029a5fb0ce0d4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc404/abc404_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc404/editorial/12871",
+      "text": "豆を1回ずつ動かすのではなく、番号の大きいほうから小さいほうへと拾い集めながら動かしていく問題ととらえると、この問題は次のように言い換えることができます。\nあなたは、\n\\(N-1\\)\nマス目からスタートして、\n\\(N - 1, N - 2 \\dots, 1, 0\\)\nと順番に移動していく。\nあなたは\n体力\nと呼ばれるパラメータを持つ。体力の初期値は\n\\(N-1\\)\nであり、マスを移動するたびに\n\\(1\\)\nずつ減っていく。\nまた、マスにいるときに行える\n操作\nがある。マス\n\\(i\\)\nで操作を行うと、あなたの体力は\n\\(C_i\\)\nへ変化する。\n\\(A_i = 1\\)\nである番号のマスでは必ず操作を行う必要があり、\n\\(A_i = 0\\)\nであるマスにおいては操作を行うかどうかは任意である。\n移動の過程において体力が\n\\(0\\)\n未満とならないように行動したときの操作回数の最小値を求めよ。\n言い換え後の問題は、\n\\(\\mathrm{dp[i][j]} =\\)\n(現在マス\n\\(i\\)\nにいて体力が\n\\(j\\)\nであるときの操作回数の最小値) という DPを行うことによって、時間計算量および空間計算量\n\\(O(N^2)\\)\nで解くことができます。",
+      "codes": [],
+      "text_sha256": "107cd955e1811c889e9584ff7d525eed61fef6955482f725010ef693a6fe26b5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc404/abc404_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc404/editorial/12870",
+      "text": "\\(L_i := i - C_i\\)\nと定義します．また，茶碗\n\\(0\\)\nには豆が入っているものとします．\n公式解説の考察より，以下の操作を繰り返せば良いです．\n最も後ろにある豆の入った茶碗を茶碗\n\\(i\\)\nとする．茶碗\n\\(i\\)\nに入った豆を以下の茶碗に移動させる．\n茶碗\n\\(L_i, L_i + 1, \\dots, i-1\\)\nの中に豆の入った茶碗があれば，そのうち最も後ろにあるものに豆を移動させる．\n茶碗\n\\(L_i, L_i + 1, \\dots, i-1\\)\nの中に豆の入った茶碗がなければ，そのうち\n\\(L\\)\nが最も小さい茶碗に豆を移動させる．\nこれを実装することで\n\\(O(N)\\)\n時間で解くことができます．\n実装例 (Python)",
+      "codes": [
+        "N = int(input())\nC = [0] + list(map(int, input().split()))\nA = [1] + list(map(int, input().split()))\nL = [i - C[i] for i in range(N)]\n\nans = 0\nfor i in range(N - 1, 0, -1):\n    # 最も後ろにある豆の入った茶碗を見つける\n    if A[i] == 0:\n        continue\n    # この豆を以下の場所に移動させる\n    ans += 1\n    l = L[i]\n    # 茶碗 [l:i] に豆の入った茶碗があれば，そのうち最も後ろの茶碗に移動\n    if any(A[j] for j in range(i - 1, l - 1, -1)):\n        continue\n    # なければ，茶碗 argmin(L[l:i]) に移動\n    mn = 1 << 60\n    argmn = -1\n    for j in range(i - 1, l - 1, -1):\n        if mn > L[j]:\n            mn = L[j]\n            argmn = j\n    A[argmn] = 1\n\nprint(ans)"
+      ],
+      "text_sha256": "4ac542d520b8140e390f061afa033ed245074caa3142211c4d1af48575a9ff18",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc404/abc404_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

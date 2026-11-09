@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc213_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc213/editorial/2365",
+      "text": "\\(A_i\\)\nを降順にソートして\n\\(2\\)\n番目の値がもともとあった位置が答えです。ソートした後に元の位置を得るには、\n\\(A_i\\)\nをソートする代わりに\n\\((A_i,i)\\)\nというタプルをソートすればよいです。\n実装例(C++)\n実装例(Python)\n別解として、前から順に大きい方の値2つとその位置を保持しておくことで、ソートすることなく\n\\(O(N)\\)\nで解くこともできます。(挿入ソートの先頭2つだけを持っておくイメージです)\n実装例(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n;\n\tcin >> n;\n\tvector<pair<int,int>>v;\n\tfor(int i=0;i<n;i++){\n\t\tint a;\n\t\tcin >> a;\n\t\tv.push_back(make_pair(a,i+1));\n\t}\n\tsort(v.begin(),v.end(),greater<pair<int,int>>());\n\t\n\tcout << v[1].second << endl;\n}",
+        "N=int(input())\nA=list(map(int,input().split()))\nv=[]\n\nfor i in range(N):\n\tv.append((A[i],i+1))\n\nv.sort()\nv.reverse()\nprint(v[1][1])",
+        "N=int(input())\nA=list(map(int,input().split()))\n\nM1,M2=(0,0),(0,0)\nfor i in range(N):\n\tX=(A[i],i+1)\n\tif X>M1:\n\t\tM2=M1\n\t\tM1=X\n\telif X>M2:\n\t\tM2=X\n\nprint(M2[1])"
+      ],
+      "text_sha256": "f4bfd092d8fbc320994f9568d39fa17644ee504370eea1e38817b80badcb818a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc213/abc213_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

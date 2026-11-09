@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc204_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc204/editorial/1988",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「\nWelcome to AtCoder\n」をお試しください。言語ごとに解答例が掲載されています。\nこの問題では、入力で与えられる\n\\(x\\)\nと\n\\(y\\)\nに応じて出力すべき値が変わります。入力としてありえるものは\n\\(9\\)\n通りなので、全てのパターンを列挙してif文で場合分けして解く事ができます。\n実装例(C)\n「\n\\(x\\)\nと\n\\(y\\)\nが等しいときは\n\\(x\\)\nを出力する」「\n\\(x\\)\nと\n\\(y\\)\nが異なるときは\n\\(x\\)\nでも\n\\(y\\)\nでもない値を出力する」と考えることで、場合分けを減らすこともできます。\n実装例2(C)",
+      "codes": [
+        "int main(){\n  int x, y;\n  scanf(\"%d %d\", &x, &y);\n  if(x==0 && y==0) puts(\"0\");\n  if(x==0 && y==1) puts(\"2\");\n  if(x==0 && y==2) puts(\"1\");\n  if(x==1 && y==0) puts(\"2\");\n  if(x==1 && y==1) puts(\"1\");\n  if(x==1 && y==2) puts(\"0\");\n  if(x==2 && y==0) puts(\"1\");\n  if(x==2 && y==1) puts(\"0\");\n  if(x==2 && y==2) puts(\"2\");\n}",
+        "int main(){\n  int x, y;\n  scanf(\"%d %d\", &x, &y);\n  if(x==y) printf(\"%d\", x);\n  else printf(\"%d\", 3-x-y);\n}"
+      ],
+      "text_sha256": "b2511531cc564ce77642471cec9018ecd5efbc3f70a5d0a67a923114a28b5bb9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc204/abc204_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc204/editorial/2027",
+      "text": "ある\n\\(3\\)\nつの手\n\\(x,y,z\\)\nがあいこになる必要十分条件は、\n\\(x+y+z \\equiv 0 \\bmod 3\\)\nであることです (樹形図などで全ての手の組み合わせを書くとわかりやすいでしょう)。\nよって\n\\((6-x-y)\\%3\\)\nと出力することで、より楽に AC することができます。\n実装例 (Python)",
+      "codes": [
+        "x,y = map(int,input().split())\nprint((6-x-y)%3)"
+      ],
+      "text_sha256": "07b3e096d4b28a1601ba9c36a814ec596901f278afd22a0b62eb393119568aad",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc204/abc204_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

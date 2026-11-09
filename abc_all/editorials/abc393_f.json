@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc393_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc393/editorial/12252",
+      "text": "LIS（最長単調増加部分列）の長さを求める際に典型的に用いられる以下の動的計画法を考えます。（この動的計画法の遷移やその正当性に関する解説はここでは省略します。）\n\\(i=1,2\\dots,N\\)\nの順に\n\\(A_i\\)\nを見てゆき、以下の DP テーブルを in-place に更新する。\n\\(\\mathrm{dp}_j\\ (1\\leq j\\leq N)=\\)\n（今までに見た要素の中から取り出せる長さ\n\\(j\\)\nの単調増加部分列における、部分列の末尾の要素の最小値。ただし、そのような部分列が存在しない場合は\n\\(\\infty\\)\n）\n上記の動的計画法の定義を考えれば、クエリ\n\\(k\\)\nの答えは以下の値に等しいことがわかります。\n\\(i=R_k\\)\nまで見た段階での DP テーブルにおいて、\n\\(\\mathrm{dp}_j \\leq X_k\\)\nを満たす最大の\n\\(j\\)\nよって、上記の動的計画法を行いながら、その過程の各\n\\(i\\)\nにおいて、\n\\(i=R_k\\)\nを満たす全てのクエリ\n\\(k\\)\nの答えをそれぞれ二分探索で求めればよいです。\n全体の計算量は\n\\(O((N+Q)\\log N)\\)\nです。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nconst int inf = 1e9 + 100;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, q;\n    cin >> n >> q;\n    vector<int> a(n);\n    for (int &i: a) cin >> i;\n    vector<vector<pair<int, int>>> qs(n);\n    for (int i = 0; i < q; i++) {\n        int r, x;\n        cin >> r >> x;\n        qs[--r].emplace_back(i, x);\n    }\n    vector<int> ans(q);\n    vector<int> dp(n, inf);\n    for (int i = 0; i < n; i++) {\n        auto it = lower_bound(dp.begin(), dp.end(), a[i]);\n        *it = a[i];\n        for (auto [id, x]: qs[i]) {\n            ans[id] = upper_bound(dp.begin(), dp.end(), x) - dp.begin();\n        }\n    }\n    for (int i = 0; i < q; i++) {\n        cout << ans[i] << '\\n';\n    }\n}"
+      ],
+      "text_sha256": "8a036d36257cb94baf6888a8980b32a4422372fcf49e988ff8ca23141576aa7d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc393/abc393_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

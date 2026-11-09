@@ -1,0 +1,720 @@
+﻿problem_id,reason,url,problem_ids,context,note,excluded_chars
+abc031_a,shared_unsegmented_editorial,https://img.atcoder.jp/abc031/editorial.pdf,"['abc031_a', 'abc031_c']","数列ゲーム
+
+概要
+
+• 高橋君と青木君が数列で遊びます。
+• 最初に高橋君が要素の1 つに丸を付けて、その後青木君が別の要
+ 素1 つに丸を付けます。
+• 2 つの丸に囲まれた範囲(両端含む)を取り出し、左から交互に高橋
+ 君、青木君の得点に加算します。
+• 青木君が自分の得点が最大となるように丸をつける(複数あるならそ
+ れらのうち最も左に丸をつける)とき、高橋君が得られる最大得点を
+ 求めてください。
+• 2 ≦𝑁≦50
+
+青",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc123_d,references_or_related_problem_section,,,"参考文献
+[2] を参考にしてください。
+
+
+⚫
+数列 𝐴, 𝐵, 𝐶 (各形のキャンドルが付いたケーキ) を降順ソートする。そして、𝐴𝑖 が 𝑖 番目
+に美味しい ‘1’ の形のキャンドルが付いたケーキとなるようにする。𝐵𝑗, 𝐶𝑘 に関しても同様と
+する。
+⚫
+Priority Queue (優先度付きキュー) である 𝑄 を定義する。
+⚫
+𝑄 に (𝐴1 + 𝐵1 + 𝐶1, 1, 1, 1 ) を追加する。なお、𝐴1 + 𝐵1 ",,1373
+abc222_h,worked_example_not_target_problem,https://atcoder.jp/contests/abc222/editorial/2742,,"例題：カタラン数 カタラン数 \(1,1,2,5,14,\dots\) の一般項を反転公式を使って求めてみましょう。 カタラン数 \(c_i\) の母関数を \(C(x)\) とします。 \(F(x)=C(x)-1\) とおくと \[F(x) = x(F(x) + 1)^2\] という関係式が成り立つので ( 漸化式を立てると従います ) 、 \[G(x) = \frac{x}{(x+1)^2}\] とおくと \(G(F(x)) = x",,542
+abc222_h,references_or_related_problem_section,https://atcoder.jp/contests/abc222/editorial/2742,,"関連記事 形式的冪級数を学ぶ上でおすすめの文章やこの問題に関連する記事をいくつか紹介します。 maspy, 形式的べき級数解説 日本人が形式的冪級数を学びたい場合、真っ先に読むべきホームページです。形式的冪級数を平易な書き方で説明していて非常に読みやすく、練習問題も多く載っていて初心者の方が勉強しやすいつくりになっています。 37zigen, 指数型母関数入門 この解説では触れませんでしたが、母関数には通常型母関数のほかに 指数型母関数",,1076
+abc224_h,references_or_related_problem_section,https://atcoder.jp/contests/abc224/editorial/2812,,関連記事 双対性についてより深く学びたい方は こちらのスライド をお読みください。,,41
+abc235_h,references_or_related_problem_section,https://atcoder.jp/contests/abc235/editorial/3250,,参考文献： 木と計算量 前編 〜O(N^2)とO(NK)の木DP〜 ( snuke さんのブログ),,49
+abc256_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc256/editorial/4159,"['abc256_a', 'abc256_b', 'abc256_c', 'abc256_d', 'abc256_e']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - 2^N
+Java/Kotlinでは、
+\(2^N\)
+を表すために左シフトを用いることができます。
+また、
+\(a^b\)
+を表すために
+Math.pow
+を使う手もあります。
+ただし、
+Math.pow
+は実数を対象とするものなので、整数で扱う際には自作しておく方が無難です。
+今回の制約下では精度が足りてい",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc256_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc256/editorial/4159,"['abc256_a', 'abc256_b', 'abc256_c', 'abc256_d', 'abc256_e']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - 2^N
+Java/Kotlinでは、
+\(2^N\)
+を表すために左シフトを用いることができます。
+また、
+\(a^b\)
+を表すために
+Math.pow
+を使う手もあります。
+ただし、
+Math.pow
+は実数を対象とするものなので、整数で扱う際には自作しておく方が無難です。
+今回の制約下では精度が足りてい",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc256_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc256/editorial/4159,"['abc256_a', 'abc256_b', 'abc256_c', 'abc256_d', 'abc256_e']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - 2^N
+Java/Kotlinでは、
+\(2^N\)
+を表すために左シフトを用いることができます。
+また、
+\(a^b\)
+を表すために
+Math.pow
+を使う手もあります。
+ただし、
+Math.pow
+は実数を対象とするものなので、整数で扱う際には自作しておく方が無難です。
+今回の制約下では精度が足りてい",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc256_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc256/editorial/4159,"['abc256_a', 'abc256_b', 'abc256_c', 'abc256_d', 'abc256_e']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - 2^N
+Java/Kotlinでは、
+\(2^N\)
+を表すために左シフトを用いることができます。
+また、
+\(a^b\)
+を表すために
+Math.pow
+を使う手もあります。
+ただし、
+Math.pow
+は実数を対象とするものなので、整数で扱う際には自作しておく方が無難です。
+今回の制約下では精度が足りてい",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc256_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc256/editorial/4159,"['abc256_a', 'abc256_b', 'abc256_c', 'abc256_d', 'abc256_e']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - 2^N
+Java/Kotlinでは、
+\(2^N\)
+を表すために左シフトを用いることができます。
+また、
+\(a^b\)
+を表すために
+Math.pow
+を使う手もあります。
+ただし、
+Math.pow
+は実数を対象とするものなので、整数で扱う際には自作しておく方が無難です。
+今回の制約下では精度が足りてい",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc257_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc257/editorial/4191,"['abc257_a', 'abc257_b', 'abc257_c', 'abc257_d', 'abc257_e', 'abc257_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A to Z String 2
+文字列を実際に構築して出力する場合、実装例は以下のようになります。
+ですが、
+\(1\)
+文字を出力するために文字列全体を構築するのは少々筋が悪いように感じます。
+\(X\)
+番目の文字は、
+\(\lceil \frac{X}{N} \rceil\)
+番目のアルファベットと表す",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc257_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc257/editorial/4191,"['abc257_a', 'abc257_b', 'abc257_c', 'abc257_d', 'abc257_e', 'abc257_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A to Z String 2
+文字列を実際に構築して出力する場合、実装例は以下のようになります。
+ですが、
+\(1\)
+文字を出力するために文字列全体を構築するのは少々筋が悪いように感じます。
+\(X\)
+番目の文字は、
+\(\lceil \frac{X}{N} \rceil\)
+番目のアルファベットと表す",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc257_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc257/editorial/4191,"['abc257_a', 'abc257_b', 'abc257_c', 'abc257_d', 'abc257_e', 'abc257_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A to Z String 2
+文字列を実際に構築して出力する場合、実装例は以下のようになります。
+ですが、
+\(1\)
+文字を出力するために文字列全体を構築するのは少々筋が悪いように感じます。
+\(X\)
+番目の文字は、
+\(\lceil \frac{X}{N} \rceil\)
+番目のアルファベットと表す",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc257_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc257/editorial/4191,"['abc257_a', 'abc257_b', 'abc257_c', 'abc257_d', 'abc257_e', 'abc257_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A to Z String 2
+文字列を実際に構築して出力する場合、実装例は以下のようになります。
+ですが、
+\(1\)
+文字を出力するために文字列全体を構築するのは少々筋が悪いように感じます。
+\(X\)
+番目の文字は、
+\(\lceil \frac{X}{N} \rceil\)
+番目のアルファベットと表す",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc257_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc257/editorial/4191,"['abc257_a', 'abc257_b', 'abc257_c', 'abc257_d', 'abc257_e', 'abc257_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A to Z String 2
+文字列を実際に構築して出力する場合、実装例は以下のようになります。
+ですが、
+\(1\)
+文字を出力するために文字列全体を構築するのは少々筋が悪いように感じます。
+\(X\)
+番目の文字は、
+\(\lceil \frac{X}{N} \rceil\)
+番目のアルファベットと表す",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc257_f,shared_unsegmented_editorial,https://atcoder.jp/contests/abc257/editorial/4191,"['abc257_a', 'abc257_b', 'abc257_c', 'abc257_d', 'abc257_e', 'abc257_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A to Z String 2
+文字列を実際に構築して出力する場合、実装例は以下のようになります。
+ですが、
+\(1\)
+文字を出力するために文字列全体を構築するのは少々筋が悪いように感じます。
+\(X\)
+番目の文字は、
+\(\lceil \frac{X}{N} \rceil\)
+番目のアルファベットと表す",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc258_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc258/editorial/4257,"['abc258_a', 'abc258_b', 'abc258_c', 'abc258_d', 'abc258_e', 'abc258_g']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - When?
+今が0時0分から
+\(X\)
+分経過していることが分かっているとき、時刻は
+\(\lfloor \frac{X}{60} \rfloor\)
+時
+\((X \bmod 60)\)
+分です。
+従って、これを出力すれば良いです。
+B問題 - Number Box
+高橋君は、最初のマスと移動方向を決める",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc258_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc258/editorial/4257,"['abc258_a', 'abc258_b', 'abc258_c', 'abc258_d', 'abc258_e', 'abc258_g']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - When?
+今が0時0分から
+\(X\)
+分経過していることが分かっているとき、時刻は
+\(\lfloor \frac{X}{60} \rfloor\)
+時
+\((X \bmod 60)\)
+分です。
+従って、これを出力すれば良いです。
+B問題 - Number Box
+高橋君は、最初のマスと移動方向を決める",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc258_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc258/editorial/4257,"['abc258_a', 'abc258_b', 'abc258_c', 'abc258_d', 'abc258_e', 'abc258_g']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - When?
+今が0時0分から
+\(X\)
+分経過していることが分かっているとき、時刻は
+\(\lfloor \frac{X}{60} \rfloor\)
+時
+\((X \bmod 60)\)
+分です。
+従って、これを出力すれば良いです。
+B問題 - Number Box
+高橋君は、最初のマスと移動方向を決める",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc258_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc258/editorial/4257,"['abc258_a', 'abc258_b', 'abc258_c', 'abc258_d', 'abc258_e', 'abc258_g']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - When?
+今が0時0分から
+\(X\)
+分経過していることが分かっているとき、時刻は
+\(\lfloor \frac{X}{60} \rfloor\)
+時
+\((X \bmod 60)\)
+分です。
+従って、これを出力すれば良いです。
+B問題 - Number Box
+高橋君は、最初のマスと移動方向を決める",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc258_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc258/editorial/4257,"['abc258_a', 'abc258_b', 'abc258_c', 'abc258_d', 'abc258_e', 'abc258_g']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - When?
+今が0時0分から
+\(X\)
+分経過していることが分かっているとき、時刻は
+\(\lfloor \frac{X}{60} \rfloor\)
+時
+\((X \bmod 60)\)
+分です。
+従って、これを出力すれば良いです。
+B問題 - Number Box
+高橋君は、最初のマスと移動方向を決める",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc258_g,shared_unsegmented_editorial,https://atcoder.jp/contests/abc258/editorial/4257,"['abc258_a', 'abc258_b', 'abc258_c', 'abc258_d', 'abc258_e', 'abc258_g']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - When?
+今が0時0分から
+\(X\)
+分経過していることが分かっているとき、時刻は
+\(\lfloor \frac{X}{60} \rfloor\)
+時
+\((X \bmod 60)\)
+分です。
+従って、これを出力すれば良いです。
+B問題 - Number Box
+高橋君は、最初のマスと移動方向を決める",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc259_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc259/editorial/4433,"['abc259_a', 'abc259_b', 'abc259_c', 'abc259_d', 'abc259_e', 'abc259_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Growth Record
+このように変数が幾つも出てくる問題では、図を書いてみることが有効です。
+例えば私の場合、格子状に線が入ったホワイトボードと8色のホワイトボードマーカーを常に用意しており、これに図を書いて考察することが多いです。
+さて、実際に図を書いてみると以下のような形になります。
+後は、この図か",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc259_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc259/editorial/4433,"['abc259_a', 'abc259_b', 'abc259_c', 'abc259_d', 'abc259_e', 'abc259_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Growth Record
+このように変数が幾つも出てくる問題では、図を書いてみることが有効です。
+例えば私の場合、格子状に線が入ったホワイトボードと8色のホワイトボードマーカーを常に用意しており、これに図を書いて考察することが多いです。
+さて、実際に図を書いてみると以下のような形になります。
+後は、この図か",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc259_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc259/editorial/4433,"['abc259_a', 'abc259_b', 'abc259_c', 'abc259_d', 'abc259_e', 'abc259_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Growth Record
+このように変数が幾つも出てくる問題では、図を書いてみることが有効です。
+例えば私の場合、格子状に線が入ったホワイトボードと8色のホワイトボードマーカーを常に用意しており、これに図を書いて考察することが多いです。
+さて、実際に図を書いてみると以下のような形になります。
+後は、この図か",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc259_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc259/editorial/4433,"['abc259_a', 'abc259_b', 'abc259_c', 'abc259_d', 'abc259_e', 'abc259_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Growth Record
+このように変数が幾つも出てくる問題では、図を書いてみることが有効です。
+例えば私の場合、格子状に線が入ったホワイトボードと8色のホワイトボードマーカーを常に用意しており、これに図を書いて考察することが多いです。
+さて、実際に図を書いてみると以下のような形になります。
+後は、この図か",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc259_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc259/editorial/4433,"['abc259_a', 'abc259_b', 'abc259_c', 'abc259_d', 'abc259_e', 'abc259_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Growth Record
+このように変数が幾つも出てくる問題では、図を書いてみることが有効です。
+例えば私の場合、格子状に線が入ったホワイトボードと8色のホワイトボードマーカーを常に用意しており、これに図を書いて考察することが多いです。
+さて、実際に図を書いてみると以下のような形になります。
+後は、この図か",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc259_f,shared_unsegmented_editorial,https://atcoder.jp/contests/abc259/editorial/4433,"['abc259_a', 'abc259_b', 'abc259_c', 'abc259_d', 'abc259_e', 'abc259_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Growth Record
+このように変数が幾つも出てくる問題では、図を書いてみることが有効です。
+例えば私の場合、格子状に線が入ったホワイトボードと8色のホワイトボードマーカーを常に用意しており、これに図を書いて考察することが多いです。
+さて、実際に図を書いてみると以下のような形になります。
+後は、この図か",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc260_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc260/editorial/4488,"['abc260_a', 'abc260_b', 'abc260_c', 'abc260_d', 'abc260_e', 'abc260_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A Unique Letter
+愚直に実装するならば条件式を並べれば良いですが、あえてそうではない実装を紹介します。
+\(F(x)\)
+を文字
+\(x\)
+の出現回数とします。
+この時、
+\(F(x)=1\)
+なる
+\(x\)
+が存在するかを判定すれば良いです。
+\(F(x)\)
+は写像なので、つまりMap(",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc260_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc260/editorial/4488,"['abc260_a', 'abc260_b', 'abc260_c', 'abc260_d', 'abc260_e', 'abc260_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A Unique Letter
+愚直に実装するならば条件式を並べれば良いですが、あえてそうではない実装を紹介します。
+\(F(x)\)
+を文字
+\(x\)
+の出現回数とします。
+この時、
+\(F(x)=1\)
+なる
+\(x\)
+が存在するかを判定すれば良いです。
+\(F(x)\)
+は写像なので、つまりMap(",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc260_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc260/editorial/4488,"['abc260_a', 'abc260_b', 'abc260_c', 'abc260_d', 'abc260_e', 'abc260_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A Unique Letter
+愚直に実装するならば条件式を並べれば良いですが、あえてそうではない実装を紹介します。
+\(F(x)\)
+を文字
+\(x\)
+の出現回数とします。
+この時、
+\(F(x)=1\)
+なる
+\(x\)
+が存在するかを判定すれば良いです。
+\(F(x)\)
+は写像なので、つまりMap(",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc260_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc260/editorial/4488,"['abc260_a', 'abc260_b', 'abc260_c', 'abc260_d', 'abc260_e', 'abc260_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A Unique Letter
+愚直に実装するならば条件式を並べれば良いですが、あえてそうではない実装を紹介します。
+\(F(x)\)
+を文字
+\(x\)
+の出現回数とします。
+この時、
+\(F(x)=1\)
+なる
+\(x\)
+が存在するかを判定すれば良いです。
+\(F(x)\)
+は写像なので、つまりMap(",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc260_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc260/editorial/4488,"['abc260_a', 'abc260_b', 'abc260_c', 'abc260_d', 'abc260_e', 'abc260_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A Unique Letter
+愚直に実装するならば条件式を並べれば良いですが、あえてそうではない実装を紹介します。
+\(F(x)\)
+を文字
+\(x\)
+の出現回数とします。
+この時、
+\(F(x)=1\)
+なる
+\(x\)
+が存在するかを判定すれば良いです。
+\(F(x)\)
+は写像なので、つまりMap(",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc260_f,shared_unsegmented_editorial,https://atcoder.jp/contests/abc260/editorial/4488,"['abc260_a', 'abc260_b', 'abc260_c', 'abc260_d', 'abc260_e', 'abc260_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A Unique Letter
+愚直に実装するならば条件式を並べれば良いですが、あえてそうではない実装を紹介します。
+\(F(x)\)
+を文字
+\(x\)
+の出現回数とします。
+この時、
+\(F(x)=1\)
+なる
+\(x\)
+が存在するかを判定すれば良いです。
+\(F(x)\)
+は写像なので、つまりMap(",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc261_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc261/editorial/4499,"['abc261_a', 'abc261_b', 'abc261_c', 'abc261_d', 'abc261_e', 'abc261_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Intersection
+区間の共通集合は、
+\([\max(L_1, L_2), \min(R_1, R_2)]\)
+で求めることができます。
+この理由を確認しておきましょう。
+\(\max(L_1, L_2) \leq i \leq \min(R_1, R_2)\)
+を満たす任意の
+\(i\)
+に対して、",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc261_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc261/editorial/4499,"['abc261_a', 'abc261_b', 'abc261_c', 'abc261_d', 'abc261_e', 'abc261_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Intersection
+区間の共通集合は、
+\([\max(L_1, L_2), \min(R_1, R_2)]\)
+で求めることができます。
+この理由を確認しておきましょう。
+\(\max(L_1, L_2) \leq i \leq \min(R_1, R_2)\)
+を満たす任意の
+\(i\)
+に対して、",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc261_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc261/editorial/4499,"['abc261_a', 'abc261_b', 'abc261_c', 'abc261_d', 'abc261_e', 'abc261_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Intersection
+区間の共通集合は、
+\([\max(L_1, L_2), \min(R_1, R_2)]\)
+で求めることができます。
+この理由を確認しておきましょう。
+\(\max(L_1, L_2) \leq i \leq \min(R_1, R_2)\)
+を満たす任意の
+\(i\)
+に対して、",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc261_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc261/editorial/4499,"['abc261_a', 'abc261_b', 'abc261_c', 'abc261_d', 'abc261_e', 'abc261_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Intersection
+区間の共通集合は、
+\([\max(L_1, L_2), \min(R_1, R_2)]\)
+で求めることができます。
+この理由を確認しておきましょう。
+\(\max(L_1, L_2) \leq i \leq \min(R_1, R_2)\)
+を満たす任意の
+\(i\)
+に対して、",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc261_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc261/editorial/4499,"['abc261_a', 'abc261_b', 'abc261_c', 'abc261_d', 'abc261_e', 'abc261_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Intersection
+区間の共通集合は、
+\([\max(L_1, L_2), \min(R_1, R_2)]\)
+で求めることができます。
+この理由を確認しておきましょう。
+\(\max(L_1, L_2) \leq i \leq \min(R_1, R_2)\)
+を満たす任意の
+\(i\)
+に対して、",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc261_f,shared_unsegmented_editorial,https://atcoder.jp/contests/abc261/editorial/4499,"['abc261_a', 'abc261_b', 'abc261_c', 'abc261_d', 'abc261_e', 'abc261_f']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Intersection
+区間の共通集合は、
+\([\max(L_1, L_2), \min(R_1, R_2)]\)
+で求めることができます。
+この理由を確認しておきましょう。
+\(\max(L_1, L_2) \leq i \leq \min(R_1, R_2)\)
+を満たす任意の
+\(i\)
+に対して、",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc262_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc262/editorial/4539,"['abc262_a', 'abc262_b', 'abc262_c', 'abc262_d', 'abc262_e']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+作成中
+A問題 - World Cup
+\(Y\)
+から順に数字を増やしていき、
+\(4\)
+で割った余りが
+\(2\)
+になった値を出力すると答えが求まります。
+あるいは、直接計算で求めることもできます。
+答えから
+\(2\)
+を引いた値は、
+\(Y-2\)
+以上の最小の
+\(4\)
+の倍数を求める問題となっています。",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc262_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc262/editorial/4539,"['abc262_a', 'abc262_b', 'abc262_c', 'abc262_d', 'abc262_e']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+作成中
+A問題 - World Cup
+\(Y\)
+から順に数字を増やしていき、
+\(4\)
+で割った余りが
+\(2\)
+になった値を出力すると答えが求まります。
+あるいは、直接計算で求めることもできます。
+答えから
+\(2\)
+を引いた値は、
+\(Y-2\)
+以上の最小の
+\(4\)
+の倍数を求める問題となっています。",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc262_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc262/editorial/4539,"['abc262_a', 'abc262_b', 'abc262_c', 'abc262_d', 'abc262_e']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+作成中
+A問題 - World Cup
+\(Y\)
+から順に数字を増やしていき、
+\(4\)
+で割った余りが
+\(2\)
+になった値を出力すると答えが求まります。
+あるいは、直接計算で求めることもできます。
+答えから
+\(2\)
+を引いた値は、
+\(Y-2\)
+以上の最小の
+\(4\)
+の倍数を求める問題となっています。",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc262_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc262/editorial/4539,"['abc262_a', 'abc262_b', 'abc262_c', 'abc262_d', 'abc262_e']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+作成中
+A問題 - World Cup
+\(Y\)
+から順に数字を増やしていき、
+\(4\)
+で割った余りが
+\(2\)
+になった値を出力すると答えが求まります。
+あるいは、直接計算で求めることもできます。
+答えから
+\(2\)
+を引いた値は、
+\(Y-2\)
+以上の最小の
+\(4\)
+の倍数を求める問題となっています。",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc262_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc262/editorial/4539,"['abc262_a', 'abc262_b', 'abc262_c', 'abc262_d', 'abc262_e']","このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+作成中
+A問題 - World Cup
+\(Y\)
+から順に数字を増やしていき、
+\(4\)
+で割った余りが
+\(2\)
+になった値を出力すると答えが求まります。
+あるいは、直接計算で求めることもできます。
+答えから
+\(2\)
+を引いた値は、
+\(Y-2\)
+以上の最小の
+\(4\)
+の倍数を求める問題となっています。",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc265_h,preface_before_explicit_solution_heading,https://atcoder.jp/contests/abc265/editorial/4577,,はじめに、問題自体の解説を読みたい方は、ページ下方の「この問題の解説」から読むことを推奨します。 この問題はフーリエ変換・多次元フーリエ変換・アダマール変換などの変換を理解していると解ける問題です。以下の解説では 「通常の畳み込み(多項式の積)」「XOR 畳み込み」は一体どのような原理で動いているのか？ という点を理解して頂けることを目標として、前提知識の解説を行っていきます。 離散フーリエ変換 はじめに離散フーリエ変換の説明から始めて,,7147
+abc269_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc269/editorial/4860,"['abc269_a', 'abc269_b', 'abc269_c', 'abc269_d', 'abc269_e', 'abc269_f']","https://twitter.com/kyopro_friends/status/1571133784799744000
+(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc269_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc269/editorial/4860,"['abc269_a', 'abc269_b', 'abc269_c', 'abc269_d', 'abc269_e', 'abc269_f']","https://twitter.com/kyopro_friends/status/1571133784799744000
+(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc269_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc269/editorial/4860,"['abc269_a', 'abc269_b', 'abc269_c', 'abc269_d', 'abc269_e', 'abc269_f']","https://twitter.com/kyopro_friends/status/1571133784799744000
+(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc269_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc269/editorial/4860,"['abc269_a', 'abc269_b', 'abc269_c', 'abc269_d', 'abc269_e', 'abc269_f']","https://twitter.com/kyopro_friends/status/1571133784799744000
+(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc269_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc269/editorial/4860,"['abc269_a', 'abc269_b', 'abc269_c', 'abc269_d', 'abc269_e', 'abc269_f']","https://twitter.com/kyopro_friends/status/1571133784799744000
+(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc269_h,preface_before_explicit_solution_heading,https://atcoder.jp/contests/abc269/editorial/4838,,"はじめに、問題自体の解説を読みたい方は、ページ下方の「この問題の解説」から読むことを推奨します。 はじめに、この問題を解くのに必要な 重軽分解 と呼ばれるテクニックを説明します。 重軽分解 重軽分解 (Heavy Light Decomposition, 以下 HLD と表記) とは、根付き木を いくつかのパスに分割するテクニックのことを言います。 HLD を利用して木をいくつかのパスに変換することで、列に対して適用できるアルゴリズムを",,2492
+abc269_f,shared_unsegmented_editorial,https://atcoder.jp/contests/abc269/editorial/4860,"['abc269_a', 'abc269_b', 'abc269_c', 'abc269_d', 'abc269_e', 'abc269_f']","https://twitter.com/kyopro_friends/status/1571133784799744000
+(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc269_g,references_or_related_problem_section,https://atcoder.jp/contests/abc269/editorial/4841,,参考資料：CodeForces の記事 その1 その2 実装例(PyPy),,37
+abc278_h,references_or_related_problem_section,https://atcoder.jp/contests/abc278/editorial/5210,,関連問題 q-二項係数を利用して解ける問題を (想定解・非想定解を問わず) 以下にまとめました。 (ネタバレ防止用に畳んでいます) ARC139 F ARC146 C CODE FESTIVAL 2016 Grand Final H :  rank を求める部分を除いて \(\mathrm{O}(N)\) で計算できます。 CodeForces Round #752 Div.1 F,,192
+abc280_c,references_or_related_problem_section,https://atcoder.jp/contests/abc280/editorial/5349,,"References:
+https://en.cppreference.com/w/cpp/string/basic_string/operator_at
+https://en.cppreference.com/w/cpp/string
+https://en.cppreference.com/w/cpp/language/zero_initialization",,181
+abc284_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc284/editorial/5513,"['abc284_a', 'abc284_b', 'abc284_c', 'abc284_d', 'abc284_e', 'abc284_f']","https://twitter.com/kyopro_friends/status/1611950973215465472
+（ツイート中に「ABC285」とありますが、ABC284の誤りです）",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc284_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc284/editorial/5513,"['abc284_a', 'abc284_b', 'abc284_c', 'abc284_d', 'abc284_e', 'abc284_f']","https://twitter.com/kyopro_friends/status/1611950973215465472
+（ツイート中に「ABC285」とありますが、ABC284の誤りです）",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc284_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc284/editorial/5513,"['abc284_a', 'abc284_b', 'abc284_c', 'abc284_d', 'abc284_e', 'abc284_f']","https://twitter.com/kyopro_friends/status/1611950973215465472
+（ツイート中に「ABC285」とありますが、ABC284の誤りです）",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc284_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc284/editorial/5513,"['abc284_a', 'abc284_b', 'abc284_c', 'abc284_d', 'abc284_e', 'abc284_f']","https://twitter.com/kyopro_friends/status/1611950973215465472
+（ツイート中に「ABC285」とありますが、ABC284の誤りです）",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc284_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc284/editorial/5513,"['abc284_a', 'abc284_b', 'abc284_c', 'abc284_d', 'abc284_e', 'abc284_f']","https://twitter.com/kyopro_friends/status/1611950973215465472
+（ツイート中に「ABC285」とありますが、ABC284の誤りです）",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc284_f,shared_unsegmented_editorial,https://atcoder.jp/contests/abc284/editorial/5513,"['abc284_a', 'abc284_b', 'abc284_c', 'abc284_d', 'abc284_e', 'abc284_f']","https://twitter.com/kyopro_friends/status/1611950973215465472
+（ツイート中に「ABC285」とありますが、ABC284の誤りです）",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc285_g,references_or_related_problem_section,https://atcoder.jp/contests/abc285/editorial/5500,,参考文献： 最小流量制限付き最大流 ( snuke さんのブログ) 『プログラミングコンテストチャレンジブック　第2版』P193,,64
+abc323_g,references_or_related_problem_section,https://atcoder.jp/contests/abc323/editorial/7356,,参考資料 yukicoder DETERMINATION 解説 ：こちらの解説では決定的解法についても言及されています。 CF blog  comment,,77
+abc349_d,references_or_related_problem_section,https://atcoder.jp/contests/abc349/editorial/9797,,"関連記事 1
+関連記事 2
+また、Rust のような言語では、整数に
+.next_power_of_two()
+や
+.is_power_of_two()
+のようなメソッドも用意されています（計算量規定はなさそうです）。
+提出 #52366131",,122
+abc367_e,references_or_related_problem_section,https://atcoder.jp/contests/abc367/editorial/10719,,"参考文献
+[1]: Bender, Michael A., and Martın Farach-Colton. “The level ancestor problem simplified.”
+Theoretical Computer Science
+321, no. 1 (2004): 5–12.
+日本語解説記事もあります。
+Level Ancestor Problem - 37zigenのHP",,200
+abc370_g,references_or_related_problem_section,https://atcoder.jp/contests/abc370/editorial/10869,,"参考文献 Library Checker : Problem proposal (Sum of Multiplicative Function) : 乗法的関数の prefix sum に関する先行研究がまとまっている。 OI-Wiki : 杜教篩, PowerfulNumber 篩などの解説がある。",,151
+abc414_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc414/editorial/13687,"['abc414_a', 'abc414_b', 'abc414_c', 'abc414_d', 'abc414_e']","注：ツイート内のE問題の解説は誤りです。
+https://x.com/kyopro_friends/status/1944032441515020378",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc414_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc414/editorial/13687,"['abc414_a', 'abc414_b', 'abc414_c', 'abc414_d', 'abc414_e']","注：ツイート内のE問題の解説は誤りです。
+https://x.com/kyopro_friends/status/1944032441515020378",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc414_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc414/editorial/13687,"['abc414_a', 'abc414_b', 'abc414_c', 'abc414_d', 'abc414_e']","注：ツイート内のE問題の解説は誤りです。
+https://x.com/kyopro_friends/status/1944032441515020378",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc414_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc414/editorial/13687,"['abc414_a', 'abc414_b', 'abc414_c', 'abc414_d', 'abc414_e']","注：ツイート内のE問題の解説は誤りです。
+https://x.com/kyopro_friends/status/1944032441515020378",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc414_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc414/editorial/13687,"['abc414_a', 'abc414_b', 'abc414_c', 'abc414_d', 'abc414_e']","注：ツイート内のE問題の解説は誤りです。
+https://x.com/kyopro_friends/status/1944032441515020378",Same URL and complete body assigned to multiple tasks; quarantine until per-task segmentation is checked.,
+abc418_g,references_or_related_problem_section,https://atcoder.jp/contests/abc418/editorial/13620,,"参考資料 今回の出題および解説執筆は以下を参考にしました。 XX Open Cup Grand Prix of Tokyo J 問題 : Median Replace Hard 浅谈有限状态自动机及其应用(徐哲安, 2021 年信息学奥林匹克中国国家集训队论文集)",,132
+abc430_g,references_or_related_problem_section,https://atcoder.jp/contests/abc430/editorial/14300,,参考文献 atcoder::lazy_segtree に1行書き足すだけの抽象化 Segment Tree Beats hitonanode さんによる記事、日本語 A simple introduction to “Segment tree beats” segment tree beats の初出記事、英語 ABC256Ex解説 Segment Tree Beats を用いて解ける問題の Nyaan さんによる公式解説記事 Segm,,905

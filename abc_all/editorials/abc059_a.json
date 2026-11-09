@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc059_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc072/editorial.pdf",
+      "text": "A : Three-letter acronym\n\n 「小文字を大文字にする」という操作は、ライブラリ関数を用いるか、ASCII 文字コードで大文字や小文字\n\nは連続して配置されていることを利用して文字コードの差を足し算して求めることもできます。\n\n                            C++ のコード例\n\nint main (){\n\n  string a, b, c;\n\n  cin >> a >> b >> c;\n\n  char dif=’A’ - ’a’;\n\n  printf (\"%c%c%c\\n\", a[0] + dif , b[0] + dif , c[0] + dif);\n\n         return 0;\n\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "74df8708ebde720fc8154f1e3ef78b671a7a10694daf55515b0e21a6fcd614bc"
+    }
+  ],
+  "status": "available"
+}

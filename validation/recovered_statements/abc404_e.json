@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc404_e",
+  "source_url": "https://atcoder.jp/contests/abc404/tasks/abc404_e?lang=ja",
+  "statement": "問題文\nN\n個の大きな茶碗が横一列に並んでおり、左から茶碗\n0,1,\\dots,N-1\nと番号付けされています。\n茶碗\ni\n(\n1 \\le i \\le N-1\n) には整数\nC_i\nが書かれており、初めに中には\nA_i\n個の豆が入っています。\n茶碗\n0\nに整数は書かれておらず、初めは豆も入っていません。\n以下の操作を繰り返すことを考えます。\nひとつの茶碗\ni\n(\n1 \\le i \\le N-1\n) を選び、そこから\n1\n個以上の豆を取り出す。\n取り出した豆を、茶碗\ni-C_i,i-C_i+1,\\dots,i-1\nに自由に振り分けて入れる。\n厳密には、豆を\nk\n個取り出した際、茶碗\ni-C_i,i-C_i+1,\\dots,i-1\nに合計\nk\n個の豆を入れる。このとき、どの茶碗にいくつ豆を入れるかの振り分け方を任意に指定して入れる。\n全ての豆が茶碗\n0\nにある状態にするために必要な最小の操作回数を求めてください。\n制約\n入力は全て整数\n2 \\le N \\le 2000\n1 \\le C_i \\le i\n0 \\le A_i \\le 1\n\\displaystyle \\sum_{i=1}^{N-1} A_i > 0",
+  "html_sha256": "ab634bbe7ec25cf3d7d2d20c14f34e518eb7199998c2913f669def6da0f191c5",
+  "extractor": "section_headings_v1"
+}

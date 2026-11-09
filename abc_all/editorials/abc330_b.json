@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc330_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc330/editorial/7748",
+      "text": "場合分けにより\n\\(A_i\\)\nに対する答えを求めましょう。\n\\(A_i\\)\nが\n\\(L\\)\n以上\n\\(R\\)\n未満のときは、\n\\(A_i\\)\nが答えです。\n\\(  A_i\\)\nが\n\\(L\\)\n未満のときは、\n\\(L\\)\nが答えです。\n\\(A_i\\)\nが\n\\(R\\)\n以上のときは、\n\\(R\\)\nが答えです。\n後は、これを if 文を用いて実装することで AC を得ることができます。\nif 文を用いない方針についても記します。求める答えは、\n\\(\\min{(\\max{(L,A_i)},R)}\\)\nとあらわすことができます。多くの言語では max, min が関数としてあるので、それを用いるとより簡単に実装できます。\n更に、C++では\n\\(\\min{(\\max{(L,A_i)},R)}\\)\n自体が関数として標準ライブラリに存在します。\nstd::clamp(A_i,L,R)\nを用いると良いです。\n実装例（C++）:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define rep(i, x) for(int i = 0; i < (x); i++)\n\nint main() {\n    int n, l, r;\n    cin >> n >> l >> r;\n    vector<int> a(n);\n    rep(i, n) cin >> a[i];\n    rep(i, n) cout << clamp(a[i], l, r) << \" \\n\"[i == n - 1];\n}"
+      ],
+      "text_sha256": "45f107a716aa70457f58697948b1b3b41b9dfcf92d3379adbbc03ea9bd788b4c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc330/abc330_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

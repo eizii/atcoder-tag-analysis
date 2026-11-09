@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc202_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc202/editorial/1858",
+      "text": "問題の指示通りに処理を行えばよいです。\n「文字列を反転する」という操作は、多くの言語で標準の関数として用意されています。例えば C++ には\nstd::reverse\nという関数があります。\n個々の文字を変換する処理は、\n0\n、\n1\n、\n8\nは全く変化しないことに注意すると、簡潔な場合分けによって行うことができます。\nC++ での実装例：\nRust での実装例：",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <algorithm>\n\nint main() {\n    std::string S;\n    std::cin >> S;\n    std::reverse(S.begin(), S.end());\n    for (const auto c: S) {\n        if (c == '6') std::cout << '9';\n        else if (c == '9') std::cout << '6';\n        else std::cout << c;\n    }\n    std::cout << '\\n';\n    return 0;\n}",
+        "use proconio::{input, marker::Chars};\n\nfn main() {\n    input!(mut s: Chars);\n    s.reverse();\n    for c in s {\n        print! {\n            \"{}\",\n            match c {\n                '6' => '9',\n                '9' => '6',\n                _ => c,\n            }\n        }\n    }\n    println!(\"\");\n}"
+      ],
+      "text_sha256": "8ecc54242b4c618905f0a2b4589f68225d89baace958454b80e5b40afcb7810c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc202/abc202_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc196_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc196/editorial/359",
+      "text": "以下のように処理すればよいです。\n\\(X\\)\nを文字列として受け取る\n\\(X\\)\nに小数点が入っているならば、小数点の手前までを出力する\n\\(X\\)\nに小数点が入っていないならば、\n\\(X\\)\nをそのまま出力する\n解答例 (C)\n解答例 (Python)",
+      "codes": [
+        "#include <stdio.h>\n#include <string.h>\n\nint main() {\n\tchar x[203];\n\tscanf(\"%s\", x);\n\tchar *dot_pos = strchr(x, '.');\n\tif (dot_pos) *dot_pos = '\\0';\n\tputs(x);\n\treturn 0;\n}",
+        "x = input()\ndot_pos = x.find('.')\nif dot_pos != -1 : x = x[:dot_pos]\n\nprint(x)"
+      ],
+      "text_sha256": "ef08d79ceec5c0de20f5a9d7989a65b0d64ec051c49fe8d9943658851f0b6750",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc196/abc196_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

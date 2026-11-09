@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc238_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc238/editorial/3354",
+      "text": "ひとまず、余計な情報を排除するため、 \\(1\\) 回目に \\(i\\) 位だった人が \\(2\\) 回目に \\(A_i\\) 位だったというような形に情報を変換します。\n例えば入力例1の場合は \\(A=(3,2,4,1)\\) となります。 このもとで、 \\(1\\) 回目の順位が良い方から、選ぶか選ばないかを決定していくことを考えます。 \\(1\\) 回目の順位の昇順に決定することを考えると、「もし今選ぶか選ばないかを決定している人物 \\(X\\) より前に選ばなかった人物 \\(Y\\) がいる場合、 \\(X\\) は \\(2\\) 回目の試験で \\(Y\\) よりもよい順位でなければならない」ということが言えます。 このもとで、以下の形式の DP を考えます。 \\(dp[\\) \\(i\\) 人目まで選ぶ/選ばないを決定した \\(][\\) 今までに選んだ人数 \\(][\\) 選ばなかった人物のうち、最も小さい順位(全員を選んでいる場合は \\(\\infty\\) ) \\(]\\) = \\(\\{\\) \\(i\\) 人目まで選ぶ/選ばないを決定した時の選び方の場合の数 \\(\\}\\) 遷移は、各 \\(dp[i][j][k]\\) から人物 \\(i+1\\) を選ぶ場合/選ばない場合へと遷移します。(但し、選べない場合もあるので注意してください。)詳しくは実装例を参照してください。(DPの形から遷移を検討するのも練習になるので、できれば自力で考えてみることをおすすめします。) なお、 \\(dp[i+1]\\) の計算に \\(dp[i]\\) 以外を用いることはないので、DPのkeyのうち左端のものは実際に持つ必要はありません。 このDPの計算量は \\(O(N^3)\\) です。 実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#define mod 998244353\n\nusing namespace std;\n\nint main(){\n  int n,k;\n  cin >> n >> k;\n  vector<int> p(n),q(n);\n  for(auto &nx : p){cin >> nx;}\n  for(auto &nx : q){cin >> nx;}\n  vector<int> v(n);\n  for(int i=0;i<n;i++){v[p[i]-1]=q[i]-1;}\n  vector<vector<int>> dp(k+1,vector<int>(n+1,0));\n  dp[0][n]=1;\n  for(int i=0;i<n;i++){\n    vector<vector<int>> ndp(k+1,vector<int>(n+1,0));\n    for(int x=0;x<=k;x++){\n      for(int y=0;y<=n;y++){\n        if(x<k && v[i]<y){\n          ndp[x+1][y]+=dp[x][y];\n          ndp[x+1][y]%=mod;\n        }\n        ndp[x][min(y,v[i])]+=dp[x][y];\n        ndp[x][min(y,v[i])]%=mod;\n      }\n    }\n    dp.swap(ndp);\n  }\n  int res=0;\n  for(auto &nx : dp[k]){res+=nx;res%=mod;}\n  cout << res << '\\n';\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "43bfdafd83a0399462f4d605765511f216dfe333af2e8fee0de1a85aecbb44ac"
+    }
+  ],
+  "status": "available"
+}

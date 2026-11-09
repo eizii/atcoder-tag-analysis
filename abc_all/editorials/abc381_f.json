@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc381_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc381/editorial/11408",
+      "text": "以下では連続とは限らない部分列を単に部分列とよびます。\nこの問題はbitDP によって解くことができます。\n\\(1\\leq A_i\\leq 20\\)\nより、\n\\(A\\)\nの部分列であるような 1122数列の長さとしてあり得る最大値は\n\\(2\\times 20=40\\)\nであることに注意してください。\nまず、\n\\(\\{1,2,\\ldots,20\\}\\)\nの部分集合\n\\(S\\)\n（空集合および\n\\(S\\)\n自身を含む）に対して 、\n\\(dp[S]\\)\nを、\n\\((A_1, A_2,\\ldots, A_r)\\)\nが 1122数列であって、 その列に含まれる整数の集合がちょうど\n\\(S\\)\nになるようなものを部分列としてもつような最小の非負整数\n\\(r\\)\n（ただし、\n\\((A_1, A_2,\\ldots, A_N)\\)\nにそのような列が含まれない場合は\n\\(\\infty\\)\n）として定義します。\n求めたい答えは\n\\(dp[S]\\neq \\infty\\)\nであるような\n\\(S\\)\nにおける、\n\\(2\\times \\lvert S\\rvert\\)\nの最大値です。ここで、\n\\(\\lvert S\\rvert\\)\nは\n\\(S\\)\nの要素数を表します。\nまた、\n\\(0\\leq i\\leq N\\)\n,\n\\(1\\leq x\\leq 20\\)\nについて、\n\\(f(i,x)\\)\nを\n\\(i\\bm{<}j\\leq N\\)\nかつ\n\\(f(j)=x\\)\nをみたす最小の\n\\(j\\)\n（存在しない場合は\n\\(\\infty\\)\n）と定義します。便宜上、任意の\n\\(1\\leq x\\leq 20\\)\nについて、\n\\(f(\\infty,x)=\\infty\\)\nとします。\n\\(dp[\\phi]\\)\n（\n\\(\\phi\\)\nは空集合を表します）はつねに\n\\(r=0\\)\nとなります。\nさて、\n\\(S=\\{e_1,e_2,\\ldots, e_{\\lvert S\\rvert}\\}\\)\nとし、\n\\(S\\)\n自身を除く\n\\(S\\)\nの部分集合\n\\(S'\\)\nに対して\n\\(dp[S']\\)\nが求まっているとき、\n\\(S\\)\nに属する整数をすべて含む1122数列の最後の\n\\(2\\)\n項について場合分けすることで、\n\\(S\\)\nは次のように計算することができます。\n\\(1\\leq i\\leq \\lvert S\\rvert\\)\nについて、集合\n\\(T_i\\)\nを\n\\(S\\)\nから\n\\(e_i\\)\nだけを除いたもの（すなわち、\n\\(T_i\\equiv S-\\{ e_i\\}\\)\n）として定義します。  このとき、含まれる整数の集合が\n\\(S\\)\nである1122数列のうち、最後の\n\\(2\\)\n項が\n\\(e_i\\)\nであるようなものを\n\\((A_1, A_2,\\ldots, A_r)\\)\nが含む最小の\n\\(r\\)\nは、\n\\(f(f(dp[T_i],e_i),e_i)\\)\nで求めることができます。よって、\n\\(dp[S]\\)\nは\n\\(\\displaystyle dp[S]=\\min_{1\\leq i\\leq \\lvert S\\rvert} f(f(dp[T_i],e_i),e_i)\\)\nとして求めることができます。\nこれにより、\n\\(S\\)\nの要素数について昇順に\n\\(dp[S]\\)\nを求めていくことができます。\n計算量について、\n\\(f(i,x)\\)\nは事前に計算してテーブルで用意しておくことで\n\\(O(1)\\)\nで求めることができます。よって、各集合について\n\\(dp[S]\\)\nは\n\\(O(\\lvert S\\rvert)\\)\nで計算することができ、全ての\n\\(S\\)\nについて求めるのにかかる計算量は\n\\(M=\\max(A_i)\\)\nとして、\n\\(O(M\\cdot 2^M)\\)\nとなります。\nなお、\n\\(f(i,x)\\)\nのテーブルの前計算にかかる計算量は、\n\\(i\\)\nについて降順に求めていくことで、\n\\(O(NM)\\)\nでできることから、全体で\n\\(O(M(N+2^M))\\)\nであり、\n\\(N\\leq 2\\times 10^5, M\\leq 20\\)\nの今回の制約のもとで十分高速です。\nよって、この問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define rep(i, n) for(int i = 0; i < n; ++i)\n#define N 200000\n#define M 20\n\nint main(void){\n\tint n;\n\tint a[N];\n\tint nxt[N+2][M];\n\tint r[(1<<M)];\n\tint ans=0,cnt;\n\n\tcin>>n;\n\trep(i,n)cin>>a[i];\n\n\trep(j,M)nxt[n][j]=n+1,nxt[n+1][j]=n+1;  //n+1=\\infty\n\tfor(int i=n-1;i>=0;i--){\n\t\trep(j,M)nxt[i][j]=nxt[i+1][j];\n\t\tnxt[i][a[i]-1]=i+1;\n\t}\n\n\trep(i,(1<<M))r[i]=n+1;\n\tr[0]=0;\n\trep(i,(1<<M)){\n\t\tcnt=0;\n\t\trep(j,M){\n\t\t\tif((i>>j)&1){\n\t\t\t\tcnt+=2;\n\t\t\t\tr[i]=min(r[i],nxt[nxt[r[i^(1<<j)]][j]][j]);\n\t\t\t}\n\t\t}\n\t\tif(r[i]<=n)ans=max(ans,cnt);\n\t}\n\n\tcout<<ans<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "cb32215248655b27ad4d669c3a55510395994d5567d24468656bea23081bc53b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc381/abc381_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

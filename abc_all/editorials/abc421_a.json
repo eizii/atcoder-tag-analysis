@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc421_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc421/editorial/13729",
+      "text": "この問題は要するに\n\\(S_X=Y\\)\nであるかどうかを問うています。\n標準入力からの読み込み方、配列の基本的な操作、文字列の比較の方法を確認して実装しましょう。\n多くの言語で配列の添字は\n\\(0\\)\nから始まることに注意してください。\nまたJavaなどの言語では文字列の比較方法に注意してください。\n実装例(Python)\n実装例(C++)\n実装例(Java)",
+      "codes": [
+        "N = int(input())\nS = [input() for _ in range(N)]\nX, Y = input().split()\nX = int(X)\n\nprint(\"Yes\" if S[X-1] == Y else \"No\")",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint N;\n\tcin >> N;\n\tvector<string> S(N);\n\tfor(int i=0; i<N; i++) cin >> S[i];\n\n\tint X;\n\tstring Y;\n\tcin >> X >> Y;\n\tcout << (S[X-1] == Y ? \"Yes\" : \"No\") << endl;\n}",
+        "import java.util.Scanner;\n\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\tScanner scanner = new Scanner(System.in);\n\n\t\tint N = Integer.parseInt(scanner.nextLine());\n\t\tString[] S = new String[N];\n\t\tfor (int i = 0; i < N; i++) {\n\t\t\tS[i] = scanner.nextLine();\n\t\t}\n\n\t\tString[] XY= scanner.nextLine().split(\" \");\n\t\tint X = Integer.parseInt(XY[0]);\n\t\tString Y = XY[1];\n\n\t\tif (S[X-1].equals(Y)) {\n\t\t\tSystem.out.println(\"Yes\");\n\t\t} else {\n\t\t\tSystem.out.println(\"No\");\n\t\t}\n\t}\n}"
+      ],
+      "text_sha256": "8ab2a4968ae3ee393a1aade69133f37f40c0f8e498c96b2a8d1fce2ce3de1172",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc421/abc421_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

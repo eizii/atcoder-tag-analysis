@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc339_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc339/editorial/9205",
+      "text": "あなたが用いている言語で文字列 (やそれに相当する配列等) を取り扱う方法を今一度確認した上で実装しましょう。\nこの問題は以下の\n\\(2\\)\nステップで正解することができます。\n文字列中、最も後ろにある\n.\nを探す。\n最も後ろにある\n.\nよりも後ろにある文字列を出力する。\nこれらは、どちらもいくつかの変数と for ループを用いて実現可能です。\nまた、今回の問題では文字列の長さを取得する方法を知っておくとより楽に実装ができます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  int l=s.size(),ldot=0;\n  for(int i=0;i<l;i++){\n    if(s[i]=='.'){ldot=i;}\n  }\n  for(int i=ldot+1;i<l;i++){\n    cout << s[i];\n  }\n  cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "b3122abd88bea5c1464196f50b8e2684986174ab226a6ee409e4b54579a0ed66",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc339/abc339_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

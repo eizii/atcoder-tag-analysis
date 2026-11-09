@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc304_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc304/editorial/6504",
+      "text": "グラフ\n\\(G\\)\nの連結成分ごとに異なる ID （整数など）を割り当て、ID が\n\\(c\\)\nである連結成分を単に連結成分\n\\(c\\)\nと呼びます。\nまた、各頂点\n\\(w\\)\nについて\n\\(w\\)\nが属する連結成分の ID を\n\\(\\mathrm{id}(w)\\)\nで表すことにします。\n例えば、頂点\n\\(u, v\\)\nが同じ連結成分に属することは\n\\(\\mathrm{id}(u) = \\mathrm{id}(v)\\)\nと同値です。\n\\(G\\)\nに\n\\(2\\)\n頂点\n\\(p, q\\)\nを結ぶ辺を追加すると、（\n\\(\\mathrm{id}(p) \\neq \\mathrm{id}(q)\\)\nであれば）連結成分\n\\(\\mathrm{id}(p)\\)\nと 連結成分\n\\(\\mathrm{id}(q)\\)\nが一つの連結成分に併合されます。\nよって、その結果\n\\(2\\)\n頂点\n\\(x_i, y_i\\)\nを結ぶパスが作られないようにするには、非順序対\n\\(\\lbrace \\mathrm{id}(p), \\mathrm{id}(q) \\rbrace\\)\nと非順序対\n\\(\\lbrace \\mathrm{id}(x_i), \\mathrm{id}(y_i) \\rbrace\\)\nが異なることが必要かつ十分です。\nしたがって、\n\\(2\\)\n頂点\n\\(p, q\\)\nを結ぶ辺を追加した後も、良いグラフであり続ける（つまり、全ての\n\\(i = 1, 2, \\ldots, K\\)\nで\n\\(2\\)\n頂点\n\\(x_i, y_i\\)\nを結ぶパスが存在しない）ようにするには、\n非順序対\n\\(\\lbrace \\mathrm{id}(p), \\mathrm{id}(q) \\rbrace\\)\nが、つないではならない連結成分のペアを示す\n\\(K\\)\n個（重複を許す）の非順序対\n\\[\\lbrace \\mathrm{id}(x_1), \\mathrm{id}(y_1)\\rbrace, \\lbrace \\mathrm{id}(x_2), \\mathrm{id}(y_2)\\rbrace, \\ldots, \\lbrace \\mathrm{id}(x_K), \\mathrm{id}(y_K)\\rbrace　\\tag{1} \\]\nのいずれとも異なることが必要かつ十分です。\nそのため、本問題を解くには、(1) に示す\n\\(K\\)\n個の非順序対の集合\n\\(S\\)\nをあらかじめ平衡二分木で保持しておき、\n各質問\n\\((p_i, q_i)\\)\nでは\n\\(\\lbrace \\mathrm{id}(p_i), \\mathrm{id}(q_i) \\rbrace\\)\nが\n\\(S\\)\nに含まれるかどうかを、この平衡二分木へのアクセスによって判定すれば良いです。\n連結成分の ID の定め方・求め方について、\n\\(G\\)\nをUnionFindで管理することで、\n\\(G\\)\nの各頂点\n\\(v\\)\nに対して\n\\(v\\)\nが属する連結成分の代表元が UnionFind の機能から得られるので、これを\n\\(v\\)\nの属する連結成分の ID\n\\(\\mathrm{id}(v)\\)\nとして用いることができます。",
+      "codes": [],
+      "text_sha256": "3b7d159ef8471c9165c24ebb68402955a7fba7aef851ae57627fa6863acb256f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc304/abc304_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

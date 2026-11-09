@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc186_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc186/editorial/403",
+      "text": "数を\n\\(10\\)\n進法や\n\\(8\\)\n進法で表すには、下の桁から求めていく方法が最も有名かつ簡単です。\n実装例(C++)\nなお、\n\\(10\\)\n進数や\n\\(8\\)\n進数などに変換する関数・メソッドなどが標準で用意されている言語もあります。\n実装例(Python)\n実装例(Ruby)",
+      "codes": [
+        "string to_oct(int n){\n  string s;\n  while(n){\n    s = to_string(n%8) + s;\n    n /= 8;\n  }\n  return s;\n}",
+        "N = int(input())\nans = 0\nfor i in range(1, N+1):\n  if ('7' not in str(i)) and ('7' not in oct(i)):\n    ans += 1\nprint(ans)",
+        "N = gets.to_i\nans = 0\nfor i in 1..N do\n  if not i.to_s(10).include?('7') and not i.to_s(8).include?('7') then\n    ans += 1\n  end\nend\np ans"
+      ],
+      "text_sha256": "be167be2dae24f2ebe372ae5f4d4a91d215e781aa222f15551306b92a2a00d42",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc186/abc186_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc354_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc354/editorial/10027",
+      "text": "最後の要素が\n\\(A_i\\)\nであるという制約付きの\n\\(A\\)\nの LIS の長さを\n\\(l_i\\)\nとし、最初の要素が\n\\(A_i\\)\nであるという制約付きの\n\\(A\\)\nの LIS の長さを\n\\(r_i\\)\nとします。\n\\(A_i\\)\nを含むという制約付きの\n\\(A\\)\nの LIS の長さは\n\\(l_i + r_i - 1\\)\nです。そのため、問題に答えるには\n\\(A\\)\nの LIS の長さを\n\\(L\\)\nとして\n\\(l_i + r_i - 1 = L\\)\nかどうか判定すればよいです。\nLIS を求める DP の途中で情報をメモすることで\n\\(l\\)\nを求めることができます。\n\\(r\\)\nも逆から同様にすればよいです。\nよくある LIS の DP での実装例 (C++)\n/\nSegment Tree の DP で LIS を求める実装例 (C++)\n競技プログラミングでは、前からと後ろからで同じような手続きをする、といったような、少し形は違うが本質的には同じコードを書きたいことがよくあります。このような場合、\n一連の手続きを関数化して、引数の配列に反転をはじめとしたなんらかの変換を行って関数を適用する。(今回の問題など)\n「少し形は違う」部分を変数としたコードを書く。(グリッド上の BFS など)\nGitHub Copilot を用いる。\nといった方法で労力を節約し、バグの原因を減らすことができるかもしれません。\nBonus? :\n\\(A\\)\nの全ての LIS に\n\\(A_i\\)\nが含まれるような\n\\(i\\)\nの集合を高速に求めてください。",
+      "codes": [],
+      "text_sha256": "d9032467d0c8c5bbd0886f2454adc049c8c671eabff2064bb6567476b71fbdd8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc354/abc354_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

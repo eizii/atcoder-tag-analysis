@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc344_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc344/editorial/9490",
+      "text": "結論から言うと、この問題は動的計画法 (DP) により正解できます。\n\\(dp[\\)\n袋を何個目まで処理したか\n\\(][\\)\n\\(T\\)\nの接頭辞のうちどこまで一致させられたか\n\\(] = \\)\n{ 必要な最小金額 } を実現しましょう。\n\\(i+1\\)\n袋目に入っている文字列\n\\(X\\)\nを\n\\(S\\)\nの末尾に連結することを考えます。この時、\n\\(dp[i][|S|]\\)\nから\n\\(dp[i+1][|S|+|X|]\\)\nに遷移するためには、\n\\(T\\)\nの\n\\(|S|+1\\)\n文字目から\n\\(|S|+|X|\\)\n文字目を取り出した文字列が\n\\(X\\)\nと一致する必要があります。\n今回の制約下では、この判定を愚直に行っても構いません。\nまた、何もしないということは\n\\(dp[i][j]\\)\nから\n\\(dp[i+1][j]\\)\nへの遷移に対応します。\n以上の DP を実装すると、この問題に\n\\(O(NM|S||T|)\\)\nといった時間計算量で正解できます。 (\n\\(M\\)\n… 袋に入った文字列の個数 )\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint dp[105][105];\n\nint main(){\n  for(int i=0;i<105;i++){\n    for(int j=0;j<105;j++){\n      dp[i][j]=1e9;\n    }\n  }\n  dp[0][0]=0;\n\n  string t;\n  cin >> t;\n  int tl=t.size();\n  int n;\n  cin >> n;\n  for(int i=0;i<n;i++){\n    for(int j=0;j<105;j++){dp[i+1][j]=dp[i][j];}\n    int m;\n    cin >> m;\n    while(m>0){\n      m--;\n      string s;\n      cin >> s;\n      int sl=s.size();\n      for(int j=0;j+sl<=tl;j++){\n        bool ok=true;\n        for(int k=0;k<sl;k++){\n          if(t[j+k]!=s[k]){ok=false;break;}\n        }\n\n        if(ok){\n          dp[i+1][j+sl]=min(dp[i+1][j+sl],dp[i][j]+1);\n        }\n      }\n    }\n  }\n\n  if(dp[n][tl]>5e8){dp[n][tl]=-1;}\n  cout << dp[n][tl] << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "f8bb1d36f896df8c97ec4dcfb1c010fd47c2cdde30932c9dd4f462b6b56f1f17",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc344/abc344_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

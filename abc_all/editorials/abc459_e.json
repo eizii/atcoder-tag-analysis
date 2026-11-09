@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc459_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc459/editorial/20979",
+      "text": "リスがアメを選ぶ順番について、どのような順番にしても答えは変わらないため、今回は木\n\\(T\\)\nの頂点を帰りがけ順に列挙したときの順番で、対応するリスがアメを選ぶことを考えます。\nここで、頂点\n\\(i\\)\nを根とした部分木に属する頂点\n\\(j\\)\nにわたる\n\\(C_j\\)\nの和を\n\\(S_i\\)\n,\n\\(D_j\\)\nの和を\n\\(T_i\\)\nとします。帰りがけに頂点を並べた際、頂点\n\\(i\\)\nの子孫はすべて頂点\n\\(i\\)\nより前に並び、祖先はすべて頂点\n\\(i\\)\nより後ろに並ぶため、リス\n\\(i\\)\nが選べるアメの候補はそれ以前のリスのアメの選び方によらず、\n\\(S_i-(T_i-D_i)\\)\n個あり、リス\n\\(i\\)\nはその中から\n\\(D_i\\)\n個のアメを選びます。すなわち、リス\n\\(i\\)\nのアメの選び方は、それ以前の他のリスのアメの選び方によらず\n\\(\\binom{S_i-T_i+D_i}{D_i}\\)\n通りあります。ここで、\n\\(S_i-T_i+D_i<D_i\\)\n、すなわち\n\\(S_i<T_i\\)\nならばリス\n\\(i\\)\nは条件をみたすようにアメを選ぶことはできず、特に答えは\n\\(0\\)\nとなります。\n最終的な答えはこれを\n\\(i=1,2,\\ldots,N\\)\nにわたりかけ合わせた値\n\\[\n\\prod_{i=1}^n \\binom{S_i-T_i+D_i}{D_i}\n\\]\nを\n\\(998244353\\)\nで割った余りとなるため、これを計算すれば良いです。\n\\(S_i\\)\nおよび\n\\(T_i\\)\nは深さ優先探索によって全体で\n\\(O(N)\\)\nで求めることができます。\nまた、\n\\(\\binom{S_i-T_i+D_i}{D_i}=\\frac{1}{D_i!}\\{(S_i-T_i+D_i)\\times(S_i-T_i+D_i-1)\\times\\cdots\\times(S_i-T_i+1)\\}\\)\nの値は\n\\(P=998244353\\)\nとしてそれぞれ\n\\(O(D_i\\log P)\\)\n、あるいは階乗\n\\(k!\\)\nを\n\\(1\\leq k\\leq \\max(D_i)\\)\nの範囲で前計算しておくことで\n\\(O(D_i+\\log P)\\)\nで求めることができます。よって、全体で時間計算量は\n\\(\\displaystyle O\\biggl((\\sum_{i=1}^N D_i)\\log P\\biggr)\\)\n、あるいは\n\\(\\displaystyle O\\biggl((\\sum_{i=1}^N D_i)+N\\log P\\biggr)\\)\nであり、いずれも問題の制約下で十分高速です。よって、この問題を解くことができました。\nC++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\nusing namespace std;\nusing namespace atcoder;\n\nusing mint = modint998244353;\n\n#define ll long long\n#define rep(i, n) for(int i = 0; i < n; ++i)\n#define N (int)2e+5\n\nvector<int>e[N];\nll c[N];\nll d[N];\nmint ans;\n\nll dfs(int k){\n\tint sz=e[k].size();\n\tll s=c[k];\n\tfor(int i=0;i<sz;i++)s+=dfs(e[k][i]);\n\tif(s<d[k])ans=0;\n\telse{ //binom (s,d[k])\n\t\trep(i,d[k]){\n\t\t\tans*=mint(s-i);\n\t\t\tans*=mint(i+1).inv();\n\t\t}\n\t}\n\treturn (s-d[k]);\n}\n\nint main(void){\n\tint n,x;\n\n\tcin>>n;\n\tfor(int i=1;i<n;i++){\n\t\tcin>>x;\n\t\te[x-1].push_back(i);\n\t}\n\trep(i,n)cin>>c[i];\n\trep(i,n)cin>>d[i];\n\t\n\tans=1;\n\tdfs(0);\n\tcout<<ans.val()<<endl;\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "fea57f3bb8baf5e4850b2f47dc84a6c9ca1d29d1bc567f04f091e5dd90f55204",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc459/abc459_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

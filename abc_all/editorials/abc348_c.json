@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc348_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc348/editorial/9730",
+      "text": "選んだビーンズの色が\n\\(c\\)\nであるとします。このとき、考えられるおいしさの最小値は色が\n\\(c\\)\nであるビーンズの中でのおいしさの最小値です。\nつまり、この問題ではすべての色についてその色を選んだ時に考えられるおいしさの最小値を求め、すべての色のうちこの値が最も大きいものを求める必要があります。\n各色について、\n\\(N\\)\n種類すべてのビーンズを確認することで正しい答えを得られますが、色の種類数も最大で\n\\(N\\)\n種類あるため、これを愚直に実装すると\n\\(O(N^{2})\\)\n時間かかってしまい実行時間制限超過してしまいます。\nこの問題では、\n連想配列\n(C++では\nstd::map\n,\nstd::unordered_map\n、Pythonでは\ndict\n,\ndeafaultdict\nなど) を用いて、各色のおいしさの最小値を管理することで\n\\(O(N\\log{N})\\)\nや expected\n\\(O(N)\\)\nなどの時間で実行できます。\n具体的には、各ビーンズを順番に見て行き、連想配列にそのビーンズの色の添字が存在する場合はおいしさの最小値を更新し、そうでない場合は新しく色の添字を追加して最小値をそのビーンズのおいしさとすることで最終的に各色のビーンズのおいしさの最小値が求まります。\n詳細は実装例を参考にしてください。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int n;\n  cin >> n;\n\n  map<int, int> minimum_taste; // 各色のおいしさの最小値\n  for (int i = 0; i < n; ++i) {\n    int a, c;\n    cin >> a >> c;\n    if (minimum_taste.contains(c)) {\n      // すでに色cが存在している場合は最小値を更新\n      minimum_taste[c] = min(minimum_taste[c], a);\n    } else {\n      // 新しく追加される色\n      minimum_taste[c] = a;\n    }\n  }\n\n  int ans = -1;\n  // 存在する色をすべて走査する\n  for (auto [c, val] : minimum_taste){\n    ans = max(ans, val);\n  }\n\n  cout << ans << endl;\n}"
+      ],
+      "text_sha256": "ee2d60fe6564d87a38a9d71ff927d9ce58cee02da4687ef8742e485aa028b7fb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc348/abc348_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

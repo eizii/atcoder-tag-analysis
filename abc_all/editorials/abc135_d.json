@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc135_d",
+  "editorials": [
+    {
+      "text": "D: Digits Parade\n次の漸化式を立てます．\ndp[i][j] := 先頭i 文字として考えられるもののうち，13 で割ったあまりがj であるものの数\nこのときi の昇順にdp テーブルを見ると，i −1 文字目までを13 で割ったあまり(dp[i −1][j] のj) と\ns[i] としてあり得る数字を全て試すことでdp[i][0] ∼dp[i][12] の値がわかります．\n以下に解答例を示します．\nListing 3\nC++ での実装例\n1 static const ull MOD = 1000000007LL;\n2\n3 int n;\n4 char s[100005];\n5 uint64_t dp[100005][13];\n6\n7 uint64_t solve () {\n8\nint i, j, ki;\n9\nuint64_t res = 0;\n10\n11\nscanf(\"%s\", s);\n12\nn = strlen(s);\n13\n14\ndp[0][0] = 1;\n15\nfor (i = 0; i < n; i++) {\n16\nint c;\n17\nif (s[i] == '?') c = -1;\n18\nelse c = s[i] - '0';\n19\n20\nfor (j = 0; j < 10; j++) {\n21\nif (c != -1 && c != j) continue;\n22\nfor (ki = 0; ki < 13; ki++) {\n23\ndp[i + 1][(ki * 10 + j) % 13] += dp[i][ki];\n24\n}\n25\n}\n26\nfor (j = 0; j < 13; j++) dp[i + 1][j] %= MOD;\n27\n}\n28\nres = dp[n][5];\n29\n30\nprintf(\"%llu\\n\", res);\n31\nreturn 0;\n32 }\n",
+      "text_sha256": "f1cfe90c85e5d6a7d8c09a7169772bbc4a0ab93db0b4af590e2dba971fe301d1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc135/abc135_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

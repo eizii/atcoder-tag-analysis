@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc476_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc476/editorial/25803",
+      "text": "原案:vwxyz \\(S\\) が \\(T\\) にマッチするならば、 \\(i=1,2,\\dots,N\\) について \\(T_i\\) は \\(S_i\\) か * のいずれかです。 逆にそれを満たすならば、 \\(S\\) は \\(T\\) にマッチするので、それを判定すればよいです。 c++の実装例 Pythonの実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N;\n    cin>>N;\n    string S,T;\n    cin>>S>>T;\n    string ans=\"Yes\";\n    for(int i=0;i<N;i++){\n        if(T[i]!=S[i]&&T[i]!='*'){\n            ans=\"No\";\n        }\n    }\n    cout<<ans<<\"\\n\";\n}\n",
+        "N=int(input())\nS=input()\nT=input()\nif all(t in s+\"*\" for s,t in zip(S,T)):\n    ans=\"Yes\"\nelse:\n    ans=\"No\"\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "abcf82bced929fb62701bf86de6be0eb55ee8db3ae6c3e3e3c01995cba5e1c9e"
+    }
+  ],
+  "status": "available"
+}

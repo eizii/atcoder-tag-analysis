@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc070_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc070/editorial.pdf",
+      "text": "C: Go Home\n\n もし1 + 2 + ... + t < X なら時刻t には座標X にはたどり着けません。逆に、1 + 2 + ... + t ≥X なら\n\n時刻t に座標X にたどり着けることが示せます。実際、{1, 2, .., t} の部分集合で和がX になるものが取れ\n\nて、そうすると部分集合に選んだ長さのときだけ右にジャンプし、それ以外のときはジャンプしないという戦\n\n略によって座標X にたどり着けます。よってあとはこのような最小のt を求めれば良いです。これはおおよ\nそ−1+√8X+1        2   になるので、この関数によって計算するとO(1) で求まります。そこまでしなくても、答えが √                                                 √\nO( X) になることから、t を前から順番に試してt(t+1)2 ≥X か毎回判定するだけでも, 時間計算量O( X)\nで答えを求めることが出来ます。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "0bb892eeb5bc42d6b2193ac6b1880fc432c9fa2e62329121ea1d2c51f76c627a"
+    }
+  ],
+  "status": "available"
+}

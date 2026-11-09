@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc379_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc379/editorial/11331",
+      "text": "行と列を反転しても答えは変わらないため， \\(W\\leq H\\) を仮定します． 左上のマスから右下のマスにかけて， \\((1,1)\\to(1,2)\\to\\dots\\to(1,W)\\to(2,1)\\to(2,2)\\to\\dots\\to(2,H)\\to\\dots\\to(H,1)\\to(H,2)\\to\\dots\\to(H,W)\\) の順に数字を決めていきながら答えを dp で求めることにします． 上の図で緑色のマスの色の数字に注目している場合を考えます．このとき，上側にある灰色のマスの情報はその後の数字の決め方に一切関与しません．青色のマスの数字の書かれ方のみによって，それ以降の数字の決め方が変わってきます．よって，「最後に見た \\(W\\) 個のマスの数字の書き方」を key として dp ができそうです． 状態数について考えます．「最後に見た \\(W\\) 個のマスの数字の書き方」は最大で \\(3^W\\) 通りあり多いですが，そのうち「隣接した数字が異なる」という条件を満たすものは高々 \\(9\\times 2^{W-2}\\) 通りしかありません．よって，条件を満たすものだけを状態として持つことで状態数を削減することができます． 計算量は \\(O(2^{\\min(H,W)}HW)\\) や \\(O(2^{\\min(H,W)}HW\\min(H,W))\\) となり， \\(\\min(H,W)\\leq 14\\) であることを踏まえると間に合います． 類題 JOI 旗 (JOI Flag) Avoid War",
+      "codes": [
+        "from collections import defaultdict\n\nH, W = map(int, input().split())\nS = [list(input()) for i in range(H)]\nif W > H:\n    S = [[S[i][j] for i in range(H)] for j in range(W)]\n    H, W = W, H\n\nmod = 998244353\n\n# 前 W マスの状態を W 桁の 10 進法として持つ\ndp = defaultdict(int)\ndp[0] = 1\nB = 10 ** (W - 1)\nfor x in range(H):\n    for y in range(W):\n        ndp = defaultdict(int)\n        for pre, val in dp.items():\n            for i in range(1, 4):\n                if S[x][y] == str(i) or S[x][y] == \"?\":\n                    top = pre // B\n                    if top == i:  # 真上のマスと同じ場合\n                        continue\n                    if y > 0:\n                        back = pre % 10\n                        if back == i:  # 左のマスと同じ場合\n                            continue\n                    nxt = (pre * 10 + i) % (10 * B)\n                    ndp[nxt] += val\n                    ndp[nxt] %= mod\n        dp = ndp\n\nans = sum(dp.values()) % mod\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "214aab72a7bf4b8e85628504b39ef5fdfa6fdd7956f5572d0080eb2ba0e65bb9"
+    }
+  ],
+  "status": "available"
+}

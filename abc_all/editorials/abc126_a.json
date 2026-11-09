@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc126_a",
+  "editorials": [
+    {
+      "text": "A: Changing a Character\n問題文のとおりに文字列のK 番目の文字を小文字に変換すればよいです。\nA, B, C の3 文字のみが入力に含まれるのでif 文を3 個書いてもよいですし、アルファベットの大文字と\n小文字の文字コードが32 異なるということを利用してchar 型の該当する文字に32 を加えても良いです。\nC++ での実装例は以下の通りです(include 等は省いています)。\nchar in[55];\nint main(){\nint a,b;scanf(\"%d%d\",&a,&b);\nscanf(\"%s\",in);\nin[b-1]+=32;\nprintf(\"%s\\n\",in);\n}\n",
+      "text_sha256": "f316563c24a0785d2102de0ed37eded12d36ffb8e893ba0aebd687d2d40dbeef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc126/abc126_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

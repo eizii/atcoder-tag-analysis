@@ -1,0 +1,51 @@
+{
+  "problem_id": "abc250_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc250/editorial/3906",
+      "text": "基本方針\n\\(A\\)\nの先頭\n\\(x_i\\)\n項に含まれる値の集合を\n\\(S_A\\)\n、\n\\(B\\)\nの先頭\n\\(y_i\\)\n項に含まれる値の集合を\n\\(S_B\\)\nとします。\n\\(|S_A| \\neq |S_B|\\)\nの場合、明らかに答えは\nNo\nです。よって、\n\\(|S_A| \\neq |S_B|\\)\nかどうかと、\n\\(|S_A| = |S_B|\\)\nの場合に\n\\(S_A\\)\nと\n\\(S_B\\)\nが一致するかどうかを高速に判定することで本問を解くことが出来ます。\n前計算①\nまず、C++におけるsetのようなデータ構造を用意し、\n\\(S\\)\nとします。\n\\(i=1,2,...,N\\)\nに対して\n\\(a_i\\)\nを\n\\(S\\)\nに挿入して\n\\(S\\)\nのサイズを変数に保存、という処理を行うことで\n\\(A\\)\nの先頭\n\\(i\\)\n項に含まれる値の集合のサイズを前計算出来ます。\n\\(B\\)\nについても同様の前計算を行えばクエリに対する\n\\(|S_A|, |S_B|\\)\nの値が分かり、\n\\(|S_A| \\neq |S_B|\\)\nかどうかを判定出来ます。先述の通り\n\\(|S_A| \\neq |S_B|\\)\nならば答えは\nNo\nとなるため、あとは\n\\(|S_A|=|S_B|\\)\nの場合の判定が出来れば良いです。\n前計算②\n前計算①において、\n\\(S\\)\nに\n\\(i\\)\n番目に(まだ\n\\(S\\)\nに無い値として)挿入される\n\\(A\\)\nの値を\n\\(a_i'\\)\nとします。\n\\(B\\)\nについても同様に\n\\(b_i'\\)\nを定めます。\n\\(k=1,2,...\\)\nに対して\n\\(\\{a_1', \\ldots, a_k'\\}\\)\nと\n\\(\\{b_1', \\ldots, b_k'\\}\\)\nが一致するかどうかが分かれば\n\\(k=|S_A|=|S_B|\\)\nとすることでクエリに答えることが出来ます。\nこれは、再びsetのようなデータ構造\n\\(S\\)\nを用意し、\n\\(k=1,2,...\\)\nに対し次のような処理を行えば良いです。\n\\(S\\)\nに\n\\(a_k'\\)\nが含まれてないならば\n\\(a_k'\\)\nを挿入し、含まれているならば削除する\n\\(S\\)\nに\n\\(b_k'\\)\nが含まれてないならば\n\\(b_k'\\)\nを挿入し、含まれているならば削除する\n\\(|S|=0\\)\nならば\n\\(\\{a_1', \\ldots, a_k'\\}\\)\nと\n\\(\\{b_1', \\ldots, b_k'\\}\\)\nが一致してると判定し、そうでなければ一致していないと判定する\n\\(S\\)\nに値が含まれていないならば挿入し、含まれているならば削除するという操作をすることにより、各値は\n\\(\\{a_1', \\ldots, a_k'\\}\\)\nと\n\\(\\{b_1', \\ldots, b_k'\\}\\)\nのどちらか一方のみに含まれるならば\n\\(S\\)\nに含まれ、どちらにも含まれる/どちらにも含まれないならば\n\\(S\\)\nに含まれないことになります。よって、\n\\(S\\)\nに含まれる値が存在しないことが\n\\(\\{a_1', \\ldots, a_k'\\}\\)\nと\n\\(\\{b_1', \\ldots, b_k'\\}\\)\nが一致するための必要十分条件となります。\nこの解法の時間計算量は\n\\(\\mathrm{O}(N\\log N)\\)\nです。\n別解(+Bonus)\n本問はZobrist Hashを用いて集合の一致判定を確率的に行うことで解くことも出来ます。\nまた、セグメント木のような値の更新・区間\n\\(XOR\\)\nを行えるデータ構造と併せることで次のようなクエリに答えることも出来ます。\n\\(a_{x_i}, a_{x_i+1} \\ldots, a_{y_i}\\)\nに含まれる値の集合と\n\\(b_{z_i}, b_{z_i+1} \\ldots, b_{w_i}\\)\nに含まれる値の集合が等しいかを判定せよ。",
+      "codes": [],
+      "text_sha256": "109242eaa4a6fa49e97dc1eb6db49469cf1d617dcec1197a9832f68f52045d7e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc250/abc250_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc250/editorial/3940",
+      "text": "ハッシュを用いることで、小さい確率で失敗することを許す代わりに\n\\(O(N+Q)\\)\nで簡単に判定できます。\n整数\n\\(a\\)\nのハッシュを適当に定めます。また集合のハッシュを、それが含む整数たちのハッシュの和と定義します。\n前計算で\n\\(A, B\\)\nのそれぞれについて先頭から第\n\\(i\\)\n項まで（\n\\(i=1, \\cdots, N\\)\n）がなす集合のハッシュを\n\\(O(N)\\)\nで求めておくと、各クエリを\n\\(O(1)\\)\nで判定できます。\nこちらの\nAC コード（PyPy3）\nでは、整数\n\\(a\\)\nのハッシュを\n\\(a * (a + 1346) * (a + 9185)\\)\nとしています。",
+      "codes": [],
+      "text_sha256": "6eee8c90a26940221a1e930244d5947aac5d3bafc1b6bf6d5431c1a5af91ae92",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc250/abc250_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc250/editorial/3948",
+      "text": "\\(A,B\\)\nに使われている数値を、\n\\(A\\)\nでの登場順に\n\\(0, 1, 2, \\cdots\\)\nとなるよう、\n数値を振り直します。\n\\(B\\)\nにしか登場しない数値は、\n\\(A\\)\nで使った数値より大きな数値を適当に振ります。\nすると、\n\\(A\\)\nの各集合は、\n種類数\n\\(k\\)\nの時\n\\(\\{0, 1, \\cdots, k-1\\}\\)\nになります。\n\\(B\\)\nの各集合との一致を「種類数と最大値の一致」のみで判定可能になり、簡便です。\nあらかじめ\n\\(i=1, \\cdots, N\\)\nに対し、\n\\(A\\)\nの先頭\n\\(i\\)\n項による集合の種類数\n\\(B\\)\nの先頭\n\\(i\\)\n項による集合の種類数と最大値\nを求めておけば、各クエリに\n\\(O(1)\\)\nで答えられます。\n計算量は、数値の振り直しや種類数のカウントにC++のmapやsetを使うと\n\\(O(N\\log N+Q)\\)\n、unordered_mapなどのハッシュを使うと\n\\(O(N+Q)\\)\nです。",
+      "codes": [],
+      "text_sha256": "c8bfe6daa1fb3f229ad73d9b522a4fcc549336fd7b92803b3733243642656ab4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc250/abc250_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc250/editorial/3909",
+      "text": "\\(A\\)\nの先頭\n\\(x\\)\n​ 項に含まれる値の集合を\n\\(SA_x\\)\n、\n\\(B\\)\nの先頭\n\\(x\\)\n​ 項に含まれる値の集合を\n\\(SB_x\\)\nとします。\n\\(SA_x,SB_x\\)\nはともに\n\\(x\\)\nの増加により(包含関係による順序で)単調増加することから、各\n\\(x\\)\nに対して\n\\(SA_x=SB_y\\)\nが成り立つような\n\\(y\\)\nは区間になることがわかります。そのような区間を\n\\(I_x\\)\nとおいたとき、さらに以下が成り立ちます。\n\\(SA_x=SA_{x'}\\Longrightarrow I_x=I_{x'}\\)\n\\(SA_x\\subsetneq SA_{x'} \\Longrightarrow \\max I_x < \\min I_{x'}\\)\nしたがって、これらを使いつつ、\n\\(SA_x \\cap SB_y, SA_x \\setminus SB_y, SB_y\\setminus SA_x\\)\nの\n\\(3\\)\nつをそれぞれsetで管理することで、尺取法の要領で全ての\n\\(x\\)\nについての\n\\(I_x\\)\nを\n\\(O(N\\log N)\\)\n時間で求めることができます。\n実装例(Python)",
+      "codes": [],
+      "text_sha256": "722998bbe68b1a7f54761e20f6f5eda6e726ff4acaecc670c7c6b567011b12ca",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc250/abc250_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc250/editorial/4518",
+      "text": "\\(2\\)\nつの集合\n\\(S, T\\)\nが\n\\(S=T\\)\nとは，\n\\(x \\in S \\rightarrow x  \\in T\\)\n\\(x \\in T \\rightarrow x \\in S\\)\nを満たすということです．\n\\(a\\)\nの各要素について\n\\(b\\)\n内での最小の位置，\n\\(b\\)\nの各要素について\n\\(a\\)\n内での最小の位置を計算し，累積maxを求めておけば，各クエリに\n\\(\\mathrm{O}(1)\\)\nで答えることができます\nhttps://atcoder.jp/contests/abc250/submissions/33595407",
+      "codes": [],
+      "text_sha256": "51092c3472559a5555963c1f696aed519d0223a621ad33a7caa4b719c9ea979a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc250/abc250_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

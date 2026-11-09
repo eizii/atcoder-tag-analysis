@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc075_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc075/editorial.pdf",
+      "text": "B:  Minesweeper\n\n  ໰୊จͷͱ͓ΓʹϚε໨Λॻ͖׵͑Δ͜ͱΛߟ͑·͢ɻ·ͣɺೋॏϧʔϓΛ࢖֤ۭ͖ͬͯϚεʹ஫໨͠·͢ɻ֤\n ۭ͖Ϛεͷपғ 8 ํ޲ʹྡ઀͢ΔϚεͷछྨΛௐ΂ͯɺര஄Ϛεͷݸ਺Λ਺͍͖͑ͯ·͢ɻ͜ͷͱ͖ɺ֤ํ޲ʹର\n Ԡ͢Δࠩ෼Λ࣋ͬͨ഑ྻΛར༻ͯ͠ௐ΂Δͱ࣮૷͕؆୯ʹͳΓ·͢ɻ·ͨɺॲཧͷ్தͰۭനϚεΛද͢จࣈʮ.ʯ\n ͕਺ ࣈʹஔ͖ ׵ΘΔ఺ʹ஫ҙ͍ͯͩ͘͠͞ɻ\n  C++ͷίʔυྫ\n\n\n\n 1 int main(void) {\n\n 2     int h, w;\n\n 3     cin >> h >> w;\n\n\n 4\n\n 5     string board[50];\n\n\n 6\n\n 7     for (int i = 0; i < h; ++i)  cin >> board[i];\n\n\n 8\n\n 9     const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};\n\n10     const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};\n\n\n11\n\n12     for (int i = 0; i < h; ++i) {\n\n13         for (int j = 0; j < w; ++j) {\n\n14             if (board[i][j] == ’#’) continue;\n\n\n15\n\n16             int num = 0;\n\n17             for (int d = 0; d < 8; ++ d) {\n\n18                 const int ni = i + dy[d];\n\n19                 const int nj = j + dx[d];\n\n\n20\n\n21                 if (ni < 0 or h <= ni) continue;\n22                 if (nj < 0 or w <= nj) continue;\n23                 if (board[ni][nj] == ’#’) num++;\n24             }\n\n\n25\n\n26             board[i][j] = char(num + ’0’);\n\n\n27\n\n28         }\n\n29     }\n\n\n30\n\n31     for (int i = 0; i < h; ++i)  cout << board[i] << endl;\n\n\n32\n\n33     return 0;\n34 }\n\n\n\n\n\n                                                  2",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "4565564d591842964b0baff42f55d6ba5ff9d5df011fe7fc872901eca4e249f6"
+    }
+  ],
+  "status": "available"
+}

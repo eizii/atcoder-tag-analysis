@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc270_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc270/editorial/4849",
+      "text": "この問題は適切に場合分けすることで解くことができます。\n一般に場合分けをする必要がある問題では、極力場合分けのケースを減らし、考えることを減らすことが重要です。\nこの問題では、例えば、常に壁の座標が正となるようにすると場合分けが減り考えやすくなります。\n必要なら全体に\n\\(-1\\)\nを掛けることで、壁の座標\n\\(Y\\)\nは正としてよく、このとき次のような場合分けにより解くことができます。\n\\(X<Y\\)\nなら直接ゴールへ行ける\n\\(X>Y\\)\nならゴールへ行くためにハンマーを拾う必要がある\n\\(Z>Y\\)\nならハンマーを拾うことは不可能\n\\(Z<Y\\)\nなら、まず\n\\(Z\\)\nに行きハンマーを拾い、それからゴールの\n\\(X\\)\nに行く\n実装例(C)",
+      "codes": [
+        "#include<stdio.h>\n#include<stdlib.h>\n\nint main(){\n\tint x,y,z;\n\tscanf(\"%d%d%d\",&x,&y,&z);\n\t\n\tif(y<0){\n\t\tx=-x;\n\t\ty=-y;\n\t\tz=-z;\n\t}\n\t\n\tif(x<y){\n\t\tprintf(\"%d\\n\",abs(x));\n\t}else{\n\t\tif(z>y){\n\t\t\tputs(\"-1\");\n\t\t}else{\n\t\t\tprintf(\"%d\\n\",abs(z)+abs(x-z));\n\t\t}\n\t}\n}"
+      ],
+      "text_sha256": "56d22f77db43ca1a9f79bfef4153494dfb3db407c388f5e1bd9caa997e40981a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc270/abc270_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

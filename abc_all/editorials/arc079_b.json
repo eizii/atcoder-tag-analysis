@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc079_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc079/editorial.pdf",
+      "text": "D: Decrease (Contestant ver)\n\n 操作を逆から考えます。\n\n すると、1 つ要素を選び、値をN 増やす。そしてそれ以外を1 減らす。と\nなります。更に条件として、\n\n   1. 逆操作後に、選んだ要素の値が最大になっている\n\n   2. 逆操作後に、選ばれなかった要素の値が−1 以下になっていない\n\n を満たしている必要があります。\n\n すべての要素が0 以上N −1 の数列から、以上の条件を満たしながらK 回\n逆操作を行うことが出来れば、その数列が答えとなることが示せます。\n\n 結論から言うと、0, 1, 2, ..., N−1という数列を考え、1, 2, ..., N, 1, 2, ..., N, 1, 2, ...\n番目の順で逆操作を行えばよいです。\n\n これを発想するのは難しいですが、これが以上の条件を満たすことを示す\n\nのはあまり難しくありません。\n\n  1, 2, ..., N 番目に1 回ずつ逆操作を行うと、全体が+1 されることに注目す\nると、最後のたかだかN −1 回の操作のみ真面目にシミュレーションすれば\nよいので、十分高速です。\n\n\n\n\n\n                                4",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "27ab1d76c96dc3db8c4d5c013492dadecc585b19302471f47de5a5925abc96e7"
+    }
+  ],
+  "status": "available"
+}

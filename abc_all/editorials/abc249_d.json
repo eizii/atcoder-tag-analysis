@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc249_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc249/editorial/3786",
+      "text": "\\(A\\)\nにおいて整数\n\\(x\\)\nが登場する回数を\n\\(c(x)\\)\nと表すことにします。\n条件を満たす組のうち、\n\\(A_i = p, A_j = q, A_k = r\\)\nを満たすものの個数は\n\\(c(p)c(q)c(r)\\)\nです。また\n\\(\\frac{A_i}{A_j} = A_k \\Leftrightarrow p = qr\\)\nです。\n\\(M = \\max_i A_i\\)\nとおきます。明らかに\n\\(x > M\\)\nのとき\n\\(c(x) = 0\\)\nであり、また\n\\(A\\)\nの要素は全て整数であるので、上記の\n\\(p, q, r\\)\nとして考えるべき組は、以下の条件を全て満たすものに絞ることができます。\n\\(1 \\leq p, q, r \\leq M\\)\n\\(p = qr\\)\n\\(p, q, r\\)\nは整数\nこれを満たす\n\\((p, q, r)\\)\nの組を列挙することができれば、それら全てに対して\n\\(c(p)c(q)c(r)\\)\nを計算して足し合わせたものを答えればよいということになります。\nさて、実は前述の条件を満たす\n\\((p, q, r)\\)\nの組はそれほど多くないことが示せます。\n\\(qr = p \\leq M\\)\nより、\n\\(q\\)\nを\n\\(1 \\leq q \\leq M\\)\nの範囲で固定したときに\n\\(r\\)\nとして考えるべき値は\n\\(1, \\dots, \\left\\lfloor \\frac{M}{q} \\right\\rfloor\\)\nのみです。\n\\(p\\)\nは\n\\(q, r\\)\nの値によって決定されるので、条件を満たす\n\\((p, q, r)\\)\nの個数は\n\\[\\begin{aligned}\n\n\\left\\lfloor \\frac{M}{1} \\right\\rfloor +  \\left\\lfloor \\frac{M}{2} \\right\\rfloor + \\dots + \\left\\lfloor \\frac{M}{M} \\right\\rfloor &\\leq \\frac{M}{1} + \\frac{M}{2} + \\dots + \\frac{M}{M} \\\\\n\n&\\leq \\left(\\frac{M}{1}\\right)  + \\left(\\frac{M}{2} + \\frac{M}{2}\\right) +  \\left(\\frac{M}{4} + \\frac{M}{4} + \\frac{M}{4} + \\frac{M}{4}\\right) + \\dots + \\left(\\frac{M}{2^d} + \\dots + \\frac{M}{2^d}\\right) \\\\\n\n&= M(d + 1)\n\n\\end{aligned}\\]\nとなります。ただし、\n\\(d\\)\nは\n\\(2^d \\leq M\\)\nを満たす最大の整数です。\n\\(d = O(\\log M)\\)\nであるので、条件を満たす\n\\((p, q, r)\\)\nの個数は\n\\(O(M \\log M)\\)\nであることがわかります。\nよって、\n\\(q = 1, \\dots, M\\)\nを全てに対し、\n\\(r\\)\nを\n\\(1 \\leq r \\leq \\left\\lfloor \\frac{M}{q} \\right\\rfloor\\)\nの範囲で動かし、\n\\(c(p)c(q)c(r) = c(qr)c(q)c(r)\\)\nの値を足し合わせることによってこの問題を\n\\(O(M \\log M)\\)\nで解くことができました。\n実装例 (C++) :",
+      "codes": [],
+      "text_sha256": "abe37a3dfb9a18ee4d3c64252b61d66d605930c5b714a572500119da69840c8c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc249/abc249_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

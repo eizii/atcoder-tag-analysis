@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc372_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc372/editorial/10975",
+      "text": "各\n\\(i\\)\nに対して条件を満たす\n\\(j\\)\nを昇順に並べた列を\n\\(J_i\\)\nとします．\n\\(H_{J_{i,1}}\\lt H_{J_{i,2}}\\lt H_{J_{i,3}}\\lt \\ldots\\ \\cdots (1)\\)\nが成り立っています．\n\\(i\\neq N\\)\nとして\n\\(J_{i+1}\\)\nと\n\\(J_i\\)\nの差分に注目します．\n\\(J_i\\)\nは\n\\(i+1\\)\nを必ず含みます．このとき，\n\\(H_{i+1}\\gt H_j\\)\nとなるような\n\\(j\\in J_{i+1}\\)\nは\n\\(J_i\\)\nには含まれません．一方で\n\\(H_{i+1}\\lt H_j\\)\nとなるような\n\\(j\\in J_{i+1}\\)\nは\n\\(J_i\\)\nにも含まれます．\n\\((1)\\)\nが成り立っていることから，次のような手順で\n\\(J_{i+1}\\)\nから\n\\(J_i\\)\nを得ることができます．\n\\(A=J_{i+1}\\)\nとする．\n\\(A\\)\nが空でない限り，以下の操作を続ける．\n\\(A\\)\nの先頭の要素を\n\\(j\\)\nとする．\n\\(H_{i+1}\\gt H_j\\)\nなら\n\\(A\\)\nから\n\\(j\\)\nを削除する．\nそうでないなら，この操作を終了する．\n\\(A\\)\nの先頭に\n\\(i+1\\)\nを追加する．\nこの手順で得られた\n\\(A\\)\nが\n\\(J_i\\)\nである．\n実際には先頭の要素を出し入れするよりも末尾の要素を出し入れする方が容易なため，\n\\(J_i\\)\nを逆順にして管理すると良いです．stack などを用いて実装することができます．計算量について，各\n\\(j\\)\nが出し入れされる回数は高々\n\\(1\\)\n回なので，合計で\n\\(O(N)\\)\nになります．",
+      "codes": [
+        "n = int(input())\nh = list(map(int, input().split()))\nans = [0] * n\nstc = []\nfor i in range(n - 2, -1, -1):\n    while stc and h[stc[-1]] < h[i + 1]:\n        stc.pop()\n    stc.append(i + 1)\n    ans[i] = len(stc)\nprint(*ans)"
+      ],
+      "text_sha256": "851208f6c98b4e463f3d82ca0aac116e8434d973ef2f2072e9027a66f2311f6b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc372/abc372_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc101_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc101/editorial.pdf",
+      "text": "C: Candles\n\n 連続するK 本のろうそくに火を付けるのが最適です．N 本のうち連続するK 本のろうそくを選ぶ方法は\n\nN −K + 1 通りしかないので，全探索することにします．連続するK 本のろうそくのうち，最も左のもの\n\nをl とし，最も右のものをr とします．l とr を訪れれば，自然と残りのろうそくを訪れることになります．\n\nよって，「座標0 を出発し，座標xl と座標xr をともに訪れるための最短時間」が求めるべき値です．これは\n次の2 通りの値の最小値です:\n\n    •  l →r の順に訪れる場合: |xl| + |xr −xl|\n    • r →l の順に訪れる場合: |xr| + |xr −xl|\n\n連続するK 本のろうそくを選ぶ方法を全探索し，この値の最小値を求めれば，それが答えです．時間計算量\n\nはO(N) です．\n\n\n\n\n                                             1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "605551c9c5dbb2d0959998ffae5d5760d4c39e25f334d54e5b7a889859e2e9ab"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc383_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc383/editorial/11543",
+      "text": "以下では商品\n\\(i\\)\nは\n\\(i\\)\n個目の商品を指すとします。\nこの問題は動的計画法を用いることで解くことができます。具体的には、\n\\(dp[c][p]=\\)\n色が\n\\(c\\)\n以下の商品から\n\\(p\\)\n円分購入したときの満足度の最大値\nとして、最終的な答えは\n\\(dp[N][0],dp[N][1],\\ldots,dp[N][X]\\)\nの最大値となるようなDPを考えます。\nこのDPを色ごとにまとめて更新することを考えます。\n\\(dp[c-1]\\)\nまで計算が終わっていて\n\\(dp[c]\\)\nの計算するとき、色が\n\\(c\\)\nである商品を\n\\(1\\)\n個ずつ見て以下のように\n\\(dp[c]\\)\nの更新をします。商品が\n\\(j\\)\nであるとき、\n\\(p=X,X-1,\\ldots,P_j\\)\nの順番で\n\\(dp[c][p]=\\max( \\{dp[c-1][p-P_j]+U_j+K,dp[c][p-P_j]+U_j,dp[c][p]\\})\\)\nと更新することで色\n\\(c\\)\nの商品全てについて更新した後は\n\\(dp[c][i]=\\)\n(色が\n\\(c\\)\n以下の商品から 色\n\\(c\\)\nの商品を\n\\(1\\)\n個以上購入して\n\\(i\\)\n円分購入したときの満足度の最大値)\nとなっています。最後に、各\n\\(p\\)\nに対して\n\\(dp[c][p]=\\max (dp[c][i],dp[c-1][p])\\)\nと更新することで色が\n\\(c\\)\n以下の商品から\n\\(p\\)\n円分購入したときの満足度の最大値が\n\\(dp[c][p]\\)\nに格納されます。\nまとめると、以下の要領でDPテーブルが計算できます\nはじめ、\n\\(dp[0][0]=0\\)\nでそれ以外は\n\\(- \\infty\\)\nで初期化されているとします。\n\\(c=1,2,\\ldots,N\\)\nの順で以下を行います\n色\n\\(c\\)\nの商品\n\\(i_1,i_2,\\ldots,i_k\\)\nであるとき、\n\\(j=1,2,\\ldots,k\\)\nの順番で以下の更新をする\n\\(p=X,X-1,\\ldots,P_{i_j}\\)\nの順番で\n\\(dp[c][p]=\\max(\\{dp[c-1][p-P_{i_j}]+U_{i_j}+K,dp[c][p-P_{i_j}]+U_{i_j},dp[c][p]\\})\\)\nと更新する\n\\(p=0,1,\\ldots,X\\)\nに順で、\n\\(dp[c][p]=\\max (dp[c][p],dp[c-1][p])\\)\nと更新する\n商品の個数も色の種類数も\n\\(N\\)\nで更新には\n\\(\\mathrm{O}(X)\\)\nかかるため、全体で計算量は\n\\(\\mathrm{O}(NX)\\)\nとなり、十分高速です。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\nstatic constexpr ll inf = 2e18;\n\nint main() {\n    int n, x;\n    ll k;\n    cin >> n >> x >> k;\n    vector<int> p(n);\n    vector<ll> u(n), c(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> p[i] >> u[i] >> c[i];\n    }\n    vector<vector<int>> id(n);\n    for (int i = 0; i < n; ++i) {\n        id[c[i] - 1].push_back(i);\n    }\n    vector<vector<ll>> dp(n + 1, vector<ll>(x + 1, -inf));\n    dp[0][0] = 0;\n    for (int i = 0; i < n; ++i) {\n        for (auto& idx : id[i]) {\n            for (int j = x; j >= p[idx]; --j) {\n                if (dp[i][j - p[idx]] != -inf)\n                    dp[i + 1][j] = max(dp[i + 1][j], dp[i][j - p[idx]] + u[idx] + k);\n                if (dp[i + 1][j - p[idx]] != -inf)\n                    dp[i + 1][j] = max(dp[i + 1][j], dp[i + 1][j - p[idx]] + u[idx]);\n            }\n        }\n        for (int j = 0; j <= x; ++j)\n            dp[i + 1][j] = max(dp[i + 1][j], dp[i][j]);\n    }\n    cout << *max_element(dp[n].begin(), dp[n].end()) << endl;\n}"
+      ],
+      "text_sha256": "ba3a801234235bbba51be70f01cfd7c20ad9504c31885c671a22522ee7f9ec03",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc383/abc383_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

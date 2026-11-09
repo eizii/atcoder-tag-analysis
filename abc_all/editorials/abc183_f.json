@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc183_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc183/editorial/282",
+      "text": "各集団について「各クラスに属する生徒が何人いるか」をmapやdictのようなデータ構造で持つことを考えます。集団そのものの管理にはUnion-Findを用います。\nクエリ2に対しては、生徒\n\\(x\\)\nがどの集団に属しているかをUnion-Findで求め、該当する集団のmap/dictを調べることで\n\\(O(\\log N)\\)\nで答えることができます。\nクエリ1に対しては、「人数が少ない方の集団を、人数が多い方の集団に吸収させる」として、2つのmap/dictをマージします。map/dictの各要素を、一方から他方へ愚直に移します。\n実装例(C++)\n実装例(Python)\nこの操作には、map1/dict1の要素数を\n\\(k\\)\nとして\n\\(O(k\\log N)\\)\nの時間がかかるため、最悪計算量は\n\\(O(N\\log N)\\)\nです。\nしかし、各生徒が属している集団の大きさは、移動が行われるごとに2倍以上になるため、各生徒について移動が行われる回数は高々\n\\(O(\\log N)\\)\n回です。したがってクエリ1全てについての計算量の合計は高々\n\\(O(N(\\log N)^2)\\)\nになります。\n以上により、この問題を\n\\(O(N(\\log N)^2+Q\\log N)\\)\nで解くことができました。\n解答例(C++)\n解答例(Python)\n一般に、今回のように「小さい方から大きい方へ移す」とすることで最悪計算量が改善されることは多くあります。（Union-Find の Union by size による実装など）",
+      "codes": [
+        "//map<int,int>であるmap1 の中身を map2に移す\nfor(auto [key, value]:map1) map2[key]+=value;",
+        "#defaultdictであるdict1の中身をdict2に移す\nfor key, value in dict1.items():\n    dict2[key]+=value;"
+      ],
+      "text_sha256": "3a320e34de3f34ebf04f3d74a183c72a6000b4337439dc21729b8a53ec89142a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc183/abc183_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

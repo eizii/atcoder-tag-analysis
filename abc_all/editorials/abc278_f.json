@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc278_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5232",
+      "text": "「これまでに使っていない単語の集合」と「最後の文字」のペアを状態に持った DP を行うことでこの問題を解くことができます。\n\\(\\operatorname{dp}[S][c]\\coloneqq\\) これまでに使っていない単語の集合が \\(S\\subseteq\\{s _ 1,\\ldots,s _ N\\}\\) であり、最後の文字が \\(c\\) である状態について、その状態から勝てるとき \\(1\\) 、そうでないとき \\(0\\)\nであるような DP テーブルを考えます。\nこのとき、この DP テーブルは次のようにして値を決めることができます。\n\\[\\operatorname{dp}[S][c]=\\left\\{\\!\\!\\begin{array}{cll}1&&({}^\\exists s\\in S.\\;s[0]=c\\wedge\\operatorname{dp}[S\\setminus\\{s\\}][s[-1]]=0)\\\\0&&(\\text{otherwise})\\end{array}\\right.\n\\]\nただし、\\(s[0],s[-1]\\) はそれぞれ \\(s\\) の最初の文字、最後の文字を表します。\nこの式は、「残っている単語のうち、それを言ったら相手を負かせるものがあるとき、かつそのときに限り勝つ」ことを DP の遷移に書き下したものです。\n\\(\\operatorname{dp}[\\{s_1,\\ldots,s_N\\}][c]\\) が \\(1\\) であるような \\(c\\) が存在すれば高橋くんは勝つことができます。\nこの DP テーブルを正しく埋めるためには、\\(\\operatorname{dp}[S][c]\\) を計算しようとするより先に \\(\\operatorname{dp}[S\\setminus\\{s\\}][s[-1]]\\) を計算していなければなりません。\nこの条件はいわゆる bit DP  で用いる方法で \\(S\\) を \\(N\\operatorname{bit}\\) の整数に変換して昇順に計算を行えば満たされます。\n文字の種類数を \\(\\sigma\\) として、状態が \\(2^N\\sigma\\) 通りあり、状態 \\(1\\) つあたり \\(O(N)\\) 時間かけて DP テーブルの計算を行うので全体で時間計算量は \\(O(2^NN\\sigma)\\) となります。\n実装例は以下のようになります。\nここではワードサイズ \\(w\\) に対して \\(\\sigma\\lt w\\) が成り立っていることを仮定した実装をしています。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <utility>\n#include <string>\n\nint main() {\n    using namespace std;\n\n    unsigned N;\n    cin >> N;\n\n    // i 番目の文字列の最初の文字/最後の文字\n    vector<pair<unsigned char, unsigned char>> info(N);\n    for (auto&&[first, last] : info) {\n        string S;\n        cin >> S;\n        first = S.front() - 'a';\n        last = S.back() - 'a';\n    }\n\n    // dp[S] の c bit 目 = S が残っていて直前の文字が c のときの勝敗\n    vector<unsigned> dp(1UL << N);\n    for (unsigned S{1}; S < 1UL << N; ++S)\n        for (unsigned c{}; c < N; ++c)\n            if (1 & S >> c)\n                dp[S] |= (1UL & ~dp[S ^ 1UL << c] >> info[c].second) << info[c].first;\n\n    // dp[2^N - 1] に立っているビットがあれば先手の勝ち\n    cout << (dp.back() ? \"First\" : \"Second\") << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "ec8eb7c3be72abffc5ab27927a59a8cb75d0872d025d2e7325d1da4d7df848b0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

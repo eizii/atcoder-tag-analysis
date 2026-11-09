@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc252_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc252/editorial/3997",
+      "text": "まず、揃える文字を固定したときについて考えます。\n例えば、\n0\nを揃えるとします。\n\\(j=0,1,\\ldots,9\\)\nについて、\n\\(i=1,2,\\ldots,N\\)\nのうち\n\\(S_i\\)\nの\n\\(j\\)\n文字目が\n0\nであるようなものの個数を\n\\(count(0,j)\\)\nとします。\nこのとき、ある\n\\(j\\)\nについて\n\\(count(0,j)\\geq 1\\)\nかつ\n\\(t<10\\times (count(0,j)-1)+j\\)\nならば\n\\(t\\)\n秒後までにすべてのリールを\n0\nに揃えることはできません。なぜなら\n\\(j\\)\n文字目が\n0\nであるようなリールをすべて\n0\nを表示させて止めるには\n\\(t'\\bmod{10}=j\\)\nであるような相異なる非負整数\n\\(t'\\)\nにおいてボタンを押すことを\n\\(count(0,j)\\)\n回繰り返さなくてはならないからです。\n逆に、\n\\(\\displaystyle\\max_{j=0,1,\\ldots,9}  (10\\times (count(0,j)-1)+j)\\)\n秒経過するまでにはこれを達成することができます。\n各時刻\n\\(t'\\)\nについて、\n\\((t'\\bmod{10})+1\\)\n文字目が\n0\nであり、まだ止まっていないならばそのリールを選んで停止させることを繰り返せばよいです。\n同じことが\n1\n,\n2\n,\n\\(\\ldots\\)\n,\n9\nに対しても成り立ち、求めたい値はそのうちの最小値となります。\nよって、答えは\n\\[\n\\displaystyle\\min_{k=0,1,\\ldots,9}\\left( \\max_{j=0,1,\\ldots,9} (10\\times (count(k,j)-1)+j)\\right)\n\\]\nとして求めることができます。\nただし、\n\\(count(k,j)\\)\nで、\n\\(i=1,2,\\ldots,N\\)\nのうち\n\\(S_i\\)\nの\n\\(j\\)\n文字目が\n\\(k\\)\nであるようなものの個数を表すとします。\nなお、特定の文字を揃えるのにかかる時間は高々\n\\(10N-1\\)\n秒であるため、揃える文字を決めた上でシミュレーションを行っても十分制限時間内に答えを出すことができます。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint n;\n\tstring s[100];\n\tint cnt[10][10];\n\tint ans, mx;\n\tfor (int i = 0; i < 10; i++) {\n\t\tfor (int j = 0; j < 10; j++)cnt[i][j] = 0;\n\t}\n\n\tcin >> n;\n\tfor (int i = 0; i < n; i++)cin >> s[i];\n\n\tfor (int i = 0; i < n; i++) {\n\t\tfor (int j = 0; j < 10; j++) {\n\t\t\tcnt[(s[i][j] - '0')][j]++;\n\t\t}\n\t}\n\n\tans = 1000;\n\tfor (int i = 0; i < 10; i++) {\n\t\tmx = 0;\n\t\tfor (int j = 0; j < 10; j++) {\n\t\t\tmx = max(mx, 10 * (cnt[i][j] - 1) + j);\n\t\t}\n\t\tans = min(ans, mx);\n\t}\n\n\tcout << ans << endl;\n\n\treturn 0;\n}",
+        "n=int(input())\ns=[]\nfor i in range(n):\n\ts.append(input())\n\ncnt=[[0 for j in range(10)]for i in range(10)]\nfor i in range(n):\n\tfor j in range(10):\n\t\tcnt[int(s[i][j])][j]= cnt[int(s[i][j])][j]+1\n\nmx=[0 for i in range(10)]\nfor i in range(10):\n\tfor j in range(10):\n\t\tmx[i]=max(mx[i], 10 * (cnt[i][j] - 1) + j)\n\nprint(min(mx))"
+      ],
+      "text_sha256": "a4ea5bb67b7ba84d779d9657f27a3d444d1ae907815bf12cd6febff32e50b95e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc252/abc252_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

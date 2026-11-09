@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc431_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc431/editorial/14492",
+      "text": "\\(A\\)\nに含まれる\n\\(v\\)\nの個数を\n\\(\\mathrm{cnt}[v]\\)\nとします．\n条件から以下が成り立ちます．\n\\(B\\)\nにおいて，ある要素\n\\(v\\)\nの直前に\n\\(v+D\\)\nより大きい要素は置くことができない\nこの考えをもとにして，値が小さい方から\n\\(B\\)\nの相対的な位置を決めていく\n挿入 dp\nでこの問題を解きます．\n\\(v\\)\n未満の相対的な位置が決まっていたとします．このとき，\n\\(v\\)\nを挿入できる位置は，（現在の\n\\(B\\)\nに依らず）\n\\(v-D\\)\n以上\n\\(v\\)\n未満の数の個数に依存しています．\n例えば\n\\(D=3, B=(4, 1, 3, 5, 4, 2, 3)\\)\nで，\n\\(v=6\\)\nを挿入するとき，挿入できる場所は以下のようになります：\n挿入できる箇所を数式で書くと\n\\(\\mathrm{cnt}[v-D]+\\ldots+\\mathrm{cnt}[v-1]+1\\)\n箇所です．（\n\\(+1\\)\nは末尾に追加できることを表しています．）\nこれらの挿入可能な位置から\n\\(v\\)\nを合計\n\\(\\mathrm{cnt}[v]\\)\n個挿入する方法は，互いに区別できない\n\\(\\mathrm{cnt}[v]\\)\n個の玉を互いに区別できる\n\\(\\mathrm{cnt}[v-D]+\\ldots+\\mathrm{cnt}[v-1]+1\\)\n個の箱に入れる方法に等しく\n\\(\\dbinom{\\mathrm{cnt}[v-D]+\\ldots+\\mathrm{cnt}[v]}{\\mathrm{cnt}[v]}\\)\n通りです．\nよって，求める答えは\n\\[\\prod_{v=1}^{\\max(A)}\\dbinom{\\mathrm{cnt}[v-D]+\\ldots+\\mathrm{cnt}[v]}{\\mathrm{cnt}[v]}\\]\nです．これは\n\\(O(N+\\max(A))\\)\nで計算できます．",
+      "codes": [
+        "( 4,  1,  3,  5,  4,  2,  3,  )\n ^       ^   ^   ^       ^   ^",
+        "mod = 998244353\ntable_size = 3 * 10**5\n\nfac = [1] * (table_size + 1)\nfinv = [1] * (table_size + 1)\n\nfor i in range(2, table_size + 1):\n    fac[i] = fac[i - 1] * i % mod\nfinv[table_size] = pow(fac[table_size], mod - 2, mod)\nfor i in range(table_size - 1, -1, -1):\n    finv[i] = finv[i + 1] * (i + 1) % mod\n\n\ndef binom(n, k):\n    if n < 0 or k < 0 or k > n:\n        return 0\n    return (fac[n] * finv[k] % mod) * finv[n - k] % mod\n\n\nN, D = map(int, input().split())\nA = list(map(int, input().split()))\ncnt = [0] * (max(A) + 1)\n\nfor i in A:\n    cnt[i] += 1\n\nans = 1\ns = 0\nfor i in range(max(A) + 1):\n    s += cnt[i]\n    ans *= binom(s, cnt[i])\n    ans %= mod\n    if i >= D:\n        s -= cnt[i - D]\n\nprint(ans)"
+      ],
+      "text_sha256": "59192f422d3bc57aa58f962587f60e1ada8e2f428341149912383198ed2bed7d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc431/abc431_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

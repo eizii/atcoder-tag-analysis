@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc253_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc253/editorial/4001",
+      "text": "一方の駒が\n\\(a\\)\n行目\n\\(b\\)\n列目のマスに置かれており、もう一方の駒が\n\\(c\\)\n行目\n\\(d\\)\n列目に置かれているとします。このとき、\n\\(|a - c| + |b - d|\\)\nが答えとなります。よって、駒が置かれているマス目を特定することができればよく、これは\nfor\n文や\nif\n文を用いて実装することができます。\n実装例 (C++) :\n実装例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int h, w;\n    cin >> h >> w;\n    vector<pair<int, int>> pieces;\n    for (int i = 0; i < h; ++i) {\n        for (int j = 0; j < w; ++j) {\n            char c;\n            cin >> c;\n            if (c == 'o') {\n                pieces.emplace_back(i, j);\n            }\n        }\n    }\n    const auto& [a, b] = pieces[0];\n    const auto& [c, d] = pieces[1];\n    cout << abs(a - c) + abs(b - d) << '\\n';\n    return 0;\n}",
+        "h, w = map(int, input().split())\ns = [input() for _ in range(h)]\npieces = []\nfor i in range(h):\n  for j in range(w):\n    if s[i][j] == 'o':\n      pieces.append((i, j))\na, b = pieces[0]\nc, d = pieces[1]\nprint(abs(a - c) + abs(b - d))"
+      ],
+      "text_sha256": "9fab2b1c97be8cc66554a437f5d003b4cc2308c942b09de5e78019a4f083a173",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc253/abc253_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

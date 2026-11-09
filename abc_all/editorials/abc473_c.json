@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc473_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc473/editorial/24875",
+      "text": "高橋くんが転入する前における、クラスの人数の最大値を \\(M\\) とします。 クラスの人数の最大値が高橋くんの転入で減ることはないので、高橋くんが転入したクラスの人数は高橋くんを含めて \\(M\\) 人以上でなければなりません。\n逆に、この条件を満たせば高橋くんは喜びます。 よって、求めるものは高橋くんが転入する前に \\(M-1\\) 人以上いるクラスがいくつあるかです。\nすべてのクラスについて高橋くんが転入する前の人数を求め、これが \\(M-1\\) 人以上となるクラスの個数を数えればよいです。 時間計算量は \\(O(N)\\) となります。 実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int N, K;\n    cin >> N >> K;\n\n    vector<int> member_count(K);\n    for (int i = 0; i < N; ++i) {\n        int A;\n        cin >> A;\n        ++member_count[--A];\n    }\n\n    int M = ranges::max(member_count); // 最大値を M として\n    int ans = 0;\n    for (int i = 0; i < K; ++i) {\n        if (member_count[i] >= M - 1) { // M - 1 人以上のクラスの個数を数える\n            ++ans;\n        }\n    }\n\n    cout << ans << endl;\n    return 0;\n}\n",
+        "N, K = map(int, input().split())\n\nmember_count = [0 for i in range(K)]\nfor A in map(int, input().split()):\n    member_count[A - 1] += 1\n\nM = max(member_count) # 最大値を M として\nans = 0\nfor c in member_count:\n    if c >= M - 1: # M - 1 人以上のクラスの個数を数える\n        ans += 1\n\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "4e158150af6a6cd0da0aae505c01ccf189a120de23e5a6ae72cd8327704beb05"
+    }
+  ],
+  "status": "available"
+}

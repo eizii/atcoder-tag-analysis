@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc187_e",
+  "source_url": "https://atcoder.jp/contests/abc187/tasks/abc187_e?lang=ja",
+  "statement": "問題文\nN\n頂点\nN-1\n辺から成る木があり、頂点には\n1, 2, \\dots, N\nの番号が、辺には\n1, 2, \\dots, N-1\nの番号がついています。辺\ni\nは頂点\na_i\nと頂点\nb_i\nを結びます。\r\nこの木の各頂点には\n1\nつの整数が書かれています。頂点\ni\nに書かれている整数を\nc_i\nとします。はじめ、\nc_i = 0\nです。\nQ\n個のクエリが与えられます。\ni\n番目のクエリでは、整数\nt_i, e_i, x_i\nが与えられます。クエリの内容は以下の通りです。\nt_i = 1\nのとき : 頂点\na_{e_i}\nから辺をたどって頂点\nb_{e_i}\nを通らずに到達できるような全ての頂点\nv\nに対して、\nc_v\nを\nc_v + x_i\nに書き換える。\nt_i = 2\nのとき : 頂点\nb_{e_i}\nから辺をたどって頂点\na_{e_i}\nを通らずに到達できるような全ての頂点\nv\nに対して、\nc_v\nを\nc_v + x_i\nに書き換える。\nすべてのクエリを処理した後、各頂点に書かれた整数を出力してください。\n制約\n入力は全て整数\n2 \\le N \\le 2 \\times 10^5\n1 \\le a_i, b_i \\le N\n与えられるグラフは木である\n1 \\le Q \\le 2 \\times 10^5\nt_i \\in \\{1, 2\\}\n1 \\le e_i \\le N-1\n1 \\le x_i \\le 10^9",
+  "html_sha256": "96f7f01b36f6b1a1c7ccd82937d8bd2fed919d35a6e36255c6935034eacd31bc",
+  "extractor": "section_headings_v1"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc251_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc251/editorial/3959",
+      "text": "本問題の制約にある通り、\n\\(S\\)\nの長さは\n\\(1, 2, 3\\)\nのうちのいずれかです。\n\\(S\\)\nの長さが\n\\(1\\)\nのとき、\n\\(S\\)\nを\n\\(6\\)\n回繰返した文字列を、\n\\(S\\)\nの長さが\n\\(2\\)\nのとき、\n\\(S\\)\nを\n\\(3\\)\n回繰返した文字列を、\n\\(S\\)\nの長さが\n\\(3\\)\nのとき、\n\\(S\\)\nを\n\\(2\\)\n回繰返した文字列を\n出力すれば良いです。\n文字列の長さに応じて異なる処理を行うには、プログラミング言語の標準的な機能である条件分岐の機能（ if 文など）を用いることができます。\n以下に、C++ 言語による正解例を記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(void)\n{\n  string s;\n  cin >> s;\n  \n  if(s.size() == 1) cout << s+s+s+s+s+s << endl;\n  if(s.size() == 2) cout << s+s+s << endl;\n  if(s.size() == 3) cout << s+s << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "8e0411b09f18afd36f67316f36e0ecc5433579c8ccd8f137a7c2c7fae9fbf7e9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc251/abc251_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

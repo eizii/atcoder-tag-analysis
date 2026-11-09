@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc384_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc384/editorial/11601",
+      "text": "一度接したスライムは吸収しない限り接し続けることと、高橋くんの強さが減少することはないことから、吸収できるスライムはすべて吸収してしまって損しません。\nここから、次のようなアルゴリズムが考えられます。\n以下の行動を繰り返せるだけ繰り返す。\n接しているスライムのうち、最も強さの小さいスライムを吸収する\nこのアルゴリズムで吸収したスライムの集合を \\(S\\) とし、\\(S\\neq S ^ {\\prime}\\) なるスライムの集合 \\(S ^ {\\prime}\\) を吸収したほうが最終的な強さが大きいとします。\nこのとき、\\(S ^ {\\prime}\\) を吸収する行動の列をひとつ固定し、その列ではじめて吸収される \\(a\\in S ^ {\\prime},a\\notin S\\) を満たすスライム \\(a\\) について考えます。\nすると、上のアルゴリズムで \\(S\\) の要素をすべて吸収したときには \\(a\\) に接しており、かつその時点での高橋くんの強さは \\(a\\) を吸収するのに十分であることが言えます。\nこれは \\(a\\notin S\\) に反するため、\\(S\\) が最適であることがわかります。\\(\\square\\)\nあとは、これを実現する十分高速なアルゴリズムを実装すればよいです。\nスライムをひとつ吸収するごとに、接しているスライムの個数はたかだか \\(2\\) つ増えます（ひとつ減り、たかだか \\(3\\) つのスライムと新しく接します）。\n行動を行おうとするたびに接しているスライムをすべて確認していては実行時間制限に間に合わせるのは難しいですが、接しているスライムの大きさを優先度付きキューや平衡二分探索木などで管理することでこれを行動一回あたり \\(O(\\log HW)\\) 時間とすることができます。\n行動回数はたかだか \\(HW\\) 回なので、十分高速です。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <queue>\n#include <ranges>\n#include <vector>\n#include <limits>\n\nint main() {\n    using namespace std;\n    unsigned H, W;\n    cin >> H >> W;\n\n    unsigned long X;\n    unsigned x, y;\n    cin >> X >> x >> y;\n\n    // 周囲に大きすぎて吸収できないスライムを番兵として配置しておく\n    // 500 × 500 × 10^12 = 2.5 × 10^19 あれば十分\n    vector slime_size(H + 2, vector(W + 2, 250000000000000000UL));\n    // 中央 H × W マスだけ読み込む\n    for (auto &&row : slime_size | views::drop(1) | views::take(H))\n        for (auto &&S : row | views::drop(1) | views::take(W))\n            cin >> S;\n\n    unsigned long now_size{slime_size[x][y]};\n\n    vector visited(H + 2, vector(W + 2, false));\n\n    priority_queue<tuple<unsigned long, unsigned, unsigned>, vector<tuple<unsigned long, unsigned, unsigned>>, greater<>> pq;\n    pq.emplace(0, x, y);\n    visited[x][y] = true;\n\n    while (!pq.empty()) {\n        const auto [size, x, y] = pq.top();\n        pq.pop();\n\n        // 接しているスライムのうち最も小さいものも吸収できなければ終了\n        if (size >= (now_size + X - 1) / X)\n            break;\n\n        // スライムを吸収する\n        now_size += size;\n\n        // 新たに接したスライムを優先度付きキューに追加する\n        for (const auto &[dx, dy] : vector<pair<int, int>>{{1, 0}, {-1, 0}, {0, 1}, {0, -1}})\n            if (!visited[x + dx][y + dy]) {\n                visited[x + dx][y + dy] = true;\n                pq.emplace(slime_size[x + dx][y + dy], x + dx, y + dy);\n            }\n    }\n\n    cout << now_size << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "15d6dba753da213a6eaf717616a2cc21a6c1c76ca18f66c74892943ee60685b1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc384/abc384_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc384/editorial/11691",
+      "text": "after_contestケースが追加され、吸収できるかどうかの判定を倍精度浮動小数点数型(c++ならdouble、pythonならfloat、rustならf64、etc)で行う解法がWAになるようになりました。\n具体的には、以下のとき、浮動小数点数の丸め誤差の影響により判定に失敗します。\n\\(X=2^{14}=16384\\)\n吸収したいスライムの大きさが\n\\(2^{39}=549755813888\\)\n高橋君の大きさが\n\\(2^{53}+1=9007199254740993\\)\nどうすればよいか\n案1\n\\(X\\)\nを移項し、\nslime_size * X < takahashi_size\nとすることで整数演算で判定することができます。ただし、左辺は\n\\(2^{64}\\)\n以上の値を取りうるため、オーバーフローに注意する必要があります。(128bit整数や多倍長整数を使うほか、一旦doubleで乗算を計算して\n\\(2^{60}\\)\n程度以上かどうかで場合分けするなどの方法があります）\n案2\n\\(n\\)\nを整数、\n\\(\\alpha\\)\nを実数とするとき、\n\\(n < \\alpha \\Longleftrightarrow n < \\lceil\\alpha\\rceil\\)\nが成り立つ\n\\(a\\)\nを整数、\n\\(b\\)\nを正整数とするとき、\n\\(\\displaystyle \\left\\lceil\\frac{a}{b}\\right\\rceil =\\left\\lfloor\\frac{a+b-1}{b}\\right\\rfloor\\)\nが成り立つ\nこの2つの性質を使うことで、\nslime_size < (takahashi_size + X-1) / X\nのように整数演算で不等式部分の計算を行うことができます。(整数除算は切り捨てになると暗黙的に仮定しています)\n公式解説\nのコードもこのように書かれています(37行目)",
+      "codes": [
+        "if (吸収したいスライムの大きさ) < (高橋君の大きさ)/X:\n    吸収する"
+      ],
+      "text_sha256": "b5e3e7904fdff081c4aee92f323f754c596e1cafea2798dc26b56873c34f8008",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc384/abc384_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

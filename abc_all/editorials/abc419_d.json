@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc419_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc419/editorial/13638",
+      "text": "この問題は累積和の練習問題です．\n各 index に対して，そこが何回 swap されたかが分かれば，最終的な\n\\(S\\)\nを求めることができます．具体的には，答えの\n\\(i\\)\n文字目は swap された回数が偶数なら\n\\(S_i\\)\n，奇数なら\n\\(T_i\\)\nです．swap された回数は累積和を用いることで高速に求めることができます．計算量は\n\\(O(N+M)\\)\nです．",
+      "codes": [
+        "N, M = map(int, input().split())\ns = input()\nt = input()\ncum = [0] * (N + 1)\nfor _ in range(M):\n    l, r = map(int, input().split())\n    cum[l - 1] += 1\n    cum[r] -= 1\nfor i in range(N):\n    cum[i + 1] += cum[i]\nans = [s[i] if cum[i] % 2 == 0 else t[i] for i in range(N)]\nprint(\"\".join(ans))"
+      ],
+      "text_sha256": "54d1c3624294b0f421af05cdd50787d44f974a82c6660fc9c7a0e3e5f09cd4e1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc419/abc419_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

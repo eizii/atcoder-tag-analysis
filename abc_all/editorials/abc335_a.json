@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc335_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc335/editorial/9036",
+      "text": "文字列\n\\(S\\)\nの最後の文字を\n3\nから\n4\nに変更して出力するにはいくつかの方法があります。\n\\(S\\)\nの末尾の文字以外を出力した後、\n4\nと出力する。\n\\(S\\)\nの末尾の文字を削除した後、末尾に\n4\nを挿入して出力する。\nあなたが用いている言語で文字列 (やそれに相当する配列等) を取り扱う方法を今一度確認した上で実装しましょう。\n実装例 (Python):\n実装例 (C++):",
+      "codes": [
+        "s = str(input())\nl = len(s)\nfor i in range(l-1):\n  print(s[i],end=\"\")\nprint(\"4\")",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  s.pop_back();\n  s.push_back('4');\n  cout << s << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "3ed595ccaef9996b77b001b21bc0c4274206b58762dc0c81f46b7b87f9658719",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc335/abc335_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

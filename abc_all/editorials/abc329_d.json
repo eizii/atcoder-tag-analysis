@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc329_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc329/editorial/7728",
+      "text": "重要な性質として、以下が成り立ちます。\n\\(i+1\\)\n票目までを開票した場合に当選する候補者は、\n\\(i\\)\n票目までを開票した場合に当選する候補者あるいは\n\\(i+1\\)\n票目の投票先となった候補者に限られる。\nこの性質を利用すると、各候補者の得票数および\n\\(i\\)\n票目までを開票した場合に当選する候補者を管理しておき、その候補者と\n\\(i+1\\)\n票目の投票先となった候補者の得票数を比較しながら、\n\\(i = 1, 2, \\ldots, N\\)\nの順に\n\\(i\\)\n票目までを開票した場合に当選する候補者を更新していくことで答えを求めることができます。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tvector<int> a(m);\n\tfor (int i = 0; i < m; i++) cin >> a[i];\n\tvector<int> cnt(n + 1); // 各候補者の得票数\n\tint ans = 0; // 現時点での当選者\n\tfor (int i = 0; i < m; i++) {\n\t\tcnt[a[i]]++;\n\t\tif (cnt[ans] < cnt[a[i]]) ans = a[i];\n\t\telse if (cnt[ans] == cnt[a[i]]) ans = min(ans, a[i]);\n\t\tcout << ans << '\\n';\n\t}\n}"
+      ],
+      "text_sha256": "71ff8551f09e330e531d46277d648f43c3b0bc025e88c7e00b3e523205e3f11f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc329/abc329_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

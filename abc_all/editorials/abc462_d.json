@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc462_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc462/editorial/21022",
+      "text": "事件解決の鍵は犯行開始時刻です。以下、\n\\(T_i\\)\nの最大値（犯行開始には遅すぎる時刻）を\n\\(M\\)\nとします。\n犯行開始時刻が\n\\(t\\)\nであるときに犯人のペアとしてありうるものの個数を\n\\(p_t\\)\nとします。犯行開始時刻は\n\\(1\\)\n以上\n\\(M\\)\n以下の整数であり、犯行開始時刻が違えば異なるシナリオとして数えられるため、答えは\n\\(p_1 + p_2 + \\dots + p_M\\)\nです。\n犯行開始時刻が\n\\(t\\)\nであるときに犯行開始から犯行終了まで常に館にいる人数を\n\\(c_t\\)\nとします。\n\\(c_t\\)\n人のうちどの\n\\(2\\)\n人を選んでもありうるシナリオが得られるため、\n\\(p_t = {}_{c_t} \\mathrm{C}_2 = \\frac{c_t \\times (c_t - 1)}{2}\\)\nです。\n\\(c_t\\)\nは時刻\n\\(t\\)\nから時刻\n\\(t + D\\)\nまで常に館にいる人の数です。すなわち、\n\\(S_i \\leq t\\)\nかつ\n\\(t + D \\leq T_i\\)\nを満たす人\n\\(i\\)\nの数です。\n\\(t + D \\leq T_i\\)\nを\n\\(t \\leq T_i - D\\)\nと書き換えると、人\n\\(i\\)\nの退館時刻を\n\\(T_i - D\\)\nに変えたときに時刻\n\\(t\\)\nに館にいる人数と解釈できます（もともと滞在時間が\n\\(D\\)\n未満の人は無視します）。この解釈のもとで人の出入りをシミュレートすることで\n\\(c_1, \\dots, c_M\\)\nがすべて求まり、それを使って答えを計算できます。時間計算量は\n\\(O(N + M)\\)\nです。\nPython での実装例",
+      "codes": [
+        "N, D = map(int, input().split())\nM = 10**6 + 1\nd = [0] * M\nfor i in range(N):\n    S, T = map(int, input().split())\n    if T - S >= D:\n        d[S] += 1\n        d[T - D + 1] -= 1\n\nc, ans = 0, 0\nfor i in range(M):\n    c += d[i]\n    ans += c * (c - 1) // 2\nprint(ans)"
+      ],
+      "text_sha256": "8526acfeec1b8d8eed86f1776d57086f777f7558a1cf08e9836fe7f2118294c0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc462/abc462_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

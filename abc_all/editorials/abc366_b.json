@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc366_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc366/editorial/10639",
+      "text": "まず，2つ目の条件「各\n\\(T_i\\)\nの末尾は\n*\nでない」を無視して，\n\\(T_i\\)\nを構成しましょう．\n\\(T_1,T_2,\\dots,T_M\\)\nを，長さ\n\\(N\\)\nの\n*\nのみからなる文字列として初期化します．\nそして，各\n\\(i,j\\)\nに対し，\n\\(S_i\\)\nの\n\\(j\\)\n文字目を\n\\(T_j\\)\nの\n\\(N-i+1\\)\n文字目に代入します．\nこれで，2つ目の条件以外は満たされます．\n2つ目の条件を満たすには，各\n\\(T_i\\)\nについて，その末尾が\n*\nである限り削除するという操作を繰り返せばよいです．\n実装例 (Python)\n実装例 (C++)",
+      "codes": [
+        "N = int(input())\nS = [input() for _ in range(N)]\nM = max(map(len, S))\nT = [[\"*\"] * N for _ in range(M)]\nfor i in range(N):\n    for j in range(len(S[i])):\n        T[j][N - i - 1] = S[i][j]\nfor i in range(M):\n    while T[i][-1] == \"*\":\n        T[i].pop()\n    print(\"\".join(T[i]))",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    vector<string> S(N);\n    for (auto& s : S) cin >> s;\n    int M = 0;\n    for (auto& s : S) M = max(M, (int)s.size());\n    vector<string> T(M, string(N, '*'));\n    for (int i = 0; i < N; ++i) {\n        for (int j = 0; j < (int)S[i].size(); ++j) {\n            T[j][N - i - 1] = S[i][j];\n        }\n    }\n    for (int i = 0; i < M; ++i) {\n        while (T[i].back() == '*') {\n            T[i].pop_back();\n        }\n        cout << T[i] << endl;\n    }\n}"
+      ],
+      "text_sha256": "1bcd7356ae9e92e51fbe281889cb1850217327313434eb1ec30c270761968545",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc366/abc366_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

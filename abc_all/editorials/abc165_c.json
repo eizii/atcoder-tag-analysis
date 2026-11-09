@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc165_c",
+  "editorials": [
+    {
+      "text": "C: Many Requirements\n結論から述べると, 問の条件を満たす数列を全探索します.\n問の条件を満たす数列は, N 個の仕切りとM −1 個のボールを並び替えた列と一対一に対応します.\n実際, 各列に対して,\nAi = i 番目の仕切りより左側に存在するボールの数+ 1\nとすれば, 前述の一対一対応が得られます.\nN 個の仕切りとM −1 個のボールを並び替える列の数は, N+M−1CN 通り存在します(N + M −1\n個の場所から仕切りを置くN 箇所を選ぶ方法の数え上げに相当).\n各数列を深さ優先探索で生成する場合, 各数列の生成に要する時間はO (N) ですから, 全ての数列の\n生成に要する時間はO (N N+M−1CN) です.\n数列を決めればその数列のスコアはO (Q) で計算出来ます.\n以上より, この問題はO ((N + Q) N+M−1CN) で解けました.\n",
+      "text_sha256": "ec36b78dad0d999f4756da997de3e8aeb3d3fb9a381da6e9ae8deff3339d79f3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc165/abc165_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

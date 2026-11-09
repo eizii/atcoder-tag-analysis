@@ -1,0 +1,423 @@
+                 ABC 075 ղઆ
+
+
+                                              writer: Hec
+
+                                   2017 ೥10 ݄ 14 ೔
+
+
+
+ A:  One out of Three
+
+  ೖྗͰ੔਺A, B, C Λड͚औΓ·͢ɻA = B ͷ৔ ߹ ʹ͸ CɺA = C ͷ৔ ߹ ʹ͸ BɺB = C ͷ৔ ߹ ʹ͸ A Λ
+ ग़ྗ͠·͢ɻ
+
+
+  C++ͷίʔυྫ
+
+
+
+ 1 int main(void) {
+
+ 2     int a,b,c;
+
+ 3     cin >> a >> b >> c;
+
+
+ 4
+
+ 5     if(a == b){
+
+ 6         cout << c << endl;
+
+ 7     }else if(a == c){
+ 8         cout << b << endl;
+
+ 9     }else{
+
+10         cout << a << endl;
+
+11     }
+
+
+12
+
+13     return 0;
+
+14 }
+
+
+
+
+
+                                                  1
+
+ B:  Minesweeper
+
+  ໰୊จͷͱ͓ΓʹϚε໨Λॻ͖׵͑Δ͜ͱΛߟ͑·͢ɻ·ͣɺೋॏϧʔϓΛ࢖֤ۭ͖ͬͯϚεʹ஫໨͠·͢ɻ֤
+ ۭ͖Ϛεͷपғ 8 ํ޲ʹྡ઀͢ΔϚεͷछྨΛௐ΂ͯɺര஄Ϛεͷݸ਺Λ਺͍͖͑ͯ·͢ɻ͜ͷͱ͖ɺ֤ํ޲ʹର
+ Ԡ͢Δࠩ෼Λ࣋ͬͨ഑ྻΛར༻ͯ͠ௐ΂Δͱ࣮૷͕؆୯ʹͳΓ·͢ɻ·ͨɺॲཧͷ్தͰۭനϚεΛද͢จࣈʮ.ʯ
+ ͕਺ ࣈʹஔ͖ ׵ΘΔ఺ʹ஫ҙ͍ͯͩ͘͠͞ɻ
+  C++ͷίʔυྫ
+
+
+
+ 1 int main(void) {
+
+ 2     int h, w;
+
+ 3     cin >> h >> w;
+
+
+ 4
+
+ 5     string board[50];
+
+
+ 6
+
+ 7     for (int i = 0; i < h; ++i)  cin >> board[i];
+
+
+ 8
+
+ 9     const int dx[8] = {1, 0, -1, 0, 1, -1, -1, 1};
+
+10     const int dy[8] = {0, 1, 0, -1, 1, 1, -1, -1};
+
+
+11
+
+12     for (int i = 0; i < h; ++i) {
+
+13         for (int j = 0; j < w; ++j) {
+
+14             if (board[i][j] == ’#’) continue;
+
+
+15
+
+16             int num = 0;
+
+17             for (int d = 0; d < 8; ++ d) {
+
+18                 const int ni = i + dy[d];
+
+19                 const int nj = j + dx[d];
+
+
+20
+
+21                 if (ni < 0 or h <= ni) continue;
+22                 if (nj < 0 or w <= nj) continue;
+23                 if (board[ni][nj] == ’#’) num++;
+24             }
+
+
+25
+
+26             board[i][j] = char(num + ’0’);
+
+
+27
+
+28         }
+
+29     }
+
+
+30
+
+31     for (int i = 0; i < h; ++i)  cout << board[i] << endl;
+
+
+32
+
+33     return 0;
+34 }
+
+
+
+
+
+                                                  2
+
+ C:  Bridge
+
+  ·ͣɺ֤ ลʹ͍ͭͯ ڮ Ͱ͋Δ͔Λ൑ఆ͢Δ͜ͱΛ ߟ ͑·͢ɻάϥϑ͔ΒลΛऔΓআ͍ͨͱ͖ʹɺඇ࿈ ݁ άϥϑ
+
+ ͱͳΔลΛ ڮ ͱ ݺ ͿͷͰɺ͜ͷఆ ٛ ʹͦͬͯௐ΂͍͖ͯ·͢ɻ͕ͨͬͯ͠ɺ֤ ลΛάϥϑ͔ΒऔΓআ͍ͯɺάϥ
+ ϑ͕࿈݁Ͱ͋Δ͔Λ൑ఆ͠·͢ɻάϥϑͷ࿈݁൑ఆʹ͸ɺਂ͞༏ઌ୳ࡧ (DFS)ɺ෯༏ઌ୳ࡧ (BFS)ɺUnion ﬁndɺ
+ ϫʔγϟϧϑϩΠυ๏ͳͲ͕ ࢖ ͑·͢ɻࠓ ճͷ໰୊ͷ੍໿Ͱ͋Ε͹ɺ͜͜Ͱ ڍ ͛ͨΞϧΰϦζϜͷͲΕΛ ࢖ͬͯ
+
+ ΋ɺे෼ʹ ؒ ʹ߹͍·͢ɻ
+  ͜͜Ͱ͸ɺάϥϑͷ࿈݁൑ఆͷͨΊͷ DFS ͷ࣮૷ʹ͍ͭͯઆ໌͠·͢ɻάϥϑͷ࿈݁൑ఆͷͨΊͷ DFS ͸ɺҎ
+ Լͷ ٙࣅίʔυͰදΘ͞ΕΔ ࠶ؼؔ਺Ͱ࣮૷͢Δ͜ͱ͕Ͱ͖·͢ɻ
+
+     1: procedure DFS( ݱࡏ ͷ௖఺v)
+     2:  ௖఺v Λ๚໰ࡁΈʹ͢Δ
+     3:    for ௖఺v2: ௖఺v ʹྡ઀͍ͯ͠Δ͔ͭະ๚໰do
+
+     4:      DFS(v2)
+
+     5:   end for
+
+     6:    return
+
+     7: end procedure
+
+
+  ࿈݁൑ఆΛ͢Δࡍʹ͸ɺશͯͷ௖఺Λະ๚໰ʹ͔ͯ͠Βɺ೚ҙͷ 1 ͭͷ௖఺͔Β DFS Λݺͼ·͢ɻͦͷޙʹશ
+ ͯͷ௖఺͕๚໰ࡁΈͳΒ͹࿈݁Ͱ͋Γɺͦ͏Ͱͳ͍৔߹͸ඇ࿈݁Ͱ͢ɻ·ͨɺάϥϑͷลͷܨ͕Γ͸ྡ઀ߦྻͰ؅
+ ཧͰ͖ɺྡ઀ ߦྻ͸ 2 ࣍ݩ഑ྻͰ࣮૷͢Δ͜ͱ͕Ͱ͖·͢ɻ
+  Ҏ্Λ·ͱΊΔͱɺ֤ ลΛάϥϑ͔ΒऔΓআ͍ͯɺάϥϑ͕࿈ ݁ Ͱ͋Δ͔Λ൑ఆͯ͠ɺඇ࿈ ݁ ͱͳΔ৔ ߹ Λ਺
+ ্͑͛·͢ɻDFS Λ༻͍ͨ৔ ߹ ͷ ࣌ؒܭࢉ ྔ͸ɺάϥϑͷ࿈ ݁ ൑ఆʹ O(N + M) Ͱ͔͔ΔͨΊɺશମͷ ࣌ؒܭ
+ ࢉྔ͸ O(M(N + M)) ͱͳΓؒʹ߹͍·͢ɻ
+
+
+  C++ͷίʔυྫ(ྡ઀ ߦྻͰάϥϑΛ؅ཧͯ͠ɺDFS Ͱ࿈݁൑ఆ͢Δ)
+
+
+
+ 1 const int limit = 50;
+
+
+ 2
+
+ 3 int n, m;
+ 4 int a[limit], b[limit];
+
+
+ 5
+
+ 6 bool graph[limit][limit];
+
+ 7 bool visited[limit];
+
+
+ 8
+
+ 9 void dfs(int v) {
+
+10     visited[v] = true;
+11     for (int v2 = 0; v2 < n; ++v2) {
+
+12         if (graph[v][v2] == false) continue;
+13         if (visited[v2] == true) continue;
+
+14         dfs(v2);
+15     }
+
+16 }
+
+
+17
+
+18 int main(void) {
+
+
+                                                  3
+
+19     cin >> n >> m;
+
+
+20
+
+21     for (int i = 0; i < m; ++i) {
+
+22         cin >> a[i] >> b[i];
+
+23         a[i]--, b[i]--;
+
+24         graph[a[i]][b[i]] = graph[b[i]][a[i]] = true;
+
+25     }
+
+
+26
+
+27     int ans = 0;
+
+
+28
+
+29     for (int i = 0; i < m; ++i) {
+
+30         graph[a[i]][b[i]] = graph[b[i]][a[i]] = false;
+
+
+31
+
+32         for (int j = 0; j < n; ++j) visited[j] = false;
+
+
+33
+
+34         dfs(0);
+
+
+35
+
+36         bool bridge = false;
+
+37         for (int j = 0; j < n; ++j) if (visited[j] == false) bridge = true;
+
+38         if (bridge) ans += 1;
+
+
+39
+
+40         graph[a[i]][b[i]] = graph[b[i]][a[i]] = true;
+
+41     }
+
+
+42
+
+43     cout << ans << endl;
+
+
+44
+
+45     return 0;
+
+46 }
+
+
+
+
+
+                                                  4
+
+ D:  Axis-Parallel Rectangle
+
+  ·ͣɺ࠷খͷ໘ੵͱͳΔΑ͏ͳ௕ํܗͷީิʹ͍ͭͯߟ͑ͯΈ·͢ɻ͜͜Ͱɺਤ1 ͷΑ͏ʹద౰ʹ K ఺Ҏ্ؚ
+ ΜͰ͍ΔΑ͏ͳ௕ํ ܗ Λ ߟ ͑·͢ɻ͜ͷͱ͖ɺਤ2 ͷΑ͏ʹ ֤ ลΛ఺ʹ઀͢Δ·Ͱ௕ํ ܗ Λখͯ͘͞͠΋ɺؚ ·
+ ΕΔ఺ͷ਺͸มΘΓ·ͤΜɻ
+
+
+
+
+
+         ਤ1: 6 ͭͷ఺ΛؚΉ௕ํܗͷྫ          ਤ2: ಺෦ʹؚΉ఺ͷ਺Λม͑ͣʹ௕ํܗΛॖখ
+
+
+  ͕ͨͬͯ͠ɺແݶʹ͋Δ௕ํܗͷީิ͔Βɺ༩͑ΒΕͨ఺ू߹ͷ࠲ඪΛ΋ͱʹͨ͠༗ݶͷީิʹߜΓࠐΊ·͢ɻ
+ ۩ମతʹ͸ɺ௕ํܗ ͷࠨ ลͱӈล͸఺ू߹ͷ x ࠲ඪɺ௕ํܗͷ্ลͱԼล͸఺ू߹ͷ y ࠲ඪ͕ީิͱͳΓ·͢ɻ
+  ͦ͏͢Δͱɺ௕ํ ܗ ͷ ީ ิΛશ୳ ࡧ Λ͢Δ͜ͱ͕ՄೳͱͳΓ·͢ɻ఺ू ߹ ͷ x ࠲ ඪ͔Β ࠨ ลͱӈลΛશ୳ ࡧ ͠
+ ͯɺ఺ू ߹ ͷ y ࠲ ඪ͔Β௕ํ ܗ ͷ্ลͱԼลΛશ୳ ࡧ ͠·͢ɻ͜͜Ͱ௕ํ ܗ ͷ ܗ ͕ ܾ ·ΔͷͰɺ͋ͱ͸௕ํ ܗ ͷ
+ ಺෦ʹؚ·ΕΔ఺ͷ਺Λ਺্͑͛ͯɺK ఺Ҏ্ͳΒ౴͑ͷީิͰ͢ɻ
+  ͜ͷղ๏ͷ࣌ؒܭࢉྔ͸ O(N 5) ͱͳΓɺे෼ؒʹ߹͍·͢ɻ·ͨɺ௕ํܗͷ಺෦ʹؚ·ΕΔ఺ͷ਺ͷ਺্͑͛
+ ʹ 2 ࣍ݩྦྷੵ࿨Λར༻͢Δͱɺ࣌ؒܭࢉྔΛ O(N 4) ʹվળ͢Δ͜ͱ͕ՄೳͰ͢ɻ
+
+
+  C++ͷίʔυྫʢ࣌ؒܭࢉྔ͸ O(N 5)ʣ
+
+
+
+ 1 using ll = long long;
+
+
+ 2
+
+ 3 int main(void){
+
+ 4     int n,k;
+ 5     cin >> n >> k;
+
+
+ 6
+
+ 7     vector<int> x(n),y(n);
+
+ 8     vector<int> xary,yary;
+
+
+ 9
+
+10     for(int i = 0; i < n; ++i){
+11         cin >> x[i] >> y[i];
+
+
+
+                                                  5
+
+12         xary.push_back(x[i]);
+13         yary.push_back(y[i]);
+
+14     }
+
+
+15
+
+16     sort(begin(xary),end(xary));
+
+17     sort(begin(yary),end(yary));
+
+
+18
+
+19     ll ans = 1LL * (xary[n-1] - xary[0]) * (yary[n-1] - yary[0]);
+
+
+20
+
+21     for(int xi = 0; xi < n; ++xi){
+
+22         for(int xj = xi + 1; xj < n;++xj){
+
+23             for(int yi = 0; yi < n; ++yi){
+
+24                 for(int yj = yi + 1; yj < n;++yj){
+
+
+25
+
+26                     int num = 0;
+
+27                     ll lx = xary[xi],rx = xary[xj];
+
+28                     ll by = yary[yi],uy = yary[yj];
+
+
+29
+
+30                     for(int i = 0; i < n;++i){
+
+31                         if(lx <= x[i] and x[i] <= rx and by <= y[i] and y[i] <= uy){
+
+32                             num++;
+
+33                         }
+
+34                     }
+
+
+35
+
+36                     if(num >= k) ans = min(ans,1LL * (rx - lx) * (uy - by));
+
+37                 }
+38             }
+
+39         }
+
+40     }
+
+
+41
+
+42     cout << ans << endl;
+
+
+43
+
+44     return 0;
+
+45 }
+
+
+
+
+
+                                                  6

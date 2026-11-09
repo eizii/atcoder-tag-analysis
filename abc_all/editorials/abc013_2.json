@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc013_2",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc013/editorial.pdf",
+      "text": "B問題\n 錠\n\f\n        B - 問題概要\n\n問題 \n1 桁のダイヤルロック錠がある。 \n数字を a から b に変えることを考える。 \n1 回の操作で数字を次のものか前のものに変えられる\n\nとき、必要な最低の操作回数は？\n\n制限 \n0 ≦ a ≦ 9, 0 ≦ b ≦ 9 \na ≠ b\n\f\n      B - 問題言い換え\n\n\n                     0                         1右図のようなリングの上で、                   9\na から b への距離は？                        a            2                 8\n\nととらえると考えやすい                           3                 7\n                   6     4\n                      5\n                                   b\n\f\n        B - 解き方\n\n\na から b への行き方は\n                     0                         1・時計回りに回る         9\n（数字が大きくなる方向）                        a            2                 8\n・反時計回りに回る                            3                 7\n（数字が小さくなる方向）\n                   6     4\n                      5\nの 2 通り考えられる。\n                                   b\n\f\n        B - 解き方\n\n\na から b への行き方は\n                     0                         1・時計回りに回る         9\n（数字が大きくなる方向）                        a            2                 8\n・反時計回りに回る                            3                 7\n（数字が小さくなる方向）\n                   6     4\n                      5\nの 2 通り考えられる。\n                                   b\n 両方の場合の距離を計算して、小さいほうが答え！\n\f\n       B - プログラム\n\nint next_digit(int d) {\n  if (d == 9) { return 0; }\n  else        { return d + 1; }\n}\n!\nint distance1(int a, int b) {\n  int res = 0;\n  while (a != b) {\n    ++res;\n    a = next_digit(a);\n  }\n  return res;\n}\nループを回して何回で b になるかを調べる\n\f\n        B - おまけ\n\n引き算をうまく使って \nもっと簡潔に解くこともできます\n\n\n          diff = abs(a - b)\n          res = min(diff, 10 - diff)",
+      "codes": [],
+      "source": "official_pdf_letter_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "94d290934f967d6b57ea5ec457495ce24cc3f97c468c9385f878b1c7dba2eb94"
+    }
+  ],
+  "status": "available"
+}

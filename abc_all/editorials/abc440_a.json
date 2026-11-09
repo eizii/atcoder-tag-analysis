@@ -1,0 +1,22 @@
+{
+  "problem_id": "abc440_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc440/editorial/15020",
+      "text": "実装方針\nこの問題にはさまざまな実装方針が考えられます．\n方針 1: ループ\n「\n\\(X\\)\nを\n\\(2\\)\n倍する」という操作を\n\\(Y\\)\n回繰り返し，得られた\n\\(X\\)\nの値を出力します．\n方針 2: シフト演算や冪乗演算\n主要なプログラミング言語の多くは，\n\\(2^Y\\)\nの値を高速に得る手段をもちます．\nたとえば C++ ではシフト演算\n1 << y\nで，Python では冪乗演算\n2 ** y\nで得られます．\n方針 3: 場合分け\n\\(Y\\)\nの値が\n\\(1,2,3\\)\nの\n\\(3\\)\n通りしかないので，条件分岐によって以下の操作を行えばよいです．\n\\(Y=1\\)\nの場合は\n\\(X \\times 2\\)\nの値を出力する．\n\\(Y=2\\)\nの場合は\n\\(X \\times 4\\)\nの値を出力する．\n\\(Y=3\\)\nの場合は\n\\(X \\times 8\\)\nの値を出力する．\n実装例\n方針 1: ループ\nC++ では for 文によってループを書くことができます．\nPython では for 文と range 関数を組み合わせることでループを書くことができます．\n方針 2: シフト演算・演算\nC++ では\n1 << y\nによって\n\\(2^Y\\)\nを表すことができます．この構文は\n\\(2\\)\nの非負整数乗にのみ使えます．\nPython では\n2 ** y\nによって\n\\(2^Y\\)\nを表すことができます．この構文は\n\\(2\\)\n冪に限らず任意の値の冪乗に使えます．\nなお，C++ では\npow\nを，Python では\nmath.pow\nを使うこともできるが，これらの関数は戻り値として浮動小数点数を返すため，精度落ちや出力形式ミスに十分注意する必要があります．\n方針 3: 場合分け\nC++ では if-else 文によって条件分岐を実現できます．\nPython では if-elif 文によって条件分岐を実現できます．\nこの問題では\n\\(Y\\)\nの値が\n\\(1,2,3\\)\nのいずれかであることが保証されているので，いずれでもない場合の動作を書かなくても正常に動作します．",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n\nint main (void) {\n\tint x, y;\n\tcin >> x >> y;\n\n\tint ans = x;\n\tfor (int i = 0; i < y; i++) ans *= 2;\n\n\tcout << ans << \"\\n\";\n\t\n\treturn 0;\n}",
+        "x, y = map(int, input().split())\n\nans = x\nfor i in range(y):\n\tans *= 2\n\nprint(ans)",
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n\nint main (void) {\n\tint x, y;\n\tcin >> x >> y;\n\n\tint ans = x * (1 << y);\n\n\tcout << ans << \"\\n\";\n\t\n\treturn 0;\n}",
+        "x, y = map(int, input().split())\n\nans = x * (2 ** y)\n\nprint(ans)",
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\n\nint main (void) {\n\tint x, y;\n\tcin >> x >> y;\n\n\tint ans;\n\tif (y == 1) {\n\t\tans = x * 2;\n\t} else if (y == 2) {\n\t\tans = x * 4;\n\t} else if (y == 3) {\n\t\tans = x * 8;\n\t}\n\n\tcout << ans << \"\\n\";\n\t\n\treturn 0;\n}",
+        "x, y = map(int, input().split())\n\nif y == 1:\n\tans = x * 2\nelif y == 2:\n\tans = x * 4\nelif y == 3:\n\tans = x * 8\n\nprint(ans)"
+      ],
+      "text_sha256": "3b937aac4b717bd32dd8267dffffa4933943d97d468e228fac2af69b54f9fbcd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc440/abc440_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

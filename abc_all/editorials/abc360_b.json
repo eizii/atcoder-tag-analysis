@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc360_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc360/editorial/10322",
+      "text": "ありえるすべての\n\\(c,w\\)\nを全てシミュレーションし、条件を満たすような\n\\(c,w\\)\nが存在するか判定すればよいです。\nfor文および文字列の連結操作を用いることである\n\\(c,w\\)\nに対する文字列を作ることができます。詳細は実装例をご参照ください。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string s, t;\n    cin >> s >> t;\n    for (int w = 1; w < (int)s.size(); ++w) {\n        for (int c = 0; c < w; ++c) {\n            string now = \"\";\n            for (int i = c; i < (int)s.size(); i += w) {\n                now += s[i];\n            }\n            if (now == t) {\n                cout << \"Yes\" << endl;\n                return 0;\n            }\n        }\n    }\n    cout << \"No\" << endl;\n}"
+      ],
+      "text_sha256": "b6e268459b74471e3361787b599a8c92b91ad8f4b7c662fe550d85165d94f37b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc360/abc360_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

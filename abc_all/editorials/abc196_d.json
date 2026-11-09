@@ -1,0 +1,38 @@
+{
+  "problem_id": "abc196_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc196/editorial/930",
+      "text": "\\(HW \\le 16\\)\nと制約が小さいので、敷き詰め方を全探索することを考えましょう。\n左上のマスから順に、半畳、右にはみ出す畳、下にはみ出す畳を置くことを試す DFS を行うと、敷き詰め方を全探索することができます。\n計算量を見積もりましょう。\n長方形の畳の左上となる場所を決め、そこから右か下かどちらに伸ばすかを選択することを考えると、答えは\n\\(2^A\\binom{HW}A\\)\nで上から押さえられます。\n\\(HW2^A\\binom{HW}A\\)\nは最大でも\n\\(5 \\times 10^7\\)\n程度なので、十分高速であると分かります。\n実際には、答えの最大値は\n\\(3388\\)\nであるので、見積もりよりずっと高速に動作します。\nBONUS :\n\\(HW ≤ 200\\)\nで解いてみましょう！\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint H, W, A, B, ans = 0;\nvoid dfs(int i, int bit, int A, int B){\n    if(i == H * W) return (void)ans++;\n    if(bit & 1 << i) return dfs(i + 1, bit, A, B);\n    if(B) dfs(i + 1, bit | 1 << i, A, B - 1);\n    if(A){\n        if(i % W != W - 1 && ~bit & 1 << (i + 1)) dfs(i + 1, bit | 1 << i | 1 << (i + 1), A - 1, B);\n        if(i + W < H * W) dfs(i + 1, bit | 1 << i | 1 << (i + W), A - 1, B);\n    }\n}\nint main(){\n    cin >> H >> W >> A >> B;\n    dfs(0, 0, A, B);\n    cout << ans << endl;\n}",
+        "H, W, A, B = map(int, input().split())\nans = 0\n\ndef dfs(i, bit, A, B):\n    if i == H * W:\n        global ans\n        ans += 1\n        return\n    if bit >> i & 1:\n        dfs(i + 1, bit, A, B)\n        return\n    if B:\n        dfs(i + 1, bit | 1 << i, A, B - 1)\n    if A:\n        if i % W != W - 1 and not bit & 1 << (i + 1):\n            dfs(i + 1, bit | 1 << i | 1 << (i + 1), A - 1, B)\n        if i + W < H * W:\n            dfs(i + 1, bit | 1 << i | 1 << (i + W), A - 1, B)\n\ndfs(0, 0, A, B)\nprint(ans)"
+      ],
+      "text_sha256": "36de00d588891b7b44bbc4989afd6111ab9ced4cad4c194d051c0a5a0177dcea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc196/abc196_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc196/editorial/980",
+      "text": "問題文中の\n\\(H, W, A, B\\)\nを小文字で\n\\(h, w, a, b\\)\nとも表すことにします。\nまず\n\\(n = h w\\)\nとおいて、マスに横書き文章スタイルで\n\\(0, \\dots, n - 1\\)\nと付番しておきましょう。マスの集合\n\\(S\\)\nに対して\n\\(\\mathtt { dp } [ S ]\\)\nを、その範囲に長い畳を、はみ出さないように満遍なくちょうど敷き詰める場合の数であるとしましょう。このときすべての\n\\(2 a\\)\n元集合に関する\n\\(\\mathtt { dp } [ S ]\\)\nの和\n\\[\n\\sum _ { S \\in \\binom { [ n ] }  { 2 a } } \\mathtt { dp } [ S ]\n\\]\nが答えです。\nさてこの\n\\(\\mathtt { dp } [ S ]\\)\nをどうやって求めるかなのですが、まず明らかに\n\\(\\mathtt { dp } [ \\emptyset ]\\)\nは\n\\(1\\)\nです。遷移は、空いている場所に畳を置けばよいです。bit DP でいうと、このような形の遷移を適切な順序で書いていくことになるかと思います。\nただし、\nすでにおいているところに畳を置かないように、\nそして場所\n\\(p\\)\nと場所\n\\(q\\)\nに一枚ずつ畳を置くときに、\n\\(p, q\\)\nの順番で置くのと\n\\(q, p\\)\nの順番で置くのをダブルカウントしてしまわないように\n注意しましょう。1 つめは bitwise and をするとよいです。2 つめは、もともとの\nx\nよりも、今から畳を置く場所の集合 （\n1 << i  * w + j | 1 << ( i + 1 ) * w + j\nや\n1 << i  * w + j | 1 << i * w + ( j + 1 )\nのことです。）のほうが整数として大きいことを課せばよいです。\n結局、小問題の個数（DP の状態数）が\n\\(2 ^ N\\)\n、遷移の個数が\n\\(\\Theta ( N )\\)\nであり、遷移のひとつひとつが定数時間ですから、全体で\n\\(\\Theta \\left ( 2 ^ N N \\right )\\)\n（ただし\n\\(N = H W\\)\n）となります。\n参考提出（Rust, 16 ms）：\nhttps://atcoder.jp/contests/abc196/submissions/21164141",
+      "codes": [
+        "dp [ x | 1 << i  * w + j | 1 << ( i + 1 ) * w + j ] += dp [ x ]\ndp [ x | 1 << i  * w + j | 1 << i * w + ( j + 1 ) ] += dp [ x ]"
+      ],
+      "text_sha256": "61ed49b825b708a69261ee7c10b7a341943646990ec2eb0732b8d7618c93fb09",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc196/abc196_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc196/editorial/960",
+      "text": "\\(F(a, b, s) =\\)\n畳を\n\\(a\\)\n枚使用、半畳を\n\\(b\\)\n枚使用し、部屋の中で既に敷かれている床の集合が\n\\(s\\)\nである場合の数\nという関数を考えます。\nまた、\n\\(s\\)\nの要素を数値で表すとき、上に行くほど小さく、行が同じならば左ほど小さいとします。\n例\n|0|1|2|\n|3|4|5|\n|6|7|8|\n初期状態から\n\\[\n\\begin{aligned}\nF(a, b, 1 << (H*W) - 1) &=& 1( a = Aかつb = Bのとき)\\\\\n&=&  0( a \\neq Aまたはb \\neq Bのとき)\n\\end{aligned}\n\\]\nです。\nここで、\n\\(s\\)\nのうちまだ敷かれていない最小のインデックスを\n\\(t\\)\nとします。\n\\(t\\)\nは\n\\(s\\)\nをビット反転した値の最下位ビット(LSB)から求められます。\nすると、\n\\[\n\\begin{aligned}\nF(a, b, s) &=& (半畳をt に置く場合の数)\\\\\n&+& (畳をt とその右に置く場合の数)\\\\\n&+& (畳をt とその下に置く場合の数)\n\\end{aligned}\n\\]\nという遷移が考えられます。\n畳を重ねて置いてしまう場合も判定してしまっていますが、そのような場合は最終的に\n\\(F(a \\neq A, b \\neq B, 1 << (H*W) - 1) = 0\\)\nにたどり着くため必ず\n\\(0\\)\nとなり影響ありません\nこれは、境界値判定を省略すると\n\\[\n\\begin{aligned}\nF(a, b, s) &=& F(a, b-1, s \\mathbin{|} 1 << t)\\\\\n&+& F(a, b-1, s \\mathbin{|} 1 << t \\mathbin{|} 1 << (t+1))\\\\\n&+& F(a, b-1, s \\mathbin{|} 1 << t \\mathbin{|} 1 << (t+H))\\\\\n\\end{aligned}\n\\]\nと再帰関数で表せます。\nよって、答え\n\\(F(A, B, 0)\\)\nが求められます。\nこの問題の場合は\n\\(F\\)\nの戻り値をメモ化しなくても問題ありませんが、このような再帰による動的計画法ではメモ化するようにしておいたほうが無難です。\n解答例 C#",
+      "codes": [],
+      "text_sha256": "ee87fd44bd6dd8c7b14338420346660f7142dc1dd17557b82205a4af43c9c846",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc196/abc196_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

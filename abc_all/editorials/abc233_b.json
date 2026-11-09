@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc233_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc233/editorial/3172",
+      "text": "受け取った\n\\(S\\)\nに変更を加えずにループを上手く回して正しく出力するという方法もありますが、今回は、文字列の\n\\(l\\)\n文字目から\n\\(r\\)\n文字目を手軽に反転する方法を紹介します。\n以下の手順で実現可能です。\n\\(p=l,q=r\\)\nとする。\n文字列の\n\\(p\\)\n文字目と\n\\(q\\)\n文字目とを入れ替える。\n\\(p\\)\nを\n\\(1\\)\n加算、\n\\(q\\)\nを\n\\(1\\)\n減算する。\n\\(p < q\\)\nとなっている限り、 2. と 3. を繰り返す。\nなお、多くの言語では文字列の始まりは\n\\(1\\)\n文字目ではなく\n\\(0\\)\n文字目として扱われますが、これには予め受け取った\n\\(l,r\\)\nを\n\\(1\\)\n減算しておくことで対応可能です。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int l,r;\n  string s;\n  cin >> l >> r >> s;\n  l--;r--;\n  int p=l,q=r;\n  while(p<q){\n    swap(s[p],s[q]);\n    p++;q--;\n  }\n  cout << s << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "d520bc4f7f257023eeefe43390486b0405ecece58962d58422d0d6dff5116428",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc233/abc233_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

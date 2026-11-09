@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc236_c",
+  "title": "Route Map",
+  "contests": [
+    {
+      "contest_id": "abc236",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 80,
+  "raw_difficulty": -245,
+  "contest_id": "abc236",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc236/tasks/abc236_c",
+  "statement": "配点 : 300 点 問題文 AtCoder 鉄道のとある路線には N 個の駅が存在し、始点から終点に向かって i \\, (1 \\leq i \\leq N) 番目の駅の名前は S_i です。 普通列車は全ての駅に止まりますが、急行列車は全ての駅に止まるとは限りません。具体的には、急行列車は M \\, (M \\leq N) 個の駅にのみ止まり、 j \\, (1 \\leq j \\leq M) 番目に止まる駅の名前は T_j です。 ただし、 T_1 = S_1 かつ T_M = S_N 、すなわち急行列車は始点と終点の両方に止まることが保証されます。 N 個の駅それぞれについて、その駅に急行列車が止まるかどうか判定してください。 制約 2 \\leq M \\leq N \\leq 10^5 N, M は整数 S_i \\, (1 \\leq i \\leq N) は英小文字のみからなる 1 文字以上 10 文字以下の文字列 S_i \\neq S_j \\, (i \\neq j) T_1 = S_1 かつ T_M = S_N (T_1, \\dots, T_M) は (S_1, \\dots, S_N) から 0 個以上の文字列を選んで取り除き、残った文字列を元の順序で並べることで得られる 入力 入力は以下の形式で標準入力から与えられる。 N M S_1 \\ldots S_N T_1 \\ldots T_M 出力 N 行出力せよ。 i \\, (1 \\leq i \\leq N) 行目には、始点から終点に向かって i 番目の駅に急行列車が止まるなら Yes 、そうでないなら No と出力せよ。 入力例 1 5 3\r\ntokyo kanda akiba okachi ueno\r\ntokyo akiba ueno 出力例 1 Yes\r\nNo\r\nYes\r\nNo\r\nYes 入力例 2 7 7\r\na t c o d e r\r\na t c o d e r 出力例 2 Yes\r\nYes\r\nYes\r\nYes\r\nYes\r\nYes\r\nYes 急行列車が全ての駅に止まることもあります。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 AtCoder 鉄道のとある路線には N 個の駅が存在し、始点から終点に向かって i \\, (1 \\leq i \\leq N) 番目の駅の名前は S_i です。 普通列車は全ての駅に止まりますが、急行列車は全ての駅に止まるとは限りません。具体的には、急行列車は M \\, (M \\leq N) 個の駅にのみ止まり、 j \\, (1 \\leq j \\leq M) 番目に止まる駅の名前は T_j です。 ただし、 T_1 = S_1 かつ T_M = S_N 、すなわち急行列車は始点と終点の両方に止まることが保証されます。 N 個の駅それぞれについて、その駅に急行列車が止まるかどうか判定してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq M \\leq N \\leq 10^5 N, M は整数 S_i \\, (1 \\leq i \\leq N) は英小文字のみからなる 1 文字以上 10 文字以下の文字列 S_i \\neq S_j \\, (i \\neq j) T_1 = S_1 かつ T_M = S_N (T_1, \\dots, T_M) は (S_1, \\dots, S_N) から 0 個以上の文字列を選んで取り除き、残った文字列を元の順序で並べることで得られる"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M S_1 \\ldots S_N T_1 \\ldots T_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N 行出力せよ。 i \\, (1 \\leq i \\leq N) 行目には、始点から終点に向かって i 番目の駅に急行列車が止まるなら Yes 、そうでないなら No と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5 3\r\ntokyo kanda akiba okachi ueno\r\ntokyo akiba ueno"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\r\nNo\r\nYes\r\nNo\r\nYes"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 7 7\r\na t c o d e r\r\na t c o d e r"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 Yes\r\nYes\r\nYes\r\nYes\r\nYes\r\nYes\r\nYes 急行列車が全ての駅に止まることもあります。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc236/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:05.119875+00:00",
+  "statement_sha256": "9d254cb4e7e288759e723a4e95496eb5b51b19f5a57721fbaee3301dcb649e30",
+  "editorials": []
+}

@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc286_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5574",
+      "text": "\\(P\\)\n番目から\n\\(Q\\)\n番目までの項と\n\\(R\\)\n番目から\n\\(S\\)\n番目までの項を入れ替えると、\n\\[\nA_1,A_2,\\ldots, A_{P-1}, A_P,A_{P+1},\\ldots, A_{Q-1}, A_Q, A_{Q+1}, \\ldots, A_{R-1}, A_R, A_{R+1}, \\ldots, A_{S-1}, A_S, A_{S+1}, \\ldots, A_{N-1}, A_N \n\\\\\n\\to\n A_1,A_2,\\ldots, A_{P-1}, A_R,A_{R+1},\\ldots, A_{S-1}, A_S, A_{Q+1}, \\ldots, A_{R-1}, A_P, A_{P+1}, \\ldots, A_{Q-1}, A_Q, A_{S+1}, \\ldots, A_{N-1}, A_N \n\\]\nとなります。\n\\(S-R=Q-P\\)\nである事から交換される要素以外の添字が変わる事はなく、よって、\n\\[\nB_i=\n\\begin{cases}\nA_i  &(i<P のとき) \\\\\nA_{i+(R-P)}  &(P\\leq i\\leq Q のとき) \\\\\nA_i  &(Q<i<R のとき) \\\\\nA_{i+(P-R)}  &(R\\leq i\\leq S のとき) \\\\\nA_i  &(S<iのとき) \\\\\n\\end{cases}\n\\]\nとすれば良いです。\nこれは、for文とif文を用いて実装する事ができます。\nまた、\n\\(Q-P=S-R\\)\nである事から\n\\(i=0,1,\\ldots, Q-P\\)\nについて\n\\(A_{P+i}\\)\nと\n\\(A_{R+i}\\)\nを交換する事によっても答えを求める事ができます。\nc++ による実装例\n\\(1\\)\n:\nc++ による実装例\n\\(2\\)\n:\nPythonによる実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n,p,q,r,s;\n\tint a[101];\n\n\tcin>>n>>p>>q>>r>>s;\n\tfor(int i=1;i<=n;i++)cin>>a[i];\n\t\n\tfor(int i=1;i<=n;i++){\n\t\tif((p<=i)&&(i<=q))cout<<a[i+r-p];\n\t\telse if((r<=i)&&(i<=s))cout<<a[i+p-r];\n\t\telse cout<<a[i];\n\t\tif(i<n)cout<<\" \";\n\t\telse cout<<endl; \n\t}\n\n\treturn 0;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n,p,q,r,s;\n\tint a[100];\n\n\tcin>>n>>p>>q>>r>>s;\n\tfor(int i=0;i<n;i++)cin>>a[i];\n\t\n\tfor(int i=p;i<=q;i++)swap(a[i-1],a[r-p+i-1]);\n\n\tfor(int i=0;i<n;i++){\n\t\tcout<<a[i];\n\t\tif(i<(n-1))cout<<\" \";\n\t\telse cout<<endl; \n\t}\n\n\treturn 0;\n}",
+        "n,p,q,r,s= map(int, input().split())\na=list(map(int, input().split()))\n\nfor i in range(p,q+1):\n    a[i-1],a[r-p+i-1]=a[r-p+i-1],a[i-1]\n    \nprint(*a)"
+      ],
+      "text_sha256": "87f5cf0b6b01c707e5c19b29a1aea3085bef05d635a4b6a4bb1924aeb1b2d51e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc286/abc286_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5581",
+      "text": "Python では、リストの区間などをスライスと呼ばれる形式で持つことができます。\n入れ替えたい区間をスライスとして、それらを直接入れ替えることで行いたい操作が実現できます。\n実装例は以下のようになります。",
+      "codes": [
+        "N, P, Q, R, S = map(int, input().split())\n\nA = list(map(int, input().split()))\nA[P - 1 : Q], A[R - 1 : S] = A[R - 1 : S], A[P - 1 : Q]\n\nprint(*A)"
+      ],
+      "text_sha256": "f19ad9ece1f8d08d158d9c6ac3ecc009b1ef3aba55958e88ddd442c3c2c68881",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc286/abc286_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

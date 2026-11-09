@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc304_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc304/editorial/6511",
+      "text": "シフト表\n\\(X\\)\nに対し、\n周期\nおよび\n最小周期\nを以下のように定義します。\n任意の\n\\(1 \\leq i \\leq N-t\\)\nに対し\n\\(i\\)\n日目と\n\\(i + t\\)\n日目の勤怠が一致しているとき、またそのときに限り\n\\(X\\)\nが周期\n\\(t\\)\nを持つという。\n\\(X\\)\nが周期\n\\(t\\)\nを持ち、\n\\(s < t\\)\nならば\n\\(X\\)\nが周期\n\\(s\\)\nを持たないとき、\n\\(X\\)\nは最小周期\n\\(t\\)\nを持つという。\n\\(A_t\\)\nを高橋君と青木君の少なくとも一方が出勤するという条件が満たされるような青木君の\n周期\n\\(t\\)\nのシフトとして考えられるものの個数、\n\\(M_t\\)\nを高橋君と青木君の少なくとも一方が出勤するという条件が満たされるような青木君の\n最小周期\n\\(t\\)\nのシフトとして考えられるものの個数とします。\n求めるものは\n\\(\\displaystyle \\sum_{t|N, t \\neq N} M_t\\)\nです。また、周期\n\\(t\\)\nのすべてのシフト表に対し\n\\(t\\)\nの約数\n\\(s\\)\nが一意に存在して最小周期\n\\(s\\)\nを持つので、\n\\(A_t = \\displaystyle \\sum_{s|t} M_s\\)\nが成立します。\n周期は最小周期に比べ構造が単純であり\n\\(A_t\\)\nは\n\\(M_t\\)\nより求めやすいので、先に\n\\(A_t\\)\nたちを求め、\n\\(A_t = \\displaystyle \\sum_{s|t} M_s\\)\nという関係式を利用して答えを求めることを考えます。\n周期\n\\(t\\)\nのシフト表は\n\\(1, 2, \\ldots, t\\)\n日目の勤怠を決めると一意に定まります。青木君が\n\\(i\\)\n日目に出勤することは常に可能で、\n\\(i\\)\n日目に欠勤できる必要十分条件は\n\\(i \\equiv j \\pmod t\\)\nならば\n\\(j\\)\n日目に高橋君が出勤することです。したがって、青木君が\n\\(i\\)\n日目に欠勤できるような\n\\(i \\in [1,t]\\)\nの個数を\n\\(p\\)\nとして、\n\\(A_t = 2^p\\)\nです。\n以上で\n\\(A_t\\)\nたちが求まり、上の関係式にしたがって\n\\(M_t\\)\nたちを求めることにより答えを得ることができました。\n\\(A_t\\)\nや\n\\(M_t\\)\nたちは各\n\\(t\\)\nに対して\n\\(O(N)\\)\nで求められ、\n\\(t\\)\nが\n\\(N\\)\nの約数であるときに限って求めればよいので時間計算量は\n\\(N\\)\nの約数の個数を\n\\(d(N)\\)\nとして\n\\(O(Nd(N))\\)\nとなります。本問題の制約下において\n\\(N\\)\nの約数は\n\\(128\\)\n個以下であり、これは十分高速です。\n実装例\n補足 1 : N の約数の個数について\n\\(M < N\\)\nならば\n\\(d(M) < d(N)\\)\nというような条件を満たす整数\n\\(N\\)\nは\n高度合成数\nと呼ばれ、その値は\nOEIS\nなどで確認できます。\n\\(N\\)\n以下の整数の約数の個数は\n\\(N\\)\n以下の最大の高度合成数の約数の個数で抑えられるので、これにより具体的な評価を得ることができます。また、本問題の制約下ではプログラムを書いて\n\\(d(N)\\)\nの具体的な値を評価することも簡単です。\n補足 2 : 最小周期を経由しない解法\n本質的には上の解法と大差ありませんが、\nメビウス関数\nを利用すれば答えは\n\\(\\displaystyle \\sum_{t|N, t \\neq N} -\\mu(\\frac{N}{t}) A_t\\)\nと表せます。この解法においては陽に\n\\(M_t\\)\nを求める必要がありません。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <atcoder/all>\nusing namespace std;\nusing namespace atcoder;\nusing mint = static_modint<998244353>;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tstring s;\n\tcin >> s;\n\tvector<mint> p2(n + 1);\n\tp2[0] = 1;\n\tfor (int i = 0; i < n; i++) p2[i + 1] = p2[i] * 2;\n\tvector<mint> a(n), m(n);\n\tfor (int t = 1; t < n; t++) {\n\t\tif (n % t == 0) {\n\t\t\tvector<bool> v(t, true);\n\t\t\tfor (int i = 0; i < n; i++) if (s[i] == '.') v[i % t] = false;\n\t\t\tint cnt = 0;\n\t\t\tfor (int i = 0; i < t; i++) if (v[i]) cnt++;\n\t\t\ta[t] = p2[cnt];\n\t\t\tm[t] = a[t];\n\t\t\tfor (int i = 1; i < t; i++) if (t % i == 0) m[t] -= m[i];\n\t\t}\n\t}\n\tmint ans = 0;\n\tfor (int i = 1; i < n; i++) ans += m[i];\n\tcout << ans.val() << '\\n';\n}"
+      ],
+      "text_sha256": "2229b167aa833ec8aa890d1ade9ed830a4080bb05585031eeaab9dc03d4aac68",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc304/abc304_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

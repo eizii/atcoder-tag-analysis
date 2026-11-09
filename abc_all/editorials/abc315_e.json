@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc315_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc315/editorial/6989",
+      "text": "\\(1\\)\nから\n\\(N\\)\nまでの番号が付いた\n\\(N\\)\n頂点の有向グラフであって、\n\\(i\\)\nから\n\\(P_{i,j}\\)\nに辺を張ったものを\n\\(G\\)\nとおきます。すべての本を読むことが可能であるという制約から、このグラフは\nDAG\nです。\n本\n\\(1\\)\nを読むために本\n\\(i\\)\nを読む必要があることの必要十分条件は\n\\(G\\)\nにおいて\n\\(1\\)\nを始点、\n\\(i\\)\nを終点とするパスが存在することです。\nしたがって、\n\\(1\\)\nを始点とする BFS を行うことなどで読む必要のある本の集合を求めることができます。\n本の読む順については、\n\\(G\\)\nのトポロジカル順の逆順に読むことで目的を達成できます。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <queue>\n#include <algorithm>\n#define rep(i, n) for (int i = 0; i < (n); i++)\nusing namespace std;\n\nvector<int> topological_sort(vector<vector<int>> graph) {\n\tint n = graph.size();\n\tvector<int> indegree(n);\n\tfor (int i = 0; i < n; i++) for (int j : graph[i]) indegree[j]++;\n\tvector<int> res;\n\tqueue<int> que;\n\tfor (int i = 0; i < n; i++) if (indegree[i] == 0) que.push(i);\n\twhile (!que.empty()) {\n\t\tint ver = que.front(); que.pop();\n\t\tres.push_back(ver);\n\t\tfor (int i : graph[ver]) {\n\t\t\tindegree[i]--;\n\t\t\tif (indegree[i] == 0) que.push(i);\n\t\t}\n\t}\n\treturn res;\n}\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<vector<int>> graph(n, vector<int>());\n\trep(i, n) {\n\t\tint c;\n\t\tcin >> c;\n\t\trep(_, c) {\n\t\t\tint v;\n\t\t\tcin >> v;\n\t\t\tv--;\n\t\t\tgraph[i].push_back(v);\n\t\t}\n\t}\n\tqueue<int> que;\n\tque.push(0);\n\tvector<bool> f(n);\n\twhile (!que.empty()) {\n\t\tint q = que.front(); que.pop();\n\t\tfor (int i : graph[q]) {\n\t\t\tif (!f[i]) {\n\t\t\t\tf[i] = true;\n\t\t\t\tque.push(i);\n\t\t\t}\n\t\t}\n\t}\n\tvector<int> t = topological_sort(graph);\n\tvector<int> order(n);\n\trep(i, n) order[t[i]] = i;\n\tvector<int> ans;\n\tfor (int i = 1; i < n; i++) if (f[i]) ans.push_back(i);\n\tsort(ans.begin(), ans.end(), [&](int x, int y) {return order[x] > order[y]; });\n\tfor (int i = 0; i < ans.size(); i++) cout << ans[i] + 1 << \" \\n\"[i == ans.size() - 1];\n}"
+      ],
+      "text_sha256": "4cefa4f005f1f0b4023612b50eaa23f9bbdf865f97bfac4b73cc570ec60c6133",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc315/abc315_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc315/editorial/7008",
+      "text": "本\n\\(x\\)\nを読むために本\n\\(y\\)\nを読む必要があるとき、頂点\n\\(x\\)\nから頂点\n\\(y\\)\nへの有向辺を張ったグラフにおいて、頂点\n\\(1\\)\nからDFSしたときの帰りがけ順が答えになります。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n;\n\tcin >> n;\n\tvector<vector<int>>G(n+1);\n\tfor(int i=1;i<=n;i++){\n\t\tint c;\n\t\tcin >> c;\n\t\tG[i].resize(c);\n\t\tfor(auto&v:G[i])cin >> v;\n\t}\n\n\tvector<bool>visited(n+1);\n\tvector<int>ans;\n\tauto dfs=[&](auto self,int v)->void{\n\t\tfor(auto vv:G[v])if(!visited[vv])self(self,vv);\n\t\tans.push_back(v);\n\t\tvisited[v]=true;\n\t};\n\tdfs(dfs,1);\n\tans.pop_back();  // 1 自身は除く\n\tfor(auto v:ans)cout << v << endl;\n}"
+      ],
+      "text_sha256": "62357c1555c49bbda3efb6310ab6f9ad95abb9d850899a3bd40d89c1e18ab869",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc315/abc315_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc411_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc411/editorial/13360",
+      "text": "任意の \\(i, j\\ (i\\neq j)\\) に対し、 頂点 \\(i\\) と頂点 \\(j\\) の間に張られた辺の数を \\(C_{i,j}\\) と表記します。 まず、長さが \\(2\\) のサイクルについては適切に別処理を行うものとします（各 \\(i<j\\) に対して \\(\\binom{C_{i,j}}{2}\\) を答えに加算すればよいです）。以降長さが \\(3\\) 以上のサイクルについてのみ考えます。 サイクルに含まれる最も番号の大きい頂点 \\(s\\ (3\\leq s\\leq N)\\) を固定します。頂点 \\(s\\) から始めてサイクル上を周回する過程を bitDP で数え上げます。すなわち、 \\(\\mathrm{dp}[S][i]:=\\) 頂点 \\(s\\) から始まり、頂点集合 \\(S\\) に含まれる頂点をちょうど \\(1\\) 度ずつ通って、頂点 \\(i\\) に至るパスの数 （ \\(s,i\\in S\\subseteq \\{1,2,\\dots,s\\}\\) ） と定義し、 \\(\\mathrm{dp}[\\{s\\}][s]=1\\) と初期化したのち、 \\[\\mathrm{dp}[S\\cup \\{j\\}][j] \\leftarrow \\mathrm{dp}[S\\cup \\{j\\}][j]+\\mathrm{dp}[S][i]\\times C_{i,j}\\ (j\\not\\in S)\\] と遷移して、 \\[\\displaystyle \\frac{1}{2} \\sum_{|S| \\geq 3} \\sum_{i\\in S} dp[S][i]\\times C_{i,s}\\] で最終的な答え（ \\(=\\) 最も番号の大きい頂点が \\(s\\) であるような長さ \\(3\\) 以上のサイクルの個数）を求めます。頂点 \\(s\\) から始めてサイクル上を周回する方法は長さ \\(3\\) 以上の任意のサイクルについてちょうど \\(2\\) 通り存在することから、上式において \\(\\frac{1}{2}\\) がかけられていることに留意してください。 これを全ての \\(s\\) について行います。計算量は \\(O(M) + \\displaystyle \\sum_{s=3}^{N} O(2^ss^2)=O(M+2^NN^2)\\) となり十分高速です。 実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\n\nusing namespace std;\n\nusing mint = atcoder::modint998244353;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector cnt(n, vector<int>(n));\n    for (int i = 0; i < m; i++) {\n        int u, v;\n        cin >> u >> v;\n        --u, --v;\n        ++cnt[u][v];\n        ++cnt[v][u];\n    }\n\n    mint ans = 0;\n    for (int i = 0; i < n; i++) {\n        for (int j = i + 1; j < n; j++) {\n            ans += mint(cnt[i][j]) * (cnt[i][j] - 1);\n        }\n    }\n    for (int s = 3; s <= n; s++) {\n        vector dp(1 << s, vector<mint>(s));\n        dp[1 << (s - 1)][s - 1] = 1;\n        for (int bit = 1 << (s - 1); bit < (1 << s); bit++) {\n            int ppc = popcount((unsigned) bit);\n            for (int i = 0; i < s; i++) {\n                if (~bit >> i & 1) continue;\n                if (ppc >= 3) {\n                    ans += dp[bit][i] * cnt[i][s - 1];\n                }\n                for (int j = 0; j < s; j++) {\n                    if (bit >> j & 1) continue;\n                    dp[bit | 1 << j][j] += dp[bit][i] * cnt[i][j];\n                }\n            }\n        }\n    }\n    ans /= 2;\n    cout << ans.val() << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "51572f29f8d6a6015b0302c1620b2f671cd17bf7f89a8153a94ff87e1cbb9454"
+    }
+  ],
+  "status": "available"
+}

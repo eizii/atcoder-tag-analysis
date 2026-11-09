@@ -1,0 +1,387 @@
+         ABC058 / ARC071 解説
+
+                              writer: nuip
+
+                       2017 年4 月8 日
+
+
+
+      For International Readers: English editorial starts from page 7.
+
+ A : ι ⊥l
+
+ 問題文にかかれているとおり、b −a = c −b であるかどうか判定すればよい
+ です。例えばこの処理はC++では次のように書けます。
+
+1  #include <iostream >
+2  using namespace std;
+3  int main (){
+4    int a, b, c;
+5    cin >> a >> b >> c;
+6    cout << ( b-a == c-b ? "YES" : "NO" ) << endl;
+7  }
+
+
+ B : ∵∴∵
+
+  E の文字とO の文字を交互に並べるとパスワードが復元できます。|E|−|O| =
+   1 のケースに気をつけてください。
+
+1  #include <iostream >
+2  using namespace std;
+3  int main (){
+4    string E, O;
+5    cin >> E >> O;
+6    for(int i=0; i < E.size (); i++){
+7      cout << E[i];
+
+
+                                   1
+
+ 8      if(i < O.size ()) cout << O[i];
+ 9    }
+10    return 0;
+11  }
+
+
+  C : 怪文書/ Dubious Document
+
+  最長の文字列を作るにはできるだけ多く文字を使ったほうがいいです。答え
+  となる文字列に使えるa の数をca とします。また、cb, . . . , cz についても同
+  様に定義します。
+   すぬけ君が文字列を作る時にa をk 個使うためには、どの文字列にもa
+  がk 個出てきている必要があります。よって、ca は、「a が最も少ない文字列」
+  に出てくるa の個数となります。同じことが他のb からz までの文字につい
+  ても言えます。
+   辞書順で最小の文字列にするためには、a から順番に並べればよいので、
+  答えは
+                          aa . . . a bb . . . b . . . zz . . . z                            | {z } | {z }   | {z }
+                               ca個     cb個       cz個
+
+  となります。
+
+ D : 井井井/ ###
+
+  答えを数式で表すと以下のようになります。
+        ∑ ∑
+                                           (xj −xi)(yl −yk)
+                          1≤i<j≤n 1≤k<l≤m
+
+  これをそのまま計算すると計算量がO(n2m2) で間に合いません。
+   この式は次のように因数分解することができます。
+            (         ) (         )
+        ∑     ∑
+                                 (xj −xi)              (yl −yk)
+                        1≤i<j≤n            1≤k<l≤m
+
+  これでx 座標とy 座標を別々に扱うことができるようになりました。しかも
+                              をどう計算す  どちらも同じ形をしているので、x 座標の式∑1≤i<j≤n(xj −xi)
+  るかだけ考えれば良いです。
+
+
+                                    2
+
+  この式もこのままでは計算にO(n2) かかってしまいます。式をよく見る
+と、n 個の変数x1, . . . , xn を足したり引いたりしてるだけなので、x1, . . . , xn
+がそれぞれ何回足されて何回引かれているかさえ分かればこの値は求まりま
+す。xk が足される回数は、ループの中でj = k である回数と同じです。これ
+はk より小さい添字の個数と同じなのでk −1 回だとわかります。同様にxk
+が引かれる回数は、k より大きい添字の個数と同じなのでn −k 回だとわか
+ります。以上のことから、次の等式が成り立ちます。
+
+     ∑    ∑
+                      (xj −xi) =      ((k −1)xk −(n −k)xk)
+              1≤i<j≤n           1≤k≤n
+
+  この式の右辺の形式だと計算量がO(n) となるため、制限時間内に答えを
+出すことができます。よって、この式を使ってx, y 両方について計算し、掛
+け算すれば答えがO(n + m) で求まります。
+
+E : TrBBnsformBBtion
+
+操作1 や2 をA 1→BB やAAAA 2→A のように書くことにします。
+  まず、どちらの操作も（空文字列を作らない限りは）逆の操作が可能です。
+  A 1→BB の逆の操作は次のように作れます。
+
+               BB 1→AAB 1→AAAA 2→A
+
+A とB が逆の場合でも、この操作のA とB を入れ替えればよいです。
+
+              AA 1→BBA 1→BBBB 2→B
+
+  操作2 の逆の操作は、消したAAA やBBB の隣の文字を利用して行えま
+す。たとえば隣の文字がA であれば、次のようにします。
+
+              A 1→BB 1→AAB 1→AAAA
+              A 1→BB 1→AAB 1→ABBB
+              A 1→BB 1→BAA 1→BBBA
+
+隣の文字がB の場合でも、この操作のA とB を入れ替えればよいです。
+  ここで、文字列を「文字列T に変換できるもの」というグループに分類
+することを考えましょう。すると、操作が双方向に行えるので、「文字列X
+をY に変換できるか」と「文字列X と文字列Y は同じグループか」が同じ
+意味になります。
+
+
+                                 3
+
+  ではグループにはどのようなものが考えられるでしょうか？簡単にする
+ために、A だけが使われるように変換することにします。また、できるだけ
+短くすることを目指します。すると、どの文字列も次の3 つのうちどれかに
+なることがわかります。
+
+   • A に変換できるもの
+
+   • AA に変換できるもの
+
+   • AAA に変換できるもの
+
+  逆に、これら3 つは互いに変換可能ではありません。これを確かめるた
+めに、文字列について「各文字についてA を1、B を2 として合計して3 で
+割ったあまり」を考えます。例えば、文字列A は1、AA は2、AAA は0 で
+す。この値は操作1 でも操作2 でも変わらないので、これら3 つの文字列は
+互いに変換不可能です。
+  以上のことから、文字列X とY のこの値が等しいこと（同じグループで
+あること）と、X をY に変換できることは同値です。そのため、各クエリに
+対してその部分文字列の値を計算して3 で割ったあまりが等しいかを判定す
+れば良いことになります。これは、事前に累積和を計算しておくことで、各
+クエリに対してO(1) で判定できます。
+
+F : Inﬁnite Sequence
+
+2 つめの条件がややこしいので、まずこれについて考えましょう。1 である項
+については2 つめの条件は何も関係ありません。では2 以上の項については
+どうなるでしょうか？数列のどこかにx, y というふうに2 以上の数x, y が連
+続して出てきた場合、x についての条件からx, y, y のようにy がもう1 つあ
+とに続いているはずです。さらに、1 つめのy についての条件からx, y, y, y
+のようにさらにもう1 つy がついていることが分かります。同様の議論が2
+つめ以降のy についても可能なので、ずっとy が続くということが分かりま
+す。つまり、2 以上の数が連続すると、それ以降の項は1 通りに定まってし
+まいます。
+  次に1 つめの条件について考えてみましょう。第n 項からはずっと同じ
+数が続いているということですが、この「同じ数の繰り返し」が始まったの
+はどこからでしょうか？その数がa1 からずっと続いているかもしれない(A)
+ですし、その前に別の数である項がある(B) かもしれません。
+  今後、第n 項の数をx で表して、第n 項に下線をひいて表すことにします。
+
+
+                                 4
+
+   (A) x, x, . . . , x, x, x, . . .
+
+   (B) ?, ?, . . . , ?, t, x, x, . . . , x, x, x, . . .
+
+     (A) の場合は単純なので、(B) の場合を考えてみましょう。x の繰り返し
+ の直前にある数をt と呼ぶことにします(t ̸= x)。ではそのt のさらに前には
+ どんな数が出てきているでしょうか？t が最初の項から続いている場合(B1)
+ とそうで無い場合(B2) があります。
+
+  (B1)  t, t, . . . , t, x, x, . . . , x, x, x, . . .
+
+  (B2) ?, ?, . . . , ?, s, t, t, . . . , t, x, x, . . . , x, x, x, . . .
+
+      t の前の数をs と呼ぶことにします。いまt がいくつか続いているように
+ 書きましたが、前に見たとおり、t > 1 だとt が連続しているはずはありませ
+ ん。t > 1 ということにして場合分けしておきましょう。
+
+(B1-1) 1, 1, . . . , 1, x, x, . . . , x, x, x, . . .
+
+(B1-2)  t, x, x, . . . , x, x, x, . . .
+
+(B2-1) ?, ?, . . . , ?, s, 1, 1, . . . , 1, x, x, . . . , x, x, x, . . .
+
+(B2-2) ?, ?, . . . , ?, s, t, x, x, . . . , x, x, x, . . .
+
+      t ̸= x であったので、(B1-1) と(B2-1) ではx > 1 です。まぎらわしいので
+ これらについてはx′ と書いておきます。また、(B2-2) の場合s としては1 し
+ かありえません。
+
+(B1-1) 1, 1, . . . , 1, x′, x′, . . . , x′, x′, x′, . . .
+
+(B1-2)  t, x, x, . . . , x, x, x, . . .
+
+(B2-1) ?, ?, . . . , ?, s, 1, 1, . . . , 1, x′, x′, . . . , x′, x′, x′, . . .
+
+(B2-2) ?, ?, . . . , ?, 1, t, x, x, . . . , x, x, x, . . .
+
+  以上で、第n 項から左に辿っていくと、(B1-1) と(B2-1) と(B2-2) では
+  1 が出てくることが分かりました。そのようなケースは1 で終わる有限列
+ に“x′, x′, . . . , x′, x′, x′, . . .” か“t, x, x, . . . , x, x, x, . . .” を付けた数列になって
+ います。
+
+
+                                  5
+
+  以上でどのような数列が条件をみたすのかがわかったので、答えを求め
+ていきましょう。
+   (A) のケースはn 通りです。(B1-2) のケースは(n−1)2 通りです1。それ以
+外のケースの答えを求めるには、「1で終わる長さiの列で最後の項以外が条件
+を満たすものの数」が必要になります。これをdp[i]とします。この値は動的計
+画法で求められます（後述）。(B2-2) のように後ろに“t, x, x, . . . , x, x, x, . . .”
+が付くケースは(dp[1] + dp[2] + . . . + dp[n −2])(n −1)2 通りです。(B1-1)
+と(B2-1) のように後ろに“x′, x′, . . . , x′, x′, x′, . . .” が付くケースについては、
+x′ > 1 なので、(dp[1] + dp[2] + . . . + dp[n −1])(n −1) 通りです。よって、答
+えは
+
+n+(n−1)2+(dp[1]+dp[2]+. . .+dp[n−2])(n−1)2+(dp[1]+dp[2]+. . .+dp[n−1])(n−1)
+
+となります。
+  さて、あとはdp[i] を求めるだけです。「最後の項以外が条件を満たす、1
+で終わる長さi の列」は、次のどれかです。
+
+   • (最後の項以外が条件を満たす、1 で終わる長さi −1 の列) + “1”
+
+   • (最後の項以外が条件を満たす、1 で終わる長さi −3 の列) + “2, 1, 1”
+
+   • (最後の項以外が条件を満たす、1 で終わる長さi −4 の列) + “3, 1, 1”
+                           ...
+
+   • (最後の項以外が条件を満たす1で終わる長さ1の列) + “i−2, 1, 1, . . . , 1”
+
+   • “i −1, 1, 1, . . . , 1”
+
+よって、
+          {
+                   1                                         (i = 1)
+              dp[i] =
+                   1 + dp[1] + dp[2] + . . . + dp[i −1]   (i > 1)
+
+と計算できます。dp[i] の累積和を計算しておくことでdp[1], dp[2], . . . , dp[n]
+をO(n) で求めることができます。
+   このdp[i] の計算を行列とベクトルの掛け算で実装するとO(log n) で解く
+こともできます。
+
+
+
+   1t > 1 に注意
+
+
+                                 6
+
+        ABC058 / ARC071 Editorial
+
+                               writer: nuip
+
+                           April 8th, 2017
+
+
+ A : ι ⊥l
+
+   Check if b −a = c −b.
+
+ 1  #include <iostream >
+ 2  using namespace std;
+ 3  int main (){
+ 4    int a, b, c;
+ 5    cin >> a >> b >> c;
+ 6    cout << ( b-a == c-b ? "YES" : "NO" ) << endl;
+ 7  }
+
+
+  B : ∵∴∵
+
+    Arrange characters in E and O alternately.
+
+ 1  #include <iostream >
+ 2  using namespace std;
+ 3  int main (){
+ 4    string E, O;
+ 5    cin >> E >> O;
+ 6    for(int i=0; i < E.size (); i++){
+ 7      cout << E[i];
+ 8      if(i < O.size ()) cout << O[i];
+ 9    }
+10    return 0;
+11  }
+
+
+
+                                    1
+
+C : Dubious Document
+
+Let ca be the maximum integer such that each string contains at least ca
+occurrences of the character ’a’. Deﬁne cb, . . . , cz similarly.
+   The answer is
+
+                    aa . . . a  bb . . . b   . . .  zz . . . z                      | {z }   | {z }      | {z }
+                            caoccurrences cboccurrences     czoccurrences
+
+D : ###
+
+The answer is   ∑ ∑
+                                       (xj −xi)(yl −yk)
+                      1≤i<j≤n 1≤k<l≤m
+
+   which is equal to
+          (         ) (         )
+      ∑     ∑
+                            (xj −xi)              (yl −yk)
+                    1≤i<j≤n            1≤k<l≤m
+
+   Thus, we can solve the problem for each coordinate independently.
+   In order to solve the problem for x-coordinates quickly, use the following
+equation:     ∑    ∑
+                      (xj −xi) =      ((k −1)xk −(n −k)xk)
+              1≤i<j≤n           1≤k≤n
+
+    It works in O(n + m).
+
+E : TrBBnsformBBtion
+
+Replace ’A’ with ’1’ and ’B’ with ’2’. We claim that we can convert a string
+s to another string t if and only if the sum of digits of s and the sum of digits
+of t are equivalent in modulo 3.
+    It is trivial that this is a necessary condition. We want to prove that this
+is suﬃcient.
+    First, the operations are revertable (except for the case where the initial
+string is empty):
+
+               BB 1→AAB 1→AAAA 2→A
+
+
+                                 2
+
+              A 1→BB 1→AAB 1→AAAA
+              A 1→BB 1→AAB 1→ABBB
+              A 1→BB 1→BAA 1→BBBA
+
+   Using the operations B →AA, we can convert any (non-empty)string to
+a string that consists only of ’A’, so any string can be converted into one of
+the strings ’A’, ’AA’, or ’AAA’. These three strings have diﬀerent values in
+modulo 3. Thus, this condition is also suﬃcient.
+
+F : Inﬁnite Sequence
+
+Let N be a ﬁxed integer.  Let dp[k] be the number of inﬁnite sequences
+a1, a2, . . . such that
+
+   • For each i, 1 ≤ai ≤N (Note that this N is constant regardless f the
+      value k)
+
+   • ak = ak+1 = · · ·
+
+   • For each (i, j, k), if i < j < k ≤i + ai, aj = ak.
+
+   The problem asks to compute dp[N].
+    Let’s compute dp[k] by case-analysis:
+
+   •  If the ﬁrst element is 1, there are dp[k−1] ways to decide the remaining
+      elements.
+
+   •  If the ﬁrst element is not 1 (call it c), and the second element is also
+     not 1 (call it d), the sequence must be c, d, d, d, . . .. In total there are
+    (N −1)2 sequences of this form.
+
+   •  If the ﬁrst element is c > 1 and the second element is 1,
+
+      –  If c + 1 ≤k, there are dp[k −c −1] ways to decide the remaining
+          elements.
+
+      – Otherwise, the sequence must be c, 1, 1, 1, . . ..
+
+   Thus, dp[k] = dp[k −1] + (N −1)2 + dp[k −3] + dp[k −4] + · · · + dp[1] +
+(N −k + 2).
+
+
+                                 3

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc354_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc354/editorial/10035",
+      "text": "while文などを用いて植物の高さが高橋君より高くなるまで、一日ごとに伸びた高さを足していくシミュレーションすることで答えを求めることができます。\nまた、30日目には植物の高さは\n\\(1073741823\\, \\mathrm{cm}(> 10^{9}\\, \\mathrm{cm})\\)\nとなっているため、while文で1日ごとに高さを求めていく方法で十分高速に求まります。\n実装例(C++):\n実装例(Python):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int h;\n    cin >> h;\n    int ans = 0;\n    int now = 0;\n    while (now <= h) {\n        now += 1 << ans;\n        ans++;\n    }\n    cout << ans << endl;\n}",
+        "h=int(input())\nnow=0\nans=0\nwhile now<=h:\n    now+=1<<ans\n    ans+=1\n\nprint(ans)"
+      ],
+      "text_sha256": "6771b4b9e3a49e7535a0ea8807c13e0a5a585c052f8de3e03cadf0cdd1b290a6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc354/abc354_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

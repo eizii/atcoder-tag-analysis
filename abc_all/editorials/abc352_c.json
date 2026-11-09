@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc352_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc352/editorial/9922",
+      "text": "\\(P_N = i\\)\n、すなわち巨人\n\\(i\\)\nが一番上にいるときの一番上に立っている巨人の頭の高さは\n\\(B_i + \\sum_{j \\neq i}A_j\\)\nです。\n\\(B_i + \\sum_{j \\neq i}A_j = B_i - A_i + \\sum_{j = 1}^{N} A_j\\)\nであり、答えは\n\\(i = 1,2, \\ldots, N\\)\nにおけるこの値の最大値ですが、\n\\(\\sum_{j = 1}^{N} A_j\\)\nの値は\n\\(i\\)\nに依らないことを利用すると\n\\(\\max (B_i - A_i)\\)\nの値を求めればよいことがわかります。\nこれは for ループなどを利用することで時間計算量\n\\(O(N)\\)\nで計算可能です。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<ll> a(n), b(n);\n\tfor (int i = 0; i < n; i++) cin >> a[i] >> b[i];\n\tll m = 0;\n\tfor (int i = 0; i < n; i++) m = max(m, b[i] - a[i]);\n\tll ans = m;\n\tfor (int i = 0; i < n; i++) ans += a[i];\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "b0b2590f3d64e94ff4fc1d50bb59b8d7574f1e17f1e62c0fb00885cb22ca3fae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc352/abc352_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

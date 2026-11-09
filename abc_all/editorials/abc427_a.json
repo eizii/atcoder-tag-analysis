@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc427_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc427/editorial/14191",
+      "text": "\\(S\\)\nの中央の文字を探し、その文字を削除する操作を実際に行えばよいです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tint n = ssize(s);\n\ts.erase(s.begin() + n / 2);\n\tcout << s << '\\n';\n}"
+      ],
+      "text_sha256": "be2a2a9a81daab5f650dad81c6f067761209b12589caad8bbe99087971c84a0e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc427/abc427_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

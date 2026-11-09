@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc437_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc437/editorial/14893",
+      "text": "実装方針\n\\(A, B\\)\nの値を入力から受け取り、\n\\(12A + B\\)\nの値を出力すればよいです。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n\nint a, b;\n\nint main (void) {\n\tcin >> a >> b;\n\t\n\tint ans = a * 12 + b;\n\n\tcout << ans << \"\\n\";\n\t\n\treturn 0;\n}",
+        "a, b = map(int, input().split())\nprint(a * 12 + b)"
+      ],
+      "text_sha256": "7628c4858fe62d834519f50f820259ff72749222ffbeda9bc327bfc8c0b44859",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc437/abc437_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

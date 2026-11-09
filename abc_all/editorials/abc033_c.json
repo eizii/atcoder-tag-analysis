@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc033_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc033/editorial.pdf",
+      "text": "C問題 数式の書き換え\n\n  問題概要1.\n  アルゴリズム2.\n\n\n\n\n\n                                     ©AtCoder Inc. All rights reserved.                                      9\n\f\nC問題問題概要\n\n• 1+2+3*4*5+6*7のような、各項が1桁で括弧がなく、\n 乗算と加算のみの数式が与えられる。\n• これらの数字をいくつか0に書き換えて答えを0にし\n たい。\n• 最低何個書き換えればよいか。\n• 数式の長さは100,000以下\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     10\n\f\nC問題アルゴリズム\n\n• 各数字を0にする/しないを全て試すとO(2^N)かかる\n ため、間に合わない\n• ある場所を0に書き換えると、どこまで影響が出るだ\n ろうか。\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     11\n\f\nC問題アルゴリズム\n\n• 1*2*3の1を0にする→ 0*2*3=0\n• 2*4*6の4を0にする→ 2*0*6=0\n• 1+2+3の1を0にする→ 0+2+3\n• 3*6+9の6を0にする→ 3*0+9=0+9\n• 1+2*3+4の2を0にする→1+0*3+4=1+0+4\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     12\n\f\nC問題アルゴリズム\n\n• *だけで繋がっている式のどこかに0があると、その\n 範囲の答えが0になる\n• 0と書かれた項は+を越えた場所には影響しない\n• 元の数式の答えを0にするには、+で区切られたそ\n れぞれの部分の答えを全て0にしなければならない\n• 要は、+で区切られた部分それぞれに最低1つの0の\n 項が欲しい\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     13\n\f\nC問題アルゴリズム\n\n• +で区切る\n• 区切ったそれぞれの部分に対して、初期状態で0が\n 1つもなければ、1回書き換えが必要\n• この合計が必要な最小個数になる\n• O(N)\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                     14",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "4c17ef42b0c52a5a8704a75b7f5c60e74dc0093e81e076e3a4e690fb69b59417"
+    }
+  ],
+  "status": "available"
+}

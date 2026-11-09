@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc147_d",
+  "editorials": [
+    {
+      "text": "D: Xor Sum 4\nXOR をとる操作で各bit は互いに干渉しないため、bit ごとに独立に考えることができます。した\nがってAi が0 または1 である場合が解ければよいです。\nAi XOR Aj は、Ai = Aj のとき0、Ai̸ = Aj のとき1 なので\nN−1\n∑\ni=1\nN\n∑\nj=i+1\n(Ai XOR Aj) = #{(i, j) | i < j かつAi̸ = Aj}\n= (0 の個数) × (1 の個数)\nとして求めることができます。各bit ごとに0 のものと1 のものの個数がわかっていればよいので元\nの問題はO(N log max Ai) で解けました。\n",
+      "text_sha256": "129ee31c4dcabb1b561651ff9366de051d5bff3fe355426bbbdfe647cef0bd5c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc147/abc147_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

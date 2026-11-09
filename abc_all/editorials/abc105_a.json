@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc105_a",
+  "editorials": [
+    {
+      "text": "A: AtCoder Crackers\nN がK の倍数の時、均等に配ることができるので答えは0 です。そうでない場合、答えを0 にはできず、\nまたN をK で割った商とあまりをそれぞれA, B として、B 人にA + 1 枚、K −B 人にA 枚のせんべい\nを配ればよく、よって答えは1 です。\nC++ ではtrue, false がそれぞれ0, 1 に対応することを用いれば、以下のように実装することもできます。\n#include <stdio . h>\nint main ()\n{\nint a , b ;\nscanf (”%d%d” , &a , &b ) ;\np r i n t f (”%d\\n” , a%b !=\n0 ) ;\n}\n",
+      "text_sha256": "1ca17b0f1652fe4091d4952cee34d2584b27e38f9a87cf202b44d5de002b2545",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc105/abc105_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

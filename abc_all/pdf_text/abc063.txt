@@ -1,0 +1,563 @@
+        ABC 063 / ARC 075 Editorial (Japanese)
+
+
+                    問題・解説: evima
+
+                                 2017 年6 月3 日
+
+
+    For international readers: English Editorial starts at page 6.
+
+
+  A: Restricted
+
+  問題の要求に素直に従うことが求められています。以下に、C++ での実装の例を示します。
+
+
+
+ 1 #include <iostream>
+
+ 2 using namespace std;
+
+
+ 3
+
+ 4 int main(){
+
+ 5     int A, B;
+
+ 6     cin >> A >> B;
+
+ 7     if(A + B >= 10){
+
+ 8         cout << "error" << endl;
+
+ 9     }else{
+
+10         cout << A + B << endl;
+
+11     }
+
+12 }
+
+
+
+
+
+                                               1
+
+  B: Varied
+
+  いくつかの方針が考えられます。
+
+      • ループを二重に組み合わせ、1 ≤i < j ≤|S| であるような添字のペア(i, j) すべてについてSi とSj
+     が異なるか確認する（|S| が大きいと遅くなりますが、今回は|S| ≤26 であり問題ありません*1）
+
+      • S に含まれる文字をアルファベット順にソートし、同じ文字が二つ隣り合わないか確認する
+
+      • 26 種類の文字それぞれについてS での出現回数を数え、どの文字の出現回数も1 以下であるか確認
+
+    する
+
+  以下に、最初の方針のC++ での実装の例を示します。
+
+
+
+ 1 #include <algorithm>
+
+ 2 #include <iostream>
+
+ 3 using namespace std;
+
+
+ 4
+
+ 5 int main(){
+
+ 6     string S;
+
+ 7     cin >> S;
+
+ 8     int N = S.size();
+
+ 9     string ans = "yes";
+
+10     for(int i = 0; i < N; ++i){
+
+11         for(int j = i + 1; j < N; ++j){
+
+12             if(S[i] == S[j]){
+
+13                 ans = "no";
+
+14             }
+
+15         }
+
+16     }
+
+17     cout << ans << endl;
+
+18 }
+
+
+
+
+
+       *1 この問題の制約に反しますが、仮に|S| = 105 であったとすると、実行制限時間の2 秒に間に合わないでしょう。余談ですが、
+     鳩の巣原理より|S| > 26 のときに直ちにno と出力すれば、そのような長さの入力に対しても実行が間に合います。
+
+
+                                               2
+
+C: Bugged
+
+方針1: 「正攻法」
+
+ すべての問題の配点の合計をS とします。
+
+    • S が10 の倍数でない場合、S が画面に表示される最大の成績です。
+
+    • S が10 の倍数である場合、画面に0 でない成績を表示させるためには一問以上の問題で不正解する必
+
+   要があります。もし、配点が10 の倍数でないような問題が一問以上存在するなら、それらのうち配点
+
+   が最も低い一問のみで不正解することで、画面に表示される最大の成績を得られます。配点が10 の倍
+
+   数でないような問題が一問も存在しない場合は、画面に0 が表示されることを防げません。
+
+
+方針2: 「オーバーキル」
+ 動的計画法を用いて、「解いた問題の配点の合計」として可能性のあるすべての値を時間計算量O(N ∑si)
+
+で列挙することができます（詳細は省きます）。これは、答えを求めるのに十分過ぎる情報です。
+
+
+D: Widespread
+
+「残りの体力が最も多い魔物を中心に爆発を起こすことを繰り返す」のは最適な戦略ではありますが、この
+
+戦略を素直にシミュレートしてしまうと、例えば体力109 の魔物が105 体存在してA = 2, B = 1 の場合に
+
+長大な時間を要します。
+
+
+ 整数T に対し、enough(T) を「T 回以内の爆発ですべての魔物を消すことは可能か？」という問いの答
+
+え(Yes またはNo) とします。このとき、求めたい答えはenough(T) = Yes であるようなT の最小値です。
+
+enough は単調性を持つ(enough(X) = Yes であればX ≤Y のときenough(Y ) = Yes) ため、この最小値
+を二分探索*2で求めることができます。
+
+
+ 定められたT の値に対してenough(T) を判定するには、爆発を起こすことを以下のように捉え直すとよい
+
+でしょう:「すべての魔物の体力をB ずつ減らし、魔物を一体選んでその体力をさらにA −B 減らす」。
+
+すると、T 回の爆発を起こすことは、すべての魔物の体力をB × T ずつ減らし、その上でT 回にわたっ
+
+て一体の魔物の体力をA −B 減らすこと（以下、この行為を「追加ダメージを与える」と表現します）
+
+と同等です。すべての魔物を消すには、体力がB × T より高い魔物i それぞれに対して追加ダメージを
+
+⌈(hi −B × T)/(A −B)⌉回与える必要があり（⌈x⌉はx 以上の最小の整数を表します）、この回数の合計が
+T 以下であればenough(T) = Yes、合計がT を超える場合はenough(T) = No と判定できます。
+
+
+ 以上により、一つのT の値に対するenough(T) の判定を時間計算量O(N) で行うことができ、この解法
+
+の全体の時間計算量はO(N log(hmax/B)) となります。
+
+
+
+   *2 二分探索自体の説明は省きます。例えば、日本語版Wikipedia の当該記事に詳細な記述があります。
+
+
+                                             3
+
+E: Meaningful Mean
+
+ 問題文中の表記からa の添え字の範囲をずらし、この解説ではa = {a0, a1, . . . , aN−1} とします。
+  a の空でない連続する部分列{al, al+1, . . . , ar−1} (0 ≤l < r ≤N)（これも問題文中の表記と異なり、ar
+が含まれないことに注意してください）の平均がK 以上であることは、次のように言い換えられます。
+
+   ∑r−1       ∑r−1  ∑l−1       ∑r−1   ∑l−1
+              ai ≥(r −l)K ⇔       ai −     ai ≥rK −lK ⇔       ai −rK ≥     ai −lK
+           i=l                       i=0      i=0                       i=0            i=0
+
+    ∑j−1
+ ここでbj =     ai −jK (0 ≤j ≤N) とおくと、この条件は単にbr ≥bl と書けます。bj (0 ≤j ≤N) す
+               i=0
+べての値は容易にO(N) 時間で求めることができ、残るはbr ≥bl であるようなペア(l, r) (0 ≤l < r ≤N)
+
+の個数を数えることのみです。これには、何らかのデータ構造を用いることが必要となるでしょう。以下に、
+
+最も簡単と思われる方法を述べます。
+
+
+ まず、N + 1 個の値b0, b1, . . . , bN を、大小関係を保ったまま0 からN の範囲の値に圧縮し、その値を
+c0, c1, . . . , cN とします（ソートと二分探索を用います）。そして、Binary Indexed Tree*3を用いて0, 1, . . . , N
+のそれぞれの値の出現回数を保持します。これにより、i = 0, 1, . . . , N のそれぞれに対し、c0, c1, . . . , ci−1 に
+ci 以下の値が何回出現したかをそれぞれO(log(N)) 時間で計算することができ、合計O(N log(N)) 時間で
+
+求めるべきペアの個数を計算することができます。
+
+
+
+
+
+   *3 Binary Indexed Tree 自体の詳細な説明は省きますが、このデータ構造は長さn の数列を特殊な形式で保持し、二種類の操作
+   「数列の指定された位置の要素に指定された値を加算する」「数列の先頭から指定された位置までの要素の和を求める」をそれぞれ
+    時間計算量O(log(n)) で行うことができます。より詳細な情報は、例えば英語版Wikipedia の記事“Fenwick Tree” にありま
+   す。
+
+
+                                             4
+
+ F: Mirrored
+
+                                                                                L−1∑
+  与えられた式をrev(N) −N = D とみなします。N の十進表記における桁数をL とし、N =     10ini
+                                                                                                 i=0
+ (0 ≤ni ≤9, nL−1 ̸= 0) と表記すると、rev(N) −N は次のように変形できます。
+
+             L−1∑           L−1∑       L−1∑                    ⌊L/2⌋−1∑
+ rev(N)−N =    10L−1−ini −    10ini =    (10L−1−i −10i)ni =       (10L−1−i −10i)(ni −nL−1−i)
+                i=0              i=0         i=0                       i=0
+
+  ここでdi = ni −nL−1−i (0 ≤i ≤⌊L/2⌋−1) とおくと、
+
+                                               ⌊L/2⌋−1∑
+                            rev(N) −N =       (10L−1−i −10i)di
+                                                   i=0
+
+  この式の右辺をf(L, d) とおきます。与えられた式を満たすN の個数を求めることは、f(L, d) = D であ
+るようなL と−9 以上9 以下の整数の列d0, d1, . . . , d⌊L/2⌋−1 の組み合わせを列挙することとほぼ同等です
+（一つのdi の列に対し、それに対応するN が複数個存在することを考慮する必要がありますが）。ここで、
+ 0 ≤i < ⌊L/2⌋−1 であるような任意のi に対して次の式が成立します。
+
+                                        ⌊L/2⌋−1∑
+                     10L−1−i −10i >       ((10L−1−j −10j) · 9) + 10L−⌊L/2⌋
+
+                                        j=i+1
+
+ （この式の「意味」は次の通りです:「あるi (̸= ⌊L/2⌋−1) に対してdi = 1 とすると、j > i であるよう
+ なすべてのj に対してdj = −9 としても、di = 1 によるf(L, d) への正の方向への影響が残り、その残りは
+ 10L−⌊L/2⌋より大きい」）この式から、次の二点がいえます。
+
+     • D の十進表記における桁数をLD とすると、L > 2LD でf(L, d) が正のとき、f(L, d) がD より大き
+    くなることがわかります。したがって、L の値としてLD 以上2LD 以下のすべての値を検討すれば十
+
+   分です。
+
+     • L の値を定めたとき、f(L, d) = D であるような整数列d0, d1, . . . , d⌊L/2⌋−1 を列挙するために（そし
+   て与えられた式を満たすN の個数を数えるために）、d0 から順に値を定めていく深さ優先探索を行
+    うことを考えます。di−1 までの値をすでに定めているとき、di の値として検討する必要がある候補
+       ∑i−1
+      は、dif = N −   ((10L−1−j −10j) · dj) として、(10i −10L−1−i)di ≤dif であるような最大の値と、
+                     j=0
+        (10i −10L−1−i)di > dif であるような最小の値の高々二つのみであることがわかります。（直感的に述
+    べると、探索の途中でf(L, d) の「途中まで」の値がD からあまり離れてしまうとそれ以降「戻って
+
+    くる」ことはできないため、D の「近くから離れる」べきではありません。）したがって、L の値を定
+   めたとき、与えられた式を満たすN であって桁数がL であるものの個数を時間計算量O(2⌊L/2⌋) で
+
+   求めることができます。
+
+                                                  2LD∑
+ 以上の二点より、求めるべきN の個数を時間計算量O(      2⌊i/2⌋) = O(2LD) で求めることができます。
+
+                                                  i=LD
+
+
+
+
+                                              5
+
+        ABC 063 / ARC 075 Editorial (English)
+
+
+                          Problems and editorial by evima
+
+                                  June 3, 2017
+
+
+
+  A: Restricted
+
+      It is required to do exactly what is told. C++ implementation follows:
+
+
+
+ 1 #include <iostream>
+
+ 2 using namespace std;
+
+
+ 3
+
+ 4 int main(){
+
+ 5     int A, B;
+
+ 6     cin >> A >> B;
+
+ 7     if(A + B >= 10){
+
+ 8         cout << "error" << endl;
+
+ 9     }else{
+
+10         cout << A + B << endl;
+
+11     }
+
+12 }
+
+
+
+
+
+                                               1
+
+  B: Varied
+
+    There are several solutions:
+
+      • Nest two loops and check if Si and Sj diﬀers for all pairs of indices (i, j) such that 1 ≤i < j ≤|S|
+         (slower if |S| is larger, but ﬁne in this problem since |S| ≤26*1)
+
+      • Sort the characters in S in alphabetical order, and check if no two adjacent letters are the same
+
+      • For each of the 26 letters, count the occurrences in S, and check if no letter appears more than
+
+        once
+
+   C++ implementation of the ﬁrst solution follows:
+
+
+
+ 1 #include <algorithm>
+
+ 2 #include <iostream>
+
+ 3 using namespace std;
+
+
+ 4
+
+ 5 int main(){
+
+ 6     string S;
+
+ 7     cin >> S;
+
+ 8     int N = S.size();
+
+ 9     string ans = "yes";
+
+10     for(int i = 0; i < N; ++i){
+
+11         for(int j = i + 1; j < N; ++j){
+
+12             if(S[i] == S[j]){
+
+13                 ans = "no";
+
+14             }
+
+15         }
+
+16     }
+
+17     cout << ans << endl;
+
+18 }
+
+
+
+
+
+       *1 The constraints in this problem does not allow this, but if |S| = 105, it would not ﬁt within the execution time limit
+          of 2 seconds. A little oﬀ-topic, but if we immediately print “no” when |S| > 26 by pigeonhole principle, it will run
+          in time.
+
+
+                                               2
+
+C: Bugged
+
+Solution 1: “Straight-forward”
+
+  Let S be the total points allocated to all the problems.
+
+    • If S is not a multiple of 10, S is the maximum value we seek.
+
+    • If S is a multiple of 10, in order to display a value other than 0, we need to incorrectly answer
+
+      at least one question. If there is at least one question with a score which is not a multiple of 10,
+
+       incorrectly answer one of the problems with the lowest score allocated among them, and we can
+
+      obtain the maximum grade that can be correctly displayed.  If there is no such question, there is
+
+     no way to prevent the system from displaying 0.
+
+
+Solution 2: “Overkill”
+
+ By Dynamic Programming, we can enumerate all the possible candidates of “the total score allocated
+to correctly answered problems” in O(N ∑si) time (we will omit the detail). This is more than enough
+
+to ﬁnd the answer.
+
+
+
+
+
+                                             3
+
+D: Widespread
+
+  It is indeed optimal to repeatedly cause an explosion centered at the monster with the most health
+
+remaining, but straight-forward simulation of this strategy will take a long time when, for example, there
+are 105 monsters with 109 health each and A = 2, B = 1.
+
+
+  For an integer T, let enough(T) be the answer to the question “is it possible to vanish all the monster
+
+in at most T explosions?”: either “yes” or “no”. Then, the answer we seek is the minimum value of T
+
+such that enough(T) = yes. Since enough is monotonic (that is, if enough(X) = yes, enough(Y ) = yes
+when X ≤Y ), we can perform binary search*2 to ﬁnd this minimum.
+
+
+  In order to determine enough(T) for a ﬁxed value of T, it would be useful to understand causing an
+
+explosion in the following way: “decrease the health of all the monsters by B, then further decrease the
+
+health of one selected monster by A −B.” Causing T explosions is now equivalent to decreasing the
+
+healths of all the monsters by B × T, then do the following T times: further decrease the health of one
+
+selected monster by A −B (we will call this an “extra attack”). In order to vanish all the monsters, we
+
+need to deliver ⌈(hi −B ×T)/(A−B)⌉extra attacks to each monster i with a health greater than B ×T.
+
+If the total required number of extra attacks is at most T, enough(T) = yes, and otherwise no.
+
+
+ We can now determine enough(T) for a ﬁxed value of T in O(N) time, which leads to the total time
+
+complexity of O(N log(hmax/B)).
+
+
+
+
+
+   *2 We will not explain the notion of binary search itself here. Resources can be found in, for example, Wikipedia.
+
+
+                                             4
+
+E: Meaningful Mean
+
+ We will shift the range of the index of a and let a = {a0, a1, . . . , aN−1} in this editorial.
+ We can transform the condition “the non-empty contiguous subsequence of a, {al, al+1, . . . , ar−1}
+(0 ≤l < r ≤N) (note that ar is excluded), has a mean greater than or equal to K” into:
+
+   ∑r−1       ∑r−1  ∑l−1       ∑r−1   ∑l−1
+              ai ≥(r −l)K ⇔       ai −     ai ≥rK −lK ⇔       ai −rK ≥     ai −lK
+           i=l                       i=0      i=0                       i=0            i=0
+
+   ∑j−1
+  Let bj =     ai −jK (0 ≤j ≤N), and this condition can be simply written as br ≥bl. We can easily
+            i=0
+ﬁnd all the values of bj (0 ≤j ≤N) in O(N) time, and what remains is to count the number of the pairs
+(l, r) (0 ≤l < r ≤N) such that br ≥bl. It would be necessary to utilize some kind of data structure.
+
+We will explain a method that we think is easiest.
+
+
+  First, compress the N + 1 values b0, b1, . . . , bN into a range between 0 and N, keeping the magnitude
+relationship (by sorting and binary search), and let the compressed values be c0, c1, . . . , cN.  Then,
+maintain the numbers of occurrences of the values between 0 and N using Binary Indexed Tree*3. In
+
+this manner, for each of i = 0, 1, . . . , N, we can found the number of occurrences of values less than or
+
+equal to ci among c0, c1, . . . , ci−1 in O(log(N)) time, which enables us to compute the desired number
+
+of pairs in a total of O(N log(N)) time.
+
+
+
+
+
+   *3 We will not explain Binary Indexed Tree in detail here, but here is the summary: this data structure maintains a
+     sequence of length n in a special format, and it can perform each of the following kinds of operations in O(log(n))
+      time: “incrementing the element at the speciﬁed position by a speciﬁed amount” and “ﬁnding the sum of the elements
+     from the beginning of the sequence up to the speciﬁed position”. More information can be found in, for example,
+     Wikipedia (in the name of “Fenwick Tree” in English version).
+
+
+                                             5
+
+F: Mirrored
+
+ We will see the given formula as rev(N) −N = D. Let the number of digits of N in decimal notation
+             L−1∑
+as L, and N =     10ini (0 ≤ni ≤9, nL−1 ̸= 0). Then, rev(N) −N can be transformed into:
+                i=0
+
+            L−1∑           L−1∑       L−1∑                    ⌊L/2⌋−1∑
+rev(N)−N =    10L−1−ini −    10ini =    (10L−1−i −10i)ni =       (10L−1−i −10i)(ni −nL−1−i)
+               i=0              i=0         i=0                       i=0
+
+  Here, let di = ni −nL−1−i (0 ≤i ≤⌊L/2⌋−1), which results in:
+
+                                              ⌊L/2⌋−1∑
+                           rev(N) −N =       (10L−1−i −10i)di
+                                                  i=0
+
+  Let the right side of this formula be f(L, d).  Finding the count of N that satisfy the given for-
+
+mula is almost equivalent to enumerating the pairs of L and a sequence of integers between −9 and 9,
+
+d0, d1, . . . , d⌊L/2⌋−1 (we also need to take into account that there is more than one N that corresponds
+to a sequence of di, though). Here, for any i such that 0 ≤i < ⌊L/2⌋−1, the following holds:
+
+                                       ⌊L/2⌋−1∑
+                    10L−1−i −10i >       ((10L−1−j −10j) · 9) + 10L−⌊L/2⌋
+
+                                       j=i+1
+
+  (The “meaning” of this is as follows: “Suppose that di = 1 for some i (̸= ⌊L/2⌋−1). Then, even if we
+set dj = −9 for all j such that j > i, the ‘positive eﬀect’ on f(L, d) by di = 1 is not completely negated,
+and more than 10L−⌊L/2⌋still remains.”) Based on this, the following can be observed:
+
+    • Let LD be the number of digits of D in decimal notation. Then, when L > 2LD and f(L, d) > 0,
+        it can be seen that f(L, d) > D. Therefore, it is enough to consider the values between LD and
+     2LD as the value of L.
+    • For a ﬁxed value of L, consider enumerating the sequences d0, d1, . . . , d⌊L/2⌋−1 such that f(L, d) =
+   D (and ﬁnding the count of N that satisfy the given formula), by performing Depth First Search
+
+       starting from d0. When the values up to di−1 are already decided, it can be seen that there are at
+     most two candidates of the value of di that have to be considered: the maximum value such that
+       (10i −10L−1−i)di ≤dif , and the minimum value such that (10i −10L−1−i)di > dif . (Intuitively,
+
+          if the “halfway” value of f(L, d) during the search gets too far from D, it is not possible to “get
+
+      back”, and thus it should “stay close” to D.) Therefore, for a ﬁxed value of L, we can ﬁnd the
+      count of N that satisfy the given formula in O(2⌊L/2⌋) time.
+
+                                                     2LD∑
+  The above enables us to ﬁnd the desired count of N in O(      2⌊i/2⌋) = O(2LD) time.
+
+                                                     i=LD
+
+
+
+
+
+                                             6

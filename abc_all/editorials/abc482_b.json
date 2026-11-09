@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc482_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc482/editorial/28013",
+      "text": "マス目において一列に並んだ \\(5\\) マスの集合としてあり得るものすべてについて「その \\(5\\) マスのうち印が書き込まれていないマスの数（ \\(S\\) の対応する文字が . であるマスの数）」の最小値が答えになります。 縦方向の \\(5\\) 列、横方向の \\(5\\) 列をまとめて処理すると実装量が削減できます。 実装例 (C++) さらに「指定したマスから指定した方向に連続する \\(5\\) マス」について計算するようにすると、縦・横・斜めを一括で扱うことができます。この方針の場合、関数やラムダ式を利用すると簡潔に書けます。 実装例 (C++) また Python では \\(S_1,\\dots,S_5\\) を一つの文字列に結合し、スライスと .count() を利用することでも実装できます。 実装例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    vector<string> S(5);\n    for (auto& s : S) cin >> s;\n\n    int ans = 5;\n    // 横\n    for (int k = 0; k < 5; k++) {\n        int count = 0;\n        for (int i = 0; i < 5; i++)\n            if (S[k][i] == '.') count++;\n        ans = min(ans, count);\n    }\n    // 縦\n    for (int k = 0; k < 5; k++) {\n        int count = 0;\n        for (int i = 0; i < 5; i++)\n            if (S[i][k] == '.') count++;\n        ans = min(ans, count);\n    }\n    // 斜め\n    {\n        int count = 0;\n        for (int i = 0; i < 5; i++)\n            if (S[i][i] == '.') count++;\n        ans = min(ans, count);\n    }\n    {\n        int count = 0;\n        for (int i = 0; i < 5; i++)\n            if (S[i][4 - i] == '.') count++;\n        ans = min(ans, count);\n    }\n    cout << ans << \"\\n\";\n}\n",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    vector<string> S(5);\n    for (auto& s : S) cin >> s;\n    int ans = 5;\n    auto check = [&](int x0, int y0, int dx, int dy) {\n        int count = 0;\n        for (int i = 0; i < 5; i++)\n            if (S[x0 + dx * i][y0 + dy * i] == '.') count++;\n        ans = min(ans, count);\n    };\n    for (int k = 0; k < 5; k++) check(k, 0, 0, 1);\n    for (int k = 0; k < 5; k++) check(0, k, 1, 0);\n    check(0, 0, 1, 1);\n    check(0, 4, 1, -1);\n    cout << ans << \"\\n\";\n}\n",
+        "S = [input() for _ in range(5)]\nSS = \"\".join(S)\nans = 5\nfor k in range(5):\n    ans = min(ans, S[k].count(\".\"))\nfor k in range(5):\n    ans = min(ans, SS[k::5].count(\".\"))\nans = min(ans, SS[0::6].count(\".\"))\nans = min(ans, SS[4:-1:4].count(\".\"))\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "763475899b86b49470be2f9726771b477cc31ff4c322b42c7fcd56cf572f0280"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc205_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc205/editorial/2050",
+      "text": "\\(A_1, A_2, \\dots, A_N\\)\nのいずれとも異なる正の整数を\n良い整数\nと呼ぶことにします。\n各\n\\(i\\)\nについて、\n\\(A_i\\)\n以下の良い整数の個数\n\\(C_i\\)\nを記録しておきます。\nこれを用いると、 小さい方から数えて\n\\(K\\)\n番目の良い整数は次のように求められます :\n\\(C_N < K\\)\nのとき\n答えは必ず\n\\(A_N\\)\nより大きいです。\n\\(A_N\\)\nより大きい整数は全て良い整数であるので、\n\\(A_N + (K - C_N)\\)\nが答えとなります。\n\\(C_N \\geq K\\)\nのとき\n\\(C_i \\geq K\\)\nとなる最小の\n\\(i\\)\nを二分探索によって求めると、答えは\n\\(A_{i - 1}\\)\nより大きく、\n\\(A_i\\)\nより小さくなります (ただし、\n\\(A_0 = 0\\)\nとする) 。\n\\(A_{i - 1}\\)\nより大きく\n\\(A_i\\)\nより小さい整数は全て良い整数であるので、\n\\(A_{i} - 1\\)\nから\n\\(C_i - K\\)\n個戻った\n\\((A_i - 1) - (C_i - K)\\)\nが答えとなります。\n計算量は\n\\(O (N + Q \\log N)\\)\nです。\n実装例 (C++)",
+      "codes": [],
+      "text_sha256": "2c5d8f1c1ec0182b6fbb535ebab501559982c9a4f6bca50e29c36e97a452a021",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc205/abc205_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc205/editorial/2091",
+      "text": "公式解説では1クエリにつき\nlower_bound\n1回で求めていましたが、\n二分探索+\nupper_bound\nでも、計算量が\n\\(O(K\\log K \\log Q)\\)\nと悪化してしまいますが、十分高速に求めることが出来ます。\n方針としてはある整数\n\\(m\\)\nが何番目（以上）のExcludedかは、配列\n\\(A\\)\nに含まれる\n\\(m\\)\n以下の個数\n\\(d\\)\nが求められれば\n\\(m-d\\)\nとして求めることができ、この値で二分探索する事ができます。\n解答例",
+      "codes": [
+        "#include <iostream>\n#include <algorithm>\n#include <vector>\n\nusing namespace std;\nusing ll = long long;\n\nint main(){\n    ll n, q;\n    cin >> n >> q;\n    vector<ll> a(n);\n    for(ll&v:a) cin >> v;\n    while(q--) {\n        ll k;\n        cin >> k;\n        ll ok = 2e18;\n        ll ng = 0;\n        while(ok-ng > 1) {\n            ll m = (ok+ng)/2;\n            ll d = upper_bound(a.begin(), a.end(), m) - a.begin();\n            ll nth = m - d;\n            if(nth >= k) {\n                ok = m;\n            } else {\n                ng = m;\n            }\n        }\n        cout << ok << endl;\n    }\n}"
+      ],
+      "text_sha256": "c5a7b13d3808147f31a9d6cb796a0e403e926de6c56641f5a4b2c05686f693c4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc205/abc205_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

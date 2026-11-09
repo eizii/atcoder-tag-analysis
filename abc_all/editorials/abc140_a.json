@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc140_a",
+  "editorials": [
+    {
+      "text": "A: Password\n各桁ごとに独立してN 通りの数字を設定出来ますから、答えはN 3 です。\nN を入力として受け取り、N 3 を計算して、その値を出力することにより、AC となります。\n以下はC++ による実装例です。\n1\n#include <iostream>\n2\nusing namespace std;\n3\nint main(){\n4\nint N;\n5\ncin >> N;\n6\ncout << N * N * N << endl;\n7\nreturn 0;\n8\n}\n",
+      "text_sha256": "28e75b39526aa858340320f585bd86dd4433a6518b90e301173af38ebb58cee7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc140/abc140_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

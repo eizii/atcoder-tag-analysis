@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc264_e",
+  "source_url": "https://atcoder.jp/contests/abc264/tasks/abc264_e?lang=ja",
+  "statement": "問題文\nある国には\nN\n個の都市と\nM\n個の発電所があります。これらを総称して地点と呼びます。\n地点には\n1,2,\\dots,N+M\nの番号がつけられており、そのうち都市は地点\n1,2,\\dots,N\nで発電所は地点\nN+1,N+2,\\dots,N+M\nです。\nこの国には電線が\nE\n本あり、電線\ni\n(\n1 \\le i \\le E\n) は地点\nU_i\nと地点\nV_i\nを双方向に結びます。\nまた、ある都市に\n電気が通っている\nとは、ある都市から電線をいくつか辿って少なくともひとつの発電所に辿り着くことができる状態を言います。\n今、\nQ\n個のイベントが起こります。そのうち\ni\n(\n1 \\le i \\le Q\n) 番目のイベントでは電線\nX_i\nが切れ、その電線を辿ることができなくなります。一度切れた電線は、その後のイベントにおいても切れたままです。\n全てのイベントについて、そのイベントが終わった直後に電気が通っている都市の数を求めてください。\n制約\n入力は全て整数\n1 \\le N,M\nN+M \\le 2 \\times 10^5\n1 \\le Q \\le E \\le 5 \\times 10^5\n1 \\le U_i < V_i \\le N+M\ni \\neq j\nならば、\nU_i \\neq U_j\nまたは\nV_i \\neq V_j\n1 \\le X_i \\le E\nX_i\nは相異なる",
+  "html_sha256": "e5042a805136f744723ca835c7ca0d148fc2de6254919423c02622499e2094e2",
+  "extractor": "section_headings_v1"
+}

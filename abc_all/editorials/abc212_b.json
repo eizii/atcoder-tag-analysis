@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc212_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc212/editorial/2354",
+      "text": "それぞれの条件をみたすかを if 文などを用いて判定すればよいです。\n\\(9\\)\nと\n\\(0\\)\nの間の判定は個別に分けても良いですし、\n\\(10\\)\nで割った余りで見ることもできます。\nやや強引な方法としては、弱い暗証番号の候補が\n\\(20\\)\n個しかないため、すべてと比較して判定する事もできます。\nC++による実装例:\nPythonによる実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tchar a[5];\n\tfor (int i = 0; i < 5; i++)a[i] = 0;\n\tcin >> a;\n\tbool same = true;\n\tbool step = true;\n\tfor (int i = 0; i < 3; i++) {\n\t\tif (a[i] != a[i + 1])same = false;\n\t\tif (((a[i] + 1) % 10) != (a[i + 1] % 10))step = false;\n\t}\n\tif (same || step)cout << \"Weak\" << endl;\n\telse cout << \"Strong\" << endl;\n\treturn 0;\n}",
+        "a = input()\nsame,step = True,True\nfor i in range(3):\n    if a[i]!=a[i+1]:\n        same=False\n    if (int(a[i])+1)%10!=int(a[i+1]):\n        step=False\nif(same or step):\n    print(\"Weak\")\nelse:\n    print(\"Strong\")"
+      ],
+      "text_sha256": "66b210463c3957a68ce6de51499e9959593f74bf803c5e6cb5674ab86cbd0797",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc212/abc212_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

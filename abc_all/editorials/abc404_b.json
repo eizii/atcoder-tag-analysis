@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc404_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc404/editorial/12862",
+      "text": "回転操作を行わない場合、\n\\(S\\)\nと\n\\(T\\)\nで一致していないマスの個数が答えです。\nマスの色を塗り替える操作と、グリッド全体を回転する操作は、順序を入れ替えても構いません。よってグリッド全体を回転する操作は最初に行うとしてよいです。\n回転する操作を行う回数が\n\\(0,1,2,3\\)\n回のいずれであるかを\n\\(4\\)\n通り全て試すことでこの問題を解くことができます。\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "N = int(input())\nS = [input() for _ in range(N)]\nT = [input() for _ in range(N)]\n\ndef right_rot90(S):\n  return list(zip(*S[::-1]))\n\ndef count_diff(S,T):\n  return sum([1 for si,ti in zip(S,T) for sij,tij in zip(si,ti) if sij!=tij])\n\nans = 10**9\nfor rot_count in range(4):\n  ans = min(ans, count_diff(S,T)+rot_count)\n  S = right_rot90(S)\n\nprint(ans)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint count_diff(vector<string>S, vector<string>T){\n\tint N = S.size();\n\tint ans = 0;\n\tfor(int i=0;i<N;i++)for(int j=0;j<N;j++)if(S[i][j]!=T[i][j])ans++;\n\treturn ans;\n}\n\nvector<string> right_rot90(vector<string>S){\n\tint N = S.size();\n\tvector<string>ret(N, string(N,'.'));\n\tfor(int i=0;i<N;i++)for(int j=0;j<N;j++)ret[i][j]=S[N-1-j][i];\n\treturn ret;\n}\n\nint main(){\n\tint n;\n\tcin >> n;\n\tvector<string> s(n), t(n);\n\tfor(auto &x:s)cin >> x;\n\tfor(auto &x:t)cin >> x;\n\t\n\tint ans = 1e9;\n\tfor(int rot_count=0;rot_count<4;rot_count++){\n\t\tans = min(ans, count_diff(s,t)+rot_count);\n\t\ts = right_rot90(s);\n\t}\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "c5cc784dc3e918bbff03134f89861f0a4d1c39395b87fb8dd47cd1a3039b38e5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc404/abc404_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

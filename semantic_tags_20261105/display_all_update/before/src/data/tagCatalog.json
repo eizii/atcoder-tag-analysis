@@ -1,0 +1,1880 @@
+{
+  "version": "semantic-learning-units-v1-20261105",
+  "classification_method": "semantic_learning_units",
+  "source_problem_count": 898,
+  "source_fine_tag_count": 115,
+  "learning_unit_count": 82,
+  "metadata_tag_count": 6,
+  "display_min_problem_count": 2,
+  "visible_unit_count": 67,
+  "granularity_definition": "独立して説明・練習できる具体的な計算課題または技法の系統。難易度をそろえる分類ではない。",
+  "independent_human_review": false,
+  "annotations_provisional": true,
+  "clusters": [
+    {
+      "cluster_id": "L001",
+      "label": "点更新・区間集約",
+      "representative": "点更新・区間集約",
+      "category": "データ構造",
+      "kind": "data_structure",
+      "description": "要素を更新しながら、区間の和・最小値などを求める。",
+      "rationale": "Fenwick木とSegment Treeを区間集約の学習単位にまとめる。区間更新と静的クエリは分ける。",
+      "member_tags": [
+        {
+          "tag_id": "T001",
+          "tag": "Binary Indexed Tree / Fenwick Tree"
+        },
+        {
+          "tag_id": "T003",
+          "tag": "Segment Tree"
+        }
+      ],
+      "detail_methods": [
+        "Binary Indexed Tree / Fenwick Tree",
+        "Segment Tree"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 73,
+      "visible": true
+    },
+    {
+      "cluster_id": "L002",
+      "label": "区間更新・区間集約",
+      "representative": "区間更新・区間集約",
+      "category": "データ構造",
+      "kind": "data_structure",
+      "description": "区間全体への更新と、区間の集約を効率よく行う。",
+      "rationale": "遅延伝播の設計が必要なため、点更新の単位から分ける。",
+      "member_tags": [
+        {
+          "tag_id": "T002",
+          "tag": "Lazy Segment Tree"
+        }
+      ],
+      "detail_methods": [
+        "Lazy Segment Tree"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 20,
+      "visible": true
+    },
+    {
+      "cluster_id": "L003",
+      "label": "静的な区間集約",
+      "representative": "静的な区間集約",
+      "category": "データ構造",
+      "kind": "data_structure",
+      "description": "更新のない配列に対する区間の集約を前計算で高速化する。",
+      "rationale": "Sparse Tableの派生形を同じ操作条件でまとめる。RMQという課題名だけから静的とは推定しない。",
+      "member_tags": [
+        {
+          "tag_id": "T004",
+          "tag": "Sparse Table"
+        },
+        {
+          "tag_id": "T095",
+          "tag": "Disjoint Sparse Table"
+        }
+      ],
+      "detail_methods": [
+        "Sparse Table",
+        "Disjoint Sparse Table"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 5,
+      "visible": true
+    },
+    {
+      "cluster_id": "L004",
+      "label": "集合の併合・連結性管理",
+      "representative": "集合の併合・連結性管理",
+      "category": "データ構造",
+      "kind": "data_structure",
+      "description": "集合の併合と、要素が同じ集合に属するかの判定を行う。",
+      "rationale": "Union-Findを一つの学習単位として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T005",
+          "tag": "Union-Find"
+        }
+      ],
+      "detail_methods": [
+        "Union-Find"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 63,
+      "visible": true
+    },
+    {
+      "cluster_id": "L005",
+      "label": "区間の順位・頻度クエリ",
+      "representative": "区間の順位・頻度クエリ",
+      "category": "データ構造",
+      "kind": "data_structure",
+      "description": "区間内の値の順位や出現個数を扱う。",
+      "rationale": "Wavelet Matrixの操作を学習単位にする。一般の区間和とは必要な操作が異なる。",
+      "member_tags": [
+        {
+          "tag_id": "T006",
+          "tag": "Wavelet Matrix"
+        }
+      ],
+      "detail_methods": [
+        "Wavelet Matrix"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 3,
+      "visible": true
+    },
+    {
+      "cluster_id": "L006",
+      "label": "キュー・両端キュー",
+      "representative": "キュー・両端キュー",
+      "category": "データ構造",
+      "kind": "data_structure",
+      "description": "順序を保った取り出しや両端からの追加・削除を行う。",
+      "rationale": "QueueとDequeは列の両端操作の系統としてまとめ、優先度付きキューは分ける。",
+      "member_tags": [
+        {
+          "tag_id": "T007",
+          "tag": "Deque"
+        },
+        {
+          "tag_id": "T011",
+          "tag": "Queue"
+        }
+      ],
+      "detail_methods": [
+        "Deque",
+        "Queue"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 46,
+      "visible": true
+    },
+    {
+      "cluster_id": "L007",
+      "label": "集合・辞書の基本操作",
+      "representative": "集合・辞書の基本操作",
+      "category": "データ構造",
+      "kind": "data_structure",
+      "description": "要素の所属やキーと値の対応を管理する。",
+      "rationale": "SetとMapを基本的な所属・対応の管理としてまとめる。順序が必要と分かる場合は別の単位を優先する。",
+      "member_tags": [
+        {
+          "tag_id": "T008",
+          "tag": "Map / 連想配列"
+        },
+        {
+          "tag_id": "T012",
+          "tag": "Set"
+        }
+      ],
+      "detail_methods": [
+        "Map / 連想配列",
+        "Set"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 135,
+      "visible": true
+    },
+    {
+      "cluster_id": "L008",
+      "label": "順序付き集合・多重集合",
+      "representative": "順序付き集合・多重集合",
+      "category": "データ構造",
+      "kind": "data_structure",
+      "description": "重複や大小順を管理しながら要素を追加・削除する。",
+      "rationale": "Multisetと平衡探索木を順序付きの動的管理としてまとめる。一般の集合・辞書とは区別する。",
+      "member_tags": [
+        {
+          "tag_id": "T009",
+          "tag": "Multiset"
+        },
+        {
+          "tag_id": "T014",
+          "tag": "平衡二分探索木"
+        }
+      ],
+      "detail_methods": [
+        "Multiset",
+        "平衡二分探索木"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 27,
+      "visible": true
+    },
+    {
+      "cluster_id": "L009",
+      "label": "優先度付きキュー",
+      "representative": "優先度付きキュー",
+      "category": "データ構造",
+      "kind": "data_structure",
+      "description": "優先度が最も高い要素を繰り返し取り出す。",
+      "rationale": "HeapとPriority Queueの表記差を吸収する。最短路の解法とは別の技能として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T010",
+          "tag": "Priority Queue / Heap"
+        }
+      ],
+      "detail_methods": [
+        "Priority Queue / Heap"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 41,
+      "visible": true
+    },
+    {
+      "cluster_id": "L010",
+      "label": "スタック",
+      "representative": "スタック",
+      "category": "データ構造",
+      "kind": "data_structure",
+      "description": "最後に追加した要素から取り出して状態を管理する。",
+      "rationale": "LIFOの操作を独立した学習単位として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T013",
+          "tag": "Stack"
+        }
+      ],
+      "detail_methods": [
+        "Stack"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 25,
+      "visible": true
+    },
+    {
+      "cluster_id": "L011",
+      "label": "永続データ構造",
+      "representative": "永続データ構造",
+      "category": "データ構造",
+      "kind": "design_technique",
+      "description": "過去の版を残し、状態を共有しながら更新・参照する。",
+      "rationale": "特定のデータ構造の種類ではなく、版の保存という設計技法として定義する。",
+      "member_tags": [
+        {
+          "tag_id": "T015",
+          "tag": "永続データ構造"
+        }
+      ],
+      "detail_methods": [
+        "永続データ構造"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 2,
+      "visible": true
+    },
+    {
+      "cluster_id": "L012",
+      "label": "直線集合の最適値クエリ",
+      "representative": "直線集合の最適値クエリ",
+      "category": "データ構造",
+      "kind": "data_structure",
+      "description": "複数の一次関数から、指定点での最小値・最大値を求める。",
+      "rationale": "Convex Hull TrickとLi Chao Treeを共通の計算課題としてまとめる。",
+      "member_tags": [
+        {
+          "tag_id": "T016",
+          "tag": "Convex Hull Trick / Li Chao Tree"
+        }
+      ],
+      "detail_methods": [
+        "Convex Hull Trick / Li Chao Tree"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L013",
+      "label": "部分集合を状態にするDP",
+      "representative": "部分集合を状態にするDP",
+      "category": "動的計画法",
+      "kind": "dp_pattern",
+      "description": "選んだ集合などをビットマスクで状態として表す。",
+      "rationale": "ビット列挙や単なるビット演算とは別に、DPの状態設計として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T017",
+          "tag": "bit DP"
+        }
+      ],
+      "detail_methods": [
+        "bit DP"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 24,
+      "visible": true
+    },
+    {
+      "cluster_id": "L014",
+      "label": "線形漸化式の高速計算",
+      "representative": "線形漸化式の高速計算",
+      "category": "計算の高速化",
+      "kind": "algorithm_family",
+      "description": "線形な遷移を繰り返す計算を、行列累乗や漸化式の手法で高速化する。",
+      "rationale": "きたまさ法と行列累乗を反復する線形遷移の計算としてまとめる。Fibonacciという題材名だけでは付けない。",
+      "member_tags": [
+        {
+          "tag_id": "T018",
+          "tag": "きたまさ法"
+        },
+        {
+          "tag_id": "T030",
+          "tag": "行列累乗"
+        }
+      ],
+      "detail_methods": [
+        "きたまさ法",
+        "行列累乗"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 11,
+      "visible": true
+    },
+    {
+      "cluster_id": "L015",
+      "label": "一般の状態遷移DP",
+      "representative": "一般の状態遷移DP",
+      "category": "動的計画法",
+      "kind": "dp_pattern",
+      "description": "状態と遷移を設計し、部分問題の結果を再利用する。",
+      "rationale": "実装順序や更新方式のタグを基本となるDPへ戻す。既知の専門的な状態型がある問題では、その型を優先する残余分類。",
+      "member_tags": [
+        {
+          "tag_id": "T019",
+          "tag": "インラインDP"
+        },
+        {
+          "tag_id": "T022",
+          "tag": "基礎DP / 動的計画法入門"
+        },
+        {
+          "tag_id": "T023",
+          "tag": "戻すDP"
+        },
+        {
+          "tag_id": "T024",
+          "tag": "挿入DP"
+        }
+      ],
+      "detail_methods": [
+        "インラインDP",
+        "基礎DP / 動的計画法入門",
+        "戻すDP",
+        "挿入DP"
+      ],
+      "algorithm_count": 4,
+      "problem_count": 94,
+      "visible": true
+    },
+    {
+      "cluster_id": "L016",
+      "label": "木上のDP",
+      "representative": "木上のDP",
+      "category": "動的計画法",
+      "kind": "dp_pattern",
+      "description": "木の部分構造に対して値を集約し、必要に応じて根を変えて計算する。",
+      "rationale": "木DPと全方位木DPを同じ構造上のDPとしてまとめ、派生手法名は詳細に残す。",
+      "member_tags": [
+        {
+          "tag_id": "T020",
+          "tag": "全方位木DP"
+        },
+        {
+          "tag_id": "T027",
+          "tag": "木DP"
+        }
+      ],
+      "detail_methods": [
+        "全方位木DP",
+        "木DP"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 18,
+      "visible": true
+    },
+    {
+      "cluster_id": "L017",
+      "label": "区間を状態にするDP",
+      "representative": "区間を状態にするDP",
+      "category": "動的計画法",
+      "kind": "dp_pattern",
+      "description": "区間の両端や分割位置を状態・遷移に用いる。",
+      "rationale": "区間DPを独立した状態設計として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T021",
+          "tag": "区間DP"
+        }
+      ],
+      "detail_methods": [
+        "区間DP"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 2,
+      "visible": true
+    },
+    {
+      "cluster_id": "L018",
+      "label": "文字列上のDP",
+      "representative": "文字列上のDP",
+      "category": "動的計画法",
+      "kind": "dp_pattern",
+      "description": "文字列の位置や接頭辞の状態を用いて数え上げ・最適化を行う。",
+      "rationale": "括弧列などの題材名と分け、実際のDPの単位を表示する。",
+      "member_tags": [
+        {
+          "tag_id": "T025",
+          "tag": "文字列DP"
+        }
+      ],
+      "detail_methods": [
+        "文字列DP"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 20,
+      "visible": true
+    },
+    {
+      "cluster_id": "L019",
+      "label": "確率・期待値のDP",
+      "representative": "確率・期待値のDP",
+      "category": "動的計画法",
+      "kind": "dp_pattern",
+      "description": "確率的な遷移から、確率や期待値の漸化式を計算する。",
+      "rationale": "確率DPと期待値DPを確率過程の状態遷移としてまとめる。期待値の問題すべてをDPとは見なさない。",
+      "member_tags": [
+        {
+          "tag_id": "T026",
+          "tag": "期待値DP"
+        },
+        {
+          "tag_id": "T029",
+          "tag": "確率DP"
+        }
+      ],
+      "detail_methods": [
+        "期待値DP",
+        "確率DP"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 16,
+      "visible": true
+    },
+    {
+      "cluster_id": "L020",
+      "label": "桁を状態にするDP",
+      "representative": "桁を状態にするDP",
+      "category": "動的計画法",
+      "kind": "dp_pattern",
+      "description": "上限との大小関係や各桁の情報を状態にして数を数える。",
+      "rationale": "桁DPを独立した状態設計として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T028",
+          "tag": "桁DP"
+        }
+      ],
+      "detail_methods": [
+        "桁DP"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 3,
+      "visible": true
+    },
+    {
+      "cluster_id": "L021",
+      "label": "二部マッチング",
+      "representative": "二部マッチング",
+      "category": "グラフ",
+      "kind": "algorithm_family",
+      "description": "二部グラフで端点を重複させない辺の組を求める。",
+      "rationale": "最大流に帰着できても計算課題は別なので、共起による統合を解消する。",
+      "member_tags": [
+        {
+          "tag_id": "T031",
+          "tag": "二部マッチング"
+        }
+      ],
+      "detail_methods": [
+        "二部マッチング"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L022",
+      "label": "最大流",
+      "representative": "最大流",
+      "category": "グラフ",
+      "kind": "algorithm_family",
+      "description": "容量制約のあるネットワークで流量を最大化する。",
+      "rationale": "二部マッチングと同じ問題に現れても、独立した学習単位として残す。",
+      "member_tags": [
+        {
+          "tag_id": "T032",
+          "tag": "最大流"
+        }
+      ],
+      "detail_methods": [
+        "最大流"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L023",
+      "label": "Nim・Grundy数",
+      "representative": "Nim・Grundy数",
+      "category": "ゲーム",
+      "kind": "algorithm_family",
+      "description": "不偏ゲームの状態を数値で表し、XORなどで勝敗を判定する。",
+      "rationale": "NimとGrundy数を共通のゲーム解析の系統としてまとめる。",
+      "member_tags": [
+        {
+          "tag_id": "T036",
+          "tag": "Grundy数 / Sprague-Grundy"
+        },
+        {
+          "tag_id": "T037",
+          "tag": "Nim"
+        }
+      ],
+      "detail_methods": [
+        "Grundy数 / Sprague-Grundy",
+        "Nim"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 2,
+      "visible": true
+    },
+    {
+      "cluster_id": "L024",
+      "label": "ゲームの状態探索・逆算",
+      "representative": "ゲームの状態探索・逆算",
+      "category": "ゲーム",
+      "kind": "algorithm_family",
+      "description": "手番ごとの状態を調べ、終端や選択肢から勝敗・評価を求める。",
+      "rationale": "ミニマックス法と後退解析を状態の勝敗評価としてまとめる。Grundy数による分解とは区別する。",
+      "member_tags": [
+        {
+          "tag_id": "T038",
+          "tag": "ミニマックス法"
+        },
+        {
+          "tag_id": "T039",
+          "tag": "後退解析"
+        }
+      ],
+      "detail_methods": [
+        "ミニマックス法",
+        "後退解析"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 6,
+      "visible": true
+    },
+    {
+      "cluster_id": "L025",
+      "label": "偏角による並べ替え",
+      "representative": "偏角による並べ替え",
+      "category": "幾何",
+      "kind": "algorithm",
+      "description": "点やベクトルを向きの順に並べて処理する。",
+      "rationale": "単なるソートの利用より具体的な幾何の手法として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T043",
+          "tag": "偏角ソート"
+        }
+      ],
+      "detail_methods": [
+        "偏角ソート"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 2,
+      "visible": true
+    },
+    {
+      "cluster_id": "L026",
+      "label": "凸包の構築",
+      "representative": "凸包の構築",
+      "category": "幾何",
+      "kind": "algorithm_family",
+      "description": "点集合を囲む凸な境界を求める。",
+      "rationale": "交差判定や面積計算との偶然の共起による統合を解消する。",
+      "member_tags": [
+        {
+          "tag_id": "T044",
+          "tag": "凸包"
+        }
+      ],
+      "detail_methods": [
+        "凸包"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L027",
+      "label": "木のパス分解",
+      "representative": "木のパス分解",
+      "category": "木・階層構造",
+      "kind": "algorithm",
+      "description": "木のパスを少数の区間に分解して処理する。",
+      "rationale": "Heavy-Light Decompositionを独立した学習単位として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T045",
+          "tag": "HLD"
+        }
+      ],
+      "detail_methods": [
+        "HLD"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L028",
+      "label": "深さ優先探索",
+      "representative": "深さ優先探索",
+      "category": "探索",
+      "kind": "algorithm_family",
+      "description": "分岐を深くたどり、訪問状態や探索木を利用する。",
+      "rationale": "DFS木をDFSから派生する詳細情報としてまとめる。",
+      "member_tags": [
+        {
+          "tag_id": "T046",
+          "tag": "DFS木"
+        },
+        {
+          "tag_id": "T067",
+          "tag": "深さ優先探索"
+        }
+      ],
+      "detail_methods": [
+        "DFS木",
+        "深さ優先探索"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 111,
+      "visible": true
+    },
+    {
+      "cluster_id": "L029",
+      "label": "木の走査順による区間化",
+      "representative": "木の走査順による区間化",
+      "category": "木・階層構造",
+      "kind": "algorithm",
+      "description": "木の頂点や辺を走査順で並べ、部分木などを区間として扱う。",
+      "rationale": "オイラーツアーを操作として定義し、参考情報だけの付与は採用しない。",
+      "member_tags": [
+        {
+          "tag_id": "T047",
+          "tag": "オイラーツアー"
+        }
+      ],
+      "detail_methods": [
+        "オイラーツアー"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 5,
+      "visible": true
+    },
+    {
+      "cluster_id": "L030",
+      "label": "トポロジカルソート",
+      "representative": "トポロジカルソート",
+      "category": "グラフ",
+      "kind": "algorithm",
+      "description": "有向非巡回グラフの依存関係を満たす順序を求める。",
+      "rationale": "閉路検出という別の計算課題との共起統合を解消する。",
+      "member_tags": [
+        {
+          "tag_id": "T049",
+          "tag": "トポロジカルソート"
+        }
+      ],
+      "detail_methods": [
+        "トポロジカルソート"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 5,
+      "visible": true
+    },
+    {
+      "cluster_id": "L031",
+      "label": "強連結成分分解",
+      "representative": "強連結成分分解",
+      "category": "グラフ",
+      "kind": "algorithm_family",
+      "description": "有向グラフを相互に到達できる頂点の集合に分解する。",
+      "rationale": "SCCを独立した学習単位として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T052",
+          "tag": "強連結成分分解"
+        }
+      ],
+      "detail_methods": [
+        "強連結成分分解"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 4,
+      "visible": true
+    },
+    {
+      "cluster_id": "L032",
+      "label": "最小全域木",
+      "representative": "最小全域木",
+      "category": "グラフ",
+      "kind": "algorithm_family",
+      "description": "全頂点を結ぶ木の辺重みの総和を最小化する。",
+      "rationale": "Kruskal法とPrim法は同じ計算課題の実現方法として詳細に残す。",
+      "member_tags": [
+        {
+          "tag_id": "T053",
+          "tag": "最小全域木"
+        },
+        {
+          "tag_id": "T233",
+          "tag": "Kruskal 法"
+        },
+        {
+          "tag_id": "T234",
+          "tag": "Prim 法"
+        }
+      ],
+      "detail_methods": [
+        "最小全域木",
+        "Kruskal 法",
+        "Prim 法"
+      ],
+      "algorithm_count": 3,
+      "problem_count": 9,
+      "visible": true
+    },
+    {
+      "cluster_id": "L033",
+      "label": "最近共通祖先の取得",
+      "representative": "最近共通祖先の取得",
+      "category": "木・階層構造",
+      "kind": "algorithm_family",
+      "description": "木の二頂点に共通する祖先のうち最も深いものを求める。",
+      "rationale": "LCAとBinary Lifting LCAを同じ計算課題としてまとめる。",
+      "member_tags": [
+        {
+          "tag_id": "T054",
+          "tag": "LCA"
+        },
+        {
+          "tag_id": "T225",
+          "tag": "Binary Lifting LCA"
+        }
+      ],
+      "detail_methods": [
+        "LCA",
+        "Binary Lifting LCA"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 8,
+      "visible": true
+    },
+    {
+      "cluster_id": "L034",
+      "label": "木の重心分解",
+      "representative": "木の重心分解",
+      "category": "木・階層構造",
+      "kind": "algorithm",
+      "description": "木を重心で分割し、分割した部分構造を利用する。",
+      "rationale": "畳み込み・FFTとの共起による統合を解消する。",
+      "member_tags": [
+        {
+          "tag_id": "T058",
+          "tag": "重心分解"
+        }
+      ],
+      "detail_methods": [
+        "重心分解"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L035",
+      "label": "ビット演算の利用",
+      "representative": "ビット演算の利用",
+      "category": "基本操作",
+      "kind": "technique",
+      "description": "整数のビットごとの演算やXORの性質を利用する。",
+      "rationale": "XORをビット演算の一種としてまとめる。部分集合の列挙やDPは別の単位にする。",
+      "member_tags": [
+        {
+          "tag_id": "T059",
+          "tag": "XOR"
+        },
+        {
+          "tag_id": "T117",
+          "tag": "ビット演算"
+        }
+      ],
+      "detail_methods": [
+        "XOR",
+        "ビット演算"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 13,
+      "visible": true
+    },
+    {
+      "cluster_id": "L036",
+      "label": "ビットマスクによる列挙",
+      "representative": "ビットマスクによる列挙",
+      "category": "探索",
+      "kind": "algorithm_family",
+      "description": "ビットマスクで部分集合や部分マスクを列挙する。",
+      "rationale": "bit全探索と部分マスク列挙を列挙手法の派生形としてまとめる。",
+      "member_tags": [
+        {
+          "tag_id": "T061",
+          "tag": "bit全探索"
+        },
+        {
+          "tag_id": "T193",
+          "tag": "部分マスク列挙"
+        }
+      ],
+      "detail_methods": [
+        "bit全探索",
+        "部分マスク列挙"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 29,
+      "visible": true
+    },
+    {
+      "cluster_id": "L037",
+      "label": "単峰性を使った探索",
+      "representative": "単峰性を使った探索",
+      "category": "探索",
+      "kind": "algorithm_family",
+      "description": "単峰性のある関数の極値候補を絞り込む。",
+      "rationale": "三分探索を単調な真偽判定に基づく二分探索とは区別する。",
+      "member_tags": [
+        {
+          "tag_id": "T063",
+          "tag": "三分探索"
+        }
+      ],
+      "detail_methods": [
+        "三分探索"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 2,
+      "visible": true
+    },
+    {
+      "cluster_id": "L038",
+      "label": "単調性を使った二分探索",
+      "representative": "単調性を使った二分探索",
+      "category": "探索",
+      "kind": "algorithm_family",
+      "description": "単調な順序や判定条件から境界を探す。",
+      "rationale": "二分探索を独立した学習単位として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T064",
+          "tag": "二分探索"
+        }
+      ],
+      "detail_methods": [
+        "二分探索"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 120,
+      "visible": true
+    },
+    {
+      "cluster_id": "L039",
+      "label": "候補の直接列挙",
+      "representative": "候補の直接列挙",
+      "category": "探索",
+      "kind": "algorithm_family",
+      "description": "候補を直接調べて条件判定・最適値の更新を行う。",
+      "rationale": "全探索という上位語を、ビット列挙や半分全列挙が既知の問題では重ねて表示しない。",
+      "member_tags": [
+        {
+          "tag_id": "T065",
+          "tag": "全探索"
+        }
+      ],
+      "detail_methods": [
+        "全探索"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 5,
+      "visible": true
+    },
+    {
+      "cluster_id": "L040",
+      "label": "幅優先探索",
+      "representative": "幅優先探索",
+      "category": "探索",
+      "kind": "algorithm_family",
+      "description": "近い状態から順に探索し、到達性や重みなしの距離を求める。",
+      "rationale": "BFSが常に最短路目的とは推定しない。0-1 BFSが既知の問題ではそちらを優先する。",
+      "member_tags": [
+        {
+          "tag_id": "T066",
+          "tag": "幅優先探索"
+        }
+      ],
+      "detail_methods": [
+        "幅優先探索"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 86,
+      "visible": true
+    },
+    {
+      "cluster_id": "L041",
+      "label": "回文半径の計算",
+      "representative": "回文半径の計算",
+      "category": "文字列",
+      "kind": "algorithm",
+      "description": "各位置を中心とする回文の広がりを効率よく求める。",
+      "rationale": "Manacher法を文字列全般ではなく具体的な計算として定義する。",
+      "member_tags": [
+        {
+          "tag_id": "T068",
+          "tag": "Manacher 法"
+        }
+      ],
+      "detail_methods": [
+        "Manacher 法"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L042",
+      "label": "接尾辞配列",
+      "representative": "接尾辞配列",
+      "category": "文字列",
+      "kind": "data_structure",
+      "description": "接尾辞の辞書順を索引として文字列を処理する。",
+      "rationale": "Zアルゴリズムやローリングハッシュと同義ではないため、共起統合を解消する。",
+      "member_tags": [
+        {
+          "tag_id": "T069",
+          "tag": "Suffix Array"
+        }
+      ],
+      "detail_methods": [
+        "Suffix Array"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 4,
+      "visible": true
+    },
+    {
+      "cluster_id": "L043",
+      "label": "トライ木",
+      "representative": "トライ木",
+      "category": "文字列・ビット列",
+      "kind": "data_structure",
+      "description": "接頭辞を共有する木に文字列やビット列を格納する。",
+      "rationale": "Binary Trieを入力表現の異なるトライ木の派生形としてまとめる。",
+      "member_tags": [
+        {
+          "tag_id": "T070",
+          "tag": "Trie"
+        },
+        {
+          "tag_id": "T089",
+          "tag": "Binary Trie"
+        }
+      ],
+      "detail_methods": [
+        "Trie",
+        "Binary Trie"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 6,
+      "visible": true
+    },
+    {
+      "cluster_id": "L044",
+      "label": "Zアルゴリズム",
+      "representative": "Zアルゴリズム",
+      "category": "文字列",
+      "kind": "algorithm",
+      "description": "各位置からの文字列と全体の接頭辞との一致長を求める。",
+      "rationale": "接尾辞配列やハッシュと別の具体的な手法として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T071",
+          "tag": "Z-Algorithm"
+        }
+      ],
+      "detail_methods": [
+        "Z-Algorithm"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 2,
+      "visible": true
+    },
+    {
+      "cluster_id": "L045",
+      "label": "ローリングハッシュ",
+      "representative": "ローリングハッシュ",
+      "category": "文字列",
+      "kind": "algorithm_family",
+      "description": "部分文字列などをハッシュ値で比較する。",
+      "rationale": "確率的な一致判定を伴う手法として、決定的な照合手法とは分ける。",
+      "member_tags": [
+        {
+          "tag_id": "T072",
+          "tag": "Rolling Hash"
+        }
+      ],
+      "detail_methods": [
+        "Rolling Hash"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 3,
+      "visible": true
+    },
+    {
+      "cluster_id": "L046",
+      "label": "差分による区間加算",
+      "representative": "差分による区間加算",
+      "category": "前計算・集約",
+      "kind": "technique",
+      "description": "区間への加算を差分に記録し、後から復元する。",
+      "rationale": "imos法を累積和そのものとは別の更新手法として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T075",
+          "tag": "imos 法"
+        }
+      ],
+      "detail_methods": [
+        "imos 法"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 21,
+      "visible": true
+    },
+    {
+      "cluster_id": "L047",
+      "label": "逐次シミュレーション",
+      "representative": "逐次シミュレーション",
+      "category": "基本操作",
+      "kind": "technique",
+      "description": "操作や状態変化を順に再現し、必要な状態を管理する。",
+      "rationale": "表記揺れを一本化し、単に実装するすべての問題には拡張しない。",
+      "member_tags": [
+        {
+          "tag_id": "T076",
+          "tag": "シミュレーション"
+        }
+      ],
+      "detail_methods": [
+        "シミュレーション"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 60,
+      "visible": true
+    },
+    {
+      "cluster_id": "L048",
+      "label": "並べ替えの利用",
+      "representative": "並べ替えの利用",
+      "category": "基本操作",
+      "kind": "technique",
+      "description": "値や要素を順序付けして、比較や処理を行う。",
+      "rationale": "既知の偏角ソートがある問題では、そちらを優先する。",
+      "member_tags": [
+        {
+          "tag_id": "T077",
+          "tag": "ソート"
+        }
+      ],
+      "detail_methods": [
+        "ソート"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 92,
+      "visible": true
+    },
+    {
+      "cluster_id": "L049",
+      "label": "反復遷移の高速化",
+      "representative": "反復遷移の高速化",
+      "category": "計算の高速化",
+      "kind": "technique",
+      "description": "同じ遷移を多数回たどる処理を、倍々の前計算で高速化する。",
+      "rationale": "ダブリングを独立した学習単位として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T078",
+          "tag": "ダブリング"
+        }
+      ],
+      "detail_methods": [
+        "ダブリング"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 12,
+      "visible": true
+    },
+    {
+      "cluster_id": "L050",
+      "label": "乱択・ランダム化",
+      "representative": "乱択・ランダム化",
+      "category": "探索",
+      "kind": "design_technique",
+      "description": "乱数を用いた試行や分割で計算を行う。",
+      "rationale": "Color Codingをランダム化の派生手法として詳細に残す。",
+      "member_tags": [
+        {
+          "tag_id": "T079",
+          "tag": "乱択アルゴリズム"
+        },
+        {
+          "tag_id": "T092",
+          "tag": "Color Coding"
+        }
+      ],
+      "detail_methods": [
+        "乱択アルゴリズム",
+        "Color Coding"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 2,
+      "visible": true
+    },
+    {
+      "cluster_id": "L051",
+      "label": "再帰的な構成",
+      "representative": "再帰的な構成",
+      "category": "構成・分解",
+      "kind": "technique",
+      "description": "小さい対象の定義を使って大きい対象を構成・処理する。",
+      "rationale": "関数という言語機能名から、現在の対象問題で使う再帰的構成の学習単位にする。",
+      "member_tags": [
+        {
+          "tag_id": "T080",
+          "tag": "再帰関数"
+        }
+      ],
+      "detail_methods": [
+        "再帰関数"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L052",
+      "label": "分割統治",
+      "representative": "分割統治",
+      "category": "構成・分解",
+      "kind": "design_technique",
+      "description": "問題を分割し、部分問題を処理して結果を利用する。",
+      "rationale": "再帰呼出しを使うすべての問題を分割統治とは扱わない。",
+      "member_tags": [
+        {
+          "tag_id": "T081",
+          "tag": "分割統治"
+        }
+      ],
+      "detail_methods": [
+        "分割統治"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 10,
+      "visible": true
+    },
+    {
+      "cluster_id": "L053",
+      "label": "半分全列挙",
+      "representative": "半分全列挙",
+      "category": "探索",
+      "kind": "algorithm",
+      "description": "候補を二つに分けて列挙し、両者を組み合わせる。",
+      "rationale": "直接列挙と異なる計算量改善の学習単位として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T082",
+          "tag": "半分全列挙"
+        }
+      ],
+      "detail_methods": [
+        "半分全列挙"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 5,
+      "visible": true
+    },
+    {
+      "cluster_id": "L054",
+      "label": "尺取り・二つのポインタ",
+      "representative": "尺取り・二つのポインタ",
+      "category": "探索",
+      "kind": "technique",
+      "description": "複数の境界を単調に動かし、区間などの条件を管理する。",
+      "rationale": "名称だけでなく境界の更新という操作として定義する。",
+      "member_tags": [
+        {
+          "tag_id": "T083",
+          "tag": "尺取り法"
+        }
+      ],
+      "detail_methods": [
+        "尺取り法"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 45,
+      "visible": true
+    },
+    {
+      "cluster_id": "L055",
+      "label": "平方分割",
+      "representative": "平方分割",
+      "category": "計算の高速化",
+      "kind": "design_technique",
+      "description": "要素や処理をブロックに分け、部分処理と全体処理を使い分ける。",
+      "rationale": "平方分割を独立した設計技法として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T084",
+          "tag": "Sqrt Decomposition / 平方分割"
+        }
+      ],
+      "detail_methods": [
+        "Sqrt Decomposition / 平方分割"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 5,
+      "visible": true
+    },
+    {
+      "cluster_id": "L056",
+      "label": "座標圧縮",
+      "representative": "座標圧縮",
+      "category": "前計算・集約",
+      "kind": "technique",
+      "description": "大小関係などを保ちながら値を小さな添字に置き換える。",
+      "rationale": "補助技法であっても、独立して練習できる操作として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T085",
+          "tag": "座標圧縮"
+        }
+      ],
+      "detail_methods": [
+        "座標圧縮"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 39,
+      "visible": true
+    },
+    {
+      "cluster_id": "L057",
+      "label": "累積和・区間和",
+      "representative": "累積和・区間和",
+      "category": "前計算・集約",
+      "kind": "technique",
+      "description": "接頭辞の和を前計算し、差から区間の和などを求める。",
+      "rationale": "根拠不足と記録された既存付与は保留する。",
+      "member_tags": [
+        {
+          "tag_id": "T086",
+          "tag": "累積和"
+        }
+      ],
+      "detail_methods": [
+        "累積和"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 127,
+      "visible": true
+    },
+    {
+      "cluster_id": "L058",
+      "label": "鎖分割・反鎖への帰着",
+      "representative": "鎖分割・反鎖への帰着",
+      "category": "数学的な帰着",
+      "kind": "reduction",
+      "description": "半順序の鎖・反鎖の対応を使って問題を言い換える。",
+      "rationale": "定理名だけのタグを、対象問題で実際に行う帰着の単位に置き換える。",
+      "member_tags": [
+        {
+          "tag_id": "T094",
+          "tag": "Dilworth の定理"
+        }
+      ],
+      "detail_methods": [
+        "Dilworth の定理"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L059",
+      "label": "最大公約数・拡張互除法",
+      "representative": "最大公約数・拡張互除法",
+      "category": "整数・合同式",
+      "kind": "algorithm_family",
+      "description": "最大公約数と、必要に応じてその整数係数表示を求める。",
+      "rationale": "互除法と拡張互除法を同じ計算の系統としてまとめる。",
+      "member_tags": [
+        {
+          "tag_id": "T097",
+          "tag": "Euclid の互除法"
+        },
+        {
+          "tag_id": "T194",
+          "tag": "拡張 Euclid の互除法"
+        }
+      ],
+      "detail_methods": [
+        "Euclid の互除法",
+        "拡張 Euclid の互除法"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 17,
+      "visible": true
+    },
+    {
+      "cluster_id": "L060",
+      "label": "法における逆元の計算",
+      "representative": "法における逆元の計算",
+      "category": "整数・合同式",
+      "kind": "algorithm_family",
+      "description": "法における除算に必要な逆元を求める。",
+      "rationale": "現在のFermat小定理タグは逆元計算の根拠なので、逆元の単位へまとめる。",
+      "member_tags": [
+        {
+          "tag_id": "T099",
+          "tag": "Fermat の小定理"
+        },
+        {
+          "tag_id": "T236",
+          "tag": "モジュラ逆元"
+        }
+      ],
+      "detail_methods": [
+        "Fermat の小定理",
+        "モジュラ逆元"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 17,
+      "visible": true
+    },
+    {
+      "cluster_id": "L061",
+      "label": "中国剰余定理",
+      "representative": "中国剰余定理",
+      "category": "整数・合同式",
+      "kind": "algorithm_family",
+      "description": "複数の剰余条件を満たす整数の条件を求める。",
+      "rationale": "単一の一次合同式とは異なる計算課題として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T122",
+          "tag": "中国剰余定理"
+        }
+      ],
+      "detail_methods": [
+        "中国剰余定理"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 3,
+      "visible": true
+    },
+    {
+      "cluster_id": "L062",
+      "label": "素因数・約数の計算",
+      "representative": "素因数・約数の計算",
+      "category": "整数・合同式",
+      "kind": "algorithm_family",
+      "description": "素因数の指数を使い、約数の性質や階乗中の指数を計算する。",
+      "rationale": "素因数分解とその指数を利用する計算を同じ学習系統としてまとめる。",
+      "member_tags": [
+        {
+          "tag_id": "T134",
+          "tag": "素因数分解"
+        },
+        {
+          "tag_id": "T160",
+          "tag": "約数の個数 / 約数和"
+        },
+        {
+          "tag_id": "T202",
+          "tag": "階乗の素因数指数"
+        }
+      ],
+      "detail_methods": [
+        "素因数分解",
+        "約数の個数 / 約数和",
+        "階乗の素因数指数"
+      ],
+      "algorithm_count": 3,
+      "problem_count": 5,
+      "visible": true
+    },
+    {
+      "cluster_id": "L063",
+      "label": "0-1重みの最短路",
+      "representative": "0-1重みの最短路",
+      "category": "グラフ",
+      "kind": "algorithm",
+      "description": "辺重みが0または1の場合の最短距離を求める。",
+      "rationale": "0-1 BFSを通常のBFSと分け、重み条件を表示名に含める。",
+      "member_tags": [
+        {
+          "tag_id": "T144",
+          "tag": "0-1 BFS"
+        }
+      ],
+      "detail_methods": [
+        "0-1 BFS"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 6,
+      "visible": true
+    },
+    {
+      "cluster_id": "L064",
+      "label": "ナップサック・部分和DP",
+      "representative": "ナップサック・部分和DP",
+      "category": "動的計画法",
+      "kind": "dp_pattern",
+      "description": "選ぶ要素の重さ・和などを状態として可否・個数・最適値を求める。",
+      "rationale": "ナップサックと部分和を対応するDPの状態設計としてまとめる。",
+      "member_tags": [
+        {
+          "tag_id": "T150",
+          "tag": "ナップサック問題"
+        },
+        {
+          "tag_id": "T262",
+          "tag": "部分和問題"
+        }
+      ],
+      "detail_methods": [
+        "ナップサック問題",
+        "部分和問題"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 20,
+      "visible": true
+    },
+    {
+      "cluster_id": "L065",
+      "label": "2-SAT",
+      "representative": "2-SAT",
+      "category": "グラフ",
+      "kind": "algorithm_family",
+      "description": "二変数以下の論理和からなる条件の充足可能性を判定する。",
+      "rationale": "二部グラフ判定との共起による統合を解消する。",
+      "member_tags": [
+        {
+          "tag_id": "T169",
+          "tag": "2-SAT"
+        }
+      ],
+      "detail_methods": [
+        "2-SAT"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L066",
+      "label": "複数パターンの文字列照合",
+      "representative": "複数パターンの文字列照合",
+      "category": "文字列",
+      "kind": "algorithm",
+      "description": "複数のパターンをまとめたオートマトンで照合する。",
+      "rationale": "Aho-Corasickを独立した照合の学習単位として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T170",
+          "tag": "Aho-Corasick"
+        }
+      ],
+      "detail_methods": [
+        "Aho-Corasick"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 2,
+      "visible": true
+    },
+    {
+      "cluster_id": "L067",
+      "label": "負辺を扱う最短路",
+      "representative": "負辺を扱う最短路",
+      "category": "グラフ",
+      "kind": "algorithm",
+      "description": "負の重みを含む辺の緩和を繰り返して距離などを求める。",
+      "rationale": "Bellman-Ford法を重み条件の異なる最短路として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T175",
+          "tag": "Bellman-Ford 法"
+        }
+      ],
+      "detail_methods": [
+        "Bellman-Ford 法"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L068",
+      "label": "累乗の高速計算",
+      "representative": "累乗の高速計算",
+      "category": "計算の高速化",
+      "kind": "algorithm",
+      "description": "指数を二進数で分解し、累乗を高速に計算する。",
+      "rationale": "二分累乗法を反復遷移や線形漸化式の計算とは区別する。",
+      "member_tags": [
+        {
+          "tag_id": "T176",
+          "tag": "二分累乗法"
+        }
+      ],
+      "detail_methods": [
+        "二分累乗法"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 5,
+      "visible": true
+    },
+    {
+      "cluster_id": "L069",
+      "label": "二項係数・組合せ計算",
+      "representative": "二項係数・組合せ計算",
+      "category": "数え上げ",
+      "kind": "technique",
+      "description": "選び方の個数を二項係数などの式に変換して計算する。",
+      "rationale": "Stars and Barsを組合せ計算の派生的な数え方としてまとめる。",
+      "member_tags": [
+        {
+          "tag_id": "T165",
+          "tag": "Stars and Bars"
+        },
+        {
+          "tag_id": "T177",
+          "tag": "二項係数"
+        }
+      ],
+      "detail_methods": [
+        "Stars and Bars",
+        "二項係数"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 21,
+      "visible": true
+    },
+    {
+      "cluster_id": "L070",
+      "label": "二部グラフ判定",
+      "representative": "二部グラフ判定",
+      "category": "グラフ",
+      "kind": "algorithm_family",
+      "description": "隣接頂点を異なる二つの組に分けられるかを判定する。",
+      "rationale": "2-SATへの帰着関係があっても同じ学習単位とは扱わない。",
+      "member_tags": [
+        {
+          "tag_id": "T178",
+          "tag": "二部グラフ判定"
+        }
+      ],
+      "detail_methods": [
+        "二部グラフ判定"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 3,
+      "visible": true
+    },
+    {
+      "cluster_id": "L071",
+      "label": "外積による幾何判定",
+      "representative": "外積による幾何判定",
+      "category": "幾何",
+      "kind": "technique",
+      "description": "外積の符号・値から向き、線分の交差、面積を扱う。",
+      "rationale": "基本的な幾何の計算をまとめ、凸包の構築とは分ける。",
+      "member_tags": [
+        {
+          "tag_id": "T181",
+          "tag": "線分交差判定"
+        },
+        {
+          "tag_id": "T240",
+          "tag": "三角形の符号付き面積"
+        }
+      ],
+      "detail_methods": [
+        "線分交差判定",
+        "三角形の符号付き面積"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L072",
+      "label": "グラフの閉路検出",
+      "representative": "グラフの閉路検出",
+      "category": "グラフ",
+      "kind": "algorithm_family",
+      "description": "グラフにある閉路や、その構造を特定する。",
+      "rationale": "トポロジカルソートと同じ問題に現れても、別の計算課題として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T182",
+          "tag": "閉路検出"
+        }
+      ],
+      "detail_methods": [
+        "閉路検出"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 3,
+      "visible": true
+    },
+    {
+      "cluster_id": "L073",
+      "label": "非負重みの最短路",
+      "representative": "非負重みの最短路",
+      "category": "グラフ",
+      "kind": "algorithm",
+      "description": "辺重みが非負のグラフで始点からの最短距離を求める。",
+      "rationale": "Dijkstra法を通常のBFSや負辺を扱う手法とは分ける。",
+      "member_tags": [
+        {
+          "tag_id": "T187",
+          "tag": "Dijkstra 法"
+        }
+      ],
+      "detail_methods": [
+        "Dijkstra 法"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 23,
+      "visible": true
+    },
+    {
+      "cluster_id": "L074",
+      "label": "畳み込みの高速計算",
+      "representative": "畳み込みの高速計算",
+      "category": "計算の高速化",
+      "kind": "algorithm_family",
+      "description": "列や多項式の畳み込みを高速に計算する。",
+      "rationale": "FFTを畳み込みの実現手法としてまとめ、重心分解との共起統合を解消する。",
+      "member_tags": [
+        {
+          "tag_id": "T132",
+          "tag": "畳み込み"
+        },
+        {
+          "tag_id": "T196",
+          "tag": "FFT"
+        }
+      ],
+      "detail_methods": [
+        "畳み込み",
+        "FFT"
+      ],
+      "algorithm_count": 2,
+      "problem_count": 2,
+      "visible": true
+    },
+    {
+      "cluster_id": "L075",
+      "label": "全頂点対の最短路",
+      "representative": "全頂点対の最短路",
+      "category": "グラフ",
+      "kind": "algorithm",
+      "description": "すべての頂点対の最短距離をまとめて求める。",
+      "rationale": "Floyd-Warshall法を単一始点の最短路から区別する。",
+      "member_tags": [
+        {
+          "tag_id": "T208",
+          "tag": "Floyd-Warshall 法"
+        }
+      ],
+      "detail_methods": [
+        "Floyd-Warshall 法"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 8,
+      "visible": true
+    },
+    {
+      "cluster_id": "L076",
+      "label": "一次合同式の解法",
+      "representative": "一次合同式の解法",
+      "category": "整数・合同式",
+      "kind": "algorithm_family",
+      "description": "係数付きの一次合同式を満たす値や条件を求める。",
+      "rationale": "拡張互除法は利用する計算手段として別に残し、合同式という計算課題を表示する。",
+      "member_tags": [
+        {
+          "tag_id": "T221",
+          "tag": "線形合同方程式"
+        }
+      ],
+      "detail_methods": [
+        "線形合同方程式"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L077",
+      "label": "最長増加部分列",
+      "representative": "最長増加部分列",
+      "category": "動的計画法",
+      "kind": "algorithm_family",
+      "description": "順序を保った部分列の増加条件を使い、長さなどを求める。",
+      "rationale": "LISを独立したDPの計算課題として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T224",
+          "tag": "LIS"
+        }
+      ],
+      "detail_methods": [
+        "LIS"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 7,
+      "visible": true
+    },
+    {
+      "cluster_id": "L078",
+      "label": "素数の列挙",
+      "representative": "素数の列挙",
+      "category": "整数・合同式",
+      "kind": "algorithm",
+      "description": "一定範囲の素数をふるい落としにより列挙する。",
+      "rationale": "エラトステネスの篩を素因数分解という別の計算から区別する。",
+      "member_tags": [
+        {
+          "tag_id": "T253",
+          "tag": "エラトステネスの篩"
+        }
+      ],
+      "detail_methods": [
+        "エラトステネスの篩"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 7,
+      "visible": true
+    },
+    {
+      "cluster_id": "L079",
+      "label": "包除原理による数え上げ",
+      "representative": "包除原理による数え上げ",
+      "category": "数え上げ",
+      "kind": "technique",
+      "description": "集合の重なりを足し引きして条件を満たす個数を求める。",
+      "rationale": "二項係数の利用とは別の数え上げの技法として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T257",
+          "tag": "包除原理"
+        }
+      ],
+      "detail_methods": [
+        "包除原理"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 14,
+      "visible": true
+    },
+    {
+      "cluster_id": "L080",
+      "label": "平面走査",
+      "representative": "平面走査",
+      "category": "幾何",
+      "kind": "design_technique",
+      "description": "位置や時刻で順序付けたイベントを処理し、状態を更新する。",
+      "rationale": "平面走査を独立した設計技法として保持する。",
+      "member_tags": [
+        {
+          "tag_id": "T266",
+          "tag": "平面走査"
+        }
+      ],
+      "detail_methods": [
+        "平面走査"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 2,
+      "visible": true
+    },
+    {
+      "cluster_id": "L081",
+      "label": "アフィン変換の合成",
+      "representative": "アフィン変換の合成",
+      "category": "幾何",
+      "kind": "technique",
+      "description": "回転・反転・平行移動を合成し、点への変換をまとめて適用する。",
+      "rationale": "線形代数という広い分野名をそのまま表示せず、ABC189 Eの公式解説で確認した操作に置き換える。",
+      "member_tags": [],
+      "detail_methods": [
+        "アフィン変換の合成"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    },
+    {
+      "cluster_id": "L082",
+      "label": "距離の式変形・座標変換",
+      "representative": "距離の式変形・座標変換",
+      "category": "幾何",
+      "kind": "technique",
+      "description": "距離の式を変形し、座標ごとの最大値・最小値などに帰着する。",
+      "rationale": "マンハッタン距離という対象名をそのまま表示せず、ABC437 Fで実際に使う式変形に置き換える。",
+      "member_tags": [],
+      "detail_methods": [
+        "距離の式変形・座標変換"
+      ],
+      "algorithm_count": 1,
+      "problem_count": 1,
+      "visible": false
+    }
+  ],
+  "problemCatalog": "public/all_problems.csv",
+  "problemCatalogSha256": "adcc2044adffe5dd1b83773ade43d731f7dd450b5c458e95b07618ebb31d6fef",
+  "source_sha256": {
+    "previous_application_csv": "914687ee124f4a8ec338f06081e6c6b7b93d7dd1aa597cf9dfa98f6a276dbeb8",
+    "previous_application_catalog": "8c2e5600ac1a855e4a4742fcd76347058481d288db479e74e1da26a6225c2259",
+    "fine_assignments": "00675eb8f8613c0ae9771d9e8b463788b3b2a98b7f0d5f3095616a5d9a870c91",
+    "semantic_policy": "ab0c3a5c244a29f4ebee3374de7d457f1dd00105bd83b2577ffd766b71a8016d"
+  }
+}

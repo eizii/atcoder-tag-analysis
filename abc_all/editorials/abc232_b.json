@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc232_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc232/editorial/3139",
+      "text": "\\(K \\geq 26\\)\nのとき、\n\\(K\\)\n個後ろの英小文字は\n\\((K-26)\\)\n個後ろの英小文字と等しいので、高橋君が選ぶ\n\\(K\\)\nは\n\\(0 \\leq K \\leq 25\\)\nを満たすとして良いです。\nよって、\n高橋君が\n\\(K = 0\\)\nを選んだ場合\n高橋君が\n\\(K = 1\\)\nを選んだ場合\n高橋君が\n\\(K = 2\\)\nを選んだ場合\n\\(\\cdots\\)\n高橋君が\n\\(K = 25\\)\nを選んだ場合\nの\n\\(26\\)\n通りそれぞれについて、「高橋君が操作を行った後の\n\\(S\\)\nが、\n\\(T\\)\nと一致するか」を調べ、\n\\(26\\)\n通りのうち一致するものが一つでもあれば\nYes\nを、そうでなければ\nNo\nを出力すれば、この問題に正解できます。\nある\n\\(K\\)\nに対して「高橋君が操作を行った後の\n\\(S\\)\nが、\n\\(T\\)\nと一致するか」を調べるには、高橋君が行う操作を実際にシミュレーションすれば良いです。すなわち、実際に、入力で与えられた\n\\(S\\)\nのすべての文字を\n\\(K\\)\n個後ろの英小文字に置き換えてみて、それが\n\\(T\\)\nと一致しているかを判定すれば良いです。\n「\n\\(S\\)\nの各文字を」走査するには、プログラミング言語の標準的な機能である繰り返しの機能を用いると良いでしょう。例えば C++ 言語であれば、例えば for 文がこれを実現します。\n「文字を\n\\(K\\)\n個後ろの英小文字に置き換え」るには、英小文字\na\nから\nz\nの ASCII コードがそれぞれ連番になっていることを用いると良いでしょう。\nC++ 言語による実装例を実装例１として本解説の最後に記載します。\n上に述べた、\n\\(K = 0, 1, 2, \\ldots, 25\\)\nの\n\\(26\\)\n通りの場合を調べる方法とは別の方法として、次の方法も考えられます。\nまず、「\n\\(T\\)\nの先頭の文字が\n\\(S\\)\nの先頭の文字の何個後ろの文字か」を求め、これを\n\\(K_0\\)\nとおきます。\nこのとき、「高橋君が操作を行った後の\n\\(S\\)\nが、\n\\(T\\)\nと一致する」可能性が残っているのは、\n\\(K = K_0\\)\nの場合のみに限られます。よって、\n\\(K = K_0\\)\nの場合のみについて、「高橋君が操作を行った後の\n\\(S\\)\nが、\n\\(T\\)\nと一致するか」を調べ、一致していれば\nYes\nを、そうでなければ\nNo\nを出力すれば、この問題に正解できます。\nC++ 言語によるこの方法の実装例を実装例２として記載します。\n実装例１\n実装例２",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main(void)\n{\n  string s, t;\n  cin >> s >> t;\n  \n  for(int k = 0; k <= 25; k++){\n    string s2 = s;\n    for(int i = 0; i < (int)s.size(); i++){\n      s2[i] = ((s2[i]-'a')+k)%26 + 'a';\n    }\n    if(s2 == t){\n      cout << \"Yes\" << endl;\n      return 0;\n    }\n  }\n  cout << \"No\" << endl;\n  \n  return 0;\n}",
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main(void)\n{\n  string s, t;\n  cin >> s >> t;\n  \n  int k = (t[0]-s[0]+26) % 26;\n  string s2 = s;\n  for(int i = 0; i < (int)s.size(); i++){\n    s2[i] = ((s2[i]-'a')+k)%26 + 'a';\n  }\n  if(s2 == t) cout << \"Yes\" << endl;\n  else cout << \"No\" << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "5c466d28de3d84ee26e08c597001f99da8cf58989e537b10cc2fc3eb7326f782",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc232/abc232_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

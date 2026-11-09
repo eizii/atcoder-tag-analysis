@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc419_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc419/editorial/13623",
+      "text": "動的計画法で解きます．\n\\(\\mathrm{dp}[i][s][last]\\)\nで「文字列の\n\\(i\\)\n文字目まで決めたとき，すでに\n\\(S_j\\ (j\\in s)\\)\nを含んでいて，文字列の末尾が\n\\(last\\)\nであるようなもの」という dp を考えます（\n\\(s\\)\nは\n\\(\\{1,2,\\ldots,N\\}\\)\nの部分集合）．このとき，\n\\(last\\)\nはいずれかの\n\\(S_i\\)\nの prefix であるようなものしか考えなくて十分です．\n例えば，\n\\(S\\)\nが\nabcdef\n,\nbcdgh\n,\ndij\n,\ndik\nで，今作っている文字列の末尾が\n...abcd\nだったとき，遷移先としては\n...abcde\n:  次の文字が\ne\nのとき\n...a\n: 次の文字が\na\nのとき\n...bcdg\n: 次の文字が\ng\nのとき\n...b\n: 次の文字が\nb\nのとき\n...di\n: 次の文字が\ni\nのとき\n...d\n: 次の文字が\nd\nのとき\n...\n: 上のいずれでもない\nのようになります．\ndp の状態数は\n\\(M=\\sum_i |S_i|\\)\nとして\n\\(O(2^NLM)\\)\nです．各状態に対して，遷移は\n\\(\\sigma=26\\)\n通りあるので，計算量は\n\\(O(2^NLM\\sigma)\\)\nになります．\ndp の遷移先は Aho–Corasick 法などで求められます．",
+      "codes": [
+        "from collections import deque\n\n\nclass AhoCorasick:\n    def __init__(self, sigma=26):\n        self.node = [[-1] * sigma]\n        self.last = [0]\n        self.sigma = sigma\n\n    def add(self, arr, ID):\n        v = 0\n        for c in arr:\n            if self.node[v][c] == -1:\n                self.node[v][c] = len(self.node)\n                self.node.append([-1] * self.sigma)\n                self.last.append(0)\n            v = self.node[v][c]\n        self.last[v] |= 1 << ID\n\n    def build(self):\n        link = [0] * len(self.node)\n        que = deque()\n        for i in range(self.sigma):\n            if self.node[0][i] == -1:\n                self.node[0][i] = 0\n            else:\n                link[self.node[0][i]] = 0\n                que.append(self.node[0][i])\n\n        while que:\n            v = que.popleft()\n            self.last[v] |= self.last[link[v]]\n            for i in range(self.sigma):\n                u = self.node[v][i]\n                if u == -1:\n                    self.node[v][i] = self.node[link[v]][i]\n                else:\n                    link[u] = self.node[link[v]][i]\n                    que.append(u)\n\n\nmod = 998244353\n\n\nN, L = map(int, input().split())\nAC = AhoCorasick()\nfor i in range(N):\n    AC.add([ord(c) - ord(\"a\") for c in input()], i)\n\nAC.build()\nm = len(AC.node)\ndp = [[0] * m for i in range(1 << N)]\ndp[0][0] = 1\nfor _ in range(L):\n    ndp = [[0] * m for i in range(1 << N)]\n    for bit in range(1 << N):\n        for v in range(m):\n            for i in range(26):\n                to = AC.node[v][i]\n                nbit = bit | AC.last[to]\n                ndp[nbit][to] = (dp[bit][v] + ndp[nbit][to]) % mod\n    dp = ndp\nprint(sum(dp[-1]) % mod)"
+      ],
+      "text_sha256": "c9587c0386d8a0f81a64e56f0f819a91eaf04a7e89fe5036b571ea848530dc6c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc419/abc419_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc419/editorial/13675",
+      "text": "公式解説と似た方法ですが、\n包除原理\nを用いて解きます。\n集合\n\\(T_i\\)\nを、「長さ\n\\(L\\)\nの英小文字からなる文字列のうち、連続部分列として\n\\(S_i\\)\nを含まないもの全体の集合」とします。\n集合\n\\(U\\)\nを、「長さ\n\\(L\\)\nの英小文字からなる文字列全体の集合」とします。\n求めたいものは「連続部分列として\n\\(S_i\\)\nを含まないような\n\\(i\\)\nが存在しないもの」の個数なので、次のようになります。\n\\[|U|-|T_1\\cup T_2\\cup \\cdots\\cup T_N|\\]\nこれは、包除原理より、次と等しいです。\n\\[\\sum_{F\\subset\\{1,2,\\cdots, N\\}} (-1)^{|F|} \\left| \\bigcap_{i\\in F} T_i \\right|\\]\nただし\n\\(F=\\emptyset\\)\nのとき\n\\(\\bigcap_{i\\in F} T_i = U\\)\nとします。\n\\(\\left| \\bigcap_{i\\in F} T_i \\right|\\)\nとは、「\n\\(i\\in F\\)\nなら、連続部分列として\n\\(S_i\\)\nを含まない」（\n\\(i\\not \\in F\\)\nなら連続部分列として\n\\(S_i\\)\nを含んでも含まなくてもよい）ような長さ\n\\(L\\)\nの英小文字からなる文字列の個数です。\n\\(F\\)\nの部分集合を\n\\(1\\)\nつ決めたとき、公式解説と同じような DP を行って\n\\(\\left| \\bigcap_{i\\in F} T_i \\right|\\)\nを求めます。\n\\(\\mathrm{dp}[i][last]\\)\nを、文字列の\n\\(i\\)\n文字目まで決めたとき、文字列の末尾が\n\\(last\\)\nであるようなものとします。ただし、\n\\(last\\)\nは\n\\(i\\in F\\)\nにおける\n\\(S_i\\)\nの prefix であるようなものしかとらなくてよく、\n\\(last\\)\nが\n\\(S_i (i \\in F)\\)\nとなるような遷移は禁止します。\nこのDPは、\n\\(M = \\left|\\sum_{i=1}^N S_i \\right|, \\sigma = 26\\)\nとして\n\\(O(LM\\sigma)\\)\n時間で計算できます。\nそして、\n\\(F\\)\nの部分集合は\n\\(2^N\\)\n通りあるので、この問題に\n\\(O(2^N LM \\sigma)\\)\n時間で答えることができます。空間計算量は\n\\(O(LM\\sigma)\\)\nあるいは\n\\(O(M\\sigma)\\)\nです。",
+      "codes": [],
+      "text_sha256": "046a68be334c9f3d8c49a574dd694cb2a6a85e341728e9ee46080ccbe9e407ad",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc419/abc419_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc419/editorial/16437",
+      "text": "動的計画法で解きます。\nまず、他の文字列\n\\(S_j\\,(j\\ne i)\\)\nの部分文字列になっているような文字列\n\\(S_i\\)\nはないものとして考えます。これにより、文字列を前から決めていったときに2つ以上の文字列が同時に完成することはありません。\nこのもとで、\n\\(dp[i][t][j]\\)\nを、「\n\\(i\\)\n文字目でちょうど\n\\(S_j\\)\nが初めて完成していて（\n\\(j=-1\\)\nの時はどれも完成していないものとする）、\n\\(S_k\\,(k\\in t)\\)\nを含み\n\\(S_k\\,(k\\notin t)\\)\nを含まない長さ\n\\(i\\)\nの文字列の個数」とします（\n\\(t\\)\nは\n\\(\\{1,2,\\dots,N\\}\\)\nの部分集合）。\n\\(S_i\\)\nと\n\\(S_j\\)\nが連続して現れる際、共有できる文字数\n\\((\\ge1)\\)\nとしてあり得るものを集合\n\\(dup_{i,j}\\)\nとして前計算して管理しておきます。すると、\n\\(dp[i][t][j]\\)\nは、\n\\(t\\)\nの要素のうち\n\\(S_j\\)\nだけ含まない文字列に\n\\(S_j\\)\nが末尾に来るように文字を足したものの個数から、その過程で新しく\n\\(S_k\\)\nが登場してしまったものの個数をそのうち（初めて登場した\n\\(S_k\\)\nに注目して）引くことで求まるので、\ndpの遷移は、\n\\(dp[i][t][j] = \\sum_{k\\,\\in\\,t\\,\\cup\\,\\{-1\\}}dp[i-|S_j|][t\\setminus\\{j\\}][k]+\\sum_{k\\,\\in\\,t\\setminus\\{j\\}}\\sum_{m\\in dup_{k,j}}dp[i-|S_j|+m][t\\setminus\\{j\\}][k]-\\sum_{k\\,\\notin\\,t\\setminus\\{j\\}}\\sum_{m\\in dup_{k,j}}dp[i-|S_j|+m][(t\\setminus\\{j\\})\\cup\\{k\\}][k]\\)\n\\(dp[i][t][-1] =  \\sum_{k\\,\\in\\,t\\,\\cup\\,\\{-1\\}}dp[i-1][t][k]\\timesσ\\,-\\sum_{k\\notin t}dp[i][t\\cup \\{k\\}][k]\\)\nとなります。\n求める値は\n\\(\\sum_{i=1}^Ndp[L][\\{1,2,\\dots,N\\}][i]+dp[l][\\{1,2,\\dots,N\\}][-1]\\)\nなので、\n\\(M=\\sum_i|S_i|\\)\nとして、dpの状態数は\n\\(O(N2^NL)\\)\nで 、遷移に\n\\(O(M)\\)\nかかるので、計算量\n\\(O(N2^NLM)\\)\nで問題を解くことができます。\n実装 (C++ 18ms)",
+      "codes": [],
+      "text_sha256": "9e50cc121406c1bdac7931a1c249a537c84fa61c2c893b6b8e34cb83e317d34d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc419/abc419_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

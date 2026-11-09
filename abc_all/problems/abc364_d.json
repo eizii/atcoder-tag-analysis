@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc364_d",
+  "title": "K-th Nearest",
+  "contests": [
+    {
+      "contest_id": "abc364",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 1136,
+  "raw_difficulty": 1136,
+  "contest_id": "abc364",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc364/tasks/abc364_d",
+  "statement": "配点 : 425 点 問題文 数直線上に N+Q 個の点 A_1,\\dots,A_N,B_1,\\dots,B_Q があり、点 A_i の座標は a_i 、点 B_j の座標は b_j です。 j=1,2,\\dots,Q それぞれについて、以下の問題に答えてください。 点 A_1,A_2,\\dots,A_N のうち点 B_j との距離が k_j 番目に近い点を X としたとき、点 X と点 B_j との距離を求めよ。\r\nより厳密には、点 A_i と点 B_j との距離を d_i として、 (d_1,d_2,\\dots,d_N) を昇順に並び替えてできる列を (d_1',d_2',\\dots,d_N') としたとき、 d_{k_j}' を求めよ。 制約 1\\leq N,Q \\leq 10^5 -10^8\\leq a_i,b_j \\leq 10^8 1\\leq k_j\\leq N 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N Q a_1 a_2 \\dots a_N b_1 k_1 b_2 k_2 \\vdots b_Q k_Q 出力 Q 行出力せよ。 l\\ (1\\leq l \\leq Q) 行目には、 j=l としたときの問題に対する答えを整数として出力せよ。 入力例 1 4 3\r\n-3 -1 5 6\r\n-2 3\r\n2 1\r\n10 4 出力例 1 7\r\n3\r\n13 1 番目のクエリについて説明します。 点 A_1,A_2,A_3,A_4 と点 B_1 との距離は順に 1,1,7,8 なので、点 B_1 との距離が 3 番目に近いのは点 A_3 です。\r\nよって、点 A_3 と点 B_1 との距離である 7 を出力します。 入力例 2 2 2\r\n0 0\r\n0 1\r\n0 2 出力例 2 0\r\n0 同じ座標に複数の点がある可能性もあります。 入力例 3 10 5\r\n-84 -60 -41 -100 8 -8 -52 -62 -61 -76\r\n-52 5\r\n14 4\r\n-2 6\r\n46 2\r\n26 7 出力例 3 11\r\n66\r\n59\r\n54\r\n88",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 数直線上に N+Q 個の点 A_1,\\dots,A_N,B_1,\\dots,B_Q があり、点 A_i の座標は a_i 、点 B_j の座標は b_j です。 j=1,2,\\dots,Q それぞれについて、以下の問題に答えてください。 点 A_1,A_2,\\dots,A_N のうち点 B_j との距離が k_j 番目に近い点を X としたとき、点 X と点 B_j との距離を求めよ。\r\nより厳密には、点 A_i と点 B_j との距離を d_i として、 (d_1,d_2,\\dots,d_N) を昇順に並び替えてできる列を (d_1',d_2',\\dots,d_N') としたとき、 d_{k_j}' を求めよ。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N,Q \\leq 10^5 -10^8\\leq a_i,b_j \\leq 10^8 1\\leq k_j\\leq N 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q a_1 a_2 \\dots a_N b_1 k_1 b_2 k_2 \\vdots b_Q k_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 l\\ (1\\leq l \\leq Q) 行目には、 j=l としたときの問題に対する答えを整数として出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 3\r\n-3 -1 5 6\r\n-2 3\r\n2 1\r\n10 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 7\r\n3\r\n13 1 番目のクエリについて説明します。 点 A_1,A_2,A_3,A_4 と点 B_1 との距離は順に 1,1,7,8 なので、点 B_1 との距離が 3 番目に近いのは点 A_3 です。\r\nよって、点 A_3 と点 B_1 との距離である 7 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2 2\r\n0 0\r\n0 1\r\n0 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0\r\n0 同じ座標に複数の点がある可能性もあります。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10 5\r\n-84 -60 -41 -100 8 -8 -52 -62 -61 -76\r\n-52 5\r\n14 4\r\n-2 6\r\n46 2\r\n26 7"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 11\r\n66\r\n59\r\n54\r\n88"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc364/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:44.734335+00:00",
+  "statement_sha256": "ab9a117a47ed3bebc0e97c72fe6c0d78f2215e13caebdc30fc3d1682d9ad285a",
+  "editorials": []
+}

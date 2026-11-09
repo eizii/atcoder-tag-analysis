@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc411_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc411/editorial/13361",
+      "text": "\\(N\\)\n個のサイコロのいずれかの面に書かれている数を小さい順に全て並べた列を\n\\(S=(S_1,S_2,\\dots,S_k)\\)\nとおきます。また、便宜上\n\\(S_0=0\\)\nとおきます。\nサイコロ\n\\(i\\)\nの上を向いた面に書かれた数を表す確率変数を\n\\(X_i\\)\nとおくと、求める期待値\n\\(E\\)\nは以下のように表されます。（\n\\(P[*]\\)\nは\n\\(*\\)\nが起こる確率を表します。）\n\\[E=\\displaystyle \\sum_{i=1}^{k} S_{i}\\times P[\\max_{j=1..N}X_j=S_i]\\]\n競技プログラミングにおける確率・期待値の問題では、「何かの最大値が特定の値に一致する確率を求めるより、最大値が特定の値\n以下\nになる確率を求める方が往々にして簡単である」ということを利用して式変形を行うことがしばしばあります。本問題でもこのテクニックを用いることができ、\n\\[\n\\displaystyle\n\\begin{aligned}\nE\n&=\\sum_{i=1}^{k} S_{i}\\times P[\\max_{j}X_j=S_i] \\\\\n&= \\sum_{i=1}^{k} S_{i}\\times \\left(P[\\max_{j}X_j\\leq S_i]-P[\\max_{j}X_j\\leq S_{i-1}]\\right) \\\\\n&= S_k -\\sum_{i=1}^{k-1} (S_{i+1}-S_i)\\times P[\\max_{j}X_j\\leq S_i]\\\\\n&= S_k -\\sum_{i=1}^{k-1} (S_{i+1}-S_i)\\prod_{j=1}^{N}\\frac{B_i^{(j)}}{6}\\\\\n\\end{aligned}\n\\]\nとなります。ここで、\n\\(B_i^{(j)}\\)\nはサイコロ\n\\(j\\)\nの\n\\(6\\)\nつの面のうち書かれた数が\n\\(S_i\\)\n以下であるようなものの数を表します。\n全ての\n\\(i,j\\)\nに対する\n\\(B_i^{(j)}\\)\nの値を配列として保持することはできません。しかし、\n\\(i=1,2,\\dots,k\\)\nの順に見ていきながら、現在の\n\\(i\\)\nに対する\n\\(B_{i}^{(j)}\\ (1\\leq j\\leq N)\\)\nの値および\n\\(\\displaystyle \\prod_{j=1}^{N}B_i^{(j)}\\)\nの値のみを保持することにすると、更新操作（\n\\(B_i^{(j)}\\neq B_{i+1}^{(j)}\\)\nなる\n\\(i,j\\)\nの組に対し、\n\\(B_i^{(j)} \\leftarrow B_{i+1}^{(j)}\\)\nとする操作）は\n\\(O(N)\\)\n回しか行われないため、十分高速に処理することができます。\n全体の計算量は、実装方針に応じて\n\\(O(N(\\log N + \\log\\mathrm{MOD}))\\)\nや\n\\(O(N\\log N + \\log \\mathrm{MOD})\\)\nなどになりますが、いずれにおいても十分高速です。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\n\nusing namespace std;\n\nusing mint = atcoder::modint998244353;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<vector<int>> a(n, vector<int>(6));\n    vector<int> s;\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < 6; j++) {\n            cin >> a[i][j];\n            s.push_back(a[i][j]);\n        }\n    }\n    sort(s.begin(), s.end());\n    s.erase(unique(s.begin(), s.end()), s.end());\n    int k = s.size();\n    vector<vector<int>> upd(k);\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < 6; j++) {\n            int id = lower_bound(s.begin(), s.end(), a[i][j]) - s.begin();\n            upd[id].push_back(i);\n        }\n    }\n\n    mint ans = 0;\n    vector<int> b(n);\n    mint prod = 1;\n    int zero_cnt = n;\n    for (int i = 0; i < k - 1; i++) {\n        for (int j: upd[i]) {\n            if (!b[j]) {\n                --zero_cnt;\n            } else {\n                prod /= b[j];\n            }\n            ++b[j];\n            prod *= b[j];\n        }\n        ans -= (zero_cnt ? 0 : prod) * (s[i + 1] - s[i]);\n    }\n    ans /= mint(6).pow(n);\n    ans += s[k - 1];\n    cout << ans.val() << endl;\n}"
+      ],
+      "text_sha256": "262140b6cc0af4bca9e161fa6116957074a7cdfaddfadb27db80867edced64b1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc411/abc411_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

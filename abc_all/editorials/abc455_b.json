@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc455_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc455/editorial/19236",
+      "text": "\\(H,W\\)\nの制約が十分小さいので、すべての長方形領域に対して点対称であるかをそれぞれ判定すればよいです。\n長方形領域の列挙の際には、問題文中の形式的な説明のように、一番上の行・一番下の行・一番左の列・一番右の列を固定するのが簡潔です。\n長方形領域を全探索する多重ループの中でその長方形領域が点対称であるかを表す変数を\ntrue\nで初期化しておき、長方形領域が点対称に塗られているならば同じ色で塗られているべきだが実際には違う色で塗られているマスの組を発見したときに変数を\nfalse\nに更新するとよいです。マスの組についても、愚直にすべてのマスを確認しても十分高速です。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint h, w;\n\tcin >> h >> w;\n\tvector<string> s(h);\n\tfor (int i = 0; i < h; i++) cin >> s[i];\n\tint ans = 0;\n\tfor (int h1 = 0; h1 < h; h1++) {\n\t\tfor (int h2 = h1 + 1; h2 <= h; h2++) {\n\t\t\tfor (int w1 = 0; w1 < w; w1++) {\n\t\t\t\tfor (int w2 = w1 + 1; w2 <= w; w2++) {\n\t\t\t\t\tbool flag = true;\n\t\t\t\t\tfor (int i = h1; i < h2; i++) for (int j = w1; j < w2; j++) if (s[i][j] != s[h1 + h2 - i - 1][w1 + w2 - j - 1]) flag = false;\n\t\t\t\t\tif (flag) ans++;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "ab5ba7da5f3106884356ad4bc3217e8b0c92438179a745d4d678a4e52fa9a0c4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc455/abc455_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc455/editorial/19457",
+      "text": "時間計算量\n\\(O(HW^2)\\)\nを達成できます。\n部分長方形に使用される列の個数\n\\(w\\)\nで場合分けし、\n\\(w=1,2, \\ldots W\\)\nの順に考えます。横\n\\(w\\)\nマスが連続する部分は\n\\(H(W-w+1)\\)\n個、また反転を含めると\n\\(2H(W-w+1)\\)\n個ありますが、それらを分類して整数に置き換えます（同じ文字列には同じ整数、異なる文字列には異なる整数になるようにする）。\n\\(w\\)\nが\n\\(1\\)\nだけ小さい場合の情報があれば、基数ソートを用いて\n\\(O(HW)\\)\n時間で求められます。\n部分長方形に使用される列の範囲で場合分けします。長さ\n\\(w\\)\nの部分文字列がすべて分類されていることにより、次の問題に帰着できます。\n長さ\n\\(H\\)\nの数列\n\\(A\\)\n,\n\\(B\\)\nが与えられます。\n\\(A _ x=B _ y\\)\nかつ\n\\(B _ x = A _ y\\)\nであることを\n\\(f(x,y)\\)\nと表します。\n\\(1 \\leq l \\leq r \\leq H\\)\nを満たす整数の組\n\\((l,r)\\)\nであって、\n\\(f(l+i,r-i)\\)\n(\n\\(0 \\leq i \\leq r-l\\)\n) を満たすものの個数を求めよ。\nこれに対して Manacher のアルゴリズムを使います。数えるものが回文とは異なりますが、 Manacher のアルゴリズムで利用する性質「文字列\n\\(S\\)\nが回文である\n\\(\\iff\\)\n文字列\n\\(S\\)\nを逆順に読んだ文字列が回文である」はこの設定に置き換えても成り立ちます。長さ\n\\(1\\)\nの文字列が条件を満たさない場合が新たに表れることに注意すれば、上記の問題は計算量\n\\(O(H)\\)\nで解けます。\n以上により、全体の計算量は\n\\(O(HW^2)\\)\nになります。\nプログラム例 (C++)\n他にも、 suffix array 、 LCP array 、\n\\(O(1)\\)\n時間の区間最小値クエリを用いれば、\n\\(O(HW^2)\\)\n時間の方法をいくつか作れると思います。",
+      "codes": [],
+      "text_sha256": "de95c8cd115261ef31233ebff89d46ea733e5ba456b0e4d9faedf9f91dc179ab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc455/abc455_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc455/editorial/19453",
+      "text": "「ある領域が点対称に塗られていること」の同値な言い換えを考えてみます。\n領域 \\((h _ 1,h _ 2,w _ 1,w _ 2)\\) が点対称に塗られていることは、以下のすべての条件が満たされていることと同値です。\nマス \\((h _ 1,w _ 1)\\) とマス \\((h _ 2,w _ 2)\\) が同じ色で塗られている\nマス \\((h _ 1,w _ 2)\\) とマス \\((h _ 2,w _ 1)\\) が同じ色で塗られている\n\\(h _ 1+1\\le h _ 2-1\\) なら、領域 \\((h _ 1+1,h _ 2-1,w _ 1,w _ 2)\\) が点対称に塗られている\n\\(w _ 1+1\\le w _ 2-1\\) なら、領域 \\((h _ 1,h _ 2,w _ 1+1, w _ 2-1)\\) が点対称に塗られている。\nあとは、これをメモ化再帰などで実装することでこの問題を解くことができます。\n時間計算量は \\(O(H ^ 2W ^ 2)\\) などとなります。\nメモ化再帰などを使うと空間計算量も \\(O(H ^ 2W ^ 2)\\) となりますが、中心を固定して伸ばしていくような実装を行うと空間計算量を \\(O(HW)\\) とすることもできます。\n実装例は以下のようになります。\n以下の実装例は\nstd::map\nを用いたメモ化再帰を行っているため、時間計算量は \\(O(H ^ 2W ^ 2\\log HW)\\) 、空間計算量は \\(O(H ^ 2W ^ 2)\\) となっています。",
+      "codes": [
+        "#include <vector>\n#include <iostream>\n#include <ranges>\n#include <map>\n\nint main() {\n    using namespace std;\n    unsigned H, W;\n    cin >> H >> W;\n    vector<string> board(H);\n    for (auto&& row : board)\n        cin >> row;\n\n    // メモ化再帰で (h1, h2, w1, w2) が点対称に塗られているか判定する\n    map<tuple<unsigned, unsigned, unsigned, unsigned>, bool> memo{};\n    const auto solve{[&board, &memo](this auto& rec, unsigned h1, unsigned h2, unsigned w1, unsigned w2) -> bool {\n        if (memo.contains({h1, h2, w1, w2}))\n            return memo[{h1, h2, w1, w2}];\n        return memo[{h1, h2, w1, w2}] = board[h1][w1] == board[h2][w2] && board[h1][w2] == board[h2][w1] && (h1 + 1 < h2 ? rec(h1 + 1, h2 - 1, w1, w2) : true) && (w1 + 1 < w2 ? rec(h1, h2, w1 + 1, w2 - 1) : true);\n    }};\n\n    unsigned ans{};\n    for (unsigned h1{}; h1 < H; ++h1)\n        for (unsigned h2{h1}; h2 < H; ++h2)\n            for (unsigned w1{}; w1 < W; ++w1)\n                for (unsigned w2{w1}; w2 < W; ++w2)\n                    ans += solve(h1, h2, w1, w2);\n\n    cout << ans << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "b4206277d0db323179a9cf94ec5115922cc7847f37bcddf57de61fdb69395c56",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc455/abc455_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

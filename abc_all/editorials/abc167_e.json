@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc167_e",
+  "editorials": [
+    {
+      "text": "E: Colorful Blocks\n「隣り合うブロックの組であって同じ色で塗られている組が、丁度k 組である」場合の色の塗り方\nを考えます.\n条件を満たす為の必要十分条件は, 左端を除いたN −1 個のブロックのうち, k 個が左隣のブロック\nと同じ色で塗られており, N −1 −k 個が左隣と異なる色で塗られていることです.\nこのような色の塗り方は, 左端のブロックの色の選び方及び前述のk 個のブロックの選び方も考慮す\nると,\nM × N−1Ck × 1k × (M −1)N−1−k\nで表されます. この値をk = 0, 1, · · · , K について足し合わせることで, 答えを求めることが出来\nます.\n",
+      "text_sha256": "4b40e72c87107a2f8a4386d64a15af0317329e9d17b36067a07e6e05a8f3ccb6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc167/abc167_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

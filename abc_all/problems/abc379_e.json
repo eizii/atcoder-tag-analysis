@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc379_e",
+  "title": "Sum of All Substrings",
+  "contests": [
+    {
+      "contest_id": "abc379",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1246,
+  "raw_difficulty": 1246,
+  "contest_id": "abc379",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc379/tasks/abc379_e",
+  "statement": "配点 : 475 点 問題文 1 から 9 までの数字からなる長さ N の文字列 S が与えられます。 整数の組 (i,j) \\ (1\\leq i\\leq j\\leq N) に対して、 f(i,j) を「 S の i 文字目から j 文字目までの連続部分文字列を 10 進法の整数としてみなしたときの値」とします。 \\displaystyle \\sum_{i=1}^N \\sum_{j=i}^N f(i,j) を求めてください。 制約 1\\leq N\\leq 2\\times 10^5 N は整数 S は 1 から 9 までの数字からなる長さ N の文字列 入力 入力は以下の形式で標準入力から与えられる。 N S 出力 答えを出力せよ。 入力例 1 3\r\n379 出力例 1 514 答えは f(1,1)+f(1,2)+f(1,3)+f(2,2)+f(2,3)+f(3,3)=3+37+379+7+79+9=514 です。 入力例 2 30\r\n314159265358979323846264338327 出力例 2 369673254065355789035427227741",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1 から 9 までの数字からなる長さ N の文字列 S が与えられます。 整数の組 (i,j) \\ (1\\leq i\\leq j\\leq N) に対して、 f(i,j) を「 S の i 文字目から j 文字目までの連続部分文字列を 10 進法の整数としてみなしたときの値」とします。 \\displaystyle \\sum_{i=1}^N \\sum_{j=i}^N f(i,j) を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N\\leq 2\\times 10^5 N は整数 S は 1 から 9 までの数字からなる長さ N の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\n379"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 514 答えは f(1,1)+f(1,2)+f(1,3)+f(2,2)+f(2,3)+f(3,3)=3+37+379+7+79+9=514 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 30\r\n314159265358979323846264338327"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 369673254065355789035427227741"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc379/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:03.525831+00:00",
+  "statement_sha256": "79c14da1f57af153a2003907922d371f0f955969ed805ff94849b18b7c2ce8a4",
+  "editorials": []
+}

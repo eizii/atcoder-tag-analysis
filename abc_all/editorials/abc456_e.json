@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc456_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc456/editorial/19849",
+      "text": "以下を満たす\n\\(N\\times W\\)\n頂点の有向グラフ\n\\(G\\)\nを考えます。\n頂点は整数組\n\\((x,w) \\ (1\\leq x\\leq N,1\\leq w\\leq W)\\)\nで表される\n任意の\n\\(1\\leq x,y\\leq N\\)\nおよび\n\\(1\\leq w\\leq W\\)\nに対し、以下が共に成り立つとき有向辺\n\\((x,w)\\to(y,w\\bmod W+1)\\)\nが存在する\n\\(x=y\\)\n、または都市\n\\(x,y\\)\nが直接道路で結ばれている\n\\(S_{x,w},S_{y,w\\bmod W+1}\\)\nは共に\no\nである\n曜日\n\\(w\\)\nの昼に都市\n\\(x\\)\nに居ることを頂点\n\\((x,w)\\)\nに対応づければ、条件を満たすように移動を続けられることは\n\\(G\\)\nにおいてサイクルが存在することと同値です。\n有向グラフにおけるサイクルの検出は DFS、またはトポロジカルソートの要領で行うことができ、\n\\(O((N+M)W)\\)\n時間で計算できます。\n実装例(C++)\n実装例(PyPy)",
+      "codes": [],
+      "text_sha256": "3ae5e27a5dddccc853c17ea88eede391e27337a34b5ff9561c9031830647f64c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc456/abc456_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc080_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc080/editorial.pdf",
+      "text": "B:  Harshad Number\n\n  f(N) の計算方法だが、例えば以下の方法が考えられる。\n  1: t = N、c = 0 とする。\n  2: c に、t を10 で割った余りを加算する。\n  3: t に、t を10 で割った商を代入する。\n  4: t > 0 ならば2 に戻る。そうでないなら終了する。このときc = f(N) となる。\n  f(N) を求めた後、N がf(N) で割り切れるかを判定すればよい。\n\n#include <cstdio >\nint N;\nint main ()\n{\n         scanf (\"%d\",&N);\n         int t=N,c=0;\n        while(t>0)c+=t%10,t/=10;\n        if(N%c==0) puts (\"Yes \");\n         else puts (\"No\");\n}\n\n\n\n\n\n                                         1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "1bb3e7791345ad976facf27f06911f483865f8bfa820eded4ac761834ff93c74"
+    }
+  ],
+  "status": "available"
+}

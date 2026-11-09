@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc179_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc179/editorial/99",
+      "text": "\\(A \\times B \\lt N\\)\nを満たす正整数の組\n\\((A,B) \\)\nに対し、\n\\(A \\times B + C = N\\)\nとなるような正整数\n\\(C\\)\nはちょうど一つに定まります。したがって、そのような正整数の組\n\\((A,B)\\)\nの個数を求めればよいです。\n\\(A\\)\nを固定したとき、\n\\(B\\)\nとして考えられる値は\n\\(\\left \\lfloor \\cfrac{N - 1}{A} \\right \\rfloor\\)\n個あります。よって、\n\\(A\\)\nを\n\\(1\\)\nから\n\\(N-1\\)\nまで全探索することで、この問題を解くことができました。\nPythonによる実装例：\nhttps://atcoder.jp/contests/abc179/submissions/16844575",
+      "codes": [],
+      "text_sha256": "74afb4252792c2bba675d53ce27cb1f0de09fc57e1d7e5e3c753b0ec02a2342e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc179/abc179_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

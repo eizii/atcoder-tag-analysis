@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc458_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc458/editorial/20144",
+      "text": "抜き出す部分文字列の真ん中にある\nC\nを固定して考えます。\n\\(S\\)\nのうち\n\\(i\\)\n文字目に\nC\nがあるとき、その\nC\nが真ん中に来る部分文字列を数えます。\nこの\nC\nの左側には文字が\n\\(i-1\\)\n個、右側には文字が\n\\(|S|-i\\)\n個あります。\nその結果、その\nC\nを真ん中とする文字列として、\nC\nの左右それぞれに\n\\(0,1,\\dots,\\min(i-1,|S|-i)\\)\n個文字を取り付けた、合計\n\\(\\min(i,|S|-i+1)\\)\n個の文字列を得ることができます。\nこれを、\n\\(S\\)\n中に存在する文字\nC\n全てについて足し合わせるとこの問題に正解できます。\n時間計算量は\n\\(O(|S|)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing ll=long long;\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  string s;\n  cin >> s;\n  ll l=s.size();\n  ll res=0;\n  for(ll i=0;i<l;i++){\n    if(s[i]=='C'){\n      res+=min(i+1,l-i);\n    }\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "d05c3327aed6c33acb73b7b6784e8c2ecdb17d42da987855bc232b66fa5c1950",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc458/abc458_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

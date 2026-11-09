@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc463_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc463/editorial/21940",
+      "text": "超頂点 \\(W _ S,W _ T\\) を作り、頂点 \\(i\\) から \\(W _ S\\) へ \\(X _ i\\) 分で、\\(W _ S\\) から \\(W _ T\\) へ \\(Y\\) 分で、\\(W _ T\\) から頂点 \\(j\\) へ \\(X _ j\\) 分で移動できるようにすることで、頂点数 \\(N+2\\) 、辺数 \\(2N+M+1\\) のグラフの単一始点最短経路問題に帰着されます。\nこれは、Dijkstra 法などを用いることで解くことができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <queue>\n#include <ranges>\n\nint main() {\n    using namespace std;\n    unsigned N, M, Y;\n    cin >> N >> M >> Y;\n\n    vector<vector<pair<unsigned, unsigned>>> edges(N + 2);\n    for (unsigned i{}; i < M; ++i) {\n        unsigned u, v, T;\n        cin >> u >> v >> T;\n        edges[--u].emplace_back(--v, T);\n        edges[v].emplace_back(u, T);\n    }\n\n    for (unsigned i{}; i < N; ++i) {\n        unsigned X;\n        cin >> X;\n        edges[i].emplace_back(N, X); // 各頂点から W_S へ\n        edges[N + 1].emplace_back(i, X); // W_T から各頂点へ\n    }\n    \n    edges[N].emplace_back(N + 1, Y); // W_S から W_T へ\n\n    // Dijkstra 法で最短経路を求める\n    vector<unsigned> distance(N + 2, 3000000000);\n    priority_queue<pair<unsigned, unsigned>, vector<pair<unsigned, unsigned>>, greater<>> pq;\n    pq.emplace(distance[0] = 0, 0);\n    while (!empty(pq)) {\n        const auto [dist, now]{pq.top()};\n        pq.pop();\n        if (distance[now] < dist) continue;\n\n        for (const auto& [next, cost] : edges[now])\n            if (distance[next] > dist + cost)\n                pq.emplace(distance[next] = dist + cost, next);\n    }\n\n    for (const auto d : distance | views::take(N) | views::drop(1))\n        cout << d << \" \";\n    cout << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "2fac565a4f6deed8f717c3b9de3c22697a8b41f9630b244ea3577f2a9576ce5b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc463/abc463_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc463/editorial/21953",
+      "text": "ワープする回数は高々\n\\(1\\)\n回に抑えられます．\n(証明)\n\\(2\\)\n回以上ワープしたとする．最初のワープを都市\n\\(a\\)\nから都市\n\\(b\\)\n，最後のワープを都市\n\\(c\\)\nから都市\n\\(d\\)\nとすると，この間の移動には\n\\((X_a+X_b+Y)+(X_c+X_d+Y)\\)\n分以上の時間がかかる．しかしこれらの代わりに都市\n\\(a\\)\nから都市\n\\(d\\)\nへワープすれば\n\\(X_a+X_d+Y\\)\n分かかるので，時間を短縮できる．\n都市\n\\(i\\)\nから都市\n\\(j\\)\nへ道路のみで移動するときの最短時間を\n\\(dis[i,j]\\)\nとします．ワープを使わない場合，答は\n\\(dis[1,k]\\)\nです．これは dijkstra 法で求められます．ワープを使う場合，答は\n\\(\\min_{i,j}(dis[1,i]+X_i+X_j+Y+dis[j,k])\\)\nです．これを求める方法を考えます．\nまず， dijkstra 法で\n\\(\\min_i(dis[1,i]+X_i)\\)\nを求めます．すると，各\n\\(j\\)\nについて\n\\(\\min_i(dis[1,i]+X_i)+X_j+Y\\)\nがわかり，あとは多始点 dijkstra 法で答が求まります．",
+      "codes": [],
+      "text_sha256": "b08894a50b4dc143b032de9256f01fae72739f311586cfbc2a72072133acb32c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc463/abc463_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

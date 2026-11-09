@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc462_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc462/editorial/16164",
+      "text": "以下では、\n\\(S\\)\nの\n\\(i\\)\n文字目\n\\((1\\leq i\\leq \\lvert S\\rvert)\\)\nを\n\\(S_i\\)\nで表し、\n\\(S_i\\ldots S_j\\)\nで\n\\(S\\)\nの\n\\(i\\)\n文字目から\n\\(j\\)\n文字目までの部分文字列を表します。\nまた、文字列\n\\(T\\)\nについて、\n\\(f(T)\\)\nで\n\\(T\\)\nに含まれる\nABC\nの数を表します。\n加えて、区別のため、高橋君が操作を行う前の（すなわち入力として与えられる）文字列を\n\\(S\\)\n, いくつかの文字を置換した後の文字列を\n\\(S'\\)\nとします。\nこの問題を動的計画法で解くことを考えます。\n\\(dp[i][j]\\)\n\\((0\\leq i\\leq N,0\\leq j\\leq K)\\)\nを、「\n\\(S_1\\ldots S_i\\)\nより\n\\(S'_1\\ldots S'_i\\)\nが\nABC\nを\n\\(j\\)\n個多く含むために置換する必要のある文字数の最小値（不可能な場合は\n\\(+\\infty\\)\n）」として定義します。\n初期状態は\n\\(dp[i][0]=0\\)\n\\((0\\leq i\\leq N)\\)\n,\n\\(dp[0][j]=\\infty\\)\n\\((1\\leq j\\leq K)\\)\nであり、\n\\(dp[N][K]\\)\nが求める答えです。\nなお、\n\\(j<0\\)\nについては\n\\(dp[i][j]>0=dp[i][0]\\)\n,\n\\(j>K\\)\nについては\n\\(dp[i][j]>dp[i][K]\\geq dp[N][K]\\)\nとなるため、それぞれの状態から\n\\(dp[N][K]\\)\nへの遷移が最適となることはないため、それらの状態を考える必要はありません。これは、次に述べる遷移が、\n最適な遷移においては値が常に単調増加すること\n\\(dp[i][j]\\)\nの値は\n\\(dp[i+1][j-1],dp[i+1][j],dp[i+3][j],dp[i+3][j+1]\\)\nにのみ直接遷移（関係）し得ること\nをみたす事から従います。\n\\(dp[i][j]\\)\n\\((1\\leq i\\leq N, 1\\leq j\\leq K)\\)\nへの遷移は次の\n\\(2\\)\nつの場合のみ考えれば良いです。\n\\(S'_{i-2}S'_{i-1}S'_i=\\)\nABC\nである場合\n\\(S'_{i-2}S'_{i-1}S'_i=\\)\nABC\nでない場合\n特に\n\\(i<3\\)\nのときは後者の場合のみ考えれば良いことに注意してください。\nそれぞれの場合における、変更する必要のある文字数の最小値について考えます。\n\\(1\\)\n.\n\\(S'_{i-2}S'_{i-1}S'_i=\\)\nABC\nである場合\nこのとき、\n\\(f(S'_1S'_2\\ldots S'_i)=f(S'_1S'_2\\ldots S'_{i-3})+1\\)\nとなります。\nよって、\n\\(f(S'_1S'_2\\ldots S'_{i-3})-f(S_1S_2\\ldots S_{i-3})=f(S'_1S'_2\\ldots S'_i)-1-f(S_1S_2\\ldots S_i)+\\{f(S_1S_2\\ldots S_i)-f(S_1S_2\\ldots S_{i-3})\\}=j-1+\\{f(S_1S_2\\ldots S_i)-f(S_1S_2\\ldots S_{i-3})\\}\\)\nであるため、\n\\(X_i\\)\nを\n\\(f(S_1S_2\\ldots S_i)-f(S_1S_2\\ldots S_{i-3})\\)\n\\((0\\leq X_i\\leq 1)\\)\n、\n\\(Y_i\\)\nを\n\\(S_{i-2}S_{i-1}S_i\\)\nを\nABC\nにするために変更する必要のある文字の個数\n\\((0\\leq Y_i\\leq 3)\\)\nとして定義すると、この場合において変更する必要のある文字の数の最小値は\n\\(dp[i-3][j-1+X_i]+Y_i\\)\nとなります。\n\\(2\\)\n.\n\\(S'_{i-2}S'_{i-1}S'_i=\\)\nABC\nでない場合\nこの場合については\n\\(S'_i\\)\nを変更しない場合のみについて考えれば良いです。なぜなら、\n\\(S'_i\\)\nを変更しかつ\n\\(S'_{i-2}S'_{i-1}S'_i=\\)\nABC\nとならなかったとすると、\n\\(S'_1S'_2\\ldots S'_{i-1}\\bm{S'_i}\\)\nと\n\\(S'_1S'_2\\ldots S'_{i-1}\\bm{S_i}\\)\nを比較して、\n\\(f(S'_1S'_2\\ldots S'_{i-1}S'_i)\\leq f(S'_1S'_2\\ldots S'_{i-1}S_i)\\)\nかつ後者の方が変更した文字の数が少ないため、\n\\(S'_1S'_2\\ldots S'_{i-1}S'_i\\)\nより少ない数の変更で、同じだけの\nABC\nを含むような文字列を構成することが可能だからです。\nさて、この場合、\n\\(f(S'_1S'_2\\ldots S'_i)=f(S'_1S'_2\\ldots S'_{i-1})\\)\nであり、\n\\(1\\)\n. と同様に\n\\(f(S'_1S'_2\\ldots S'_{i-1})-f(S_1S_2\\ldots S_{i-1})=j+\\{f(S_1S_2\\ldots S_i)-f(S_1S_2\\ldots S_{i-3})\\}\\)\nであるため、\n\\(Z_i\\)\nを\n\\(f(S_1S_2\\ldots S_i)-f(S_1S_2\\ldots S_{i-1})\\)\n\\((0\\leq Z_i\\leq 1)\\)\nで定義すると、この場合において変更する必要のある文字の数の最小値は\n\\(dp[i-1][j+Z_i]\\)\nとなります。\nよって、\n\\(dp[i][j]=\\min(dp[i-3][j-1+X_i]+Y_i,dp[i-1][j+Z_i])\\)\nとなります。どちらかが配列の定義域の外である場合には他方の値が入ります。\n\\(Z_i=1\\)\nならば\n\\(i\\geq 3\\)\nが成り立つためどちらも範囲外となることはないことに注意してください。\n\\(Z_i\\)\nは\n\\(S_{i-2}S_{i-1}S_i=\\)\nABC\nならば\n\\(1\\)\n, そうでないならば\n\\(0\\)\n,\n\\(X_i=Z_{i-2}+Z_{i-1}+Z_i\\)\nであるためそれぞれの\n\\(i\\)\nに対して定数時間で計算でき、\n\\(Y_i\\)\nもそれぞれの\n\\(i\\)\nに対して定数時間で計算できます。\nそれぞれの遷移も\n\\(O(1)\\)\nで計算できるため、全体で\n\\(O(NK)\\)\nで答えを求めることができます。\nよって、この問題を解くことができました。\nC++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define INF (int)1e+9\n\nint main() {\n\tint t,n,k;\n\tstring s;\n\n\tcin>>t;\n\tfor(int itest=0;itest<t;itest++){\n\t\tcin>>s;\n\t\tcin>>k;\n\t\tn=s.size();\n\n\t\tvector<int>x(n+1),y(n+1),z(n+1);\n\t\tvector<vector<int> >dp(n+1,vector<int>(k+1));\n\n\t\tfor(int i=3;i<=n;i++){\n\t\t\tif(s[i-3]!='A')y[i]++;\n\t\t\tif(s[i-2]!='B')y[i]++;\n\t\t\tif(s[i-1]!='C')y[i]++;\n\t\t\tif(y[i]==0)z[i]++;\n\t\t\tfor(int j=0;j<3;j++){\n\t\t\t\tif(i+j<=n)x[i+j]+=z[i];\n\t\t\t}\n\t\t}\n\n\t\tfor(int j=1;j<=k;j++)dp[0][j]=INF;\n\t\tfor(int i=1;i<=n;i++){\n\t\t\tfor(int j=1;j<=k;j++){\n\t\t\t\tdp[i][j]=INF;\n\t\t\t\tif(j+z[i]<=k)dp[i][j]=min(dp[i][j],dp[i-1][j+z[i]]);\n\t\t\t\tif(i>=3)dp[i][j]=min(dp[i][j],dp[i-3][j-1+x[i]]+y[i]);\n\t\t\t}\n\t\t}\n\t\tif(dp[n][k]>=INF)cout<<-1<<endl;\n\t\telse cout<<dp[n][k]<<endl;\n\t}\n\treturn 0;\n}"
+      ],
+      "text_sha256": "2ee1fbbabc7e35724d8541e0d28e786cf2cc48d47dc094c1304cbd4cb9850b97",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc462/abc462_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc462/editorial/21471",
+      "text": "https://codeforces.com/contest/2125/problem/F\nリンク先の問題はちょっと考察すると「\n\\(K\\)\nが与えられるので\n\\(S\\)\nに含まれる\ndocker\nの出現を\n\\(K\\)\n個増やすために最小何文字置換すればよいですか？」という問題に帰着します。この問題とは異なり、\n\\(K\\)\nが小さいとかはないです。解法はリンク先の問題の解説をご覧ください。\nABC\nの出現をすべて取り出したときに添え字の被りが無いという性質が上手くて、\ndocker\nの場合と同じ解法が使えるのだと思います。",
+      "codes": [],
+      "text_sha256": "c83ce695536d82b2c94f9e008fe443cab945df3230d138aa3628fd589773d372",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc462/abc462_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc462/editorial/21931",
+      "text": "\\(x \\in \\left[0, \\lfloor N / 3 \\rfloor\\right]\\)\nに対して、\nABC\nが\n\\(x\\)\n個以上するように\n\\(S\\)\nを書き換えることができるのでそのコストの最小値を\n\\(f(x)\\)\nとおきます。また定義域の外では便宜上\n\\(+\\infty\\)\nと考えることで、適宜整数全体の集合全体で定義されているとみなします。\nこのとき関数\n\\(f\\)\nは次の性質を満たします。\n\\(f\\)\nは凸関数:\n\\(f(x) + f(x + 2) \\ge f(x + 1) + f(x + 1)\\)\n定義域内で、\n\\(f(x) \\in [0, N]\\)\n従って、\nABC\nのコスト免除額を二分探索する Alien DP で解くことが出来ます。実行時間は\n\\(O(N \\log N)\\)\nです。",
+      "codes": [],
+      "text_sha256": "1765decd25a66f9ddb4bdd052994e9c18a31c8d16d60755d42a8c08f59ded5ff",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc462/abc462_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

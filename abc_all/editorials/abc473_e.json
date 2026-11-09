@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc473_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc473/editorial/24877",
+      "text": "\\(A\\) の\\({}\\bmod K\\) における累積和 \\(\\displaystyle S\\ (S _ i=\\sum _ {j=1} ^ iA _ i\\pmod K)\\) によって条件を言い換えると、次のような問題になります。 整数列の スコア を、隣接する等しい値の個数として定める。長さ \\(N+1\\) の列 \\(S=(S _ 0,S _ 1,\\ldots,S _ N)\\) の部分列のうち \\(S _ 0,S _ N\\) を含むものにおけるスコアの最大値を求めよ。 \\(S _ 0,S _ N\\) を取り除いてスコアが大きくなることはないので、すべての部分列をわたる最大値としても答えは変わりません。 スコアが \\(k\\) である \\(S\\) の部分列について、隣接する等しい値の組を \\((S _ {l _ i},S _ {r _ i}) _ {i=1,2,\\ldots,k}\\) とすると、\\(k\\) 個の右半開区間 \\(\\lbrack l _ i,r _ i\\rparen\\) は互いに共通部分を持ちません。\n逆に、共通部分を持たないように \\(S _ l=S _ r\\) なる右半開区間 \\(\\lbrack l,r\\rparen\\) を \\(k\\) 個選べるなら、それらの端点からなる部分列を取ることでスコアを \\(k\\) にすることができます。 よって、さらに次のような問題に言い換えることができます。 整数列 \\(S\\) に対して、区間の集合 \\(I\\coloneqq\\lbrace\\lbrack l,r\\rparen\\mid S _ l=S _ r\\rbrace\\) を定める。\n\\(I\\) の部分集合であって、どの \\(2\\) つの区間も共通部分をもたないものの大きさの最大値を求めよ。 これは区間スケジューリング問題と呼ばれる問題で、貪欲法によって解くことができます。\nこのままでは \\(I\\) の大きさが \\(\\Theta(N ^ 2)\\) になってしまう場合がありますが、\\(S _ l\\) ごとに一番左側の \\(S _ r\\) をとることで答えを変えないまま \\(O(N)\\) 個の区間に削減することができます（\\(S _ l=S _ m=S _ r\\ (l\\lt m\\lt r)\\) であるような \\(l,m,r\\) について、\\(\\lbrack l,r\\rparen\\) を選ぶことができるなら \\(\\lbrack l,m\\rparen\\) と \\(\\lbrack m,r\\rparen\\) の \\(2\\) つを選んだほうがよいため）。 実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <map>\n#include <ranges>\n\nint main() {\n    using namespace std;\n    unsigned N, K;\n    cin >> N >> K;\n    \n    unsigned ans{};\n\n    // S の値からいつ出現したかを求める連想配列\n    map<unsigned, unsigned> prev;\n    prev[0] = 0;\n    for (unsigned S{}, last{}; const auto &[i, A] : views::istream<unsigned>(cin) | views::enumerate) {\n        (S += A) %= K; // 累積和を求めて\n        // 累積和の値がすでに出現していて、かつ選んだ区間と重なっていなければ\n        if (prev.contains(S) && last <= prev[S]) {\n            ++ans;\n            last = i + 1; // 区間を選ぶ\n        }\n        prev[S] = i + 1; // 番号を更新\n    }\n    \n    cout << ans << endl;\n    return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "74d6b01776d18c99e0feebebf8b7137689505fa57bb4b2a4dd7bd12a08a9168e"
+    }
+  ],
+  "status": "available"
+}

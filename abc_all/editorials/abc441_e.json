@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc441_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc441/editorial/15101",
+      "text": "\\(i=0,1,2,\\ldots,N\\) に対して、\\(S\\) の先頭 \\(i\\) 文字の中にある\nA\nの個数を \\(A _ i\\) 、\nB\nの個数を \\(B _ i\\) とします。\n\\(S\\) の \\(i\\) 文字目から \\(j\\) 文字目までを取って得られる部分文字列が条件を満たすことは、\\(A _ j-A _ {i-1}\\gt B _ j-B _ {i - 1}\\) と言い換えることができます。これは式変形をすることで \\(A _ j-B _ j\\gt A _ {i-1}-B _ {i-1}\\) となります。\n数列 \\(D=(D _ 0,D _ 1,\\ldots,D _ N)\\) を \\(D _ i=A _ i-B _ i\\) で定めると、求める値は \\(D _ i\\lt D _ j\\) かつ \\(0\\le i\\lt j\\le N\\) を満たす整数の \\(2\\) つ組 \\((i,j)\\) の個数です。\nこれは、転倒数を求めるのと同じような要領で \\(O(N\\log N)\\) 時間で求めたり、\\(s _ {i,d}\\coloneqq \\bigl(D _ j=d\\) かつ \\(j\\leq i\\) を満たす \\(j\\) の個数\\(\\bigr)\\) および \\(\\displaystyle S _ i=\\sum _ {d\\lt D _ i}s _ {i,d}\\) の値を管理することで \\(O(N)\\) 時間で求めることができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    string S;\n    cin >> N >> S;\n\n    vector<unsigned> counter(2 * N + 1); // counter[d + N] = これまでの D_j のうち D_j = d を満たすものの個数（d は -N から N の範囲をとるので、N を足して 0 から 2N にしている）\n    unsigned D{N};\n    ++counter[D];\n    unsigned long sum{}; // 現在の D 未満の d に対する counter[d] の総和\n    unsigned long ans{};\n    for (const auto c : S) {\n        // sum と D を更新\n        if (c == 'A')\n            sum += counter[D++];\n        if (c == 'B')\n            sum -= counter[--D];\n        \n        // counter を更新\n        ++counter[D];\n\n        ans += sum;\n    }\n\n    cout << ans << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "249b43006ae82233b0f76afdb46823935c5b9d2bd19a00a7b7dfcdebb0c37889",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc441/abc441_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

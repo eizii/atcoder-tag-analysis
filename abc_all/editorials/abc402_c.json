@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc402_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc402/editorial/12758",
+      "text": "まず初めに問題文通りに\n\\(i=1,2,\\ldots,N\\)\nについてそれぞれ\n\\(i\\)\n日目にすぬけ君が食材\n\\(B_i\\)\n​ を克服した直後、すぬけ君が食べることができるAtCoderレストランの料理の個数を求めることを考えます。ある食材が苦手か苦手でないかを配列で持ち、\n\\(i=1,2,\\ldots ,N\\)\nの順に求めていくとして、各\n\\(i\\)\nについて\n\\(M\\)\n個の料理それぞれについて含まれる食材を全種類見て料理が食べられるか判定するという方法が考えられます。しかし、この方法では最悪計算量は\n\\(\\mathrm{\\Theta }(N(\\sum K_i +M))\\)\nになり、問題の制約下では正解を得ることは難しいです。\nこの解法のどこがボトルネックかを考えてみましょう。毎日全料理見ているのがまず一番のボトルネックです。毎日全料理見るのではなく前日からの差分を考え、その日克服した食材が含まれる料理だけを見れば良いです。なぜならば、\n\\(i\\)\n日目に食材\n\\(B_i\\)\nを克服したとき、食べられなかった料理で食べられるようになるかもしれない料理は食材\n\\(B_i\\)\nが含まれるもののみだからです。\n\\(i\\)\n日目時点で食材\n\\(B_i\\)\nが含まれる料理について食材\n\\(B_i\\)\nを克服して食べられるようになるかは、各料理に含まれる苦手な食材の種類数を管理し更新していけば判定できます。\nよって、\n\\(1\\)\n日目から順に苦手な食材を見ていって、各料理に含まれる苦手な食材の種類数を更新していき、\n\\(0\\)\n種類になったら食べられる料理として答えに\n\\(1\\)\n加算するといった方法を用いると求めることができます。具体的にはある食材が苦手でなくなったとき、その食材を含むすべての料理について苦手な食材の種類数を\n\\(1\\)\n減らす操作をすれば良いです。また、ある食材を含む料理の一覧は二次元配列などを用いて管理することができます。\nある料理に使われている食材の種類数の総和と各食材についてそれが含まれる料理の個数の総和は等しいです。また、この値は\n\\(\\sum K_i\\)\nです。つまり、時間計算量\n\\(\\mathrm{O}(N+\\sum K_i)\\)\nで更新していくことができます。\n全体で計算量は\n\\(\\mathrm{O}(N+M+\\sum K_i)\\)\nになります。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<vector<int>> a(m);\n    vector<vector<int>> idx(n);\n    vector<int> cnt(m);\n    for (int i = 0; i < m; ++i) {\n        int k;\n        cin >> k;\n        cnt[i] = k;\n        a[i].resize(k);\n        for (auto &e : a[i]) {\n            cin >> e, e--;\n            idx[e].push_back(i);\n        }\n    }\n    int ans = 0;\n    for (int i = 0; i < n; ++i) {\n        int b;\n        cin >> b;\n        b--;\n        for (auto id : idx[b]) {\n            cnt[id]--;\n            if (cnt[id] == 0)\n                ans++;\n        }\n        cout << ans << endl;\n    }\n}"
+      ],
+      "text_sha256": "d3c0922d30f4ed14eb3dcce5971b4fb1e43f88b8a7964f05515e734ae64367d1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc402/abc402_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc402/editorial/12804",
+      "text": "六月さんがXに投稿されていた解説が、公式解説と異なる解法で有益と感じたので、六月さんに許可をいただいてこちらにも投稿します。\nhttps://x.com/june19312/status/1914148087905587212",
+      "codes": [],
+      "text_sha256": "205e805c71a2f3b87fd03f2bfee314bc1605c7fd9ef717b860a0d207cd15390a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc402/abc402_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc215_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc215/editorial/2480",
+      "text": "この問題には様々な解法があります。今回はいくつかの解法を説明していくので、コンテスト中に正解できた方も是非他の解法を検討してみてください。\nなお、この解説での実装例は全て C++ で示します。予めご了承ください。\n基本的な解法\n対数を利用した解法と数値誤差\n整数の bit表現 を利用した解法\n1. 基本的な解法\nまず、\n\\(k\\)\nを大きくしていくごとに、明らかに\n\\(2^k\\)\nは大きくなっていきます。このことから、ある整数\n\\(k\\)\nまでは\n\\(2^k \\le N\\)\nが成立し、その値より大きな\n\\(k\\)\nについては\n\\(2^k>N\\)\nとなることが分かります。\nこれより、\n\\(k\\)\nの値を\n\\(1\\)\nずつ大きくしていくループを書くことによって、答えを求めることができます。\nなお、\n\\(k\\)\nを大きくしていくループの中で\n\\(2^k\\)\nを要領よく求めていくことで、計算量を抑えることができます。\n2. 対数を利用した解法と数値誤差\n\\(2^k \\le N\\)\nを対数を使って変形すると、\n\\(k \\le \\log_2(N)\\)\nと変形できます。よって、\n\\(\\log_2(N)\\)\nの小数点以下を切り捨てて整数として出力しても正解できるはずです。\nしかし、以下のコードは WA となってしまいます。\n不正解となる原因は精度不足です。具体的には以下のケース(\n\\(N=2^{59}-1\\)\n)で精度不足を起こします。(WA: 59, AC: 58)\n誤差を回避する方法として、\n\\(64\\)\nbit 浮動小数点型よりも精度の高い型を用いるという方法があります。先ほどのコードを以下のように修正すると、この問題に正解することができます。\nしかし、精度が高い型であるからといって、万能であるわけではありません。もしこの問題の制約が\n\\(N \\le 2 \\times 10^{18}\\)\nであれば、以下のテストケースについて修正した後のコードでも不正解となります。(WA:60, AC:59)\n競技プログラミングにおいて、整数性のある問題に対して整数性を外して実数で処理することには危険が伴います。整数性のある問題はなるだけ整数型で処理することをおすすめしますが、どうしても実数型が必要な際は注意して取り扱いましょう。\n3. 整数の bit表現 を利用した解法\n整数を\n\\(2\\)\n進数で表現することを考えましょう。\n例えば\n\\(6=110_{(2)}, 15=1111_{(2)}\\)\nというように変換できます。\nここで、\n\\(2^{k} \\le N < 2^{k+1}\\)\nという不等式は、\n\\(2\\)\n進数で以下のように変換できます。\n\\(1 \\underbrace{ 00 \\dots 0 }_{ k }\\ _{(2)} \\le N < 1 \\underbrace{ 00 \\dots 0 }_{ k+1 }\\ _{(2)}\\)\nこれを利用して、以下のような解法を導くことができます。\n\\(N\\)\nを(先頭に\n\\(0\\)\nをつけずに)\n\\(2\\)\n進数に変換したときに、\n\\(N\\)\nが\n\\(k\\)\n桁となる(すなわち、\n\\(N\\)\nを\n\\(2\\)\n進数に変換したときに最も上の位にくる\n\\(1\\)\nが下から数えて\n\\(k\\)\n桁目に存在する)なら、答えは\n\\(k-1\\)\nである。\nこの解法の実装の方針は色々と存在しますが、 bit 演算を利用すると楽に実装できます。(ただし、一番下の位を\n\\(0\\)\n桁目と取り扱うことに注意してください。)",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long n;\n  cin >> n;\n  long long val=1;\n  for(long long i=0;i<=60;i++){\n    if(val>n){\n      cout << i-1 << '\\n';\n      break;\n    }\n    val*=2;\n  }\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long n;\n  cin >> n;\n  cout << floor(log2(n)) << '\\n';\n  return 0;\n}",
+        "576460752303423487",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long n;\n  cin >> n;\n  cout << floor(log2((long double)n)) << '\\n';\n  return 0;\n}",
+        "1152921504606846975",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long n;\n  cin >> n;\n  for(int i=60;i>=0;i--){\n    if(n&(1ll<<i)){cout << i << '\\n';break;}\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "59f3dc2468bac26e43def58577fe3985ea2ac5171042519f08c1f39367ffc815",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc215/abc215_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc215/editorial/2528",
+      "text": "公式解説\nの解法3「整数の bit表現 を利用した解法」に関する補足情報です.\nよく用いられるbit演算については, 言語ごとの標準ライブラリで提供されていることがあります.  例えばJavaでは,\njava.lang.Long\nクラスのライブラリ関数として\nnumberOfLeadingZeros\nという関数(上位の連続する0のbitを数える)が存在し, これを用いて以下のようなプログラムを書くことが可能です\n(以下のコードでACを得られることは,\nこの提出\nから確認できます).\nこのように, 言語ごとに提供されているライブラリを知っておくことで楽に回答できる問題が出題されることも(特に低~中難易度帯では)少なくありません.\nたまには自分の使っている言語にどのような標準ライブラリが存在するか調べてみてはいかがでしょうか.",
+      "codes": [
+        "import java.util.*;\n\npublic class Main {    \n    public static void main(String[] args) throws Exception{\n        final Scanner sc = new Scanner(System.in);        \n        final long N = sc.nextLong();\n        System.out.println(63 - Long.numberOfLeadingZeros(N));        \n    }\n}"
+      ],
+      "text_sha256": "dd3f3aeead091265a708cd8ca88a584a2d6c66374a9cd1222768b82d23e5d6fb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc215/abc215_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

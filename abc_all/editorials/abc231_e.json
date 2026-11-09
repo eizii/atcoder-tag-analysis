@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc231_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc231/editorial/3062",
+      "text": "サンプル\n\\(1\\)\nの\n\\(X=87\\)\n、\n\\(A=(1,10,100)\\)\nを例として考えます。\n\\(10\\)\n円以上の硬貨では\n\\(10\\)\n円単位のやりとりしかできないので、\n\\(10\\)\n円未満の端数に関するやり取りは\n\\(1\\)\n円硬貨で行わなければなりません。このときありえるやり取りとしては「支払いに\n\\(1\\)\n円硬貨を\n\\(7\\)\n枚含める」「お釣りとして\n\\(1\\)\n円硬貨を\n\\(3\\)\n枚もらう」のどちらかのみを考慮すれば十分です。\n前者は\n\\(80\\)\n円を\n\\(10\\)\n円以上の硬貨を用いて支払う問題に、後者は\n\\(90\\)\n円を\n\\(10\\)\n円以上の硬貨を用いて支払う問題になります。\nこのように下から順に考えることで、再帰的に問題を解くことができます。\n再帰的に問題を解く過程で登場する金額は\n\\(\\left\\lfloor \\frac{X}{A_i}\\right\\rfloor A_i\\)\n及び\n\\(\\left\\lceil \\frac{X}{A_i}\\right\\rceil A_i\\)\nのみなので、メモ化することで計算量は\n\\(O(N)\\)\nになります。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "9b1af3cf59d47a80dbb1fa1e02f9b060e11376eb1142a9c8bf2172a842492e9d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc231/abc231_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

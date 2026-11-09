@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc422_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc422/editorial/13818",
+      "text": "この問題を解くには、すべてのマスについて次の \\(2\\) つの条件のうち少なくとも \\(1\\) つを満たすか確認すればよいです。 マスが白で塗られている 上下左右で隣り合っているマスのうち \\(2\\) つか \\(4\\) つが黒で塗られている 上の条件のどちらも満たさないマスが \\(1\\) つでもあれば答えは No 、\\(1\\) つも存在しなければ答えは Yes です。 この処理は、 番兵 を用いると比較的簡単に実装することができます。 番兵 (sentinel) とは、グリッドや配列に対して操作を行う際に実際のデータの外側などに配置される特殊なデータのことをいいます。\n番兵は、操作の際に行う条件分岐をシンプルにすることを目的として用いられます。\n例えば、グリッド上に通れるマスと障害物マス（通れないマス）があり、グリッドの外側に出ることができないような場合に「障害物マスへは進まない」「外側のマスへは進まない」の \\(2\\) つの条件分岐を書くかわりに、グリッドの外側に障害物マスを設置することで前者の条件分岐だけを用いて処理を行うことができるようになります。 今回の問題では、与えられたマス目の周囲に白で塗られたマスを配置することで、上下左右に隣接するマスが存在するかどうかの分岐を書かなくてよくなります。 実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int H, W;\n    cin >> H >> W;\n    \n    vector field(H + 2, string(W + 2, '.')); // すべて白マスの、上下左右に 1 列ずつ広げたマス目を用意する\n\n    for (int i = 1; i <= H; ++i) {\n        string S;\n        cin >> S;\n        field[i] = '.' + S + '.'; // 入力の左右に白マスを追加しておく\n    }\n\n    for (int i = 1; i <= H; ++i) {\n        for (int j = 1; j <= W; ++j) { // すべてのマスについて\n            int black_count = 0; // 周囲の黒マスの個数\n            if (field[i - 1][j] == '#')\n                ++black_count;\n            if (field[i][j - 1] == '#')\n                ++black_count;\n            if (field[i][j + 1] == '#')\n                ++black_count;\n            if (field[i + 1][j] == '#')\n                ++black_count;\n\n            if (field[i][j] == '#' && black_count != 2 && black_count != 4) {\n                // 条件を満たさないマスがあったら、No を出力して終了\n                cout << \"No\" << endl;\n                return 0;\n            }\n        }\n    }\n\n    // すべてのマスが条件を満たすので、Yes を出力して終了\n    cout << \"Yes\" << endl;\n    return 0;\n}\n",
+        "H, W = map(int, input().split())\n\n# 上下左右に 1 マスずつ白マスを広げたマス目を用意する\nfield = ['.' * (W + 2)] + ['.' + input() + '.' for i in range(H)] + ['.' * (W + 2)]\n\nfor i in range(1, H + 1):\n    for j in range(1, W + 1):\n        black_count = 0 # 周囲の黒マスの個数\n        if field[i - 1][j] == '#':\n            black_count += 1\n        if field[i][j - 1] == '#':\n            black_count += 1\n        if field[i + 1][j] == '#':\n            black_count += 1\n        if field[i][j + 1] == '#':\n            black_count += 1\n        \n        if field[i][j] == '#' and black_count != 2 and black_count != 4:\n            # 条件を満たさないマスがあったら、No を出力して終了\n            print('No')\n            exit(0)\n\n# すべてのマスが条件を満たすので、Yes を出力して終了\nprint('Yes')\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "baacb95704683a95e1ae6142b93462144157bf5ed1668d7eaf69fc474306a1cc"
+    }
+  ],
+  "status": "available"
+}

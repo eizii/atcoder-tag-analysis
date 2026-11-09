@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc245_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc245/editorial/3652",
+      "text": "入力で与えられたグラフ\n\\(G\\)\nの頂点に対して、つぎのように整数を書き込む操作を可能な限り繰り返し行うことを考えます。最初、どの頂点にも整数は書き込まれていません。\n\\(i\\)\n回目の操作では、「\n\\(G\\)\nの頂点であって、その頂点自身にはまだ整数が書き込まれておらず、その頂点から辺が出ていないあるいはその頂点から直接出ている辺の先の頂点すべてにすでに整数が書き込まれているようなもの」を探し、そのようなものが存在すればそのうちの\n\\(1\\)\nつに\n\\(i\\)\nを書き込む。そのようなものが存在しなければ、\n\\(i+1\\)\n回目以降の操作は行わず、そこで一連の操作を終了する。\nこの操作は高々\n\\(N\\)\n回で終了します。\nこの操作が終了したとき、数字が書き込まれる条件から、数字が書き込まれている頂点からは辺が出ていないか、自身より小さい数字が書き込まれた頂点にしか辺が生えていません。このとき、どの辺を選んで移動したとしてもその先はやはり数字の書き込まれた頂点であり、その数字は元の数字より真に小さいです。このため、 高橋君は\n\\(i\\)\nが書き込まれた頂点から高々\n\\(i-1\\)\n回しか移動できないことが分かります。そのため、高橋君はこのような頂点から高々有限回しか行動を繰り返すことができません。\n逆に、それ以外の頂点について、何も書き込まれていない頂点\n\\(v\\)\nからは、別の何も書き込まれていない頂点のうちの少なくとも\n\\(1\\)\nつ以上に辺が伸びています。複数ある場合はそのうちの\n\\(1\\)\nつを選び、\n\\(v\\)\nに対して先の頂点を\n\\(f(v)\\)\nで定めます。\n\\(f\\)\nの\n\\(k\\)\n回合成を\n\\(f^k\\)\nで表すと、\n\\(v=f^0(v)\\)\n,\n\\(f(v)\\)\n,\n\\(f(f(v))\\)\n,\n\\(\\ldots\\)\n,\n\\(f^k(v)\\)\n,\n\\(\\ldots\\)\nはそれぞれ何も書き込まれていない頂点 であり、各\n\\(k\\geq 0\\)\nについて\n\\(f^k(v)\\)\nから\n\\(f^{k+1}(v)\\)\nへは辺が伸びています。よって、高橋君は頂点\n\\(v\\)\nから始めていくらでも移動を繰り返すことができます。\nよって、求めたいものは上記の操作の結果として数字が書き込まれなかった 頂点の数です。\nこれを愚直に数えると、\n\\(O(NM)\\)\nかかってしまい、間に合いません。ここで、一度数字を書き込む条件をみたした頂点は、その頂点に数字が書き足されるまで、その後条件をみたさなくなることはないことに注目します。そこで、数字を書き込む条件をみたした頂点をキューに突っ込んでいき、可能な限りそのキューから頂点を取り出して整数を書き込むことを繰り返すことを考えます。\nまず、\n\\(1\\)\n回目の操作の前で条件をみたしている頂点はその頂点から辺の出ていない頂点であり、これは各頂点の出次数を確認することで\n\\(O(N)\\)\n（辺の情報を受け取るときに記録する所も含めれば\n\\(O(N+M)\\)\n）で求めることができます。\nさらに\n\\(i\\)\n回目の操作の前では条件をみたさず、\n\\(i+1\\)\n回目の操作の前で初めて条件をみたす頂点として考えられるものは\n\\(i\\)\nが書き込まれた頂点へ辺が伸びている頂点に限られます。\nよって、\n\\(i+1\\)\n回目の操作の前にそのようなものについて確認を行えばよいです。このとき各頂点が出次数の条件をみたすかの確認は\n\\(N\\)\n回の操作の中で合計高々\n\\(M\\)\n回しか行われないため、全部で\n\\(O(M)\\)\nで行うことができます。\nよって、\n\\(O(N+M)\\)\nでこの問題を解くことができました。\nまた、上記のような方針で実装する場合、辺の向きを逆方向に管理した方が楽に実装することができます。\nc++による実装例 ;",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint n, m;\n\tcin >> n >> m;\n\n\tvector<vector<int> > e(n);\n\tvector<int> out(n, 0);\n\tint x, y, sz, cur;\n\tfor (int i = 0; i < m; i++) {\n\t\tcin >> x >> y;\n\t\te[y - 1].push_back(x - 1);\n\t\tout[x - 1]++;\n\t}\n\n\tqueue<int>que;\n\tint ans = n;\n\n\tfor (int i = 0; i < n; i++)if (out[i] == 0)que.push(i);\n\twhile (!que.empty()) {\n\t\tans--;\n\t\tcur = que.front();\n\t\tque.pop();\n\t\tsz = e[cur].size();\n\t\tfor (int i = 0; i < sz; i++) {\n\t\t\tout[e[cur][i]]--;\n\t\t\tif (out[e[cur][i]] == 0)que.push(e[cur][i]);\n\t\t}\n\t}\n\tcout << ans << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "dc844d69a23d31ea25d2df90d68776282849f082aa4c77f7f2f042c82493c589",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc245/abc245_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc245/editorial/3667",
+      "text": "公式解説とほとんど同一ですが、個人的に分かりやすかった説明を行います。\nグラフ\n\\(G\\)\nにおいて頂点\n\\(v\\)\nの出次数が\n\\(0\\)\nだったとします。すると、\n\\(v\\)\n及び\n\\(v\\)\nに接続する辺は\n\\(G\\)\nから削除してしまって問題ありません。なぜなら、\n\\(v\\)\nに到達した時点でそれ以上行き先が無く、「いくらでも移動を繰り返せるか」を考える際に\n\\(v\\)\nに到達する意味がないからです。これにより新たに出次数が\n\\(0\\)\nになる頂点が存在すれば、それもまた同じ議論により削除できます。\nそれ以上削除ができなくなった時、残る全ての頂点は出次数が\n\\(1\\)\n以上です。どの頂点から始めても、出る辺を選んで進むことでいくらでも移動を繰り返すことができます。したがって、残った頂点の個数が答えになります。\n削除の部分は Queue などを用いて実装することができ、時間計算量は\n\\(\\Theta(N + M)\\)\nです。",
+      "codes": [],
+      "text_sha256": "7da5f45c3b35c7ec1a6f52ada225a831f302f7b43b7fa47a0d4185dbb96db2c7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc245/abc245_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc245/editorial/3664",
+      "text": "この問題は「頂点数が2以上の強連結成分に到達できる頂点はいくつあるか？」と読み替えることができます。したがって、強連結成分分解をしたあとDPすることで解くことができます。\nC++の場合、ACL(Atcoder Library)を使うことで強連結成分分解を容易に行うことができます。\n実装例(C++ with ACL)",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/all>\nusing namespace std;\nusing namespace atcoder;\nint main(){\n\tint n,m;\n\tcin >> n >> m;\n\tscc_graph g(n);\n\tvector<vector<int>>G(n);\n\tfor(int i=0;i<m;i++){\n\t\tint u,v;\n\t\tcin >> u >> v;\n\t\tu--,v--;\n\t\tg.add_edge(u,v);\n\t\tG[u].push_back(v);\n\t}\n\t\n\tvector<vector<int>> scc=g.scc();\n\tint k=scc.size();\n\tvector<int> idx(n);\n\tfor(int i=0;i<k;i++)for(auto v:scc[i])idx[v]=i;\n\n\tvector<int>dp(k);\n\tint ans=0;\n\tfor(int i=k-1;i>=0;i--){\n\t\tif(scc[i].size()==1){\n\t\t\tfor(auto v:G[scc[i][0]])dp[i]|=dp[idx[v]];\n\t\t}else{\n\t\t\tdp[i]=1;\n\t\t}\n\t\tif(dp[i])ans+=scc[i].size();\n\t}\n\t\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "c4c0eb38ed8bbf561a14b47fca5d6b148a123140e2a7720d9544f4294200bf4c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc245/abc245_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

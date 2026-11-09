@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc264_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4578",
+      "text": "与えられた\n\\(15 \\times 15\\)\nのグリッドの情報をソースコード中に埋め込む方法によっても正解することができますが、少し大変です。\nグリッドが中央のマス（\n\\(8\\)\n行目\n\\(8\\)\n列目のマス）を中心として対称で規則的な形をしていることを利用すると、以下の通り、より簡潔に解くことができます。\n与えられたグリッドでは、中央のマスからの”距離”が奇数のマスは黒、偶数のマスは白になっています。\n具体的には、\n\\(R\\)\n行目\n\\(C\\)\n列目のマスが黒色であるのは、そのマスと中央のマスからの\nチェビシェフ距離（チェス盤距離）\n\\[\\max\\lbrace |R-8|, |C-8|\\rbrace \\tag{1}\\]\nが奇数のときかつそのときに限ります（ここで、\n\\(|x|\\)\nは\n\\(x\\)\nの絶対値を表します）。\nよって、上記 (1) を計算してその偶奇を判定することで、下記の実装例（ C++ ）のように、この問題を簡潔に解くことができます。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(void)\n{\n  int r, c;\n  cin >> r >> c;\n  \n  if(max(abs(r-8), abs(c-8)) % 2) cout << \"black\" << endl;\n  else cout << \"white\" << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "51d8f9fa4b195731af815a809891f0e12984fe80bc7657fb835c04199b33bad4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc264/abc264_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4589",
+      "text": "単純な解法を思いつかず、どうしようもなくなった場合に、答えを埋め込むという対処法があります。\nこの問題の場合、少し時間がかかってしまいますが、実装例のように手でグリッドを描いてコードに埋め込んだ上でこの問題を解くことができます。\nこの他に埋め込みが有用な例として、解法に必要な値がそこまで多くはないものの計算に時間がかかる場合に手元でその値を予め計算しておきコードにその値を埋め込んで利用するという例が挙げられます。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nvector<string> grid={\n  \"###############\",\n  \"#.............#\",\n  \"#.###########.#\",\n  \"#.#.........#.#\",\n  \"#.#.#######.#.#\",\n  \"#.#.#.....#.#.#\",\n  \"#.#.#.###.#.#.#\",\n  \"#.#.#.#.#.#.#.#\",\n  \"#.#.#.###.#.#.#\",\n  \"#.#.#.....#.#.#\",\n  \"#.#.#######.#.#\",\n  \"#.#.........#.#\",\n  \"#.###########.#\",\n  \"#.............#\",\n  \"###############\"\n};\n\nint main(){\n  int r,c;\n  cin >> r >> c;\n  if(grid[r-1][c-1]=='#'){cout << \"black\\n\";}\n  else{cout << \"white\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "0e844e0cf6d6ea538e6bbeed643eb0d9a8a4205eb6972821ad9f714b97031605",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc264/abc264_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

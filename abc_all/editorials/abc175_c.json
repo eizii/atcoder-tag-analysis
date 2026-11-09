@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc175_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc175/editorial/52",
+      "text": "まず、\n\\(X < 0\\)\nの場合は全ての動きの方向を反転すれば\n\\(X := -X\\)\nと置き換えて解いた場合と対応するので、一般性を失わずに\n\\(X \\geq 0\\)\nと仮定します。\n最小化を考える前に、\n\\(K\\)\n回の移動後にいる座標\n\\(Y\\)\nとしてどのようなものがありうるかを考えてみましょう。\nまず、各移動で座標を\n\\(D\\)\nで割った余りは変わらないので、\n\\(Y = X \\pmod D\\)\nが必要です。また、\n\\(K\\)\n回の移動でたどり着ける必要があるので、\n\\(\\frac{|Y-X|}{D}  \\leq K\\)\nも満たす必要があります。\nさらに、ちょうど\n\\(K\\)\n回という条件から、\n\\(\\frac{|Y-X|}{D} = K \\pmod 2\\)\nという条件も満たす必要があります。これは、座標を\n\\(x = p * D + r (p, r \\in \\mathbb{Z}, 0 \\leq r < D)\\)\nと表したとき移動の度に\n\\(p\\)\nの偶奇が変化することから従います。\nまた、これらの条件を全て満たすとき、そのような\n\\(Y\\)\nで移動を終えることができます。これは例えば、\n\\(X\\)\nから\n\\(Y\\)\nへ移動を繰り返した後、余った回数 (これは偶数となる) 回数だけ\n\\(-D\\)\nした座標との間を行き来すれば良いです。\n以上から、まず\n\\(\\lfloor \\frac{X}{D} \\rfloor\\)\n回だけ\n\\(-D\\)\nに移動し\n\\(K := K - \\lfloor \\frac{X}{D} \\rfloor\\)\nとしておきます。(この途中で\n\\(K\\)\n回使い切ればその座標が答えです) その座標を\n\\(A\\)\nとしたとき、\n\\(K\\)\nが偶数であれば\n\\(A\\)\nを、奇数であれば\n\\(|A-D|\\)\nを出力すれば良いです。(これは、行き来する部分を\n\\(X=0\\)\n付近で行うことにすると、余りの性質から偶奇に応じた最適な座標に居続けられることを利用しています)\n時間計算量は\n\\(\\mathrm{O}(1)\\)\nです。",
+      "codes": [
+        "#include <iostream>\n#include <algorithm>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n    ll X, K, D;\n    cin >> X >> K >> D;\n    X = abs(X);\n\n    ll straight = min(K, X / D);\n    K -= straight;\n    X -= straight * D;\n\n    if (K % 2 == 0) {\n        cout << X << endl;\n    } else {\n        cout << D - X << endl;\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "79e971ad418607bcc90ea276c09f95ddf1fa2ce329799976875e33646162a3d5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc175/abc175_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

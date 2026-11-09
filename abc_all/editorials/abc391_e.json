@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc391_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc391/editorial/12103",
+      "text": "この問題は\n動的計画法 (DP)\nにより解くことができます．\n\\(A\\)\nに対して\n\\(k\\)\n回操作を繰り返した列を\n\\(A^{(k)}=(A_1^{(k)},\\dots,A_{3^{N-k}}^{(k)})\\)\nとします．\n\\(A^{(k)}\\)\nは問題文の操作を愚直に実行することで求めることができます．\n\\(A^{(k)}_i \\; (i=1,\\dots,3^{N-k})\\)\nの値を反転させるために\n\\(A\\)\nで変更する必要のある要素の個数の最小値を\n\\(f(k,i)\\)\nとします．\n\\(f(N,1)\\)\nが求める答えです．\nまず，\n\\(k=0\\)\nについては明らかに\n\\(f(0,i)=1 \\; (i=1,\\dots,3^N)\\)\nです．\n\\(k \\geq 1\\)\nのときを考えます．\n\\(A_i^{(k)}\\)\nは\n\\(A^{(k-1)}_{3i-2},A^{(k-1)}_{3i-1},A^{(k-1)}_{3i}\\)\nの過半数を占める値です．\n\\(A^{(k-1)}_{3i-2},A^{(k-1)}_{3i-1},A^{(k-1)}_{3i}\\)\nの中に\n\\(A_i^{(k)}\\)\nと同じ値のものは\n\\(2\\)\n個か\n\\(3\\)\n個あります．この個数に関して場合分けをします．\n同じ値のものが\n\\(3\\)\n個あるとき：\n\\(A^{(k)}_i\\)\nの値を反転させるためには，\n\\(A^{(k-1)}_{3i-2},A^{(k-1)}_{3i-1},A^{(k-1)}_{3i}\\)\nのうち\n\\(2\\)\nつを反転させる必要があります．よって，\n\\(f(k,i)\\)\nは\n\\(f(k-1,3i-2),f(k-1,3i-1),f(k-1,3i)\\)\nで小さい方から\n\\(2\\)\nつの和です．\n同じ値のものが\n\\(2\\)\n個あるとき：一般性を失わず\n\\(A^{(k)}_i=A^{(k-1)}_{3i-2}=A^{(k-1)}_{3i-1}\\)\nとします．このとき，\n\\(A^{(k-1)}_{3i}\\)\nを反転させる必要はなく，\n\\(A^{(k-1)}_{3i-2},A^{(k-1)}_{3i-1}\\)\nの一方を反転させればよいです．\n\\(f(k-1,3i-2),f(k-1,3i-1)\\)\nの小さい方を反転させればよいので，\n\\(f(k,i)=\\min\\{f(k-1,3i-2),f(k-1,3i-1)\\}\\)\nです．\n以上より，\n\\(k\\)\nが小さい方から順番に求めていくことで，すべての\n\\(f(k,i)\\)\nを求めることができます．時間計算量は\n\\(O(3^N)\\)\nです．\n実装は，再帰関数を用いるのが簡便です．\n実装例 (Python)",
+      "codes": [],
+      "text_sha256": "52d9b7ed8dff17b3b484a760d8296b948bb3e07f318f7f937d8961c21aa3af97",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc391/abc391_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc391/editorial/12106",
+      "text": "\\(\\mathrm{DP}[n][L][x]=A_L A_{L+1}\\ldots A_{L+3^n} \\)\nに対して操作をした結果を\n\\( x \\)\nにするために必要な変更箇所の最小値\nとすると、\n\\(\\mathrm{DP}[n][L][x]=\\begin{cases}\n0 &  n=0 かつ x=A_L\\\\\n1 &  n=0 かつ x\\neq A_L\\\\\nDP[n-1][L][x], DP[n-1][L+3^{n-1}][x], DP[n-1][L+2\\times 3^{n-1}][x] のうち小さい2つの和 & \\text{otherwise}\n\\end{cases}\\)\nとなり、メモ化再帰などにより解くことができます。\nなお、各\n\\(n,L\\)\nについて、\n\\(DP[n][L][0],DP[n][L][1]\\)\nは一方が 0 で他方が非0 になります。このため、DP[n][L] の表し方として、ここで述べた (0にする最小値, 1にする最小値) 以外にも、(値が0なのは0と1のどちらか, 他方の値) という持ち方も考えられ、\n公式解説\nはこちらによるものです。",
+      "codes": [
+        "N=int(input())\nS=input()\n\ndef dfs(n,l):\n  if n==0:\n    return (0,1) if S[l]==\"0\" else (1,0)\n  zero,one=zip(*[dfs(n-1,l+k*3**(n-1)) for k in range(3)])\n  return (sum(zero)-max(zero),sum(one)-max(one))\n\nprint(max(dfs(N,0)))"
+      ],
+      "text_sha256": "4aac60b8096ec1cef624540898e74eb107d7e64dda7a86ced60a292f4d69cfb2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc391/abc391_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

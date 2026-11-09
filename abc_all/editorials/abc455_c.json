@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc455_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc455/editorial/19454",
+      "text": "各操作において、\n\\(A_i = x\\)\nである各\n\\(i\\)\nについて\n\\(A_i\\)\nの値を\n\\(0\\)\nに置き換える代わりに\n\\(A_i\\)\nを数列から取り除くことにしても本問題の答えは変わりません。\nしたがって、数列\n\\(A\\)\nに含まれる\n\\(x\\)\nの個数を\n\\(c_x\\)\nとすると、\n\\(xc_x\\)\nの値が大きい\n\\(K\\)\n個の整数\n\\(x\\)\nに対して操作を行うのが最適であることがわかります。\n\\(c_x\\)\nの値が正である各\n\\(x\\)\nについて\n\\(c_x\\)\nの値が求められればよいですが、\n\\(x\\)\nの取り得る範囲は\n\\(1\\)\n以上\n\\(10^9\\)\n以下の整数と範囲が広いため、単に配列で管理するのではなく連想配列を用いる、あるいは\n\\(A\\)\nのソート列のランレングス圧縮を計算するなどの工夫が必要です。\n時間計算量は\n\\(O(N \\log N)\\)\nなどになります。入出力例\n\\(2\\)\nのように\n\\(c_x\\)\nの値が正である\n\\(x\\)\nの個数が\n\\(K\\)\nより少ない場合もあることに注意してください。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n\tll n, k;\n\tcin >> n >> k;\n\tmap<ll, ll> mp;\n\tfor (int i = 0; i < n; i++) {\n\t\tll a;\n\t\tcin >> a;\n\t\tmp[a]++;\n\t}\n\tvector<ll> v;\n\tfor (auto [x, c_x] : mp) v.push_back(x * c_x);\n\tsort(v.begin(), v.end());\n\tfor (int i = 0; i < k; i++) if (!v.empty()) v.pop_back();\n\tll ans = reduce(v.begin(), v.end());\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "0b26faab04571a2c00cdb01db5db5dcd8b2bee2c426951bf4e4e468791104520",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc455/abc455_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

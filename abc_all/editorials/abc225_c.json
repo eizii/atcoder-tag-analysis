@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc225_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc225/editorial/2845",
+      "text": "実際に紙に書き出してみると分かりますが、\n\\(A\\)\nの要素は互いに異なる、すなわち\n\\((i,j) \\neq (k,l)\\)\nならば\n\\(A_{i,j} \\neq A_{k,l}\\)\nが満たされます。\n故に\n\\(A\\)\nのある要素が与えられたとき、それが何行目何列目の要素なのかは一意に定まります。具体的にはその値を\n\\(x\\)\nとした場合、その行数は\n\\(\\frac{x-1}{7}\\)\nの小数点以下切り上げ\bとなり、またその列数は\n\\(x-1\\)\nを\n\\(7\\)\nで割ったあまりに\n\\(1\\)\nを足したものになります。\nよって\n\\(B\\)\nの各要素についてそれが本来\n\\(A\\)\nの何行目何列目に存在しているかを求め、それらが矩形領域を成しているかを判定すればよいです。\n実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N,M; cin >> N >> M;\n    vector<vector<int>> B(N,vector<int>(M));\n    for(int i=0; i<N; i++){\n        for(int j=0; j<M; j++) cin >> B[i][j];\n    }\n    vector<vector<int>> x(N,vector<int>(M)),y(N,vector<int>(M));\n    for(int i=0; i<N; i++){\n        for(int j=0; j<M; j++){\n            x[i][j] = (B[i][j]+6)/7;\n            y[i][j] = (B[i][j]-1)%7+1;\n        }\n    }\n    string ans = \"Yes\";\n    for(int i=0; i<N; i++){\n        for(int j=0; j<M; j++){\n            if(0 < i && x[i][j] != x[i-1][j]+1) ans = \"No\";\n            if(0 < j && y[i][j] != y[i][j-1]+1) ans = \"No\";\n            if(0 < j && x[i][j] != x[i][j-1]) ans = \"No\";\n            if(0 < i && y[i][j] != y[i-1][j]) ans = \"No\";\n        }\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "b6d02677984448876a13eebf4677fb2d393a4c08ce5580835546c37e524364f4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc225/abc225_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

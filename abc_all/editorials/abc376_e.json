@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc376_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc376/editorial/11187",
+      "text": "簡単のため、任意の\n\\(i\\)\n\\((1 \\leq i \\leq N-1)\\)\nに対して\n\\(A_i \\leq A_{i+1}\\)\nが成り立つことを仮定します。(そうでない場合は、\n\\(A, B\\)\nの列を適切にソートすることで答えが変わらないまま条件を達成できます。)\n\\(S\\)\nに含まれる最大の要素を\n\\(r\\)\n\\((K \\leq r)\\)\nと置きます。この時、\n\\(\\lbrace 1, 2, \\dots, r-1 \\rbrace\\)\nから要素を\n\\(K-1\\)\n個選んで\n\\(S\\)\nに加えることになりますが、上記の条件よりどれを選んでも\n\\(\\max_{i \\in S} A_i\\)\nの値は\n\\(A_r\\)\nとなるので\n\\(A_i\\)\nは式の値に影響が無くなり、\n\\(\\sum_{i \\in S} B_i\\)\nを最小化することだけ考えればよいです。よってこの場合、式の値は次のようになります。\n\\[A_r \\times \\left(B_r + (B_1, B_2, \\dots, B_{r-1}\\ のうち小さい方から\\ K-1\\ 個の和)\\right)\\]\nよって、\n\\(r\\)\nを決め打ちして解くことを考えると、\n\\(B_1, B_2, \\dots, B_{r-1}\\)\nのうち小さい方から\n\\(K-1\\)\n個の和\nが\n\\(r=K, K+1, \\dots, N\\)\nにおいて全て計算できればこの問題が解けることが分かりました。\nこの値は優先度付きキューを用いることで全て計算することが出来ます。多重集合\n\\(Q_n\\)\nを次のように定義します。\n\\(B_1, B_2, \\dots, B_n\\)\nのうち小さい方から\n\\(\\min(K-1, n)\\)\n個の要素が入った多重集合\nこの時、\n\\(Q_1, Q_2, \\dots, Q_N\\)\nは次のように差分更新によって求めることが出来ます。(ここで\n\\(\\lbrace \\lbrace \\rbrace \\rbrace\\)\nは多重集合を意味する記号です。)\n\\(Q_1 = \\lbrace \\lbrace B_1 \\rbrace \\rbrace\\)\n\\(2 \\le n \\leq K-1\\)\nの時、\n\\(Q_n = Q_{n-1} + \\lbrace\\lbrace B_n \\rbrace\\rbrace\\)\nである。\n\\(K \\leq n \\leq N\\)\nの時、\n\\(Q_n\\)\nは\n\\(Q_{n-1} + \\lbrace \\lbrace B_{n-1} \\rbrace \\rbrace\\)\nから最大値を取り除いた集合である。\n\\(Q_n\\)\nの管理に必要な操作は「要素の push」「最大値の pop」なので、\n\\(Q_n\\)\nを優先度付きキューで管理すればこれらの処理を高速に行うことが出来ます。\nまた、答えの計算に必要なものは\n\\(Q_{K-1}, Q_K, \\dots, Q_N\\)\nそれぞれの要素の総和です。これらは\n\\(Q_n\\)\nを計算する際に push, pop した要素の値の和も別途管理することで容易に計算できます。\n以上の内容を適切に実装することでこの問題を解くことができます。計算量は\n\\(\\mathrm{O}(N \\log N)\\)\nで十分高速です。\n実装例(Python)",
+      "codes": [
+        "import heapq\n\nT = int(input())\nfor t in range(T):\n    N, K = map(int, input().split())\n    A = list(map(int, input().split()))\n    B = list(map(int, input().split()))\n    C = sorted([(a, b) for a, b in zip(A, B)])\n    ans = 10**18\n    Q = []\n    bsum = 0\n    for i in range(N):\n        a, b = C[i]\n        if len(Q) == K - 1:\n            ans = min(ans, a * (bsum + b))\n        heapq.heappush(Q, -b)\n        bsum += b\n        if len(Q) > K - 1:\n            bsum -= -heapq.heappop(Q)\n    print(ans)"
+      ],
+      "text_sha256": "133ce4b8c61e1b2d8ba4f13e75642d69d74e4b721309c0e13fe95735beb55222",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc376/abc376_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

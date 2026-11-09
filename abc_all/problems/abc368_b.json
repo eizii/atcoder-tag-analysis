@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc368_b",
+  "title": "Decrease 2 max elements",
+  "contests": [
+    {
+      "contest_id": "abc368",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 56,
+  "raw_difficulty": -384,
+  "contest_id": "abc368",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc368/tasks/abc368_b",
+  "statement": "配点 : 200 点 問題文 長さ N の正整数列 A = (A_1, A_2, \\dots ,A_N) が与えられます。高橋くんは、以下の操作を A に含まれる正の要素の個数が 1 つ以下になるまで繰り返します。 A を要素の降順に並び替える。それから、 A_1, A_2 を 1 減らす。 高橋くんが操作をする回数を求めてください。 制約 2 \\leq N \\leq 100 1 \\leq A_i \\leq 100 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\cdots A_N 出力 答えを出力せよ。 入力例 1 4\n1 2 3 3 出力例 1 4 操作は以下のように進みます。 1 回目の操作で A = (2, 2, 2, 1) となる。 2 回目の操作で A = (1, 1, 2, 1) となる。 3 回目の操作で A = (1, 0, 1, 1) となる。 4 回目の操作で A = (0, 0, 1, 0) となる。 A に含まれる正の要素の個数が 1 つ以下になったので、ここで操作を終了する。 入力例 2 3\n1 1 100 出力例 2 2",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の正整数列 A = (A_1, A_2, \\dots ,A_N) が与えられます。高橋くんは、以下の操作を A に含まれる正の要素の個数が 1 つ以下になるまで繰り返します。 A を要素の降順に並び替える。それから、 A_1, A_2 を 1 減らす。 高橋くんが操作をする回数を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 100 1 \\leq A_i \\leq 100 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\cdots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\n1 2 3 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 操作は以下のように進みます。 1 回目の操作で A = (2, 2, 2, 1) となる。 2 回目の操作で A = (1, 1, 2, 1) となる。 3 回目の操作で A = (1, 0, 1, 1) となる。 4 回目の操作で A = (0, 0, 1, 0) となる。 A に含まれる正の要素の個数が 1 つ以下になったので、ここで操作を終了する。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\n1 1 100"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 2"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc368/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:49.699760+00:00",
+  "statement_sha256": "0bf32c8aad66068e8d1992643a4f7a88fd64d2fcc68367a8e08ce5e5182197cf",
+  "editorials": []
+}

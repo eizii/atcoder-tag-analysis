@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc235_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc235/editorial/3248",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\n次のような処理を行うことで問題を解くことができます\n入力の\n\\(a,b,c\\)\nを文字として受け取る\nそれらの文字を要求された順序で連結して文字列を作る\n文字列を数値に変換し、合計を求める\n実装例(C++)\n実装例(Python)\nなお、入力を整数\n\\(N\\)\nとして受け取った場合でも、\n\\(N\\%10\\)\n,\n\\(N/10\\%10\\)\nなどの演算により、各桁の数字を得ることができます。（ここで\n\\(\\%\\)\nは剰余演算を表します）",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n\tchar a, b, c;\n\tcin >> a >> b >> c;\n\tstring abc = string({a, b, c});\n\tstring bca = string({b, c, a});\n\tstring cab = string({c, a, b});\n\tint ans = stoi(abc) + stoi(bca) + stoi(cab);\n\tcout << ans << endl;\n}",
+        "a, b, c = input()\nabc = a + b + c\nbca = b + c + a\ncab = c + a + b\nans = int(abc) + int(bca) + int(cab)\nprint(ans)"
+      ],
+      "text_sha256": "7625d1d8f28868012dfe839ceda639f92209dc42b88a8a8f8659dfc5ce98d898",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc235/abc235_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc235/editorial/3257",
+      "text": "以下のような方針でACすることもできます。\n\\(abc\\)\nの桁和である\n\\(a+b+c\\)\nを求め、これを\n\\(111\\)\n倍した値を出力する。\nこの解法が正当である理由は以下のように説明されます。\n\\(abc=100a+10b+c\\)\nとする。\n\\(abc+bca+cab\\)\n\\(=(100a+10b+c)+(100b+10c+a)+(100c+10a+b)\\)\n\\(=111(a+b+c)\\)\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  int tg=0;\n  tg+=(s[0]-'0');\n  tg+=(s[1]-'0');\n  tg+=(s[2]-'0');\n  cout << 111*tg << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "950a162e751970f4d0f844352741fcdc17c2403594110d850c8e3a95c682c599",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc235/abc235_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

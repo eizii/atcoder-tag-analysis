@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc431_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc431/editorial/14536",
+      "text": "すべてのパーツの重さの合計を \\(S\\) とします。\nはじめ、すべてのパーツを体に取り付けて、いくつかのパーツを頭に移動させることを考えます。\nすると、次のような問題が解ければよいことがわかります。\n\\(i\\) 番目の品物は、重さが \\(W _ i\\) で、価値が \\(V_  i=H _ i-B _ i\\) です。\n重さの合計が \\(\\left\\lfloor\\dfrac S2\\right\\rfloor\\) 以下であるように品物をいくつか選んだときの、価値の合計としてありえる最大値を求めてください。\nこれは典型的なナップサック問題で、動的計画法を用いて時間計算量 \\(O(NS)\\) で解くことができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <ranges>\n\nint main() {\n    using namespace std;\n    int N;\n    cin >> N;\n    vector<long> dp{0}, prev;\n    for (int n = 0; n < N; ++n) {\n        int w, h, b;\n        cin >> w >> h >> b;\n        swap(dp, prev);\n        const auto M = size(prev);\n        dp.resize(M + w);\n        for (int i = 0; i < M; ++i) {\n            dp[i] = max(dp[i], prev[i] + h); // 頭に取り付ける\n            dp[i + w] = max(dp[i + w], prev[i] + b); // 体に取り付ける\n        }\n    }\n    cout << ranges::max(dp | views::drop(size(dp) / 2)) << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "b0aac1a777d39a741aa5b0953673bdb54322b8be34132ecdb0f4787cef1adb2f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc431/abc431_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc135_a",
+  "editorials": [
+    {
+      "text": "A: Harmony\nA とB の偶奇が異なるとき、どのような整数K についても|A −K| と|B −K| の偶奇は異なります。し\nたがってこの場合、答えはIMPOSSIBLE です。\n次にA とB の偶奇が等しいときを考えます。このときK =\nA+B\n2\nとおくとK は整数です。また\n|A −K| = | A−B\n2\n|, |B −K| = | B−A\n2\n| となり、絶対値の定義より両者は等しいことが言えます。よってこれが\n答えです。\nC++ でのコード例を示します。\nListing 1\nC++ による実装例\n1 #include <bits/stdc++.h>\n2 using namespace std;\n3 int main() {\n4\nlong long A, B;\n5\ncin >> A >> B;\n6\nif(A % 2 != B % 2) {\n7\ncout << \"IMPOSSIBLE\" << endl;\n8\n} else {\n9\ncout << (A + B) / 2 << endl;\n10\n}\n11\nreturn 0;\n12 }\n",
+      "text_sha256": "c2896d6453998ad3adfa1eba771f8ab3ef532ec4d7049d6d19a7cabd99e5df57",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc135/abc135_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc366_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc366/editorial/10646",
+      "text": "数列\n\\(p\\)\nに使われる\n\\(K\\)\n個の整数を定めたとき、最大値を取るような\n\\(p\\)\nにはどのような性質があるかを考えます。この性質を考える時に、以下の事実が重要になります。\n\\(f_i(f_j(x))\\)\nと\n\\(f_j(f_i(x))\\)\nの大小は\n\\(x\\)\nによらない。また、この大小は\n\\(\\frac{A_i-1}{B_i}\\)\nと\n\\(\\frac{A_j-1}{B_j}\\)\nの大小による。\n\\(\\frac{A_i-1}{B_i}>\\frac{A_j-1}{B_j}\\)\nならば\n\\(f_i(f_j(x))>f_j(f_i(x))\\)\nである。\nこの性質より、\n\\(p\\)\nに用いられている\n\\(K\\)\n個の整数を定めたとき、\n\\(\\frac{A_{p_1}-1}{B_{p_1}} \\geq \\frac{A_{p_2}-1}{B_{p_2}} \\geq \\ldots \\geq \\frac{A_{p_K}-1}{B_{p_K}}\\)\nを満たす\n\\(p\\)\nが\n\\(f_{p_1}(f_{p_2}(\\ldots f_{p_K}(1) \\ldots))\\)\nの最大値を取ります。\n簡単のため、\n\\(\\frac{A_1-1}{B_1} \\geq \\frac{A_2-1}{B_2} \\geq \\ldots \\frac{A_N-1}{B_N}\\)\nを満たすように\n\\((A,B)\\)\nをソートしたとします。\nこの時以下の問題に言い換えることができます。\n\\(1\\)\n以上\n\\(N\\)\n以下の整数からなり、\n\\(p_1 <p_2< \\ldots <p_N\\)\nを満たす\n\\(p\\)\nを取ったとき、\n\\(f_{p_1}(f_{p_2}(\\ldots f_{p_K}(1) \\ldots))\\)\nとしてありえる最大値を求めよ。\nこの問題は以下のような dp で求めることができます。\n\\(dp_{i,j}=( p_K,p_{K-1},\\ldots p_{K-i} \\)\nまで定めて、\n\\(p_{K-i} \\geq j\\)\nを満たすとき、\n\\(f_{p_{K-i}}(\\ldots f_{p_K}(1)\\ldots)\\)\nとしてありえる最大値)\n具体的に、各遷移は\n\\(dp_{i,j}=\\text{max}(dp_{i,j+1},A_j \\times dp_{i-1,j+1}+B_j)\\)\nとなり、求めるべき答えは\n\\(dp_{K,1}\\)\nです。\n状態数は\n\\(O(NK)\\)\nで遷移は\n\\(O(1)\\)\nであるため、全体で時間計算量\n\\(O(NK)\\)\nでこの問題を解くことができます。\n実装例(C++):\n実装例(Python):",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, k;\n    cin >> n >> k;\n    vector<int> a(n), b(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> a[i] >> b[i];\n    }\n    vector<int> ord(n);\n    for (int i = 0; i < n; ++i)\n        ord[i] = i;\n    sort(ord.begin(), ord.end(), [&](int i, int j) { return b[i] * (a[j] - 1) > b[j] * (a[i] - 1); });\n    vector<long long> dp(k + 1, -1e9);\n    dp[0] = 1;\n    for (auto i : ord) {\n        vector<long long> ndp = dp;\n        for (int j = 0; j < k; ++j) if(dp[j] != -1e9) {\n            ndp[j + 1] = max(ndp[j + 1], dp[j] * a[i] + b[i]);\n        }\n        dp = move(ndp);\n    }\n    cout << dp[k] << \"\\n\";\n}",
+        "n, k = map(int, input().split())\na = []\nb = []\nfor _ in range(n):\n    ai, bi = map(int, input().split())\n    a.append(ai)\n    b.append(bi)\n\nord_indices = list(range(n))\nord_indices.sort(key=lambda i: (a[i] - 1) / b[i])\n\ndp = [int(-1e9)] * (k + 1)\ndp[0] = 1\n\nfor i in ord_indices:\n    ndp = dp[:]\n    for j in range(k):\n        if dp[j] > int(-1e9):\n            ndp[j + 1] = max(ndp[j + 1], dp[j] * a[i] + b[i])\n    dp = ndp\n\nprint(dp[k])"
+      ],
+      "text_sha256": "65f871230637802cbc8ab446dcfedc7f254b692fc0c4f33235725eda331309e7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc366/abc366_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc366/editorial/10658",
+      "text": "次の\n(性質)\nに注目します：\n\\(x < x'\\)\nなら、\n\\(ax + b < ax' + b\\)\nである。\n列挙\n最適の数列を\n\\((q_1, q_2, \\cdots, q_K)\\)\nと仮定します。\n\\(p_K, p_{K-1}, \\cdots, p_1\\)\nの順に\n\\(p_i\\)\nを決めていくことを考えます。\n\\(p_K\\)\nを決める\n\\(A_i + B_i\\)\nの値が大きい順に\n\\(K\\)\n個の関数を選びます。\nその中の少なくとも\n\\(1\\)\nつは\n\\(\\{q_1, q_2, \\cdots, q_{K-1}\\}\\)\nに含まれません。\nここで、\n(性質)\nによって、その集合の中に\n\\(q_K\\)\nがあると仮定して構いません。\nよって、これら\n\\(K\\)\n個から関数を\n\\(1\\)\nつ選び 、\n\\(p_K\\)\nとします（\n\\(p_K\\)\nはすべて試します）\n\\(p_{K-1}\\)\nを決める\n\\(p_K\\)\nをすでに決めたとします。ここで、\n\\(p_K = q_K\\)\nであったと仮定します。\n\\(p_K\\)\n以外の\n\\(i\\)\nのうち、\n\\(A_i + B_i\\)\nの値が大きい順に\n\\(K-1\\)\n個の関数を選びます。\nその中の少なくとも\n\\(1\\)\nつは\n\\(\\{q_1, q_2, \\cdots, q_{K-2}\\}\\)\nに含まれません。\nここで、\n(性質)\nによって、その集合の中に\n\\(q_{K-1}\\)\nがあると仮定して構いません。\nよって、これら\n\\(K-1\\)\n個から関数を\n\\(1\\)\nつ選び 、\n\\(p_{K-1}\\)\nとします（\n\\(p_{K-1}\\)\nもすべて試します）\n同様に続けていく\n\\(p_K, p_{K-1}\\)\nをすでに決めたとします。\n\\(p_{K}, p_{K-1}\\)\n以外の\n\\(i\\)\nのうち、\n\\(x = A_{p_{K-1}} (A_{p_K} + B_{p_K}) + B_{p_{K-1}}\\)\nとして、\n\\(A_i x + B_i\\)\nが大きい順から\n\\(K-2\\)\n個に関数を選びます。\n同様に\n\\(p_{K-2}\\)\nを選びます。\nまとめ\nこのようにして、\n\\((p_1, p_2, \\cdots, p_K)\\)\nを列挙すると、その中に必ず最適な\n\\((q_1, q_2, \\cdots, q_K)\\)\nがあることが保証され、最適解が求まります。この方法では、数列\n\\((p_1, p_2, \\cdots, p_K)\\)\nは\n\\(K!\\)\n通り列挙することになります。\n工夫\n各\n\\(x\\)\nに対し、\n\\(A_i x + B_i\\)\nが大きい順から\n\\(K\\)\n個を求めればよいです。しかし、ここで時間計算量の工夫が必要です。制約の\n\\(1 \\le B_i \\le 50\\)\nに注目すると、\n\\(x \\ge 50\\)\nのとき、 任意の\n\\(t\\)\nについて\n\\[tx + 50 < (t+1)x + 1\\]\nが成り立ちます。よって、上位\n\\(K\\)\n個を求める必要がある\n\\(x\\)\nは\n\\(x=1,2,\\cdots, 50\\)\nのみです。各\n\\(x\\)\nについて時間計算量\n\\(O(NK)\\)\nで\n\\(A_i x + B_i\\)\nの上位\n\\(K\\)\n個を求めることができます。\n計算量\n最終的な計算量は以下のようになります。\n\\(x=1,2,\\cdots, 50\\)\nに対して、\n\\(A_i x + B_i\\)\nの値の上位\n\\(K\\)\n個を求めるときに\n\\(O(NK \\max B_i)\\)\n時間\n数列\n\\(p\\)\nの列挙に\n\\(O(K \\times K!)\\)\n時間\nかかります。以上より、時間計算量\n\\(O(NK \\max B_i + K \\times K!)\\)\n、空間計算量\n\\(O(NK)\\)\nとなり、この計算量なら実行時間制限に間に合います。\nshobonvipの実装 (C++, 260ms)",
+      "codes": [],
+      "text_sha256": "1c7c24abca8f413b97ff0028fb593a7b9d499b7be017648818300d6e5b4f2cd9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc366/abc366_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

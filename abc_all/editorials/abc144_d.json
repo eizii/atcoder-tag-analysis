@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc144_d",
+  "editorials": [
+    {
+      "text": "D: Water Bottle\n解法1\n水筒をθ 傾けた際に水が溢れるか否かには明らかに単調性がありますから、二分法により解を求め\nることが出来ます。\n水筒をθ 傾けた際に水筒の中に存在出来る水量f (a, b, θ) を計算し、x と比較することにより、解の\n範囲を狭めることが出来ます。\nただし、f (a, b, θ) の計算では、場合分けが必要であることに注意してください。\n具体的な計算式については、以下の解答例コードをご確認ください。\nC++ による解答例:https://atcoder.jp/contests/abc144/submissions/8133803\n立式に際しては、以下の図が役に立ちます。\n図1\nb tan (π/2 −θ) ≤a のとき\n\n図2\nb tan (π/2 −θ) > a のとき\n解法2\n更に計算を進めると、答えを直接計算することが出来ます。\nこちらもa, b, x の値に応じて場合分けが必要であることに注意してください。\n具体的な計算式については、以下の解答例コードをご確認ください。\nC++ による解答例:https://atcoder.jp/contests/abc144/submissions/8133804\n",
+      "text_sha256": "99abc5285c4471790686c9c5610fbb65aa38f52c78ac42c972309fac95a22608",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc144/abc144_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

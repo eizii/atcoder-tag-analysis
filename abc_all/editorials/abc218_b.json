@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc218_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc218/editorial/2604",
+      "text": "辞書順で\n\\(i\\)\n番目の英小文字は、例えば C++ では\nと求められます。\n用意した空文字列に一文字ずつつなげていき、最後に出力します。以下は C++ による実装例です。\n実装例 (C++)",
+      "codes": [
+        "(char)('a'+i-1)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    string ans;\n    for(int i = 0; i < 26; i++){\n        int p; cin >> p; p--;\n        ans += (char)('a'+p);\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "8325f3444a465af64bedf45009867163299e9a68b9eac794e9f9467118fc2ed2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc218/abc218_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

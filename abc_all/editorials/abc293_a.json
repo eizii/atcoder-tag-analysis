@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc293_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc293/editorial/5956",
+      "text": "実際に\n\\(i = 1,2, \\ldots, \\frac{|S|}{2}\\)\nについて\n\\(S_{2i-1}\\)\nと\n\\(S_{2i}\\)\nを入れ替える操作を行い、操作後の\n\\(S\\)\nを出力するといいです。ただし、多くの言語では文字列の添え字は\n\\(0\\)\nから始まるため、プログラム上では問題文とは添え字が\n\\(1\\)\nつずれる場合があることに注意してください。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tint n = s.size(); // s の長さを取得\n\tfor (int i = 0; i < n / 2; i++) swap(s[2 * i], s[2 * i + 1]);\n\tcout << s << '\\n';\n}"
+      ],
+      "text_sha256": "bcc65c1916b543c5240fb37b7b97f1a6625799c229cf56248e45007737a8fccd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc293/abc293_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc347_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc347/editorial/9693",
+      "text": "この問題では部分文字列を列挙し、重複を除いて個数を数えることが問われています。\n部分文字列を求めるのは、C++ では\nsubstr\nという関数を用いることで行えます。Python では文字列をリストとして扱いスライス機能を用いるのが簡単です。\n重複を除くには、\nset\nなどのデータ構造を用いると便利です。前回の\nABC346-C 解説\nで重複を除くデータ構造について詳しく述べられていますので、そちらも参照してください。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    set<string> st;\n    for(int i = 0; i < s.size(); i++) {\n        for(int j = 1; i + j <= s.size(); j++) {\n            st.insert(s.substr(i, j));\n        }\n    }\n    cout << st.size() << endl;\n}"
+      ],
+      "text_sha256": "6d008438ee97910822b8b6d550400d57d102fb8bdc6cce03b9ba7e5c5bd4f797",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc347/abc347_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

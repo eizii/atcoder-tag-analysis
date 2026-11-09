@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc286_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5587",
+      "text": "この問題を解くために重要な考察として、最初に\n\\(A\\)\n円払う操作を何回かしてから\n\\(B\\)\n円払う操作を何回か行うというように操作の順序を決め打っていいというものがあります。また、\n\\(A\\)\n円払う操作の回数は\n\\(N\\)\n回未満であるということも重要です。（\n\\(N\\)\n回行うと元に戻るため）\nこの考察を用いると、制約が小さいことから\n\\(A\\)\n円払う操作の回数を全探索できます。\n\\(B\\)\n円払う操作の必要回数の最小値は、回文になるために同じ文字でないといけない組のうち、二つの文字が現時点で一致していないものの個数として求まります。\nよってこの問題を\n\\(\\mathrm{O}(N^2)\\)\nで解くことが出来ました。\n実装例(c++):\n実装例(Python):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    long long a, b;\n    string s;\n    cin >> n >> a >> b >> s;\n    s += s;\n    long long ans = 1ll << 60;\n    for(int i = 0; i < n; i++) {\n        long long tmp = a * i;\n        for(int j = 0; j < n / 2; j++) {\n            int l = i + j;\n            int r = i + n - 1 - j;\n            if(s[l] != s[r]) tmp += b;\n        }\n        ans = min(ans, tmp);\n    }\n    cout << ans << endl;\n}",
+        "n, a, b = map(int, input().split())\ns = input()\ns += s\nans = 1 << 60\nfor i in range(n):\n    tmp = a * i\n    for j in range(n // 2):\n        if s[i + j] != s[i + n - 1 - j]:\n            tmp += b\n    ans = min(ans, tmp)\nprint(ans)"
+      ],
+      "text_sha256": "72ae9ef015850a194f7d5aa9eddc512b342382061863a18701a9f2207e5bd108",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc286/abc286_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5583",
+      "text": "この問題において、\\(S _ i=S _ j\\) かつ \\(i\\lt j\\) なる \\((i,j)\\) の組があると、その \\((i,j)\\) を対称な位置になるまで移動させたときの \\(2\\) 番目の操作を \\(1\\) 回節約できます。\nそのような移動は、文字列の中心を \\(\\dfrac{i+j}2\\) 文字目にするものです。\nより厳密には、\n\\(N\\) が奇数のとき、中央を \\(\\dfrac{i+j}2\\bmod N\\) 文字目にするような移動\n\\(N\\) が偶数のとき、\n\\(i+j\\equiv0\\bmod 2\\) のときはそのような移動は存在しない\n\\(i+j\\equiv1\\bmod 2\\) のときは中央を \\(\\dfrac{i+j-1}2\\) 文字目と \\(\\dfrac{i+j+1}{2}\\) 文字目の間にするような移動および中央を \\(\\dfrac{i+j-1+N}2\\bmod N\\) 文字目と \\(\\dfrac{i+j+1+N}{2}\\bmod N\\) 文字目の間にするような移動\nです。\nよって、\\(S _ i=S _ j\\) かつ \\(i\\lt j\\) なる \\((i,j)\\) の組に対する \\(i+j\\) の値にのみ興味があります。\n特に、各 \\(k\\) に対して \\(i+j=k\\) かつ \\(S _ i=S _ j\\) かつ \\(i\\lt j\\) なる \\((i,j)\\) の組の個数 \\(C _ k\\) がわかるとこの問題が解けることがわかります。\n文字 \\(c\\) に対して、\\(T _ c=(T _ {c,i}) _ {1\\leq i\\leq N}\\) を \\(T _ {c,i}=\\begin{cases}1\\quad(S _ i=c)\\\\0\\quad(\\text{otherwise})\\end{cases}\\) で定めます。\nすると、\\(i+j=k\\) かつ \\(S _ i=S _ j=c\\) なる \\((i, j)\\) の組の個数は \\(T _ c\\) の自身との畳み込みによって得られます。\n畳み込みによって得る可能性のある値はたかだか \\(N\\) なので、適切な素数 \\(P\\) に対する \\({}\\bmod P\\) における値を用いることで畳み込みを \\(O(N\\log N+\\log P)\\) で計算することができます。\nすべての \\(c\\) にわたって畳み込みの結果を足した結果 \\(T ^ 2\\) から、\\(i=j\\) なる組（これはすべての \\(T ^ 2 _ {2i}\\) から \\(1\\) を引くことに対応します）を除いて \\(2\\) で割ることで求める組の個数 \\(C _ k\\) が得られます。\nこれを用いて計算を行うと、全体で計算量は \\(O(\\sigma(N\\log N+\\log P))\\) 時間となります（\\(\\sigma=26\\) はアルファベットサイズです）。\n\\(\\sigma=26,N=2\\times10^5\\) でも比較的高速に答えを求めることができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <vector>\n#include <limits>\n#include <atcoder/modint>\n#include <atcoder/convolution>\n\nint main() {\n    using namespace std;\n    // constexpr int MOD{469762049}; // N が大きいとき\n    constexpr int MOD{65537}; // 2^d | MOD - 1 かつ 2^d >= 2*N が必要 今回は N <= 5000 なので d >= 14 であればよい\n    using modint = atcoder::static_modint<MOD>;\n\n    unsigned N;\n    unsigned long A, B;\n    cin >> N >> A >> B;\n    string S;\n    cin >> S;\n\n    vector<modint> C(2 * N); // C[k] = (i + j == k かつ S[i] == S[j] かつ i < j なる組 (i, j) の個数)\n\n    const auto char_vector{[&N, &S](const char c) {\n        vector<modint> ret;\n        ret.reserve(N);\n        transform(begin(S), end(S), back_inserter(ret), [&c](const auto i) { return i == c; });\n        while (!empty(ret) && ret.back() == 0) ret.pop_back();\n        return ret;\n    }};\n    for (char c{'a'}; c <= 'z'; ++c) {\n        // T[i] = (S[i] == c なら 1, そうでなければ 0)\n        auto &&T{char_vector(c)};\n        // T_sq[k] = (i + j == k かつ S[i] == c かつ S[j] == c なる組 (i, j) の個数)\n        auto &&T_sq{atcoder::convolution(T, T)};\n        for (unsigned i{}; i < size(T_sq); ++i) C[i] += T_sq[i]; // C[i] = ∑_c T_sq[i]\n    }\n\n    for (unsigned i{}; i < N; ++i) --C[2 * i]; // i == j の組を除く\n    for (unsigned i{}; i < N; ++i) C[i] += C[i + N]; // index を mod N\n    C.resize(N);\n    for (auto &&c : C) c *= (MOD + 1) / 2; // i > j の組を除く\n\n    unsigned long ans{numeric_limits<unsigned long>::max()};\n    for (unsigned i{}; i < N; ++i)\n        // 1 つめの操作を i 回行うと、2 つめの操作は N / 2 - (節約できる個数) 回\n        ans = min(ans, A * i + B * (N / 2 - C[(2 * i + N - 1) % N].val()));\n    cout << ans << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "be880ff4e397f832d1f95ef463f8e50ebbcee0e9a66f36b859e152e3c7e50a05",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc286/abc286_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc352_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc352/editorial/9920",
+      "text": "最小全域木を求めるアルゴリズムの\n\\(1\\)\nつにクラスカル法があります。クラスカル法は簡単には以下のようなアルゴリズムです。\nどの辺もグラフに追加されていない状態から初めて、重みが小さい順に各辺を見ていく。今見ている辺の端点を\n\\(u,v\\)\nとしたとき、頂点\n\\(u,v\\)\nがまだ連結でないならば、その辺をグラフに追加する。\nグラフの連結性を union-find などのデータ構造でうまく管理すれば、このアルゴリズムはソート部分がボトルネックとなって\n\\(O(E\\log E)\\)\nの計算量で動作します（\n\\(E\\)\nは辺の数）。\nしかし、本問題においては辺の数が最大で\n\\(O((\\sum K)^2)\\)\n本程度あるためこのままでは間に合いません。そこで、最小全域木に関する以下の性質を用います。\n以下を満たす辺\n\\(e=(u,v)\\)\nが存在する場合、辺\n\\(e\\)\nを候補から消してしまっても最小全域木に含まれる辺の重みの総和は変化しない。\n頂点\n\\(u\\)\nと頂点\n\\(v\\)\nを結ぶパスであって、辺\n\\(e\\)\nの重み以下の辺のみで構成され、かつ辺\n\\(e\\)\nを含まないようなものが存在する。\n正当性はクラスカル法の動作を考えると分かります（辺\n\\(e\\)\nの順番になったときには\n\\(u,v\\)\nは既に連結になっているので、辺\n\\(e\\)\nが使われることはない）。本問題において\n\\(i\\)\n回目の操作で追加される辺は\n\\(\\lbrace A_{i,1},A_{i,2},\\dots,A_{i,K_i}\\rbrace\\)\nに含まれる異なる\n\\(2\\)\n頂点の組\n\\(u,v\\)\n全てについて、頂点\n\\(u\\)\nと頂点\n\\(v\\)\nの間を結ぶ重み\n\\(C_i\\)\nの辺\nでしたが、上記の性質を用いれば、実際には以下の辺だけを追加することにしてもよいと分かります。\n各\n\\(j=2,3,\\dots,K_i\\)\nについて、\n\\(A_{i,1}\\)\nと\n\\(A_{i,j}\\)\nを結ぶ重み\n\\(C_i\\)\nの辺\nこれによって辺の数の合計が\n\\(O(\\sum K)\\)\n本となるので、あとはクラスカル法を適用することによって本問題を解くことができます。\n実装例 (C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/dsu>\n\nusing namespace std;\nusing namespace atcoder;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, m;\n    cin >> n >> m;\n    vector<int> k(m), c(m);\n    vector<vector<int>> a(m);\n    for (int i = 0; i < m; i++) {\n        cin >> k[i] >> c[i];\n        a[i].resize(k[i]);\n        for (int &j: a[i]) {\n            cin >> j;\n            --j;\n        }\n    }\n    vector<int> ord(m);\n    iota(ord.begin(), ord.end(), 0);\n    sort(ord.begin(), ord.end(), [&](int i, int j) { return c[i] < c[j]; });\n    dsu uf(n);\n    long long ans = 0;\n    for (int i: ord) {\n        for (int j = 1; j < k[i]; j++) {\n            if (uf.same(a[i][0], a[i][j])) continue;\n            uf.merge(a[i][0], a[i][j]);\n            ans += c[i];\n        }\n    }\n    cout << (uf.groups().size() == 1 ? ans : -1) << endl;\n}"
+      ],
+      "text_sha256": "8fd024a787edae3cfe13866cb1a64d7e914e828cbd4082482f2e21bbb130bc8e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc352/abc352_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

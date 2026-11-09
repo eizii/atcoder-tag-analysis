@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc116_b",
+  "editorials": [
+    {
+      "text": "B - Collatz Problem\n実際にシミュレーションしてa の要素を順次求めていきましょう。出てきたai の値を配列や連\n想データ構造に保存していって、重複する値を検出することで、この問題に正答することができ\nます。\nまた、この問題はCollatz problem として知られており、a1 の値によらず、a はかならず\n4 →2 →1 →4 のループに到達すると予想されています。この予想は5×10260 以下ならば実証さ\n\nれているため、am = 4, 2, 1 となる最⼩の整数m をシミュレーションで求めて、m + 3 を出⼒する\nことでも、この問題に正答できます。\n",
+      "text_sha256": "c29b277cbb158ab6ae7aa59991873c92119761085d100340220cf75cbe9be5e5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc116/abc116_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

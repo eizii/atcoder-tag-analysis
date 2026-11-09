@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc189_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc189/editorial/537",
+      "text": "\\(S_1,...,S_N\\)\nに対する答えを\n\\(f(S_1,...,S_N)\\)\nとしましょう。\n\\(S_N\\)\nが\nAND\nのとき、\n\\(y_{N-1}\\)\nと\n\\(x_N\\)\nはともに\n\\(\\text{True}\\)\nでなければなりません。よって\n\\(f(S_1,...,S_N)=f(S_1,...,S_{N-1})\\)\nです。\n\\(S_N\\)\nが\nOR\nのとき、\n\\(x_N\\)\nが\n\\(\\text{True}\\)\nなら\n\\(y_{N-1}\\)\nは何でもよく、\n\\(x_N\\)\nが\n\\(\\text{False}\\)\nなら\n\\(y_{N-1}\\)\nは\n\\(\\text{True}\\)\nでなければなりません。よって\n\\(f(S_1,...,S_N)=2^N+f(S_1,...,S_{N-1})\\)\nです。\n以上により\n\\(O(N)\\)\nでこの問題が解けました。",
+      "codes": [],
+      "text_sha256": "74ed60274ae3c9dd393eef3945d0bddcab0a811674a98133ad1cd83204fa7c91",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc189/abc189_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

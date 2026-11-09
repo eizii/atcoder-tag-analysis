@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc249_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc249/editorial/3785",
+      "text": "高橋君は\n\\(A+C\\)\n秒の周期で同じ行動を繰り返します。具体的には、\n\\(k\\)\nを非負整数として、高橋君が出発して\n\\(k\\)\n秒後から\n\\(k+1\\)\n秒後にかけての行動は\n\\(k\\)\nを\n\\(A+C\\)\nで割った余りが\n\\(A\\)\nより小さいとき、\n\\(B\\)\nメートル歩く\nそうでない場合、動かない\nとなります。同様に、青木君の行動は\n\\(k\\)\nを\n\\(D+F\\)\nで割った余りが\n\\(D\\)\nより小さいとき、\n\\(E\\)\nメートル歩く\nそうでない場合、動かない\n\\(k = 0, 1, \\dots, X - 1\\)\nについて上記の判定を行うことで、二人がそれぞれ何メートル進んだか計算することができます。よって、この問題を\n\\(O(X)\\)\nの時間計算量で解くことができました。\n実装例 (C++) :\nなお、より高速に（\n\\(O(1)\\)\nの時間計算量で）解くこともできます。\n高橋君の行動を\n\\(A + C\\)\n秒間隔で区切り、これを\n\\(1\\)\n周期とします。高橋君は\n\\(1\\)\n周期あたり\n\\(A \\times B\\)\nメートル進み、ある周期のはじめの\n\\(k\\)\n秒（\n\\(0 \\leq k \\leq A + C\\)\n）で\n\\(\\min(A, k) \\times B\\)\nメートル進むことがわかります。\n高橋君が出発してから\n\\(X\\)\n秒間でちょうど\n\\(q\\)\n周期を完全に終えるとすると\n\\(q =\\left\\lfloor  \\frac{X}{A + C} \\right\\rfloor\\)\nです。残った\n\\(X - (A + C) \\times q\\)\n秒間はある同一の周期に属するので、高橋君が\n\\(X\\)\n秒間に進む距離の合計は\n\\(A \\times B \\times q + \\min(A, X - (A + C) \\times q) \\times \nB\\)\nメートルとなります。\n青木君についても同様であるので、二人がそれぞれ進んだ距離を定数時間で計算することができます。\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int a, b, c, d, e, f, x;\n    cin >> a >> b >> c >> d >> e >> f >> x;\n    int takahashi = 0, aoki = 0;\n    for (int k = 0; k < x; ++k) {\n        if (k % (a + c) < a) {\n            takahashi += b;\n        }\n        if (k % (d + f) < d) {\n            aoki += e;\n        }\n    }\n    if (takahashi > aoki) {\n        cout << \"Takahashi\\n\";\n    } else if (takahashi < aoki) {\n        cout << \"Aoki\\n\";\n    } else {\n        cout << \"Draw\\n\";\n    }\n    return 0;\n}",
+        "def solve(a, b, c, x):\n  q = x // (a + c)\n  r = x % (a + c);\n  return (q * a + min(a, r)) * b;\n\na, b, c, d, e, f, x = map(int, input().split())\n\ntakahashi = solve(a, b, c, x)\naoki = solve(d, e, f, x)\n\nif takahashi > aoki:\n  print(\"Takahashi\")\nelif takahashi < aoki:\n  print(\"Aoki\")\nelse:\n  print(\"Draw\")"
+      ],
+      "text_sha256": "ccaa2f0e03fa396d4c61d9f9d2e2816dd9dbc7d78ac3bf86ae6fa159e48400de",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc249/abc249_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

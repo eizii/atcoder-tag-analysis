@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc473_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc473/editorial/24871",
+      "text": "原案: physics0523 A を \\(+1\\) 、 B を \\(-1\\) に置き換えて考えます。 AB , A の挿入を利用しても、累積和が負になるような地点は作れないことが分かります。 逆に、累積和が負になる地点が無ければ必ず(置き換える前の)文字列を作ることができます。 証明: 文字列から B が無くなるまで AB を除去することを考えます。 累積和が負になる地点が無いという仮定より、文字列中の先頭の B の直前の時点で累積和は必ず正です。このことから、その B の直前に必ず A が存在することが分かります。 その AB を除去する前と後で、除去に関与しない部分の累積和は不変です (取り除く部分の総和が \\(0\\) であるため)。なので、この除去を行っても累積和が負になる地点が無いという状態は変わりません。 これを繰り返し、全ての文字が A である文字列を得られ、あとはそれらを個別に除去することを考えます。 最後に、全ての時系列順を逆転させ、除去を挿入に言い換えることで元の文字列が確かに作れることが確認できます。 あとは、部分文字列に対して累積和が負になる地点があるかどうかを判定できればよいです。 ひとつの方法として、 遅延伝搬 segment tree (Lazy Segtree) を利用することでこの判定を行うことができます。具体的には、各点の累積和を維持するために区間加算・区間最小値取得ができればよいです。 本解法の時間計算量は \\(O(N + Q \\log N)\\) です。 実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/all>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing S=int;\nusing F=int;\n\nS op(S l,S r){return min(l,r);}\nS e(){return 1e9;}\nS mapping(F l,S r){return (l+r);}\nF composition(F l,F r){return (l+r);}\nF id(){return 0;}\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int n;\n  string s;\n  cin >> n >> s;\n  vector<S> ini(n+1,0);\n  for(int i=0;i<n;i++){\n    if(s[i]=='A'){ini[i+1]=ini[i]+1;}\n    else{ini[i+1]=ini[i]-1;}\n  }\n  lazy_segtree<S,op,e,F,mapping,composition,id> seg(ini);\n  int q;\n  cin >> q;\n  while(q--){\n    int typ;\n    cin >> typ;\n    if(typ==1){\n      int i;\n      string c;\n      cin >> i >> c;\n      i--;\n      int del;\n      if(s[i]=='A'){del=-1;}\n      else{del=1;}\n      s[i]=c[0];\n      if(s[i]=='A'){del++;}\n      else{del--;}\n      seg.apply(i+1,n+1,del);\n    }\n    else{\n      int l,r;\n      cin >> l >> r;\n      l--;\n      if(seg.prod(l,r+1)==seg.get(l)){cout << \"Yes\\n\";}\n      else{cout << \"No\\n\";}\n    }\n  }\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "7c1192cca476ec72ee199f2334187e882a06ed1939bee9f17ab66736848b34f0"
+    }
+  ],
+  "status": "available"
+}

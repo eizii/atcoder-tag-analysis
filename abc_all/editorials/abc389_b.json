@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc389_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc389/editorial/11965",
+      "text": "\\(2 \\leq X \\leq 3 \\times 10^{18}\\)\nを満たす整数\n\\(X\\)\nであって、\n\\(N! = X\\)\nを満たす整数\n\\(N\\)\nが存在するような\n\\(X\\)\nの最大値は\n\\(2432902008176640000 (=20!)\\)\nです。また、\n\\(2 \\leq X\\)\nであるため、\n\\(2 \\leq N\\)\nを満たします。\nよって、以下のような方法でfor文等を用いて答えを求めることができます。\n\\(i=2,\\ldots,20\\)\nについて以下の操作を順に行う\n\\(i!\\)\nを求めるための変数\n\\(f\\)\nを用意する。最初に\n\\(f\\)\nは\n\\(1\\)\nで初期化されている。\n\\(j=1,\\ldots i\\)\nについて以下の操作を順に行う\n\\(f\\)\nに\n\\(j\\)\nを掛ける\n\\(f\\)\nと\n\\(X\\)\nが等しいとき、\n\\(i\\)\nを出力する\n答えとしてありえる最大値を\n\\(N\\)\nとするとこれは時間計算量\n\\(O(N^2)\\)\nとなります。今回は\n\\(N =20\\)\nであるため、十分高速に求められます。実装の際は32bit整数で計算するとオーバーフローすることに注意してください。\nまた、\n\\(i!\\)\nの計算を\n\\(i\\)\nが小さい順に求めていくことで、全体で\n\\(O(N)\\)\n時間で求めることも可能です。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    long long x;\n    cin >> x;\n    for (int i = 2; i <= 20; ++i) {\n        long long f = 1;\n        for (int j = 1; j <= i; ++j) {\n            f *= j;\n        }\n        if (f == x) {\n            cout << i << endl;\n        }\n    }\n}"
+      ],
+      "text_sha256": "813deff24bc331ce0e7dd8cea57b99174490f65f9d9cd69a98ed297651d11f38",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc389/abc389_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

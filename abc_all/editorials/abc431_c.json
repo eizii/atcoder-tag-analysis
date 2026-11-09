@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc431_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc431/editorial/14535",
+      "text": "\\(K\\) 体の倒れないロボットを作ることができるなら、次のようにして \\(K\\) 体の倒れないロボットを作ることができることが証明できます。\n頭パーツを軽いほうから \\(K\\) 個、体パーツを重いほうから \\(K\\) 個選び、それら以外をすべて破壊する。\n残ったパーツを、軽いものどうしから組み合わせてロボットを作る。\n軽いほうから \\(i\\) 番目の頭パーツと軽いほうから \\(j\\) 番目の体パーツを組み合わせてロボットを作ることを \\((i,j)\\) で表すこととします（頭パーツと体パーツを軽いほうから並べ替えたこととして、単に \\(i\\) 番目の頭パーツなどと呼ぶことにします）。\n\\(K\\) 体の倒れないロボットの作り方を \\((a _ 1,b _ 1),(a _ 2,b _ 2),\\ldots,(a _ K,b _ K)\\ (a _ 1\\lt a _ 2\\lt\\cdots\\lt a _ K)\\) とします。\n\\(i\\le a _ i\\) が成り立つので、\\((1,b _ 1),(2,b _ 2),\\ldots,(K,b _ K)\\) としても \\(K\\) 体の倒れないロボットを作ることができます。\n\\(b _ i\\gt b _ {i+1}\\) となる \\(i\\) が存在しているとき、\\((i,b _ i),(i+1,b _ {i+1})\\) を \\((i+1,b _ i),(i,b _ {i+1})\\) に取り換えてもそれらのロボットが倒れないことを示します。\nパーツの番号の付け方と、\\((i,b _ i),(i+1,b _ {i+1})\\) で作られるロボットがいずれも倒れないことから、以下の \\(3\\) つの大小関係がわかります。\n\\(i\\) 番目の頭パーツの重さは \\(i+1\\) 番目のパーツの重さ以下\n\\(i+1\\) 番目の頭パーツの重さは \\(b _ {i+1}\\) 番目の体パーツの重さ以下\n\\(b _ i\\gt b _ {i+1}\\) より \\(b _ {i+1}\\) 番目の体パーツの重さは \\(b _ i\\) 番目の体パーツの重さ以下\nこのことから、\\((i+1,b _ i),(i,b _ {i+1})\\) で作られるロボットも倒れません。\\(\\quad\\Box\\)\nよって、\\(b=(b _ 1,b _ 2,\\ldots,b _ K)\\) を昇順に並べ替えた列 \\(b ^ \\prime=(b ^ \\prime _ 1,b ^ \\prime _ 2,\\ldots,b ^ \\prime _ K)\\) に対して \\((1,b ^ \\prime _ 1),(2,b ^ \\prime _ 2),\\ldots,(K,b ^ \\prime _ K)\\) で作られる \\(K\\) 体のロボットも倒れません。\nここで、\\(b ^ \\prime _ i\\le i-K+N\\) が成り立つので、\\((1,N-K+1),(2,N-K+2),\\ldots,(K,N)\\) でも \\(K\\) 体の倒れないロボットを作ることができます。\\(\\quad\\Box\\)\nつまり、上の方法で作られた \\(K\\) 体のロボットのいずれかが倒れれば\nNo\n、そうでなければ\nYes\nを出力すればよいです。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <numeric>\nusing namespace std;\n\nint main() {\n    int N, M, K;\n    cin >> N >> M >> K;\n    vector<int> H(N), B(M);\n    for (auto&& h : H)\n        cin >> h;\n    for (auto&& b : B)\n        cin >> b;\n\n    // 軽いほうから並べて\n    ranges::sort(H);\n    ranges::sort(B);\n\n    // 頭の先頭 K 個と体の末尾 K 個のうち、軽いほうから見て頭のほうが重いペアがあれば No 、なければ Yes\n    cout << (transform_reduce(begin(H), begin(H) + K, end(B) - K, false, logical_or{}, greater{}) ? \"No\" : \"Yes\") << endl;\n    return 0;\n}",
+        "N, M, K = map(int, input().split())\n\nH = list(map(int, input().split()))\nB = list(map(int, input().split()))\n\n# 軽いほうから並べて\nH.sort()\nB.sort()\n\n# 頭の先頭 K 個と体の末尾 K 個のうち、軽いほうから見てすべてのペアで体の重さが頭の重さ以上ならば Yes 、そうでなければ No\nif all(h <= b for h, b in zip(H[:K], B[-K:])):\n    print('Yes')\nelse:\n    print('No')"
+      ],
+      "text_sha256": "69d208efa585443c84f75684533a979a9c20f0895d368c84729cf7a27b072574",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc431/abc431_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

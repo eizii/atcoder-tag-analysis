@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc103_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc103/editorial.pdf",
+      "text": "D: Robot Arms\n\n まず，ロボットアームを決めると，(xm + ym) mod 2 は，モードの設定によらず一定になります．なので，(Xj + Yj)\n(mod 2) が一定でなければ，条件を満たすことは不可能です．\n  (Xj + Yj) (mod 2) が一定であるとします．今，(Xj + Yj) (mod 2) = 1 と仮定します((Xj + Yj) (mod 2) = 0 の場\n合は，長さ1 の腕を追加することで，(Xj + Yj) (mod 2) = 0 の場合に帰着できます)．\n 座標(x, y) に対して，u = x + y, v = x −y とおいて(u, v) を考えます．すると，(ui, vi) と(ui+1, vi+1) の間に次の\n関係が成り立ちます：\n\n\n                                                   2\n\f\n   • 腕i のモードがL のとき，(ui+1, vi+1) = (ui −di, vi −di)\n\n   • 腕i のモードがR のとき，(ui+1, vi+1) = (ui + di, vi + di)\n\n   • 腕i のモードがD のとき，(ui+1, vi+1) = (ui −di, vi + di)\n\n   • 腕i のモードがU のとき，(ui+1, vi+1) = (ui + di, vi −di)\n\nよって，{di} を決めたときに{ui}, {vi} を決定する問題をu, v について独立に解けば，各関節のモードも決定できるこ\nとになります．\n この{ui} を決定する問題を考えます．ui+1 = ui + di なるi ∈{1, . . . , m} の集合をS とすると，um = −∑mi=1 di +∑\n  i∈S 2di が成り立ちます．(Xj + Yj) (mod 2) = 1 の仮定より，Uj, Vj はすべて奇数です．また，−231 < −2 · 109 ≤\n                                                 が成り立Uj, Vj ≤2 · 109 < 231 が成り立っています．よって，m = 31, di = 2i−1 とすると，∑i∈S 2di = Uj + (231 −1)\n                      の二進展開を考えればよいです）．よって，この問題を解くことができつようにS を選ぶことができます（Uj+(231−1)2\nました．",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "d29a50d8c4474a22b4b8ecd64663921898d6245b9c36183f9cb767cae4f85aef"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc389_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc389/editorial/11975",
+      "text": "クエリ全体を通して、\n\\(i\\)\n番目に列に並んだヘビをヘビ\n\\(i\\)\nとし、その長さを\n\\(l_i\\)\nとします。\nまず、重要な性質としてこの問題の操作では、ヘビが列に追加される順番とヘビが列を抜ける順番は同じです。よって、どんな時も列にいる前から\n\\(k\\)\n番目のヘビは、それまで列を抜けたヘビの数を\n\\(m\\)\nとすると、ヘビ\n\\((k+m)\\)\nです。\nまた、前から\n\\(k\\)\n番目のヘビの頭の座標は列の前から\n\\(1,2,\\ldots,k-1\\)\n番目のヘビの長さの総和です。つまり、各クエリにおいてそれまでに抜けたヘビの数\n\\(m\\)\nと、\n\\(l_{m+1}+l_{m+2}+ \\ldots + l_{m+k-1}\\)\nが求められればよいです。\n前者は、先頭からヘビが抜ける度に\n\\(m\\)\nに\n\\(1\\)\nを加えていくことで求められます。後者は、\n\\(S_i=\\sum_{k=1}^{i}l_k \\)\nを満たす配列\n\\(S\\)\nを随時求めていけばよいです。具体的には 、\n\\(S_i=S_{i-1}+l_i\\)\nを満たすため、ヘビが列に並ぶたびに\n\\(S\\)\nの末尾と追加されるヘビの長さから\n\\(S\\)\nの末尾に追加する必要がある要素が求められます。\n実装の際は、ヘビの長さの合計は32bit整数型ではオーバーフローするため64bit整数型を利用する必要があることに注意してください。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int q;\n    cin >> q;\n    long long now = 0;\n    vector<long long> x;\n    int id = 0;\n    for (int i = 0; i < q; ++i) {\n        int t;\n        cin >> t;\n        if (t == 1) {\n            long long l;\n            cin >> l;\n            x.push_back(now);\n            now += l;\n        } else if (t == 2) {\n            id++;\n        } else {\n            int k;\n            cin >> k;\n            k--;\n            cout << x[id + k] - x[id] << \"\\n\";\n        }\n    }\n}"
+      ],
+      "text_sha256": "4a9accf9a26943f4c198a059ea53cde0af6c4ae422a8642832b1f8f170334132",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc389/abc389_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

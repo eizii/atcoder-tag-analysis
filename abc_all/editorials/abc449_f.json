@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc449_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc449/editorial/17255",
+      "text": "以下の条件を全て満たす\n\\((r_0,c_0)\\)\nを考えます。\n\\(1\\le r_0\\le H-h+1\\)\n\\(1\\le c_0\\le W-w+1\\)\n\\(0\\le i < H,\\ 0\\le j < W\\)\nを満たす整数の組\n\\((i,j)\\)\nであって、マス\n\\((r_0+i,c_0+j)\\)\nが黒で塗られているようなものが存在する\nこれらの条件を全て満たす\n\\((r_0,c_0)\\)\nの個数を\n\\(X\\)\nとすると、求める答えは\n\\((H-h+1)(W-w+1)-X\\)\nとなります。以降はこの\n\\(X\\)\nを求めることを考えます。\nある黒で塗られたマス\n\\((R_k,C_k)\\)\nがあったとき、それにより条件を満たすマスは\n\\((r_0,c_0) \\in [R_k-h+1,R_k] \\times [C_k-w+1,C_k]\\)\nとなります。したがって、これらの長方形領域の和集合の大きさを計算できれば良いです。\nこの長方形領域の和集合の大きさを求める方法は様々なものがありますが、ここでは multiset を用いた平面走査を紹介します。\n各長方形領域は\n\\(r\\)\n軸を走査していくと\n\\(r=R_k-h+1\\)\nで\n\\([C_k-w+1,C_k]\\)\nに黒マスが表れ\n\\(r=R_k+1\\)\nでそれが消えるという形で捉えることができます。したがって、\n\\(r\\)\nの昇順に今どの区間に黒マスがあるのかを multiset や map で保持し、それらがなす面積を差分を考えることで高速に計算することができます。\n以上を適切に実装することでこの問題に正答することができます。計算量は\n\\(O(N\\log N)\\)\nです。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tcin.tie(nullptr);\n\tios::sync_with_stdio(false);\n\n\tlong H, W, h, w, n;\n\tcin >> H >> W >> h >> w >> n;\n\tvector<tuple<long, long, bool>> g;\n\tg.reserve(2 * n);\n\tfor (int i = 0; i < n; i++) {\n\t\tlong r, c;\n\t\tcin >> r >> c;\n\t\tr--, c--;\n\t\tg.push_back({r - h + 1, c - w + 1, true});\n\t\tg.push_back({r + 1, c - w + 1, false});\n\t}\n\tsort(g.begin(), g.end());\n\tmultiset<long> s;\n\ts.insert(-w);\n\ts.insert(W - w + 1);\n\tlong ans = (H - h + 1) * (W - w + 1);\n\tauto gap = [&](long l, long r) { return max(0L, r - l - w); };\n\tconst long Y = W - w + 1;\n\tconst long X = H - h + 1;\n\tlong good = Y;\n\tauto add = [&](long x) {\n\t\tauto it = s.lower_bound(x);\n\t\tlong r = *it, l = *prev(it);\n\t\tgood += gap(l, x) + gap(x, r) - gap(l, r);\n\t\ts.insert(x);\n\t};\n\tauto del = [&](long x) {\n\t\tauto it = s.find(x);\n\t\tlong r = *next(it), l = *prev(it);\n\t\tgood -= gap(l, x) + gap(x, r) - gap(l, r);\n\t\ts.erase(it);\n\t};\n\tlong pre = 0;\n\tint i = 0;\n\twhile (i < 2 * n) {\n\t\tconst long x = get<0>(g[i]);\n\t\tconst long nx = min(x, X);\n\t\tif (pre < nx) {\n\t\t\tans -= (nx - pre) * (Y - good);\n\t\t\tpre = nx;\n\t\t}\n\t\twhile (i < 2 * n && get<0>(g[i]) == x) {\n\t\t\tauto [r, c, in] = g[i];\n\t\t\tif (in) add(c);\n\t\t\telse del(c);\n\t\t\ti++;\n\t\t}\n\t}\n\tif (pre < X) ans -= (X - pre) * (Y - good);\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "c992e43dd502abb14ea7ed8c938d630f89d0df3b629ccb6fbe6cdb56963f6965",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc449/abc449_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc449/editorial/18402",
+      "text": "公式解説の手順により、長方形に覆われていないマスの個数に帰着します。\n\\(c\\)\n座標が小さい場合を考えます。「各\n\\(c\\)\n座標が長方形に覆われているか？」を持って\n\\(r\\)\n座標の順に平面走査をすることを考えると、以下のクエリが解ければ良いことがわかります。\n区間\n\\([l,r)\\)\nに\n\\(x\\)\nを加算する。ただし、要素は常に非負になることが保証される。\n全体で\n\\(0\\)\nとなっている要素の総数を答える。\nこれは、区間加算および (区間の最小値, その個数) の遅延セグメント木を用いて処理できます。\n一般の場合を考えます。区間の端点および\n\\(c\\)\n座標の限界を座標圧縮します。それを\n\\(X_1,X_2,\\ldots,X_k\\)\nとしたとき、各区間\n\\([X_i,X_{i+1})\\)\nに対応して、遅延セグメント木のノードに\n\\((0,X_{i+1}-X_i)\\)\nを持たせることで、\n\\(c\\)\n座標が小さい場合と同様に計算できます。\nまた、動的遅延セグメント木を使うこともできます。",
+      "codes": [],
+      "text_sha256": "48d37fcaabbb192363208e47d0739b874cda01991bc2f206a613fa2eaac60567",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc449/abc449_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

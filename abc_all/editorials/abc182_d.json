@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc182_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc182/editorial/291",
+      "text": "制約が\n\\(N \\le 200000\\)\nなので愚直にロボットをシミュレートする計算量が\n\\(\\Theta(N^2)\\)\nの解は実行時間制限に間に合わず TLE となってしまいます。\n「正の向きに\n\\(A_1\\)\n進む。正の向きに\n\\(A_2\\)\n進む。正の向きに\n\\(A_3\\)\n進む。\n\\(\\dots\\)\n正の向きに\n\\(A_i\\)\n進む。」という一連の動作を動作\n\\(i\\)\nと呼ぶことにします。\nここで\n\\(1 \\le i \\le N\\)\nを満たす全ての整数\n\\(i\\)\nについて次の値は簡単に\n\\(O(N)\\)\nで求めることができます。(\n\\(i\\)\nの小さい順に求められます)\n\\(p_i\\)\n: 動作\n\\(i\\)\nの合計の座標の変化\n\\(q_i\\)\n: 動作\n\\(i\\)\nを座標\n\\(0\\)\nで始めた場合の、開始から終了までの座標の最大値\nそしてこれが求まると以下の要領で答が求まります。\n答え (座標の最大値) を入れる変数\n\\(r\\)\nを\n\\(0\\)\nとする。\n今の座標\n\\(x\\)\nを\n\\(0\\)\nとして\n\\(i = 1, 2, 3, \\dots , N\\)\nについて以下を行う\n\\(r\\)\nを、\n\\(\\max(r, x + q_i)\\)\nで置き換える\n\\(x\\)\nを\n\\(x + p_i\\)\nで置き換える\n時間計算量は\n\\(O(N)\\)\nです。",
+      "codes": [],
+      "text_sha256": "ffcbe3136785e682c61f1e2f08af21bb4cccdcaaed2bcd6fa8561a4a3af4d4b9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc182/abc182_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

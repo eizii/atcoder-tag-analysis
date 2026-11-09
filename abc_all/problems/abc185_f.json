@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc185_f",
+  "title": "Range Xor Query",
+  "contests": [
+    {
+      "contest_id": "abc185",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1053,
+  "raw_difficulty": 1053,
+  "contest_id": "abc185",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc185/tasks/abc185_f",
+  "statement": "配点 : 600 点 問題文 長さ N の整数列 A があります。 あなたは今からこの数列について Q 個のクエリを処理します。 i 番目のクエリでは、 T_i, X_i, Y_i が与えられるので、以下の処理をしてください。 T_i = 1 のとき A_{X_i} を A_{X_i} \\oplus Y_i で置き換える T_i = 2 のとき A_{X_i} \\oplus A_{X_i + 1} \\oplus A_{X_i + 2} \\oplus \\dots \\oplus A_{Y_i} を出力する ただし a \\oplus b は a と b のビット単位 xor を表します。 ビット単位 xor とは 整数 A, B のビット単位 xor 、 A \\oplus B は、以下のように定義されます。 A \\oplus B を二進表記した際の 2^k ( k \\geq 0 ) の位の数は、 A, B を二進表記した際の 2^k の位の数のうち一方のみが 1 であれば 1 、そうでなければ 0 である。 例えば、 3 \\oplus 5 = 6 となります (二進表記すると: 011 \\oplus 101 = 110 )。 制約 1 \\le N \\le 300000 1 \\le Q \\le 300000 0 \\le A_i \\lt 2^{30} T_i は 1 または 2 T_i = 1 なら 1 \\le X_i \\le N かつ 0 \\le Y_i \\lt 2^{30} T_i = 2 なら 1 \\le X_i \\le Y_i \\le N 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N Q A_1 \\hspace{7pt} A_2 \\hspace{7pt} A_3 \\hspace{5pt} \\dots \\hspace{5pt} A_N T_1 X_1 Y_1 T_2 X_2 Y_2 T_3 X_3 Y_3 \\hspace{22pt} \\vdots T_Q X_Q Y_Q 出力 T_i = 2 であるような各クエリについて、答えを 1 行に 1 つずつ、順に出力せよ。 入力例 1 3 4\r\n1 2 3\r\n2 1 3\r\n2 2 3\r\n1 2 3\r\n2 2 3 出力例 1 0\r\n1\r\n2 1 個目のクエリでは 1 \\oplus 2 \\oplus 3 = 0 を出力します。 2 個目のクエリでは 2 \\oplus 3 = 1 を出力します。 3 個目のクエリでは A_2 が 2 \\oplus 3 = 1 で置き換えられます。 4 個目のクエリでは 1 \\oplus 3 = 2 を出力します。 入力例 2 10 10\r\n0 5 3 4 7 0 0 0 1 0\r\n1 10 7\r\n2 8 9\r\n2 3 6\r\n2 1 6\r\n2 1 10\r\n1 9 4\r\n1 6 1\r\n1 6 3\r\n1 1 7\r\n2 3 5 出力例 2 1\r\n0\r\n5\r\n3\r\n0",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の整数列 A があります。 あなたは今からこの数列について Q 個のクエリを処理します。 i 番目のクエリでは、 T_i, X_i, Y_i が与えられるので、以下の処理をしてください。 T_i = 1 のとき A_{X_i} を A_{X_i} \\oplus Y_i で置き換える T_i = 2 のとき A_{X_i} \\oplus A_{X_i + 1} \\oplus A_{X_i + 2} \\oplus \\dots \\oplus A_{Y_i} を出力する ただし a \\oplus b は a と b のビット単位 xor を表します。 ビット単位 xor とは 整数 A, B のビット単位 xor 、 A \\oplus B は、以下のように定義されます。 A \\oplus B を二進表記した際の 2^k ( k \\geq 0 ) の位の数は、 A, B を二進表記した際の 2^k の位の数のうち一方のみが 1 であれば 1 、そうでなければ 0 である。 例えば、 3 \\oplus 5 = 6 となります (二進表記すると: 011 \\oplus 101 = 110 )。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\le N \\le 300000 1 \\le Q \\le 300000 0 \\le A_i \\lt 2^{30} T_i は 1 または 2 T_i = 1 なら 1 \\le X_i \\le N かつ 0 \\le Y_i \\lt 2^{30} T_i = 2 なら 1 \\le X_i \\le Y_i \\le N 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q A_1 \\hspace{7pt} A_2 \\hspace{7pt} A_3 \\hspace{5pt} \\dots \\hspace{5pt} A_N T_1 X_1 Y_1 T_2 X_2 Y_2 T_3 X_3 Y_3 \\hspace{22pt} \\vdots T_Q X_Q Y_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 T_i = 2 であるような各クエリについて、答えを 1 行に 1 つずつ、順に出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 4\r\n1 2 3\r\n2 1 3\r\n2 2 3\r\n1 2 3\r\n2 2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 0\r\n1\r\n2 1 個目のクエリでは 1 \\oplus 2 \\oplus 3 = 0 を出力します。 2 個目のクエリでは 2 \\oplus 3 = 1 を出力します。 3 個目のクエリでは A_2 が 2 \\oplus 3 = 1 で置き換えられます。 4 個目のクエリでは 1 \\oplus 3 = 2 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 10\r\n0 5 3 4 7 0 0 0 1 0\r\n1 10 7\r\n2 8 9\r\n2 3 6\r\n2 1 6\r\n2 1 10\r\n1 9 4\r\n1 6 1\r\n1 6 3\r\n1 1 7\r\n2 3 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1\r\n0\r\n5\r\n3\r\n0"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc185/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:00.795856+00:00",
+  "statement_sha256": "d5f86fc05aa29f40c90a5d9aeb51926d005b60ff7654e90fbb9a0342153548f0",
+  "editorials": []
+}

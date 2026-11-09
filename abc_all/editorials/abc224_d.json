@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc224_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc224/editorial/2813",
+      "text": "\\(8\\)\n個のコマの配置を\n\\(9\\)\n文字の文字列\n\\(s_1 s_2 \\ldots s_9\\)\nで 表現することを考えます。\n頂点\n\\(i\\)\nにコマ\n\\(j\\)\nが置かれているとき\n\\(s_i\\)\nを\n\\(j\\)\nとします。また、頂点\n\\(i\\)\nが空の頂点のときは\n\\(s_i\\)\nを\n\\(9\\)\nとします。\n例えば、完成したパズルのコマの配置は文字列\n123456789\nで表されます。また、本問題の入力例\n\\(1\\)\nの説明文に示す手順では、コマの配置が\n931456782\n\\(\\rightarrow\\)\n231456789\n\\(\\rightarrow\\)\n291456783\n\\(\\rightarrow\\)\n921456783\n\\(\\rightarrow\\)\n129456783\n\\(\\rightarrow\\)\n123456789\nと変化します。\nコマの配置は\n1\nから\n9\nの文字の並べ替えで表されるため、コマの配置の総数は\n\\(9!\\)\n個です。\nまた、ある状態\n\\(s_1 s_2 \\ldots s_9\\)\nからは、「\n\\(s_i = \\)\n9\nまたは\n\\(s_j = \\)\n9\n」 かつ 「頂点\n\\(i\\)\nと頂点\n\\(j\\)\nを結ぶ辺が存在する」ときかつそのときに限り、\n\\(s_i\\)\nと\n\\(s_j\\)\nを入れ替えた状態\n\\(s_1 \\ldots s_{i-1} s_j s_{i+1} \\ldots s_{j-1} s_i s_{j+1} \\ldots s_9\\)\nに\n\\(1\\)\n回の操作で遷移することができます。\nありうる\n\\(9!\\)\n個の状態を頂点とし、\n\\(1\\)\n回の操作で遷移可能な状態どうしの間に辺を張った無向グラフを考えると、本問題の答えはこの無向グラフ上での「初期状態から状態\n123456789\nまでの最短距離（到達するためにたどる辺の本数の最小値）」です。\nこれは、このグラフ上で幅優先探索（BFS）を行うことで求めることができます。  幅優先探索の過程で「初期状態から各状態\n\\(s_1 s_2 \\ldots s_9\\)\nへの最短距離」を記憶するためには、文字列\n\\(s_1 s_2 \\ldots s_9\\)\nに対して最短距離を対応させる連想配列を用いることができます。\n以下に、C++言語による実装例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <vector>\n#include <algorithm>\n#include <map>\n#include <queue>\nusing namespace std;\n\nint main(void)\n{\n  int m;\n  cin >> m;\n\n  vector<int> G[10];\n  int u, v;\n  for(int i = 1; i <= m; i++){\n    cin >> u >> v;\n    G[u].push_back(v);\n    G[v].push_back(u);\n  }\n\n  int p; string s = \"999999999\";\n  for(int i = 1; i <= 8; i++){\n    cin >> p;\n    s[p-1] = i + '0';\n  }\n\n  queue<string> Q;\n  Q.push(s);\n  map<string, int> mp;\n  mp[s] = 0;\n\n  while(Q.size()){\n    string s = Q.front(); Q.pop();\n    for(int i = 1; i <= 9; i++) if(s[i-1] == '9') v = i;\n\n    for(auto u : G[v]){\n      string t = s;\n      swap(t[u-1], t[v-1]);\n      if(mp.count(t)) continue;\n      mp[t] = mp[s] + 1;\n      Q.push(t);\n    }\n  }\n  if(mp.count(\"123456789\") == 0) cout << -1 << endl;\n  else cout << mp[\"123456789\"] << endl;\n\n  return 0;\n}"
+      ],
+      "text_sha256": "558ae94e711319f98e57d5fccd1e0bd38ab4c894e5c4beeb04596828a4f1f6f8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc224/abc224_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

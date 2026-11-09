@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc439_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc439/editorial/14993",
+      "text": "まず、いったん計算量を無視した解法を考えてみましょう。\n\\(N\\)\n以下の各整数が良い整数であるかどうかを判定できればよいので、例えば次のアルゴリズムが考えられます。\n答えを管理する配列\n\\(a\\)\nを用意する。はじめ、\n\\(a\\)\nは空である。\n\\(n=1,2,\\dots, N\\)\nに対して次の操作を行う。\nはじめ、\n\\(c  = 0\\)\nとする。\n\\(0 \\lt x \\leq \\sqrt{n}\\)\nを満たす整数\n\\(x\\)\nについて次の操作を行う。(注：\n\\(x \\leq \\sqrt{n}\\)\nという条件を加えているのは、\n\\(x \\gt \\sqrt{n}\\)\nの場合\n\\(x^2+y^2=n\\)\nを満たす\n\\(y\\)\nが存在しないためである。)\n\\(x^2 + y^2 = n\\)\nを満たす非負の数\n\\(y\\)\nを計算する。(これは\nsqrt(n - x * x)\nを計算すればよい。)\n\\(y\\)\nが\n\\(x \\lt y\\)\nを満たす正整数である場合、\n\\(c\\)\nをインクリメントする。\n最終的な\n\\(c\\)\nの値が\n\\(1\\)\nである場合、良い整数としての条件を満たすので、\n\\(a\\)\nに\n\\(n\\)\nを追加する。\n最終的な\n\\(a\\)\nが答えを格納した配列となる。\nしかし、このアルゴリズムは\n\\(\\mathrm{O}(N \\sqrt{N})\\)\n回\n\\(y\\)\nを計算しているため実装しても TLE してしまうので工夫が必要です。\n上記のアルゴリズムにおいて調べている\n\\((x, y)\\)\nの範囲が\n\\(x^2 + y^2 \\leq N\\)\nである点に注目します。ここから、はじめに\n\\(n\\)\nを固定することなく\n\\((x, y)\\)\nを調べていくという方法が導出できます。つまり、次のアルゴリズムが従います。\nはじめに\n\\(c = (c_1, c_2, \\dots, c_N)\\)\nを\n\\(0\\)\n初期化された配列とする。\n\\(x = 1, 2, \\dots\\)\nについて\n\\(x^2 \\leq N\\)\nを満たす間、次の操作を行う。\n\\(y = x+1, x+2, \\dots\\)\nについて\n\\(x^2 + y^2 \\leq N\\)\nを満たす間、次の操作を行う。\n\\(c_{x^2 + y^2}\\)\nをインクリメントする。\n最終的に\n\\(c_n = 1\\)\nであるような\n\\(n\\)\nが良い整数となるから、\n\\(c_n=1\\)\nである\n\\(n\\)\nを列挙する。\nこのアルゴリズムの計算量を考えてみると、\n\\(x, y\\)\nは\n\\(x^2 + y^2 \\leq N\\)\nの範囲のみを探索していることから\n\\(x, y \\leq \\sqrt{N}\\)\nが従うので、調べる\n\\((x,y)\\)\nの個数は\n\\(\\mathrm{O}(\\sqrt{N} \\times \\sqrt{N}) = \\mathrm{O}(N)\\)\n個です。よってこの問題を\n\\(\\mathrm{O}(N)\\)\nで解くことが出来ていて、これは十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int N;\n  cin >> N;\n  vector<int> c(N + 1);\n  for (int x = 1; x * x <= N; x++) {\n    for (int y = x + 1; x * x + y * y <= N; y++) {\n      c[x * x + y * y]++;\n    }\n  }\n  vector<int> ans;\n  for (int n = 1; n <= N; n++) {\n    if (c[n] == 1) ans.push_back(n);\n  }\n  cout << ans.size() << \"\\n\";\n  for (int i = 0; i < (int)ans.size(); i++) {\n    cout << ans[i] << \" \\n]\"[i + 1 == (int)ans.size()];\n  }\n}"
+      ],
+      "text_sha256": "d51f36f46105f9a3c8b31a841c7130983ce8c1223395c8b0b868a6ec26992476",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc439/abc439_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

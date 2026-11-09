@@ -1,0 +1,468 @@
+              ABC086 / ARC089 解説
+
+
+                                  sigma425
+
+
+
+  For International Readers: English editorial starts on page 5.
+
+
+A: Product
+
+ 整数a, b を読み込み、a × b を計算し、2 で割ったあまりを計算すればいいです。
+
+int main (){
+         int a,b;
+         cin >>a>>b;
+         int c = a * b;
+        if(c%2 == 0) puts (" Even ");
+         else puts (" Odd ");
+         return 0;
+}
+
+
+B: 1 21
+
+ 整数として読み込むよりも、文字列として読み込んで連結したものを整数に直すのが簡単かもしれません。
+
+C++ には標準で文字列を整数に直すstoi 関数があります。この整数は高々100100 なので、平方数かどうか
+
+は、1 × 1, 2 × 2, ..  , 1000 × 1000 くらいまでのどれかと一致するかループを回して確かめれば良いです。
+
+int main (){
+         string s,t;
+         cin >>s>>t;
+         int x = stoi(s+t);
+        for(int i=1;i <=1000;i++){
+                 if(i*i == x){
+                          puts (" Yes ");
+                         return 0;
+                   }
+          }
+         puts ("No ");
+}
+
+
+C: Traveling
+
+  t0 = 0, (x0, y0) = (0, 0) と置きます。各0 以上N −1 以下のi について、時刻ti に場所(xi, yi) にいた後、
+時刻ti+1 に場所(xi+1, yi+1) にいることができるか、を判定して、どれか一つでも不可能ならNo を、全て可
+能ならYes を出力すれば良いです。
+
+
+                                             1
+
+ この判定は、t := ti+1 −ti, d := abs(xi −xi+1) + abs(yi −yi+1) とおくと、d ≤t ∧t%2 = d%2 で判定で
+きます。(d ≤t でないと不可能なのは明らか、毎秒x + y の偶奇は変わるので2 で割ったあまりは一致する
+
+必要がある。逆にd, t がこれを満たすなら実際に条件のように動くことが可能)
+
+
+D: Checker
+
+ マス(x, y) が白とマス(x, y + K) が黒は同値なので、(x, y,′ W ′) という入力を(x, y + K,′ B′) に置き換
+
+えても条件は同じです。これで入力のci を全て’B’ に変換することが出来ます。
+ マス(x, y) の色とマス(x, y + 2K), (x + 2K, y) の色は一致します。なので、入力のx, y をx%2K, y%2K
+
+で置き換えても答えは変わりません。すると0 ≤x, y < 2K と変換することが出来ます。
+
+ 市松模様の黒い部分の左下のマスのうちひとつを定めるとマスの塗られ方全体が定まります。ここで、定め
+
+るマスは[0, 2K) × [0, 2K) の中にあると仮定して問題ありません(なぜなら、どんな市松の塗られ方でも黒い
+部分の左下のマスのうちひとつはこの中にあるため)。なので、左下マスを(2K)2 すべて試すと、左下を決め
+れば各条件が満たされるかどうかはO(1) で判定できるので、全体でO(NK2) になります。
+
+ ここから計算量を落とすには、条件i を満たせるような左下マスの集合がK ∗K の正方形区間のようになっ
+
+ていることに着目して、その範囲に+1 を足し、全体でのmax を取ります。ただし毎回範囲に+1 をしてい
+
+ては遅いので、差分を取って左下と右上に+1, 左上と右下に−1 を足しておき、あとで累積和を取ることで
+O(N + K2) で同じことが可能です。
+
+
+E: GraphXY
+
+ まずグラフ,S, T が与えられた時に,X = x, Y = y の時の最短距離Dx,y がどういう振る舞いをするかを考
+えます。0 以上の整数の組(a, b) に対して、「X の辺をちょうどa 回,Y の辺をちょうどb 回使った時にS か
+
+らT への(整数が書いてある辺の重みのみを考慮した) 最短距離」をfa,b とおきます。
+
+ すると、
+                                   Dx,y = min xa + yb + fa,b
+                                                 a,b≥0
+
+ 逆に次のようなグラフを考えれば、fa,b を0 以上の整数値に自由に決めて上のようにDx,y を設定できます。
+
+
+
+
+
+ なので、fa,b を決めることでこのD を入力のd と一致させることが目標です。
+ 入力d が与えられた時,d の値の範囲が高々100 であることから、a やb が100 より大きいとxa + yb + fa,b
+が100 より大きくなってしまいD をd と一致させる役には立ちません。
+
+ よって0 ≤a, b ≤100 をみたす整数の組(a, b) に対してfa,b を決めることにします。fa,b は、任意の
+1 ≤x ≤A, , 1 ≤y ≤B に対しdx,y ≤xa + yb + fa,b を満たす、という条件のもとで最も小さくする(ただし
+0 以上である必要はある) のがベストです。
+
+
+                                             2
+
+ なので、
+
+                                     fa,b = max(0, 0≤a,b≤100(dx,ymax     −xa + yb))
+
+として、これで計算したD と入力のd が一致していればこれを出力、していなければImpossible です。
+
+
+F: ColoringBalls
+
+ 以下では赤、青、白色のボールをそれぞれR,B,W で表します。まずボールの列が与えられた時に、それが
+
+実現できるか判定することを考えます。例えば”WRRBRBBWWRRRRWRBBWWRRBBRR” というボー
+
+ル列を考えます。まず’W’ で区切ってR,B からなる列の(多重) 集合に変換します。
+
+  {“RRBRBB”, “RRRR”, “RBB”, “RRBBRR”}
+
+ 次に、RR をR に、BB をB にする操作をできるだけ繰り返します(つまり連続しているR(B) をひとつの
+
+R(B) に置き換える操作をします)。
+
+  {“RBRB”, “R”, “RB”, “RBR”}
+
+ さらに、これらが次のうちどのグループに属しているかをカウントします：
+
+グループ1 : “R”
+
+グループ2 : “B”, “RB”, “BR”, “RBR”
+
+グループ3 : “BRB”, “RBRB”, “BRBR”, “RBRBR”
+
+グループ4 : “BRBRB”, “RBRBRB”, “BRBRBR”, “RBRBRBR”
+
+:
+
+(以下同様)
+
+ グループid を降順にならべた配列をf とおきます。
+
+ 上の例だとf = [3, 2, 2, 1] です。
+
+ 重要なのは、この配列f が一緒になるようなどんなボール列も実現できるかどうかは変わらないということ
+
+です。以下説明します。
+
+ まず列の集合に変換した結果が同じなら(つまり列の順番を並び替えたり無駄なW を挿入したりするだけ)
+
+結果も明らかに同じなのでここはOK です。
+
+ 次に連続するR の個数を増やしたりしてもそういう塗り方が出来るかは変わらないのでこれもOK です。
+
+ 最後にグループ分けですが、赤で塗る操作をr, 青で塗る操作をb, どちらでもいいので塗る操作を?とか
+
+くと、
+
+ グループ1 はr で実現できる
+
+グループ2 はrb で実現できる
+
+グループ3 はrb? で実現できる
+
+グループ4 はrb?? で実現できる
+
+グループ5 はrb??? で実現できる
+
+:
+
+
+ ということがわかります。つまり同グループに属していれば操作列によって実現可能かどうかは一緒です。
+
+ 最終的に、配列f が同じならば、実現可能性は同じであることがわかりました。
+
+ 配列f となるようなボール列が実現可能かどうかは次のように判定できます。操作列をs とおきます。
+
+
+                                             3
+
+  f の各要素x に、操作列の部分列であってグループx を実現できるものを割り当てられるかの判定をすれ
+
+ば良いです。(操作列の各文字はひとつにしか割り当てられません)
+
+ 実は最適な割当は以下の貪欲法で構成することが出来ます(以下の貪欲で構成できなければ不可能です)。
+
+ はじめに、s の要素を左から見ていって、k 個目にでてきたr をf のk 個目の要素に割り当てます。これが
+
+出てきた場所をrk とおきます。
+ 次に、f の要素を左から見ていって、もし値が2 以上なら、rk より右にあってまだ割り当てていないうち最
+も左のb を割り当てます。これが出てきた場所をbk とおきます。
+ 最後に、f の要素を左から見ていって、値x が3 以上なら、bk より右にあってまだ割り当てられていない
+もののうち左にあるx −2 個(r,b どちらでもよい) を割り当てます。
+
+ これらはそれぞれグループ分け部分で説明した必要な文字列のうち、r,b,? の部分に対応するものをとる操
+
+作です。
+
+ この貪欲の証明は、
+
+i) r を左から貪欲にとってよい
+
+ii) b を(対応するr より右で) 左から貪欲にとってよい
+
+iii) グループ番号が大きいものをできるだけ左に対応させるのがよい
+
+iv) 残りの?に対応する部分も、対応するb より右で左から貪欲にとってよい
+
+の4 つを示せば完了します。省略しますがこれは証明できます。
+
+ この貪欲はO(NK) で走ります。
+
+ ところでN = 70 でありうるボールの色の列から生成されるf は418662 通りしか無いことがわかります。
+
+なので、実際にf を生成し、上の貪欲アルゴリズムで可能かどうか判定し、可能なら,f を生成するボール列が
+
+何通りあるかを求めて(これは適切なcombination をかけ合わせるとできます) 十分高速に答えが求まります。
+
+  N, K の多項式時間で走るDP で計算することも出来ます。f にある1 の個数、1 以外の個数を全探索し
+
+て、そのあとf の要素を小さい方から追加していく(1 を何個追加するか、2 を何個追加するか・・・を順番
+
+に決めていく) のですが、「今追加しようとしている値」「これまで追加した値の総和」「これまで何個値を追加
+
+したか」をDP のキーに持てば可能です。
+
+
+
+
+
+                                             4
+
+             ABC086 / ARC089 Editorial
+
+
+                                  sigma425
+
+
+
+A: Product
+
+
+int main (){
+         int a,b;
+         cin >>a>>b;
+         int c = a * b;
+        if(c%2 == 0) puts (" Even ");
+         else puts (" Odd ");
+         return 0;
+}
+
+
+B: 1 21
+
+
+int main (){
+         string s,t;
+         cin >>s>>t;
+         int x = stoi(s+t);
+        for(int i=1;i <=1000;i++){
+                 if(i*i == x){
+                          puts (" Yes ");
+                         return 0;
+                   }
+          }
+         puts ("No ");
+}
+
+
+C: Traveling
+
+  Let t0 = 0, (x0, y0) = (0, 0). For each i between 0 and N −1, we check the following: can we reach
+(xi+1, yi+1) at time ti+1  if we start (xi, yi) at time ti?  If the answer is no for at least one i, we print
+
+”No”, otherwise we print ”Yes”.
+
+ We can check this as follows. Let t := ti+1 −ti, d := abs(xi −xi+1) + abs(yi −yi+1).  If d ≤t and
+
+t%2 = d%2, the answer is yes, otherwise the answer is no.
+
+
+
+
+
+                                             1
+
+D: Checker
+
+  The cell (x, y) is white iﬀthe cell (x, y + K) is black. Thus, we can replace a query (x, y,′ W ′) with
+(x, y + K,′ B′). Assume that all ci are ’B’s.
+  The colors of (x, y) and (x, y +2K), (x+2K, y) are same. Thus, we can replace a query (x, y,′ B′) with
+(x%2K, y%2K,′ B′). Assume that 0 ≤x, y < 2K for all queries.
+
+   If we ﬁx a black cell at the lower-left corner of a K × K block, we can uniquely determine the colors
+
+of all cells.  Here, we can assume that the black cell is inside [0, 2K) × [0, 2K).  Therefore, by trying
+all (2K)2 possibilities, and by checking the colors of all N cells that appear in the queries, we get an
+O(NK2) solution.
+
+  To make it faster, after we ﬁx the black cell at the corner, we should compute the number of queried
+
+cells inside certain rectangles in O(1). This can be done by pre-computing rectangle sums. Now the
+solution becomes O(N + K2).
+
+
+
+
+
+                                             2
+
+E: GraphXY
+
+  Let’s ﬁx a graph (and S, T). How does Dx,y (the shortest path when X = x, Y = y) behave?
+
+  For a pair of non-negative integers (a, b), deﬁne f(a, b) as the smallest possible sum of integers on an
+
+S −T path that contains exactly a edges with ’X’ and exactly b edges with ’Y’. Then,
+
+
+                                   Dx,y = min xa + yb + fa,b
+                                                 a,b≥0
+
+ On the other hand, if D satisﬁes the equation above (for some fa,b), we can construct a desired graph
+
+as follows:
+
+
+
+
+
+  Thus, our objective is to ﬁnd fa,b that matches with given d.
+
+  Since each integer in d is at most d, we don’t need to care the values of f(a, b) for a > 100 or b > 100
+
+because xa + yb + fa,b > 100 in this case. Thus, we want to decide fa,b for each pair (a, b) such that
+0 ≤a, b ≤100. We should minimize the value of fa,b under the constraint that dx,y ≤xa + yb + fa,b for
+all 1 ≤x ≤A, , 1 ≤y ≤B.
+
+  Therefore, deﬁne
+
+                                     fa,b = max(0, 0≤a,b≤100(dx,ymax     −xa + yb))
+
+  and compute D. If it matches with the input, we should print the graph described above. Otherwise,
+
+the answer is ”Impossible”.
+
+
+
+
+
+                                             3
+
+F: ColoringBalls
+
+ We start with a slow solution: generate all 3N sequences of balls of length N, and for each sequence,
+
+check if the sequence can be constructed by given operations.
+  However, we don’t need to check all 3N sequences. Some sequences turn out to be equivalent regardless
+
+of the operations.
+
+  Let R,B,W denote red, blue, and white, respectively. As an example, we use a sequence of balls
+
+”WRRBRBBWWRRRRWRBBWWRRBBRR”. We want to transform it into a ”canonlcal form” (while
+
+keeping the string equivalent to the original string).
+
+  First, obviously, we can split the string by ’W’:
+
+  {“RRBRBB”, “RRRR”, “RBB”, “RRBBRR”}
+
+  Next, we can replace ”RR” with ”R” and ”BB” with ”B”:
+
+  {“RBRB”, “R”, “RB”, “RBR”}
+
+  Next, replace each string with its group number:
+
+  Group 1 : “R”
+
+Group 2 : “B”, “RB”, “BR”, “RBR”
+
+Group 3 : “BRB”, “RBRB”, “BRBR”, “RBRBR”
+
+Group 4 : “BRBRB”, “RBRBRB”, “BRBRBR”, “RBRBRBR”
+
+:
+
+
+  Here, the groups represent strings that can be obtained by the following sequences of operations:
+
+  Group 1 : r
+
+Group 2 : rb
+
+Group 3 : rb?
+
+Group 4 : rb??
+
+Group 5 : rb???
+
+:
+
+
+  Finally, we can arbitrary shuﬄe the elements of the array of integers we get.  In this case, we get
+
+f = [3, 2, 2, 1].
+
+  It turns out that the number of distinct ﬁnal arrays we get is O(partitionnumber(N)∗N). In particular,
+
+when N = 70, there are only 418662 possible fs.
+
+  Now, our solution is as follows. We generate all 418662 possible fs. For each f, check if it can be
+
+obtained by the given sequence of operations. If yes, count the number of sequences of balls that lead to
+
+f (this is simply the product of some binomial coeﬃcients), and add it to the answer.
+
+ How to check if we can get f with the given sequence of operations?
+
+  Let s be the sequence of operations. For each integer x in f, we want to assign a subsequence of s that
+
+matches with x (for example, if x = 4, the subsequence must be ”rb??”). Here, the subsequences must
+
+be disjoint.
+
+
+                                             4
+
+ We can assign subsequences greedily as follows:
+
+    • Suppose that f is sorted in non-decreasing order.
+
+    • For each k, assign the k-th ’r’ in s (suppose that this is the rk-th character in s) to f[k].
+    • For each f[k] = x, (we check elements of f from left to right) if x ≥2, assign the leftmost ’b’ in s
+
+      to the right of the rk-th character of s to f[k]. Suppose that this is the bk-th character.
+    • Finally, for each f[k] = x, if x ≥3, we assign the leftmost x −2 unused letters of s to the right of
+
+      bk-th to f[k].
+
+ We omit the proof here, but it is relatively straightforward.
+
+  The solution above is fast enough to get accepted.
+
+   If you want a polynomial solution, we can do DP. We ﬁrst ﬁx the total number of 1s in f and the
+
+number of elements in f. Then, we add integers to f in the increasing order. Here, the keys of DP is
+
+(the ineger we will add next), (the sum of all integers we’ve added so far), and (the number of integers
+
+we’ve added so far). Since it’s complicated and not signiﬁcantly faster than the brute force above, we
+
+omit details.
+
+
+
+
+
+                                             5

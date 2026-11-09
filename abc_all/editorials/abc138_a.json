@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc138_a",
+  "editorials": [
+    {
+      "text": "A: Red or Not\n(原案: tozangezan, 準備・解説: evima)\npractice contest の問題A で足し算の代わりに条件分岐をさせるような問題です。入出力の行い方はそち\nらのサンプルコードを参照していただき、あとはif 文や条件演算子(?: など) と比較演算子(>= など) を組\nみ合わせてa と3200 の大小に応じて出力を変える処理を加えれば完成です。（抽象的な記述で終わってしま\nい恐縮ですが、個別の言語について述べるにはこのPDF は狭すぎます。Google 検索を活用してください）\n以下はPython(3) での実装例です。\n1 a = int(input())\n2 s = input()\n3 print(s if a >= 3200 else 'red')\n",
+      "text_sha256": "2828ebbf34bdcbe4197cf9aa12880812817ae829ee1f07920a33ecce391c266d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc138/abc138_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

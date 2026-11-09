@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc473_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc473/editorial/24874",
+      "text": "この問題は、残っているカードを順に確認して、 同じ整数が書かれているカードがないとき、そのカードは最後まで残ることが確定する。 同じ整数が書かれているカードがあるとき、それらのカード \\(2\\) 枚を食べる。 という操作を行い、確定したカードの総和を出力することで解くことができます。 実装例は以下のようになります。 別の方法で解くこともできます。 整数 \\(x\\) が書かれたカードは、最終的に \\(1\\) 枚残るか \\(1\\) 枚も残らないかのどちらかです。\n操作によって整数 \\(x\\) が書かれたカードの枚数の偶奇が変化しないので、はじめに \\(x\\) が書かれたカードが奇数枚あるとき、かつそのときに限り \\(x\\) のカードが残ります。 よって、奇数枚ある \\(x\\) の合計を計算することでもこの問題を解くことができます。 実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\n    vector<int> A(N);\n    for (int& a : A) {\n        cin >> a;\n    }\n\n    // 残ることが確定したカードの合計\n    int answer = 0;\n    // 全部確定するまで操作を行う\n    while (!A.empty()) {\n        int a = A.back();\n        A.pop_back();\n\n        bool found = false; // 同じカードがあるか\n        for (int i = 0; i < A.size(); ++i) {\n            if (A[i] == a) { // 同じカードがあったら\n                A.erase(begin(A) + i); // A から消す\n                found = true;\n                break;\n            }\n        }\n        if (!found) { // 同じカードがなければ\n            answer += a; // 合計に足す\n        }\n    }\n\n    cout << answer << endl;\n    return 0;\n}\n",
+        "N = int(input())\n\nA = list(map(int, input().split()))\n\n# 残ることが確定したカードの合計\nanswer = 0\n# 全部確定するまで操作を行う\nwhile len(A) > 0:\n    a = A.pop(0)\n\n    if a in A: # 同じカードがあったら\n        A.remove(a) # A から消す\n    else: # 同じカードがなければ\n        answer += a\n\nprint(answer)\n",
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\n    vector<int> parity(101);\n    for (int i = 0; i < N; ++i) {\n        int A;\n        cin >> A;\n        parity[A] ^= A; // 奇数枚なら A に、偶数枚なら 0 にする\n    }\n\n    // 全体の合計を出力\n    cout << ranges::fold_left(parity, 0, plus{}) << endl;\n}\n",
+        "N = int(input())\n\nparity = [0 for i in range(101)]\nfor A in map(int, input().split()):\n    parity[A] ^= A # 奇数枚なら A に、偶数枚なら 0 にする\n\n# 全体の合計を出力\nprint(sum(parity))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "a4c5f4155f14688364fb8a6a97b3e081108ab0b70bdda100fd023b9a3f6c4af4"
+    }
+  ],
+  "status": "available"
+}

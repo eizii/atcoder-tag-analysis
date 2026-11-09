@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc139_a",
+  "editorials": [
+    {
+      "text": "A: Tenki\nS とT を比較して、一致する文字がいくつあるかを数えればよいです。\nこの問題では文字列が固定長なので、ループを回さなくても場合分けで正答することができます。\nListing 1\nC++ による実装例\n1\n#include<bits/stdc++.h>\n2\nusing namespace std;\n3\n4\nint main() {\n5\nstring s, t;\n6\ncin >> s >> t;\n7\nint ans = 0;\n8\nif(s[0] == t[0]) ans++;\n9\nif(s[1] == t[1]) ans++;\n10\nif(s[2] == t[2]) ans++;\n11\ncout << ans << endl;\n12\nreturn 0;\n13\n}\n",
+      "text_sha256": "0108f2e0095147e1e4f0218d70502fc74a37e1a19fbdc316d46648033a574266",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc139/abc139_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

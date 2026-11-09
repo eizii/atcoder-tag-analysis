@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc350_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc350/editorial/9810",
+      "text": "先頭から順に正しい要素と入れ替えることで必ず\n\\(N-1\\)\n回以下の操作で目的を達成できます。\n例\nこの操作を行う際、「現在\n\\(A\\)\nの中で\n\\(i\\)\nがどこにあるか」を配列の中から毎回探すと、最悪\n\\(\\Theta(N)\\)\n時間、全体で\n\\(\\Theta(N^2)\\)\n時間かかるケースが存在し、TLE(実行時間制限超過)となります。\nそこで配列\n\\(A\\)\nの他に「\n\\(A\\)\nの中で値\n\\(i\\)\nがある位置を表す配列\n\\(\\mathrm{pos}\\)\n」を用意し、同時に更新することにします。\n例えば\n\\(A=(3,1,2,4)\\)\nのとき、\n\\(\\mathrm{pos}=(2,3,1,4)\\)\nとなります。\nこれにより「現在\n\\(A\\)\nの中で\n\\(i\\)\nがどこにあるか」は\n\\(\\mathrm{pos}[i]\\)\nを参照することで\n\\(O(1)\\)\nで求めることができ、全体で\n\\(O(N)\\)\n時間で問題を解くことができます。",
+      "codes": [
+        "5 2 3 8 4 9 6 7 1\n  ↓ 1を正しい位置に移動する\n1 2 3 8 4 9 6 7 5\n  ↓ 2は正しい位置にあるので何もしない\n1 2 3 8 4 9 6 7 5\n  ↓ 3は正しい位置にあるので何もしない\n1 2 3 8 4 9 6 7 5\n  ↓ 4を正しい位置に移動する\n1 2 3 4 8 9 6 7 5\n  ↓ 5を正しい位置に移動する\n1 2 3 4 5 9 6 7 8\n  ↓ 6を正しい位置に移動する\n1 2 3 4 5 6 9 7 8\n  ↓ 7を正しい位置に移動する\n1 2 3 4 5 6 7 9 8\n  ↓ 8を正しい位置に移動する\n1 2 3 4 5 6 7 8 9"
+      ],
+      "text_sha256": "14ca9762391b4de27b37da5a51e8da6b9c9652763fe606bb6687b1ece3eeeac2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc350/abc350_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc350/editorial/9832",
+      "text": "Pythonでこの問題を解く際に次のように書いてしまい、TLEした人が多いのではないでしょうか。\n実は配列クラスのindexメゾットの計算量は最悪で\n\\({O(配列の要素数)}\\)\n掛かってしまうので、上記のコードの全体の最悪計算量は\n\\({O(N^{2})}\\)\nとなってしまいます。今回の制約の場合、最悪で\n\\(N^2 ≃ 10^{10}\\)\n回ほど計算しなければいけなくなり、とても実行制限時間2秒に間に合いません。\nこれを回避するためには、次のような要素数\n\\(N\\)\nの配列\n\\(B\\)\nを新たに定義すればよいです。\n整数\n\\(i+1\\)\nは配列\n\\(A\\)\nの\n\\(B[i]\\)\n番目に存在する。\nこうすることで計算量は\n\\(O(N)\\)\nとなり十分高速にこの問題を解くことができます",
+      "codes": [
+        "ans = []\nfor i in range(N):\n    if A[i] == i+1:\n        continue\n    idx = A.index(i+1)\n    A[i],A[idx] = A[idx],A[i]\n    ans.append((i+1,idx+1))\n\nprint(len(ans))\nfor a in ans:\n    print(*a)"
+      ],
+      "text_sha256": "132b7ba4eacce723165ff5ba68fa7e0401a39736200652b8afe0175ada6d642b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc350/abc350_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc350/editorial/9833",
+      "text": "公式解説\nでは「\n\\(A\\)\nの中で値\n\\(i\\)\nがある位置を表す配列\n\\(\\text{pos}\\)\n」を作成することで計算量が\n\\(O(N^2)\\)\nになることを回避していましたが、このような配列を作らない方法を解説します。この方針の方がほんの少し実装が楽かもしれません。\n以下の手続きで正当な解を得ることができます。\n\\(i=1,2,...,N\\)\nの順に、以下の手続きを行う。\n\\(A_i\\ne i\\)\nである間、\n\\(A_i\\)\nと\n\\(A_{A_i}\\)\nを\nswap\nする。\n一回の\nswap\nごとに\n\\(A_i\\)\nは正しい位置に移動するので、\n\\(A\\)\nのうちちょうど\n\\(N-1\\)\n要素が正しい位置に存在することがないことも踏まえると、高々\n\\(N-1\\)\n回の操作で目標を達成できることが示せます。\n計算量は、一回の\nswap\nに定数時間かかっているため、必ず\n\\(N-1\\)\n回以下の\nswap\nで終了することも踏まえると\n\\(O(N)\\)\nです。これは十分高速です。\n実装例(PyPy3)",
+      "codes": [
+        "N=int(input())\nA=list(map(int,input().split()))\nans=[]\nfor i in range(N):\n    A[i]-=1\nfor i in range(N):\n    while A[i]!=i:\n        ans.append((i+1,A[i]+1))\n        pre=A[A[i]]\n        A[A[i]]=A[i]\n        A[i]=pre\nprint(len(ans))\nfor i in ans:\n    print(*i)"
+      ],
+      "text_sha256": "4da8dd06b56f1fc2fbd5350dd3ba191038d17d706c9d7914c8b1393c87d78794",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc350/abc350_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc405_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13009",
+      "text": "円環上の\n\\(2\\)\n点を結ぶ線分同士の交差に関する問題では、以下の事実がよく用いられます。（証明は省略します。）\n円環上に時計回り（あるいは反時計回り）に点が並んでいるとする。互いに相異なる整数\n\\(a,b,c, d\\ (a<b, c<d)\\)\nに対し、\n\\(2\\)\n点\n\\(a,b\\)\nを結ぶ線分と\n\\(2\\)\n点\n\\(c,d\\)\nを結ぶ線分が共有点を持つことは以下と同値である。\n数直線上の区間\n\\([a,b]\\)\nと\n\\([c,d]\\)\nが共有点を持ち、かつ包含関係（片方がもう片方を完全に包含する関係）にない。すなわち、\n\\(a<c<b<d\\)\nまたは\n\\(c<a<d<b\\)\n。\n本解説でも考察の簡略化のため上記の事実を用います。すなわち、以下のような問題を考えます。\n数直線上の\n\\(M\\)\n個の区間\n\\([A_i, B_i]\\ (1\\leq i\\leq M)\\)\nおよび\n\\(Q\\)\n個の区間\n\\([C_j, D_j]\\ (1\\leq j\\leq Q)\\)\nが与えられる。\n任意の\n\\(i_1, i_2\\ (1\\leq i_1,i_2\\leq M, i_1\\neq i_2)\\)\nについて、\n\\(2\\)\n区間\n\\([A_{i_1},B_{i_1}], [A_{i_2},B_{i_2}]\\)\nは共有点を持たないか包含関係にあるかのいずれかである（＊）。\n\\(j=1,2,\\dots,Q\\)\nそれぞれについて、\n\\([A_i,B_i]\\)\nと\n\\([C_j,D_j]\\)\nが共有点を持ちかつ包含関係にないような\n\\(i\\)\nの個数を求めよ。（なお、任意の\n\\(i,j\\)\nの組について、\n\\(A_i,B_i,C_j,D_j\\)\nは互いに相異なることが保証される。）\n以下、簡単のため区間\n\\([A_i,B_i]\\)\nのことを区間\n\\(i\\)\nと表記します。また、区間\n\\(i\\)\nが区間\n\\(j\\)\nを包含することを\n\\(i \\supset j\\)\nと表記します。\n唐突ですが、区間\n\\(1,2,\\dots,M\\)\nの包含関係を表す有向グラフ\n\\(G\\)\nを考えます。具体的な定義は以下の通りです：\n\\(G\\)\nは\n\\(M+1\\)\n個の頂点\n\\(0,1,\\dots,M\\)\nからなる。\n任意の\n\\(i,j\\ (1\\leq i,j\\leq M, i\\neq j)\\)\nについて、\n\\(i \\supset j\\)\nかつ、\n\\(i\\supset k \\supset j\\)\nなる\n\\(k\\ (1\\leq k\\leq M, k\\neq i, k\\neq j)\\)\nが存在し\nない\nとき、頂点\n\\(i\\)\nから頂点\n\\(j\\)\nに向かって辺が張られている。\n任意の\n\\(i\\ (1\\leq i\\leq M)\\)\nについて、\n\\(k\\supset i\\)\nなる\n\\(k\\ (1\\leq k\\leq M, k\\neq i)\\)\nが存在し\nない\nとき、頂点\n\\(0\\)\nから頂点\n\\(i\\)\nに向かって辺が張られている。\n上記の辺以外に辺は存在しない。\nこのとき、区間\n\\(1,2,\\dots,M\\)\nは互いに共有点を持たないか包含関係にあるという条件（＊）から、\n\\(G\\)\nは頂点\n\\(0\\)\nを根とする根付き木になります。（証明は省略します。）\n下図はその具体例です。\nさて、クエリの処理について考えましょう。任意の整数\n\\(x\\)\nについて、\n\\(x\\)\nの\n最小包含区間\n\\(m(x)\\)\nを以下のように定義します。\n区間\n\\(1,2,\\dots,M\\)\nのうち、\n\\(x\\)\nを区間内に含む（すなわち\n\\(A_i \\leq x\\leq B_i\\)\n）ものであって、幅\n\\(B_i-A_i\\)\nが最小であるようなものの番号。ただし、存在しなければ\n\\(0\\)\n。\nこのとき、区間\n\\([C_j,D_j]\\)\nに対するクエリの答えは、\n\\(G\\)\nを無向木とみなしたときの頂点\n\\(m(C_j),m(D_j)\\)\n間の最短経路の長さに一致します。\nよって、本問題は以下のようなアルゴリズムによって解くことができます。\n\\(G\\)\nを構築し、\n\\(m(x)\\ (1\\leq x\\leq 2N)\\)\nの値を求める。これは stack を用いることで\n\\(O(N+M)\\)\nで実現できる。（詳細は下記の実装例を参照。）\n最小共通祖先 (LCA) を求めるアルゴリズムを利用し、前計算\n\\(O(M\\log M)\\)\n、各クエリあたり\n\\(O(\\log M)\\)\nでクエリの答えを求める。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, m;\n    cin >> n >> m;\n    vector<int> id(2 * n);\n    for (int i = 1; i <= m; i++) {\n        int a, b;\n        cin >> a >> b;\n        --a, --b;\n        id[a] = id[b] = i;\n    }\n\n    vector<int> min_cov(2 * n); // min_cov[i]: smallest interval that covers point i\n    int K = 1;\n    while ((1 << K) <= m) ++K;\n    vector par(K, vector<int>(m + 1, -1));\n    vector<int> dep(m + 1);\n    stack<int> st;\n    st.push(0);\n    for (int i = 0; i < 2 * n; i++) {\n        if (i & 1) {\n            if (!id[i]) continue;\n            if (st.top() == id[i]) {\n                st.pop();\n                par[0][id[i]] = st.top();\n                dep[id[i]] = st.size();\n            } else {\n                st.push(id[i]);\n            }\n        } else {\n            min_cov[i] = st.top();\n        }\n    }\n    for (int k = 0; k < K - 1; k++) {\n        for (int i = 0; i < m + 1; i++) {\n            par[k + 1][i] = (par[k][i] == -1 ? -1 : par[k][par[k][i]]);\n        }\n    }\n\n    auto lca = [&](int u, int v) -> int {\n        if (dep[u] > dep[v]) swap(u, v);\n        int d = dep[v] - dep[u];\n        for (int k = 0; k < K; k++) {\n            if (d >> k & 1) v = par[k][v];\n        }\n        if (u == v) return u;\n        for (int k = K - 1; k >= 0; k--) {\n            if (par[k][u] != par[k][v]) {\n                u = par[k][u];\n                v = par[k][v];\n            }\n        }\n        return par[0][u];\n    };\n\n    int q;\n    cin >> q;\n    while (q--) {\n        int c, d;\n        cin >> c >> d;\n        --c, --d;\n        int u = min_cov[c];\n        int v = min_cov[d];\n        int l = lca(u, v);\n        cout << dep[u] + dep[v] - dep[l] * 2 << '\\n';\n    }\n}"
+      ],
+      "text_sha256": "c8def827363139f3157ce7f1e091e7bbc7e24925fbc3e811959b2ae54c59ef22",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13011",
+      "text": "\\(D\\)\nが固定されていると仮定します。\n任意の要素が\n\\(0\\)\nで初期化された長さ\n\\(2N\\)\nの数列\n\\(V\\)\nに対して、以下の操作を\n\\(i = 1, 2, \\dots , M\\)\nの順に行います。\n\\(B_{i} < D\\)\nならば、\n\\(V[A_{i}]\\)\nに\n\\(-1\\)\nを加算し、\n\\(V[B_{i}]\\)\nに\n\\(1\\)\nを加算する。\n\\(D < B_{i}\\)\nならば、\n\\(V[A_{i}]\\)\nに\n\\(1\\)\nを加算する。\nすると、\n\\(k\\)\n番目のクエリの答えは\n\\(V[C_{k}] + V[C_{k} + 1] + \\cdots + V[D]\\)\nとなります。\n\\(D\\)\nが固定されていなくても、\n\\(D_{k}\\)\nの昇順にクエリを見て、適切に\n\\(V\\)\nを変更することで、\n\\(1\\)\n点更新・区間和の問題に帰着できます。\nよって、BIT や segment tree を用いて十分高速に解くことができます。\nc++ 実装例",
+      "codes": [],
+      "text_sha256": "03a3be0f99dae8e0858fba1c2999833574997ba8ce3f2a5644e437c7cd7a86d6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13017",
+      "text": "各クエリは2次元平面上で以下の2つの矩形内の点の個数を数える問題と考えられます。\n\\(1\\leq a <c\\)\nかつ\n\\(c\\leq b<d\\)\n\\(c\\leq a <d\\)\nかつ\n\\(d\\leq b<2N+1\\)\nこれはRectangle Sumと呼ばれる問題で、Wavelet Matrixなどを用いて高速に解くことができます。計算量は\n\\(O((N+Q)\\log N)\\)\nで十分高速です。",
+      "codes": [],
+      "text_sha256": "3682bcde9a0a3a8258bab494472546370762e72726e83fd938bf98f4cfa818a7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13024",
+      "text": "括弧列に置き換えて解く方法を紹介します。\nまず、公式解説の冒頭と同様に、この問題を数直線上の区間の包含関係の問題に置き換えて考えます。その上で、全ての区間\n\\([A_{i}, B_{i}]\\)\nについて、\n\\(A_{i}\\)\n番目の文字を\n(\n、\n\\(B_{i}\\)\n番目の文字を\n)\nとした長さ\n\\(2N\\)\nの文字列\n\\(S\\)\nを考えます(どの文字も割り当てられなかった位置は空白文字とします)。区間\n\\([A_{i}, B_{i}]\\)\nは互いに交差しないため、この空白文字を含む括弧列\n\\(S\\)\n上で文字\n\\(S_{A_{i}}\\)\nと\n\\(S_{B_{i}}\\)\nは対応する括弧となります。\nこの時、区間\n\\([C_{i}, D_{i}]\\)\nに交差する区間の数は、\n\\(S\\)\nの部分文字列\n\\(S_{C_{i}...D_{i}}\\)\nを空白文字を含む正しい括弧列にするために削除する必要のある最小の括弧の数と等しくなります。\n\\(S_{C_{i}...D_{i}}\\)\nを空白文字を含む正しい括弧列にするために削除する必要のある最小の括弧の数は以下のように求めることができます。\n\\(S\\)\nの\n(\nを\n\\(+1\\)\n、\n)\nを\n\\(−1\\)\n、空白文字を\n\\(0\\)\nに置き換えた数列を\n\\(T=(T_{1}, T_{2}, ... ,T_{2N})\\)\nとし、\n\\(T\\)\nの前から累積和をとった数列を\n\\(U=(U_{0},U_{1}, U_{2}, ... ,U_{2N})\\)\nとします。この時、\n削除する必要のある\n)\nの数：\n\\(U_{C_{i}} - \\min(U_{C_{i}}, U_{C_{i}+1}, ... , U_{D_{i}})\\)\n削除する必要のある\n(\nの数：\n\\(U_{D_{i}} - \\min(U_{C_{i}}, U_{C_{i}+1}, ... , U_{D_{i}})\\)\nです。\n区間最小値の取得にセグメントツリーを利用することで、時間計算量\n\\(O(N + Q\\log(N))\\)\nで解くことができます。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/all>\n\nusing namespace std;\nusing namespace atcoder;\n\nint op(int a, int b) { return min(a, b); }\nint e() { return numeric_limits<int>::max(); }\n\nint main() {\n\tint N, M;\n\tcin >> N >> M;\n\tvector<pair<int, int>> ab(M);\n\tfor (auto&& e : ab) cin >> e.first >> e.second;\n\n\tvector<int> T(N * 2 + 1, 0);\n\tfor (auto&& e : ab) {\n\t\tT[e.first]++;\n\t\tT[e.second]--;\n\t}\n\tvector<int> U(N * 2 + 1, 0);\n\tfor (int i = 1; i < ssize(U); ++i) U[i] = T[i] + U[i-1];\n\tsegtree<int, op, e> seg(U);\n\n\tint Q;\n\tcin >> Q;\n\twhile (Q--) {\n\t\tint C, D;\n\t\tcin >> C >> D;\n\t\tconst int E = seg.prod(C, D + 1);\n\t\tcout << U[C] - E + U[D] - E << '\\n';\n\t}\n}"
+      ],
+      "text_sha256": "a4d1871a636ed3ebba8e288189feaad60ee63b01abd1c7cba378f6af8a40bff4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13019",
+      "text": "この解法の本質は公式解説と同じです。\n\\(M\\)\n本の線分が互いに交わらないことから円の内部の領域は\n\\(M\\)\n本の線分によって\n\\(M+1\\)\n個の領域に分割され、領域を頂点、線分を隣接する2つの領域を繋ぐ辺とするグラフが構築できます。\nこのグラフは連結かつ\n\\(M+1\\)\n頂点\n\\(M\\)\n辺なので木です。\nクエリで与えられる線分(に向きをつけたもの)はいくつかの領域を線分と交差することによって移動するのでウォークと対応づけられます。\n「線分がいくつの線分と交わるか」\nはグラフ上では\n「線分に対応するウォークの長さ」\nと等しいです。\nこのウォークは同一ではない2つの直線が2回以上交わることはないことより同じ辺を2回以上通ることはないので、グラフが木であることからパスであるとわかります\n以上のことより木上のパスの長さを求める問題に帰着することができました。\nあとは公式解説と同じなので割愛。",
+      "codes": [],
+      "text_sha256": "1696c2d3d84055ff015baf7ccb497fcae55fcd1d8aafc4b0157b703a4a026dd2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13018",
+      "text": "公式解説と同様の方針で、根付き木\n\\(G\\)\nを構築しない解法を紹介します。\n\\(n(x)  (1 \\le x \\le 2N)\\)\nを、「区間\n\\(1, 2, \\cdots, M\\)\nのうち\n\\(x\\)\nを含む区間の個数」とすると、\n\\(n(x)\\)\nは根付き木\n\\(G\\)\nにおける頂点\n\\(m(x)\\)\nの深さに対応しています(下図参照)。\nすると、各クエリの答えである「根付き木\n\\(G\\)\nでの頂点\n\\(m(C_j), m(D_j)\\)\n間の最短経路の長さ」は、\n\\(n(C_j)+n(D_j)-2n(a)\\)\n（\n\\(a\\)\nは\n\\(m(C_j), m(D_j)\\)\nのLCA）で求めることができます。そして、\n\\(n(a)\\)\nは\n\\(n(x)\\)\nの区間\n\\([C_j,D_j]\\)\n内の最小値として求めることができます。\nよって、区間加算・区間最小値取得ができる遅延セグメント木を用いれば、\n\\(n(x)\\)\nの作成：遅延セグメント木への区間加算\n\\(n(a)\\)\nの取得：遅延セグメント木の区間最小値取得\nで済み、少ない実装量でACすることができます。\n計算量は\n\\(O((M+Q) \\log N)\\)\nです。",
+      "codes": [],
+      "text_sha256": "ad9a39a160b69300cfa2d2216f40f3d9dbfc4c43bdc451eb0d8928e77f00a8b5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

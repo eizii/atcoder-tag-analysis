@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc261_c",
+  "title": "NewFolder(1)",
+  "contests": [
+    {
+      "contest_id": "abc261",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 179,
+  "raw_difficulty": 79,
+  "contest_id": "abc261",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc261/tasks/abc261_c",
+  "statement": "配点 : 300 点 問題文 2 つの文字列 A,B に対して、 A の末尾に B を連結した文字列を A+B と表します。 N 個の文字列 S_1,\\ldots,S_N が与えられます。 i=1,\\ldots,N の順に、次の指示に従って加工して出力してください。 S_1,\\ldots,S_{i-1} の中に S_i と同じ文字列が存在しないならば、 S_i を出力する。 S_1,\\ldots,S_{i-1} の中に S_i と同じ文字列が X 個 (X>0) 存在するならば、 X を文字列として扱って S_i+ ( +X+ ) を出力する。 制約 1 \\leq N \\leq 2\\times 10^5 S_i は英小文字のみからなる長さ 1 以上 10 以下の文字列 入力 入力は以下の形式で標準入力から与えられる。 N S_1 S_2 \\vdots S_N 出力 問題文中の指示にしたがって、 N 行出力せよ。 入力例 1 5\r\nnewfile\r\nnewfile\r\nnewfolder\r\nnewfile\r\nnewfolder 出力例 1 newfile\r\nnewfile(1)\r\nnewfolder\r\nnewfile(2)\r\nnewfolder(1) 入力例 2 11\r\na\r\na\r\na\r\na\r\na\r\na\r\na\r\na\r\na\r\na\r\na 出力例 2 a\r\na(1)\r\na(2)\r\na(3)\r\na(4)\r\na(5)\r\na(6)\r\na(7)\r\na(8)\r\na(9)\r\na(10)",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 2 つの文字列 A,B に対して、 A の末尾に B を連結した文字列を A+B と表します。 N 個の文字列 S_1,\\ldots,S_N が与えられます。 i=1,\\ldots,N の順に、次の指示に従って加工して出力してください。 S_1,\\ldots,S_{i-1} の中に S_i と同じ文字列が存在しないならば、 S_i を出力する。 S_1,\\ldots,S_{i-1} の中に S_i と同じ文字列が X 個 (X>0) 存在するならば、 X を文字列として扱って S_i+ ( +X+ ) を出力する。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2\\times 10^5 S_i は英小文字のみからなる長さ 1 以上 10 以下の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S_1 S_2 \\vdots S_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 問題文中の指示にしたがって、 N 行出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\nnewfile\r\nnewfile\r\nnewfolder\r\nnewfile\r\nnewfolder"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 newfile\r\nnewfile(1)\r\nnewfolder\r\nnewfile(2)\r\nnewfolder(1)"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 11\r\na\r\na\r\na\r\na\r\na\r\na\r\na\r\na\r\na\r\na\r\na"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 a\r\na(1)\r\na(2)\r\na(3)\r\na(4)\r\na(5)\r\na(6)\r\na(7)\r\na(8)\r\na(9)\r\na(10)"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc261/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:36.607869+00:00",
+  "statement_sha256": "ef5d2d3470edee13b2aa5102a3483f64ebc1724e5e95fe8e7de33ec860a377ae",
+  "editorials": []
+}

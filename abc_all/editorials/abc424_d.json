@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc424_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc424/editorial/13932",
+      "text": "この問題にはいくつかの解法が考えられます。\nbitDP を用いて、マス目を上から順に、各行の状態を管理しつつ走査する解法\nbitDP を用いて、マス目をマス番号\n\\((i,j)\\)\nの辞書順に、最後の\n\\((W+1)\\)\nマスの状態を管理しつつ走査する解法\n問題の制約下で答えが高々\n\\(9\\)\nであること\n\\(^*\\)\nを用いて、枝刈りを含む全探索を行う解法\n\\(^*\\)\n:\n\\(1\\leq i\\leq H\\)\n,\n\\(1\\leq j\\leq W\\)\nをみたす\n偶数\nの組\n\\((i,j)\\)\nについて、マス\n\\((i,j)\\)\nがすべて白く塗られているならば、他のマスの状態によらず、条件をみたします。問題の制約\n\\(H,W\\leq 7\\)\nの下においてそのようなマスは高々\n\\(9\\)\n個であり、それらのマスがすべて白く塗られているように塗り替える必要のあるマスの個数も高々\n\\(9\\)\n個となります。よって、\n\\(9\\)\n個以下のマスを白く塗り替えて条件をみたすようにする方法が存在し、塗り替える必要のあるマスの個数の最小値は高々\n\\(9\\)\nであることがわかります。\nここでは、\n\\(1\\)\nつめの解法のみを紹介します。\n以下、行\n\\(i\\)\n\\((1\\leq i\\leq H)\\)\nの状態を、\n\\(x_{i,1}+2\\cdot x_{i,2}+2^2\\cdot x_{i,3}+\\cdots+2^{W-1}\\cdot x_{i,W}\\)\nで定義します。ここで、\n\\(x_{i,j}\\)\n\\((1\\leq j\\leq W)\\)\nは、マス\n\\((i,j)\\)\nが白く塗られているとき\n\\(x_{i,j}=0\\)\n、黒く塗られているとき\n\\(x_{i,j}=1\\)\nと定義します。このとき、任意の行の状態は\n\\(0\\)\n以上\n\\(2^W\\)\n未満の整数のいずれかで表されます。\nさて、\n\\(dp[i][j]\\)\n\\((1\\leq i\\leq H,0\\leq j\\leq 2^W-1)\\)\nを、次の\n\\(2\\)\nつの条件をともにみたすようにするために白く塗り替える必要のある黒マスの個数の最小値（そのように塗り替える方法が存在しない場合は\n\\(+\\infty\\)\n）で定義します。\n塗り替えた後のマス目の\n\\(1\\)\n行目から\n\\(i\\)\n行目までを考えた時に、黒く塗られたマスのみからなる\n\\(2\\times 2\\)\nの部分が存在しない。\n\\(i\\)\n行目の状態が\n\\(j\\)\nである。\nまず、\n\\(dp[1][j]\\)\nについて、\n\\(2\\)\nつめの条件はつねにみたされていることから、\n\\(1\\)\nつめの条件についてのみ考えれば良いです。マス目の\n\\(1\\)\n行目の最初の状態から、いくつかの黒く塗られたマスを白く塗りかえることで、状態\n\\(j\\)\nにできるならば、\n\\(dp[1][j]\\)\nの値はその塗り替える必要のある個数であり、そうでないならば\n\\(+\\infty\\)\nです。\nつぎに、任意の\n\\(0\\leq j'<2^W\\)\nについて\n\\(dp[i][j']\\)\nが求まっているとき、\n\\(dp[i+1][j]\\)\nを求める方法について考えます。まず、\n\\((i+1)\\)\n行目の最初の状態から、いくつかの黒く塗られたマスを白く塗りかえることで、状態\n\\(j\\)\nにできないならば、\n\\(dp[i+1][j]=+\\infty\\)\nです。そうでないとき、\n\\(i\\)\n行目の状態が\n\\(j'\\)\n,\n\\((i+1)\\)\n行目の状態が\n\\(j\\)\nのとき、マス目の\n\\(i,(i+1)\\)\n行目のみを考えたときに 黒く塗られたマスのみからなる\n\\(2\\times 2\\)\nの部分が存在しないような\n\\(j'\\)\nの集合を\n\\(S\\)\nとします。このとき、\n\\((i+1)\\)\n行目を状態\n\\(j\\)\nにするために塗り替える必要のある個数を\n\\(x\\)\nとして、\n\\(\\displaystyle dp[i+1][j]=\\min_{j'\\in S}dp[i][j']+x\\)\nが成り立ちます。\nここで、\n\\(dp[i][j']\\)\nおよび\n\\(S\\)\nの定義より、\n\\(dp[i][j']+x\\)\n回で\n\\(1\\)\n行目から\n\\((i+1)\\)\n行目には黒く塗られたマスのみからなる\n\\(2\\times 2\\)\nの部分が存在せず、かつ\n\\(i\\)\n行目の状態が\n\\(j'\\)\nかつ\n\\((i+1)\\)\n行目の状態が\n\\(j\\)\nであるようにすることができ、かつそのための最小の塗り替え回数となっていることに注意します。\n\\(i\\)\n行目の状態としてあり得るものすべてにわたって、その値の最小値をとることで\n\\(dp[i+1][j]\\)\nの定義に従った値が求まっていることになります。\n答えは\n\\(\\displaystyle\\min_{0\\leq j<2^W} dp[H][j]\\)\nで求めることができます。\nさて、計算量は\n\\(dp\\)\n配列の要素数が\n\\(H\\cdot 2^W\\)\n, 更新にそれぞれ最大\n\\(2^W\\)\n個の最小値を取る必要があることから、テストケースあたり\n\\(O(H\\cdot 4^W)\\)\nとなります。よって、全体で\n\\(O(TH\\cdot 4^W)\\)\nとなりますが、\n\\(TH\\cdot 4^W\\leq 100\\cdot 7\\cdot2^{14}\\sim 10^7\\)\nより、今回の制約下で十分高速です。\nよって、この問題を解くことができました。\nなお、\n\\(2\\)\nつめの解法では、\n\\(O(THW\\cdot 2^W)\\)\nの時間計算量でより高速にこの問題を解くことができます。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define INF (int)1e+9\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nint main(void){\n\tint t;\n\tcin>>t;\n\trep(_,t){\n\t\tint h,w,k;\n\t\tcin>>h>>w;\n\t\tk=1<<w;\n\n\t\tvector<string>s(h);\n\t\trep(i,h)cin>>s[i];\n\n\t\tvector<vector<bool> >allow(k,vector<bool>(k,true));\n\t\trep(i,k){\n\t\t\trep(j,k){\n\t\t\t\trep(ii,w-1){\n\t\t\t\t\tif((((i>>ii)&3)==3)&&(((j>>ii)&3)==3)){\n\t\t\t\t\t\tallow[i][j]=false;\n\t\t\t\t\t\tbreak;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tvector<int>dp(k,INF);\n\t\tdp[0]=0;\n\t\trep(i,h){\n\t\t\tint state=0;\n\t\t\trep(j,w)if(s[i][j]=='#')state+=(1<<j);\n\t\t\tvector<int>dp2(k,INF);\n\t\t\trep(j,k){\n\t\t\t\tif((j|state)==state){\n\t\t\t\t\trep(jj,k){\n\t\t\t\t\t\tif(allow[jj][j])dp2[j]=min(dp2[j],dp[jj]+std::popcount(((unsigned int)(j^state))));\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t\tdp=dp2;\n\t\t}\n\n\t\tint ans=INF;\n\t\trep(i,k)ans=min(ans,dp[i]);\n\t\tcout<<ans<<endl;\n\t}\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "17dfabe83bdce8a9dfc8bc05a564b7c1c17ca9e38b70513da72a6d0dffd84e48",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc424/abc424_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc424/editorial/13947",
+      "text": "黒いマスが4つ集まっている頂点に印をつけることを考えます。この印はあるマスを白く塗るとそのマスの4頂点から除かれます。これによりもとの問題は「\n\\((H-1)\\times(W-1)\\)\nのグリッドが与えられ、いくつかのマスに印がついているので、\n\\(2\\times 2\\)\nのタイルで印のあるマスを全て覆うには最小何個のタイルが必要か？（タイルは重ねてもよい）」という問題に読み替えることができます。\n読み替えたあとの問題は\n\\(\\mathrm{dp}[i][S]=\\)\n\\(i\\)\n行目までの印を全て覆って、\n\\(i+1\\)\n行目のうち集合\n\\(S\\)\nに属する列がすでに覆われている状態にするための、タイルの最小枚数\nとするbitDPで求めることができます。",
+      "codes": [],
+      "text_sha256": "48ffbf5ee664e7f0afe007c757f70cb55f3d04a7e93528baaef1605847375659",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc424/abc424_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

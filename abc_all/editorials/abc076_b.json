@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc076_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc076/editorial.pdf",
+      "text": "問題B：Addition and Multiplication / 足し算と掛け算\n\n  次のような方法で最終的な整数を最小化することができます。\n     1. 現在の電光掲示板に書かれている数を 𝑥 とする。\n     2. 電光掲示板に書かれている数を 「𝑥+ 𝐾 と 2𝑥 のうち小さい方の数」 にする。\n     3.  1. と 2. を 𝑁 回繰り返す。\n\n\n  ここから、なぜこのような方法ができるのか説明します。\n 整数 𝑎 が電光掲示板に書かれているとします。そのとき、次の値は min⁡(𝑎+ 𝐾, 2𝑎) となります。ま\nた、整数 𝑏 が電光掲示板に書かれているとすると、次の値は min⁡(𝑏+ 𝐾, 2𝑏) となります。𝑎< 𝑏 のと\nき、𝑎+ 𝐾< 𝑏+ 𝐾 でかつ 2𝑎< 2𝑏 となるので、必ず min(𝑎+ 𝐾, 2𝑎) < min⁡(𝑏+ 𝐾, 2𝑏) となること\nが分かります。\n  よって、値が小さいと、次の値も小さくできるので、「各ステップに対して次に書かれる数をできるだけ小さ\nくするようにする」 ことを繰り返せば、最終的な数も小さくなります。よって、上の方法で答えを出すことがで\nきます。\n  このような 「次の状態の値を最適にすることだけを考える」 という方法をコンピューターサイエンスの世\n界では 「貪欲法 (Greedy Algorithm)」 といいます。問題によっては貪欲法で最適解が出ない場合\nもありますが、この問題のように貪欲法で最適解が出せるような問題もあります。知らない人はぜひ知って\nおくとよいでしょう。\n\n\n擬似コード：\n\n input N, K\n\n number = 1\n\n for i = 1 to N:\n\n    if number * 2 < number + K:\n\n        number := number * 2\n\n    else:\n\n        number := number + K\n\n print number",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "4813b4b97d28b03cf36a51bef36ee710a19bc51545aa6b79b9d45fc9f6c2ba85"
+    }
+  ],
+  "status": "available"
+}

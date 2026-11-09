@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc286_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5573",
+      "text": "\\(G\\) の頂点を、 \\(S\\) に属していない辺のみを考えた時の連結成分ごとに分ける事を考えます。\nそして、連結成分を頂点に対応させ、 \\(S\\) に属する各辺 \\(x_i\\) について、 \\(U_{x_i}\\) が属する連結成分と \\(V_{x_i}\\) が属する連結成分に対応する頂点の間に辺を張った新しいグラフ \\(G'\\) を考えます。この時、 \\(G'\\) は連結な無向グラフとなりますが、単純とは限りません。 \\(G\\) における条件をみたす歩道を考え、 \\(S\\) に属する辺を通った順番に合わせて \\(G'\\) 上で対応する辺を順に通る歩道を考えます。 ( \\(S\\) に属する辺を通らない限り、 \\(G'\\) 上では同じ頂点に留まり続けることに注意してください。)\nこの時、 \\(G'\\) 上においてちょうど \\(1\\) 度ずつ全ての辺を通ることからこれは \\(G'\\) 上のオイラー路となっています。よって、 \\(G'\\) にオイラー路が存在しない、すなわち \\(G'\\) がオイラーグラフでも準オイラーグラフでもなければ、そのような歩道は存在しません。 一方、 \\(G'\\) にオイラー路が存在するならば題意をみたす歩道は次のように構成でき、必ず存在します。 \\(G'\\) 上のオイラー路を考え、それらの辺に対応する \\(S\\) に属する( \\(G\\) 上の)辺を、通る方向に向きづけた( \\(G'\\) 上の(自己)ループに対応する辺は適当に向きづける)上で、オイラー路で通る順に並べると、連続する \\(2\\) つの辺において、前の辺の終点と後の辺の始点は同じ( \\(S\\) に属していない辺のみを考えた時の)連結成分に属しています。\n同じ連結成分に属している \\(2\\) 点の間は \\(S\\) に属していない辺のみを辿って自由に移動できることから、そのような経路のうち \\(1\\) つをとって \\(S\\) に属する辺の間を結ぶ事で、 \\(G'\\) 上のオイラー路から条件をみたす歩道を構成する事ができます。 よって、 \\(G'\\) を生成し、オイラー路の存在を判定すれば良いですが、オイラー路はオイラーの定理から奇数次の頂点が \\(0\\) または \\(2\\) つの時、かつその時に限り存在します。 \\(G'\\) の生成( \\(S\\) に属していない辺のみを考えた時の連結成分の判定)は \\(O(N+M)\\) で行う事ができ、 \\(G'\\) 上の頂点に対する次数の偶奇判定も \\(O(N+M)\\) で出来ることから、よってこの問題を解く事ができました。 c++による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#define N 200000\n\nint idx;\nint c[N];\nvector<int>e[N];\n\nvoid dfs(int cur){\n\tc[cur]=idx;\n\tint sz=e[cur].size();\n\tfor(int i=0;i<sz;i++)if(c[e[cur][i]]==-1)dfs(e[cur][i]);\n\treturn;\n}\n \nint main() {\n\tint n,m,k,x;\n\tint u[N],v[N];\n\tbool a[N];\n\tint cnt[N];\n\tint odd;\n\n\tcin>>n>>m;\n\tfor(int i=0;i<m;i++){\n\t\tcin>>u[i]>>v[i];\n\t\tu[i]--,v[i]--;\n\t}\n\tfor(int i=0;i<m;i++)a[i]=false;\n\tcin>>k;\n\tfor(int i=0;i<k;i++){\n\t\tcin>>x;\n\t\ta[x-1]=true;\n\t}\n\n\tfor(int i=0;i<m;i++){\n\t\tif(!a[i]){\n\t\t\te[u[i]].push_back(v[i]);\n\t\t\te[v[i]].push_back(u[i]);\n\t\t}\n\t}\n\n\tfor(int i=0;i<n;i++)c[i]=-1;\n\tidx=0;\n\tfor(int i=0;i<n;i++){\n\t\tif(c[i]==-1){\n\t\t\tdfs(i);\n\t\t\tidx++;\n\t\t}\n\t}\n\n\tfor(int i=0;i<idx;i++)cnt[i]=0;\n\tfor(int i=0;i<m;i++){\n\t\tif(a[i]){\n\t\t\tcnt[c[u[i]]]++,cnt[c[v[i]]]++;\n\t\t}\n\t}\n  \n\todd=0;\n\tfor(int i=0;i<idx;i++)if(cnt[i]%2)odd++;\n\tif(odd<=2)cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "f0dff1dab7c11b6594f14f74ce7f592bd58d545c7a75306abb07b119b0482964"
+    }
+  ],
+  "status": "available"
+}

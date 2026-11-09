@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc399_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc399/editorial/12563",
+      "text": "\\(2\\)\n種類の解法を説明します。\n解法 1: 問題文の通りに実装する\n問題文で説明されている順位決めのプロセスをそのままプログラムとして実装する方針です。以下のような要素を実装する必要があります：\nある条件が満たされるまで特定の操作を繰り返す：繰り返し処理 (\nfor\n文、\nwhile\n文など) を用いることで実現できます。\n順位が未確定である人の中での得点の最大値を求める：\n\\(N\\)\n人の人それぞれについて順位が既に確定したかを配列によって管理した上で、繰り返し処理を用いることで実現できます。\n解法 2: 言い換えを利用する\n問題文で説明されている順位決めの方法は一見複雑でよく分からないもののように思われますが、実は以下のようなシンプルな形に言い換えることができます。\n人\n\\(i\\)\nの順位は、人\n\\(i\\)\nよりも真に得点が高い人の数に\n\\(1\\)\nを足したものである。\nこの言い換えを利用すると、問題文で説明されているプロセスをそのままプログラムとして表現するよりも実装が簡単になります。\n一般的に、この問題のように何か複雑なプロセスを導入している問題に出会った時は、そのプロセスが実際にどのように進行するのかを具体例などを用いてよく観察し、何か簡単な言い換えがないか探してみるのも良いでしょう。（もちろん、簡単な言い換えが常に存在するとは限りません。）\n解法 1, 2 それぞれにおける実装例 (C++, Python) を下に掲載しています。参考にしてください。\n実装例 1 (C++) :\n実装例 1 (Python) :\n実装例 2 (C++) :\n実装例 2 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> p(n);\n    for (int i = 0; i < n; i++) {\n        cin >> p[i];\n    }\n    vector<int> rank(n);\n    int r = 1;\n    while (true) {\n        int x = 0;\n        for (int i = 0; i < n; i++) {\n            if (rank[i]) continue;\n            x = max(x, p[i]);\n        }\n        if (!x) break;\n        int k = 0;\n        for (int i = 0; i < n; i++) {\n            if (p[i] == x) {\n                rank[i] = r;\n                k++;\n            }\n        }\n        r += k;\n    }\n    for (int i = 0; i < n; i++) {\n        cout << rank[i] << '\\n';\n    }\n}",
+        "n = int(input())\np = list(map(int, input().split()))\nrank = [0 for i in range(n)]\nr = 1\nwhile True:\n  x = 0\n  for i in range(n):\n    if rank[i] != 0:\n      continue\n    x = max(x, p[i])\n  if x == 0:\n    break\n  k = 0\n  for i in range(n):\n    if p[i] == x:\n      rank[i] = r\n      k += 1\n  r += k\n\nfor i in range(n):\n  print(rank[i])",
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> p(n);\n    for (int i = 0; i < n; i++) {\n        cin >> p[i];\n    }\n    for (int i = 0; i < n; i++) {\n        int rank = 1;\n        for (int j = 0; j < n; j++) {\n            if (p[j] > p[i]) rank++;\n        }\n        cout << rank << '\\n';\n    }\n}",
+        "n = int(input())\np = list(map(int, input().split()))\nfor i in range(n):\n  rank = 1\n  for j in range(n):\n    if p[j] > p[i]:\n      rank += 1\n  print(rank)"
+      ],
+      "text_sha256": "803060d81027d1be365687cca2769e4d04a8374bb92da48cfd8d2611d6c69778",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc399/abc399_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

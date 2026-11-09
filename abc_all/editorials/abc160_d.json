@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc160_d",
+  "editorials": [
+    {
+      "text": "D: Line++\n整数i, j(1 ≤i < j ≤N) を固定します。グラフG における、頂点i と頂点j の最短距離を効率\n的に求めることを考えます。頂点X と頂点Y を結ぶ辺を使う場合と使わない場合に分けて考える\nと、求める最短距離はmin{|j −i|, |X −i| + 1 + |j −Y |, |Y −i| + 1 + |j −X|} となります。この\n式に従って計算することで、頂点i と頂点j の最短距離をO(1) で求めることができます。後は、\n1 ≤i < j ≤N を満たすすべてのi, j について、上記の方法で最短距離を求めれば、O(N 2) でこの\n問題を解くことができます。\n",
+      "text_sha256": "650246ff83e796d5bceecddbde9581bcac2c10b56dc0899490c5a50f5e2ac934",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc160/abc160_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

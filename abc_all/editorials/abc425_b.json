@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc425_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc425/editorial/14076",
+      "text": "この問題は\n順列全探索\nを用いることで解くことができます。\n\\(P\\)\nの候補は\n\\((1,2,\\ldots,N)\\)\nの並び替え\n\\(N!\\)\n通りなので、それらを全て試し、\n\\(2\\)\nつ目の条件を満たすか確かめていけば良いです。\n\\(1\\)\nつでも条件を満たす\n\\(P\\)\nが見つかれば直ちに出力しプログラムを停止させ、全て調べた後も見つからなければ\nNo\nを出力すれば良いです。\n「\n\\(A_i \\neq -1\\)\nならば\n\\(P_i=A_i\\)\n」という命題は「\n\\(A_i=-1\\)\nまたは\n\\(A_i=P_i\\)\n」というように言い換えることができるので、実装上は後者を用いると良いです。\n実装例(Python3)\n実装例(C++)",
+      "codes": [
+        "from itertools import permutations\n\nn = int(input())\na = list(map(int, input().split()))\nfor p in permutations([i + 1 for i in range(n)]):\n    ok = True\n    for i in range(n):\n        ok &= a[i] == -1 or p[i] == a[i]\n    if ok:\n        print(\"Yes\")\n        print(*p)\n        break\nelse:\n    print(\"No\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> a(n);\n\tfor (int &i : a)\n\t\tcin >> i;\n\tvector<int> p(n);\n\tiota(p.begin(), p.end(), 1);\n\tdo {\n\t\tbool ok = true;\n\t\tfor (int i = 0; i < n; i++) {\n\t\t\tok &= a[i] == -1 || p[i] == a[i];\n\t\t}\n\t\tif (ok) {\n\t\t\tcout << \"Yes\" << endl;\n\t\t\tfor (int i = 0; i < n; i++) {\n\t\t\t\tcout << p[i] << \" \\n\"[i + 1 == n];\n\t\t\t}\n\t\t\treturn 0;\n\t\t}\n\t} while (next_permutation(p.begin(), p.end()));\n\tcout << \"No\" << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "7b9bc9a6a2d467172b32447baacae54e9b56f5a2ad483b00276b3e6df3306a65",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc425/abc425_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc425/editorial/14092",
+      "text": "\\(A_i, A_j \\ne -1\\)\nで\n\\(A_i = A_j\\)\nとなる\n\\(i, j\\)\nの組\n\\((i \\ne j)\\)\nが存在する場合、答えは\nNo\nです。\n実はそれ以外は\nYes\nになります。 値\n\\(k\\)\nが\n\\(A_i = k\\)\nとして登場しているなら、「値\n\\(k\\)\nは使用されている」と言うことにします。\n\\(A_i = -1\\)\nとなっているものに、使用されていない\n\\(1, 2, \\cdots, N\\)\nの値を順に入れていけばよいです。\n時間計算量は\nstd::set\nを使えば\n\\(O(N \\log N)\\)\n、配列を使えば\n\\(O(N)\\)\nです。\nPython (10 ms)\nC++ (1 ms)",
+      "codes": [],
+      "text_sha256": "a61c022c146ec1099d4a9b689c9586dcadd2db0ee3578339c1c113d4b855bc30",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc425/abc425_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

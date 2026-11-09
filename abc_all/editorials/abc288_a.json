@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc288_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc288/editorial/5658",
+      "text": "本問題に正解するには、問題文で指示されたことをそのまま行うプログラムを実装すれば良いです。具体的には、\nまず、整数\n\\(N\\)\nを標準入力から受け取る。\nその後、\n\\(i = 1, 2, \\ldots, N\\)\nについて、下記の手順を繰り返す。\n整数\n\\(A_i\\)\nと整数\n\\(B_i\\)\nを標準入力から受け取る。\n\\(A_i + B_i\\)\nを標準出力に出力する。\nという処理を行うプログラムを作成します。\n標準入（出）力に対する入（出）力の方法は、使用するプログラミング言語に依存します。\nまた、「\n\\(i = 1, 2, \\ldots, N\\)\nについて、下記の手順を繰り返す」ためには、プログラミング言語の標準的な機能である\n繰り返し\nの機能（ for 文など）を用いることができます。\n以下に、C++ 言語による正解例を記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(void){\n  int n, a, b;\n  cin >> n;\n  for(int i = 1; i <= n; i++){\n    cin >> a >> b;\n    cout << a + b << endl;\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "05e3049fab3342756ceac97f0bea96a77d85b302794910134ecc59a56574963e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc288/abc288_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

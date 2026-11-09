@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc436_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc436/editorial/14751",
+      "text": "まず、\\(P\\) を \\((1,2,\\ldots,N)\\) と一致させるために必要な操作の回数 \\(K\\) について考察します。\n\\((1,2,\\ldots,N)\\) の並べ替えである列 \\(P\\) に対して、頂点 \\(1,\\) 頂点 \\(2,\\ldots,\\) 頂点 \\(N\\) の \\(N\\) 個の頂点からなるグラフを考え、\\(i=1,2,\\ldots,N\\) に対して頂点 \\(i\\) と頂点 \\(P _ i\\) を結ぶ辺を追加します。\nこのグラフの連結成分の個数を \\(C\\) としたとき、\\(K=N-C\\) であることを示します。\nグラフのすべての連結成分はサイズ \\(1\\) 以上のサイクルです。\nそれぞれの連結成分から頂点を選び \\(i _ 1,i _ 2,\\ldots,i _ C\\) としたとき、それぞれのサイクルは \\(i _ k,P _ {i _ k},P _ {P _ {i _ k}},\\ldots\\ (1\\le k\\le C)\\) と表されます。\n\\((i,j)\\) を選んで操作を行ったときに \\(C\\) がどのように変化するかを、頂点 \\(i\\) と頂点 \\(j\\) が同じ連結成分にあるときとそうでないときのそれぞれについて考えます。\n頂点 \\(i\\) と頂点 \\(j\\) が同じ連結成分にあるとき、もともとのサイクル \\((i,P _ i,P _ {P _ i},\\ldots,j,P _ j,P _ {P _ j},\\ldots,P ^ {-1} _ i)\\ \\bigl(\\)ただし、\\(P ^ {-1} _ i\\) で \\(P _ x=i\\) なる整数 \\(x\\) を表す\\(\\bigr)\\) は操作で \\((P _ i,P _ {P _ i},\\ldots,j)\\) と \\((P _ j,P _ {P _ j},\\ldots,i)\\) の \\(2\\) つのサイクルに分かれます。\nよって、この操作で \\(C\\) は \\(1\\) だけ増加します。\n頂点 \\(i\\) と頂点 \\(j\\) が異なる連結成分にあるとき、もともとの \\(2\\) つのサイクル \\((i,P _ i,P _ {P _ i},\\ldots,P ^ {-1} _ i),(j,P _ j,P _ {P _ j},\\ldots,P ^ {-1} _ j)\\) は操作で \\((j,P _ i,P _ {P _ i},\\ldots,i,P _ j,P _ {P _ j},\\ldots,P ^ {-1} _ j)\\) の \\(1\\) つのサイクルになります。\nよって、この操作で \\(C\\) は \\(1\\) だけ減少します。\n\\(P\\) が \\((1,2,\\ldots,N)\\) と等しいとき、かつそのときに限り \\(N=C\\) です。\n\\(N\\gt C\\) のとき、同じ連結成分にある異なる \\(2\\) 頂点が必ず存在する（\\(i\\ne P _ i\\) なる \\((i,P _ i)\\) が条件を満たします）ため、\\(N\\gt C\\) である限り必ず \\(C\\) を \\(1\\) ずつ増やすことができます。\n逆に、\\(C\\) は一回の操作でたかだか \\(1\\) しか増えないため、\\(K=N-C\\) であることが示されました。\n上の議論から、\\(K=N-C\\) 回の操作で \\(P\\) を \\((1,2,\\ldots,N)\\) と一致させるためには、（操作をする時点での \\(P\\) に対応する）グラフで同じ連結成分にある \\(2\\) 頂点を選んで操作を行うことを \\(K\\) 回行う必要があることがわかります。\n逆に、同じ連結成分にある \\(2\\) 頂点であれば、どの組を選んでもよいことがわかります。\nよって、それぞれのサイクルの大きさを求めることで、この問題を \\(O(N)\\) 時間などで解くことができました。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <ranges>\n#include <numeric>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    cin >> N;\n    vector<unsigned> P(N);\n    for (auto&& p : P) {\n        cin >> p;\n        --p;\n    }\n    vector<unsigned> ans(N);\n    for (const auto i : views::iota(0U, N)) if (!ans[i]) {\n        auto p{i};\n        unsigned count{};\n        do {\n            ++count;\n            p = P[p];\n        } while (p != i); // サイクルを検出して\n        do {\n            ans[p] = count; // その頂点が属するサイクルの大きさを記録する\n            p = P[p];\n        } while (p != i);\n    }\n    cout << (reduce(begin(ans), end(ans), 0UL) - N) / 2 << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "b90da3c931c6377077ffa1735c59ef9f7e71316e19629a95398e9e2d72cbe179",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc436/abc436_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

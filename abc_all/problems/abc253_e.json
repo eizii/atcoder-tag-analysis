@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc253_e",
+  "title": "Distance Sequence",
+  "contests": [
+    {
+      "contest_id": "abc253",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1073,
+  "raw_difficulty": 1073,
+  "contest_id": "abc253",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc253/tasks/abc253_e",
+  "statement": "配点 : 500 点 問題文 長さ N の整数からなる数列 A=(A_1,\\ldots,A_N) であって、以下の条件を全て満たすものは何通りありますか？ 1\\le A_i \\le M (1 \\le i \\le N) |A_i - A_{i+1}| \\geq K (1 \\le i \\le N - 1) ただし、答えは非常に大きくなることがあるので、答えを 998244353 で割った余りを求めてください。 制約 2 \\leq N \\leq 1000 1 \\leq M \\leq 5000 0 \\leq K \\leq M-1 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M K 出力 答えを 998244353 で割った余りを出力せよ。 入力例 1 2 3 1 出力例 1 6 条件を満たす数列は以下の 6 つです。 (1,2) (1,3) (2,1) (2,3) (3,1) (3,2) 入力例 2 3 3 2 出力例 2 2 条件を満たす数列は以下の 2 つです。 (1,3,1) (3,1,3) 入力例 3 100 1000 500 出力例 3 657064711 答えを 998244353 で割った余りを出力してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の整数からなる数列 A=(A_1,\\ldots,A_N) であって、以下の条件を全て満たすものは何通りありますか？ 1\\le A_i \\le M (1 \\le i \\le N) |A_i - A_{i+1}| \\geq K (1 \\le i \\le N - 1) ただし、答えは非常に大きくなることがあるので、答えを 998244353 で割った余りを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 1000 1 \\leq M \\leq 5000 0 \\leq K \\leq M-1 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M K"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを 998244353 で割った余りを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2 3 1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 6 条件を満たす数列は以下の 6 つです。 (1,2) (1,3) (2,1) (2,3) (3,1) (3,2)"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 3 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 2 条件を満たす数列は以下の 2 つです。 (1,3,1) (3,1,3)"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 100 1000 500"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 657064711 答えを 998244353 で割った余りを出力してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc253/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:26.544411+00:00",
+  "statement_sha256": "f96153d365903ae7072b8574a6df56f09ba3a7270cc59610072b759ad46163d8",
+  "editorials": []
+}

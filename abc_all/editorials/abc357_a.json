@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc357_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc357/editorial/10180",
+      "text": "\\(1\\)\n人目から順に消毒液の残量をシミュレーションしてくことで答えを求めることができます。\n\\(M\\)\nから始めて、\n\\(H_1,H_2,\\ldots,H_N\\)\nを順に引いていきます。\n\\(0\\)\n未満になることがなければ全員が手を消毒することができるので、答えは\n\\(N\\)\nとなります。そうでなく、\n\\(H_i\\)\nを引いた時に初めて\n\\(0\\)\n未満になったとき、答えは\n\\(i-1\\)\nとなります。\nよって、答えを求めることができました。\n判定条件の不等式に等号をつけるかどうかについて、ある宇宙人が自身の手をすべて消毒した時点でちょうど消毒液がなくなる場合に注意してください。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n\tint n,m,h,ans=0;\n\t\n\tcin>>n>>m;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>h;\n\t\tm-=h;\n\t\tif(m>=0)ans++;\n\t}\n\n\tcout<<ans<<endl;\n\treturn 0;\n}",
+        "n,m=map(int, input().split())\nh=list(map(int, input().split()))\nans=0\nfor i in range(n):\n    m-=h[i]\n    if m>=0:\n        ans+=1\nprint(ans)"
+      ],
+      "text_sha256": "03baabe858833ab4a9b2c1a72a5aab3b4d3b0941a07692fca46f84baa86fd23b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc357/abc357_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

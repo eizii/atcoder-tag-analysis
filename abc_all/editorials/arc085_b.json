@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc085_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc085/editorial.pdf",
+      "text": "D: ABS\n\n まず，N=1 の場合の答えは|a1 −W| です。\n  2 ≤N の場合を考えます。X は初手で全部のカードを引くことにより，\n|aN −W| が達成できます。また，初手でN −1 枚のカードを引くことで\n|aN−1 −aN| が達成できます。\n 実は，初手で行うべき操作はこの2 通りのみ，つまり2 枚以上カードを残\nす理由はありません。なぜならば，その直後の手番でY さんは，残り1 枚に\nなるようにカードを引くと|aN−1 −aN| を達成できます。よって2 枚以上カー\nドを残してもスコアが|aN−1 −aN| より高くなることはないからです。\n 以上より，この問題の(2 ≤N の時の) 答えはmax(|aN −W|, |aN−1 −aN|)\nです。\n\n\n\n\n\n                                4",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "a5652db261d893dde339ccc4207e7a1e863c046d75ba9d1a072a12bd954e4213"
+    }
+  ],
+  "status": "available"
+}

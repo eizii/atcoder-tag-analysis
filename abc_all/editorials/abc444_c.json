@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc444_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc444/editorial/15600",
+      "text": "原案:ynymxiaolongbao\n\\(A_1,A_2,\\dots,A_N\\)\nはソートされているとして一般性を失いません。\nすべての AtCoderりこが\n\\(2\\)\n本に分かれたかどうかで場合分けして考えます。\n\\((1)\\)\nすべての AtCoderりこが\n\\(2\\)\n本に分かれた場合\nまず、\n\\(N\\)\nは偶数であることが必要です。\n長さ\n\\(A_1\\)\nの AtCoderりことペアになっていた AtCoderりこの長さは\n\\(A_N\\)\n以下なので、\n\\(L \\leq A_1+A_N\\)\nです。\n長さ\n\\(A_N\\)\nの AtCoderりことペアになっていた AtCoderりこについても同様に考えると、\n\\(A_1+A_N \\leq L\\)\nです。\nよって、\n\\(A_1+A_N=L\\)\nが成り立ち、長さ\n\\(A_1,A_N\\)\nの AtCoderりこをペアとしてよいことがわかります。\n同様に考えると、\n\\((A_2,A_{N-1}),(A_3,A_{N-2}) \\dots,(A_{\\frac{N}{2}},A_{\\frac{N}{2}+1})\\)\nがペアになり、各ペアの合計が\n\\(A_1+A_N\\)\nに等しい必要があります。\n逆に、これが成り立つならば\n\\(L=A_1+A_N\\)\nとして条件を満たすこともわかります。\n\\((2)\\)\n\\(2\\)\n本に分かれなかった AtCoderりこが存在する場合\n最も長い AtCoderりこが\n\\(2\\)\n本に分かれなかった AtCoderりこなので、\n\\(L=A_N\\)\nがわかります。\nまた、長さが\n\\(A_N\\)\nであるような AtCoderりこは\n\\(1\\)\n本のまま残り、長さが\n\\(A_N\\)\n未満の AtCoderりこは\n\\(2\\)\n本に分かれた AtCoderりこであるということもわかります。\n長さが\n\\(A_N\\)\n未満であるような AtCoderりこについて、(1)と同様に判定することができます。\nこれらをそれぞれ判定することで、問題を解くことができます。\nソートがボトルネックで、計算量は\n\\(O(N\\log N)\\)\nです。",
+      "codes": [],
+      "text_sha256": "838f5a2be18f50fcf5ca10e3f63779f1293ba594757ba1b23948dfd7b20dc8e1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc444/abc444_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

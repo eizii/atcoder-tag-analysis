@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc315_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc315/editorial/6994",
+      "text": "\\(N \\le 10^6\\) なので、 \\(i\\) を固定する全探索ができます。\nこのとき、 問題は \\(Bj+Ck=Y\\) ( \\(Y=X-Ai\\) ) に帰着されます。 この不定方程式はユークリッドの拡張互除法(以降 extgcd )を用いて解くことができます。 具体的には、 extgcd で \\(Bj+Ck=\\gcd(B,C)\\) を満たす解がひとつ出て、これを定数倍することで右辺が \\(Y\\%B\\) なる解をひとつ得ることが出来ます。( 逆に、これが得られないなら固定した \\(i\\) に対して解が無いことも分かります。 ) さらに、不足分の \\(j\\) を調節することで元の不定方程式の解をひとつ得ます。 ここで、この時の各変数の値を long long に収めながら処理できることに注意してください。(詳しくはコード中のリンクも参照してください) 一般解は \\(j'=j+tC/\\gcd(B,C), k'=k-tB/\\gcd(B,C)\\) ( \\(t\\) は整数 ) という形をしているので、これを元に各変数が \\(1\\) 以上 \\(N\\) 以下となる \\(t\\) の数を数え上げれば元の不定方程式の解の数も数え上げることが出来ます。 実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n \nusing namespace std;\n \n// https://math.stackexchange.com/questions/670405/does-the-extended-euclidean-algorithm-always-return-the-smallest-coefficients-of\n// https://teratail.com/questions/176282\n// https://ei1333.github.io/luzhiled/snippets/math/extgcd.html\ntemplate< typename T >\nT extgcd(T a, T b, T &x, T &y) {\n  T d = a;\n  if(b != 0) {\n    d = extgcd(b, a % b, y, x);\n    y -= (a / b) * x;\n  } else {\n    x = 1;\n    y = 0;\n  }\n  return d;\n}\n \nlong long llceil(long long a,long long b){\n  if(a%b==0){return a/b;}\n \n  if(a>=0){return (a/b)+1;}\n  else{return -((-a)/b);}\n}\n \nlong long llfloor(long long a,long long b){\n  if(a%b==0){return a/b;}\n \n  if(a>=0){return (a/b);}\n  else{return -((-a)/b)-1;}\n}\n \nusing pl=pair<long long,long long>;\npl findseg(pl seg,long long ini,long long step){\n  if(step>0){\n    return {llceil(seg.first-ini,step), llfloor(seg.second-ini,step)};\n  }\n  else{\n    step*=-1;\n    return {llceil(ini-seg.second,step), llfloor(ini-seg.first,step)};\n  }\n}\n \nint main(){\n  long long n,a,b,c,x;\n  cin >> n >> a >> b >> c >> x;\n \n  // 0 <= i,j,k < n\n  x -= (a+b+c);\n  if(x<0){cout << \"0\\n\";return 0;}\n \n  long long res=0;\n  long long gbc=gcd(b,c);\n \n  long long stepj=(c/gbc);\n  long long stepk=-(b/gbc);\n \n  for(long long i=0;i<n;i++){\n    long long rx = x-a*i;\n    if(rx<0){break;}\n \n    // b*j + c*k = rx\n    if(rx%gbc){continue;}\n    long long j,k;\n    extgcd(b,c,j,k);\n    j*=((rx%b)/gbc);\n    k*=((rx%b)/gbc);\n    long long jadd=(rx/b);\n    j+=jadd;\n \n    pl sj=findseg({0,n-1},j,stepj);\n    pl sk=findseg({0,n-1},k,stepk);\n    long long fl=max(sj.first,sk.first);\n    long long fr=min(sj.second,sk.second);\n    res+=max(0ll,fr-fl+1);\n  }\n  cout << res << \"\\n\";\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "f6474b33441e7f30d71d874bdb79cc2ab65c8c2272c18221907bd022de8d5b98"
+    }
+  ],
+  "status": "available"
+}

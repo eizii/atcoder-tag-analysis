@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc229_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc229/editorial/2964",
+      "text": "頂点\n\\(0,1,\\ldots,N\\)\nの順に頂点を赤青に塗り分けて、同色の頂点を結ぶ辺の重みを足すことを考えましょう。\n頂点\n\\(0\\)\nは赤色として一般性を失いません。\nここで、一旦頂点\n\\(1\\)\nと頂点\n\\(N\\)\nを結ぶ辺のみ無視したうえで、次の\n\\(dp\\)\nを考えます。\n\\(dp[i][j][k] :=\\)\n頂点\n\\(i\\)\nまで色を塗り終わった時の辺の重みの和の最小値\nただし、頂点\n\\(i\\)\nの色は\n\\(j\\)\nで、頂点\n\\(1\\)\nの色は\n\\(k\\)\nである。(\n\\(j\\)\nと\n\\(k\\)\nは、\n\\(0\\)\nを赤色、\n\\(1\\)\nを青色とする)\n\\(dp[i]\\)\nは\n\\(dp[i-1]\\)\nから求めることができます。(遷移や初期値が分からなければ下の実装例も参考にしてください。)\n最後に、\n\\(dp[N]\\)\nの値に、頂点\n\\(1\\)\nと頂点\n\\(N\\)\nを結ぶ辺も考慮すれば答えを出すことができます。\n計算量は\n\\(O(N)\\)\nです。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n#define rep(i,l,r) for(ll i=l;i<=r;i++)\nvoid chmin(ll &a,ll b){a = min(a,b);}\nll inf = 1e18;\n\nsigned main(){\n    ll n;cin>>n;\n    vector<ll> a(n+1),b(n+1);\n    rep(i,1,n)cin>>a[i];\n    rep(i,1,n)cin>>b[i];\n    vector<vector<vector<ll>>> dp(n+1,vector<vector<ll>>(2,vector<ll>(2,inf)));\n    dp[1][0][0] = a[1];\n    dp[1][1][1] = 0;\n    rep(i,2,n)rep(j,0,1)rep(k,0,1)rep(prej,0,1){\n        chmin(dp[i][j][k],dp[i-1][prej][k] + (j==0?a[i]:0) + (j==prej?b[i-1]:0));\n    }\n    ll ans = inf;\n    rep(j,0,1)rep(k,0,1)chmin(ans,dp[n][j][k] + (j==k?b[n]:0));\n    cout<<ans<<endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "d9d38ba5b5e76dc2a47155149ca674d15dc47d56122e97c13314f646d9258125",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc229/abc229_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc229/editorial/13631",
+      "text": "頂点\n\\(i,i+1\\)\nを結ぶ辺を\n外辺\n\\(i\\)\nと呼び、頂点\n\\(0,i\\)\nを結ぶ辺を\n内辺\n\\(i\\)\nと呼ぶことにします。ただし、内辺\n\\(1\\)\nを内辺\n\\(N+1\\)\nと呼ぶことがあります。\nまず、内辺\n\\(1\\)\nは残すものとして解きます。ここで、次の\n\\(dp\\)\nを考えます。\n\\(dp[i]:=\\)\n外辺\n\\(1,\\ldots,i-1\\)\nおよび内辺\n\\(1,\\ldots,i\\)\nのみを考え、内辺\n\\(i\\)\nを残すとき、削除する辺の重みの総和の最小値\nこのとき、答えは\n\\(dp[N+1]\\)\nとなります。\nこれを計算する方法を考えます。明らかに\n\\(dp[1]=0\\)\nです。\n\\(i=2,\\ldots,N\\)\nに対して\n\\(dp[i]\\)\nを計算する際に、内辺\n\\(1,\\ldots,N-1\\)\nのうち最後に残した辺を\n\\(k\\)\nとすると、最適解において\n\\(k\\ge i-3\\)\nが成り立ちます。\n(証明)\n\\(k<i-3\\)\nが最適解でないことを示します。このとき、以下のいずれかが成り立ちます。\n外辺\n\\(k,\\ldots,i-3\\)\nのうちいずれかは削除されている。\n外辺\n\\(k+2,\\ldots,i-1\\)\nのうちいずれかは削除されている。\n前者の場合を考えます。外辺\n\\(i-2,i-1\\)\nの両方が残されている場合、パス\n\\(0\\to i\\to i-1\\to i-2\\)\nが存在するため、二部グラフにおいて頂点\n\\(0,i-2\\)\nは違う色で塗られます。よって、内辺\n\\(i-2\\)\nを残せます。外辺\n\\(i-2,i-1\\)\nの両方が残されていない場合、頂点\n\\(0,i-2\\)\nは連結でないので、内辺\n\\(i-2\\)\nを残すことができます。後者の場合も同様に内辺\n\\(k+2\\)\nを残せます。(証明終わり)\nよって、計算式は次のようになります。\n\\(dp[i]=\\min(dp[i-1]+B_{i-1},dp[i-2]+A_{i-1},dp[i-3]+A_{i-2}+A_{i-1}+\\min(B_{i-1},B_{i-2},B_{i-3}))\\)\nまた、この議論より、内辺\n\\(1,2,3\\)\nのうちどれか\n\\(1\\)\nつは残されることがわかります。\nよってこれらについて上の\n\\(dp\\)\nを\n\\(3\\)\n回行うことで\n\\(O(N)\\)\nで答えが求まります。\n実装例 (Python)",
+      "codes": [
+        "N = int(input())\nA = list(map(int, input().split()))\nB = list(map(int, input().split()))\ndef solve(i):\n    dp = [0]*(N+1)\n    for j in range(N):\n        dp[j+1] = dp[j] + B[(i+j)%N]\n        if j:\n            dp[j+1] = min(dp[j+1], dp[j-1] + A[(i+j)%N])\n        if j > 1:\n            dp[j+1] = min(dp[j+1], dp[j-2] + A[(i+j)%N] + A[(i+j-1)%N] + min(B[(i+j)%N], B[(i+j-1)%N], B[(i+j-2)%N]))\n    return dp[N]\nans = min(solve(0), solve(1), solve(2))\nprint(ans)"
+      ],
+      "text_sha256": "81cd41d59de2086d28698b1a56e8a443ab4535860185d6dc8923b3f22fd68d1b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc229/abc229_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

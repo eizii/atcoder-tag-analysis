@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc277_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc277/editorial/5204",
+      "text": "スイッチを\n\\(2\\)\n回押すと元の状態に戻るので、\n（いまいる頂点, これまでにスイッチを押した回数を\n\\(2\\)\nで割ったあまり)\nの組によって現在の\n状態\nが表現できます。\nはじめは、スイッチを\n\\(0\\)\n回押した状態で頂点\n\\(1\\)\nにいるので、状態\n\\((1, 0)\\)\nです。\nそこから、「移動」や「スイッチを押す」の行動を行うたびに現在の状態が別の状態に遷移していきます。\nそして、最終的に\n\\((N, 0)\\)\nと\n\\((N, 1)\\)\nのどちらかの状態になるまでに行う移動の回数の最小値が本問題の答えです。\n入力で与えられるグラフ\n\\(G\\)\nに対し、\n「各状態を頂点とし、\n\\(1\\)\n回の行動で互いに遷移可能な状態間に辺を張った無向グラフ\n\\(G'\\)\n」を考え、\n\\(G'\\)\n上の最短経路問題に帰着して本問題を解きます。\nつまり、\n\\(G'\\)\nとして\n\\((1, 0), (2, 0), \\ldots, (N, 0)\\)\nおよび\n\\((1, 1), (2, 1), \\ldots, (N, 1)\\)\nという\n\\(2N\\)\n個の状態を頂点とし、下記の通りに辺を張って得られる無向グラフを考えます。\n「移動」の行動に対応して、\n\\(G\\)\nの各辺\n\\(\\lbrace u_i, v_i \\rbrace\\)\nごとに、\n\\(G'\\)\nにコスト\n\\(1\\)\nの無向辺\n\\(\\lbrace (u_i, 1-a_i), (v_i, 1-a_i)\\rbrace\\)\nを張る。\n「スイッチを押す」の行動に対応して、スイッチがある\n\\(G\\)\nの頂点\n\\(s_i\\)\nごとに、\n\\(G'\\)\nにコスト\n\\(0\\)\nの無向辺\n\\(\\lbrace (s_i, 0), (s_i, 1)\\rbrace\\)\nを張る。\n本問題の答えは、\n\\(G'\\)\n上における\n\\((1, 0)\\)\nから\n\\((N, 0)\\)\nと\n\\((N, 1)\\)\n（のうち近い方）への最短距離となります。（ただし、\n\\((N, 0)\\)\nにも\n\\((N, 1)\\)\nにも到達できなければ答えは\n\\(-1\\)\n）\nよって、ダイクストラ法を用いれば\n\\(O(N+M\\log N)\\)\n時間、01BFS を用いれば\n\\(O(N+M)\\)\n時間で本問題を解くことができます。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <utility>\n#include <vector>\n#include <deque>\nusing namespace std;\ntypedef pair<int, int> edge;\nconst int inf = 1e9;\n\nint n, m, k;\nvector<edge> G[400005];\nint dist[400005];\n\nint main(void)\n{\n  cin >> n >> m >> k;\n  int u, v, a, s;\n  for(int i = 1; i <= m; i++){\n    cin >> u >> v >> a;\n    if(a) G[u].push_back(edge(v, 1)), G[v].push_back(edge(u, 1));\n    else G[n+u].push_back(edge(n+v, 1)), G[n+v].push_back(edge(n+u, 1));\n  }\n  for(int i = 1; i <= k; i++){\n    cin >> s;\n    G[s].push_back(edge(n+s, 0)), G[n+s].push_back(edge(s, 0));\n  }\n  \n  deque<int> deq;\n  deq.push_back(1);\n  for(int i = 1; i <= 2*n; i++) dist[i] = inf;\n  dist[1] = 0;\n  \n  while(deq.size()){\n    int v = deq.front();\n    deq.pop_front();\n    for(int i = 0; i < (int)G[v].size(); i++){\n      int u = G[v][i].first, c = G[v][i].second;\n      if(dist[u] > dist[v] + c){\n        dist[u] = dist[v] + c;\n        if(c == 0) deq.push_front(u);\n        else deq.push_back(u);\n      }\n    }\n  }\n  \n  int ans = min(dist[n], dist[2*n]);\n  if(ans == inf) ans = -1;\n  cout << ans << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "bece6a1ecd299b1125c47285f365591dcf95979581022bc243956f2aca8b78ce",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc277/abc277_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc217_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc217/editorial/2390",
+      "text": "人 \\(1,\\ldots,i\\) の \\(i\\) 人を条件を満たしつつちょうど \\(j\\) 個のグループに分ける方法の数を \\(DP[i][j]\\) として \\(DP[i][j]=DP[i-1][j-1]+\\left(j-\\left\\lfloor\\frac{i-1}{M}\\right\\rfloor\\right)*DP[i-1][j]\\) というDPにより \\(O(N^2)\\) で求めることができます。 漸化式の気持ち 人 $i$ に注目します。 人 $i$ が1人グループをなす場合、残りの $i-1$ 人で $j-1$ 個のグループを作るので、そのような方法の数は $DP[i-1][j-1]$ になります。 そうでない場合、まず人 $i$ 以外の $i-1$ 人で $j$ 個のグループを作り、出来たグループのいずれかに人 $i$ が合流すると考えます。人 $i$ が合流できるグループは、$M$ で割った余りが $i$ と等しい番号の人を含まないようなものに限ります。そのような人は $\\left\\lfloor\\frac{i-1}{M}\\right\\rfloor$ 人おり、この人たちは相異なるグループに属しているので、人 $i$ が合流できるグループは $j-\\left\\lfloor\\frac{i-1}{M}\\right\\rfloor$ 個です。したがって、そのような方法の数は $\\left(j-\\left\\lfloor\\frac{i-1}{M}\\right\\rfloor\\right)*DP[i-1][j]$ となります。 より基本的な類題： AOJ『Balls and Boxes 9』",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "cc42705d860e0e93feee141d7958b156c99ea127d3193b6954298cd3393b310e"
+    }
+  ],
+  "status": "available"
+}

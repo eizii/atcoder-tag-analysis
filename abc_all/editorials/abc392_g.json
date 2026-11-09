@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc392_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc392/editorial/12175",
+      "text": "\\(B-A = C-B\\)\nを移項して、\n\\(2B=A+C\\)\nとします。\nここで、ひとまず\n\\(A,C \\in S\\)\nかつ\n\\(A+C=k\\)\nなる整数組\n\\((A,C)\\)\nの数を数えましょう。\n例えば、\n\\(S = \\{1,2,3,5\\}\\)\nであるとき、以下のような式を考えます。\n\\((\\sum_{k \\in S} x^k)^2 = (x^1 + x^2+x^3+x^5)(x^1+x^2+x^3+x^5) = x^2 + 2 x^3 + 3 x^4 + 2 x^5 + 3 x^6 + 2 x^7 + 2 x^8 + x^{10}\\)\nこの式の左辺を展開するとき、左側の\n\\((x^1+x^2+x^3+x^5)\\)\nから\n\\(1\\)\n項、右側の\n\\((x^1+x^2+x^3+x^5)\\)\nから\n\\(1\\)\n項を選んで、その積を右辺に加算することになります。\n例えば、左側から\n\\(x^5\\)\n、右側から\n\\(x^2\\)\nを選んだ時、右辺に\n\\(x^{5+2} = x^7\\)\nが加算されます。\nこれを全体について行うと、順序付きの整数組\n\\((A,C)\\)\n\\((A,C \\in S)\\)\nであって\n\\(A+C=k\\)\nなるものの個数が右辺の\n\\(x^k\\)\nにつく係数として現れます。\nここで、ふたつの多項式の積は\nConvolution\nを使って求めることができます。\n(ACL のドキュメント)\n注意として、右辺の各項につく係数は最大でも\n\\(10^6\\)\nなので、\n\\({\\rm mod}\\ 998244353\\)\n上で余りを求めてしまっても (ACL の\nconvolution\nで求まる値をそのまま使っても) 構いません。\nこの情報を使って求解しましょう。\n\\(B \\in S\\)\nなる全ての\n\\(B\\)\nについて、\n\\(A<B<C\\)\nとなるように\n\\(S\\)\n中から\n\\(A,C\\)\nを選んで\n\\((A,B,C)\\)\nを良い三つ組とする方法が何通りあるか数えて足し合わせます。\n\\(S = \\{1,2,3,5\\}\\)\nの例で、\n\\(B=3\\)\nとするとき\n\\(A+C=2B\\)\nかつ\n\\(A,C \\in S\\)\nなる順序付きの整数組\n\\((A,C)\\)\nは\n\\((1,5),(3,3),(5,1)\\)\nの\n\\(3\\)\nつです。\nこのうち\n\\((B,B)=(3,3)\\)\nを選んだ場合は\n\\(A=B=C\\)\nとなり良い三つ組とはならず、 そうでない組\n\\((A,C)\\)\nを選択すると良い三つ組を作ることができますが、全ての組が\n\\((C,A)\\)\nと合わせて\n\\(2\\)\n回ずつカウントされています。\nよって、\n\\(x^{2B}\\)\nの係数から\n\\(1\\)\nを引き\n\\(2\\)\nで割ると\n\\(B\\)\nを固定した際の良い三つ組の数が分かります。\n以上を実装することで、この問題に正解できます。時間計算量は\n\\(A_i\\)\nの最大値を\n\\(M\\)\nとして\n\\(O(M \\log M)\\)\nです。\n実装例 (C++):\n実装例 (Python) (PyPy として提出すると TLE する恐れがあります):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/convolution>\n\nusing namespace std;\nusing namespace atcoder;\n\nint main(){\n  int n;\n  cin >> n;\n  vector<int> p(1000005,0);\n  for(int i=0;i<n;i++){\n    int a;\n    cin >> a;\n    p[a]=1;\n  }\n  long long res=0;\n  auto c=convolution(p,p);\n  for(int i=0;i<1000005;i++){\n    if(p[i]==1){\n      res+=(c[2*i]-1)/2;\n    }\n  }\n  cout << res << \"\\n\";\n}",
+        "import numpy.fft as F\n\nM = 1000005\nN,*A = map(int,open(0).read().split())\nf = [0]*(M+1)*2\nfor a in A: f[a]=1\n\ng = F.ifft(F.fft(f,1<<21)**2)\n\nres = 0\nfor v in A:\n  res += int(g[2*v]+0.5)\n  res -= 1\n\nres //= 2\nprint(res)"
+      ],
+      "text_sha256": "dfe30321064b3919b9caf8c0f814047cf4b641e4cea84bd76bad80a2eae77d76",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc392/abc392_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

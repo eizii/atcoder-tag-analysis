@@ -1,0 +1,38 @@
+{
+  "problem_id": "abc382_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc382/editorial/11479",
+      "text": "数列を辞書順に並び替えることは最後にソートすることにより達成できるので、条件を満たす数列を単に列挙することを考えます。\n説明の簡略化のため、条件を満たす数列の prefix（先頭何項かを順に抜き出して得られる数列）としてあり得る数列を良い数列と呼びます。\n良い数列を列挙することを考えます。\n長さ\n\\(1\\)\nの数列\n\\((A_1)\\)\nが良い数列である条件は\n\\(1 \\leq A_1 \\leq M - 10(N - 1)\\)\nであることです（\n\\(A_1 > M - 10(N - 1)\\)\nとすると、\n\\(A_N\\)\nを最小化しても\n\\(M\\)\nを超えてしまいます）。\n\\(2 \\leq i \\leq N\\)\nであり、\n\\((A_1, A_2, \\ldots, A_{i - 1})\\)\nが良い数列であるとします。このとき、\n\\((A_1, A_2, \\ldots, A_{i - 1}, A_i)\\)\nが良い数列となる\n\\(A_i\\)\nの範囲は\n\\(A_{i - 1} + 10 \\leq A_i \\leq M - 10(N - i)\\)\nとなります（\n\\(A_1\\)\nのときと同じ評価です）。\nこの規則に従って良い数列を列挙することでこの問題を解くことができます。\n条件を満たす数列は最大で\n\\(\\binom{21}{9} = 293930\\)\n個であるため、適切な実装のもとこれは十分高速です。実装方針によっては自然に数列が辞書順になった状態で得られます。\nまた、個数に関する評価を行わずとも、すべての出力が求められていることから条件を満たす数列はある程度数が少なくなると予想でき、各長さの良い数列は出力する数列の個数を超えることがないことを利用すると、良い数列の個数と同程度のオーダーの計算量であれば実行時間制限に間に合うと予想できます。\n\\(A_i\\)\nの上からの評価を単に\n\\(M\\)\n以下とした場合、prefix となり得ない無駄な数列も列挙してしまうため、実行時間制限に間に合わせることはかなり難しいと思われます。\n実装例\n再帰関数を用いて実装する方法が有名ですが、再帰関数を用いずに素朴に各長さの良い数列を列挙する方法でも自然に実装できます。\n非再帰\n再帰",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tvector<vector<int>> w = { {} };\n\tfor (int i = 1; i <= n; i++) {\n\t\tvector<vector<int>> v;\n\t\tfor (vector<int> a : w) {\n\t\t\tfor (int x = (i == 1 ? 1 : a.back() + 10); x <= m - 10 * (n - i); x++) {\n\t\t\t\tvector<int> na = a;\n\t\t\t\tna.push_back(x);\n\t\t\t\tv.push_back(na);\n\t\t\t}\n\t\t}\n\t\tswap(v, w);\n\t}\n\tint X = w.size();\n\tcout << X << '\\n';\n\tfor (int i = 0; i < X; i++) for (int j = 0; j < n; j++) cout << w[i][j] << \" \\n\"[j == n - 1];\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tvector<vector<int>> ans;\n\tauto dfs = [&](auto dfs, vector<int> v) -> void {\n\t\tint sz = v.size();\n\t\tif (sz == n) {\n\t\t\tans.push_back(v);\n\t\t\treturn;\n\t\t}\n\t\tfor (int i = (sz == 0 ? 1 : v.back() + 10); i <= m - 10 * (n - sz - 1); i++) {\n\t\t\tvector<int> nxt = v;\n\t\t\tnxt.push_back(i);\n\t\t\tdfs(dfs, nxt);\n\t\t}\n\t};\n\tdfs(dfs, {});\n\tint X = ans.size();\n\tcout << X << '\\n';\n\tfor (int i = 0; i < X; i++) for (int j = 0; j < n; j++) cout << ans[i][j] << \" \\n\"[j == n - 1];\n}"
+      ],
+      "text_sha256": "1e3ced418e60448857acbb1a08eabeda160de835f8cb67d5346928fb14fe10f1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc382/abc382_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc382/editorial/11498",
+      "text": "Pythonの\nitertools.combinations(p, r)\nは、リストpの長さrの部分列をソートして重複なしで返す関数です。\n\\(B_i=A_i-9(i-1)\\)\nとすると、問題の条件は\n\\(1\\le B_1, B_{i-1}<B_i, B_N \\le M-9(N-1)\\)\nとなり、\n\\(B\\)\nは\nitertools.combinations\nで簡単に取り出せます。\n実装例 (Python) :",
+      "codes": [
+        "from itertools import combinations\n\nN, M = map(int, input().split())\nans = []\nfor c in combinations(list(range(1, M - 9 * (N - 1) + 1)), N):\n    l = list(c)\n    for i in range(1, N):\n        l[i] += 9 * i\n    ans.append(l)\nprint(len(ans))\nfor i in ans:\n    print(*i)"
+      ],
+      "text_sha256": "bcb5eaff788bbbc90d1fc58446a00bb7941a91808fd3159c3515175479e27096",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc382/abc382_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc382/editorial/11494",
+      "text": "題意の条件を満たす整数列の個数を明示的に求めます.\n整数列\n\\(\\{A_i\\}\\)\nに対して, 整数列\n\\(\\{B_i\\}\\)\nを\n\\(B_i := A_i-10(N-i)\\)\nで定めます.  このとき,\n\\(\\{A_i\\}\\)\nが題意の条件を満たすことと,\n\\(\\{B_i\\}\\)\nが以下の条件を満たすことが同値であることが確認できます.\n\\(\\{B_i\\}\\)\nは広義単調増大,\n\\(\\> i.e.  \\> B_1 ≤ \\dots ≤ B_N\\)\n\\(1 ≤ B_1 , \\> B_N ≤ M-10N+10 \\)\n上の条件を満たす整数列\n\\(\\{B_i\\}\\)\nの個数は,\n\\(1\\)\n以上\n\\((M-10N+10)\\)\n以下の整数を重複も込めて\n\\(N\\)\n個選ぶ場合の数に一致するので,\n\\(\\left( \\begin{array}{cc} M-9N+9 \\\\ N \\end{array} \\right) \\)\n個となります.\n\\(\\> \\{A_i\\}\\)\nと\n\\(\\{B_i\\}\\)\nは1:1対応しているので, 題意の条件を満たす整数列の個数も同じ値となります.\n公式解説の通りですが, 本問題の制約における最大ケースは\n\\(N=12, \n\\> M = 120\\)\nのときで, 題意の条件を満たす整数列の個数は\n\\(\\left( \\begin{array}{cc} 21 \\\\ 12 \\end{array} \\right) = 293930\\)\n個となります.",
+      "codes": [],
+      "text_sha256": "22a896739093cdf6fc04ad7d39761bc441fa6e86a687cd4a827b54942bfa52b6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc382/abc382_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

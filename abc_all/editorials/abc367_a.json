@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc367_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc367/editorial/10698",
+      "text": "高橋君が寝ているときに日をまたぐかどうかで場合分けすることで解くことができます．\n[1] 日をまたがない場合\n高橋君は同じ日に就寝し起床するため，\n\\(B<C\\)\nが成り立ちます．寝ている時間は\n\\(B\\)\n時から\n\\(C\\)\n時なので，その間に\n\\(A\\)\n時がある場合，すなわち\n\\(B<A<C\\)\nのときは答えは\nNo\nです．そうでない場合は答えは\nYes\nです．\n[2] 日をまたぐ場合\n一日の中では高橋君は先に起床し，その後就寝するため\n\\(C<B\\)\nが成り立ちます．起きている時間は\n\\(C\\)\n時から\n\\(B\\)\n時なので，その間に\n\\(A\\)\n時がある場合，すなわち\n\\(C<A<B\\)\nのときは答えは\nYes\nです．そうでない場合は\nNo\nです．\n実装例(Python)\n実装例(C++)\nこのような場合分けが多い問題において，場合分けを使わない方法があるときは，場合分けの漏れやミスによるペナルティを回避することができるため有効な手段となることがあります．\n本問題においては，while 文を使うことで場合分けを回避することができます．\n\\(B\\)\n時から時間を進めていき，\n\\(C\\)\n時になるまでに\n\\(A\\)\n時と一致するならば\nNo\n出力し，そうでないならば\nYes\nを出力すればよいです．\n実装例 (Python)",
+      "codes": [
+        "A, B, C = map(int, input().split())\nif B < C:\n    if B < A < C:\n        print(\"No\")\n    else:\n        print(\"Yes\")\nelse:\n    if C < A < B:\n        print(\"Yes\")\n    else:\n        print(\"No\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main()\n{\n  int A, B, C;\n  cin >> A >> B >> C;\n  if (B < C)\n  {\n    if (B < A && A < C)\n      cout << \"No\" << endl;\n    else\n      cout << \"Yes\" << endl;\n  }\n  else\n  {\n    if (C < A && A < B)\n      cout << \"Yes\" << endl;\n    else\n      cout << \"No\" << endl;\n  }\n}",
+        "A, B, C = map(int, input().split())\nnow = B\nwhile now != C:\n    if now == A:\n        print(\"No\")\n        exit()\n    now += 1\n    now %= 24\n\nprint(\"Yes\")"
+      ],
+      "text_sha256": "481a62e7a1d51d445c773b601b7ceee517919860261faa834c3dd771f10e4087",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc367/abc367_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc367/editorial/10712",
+      "text": "実は\n\\((a - b) (b - c) (c - a) > 0\\)\nで判定できます。\n提出:\nRust (1 ms)",
+      "codes": [],
+      "text_sha256": "eb00407aa8bf09eef09cc7dd0a99f8e4827053aa010726dc1d417cebdd474297",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc367/abc367_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc367/editorial/10717",
+      "text": "周期がある問題では、基準となるものをゼロとするように動かすと場合分けを減らすことができます。\n本問では、起床時刻を基準に考える（つまり\n\\(0\\)\n時に起床すると考える）と、愛を叫ぶ時刻と就寝時刻の比較を行えばよいです。\n実装上は、\n\\(A\\)\nの代わりに\n\\((A-C)\\ \\%\\ 24\\)\nを、\n\\(B\\)\nの代わりに\n\\((B-C)\\ \\%\\ 24\\)\nを使うと良いです。\nAC コード例",
+      "codes": [],
+      "text_sha256": "f089e2a6b59693384c8d850a6f910327fdbd957b1c0211dbda678d7a1218bbb9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc367/abc367_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

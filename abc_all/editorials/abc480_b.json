@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc480_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc480/editorial/27150",
+      "text": "原案:vwxyz 各投票用紙がどの候補者の有効票になるか（もしくは無効票になるか）を判定します。 名前が一致する候補者がいるならばときはその人の票となります。 そうでないとき、配列を用意して、 \\(1\\) 文字書き換えることで名前が一致するような候補者がいればその番号を配列に追加していき、その配列の要素数が \\(1\\) ならばその候補者に \\(1\\) 票が入ります。\nそうでないとき、無効票となります。 \\(1\\) 文字書き換えることで一致するかの判定は、各文字列の \\(k\\) 文字目が異なるような \\(k\\) の個数が \\(1\\) 個かどうかを判定すればよいです。 \\(S_i\\) と \\(T_j\\) の長さが違うケースに注意してください。 Pythonの実装例",
+      "codes": [
+        "N,M=map(int,input().split())\nS=[input() for i in range(N)]\nT=[input() for j in range(M)]\nans_lst=[0]*N\nfor j in range(M):\n    if T[j] in S:\n        ans_lst[S.index(T[j])]+=1\n    else:\n        I=[]\n        for i in range(N):\n            if len(S[i])==len(T[j]) and sum(s!=t for s,t in zip(S[i],T[j]))==1:\n                I.append(i)\n        if len(I)==1:\n            ans_lst[I[0]]+=1\nprint(*ans_lst,sep=\"\\n\")\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "8dc434837803646125b580d5c6f6030a51eb8faf82789d7601b5cde999daaec2"
+    }
+  ],
+  "status": "available"
+}

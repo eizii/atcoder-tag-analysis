@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc282_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc282/editorial/5399",
+      "text": "左から順に括られた文字かを判定し、括られた文字でなくかつ\n,\nならば\n.\nで置き換えるという操作が行えればよいです。\n括られた文字であるかの判定ですが、括られた文字であることの同値な条件として、例えばその文字の左に\n“\nが奇数個存在するという条件があります。この条件を用いると、線形時間での解法が得られます。実装例もご確認ください。\n実装例(Python):",
+      "codes": [
+        "n = int(input())\ns = list(input())\nlef_even = True\nfor i in range(n):\n    if lef_even and s[i] == \",\":\n        s[i] = \".\"\n    if s[i] == '\"':\n        lef_even = not lef_even\nprint(\"\".join(s))"
+      ],
+      "text_sha256": "f47ec438134bdfe1dd24ab72aa6b30ea7e0baedd105a83ec83bbcda9d1dca23f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc282/abc282_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc282/editorial/5409",
+      "text": "“を区切り文字としてSを分割したリストを考えます。\nこのリストの1, 3, 5, …個目の要素について, を.に置き換える操作を行い、再び”で結合すれば求める解を得ることができます。\n入力例1の”a,b”c,dについて実際に操作を見てみます。\n“a,b”c,d\n\\(\\cdots\\)\n元の文字列\n→ [ ‘ ’ , ‘a,b’, ‘c, d’]\n\\(\\cdots\\)\n区切り文字で分割したリスト\n→ [ ‘ ’ , ‘a,b’, ‘c. d’]\n\\(\\cdots\\)\n1, 3, 5, …個目の要素について, を.に置き換える操作\n→ “a,b”c.d\n\\(\\cdots\\)\n区切り文字で再び結合した文字列\nPythonでは、上記の操作を簡単に行える関数が用意されています。\n提出",
+      "codes": [
+        "import sys\nimport numpy as np\n\n\n# 入力\nN, S = sys.stdin.readlines()\n\n# Sを区切り文字で分割したリストseparatedを作る\nseparated = S.split(sep='\\\"')\n# separatedの偶数個目(0-index)の要素について置き換えを行う\nseparated[::2] = np.char.replace(separated[::2], ',', '.')\n# 置き換えられたリストを区切り文字で連結\nanswer = '\\\"'.join(separated)\n\nprint(answer)"
+      ],
+      "text_sha256": "d26d02674b8cc52988c36955785e0e461b0e8b0945a595fe1074d1c95a26f0af",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc282/abc282_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

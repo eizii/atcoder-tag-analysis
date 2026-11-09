@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc231_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc231/editorial/3073",
+      "text": "この問題を解くには for 文などのループに関する知識が必要です。知らなかったという人はこの機会に是非習得してみてください。\n候補者は\n\\(N\\)\n人以下であり、それぞれに対してその候補者に投票した人数を愚直に求めます。\n人数を計算した後に投票数最大の候補者を求めるにはいくつか方法が考えられますが、一例として以下の実装例を参照してください。\n計算量は\n\\(O(N^2)\\)\nで十分高速です。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n; cin >> n;\n    vector<string> v(n);\n    for(int i = 0; i < n; i++) cin >> v[i];\n    int ma = 0;\n    string res;\n    for(int i = 0; i < n; i++){\n        string kouho = v[i];\n        int cnt = 0;\n        for(int j = 0; j < n; j++) if(v[j] == kouho) cnt++;\n        if(cnt > ma){\n            ma = cnt;\n            res = kouho;\n        }\n    }\n    cout << res << endl;\n}"
+      ],
+      "text_sha256": "8ce0865fde3f5163e1d9717da14566f5e073f8b105205b8968f1a1d74c0f8c3d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc231/abc231_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

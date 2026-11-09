@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc164_a",
+  "editorials": [
+    {
+      "text": "A:Sheep and Wolves\nif 文などにより条件分岐を行うことで、それぞれの場合に対応した出力を行います。\nC 言語での実装例\n1 int main(){\n2\nint s,w;\n3\nscanf(\"%d%d\",&s,&w);\n4\nif(w>=s)printf(\"unsafe\");\n5\nelse printf(\"safe\");\n6 }\nPython での実装例\n1 s, w = map(int, input().split())\n2 if w >= s:\n3\nprint(\"unsafe\")\n4 else:\n5\nprint(\"safe\")\n",
+      "text_sha256": "ac500eae2f98b8a51136fada6a102240d236170bfb2736d6d85334ed50392195",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc164/abc164_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

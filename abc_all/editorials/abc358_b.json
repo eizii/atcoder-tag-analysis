@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc358_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc358/editorial/10220",
+      "text": "\\(i\\)\n番目の人がチケットを購入し終わるのが今から\n\\(x_i\\)\n秒後だとします。また、便宜上\n\\(x_0=0\\)\nとおきます。\n各\n\\(i\\ (1\\leq i\\leq N)\\)\nについて、\n\\(x_i\\)\nの値が\n\\(x_{i-1}\\)\nの値を用いてどのように表されるか考えます。\n\\(x_{i-1} \\leq T_i\\)\nのとき：\n\\(i\\)\n番目の人がチケット売り場を訪れたタイミングで列は存在しないので、すぐさま購入手続きを開始できます。よって、\n\\(x_i=T_i+A\\)\nです。\n\\(x_{i-1} > T_i\\)\nのとき：\n\\(i\\)\n番目の人がチケット売り場を訪れたタイミングではまだ前の人たちがチケットを購入しているので、\n\\(i\\)\n番目の人は\n\\(i-1\\)\n番目の人が購入を終了し次第購入手続きを開始します。よって、\n\\(x_i=x_{i-1}+A\\)\nです。\nこれらをまとめると\n\\(x_i=\\max(x_{i-1},T_i)+A\\)\nとなります。よって、この式を用いて\n\\(i=1,2,\\dots,N\\)\nの順に\n\\(x_i\\)\nの値を求めていけばよいです。\n実装例  (C++) :\n実装例  (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, a;\n    cin >> n >> a;\n    int pre = 0;\n    for (int i = 0; i < n; i++) {\n        int t;\n        cin >> t;\n        int ans = max(pre, t) + a;\n        cout << ans << '\\n';\n        pre = ans;\n    }\n}",
+        "n, a = map(int, input().split())\nt = list(map(int, input().split()))\npre = 0\nfor i in range(n):\n    ans = max(pre, t[i]) + a\n    print(ans)\n    pre = ans"
+      ],
+      "text_sha256": "0761e9030407c104ae425e3b0479370ca65057b0d7ca667921aea3387ea3ec8c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc358/abc358_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

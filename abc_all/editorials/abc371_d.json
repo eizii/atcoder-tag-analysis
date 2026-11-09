@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc371_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc371/editorial/10923",
+      "text": "座標が\n\\(D\\)\n以下の村の村人の総数が高速に分かれば、この問題に答えられます。なぜなら、その答えを\n\\(f(D)\\)\nとするとクエリの答えは\n\\(f(R_i)-f(L_i-1)\\)\nと表されるからです。\nまず、\n\\(x,D\\)\nがそれぞれ\n\\(0\\)\n以上\n\\(N\\)\n以下の場合を考えましょう。このときは、単純に累積和を求めておけば答えは\n\\(\\mathrm{O}(1)\\)\nで求まります。\n今回の問題の難しいところは、\n\\(x,D\\)\n(の絶対値) が大きいことです。これを解決するには、二分探索を用いればよいです。\n座標が\n\\(D\\)\n以下である最右の村は二分探索により求めることができます。これと累積和を組み合わせることで、\n\\(f(D)\\)\nを\n\\(\\mathrm{O}(\\log N)\\)\nで求めることが可能で、十分高速です。",
+      "codes": [],
+      "text_sha256": "5c51116e5f0d1658a9203d670572cd7415aecb03069213c2653569a0e8f4a79a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc371/abc371_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

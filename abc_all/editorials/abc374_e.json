@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc374_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc374/editorial/11094",
+      "text": "この問題は、\n\\(W\\)\nの「最小値を最大化」する問題です。\n競技プログラミングにおいて、「最小値を最大化」(または「最大値を最小化」) する問題は、答えとなる値を仮に決め打って、その値が達成可能かを判定しながら二分探索する (いわゆる\n決め打ち二分探索\n) テクニックがしばしば有効です。\n現に、今回は決め打ち二分探索を用いてこの問題を解くことができます。 以下の判定問題を解くことを考えましょう。\n予算を\n\\(X\\)\n円までかけることができるとき、製造能力を\n\\(w\\)\n以上にできるか?\nこの問題を解くためには、全ての\n\\(i\\)\nについて\n\\(W_i \\ge w\\)\nとするための最小の金額を求めれば良いことになります。以降、次の問題を考えます。\n工程\n\\(i\\)\nで製品を\n\\(w\\)\n個以上処理できるようにするためにかかる最小の費用はいくらか?\n実は、以下の事柄が成り立ちます。\n工程\n\\(i\\)\nを\n\\(w\\)\n個以上処理できる機械の導入方法のうち最小の金額を達成するものでは、次の少なくとも一方が満たされる。\n機械\n\\(S_i\\)\nが\n\\(B_i\\)\n台以下しか導入されない。\n機械\n\\(T_i\\)\nが\n\\(A_i\\)\n台以下しか導入されない。\n証明:\n上記を言い換えると、次のようになります。\n最適解において、機械\n\\(S_i, T_i\\)\nのどちらかについて、\n\\(A_iB_i\\)\n個分以下の処理能力しか持たせなくて良い。\n\\(B_i\\)\n台の機械\n\\(S_i\\)\nと\n\\(A_i\\)\n台の機械\n\\(T_i\\)\nはどちらも\n\\(A_iB_i\\)\n個分の処理能力であり、この\n\\(2\\)\nつは相互に交換可能である。ならば、この\n\\(2\\)\nつのうちコストの安いものに交換できる限り交換すればよい。このことを言い換えると上記の事柄となる。\nこの事柄を使うことで、「機械\n\\(S_i\\)\nの個数を\n\\(B_i\\)\n以下で全探索」「機械\n\\(T_i\\)\nの個数を\n\\(A_i\\)\n以下で全探索」するとこの問題を時間計算量\n\\(O(A_i+B_i)\\)\nで解くことができます。\n元の問題に戻ります。 元の問題は以下の構造で解くことができます。\nこの問題の答え\n\\(w\\)\nを二分探索する。\n全ての\n\\(i=1,2,\\dots,N\\)\nについて、\n\\(W_i \\ge w\\)\nとするための最小金額を足し合わせる。\nその金額が\n\\(X\\)\n以下なら答えは\n\\(w\\)\n以上であり、そうでないとき答えは\n\\(w\\)\n未満である。\n制約から、答えは\n\\(10^9\\)\n以下であることが証明できるので、この範囲で二分探索すればよいです。\n時間計算量は\n\\(O(N(A_i+B_i) \\log(X (A_i+B_i)))\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nlong long div_ceil(long long a,long long b){\n  return (a+b-1)/b;\n}\n\nlong long solve(\n  long long n,long long x,vector<long long> a,vector<long long> p,vector<long long> b,vector<long long> q\n){\n  long long l=1,r=1000000007;\n  while(l<=r){\n    long long te=(l+r)/2;\n    long long rem=x;\n\n    for(long long i=0;i<n;i++){\n      long long sub=4e18;\n      for(long long j=0;j<=b[i];j++){\n        long long cur=j*p[i];\n        long long rte=max(0ll,te-a[i]*j);\n        cur+=div_ceil(rte,b[i])*q[i];\n\n        sub=min(sub,cur);\n      }\n      for(long long j=0;j<=a[i];j++){\n        long long cur=j*q[i];\n        long long rte=max(0ll,te-b[i]*j);\n        cur+=div_ceil(rte,a[i])*p[i];\n\n        sub=min(sub,cur);\n      }\n      rem-=sub;\n      if(rem<0){break;}\n    }\n\n    if(rem>=0){l=te+1;}\n    else{r=te-1;}\n  }\n  return r;\n}\n\nint main(){\n  long long n,x;\n  cin >> n >> x;\n  vector<long long> a(n),p(n),b(n),q(n);\n  for(int i=0;i<n;i++){\n    cin >> a[i] >> p[i] >> b[i] >> q[i];\n  }\n\n  cout << solve(n,x,a,p,b,q) << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "be0bfc317836f727eb8fea3cead4dd4b73e590e6e81ed9fb90ac7137e751ee4d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc374/abc374_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

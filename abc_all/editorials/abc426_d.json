@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc426_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc426/editorial/14150",
+      "text": "全ての文字を\n0\nにするための操作回数の最小値について考えます（全ての文字を\n1\nにする場合についても同様です）。\nまず、元々\n1\nである文字に対しては少なくとも\n\\(1\\)\n回以上操作を行う必要があります（ある文字を削除して反転・挿入し直すことを、この文字に対して操作を行うと表現します）。元々\n0\nである文字に対しては、偶数回の操作を行う必要があるため、\n\\(1\\)\n回も操作しないか、あるいは\n\\(2\\)\n回以上の操作を行う必要があります。\n元々\n0\nである文字のうち、その文字に対して\n\\(1\\)\n回も操作を行わないようなものが最大で何個取れるか考えてみましょう。元々\n\\(i, j\\ (i < j)\\)\n文字目にあった\n\\(2\\)\n文字のいずれに対しても\n\\(1\\)\n回も操作を行わない場合、それらの間にある\n\\(i+1,\\dots,j-1\\)\n文字目についても\n\\(1\\)\n回も操作を行うことができません。ゆえに、\n\\(1\\)\n回も操作を行わないような\n0\nたちは元の文字列において連続した区間をなしている必要があります。\nよって、元の文字列における\n0\nの個数を\n\\(C_0\\)\n、\n0\nが連続して現れる個数の最大値を\n\\(M_0\\)\nとおくと、\n\\(C_0-M_0\\)\n個の\n0\nに対しては少なくとも\n\\(2\\)\n回操作を行う必要があり、\n\\(N-C_0\\)\n個ある\n1\nに対しては少なくとも\n\\(1\\)\n回操作を行う必要があるため、答えは\n\\(2(C_0-M_0)+(N-C_0)\\)\n以上になります。\n逆に、\n\\(2(C_0-M_0)+(N-C_0)\\)\n回の操作で全ての文字を\n0\nにすることが常に可能です。詳細は省略しますが、例えば、\n0\nが\n\\(M_0\\)\n個並ぶ区間の両側にある文字に対して\n\\(1\\)\n回ずつ操作を行うことでまず\n0...01...1\nの形に持っていき、その後\n\\(C_0-M_0\\)\n個の（元々\n0\nであった）\n1\nに対して\n\\(1\\)\n回ずつ操作を行うことで全ての文字を\n0\nにすることが可能です。\n\\(C_0,M_0\\)\nの値は\n\\(O(N)\\)\nで求めることができるため、全体の計算量は\n\\(O(N)\\)\nです。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint solve(int n, string s) {\n    vector<int> mx(2), cnt(2);\n    for (int l = 0; l < n;) {\n        int r = l + 1;\n        while (r < n and s[l] == s[r]) ++r;\n        int c = s[l] - '0';\n        int len = r - l;\n        mx[c] = max(mx[c], len);\n        cnt[c] += len;\n        l = r;\n    }\n    int ans = 2 * n;\n    for (int i = 0; i < 2; i++) {\n        ans = min(ans, (cnt[i] - mx[i]) * 2 + cnt[i ^ 1]);\n    }\n    return ans;\n}\n\nint main() {\n    int t;\n    cin >> t;\n    while (t--) {\n        int n;\n        string s;\n        cin >> n >> s;\n        cout << solve(n, s) << '\\n';\n    }\n}"
+      ],
+      "text_sha256": "7fbfac469cf353964fdb366916e23d05df56788acbaf5c355851ceaa201a21bf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc426/abc426_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

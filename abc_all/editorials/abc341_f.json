@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc341_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc341/editorial/9319",
+      "text": "頂点\n\\(v\\)\nだけにコマが\n\\(1\\)\n個置かれており他の頂点にはコマが置かれていない状況から何回の操作ができるか、つまり、頂点\n\\(v\\)\nのコマ\n\\(1\\)\n個が操作回数に寄与できる最大数\n\\(\\mathrm{dp}[v]\\)\nを、全頂点\n\\(v = 1, 2, \\ldots, N\\)\nについて求めれば、本問題の答えは\n\\(\\sum_{v =1}^N \\mathrm{dp}[v] \\times A_v\\)\nとして得られます。\n以下、\n\\(\\mathrm{dp}[\\ast]\\)\nを動的計画法で求める方法を考えます。\nある頂点\n\\(v\\)\nからコマを取り除いて、集合\n\\(S\\)\n内の頂点それぞれにコマを置いたとすると、各頂点\n\\(u \\in S\\)\nに置いたコマに由来する操作がこの後に\n\\(\\mathrm{dp}[u]\\)\n回可能であり、置いたコマ全体に由来して合計\n\\(\\sum_{u \\in S}  \\mathrm{dp}[u]\\)\n回の操作がこの後に可能です。\nよって、操作回数を最大化するには\n\\(\\sum_{u \\in S}  \\mathrm{dp}[u]\\)\nが最大になる\n\\(S\\)\nを選べばよく、\n\\[\\mathrm{dp}[v] = 1 + \\max_S  \\sum_{u \\in S}  \\mathrm{dp}[u] \\tag{1}\\]\nです。ここで、\n\\(S\\)\nは\n\\(v\\)\nに隣接するいくつかの頂点からなる（空でも良い）集合であって\n\\(\\sum_{u \\in S} W_u \\lt W_v\\)\nを満たすもの全てをわたります。\n\\(S\\)\nは\n\\(W_u \\lt W_v\\)\nを満たす頂点\n\\(u\\)\nらしか含み得ないことから、\n式 (1) の右辺も\n\\(W_u \\lt W_v\\)\nを満たす頂点\n\\(u\\)\nらのみに依存するため、\n\\(\\mathrm{dp}[v]\\)\nの値は\n\\(W_v\\)\nの小さい\n\\(v\\)\nから順次求めていくことができます。\nまた、ある固定された\n\\(v\\)\nについて式 (1) の右辺を求める問題は、\n\\(v\\)\nに隣接する全頂点\n\\(u_1, u_2, \\ldots, u_{\\deg(v)}\\)\nについて、\n\\(u_i\\)\nの\n価値\nが\n\\(\\mathrm{dp}[u_i]\\)\n、\n\\(u_i\\)\nの\nコスト\nが\n\\(W_{u_i} \\)\nと定められている時に、選ぶ合計コストが\n\\(W_v\\)\n未満という制約下で選ぶ合計価値を最大化せよ\nというナップザック問題と見ることができ、これは動的計画法によって\n\\(O(\\deg(v) \\times W_v)\\)\n時間で解くことができます。\n全頂点について上記のナップザック問題を解くことを考えても、\n\\[\\sum_{v = 1}^N \\deg(v) W_v \\leq W_{\\max} \\sum_{v = 1}^N \\deg(v)  = W_{\\max} \\times 2M\\]\nです（ただし、\n\\(W_{\\max} \\coloneqq \\max \\lbrace W_1, W_2, \\ldots, W_N \\rbrace\\)\n）ので、本問題を\n\\(O(N + MW_{\\max})\\)\n時間で解くことができます。",
+      "codes": [],
+      "text_sha256": "9cf459c43c867b617c5a3baaa7ae1e100cf7942edbaf93378c02d7be7b5fb533",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc341/abc341_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

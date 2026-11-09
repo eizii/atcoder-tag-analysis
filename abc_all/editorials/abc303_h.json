@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc303_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc303/editorial/6425",
+      "text": "ラベルの付いた木の個数は以下のケイリーの公式で表されます。 \\(N\\) 頂点のラベル付き木の個数は \\(N^{N-2}\\) 個である。 この定理の証明には様々な方法がありますが、そのうちの一つとして  Prüfer コードを用いたものがあります。 詳細は割愛しますが、Prüfer コードの考え方では、 \\(N\\) 頂点のラベル付き木と \\(1\\) 以上 \\(N\\) 以下の整数からなる長さ \\(N-2\\) の数列との間に全単射を作ります。このとき、得られる数列に出現する \\(x\\) の回数が、木の頂点 \\(x\\) の次数 \\(-1\\) になっているという性質があります。 上記の事実を用いると、問題は以下のように言い換えられます。 \\(1\\) 以上 \\(N\\) 以下の整数からなる長さ \\(N-2\\) の数列であって、任意の \\(i\\ (1\\leq i \\leq N)\\) にたいして、 \\(i\\) が数列に出現する回数が \\(S_1-1,S_2-1,\\ldots,S_K-1\\) のいずれかであるという条件を満たすものは何通りか。 これは、 \\(i + 1 \\in S \\Rightarrow a_i = 1, i + 1 \\notin S \\Rightarrow a_i = 0\\) として定義される数列 \\(a\\) の指数型母関数を \\(\\displaystyle f(x)=\\sum_{i=0}^\\infty \\frac{a_i}{i!}x^i\\) としたとき、 \\( (N-2)![x^{N-2}]f^{N}(x) \\) として書けます。これは、多項定理を考えると従います。 \\(f^N(x)\\) は繰り返し二乗法と NTT を使うことで \\(\\mathrm{O}(N\\log^2 N)\\) で計算できます。また、Newton 法を使って exp, log を \\(\\mathrm{O}(N\\log N)\\) で計算できることを用いると \\(f^N(x)\\) を \\(\\mathrm{O}(N\\log N)\\) で求めることもできます。以上よりこの問題を解くことができました。 プリューファーコードを用いる類題です。 Unicyclic Graph Counting(AtCoder) Figures(AtCoder) Random Tree Score(yukicoder)",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "1c0a154b5670865c5348f2048af978e6589bdea63a8b280060807fc90154b282"
+    }
+  ],
+  "status": "available"
+}

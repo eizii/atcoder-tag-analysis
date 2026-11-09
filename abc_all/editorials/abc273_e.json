@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc273_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc273/editorial/5023",
+      "text": "数列全体を愚直にノートから読み書きする方法では、かかる計算量が大きくなり実行制限時間やメモリ制限を満たすことは難しいでしょう。\nその対策として、数列\n\\(A\\)\nの現在および過去の状態を木として保持することで、各クエリを高速に処理する方法を述べます。\nまず、\n\\(-1\\)\nと書かれた頂点\n\\(r\\)\nのみからなる根付き木（唯一の頂点\n\\(r\\)\nを根とする）を用意し、頂点\n\\(r\\)\nにコマを置きます。\nそして、以後、\nADD\n\\(x\\)\nのクエリでは、現在コマがある頂点の子として新たな頂点\n\\(v\\)\nを追加し、頂点\n\\(v\\)\nに整数\n\\(x\\)\nを書き込んで、コマを頂点\n\\(v\\)\nに移動します。\nDELETE のクエリでは、コマを、コマが現在ある頂点の親頂点に移動します。ただし、コマが根\n\\(r\\)\nにあるときは何もしません。\n上記のように ADD 、 DELETE のクエリを処理することで、つねに、現在の数列\n\\(A\\)\nは「根から現在コマがある頂点までの単純パス上の頂点に書かれた整数を順に並べ、先頭の\n\\(-1\\)\nを取り除いて得られる数列」になっていることに注意してください。\nよって、現在の数列\n\\(A\\)\nをノートに記録する際は、数列そのものではなく、現在コマがある頂点がどこかという情報だけを記録すれば十分です。\nつまり、\nSAVE\n\\(y\\)\nのクエリでは、現在コマがある頂点（その ID やメモリ上のアドレスなど実装方法に応じたもの）をノートの\n\\(y\\)\nページ目に記録します。ノートの各ページにどの頂点が書かれているかは連想配列で管理することができます。\nそして、\nLOAD\n\\(z\\)\nのクエリでは、ノートの\n\\(z\\)\nページ目を参照し、そこに書かれた頂点にコマを移動すれば良いです。\n\\(A\\)\nの末尾要素は、つねに、コマがある頂点に書かれた整数と一致し、また、\n\\(A\\)\nが空の場合（つまりコマが根\n\\(r\\)\nにある場合）についても、根には\n\\(-1\\)\nが書かれているので、\n結局、本問題を解くには、各クエリを実行するたびにその直後にコマがある頂点に書かれた整数を出力すれば良いです。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <map>\nusing namespace std;\n\nstruct Node{\n  int val, par;\n  vector<int> vec;\n  Node(int v, int p){val = v, par = p;};\n};\n\nint Q;\nmap<int, int> mp;\nvector<Node> vec;\n\nint main(void)\n{\n  ios::sync_with_stdio(0);\n  cin.tie(0);\n  cin >> Q;\n  \n  int v = 0;\n  vec.push_back(Node(-1, 0));\n\n  string s; int x;\n  for(int i = 1; i <= Q; i++){\n    cin >> s;\n    if(s == \"ADD\"){\n      cin >> x;\n      vec.push_back(Node(x, v));\n      vec[v].vec.push_back((int)vec.size()-1);\n      v = (int)vec.size()-1;\n    }\n    if(s == \"DELETE\") v = vec[v].par;\n    if(s == \"SAVE\"){\n      cin >> x;\n      mp[x] = v;\n    }\n    if(s == \"LOAD\"){\n      cin >> x;\n      v = mp[x];\n    }\n    cout << vec[v].val << \" \";\n  }\n  cout << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "946e33d410ff9c2b55cadc229de46e4b63a197f28526a292f1cac4dab8c350b6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc273/abc273_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc273/editorial/5059",
+      "text": "この問題を見て、「何か難しそうなことしている、分からない」と思った方も多くいらっしゃるのではないでしょうか？\n公式解説では何か特殊な発想を要求する問題に見えて、解き方が分かり辛いかもしれません。\nこの解説では、「そもそもこの問題が要求しているものは何か？」「どのように考察すれば解けたか？」の一例を書きます。\nまず、\nADD\nと\nDELETE\nに着目します。\nADD\nは末尾への要素追加、\nDELETE\nは末尾の要素を削除する操作であり、クエリごとに出力すべき値も末尾の要素です。\n従って、これはデータ構造で言えば\nstack\nに該当します。\nさて、\nSAVE\nと\nLOAD\nについても考えてみましょう。\nLOAD\nを行うと、特定のクエリの時点での状態まで巻き戻ることが分かります。従って、これは永続データ構造の説明に他なりません。\n従って、この問題は永続スタックを作る問題である、と読み解くことができます。用語さえ分かれば検索できるので、これでこの問題は解けました。\nこのように、複数のクエリを捌く問題では、それぞれのクエリを捌くにはどのような性質が必要か？を考えると答えに辿り着きやすくなります。\nまた、データ構造に必要な性質に対して、「この性質が要求されたらこの構造を疑う」という発想を持っておくと良いかもしれません。例えば、区間和クエリが存在するなら累積和やセグメント木のような和の構造が載るデータ構造を疑う、などですね。\n今回の場合、永続データ構造はクエリを捌く問題で有用で、「特定の時間のデータを取得したい」という需要がある場合は永続性を疑うと良いです。\n(余談ですが、「特定の時間のデータを取得する」方法としてはクエリ先読みと呼ばれる手法もあります。予め、この時間のこのデータが欲しいという情報を求めておいて、対応する時間になったらデータを取得して未来のクエリに渡してあげる手法です)\n(余談2: Twitterで見かけたのですが、今回の操作はGitだと思うと木構造が自然に感じるとのこと。確かに？)\n(余談3: 永続スタックの実装時、単方向リストを使う場合は初期状態のノードの(値, 直前のノード)を(\n\\(-1\\)\n,自分自身)にすると例外処理が不要になったり)",
+      "codes": [],
+      "text_sha256": "b9a83a3f6fd1bfe1b3f9cdca3d6754ac626d8afcfd5731686f2d21281a0bc725",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc273/abc273_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc273/editorial/5058",
+      "text": "この問題において、数列に対する操作は、末尾に対する追加・削除・参照しか行われません。よって、連結リストとして数列を管理すれば、これらの操作を定数時間で行うことができ、ノートの読み書きも末尾要素のポインタを保持するだけで済みます。\nなお、この解法は、公式解説による根付き木を用いた解法と本質的に同等です。\n以下にC++による例を示します。",
+      "codes": [
+        "#include <bits/extc++.h>\n\nstruct linked_list {\n  struct node {\n    int val;\n    node* next;\n    node(int val, node* next) : val(val), next(next) {}\n  };\n\n  node* head;\n\n  linked_list() : head(nullptr) {}\n\n  void push(int val) { head = new node(val, head); }\n\n  void pop() {\n    if (head) {\n      head = head->next;\n    }\n  }\n\n  int get() {\n    if (head) {\n      return head->val;\n    } else {\n      return -1;\n    }\n  }\n};\n\nint main() {\n  int q;\n  std::cin >> q;\n\n  std::map<int, linked_list> notebook;\n\n  linked_list a;\n\n  for (int i = 0; i < q; ++i) {\n    std::string op;\n    std::cin >> op;\n\n    if (op == \"ADD\") {\n      int x;\n      std::cin >> x;\n\n      a.push(x);\n    } else if (op == \"DELETE\") {\n      a.pop();\n    } else if (op == \"SAVE\") {\n      int y;\n      std::cin >> y;\n\n      notebook[y] = a;\n    } else if (op == \"LOAD\") {\n      int z;\n      std::cin >> z;\n\n      a = notebook[z];\n    }\n\n    std::cout << a.get() << (i == q - 1 ? '\\n' : ' ');\n  }\n}"
+      ],
+      "text_sha256": "5c62255ca4b7265afd34d05a3bc11bde7e881358e6ff74efe338f3fd56d6d184",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc273/abc273_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

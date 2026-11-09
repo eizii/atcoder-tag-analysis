@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc427_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc427/editorial/14195",
+      "text": "この問題は半分全列挙を用いて解くことができます。\nフィボナッチ数列 \\(\\operatorname{fib} _ 0=1,\\operatorname{fib} _ 1=2,\\operatorname{fib} _ {i+2}=\\operatorname{fib} _ {i+1}+\\operatorname{fib} _ i\\) について、長さ \\(N\\) の列の（連続するとは限らない）部分列 \\(2 ^ N\\) 個のうち、連続する \\(2\\) つの要素を選ばないものが \\(\\operatorname{fib} _ N\\) 個であることが知られています。\n与えられた長さ \\(N\\) の列を、前半 \\(\\lfloor N/2\\rfloor\\) 項と後半 \\(\\lceil N/2\\rceil\\) 項に分けることを考えます。\nすると、それぞれの部分列のうち連続する \\(2\\) つの要素を選ばないものは \\(\\operatorname{fib} _ {\\lfloor N/2\\rfloor}\\) 個と \\(\\operatorname{fib} _ {\\lceil N/2\\rceil}\\) 個になります。\n\\(N\\le60\\) のとき \\(\\operatorname{fib} _ {\\lfloor N/2\\rfloor}\\le\\operatorname{fib} _ {\\lceil N/2\\rceil}\\le2178309\\) が成り立つので、 \\(\\operatorname{fib} _ {\\lfloor N/2\\rfloor}\\) 個と \\(\\operatorname{fib} _ {\\lceil N/2\\rceil}\\) 個の部分列すべてに対して、それぞれの部分列に含まれる値の総和を \\(M\\) で割った余りを求めておくことができます。\nこの情報を用いて、前半と後半の部分列を組み合わせて \\(M\\) の倍数になる組み合わせの数を \\(O(\\operatorname{fib} _ {\\lfloor N/2\\rfloor}\\log\\operatorname{fib} _ {\\lceil N/2\\rceil})=O(N((1+\\sqrt5)/2)^{N/2})\\) 時間 で求めることができます。\nこの値には、分割された境界に接している \\(2\\) つの項（前半の末尾の項と、後半の先頭の項）を両方使う組み合わせが含まれているため、これを取り除く必要があります。\nこれも同様のアルゴリズムで求めることができるため、この問題を \\(O(N((1+\\sqrt5)/2)^{N/2})\\) 時間で解くことができます。\n実装例は以下のようになります。\n実装方針によっては、\\(N=1\\) の場合を特別に扱う必要があることに注意してください（分割した列の一方が空列になるため）。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <ranges>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n    unsigned N, M;\n    cin >> N >> M;\n    vector<unsigned> A(N);\n    for (auto&& a : A)\n        cin >> a;\n\n    // 与えられた列の連続する 2 要素を選ばない部分列の総和を列挙する\n    // 末尾の要素を使うものも同時に求める\n    const auto solve{[M](const auto& seq) -> pair<vector<unsigned>, vector<unsigned>> {\n        vector<unsigned> used, unused;\n        unused.emplace_back();\n        for (const auto x : seq) {\n            swap(used, unused);\n            for (auto&& v : used) {\n                unused.emplace_back(v);\n                (v += x) %= M;\n            }\n        }\n        vector<unsigned> all(used);\n        ranges::copy(unused, back_inserter(all));\n        ranges::sort(used);\n        ranges::sort(all);\n        return make_pair(used, all);\n    }};\n\n    // 前半に対する結果\n    const auto [first_used, first_all]{solve(A | views::take(N / 2))};\n    // 後半に対する結果\n    const auto [second_used, second_all]{solve(A | views::reverse | views::take((N + 1) / 2))};\n\n    unsigned long ans{};\n    for (const auto a : first_all)\n        ans += ranges::upper_bound(second_all, (M - a) % M) - ranges::lower_bound(second_all, (M - a) % M);\n\n    // 境界で連続しているものを引く\n    for (const auto a : first_used)\n        ans -= ranges::upper_bound(second_used, (M - a) % M) - ranges::lower_bound(second_used, (M - a) % M);\n\n    cout << ans << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "25488477ccf6d1b7ad1d0ea45af5d3ae3f09f7c92293411683e1893ebd39ede7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc427/abc427_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

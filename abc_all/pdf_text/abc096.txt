@@ -1,0 +1,226 @@
+          AtCoder Beginner Contest 096 解説
+
+
+              問題作成者：E869120, square1001
+
+
+                         2018 年5 月5 日
+
+
+                For international readers: English editorial starts from page 5.
+
+A – Day of Takahashi
+
+  1 月 1 日 から 𝑎 月 𝑏 日までの間には, 少なくとも 1 月 1 日, 2 月 2 日,…, 𝑎−1 月
+
+𝑎−1 日の, 合計 𝑎−1 日の高橋があり, これはどのような (𝑎, 𝑏) の組に対しても成り立ちます.
+
+  また, 𝑎 月 𝑎 日も高橋であるので, 𝑎≤𝑏 であれば追加で 1 日を足せばよいです. よって, 答え
+
+の場合分けは以下のようになります.
+
+   -  𝑎≤𝑏 のとき, 高橋は 𝑎 日
+
+   -  そうでないとき, 高橋は 𝑎−1 日
+
+  C++ や Java などのプログラミング言語では, if-else 文を用いて条件分岐をすることで, 場合分
+
+けをすることができます.
+
+
+ソースコード (C++)：https://beta.atcoder.jp/contests/abc096/submissions/2456270
+
+ソースコード (Java)：https://beta.atcoder.jp/contests/abc096/submissions/2457128
+
+B – Maximum Sum
+
+   𝐴, 𝐵, 𝐶 は正の数なので, 「一番大きい数を 2 倍することを 𝐾 回繰り返す」 という方法が、最終的
+
+な 𝐴+ 𝐵+ 𝐶 の値を最大化する方法です. 証明は以下のようになります.
+
+
+   - 𝐾= 1 の時は, 数 𝑝 を 2 倍すると数の合計が 𝑝 増えるので明らか
+
+   - 𝐾= 2 の時は, 一番大きな数を 2 倍してもこの数が 3 つの数の中で一番大きいのに変わりは
+
+    ないから, 𝐾= 1 の時の状態に持っていける. 残り 2 回のときの増分を最大化しながら 残り 1
+
+    回の時の増分も最大化できるので, 自明にこの方法が最適.
+
+   - 𝐾≥3 のときも同様に, 帰納的に示せる.
+
+
+  また, よく考えてみると, この方法では操作で選ぶのはすべて 1 つの整数に限られます. これは
+
+ 𝐴, 𝐵, 𝐶 の中で最大の整数なので, 𝐴+ 𝐵+ 𝐶+ max(𝐴, 𝐵, 𝐶) × (2𝐾−1) が答えとなります.
+
+
+ソースコード (C++)：https://beta.atcoder.jp/contests/abc096/submissions/2456285
+
+ソースコード (Java)：https://beta.atcoder.jp/contests/abc096/submissions/2457147
+
+C – Grid Repainting 2
+
+  以下の図のような 「上下左右に隣り合うマスに黒いマスがない, 黒いマス」 がある場合を考えましょう.
+
+
+
+
+
+  square1001 君は, あるマスを黒で塗る際に隣り合ったマスも一緒に黒で塗らなければならないので,
+
+他の隣り合ったマスを塗らずにある特定のマスのみを塗るのは不可能です. ですので, このような場合にお
+
+ける答えは必ず “No” となります.
+
+  逆に, それ以外の場合, どの黒いマスに対しても 「上下左右に隣り合うマスのうち最低 1 つは黒」
+
+という条件を満たすことになります. その場合, 全ての黒いマス 𝐴 に対して、「黒いマス 𝐴 と, 𝐴 と隣り
+
+合う黒いマスのうちの 1 つ 𝐵 を両方塗る」 という操作をすれば, 白にすべきマスを黒にすることなく, 黒
+
+にすべきマスをすべて黒にすることができます. よって, この場合答えは “Yes” となります。
+
+
+  「上下左右に隣り合うマスに黒いマスがない, 黒いマス」 が存在するかどうか判定すればよいので, 個
+
+の問題は計算量 𝑂(𝐻𝑊) で解くことができます.
+
+
+ソースコード (C++)：https://beta.atcoder.jp/contests/abc096/submissions/2447972
+
+D – Five, Five Everywhere
+
+  出力すべき数列の条件はかなり厳しく, 例えば 「小さい順から、条件を満たすように選んでいく」 とい
+う手法では 𝑁= 9 までしか答えを出すことはできません (ちなみに, a = [2, 3, 5, 7, 11, 13, 59,
+1597, 34019] が作れる). 全探索のような手法でも難しそうなので, 何か別の特別な方法を思いつ
+かなければなりません.
+
+
+想定解法
+  数列に含まれる数のうちすべてが 「5 で割って1 余る」 数であれば, ここから 5 個の整数を選んだ
+時にこれらの合計は必ず 5 で割り切れます. また数列の値が素数, すなわち2 以上の値であることから,
+5 つの整数の合計は必ず2×5=10 以上になります. 5 で割り切れる正の整数の中で素数なものは 5
+以外にないので, 「5 で割り切れる10 以上の整数」 は, 必ず合成数になります.
+  したがって, 「5 で割って1 余る, 55555 以下の素数」 を 𝑁 個列挙して, これを答えの数列にす
+ればよいです. その場合, a = [11, 31, 41, 61, 71, 101, 131, 151,…, 1381] という数列を作
+ることができます. これは 「すべての数は 55 555 以下」 という制約を余裕で (!) 満たします.
+
+また, 「5 で割って1 余る」 だけではなく, 余りの値を1,2,3,4 のいずれに設定しても条件を満たす数列
+
+を作ることができます.
+
+
+ソースコード (C++)：https://beta.atcoder.jp/contests/abc096/submissions/2444746
+
+        AtCoder Beginner Contest 096 Editorial
+
+
+                 Problem Setters：E869120, square1001
+
+
+                        May 5th, 2018
+
+
+
+A: Day of Takahashi
+
+   In this editorial, let 𝑝−𝑞 be “𝑝 -th month and 𝑞 -th day”. For example, 5 −5
+means May 5th, and 12 −31 means December 31st.
+
+
+  From 1 −1 to 𝑎−𝑏, there are at least 𝑎−1 Takahashis: 1 −1, 2 −2, 3 −3, …,
+
+(𝑎−1) −(𝑎−1).
+
+  𝑎−𝑎 is also Takahashi, so if 𝑎≤𝑏, the number of Takahashi is 𝑎. Otherwise, the
+
+number of Takahashi is 𝑎−1.
+
+    If you use programming language like C++ or Java, you can use if-else statement
+
+to branch.
+
+
+Code (C++)：https://beta.atcoder.jp/contests/abc096/submissions/2456270
+
+Code (Java)：https://beta.atcoder.jp/contests/abc096/submissions/2457128
+
+Problem B: Maximum Sum
+
+Solution
+  The optimal solution  is, choosing maximum number among three, for each
+operation. There is 𝐾 operations in total, so it should be repeated 𝐾 times.
+
+
+  The proof that this is an optimal way is following. We assume 𝐴≥𝐵≥𝐶, and it
+will not lose generality because it is achievable with rearranging some numbers.
+
+
+Proof
+   -  Case 𝐾= 1 : the “increase” of sum of three numbers will be equal to the
+     chosen number. So, it is obvious that you must choose the maximum number,
+      to achieve the maximum sum.
+   -  Case 𝐾= 2 : Considering 𝐾= 1 , the numbers will be 2𝐴, 𝐵, 𝐶 . Since 𝐴≥1
+     from constraints of the problem, the maximum number among three will be
+      2𝐴. And choosing this also maximizes the “increase” of sum of three numbers,
+      so “choosing 𝐴”  “choosing 2𝐴” will be the optimal choice.
+   -  Case 𝐾≥3: Using induction, we can prove similarly.
+
+
+Alternative Solution
+  Seeing this proof,  if 𝐴≥𝐵≥𝐶, we will choose only one number: 𝐴. So, after
+doing 𝐾 operations, the three numbers will be 𝐴× 2𝐾,𝐵, 𝐶 . So, in this case, the
+maximum sum will be 𝐴× 2𝐾+ 𝐵+ 𝐶.
+   Generally, the maximum sum will be 𝐴+ 𝐵+ 𝐶+ max(𝐴, 𝐵, 𝐶) × (2𝐾−1).
+
+
+Code (C++)：https://beta.atcoder.jp/contests/abc096/submissions/2456285
+
+Code (Java)：https://beta.atcoder.jp/contests/abc096/submissions/2457147
+
+Problem C: Grid Repainting 2
+
+  The following cases are that there are some black cells without adjacent black
+cells (which is represented as “☆”), in the goal picture.
+
+
+
+
+
+   In these cases, it is impossible to achieve the goal. If you want to paint a “☆”
+cell black, one of the adjacent cell should be painted black (which should be painted
+white) because he is not good at drawing pictures.
+   In other cases, for each black cell 𝑋, at least one adjacent cell (let this 𝑓(𝑋)) is
+black. Painting “𝑋 and 𝑓(𝑋)” for all 𝑋, he can achieve the goal.
+   Therefore, “there is no ‘☆’ cell in the goal picture” and “he can achieve the goal”
+is equivalent. You can check whether there are ‘☆’ cells, in straight-forward way,
+and time complexity will be 𝑂(𝐻𝑊).
+
+
+Code (C++)：https://beta.atcoder.jp/contests/abc096/submissions/2447972
+
+D – Five, Five Everywhere
+
+   Since the condition of sequence is very strict, it is difficult to make the sequence
+in straight-forward way. For example,  if you choose from smallest element if the
+condition   is  okay,   it  only  passes 𝑁≤9  case,  because   it  constructs 𝑎=
+[2, 3, 5, 7, 11, 13,59, 1597,34019]. Another possible approach is kind of brute-forcing,
+but even 𝑁= 15 is very difficult in this way. So, you should come up with some
+special way to construct the sequence.
+
+
+Solution
+  Suppose that every number in the sequence are “the number which remainder
+divided by 5 is 1”. In this case, if we choose 5 numbers from this sequence, the sum
+will always be divisible by 5. Also, since each number is at least 2 (because it’s a
+prime number), the sum of five number will be at least 10. Since 5 is the only prime
+number which is divisible by 5, the sum of five numbers from this sequence will
+always be a composite number.
+  Now we should print 𝑁 distinct prime numbers, which the remainder divided by
+5 is 1. We can easily find 𝑁 (𝑁≤55) such numbers less than 55,555.
+  The sequence when 𝑁= 55 will be, 𝑎= [11, 31,41, 61,71, 101,131,151, … , 1381]. It
+easily (!) fits in constraints “𝑎𝑖≤55 555”.
+
+
+Code (C++)：https://beta.atcoder.jp/contests/abc096/submissions/2444746

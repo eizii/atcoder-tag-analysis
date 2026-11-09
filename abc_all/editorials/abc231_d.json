@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc231_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc231/editorial/3063",
+      "text": "どの人も高々\n\\(2\\)\n人としか隣り合うことはできません。したがって、条件の中に\n\\(3\\)\n回以上登場する人がいた場合、答えは\nNo\nです。この判定は\n\\(O(N+M)\\)\nで容易に行えます。\nまた、\n\\((A_i,B_i)=(1,2),(1,3),(2,3)\\)\nなどのように、ループする条件がある場合も\nNo\nです。この判定はUnion-FindやBFS, DFSなどを用いることで\n\\(O(N+M)\\)\nなどで行なえます。\n逆に、以上の\n\\(2\\)\n条件に抵触しない場合、(実際に並べて確かめることなく！)答えは\nYes\nとなるため、この問題が解けました。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "84d4ffce98feffe500977c5026aecf612117ef5a991f50f7e285ee4fe7a86dd1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc231/abc231_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

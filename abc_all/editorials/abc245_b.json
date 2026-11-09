@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc245_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc245/editorial/3632",
+      "text": "\\(0,1,\\ldots,N\\)\nに整数は\n\\(N+1\\)\n個あるので、答えの上限は\n\\(N\\)\nであることがわかります。\nよって、\n\\(ans=0,1,2,\\ldots,N\\)\nについて\n\\(A\\)\nに\n\\(ans\\)\nは含まれるか？\nという問題を順番に解いていき、最初に含まれない値が見つかった時、その値を答えとすれば良いです。\n計算量は\n\\(O(N^2)\\)\nです。\nなお、bool 配列を用意するなどして\n\\(O(N)\\)\nで解くこともできます。\n\\(O(N^2)\\)\nの実装例",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nsigned main(){\n    ll n;cin>>n;\n    vector<ll>a(n);\n    for(ll i=0;i<=n-1;i++)cin>>a[i];\n    for(ll ans=0;ans<=n;ans++){\n        bool ok=true;\n        for(ll x:a){\n            if(x==ans)ok=false;\n        }\n        if(ok){\n            cout<<ans<<endl;\n            return 0;\n        }\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "76fa702d89cadcb9d3c3281e7a77d49b94058c22e0bc146054986e0329532ef3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc245/abc245_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

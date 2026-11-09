@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc211_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc211/editorial/2285",
+      "text": "問題文の指示通りに、足し算、引き算、割り算を実行しましょう。\n1つ注意しないといけないのは、プログラミング言語によっては、整数型(C++でいう\nint\nなど)同士の割り算を実行したときに、小数点以下が切り捨てられることです。\n以下にC++での正解、不正解例を示します。\nC++による実装例(AC):\nC++による実装例(AC):\nC++による実装例(WA):",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nsigned main(){\n    int a,b;\n    cin>>a>>b;\n    double c=(a-b)/3.0+b;\n    cout<<c<<endl;\n    return 0;\n}",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nsigned main(){\n    int a,b;\n    cin>>a>>b;\n    double c=(double)(a-b)/3+b;\n    cout<<c<<endl;\n    return 0;\n}",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nsigned main(){\n    int a,b;\n    cin>>a>>b;\n    double c=(a-b)/3+b;\n    cout<<c<<endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "126577cbb29f073c4388a93a982ee193ed0646cf17854217ac1ab9b0c2a36b04",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc211/abc211_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

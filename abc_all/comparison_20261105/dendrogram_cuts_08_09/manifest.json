@@ -1,0 +1,65 @@
+{
+  "source_snapshot": "comparison_20261105",
+  "distance": "jaccard",
+  "linkage": "average",
+  "font": "Meiryo",
+  "cut_rule": "merge distance <= cut",
+  "minimum_problem_filter": null,
+  "source_sha256": {
+    "taxonomy.json": "b3ef7280852ba3b9ba8b33e1c5e3e45af2ee9dfae6534787f9307825f6bcfaa0",
+    "comparison_20261105\\comparison_summary.json": "f4730849aa449a4d20502d8966c92e98f1394dfb5c2b51778d688f8938938b04",
+    "comparison_20261105\\all_difficulties\\linkage.csv": "358c29ad91fad7a22784ccf9e1ac28718ec6a0b80b5bffdb06c0bc52fa6e0de6",
+    "comparison_20261105\\all_difficulties\\problem_tag_matrix.csv": "9ad2057a8f1c5a2f4e2c2f9427f534dd71f437adc6187dc4018ce128ba7fa850",
+    "comparison_20261105\\all_difficulties_dendrogram.png": "45cb414e0d7b90ff2810be64414058331e686d58ecff0e2d2c215e84a5e90386",
+    "comparison_20261105\\all_difficulties_dendrogram.svg": "1870a7a141130107ce744301db5671661fc3d46ff27bfe9262b6aed05c05af35",
+    "comparison_20261105\\under_2000\\linkage.csv": "7bd0692b6653cee058ca1e571e757a1854c9a30e012177f64daa18b97a5cc254",
+    "comparison_20261105\\under_2000\\problem_tag_matrix.csv": "36792fae192c18a973e8bbdf34eec1677c70db1cb1123637bcb6911b8e17ece5",
+    "comparison_20261105\\under_2000_dendrogram.png": "2366fd01a72d6ef89b8b37d40c2bdac325cb9e42ff6a55e2afed954a611d5c6f",
+    "comparison_20261105\\under_2000_dendrogram.svg": "4a6c38489c284346c725d85007244940839352bcbd28ffba16ffb88290940126"
+  },
+  "checks": [
+    "original_inputs_and_figures_unchanged",
+    "valid_linkage",
+    "active_tag_count_matches_linkage",
+    "cluster_counts_match_sweep",
+    "identical_leaf_order_across_cuts"
+  ],
+  "figures": [
+    {
+      "dataset": "all_difficulties",
+      "cut": 0.8,
+      "problems": 3012,
+      "active_tags": 157,
+      "clusters": 135,
+      "png": "all_difficulties_cut_0.8_dendrogram.png",
+      "svg": "all_difficulties_cut_0.8_dendrogram.svg"
+    },
+    {
+      "dataset": "all_difficulties",
+      "cut": 0.9,
+      "problems": 3012,
+      "active_tags": 157,
+      "clusters": 102,
+      "png": "all_difficulties_cut_0.9_dendrogram.png",
+      "svg": "all_difficulties_cut_0.9_dendrogram.svg"
+    },
+    {
+      "dataset": "under_2000",
+      "cut": 0.8,
+      "problems": 2473,
+      "active_tags": 139,
+      "clusters": 113,
+      "png": "under_2000_cut_0.8_dendrogram.png",
+      "svg": "under_2000_cut_0.8_dendrogram.svg"
+    },
+    {
+      "dataset": "under_2000",
+      "cut": 0.9,
+      "problems": 2473,
+      "active_tags": 139,
+      "clusters": 89,
+      "png": "under_2000_cut_0.9_dendrogram.png",
+      "svg": "under_2000_cut_0.9_dendrogram.svg"
+    }
+  ]
+}

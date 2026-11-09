@@ -1,0 +1,60 @@
+{
+  "problem_id": "abc008_2",
+  "title": "投票",
+  "contests": [
+    {
+      "contest_id": "abc008",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 601,
+  "raw_difficulty": 601,
+  "contest_id": "abc008",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc008/tasks/abc008_2",
+  "statement": "問題文 とある組織で、リーダーを選ぶ選挙が行われた。 組織は N 人の構成員で構成されており、各人は最もリーダーにふさわしい人物の名前を書いた。 リーダーは、得票数が最も多い人物が選ばれることになっている。 得票数が最も多い人物の名前を出力せよ。得票数が最も多い人物が複数いる場合は、そのうちどの名前を出力してもよい。 入力 入力は以下の形式で標準入力から与えられる。 N S_1 S_2 : S_N 1 行目には、組織の構成員の人数を表す整数 N (1 ≦ N ≦ 50) が与えられる。 2 行目から N 行では、それぞれの構成員の投票内容を表す。 N 行のうち i (1 ≦ i ≦ N) 行目には文字列 S_i が書かれている。 S_i は i 番目の人の投票内容を表している。 S_i は小文字の半角英字のみで構成されており、長さは 1 文字以上 50 文字以下である。 出力 得票数が最も多い人物の名前を出力せよ。得票数が最も多い人物が複数いる場合は、そのうちどの名前を出力してもよい。出力の末尾にも改行を入れること。 入力例1 4\r\ntaro\r\njiro\r\ntaro\r\nsaburo 出力例1 taro taro が 2 票、 jiro と saburo が 1 票ずつです。 入力例2 1\r\ntakahashikun 出力例2 takahashikun takahashikun 以外の投票がありません。 入力例3 9\r\na\r\nb\r\nc\r\nc\r\nb\r\nc\r\nb\r\nd\r\ne 出力例3 b b が 3 票で最多ですが、 c も 3 票で同様に最多なので、 c を出力しても正解となります。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 とある組織で、リーダーを選ぶ選挙が行われた。 組織は N 人の構成員で構成されており、各人は最もリーダーにふさわしい人物の名前を書いた。 リーダーは、得票数が最も多い人物が選ばれることになっている。 得票数が最も多い人物の名前を出力せよ。得票数が最も多い人物が複数いる場合は、そのうちどの名前を出力してもよい。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S_1 S_2 : S_N 1 行目には、組織の構成員の人数を表す整数 N (1 ≦ N ≦ 50) が与えられる。 2 行目から N 行では、それぞれの構成員の投票内容を表す。 N 行のうち i (1 ≦ i ≦ N) 行目には文字列 S_i が書かれている。 S_i は i 番目の人の投票内容を表している。 S_i は小文字の半角英字のみで構成されており、長さは 1 文字以上 50 文字以下である。"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 得票数が最も多い人物の名前を出力せよ。得票数が最も多い人物が複数いる場合は、そのうちどの名前を出力してもよい。出力の末尾にも改行を入れること。"
+    },
+    {
+      "heading": "入力例1",
+      "text": "入力例1 4\r\ntaro\r\njiro\r\ntaro\r\nsaburo"
+    },
+    {
+      "heading": "出力例1",
+      "text": "出力例1 taro taro が 2 票、 jiro と saburo が 1 票ずつです。"
+    },
+    {
+      "heading": "入力例2",
+      "text": "入力例2 1\r\ntakahashikun"
+    },
+    {
+      "heading": "出力例2",
+      "text": "出力例2 takahashikun takahashikun 以外の投票がありません。"
+    },
+    {
+      "heading": "入力例3",
+      "text": "入力例3 9\r\na\r\nb\r\nc\r\nc\r\nb\r\nc\r\nb\r\nd\r\ne"
+    },
+    {
+      "heading": "出力例3",
+      "text": "出力例3 b b が 3 票で最多ですが、 c も 3 票で同様に最多なので、 c を出力しても正解となります。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc008/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:33:27.300554+00:00",
+  "statement_sha256": "3911a3918948ea694bb7a09a704b6d189c06ca02d7936c0d140d634cee5742ba",
+  "editorials": []
+}

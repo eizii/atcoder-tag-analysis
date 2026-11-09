@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc438_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc438/editorial/14946",
+      "text": "\\(g=\\gcd(N,M) > 1\\) の場合、 \\((i \\bmod M) \\bmod g=(i \\bmod N) \\bmod g\\) より \\(\\gcd(N,M)=1\\) となる \\(g\\) 個の問題に分割することができます。以降は \\(\\gcd(N,M)=1\\) の場合を考えます。 \\(S_k\\) を \\(0\\le i < K\\) と \\(k \\equiv i \\bmod N\\) を満たす整数 \\(i\\) の集合とします。このとき、 \\(\\displaystyle \\sum_{i=0}^{K-1}\\min (A_{i \\bmod N},B_{i \\bmod M})=\\sum_{k=0}^{N-1}\\sum_{i\\in S_k} \\min (A_k, B_{i\\bmod M})\\) が成り立ちます。 ここで、 \\(\\displaystyle S_k=\\left\\lbrace k+cN \\left| 0 \\le c < \\left\\lceil\\frac{K-k}{N} \\right\\rceil\\right. \\right\\rbrace\\) が成り立つことを踏まえると、 \\(B_i'=B_{Ni\\bmod M}\\) に対し \\[\\displaystyle \\sum_{i\\in S_k} \\min (A_k, B_{i\\bmod M})=\\sum_{c=0}^{\\left\\lceil\\frac{K-k}{N} \\right\\rceil -1} \\min\\left(A_k,B'_{\\left(\\frac{i}{N}+c\\right) \\bmod M}\\right)\\] が成立します。この和を一般化すると、整数列 \\(B'\\) に対し以下のクエリを高速に計算することができれば良いです： 整数 \\(L,R,x\\) が与えられるので、 \\(\\displaystyle \\sum_{c=L}^{R-1} \\min(x,B'_{c\\bmod M})\\) を求めよ。 これは \\(R-L<M\\) に帰着させ、 \\(c\\bmod M\\) が増える場合は \\(\\displaystyle \\left\\lfloor\\frac{c}{M} \\right\\rfloor\\) の値で \\(2\\) つの問題に分類し \\(\\displaystyle \\sum_{c=L}^{R-1} \\min(x,B'_c)\\) を求める問題に帰着させることができます。そして、この帰着させた問題はクエリを \\(x\\) の昇順にソートし Fenwick Tree を用いることでクエリの個数を \\(Q\\) として \\(O(Q(\\log Q + \\log M))\\) で計算することができます。 \\(Q\\) の値は高々 \\(2N\\) なので、全体として \\(O(N(\\log N + \\log M) + M)\\) 時間で計算することができます。 以上を適切に実装することでこの問題に正答することができます。",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "437858729cfb204384d7bbb473ac4452fc10cf2551f382104365cb5c4164ded2"
+    }
+  ],
+  "status": "available"
+}

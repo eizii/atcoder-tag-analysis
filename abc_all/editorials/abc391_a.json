@@ -1,0 +1,31 @@
+{
+  "problem_id": "abc391_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc391/editorial/12100",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n解法 1\nこの問題は，\n\\(8\\)\n通りの場合分けにより解くことができます．\nN\nの反対は\nS\n,\nSE\nの反対は\nNW\n，…… といったルールを全\n\\(8\\)\n通り列挙して， if 文により場合分けをすればよいです．\n実装例 (Python3)\n解法 2\n\\(D\\)\nを\n\\(1\\)\n文字ずつ反転させることを考えれば，\n\\(4\\)\n通りの場合分けで済みます．for 文を用いれば，\n\\(D\\)\nが\n\\(1\\)\n文字である場合と\n\\(2\\)\n文字である場合を統一的に扱うことができます．\n実装例 (Python3)\n実装例 (C++)",
+      "codes": [
+        "D = input()\nif D == \"N\":\n    print(\"S\")\nelif D == \"S\":\n    print(\"N\")\nelif D == \"E\":\n    print(\"W\")\nelif D == \"W\":\n    print(\"E\")\nelif D == \"NE\":\n    print(\"SW\")\nelif D == \"NW\":\n    print(\"SE\")\nelif D == \"SE\":\n    print(\"NW\")\nelif D == \"SW\":\n    print(\"NE\")",
+        "D = input()\nans = \"\"\nfor d in D:\n    if d == \"N\":\n        ans += \"S\"\n    elif d == \"S\":\n        ans += \"N\"\n    elif d == \"E\":\n        ans += \"W\"\n    elif d == \"W\":\n        ans += \"E\"\nprint(ans)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string D;\n    cin >> D;\n    string ans = \"\";\n    for (char d : D) {\n        if (d == 'N') {\n            ans += 'S';\n        } else if (d == 'S') {\n            ans += 'N';\n        } else if (d == 'E') {\n            ans += 'W';\n        } else if (d == 'W') {\n            ans += 'E';\n        }\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "6f08bebd6b38fae7a3a34fd6c8c72f1edc2e00e5caebecd042f41f7c375c7a97",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc391/abc391_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc391/editorial/12113",
+      "text": "文字列に対して、「ある文字をある文字に、予め決められた対応づけで置き換える」という処理を行うメソッドがあります。\nstr.translate\n(\nref\n) を用います。文字同士の対応づけの部分は、\nstr.maketrans\n(\nref\n) を用いて作るのが便利です。\nexamples\n:\nstr.maketrans\nの 1 つ目の引数の各文字が、2 つ目の引数の対応する位置の文字に置き換わります。\n提出 #62305304",
+      "codes": [
+        "'rotator'.translate(str.maketrans('ota', 'evi'))\n#=> 'reviver'",
+        "'reoffer'.translate(str.maketrans('reof', 'stre'))\n#=> 'streets'"
+      ],
+      "text_sha256": "1ac040e96d48b89925575a60a7c4a162344467e712609ace0c5c078c3f67bbdc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc391/abc391_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

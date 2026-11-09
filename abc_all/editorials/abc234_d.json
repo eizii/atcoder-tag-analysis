@@ -1,0 +1,47 @@
+{
+  "problem_id": "abc234_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc234/editorial/3222",
+      "text": "問題文中で問われているのは\n\\(P\\)\nの先頭\n\\(i\\)\n項のうち\n\\(K\\)\n番目に大きい値のみですが、ここでは\n\\(i=K,K+1,\\ldots,N\\)\nについて\n\\(P\\)\nの先頭\n\\(i\\)\n項のうち値の大きい方から\n\\(K\\)\n個の要素からなる集合\n\\(S_i\\)\nを求めに行くことを考えます。\nこのような\n\\(N-K+1\\)\n個の集合を愚直に求めた場合、時間計算量が\n\\(O(NK)\\)\nや\n\\(O(NK \\log K)\\)\nとなり実行時間制限に間に合いません。また\n\\(N-K+1\\)\n個の集合をそれぞれ別個の配列等に保存した場合、空間計算量が\n\\(O(NK)\\)\nとなってしまい実行時間制限、およびメモリ制限を超過してしまいます。\nそのため、以下の発想が必要となります。\n各\n\\(i\\ (K \\lt i)\\)\nについて、\n\\(S_{i-1}\\)\nの内容を利用して\n\\(S_i\\)\nを求める。保持するデータ構造も\n\\(S_{i-1}\\)\nのものを再利用する。\nでは、具体的にどのようにすればよいのでしょうか？\n結論から言うと、以下のようなアルゴリズムを用いればよいです。\nまず、\n\\(S_K\\)\nを\n\\(\\{P_1,P_2,\\ldots,P_K\\}\\)\nで初期化する。\nその後、\n\\(i=K+1,K+2,\\ldots,N\\)\nについて、この順に以下の操作を行う。\n\\(S_i\\)\nを\n\\(S_{i-1}\\)\nで初期化する（実際には保持するデータ構造を再利用するためこの操作は行わない）。\n\\(S_{i-1}\\)\nに含まれる要素のうち値が最小のものを\n\\(x\\)\nとする。\n\\(x \\lt P_i\\)\nならば、\n\\(S_i\\)\nから\n\\(x\\)\nを削除し、代わりに\n\\(P_i\\)\nを挿入する。\n上記のアルゴリズムも、愚直に計算した場合\n\\(O(NK)\\)\nの時間計算量となります。しかし、大抵のプログラミング言語の標準ライブラリに備わっている「優先度付きキュー」と呼ばれるデータ構造を用いると以下の操作をそれぞれ\n\\(O(\\log n)\\ (n\\)\nは操作時点での要素数\n\\()\\)\nで行うことができ、これにより時間計算量を\n\\(O(N \\log K)\\)\nまで改善することが可能です。\n最小値の取り出し\n最小値の削除\n要素の挿入\n求めるべき答えは、\n\\(i=K,K+1,\\ldots,N\\)\nについての\n\\(S_i\\)\nに含まれる要素の最小値です。そのような要素の取り出しももちろん、\n\\(1\\)\n回あたり対数時間で行うことが可能です。\n実装例 (Python): Python においては「heapq」という名前で「優先度付きキュー」が実装されています。\n実装例 (C++): C++ においては「priority_queue」という名前で「優先度付きキュー」が実装されています。C++ の場合、デフォルトでは最小値ではなく最大値が取り出されてしまうことに注意してください。",
+      "codes": [
+        "import heapq\nN,K = map(int,input().split())\nP = list(map(int,input().split()))\nque = P[0:K]\nprint(min(que))\nheapq.heapify(que)\nfor i in range(K,N):\n    minima = heapq.heappop(que)\n    minima = max(minima,P[i])\n    heapq.heappush(que,minima)\n    ans = heapq.heappop(que)\n    print(ans)\n    heapq.heappush(que,ans)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint N,K; cin >> N >> K;\n\tvector<int> P(N);\n\tfor(int i=0; i<N; i++) cin >> P[i];\n\tpriority_queue<int,vector<int>,greater<int> > que;\n\tfor(int i=0; i<K; i++) que.push(P[i]);\n\tcout << que.top() << endl;\n\tfor(int i=K; i<N; i++){\n\t\tif(que.top() < P[i]){\n\t\t\tque.pop();\n\t\t\tque.push(P[i]);\n\t\t}\n\t\tcout << que.top() << endl;\n\t}\n}"
+      ],
+      "text_sha256": "659c287f8e8ca5ebc426502c2095ade0eff34d80cab8c333106195f082ecba6c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc234/abc234_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc234/editorial/3241",
+      "text": "公式解説は\n\\(\\Theta(N \\log K)\\)\n時間での解法ですが、少し工夫をすると\n\\(\\Theta(N)\\)\n時間にすることが可能です。\n公式解説のアルゴリズムは以下のようなものでした。\nまず、\n\\(S \\coloneqq \\lbrace P_1, P_2, \\ldots, P_K \\rbrace\\)\nとする。\n\\(\\min(S)\\)\nを出力する。\nその後、\n\\(i = K+1, K+2, \\ldots, N\\)\nについて、この順に以下の操作を行なう。\n\\(x \\coloneqq \\min(S)\\)\nとする。\n\\(P_i > x\\)\nならば、\n\\(S\\)\nから\n\\(x\\)\nを削除し、代わりに\n\\(P_i\\)\nを挿入する。\n\\(\\min(S)\\)\nを出力する。\nこのアルゴリズムでは、\n\\(x\\)\nの値は前ステップの値よりも小さくなることはありません。よって、前ステップでの\n\\(x\\)\nの値を記憶しておくことで高速化ができます。具体的には、次のようなアルゴリズムで\n\\(\\Theta(N)\\)\n時間が達成できます。\nまず、\n\\(S \\coloneqq \\lbrace P_1, P_2, \\ldots, P_K \\rbrace, x \\coloneqq \\min(S)\\)\nとする。\n\\(x\\)\nを出力する。\nその後、\n\\(i = K+1, K+2, \\ldots, N\\)\nについて、この順に以下の操作を行なう。\n\\(P_i > x\\)\nならば、\n\\(S\\)\nから\n\\(x\\)\nを削除し、代わりに\n\\(P_i\\)\nを挿入する。\n\\(x \\notin S\\)\nである間、\n\\(x \\leftarrow x + 1\\)\nとする。\n\\(x\\)\nを出力する。\n\\(S\\)\nの管理ですが、各要素は\n\\(1\\)\n以上\n\\(N\\)\n以下ですから、\n\\(A[k] \\coloneqq (k \\in S)\\)\nとして長さ\n\\(N\\)\nの真偽値の配列を管理すれば良いです。\n実装例 (Python)",
+      "codes": [
+        "n, k = map(int, input().split())\np = list(map(lambda x: int(x) - 1, input().split()))\n\na = [False] * n\nfor i in range(k):\n    a[p[i]] = True\nx = min(p[:k])\nprint(x + 1)\nfor i in range(k, n):\n    if p[i] > x:\n        a[x] = False\n        a[p[i]] = True\n    while not a[x]:\n        x += 1\n    print(x + 1)"
+      ],
+      "text_sha256": "1037c7b72080d53a8098b2a95cfbcfe293ac211b7258481b7fbeb81c9f0cffbf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc234/abc234_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc234/editorial/3246",
+      "text": "より一般に、与えられた配列に対して「区間\n\\([l, r)\\)\nで小さい方から\n\\(k\\)\n番目の値を求めてね」という形式の問題も解くことができます。\n以下では、wavelet matrix というデータ構造を用いる方法と、並列二分探索というアルゴリズムを用いる方法を紹介しています。\nhttps://rsk0315.hatenablog.com/entry/2022/01/09/152028\n難易度は元の問題よりも多少高いと思われるので、無理に考える必要はありませんが、興味のある人の助けになれば幸いです。\n（追記）他にも、平方分割や range tree を使う方法などもあります。\n蟻本\npp. 168–172 に載っています。",
+      "codes": [],
+      "text_sha256": "e9e8b44449d0ad1691d4279f3074ea5b514db9daadf015376a5a9686a330a810",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc234/abc234_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc234/editorial/3238",
+      "text": "(C++使用者向けの内容です。)\n次の要件を満たすデータ構造があればこの問題を解くことができます。\n(多重)集合 $S$ に $X$ を追加する。\n$S$ の $K$ 番目の値を求める。\nこれらのクエリは、g++拡張によって使える\ntree\nというデータ構造を使うことで効率的に処理することができます。\nこのデータ構造はC++のsetの上位互換のような感覚で、(多重でない)集合において $k$ 番目の値を返すことや $k$ 未満の数が何個あるかを知ることができます。\n参考記事\n参考記事\n実装例\n(cincout高速化をしていないので1227msですが、高速化をすることで800ms以上速くなります。)",
+      "codes": [],
+      "text_sha256": "800ae4346b7f4a89a433616f55bd7f6ec34146fc402bb5d9fd2116bd8a4d9668",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc234/abc234_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

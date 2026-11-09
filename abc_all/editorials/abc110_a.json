@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc110_a",
+  "editorials": [
+    {
+      "text": "A: Maximize the Formula\n数式XY + Z とZ + XY の値は同じなので、XY + Z の形のみを考えることにします。さらに、XY + Z\nとXZ +Y の値は変わりません。従って、作れる数式の値は10×X +Y +Z, X +10×Y +Z, X +Y +10×Z\nの3 通りです。これらの最大値が答えになるので、C++ での実装例は次のようになります。\n#include <iostream >\n#include <algorithm >\nusing\nnamespace\nstd;\nint main () {\nint A, B, C; cin >> A >> B >> C;\nint ans = max <int >({\n10 * A + B + C,\nA + 10 * B + C,\nA + B + 10 * C,\n});\ncout << ans << endl;\n}\nさらに考察すると、X, Y, Z のうち最大のものに10 をかける場合が最大になります。これをC++ で実装\nすると、例えば次のようになります。\n#include <iostream >\n#include <algorithm >\nusing\nnamespace\nstd;\nint main () {\nint A, B, C; cin >> A >> B >> C;\nint mx = max({A, B, C});\n\nint ans = A + B + C + 9 * mx;\ncout << ans << endl;\n}\n",
+      "text_sha256": "3c91fe65f687d4d525a2f0361231014ff5cdb63d0c8d086b473cc034f0031953",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc110/abc110_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

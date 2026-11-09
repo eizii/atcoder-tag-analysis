@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc306_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc306/editorial/6600",
+      "text": "以下のアルゴリズムによって解くことができます。\n空の配列\n\\(ans\\)\nを用意する。\n\\(A_1,A_2,\\dots\\)\nの順に数列を走査する。このとき、今まで見た部分の中に各数字が何回現れたかを別の配列で管理しておく。今見ている数字を\n\\(c\\)\nとしたとき、\n\\(c\\)\nが現れたのが\n\\(2\\)\n回目であるならば、\n\\(ans\\)\nの末尾に\n\\(c\\)\nを追加する。\n\\(ans\\)\nを出力する。\nこのアルゴリズムは\n\\(O(N)\\)\nで動作し、十分高速です。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> cnt(n + 1), ans;\n    for (int i = 0; i < 3 * n; i++) {\n        int a;\n        cin >> a;\n        ++cnt[a];\n        if (cnt[a] == 2) ans.push_back(a);\n    }\n    for (int i = 0; i < n; i++) {\n        cout << ans[i] << (i == n - 1 ? '\\n' : ' ');\n    }\n}",
+        "n = int(input())\na = list(map(int, input().split()))\ncnt = [0 for _ in range(3 * n)]\nans = []\nfor i in a:\n    cnt[i] += 1\n    if cnt[i] == 2:\n        ans.append(i)\n\nprint(*ans)"
+      ],
+      "text_sha256": "9acd821b888c84bad7ee8be57235be0bcc90a52dfaff4294ed7ff99d5664fa24",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc306/abc306_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc306/editorial/6629",
+      "text": "マップや頻度配列を使用して、これまでの各要素の発生回数を保存します。\nその後、各要素の2回目の発生を見ると、単に要素を出力します。\n時間の複雑さ:\n\\(O(n)\\)\nまたは\n\\(O(n \\log n)\\)\n。私の提出\nhttps://atcoder.jp/contests/abc306/submissions/42321736\nを見ることができますが、やや複雑すぎます。\n(ChatGPTによって翻訳されました)",
+      "codes": [],
+      "text_sha256": "5e964269fc643695226bd21f2727158de31e2ba9ddf0d3a598f8598a3e82198f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc306/abc306_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

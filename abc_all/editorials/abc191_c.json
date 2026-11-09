@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc191_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc191/editorial/612",
+      "text": "ある点\n\\((x, y)\\)\nが頂点であることと、その点の周囲\n\\(4\\)\nマス\n\\((S_{x, y}, S_{x + 1, y}, S_{x, y + 1}, S_{x + 1, y + 1})\\)\nのうち\n#\nがちょうど\n\\(1\\)\n個または\n\\(3\\)\n個あることが同値であることが分かります。\n注意 :\n周囲にちょうど\n\\(2\\)\n個\n#\nがある場合は、自己交叉がないという制約より、その\n\\(2\\)\nつが対角線上に配置されていることはありません。よって、隣り合って配置されていることになりますが、多角形の周がその点で曲がっていないので頂点である必要はありません。\n\\(S\\)\nの端の列や行が全て\n.\nという制約があるので、\n\\(1 \\le x \\lt H, 1 \\le y \\lt W\\)\nの範囲で調べればよく、実装の際に\n\\(S\\)\nの範囲外の参照に特別に気を付ける必要はありません。",
+      "codes": [],
+      "text_sha256": "015fe2e1263d777ed63282f694c2218158114da3180d163a78b4027358a10bd1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc191/abc191_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

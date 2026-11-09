@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc150_c",
+  "editorials": [
+    {
+      "text": "C: Count Order\n順列X が辞書順でk 番目であることと、X より辞書順で小さい順列がk −1 個あることは同値で\nす。よって、大きさN の順列をすべて生成して、そのうちにP, Q それぞれより小さいものがいく\nつあるかを数えることで、この問題を解くことができます。\n順列の生成には、深さ優先探索などの探索を行う他に、C++ のnext permutation 関数のような\n順列生成用の関数を利用することも可能です。\n",
+      "text_sha256": "b0f1e544861e35cab12364cd502648b669e4a0fb08eb5bc7cb0a3d42c47b6c1f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc150/abc150_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

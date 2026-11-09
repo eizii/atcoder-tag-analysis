@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc341_f",
+  "source_url": "https://atcoder.jp/contests/abc341/tasks/abc341_f?lang=ja",
+  "statement": "問題文\nN\n個の頂点と\nM\n本の辺からなる単純な無向グラフが与えられます。\ni = 1, 2, \\ldots, M\nについて、\ni\n番目の辺は頂点\nu_i\nと頂点\nv_i\nを結ぶ辺です。\nまた、\ni = 1, 2, \\ldots, N\nについて、頂点\ni\nには正整数\nW_i\nが割り当てられており、\nA_i\n個のコマが置かれています。\nグラフ上にコマが存在する限り、下記の操作を繰り返します。\nまず、グラフ上のコマを\n1\n個選んで取り除き、そのコマが置かれていた頂点を\nx\nとおく。\nx\nに隣接するいくつかの頂点からなる（空でも良い）集合\nS\nであって、\n\\sum_{y \\in S} W_y \\lt W_x\nであるものを選び、\nS\nに含まれる頂点それぞれに\n1\n個ずつコマを置く。\n操作を行う回数としてあり得る最大値を出力してください。\nなお、どのように操作を行っても、有限回の操作の後にはグラフ上にコマが存在しない状態に至ることが証明出来ます。\n制約\n入力される値はすべて整数\n2 \\leq N \\leq 5000\n1 \\leq M \\leq \\min \\lbrace N(N-1)/2, 5000 \\rbrace\n1 \\leq u_i, v_i \\leq N\nu_i \\neq v_i\ni \\neq j \\implies \\lbrace u_i, v_i \\rbrace \\neq \\lbrace u_j, v_j \\rbrace\n1 \\leq W_i \\leq 5000\n0 \\leq A_i \\leq 10^9",
+  "html_sha256": "2716e7d38ac94c3a00dc61cb2928fb6b3f1ca422e533b036422663db3bce56ce",
+  "extractor": "section_headings_v1"
+}

@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc280_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc280/editorial/5329",
+      "text": "問題を入力の形式に従って読み変えると、「\n\\(W\\)\n文字の文字列が\n\\(H\\)\n個与えられます。各文字列に現れる\n#\nの数の合計を求めてください。 」という問題になります。これは for 文と if 文またはcount関数を用いて実装する事ができます。\nc++による実装例(if 文) :\nPythonによる実装例(if 文) :\nc++による実装例(count 関数) :\nPythonによる実装例(count 関数) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint h,w,ans=0;\n\tstring s;\n\n\tcin >> h >> w;\n\tfor(int i=0;i<h;i++){\n\t\tcin>>s;\n\t\tfor(int j=0;j<w;j++){\n\t\t\tif(s[j]=='#')ans++;\n\t\t}\n\t}\n\n\tcout << ans <<endl;\n\treturn 0;\n}",
+        "h,w = map(int, input().split())\n\nans=0\nfor i in range(h):\n    s=input()\n    for j in range(w):\n        if s[j]=='#':\n            ans += 1\n    \nprint(ans)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint h,w,ans=0;\n\tstring s;\n\n\tcin >> h >> w;\n\tfor(int i=0;i<h;i++){\n\t\tcin>>s;\n\t\tans += count(s.begin(), s.end(), '#'); //if文の場合と, この行だけ異なる\n\t}\n\n\tcout << ans <<endl;\n\treturn 0;\n}",
+        "h,w = map(int, input().split())\n\nans=0\nfor i in range(h):\n    ans += input().count('#')\n    \nprint(ans)"
+      ],
+      "text_sha256": "6e262f0ee87d67b604914b5f901cdab5924d2309d42265e0a6eb8baf7f8caf37",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc280/abc280_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

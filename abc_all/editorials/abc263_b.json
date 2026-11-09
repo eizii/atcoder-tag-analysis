@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc263_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4540",
+      "text": "この問題は、以下のような動的計画法(DP)を用いることにより解くことができます。\n動的計画法とは、小さいサイズの部分問題から順に解いていって答えをメモしていき、大きいサイズの問題は小さいサイズの問題の答えを元に計算するようなアルゴリズムのことを言います。\n「\n\\(\\mathrm{DP}[i]=\\)\n人\n\\(1\\)\nは人\n\\(i\\)\nの何代前か」という長さ\n\\(N\\)\nの配列\n\\(\\mathrm{DP}\\)\nを考えます。このとき、解は\n\\(\\mathrm{DP}[N]\\)\nです。\nまず、\n\\(\\mathrm{DP}[1]=0\\)\nです。\n人\n\\(i\\)\nの親が人\n\\(P_i\\)\nであることより、\n\\(\\mathrm{DP}[i]=\\mathrm{DP}[P_i]+1\\)\nであることがわかります。\n\\(i=2,3,\\dots,N\\)\nの順に上の式を使い\n\\(\\mathrm{DP}[i]\\)\nを求めることで\n\\(\\mathrm{DP}[N]\\)\nを求めることができます。\n全体の計算量は\n\\(\\mathrm{O}(N)\\)\nです。\nちなみに、この問題はグラフの用語を使うと以下のように言い換えられます。\n$N$ 頂点の根付き木があります。根は頂点 $1$ です。\n\n頂点 $i(2 \\le i \\le N)$ の親は頂点 $P_i$ です。ここで、$P_i < i$ であることが保証されます。\n\n頂点 $1$ と頂点 $N$ の距離を求めてください。\n上記の言い換えをすることで、BFS や DFS によってもこの問題を解くことができます。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int n;\n  cin>>n;\n  vector<int> a(n);\n  for(int i=1;i<n;i++){\n    cin>>a[i];\n    a[i]--;\n  }\n  vector<int> dp(n);\n  for(int i=1;i<n;i++){\n    dp[i]=dp[a[i]]+1;\n  }\n  cout<<dp[n-1]<<endl;\n}"
+      ],
+      "text_sha256": "e1cca661167b2018b64d6c7b792a9b0f1a763a9c0e4d1d1dea55ad0077b6638f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4543",
+      "text": "「いま注目している人」「いま注目している人が人Nの何代前か」の2つの情報を持ち、人1に到達するまで1代ずつ遡ればよいです。\n実装例(Python)",
+      "codes": [
+        "N=int(input())\nP=[0,0]+list(map(int,input().split()))\n\ncrr=N  # いま注目している人\ncnt=0  # いま注目している人が人Nの何代前か\nwhile crr!=1:\n  # 1代遡る\n  cnt+=1\n  crr=P[crr]\n\nprint(cnt)"
+      ],
+      "text_sha256": "f0d18744bcd23ffed487c100debd435c56e3d967d741ebfabe859f37242a0157",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

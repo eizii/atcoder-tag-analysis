@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc446_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc446/editorial/16163",
+      "text": "レストランに存在する卵の「仕入れた日」を、キューで管理することを考えます。\nこのとき、空のキューから始めて、\n\\(i\\)\n日目の朝・昼・夜の行動に対応する操作はそれぞれ次のようになります。\nキューの末尾に\n\\(i\\)\nを\n\\(A_i\\)\n個追加する。\nキューの先頭から\n\\(B_i\\)\n個の要素を削除する。\nキューの先頭の要素が\n\\((i-D)\\)\nである限り、キューの先頭の要素を削除する。\nここで、夜の行動について、キューの要素はつねに先頭から末尾に向けて昇順となっており、\n\\((i-D-1)\\)\n日目以前に仕入れられた卵は前日までに削除されているため、キューの要素に\n\\((i-D)\\)\nが含まれるかを確認するには、キューの先頭の要素が\n\\((i-D)\\)\nであるかを確認すれば十分であることに注意してください。\n求めるべき答えは、これを\n\\(i=1,2,\\ldots,N\\)\nの順で行った後のキューの要素数になります。\nそれぞれの操作を行う回数について、各テストケースにおいてキューに追加される要素の数は\n\\((A_1+A_2+\\cdots+A_N)\\)\n個であり、よって削除される要素の個数も高々その個数です。  よって、キューに対する追加・削除操作が\n\\(O(1)\\)\nで行えることから、時間計算量は\n\\(O(N\\max(A_i))\\)\nです。\n問題の制約より、各入力における\n\\(N\\)\nの総和は高々\n\\(2\\times 10^5\\)\nであり、\n\\(\\max(A_i)\\leq 10\\)\nとあわせて十分高速です。\nよって、この問題を解くことができました。\n他にも、\n\\(i\\)\n日目に仕入れた卵がいくつ残っているかを配列の\n\\(i\\)\n番目の要素に格納・更新して管理する方法などもあります。その場合は、毎回\n\\(D\\)\n日分の在庫を確認すると\n\\(\\Theta(ND)\\)\nの時間計算量がかかって実行時間制限に引っかかるため、現在所持している卵の中で最も古いものが何日目に仕入れたものであるかの情報もあわせて更新していく必要があることに注意してください。\nC++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint t;\n\tcin>>t;\n\t\n\tfor(int itest=0;itest<t;itest++){\n\t\tint n,d;\n\t\tcin>>n>>d;\n\n\t\tvector<int>a(n),b(n);\n\t\tfor(int i=0;i<n;i++)cin>>a[i];\n\t\tfor(int i=0;i<n;i++)cin>>b[i];\n\n\t\tint x;\n\t\tqueue<int>q;\n\t\tfor(int i=0;i<n;i++){\n\t\t\tfor(int j=0;j<a[i];j++)q.push(i);\n\t\t\tfor(int j=0;j<b[i];j++)q.pop();\n\t\t\twhile((!q.empty())&&(q.front()==i-d))q.pop();\n\t\t}\n\t\tcout<<((int)(q.size()))<<endl;\n\t}\n\treturn 0;\n}"
+      ],
+      "text_sha256": "dad2fcab77708f5e1e810970a65926c2907a147ef1bc43783cdb8383a4dc4c13",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc446/abc446_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

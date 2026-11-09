@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc339_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc339/editorial/9211",
+      "text": "\\(N^4\\)\n頂点のグラフであって、頂点に\n\\(1\\)\n以上\n\\(N\\)\n以下の整数\n\\(4\\)\nつの組で番号が付けられたものを用意します。\n\\(2\\)\n人のプレイヤーの位置が\n\\((x_1,y_1)\\)\nと\n\\((x_2, y_2)\\)\nであるとき、操作を\n\\(1\\)\n回行うことで\n\\((x_1,y_1)\\)\nにいたプレイヤーの位置を\n\\((x'_1, y'_1)\\)\n、\n\\((x_2, y_2)\\)\nにいたプレイヤーの位置を\n\\((x'_2, y'_2)\\)\nにすることができるならば頂点\n\\((x_1, y_1, x_2, y_2)\\)\nから頂点\n\\((x'_1, y'_1, x'_2, y'_2)\\)\nに辺を張ります（そうでないとき、辺は張りません）。\n問題におけるはじめのプレイヤーの位置を\n\\((X_1, Y_1)\\)\nと\n\\((X_2, Y_2)\\)\nとすると、\n\\((i, j)\\)\nで\n\\(2\\)\n人が集まるために必要な操作回数はこのグラフにおける\n\\((X_1, Y_1, X_2, Y_2)\\)\nから\n\\((i, j, i, j)\\)\nへの最短経路となります（\n\\((i,j)\\)\nで\n\\(2\\)\n人が集まることが不可能であることと\n\\((i, j, i, j)\\)\nへの経路が存在しないことも対応していることに注意してください）。\nグラフの頂点の数および辺の数が\n\\(O(N^4)\\)\nであるため、BFS で最短経路を計算することで時間計算量は全体で\n\\(O(N^4)\\)\nとなります。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#define rep(i, n) for (int i = 0; i < (n); i++)\n\nconst int inf = 1000000010;\nint dx[] = { -1,0,1,0 }; int dy[] = { 0,1,0,-1 };\n\nint main() {\n    int n;\n    cin >> n;\n    vector<vector<char>> s(n, vector<char>(n));\n    rep(i, n) rep(j, n) cin >> s[i][j];\n    vector dis(n, vector(n, vector(n, vector(n, inf))));\n    int x1 = -1, y1 = -1, x2 = -1, y2 = -1;\n    rep(i, n) rep(j, n) if (s[i][j] == 'P') {\n        if (x1 == -1) x1 = i, y1 = j;\n        else x2 = i, y2 = j;\n    }\n    queue<array<int, 4>> que;\n    dis[x1][y1][x2][y2] = 0;\n    que.push({ x1,y1,x2,y2 });\n    while (!que.empty()) {\n        array<int, 4> ar = que.front(); que.pop();\n        rep(d, 4) {\n            array<int, 4> nxt = ar;\n            nxt[0] += dx[d], nxt[1] += dy[d];\n            if (0 > nxt[0] or nxt[0] >= n or 0 > nxt[1] or nxt[1] >= n or s[nxt[0]][nxt[1]] == '#') {\n                nxt[0] = ar[0], nxt[1] = ar[1];\n            }\n            nxt[2] += dx[d], nxt[3] += dy[d];\n            if (0 > nxt[2] or nxt[2] >= n or 0 > nxt[3] or nxt[3] >= n or s[nxt[2]][nxt[3]] == '#') {\n                nxt[2] = ar[2], nxt[3] = ar[3];\n            }\n            if (dis[nxt[0]][nxt[1]][nxt[2]][nxt[3]] == inf) {\n                dis[nxt[0]][nxt[1]][nxt[2]][nxt[3]] = dis[ar[0]][ar[1]][ar[2]][ar[3]] + 1;\n                que.push(nxt);\n            }\n        }\n    }\n    int ans = inf;\n    rep(i, n) rep(j, n) ans = min(ans, dis[i][j][i][j]);\n    cout << (ans == inf ? -1 : ans) << '\\n';\n}"
+      ],
+      "text_sha256": "54bab5de799495babd6b964becb708f1bd349fb072845c3a359fc3852bb67b55",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc339/abc339_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

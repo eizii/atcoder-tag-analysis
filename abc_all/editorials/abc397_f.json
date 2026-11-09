@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc397_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc397/editorial/12457",
+      "text": "\\(X_i=(A_1,A_2,\\ldots,A_i)\\)\nを\n\\(2\\)\nつの空でない連続する部分列に分割したときの種類数の和の最大値\n\\(L_i=(A_1,A_2,\\ldots,A_i)\\)\nの種類数\n\\(R_i=(A_i,A_{i+1},\\ldots,A_N)\\)\nの種類数\nとします。\nこのとき、答えは\n\\(\\max_{2 \\leq i \\leq N-1}(X_i+R_{i+1})\\)\nとなります。\n\\(L,R\\)\nは前と後ろから順に見ていって、種類数を更新していくことで\n\\(O(N)\\)\nで計算できます。(C問題の解説と同様の定義です。)\n\\(X\\)\nの計算方法について考えます。\n\\(dp_{i,j}=(A_1,A_2,\\ldots,A_j)\\)\nと\n\\((A_{j+1},A_{j+2},\\ldots,A_i)\\)\nの種類数の和とします。\nこのとき、\n\\(X_i=\\max(dp_{i})\\)\nです。\nまた、\n\\(1 \\leq j \\leq i-1\\)\nについては\n\\(dp_{i+1,j}=\\left \\{\n\\begin{array}{ll}\n dp_{i,j}+1 & ((A_{j+1},A_{j+2},\\ldots,A_{i}) に A_{i+1}が含まれない) \\\\\ndp_{i,j} & ((A_{j+1},A_{j+2},\\ldots,A_{i}) に A_{i+1}が含まれる)\n\\end{array}\n\\right\\} \n\\)\nおよび、\n\\(dp_{i+1,i}=L_i+1\\)\nが成り立ちます\n\\((A_{j+1},A_{j+2},\\ldots,A_{i})\\)\nに\n\\(A_{i+1}\\)\nが含まれるかは\n\\(j\\)\nについて単調であるため、ある整数\n\\(k\\)\n以上の\n\\(j\\)\nについては\n\\(dp_{i+1,j}=dp_{i,j}+1\\)\nが成り立ち、それ以外では\n\\(dp_{i+1,j}=dp_{i,j}\\)\nになります。つまり、\n\\(dp_{i}\\)\nから\n\\(dp_{i+1}\\)\nへの遷移は区間加算で表せます。\nこれはinline DPの形で、区間加算区間最大値の遅延セグメント木を使うことでメモリを使いまわして\n\\(dp\\)\nを計算できます。\nよって、時間計算量\n\\(O(N\\log N)\\)\nで解くことができます。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/lazysegtree>\nusing namespace std;\nint op(int a, int b) { return max(a, b); }\nint e() { return -1e9; }\nint mapping(int f, int x) { return f + x; }\nint composition(int f, int g) { return f + g; }\nint id() { return 0; }\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (auto& e : a)\n        cin >> e;\n    vector<int> x(n, 0);\n    vector<int> suml(n), sumr(n);\n    int now = 0;\n    vector<int> vis(n + 1, 0);\n    for (int i = 0; i < n; ++i) {\n        if (++vis[a[i]] == 1) {\n            now++;\n        }\n        suml[i] = now;\n    }\n    vis = vector<int>(n + 1, 0);\n    now = 0;\n    for (int i = n - 1; i >= 0; --i) {\n        if (++vis[a[i]] == 1) {\n            now++;\n        }\n        sumr[i] = now;\n    }\n    atcoder::lazy_segtree<int, op, e, int, mapping, composition, id> dp(n);\n    vector<int> last(n + 1, -1);\n    for (int i = 0; i < n; ++i) {\n        dp.apply(last[a[i]] == -1 ? 0 : last[a[i]], i, 1);\n        x[i] = dp.prod(0, i);\n        dp.set(i, suml[i]);\n        last[a[i]] = i;\n    }\n    int ans = 0;\n    for (int i = 1; i < n - 1; ++i) {\n        ans = max(ans, x[i] + sumr[i + 1]);\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "b0dbdfd50b449719fa6319468ddc3c69cae1005fb4fb8452d53970734bf0165c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc397/abc397_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc397/editorial/19228",
+      "text": "\\(dp_{i,j}\\)\nを\n\\(A_1,A_2,…,A_j\\)\nを\n\\(i\\)\n個に分けた時の種類数の和の最大値とします。\n\\(dp_{i,j}=max_{0 \\leq k < j} dp_{i-1,k}+(A_{k+1},…,A_jの種類数)\\)\nと更新できます。\nここで、区間種類数はそれぞれの値が含まれるかどうかの01列の区間maxの和で表せます。区間maxはmongeでmongeの和もmongeであることから区間種類数もmongeです。したがって(スライドアクセスの)monotone minimaで\n\\(dp_i\\)\nから\n\\(dp_{i+1}\\)\nへの更新を\n\\(O(NlogN)\\)\nで行えます。答えは\n\\(dp_{3,N}\\)\nです。\n実装例",
+      "codes": [],
+      "text_sha256": "afed6aad4a751f4a3a467549ce3e107443fcf06786b455d5a3f63544e5efead0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc397/abc397_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc028_d",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc028/editorial.pdf",
+      "text": "D問題: 乱数生成\n\f\n    問題\n\n\n\n\n\n•  1, 2, 3, .., N から 1 個選ぶ機械がある\n\n\n• この機械を3回動かして中央値がKになる確率は？\n\f\n    問題\n\n\n\n• 中央値がKになるような機械の出力の通り数を求め\n てN^3で割れば良い\n\n\n• たとえばN=3, K=1ならば\n\n\n•   (1, 1, 2) (1, 1, 3) (1, 2, 1) (1, 3, 1) (2, 1, 1) (3, 1, 1) (1, 1, 1)\n\n\n• と、中央値が1となる出方が7通りある\n\n\n• よって答えは 7 / 27 = 0.259259259…\n\f\n    問題\n\n\n\n\n\n• 中央値がKになるような機械の出力は何通りか？\n\n\n• 何回Kが出力されたかで場合分けして数え上げる\n\f\n    問題\n\n\n\n       Kが0回出力された場合\n\n\n\n\n\n• 当然中央値がKとなることはありえない。よって0\n 通り。\n\f\n    問題\n\n\n\n       Kが1回出力された場合\n\n\n\n• 残りの2回のうち、片方がKより大きくてもう片方がKより小さければ良い\n\n\n• Kより大きいもの(Bとする)はN-K個\n\n\n• Kより小さいもの(Sとする)はK-1個\n\n\n• 3回の出力の出る順番として(K, B, S) (K, S, B) (B, K, S) (B, S, K) (S, K,\n\n  B) (S, B, K) の6通りが考えられる\n\n\n• 以上まとめて (N-K) * (K-1) * 6 通り\n\f\n    問題\n\n\n\n       Kが2回出力された場合\n\n\n\n• 残りの1回の出力がなんであろうと中央値はKとなる\n\n\n• Kではないもの(Lとする)はN-1個\n\n\n• 3回の出力の出る順番として(K, K, L) (K, L, K) (L, K, K)\n の3通りが考えられる\n\n\n• 以上まとめて (N-1) * 3 通り\n\f\n    問題\n\n\n\n       Kが3回出力された場合\n\n\n\n\n\n• 当然中央値はKとなる\n\n\n• 当然出方は1通り\n\f\n    問題\n\n\n\n\n\n• よって全部まとめると\n\n\n•  (N-K) * (K-1) * 6 + (N-1) * 3 + 1 通り\n\n\n• これを N^3 で割ったものが答え",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "5c2fcca3532d6d49462cdc66ae65a8a81e5a12a457bdda6c528024b902d8e7e7"
+    }
+  ],
+  "status": "available"
+}

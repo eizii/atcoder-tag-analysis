@@ -1,0 +1,424 @@
+            ABC 085 Editorial (Japanese)
+
+
+                    問題・解説: evima
+
+                                 2018 年1 月7 日
+
+
+
+                     For International Readers: English editorial starts on page 5.
+
+
+  A: Already 2018
+
+  この問題を解くには、以下の手順を踏む必要があります。
+
+   0.（言語によっては不要）文字列変数S を宣言する。
+
+       1. 標準入力からS を文字列として受け取る。
+
+       2. S の4 文字目を’8’ に置き換える（直接的または間接的に）。
+
+       3. 得た文字列を標準出力に出力する。
+
+ ステップ2. に関しては、言語によって事情が異なります。C++ のような言語では単にS[3] = ’8’; など
+
+  とすれば済みますが、Python のような言語では文字列中の文字を直接書き換えることが許されないこともあ
+
+ ります。このような場合、文字列を一旦別のデータ構造（リスト）に変換する手もありますが、S の末尾の2
+
+  文字を"2018/01/" と連結するなど、別の方針も考えられます。
+
+   C++, Python での実装例:
+
+
+
+ 1 #include <iostream>
+
+ 2 #include <string>
+
+ 3 using namespace std;
+
+
+ 4
+
+ 5 int main(){
+
+ 6     string S;
+
+ 7     cin >> S;
+
+ 8     S[3] = '8';
+
+ 9     cout << S << endl;
+
+10 }
+
+
+
+
+ 1 print("2018/01/" + input()[-2:])
+
+
+
+
+                                               1
+
+  B: Kagami Mochi
+
+  問題文は遠回しな言い方をしていますが、要するに「d1, d2, . . . , dN には何種類の異なる値があるか？」と
+
+ 聞いています。
+
+
+ 方針1: 「自分でやる」
+
+   配列flag を用意し、はじめflag[1] = flag[2] = . . . = flag[100] = 0 とします。d1 からdN まで
+ のそれぞれの値d に対してflag[d] = 1 とすると、flag の要素の和が答えとなります。
+
+   C++ での実装例:
+
+
+
+ 1 #include <iostream>
+
+ 2 using namespace std;
+
+ 3 int N, flag[101];   // Global variables are initially all 0.
+
+ 4                     // Also note that we need [101], not [100]!
+
+ 5 int main(){
+
+ 6     cin >> N;
+
+ 7     for(int i = 0; i < N; ++i){
+
+ 8         int d;
+
+ 9         cin >> d;
+
+10         flag[d] = 1;
+
+11     }
+
+12     int ans = 0;
+
+13     for(int i = 0; i < N; ++i){
+
+14         ans += flag[i];
+
+15     }
+
+16     cout << ans << endl;
+
+17 }
+
+
+
+ 方針2: 「set を使う」
+
+  多くの言語には重複を省いた集合を表すデータ構造が実装されており、たいていset か似たような名前を持
+
+  ちます。d1, d2, . . . , dN を入れたset の要素数がそのまま答えとなります。
+    Python での実装例（少し遊んでいます）:
+
+
+
+ 1 1 print(len(set(input() for i in range(int(input())))))
+
+
+
+
+
+                                               2
+
+C: Otoshidama
+
+ 袋の中身を「10000 円札x 枚、5000 円札y 枚、1000 円札z 枚」とします。当然ですが重要な点として、
+
+x, y, z はどれも0 以上N 以下の整数でなければなりません。
+
+
+ もっとも単純な方針は、三重ループでx, y, z の値の決め方をすべて試し、x+y +z = N, 10000x+5000y +
+1000z = Y が成立するか確かめるものですが、N ≤2000、実行制限時間2 秒という設定でO(N 3) 時間の解
+
+法は分が悪いです（間に合わせることも不可能ではありません）。しかし、x とy の値が決定されるとz の値
+
+がz = N −x −y に限られることを利用すると、三重ループではなく二重ループですべての可能性を列挙す
+
+ることができます（ただし、z が負になるケースを取り除く必要があります）。これらのすべての可能性に対
+して10000x + 5000y + 1000z = Y が成り立つか調べることで、問題をO(N 2) 時間で解くことができます。
+
+
+ なお、O(N) 時間やO(1) 時間の解法も考えられますが、コンテスト中に追求する必要はないでしょう。
+
+
+
+
+
+                                             3
+
+D: Katana Thrower
+
+ 問題文のルールでは、刀を投げてしまうとその刀を振ることはできなくなります。しかし、すでに投げてし
+
+まった刀も振ることができるというルールに変更しても問題の答えは変わりません。これを証明します。以
+
+下、問題文のルールを「旧ルール」、ここで定義したルールを「新ルール」と呼びます。
+
+
+ 新ルールでT 回攻撃して合計D ダメージを与えることが可能であると仮定します。そのような攻撃手順の
+
+一つで、それぞれの刀i (1 ≤i ≤N) をxi 回振ってyi 回投げるとします(0 ≤xi, 0 ≤yi ≤1)。このとき、
+旧ルールでも刀1 をx1 回振ってからy1 回投げ、刀2 をx2 回振ってからy2 回投げ、. . . 、刀N をxN 回
+振ってからyN 回投げることで、同じくT 回の攻撃で合計D ダメージを与えることが可能です。よって、新
+ルールでT 回の攻撃で魔物を退治できるとき、旧ルールでもT 回の攻撃で魔物を退治できます。逆に、旧
+
+ルールでT 回の攻撃で魔物を退治できるとき、新ルールでもまったく同じ攻撃手順でT 回の攻撃で魔物を退
+
+治できます。以上より、新ルールを採用しても問題の答えは変わりません。
+
+
+ 以後、新ルールの下で問題を考えます。新ルールでは、刀を振ることと投げることは直接関連せず、我々は
+
+攻撃力ai の「振り刀」N 本と攻撃力bi の「投げ刀」N 本、合計2N 本の武器を持っていると考えることが
+できます。（攻撃力a の振り刀は投げることはできないが何度でも振ることができ、そのたびにa ダメージを
+
+与えます。攻撃力b の投げ刀は振ることはできないが一度だけ投げることができ、投げるとb ダメージを与
+
+えます。）このときの最適な攻撃手順は以下の通りです。
+
+    0. a1, . . . , aN のうち最大の値をamax とし、攻撃力がamax 以上の投げ刀を「強い投げ刀」とする。
+    1. 強い投げ刀を攻撃力が高い順に投げていく。
+
+    2. 強い投げ刀を使い果たしたら、攻撃力amax の振り刀を振り続ける。
+
+ この戦略は、はじめにb1, . . . , bN を降順にソートしておき（言語の標準ライブラリを使うべきです）、ス
+テップ2. で割り算を使うことで、全体でO(N log(N)) 時間でシミュレートすることができます。
+
+
+
+
+
+                                             4
+
+            ABC 085 Editorial (English)
+
+
+                         Problems and editorial by: evima
+
+                                 January 7, 2018
+
+
+
+  A: Already 2018
+
+    To solve this problem, you need to go through the procedure below:
+
+       0. (Unnecessary for some languages) Declare a string variable S.
+
+       1. Receive S as a string from Standard Input.
+
+       2. Replace the fourth character in S with ’8’ (directly or indirectly).
+
+       3. Print the obtained string to Standard Output.
+
+  For step 2., situations are diﬀerent depending on language. In languages such as C++, writing S[3] =
+
+  ’8’; or similar code is ﬁne, but in some languages such as Python, rewriting a character in a string is
+
+   prohibited. In this case, a workaround is to convert the string to another data structure (list) temporarily,
+
+  but there are also other paths, such as appending the last two characters in S to "2018/01/".
+
+    Sample implementations in C++ and Python:
+
+
+
+ 1 #include <iostream>
+
+ 2 #include <string>
+
+ 3 using namespace std;
+
+
+ 4
+
+ 5 int main(){
+
+ 6     string S;
+
+ 7     cin >> S;
+
+ 8     S[3] = '8';
+
+ 9     cout << S << endl;
+
+10 }
+
+
+
+
+ 1 print("2018/01/" + input()[-2:])
+
+
+
+
+
+                                               5
+
+  B: Kagami Mochi
+
+    The statement is beating around the bush, but in short, the problem is asking you: “how many diﬀerent
+
+   values are there among d1, d2, . . . , dN?”
+
+
+  Approach 1: Do it yourself
+
+    Prepare an array flag, and initially set it to flag[1] = flag[2] = . . . = flag[100] = 0. Then, for
+
+  each value d from d1 to dN, set flag[d] = 1. Now, the sum of the elements of flag is the answer.
+
+    Sample implementation in C++:
+
+
+
+ 1 #include <iostream>
+
+ 2 using namespace std;
+
+ 3 int N, flag[101];   // Global variables are initially all 0.
+
+ 4                     // Also note that we need [101], not [100]!
+
+ 5 int main(){
+
+ 6     cin >> N;
+
+ 7     for(int i = 0; i < N; ++i){
+
+ 8         int d;
+
+ 9         cin >> d;
+
+10         flag[d] = 1;
+
+11     }
+
+12     int ans = 0;
+
+13     for(int i = 0; i < N; ++i){
+
+14         ans += flag[i];
+
+15     }
+
+16     cout << ans << endl;
+
+17 }
+
+
+
+  Approach 2: Use set
+
+   Many languages implement data structures representing sets without duplication, usually named “set”
+
+   or similarly. Insert d1, d2, . . . , dN into a set, and the number of elements itself is the answer.
+
+    Sample implementation in Python (I’m playing a bit):
+
+
+
+ 1 1 print(len(set(input() for i in range(int(input())))))
+
+
+
+
+
+                                               6
+
+C: Otoshidama
+
+  Let the contents of the envelope be “x 10000-yen bills, y 5000-yen bills and z 1000-yen bills”. Naturally
+
+but importantly, x, y and z all have to be integers between 0 and N.
+
+
+  The simplest approach is to try all ways to set the values of x, y and z in three nested loops and
+
+check if x + y + z = N, 10000x + 5000y + 1000z = Y hold, but under the constraint N ≤2000 and the
+execution time limit of 2 seconds, odds are against O(N 3) time solutions (not impossible to make it in
+
+time, though). Notice that, however, when we ﬁx the values of x and y, the value of z will be limited to
+
+z = N −x −y. Then, we can enumerate all possibilities in two nested loops, not three (but we need to
+
+remove the case where z is negative). By checking if 10000x + 5000y + 1000z = Y holds for each of these
+possibilities, we can solve the problem in O(N 2) time.
+
+  There are also O(N) time and O(1) time solutions, but no need to ﬁnd them during the contest.
+
+
+
+
+
+                                             7
+
+D: Katana Thrower
+
+  Under the rules in the statement, when you throw a katana, you will no longer be able to wield that
+
+katana. However, the answer does not change if we change the rule to allow wielding a katana that you
+
+have already thrown. We will now prove it. Below, we will call the rules in the statement the “old rules”,
+
+and the rules deﬁned here the “new rules”.
+
+
+  Suppose that we can deal a total of D damage in T attacks under the new rules. Assume that, in
+
+one such sequence of attacks, each katana i (1 ≤i ≤N) is wielded xi times and thrown yi times
+(0 ≤xi, 0 ≤yi ≤1). Then, we can also deal a total of D damage in T attacks under the old rules,
+by wielding katana 1 x1 times, then throwing katana 1 y1 times, then wielding katana 2 x2 times, then
+throwing katana 2 y2 times, . . . , then wielding katana N xN times, then throwing katana N yN times.
+
+Thus, if we can vanish the monster in T attacks under the new rules, we can also vanish the monster in
+
+T attacks under the old rules. On the other hand, if we can vanish the monster in T attacks under the
+
+old rules, we can also vanish the monster in T attacks under the new rules by performing exactly the
+
+same sequence of attacks. Therefore, the answer does not change by adopting the new rules.
+
+
+ We will consider the problem under the new rules from now on. Under the new rules, wielding katana
+
+and throwing them is not directly related, and we can assume that we have 2N weapons, N ”wielding
+
+katana” of attack power ai and N ”throwing katana” of attack power bi. (A wielding katana of attack
+power ai cannot be thrown but can be wielded any number of times, and deals a damage each time we
+wield it. A throwing katana of attack power bi cannot be wielded but can be thrown only once, and
+
+deals b damage when we throw it.) The optimal strategy now is:
+
+    0. Let amax be the maximum value among a1, . . . , aN, and ”strong throwing katana” be the katana
+     whose attack powers are amax or above.
+
+    1. Throw strong throwing katana one at a time in decreasing order of attack power.
+
+    2. When we have no more throwing katana, repeat wielding the wielding katana of attack power
+
+      amax.
+
+  This strategy can be simulated in O(N log(N)) time in total, by sorting b1, . . . , bN in decreasing order
+
+(the standard library in your language should be used) in the beginning and use division in step 2.
+
+
+
+
+
+                                             8

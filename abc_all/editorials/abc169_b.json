@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc169_b",
+  "editorials": [
+    {
+      "text": "B: Multiplication 2\nAi に0 が含まれる場合、答えは0 です。そうでない場合を考えます。\n64bit 整数でそのまま掛け算を行うとオーバーフローします。倍精度浮動小数点数で計算を行う\nと精度が足りません。多倍長整数で最後まで計算するとTLE します。したがって何らかの工夫が\n必要です。\nPython などの多倍長整数が使える言語や、128bit 整数が使える環境であれば「積が1018 が超え\nた時点で-1 を出力する」とすることで解くことができます。\nPython での実装例\ndef main():\nN = int(input())\nA = list(map(int,input().split()))\nif 0 in A:\nprint(0)\nreturn\nprod = 1\nfor a in A:\nprod *= a\nif prod > 1000000000000000000:\nprint(-1)\nreturn\nprint(prod)\nmain()\nそうでない場合も、1018 を超えるかどうかの判定を乗算ではなく除算で行う必要がありますが、\n同様の方針で解くことができます。\nC 言語での実装例\n#include <stdio.h>\nlong long a[100010];\nint main(){\nint n;\nscanf(\"%d\",&n);\nfor(int i=0;i<n;i++)scanf(\"%lld\",&a[i]);\nint zero=0;\n\nfor(int i=0;i<n;i++)if(a[i]==0)zero++;\nif(zero >0){\n// a[i] contains 0\nprintf(\"0\\n\");\nreturn 0;\n}\nlong long prod=1;\nfor(int i=0;i<n;i++){\nif(a[i]<=1000000000000000000/prod){\n// This condition is equivalent to prod*a[i]<=10ˆ18\nprod*=a[i];\n}else{\nprintf(\"-1\\n\");\nreturn 0;\n}\n}\nprintf(\"%lld\\n\",prod);\n}\n",
+      "text_sha256": "fc0ee861fc0375c4e985b91adbd56c34a79bd230e8e503f3ef1fbcfe0838ce50",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc169/abc169_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

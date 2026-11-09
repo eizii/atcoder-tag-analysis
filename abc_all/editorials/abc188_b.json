@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc188_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc188/editorial/490",
+      "text": "問題文に書かれている式の通りに、配列と繰り返し文を使って内積を求めることで解くことができます。\n解答例(Python)\n解答例(C)",
+      "codes": [
+        "n = int(input())\na = list(map(int, input().split()))\nb = list(map(int, input().split()))\n\nprod = 0\nfor i in range(n) : prod += a[i] * b[i]\nprint(\"No\" if prod else \"Yes\")",
+        "#include <stdio.h>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tint n = ri();\n\tint a[n];\n\tfor (int i = 0; i < n; i++) a[i] = ri();\n\tint b[n];\n\tfor (int i = 0; i < n; i++) b[i] = ri();\n\t\n\tint prod = 0;\n\tfor (int i = 0; i < n; i++) prod += a[i] * b[i];\n\t\n\tputs(prod ? \"No\" : \"Yes\");\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "b3c2d5d0c4ddaa6835791a92e6e0635010ca6520d84c9e5beb646e666819e911",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc188/abc188_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

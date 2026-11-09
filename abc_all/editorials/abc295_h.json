@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc295_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc295/editorial/6036",
+      "text": "\\(dp[\\) 何行目まで見たか \\(][\\) その列の上から伸ばしていけるか \\(] = \\{\\) 場合の数 \\(\\}\\) というDPを考えます。 具体例を挙げると、各グリッドに対して以下のような key の持ち方をします。 このDPにおける遷移を考えてみましょう。 例えば dp[5][1101001] からの遷移には以下のケースがあります。 ( 1101001 の部分集合 ) = sssssss を置いて、 dp[6][sssssss] に遷移する。 111 + ( 1001 の部分集合 ) = 111ssss を置いて、 dp[6][110ssss] に遷移する。 11111 + ( 01 の部分集合 ) = 11111ss を置いて、 dp[6][11010ss] に遷移する。 111111 + ( 1 の部分集合 ) = 111111s を置いて、 dp[6][110100s] に遷移する。 このように、「key のうち左からある 0 までを決め打って、そこまでを全部 1 で埋めその後ろに key の部分集合をつけたものを置いた場合の遷移」を全通り繰り返すことで、遷移を漏れなくダブりなく行うことができます。 部分集合への遷移は、 高速ゼータ変換 の要領で行えばよいです。 (※) なお、左から徐々に 1 が詰まってきているので、左から順に着目する遷移を行いつつ左から \\(k\\) 個の遷移を終えたタイミングで (左から \\(k\\) 個 1 が詰まったもの + 残りの部分集合) を置く場合を追加すれば、全体で一度の「部分集合への遷移」をかけるだけで遷移が完了します。(詳細は実装例参照) これで、入力されるグリッドが全て ? の場合は解けました。では、入力されるグリッドに制約がある場合はどうすればよいでしょうか？ この場合もそう難しくありません。上述の通り何を置くかは分かっているので、実際に置けるもののみに対して遷移を行えばよいです。 例えば部分集合に対して遷移をかける際は、 1 が置けないなら key の 1 は必ず 0 に遷移し、 0 が置けないなら元々 key が 0 である場合は遷移ができず 1 である場合は必ず 1 に遷移するという要領です。 (※) の部分に関しても、左から \\(k\\) 個 1 が詰まったものを置くことが許されるかどうかでその場合を追加すべきかどうかを決定してよいです。\nこちらも詳しくは実装例を参照してください。 以上を実装すれば、 \\(O(2^M NM)\\) の時間計算量を達成でき、この問題に正解することができます。 実装例 (C++):",
+      "codes": [
+        "        1101       0111       1111\n        1111       0001       0011\n        1001       1110       1101\ndp  [3][1001]  [3][0000]  [3][0001]\n",
+        "#include<bits/stdc++.h>\n#define mod 998244353\n\nusing namespace std;\n\nint main(){\n  int n,m;\n  cin >> n >> m;\n  vector<string> s(n);\n  for(auto &nx : s){cin >> nx;}\n  vector<long long> dp(1<<m,0);\n  dp[(1<<m)-1]=1;\n  for(int i=0;i<n;i++){\n    vector<long long> ndp=dp;\n    for(int j=0;j<m;j++){\n\n      vector<long long> work(1<<m,0);\n      if(s[i][j]!='1'){\n        // put 0\n        for(int k=0;k<(1<<m);k++){\n          if(k&(1<<j)){\n            work[k^(1<<j)]+=ndp[k];\n            work[k^(1<<j)]%=mod;\n          }\n          else{\n            work[k]+=ndp[k];\n            work[k]%=mod;\n          }\n        }\n      }\n      if(s[i][j]!='0'){\n        // put 1\n        for(int k=0;k<(1<<m);k++){\n          if(k&(1<<j)){\n            work[k]+=ndp[k];\n            work[k]%=mod;\n          }\n        }\n      }\n      ndp=work;\n\n      bool ok=true;\n      for(int k=0;k<=j;k++){\n        if(s[i][k]=='0'){ok=false;break;}\n      }\n      if(!ok){continue;}\n      for(int k=0;k<(1<<m);k++){\n        if(k&(1<<j)){continue;}\n        ndp[k]+=dp[k];\n        ndp[k]%=mod;\n      }\n    }\n    dp=ndp;\n  }\n\n  long long res=0;\n  for(auto &nx : dp){res+=nx;res%=mod;}\n  cout << res << \"\\n\";\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "a2a533a12d9e7fa5cd852165ded2eca34d8c2bdfcb01682ebd2309bc12233451"
+    }
+  ],
+  "status": "available"
+}

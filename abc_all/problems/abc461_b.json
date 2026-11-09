@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc461_b",
+  "title": "The Honest Woodcutters",
+  "contests": [
+    {
+      "contest_id": "abc461",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 34,
+  "raw_difficulty": -581,
+  "contest_id": "abc461",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc461/tasks/abc461_b",
+  "statement": "配点 : 200 点 問題文 N 人の木こり 1,2,\\dots,N が斧を 1 個ずつ持っています。\r\n全員が斧を池に落としてしまいました。 池に N 個の斧 1,2,\\dots,N が沈んでいました。 各木こり i は「自分が持っていた斧は斧 A_i である」と主張しています。 一方、この池の女神は、各斧 i を持っていたのは木こり B_i であることを知っています。 N 人の木こり全員が本当のことを言っているかどうかを判定してください。 制約 1 \\leq N \\leq 100 1 \\leq A_i \\leq N 1 \\leq B_i \\leq N A_i \\neq A_j\\;(i \\neq j) B_i \\neq B_j\\;(i \\neq j) 入力される値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N B_1 B_2 \\dots B_N 出力 N 人の木こり全員が本当のことを言っているならば Yes を、そうでないならば No を出力せよ。 入力例 1 3\r\n3 1 2\r\n2 3 1 出力例 1 Yes N 人の木こり全員が本当のことを言っています。 入力例 2 4\r\n1 2 3 4\r\n1 3 2 4 出力例 2 No 木こり 2,3 の 2 人は嘘をついています。 入力例 3 5\r\n2 4 5 1 3\r\n4 1 5 2 3 出力例 3 Yes",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 人の木こり 1,2,\\dots,N が斧を 1 個ずつ持っています。\r\n全員が斧を池に落としてしまいました。 池に N 個の斧 1,2,\\dots,N が沈んでいました。 各木こり i は「自分が持っていた斧は斧 A_i である」と主張しています。 一方、この池の女神は、各斧 i を持っていたのは木こり B_i であることを知っています。 N 人の木こり全員が本当のことを言っているかどうかを判定してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 100 1 \\leq A_i \\leq N 1 \\leq B_i \\leq N A_i \\neq A_j\\;(i \\neq j) B_i \\neq B_j\\;(i \\neq j) 入力される値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N B_1 B_2 \\dots B_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N 人の木こり全員が本当のことを言っているならば Yes を、そうでないならば No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\n3 1 2\r\n2 3 1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes N 人の木こり全員が本当のことを言っています。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4\r\n1 2 3 4\r\n1 3 2 4"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No 木こり 2,3 の 2 人は嘘をついています。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 5\r\n2 4 5 1 3\r\n4 1 5 2 3"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc461/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:46.545795+00:00",
+  "statement_sha256": "16bc98f5145802bcd4aaeb20cdf0fe5a94dd2ab4505098a9824fb40f8fc4b10f",
+  "editorials": []
+}

@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc416_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc416/editorial/13537",
+      "text": "与えられる木 \\(T\\) を頂点 \\(1\\) を根とする根付き木とします。 以下のような木 DP で答えを求めることを考えます。 \\(d_c[i][k]\\) を以下のように定める。 部分木 \\(i\\) から \\(k\\) 本の点素パス（どの \\(2\\) つのパスも同じ頂点を共有しない）を取り、いずれかのパスに含まれる頂点に書かれた整数の総和の最大値を \\(d_c[i][k]\\) とする。 ただし、 \\(c=0\\) なら追加の制約はなく、 \\(c=1\\) ならいずれかのパスが端点として頂点 \\(i\\) を持つ必要がある。 \\(\\displaystyle \\max_k d_0[1][k]\\) が求める答えとなります。 各部分木のマージは \\(O(K^2)\\) 時間で行うことができるので、全体として \\(O(NK^2)\\) 時間で答えを求めることができます。 マージの式は複雑になるので、詳しくは実装例を参考にしてください。下の実装では \\(d_2[i][k]\\) を上の \\(1\\) つ目の定義に加え「いずれかのパスが端点以外の頂点として頂点 \\(i\\) を持つ」という条件を加えた \\(3\\) つの長さ \\(m+1\\) の配列 \\(d_0,d_1,d_2\\) を持ち、最後に \\(d_2\\) を \\(d_0\\) に吸収させる遷移を書いています。 実装例(Python3) また、適切な枝刈りを行うことで計算量を \\(O(NK)\\) に削減することもできます。詳しくは こちらの記事 を参考にしてください。",
+      "codes": [
+        "import pypyjit\npypyjit.set_param('max_unroll_recursion=-1')\nimport sys\nsys.setrecursionlimit(2 * 10**7)\ninput = sys.stdin.readline\nn, k = map(int, input().split())\na = list(map(int, input().split()))\ng = [[] for _ in range(n)]\nfor _ in range(n - 1):\n    u, v = map(int, input().split())\n    g[u - 1].append(v - 1)\n    g[v - 1].append(u - 1)\nINF = 10**18\n\ndef f(to, fr):\n    d0 = [-INF] * (k + 1)\n    d1 = [-INF] * (k + 1)\n    d2 = [-INF] * (k + 1)\n    d0[0] = 0\n    for x in g[to]:\n        if x == fr:\n            continue\n        new_d0 = [-INF] * (k + 1)\n        new_d1 = [-INF] * (k + 1)\n        new_d2 = [-INF] * (k + 1)\n        di0, di1 = f(x, to)\n        for i in range(k + 1):\n            for j in range(k + 1):\n                if i + j <= k:\n                    new_d0[i + j] = max(new_d0[i + j], d0[i] + di0[j])\n                    new_d1[i + j] = max(new_d1[i + j], d0[i] + di1[j] + a[to])\n                    new_d1[i + j] = max(new_d1[i + j], d1[i] + di0[j])\n                    new_d2[i + j] = max(new_d2[i + j], d2[i] + di0[j])\n                    new_d1[i + j] = max(new_d1[i + j], d1[i] + di1[j])\n                    new_d2[i + j] = max(new_d2[i + j], d2[i] + di1[j])\n                if 0 <= i + j - 1 <= k:\n                    new_d2[i + j - 1] = max(new_d2[i + j - 1], d1[i] + di1[j])\n        d0, d1, d2 = new_d0, new_d1, new_d2\n    for i in range(1, k + 1):\n        d1[i] = max(d1[i], d0[i - 1] + a[to])\n    for i in range(k + 1):\n        d0[i] = max(d0[i], d1[i], d2[i])\n    return d0, d1\n\nd0, d1 = f(0, -1)\nprint(max(d0))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "7dd9b908ff573a2a72ee7f7a7f2525d0026e2314c84a791b750a60bc6af6ed56"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc374_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc374/editorial/11095",
+      "text": "\\(T_N \\le 10^{12}\\) である (暦に存在する日数が非常に大きい) ので、「今何日か?」を愚直に管理する解法ではこの問題に正解することができなさそうです。 そこで、着目する日の数を減らしてみましょう。 実は、出荷を行うタイミングとして考えるべきものは以下の式で記述できるものだけです。 \\(T_i + kX\\) 但し、 \\(1 \\le i \\le N, 0 \\le k \\le N\\) 略証: 注文 \\(i,j\\) ( \\(i < j\\) ) について、 \\(j\\) を \\(i\\) より先に出荷しても不満度が減少することはない (注文の順番に出荷する最適解が常に存在する) 。 このとき、同時に出荷する注文の集合を固定した時、起こることは以下の \\(2\\) つのうち \\(1\\) つである。 同時に出荷する注文のうち最も遅いものを待って出荷する。 前の出荷の \\(X\\) 日後の時点で出荷したい注文が全て揃っているので、その日に直ちに出荷する。 前者はある \\(i\\) を用いて \\(T_i\\) 日、後者は前の出荷の \\(X\\) 日後と表現されるため、最初の結論を得る。 これで、着目する日の個数が \\(O(N^2)\\) 個になりました。 このもとで、この問題は以下の動的計画法により解くことができます。 着目する日をイベント \\(1,2,\\dots\\) と呼ぶことにします。 \\(dp\\) [ イベント \\(i\\) ][ 最後に出荷した注文 \\(j\\) ] = { 現時点で出荷された注文に対する不満度の総和の最小値 \\(x\\) } 遷移は次の通りです。 \\(dp[i+1][j]\\) に \\(x\\) を遷移する ( イベント \\(i\\) の日に何も出荷しない ) イベント \\(i\\) から \\(X\\) 日以降経過した最初のイベントを \\(d\\) とする。このとき、 \\(dp[d][j+m]\\) に \\(x\\) + ( イベント \\(i\\) の日に \\(j+1\\) 個目から \\(j+m\\) 個目までの注文を出荷した場合の不満度の総和 ) を遷移する。 この動的計画法は、時間計算量 \\(O(N^3K)\\) で動作します。 実行時間制限が余裕をもって設定されているため、もうひとつ計算量にかかる文字が多い解法でも定数倍が十分高速であれば正解できる可能性があります。 実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long n,k,x;\n  cin >> n >> k >> x;\n  vector<long long> t(n);\n  for(auto &nx : t){cin >> nx;}\n\n  vector<long long> clk;\n  for(long long i=0;i<n;i++){\n    for(long long j=0;j<=n;j++){\n      clk.push_back(t[i]+j*x);\n    }\n  }\n\n  sort(clk.begin(), clk.end());\n  clk.erase(unique(clk.begin(),clk.end()),clk.end());\n\n  long long cs=clk.size();\n  vector<vector<long long>> dp(cs+1,vector<long long>(n,8e18));\n  dp[0][0]=0;\n  long long res=8e18;\n  long long nxt=0;\n  for(long long i=0;i<cs;i++){\n    while(nxt<cs && clk[nxt]<clk[i]+x){nxt++;}\n\n    for(long long j=0;j<n;j++){\n      if(dp[i][j]>4e18){continue;}\n      dp[i+1][j]=min(dp[i+1][j],dp[i][j]);\n\n      long long mv=dp[i][j];\n      for(long long m=j;m<min(j+k,n);m++){\n        if(clk[i]<t[m]){break;}\n\n        mv+=(clk[i]-t[m]);\n\n        if(m==n-1){\n          // finish\n          res=min(res,mv);\n        }\n        else if(nxt<cs){\n          dp[nxt][m+1]=min(dp[nxt][m+1],mv);\n        }\n      }\n    }\n  }\n\n  cout << res << \"\\n\";\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "1acbb94a6d2820dbf2536928305acd90b40151e1816dcec385523b5b0509271f"
+    }
+  ],
+  "status": "available"
+}

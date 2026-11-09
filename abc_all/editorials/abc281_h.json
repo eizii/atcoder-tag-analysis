@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc281_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc281/editorial/5371",
+      "text": "\\(i \\geq 2\\) に対し、 \\(N=i\\) の時の答えを \\(a_i\\) とします。ここで、「レベル \\(i\\) の宝石」を生成する方法であって、「レベル \\(1\\) の宝石」を \\(x\\) 個と、「レベル \\(k_1\\) の宝石」、「レベル \\(k_2\\) の宝石」、 \\(\\ldots\\) 、「レベル \\(k_{i-x}\\) の宝石」を \\(1\\) 個ずつ使うようなものの個数は \\(_A C _x \\prod_{j=1}^{i-x} a_{k_j}\\) と表せます(ただし、 \\(2 \\leq k_1 \\lt \\ldots \\lt k_{i-x} \\leq i-1\\) です)。そして、 \\(a_i\\) の値はすべての宝石の選び方に対するこの値の総和であるため、 \\(f(x) = _A C _0 + _A C _1 x + \\ldots + _AC_A x^A\\) とすると \\(f(x) \\prod_{j=2}^{i-1} (1+a_j x)\\) の \\(x^i\\) の係数と一致します。考慮するべき項は \\(N\\) 次以下であるため、多項式を愚直に( \\(a_i\\) を順に求めながら \\((1+a_i x)\\) を掛けて)求めれば \\(\\mathrm {O}(N^2)\\) で答えを求めることが出来ます。 上述の処理で現れるのは \\(\\mathrm{O}(N)\\) サイズの多項式と \\((1+a_i x)\\) の積を \\(\\mathrm{O}(N)\\) 回求める処理であり、高速化が難しいです。一方、 \\( \\mathrm {O}(N)\\) サイズの多項式同士の積はFFTによって \\(\\mathrm{O}(N \\log N)\\) で計算出来ます。そのため、例えば「 \\(a_1\\ldots a_N\\) が与えられた状態で \\(\\prod (1+a_ix)\\) を求めよ」といった問題は以下のような分割統治法によって \\(\\mathrm{O}(N (\\log N)^2)\\) で解くことができます。 本問では \\(a_i\\) が動的に決まる・ \\(f(x)\\) との積を考えるといった違いがありますが、同様に以下のように分割統治で解くことが考えられます。しかし、 \\(8\\) 行目や \\(9\\) 行目で \\(\\mathrm{O}(N)\\) サイズの多項式である \\(g\\) と他の多項式の積を求めているためこのままではTLEとなります。 ここで、 \\([l,r)\\) に対する関数の呼び出しにおいては \\(g\\) は次数が \\([l,r)\\) である部分しか計算に用いません。この部分のみを渡して積を求めるようにすることで、先の例と同様に \\(\\mathrm{O}(N (\\log N)^2)\\) で本問を解くことができます。",
+      "codes": [
+        "//(1+a_l x)(1+a_{l+1} x)...(1+a_{r-1} x) を返す\nvector<mint> dc(int l,int r){\n\n\tif(r-l==1)return {1,a[l]};\n\n\tint m = (l+r)/2;\n\treturn convolution(dc(l,m),dc(m,r));\n\n}\n",
+        "//引数のgはf(x)(1+a_2 x)...(1+a_{l-1} x)\n//(1+a_l x)(1+a_{l+1} x)...(1+a_{r-1} x) を返す\nvector<mint> dc(int l,int r,vector<mint> g){\n\t\n\tif(r-l==1)return {1,g[l]};\n\t\n\tint m = (l+r)/2;\n\tvector<mint> temp = dc(l,m,g);\n\treturn convolution(temp,dc(m,r,convolution(g,temp)));\n\t\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "4facfaccb9b004286b6002f4098d8bf7999a3353a99628787294caa6722e060e"
+    }
+  ],
+  "status": "available"
+}

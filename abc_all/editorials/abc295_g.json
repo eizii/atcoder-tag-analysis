@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc295_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc295/editorial/6052",
+      "text": "\\(G\\) の強連結成分分解を考えます。 上図において、黒い辺は \\(G_S\\) 由来の辺を、赤い辺はクエリで追加された辺を表しています。また、頂点に書かれた数字は、同じ数字が書かれた頂点が同じ強連結成分に属していることを表します。 \\(G\\) において黒い辺だけを取り出したときにできる有向木のことを、以降黒い木とよびます。 出力クエリ ( \\(2\\) 番目の形式のクエリ) について考えてみましょう。上図のように、各強連結成分は黒い木上の部分木になっているので、「黒い辺を辿ると頂点番号が必ず増加する」という本問題の設定上、頂点 \\(x\\) を含む強連結成分の外を探すことは無意味です (頂点 \\(x\\) を含む強連結成分の外であって \\(x\\) から到達可能な範囲には、頂点番号が \\(x\\) より大きい頂点しか存在しないため)。よって、「頂点 \\(x\\) を含む強連結成分内で最も番号が小さい頂点」が出力クエリの答えになります。 辺追加クエリ ( \\(1\\) 番目の形式のクエリ) について考えてみましょう。黒い木上で \\(v\\) から \\(u\\) に伸びるパスを \\(P\\) として、 \\(P\\) と共通部分を持つような強連結成分の集合を \\(S\\) とすると、 \\(u \\rightarrow v\\) の辺を追加することで \\(S\\) 全体が新たに \\(1\\) つの強連結成分になります。 よって、強連結成分を Union-Find で管理しながら、各強連結成分について「その強連結成分内にある頂点の番号の最小値」 \\(\\dots(*)\\) を持てばよいです。辺追加クエリにおいては、上述した \\(S\\) を \\(|S|\\) 程度で求める必要があります (つまり、 \\(|P|\\) かかってはいけない) が、これは \\((*)\\) の値をうまく利用することで実現できます。詳しくは下記の実装例をご参照ください。 想定解 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/dsu>\n\nusing namespace std;\nusing namespace atcoder;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    \n    int n;\n    cin >> n;\n    vector<int> p(n);\n    for (int i = 1; i < n; i++) {\n        cin >> p[i];\n        --p[i];\n    }\n    \n    dsu uf(n);\n    vector<int> r(n); // r[i] = i を代表元とする強連結成分内の最小頂点\n    iota(r.begin(), r.end(), 0);\n    auto get_min = [&](int i) { return r[uf.leader(i)]; }; // i を含む強連結成分内の最小頂点\n    int q;\n    cin >> q;\n    while (q--) {\n        int t;\n        cin >> t;\n        if (t == 1) {\n            int u, v;\n            cin >> u >> v;\n            --u, --v;\n            while (get_min(u) > v) {\n                int mn = get_min(u);\n                int nr = get_min(p[mn]);\n                r[uf.merge(mn, p[mn])] = nr;\n            }\n        } else {\n            int x;\n            cin >> x;\n            --x;\n            cout << get_min(x) + 1 << '\\n';\n        }\n    }\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "abab661475cc05ea6281245e9b1105c2139344a877627d885970985bc4985dad"
+    }
+  ],
+  "status": "available"
+}

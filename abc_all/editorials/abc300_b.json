@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc300_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6281",
+      "text": "この問題は条件を満たす非負整数の組\n\\((s, t)\\)\nが存在するかを判定する問題です。全ての非負整数の組に対して条件を満たすか判定していてはプログラムが終わらないので、まず\n\\((s, t)\\)\nとして調べる必要のある組を絞り込みます。\nすると、\n\\(s\\)\nは\n\\(0\\)\n以上\n\\(H\\)\n未満しか調べなくてよいことがわかります。なぜならば、\n\\(A\\)\nの高さは\n\\(H\\)\nなので全ての\n\\(s\\)\nについて「\n\\(s\\)\n回縦方向シフトしたあとの\n\\(A\\)\n」と「\n\\(s + H\\)\n回縦方向シフトしたあとの\n\\(A\\)\n」が一致するからです。\n同様にして、\n\\(t\\)\nは\n\\(0\\)\n以上\n\\(W\\)\n未満しか調べなくてよいことがわかります。よって調べる必要のある\n\\((s, t)\\)\nを\n\\(HW\\)\n個に抑えることができました。\n(以下の説明では\n\\(A, B\\)\nの添え字を 0-indexed で考えます。つまり、\n\\(A\\)\nの左上は\n\\(A[0][0]\\)\nで、右下は\n\\(A[H-1][W-1]\\)\nとします。)\n\\((s, t)\\)\nを決め打ったときに、操作後の\n\\(A\\)\nと\n\\(B\\)\nが一致しているかを判定する問題を考えます。\n\\(A\\)\nを縦方向に\n\\(s\\)\n回、横方向に\n\\(t\\)\nシフトすると\n\\(A[i][j]\\)\nは\n\\(A[(i - s) \\bmod H][(j - t) \\bmod W]\\)\nに移ります。(\n\\(\\bmod\\)\nは余りを取る演算) よって、すべてのグリッドの地点\n\\((i, j)\\)\nに対して\n\\(A[(i - s) \\bmod H][(j - t) \\bmod W]\\)\nと\n\\(B[i][j]\\)\nが一致するかを判定すればよいです。\nこのアルゴリズムは\n\\(s, t, i, j\\)\nの\n\\(4\\)\n重ループになるので\n\\(\\mathrm{O}(H^2 W^2)\\)\nの計算量で解けて、十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int H, W;\n  cin >> H >> W;\n  vector<string> A(H), B(H);\n  for (auto& x : A) cin >> x;\n  for (auto& x : B) cin >> x;\n  for (int s = 0; s < H; s++) {\n    for (int t = 0; t < W; t++) {\n      int ok = 1;\n      for (int i = 0; i < H; i++) {\n        for (int j = 0; j < W; j++) {\n          if (A[(i - s + H) % H][(j - t + W) % W] != B[i][j]) ok = 0;\n        }\n      }\n      if (ok) {\n        cout << \"Yes\" << endl;\n        exit(0);\n      }\n    }\n  }\n  cout << \"No\" << endl;\n}"
+      ],
+      "text_sha256": "19a6a83bdbfda051b82062bb9335f87df48171e238ef2873591e42179f657419",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc300/abc300_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

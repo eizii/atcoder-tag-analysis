@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc315_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc315/editorial/6991",
+      "text": "問題文の流れに乗って、素直に実装を進めましょう。\n一年の総日数を求める\nこれは for 文等を用いれば可能です。\n総日数をもとに真ん中の日を求める\n真ん中の日が属する月を for 文を用いて発見し、その何日目が真ん中の日かを求めます。これは簡単な比較と引き算により可能です。\n詳細は実装例を参照してください。\n実装例 (Python):",
+      "codes": [
+        "m = int(input())\nd = list(map(int,input().split()))\n\ntot = 0\nfor x in d:\n    tot += x\n\nmid = (tot+1) // 2\n\nfor i in range(m):\n    if mid <= d[i]:\n        print(str(i+1) + \" \" +str(mid))\n        exit()\n    else:\n        mid -= d[i]"
+      ],
+      "text_sha256": "205b45eea52c366f161a2371439442ba8ba3745a25263bbf44f873325a169df5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc315/abc315_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

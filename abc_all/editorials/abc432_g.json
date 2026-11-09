@@ -1,0 +1,44 @@
+{
+  "problem_id": "abc432_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc432/editorial/14573",
+      "text": "\\(A_i=j\\)\nを満たす\n\\(i\\)\nの個数を\n\\(C_a(j)\\)\n、\n\\(B_i=j\\)\nを満たす\n\\(i\\)\nの個数を\n\\(C_b(j)\\)\n、数列\n\\(A,B\\)\nの要素の最大値を\n\\(K\\)\nとおくと、\n\\[\n\\displaystyle\n\\begin{aligned}\n\\sum_{i=1}^{N} \\sum_{j=1}^{M} \\binom{A_i}{B_j}\n&= \\sum_{i=1}^{K} \\sum_{j=1}^{i} C_a(i)\\cdot C_b(j)\\cdot \\binom{i}{j} \\\\\n&= \\sum_{i=1}^{K} \\sum_{j=1}^{i} C_a(i)\\cdot C_b(j)\\cdot \\frac{i!}{j!(i-j)!} \\\\\n&= \\sum_{i=1}^{K} \\left(C_a(i)\\cdot (i!)\\cdot \\sum_{j=1}^{i} \\frac{C_b(j)}{j!(i-j)!}\\right) \\\\\n&= \\sum_{i=1}^{K} \\left(C_a(i)\\cdot (i!)\\cdot \\sum_{j+k=i} \\left(\\frac{C_b(j)}{j!}\\cdot \\frac{1}{k!}\\right)\\right) \\\\\n\\end{aligned}\n\\]\nとなります。\nしたがって、\n\\(\\displaystyle f(x)=\\sum_{j=0}^{K} \\frac{C_b(j)}{j!}x^j, \\ \\ g(x)=\\sum_{j=0}^{K} \\frac{x^j}{j!}\\)\nと定義し、\n\\(h(x)=f(x)\\cdot g(x)\\)\nとおくと、求める値は\n\\(\\displaystyle \\sum_{i=1}^{K} C_a(i)\\cdot (i!)\\cdot[x^i]h\\)\nとなります。\nよって、数論変換 (NTT) を用いて\n\\(h(x)\\)\nを計算することで、本問題を\n\\(O(N+M+K\\log K)\\)\nで解くことができます。実装においては\nAC Library (Convolution)\nを利用することができます。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/all>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing mint = modint998244353;\n\nconst int C = 500010;\n\nmint fac[C + 1];\nmint ifac[C + 1];\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    fac[0] = 1;\n    for (int i = 0; i < C; i++) fac[i + 1] = fac[i] * (i + 1);\n    ifac[C] = fac[C].inv();\n    for (int i = C - 1; i >= 0; i--) ifac[i] = ifac[i + 1] * (i + 1);\n\n    int n, m;\n    cin >> n >> m;\n    vector<int> ca(C), cb(C);\n    for (int i = 0; i < n; i++) {\n        int a;\n        cin >> a;\n        ++ca[a];\n    }\n    for (int i = 0; i < m; i++) {\n        int b;\n        cin >> b;\n        ++cb[b];\n    }\n\n    vector<mint> f(C), g(C);\n    for (int i = 0; i < C; i++) {\n        f[i] = ifac[i] * cb[i];\n        g[i] = ifac[i];\n    }\n    auto h = convolution(f, g);\n    mint ans = 0;\n    for (int i = 0; i < C; i++) {\n        ans += h[i] * fac[i] * ca[i];\n    }\n    cout << ans.val() << endl;\n}"
+      ],
+      "text_sha256": "63cfa05b2a10350bbb186453042e2cd804966520060dfc315801ae0b69c9fbe7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc432/abc432_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc432/editorial/14578",
+      "text": "求める値は、\n\\(S=\\sum_{i=1}^N(1+x)^{A_i}\\)\nとして\n\\(\\sum_{i=1}^MS[x^{B_i}]\\)\nとなります。よって、\n\\(S\\)\nを高速に計算できればよいです。\nある\n\\(A\\)\nに対する答えを\n\\(S(A)\\)\nとし、これを再帰的に求めます。閾値\n\\(m\\)\nを定め、\n\\(A\\)\nの要素のうち\n\\(m\\)\n以上のものから\n\\(m\\)\nを引いたものの列\n\\(A_1\\)\n、そうでないものの列を\n\\(A_2\\)\nとします。このとき、\n\\(S(A)=(1+x)^mS(A_1)+S(A_2)\\)\nとなります。\nここで、\n\\((1+x)^m\\)\nは二項係数の列挙、\n\\((1+x)^mS(A_1)\\)\nは畳み込みを使って計算できます。\n分割統治を行うことで、要素の最大値を\n\\(K\\)\nとして\n\\(O(N+M+K(\\log K)^2)\\)\nで解くことができます。",
+      "codes": [],
+      "text_sha256": "e3d2b91eecc6e4774a70690462695a0fcc27d0543e6dba02f8feb676e7b45f3b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc432/abc432_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc432/editorial/14579",
+      "text": "\\(\\displaystyle f  =\\sum_{i} a_i ! x^{a_i}\\)\nと\n\\(\\displaystyle g  = \\sum_{j} \\frac{1}{b_j !}x^{-b_j}\\)\nを畳み込むと\n\\(\\displaystyle f * g = \\sum_{i} \\sum_{j} \\frac{a_i!}{b_j!} x^{a_i - b_j}\\)\nとなります。\n指数部分に\n\\(a_i - b_j\\)\nが出現するため、答えは\n\\(\\displaystyle \\sum_{k \\ge 0} [x^k](f*g) \\times \\frac{1}{k!}\\)\nと簡単に記述できます。\n実装時は適当なoffsetをつけることで指数が正になるようにしてください。",
+      "codes": [],
+      "text_sha256": "8221c20a53f6dfc397cc977c921c43d6b9b19166bb7cc9e8028e3ca705ad1432",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc432/abc432_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc432/editorial/14581",
+      "text": "形式的べき級数で考えると、求めるべき値は\n\\[\n\\sum_{i=1}^{N} \\sum_{j=1}^M [x^{b_j}] (1 + x)^{a_i}\n\\]\nであり、特に\n\\(f(x) = \\sum_{i=1}^N (1 + x)^{a_i}\\)\nとおくと、\n\\[\n\\sum_{j=1}^M [x^{b_j}] f(x) \n\\]\nです。ここで、\n\\(g(x) = \\sum_{i=1}^{N} x^{a_i}\\)\nとすると、\n\\(f(x) = g(x+1)\\)\nであり、これは\nPolynomial Taylor Shift\nと言われる手法で\n\\(f(x)\\)\nの係数を得ることができます。\n（Polynomial Taylor Shiftについては、例えば\nABC215-Gの解説\nなどを参照してください。）\n\\(f(x)\\)\nの係数を求めて、各\n\\(b_j\\)\nに対応する係数の値の総和を取ることでこの問題を解くことができます。\n実装例(C++)\n（\nNyaan’s Library\nを使用しています。）",
+      "codes": [],
+      "text_sha256": "18e644bafd736facff6f9dc6b5efb41c4c93917dbb6f1ae47265195540503cdf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc432/abc432_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

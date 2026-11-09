@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc051_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc051/editorial.pdf",
+      "text": "A:  Haiku\n\n  文字列を入力して、文字列の6 文字目と14 文字目をスペースに置き換えて出力すれば良いです。置き換える方\n 法の例として、次の2 つが挙げられます。\n\n     • 文字列の6 文字目と14 文字目をスペースに変更してから、文字列を出力する。\n\n     • 文字列をループ処理で1 文字ずつ見ていき、その文字がカンマだったらスペース、そうでなければそのまま\n   文字を出力する。\n\n  C++のコード例(1 つ目の例)\n\n\n\n1 int main(void){\n\n2     string s;\n\n3     cin >> s;\n\n4     s[5]=’ ’,s[13]=’ ’;\n\n5     cout << s << endl;\n\n6     return 0;\n\n7 }",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "fd9632800a3dddcb2207889f69ab81e344a9b3f69c5e41213cda1a890ef07524"
+    }
+  ],
+  "status": "available"
+}

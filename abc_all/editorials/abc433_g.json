@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc433_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc433/editorial/14604",
+      "text": "この問題は Suffix Automaton というデータ構造を用いて解くことができます。 Suffix Automaton は文字列 \\(S\\) が与えられた時に \\(S\\) の suffix のみを受理するオートマトンのことです。 詳しくは以下の記事などを参照してください： Suffix Automaton (よすぽの日記) Suffix Automaton (cp-algorithms) \\(S\\) の Suffix Automaton を考えると、この問題のゲームは以下のように言い換えることができます。 はじめ \\(S\\) の Suffix Automaton の空文字列を表す頂点にコマがある。 Alice と Bob が交互に、現在コマが置かれている頂点から辺が伸びている頂点を選びそこにコマを移動させる。 先に行動できなくなった方が負けの時、どちらが勝つか求めよ。 この問題のこたえは簡単な後退解析で求めることができます。 Suffix Automaton の頂点数は高々 \\(2|S|-1\\) であり、さらに辺数も高々 \\(3|S|-4\\) です。したがって、この問題を \\(O(|S|)\\) 時間で解くことができます。 以上を適切に実装することでこの問題に正答することができます。 また、Suffix Automaton を用いないでも Suffix Array と LCP Array を用いることで解くこともできます。具体的には、 \\(S\\) の Suffix を辞書順に（仮想的に）並べたものを \\(S_1',S_2',\\ldots,S_N'\\) として、 \\(d[l][r][c]\\) を「問題のゲームで既に \\(c\\) 文字埋まっており、それらは全て \\(S_l',S_{l+1}',\\ldots,S_r'\\) の prefix であるという条件下で \\(S_l',S_{l+1}',\\ldots,S_r'\\) のみを考えてゲームした時の勝者」とした DP を行うことで \\(O(N \\sigma \\log N)\\) 時間（ \\(\\sigma = 26\\) ）で解くこともできます。",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "8f52f1b21687f3d38bd87f4d9bbbee8d336f2e3139c220c108d477495587f964"
+    }
+  ],
+  "status": "available"
+}

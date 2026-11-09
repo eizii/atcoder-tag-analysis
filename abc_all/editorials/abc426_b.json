@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc426_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc426/editorial/14141",
+      "text": "この問題にはいくつかの方針があります。\n方針1. 各文字の数を数える\n各文字が何回現れるかを数えた上で、\n\\(1\\)\n度しか登場しない文字がただひとつに定まるので、それを出力すればよいです。\n実装例 (C++):\n方針2. 問題の性質を利用する\n与えられた文字列について、文字を辞書順にソートすると、正解となる文字は先頭か末尾に来るはずです。\n更に言うと、ソート後の文字列\n\\(S'\\)\nについて、\n\\(S'\\)\nの\n\\(1\\)\n文字目と\n\\(2\\)\n文字目が異なるなら、正答は\n\\(S'\\)\nの\n\\(1\\)\n文字目\nそうでないなら、正答は\n\\(S'\\)\nの末尾の文字\nが成り立ちます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  map<char,int> mp;\n  for(auto &nx : s){ mp[nx]++; }\n  for(auto &nx : mp){\n    if(nx.second==1){\n      cout << nx.first << \"\\n\";\n    }\n  }\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  sort(s.begin(),s.end());\n  if(s[0]!=s[1]){cout << s[0] << \"\\n\";}\n  else{cout << s.back() << \"\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "96e48516e5c3f808dcabf6ff9a78c0d2e7e5f6178d72758ad108ee607c6eec3d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc426/abc426_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

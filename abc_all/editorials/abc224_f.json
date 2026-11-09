@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc224_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc224/editorial/2805",
+      "text": "\\(|S|=1\\)\nの場合、入力をそのまま出力すればよいです。\n以下はそうでない場合を議論します。\n今回の問題は、以下のように言い換えた方が見通しがよいです。\n全てのありうる集合\n\\(A\\)\nから一様ランダムにひとつ選んで\n\\(T\\)\nを作る際、\n\\(T\\)\nを計算して得られる値の期待値の\n\\(2^{|S|-1}\\)\n倍を求めよ。\nここで、「いくつかの式の値の総和」という足し合わせ方から、「\n\\(S\\)\nの各文字が最終的な答えにどのくらい影響するか」という考えに切り替えます。(このように、値を足し合わせる時の着目の仕方を切り替えるテクニックは、「主客転倒」とも呼ばれます。)\nでは、\n\\(S\\)\nの末尾から\n\\(k\\)\n文字目について検討します。\nそれが\n\\(1\\)\nの位になる確率は\n\\(\\frac{1}{2}\\)\nそれが\n\\(10\\)\nの位になる確率は\n\\(\\frac{1}{4}\\)\nそれが\n\\(100\\)\nの位になる確率は\n\\(\\frac{1}{8}\\)\n\\(\\dots\\)\nそれが\n\\(10^{k-2}\\)\nの位になる確率は\n\\(\\frac{1}{2^{k-1}}\\)\nそれが\n\\(10^{k-1}\\)\nの位になる確率は\n\\(\\frac{1}{2^{k-1}}\\)\n一番下の文章だけが例外となることに注意してください。\n\\(S\\)\nの右から\n\\(k\\)\n文字目を\n\\(x\\)\nとおくと、この文字が最終的な答えを\n\\(x \\times (1 \\times \\frac{1}{2}+10 \\times \\frac{1}{4} + 100 \\times \\frac{1}{8} + \\dots + 10^{k-2} \\times \\frac{1}{2^{k-1}} + 10^{k-1} \\times \\frac{1}{2^{k-1}})\\)\nだけ増やすことになります。\nこの値は、等比数列の和に例外の項を調節したものに\n\\(x\\)\nを掛けたものとなります。これは、等比数列の和の公式で計算することも、下の位から計算を行って累積和のように計算することもできます。\n計算量は\n\\(O(N)\\)\nとなり、この問題を解くのに十分高速です。\n実装例(C++)\nBonus! 出力が\n\\(0\\)\nとなるケースをひとつ構成してください。",
+      "codes": [
+        "#include<bits/stdc++.h>\n#define mod 998244353\n\nusing namespace std;\n\nlong long power(long long a,long long b){\n  long long x=1,y=a;\n  while(b>0){\n    if(b&1ll){\n      x=(x*y)%mod;\n    }\n    y=(y*y)%mod;\n    b>>=1;\n  }\n  return x%mod;\n}\n\nint main(){\n  string s;\n  cin >> s;\n  if(s.size()==1){cout << s << '\\n';return 0;}\n  long long res=0,del=1,cur=0;\n  for(int i=s.size()-1;i>=0;i--){\n    cur+=del;cur%=mod;\n    long long ce=(cur+del)%mod;\n    res+=(s[i]-'0')*ce;res%=mod;\n    del*=5;del%=mod;\n  }\n  res*=power(2,s.size()-2);res%=mod;\n  cout << res << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "fbbdee548058151562496ca1627a95f878ff4d3aa2736fe94b6d71fdb9fc3fc1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc224/abc224_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc224/editorial/2830",
+      "text": "（英語解説にも参照してください。\nhttps://atcoder.jp/contests/abc224/editorial/2829\n）\nまず、式\n\\(T\\)\nが与えられたとき\n\\(T\\)\nを評価するアルゴリズムを考えます。\n\\(T\\)\nの先頭から\n\\(i\\)\n個の数字とその間の「+」からなる式に対して、一番右にある項以外のすべての項の和を\n\\(s_i\\)\nとし、一番右にある項を\n\\(x_i\\)\nとします。はじめ、\n\\(s_1=0,x_1=d_1\\)\nとします。式\n\\(T\\)\nの値は、\n\\(s_N+x_N\\)\nです。\n\\((i+1)\\)\n番目の数字\n\\(d_{i+1}\\)\nをその式に追加するとき、二つのケースがあり得ます。\n\\(d_{i+1}\\)\nの前に「+」が\nある\n：\n\\(s_{i+1}=s_i+a_i, x_{i+1}=d_{i+1}\\)\n\\(d_{i+1}\\)\nの前に「+」が\nない\n：\n\\(s_{i+1}=s_i,x_{i+1}=10x_i+d_{i+1}\\)\nどちらも\n\\(s_i\\)\nと\n\\(x_i\\)\nに関する線形関数なので、行列とベクトルで表されます。\n\\(v_i=\\begin{bmatrix} s_i & x_i & 1\\end{bmatrix}^T\\)\nとすれば\n\\(d_{i+1}\\)\nの前に「+」が\nある\n：\n\\(v_{i+1}=A_{i+1}v_i\\)\n、ただし\n\\[\nA_{i+1}=\n\\begin{bmatrix}\n1 & 1 & 0 \\\\\n0 & 0 & d_{i+1} \\\\\n0 & 0 & 1\n\\end{bmatrix}\n\\]\n\\(d_{i+1}\\)\nの前に「+」が\nない\n：\n\\(v_{i+1}=B_{i+1}v_i\\)\n、ただし\n\\[\nB_{i+1}=\n\\begin{bmatrix}\n1 & 0 & 0 \\\\\n0 & 10 & d_{i+1} \\\\\n0 & 0 & 1\n\\end{bmatrix}\n\\]\nよって、\n\\(2^{N-1}\\)\n通りのすべての式に対する\n\\(s_N+x_N\\)\nの和は、こうして表せます。\n\\[\n\\begin{bmatrix}\n1 & 1 & 0\n\\end{bmatrix}\n(A_N+B_N)(A_{N-1}+B_{N-1})\\dots(A_2+B_2)\n\\begin{bmatrix}\n0 \\\\\nd_1 \\\\\n1\n\\end{bmatrix}\n\\]\nこれは行列演算の定義に従って\n\\(O(N)\\)\nで計算できます。\n実装例(C++):\nhttps://atcoder.jp/contests/abc224/submissions/26789924",
+      "codes": [],
+      "text_sha256": "38b3b77cbbd30265f29ed4ec0298f7f7555c71694b589d24642cfc6090dfc1ab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc224/abc224_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

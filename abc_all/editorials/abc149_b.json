@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc149_b",
+  "editorials": [
+    {
+      "text": "B: Greedy Takahashi\nK の値によって次のように3 通りに場合分けすることで解けます。\n• K ≤A のとき、高橋君は自分の持っているクッキーをK 枚食べます。\n• A < K ≤A + B のとき、高橋君は最初のA 回の行動で自分の持っているクッキーを全て食\nべ、残りのK −A 回の行動で青木君の持っているクッキーをK −A 枚食べます。\n• A + B < K のとき、高橋君は最初のA 回の行動で自分の持っているクッキーを全て食べ、次\nのB 回の行動で青木君の持っているクッキーを全て食べます。\nC++ による実装例は以下の通りです。\n1 #include <iostream>\n2 using namespace std;\n3\n4 int main(){\n5\nlong long a, b, k;\n6\ncin >> a >> b >> k;\n7\n8\nif(k <= a){\n9\ncout << a - k << '␣' << b <<endl;\n10\n}else if(k <= a+b){\n11\ncout << 0 << '␣' << b - (k-a) <<endl;\n12\n}else{\n13\ncout << 0 << '␣' << 0 <<endl;\n14\n}\n15 }\n",
+      "text_sha256": "8062b8fc2b88957cf5449b5a76da7978ffef028de2702065c3bc6bb4f30d5976",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc149/abc149_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

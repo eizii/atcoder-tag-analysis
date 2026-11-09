@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc387_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc387/editorial/11833",
+      "text": "この問題は、「縦移動と横移動を\n\\(1\\)\n回ずつ交互に行う」という条件（＊）さえなければ単なるグリッド上の最短経路問題であり幅優先探索 (BFS) で解くことができますが、この条件が厄介です。そこで、この条件を別の条件に言い換えてみましょう。\n上図のように、グリッドの各マスを市松模様に黒と白で塗ることを考えましょう。今、スタートマスが黒マスであり、最初（\n\\(1\\)\n回目）の移動が縦移動であると仮定します。すると、\n奇数回目の移動は縦移動、偶数回目の移動は横移動\n移動経路によらず、偶数回の移動を行った後は黒マス上におり、奇数回の移動を行った後は白マス上にいる\nことから、\n黒マスから白マスに移動する時は常に縦移動、白マスから黒マスに移動する時は常に横移動\nであることが言え、逆にこれを満たす経路は条件（＊）を満たします。最初の移動が横移動である場合はこの逆（黒マスから白マスへの移動は横移動、白マスから黒マスへの移動は縦移動）になります。スタートマスが白マスである場合も同様です。\nよって、本問題は以下のアルゴリズムで解くことができます。\n「黒マスから白マスへの移動は縦移動、白マスから黒マスへの移動は横移動」という条件の下でのスタートマスからゴールマスへの最短経路を求める。これは、グリッドの各マスを頂点集合、「各黒マスからその上下に隣接する白マスへの有向辺」と「各白マスからその左右に隣接する黒マスへの有向辺」を辺集合とした有向グラフ上での最短経路問題なので、BFS を用いればよい。\n同様に、「黒マスから白マスへの移動は横移動、白マスから黒マスへの移動は縦移動」という条件の下でのスタートマスからゴールマスへの最短経路を求める。\n1 と 2 の最小値を求めて出力する。\n計算量は\n\\(O(HW)\\)\nです。\nなお、本解説のような条件の言い換えを用いずとも、現在のマスと直前の移動方向のペアを状態と見て BFS することでも本問題を解くことができます（詳細略）。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nconst int inf = 1e9;\n\nint main() {\n    int h, w;\n    cin >> h >> w;\n    vector<string> s(h);\n    for (int i = 0; i < h; i++) cin >> s[i];\n    int si, sj, gi, gj;\n    for (int i = 0; i < h; i++) {\n        for (int j = 0; j < w; j++) {\n            if (s[i][j] == 'S') {\n                si = i, sj = j;\n            } else if (s[i][j] == 'G') {\n                gi = i, gj = j;\n            }\n        }\n    }\n    int ans = inf;\n    vector<vector<pair<int, int>>> moves(2);\n    moves[0] = {{0, 1},\n                {0, -1}};\n    moves[1] = {{1,  0},\n                {-1, 0}};\n    for (int p = 0; p < 2; p++) {\n        vector d(h, vector<int>(w, inf));\n        d[si][sj] = 0;\n        queue<pair<int, int>> q;\n        q.emplace(si, sj);\n        while (!q.empty()) {\n            auto [i, j] = q.front();\n            q.pop();\n            for (auto [di, dj]: moves[(i + j + p) & 1]) {\n                int ni = i + di, nj = j + dj;\n                if (ni < 0 or ni >= h or nj < 0 or nj >= w) continue;\n                if (s[ni][nj] == '#') continue;\n                if (d[ni][nj] == inf) {\n                    d[ni][nj] = d[i][j] + 1;\n                    q.emplace(ni, nj);\n                }\n            }\n        }\n        ans = min(ans, d[gi][gj]);\n    }\n    if (ans == inf) ans = -1;\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "7c949c969753140d5cb295ca1959d1313550f61b747d17354ffcc6a8cfa7a620",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc387/abc387_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

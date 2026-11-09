@@ -1,0 +1,80 @@
+{
+  "problem_id": "abc300_h",
+  "title": "Fibonacci: Revisited",
+  "contests": [
+    {
+      "contest_id": "abc300",
+      "problem_index": "Ex"
+    }
+  ],
+  "difficulty": 3209,
+  "raw_difficulty": 3209,
+  "contest_id": "abc300",
+  "problem_index": "Ex",
+  "url": "https://atcoder.jp/contests/abc300/tasks/abc300_h",
+  "statement": "配点 : 600 点 問題文 数列 a_0, a_1, a_2, \\dots の一般項 a_n を次のように定義します。 a_n = \\begin{cases} 1 & (0 \\leq n \\lt K) \\\\ \\displaystyle{\\sum_{i=1}^K} a_{n-i} & (K \\leq n) \\\\ \\end{cases} 整数 N が与えられます。 m\\text{ AND }N = m を満たす全ての非負整数 m に対する a_m の総和を 998244353 で割った余りを求めてください。( \\text{AND} はビット単位 AND) ビット単位 AND とは？ 整数 A,B のビット単位 AND、 A\\text{ AND }B は以下のように定義されます。 ・ A\\text{ AND }B を二進表記した際の 2^k (k \\geq 0) の位の数は、 A,B を二進表記した際の 2^k の位の数のうち両方が 1 であれば 1 、そうでなければ 0 である。 制約 1 \\leq K \\leq 5 \\times 10^4 0 \\leq N \\leq 10^{18} N, K は整数 入力 入力は以下の形式で標準入力から与えられる。 K N 出力 答えを出力せよ。 入力例 1 2 6 出力例 1 21 数列の各項を a_0 から順に並べると 1, 1, 2, 3, 5, 8, 13, 21, \\dots になります。 6 \\text{ AND } m = m であるような非負整数は 0, 2, 4, 6 の 4 個なので、答えは 1 + 2 + 5 + 13 = 21 になります。 入力例 2 2 8 出力例 2 35 入力例 3 1 123456789 出力例 3 65536 入力例 4 300 20230429 出力例 4 125461938 入力例 5 42923 999999999558876113 出力例 5 300300300",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 数列 a_0, a_1, a_2, \\dots の一般項 a_n を次のように定義します。 a_n = \\begin{cases} 1 & (0 \\leq n \\lt K) \\\\ \\displaystyle{\\sum_{i=1}^K} a_{n-i} & (K \\leq n) \\\\ \\end{cases} 整数 N が与えられます。 m\\text{ AND }N = m を満たす全ての非負整数 m に対する a_m の総和を 998244353 で割った余りを求めてください。( \\text{AND} はビット単位 AND) ビット単位 AND とは？ 整数 A,B のビット単位 AND、 A\\text{ AND }B は以下のように定義されます。 ・ A\\text{ AND }B を二進表記した際の 2^k (k \\geq 0) の位の数は、 A,B を二進表記した際の 2^k の位の数のうち両方が 1 であれば 1 、そうでなければ 0 である。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq K \\leq 5 \\times 10^4 0 \\leq N \\leq 10^{18} N, K は整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 K N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2 6"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 21 数列の各項を a_0 から順に並べると 1, 1, 2, 3, 5, 8, 13, 21, \\dots になります。 6 \\text{ AND } m = m であるような非負整数は 0, 2, 4, 6 の 4 個なので、答えは 1 + 2 + 5 + 13 = 21 になります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2 8"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 35"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1 123456789"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 65536"
+    },
+    {
+      "heading": "入力例 4",
+      "text": "入力例 4 300 20230429"
+    },
+    {
+      "heading": "出力例 4",
+      "text": "出力例 4 125461938"
+    },
+    {
+      "heading": "入力例 5",
+      "text": "入力例 5 42923 999999999558876113"
+    },
+    {
+      "heading": "出力例 5",
+      "text": "出力例 5 300300300"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc300/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:25.748525+00:00",
+  "statement_sha256": "1e584a2a0a0c511bfdf94be90bd0d5847177ed34cdf811a8d622108ecfcbee28",
+  "editorials": []
+}

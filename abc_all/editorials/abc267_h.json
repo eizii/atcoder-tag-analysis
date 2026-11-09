@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc267_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc267/editorial/4736",
+      "text": "「 \\(\\mathrm{dp}_X[i][j]:=\\) ある数列 \\(X\\) から総和を \\(i\\) かつ個数を \\(\\bmod\\ 2\\) で \\(j\\) 個選ぶ方法の個数」と定義される動的計画法を考えます。この \\(\\mathrm{dp}\\) を \\(X=(A_1),(A_1,A_2),(A_1,A_2,A_3),\\dots\\) に対して全て求めていくと計算量が \\(\\mathrm{O}(NM)\\) となり実行制限時間に間に合いません。 \\(\\mathrm{dp'}_X[i]=\\sum_{j=0}^{\\infty} \\mathrm{dp}_X[j][i] x^j\\) とします。つまり、 \\(\\mathrm{dp'}_X[i]\\) は選んだ要素の総和を \\(x\\) の指数に乗せた多項式です。 ここで、 \\(2\\) 個の数列 \\(X,Y\\) に対する \\(\\mathrm{dp'}_X,\\mathrm{dp'}_Y\\) が求まっているとします。このとき \\(X,Y\\) を連結した数列 \\(Z\\) に対して \\(\\mathrm{dp'}_Z\\) を求めることを考えます。これは、以下のように遷移を行うことができます。 \\(\\begin{cases}\n\\mathrm{dp'}_Z[0]=\\mathrm{dp'}_X[0] \\times \\mathrm{dp'}_Y[0] + \\mathrm{dp'}_X[1] \\times \\mathrm{dp'}_Y[1] \\\\\n\\mathrm{dp'}_Z[1]=\\mathrm{dp'}_X[1] \\times \\mathrm{dp'}_Y[0] + \\mathrm{dp'}_X[0] \\times \\mathrm{dp'}_Y[1]\n\\end{cases}\\) ここで、 \\(\\times\\) は多項式としての乗算を表します。この乗算に畳み込みを使うことにより、遷移を高速に行うことができます。 元の問題に戻ります。始め、 \\(\\mathrm{dp'}_{(A_1)},\\mathrm{dp'}_{(A_2)},\\dots,\\mathrm{dp'}_{(A_N)}\\) が求まっています。これらの列を \\(f=\\) とします。以下のようにこれらをマージします。 $f$ の長さが $2$ 以上である限り、以下を繰り返す。 $f$ の先頭から $2$ 個 $\\mathrm{dp'}$ を選ぶ。 選んだ $2$ 個を上記の方法を使いマージする。マージした結果の $\\mathrm{dp'}$ を $f$ の末尾に加える。 計算量解析を行います。初期の \\(\\mathrm{dp'}_{(A_i)}\\) は、全て自分が属する \\(\\mathrm{dp'}\\) が選ばれる回数が高々 \\(\\mathrm{O}(\\log N)\\) 回であるため、 \\(\\mathrm{O}(M \\log M \\log N)\\) となります。 よって、この問題を \\(\\mathrm{O}(M \\log M \\log N)\\) で解くことができます。これは十分高速です。",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "a59bf62bc301132b1caed710938e8732ad613971735fdb0fb40ebf546d21b956"
+    }
+  ],
+  "status": "available"
+}

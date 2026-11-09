@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc315_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc315/editorial/6987",
+      "text": "問題文の指示の通りに\n\\(S\\)\nから\na\n,\ne\n,\ni\n,\no\n,\nu\nを取り除く、あるいは空文字列に\n\\(S\\)\nの\na\n,\ne\n,\ni\n,\no\n,\nu\n以外の文字を順序を保って追加していくことで答えを得ることができます。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tstring ans = \"\";\n\tfor (char c : s) if (c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u') ans += c;\n\tcout << ans << endl;\n}",
+        "import re\nprint(re.sub('a|e|i|o|u', '', input()))"
+      ],
+      "text_sha256": "b8fe6264b3565f4aedaeb619f4d7f9714e9dc99781a81352016b4039a301bd75",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc315/abc315_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

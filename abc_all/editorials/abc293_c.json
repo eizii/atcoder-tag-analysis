@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc293_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc293/editorial/5948",
+      "text": "高橋君の移動経路を\n\\(1\\)\nつ固定したとき、その経路上の整数がすべて異なるかどうかの判定は、実際にその移動経路をたどることで確認することができます。\nその際、例えば平衡二分木などを用いると、新たにたどった整数が今までたどった整数のどれかと一致するかを十分高速に判定できます。\n高橋君の移動経路としてあり得るものすべてについて、上記の判定を行えば、本問題を解くことができます。\nそこで、あり得る移動経路を全列挙することを考えます。\nあり得る移動経路は、右への移動をちょうど\n\\(W-1\\)\n回と下への移動をちょうど\n\\(H-1\\)\n回含む移動の列です。\nそのような列は再帰関数などを用いて列挙できます。\n再帰を用いる：  「\n\\((i, j)\\)\nから\n\\((H, W)\\)\nへの経路」は、\n\\((i, j)\\)\nから右に移動した後「\n\\((i, j+1)\\)\nから\n\\((H, W)\\)\nへの経路」を辿るものと、\n\\((i, j)\\)\nから下に移動した後「\n\\((i+1, j)\\)\nから\n\\((H, W)\\)\nへの経路」を辿るものからなります。\nあるいは、右への移動を\n\\(0\\)\n、下への移動を\n\\(1\\)\nで表すと、\nあり得る移動経路は、ちょうど\n\\(W-1\\)\n個の\n\\(0\\)\nとちょうど\n\\(H-1\\)\n個の\n\\(1\\)\nを含む、長さ\n\\(H+W-2\\)\nの文字列と\n\\(1\\)\n対\n\\(1\\)\nに対応するので、\n下記の方法などによってそのような列を列挙しても良いです。\nbit 全探索を用いる：\n\\(0\\)\nから\n\\(2^{H+W-2}-1\\)\nまでの整数、すなわち、\n\\(H+W-2\\)\n桁の\n\\(2\\)\n進数表示で\n\\(000\\ldots 0\\)\nから\n\\(111\\ldots 1\\)\nまでの整数を for ループなどで列挙し、そのうち\n\\(2\\)\n進数表示で\n\\(1\\)\nである桁の個数がちょうど\n\\(H-1\\)\n個のものだけを取り出す。\nC++ 言語の next_permutation 関数などを用いる\n以下に、C++ 言語による本問題の正解例を記載します。（ next_permutation を用いる例）",
+      "codes": [
+        "#include <iostream>\n#include <set>\n#include <algorithm>\nusing namespace std;\n\nint main(void)\n{\n  int h, w;\n  int a[11][11];\n  \n  cin >> h >> w;\n  for(int y = 1; y <= h; y++) for(int x = 1; x <= w; x++) cin >> a[x][y];\n  \n  int p[20], l = h+w-2, ans = 0;\n  for(int i = 1; i <= l; i++){\n    if(i > w-1) p[i] = 1;\n    else p[i] = 0;\n  }\n  \n  do{\n    int x = 1, y = 1;\n    set<int> S; S.insert(a[1][1]);\n    for(int i = 1; i <= l; i++){\n      if(p[i]) y++;\n      else x++;\n      S.insert(a[x][y]);\n    }\n    if(S.size() == l+1) ans++;\n  }while(next_permutation(p+1, p+l+1));\n  \n  cout << ans << endl;\n  return 0;\n}"
+      ],
+      "text_sha256": "feb1dbb8872e67155bc3cfbb92576da07f953b220d5860d356a41e07fef005a2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc293/abc293_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

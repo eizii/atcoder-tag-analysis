@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc442_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc442/editorial/15141",
+      "text": "研究者\n\\(i\\)\nと利害関係にない研究者の人数を\n\\(C_i\\)\nとおきます。\n研究者\n\\(i\\)\nについての求めるべき答えはこの\n\\(C_i\\)\n人の部分集合であって大きさが\n\\(3\\)\nのものの個数であるため、これは二項係数\n\\(\\binom{C_i}{3}\\)\nです。\n\\(\\binom{C_i}{3} = \\frac{1}{6} C_i(C_i - 1)(C_i - 2)\\)\nであるため、この二項係数の値は\n\\(C_i\\)\nの値から\n\\(O(1)\\)\n時間で計算できます。\n\\(C_i\\)\nの値を求めるには、研究者\n\\(i\\)\n以外の研究者全体の人数である\n\\(N - 1\\)\nから研究者\n\\(i\\)\nと利害関係のある研究者の人数を引けばよく、全体として\n\\(O(N + M)\\)\n時間で処理できます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#define rep(i, n) for (int i = 0; i < (n); i++)\nusing ll = long long;\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tvector<ll> c(n, n - 1);\n\trep(i, m) {\n\t\tint a, b;\n\t\tcin >> a >> b;\n\t\tc[a - 1]--; c[b - 1]--;\n\t}\n\trep(i, n) {\n\t\tll ans = c[i] * (c[i] - 1) * (c[i] - 2) / 6;\n\t\tcout << ans << \" \\n\"[i == n - 1];\n\t}\n}"
+      ],
+      "text_sha256": "4820a8bcc215859a0dc4c6417ab023e087528c6b2390813c7ee986c5683b6e5a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc442/abc442_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

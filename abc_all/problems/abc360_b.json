@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc360_b",
+  "title": "Vertical Reading",
+  "contests": [
+    {
+      "contest_id": "abc360",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 78,
+  "raw_difficulty": -255,
+  "contest_id": "abc360",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc360/tasks/abc360_b",
+  "statement": "配点 : 200 点 問題文 英小文字からなる文字列 S と T が与えられます。 以下の条件を満たす 1 \\leq c \\leq w < |S| となる整数の組 c と w が存在するか判定してください。ただし、 |S| は文字列 S の長さを表します。ここで、 w は |S| 未満 である必要があることに注意してください。 S を先頭から順に w 文字毎に区切ったとき、長さが c 以上の文字列の c 文字目を順番に連結した文字列が T と一致する 制約 S と T は英小文字からなる文字列 1 \\leq |T| \\leq |S| \\leq 100 入力 入力は以下の形式で標準入力から与えられる。 S T 出力 条件を満たすような 1 \\leq c \\leq w < |S| となる整数の組 c と w が存在する場合は Yes を、存在しない場合は No を出力せよ。 入力例 1 atcoder toe 出力例 1 Yes S を 2 文字毎に区切ると以下のようになります。 at\nco\nde\nr 区切った後、 2 文字以上の文字列の 2 文字目を取り出し連結させたときの文字列は、 toe となり T と一致します。よって、 Yes を出力します。 入力例 2 beginner r 出力例 2 No w=|S| であることはないため、条件を満たすような 1 \\leq c \\leq w < |S| となる整数の組 c と w は存在しません。よって、 No を出力します。 入力例 3 verticalreading agh 出力例 3 No",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英小文字からなる文字列 S と T が与えられます。 以下の条件を満たす 1 \\leq c \\leq w < |S| となる整数の組 c と w が存在するか判定してください。ただし、 |S| は文字列 S の長さを表します。ここで、 w は |S| 未満 である必要があることに注意してください。 S を先頭から順に w 文字毎に区切ったとき、長さが c 以上の文字列の c 文字目を順番に連結した文字列が T と一致する"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 S と T は英小文字からなる文字列 1 \\leq |T| \\leq |S| \\leq 100"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S T"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 条件を満たすような 1 \\leq c \\leq w < |S| となる整数の組 c と w が存在する場合は Yes を、存在しない場合は No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 atcoder toe"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes S を 2 文字毎に区切ると以下のようになります。 at\nco\nde\nr 区切った後、 2 文字以上の文字列の 2 文字目を取り出し連結させたときの文字列は、 toe となり T と一致します。よって、 Yes を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 beginner r"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No w=|S| であることはないため、条件を満たすような 1 \\leq c \\leq w < |S| となる整数の組 c と w は存在しません。よって、 No を出力します。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 verticalreading agh"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 No"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc360/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:39.709500+00:00",
+  "statement_sha256": "0dbc96f134d63d983b4479a3a5583620cfc5ac1393ecc26b6369b1c0a1672cad",
+  "editorials": []
+}

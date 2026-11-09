@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc391_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc391/editorial/12101",
+      "text": "この問題は，\n\\(4\\)\n重の for ループによる全探索によって解くことができます．\nまず，\n\\(a,b\\)\nを\n\\(1,\\dots,N-M+1\\)\nの範囲で全探索します．\n\\(a,b\\)\nを固定したときに，それが条件を満たすかどうかをさらに\n\\(2\\)\n重の for ループにより判定します．\n具体的には，\n\\(i,j\\)\nを\n\\(1,\\dots,M\\)\nの範囲で全探索し，\n\\(S_{a+i-1,b+j-1} \\neq T_{i,j}\\)\nとなる\n\\(i,j\\)\nが\n\\(1\\)\nつでも存在するかどうか判定します．そのような\n\\(i,j\\)\nが存在しなければ，その時点で見ている\n\\(a,b\\)\nが答えです．\n実装例 (Python)\n実装例 (C++)",
+      "codes": [
+        "N, M = map(int, input().split())\nS = [input() for _ in range(N)]\nT = [input() for _ in range(M)]\nfor a in range(N - M + 1):\n    for b in range(N - M + 1):\n        ok = True\n        for i in range(M):\n            for j in range(M):\n                if S[a + i][b + j] != T[i][j]:\n                    ok = False\n        if ok:\n            print(a + 1, b + 1)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int N, M;\n    cin >> N >> M;\n    vector<string> S(N), T(M);\n    for (auto& x : S) cin >> x;\n    for (auto& x : T) cin >> x;\n\n    for (int a = 0; a <= N - M; ++a) {\n        for (int b = 0; b <= N - M; ++b) {\n            bool ok = true;\n            for (int i = 0; i < M; ++i) {\n                for (int j = 0; j < M; ++j) {\n                    if (S[a + i][b + j] != T[i][j]) {\n                        ok = false;\n                    }\n                }\n            }\n            if (ok) {\n                cout << a + 1 << \" \" << b + 1 << endl;\n            }\n        }\n    }\n}"
+      ],
+      "text_sha256": "36b6cb3dd75c5a6b6d5749155d5da512334d89acef2a121ce23d700219f107f6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc391/abc391_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

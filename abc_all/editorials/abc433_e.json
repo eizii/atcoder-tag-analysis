@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc433_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc433/editorial/14636",
+      "text": "\\(X\\)\nに同じ要素が\n\\(2\\)\nつ以上含まれる場合の答えは\nNo\nです（\n\\(Y\\)\nも同様です）。以降はこれ以外の場合を考えます。\n\\(A\\)\nに\n\\(N\\times M\\)\nから\n\\(1\\)\nまで大きい順に要素を埋めていくことを考えます。\n\\(v\\)\nより大きい要素を全て埋めたとして、\n\\(v\\)\nを埋める場合のルールは次の通りです。\n\\(v\\)\nが\n\\(X\\)\nにも\n\\(Y\\)\nにも含まれるとき：\n\\(X_i=Y_j=v\\)\nとして、\n\\(A_{i,j}\\)\nに\n\\(v\\)\nを埋める。\n\\(v\\)\nが\n\\(X\\)\nのみに含まれるとき：\n\\(X_i=v\\)\nとして、\n\\(Y_j>v\\)\nかつ\n\\(A_{i,j}\\)\nがまだ埋まっていないような\n\\(A_{i,j}\\)\nに\n\\(v\\)\nを埋める。\n\\(v\\)\nが\n\\(Y\\)\nのみに含まれるとき：\n\\(Y_j=v\\)\nとして、\n\\(X_i>v\\)\nかつ\n\\(A_{i,j}\\)\nがまだ埋まっていないような\n\\(A_{i,j}\\)\nに\n\\(v\\)\nを埋める。\n\\(v\\)\nが\n\\(X,Y\\)\nどちらにも含まれないとき：\n\\(X_i>v\\)\nかつ\n\\(Y_j>v\\)\nかつ\n\\(A_{i,j}\\)\nがまだ埋まっていないような\n\\(A_{i,j}\\)\nに\n\\(v\\)\nを埋める。\n\\(v\\)\nを大きい順に埋めていくことから、埋められる数字の候補は単調増加するため上記のルールを満たす箇所であれば好きに埋めていけば良いです。\n以上の発想を実装に落とし込めば良いですが、上のルールをそのまま実装すると計算量が悪く TLE となります。実装する上では、\n\\(A_{i,j}\\)\nは\n\\(v < \\min(X_i,Y_j)\\)\nとなれば自由に埋めて良いと考え\n\\(v=\\min(X_i,Y_j)\\)\nを満たす\n\\((i,j)\\)\nをリストで管理するなどすれば良いです。詳しくは実装例を参考にしてください。\n実装例(Python3)",
+      "codes": [
+        "import sys\nfrom collections import deque\n\ninput = sys.stdin.readline\n\ndef solve():\n    n, m = map(int, input().split())\n    nm = n * m\n    x = [v - 1 for v in map(int, input().split())]\n    y = [v - 1 for v in map(int, input().split())]\n\n    gx = [-1] * nm\n    gy = [-1] * nm\n    for i in range(n):\n        if gx[x[i]] != -1:\n            print(\"No\")\n            return\n        gx[x[i]] = i\n    for j in range(m):\n        if gy[y[j]] != -1:\n            print(\"No\")\n            return\n        gy[y[j]] = j\n\n    ok = [[] for _ in range(nm)]\n    for i in range(n):\n        for j in range(m):\n            ok[min(x[i], y[j])].append((i, j))\n\n    ans = [[-1] * m for _ in range(n)]\n    q = deque()\n\n    for v in range(nm - 1, -1, -1):\n        if gx[v] == -1 and gy[v] == -1:\n            if not q:\n                print(\"No\")\n                return\n            i, j = q.popleft()\n            ans[i][j] = v + 1\n            for ii, jj in ok[v]:\n                q.append((ii, jj))\n            continue\n\n        if gx[v] == -1 or gy[v] == -1:\n            if not ok[v]:\n                print(\"No\")\n                return\n            i, j = ok[v].pop()\n            ans[i][j] = v + 1\n            for ii, jj in ok[v]:\n                q.append((ii, jj))\n            continue\n\n        i, j = gx[v], gy[v]\n        ans[i][j] = v + 1\n        for ii, jj in ok[v]:\n            if i != ii or j != jj:\n                q.append((ii, jj))\n\n    print(\"Yes\")\n    for r in ans:\n        print(*r)\n\nfor _ in range(int(input())):\n    solve()"
+      ],
+      "text_sha256": "ea55749e33337294da683289825f0b2fa4e37f015358e341228762df62f26612",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc433/abc433_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

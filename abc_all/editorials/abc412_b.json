@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc412_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc412/editorial/13389",
+      "text": "\\(2 \\leq i \\leq |S|\\)\nなる各整数\n\\(i\\)\nについて\n\\(S_i\\)\nが英大文字であるか判定し、英大文字である場合は\n\\(S_{i - 1}\\)\nが\n\\(T\\)\nに含まれるか判定すればよいです。\n\\(T\\)\nに含まれているかの判定においてはループを用いてもよいですが、多くの言語では適切な関数を用いることにより明示的にループを書かずに判定することができます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tstring s, t;\n\tcin >> s >> t;\n\tbool res = true;\n\tint n = ssize(s);\n\tfor (int i = 1; i < n; i++) {\n\t\tif (isupper(s[i])) {\n\t\t\tif (t.find(s[i - 1]) == string::npos) res = false;\n\t\t}\n\t}\n\tcout << (res ? \"Yes\" : \"No\") << '\\n';\n}"
+      ],
+      "text_sha256": "a2f7dfec180518d55ff63711efb610a3d9b332076716b28498a3866ba749dec8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc412/abc412_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

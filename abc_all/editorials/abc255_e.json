@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc255_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc255/editorial/4098",
+      "text": "良い数列\n\\(A\\)\nの要素のうちいずれか\n\\(1\\)\nつの値を決めると、\n\\(A\\)\nの全体が一意に決まります。\n例えば、\n\\(A_1\\)\nを\n\\(Z\\)\nに決めると、\n条件\n\\(A_1 + A_2 = S_1\\)\nより、\n\\(A_ 2 = S_1 - Z\\)\n条件\n\\(A_2 + A_3 = S_2\\)\nより、\n\\(A_ 3 = S_2 - A_2 = S_2 - S_1 + Z\\)\n条件\n\\(A_3 + A_4 = S_3\\)\nより、\n\\(A_ 4 = S_3 - A_3 = S_3 - S_2 + S_1 - Z\\)\n\\(\\cdots\\)\nと\n\\(A_2, A_3, \\ldots, A_N\\)\nの値が順次、一意に決まります。\nすなわち、\n\\(A_1\\)\nを\n\\(Z\\)\nとおくとき、\n\\(i = 1, 2, \\ldots, N\\)\nについて\n\\(A_i\\)\nは\n\\[\nA_i = (-1)^{i+1} Z + B_i\n\\]\nと表せます。\nここで、数列\n\\(B = (B_1, B_2, \\ldots, B_N)\\)\nは\n\\[\nB_i = \\begin{cases}\nS_{i-1} - B_{i-1}  & \\text{if}\\,\\,\\, i  \\geq 2\\\\ \n0 & \\text{if}\\,\\,\\, i  = 1\n\\end{cases}\n\\]\nで定まる数列です。\nよって、本問題は「\n\\(Z\\)\nをうまく選ぶことで\n\\(A\\)\nの要素のうちラッキーナンバーであるものの個数をどれだけ多くできるか」という問題に言い換えられます。\n\\(i = 1, 2, \\ldots, N\\)\nと\n\\(j = 1, 2, \\ldots, M\\)\nの組\n\\((i, j)\\)\nについて、\n\\(A_i\\)\nがラッキーナンバー\n\\(X_j\\)\nと一致することは\n\\[\nA_i = (-1)^{i+1} Z+ B_i = X_j\n\\]\nすなわち、\n\\[\nZ = (-1)^{i+1} (X_j - B_i) \\tag{1}\n\\]\nと同値です。\nよって、すべての\n\\(i = 1, 2, \\ldots, N\\)\nと\n\\(j = 1, 2, \\ldots, M\\)\nの組\n\\((i, j)\\)\nについて、(1) の右辺の値\n\\[C_{i, j} := (-1)^{i+1} (X_j - B_i)\\]\nを計算し、得られる\n\\(NM\\)\n個の値を\n\\[C_{1, 1}, C_{1, 2}, \\ldots, C_{N, M} \\tag{2}\\]\nと並べるとき、(2) の中に最も多く登場する値\n\\(C^{\\ast}\\)\nを\n\\(Z\\)\nとすれば、数列\n\\(A\\)\nの要素のうちラッキーナンバーであるものの個数が最大となります。\nしたがって、(2) における\n\\(C^{\\ast}\\)\nの出現回数が本問題の答えとなります。\nこの出現回数を求めることは、連想配列を用いて\n\\(\\mathrm{O}(NM\\log NM)\\)\n時間で可能です。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <map>\nusing namespace std;\ntypedef long long ll;\n\nll n, m;\nll s[200005], x[15];\nll b[200005];\n\nint main(void)\n{\n  cin >> n >> m;\n  for(int i = 1; i <= n-1; i++) cin >> s[i];\n  for(int i = 1; i <= m; i++) cin >> x[i];\n  \n  for(int i = 2; i <= n; i++) b[i] = s[i-1] - b[i-1];\n  \n  map<ll, ll> mp;\n  for(int i = 1; i <= n; i++){\n    for(int j = 1; j <= m; j++){\n      ll c = x[j] - b[i];\n      if(i % 2 == 0) c *= -1;\n      mp[c]++;\n    }\n  }\n  \n  ll ans = 0;\n  for(auto p : mp) ans = max(ans, p.second);\n  cout << ans << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "722973e6c6131e73815c3edeacbeaa249d31953981e2755972957b63bb9d9a46",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc255/abc255_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

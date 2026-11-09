@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc248_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc248/editorial/3745",
+      "text": "数列を全通り試そうとすると、\n\\(M^N\\)\n種類の数列が考えられるため、実行時間制限には到底間に合いません。\n数列を先頭から決めていくこととします。\nここで、以下の事実に着目します。\n数列を先頭から決めていく際、覚えておくべき必要があるものはその時点での数列の総和のみであり、具体的に各要素の値が何であったかは捨象してよい。\nこのことを用いると、動的計画法で解くことができます。\nDP の定義\n\\(\\mathrm{dp}[i][j]:=\\)\n数列の先頭から\n\\(i\\)\n項まで決めた際に、総和が\n\\(j\\)\nであるような数列の決め方の総数\n\\(i\\)\nとしては\n\\(0\\)\n以上\n\\(N\\)\n以下、\n\\(j\\)\nとしては\n\\(1\\)\n以上\n\\(K\\)\n以下を考えれば良いので、状態数は\n\\(\\mathrm{Ο}(NK)\\)\nです。\nDP の初期値\nはじめ、\n\\(\\mathrm{dp}[0][0] = 1\\)\nで、残りは\n\\(0\\)\nで埋めます。\nDP の遷移\n\\(i\\)\nの昇順に計算していきます。\n\\(j = 0, \\ldots, K-1\\)\n、\n\\(k = 1,\\ldots,M\\)\nについて\nもし\n\\(j + k \\leq K\\)\nならば、\n\\(\\mathrm{dp}[i+1][j + k]\\)\nに\n\\(\\mathrm{dp}[i][j]\\)\nを加算する。\nと遷移すればよいです。\n答え\n最終的に、\n\\(\\mathrm{dp}[N][1] + \\mathrm{dp}[N][2] +  \\ldots + \\mathrm{dp}[N][K]\\)\nが答えとなります。\n計算量は\n\\(\\mathrm{Ο}(NMK)\\)\nです。\n実装例 (C++):\nBonus 1\n\\(\\mathrm{Ο}(NK)\\)\nで解いてみましょう。（中級者向け）\nBonus 2\n\\(\\mathrm{Ο}(K)\\)\nで解いてみましょう。（上級者向け）",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\n\nusing namespace std;\nusing mint = atcoder::modint998244353;\n\nint main() {\n\tint n, m, K;\n\tcin >> n >> m >> K;\n\n\tvector dp(n + 1, vector(K + 1, mint(0)));\n\tdp[0][0] = 1;\n\n\tfor(int i = 0; i < n; i++) {\n\t\tfor(int j = 0; j < K; j++) {\n\t\t\tfor(int k = 1; k <= m; k++) {\n\t\t\t\tif(j + k <= K) dp[i + 1][j + k] += dp[i][j];\n\t\t\t}\n\t\t}\n\t}\n\n\tmint res = 0;\n\tfor(int i = 1; i <= K; i++) {\n\t\tres += dp.back()[i];\n\t}\n\n\tcout << res.val() << endl;\n}"
+      ],
+      "text_sha256": "f11e267c32b66b76b1d2eb554c9904aee2e85bbc6cdcc1658401a7ace7aa47c8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc248/abc248_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc248/editorial/3818",
+      "text": "\\(O(K)\\)\nで解く解法です。包除原理を用います。\nまず、以下の問題について考えます。\n\\(1\\)\nから\n\\(N\\)\nの整数で構成される集合\n\\(S\\)\nが与えられます。\n長さ\n\\(N\\)\nの整数からなる整数列\n\\(A\\)\nであって、以下の条件を満たすもの個数を答えよ。\n\\(1\\leq i \\leq N\\)\nについて、\n\\(i\\in S\\)\nならば\n\\(M+1\\leq A_{i}\\)\n、そうでないならば\n\\(1\\leq A_{i}\\)\n\\(\\sum_{i=1}^{N}A_i \\leq K\\)\n\\(|S|=L\\)\nのとき、\n\\(|S|\\)\nとして\n\\(\\dbinom{N}{L}\\)\n通り考えられますが、その全てにおいて答えが一致します。\nその答えは、\n\\((K-ML+1)\\)\n個のボールの間に\n\\(N\\)\n個の仕切りを仕切りどうしが隣り合わないように置く場合の数と同値で、\n\\(\\dbinom{K-ML}{N}\\)\nとなります。\n（同値になる理由としては、この仕切られた区間について、右から\n\\(i\\)\n番目の区間にあるボールの数を\n\\(B_i\\)\n個として、\n\\(i\\in S\\)\nなら\n\\(A_i=M+B_i\\)\n、そうでないなら\n\\(A_i=B_i\\)\nとすることで一対一対応を取ることができるからである。)\n以上の考察と包除原理より、答えは\n\\(\\sum_{L=0}^{N}\\dbinom{K-ML}{N}\\dbinom{N}{L}(-1)^L\\)\nとなります。\n事前に\n\\(O(K)\\)\nの計算をすることで二項係数は\n\\(O(1)\\)\nで求まるため、全体の計算量は\n\\(O(K)\\)\nです。",
+      "codes": [],
+      "text_sha256": "384a7717358f1f96ec9725bbf1a0cb3d49adfef6fac4363b1084bc43664313d1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc248/abc248_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

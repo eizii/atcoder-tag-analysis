@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc234_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc234/editorial/3226",
+      "text": "この問題は、平面上に \\(N\\) 点がプロットされており、その中で 距離が \\(K\\) 以下の点の組を列挙する問題であると言い換えられるので、解説では整数組 \\((x_i,y_i)\\) のことを点と呼びます。 結論から言うと、以下の解法でこの問題に正解できます。 全ての点について、 \\((x_i,y_i)\\) を「バケット \\((\\lfloor \\frac{x_i}{K} \\rfloor , \\lfloor \\frac{y_i}{K} \\rfloor)\\) 」に割り当てる。 全ての点について、その点がバケット \\((X,Y)\\) に割り当てられていれば、点の組の相手として考えられる点はそのバケット自身か隣接するバケット \\((X+l,Y+m)\\) ( \\(l,m\\) は \\(-1\\) 以上 \\(1\\) 以下の整数)  にしか含まれないので、これら \\(9\\) 個のバケット内で点の組の相手を全探索する。 この解法の(データ構造を利用することによって付きうる \\(\\log\\) などを除いた部分の)計算量は、出力するべき点の組の数を \\(M\\) とすると \\(O(N+M)\\) です。どのように見積もれば良いでしょうか? バケット \\((X,Y)\\) 内の点の個数を \\(B_{X,Y}\\) とし、 \\(f(x)\\) を 「バケット内に \\(x\\) 点存在している時、同一バケット内で距離 \\(K\\) 以下の点の組が少なくともいくつあるか」で定義します。 まず、 \\(f(x)\\) が \\(\\Theta(x^2)\\) であることを示します。 \\(f(x)\\) が \\(O(x^2)\\) であることは \\(x\\) 点のうち \\(2\\) 点を選んでペアにすることを考えていることから明らかです。 \\(\\Omega(x^2)\\) であること(すなわち、 \\(x^2\\) (の定数倍)によって下から抑えられる)の証明は以下です。 「一辺が \\(\\frac{K}{\\sqrt{2}}\\) 以下であるような部分正方形」では、その内部に含まれる任意の \\(2\\) 点について距離が \\(K\\) 以下です。また、一辺が \\(K\\) の正方形は、一辺が \\(\\frac{K}{\\sqrt{2}}\\) の正方形 \\(4\\) つで覆うことができるので、覆います。ここで、一辺が \\(K\\) の正方形の中に \\(4n\\) 点プロットした場合、少なくとも \\(1\\) つの一辺が \\(\\frac{K}{\\sqrt{2}}\\) の正方形の内部に \\(n\\) 個以上の点が含まれます。そして、その内部だけでも \\(\\frac{n(n-1)}{2}\\) 個の距離 \\(K\\) 以下の点の組が含まれるので、 \\(f(x)\\) は \\(\\Omega(x^2)\\) です。 \\(\\sum_{X,Y} f(B_{X,Y}) \\le M\\) であるので、 \\(\\sum_{X,Y} B_{X,Y}^2\\) は \\(N+M\\) の定数倍で上から抑えられます。 次に、この解法で探索することになる点の組の数は \\(\\sum_{X,Y} \\sum_{l=-1}^{1} \\sum_{m=-1}^{1} B_{X,Y}B_{X+l,Y+m}\\) です。ここで、 \\(\\sum_{X,Y} B_{X,Y}^2\\) が \\(N+M\\) の定数倍で抑えられていることと、相加相乗平均から導かれる \\(B_{X,Y}B_{X+l,Y+m} \\le \\frac{1}{2}(B_{X,Y}^2+B_{X+l,Y+m}^2)\\) より、こちらも \\(N+M\\) の定数倍で抑えられます。 以上より、この解法の計算量は \\(O(N+M)\\) であることが示されました。 実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#define big 2000000000\n\nusing namespace std;\nusing pi=pair<int,int>;\nusing pl=pair<long long,long long>;\n\nvector<long long> dlt={-big-1,-big,-big+1,-1,0,1,big-1,big,big+1};\n\nint main(){\n  int n;\n  long long k;\n  cin >> n >> k;\n  vector<pl> pts(n);\n  map<long long,vector<int>> mp;\n  for(int i=0;i<n;i++){\n    cin >> pts[i].first >> pts[i].second;\n    long long bkid=(pts[i].first/k)*big+(pts[i].second/k);\n    mp[bkid].push_back(i);\n  }\n  vector<pi> res;\n  for(int i=0;i<n;i++){\n    long long bkid=(pts[i].first/k)*big+(pts[i].second/k);\n    for(auto &d : dlt){\n      long long cur=bkid+d;\n      for(auto &nx : mp[cur]){\n        if(i>=nx){continue;}\n        long long dist=(pts[i].first-pts[nx].first)*(pts[i].first-pts[nx].first);\n        dist+=(pts[i].second-pts[nx].second)*(pts[i].second-pts[nx].second);\n        if(dist<=k*k){res.push_back({i+1,nx+1});}\n      }\n    }\n  }\n  sort(res.begin(),res.end());\n  cout << res.size() << '\\n';\n  for(auto &nx : res){cout << nx.first << ' ' << nx.second << '\\n';}\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "b2c21d729791997b0abc00291916e8e34588a985c9813818e30410569687ba28"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc180_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc180/editorial/154",
+      "text": "都市間の移動のコストについて三角不等式が成り立つので、ある都市から次の都市に移動するとき、別の都市を経由する必要はありません。よって各都市をちょうど1度ずつ訪問する場合についてのみ考えればよいです。\n全ての訪問順を探索する場合\n\\(O(N!*N)\\)\n程度の時間が掛かるため、今回の制約では時間内に答えを得ることはできません。\n次のようなDPにより解くことが出来ます。\n\\(DP[i][S]=\\)\n現在地が都市\n\\(i\\)\nで、訪問済みの街の集合が\n\\(S\\)\nであるときのコストの最小値\n\\(DP[i][S]=\\min\\{DP[j][S\\setminus \\{i\\}]+dist(i,j) \\mid j\\in S\\setminus\\{i\\}\\}\\)\nここで、集合\n\\(S\\)\nを直接キーとして持ってもよいですが、例えば集合\n\\(\\{0,3,5\\}\\)\nを\n\\(2^0+2^3+2^5=41\\)\nのように2進数に対応させることで整数として扱うことができます。そのためこのようなDPは俗にbitDPとも呼ばれます。\nこの対応により得られた整数を\n\\(f(S)\\)\nとすると、\n-\n\\(i\\in S \\Longleftrightarrow\\)\n\\(f(S)\\)\nのbit\n\\(i\\)\nが\n\\(1\\)\n-\n\\(T \\subset S \\Longleftrightarrow (f(T) \\text{ bitwiseor } f(S))=f(S) \\Longrightarrow f(T) \\leq f(S)\\)\nなどが成り立ち、集合に関する操作・性質をbit演算で簡潔に表現することができます。",
+      "codes": [],
+      "text_sha256": "d1401dee0d61eecb1d9346b39fce85852d5ce33b1b18a8fbf77b63e5182b405b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc180/abc180_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

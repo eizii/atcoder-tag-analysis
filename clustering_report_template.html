@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>アルゴリズムの階層クラスタリング</title>
+<style>
+:root{font-family:"Yu Gothic",Meiryo,system-ui,sans-serif;color:#182235;background:#f5f7fb;line-height:1.65}
+*{box-sizing:border-box}body{margin:0}main{max-width:1220px;margin:0 auto;padding:32px 24px 64px}
+h1{font-size:28px;line-height:1.4;margin:0 0 12px}h2{font-size:20px;margin:0 0 16px}
+p{margin:8px 0}a{color:#2563eb}small,.muted{color:#586578}
+.panel{background:white;border:1px solid #dce3ed;border-radius:12px;padding:22px;margin-top:22px}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+label{display:block;font-weight:600;margin-bottom:8px}select,input[type=search],input[type=number]{border:1px solid #b8c5d8;border-radius:6px;padding:9px;background:white;font:inherit}
+select,input[type=search]{width:100%}input[type=range]{width:100%;accent-color:#2563eb}
+.cutline{display:flex;align-items:center;gap:12px}input[type=number]{width:96px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.stat{background:#f1f5fa;border-radius:8px;padding:12px 16px}.stat b{display:block;font-size:25px}.stat span{font-size:13px;color:#526079}
+.notice{border-left:4px solid #df9c21;background:#fff8e8;padding:12px 16px;font-size:14px;margin-top:16px}
+.toolbar{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}
+.toolbar label{font-weight:400;display:flex;gap:8px;align-items:center;margin:0}.toolbar input[type=search]{max-width:330px}
+button{background:#2563eb;color:white;border:0;border-radius:6px;padding:10px 14px;font:inherit;cursor:pointer}
+button:hover{background:#1d4ed8}.tablewrap{overflow:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}th{text-align:left;background:#f3f6fa;white-space:nowrap}
+th,td{padding:12px;border-bottom:1px solid #e3e9f1;vertical-align:top}td:first-child{white-space:nowrap;color:#5b687b}
+.tag{display:inline-block;margin:3px 8px 3px 0;padding:3px 7px;border:1px solid #cdd8e8;border-radius:4px;background:#f8faff}
+.tag.rare{border-color:#e7c781;background:#fff9eb}.tag small{font-size:12px;white-space:nowrap}
+.plot{width:100%;height:auto;display:block;background:white}.plotframe{overflow:auto}
+footer{font-size:13px;color:#5b687b;margin-top:26px}
+@media(max-width:700px){main{padding:20px 12px}.controls{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.panel{padding:16px}h1{font-size:23px}}
+</style>
+</head>
+<body>
+<main>
+<h1>アルゴリズムの階層クラスタリング</h1>
+<p id="datasetNote"></p>
+<p id="scopeNote" class="muted"></p>
+<section class="panel">
+<div class="controls">
+<div><label for="model">比較するタグ</label>
+<select id="model">
+<option value="all">使用済みの全タグ</option>
+<option value="min3">3問以上のタグ</option>
+<option value="review_excluded">要確認の付与を除いて再計算</option>
+</select>
+<p id="modelNote" class="muted"></p></div>
+<div><label for="threshold">階層を切る距離の閾値</label>
+<div class="cutline"><input id="threshold" type="range" min="0" max="1" step="0.005" value="0.9"><input id="thresholdNumber" aria-label="距離閾値の数値" type="number" min="0" max="1" step="0.005" value="0.9"></div>
+<small>小さくすると細かく、大きくすると大きなグループになります。</small>
+</div>
+</div>
+<div class="stats" aria-live="polite">
+<div class="stat"><b id="nTags"></b><span>対象タグ</span></div>
+<div class="stat"><b id="nClusters"></b><span>クラスタ（単独タグを含む）</span></div>
+<div class="stat"><b id="nSingletons"></b><span>単独タグ</span></div>
+<div class="stat"><b id="silhouette"></b><span>シルエットスコア</span></div>
+</div>
+<div class="notice">同じ問題に登場する手法のまとまりです。主解・別解・補助データ構造も含むため、同義語やアルゴリズムの最適度を示す分類ではありません。1〜2問しか例がないタグは黄色で表示します。</div>
+</section>
+<section class="panel">
+<h2>クラスタ一覧</h2>
+<div class="toolbar">
+<input id="search" type="search" placeholder="タグ名・タグIDで絞り込み" aria-label="クラスタを検索">
+<label><input id="singletons" type="checkbox" checked>単独タグも表示</label>
+<button id="download">現在の分割をCSVで保存</button>
+</div>
+<p id="listNote" class="muted" aria-live="polite"></p>
+<div class="tablewrap"><table><thead><tr><th>クラスタ</th><th>タグ数</th><th>アルゴリズム（タグID / 該当問題数）</th></tr></thead><tbody id="groups"></tbody></table></div>
+</section>
+<section class="panel">
+<h2>デンドログラム</h2>
+<p id="plotNote" class="muted"></p>
+<p class="muted">左で結合するほど問題集合が近いタグです。右端の距離1での結合は共通問題がないグループ間の結合も含みます。</p>
+<div class="plotframe"><img id="dendrogram" class="plot" alt="Jaccard距離と平均連結法によるデンドログラム"></div>
+</section>
+<section class="panel">
+<h2>関連度と元の問題を確認する</h2>
+<p class="muted">問題データの表示タグは、書き出したクラスタの固定版です。スライダーを動かしても問題ごとのタグは変わりません。</p>
+<p><a href="all_problems_clustered.csv">クラスタ版の問題データ（898問・CSV）</a> / <a href="algorithm_to_cluster.csv">細かいタグからクラスタへの対応表</a></p>
+<p><a href="tag_pairs.csv">タグ対の関連度・共通問題ID（CSV）</a>には、Jaccard類似度、各タグの問題数、共通問題数、確認が必要な付与を含む問題数を記録しています。</p>
+<p><a href="clustering_report.md">分析レポート（Markdown）</a>には、方法、閾値の比較、要確認の付与を除いた場合の変化、結果の限界、再実行方法があります。</p>
+<p>タグを細分化する際に広いタグを置き換えた場合、親子関係にあるタグでも共起が少なくなります。共通問題の検討と、概念上の親子関係の整理を合わせて使ってください。</p>
+</section>
+<footer>ローカルファイルだけで動作します。通信・外部ライブラリは使用しません。クラスタ番号は対象と閾値ごとに振り直しています。</footer>
+</main>
+<script id="analysis-data" type="application/json">__CLUSTERING_DATA__</script>
+<script>
+"use strict";
+const data=JSON.parse(document.getElementById("analysis-data").textContent);
+const $=id=>document.getElementById(id);
+const summary=data.summary;
+$("datasetNote").textContent=summary.dataset_label+"："+
+ summary.problem_count+"問・"+summary.assigned_pairs+"件の付与を反映。Jaccard距離 × 平均連結法。";
+$("scopeNote").textContent=summary.used_tags+"種類の使用済みタグが対象です。未使用の"+
+ summary.unused_tags+"種類は除外しています。初期表示は全使用タグです。修正案には未点検の付与も含みます。";
+for(const option of $("model").options){
+ const model=data.models.find(m=>m.key===option.value);
+ if(model)option.textContent=(model.key==="all"?"使用済みの全タグ":model.key==="min3"?
+ "3問以上のタグ":"要確認の付与を除外")+"（"+model.tags.length+"種類）";
+}
+let currentGroups=[];
+function selectedModel(){return data.models.find(m=>m.key===$("model").value);}
+function partition(model,cut){
+ const n=model.tags.length,desc=Array.from({length:n},(_,i)=>[i]);
+ for(const row of model.tree)desc.push(desc[row[0]].concat(desc[row[1]]));
+ const groups=[];
+ function visit(node){
+  if(node<n){groups.push([node]);return;}
+  const row=model.tree[node-n];
+  if(row[2]<=cut){groups.push(desc[node].slice().sort((a,b)=>a-b));}
+  else{visit(row[0]);visit(row[1]);}
+ }
+ visit(n+model.tree.length-1);
+ return groups.sort((a,b)=>a[0]-b[0]);
+}
+function groupId(i){return "C"+String(i+1).padStart(3,"0");}
+function render(){
+ const model=selectedModel(),cut=Number($("thresholdNumber").value);
+ currentGroups=partition(model,cut);
+ const singletonCount=currentGroups.filter(g=>g.length===1).length;
+ $("nTags").textContent=model.tags.length;
+ $("nClusters").textContent=currentGroups.length;
+ $("nSingletons").textContent=singletonCount;
+ const candidates=model.metrics.filter(m=>m.threshold<=cut);
+ const metric=candidates[candidates.length-1];
+ $("silhouette").textContent=metric&&metric.silhouette!==null?metric.silhouette.toFixed(4):"—";
+ $("modelNote").textContent=model.key==="review_excluded"?
+  "needs_review=1の付与を除外して再計算。残る付与がすべて検証済みという意味ではありません。":
+  model.key==="all"?"1〜2問だけに付いた"+summary.tags_with_1_or_2_problems+"種類も含みます。少数例によるまとまりに注意してください。":
+  "少数例の影響を減らす補助版です。使用済みの全タグの結果も切り替えて確認できます。";
+ const query=$("search").value.trim().toLowerCase(),showSingle=$("singletons").checked;
+ const tbody=$("groups");tbody.replaceChildren();let visible=0;
+ currentGroups.forEach((group,i)=>{
+  if(group.length===1&&!showSingle)return;
+  if(query&&!group.some(j=>(model.tags[j].name+" "+model.tags[j].id).toLowerCase().includes(query)))return;
+  visible++;
+  const tr=document.createElement("tr"),id=document.createElement("td"),size=document.createElement("td"),members=document.createElement("td");
+  id.textContent=groupId(i);size.textContent=group.length;
+  group.forEach(j=>{
+   const tag=model.tags[j],span=document.createElement("span"),meta=document.createElement("small");
+   span.className="tag"+(tag.count<3?" rare":"");
+   span.append(document.createTextNode(tag.name+" "));
+   meta.textContent="("+tag.id+" / "+tag.count+"問)";span.append(meta);members.append(span);
+  });
+  tr.append(id,size,members);tbody.append(tr);
+ });
+ $("listNote").textContent="全"+currentGroups.length+"クラスタのうち"+visible+"件を表示。閾値 "+cut.toFixed(3)+"。";
+ const img=$("dendrogram");
+ if(img.dataset.model!==model.key){img.src=model.svg;img.dataset.model=model.key;}
+ $("plotNote").textContent="図は生成時の閾値 "+data.threshold.toFixed(3)+" の表示です。スライダーで変わるのは上のクラスタ一覧と統計です。現在の一覧の閾値: "+cut.toFixed(3)+"。";
+}
+function changeCut(value){
+ const n=Number(value);if(!Number.isFinite(n))return;
+ const cut=Math.max(0,Math.min(1,n));
+ $("threshold").value=String(cut);$("thresholdNumber").value=String(cut);render();
+}
+$("threshold").addEventListener("input",e=>changeCut(e.target.value));
+$("thresholdNumber").addEventListener("change",e=>changeCut(e.target.value));
+for(const id of ["model","search","singletons"])$(id).addEventListener(id==="search"?"input":"change",render);
+$("download").addEventListener("click",()=>{
+ const model=selectedModel(),cut=Number($("thresholdNumber").value);
+ const rows=[["model","distance_threshold","cluster_id","cluster_size","tag_id","tag","problem_count_in_model","low_support"]];
+ currentGroups.forEach((g,i)=>g.forEach(j=>{
+  const tag=model.tags[j];rows.push([model.key,cut,groupId(i),g.length,tag.id,tag.name,tag.count,Number(tag.count<3)]);
+ }));
+ const quote=v=>'"'+String(v).replaceAll('"','""')+'"';
+ const csv="\uFEFF"+rows.map(r=>r.map(quote).join(",")).join("\r\n")+"\r\n";
+ const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"})),a=document.createElement("a");
+ a.href=url;a.download="clusters_"+model.key+"_"+cut.toFixed(3)+".csv";a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+changeCut(data.threshold);
+</script>
+</body>
+</html>

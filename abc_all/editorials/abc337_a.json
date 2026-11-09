@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc337_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc337/editorial/9109",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nC++入門 AtCoder Programming Guide for beginners (APG4b)\nは、競技プログラミングのための C++ 入門用コンテンツです。\nチーム高橋が獲得したポイントの合計と、チーム青木が獲得したポイントの合計を計算して、大小関係に従って答えを出力すればよいです。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\n    int TakahashiScore = 0; // チーム高橋の合計得点\n    int AokiScore = 0; // チーム青木の合計得点\n    for (int i = 0; i < N; ++i) {\n        int X, Y;\n        cin >> X >> Y;\n\n        // それぞれのチームに得点をプラスする\n        TakahashiScore += X;\n        AokiScore += Y;\n    }\n\n    // 合計得点の大小に従って結果を出力\n    if (TakahashiScore > AokiScore)\n        cout << \"Takahashi\" << endl;\n    else if (TakahashiScore > AokiScore)\n        cout << \"Aoki\" << endl;\n    else\n        cout << \"Draw\" << endl;\n    \n    return 0;\n}",
+        "N = int(input())\n\nTakahashiScore = 0 # チーム高橋の合計得点\nAokiScore = 0 # チーム青木の合計得点\n\nfor i in range(N):\n    X, Y = map(int, input().split())\n    \n    # それぞれのチームに得点をプラスする\n    TakahashiScore += X\n    AokiScore += Y\n\n# 合計得点の大小に従って結果を出力\nif TakahashiScore > AokiScore:\n    print('Takahashi')\nelif TakahashiScore < AokiScore:\n    print('Aoki')\nelse:\n    print('Draw')"
+      ],
+      "text_sha256": "bda0fc4249729b1db1b014bdd3727f41bbfc66d36988e0c15497832ff82b17b3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc337/abc337_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

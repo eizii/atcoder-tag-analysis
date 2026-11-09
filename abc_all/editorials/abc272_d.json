@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc272_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc272/editorial/4978",
+      "text": "それぞれのマスに対応する頂点を持つグラフを作り、マス\n\\((i,j)\\)\nからマス\n\\((k,l)\\)\nに移動できるときに\n\\((i,j) \\rightarrow (k,l)\\)\nという有向辺を貼ることによって、この問題は有向重み無しグラフに対して、ある頂点からそれぞれの頂点への最短距離を求める問題に帰着します。\nマス\n\\((i,j)\\)\nから移動できるマスの列挙を考えます。これは、\n\\((k-i)^2+(l-j)^2=M\\)\nを満たす\n\\((k,l)\\)\nの列挙です。\n\\((k-i)^2 \\le M\\)\nを満たす必要があるため、\n\\(|k-i| \\le \\sqrt{M}\\)\nです。\n\\(k\\)\nを固定したとき、\n\\(l = j \\pm \\sqrt{M - (k-i)^2}\\)\nとなります。\n\\(0 \\le x \\le M\\)\nを満たす整数\n\\(x\\)\nに対して、\n\\(x\\)\nが平方数であるか、もし平方数であるなら\n\\(\\sqrt{x}\\)\nは何かを\n\\(\\mathrm{O}(M)\\)\nで前計算しておくことにより、\n\\(k\\)\nを固定したときに\n\\(l\\)\nが整数となるか、\n\\(l\\)\nが整数となるのであればその値は何かを\n\\(\\mathrm{O}(1)\\)\nで計算することができます。\nよって、BFS である頂点からの遷移を\n\\(\\mathrm{O}(\\sqrt{M})\\)\nで行うことができるためこの問題を\n\\(\\mathrm{O}(N^2 \\sqrt{M})\\)\nで解くことができます。",
+      "codes": [],
+      "text_sha256": "9581786addef41904ed801f5a720eb74b95f88ead2a53b110f265b18a7523b00",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc272/abc272_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

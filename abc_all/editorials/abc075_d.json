@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc075_d",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc075/editorial.pdf",
+      "text": "D:  Axis-Parallel Rectangle\n\n  ·ͣɺ࠷খͷ໘ੵͱͳΔΑ͏ͳ௕ํܗͷީิʹ͍ͭͯߟ͑ͯΈ·͢ɻ͜͜Ͱɺਤ1 ͷΑ͏ʹద౰ʹ K ఺Ҏ্ؚ\n ΜͰ͍ΔΑ͏ͳ௕ํ ܗ Λ ߟ ͑·͢ɻ͜ͷͱ͖ɺਤ2 ͷΑ͏ʹ ֤ ลΛ఺ʹ઀͢Δ·Ͱ௕ํ ܗ Λখͯ͘͞͠΋ɺؚ ·\n ΕΔ఺ͷ਺͸มΘΓ·ͤΜɻ\n\n\n\n\n\n         ਤ1: 6 ͭͷ఺ΛؚΉ௕ํܗͷྫ          ਤ2: ಺෦ʹؚΉ఺ͷ਺Λม͑ͣʹ௕ํܗΛॖখ\n\n\n  ͕ͨͬͯ͠ɺແݶʹ͋Δ௕ํܗͷީิ͔Βɺ༩͑ΒΕͨ఺ू߹ͷ࠲ඪΛ΋ͱʹͨ͠༗ݶͷީิʹߜΓࠐΊ·͢ɻ\n ۩ମతʹ͸ɺ௕ํܗ ͷࠨ ลͱӈล͸఺ू߹ͷ x ࠲ඪɺ௕ํܗͷ্ลͱԼล͸఺ू߹ͷ y ࠲ඪ͕ީิͱͳΓ·͢ɻ\n  ͦ͏͢Δͱɺ௕ํ ܗ ͷ ީ ิΛશ୳ ࡧ Λ͢Δ͜ͱ͕ՄೳͱͳΓ·͢ɻ఺ू ߹ ͷ x ࠲ ඪ͔Β ࠨ ลͱӈลΛશ୳ ࡧ ͠\n ͯɺ఺ू ߹ ͷ y ࠲ ඪ͔Β௕ํ ܗ ͷ্ลͱԼลΛશ୳ ࡧ ͠·͢ɻ͜͜Ͱ௕ํ ܗ ͷ ܗ ͕ ܾ ·ΔͷͰɺ͋ͱ͸௕ํ ܗ ͷ\n ಺෦ʹؚ·ΕΔ఺ͷ਺Λ਺্͑͛ͯɺK ఺Ҏ্ͳΒ౴͑ͷީิͰ͢ɻ\n  ͜ͷղ๏ͷ࣌ؒܭࢉྔ͸ O(N 5) ͱͳΓɺे෼ؒʹ߹͍·͢ɻ·ͨɺ௕ํܗͷ಺෦ʹؚ·ΕΔ఺ͷ਺ͷ਺্͑͛\n ʹ 2 ࣍ݩྦྷੵ࿨Λར༻͢Δͱɺ࣌ؒܭࢉྔΛ O(N 4) ʹվળ͢Δ͜ͱ͕ՄೳͰ͢ɻ\n\n\n  C++ͷίʔυྫʢ࣌ؒܭࢉྔ͸ O(N 5)ʣ\n\n\n\n 1 using ll = long long;\n\n\n 2\n\n 3 int main(void){\n\n 4     int n,k;\n 5     cin >> n >> k;\n\n\n 6\n\n 7     vector<int> x(n),y(n);\n\n 8     vector<int> xary,yary;\n\n\n 9\n\n10     for(int i = 0; i < n; ++i){\n11         cin >> x[i] >> y[i];\n\n\n\n                                                  5\n\f\n12         xary.push_back(x[i]);\n13         yary.push_back(y[i]);\n\n14     }\n\n\n15\n\n16     sort(begin(xary),end(xary));\n\n17     sort(begin(yary),end(yary));\n\n\n18\n\n19     ll ans = 1LL * (xary[n-1] - xary[0]) * (yary[n-1] - yary[0]);\n\n\n20\n\n21     for(int xi = 0; xi < n; ++xi){\n\n22         for(int xj = xi + 1; xj < n;++xj){\n\n23             for(int yi = 0; yi < n; ++yi){\n\n24                 for(int yj = yi + 1; yj < n;++yj){\n\n\n25\n\n26                     int num = 0;\n\n27                     ll lx = xary[xi],rx = xary[xj];\n\n28                     ll by = yary[yi],uy = yary[yj];\n\n\n29\n\n30                     for(int i = 0; i < n;++i){\n\n31                         if(lx <= x[i] and x[i] <= rx and by <= y[i] and y[i] <= uy){\n\n32                             num++;\n\n33                         }\n\n34                     }\n\n\n35\n\n36                     if(num >= k) ans = min(ans,1LL * (rx - lx) * (uy - by));\n\n37                 }\n38             }\n\n39         }\n\n40     }\n\n\n41\n\n42     cout << ans << endl;\n\n\n43\n\n44     return 0;\n\n45 }\n\n\n\n\n\n                                                  6",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "820dacdbe02bdf97fc0c275d9126a4519b4094b237ebfae231a904121ccebb20"
+    }
+  ],
+  "status": "available"
+}

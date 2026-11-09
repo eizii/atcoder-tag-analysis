@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc079_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc079/editorial.pdf",
+      "text": "A:  Good Integer\n\n N は4 桁の整数なので、3 つ以上の同じ数字が連続して並ぶ時、前の3 つの数字か、後の3 つ\nの数字の少なくともどちらかは必ず等しくなります。\n よって、この2 つの条件の少なくともどちらかを満たしたときに‘Yes‘、そうでないときに‘No‘\nを出力するとよいです。\n\n#include <cstdio >\nchar s[5];\nint main ()\n{\n         scanf (\"%s\",&s);\n        if(s[0]==s[1]&&s[1]==s[2]) puts (\"Yes \");\n         else if(s[1]==s[2]&&s[2]==s[3]) puts (\"Yes \");\n         else puts (\"No\");\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "da3b80d4a1ded00a064ee735d6865e2daf3ec08ed20382f36067d80ff5df1afc"
+    }
+  ],
+  "status": "available"
+}

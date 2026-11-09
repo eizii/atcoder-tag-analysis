@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc128_c",
+  "editorials": [
+    {
+      "text": "C: Switches\nまず条件を無視すると、スイッチのon/oﬀの組み合わせは2N 通りあります。条件を満たすスイッチの状\n態を直接数えるのは難しいので、この組み合わせを1 つ固定して考えてみましょう。すると、それぞれの電球\nが点灯しているかどうかチェックし、全て点灯しているかどうか判定することで答えが求まります。この時間\n計算量はO(MN ∗2N) です。\nなおスイッチの状態を固定する方法としては、DFS を用いる方法や、スイッチの状態をN bit の整数にエ\nンコードする方法などがあります。\n今回は全列挙することで解ける制約でしたが、mod 2 での連立方程式の解を数える問題と見なせるので、\nrank 等を計算することでより高速に求めることもできます。\n解答例: https://atcoder.jp/contests/abc128/submissions/5640467\n",
+      "text_sha256": "99341feb752d8be3b533739691baee011d6140979e6993e03d23902419d53072",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc128/abc128_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

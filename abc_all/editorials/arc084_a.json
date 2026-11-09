@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc084_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc084/editorial.pdf",
+      "text": "C: Snuke Festival\n\n  Ai < Bj < Ck なる組(i, j, k) の個数を数える問題です。j を固定すれば、求める個数はAi < Bj\nなるi の個数と、Bj < Ck なるk の個数の積となります。\n よって、全てのj に対し、上述のi, k の個数を数えて掛け合わせ、足し合わせればよいです。\n では、i の個数やk の個数はどのように求めればいいでしょうか？　愚直に配列をすべて見る\nと、O(N 2) となり間に合いません。\n 配列A, C をあらかじめソートしておきます。すると、i やk の個数は、二分探索を用いて求めるこ\nとができます。C++ の場合、標準ライブラリに用意されているlower bound 関数やupper bound\n関数を用いるのが良いでしょう。\n\n 時間計算量はO(NlogN) となり、間に合います。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "bba2ecb9e7a4d6918ed0caee70dc40f3fffc434535eb1937f4d744fa8759cb3e"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,46 @@
+{
+  "problem_id": "abc283_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc283/editorial/5429",
+      "text": "求める値 \\(D _ i=\\displaystyle\\min_{j\\neq i}\\left\\lparen\\left\\lvert P _ i-P _ j\\right\\rvert+\\left\\lvert i-j\\right\\rvert\\right\\rparen\\) について、この式から絶対値を外すことを考えます。\n\\[\\begin{aligned}\nD _ i&=\\displaystyle\\min_{j\\neq i}\\left\\lparen\\left\\lvert P _ i-P _ j\\right\\rvert+\\left\\lvert i-j\\right\\rvert\\right\\rparen\\\\\n&=\\min\\lbrace\\min_{j\\lt i}\\left\\lparen\\left\\lvert P _ i-P _ j\\right\\rvert+i-j\\right\\rparen,\\min_{j\\gt i}\\left\\lparen\\left\\lvert P _ i-P _ j\\right\\rvert+j-i\\right\\rparen\\rbrace\\\\\n&=\\min\\lbrace\\min_{j\\lt i,P _ j\\lt P _ i}\\left\\lparen P _ i-P _ j+i-j\\right\\rparen,\\min_{j\\lt i,P _ j\\gt P _ i}\\left\\lparen P _ j-P _ i+i-j\\right\\rparen,\\min_{j\\gt i,P _ j\\lt P _ i}\\left\\lparen P _ i-P _ j+j-i\\right\\rparen,\\min_{j\\gt i,P _ j\\gt P _ i}\\left\\lparen P _ j-P _ i+j-i\\right\\rparen\\rbrace\\\\\n&=\\min\\lbrace P _ i+i-\\max_{j\\lt i,P _ j\\lt P _ i}\\left\\lparen P _ j+j\\right\\rparen,\\min_{j\\lt i,P _ j\\gt P _ i}\\left\\lparen P _ j-j\\right\\rparen-\\lparen P _ i-i\\rparen,P _ i-i-\\max_{j\\gt i,P _ j\\lt P _ i}\\left\\lparen P _ j-j\\right\\rparen,\\min_{j\\gt i,P _ j\\gt P _ i}\\left\\lparen P _ j+j\\right\\rparen-\\lparen P _ i+i\\rparen\\rbrace\n\\end{aligned}\\]\nとなり、\\(A _ i=P _ i+i,B _ i=P _ i-i\\) のように定めると、\n\\[\\begin{aligned}\nD _ i&=\\min\\lbrace A _ i-\\max_{j\\lt i,P _ j\\lt P _ i}A _ j,\\min_{j\\gt i,P _ j\\gt P _ i}A _ j-A _ i,B _ i-\\max_{j\\gt i,P _ j\\lt P _ i}B _ j,\\min_{j\\lt i,P _ j\\gt P _ i}B _ j-B _ i\\rbrace\n\\end{aligned}\\]\nとなります。\nこれは、セグメント木などの区間最大値（もしくは区間最小値）が得られるデータ構造を用い、\\(i\\) について走査しながら \\(A _ i\\) や \\(B _ i\\) を \\(P _ i\\) の位置に更新していくことで解くことができます。\n実装例は以下のようになります。\nいずれか \\(1\\) 通りについて解く関数を作り、列を反転させたり \\(P _ i\\leftarrow N+1-P_i\\) などとすることで \\(4\\) 通りすべてをカバーするようにすると実装が単純になります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <atcoder/segtree>\n\nusing namespace std;\n\nconstexpr int INF = 100000000;\n\n// 区間最大値を得るセグメント木の準備\nusing S = int;\nint op(int a, int b) { return max(a, b); }\nint e() { return -INF; }\nusing segtree = atcoder::segtree<S, op, e>;\n\nvoid calc(const int N, const vector<int> &P, vector<int> &D) {\n    // chmin(D[i], P[i] + i - max_{j < i && P[j] < P[i]} {P[j] + j}\n    segtree segment_tree(N);\n    for (int i = 0; i < N; ++i) {\n        D[i] = min(D[i], P[i] + i - segment_tree.prod(0, P[i]));\n        segment_tree.set(P[i] - 1, P[i] + i);\n    }\n}\n\nint main() {\n\n    int N;\n    cin >> N;\n    vector<int> P(N);\n    for (auto &&p : P) cin >> p;\n    vector<int> D(N, INF);\n\n    // j < i かつ P[j] < P[i] なる j について計算\n    calc(N, P, D);\n\n    // j < i かつ P[j] > P[i]\n    for (auto &&p : P) p = N + 1 - p;\n    calc(N, P, D);\n\n    // j > i かつ P[j] > P[i]\n    reverse(begin(P), end(P));\n    reverse(begin(D), end(D));\n    calc(N, P, D);\n\n    // j > i かつ P[j] < P[i]\n    for (auto &&p : P) p = N + 1 - p;\n    calc(N, P, D);\n\n    // 反転を直して出力\n    reverse(begin(P), end(P));\n    reverse(begin(D), end(D));\n    for (int i = 0; i < N; ++i) cout << D[i] << \" \";\n    cout << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "bafd82a16c3305e57ba6391399dea3759e2e59588b65b6fee9a83a846e0e188a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc283/abc283_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc283/editorial/5431",
+      "text": "この問題は、\\(P\\) が順列でなくても高速に解くことができます。\n公式解説で述べたように、\\(\\displaystyle D ^ \\prime _ i=P _ i+i-\\max_{j\\lt i,P _ j\\lt P _ i}(P _ j+j)\\) が計算できれば十分です。\n\\(i\\) まで見たときに、これから \\(j\\) として選ばれうる値のみ保持しておくことを考えます。\n整数 \\(j\\) に対して、\\(P _ j\\gt P _ k\\) かつ \\(P _ j+j\\lt P _ k+k\\) となるような \\(k\\) が存在するならそのような \\(j\\) が最大を与えることはありません。\n逆に、そうでないようなすべての \\(j\\) は適当な \\((i,P _ i)\\) の組で選ばれる可能性があります。\nよって、保持するべき \\((P _ i,P _ i+i)\\) の組を辞書順で昇順に並べると、\\(P _ i+i\\) も昇順に並んでいます。\nそのような列を管理できたら、その上で二分探索を行うことで \\(D ^ \\prime _ i\\) を高速に求めることができます。\n\\((P _ i,P _ i+i)\\) を昇順に並べた列は、\nこの記事\nにあるようなテクニックを用いることで全体で \\(O(N\\log N)\\) 時間で管理することができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <limits>\n#include <set>\n#include <utility>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n\n    unsigned long N;\n    cin >> N;\n    vector<unsigned long> P(N);\n    for(auto&& p : P)cin >> p;\n    vector<unsigned long> D(N, numeric_limits<unsigned long>::max());\n\n    const auto calc{[&P, &N, &D]{\n        // chmin(D[i], min_{j < i && P[j] < P[i]} (P[i] + i) - (P[j] + j)); (i = 1, 2, ..., N)\n        // を O(N log N) 時間で実行\n\n        // 最小値を与える可能性がある j を P[j] の昇順に管理\n        set<pair<unsigned long, unsigned long>> cost_set;\n\n        for(unsigned long i{}; i < N; ++i){\n            const auto value{P[i]};\n            const auto cost{P[i] + i};\n\n            // D[i] を更新\n            auto it{cost_set.upper_bound({P[i], 0})};\n            if(it != begin(cost_set))D[i] = min(D[i], cost - prev(it) -> second);\n\n            // j の候補を更新\n            while(it != end(cost_set) && it -> second <= cost)it = cost_set.erase(it);\n            cost_set.emplace_hint(it, value, cost);\n        }\n    }};\n\n    // j < i かつ P[j] < P[i] なる j について計算\n    calc();\n\n    // j < i かつ P[j] > P[i]\n    for(auto&& p : P)p = N - p;\n    calc();\n\n    // j > i かつ P[j] > P[i]\n    reverse(begin(P), end(P));\n    reverse(begin(D), end(D));\n    calc();\n\n    // j > i かつ P[j] < P[i]\n    for(auto&& p : P)p = N - p;\n    calc();\n\n    // 反転しているので逆順に出力\n    for(unsigned long i{N}; i--; )cout << D[i] << (i ? ' ' : '\\n');\n\n    return 0;\n}"
+      ],
+      "text_sha256": "81bc1060377150fb89d61fc927da8f7154f5e2c7d5d2ac0fb3f1b7ba252090f6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc283/abc283_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc283/editorial/5451",
+      "text": "次の問題を考えます。\n\\(N\\)\n個の点があり、\n\\(i\\)\n番目の点は座標\n\\((i, P_i)\\)\nである。この時、各点についてその点にマンハッタン距離が最も小さい点を求めよ。\nこの問題は元の問題と同値です。\nさて、マンハッタン距離をコストとする最小全域木を考えてみましょう。\nこの時、各点について自身の周囲の辺のうち少なくとも一つはマンハッタン距離が最も小さいので、それを答えとすればよいです。\nManhattan MST\nは\n\\(O(N \\log N)\\)\nなどで解くことができるので、この問題を解くことができました。",
+      "codes": [],
+      "text_sha256": "e50f91091fefcb14ffb55ebd7941742b51e705ca59b8243bacff3e03e49a7ff3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc283/abc283_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc283/editorial/5445",
+      "text": "\\(i=1,2,\\dots,N\\)\nに対して、以下を行うアルゴリズムを考えます。\nここで、\n\\(i<0\\)\nまたは\n\\(i>N\\)\nに対する\n\\(P_i\\)\nは\n\\(\\infty\\)\nとします。\n変数として、$c=1,ans=\\infty$ を持ち、以下を繰り返す。\n$ans$ を $ans,|P_i-P_{i-c}|+c$ の最小値に置き換える。\n$ans$ を $ans,|P_i-P_{i+c}|+c$ の最小値に置き換える。\n$c$ を $1$ 増やし、$c > ans$ であるか「$i-c < 0$ かつ $i+c >N$」であれば繰り返しを終える。\n$ans$ を出力する。\nアルゴリズムの正当性は、繰り返しを終えたとき、それ以降では\n\\(c > ans\\)\nより、\n\\(|P_i-P_{i-c}| + c,|P_i-P_{i+c}|+c>ans\\)\nであるため示されます。\n計算量は、一見\n\\(c\\)\nが各\n\\(i\\)\nに対して\n\\(\\mathrm{O}(N)\\)\n回動くので\n\\(\\mathrm{O}(N^2)\\)\nですが、実は\n\\(\\mathrm{O}(N\\sqrt N)\\)\nで動作します。以下、それを示します。\n\\(M=\\lfloor \\sqrt N \\rfloor\\)\nと置きます。\n\\(ans\\)\nの更新を、\n\\(\\left\\lfloor \\frac{P_i}{M} \\right\\rfloor = \\left\\lfloor \\frac{P_{i-c}}{M} \\right\\rfloor\\)\nである場合についてのみ行うとします。(\n\\(P_{i+c}\\)\nについても同様)\nこのようにしても、計算量がよくなることはありません。\nこのとき、\n\\(\\left\\lfloor \\frac{P_i}{M} \\right\\rfloor\\)\nが同じものに対して繰り返しの回数の総和を考えます。\n\\(1\\)\n度\n\\(ans\\)\nを更新したら、それ以降の繰り返しの回数は\n\\(\\mathrm{O}(M)\\)\n回であり、\n\\(ans\\)\nを更新するまでの繰り返しの回数は総和を取ると\n\\(\\mathrm{O}(N)\\)\nであるため、繰り返しの回数の総和は\n\\(\\mathrm{O}(N)\\)\nとなります。\n\\(\\left\\lfloor \\frac{P_i}{M} \\right\\rfloor\\)\nの種類は\n\\(\\mathrm{O}(M)\\)\n個であるため、全体での繰り返しの回数の総和は\n\\(\\mathrm{O}(NM)=\\mathrm{O}(N\\sqrt N)\\)\nとなります。\nよって、上記のアルゴリズムの計算量は\n\\(\\mathrm{O}(N\\sqrt N)\\)\nとなり、十分高速です。",
+      "codes": [],
+      "text_sha256": "82cb722ca2b549ab2788b577dc1e2f92e4c4a2c0aa11a51c216d8e082f460e97",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc283/abc283_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

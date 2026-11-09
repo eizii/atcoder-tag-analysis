@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc442_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc442/editorial/15139",
+      "text": "\\(S\\)\nに含まれる\ni\nの個数と\nj\nの個数を足し合わせればよいです。特定の文字が文字列に含まれる回数を求める関数を使う方法や、ループを用いて答えを数え上げる方法があります。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tcout << count(s.begin(), s.end(), 'i') + count(s.begin(), s.end(), 'j') << '\\n';\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tint ans = 0;\n\tfor (char c : s) if (c == 'i' or c == 'j') ans++;\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "a434b13dcd2947b7e74bbf7a173bfffa89a294cc26eed8439c3a9f0b1054913d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc442/abc442_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

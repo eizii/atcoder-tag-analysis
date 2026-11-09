@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc436_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc436/editorial/14750",
+      "text": "ありえる集合のうち、写っている星の集合の中で最も暗い星が \\(i\\) 番目の星であるような集合は \\(\\bigl(j\\lt i\\) かつ \\(B _ j\\lt B _ i\\) なる \\(j\\) の個数\\({}+1\\bigr)\\times\\bigl(j\\gt i\\) かつ \\(B _ j\\lt B _ i\\) なる \\(j\\) の個数\\({}+1\\bigr)\\) 通りあります。\nすべての \\(i\\) について、\\(j\\lt i\\) かつ \\(B _ j\\lt B _ i\\) なる \\(j\\) の個数や \\(j\\lt i\\) かつ \\(B _ j\\lt B _ i\\) なる \\(j\\) の個数を求めることは、転倒数を \\(O(N\\log N)\\) 時間で求めるアルゴリズムを少し変形することで同様に \\(O(N\\log N)\\) 時間でできます。\n例えば、\\(B _ i\\) の昇順になるような順序で処理を行い、セグメント木やフェニック木を用いてこれまで処理を行った \\(i\\) のうち現在の \\(i\\) より大きいものと小さいものがそれぞれいくつかあるか求めるようなアルゴリズムで実現されます。\nこのようにして得られた情報をもとに \\(O(N)\\) 時間で答えを求めることができるため、全体の計算時間は \\(O(N\\log N)\\) 時間となり、十分高速です。\n\\((B _ i)\\) が \\((1,2,\\ldots,N)\\) の並べ替えであることから、少し実装を単純にできる場合もあります。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <ranges>\n#include <atcoder/fenwicktree>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    cin >> N;\n    atcoder::fenwick_tree<unsigned> bit(N);\n    unsigned long ans{};\n    for (const auto B : views::istream<unsigned>(cin)) {\n        const unsigned long left{bit.sum(0, B)}, right{B - 1 - left};\n        ans += (left + 1) * (right + 1); // (左側の明るい星の個数 + 1) × (右側の明るい星の個数 + 1)\n        bit.add(B - 1, 1); // BIT を更新\n    }\n    cout << ans << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "50e8ececbf2d4e19beab40764d9243e530bbcca8747117d94acff830fb0ec8bc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc436/abc436_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc407_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc407/editorial/13104",
+      "text": "合計 \\(n\\) マスの（長方形とは限らない）マス目に対するありうるドミノの置き方の総数の最大値を \\(f(n)\\) と書くことにし、\\(f(n)\\) の増加の度合いについて考えます。\n\\(n\\) マスのマス目のうち、左にも上にもマス目が存在しないマスを \\(1\\) つ取ります。\nこのマス目には、\nドミノが置かれない\n縦向きのドミノが置かれる\n横向きのドミノが置かれる\nのいずれか \\(1\\) つが成り立ちます。\nそれぞれの場合に対するドミノの置き方の総数はそれぞれ高々 \\(f(n-1),f(n-2),f(n-2)\\) 通りです。\nよって、\\[f(n)\\leq f(n-1)+2f(n-2)\\] が成り立ちます。\\(f(1)=1,f(0)=1\\) より、\\(f(n)\\leq\\dfrac{2 ^ {n+1}+(-1) ^ n}3\\) がいえます。\nよって、ドミノの置き方すべてを探索しても十分高速であることがわかります。\nすでにドミノが置かれたマスを \\(HW\\operatorname{bit}\\) の整数で管理すると実装が簡単になります。\n実装例は以下のようになります。\n時間計算量は \\(O(HW2 ^ {HW})\\) などとなります。\n\\(30\\) 行目の直後で重複を取り除くことで管理する状態の数を減らすことができますが、重複を取り除くための処理で計算量が悪化する場合があることに注意してください。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n    unsigned H, W;\n    cin >> H >> W;\n    vector A(H, vector<unsigned long>(W));\n    for (auto&& row : A)\n        for (auto&& a : row)\n            cin >> a;\n\n    // HW ビットの整数でドミノが置かれたマスを管理する\n    vector<unsigned> possible_domino{0}; // はじめは何も置かれていない盤面だけ\n\n    const unsigned domino_vertical = (1U << W) + 1, domino_horizontal = 3;\n\n    for (unsigned i = 0, bit = 0; i < H; ++i)\n        for (unsigned j = 0; j < W; ++j, ++bit) { // 各マスについて\n            vector<unsigned> tmp;\n            for (const auto b : possible_domino) {\n                // 縦に置けるなら置いたものを追加する\n                if (j + 1 < W && !(b & domino_horizontal << bit))\n                    tmp.emplace_back(b | domino_horizontal << bit);\n                // 横に置けるなら置いたものを追加する\n                if (i + 1 < H && !(b & domino_vertical << bit))\n                    tmp.emplace_back(b | domino_vertical << bit);\n            }\n            ranges::move(tmp, back_inserter(possible_domino));\n        }\n\n    unsigned long ans = 0;\n    for (const auto b : possible_domino) { // 各ドミノの置き方について\n        unsigned long now = 0;\n        for (unsigned i = 0, bit = 0; i < H; ++i)\n            for (unsigned j = 0; j < W; ++j, ++bit)\n                if (1 & ~b >> bit) // ドミノが置かれてないマスに\n                    now ^= A[i][j]; // 書かれた整数の xor を求める\n        ans = max(ans, now); // 大きければ更新\n    }\n\n    cout << ans << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "db3e6ef2c9cd29ed9a87f5c7f6c64f9990316bd5df886e380909254b49a4cc9c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc407/abc407_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

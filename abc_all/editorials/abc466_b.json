@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc466_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc466/editorial/22628",
+      "text": "各色について大きさの最大値を管理する変数を用意しておきます。 ボールを順に確認し、ボールがその色のボールの大きさの最大値を更新する場合は実際に管理している量を更新すればよいです。 ここで、各色について大きさの最大値の初期値を \\(-1\\) としておくと、実装上で答えが \\(-1\\) の場合の場合分けをする必要がなくなります。 実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tvector<int> a(m, -1);\n\tfor (int i = 0; i < n; i++) {\n\t\tint c, s;\n\t\tcin >> c >> s;\n\t\tc--;\n\t\tif (a[c] < s) a[c] = s;\n\t}\n\tfor (int i = 0; i < m; i++) cout << a[i] << \" \\n\"[i == m - 1];\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "680f98627625bdc11474926fde8b43d9feb0026ed89fd31c56b6e9b7e2703b51"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc393_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc393/editorial/12251",
+      "text": "いくつかの解法が考えられますが、ここでは実装が最も簡単である（と思われる）ものを解説します。少々形式的な説明が多くなるため、最初に直観的な説明を載せておきます。\n\\(S\\)\nに含まれる\n0\nの個数を\n\\(C_0\\)\n、\n1\nの個数を\n\\(C_1\\ (=N-C_0)\\)\nとおきます。\n各\n\\(i\\ (1\\leq i\\leq C_0)\\)\nについて、\n\\(d_i\\)\nを「左から\n\\(i\\)\n番目の\n0\nよりも左にある\n1\nの個数」と定義します。また、便宜上\n\\(d_0=0, d_{C_0+1}=C_1\\)\nと定義します。このとき、\n\\(d_0 \\leq d_1\\leq d_2\\leq \\dots \\leq d_{C_0}\\leq d_{C_0+1}\\)\nです。\n\\(d_i\\)\nの値に着目して本問題を捉え直してみましょう。まず、同じ文字同士を入れ替える操作には意味がないことから、元の問題における操作は、\n\\(d_i\\)\nに対して以下のいずれかの操作を行うことと同値です。\n\\(d_{i-1}<d_i\\)\nなる\n\\(i\\ (1\\leq i\\leq C_0)\\)\nを一つ選び、\n\\(d_i\\)\nを\n\\(1\\)\n減少させる。\n\\(d_i<d_{i+1}\\)\nなる\n\\(i\\ (1\\leq i\\leq C_0)\\)\nを一つ選び、\n\\(d_i\\)\nを\n\\(1\\)\n増加させる。\nまた、終了条件は以下と同値です。\nある\n\\(p\\ (0\\leq p\\leq C_0)\\)\nが存在し、\n\\(0=d_1=\\dots=d_p\\)\nかつ\n\\(d_{p+1}=\\dots=d_{C_0}=C_1\\)\n一回の操作では\n\\(1\\)\nつの\n\\(d_i\\)\nの値が\n\\(1\\)\nだけ変化することから、\n\\[K=\\displaystyle\\sum_{i=1}^{C_0} \\min\\{d_i, C_1-d_i\\}\\]\nと定義すると、\n\\(K\\)\n回以上の操作が明らかに必要です。\n逆に、\n\\(d_i\\)\nが単調増加であることから、\n\\(K\\)\n回の操作で終了条件を満たすことが常に可能なため、答えは\n\\(K\\)\nです。（\n\\(d_i < C_1-d_i\\)\nなる最大の\n\\(i\\)\n(存在しなければ\n\\(0\\)\n) を\n\\(p\\)\nとすればよいです。）\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    string s;\n    cin >> n >> s;\n    int c1 = 0;\n    for (char c: s) {\n        if (c == '1') ++c1;\n    }\n    int now = 0;\n    long long ans = 0;\n    for (char c: s) {\n        if (c == '0') {\n            ans += min(now, c1 - now);\n        } else {\n            ++now;\n        }\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "d63198e27952c3eb595452b40131069e107010ed543114f90b70d43af763c2a2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc393/abc393_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc393/editorial/12258",
+      "text": "\\(S\\)\nの中の\n1\nの個数を\n\\(M\\)\nとします。また、左から\n\\(i\\)\n番目の\n1\nの場所を\n\\(A_i\\)\nとします。（この\n\\(i\\)\nは 0-indexed とします）\n\\(S\\)\nの中の左から\n\\(k\\)\n文字目から\n\\(k+M-1\\)\n文字目までに\n1\nを集めることを考えます。すると、\n1\n同士の相対的な位置関係は変わらないことから、左から\n\\(i\\)\n番目の\n1\nは左から\n\\(A_i\\)\n番目の場所から左から\n\\(k+i\\)\n番目に移動させれば良いので、全体的な移動回数は\n\\(\\displaystyle \\sum_{i=0}^{M-1}|A_i-(k+i)|=\\sum_{i=0}^{M-1}|k-(A_i-i)|\\)\nとなります。\nここで、一般に\n\\(\\displaystyle f(x)=\\sum_{i=0}^{N-1} |x-X_i|\\)\nの値は\n\\(x\\)\nを\n\\(X\\)\nの中央値とすると最小になることが知られています。\n\\(A\\)\nは狭義単調増加数列であるので、\n\\(B_i=A_i-i\\)\nは広義単調増加数列となります。よって、\n\\(B\\)\nの中央値は\n\\(B_{\\lfloor M/2\\rfloor }\\)\nとなるので、\n\\(k=B_{\\lfloor M/2\\rfloor }\\)\nとすると操作回数の最小値が得られます。\n以上を適切に実装することでこの問題に正答することができます。\n実装例(Python3)",
+      "codes": [
+        "n = int(input())\ns = input()\na = []\nfor i in range(n):\n    if s[i] == \"1\":\n        a.append(i - len(a))\nki = a[len(a) >> 1]\nans = 0\nfor i in a:\n    ans += abs(i - ki)\nprint(ans)"
+      ],
+      "text_sha256": "a46e4c70b457192a089dc4f52be9402ce06ba146b3bd3e8de89faa6670adf0b6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc393/abc393_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

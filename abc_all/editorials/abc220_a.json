@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc220_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc220/editorial/2680",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「\nWelcome to AtCoder\n」をお試しください。言語ごとに解答例が掲載されています。\n\\(X\\)\nを、\n\\(B\\)\nを\n\\(C\\)\nで割って余りを切り捨てた値、すなわち\n\\(X=\\lfloor \\frac{B}{C} \\rfloor\\)\nとします。\n\\(Y=X \\times C\\)\nとおきます。\nすると、\n\\(Y\\)\nは\n\\(B\\)\n以下で最大の\n\\(C\\)\nの倍数です。\nしたがって、\n\\(Y \\geq A\\)\nならば\n\\(Y\\)\nを答えとして良いです。\n\\(Y \\lt A\\)\nならば答えは\n-1\nです。\n以下に C++ の実装例を示すので参考にしてください。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nsigned main(){\n    ll a,b,c;\n    cin>>a>>b>>c;\n    ll Y = b / c * c; // Y は B 以下で最大の C の倍数\n    if(a <= Y){\n        cout<<Y<<endl;\n    }else{\n        cout<<-1<<endl;\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "1172361e26080cd831ab5fc9f3b10afe84f54d1cc679cae2dcae0adfdef1d59c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc220/abc220_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

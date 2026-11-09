@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc441_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc441/editorial/15088",
+      "text": "マス\n\\((X,Y)\\)\nは、\n\\(P\\leq X<P+100\\)\nかつ\n\\(Q\\leq Y<Q+100\\)\nのとき、かつそのときに限り黒く塗られています。\n（\n\\(P\\leq X\\leq P+100\\)\n（\n\\(Q\\leq Y\\leq Q+100\\)\n）ではないことに注意してください。）\nよって、\n\\(P\\leq X< P+100\\)\nかつ\n\\(Q\\leq Y<Q+100\\)\nならば\nYes\nを、そうでないならば\nNo\nを出力すれば良いです。これは if 文を用いて実装することができます。\nなお、\n\\(P,Q,X,Y\\)\nは整数であるので、代わりに\n\\(P\\leq X \\leq  P+99\\)\nかつ\n\\(Q\\leq Y\\leq Q+99\\)\nを用いて判定することもできます。\nC++ による実装例:\nPython による実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint p, q, x, y;\n\tcin >> p >> q;\n\tcin >> x >> y;\n\tif( (p<=x) && (x<p+100) && (q<=y) && (y<q+100) )cout << \"Yes\" << endl;\n\telse cout << \"No\" << endl;\n\treturn 0;\n}",
+        "p,q=map(int, input().split())\nx,y=map(int, input().split())\n\nif p<=x and x<p+100 and q<=y and y<q+100:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "29d89b8f8968df4fa0048822aa548f698a72b8eacb470962967f890986fda535",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc441/abc441_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

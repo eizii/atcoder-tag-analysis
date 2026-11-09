@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc264_d",
+  "title": "\"redocta\".swap(i,i+1)",
+  "contests": [
+    {
+      "contest_id": "abc264",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 414,
+  "raw_difficulty": 414,
+  "contest_id": "abc264",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc264/tasks/abc264_d",
+  "statement": "配点 : 400 点 問題文 atcoder の並べ替えである文字列 S が与えられます。 この文字列 S に対して以下の操作を 0 回以上行います。 S 中の隣接する 2 文字を選び、入れ替える。 S を atcoder にするために必要な最小の操作回数を求めてください。 制約 S は atcoder の並べ替えである文字列 入力 入力は以下の形式で標準入力から与えられる。 S 出力 答えを整数として出力せよ。 入力例 1 catredo 出力例 1 8 catredo \\rightarrow [ac]tredo \\rightarrow actre[od] \\rightarrow actr[oe]d \\rightarrow actro[de] \\rightarrow act[or]de \\rightarrow acto[dr]e \\rightarrow a[tc]odre \\rightarrow atcod[er] という流れで操作を行うと、 8 回で S を atcoder にすることができ、これが達成可能な最小の操作回数です。 入力例 2 atcoder 出力例 2 0 この場合、文字列 S は元から atcoder です。 入力例 3 redocta 出力例 3 21",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 atcoder の並べ替えである文字列 S が与えられます。 この文字列 S に対して以下の操作を 0 回以上行います。 S 中の隣接する 2 文字を選び、入れ替える。 S を atcoder にするために必要な最小の操作回数を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 S は atcoder の並べ替えである文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを整数として出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 catredo"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 8 catredo \\rightarrow [ac]tredo \\rightarrow actre[od] \\rightarrow actr[oe]d \\rightarrow actro[de] \\rightarrow act[or]de \\rightarrow acto[dr]e \\rightarrow a[tc]odre \\rightarrow atcod[er] という流れで操作を行うと、 8 回で S を atcoder にすることができ、これが達成可能な最小の操作回数です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 atcoder"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0 この場合、文字列 S は元から atcoder です。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 redocta"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 21"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc264/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:40.456219+00:00",
+  "statement_sha256": "0d2c89f3e9715feff537d169612679c0cde799e6523bbd059bee5233ac22024d",
+  "editorials": []
+}

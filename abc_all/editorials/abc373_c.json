@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc373_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc373/editorial/11029",
+      "text": "\\(i,j\\)\nの組み合わせは\n\\(N^2\\)\n個あるので，すべての\n\\(i,j\\)\nの組に対して\n\\(A_i+B_j\\)\nの値を調べていては，実行時間制限に間に合いません．\nここで，\n\\(\\max_{1 \\leq i,j \\leq N} (A_i + B_j) = \\max_{1 \\leq i \\leq N} A_i + \\max_{1 \\leq j \\leq N} B_j\\)\nと分解できることを利用します．\n\\(\\max_{1 \\leq i \\leq N} A_i\\)\nは，\n\\(A\\)\nの要素を一つ一つ調べることで，\n\\(O(N)\\)\n時間で求めることができます．\n\\(\\max_{1 \\leq j \\leq N} B_j\\)\nも同様です．よって，全体で\n\\(O(N)\\)\n時間で問題を解くことができます．\n実装例 (Python)\n実装例 (C++)",
+      "codes": [
+        "N = int(input())\nA = list(map(int, input().split()))\nB = list(map(int, input().split()))\nprint(max(A) + max(B))",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    int a = -1e9, b = -1e9;\n    for (int i = 0; i < N; ++i) {\n        int x;\n        cin >> x;\n        a = max(a, x);\n    }\n    for (int i = 0; i < N; ++i) {\n        int x;\n        cin >> x;\n        b = max(b, x);\n    }\n    cout << a + b << endl;\n}"
+      ],
+      "text_sha256": "1337ee85296b865a4bcb3b885e4c3aa7561333397e5d1ac72339339fd446a952",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc373/abc373_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

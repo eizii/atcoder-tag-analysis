@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc148_b",
+  "editorials": [
+    {
+      "text": "B: Strings with the Same Length\n1 からN までループを回し、i 回目のループではS のi 文字目を出力する、その後T のi 文字目を\n空白を開けずに出力する、ということを繰り返すと、最終的に目的の新しい文字列が出力されます。\n以下はC++ による実装例です(include 等は省略しています)。\n1 char S[110];\n2 char T[110];\n3 int main(){\n4\nint a;scanf(\"%d\",&a);\n5\nscanf(\"%s%s\",S,T);\n6\nfor(int i=0;i<a;i++)printf(\"%c%c\",S[i],T[i]);printf(\"\\n\");\n7 }\n",
+      "text_sha256": "8ae122048f18af9c21650d85b1d3c1248a52eb35fba5aa20d5c5b9f24e6f2f12",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc148/abc148_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

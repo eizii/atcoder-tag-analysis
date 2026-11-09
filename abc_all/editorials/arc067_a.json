@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc067_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc067/editorial.pdf",
+      "text": "C : Factors of Factorial\n\n ある整数x が、素因数分解によってx = pn × qm × ... (p, q, ...は素数) と表せる時、x の約数の個数は\n\n(n + 1) × (m + 1) × ... となります。よって、N! の素因数全てについて、その素因数でN! が何回割り切れる\n\nかを求めればよいです。そして、N! のがどの素因数で何回割れるかは、1 からN までの数がそれぞれどの素\n\n因数で何回割れるかを求めて足し合わせると求まります。今回の問題はN が小さいので、これを愚直に実装\n\nすれば解くことができます。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "f0072d3e1ac1bf46c76d7fbac2b677030300a9219f1510bc5fc02d5a22ad415b"
+    }
+  ],
+  "status": "available"
+}

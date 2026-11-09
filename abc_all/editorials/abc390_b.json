@@ -1,0 +1,43 @@
+{
+  "problem_id": "abc390_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc390/editorial/12043",
+      "text": "\\(A\\)\nが等比数列であることの定義は、、\n連続する\n\\(2\\)\n項の比、すなわち\n\\(\\frac{A_{i+1}}{A_i}\\)\n\\((1\\leq i\\leq N-1)\\)\nがすべて等しいことであり、\nこれは任意の\n\\(1\\leq i\\leq N-2\\)\nについて、\n\\[\n\\frac{A_{i+1}}{A_{i}}=\\frac{A_{i+2}}{A_{i+1}}\n\\]\nが成り立つことと言い換えられます。\nしかし、このままでは分数を誤差なく比較する必要があります。\nそこで、この式をさらに、\n\\[\nA_{i+1}^2=A_{i}A_{i+2}\n\\]\nと変形させることで、整数の比較によって判定を行うことができます。\nこれは for 文と if 文によって実装することができます。\nなお、各項\n\\(A_i,A_{i+1},A_{i+2}\\)\nはそれぞれ\n\\(10^9\\)\n以下の正整数であることから両辺は\n\\(10^{18}\\)\n以下の正整数であり、\n\\(64\\)\nビット整数型などを用いて比較することができます。\nc++ の int など、\n\\(32\\)\nビット整数型で比較を行うとオーバーフローを起こすため注意してください。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tlong long a[100];\n\tbool flag=true;\n\n\tcin>>n;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>a[i];\n\t}\n\tfor(int i=0;i<(n-2);i++){\n\t\tif((a[i]*a[i+2])!=(a[i+1]*a[i+1]))flag=false;\n\t}\n\n\tif(flag)cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n}",
+        "n=int(input())\na=list(map(int, input().split()))\nflag=True\n\nfor i in range(n-2):\n    if a[i]*a[i+2]!=a[i+1]*a[i+1]:\n        flag=False\n\nif flag:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "0f453d09bfb6adb34a2c988c922293c316b30afd8a1b9fd9041ebe532439736b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc390/abc390_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc390/editorial/12057",
+      "text": "分数を誤差なく比較する必要があります。\n（\n公式解説\nからの引用）\nこうした話はしばしば目にしますが、実際に誤差が出るケースを見ないと「なんか誤差というものがあるらしい？」となってしまう人も多いでしょう。\n次の単純な解法を考えます。\nYes/No の問題なので、次の 2 通りが考えられます。\n実際には Yes だが No を出力してしまう。\n実際には No だが Yes を出力してしまう。\nまず、今回の問題においては前者のケースは存在しないことを示します。\n正解が Yes であるとき、ある\n\\(r\\)\nが存在して、任意の\n\\(i\\)\nに対して\n\\(\\frac{a_{i+1}}{a_i} = r\\)\nが成り立ちます。\n\\(10^9\\)\n以下の整数は誤差なく表せるため、任意の\n\\(i\\)\nに対して\n\\(a_{i+1}\\oslash a_i = \\hat r\\)\nとなります。ここで、\n\\(\\hat r\\)\nは\n\\(r\\)\nを\nf64\nで表せるように丸めた値、\n\\(x\\oslash y\\)\nは\n\\(\\frac xy\\)\nを\nf64\nで表せるように丸めた値とします。\n以降、正解が No であるのに Yes と判定してしまうケースを考えます。\n\\(\\frac{a_{i+1}}{a_i} \\ne \\frac{a_2}{a_1}\\)\nとなる\n\\(i\\)\nが一つでも存在すれば十分なので、\n\\(N=3\\)\nとしてよいです。\nある（これから考える）\n\\(\\varepsilon\\)\nに対して\n\\(\\frac{a_2}{a_1} = \\frac{a_3}{a_2} + \\varepsilon\\)\nとします。\n\\(a_2^2=a_1a_3+a_1a_2\\cdot\\varepsilon\\)\nです。\n\\(a_1a_2\\cdot\\varepsilon=1\\)\nとしてみると、\n\\((a_2-1)(a_2+1) = a_1a_3\\)\nとできます。\nここで、\n\\((a_1, a_3) = (a_2-1, a_2+1)\\)\nとしてみましょう。これにより、探索するべき変数が\n\\(a_2\\)\n一つになったため、\n\\(10^9\\)\n個程度であればすぐに調べられます。\n実際、たとえば\n\\(a_2 = 67114657\\)\nとすると下記が成り立ちます。\n\\[\n\\begin{aligned}\na_2\\oslash a_1 &= a_3\\oslash a_2 \\\\\n&=1.000000014899875{\\small 111495930468663}{\\scriptsize 57326507568359375} \\\\\n&= \\texttt{0x10000003FFE960}\\cdot 2^{-52}.\n\\end{aligned}\n\\]\nなので、下記のケースによって WA にすることができます。\nなお、たとえば\n\\(a_2 = 999999807\\)\nのケースでは、下記のように No と判定されます。\n\\[\n\\begin{aligned}\na_2\\oslash a_1 &= 1.000000001000000{\\small 304784975924121}{\\scriptsize 6816008090972900390625} \\\\\n&\\ne 1.000000001000000{\\small 082740370999090}{\\scriptsize 373516082763671875} \\\\\n&= a_3\\oslash a_2.\n\\end{aligned}\n\\]\n今回は（たまたま）\n\\(a_2 = 10^9-1\\)\nのケースで WA にすることもできますが、誤差は容易に予測できるものではないので、「大きいケースを適当に入れてみてうまくいったから、たぶん整数型を使わなくても大丈夫であろう」のような判断はしないようにしましょう。",
+      "codes": [
+        "use proconio::input;\nfn main() {\n    input! {\n        a: [f64],\n    }\n    let res = a.windows(2).all(|w| w[1] / w[0] == a[1] / a[0]);\n    println!(\"{}\", if res { \"Yes\" } else { \"No\" });\n}",
+        "3\n67114656 67114657 67114658"
+      ],
+      "text_sha256": "830377aacc8c883cb6178c20430e99b35330c036276b6f6a2f1bbab3816bca58",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc390/abc390_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc390/editorial/12058",
+      "text": "以下のような解法の場合、long double(80bit浮動小数点数、128bit浮動小数点数)を用いても、誤差によりWAとなるケースが存在します。\n具体的には\nなどです。\n出典\n実装例(C++)",
+      "codes": [
+        "r=A[1]/A[0]\nif all(A[i]*r==A[i+1]):\n  print(\"Yes\")\nelse:\n  print(\"No\")",
+        "3\n61058596 7814 1",
+        "// このコードを提出するとWAになります\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n;\n\tcin >> n;\n\tvector<int>a(n);\n\tfor(auto&x:a)cin >> x;\n\n\tlong double r=(long double)a[1]/a[0];\n\tfor(int i=0;i<n-1;i++){\n\t\tif(a[i]*r!=a[i+1]){\n\t\t\tcout << \"No\";\n\t\t\treturn 0;\n\t\t}\n\t}\n\tcout << \"Yes\";\n}"
+      ],
+      "text_sha256": "339a47458b8a7421da206ab0ddbc00898b90d4c26f242d0a899b2ff9947b9393",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc390/abc390_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

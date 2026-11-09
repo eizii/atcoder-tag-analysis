@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc343_g",
+  "title": "Compress Strings",
+  "contests": [
+    {
+      "contest_id": "abc343",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2114,
+  "raw_difficulty": 2114,
+  "contest_id": "abc343",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc343/tasks/abc343_g",
+  "statement": "配点 : 600 点 問題文 N 個の文字列 S_1,S_2,\\ldots,S_N が与えられます。 これらの文字列全てを部分文字列として含むような文字列の長さの最小値を求めてください。 ただし、ある文字列 S,T に対して、 S が T を部分文字列として含むとは、 S の先頭から 0 文字以上、末尾から 0 文字以上削除することで T が得られることをいいます。 制約 N は整数 1\\leq N \\leq 20 S_i は英小文字からなる長さ 1 以上の文字列 S_1,S_2,\\dots,S_N の長さの総和は 2\\times 10^5 以下 入力 入力は以下の形式で標準入力から与えられる。 N S_1 S_2 \\vdots S_N 出力 答えを整数として出力せよ。 入力例 1 3\nsnuke\nkensho\nuk 出力例 1 9 長さ 9 の文字列 snukensho は S_1,S_2,S_3 全てを部分文字列として含みます。 具体的には、 snukensho の 1 文字目から 5 文字目までが S_1 に、 4 文字目から 9 文字目までが S_2 に、 3 文字目から 4 文字目までが S_3 にそれぞれ対応しています。 これより短い文字列であって、 S_1,S_2,S_3 全てを部分文字列として含むものは存在しません。\nよって、答えは 9 です。 入力例 2 3\nabc\nabc\narc 出力例 2 6 入力例 3 6\ncmcmrcc\nrmrrrmr\nmrccm\nmmcr\nrmmrmrcc\nccmcrcmcm 出力例 3 27",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 個の文字列 S_1,S_2,\\ldots,S_N が与えられます。 これらの文字列全てを部分文字列として含むような文字列の長さの最小値を求めてください。 ただし、ある文字列 S,T に対して、 S が T を部分文字列として含むとは、 S の先頭から 0 文字以上、末尾から 0 文字以上削除することで T が得られることをいいます。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 N は整数 1\\leq N \\leq 20 S_i は英小文字からなる長さ 1 以上の文字列 S_1,S_2,\\dots,S_N の長さの総和は 2\\times 10^5 以下"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S_1 S_2 \\vdots S_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを整数として出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\nsnuke\nkensho\nuk"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 9 長さ 9 の文字列 snukensho は S_1,S_2,S_3 全てを部分文字列として含みます。 具体的には、 snukensho の 1 文字目から 5 文字目までが S_1 に、 4 文字目から 9 文字目までが S_2 に、 3 文字目から 4 文字目までが S_3 にそれぞれ対応しています。 これより短い文字列であって、 S_1,S_2,S_3 全てを部分文字列として含むものは存在しません。\nよって、答えは 9 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\nabc\nabc\narc"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 6"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 6\ncmcmrcc\nrmrrrmr\nmrccm\nmmcr\nrmmrmrcc\nccmcrcmcm"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 27"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc343/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:18.314847+00:00",
+  "statement_sha256": "d9aca16198dd63ed3b5bfc9d0e82499fe6e43ce103a135fe135fb1b5d77a2d53",
+  "editorials": []
+}

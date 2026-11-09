@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc287_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc287/editorial/5609",
+      "text": "\\(2\\)\n個以上の文字列\n\\(s_1, s_2, \\dots, s_n\\)\nについて、どの異なる\n\\(2\\)\nつの文字列も先頭から\n\\(k\\)\n文字以上一致しているとします。これらが入力として与えられたときに\n\\(\\max_{i \\neq j} \\mathrm{LCP}(s_i, s_j)\\)\nを全ての\n\\(i\\)\nについて求める方法を説明します。\n\\(s_1, s_2, \\dots, s_n\\)\nのうち長さがちょうど\n\\(k\\)\nのものがあるならば、それらに対する答えは明らかに\n\\(k\\)\nです。以下では全て長さが\n\\(k+1\\)\n以上であるとします。\n\\(s_1, s_2, \\dots, s_n\\)\nを\n\\(k+1\\)\n文字目によって分類します。文字の種類数を\n\\(\\sigma \\, ( = 26)\\)\nとして、\n\\(\\sigma\\)\n個のグループに分類することができます。\n\\(1\\)\n個以下の文字列しか存在しないグループについては、答えが\n\\(k\\)\nで確定します。一方で、\n\\(2\\)\n個以上の文字列が存在するグループについては、同じグループ内のどの異なる\n\\(2\\)\nの文字列も先頭から\n\\(k+1\\)\n文字以上が一致しています。よって、グループ内の文字列に対し、\n\\(k \\leftarrow k+1\\)\nとして再帰的に同じ問題を解けばよいです。\n\\((s_1, s_2, \\dots, s_n) \\leftarrow (S_1, S_2, \\dots, S_N), k \\leftarrow 0\\)\nとした場合の答えが求めたい値です。上記の方法を再帰関数などで実装することにより、\n\\(O(\\sigma (N + \\sum |S_i|))\\)\nでこの問題を解くことができます。\n実装例 (C++)",
+      "codes": [],
+      "text_sha256": "5f516cee1d68319ed23f3737b5c2c3093a1f9d4a5bed3a14bce9b2022fee6e86",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc287/abc287_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc287/editorial/5645",
+      "text": "\\(\\text{LCP}(s,t)\\lt \\text{LCP}(s,u)\\)\nを満たす相異なる文字列\n\\(s,t,u\\)\nが、辞書順で\n\\(s\\lt t\\lt u\\)\nとなることがあり得ないことは、\n\\((\\text{LCP}(s,t)+1)\\)\n文字目を比較するときの結果で矛盾することからわかります。逆方向\n\\((u\\lt t\\lt s)\\)\nも同様です。\nよって、与えられた文字列を辞書順でソートしたあとに隣接する文字列の組の\n\\(\\text{LCP}\\)\nのみ考えても十分です。\n長さの合計が\n\\(N\\)\nであるような列たちのソートは\n\\(O(N\\log N)\\)\n時間でできて、必要な\n\\(\\text{LCP}\\)\nの計算は\n\\(O(N)\\)\n時間でできるので、全体で\n\\(O(N\\log N)\\)\n時間で問題に答えることができます。",
+      "codes": [],
+      "text_sha256": "10e0e47b25c4ec8c158fb6d527f4b7b7e772200bbf548ef22f94a5f67f1d4e98",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc287/abc287_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

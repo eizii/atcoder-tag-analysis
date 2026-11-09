@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc430_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc430/editorial/14298",
+      "text": "問題原案：admin\nこの問題のようにあるものが何種類あるかを求めるには、数える対象のものを全てsetに入れてそのサイズを求めるのが簡単です。\n取り出した\n\\(M\\times M\\)\nの領域を適当な状態に持ってsetに入れましょう。\n実装例(C++)\npythonの場合、listをsetに入れることはできないので、tupleを用いる必要があります。\n実装例(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int N,M;\n  cin >> N >> M;\n  vector<string>S(N);\n  for(int i=0;i<N;i++)cin >> S[i];\n\n  set<vector<string>>grid_set;\n  for(int i=0;i<N-M+1;i++)for(int j=0;j<N-M+1;j++){\n    vector<string>grid;\n    for(int ii=i;ii<i+M;ii++)grid.push_back(S[ii].substr(j,M));\n    grid_set.insert(grid);\n  }\n\n  cout << grid_set.size() << endl;\n}",
+        "N,M=map(int,input().split())\nS=[input() for _ in range(N)]\n\ngrid_set=set()\nfor i in range(N-M+1):\n  for j in range(N-M+1):\n    grid = tuple(S[ii][j:j+M] for ii in range(i,i+M))\n    grid_set.add(grid)\n\nprint(len(grid_set))"
+      ],
+      "text_sha256": "75fb8c613125515aec8b6eab4940a1fdd581b75c3a57749b1cdb60a227518e5b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc430/abc430_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

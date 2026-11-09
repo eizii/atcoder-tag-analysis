@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc127_b",
+  "editorials": [
+    {
+      "text": "B: Algae\nfor ループを回すことによって漸化式の通りにシミュレーションしましょう。配列x[i] を用意して\nx[2001], ..., x[2010] を順に求め、出力してもよいですし、変数x を随時更新し、更新するごとに出力\nしてもよいです。\nC++ での実装例は以下の通りです。\nint main(){\nint r,K;\nint x;\nscanf(\"%d%d%d\",&r,&K,&x);\nfor(int i=0;i<10;i++){\nx=x*r-K;\nprintf(\"%d\\n\",x);\n}\n}\n",
+      "text_sha256": "ed7bbacc768d3c2d2b3d941989b051f4002b5fcf2e961abd15efce5e0ee3a391",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc127/abc127_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

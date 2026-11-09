@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc357_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc357/editorial/10184",
+      "text": "この問題は文字列を処理する能力を問うている問題です。この問題が解けなかった方は文字列を扱う方法を復習してみましょう。\nこの問題は次の手順で解くことが出来ます。\n\\(S\\)\nに含まれる小文字の個数と大文字の個数を数え、値の大小に応じて次の操作を行う。\n小文字の個数が大文字の個数より大きい場合は、\n\\(S\\)\nに含まれる大文字を全て小文字に置き換える。\n大文字の個数が小文字の個数より大きい場合は、\n\\(S\\)\nに含まれる小文字を全て大文字に置き換える。\n主要なプログラミング言語では小文字・大文字に関する専用の関数が用意されています。例えば C++ では次のような関数が存在します。\nislower(c)\n:\nc\nが小文字かどうかを判定する関数\nisupper(c)\n:\nc\nが大文字かどうかを判定する関数\ntolower(c)\n:\nc\nを小文字に変換した文字を返す関数\ntoupper(c)\n:\nc\nを大文字に変換した文字を返す関数\nこれらの関数を適切に使用することで上記の手順を実装することが出来ます。計算量は\n\\(\\mathrm{O}(|S|)\\)\nで十分高速です。\n実装例 (C++)",
+      "codes": [
+        "#include <cctype>\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n  string S;\n  cin >> S;\n\n  int lower = 0, upper = 0;\n  for (auto& c : S) {\n    (islower(c) ? lower : upper)++;\n  }\n\n  if (lower < upper) {\n    for (auto& c : S) {\n      if (islower(c)) c = toupper(c);\n    }\n  } else {\n    for (auto& c : S) {\n      if (isupper(c)) c = tolower(c);\n    }\n  }\n\n  cout << S << \"\\n\";\n}"
+      ],
+      "text_sha256": "5bfcd69a732911754fdbf7b98bfc0ab2f2981c5b90ca21e4482bb84fd695d94f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc357/abc357_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

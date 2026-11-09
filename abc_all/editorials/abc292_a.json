@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc292_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5871",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\nある英小文字\n\\(c\\)\nを英大文字に変換する処理は、例えばC++ではtoupper関数を用いて以下のように書けます。\nそこで、for文を用いて\n\\(S\\)\nの各文字を順番にtoupperに変換すれば良いです。\n実装例 (C++)",
+      "codes": [
+        "//Cにcを大文字に変換したものを代入\nchar C = toupper(c);",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tstring S;\n\tcin>>S;\n\t\n\tstring T = \"\";\n\t\n\tfor(int i=0;i<S.size();i++)T += toupper(S[i]);\n\t\n\tcout<<T<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "2a6c3630fef73efd1282b3b6cd69793e60404b6dc6e6ee0d2ac6182314898ad2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc292/abc292_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

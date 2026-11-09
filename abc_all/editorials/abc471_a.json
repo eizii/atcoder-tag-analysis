@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc471_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc471/editorial/24211",
+      "text": "いずれかの条件を満たしているかを管理する Boolean 変数 \\(\\mathrm{hasnine}\\) を，初期値を偽として持っておきます． \\(4\\) つの条件ごとに，満たしていれば \\(\\mathrm{hasnine}\\) を真に更新する処理を行います． \\(4\\) 条件をすべて処理した時点での \\(\\mathrm{hasnine}\\) の値が真か偽かで判定すればよいです． 実装例 (Python3) 実装例 (C++)",
+      "codes": [
+        "a, b = map(int, input().split())\n\nhasnine = False\nif (a + b == 9):\n  hasnine = True\nif (a - b == 9):\n  hasnine = True\nif (a * b == 9):\n  hasnine = True\nif (a == b * 9):\n  hasnine = True\n\nif hasnine:\n  print(\"Nine\")\nelse:\n  print(\"Nein\")\n",
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n\n\nint main (void) {\n\tint a, b;\n\n\t// Input\n\tcin >> a >> b;\n\n\t// Solve\n\tbool hasnine = false;\n\tif (a + b == 9) hasnine = true;\n\tif (a - b == 9) hasnine = true;\n\tif (a * b == 9) hasnine = true;\n\tif (a == b * 9) hasnine = true;\n\n\t// Output\n\tif (hasnine) {\n\t\tcout << \"Nine\" << \"\\n\";\n\t} else {\n\t\tcout << \"Nein\" << \"\\n\";\n\t}\n\n\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "398abfdf37d123270d01f8eae683f742429718eaaca947df60cff00d1765758d"
+    }
+  ],
+  "status": "available"
+}

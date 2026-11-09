@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc380_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc380/editorial/11362",
+      "text": "\\(1\\)\n文字目から\n\\(|S|\\)\n文字目を\n\\(0\\)\nブロック目\n\\(|S|+1\\)\n文字目から\n\\(2 \\times |S|\\)\n文字目を\n\\(1\\)\nブロック目\n\\(2 \\times |S|+1\\)\n文字目から\n\\(3 \\times |S|\\)\n文字目を\n\\(2\\)\nブロック目\n\\(\\dots\\)\nと呼ぶことにします。すると、操作後にできる文字列のうち\n\\(0\\)\nブロック目は\n\\(S\\)\n\\(1\\)\nブロック目は\n\\(S\\)\nの大小文字を反転したもの\n\\(2\\)\nブロック目は\n\\(S\\)\nの大小文字を反転したもの\n\\(3\\)\nブロック目は\n\\(S\\)\n\\(4\\)\nブロック目は\n\\(S\\)\nの大小文字を反転したもの\n\\(5\\)\nブロック目は\n\\(S\\)\n\\(6\\)\nブロック目は\n\\(S\\)\n\\(7\\)\nブロック目は\n\\(S\\)\nの大小文字を反転したもの\n\\(\\dots\\)\nとなることが分かります。\n\\(S\\)\nの\n\\(1\\)\nブロックから始めて、「全体の大小文字を反転したものを後ろにつける」という操作を繰り返していることになります。この操作を\n\\(k\\)\n回繰り返すと、全体は\n\\(2^k\\)\nブロックになります。\nこのことから、次が成立します。\n\\(B\\)\nブロック目の文字を特定したいとする。\n\\(B\\)\nを\n\\(2\\)\n進表記した際、最も上位にある\n\\(1\\)\nが\n\\(2^k\\)\nの位であるとき、\n\\(B\\)\nブロック目は\n\\(B-2^k\\)\nブロック目の大小文字を反転したものになる。\nこれを\n\\(B=0\\)\nになるまで辿ることでもこの問題に正解できますが、その過程を考えると次が成立します。\n\\(B\\)\nを\n\\(2\\)\n進表記した際の各桁に含まれる\n\\(1\\)\nの数が偶数なら、\n\\(B\\)\nブロック目は\n\\(S\\)\n\\(B\\)\nを\n\\(2\\)\n進表記した際の各桁に含まれる\n\\(1\\)\nの数が奇数なら、\n\\(B\\)\nブロック目は\n\\(S\\)\nの大小文字を反転したもの\nよって、\n\\(K_i\\)\n文字目が何ブロック目の何文字目かを特定し、そのブロックの番号を\n\\(2\\)\n進表記した際に各桁にいくつ\n\\(1\\)\nが含まれるか求めればこの問題に正解できます。\n\\(2\\)\n進表記した際の\n\\(1\\)\nの数はループ等を用いて数えても良ければ、\npopcount\nのような\n\\(2\\)\n進表記において立っている bit の個数を数える関数を利用しても良いです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nchar flip(char c){\n  if('a'<=c && c<='z'){\n    return (c-'a')+'A';\n  }\n  else{\n    return (c-'A')+'a';\n  }\n}\n\nint main(){\n  string s;\n  cin >> s;\n  int q;\n  cin >> q;\n  for(int i=0;i<q;i++){\n    if(i){cout << \" \";}\n    long long k;\n    cin >> k;\n    k--;\n    long long blk=k/s.size();\n    long long pt=k%s.size();\n    if(popcount((unsigned long long)blk)%2){\n    // if(__builtin_popcountll(blk)%2){\n    // if(__builtin_parityll(blk)){\n      cout << flip(s[pt]);\n    }\n    else{\n      cout << s[pt];\n    }\n  }cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "0245f192ea492ac7a055205258e23e87cc3af8c60365b3568e2e43c80eeadcdd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc380/abc380_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc380/editorial/11364",
+      "text": "\\(S\\) の長さを \\(N\\) とし、\\(N,Q\\) および各 \\(K _ i\\) が \\(1\\) ワードに収まる整数であると仮定して、各 \\(K _ i\\) ごとに \\(O(\\log\\log w)\\) 回の演算で答えを求める方法について解説します。\n公式解説と同様の考察を経ることで、\\(\\left\\lfloor\\dfrac{K _ i}N\\right\\rfloor\\) に立っているビットが奇数個か偶数個かを判定するパート以外は定数回の演算で行うことができることがわかります。\n以下、\\(w\\operatorname{bit}\\) の整数 \\(x\\) に対して、\\(4+2\\bigl\\lceil\\log _ 2(\\log _ 2w-\\log _ 2\\log _ 2w+o(1))\\bigr\\rceil\\) 回の演算で \\(x\\) に立っているビットの本数の偶奇を求める方法を解説します。\nまず、\\(w\\leq 2 ^ k2 ^ {2 ^ k}\\) が成り立つ非負整数 \\(k\\) をとります。\nまた、\\(M=1+2 ^ {2 ^ k}+2 ^ {2\\times2 ^ k}+\\cdots+2 ^ {\\lfloor(w-1)/{2 ^ k}\\rfloor 2 ^ k}\\) とします。\n次のアルゴリズムを考えます。\n\\(i=0,1,\\ldots,k-1\\) について、以下を行う。\n\\(w\\leftarrow w\\oplus w/2 ^ {2 ^ i}\\) とする（ここで、\\(\\oplus\\) はビットごとの排他的論理和とする）。\n\\(w\\leftarrow w\\;\\&\\; M\\) とする（ここで、\\(\\&\\) はビットごとの論理積とする）。\n\\(w\\times M\\) の \\(\\left\\lfloor\\dfrac{w-1}{2 ^ k}\\right\\rfloor2 ^ k\\operatorname{bit}\\) めが求める値である。\nこれは、ワードサイズの演算を \\(2k+4\\) 回行うことで実現できます。\nまず、これが正しい偶奇を与えることを示します。\n補題\nはじめの \\(w\\) と、整数 \\(n\\) について、\\(w _ n=\\left\\lfloor\\dfrac w{2 ^ {n2 ^ k}}\\right\\rfloor\\bmod{2 ^ {2 ^ k}}\\) と定める。\n2 番目のステップが終了した時点における \\(w\\) について、以下の \\(2\\) つが成り立つ。\n\\(2 ^ {n2 ^ k}\\operatorname{bit}\\) めの形として表されるビット以外は立っていない。\n\\(2 ^ {n2 ^ k}\\operatorname{bit}\\) めは、\\(w _ n\\) の立っているビットが奇数個のとき、かつそのときに限り立っている。\n補題の証明\n\\(M _ i=1+2 ^ {2 ^ i}+\\cdots+2 ^ {\\lfloor(w-1)/2 ^ i\\rfloor2 ^ i}\\) として、1. のループを繰り返すたびはじめに \\(w\\leftarrow w\\;\\&\\;M _ i\\) としているとしても答えが変わらないことが示せます。\nすると、それぞれ帰納法によって示すことができます。\n\\(w\\times M\\) の \\(\\left\\lfloor\\dfrac{w-1}{2 ^ k}\\right\\rfloor2 ^ k\\operatorname{bit}\\) めがどのような値になるか考えてみましょう。\n\\(p _ n\\) を \\(w _ n\\) の立っているビットが奇数個なら \\(1\\) 、そうでなければ \\(0\\) であるようなものとします。\n2 番目のステップが終了した時点で、\\(\\displaystyle w=\\sum _ n2 ^ {n2 ^ k}p _ n\\) となっていることに注意してください。\nまず、\\(\\left\\lfloor\\dfrac{w-1}{2 ^ k}\\right\\rfloor2 ^ k\\operatorname{bit}\\) めへの繰り上がりが生じることはないことが示せます（積を筆算のように整理するとよいでしょう）。\nここから、このビットが立っているかどうかは、\\(p _ n\\) のうち奇数個が \\(1\\) であるかと同値になります。\nこれは、\\(w\\) のビットのうち奇数個が経っていることと同値であり、正しい答えが得られることがわかりました。\\(\\square\\)\nよってこれを実装することでクエリごとに \\(O(\\log\\log w)\\) 回の演算で答えを求めることができます（\\(k=\\bigl\\lceil\\log _ 2(\\log _ 2w-\\log _ 2\\log _ 2w+o(1))\\bigr\\rceil\\) と評価することは、Lambert の W 関数に関する評価などを使うことでできます。\\(\\lceil\\log _ 2\\log _ 2w\\rceil\\) で上からおさえられるのはほぼ明らかです）。\n\\(w=64\\) のとき、\\(k=2\\) として正しい答えを求めることができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string S;\n    cin >> S;\n    unsigned Q;\n    cin >> Q;\n\n    unsigned long N = size(S);\n\n    for (unsigned i = 0; i < Q; ++i) {\n        unsigned long K;\n        cin >> K;\n        --K;\n        // 何周期目の何文字目かを求める\n        unsigned long repeat = K / N, offset = K % N;\n        // 周期の情報から大文字小文字が入れ替わっているかを求める\n        unsigned long parity = repeat;\n        parity ^= parity >> 1;\n        parity ^= parity >> 2;\n        parity &= 0x1111111111111111UL;\n        parity = 1 & (parity * 0x1111111111111111UL >> 60);\n        \n        // parity が 1 なら大文字小文字を入れ替える\n        putchar(S[offset] ^ 32 * parity);\n        putchar(32);\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "35d9d1c89e9c8d3787ac948a228b869fa681156cc9d02b375fbda8977c17f034",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc380/abc380_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc380/editorial/11379",
+      "text": "（\n公式解説\nの「これを\n\\(B=0\\)\nになるまで辿ることでもこの問題に正解できますが」の再帰関数による実装です。）\n\\(S\\)\nの長さを\n\\(N\\)\nとし、\n\\(S\\)\nに問題文中の操作を\n\\(l\\)\n回施して得られる文字列をレベル\n\\(l\\)\nの文字列と呼びます。操作を行うたびに文字列の長さが倍になるため、レベル\n\\(l\\)\nの文字列の長さは\n\\(2^l \\times N\\)\nであり、\n\\(K_i \\leq 10^{18}\\)\nという制約を考慮するとレベル\n\\(60\\)\nの文字列を考えれば十分です。\nレベル\n\\(0\\)\nの文字列の\n\\(k\\)\n文字目は\n\\(S\\)\nの\n\\(k\\)\n文字目です。\nレベル\n\\(l\\)\n（\n\\(l \\geq 1\\)\n）の文字列の\n\\(k\\)\n文字目は、この文字列の前半がレベル\n\\(l-1\\)\nの文字列と一致して後半がその文字列の大文字小文字を入れ替えたものであることに注意すると以下の通りです。\n\\(k \\leq 2^l \\times N\\)\nなら、レベル\n\\(l-1\\)\nの文字列の\n\\(k\\)\n文字目\nそうでないなら、レベル\n\\(l-1\\)\nの文字列の\n\\(k-2^{l-1} \\times N\\)\n文字目の大文字小文字を入れ替えたもの\nこれは再帰関数としてそのまま実装できます。\n実装例（Python）",
+      "codes": [
+        "S = input()\nQ = int(input())\nK = map(int, input().split())\n\n\ndef f(k, l):\n    if l == 0:\n        return S[k - 1]\n    h = len(S) << (l - 1)\n    if k <= h:\n        return f(k, l - 1)\n    return chr(ord(f(k - h, l - 1)) ^ 32)\n\n\nfor k in K:\n    print(f(k, 60), end=\" \")"
+      ],
+      "text_sha256": "c3f7ab0a14c397a1dfeda11917e12a9f610f7cdbc1264ecba9c4f5b266fed463",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc380/abc380_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

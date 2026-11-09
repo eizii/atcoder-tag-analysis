@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc452_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc452/editorial/18360",
+      "text": "\\(S\\) の \\(i\\) 文字目 \\((1\\le i\\le |S|)\\) や \\(T\\) の \\(i\\) 文字目 \\(1\\le i\\le |T|\\) を \\(S _ i,T _ i\\) と書くこととします。\n次のように \\(\\operatorname{dp} _ {i}[j]\\ (1\\le i\\le |S|,0\\le j\\le |T|)\\) を定めます。\n\\(\\operatorname{dp} _ i[j]\\coloneqq S\\) の部分文字列 \\(S _ kS _ {k+1}\\cdots S _ i\\ (1\\le k\\le i)\\)  のうち、次の \\(2\\) つの条件を満たすものの個数\n\\(j=0\\) もしくは部分列として \\(T _ 1T _2\\cdots T _ j\\) を含む\n\\(j=|T|\\) もしくは部分列として \\(T _ 1T _ 2\\cdots T _ {j+1}\\) を含まない\nこれは、次のように計算することができます（配る DP の形で書くほうが簡単かもしれません）。\n\\[\\begin{aligned}\\operatorname{dp} _ i[j]={}&\\begin{cases}1&\\quad&(j=0\\wedge S _ i\\ne T _ 1)\\\\0&&(\\text{otherwise})\\end{cases}\\\\&{}+\\begin{cases}1&\\quad&(j=1\\wedge S _ i=T _ 1)\\\\0&&(\\text{otherwise})\\end{cases}\\\\&{}+\\begin{cases}\\operatorname{dp} _ {i-1}[j]&\\quad&(j\\lt|T|\\wedge S _ i\\ne T _ {j+1})\\\\0&&(\\text{otherwise})\\end{cases}\\\\&{}+\\begin{cases}\\operatorname{dp} _ {i-1}[j-1]&\\quad&(S _ i=T _ j)\\\\0&&(\\text{otherwise})\\end{cases}\\end{aligned}\\]\n求めるものは \\(\\displaystyle\\sum _ {i=1} ^ {|S|}\\sum _ {j=0} ^ {|T|-1}\\operatorname{dp} _ i[j]\\) です。\nこれは \\(O(|S||T|)\\) 時間で求めることができ、十分高速です。\n答えを求めるのに、すべての空でない部分文字列の個数 \\(\\dfrac{|S|(|S|+1)}2\\) から \\(\\displaystyle\\sum _ {i=1} ^ {|S|}\\operatorname{dp} _ i[|T|]\\) を引いてもよいでしょう。\n実装例は以下のようになります。\nin-place に DP テーブルを更新すると、少し実装が楽になるかもしれません。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <vector>\n#include <ranges>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n    string S, T;\n    cin >> S >> T;\n\n    vector<unsigned> dp(size(T) + 1);\n\n    unsigned long ans = 0;\n    for (const auto s : S) { // S の各文字 s を順に見て\n        ++dp.front();\n        for (const auto i : views::enumerate(T) | views::filter([s](const auto& t){return s == get<1>(t);}) | views::reverse | views::keys) { // s = T[i] となる i について降順に\n            dp[i + 1] += dp[i]; // dp テーブルを更新する\n            dp[i] = 0;\n        }\n        ans += ranges::fold_left(dp | views::take(size(T)), 0UL, plus{}); // 答えに dp テーブルの合計を足す\n    }\n    cout << ans << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "cb94406cbfad29ec93425102df147cc631e34c4bcf9898fe35c92d5428e040a7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc452/abc452_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc452/editorial/18418",
+      "text": "以下\n\\(|S|=N, |T|=M\\)\nとおきます．\n\\(S\\)\nの\n\\(l\\)\n文字目から\n\\(r\\)\n文字目を取り出して得られる部分文字列を，\n\\(S(l, r)\\)\nと表します．このとき，\n\\(S(l, r)\\)\nの部分列に\n\\(T\\)\nが含まれる最小の\n\\(r\\)\nを\n\\(r_{max}(l)\\)\nとすると，\n\\(r \\geq r_{max}(l)\\)\nのとき，\n\\(S(l, r)\\)\nは\n\\(T\\)\nを部分列として含む．\n\\(r < r_{max}(l)\\)\nのとき，\n\\(S(l, r)\\)\nは\n\\(T\\)\nを部分列として含まない．\nこれにより，答えは\n\\(\\sum_{1 \\leq l \\leq N}(r_{max}(l) - l)\\)\nとなります．\n\\(l\\)\nを固定したときの\n\\(r_{max}(l)\\)\nの求め方を考えましょう．これは，\n\\(nxt(i, c) =\\)\n(\n\\(S\\)\nにおいて，\n\\(i\\)\n文字目以降で文字\n\\(c\\)\nが初めて現れる位置) を全ての\n\\(i, c\\)\nに対して前計算しておけば，\n部分列DP\nの要領で\n\\(T\\)\nの各文字を最も早く現れる箇所から貪欲に選んでいく方法によって，\n\\(O(M)\\)\nで求められます．\n\\(nxt(i, c)\\)\nは後ろから順に決定していくことで，\n\\(\\sigma = 26\\)\nとして\n\\(O(\\sigma N)\\)\nで計算可能です．\n以上の方法で，\n\\(O((\\sigma + M)N)\\)\nでこの問題を解くことができます．",
+      "codes": [],
+      "text_sha256": "f078ecfda0d3eb9c0f4cc93e71d954c57e4da9e1e3b62e74d80c0cdc6cf6f6dd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc452/abc452_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc452/editorial/18420",
+      "text": "この問題は、各\n\\(i\\)\n(\n\\(1 \\leq i \\leq N\\)\n) に対し、\n\\(s\\)\nの\n\\(i\\)\n文字目から\n\\(j\\)\n文字目からなる部分文字列が\n\\(T\\)\nを部分列として含まない最大の\n\\(j\\)\nを求め、各\n\\(i\\)\nに対する\n\\(j\\)\nの範囲の長さの和を取ると解けます。\n(自明に、\n\\(S\\)\nの\n\\(i\\)\n文字目から\n\\(j\\)\n文字目からなる部分文字列が\n\\(T\\)\nを部分列として含むなら、\n\\(S\\)\nの\n\\(i\\)\n文字目から\n\\(j+1\\)\n文字目からなる部分文字列も\n\\(T\\)\nを部分列として持つので、条件を満たす\n\\(j\\)\nは\n\\(1\\)\nつの範囲となる)\nこれは、貪欲に\n\\(T\\)\nの文字を順番に\n\\(1\\)\n番左にあるものを取ればよく、これは\n\\(S\\)\nの文字とindexを持った配列を作っておいて、二分探索をすれば求められます。\nよって、この問題が\n\\(O(|S||T|\\)\n\\(log |S|)\\)\nで解けます",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nusing ll=long long;\n#define pb push_back\n#define all(x) (x).begin(), (x).end()\n\nint main(){\n    ios::sync_with_stdio(false);cin.tie(nullptr);\n    string s,t;\n    cin>>s>>t;\n    int N=s.size(),M=t.size();\n    vector<vector<int>>idx(26);\n    for(int i=0;i<N;i++){\n        idx[s[i]-'a'].pb(i);\n    }\n    for(int i=0;i<26;i++)idx[i].pb(N);\n    ll ans=0;\n    for(int i=0;i<N;i++){\n        int rig=i-1;\n        for(int j=0;j<M;j++){\n            rig=*upper_bound(all(idx[t[j]-'a']),rig);\n            if(rig==N)break;\n        }\n        ans+=(rig-i);\n    }\n    cout<<ans<<\"\\n\";\n}"
+      ],
+      "text_sha256": "25d9588f175edaa8cb6ab68a58d85a666af70a22cabb4f05f28d1e2096f6fa46",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc452/abc452_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

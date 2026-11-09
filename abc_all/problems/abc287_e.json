@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc287_e",
+  "title": "Karuta",
+  "contests": [
+    {
+      "contest_id": "abc287",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1093,
+  "raw_difficulty": 1093,
+  "contest_id": "abc287",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc287/tasks/abc287_e",
+  "statement": "配点 : 500 点 問題文 英小文字からなる文字列が N 個与えられます。 i \\, (i = 1, 2, \\dots, N) 番目のものを S_i と表します。 二つの文字列 x, y に対し、以下の条件を全て満たす最大の整数 n を \\mathrm{LCP}(x, y) と表します。 x, y の長さはいずれも n 以上 1 以上 n 以下の全ての整数 i に対し、 x の i 文字目と y の i 文字目が等しい 全ての i = 1, 2, \\dots, N に対し、以下の値を求めてください。 \\displaystyle \\max_{i \\neq j} \\mathrm{LCP}(S_i, S_j) 制約 2 \\leq N \\leq 5 \\times 10^5 N は整数 S_i は英小文字からなる長さ 1 以上の文字列 (i = 1, 2, \\dots, N) S_i の長さの総和は 5 \\times 10^5 以下 入力 入力は以下の形式で標準入力から与えられる。 N S_1 S_2 \\vdots S_N 出力 N 行出力せよ。 i \\, (i = 1, 2, \\dots, N) 行目には、 \\displaystyle \\max_{i \\neq j} \\mathrm{LCP}(S_i, S_j) を出力せよ。 入力例 1 3\r\nabc\r\nabb\r\naac 出力例 1 2\r\n2\r\n1 \\mathrm{LCP}(S_1, S_2) = 2, \\mathrm{LCP}(S_1, S_3) = 1, \\mathrm{LCP}(S_2, S_3) = 1 です。 入力例 2 11\r\nabracadabra\r\nbracadabra\r\nracadabra\r\nacadabra\r\ncadabra\r\nadabra\r\ndabra\r\nabra\r\nbra\r\nra\r\na 出力例 2 4\r\n3\r\n2\r\n1\r\n0\r\n1\r\n0\r\n4\r\n3\r\n2\r\n1",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英小文字からなる文字列が N 個与えられます。 i \\, (i = 1, 2, \\dots, N) 番目のものを S_i と表します。 二つの文字列 x, y に対し、以下の条件を全て満たす最大の整数 n を \\mathrm{LCP}(x, y) と表します。 x, y の長さはいずれも n 以上 1 以上 n 以下の全ての整数 i に対し、 x の i 文字目と y の i 文字目が等しい 全ての i = 1, 2, \\dots, N に対し、以下の値を求めてください。 \\displaystyle \\max_{i \\neq j} \\mathrm{LCP}(S_i, S_j)"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 5 \\times 10^5 N は整数 S_i は英小文字からなる長さ 1 以上の文字列 (i = 1, 2, \\dots, N) S_i の長さの総和は 5 \\times 10^5 以下"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S_1 S_2 \\vdots S_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N 行出力せよ。 i \\, (i = 1, 2, \\dots, N) 行目には、 \\displaystyle \\max_{i \\neq j} \\mathrm{LCP}(S_i, S_j) を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\nabc\r\nabb\r\naac"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2\r\n2\r\n1 \\mathrm{LCP}(S_1, S_2) = 2, \\mathrm{LCP}(S_1, S_3) = 1, \\mathrm{LCP}(S_2, S_3) = 1 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 11\r\nabracadabra\r\nbracadabra\r\nracadabra\r\nacadabra\r\ncadabra\r\nadabra\r\ndabra\r\nabra\r\nbra\r\nra\r\na"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 4\r\n3\r\n2\r\n1\r\n0\r\n1\r\n0\r\n4\r\n3\r\n2\r\n1"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc287/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:09.296487+00:00",
+  "statement_sha256": "1bd192825615cbfbb70f9c910d7c8d6f1d54b05cf2f274bc1d469037f08e5894",
+  "editorials": []
+}

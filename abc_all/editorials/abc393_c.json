@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc393_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc393/editorial/12242",
+      "text": "グラフが単純にする、すなわち自己ループと多重辺が存在しない状態にするために削除するべき辺を考えると、次の 2 通りが考えられます。\n\\(u=v\\)\nである辺\n\\((u,v)\\)\nが存在する場合 : 自己ループなので必ず削除する必要があります。\n\\(u \\neq v\\)\nである辺\n\\((u,v)\\)\nが複数本存在する場合 : 多重辺なので 1 本だけ残してそれ以外を全て削除する必要があります。\nよって、自己ループとなる辺は無条件に答えに本数を加算してよく、それ以外の辺については辺\n\\((u,v)\\)\nが\n\\(k\\)\n本存在するごとに\n\\(k-1\\)\n本を答えに加算すればよいです。\n実装には辺の種類ごとに登場する回数をカウントすることが出来ればよく、これは C++ の\nstd::map\nなどの辞書と呼ばれるデータ構造を用いれば高速にカウントできます。計算量は全体で\n\\(\\mathrm{O}(M \\log M)\\)\n程度となり十分高速です。\n\\(u \\neq v\\)\nの時に辺\n\\((u,v)\\)\nと辺\n\\((v,u)\\)\nを同一視する必要がある点に注意してください。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <map>\nusing namespace std;\n\nint main() {\n  cin.tie(0)->sync_with_stdio(0);\n  int N, M;\n  cin >> N >> M;\n  int ans = 0;\n  map<pair<int, int>, int> m;\n  for (int i = 0; i < M; i++) {\n    int u, v;\n    cin >> u >> v;\n    if (u == v) {\n      ans++;\n      continue;\n    }\n    if (u > v) swap(u, v);\n    m[{u, v}]++;\n  }\n  for (auto& [edge, k] : m) ans += k - 1;\n  cout << ans << \"\\n\";\n}"
+      ],
+      "text_sha256": "c6e694bf93f662e853620282e981e7e8a9cb0fa81111ebf2aae9a0d3ba10437e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc393/abc393_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

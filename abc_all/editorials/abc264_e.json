@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc264_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4583",
+      "text": "「電線を切る」操作はグラフ理論の用語に言い換えると「辺を削除する」操作ですが、グラフにとって「辺を削除する」操作は基本的には「辺を追加する」操作に比べて大変であることが多いです。\nなので、どうにかして「辺を削除する」操作を「辺を追加する」操作に言い換えましょう。\n今回は、操作を「逆から見る」ことが有効です。\n端的に述べると、「電線を切る」のではなく「電線を繋ぐ」ことを考えます。\n問題を以下のように言い換えましょう。\n最初、\n\\(N\\)\n個の都市と\n\\(M\\)\n個の発電所があり、いくつかの地点は電線で繋がっています。\n(元の問題で最後まで切れなかった電線だけを、最初から繋がっているものとして取り扱います。)\nその後、\n\\(Q\\)\n個のイベントが与えられます。(このイベントは、元の問題と逆の順番に並べておきます。)\n各イベントでは以下のことが起こります。\nまず、現時点で電気が通っている都市の数を確認する。\nその後、地点\n\\(U_i\\)\nと地点\n\\(V_i\\)\nとの間を電線で接続する。\nこの問題が解ければ、もとの問題も解けることになります。\n辺を追加していき連結成分の中に発電所があるかどうかという問題を解くことは、 Union-Find の得意分野です。\n以下の流れで辺を追加しながら現時点で電気が通っている都市の数を求めることができます。\n既に地点\n\\(U_i\\)\nと\n\\(V_i\\)\nが同じ連結成分に存在している場合、その辺の追加を無視する。\nそうでない場合、まず地点\n\\(U_i,V_i\\)\nの存在する連結成分に発電所があるかを確認する。\n両方の連結成分に発電所がある / 両方の地点に発電所がない 場合は新たに電気が通る都市はない。\n片方の成分に発電所がありもう片方にはない場合、発電所がない側に含まれる都市が新たに電気が通る都市となります。(この数は何らかの手段で管理しておく必要があります。ただし、発電所がない側に含まれる地点は全て電気が通っていない都市であるため、この数は発電所がない側の連結成分のサイズと一致します。)\nその後、\n\\(2\\)\nつの連結成分を併合する。\nなお、頂点に付いた重みの連結成分についての和を管理する機能があるような Union-Find を持っていない場合でも、通常の Union-Find の根(代表元)を返す機能を活用する (例えば ACL 内の\ndsu\nでは\n.leader()\nという機能があります。実装例を参照してください。) ことで同等の機能を実現することができます。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/all>\n\nusing namespace std;\nusing namespace atcoder;\n\nint main(){\n  int n,m,e;\n  cin >> n >> m >> e;\n  vector<int> u(e),v(e);\n  for(int i=0;i<e;i++){\n    cin >> u[i] >> v[i];\n    u[i]--;v[i]--;\n  }\n\n  vector<int> fl(e,1);\n  int q;\n  cin >> q;\n  vector<int> query(q);\n  for(auto &nx : query){\n    cin >> nx;\n    nx--;\n    fl[nx]=0;\n  }\n\n  dsu uf(n+m);\n  vector<int> w(n+m,0);\n  for(int i=n;i<n+m;i++){w[i]=1;}\n  int cur=0;\n  for(int i=0;i<e;i++){\n    if(fl[i]==0){continue;}\n    if(uf.same(u[i],v[i])){continue;}\n    int fu=w[uf.leader(u[i])];\n    int fv=w[uf.leader(v[i])];\n    if(fu==0 && fv==1){cur+=uf.size(u[i]);}\n    if(fu==1 && fv==0){cur+=uf.size(v[i]);}\n    uf.merge(u[i],v[i]);\n    w[uf.leader(u[i])]=max(fu,fv);\n  }\n  \n  vector<int> res;\n  for(int j=q-1;j>=0;j--){\n    int i=query[j];\n    res.push_back(cur);\n    if(uf.same(u[i],v[i])){continue;}\n    int fu=w[uf.leader(u[i])];\n    int fv=w[uf.leader(v[i])];\n    if(fu==0 && fv==1){cur+=uf.size(u[i]);}\n    if(fu==1 && fv==0){cur+=uf.size(v[i]);}\n    uf.merge(u[i],v[i]);\n    w[uf.leader(u[i])]=max(fu,fv);\n  }\n  \n  reverse(res.begin(),res.end());\n  for(auto &nx : res){cout << nx << \"\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "97905b3d4a020a583f11ac0c07ceda40ebe421a8fa4cf752ec10372adeb480cb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc264/abc264_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4585",
+      "text": "大まかな方針は\n物理好きさんの公式解説\nと同様です。\nここでは少しの考察を行うことで実装を簡潔にする方法を紹介します。\n問題で求められていたのは、いずれかの発電所と連結な都市の個数であり、発電所の区別はないことに注意します。このことから、発電所を全て同一視しても問題ないことがわかります。\nすると、発電所と連結な都市の個数は単純に\nuf.size(発電所)\n\\(-1\\)\nで取得でき、頂点の重みの管理といった複雑な実装が不要となります。\n実装例(c++):",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/dsu>\n\nusing namespace std;\n\nint main() {\n    int n, m, e;\n    cin >> n >> m >> e;\n\n    vector<pair<int, int>> uv;\n    for(int i = 0; i < e; i++) {\n        int u, v;\n        cin >> u >> v;\n        --u, --v;\n        //発電所を全て地点 N と同一視しています\n        uv.emplace_back(min(u, n), min(v, n));\n    }\n\n    int q;\n    cin >> q;\n    vector query(q, 0);\n    for(auto &v : query) cin >> v, --v;\n\n    vector def_edges(e, true);\n    for(auto v : query) def_edges[v] = false;\n\n    atcoder::dsu uf(n + 1);\n    for(int i = 0; i < e; i++) {\n        if(def_edges[i]) {\n            auto [u, v] = uv[i];\n            uf.merge(u, v);\n        }\n    }\n\n    vector<int> ans(q);\n    for(int i = q - 1; i >= 0; i--) {\n        ans[i] = uf.size(n) - 1;\n        auto [u, v] = uv[query[i]];\n        uf.merge(u, v);\n    }\n\n    for(auto v : ans) cout << v << endl;\n}"
+      ],
+      "text_sha256": "4f4442871904733694611c4cfdb0abb7e67df6c9d034cb18f3fd2cdcfb1671b5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc264/abc264_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4603",
+      "text": "この問題を線形時間で解く方法を紹介します。\nまず、クエリを逆順に見ることで、辺が少しずつ増えていく問題になります。\nこの時、各都市について最初に発電所から辿れるようになる時間を求めれば良く、これは最短距離問題として解くことができます。\n具体的には、各辺に対してその重みを電線が新たに貼られる時刻と定めれば、その\n\\((\\min, \\max)\\)\n閉半環が成す最短距離が答えとなります。\n普通にDijkstra法を用いると計算量は\n\\(O(E+(N+M)\\log(N+M))\\)\nですが、最短距離としてあり得る値は\n\\(0, 1, \\ldots, Q\\)\nだけであることを利用するとDial’s Algorithmなどで\n\\(O(N+M+E)\\)\nで解くことができます。\nなお、発電所が複数ある問題ですが、このように始点が複数ある場合は超頂点を一つ用意してそこから各発電所に繋げることで始点を一つにできます。",
+      "codes": [],
+      "text_sha256": "9282d08e210b81ed04bed491e2728b938c322460f18bc6be690c376d6bcdad54",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc264/abc264_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

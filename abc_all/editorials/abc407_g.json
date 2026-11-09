@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc407_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc407/editorial/13077",
+      "text": "マスを頂点として、隣り合っている \\(2\\) マスを辺で結ぶこととします。\nすると、この問題は次のように言い換えられます。 辺の重みを結ばれている \\(2\\) マスに書かれている整数の和として定める。\nこのグラフのマッチングについて、使われた辺の重みの総和としてありえる最小値を求めよ。 この最小値を \\(\\displaystyle\\sum _ {i,j}A _ {i,j}\\) から引くことでもとの問題の答えが求められます。 辺の重みが非負である二部グラフ \\(G\\) について、最小費用流（min_cost_slope）を用いて次の問題が解けることが知られています。 \\(f(k)\\) を、\\(G\\) の大きさ \\(k\\) のマッチングに対する使われた辺の重みの総和としてありえる最小値として定める。\\(k _ {\\max}\\) を \\(G\\) の最大マッチングの大きさとして、\\(k=0,1,\\ldots,k _ {\\max}\\) それぞれについて \\(f(k)\\) の値を求めよ。 帰着の詳細 超頂点 \\(S,T\\) を追加し、\\(G\\) の極大な独立集合 \\(2\\) つを \\(U,V\\) として、 \\(S\\) から \\(U\\) の各頂点へ容量 \\(1,\\) コスト \\(0\\) の辺 \\(G\\) の各辺について \\(U\\) から \\(V\\) へ容量 \\(1,\\) コストが辺の重み \\(V\\) の各頂点から \\(T\\) へ容量 \\(1,\\) コスト \\(0\\) の辺 の辺を張ったグラフを考えます。 このグラフの \\(S\\) から \\(T\\) への流量 \\(k\\) のフローに対するコストの最小値が \\(f(k)\\) となります。 min_cost_slope を用いることで、\\(k=0,1,\\ldots,k _ {\\max}\\) に対する \\(f(k)\\) を求めることができます。 これを用いて、負の重みがあるグラフについても同様の問題を解くことができます。 適当な大きさの定数 \\(C\\) を定め、すべての辺の重みに \\(C\\) を加えます。\nその上で上記の問題を解き、得られた \\(f(k)\\) に対して \\(f(k)-Ck\\) が求めるものとなります。 よって、\\(\\displaystyle\\sum _ {i,j}A _ {i,j}-\\min _ {0\\leq k\\leq k _ {\\max}}\\lbrace f(k)-Ck\\rbrace\\) が求める答えです。 今回の問題では、帰着されたグラフの流量はたかだか \\(\\dfrac{HW}2\\) 、頂点数は \\(2+HW\\) 、辺数はたかだか \\(3HW-H-W\\) となります。\nAtCoder Library の min_cost_slope の時間計算量は \\(O(F(n+m)\\log(n+m))\\) なので、十分高速です。 実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <numeric>\n#include <atcoder/mincostflow>\n\nint main() {\n    using namespace std;\n    unsigned H, W;\n    cin >> H >> W;\n    vector A(H, vector<long>(W));\n    for (auto&& row : A)\n        for (auto&& a : row)\n            cin >> a;\n\n    atcoder::mcf_graph<int, long> graph(1 + H * W + 1);\n    // 辺重みを非負にするために全体に 2 × 10¹² を加える\n    constexpr long offset{2000000000000};\n\n    // 横にドミノを置く\n    for (unsigned i{}; i < H; ++i)\n        for (unsigned j{}; j + 1 < W; ++j)\n            if (A[i][j] + A[i][j + 1] < 0)\n                graph.add_edge(1 + i * W + j + ((i ^ j) & 1), 1 + i * W + j + !((i ^ j) & 1), 1, A[i][j] + A[i][j + 1] + offset);\n\n    // 縦にドミノを置く\n    for (unsigned i{}; i + 1 < H; ++i)\n        for (unsigned j{}; j < W; ++j)\n            if (A[i][j] + A[i + 1][j] < 0)\n                graph.add_edge(1 + (i + ((i ^ j) & 1)) * W + j, 1 + (i + !((i ^ j) & 1)) * W + j, 1, A[i][j] + A[i + 1][j] + offset);\n\n    // S からの辺と T への辺\n    for (unsigned i{}; i < H; ++i)\n        for (unsigned j{}; j < W; ++j)\n            if ((i ^ j) & 1)\n                graph.add_edge(1 + i * W + j, 1 + H * W, 1, 0);\n            else\n                graph.add_edge(0, 1 + i * W + j, 1, 0);\n\n    long ans{};\n    for (const auto& [flow, cost] : graph.slope(0, 1 + H * W))\n        // min {f(k) - Ck} を求める\n        ans = min(ans, cost - flow * offset);\n\n    // ∑ A[i][j] - min {f(k) - Ck} が求める答え\n    cout << transform_reduce(begin(A), end(A), -ans, plus{}, [](const auto& row){return reduce(begin(row), end(row));}) << endl;\n    \n    return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "4e5b3b18f76df62f9f5410366cc81500eef6049a929e62a96d339f80cd62c10c"
+    }
+  ],
+  "status": "available"
+}

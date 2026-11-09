@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc175_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc175/editorial/53",
+      "text": "まず、頂点集合がマスに対応して、\n\\(i\\)\nから\n\\(P_i\\)\nに有向辺を張ったグラフとして考えてみましょう。このグラフは、何個かのサイクル\bを集めた形になっています。移動は置かれたマスの属するサイクル上でのみ行われるので、各サイクルについて独立に解いた後、最大値を取れば良いです。\nスコアは\n\\(C_{P_i}\\)\nの和の形になっていますが、移動した経路全体を\n\\(1\\)\nつずらすことで、\n\\(C_i\\)\nの和と思っても良いです。\nコマの通った経路がどのような形をしているかをもう少し考えてみましょう。すると、あるマスから始めて、何周 (\n\\(0\\)\nでもよい)かサイクル全体を回った後、あるマスで終わるというような形をしています。このサイクルの「余り」の部分を全て試すことにすると、サイクルの和が正のときは使えるだけ使って、そうでないときは全く使わないのが最適です。\n以上により時間計算量は\n\\(\\mathrm{O}(N^2)\\)\nでこの問題を解くことができます。\n実装例(C++)\nbonus :\n\\(N \\leq 2 \\times 10^5\\)",
+      "codes": [],
+      "text_sha256": "11f86899c5b8ef2faaa8a6882bdd5c35295ac0b2b752ccba960686f252bb8066",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc175/abc175_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc175/editorial/4722",
+      "text": "以下の bonus 制約でも解けるので、その解説を書きます。\nbonus\n:\n\\(N \\le 2\\times 10^5\\)\nbonus\n: 辺\n\\((i, P_i)\\)\nが一般の functional graph を成す\n元問題における\n\\(P_i \\neq i\\)\nと\n\\(P\\)\nが相異なる制約がないのに相当\n関連する問題として、まず以下の問題を考えます。\n配列\n\\(a = (a_0, a_1, \\dots, a_{n-1})\\)\nが与えられる。\n次のクエリに高速に答えよ。\n1\n\\(i\\)\n\\(x\\)\n\\(a_i \\gets x\\)\nで更新\n2\n\\(l\\)\n\\(\\max_{l < r < n} \\sum_{i=l}^{r-1} a_i\\)\nを出力\n要するに、\n\\(l\\)\nから始まる（空でない）区間の和のうちの最大値\nこれは、以下のような情報を管理することでモノイドを作れるため、セグ木で解くことができます。\n区間\n\\([l, r)\\)\nの和\nsum\n\\(l < i \\le r\\)\nにおける区間\n\\([l, i)\\)\nの和の最大値\nmax\nこれらのモノイド積を考えます。\n(left.sum, left.max)\nと\n(right.sum, right.max)\nの積は\n(left.sum + right.sum, max(left.max, left.sum + right.max))\nで得られます。\n単位元は\n\\((0, -\\infty)\\)\nです。\nnote\n: 空区間を許すなら\n\\((0, 0)\\)\nとなりそうです。また、適切に管理することで、prefix sum だけでなく subarray sum の最大値なども計算できます。\nさて、元の問題について考えます。\nfunctional graph の各辺について上記のモノイドの値を乗せます。\n具体的には、頂点\n\\(v\\)\nから\n\\(P_v\\)\nへの辺には\n\\((C_{P_v}, C_{P_v})\\)\nを乗せます。\n与えられた頂点\n\\(v\\)\nから\n\\(K\\)\n回辿る間に見た辺にある値たちのモノイド積を計算することで、頂点\n\\(v\\)\nから始めた際のスコアの最大値が得られます。\nこの値は、ダブリングを用いることで\n\\(\\langle O(N\\log(K)), O(\\log(K))\\rangle\\)\nで処理できるため、各\n\\(v\\)\nについて行うことで全体の答えが\n\\(O(N\\log(K))\\)\n時間で求まります。\n実装例：\n提出 #34409729\n, 21 ms\nここではモノイド積ではなく半群積のような実装になっていますが、本質は同じです。",
+      "codes": [],
+      "text_sha256": "9d28e643ea831c8ee3459f1b2144c9b5fba56bd411b0330b44cf4a565bfd49e3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc175/abc175_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

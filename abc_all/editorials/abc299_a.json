@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc299_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc299/editorial/6213",
+      "text": "文字列 \\(S\\) の中に | および * がどこで出現するかを計算して、それらの大小関係が想定したものになっているか判定すればよいです。 実装例は以下のようになります。 C++ での実装例 Python での実装例",
+      "codes": [
+        "#include <iostream>\n#include <string>\n\nusing namespace std;\n\nint main() {\n    int N;\n    string S;\n    cin >> N >> S;\n\n    int v_first = -1, s, v_second;\n    for (int i = 0; i < N; ++i) {\n        if (S[i] == '|') {\n            if (v_first < 0)\n                v_first = i;\n            else\n                v_second = i;\n        }\n        if (S[i] == '*')\n            s = i;\n    }\n\n    if (v_first < s && s < v_second)\n        cout << \"in\" << endl;\n    else\n        cout << \"out\" << endl;\n\n    return 0;\n}\n",
+        "N = int(input())\nS = input()\n\nv_first = S.index('|')\ns = S.index('*')\nv_second = S.rindex('|')\n\nif v_first < s < v_second:\n    print('in')\nelse:\n    print('out')\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "781d99031fd0b937fb83ca9b21eca637a2fcb98858ee14c065ff7a158df9e4f6"
+    }
+  ],
+  "status": "available"
+}

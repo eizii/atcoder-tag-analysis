@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc303_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc303/editorial/6441",
+      "text": "すべての\n\\((x,y)\\)\nの組に対して、\n\\(M\\)\n回の撮影の中に\n\\(x\\)\nと\n\\(y\\)\nが連続しているものがあるかどうかを調べればよいです。\n\\(x, y\\)\nの順番を入れ替えたものは区別しないため、たとえば\n\\(x \\lt y\\)\nというルールの下で数えたり、\n\\(x \\neq y\\)\nというルールの下で数えた上で求められた答えを\n\\(2\\)\nで割ることで\n\\(x\\lt y\\)\nの場合と\n\\(y\\lt x\\)\nの場合でのダブルカウントを考慮する必要があります。実装例では外側から\n\\(2\\)\n番目のループの添え字の初期値を工夫することで\n\\(x \\lt y\\)\nというルールの下で数えています。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N,M;\n\tcin>>N>>M;\n\t\n\tvector a(M,vector<int>(N));\n\t\n\tfor(int i=0;i<M;i++){\n\t\tfor(int j=0;j<N;j++){\n\t\t\tcin>>a[i][j];\n\t\t}\n\t}\n\t\n\tint ans = 0;\n\t\n\tfor(int i=1;i<=N;i++){\n\t\tfor(int j=i+1;j<=N;j++){\n\t\t\tbool flag = false;\n\t\t\tfor(int k=0;k<M;k++){\n\t\t\t\tfor(int l=0;l<N-1;l++){\n\t\t\t\t\tif(a[k][l]==i&&a[k][l+1]==j)flag = true;\n\t\t\t\t\tif(a[k][l]==j&&a[k][l+1]==i)flag = true;\n\t\t\t\t}\n\t\t\t}\n\t\t\tif(!flag)ans++;\n\t\t}\n\t}\n\t\n\tcout<<ans<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "e9fd7327f5d35a4ff0b048b150ccf2ab04975ac6dcfbf579a14b451946e2f991",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc303/abc303_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc439_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc439/editorial/14989",
+      "text": "原案: blackyuki\n門松的である数列の例は以下の通りです。\nここから、門松的であるための条件を求めることはできるでしょうか？\n入力される数列は順列なので、\n\\(a_i=a_{i+1}\\)\nのように隣接項が等しいケースは考えなくてよいです。また、問題条件より隣接項の大小関係しか考慮しなくてよいので、その関係が認識しやすい形に置き換えて考察を進めましょう。\n\\(a_i < a_{i+1}\\)\nという状況を\n<\n、\n\\(a_i > a_{i+1}\\)\nなる状況を\n>\nと書くことにします。\nすると、隣接項の関係を\n<\nと\n>\nからなる文字列として書くことができ、\n\\(x\\)\nは\n<>\nなる連続部分列の個数、\n\\(y\\)\nは\n><\nなる連続部分文字列の個数に対応します。\n先程の例を文字列に置き換えると\nとなります。\nここから、門松的であるための条件を求めることはできるでしょうか？\n以降の解説は後半に続けます。",
+      "codes": [
+        "1 3 2\n4 6 5 3 8 2 7 1\n2 7 6 1 3 4 8 5\n4 9 3 7 6 8 1 5 2\n2 7 3 9 1 8 5 6 4\n1 6 2 3 5 4\n1 4 3 2\n4 6 3 2 5 1\n2 7 3 1 6 5 4\n1 9 7 5 2 8 4 6 3",
+        "<>\n<>><><>\n<>><<<>\n<><><><>\n<><><><>\n<><<>\n<>>\n<>><>\n<>><>>\n<>>><><>"
+      ],
+      "text_sha256": "dea218afc6a91c7d14d3dbb74906a0e0aa5ca52bbc03b972c7538feae8977aa1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc439/abc439_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc439/editorial/14996",
+      "text": "解説の前半を先にお読みください。\n実は、各要素が相異なる数列\n\\(a=(a_1,a_2,\\dots,a_k)\\)\nが\n門松的\nであることは、以下が成り立つことと同値です。\n\\(a_1 < a_2\\)\nかつ\n\\(a_{k-1}>a_k\\)\n証明\n\\(a_{i-1} < a_i\\)\nかつ\n\\(a_i > a_{i+1}\\)\nなる部分を\n\\(x\\)\n折り返し\n\\(a_{i-1} > a_i\\)\nかつ\n\\(a_i < a_{i+1}\\)\nなる部分を\n\\(y\\)\n折り返し\nと呼ぶことにします。\nある\n\\(k\\)\nについて\n\\(a_k < a_{k+1}\\)\nである場合、次に折り返す場合は必ず\n\\(x\\)\n折り返しになります。\nまた、ある\n\\(k\\)\nについて\n\\(a_k > a_{k+1}\\)\nである場合、次に折り返す場合は必ず\n\\(y\\)\n折り返しになります。\n\\(a_1 < a_2\\)\nである場合、最初に\n\\(x\\)\n折り返し、次に\n\\(y\\)\n折り返し、次に\n\\(x\\)\n折り返し、… と続くことになります。\n\\(x>y\\)\nとなるためには、最後に\n\\(x\\)\n折り返しを受けた状態で\n\\(y\\)\n折り返しを受けていない状態、つまり\n\\(a_{k-1} > a_k\\)\nであることが必要であり、これで十分です。\n\\(a_1 > a_2\\)\nである場合、最初に\n\\(y\\)\n折り返し、次に\n\\(x\\)\n折り返し、次に\n\\(y\\)\n折り返し、… と続くことになります。この場合、\n\\(x>y\\)\nとなることはありません。\n以上より、冒頭の事実の証明が完了しました。\nあとは、門松的である部分列を数え上げればよいです。\n\\(a_2,a_{k-1}\\)\nを固定して考えます。\n\\(a_1 < a_2\\)\nなる\n\\(a_1\\)\nの取り方が\n\\(p\\)\n通り、\n\\(a_{k-1} > a_k\\)\nなる\n\\(a_k\\)\nの取り方が\n\\(q\\)\n通りあるとします。\n\\(k=3\\)\n( 即ち\n\\(k-1=2\\)\n) のケースを考慮するために、\n\\(pq\\)\nを答えに加算します。\n\\(k \\ge 4\\)\nのケースについて、\n\\(a_2\\)\nが元の列での\n\\(P_l\\)\n、\n\\(a_{k-1}\\)\nが元の列での\n\\(P_r\\)\nであるなら、\n\\(P_{l+1},P_{l+2},\\dots,P_{r-1}\\)\nは使うかどうかを自由に選択できます。なので、答えに\n\\(pq \\times 2^{r-l-1}\\)\nを加算します。\n\\(a_1 < a_2\\)\nなる\n\\(a_1\\)\nの取り方、\n\\(a_{k-1} > a_k\\)\nなる\n\\(a_k\\)\nの取り方は segtree 、平衡二分探索木などのデータ構造を活用して数え上げることができます。\n\\(2^{r-l-1}\\)\nが付いた加算たちも、累積和の要領で足し合わせることができます。\nこの解法の時間計算量は\n\\(O(N \\log N)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<ext/pb_ds/assoc_container.hpp>\n#include<ext/pb_ds/tree_policy.hpp>\n#include<ext/pb_ds/tag_and_trait.hpp>\nusing namespace __gnu_pbds;\n\nusing namespace std;\nusing ll=long long;\n\nconst ll mod=998244353;\n\nint main(){\n  ll n;\n  cin >> n;\n  vector<ll> p(n);\n  for(auto &nx : p){cin >> nx;}\n\n  vector<ll> beg(n),fin(n);\n  tree<ll,null_type,less<ll>,rb_tree_tag,tree_order_statistics_node_update> tr;\n  for(ll i=0;i<n;i++){\n    beg[i]=tr.order_of_key(p[i]);\n    tr.insert(p[i]);\n  }\n  tr.clear();\n  for(ll i=n-1;i>=0;i--){\n    fin[i]=tr.order_of_key(p[i]);\n    tr.insert(p[i]);\n  }\n\n  ll res=0;\n  for(ll i=0;i<n;i++){\n    res+=beg[i]*fin[i];\n    res%=mod;\n  }\n  ll s=0;\n  for(ll i=0;i<n;i++){\n    res+=s*fin[i];\n    res%=mod;\n    s=(2*s+beg[i])%mod;\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "8d8db9add10c887b742b12467ef34d71f0415e7c3f3cf31a3707bbea41127750",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc439/abc439_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

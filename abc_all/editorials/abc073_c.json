@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc073_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc073/editorial.pdf",
+      "text": "C:  Write and Erase\n\n 　まず、どのような場合に数が最後に紙に書かれており、どのような場合に書かれてい\nないかを考えてみる。\n　Ai に一度しか登場しなければ、その数は最後まで紙に残る。Ai に二度登場すれば、\nその数は最後には紙に残っていない。同様に考えていくと、Ai に偶数回登場する数は最\n後に紙には書かれていないが、奇数回登場する数は最後に紙に書かれているとわかる。\n　よって、求めるのは奇数回登場する数が何種類あるかで良いことがわかる。\n　N は最大で100000、Ai は最大で109 であり、O(N2) 回かけて数えたり、109 個の\nフラグを持つような手法はとることができず、異なる方法を考える必要がある。\n　Ai をソートすると、同じ数が隣り合うように並べ替えられる。これを左から順にみて\nいくと、奇数回登場する数が何種類あるかを数えることができる。\n　ソート部分がO(NlogN) 、左から見ていく部分がO(N) より、これで間に合う。\n　また、C++におけるset のようなデータ構造を用いて紙に書かれている数を持っておき、\n実際にシミュレーションしても解くことができる。\n\n\n#include <cstdio >\n#include <algorithm >\nusing namespace std;\nint N,ptr ,res;\nint A[100000];\nint main ()\n{\n        scanf(\"%d\" ,&N);\n        for(int i=0;i<N;i++) scanf(\"%d\" ,&A[i]);\n        sort(A,A+N);\n        while(ptr <N)\n          {\n                  int cc=A[ptr],f=0;\n                 while(ptr <N&&A[ptr ]==cc)f++,ptr ++;\n                 res+=f%2;\n          }\n        printf(\"%d\\n\",res);\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "7fcfade3f36c9e63a9a9e9ac77c9e8c9f13c8b4a17d818188b4737ccc1c17cd4"
+    }
+  ],
+  "status": "available"
+}

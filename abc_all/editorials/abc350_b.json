@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc350_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc350/editorial/9819",
+      "text": "穴に歯が生えている状態を\n\\(1\\)\n穴に歯が生えていない状態を\n\\(0\\)\nとして配列などを用いて管理します。\n操作が行われた穴について、\n\\(0\\)\nと\n\\(1\\)\nを反転することを繰り返したうえで、最後に値の総和を取ることでこの問題に正解できます。\ntips: 変数\n\\(x\\)\nに対して、\n\\(a\\)\nと\n\\(b\\)\nとを ( if 文なしで) 反転 (\n\\(a\\)\nだった変数を\n\\(b\\)\nに、\n\\(b\\)\nだった変数を\n\\(a\\)\nに更新 ) させる簡潔な方法を紹介します。\n\\(x = (a+b)-x\\)\nと更新する。\n\\(x = a \\ \\rm{xor} \\ \\)\n\\(b\\)\n\\( \\ \\rm{xor} \\ \\)\n\\(x\\)\nと更新する。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,q;\n  cin >> n >> q;\n  vector<int> a(n,1);\n  for(int i=0;i<q;i++){\n    int t;\n    cin >> t;\n    a[t-1]^=1;\n  }\n  int s=0;\n  for(auto &nx : a){s+=nx;}\n  cout << s << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "099327b7530a225e50efef80c772964ccbdd263f7eed54019d96790dd8ce538a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc350/abc350_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

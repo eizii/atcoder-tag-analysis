@@ -1,0 +1,57 @@
+{
+  "problem_id": "abc406_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc406/editorial/13044",
+      "text": "問題文中の\n\\(x\\)\nに対する条件、「\n\\(N\\)\n以下の正の整数」を「\n\\(N\\)\n以下の非負整数」と言い換えても答えは変わらないため、その条件下で答えを求めます。\nまた、\n\\(i\\geq j\\)\nをみたす非負整数の組\n\\((i,j)\\)\nに対して、\n\\(2^i\\)\n未満の非負整数であって、popcount の値が\n\\(j\\)\nであるようなものの個数を\n\\(f(i,j)\\)\n, 総和を\n\\(s(i,j)\\)\nとして定めます。これらの値は動的計画法を用いて計算することができます。\n具体的には、\n\\(f(i,0)=f(i,i)=1\\)\n,\n\\(s(i,0)=0\\)\n,\n\\(s(i,i)=2^i-1\\)\nであり、\n\\(0<j<i\\)\nのとき\n\\(f(i,j)=f(i-1,j-1)+f(i-1,j)\\)\nおよび\n\\(s(i,j)=s(i-1,j)+s(i-1,j-1)+2^{i-1}\\times f(i-1,j-1)\\)\nであることを用いれば良いです。\nまた数学的に計算する事で、\n\\(f(i,j)=\\binom{i}{j}\\)\n,\n\\(s(i,0)=0\\)\n,\n\\(s(i,j)=\\binom{i-1}{j-1}\\times (2^i-1)\\)\n（\n\\(j>0\\)\nのとき）となることが証明できます。\n\\(\\mathrm{popcount}(N)=m\\)\nとし、\n\\(N\\)\nを二進数表記したときに\n\\(2^i\\)\nの位が\n\\(1\\)\nである\n\\(i\\)\nを降順に\n\\(d_1,d_2,\\ldots, d_m\\)\n\\((d_1>d_2\\cdots>d_m)\\)\nとします。すなわち、\n\\(N=\\displaystyle\\sum_{i=1}^m 2^{d_i}\\)\nです。\nこのとき、\n\\(0\\)\n以上\n\\(N\\)\n以下の整数を次のように\n\\((m+1)\\)\n個のグループに分け、それぞれにおいて条件をみたすものについての総和を求めることを考えます。\n\\(1\\leq i\\leq m\\)\nについて\n\\(i\\)\n番目のグループは\n\\(\\displaystyle\\sum_{j=1}^{i-1} 2^{d_j}\\)\n以上\n\\(\\displaystyle\\sum_{j=1}^{i} 2^{d_j}\\)\n未満の整数全体を表し、\n\\((m+1)\\)\n番目のグループは\n\\(N\\)\nのみからなるものとします。\n\\((m+1)\\)\n番目のグループについては\n\\(m=K\\)\nならば\n\\(N\\)\n, そうでないならば\n\\(0\\)\nです。\n\\(i\\)\n番目のグループ\n\\((1\\leq i\\leq m)\\)\nについて、属する整数を二進数表記したときの\n\\(2^{d_i}\\)\nの位以上のうち\n\\(1\\)\nである桁は\n\\(d_1, d_2,\\ldots, d_{i-1}\\)\nのみであり、\n\\(2^{d_i-1}\\)\nの位以下の桁はすべての組み合わせをとることから、条件をみたすものの個数は\n\\(f(d_i,K-i+1)\\)\n個であり、それらの総和は\n\\(S(d_i,K-i+1)+f(d_i,K-i+1)\\times \\displaystyle\\sum_{j=1}^{i-1} 2^{d_j}\\)\nとなります。なお、\n\\(K-i+1<0\\)\nまたは\n\\(d_i<K-i+1\\)\nならば\n\\(0\\)\n個であり、総和も\n\\(0\\)\nとなります。\n事前に\n\\(f(i,j)\\)\n,\n\\(S(i,j)\\)\nを計算しておくことで、各グループ\n\\(O(1)\\)\nで計算できるため、各テストケースごとに\n\\(O(\\log N)\\)\nで解くことができます。また、\n\\(f(i,j)\\)\n,\n\\(S(i,j)\\)\nは\n\\(0\\leq j\\leq i\\leq\\lfloor \\log_2 N\\rfloor\\)\nの範囲について計算しておけば十分であるため、前計算にかかる時間計算量は\n\\(O((\\log N)^2)\\)\nとなります。\nよって、計算量は全体で\n\\(O((\\log N+T)\\log N)\\)\nであり、問題の制約下で十分高速です。ゆえに、この問題を解くことができました。\n\\(998244353\\)\nで割った余りを出力することがあることに注意してください。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\n\nusing namespace std;\nusing namespace atcoder;\nusing mint = modint998244353;\n\n#define N 60\n\nmint c[N+1][N+1]; //c[i][j]=(the number of x  s.t. 0<=x<(2^i), popcount(x)=j) for 0<=j<=i<=60\nmint s[N+1][N+1]; //s[i][j]=(the sum    of x  s.t. 0<=x<(2^i), popcount(x)=j) for 0<=j<=i<=60\n\nvoid preset(void){\n\tfor(int i=0;i<=N;i++)for(int j=0;j<=N;j++){\n\t\tc[i][j]=0,s[i][j]=0;\n\t}\n\tc[0][0]=1;\n\tfor(int i=0;i<60;i++){\n\t\tfor(int j=0;j<=i;j++){\n\t\t\tc[i+1][j+1]+=c[i][j];\n\t\t\ts[i+1][j+1]+=s[i][j];\n\t\t\ts[i+1][j+1]+=(c[i][j]*((mint)2).pow(i));\n\t\t\tc[i+1][j]+=c[i][j];\n\t\t\ts[i+1][j]+=s[i][j];\n\t\t}\n\t}\n\treturn;\n}\n\nint solve(long long n,int k){\n\tint a[N];\n\tfor(int i=0;i<N;i++){\n\t\ta[i]=n&1;\n\t\tn=(n>>1);\n\t}\n\tint cur=0;\n\tmint offset=0;\n\tmint ans=0;\n\tfor(int i=N-1;i>=0;i--){\n\t\tif(a[i]==1){\n\t\t\tif(cur<=k){\n\t\t\t\tans+=s[i][k-cur];\n\t\t\t\tans+=offset*c[i][k-cur];\n\t\t\t}\n\t\t\tcur++;\n\t\t\toffset+=((mint)2).pow(i);\n\t\t}\n\t}\n\tif(cur==k)ans+=offset;\n\treturn (ans.val());\n}\n\nint main(void){\n\tpreset();\n\tint t,k;\n\tlong long n;\n\tcin>>t;\n\tfor(int i=0;i<t;i++){\n\t\tcin>>n>>k;\n\t\tcout<<solve(n,k)<<endl;\n\t}\n\treturn 0;\n}"
+      ],
+      "text_sha256": "5a7b25095c6d34b5ab6e74619b8403285eb440e3b94d46c6f7ae8524de18d700",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc406/abc406_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc406/editorial/13072",
+      "text": "公式解説と同じような方針で\n\\(O(T\\log(N))\\)\nで解くことができます。公式解説にあった前計算は\n\\(\\Theta(\\log^2(N))\\)\nから\n\\(\\Theta(\\log(N))\\)\nに改善されます。\n\\(0\\)\n以上\n\\(N\\)\n未満の整数の集合を\n\\(2\\)\n冪のサイズの集合に綺麗に分けます。\n具体的には、\n\\(N = 22 = 2^{4} + 2^{2} + 2^{1}\\)\nのとき、\n\\([0, 16), [16, 20), [20, 22)\\)\nのように分けます。\nこれらの集合に含まれる整数は2進数で以下のように表現できます。\n\\([0, 16)\\)\n\\([16, 20)\\)\n\\([20, 22)\\)\nそれぞれの集合に対して、popcount が\n\\(K\\)\nであるような整数の総和を求めれば良いです。\n\\([L, L + 2^{a})\\)\nに対する答えを求めます。(\n\\(L\\)\nは\n\\(2^{a + 1}\\)\nで割り切れます。)\n\\(\\mathrm{popcount}(L) = c\\)\nとすると、そのような整数の数は\n\\(\\binom{a}{K - c}\\)\nです。これは\n\\(a\\)\n個の\n?\nからちょうど\n\\(K - c\\)\n個が\n1\nであるような振り分け方と同じだからです。\nまた、popcount が\n\\(K\\)\nであるような\n\\(\\binom{a}{K - c}\\)\n個の整数からランダムに数を選んだとき、その期待値は\n\\(L + (2^{a} - 1) \\cdot \\frac{K - c}{a}\\)\nです。なぜなら、それぞれの\n?\nについて、\n1\nになる確率が独立に\n\\(\\frac{K - c}{a}\\)\nだからです。\nよって、\n\\([L, L + 2^{a})\\)\nに対する答えは\n\\(\\binom{a}{K - c}\\left(L + (2 ^ {a} - 1)\\cdot \\frac{K - c}{a}\\right)\\)\nになります。\n適切な前計算のもとで、それぞれの区間に対して答えを\n\\(O(1)\\)\nで求められるので、テストケースごとに\n\\(O(\\log(N))\\)\nで求められます。\n\\(\\mathrm{popcount}(N) = K\\)\nのときは答えに\n\\(N\\)\nを加算する必要があることに注意してください。\nc++ による実装例\nABC 過去問の類題",
+      "codes": [
+        "0????",
+        "100??",
+        "1010?"
+      ],
+      "text_sha256": "53aecffeda44b107d205033ba4163f9c9b3e2132b6a6674ad2e1af1ed44bb12c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc406/abc406_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc406/editorial/13057",
+      "text": "\\(c(n, k)\\)\nを、\n\\(0\\)\n以上\n\\(n\\)\n以下の整数のうち popcount が\n\\(k\\)\nであるものの個数\n\\(s(n, k)\\)\nを、\n\\(0\\)\n以上\n\\(n\\)\n以下の整数のうち popcount が\n\\(k\\)\nであるものの総和\nと定めます。つまり\n\\(\\begin{aligned}\nc(n, k) &= \\sum_{\\substack{0 \\leq x \\leq n \\\\ \\mathrm{popcount}(x) = k}} 1, \\\\\ns(n, k) &= \\sum_{\\substack{0 \\leq x \\leq n \\\\ \\mathrm{popcount}(x) = k}} x\n\\end{aligned}\\)\nです。答えは\n\\(s(N, K)\\)\nです（\n\\(x = 0\\)\nを含めても問題ありません）。\n\\(x\\)\nの最も下の桁が\n\\(0\\)\nか\n\\(1\\)\nかで場合分けすることにより、\n\\(\\begin{aligned}\nc(n, k) &= \\sum_{\\substack{0 \\leq 2y \\leq n \\\\ \\mathrm{popcount}(2y) = k}} 1 +  \\sum_{\\substack{0 \\leq 2y+1 \\leq n \\\\ \\mathrm{popcount}(2y+1) = k}} 1 \\\\\n&= \\sum_{\\substack{0 \\leq y \\leq \\left\\lfloor \\frac{n}{2}\\right\\rfloor \\\\ \\mathrm{popcount}(y) = k}} 1 +  \\sum_{\\substack{0 \\leq y \\leq \\left\\lfloor \\frac{n-1}{2}\\right\\rfloor \\\\ \\mathrm{popcount}(y) = k-1}} 1 \\\\\n&= c\\left(\\left\\lfloor \\frac{n}{2} \\right\\rfloor,k \\right) + c\\left(\\left\\lfloor \\frac{n-1}{2} \\right\\rfloor,k-1 \\right) , \\\\\ns(n, k) &= \\sum_{\\substack{0 \\leq 2y \\leq n \\\\ \\mathrm{popcount}(2y) = k}} 2y +  \\sum_{\\substack{0 \\leq 2y+1 \\leq n \\\\ \\mathrm{popcount}(2y+1) = k}} (2y+1) \\\\\n&= \\sum_{\\substack{0 \\leq y \\leq \\left\\lfloor \\frac{n}{2}\\right\\rfloor \\\\ \\mathrm{popcount}(y) = k}} 2y +  \\sum_{\\substack{0 \\leq y \\leq \\left\\lfloor \\frac{n-1}{2}\\right\\rfloor \\\\ \\mathrm{popcount}(y) = k-1}} (2y+1) \\\\\n&= 2s\\left(\\left\\lfloor \\frac{n}{2} \\right\\rfloor,k\\right) + 2s\\left(\\left\\lfloor \\frac{n-1}{2} \\right\\rfloor,k-1 \\right) + c\\left(\\left\\lfloor \\frac{n-1}{2} \\right\\rfloor,k-1 \\right)\n\\end{aligned}\\)\nです。\nこれをメモ化再帰で実装することで解くことができます。再帰関数が呼び出される回数は\n\\(1\\)\nケースあたり\n\\(O(\\log^2 N)\\)\nです。",
+      "codes": [],
+      "text_sha256": "133d84da09f4620802717ee993c0d6b90cc747e9cc2ce86b19a2ac86026e2c74",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc406/abc406_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc406/editorial/13071",
+      "text": "この問題は，\n桁DP\nを行うことで解くことができます．\n本問のように，「\n\\(N\\)\n以下の値に対して何かの値を求める」という類の問題に対しては，桁DPが適用できることが多いです．その場合，上の桁から順に見て行き，\n\\(N\\)\nより小さい値であることが確定している場合の値としていない値の場合に分けて値を保持しておくことで遷移を行う，という定石が取られることが多いです．\n本問についても例外ではなく，この方法を採ることができますので，以下ではその方法について解説していきます．\n（※なお，桁DPには下の桁から見て遷移を行い，再帰的に問題を解いていく方法（俗に\n竹DP\nとも呼ばれます：「けた」の逆さ読みで「たけ」となっているのだと推測されます）もあります．その方法は\nmiscalculation53さんの解説\nにありますのでそちらを参照してください．）\n以下の\n\\(2\\)\nつの量を持ちます．なお，解説の都合上，ビット長は\n\\(L = 60\\)\nであるものとします．\n\\(dp_1(i, j)\\)\n：\n\\(i\\)\nビット目までを埋めた時点で\n\\(N\\)\nより小さいことが確定している\n非負整数であって，立っているビットが上から\n\\(i\\)\nビット目までであり，立っているビット数が\n\\(j\\)\nであるものの\n個数\n\\(dp_2(i, j)\\)\n：\n\\(i\\)\nビット目までを埋めた時点で\n\\(N\\)\nより小さいことが確定している\n非負整数であって，立っているビットが上から\n\\(i\\)\nビット目までであり，立っているビット数が\n\\(j\\)\nであるものの\n総和\nはじめ，dp テーブルの値は全て\n\\(0\\)\nで初期化されています．\nこの DP の遷移を考えます．すなわち，上のビットから順に，そのビットを立てるか立てないかを選択していきます．\nまず，\n\\(dp_1(*, *)\\)\nおよび\n\\(dp_2(*, *)\\)\n同士の遷移を考えます．このテーブルでは\n\\(N\\)\nより小さい値のみを考慮しているため，ビットを立てるか立てないかの選択を自由に行えます．\nしたがって，ビットを立てる選択をした場合は\n\\(dp_1(i, j) \\leftarrow dp_1(i, j) + dp_1(i - 1, j - 1)\\)\n\\(dp_2(i, j) \\leftarrow dp_2(i, j) + dp_2(i - 1, j - 1)  + dp_1(i - 1, j - 1) \\times 2^{L-i}\\)\nビットを立てない選択をした場合は\n\\(dp_1(i, j) \\leftarrow dp_1(i, j) + dp_1(i - 1, j)\\)\n\\(dp_2(i, j) \\leftarrow dp_2(i, j) + dp_2(i - 1, j)\\)\nのように遷移できます．\nまた，\n\\(N\\)\nの\n\\(i\\)\nビット目が立っている場合は，\n\\(N\\)\nから\n\\(dp_1(i, j), dp_2(i, j)\\)\nへの遷移も別で行います．事前にここまでで立っているビットの数\n\\(b\\)\nおよびここまでで見たビットのみが立っている場合の値\n\\(m\\)\nを管理しておくことで，\n\\(dp_1(i, b) \\leftarrow dp_1(i, b) + 1\\)\nおよび\n\\(dp_2(i, b) \\leftarrow dp_2(i, b) + m\\)\nなどのように更新できます（この遷移をする場合は，\n\\(i\\)\nビット目を立てない選択をしたことに対応することに注意してください．特に，\n\\(b, m\\)\nの更新タイミングを誤ると誤った遷移となります）．\n\\(N\\)\nの popcount が\n\\(K\\)\nである場合は\n\\(dp_2(L, K) + N\\)\nが，そうでない場合は\n\\(dp_2(L, K)\\)\nが答えです．計算量は\n\\(O(LK)\\)\nです．",
+      "codes": [],
+      "text_sha256": "134b1dc34cf3091be3b2c5ebf6dc690941b79f58c04fb5a9d7e6bad1f121e906",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc406/abc406_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc406/editorial/13078",
+      "text": "元の問題では\n\\(x\\)\nは正の整数となっていますが、0を含むことにしても答えは変わりません。「\n\\(0\\)\n以上\n\\(N\\)\n以下の整数のうち、popcount が\n\\(K\\)\nであるものの和」を\n\\(f(N,K)\\)\nとおきます。\n\\(2^m\\)\nを\n\\(N\\)\n以下の最大の\n\\(2\\)\nベキとして、下図のように3つの領域に分けて寄与を考えます。（左上の領域は必ず全て 0 なので考慮する必要はありません）\n右上の領域の寄与は\n\\(f(2^m-1,K)\\)\nです。各bit に注目したとき、「\n\\(0\\)\n以上\n\\(2^m-1\\)\n以下の整数で、popcountがKであり、指定されたbitが1であるもの」は\n\\(\\binom{m-1}{k-1}\\)\n個あります（指定された桁以外の\n\\(m-1\\)\n箇所のうち\n\\(K-1\\)\n個が 1 なので）。よって\n\\(f(2^m-1,K)=(2^m-1)\\binom{m-1}{k-1}\\)\nとなります。\n左下の領域の寄与は\n\\(2^m\\times(0以上N-2^m以下の整数で、\\text{popcount} がK-1であるものの個数)\\)\nとなります。\n右下の領域の寄与は\n\\(f(N-2^m,K-1)\\)\nです。再帰的に計算します。\n「\n\\(0\\)\n以上\n\\(N-2^m\\)\n以下の整数で、popcount が\n\\(K-1\\)\nであるものの個数」も同様の再帰で求めることができます。\n再帰するごとに第一引数の2進での桁が1つ以上減るので、全体で\n\\(O(\\log N)\\)\nで計算できます。\n実装(Python)",
+      "codes": [],
+      "text_sha256": "07420b2d744c67286f8b784783fefb02a0635bd3a50d0530d0789d90c3970e7c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc406/abc406_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

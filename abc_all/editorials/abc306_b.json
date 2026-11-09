@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc306_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc306/editorial/6599",
+      "text": "for 文等を使って、問題文で書かれている通りに答えを求めればよいです。下記の実装例のようにビットシフト演算子を用いると簡潔です。符号付き 64 bit 整数 (C++ の long long 型など) は表現することのできる値の最大値が \\(2^{63}-1\\) なので、この問題には適さないことに注意してください (符号なし 64 bit 整数や多倍長整数などを用いるとよいです)。 実装例 (C++) : 実装例 (Python) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nusing ull = unsigned long long;\n\nint main() {\n    ull ans = 0;\n    for (int i = 0; i < 64; i++) {\n        ull a;\n        cin >> a;\n        ans += a << i;\n    }\n    cout << ans << endl;\n}\n",
+        "a = list(map(int, input().split()))\nans = 0\nfor i in range(64):\n    ans += a[i] << i\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "f146995e0978a2f5ae0845606b7907eab329212eb4d1bf38b403fc7e24951e39"
+    }
+  ],
+  "status": "available"
+}

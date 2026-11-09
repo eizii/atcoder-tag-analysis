@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc447_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc447/editorial/16430",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか試すことをおすすめします。\n結論からいえば\n\\(M \\le \\lceil N / 2 \\rceil\\)\nであれば\nYes\n、そうでなければ\nNo\nです。\n\\(2M -1 \\le N\\)\nと書くこともできます。\n以下のように証明できます。\n11223344 ...\nと\n\\(2\\)\nつずつ前から数字を書き込んでいきます（奇数の場合は最後の数字は\n\\(1\\)\n回だけ書き込みます）。最後に書き込まれた数字は\n\\(X = \\lceil N / 2 \\rceil\\)\nです。\nこのとき、条件から同じ数字が書き込まれた座席には\n\\(1\\)\n人までしか座れません。よって\n\\(X \\lt M\\)\nならば座らせることはできません。逆に\n\\(M \\le X\\)\nのときは、\n\\(i\\)\n人目を左の\n\\(i\\)\nに座らせることで\noxox ...\nのようになり、これは条件を満たしています。\nPython の実装例\nC++ の実装例",
+      "codes": [
+        "n, m = map(int, input().split())\nprint(\"Yes\" if 2 * m - 1 <= n else \"No\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n, m; cin >> n >> m;\n    cout << (2 * m - 1 <= n ? \"Yes\" : \"No\") << endl;\n}"
+      ],
+      "text_sha256": "7f3d16a955e7dbe8510cf69d3ba971a8c326d83ff9f20ac28f51a8f2387570ab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc447/abc447_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

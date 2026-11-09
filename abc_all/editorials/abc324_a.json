@@ -1,0 +1,21 @@
+{
+  "problem_id": "abc324_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc324/editorial/7373",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nC++入門 AtCoder Programming Guide for beginners (APG4b)\nは、競技プログラミングのための C++ 入門用コンテンツです。\n素朴な方法\n「\\(A _ 1,A _ 2,\\ldots,A _ N\\) がすべて等しい」ことは、「\n\\(A\\)\nのどの \\(2\\) つの要素を取り出しても等しい」ことと同値です。\nよって、\\(A\\) をすべて読み込んで、ありえる \\(2\\) つのペアすべてについて値が等しいかを判定すればよいです。\n実装例は以下のようになります。\nより高速な方法\n「\n\\(A _ 1,A _ 2,\\ldots,A _ N\\)\nがすべて等しい」ことは、「\n\\(A _ 2,A _ 3,\\ldots,A _ N\\)\nがすべて\n\\(A _ 1\\)\nと等しい」ことと同値です。\nなので、\n\\(N\\)\nと\n\\(A _ 1\\)\nを入力して、残りが\n\\(A _ 1\\)\nと等しいかを判定すればよいです。\nこれは、等しくない値があればその時点で\nNo\nと出力して終了し、全てを判定し終わったら\nYes\nと出力すると実装が簡便になります。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\n    vector<int> A(N);\n    for(int i = 0; i < N; ++i) // A をすべて入力する\n        cin >> A[i];\n\n    for(int i = 0; i < N; ++i)\n        for(int j = 0; j < N; ++j)\n            if(A[i] != A[j]){ // 違うペアがあったら\n                cout << \"No\" << endl; // No と出力して\n                return 0; // 終了\n            }\n\n    // 違うペアがなかったら\n    cout << \"Yes\" << endl; // Yes と出力して\n    return 0; // 終了\n}",
+        "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    \n    vector<int> A(N);\n    for(auto&& a : A) // A をすべて入力する\n        cin >> a;\n    \n    for(auto a : A)\n        for(auto b : A)\n            if(a != b){ // 違うペアがあったら\n                cout << \"No\" << endl; // No と出力して\n                return 0; // 終了\n            }\n    \n    // 違うペアがなかったら\n    cout << \"Yes\" << endl; // Yes と出力して\n    return 0; // 終了\n}",
+        "N = int(input())\nA = list(map(int, input().split())) # A をすべて読み込む\n\nfor a in A:\n    for b in A:\n        if a != b: # 違うペアがあったら\n            print('No') # No と出力して\n            break # ループを抜ける\n    else: # 違うペアがなかったら\n        continue # 探索を続ける\n    break\nelse: # 最後まで違うペアがなかったら\n    print('Yes') # Yes と出力",
+        "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    int N, A1; // A の先頭を先に読んでおく\n    cin >> N >> A1;\n\n    for (int i = 1; i < N; ++i) { // A の残りについて\n        int A;\n        cin >> A; // 読み込んで\n        if (A != A1) { // 等しくなければ No を出力して終了\n            cout << \"No\" << endl;\n            return 0;\n        }\n    }\n    // すべて判定が終わってここに到達したら Yes\n    cout << \"Yes\" << endl;\n    return 0;\n}",
+        "N = int(input())\nA1, *A = map(int, input().split()) # A の先頭とそれ以外に分ける\n\nfor a in A:\n    if A1 != a: # 異なる要素があったら No\n        print('No')\n        break\nelse: # break されなかったら Yes\n    print('Yes')"
+      ],
+      "text_sha256": "c990ca5faf8a96a98765ef3282a9c176851a53d2c6096cf28881bbb440b31b43",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc324/abc324_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc438_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc438/editorial/14962",
+      "text": "数列\n\\(D_{i, j}\\)\nを以下のように定めます。\n\\(D_{i, 1} = \\displaystyle\\sum_{j = 1}^{i} A_j\\)\n\\(D_{i, 2} = \\displaystyle\\max_{1 \\leq x < i}(\\sum_{j  =1} ^ {x} A_j + \\sum_{j = x + 1}^{i} B_j)\\)\n\\(D_{i, 3} = \\displaystyle\\max_{1 \\leq x < y < i}(\\sum_{j  =1} ^ {x} A_j + \\sum_{j = x + 1}^{y} B_j + \\sum_{j  =y + 1} ^ {i} C_j)\\)\n求める答えは\n\\(D_{N, 3}\\)\nです。\nここで、\n\\(D_{i, j}\\)\nたちは動的計画法の要領で計算できます。具体的には、\n\\(D_{i - 1, *}\\)\nたちの値と\n\\(A_i, B_i, C_i\\)\nの値から\n\\(D_{i, *}\\)\nを計算することができます。\n\\(i\\)\n番目の要素として\n\\(A_i, B_i, C_i\\)\nのどれを和に寄与させるかで場合分けを行うことで、以下の遷移により計算できることがわかります。\n\\(D_{i, 1} = D_{i - 1, 1} + A_i\\)\n\\(D_{i, 2} = \\max(D_{i - 1, 1}, D_{i - 1, 2}) + B_i\\)\n\\(D_{i, 3} = \\max(D_{i - 1, 2}, D_{i - 1, 3}) + C_i\\)\n時間計算量は\n\\(O(N)\\)\nです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n#define rep(i, n) for (ll i = 0; i < (n); i++)\nconst ll INF = 1000000000000000010;\ntemplate<class T, class U> inline bool chmax(T& a, const U& b) { if (a < b) { a = b; return true; } return false; }\n\nint main() {\n\tll n;\n\tcin >> n;\n\tvector<ll> a(n), b(n), c(n);\n\trep(i, n) cin >> a[i];\n\trep(i, n) cin >> b[i];\n\trep(i, n) cin >> c[i];\n\tvector<array<ll, 4>> dp(n + 1);\n\trep(i, n + 1) rep(j, 4) dp[i][j] = -INF;\n\tdp[0][0] = 0;\n\trep(i, n) {\n\t\tfor (int j = 0; j <= 1; j++) chmax(dp[i + 1][1], dp[i][j] + a[i]);\n\t\tfor (int j = 1; j <= 2; j++) chmax(dp[i + 1][2], dp[i][j] + b[i]);\n\t\tfor (int j = 2; j <= 3; j++) chmax(dp[i + 1][3], dp[i][j] + c[i]);\n\t}\n\tcout << dp[n][3] << '\\n';\n}"
+      ],
+      "text_sha256": "0440bf6c787bb809059cad0e5cc96b6f8bf4730234c05c327def31931f75e37e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc438/abc438_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc438/editorial/14963",
+      "text": "説明のため\n\\(A, B, C\\)\nを 0-indexed に置き換えます。 以降、この解説において数列はすべて 0-indexed です。\n\\(A, B, C\\)\nの累積和を取ります。すなわち、長さ\n\\(N + 1\\)\nの数列\n\\(D, E, F\\)\nを\n\\(\\displaystyle D_i = \\sum_{j = 0}^{i - 1} A_j, E_i = \\sum_{j = 0}^{i  - 1} B_j, F_i = \\sum_{j = 0}^{i-1} C_j\\)\nとなるよう定めます。\n最大化する対象\n\\(\\displaystyle \\sum_{i = 0} ^ {x - 1} A_i + \\sum_{i = x}^{y - 1} B_i +\\sum_ {i  =y}^{N - 1} C_i\\)\nを\n\\(D, E, F\\)\nを用いて書き直すと\n\\(D_x - E_x + E_y - F_y + F_N\\)\nとなります。\n\\(F_N\\)\nは\n\\(x, y\\)\nの選択によらない定数なので、目的は\n\\(D_x - E_x + E_y - F_y\\)\nを最大化することです。\n数列\n\\(G, H\\)\nを\n\\(G_i = D_i - E_i, H_i = E_i - F_i\\)\nにより定めると、\n\\(G_x + H_y\\)\nを最大化すればよいです。これは、先頭から累積 max を取りながら\n\\(y\\)\nを全探索することによって実現できます。具体的には、数列\n\\(I\\)\nを\n\\(I_i = \\displaystyle\\max_{1 \\leq j < i} G_j\\)\nとなるよう定めると、\n\\(y\\)\nを固定したときの最大値は\n\\(I_y + H_y\\)\nとなります。\n時間計算量は\n\\(O(N)\\)\nです。\n\\(x = 0, x = y, y = N\\)\nが許容されていないことに注意してください。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n#define rep(i, n) for (ll i = 0; i < (n); i++)\nconst ll INF = 1000000000000000010;\ntemplate<class T, class U> inline bool chmax(T& a, const U& b) { if (a < b) { a = b; return true; } return false; }\n\nint main() {\n\tll n;\n\tcin >> n;\n\tvector<ll> a(n), b(n), c(n);\n\trep(i, n) cin >> a[i];\n\trep(i, n) cin >> b[i];\n\trep(i, n) cin >> c[i];\n\tvector<ll> d(n + 1), e(n + 1), f(n + 1);\n\trep(i, n) {\n\t\td[i + 1] = d[i] + a[i];\n\t\te[i + 1] = e[i] + b[i];\n\t\tf[i + 1] = f[i] + c[i];\n\t}\n\tvector<ll> g(n + 1), h(n + 1);\n\trep(i, n + 1) {\n\t\tg[i] = d[i] - e[i];\n\t\th[i] = e[i] - f[i];\n\t}\n\tll mx = -INF;\n\tll ans = 0;\n\tfor (int j = 1; j < n; j++) {\n\t\tchmax(ans, mx + h[j] + f[n]);\n\t\tchmax(mx, g[j]);\n\t}\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "9e3b1009c7adfff5ade93c222e6ee2d549f93ce45d61e215793b2ee5f47857ea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc438/abc438_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

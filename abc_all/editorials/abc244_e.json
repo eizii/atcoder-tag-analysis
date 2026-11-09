@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc244_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc244/editorial/3601",
+      "text": "「数列\n\\(A\\)\nの中に整数\n\\(X\\)\nは偶数回出現する」という条件が厄介なので、まずはこれを取り除いて考えてみましょう。すると、「頂点\n\\(S\\)\nから辺を\n\\(K\\)\n回通って頂点\n\\(T\\)\nへ行く方法は何通り？」という問題になります。これは、\nABC242 C - 1111gal password\nのように DP (動的計画法) で解くことができます。\n具体的には、\n\\(dp[i][j] = {}\\)\n(頂点\n\\(S\\)\nから辺を\n\\(i\\)\n回通って頂点\n\\(j\\)\nへ行く方法の数)\nを計算すれば良いです。漸化式は、頂点\n\\(i\\)\nと直接辺でつながっている頂点の集合を\n\\(\\text{adj}(i)\\)\nとして、\n\\(dp[0][j] = \\begin{cases} 1 & (j = S) \\\\ 0 & (j ≠ S)\\end{cases}\\)\n\\(dp[i + 1][j] = \\displaystyle\\sum_{k \\in \\text{adj}(j)}dp[i][k]\\)\nとなります。\n\\(dp[K][T]\\)\nが求める答えです。時間計算量は\n\\(O((N + M) K)\\)\nです。\nさて、「数列\n\\(A\\)\nの中に整数\n\\(X\\)\nは偶数回出現する」という条件を扱うためには、DP の計算に「これまでに頂点\n\\(X\\)\nを通った回数が偶数か奇数か」の状態を持たせる必要があります。DP の計算中に頂点\n\\(X\\)\nを通ったら、偶数から奇数へ、奇数から偶数へ状態を変化させれば良いです。\nこのような状態を追加するには、\n\\(dp\\)\nの添字を\n\\(1\\)\nつ増やせば良いです。すなわち、\n\\(dp[i][j][x] = {}\\)\n(頂点\n\\(S\\)\nから辺を\n\\(i\\)\n回通って頂点\n\\(j\\)\nへ行き、途中で頂点\n\\(X\\)\nを通った回数\n\\({}\\bmod 2\\)\nが\n\\(x\\)\nであるような方法の数)\nとします。漸化式は、\n\\(dp[0][j][0] = \\begin{cases} 1 & (j = S) \\\\ 0 & (j ≠ S)\\end{cases}\\)\n\\(dp[0][j][1] = 0\\)\n\\(dp[i + 1][j][x] = \\displaystyle\\sum_{k \\in \\text{adj}(j)}dp[i][k][x]\\ (j ≠ X)\\)\n\\(dp[i + 1][X][x] = \\displaystyle\\sum_{k \\in \\text{adj}(X)}dp[i][k][1 - x]\\)\nとなります。\n\\(dp[K][T][0]\\)\nが求める答えです。時間計算量は先ほどと変わらず\n\\(O((N + M) K)\\)\nなので、これでこの問題を解くことができました。\n\\(998244353\\)\nで割ったあまりについては、各計算の後に毎回\n\\(998244353\\)\nで割ったあまりを取るようにするか、\nAC Library\nの modint を使えば良いです。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "#include <atcoder/modint>\n#include <array>\n#include <iostream>\n#include <vector>\nusing namespace std;\nusing Modint = atcoder::modint998244353;\n\nint main(){\n    int N, M, K, S, T, X;\n    cin >> N >> M >> K >> S >> T >> X;\n    S--; T--; X--;\n    vector<pair<int, int>> edge(M);\n    for(auto& [U, V] : edge){\n        cin >> U >> V;\n        U--; V--;\n    }\n    vector dp(K + 1, vector(N, array<Modint, 2>{0, 0}));\n    dp[0][S][0] = 1;\n    for(int i = 0; i < K; i++){\n        for(auto [U, V] : edge) for(int x : {0, 1}){\n            dp[i + 1][V][x ^ (V == X)] += dp[i][U][x];\n            dp[i + 1][U][x ^ (U == X)] += dp[i][V][x];\n        }\n    }\n    cout << dp[K][T][0].val() << endl;\n}",
+        "MOD = 998244353\nN, M, K, S, T, X = map(int, input().split())\nS -= 1\nT -= 1\nX -= 1\n\nedge = []\nfor i in range(M):\n    U, V = map(int, input().split())\n    U -= 1\n    V -= 1\n    edge.append((U, V))\n\ndp = [[[0] * N for i in range(K + 1)] for x in range(2)]\ndp[0][0][S] = 1\n\nfor i in range(K):\n    for U, V in edge:\n        for x in range(2):\n            dp[x][i + 1][V] += dp[x ^ (V == X)][i][U]\n            if dp[x][i + 1][V] >= MOD:\n                dp[x][i + 1][V] -= MOD\n            dp[x][i + 1][U] += dp[x ^ (U == X)][i][V]\n            if dp[x][i + 1][U] >= MOD:\n                dp[x][i + 1][U] -= MOD\n\nprint(dp[0][K][T])"
+      ],
+      "text_sha256": "04e6ccadd41511d7ce501d8c2fd3b857adbbe9a66b7f47c99c4f798310d23b47",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc244/abc244_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

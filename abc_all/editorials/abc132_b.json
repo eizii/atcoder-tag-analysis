@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc132_b",
+  "editorials": [
+    {
+      "text": "B: Ordinary Number\npi が条件を満たすことと、pi−1 < pi < pi+1 またはpi−1 > pi > pi+1 のいずれかの条件が成り立つことは\n同値です。よって、for ループを回してこの条件を満たす要素を数えていけばよいです。\n以下はC++ での実装例です。\n1 #include <iostream>\n2 using namespace std;\n3\n4 int main() {\n5\nint n;\n6\ncin >> n;\n7\nvector<int> p(n);\n8\nfor(int i = 0; i < n; i++) cin >> p[i];\n9\nint ans = 0;\n10\nfor(int i = 1; i < n - 1; i++) {\n11\nif((p[i - 1] < p[i]) && (p[i] < p[i + 1])) ans++;\n12\nelse if((p[i - 1] > p[i]) && (p[i] > p[i + 1])) ans++;\n13\n}\n14\ncout << ans << endl;\n15\nreturn 0;\n16 }\n",
+      "text_sha256": "4b527b2e427d241c3127861bc91f1d467b86268c019eec837ac66f3fc4bfe68b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc132/abc132_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc356_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc356/editorial/10124",
+      "text": "方針1. 実際に数列を作って反転する\n例えば、実際に数列\n\\(A=(1,2,\\dots,N)\\)\nを配列で作った後に\n\\(L\\)\n項目から\n\\(R\\)\n項目までを逆順に並べて出力することでこの問題に正解できます。\n配列の連続した部分列の反転にはいくつかの方法があります。\n最初\n\\(l=L,r=R\\)\nとして、\n\\(l<r\\)\nである限り以下を繰り返す。\n\\(l\\)\n項目と\n\\(r\\)\n項目を入れ替えた後、\n\\(l\\)\nに\n\\(1\\)\n加算、\n\\(r\\)\nから\n\\(1\\)\n減算する。\n標準ライブラリの機能を利用する。\n配列の使い方によっては初項が\n\\(0\\)\n番になることに注意してください。\n実装例1 (C++):\n実装例2 (C++):\n方針2. 数列を直接構築する\n答えの数列は以下の構造になります。\n最初に\n\\(1,2,\\dots,L-1\\)\nをこの順に並べる。\n次に\n\\(R,R-1,\\dots,L\\)\nをこの順に並べる。\n最後に\n\\(R+1,R+2,\\dots,N\\)\nをこの順に並べる。\nこれを for ループなどを用いて直接構築すればよいです。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int N,L,R;\n  cin >> N >> L >> R;\n  vector<int> A(N+5);\n  for(int i=1;i<=N;i++){\n    A[i]=i;\n  }\n  while(L<R){\n    swap(A[L],A[R]);\n    L++; R--;\n  }\n  for(int i=1;i<=N;i++){\n    if(i!=1){cout << \" \";}\n    cout << A[i];\n  }cout << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int N,L,R;\n  cin >> N >> L >> R;\n  vector<int> A(N+5);\n  for(int i=1;i<=N;i++){\n    A[i]=i;\n  }\n  reverse(A.begin()+L,A.begin()+R+1);\n  for(int i=1;i<=N;i++){\n    if(i!=1){cout << \" \";}\n    cout << A[i];\n  }cout << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int N,L,R;\n  cin >> N >> L >> R;\n  vector<int> res;\n\n  for(int i=1;i<=L-1;i++){res.push_back(i);}\n  for(int i=R;i>=L;i--){res.push_back(i);}\n  for(int i=R+1;i<=N;i++){res.push_back(i);}\n\n  for(int i=0;i<N;i++){\n    if(i){cout << \" \";}\n    cout << res[i];\n  }cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "23b61d734c74995d5a22dae86c6302834506ea6119806106460efe1709fb6f3d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc356/abc356_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc308_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc308/editorial/6708",
+      "text": "まずは\n\\(j\\)\nを全探索します (以下、\n\\(j\\)\nが固定されているものとします)。ただし、\n\\(S_j=\\)\nE\nを満たす\n\\(j\\)\nのみを考えます。\n\\(i\\)\nと\n\\(k\\)\nを全探索しては間に合わないですが、この問題を解くにあたって\n\\(i\\)\nや\n\\(k\\)\nそのものの値には興味がなく、\n\\(S_i,S_k\\)\nと\n\\(A_i,A_k\\)\nの値にしか興味がないこと、\n\\(S_i\\)\nと\n\\(A_i\\)\nの値の組は\n\\(3\\times 3 = 9\\)\n通りしかないことに着目します。すると、以下のようなアルゴリズムが考えられます：\n全ての\n\\(a,b\\ (a,b \\in \\lbrace 0,1,2 \\rbrace)\\)\nに対して、「\n\\(i < j\\)\nかつ\n\\(S_i=\\)\nM\nかつ\n\\(A_i=a\\)\nを満たす\n\\(i\\)\nの数」\n\\(\\times\\)\n「\n\\(k> j\\)\nかつ\n\\(S_k=\\)\nX\nかつ\n\\(A_k=b\\)\nを満たす\n\\(k\\)\nの数」\n\\(\\times\\ \\text{mex}(a,A_j,b)\\)\nを答えに加算する\n「\n\\(i < j\\)\nかつ\n\\(S_i=\\)\nM\nかつ\n\\(A_i=a\\)\nを満たす\n\\(i\\)\nの数」については、「\n\\(S_i=\\)\nM\nかつ\n\\(A_i=a\\)\nを満たすならば\n\\(B_i = 1\\)\n、そうでないならば\n\\(B_i=0\\)\nと定めた配列\n\\(B\\)\n」 の累積和を各\n\\(a\\)\nについてあらかじめ求めておくことによって、すべての\n\\(j,a\\)\nに対する値を\n\\(O(N)\\)\nで求めることができます。「\n\\(k> j\\)\nかつ\n\\(S_k=\\)\nX\nかつ\n\\(A_k=b\\)\nを満たす\n\\(k\\)\nの数」についても同様です。よって、この問題を\n\\(O(N)\\)\nで解くことができました。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint mex(int x, int y, int z) {\n    for (int i = 0; i < 3; i++) {\n        if (x != i and y != i and z != i) return i;\n    }\n    return 3;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &i: a) cin >> i;\n    string s;\n    cin >> s;\n    \n    vector cnt_l(n + 1, vector<int>(3));\n    vector cnt_r(n + 1, vector<int>(3));\n    for (int i = 0; i < n; i++) {\n        cnt_l[i + 1] = cnt_l[i];\n        if (s[i] == 'M') ++cnt_l[i + 1][a[i]];\n    }\n    for (int i = n - 1; i >= 0; i--) {\n        cnt_r[i] = cnt_r[i + 1];\n        if (s[i] == 'X') ++cnt_r[i][a[i]];\n    }\n    \n    ll ans = 0;\n    for (int i = 0; i < n; i++) {\n        if (s[i] != 'E') continue;\n        for (int j = 0; j < 3; j++) {\n            for (int k = 0; k < 3; k++) {\n                ans += (ll) cnt_l[i][j] * cnt_r[i + 1][k] * mex(j, a[i], k);\n            }\n        }\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "90ef2e7a6d8cc45902da4041a89239efa43c70e4d190c7b7af74b92812c21c38",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc308/abc308_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc308/editorial/6710",
+      "text": "問題を次のように読み替えます：\n長さ\n\\(N\\)\nの列\n\\(SA\\)\nが与えられます。各要素は\nM0\n,\nM1\n,\nM2\n,\nE0\n,\nE1\n,\nE2\n,\nX0\n,\nX1\n,\nX2\nのいずれかです。\n\\(SA\\)\nの長さ\n\\(3\\)\nの (連続とは限らない) 部分列\n\\(\\binom{N}{3}\\)\n通りについて、それぞれ次のように得点を定めます。得点の合計はいくらですか？\n(\nM0\n,\nE0\n,\nX0\n) は\n\\(\\mathrm{MEX}(0,0,0)=1\\)\n点\n(\nM0\n,\nE0\n,\nX1\n) は\n\\(\\mathrm{MEX}(0,0,1)=2\\)\n点\n(\nM0\n,\nE0\n,\nX2\n) は\n\\(\\mathrm{MEX}(0,0,2)=1\\)\n点\n(\nM0\n,\nE1\n,\nX0\n) は\n\\(\\mathrm{MEX}(0,1,0)=2\\)\n点\n以下略\nこのように読み替えた問題は明らかに「与えられた列\n\\(X\\)\nの中に、指定された列\n\\(Y\\)\nが (連続とは限らない) 部分列として何度登場しますか？」が解ければ答えることができ、これが\n\\(O(|X||Y|)\\)\nのDPで解けることは非常によく知られています。\n例：\nABC211C",
+      "codes": [],
+      "text_sha256": "608d92731d126720cef34dfeaf1e406130e22cd85399c4e75f6a36921b3fc0ad",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc308/abc308_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

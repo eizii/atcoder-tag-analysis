@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc382_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc382/editorial/11483",
+      "text": "\\(f_i\\)\nをこれから合計\n\\(i\\)\n枚以上のレアカードを手に入れるまでに開封するパックの個数の期待値、\n\\(g_i\\)\nを\n\\(1\\)\nつのパックにレアカードがちょうど\n\\(i\\)\n枚入っている確率とします。求める答えは\n\\(f_X\\)\nです。\n\\(f_i\\)\nを dp の要領で求めます。\n\\(i = 0\\)\nのときは\n\\(f_i = 0\\)\nです。\n\\(i > 0\\)\nのときは次に開封するパックに入っているレアカードの枚数で場合分けして足し合わせることを考えることにより、\n\\(f_i = 1 + \\displaystyle\\sum_{j  = 0}^{N} f_{ \\max(i - j, 0) }g_j\\)\nがわかります。このままでは右辺に\n\\(f_i\\)\nを含む項が存在するため素朴な dp による計算が行えませんが、\n\\(j = 0\\)\nの項を移項することにより\n\\(f_i(1 - g_0) =1 + \\displaystyle\\sum_{j  = 1}^{N} f_{ \\max(i - j, 0) }g_j\\)\nが得られるので、\n\\(f_i =\\frac{1}{1 - g_0}(1 + \\displaystyle\\sum_{j  = 1}^{N} f_{ \\max(i - j, 0) }g_j)\\)\nという式により\n\\(i\\)\nについて昇順に\n\\(f_i\\)\nの値が計算できます。ここで、制約から\n\\(g_0 \\leq \\frac{99}{100}\\)\nであるため\n\\(1 - g_0 \\neq 0\\)\nであることに注意してください。\nしたがって、\n\\(g_j\\)\nたちの値が求まっているとき、\n\\(f_X\\)\nの値は\n\\(O(NX)\\)\n時間で計算できます。\n以上により\n\\(g_j\\)\nたちの値を求めることに帰着できましたが、これも dp の要領で求めることができます。\n\\(dp_ {\n\ti, j\n}\\)\nを\n\\(1, 2, \\ldots, i\\)\n枚目にちょうど\n\\(j\\)\n枚のレアカードがある確率とすると、\n\\(i\\)\n枚目がレアカードであるかに着目してそれぞれの確率を足すことにより、\n\\(dp_{ i,j } = \\frac{ P_i }{100} dp_{ i - 1, j - 1 } + (1 - \\frac{ P_i }{100})dp_ { i - 1, j }\\)\nがわかります。 この dp は全体として\n\\(O(N ^ 2)\\)\n時間で計算でき、\n\\(g_j = dp_{ N, j }\\)\nです。\n以上より全体として\n\\(O(NX + N ^ 2)\\)\n時間で解くことができます。",
+      "codes": [],
+      "text_sha256": "b8c026a43b978e9b3d64f6d636a4e6c4955153d70e5e49b15c08ce2d3ba75fd0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc382/abc382_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc288_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc288/editorial/5662",
+      "text": "問題で問われているのは削除する必要のある辺の本数の最小値ですが、残すことのできる辺の本数の最大値について考えます。最大で\n\\(L\\)\n本の辺を残すことができるとすると、元の問題の答えは\n\\(M-L\\)\nです。\nここで、グラフの連結成分の個数を\n\\(S\\)\nとおきます。各連結成分について、何本の辺を残せるでしょうか。頂点数が\n\\(X\\)\nの連結成分について考えると、適当な全域木を取ることにより\n\\(X - 1\\)\n本以上は残すことができます。一方、\n\\(X\\)\n本以上の辺を残すことはできません。これは辺のない状態から閉路ができないよう\n\\(X\\)\n本以上の辺を追加していくことを考えると、連結成分の個数が減る操作が\n\\(X\\)\n回以上行われてしまうことからわかります。\nしたがって、各連結成分の大きさを\n\\(X_1,X_2, \\ldots, X_S\\)\nとすると、\n\\(L = \\displaystyle \\sum_{i=1}^{S}(X_i-1)\\)\nです。\n\\(N = \\displaystyle \\sum_{i=1}^{S} X_i\\)\nだったので、\n\\(L = N - S\\)\nです。\n以上より、元の問題の答えは\n\\(M - N + S\\)\nであったことがわかりました。連結成分の個数は DFS や BFS 、UnionFind などを用いて数えることができます。\n実装例 ( BFS を用いた解法 )\n実装例 ( ACL を用いた実装が軽い解法 )",
+      "codes": [
+        "#include <iostream>\n#include <queue>\nusing namespace std;\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tvector<vector<int>> graph(n, vector<int>());\n\tfor (int i = 0; i < m; i++) {\n\t\tint u, v;\n\t\tcin >> u >> v;\n\t\tu--; v--;\n\t\tgraph[u].push_back(v);\n\t\tgraph[v].push_back(u);\n\t}\n\tvector<bool> used(n);\n\tint s = 0;\n\tfor (int i = 0; i < n; i++) {\n\t\tif (!used[i]) {\n\t\t\ts++;\n\t\t\tqueue<int> que;\n\t\t\tque.push(i);\n\t\t\twhile (!que.empty()) {\n\t\t\t\tint q = que.front(); que.pop();\n\t\t\t\tfor (int v : graph[q]) {\n\t\t\t\t\tif (!used[v]) {\n\t\t\t\t\t\tused[v] = true;\n\t\t\t\t\t\tque.push(v);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tcout << m - n + s << '\\n';\n}",
+        "#include <iostream>\n#include <atcoder/all>\nusing namespace std;\nusing namespace atcoder;\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tdsu d(n);\n\tint ans = 0;\n\tfor (int i = 0; i < m; i++) {\n\t\tint u, v;\n\t\tcin >> u >> v;\n\t\tu--; v--;\n\t\tif (d.same(u, v)) ans++;\n\t\td.merge(u, v);\n\t}\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "9bb3fb3998f866501ad7a28a6d0bac1dc29cc53b8351ff89afdba2f4005ef9a9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc288/abc288_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

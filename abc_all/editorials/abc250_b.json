@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc250_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc250/editorial/3903",
+      "text": "はじめに\n本解説では行や列等の番号を0-indexedで扱います。たとえば、左上のタイルはタイル\n\\((0,0)\\)\nとなります。\n基本方針\n次の2つの問題を考えます。\nマス目\n\\(X\\)\nのタイル\n\\((i,j)\\)\nの色は何か\nマス目\n\\(X\\)\nの上から\n\\(i\\)\n行目、左から\n\\(j\\)\n列目のマス(以降マス\n\\((i,j)\\)\nとする)が属するタイル\n\\((i',j')\\)\nはどこか\nこの2つの問題が解ければ、各\n\\(i,j\\)\nに対してマス\n\\((i,j)\\)\nが属するタイル\n\\((i',j')\\)\nが白いならマス\n\\((i,j)\\)\nは白、黒いなら黒とすることでマス目\n\\(X\\)\nを求めることが出来ます。\nタイル\n\\((i,j)\\)\nの色は何かを求める\n\\(X\\)\nの各タイルは、\n\\(0\\)\n行目は左から白、黒、白、…と交互に、\n\\(1\\)\n行目は黒、白、黒、…と交互に、\n\\(2\\)\n行目は白、黒、白、…と交互になっています。より一般に、\n\\(i\\)\n行目のタイルは\n\\(i\\)\nが偶数のときは白から始めて交互に、奇数のときは黒から始めて交互に白と黒が並んでいます。\n白、黒、白、…と並んでいる行において、\n\\(j\\)\n列目は\n\\(j\\)\nが偶数のときは白で奇数のときは黒です。左端が黒の場合はその逆です。\nここまでの議論に基づいて各タイルの色を求めるC++のコードを以下に示します。\nあるいは、\n\\(i+j\\)\nが偶数ならばタイル\n\\((i,j)\\)\nは白、奇数ならば黒、という特徴付けをすることもできます。\nマス\n\\((i,j)\\)\nが属するタイル\n\\((i',j')\\)\nを求める\n各タイルが\n\\(A\\)\n行\n\\(B\\)\n列のマス目であることを考えると、たとえばタイル\n\\((0,0)\\)\nには行が\n\\(0\\)\n以上\n\\(A\\)\n未満で列が\n\\(0\\)\n以上\n\\(B\\)\n未満のマス目が含まれます。これを一般化すると、領域\n\\((i',j')\\)\nには\n\\(A \\times i' \\leq i \\lt A \\times (i'+1)\\)\nかつ\n\\(B \\times j' \\leq j \\lt B \\times (j'+1)\\)\nを満たすマス\n\\((i,j)\\)\nが含まれるといえます。逆に、マス\n\\((i,j)\\)\nが属する領域\n\\((i',j') \\)\nは\n\\(i'= \\lfloor \\frac{i}{A} \\rfloor, j'= \\lfloor \\frac{j}{B} \\rfloor \\)\nとして求めることが出来ます。\n初めに述べた通り、こうして求めた\n\\((i',j')\\)\nに対して タイル\n\\((i',j')\\)\nの色を参照することで\n\\(X\\)\nの各マスの色を求めることが出来ます。よって本問を解くことが出来ました。\n実装例1\n実装例2 (\n\\(i+j\\)\nの偶奇を用いて各タイルの色を判定)",
+      "codes": [
+        "vector<string> tiles(N,string(N,'-'));\nfor(int i=0;i<N;i++){\n\tif(i%2==0){\n\t\tfor(int j=0;j<N;j++){\n\t\t\tif(j%2==0)tiles[i][j] = '.';\n\t\t\telse tiles[i][j] = '#';\n\t\t}\n\t}\n\telse{\n\t\tfor(int j=0;j<N;j++){\n\t\t\tif(j%2==0)tiles[i][j] = '#';\n\t\t\telse tiles[i][j] = '.';\n\t\t}\n\t}\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N,A,B;\n\tcin>>N>>A>>B;\n\t\n\tvector<string> tiles(N,string(N,'-'));\n\tfor(int i=0;i<N;i++){\n\t\tif(i%2==0){\n\t\t\tfor(int j=0;j<N;j++){\n\t\t\t\tif(j%2==0)tiles[i][j] = '.';\n\t\t\t\telse tiles[i][j] = '#';\n\t\t\t}\n\t\t}\n\t\telse{\n\t\t\tfor(int j=0;j<N;j++){\n\t\t\t\tif(j%2==0)tiles[i][j] = '#';\n\t\t\t\telse tiles[i][j] = '.';\n\t\t\t}\n\t\t}\n\t}\n\t\n\tvector<string> X(A*N,string(B*N,'-'));\n\tfor(int i=0;i<A*N;i++){\n\t\tfor(int j=0;j<B*N;j++){\n\t\t\tX[i][j] = tiles[i/A][j/B];\n\t\t}\n\t}\n\t\n\tfor(int i=0;i<A*N;i++){\n\t\tcout<<X[i]<<endl;\n\t}\n\t\n    return 0;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N,A,B;\n\tcin>>N>>A>>B;\n\t\n\tvector<string> X(A*N,string(B*N,'-'));\n\tfor(int i=0;i<A*N;i++){\n\t\tfor(int j=0;j<B*N;j++){\n\t\t\tif(((i/A)+(j/B))%2==0)X[i][j] = '.';\n\t\t\telse X[i][j] = '#';\n\t\t}\n\t}\n\t\n\tfor(int i=0;i<A*N;i++){\n\t\tcout<<X[i]<<endl;\n\t}\n\t\n    return 0;\n}"
+      ],
+      "text_sha256": "e10337a076d8046ed7259fcdb0b38c7fbc981a0063828de521bc73dd7ad06847",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc250/abc250_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

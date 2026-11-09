@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc321_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc321/editorial/7260",
+      "text": "\\(0\\)\n点を取った場合から\n\\(100\\)\n点を取った場合までを、ループを用いてシミュレーションすることでこの問題を解くことができます。\nなお、「総和から最大値と最小値を除いて最終結果とする」部分は、例えば以下の方法で求められます。\n各ラウンドの得点を昇順にソートし、先頭と末尾以外の要素を足し合わせる。\n最初に全ラウンドの得点を足し合わせ、そこから各ラウンドの得点のうち最大値と最小値を引き去る。\n各パターンについて実装例を示します。\n実装例 (Python):\n実装例 (Python):",
+      "codes": [
+        "N,X = map(int,input().split())\nA = list(map(int,input().split()))\nA.append(-1)\n\nfor last in range(0,101):\n    B = A.copy()\n    B[N-1] = last\n    B.sort()\n    sum = 0\n    for i in range(1,N-1):\n        sum += B[i]\n    if sum >= X:\n        print(last)\n        exit()\n\nprint(\"-1\")",
+        "N,X = map(int,input().split())\nA = list(map(int,input().split()))\nA.append(-1)\n\nfor last in range(0,101):\n    B = A.copy()\n    B[N-1] = last\n    sum = 0\n    ma = 0\n    mi = 100\n    for p in B:\n        sum += p\n        ma = max(ma,p)\n        mi = min(mi,p)\n    score = sum - ma - mi\n\n    if score >= X:\n        print(last)\n        exit()\n    \nprint(\"-1\")"
+      ],
+      "text_sha256": "d3c9adb0063cb7b8f29a63f78440122b2a91f899a06c5383754ad1a0ef210924",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc321/abc321_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc321/editorial/7264",
+      "text": "\\(1\\)\n枚目の解説より高速な解法を示します。\nまず、\n\\(a<b\\)\nであるとき、\n\\(N\\)\nラウンド目で\n\\(a\\)\n点を取るより\n\\(N\\)\nラウンド目で\n\\(b\\)\n点を取る方が最終結果が高くなることが示せます。\nこのことから、\n\\(N\\)\nラウンド目に取るべき点数を二分探索することが可能です。\n実装例 (C++):\nさらに、\n\\(N\\)\nラウンド目に取ったスコアと最終結果との関係を解析してみましょう。以下の結論が得られます。\n(\n\\(N-1\\)\nラウンド目までのスコアの最小値 ) を\n\\(l\\)\n(\n\\(N-1\\)\nラウンド目までのスコアの最大値 ) を\n\\(r\\)\n(\n\\(N-1\\)\nラウンド目までのスコアの総和 ) を\n\\(s\\)\nとします。\n(\n\\(N\\)\nラウンド目のスコア )\n\\(\\le l\\)\nである場合、最終結果は\n\\(s-r\\)\nとなる。\n\\(l <\\)\n(\n\\(N\\)\nラウンド目のスコア )\n\\(<r\\)\nである場合、最終結果は\n\\(s-l-r+\\)\n(\n\\(N\\)\nラウンド目のスコア ) となる。\n(\n\\(N\\)\nラウンド目のスコア )\n\\(\\ge r\\)\nである場合、最終結果は\n\\(s-l\\)\nとなる。\nこの結論から、場合分けにより\n\\(l,r,s\\)\nを求めた後は\n\\(O(1)\\)\nとなる解法が導出できます。",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,x;\n  cin >> n >> x;\n  vector<int> a(n-1);\n  for(auto &nx : a){cin >> nx;}\n\n  int l=0,r=100;\n  while(l<=r){\n    int te=(l+r)/2;\n    vector<int> b=a;\n    b.push_back(te);\n    int sum=0,ma=0,mi=100;\n    for(auto &nx : b){\n      sum+=nx;\n      ma=max(ma,nx);\n      mi=min(mi,nx);\n    }\n    int score=sum-ma-mi;\n    if(score>=x){r=te-1;}\n    else{l=te+1;}\n  }\n  if(l>100){l=-1;}\n  cout << l << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,x;\n  cin >> n >> x;\n  int l=100,r=0,s=0;\n  for(int i=0;i<n-1;i++){\n    int a;\n    cin >> a;\n    l=min(l,a);\n    r=max(r,a);\n    s+=a;\n  }\n\n  if(s-r >= x){cout << \"0\\n\";return 0;}\n  int need=x-(s-l-r);\n  if(need <= r){cout << need << \"\\n\";return 0;}\n  cout << \"-1\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "40d80417f0cf72e941ef44ba84880903a2de5b80772a159cdb43582b41cc91ea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc321/abc321_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

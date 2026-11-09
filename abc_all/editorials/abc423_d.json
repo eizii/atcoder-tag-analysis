@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc423_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc423/editorial/13871",
+      "text": "実装方針\n団体客\n\\(i-1\\)\nが入店するまでを処理したものとし，その時刻を\n\\(T_{i-1}\\)\nとおきます．\n団体客\n\\(i\\)\nが先頭に来る時刻\n\\(A'_i\\)\nは\n\\(\\max(T_{i-1}, A_i)\\)\nによって得られます．\nこの時点で，まだ退店していない客の人数合計が\n\\(K\\)\n以下であれば，その時刻がそのまま団体客\n\\(i\\)\nの入店時刻になります．\nそうでなければ，人数合計が\n\\(K\\)\n以下になるまで，退店時刻が最も早い客を取り除くことを繰り返します．そして，\n\\(A'_i\\)\nと退店時刻との最大値が団体客\n\\(i\\)\nの入店時刻とわかります．\n退店時刻が最も早い客を取得するのは，優先度付きキューと呼ばれるデータ構造によって実現可能です．C++ などの主な言語においては標準で用意されているので，それを使用するのがよいでしょう．\n現時点で退店していない客の人数合計は，客の入店ごとに人数合計を増やし，退店ごとに人数合計を減らすことで差分更新が可能です．\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n#include <vector>\nusing std::vector;\nusing std::pair;\n#include <queue>\nusing std::priority_queue;\nusing std::greater;\nusing std::max;\n\ntypedef long long int ll;\ntypedef pair<ll, ll> P;\n\n\nll n, k;\nvector<ll> a, b, c;\n\nvoid solve () {\n\tpriority_queue<P, vector<P>, greater<P> > que;\n\n\tvector<ll> ans(n, -1);\n\tll sum = 0;\n\tll t = 0;\n\tfor (ll i = 0; i < n; i++) {\n\t\tt = max(t, a[i]);\n\t\twhile (sum + c[i] > k) {\n\t\t\tP q = que.top(); que.pop();\n\t\t\tt = max(t, q.first);\n\t\t\tsum -= q.second;\n\t\t}\n\n\t\tans[i] = t;\n\t\tque.push({t + b[i], c[i]});\n\t\tsum += c[i];\n\t}\n\n\tfor (ll i = 0; i < n; i++) {\n\t\tcout << ans[i] << \"\\n\";\n\t}\n}\n\nint main (void) {\n\tcin >> n >> k;\n\ta.resize(n);\n\tb.resize(n);\n\tc.resize(n);\n\tfor (ll i = 0; i < n; i++) {\n\t\tcin >> a[i] >> b[i] >> c[i];\n\t}\n\n\tsolve();\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "ef5f84e929579b282c9e28d99c94d41277bd7a882873ea3c583b6e4767adae7c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc423/abc423_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

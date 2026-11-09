@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc055_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc069/editorial.pdf",
+      "text": "B : Training Camp\n\n 「N! を109 + 7 で割ったあまりを求めよ」という問題です．N! そのものを求めようとすると、\n\nこの値は非常に値が大きくなるため64 ビット符号付き整数ではオーバーフローによって正しく値\n\nを求められなかったり，多倍長整数の乗算計算は時間がかかるため実行時間制限内に計算を終える\n\nことが難しくなります．\n\n 求める必要があるのは「109 + 7 で割ったあまり」であることに着目すると，現在のパワーをx\nとしてx = i × x mod 109 + 7 として更新していけば、64 ビット符号付整数で収まる範囲で計算\nをすることが可能です．32 ビット符号付整数で扱っている場合x × i が109 より大きくなってし\n\nまいオーバーフローしてしまうことに注意してください．\n\n\n\n\n\n                                        1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "1431ffa1445666c75066b0f508c77a9c7e75404b65c9527673513cf8a158e8ea"
+    }
+  ],
+  "status": "available"
+}

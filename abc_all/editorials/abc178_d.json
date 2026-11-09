@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc178_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc178/editorial/101",
+      "text": "動的計画法を考えます。\n\\(A[n]\\)\nを\n\\(S=n\\)\nのときの答えとすると、\n\\(A[n]=A[n-3]+A[n-4]+\\cdots+A[0]\\)\nや\n\\(A[n]=A[n-1]+A[n-3]\\)\nのように立式できます。ただし\n\\(A[0]=1\\)\nとします。\n上の遷移式は、総和が\n\\(n-3,n-4,\\cdots,0\\)\nですべての項の値が\n\\(3\\)\n以上であるような空でもよい数列に、新たに値が\n\\(3,4,\\cdots n\\)\nの項を末尾に加える操作に対応しています。\n下の遷移式は、\n\\(A[n]=A[n-3]+A[n-4]+\\cdots+A[0]\\)\nの\n\\(A[n-4]+\\cdots+A[0]\\)\nの部分を\n\\(A[n-1]\\)\nで置き換えることで得られます。\n上の遷移式を用いると\n\\(O(S^2)\\)\n、下の遷移式を用いると\n\\(O(S)\\)\nで答えを求めることができます。高速Kitamasa法を用いてさらに高速に計算することもできます。\n解答例（C++）",
+      "codes": [],
+      "text_sha256": "56296871af701384cdcd820d010e265333789837738c5afbbf2c6a29e53b791a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc178/abc178_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc178/editorial/2430",
+      "text": "数え上げの対象となる数列の長さを固定します。\n長さが\n\\(k\\)\nであり、すべての項が\n\\(3\\)\n以上の整数で、その総和が\n\\(S\\)\nであるような数列の個数は、長さが\n\\(k\\)\nであり、すべての項が\n\\(0\\)\n以上の整数で、その総和が\n\\(S-3k\\)\nであるような数列の個数と等しいです。\nそのような数列の個数は、互いに区別できない\n\\(S-3k\\)\n個のボールと互いに区別できない\n\\(k-1\\)\n個の仕切りの並び替え方の総数に等しいので、全部で\n\\( _{(S-3k)+(k-1)}C_{k-1} = {}_{S-2k-1}C_{k-1} \\)\n個あります。\n\\(k\\)\nの取り得る値は\n\\(k = 1,2,\\ldots, \\lfloor \\frac{S}{3} \\rfloor\\)\nなので、結局この問題の答えの値は以下のようになります。\n\\[\\sum_{k=1}^{\\lfloor \\frac{S}{3} \\rfloor}   {}_{S-2k-1}C_{k-1}\\]\n二項係数の値の前計算に\n\\(O(S)\\)\n、答えの式の計算に\n\\(O(S)\\)\nかかるので、全体で\n\\(O(S)\\)\nでこの問題の答えを求めることが出来ます。",
+      "codes": [],
+      "text_sha256": "67d88860d86e8266d20a17ea01148e42474391660f02b6d253945a3098b777bb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc178/abc178_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

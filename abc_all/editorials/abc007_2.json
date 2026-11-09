@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc007_2",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc007/editorial.pdf",
+      "text": "B問題 辞書式順序\n\n\n\n\n\n2014/4/19                             ©AtCoder Inc. All rights reserved.                                    1010\n\f\nB問題 概要\n\n• 英小文字から成る文字列Aが与えられる\n• 辞書順比較した際にAより小さい文字列を1つ\n どれでもよいので出力、存在しない場合は-1を出力\n\n\n\n\n\n2014/4/19                                                                                             11\n\f\nB問題 アルゴリズム\n\n• 問題の流れ\n• 入力\n   – 文字列Aを受け取る\n• 処理\n   – 文字列Aより辞書順で小さい文字列を探す\n• 出力\n   – 上記処理で見つけた文字列を出力する\n   – もし存在しなければ-1を出力する\n\n\n\n\n\n2014/4/19                                                                                             12\n\f\nB問題 アルゴリズム\n\n• 最も良いアルゴリズム\n   – “a”が一番小さいのでどんな文字列がきても”a”を出力す\n   ればよい\n   – ただしA=“a”のときはそれより小さい文字列は存在しない\n   ので”-1”を出力する。\n\n• もちろんこれ以外にも色々ある\n   – 具体例は以下の通り\n          • 文字列が2文字以上の場合は、1文字減らして出力\n          • 1文字の場合は全探索\n\n\n\n\n\n2014/4/19                                                                                             13",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "1786bc54c318c0e56eaed09317fbb7e44d0fdee681596e6fd7ec533eba43709d"
+    }
+  ],
+  "status": "available"
+}

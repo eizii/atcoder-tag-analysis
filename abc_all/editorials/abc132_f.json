@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc132_f",
+  "editorials": [
+    {
+      "text": "F: Small Products\nまず、DP[i][x]: 最後の整数がx であるようなi 個の整数を並べて条件を満たすようにする場合の数とした\nO(NK) 状態のDP を考えます。このままでは計算量が大きいので、このDP を高速化することを考えます。\n正整数x, y が⌊N\nx ⌋= ⌊N\ny ⌋= t を満たすとします。このとき、DP[i + 1][x] とDP[i + 1][y] は同じ更新式\n∑t\nz=1 DP[i][z] で求まるため、値は等しくなります。よって、このようなx, y に対するDP の状態は同一視\nしてよいことがわかります。\n上記の規則で同一視できる状態をすべて同一視すると、DP の状態数はO(\n√\nNK) になります。これは、\nx ≤\n√\nN のときはx の値が、x >\n√\nN のときは⌊N\nx ⌋の値がO(\n√\nN) 個しかないことからわかります。適切\nに累積和を用いれば、このDP はO(\n√\nNK) 時間で動くように実装できるため、この問題を解くことができ\nました。\n\nABC 132\nDEGwer, gazelle, potetisensei, tozangezan, yuma000\n06/29/2019\n",
+      "text_sha256": "78baebb49dbef7de32c2817d9c5c4fe4b4644ea4464ac0a2af54a2749f6aaeed",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc132/abc132_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

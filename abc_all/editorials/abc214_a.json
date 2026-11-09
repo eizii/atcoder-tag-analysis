@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc214_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc214/editorial/2432",
+      "text": "if 文を用いることによって実装することができます。\n実装例 (C++) :\nなお、三項演算子を用いるとコードを短くすることができます。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int N;\n  cin >> N;\n  if (N <= 125) {\n    cout << 4 << '\\n';\n  } else if (N <= 211) {\n    cout << 6 << '\\n';\n  } else {\n    cout << 8 << '\\n';\n  }\n  return 0;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int N;\n  cin >> N;\n  cout << (N <= 125 ? 4 : (N <= 211 ? 6 : 8)) << '\\n';\n  return 0;\n}",
+        "n = int(input())\nprint(4 if n <= 125 else 6 if n <= 211 else 8)"
+      ],
+      "text_sha256": "95136870a6818ecfe9770082a5d6dce563e5e2f0350a60470eb1fb11388fe039",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc214/abc214_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

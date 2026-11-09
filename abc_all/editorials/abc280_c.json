@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc280_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc280/editorial/5305",
+      "text": "\\(S,T\\)\nの文字を先頭から順に比較し、初めて異なった箇所が答えの\n\\(1\\)\nつです。\n実装例(C++)\nこのアルゴリズムの正当性は次のように証明できます。\n\\(S_i,T_i\\)\nでそれぞれ\n\\(S,T\\)\nの\n\\(i\\)\n番目の文字を表すことにします。\n問題を「\n\\(T\\)\nから\n\\(1\\)\n文字取り除いて\n\\(S\\)\nと一致させるのはどの文字を取り除けばよいか」と読み替えます。\n\\(p\\)\nを、\n\\(S_i\\neq T_i\\)\nとなるような最小の\n\\(i\\)\nとします。\n取り除く文字が\n\\(p\\)\n番目より後ろであることはありません。(\n\\(p\\)\n番目の文字が異なるままになるため)\n取り除く文字が\n\\(p\\)\n番目よりも前であると仮定し、\n\\(q\\)\n番目とします。このとき、\n\\(q\\)\nによって定まる、S,Tの後ろの方の文字列の一致が、\n\\(p\\)\nに関しても言えるため、\n\\(p\\)\nも答えになることがわかります。(図参照)\n以上により、正当性が示せました。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tstring S,T;\n\tcin >> S >> T;\n\t\n\tfor(int i=0;i<S.size();i++){\n\t\tif(S[i]!=T[i]){\n\t\t\tcout << i+1 << endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\tcout << S.size()+1 << endl;\n}"
+      ],
+      "text_sha256": "f47647abca8c7462546b0c0b197f59d645c2e10b81050732d82e8126a3fb3ab9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc280/abc280_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc280/editorial/5349",
+      "text": "公式解説\nは前提とします。\nstd::string s\nに対して\ns[s.length()]\nは（未定義動作ではなく）\nchar\n型の\n0\nを返すことが保証されています。\n今回は制約から\nt.length() > s.length()\nであり\nt[s.length()] != char(0)\nなので、以下のようなコードでも正解することができます。\nReferences:\nhttps://en.cppreference.com/w/cpp/string/basic_string/operator_at\nhttps://en.cppreference.com/w/cpp/string\nhttps://en.cppreference.com/w/cpp/language/zero_initialization",
+      "codes": [
+        "#include <iostream>\n#include <string>\n\nint main() {\n  std::string s, t;\n  std::cin >> s >> t;\n\n  for (size_t i = 0; i <= s.length(); ++i) {\n    if (s[i] != t[i]) {\n      std::cout << i + 1 << '\\n';\n      return 0;\n    }\n  }\n}"
+      ],
+      "text_sha256": "52d3ad2a12e238bdce80301d1b94450c3c147f2162b04e6435ca18f8995927fc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc280/abc280_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc450_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc450/editorial/17732",
+      "text": "原案：admin\nこの問題は BFS により解くことができます。\n左上から順に各マスを見て、まだ調べていない白マスがあれば、その白マスが属する領域を求め、それが最外周のマスを含むかを確かめます。\n実装例 (Python)\nなお、ACL (AtCoder Library) の DSU を用いることで実装を簡略化することもできます。\n実装例 (C++)",
+      "codes": [
+        "H, W = map(int,input().split())\nS = [input() for _ in range(H)]\nchecked = [[False]*W for _ in range(H)]\n\ndef bfs(si, sj):\n  # (si, sj) を含む白マスの領域が最外周のマスを含むか\n  out = False\n  q = [(si, sj)]\n  checked[si][sj] = True\n  for i, j in q:\n    if i == 0 or i == H-1 or j == 0 or j == W-1:\n      out = True\n    for di, dj in [(0, 1), (0, -1), (1, 0), (-1, 0)]:\n      ii = i + di\n      jj = j + dj\n      if 0 <= ii < H and 0 <= jj < W and S[ii][jj] == '.' and not checked[ii][jj]:\n        q.append((ii, jj))\n        checked[ii][jj] = True\n  return out\n\nans = 0\nfor i in range(H):\n  for j in range(W):\n    if S[i][j] == '.' and not checked[i][j]:\n      if not bfs(i, j):\n        ans += 1\n\nprint(ans)",
+        "#include<bits/stdc++.h>\n#include<atcoder/dsu>\nusing namespace std;\n#define rep(i,l,r)for(int i=(l);i<(r);i++)\n#define idx(i,j) ((i)*w+(j))\n\nint main(){\n\tint h, w;\n\tcin >> h >> w;\n\tvector<string>s(h);\n\trep(i, 0, h) cin >> s[i];\n\t\n\tatcoder::dsu d(h*w);\n\trep(i, 0, h)rep(j, 0, w-1)if(s[i][j]=='.' && s[i][j+1]=='.'){\n\t\td.merge(idx(i, j), idx(i, j+1));\n\t}\n\trep(i, 0, h-1)rep(j, 0, w)if(s[i][j]=='.' && s[i+1][j]=='.'){\n\t\td.merge(idx(i, j), idx(i+1, j));\n\t}\n\t\n\tset<int>s1,s2;\n\trep(i, 0, h)rep(j, 0, w)if(s[i][j]=='.'){\n\t\ts1.insert(d.leader(idx(i, j)));\n\t\tif(i==0 || i==h-1 || j==0 || j==w-1){\n\t\t\ts2.insert(d.leader(idx(i, j)));\n\t\t}\n\t}\n\t\n\tcout  <<  s1.size() - s2.size() << endl;\n}"
+      ],
+      "text_sha256": "ad0a3385eea2b668436d7272f2df8feb2b7f86bf396448f49a3afd736369a610",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc450/abc450_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

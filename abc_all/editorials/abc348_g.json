@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc348_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc348/editorial/9707",
+      "text": "以下、入力は \\(B\\) が小さい方から順にソートされているものとします。また、 \\(0\\) 個選ぶ場合の問題の答えを \\(\\mathrm{-inf}\\) と扱います。 本解では、区間 \\([l, r)\\) について、その区間内の値のみを選ぶ場合の部分問題を分割統治法を用いて解きます。 \\(r - l = 1\\) の場合は自明です。そうでない場合、 \\(\\displaystyle m = \\lfloor \\frac{l + r}{2} \\rfloor\\) として、区間 \\([l, m), [m, r)\\) についての問題は再帰して解きます。 区間 \\([l, m)\\) からも \\([m, r)\\) からも値を選ぶ場合について解くことを考えます。 \\(\\displaystyle \\max_{i \\in S} B\\) は \\([m, r)\\) から選ぶ値のみについて考えればよいことに注意します。すると、 \\(x_i\\) を \\([l, m)\\) のうち \\(A\\) の大きい方から \\(i\\) 要素の総和、 \\(y_i\\) を \\([m, r)\\) についての \\(i\\) 個選ぶ問題の答えとして、 \\(\\displaystyle z_i = \\max_{j + k = i} (x_j + y_k)\\) としたときの \\(z\\) を計算できればよいです。 ここで \\(x\\) はその定義より上に凸です。この形の畳み込みは高速に計算できます。 errorgorn 氏による CF blog (英語) に詳しく解説されています。数列の長さをどちらも \\(M\\) としたとき、 Monotone Minima や Li Chao Tree で \\(O(M \\log M)\\) で計算が可能で、 SMAWK Algorithm で \\(O(M)\\) が達成できます。(元 blog には Li Chao Tree 解が紹介されていますが、仕組みは直感的ですがうまく一般化した実装が必要で、速度も Monotone Minima より実効的には遅いです) 以上より、分割統治の計算量と合わせて \\(O(N \\log^2 N)\\) でこの問題を解くことができます。ソートを工夫した上で SMAWK Algorithm を用いれば \\(O(N \\log N)\\) で解くこともできます。 Monotone Minima での実装例 (C++)",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "6a68cc6204608faceaf89476350f2cabe271ad563a267f91543486545eb3594c"
+    }
+  ],
+  "status": "available"
+}

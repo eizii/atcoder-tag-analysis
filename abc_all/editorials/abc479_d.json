@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc479_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc479/editorial/27141",
+      "text": "対称性から、 \\(s < t\\) であるクエリについて考えればよいです。 最初の移動について着目し、場合分けを行います。 まず、最初の移動でマスの番号が \\(s\\) より大きいマスに移動するとき、最初の移動のコストは \\(R_s\\) であり、コストの合計は \\(R_s\\) 以上です。一方、マス \\(s\\) からマス \\(t\\) に直接 \\(1\\) 回の移動で辿り着くとき、コストの合計が \\(R_s\\) となるため、この場合のコストの合計の最小値は \\(R_s\\) となります。 次に、最初の移動においてマスの番号が \\(s\\) 未満のマスに移動するときを考えます。このとき、一連の移動においてマスの番号が \\(s\\) 未満のマスからマスの番号がそれより大きいマスへの移動が必要なことがわかります。この移動のコストは \\(\\displaystyle\\min_{i < s} R_i\\) 以上であり、最初の移動のコストが \\(L_s\\) であることと合わせるとコストの合計は \\(L_s + \\displaystyle\\min_{i < s} R_i\\) 以上となります。一方、最初の移動で \\(\\displaystyle\\min_{i < s} R_i = R_u\\) かつ \\(u < s\\) なるマス \\(u\\) に移動し、次の移動でマス \\(t\\) に移動すればコストの合計は \\(L_s + \\displaystyle\\min_{i < s} R_i\\) となるため、この場合のコストの合計の最小値は \\(L_s + \\displaystyle\\min_{i < s} R_i\\) となります。 以上をまとめると、 \\(s < t\\) なるクエリに対する答えは \\(\\min(R_s, L_s + \\displaystyle\\min_{i < s} R_i)\\) です。 \\(R\\) の先頭から累積 min を前計算しておくことで、各クエリには \\(O(1)\\) 時間で答えることができます。 なお、 \\(s > t\\) なるクエリに対しては、答えは \\(\\min(L_s, R_s + \\displaystyle\\min_{i > s}L_i)\\) であり、 \\(L\\) の末尾から累積 min を計算しておくとよいです。 実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, q;\n\tcin >> n >> q;\n\tvector<int> L(n), R(n);\n\tfor (int i = 1; i < n; i++) cin >> L[i];\n\tfor (int i = 0; i < n - 1; i++) cin >> R[i];\n\tvector<int> A = L, B = R;\n\tfor (int i = n - 2; i >= 0; i--) A[i] = min(A[i], A[i + 1]);\n\tfor (int i = 1; i < n; i++) B[i] = min(B[i], B[i - 1]);\n\twhile (q--) {\n\t\tint s, t;\n\t\tcin >> s >> t;\n\t\ts--; t--;\n\t\tif (s < t) {\n\t\t\tint ans = R[s];\n\t\t\tif (s > 0) ans = min(ans, L[s] + B[s - 1]);\n\t\t\tcout << ans << '\\n';\n\t\t}\n\t\telse {\n\t\t\tint ans = L[s];\n\t\t\tif (s < n - 1) ans = min(ans, R[s] + A[s + 1]);\n\t\t\tcout << ans << '\\n';\n\t\t}\n\t}\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "11e5a3fb0bdfd67d8912e070c4cb30edbc0d22e8037e48c36e3041c842eeaa11"
+    }
+  ],
+  "status": "available"
+}

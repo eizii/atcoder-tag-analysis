@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc067_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc078/editorial.pdf",
+      "text": "A : Sharing Cookies\n\n  A, B, A + B のいずれかが3 で割り切れるかどうかを調べればよい．なお，答えがImpossible\n\nとなるのはA ≡B ≡1 mod 3 あるいはA ≡B ≡2 mod 3 の場合のみである．\n\n#include <iostream>\n\nusing namespace std;\n\nint main(){\n\n    int a,b;\n\n    cin>>a>>b;\n\n    if(a%3 == 0 || b%3 == 0 || (a+b)%3==0)\n\n        cout<< \"Possible\" <<endl;\n\n    else cout<< \"Impossible\" <<endl;\n\n}\n\n\n\n\n\n                                        1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "f93656e8afdb4145ed7b2f25936a4036d91596856b98122f3fefdf074c2a3b52"
+    }
+  ],
+  "status": "available"
+}

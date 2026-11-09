@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc162_c",
+  "editorials": [
+    {
+      "text": "C: sum of gcd of tuples (easy)\ngcd(a, b, c) = gcd(gcd(a, b), c) が成立します。\nK 以下の2 つの数の最大公約数は、ユークリッドの互除法を用いることでO(log K) で求めること\nが出来ます。したがって、実際に全ての(a, b, c) の組に対して最大公約数を計算することで、この問\n題はO(K3 log K) で解けました。\nC 言語でのユークリッドの互除法の実装例は次のとおりです。\n再帰版\n1 int gcd(int p, int q){\n2\nif(p % q == 0)return q;\n3\nreturn gcd(q, p % q);\n4 }\n非再帰版\n1 int gcd(int p, int q){\n2\nwhile(q != 0){\n3\nint r = p % q;\n4\np = q;\n5\nq = r;\n6\n}\n7\nreturn p;\n8 }\n",
+      "text_sha256": "3a4aa37755b4826460b35f5f74b852bee5c0397a5cd221324d059dcb09b979c4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc162/abc162_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc248_e",
+  "title": "K-colinear Line",
+  "contests": [
+    {
+      "contest_id": "abc248",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1292,
+  "raw_difficulty": 1292,
+  "contest_id": "abc248",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc248/tasks/abc248_e",
+  "statement": "配点 : 500 点 問題文 座標平面上の N 個の点が与えられます。 1\\leq i\\leq N について、 i 番目の点の座標は (X_i, Y_i) です。 座標平面上の直線であって、 N 個の点のうち K 個以上の点を通るものの個数を求めてください。 ただし、そのようなものが無数に存在する場合は Infinity を出力してください。 制約 1 \\leq K \\leq N \\leq 300 \\lvert X_i \\rvert, \\lvert Y_i \\rvert \\leq 10^9 i\\neq j ならば X_i\\neq X_j または Y_i\\neq Y_j 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N K X_1 Y_1 X_2 Y_2 \\vdots X_N Y_N 出力 与えられた N 個の点のうち K 個以上の点を通る直線の数を出力せよ。ただし、そのようなものが無数に存在する場合は Infinity を出力せよ。 入力例 1 5 2\n0 0\n1 0\n0 1\n-1 0\n0 -1 出力例 1 6 x=0 , y=0 , y=x\\pm 1 , y=-x\\pm 1 の 6 本の直線が条件をみたします。 例えば、 x=0 は、 1 , 3 , 5 番目の 3 個の点を通ります。 よって、 6 を出力します。 入力例 2 1 1\n0 0 出力例 2 Infinity 原点を通る直線は無数に存在します。\nよって、 Infinity を出力します。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 座標平面上の N 個の点が与えられます。 1\\leq i\\leq N について、 i 番目の点の座標は (X_i, Y_i) です。 座標平面上の直線であって、 N 個の点のうち K 個以上の点を通るものの個数を求めてください。 ただし、そのようなものが無数に存在する場合は Infinity を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq K \\leq N \\leq 300 \\lvert X_i \\rvert, \\lvert Y_i \\rvert \\leq 10^9 i\\neq j ならば X_i\\neq X_j または Y_i\\neq Y_j 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K X_1 Y_1 X_2 Y_2 \\vdots X_N Y_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 与えられた N 個の点のうち K 個以上の点を通る直線の数を出力せよ。ただし、そのようなものが無数に存在する場合は Infinity を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5 2\n0 0\n1 0\n0 1\n-1 0\n0 -1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 6 x=0 , y=0 , y=x\\pm 1 , y=-x\\pm 1 の 6 本の直線が条件をみたします。 例えば、 x=0 は、 1 , 3 , 5 番目の 3 個の点を通ります。 よって、 6 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 1 1\n0 0"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 Infinity 原点を通る直線は無数に存在します。\nよって、 Infinity を出力します。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc248/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:20.232534+00:00",
+  "statement_sha256": "7a46467596aefd261d3611da7990a939bb0c2d55a7ae6678d029429279f89820",
+  "editorials": []
+}

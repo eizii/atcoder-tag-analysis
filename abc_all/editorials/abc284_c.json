@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc284_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5479",
+      "text": "まず、この問題では「単純無向グラフ」「連結成分」のような少し聞きなれない単語が登場しますが、これらは\nグラフ理論\nと呼ばれる分野の専門用語です。この問題は用語の意味に注をつけていますが、競技プログラミングではグラフ理論の用語がときどき説明なしに登場します。より多くの問題を解けるようになりたい人は、少なくとも Google 等の検索エンジンを利用して用語の意味を素早く把握できる能力を身につけましょう。\nさて、連結成分の個数を求める方法を考えます。\n頂点\n\\(v\\)\nを 1 つ選んだ時に、\n\\(v\\)\nを含む連結成分に含まれる頂点の集合は\n深さ優先探索(DFS)\nや\n幅優先探索(BFS)\nのようなグラフ探索アルゴリズムを利用すれば調べることができます。\nよって、次の手順で DFS や BFS を行えば全ての連結成分を 1 回ずつ探索することができます。\nはじめに、すでに訪問したかを管理する\n\\(N\\)\n要素の配列\n\\(\\text{visited}\\)\nを false で初期化する。また、答えの値を管理する変数\n\\(\\text{ans}\\)\nを\n\\(0\\)\nで初期化する。\n\\(i = 1, 2, \\dots, N\\)\nの順に次の操作を行う。\n\\(\\text{visited}_i\\)\nが true ならば何もしない。(頂点\n\\(i\\)\nを含むはすでに訪問したので)\n\\(\\text{visited}_i\\)\nが false ならば「頂点\n\\(i\\)\nを含む連結成分」を DFS や BFS 等で求め、連結成分に含まれるすべてに頂点\n\\(v\\)\nについて\n\\(\\text{visited}_v\\)\nを true にする。そして\n\\(\\text{ans}\\)\nに\n\\(1\\)\nを加算する。\n例えばサンプル 1 (下図) ではおよそ次のような手順で連結成分を調べて行きます。\n頂点\n\\(1\\)\nは未訪問なので、頂点\n\\(1\\)\nを含む連結成分を調べる。連結成分の頂点集合は\n\\(\\lbrace 1,2,3 \\rbrace\\)\nである。\n頂点\n\\(2\\)\nはすでに訪問したので調べなくてよい。\n頂点\n\\(3\\)\nはすでに訪問したので調べなくてよい。\n頂点\n\\(4\\)\nは未訪問なので、頂点\n\\(4\\)\nを含む連結成分を調べる。連結成分の頂点集合は\n\\(\\lbrace 4,5 \\rbrace\\)\nである。\n頂点\n\\(5\\)\nはすでに訪問したので調べなくてよい。\n計算量は\n\\(\\mathrm{O}(N + M)\\)\nで、この問題を十分高速に解くことができます。\nDFS を利用した実装例\nBFS を利用した実装例\nまた、別解として\nUnion-Find (素集合データ構造)\nと呼ばれるデータ構造を使う解法もあります。\nUnion Find を利用した実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint N, M;\nvector<vector<int>> g;\nvector<int> vis;\n\nvoid dfs(int c) {\n  vis[c] = true;\n  for (auto& d : g[c]) {\n    if (vis[d]) continue;\n    dfs(d);\n  }\n}\n\nint main() {\n  cin >> N >> M;\n  g.resize(N);\n  for (int i = 0; i < M; i++) {\n    int u, v;\n    cin >> u >> v;\n    --u, --v;\n    g[u].push_back(v);\n    g[v].push_back(u);\n  }\n\n  int ans = 0;\n  vis.resize(N);\n  for (int i = 0; i < N; i++) {\n    if (!vis[i]) ans++, dfs(i);\n  }\n  cout << ans << \"\\n\";\n}",
+        "#include <iostream>\n#include <queue>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int N, M;\n  cin >> N >> M;\n  vector<vector<int>> g(N);\n  for (int i = 0; i < M; i++) {\n    int u, v;\n    cin >> u >> v;\n    --u, --v;\n    g[u].push_back(v);\n    g[v].push_back(u);\n  }\n\n  int ans = 0;\n  vector<int> vis(N);\n  queue<int> Q;\n  for (int i = 0; i < N; i++) {\n    if (vis[i]) continue;\n    ans++, vis[i] = true;\n    Q.push(i);\n    while (!Q.empty()) {\n      int c = Q.front();\n      Q.pop();\n      for (auto& d : g[c]) {\n        if (vis[d]) continue;\n        vis[d] = true, Q.push(d);\n      }\n    }\n  }\n  cout << ans << \"\\n\";\n}",
+        "#include <iostream>\nusing namespace std;\n#include \"atcoder/dsu.hpp\"\n \nint main() {  \n  int N, M;\n  cin >> N >> M;\n  atcoder::dsu uf(N);\n  while(M--) {\n    int u, v;\n    cin >> u >> v;\n    --u, --v;\n    uf.merge(u, v);\n  }\n  int ans = 0;\n  for(int i = 0; i < N; i++) {\n    if(uf.leader(i) == i) ans++;\n  }\n  cout << ans << \"\\n\";\n}"
+      ],
+      "text_sha256": "8aea6709565028863469b15ca7eae2adca5f60e092ee199979c75fc64525dc0c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5513",
+      "text": "https://twitter.com/kyopro_friends/status/1611950973215465472\n（ツイート中に「ABC285」とありますが、ABC284の誤りです）",
+      "codes": [],
+      "text_sha256": "d6a193d4f5c4d762057ec3c18a8d494ec0fccd9272b0454820b0506934e6e038",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

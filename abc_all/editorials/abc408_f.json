@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc408_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc408/editorial/13171",
+      "text": "移動によって足場の高さは常に狭義単調減少します。よって、高さが小さい足場からその足場を最初に選んだ時にあり得る移動回数の最大値を動的計画法を用いて計算できます。\n\\(dp_i\\)\nを最初に足場 i に移動した時にあり得る移動回数の最大値 とします。このとき、答えは\n\\(dp\\)\nの最大値です。\nまた、数列\n\\(p\\)\nを\n\\(p_{H_i}=i\\)\nとなるような数列とします。\nこの時、\n\\(dp\\)\nは以下のようにして求められます。\n\\(dp=(0,0,\\ldots,0)\\)\nと初期化する\n\\(i=1,2,\\ldots,N\\)\nの順で以下を行う\n\\(|p_i-j| \\leq R, H_j \\leq i-D\\)\nを満たす\n\\(j\\)\nについて、\n\\(dp_{p_i} \\leftarrow \\max(dp_{p_i},dp_j+1)\\)\n各\n\\(i\\)\nについて条件を満たす\n\\(j\\)\nを列挙するような方法では 時間計算量\n\\(\\mathrm{O}(ND)\\)\nや\n\\(\\mathrm{O}(NR)\\)\nとなり、実行時間制限に収めることは難しいです。\n各\n\\(i\\)\nについて条件を満たす\n\\(j\\)\nを列挙する部分を整理し、特に\n\\(H_j \\leq i-D\\)\nの部分を工夫することで、先ほどの処理を以下のように言い換えることができます。\n\\(dp=(0,0,\\ldots,0), S=(-\\infty,-\\infty,\\ldots,-\\infty)\\)\nと初期化する\n\\(i=1,2,\\ldots,N\\)\nの順で以下を行う\n\\(D+1 \\leq i\\)\nの時、\n\\(S_{p_{i-D}} \\leftarrow dp_{p_{i-D}}\\)\nと更新する\n\\(l=\\max(1,p_i-R),r=\\min(N,p_i+R),M=\\max(S_{l},S_{l+1},\\ldots,S_{r})\\)\nとしたとき、\n\\(dp_{p_i} \\leftarrow \\max(dp_{p_i},M+1)\\)\nと更新する\nこの処理では\n\\(S\\)\nの区間最大値を求める部分がボトルネックとなっており、\n\\(S\\)\nに区間最大値セグメント木用いれば高速化できます。よって、この問題を時間計算量\n\\(\\mathrm{O}(N \\log N)\\)\nで解くことができます。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/segtree>\nusing namespace std;\nint op(int a, int b) {\n    return max(a, b);\n}\nint e() {\n    return -1e9;\n}\nint main() {\n    int n, d, r;\n    cin >> n >> d >> r;\n    vector<int> h(n);\n    for (auto &e : h)\n        cin >> e;\n    for (auto &e : h)\n        e--;\n    vector<int> p(n);\n    for (int i = 0; i < n; i++)\n        p[h[i]] = i;\n    vector<int> dp(n, 0);\n    atcoder::segtree<int, op, e> seg(n);\n    for (int i = 0; i < n; ++i) {\n        if (i - d >= 0) {\n            seg.set(p[i - d], dp[i - d]);\n        }\n        int mx = seg.prod(max(0, p[i] - r), min(n, p[i] + r + 1));\n        dp[i] = max(dp[i], mx + 1);\n    }\n    cout << *max_element(dp.begin(), dp.end()) << '\\n';\n}"
+      ],
+      "text_sha256": "41c81abe390f2c61504f9e96e9e19841ee11ecda0656af6527bd41c8803890b7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc408/abc408_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc408/editorial/13197",
+      "text": "注：この解説は公式解説と逆向きにDPしているだけです\n移動によって高橋君がいる足場の高さは狭義単調減少します。よって、足場の高さが高い方から順に「この足場に来るまでに移動できる最大回数」を計算することができそうです。\nもらうDPの気持ちで考えます。\n\\(dp[i]=\\)\n足場\n\\(i\\)\nにいる状態になるまでの移動回数の最大値\nとして（計算量を無視して）次のように計算できます。\n（注：擬似コードは概念をふわっと理解してもらうためのものなのでかなりいい加減です）\nここでもしif文がなければただの区間maxなのでセグ木を用いて高速に計算できます。\nif文がある場合も、seg木の更新をするタイミングを後ろにずらすことで同様に処理できます。\n実装例",
+      "codes": [
+        "for j in H[j]が大きい順:\n  for i in j-r..j+r:\n    if H[j]<=H[i]-D:\n      chmax(dp[j],dp[i]+1)",
+        "seg=セグ木\nfor j in H[j]が大きい順:\n  seg[j]=max(seg[i-r],...,seg[i+r])+1",
+        "seg=セグ木\nque=セグ木の更新待ちの(index, 値)\nfor j in H[j]が大きい順:\n  while:\n    i,v=que.pop()\n    if H[j]<=H[i]-D:\n      seg[i]=v\n  que.push((j, max(seg[i-r],...,seg[i+r])+1))"
+      ],
+      "text_sha256": "ec55c8c3aa09c5eb1920aab9316b4803c3f7aa6d34f16677cf08ce741ebb0492",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc408/abc408_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

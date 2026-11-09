@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc380_d",
+  "title": "Strange Mirroring",
+  "contests": [
+    {
+      "contest_id": "abc380",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 849,
+  "raw_difficulty": 849,
+  "contest_id": "abc380",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc380/tasks/abc380_d",
+  "statement": "配点 : 350 点 問題文 英大小文字からなる文字列 S が与えられます。 S に以下の操作を 10^{100} 回繰り返します。 まず、 S の大文字を小文字に、小文字を大文字に書き換えた文字列を T とする。 その後、 S と T とをこの順に連結した文字列を新たな S とする。 Q 個の質問に答えて下さい。 そのうち i 個目は次の通りです。 全ての操作を終えた後の S の先頭から K_i 文字目を求めよ。 制約 S は英大小文字からなる長さ 1 以上 2 \\times 10^5 以下の文字列 Q,K_i は整数 1 \\le Q \\le 2 \\times 10^5 1 \\le K_i \\le 10^{18} 入力 入力は以下の形式で標準入力から与えられる。 S Q K_1 K_2 \\dots K_Q 出力 i 個目の質問の答えを C_i とする時、以下の形式で 1 行に空白区切りで出力せよ。 C_1 C_2 \\dots C_Q 入力例 1 aB\r\n16\r\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 出力例 1 a B A b A b a B A b a B a B A b 操作前の S = aB です。 aB に 1 回操作を行うと aBAb となります。 aB に 2 回操作を行うと aBAbAbaB となります。 \\dots 10^{100} 回の操作を終えた後の S = aBAbAbaBAbaBaBAb ... です。 入力例 2 qWeRtYuIoP\r\n8\r\n1 1 2 3 5 8 13 21 出力例 2 q q W e t I E Q 入力例 3 AnUoHrjhgfLMcDIpzxXmEWPwBZvbKqQuiJTtFSlkNGVReOYCdsay\r\n5\r\n1000000000000000000 123456789 1 987654321 999999999999999999 出力例 3 K a A Z L",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英大小文字からなる文字列 S が与えられます。 S に以下の操作を 10^{100} 回繰り返します。 まず、 S の大文字を小文字に、小文字を大文字に書き換えた文字列を T とする。 その後、 S と T とをこの順に連結した文字列を新たな S とする。 Q 個の質問に答えて下さい。 そのうち i 個目は次の通りです。 全ての操作を終えた後の S の先頭から K_i 文字目を求めよ。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 S は英大小文字からなる長さ 1 以上 2 \\times 10^5 以下の文字列 Q,K_i は整数 1 \\le Q \\le 2 \\times 10^5 1 \\le K_i \\le 10^{18}"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S Q K_1 K_2 \\dots K_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 i 個目の質問の答えを C_i とする時、以下の形式で 1 行に空白区切りで出力せよ。 C_1 C_2 \\dots C_Q"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 aB\r\n16\r\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 a B A b A b a B A b a B a B A b 操作前の S = aB です。 aB に 1 回操作を行うと aBAb となります。 aB に 2 回操作を行うと aBAbAbaB となります。 \\dots 10^{100} 回の操作を終えた後の S = aBAbAbaBAbaBaBAb ... です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 qWeRtYuIoP\r\n8\r\n1 1 2 3 5 8 13 21"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 q q W e t I E Q"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 AnUoHrjhgfLMcDIpzxXmEWPwBZvbKqQuiJTtFSlkNGVReOYCdsay\r\n5\r\n1000000000000000000 123456789 1 987654321 999999999999999999"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 K a A Z L"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc380/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:04.791211+00:00",
+  "statement_sha256": "628598417ceab80d08de76ee917aa77c8f811cb6302f4b6e52f359075fc69e25",
+  "editorials": []
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc310_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc310/editorial/6789",
+      "text": "もし割引券を使うのであれば、もっとも安い料理を注文するのが最適です。よって、もっとも安い料理の価格を\n\\(D_{\\min}\\)\n円とすると、\n割引券を使わない場合の支払額\n\\(P\\)\n円と、\n割引券を使ってもっとも安い料理を注文する場合の支払額\n\\(Q + D_{\\min}\\)\n円\nのうち、より安い方の金額\n\\(\\min\\lbrace P,  Q + D_{\\min}\\rbrace\\)\nを出力すれば本問題に正解できます。\nもっとも安い料理の価格\n\\(D_{\\min}\\)\nを求めるには、すべての料理\n\\(1, 2, \\ldots, N\\)\nを順に調べてそれらの価格を比較する必要があります。\n「料理\n\\(1, 2, \\ldots, N\\)\nを順に調べ」ることの実装には、プログラミング言語の標準的な機能である\n繰り返し\nの機能（ for 文など）を用いることができます。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(void)\n{\n  int n, p, q;\n  cin >> n >> p >> q;\n  \n  int d_min = 1000000000, d;\n  for(int i = 1; i <= n; i++){\n    cin >> d;\n    d_min = min(d, d_min);\n  }\n  cout << min(p, q+d_min) << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "685dc666d441d99df56269cc9d37dedfd8ff0f4f77233a960df36dea03237fff",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc310/abc310_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

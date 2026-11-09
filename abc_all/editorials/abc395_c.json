@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc395_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc395/editorial/12329",
+      "text": "まず、「同じ値を複数個含む」を「\n\\(1\\)\nを複数個含む」に言い換えた問題を考えます。\nこれは、\n\\(A_i=1\\)\nなる\n\\(i\\)\nを昇順に並び替え、隣り合う部分の差を考えればよいです。\n\\(1\\)\nをほかの値に置き換えても同じことが可能です。添字をグループ分けする作業をはじめに行っておくことで、\n\\(O(N)\\)\nでこの問題を解くことができました。\n実装例 (Python3)\n余談\nいわゆる尺取り法と呼ばれるテクニックを用いてもこの問題を解くことができます。",
+      "codes": [
+        "N = int(input())\nA = list(map(int, input().split()))\n\nans = N + 1\npos = [[] for _ in range(1_000_001)]\n\nfor i in range(N):\n    pos[A[i]].append(i)\n\nfor i in range(1_000_001):\n    if len(pos[i]) < 2:\n        continue\n    for j in range(len(pos[i]) - 1):\n        ans = min(ans, pos[i][j + 1] - pos[i][j] + 1)\n\nif ans == N + 1:\n    print(-1)\nelse:\n    print(ans)"
+      ],
+      "text_sha256": "81ae5ca7924301ac4dc32ffaec70f1de2d0fbb5d195c26e55cca0a4c79df1e8d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc395/abc395_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

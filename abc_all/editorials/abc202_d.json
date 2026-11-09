@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc202_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc202/editorial/1860",
+      "text": "辞書順が関係する問題では、前の文字から決めていくというのが定石です。では、この問題において、答えの先頭の文字が\na\nと\nb\nのどちらであるか判定するためにはどのようにすれば良いでしょうか？\nこれは次のように判定できます：\n先頭が\na\nであるような文字列の総数が\n\\(K\\)\n個以上なら\na\nそうでないなら\nb\n各\n\\(0 \\leq i \\leq A, 0 \\leq j \\leq B\\)\nについて、\na\nが\n\\(i\\)\n個と\nb\nが\n\\(j\\)\n個からなる文字列の総数\n\\(C(i, j)\\)\nを前もって計算しておきます。これは\n\\((0, 0)\\)\nからスタートし、\n\\(x\\)\n軸の正の方向あるいは\n\\(y\\)\n軸の正の方向に\n\\(1\\)\n進むことを繰り返して\n\\((i, j)\\)\nに至る方法の総数に等しいため、単純な動的計画法によって求めることが出来ます。\n\\(S(i, j, k)\\)\nを「\na\nが\n\\(i\\)\n個と\nb\nが\n\\(j\\)\n個からなる文字列のうち、辞書順で\n\\(k\\)\n番目のもの」と定義します。これは次のような場合分けによって求められます：\n\\(i = 0\\)\nのとき、\nb\nが\n\\(j\\)\n個からなる文字列\n\\(j = 0\\)\nのとき、\na\nが\n\\(i\\)\n個からなる文字列\n\\(i > 0\\)\nかつ\n\\(j > 0\\)\nのとき\n\\(C(i - 1, j) \\geq k\\)\nのとき、\na\nに\n\\(S(i - 1, j, k)\\)\nを繋げた文字列\n\\(C(i - 1, j) < k\\)\nのとき、\nb\nに\n\\(S(i, j - 1, k - C(i - 1, j))\\)\nを繋げた文字列\n再帰関数として実装すると次のようになります (C++)：\nループによって非再帰で実装することも可能です (C++)：\n全体の計算量は\n\\(O((A + B)^2)\\)\nあるいは\n\\(O(AB)\\)\nです。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n\nconstexpr int MAX = 30;\nlong long dp[MAX + 1][MAX + 1];\n\nstd::string find_kth(int A, int B, long long K) {\n    if (A == 0) {\n        return std::string(B, 'b');\n    }\n    if (B == 0) {\n        return std::string(A, 'a');\n    }\n    if (K <= dp[A - 1][B]) {\n        return std::string(\"a\") + find_kth(A - 1, B, K);\n    }\n    else {\n        return std::string(\"b\") + find_kth(A, B - 1, K - dp[A - 1][B]);\n    }\n}\n\nint main() {\n    int A, B;\n    long long K;\n    std::cin >> A >> B >> K;\n    dp[0][0] = 1;\n    for (int i = 0; i <= A; ++i) {\n        for (int j = 0; j <= B; ++j) {\n            if (i > 0) {\n                dp[i][j] += dp[i - 1][j];\n            }\n            if (j > 0) {\n                dp[i][j] += dp[i][j - 1];\n            }\n        }\n    }\n    std::cout << find_kth(A, B, K) << '\\n';\n    return 0;\n}",
+        "#include <iostream>\n#include <vector>\n#include <string>\n\nint main() {\n    int A, B;\n    long long K;\n    std::cin >> A >> B >> K;\n    std::vector<std::vector<long long>> dp(A + 1, std::vector<long long>(B + 1));\n    dp[0][0] = 1;\n    for (int i = 0; i <= A; ++i) {\n        for (int j = 0; j <= B; ++j) {\n            if (i > 0) {\n                dp[i][j] += dp[i - 1][j];\n            }\n            if (j > 0) {\n                dp[i][j] += dp[i][j - 1];\n            }\n        }\n    }\n    while (A > 0 and B > 0) {\n        if (K <= dp[A - 1][B]) {\n            std::cout << 'a';\n            A -= 1;\n        }\n        else {\n            K -= dp[A - 1][B];\n            std::cout << 'b';\n            B -= 1;\n        }\n    }\n    std::cout << std::string(A, 'a');\n    std::cout << std::string(B, 'b');\n    std::cout << '\\n';\n    return 0;\n}"
+      ],
+      "text_sha256": "a9d1ed1e88cc204167bce95d62b1ec8b5e1fdff779e897ca65c24b888299d561",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc202/abc202_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

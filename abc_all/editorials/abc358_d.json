@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc358_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc358/editorial/10225",
+      "text": "人\n\\(1, 2, \\ldots, M\\)\nの順に渡す箱を確定させることを考えます。\n\\(i = 1, 2, \\ldots , M\\)\nの順に以下のようにする貪欲法が正当です。\n\\(B_i\\)\n個以上のお菓子が入った箱であって、まだ誰にも渡すことを決めていない箱のうち入っているお菓子の数が最小である箱を人\n\\(i\\)\nに渡すと決める（以下この渡し方を\n\\((\\bigstar)\\)\nとおきます）。\nこの解法が正当でないと仮定して矛盾を導きます。\n最適解を\n\\(1\\)\nつとります。\nこの最適解においては、ある\n\\(i\\)\nについて\n\\((\\bigstar)\\)\nを満たさない渡し方をしています。そのようなものの中で最小の\n\\(i\\)\nをとります。\n\\(1,2,\\ldots, i-1, i\\)\nについて\n\\((\\bigstar)\\)\nを満たしているときに人\n\\(i\\)\nに対して渡す箱を箱\n\\(X\\)\nとおきます（正確には箱自体は一意には定まりませんが、箱に入っているお菓子の数は一意に定まります）。とった最適解において箱\n\\(X\\)\nが誰にも渡されない場合には、人\n\\(i\\)\nに箱\n\\(X\\)\nを渡すことにより解が改善するので最適解であることに矛盾します。したがって、ある人\n\\(j\\)\nに対して箱\n\\(X\\)\nを渡すことになりますが、この場合は人\n\\(i\\)\nと人\n\\(j\\)\nに渡す箱を交換する操作を行います。このような操作を行っても最適解である状態は保たれますが、この操作によって\n\\((\\bigstar)\\)\nを満たさない最小の\n\\(i\\)\nは真に増加するため、操作を繰り返すことによって矛盾が得られます。よって貪欲法の正当性が示されました。\nしたがってこの貪欲法を十分高速にシミュレーションできればよいです。これは C++ における\nstd::multiset\nなどのデータ構造を利用して素朴に行うか、\n\\(A\\)\nおよび\n\\(B\\)\nは sort しても答えが変わらないことを利用して尺取り法の要領で行うこともできます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\n#define rep(i, n) for (int i = 0; i < (n); i++)\nusing namespace std;\nusing ll = long long;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<int> a(n), b(m);\n    rep(i, n) cin >> a[i];\n    rep(i, m) cin >> b[i];\n    multiset<int> st;\n    rep(i, n) st.insert(a[i]);\n    ll ans = 0;\n    rep(i, m) {\n        auto v = st.lower_bound(b[i]);\n        if (v == st.end()) {\n            cout << -1 << '\\n';\n            return 0;\n        }\n        ans += *v;\n        st.erase(v);\n    }\n    cout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "17f96a5967a9ba602a81fb5ddab7bbce9b15f866a8c4aa8368a576879595d8eb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc358/abc358_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc099_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc099/editorial.pdf",
+      "text": "C:  Strange Bank\n\n  6p 円を6 回引き出す操作は、6p+1 円を1 回引き出す操作で置き換え可能なため、6p 円の形で\n表せる金額それぞれにおいて、6 回以上引き出すことは考慮に入れなくてよいことがわかります。\n  9p の形で表される金額に関しても同様のことが言えます。\n\n\n                                         1\n\f\n そこで、「6p 円の形で表される金額」のみでA 円を引き出す場合を考えます。同じ金額を6 回\n以上引き出すことはないことから、6i 円はfloor(A ÷ 6i)%6 回引き出せばいいことがわかります。\n  (ただしfloor(x) はx 以下の最大の整数)\n 残りの「9p 円の形で表される金額」についても同様です。\n よって、「6p 円の形であらわされる金額」のみでいくら引き出すかを全通り試すと、正解を得る\nことができます。\n\n#include <cstdio >\nint N;\nint main ()\n{\n         scanf (\"%d\",&N);\n         int res=N;\n        for(int i=0;i<=N;i++)\n          {\n                  int cc=0;\n                  int t=i;\n                while(t>0)cc+=t%6,t/=6;\n                 t=N-i;\n                while(t>0)cc+=t%9,t/=9;\n                 if(res >cc)res=cc;\n          }\n         printf (\"%d\\n\",res);\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "c5741568f1bd6955f5dce2c98447dfec1e5e809a918f4afef4c96bc61c7ad9bb"
+    }
+  ],
+  "status": "available"
+}

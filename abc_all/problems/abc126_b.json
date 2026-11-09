@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc126_b",
+  "title": "YYMM or MMYY",
+  "contests": [
+    {
+      "contest_id": "abc126",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": null,
+  "raw_difficulty": null,
+  "contest_id": "abc126",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc126/tasks/abc126_b",
+  "statement": "配点 : 200 点 問題文 長さ 4 の数字列 S が与えられます。あなたは、この数字列が以下のフォーマットのどちらであるか気になっています。 YYMM フォーマット: 西暦年の下 2 桁と、月を 2 桁で表したもの (例えば 1 月なら 01 ) をこの順に並べたもの MMYY フォーマット: 月を 2 桁で表したもの (例えば 1 月なら 01 ) と、西暦年の下 2 桁をこの順に並べたもの 与えられた数字列のフォーマットとして考えられるものが YYMM フォーマットのみである場合 YYMM を、\r\nMMYY フォーマットのみである場合 MMYY を、\r\nYYMM フォーマット と MMYY フォーマットのどちらの可能性もある場合 AMBIGUOUS を、\r\nどちらの可能性もない場合 NA を出力してください。 制約 S は長さ 4 の数字列 入力 入力は以下の形式で標準入力から与えられる。 S 出力 YYMM , MMYY , AMBIGUOUS , NA のうち正しいものを出力せよ。 入力例 1 1905 出力例 1 YYMM 19 年 5 月はありえますが、 05 年 19 月はありえません。よって、これは YYMM フォーマットです。 入力例 2 0112 出力例 2 AMBIGUOUS 01 年 12 月も 12 年 1 月もありえます。よって、これはどちらの可能性もあります。 入力例 3 1700 出力例 3 NA 17 年 0 月も 00 年 17 月もありえません。よって、これはどちらの可能性もありません。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ 4 の数字列 S が与えられます。あなたは、この数字列が以下のフォーマットのどちらであるか気になっています。 YYMM フォーマット: 西暦年の下 2 桁と、月を 2 桁で表したもの (例えば 1 月なら 01 ) をこの順に並べたもの MMYY フォーマット: 月を 2 桁で表したもの (例えば 1 月なら 01 ) と、西暦年の下 2 桁をこの順に並べたもの 与えられた数字列のフォーマットとして考えられるものが YYMM フォーマットのみである場合 YYMM を、\r\nMMYY フォーマットのみである場合 MMYY を、\r\nYYMM フォーマット と MMYY フォーマットのどちらの可能性もある場合 AMBIGUOUS を、\r\nどちらの可能性もない場合 NA を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 S は長さ 4 の数字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 YYMM , MMYY , AMBIGUOUS , NA のうち正しいものを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 1905"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 YYMM 19 年 5 月はありえますが、 05 年 19 月はありえません。よって、これは YYMM フォーマットです。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 0112"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 AMBIGUOUS 01 年 12 月も 12 年 1 月もありえます。よって、これはどちらの可能性もあります。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1700"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 NA 17 年 0 月も 00 年 17 月もありえません。よって、これはどちらの可能性もありません。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc126/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:34:46.289804+00:00",
+  "statement_sha256": "aec9855ff28d2564dd67b78062e5dd34ed9bab0509de826e30b58c9d57f7a085",
+  "editorials": []
+}

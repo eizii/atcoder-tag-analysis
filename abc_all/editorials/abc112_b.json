@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc112_b",
+  "editorials": [
+    {
+      "text": "B: Time Limit Exceeded\nti ≤T を満たすi のうちci の最小値を求めつつ、そのようなi が存在するか調べていきます。これを実現\nするアルゴリズムとして、例えば次のようなアルゴリズムが考えられます。\nアルゴリズム1\n1.\nans := ∞とする\n2.\ni = 1, 2, ..., N と順に、ti ≤T かつci < ans ならans := ci とする\n3.\nans = ∞なら条件を満たすi は存在しないのでTLE と出力し、そうでなければans を出力する\nアルゴリズム2\n1.\nti ≤T であるようなi についてci を集めた配列をc′ とする\n2.\nc′ が空ならTLE と出力し、そうでなければc′ の最小値を求めて出力する\n以下は、これらのアルゴリズムをそれぞれC++ で実装した例です。\nアルゴリズム1\n#include <iostream>\nusing namespace std ;\nconst int\ni n f {int (1 e9 ) } ;\nint main () {\nint N, T;\ncin >> N >> T;\nint ans{ i n f };\nfor\n( int\ni = 0;\ni < N; ++i ) {\nint c ,\nt ;\ncin >> c >> t ;\ni f\n( t < T && c < ans ) {\nans = c ;\n}\n}\ni f\n( ans == i n f ) {\ncout << ”TLE” << endl ;\n}\nelse {\ncout << ans << endl ;\n}\n}\n\nアルゴリズム2\n#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std ;\nint main () {\nint N, T;\ncin >> N >> T;\nvector<int> c (N) ,\nt (N) ;\nfor\n( int\ni = 0;\ni < N; ++i ) {\ncin >> c [ i ] >> t [ i ] ;\n}\nvector<int> f i l t e r e d c ;\nfor\n( int\ni = 0;\ni < N; ++i ) {\ni f\n( t [ i ] <= T) {\nf i l t e r e d c . push back ( c [ i ] ) ;\n}\n}\ni f\n( f i l t e r e d c . s i z e () == 0) {\ncout << ”TLE” << endl ;\n}\nelse {\ncout << ∗min element ( f i l t e r e d c . begin () ,\nf i l t e r e d c . end ( ) ) << endl ;\n}\n}\n",
+      "text_sha256": "9714e5e8bc3705f6b772bd3c4f22dffb710ff127fee7d8a7526fcfe3c39ab768",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc112/abc112_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

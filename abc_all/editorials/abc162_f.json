@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc162_f",
+  "editorials": [
+    {
+      "text": "F:Select Half\nこの問題は、もしN が十分小さければ次のようなDP で解くことができます。\nDP[i][j] = {i 番目までのうちどの2 個も連続しないj 個を選んだ時の和の最大値}\nこのDP には無駄が多いので、ここから状態数を減らします。連続する要素を選んではいけないの\nで、i 番目までの数のうち選べるのは最大で⌊i+1\n2 ⌋個です。同様に、残りのN −i 個から選べるのは\n最大で⌊N−i+1\n2\n⌋個なので、最終的に⌊N\n2 ⌋個を選ぶためには、i 番目までに⌊N\n2 ⌋−⌊N−i+1\n2\n⌋個以上\n選んでいる必要があります。\n⌊N\n2 ⌋−⌊N−i+1\n2\n⌋≥⌊i\n2⌋−1 であるので、冒頭のDP で考慮すべきj の値は、各i について⌊i\n2⌋−1\n以上⌊i+1\n2 ⌋以下の高々3 通りであることがわかり、状態数及び計算量がO(N) となって解けました。\n",
+      "text_sha256": "16b474c58db995c410dc565f7363341a5bedb4899187b37c54cfbca8d6c0901a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc162/abc162_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

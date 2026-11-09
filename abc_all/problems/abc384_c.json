@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc384_c",
+  "title": "Perfect Standings",
+  "contests": [
+    {
+      "contest_id": "abc384",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 187,
+  "raw_difficulty": 95,
+  "contest_id": "abc384",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc384/tasks/abc384_c",
+  "statement": "配点 : 300 点 問題文 高橋くんは、プログラミングコンテストを主催することにしました。 コンテストは A 問題、B 問題、C 問題、D 問題、E 問題の 5 問からなり、それぞれの配点は a 点、 b 点、 c 点、 d 点、 e 点です。 コンテストには 31 人が参加し、全員が 1 問以上解きました。 より具体的には、文字列 ABCDE の空でない（連続するとは限らない）部分列すべてについて、その部分列を名前とする参加者が存在し、その参加者は名前に含まれる文字に対応する問題をすべて解き、それ以外の問題は解きませんでした。 例えば、A さんは A 問題のみを、BCE さんは B 問題、C 問題、E 問題を解きました。 参加者の名前を、取った点数が大きいほうから順に出力してください。\r\nただし、参加者が取った点数は、その参加者が解いた問題の配点の合計です。 ただし、同じ点数を獲得した参加者については、名前が辞書順で小さいほうを先に出力してください。 辞書順で小さいとは？ 辞書順とは、一言で説明すると「単語が辞書に載っている順番」を意味します。 より厳密には、英大文字からなる相異なる文字列 S,T について、 S が T より辞書順で小さいとは、以下の条件のどちらかが成り立つことを意味します。 S の長さ |S| が T の長さより短く、 T の先頭 |S| 文字が S と一致する ある整数 1\\leq i\\leq\\min\\lbrace|S|,|T|\\rbrace が存在して、次の 2 つの条件を両方を満たす 1\\leq j\\lt i を満たすすべての整数 j に対して S の j 文字目と T の j 文字目が等しい S の i 文字目が T の i 文字目よりアルファベット順で小さい 例えば、 S= AB ,T= ABC とすると、ひとつめの条件が成り立つため S は T より小さいです。\r\nまた、 S= ABD ,T= ACD とすると、ふたつめの条件が i=2 で成り立つため S は T より小さいです。 制約 100\\leq a\\leq b\\leq c\\leq d\\leq e\\leq 2718 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 a b c d e 出力 31 行出力せよ。 i 行目 (1\\leq i\\leq 31) には、 i 番目に高い得点を獲得した参加者の名前を出力せよ。\r\n同じ得点を獲得した参加者については、それらのうち辞書順で小さい名前をもつ参加者を先に出力せよ。 入力例 1 400 500 600 700 800 出力例 1 ABCDE\r\nBCDE\r\nACDE\r\nABDE\r\nABCE\r\nABCD\r\nCDE\r\nBDE\r\nADE\r\nBCE\r\nACE\r\nBCD\r\nABE\r\nACD\r\nABD\r\nABC\r\nDE\r\nCE\r\nBE\r\nCD\r\nAE\r\nBD\r\nAD\r\nBC\r\nAC\r\nAB\r\nE\r\nD\r\nC\r\nB\r\nA それぞれの参加者の得点は以下のようになります。 例えば、ADE さんと BCE さんは同じ得点を獲得していますが、ADE さんのほうが辞書順で小さい名前をもつため、ADE さんを先に出力してください。 入力例 2 800 800 900 900 1000 出力例 2 ABCDE\r\nACDE\r\nBCDE\r\nABCE\r\nABDE\r\nABCD\r\nCDE\r\nACE\r\nADE\r\nBCE\r\nBDE\r\nABE\r\nACD\r\nBCD\r\nABC\r\nABD\r\nCE\r\nDE\r\nAE\r\nBE\r\nCD\r\nAC\r\nAD\r\nBC\r\nBD\r\nAB\r\nE\r\nC\r\nD\r\nA\r\nB 入力例 3 128 256 512 1024 2048 出力例 3 ABCDE\r\nBCDE\r\nACDE\r\nCDE\r\nABDE\r\nBDE\r\nADE\r\nDE\r\nABCE\r\nBCE\r\nACE\r\nCE\r\nABE\r\nBE\r\nAE\r\nE\r\nABCD\r\nBCD\r\nACD\r\nCD\r\nABD\r\nBD\r\nAD\r\nD\r\nABC\r\nBC\r\nAC\r\nC\r\nAB\r\nB\r\nA",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 高橋くんは、プログラミングコンテストを主催することにしました。 コンテストは A 問題、B 問題、C 問題、D 問題、E 問題の 5 問からなり、それぞれの配点は a 点、 b 点、 c 点、 d 点、 e 点です。 コンテストには 31 人が参加し、全員が 1 問以上解きました。 より具体的には、文字列 ABCDE の空でない（連続するとは限らない）部分列すべてについて、その部分列を名前とする参加者が存在し、その参加者は名前に含まれる文字に対応する問題をすべて解き、それ以外の問題は解きませんでした。 例えば、A さんは A 問題のみを、BCE さんは B 問題、C 問題、E 問題を解きました。 参加者の名前を、取った点数が大きいほうから順に出力してください。\r\nただし、参加者が取った点数は、その参加者が解いた問題の配点の合計です。 ただし、同じ点数を獲得した参加者については、名前が辞書順で小さいほうを先に出力してください。 辞書順で小さいとは？ 辞書順とは、一言で説明すると「単語が辞書に載っている順番」を意味します。 より厳密には、英大文字からなる相異なる文字列 S,T について、 S が T より辞書順で小さいとは、以下の条件のどちらかが成り立つことを意味します。 S の長さ |S| が T の長さより短く、 T の先頭 |S| 文字が S と一致する ある整数 1\\leq i\\leq\\min\\lbrace|S|,|T|\\rbrace が存在して、次の 2 つの条件を両方を満たす 1\\leq j\\lt i を満たすすべての整数 j に対して S の j 文字目と T の j 文字目が等しい S の i 文字目が T の i 文字目よりアルファベット順で小さい 例えば、 S= AB ,T= ABC とすると、ひとつめの条件が成り立つため S は T より小さいです。\r\nまた、 S= ABD ,T= ACD とすると、ふたつめの条件が i=2 で成り立つため S は T より小さいです。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 100\\leq a\\leq b\\leq c\\leq d\\leq e\\leq 2718 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 a b c d e"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 31 行出力せよ。 i 行目 (1\\leq i\\leq 31) には、 i 番目に高い得点を獲得した参加者の名前を出力せよ。\r\n同じ得点を獲得した参加者については、それらのうち辞書順で小さい名前をもつ参加者を先に出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 400 500 600 700 800"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 ABCDE\r\nBCDE\r\nACDE\r\nABDE\r\nABCE\r\nABCD\r\nCDE\r\nBDE\r\nADE\r\nBCE\r\nACE\r\nBCD\r\nABE\r\nACD\r\nABD\r\nABC\r\nDE\r\nCE\r\nBE\r\nCD\r\nAE\r\nBD\r\nAD\r\nBC\r\nAC\r\nAB\r\nE\r\nD\r\nC\r\nB\r\nA それぞれの参加者の得点は以下のようになります。 例えば、ADE さんと BCE さんは同じ得点を獲得していますが、ADE さんのほうが辞書順で小さい名前をもつため、ADE さんを先に出力してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 800 800 900 900 1000"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 ABCDE\r\nACDE\r\nBCDE\r\nABCE\r\nABDE\r\nABCD\r\nCDE\r\nACE\r\nADE\r\nBCE\r\nBDE\r\nABE\r\nACD\r\nBCD\r\nABC\r\nABD\r\nCE\r\nDE\r\nAE\r\nBE\r\nCD\r\nAC\r\nAD\r\nBC\r\nBD\r\nAB\r\nE\r\nC\r\nD\r\nA\r\nB"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 128 256 512 1024 2048"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 ABCDE\r\nBCDE\r\nACDE\r\nCDE\r\nABDE\r\nBDE\r\nADE\r\nDE\r\nABCE\r\nBCE\r\nACE\r\nCE\r\nABE\r\nBE\r\nAE\r\nE\r\nABCD\r\nBCD\r\nACD\r\nCD\r\nABD\r\nBD\r\nAD\r\nD\r\nABC\r\nBC\r\nAC\r\nC\r\nAB\r\nB\r\nA"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc384/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:09.873655+00:00",
+  "statement_sha256": "aa39ae867c99dec50e0adce11c49636f435f72da5406523de076f7d1aa004c70",
+  "editorials": []
+}

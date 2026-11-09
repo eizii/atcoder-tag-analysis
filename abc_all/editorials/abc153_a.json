@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc153_a",
+  "editorials": [
+    {
+      "text": "A: Serval vs Monster\n求める答えはH/A の切り上げです。ceil 関数などを使ってもよいですし、(H + A −1)/A の切り\n捨てにより求めることもできます。\nC 言語での実装例は次のとおりです。\n1 #include<stdio.h>\n2 int main(){\n3\nint h,a;\n4\nscanf(\"%d%d\",&h,&a);\n5\nprintf(\"%d\\n\",(h+a-1)/a);\n6 }\nこのほか、「H が0 以下になるまでA を引く」というループ処理で解くこともできます。\n",
+      "text_sha256": "308cd7e1eeede9a7e10daf1324ea73e3b99a672fe5d66efafcee7c87c7f7931e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc153/abc153_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

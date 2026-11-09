@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc410_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc410/editorial/13300",
+      "text": "タイプ\n\\(1\\)\n、タイプ\n\\(2\\)\nのクエリは愚直に行っても時間計算量\n\\(O(1)\\)\nですが、タイプ\n\\(3\\)\nのクエリは愚直に行うと\n\\(k\\)\n回の操作を\n\\(1\\)\n度にまとめるような工夫をしても\n\\(1\\)\n回あたり時間計算量\n\\(O(N)\\)\n、全体で最悪の場合時間計算量\n\\(O(NQ)\\)\nとなり実行時間制限に間に合いません。\nどうにかしてタイプ\n\\(3\\)\nのクエリを高速に対処したいです。どのようにすればよいでしょうか？\nこの問題を次のように読み替えても、答えは変化しません。\n数列を 0-indexed として取り扱う。つまり、\n\\(A=(A_0,A_1,\\dots,A_{N-1})\\)\nと添え字を振り直し、\n\\(p\\)\nを含むクエリについて受け取った直後に\n\\(p\\)\nを\n\\(1\\)\n減算するものとする。\n最初、\n\\({\\rm offset} = 0\\)\nとする。\nタイプ\n\\(1\\)\nのクエリを、「\n\\(A_{(p+{\\rm offset})\\%N}\\)\nを\n\\(x\\)\nに変更する」と読み替える。\nタイプ\n\\(2\\)\nのクエリを、「\n\\(A_{(p+{\\rm offset})\\%N}\\)\nを出力する」と読み替える。\nタイプ\n\\(3\\)\nのクエリを、「\n\\({\\rm offset}\\)\nを\n\\(({\\rm offset} + k) \\% N\\)\nで置き換える」と読み替える。\n但し、\n\\(p\\%q\\)\nで\n\\(p\\)\nを\n\\(q\\)\nで割った余りを表します。\n要するに、タイプ\n\\(3\\)\nの本来\n\\(O(N)\\)\nかかる操作を、\n\\({\\rm offset}\\)\nの値のみを変更するという\n\\(O(1)\\)\nの軽い操作に置き換えることで高速化しています。\n\\({\\rm offset}\\)\nを\n\\(1\\)\n増やすと元々\n\\(A_0\\)\nを読むはずだった操作が\n\\(A_1\\)\nを、元々\n\\(A_1\\)\nを読みはずだった操作が\n\\(A_2\\)\nを、\n\\(\\dots\\)\n、元々\n\\(A_{N-1}\\)\nを読むはずだった操作が\n\\(A_0\\)\nを読むようになります。これは、まさに元々のタイプ\n\\(3\\)\nで行いたい置き換えです。\nこの高速化により全てのクエリへの対処が時間計算量\n\\(O(1)\\)\nとなり、全体で時間計算量\n\\(O(N+Q)\\)\nでこの問題に正解できます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int N,Q;\n  cin >> N >> Q;\n  vector<int> A(N);\n  for(int i=0;i<N;i++){\n    A[i]=i+1;\n  }\n  int offset=0;\n  while(Q>0){\n    Q--;\n    int typ;\n    cin >> typ;\n    if(typ==1){\n      int p,x;\n      cin >> p >> x;\n      p--;\n      A[(p+offset)%N]=x;\n    }\n    else if(typ==2){\n      int p;\n      cin >> p;\n      p--;\n      cout << A[(p+offset)%N] << \"\\n\";\n    }\n    else{\n      int k;\n      cin >> k;\n      offset+=k;\n      offset%=N;\n    }\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "b5f0c693072262fc97b42664dec3731c01ffe36cbf4ce515259c74345e3b812d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc410/abc410_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

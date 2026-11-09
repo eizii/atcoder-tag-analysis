@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc414_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc414/editorial/13452",
+      "text": "解法の方針\n以下の方針で解くことができます．\n\\(1\\)\n以上\n\\(N\\)\n以下の整数のうち，十進法での表記が回文であるもの (以下「十進回文数」と呼ぶ) を列挙する．\n上で挙げた整数のそれぞれについて，\n\\(A\\)\n進法での表記が回文かどうかを判定し，回文であれば答えに加える．\n回文となる整数の列挙\n十進回文数を観察すると，「上半分を固定すると下半分も自動的に決まる」という特徴があることがわかります．\nということは，\n\\(d\\)\n桁の十進回文数を列挙するには，冒頭\n\\(\\lceil d/2 \\rceil\\)\n桁の部分を列挙し，そこから下半分を復元すれば十分です．ここで\n\\(\\lceil d/2 \\rceil\\)\nとは，\n\\(d\\)\nが偶数のとき\n\\(d/2\\)\nで，奇数のとき\n\\((d+1)/2\\)\nで求まる整数です．\n注意点として，十進表記の先頭にゼロがつかないように，冒頭\n\\(\\lceil d/2 \\rceil\\)\n桁の部分の列挙は\n\\((1, 0, \\dots, 0)\\)\nから始める必要があります．\n\\(d\\)\n桁の回文数を探索するにあたって列挙するべき上半分の種類は高々\n\\(10^{\\lceil d/2 \\rceil}\\)\n通りなので，列挙は\n\\(O(d 10^{\\lceil d/2 \\rceil})\\)\nの時間で実行できます．\n回文判定\n以下のようにして，\n\\(x\\)\nが\n\\(A\\)\n進回文数かを判定することができます．\n\\(x\\)\nの\n\\(A\\)\n進数での表記を求め，下の位から\n\\(x_0, \\cdots, x_{d'-1}\\)\nとおく．\nすべての\n\\(i = 0, \\cdots, d'-1\\)\nに対して，\n\\(x_i = x_{d'-1-i}\\)\nが成り立つかを判定する．\nこれは\n\\(O(\\log_A x)\\)\n時間で実行できます．\n以上の解法を組み合わせることで，全体の時間計算量は\n\\(O(\\sqrt{N} \\log N)\\)\nとなり，十分高速です．\nなお，条件を満たす整数は最大でも\n\\(64\\)\n個 (\n\\(A=6\\)\n,\n\\(N=10^{12}\\)\nのとき) しか存在しないので，\n\\(\\text{(答え)} < 64 \\times 10^{12} < 2^{63}\\)\nがいえます．\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <cstdio>\n#include <string>\n#include <vector>\n#include <array>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\nusing std::string;\nusing std::pair;\nusing std::vector;\nusing std::min;\nusing std::max;\nusing std::array;\n#include <atcoder/all>\n\ntypedef long long int ll;\n\nll a, b, n;\n\n// determine if x is palindromic in base b\nbool ispal (ll x, ll b) {\n\tvector<ll> s;\n\t// s[i] is the digit in i-th place\n\twhile (x > 0) {\n\t\ts.push_back(x % b);\n\t\tx /= b;\n\t}\n\n\tbool isok = true;\n\tfor (ll i = 0; i < s.size(); i++) {\n\t\tif (s[i] != s[s.size() - 1 - i]) isok = false;\n\t}\n\treturn isok;\n}\nvoid solve () {\n\tb = 10;\n\t\n\tvector<ll> vec; // list of answers\n\n\tvector<ll> powb = {1}; // powb[i] == 10**i\n\tll len = 1;\n\twhile (true) {\n\t\t// extend powb enough\n\t\twhile (powb.size() < len) {\n\t\t\tll w = powb[powb.size()-1] * b;\n\t\t\tpowb.push_back(w);\n\t\t}\n\t\tif (powb[len-1] > n) break;\n\n\t\tvector<ll> d((len+1)/2, 0); // upper half. d[0] is the most-significant-digit.\n\t\td[0] = 1; // starts at (1, 0, ..., 0)\n\t\twhile (true) {\n\t\t\t// calculate the palindromic integer corresponding to d as sum\n\t\t\tll sum = 0;\n\t\t\tfor (ll i = 0; i < len; i++) {\n\t\t\t\tll idx;\n\t\t\t\tif (i < d.size()) {\n\t\t\t\t\tidx = i;\n\t\t\t\t} else {\n\t\t\t\t\tidx = (len-1) - i;\n\t\t\t\t}\n\t\t\t\tsum += powb[i] * d[idx];\n\t\t\t}\n\t\t\t// check if (sum <= n) and (sum is palindromic in base A)\n\t\t\tif (sum <= n) {\n\t\t\t\tbool isok = ispal(sum, a);\n\t\t\t\tif (isok) {\n\t\t\t\t\tvec.push_back(sum);\n\t\t\t\t}\n\t\t\t}\n\n\t\t\t// next d\n\t\t\tbool hasnext = false;\n\t\t\tfor (ll i = d.size()-1; i >= 0;i--) {\n\t\t\t\tif (d[i] == b-1) {\n\t\t\t\t\td[i] = 0;\n\t\t\t\t\tcontinue;\n\t\t\t\t} else {\n\t\t\t\t\td[i] += 1;\n\t\t\t\t\thasnext = true;\n\t\t\t\t\tbreak;\n\t\t\t\t}\n\t\t\t}\n\t\t\tif (!hasnext) break;\n\t\t}\n\n\t\tlen++;\n\t}\n\n\t// calculate sum\n\tll allsum = 0;\n\tfor (ll v : vec) {\n\t\tallsum += v;\n\t}\n\tcout << allsum << \"\\n\";\n}\n\nint main (void) {\n\tstd::ios_base::sync_with_stdio(false);\n\tcin.tie(nullptr);\n\t\n\tcin >> a;\n\tcin >> n;\n\n\tsolve();\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "ff578ae1883de78218d38a9c092be7a8ab9e23e3d9b7dfc0ba3bc8ec8b4ea8d5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc414/abc414_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc414/editorial/13687",
+      "text": "注：ツイート内のE問題の解説は誤りです。\nhttps://x.com/kyopro_friends/status/1944032441515020378",
+      "codes": [],
+      "text_sha256": "7211b2042198a7f148b80079c045ae48fedda69bfec7c15dded8eb2461622f40",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc414/abc414_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc472_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc472/editorial/24427",
+      "text": "まず、各行と各列に爆弾があるかを管理することで、全ての 安全な空マス を \\(O(HW)\\) で列挙できます。 計算量を気にしないのであれば各空きマスから BFS をして \\(K\\) 回以下の移動で 安全な空マス に到達できるか？ を解けばよいです。しかし、これでは \\(\\Theta((HW)^2)\\) の計算量がかかってしまいます。よって、すべてのマスについて同時に求めるような工夫が必要です。 ところで、空きマス \\((i, j)\\) について以下の \\(2\\) つの条件は同値です。 \\(K\\) 回以下の移動で 安全な空マス に到達できる ある 安全な空きマス \\((r, c)\\) であって、そのマスから \\(K\\) 回以下の移動で \\((i, j)\\) に到達できるようなものが存在する よって、「もっとも近い 安全な空マス からの最短距離」を各 \\((i, j)\\) について求めれば良いです。これは全ての 安全な空マス を同時に始点とした、「多始点 BFS 」で出来ることが知られています。（通常の BFS は始点が \\(1\\) つですが、複数の頂点を距離 \\(0\\) の始点としたものを「多始点 BFS 」と呼びます。実装上は、はじめに距離を \\(0\\) として que に入れる頂点が複数になるのみです） これによって、「もっとも近い 安全な空きマス までの距離」がすべての空きマスについて \\(O(HW)\\) で列挙できます。 あとは、これが \\(K\\) 以下か判定すればよいです。 実装例",
+      "codes": [
+        "from collections import deque\n\nh, w, k = map(int, input().split())\ns = [input() for _ in range(h)]\n\nr = [0] * h\nc = [0] * w\nfor i in range(h):\n    for j in range(w):\n        if s[i][j] == \"#\":\n            r[i] = 1\n            c[j] = 1\n\nd = [[-1] * w for i in range(h)]\nq = deque()\nfor i in range(h):\n    for j in range(w):\n        if r[i] == c[j] == 0:\n            d[i][j] = 0\n            q.append((i, j))\n\nans = 0\nwhile q:\n    i, j = q.popleft()\n    if d[i][j] <= k:\n        ans += 1\n    for ni, nj in ((i-1, j), (i+1, j), (i, j-1), (i, j+1)):\n        if 0 <= ni < h and 0 <= nj < w:\n            if s[ni][nj] == \".\" and d[ni][nj] == -1:\n                d[ni][nj] = d[i][j] + 1\n                q.append((ni, nj))\n\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "1bf0a7c896ae31977ae3aa89514bc28db305f13795aec33cbae2095a22dc642e"
+    }
+  ],
+  "status": "available"
+}

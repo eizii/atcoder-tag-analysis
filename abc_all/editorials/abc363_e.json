@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc363_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc363/editorial/10482",
+      "text": "以下では、上から\n\\(i\\)\n番目かつ左から\n\\(j\\)\n番目の区画を\n\\((i,j)\\)\nで表し、現在から\n\\(k\\)\n年後を\n\\(k\\)\n年目と表現します。\nまた、以下では、区画が「海または海に沈んだ区画に上下左右に隣接する」ことを単に「海に接する」と表現します。\n区画\n\\((i,j)\\)\nが海に沈むタイミングは次の\n\\(2\\)\nつしかありません。\n海に接している状態で\n\\(A_{i,j}\\)\n年目を迎える。\n\\(k\\geq A_{i,j}\\)\nであるようなある\n\\(k\\)\n年目に、上下左右に隣接するいずれかの区画が海に沈み、新しく海に接するようになる。\n言い換えると、各区画は海に接しない限り沈むことはなく、逆に海に接した瞬間に何年目に沈むかが直ちにわかります。具体的には、区画\n\\((i,j)\\)\nが\n\\(k\\)\n年目に初めて海に接したとき、\n\\(A_{i,j}\\leq k\\)\nのとき、\n\\(k\\)\n年目に沈む。\n\\(k<A_{i,j}\\leq Y\\)\nのとき,\n\\(A_{i,j}\\)\n年目に沈む。\n\\(A_{i,j}\\geq Y\\)\nのとき、\n\\(Y\\)\n年目までに沈むことはない。\nとなります。\nこのことに注意して、\n\\(Y\\)\n個の列(\n\\(Y\\)\n項からなる列ではないことに注意してください)\n\\(Q_1\\)\n,\n\\(Q_2\\)\n,\n\\(\\ldots\\)\n,\n\\(Q_Y\\)\nを用意し、\n\\(Q_k\\)\nの各項は現時点ですでに海に接している区画であって、\n\\(k\\)\n日目に沈む区画となるようなものを作り、更新していくことを考えます。\nまず、島の外周, すなわち海と最初から接している区画について、便宜上\n\\(0\\)\n年目に初めて海に接したと考えることができます。\nよって、外周の各\n\\((i,j)\\)\nすなわち\n\\(\\{(i,j)|i=1 または  i=H または  j=1 または  j=W\\} \\)\nは、（常に\n\\(A_{i,j}\\geq 0\\)\nであることに注意すると）\n\\(A_{i,j}\\leq Y\\)\nならば\n\\(A_{i,j}\\)\n年目に沈み、そうでなければ\n\\(Y\\)\n年目までに沈むことはありません。なので外周の各\n\\((i,j)\\)\nについて、\n\\(A_{i,j}\\leq Y\\)\nならば\n\\(Q_{A_{i,j}}\\)\nの末尾に\n\\(A_{i,j}\\)\nを追加します。\nその後、\n\\(k=1,2,\\ldots,Y\\)\nの順に次の操作を行います。\n\\(Q_k\\)\nの要素(区画) (\n\\(Q_{k,1}, Q_{k,2},\\ldots\\)\n) を先頭から順に見ていく。\n\\(Q_{k,l}\\)\nと隣接する区画（高々\n\\(4\\)\nつ）のうち、まだ海と接していない区画、すなわち\n\\(Q_{k,l}\\)\nが\n\\(k\\)\n年目に海に沈むことで初めて海と接する区画について、その区画の標高\n\\(A_{i',j'}\\)\nが\n\\(k\\)\n以下ならば\n\\(Q_k\\)\nの末尾に、\n\\((k+1)\\)\n以上\n\\(Y\\)\n以下ならば\n\\(Q_{A_{i',j'}}\\)\nの末尾にその区画を追加する。そうでなければ何もしない。\nこれらの操作を行うことによって、\n\\(Y\\)\n年目までに沈む区画を列挙することができます。これらを最初の島の面積\n\\((H\\times W)\\)\nから順に引いていくことによって答えを求めることができます。\n各区画は\n\\(Q_1\\)\n,\n\\(Q_2\\)\n,\n\\(\\ldots\\)\n,\n\\(Q_Y\\)\nのうち高々\n\\(1\\)\nつに\n\\(1\\)\n回しか登場しません。また、列に含まれる各区画についての操作は、それと隣接する区画がすでに海と接しているか確認し、またその標高に応じて列に追加するだけであるため、計算量は全体で\n\\(O(HW)\\)\nとなります。\n本問題の制約下でこれは十分高速です。\nよって、この問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define MAX_H 1000\n#define MAX_W 1000\n#define MAX_Y 100000\n\nint main(void){\n\tqueue<int> q[MAX_Y+1];\n\tint a[MAX_H][MAX_W];\n\tbool inland[MAX_H][MAX_W];\n\tint h,w,n,ans,x,y,z;\n\n\tcin>>h>>w>>n;\n\tans=h*w;\n\tfor(int i=0;i<h;i++){\n\t\tfor(int j=0;j<w;j++){\n\t\t\tcin>>a[i][j];\n\t\t\tinland[i][j]=true;\n\t\t\tif((i==0)||(i==h-1)||(j==0)||(j==w-1)){\n\t\t\t\tq[a[i][j]].push(w*i+j);\n\t\t\t\tinland[i][j]=false;\n\t\t\t}\n\t\t}\n\t}\n\n\tint dx[4]={0,0,-1,1};\n\tint dy[4]={1,-1,0,0};\n\tfor(int i=1;i<=n;i++){\n\t\twhile(!q[i].empty()){\n\t\t\tans--;\n\t\t\tz=q[i].front();\n\t\t\tx=z/w,y=z%w;\n\t\t\tq[i].pop();\n\t\t\tfor(int j=0;j<4;j++){\n\t\t\t\tif(((x+dx[j])>=0)&&((x+dx[j])<h)&&((y+dy[j])>=0)&&((y+dy[j])<w)){\n\t\t\t\t\tif(inland[x+dx[j]][y+dy[j]]){\n\t\t\t\t\t\tq[max(a[x+dx[j]][y+dy[j]],i)].push(w*(x+dx[j])+(y+dy[j]));\n\t\t\t\t\t\tinland[x+dx[j]][y+dy[j]]=false;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tcout<<ans<<endl;\n\t}\n\treturn 0;\n}"
+      ],
+      "text_sha256": "5987cc1a9a26ab18195e3a445b8ddf7a762745463103b663d6209e0642de7d4e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc363/abc363_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc363/editorial/10500",
+      "text": "\\(y\\)\n年後に区画\n\\(v\\)\nが沈んでいるための必要十分条件は、「海からスタートして、標高が\n\\(y\\)\n以下の区画のみを通って\n\\(v\\)\nに到達できること」です。よって問題は次の通り読み替えられます。\n「パスに対するコストを、通った区画の標高の最大値と定める。各\n\\(i\\)\nについて、海からコスト\n\\(i\\)\n以下で到達できる区画の個数を求めよ」\nこの問題は、海を表す頂点のみからなるグラフから始め、標高の低い区画から順に追加する Union-Find により、\n\\(i\\)\nの昇順に求めることができます。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "3a3c36878f4c292798b32b867bf56df8f75ec05e84342d4db5d05e704026acc8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc363/abc363_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc363/editorial/10501",
+      "text": "\\(y\\)\n年後に区画\n\\(v\\)\nが沈んでいるための必要十分条件は、「海からスタートして、標高が\n\\(y\\)\n以下の区画のみを通って\n\\(v\\)\nに到達できること」です。よって問題は次の通り読み替えられます。\n「パスに対するコストを、通った区画の標高の最大値と定める。各\n\\(i\\)\nについて、海からコスト\n\\(i\\)\n以下で到達できる区画の個数を求めよ」\n海を始点としたダイクストラ法により、海から各区画までのパスのコストの最小値を求めることができるので、これを集計することでもとの問題に答えることができます。\n実装例(C++)\n本質的には\n公式解説\nと等価です。",
+      "codes": [],
+      "text_sha256": "3451ec14164686da54b07441818ad83165c12e837a129ee0eeba32c24155e842",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc363/abc363_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

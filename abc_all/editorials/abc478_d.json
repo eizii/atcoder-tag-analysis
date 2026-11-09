@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc478_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc478/editorial/26537",
+      "text": "\\(N\\) 個の集合 \\(S _ 1,S _ 2,\\ldots,S _ N\\) を時系列だと思うことで、問題は以下のように読み替えられます。 集合 \\(S\\) に対して \\(Q\\) 個の操作を行う。\\(i\\) 番目の操作は「\\(L _ i\\) 秒から \\(R _ i+\\dfrac12\\) 秒までの間、\\(S\\) に \\(X _ i\\) を追加する」である。\\(t\\) 秒 \\((1\\le t\\le N)\\) における \\(S\\) の要素数をそれぞれ求めよ。 これはイベントソートの要領で解くことができます。\n具体的には、「現在 \\(X _ i\\) を追加している操作の個数」を管理し、\\(0\\) が \\(1\\) になるときや \\(1\\) が \\(0\\) になるときに答えを更新すればよいです。 実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <tuple>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n    unsigned N, Q;\n    cin >> N >> Q;\n    vector<tuple<unsigned, unsigned, unsigned>> event;\n    for (unsigned i{}; i < Q; ++i) {\n        unsigned L, R, X;\n        cin >> L >> R >> X;\n        --L;\n        --X;\n        event.emplace_back(L, X, 1); // X を追加するイベント\n        event.emplace_back(R, X, -1); // X を削除するイベント\n    }\n    event.emplace_back(N, 0, 0); // 番兵\n\n    ranges::sort(event);\n    vector<unsigned> counter(Q); // counter[i] := i を追加しているイベントがいくつあるか\n    unsigned ans{}, now{};\n    for (const auto &[t, x, v] : event) {\n        while (t != now) {\n            ++now;\n            cout << ans << \" \";\n        }\n        if (counter[x] == 0) ++ans; // 0 から増えたら答えを増やす\n        counter[x] += v;\n        if (counter[x] == 0) --ans; // 0 に減ったら答えを減らす\n    }\n    cout << endl;\n    return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "f35ac0e175b35f2509d8afbdb9c441d3af4b6c6390156b918d3a89618777033d"
+    }
+  ],
+  "status": "available"
+}

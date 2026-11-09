@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc284_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5467",
+      "text": "与えられた整数\n\\(N\\)\nを素因数分解するアルゴリズムとしては、\n\\(i=1,2,\\dots,\\lfloor\\sqrt{N}\\rfloor\\)\nの順に\n\\(N\\)\nが\n\\(i\\)\nで割り切れるかどうかを確かめる\n\\(O(\\sqrt{N})\\)\nのアルゴリズムが有名です (試し割りと呼ばれることが多いです)。\nしかし、本問題では\n\\(N\\)\nが大きいため、\n\\(O(\\sqrt{N})\\)\nの試し割りは間に合いません。そこで、\n\\(N=p^2q\\)\n(\n\\(p,q\\)\nは素数) と表せるという条件を使います。\n重要な性質として、\n\\(\\min(p,q)\\leq\\sqrt[3]{N}\\)\nが成り立ちます (これが成り立たないと仮定すると、\n\\(p^2q>N\\)\nとなって矛盾します)。よって、\n\\(\\sqrt{N}\\)\nまで試し割りしなくとも、\n\\(\\sqrt[3]{N}\\)\nまで試し割りすれば\n\\(p\\)\nと\n\\(q\\)\nのうち少なくとも一方は見つかることがわかります。この方針の下、以下のように具体的なアルゴリズムを構築可能です。\n\\(i=2,3,\\dots,\\lfloor\\sqrt[3]{N}\\rfloor\\)\nのうち、\n\\(N\\)\nが\n\\(i\\)\nで割り切れるような最小の\n\\(i\\)\nを\n\\(A\\)\nとおく (\n\\(A=p\\)\nまたは\n\\(A=q\\)\nである)。\n\\(\\frac{N}{A}\\)\nが\n\\(A\\)\nで割り切れるか調べる。割り切れるなら、\n\\(p=A,q = \\frac{N}{A^2}\\)\nである。割り切れないなら、\n\\(p = \\sqrt{\\frac{N}{A}},q=A\\)\nである。\nよって、\n\\(1\\)\nテストケースあたり\n\\(O(\\sqrt[3]{N})\\)\nでこの問題を解くことができました。\nなお、Pollard’s rho algorithm などの高速な素因数分解アルゴリズムを用いることでもこの問題を解くことができます。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint main() {\n    int t;\n    cin >> t;\n    while (t--) {\n        ll n;\n        cin >> n;\n        \n        ll p = 0, q = 0;\n        for (ll i = 2; i * i * i <= n; i++) {\n            if (n % i != 0) continue;\n            if ((n / i) % i == 0) {\n                p = i;\n                q = n / i / i;\n            } else {\n                q = i;\n                p = (ll) round(sqrt(n / i));\n            }\n            break;\n        }\n        cout << p << ' ' << q << endl;\n    }\n}"
+      ],
+      "text_sha256": "04b4a7b1aa5653b942b83e9fd190b7bb08af2e6e3c2c895ed2b6559ee86cb41f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5513",
+      "text": "https://twitter.com/kyopro_friends/status/1611950973215465472\n（ツイート中に「ABC285」とありますが、ABC284の誤りです）",
+      "codes": [],
+      "text_sha256": "d6a193d4f5c4d762057ec3c18a8d494ec0fccd9272b0454820b0506934e6e038",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc150_f",
+  "editorials": [
+    {
+      "text": "F:XOR Shift\n数列の添え字は断りなくmodN で考えるものとし、XOR を⊕で表すこととします。\n(1) すべてのi でa′\ni = bi\nとなるためには\n(2) すべてのi でa′\ni ⊕a′\ni+1 = bi ⊕bi+1\nが成立していることが必要です。ここでa′\ni ⊕a′\ni+1 = (ai+k ⊕x) ⊕(ai+k+1 ⊕x) = ai+k ⊕ai+k+1 で\nあることから、(2) の条件はk のみによって決まります。この条件を満たすk は、KMP 法などを用\nいることで、O(N) で列挙することができます。（ci = ai ⊕ai+1、di = bi ⊕bi+1 として、d の中から\nc を検索します）\n逆に(2) を満たすようなk に対しては、x がbi ⊕ai+k であるとき、その時に限り(1) の条件を満\nたします。したがって、各k に対してこのようなx は定数時間で求めることができます。以上によ\nりこの問題はO(N) で解けました。\nXOR になじみがない人は、まずXOR の代わりに足し算で同様のことを考えてみるとわかりやす\nいかもしれません。その場合(2) の条件はa′\ni −a′\ni+1 = bi −bi+1 となります。\n",
+      "text_sha256": "d588c55de0798b21570d079ea4bf9d0dc26f2584aec87f601251625ebbbbd814",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc150/abc150_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

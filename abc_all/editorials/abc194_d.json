@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc194_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc194/editorial/823",
+      "text": "重要な事実として以下があります。\n確率\n\\(p(p \\neq 0)\\)\nで成功する試行を、成功するまで行うときの試行回数(最後の成功した回も含む) の期待値は\n\\(\\frac{1}{p}\\)\nである。\n証明 :\n求める期待値を\n\\(X\\)\nとする。\n\\(1\\)\n回試行して、成功したらそこで終わり、失敗したら全く同じ状況でやり直しなので\n\\(X = 1 + (1 - p) X\\)\nという等式が成り立つ。\n変形して\n\\(pX = 1\\)\nなので\n\\(X = \\frac{1}{p}\\)\nである。\n今回の問題で、「今高橋君がいる連結成分に含まれる頂点集合」を\n\\(S\\)\nと表すことにします。また、\n\\(S\\)\nの要素数を\n\\(|S|\\)\nと表します。\n操作において\n\\(S\\)\nに含まれない頂点が選ばれた場合、そしてその場合に限り\n\\(|S|\\)\nが\n\\(1\\)\n大きくなります。\n\\(S\\)\nに含まれない頂点が初めて選ばれるまでに必要な操作回数の期待値は冒頭の事実より\n\\(\\frac{1}{\\frac{N - |S|}{N}} = \\frac{N}{N - |S|}\\)\nであり、\n\\(|S| = 1\\)\nの状態から始めて\n\\(|S| = N\\)\nになった時に終了なので、答えは\n\\(\\frac{N}{N - 1} + \\frac{N}{N - 2} + \\frac{N}{N - 3} + \\dots + \\frac{N}{1}\\)\nです。\nこれは\n\\(O(N)\\)\nで計算できるので解けました。\n答えの値は最大で\n\\(1.2 \\times 10^6\\)\n程度なので、少なくとも倍精度浮動小数点数 (double型)を使えば誤差も問題になりません。",
+      "codes": [],
+      "text_sha256": "a1449e562737de452e347e126b3948dd990fe816aad961f3d68ef2fbb66b31cc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc194/abc194_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

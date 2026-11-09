@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc290_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc290/editorial/5766",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n以下の処理を実装すれば良いです。\n入力を受け取る。\n変数 ans を準備し、\n\\(0\\)\nで初期化する。\n各\n\\(i\\ (1\\leq i \\leq M)\\)\nに対して、ans に\n\\(A_{B_i}\\)\nを加算する。\nans の値を出力する。\n具体的な実装方法は以下の実装例 (C++, Python) をご参照ください。\n多くのプログラミング言語では配列の添字が\n\\(0\\)\nから始まるため、実装方法によっては入力で受け取った\n\\(B_i\\)\nから\n\\(1\\)\nを引く必要があることに注意してください。\nC++\nPython",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<int> a(n), b(m);\n    for (int i = 0; i < n; i++) cin >> a[i];\n    for (int i = 0; i < m; i++) {\n        cin >> b[i];\n        --b[i];\n    }\n    int ans = 0;\n    for (int i = 0; i < m; i++) ans += a[b[i]];\n    cout << ans << endl;\n}",
+        "n, m = map(int, input().split())\na = list(map(int, input().split()))\nb = list(map(int, input().split()))\n\nans = 0\nfor i in range(0, m):\n    ans += a[b[i] - 1]\nprint(ans)"
+      ],
+      "text_sha256": "b5e436cde26f79cbeb8c749cdcbf4f1dde136668542d6eb9f800b78304c81c17",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc290/abc290_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

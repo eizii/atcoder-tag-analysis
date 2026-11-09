@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc260_f",
+  "title": "Find 4-cycle",
+  "contests": [
+    {
+      "contest_id": "abc260",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1995,
+  "raw_difficulty": 1995,
+  "contest_id": "abc260",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc260/tasks/abc260_f",
+  "statement": "配点 : 500 点 問題文 S+T 頂点 M 辺の単純無向グラフ G があります。頂点には 1 から S+T の番号が、辺には 1 から M の番号が割り振られています。辺 i は頂点 u_i と頂点 v_i を結んでいます。 また、頂点集合 V_1 = \\lbrace 1, 2,\\dots, S\\rbrace および V_2 = \\lbrace S+1, S+2, \\dots, S+T \\rbrace はともに独立集合です。 長さ 4 のサイクルを 4-cycle と呼びます。 G が 4-cycle を含む場合、4-cycle をどれか 1 つ選び、選んだサイクルに含まれる頂点を出力してください。頂点を出力する順番は自由です。 G が 4-cycle を含まない場合、 -1 を出力してください。 独立集合とは？ グラフ G の独立集合とは、 G に含まれるいくつかの頂点からなる集合 V' であって、 V' に含まれる任意の 2 つの頂点の間に辺がないものを言います。 制約 2 \\leq S \\leq 3 \\times 10^5 2 \\leq T \\leq 3000 4 \\leq M \\leq \\min(S \\times T,3 \\times 10^5) 1 \\leq u_i \\leq S S + 1 \\leq v_i \\leq S + T i \\neq j ならば (u_i, v_i) \\neq (u_j, v_j) 入力される値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 S T M u_1 v_1 u_2 v_2 \\vdots u_M v_M 出力 G が 4-cycle を含む場合は、任意の 4-cycle を 1 つ選び、選んだサイクルに含まれている相異なる 4 個の頂点の番号を出力せよ。(頂点の順番は問わない。) G が 4-cycle を含まない場合は -1 を出力せよ。 入力例 1 2 3 5\r\n1 3\r\n1 4\r\n1 5\r\n2 4\r\n2 5 出力例 1 1 2 4 5 頂点 1 と 4 、 4 と 2 、 2 と 5 、 5 と 1 の間に辺があるので 頂点 1,2,4,5 は 4-cycle をなします。よって 1, 2, 4, 5 を出力すればよいです。 頂点を出力する順番は自由で、出力例のほかにも例えば 2 5 1 4 のような出力も正答となります。 入力例 2 3 2 4\r\n1 4\r\n1 5\r\n2 5\r\n3 5 出力例 2 -1 G が 4-cycle を含まない入力もあります。 入力例 3 4 5 9\r\n3 5\r\n1 8\r\n3 7\r\n1 9\r\n4 6\r\n2 7\r\n4 8\r\n1 7\r\n2 9 出力例 3 1 7 2 9",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 S+T 頂点 M 辺の単純無向グラフ G があります。頂点には 1 から S+T の番号が、辺には 1 から M の番号が割り振られています。辺 i は頂点 u_i と頂点 v_i を結んでいます。 また、頂点集合 V_1 = \\lbrace 1, 2,\\dots, S\\rbrace および V_2 = \\lbrace S+1, S+2, \\dots, S+T \\rbrace はともに独立集合です。 長さ 4 のサイクルを 4-cycle と呼びます。 G が 4-cycle を含む場合、4-cycle をどれか 1 つ選び、選んだサイクルに含まれる頂点を出力してください。頂点を出力する順番は自由です。 G が 4-cycle を含まない場合、 -1 を出力してください。 独立集合とは？ グラフ G の独立集合とは、 G に含まれるいくつかの頂点からなる集合 V' であって、 V' に含まれる任意の 2 つの頂点の間に辺がないものを言います。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq S \\leq 3 \\times 10^5 2 \\leq T \\leq 3000 4 \\leq M \\leq \\min(S \\times T,3 \\times 10^5) 1 \\leq u_i \\leq S S + 1 \\leq v_i \\leq S + T i \\neq j ならば (u_i, v_i) \\neq (u_j, v_j) 入力される値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S T M u_1 v_1 u_2 v_2 \\vdots u_M v_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 G が 4-cycle を含む場合は、任意の 4-cycle を 1 つ選び、選んだサイクルに含まれている相異なる 4 個の頂点の番号を出力せよ。(頂点の順番は問わない。) G が 4-cycle を含まない場合は -1 を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2 3 5\r\n1 3\r\n1 4\r\n1 5\r\n2 4\r\n2 5"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1 2 4 5 頂点 1 と 4 、 4 と 2 、 2 と 5 、 5 と 1 の間に辺があるので 頂点 1,2,4,5 は 4-cycle をなします。よって 1, 2, 4, 5 を出力すればよいです。 頂点を出力する順番は自由で、出力例のほかにも例えば 2 5 1 4 のような出力も正答となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 2 4\r\n1 4\r\n1 5\r\n2 5\r\n3 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 -1 G が 4-cycle を含まない入力もあります。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 4 5 9\r\n3 5\r\n1 8\r\n3 7\r\n1 9\r\n4 6\r\n2 7\r\n4 8\r\n1 7\r\n2 9"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 1 7 2 9"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc260/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:35.392150+00:00",
+  "statement_sha256": "f0641ff7ed6c1eee5b660a806842fa0367db8d1ed5e628ee27651d783ae0ea15",
+  "editorials": []
+}

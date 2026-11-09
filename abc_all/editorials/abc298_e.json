@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc298_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc298/editorial/6216",
+      "text": "\\(dp_{i,j,f}\\)\nを高橋君が地点\n\\(i\\)\n、青木君が地点\n\\(j\\)\nにいて、\n\\(f=0\\)\nならば次の手番が高橋君、\n\\(f = 1\\)\nならば次の手番が青木君としたときの高橋君の勝率とします。求める値は\n\\(dp_{A,B,0}\\)\nです。\n具体的に dp の遷移を考えていきます。\nまずは、\n\\(dp_{i,j,0}\\)\nの値について考えます。高橋君は\n\\(k = 1,2, \\ldots, P\\)\nに対し地点\n\\(\\min(i+k,N)\\)\nに等確率で進むので、\n\\(dp_{i,j,0} = \\frac{1}{P}\\displaystyle\\sum_{k=1}^{P}dp_{\\min(i+k,N),j,1}\\)\nが成り立ちます。\n同様に\n\\(dp_{i,j,1}\\)\nの値を考えると、青木君は\n\\(k = 1,2, \\ldots, Q\\)\nに対し地点\n\\(\\min(j+k,N)\\)\nに等確率で進むので、\n\\(dp_{i,j,1} = \\frac{1}{Q}\\displaystyle\\sum_{k=1}^{Q}dp_{i,\\min(j+k,N),0}\\)\nが成り立ちます。\n上の dp 配列についての関係式より、\n\\(i\\)\nおよび\n\\(j\\)\nの降順に計算していくと dp 配列の値が求まることがわかります。\n\\(i < N\\)\nに対し\n\\(dp_{N,i,f} = 1, dp_{i,N,f} = 0\\)\nであることを用いると、答えを求めることができました。\n\\(\\text{mod } 998244353\\)\nにおける\n\\(P\\)\nと\n\\(Q\\)\nの逆元を\n\\(\\mathrm{O}(P+Q)\\)\n時間で求めることにより、時間計算量は\n\\(\\mathrm{O}(N^2(P+Q))\\)\nとなります（ユークリッドの互除法などにより\n\\(\\log 998244353\\)\n程度の時間計算量をかけても問題なく間に合います）。\nまた、累積和を用いることで時間計算量\n\\(\\mathrm{O}(N^2)\\)\nとすることもできます。\nACL を用いた実装例",
+      "codes": [
+        "#include <iostream>\n#include <atcoder/all>\nusing namespace std;\nusing namespace atcoder;\nusing mint = static_modint<998244353>;\nmint dp[110][110][2];\n\nint main() {\n\tint n, a, b, p, q;\n\tcin >> n >> a >> b >> p >> q;\n\tfor (int i = 0; i < n; i++) for (int f = 0; f < 2; f++) {\n\t\tdp[n][i][f] = 1;\n\t\tdp[i][n][f] = 0;\n\t}\n\tfor (int i = n - 1; i >= 0; i--) {\n\t\tfor (int j = n - 1; j >= 0; j--) {\n\t\t\tfor (int k = 1; k <= p; k++) {\n\t\t\t\tdp[i][j][0] += dp[min(n, i + k)][j][1];\n\t\t\t}\n\t\t\tdp[i][j][0] /= p;\n\t\t\tfor (int k = 1; k <= q; k++) {\n\t\t\t\tdp[i][j][1] += dp[i][min(n, j + k)][0];\n\t\t\t}\n\t\t\tdp[i][j][1] /= q;\n\t\t}\n\t}\n\tcout << dp[a][b][0].val() << '\\n';\n}"
+      ],
+      "text_sha256": "02340ba519166aa6c8346523d32cbb403f97ad91e8e5931993d34d7a498df9fa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc298/abc298_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

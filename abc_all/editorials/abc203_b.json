@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc203_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc203/editorial/1950",
+      "text": "\\(i\\)\n階\n\\(j\\)\n号室の部屋番号を\n\\(3\\)\n桁の整数とみなしたときその数は\n\\(100i+j\\)\nと書く事が出来ます。\nこれを\n\\(2\\)\n重のfor文によって足し合わせてあげればよいです。\n\\(1000\\)\n未満の数を高々\n\\(81\\)\n個足し合わせるだけなので答えは明らかに\n\\(32\\)\nbit 整数の範囲に収まります。\n実際には具体的にこの値を式で書く事が出き、\n\\(100i\\)\nと\n\\(j\\)\nごとに足し合わせることを考えると\n\\[\n100(1+2+\\cdots +N)\\times K+(1+2+\\cdots +K)\\times N=\\frac{NK\\{100(N+1)+(K+1)\\}}{2}\n\\]\nと求めることもできます。\nこの方法でやる際は先に分子を計算してから\n\\(2\\)\nで割らないと値がずれてしまう可能性がある事に注意してください。\n例えば、\n\\(\\frac{NK}{2}\\)\nを先に整数型で計算してしまうと、\n\\(N\\)\n,\n\\(K\\)\nがともに奇数のときに切り捨てによって値がずれてしまいます。\n以下の実装例は\n\\(1\\)\nつめの方針による実装です。\nC++による実装例:\nPythonによる実装例:",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(void) {\n\tint n, k;\n\tint s = 0;\n\tcin >> n >> k;\n\tfor (int i = 1; i <= n; i++) {\n\t\tfor (int j = 1; j <= k; j++) {\n\t\t\ts += (100 * i + j);\n\t\t}\n\t}\n\tcout << s << endl;\n\treturn 0;\n}",
+        "n, k = map(int, input().split())\ns = 0\nfor i in range(1,n+1):\n    for j in range(1,k+1):\n        s += (100*i)+j\nprint(s)"
+      ],
+      "text_sha256": "2dee20c3e032576322f26deeacbbda0e2b10966aae4921e403cb6f62a1760126",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc203/abc203_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

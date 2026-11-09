@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc335_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc335/editorial/9038",
+      "text": "黒く塗られたマスの集合と駒の進め方とは対応するので、ありうる駒の進め方を数え上げれば良いです。\nこのもとで、今回の問題を計算量を気にせずに解くことを考えましょう。以下のような擬似コードの DP を書くことになると思います。\n\\(A_i\\)\nが大きいケースでは\n\\(j\\)\nループが回る回数は少なく済むのでこの方針がそのまま使えそうですが、例えば\n\\(A_i=(1,1,\\dots,1)\\)\nのようなケースでは\n\\(O(N^2)\\)\nの時間計算量を要するので、このままではこの問題に正解することは難しいです。\nでは、\n\\(A_i\\)\nが小さいケースについて\n\\(dp\\)\n配列を高速に更新する方法を考えましょう。\n\\(i<j\\)\nについて、\n\\(dp[i]\\)\nから\n\\(dp[j]\\)\nに遷移させる条件は、\n\\((j-i)\\)\nが\n\\(A_i\\)\nの倍数であること ( すなわち、\n\\(i\\)\nを\n\\(A_i\\)\nで割ったあまりと\n\\(j\\)\nを\n\\(A_i\\)\nで割ったあまりとが一致すること ) です。\nこのことから、\n\\(dp2[d][r] = \\)\n{\n\\(d\\)\nで割った余りが\n\\(r\\)\nである場合 } のような配列を作ればこの問題を解くことができそうです。( 実際に、この方針から正解することができます。 )\nでは、\n\\(A_i\\)\nが小さい、大きいとはどのようなことでしょうか?\n仮に、\n\\(A_i \\le b\\)\nが\n\\(A_i\\)\nが小さいか大きいかの境界であったとしましょう。\n\\(A_i\\)\nが小さい場合の処理をかけるとその部分の時間計算量は全体で\n\\(O(Nb)\\)\n\\(A_i\\)\nが大きい場合の処理をかけるとその部分の時間計算量は全体で\n\\(O(N \\times \\frac{N}{b})\\)\nとなります。\n\\(O(Nb + N \\times \\frac{N}{b})\\)\nの評価をなるだけ良くするには、\n\\(b=\\sqrt{N}\\)\nとすればよいです ( 略証: 相加相乗平均の関係 ) 。\n実装上では、\n\\(b\\)\nを\n\\(\\sqrt{\\max N}\\)\n付近の適当な定数にしてしまっても構いません。また、各部分の定数倍によっては、最適な\n\\(b\\)\nが\n\\(\\sqrt{N}\\)\nから少し遠い値になることもあるので、局面によっては色々試すのも良いでしょう。\nここから正しい実装に辿り着くのは読者への課題とします。解説の最後に実装例を示します。\nこのように、問題を\n\\(\\sqrt{N}\\)\nを境に区切ったり、\n\\(\\sqrt{N}\\)\n個に問題を分割して部分問題を高速に解いたりするテクニックを\n平方分割\nと呼ぶことがあります。\n実装例 (C++):\n注:\n\\(998244353\\)\nでの除算を条件分岐を利用して回避しています。",
+      "codes": [
+        "dp={1,0,...,0};\nfor(i=1;i<=N;i++)\n  for(j=i+A[i];j<=N;j+=A[i])\n    dp[j]+=dp[i];\nprint(sum(dp));",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\n#define mod 998244353\n#define BD 500\n\nint dp[200005]={0};\nint dp2[505][505]={0};\n\nint main(){\n  int n;\n  cin >> n;\n  dp[0]=1;\n  for(int i=0;i<n;i++){\n    int a;\n    cin >> a;\n    for(int d=1;d<=BD;d++){\n      dp[i]+=dp2[d][i%d];\n      if(dp[i]>=mod){dp[i]-=mod;}\n    }\n\n    if(a<=BD){\n      dp2[a][i%a]+=dp[i];\n      if(dp2[a][i%a]>=mod){dp2[a][i%a]-=mod;}\n    }\n    else{\n      for(int j=i+a;j<n;j+=a){\n        dp[j]+=dp[i];\n        if(dp[j]>=mod){dp[j]-=mod;}\n      }\n    }\n  }\n\n  int res=0;\n  for(int i=0;i<n;i++){\n    res+=dp[i];\n    if(res>=mod){res-=mod;}\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "41eb3b7ff571ff01def0b5405979c47365fc298ec5824cbb0a70b146bd94bc37",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc335/abc335_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc335/editorial/9041",
+      "text": "考え方\n公式解説\nの最初の擬似コードの部分までの考え方は同じです。\n\\(A_i\\)\nが同じところをなるべくまとめて更新することを考えましょう。具体的には\n\\(i\\)\nからの遷移中に\n\\(A_i=A_j\\)\nとなる\n\\(j\\)\nが存在すれば、それ以降は\n\\(j\\)\nのループのときにまとめて合計すれば良いです。\n計算量について\n計算量は\n\\(O(N\\sqrt N)\\)\nです。\n計算量の直感的な説明は、「まとめて」更新されるのがなく、かつなるべく\n\\(A_i\\)\nたちが小さいときが最悪ケースになりますが、そのとき\n\\(A\\)\nは\n\\(1,\\ 2,\\ 2,\\ 3,\\ 3,\\ 3,\\ 4,\\ \\cdots\\)\nのようになり、このとき\n\\(j\\)\n側として呼ばれる回数はそれぞれ\n\\(O(\\sqrt N)\\)\nであることから分かります。\nより厳密には、\n\\(G_{k,l} = \\{\\ i \\ |\\ 0\\le i \\lt N,\\ A_i=k,\\ i \\bmod k = l \\}\\)\n、\n\\(f(G_{k,l})=\\displaystyle\\frac{N}{k}\\)\nとするとループ数は\n\\(\\displaystyle\\sum_{G_{k,l}\\neq \\phi}f(G_{k,l})\\)\nで抑えられますが、\n\\(f\\)\nが大きい方から\n\\(N\\)\n個を取ることを考えると上と同じ結論が得られます。\nコード例\nAC コード\n（Python）\nコードでは、まとめて後で計算する分を配列\nY\nに格納しています。",
+      "codes": [],
+      "text_sha256": "ee4634ec5faa98f2cbdb3a29b770a323f150ea1c653d3fdc3731d1a61a052eae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc335/abc335_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

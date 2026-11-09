@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc388_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc388/editorial/11909",
+      "text": "\\(i\\)\n人目の宇宙人を単に人\n\\(i\\)\nと書きます。\n石を受け取る操作ではなく渡す操作に注目することで、以下のように言い換えても問題の答えは変わらないことがわかります。\n人\n\\(i\\)\nは\n\\(A_i\\)\n個の石を持っており、\n\\(i\\)\n年後に成人する。\n人\n\\(i\\)\nは成人したときに人\n\\(i + 1, i + 2, \\ldots, N\\)\nの順に（石を持っていれば）石を\n\\(1\\)\n個渡す。\n最終的に各宇宙人が持っている石の個数はいくつか？\n以下では言い換え後の問題を考えます。\n長さ\n\\(N\\)\nの数列\n\\(C\\)\nと長さ\n\\(N + 1\\)\nの数列\n\\(D\\)\nを用意し、各要素を\n\\(0\\)\nで初期化します。\n\\(C_i\\)\nが人\n\\(i\\)\nが受け取る石の数の合計になるように計算をすることを目指します。\n人\n\\(i\\)\nが成人後に石を渡す人を人\n\\(i + 1, i + 2, \\ldots, R_i\\)\nとします。ここで、\n\\(j = i + 1, i + 2, \\ldots, R_i\\)\nに対して\n\\(C_j\\)\nに\n\\(1\\)\nを加算したいですが、これを愚直に行ってしまうと全体で時間計算量は\n\\(\\Theta(N^2)\\)\nになってしまいます。そこで、以下のように imos 法の要領による高速化を行います。\n\\(D\\)\nが\n\\(C\\)\nの差分を取った数列の役割を果たします。\n\\(i = 1, 2, \\ldots, N\\)\nの順に以下の操作を行う。\n（\n\\(i > 1\\)\nのとき）\n\\(C_i\\)\nに\n\\(C_{i - 1} + D_i\\)\nの値を代入する。これにより人\n\\(i\\)\nが成人したときに持っている石の個数がわかり、\n\\(R_i\\)\nの値が定まる。\n\\(D_{i + 1}\\)\nに\n\\(1\\)\n、\n\\(D_{R_i + 1}\\)\nに\n\\(-1\\)\nを加算する。\nこれらの操作は全体として\n\\(O(N)\\)\n時間で行えます。\n実装例 (0-indexed)",
+      "codes": [
+        "#include <bits/stdc++.h>\n#define rep(i, n) for (int i = 0; i < (n); i++)\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> a(n);\n\trep(i, n) cin >> a[i];\n\tvector<int> c(n), d(n + 1);\n\trep(i, n) {\n\t\tif (i != 0) {\n\t\t\tc[i] = c[i - 1] + d[i];\n\t\t\ta[i] += c[i];\n\t\t}\n\t\tint cnt = min(n - i - 1, a[i]);\n\t\ta[i] -= cnt;\n\t\td[i + 1]++;\n\t\td[min(n, i + cnt + 1)]--;\n\t}\n\trep(i, n) cout << a[i] << \" \\n\"[i == n - 1];\n}"
+      ],
+      "text_sha256": "4a213b2409ca57f435285c9a01bdc9ee4245436fdecba2f18651b1f7972e487d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc388/abc388_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

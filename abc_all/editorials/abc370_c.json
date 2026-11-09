@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc370_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc370/editorial/10894",
+      "text": "文字列の長さを\n\\(N\\)\n、\n\\(S_i \\neq T_i\\)\nなる\n\\(i\\)\nの個数を\n\\(x\\)\nとおきます。\n答えの要素数、すなわち操作回数として考えられる最小の値は\n\\(x\\)\nであり、すべての操作は\n\\(S_i \\neq T_i\\)\nである\n\\(i\\)\nを選び\n\\(S_i\\)\nを\n\\(T_i\\)\nに書き換えるものとなることがわかります。\n操作の順番を考えます。\n\\(S_i \\neq T_i\\)\nである\n\\(i\\)\nを選び\n\\(S_i\\)\nを\n\\(T_i\\)\nに書き換える操作は可換であることに注意すると、辞書順最小化のためにはそのような操作をすべて試し、操作後の文字列が辞書順最小となる操作を実際に行えばよいです。\n本問題の制約下では上記の操作をそのまま繰り返せばよく、時間計算量は\n\\(O(N^3)\\)\nと評価できます。\nまた、高速化を行うこともできます。\n\\(S_i\\)\nを\n\\(T_i\\)\nに書き換える操作では\n\\(S_i < T_i\\)\nのとき元の文字列より辞書順が大きく、\n\\(S_i > T_i\\)\nのとき元の文字列より辞書順が小さくなります。\nしたがって、\n\\(S_i > T_i\\)\nなる\n\\(i\\)\nが存在するならばそのような\n\\(i\\)\nに対して操作を行うのが最適であり、特に\n\\(i\\)\nとして最小であるものを取るのが最適です。また、\n\\(S_i > T_i\\)\nなる\n\\(i\\)\nが存在しないときは\n\\(S_i < T_i\\)\nなる最大の\n\\(i\\)\nに対して操作を行うことが最適となります。\nこの操作を\n\\(S \\neq T\\)\nである限り繰り返せばよく、時間計算量は\n\\(O(N^2)\\)\nと評価できます。\n実装例 (\n\\(O(N^3)\\)\n)\n実装例 (\n\\(O(N^2)\\)\n)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tstring s, t;\n\tcin >> s >> t;\n\tvector<string> ans;\n\tint n = s.size();\n\twhile (s != t) {\n\t\tstring nxt(n, 'z');\n\t\tfor (int i = 0; i < n; i++) {\n\t\t\tif (s[i] != t[i]) {\n\t\t\t\tstring tmp = s;\n\t\t\t\ttmp[i] = t[i];\n\t\t\t\tnxt = min(nxt, tmp);\n\t\t\t}\n\t\t}\n\t\tans.push_back(nxt);\n\t\ts = nxt;\n\t}\n\tint sz = ans.size();\n\tcout << sz << '\\n';\n\tfor (string e : ans) cout << e << '\\n';\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tstring s, t;\n\tcin >> s >> t;\n\tvector<string> ans;\n\tvector<int> v;\n\tint n = s.size();\n\tfor (int i = 0; i < n; i++) {\n\t\tif (s[i] > t[i]) v.push_back(i);\n\t}\n\tfor (int i = n - 1; i >= 0; i--) {\n\t\tif (s[i] < t[i]) v.push_back(i);\n\t}\n\tint sz = v.size();\n\tfor (int i = 0; i < sz; i++) {\n\t\ts[v[i]] = t[v[i]];\n\t\tans.push_back(s);\n\t}\n\tcout << sz << '\\n';\n\tfor (string e : ans) cout << e << '\\n';\n}"
+      ],
+      "text_sha256": "09d9d068e88cfa47a78f4571a71f29ffa7fd506b42982a8cf8d6022f008dba5e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc370/abc370_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

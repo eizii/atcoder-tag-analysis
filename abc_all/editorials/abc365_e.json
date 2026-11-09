@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc365_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc365/editorial/10607",
+      "text": "XOR を扱う問題では、各bit 毎に分けて考えることが有効である場合が多いです。\n\\(j=0,1,\\ldots,27\\)\nに対して、\n\\(A_i\\)\nの\n\\(j\\)\nbit 目が\n\\(1\\)\nならば\n\\(B_i = 1\\)\n、\n\\(0\\)\nならば\n\\(B_i=0\\)\nとして長さ\n\\(N\\)\nの数列\n\\(B\\)\nを定義します。（ここで\n\\(j\\leq 27\\)\nなのは\n\\(\\mathrm{MAX_A} = 10^8 < 2^{27}\\)\nであるからです。）\n各\n\\(j\\)\nについて、\n\\(B\\)\nに対して本問題を解き、答えに\n\\(2^j\\)\nを掛けたものの総和が\n\\(A\\)\nに対する答えとなります。\nこのようにすると、\n\\(A\\)\nは様々な値を取るのに対し、\n\\(B\\)\nは\n\\(0\\)\nまたは\n\\(1\\)\nしか取らないため、考えやすくなります。\n次に、\n\\(\\sum_{i=1}^{N-1}\\sum_{j=i+1}^N (B_i \\oplus B_{i+1}\\oplus \\ldots \\oplus B_j)\\)\nという形では ある区間の総 XOR が必要とされていますが、これは区間の和を計算する時累積和を使うのと同様に、累積XORを用いることで高速に計算できます。\n具体的には、\n\\(C_0=0, C_i =B_1\\oplus \\ldots \\oplus B_i\\)\nとして累積 XOR の配列\n\\(C\\)\nを定めます。\nこのとき、\n\\(B_i \\oplus B_{i+1}\\oplus \\ldots \\oplus B_j = C_{i-1} \\oplus C_j\\)\nという等式が分かります。このことを用いると、計算する対象を以下の形で書くことが出来ます。\n\\[ \\sum_{i=1}^{N-1}\\sum_{j=i+1}^N (C_{i-1} \\oplus C_j)  = \\sum_{i=0}^{N-2}\\sum_{j=i+2}^N (C_{i} \\oplus C_j)  \\]\nここで\n\\(j\\)\nの添え字が\n\\(i+2\\)\nから始まっている点が厄介です。そのため、以下の方法で添え字が\n\\(i+1\\)\nから始まるように変形します。\n\\[ \\sum_{i=0}^{N-2}\\sum_{j=i+2}^N (C_{i} \\oplus C_j)  = \\sum_{i=0}^{N-1}\\sum_{j=i+1}^N (C_{i} \\oplus C_j)  -\\sum_{i=0}^{N-1} (C_i\\oplus C_{i+1}) =\\sum_{i=0}^{N-1}\\sum_{j=i+1}^N (C_{i} \\oplus C_j) - \\sum_{i=1}^{N} B_i\\]\nこのとき、\n\\(\\sum_{i=0}^{N-1}\\sum_{j=i+1}^N (C_{i} \\oplus C_j)\\)\nの部分は\n\\(C\\)\nで値が異なる組の個数と等しいです。これは、\n\\(C\\)\nに含まれる\n\\(0\\)\nの個数と\n\\(C\\)\nに含まれる\n\\(1\\)\nの個数の積で求まります。\nよって、計算したい値は、\n\\(B\\)\nの総和と、累積 XOR により得られる配列の\n\\(0,1\\)\nの個数を使用することで簡単に求められます。以上より、この問題を\n\\(\\mathrm{O}(N\\log {\\mathrm{MAX_A}})\\)\n時間で解くことができました。",
+      "codes": [],
+      "text_sha256": "81e38f93d99a7692573b3e817b60f10007670b4553556ffe2ff4c0321bddc52e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc365/abc365_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc365/editorial/10588",
+      "text": "bitごとに分けて考えることで、\n\\(A_i \\in\\{0,1\\}\\)\nの問題が解ければ十分です。\n\\(A_L\\oplus \\ldots\\oplus A_R\\)\nを\n\\(f(L,R)\\)\nと表すことにします。\n\\(L=R\\)\nのケースも含めて和を取り、最後に\n\\(\\mathrm{sum}(A)\\)\nを引くことにします。\n\\(\\mathrm{dp}[i][c]=|\\{j \\mid f(j,i)=c\\}|\\)\nと定めると、\n\\(\\mathrm{dp}[i][c]=\\mathrm{dp}[i-1][c\\oplus A_i]+(c=A_iなら1)\\)\nとなることから、このdpテーブルは\n\\(O(N)\\)\nで埋めることができます。\n求める答えは\n\\(\\sum_i \\mathrm{dp}[i][1]\\)\nであり、これはdpテーブルから直ちに計算できます。",
+      "codes": [],
+      "text_sha256": "01fde0c51ffe31fce2d18dc4d34e4ccb28a1ae6093fb2d1d5e7810313c400358",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc365/abc365_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

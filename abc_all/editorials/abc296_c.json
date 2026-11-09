@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc296_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc296/editorial/6095",
+      "text": "\\(j\\)\nを固定したとき、\n\\(A_i-A_j=X\\)\nとなるための\n\\(A_i\\)\nの値は一意に定まります。このため、\n\\(A\\)\nの中にそのような値が存在するかどうかを判定できればよいです。\n愚直に配列を走査すると最悪の場合\n\\(1\\)\n回あたり\n\\(\\Omega(N)\\)\n時間かかり、全体で\n\\(\\Omega (N^2)\\)\n時間となるため実行時間制限に間に合いません。C++ の vector に対する find、Python の list に対する in、Java の list に対する contains などを用いた場合も同様です。標準ライブラリの計算量にも注意しましょう。\n\\(A\\)\nを set で保持するなどすれば\n\\(1\\)\n回あたり\n\\(O(\\log N)\\)\n、全体で\n\\(O(N\\log N)\\)\nとなり、実行時間制限に間に合わせることができます。\n実装例(C++)\nこの問題は尺取法によりソート＋線形時間で解くこともできます。\n\\(A\\)\nを並び替えても答えは変わらないので、\n\\(A\\)\nを昇順にソートします。\n\\(j\\)\nを固定して\n\\(i\\)\nを探す際、\n\\(j\\)\nが小さい順に調べると、対応する\n\\(i\\)\nも単調増加となることから、線形時間ですべての\n\\(j\\)\nについて調べることができます。\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n,x;\n\tcin >> n >> x;\n\n\tset<int>s;\n\tfor(int i=0;i<n;i++){\n\t\tint t;\n\t\tcin >> t;\n\t\ts.insert(t);\n\t}\n\t\n\tfor(auto a:s){\n\t\tif(s.find(a+x)!=s.end()){\n\t\t\tcout << \"Yes\" << endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\tcout << \"No\" << endl;\n}",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n,x;\n\tcin >> n >> x;\n\tvector<int>a(n);\n\tfor(int i=0;i<n;i++)cin >> a[i];\n\tsort(a.begin(),a.end());\n\n\tint i=0;\n\tfor(int j=0;j<n;j++){\n\t\twhile(i<n&&a[i]-a[j]<x)i++;\n\t\tif(i<n&&a[i]-a[j]==x){\n\t\t\tcout << \"Yes\" << endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\tcout << \"No\" << endl;\n}"
+      ],
+      "text_sha256": "3e7a90783f0250034b621a419ebe6cba0f30d91428295110dc983b91f8ffa349",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc296/abc296_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

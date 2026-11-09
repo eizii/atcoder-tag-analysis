@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc453_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc453/editorial/18523",
+      "text": "解法はいろいろあるので、ひとつの方針を示します。\n以下のロジックで出力することで、この問題に正解できます。\n文字列を先頭から調べる。\n現在の文字が\no\nである場合、フラグが立っている時に限り、その文字を出力する。\n現在の文字が\no\nでない場合、フラグを立ててその文字を出力する。\nこうすることで、先頭から見て\no\n以外が出るまでは\no\nを出力せず、\no\n以外が出てからは\no\nを出力することができます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  string s;\n  bool flag=false;\n  cin >> n >> s;\n  for(auto &nx : s){\n    if(nx=='o'){\n      if(flag){\n        cout << nx;\n      }\n    }\n    else{\n      flag=true;\n      cout << nx;\n    }\n  }\n  cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "0c459e5d1419d451991bf36246bb4e288adae673e9c530b3ae827c622fb6b99e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc453/abc453_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

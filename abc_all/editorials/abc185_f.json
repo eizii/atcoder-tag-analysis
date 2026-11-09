@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc185_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc185/editorial/355",
+      "text": "\\(a \\oplus b\\)\nは\n\\(0\\)\nを単位元としてもち、結合法則を満たすのでセグメント木を使うことで高速に処理できます。\n計算量は\n\\(O((N + Q) \\log (N))\\)\nです。\nまた、\n\\(f(i) = A_1 \\oplus A_2 \\oplus A_3 \\oplus \\dots \\oplus A_i(f(0) = 0\\)\nとする\n\\()\\)\nさえ高速に計算できれば、xor の性質により答えは\n\\(f(Y_i) \\oplus f(X_i - 1)\\)\nとなるので Fenwick tree (Binary indexed tree) を使うこともできます。\nFenwick tree やセグメント木はAtCoder Library (ACL) にも実装されているので、これを使うと実装量を減らせます。",
+      "codes": [],
+      "text_sha256": "05302d88ca1d2ff620d9dae642bf9de172ae369774df643d46f7d413e15864bc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc185/abc185_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc210_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc210/editorial/2293",
+      "text": "\\(N\\)\nが\n\\(A\\)\nより大きいかどうかで場合分けして考えます。\n1)\n\\(N \\leq A\\)\nのとき\n\\(N\\)\n個のキャベツそれぞれについて、\n\\(1\\)\n個あたり\n\\(X\\)\n円かかるので、\n\\(N\\)\n個のキャベツを買うのにかかる金額は\n\\(NX\\)\n円です。\n2)\n\\(N>A\\)\nのとき\n\\(1\\)\n個目から\n\\(A\\)\n個目までに買うキャベツについて、\n\\(1\\)\n個あたり\n\\(X\\)\n円かかるので、合計で\n\\(AX\\)\n円かかります。\n\\(A+1\\)\n個目以降に買うキャベツについて、\n\\(1\\)\n個あたり\n\\(Y\\)\n円かかるので、合計で\n\\((N-A)Y\\)\n円かかります。\nよって、\n\\(N\\)\n個のキャベツを買うのにかかる金額は、\n\\(AX + (N-A)Y\\)\n円です。\n上記の場合分けを実装するには、プログラミング言語の「条件分岐」の機能を用います。C++言語では、例えばif文が条件分岐の機能を実現します。\n以下に、C++言語を用いたこの問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n\nusing namespace std;\n\nint main(void)\n{\n  int n, a, x, y;\n  cin >> n >> a >> x >> y;\n\n  if(n <= a) cout << n*x << endl;\n  else cout << a*x + (n-a)*y << endl;\n\n  return 0;\n}"
+      ],
+      "text_sha256": "5ea868d122efd0321f12b37e24897a942d93564ed532ded9ab73425900f8ab13",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc210/abc210_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

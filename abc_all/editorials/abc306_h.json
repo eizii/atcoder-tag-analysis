@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc306_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc306/editorial/6608",
+      "text": "問題は以下のように言い換えられます。 \\(N\\) 頂点 \\(M\\) 辺の無向グラフ \\(G\\) がある。 以下の手順でグラフ \\(G'\\) を作る。最初 \\(G'\\) には頂点 \\(1,2,\\dots,N\\) のみがある。 全ての辺 \\(u-v\\) に対して以下の \\(3\\) つの処理の中から \\(1\\) つ選び、それを施す。 \\(G'\\) に \\(u \\rightarrow v\\) の有向辺を張る。 \\(G'\\) に \\(v \\rightarrow u\\) の有向辺を張る。 全ての辺に対して処理を施した後にできたグラフ \\(G'\\) に対して、頂点 \\(u,v\\) を同一視する。 処理の選択方法は \\(3^M\\) 通りありますが、 \\(G'\\) が DAG となるような処理の選択方法は何通りありますか？ 入次数が \\(0\\) である頂点集合を順に取り去っていく \\(O(3^N)\\) の bitDP を方針として選択します。 しかし、ある頂点集合を取り去る際に、残りの頂点集合に入次数 \\(0\\) の頂点があるとそれらをダブルカウントしてしまいます。それらを上手く取り除くことを考えましょう。 ある頂点集合を取り除く際に、取り除いた各連結成分はひとつの頂点に同一視されている必要があります(さもなくば、どれかの頂点が入次数が非零です。) ここで、 \\(dp[\\) 生き残っている頂点の bit 集合表現 \\(i\\) \\(]\n=\\) \\(\\{\\) ありうるグラフの通り数 \\(\\}\\) を考えます。  初期化として \\(dp[0] = 1\\) です。 全ての \\(0 \\le j < i\\) に対して \\(dp[j]\\) が求まっている時に、 \\(dp[i]\\) を求めることを考えましょう。 全ての \\(i\\) の非空な部分集合 \\(s\\) を走査する際に、以下のように遷移する包除原理を行えばよいです。 \\(\\displaystyle dp[i] = \\sum_{s \\subset i, s \\neq \\varnothing} dp[i \\setminus s] \\times (-1)^{(c(s)+1)}\\) ( 但し、 \\(c(s)\\) は \\(s\\) の \\(G\\) 上での連結成分数) 上の包除原理を行うことで、全ての整数 \\(k\\) に対して、 (残っている部分だけを着目すると) 入次数が \\(0\\) である頂点の個数が \\(k\\) であるようなケースを丁度 \\(1\\) 度だけ足すことができます。 全ての頂点の部分集合に対して連結成分を予計算しておくことで、 \\(O(3^n)\\) でこの問題に正解することができます。 実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/all>\n\nusing namespace std;\nusing namespace atcoder;\nusing pi=pair<int,int>;\n\n#define mod 998244353\n\nint main(){\n  int n,m;\n  cin >> n >> m;\n  vector<pi> eg(m);\n  for(auto &nx : eg){\n    cin >> nx.first >> nx.second;\n    nx.first--;nx.second--;\n  }\n\n  vector<int> comp(1<<n);\n  for(int i=0;i<(1<<n);i++){\n    int res=__builtin_popcount(i);\n    dsu uf(n);\n    for(auto &nx : eg){\n      if((i&(1<<nx.first))==0){continue;}\n      if((i&(1<<nx.second))==0){continue;}\n      if(!uf.same(nx.first,nx.second)){\n        uf.merge(nx.first,nx.second);\n        res--;\n      }\n    }\n    comp[i]=res;\n  }\n\n  vector<int> dp(1<<n,0);\n  dp[0]=1;\n  for(int i=1;i<(1<<n);i++){\n    for(int j=(1<<n)-1;;j--){\n      j&=i;\n      if(j==0){break;}\n      if(comp[j]%2){\n        dp[i]+=dp[i^j];\n      }\n      else{\n        dp[i]+=(mod-dp[i^j]);\n      }\n      dp[i]%=mod;\n    }\n  }\n  cout << dp[(1<<n)-1] << \"\\n\";\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "1869cf4668ec03faf39c08bb4585dfbf0d40e6fa7b6cf360710c577d8d75664e"
+    }
+  ],
+  "status": "available"
+}

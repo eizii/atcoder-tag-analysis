@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc427_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc427/editorial/14196",
+      "text": "このようなゲームの問題では、後ろから勝敗の状態を解析するのが有効なことが多いです。\n各状態についてその状態が Alice が必勝の状態であるのか Bob が必勝の状態であるのか解析することを目指します。\n\\(dp_{i, j}\\)\nを Alice と Bob が合わせて\n\\(i\\)\n回の操作を行い、駒が頂点\n\\(j\\)\nにあるときに Alice が必勝の状態であるかの真偽値を表す変数とします。\n\\(i = 2K, 2K - 1, \\ldots, 1, 0\\)\nの順に\n\\(dp_{i, j}\\)\nの計算を行います。\nまず、\n\\(i = 2K\\)\nのときは\n\\(S_j =\\)\nA\nならば\n\\(dp_{i, j}\\)\nは true であり、\n\\(S_j = \\)\nB\nならば\n\\(dp_{i, j}\\)\nは false です。\n\\(i = 2K - 2, 2K - 4, \\ldots, 2, 0\\)\nのときは、次に行う Alice の操作に注目することになります。\n\\(dp_{i + 1, v}\\)\nが true であり頂点\n\\(j\\)\nから頂点\n\\(v\\)\nに向かう辺が存在するような\n\\(v\\)\nが存在するとき、\n\\(dp_{i, j}\\)\nは true になります。実際、\n\\(i\\)\n回の操作後に頂点\n\\(j\\)\nに駒があるとき Alice は頂点\n\\(v\\)\nに駒を動かすことで勝つことができます。そうでないとき、\n\\(dp_{i, j}\\)\nは false です。\n同様に、\n\\(i = 2K - 1, 2K - 3, \\ldots, 3, 1\\)\nのときは次に行う Bob の操作について考えることで、\n\\(dp_{i + 1, v}\\)\nが false であり頂点\n\\(j\\)\nから頂点\n\\(v\\)\nに向かう辺が存在するするような\n\\(v\\)\nが存在するとき\n\\(dp_{i, j}\\)\nは false であり、そうでないとき\n\\(dp_{i, j}\\)\nは true であるとわかります。\n最終的な答えは\n\\(dp_{0, 1}\\)\nの値によって決まります。dp の状態数が\n\\(O(NK)\\)\nであり、遷移はすべて合わせて\n\\(O((N+M)K)\\)\n時間で行えるので適切な実装のもと十分高速です。\n実装例\n（dp 配列を 1 次元にするなど、解説本文とは異なる記号を採用したりしている部分があります）",
+      "codes": [],
+      "text_sha256": "ddbf296d583afcd29ee39d0e0f758cb497583c209ff06b2289b8800f1f27dc03",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc427/abc427_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

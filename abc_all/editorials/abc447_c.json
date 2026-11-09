@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc447_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc447/editorial/16716",
+      "text": "各操作は\n\\(S\\)\nに文字\nA\nを追加/削除するものであることから、\n\\(S\\)\nを\nA\nが連続する部分と\nA\n以外の文字が現れる部分に分解して考えたいです。そこで、文字列\n\\(S'\\)\nおよび数列\n\\(A_S\\)\nを以下のように定義します。\n\\(S'\\)\n:\n\\(S\\)\nに含まれる\nA\n以外の文字を全て取り出し、元の順序で連結して得られる文字列。\n\\(A_S\\)\n:\n\\(S\\)\nを\nA\n以外の文字が現れる場所で分割したとき、各ブロックに含まれる\nA\nの個数を前から順番に並べた列。より形式的には、\n\\(S'\\)\nの長さを\n\\(n\\)\nとしたとき、\n\\(A_S\\)\nは長さ\n\\(n+1\\)\nの数列であり、\n\\(i\\)\n番目の要素\n\\(A_S(i)\\)\nは以下の値に等しい：\n\\(i= 1\\)\nのとき、\n\\(S\\)\nに含まれる最初の\nA\n以外の文字より前に現れる\nA\nの数\n\\(2 \\leq i \\leq n\\)\nのとき、\n\\(S\\)\nに含まれる\n\\(i-1\\)\n番目の\nA\n以外の文字と、\n\\(i\\)\n番目の\nA\n以外の文字の間に現れる\nA\nの数\n\\(i= n+1\\)\nのとき、\n\\(S\\)\nに含まれる最後の\nA\n以外の文字より後に現れる\nA\nの数\nなお、\n\\(S'\\)\nが空文字列のとき、\n\\(A_S(1)=|S|\\)\n例えば、\n\\(S=\\)\nABAAACAA\nのとき、\n\\(S'=\\)\nBC\n、\n\\(A_S=(1,3,2)\\)\nです。\n文字列\n\\(T\\)\nに対しても同様に\n\\(T'\\)\nおよび\n\\(A_T\\)\nを定義します。\nでは、各操作によって\n\\(S'\\)\nおよび\n\\(A_S\\)\nがどのように変化するかを観察してみましょう。すると、以下の事実が成り立つことが分かります。\n操作によって\n\\(S'\\)\nは変化しない。\n\\(1\\)\n種類目の操作では、ある\n\\(i\\)\nに対して\n\\(A_S(i)\\)\nの値が\n\\(1\\)\n増加する。\n\\(2\\)\n種類目の操作では、ある\n\\(i\\)\nに対して\n\\(A_S(i)\\)\nの値が\n\\(1\\)\n減少する。\n逆に、\n\\(1\\)\n回の操作では、（\n\\(S'\\)\nを保ったまま）好きな\n\\(i\\)\nに対して\n\\(A_S(i)\\)\nの値を\n\\(1\\)\n増加または減少させることができます。\nよって、本問題の答えは以下のように表せます：\n\\(S'\\neq T'\\)\nのとき、\n\\(S\\)\nを\n\\(T\\)\nに一致させることはできない\n\\(S'= T'\\)\nのとき、すべての\n\\(i\\ (1\\leq i\\leq |S'|+1)\\)\nに対する\n\\(|A_S(i) - A_T(i)|\\)\nの総和\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\npair<string, vector<int>> decompose(const string &s) {\n    string t;\n    vector<int> v;\n    int cnt = 0;\n    for (char c: s) {\n        if (c == 'A') {\n            ++cnt;\n        } else {\n            t += c;\n            v.push_back(cnt);\n            cnt = 0;\n        }\n    }\n    v.push_back(cnt);\n    return {t, v};\n}\n\nint main() {\n    string s, t;\n    cin >> s >> t;\n    auto [ss, sv] = decompose(s);\n    auto [ts, tv] = decompose(t);\n    if (ss != ts) {\n        cout << -1 << endl;\n        return 0;\n    }\n    int ans = 0;\n    for (int i = 0; i < (int) sv.size(); i++) {\n        ans += abs(sv[i] - tv[i]);\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "36920737420c3a4b41c552b53241adc5c6f68d7e072ce699573d4fe926ebdeae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc447/abc447_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

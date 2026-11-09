@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc388_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc388/editorial/11908",
+      "text": "太さが\n\\(T_i\\)\n、長さが\n\\(L_i\\)\nのヘビの長さが\n\\(k\\)\n伸びたときのヘビの重さは\n\\(T_i(L_i + k)\\)\nです。\nしたがって、各\n\\(k = 1, 2, \\ldots, D\\)\nに対して\n\\(T_i(L_i + k)\\)\nの最大値を求め、出力すればよいです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, d;\n\tcin >> n >> d;\n\tvector<int> t(n), l(n);\n\tfor (int i = 0; i < n; i++) cin >> t[i] >> l[i];\n\tfor (int k = 1; k <= d; k++) {\n\t\tint ans = 0;\n\t\tfor (int i = 0; i < n; i++) ans = max(ans, t[i] * (l[i] + k));\n\t\tcout << ans << '\\n';\n\t}\n}"
+      ],
+      "text_sha256": "2ed281a90fd67f6a9ac75094f89abb90c7e5b23f75916f0280e4f095f5bb9629",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc388/abc388_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

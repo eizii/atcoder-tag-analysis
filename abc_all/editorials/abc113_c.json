@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc113_c",
+  "editorials": [
+    {
+      "text": "C:\nID\n県ごとに、その県に属する市を誕生した順にソートして、認識番号を割り振るとよいです。\n#include <cstdio >\n#include <vector >\n#include <algorithm >\nusing\nnamespace\nstd;\ntypedef\nlong long ll;\n#define rep(i,n) for(int i=0;i<n;i++)\nint N,M;\nint P[100000] ,Y[100000];\nvector <int > yd [100001];\nint main ()\n{\nscanf (\"%d%d\",&N,&M);\nrep(i,M)scanf (\"%d%d\",&P[i],&Y[i]),yd[P[i]]. push_back(Y[i]);\nrep(i,N)sort(yd[i+1]. begin (),yd[i+1]. end ());\nrep(i,M)printf (\"%012 lld\\n\",ll(P[i])*1000000+ int(lower_bound(yd[P[i]].\nbegin(),yd[P[i]]. end(),Y[i])-yd[P[i]]. begin ())+1);\n}\n",
+      "text_sha256": "c8c383143bc7dd9db3f5706711556fe9946dcb04a4ceb371ebbe04cc4abba213",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc113/abc113_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

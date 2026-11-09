@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc441_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc441/editorial/15103",
+      "text": "ある一つの区間に対してたこ焼きの追加クエリと皿の反転クエリがそれぞれ \\(0\\) 個以上任意の順番で行われたとき、どのような操作が行われたことになるかを考えます。\n最後の反転クエリ以前に行われた追加クエリの影響はなくなるため、これは \\(0\\) 回以上の反転クエリののち、\\(1\\) 回の追加クエリが行われたことに言い換えることができます。\nよって、複数回の更新クエリは非負整数の \\(2\\) つ組 \\((a,b)\\) を用いて、\\(a\\) 回の反転クエリののち \\(b\\) 個のたこ焼きを追加する操作として表現することができます。\nこのような操作を単に \\((a,b)\\) と書くことにし、\\((a,b)\\) のあとに \\((c,d)\\) を行うことを \\((a,b)\\oplus(c,d)\\) と書くことにすると、\\[(a,b)\\oplus(c,d)=\\begin{cases}(a,b+d)&\\quad(c=0)\\\\ (a+c,d)&\\quad(c\\neq0)\\end{cases}\\]となります。\n次に、列に対してどのような情報を持てば、任意の非負整数の \\(2\\) つ組 \\((a,b)\\) に対して操作 \\((a,b)\\) が行われたあとの列に対する最大値が得られるかを考えます。\n例えば \\(\\bigl(\\)現在の列の最大値\\({},{}\\) 現在いくつの皿が表向きになっているか\\({},{}\\) 現在いくつの皿が裏向きになっているか\\(\\bigr)\\) のような \\(3\\) つ組を持つと、この \\(3\\) つ組の値が \\((x,y,z)\\) であるような列に対して操作 \\((a,b)\\) を行ったあとの列に対する値は \\[\\begin{cases}(0,y,z)&(a\\equiv0\\pmod2\\wedge y=0)\\\\ (x+b,y,z)&(a=0\\wedge y\\neq0)\\\\ (b,y,z)&(a\\gt0\\wedge a\\equiv0\\pmod2\\wedge y\\neq0)\\\\ (0,z,y)&(a\\equiv1\\pmod2\\wedge z=0)\\\\ (b,z,y)&(a\\equiv1\\pmod2\\wedge z\\neq0)\\end{cases}\\] となります。\nこれらは、遅延伝播セグメント木や遅延評価セグメント木などと呼ばれるデータ構造を使って管理することができる条件を満たします。\nよって、この問題を \\(O(N+Q\\log N)\\) 時間で解くことができました。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <atcoder/lazysegtree>\n\nint main() {\n    using namespace std;\n\n    unsigned N, Q;\n    cin >> N >> Q;\n\n    struct value { unsigned long max; unsigned up, down; };\n    struct op { unsigned flip; unsigned long add; };\n    atcoder::lazy_segtree<value,\n                          [](const value lhs, const value rhs) { return value{max(lhs.max, rhs.max), lhs.up + rhs.up, lhs.down + rhs.down}; },\n                          [] { return value{}; },\n                          op,\n                          [](const op operation, const value segment) {\n                              return value{\n                                  (operation.flip & 1 ? segment.down : segment.up) ? operation.flip ? operation.add : segment.max + operation.add : 0,\n                                  operation.flip & 1 ? segment.down : segment.up,\n                                  operation.flip & 1 ? segment.up : segment.down\n                              };\n                          },\n                          [](const op lhs, const op rhs) { return op{lhs.flip + rhs.flip, (lhs.flip ? 0 : rhs.add) + lhs.add}; },\n                          [] { return op{}; }> segment_tree(vector(N, value{0, 1, 0}));\n\n    for (unsigned q{}; q < Q; ++q) {\n        unsigned t;\n        cin >> t;\n        if (t == 1) {\n            unsigned L, R, X;\n            cin >> L >> R >> X;\n            segment_tree.apply(L - 1, R, op{0, X});\n        } else if (t == 2) {\n            unsigned L, R;\n            cin >> L >> R;\n            segment_tree.apply(L - 1, R, op{1, 0});\n        } else {\n            unsigned L, R;\n            cin >> L >> R;\n            cout << segment_tree.prod(L - 1, R).max << endl;\n        }\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "b08cbe8c1d8f44935d456109e60b3b54265f0784f3b47a92d03dab135dae7187",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc441/abc441_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

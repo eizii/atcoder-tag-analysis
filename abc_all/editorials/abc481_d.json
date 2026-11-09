@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc481_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc481/editorial/27926",
+      "text": "「惑星」を頂点，「航路」を辺とした有向グラフを考えます． 各頂点について，そこから直接辺で結ばれた頂点のリストを作り，空でないならばそのうち番号最小の頂点につながる辺を重み \\(0\\) ，他の頂点につながる辺を重み \\(1\\) とします．このとき，各辺を通るときの「燃料の消費量」は，その辺の重みとして得られます． この有向グラフ上で，頂点 \\(S\\) から頂点 \\(T\\) への最短路を求めればよいです．これは Dijkstra 法や 01-BFS などのアルゴリズムによって実現できます．時間計算量は Dijkstra 法の場合は \\(O(N + M \\log N)\\) 時間，01-BFS の場合は \\(O(N + M)\\) 時間です． 実装例 (C++) この実装例では 01-BFS を採用しています．なお，各頂点から直接辺で結ばれた番号最小の頂点を求める部分でソートをしているため，時間計算量は \\(O(N + M (\\log N + \\log M))\\) になっています．",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\n#include <vector>\nusing std::vector;\nusing std::pair;\n#include <cassert>\nusing std::min;\nusing std::max;\n#include <deque>\nusing std::deque;\n\n\n\n#ifdef DEBUG\nconst int debug = 1;\n#else\nconst int debug = 0;\n#endif\n\nusing ll = int64_t;\nusing P = pair<ll, ll>;\n\nconst ll INF = 1'000'000'000'000'000'009LL;\n\nll n, m, s, t;\nvector<ll> a, b;\n\ninline void output (const ll x) {\n\tcout << x << \"\\n\";\n}\n\n\n\nvoid solve() {\n\tvector<vector<P> > g(n);\n\tfor (ll i = 0; i < m; i++) {\n\t\tg[a[i]].emplace_back(b[i], 1);\n\t}\n\tfor (ll i = 0; i < n; i++) {\n\t\tif (g[i].size() > 0) {\n\t\t\tsort(g[i].begin(), g[i].end());\n\t\t\tg[i][0].second = 0;\n\t\t}\n\t}\n\n\tvector<ll> d(n, INF);\n\tdeque<P> que;\n\td[s] = 0;\n\tque.push_front({d[s], s});\n\twhile (!que.empty()) {\n\t\tP p = que.front();\n\t\tque.pop_front();\n\n\t\tll dv = p.first;\n\t\tll v = p.second;\n\t\tif (d[v] < dv) continue;\n\n\t\tfor (auto &[u, len] : g[v]) {\n\t\t\tif (d[u] > dv + len) {\n\t\t\t\td[u] = dv + len;\n\t\t\t\tif (len == 0) {\n\t\t\t\t\tque.push_front({d[u], u});\n\t\t\t\t} else {\n\t\t\t\t\tque.push_back({d[u], u});\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\tif (d[t] == INF) {\n\t\toutput(-1);\n\t} else {\n\t\toutput(d[t]);\n\t}\n\treturn;\n}\n\nint main (void) {\n\tstd::cin.tie(nullptr);\n\tstd::ios_base::sync_with_stdio(false);\n\n\tcin >> n >> m >> s >> t;\n\t--s;\n\t--t;\n\ta.resize(m);\n\tb.resize(m);\n\tfor (ll i = 0; i < m; i++) {\n\t\tcin >> a[i] >> b[i];\n\t\ta[i]--;\n\t\tb[i]--;\n\t}\n\n\tsolve();\n\n\t\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "b61efb516fa8e7017fc8cccc5fca01327ad7eb4d17737097748d54838bf210a7"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc401_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc401/editorial/12694",
+      "text": "高橋くんたちがそれぞれ最終的に向かうボタンを決めたとき、それぞれの高橋くんの最適な動きは「スタートしたらまっすぐ目的のボタンへ向かい、着いたらそこにとどまる」ことです。\nよって、答えはいずれかの高橋くんといずれかのボタンとの距離と等しいです。\nここから、次の判定問題を十分高速に解くことができれば、たかだか \\(N ^ 2\\) 通りの答えの候補に対して二分探索を行うことなどでこの問題を解くことができます。\n正実数 \\(t\\) が与えられる。\n高橋くんからボタンへの全単射をひとつ取ることで、どの高橋くんに対しても、その高橋くんと対応するボタンとの距離を \\(t\\) 以下にすることができるか？\nこれは、距離が \\(t\\) 以下の高橋くんとボタンの間に辺を張ることで得られる二部グラフの、最大マッチングのサイズが \\(N\\) と等しいことと同値です。\n二部グラフの最大マッチングは Hopcroft-Karp 法や Dinic 法で \\(O(E\\sqrt V)\\) 時間で得ることができるので、それらを利用することでこの問題を \\(O(N ^ {2.5}\\log N)\\) 時間で解くことができました。\n実装例は以下のようになります。\n誤差については、\nhypot\n関数の引数に座標の差を与えるところでたかだか \\(0.5\\operatorname{ulp}\\) 、\nhypot\n関数の計算でたかだか \\(1\\operatorname{ulp}\\) の誤差（参考 :\nKnown Maximum Errors in Math Functions\n）が生じて、他の部分では誤差が生じないため、十分な精度の解が得られます。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <cmath>\n#include <algorithm>\n#include <ranges>\n#include <iomanip>\n#include <atcoder/maxflow>\n\nint main() {\n    using namespace std;\n    \n    unsigned N;\n    cin >> N;\n\n    vector<pair<unsigned long, unsigned long>> start(N), goal(N);\n    for (auto&& [x, y] : start) cin >> x >> y;\n    for (auto&& [x, y] : goal) cin >> x >> y;\n\n    vector<tuple<double, unsigned, unsigned>> edges;\n    for (unsigned i = 0; const auto& [sx, sy] : start) {\n        for (unsigned j = 0; const auto& [gx, gy] : goal) {\n            // ((sx, sy) と (gx, gy) との距離, 高橋くんの番号, ボタンの番号)\n            edges.emplace_back(hypot(max(sx, gx) - min(sx, gx), max(sy, gy) - min(sy, gy)), i, j);\n            ++j;\n        }\n        ++i;\n    }\n\n    // 距離 X 以下の辺を用いてマッチングができるか判定\n    const auto judge = [N, &edges](const auto& X) {\n        atcoder::mf_graph<long long> graph(1 + N + N + 1);\n        for (unsigned i = 0; i < N; ++i) graph.add_edge(0, 1 + i, 1);\n        for (unsigned i = 0; i < N; ++i) graph.add_edge(1 + N + i, 1 + N + N + 0, 1);\n\n        // 距離 X 以下の辺だけをグラフに追加する\n        for (const auto& [w, u, v] : edges | views::filter([X](const auto& e) { return get<0>(e) <= X; }))\n            graph.add_edge(1 + u, 1 + N + v, 1);\n\n        // マッチングの大きさが N かどうか判定\n        return graph.flow(0, 1 + N + N + 0) < N;\n    };\n\n    // 長さでソートして二分探索\n    ranges::sort(edges);\n    cout << setprecision(7) << *ranges::partition_point(edges | views::keys, judge) << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "fab1bdf27c6ba0fc046385725b7048e9fc0721d982bb34ba18daf4b3f5f00b01",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc401/abc401_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

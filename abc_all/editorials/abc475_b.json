@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc475_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc475/editorial/25491",
+      "text": "お釣りをいくら受け取るかを順にシミュレーションします。 \\(A\\) 円の買い物に対して出す最小の \\(1000\\) 円紙幣の枚数は \\(\\left\\lceil\\frac{A}{1000}\\right\\rceil\\) であるため、そのときのお釣りは \\(1000\\times \\left\\lceil\\frac{A}{1000}\\right\\rceil -A\\) 円になります。 お釣りが \\(X\\) 円( \\(X<1000\\) )であるとき、お釣りに含まれる \\(100\\) 円硬貨の数は \\(\\left\\lfloor\\frac{X}{100}\\right\\rfloor\\) 、 \\(10\\) 円硬貨の数は \\(\\left\\lfloor\\frac{X}{10}\\right\\rfloor\\bmod 10\\) 、 \\(1\\) 円硬貨の数は \\(X \\bmod 10\\) です。 実装例 (C++) pythonでは剰余が常に非負になることから、お釣りを (-a)%1000 により求めることができます。 実装例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n\n  int c1=0,c10=0,c100=0;\n  for(int i=0;i<n;i++){\n    int a;\n    cin >> a;\n    int x=(a+999)/1000*1000-a;\n    c100+=x/100;\n    c10+=x/10%10;\n    c1+=x%10;\n  }\n  cout << c1 << ' ' << c10 << ' ' << c100 << endl;\n}\n",
+        "N=int(input())\nA=list(map(int,input().split()))\nc100,c10,c1=0,0,0\nfor a in A:\n  x=(-a)%1000\n  c100+=x//100\n  c10+=x//10%10\n  c1+=x%10\n\nprint(c1,c10,c100)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "5d48903dc5fa193ff219568069e23c43d48abe37e35ade3428c45ef11a3e4e18"
+    }
+  ],
+  "status": "available"
+}

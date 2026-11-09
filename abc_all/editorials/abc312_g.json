@@ -1,0 +1,51 @@
+{
+  "problem_id": "abc312_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6854",
+      "text": "頂点\n\\(v\\)\nに対して、\n\\(x\\)\nと\n\\(y\\)\nが\n同じ側\nにあることを\n\\(v\\)\nと\n\\(x\\)\nを結ぶ単純パスと\n\\(v\\)\nと\n\\(y\\)\nを結ぶ単純パスが共通した\n\\(v\\)\nでない頂点を含む、あるいは\n\\(x = v\\)\nまたは\n\\(y = v\\)\nを満たすことと定義します。\n頂点\n\\((i,j,k)\\)\nをすべて含む単純パスが存在しないとします。このとき、\n\\(i\\)\nに対して\n\\(j,k\\)\nは同じ側で、同様に\n\\(j\\)\nに対して\n\\(k,i\\)\nは同じ側、\n\\(k\\)\nに対して\n\\(i,j\\)\nは同じ側です。したがって、ある頂点\n\\(v\\)\nが一意に存在して、\n\\(i,j,k\\)\nから異なる\n\\(2\\)\n頂点を選んだとき、それらは\n\\(v\\)\nに関して同じ側ではありません。逆に、\n\\((i,j,k)\\)\nをすべて含む単純パスが存在するとき、そのような\n\\(v\\)\nは存在しません。\nよって、\n\\(v = 1,2, \\ldots, N\\)\nに対して\n\\(i,j,k\\)\nから異なる\n\\(2\\)\n頂点を選んだときにそれらが\n\\(v\\)\nに関して同じ側ではないような\n\\((i,j,k)\\)\nの組の個数を求め、足し合わせればよいです。\n\\(v\\)\nを固定したときの答えを考えます。\n\\(v\\)\nを根として木を根付き木とし、\n\\(v\\)\nの子を\n\\(w_1, w_2, \\ldots, w_n\\)\nとします。\n\\((i,j,k)\\)\nが条件を満たすことは相異なる\n\\((i', j', k')\\)\nが存在して\n\\(i\\)\nが\n\\(w_{i'}\\)\nを根とする部分木の頂点、\n\\(j\\)\nが\n\\(w_{j'}\\)\nを根とする部分木の頂点、\n\\(k\\)\nが\n\\(w_{k'}\\)\nを根とする部分木の頂点となることと同値です。したがって、\n\\(w_l\\)\nを根とする部分木の頂点数を\n\\(c_l\\)\nとすると、答えは相異なる\n\\((i', j', k')\\)\nに対する\n\\(c_{i'}c_{j'}c_{k'}\\)\nの和です。\nよって数列\n\\(c\\)\nが与えられたときに異なる\n\\(3\\)\n要素の積の和が求められればよく、これは\n\\(dp_{i,j}\\)\nを\n\\(i\\)\n番目までから異なる\n\\(j\\)\n要素を選んだときの積の和とし計算することにより\n\\(O(|c|)\\)\nで求められます（多項式を用いた数え上げの議論に慣れている方は、\n\\([x^3] \\displaystyle \\prod (c_ix+1)\\)\nと考えても簡明でしょう）。\n以上より\n\\(v\\)\nを固定したときの問題が解けました。必要な情報は\n\\(v\\)\nを根付き木としたときの\n\\(v\\)\nの各子を根とする部分木の頂点数だけだったので、これは適当な頂点を根とする部分木をとり、各頂点を根とする部分木の頂点数を木 dp により求めることにより十分高速に得られます。頂点\n\\(v\\)\nに関する計算は\n\\(v\\)\nの次数を\n\\(d(v)\\)\nとして\n\\(O(d(v))\\)\nでできたので、全体として時間計算量\n\\(O(N)\\)\nでこの問題が解けました。",
+      "codes": [],
+      "text_sha256": "79d64089e95ec54939bd2f3ae5d1a0bea934c2dba9fccfb42edd4a537d62ad24",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6872",
+      "text": "頂点対\n\\((i, j)\\ (i\\lt j)\\)\nであって、距離がちょうど\n\\(d\\)\nであるようなものの個数を\n\\(\\mathsf{freq} (d)\\)\nとします。\nこのとき、補集合を考えることで答えは次のように表せます。\n\\[\\binom{n}{3} - \\sum _ {d = 2} ^ {n - 1} (d - 1) \\times \\mathsf{freq} (d).\\]\n\\(\\mathsf{freq} (2), \\ldots, \\mathsf{freq}(n - 1)\\)\nの列挙は重心分解と FFT を用いた畳み込みで\n\\(O(n (\\log n) ^ 2)\\)\n時間で計算できることが知られています。(参考:\nhttps://judge.yosupo.jp/problem/frequency_table_of_tree_distance\n)\n従って、本問題を\n\\(O(n (\\log n) ^ 2)\\)\n時間で解くことができました。",
+      "codes": [],
+      "text_sha256": "209768879bd4822bb14b9ff73980127ea9e34da4b78b92d0dc4a5c858689090f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6878",
+      "text": "余事象を考えます.\n条件を満たさないとは, 3頂点がある単純パス上にあるということです.頂点\n\\(a,b,c\\)\nがこの順に単純パス上にあるとします.\n「連続する3点は真ん中の1点を固定する」という典型に基づき,\n\\(b\\)\nを固定します.\n木から\n\\(b\\)\nを除いて出来る各連結成分のサイズを\n\\(m_1,\\dots,m_k\\)\nとすると,\n\\(\\sum_{i<j} m_im_j\\)\nが固定した\n\\(b\\)\nに対して求めたいものです.\n\\(2\\sum_{i<j} m_im_j = (\\sum m_i)^2 - \\sum m_i^2\\)\nの式変形を用いることでこれは\n\\(O(k)\\)\nで求めることができます.\n木を(頂点0を根とした）根付き木として各頂点\n\\(v\\)\nに対し\n\\(v\\)\nを根とする部分木のサイズを前計算\n\\(O(n)\\)\nで求めておくことで, 各\n\\(b\\)\nに対して\n\\(m_1,\\dots,m_k\\)\nは\n\\(O(k)\\)\nで求めることが出来るので, 全体として\n\\(O(n)\\)\nでこの問題を解くことができました.\n実装例（C++）",
+      "codes": [],
+      "text_sha256": "931d1d8bcd9c369564c72726ff5cb04bee83e50801b84c969dffb7d045b20ea1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6874",
+      "text": "余事象を考えます。\n条件を満たさないとは、3頂点がある単純パス上にあるということです。\n頂点\n\\(a, b, c\\)\nがこの順に単純パス上にあるとします。\nこの時、\n\\(a, c\\)\nを決め打つと、\n\\(b\\)\nとしてあり得る個数は\n\\({\\rm dist}(a, c)-1\\)\n通りです。\nしたがって、条件を満たさない組の個数は\n\\[\\sum_{a=1}^{N-1} \\sum_{c=a+1}^N ({\\rm dist}(a, c)-1) = \\left\\{ \\sum_{a=1}^{N-1} \\sum_{c=a+1}^N {\\rm dist}(a, c) \\right\\} - \\frac{N(N-1)}{2}\\]\nです。\nこれは\n典型90問 039 - Tree Distance（★5）\nと同じ問題です。",
+      "codes": [],
+      "text_sha256": "816c9c216341e0a65a5ca155cca9072c8bde53590291e2a51c278087579a162f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6877",
+      "text": "余事象で考えます。\n条件を満たさないとは、3頂点がある単純パス上にあるということです。 適当な根付き木を考えます。\n根付き木上の頂点\n\\(v\\)\nを通るパスを数え上げます。\n頂点\n\\(v\\)\nを通るパスは以下の 2通りが考えられます。\n頂点\n\\(v\\)\nの部分木に含まれない頂点から、頂点\n\\(v\\)\nを通って、頂点\n\\(v\\)\nの子孫に至る\n頂点\n\\(v\\)\nに直接繋がる頂点を\n\\(c_i, c_j\\)\nとすると、頂点\n\\(c_i\\)\nの部分木から頂点\n\\(v\\)\nを通って、頂点\n\\(c_j\\)\nの部分木に至る\nよって、上記の 2通りの単純パスの通り数を\n\\( \\footnotesize\n \\begin{pmatrix} n  \\\\ 3 \\end{pmatrix} \\)\nから引けば答えを計算することができます。\nc++ 解答例",
+      "codes": [],
+      "text_sha256": "2ad54da87803e4fb4dcf37ecf2b835d955f5f0c6cabb4ca8a236bf64746c4523",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc445_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc445/editorial/15891",
+      "text": "文字列\n\\(S\\)\nの長さを\n\\(|S|\\)\nで表すと、\n\\(T_i\\)\nについての条件における\n\\(k\\)\nの値は\n\\(k=\\dfrac{m-|S_i|}{2}\\)\nとなります。\n実際に\n\\(T_i\\)\nを求める方法としては「\n\\(S_i\\)\nの前後に\n.\nを付け足すことを\n\\(k\\)\n回繰り返す」や「\n.\nを\n\\(k\\)\n個結合した文字列を利用する」などが考えられます。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    int N;\n    cin >> N;\n    vector<string> S(N);\n    for (int i = 0; i < N; i++) cin >> S[i];\n    int m = 0;\n    for (int i = 0; i < N; i++) m = max(m, (int)S[i].size());\n    for (int i = 0; i < N; i++) {\n        int k = (m - S[i].size()) / 2;\n        string T = string(k, '.') + S[i] + string(k, '.');\n        cout << T << \"\\n\";\n    }\n}",
+        "N = int(input())\nS = [input() for _ in range(N)]\nm = max(len(s) for s in S)\nfor s in S:\n    k = (m - len(s)) // 2\n    t = (\".\" * k) + s + (\".\" * k)\n    print(t)"
+      ],
+      "text_sha256": "98effc7f77c41e2ba29a55df877617f08d1bca3ea9cfd5828d158fc3f03ba82c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc445/abc445_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

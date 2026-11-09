@@ -1,0 +1,55 @@
+{
+  "problem_id": "abc384_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc384/editorial/11568",
+      "text": "まず、\n\\(d_k\\)\nを以下の\n\\(2\\)\nつの条件\n\\(1\\le i\\le j\\le N\\)\n\\(A_i+A_j\\)\nが\n\\(2^k\\)\nの倍数\nを満たす\n\\((i,j)\\)\nに対する\n\\(A_i+A_j\\)\nの総和と定義します。すると、以下の\n\\(2\\)\nつの条件\n\\(1\\le i\\le j\\le N\\)\n\\(A_i+A_j\\)\nが\n\\(2\\)\nでちょうど\n\\(k\\)\n回割り切れる\nを満たす\n\\((i,j)\\)\nに対する\n\\(A_i+A_j\\)\nの総和は\n\\(d_k-d_{k+1}\\)\nと表されるため、求める答えは\n\\(\\displaystyle \\sum_{k\\geq 0}\\frac{d_k-d_{k+1}}{2^k}\\)\nとなります。\n\\(A_i+A_j\\le  2\\times 10^7<2^{25}\\)\nより\n\\(k\\)\nの範囲は\n\\(0\\le k\\le 25\\)\nとして良いです。以降は各\n\\(k\\)\nに対して\n\\(d_k\\)\nを求めることを考えます。\n\\(A_i+A_j\\)\nが\n\\(2^k\\)\nの倍数という条件は\n\\(A_j\\equiv -A_i\\mod 2^k\\)\nと言い換えられます。よって、\n\\(j\\)\nを固定して\n\\(1\\le i\\le j\\)\n\\(A_j\\equiv -A_i\\mod 2^k\\)\nを満たす\n\\(A_i\\)\nの個数と総和をそれぞれ\n\\(C_j,S_j\\)\nとすると、\n\\(\\displaystyle d_k=\\sum_{j=1}^N(C_jA_j+S_j)\\)\nが成立します。この\n\\(C_j\\)\nと\n\\(S_j\\)\nは鍵として\n\\(k=\\left(-A_i\\ \\text{mod}\\ 2^k\\right)\\)\nの値を、値として鍵が\n\\(k\\)\nとなる\n\\(A_i\\)\nの個数と総和を持つ辞書 (map) を順番に作っていくことで高速に求めることができます。\n以上を適切に実装することでこの問題を解くことができます。計算量は\n\\(O(N\\log \\max A)\\)\nです。\n実装例(Python3)",
+      "codes": [
+        "from collections import defaultdict\nimport sys\ninput = sys.stdin.readline\nn = int(input())\na = list(map(int, input().split()))\nK = 25\ncur = [0] * (K + 1)\nfor k in range(K):\n    kk = 1 << k\n    s = defaultdict(lambda: (0, 0))\n    for i in a:\n        c1, c2 = s[-i % kk]\n        s[-i % kk] = c1 + 1, c2 + i\n        c1, c2 = s[i % kk]\n        cur[k] += c2 + i * c1\nans = 0\nfor i in range(K):\n    assert cur[i] % (1 << i) == 0\n    ans += (cur[i] - cur[i + 1]) >> i\nprint(ans)"
+      ],
+      "text_sha256": "d5b8eae421c7465ade9fa067eed66020ae77230362695324f68a6ef8e18f9893",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc384/abc384_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc384/editorial/11617",
+      "text": "奇数\n\\(m\\)\nを用いて\n\\(2^km\\)\nと表される数は\n\\(2^{k+1}\\)\nを法として\n\\(2^k\\)\nと合同なので、\n\\(A_j\\)\nに対して\n\\(A_i+A_j \\ (i \\leq j)\\)\nが\n\\(2\\)\nでちょうど\n\\(k\\)\n回割り切れるものの総和は\n\\(A_i ≡ 2^k-A_j \\pmod{2^{k+1}}\\)\nであるような\n\\(A_i\\)\nの総和がわかれば良いです。\n公式解説と同様、\n\\(A_i\\bmod 2^k\\)\nにより\n\\(A_i\\)\nの総和と個数を管理することにより解けます。",
+      "codes": [],
+      "text_sha256": "b24545fd59cd0f1f24c3fbdf7a55d944683aad0453922887d2c94009bcaf2686",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc384/abc384_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc384/editorial/11619",
+      "text": "2つの数列\n\\(A,B\\)\nに対して\n\\[F(A,B):=\\sum_{i=1}^{N}\\sum_{j=1}^{M} f(A_i+B_j)\\]\nが解ければ十分\n多分分割統治みたいなことをする\n数列\n\\(A\\)\nを\n\\(A_{odd}\\cup A_{even}\\)\nというように偶数と奇数に分ける．\n\\(B\\)\nについても\n\\(B_{odd}\\cup B_{even}\\)\nと分ける．\nこのとき，\n\\[F(A,B)=F(A_{even},B_{even})+F(A_{odd},B_{even})+F(A_{even},B_{odd})+F(A_{odd},B_{odd})\\]\nである．\n\\(F(A_{odd},B_{even})\\)\nについては，\n偶数と奇数の和は奇数なので，\n\\(f(A_{odd,i}+B_{even,j})=A_{odd,i}+B_{even,j}\\)\nである．\n\\(F(A_{even},B_{odd})\\)\nも同様\n\\(F(A_{even},B_{even})\\)\nについては，\n\\(f(A_{even,i}+B_{even,j})=f(A_{even,i}/2+B_{even,j}/2)\\)\nなので，\n\\(F(A_{even},B_{even})=F(A_{even}/2,B_{even}/2)\\)\n\\(F(A_{odd},B_{odd})\\)\nについては，\n\\(f(A_{odd,i}+B_{odd,j})=f(\\lfloor A_{odd,i}/2\\rfloor +\\lfloor B_{odd,j}/2\\rfloor +1)\\)\nなので，\n\\(F(A_{odd},B_{odd})=F(\\lfloor A_{odd}/2\\rfloor ,1+\\lfloor B_{odd}/2\\rfloor )\\)\nこれを再帰関数として実装すればOK",
+      "codes": [
+        "def solve(A,B):\n    '''\n    sum_{i,j} f(A_i+B_j)\n    '''\n    if len(A)==0 or len(B)==0:\n        return 0\n    A_even=[a for a in A if a%2==0]\n    A_odd=[a for a in A if a%2==1]\n    B_even=[b for b in B if b%2==0]\n    B_odd=[b for b in B if b%2==1]\n    AeBe=solve([a//2 for a in A_even],[b//2 for b in B_even])\n    AeBo=len(B_odd)*sum(A_even)+len(A_even)*sum(B_odd)\n    AoBe=len(A_odd)*sum(B_even)+len(B_even)*sum(A_odd)\n    AoBo=solve([a//2 for a in A_odd],[1+b//2 for b in B_odd])\n    return AeBe+AeBo+AoBe+AoBo\ndef f(x):\n    while(x%2==0):\n        x//=2\n    return x\nN=int(input())\nA=[int(i) for i in input().split()]\nans=solve(A,A)\nfor i in range(N):\n    ans+=f(2*A[i])\nans//=2\nprint(ans)"
+      ],
+      "text_sha256": "0a1d6adc214d1aeb5d838b27ddd4477e2fcd8a4431bb915cad975b2d7aa6cddb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc384/abc384_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc384/editorial/11882",
+      "text": "\\(\\displaystyle \\sum_{i=1}^N \\sum_{j=1}^N f(A_i+A_j)\\)\nを代わりに求めます（対角線を引いて\n\\(2\\)\nで割って対角線を足せばもとの問題の答えになります）。\n以下では\n\\(\\bm{1}[\\cdot]\\)\nで指示関数を表します。\n\\(\\begin{aligned}\n&\\phantom{=} \\sum_{i=1}^N \\sum_{j=1}^N f(A_i+A_j) \\\\\n&= \\sum_{i=1}^N \\sum_{j=1}^N \\sum_{k \\geq 0} \\frac{A_i+A_j}{2^k} \\cdot \\bm{1}\\left[A_i+A_j \\ は \\ 2^k \\ で割り切れるが \\ 2^{k+1} \\ で割り切れない\\right] \\\\\n&= \\sum_{i=1}^N \\sum_{j=1}^N \\sum_{k \\geq 0} \\frac{A_i+A_j}{2^k} \\cdot \\left(\\bm{1}\\left[A_i+A_j \\equiv 0 \\pmod{2^k} \\right] - \\bm{1}\\left[A_i+A_j \\equiv 0 \\pmod{2^{k+1}} \\right]\\right) \\\\\n&= \\sum_{i=1}^N \\sum_{k\\geq 0} \\frac{A_i}{2^k} \\left(\\underbrace{\\sum_{j=1}^N \\bm{1}\\left[A_j \\equiv -A_i \\pmod{2^k} \\right]}_{\\coloneqq C_k[-A_i]} - \\underbrace{\\sum_{j=1}^N \\bm{1}\\left[A_j \\equiv -A_i \\pmod{2^{k+1}} \\right]}_{\\coloneqq C_{k+1}[-A_i]} \\right) \\\\\n&\\phantom{=} \\quad + \\sum_{i=1}^N \\sum_{k\\geq 0} \\frac{1}{2^k} \\left(\\underbrace{\\sum_{j=1}^N A_j \\cdot \\bm{1}\\left[A_j \\equiv -A_i \\pmod{2^k} \\right]}_{\\coloneqq S_k[-A_i]} - \\underbrace{\\sum_{j=1}^N A_j \\cdot \\bm{1}\\left[A_j \\equiv -A_i \\pmod{2^{k+1}} \\right]}_{\\coloneqq S_{k+1}[-A_i]} \\right)\n\\end{aligned}\\)",
+      "codes": [],
+      "text_sha256": "bfb7c2fb1cb7a63c624a4e08af24c33384bda4bfe6669ec5ffa611dd6aa5b8c7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc384/abc384_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc384/editorial/11620",
+      "text": "shakayamiさんのユーザ解説の発想と個人的に似ていると思います。\n概要\nbinary trieを下のbitから考えるような方法で解くことができます。\n\\(A_i, A_j\\)\nについて、最下位bitが異なる場合、そのまま足すことができます。\n最下位bitが両方0の場合、両方を2で割ってループさせます。\n最下位bitが両方1の場合、両方2で割ったあと以下のようになります。\n\\(A_i, A_j\\)\nの最下位bitが異なるなら両方2で割る。同じになったら、足してさらに1を足したものが答え。\n以上のようにして、\n\\(A_i, A_j\\)\nを足したあと2で割っていくのではなく、別々に値を持って考えることができます。これにより、以下のような主客転倒方針が可能になります。\n答えを\n\\(0\\)\nで初期化し、\n\\(i = j\\)\nの場合を先に求めておきます。\nその後、数列\n\\(A\\)\nに対して手続き1を行います。\n手続き1\n数列\n\\(A\\)\nを入力(引数)とします。\n\\(A\\)\nのうち最下位bitが0になるものをまとめて数列\n\\(A_0'\\)\n、1になるものをまとめて数列\n\\(A_1'\\)\nとします。\n\\(A_0'\\)\nと\n\\(A_1'\\)\nの各組合せに対して和を求めてその総和を求めるのは容易なので、求めて答えに足します。\n\\(A_0', A_1'\\)\nの中の要素をすべて2で割って切り捨てます。\n\\(A_0'\\)\nが空でなければ\n\\(A_0'\\)\nに対して手続き1を繰り返し行います。\n\\(A_1'\\)\nについて手続き2を行います。\n手続き2\n数列\n\\(B\\)\nを引数とします。\n\\(B\\)\nのうち最下位bitが0になるものをまとめて数列\n\\(B_0'\\)\n、1になるものをまとめて数列\n\\(B_1'\\)\nとします。\n\\(B_0'\\)\n内の2項の和は、手続き1で切り捨て除算したときの分の繰り上がりで最下位bitが1になります。なので、そのまま総和を求めることができるため、求めて答えに足し合わせます。\n\\(B_1'\\)\nについても同様です。\n\\((B_0' , B_1)\\)\nの 2項組について、手続き3を実行します。\n手続き3\n数列の組\n\\((C_0, C_1)\\)\nを引数とします。\n\\(C_0, C_1\\)\nのどちらかが空なら手続き3を終了します。\n\\(C_0, C_1\\)\nのすべての要素を2で切り捨て除算します。\n\\(C_0, C_1\\)\nの要素を最下位bitで分け、\n\\(C_{0, 0}, C_{0, 1}, C_{1, 0},C_{1, 1}\\)\nとします。\n\\(C_{0, 0}, C_{1, 0}\\)\n内の要素の組み合わせは、下からの繰り上がりによって和の最下位bitが1になります。よって、その総和を求めるのは容易なので、求めて答えに足します。\n\\(C_{0, 1}, C_{1, 1}\\)\nについても同様です。\n\\((C_{0, 0}, C_{1, 1})\\)\nについて手続き3を繰り返し行い、\n\\((C_{0, 1}, C_{1, 0})\\)\nについて手続き3を繰り返し行います。\nすべての手続きが終了したあとの答えを出力します。\n計算量は\n\\(O(N \\log (\\max(A)))\\)\nです。\n実装例 (C++, 100ms)\nhttps://atcoder.jp/contests/abc384/submissions/60763883",
+      "codes": [],
+      "text_sha256": "7e684c8072822a41be7a81dfec432286041d56bafbe92af8075be97e7a49601d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc384/abc384_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

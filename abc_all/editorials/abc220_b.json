@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc220_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc220/editorial/2681",
+      "text": "\\(K\\)\n進法表記で与えられた\n\\(S\\)\nを、\n\\(10\\)\n進法表記で表す関数を作ることを目標にします。\nこれは以下のようなアルゴリズムを実装すれば良いです。\n\\(ans =0\\)\nとする。\n\\(S\\)\nの先頭の桁から見ていき、順番に以下の操作を行う。\n\\(ans\\)\nを\n\\(K\\)\n倍する\n\\(ans\\)\nに今見ている桁の数字を加える\n\\(S\\)\nの最後の桁まで見終わったとき、\n\\(ans\\)\nが求めたい値である。\n最後に、\n\\(10\\)\n進法表記に直した\n\\(A,B\\)\nを掛け合わせれば答えになります。\nC++ の実装例も示すので参考にしてください。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\n\nll f(string s,ll k){ // K 進法表記の S を、10 進法表記で表す関数\n    ll ans=0;\n    for(char x:s){\n        ans *= k;\n        ans += x - '0';\n    }\n    return ans;\n}\n\nsigned main(){\n\n    ll k;\n    string a,b;\n    cin>>k>>a>>b;\n    ll A = f(a,k);\n    ll B = f(b,k);\n    cout<< A * B <<endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "f3cfa4e5f01654c85e4ebc3e12c060b5a8efdef6bb35b30539fd83aa64972db5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc220/abc220_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc385_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc385/editorial/11639",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nこの問題は，場合分けにより解くことができます．\nまず，和が等しい\n\\(3\\)\nつのグループに分けることができる条件は，\n\\(A=B=C\\)\nが成り立つことです．\n次に，和が等しい\n\\(2\\)\nつのグループに分けることができる条件を考えます．和が等しい\n\\(2\\)\nつのグループに分ける方法は\n\\(3\\)\n通りあり，\n\\(A+B=C,B+C=A,C+A=B\\)\nのいずれかの条件が満たされるときに\n\\(2\\)\nつのグループに分けることができます．\n以上のいずれかの条件が満たされる場合，答えは\nYes\nです．満たされない場合，答えは\nNo\nです．\n実装例 (Python3)\n実装例 (C++)",
+      "codes": [
+        "A, B, C = map(int, input().split())\nif A == B == C or A + B == C or B + C == A or C + A == B:\n    print(\"Yes\")\nelse:\n    print(\"No\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int A, B, C;\n    cin >> A >> B >> C;\n    if ((A == B && B == C) || A + B == C || B + C == A || C + A == B) {\n        cout << \"Yes\" << endl;\n    } else {\n        cout << \"No\" << endl;\n    }\n}"
+      ],
+      "text_sha256": "125d0444ad6f187f74a142addbd48860d810e5616a99bed1f10d810e5f0bb95e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc385/abc385_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

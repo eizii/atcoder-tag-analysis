@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc186_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc186/editorial/405",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practicecontest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nこの問題では、\n\\(N/W\\)\nを整数に切り捨てた値を出力すればよいです。単に\n\\(N/W\\)\nと書いたとき、言語や変数の型によって、結果が整数に丸められる場合と、小数になる場合があります。自分が使っている言語ではどうなっているかよく確認しておきましょう。\n実装例(C)\n実装例(Python)\n実装例(Ruby)",
+      "codes": [
+        "#include<stdio.h>\nint main(){\n\tint n,w;\n\tscanf(\"%d%d\",&n,&w);\n\tprintf(\"%d\\n\",n/w);\n}",
+        "N, W = map(int,input().split())\nprint(N//W)",
+        "N, W = gets.split(' ').map(&:to_i)\np N/W"
+      ],
+      "text_sha256": "5f0566005a5d452a286a7307fbd458d3826e3fada376eb3140fceedeaeacef25",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc186/abc186_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

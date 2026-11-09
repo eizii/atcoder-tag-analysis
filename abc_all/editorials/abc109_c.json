@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc109_c",
+  "editorials": [
+    {
+      "text": "C: Skip\nD が全てのi について|X −xi| の約数であるとき、全ての都市を訪れることができます。逆に、D が\n|X −xi| の約数でないようなi が存在するとき、操作によって現在居る座標をD で割った余りが変化しない\nことから、|X −xi| をD で割った余りが|X −xi| またはD −|X −xi| となり、0 になることがないため、\n座標xi を訪れることができません。\nしたがって、|X −x1|, |X −x2|, ..., |X −xN| 全ての約数であって最大の正整数D を求めれば良いことに\nなります。このようなD は最大公約数と定義され、ユークリッドの互除法により高速に計算できることが知\nられています。ユークリッドの互除法とは、\ngcd(a, b) =\n{\ngcd(b, a mod b)\nif b > 0\na\nif b = 0\nが成り立ち、これに従って計算するアルゴリズムのことです。ここで、gcd(a, b) はa とb の最大公約数\n表し、a mod b はa をb で割った余りを表します。ユークリッドの互除法はa ≤b のとき1 回の反復で\na mod b < a\n2 となることからO(log max(a, b)) で求まります。ちなみに、a, b がフィボナッチ数のときに遅\nくなりますがlog で求まることには変わりありません。gcd(a, b, c) = gcd(gcd(a, b), c) なので、答えである\ngcd(|X −x1|, |X −x2|, ..., |X −xN|) をO(Nlog max{|X −x1|, |X −x2|, ..., |X −xN|}) で求められます。\n",
+      "text_sha256": "06b2fb1b1f3cc6c8d918643574797c60bb55a8e4cce2be8b5584ed46b138c3b4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc109/abc109_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

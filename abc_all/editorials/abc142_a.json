@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc142_a",
+  "editorials": [
+    {
+      "text": "A: Odds of Oddness\n実数x について,x を超えない最大の整数をfloor (x) と定義します.N 以下の正の奇数はN −\nfloor\n( N\n2\n)\n個数存在しますから, 答えは\n(\nN −floor\n( N\n2\n))\n/N です.\nただし, 実装には注意が必要です. 例えばC++ では,N をint 型の変数とした場合floor\n( N\n2\n)\nはN/2\nで計算出来ますが,(N −N/2) /N のように書くと, 二度目の除算もint 型の変数同士の除算となり, 正\nしい計算結果が得られません.\nこれを回避する手法はいくつかあります。例えば, 二度目の除算がdouble 型の変数同士の除算として\n実行されるように, 型変換を行えば良いです.\nより詳しくは, AtCoder Programming Guide for beginners Y-3.01. 数値型をご参照ください。\nC++ による解答例:https://atcoder.jp/contests/abc142/submissions/7731173\n",
+      "text_sha256": "15e49cd766cd2cfd7ee8c7ad62d552b8d5841bee740a5a6676df9ac98f8c6376",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc142/abc142_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

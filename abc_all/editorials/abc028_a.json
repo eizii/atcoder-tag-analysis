@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc028_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc028/editorial.pdf",
+      "text": "A問題: テスト評価\n\f\n  プログラムの流れ\n\n\n  •  入力\n\n\n  •  それがBad, Good, Great, Perfectのどれかを判別する\n\n\n  •  出力\n\n入力, 出力\n\n   練習ページ: (http://practice.contest.atcoder.jp/tasks/practice_1 )を参考に\n\n判別部分\n      C, C++ ならばif文というものを使います。\n   example : if (60 <= point && point <= 89) とか\n\f\n コード例(C++)\n\n\n\n#include <cstdio>\n\nint main() {\n    int N;\n    scanf(\"%d\", &N);\n    if (0 <= N && N <= 59) {\n        printf(\"Bad\\n\");\n    } else if (60 <= N && N <= 89) {\n        printf(\"Good\\n\");\n    } else if (90 <= N && N <= 99) {\n        printf(\"Great\\n\");\n    } else if (N == 100) {\n        printf(\"Perfect\\n\");\n    }\n    return 0;\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "db0b7b019f35433ee4669d5746c100325bc69197d0c6c7541ff180c738a8b97e"
+    }
+  ],
+  "status": "available"
+}

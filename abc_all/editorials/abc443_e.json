@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc443_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc443/editorial/15178",
+      "text": "この問題を解くために、動的計画法 (DP) を利用します。\n\\(dp[i][j] = \\{\\)\n高橋君が\n\\((i,j)\\)\nに侵入できるなら\n\\(1\\)\n、侵入できないなら\n\\(0\\)\n\\(\\}\\)\nという DP を実行することを考えます。\n最初は、全ての\n\\(i,j\\)\nについて\n\\(dp[i][j]=0\\)\nと初期化します。\nその後、全ての\n\\(i\\)\nについて\n\\((i,C)\\)\nには侵入可能なので\n\\(dp[i][C]=1\\)\nとします。\nそして、以下のように DP テーブルを更新します。\n\\(i=N-1,N-2,\\dots,1\\)\nについて以下を実行する。\n\\(j=1,2,\\dots,N\\)\nについて、\n\\(dp[i][j]\\)\nを更新する。\n\\(dp[i+1][j-1],dp[i+1][j],dp[i+1][j+1]\\)\nのいずれかが\n\\(1\\)\nであれば、壁マスの条件を無視すれば\n\\((i,j)\\)\nに侵入することができる。以降はこのケースのみを考慮する。\nもし既に\n\\(dp[i][j]=1\\)\nであれば、既に\n\\((i,j)\\)\nに到達可能であることが分かっているためこれ以上の調査は不要である。\nもし\n\\((i,j)\\)\nが空きマスであれば、侵入可能なので\n\\(dp[i][j]=1\\)\nとする。\nもし\n\\((i,j)\\)\nが壁マスである時、全ての\n\\(i < k \\le N\\)\nについて\n\\((k,j)\\)\nが空きマスであれば、\n\\((i,j)\\)\nおよびそれより上の\n\\(j\\)\n列目のマスについて壁を壊して侵入できることが分かるので、全ての\n\\(1 \\le k \\le i\\)\nについて\n\\(dp[k][j]=1\\)\nとする。この判定は、\n\\(j\\)\n列目のうち最も下の壁マスはどこかを予め調べておくことで高速に行うことができる。\nこの解法の時間計算量は\n\\(O(N^2)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int t;\n  cin >> t;\n  while(t--){\n    int n,c;\n    cin >> n >> c;\n    c--;\n    vector<string> s(n);\n    vector<int> low(n,-1);\n    for(int i=0;i<n;i++){\n      cin >> s[i];\n      for(int j=0;j<n;j++){\n        if(s[i][j]=='#'){ low[j]=i; }\n      }\n    }\n    vector<vector<int>> dp(n,vector<int>(n,0));\n    for(int i=0;i<n;i++){dp[i][c]=1;}\n    for(int i=n-2;i>=0;i--){\n      for(int j=0;j<n;j++){\n        if(dp[i][j]>0){continue;}\n        bool ok=false;\n        if(dp[i+1][j]>0){ok=true;}\n        if(j>0 && dp[i+1][j-1]>0){ok=true;}\n        if(j+1<n && dp[i+1][j+1]>0){ok=true;}\n        if(ok){\n          if(s[i][j]=='.'){\n            dp[i][j]=1;\n          }\n          else{\n            if(low[j]==i){\n              for(int k=0;k<=i;k++){\n                dp[k][j]=1;\n              }\n            }\n          }\n        }\n      }\n    }\n    for(auto &nx : dp[0]){cout << nx;}\n    cout << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "9a49342a169bf942140c143f1ff17b5584e99ab57daf1ff7941610384d26a50e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc443/abc443_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

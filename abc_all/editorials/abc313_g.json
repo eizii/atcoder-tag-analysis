@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc313_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc313/editorial/6896",
+      "text": "2 種類の操作をそれぞれ操作 \\(A\\) , 操作 \\(B\\) と呼びます。\n重要な観察として次の事実があります。 「操作 \\(B\\) の直後に操作 \\(A\\) を行わない」という条件を加えても答えは変わらない。 なぜかというと、操作 \\(B\\) の直後は全ての皿にボールが 1 個ずつ入っているので操作 \\(A\\) を行うと元の状態に戻ってしまうからです。よってこのような操作は無意味であると分かります。 同様にして以下の事実も確認できます。 「操作 \\(A\\) で全ての皿からボールを取り出した直後に, 操作 \\(B\\) を行わない」という条件を加えても答えは変わらない。 また、逆に上記の 2 つのルールを加えた場合に、 1 つの操作列と 1 個の数列の間に全単射を取れることが確認できます。よってこの問題は条件を満たす操作列の数え上げに言い換えられます。 操作列を整数 \\(x, y\\) を用いて 「 \\(A\\) を \\(x\\) 回, \\(B\\) を \\(y\\) 回」 という形で表すとします。 \\(x\\) を固定したときの \\(y\\) の範囲と通り数を考えると以下のようになります。 \\(x \\leq \\min \\lbrace a \\rbrace\\) の場合： \\(y = 0\\) ( \\(1\\) 通り) ( \\(B\\) を行うと 2 番目の条件に反する) \\(\\min \\lbrace a \\rbrace \\lt x\\) の場合 : \\(s\\) を袋に入っているボールの個数として, \\(0 \\leq y \\leq \\lfloor s/N \\rfloor\\) ( \\( \\lfloor s/N \\rfloor + 1\\) 通り) よって \\(x\\) を全探索すると \\(\\mathrm{O}(\\max \\lbrace a \\rbrace)\\) でこの問題を解けますが, 計算量が大きすぎて TLE します。 式を整理すると \\(\\sum_{L \\leq n \\leq R} \\lfloor (ax+b)/m \\rfloor\\) 型の式が \\(\\mathrm{O}(N)\\) 個ある形に変形できるため、floor sum と呼ばれるアルゴリズムを適用できる形に帰着できます。 (floor sum は AtCoder Library を使えば容易に計算できます。 参考：ACL のリファレンス ) floor sum を利用するとこの問題を ( \\(M = \\max \\lbrace a \\rbrace\\) として) \\(\\mathrm{O}(N \\log M)\\) で計算出来て十分高速です。 実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#include \"atcoder/math.hpp\"\n#include \"atcoder/modint.hpp\"\nusing mint = atcoder::modint998244353;\nusing ll = long long;\n\nint main() {\n  ll N;\n  cin >> N;\n  vector<ll> A(N);\n  for(auto&x : A) cin >> x;\n  sort(begin(A), end(A));\n  ll s = A[0] * N;\n  mint ans = A[0] + 1;\n  for (int i = 1; i < N; i++) {\n    ll L = A[i - 1];\n    ll R = A[i];\n    ll a = N - i;\n    ll b = s - L * (N - i);\n    ll m = N;\n    ll cur = 0;\n    cur += atcoder::floor_sum(R + 1, m, a, b);\n    cur -= atcoder::floor_sum(L + 1, m, a, b);\n    cur += R - L;\n    ans += cur;\n    s += (R - L) * (N - i);\n  }\n  cout << ans.val() << \"\\n\";\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "010363e73dfc4ee7973f99e398cfc623f77dcd862436c3c6fdaa0965f48367e7"
+    }
+  ],
+  "status": "available"
+}

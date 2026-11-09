@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc405_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13004",
+      "text": "一番左にあるブドウに注目します。\n一番左にあるブドウよりも左に置かれているバナナの個数が\n\\(i\\)\n\\((0 \\leq i \\leq C)\\)\n本である場合の、そのブドウの左右での並べ方の通り数をそれぞれ数えます。\n(1) 「一番左にあるブドウ」の左側\n「一番左にあるブドウ」の左側には\n\\(A\\)\n個のリンゴ、\n\\(B\\)\n個のオレンジ、\n\\(i\\)\n個のバナナ\nがあります。ここで、「リンゴはバナナより左」という制約から、これら\n\\(A+B+i\\)\n個の果物の並べ替え方の通り数は\n「\n\\(A+i\\)\n個のリンゴとバナナの列」の隙間にオレンジを差し込む方法\nと一致することが確認できます。よって通り数は次のようになります。\n\\[\\binom{A+B+i}{B}\\]\n(2)「一番左にあるブドウ」の右側\n「一番左にあるブドウ」の右側には\n\\(C-i\\)\n個のバナナと\n\\(D-1\\)\n個のブドウ\nがあります。これらは自由な順番で並べてよいので通り数は次のようになります。\n\\[\\binom{D-1+C-i}{D-1}\\]\n(1) (2) より、「一番左にあるブドウ」よりも左に置かれているバナナの個数が\n\\(i\\)\n\\((0 \\leq i \\leq C)\\)\n本である場合の並べた方の通り数は\n\\[\\binom{A+B+i}{B}\\binom{D-1+C-i}{D-1}\\]\nです。よってこれらを\n\\(i=0,1,\\dots,C\\)\nについて足し合わせた\n\\[\\sum_{i=0}^C \\binom{A+B+i}{B}\\binom{D-1+C-i}{D-1}\\]\nがこの問題の答えとなります。これは適切な階乗・階乗逆元の前計算の元\n\\(\\mathrm{O}(A+B+C+D)\\)\n程度で計算することができて十分高速です。(実装例は省略します。)",
+      "codes": [],
+      "text_sha256": "37e826d34c4090af8fbd97a3a45628797137b48378c48b3112b3757d8bb37675",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13012",
+      "text": "\\(N = A + B + C + D\\)\nとします。また二項係数を\n\\(\\displaystyle \\binom{n}{m}\\)\nで表します。\n最も右にあるリンゴの位置\n\\(i\\)\nは、\n\\(A \\le i \\le A + B\\)\nを満たす必要があります。\nこのとき、左から\n\\(i - 1\\)\n個のうち\n\\(A - 1\\)\n個のリンゴの位置、  右から\n\\(N - i\\)\n個のうち\n\\(C\\)\n個のバナナの位置を決める方法は\n\\(\\displaystyle \\binom{i - 1}{A - 1} \\times \\binom{N - i}{C}\\)\n通りあります。  逆に、これらを決めると残りのオレンジとブドウの位置は一意に決まります。\nよって、求める答えは\n\\(\\displaystyle \\sum_{i = A}^{A + B} \\binom{i - 1}{A - 1} \\times \\binom{N - i}{C}\\)\nです。\n階乗を前計算することにより、\n\\(O(N)\\)\nでこの問題を解くことができます。\nACコード例\n（Python）",
+      "codes": [],
+      "text_sha256": "456a1392bc40a12776048a2400ae86fda3ecb58a2ea134f306376fe78c5f8eea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13034",
+      "text": "フルーツ列（\n\\(\\{ \\mathtt{0}, \\mathtt{1}, \\mathtt{2}, \\mathtt{3} \\}\\)\n-列）の代わりに\n\\(\\{ \\mathtt{0}, \\mathtt{1} \\}\\)\n-列を数え上げる方針です。\nフルーツ列から\n\\(\\{ \\mathtt{0}, \\mathtt{1}, \\mathtt{2}, \\mathtt{3} \\}\\)\n-列への置き換え\nダイエットのため、次のようにフルーツを整数に置き換えます。\nリンゴ →\n\\(\\mathtt{0}\\)\nオレンジ →\n\\(\\mathtt{1}\\)\nバナナ →\n\\(\\mathtt{2}\\)\nブドウ →\n\\(\\mathtt{3}\\)\nすると、これらがそれぞれ\n\\(A, B, C, D\\)\n回登場する列であって、次の条件を満たすものの個数が答えです。\n条件 1\n:\n\\(\\mathtt{0}\\)\nはすべて、\n\\(\\mathtt{2}\\)\nより先に登場する。\n条件 2\n:\n\\(\\mathtt{0}\\)\nはすべて、\n\\(\\mathtt{3}\\)\nより先に登場する。\n条件 3\n:\n\\(\\mathtt{1}\\)\nはすべて、\n\\(\\mathtt{3}\\)\nより先に登場する。\nたとえば入力例 1 では、次の\n\\(5\\)\n通りの並べ方が条件を満たします。\n\\(\\mathtt{0123}\\)\n\\(\\mathtt{0132}\\)\n\\(\\mathtt{0213}\\)\n\\(\\mathtt{1023}\\)\n\\(\\mathtt{1032}\\)\n\\(\\{ \\mathtt{0}, \\mathtt{1} \\}\\)\n-列への置き換え\nさらなるダイエットのため、\n\\(\\mathtt{0}, \\mathtt{2}\\)\nをともに\n\\(\\mathtt{0}\\)\nに、また\n\\(\\mathtt{1}, \\mathtt{3}\\)\nをともに\n\\(\\mathtt{1}\\)\nに置き換えましょう。（つまり、\n\\(2\\)\nで割ったあまりに置き換えます。）\nこの操作は単射的です。なぜならば\n条件 1\nより\n\\(\\mathtt{0}\\)\nのうちはじめの\n\\(A\\)\n個は\n\\(\\mathtt{0}\\)\n由来、残りの\n\\(C\\)\n個は\n\\(\\mathtt{2}\\)\n由来であることが確定し、\n条件 3\nより\n\\(\\mathtt{1}\\)\nのうちはじめの\n\\(B\\)\n個は\n\\(\\mathtt{1}\\)\n由来、残りの\n\\(D\\)\n個は\n\\(\\mathtt{3}\\)\n由来であることが確定するからです。\nたとえば入力例 1 の\n\\(5\\)\n通りの並べ方は、次の\n\\(\\mathtt{0}\\)\n-\n\\(\\mathtt{1}\\)\n列に写ります。\n\\(\\mathtt{0101}\\)\n\\(\\mathtt{0110}\\)\n\\(\\mathtt{0011}\\)\n\\(\\mathtt{1001}\\)\n\\(\\mathtt{1010}\\)\n\\(\\{ \\mathtt{0}, \\mathtt{1} \\}\\)\n-列の満たすべき条件\n条件 2\nに着目すると、\n\\(\\mathtt{0}, \\mathtt{1}\\)\nがそれぞれ\n\\(A + C, B + D\\)\n回登場する列であって、次の条件を満たすものの個数が答えであることがわかります。\n条件 2’\n: 先頭\n\\(A + B\\)\n項に、\n\\(\\mathtt{0}\\)\nが\n\\(A\\)\n個以上ある\n答え\n先頭\n\\(A + B\\)\n項のうち、ダミー変数\n\\(i\\)\nを用いて\n\\(\\mathtt{0}\\)\nが\n\\(A + i\\)\n個あると場合分けして足し合わせることで、次の答えを得ます。\n\\[\n\\sum_{i \\ge 0} \\binom{A + B}{A + i} \\binom{C + D}{C - i}\n\\]",
+      "codes": [],
+      "text_sha256": "03d2c0df6e2fc76d14e4763a47bb4b8e4f1edeb9dbc0c4c7f944607d7286785f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

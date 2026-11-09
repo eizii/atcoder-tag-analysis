@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc300_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6279",
+      "text": "DP で解くことを考えます。\n\\(\\mathrm{dp}(n)\\)\n: (持っている数が\n\\(n\\)\nである状態からスタートしたときに, 最終的に持っている数が\n\\(N\\)\nに一致する確率)\nと定義すると、答えは\n\\(\\mathrm{dp}(1)\\)\nです。\n\\(\\mathrm{dp}(n)\\)\nに関する式を求めます。\n\\(n\\)\nを持っている状態から 1 回サイコロを振ると、持っている数は\n\\(n, 2n, 3n, 4n, 5n, 6n\\)\nのいずれかに等確率に変化します。よって\n\\[\\mathrm{dp}(n) = \\frac{1}{6} (\\mathrm{dp}(n) + \\mathrm{dp}(2n) + \\mathrm{dp}(3n) + \\mathrm{dp}(4n) + \\mathrm{dp}(5n) + \\mathrm{dp}(6n) )\\]\nです。この式は両辺に\n\\(\\mathrm{dp}(n)\\)\nが含まれているので式変形によって取り除くと\n\\[\\mathrm{dp}(n) - \\frac{1}{6} \\mathrm{dp}(n) = \\frac{1}{6} (\\mathrm{dp}(2n) + \\mathrm{dp}(3n) + \\mathrm{dp}(4n) + \\mathrm{dp}(5n) + \\mathrm{dp}(6n) )\\]\n\\[\\frac{5}{6} \\mathrm{dp}(n) = \\frac{1}{6} (\\mathrm{dp}(2n) + \\mathrm{dp}(3n) + \\mathrm{dp}(4n) + \\mathrm{dp}(5n) + \\mathrm{dp}(6n) )\\]\n\\[\\mathrm{dp}(n) = \\frac{1}{5} (\\mathrm{dp}(2n) + \\mathrm{dp}(3n) + \\mathrm{dp}(4n) + \\mathrm{dp}(5n) + \\mathrm{dp}(6n) )\\]\nとなり、\n\\(\\mathrm{dp}(n)\\)\nに関する式を得ることができました。\nまた、\n\\(\\mathrm{dp}(N) = 1\\)\nであり、さらに\n\\(n \\geq N\\)\nのとき\n\\(\\mathrm{dp}(n) = 0\\)\nです。以上の条件を全て使うと、\n\\(\\mathrm{dp}(n)\\)\nをメモ化再帰で計算するアルゴリズムが有限の時間で終了することがわかります。\nこの式は左辺が\n\\(\\mathrm{dp}(n)\\)\nに関する式で右辺が\n\\(\\mathrm{dp}(kn)\\)\n\\((2 \\leq k \\leq 6)\\)\nに関する式なので、再帰が深くなるごとに呼び出される値は大きくなります。ここから、再帰の最中にループが発生することはありえないのが確認できます。\n計算量を考えます。メモ化再帰で訪問する\n\\(\\mathrm{dp}(n)\\)\nの種類を\n\\(X\\)\nとすると,\nstd::map\n等を用いたメモ化再帰が\n\\(\\mathrm{O}(X \\log X)\\)\n程度で動作して十分高速であると言えるので、この\n\\(X\\)\nの値の上界を評価します。\nサイコロの目は\n\\(2, 3, 5\\)\nの倍数のみが書かれているので、\n\\(n\\)\nは非負整数の組\n\\((a, b, c)\\)\nを用いて\n\\(n = 2^a 3^b 5^c\\)\nと表せる数に限ります。\n\\(n \\leq N\\)\nという条件と合わせると\n\\[\n\\begin{aligned}\n&0 \\leq a \\leq \\log_2 N \\leq \\log_2(10^{18}) < 60 \\\\\n&0 \\leq b \\leq \\log_3 N \\leq \\log_3(10^{18}) < 38 \\\\\n&0 \\leq c \\leq \\log_5 N \\leq \\log_5(10^{18}) < 26\n\\end{aligned}\n\\]\nが言えるので、\n\\(n\\)\nとしてあり得るのは高々\n\\(60 \\times 38 \\times 26 = 59280\\)\n通りであることが証明できます。よって、\n\\(X \\leq 59280\\)\nが証明できたため、メモ化再帰による DP の計算は高速に動作することが言えました。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <map>\nusing namespace std;\n#include \"atcoder/modint.hpp\"\nusing mint = atcoder::modint998244353;\n\nlong long N;\nmap<long long, mint> memo;\nmint dp(long long n) {\n  if (n >= N) return n == N ? 1 : 0;\n  if (memo.count(n)) return memo[n];\n  mint res = 0;\n  for (int i = 2; i <= 6; i++) res += dp(i * n);\n  return memo[n] = res / 5;\n}\nint main() {\n  cin >> N;\n  cout << dp(1).val() << \"\\n\";\n}"
+      ],
+      "text_sha256": "ddf129be467f67f61bfbe0f044bc375c122c8a1a8365528cd09a588df017c159",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc300/abc300_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6296",
+      "text": "まず、サイコロの\n\\(1\\)\nの目は何も影響を及ぼさないので、出ないものとしてよいです。すなわち、サイコロを振ると\n\\(2\\)\nから\n\\(6\\)\nの目が等確率で出るとします。\nまた、求める確率が正のとき、\n\\(N=2^a3^b5^c\\)\nと表せるので、表しておきます。\nここで、持っている整数が\n\\(N\\)\nに一致して、さらに一致するまでに\n\\(4\\)\nの目が\n\\(i\\)\n回、\n\\(6\\)\nの目が\n\\(j\\)\n回（ただし\n\\(2i+j\\leq a\\)\n,\n\\(j\\leq b\\)\n）出る確率は、そのとき\n\\(2\\)\nの目が\n\\(a-2i-j\\)\n回、\n\\(3\\)\nの目が\n\\(b-j\\)\n回、\n\\(5\\)\nの目が\n\\(c\\)\n回出たことになるので、\n\\(\\displaystyle\\frac{((a-2i-j)+(b-j)+i+c+j)!}{(a-2i-j)!(b-j)!i!c!j!}\\left(\\displaystyle\\frac{1}{5}\\right)^{(a-2i-j)+(b-j)+i+c+j}=\\displaystyle\\frac{(a+b+c-i-j)!}{(a-2i-j)!(b-j)!i!j!c!}\\left(\\displaystyle\\frac{1}{5}\\right)^{a+b+c-i-j}\\)\nとなります。これを\n\\(2i+j\\leq a\\)\n,\n\\(j\\leq b\\)\nの範囲で動かして足し合わせたものが求める確率になります。\n計算量は、\n\\(a\\)\n,\n\\(b\\)\n,\n\\(c\\)\nがそれぞれ\n\\(O(\\log N)\\)\nであることに気を付けると、\n\\(P = 998244353\\)\nとして\n\\(O(\\log^2 N+\\log P)\\)\nです。\n実装例 :\nhttps://atcoder.jp/contests/abc300/submissions/41055526",
+      "codes": [],
+      "text_sha256": "573914bd29f89aa2b35c78bad7b5a8b43c053acb4e23d174d5151a925baaf89d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc300/abc300_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

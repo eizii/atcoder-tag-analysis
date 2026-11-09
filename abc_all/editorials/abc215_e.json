@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc215_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc215/editorial/2483",
+      "text": "結論から言うと、以下のような bitDP が成立します。\ndp[コンテスト\n\\(i\\)\n回目まで][既に出場したコンテストの種類の集合][最後に出場したコンテストの種類]={場合の数}\nこの DP の遷移は以下の通りです。\nコンテスト\n\\(i\\)\n回目の種類が\n\\(x\\)\nである時\n全ての集合\n\\(U\\)\nと任意のコンテストの種類\n\\(j\\)\nに対して、\n\\(dp[i][U][j]\\)\nに\n\\(dp[i-1][U][j]\\)\nを加算 (\n\\(i\\)\n回目のコンテストに出場しないパターン)\nもし\n\\(j=x\\)\nならさらに\n\\(dp[i-1][U][j]\\)\nを加算 (最後に出場したコンテストと同じ種類の、\n\\(i\\)\n回目のコンテストに出場するパターン)\n\\(x\\)\nを含まない全ての集合\n\\(V\\)\nと任意のコンテストの種類\n\\(j\\)\nに対して、\n\\(V\\)\nに\n\\(x\\)\nを加えたものを\n\\(V'\\)\nとして\n\\(dp[i][V'][x]\\)\nに\n\\(dp[i-1][V][j]\\)\nを加算 (最後に出場したコンテストと異なる種類の、\n\\(i\\)\n回目のコンテストに出場するパターン)\n\\(x\\)\nのみを含む集合を\n\\(W\\)\nとして\n\\(dp[i][W][x]\\)\nに\n\\(1\\)\nを加算 (初めて出場するコンテストが\n\\(i\\)\n回目であるパターン)\n以上の遷移を行う bitDP について、最終的な解は全ての集合\n\\(U\\)\nと任意のコンテストの種類\n\\(j\\)\nについての\n\\(dp[N][U][j]\\)\nの総和となります。\n計算量は\n\\(O(2^KNK)\\)\n(但し\n\\(K=10\\)\n、コンテストの種類数)となり、実行時間制限に間に合います。\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\n#define mod 998244353\n\nusing namespace std;\n\nint main(){\n  int n;\n  string s;\n  cin >> n >> s;\n  long long dp[1024][1024][10]={0};\n  for(int i=1;i<=n;i++){\n    int x=s[i-1]-'A';\n    for(int u=0;u<1024;u++){\n      for(int j=0;j<10;j++){\n        dp[i][u][j]=dp[i-1][u][j];\n        if(j==x){\n          dp[i][u][j]+=dp[i-1][u][j];\n          dp[i][u][j]%=mod;\n        }\n      }\n    }\n    for(int v=0;v<1024;v++){\n      if(v&(1<<x)){continue;}\n      for(int j=0;j<10;j++){\n        dp[i][v|(1<<x)][x]+=dp[i-1][v][j];\n        dp[i][v|(1<<x)][x]%=mod;\n      }\n    }\n    dp[i][(1<<x)][x]++;\n    dp[i][(1<<x)][x]%=mod;\n  }\n  long long res=0;\n  for(int u=0;u<1024;u++){\n    for(int j=0;j<10;j++){res+=dp[n][u][j];res%=mod;}\n  }\n  cout << res << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "fa89a37d60b50e88b91cc20ae14eddd37da9fce4ce0ce1090ef8f8d0af84c25d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc215/abc215_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

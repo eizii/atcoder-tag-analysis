@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc393_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc393/editorial/12243",
+      "text": "GCD を\n\\(x\\)\nにするためには以下の条件を満たす必要があります。\n\\(A_i\\)\nが\n\\(x\\)\nで割り切れる。\n\\(x\\)\nで割り切れる\n\\(A\\)\nの要素が\n\\(K\\)\n個以上存在する。\nこのような\n\\(x\\)\nのうち最大のものが答えとなります。\n上記の条件を計算するためにいくつかの DP テーブルを前計算していきます。以降では\n\\(M = \\max(A)\\)\nとします。\n\\(s_n\\)\nを\n\\(A\\)\nに含まれる\n\\(n\\)\nの個数とします。\n\\(s_n\\)\nは配列を用いて\n\\(A\\)\nの要素を走査しながらカウントしていけばよいので\n\\(\\mathrm{O}(N + M)\\)\nで行えます。\n次に\n\\(t_n\\)\nを\n\\(A\\)\nに含まれる\n\\(n\\)\nの倍数の個数とします。以降では\n\\(d \\vert n\\)\nを「\n\\(d\\)\nは\n\\(n\\)\nを割り切る」という意味で使います。\n\\(t_n\\)\nと\n\\(s_n\\)\nの間には\n\\[t_d = \\sum_{d \\vert n} s_n\\]\nという関係式が成り立つので、次の 2 重 for 文の要領で\n\\(t_n\\)\nを全て計算できます。\nこの二重 for 文の計算量はいわゆる調和級数(の\n\\(M\\)\n倍)で抑えられるので\n\\(\\mathrm{O}(M \\log M)\\)\nです。\n最後に\n\\(u_n\\)\nを\n\\(A_i = n\\)\nの時の答えとします。\n\\(u_n\\)\nと\n\\(t_n\\)\nの間には\n\\[\nu_n  =\\max(\\left\\lbrace d \\vert n かつ t_d \\geq K を満たす d\\right\\rbrace)\n\\]\nという関係式が成り立つので、\n\\(u_n\\)\nは以下の 2 重 for 文で計算できます。この二重 for 文の計算量もまた\n\\(\\mathrm{O}(M \\log M)\\)\nです。\nあとは各\n\\(i\\)\nについて\n\\(u_{A_i}\\)\nを出力すればよいです。\n以上の方法でこの問題を時間計算量\n\\(\\mathrm{O}(N + M \\log M)\\)\n, 空間計算量\n\\(\\mathrm{O}(N + M)\\)\nで解くことが出来て、これは十分高速です。\n実装例(C++)\n以下は余談ですが、この問題は別解が多くあります。\n時間計算量が\n\\(\\mathrm{O}(N \\sqrt{M} + M \\log M)\\)\n掛かる解法\n空間計算量が\n\\(\\mathrm{O}(M \\log M)\\)\n掛かる解法\nいずれの解法も工夫した実装を行えば 2 秒の TL に間に合いますが、特に前者は実装によっては TLE すると思います。ご了承ください。",
+      "codes": [
+        "for(int d = 1; d <= M; d++) {\n  for(int n = d; n <= M; n += d) {\n    t[d] += s[n];\n  }\n}",
+        "for(int d = 1; d <= M; d++) {\n  if(t[d] < K) continue;\n  for(int n = d; n <= M; n += d) {\n    u[n] = max(u[n], d);\n  }\n}",
+        "#include <algorithm>\n#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n  cin.tie(0)->sync_with_stdio(0);\n\n  int N, K;\n  cin >> N >> K;\n  vector<int> A(N);\n  for (auto& a : A) cin >> a;\n  int M = *max_element(begin(A), end(A));\n  vector<int> s(M + 1), t(M + 1), u(M + 1);\n  for (auto& a : A) s[a]++;\n  for (int d = 1; d <= M; d++) {\n    for (int n = d; n <= M; n += d) {\n      t[d] += s[n];\n    }\n  }\n  for (int d = 1; d <= M; d++) {\n    if (t[d] < K) continue;\n    for (int n = d; n <= M; n += d) {\n      u[n] = max(u[n], d);\n    }\n  }\n  for (auto& a : A) cout << u[a] << \"\\n\";\n}"
+      ],
+      "text_sha256": "084be184fb24a26ec9785fb7c038a5271e6278ac87b8471bc7819f5586ff3741",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc393/abc393_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc393/editorial/12257",
+      "text": "公式解説の\n\\(s_n, t_n, u_n\\)\nの間に成り立つ関係式は、約数・倍数ゼータ変換の形になっています。そのため、\n\\(O(N + M\\log\\log M)\\)\n時間で計算できます。計算方法は\nnoshi91 さんの記事\nなどが参考になります。\n約数・倍数ゼータ変換は和で計算することが多いですが、一般には可換モノイドが載ります。\n\\(u_n\\)\nの計算は可換モノイド\n\\((\\mathbb{Z}, \\max)\\)\n上での約数ゼータ変換として行えます。",
+      "codes": [],
+      "text_sha256": "a1cd1078b82b0417a99dee5226676616328b50f917144a193f8c32810ef6e462",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc393/abc393_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc089_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc089/editorial.pdf",
+      "text": "B:  Hina Arare\n\n 袋には必ず桃色、白色、緑色のひなあられが入っていることが保証されるので、3 種類か4 種\n類かの判別は黄色のひなあられの有無で判別できます。\n よって、黄色のひなあられがあれば‘Four‘、なければ‘Three‘ と出力するとよいです。\n\n#include <cstdio >\nint N;\nchar c;\nint main ()\n{\n         scanf (\"%d\",&N);\n         bool flag=false;\n        for(int i=0;i<N;i++)\n          {\n                 scanf (\"%c\",&c);\n                if(c==’Y’) flag=true;\n          }\n        if(flag)puts (\" Four \");\n         else puts (\" Three \");\n}\n\n\n\n\n\n                                         1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "3dd1c65590cfac88d7b731f759122c9be6795015b1ea4dfeb8e870c85ca23860"
+    }
+  ],
+  "status": "available"
+}

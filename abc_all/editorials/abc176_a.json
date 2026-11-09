@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc176_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc176/editorial/60",
+      "text": "まず、たこ焼きを何回焼く必要があるかを求め、その後かかる時間を掛け算することで、答えを求めることが出来ます。\nたこ焼きを何回焼くかですが、これは\n\\(N / X\\)\nを切り上げたものになります。ここで、天井関数\nceil\nを用いて、\nceil(N/X)\nなどと書きたくなりますが、これは多くの言語において不正解となります。\nやり方は複数ありますが、例えば以下のように書くのが最も分かりやすいです。\n多くの言語において、整数の除算は切り捨てとなるので、切り捨てられる時だけ\n\\(+1\\)\nしてあげることで、正しく切り上げ計算をすることが出来るようになります。\nこの計算は、実は以下のような表現でも行うことが出来ます。\nこの式においては、割られる数に\n\\(X-1\\)\nを足してあげることにより、ちょうど割り切れる時以外は答えが\n\\(1\\)\n増えるようになっています。頻出テクニックなので覚えておくと良いかもしれません。\nまた、ceil関数を使いたいのであれば、\nなどと記述することは出来ますが、これは、整数演算を一度小数演算に変換するので、誤差などに気を使う必要が出てくるため、あまりおすすめしません。\n回答例(C++)",
+      "codes": [
+        "int times;\nif(N % X == 0) times = N / X;\nelse times = N / X + 1;",
+        "int times = (N + X - 1) / X;",
+        "int times = (int)ceil((double)N / X);",
+        "#include <iostream>\nusing namespace std;\n\nint main(){\n\t//入力を受け取る\n\tint N, X, T;\n\tcin >> N >> X >> T;\n\n\t//たこ焼きを焼く回数を求める\n\tint times = (N + X - 1) / X;\n\n\t//答えを求める\n\tint ans = times * T;\n\n\t//答えを出力する\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "d843a6ccc29fe47451e592b48c00380a6b9a0ad9234ca9a7129321ff0e7ab723",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc176/abc176_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

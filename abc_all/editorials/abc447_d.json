@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc447_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc447/editorial/16451",
+      "text": "問題を言い換えると「（連続するとは限らない）部分列で\nABC\nであるもの」を重なりのないように、なるべく多く選ぶ問題となります。\n解法\n以下のような貪欲法が正当です。直感的には「採用できるなら採用する」をする方法です。\n変数\n\\(A, B, C\\)\nを\n\\(0\\)\nで初期化する。（それぞれ\nA\n,\nB\n,\nC\nの採用した個数を管理している）\n\\(i = 1, 2, \\dots , N\\)\nについて順番に以下の処理をする。\n\\(S_i =\\)\nA\nのとき\n\\(A \\leftarrow A + 1\\)\nとする\n\\(S_i =\\)\nB\nのとき\n\\(B \\leftarrow \\min(A, B + 1)\\)\nとする\n\\(S_i =\\)\nC\nのとき\n\\(C \\leftarrow \\min(B, C+1)\\)\n最終的な\n\\(C\\)\nの値が答えとなる。\n証明\nステップ\n\\(i\\)\n終了時点における貪欲法の採用数を\n\\(A_i, B_i, C_i\\)\nとします。また、ある解における採用数を\n\\(a_i, b_i, c_i\\)\nとします。部分列として\nABC\nを構成する性質から、\n\\(A_i \\ge B_i \\ge C_i\\)\nと\n\\(a_i \\ge b_i \\ge c_i\\)\nが常に成立していることに注意して下さい。\nこのとき、すべての\n\\(i\\)\nについて以下の不等式が成り立つことを示します。\n\\[A_i \\ge a_i, \\quad B_i \\ge b_i, \\quad C_i \\ge c_i\\]\nA\nについて\n貪欲法では\nA\nを常に採用します。したがって、どのような解に対しても\n\\(A_i \\ge a_i\\)\nが常に成立します。\nB\nについて\n貪欲法が\nB\nを採用できなかったならば、その時点で\n\\(A_i = B_i\\)\nが成り立っています。どのような解においても、（\nA\nのほうが\nB\nより先に採用されるため）\n\\(a_i \\ge b_i\\)\nが成立する必要があり、以下の式が成立します。\n\\[B_i = A_i \\ge a_i \\ge b_i\\]\nよって、\n\\(B_i \\ge b_i\\)\nが成立します。\nC\nについて\nB\nと同様の議論（\n\\(C_i = B_i \\ge b_i \\ge c_i\\)\n）が成立します。\n以上より すべての\n\\(i\\)\nで\n\\(C_i \\ge c_i\\)\nですから、\n\\(C_N \\ge c_N\\)\nも成立します。これは、上の貪欲がどのような採用方法よりも\nABC\nの個数が小さくならないことを意味します。よって示されました。\nPython の実装例",
+      "codes": [
+        "s = input()\na, b, c = 0, 0, 0\nfor i in s:\n    if i == \"A\":\n        a += 1\n    if i == \"B\":\n        b = min(a, b + 1)\n    if i == \"C\":\n        c = min(b, c + 1)\nprint(c)"
+      ],
+      "text_sha256": "4db02c763b7e31d649fcc6a5c91c8a7b68903c29312c7dd1daefe1522eda342a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc447/abc447_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

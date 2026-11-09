@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc076_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc076/editorial.pdf",
+      "text": "C: Reconciled?\n\n N とM の差(の絶対値) が2 以上のとき、条件を満たすように並べることはできません。\n\n\n\n                                             2\n\f\n N とM の差が1 のとき、N + 1 = M とすれば、条件を満たすためには猿犬猿... 犬猿の順に並べるこ\n\nとになります。このような並べ方は、犬N 匹を並べる場合の数と、猿M 匹を並べる場合の数の積なので、\n\nN!M! 通りです。M + 1 = N の場合も同様です。\n\n N = M のとき、猿犬猿... 猿犬と犬猿犬... 犬猿の2 種類の並べ方があります。上記の場合と同じように考\n\nえれば、それぞれN!M! 通りの並べ方があることがわかるので、全体の場合の数は2N!M! 通りです。\n  109 + 7 で割ったあまりを求めるのを忘れないようにしてください。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "3967f8d3e042fd69b67405ec63b3b5ca92e249b1f196af14508e2611e8e4e92d"
+    }
+  ],
+  "status": "available"
+}

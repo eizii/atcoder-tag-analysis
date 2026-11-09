@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc401_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc401/editorial/12691",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nC++入門 AtCoder Programming Guide for beginners (APG4b)\nは、競技プログラミングのための C++ 入門用コンテンツです。\nPython入門 AtCoder Programming Guide for beginners (APG4bPython)\nは、競技プログラミングのための Python 入門用コンテンツです。\nこの問題は、次のような手順をプログラムすることで解くことができます。\n標準入力から整数 \\(S\\) を受け取る。\n\\(S\\) が \\(200\\) 以上 \\(299\\) 以下なら、\nSuccess\nと出力する。\nそうでなければ、\nFailure\nと出力する。\nif-else 文を適切に利用することで、この問題を解くことができます。\n実装例は以下のようになります。\nC++ での実装例\nPython での実装例\nif-else 文を複数繋げる（Python では elif を使う）ことで、それぞれの条件を \\(1\\) つの整数との比較にすることもできます。\nC++ での実装例\nPython での実装例",
+      "codes": [
+        "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    int S;\n    cin >> S;\n\n    if (200 <= S && S <= 299) {\n        cout << \"Success\" << endl;\n    } else {\n        cout << \"Failure\" << endl;\n    }\n}",
+        "S = int(input())\n\nif 200 <= S <= 299:\n    print('Success')\nelse:\n    print('Failure')",
+        "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    int S;\n    cin >> S;\n\n    if (S < 200) {\n        cout << \"Failure\" << endl;\n    } else if (S <= 299) {\n        cout << \"Success\" << endl;\n    } else {\n        cout << \"Failure\" << endl;\n    }\n}",
+        "S = int(input())\n\nif S < 200:\n    print('Failure')\nelif S <= 299:\n    print('Success')\nelse:\n    print('Failure')"
+      ],
+      "text_sha256": "9b823c4726ccede3a95f24ce2e90f984fb136ce45d03569d6b1a4cb3c43731d9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc401/abc401_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

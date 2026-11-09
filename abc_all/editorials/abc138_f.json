@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc138_f",
+  "editorials": [
+    {
+      "text": "F: Coincidence\n(原案: camypaper, 準備・解説: evima)\ny のMSB (Most Signiﬁcant Bit: 最上位ビット) の位置をm とします(つまり、y の2m の位の桁は1\nで、任意の整数n (n > m) に対してx の2n の位の桁は0 です)。ここでx の2m の位の桁が0 であると仮\n定すると、XOR の定義よりx XOR y の2m の位の桁は1 となります。しかし、一般に整数x, y (y ≥x) に\n対してy をx で割った余りはy の半分未満であり*4、これはy をx で割った余りのMSB の位置がm 未満\nであることを意味するため、y をx で割った余りはx XOR y と決して一致しません。よって、x のMSB の\n位置もm である場合のみ考えれば十分です。このときy をx を割った商は1 であるため、y をx で割った\n余りは単にy −x と書けます。以上を整理すると、答えは次の条件を満たす整数の組(x, y) の個数です。\n• L ≤x ≤y ≤R\n• x とy のMSB の位置が同じである。\n• y −x = x XOR y\ny −x = x XOR y という条件は、y −x という二進数の引き算において繰り下がりが起こらないことと同\n値であり、「どの整数i に対しても、y の2i の位の桁が0 であってx の2i の位の桁が1 であるということ\nはない」と書き換えられます(このときx ≤y は無条件に満たされ、この不等式は以後考慮する必要がなく\nなります)。あとはこの条件に加えてさらに「L ≤x」「y ≤R」「x とy のMSB の位置が同じ」という三つ\nの条件を満たす二本の01 列を数える問題となり、これは動的計画法によりO(log Y ) 時間で解けます。詳細\nは実装例*5を参照してください。\n(おらず)、y < R であることが確定しており(おらず)、両者のMSB がすでに現れている(いない) 場合の残りの桁の決め方の数\n\nABC 138 Editorial\ncamypaper, evima, sheyasutaka, tozangezan, yosupo\nAugust 18, 2019\n",
+      "text_sha256": "f927eb3f793b221392c2bb5c7d41a47ec1935e3d43608ab263a81334943cfab8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc138/abc138_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

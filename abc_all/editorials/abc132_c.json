@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc132_c",
+  "editorials": [
+    {
+      "text": "C. Dividing Problems(writer : yuma000)\n結論から言うと、\n• 　N/2 番目に難しい問題が「ARC 用の問題」、N/2 −1 番目に難しい問題が「ABC 用の問題」となる\nこと\n• 　「ARC 用の問題」の数と「ABC 用の問題」の数が同じになること\nは、同値であると言えます。よって、解法は以下のようになります。\n1. 　問題を難易度順に昇順でソートする。\n2. 　N/2 番目の要素から、N/2 −1 番目の要素を引いたものを出力する。\n多くの言語にはソート用のライブラリが用意されているので、それを利用するのが良いでしょう。(C++ な\nらstd::sort)\n以下が、C++ のサンプルコードです。\n1 #include<iostream>\n2 #include<algorithm>\n3 #include<vector>\n4 using namespace std;\n5\n6 int main(){\n7\nint N;cin>>N;\n8\nvector<int>v(N);\n9\nfor(int i=0;i<N;++i){\n10\ncin>>v[i];\n11\n}\n12\nsort(v.begin(),v.end());\n13\n14\nint answer=v[v.size()/2]-v[v.size()/2-1];\n15\n16\ncout<<answer<<endl;\n17\n18\nreturn 0;\n19 }\n",
+      "text_sha256": "dfa6d491abf63eef4f356f7b8aa4bf5726f2987327054c382c464bad379ac745",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc132/abc132_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

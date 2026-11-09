@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc238_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc238/editorial/3359",
+      "text": "\\(x,y\\)\nをそれぞれ二進表記したとき、両方が\n\\(1\\)\nとなるような位の集合を\n\\(A\\)\n、片方が\n\\(1\\)\nとなるような位の集合を\n\\(B\\)\nとします（\n\\(2^0\\)\nの位、\n\\(2^1\\)\nの位、\n\\(\\cdots\\)\n）。\nまず、\n\\(A \\cap B = \\emptyset\\)\nであることは明らかです。そしてまた、\n\\(\\sum_{x \\in A} x = a\\)\n、\n\\((2 \\times \\sum_{x \\in A} x)+(\\sum_{y \\in B} y)=s\\)\nであることも分かります。\nよって、\n\\(\\sum_{x \\in A} x = a\\)\n、\n\\(\\sum_{y \\in B} y = s-(2 \\times \\sum_{x \\in A} x)\\)\nと復元することができ、故に問題文中の条件を満たすような非負整数対\n\\((x,y)\\)\nが存在する必要条件の\n\\(1\\)\nつは\n\\(B\\)\nと\n\\(\\sum_{y \\in B} y\\)\nが一対一で対応すること（\n\\(B\\)\nは\n\\(\\sum_{y \\in B} y\\)\nを二進数表記した際に\n\\(1\\)\nとなるような位の集合と一致する）を踏まえると以下のようになります。\n\\(2a \\leq s\\)\nかつ\n\\((s-2a)\\ \\text{AND}\\ a = 0\\)\nそしてこの条件は、実は十分条件でもあります。\n\\(a,s\\)\nがこれを満たすとき、\n\\(x=a,y=s-a\\)\nとなるような\n\\((x,y)\\)\nが問題文中の条件を必ず満たします。\nよってこの問題を解くことができました。実装の際は各言語に備わっているビット演算を用いると便利です。\n実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nusing ll = long long;\n\nint main(){\n\tll T; cin >> T;\n\twhile(T--){\n\t\tll a,s; cin >> a >> s;\n\t\tstring ans = \"No\";\n\t\tif(2*a <= s){\n\t\t\tll differ = s-2*a;\n\t\t\tif((differ & a) == 0) ans = \"Yes\";\n\t\t}\n\t\tcout << ans << endl;\n\t}\n}"
+      ],
+      "text_sha256": "f87da5d44f949cd1c248ec251ee716c5f00acb3e36a734582958a9c4637720c2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc238/abc238_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc238/editorial/3512",
+      "text": "\\(\\text{AND}\\)\nと\n\\(+\\)\nで表された条件を\n\\(\\text{AND}\\)\nと\n\\(\\text{OR}\\)\nに読み替えて 解く方法について解説します。\nまずビット演算全般について、それぞれ「ビットごとに ○○ する演算」と言い換えられます。○○ の部分は、例えば\n\\(\\text{AND}\\)\n：\n\\(\\min\\)\n、\n\\(\\bmod \\, 2\\)\nでの積\n\\(\\text{OR}\\)\n：\n\\(\\max\\)\n\\(\\text{XOR}\\)\n：\n\\(\\bmod \\, 2\\)\nでの和\n\\(\\text{NOT}\\)\n：\n\\(\\bmod \\, 2\\)\nでの\n\\(+1\\)\nとなります。今回は\n\\(\\text{AND}\\)\n：\n\\(\\min\\)\n、\n\\(\\text{OR}\\)\n：\n\\(\\max\\)\nの解釈を利用します。\nさて、\n\\(\\min\\)\nと\n\\(\\max\\)\nと\n\\(+\\)\nについては、恒等式\n\\[ \\min(p, q) + \\max(p, q) = p + q \\]\nが成り立ちます。\n「小さい方\n\\(+\\)\n大きい方\n\\(=\\)\n和」という当たり前の式ですね。\nこれをビットごとに適用してやると、恒等式\n\\[ (x \\: \\text{AND} \\: y) + (x \\: \\text{OR} \\: y) = x + y \\]\nが得られます。\n先の恒等式より、問題文で与えられた\n\\((x, y)\\)\nに関する条件\n\\( x \\: \\text{AND} \\: y = a \\)\n\\( x + y = s \\)\nは、\n\\(a  \\le  s\\)\nならば\n\\(\\text{AND}\\)\nと\n\\(\\text{OR}\\)\nを用いた式\n\\( x \\: \\text{AND}  \\: y = a \\)\n\\( x \\: \\text{OR} \\: y = s - a \\)\nに変形できます。（同時に、\n\\(a \\gt s\\)\nのときは条件が満たされないことも分かります。）\n書き換えた後の条件を満たすような\n\\((x, y)\\)\nが存在するかどうかを考えましょう。\n以下便宜上\n\\(b = s - a\\)\nとおきます。また\n\\(x\\)\nの第\n\\(i\\)\nビットを\n\\(x \\lbrack i \\rbrack\\)\nなどと書くことにします。\n再び\n\\(\\text{AND}\\)\n：\n\\(\\min\\)\n、\n\\(\\text{OR}\\)\n：\n\\(\\max\\)\nの解釈を用います。条件を満たすためには、各第\n\\(i\\)\nビットについて、小さい方が\n\\(a \\lbrack i \\rbrack\\)\n、大きい方が\n\\(b \\lbrack i \\rbrack\\)\nになるようなビットの組\n\\((x \\lbrack i \\rbrack, y \\lbrack i \\rbrack)\\)\nが存在すれば良いです。\nこのような組は\n\\(a \\lbrack i \\rbrack \\le b \\lbrack i \\rbrack\\)\nであるときに限り存在します。（例えば\n\\((x \\lbrack i \\rbrack, y \\lbrack i \\rbrack) = (a \\lbrack i \\rbrack, b \\lbrack i \\rbrack)\\)\nとすれば良いです。）\nよって条件は全てのビットで\n\\(a \\lbrack i \\rbrack \\le b \\lbrack i \\rbrack\\)\nが成り立つことと言い換えられます。さらにこの不等式を\n\\(\\min (a \\lbrack i \\rbrack,b \\lbrack i \\rbrack) =  a \\lbrack i \\rbrack\\)\nと書き直して全てのビットについてまとめれば、\n\\(a \\: \\text{AND} \\: b = a\\)\n、すなわち\n\\(a \\: \\text{AND} \\: (s - a) = a\\)\nと書き直せます。\n以上より、\n\\(a \\le s\\)\n\\(a \\: \\text{AND} \\: (s - a) = a\\)\nであれば\nYes\n、さもなくば\nNo\nを出力すれば良いです。\n提出コード（C++）",
+      "codes": [],
+      "text_sha256": "60d0b4c6582f22c351da757d5328730bd272d27f3fc6aa5bdb6cb4980be8e6cd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc238/abc238_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc238/editorial/3374",
+      "text": "bitごとの排他的論理和をとる演算子を\n\\(\\text{XOR}\\)\nと表すことにします。\n\\(x+y=(x\\text{ XOR }y) + 2(x\\text{ AND }y)\\)\nが成り立つことから、元の問題は\n\\(\n\\begin{cases}\nx\\text{ XOR }y = p\\\\\nx\\text{ AND }y = q\n\\end{cases}\n\\)\nという連立方程式に変形することができ、bitごとに独立に解くことができます。\n類題\nABC172F『Unfair Nim』",
+      "codes": [],
+      "text_sha256": "197f9e5a78f5ae0ab09d40834c58e3273c3f77eb6fb1e07e06570e2bb2734eef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc238/abc238_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

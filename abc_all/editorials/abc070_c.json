@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc070_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc070/editorial.pdf",
+      "text": "C:  Multiple Clocks\n\n  まず、この問題で求めたい答えをA とおくと、A はTi(1 ≤i ≤N) で割り切れる最小の正の整数です。A をシ\n ミュレーションで求めようとすると、時間計算量はO(NA) となるためTLE となります。\n  ここで、A について詳しく考えていきます。A はTi(1 ≤i ≤N) で割り切れることからTi(1 ≤i ≤N) の公倍\n 数です。したがって、A は以下の式で求めることができます。\n\n     A = lcm(T1, · · · , TN) = lcm(T1, lcm(T2, · · · lcm(TN−1, TN) · · · ))\n\n  ここで、lcm(·) は最小公倍数を表します。\n    2 つの正整数の最小公倍数を直接計算することはできないため、以下の公式を利用します1。\n\n\n        ab = gcd(a, b)lcm(a, b)\n\n  ここで、gcd(·) は最大公約数を表します。\n    2 つの正整数の最大公約数はユークリッドの互除法を利用することで計算できます。ユークリッドの互除法は以\n 下の再帰関数のような形で実装できます。\n\n     1: procedure GCD(a,b)\n\n     2:      if b = 0 then\n\n     3:       return a\n\n     4:   end if\n     5:    return GCD(b, a mod b)\n\n     6: end procedure\n\n\n  以上をまとめると、ユークリッドの互除法を利用して最大公約数を求め、公式を利用して最小公倍数を計算\n することでA が求まります。ユークリッドの互除法の計算量はO(log (max Ti)) であり、全体の時間計算量は\n  O(N log (max Ti)) となるため間に合います。\n   なお、答えは1018 秒以内と保証されていますが、最小公倍数の計算の仕方によっては64 bit 整数型のオーバー\n フローが発生するので、注意してください。\n\n\n  C++のコード例\n\n\n\n 1 using ll = long long;\n\n\n 2\n\n 3 ll gcd(ll a,ll b){\n\n 4     if(b == 0) return a;\n\n 5     return gcd(b,a%b);\n\n 6 }\n\n\n 7\n\n 8 ll lcm(ll a,ll b){\n 9     ll g = gcd(a,b);\n10     return a / g * b; // Be careful not to overflow\n\n11 }\n\n\n12\n\n     13 つ以上の正整数に対しては成り立たないので注意abc ̸= gcd(a, b, c)lcm(a, b, c)\n\n\n                                                  3\n\f\n13 int main(void) {\n14     int N;\n\n15     cin >> N;\n\n\n16\n\n17     ll ans = 1LL;\n\n\n18\n\n19     for (int i = 0; i < N; ++i) {\n\n20         ll T;\n\n21         cin >> T;\n\n22         ans = lcm(ans, T);\n\n23     }\n\n\n24\n\n25     cout << ans << endl;\n\n26     return 0;\n\n27 }\n\n\n\n\n\n                                                  4",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "21b4da47a699ea819ed67e848976a206b9222ffd5c30a1c04bb88f631f9ad395"
+    }
+  ],
+  "status": "available"
+}

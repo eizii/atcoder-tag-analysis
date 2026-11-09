@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc476_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc476/editorial/25811",
+      "text": "文字列の末尾の文字が e と一致するかどうかで条件分岐をし， \\(S\\) に適切な文字列を結合して出力すればよいです． 実装例 (Python) Python では， s[-1] によって \\(s\\) の末尾の文字を得ることができます．これはリストなどの他のデータ構造にも適用できます． 実装例 (C++) C++ では， s.back() によって \\(s\\) の末尾の文字を得ることができます．これは vector などの他のデータ構造にも適用できます．",
+      "codes": [
+        "s = input()\n\nif s[-1] == 'e':\n\tt = s + \"r\"\nelse:\n\tt = s + \"er\"\n\nprint(t)\n",
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n#include <string>\nusing std::string;\n\n\nint main (void) {\n\tstring s;\n\tcin >> s;\n\n\tstring t;\n\tif (s.back() == 'e') {\n\t\tt = s + \"r\";\n\t} else {\n\t\tt = s + \"er\";\n\t}\n\n\tcout << t << \"\\n\";\n\n\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "ec1ce859efc03131945e640a2d04dbec61208fc8c59a15bb9a4ba1dbca96d17c"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc173_a",
+  "editorials": [
+    {
+      "text": "A: Payment\n(解説: evima)\nプログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice\ncontest」(https://atcoder.jp/contests/practice/) の問題A「はじめてのあっとこーだー」を\nお試しください。言語ごとに解答例が掲載されています。\n「はじめての～」に正解するソースコードがあれば、今回の問題でも入出力は行えるはずです。以下\nでは、お釣りの金額を求めることに集中します。\n支払う千円札の枚数を計算する方針も考えられますが、ここでは価格N の下三桁に注目します。\n千円札のみで支払いを行う以上、N の下三桁のみがお釣りの金額に関係します。この下三桁に対応す\nる数値は、多くの言語に存在する剰余演算子% を用いてN % 1000 と求められます。\nこの値が0 であればお釣りは0 円、そうでなければ1000 からその値を引いたものがお釣りの金額\nです。ここではif 文を使うこともできますが、1000 - N % 1000 をさらに1000 で割った余りを計\n算することでも対処できます。以下は後者をC++ で実装した例です。(説明は次頁へ続きます)\n1 #include <iostream>\n2 using namespace std;\n3 int main(){\n4\nint N;\n5\ncin >> N;\n6\ncout << (1000 - N % 1000) % 1000 << endl;\n7 }\n\n言語によっては、「負の整数% 正の整数」が負になりません。そのような言語では、以下のRuby\nでの実装例のように楽をすることもできます。\n1 puts -gets.to_i % 1000\n",
+      "text_sha256": "c1b474c497487b31edc9643aa640c69db02aca9bc22386c9391634642c35b62d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc173/abc173_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

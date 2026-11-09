@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc297_b",
+  "title": "chess960",
+  "contests": [
+    {
+      "contest_id": "abc297",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 47,
+  "raw_difficulty": -455,
+  "contest_id": "abc297",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc297/tasks/abc297_b",
+  "statement": "配点 : 200 点 問題文 高橋君は chess960 と呼ばれるゲームで遊んでいます。\r\n高橋君はランダムに決めた初期配置が chess960 の条件を満たすか確認するプログラムを書くことにしました。 長さ 8 の文字列 S が与えられます。 S には K , Q がちょうど 1 文字ずつ、 R , B , N がちょうど 2 文字ずつ含まれます。 S が以下の条件を全て満たしているか判定してください。 S において左から x,y\\ (x < y) 文字目が B であるとする。このとき x と y の偶奇が異なる。 K は 2 つの R の間にある。より形式的には、 S において左から x,y\\ (x < y) 文字目が R であり、 z 文字目が K であるとする。このとき、 x< z < y が成り立つ。 制約 S は 長さ 8 の文字列であり、 K , Q がちょうど 1 文字ずつ、 R , B , N がちょうど 2 文字ずつ含まれる。 入力 入力は以下の形式で標準入力から与えられる。 S 出力 S が条件を満たす場合 Yes を、そうでない場合 No を出力せよ。 入力例 1 RNBQKBNR 出力例 1 Yes B は左から 3 番目、 6 番目にあり、 3 と 6 は偶奇が異なります。\r\nまた、 K は 2 つの R の間にあります。よって条件を満たします。 入力例 2 KRRBBNNQ 出力例 2 No K は 2 つの R の間にありません。 入力例 3 BRKRBQNN 出力例 3 No",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 高橋君は chess960 と呼ばれるゲームで遊んでいます。\r\n高橋君はランダムに決めた初期配置が chess960 の条件を満たすか確認するプログラムを書くことにしました。 長さ 8 の文字列 S が与えられます。 S には K , Q がちょうど 1 文字ずつ、 R , B , N がちょうど 2 文字ずつ含まれます。 S が以下の条件を全て満たしているか判定してください。 S において左から x,y\\ (x < y) 文字目が B であるとする。このとき x と y の偶奇が異なる。 K は 2 つの R の間にある。より形式的には、 S において左から x,y\\ (x < y) 文字目が R であり、 z 文字目が K であるとする。このとき、 x< z < y が成り立つ。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 S は 長さ 8 の文字列であり、 K , Q がちょうど 1 文字ずつ、 R , B , N がちょうど 2 文字ずつ含まれる。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 S が条件を満たす場合 Yes を、そうでない場合 No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 RNBQKBNR"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes B は左から 3 番目、 6 番目にあり、 3 と 6 は偶奇が異なります。\r\nまた、 K は 2 つの R の間にあります。よって条件を満たします。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 KRRBBNNQ"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No K は 2 つの R の間にありません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 BRKRBQNN"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 No"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc297/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:22.052624+00:00",
+  "statement_sha256": "1bd709134149f3f6959408d84ac82498b1b90d00a154007a3972bc60e165b3ee",
+  "editorials": []
+}

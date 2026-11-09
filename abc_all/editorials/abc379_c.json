@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc379_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc379/editorial/11323",
+      "text": "この問題は、すべてのマスに\n\\(1\\)\n個ずつ石を置くことができるか判定することと可能な場合は操作回数の最小値を求めることが必要です。\nすべてのマスに\n\\(1\\)\n個ずつ石を置くことができる条件\nまず、\n\\(\\sum_{i=1}^{M}A_i=N\\)\nである必要があります。以降、満たしているとします。\nこのとき、\n\\(i=1,2,\\ldots,N\\)\nについて、マス\n\\(1,2,\\ldots,i\\)\nにある石の個数が合計で\n\\(i\\)\n個以上であることが必要十分条件となっています。\nこれは、石が入っているマスの番号が小さい順に最終的なマスを\n\\(1,2,\\ldots,N\\)\nと割り当てていくことで、すべての石は必ず割り当てられた先のマスに移動させることができると考えるとわかりやすいです。\nこの条件を全ての\n\\(i\\)\nについて確認することは\n\\(N\\)\nが最大で\n\\(2 \\times 10^9\\)\nであることより少し難しいですが、マス\n\\(1,2,\\ldots,i\\)\nにある石の個数の合計が変化するような\n\\(i\\)\nが\n\\(X_1,X_2,\\ldots,X_M\\)\nの\n\\(M\\)\n個であることより、\n\\(i=X_1-1,X_2-1,\\ldots,X_M-1\\)\n\\((1 \\leq i \\leq M)\\)\nについて確認するだけで十分であることがわかります。また、番号が\n\\(i\\)\n以下のマスの石の総和を求めやすくするために\n\\(X_1 < X_2 \\ldots <X_M\\)\nをみたすように事前に適切にソートしておき、累積和を求めていくことでこの条件の確認をソート以外の部分は\n\\(O(M)\\)\nで行うことができます。\n必要な操作回数の最小値の求め方\n全ての石についてそれが入っているマスの番号の総和を考えます。操作を\n\\(1\\)\n回することでマス\n\\(i\\)\nにあった石がマス\n\\(i+1\\)\nに置かれます。このとき、マスの番号の総和が\n\\(1\\)\n増加しています。すでに条件を満たすことができるか事前に判定していれば、この値がどれだけ変化するかを元に操作回数を求めることができます。\nよって、操作回数の最小値は\n\\(\\frac{N(N+1)}{2}-\\displaystyle \\sum_{i=1}^{M}X_i  \\times A_i \\)\nとなります。\nソートがボトルネックとなり、計算量は\n\\(O(M\\log M)\\)\nになります。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    long long n;\n    int m;\n    cin >> n >> m;\n    vector<pair<int, long long>> xa(m);\n    for (int i = 0; i < m; ++i) {\n        cin >> xa[i].first;\n    }\n    for (int i = 0; i < m; ++i) {\n        cin >> xa[i].second;\n    }\n    sort(xa.begin(), xa.end());\n    long long sum = 0, sum_idx = 0;\n    for (int i = 0; i < m; ++i) {\n        if (sum < xa[i].first - 1) {\n            cout << -1 << endl;\n            return 0;\n        }\n        sum += xa[i].second;\n        sum_idx += xa[i].second * xa[i].first;\n    }\n    if (sum != n) {\n        cout << -1 << endl;\n        return 0;\n    }\n    cout << n * (n + 1) / 2 - sum_idx << endl;\n}"
+      ],
+      "text_sha256": "371d28a1e89e9747034679c004d52cd1b2cbd276862adeceb5f5e4b9baf2e429",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc379/abc379_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc447_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc447/editorial/16431",
+      "text": "問題文の通りに実装をすればよいです。実装方針は様々ありますが、以下で紹介する実装は\n頻度列（各文字が\n\\(S\\)\nに何回出現するかを管理する列）をつくる\n頻度列の最大値（= 出現回数の最大値）を求める\n最大値を\nとらない\n文字を順番に連結する\nといった手順で答えを求めています。\nPython の実装例\nC++ の実装列",
+      "codes": [
+        "s = input()\ncnt = {c : s.count(c) for c in s}\nma = max(cnt.values())\nprint(\"\".join(c for c in s if cnt[c] != ma))",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    string s; cin >> s;\n    vector<int> cnt(26, 0);\n    for (char c : s) cnt[c-'a']++;\n    int ma = *max_element(cnt.begin(), cnt.end());\n    string t = \"\";\n    for (char c : s){\n        if (cnt[c-'a'] != ma) t += c;\n    }\n    cout << t << endl;\n}"
+      ],
+      "text_sha256": "0543862a63d664f65bf4e1b40ded5b2e6f32558307eb522e7e197a261a339996",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc447/abc447_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

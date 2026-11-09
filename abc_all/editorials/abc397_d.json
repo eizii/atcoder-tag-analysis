@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc397_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc397/editorial/12454",
+      "text": "\\(\\mathrm{O}(\\sqrt{N})\\)\n解法\n制約より、\n\\(N >0\\)\nです。よって、\n\\(x^3-y^3=N\\)\nを満たすような\n\\((x,y)\\)\nについて、\n\\(y+1 \\leq x\\)\nが成り立ち、\n\\((y+1)^3-y^3=3y^2 +3y+1 \\leq x^3-y^3 =N\\)\nです。つまり、\n\\(y \\leq \\sqrt{N}\\)\nが成り立ちます。\nよって、\n\\(1\\)\n以上\n\\(\\sqrt{N}\\)\n以下の整数\n\\(k\\)\nを全探索し、\n\\(k^3+N\\)\nが立法数であるか判定し、立法数である場合は\n\\((x,y)=(\\sqrt[3]{k^3+N},k)\\)\nが解の一つとなります。\n逆に、上を満たすような\n\\(k\\)\nが存在しなければ、解は存在しません。\n以上より、時間計算量\n\\(\\mathrm{O}(\\sqrt{N})\\)\nで解くことができます。ですが、この解法では今回の制約ではACを得ることは難しいです。\n\\(\\mathrm{O}({\\sqrt[3]{N}})\\)\n解法\n\\(x-y=d\\)\nとします。\n\\(x^3-y^3=N\\)\nを満たすような\n\\((x,y)\\)\nについて、\n\\(x^3-y^3=(x-y) (x^2+xy+y^2)=d(x^2+xy+y^2)\\)\nです。また、\n\\(x^2+xy+y^2 \\geq x^2-2xy+y^2 =d^2\\)\nより、\n\\(d^3 \\leq d(x^2+xy+y^2) = x^3-y^3 =N\\)\nを満たします。\nつまり、\n\\(d \\leq \\sqrt[3]{N}\\)\nを満たします。\nよって、\n\\(1\\)\n以上\n\\(\\sqrt[3]{N}\\)\n以下の整数\n\\(d\\)\nを全探索し、\n\\((k+d)^3-k^3=d^3+3d^2 k+3dk^2=N\\)\nを満たす整数\n\\(k\\)\nが存在するか判定し、ある場合は\n\\((x,y)=(k+d,k)\\)\nが解の一つとなります。\n逆に、上を満たすような\n\\(d\\)\nが存在しなければ、解は存在しません。\n\\(d\\)\nが与えられたとき、\n\\(d^3+3d^2 k+3dk^2=N\\)\nを満たす\n\\(k\\)\nを求めるのは\n\\(3dk^2+3d^2k+d^3-N=0\\)\nと変形し、この二次方程式を解くことで求められます。今回の場合、これは二次方程式の解の公式や二分探索を用いることで解けます。\n以上より時間計算量\n\\(\\mathrm{O}(\\sqrt[3]{N})\\)\nや\n\\(\\mathrm{O}(\\sqrt[3]{N}\\log N)\\)\nなどで解くことができます。\nまた、実装の際はオーバーフローに気を付ける必要があります。\n特に、二次方程式の解を求めるとき、直接解の公式で求めるとオーバーフローすることがあります。適切な実装の下で二分探索を用いるとオーバーフローしません。\n実装例\n\\((\\mathrm{O}(\\sqrt[3]{N}\\log N))\\)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\nll sol(ll a, ll b, ll c) {\n    // ax^2 + bx + c = 0の解\n    ll l = 0, r = 600000001;\n    while (r - l > 1) {\n        ll mid = (l + r) / 2;\n        if (a * mid * mid + b * mid + c <= 0)\n            l = mid;\n        else\n            r = mid;\n    }\n    if (a * l * l + b * l + c == 0)\n        return l;\n    return -1;\n}\nint main() {\n    ll n;\n    cin >> n;\n    for (ll d = 1; d * d * d <= n; ++d) {\n        // (k+d)^3 - k^3 = d^3 + 3*d^2k + 3*d*k^2 = n\n        if (n % d != 0)\n            continue;\n        ll m = n / d; // =3*k^2 + 3*dk + d^2\n        ll k = sol(3, 3 * d, d * d - m);\n        if (k > 0) {\n            cout << k + d << \" \" << k << endl;\n            return 0;\n        }\n    }\n    cout << -1 << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "460e34917cd6649d882a8de57d224f3d979ca6ffad23cc44ce380fba44762c7f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc397/abc397_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

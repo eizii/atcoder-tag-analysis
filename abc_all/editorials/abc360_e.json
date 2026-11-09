@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc360_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc360/editorial/10310",
+      "text": "操作の対称性を考えると、ある時点で黒いボールが最も左にある確率を\n\\(p\\)\nとしたとき、左から\n\\(2, 3, \\dots ,N\\)\n番目にある確率はどれも\n\\(\\displaystyle \\frac{1 - p}{N - 1}\\)\nです。そのため、\n\\(K\\)\n回操作をした後に黒いボールが最も左にある確率が求まれば、この問題を解けます。これは動的計画法で求められます。\n\\(\\mathrm{dp}[i] := i\\)\n回操作をしたとき黒いボールが最も左にある確率\nと定義します。求めたいものは\n\\(\\mathrm{dp}[K]\\)\nです。遷移には、以下の\n\\(2\\)\nつの確率が必要です。\n黒いボールが最も左にある状態から\n\\(1\\)\n回操作して、黒いボールが最も左以外のどこかに移動する確率\n黒いボールが最も左以外のどこかにある状態から\n\\(1\\)\n回操作して、黒いボールが最も左に移動する確率\nそれぞれ\n\\(p, q\\)\nとします。DP の遷移は以下の通りです。\n\\(\\mathrm{dp}[0] = 1\\)\n\\( \\mathrm{dp}[i+1] = (1 - p) \\mathrm{dp}[i] + q(1 - \\mathrm{dp}[i])\\)\n\\(p, q\\)\nは単純な場合の数の計算で\n\\(\\displaystyle p = \\frac{2(n - 1)}{n^2}\\)\n\\(\\displaystyle q = \\frac{2}{n^2}\\)\nとわかります。これを素直に実装すると計算量\n\\(\\mathcal{O}(K)\\)\nの解法が得られます。整理すると\n\\(2\\)\n項間線形漸化式の形になり、一般項を簡単な形で表現できます (高校数学の典型的な問題です) 。累乗の計算がボトルネックとなり、\n\\(\\mathrm{dp}[K]\\)\nは計算量\n\\(\\mathcal{O}(\\log K)\\)\nで求まります。\n実装例 (C++)\nより一般に、線形漸化式の第\n\\(N\\)\n項を求める高速な方法として、行列累乗や Fiduccia のアルゴリズムがあります。",
+      "codes": [],
+      "text_sha256": "9cccbcc4075f2b8e06b96eab9fdf3590c3d5a301d0cef59738ba4eaead98bbf3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc360/abc360_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc360/editorial/10352",
+      "text": "期待値を DP のキーに直接設定する方法です．\n\\(\\mathrm{dp}[i] =\\)\n（\n\\(i\\)\n回操作を行った後の，黒いボールが左から何番目にあるかを表す値の期待値）という DP を行います．このとき，初期値は\n\\(\\mathrm{dp}[0] = 1\\)\n，答えは\n\\(\\mathrm{dp}[K]\\)\nとなります．\n遷移の方法を考えましょう．黒いボールが移動しない場合と，移動する場合に分けて考えます．\nまず黒いボールが移動しない場合です．この場合は，次に示す\n\\(2\\)\nつの場合があります．\n\\(a, b\\)\nが両方とも白いボールのある位置を示した場合．\n\\(a, b\\)\nが両方とも黒いボールのある位置を示した場合．\n\\(a, b\\)\nそれぞれについて選ぶ位置を考えることにより，前者の確率は\n\\(\\frac{(N-1)^2}{N^2}\\)\n，後者の確率は\n\\(\\frac{1}{N^2}\\)\nとなることがわかります．よって，確率は合計して\n\\(\\frac{N^2 - 2N + 2}{N^2}\\)\nとなります．\n次に，黒いボールが移動する場合です．この場合は，先ほどと同様に考えることにより，今自分の黒いボールがある位置を\n\\(j\\)\nとしたときに，\n\\(i = 1, 2, \\dots, j - 1, j +1, \\dots, N - 1, N\\)\nのそれぞれに移動する確率が\n\\(\\frac{2}{N^2}\\)\nとなることがわかります．\nよって，DP の遷移は次のように行えることがわかります．\n\\(\\mathrm{dp}[i + 1] = \\mathrm{dp}[i] \\times \\frac{N^2-2N+2}{N^2} + \\sum_{k \\neq j} k \\times\\frac{2}{N^2}\\)\nしかし，このままでは遷移に\n\\(j\\)\nの情報が必要となってしまうため，遷移を行えません．そこで，この式を次のように変形します．\n\\(\\mathrm{dp}[i + 1] = \\mathrm{dp}[i] \\times \\frac{N^2-2N+2}{N^2} + \\sum_{k} k \\times\\frac{2}{N^2} - j \\times \\frac{2}{N^2}\\)\nここで，改めて\n\\(j\\)\nの意味を考えてみると，「今黒いボールがある位置」という意味でした．そのため，実はこの値（の期待値）は，既に\n\\(\\mathrm{dp}[i]\\)\nに現れています．したがって，この式はさらに次のように変形できます．\n\\(\\mathrm{dp}[i + 1] = \\mathrm{dp}[i] \\times \\frac{N^2 - 2N + 2}{N^2} + \\sum_{k} k \\times\\frac{2}{N^2} - \\mathrm{dp}[i] \\times \\frac{2}{N^2}\\)\n結局，DP の遷移を表す式は次のような形で書けることがわかります．\n\\(\\mathrm{dp}[i + 1] = \\mathrm{dp}[i] \\times \\frac{N-2}{N} + \\frac{N + 1}{N}\\)\nあとは，この式に従って\n\\(\\mathrm{dp}[K]\\)\nの値を計算すればよいです．",
+      "codes": [],
+      "text_sha256": "f2a6d126d58540a21414e6865c15be8bf08875b739867efaa491a05aa72d2493",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc360/abc360_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc360/editorial/17275",
+      "text": "初項が\n\\(r_0\\)\nであって、\n\\(r_{n+1}=a\\cdot r_n+b \\, (n\\in\\{0, 1, \\dots\\})\\)\nで定まる線形漸化式\n\\(r\\)\nについて、\n\\(a\\neq1\\)\nならば\n\\(r\\)\nの一般項は\n\\[r_n=a^n\\left(r_0+\\frac{b}{a-1}\\right)-\\frac{b}{a-1}\\]\nで与えられます。\n公式解説\nにおける漸化式\n\\(\\text{dp}\\)\nは\n初項\n\\(\\text{dp}[0]=1\\)\n係数\n\\(a=1-\\frac{2(N-1)}{N^2}-\\frac2{N^2}=1-\\frac2N\\lt1\\)\n係数\n\\(b=\\frac2{N^2}\\)\nであることから、その一般項は\n\\[\n\\begin{aligned}\n\\text{dp}[i]&=\\left(1-\\frac2N\\right)^i\\left(1+\\frac{2/N^2}{-2/N}\\right)-\\frac{2/N^2}{-2/N} \\\\\n&=\\left(1-\\frac2N\\right)^i\\left(1-\\frac1N\\right)+\\frac1N\n\\end{aligned}\n\\]\nとなります。以上の式を用いることで、元の問題の解を\n\\(O(\\log K)\\)\n時間で計算できます。",
+      "codes": [],
+      "text_sha256": "54d1e7e6480bfaedb0a915c6ab598c1751275cdac10f4be8b2831fbec1d4a849",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc360/abc360_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

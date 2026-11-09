@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc478_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc478/editorial/26539",
+      "text": "条件を緩め、すべての条件が \\(t _ i=0\\) であるときを考えます。 このとき、\\(1,2,\\ldots,N\\) の \\(N\\) 頂点からなり、\\(u _ i\\) から \\(v _ i\\) への辺 \\((1\\le i\\le Q)\\) を張った有向グラフを \\(G\\) とすると、\\(G\\) において \\(x\\) から \\(y\\) に到達できるとき \\(A _ x\\le A _ y\\) が成り立つ必要があります。\n特に、\\(G\\) において同じ強連結成分にある頂点 \\(x,y\\) について \\(A _ x\\le A _ y\\) および \\(A _ x\\ge A _ y\\) より \\(A _ x=A _ y\\) が必要です。\n逆に、\\(G\\) において異なる強連結成分にあるような任意の \\(2\\) つの頂点 \\(x,y\\) について \\(A _ x\\ne A _ y\\) とすることができます（例えば、\\(G\\) の強連結成分に元のグラフの辺と対応する強連結成分の間に（自己ループを除いて）辺を張り、それのトポロジカル順序に沿って番号を付ければよいです）。 \\(t _ i=1\\) の条件があるときについて考えます。\n同様のグラフを考えると、これの強連結成分内の \\(2\\) 頂点 \\(x,y\\) について \\(A _ x=A _ y\\) が必要であることは変わりません。\nよって、同一の強連結成分内の \\(2\\) 頂点を結ぶ辺であって \\(t _ i=1\\) の条件に対応するものが存在するとき、条件を満たす列は存在しません。\n逆に、そのような辺が存在しないとき、条件を満たす列は存在し、上と同様の構成が条件を満たします。 時間計算量は \\(O(N+Q)\\) となります。 実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <ranges>\n#include <atcoder/scc>\n\nint main() {\n    using namespace std;\n    unsigned N, Q;\n    cin >> N >> Q;\n    atcoder::scc_graph scc(N);\n    vector<pair<unsigned, unsigned>> lt;\n    for (unsigned i{}; i < Q; ++i) {\n        unsigned t, u, v;\n        cin >> t >> u >> v;\n        --u;\n        --v;\n        scc.add_edge(u, v);\n        if (t) lt.emplace_back(u, v); // t = 1 の辺をまとめておく\n    }\n\n    vector<unsigned> ans(N);\n    // 強連結成分のトポロジカル順序に従って番号を付ける\n    for (const auto& [i, component] : scc.scc() | views::enumerate)\n        for (const auto x : component)\n            ans[x] = i + 1;\n\n    // 矛盾が生じたら \n    for (const auto& [u, v] : lt)\n        if (ans[u] == ans[v]) {\n            cout << \"No\" << endl;\n            return 0;\n        }\n    cout << \"Yes\" << endl;\n    for (string delim{}; const auto a : ans) cout << a << \" \";\n    cout << endl;\n    return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "fcbc19d63657b36ad77d671cddcd7737bee235fe77b13775b531abda13153275"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc209_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc209/editorial/2227",
+      "text": "商品の値段の総和を格納する変数を用意し、for 文などを用いて\n\\(N\\)\n回ループを回して問題文の通りに各商品の値段を用意した変数に加算していけばよいです。最後に商品の値段の総和と\n\\(X\\)\nとの大小を比較します。\n添字を\n\\(0\\)\nから始める場合は偶奇が逆転することに注意してください。\n実装例 (C++)\nなお、以下のように書くことも可能です。\n実装例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N, X; cin >> N >> X;\n    int sum = 0;\n    for(int i = 1; i <= N; i++){\n        int A; cin >> A;\n        if(i%2 == 0)A--;\n        sum += A;\n    }\n    if(X >= sum) cout << \"Yes\" << endl;\n    else  cout << \"No\" << endl;\n}",
+        "N, X = map(int, input().split())\nA = list(map(int, input().split()))\nif sum(A) - N//2 <= X :\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "b684219fb206747597c5b64351f9003cc3b1f934638049cea7f09d6e6f3249cd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc209/abc209_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

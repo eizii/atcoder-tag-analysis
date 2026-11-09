@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc216_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc216/editorial/2559",
+      "text": "「各色で塗られたボールはちょうど\n\\(2\\)\nつずつ存在する」という制約より、以下の事柄が成立します。\n一番上に置かれているボールの色が同じであるような筒の組が複数存在する場合、それらに対してどのような順番で問題文中の操作を行っても答え、すなわち「\n\\(M\\)\n本の筒全てを空にすることは可能か」という問題に対する判定結果は変わらない。\nよって、この問題を解く上では以下のようなシミュレーションが有効です。\n以下の操作を\n\\(N\\)\n回繰り返す。\n一番上に置かれているボールの色が同じであるような筒の組が存在しないなら、\nNo\nを出力してプログラムを終了する。\nそうでなく、一番上に置かれているボールの色が同じであるような筒の組が存在するなら、そのうちの一組を適当に選び、問題文中の操作を行う。\n\\(N\\)\n回の操作が終わった時点でプログラムが終了していなければ、\nYes\nを出力する。\n上記のシミュレーションの計算量は、愚直に行うと\n\\(O(NM^2)\\)\nないし\n\\(O(NM)\\)\nとなります。しかし、\n\\(\\text{cnt}[i]:=(\\)\nある筒の一番上に置かれているようなボールのうち、色が\n\\(i\\)\nであるものの個数\n\\()\\)\nとした配列\n\\(\\text{cnt}\\)\nを用意した上で、それを更新しつつ\n\\(\\text{cnt}[i]=2\\)\nとなるような整数\n\\(i\\)\nの集合を queue などを用いて管理することで計算量を\n\\(O(N+M)\\)\nまで改善することが可能です。\n実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint N,M; cin >> N >> M;\n\tqueue<int> que;\n\tvector<queue<int>> A(M);\n\tvector<vector<int>> mem(N);\n\tfor(int i=0; i<M; i++){\n\t\tint k; cin >> k;\n\t\tfor(int j=0; j<k; j++){\n\t\t\tint a; cin >> a;\n\t\t\tA[i].push(a-1);\n\t\t}\n\t\tmem[A[i].front()].push_back(i);\n\t}\n\tfor(int i=0; i<N; i++){\n\t\tif(mem[i].size() == 2){\n\t\t\tque.push(i);\n\t\t}\n\t}\n\twhile(!que.empty()){\n\t\tint now = que.front(); que.pop();\n\t\tfor(auto p: mem[now]){\n\t\t\tA[p].pop();\n\t\t\tif(!A[p].empty()){\n\t\t\t\tmem[A[p].front()].push_back(p);\n\t\t\t\tif(mem[A[p].front()].size() == 2){\n\t\t\t\t\tque.push(A[p].front());\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tfor(auto p: A){\n\t\tif(!p.empty()){\n\t\t\tcout << \"No\" << endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\tcout << \"Yes\" << endl;\n}"
+      ],
+      "text_sha256": "6ec52cf74563ffdedc4c88cc6a2bd03bf215de5d0850965cdb67b53860144e00",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc216/abc216_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

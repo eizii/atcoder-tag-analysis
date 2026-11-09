@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc435_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc435/editorial/14709",
+      "text": "原案： ynymxiaolongbao マス \\(i-1,i\\) をともに塗ることができる色の集合を \\(C_i\\) とします。 \\(\\mathrm{dp}[i][c]\\) を「条件を満たす並べ方のうち、色が塗られた最も右のマスが \\(i\\) で、その色が \\(c\\) である方法の数」と定めます。 \\(S_k=\\sum_{i\\leq k}\\sum_c \\mathrm{dp}[i][c]\\) とおきます。求める値は \\(S_N\\) です。定義から \\(\\mathrm{dp}[i][c]=\\begin{cases}\nS_{i-2}-\\mathrm{dp}[i-2][c] & c\\in C_i\\\\\n0 & c\\not \\in C_i  \\end{cases}\\) なので \\(S_k\\\\\n=S_{k-1}+\\sum_c \\mathrm{dp}[k][c]\\\\\n=S_{k-1}+|C_k|S_{k-2}-\\sum_{c\\in C_k}\\mathrm{dp}[k-2][c]\\) という漸化式が得られます。この第 \\(3\\) 項を高速に計算します。 整数または \\(\\bot\\) からなる配列 \\(T_k\\) を \\(T_k[c]=\\begin{cases}\n\\mathrm{dp}[k-2][c] & c \\in C_k\\\\\n\\bot & c \\not \\in C_k\n\\end{cases}\\) と定め、 \\(|T_k|=|\\{c \\mid T_k[c]\\neq \\bot\\}|\\) 、 \\(\\mathop{\\mathrm{sum}}T_k=\\sum_{T_k[c]\\neq \\bot}T_k[c]\\) と定めます。 \\(\\mathrm{dp}\\) の定義から \\(T_{k-2}[c]\\) から \\(T_{k}[c]\\) への変化は \\( c \\in C_k \\cap C_{k-2}\\) のとき \\(T_{k-2}[c] \\to S_{k-4}-T_{k-2}[c]\\) \\(c \\in C_k \\setminus C_{k-2}\\) のとき \\(\\bot \\to 0\\) \\(c \\in C_{k-2} \\setminus C_k\\) のとき \\(T_{k-2}[c] \\to \\bot\\) それ以外のとき \\(\\bot \\to \\bot\\) となります。よって、 \\(T'_k[c]=S_{k-4}-T_{k-2}[c]\\) と定めると、 \\(T'_k[c]\\neq T_k[c]\\) となる \\((k,c)\\) の組は高々 \\(2M\\) 個です。 \\(T_{k-2}\\) から \\(T'_k\\) への変換は、要素全体にかかる-1倍・定数加算及び \\(|T_k|,\\mathop{\\mathrm{sum}}T_k\\) を別で管理することで \\(O(1)\\) でin-placeに更新できるとみなせ、 \\(T'_k\\) から \\(T_k\\) への更新は愚直にやることで、全体で \\(O(N+M)\\) で \\(T_k\\) を順に求めることができます。 \\(S_k=S_{k-1}+|T_k|S_{k-2}-\\mathop{\\mathrm{sum}}T_k\\) であったことから、全体で \\(O(N+M)\\) でこの問題を解くことができます。",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "0bb37701276ddc687ee6c92a43e09d64e15da10f49c07ec01d20e29cf0f95b2b"
+    }
+  ],
+  "status": "available"
+}

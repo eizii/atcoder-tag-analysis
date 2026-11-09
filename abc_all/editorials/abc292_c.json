@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc292_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5872",
+      "text": "\\(\\mathrm{O}(N \\sqrt{N})\\)\n解法\n\\(A,B,C,D\\)\nとしてあり得るもの全てについて\n\\(AB+CD=N\\)\nを満たすかどうかを調べると\n\\(\\mathrm{O}(N^4)\\)\nで答えを求められますが、これは実行時間制限に対して遅すぎます。\n\\(A,B,C\\)\nの値を仮定すると\n\\(AB+CD=N\\)\nを満たす\n\\(D\\)\nは高々\n\\(1\\)\n個であり、\n\\(N-AB\\)\nがせいかつ\n\\(C\\)\nの倍数かどうかを調べることで存在するかどうかも判定出来るため、\n\\(A,B,C\\)\nを全探索することで\n\\(\\mathrm{O}(N^3)\\)\nになりますが、これもやはり遅すぎます。\n\\(AB\\)\nの値を\n\\(X\\)\nと仮定すると、\n\\(CD\\)\nの値\n\\(Y\\)\nは\n\\(N-X\\)\nと定まります。また、先ほどと同様の論理で\n\\(A\\)\nの値を仮定すると\n\\(B\\)\nの値が、\n\\(C\\)\nの値を仮定すると\n\\(D\\)\nの値が定まります。\n\\(X\\)\nの値、\n\\(A\\)\nの値、\n\\(C\\)\nの値を全探索すると先ほどと同様\n\\(\\mathrm{O} (N^3)\\)\nとなりますが、\n\\(X=AB\\)\nを満たす\n\\(A,B\\)\nの個数、および\n\\(Y=CD\\)\nを満たす\n\\(C,D\\)\nの個数は独立に求められるため、\n\\(\\mathrm{O}(N^2)\\)\nで求められます。また、\n\\(A\\leq B\\)\nと仮定すると\n\\(X=AB\\)\nを満たす\n\\(A\\)\nは\n\\(A \\leq \\sqrt{X}\\)\nを満たすため、(\n\\(C,D\\)\nも同様に調べることで)\n\\(\\mathrm{O}(N \\sqrt{N})\\)\nで答えを求められます。\n実装例 (C++)\n\\(\\mathrm{O}(N \\log N)\\)\n解法\n\\(AB=X\\)\nを満たす正整数\n\\(A,B\\)\nの個数は\n\\(X\\)\nの正の約数の個数に等しいです。また、正の整数\n\\(x\\)\nに対し、\n\\(x\\)\nを約数に持つ正の整数は\n\\(x,2x,3x,\\ldots\\)\nです。このため、長さ\n\\(N\\)\nの配列を用意し、\n\\(x=1,2,\\ldots\\)\nに対して添え字が\n\\(x\\)\nの倍数の値を\n\\(1\\)\n増やす、という処理をすることで各値が何個約数を持つかを求めることが出来ます。\nまた、上の加算処理は各\n\\(x\\)\nに対して\n\\(\\frac {N}{x}\\)\n回程度行われるため、全体では\n\\(\\frac{N}{1} + \\frac{N}{2} + \\ldots + \\frac{N}{N}\\)\n回程度行われます。これは\n\\(\\mathrm{O}(N \\log N)\\)\nと評価出来ることが知られており(調和級数と調べると出てきます)、先の\n\\(\\mathrm{O}(N \\sqrt{N})\\)\n解法よりも高速に動作します。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N;\n\tcin>>N;\n\t\n\tlong long ans = 0;\n\t\n\tfor(int i=1;i<N;i++){\n\t\tint X = i,Y = N-i;\n\t\tlong long x = 0,y = 0;\n\t\tfor(int j=1;j*j<=X;j++){\n\t\t\tif(X%j==0){\n\t\t\t\tx++;\n\t\t\t\tif(X!=j*j)x++;\n\t\t\t}\n\t\t}\n\t\tfor(int j=1;j*j<=Y;j++){\n\t\t\tif(Y%j==0){\n\t\t\t\ty++;\n\t\t\t\tif(Y!=j*j)y++;\n\t\t\t}\n\t\t}\n\t\tans += x * y;\n\t}\n\t\n\tcout<<ans<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "7e9579dee80d7b397d1d33d995d119501ccfafbd7f345e344703cb07ff5d508d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc292/abc292_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5912",
+      "text": "この問題は、\\(O(N)\\) 時間で解くこともできます。\n線形篩を用いることで、\\(i=1,2,\\ldots,N\\) について、\\(i\\) の約数の個数 \\(d(i)\\) を求めることができます。\n\\(\\operatorname{lpf} _ i\\coloneqq i\\) の最小素因数 とします。\n線形篩は、\\(\\dfrac n{\\operatorname{lpf} _ n}\\rightarrow n\\) なる遷移のみを考えることで \\(i=2,3,\\ldots,X\\) についての \\(\\operatorname{lpf} _ i\\) を時間計算量 \\(\\Theta(X)\\) で全て求めるアルゴリズムです。\n線形篩の詳細は\nこちらの解説\nにあるリンクを参考にしてください。\n\\(\\operatorname{lpf} _ n\\) が求まっているとき、\\(m=\\dfrac n{{\\operatorname{lpf} _ i} ^ k}\\ (k\\) は整数 \\(,m\\not\\equiv0\\pmod{\\operatorname{lpf} _ i})\\)  によって \\(d(n)\\) を次のように再帰的に求めることができます。\n\\[d(n)=\\left\\{\\begin{matrix}1&\\ &(n=1)\\\\ d(m)(k+1)&&(n\\neq1)\\end{matrix}\\right.\\]\n\\(m\\) は愚直に求めても全体で \\(O(N)\\) 時間になることが示せますし、線形篩で \\(\\operatorname{lpf} _ i\\) を求めるのと並行して求めてもよいです。\nあとは、\\(i=1,2,\\ldots,N-1\\) について、\\(d(i)d(N-i)\\) を求めて合計すればよいです。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <numeric>\n\nint main(){\n    using namespace std;\n\n    unsigned N;\n    cin >> N;\n    vector<unsigned> divisor_count(N + 1);\n\n    // 線形篩で d(i) を求める\n    {\n        vector<unsigned> primes, least_prime_factor(N + 1), prev_divisor(N + 1, 1), prime_power(N + 1, 1);\n        for(unsigned i = 2; i <= N; ++i){\n            if(!least_prime_factor[i]){\n                primes.emplace_back(i);\n                least_prime_factor[i] = i;\n                prime_power[i] = 1;\n            }\n            for(const auto p : primes){\n                if(p * i > N)break;\n                least_prime_factor[p * i] = p;\n                if(p == least_prime_factor[i]){\n                    prev_divisor[p * i] = prev_divisor[i];\n                    prime_power[p * i] = prime_power[i] + 1;\n                    break;\n                }\n                prev_divisor[p * i] = i;\n                prime_power[p * i] = 1;\n            }\n        }\n        divisor_count[1] = 1;\n        for(unsigned i = 2; i <= N; ++i)divisor_count[i] = divisor_count[prev_divisor[i]] * (prime_power[i] + 1);\n    }\n    \n    // ∑_i d(i)d(N - i) が答え\n    cout << inner_product(begin(divisor_count), end(divisor_count), rbegin(divisor_count), 0UL) << endl;\n    \n    return 0;\n}"
+      ],
+      "text_sha256": "a0cbf07591d0b6d1ea902b1939fd1607e89252e113d58d20ecff3b169b9ce8b5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc292/abc292_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

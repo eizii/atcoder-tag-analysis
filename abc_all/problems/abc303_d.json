@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc303_d",
+  "title": "Shift vs. CapsLock",
+  "contests": [
+    {
+      "contest_id": "abc303",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 778,
+  "raw_difficulty": 778,
+  "contest_id": "abc303",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc303/tasks/abc303_d",
+  "statement": "配点 : 400 点 問題文 あなたのパソコンのキーボードには、a キー・Shift キー・CapsLock キーの 3 種類のキーがあります。また、CapsLock キーにはランプが付いています。\n初め、CapsLock キーのランプは OFF であり、パソコンの画面には空文字列が表示されています。 あなたは、以下の 3 種類の操作のうち 1 つを選んで実行するということを 0 回以上何度でも行うことができます。 X ミリ秒かけて a キーのみを押す。CapsLock キーのランプが OFF ならば画面の文字列の末尾に a が付け足され、ON ならば A が付け足される。 Y ミリ秒かけて Shift キーと a キーを同時に押す。CapsLock キーのランプが OFF ならば画面の文字列の末尾に A が付け足され、 ON ならば a が付け足される。 Z ミリ秒かけて CapsLock キーを押す。CapsLock キーのランプが OFF ならば ON に、ON ならば OFF に切り替わる。 A と a からなる文字列 S が与えられます。画面の文字列を S に一致させるのに必要な最短の時間は何ミリ秒かを求めてください。 制約 1 \\leq X,Y,Z \\leq 10^9 X,Y,Z は整数 1 \\leq |S| \\leq 3 \\times 10^5 S は A と a からなる文字列 入力 入力は以下の形式で標準入力から与えられる。 X Y Z S 出力 答えを出力せよ。 入力例 1 1 3 3\nAAaA 出力例 1 9 以下のように操作を行うと 9 ミリ秒で画面の文字列を AAaA に一致させられます。これが最短の時間です。 Z(=3) ミリ秒かけて CapsLock キーを押す。CapsLock キーのランプが ON になる。 X(=1) ミリ秒かけて a キーを押す。 A が画面の文字列の末尾に付け足される。 X(=1) ミリ秒かけて a キーを押す。 A が画面の文字列の末尾に付け足される。 Y(=3) ミリ秒かけて Shift キーと a キーを同時に押す。 a が画面の文字列の末尾に付け足される。 X(=1) ミリ秒かけて a キーを押す。 A が画面の文字列の末尾に付け足される。 入力例 2 1 1 100\naAaAaA 出力例 2 6 入力例 3 1 2 4\naaAaAaaAAAAaAaaAaAAaaaAAAAA 出力例 3 40",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 あなたのパソコンのキーボードには、a キー・Shift キー・CapsLock キーの 3 種類のキーがあります。また、CapsLock キーにはランプが付いています。\n初め、CapsLock キーのランプは OFF であり、パソコンの画面には空文字列が表示されています。 あなたは、以下の 3 種類の操作のうち 1 つを選んで実行するということを 0 回以上何度でも行うことができます。 X ミリ秒かけて a キーのみを押す。CapsLock キーのランプが OFF ならば画面の文字列の末尾に a が付け足され、ON ならば A が付け足される。 Y ミリ秒かけて Shift キーと a キーを同時に押す。CapsLock キーのランプが OFF ならば画面の文字列の末尾に A が付け足され、 ON ならば a が付け足される。 Z ミリ秒かけて CapsLock キーを押す。CapsLock キーのランプが OFF ならば ON に、ON ならば OFF に切り替わる。 A と a からなる文字列 S が与えられます。画面の文字列を S に一致させるのに必要な最短の時間は何ミリ秒かを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq X,Y,Z \\leq 10^9 X,Y,Z は整数 1 \\leq |S| \\leq 3 \\times 10^5 S は A と a からなる文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 X Y Z S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 1 3 3\nAAaA"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 9 以下のように操作を行うと 9 ミリ秒で画面の文字列を AAaA に一致させられます。これが最短の時間です。 Z(=3) ミリ秒かけて CapsLock キーを押す。CapsLock キーのランプが ON になる。 X(=1) ミリ秒かけて a キーを押す。 A が画面の文字列の末尾に付け足される。 X(=1) ミリ秒かけて a キーを押す。 A が画面の文字列の末尾に付け足される。 Y(=3) ミリ秒かけて Shift キーと a キーを同時に押す。 a が画面の文字列の末尾に付け足される。 X(=1) ミリ秒かけて a キーを押す。 A が画面の文字列の末尾に付け足される。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 1 1 100\naAaAaA"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 6"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1 2 4\naaAaAaaAAAAaAaaAaAAaaaAAAAA"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 40"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc303/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:29.694609+00:00",
+  "statement_sha256": "57d59b087002aa48bc3e4405dcb8f90e12f8857d7dbafcf7056dea60cbaa4543",
+  "editorials": []
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc301_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc301/editorial/6342",
+      "text": "以下、整数は\n\\(2\\)\n進数表記されているものとし、一番下の位から順番に\n\\(1\\)\n番目の位、\n\\(2\\)\n番目の位、\n\\(\\dots\\)\nと呼びます。 また、非負整数\n\\(n,i\\)\nに対して、\n\\(n\\)\nの\n\\(i\\)\n番目の位を\n\\(n[i]\\)\nと表記します。加えて、文字の\n0\n,\n1\nと数字の\n\\(0,1\\)\nを断りなく同一視します。\n整数\n\\(t\\)\nを一つ取ります。\n\\(t \\leq N\\)\nであり、\n\\(t\\)\nと\n\\(N\\)\nを上の位から順番に見ていったときに初めて数字が異なるのが\n\\(i\\)\n番目の位であるとします（\n\\(t=N\\)\nのとき\n\\(i=-1\\)\n）。すなわち、\n\\(i\\neq -1\\)\nならば、\n\\(t[i]=0\\)\nかつ\n\\(N[i]=1\\)\nすべての\n\\(j\\ (j >i)\\)\nに対して、\n\\(t[j]=N[j]\\)\nが満たされるとします。このとき、\n\\(t\\in T\\)\nとなるための必要十分条件は以下が全て満たされることです。\n\\(i\\neq -1\\)\nならば、 (\n\\(s[i]=\\)\n?\nまたは\n\\(s[i]=\\)\n0\n) かつ\n\\(N[i]=1\\)\nすべての\n\\(j\\ (j >i)\\)\nに対して、\n\\(s[j]=\\)\n?\nまたは\n\\(s[j]=N[j]\\)\nすべての\n\\(j\\ (j <i)\\)\nに対して、\n\\(s[j]=\\)\n?\nまたは\n\\(s[j]=t[j]\\)\n上\n\\(2\\)\nつの条件を満たす最大の\n\\(i\\)\nを\n\\(i^*\\)\nとします (これは\n\\(S\\)\nと\n\\(N\\)\nのみに依存します)。\n\\(i\\)\nが大きいほど\n\\(t\\)\nも大きくなることを考えると、\n\\(i=i^*\\)\nおよび\n\\(3\\)\n番目の条件を満たす\n\\(t\\)\nのうち最大のものが求める答えです。よって、以下のアルゴリズムによってこの問題を解くことができます。\n\\(i^*\\)\nを求める。ただし、上\n\\(2\\)\nつの条件を満たす\n\\(i\\)\nが存在しない場合答えは\n-1\n。\n\\(j\\ (j < i^*)\\)\nに対して、\n\\(s[j]=\\)\n?\nならば\n\\(s[j]\\)\nを\n1\nで置き換える。\n\\(j\\ (j > i^*)\\)\nに対して、\n\\(s[j]=\\)\n?\nならば\n\\(s[j]\\)\nを\n\\(N\n[j]\\)\nで置き換える。\n\\(S\\)\nを\n\\(2\\)\n進整数とみなしたときに得られる値を出力する。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint main() {\n    string s;\n    ll n;\n    cin >> s >> n;\n    \n    reverse(s.begin(), s.end());\n    while (s.size() < 60) s.push_back('0');\n    int lb = -1;\n    for (int i = 0; i < 60; i++) {\n        if (s[i] != '?' and s[i] - '0' != (n >> i & 1)) lb = i;\n    }\n    if (lb == -1) {\n        cout << n << endl;\n        return 0;\n    }\n    for (int i = lb; i < 60; i++) {\n        if (s[i] == '1' or !(n >> i & 1)) continue;\n        s[i] = '0';\n        for (int j = 0; j < i; j++) {\n            if (s[j] == '?') s[j] = '1';\n        }\n        for (int j = i + 1; j < 60; j++) {\n            s[j] = '0' + (n >> j & 1);\n        }\n        ll ans = 0;\n        for (int j = 59; j >= 0; j--) {\n            ans *= 2;\n            ans += s[j] - '0';\n        }\n        cout << ans << endl;\n        return 0;\n    }\n    cout << -1 << endl;\n}"
+      ],
+      "text_sha256": "c620c2d18c552776c422b4bca8b24eb3f2e6f6f9d2afc867ada958b7f7b8dd18",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc301/abc301_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc301/editorial/6347",
+      "text": "\\(S\\)\nの\n?\nをすべて\n0\nに変えて得られる数が\n\\(N\\)\nより大きいなら、答えは\n-1\nです。そうでないなら、いま\n0\nに変えた各桁に対して、上から順に次を行えば答えが得られます：「その桁を\n1\nに変えても数が\n\\(N\\)\nを超えないなら、\n1\nに変える」。\n実装例（Python）",
+      "codes": [
+        "S, N = list(reversed(input())), int(input())\ns = 0\nfor i in range(len(S)):\n    s |= (S[i] == '1') << i\nif s > N:\n    print(-1)\nelse:\n    for i in reversed(range(len(S))):\n        if S[i] == '?' and (s | 1 << i) <= N:\n            s |= 1 << i\n    print(s)"
+      ],
+      "text_sha256": "5bd7cc3ad96d50b7255c9376861560c5b122bbb8cfa79d0046c3b07391ac5d2a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc301/abc301_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

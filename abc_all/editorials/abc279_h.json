@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc279_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5290",
+      "text": "以下、 \\(x\\) を含む式は全て形式的べき級数であるとします。 オイラーの五角数定理 オイラーの五角数定理 (pentagonal number theorem) とは、次のような定理です。 \\[\\displaystyle \\prod_{i=1}^{\\infty} (1-x^i) = \\sum_{n=-\\infty}^{\\infty} (-1)^nx^{\\frac{n(3n-1)}{2}}\\] 証明はここでは省略します。気になる方は wikipedia ( https://en.wikipedia.org/wiki/Pentagonal_number_theorem ) 等をご参照ください。 本問題の解法 求める値は、次の式で表されます。 \\[[x^M]\\ \\prod_{i=1}^{N} (x+2x^2+3x^3+\\dots+ix^i+ix^{i+1}+ix^{i+2}+\\dots)\\] 総積記号の中身を変形すると、 \\[[x^M]\\ \\prod_{i=1}^{N}  \\frac{x(1-x^i)}{(1-x)^2}\\] と表すことができます（ここの部分の導出方法は後述）。 さらに変形をすると、 \\[\n\\begin{aligned}\n[x^M]\\ \\prod_{i=1}^{N} \\frac{x(1-x^i)}{(1-x)^2}\n&= [x^{M-N}]\\ \\prod_{i=1}^{N} \\frac{(1-x^i)}{(1-x)^2}\\\\\n&= [x^{M-N}]\\ \\frac{\\prod_{i=1}^{\\infty} (1-x^i)}{(1-x)^{2N}}\n\\end{aligned}\n\\] （最後の式変形において \\(M-N \\leq N\\) を用いた） となり、冒頭に紹介したオイラーの五角数定理における左辺の式がそのまま分子に現れます。よって、分子の無限積を展開した際に出てくる項のうち、次数が \\({M-N}\\) 以下であるものは \\(O(\\sqrt{N})\\) 個しかありません。それらを \\(a_1 x^{e_1},a_2 x^{e_2},\\dots,a_k x^{e_k}\\) とおくと、 \\[\n\\begin{aligned}\n [x^{M-N}]\\ \\frac{\\prod_{i=1}^{\\infty} (1-x^i)}{(1-x)^{2N}}\n&=[x^{M-N}]\\ \\frac{\\sum_{i=1}^{k} a_kx^{e_k}}{(1-x)^{2N}}\\\\\n&=\\sum_{i=1}^{k} a_k \\binom{M+N-{e_k}-1}{2N-1}\n\\end{aligned}\n\\] となり、二項係数の計算に Lucas の定理を用いることで、 \\(O(\\sqrt{N}\\log_{\\text{mod}}{N} +\\text{mod})\\) でこの問題を解くことができます。 「ここの部分の導出方法は後述」と書いたところについて このような形のべき級数は、係数列の階差数列を考えることで簡潔な分数式表現を得られることが多いです。また、係数列の階差数列を取ることは、形式的べき級数において \\((1-x)\\) をかけることに該当します。実際に、 \\[f_i(x) = (x+2x^2+3x^3+\\dots+ix^i+ix^{i+1}+ix^{i+2}+\\dots)\\] とおくと、 \\[f_i(x)(1-x) = (x+x^2+x^3+\\dots+x^i)\\] \\[f_i(x)(1-x)^2 = (x-x^{i+1})\\] となるため、 \\[f_i(x) = \\frac{x(1-x^i)}{(1-x)^2}\\] です。 実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/all>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing ll = long long;\nusing mint = modint;\n\nconst int mod = 200003;\n\nmint fact[mod];\nmint ifact[mod];\n\n// binom(n, k) mod 200003\nmint binom(ll n, ll k) {\n    if (k < 0 or k > n) return 0;\n    mint res = 1;\n    while (n) {\n        ll n0 = n % mod;\n        ll k0 = k % mod;\n        if (n0 < k0) return 0;\n        res *= fact[n0] * ifact[k0] * ifact[n0 - k0];\n        n /= mod;\n        k /= mod;\n    }\n    return res;\n}\n\nint main() {\n    mint::set_mod(mod);\n    fact[0] = 1;\n    for (int i = 1; i < mod; i++) fact[i] = fact[i - 1] * i;\n    ifact[mod - 1] = fact[mod - 1].inv();\n    for (int i = mod - 1; i >= 1; i--) ifact[i - 1] = ifact[i] * i;\n    \n    ll n, m;\n    cin >> n >> m;\n    \n    mint ans = 0;\n    for (ll i = 0; i * (3 * i + 1) / 2 <= m - n; i++) {\n        ll j = i * (3 * i + 1) / 2;\n        ans += binom(m + n - j - 1, 2 * n - 1) * (i % 2 ? -1 : 1);\n    }\n    for (ll i = 1; i * (3 * i - 1) / 2 <= m - n; i++) {\n        ll j = i * (3 * i - 1) / 2;\n        ans += binom(m + n - j - 1, 2 * n - 1) * (i % 2 ? -1 : 1);\n    }\n    cout << ans.val() << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "33603208d57e549787039989b9037149d1cf1cfd74005952c583ba8772341e48"
+    }
+  ],
+  "status": "available"
+}

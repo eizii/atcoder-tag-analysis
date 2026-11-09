@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc468_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc468/editorial/23738",
+      "text": "まず、 \\(d[i][p][q]\\) を「 \\(k=i\\) 番目の操作まで終わった時点で \\(x=p,y=q\\) となっている時の \\(c\\) の値の最大値」と定義した DP を考えます。この DP は空間計算量が \\(O(N^3)\\) であり、メモリ制限・実行時間制限に間に合わないのでこの DP を改善することを考えます。 まず、各 \\(k\\) に対し \\(\\max(x,y)=\\max(P_1,P_2,\\ldots,P_k)\\) が成り立ちます。したがって、上の動的計画法から \\(1\\) つパラメータを削除することができ、 \\(d[i][p]\\) を「 \\(k=i\\) 番目の操作まで終わった時点で \\(\\min(x,y)=p\\) となっている時の \\(c\\) の値の最大値(ただし \\(\\min(x,y)=p\\) とする操作が存在しない場合は \\(-\\infty\\) )」とした DP が回ります。 この DP の遷移を考えます。 ① \\(P_i < \\max(P_1,P_2,\\ldots,P_{i-1})\\) のとき \\(\\displaystyle d[i][P_i]=\\max_{0\\le j < P_i}d[i-1][j]+1\\) です。また、 \\(p\\neq P_i\\) なら \\(d[i][p]=d[i-1][p]\\) です。 ② \\(P_i > \\max(P_1,P_2,\\ldots,P_{i-1})\\) のとき \\(x,y\\) どちらかの値は必ず \\(P_i\\) になります。 \\(\\min(x,y)\\) の値は小さい方が良いので、必ず大きい方を選び \\(P_i\\) にするとして良いです。このことから \\(d[i][p]=d[i-1][p]+1\\) となります。 以上の遷移はセグメント木に乗せることで in-place に行うことができます。計算量は \\(O(N\\log N)\\) です。 さらに、もう少し考察を進めることで答えは「 \\(P\\) から \\(P_i>\\max(P_1,P_2,\\ldots, P_{i-1})\\) を満たす要素を取り除いた整数列を \\(Q\\) とした時の、取り除いた要素数と \\(Q\\) の LIS の長さの和」となることが分かります。この事実を用いて LIS を求めても正答となります。 実装例(Python3) 実装例(Python3)",
+      "codes": [
+        "import sys\nfrom atcoder.segtree import SegTree\n\ninput = sys.stdin.readline\nINF = 10**9\nn = int(input())\na = list(map(int, input().split()))\nseg = SegTree(max, -INF, n + 1)\nseg.set(0, 0)\nma = 0\nans = 0\nfor v in a:\n    if ma < v:\n        ans += 1\n        ma = v\n    else:\n        seg.set(v, seg.prod(0, v) + 1)\nprint(ans + seg.all_prod())\n",
+        "import bisect\n\n\ndef lis(seq):\n    if len(seq) == 0:\n        return 0\n    LIS = [seq[0]]\n    for i in range(len(seq)):\n        if seq[i] > LIS[-1]:\n            LIS.append(seq[i])\n        else:\n            LIS[bisect.bisect_left(LIS, seq[i])] = seq[i]\n    return len(LIS)\n\n\nn = int(input())\np = list(map(int, input().split()))\nq = []\nans = 0\nmax_val = -1\nfor v in p:\n    if max_val < v:\n        max_val = v\n        ans += 1\n    else:\n        q.append(v)\nprint(ans + lis(q))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "9f733e22549c57ba3b192c356aa13550d2591fa536406c792c4d48b7ae9e3612"
+    }
+  ],
+  "status": "available"
+}

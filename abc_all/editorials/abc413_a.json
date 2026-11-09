@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc413_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13409",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nC++入門 AtCoder Programming Guide for beginners (APG4b)\nは、競技プログラミングのための C++ 入門用コンテンツです。\nPython入門 AtCoder Programming Guide for beginners (APG4bPython)\nは、競技プログラミングのための Python 入門用コンテンツです。\nこの問題は、\\(A _ 1+A _ 2+A _ 3+\\cdots+A _ N\\) が \\(M\\) より大きいかどうかを判定することができれば解くことができます。\n\\(A _ 1+A _ 2+A _ 3+\\cdots+A _ N\\) の値を求めるのは for 文などを用いることで、\\(M\\) との大小によって出力する値を変えるのは if 文などを用いることで実現できます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n    int N, M;\n    cin >> N >> M;\n\n    // 大きさの合計を求める\n    int sum = 0;\n    for (int i = 0; i < N; ++i) {\n        int A;\n        cin >> A;\n        sum += A;\n    }\n\n    // 大きさの合計が M 以下なら Yes\n    if (sum <= M) {\n        cout << \"Yes\" << endl;\n    } else {\n        cout << \"No\" << endl;\n    }\n    return 0;\n}",
+        "N, M = map(int, input().split())\n\nif sum(map(int, input().split())) <= M:\n    print('Yes')\nelse:\n    print('No')"
+      ],
+      "text_sha256": "338a86602230563ddd7401aa188f55e196d78a39b80cf86796b5f5a2f5826447",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

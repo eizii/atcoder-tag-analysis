@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc333_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc333/editorial/7960",
+      "text": "\\(N\\)\nを入力として受け取り、for 文を用いて\n\\(N\\)\n回\n\\(N\\)\nを出力することを繰り返しましょう。\n入力が\n\\(9\\)\n通りしかないため、場合分けを if 文で行うことでも正答できますが、for 文を用いるほうが賢いやり方です。\n実装例(C++):\n実装例(Python):",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  for(int i = 0; i < n; i++) cout << n;\n  cout << endl;\n}",
+        "n = int(input())\nfor i in range(n):\n  print(n, end = '')"
+      ],
+      "text_sha256": "633abf59bf3f6507a7b6be55de0fa12ed315ed45302841376fa6f814fbd66d51",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc333/abc333_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc333/editorial/8193",
+      "text": "\\(\\underbrace{11\\ldots1}_{n\\;\\text{digits}} = \\frac{10^n-1}{10-1}\\)\nを利用すると、数値計算として求めることもできます。\n提出 #48661687",
+      "codes": [
+        "n = int(input())\nprint((10**n - 1) // 9 * n)"
+      ],
+      "text_sha256": "bf760ba7a53c46590835ba547379ea6b9d2026d598d7c432019450290b91b61d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc333/abc333_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

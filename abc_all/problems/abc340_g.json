@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc340_g",
+  "title": "Leaf Color",
+  "contests": [
+    {
+      "contest_id": "abc340",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2401,
+  "raw_difficulty": 2401,
+  "contest_id": "abc340",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc340/tasks/abc340_g",
+  "statement": "配点 : 600 点 問題文 頂点に 1 から N までの番号がついた N 頂点の木 T があります。 i 番目の辺は頂点 u_i と頂点 v_i を結んでいます。また、頂点 i は色 A_i で塗られています。 T の頂点集合の(非空な)部分集合 S のうち、次の条件を満たすものの個数を 998244353 で割った余りを求めてください。 T の S による誘導部分グラフ G は次の条件を全て満たす。 G は木である。 次数 1 の頂点に塗られた色が全て一致している。 誘導部分グラフとは S をグラフ G の頂点の部分集合とします。このとき、 G の S による誘導部分グラフとは、頂点集合が S で、辺集合が「 G の辺であって両端が S に含まれるもの全て」であるようなグラフです。 制約 1 \\leq N \\leq 2 \\times 10^5 1 \\leq A_i \\leq N 1 \\leq u_i \\lt v_i \\leq N 入力で与えられるグラフは木 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N u_1 v_1 u_2 v_2 \\vdots u_{N-1} v_{N-1} 出力 問題文の条件を満たす頂点集合の(非空な)部分集合 S の個数を 998244353 で割った余りを出力せよ。 入力例 1 3\r\n1 2 1\r\n1 2\r\n2 3 出力例 1 4 条件を満たす頂点の集合は次の 4 通りです。 \\lbrace 1 \\rbrace \\lbrace 1, 2, 3 \\rbrace \\lbrace 2 \\rbrace \\lbrace 3 \\rbrace 入力例 2 5\r\n2 2 1 1 1\r\n2 5\r\n3 4\r\n1 3\r\n1 5 出力例 2 9 入力例 3 15\r\n5 3 5 1 1 4 4 4 2 5 5 4 4 2 5\r\n3 13\r\n4 10\r\n7 11\r\n8 9\r\n2 10\r\n2 14\r\n5 11\r\n5 6\r\n6 13\r\n12 13\r\n9 14\r\n9 13\r\n1 13\r\n1 15 出力例 3 48",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 頂点に 1 から N までの番号がついた N 頂点の木 T があります。 i 番目の辺は頂点 u_i と頂点 v_i を結んでいます。また、頂点 i は色 A_i で塗られています。 T の頂点集合の(非空な)部分集合 S のうち、次の条件を満たすものの個数を 998244353 で割った余りを求めてください。 T の S による誘導部分グラフ G は次の条件を全て満たす。 G は木である。 次数 1 の頂点に塗られた色が全て一致している。 誘導部分グラフとは S をグラフ G の頂点の部分集合とします。このとき、 G の S による誘導部分グラフとは、頂点集合が S で、辺集合が「 G の辺であって両端が S に含まれるもの全て」であるようなグラフです。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2 \\times 10^5 1 \\leq A_i \\leq N 1 \\leq u_i \\lt v_i \\leq N 入力で与えられるグラフは木 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N u_1 v_1 u_2 v_2 \\vdots u_{N-1} v_{N-1}"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 問題文の条件を満たす頂点集合の(非空な)部分集合 S の個数を 998244353 で割った余りを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\n1 2 1\r\n1 2\r\n2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 条件を満たす頂点の集合は次の 4 通りです。 \\lbrace 1 \\rbrace \\lbrace 1, 2, 3 \\rbrace \\lbrace 2 \\rbrace \\lbrace 3 \\rbrace"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5\r\n2 2 1 1 1\r\n2 5\r\n3 4\r\n1 3\r\n1 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 9"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 15\r\n5 3 5 1 1 4 4 4 2 5 5 4 4 2 5\r\n3 13\r\n4 10\r\n7 11\r\n8 9\r\n2 10\r\n2 14\r\n5 11\r\n5 6\r\n6 13\r\n12 13\r\n9 14\r\n9 13\r\n1 13\r\n1 15"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 48"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc340/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:14.538352+00:00",
+  "statement_sha256": "5bfacea588270c8a8ab629d9cd90103bb2668776afa109fcc82fa8e822d4c855",
+  "editorials": []
+}

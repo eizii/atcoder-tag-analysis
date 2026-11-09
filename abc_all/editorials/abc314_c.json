@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc314_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc314/editorial/6950",
+      "text": "まず、各色\n\\(i = 1, 2, \\ldots, M\\)\nに対して、\n\\(S\\)\nの 色\n\\(i\\)\nで塗られた文字全ての位置を昇順に格納した可変長配列\n\\(P^{(i)}\\)\nを作ります。\n\\(S\\)\nを\n\\(1\\)\n回走査することで\n\\(P^{(1)}, P^{(2)}, \\ldots, P^{(M)}\\)\n全てを同時に\n\\(O(N)\\)\n時間で作ることができます。\n具体的には、可変長配列\n\\(P^{(1)}, P^{(2)}, \\ldots, P^{(M)}\\)\nがすべて空の状態からはじめ、\n\\(S\\)\nの各添字\n\\(i = 1, 2, \\ldots, N\\)\nについてこの順番に見ていき、可変長配列\n\\(P^{(C_i)}\\)\nの末尾に\n\\(i\\)\nを追加するという処理を行えば良いです。\n\\(P^{(1)}, P^{(2)}, \\ldots, P^{(M)}\\)\nを用いて、出力すべき答えである長さ\n\\(N\\)\nの文字列\n\\(T\\)\nの各文字が下記の通りにわかります。\n\\(P^{(1)} = (p^{(1)}_1, p^{(1)}_2, \\ldots, p^{(1)}_{k_1})\\)\nとおく。\n\\(T\\)\nの\n\\(p^{(1)}_2, \\ldots, p^{(1)}_{k_1}, p^{(1)}_1\\)\n文字目が、それぞれ\n\\(S\\)\nの\n\\(p^{(1)}_1, p^{(1)}_2, \\ldots, p^{(1)}_{k_1}\\)\nに等しいとわかる。\n\\(P^{(2)} = (p^{(2)}_1, p^{(2)}_2, \\ldots, p^{(2)}_{k_2})\\)\nとおく。\n\\(T\\)\nの\n\\(p^{(2)}_2, \\ldots, p^{(2)}_{k_2}, p^{(2)}_1\\)\n文字目が、それぞれ\n\\(S\\)\nの\n\\(p^{(2)}_1, p^{(2)}_2, \\ldots, p^{(2)}_{k_2}\\)\nに等しいとわかる。\n\\(\\cdots\\)\n\\(P^{(M)} = (p^{(M)}_1, p^{(M)}_2, \\ldots, p^{(M)}_{k_M})\\)\nとおく。\n\\(T\\)\nの\n\\(p^{(M)}_2, \\ldots, p^{(M)}_{k_M}, p^{(M)}_1\\)\n文字目が、それぞれ\n\\(S\\)\nの\n\\(p^{(M)}_1, p^{(M)}_2, \\ldots, p^{(M)}_{k_M}\\)\nに等しいとわかる。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint n, m;\nstring s;\nint c[200000];\nvector<int> p[200001];\n\nint main(void)\n{\n    cin >> n >> m;\n    cin >> s;\n    for(int i = 0; i < n; i++) cin >> c[i];\n    for(int i = 0; i < n; i++) p[c[i]].push_back(i);\n    \n    string t(n, '?');\n    for(int i = 1; i <= m; i++){\n        int k = p[i].size();\n        for(int j = 0; j < k; j++) t[p[i][(j+1)%k]] = s[p[i][j]];\n    }\n    cout << t << endl;\n    \n    return 0;\n}"
+      ],
+      "text_sha256": "fdeb43137aabcb2ce2574f1417a27bd439a65f7add83881fbb72daf824f0f022",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc314/abc314_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

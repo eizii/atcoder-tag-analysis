@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc034_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc034/editorial.pdf",
+      "text": "A問題テスト\n\n\n\n\n\n2023/1/27                             ©AtCoder Inc. All rights reserved.                                      33\n\f\nA問題問題概要\n\n• 整数X, Yが与えられる。\n• X<YならBetter、そうでないならWorseを出力しなさい\n\n\n• 制約\n   – 0 ≦X, Y ≦100\n   – X ≠ Y\n\n\n\n\n\n2023/1/27                                                                                               4\n\f\nA問題アルゴリズム\n\n• 基本的なプログラムの流れ\n   – 標準入力から、必要な入力を受け取る\n          • 今回の場合は、X, Y という2つの整数\n   – 問題で与えられた処理を行う\n          • 今回は、X<Yの大小関係の判定\n   – 標準出力へ、答えを出力する\n\n\n\n\n\n2023/1/27                                                                                               5\n\f\nA問題アルゴリズム\n\n• 入力\n   – 2つの整数を、標準入力から受け取る\n          • Cであれば、scanf(“%d %d”, &X, &Y); など\n          • C++であれば、cin >> X >> Y;\n          • 入力の受け取り方は、下記の練習問題に記載があります。\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2023/1/27                                                                                               6\n\f\nA問題アルゴリズム\n\n• 今回の問題は、X, Yの大小関係を出力する\n•  X, Yの大小関係ってどう求めればいいの？\n   – 不等号で判定して、If ～else文で分岐しちゃいましょう。\n   – 例えばこんな感じ\n  string ans;\n  if(X < Y) ans = “Better”;\n  else ans = “Worse”;\n\n\n\n\n\n2023/1/27                                                                                               7\n\f\nA問題アルゴリズム\n\n• 出力\n   – 求めた答えを、標準出力より出力する。\n   – 言語によって違います。\n          • printf(“%s¥n”, ans); (C)\n          • cout << ans << endl; (C++)\n          • System.out.println(ans); (Java)\n          • 各言語の標準出力は、下記の練習問題に記載があります。\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2023/1/27                                                                                               8",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "936944ebe20f9f7982b0d60c4f0e8d2f2f0b1a2bcc2dd6b2005e6801934eefee"
+    }
+  ],
+  "status": "available"
+}

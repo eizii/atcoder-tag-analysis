@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc220_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc220/editorial/2679",
+      "text": "頂点\n\\(1\\)\nを根とします。各頂点について、頂点\n\\(1\\)\nからの距離をその頂点の深さと呼びます。また、葉でない頂点\n\\(i\\)\nについて、頂点\n\\(2i\\)\nの部分木を\n左側\n、頂点\n\\(2i+1\\)\nの部分木を\n右側\nと呼ぶことにします。\n\\(0\\)\n以上\n\\(2N\\)\n以下の整数\n\\(n\\)\nについて、\n\\(2^n \\mod 998244353\\)\nを前計算しておくことで、これらの値は\n\\(O(1)\\)\nで得られるとして良いです。\n各頂点\n\\(v\\)\nについて、「距離が\n\\(D\\)\nである頂点の組\n\\((i,j)\\)\nであって、\n\\(i,j\\)\nのLCA (Lowest Common Ancestor) が\n\\(v\\)\nであるようなもの」の個数を考え、これを\n\\(f(v)\\)\nとおきます。求めるものは全ての頂点についての\n\\(f(v)\\)\nの合計です。\n\\(v\\)\nの深さを\n\\(d\\)\nとします。\n\\(v=i\\)\nまたは\n\\(v=j\\)\nの場合、他方の頂点は\n\\(v\\)\nの子孫である深さ\n\\(d+D\\)\nの頂点から自由に選ぶことができます。このようなケースの個数は\n\\(d+D\\)\nが\n\\(N-1\\)\nを超えるかどうかのみに依存して\n\\(0\\)\nまたは\n\\(2^D\\)\nであるため、\n\\(O(1)\\)\nで求められます。\nそれ以外の場合、各\n\\(0< k< D\\)\nで、\n\\(i\\)\nは\n\\(v\\)\nの左側にある深さ\n\\(d+k\\)\nの頂点、\n\\(j\\)\nは\n\\(v\\)\nの右側にある深さ\n\\(d+(D-k)\\)\nの頂点から、それぞれ自由に選ぶことができます。「\n\\(i\\)\nを\n\\(v\\)\nの左側の深さ\n\\(d+k\\)\nの頂点、\n\\(j\\)\nを\n\\(v\\)\nの右側の深さ\n\\(d+(D-k)\\)\nの頂点から、それぞれ自由に選ぶ方法の数」は\n\\(d+k\\)\n及び\n\\(d+(D-k)\\)\nが\n\\(N-1\\)\nを超えるかどうかのみに依存して\n\\(0\\)\nまたは\n\\(2^{D-2}\\)\nとなるため、適切な場合分けにより全ての\n\\(k\\)\nに関する個数の合計を\n\\(O(1)\\)\nで求めることができます。\n以上より、\n\\(v\\)\nを固定するごとに\n\\(f(v)\\)\nは\n\\(O(1)\\)\nで求められることがわかりました。\n木が完全二分木であることから、\n\\(f(v)\\)\nは\n\\(v\\)\nの深さのみに依存することがわかります。深さが\n\\(d\\)\nであるような頂点の個数は\n\\(2^d\\)\nなので、深さ\n\\(d=0,1,\\ldots,N-1\\)\nの頂点に関する\n\\(f(v)\\)\nの和をそれぞれを\n\\(O(1)\\)\nで求めることができ、全体で\n\\(O(N)\\)\nで問題が解けました。",
+      "codes": [],
+      "text_sha256": "ebd56f688ed73dc5a541461026c8e550ea0fda33be1d20c7f841e0c6df9bec66",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc220/abc220_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc220/editorial/2929",
+      "text": "公式解説\nについて、結論の計算式を示します。\n「距離が\n\\(D\\)\nである頂点の組\n\\((i,j)\\)\nであって、\n\\(i,j\\)\nのLCA (Lowest Common Ancestor) が\n\\(v\\)\nであるようなもの」の個数を考え、これを\n\\(f(v)\\)\nとおきます。\n\\(v\\)\nの深さを\n\\(d\\)\nとします。\n(\n公式解説\n)\n\\(v=i\\)\nまたは\n\\(v=j\\)\nの場合の数え上げ\n\\(f_1(d)\\)\n、それ以外の場合の数え上げ\n\\(f_2(d)\\)\nは次の式で表されます。\n\\[\nf_1(d)=\n\\begin{cases}\n              2^{D+1} & \\text{if } d+D \\leq N-1\\\\\n              0 & \\text{otherwise}\\\\\n\\end{cases} .\\]\n\\[\nf_2(d)=\n\\begin{cases}\n0 & \\text{if } 2(N-1-d) \\lt D \\text{ or } D=1\\\\\n2^{D-1}(D-1) & \\text{otherwise if } d+D \\leq N-1\\\\\n2^{D-1}(2N-2d-D-1) &  \\text{otherwise} \n\\end{cases}\n     .\n\\]\n従って、求める数え上げ\n\\(C\\)\n（\n\\(998244353\\)\nで割った余りを求める前の値）は次のように表されます。\n\\[C=\\sum_{d=0}^{N-1}2^d(f_1(d)+f_2(d)).\\]\n\\(k=0,1,2, \\ldots ,2N\\)\nについて\n\\(2^k\\)\nの値\n\\(\\pmod{998244353}\\)\nを前計算すると、求める値を計算量\n\\(O(N)\\)\nで計算できます。\n解答例(C++)",
+      "codes": [],
+      "text_sha256": "94473ead268066e48a23d775942faab969c8e396408f01c34e70d6743d07b713",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc220/abc220_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

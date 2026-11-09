@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc305_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc305/editorial/6537",
+      "text": "この問題は簡潔な実装方法を見つけられるかが重要になる問題です。実装に苦労した人は次回以降素早く実装できるように勉強してみるとよいでしょう。\n解法はいくつかありますが、推奨しない解法の 1 つとして、答えを全部埋め込んでしまうという方法があります。入力としてあり得る\n\\(p, q\\)\nの組は\n\\(7 \\times 6 = 42\\)\n通りです。そして、それぞれの組に対する答えは手元で足し算を行えば答えを求められます。\nしかし、この方針はとにかく面倒なので、どうにか楽をできないか考えてみましょう。\n簡単のため、頂点をアルファベットではなく 0 始まりの番号で呼ぶことにします。つまり、点\n\\(A, B, C, D, E, F, G\\)\nを点\n\\(0, 1, 2, 3, 4, 5, 6\\)\nに置き換えます。(この置き換えは 文字を ASCII コードに置き換える操作によって容易に実現できます。たとえば C++ では (\np\nを\nchar\n型として)\np - 'A'\n、Python では (\np\nを\nstr\n型として)\nord(p[0]) - ord('A')\nのように書けばよいです。)\n そして、\n\\(n=0,1,2,3,4,5\\)\nについて、点\n\\(n\\)\nと点\n\\(n+1\\)\nの間の辺を 辺\n\\(n\\)\nと呼ぶことにします。(例えば辺\n\\(0\\)\nは点\n\\(0\\)\nと点\n\\(1\\)\nを結ぶ長さ\n\\(3\\)\nの辺です。)\nこのように言い換えた上で解法を説明します。\nまず、\n\\(p \\gt q\\)\nの場合は 「点\n\\(p\\)\nと点\n\\(q\\)\nの距離」と「点\n\\(q\\)\nと点\n\\(p\\)\nの距離」は等しいので\n\\(p\\)\nと\n\\(q\\)\nを swap しても問題ないです。よってこのような場合は\n\\(p\\)\nと\n\\(q\\)\nを swap することで、\n\\(p \\lt q\\)\nの場合のみを考えればよいことになります。\nそして、\n\\(p \\lt q\\)\nの場合、点\n\\(p\\)\nと点\n\\(q\\)\nの間にある辺は「番号が\n\\(p\\)\n以上\n\\(q\\)\n未満の辺」であることが、辺の番号の定義からわかります。よって、条件を満たす範囲の辺の長さを for-loop 等を用いて足し合わせれば答えを得られます。\n実装例(C++)\n別解として、\n\\(A\\)\nから\n\\(G\\)\nを何らかの座標に対応させる解法があります。\n簡単に方針を説明します。\n\\(A\\)\nを数直線上の\n\\(x=0\\)\nの地点とみなして、\n\\(B\\)\nから\n\\(G\\)\nまでの座標を計算すると順に\n\\(x=3, 4, 8, 9, 14, 23\\)\nになります。このとき地点間の距離は座標の差の絶対値になるので\nabs\n関数を利用して計算できます。\n実装例 (C++)",
+      "codes": [
+        "# Python による(推奨されないアルゴリズムの)実装例\np, q = input().split()\nif p == 'A' and q == 'B':\n  print(3)\nelif p == 'A' and q == 'C':\n  print(4)\n# 以下省略 (残りの 40 通りも列挙すると AC できる)",
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n  char p, q;\n  cin >> p >> q;\n  p -= 'A', q -= 'A';\n  if(p > q) swap(p, q);\n  int e[] = {3, 1, 4, 1, 5, 9}, ans = 0;\n  for (int i = p; i < q; i++) ans += e[i];\n  cout << ans << \"\\n\";\n}",
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n  char p, q;\n  cin >> p >> q;\n  int e[] = {0, 3, 4, 8, 9, 14, 23};\n  cout << abs(e[p - 'A'] - e[q - 'A']) << endl;\n}"
+      ],
+      "text_sha256": "e36403a8d9f88de7e6cb7e607604079e65be12390fc148782f8120a3d1f92d4b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc305/abc305_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc305/editorial/6572",
+      "text": "各文字間の距離が小さいので、文字列の形で直接書いてしまい、出現位置を検索して差を調べることで答えを求めることができます。\n提出 #42181037\n（\n_\nより\n.\nの方が数えやすそうだったので修正しました）",
+      "codes": [
+        "p, q = input().split()\ns = 'A..BC...DE....F........G'\nprint(abs(s.find(p) - s.find(q)))"
+      ],
+      "text_sha256": "19d9c578536288e05ed2e855bfca52da207bb53424b961149d6fc92dbde559bd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc305/abc305_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

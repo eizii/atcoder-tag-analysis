@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc165_b",
+  "editorials": [
+    {
+      "text": "B: 1% writer: beet\n今持っている金額をP とすると、P < X のあいだP に\n⌊P\n100\n⌋\nを足せばよいです。\n入力例2 からもわかるように、ループ回数は高々3760 回となり、十分高速です。\n64bit 整数を扱う言語ではオーバーフローに注意してください。\n(P ′ =\n⌊P ×101\n100\n⌋\nのように計算するとオーバーフローする場合があります)\n以下はC++ による回答例です。\n1 #include <bits/stdc++.h>\n2 using namespace std;\n3 int main(){\n4\nlong long X;\n5\ncin >> X;\n6\nlong long P = 100, step = 0;\n7\nwhile(P < X){\n8\nP += P / 100;\n9\nstep++;\n10\n}\n11\ncout << step << endl;\n12\nreturn 0;\n13 }\n",
+      "text_sha256": "b9f3cfd90b7d8efab0ef88c63b292b018aa798529ad8242160d088e3ae79a020",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc165/abc165_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

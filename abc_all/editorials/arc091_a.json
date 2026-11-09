@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc091_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc091/editorial.pdf",
+      "text": "C: Flip,Flip, and Flip......\n\n N ≤M として一般性を失いません。偶数回裏返されるカードは全操作の終了後には表を、奇数回裏返され\n\nるカードは裏を向くことになるので、各マスのカードが何回裏返されるかを考えることにしましょう。\n\n N = 1 かつM = 1 のとき、1 枚だけあるカードは1 回裏返されるので、答えは1 です。\n\n N = 1 かつM ̸= 1 のとき、M 枚のカードのうち両端のカードは2 回、それ以外のカードは3 回裏返され\n\nるので、答えはM −2 です。\n\n N ≥2 のとき、N ≤M よりM ≥2 で、このとき、\n\n    • 四隅のカードは4 回\n\n    • それ以外の周上のカードは6 回\n\n    • それ以外のカードは9 回\n\n 裏返されるので、答えは(N −2)(M −2) です。\n\n 以上で答えがすべて求まりました。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "a7eabe1eff640632cf3418ab8428d7dc53e04acc80483e4d910ed6e8a0ced84a"
+    }
+  ],
+  "status": "available"
+}

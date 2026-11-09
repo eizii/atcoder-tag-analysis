@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc370_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc370/editorial/10893",
+      "text": "元素\n\\(1\\)\nに元素\n\\(1, 2, \\ldots, N\\)\nを順に合成する操作を現時点での元素の番号を管理しながらシミュレートすればよいです。\n実装例 (添え字が\n\\(0\\)\nから始まるものとなっています)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<vector<int>> a(n, vector<int>(n));\n\tfor (int i = 0; i < n; i++) for (int j = 0; j <= i; j++) {\n\t\tcin >> a[i][j];\n\t\ta[i][j]--;\n\t}\n\tint ans = 0;\n\tfor (int i = 0; i < n; i++) {\n\t\tif (ans >= i) ans = a[ans][i];\n\t\telse ans = a[i][ans];\n\t}\n\tans++;\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "e9f9f64bb393e7f8308f40ca00801968939c409e84ab04d82155545202d687ce",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc370/abc370_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

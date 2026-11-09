@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc163_c",
+  "editorials": [
+    {
+      "text": "C:management\n社員番号x の社員の直属の部下はAi = x を満たします。つまり、各数がA に何度登場するかを\n求めればよいです。\n1 int a[200010];\n2 int ans[200010];\n3 int main(){\n4\nint n;\n5\nscanf(\"%d\",&n);\n6\nfor(int i=2;i<=n;i++)scanf(\"%d\",&a[i]);\n7\nfor(int i=2;i<=n;i++)ans[a[i]]++;\n8\nfor(int i=1;i<=n;i++)printf(\"%d\\n\",ans[i]);\n9 }\n",
+      "text_sha256": "8606256d28ec8932bceeb7f950b92f77ad00a6435dcbf5422d5b737adfe9201a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc163/abc163_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

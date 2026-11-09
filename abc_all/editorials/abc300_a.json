@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc300_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6272",
+      "text": "この問題でなすべきことは以下の\n\\(4\\)\nつです。\n標準入力から入力を受け取る\n\\(A+B\\)\nの値を求める\n正解となる選択肢を探す\n標準出力に答えを出力する\n\\(1,4\\)\nつ目で躓いた場合は、例えば以下のようにして習得することができます。\n解答に用いる言語のドキュメントや記事等を読む\n「すべての提出」から他の参加者のコードを閲覧し、入出力の方法を学ぶ\n\\(2\\)\nつ目は変数の足し算を用いると実現可能です。\n\\(3\\)\nつ目は for ループを利用することにより実現可能です。選択肢を順に調べ、正解が出現したらその番号を記録します。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,a,b;\n  cin >> n >> a >> b;\n  vector<int> c(n);\n  for(auto &nx : c){cin >> nx;}\n  int ans;\n  for(int i=0;i<n;i++){\n    if(a+b == c[i]){ans=i+1;break;}\n  }\n  cout << ans << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "ddbb68e89cfaba4c50874945acd8d0f1f703dd3202441f2166087fef71c77b25",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc300/abc300_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

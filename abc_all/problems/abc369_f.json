@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc369_f",
+  "title": "Gather Coins",
+  "contests": [
+    {
+      "contest_id": "abc369",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1618,
+  "raw_difficulty": 1618,
+  "contest_id": "abc369",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc369/tasks/abc369_f",
+  "statement": "配点 : 500 点 問題文 縦 H 行、横 W 列のグリッドがあります。\r\nこのグリッドの上から i 行目、左から j 列目にあるマスのことを (i,j) と表記します。 このグリッド上には N 枚のコインが落ちており、 i 個目のコインはマス (R_i,C_i) を通ることで拾うことができます。 あなたの目標は、マス (1,1) から始めて下か右に 1 マス移動することを繰り返し、できるだけ多くのコインを拾いながらマス (H,W) まで行くことです。 あなたが拾うことのできるコインの枚数の最大値、およびそれを達成するための移動経路を 1 つ求めてください。 制約 2\\leq H,W \\leq 2\\times 10^5 1\\leq N \\leq \\min(HW-2, 2\\times 10^5) 1\\leq R_i \\leq H 1\\leq C_i \\leq W (R_i,C_i)\\neq (1,1) (R_i,C_i)\\neq (H,W) (R_i,C_i) は互いに相異なる 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 H W N R_1 C_1 R_2 C_2 \\vdots R_N C_N 出力 2 行出力せよ。 1 行目には、あなたが拾うことのできるコインの枚数の最大値を出力せよ。 2 行目には、それを達成するための移動経路の 1 つを長さ H+W-2 の文字列として出力せよ。\r\nここで、出力する文字列の i 文字目は、 i 回目の移動において下に移動するならば D 、右に移動するならば R である。 拾うコインの枚数が最大となるような移動経路が複数存在する場合は、そのどれを出力しても良い。 入力例 1 3 4 4\r\n3 3\r\n2 1\r\n2 3\r\n1 4 出力例 1 3\r\nDRRDR 上図のように (1,1)\\rightarrow (2,1)\\rightarrow (2,2)\\rightarrow (2,3)\\rightarrow (3,3)\\rightarrow (3,4) と移動することで、 (2,1),(2,3),(3,3) にある 3 枚のコインを拾うことができます。 入力例 2 2 2 2\r\n2 1\r\n1 2 出力例 2 1\r\nDR RD という移動経路も正解となります。 入力例 3 10 15 8\r\n2 7\r\n2 9\r\n7 9\r\n10 3\r\n7 11\r\n8 12\r\n9 6\r\n8 1 出力例 3 5\r\nDRRRRRRRRDDDDDRRDRDDRRR",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 縦 H 行、横 W 列のグリッドがあります。\r\nこのグリッドの上から i 行目、左から j 列目にあるマスのことを (i,j) と表記します。 このグリッド上には N 枚のコインが落ちており、 i 個目のコインはマス (R_i,C_i) を通ることで拾うことができます。 あなたの目標は、マス (1,1) から始めて下か右に 1 マス移動することを繰り返し、できるだけ多くのコインを拾いながらマス (H,W) まで行くことです。 あなたが拾うことのできるコインの枚数の最大値、およびそれを達成するための移動経路を 1 つ求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2\\leq H,W \\leq 2\\times 10^5 1\\leq N \\leq \\min(HW-2, 2\\times 10^5) 1\\leq R_i \\leq H 1\\leq C_i \\leq W (R_i,C_i)\\neq (1,1) (R_i,C_i)\\neq (H,W) (R_i,C_i) は互いに相異なる 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 H W N R_1 C_1 R_2 C_2 \\vdots R_N C_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 2 行出力せよ。 1 行目には、あなたが拾うことのできるコインの枚数の最大値を出力せよ。 2 行目には、それを達成するための移動経路の 1 つを長さ H+W-2 の文字列として出力せよ。\r\nここで、出力する文字列の i 文字目は、 i 回目の移動において下に移動するならば D 、右に移動するならば R である。 拾うコインの枚数が最大となるような移動経路が複数存在する場合は、そのどれを出力しても良い。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 4 4\r\n3 3\r\n2 1\r\n2 3\r\n1 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3\r\nDRRDR 上図のように (1,1)\\rightarrow (2,1)\\rightarrow (2,2)\\rightarrow (2,3)\\rightarrow (3,3)\\rightarrow (3,4) と移動することで、 (2,1),(2,3),(3,3) にある 3 枚のコインを拾うことができます。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2 2 2\r\n2 1\r\n1 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1\r\nDR RD という移動経路も正解となります。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10 15 8\r\n2 7\r\n2 9\r\n7 9\r\n10 3\r\n7 11\r\n8 12\r\n9 6\r\n8 1"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 5\r\nDRRRRRRRRDDDDDRRDRDDRRR"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc369/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:50.988640+00:00",
+  "statement_sha256": "6c47c775588929a1022c161f087314bea1a2debfc1622360a12396e4b057196e",
+  "editorials": []
+}

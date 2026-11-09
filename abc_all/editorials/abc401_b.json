@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc401_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc401/editorial/12692",
+      "text": "この問題は、「高橋くんが現在ログインしている状態にあるか」のフラグを持ちながら操作を処理していくことで解くことができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\n    // 現在ログインしているかを表すフラグ：はじめはログインしていない\n    bool logged_in = false;\n    // 認証エラーを返された回数\n    int unauthorized = 0;\n\n    for (int i = 0; i < N; ++i) {\n        string s;\n        cin >> s;\n\n        // ログイン操作なら、フラグを true にする\n        if (s == \"login\") {\n            logged_in = true;\n        }\n        // ログアウト操作なら、フラグを false にする\n        if (s == \"logout\") {\n            logged_in = false;\n        }\n        // ログインしていない状態で非公開ページにアクセスしようとしたとき、認証エラーを返された回数を増やす\n        if (s == \"private\" && !logged_in) {\n            unauthorized++;\n        }\n    }\n\n    cout << unauthorized << endl;\n    \n    return 0;\n}",
+        "N = int(input())\n\n# 現在ログインしているかを表すフラグ：はじめはログインしていない\nlogged_in = False\n# 認証エラーを返された回数\nunauthorized = 0\n\nfor i in range(N):\n    s = input()\n    # ログイン操作なら、フラグを true にする\n    if s == 'login':\n        logged_in = True\n    # ログアウト操作なら、フラグを false にする\n    if s == 'logout':\n        logged_in = False\n    # ログインしていない状態で非公開ページにアクセスしようとしたとき、認証エラーを返された回数を増やす\n    if s == 'private' and not logged_in:\n        unauthorized += 1\n\nprint(unauthorized)"
+      ],
+      "text_sha256": "2b76b9e65982a18e09491101d671965250b13cdfeb2fd7a5be71d5403c69178a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc401/abc401_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

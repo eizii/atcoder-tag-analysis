@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc079_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc079/editorial.pdf",
+      "text": "B:  Lucas Number\n\n リュカ数の定義( L0 = 2 , L1 = 1 , Li = Li−1 + Li−2(i ≧2) ) に従って計算すると求まります。\n ただし、答えが32 bit に収まらない場合があるので注意してください。\n\n#include <cstdio >\ntypedef long long ll;\nint N;\nll L[87];\nint main ()\n{\n         scanf (\"%d\",&N);\n        L[0]=2LL ,L[1]=1 LL;\n        for(int i=2;i<=N;i++)L[i]=L[i -2]+L[i -1];\n         printf (\"% lld\\n\",L[N]);\n}\n\n\n\n\n\n                                         1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "e647dbe4652f6d207044310595749ea7b34f5aeb2ff55e66ec8b66125d35cf08"
+    }
+  ],
+  "status": "available"
+}

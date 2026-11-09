@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc430_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc430/editorial/14297",
+      "text": "問題原案：admin\n法律に違反するのは「飴を\n\\(A\\)\n個以上持っており、かつ、クッキーを\n\\(B\\)\n個未満しか持っていない」ときです。この条件に当てはまるかどうかを判定し、if文を用いることでこの問題を解くことができます。\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "A,B,C,D=map(int,input().split())\nif (C>=A) and (D<B):\n  print(\"Yes\")\nelse:\n  print(\"No\")",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int a,b,c,d;\n  cin >> a >> b >> c >> d;\n  if((c>=a)&&(d<b)){\n    cout << \"Yes\" << endl;\n  }else{\n    cout << \"No\" << endl;\n  }\n}"
+      ],
+      "text_sha256": "db3daeb17606e55ea9402e0d8a6d98964297cee0d8a03cdac4ca604628f916d8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc430/abc430_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

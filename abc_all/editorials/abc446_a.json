@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc446_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc446/editorial/16368",
+      "text": "実装方針\n「頭文字を英小文字に直す」と「先頭に\nOf\nをつける」の\n\\(2\\)\nつのことを順番に行えばよいです．\n「頭文字を英小文字に直す」を実装する方針として，頭文字を新しい文字で上書きする方針や，(頭文字以外はもとから英小文字であることを利用して)全体を英小文字に直す関数を使う方針が考えられます．\n「先頭に\nOf\nをつける」については，文字列連結を用いる方針が最も簡潔でしょう．\n実装例 (Python3, C++)\nPython3 での実装例を以下に示します．\nC++ での実装例を以下に示します．",
+      "codes": [
+        "s = input()\nans = \"Of\" + s.lower()\nprint(ans)",
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n#include <string>\nusing std::string;\n#include <algorithm>\nusing std::tolower;\n\nint main (void) {\n\tstring s;\n\tcin >> s;\n\t\n\tstring ans = s;\n\tans[0] = tolower(ans[0]);\n\tans = \"Of\" + ans;\n\n\tcout << ans << \"\\n\";\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "d59ffe4506125008979a6d692bf33af68ed2bfb164b1396bfd74d520d060f45c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc446/abc446_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

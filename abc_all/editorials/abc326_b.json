@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc326_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc326/editorial/7500",
+      "text": "最も自然な方針は次のようなものです。\n与えられた数が326-like numberであるかどうかを判定するには、各位の数字を得る必要があります。次の 2 種類の方法が考えられます。\n計算により求める方法\n整数\n\\(n\\)\nが与えられたとき、百の位は\n\\(\\left\\lfloor \\frac{n}{100}\\right\\rfloor \\bmod 10\\)\n、十の位は\n\\(\\left\\lfloor \\frac{n}{10} \\right\\rfloor \\bmod 10\\)\n、一の位は\n\\(n \\bmod 10\\)\nにより得ることができます。\n文字列変換により求める方法\n\\(3\\)\n桁の整数\n\\(n\\)\nが与えらえたとき、\n\\(n\\)\nを文字列に変換したものを\n\\(s\\)\nとすると、百の位は\n\\(s\\)\nの\n\\(1\\)\n文字目、十の位は\n\\(s\\)\nの\n\\(2\\)\n文字目、一の位は\n\\(s\\)\nの\n\\(3\\)\n文字目として得ることができます。なお、多くの言語では、この方法で得られるものは数値ではなく文字であることに注意してください。\n以上を実装することで 326-like number の判定を行うことができます。\n実装例(C++)　計算による方法\n実装例(Python)　文字列変換による方法\nこの他、各位の数を最初から別のfor文に書くという方法もあります。\n実装例(Python)",
+      "codes": [
+        "for i=n to 919:\n  if i が 326-like number:\n    print(i)\n    exit",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nbool check(int n){\n  int c100=n/100;\n  int c10=n/10%10;\n  int c1=n%10;\n  return c100*c10==c1;\n}\n\nint main(){\n  int n;\n  cin >> n;\n  for(int i=n;i<=919;i++){\n    if(check(i)){\n      cout << i << endl;\n      return 0;\n    }\n  }\n}",
+        "def check(n):\n  s=str(n)\n  c100=int(s[0])\n  c10=int(s[1])\n  c1=int(s[2])\n  return c100*c10==c1\n\nN=int(input())\nfor i in range(N,919+1):\n  if check(i):\n    print(i)\n    exit()",
+        "N=int(input())\nfor c100 in range(1,10):\n  for c10 in range(10):\n    for c1 in range(10):\n      x=c100*100+c10*10+c1\n      if x>=N and c100*c10==c1:\n        print(x)\n        exit()"
+      ],
+      "text_sha256": "456a09eba458e48caa5fad8fa8439ac89033d659bf0525e42b9bf0cefe75a3f9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc326/abc326_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

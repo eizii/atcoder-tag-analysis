@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc190_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc190/editorial/626",
+      "text": "\\(K ≤ 16\\)\nと\n\\(K\\)\nの制約が非常に小さいことに注目すると、それぞれの人がどちらの皿にボールを置くかの\n\\(2^K\\)\n通りを全探索できそうです。\nそれぞれの人がどちらの皿にボールを置くかを固定したとき、満たされる条件の個数は\n\\(O(N+M+K)\\)\nで求めることができるので、時間計算量\n\\(O(2^K(N+M+K))\\)\nでこの問題を解くことができます。\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main(){\n    int N, M;\n    cin >> N >> M;\n    vector<pair<int, int>> cond(M);\n    for(auto& [A, B] : cond) cin >> A >> B;\n    int K;\n    cin >> K;\n    vector<pair<int, int>> choice(K);\n    for(auto& [C, D] : choice) cin >> C >> D;\n    \n    int ans = 0;\n    for(int bit = 0; bit < 1 << K; bit++){\n        vector<bool> ball(N);\n        for(int i = 0; i < K; i++){\n            const auto [C, D] = choice[i];\n            ball[bit & 1 << i ? C : D] = 1;\n        }\n        int cnt = 0;\n        for(auto [A, B] : cond) if(ball[A] && ball[B]) cnt++;\n        if(ans < cnt) ans = cnt;\n    }\n    cout << ans << endl;\n}",
+        "import itertools\n\nN, M = map(int, input().split())\ncond = [tuple(map(int, input().split())) for i in range(M)]\nK = int(input())\nchoice = [tuple(map(int, input().split())) for i in range(K)]\nans = 0\nfor balls in itertools.product(*choice):\n    balls = set(balls)\n    cnt = sum(A in balls and B in balls for A, B in cond)\n    if ans < cnt:\n        ans = cnt\n\nprint(ans)"
+      ],
+      "text_sha256": "a717dc158f83bfc38b6bdd119ab704d94630f2f143fec34fd58a29c1037e9558",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc190/abc190_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

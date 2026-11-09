@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc351_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc351/editorial/9885",
+      "text": "\\(9\\)\n回表の時点で チーム高橋が\n\\(X\\)\n点、 チーム青木が\n\\(Y\\)\n点をとっていたとします。（問題文の制約より\n\\(X\\geq Y\\)\nです。）\nここで、\n\\(X,Y\\)\nはそれぞれ、\n\\(X=A_1+A_2+\\cdots+A_9\\)\n,\n\\(Y=B_1+B_2+\\cdots+B_8\\)\nとして求められます。\nこのとき、\n\\(9\\)\n回裏にチーム青木が取った点数が\n\\((X-Y-1)\\)\n以下であればチーム高橋の勝ち、\n\\((X-Y)\\)\nであれば引き分け、\n\\((X-Y+1)\\)\n以上であればチーム青木の勝ちとなります。\nよって、チーム青木が勝つために必要な点数の最小値は\n\\((X-Y+1)\\)\nであるので、これを出力すれば良いです。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint a=0,b=0,x;\n\tfor(int i=0;i<9;i++){\n\t\tcin>>x;\n\t\ta+=x;\n\t}\n\tfor(int j=0;j<8;j++){\n\t\tcin>>x;\n\t\tb+=x;\n\t}\n\tcout<<(a-b+1)<<endl;\n\treturn 0;\n}",
+        "A = list(map(int, input().split()))\nB = list(map(int, input().split()))\nprint(sum(A)-sum(B)+1)"
+      ],
+      "text_sha256": "30f6cb97ddd3328e207448604d4523d9d89778ea0272028a631feb4ba28ba9e0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc351/abc351_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

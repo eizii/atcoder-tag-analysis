@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc240_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc240/editorial/3426",
+      "text": "問題文中の条件を満たす\n\\(\\big((L_1, R_1), (L_2, R_2), \\ldots, (L_N, R_N) \\big)\\)\nが達成できる\n\\(\\max\\lbrace L_1, L_2, \\ldots, L_N, R_1, R_2, \\ldots, R_N \\rbrace\\)\nの最小値を考えます。\n与えられた木の、葉（すなわち、子を持たない頂点）の個数を\n\\(M\\)\nとし、\n\\(M\\)\n個の葉を\n\\(v_1, v_2, \\ldots, v_M\\)\nとします。\nこのとき、\n任意の異なる\n\\(2\\)\nつの葉\n\\(v_i, v_j\\)\nについて、\n\\(S_{v_i} \\cap S_{v_j} = \\lbrace v_i \\rbrace \\cap \\lbrace v_j \\rbrace = \\emptyset\\)\nであるので、問題文中の条件より\n任意の異なる\n\\(2\\)\nつの葉\n\\(v_i, v_j\\)\nについて\n\\([L_{v_i}, R_{v_i}] \\cap [L_{v_j}, R_{v_j}] =  \\emptyset\\)\nでなければなりません。\nよって、\n\\(\\lbrace L_{v_1}, L_{v_2}, \\ldots, L_{v_M} \\rbrace\\)\nには少なくとも異なる\n\\(M\\)\n個の正の整数が含まれなければなりません（\n\\(\\lbrace R_{v_1}, R_{v_2}, \\ldots, R_{v_M} \\rbrace\\)\nで考えても同様）。\nしたがって、達成できる\n\\(\\max\\lbrace L_1, L_2, \\ldots, L_N, R_1, R_2, \\ldots, R_N \\rbrace\\)\nの最小値は\n\\(M\\)\n以上です。\n反対に、\n\\(\\max\\lbrace L_1, L_2, \\ldots, L_N, R_1, R_2, \\ldots, R_N \\rbrace = M\\)\nは達成できます。\n実際、\n\\(\\max\\lbrace L_1, L_2, \\ldots, L_N, R_1, R_2, \\ldots, R_N \\rbrace = M\\)\nを達成する\n\\(\\big((L_1, R_1), (L_2, R_2), \\ldots, (L_N, R_N) \\big)\\)\nを以下のようにして構成することができます。\nまず、根である頂点\n\\(1\\)\nから深さ優先探索を行います。\n\\(M\\)\n個の葉について、深さ優先探索で訪れたのが早い順に、\n葉\n\\(1\\)\n、葉\n\\(2\\)\n、\n\\(\\ldots\\)\n、葉\n\\(M\\)\nとあだ名をつけます。\n\\(i =1, 2, \\ldots, N\\)\nについて、\n\\(L_i\\)\nと\n\\(R_i\\)\nをそれぞれ頂点\n\\(i\\)\nの部分木に含まれる葉のあだ名の最小値と最大値とします。\n手順 2. で各頂点の部分木に含まれる葉のあだ名の最小値・最大値を求めるのは、深さ優先探索によってまとめて\n\\(\\mathrm{O}(N)\\)\n時間で行えます。\n葉のあだ名は深さ優先探索によって与えたので、\n\\(i = 1, 2, \\ldots, N\\)\nについて、頂点\n\\(i\\)\nの部分木に含まれる葉のあだ名の集合は、連続するいくつかの整数からなる集合となります。\nよって、 頂点\n\\(i\\)\nの部分木に含まれる葉のあだ名の集合は\n\\([L_i, R_i]\\)\nです。\nこのことと、葉のあだ名は葉ごとに異なることから、上記の手順で構成した\n\\(\\big((L_1, R_1), (L_2, R_2), \\ldots, (L_N, R_N) \\big)\\)\nがたしかに問題文中の条件を満たすことが確かめられます。\n以上より、本問題を\n\\(\\mathrm{O}(N)\\)\n時間で解くことができます。\n以下にC++言語による正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint n;\nvector<int> G[200005];\nint L[200005], R[200005];\nint leaf[200005];\n\nint id = 0;\nvoid dfs(int v, int p)\n{\n  if(v != 1 && G[v].size() == 1){\n    leaf[v] = ++id;\n    return;\n  }\n  for(auto u : G[v]) if(u != p) dfs(u, v);\n}\n\nvoid dfs2(int v, int p)\n{\n  if(leaf[v]){\n    L[v] = R[v] = leaf[v];\n    return;\n  }\n  L[v] = 1e9, R[v] = -1e9;\n  for(auto u : G[v]){\n    if(u == p) continue;\n    dfs2(u, v);\n    L[v] = min(L[v], L[u]);\n    R[v] = max(R[v], R[u]);\n  } \n}\n\nint main(void)\n{\n  cin >> n;\n  int u, v;\n  for(int i = 1; i <= n-1; i++){\n    cin >> u >> v;\n    G[u].push_back(v);\n    G[v].push_back(u);\n  }\n  \n  dfs(1, -1);\n  dfs2(1, -1);\n  for(int i = 1; i <= n; i++) cout << L[i] << \" \" << R[i] << \"\\n\";\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "47d006250dd8b8edf0a95f6a93ef00df083dca0753a857c31f1c29cb670344ef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc240/abc240_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

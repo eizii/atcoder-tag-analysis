@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc180_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc180/editorial/180",
+      "text": "問題文に書かれた通りの計算式に従って計算を行い、結果を出力すればよいです。絶対値、平方根、最大値などは、ほとんどの言語では標準関数として用意されているので、使い方を確認しておきましょう。\n回答例(C++)\nオーバーフローや誤差（出力形式）に注意してください。\nオーバーフローについて\n32bit符号付き整数型(例えばAtCoder環境でのC/C++のint型)では、\n\\(2^{31} \\fallingdotseq 2.1\\times 10^9\\)\n以上の値を表現できません。かわりに、64bit符号付き整数型(例えばAtCoder環境でのC/C++のlong型)などを使う必要があります。\nC++クイズ：以下の4つの計算の内、正しく「10000000000」が出力されるものがいくつあるでしょうか？\n誤差について\n倍精度浮動小数点数(例えばAtCoder環境でのC/C++のdouble型)は10進数で15桁から16桁の精度があります。大抵の問題は誤差を気にせずに計算してもうまくいきますが、気を付けましょう。\n例題1\n例題2\nまた計算自体は正しく行われていても、出力桁数が不足しているためWAになることがあり得ます。各言語で、出力桁数の設定方法を確認しましょう",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n\tcout << fixed << setprecision(15);\n\n\tint n;\n\tcin >> n;\n\tvector<int>x(n);\n\tfor(int i=0;i<n;i++)cin >> x[i];\n\n\tlong ans1=0;\n\tfor(int i=0;i<n;i++)ans1+=abs(x[i]);\n\tcout << ans1 << endl;\n\n\tlong ans2=0;\n\tfor(int i=0;i<n;i++)ans2+=abs(x[i])*(long)abs(x[i]);\n\tcout << sqrt(ans2) << endl;\n\n\tint ans3=0;\n\tfor(int i=0;i<n;i++)ans3=max(ans3,abs(x[i]));\n\tcout << ans3 << endl;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tcout << (100000 * 100000) << endl;\n\tint x=100000;\n\tcout << (x*x) << endl;\n\tlong y=x*x;\n\tcout << y << endl;\n\tlong z=x*(long)x;\n\tcout << z << endl;\t\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tcout << 0.1234567890123;  //AtCoder環境では0.123457になる\n}"
+      ],
+      "text_sha256": "5eaad8f219f839d2ec98c20f20b75f00be7ca70f37a57748b1609869be03cab9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc180/abc180_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

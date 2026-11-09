@@ -1,0 +1,55 @@
+{
+  "problem_id": "abc404_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc404/editorial/12860",
+      "text": "同じ動物園に\n\\(3\\)\n度以上行く必要はありません。よって各動物園に行く回数が\n\\(0,1,2\\)\nのいずれであるかを\n\\(3^N\\)\n通り全探索することで答えを求めることができます。\n動物園に行く回数を決めたとき、各動物を何度見ることになるかは愚直に回数を数えることで\n\\(O(NM)\\)\nで求めることができるため、計算量は全体で\n\\(O(3^NNM)\\)\nになります。\n実装の練習問題：\nABC263C",
+      "codes": [],
+      "text_sha256": "d6980c0fea7a5f9cf5f7d1ccc272f3ac14f9de060041a95064ea52d9188ee71e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc404/abc404_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc404/editorial/12884",
+      "text": "\\(G_i:=(\\)\n動物園\n\\(i\\)\nにいる動物\n\\()\\)\nと定義します。\nここで、同じ動物園に\n\\(3\\)\n度以上行く必要はないため、各動物園への訪問回数を最大\n\\(2\\)\n回とみなして bit 全探索 を行います。\n具体的には、\n\\(S=0,1,2,\\dots,2^{2N}-1\\)\nについて for ループを回し、\n\\(S\\)\nの\n\\(2^k\\)\nの位が\n\\(1\\)\nならば動物園\n\\(\\lfloor k/2\\rfloor+1\\)\nに\n\\(1\\)\n回訪れたとすることで全探索が可能です。各訪問で見られる動物\n\\(j\\)\nの回数を\n\\(G_i\\)\nを用いて計算することで十分高速に処理することができます。\n計算量は\n\\(O(4^NNM)\\)\nです。公式解説のアルゴリズムより大きいですが、実装が容易であり、制約内では十分高速に動作します。\n実装例 ( PyPy3  , 1672 ms )\n実装例 ( C++  , 618 ms )",
+      "codes": [],
+      "text_sha256": "202f082bf201a6eb6d3859483498e4d3d3eaddb9c85642996520bc11a2818a55",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc404/abc404_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc404/editorial/12874",
+      "text": "ユーザ解説\nの解法を更に高速化します．\nDFS中の各時点において，動物\n\\(i\\)\nを見た回数\n\\(F_i\\)\nの代わりに，\n\\(G_i \\coloneqq \\min(F_i, 2)\\)\nを管理することを考えます．これは\n\\(2\\)\nbit あれば表現することができるので，合計\n\\(2M\\)\nbit の多倍長整数\nwatched\nとして持つことができます．\nDFSを行う上では\nwatched\nに対して以下の操作ができれば良いです．\nある動物園に存在する全ての動物\n\\(i\\)\nに対し，\n\\(G_i\\)\nを\n\\(\\min(G_i + 1, 2)\\)\nに更新する\n全ての動物を\n\\(2\\)\n度以上見たか判定する\n詳細は後述しますが，次の実装例ではこれらの操作を共に（ワードサイズを\n\\(W\\)\nとして）\n\\(O(M/W)\\)\n時間で達成します．\n従って全体で\n\\(O(3^N M/W)\\)\n時間で解けます．\n操作1が\n\\(O(M/W)\\)\nでできること\n当該動物園で動物\n\\(i\\)\nが見られるなら\n\\(E_i \\coloneqq 1\\)\n，見られないなら\n\\(E_i \\coloneqq 0\\)\nで\n\\(E_i\\)\nを定めると，操作1は\n全ての動物\n\\(i\\)\nに対し，\n\\(G_i\\)\nを\n\\(\\min(G_i + E_i, 2)\\)\nに更新する\nと言い換えられます．\none\n\\( = E_i \\in \\lbrace 0, 1\\rbrace\\)\n,\nw\n\\( = G_i \\in \\lbrace 0, 1, 2\\rbrace \\)\nの各組み合わせについて調べると次表のようになり，いずれも\nw + (one & ~w >> 1)\nと\n\\(\\min(G_i + E_i, 2)\\)\nが一致することが分かります．\none\n00\n00\n00\n01\n01\n01\nw\n00\n01\n10\n00\n01\n10\n~w >> 1\n01\n01\n00\n01\n01\n00\none & ~w >> 1\n00\n00\n00\n01\n01\n00\nw + (one & ~w >> 1)\n00\n01\n10\n01\n10\n10\nよって上の実装例で操作1に対応する関数\nadd_one\nの正当性が確認できました．\n操作2が\n\\(O(M/W)\\)\nでできること\n全ての動物\n\\(i\\)\nに対し ，\n\\[\nF_i \\ge 2 \\iff G_i (= \\min(F_i, 2) ) = 2\n\\]\nであるので，\nwatched\nの全ての “位” が\n10\nになっているか判定すれば良く，これはある定数（実装例における\ntwo_all\n）との等値比較でできます（実装例 23 行目）．",
+      "codes": [
+        "n, m = map(int, input().split())\ncost = tuple(map(int, input().split()))\nzoo = [[] for _ in range(n)]\nfor animal in range(m):\n    _, *a = map(lambda s_: int(s_) - 1, input().split())\n    for j in a:\n        zoo[j].append(animal)\n\nones = [sum(1 << 2 * j for j in z) for z in zoo]\ntwo_all = sum(2 << 2 * j for j in range(m))\n\ndef add_one(watched, one):\n    \"\"\"\n    `one`に存在する動物に対応する\"位\"だけを以下のように変化させ，そうでない\"位\"はそのままにする\n    - `00` => `01`\n    - `01` => `10`\n    - `10` => `10`\n    \"\"\"\n    return watched + (one & ~watched >> 1)\n\ndef dfs(i, watched, ans):\n    if i == n:\n        return ans if watched == two_all else 10**18\n    ans0 = dfs(i + 1, watched, ans)\n    watched = add_one(watched, ones[i])\n    ans1 = dfs(i + 1, watched, ans + cost[i])\n    watched = add_one(watched, ones[i])\n    ans2 = dfs(i + 1, watched, ans + cost[i] * 2)\n    return min(ans0, ans1, ans2)\n\nprint(dfs(0, 0, 0))"
+      ],
+      "text_sha256": "1fe41577a75a7193d3c53cd1e2f2c9cf763ebff34af099b6f85e894e9be452f5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc404/abc404_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc404/editorial/12873",
+      "text": "\\(0, 1, 2\\)\nのみからなる長さ\n\\(N\\)\nの列を全探索する方法について，3 通りの方針を挙げます．\nDFS を使う方法\nbit 演算を使う方法\nライブラリを使う方法\n特に新規性はありませんが，実装の助けになれば幸いです．\nDFS を使う方法\n空列\n\\(()\\)\nから始めて，\n\\(0, 1, 2\\)\nのみからなる長さ\n\\(N\\)\n以下\nの列を全て作ることを考えます．\n列をそのまま頂点に見立てて DFS をしてみます．\nいま，列\n\\(X = (X_1, \\cdots, X_n)\\ (n\\le N)\\)\nに対応する頂点にいるとすると，次のような遷移を行えます．\n\\(n = N\\)\nのとき：次の探索箇所を探索する．\n\\(n\\lt N\\)\nのとき：\n\\(X\\)\nの末尾にそれぞれ\n\\(0, 1, 2\\)\nを挿入した列に対し，探索を行う．\nこの問題では\n\\(n = N\\)\nとなった列を列挙すればよいです．\n実装例\n\\(X\\)\nを陽に持たないで探索することもできます．\nあくまで推測ですが，こちらの方が定数倍が良いと思います．\n実装例\nこの問題では各要素のとる範囲が一定ですが，範囲が一定でない場合にも応用が効くため，汎用性が高いと考えられます．\nbit 演算を使う方法\nややトリッキーな方法です．\nbit 全探索を行うと，各動物園に\n\\(0\\)\n回行った，あるいは\n\\(1\\)\n回行った，という状態を列挙できます．\nその状態に対し，立っている bit だけでさらに bit 全探索をするようなことを考えると，\n\\(2\\)\n回行った状態も表現できます．\nつまり，ある集合に対してその部分集合を列挙できればよいです．\nこれは例えば\nABC269Cの解説\nの解法 3 で説明されています．\n実装例\n余談ですが，この手法を bit DP に応用できる場合があります．\n応用例（最小シュタイナー木問題）\n応用例（青 diff）\nライブラリを使う方法\n言語によってはライブラリを用いて簡潔に書くことができます．\n例えば，Python の\nitertools\nモジュールには\nproduct\nという関数があります．\nこれを使うと，求めたい列の集合は\nitertools.product([0, 1, 2], repeat=N)\nと表現できます．\nitertools\nモジュールには他にも\ncombinations\nや\npermutations\nなど，全探索を実装する際に有用な関数が含まれています．",
+      "codes": [],
+      "text_sha256": "f6b718f6dedef3667c932df43eb0b26bd011a2c6d05e7903f0f77dfb4aa81d35",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc404/abc404_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc404/editorial/12872",
+      "text": "各要素について\n\\(0, 1, 2\\)\nという多値を取る時は、再帰で実装すると楽に書けます。\n計算量は\n\\(O(3^NM)\\)\nです。",
+      "codes": [
+        "import java.util.Scanner\nimport kotlin.math.min\nimport kotlin.Int\nfun main() {\n  Scanner(System.`in`).use { sc -> \n    val N = sc.nextInt()\n    val M = sc.nextInt()\n    val C = IntArray(N) { sc.nextInt() }\n    val zoo = Array(N) {MutableList<Int>(0){0}} // 各動物園が持つ動物のリスト\n    for (i in 0 until M) {\n      var A = IntArray(sc.nextInt()) {sc.nextInt()}\n      for (j in A) zoo[j - 1].add(i)\n    }\n    var watched = IntArray(M) { 0 } // 各動物を見た回数\n    println(dfs(0, watched, C, zoo, 0))\n  }\n}\n\nfun dfs(i: Int, watched: IntArray, C: IntArray, zoo: Array<MutableList<Int>>, ans: Long): Long {\n  if (i == C.size) { // 再帰の終了条件\n    for (j in watched) {\n      if (j < 2) return Long.MAX_VALUE // ある動物について一度以下しか見ていない時は、適当に答えになり得ない値を返す\n    }\n    return ans\n  }\n  var ret = dfs(i + 1, watched, C, zoo, ans) // i番目の動物園を訪れない\n  for (j in zoo[i]) watched[j]++\n  ret = min(ret, dfs(i + 1, watched, C, zoo, ans + C[i])) // i番目の動物園を一度訪れる\n  for (j in zoo[i]) watched[j]++\n  ret = min(ret, dfs(i + 1, watched, C, zoo, ans + C[i] * 2)) // i番目の動物園を二度訪れる\n  for (j in zoo[i]) watched[j] -= 2\n  return ret\n}"
+      ],
+      "text_sha256": "33b07ed59ab4bc2ded9cc81866ed536114006460177155ca113ddabd12ada9df",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc404/abc404_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

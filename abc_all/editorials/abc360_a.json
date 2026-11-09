@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc360_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc360/editorial/10302",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nC++入門 AtCoder Programming Guide for beginners (APG4b)\nは、競技プログラミングのための C++ 入門用コンテンツです。\n例えば、以下のような手順でこの問題を解くことができます。\n文字列変数\ns\nを用意し、\ns\nに標準入力から入力を読み込む。\nfor\n文を用いるなどして、\nR\nM\nがそれぞれ\ns\nのどこに含まれるかを調べる。 それぞれ index を変数\npos_r\npos_m\nに保存する。\nif\n文で\npos_r < pos_m\nかどうかを判定し、そうであれば\nYes\n、そうでなければ\nNo\nを出力する。\n他にも、\n\\(S\\)\nとしてあり得る文字列はたかだか\n\\(6\\)\n通りしかないので、全て答えを手で求めておいて場合分けで解くこともできます。\nC++ による実装例",
+      "codes": [
+        "#include <string>\n#include <iostream>\n\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    int pos_r = -1, pos_m = -1;\n    for (int i = 0; i < 3; ++i) {\n        if (s[i] == 'R') {\n            pos_r = i;\n        }\n        if (s[i] == 'M') {\n            pos_m = i;\n        }\n    }\n    if (pos_r < pos_m) {\n        cout << \"Yes\" << endl;\n    } else {\n        cout << \"No\" << endl;\n    }\n}"
+      ],
+      "text_sha256": "f0a0f33d2e0384c725a6e14128d6b35e70b1a1b9eb549c1a9cf26aaa70b53c27",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc360/abc360_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

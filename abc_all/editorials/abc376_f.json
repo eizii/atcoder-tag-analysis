@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc376_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc376/editorial/11195",
+      "text": "動的計画法を用いて解くことを考えます。指示 \\(i\\) まで従い終えた段階では手 \\(H_i\\) の位置がパーツ \\(T_i\\) で確定しており、もう一方の手の位置にだけ自由度があるので、以下のように DP を定義することができます。 \\(\\mathrm{dp}_{i,j}:=\\) 指示 \\(i\\) まで従い終えて、 \\(H_i\\) でない方の手の位置がパーツ \\(j\\) であるときの、ここまでの操作回数の合計の最小値 ( \\(1\\leq i\\leq Q, 1\\leq j\\leq N\\) ) 遷移について考えます。今、左手の位置がパーツ \\(l\\) 、右手の位置がパーツ \\(r\\) であり、これから左手をパーツ \\(l'\\) に移動させたいと仮定します。右手も左手も自由に動かせるため一見多くの移動パターンがあるように思われますが、実は以下の \\(2\\) パターン以外は最適でないので考える必要がありません。 右手を動かさずに左手だけを動かす（ B 問題 で行う操作と同じ）。ただし \\(l'\\neq r\\) の場合に限る。 1 とは逆方向に左手を動かす。そのままだと途中で右手とぶつかってしまうので、左手をパーツ \\(l'\\) まで動かすために必要な最低限の回数だけ右手も一緒に動かす。すなわち、左手をパーツ \\(l\\rightarrow l+1\\rightarrow \\dots\\rightarrow l'\\) と動かすならば右手はパーツ \\(r\\rightarrow r+1\\rightarrow \\dots\\rightarrow l'+1\\) と動かし、左手をパーツ \\(l\\rightarrow l-1\\rightarrow \\dots\\rightarrow l'\\) と動かすならば右手はパーツ \\(r\\rightarrow r-1\\rightarrow \\dots\\rightarrow l'-1\\) と動かす（なお、パーツ \\(N+1\\) はパーツ \\(1\\) を、パーツ \\(0\\) はパーツ \\(N\\) をそれぞれ意味するものとする）。 これにより遷移が \\(O(1)\\) となり、 \\(O(NQ)\\) で本問題を解くことができます。場合分けや円環上での処理が必要になるので、細部に注意しながら実装してください。 実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nconst int inf = 1e9;\n\nvector<pair<int, int>> num_move(int n, int from, int to, int ng) {\n    vector<pair<int, int>> res;\n    if (to != ng) {\n        if (min(from, to) < ng and ng < max(from, to)) {\n            res.emplace_back(n - abs(from - to), ng);\n        } else {\n            res.emplace_back(abs(from - to), ng);\n        }\n    }\n    if (from < ng) {\n        if (from < to and to <= ng) {\n            res.emplace_back(n - (to - from) + (ng - to + 1), to - 1);\n        }\n        if (to < from or ng <= to) {\n            res.emplace_back((to - from + n) % n + (to - ng + n) % n + 1, (to + 1) % n);\n        }\n    } else {\n        if (ng <= to and to < from) {\n            res.emplace_back(n - (from - to) + (to - ng + 1), to + 1);\n        }\n        if (to <= ng or from < to) {\n            res.emplace_back((from - to + n) % n + (ng - to + n) % n + 1, (to - 1 + n) % n);\n        }\n    }\n    return res;\n}\n\nint main() {\n    int n, q;\n    cin >> n >> q;\n    vector dp(q + 1, vector<int>(n, inf));\n    int ph = 0, pt = 0;\n    dp[0][1] = 0;\n    for (int i = 0; i < q; i++) {\n        char hc;\n        int t;\n        cin >> hc >> t;\n        --t;\n        int h = (hc == 'L' ? 0 : 1);\n        for (int j = 0; j < n; j++) {\n            if (dp[i][j] == inf) continue;\n            vector<int> pos(2);\n            pos[ph] = pt;\n            pos[ph ^ 1] = j;\n            for (auto [num, npos]: num_move(n, pos[h], t, pos[h ^ 1])) {\n                dp[i + 1][npos] = min(dp[i + 1][npos], dp[i][j] + num);\n            }\n        }\n        ph = h, pt = t;\n    }\n    int ans = inf;\n    for (int i = 0; i < n; i++) ans = min(ans, dp[q][i]);\n    cout << ans << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "4ab8ab9a306e05812e5281f459f062a906c6bffc2db99fb7dab03cf1de4f8501"
+    }
+  ],
+  "status": "available"
+}

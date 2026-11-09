@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc072_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc072/editorial.pdf",
+      "text": "C : Sequence\n\n 偶数番目と奇数番目どちらを正にするかで2 通り考え、小さい方を答えることにします。番号の小さい順に\n\n数を確定させていきます。\n\n   i 桁目までの和の符号が欲しい符号と同じ場合、i 番目の数を変更する必要はありません。すでにi 番目まで\n\nの和の符号が合致しているのにi 番目の数を変更して最適解が得られるなら、i 番目の数に対する変更をi + 1\n\n番目の数に持ってくることで同じ最適解が得られるからです。\n\n   i 桁目までの和の符号が欲しい符号と異なる場合、まず欲しい符号のうち絶対値最小までは変更しなくては\n\nいけません(1 か−1)。これ以後は上と同様の議論が成り立つので、1 か−1 まで変更すれば十分です。\n\n この規則で前から順に決めコストを求めていくことで答えが求まります。\n\n\n\n\n                                             1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "355449949f7ba61762cce1b5295b4b3765ca7d0fd306c2151cab25c82c790a18"
+    }
+  ],
+  "status": "available"
+}

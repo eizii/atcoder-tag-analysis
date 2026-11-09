@@ -1,0 +1,40 @@
+{
+  "problem_id": "abc346_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc346/editorial/9643",
+      "text": "\\(K\\)\nが大きいため、\n\\(1,2,\\dots,K\\)\nのうち\n\\(A\\)\nに含まれないものを\n\\(1\\)\nつずつ足し合わせていくことはできません。そこで、以下の方針を考えます。\n\\(\\mathrm{ans}=1+2+\\dots+K=\\frac{K(K+1)}{2}\\)\nとする。\n\\(A\\)\nの中に一度以上現れる\n\\(1\\)\n以上\n\\(K\\)\n以下の整数を列挙し、 それぞれの整数を\n\\(\\mathrm{ans}\\)\nから引く。\n\\(\\mathrm{ans}\\)\nを出力する。\n\\(A\\)\nの中に一度以上現れる\n\\(1\\)\n以上\n\\(K\\)\n以下の整数を列挙するためには、\n\\(A\\)\nから\n\\(K+1\\)\n以上の数を除外した上で、重複を取り除く必要があります。重複を取り除く方法は複数考えられますが、例えば、 C++ の\nstd::set\nや Python の set などの集合を管理できるデータ構造を使う方法があります。これらのデータ構造は、挿入された要素を重複を取り除いた状態で管理してくれます（それ以外の機能を持つものもあります）。より詳細には、C++ の\nstd::set\nのような内部に平衡二分探索木を用いたものと、C++ の\nstd::unordered_set\nや Python の set のようなハッシュを用いたものがあり、両者は計算量や機能の面で差があります。本問題においてはどちらも用いることができ、前者を用いると計算量が\n\\(O(N\\log N)\\)\n、後者を用いると計算量が期待\n\\(O(N)\\)\nになりますが、後者の場合はハッシュの衝突によって計算量が悪化する可能性もあることを念頭に入れて使用してください。以下の実装例では C++ の\nstd::set\nを用いています。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint main() {\n    int n, k;\n    cin >> n >> k;\n    set<int> st;\n    for (int i = 0; i < n; i++) {\n        int a;\n        cin >> a;\n        if (a <= k) st.insert(a);\n    }\n    ll ans = (ll) k * (k + 1) / 2;\n    for (int i: st) ans -= i;\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "51dd6be2bd07b84f496e6fb39842f2ef36bbfec5dbffd41d32be19b9b9d9db5e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc346/abc346_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc346/editorial/9685",
+      "text": "setを使用しないで解くこともできます。\n\\(1\\)\nから\n\\(K\\)\nまでの総和を求め、\n\\(ans\\)\nとするところまでは公式解説と同じですが、\n\\(A\\)\nをソートしたものを\n\\(B\\)\nとすると\n\\(B_i\\)\nは\n\\(B_i \\neq B_{i-1}\\)\nかつ\n\\(B_i \\leq K\\)\nの時のみ\n\\(ans\\)\nから引けばよいです。\n\\(A\\)\nのソートがボトルネックとなり\n\\(O(NlogN)\\)\nでこの問題が解けます。\n\\(B_1\\)\nのみ必ず\n\\(ans\\)\nから引かなければいけないことに注意してください。",
+      "codes": [],
+      "text_sha256": "158d91ee056c6e5c08c6c9173ed790a9981947ce33a201f91d6ec5485e66e515",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc346/abc346_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc346/editorial/9635",
+      "text": "はじめに\nこの問題のコードを例えば以下のように書くと，用意されたテストケースに対しては制限時間内に正しい答えを求めることができます．しかし，厳密にはこのコードが適切であるとは言えません．\n本解説では，Python で set および dict を用いる際に注意すべき点について述べます．\nコードが適切ではない理由\nPython で実装されている set や dict の計算量は expected\n\\(O(1)\\)\nで，基本的には高速で動作します．しかし，set や dict で実装されている中身を悪用することで，Python に対して意図的ないじわるなケースを作れてしまう (Hack できてしまう) ことが知られています．競プロにおいて，制約を満たしたいかなるケースに対しても正しいコードを書くことが求められるという観点からすると，上のコードは厳密には適切とは言えません．今回は Hack ケースが用意されていませんでしたが，Hack を目的とした意図的なテストケースが用意されていた場合は上のコードでは AC が得られなくなってしまいます．\n海外のコンテストサイト Codeforces ではコンテスト中に他人のコードを Hack することができます．そのため，set や dict をそのまま用いるとしばしば Hack されることがあるため特に注意が必要です．\nHack ケース\n上のコードで TLE してしまう入力例を紹介します．\nコードテストに上の Hack ケースを貼って，実際に TLE することを体感してみると良いかもしれません．\nHack ケースを作るにあたって以下の記事を参考にしました．\nPythonのdict()が特定の入力に対し非常に遅い件について\ndict および set の中身について知りたい方におすすめの日本語記事です\nPythonのハッシュ衝突攻撃の考察3: setの理解と効率的な衝突の実践(anti-set)\n(Codeforces Blog) Anti-hash-table test in Python\nHack ケースを防ぐ方法\n競プロでは，意図的な入力による Hack を防ぐ方法として乱数を用いる方法が主流だと筆者は感じます．適当な乱数\n\\(R\\)\nを用意し，値\n\\(x\\)\nの代わりに\n\\(R\\oplus x\\)\nを用いるようにすることで，いかなる（意図的な）入力に対しても Hack されることを高確率で防ぐことができます．\n他にも，計算量は落ちますが hash を用いずに集合を管理するデータ構造を使うことによっても回避することが可能です．",
+      "codes": [
+        "N, K = map(int, input().split())\nA = list(map(int, input().split()))\nS = set(A)\n\nans = K*(K+1)//2\nfor i in S:\n    if i <= K:\n        ans -= i\n\nprint(ans)",
+        "def generate_python_killer():\n    mask = (1 << 30)-1\n    A = []\n    for i in range(10):\n        A.append(mask+2+i)\n    x = 6\n    for i in range(10**4):\n        for j in range(10):\n            A.append(x+j)\n        x = 5*x+1\n        x &= mask\n    A += [1]*(N-len(A))\n    return A\n\n\n# N, K = map(int, input().split())\n# A = list(map(int, input().split()))\nN, K = 2*10**5, 2*10**9\nA = generate_python_killer()\nS = set(A)\nans = K*(K+1)//2\nfor i in S:\n    if i <= K:\n        ans -= i\nprint(ans)",
+        "def generate_pypy_killer():\n    mask = (1 << 30)-1\n    A = [mask+2]\n    x = 6\n    for i in range(43599):\n        A.append(x)\n        x = (x*5+1) & mask\n    A += [1]*(N-len(A))\n    return A\n\n\n# N, K = map(int, input().split())\n# A = list(map(int, input().split()))\nN, K = 2*10**5, 2*10**9\nA = generate_pypy_killer()\nS = set(A)\nans = K*(K+1)//2\nfor i in S:\n    if i <= K:\n        ans -= i\nprint(ans)",
+        "import random\nR = random.randint(1, 1 << 60)\n\nN, K = map(int, input().split())\nA = list(map(int, input().split()))\nS = set([i ^ R for i in A]) # hack を防ぐため，i の代わりに i ^ R を用いる\nans = K*(K+1)//2\nfor j in S:\n    i = j ^ R  # 元に戻す\n    if i <= K:\n        ans -= i\nprint(ans)"
+      ],
+      "text_sha256": "490c4ab6f9881963205246fca1d337dfbddd9fe36d304db27e52ba787631df36",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc346/abc346_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

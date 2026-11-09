@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc410_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc410/editorial/13301",
+      "text": "この問題には\n\\(H \\times W \\le 300000\\)\nという特別な制約がかかっています。\nこの制約から、\n\\(\\min(H,W) \\le \\sqrt{300000} \\approx 548\\)\nということが分かります。\n\\(H \\le W\\)\nとなるように予め入力を変形しておくことで、\n\\(O(H^2W)\\)\nといった時間計算量をかけても各パラメータに値を代入して額面\n\\(1.7 \\times 10^8\\)\nという計算量になり、時間制限に間に合いそうなことが分かります。\n以降、\n\\(H \\le W\\)\nであるよう入力を変形したものとして考えます。\n例えば\n\\(90\\)\n度回転を用いてもよければ、\n\\(S'_{i,j} = S_{j,i}\\)\nと変形しても構いません。どちらの変形でも答えは不変です。\nまず、長方領域のうち上辺と下辺を固定します。この選び方は\n\\(O(H^2)\\)\n通りあります。上辺と下辺を固定した時の問題を時間計算量\n\\(O(W)\\)\nで解ければこの問題に正解できます。\n最も上の行を\n\\(u\\)\n、最も下の行を\n\\(d\\)\nと固定した場合の問題は次の通りです。\n\\(C_j\\)\nを次の通りに定義する。\n上から\n\\(u\\)\n行目から\n\\(d\\)\n行目、左から\n\\(1\\)\n行目から\n\\(W\\)\n行目を取り出した領域を\n\\(G\\)\nとする。\n\\(C_j\\)\nを (\n\\(G\\)\nの左から\n\\(j\\)\n列目に含まれる\n#\nの数 )\n\\(-\\)\n(\n\\(G\\)\nの左から\n\\(j\\)\n列目に含まれる\n.\nの数 ) と定義する。\nこのとき、\n\\(C_l+C_{l+1}+\\dots+C_{r}=0\\)\nかつ\n\\(l \\le r\\)\nとなる整数の組\n\\((l,r)\\)\nの数が求めたい値である。\nこの問題はまさに\nZero-Sum Ranges\nです。しかし、この解説の通りに解くと\n\\(O(W \\log W)\\)\nとなり、全体で\n\\(O(H^2 W \\log W)\\)\n、値を代入して額面\n\\(1.5 \\times 10^{9}\\)\nという計算量となり、よほど定数倍に気を遣った実装でない限り実行時間に間に合いません (逆に、この程度の計算量であれば非常に気を遣った実装をすると正解できる場合もあります。)\nでは、どのように高速化すればよいでしょうか？\nここで、\n\\(C_l+C_{l+1}+\\dots+C_{r}\\)\nのとりうる値域に注目しましょう。\n\\(C_i\\)\nの定義より、この値域は\n\\(-HW\\)\n以上\n\\(HW\\)\n以下です。なので、総和が\n\\(0\\)\nとなる連続部分列を数える際に\nmap\nや\nsort\nといった\n\\(\\log\\)\nがつくデータ構造の代わりに単なる配列を工夫して用いることで、この\n\\(\\log\\)\nを排除することができます。\nなお、毎回\n\\(C_i\\)\nを愚直に計算すると計算量が増加するため、\n\\(u,d\\)\nに関してループを回す際に工夫して\n\\(C_i\\)\nを更新する必要があります。\n\\(\\log\\)\nを排除すると、最初の望み通りに時間計算量\n\\(O(H^2W)\\)\nでこの問題に正解できます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nvector<string> flip(vector<string> &s){\n  int H=s.size(),W=s[0].size();\n  vector<string> res(W);\n  for(int i=0;i<W;i++){\n    for(int j=0;j<H;j++){\n      res[i].push_back(s[j][i]);\n    }\n  }\n  return res;\n}\n\nint main(){\n  int t;\n  cin >> t;\n  while(t>0){\n    t--;\n    int H,W;\n    cin >> H >> W;\n    vector<string> s(H);\n    for(auto &nx : s){cin >> nx;}\n    if(H>W){s=flip(s);}\n    H=s.size();\n    W=s[0].size();\n\n    int ofs=H*W;\n    vector<int> bk(2*H*W+1,0);\n    long long res=0;\n    for(int u=0;u<H;u++){\n      vector<int> C(W,0);\n      for(int d=u;d<H;d++){\n        for(int i=0;i<W;i++){\n          if(s[d][i]=='#'){C[i]++;}\n          else{C[i]--;}\n        }\n        int h;\n        h=0;\n        bk[h+ofs]++;\n        for(int i=0;i<W;i++){\n          h+=C[i];\n          res+=bk[h+ofs];\n          bk[h+ofs]++;\n        }\n\n        // reset bk\n        h=0;\n        bk[h+ofs]=0;\n        for(int i=0;i<W;i++){\n          h+=C[i];\n          bk[h+ofs]=0;\n        }\n      }\n    }\n    cout << res << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "312bfb49a5d77da39c57b4a872d86fd196a05ebb8a5b673960a9382f5b0c90b2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc410/abc410_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

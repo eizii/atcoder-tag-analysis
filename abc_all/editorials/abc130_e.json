@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc130_e",
+  "editorials": [
+    {
+      "text": "E: Common Subsequence\nある整数k に対して、Si1 = Tj1, ..., Sik = Tjk となるように添字の集合1 ≤i1 < i2 < ... < ik ≤N\nと1 ≤j1 < j2 < ... < jk ≤M を選ぶ場合の数を求める問題です。以下ではこの集合を前から決めて\nいくことを考えます。まず、素直な解法として次のようなdp が考えられます。dp[i][j] : S のi 文字目ま\nでとT のj 文字目までを考慮し、この2 文字をペアにするときの場合の数とすると、Si = Tj である\nときdp[i][j] = (∑i−1\nk=1\n∑j−1\nl=1 dp[k][l]) + 1 、そうでないとき0 として計算できますが、この時間計算量は\nO(N 2 ∗M 2) です。和を取る部分に着目すると、2 次元累積和の考え方を適応することができ、O(NM) に\n改善できます。具体的には、sum[i][j] = ∑i\nk=1\n∑j\nl=1 dp[k][l] と置いて、sum[i][j] = sum[i-1][j] + sum[i][j-\n1] −sum[i-1][j-1] + dp[i][j] として更新していくことができます。\n",
+      "text_sha256": "127c12e121b1e8ac7dc7bae24d4ee54cf1537b04cc89c0e685352e877b77f65d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc130/abc130_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

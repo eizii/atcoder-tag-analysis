@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc182_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc182/editorial/288",
+      "text": "フォロー数は、フォロワー数の\n\\(2\\)\n倍\n\\(+100\\)\n、つまり\n\\(2 \\times A + 100\\)\nまで上げられます。今\n\\(B\\)\nなので増やせる分は\n\\(2 \\times A + 100 - B\\)\nです。\n多くのプログラミング言語には四則演算の演算子があるのでそれを使用することでこの値が計算できます。\n解答例 (C)\n解答例 (Python)",
+      "codes": [
+        "#include <stdio.h>\n\nint main() {\n   int a, b;\n   scanf(\"%d%d\", &a, &b);\n   printf(\"%d\\n\", 2 * a + 100 - b);\n   return 0;\n}",
+        "a, b = map(int, input().split())\nprint(2 * a + 100 - b)"
+      ],
+      "text_sha256": "adf5494174704c066d714291248baae79189d52d3be5133d753b80d82dabede9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc182/abc182_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

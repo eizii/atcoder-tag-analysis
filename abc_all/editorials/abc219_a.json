@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc219_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc219/editorial/2655",
+      "text": "if / else 文を用いて実装することができます。\n実装例 (C++):\n実装例 (Python) :\nなお、ループを用いて簡潔に実装することもできます。\n\\(40, 70, 90\\)\nのうち\n\\(X\\)\nより大きい最小のものを見つけ（存在しない場合は\nexpert\nと出力）、その値から\n\\(X\\)\nを引くという処理を行っています。\n実装例 (C++):\n以下に載せるコードは発展的な内容を含みます (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int X;\n    cin >> X;\n    if (X < 40) {\n        cout << 40 - X << '\\n';\n    } else if (X < 70) {\n        cout << 70 - X << '\\n';\n    } else if (X < 90) {\n        cout << 90 - X << '\\n';\n    } else {\n        cout << \"expert\\n\";\n    }\n}",
+        "X = int(input())\nif X < 40:\n    print(40 - X)\nelif X < 70:\n    print(70 - X)\nelif X < 90:\n    print(90 - X)\nelse:\n    print(\"expert\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int X;\n    cin >> X;\n    vector<int> A = {40, 70, 90};\n    for (int i = 0; i < 3; ++i) {\n        if (A[i] > X) {\n            cout << A[i] - X << '\\n';\n            return 0;\n        }\n    }\n    cout << \"expert\\n\";\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int X;\n    cin >> X;\n    vector<int> A = {40, 70, 90};\n    auto itr = upper_bound(begin(A), end(A), X);\n    if (itr != end(A)) {\n        cout << *itr - X << '\\n';\n    } else {\n        cout << \"expert\\n\";\n    }\n}"
+      ],
+      "text_sha256": "9ded4615500eff8587bf44e86f22d8ae8fee74e40d19597523a4835449b6350a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc219/abc219_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

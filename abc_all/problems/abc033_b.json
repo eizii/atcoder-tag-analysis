@@ -1,0 +1,60 @@
+{
+  "problem_id": "abc033_b",
+  "title": "町の合併",
+  "contests": [
+    {
+      "contest_id": "abc033",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 296,
+  "raw_difficulty": 279,
+  "contest_id": "abc033",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc033/tasks/abc033_b",
+  "statement": "問題文 N 個の町が合併し、 1 つの新しい市になることになりました。合併前の i (1 ≦ i ≦ N) 番目の町は名称が S_i で、人口が P_i 人です。\r\n新しい市の名称を、以下のように決めようとしています。 N 個の町の人口の合計の過半数以上の人口を有する町が存在するならば、新しい市の名称はその町の名称を引き継ぐことにする。 そのような町が存在しないならば、新しい市の名称は atcoder とする。 それぞれの町の名称と人口が与えられるので、合併後の新しい市の名称を出力してください。 入力 入力は以下の形式で標準入力から与えられる。 N S_1 P_1 S_2 P_2 : S_N P_N 1 行目には、整数 N (2 ≦ N ≦ 1,000) が与えられる。 2 行目から N 行では、それぞれの町の情報が与えられる。このうち i 行目には、英小文字のみからなる長さ 1 以上 20 以下の文字列 S_i と 整数 P_i (1 ≦ P_i ≦ 100,000) が空白区切りで与えられる。 S_1 , S_2 , …, S_N は全て異なる。 出力 合併後の新しい市の名称を 1 行に出力せよ。 出力の末尾にも改行を入れること。 入力例 1 4\r\nunagi 20\r\nusagi 13\r\nsnuke 42\r\nsmeke 7 出力例 1 snuke 4 つの町の合計人口は 20 + 13 + 42 + 7 = 82 人です。 3 番目の町はこの過半数以上の人口を有しています。 入力例 2 5\r\na 10\r\nb 20\r\nc 30\r\nd 40\r\ne 100 出力例 2 atcoder 5 つの町の合計人口は 10 + 20 + 30 + 40 + 100 = 200 人ですが、この過半数以上の人口を有する町は存在しないので、 atcoder という市名になります。\r\nなお、 5 番目の町は合計人口のちょうど半数の人口を有していますが、過半数ではないことに注意してください。 入力例 3 14\r\nyasuzuka 3340\r\nuragawara 4032\r\noshima 2249\r\nmaki 2614\r\nkakizaki 11484\r\nogata 10401\r\nkubiki 9746\r\nyoshikawa 5142\r\njoetsu 100000\r\nnakago 4733\r\nitakura 7517\r\nkiyosato 3152\r\nsanwa 6190\r\nnadachi 3169 出力例 3 joetsu",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 個の町が合併し、 1 つの新しい市になることになりました。合併前の i (1 ≦ i ≦ N) 番目の町は名称が S_i で、人口が P_i 人です。\r\n新しい市の名称を、以下のように決めようとしています。 N 個の町の人口の合計の過半数以上の人口を有する町が存在するならば、新しい市の名称はその町の名称を引き継ぐことにする。 そのような町が存在しないならば、新しい市の名称は atcoder とする。 それぞれの町の名称と人口が与えられるので、合併後の新しい市の名称を出力してください。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S_1 P_1 S_2 P_2 : S_N P_N 1 行目には、整数 N (2 ≦ N ≦ 1,000) が与えられる。 2 行目から N 行では、それぞれの町の情報が与えられる。このうち i 行目には、英小文字のみからなる長さ 1 以上 20 以下の文字列 S_i と 整数 P_i (1 ≦ P_i ≦ 100,000) が空白区切りで与えられる。 S_1 , S_2 , …, S_N は全て異なる。"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 合併後の新しい市の名称を 1 行に出力せよ。 出力の末尾にも改行を入れること。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\r\nunagi 20\r\nusagi 13\r\nsnuke 42\r\nsmeke 7"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 snuke 4 つの町の合計人口は 20 + 13 + 42 + 7 = 82 人です。 3 番目の町はこの過半数以上の人口を有しています。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5\r\na 10\r\nb 20\r\nc 30\r\nd 40\r\ne 100"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 atcoder 5 つの町の合計人口は 10 + 20 + 30 + 40 + 100 = 200 人ですが、この過半数以上の人口を有する町は存在しないので、 atcoder という市名になります。\r\nなお、 5 番目の町は合計人口のちょうど半数の人口を有していますが、過半数ではないことに注意してください。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 14\r\nyasuzuka 3340\r\nuragawara 4032\r\noshima 2249\r\nmaki 2614\r\nkakizaki 11484\r\nogata 10401\r\nkubiki 9746\r\nyoshikawa 5142\r\njoetsu 100000\r\nnakago 4733\r\nitakura 7517\r\nkiyosato 3152\r\nsanwa 6190\r\nnadachi 3169"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 joetsu"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc033/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:33:35.730398+00:00",
+  "statement_sha256": "c3d9fdd78215f4a52d7f7a0c10e0d9b89139d150748d88c87ca639b72aaaa462",
+  "editorials": []
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc383_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc383/editorial/11540",
+      "text": "加湿器が置かれたマスが\n\\((i_1,j_1),(i_2,j_2)\\)\nと定まっているとき、ある床のマス\n\\((i,j)\\)\nは\n\\(|i-i_1|+|j-j_1|\\leq D\\)\nまたは\n\\(|i-i_2|+|j-j_2| \\leq D\\)\nを満たす時にのみ加湿され、容易に加湿されるかの判定ができます。\nよって、加湿器を置くマスを全探索し、それぞれの置き方について全てのマスについて加湿されるか判定することで加湿される床のマスの個数を求めて、それらの最大値を計算することで答えを得られます。\n加湿器の置き方は最大で\n\\((HW)^2\\)\n通りあり、それぞれの置き方で\n\\(HW\\)\n個の全てのマスについて加湿判定をするため、全体で\n\\(\\mathrm{O}((HW)^3)\\)\nの計算量となります。\n実装の際は加湿器を置くマスは床であること、求める値は加湿される床のマスの個数であることに注意する必要があります。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int h, w, d;\n    cin >> h >> w >> d;\n    vector<string> s(h);\n    for (int i = 0; i < h; ++i) {\n        cin >> s[i];\n    }\n    int ans = 0;\n    for (int i1 = 0; i1 < h; ++i1) {\n        for (int j1 = 0; j1 < w; ++j1) {\n            if (s[i1][j1] == '#')\n                continue; //床のマスではない\n            for (int i2 = 0; i2 < h; ++i2) {\n                for (int j2 = 0; j2 < w; ++j2) {\n                    if (s[i2][j2] == '#' || (i1 == i2 && j1 == j2))\n                        continue; //床のマスではないか片方の加湿器と同じ場所\n                    int tmp = 0;\n                    for (int i = 0; i < h; ++i) {\n                        for (int j = 0; j < w; ++j) {\n                            if (s[i][j] == '.' && (abs(i - i1) + abs(j - j1) <= d || abs(i - i2) + abs(j - j2) <= d)) {\n                                tmp++; //加湿されている\n                            }\n                        }\n                    }\n                    ans = max(ans, tmp);\n                }\n            }\n        }\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "19d3cfac55625ad42108ba2ad28c51d2b1c7d8bb9793fb194cf790aec0f6ed7c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc383/abc383_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

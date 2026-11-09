@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc397_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc397/editorial/12456",
+      "text": "\\(L_i=(A_1,A_2,\\ldots,A_i)\\)\nに含まれる整数の種類数\n\\(R_i=(A_i,A_{i+1},\\ldots,A_N)\\)\nに含まれる整数の種類数\nとします。\nこのとき、答えは\n\\(\\max_{1 \\leq i \\leq N-1} (L_i+R_{i+1})\\)\nとなります。つまり、\n\\(L,R\\)\nをそれぞれ計算することができれば答えを求めることができます。\n\\(R\\)\nは\n\\(A\\)\nを逆順にしたて\n\\(L\\)\nと同様の求め方をすればいいです。また、\n\\(L\\)\nは実際に高速に求めることが可能です。\n以下の手順で求められます。\n\\(S=0,V=(0,0,0,0,\\ldots,0) \\)\nとします。このとき、\n\\(V\\)\nは長さ\n\\(N\\)\nの配列です。\n\\(i=1,2,\\ldots,N\\)\nの順に以下を行う\n\\(V_{A_i}=0\\)\nならば、\n\\(V_{A_i} \\larr 1\\)\n、\n\\(S \\larr S+1\\)\nとする。\n\\(L_i \\larr S\\)\n同様に\n\\(R\\)\nを求め、\n\\(L,R\\)\nから上で示した式を計算し、答えを計算できます。\n時間計算量は\n\\(O(N)\\)\nです。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (auto &e : a)\n        cin >> e;\n    vector<int> suml(n), sumr(n);\n    vector<int> vis(n + 1, 0);\n    int now = 0;\n    for (int i = 0; i < n; ++i) {\n        if (!vis[a[i]]) {\n            now++;\n        }\n        vis[a[i]] = 1;\n        suml[i] = now;\n    }\n    now = 0;\n    vis = vector<int>(n + 1, 0);\n    for (int i = n - 1; i >= 0; --i) {\n        if (!vis[a[i]]) {\n            now++;\n        }\n        vis[a[i]] = 1;\n        sumr[i] = now;\n    }\n    int ans = 0;\n    for (int i = 0; i < n - 1; ++i) {\n        ans = max(ans, suml[i] + sumr[i + 1]);\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "a5c4dfba93022829b7ea5b76b0e06bd2e2db4f1ba9a95b6a2cab9377d478b682",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc397/abc397_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

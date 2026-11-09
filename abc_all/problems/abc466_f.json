@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc466_f",
+  "title": "Many Mod Calculation",
+  "contests": [
+    {
+      "contest_id": "abc466",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1887,
+  "raw_difficulty": 1887,
+  "contest_id": "abc466",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc466/tasks/abc466_f",
+  "statement": "配点 : 500 点 問題文 整数 N,X と長さ N の正整数列 A=(A_1,A_2,\\ldots,A_N) が与えられます。 非負整数 x に対し、 f(x)=(\\ldots((x \\bmod A_1) \\bmod A_2) \\ldots ) \\bmod A_N と定義します。 f(x)=0 となる 1 以上 X 以下の整数 x がいくつ存在するか求めてください。 T 個のテストケースが与えられるので、それぞれについて答えを求めてください。 制約 1\\le T\\le 2\\times 10^5 1\\le N\\le 2\\times 10^5 全てのテストケースにおける N の総和は 2\\times 10^5 以下 1\\le X\\le 10^{18} 1\\le A_i\\le 10^{18} 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 T \\text{case}_1 \\text{case}_2 \\vdots \\text{case}_T 各テストケースは以下の形式で与えられる。 N X A_1 A_2 \\ldots A_N 出力 各テストケースに対する答えを順に改行区切りで出力せよ。 入力例 1 4\n3 7\n5 2 3\n9 31415\n9 9 8 2 4 4 3 5 3\n1 1000000000000000000\n1\n9 20260405\n3141 5926 5358 9793 2384 6264 3383 2795 288 出力例 1 4\n17452\n1000000000000000000\n77403 1 番目のテストケースについて考えます。 例えば x=7 のとき f(7)=(((7 \\bmod 5) \\bmod 2)\\bmod 3)=(2\\bmod 2)\\bmod 3=0\\bmod 3=0 となります。 f(x)=0 となる 1 以上 7 以下の整数 x は x=2,4,5,7 の 4 つです。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 整数 N,X と長さ N の正整数列 A=(A_1,A_2,\\ldots,A_N) が与えられます。 非負整数 x に対し、 f(x)=(\\ldots((x \\bmod A_1) \\bmod A_2) \\ldots ) \\bmod A_N と定義します。 f(x)=0 となる 1 以上 X 以下の整数 x がいくつ存在するか求めてください。 T 個のテストケースが与えられるので、それぞれについて答えを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\le T\\le 2\\times 10^5 1\\le N\\le 2\\times 10^5 全てのテストケースにおける N の総和は 2\\times 10^5 以下 1\\le X\\le 10^{18} 1\\le A_i\\le 10^{18} 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 T \\text{case}_1 \\text{case}_2 \\vdots \\text{case}_T 各テストケースは以下の形式で与えられる。 N X A_1 A_2 \\ldots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 各テストケースに対する答えを順に改行区切りで出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\n3 7\n5 2 3\n9 31415\n9 9 8 2 4 4 3 5 3\n1 1000000000000000000\n1\n9 20260405\n3141 5926 5358 9793 2384 6264 3383 2795 288"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4\n17452\n1000000000000000000\n77403 1 番目のテストケースについて考えます。 例えば x=7 のとき f(7)=(((7 \\bmod 5) \\bmod 2)\\bmod 3)=(2\\bmod 2)\\bmod 3=0\\bmod 3=0 となります。 f(x)=0 となる 1 以上 7 以下の整数 x は x=2,4,5,7 の 4 つです。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc466/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:52.847556+00:00",
+  "statement_sha256": "b2e7c79339abe29bac95dbeae5ca1b4942ca5e60071fac3e4278c4d14a9c67a5",
+  "editorials": []
+}

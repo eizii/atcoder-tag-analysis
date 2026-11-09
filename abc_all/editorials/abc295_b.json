@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc295_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc295/editorial/6049",
+      "text": "以下のアルゴリズムを for 文によって実装すればよいです。\n\\(R\\times C\\)\nの bool 配列\n\\(v\\)\nを用意し、最初全ての要素を False で初期化する。\n爆弾がある全てのマス\n\\((i,j)\\)\nについて以下を行う。\n\\((i,j)\\)\nにある爆弾の爆発が効果を及ぼすような全てのマス\n\\((k,l)\\)\nについて、\n\\(v[k][l]\\)\nを True にする。\n\\(v[i][j]\\)\nが True であるような全てのマス\n\\((i,j)\\)\nについて、\n\\(B[i][j]\\)\nを\n.\nにする。\n上記の 2. において直接\n\\(B[k][l]\\)\nを\n.\nにしてしまうと、\n\\((k,l)\\)\nに爆弾があった場合、その爆弾の爆発を考慮し損ねてしまう可能性があることに注意してください。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int r, c;\n    cin >> r >> c;\n    vector <string> b(r);\n    for (string &s: b) cin >> s;\n    \n    vector blasted(r, vector<bool>(c));\n    for (int i = 0; i < r; i++) {\n        for (int j = 0; j < c; j++) {\n            if (!isdigit(b[i][j])) continue;\n            int power = b[i][j] - '0';\n            for (int ni = 0; ni < r; ni++) {\n                for (int nj = 0; nj < c; nj++) {\n                    if (abs(i - ni) + abs(j - nj) <= power) blasted[ni][nj] = true;\n                }\n            }\n        }\n    }\n    \n    for (int i = 0; i < r; i++) {\n        for (int j = 0; j < c; j++) {\n            if (blasted[i][j]) b[i][j] = '.';\n        }\n    }\n    \n    for (string &s: b) cout << s << '\\n';\n}"
+      ],
+      "text_sha256": "969217440982a8c54e01e64ebad464e30fb44482b0ccfb708d20cdb35f86433d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc295/abc295_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc295/editorial/6053",
+      "text": "基本的には問題文で述べられた通りに爆発を実装することになりますが、入力例 3 のようなケースで「爆発する前の爆弾」を吹き飛ばさないように注意を要します。以下の実装例では、各マスに対してそのマスが爆発に巻き込まれるかを個別に判定することでこれを回避しています。\nその他雑記：\n\\(R, C \\leq 20\\)\nと盤面が狭いため、爆弾の威力を気にせず\n\\(R^2 C^2\\)\n周の四重ループを書いてしまって問題ありません。\n空きマスや壁を威力\n\\(-1\\)\nの爆弾とみなすと実装が楽になるかもしれません。\n実装例：（Python）",
+      "codes": [
+        "R, C = map(int, input().split())\nB = [input() for i in range(R)]\nfor i in range(R):\n    for j in range(C):\n        x = B[i][j]\n        for i2 in range(R):\n            for j2 in range(C):\n                p = int(B[i2][j2]) if B[i2][j2].isdigit() else -1\n                if abs(i - i2) + abs(j - j2) <= p:\n                    x = '.'\n        print(x, end='')\n    print()"
+      ],
+      "text_sha256": "e48b74984a665f22f8e26039a3b95f76024f4e20764b47a994b52bf1339378db",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc295/abc295_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

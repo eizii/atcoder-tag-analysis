@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc353_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc353/editorial/9957",
+      "text": "\\(f(x,y)\\)\nを扱いやすい形に言い換えましょう。今回の制約の範囲では、\n\\(f(x,y)\\)\nは\n\\(x+y < 10^8\\)\nのとき\n\\(x+y\\)\n、\n\\(x+y\\geq 10^8\\)\nのとき\n\\(x+y-10^8\\)\nに等しいことがわかります。\nこのことから、\n\\(\\sum_{i=1}^{N-1}\\sum_{j=i+1}^N A_i + A_j\\)\nを求め、そこから\n\\(A_i + A_j\\)\nが\n\\(10^8\\)\n以上となる整数組\n\\((i,j)\\ (1\\leq i <j\\leq N)\\)\nの個数\n\\(\\times 10^8\\)\nを引けば答えが求まります。\n\\(\\sum_{i=1}^{N-1}\\sum_{j=i+1}^N A_i + A_j\\)\nを考えると、各項が\n\\(N-1\\)\n回加算されることから、これは\n\\((N-1)\\sum_{i=1}^{N} A_i\\)\nと言い換えられ、\n\\(\\mathrm{O}(N)\\)\nで求められます。\n次に、\n\\(A_i + A_j\\)\nが\n\\(10^8\\)\n以上となる整数組\n\\((i,j)\\ (1\\leq i <j\\leq N)\\)\nの個数を求めましょう。\n\\(A\\)\nを昇順に並び替えても答えは変わらないので昇順に並び替えておきます。すると、\n\\(A_i + A_j\\geq 10^8\\)\nなる\n\\(j\\)\nの最小値は、\n\\(i\\)\nが増加するにつれて単調に減少することがわかります。以上から、尺取り法を用いることで条件を満たす整数組の個数を求められます。\n\\(A_i = 5\\times 10^7\\)\nの場合に余計に数えすぎないよう注意してください。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n  int n;\n  cin >> n;\n  vector<int> a(n);\n  for(auto &v : a) cin >> v;\n  sort(a.begin(), a.end());\n  int r = n;\n  ll cnt = 0, res = 0;\n  for(int i = 0; i < n; i++) {\n    r = max(r, i + 1);\n    while(r - 1 > i and a[r - 1] + a[i] >= 100000000) {\n      r--;\n    }\n    cnt += n - r;\n  }\n  for(int i = 0; i < n; i++) res += ll(a[i]) * (n - 1);\n  res -= cnt * 100000000;\n  cout << res << endl;\n}"
+      ],
+      "text_sha256": "4d4cf4c8ce6d0acad9898c8fb4ff9d330b20b7d212254777ce55d67327333d81",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc353/abc353_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc353/editorial/9975",
+      "text": "公式解説\nの最後の\n\\(A_i + A_j \\geq 10^8\\)\nであるようなペア\n\\((i, j)\\)\n\\((i < j)\\)\nを数える部分を線形時間で行います。以下、\n\\(M \\coloneqq 10^8\\)\nとします。\nまず、長さ\n\\(M\\)\nの配列\n\\(\\text{cnt}\\)\nを宣言し、\n\\(\\text{cnt}[i]\\)\nに\n\\(A_1, \\ldots, A_N\\)\nのうち\n\\(i\\)\n以下の値の個数を格納します。これは\n\\(O(N + M)\\)\n時間で可能です。具体的な手順は実装例を見てください。\n次に、各\n\\(A_i\\)\nについて、\n\\(A_1, \\ldots, A_N\\)\nのうち\n\\(A_i\\)\n以外で\n\\(M - A_i\\)\n以上であるものの個数を求めます。これは、「\n\\(A_i\\)\n以外」という部分を無視すれば\n\\(N - \\text{cnt}[M - a - 1]\\)\nです。ただし、\n\\(2 A_i \\geq M\\)\nの場合は\n\\(A_i\\)\n自身が含まれてしまうため、\n\\(1\\)\nを引きます。\nこうして求めた\n\\(N\\)\n個の個数を合計すると、\n\\(A_i + A_j \\geq M\\)\nであるようなペア\n\\((i, j)\\)\n\\((i \\neq j)\\)\nの個数となります。これを\n\\(2\\)\nで割ったものが求めたいペア\n\\((i, j)\\)\n\\((i < j)\\)\nの個数です。\n実装例：（Python）",
+      "codes": [
+        "N = int(input())\nA = list(map(int, input().split()))\nM = 10**8\n\ncnt = [0] * (M + 1)\nfor a in A:\n    cnt[a] += 1\nfor i in range(M):\n    cnt[i + 1] += cnt[i]\n\np = 0\nfor a in A:\n    p += N - cnt[M - a - 1]\n    if 2 * a >= M:\n        p -= 1\nprint((N - 1) * sum(A) - p // 2 * M)"
+      ],
+      "text_sha256": "f7230c6da87108bf2e05d119d7e910fcf974d9b1e4a6728cb8872bf4122a3bff",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc353/abc353_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

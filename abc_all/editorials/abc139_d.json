@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc139_d",
+  "editorials": [
+    {
+      "text": "D: ModSum\nA をB で割った余りをA mod B と表すことにすると\n(1 mod 2) + (2 mod 3) + ... + ((N −1) mod N) + (N mod 1) = 1 + 2 + ... + N −1 = N(N −1)\n2\nと順列を選ぶのが最適です。以下、これを説明します。\n選んだ順列には1, 2, ..., N がそれぞれちょうど1 回ずつ登場します。i = 1, 2, ..., N について、i\nが順列のxi 番目に登場するとします。すると、目的関数(最大化したいもの) は\n(x1 mod 1) + (x2 mod 2) + ... + (xN mod N)\nになります。各項に着目すると、それぞれの項は最大でも0, 1, 2, ..., N −1 ですが、i ≥2 について\nxi = i −1 とし、余ったN をx1 = N とすると実際に\n(N mod 1) + (1 mod 2) + ... + ((N −1) mod N) = 0 + 1 + 2 + ... + N −1\nとできるため、目的関数の最大値は0 + 1 + 2 + ... + N −1 = N(N−1)\n2\nです。\n",
+      "text_sha256": "e6ad66c4306c519e2c096f344eeb18d32add94ffe2e3ba1c1167599405c85aac",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc139/abc139_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

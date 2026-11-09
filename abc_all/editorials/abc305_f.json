@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc305_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc305/editorial/6542",
+      "text": "この問題は、得られる情報を使ってもとのグラフ上で DFS（深さ優先探索）を行うことで解くことができます。\n次の \\(2\\) つのことを考えます。\n得られる情報だけから DFS を正しく行えること\n\\(2N\\) 回以下の移動で頂点 \\(N\\) へ到達できること\n1. 得られる情報だけから DFS を行えること\nDFS を行うためには「隣接している頂点のうちこれまでに訪れたことがない頂点に移動する（存在しなければこの頂点にはじめに訪れたときの直前にいた頂点に移動する）」ことができればよいです。\n隣接している頂点の集合は与えられています。\nこれまでに訪れた頂点の集合の情報と、直前にいた頂点の情報も（自分が訪れた頂点なので）持っています。\nよって、この \\(2\\) つに共通する頂点へ移動することを繰り返して DFS を行うことができます。\n持っている情報から次に進むべき頂点を見つけるのは \\(O(N)\\) 時間で可能です。\\(O(N^2)\\) 時間使っても十分高速です。\n2. \\(2N\\) 回以下の移動で頂点 \\(N\\) へ到達できること\nもとのグラフの部分グラフとして、DFS で利用される辺のみからなるグラフを考えます。\nすると、このグラフは閉路を持ちません（閉路を持つ場合、すでに訪れたことがある頂点に移動していることになります）。\nよって、この部分グラフは特に木になっています。\nDFS では連結成分の頂点をすべて訪れ、もとのグラフは連結であったので、この部分グラフは全域木です。\nある頂点から DFS を開始し、他の頂点を探索し終えてもとの頂点に戻ってくるとき、すべての辺を \\(2\\) 回ずつ通ります。\nよって、もとのグラフで頂点 \\(1\\) から DFS を行って頂点 \\(1\\) に戻ってくるとき、\\(2(N-1)\\) 回の移動を行います。\nこれの途中で頂点 \\(N\\) に到達しているので、示されました。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <bits/extc++.h>\n\nusing namespace std;\n\n// 隣接する頂点の情報を受け取る\nvector<unsigned> read_vector() {\n    unsigned k;\n    cin >> k;\n    vector<unsigned> ret(k);\n    for (auto &&r : ret)\n        cin >> r;\n    return ret;\n}\n\nint main() {\n    using namespace std;\n    unsigned long N, M;\n    cin >> N >> M;\n\n    // dfs を行う関数\n    [dfs{[N, visited{vector<unsigned long>(N + 1)}](auto &&f, unsigned now, unsigned prev) mutable -> void {\n        // N に到達したら、終了\n        if (now == N) {\n            string S;\n            cin >> S;\n            exit(0);\n        }\n\n        // 訪れたことを記録\n        visited[now] = 1;\n\n        // 隣接している頂点それぞれについて\n        for (const auto next : read_vector())\n            if (!visited[next]) {\n                // 訪れたことがないならそこへ移動\n                cout << next << endl;\n                f(f, next, now);\n            }\n\n        // まわりに未探索の頂点がなくなったら、親に戻る\n        cout << prev << endl;\n        read_vector();\n    }}]() mutable {\n        // はじめは頂点 1 から\n        dfs(dfs, 1, 1);\n    }();\n    return 0;\n}"
+      ],
+      "text_sha256": "bf95484f05c3b400354251fb6b0dfd8b07aaa6e50bbdf0e25a0e22e4e0f9439f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc305/abc305_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

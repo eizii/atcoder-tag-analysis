@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc425_g",
+  "title": "Sum of Min of XOR",
+  "contests": [
+    {
+      "contest_id": "abc425",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2205,
+  "raw_difficulty": 2205,
+  "contest_id": "abc425",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc425/tasks/abc425_g",
+  "statement": "配点 : 575 点 問題文 正整数 N,M と長さ N の非負整数列 A=(A_1,A_2,\\ldots,A_N) が与えられます。 \\displaystyle \\sum_{x=0}^{M-1} \\min_{1\\le i\\le N} \\left(x\\oplus A_i \\right) を求めてください。 ただし、 x\\oplus A_i は x と A_i のビット単位 \\mathrm{XOR} を表します。 ビット単位 \\mathrm{XOR} 演算とは 非負整数 X,Y のビット単位 \\mathrm{XOR} 、 X \\oplus Y は、以下のように定義されます。 X \\oplus Y を二進表記した際の 2^k ( k \\geq 0 ) の位の数は、 X,Y を二進表記した際の 2^k の位の数のうち一方のみが 1 であれば 1 、そうでなければ 0 である。 例えば、 3 \\oplus 5 = 6 となります (二進表記すると: 011 \\oplus 101 = 110 )。 制約 1\\le N\\le 2\\times 10^5 1\\le M\\le 10^9 0\\le A_i \\le 10^9 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M A_1 A_2 \\ldots A_N 出力 答えを出力せよ。 入力例 1 2 4\r\n1 2 出力例 1 2 x=0 のとき： x\\oplus A_1=1,x\\oplus A_2= 2 なので \\displaystyle \\min_{1\\le i\\le N} \\left(x\\oplus A_i \\right) = 1 です。 x=1 のとき： x\\oplus A_1=0,x\\oplus A_2= 3 なので \\displaystyle \\min_{1\\le i\\le N} \\left(x\\oplus A_i \\right) = 0 です。 x=2 のとき： x\\oplus A_1=3,x\\oplus A_2= 0 なので \\displaystyle \\min_{1\\le i\\le N} \\left(x\\oplus A_i \\right) = 0 です。 x=3 のとき： x\\oplus A_1=2,x\\oplus A_2= 1 なので \\displaystyle \\min_{1\\le i\\le N} \\left(x\\oplus A_i \\right) = 1 です。 したがって、 1+0+0+1=2 を出力してください。 入力例 2 6 5\r\n0 1 2 3 4 5 出力例 2 0 入力例 3 10 8762\r\n347 883 264 816 533 306 190 880 624 279 出力例 3 34912221",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 正整数 N,M と長さ N の非負整数列 A=(A_1,A_2,\\ldots,A_N) が与えられます。 \\displaystyle \\sum_{x=0}^{M-1} \\min_{1\\le i\\le N} \\left(x\\oplus A_i \\right) を求めてください。 ただし、 x\\oplus A_i は x と A_i のビット単位 \\mathrm{XOR} を表します。 ビット単位 \\mathrm{XOR} 演算とは 非負整数 X,Y のビット単位 \\mathrm{XOR} 、 X \\oplus Y は、以下のように定義されます。 X \\oplus Y を二進表記した際の 2^k ( k \\geq 0 ) の位の数は、 X,Y を二進表記した際の 2^k の位の数のうち一方のみが 1 であれば 1 、そうでなければ 0 である。 例えば、 3 \\oplus 5 = 6 となります (二進表記すると: 011 \\oplus 101 = 110 )。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\le N\\le 2\\times 10^5 1\\le M\\le 10^9 0\\le A_i \\le 10^9 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M A_1 A_2 \\ldots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2 4\r\n1 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2 x=0 のとき： x\\oplus A_1=1,x\\oplus A_2= 2 なので \\displaystyle \\min_{1\\le i\\le N} \\left(x\\oplus A_i \\right) = 1 です。 x=1 のとき： x\\oplus A_1=0,x\\oplus A_2= 3 なので \\displaystyle \\min_{1\\le i\\le N} \\left(x\\oplus A_i \\right) = 0 です。 x=2 のとき： x\\oplus A_1=3,x\\oplus A_2= 0 なので \\displaystyle \\min_{1\\le i\\le N} \\left(x\\oplus A_i \\right) = 0 です。 x=3 のとき： x\\oplus A_1=2,x\\oplus A_2= 1 なので \\displaystyle \\min_{1\\le i\\le N} \\left(x\\oplus A_i \\right) = 1 です。 したがって、 1+0+0+1=2 を出力してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 6 5\r\n0 1 2 3 4 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10 8762\r\n347 883 264 816 533 306 190 880 624 279"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 34912221"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc425/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:01.296748+00:00",
+  "statement_sha256": "bcfe99023c05c2f943e04f946de894caeac12fd19a081e4fc79243ec52cade2c",
+  "editorials": []
+}

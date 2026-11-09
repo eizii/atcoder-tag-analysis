@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc335_b",
+  "title": "Tetrahedral Number",
+  "contests": [
+    {
+      "contest_id": "abc335",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 52,
+  "raw_difficulty": -416,
+  "contest_id": "abc335",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc335/tasks/abc335_b",
+  "statement": "配点 : 150 点 問題文 整数 N が与えられます。 非負整数の組 (x,y,z) であって x+y+z\\leq N を満たすものを辞書順で小さい方から順に全て出力してください。 非負整数の組の辞書順とは？ 非負整数の組 (x,y,z) が (x',y',z') より 辞書順で小さい とは、下記のいずれかが成り立つことを言います。 x < x' である x=x' かつ y< y' である x=x' かつ y=y' かつ z< z' である 制約 0 \\leq N \\leq 21 N は整数である 入力 入力は以下の形式で標準入力から与えられる。 N 出力 非負整数の組 (x,y,z) であって x+y+z\\leq N を満たすものを、 1 行に 1 組ずつ x,y,z を空白区切りで、辞書順で小さい方から順に全て出力せよ。 入力例 1 3 出力例 1 0 0 0\r\n0 0 1\r\n0 0 2\r\n0 0 3\r\n0 1 0\r\n0 1 1\r\n0 1 2\r\n0 2 0\r\n0 2 1\r\n0 3 0\r\n1 0 0\r\n1 0 1\r\n1 0 2\r\n1 1 0\r\n1 1 1\r\n1 2 0\r\n2 0 0\r\n2 0 1\r\n2 1 0\r\n3 0 0 入力例 2 4 出力例 2 0 0 0\r\n0 0 1\r\n0 0 2\r\n0 0 3\r\n0 0 4\r\n0 1 0\r\n0 1 1\r\n0 1 2\r\n0 1 3\r\n0 2 0\r\n0 2 1\r\n0 2 2\r\n0 3 0\r\n0 3 1\r\n0 4 0\r\n1 0 0\r\n1 0 1\r\n1 0 2\r\n1 0 3\r\n1 1 0\r\n1 1 1\r\n1 1 2\r\n1 2 0\r\n1 2 1\r\n1 3 0\r\n2 0 0\r\n2 0 1\r\n2 0 2\r\n2 1 0\r\n2 1 1\r\n2 2 0\r\n3 0 0\r\n3 0 1\r\n3 1 0\r\n4 0 0",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 整数 N が与えられます。 非負整数の組 (x,y,z) であって x+y+z\\leq N を満たすものを辞書順で小さい方から順に全て出力してください。 非負整数の組の辞書順とは？ 非負整数の組 (x,y,z) が (x',y',z') より 辞書順で小さい とは、下記のいずれかが成り立つことを言います。 x < x' である x=x' かつ y< y' である x=x' かつ y=y' かつ z< z' である"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 0 \\leq N \\leq 21 N は整数である"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 非負整数の組 (x,y,z) であって x+y+z\\leq N を満たすものを、 1 行に 1 組ずつ x,y,z を空白区切りで、辞書順で小さい方から順に全て出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 0 0 0\r\n0 0 1\r\n0 0 2\r\n0 0 3\r\n0 1 0\r\n0 1 1\r\n0 1 2\r\n0 2 0\r\n0 2 1\r\n0 3 0\r\n1 0 0\r\n1 0 1\r\n1 0 2\r\n1 1 0\r\n1 1 1\r\n1 2 0\r\n2 0 0\r\n2 0 1\r\n2 1 0\r\n3 0 0"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0 0 0\r\n0 0 1\r\n0 0 2\r\n0 0 3\r\n0 0 4\r\n0 1 0\r\n0 1 1\r\n0 1 2\r\n0 1 3\r\n0 2 0\r\n0 2 1\r\n0 2 2\r\n0 3 0\r\n0 3 1\r\n0 4 0\r\n1 0 0\r\n1 0 1\r\n1 0 2\r\n1 0 3\r\n1 1 0\r\n1 1 1\r\n1 1 2\r\n1 2 0\r\n1 2 1\r\n1 3 0\r\n2 0 0\r\n2 0 1\r\n2 0 2\r\n2 1 0\r\n2 1 1\r\n2 2 0\r\n3 0 0\r\n3 0 1\r\n3 1 0\r\n4 0 0"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc335/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:08.261697+00:00",
+  "statement_sha256": "369bf2ed4974b44632ecdd1b65febcdb59298c53e0ee4200063eb3da547d68ae",
+  "editorials": []
+}

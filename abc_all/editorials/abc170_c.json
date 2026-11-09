@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc170_c",
+  "editorials": [
+    {
+      "text": "C: Forbidden List\n(原案: tozangezan, 準備・解説: evima)\nX, p1, . . . , pN はいずれも1 以上100 以下ですが、答えは0 または101 となりうる点に注意を要\nします。\nこの点にさえ注意すれば、与えられる値の小ささのため計算を高速化する工夫などは必要なく、\n「書かれていることを実装しなさい」という通常のBeginner Contest 問題B 相当の問題です。本問\nが問題B として出題されていたなら以下に具体的な実装方法を述べるところですが、問題C を解\nかれる方にそのような説明は不要と考え、省略します。\n追記(6/18): 以下にPython での実装例を示します。\n1 X, N = map(int, input().split())\n2 p = list(map(int, input().split()))\n3 for d in range(X + 1):\n4\nfor s in [-1, +1]:\n5\na = X + s * d\n6\nif p.count(a) == 0:\n7\nprint(a)\n8\nexit(0)\n答えの候補をX, X −1, X + 1, X −2, X + 2, . . . の順に調べています。count を何度も呼び出して\nいる部分に高速化の余地がありますが、この問題の制約下ではその必要はありません。\n",
+      "text_sha256": "b9f493c26cd4bf987816240f61b9ea5266a9df6fce57c351b53dd2694bc6bd97",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc170/abc170_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

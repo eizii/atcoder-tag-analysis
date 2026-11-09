@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc332_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc332/editorial/7898",
+      "text": "高橋君が支払う金額は次のステップによって求めることができます。\n購入する商品の合計金額を計算する。\n合計金額が\n\\(S\\)\n円以上ならばその金額が、そうでないならば合計金額に\n\\(K\\)\nを加えたものが答えとなる。\n購入する商品の合計金額は\n\\(i=1,2,\\ldots,N\\)\nについての\n\\((P_i\\times Q_i)\\)\nの値を足し合わせればよく、for文などによって計算できます。\nその後、if文によって、送料を判定すれば良いです。\nよって、この問題を解くことができました。\nなお、高橋君の支払う金額は高々\n\\(100\\times(10000\\times 100)+10000<2^{31}\\)\n円であるため、符号付き\n\\(32\\)\nbit 整数型で扱える範囲に収まっています。\nc++ による実装例:\npython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n,s,k,p,q;\n\tint ans=0;\n\n\tcin>>n>>s>>k;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>p>>q;\n\t\tans+=(p*q);\n\t}\n\tif(ans<s)ans+=k;\n\t\n\tcout<<ans<<endl;\n\treturn 0;\n}",
+        "n,s,k=map(int, input().split())\nans=0\n\nfor i in range(n):\n    p,q=map(int, input().split())\n    ans+=(p*q)\n\nif ans<s:\n    ans+=k\n\nprint(ans)"
+      ],
+      "text_sha256": "8f6a94fcfcba8749c442e1719593b71d06ad2382b285d958cd80e9ebe82e224e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc332/abc332_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

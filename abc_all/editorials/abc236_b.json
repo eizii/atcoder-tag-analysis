@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc236_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc236/editorial/3275",
+      "text": "渡された束に\n\\(x\\)\nが書かれたカードが\n\\(3\\)\n枚しかないような整数\n\\(x\\)\nがただ一つ存在します。この\n\\(x\\)\nが答えです。\n各\n\\(k \\ (1 \\leq k \\leq N)\\)\nについて、\n\\(k\\)\nが書かれたカードが何枚あるか数えておくことで、この問題を解くことができます。\nなお、別解として、\n\\(4 \\times (1 + \\dots + N)\\)\nから渡されたカードに書かれた整数の総和を引いた値を出力するという方法も考えられます。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> count(n + 1);\n    for (int i = 0; i < 4 * n - 1; ++i) {\n        int a;\n        cin >> a;\n        count[a] += 1;\n    }\n    for (int i = 1; i <= n; ++i) {\n        if (count[i] == 3) {\n            cout << i << '\\n';\n        }\n    }\n    return 0;\n}",
+        "n = int(input())\ncount = [0] * (n + 1)\nfor a in map(int, input().split()):\n    count[a] += 1\nfor i in range(1, n + 1):\n    if count[i] == 3:\n        print(i)"
+      ],
+      "text_sha256": "e93d5c100387c489b6551c72bfa5da5863eb3feab9cddfea13d5e25c6d5ce894",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc236/abc236_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc236/editorial/3313",
+      "text": "ビットごとの排他的論理和を表す記号を\n\\(\\oplus\\)\nとします。\n\\(a \\oplus a = 0\\)\nであることを用います。 入力で与えられた\n\\(A\\)\n全ての排他的論理和を考えると、上述の性質より\n\\(4\\)\n枚存在するようなカードについての排他的論理和は\n\\(0\\)\nとなり、\n\\(3\\)\n枚しか存在しないカードの値が残ります。\nすなわち、答えは\n\\(A_1 \\oplus A_2 \\oplus \\dots \\oplus A_{4N-1}\\)\nと一致します。\n実装例 (C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector a(n * 4 - 1, 0);\n\tfor(auto &v : a) cin >> v;\n\tcout << accumulate(a.begin(), a.end(), 0, [](int x, int y) { return x ^ y; }) << '\\n';\n\treturn 0;\n}"
+      ],
+      "text_sha256": "56205dabac78e5cec2729edfa49688d73d15fab6e9b0f00d928da68fc5a7d524",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc236/abc236_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

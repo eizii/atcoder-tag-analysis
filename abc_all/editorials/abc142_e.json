@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc142_e",
+  "editorials": [
+    {
+      "text": "E: Get Everything\n動的計画法により解くことが出来ます.\n0 以上2N 未満の整数j が,「1 以上N 以下の整数k について, 現在購入している鍵で宝箱k を開けら\nれることと,j を2 進数表記した際にk −1 桁目が1 であることが同値」という状態を表すこととしま\nす.\ndp テーブルを以下のように定義します.\ndpi,j = i + 1 番目以降の鍵は購入せずに状態をj にする為に必要な最小費用\n1 以上N 以下の整数i について,0 以上2N 未満の整数di を,「1 以上N 以下の整数k について, 鍵i\nで宝箱k を開けられることと,di を2 進数表記した際にk −1 桁目が1 であることが同値」となるよ\nうに定めます. このとき, 動的計画法の遷移式は\ndpi,j or di = min (dpi−1,j or di, dpi−1,j + ai)\nとなります. 時間計算量はO\n(\n2NM\n)\nです.\nC++ による解答例:https://atcoder.jp/contests/abc142/submissions/7731316\n",
+      "text_sha256": "50470f7beee301be158786bdc8363b18b9aa93e1455b4f55cfc9bc0fe5edc399",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc142/abc142_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

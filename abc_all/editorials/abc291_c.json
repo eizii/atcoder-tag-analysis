@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc291_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc291/editorial/5837",
+      "text": "それぞれの移動後の座標を求め、それらの中に重複があるかどうかを調べればよいです。\n要素の重複を探す際、配列/リストから探すと、1回あたり配列/リストの長さに比例する時間がかかり、全体で\n\\(\\Theta(N^2)\\)\n時間となりTLEとなります。setなどを用いることで 1回あたり\n\\(O(\\log N)\\)\n時間、全体で\n\\(O(N\\log N)\\)\n時間となます。\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint N;\n\tcin >> N;\n\tstring S;\n\tcin >> S;\n\tset<pair<int,int>>used({{0,0}});\n\tint x=0,y=0;\n\tfor(auto c:S){\n\t\tif(c=='U')y++;\n\t\tif(c=='D')y--;\n\t\tif(c=='R')x++;\n\t\tif(c=='L')x--;\n\t\tif(used.find({x,y})!=used.end()){\n\t\t\tcout << \"Yes\" << endl;\n\t\t\treturn 0;\n\t\t}\n\t\tused.insert({x,y});\n\t}\n\tcout << \"No\" << endl;\n}"
+      ],
+      "text_sha256": "96ede89be2623bb9ba791fd72094b2db52fbdbe915a6eaf4b5a48841fbe34dfe",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc291/abc291_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

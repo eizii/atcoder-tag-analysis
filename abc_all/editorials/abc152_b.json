@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc152_b",
+  "editorials": [
+    {
+      "text": "B: Comparing Strings\n考えられる方法の一つは、2 つの文字列を実際に作り、辞書順比較することです。辞書順比較は、\n例えばC++ ならばstring 型同士で比較をすることで可能です。\nしかし、a をb 回繰り返した文字列はa で始まり、b をa 回繰り返した文字列はb で始まるため、\na < b ならば常にa をb 回繰り返した文字列の方が辞書順で小さいですし、a > b ならば常にb をa\n回繰り返した文字列の方が辞書順で小さいです。また、a = b なら二つの文字列が等しくなるのでど\nちらを出力しても同じになります。\nListing 1\nC++ での実装例1\n1 #include <stdio.h>\n2 #include <string>\n3 #include <algorithm>\n4 using namespace std;\n5 char in[110];\n6 int main(){\n7\nint a,b;scanf(\"%d%d\",&a,&b);\n8\nfor(int i=0;i<b;i++)in[i]='0'+a;\n9\nstring L=in;\n10\nfor(int i=0;i<a;i++)in[i]='0'+b;\n11\nin[a]=0;\n12\nstring R=in;\n13\nprintf(\"%s\\n\",min(L,R).c_str());\n14 }\nListing 2\nC++ での実装例2\n1 #include <stdio.h>\n2\n3 int main(){\n4\nint a,b;scanf(\"%d%d\",&a,&b);\n5\nif(a<b){\n6\nfor(int i=0;i<b;i++)printf(\"%d\",a);\n7\n}else{\n8\nfor(int i=0;i<a;i++)printf(\"%d\",b);\n9\n}\n10\nprintf(\"\\n\");\n11 }\n",
+      "text_sha256": "058bdd1294f8e70f8b7e05912959760f81df49cef07c770d653d7bc40b97f99b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc152/abc152_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

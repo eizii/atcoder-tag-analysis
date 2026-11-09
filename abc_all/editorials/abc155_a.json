@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc155_a",
+  "editorials": [
+    {
+      "text": "A: Poor\nたとえばA = B かつB̸ = C をC 言語における式で表すとA == B && B != C となります．\nこれを踏まえて，過不足なく場合分けして書くと下の実装例のようになります。\nC 言語での実装例は次のとおりです．\n1 #include <stdio.h>\n2\n3 int main(void){\n4\nint a, b, c;\n5\n6\nscanf(\"%d%d%d\", &a, &b, &c);\n7\n8\nint ispoor = 0;\n9\nif (a == b && b != c) ispoor = 1;\n10\nif (b == c && c != a) ispoor = 1;\n11\nif (c == a && a != b) ispoor = 1;\n12\n13\nif (ispoor) {\n14\nputs(\"Yes\");\n15\n} else {\n16\nputs(\"No\");\n17\n}\n18\n19\nreturn 0;\n20 }\n",
+      "text_sha256": "0f78d2da95f9bc7c4161c53f1c12237ecc63dbef433d1ca8469b2ee53edc218b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc155/abc155_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

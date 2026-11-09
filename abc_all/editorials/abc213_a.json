@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc213_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc213/editorial/2363",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「\nWelcome to AtCoder\n」をお試しください。言語ごとに解答例が掲載されています。\nXOR の性質を使う解法\nもしこの問題が XOR ではなく足し算だった場合、つまり「\n\\(A+C=B\\)\nとなる\n\\(C\\)\nを求めよ」であれば、両辺から\n\\(A\\)\nを引くことで\n\\(C=B-A\\)\nとして求めることができます。\n足し算の場合に「両辺から\n\\(A\\)\nを引く」にあたる操作は、XORの場合には何になるでしょうか？\n実は、任意の非負整数\n\\(A\\)\nに対して、\n\\(A \\ XOR \\ A=0\\)\nが成り立ちます。したがって両辺に\n\\(A\\)\nを XOR することで左辺の\n\\(A\\)\nは相殺され、\n\\(C=B\\ XOR \\ A\\)\nとして\n\\(C\\)\nを求めることができました。\nXOR の計算には\n^\nの演算子が割り当てられている言語が多いです。\n実装例(C)\n実装例(Python)\n全探索する解法\n答えは\n\\(0\\)\n以上\n\\(255\\)\n以下の\n\\(256\\)\n個の整数であることがわかっています。\n\\(256\\)\n個全ての場合について、等式を満たすかどうか調べることでもこの問題を解くことができます。\n実装の際は演算子の優先順位に注意が必要な場合があります。\n実装例(C)\n実装例(Python)",
+      "codes": [
+        "#include<stdio.h>\n\nint main(){\n  int a,b;\n  scanf(\"%d%d\",&a,&b);\n  printf(\"%d\\n\",a^b);\n}",
+        "A,B = map(int, input().split())\nprint(A^B)",
+        "#include<stdio.h>\n\nint main(){\n  int a,b;\n  scanf(\"%d%d\",&a,&b);\n  for(int c=0;c<=255;c++){\n    if((a^c)==b){\n      printf(\"%d\\n\",c);\n      return 0;\n    }\n  }\n}",
+        "A,B=map(int,input().split())\nfor C in range(256):\n  if (A^C)==B:\n    print(C)\n    exit()"
+      ],
+      "text_sha256": "61949f6a5ddf7f61bf8bb87bebc462f13af232b59aee4fa08090fc650c483eea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc213/abc213_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc285_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc285/editorial/5530",
+      "text": "円環上で問題を解く際は、特別な意味のあるものを先頭に固定するのが定石です。そのようにすることで、末尾から先頭に繋がる場合の考察を最低限に済ませることができます。\n今回は、「休日」(のうち\n\\(1\\)\nつ)を曜日\n\\(1\\)\nに固定することがそれにあたるので、そこから始めましょう。\n「休日」同士の間隔が\n\\(d\\)\n日である部分において、間に挟まる「平日」の生産量の総和はいくつでしょうか?　これは、以下のように記述できます。\n\\(d=0\\)\nのとき\n\\(0\\)\n\\(d=1\\)\nのとき\n\\(A_1\\)\n\\(d=2\\)\nのとき\n\\(2 \\times A_1\\)\n\\(d=3\\)\nのとき\n\\(2 \\times A_1 + A_2\\)\n\\(d=4\\)\nのとき\n\\(2 \\times A_1 + 2 \\times A_2\\)\n\\(d=5\\)\nのとき\n\\(2 \\times A_1 + 2 \\times A_2 + A_3\\)\n\\(\\vdots\\)\n結局、\n\\(\\displaystyle \\sum_{i=1}^{d} A_{\\lfloor \\frac{i+1}{2} \\rfloor}\\)\nと表現することができます。これを\n\\(B_d\\)\nと定義します。\nここで、以下のような動的計画法を行います。\n\\(dp[\\)\n何曜日まで割り当てを決めたか\n\\(][\\)\n現在連続している平日の数\n\\(] = \\{\\)\n生産量の最大値\n\\(\\}\\)\n遷移は以下の通りです。\n\\(dp[i][j]\\)\nを\n\\(dp[i+1][j+1]\\)\nに遷移\n\\(dp[i][j]+B_j\\)\nを\n\\(dp[i+1][0]\\)\nに遷移\n\\(dp[1][0]=0\\)\nと初期化することで、冒頭で述べた「曜日\n\\(1\\)\nを「休日」に固定する」が実現されます。\n最終的な答えは以下のうち最大値です。\n\\(dp[N][i]+B_i (0 \\le i \\le N-1)\\)\nここで\n\\(B_i\\)\nを足すことは、最後の「休日」から最初の「休日」( 曜日\n\\(1\\)\n) までの区間を考慮することに対応します。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  vector<long long> a(n+1),b(n+1,0);\n  for(int i=1;i<=n;i++){cin >> a[i];}\n  for(int i=1;i<=n;i++){b[i]=b[i-1]+a[(i+1)/2];}\n  vector<vector<long long>> dp(n+1,vector<long long>(n+1,-4e18));\n  dp[1][0]=0;\n  for(int i=1;i<n;i++){\n    for(int j=0;j<=n;j++){\n      if(dp[i][j]<0){continue;}\n      dp[i+1][j+1]=max(dp[i+1][j+1],dp[i][j]);\n      dp[i+1][0]=max(dp[i+1][0],dp[i][j]+b[j]);\n    }\n  }\n  long long res=0;\n  for(int i=0;i<n;i++){\n    res=max(res,dp[n][i]+b[i]);\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "5a2fe26d5d405d3206d650216cf34e2af44f1f2328d01e250e2435adfe606d3b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc285/abc285_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc285/editorial/5545",
+      "text": "DP の定義を公式解説と変えます。こちらの方がイメージしやすい人もいる気がします。\nまずは公式解説の通りに\n\\(B\\)\nを定義し、計算します。\n\\(\\mathrm{dp}_i\\)\nを\n\\(i\\)\n日目は休むとしたとき\n\\(i\\)\n日目までの生産量として考えられる最大値と定義します。\n\\(i \\geq 2\\)\nであれば、\n\\(\\displaystyle \\mathrm{dp}_i = \\max_{j=1}^{i-1} (\\mathrm{dp}_j + B_{i-j-1})\\)\nです。\n\\(\\mathrm{dp}_1 = 0\\)\nと初期化し、\n\\(i = 2, 3, \\cdots , N+1\\)\nの順に式の通りに計算していけば、計算量\n\\(O(N^2)\\)\nで DP テーブルが埋まります。問題の答えは\n\\(\\mathrm{dp}_{N+1}\\)\nです。",
+      "codes": [],
+      "text_sha256": "a51d991b15fd182119e78eecb9f56266d0c95263a5ee26a22f60a6aef11d0dbf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc285/abc285_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

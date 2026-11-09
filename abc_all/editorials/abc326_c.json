@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc326_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc326/editorial/7537",
+      "text": "半開区間という少し見慣れない用語が出てきたので、問題文の詳細な説明を利用しながら状況を整理しましょう。以下の\n\\(2\\)\n通りの場合について議論します。\nなお、プレゼントは必ず整数座標に置かれていることに注意してください。\n選んだ実数\n\\(x\\)\nが整数である場合\n座標\n\\(x,x+1,\\dots,x+M-1\\)\nにあるプレゼントを獲得できます。座標\n\\(x+M\\)\nにあるプレゼントは獲得できないことに注意してください。\n選んだ実数\n\\(x\\)\nが整数でない場合\n\\(x\\)\nを切り上げた整数を\n\\(\\lceil x \\rceil\\)\nとします。このとき、座標\n\\(\\lceil x \\rceil, \\lceil x \\rceil+1,\\dots,\\lceil x \\rceil+M-1\\)\nにあるプレゼントを獲得できます。\nどちらの場合でも、結局は「連続する整数座標を\n\\(M\\)\n個選び、それらに置かれているプレゼントを全て獲得する」ことになると分かります。\nすると、\n\\(A_i\\)\nを予めソートし、取るプレゼントのうち最も小さい座標にあるものを固定した上で取ることのできるプレゼントのうち最も大きい座標にあるものを求めていけばよいです。\nこれは、尺取り法や二分探索などで時間計算量\n\\(O(N)\\)\nや\n\\(O(N \\log N)\\)\nといった計算量で解くことができます。 ( ソートによる時間計算量\n\\(O(N \\log N)\\)\nが別個に発生することに留意してください )\n実装例 (Python):",
+      "codes": [
+        "n,m = map(int,input().split())\na = list(map(int,input().split()))\n\na.sort()\na.append(9000000000000)\n\nres = 0\nr = 0\nfor l in range(0,n):\n    while a[r] < a[l]+m:\n        r += 1\n    res = max(res,r-l)\n\nprint(res)"
+      ],
+      "text_sha256": "f3d868b4cff246a90ade6c15af7b24ccac8a03ad97ed0df5878050455552bbe3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc326/abc326_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

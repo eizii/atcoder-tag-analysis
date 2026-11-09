@@ -1,0 +1,58 @@
+{
+  "problem_id": "abc391_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc391/editorial/12085",
+      "text": "\\(A, B, C\\)\nをそれぞれ降順ソートしておきます．\n\\(f(i,j,k)=A_iB_j+B_jC_k+C_kA_i\\)\nとします．\n\\(K\\)\nが\n\\(K\\leq 5\\times 10^5\\)\nと小さいことを利用して，上位\n\\(K\\)\n個を列挙することを考えます．重要な事実として\n\\[f(i,j,k)\\geq f(i+1,j,k),f(i,j,k)\\geq f(i,j+1,k),f(i,j,k)\\geq f(i,j,k+1)\\]\nが成り立ちます．よって，大きい方から値を列挙していったときに，必ず\n\\(f(i,j,k)\\)\nが列挙された後に\n\\(f(i+1,j,k),f(i,j+1,k),f(i,j,k+1)\\)\nが列挙されることが分かります．\nこれを踏まえれば，以下のアルゴリズムで解くことができます．\n優先度付きキュー\n\\(Q\\)\nを用意し，\n\\(Q\\)\nに\n\\((f(1,1,1),1,1,1)\\)\nを追加する．\n以下を\n\\(K\\)\n回繰り返す．\n\\(Q\\)\nの最大値を\n\\((val,i,j,k)\\)\nとする．\n\\(Q\\)\nから\n\\((val,i,j,k)\\)\nを削除したうえで，\n\\(Q\\)\nに\n\\((f(i+1,j,k),i+1,j,k),(f(i,j+1,k),i,j+1,k),(f(i,j,k+1),i,j,k+1)\\)\nを（まだ\n\\(Q\\)\nに追加していなかったら）追加する．\n計算量は\n\\(O(N\\log N+K\\log K)\\)\nです．\n（Python の優先度付きキューは最小値を管理するため，以下の実装例では\n\\(\\mathrm{hq}\\)\nには\n\\(f(i,j,k)\\)\nを\n\\(-1\\)\n倍して追加し，22 行目の出力時に\n\\(-1\\)\n倍することで元に戻しています．）",
+      "codes": [
+        "from heapq import heappop, heappush\n\nN, K = map(int, input().split())\nA = sorted(list(map(int, input().split())), reverse=True)\nB = sorted(list(map(int, input().split())), reverse=True)\nC = sorted(list(map(int, input().split())), reverse=True)\n\ns = set()\nhq = []\n\n\ndef add(i, j, k):\n    if i < N and j < N and k < N and (i, j, k) not in s:\n        s.add((i, j, k))\n        heappush(hq, (-(A[i] * B[j] + B[j] * C[k] + C[k] * A[i]), i, j, k))\n\n\nadd(0, 0, 0)\nfor t in range(K):\n    val, i, j, k = heappop(hq)\n    if t == K - 1:\n        print(-val)\n    add(i + 1, j, k)\n    add(i, j + 1, k)\n    add(i, j, k + 1)"
+      ],
+      "text_sha256": "683cde1528efe72eaf419ee837eed3b84c9a7e2eb985ab418e1980354bd73457",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc391/abc391_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc391/editorial/12086",
+      "text": "\\(A, B, C\\)\nをそれぞれ降順ソートしておきます．\n\\(f(i,j,k)=A_iB_j+B_jC_k+C_kA_i\\)\nとします．\n答えを二分探索します．判定問題として\n\\(f(i,j,k)\\geq mid\\)\nを満たす\n\\((i,j,k)\\)\nが\n\\(K\\)\n個あるか？が高速に求められれば良いです．\n判定問題を愚直で解こうとすると\n\\(O(N^3)\\)\nかかり間に合いませんが，枝刈りをすることで計算量を落とすことができます．\n\\[f(i,j,k)\\geq f(i+1,j,k),f(i,j,k)\\geq f(i,j+1,k),f(i,j,k)\\geq f(i,j,k+1)\\]\nが成り立つことを利用すると，次のような判定関数のコードを書くことができます．\nこれにより，判定関数の中でループが回る回数を\n\\(O(K)\\)\n回に減らすことができます．よって，この問題を計算量\n\\(O(N\\log N+K(\\log \\max A+\\log \\max B+\\log \\max C))\\)\nで解くことができます．",
+      "codes": [
+        "bool check(long long mid) {\n    int cnt = 0;\n    for (int i = 1; i <= N; i++) {\n        if (f(i, 1, 1) < mid) break;  // もし f(i, 1, 1) が mid より小さいならば i のループを打ち切る\n        for (int j = 1; j <= N; j++) {\n            if (f(i, j, 1) < mid) break;  // もし f(i, j, 1) が mid より小さいならば j のループを打ち切る\n            for (int k = 1; k <= N; k++) {\n                if (f(i, j, k) < mid) break;  // もし f(i, j, k) が mid より小さいならば k のループを打ち切る\n                cnt += 1;\n                if (cnt == K) return true;  // もし cnt が K ならば true を返す\n            }\n        }\n    }\n    return false  // false を返す\n}",
+        "N, K = map(int, input().split())\nA = sorted(list(map(int, input().split())), reverse=True)\nB = sorted(list(map(int, input().split())), reverse=True)\nC = sorted(list(map(int, input().split())), reverse=True)\n\n\ndef f(i, j, k):\n    return A[i] * B[j] + B[j] * C[k] + C[k] * A[i]\n\n\ndef calc(mid):\n    cnt = 0\n    for i in range(N):\n        if f(i, 0, 0) < mid:\n            break\n        for j in range(N):\n            if f(i, j, 0) < mid:\n                break\n            for k in range(N):\n                if f(i, j, k) >= mid:\n                    cnt += 1\n                    if cnt == K:\n                        return True\n                else:\n                    break\n    return False\n\n\nok, ng = 0, 3 * 10**18 + 1\nwhile ng - ok > 1:\n    mid = (ok + ng) // 2\n    if calc(mid):\n        ok = mid\n    else:\n        ng = mid\n\nprint(ok)"
+      ],
+      "text_sha256": "b86b4df383873977a0dfe58453a81afae35bc484592c8212b9d13692446b0b99",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc391/abc391_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc391/editorial/12099",
+      "text": "\\(A, B, C\\)\nをそれぞれ降順ソートしておきます．\n\\(f(i,j,k)=A_iB_j+B_jC_k+C_kA_i\\)\nとします．\n\\[f(i,j,k)\\geq f(i+1,j,k),f(i,j,k)\\geq f(i,j+1,k),f(i,j,k)\\geq f(i,j,k+1)\\]\nが成り立つことにより，答えとしてあり得る\n\\((i,j,k)\\)\nの組は\n\\(ijk\\leq K\\)\nを満たします．よってこれらを満たす組\n\\((i,j,k)\\)\nそれぞれについて\n\\(f(i,j,k)\\)\nを計算し，この中で\n\\(K\\)\n番目に大きいものを求めればよいです．\n\\(ijk\\leq K\\)\nを満たす組の個数は\n\\(O(K\\log^2K)\\)\n個あります．（\n\\(K=5\\times 10^5\\)\nのとき\n\\(48094156\\approx 4.8\\times 10^7\\)\n個です．） 長さ\n\\(O(K\\log^2 K)\\)\nの列をソートするのはおそらく間に合いませんが，\nc++\nであれば\nnth_element\nを用いて\n\\(K\\)\n番目に大きい要素を求めれば，高速な言語であれば間に合います．\n補足：\n\\(ijk\\leq K\\)\nを満たす組の個数が\n\\(O(K\\log^2K)\\)\nであることは\n\\(\\displaystyle\\int_1^K\\left(\\int_1^{K/x}\\left(\\int_{1}^{K/(xy)}1dz\\right)dy\\right)dx=O(K\\log^2K)\\)\nより従います．",
+      "codes": [],
+      "text_sha256": "8bea6764048e292e81636c95ce607c86b8bc8e9613029342421aa8b71737e40b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc391/abc391_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc391/editorial/12119",
+      "text": "\\(A_i,\\ B_i,\\ C_i \\leq M\\)\n（\n\\(= 10^9\\)\n）として、\n\\(O(K^{2/3} \\cdot \\log N \\cdot \\log M) \\)\n解法を紹介します。\n答えに関する二分探索を考えることで、\n\\(x\\)\nを固定したときに\n\\(A_{i}B_{j} + B_{j}C_{k} + C_{k}A_{i} \\geq x\\)\nとなる\n\\((i, j, k)\\)\nの組が\n\\(K\\)\n個以上あるかどうかを判定する問題に帰着できます。\n以下、この判定問題を考えます。\n添え字\n\\(i, j, k\\)\nをすべて調べると正しい答えが得られますが、計算回数が多くなる可能性があるのでうまく枝刈りをしたいです。\n\\(i, j, k\\)\nを昇順に並べ替えたものを\n\\(i' \\leq j' \\leq k'\\)\nとします。\nこのとき\n\\({i'} ^3 \\leq K\\)\nかつ\n\\(i' \\cdot {j'}^2 \\leq K\\)\nが成立する範囲のみを調べても結果が変わらないことが分かります。\nすなわち、\n\\(i' = 1,2,\\cdots, \\lfloor K^{1/3} \\rfloor\\)\n、\n\\(j'=1, 2, \\cdots, \\lfloor \\sqrt{\\frac{K}{i'}}\\rfloor\\)\nの範囲のみ調べれば十分です。\nこの決め方は\n\\(O(K^{2/3})\\)\nあります。\n\\(i', j'\\)\nを決めると\n\\(k'\\)\nに関する二分探索で条件を満たす\n\\(k'\\)\nの個数が分かります。\n添え字\n\\(i, j, k\\)\nの大小関係をすべて試し、重複がないようにカウントすることで、\n\\(O(K^{2/3} \\cdot \\log N)\\)\nで判定問題を解くことができます。\n全体の計算量は\n\\(O(K^{2/3} \\cdot \\log N \\cdot \\log M) \\)\nです。",
+      "codes": [],
+      "text_sha256": "c1c44c68467c9c01e85f0bde116b78ab64454b70463d353dd0aff155befcd55d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc391/abc391_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc391/editorial/12105",
+      "text": "この記事では index は 0 始まりとします。\n公式解説1\nでは、\n\\((i,j,k)\\)\nが\n\\(Q\\)\nに入っているかどうかを判定していますが、 キューへの追加の仕方を工夫することでその処理は省略することができます。\n具体的には次の通りです。\n優先度付きキュー\n\\(Q\\)\nを用意し，\n\\(Q\\)\nに\n\\((f(0,0,0),0,0,0)\\)\nを追加する。\n以下を\n\\(K\\)\n回繰り返す。\n\\(Q\\)\nの最大値を\n\\((\\mathrm{val},i,j,k)\\)\nとする．\n\\(Q\\)\nから\n\\((\\mathrm{val},i,j,k)\\)\nを削除し、\n\\(j=0\\)\nかつ\n\\(k=0\\)\nなら\n\\(Q\\)\nに\n\\((f(i+1,j,k),i+1,j,k)\\)\nを追加する\n\\(k=0\\)\nなら\n\\(Q\\)\nに\n\\((f(i,j+1,k),i,j+1,k)\\)\nを追加する\n\\(Q\\)\nに\n\\((f(i,j,k+1),i,j,k+1)\\)\nを追加する\n実装例(Python)\n添字が3つあると難しいので、まず2つのバージョンを考えます。\n優先度付きキュー\n\\(Q\\)\nを用意し，\n\\(Q\\)\nに\n\\((f(0,0),0,0)\\)\nを追加する。\n以下を\n\\(K\\)\n回繰り返す。\n\\(Q\\)\nの最大値を\n\\((\\mathrm{val},i,j)\\)\nとする．\n\\(Q\\)\nから\n\\((\\mathrm{val},i,j)\\)\nを削除し、\n\\(j=0\\)\nなら\n\\(Q\\)\nに\n\\((f(i+1,j),i+1,j)\\)\nを追加する\n\\(Q\\)\nに\n\\((f(i,j+1),i,j+1)\\)\nを追加する\nこのアルゴリズムにおいて、「取り出したもの」から「追加したもの」へ矢印を描いた\n\\((i,j)\\)\nのプロットは下図のようになります。\n全ての点がちょうど1度指されることから正当性が従います。これを3次元に拡張したものが最初に述べたアルゴリズムになります。\nこの考え方により、線形篩が線形時間であることを直感的に理解することができます。考えてみましょう。\n（整数\n\\(N\\)\nを\n\\(2^{e_2}\\times 3^{e_3}\\times 5^{e_5}\\times\\dots\\)\nにより数列\n\\((e_2,e_3,e_5,\\ldots)\\)\nと対応させ、今回のアルゴリズムの無限次元バージョンを考えたものだとみなすことができます）",
+      "codes": [
+        "from heapq import heappop, heappush\n\nN, K = map(int, input().split())\nA = sorted(list(map(int, input().split())), reverse=True)\nB = sorted(list(map(int, input().split())), reverse=True)\nC = sorted(list(map(int, input().split())), reverse=True)\n\nhq = []\n\n\ndef add(i, j, k):\n    if i < N and j < N and k < N:\n        heappush(hq, (-(A[i] * B[j] + B[j] * C[k] + C[k] * A[i]), i, j, k))\n\n\nadd(0, 0, 0)\nfor t in range(K):\n    val, i, j, k = heappop(hq)\n    if t == K - 1:\n        print(-val)\n    if j==0 and k==0: add(i + 1, j, k)\n    if k==0: add(i, j + 1, k)\n    add(i, j, k + 1)"
+      ],
+      "text_sha256": "1a0e955b4264493191a3a00174af155ed32d57b79a7402f15fea43850ed9f024",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc391/abc391_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

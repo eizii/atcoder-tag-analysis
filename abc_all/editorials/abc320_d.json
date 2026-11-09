@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc320_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc320/editorial/7124",
+      "text": "人を頂点とし、情報で与えられる頂点対\n\\((A_i,B_i)\\)\nに辺をはるグラフを考え、この上でDFSをすることで各人の座標を求めることができます。\n辺は有向辺として、\n\\(A_i\\)\nから\n\\(B_i\\)\nへの辺と、\n\\(B_i\\)\nから\n\\(A_i\\)\nへの辺それぞれについて、辺の出る側から辺の入る側を見たときの相対位置を持ちます。DFSでは人の番号と座標を情報にもち、辺を通る際に座標を更新します。\nWriter解(C++)",
+      "codes": [],
+      "text_sha256": "c60d4aad622e482172354368185864bc81c84388eb46f2f41a59cdcfd01a0c9a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc320/abc320_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc173_c",
+  "editorials": [
+    {
+      "text": "C: H and V\n(解説: evima)\n要するに、「1 行目を赤く塗るか？2 行目を塗るか？· · · H 行目を塗るか？1 列目を塗るか？2 列\n目を塗るか？· · · W 列目を塗るか？」というH + W 個の二者択一の問いに「Yes, No, Yes, Yes,\n· · · 」などと答えることが求められています。このようなYes/No 列は2H+W 通り考えられ、今回の\n制約H, W ≤6 のもとでは最大でも212 = 4096 通りです。この程度であれば、全通りのYes/No 列\nを試して実際に黒いマスがK 個残るようなものの数を数えても時間切れの心配はありません。\nあとはYes/No 列を列挙するというプログラミングの課題です。再帰関数などを用いる方針も考え\nられますが、ここではYes/No 列を二進数と対応づけて列挙することにします。以下、0b で始まる\n数は二進数です(例: 0b0101 = 4 + 1 = 5)。\nしばらく行についてのみ考えます。例えばH = 3 のとき、3 個の列に対して23 = 8 通りの\nYes/No 列が考えられます。そして、「No, No, No」を0b000 = 0、「Yes, No, No」を0b001 = 1、\n「No, Yes, No」を0b010 = 2、「Yes, Yes, No」を0b011 = 3、· · · 、「Yes, Yes, Yes」を0b111 = 7\nに対応させれば、23 通りのYes/No 列と0 から23 −1 = 7 までの整数が一対一に対応します(左右\nが反転していますが、整数の表記では大きい桁ほど左に置かれるためです)。\n同様に、行の数がいくつであっても、Yes/No 列の前からi 番目の要素を二進数の2i の位の桁に紐\n付けることで、2H 通りのYes/No 列と0 から2H −1 までの整数が一対一に対応します。列に関し\nても2W 通りのYes/No 列を0 から2W −1 までの整数と一対一に対応させれば、以下の疑似コー\nドのように二重ループで2H+W 通りすべてのシナリオを列挙することができます。\n1 H, W, K, c := input\n2 ans := 0\n3 for maskR = 0, ..., (1 << H) - 1:\n4\nfor maskC = 0, ..., (1 << W) - 1:\n5\nblack := 0\n6\nfor i = 0, ..., H-1:\n7\nfor j = 0, ..., W-1:\n8\nif ((maskR >> i) & 1) == 0 and ((maskC >> j) & 1) == 0\n9\nand c[i][j] == '#': black = black + 1\n10\nif black == K: ans = ans + 1\n11 print ans\n",
+      "text_sha256": "fa583ec4fcd6f7c8f6050faa4287141fac7c48aa010159bd7a30eff8348e9677",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc173/abc173_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

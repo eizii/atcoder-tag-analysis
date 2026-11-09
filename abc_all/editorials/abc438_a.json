@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc438_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc438/editorial/14961",
+      "text": "ある年の最初のコンテストが\n\\(F\\)\n日目に開催されるとき、その年には\n\\(F, F + 7, F + 14, \\ldots\\)\n日目にコンテストが開催されます。\n次の年の\n\\(x\\)\n日目が「ある年」の\n\\(D + x\\)\n日目に相当することを考えると、\n\\(F\\)\nが\n\\(D\\)\n以下である間\n\\(F\\)\nに\n\\(7\\)\nを加算し続け、\n\\(F - D\\)\nを出力すると答えとなります。この操作は while 文などを用いると実現できます。\n実装例\nまた、以下のようにループを用いずに答えを出すことも可能です。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint d, f;\n\tcin >> d >> f;\n\twhile (f <= d) f += 7;\n\tcout << f - d << '\\n';\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint d, f;\n\tcin >> d >> f;\n\tcout << 7 - ((d - f) % 7) << '\\n';\n}"
+      ],
+      "text_sha256": "a3dc08ef84a4d7d72e5c5e064bd78dc0fc8928e6370b9ee1562822351d5a0849",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc438/abc438_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc438/editorial/15129",
+      "text": "公式解説の2つ目の実装例7行目に\ncout << 7 - ((d - f) % 7) << '\\n';\nという行がありますが、この行で何を行っているかの解説です。以下では合同式（剰余）についての知識を仮定します。\n求める答えを\n\\(x\\)\nとして、\n\\(f \\equiv x + d \\pmod 7\\)\nが成り立ちます。したがって、この問題は\n\\(x \\equiv f - d \\pmod 7\\)\nとなるような\n\\(x \\quad (1 \\le x \\le 7)\\)\nを求める問題と言い換えることができます。\n\\(7-x = y\\)\nとすると、\n\\(y \\equiv d - f \\pmod 7\\)\nで、\n\\(0 \\le y \\lt 7\\)\nです。このような\n\\(y\\)\nは剰余演算を用いて\n(d - f) % 7\nと計算することができます。（制約から、必ず\n\\((d-f) \\gt 0\\)\nとなることに注意してください。）\n\\(7 - x = y\\)\nを変形し、\n\\(x = 7 - y\\)\nであるため、結局\n\\(x\\)\nは\n7 - ((d - f) % 7)\nにより求まることがわかります。",
+      "codes": [],
+      "text_sha256": "11449efc90932f08b9e0f0c03bd8726081591481ffe6cd0b300a26826d911abf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc438/abc438_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

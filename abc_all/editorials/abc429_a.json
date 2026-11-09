@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc429_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc429/editorial/14278",
+      "text": "問題文の指示通りに\n\\(i=1,2,\\ldots, N\\)\nについて、\n\\(i\\)\nが\n\\(M\\)\n以下ならば\nOK\nを、\n\\(M\\)\nより大きければ\nToo Many Requests\nを出力すれば良いです。\nこれは for 文と if 分の組み合わせで実装することができます。\n改行することを忘れないように注意してください。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint n,m;\n\tcin>>n>>m;\n\tfor(int i=0;i<n;i++){\n\t\tif(i<m)cout<<\"OK\"<<endl;\n\t\telse cout<<\"Too Many Requests\"<<endl;\n\t}\n}",
+        "n,m=map(int, input().split())\n\nfor i in range(n):\n    if i<m:\n        print(\"OK\")\n    else:\n        print(\"Too Many Requests\")"
+      ],
+      "text_sha256": "46d12e5a57e8088d3e61f2b0a8e920c2920b4413928b3c498c9284f0a81a5799",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc429/abc429_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

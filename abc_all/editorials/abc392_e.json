@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc392_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc392/editorial/12146",
+      "text": "サーバーを頂点、ケーブルを辺とみなしたグラフを考えます。\n連結成分ごとに、そこに属する頂点と、”余っている”辺を求めます。これはDFS/BFSを行うことや、DSUなどのデータ構造を用いることでできます。\n“余っている辺”の端点を、別の連結成分に属する頂点に繋ぎ変えることで、必ず連結成分数を減らすことができます。逆にどのように辺を繋ぎ変えても\n\\(1\\)\n回の操作では連結成分数は高々\n\\(1\\)\nしか変化しないため、この操作を繰り返し行うことで操作回数を最小にできることがわかります。\n“余っている辺”が多い連結成分から順に辺の繋ぎ変えを考えると実装が容易です。\nwriter解(C++)",
+      "codes": [],
+      "text_sha256": "7b1c2f3a840fdb5b15eefee84f5c4cfdb16e76bbb1c95c6c33b0747a961ad6e3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc392/abc392_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc392/editorial/12210",
+      "text": "元のグラフの連結成分の数を\n\\(c\\)\nとしたとき，\n\\(c - 1\\)\n回の操作を行う必要があります．よって，余分な辺を事前に\n\\(c - 1\\)\n辺選んでおきます（Union-Find を用意し，\n\\(1\\)\n辺ずつ追加して連結成分を管理した際に，辺の両端が連結な場合に「余分な辺」であるとみなす，とすると簡潔に行えます）．\nあとは，その\n\\(c - 1\\)\n辺をつなぎかえることで全体を連結にしていきます．これについては，先ほどの Union-Find を用いることで，次のように行えばよいです．\nまず，連結成分の代表元の番号を管理する集合\n\\(S\\)\n（C++ の\nset\nなどで実現可能です）を用意する．この集合を，\n\\(c\\)\n個の連結成分の代表元で初期化する．\n余分な辺の中でまだ選んでいないものを\n\\(1\\)\nつ選ぶ．その辺が含まれる連結成分の代表元を，\n\\(S\\)\nから削除する．ここで\n\\(S\\)\nから削除された代表元を\n\\(r_1\\)\nとする．\n\\(S\\)\nに含まれる要素を\n\\(1\\)\nつ，任意に選ぶ．その要素を\n\\(S\\)\nから削除する．これを\n\\(r_2\\)\nとする．\n2 で選んだ辺の両端の頂点のうち，片方の頂点の結ぶ先を\n\\(r_2\\)\nに変更する．ここで，Union-Find のマージに相当する操作を，\n\\(r_1\\)\nおよび\n\\(r_2\\)\nに対して行う．そうしてできた新たな連結成分の代表元\n\\(r_3\\)\nを，\n\\(S\\)\nに追加する．\n2 から 4 までを規定の回数に到達するまで繰り返し行う．\nなお，4 の操作において，マージ後の新たな代表元は ACL の dsu を用いると，\nmerge\n関数の返り値として得られることを利用し，\nr_3 = tree.merge(r_1, r_2)\nのように記述すると便利です．",
+      "codes": [],
+      "text_sha256": "dd9be65ea7f74af09e7e1ad97dd0cfa27f48c2fe8239783fce6b6be8dc5c8da4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc392/abc392_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

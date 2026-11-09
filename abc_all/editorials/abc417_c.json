@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc417_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc417/editorial/13577",
+      "text": "ありえるすべての \\((i,j)\\) の組（\\(\\dfrac{N(N-1)}2\\) 通りあります）に関して判定を行うと、実行時間制限に間に合わせるのは難しいです。\nここで、判定する式 \\(j-i=A _ i+A _ j\\) を変形して、\\(j-A _ j=i+A _ i\\) としてみましょう。\nすると、\\(j\\) を \\(1\\) つ固定して条件を満たす \\((i,j)\\) の組をすべて見つけることを、\\(1\\le i\\lt j\\) を満たす \\(i\\) のうち、\\(i+A _ i\\) の値が \\(j-A _ j\\) と等しいものをすべて見つけることに言い換えることができます。\nこのことを考えると、連想配列などを使った次のようなアルゴリズムが考えられます。\n整数をキーとして非負整数を返す連想配列 \\(\\operatorname{map}\\) を作り、はじめすべて \\(0\\) で初期化する。\n\\(\\operatorname{ans}\\) を  \\(0\\) で初期化する。\n\\(j=2,3,\\ldots,N\\) に対して、次を繰り返す。\n\\(\\operatorname{ans}\\leftarrow\\operatorname{ans}+\\operatorname{map}\\lbrack j-A _ j\\rbrack\\) と更新する。\n\\(\\operatorname{map}\\lbrack j+A _ j\\rbrack\\leftarrow\\operatorname{map}\\lbrack j+A _ j\\rbrack+1\\) と更新する。\n3-2. のステップが行われることによって、3-1. のステップの時点で \\(\\operatorname{map}\\lbrack x\\rbrack\\) には \\(i+A _ i=x\\) を満たす \\(1\\le i\\lt j\\) の個数が入っているので、このアルゴリズムで正しい答えを得ることができます。\n\\(1\\le A _ i\\) なので \\(i+A _ i=j-A _ j=x\\) を満たす \\(x\\) は \\(0\\le x\\lt N\\) を満たす（もう少し狭めることもできます）ことを利用して連想配列を長さ \\(N\\) の配列に置き換えることもできます。\n実装例は以下のようになります。\n答えが \\(2 ^ {32}\\) を越える場合があることに注意してください（例えば、\\(N=2\\times10 ^ 5, A _ i=\\vert i-10 ^ 5\\vert\\) の場合）。",
+      "codes": [
+        "#include <iostream>\n#include <map>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\n    // counter[x] : x = i + A[i] を満たす i の個数 \n    map<int, int> counter;\n\n    long ans = 0;\n    for (int i = 0; i < N; ++i) {\n        int a;\n        cin >> a;\n        // j - A[j] = i + A[i] を満たす個数を加算して\n        ans += counter[i - a];\n        // j + A[j] のカウンタを進める\n        ++counter[i + a];\n    }\n    cout << ans << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "6d36b4b842ff62631776f0b02f38661c74f3c494aa71230d6a3609ab454b84d3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc417/abc417_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc417/editorial/13581",
+      "text": "\\(j-i=A _ i+A _ j\\)\nを変形して、\n\\(j-A _ j=i+A _ i\\)\nとします。\n公式解説\nでは\n\\(i+A_i\\)\nの登場回数を逐次更新していますが、あらかじめ\n\\(i+A_i\\)\nの値を列挙しておき、各\n\\(j-A_j\\)\nがその中に何度登場するかを確かめれば十分です。\n（全ての\n\\(A_i\\)\nが正であることから\n\\(i=j\\)\nが条件を満たすことはなく、\n\\((i,j)\\)\nが条件を満たすならば\n\\((j,i)\\)\nが条件を満たすこともないため）\n実装例(Python)",
+      "codes": [
+        "from collections import Counter\nN=int(input())\nA=list(map(int,input().split()))\n\n# Ai+i の度数分布の作成\nAi_plus_i = Counter(A[i]+i for i in range(N))\n# j-Ajの登場回数の和を計算\nprint(sum(Ai_plus_i[j-A[j]] for j in range(N)))"
+      ],
+      "text_sha256": "5ecc838fdde44a4365a29421e4997eb500caa9f02c04590ec54c6756346b896c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc417/abc417_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

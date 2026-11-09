@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc321_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc321/editorial/7262",
+      "text": "もしこの問題にタイプ\n\\(1\\)\nの操作 (追加) しかなければ、\n\\(dp\\)\n[ 部分和 ]\n\\(=\\)\n{ 場合の数 } のような DP をすることで解けます。\nこの解法を拡張して削除にも対応できないか考えます。\n追加を行う際の DP の遷移は以下の通りです。\n\\(i=K,K-1,\\dots,x+1,x\\)\nの順に以下の操作を行う。\n\\(dp[i]\\)\nに\n\\(dp[i-x]\\)\nを加算する。\nこれを逆向きにすると削除についての正しい DP の遷移が導出できます。\n\\(i=x,x+1,\\dots,K-1,K\\)\nの順に以下の操作を行う。\n\\(dp[i]\\)\nから\n\\(dp[i-x]\\)\nを減算する。\nまた、\n\\(dp\\)\nの添え字の範囲は\n\\(0,1,\\dots,K\\)\nまでしか保持する必要がありません。 (\n\\(dp[K+1]\\)\n以降の値は\n\\(dp[K]\\)\n以前の値には影響しません )\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#define mod 998244353\n\nusing namespace std;\n\nint dp[5005]={0};\n\nint main(){\n  int q,k;\n  cin >> q >> k;\n  dp[0]=1;\n  while(q>0){\n    q--;\n    string s;\n    int x;\n    cin >> s >> x;\n    if(s==\"+\"){\n      for(int i=k;i>=x;i--){\n        dp[i]+=dp[i-x];\n        dp[i]%=mod;\n      }\n    }\n    else{\n      for(int i=x;i<=k;i++){\n        dp[i]+=(mod-dp[i-x]);\n        dp[i]%=mod;\n      }\n    }\n    cout << dp[k] << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "33eaea475d1b2ee5ac636ddf1c823ff12533561dfd880bbc957d8faae62f3a49",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc321/abc321_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc321/editorial/7270",
+      "text": "本質的には\nphysics0523さんによる解説\nと同一です。\n今回の問題は、形式的冪級数を用いて解釈することも可能です。\n今回の問題は、\n\\(f(x)=1\\)\nからはじめ、以下の操作を\n\\(Q\\)\n回繰り返し、各操作後に\n\\(x^K\\)\nの係数を出力すれば良いです。（\n\\(x\\)\nが混在するため、以下入力で与えられる整数は\n\\(d\\)\nと表記します）\n+\nのとき：\n\\(f(x)\\)\nに\n\\(1+x^d\\)\nを掛ける\n-\nのとき：\n\\(f(x)\\)\nを\n\\(1+x^d\\)\nで割る\nこれらの操作は、\n\\(f\\)\nの\n\\(0\\)\n次の項から\n\\(K\\)\n次の項までを管理することで\n\\(\\mathrm{O}(K)\\)\nで可能です。\nこれらの掛け算、割り算をよく考えると、公式解説の DP の更新と同一であることが分かります。",
+      "codes": [],
+      "text_sha256": "dfbbae9832c2ed3af5513eaaf9b1d668ef957ebf107589c9a0216b32cb1d3780",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc321/abc321_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

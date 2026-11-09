@@ -1,0 +1,22 @@
+{
+  "problem_id": "abc461_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc461/editorial/21021",
+      "text": "「何もわからない」という場合、まずは\npractice contest\nの\n問題 A - Welcome to AtCoder\nをご覧ください。各言語での基本的な入出力のサンプルコードがあります。\nAtCoder Beginners Selection\nもおすすめします。\n今回の問題を解くには、次の四つの処理を行う必要があります。\nスペース区切りで入力される整数\n\\(A\\)\nと\n\\(D\\)\nを受け取る。\n\\(A\\)\nと\n\\(D\\)\nの大小を比較する。\n比較結果に応じてプログラムの進行を分岐させる。\n文字列\nYes\nまたは\nNo\nを出力する。\n1. 入力\n上記の\nWelcome to AtCoder\nのサンプルコードを流用できます。例えば Python を使う場合、「Python3 での解答例」として次のコードが載っています。\nこの 5 行目を使い、次のように書けます。\n2. 大小比較\n多くのプログラミング言語に\n<=\nという演算子があり、「\n\\(A\\)\nが\n\\(D\\)\n以下であるか」は\nA <= D\nと書けます。\n3. 条件分岐\n多くの言語に if 文という構文や条件演算子（三項演算子）というものがあり、このいずれかを 2. と組み合わせて使います。具体的な書き方は言語によって異なります。お使いの検索エンジンで「〇〇〇 if」（〇〇〇に言語名を入れる）などと検索してください。\n4. 出力\n再び\nWelcome to AtCoder\nのサンプルコードを流用できます。例えば Python の場合、上のサンプルコードの 9 行目の\n\"{} {}\".format(a+b+c, s)\nを\n\"Yes\"\nに置き換えると\nYes\nを出力できます。ほかの多くの言語でも似たようなことができるでしょう。（なお、AtCoder では出力中の大文字・小文字は原則として区別されます。）\nPython と C++ での実装例を二つずつ挙げます。\n（Python: if 文）\n（Python: 条件演算子）\n（C++: if 文）\n（C++: 条件演算子）",
+      "codes": [
+        "# -*- coding: utf-8 -*-\n# 整数の入力\na = int(input())\n# スペース区切りの整数の入力\nb, c = map(int, input().split())\n# 文字列の入力\ns = input()\n# 出力\nprint(\"{} {}\".format(a+b+c, s))",
+        "A, D = map(int, input().split())",
+        "A, D = map(int, input().split())\nif A <= D:\n    print(\"Yes\")\nelse:\n    print(\"No\")",
+        "A, D = map(int, input().split())\nprint(\"Yes\" if A <= D else \"No\")",
+        "#include <iostream>\nusing namespace std;\nint main() {\n    int A, D;\n    cin >> A >> D;\n    if (A <= D) {\n        cout << \"Yes\" << endl;\n    } else {\n        cout << \"No\" << endl;\n    }\n}",
+        "#include <iostream>\nusing namespace std;\nint main() {\n    int A, D;\n    cin >> A >> D;\n    cout << (A <= D ? \"Yes\" : \"No\") << endl;\n}"
+      ],
+      "text_sha256": "4ab23933fb21fb0d1cfd5ec84ef067dc2c6c673faae22a0cc8087359a31de04d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc461/abc461_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc395_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc395/editorial/12284",
+      "text": "問題文に書かれている通り、すべての\n\\(i\\)\nに対して\n\\(A_i\\lt A_{i+1}\\)\nが成り立つか判定すればよいです。\nどうしても不正解となる場合、以下のような原因が考えられます。\n正しく入力が行えていない\npractice contest\nのA問題\nWelcome to AtCoder\nで入出力の方法を確認しましょう。\n\\(A\\)\nの範囲外の要素を参照してしまっている\n不等号の向きや等号の有無が間違っている\n実装例 (Python3)",
+      "codes": [
+        "N = int(input())\nA = list(map(int, input().split()))\n\nfor i in range(N - 1):\n    if A[i] >= A[i + 1]:\n        print(\"No\")\n        break\nelse:\n    print(\"Yes\")"
+      ],
+      "text_sha256": "e6fab55a65365669156f9212a2f57b1db0d924a33121044e74702e5bd055534f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc395/abc395_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

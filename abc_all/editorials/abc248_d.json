@@ -1,0 +1,46 @@
+{
+  "problem_id": "abc248_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc248/editorial/3747",
+      "text": "\\(x = 1,\\ldots,N\\)\nそれぞれについて、\n\\(A_i = x\\)\nなる\n\\(i\\)\nを昇順に管理した配列を\n\\(\\mathrm{idx}_x\\)\nとします。\nこのとき、各クエリは以下のように言い換えられます。\n\\(L,R,X\\)\nが与えられる。\n\\(\\mathrm{idx}_X\\)\nの要素のうち、\n\\(L\\)\n以上\n\\(R\\)\n以下のものは何個あるか答えよ。\nこのクエリは\n\\(\\mathrm{idx}_X\\)\nの要素のうち\n\\(L\\)\n以上の最小の要素は前から何番目か、\n\\(R + 1\\)\n以上の最小の要素は前から何番目かを求めることで解くことができ、これらは二分探索により\n\\(\\mathrm{Ο}(\\log N)\\)\nで求められます。\n計算量は\n\\(\\mathrm{Ο}(N+Q\\log N)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\n\tvector<vector<int>> idx(n + 1);\n\tfor(int i = 0; i < n; i++) {\n\t\tint a;\n\t\tcin >> a;\n\t\tidx[a].push_back(i);\n\t}\n\n\tint q;\n\tcin >> q;\n\n\twhile(q--) {\n\t\tint l, r, x;\n\t\tcin >> l >> r >> x;\n\t\tcout << lower_bound(idx[x].begin(), idx[x].end(), r) - lower_bound(idx[x].begin(), idx[x].end(), l - 1) << endl;\n\t}\n}"
+      ],
+      "text_sha256": "effa69ce53896053083c0ee39b6c41e32f50248cb6efd5f7c99642f63c736ab5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc248/abc248_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc248/editorial/3821",
+      "text": "この問題は、\n\\(\\Theta(N + Q)\\)\n時間で解くことができます。\n「\n\\(A_L, \\dots, A_R\\)\nの中の\n\\(X\\)\nの個数」を、「\n\\(X\\)\nを\n\\(1\\)\n、それ以外を\n\\(0\\)\nに変換したときの区間和」と考えると、累積和が使えそうです。\n累積和 :\n\\(\\text{sum}[X][i] = {}\\)\n(\n\\(A_1, \\dots, A_i\\)\nの中の\n\\(X\\)\nの個数) とすると、答えは\n\\(\\text{sum}[X][R] - \\text{sum}[X][L - 1]\\)\nです。\nしかし、このままでは\n\\(X = 1, \\dots, N\\)\nのそれぞれについて累積和を求める必要があり、\n\\(\\Theta(N^2)\\)\n時間かかってしまいます。\nここで、\n\\(i = 0, \\dots, N\\)\nの順に走査し、累積和 :\n\\(\\text{sum}[X] = {}\\)\n(\n\\(A_1, \\dots, A_i\\)\nの中の\n\\(X\\)\nの個数) を更新していくと、更新は\n\\(\\Theta(N)\\)\n時間で行えます。\nよって、累積和が必要になる位置\n\\((X, R), (X, L - 1)\\)\nをバケットソートすることで、\n\\(\\Theta(N + Q)\\)\n時間で解くことができました。\n実装例 (C++)",
+      "codes": [],
+      "text_sha256": "89f231cfd93029fa8dbee88882cf0f13b332d1d6f750fb092c0e1c7697dc51a3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc248/abc248_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc248/editorial/3819",
+      "text": "セグメント木にソート済み列や多重集合を乗せることでもこの問題を解くことができます。\n葉に単一の要素\n\\(A[i]\\)\nのみからなるソート済み列や多重集合を乗せて、葉以外の頂点は子のソート済み列や多重集合を合併したものを乗せることにします。\nこのとき、ソート済み列や多重集合のサイズの合計は\n\\(N\\log N\\)\nと評価できます（深さが同じ頂点のサイズの合計を考えることで示せます）。\nこのようなセグメント木をもち、クエリごとに対応する頂点のソート済み列や多重集合にそれぞれに対して「\n\\(X\\)\nがいくつ含まれるか」を求め、それらを合計することでこの問題を解くことができました。\nこの方針では\natcoder::segtree\nをそのまま用いて解くことは難しいため注意してください。\n以下の実装では多重集合を\n\\((\\)\n値\n\\(, \\)\n個数\n\\()\\)\nの組として連想配列（ハッシュマップ）で持つことで時間計算量を\n\\(\\operatorname{expected} O((N+Q)\\log N)\\)\nとしています。\n実際の提出",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    // 入力\n    int N;\n    cin >> N;\n\n    vector<unordered_map<int, int>> segment_tree(2 * N);\n    // 葉は {A[i]}\n    for(int i = 0; i < N; ++i){\n        int A;\n        cin >> A;\n        segment_tree[i + N][A] = 1;\n    }\n    // 子を多重集合としてマージ\n    for(int i = N; --i;){\n        for(const auto [value, count] : segment_tree[2 * i])segment_tree[i][value] += count;\n        for(const auto [value, count] : segment_tree[2 * i + 1])segment_tree[i][value] += count;\n    }\n\n    int Q;\n    cin >> Q;\n    for(int i = 0; i < Q; ++i){\n        int L, R, X;\n        cin >> L >> R >> X;\n        L += N - 1;\n        R += N;\n        int ans = 0;\n        // 区間に対応するセグメント木の頂点に対して X の個数を足す\n        while(L != R){\n            if(L & 1){\n                if(segment_tree[L].count(X))ans += segment_tree[L][X];\n                ++L;\n            }\n            if(R & 1){\n                --R;\n                if(segment_tree[R].count(X))ans += segment_tree[R][X];\n            }\n            L /= 2;\n            R /= 2;\n        }\n        cout << ans << endl;\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "245183b8fcff11a235bd57cae15f7e5a1aa876cd12801afa1007ced67e66e895",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc248/abc248_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc248/editorial/16160",
+      "text": "平方分割でこの問題を解くこともできます。\nブロックサイズを\n\\(B\\)\nとして、あらかじめ配列を長さ\n\\(B\\)\nごとのブロックに分けそれぞれのブロックごとに出現する値ごとの出現回数を記録しておきます。\n各クエリでは、区間に完全に含まれるブロックごとに記録した出現回数を加算し、完全に覆われていない箇所は愚直に出現回数を数えます。完全に含まれるブロックの数は高々\n\\(O(N / B)\\)\n個、愚直に数え上げる箇所の数は高々\n\\(O(B)\\)\n個であるので、全体で\n\\(O(Q(N / B + B))\\)\nでこの問題を解くことができます。特に\n\\(B = \\sqrt{N}\\)\nとすると\n\\(O(Q \\sqrt{N})\\)\nで解くことができます。\n実行時間制限が厳しいため、PythonなどではACは難しいかもしれません。\n実装例（C++）",
+      "codes": [],
+      "text_sha256": "7dde8f14cf29ab1212c1406d909256402eabfa79b3d9a2f02669d47aa1df1391",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc248/abc248_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

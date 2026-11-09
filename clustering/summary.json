@@ -1,0 +1,104 @@
+{
+  "dataset_label": "検証後のタグ付け修正案",
+  "input_directory": "validation\\revised",
+  "validation_status_counts": {
+    "not_reviewed": 1651,
+    "add_supported": 22,
+    "supported_existing": 61,
+    "needs_review": 6
+  },
+  "problem_count": 898,
+  "taxonomy_count": 266,
+  "assigned_pairs": 1740,
+  "used_tags": 115,
+  "unused_tags": 151,
+  "tags_with_1_or_2_problems": 48,
+  "review_pairs_removed": 77,
+  "problems_losing_all_tags_after_review_exclusion": 44,
+  "distance": "Jaccard",
+  "linkage": "average (UPGMA)",
+  "optimal_leaf_ordering": true,
+  "default_distance_threshold": 0.9,
+  "review_sensitivity": {
+    "common_tags": 115,
+    "tags_losing_all_evidence": [],
+    "adjusted_rand_index": 0.968922897495342,
+    "changed_cocluster_pairs": 4,
+    "changed_tags": 6
+  },
+  "models": [
+    {
+      "key": "all",
+      "min_support": 1,
+      "threshold": 0.9,
+      "tag_count": 115,
+      "cluster_count": 72,
+      "multi_tag_clusters": 29,
+      "singleton_clusters": 43,
+      "silhouette": 0.16036932955478503,
+      "cophenetic_correlation": 0.9668502289124358,
+      "best_silhouette_cut_observed": {
+        "threshold": 0.8666666666666667,
+        "tag_count": 115,
+        "cluster_count": 80,
+        "multi_tag_clusters": 29,
+        "singleton_clusters": 51,
+        "silhouette": 0.17488984995140824
+      }
+    },
+    {
+      "key": "min3",
+      "min_support": 3,
+      "threshold": 0.9,
+      "tag_count": 67,
+      "cluster_count": 47,
+      "multi_tag_clusters": 15,
+      "singleton_clusters": 32,
+      "silhouette": 0.07871821811018549,
+      "cophenetic_correlation": 0.8787509679922644,
+      "best_silhouette_cut_observed": {
+        "threshold": 0.9393939393939394,
+        "tag_count": 67,
+        "cluster_count": 37,
+        "multi_tag_clusters": 20,
+        "singleton_clusters": 17,
+        "silhouette": 0.08479581294184872
+      }
+    },
+    {
+      "key": "review_excluded",
+      "min_support": 1,
+      "threshold": 0.9,
+      "tag_count": 115,
+      "cluster_count": 70,
+      "multi_tag_clusters": 30,
+      "singleton_clusters": 40,
+      "silhouette": 0.16868235583360336,
+      "cophenetic_correlation": 0.9667734371669188,
+      "best_silhouette_cut_observed": {
+        "threshold": 0.8668777655989932,
+        "tag_count": 115,
+        "cluster_count": 78,
+        "multi_tag_clusters": 30,
+        "singleton_clusters": 48,
+        "silhouette": 0.18268428000411707
+      }
+    }
+  ],
+  "runtime": {
+    "python": "3.9.13",
+    "numpy": "2.0.2",
+    "scipy": "1.13.1",
+    "matplotlib": "3.9.4",
+    "scikit_learn": "1.6.1",
+    "plot_font": "Yu Gothic"
+  },
+  "source_sha256": {
+    "all_problems.csv": "ef84cd9cdfe70f0238962c62514eec15b9d91d81ba549141f323f1a9ada31751",
+    "tags.md": "faf14c793ec71a30df5b2bd23a5f4b9878d0350e013d09a14f9147f8ae9bb4b6",
+    "problem_tag_matrix.csv": "49151564ffa94bb69af08c2145cdf19ead5aeeb1b24812d01c7adaec0a65910e",
+    "all_problems_tagged.csv": "00675eb8f8613c0ae9771d9e8b463788b3b2a98b7f0d5f3095616a5d9a870c91",
+    "tag_catalog.csv": "e046618cfae74f4593676a6d892f68be0d05a5142dc51edf187b1b40987254bb"
+  },
+  "validation": "all checks passed"
+}

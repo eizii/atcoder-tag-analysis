@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc189_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc189/editorial/528",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「\nWelcome to AtCoder\n」をお試しください。言語ごとに解答例が掲載されています。\nこの問題は、入力を文字列として受け取り、各文字が等しいかどうかを比較することで解けます。\n実装例(C)\n実装例(Python)",
+      "codes": [
+        "#include <stdio.h>\nint main(){\n\tchar s[9];\n\tscanf(\"%s\",s);\n\tif(s[0]==s[1]&&s[1]==s[2]){\n\t\tprintf(\"Won\");\n\t}else{\n\t\tprintf(\"Lost\");\n\t}\n}",
+        "s=input()\nif s[0]==s[1] and s[1]==s[2]:\n\tprint(\"Won\")\nelse:\n\tprint(\"Lost\")"
+      ],
+      "text_sha256": "c0a2df7c1183c483f8157cfe5c34d901c341d69b663fa7cf90e31e0bf28b93fc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc189/abc189_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

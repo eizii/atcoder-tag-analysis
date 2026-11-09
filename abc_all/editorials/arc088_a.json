@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc088_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc088/editorial.pdf",
+      "text": "C: Multiple Gift\n\n 作る数列をA1, ..., A|A| とします。条件よりX ≤A1 であり、またすべてのi に対し2Ai ≤Ai+1 となり\nます。よって、Ai ≥X × 2i−1 がわかります。\n 逆に、Ai = X × 2i−1 とすれば、これは条件を満たします。すべてのi に対しAi の最小値を達成できてい\nるので、条件を満たす数列のうちこのようにして作られるもののみを考慮すればよく、時間計算量O(log BA)\nでこの問題を解くことができます。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "d968f0c70f3422f373afbbb11acc8bf265de1eebe7af858029bd75e86336e1d5"
+    }
+  ],
+  "status": "available"
+}

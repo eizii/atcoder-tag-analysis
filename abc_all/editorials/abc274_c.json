@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc274_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc274/editorial/5019",
+      "text": "求める答えは親のアメーバに対する答え\n\\(+1\\)\nになります。したがって、各アメーバが生まれたタイミングで答えを記録することで、\n\\(O(N)\\)\nで解くことができます。\n実装例(Python)",
+      "codes": [
+        "N=int(input())\nA=list(map(int,input().split()))\nans=[0]*(2*N+1)\nfor i,a in enumerate(A):\n  ans[2*i+1]=ans[a-1]+1\n  ans[2*i+2]=ans[a-1]+1\n\nprint(*ans,sep=\"\\n\")"
+      ],
+      "text_sha256": "c5f51b5ce730d24dbad2655c02565b1d4bfa2870fc3b81fdba42f54be5fa8641",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc274/abc274_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

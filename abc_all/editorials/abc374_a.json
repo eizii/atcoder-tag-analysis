@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc374_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc374/editorial/11096",
+      "text": "文字列の最後から\n\\(3\\)\n文字の部分文字列を取り出し、それが\nsan\nと一致しているか判定し、そうであるならば\nYes\n、ないならば\nNo\nを出力すれば良いです。\n部分文字列を取り出す関数は C++ や pythonでは標準ライブラリや記法の形で定義されています。\n他には、文字列の長さを\n\\(N\\)\nとしたとき、 問題文の条件は（\n\\(S\\)\nの\n\\(N-2\\)\n文字目が\ns\n）かつ（\n\\(S\\)\nの\n\\(N-1\\)\n文字目が\na\n）かつ（\n\\(S\\)\nの\n\\(N\\)\n文字目が\nn\n）と言い換えることができるため、これを判定しても良いです。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n\tstring s;\n\t\n\tcin >> s;\n\tif(s.substr(s.size() - 3)==\"san\")cout << \"Yes\" << endl;\n\telse cout << \"No\" << endl;\n\n\treturn 0;\n}",
+        "s=input()\nif s[-3:]==\"san\":\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "eed094dc0edae5146d639382bb6a467acbf205bcd63f49c0097f34513722c3c8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc374/abc374_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc374/editorial/11120",
+      "text": "公式解説のように、部分文字列を取り出してそれが\nsan\nと一致するかどうかを確かめても良いですが、言語によっては「指定文字列で始まる/終わるかどうか」を返す関数が用意されていることがあります。\nこの問題に限らず、基本的な操作であれば言語にもともと関数が用意されていることも多いです。こういった関数を使用することで、バグを防いだり、コードの可読性を上げて思考を整理しやすくなったりするため、習得しておくと良いでしょう。\nPythonによる実装\nC++による実装（C++20以降を使用する必要があります。）",
+      "codes": [
+        "s = input()\nif s.endswith(\"san\"):\n  print(\"Yes\")\nelse:\n  print(\"No\")",
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  string s;cin >> s;\n  if(s.ends_with(\"san\"))cout << \"Yes\" << endl;\n  else cout << \"No\" << endl;\n}"
+      ],
+      "text_sha256": "2e8d30a3b6ee58422fed913d2f19d2e490478d4d6ea39e74f3311423d9f1d39f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc374/abc374_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

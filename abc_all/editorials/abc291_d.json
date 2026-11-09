@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc291_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc291/editorial/5838",
+      "text": "1枚目から順に表裏を決めることを考えます。\n\\(i\\)\n枚目のカードを表/裏にしてよいかどうかは、\n\\(i-1\\)\n枚目のカードを表/裏にしたかどうかのみに依存します。そこで次のようなDPを考えます。\n\\({\\rm DP}[i][{\\rm flag}] =\\)\n\\(i\\)\n枚目のカードまでの表裏の決め方のうち、条件を満たし、\n\\(i\\)\n枚目のカードが (\n\\({\\rm flag}\\)\n? 表 : 裏) であるような方法の数\nこのDPは状態数\n\\(O(N)\\)\n、遷移\n\\(O(1)\\)\nであることから、\n\\(O(N)\\)\nで答えを求めることができます。\n実装例(Python)",
+      "codes": [
+        "MOD=998244353\n\nN=int(input())\ndata=[tuple(map(int,input().split())) for _ in range(N)]\ndp=[[0,0] for _ in range(N)]\ndp[0]=[1,1]\nfor i in range(1,N):\n  # 配るDP\n  for pre in range(2):\n    for nxt in range(2):\n      if data[i-1][pre]!=data[i][nxt]:\n        dp[i][nxt]+=dp[i-1][pre]\n  dp[i][0]%=MOD\n  dp[i][1]%=MOD\n\nprint((dp[N-1][0]+dp[N-1][1])%MOD)"
+      ],
+      "text_sha256": "7197ed6aa5b1ef97f405c9ab48d403b212c6afecf73438fa581a43bc90985d9b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc291/abc291_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

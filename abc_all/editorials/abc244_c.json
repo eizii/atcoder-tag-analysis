@@ -1,0 +1,40 @@
+{
+  "problem_id": "abc244_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc244/editorial/3598",
+      "text": "本問題に正解するには、問題文にある通りに高橋君の行動をシミュレーションするプログラムを作成すれば良いです。\nゲームの過程では、\n\\(i = 1, 2, \\ldots, 2N+1\\)\nについて「整数\n\\(i\\)\nがどちらかのプレイヤーによってすでに宣言されているか？」をブーリアン型配列等で記録し、高橋君が次に宣言する整数を選ぶ際に使用します。\nプログラミングコンテストではしばしば本問題のようなインタラクティブな問題が出題されます。\n本問題のようにジャッジプログラムとゲームで対戦する問題や、ジャッジプログラムが持つ秘密の情報をジャッジプログラムに対する質問を繰り返して推定する問題が典型的です。\nAtCoderでの出題例を以下でいくつか挙げます。\npractice contest B - Interactive Sorting (\nhttps://atcoder.jp/contests/practice/tasks/practice_2\n)\nAtCoder Petrozavodsk Contest 001 C - Vacant Seat (\nhttps://atcoder.jp/contests/apc001/tasks/apc001_c\n)\nAtCoder Regular Contest 078 E - Awkward Response (\nhttps://atcoder.jp/contests/arc078/tasks/arc078_c\n)\nAtCoder Regular Contest 070 F - HonestOrUnkind (\nhttps://atcoder.jp/contests/arc070/tasks/arc070_d\n)\nC++ 言語による正解例を以下に記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nbool used[2005];\n\nint main(void)\n{\n  int n;\n  \n  cin >> n;\n  while(1){\n    for(int i = 1; i <= 2*n+1; i++){\n      if(!used[i]){\n        cout << i << endl;\n\tused[i] = true;\n        break;\n      }\n    }\n    \n    int res;\n    cin >> res;\n    if(res == 0) break;\n    used[res] = true;\n  }\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "26528db274b244a928088d025368ccc3a4723df3cad2cacce78592c59e53885b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc244/abc244_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc244/editorial/3639",
+      "text": "この問題は、\n\\(O(N)\\)\nで解くことができます。\n一般に、ゲーム問題においては対称戦略が必勝法になることがあります。\n今回の場合、まず予め数字を二つずつのペアにしておきます。そして、ペアの片方の数字が宣言されたら、もう片方の数字を宣言することにします。\nこの方法は、 数字の個数が偶数ならば後攻が必勝となります。\n今回は\n\\(2N+1\\)\nが奇数なので、最初にペアを作った時に余る値を宣言することで先攻が必勝になります。\n具体的な実装の一例として、まず初めに\n\\(N+1\\)\nを宣言し、後は青木君が宣言した値を\n\\(x\\)\nとして\n\\(2N+2-x\\)\nを宣言するという方法などが存在します。",
+      "codes": [
+        "N = int(input())\nprint(N + 1)\nfor _ in range(N):\n\taoki = int(input())\n\tprint(2 * N + 2 - aoki)"
+      ],
+      "text_sha256": "ff34399151841816f7761bf93c083f21974f1c9aa25599ae2fd6b7e4a48647dd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc244/abc244_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc244/editorial/3625",
+      "text": "インタラクティブ問題の Rust での実装に関する話を書きます。\nproconio\n(\ndoc\n) を使っているユーザが多いと思われますが、これは\n--release\nとそうでないときで挙動が異なります。\n具体的には、\n--release\nのときは「入力を一通り読んでから処理を行う」のに対し、そうでないときは一行ずつ読んで処理を行います。\nそのため、「ローカルで（デバッグビルドで）実行したときはうまくいくのに」「コードテストで一通り入力を与えて実行したときはうまくいくのに」といった事象が起きたりします。（補足：ジャッジはリリースビルドで行われます）\nそこで、普段は陽には指定しないことが多い source というのを指定することで、リリースビルドでも一行ずつ読んでもらうことができます。\nまた、実装方針として、「\nx\nを出力したときのジャッジからの返答を返す関数\nf(x)\nを定義しておく」というのがあります。この問題ではあまりメリットはないですが、「同じ出力方法を複数回行うときに一箇所だけ flush を忘れる」といったミスを防ぎやすくてよいです。\nそうした際は、次のように書くとよいでしょう。\nquery\nに\nsource\nを渡さずに関数呼び出し毎に\nstdin.lock()\nを呼びたい場合は注意が必要です。\nスコープを抜けないと lock が解放されないため、期待通りに動いてくれません。\nドキュメント (\nstruct.Stdin.html#method.lock\n)\nスコープを分けない場合の提出\n、TLE\nスコープを切った場合の提出\n、AC\nsource を渡す場合の提出\n、AC\n追記\n:\n#[fastout]\nをつけていると「\nmain()\nの終了時に全ての出力をまとめて書き出す」といった挙動になるので、インタラクティブ問題の際には外しましょう。",
+      "codes": [
+        "use std::collections::BTreeSet;\nuse std::io::{stdin, stdout, BufReader, Write};\n \nuse proconio::{input, source::line::LineSource};\n \nfn main() {\n    let stdin = stdin();\n    let mut source = LineSource::new(BufReader::new(stdin.lock()));\n \n    input! {\n        from &mut source,\n        n: usize,\n    }\n \n    let mut rem: BTreeSet<_> = (1..=2 * n + 1).collect();\n    for _ in 0..=n {\n        let x = *rem.iter().next().unwrap();\n        println!(\"{}\", x);\n        stdout().flush().unwrap();\n        rem.remove(&x);\n        input! {\n            from &mut source,\n            y: usize,\n        }\n        // remove(&0) しても問題ないので適当に\n        rem.remove(&y);\n    }\n}",
+        "use std::collections::BTreeSet;\nuse std::io::{stdin, stdout, BufRead, BufReader, Write};\n\nuse proconio::{input, source::line::LineSource};\n\nfn main() {\n    let stdin = stdin();\n    let mut source = LineSource::new(BufReader::new(stdin.lock()));\n\n    input! {\n        from &mut source,\n        n: usize,\n    }\n\n    let mut rem: BTreeSet<_> = (1..=2 * n + 1).collect();\n    for _ in 0..=n {\n        let x = *rem.iter().next().unwrap();\n        rem.remove(&x);\n        let reply = query(x, &mut source);\n        rem.remove(&reply);\n    }\n}\n\nfn query<R: BufRead>(x: usize, source: &mut LineSource<R>) -> usize {\n    println!(\"{}\", x);\n    stdout().flush().unwrap();\n    input! {\n        from source,\n        y: usize,\n    }\n    y\n}"
+      ],
+      "text_sha256": "9ce5a8a0417196c2d7d47c23dc853e701455e57dda3421565e7f573eeaaf991f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc244/abc244_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

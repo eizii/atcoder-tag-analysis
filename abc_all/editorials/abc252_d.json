@@ -1,0 +1,53 @@
+{
+  "problem_id": "abc252_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc252/editorial/3965",
+      "text": "与えられた条件は「\n\\(A_i < A_j < A_k\\)\nを満たす\n\\((i,j,k)\\)\nの組の個数を求めよ」と読み替えることができます。\n\\(j\\)\nを全探索します。このとき、\n\\(i,k\\)\nは独立に選ぶことができます。\n\\(i\\)\nの選択肢の個数は\n\\(A\\)\nに含まれる\n\\(A_j\\)\nより小さな要素の個数、\n\\(k\\)\nの選択肢の個数は\n\\(A\\)\nに含まれる\n\\(A_j\\)\nより大きな要素の個数となります。したがって、「\n\\(A\\)\nに\n\\(x\\)\n未満の要素が何個あるか？」を表す配列を予め用意しておくことで、この問題を\n\\(O(N+\\max A)\\)\nで解くことができます。\n実装例(Python)",
+      "codes": [],
+      "text_sha256": "a20e16c7afa8ee4e71ecec58d431c9563c9c61b144d935b9ede9c3fcc177f5c0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc252/abc252_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc252/editorial/4014",
+      "text": "値\n\\(i\\)\nが\n\\(A\\)\n上で出現する回数を\n\\(d_i\\)\nと置きます。\n\\(d_i=0\\)\nなる\n\\(i\\)\nに興味はないので、適当に圧縮して\n\\(d_i>0\\)\nとし、\n\\(d_i>0\\)\nとなる\n\\(i\\)\nの個数を\n\\(M\\)\nと置きます。\nこの時、答えは\\[ [x^3] \\prod_{i=1}^M (d_i x + 1) \\]です。\nまた、この方法では3種類に限らず\n\\(K\\)\n種類の値を選ぶこともでき、計算量は多項式が小さい方から順に畳み込むことで\n\\(O(M \\log ^2 K)\\)\nとなります。",
+      "codes": [],
+      "text_sha256": "1f9442001372aabbb99ec7f61e51f2c2190a2d2b7db4e6bcd284f65e8443d24c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc252/abc252_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc252/editorial/4012",
+      "text": "\\(A_i, A_j, A_k\\)\nが全て異なることは，\n\\(A_i, A_j, A_k\\)\nの種類数が\n\\(2\\)\nまたは\n\\(1\\)\nではないことと同値です．したがって，\n\\(i,j,k\\)\nすべての選び方\n\\({}_N\\mathrm{C}_3\\)\n通りから種類数が\n\\(2\\)\nまたは\n\\(1\\)\nとなるようなものを除けばよいです．\n\\(A_y=x\\)\nとなる\n\\(y\\)\nの個数を\n\\(\\mathrm{cnt}_x\\)\nとします．\n(1) 種類数が\n\\(2\\)\nの場合\n\\(A_i,A_j,A_k\\)\nのうち\n\\(2\\)\n回登場するものを\n\\(x\\)\nとすると，\n\\(A_y=x\\)\nとなるような異なる\n\\(2\\)\nつの\n\\(y\\)\nの選び方が\n\\({}_{\\mathrm{cnt}_x}\\mathrm{C}_2\\)\n通り，残りの\n\\(x\\)\n以外の数の選び方が\n\\((N-\\mathrm{cnt}_{x})\\)\n通りです．\n(2) 種類数が\n\\(1\\)\nの場合\n\\(A_i=A_j=A_k=x\\)\nとすると，\n\\(A_y=x\\)\nとなるような異なる\n\\(3\\)\nつの\n\\(y\\)\nの選び方は\n\\({}_{\\mathrm{cnt}_x}\\mathrm{C}_3\\)\n通りです．\nよって，求める答えは\n\\({}_N\\mathrm{C}_3-\\displaystyle \\sum_{x=1}^{\\max{A}} ({}_{\\mathrm{cnt}_x}\\mathrm{C}_2\\times(N-\\mathrm{cnt}_{x})+{}_{\\mathrm{cnt}_x}\\mathrm{C}_3)\\)\nです．\n実装例 (pypy3)",
+      "codes": [],
+      "text_sha256": "422f7a0b8b1350098739d92a7f20f1cd21e69e9c093c36d6a7938b81ce85d54c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc252/abc252_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc252/editorial/4013",
+      "text": "\\(T_i\\)\nを\n\\(A\\)\nの中に含まれる\n\\(i\\)\nの個数と定義します。すると、求める値は\n\\(\\displaystyle\\sum_{1\\le i<j<k\\le \\text{inf}}T_iT_jT_k\\)\nと書くことができます。ここで、\n\\(\\text{inf}\\)\nは\n\\(A\\)\nの最大値、つまり\n\\(2\\times 10^5\\)\nです。\n上の式の\n\\(k\\)\nを全探索することを考えます。 なので、\n\\(k=1,2,\\ldots,N\\)\nに対し\n\\(\\displaystyle\\sum_{1\\le i<j<k}T_iT_j\\)\nを高速に求めることを考えます。\n\\(\\displaystyle\\sum_{1\\le i<j<k}T_iT_j=\\frac12\\left(\\sum_{i=1}^{k-1}T_i\\right)^2-\\frac12\\sum_{i=1}^{k-1}T_i^2\\)\nです。これより、\n\\(\\displaystyle X_j=\\sum_{i=1}^j T_i\\)\n、\n\\(\\displaystyle Y_j=\\sum_{i=1}^j T_i^2\\)\nと定義して\n\\(O(\\text{inf})\\)\nで前計算することにより 各\n\\(k\\)\nに対し\n\\(\\displaystyle\\sum_{1\\le i<j<k}T_iT_j\\)\nが\n\\(O(1)\\)\nで求めることができます。\n以上でこの問題が解けました。計算量は\n\\(O(N+\\max A)\\)\nです。\n実装例(Java)",
+      "codes": [],
+      "text_sha256": "e17890bd8ac41fec408bc9305dfaad871013ddea0ed9f1132ff9b1dd51c8ee76",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc252/abc252_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc252/editorial/4011",
+      "text": "ユーザー解説です\nこの問題は DP (動的計画法) で解くこともできます。\nこの問題は\n\\(A\\)\nから異なる値を\n\\(3\\)\n個選んで集合を作る方法の通り数を数える問題です。そこで、\n\\(1,2,\\dots\\)\nの順に 「\n\\(n\\)\nを集合に入れるか？」を考えていきましょう。\nDP テーブルを次のように定義します。\n\\(dp_{i,j} :=\\)\n\\(i\\)\nまで確定していて、集合のサイズが\n\\(j\\)\nである通り数。(\n\\(i,j\\)\nは\n\\(0 \\leq i \\leq \\max(A), 0 \\leq j \\leq 3\\)\nの範囲)\nDP の遷移を考えてみましょう。集合に\n\\(i\\)\nを入れる場合とそうでない場合で通り数は次のように変化します。\n集合に\n\\(i\\)\nを追加する場合：\n\\(i\\)\nの選び方は\n\\(A\\)\nに含まれる\n\\(i\\)\nの個数の分だけ存在する。また集合のサイズは\n\\(1\\)\n増える。\n集合に\n\\(i\\)\nを追加しない場合：通り数・集合のサイズはそのままである。\nよって、次の式によって DP テーブルを計算していくことができます。\n\\(dp_{i+1,j} = dp_{i,j} + dp_{i,j-1} \\times (A に含まれる i の個数)\\)\nまた、求めたい答えは\n\\(dp_{\\max(A),3}\\)\nです。よって DP を計算することでこの問題を解くことができます。計算量は\n\\(\\mathrm{O}(N + \\max(A))\\)\nです。\nPython による実装例は次の通りです。簡単のため DP は 1 次元テーブルを使い回す方法で実装しています。",
+      "codes": [
+        "N = int(input())\nfreq = [0] * (2 * 10**5 + 10)\nfor a in map(int, input().split()):\n  freq[a] += 1\ndp = [1, 0, 0, 0, 0]\nfor f in freq:\n  nx = [0] * 5\n  for i in range(4):\n    nx[i + 1] += dp[i] * f\n    nx[i] += dp[i]\n  dp = nx\nprint(dp[3])"
+      ],
+      "text_sha256": "22cf12ed188cd8e7246826d1800e4dd2067955044d62cacc949a11eed3452922",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc252/abc252_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

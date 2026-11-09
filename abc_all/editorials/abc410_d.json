@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc410_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc410/editorial/13208",
+      "text": "この問題は俗に頂点倍化と呼ばれるテクニックを用いて解くことができます。\n与えられたグラフを\n\\(G\\)\nとし、次のグラフ\n\\(G'\\)\nを考えます。\n\\(G'\\)\nは\n\\((1,0),(1,1),\\dots,(1,1023), (2,0),(2,1),\\ldots,(N,1023)\\)\nを頂点とする\n\\(1024N\\)\n頂点のグラフ\n\\(G\\)\nにおいて頂点\n\\(x\\)\nから頂点\n\\(y\\)\nへの重み\n\\(w\\)\nの有向辺があるときかつそのときに限り、\n\\(G'\\)\nにおいて頂点\n\\((x,s)\\)\nから頂点\n\\((y,s\\ \\mathrm{XOR}\\ w)\\)\nへの有向辺がある。\n\\(G'\\)\nにおいて頂点\n\\((1,0)\\)\nから始めて頂点\n\\((x,s)\\)\nに到達できることは、\n\\(G\\)\nにおいて頂点\n\\(1\\)\nから頂点\n\\(x\\)\nへの重み\n\\(s\\)\nの walk があることと同値です。\nよってグラフ\n\\(G'\\)\nにおいて頂点\n\\((1,0)\\)\nから各頂点\n\\((N,0),(N,1),\\ldots,(N,1023)\\)\nへ到達可能であるかどうかを判定すればよく、グラフ\n\\(G'\\)\nは\n\\(1024N\\)\n頂点\n\\(1024M\\)\n辺であることから、実際にグラフを構築してBFSやDFSなどを行うことで\n\\(O((N+M)\\max W_i)\\)\n時間でこの問題が解けます。",
+      "codes": [],
+      "text_sha256": "42ef10606cb9b9bd9cb6788ca4993a420506a8cb966f72d2fb4ab41483b36bd8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc410/abc410_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

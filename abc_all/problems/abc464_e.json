@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc464_e",
+  "title": "Fill-Rect Query",
+  "contests": [
+    {
+      "contest_id": "abc464",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1075,
+  "raw_difficulty": 1075,
+  "contest_id": "abc464",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc464/tasks/abc464_e",
+  "statement": "配点 : 450 点 問題文 H \\times W のグリッドがあります。はじめ、すべてのマスに A が書かれています。上から i 行目、左から j 列目のマスを (i,j) で表します。 これから Q 回の操作を順に行います。 i 回目の操作では、左上のマスを (1,1) 、 右下のマスを (R_i,C_i) とする長方形に含まれるすべてのマスを、英大文字 X_i で上書きします。 すべての操作を行った後のグリッドを出力してください。 制約 1 \\le H, W H \\times W \\le 10^6 1 \\le Q \\le 2 \\times 10^5 1 \\le R_i \\le H 1 \\le C_i \\le W X_i は英大文字 入力される数値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 H W Q R_1 C_1 X_1 R_2 C_2 X_2 \\vdots R_Q C_Q X_Q 出力 H 行出力せよ。 i 行目には長さ W の文字列であって、 j 文字目が操作後のグリッドにおいて (i, j) に書かれている英大文字であるものを出力せよ。 入力例 1 2 3 3\r\n2 2 B\r\n1 3 C\r\n2 1 D 出力例 1 DCC\r\nDBA 図のように操作が進みます。 入力例 2 1 7 7\r\n1 7 E\r\n1 6 C\r\n1 5 N\r\n1 4 A\r\n1 3 V\r\n1 2 D\r\n1 1 A 出力例 2 ADVANCE 入力例 3 10 10 15\r\n8 9 B\r\n6 7 C\r\n5 8 D\r\n10 6 E\r\n8 5 F\r\n3 10 G\r\n7 3 H\r\n4 6 I\r\n3 1 J\r\n10 2 K\r\n3 6 L\r\n3 3 M\r\n2 5 N\r\n9 1 O\r\n1 4 P 出力例 3 PPPPNLGGGG\r\nONNNNLGGGG\r\nOMMLLLGGGG\r\nOKIIIIDDBA\r\nOKHFFEDDBA\r\nOKHFFECBBA\r\nOKHFFEBBBA\r\nOKFFFEBBBA\r\nOKEEEEAAAA\r\nKKEEEEAAAA",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 H \\times W のグリッドがあります。はじめ、すべてのマスに A が書かれています。上から i 行目、左から j 列目のマスを (i,j) で表します。 これから Q 回の操作を順に行います。 i 回目の操作では、左上のマスを (1,1) 、 右下のマスを (R_i,C_i) とする長方形に含まれるすべてのマスを、英大文字 X_i で上書きします。 すべての操作を行った後のグリッドを出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\le H, W H \\times W \\le 10^6 1 \\le Q \\le 2 \\times 10^5 1 \\le R_i \\le H 1 \\le C_i \\le W X_i は英大文字 入力される数値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 H W Q R_1 C_1 X_1 R_2 C_2 X_2 \\vdots R_Q C_Q X_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 H 行出力せよ。 i 行目には長さ W の文字列であって、 j 文字目が操作後のグリッドにおいて (i, j) に書かれている英大文字であるものを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2 3 3\r\n2 2 B\r\n1 3 C\r\n2 1 D"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 DCC\r\nDBA 図のように操作が進みます。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 1 7 7\r\n1 7 E\r\n1 6 C\r\n1 5 N\r\n1 4 A\r\n1 3 V\r\n1 2 D\r\n1 1 A"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 ADVANCE"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10 10 15\r\n8 9 B\r\n6 7 C\r\n5 8 D\r\n10 6 E\r\n8 5 F\r\n3 10 G\r\n7 3 H\r\n4 6 I\r\n3 1 J\r\n10 2 K\r\n3 6 L\r\n3 3 M\r\n2 5 N\r\n9 1 O\r\n1 4 P"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 PPPPNLGGGG\r\nONNNNLGGGG\r\nOMMLLLGGGG\r\nOKIIIIDDBA\r\nOKHFFEDDBA\r\nOKHFFECBBA\r\nOKHFFEBBBA\r\nOKFFFEBBBA\r\nOKEEEEAAAA\r\nKKEEEEAAAA"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc464/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:50.780766+00:00",
+  "statement_sha256": "ca27d99924fa77306b975b62e96c464c8bd179b552377110b0b1bfa9e25251ff",
+  "editorials": []
+}

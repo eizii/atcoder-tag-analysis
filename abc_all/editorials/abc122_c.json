@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc122_c",
+  "editorials": [
+    {
+      "text": "C: GeT AC\n文字列S の長さN と問いの数Q さえ小さければ、この問題は前問と同等の「書かれた通りに実装する」\n問題になります。しかし、実際にはN もQ も最大で10 万と大きく、「書かれた通り」の実装を行うと最大\nで延べ100 億文字を走査することになります。これは、C++ のような高速な言語でも2 秒で処理できる量\nではありません。処理を高速化する何らかの工夫が必要です。\n範囲内の部分文字列AC を数えよと問われていますが、その代わりに「右隣がC であるようなA」を数えた\n方が単純です。文字列中のこのようなA をa に置き換えると、問i は「li 文字目からri −1 文字目までのa\nを数えよ」となります(右端が1 左に動いたことに注意してください。ri 文字目がa であってもその右隣の\nC が範囲からはみ出てしまうためです)。\nここで、ti =「S の1 文字目からi 文字目までに出現するa の数」として数列t = {t0, t1, . . . , tN} を考え\nると、問i の答えはtri−1 −tli−1 として求められます。この数列t を問いの処理を始める前に構築しておい\nて使い回せば、入力サイズの線形時間ですべての問いを処理できます。\n1 N, Q = map(int, input().split())\n2 S = input()\n3 t = [0] * (N + 1)\n4 for i in range(N):\n5\nt[i + 1] = t[i] + (1 if S[i : i + 2] == 'AC' else 0)\n6 for i in range(Q):\n7\nl, r = map(int, input().split())\n8\nprint(t[r-1] - t[l-1])\n",
+      "text_sha256": "ef23a894422397612faae9960bdfcadc4241606ac2d806fd193f16f6ad47dafe",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc122/abc122_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

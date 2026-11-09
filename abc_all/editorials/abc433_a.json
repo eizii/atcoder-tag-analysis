@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc433_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc433/editorial/14595",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n今から\n\\(k\\)\n年後\n\\((k \\geq 0)\\)\nに高橋君の年齢が青木君の年齢のちょうど\n\\(Z\\)\n倍になるとして式を立ててみると、次のようになります。\n\\[X+k=Z(Y+k)\\]\nこの式を式変形して\n\\(k\\)\nについて解くと、以下のようになります。\n\\[X+k=YZ+Zk\\]\n\\[(Z-1)k=X-YZ\\]\n\\[k=\\displaystyle\\frac{X-YZ}{Z-1}\\]\n\\(k\\)\nは非負整数という制約があるので、この問題の答えが\nYes\nとなることは\n\\(X-YZ\\)\nが\n\\(Z-1\\)\nで割り切れる\n\\(X-YZ \\geq 0\\)\nが成り立つ\nの\n\\(2\\)\nつが両方成り立つことと同値です。\nこの\n\\(2\\)\nつの条件の判定は if 文を用いることで実装することができます。\n以上を適切に実装することでこの問題に正答することができます。\n実装例(Python3)",
+      "codes": [
+        "x, y, z = map(int, input().split())\nif (x - y * z) % (z - 1) == 0 and x - y * z >= 0:\n  print(\"Yes\")\nelse:\n  print(\"No\")"
+      ],
+      "text_sha256": "cdd89272ce1b6d3d9a74551352856a0e7fe78b81a68a3f07864d214fa5d8fb20",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc433/abc433_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc433/editorial/14657",
+      "text": "公式解説のように、現在から\n\\(k\\)\n年後\n\\((k \\ge 0)\\)\nに高橋君の年齢が青木君の年齢のちょうど\n\\(Z\\)\n倍となるための条件は、\n\\[X+k = Z(Y+k)\\]\nとなります。\n\\(k\\)\nが大きすぎると高橋君の年齢と青木君の年齢の比が近くなることに注目します。たとえば、現在高橋君が\n\\(25\\)\n歳、青木君が\n\\(5\\)\n歳であるとき、現在では高橋君の年齢は青木君の年齢の\n\\(5\\)\n倍になっています。しかし、今から\n\\(995\\)\n年後には、高橋君が\n\\(1020\\)\n歳、青木君が\n\\(1000\\)\n歳となり、高橋君の年齢は青木君の年齢の\n\\(1.02\\)\n倍にしかなりません。\nどのくらい\n\\(k\\)\nを大きくすれば高橋君の年齢は青木君の年齢の\n\\(2\\)\n倍未満になるのでしょうか？\n\\((X+k)/(Y+k) < 2\\)\nを解くと\n\\(k > X-2Y \\ge X\\)\nとなります。よって、\n\\(k \\ge X + 1\\)\nであれば二人の年齢の比の値は\n\\(2\\)\n未満になります。したがって、\n\\(k\\)\nとして考慮すべき値は\n\\(k = 0,1,2,\\cdots, X\\)\nのみとなります。\n制約が\n\\(1 \\le X, Y \\le 100\\)\nと小さいので、\n\\(k=0,1,2,\\cdots, X\\)\nについて\n\\(X+k = Z(Y+k)\\)\nか否かをすべて試しても実行時間に間に合い、正解することができます。\nなお、厳密に\n\\(k \\le X\\)\nなどと評価できなくても、直感的に\n\\(k\\)\nが抑えられることを感じ取れば、\n\\(k \\le 10^6\\)\nなどで全探索を行うことで正解することも可能です。（いわゆる未証明AC）",
+      "codes": [
+        "x, y, z = map(int,input().split())\nfor i in range(x + 1):\n\tif x + i == (y + i) * z:\n\t\tprint(\"Yes\")\n\t\texit()\nprint(\"No\")",
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint x, y, z;\n\tcin >> x >> y >> z;\n\tfor (int i=0; i<=x; i++) {\n\t\tif (x + i == (y + i) * z) {\n\t\t\tcout << \"Yes\\n\";\n\t\t\treturn 0;\n\t\t}\n\t}\n\tcout << \"No\\n\";\n}"
+      ],
+      "text_sha256": "f4891bdfb9008e3f714b70bb6336642c5db162684ab5a0f05fe0e0b7b4c3cbb3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc433/abc433_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

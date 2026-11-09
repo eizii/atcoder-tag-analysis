@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc465_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc465/editorial/22564",
+      "text": "\\(h\\)\n時台 (\n\\(h\\)\n時ちょうどから\n\\(h+1\\)\n時ちょうどまで) の料金は以下で求まります．\n\\(L \\leq h \\leq R-1\\)\nであれば\n\\(X\\)\nそうでなければ\n\\(Y\\)\n整数\n\\(h\\)\nについて，\n\\(A \\leq h \\leq B-1\\)\nの範囲でループを回し，上で求まる\n\\(h\\)\n時台の料金を足していけば答えになります．\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\n\nint main (void) {\n\tint x, y, l, r, a, b;\n\tcin >> x >> y >> l >> r >> a >> b;\n\n\tint sum = 0;\n\tfor (int i = a; i <= b-1; i++) {\n\t\t// cost of i-th hour\n\t\tif (l <= i && i <= r-1) {\n\t\t\tsum += x;\n\t\t} else {\n\t\t\tsum += y;\n\t\t}\n\t}\n\n\tcout << sum << \"\\n\";\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "e2ce3addaad1008f9508669e8face9bcddfcf5afb42e8913b107be20ee34530a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc465/abc465_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

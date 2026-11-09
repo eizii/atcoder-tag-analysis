@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc400_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc400/editorial/12622",
+      "text": "\\(AB = 400\\)\nなる正整数\n\\(B\\)\nが存在するか判定し、存在する場合はそのような\n\\(B\\)\nを求めればよいです。\n\\(A\\)\nが\n\\(400\\)\nの約数のときは\n\\(B = \\frac{400}{A}\\)\nが条件を満たし、そうでないときは条件を満たす\n\\(B\\)\nは存在しません。\n\\(A\\)\nが\n\\(400\\)\nの約数であるかは剰余演算などを用いることにより判定できます。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint a;\n\tcin >> a;\n\tif (400 % a == 0) cout << 400 / a << '\\n';\n\telse cout << -1 << '\\n';\n}"
+      ],
+      "text_sha256": "0849e914d0d877725bfba8220b0ec0acb8e0e5c8b7d0042ea6bb036e141f1f6f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc400/abc400_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

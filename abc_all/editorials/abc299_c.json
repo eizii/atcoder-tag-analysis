@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc299_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc299/editorial/6214",
+      "text": "以下では、便宜上\n-\nもレベル \\(0\\) のダンゴ文字列とします。\n文字列中にレベルが \\(0\\) より大きいダンゴ文字列が存在しない場合、元の問題の答えは \\(-1\\) です。\n右端に\n-\nがあるダンゴ文字列（右ダンゴ文字列）と左端に\n-\nがあるダンゴ文字列（左ダンゴ文字列）をそれぞれ分けて考え、それらのうち一番レベルが大きいもの（\\({}=\\) もっとも長いもの）のレベルを求めることとします。\nしばらく、右ダンゴ文字列についてのみ考えます。\n右ダンゴ文字列のうち最も長いものである可能性があるのは、ある\n-\nとその直前の\no\nの \\(0\\) 個以上の連なりすべてのみを含む部分文字列です。\nこれらを極大な右ダンゴ文字列と呼ぶことにします。\n例 :\noo--o-oooo-o\nの極大な右ダンゴ文字列は\noo-\n-\no-\noooo-\nの \\(4\\) つです。一般に、極大な右ダンゴ文字列の個数はその文字列に含まれる\n-\nの個数と等しいです。\nすべての極大な右ダンゴ文字列のレベルを求めるのは、文字列を先頭から \\(1\\) 度走査すればよいので、\\(O(N)\\) 時間で可能です。\n極大な右ダンゴ文字列についての処理が書けたら、文字列を反転したものについて同じ処理を行うことで極大な左ダンゴ文字列に対する処理を済ませることができます。\nよって、\\(O(N)\\) 時間ですべての極大なダンゴ文字列のレベルが得られるので、これらの最大値を答えればよいです。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    cin >> N;\n    string S;\n    cin >> S;\n\n    unsigned ans{};\n\n    for (unsigned flip{}; flip < 2; ++flip) {\n        // 極大な右ダンゴ文字列のレベルを列挙する\n        unsigned level{};\n        for (unsigned i{}; i < N; ++i)\n            if (S[i] == '-') {\n                // '-' に対応する極大な右ダンゴ列のレベルは、直前までの 'o' の個数\n                ans = max(ans, level);\n                level = 0;\n            } else\n                ++level;\n        // 文字列を反転\n        reverse(begin(S), end(S));\n    }\n\n    if (ans)\n        cout << ans << endl;\n    else\n        cout << \"-1\" << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "7f87fd13e5a81589bd054ac43d40a2ce0487a956443d4de61c2a2cb4208af0b8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc299/abc299_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc299/editorial/6238",
+      "text": "o\nと\n-\nのうち一方が\n\\(S\\)\nに存在しないなら、答えは\n\\(-1\\)\nです。そうでないなら、\n\\(S\\)\nに\no\nが連続で出現する最大回数が答えとなります。なぜなら、\no\nと\n-\nがともに存在するなら、\no\nの「かたまり」は必ず\n-\nと隣接するからです。\n実装例（Python）",
+      "codes": [
+        "N, S = input(), input()\nprint(max(map(len, S.split('-'))) if 'o' in S and '-' in S else -1)"
+      ],
+      "text_sha256": "549d8e63ea957ca7002a08aa89ba56ce53dc473dee14738519aed4aafaac2266",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc299/abc299_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc187_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc187/editorial/487",
+      "text": "各クエリは、「辺\n\\(e\\)\nで木を切断した時の連結成分のどちらかに\n\\(x\\)\nを足す」という形になっています。\n適当に根を取り、根付き木として考えます。\nすると、クエリの内容は、「ある頂点の子孫に\n\\(x\\)\nを足す」または「ある頂点の子孫でない頂点に\n\\(x\\)\nを足す」に言い換えることができます。\n「ある頂点の子孫でない頂点に\n\\(x\\)\nを足す」は、「根の子孫に\n\\(x\\)\nを足す」と「ある頂点の子孫に\n\\(-x\\)\nを足す」に分けることができるので、全てのクエリを「ある頂点の子孫に\n\\(x\\)\nを足す」の形に帰着することができます。\nこれは、\nいもす法\nのように最後に子孫に向かって累積和をとることで、\n\\(O(N+Q)\\)\nで処理することができます。\nまた、各クエリで辺\n\\(e\\)\n以外では\n\\(c_{a_i}-c_{b_i}\\)\nの値が変わらないことに注目し、\n\\(c_1\\)\nと\n\\(c_{a_i}-c_{b_i}\\)\nの値を管理しても同様に解くことができます。\n回答例 (C++) :\nhttps://atcoder.jp/contests/abc187/submissions/19103187\n回答例 (Python) :\nhttps://atcoder.jp/contests/abc187/submissions/19103203",
+      "codes": [],
+      "text_sha256": "d0cd15aceb34c89f4cb66925dd25bc289362c296b173f1827ead3d00a3a46646",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc187/abc187_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

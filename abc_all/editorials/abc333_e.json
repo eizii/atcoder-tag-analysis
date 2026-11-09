@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc333_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc333/editorial/7939",
+      "text": "どのモンスターに対しても、そのモンスターを倒すのに使えるポーションのうち最も遅く発見するポーションを使うことにしてもよさそうです。\nこのことから、次の貪欲法を考えることができます。\nポーションはすべて\n一旦\n拾う。\nモンスターと遭遇したとき、\nそのモンスターを倒すことができるポーションを持っていなければ、敗北する。\nそのモンスターを倒すことができるポーションを持っていれば、そのうち最後に拾ったものを使う。\n冒険が終了したあとに持っているポーションは拾わなかったことにする。\nこの貪欲法は正しい敗北判定と、敗北しない場合最小の \\(K\\) を与えます。\n敗北判定が正しいこと\nすべてのポーションを一旦拾うので、敗北と判定された場合、あるタイプのモンスターを \\(K\\) 体倒すためのポーションをそれらのモンスターとの遭遇までに \\(K\\) 個以上発見できません。よって、どのような戦略でも敗北します。逆に、敗北と判定されなかった場合は敗北しない戦略を具体的に与えています。\n\\(K\\) が最小であること\n戦略は「各モンスターに対して何番目のポーションを用いるか」で表現できるので、戦略 \\(t\\) でモンスター \\(m\\) に対して用いるポーションを \\(f(t,m)\\) とします。\n\\(K\\) を最小にする戦略 \\(T\\) を一つ取ります。貪欲法の結果 \\(T ^ \\prime\\) と一致しないモンスターが存在すると仮定し、そのうち最も早く遭遇するモンスターを取り \\(M _ {\\operatorname{first}}\\) とします。\n貪欲法の仮定より、\\(f(T,M _ {\\operatorname{first}})\\) を発見するより後に \\(f(T ^ \\prime,M _ {\\operatorname{first}})\\) を発見します。\n\\(f(T,\\hat{M})=f(T ^ \\prime,M _ {\\operatorname{first}})\\) となるようなモンスター \\(\\hat M\\) が存在しないとき、単に \\(f(T,M _ {\\operatorname{first}})\\) を \\(f(T ^ \\prime,M _ {\\operatorname{first}})\\) で置き換えても \\(K\\) は増加しません（\\(f(T,M _ {\\operatorname{first}})\\) を発見してから \\(f(T ^ \\prime,M _ {\\operatorname{first}})\\) を発見するまでポーションを \\(1\\) 本少なく持つため）。\n\\(\\hat M\\) が存在するとき、\\(f(T,\\hat M)\\) と \\(f(T,M _ {\\operatorname{first}})\\) を交換しても \\(K\\) は増加しません（\\(M _ {\\operatorname{first}}\\) の取り方から、\\(\\hat M\\) は \\(M _ {\\operatorname{first}}\\) より後に出現します。よって、発見・遭遇するタイミングは \\(f(T,M _ {\\operatorname{first}})\\rightarrow f(T,\\hat M)\\rightarrow M _ {\\operatorname{first}}\\rightarrow\\hat M\\) の順になり、\\(2\\) つのポーションを使う順番を変えてもそれぞれの時点で持っているポーションの本数は変化しません）。\nよって、\\(K\\) を増加させないまま \\(M _ {\\operatorname{first}}\\) （およびそれ以前に遭遇するモンスター）に使うポーションを \\(T ^ \\prime\\) と一致させることができます。\nモンスターは有限なので、これを有限回行うことで戦略が \\(T ^ \\prime\\) と一致します。\n\\(T\\) の取り方から、\\(T ^ \\prime\\) の \\(K\\) が最小であることが示されました。\n「遭遇したモンスターに使えるポーションのうち最後に拾ったもの」を高速に求める必要があります。\nこれは、スタックの配列を使って一旦拾っておいたポーションを管理することなどで十分高速に求められます。\nそれぞれのモンスターに対して使うポーションがわかれば、imos 法などを用いることで \\(K\\) の値を求めることができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <utility>\n#include <stack>\n#include <vector>\n#include <string>\n#include <numeric>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n\n    unsigned N;\n    cin >> N;\n\n    // ポーションのタイプ -> {いつ拾ったか, 何本目のポーションか}\n    vector<stack<pair<unsigned, unsigned>>> potion_holder(N);\n\n    // potion_result[i] := i 番目のポーションを拾う ⇔ true\n    basic_string<bool> potion_result;\n    // ∑_{j≤i}occupied_imos[j] := i 番目の出来事の時点で持っているポーションの本数\n    vector<unsigned> occupied_imos(N);\n\n    for (unsigned turn = 0; turn < N; ++turn) {\n        unsigned event_type;\n        cin >> event_type;\n        if (event_type == 1) { // ポーションを発見したら\n            unsigned potion_type;\n            cin >> potion_type;\n            --potion_type;\n            potion_holder[potion_type].emplace(turn, size(potion_result)); // とりあえず拾い\n            potion_result += false; // 一旦使わないと思っておく\n        } else { // モンスターと遭遇したら\n            unsigned monster_type;\n            cin >> monster_type;\n            --monster_type;\n            if (empty(potion_holder[monster_type])) { // 使えるポーションがなければ\n                cout << \"-1\" << endl; // 敗北\n                return 0;\n            }\n            // 使えるポーションがあれば\n            const auto&[t, i]{potion_holder[monster_type].top()}; // 最後に拾ったものを使う\n            ++occupied_imos[t];\n            --occupied_imos[turn];\n            potion_result[i] = true;\n            potion_holder[monster_type].pop();\n        }\n    }\n\n    // imos 法をする\n    inclusive_scan(begin(occupied_imos), end(occupied_imos), begin(occupied_imos));\n\n    // 必要な最大本数\n    cout << ranges::max(occupied_imos) << endl;\n\n    // それぞれのポーションを拾うか出力する\n    for (const auto result : potion_result)\n        cout << result << \" \";\n    cout << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "35131a15042fb2fcf68d3807a546a44c070a51bfeefb6a6a28af49b1849736e8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc333/abc333_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc333/editorial/7981",
+      "text": "後ろから考え、「最後まで敗北しないためにこの時点で持っている必要のあるポーションの種類と個数」を管理します。\n「必要なポーションは可能な限り後で（＝後ろから見て最初に）拾うのが最適である」ということから、ポーションを見つけたときは必要なポーションであれば必ず拾うとしてよいです。\n実装例(Python)",
+      "codes": [
+        "from collections import defaultdict\nN=int(input())\nQ=[tuple(map(int,input().split())) for _ in range(N)]\n\nreq=defaultdict(int)\ncrr=0\nans=0\nchoice=[]\nfor t,x in Q[::-1]:\n  if t==1:\n    if req[x]:\n      req[x]-=1\n      crr-=1\n      choice.append(1)\n    else:\n      choice.append(0)\n  elif t==2:\n    req[x]+=1\n    crr+=1\n    ans=max(ans,crr)\n\nif sum(req.values())==0:\n  print(ans)\n  print(*choice[::-1])\nelse:\n  print(-1)"
+      ],
+      "text_sha256": "0dc8c5f133df2c2ce4f7def60c83974ccb6ab11128841253458042b8f6e2935e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc333/abc333_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

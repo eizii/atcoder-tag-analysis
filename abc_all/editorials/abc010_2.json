@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc010_2",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc010/editorial.pdf",
+      "text": "B問題 花占い\n\n  問題概要 1.\n  アルゴリズム 2.\n\n\n\n\n\n2014/6/7                              ©AtCoder Inc. All rights reserved.                                      99\n\f\nB問題 問題概要\n\n• N個の整数の配列aが与えられる\n   – これが、庭に存在する花の花びらを行う\n• 2パターンの花占いを行う可能性がある\n   – 「好き」「嫌い」のループ\n   – 「好き」「嫌い」「大好き」のループ\n• 「嫌い」にならないように、予め花びらを毟る\n• 毟る必要のある花びらの枚数を出力しなさい。\n\n\n\n\n\n2014/6/7                                                                                              10\n\f\nB問題 アルゴリズム\n\n• 入力\n   – 整数nを受け取る\n   – 数列aの数字をn個受け取る\n          • 受け取り方は複数いくつかある\n           – 1行纏めて受け取って、スペースでsplitする\n           – 1つずつ受け取る\n          • 言語によって受け取りやすい書き方が違う！\n          • 詳しくはpracticeで確認しよう！\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2014/6/7                                                                                              11\n\f\nB問題 アルゴリズム\n\n• 処理\n   – 各花びらについて、何枚花びらを毟る必要があるかを求\n   める。\n   – やり方は複数存在する。\n\n\n\n\n\n2014/6/7                                                                                              12\n\f\nB問題 アルゴリズム\n\n• 解法1\n   – 実際に試してみる\n   – “suki”, “kirai”でループを回して、kiraiになったら失敗 など\n   – もうちょっと簡単に、bool型の配列などに直す なども。\n          • 「好き」「嫌い」 →  true, false\n          • 「好き」「嫌い」「大好き」 →  true, false, true\n\n• 解法2\n   – あまりを利用する\n          • 「好き」「嫌い」 → 2で割った時割り切れるとダメ\n          • 「好き」「嫌い」「好き」 → 3で割った時、2余るとダメ\n\n\n\n\n\n2014/6/7                                                                                              13\n\f\nB問題 アルゴリズム\n\n• 解法3\n   – それぞれの枚数について、大丈夫かどうか予め書いてお\n    く\n          • 1, 3, 7, 9の時大丈夫\n          •  {false, true, false, true, false, false, false, true, false, true}みたいな\n     配列を予め作ってしまえば、判定の必要がない\n\n• 解法4\n   – それぞれの枚数について、毟る枚数を予め書いておく\n          •  {0, 0, 1, 0, 1, 2, 3, 0, 1, 0}\n          • これなら足し算するだけ\n• どちらも入力ミスに注意！\n\n\n\n2014/6/7                                                                                              14\n\f\nB問題 アルゴリズム\n\n• 出力\n   – A問題と同じく、答えを出力するだけ\n   – Print(ret)みたいな感じ\n\n\n\n\n\n2014/6/7                                                                                              15",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "6b3f010f63eab2451ff048892c24e70f8afac192f5d5227c28fa66072ab00554"
+    }
+  ],
+  "status": "available"
+}

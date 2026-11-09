@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc318_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc318/editorial/7068",
+      "text": "条件を満たす\n\\(3\\)\nつ組を考えるときは、真ん中に着目することが効果的です。今回の問題でも、真ん中の\n\\(j\\)\nを固定したときの答えを考えてみましょう。\n\\(i<j\\)\nかつ\n\\(A_i=x\\)\nを満たす\n\\(i\\)\nの個数を\n\\(\\mathrm{lef}[x]\\)\n、\n\\(i>j\\)\nかつ\n\\(A_i=x\\)\nを満たす\n\\(i\\)\nの個数を\n\\(\\mathrm{rig}[x]\\)\nと置きます。\nこのとき、\n\\(j\\)\nを固定したときの答えは以下で表されます。\n\\(\\displaystyle (\\sum_{x=1}^N \\mathrm{lef}[x] \\mathrm{rig}[x]) - \\mathrm{lef}[A_j] \\mathrm{rig}[A_j]\\)\n\\(j\\)\nを\n\\(2\\)\nから\n\\(N-1\\)\nまで動かしたときの、上式の和が答えとなります。\n上式は愚直に毎回計算すると、各回の計算に\n\\(\\mathrm{O}(N)\\)\nかかってしまいます。ここで、\n\\( \\sum_{x=1}^N \\mathrm{lef}[x] \\mathrm{rig}[x]\\)\nは\n\\(j\\)\nを\n\\(1\\)\nずらしてもあまり変化しないことに着目します。\n\\(j\\)\nを\n\\(1\\)\nずらしたことによって、\n\\(\\mathrm{lef},\\mathrm{rig}\\)\nが変化した部分のみ再計算を行うことで、\n\\( \\sum_{x=1}^N \\mathrm{lef}[x] \\mathrm{rig}[x]\\)\nを各\n\\(j\\)\nについて求めることが\n\\(\\mathrm{O}(N)\\)\nで出来るようになります。\n以上より、全体で\n\\(\\mathrm{O}(N)\\)\nでこの問題を解くことができました。",
+      "codes": [],
+      "text_sha256": "cb7e97f5d305467959aec4fb100e3d4b56c6017cf3a34c72f850bf16b982be60",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc318/abc318_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc318/editorial/7094",
+      "text": "公式解説とは異なり、どちらかというと両端の要素に着目する解法です。\n右端の位置\n\\(k\\)\nを固定したときに、条件を満たす三つ組\n\\((i, j, k)\\)\nがいくつあるかを考えます。ここで、\n\\(P_k = \\{i < k \\mid A_i = A_k\\}\\)\n(つまり、\n\\(k\\)\nより左にあって値が\n\\(A_k\\)\nに等しい位置の集合) とします。\nいま、\n\\(A_i \\ne A_j\\)\nという条件を一旦無視してみます。すると、\n\\(i \\in P_k\\)\nを一つ取ったとき、\n\\(j\\)\nは\n\\(\\{i+1, ..., k-1\\}\\)\nの\n\\(k-1-i\\)\n通りから自由に選ぶことができます。つまりこのような条件を満たす三つ組\n\\((i, j, k)\\)\nの個数は、\n\\(\\sum_{i \\in P_k} (k-1-i) = \\sum_{i \\in P_k} (k-1) - \\sum_{i \\in P_k} i = (k-1)|P_k| - \\mathrm{sum}(P_k)\\)\n個となります。\nこのままだと無視した条件 (\n\\(A_i \\ne A_j\\)\n) の分を足しすぎてしまいますが、これは\n\\(A_i = A_j = A_k\\)\nとなる三つ組の個数を考えればよく、簡単な計算で\n\\(|P_k|(|P_k| - 1) / 2\\)\n個であることがわかります。\nつまり、\n\\(k\\)\nを固定したとき、条件を満たす三つ組\n\\((i, j, k)\\)\nの個数は、\n\\((k-1)|P_k| - \\mathrm{sum}(P_k) - |P_k|(|P_k| - 1)/2\\)\n個であることがわかります。この式をよく見ると、集合\n\\(P_k\\)\nを愚直に持つ必要はなく、要素数\n\\(|P_k|\\)\nと総和\n\\(\\mathrm{sum}(P_k)\\)\nだけわかれば十分です。\nというわけで、\n\\(k\\)\nを左から順に見ていき、各値\n\\(x\\)\nごとに出現済みの位置の個数と総和を二つの配列で管理しておけばよいです。計算量は全体で\n\\(O(N)\\)\n時間となります。\n実装例:\nhttps://atcoder.jp/contests/abc318/submissions/45200725",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  vector<long long> sum(n + 1), size(n + 1);\n  long long ans = 0;\n  for (int k = 1; k <= n; ++k) {\n    int x;\n    cin >> x;\n    ans += (k - 1) * size[x] - sum[x] - (size[x] * (size[x] - 1) / 2);\n    size[x] += 1;\n    sum[x] += k;\n  }\n  cout << ans << \"\\n\";\n}"
+      ],
+      "text_sha256": "003405ad91bbe192acafd3bd873dc390805da5afda104a188ab2c399d51ccb7f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc318/abc318_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc318/editorial/7093",
+      "text": "\\(x\\)\nを固定し、\n\\(A_i = A_k = x\\)\nかつ\n\\(A_j \\neq x\\)\nとなる\n\\((i, j, k)\\)\nの個数を数えます。値が\n\\(x\\)\nである要素の個数を\n\\(n_x\\)\nとし、それらの要素の添字を順に\n\\(p_1, \\dots, p_{n_x}\\)\nとします。ここで、\n\\(p_m < j < p_{m + 1}\\)\nを満たすような\n\\(j\\)\nについて考えると、\n\\(i\\)\nは\n\\(p_1, \\dots, p_m\\)\nの\n\\(m\\)\n通り、\n\\(k\\)\nは\n\\(p_{m + 1}, \\dots, p_{n_x}\\)\nの\n\\(n_x - m\\)\n通りの選び方があります。よって、このような\n\\(j\\)\nを固定した時の\n\\((i, j, k)\\)\nの選び方は\n\\(m(n_x - m)\\)\n通りです。\nゆえに、\n\\(A_i = A_k = x\\)\nかつ\n\\(A_j \\neq x\\)\nとなる\n\\((i, j, k)\\)\nの個数は\n\\(\\sum_{m = 1}^{n_x - 1} (p_{m + 1} - p_m - 1) m(n_x - m)\\)\nにより計算出来ます。この式を基に各\n\\(x\\)\nに対して愚直に計算しても、合計の計算量は\n\\(O(\\sum_{x = 1}^N n_x) = O(N)\\)\nとなり、十分高速に解くことが出来ます。\n実装例 :\nhttps://atcoder.jp/contests/abc318/submissions/45200908",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n    int N;\n    cin>>N;\n    vector<int> a(N);\n    vector<vector<ll>> pos(N);\n    for(int i = 0; i < N; ++i){\n        cin>>a[i];\n        --a[i];\n        pos[a[i]].push_back(i);\n    }\n    ll res = 0;\n    for(auto p : pos){\n        ll n = size(p);\n        for(int m = 0; m < n - 1; ++m){\n            res += (p[m + 1] - p[m] - 1) * (m + 1) * (n - (m + 1));\n        }\n    }\n    cout<<res<<endl;\n}"
+      ],
+      "text_sha256": "7e4dded4c79af458b18f8ca5927bbcaaecae2b90075563817cdf993fc1596c0d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc318/abc318_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

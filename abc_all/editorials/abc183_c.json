@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc183_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc183/editorial/286",
+      "text": "都市\n\\(2\\)\n～都市\n\\(N\\)\nを訪問する順序を全探索します。そのような場合の数は\n\\((N-1)!\\)\n通りであり、各場合について、移動時間の合計の計算に\n\\(O(N)\\)\nかかるので、全体で\n\\(O(N!)\\)\n時間で問題を解くことができます。都市\n\\(1\\)\nからスタートし、都市\n\\(1\\)\nに戻ってくるという条件に注意してください。\n都市\n\\(2\\)\n～ 都市\n\\(N\\)\nを訪問する順序の全探索は、C++ならnext_permutation、Python なら itertools.permutations などを用いて行うことができます。C や Java には順列の全列挙を行う標準関数はないため、自分で適切に実装する必要があります。\n回答例(C++)\n回答例(Python)\n回答例(C)",
+      "codes": [],
+      "text_sha256": "a4296e83f3270708dc1d27144b91ace41ccb87413e0504f25f30bfea519e7630",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc183/abc183_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

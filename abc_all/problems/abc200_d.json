@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc200_d",
+  "title": "Happy Birthday! 2",
+  "contests": [
+    {
+      "contest_id": "abc200",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 1217,
+  "raw_difficulty": 1217,
+  "contest_id": "abc200",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc200/tasks/abc200_d",
+  "statement": "配点 : 400 点 問題文 N 個の正整数からなる数列 A = (A_1, A_2, \\dots, A_N) が与えられます。\r\n以下の条件を全て満たす 2 つの数列 B = (B_1, B_2, \\dots, B_x),\\ C = (C_1, C_2, \\dots, C_y) が存在するか判定し、存在する場合はひとつ出力してください。 1 ≤ x, y ≤ N 1 \\le B_1 < B_2 < \\dots < B_{x} \\le N 1 \\le C_1 < C_2 < \\dots < C_{y} \\le N B と C は、異なる数列である。 x ≠ y のとき、または、ある整数 i\\ (1 ≤ i ≤ \\min(x, y)) が存在して B_i ≠ C_i であるとき、 B と C は異なるものとする。 A_{B_1} + A_{B_2} + \\dots + A_{B_x} を 200 で割った余りと A_{C_1} + A_{C_2} + \\dots + A_{C_y} を 200 で割った余りが等しい。 制約 入力はすべて整数 2 \\le N \\le 200 1 \\le A_i \\le 10^9 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N 出力 条件を満たす数列の組 B,C が存在しない場合、 1 行に No と出力せよ。\r\n存在する場合、以下の形式で B,C を出力せよ。 Yes x B_1 B_2 \\dots B_x y C_1 C_2 \\dots C_y なお、正誤判定器は英大文字と英小文字を区別せず、どちらも受理する。 入力例 1 5\r\n180 186 189 191 218 出力例 1 Yes\r\n1 1\r\n2 3 4 B=(1),C=(3,4) とすると、 A_1 = 180,\\ A_3 + A_4 = 380 となり、この 2 つを 200 で割った余りは等しくなります。 他にも、以下のような出力も正答として扱われます。 yEs\r\n4 2 3 4 5\r\n3 1 2 5 入力例 2 2\r\n123 523 出力例 2 Yes\r\n1 1\r\n1 2 入力例 3 6\r\n2013 1012 2765 2021 508 6971 出力例 3 No 条件を満たす数列の組が存在しない場合、 1 行に No と出力してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 個の正整数からなる数列 A = (A_1, A_2, \\dots, A_N) が与えられます。\r\n以下の条件を全て満たす 2 つの数列 B = (B_1, B_2, \\dots, B_x),\\ C = (C_1, C_2, \\dots, C_y) が存在するか判定し、存在する場合はひとつ出力してください。 1 ≤ x, y ≤ N 1 \\le B_1 < B_2 < \\dots < B_{x} \\le N 1 \\le C_1 < C_2 < \\dots < C_{y} \\le N B と C は、異なる数列である。 x ≠ y のとき、または、ある整数 i\\ (1 ≤ i ≤ \\min(x, y)) が存在して B_i ≠ C_i であるとき、 B と C は異なるものとする。 A_{B_1} + A_{B_2} + \\dots + A_{B_x} を 200 で割った余りと A_{C_1} + A_{C_2} + \\dots + A_{C_y} を 200 で割った余りが等しい。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 入力はすべて整数 2 \\le N \\le 200 1 \\le A_i \\le 10^9"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 条件を満たす数列の組 B,C が存在しない場合、 1 行に No と出力せよ。\r\n存在する場合、以下の形式で B,C を出力せよ。 Yes x B_1 B_2 \\dots B_x y C_1 C_2 \\dots C_y なお、正誤判定器は英大文字と英小文字を区別せず、どちらも受理する。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\n180 186 189 191 218"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\r\n1 1\r\n2 3 4 B=(1),C=(3,4) とすると、 A_1 = 180,\\ A_3 + A_4 = 380 となり、この 2 つを 200 で割った余りは等しくなります。 他にも、以下のような出力も正答として扱われます。 yEs\r\n4 2 3 4 5\r\n3 1 2 5"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2\r\n123 523"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 Yes\r\n1 1\r\n1 2"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 6\r\n2013 1012 2765 2021 508 6971"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 No 条件を満たす数列の組が存在しない場合、 1 行に No と出力してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc200/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:19.857523+00:00",
+  "statement_sha256": "995573b6574dee3806d959f21ca288370e6d3b5e6ff0a2c3204e4874a9d31178",
+  "editorials": []
+}

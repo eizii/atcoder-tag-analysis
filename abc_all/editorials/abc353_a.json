@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc353_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc353/editorial/9968",
+      "text": "for 文を用いて、\n\\(i=2,3,\\ldots,N\\)\nの順に\n\\(H_i > H_1\\)\nかを確認しましょう。\nそのような\n\\(i\\)\nが見つかれば、その時点でその\n\\(i\\)\nを出力してコードを終了すればよいです。見つからない場合は\n\\(-1\\)\nを出力します。\n多くのプログラミング言語では 0-indexed が用いられていることに注意してください。\n実装例 (C++):\n実装例(Python):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int n;\n  cin >> n;\n  vector<int> h(n);\n  for(int i = 0; i < n; i++) cin >> h[i];\n  for(int i = 1; i < n; i++) {\n    if(h[i] > h[0]) {\n      cout << i + 1 << endl;\n      return 0;\n    }\n  }\n  cout << -1 << endl;\n}",
+        "n = int(input())\nh = list(map(int, input().split()))\nfor i in range(1, n):\n  if h[i] > h[0]:\n    print(i + 1)\n    exit()\nprint(-1)"
+      ],
+      "text_sha256": "6a8626efff361fd9e58829f8315a14a0b0e5b232592588826ce037f99d933184",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc353/abc353_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

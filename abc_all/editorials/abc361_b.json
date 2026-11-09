@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc361_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc361/editorial/10353",
+      "text": "「\n\\(x\\)\n以上\n\\(y\\)\n以下の実数全体からなる区間」を\n\\([x,y]\\)\nと表します。\nまずは\n\\(1\\)\n次元の問題を考えてみましょう。\n1 次元の問題\n問題：2つの区間\n\\([a,b]\\)\nと\n\\([c,d]\\)\nの共通部分の長さが正であるかどうか判定してください。\n判定方法は様々ありますが、単純な方法の\n\\(1\\)\nつは「共通部分の長さが\n\\(0\\)\nかどうか」を判定し、その否定を取ることです。\n共通部分の長さが\n\\(0\\)\nになるのは、\n\\([a,b]\\)\nが\n\\([c,d]\\)\nより左側にある\n\\([a,b]\\)\nが\n\\([c,d]\\)\nより右側にある\nのどちらかが起こるときです。よってこの判定はPython風のコードでは以下のように書けます。\n3 次元の問題\n\\(x,y,z\\)\nの\n\\(3\\)\nつの座標それぞれで\n\\(1\\)\n次元の問題を解き、全てで共通部分の長さが正なら、直方体の共通部分の体積は正、そうでなければ\n\\(0\\)\nです。\n\\(1\\)\n次元の問題を\n\\(3\\)\n回解くことになるため、この部分を関数として分けるとシンプルに実装できます。\n実装例(Python)",
+      "codes": [
+        "if b <= c  or  d <= a:\n  print(\"共通部分0\")\nelse:\n  print(\"共通部分正\")",
+        "x1,y1,z1,x2,y2,z2 = map(int,input().split())\nx3,y3,z3,x4,y4,z4 = map(int,input().split())\n\ndef f(l1,r1,l2,r2):\n  # [l1,r1] と [l2,r2] の共通部分の長さが正ならTrue\n  return not (r1<=l2 or r2<=l1)\n\nif f(x1,x2,x3,x4) and f(y1,y2,y3,y4) and f(z1,z2,z3,z4):\n  print(\"Yes\")\nelse:\n  print(\"No\")"
+      ],
+      "text_sha256": "e91d3404331109a55d1deb6ba7ba2eb2a98cc575cdb7819ecc89d75289b3e63b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc361/abc361_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

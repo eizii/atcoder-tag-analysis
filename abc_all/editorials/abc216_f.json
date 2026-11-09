@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc216_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc216/editorial/2560",
+      "text": "与えられる\n\\(2\\)\n数列\n\\(A\\)\n,\n\\(B\\)\nを、\n\\(A_i\\)\nの昇順にまとめてソートします（\n\\(A_i\\)\nの値が同じときは\n\\(B_i\\)\nの大小で区別するなどして適当に順序付けをします）。すると、\n\\(\\{1,2,\\ldots,N\\}\\)\nの空でないすべての部分集合\n\\(S\\)\nについて\n\\(\\max_{i \\in S} A_i=A_{\\max(S)}\\)\nが成り立つことから、問題を以下のように変形させることができます。\n\\(f(i,j)\\)\nを\n\\((B_1,B_2,\\ldots,B_i\\)\nから\n\\(0\\)\n個以上の要素を選んでそれらの和を\n\\(j\\)\nにする通り数\n\\()\\)\nと定めるとき、以下の値を求めよ。\n\\(\\sum_{i=1}^{N} \\sum_{j=0}^{A_i-B_i} f(i-1,j)\\)\n明らかに、\n\\(f(i,j)\\)\nに関して、\n\\(i\\)\nの値域は\n\\(0\\)\n以上\n\\(N\\)\n以下であり、また\n\\(j\\)\nの値域は\n\\(0\\)\n以上\n\\(\\max(A)\\)\n以下のみしか考えなくてよいです。よって適切に動的計画法を用いて\n\\(f(i,j)\\)\nの値を求めることで、\n\\(O(N \\max(A))\\)\nでこの問題を解くことが可能です。\n実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nconst int mod = 998244353, maxi = 5000;\n\nint main(){\n\tint N; cin >> N;\n\tvector<pair<int,int>> data(N);\n\tfor(int i=0; i<N; i++) cin >> data[i].first;\n\tfor(int i=0; i<N; i++) cin >> data[i].second;\n\tsort(data.begin(),data.end());\n\tvector<int> A(N),B(N);\n\tfor(int i=0; i<N; i++) tie(A[i],B[i]) = data[i];\n\tvector<vector<int>> dp(N+1,vector<int>(maxi+1));\n\tdp[0][0] = 1;\n\tint ans = 0;\n\tfor(int i=0; i<N; i++){\n\t\tfor(int j=0; j<=maxi; j++){\n\t\t\tdp[i+1][j] = dp[i][j];\n\t\t\tif(B[i] <= j){\n\t\t\t\tdp[i+1][j] += dp[i][j-B[i]];\n\t\t\t\tdp[i+1][j] %= mod;\n\t\t\t}\n\t\t\tif(j <= A[i]-B[i]){\n\t\t\t\tans += dp[i][j];\n\t\t\t\tans %= mod;\n\t\t\t}\n\t\t}\n\t}\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "b6493027ac3e0167d54f825fce1bf22438b2a2fa66895c5b5fc1ebe838653f2a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc216/abc216_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc216/editorial/3460",
+      "text": "まず、\n\\(A\\)\nと\n\\(B\\)\nを セットにして、\n\\(A\\)\nの昇順にソートしておきます。\nまた、\n\\(\\{1,2,\\ldots,i\\}\\)\nの部分集合(空集合も含む)を\n\\(S_i\\)\nとします。\n\\[F(i, j) =(j \\ge \\sum_{k \\in S_i} B_k となるS_{i}の数)\\]\nという関数を考えます。\nDPパート\n上記の関数\n\\(F\\)\nは簡単な動的計画法で解けます。\n公式解説にもあるとおり、\n\\(\\sum_{k \\in S_i} B_k \\)\nが\n\\(\\max (A)\\)\nを超える場合を考える必要はないので、\n\\(j \\le \\max (A)\\)\nとして良いです。\n\\(i=0\\)\nのとき\n\\(S_0\\)\nとしてありえるのは空集合\n\\(\\emptyset\\)\nだけです。\n\\(\\sum_{k \\in \\emptyset} B_k=0\\)\nより\n\\[\n\\left\\{\n\\begin{array}{ll}\nF(0, j) = 1 & j \\ge 0 \\\\\nF(0, j) = 0 & j \\lt 0\n\\end{array}\n\\right.\n\\]\nとなります。\n\\(i>0\\)\nのとき\n\\[F(i, j) =F(i-1, j) +F(i-1, j-B_i)\\]\nです。\nこれは、\n\\((B_i を採用しない場合の数)+(B_i を採用する場合の数)\\)\nを表します。\n合計パート\n\\(A\\)\nがソート済みなので\n\\[\\max_{i \\in S} A_i = A_{\\max i \\in S}\\]\nです。\nつまり、\n\\(S\\)\nに含まれる最大値が\n\\(k\\)\nのとき\n\\(A_k \\ge \\sum_{i \\in S} B_i\\)\nをみたすものを数え上げればよいです。\nこのとき、\n\\[\\sum_{i \\in S} B_i = B_k + \\sum_{i \\in S_{k-1}} B_i\\]\nとなります。\nよって、\n\\[A_k - B_k \\ge  \\sum_{i \\in S_{k-1}} B_i\\]\nをみたすものの数を数え上げればよいです。\nこれは\n\\(F(k-1, A_k - B_k )\\)\nで取得できます。\n求める答えは\n\\[\\sum_{k=1}^N F(k-1, A_k - B_k )\\]\nとなります。\n提出例(C#):\nhttps://atcoder.jp/contests/abc216/submissions/29591012",
+      "codes": [],
+      "text_sha256": "0e0adc5ce2a16563c1e2dea011207594d46285e815835f68b2b092e532b77175",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc216/abc216_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

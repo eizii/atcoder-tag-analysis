@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc320_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc320/editorial/7159",
+      "text": "\\(S\\)\nのすべての連続する部分文字列に対し、それが回文か判定すればよいです。\n長さ\n\\(N\\)\nの文字列は\n\\(O(N)\\)\nの時間計算量で回文か判定でき、\n\\(S\\)\nの連続する部分文字列は\n\\(O(|S|^2)\\)\n個存在するため、全体として\n\\(O(|S|^3)\\)\nの時間計算量で解くことができました。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <algorithm>\n#include <string>\nusing namespace std;\n\nbool is_palindrome(string s) {\n\tint n = s.size();\n\tfor (int i = 0; i < n; i++) if (s[i] != s[n - i - 1]) return false;\n\treturn true;\n}\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tint n = s.size();\n\tint ans = 1;\n\tfor (int i = 0; i < n; i++) {\n\t\tfor (int j = i + 1; j <= n; j++) {\n\t\t\tstring t = \"\";\n\t\t\tfor (int k = i; k < j; k++) t += s[k];\n\t\t\tif (is_palindrome(t)) ans = max(ans, j - i);\n\t\t}\n\t}\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "14fa9b606b2f81070173ed66cdca6ba7d6fc6914ec3693ad90cffda764d70168",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc320/abc320_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

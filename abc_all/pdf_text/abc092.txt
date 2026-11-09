@@ -1,0 +1,486 @@
+              ARC093 / ABC092 解説
+
+
+                                 wo01
+
+                               2018 年3 月25 日
+
+
+
+A 問題
+
+ 答えはmin(A, B) + min(C, D) となります。
+
+ 以下にC++ による実装例を示します。
+
+#include<cstdio>
+
+#include<algorithm>
+
+
+using namespace std;
+
+
+int main(){
+
+    int A, B, C, D;
+
+    scanf("%d%d%d%d", &A, &B, &C, &D);
+
+    printf("%d\n", min(A, B) + min(C, D));
+
+    return 0;
+
+}
+
+
+B 問題
+
+   i 人目の参加者は合宿中にチョコレートを1 + ⌊(D −1)/Ai⌋個食べます。ここで、⌊x⌋はx を超えない最
+
+大の整数です。
+
+ よって、答えは                                  ⌋              ∑    ⌊D −1
+                     X +      (1 +           )
+                                                 Ai
+                                     1≤i≤N
+
+となります。
+
+ 以下にC++ による実装例を示します。C++ を含む多くの言語で、正の整数同士の除算の際はあまりが切
+
+り捨てられます。
+
+
+
+
+
+                                             1
+
+#include<cstdio>
+
+
+using namespace std;
+
+
+const int MAX_N = 100;
+
+
+int N;
+
+int A[MAX_N];
+
+int D;
+
+int X;
+
+
+int main(){
+
+    scanf("%d", &N);
+
+    scanf("%d%d", &D, &X);
+
+    for(int i = 0; i < N; ++i){
+
+        scanf("%d", A + i);
+
+    }
+
+    int ans = X;
+
+    for(int i = 0; i < N; ++i){
+
+        int tmp = (D - 1) / A[i] + 1;
+
+        ans += tmp;
+
+    }
+
+    printf("%d\n", ans);
+
+    return 0;
+
+}
+
+
+C 問題
+
+ 入力で与えられるA1, A2, . . . , AN に加えて、A0 = AN+1 = 0 としておきます。求めたいものは、各i
+(1 ≤i ≤N) に対する
+
+                 Si = |A0 −A1| + |A1 −A2| + · · · + |Ai−2 −Ai−1| + |Ai−1 −Ai+1| +
+                      |Ai+1 −Ai+2| + · · · + |AN −AN+1|
+
+の値です。
+
+ ここで、              ∑
+                             S =       |Aj −Aj+1|
+                                     0≤j≤N
+
+とします。この値はO(N) 時間で求められます。
+
+ このとき、
+                         Si = S + |Ai−1 −Ai+1| −(|Ai−1 −Ai| + |Ai −Ai+1|)
+
+
+                                             2
+
+となります。よって、Si の値は各i に対してO(1) 時間で求められます。
+ 以上から、全体でO(N) 時間で解くことができます。
+
+
+D 問題
+
+ 条件を満たすグリッドは以下のようにして構成することができます。
+
+    • K = 50 として、2K × 2K のグリッドを用意する。
+
+    • 上からK 行以内にあるマスを全て黒く塗り、残りのマスをすべて白く塗る。
+
+    • 上からK −1 行以内のマスのうちA −1 個のマスを上下左右斜めに隣り合わないように選び、それら
+
+   の色を白に変える。
+
+    • 下からK −1 行以内のマスのうちB −1 個のマスを上下左右斜めに隣り合わないように選び、それら
+
+   の色を黒に変える。
+
+
+E 問題
+
+ 与えられたグラフをG とし、G の最小全域木T を一つ選びます。また、その重みをS とします。
+
+  T の2 頂点u, v に対して、pathMax(u, v) をT のuv パス上の辺の重みの最大値と定義します。さらに、
+
+G に含まれるがT に含まれない辺e = {u, v} が重みc を持つとき、diﬀ(e) = c −pathMax(u, v) と定義し
+
+ます。T が最小全域木であることから、すべてのe に対してdiﬀ(e) ≥0 となります。
+
+ さて、G の辺を白色または黒色に塗ったとき、白く塗られた辺と黒く塗られた辺をともに含む全域木のうち
+最小の重みのものの重みS′ は以下のようになります。
+
+    • T に白色の辺と黒色の辺がともに含まれる場合、S′ = S
+
+    • そうでない場合、T の辺と異なる色で塗られた辺のうち最小のdiﬀの値を持つものをe として、
+      S′ = S + diﬀ(e)
+
+ このことから、求めたい塗り方の個数は以下のようにして求められます。
+
+ まず、D = X −S とします。さらに、diﬀ(e) < D, diﬀ(e) = D, diﬀ(e) > D を満たすe の個数をそれぞ
+
+れlower, equal, upper とします。このとき、
+
+    • D < 0 のとき、塗り方の個数は0
+
+    • D = 0 のとき、
+      – T の辺に2 種類の色を両方用いる場合、塗り方の個数は(2N−1 −2)2M−N+1
+      – そうでない場合、塗り方の個数は2 × (2equal −1) × 2upper
+    • D > 0 のとき、塗り方の個数は2 × (2equal −1) × 2upper
+
+ 以上で答えが求まりました。
+
+
+F 問題
+
+ 条件を満たすp のうちp1 = 1 であるものの個数がわかれば十分です。以下、p1 = 1 を仮定します。
+
+
+
+                                             3
+
+ 選手1 が優勝または敗退するまでに対戦する可能性がある選手の番号は
+
+                                 p2, min{p3, p4}, . . . , min{p2N−1+1, . . . , p2N }
+
+です。上のN 個の値がどれも集合{A1, A2, . . . , AM} に含まれないとき、選手1 が優勝します。
+ 選手2, 3, . . . , 2N を番号順に場所p2, p3, . . . , p2N に割り当てていくことを考えます。また、これらの場所
+はN 個のグループG1 = {p2}, G2 = {p3, p4}, . . . , GN = {p2N−1+1, . . . , p2N } に分かれているとします。グ
+ループGi が開始済みグループであるとは、グループGi に属する選手が1 人以上決まっていることを言うこ
+とにします。また、{1, 2, . . . , N} の部分集合U に対して、
+
+                ∑
+                                        sz(U) =    2i−1
+
+                                                  i∈U
+
+と定めます。
+
+ 次のようなDP を考えます。
+
+                     dp1,i,U = 選手2, 3, . . . , Ai の場所を決める方法であって、
+              開始済みグループの集合T がT = U を満たすものの個数
+                     dp2,i,U = 選手2, 3, . . . , Ai の場所を決める方法であって、
+              開始済みグループの集合T がT ⊆U を満たすものの個数
+                     dp3,i,U = 選手2, 3, . . . , Ai −1 の場所を決める方法であって、
+              開始済みグループの集合T がT ⊆U を満たすものの個数
+                     dp4,i,U = 選手2, 3, . . . , Ai −1 の場所を決める方法であって、
+              開始済みグループの集合T がT = U を満たすものの個数
+
+ このDP テーブルは以下のように計算することができます。
+
+    • 各U に対してdp1,i,U が求まっているとき、各U に対するdp2,i,U は高速ゼータ変換(の変形) によ
+   り求められます。
+
+    • 各U に対してdp2,i,U が求まっているとき、各U に対するdp3,i+1,U は、t = max(0, sz(U) −Ai),
+     d = Ai+1 −1 −Ai として、
+
+                               dp3,i+1,U = t × (t −1) × · · · × (t −d + 1) × dp1,i,U
+
+   として求められます。
+
+    • 各U に対してdp3,i,U が求まっているとき、各U に対するdp4,i,U は高速ゼータ変換(の変形) によ
+   り求められます。
+
+    • 各U に対してdp4,i,U が求まっているとき、各U に対するdp1,i,U は
+
+                                    dp1,i+1,U = (sz(U) −(Ai −1)) × dp4,i,U
+
+   として求められます。
+
+ このDP テーブルが求められれば、あとは適切に足し合わせて適切な係数をかけるだけで答えが求められ
+
+ます。
+
+ 以上で答えが求まりました。
+
+
+
+                                             4
+
+             ARC093 / ABC092 Editorial
+
+
+                                 wo01
+
+                            March 25th, 2018
+
+
+
+Problem A
+
+  The answer is min(A, B) + min(C, D).
+
+ C++ example:
+
+#include<cstdio>
+
+#include<algorithm>
+
+
+using namespace std;
+
+
+int main(){
+
+    int A, B, C, D;
+
+    scanf("%d%d%d%d", &A, &B, &C, &D);
+
+    printf("%d\n", min(A, B) + min(C, D));
+
+    return 0;
+
+}
+
+
+Problem B
+
+  The i-th participant eats 1+⌊(D−1)/Ai⌋chocolates. Here ⌊x⌋denotes the largest integer that doesn’t
+
+exceed x.
+
+  Therefore, the answer is                                               ⌋              ∑    ⌊D −1
+                     X +      (1 +           )
+                                                 Ai
+                                     1≤i≤N
+
+ C++ example:
+
+
+
+
+
+                                             1
+
+#include<cstdio>
+
+
+using namespace std;
+
+
+const int MAX_N = 100;
+
+
+int N;
+
+int A[MAX_N];
+
+int D;
+
+int X;
+
+
+int main(){
+
+    scanf("%d", &N);
+
+    scanf("%d%d", &D, &X);
+
+    for(int i = 0; i < N; ++i){
+
+        scanf("%d", A + i);
+
+    }
+
+    int ans = X;
+
+    for(int i = 0; i < N; ++i){
+
+        int tmp = (D - 1) / A[i] + 1;
+
+        ans += tmp;
+
+    }
+
+    printf("%d\n", ans);
+
+    return 0;
+
+}
+
+
+
+
+
+                                             2
+
+Problem C
+
+  Let A0 = AN+1 = 0. For each i (1 ≤i ≤N), we want to compute the following value:
+
+                 Si = |A0 −A1| + |A1 −A2| + · · · + |Ai−2 −Ai−1| + |Ai−1 −Ai+1| +
+                      |Ai+1 −Ai+2| + · · · + |AN −AN+1|
+
+  Let            ∑
+                             S =       |Aj −Aj+1|
+                                     0≤j≤N
+
+and we pre-compute this value in O(N) time.
+
+  Then, since
+                         Si = S + |Ai−1 −Ai+1| −(|Ai−1 −Ai| + |Ai −Ai+1|)
+
+we can compute the value of Si in O(1) for each i.
+
+  This solution works in O(N) time in total.
+
+
+Problem D
+
+ We can construct the grid as follows:
+
+    • Let K = 50 and prepare a grid of dimensions 2K × 2K.
+
+    • Paint all cells in the topmost K rows black. Paint the other cells white.
+
+    • From the topmost K −1 rows, choose A−1 cells such that no two chosen cells are 8-adjacent, and
+
+      paint them white.
+
+    • From the bottommost K −1 rows, choose B −1 cells such that no two chosen cells are 8-adjacent,
+
+     and paint them black.
+
+
+
+
+
+                                             3
+
+Problem E
+
+  Let G be the given graph, and let T be (one of) its MSTs. Let S be its weight.
+
+  For two vertices u, v in T, deﬁne pathMax(u, v) as the weight of the heaviest edge on the path uv along
+
+T. Also, if an edge e = {u, v} is not contained in T, deﬁne diﬀ(e) = c −pathMax(u, v), where c is the
+
+weight of edge e. Note that for edges e in T, the value of diﬀ(e) is undeﬁned (make sure not to regard
+
+them as zeroes). Since T is an MST, for all edge e outside T, diﬀ(e) ≥0 holds.
+
+  Suppose that we paint the edges of G black and white. The weight of the MST that contains both
+black and white edges can be computed as follows (let’s denote it S′):
+
+    • If T contains both black and white edges, S′ = S.
+    • If T contains only black edges, S′ = S + diﬀ(e). Here, e is a white edge that minimizes the value
+
+       of diﬀ(e).
+
+    • (Similarly, we can handle the case where all edges in T are white).
+
+  Therefore, the answer can be computed as follows.
+
+  First, let D = X −S.  Let lower, equal, upper be the number of edges e such that diﬀ(e) < D,
+
+diﬀ(e) = D, and diﬀ(e) > D, respectively.
+
+  Then,
+
+    • If D < 0, the answer is 0.
+
+    • If D = 0,
+      – In case we use both colors at least once for the edges in T, there are (2N−1 −2)2M−N+1
+         ways to paint edges: (2N−1 −2) ways to color T by using both colors, and 2M−N+1 ways to
+
+           arbitrarily color other edges.
+      – Otherwise, there are 2 × (2equal −1) × 2upper ways to paint edges: two ways to color edges in
+         T, (2equal −1) ways to color edges in ”equal” (the color of at least one edge must be diﬀerent
+         from T’s color), and 2upper ways to arbitrarily color ”upper” edges.
+    • If D > 0, the answer is 2 × (2equal −1) × 2upper: two ways to color edges in T and ”lower”,
+       (2equal −1) ways to color edges in ”equal” (the color of at least one edge must be diﬀerent from
+      T’s color), and 2upper ways to arbitrarily color ”upper” edges.
+
+
+
+
+
+                                             4
+
+Problem F
+
+  Assume that p1 = 1 (and later multiply the answer by 2N).
+
+  Player 1 can win the tournament if he can beat all of the following players:
+
+                                 p2, min{p3, p4}, . . . , min{p2N−1+1, . . . , p2N }
+
+  Thus, we want to compute the number of permutations such that none of the N numbers above are
+
+contained in the set {A1, A2, . . . , AM}.
+  Consider N groups of positions: G1 = {p2}, G2 = {p3, p4}, . . . , GN = {p2N−1+1, . . . , p2N }. We want to
+count the number of permutations such that for each group g in {G1, . . . , GN}, the minimum element in
+g is not in {A1, A2, . . . , AM}. Let’s use inclusion-exclusion principle. For each subset S of {G1, . . . , GN},
+
+we want to compute f(S), the number of permutations such that
+
+    • For each group g in S, the minimum element of g is in {A1, A2, . . . , AM}.
+
+  To compute these values, do the following DP. Assume that A1 > A2 >  · · · > AM. For each i =
+1, · · · , M in this order, do one of the following:
+
+    • For some integer k, choose 2k −1 players greater than Ai, and assign them to the group Gk,
+      together with the player Ai. Now the minimum element in Gk is in {A1, A2, . . . , AM}.
+    • Do nothing.
+
+  For each integer 0 ≤i ≤M and a set S ⊆{G1, . . . , GN}, deﬁne dpi,S as the number of ways such
+that when we process players A1, · · · , Ai as described above, the groups in S are ﬁlled, and other groups
+are empty. Then, we can compute f(S) as dpM,S times some coeﬃcients, and by inclusion-exclusion
+principle, the answer is ∑f(S)(−1)|S|.
+
+
+
+
+
+                                             5

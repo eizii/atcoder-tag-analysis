@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc372_c",
+  "title": "Count ABC Again",
+  "contests": [
+    {
+      "contest_id": "abc372",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 341,
+  "raw_difficulty": 336,
+  "contest_id": "abc372",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc372/tasks/abc372_c",
+  "statement": "配点 : 350 点 問題文 長さ N の文字列 S が与えられます。クエリが Q 個与えられるので、順番に処理してください。 i 番目のクエリは以下の通りです。 整数 X_i と文字 C_i が与えられるので、 S の X_i 番目の文字を C_i に置き換える。その後、 S に文字列 ABC が部分文字列として何箇所含まれるかを出力する。 ここで、 S の 部分文字列 とは、 S の先頭から 0 文字以上、末尾から 0 文字以上削除して得られる文字列のことをいいます。 例えば、 ab は abc の部分文字列ですが、 ac は abc の部分文字列ではありません。 制約 3\\le N\\le 2\\times 10^5 1\\le Q\\le 2\\times 10^5 S は英大文字からなる長さ N の文字列 1\\le X_i\\le N C_i は英大文字 入力 入力は以下の形式で標準入力から与えられる。 N Q S X_1 C_1 X_2 C_2 \\vdots X_Q C_Q 出力 Q 行出力せよ。 i 行目 (1\\le i\\le Q) には i 番目のクエリに対する答えを出力せよ。 入力例 1 7 4\nABCDABC\n4 B\n3 A\n5 C\n4 G 出力例 1 2\n1\n1\n0 各クエリを処理した後の S は次のようになります。 1 つ目のクエリを処理後： S= ABCBABC となる。この中に ABC は部分文字列として 2 回登場する。 2 つ目のクエリを処理後： S= ABABABC となる。この中に ABC は部分文字列として 1 回登場する。 3 つ目のクエリを処理後： S= ABABCBC となる。この中に ABC は部分文字列として 1 回登場する。 4 つ目のクエリを処理後： S= ABAGCBC となる。この中に ABC は部分文字列として 0 回登場する。 入力例 2 3 3\nABC\n1 A\n2 B\n3 C 出力例 2 1\n1\n1 クエリの処理前と処理後で S が変わらない場合もあります。 入力例 3 15 10\nBBCCBCACCBACACA\n9 C\n11 B\n5 B\n11 B\n4 A\n8 C\n8 B\n5 B\n7 B\n14 B 出力例 3 0\n0\n0\n0\n1\n1\n2\n2\n1\n1",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の文字列 S が与えられます。クエリが Q 個与えられるので、順番に処理してください。 i 番目のクエリは以下の通りです。 整数 X_i と文字 C_i が与えられるので、 S の X_i 番目の文字を C_i に置き換える。その後、 S に文字列 ABC が部分文字列として何箇所含まれるかを出力する。 ここで、 S の 部分文字列 とは、 S の先頭から 0 文字以上、末尾から 0 文字以上削除して得られる文字列のことをいいます。 例えば、 ab は abc の部分文字列ですが、 ac は abc の部分文字列ではありません。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 3\\le N\\le 2\\times 10^5 1\\le Q\\le 2\\times 10^5 S は英大文字からなる長さ N の文字列 1\\le X_i\\le N C_i は英大文字"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q S X_1 C_1 X_2 C_2 \\vdots X_Q C_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 i 行目 (1\\le i\\le Q) には i 番目のクエリに対する答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 7 4\nABCDABC\n4 B\n3 A\n5 C\n4 G"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2\n1\n1\n0 各クエリを処理した後の S は次のようになります。 1 つ目のクエリを処理後： S= ABCBABC となる。この中に ABC は部分文字列として 2 回登場する。 2 つ目のクエリを処理後： S= ABABABC となる。この中に ABC は部分文字列として 1 回登場する。 3 つ目のクエリを処理後： S= ABABCBC となる。この中に ABC は部分文字列として 1 回登場する。 4 つ目のクエリを処理後： S= ABAGCBC となる。この中に ABC は部分文字列として 0 回登場する。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 3\nABC\n1 A\n2 B\n3 C"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1\n1\n1 クエリの処理前と処理後で S が変わらない場合もあります。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 15 10\nBBCCBCACCBACACA\n9 C\n11 B\n5 B\n11 B\n4 A\n8 C\n8 B\n5 B\n7 B\n14 B"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 0\n0\n0\n0\n1\n1\n2\n2\n1\n1"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc372/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:54.751199+00:00",
+  "statement_sha256": "5146d37b81e6df38ccb1feaacd8aa848e683cb4faeb883004d49b4f4d1141529",
+  "editorials": []
+}

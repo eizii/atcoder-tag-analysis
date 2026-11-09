@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc342_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc342/editorial/9402",
+      "text": "人\n\\(i\\)\nは前から\n\\(Q_i\\)\n番目に並んでいるという情報を表す配列\n\\(Q\\)\nを作成します。\nすると、クエリは\n\\(Q_{A_i}\\)\nと\n\\(Q_{B_i}\\)\nの大小の比較となり、簡単に行うことが出来ます。\n\\(Q\\)\nの作成方法ですが、各\n\\(i\\)\nについて\n\\(Q_{P_i}=i\\)\nとすればよいです。\n以下に、C++ 言語による正解例を記載します。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> P(n);\n    for(int i = 0; i < n; i++) cin >> P[i];\n    vector<int> Q(n + 1);\n    for(int i = 0; i < n; i++) Q[P[i]] = i;\n    int q;\n    cin >> q;\n    for(int i = 0; i < q; i++) {\n        int a, b;\n        cin >> a >> b;\n        if(Q[a] < Q[b])\n            cout << a << endl;\n        else\n            cout << b << endl;\n    }\n}"
+      ],
+      "text_sha256": "f8010ba90ef95f66728b783f9cd08c9e3a209082987963bba9b3a63b66712a18",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc342/abc342_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

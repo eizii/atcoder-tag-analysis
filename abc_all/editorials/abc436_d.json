@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc436_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc436/editorial/14834",
+      "text": "迷路の大きさが小さい場合は単純な BFS (幅優先探索) によって解くことができます。しかし、マスの数が\n\\(O(HW)\\)\n、各マスからの遷移の数（今のマスから\n\\(1\\)\n回の行動で到達できるマスの数）が歩行・ワープ合わせて\n\\(O(HW)\\)\nあることから、全体の計算量は\n\\(O(H^2W^2)\\)\nとなり、本問題の制約下では間に合いません。\nここで、以下の事実が成立することに着目します。\nBFS の過程においてあるワープマスを訪れたとする。もし、このワープマスと同じ文字が書かれた別のワープマスに既に訪れたことがあるのであれば、今訪れているマスからのワープについては考える必要が\nない\n。\nなぜならば、今訪れているマスからワープをするよりも、既に訪れた同じ文字のワープマスからワープをした方が得だからです。\nよって、ワープに対応する遷移は各文字ごとに最初に訪れたマスのみから行えばよいため、全体の計算量は文字の種類数を\n\\(\\sigma\\)\nとして\n\\(O(\\sigma HW)\\)\nとなり、十分高速です。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nconst int inf = 1 << 30;\n\nconst int dx[] = {1, 0, -1, 0};\nconst int dy[] = {0, 1, 0, -1};\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int h, w;\n    cin >> h >> w;\n    vector<string> s(h);\n    vector<vector<pair<int, int>>> ls(26);\n    for (int i = 0; i < h; i++) {\n        cin >> s[i];\n        for (int j = 0; j < w; j++) {\n            if (islower(s[i][j])) {\n                ls[s[i][j] - 'a'].emplace_back(i, j);\n            }\n        }\n    }\n\n    vector d(h, vector<int>(w, inf));\n    queue<pair<int, int>> q;\n    vector<bool> seen(26);\n    d[0][0] = 0;\n    q.emplace(0, 0);\n    while (!q.empty()) {\n        auto [i, j] = q.front();\n        q.pop();\n        for (int k = 0; k < 4; k++) {\n            int ni = i + dx[k];\n            int nj = j + dy[k];\n            if (ni < 0 or ni >= h or nj < 0 or nj >= w) continue;\n            if (s[ni][nj] == '#') continue;\n            if (d[ni][nj] == inf) {\n                d[ni][nj] = d[i][j] + 1;\n                q.emplace(ni, nj);\n            }\n        }\n        if (islower(s[i][j])) {\n            int c = s[i][j] - 'a';\n            if (seen[c]) continue;\n            seen[c] = true;\n            for (auto [ni, nj]: ls[c]) {\n                if (d[ni][nj] == inf) {\n                    d[ni][nj] = d[i][j] + 1;\n                    q.emplace(ni, nj);\n                }\n            }\n        }\n    }\n\n    int ans = d[h - 1][w - 1];\n    cout << (ans == inf ? -1 : ans) << endl;\n}"
+      ],
+      "text_sha256": "0720940a427db70027fd953a192d16d387bdc95ce04d7bd79f9ff985f37213f4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc436/abc436_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc436/editorial/14855",
+      "text": "以下のようにグラフを構築します．\n各マスおよび（ワープ中であることを示す）英小文字に対応する頂点を作る．\n隣接する障害物が無いマスの頂点の間に，重み\n\\(1\\)\nの無向辺を張る．\nワープマスの頂点からアルファベットの頂点へ，重み\n\\(1\\)\nの有向辺を張る．\nアルファベットの頂点からワープマスの頂点へ，重み\n\\(0\\)\nの有向辺を張る．\n求めるべきは\n\\((1,1)\\)\nから\n\\((H,W)\\)\nへの最短距離なので， 0-1 BFS により求めることができます．\n計算量は\n\\(O(HW)\\)\nです．",
+      "codes": [],
+      "text_sha256": "9434f9d96d78579ef2d3320c5fa8e1c049e472d38cd16501f63b4119125977ea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc436/abc436_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

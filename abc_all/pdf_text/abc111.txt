@@ -1,0 +1,386 @@
+  AtCoder Beginner Contest 111 / AtCoder Regular Contest 103 解説
+
+                                      writer: nuip 並びにsemiexp
+
+                                   2018 年9 月29 日
+
+
+
+                       For International Readers: English editorial starts on page 200.
+
+
+A: AtCoder Beginner Contest 999
+
+ 与えられる3 文字をそれぞれ問題文のとおりに置き換えればよいです。
+
+    1 #include<iostream>
+    2
+    3  using namespace std;
+    4
+    5  int main(){
+    6          string n;
+    7          cin >> n;
+    8         for(char c:n){
+    9                     if(c == ’1’){
+   10                        cout << 9;
+   11                 }else{
+   12                        cout << 1;
+   13                }
+   14         }
+   15        return 0;
+   16 }
+
+ 文字列を相互に置き換える処理は次のようにも書けます。
+
+    1 #include<iostream>
+    2
+    3  using namespace std;
+    4
+    5  int main(){
+    6          string n;
+    7          cin >> n;
+    8         for(char c:n){
+    9                 cout << (char)(’1’ + ’9’ −c);
+   10         }
+   11        return 0;
+   12 }
+
+ これを応用して次のようなシンプルなコードでも解けます。
+
+    1 #include<iostream>
+    2
+    3  using namespace std;
+    4
+    5  int main(){
+    6         int n;
+    7          cin >> n;
+    8         cout << 111 + 999 −n << endl;
+    9        return 0;
+   10 }
+
+
+
+
+
+                                                   1
+
+B: AtCoder Beginner Contest 111
+
+  x 回目のABC が黒橋君が初めて参加するABC としてふさわしいかどうかは，各桁の数字を見ることで確かめられ
+ます．なので，x = N から始めて，条件を満たすまで1 ずつx を大きくしていけば解くことができます．
+ ところで，この問題では，100 ≤N ≤999 という条件から，答えとなるx は必ず3 桁になります．3 桁で条件を満た
+すx はすべて111 の倍数（逆もしかり）なので，N 以上の最小の111 の倍数を求める方法でも解くことができます．
+
+   • C++ による解答例: https://beta.atcoder.jp/contests/abc111/submissions/3279754
+
+   • Java による解答例: https://beta.atcoder.jp/contests/abc111/submissions/3279759
+
+   • Python 3 による解答例: https://beta.atcoder.jp/contests/abc111/submissions/3279761
+
+   • Ruby による解答例: https://beta.atcoder.jp/contests/abc111/submissions/3279762
+
+   • Rust による解答例: https://beta.atcoder.jp/contests/abc111/submissions/3279784
+
+   • Bash による解答例: https://beta.atcoder.jp/contests/abc111/submissions/3279843
+
+
+C: /\/\/\/
+
+ 数列v1, v2, . . . , vn から偶数番目を取り出した数列v2, v4, . . . , vn をe とおき、奇数番目を取り出した数列v1, v3, . . . , vn−1
+をo とおきます。問題の条件をe とo を使って言い換えると、次のようになります。
+
+   1. e の要素はすべて同じ
+
+   2. o の要素はすべて同じ
+
+   3. e ̸= o
+
+ みっつめの条件を無視して考えると、e とo それぞれについて、各要素を数列の最頻値に書き換えるのが最適になりま
+す。e とo それぞれの最頻値が異なっていれば、その書き換え方でみっつめの条件もクリアできます。そうでない場合は
+どちらかを最頻値でない値に書き換えなければなりません。
+  e で一番出現回数の多い要素をE1 とおき、二番目に出現回数の多い要素をE2 とおきます（E1 とE2 の出現回数が同
+じということもありえます）。同様に、o で一番出現回数の多い要素をO1 とおき、二番目に出現回数の多い要素をO2 と
+おきます。今、E1 = O1 であるため、次のふたつの書き換え方のうちどちらかが最適です。
+
+   • e をE1 で書き換え、o をO2 で書き換える
+
+   • e をE2 で書き換え、o をO1 で書き換える
+
+この2 通りを両方試して、書き換える項の数の小さい方が答えです。
+
+
+D: Robot Arms
+
+ まず，ロボットアームを決めると，(xm + ym) mod 2 は，モードの設定によらず一定になります．なので，(Xj + Yj)
+(mod 2) が一定でなければ，条件を満たすことは不可能です．
+  (Xj + Yj) (mod 2) が一定であるとします．今，(Xj + Yj) (mod 2) = 1 と仮定します((Xj + Yj) (mod 2) = 0 の場
+合は，長さ1 の腕を追加することで，(Xj + Yj) (mod 2) = 0 の場合に帰着できます)．
+ 座標(x, y) に対して，u = x + y, v = x −y とおいて(u, v) を考えます．すると，(ui, vi) と(ui+1, vi+1) の間に次の
+関係が成り立ちます：
+
+
+                                                   2
+
+   • 腕i のモードがL のとき，(ui+1, vi+1) = (ui −di, vi −di)
+
+   • 腕i のモードがR のとき，(ui+1, vi+1) = (ui + di, vi + di)
+
+   • 腕i のモードがD のとき，(ui+1, vi+1) = (ui −di, vi + di)
+
+   • 腕i のモードがU のとき，(ui+1, vi+1) = (ui + di, vi −di)
+
+よって，{di} を決めたときに{ui}, {vi} を決定する問題をu, v について独立に解けば，各関節のモードも決定できるこ
+とになります．
+ この{ui} を決定する問題を考えます．ui+1 = ui + di なるi ∈{1, . . . , m} の集合をS とすると，um = −∑mi=1 di +∑
+  i∈S 2di が成り立ちます．(Xj + Yj) (mod 2) = 1 の仮定より，Uj, Vj はすべて奇数です．また，−231 < −2 · 109 ≤
+                                                 が成り立Uj, Vj ≤2 · 109 < 231 が成り立っています．よって，m = 31, di = 2i−1 とすると，∑i∈S 2di = Uj + (231 −1)
+                      の二進展開を考えればよいです）．よって，この問題を解くことができつようにS を選ぶことができます（Uj+(231−1)2
+ました．
+
+
+E: Tr/ee
+
+  s のi 文字目をsi で表します。条件を満たす木が存在するためには、以下の条件が必要です。
+
+   • s1 = 1
+   葉につながっている辺を取るとサイズ1 の連結成分ができるため
+
+   • sn = 0
+   どの辺をとっても非連結な頂点対ができるのだから、連結成分はn よりも真に小さくなるため
+
+   • si = sn−i
+   木から辺を1 つとると連結成分はちょうど2 こできるため。
+
+ 逆に、以上の条件をすべてみたしている場合、条件を満たす木を構築することができます。直感的には、存在しては
+
+いけないサイズの部分木が存在しないように、うまく根付き木を構成していけばよいです。
+  s のn 文字目を1 に書き換えた文字列をs′ とします。頂点n を根とした木で、次の条件を満たす木を構成します。
+
+   1. 辺i は頂点i とその親をつなぐ
+
+   2. s′i = 1 であるとき、頂点i の部分木のサイズはi
+
+   3. s′i = 0 であるとき、頂点i は葉
+
+ このような木は、頂点i の親をi < j かつs′j = 1 となる最小のj とすると構成できます。これを確かめます。親とな
+る頂点がs′i = 1 であるようなi に限られることから条件3 が満たされることが分かります。また、s′j = 1 かつi ≤j で
+ある場合、頂点i から何度か親をたどることで頂点j に到達することができることから、1, 2, . . . , j のj 個の頂点は頂点
+j の部分木に含まれます。それ以外の頂点が部分木に含まれないことも明らかであるため、条件2 も満たされます。
+
+   • C++ による解答例: https://beta.atcoder.jp/contests/arc103/submissions/3288872
+
+
+
+
+
+                                                   3
+
+F: Distance Sums
+
+  S(v) で，頂点v から他の点までの距離の和を表すことにします．木の中に辺uv があるとき，辺uv を除去したとき
+のu, v を含む連結成分の頂点数をそれぞれnuv, nvu と書くことにすると，S(u) = S(v) + nvu −nuv = S(v) + N −2nuv
+が確かめられます．
+ 一般性を失わず，D1 < D2 <  · · · < DN としてよいです．木を頂点1 を根とする根付き木として考えます．ここ
+で，頂点1 から他の頂点までのパス1, p1, p2, . . . , pk を考えます．まず，S(1) < S(p1) より，n1p1 > n2 です．また，
+n1p1 < np1p2 < np2p3 < · · · < npk−1pk より，npipi+1 > n2 であるから，S(pi) < S(pi+1) も成り立ちます．よって，頂点
+1 以外の任意の頂点について，それよりD の値が小さい頂点への辺がちょうど1 本存在します．
+ 頂点N から順に，そのような辺を順次決定していくことを考えます．頂点i + 1, . . . , N までは確定したとして，頂点
+i について考えます．頂点i に隣接する，i より番号の小さい唯一の頂点をj とすると，S(j) = S(i) + 2nji −N ですが，
+nji は頂点i を根とする部分木の大きさに等しく，この値は計算できるので（辺を追加するときに順次更新すればよいで
+す），S(j) が決まります．Di はすべて異なるという条件から，j を求めることができます．ここで，そのようなj が存
+在しない（i より大きくなる場合を含む）ときは，条件を満たす木は存在しません．
+ 頂点2 まですべて決定できた場合は，一つの木ができます．この木について，実際にS(i) の値を計算して（動的計画
+法などで可能です），Di に一致していればその木が答えです．一致していない場合は，条件を満たす木は存在しません．
+
+
+
+
+
+                                                   4
+
+AtCoder Beginner Contest 111 / AtCoder Regular Contest 103 Editorial
+
+
+                                       writer: nuip and semiexp
+
+                                 September 29th, 2018
+
+
+
+A: AtCoder Beginner Contest 999
+
+  Some example implementations:
+
+    1 #include<iostream>
+    2
+    3  using namespace std;
+    4
+    5  int main(){
+    6          string n;
+    7          cin >> n;
+    8         for(char c:n){
+    9                     if(c == ’1’){
+   10                        cout << 9;
+   11                 }else{
+   12                        cout << 1;
+   13                }
+   14         }
+   15        return 0;
+   16 }
+
+
+    1 #include<iostream>
+    2
+    3  using namespace std;
+    4
+    5  int main(){
+    6          string n;
+    7          cin >> n;
+    8         for(char c:n){
+    9                 cout << (char)(’1’ + ’9’ −c);
+   10         }
+   11        return 0;
+   12 }
+
+
+    1 #include<iostream>
+    2
+    3  using namespace std;
+    4
+    5  int main(){
+    6         int n;
+    7          cin >> n;
+    8         cout << 111 + 999 −n << endl;
+    9        return 0;
+   10 }
+
+
+
+
+
+                                                   1
+
+B: AtCoder Beginner Contest 111
+
+  Some example implementations:
+
+   • C++: https://beta.atcoder.jp/contests/abc111/submissions/3279754
+
+   • Java: https://beta.atcoder.jp/contests/abc111/submissions/3279759
+
+   • Python 3: https://beta.atcoder.jp/contests/abc111/submissions/3279761
+
+   • Ruby: https://beta.atcoder.jp/contests/abc111/submissions/3279762
+
+   • Rust: https://beta.atcoder.jp/contests/abc111/submissions/3279784
+
+   • Bash: https://beta.atcoder.jp/contests/abc111/submissions/3279843
+
+
+C: /\/\/\/
+
+  Let E be the sequence v2, v4, . . . , vn, and let O be the sequence v1, v3, . . . , vn−1. We want to do the following (and
+minimize the number of changes):
+
+   1. Change all elements of E to x.
+
+   2. Change all elements of O to y.
+
+   3. x ̸= y
+
+
+   If we ignore the third condition, the problem is easy: x should be the mode (the most frequent element) of E and y
+
+should be the mode of O. Thus, in case the mode of E and the mode of O are diﬀerent, this is the optimal solution.
+  Otherwise, we should try two cases. Let e be the mode of E and e2 be the second most frequent element of E.
+(Strictly speaking, e2 is the most frequent element of E except for e.  It’s possible that e and e2 appear the same
+number of times in E.) SImilarly, let o be the mode of O and o2 be the second most frequent element of O. Then,
+the optimal solution is one of the following two:
+
+   • x = e, y = o2
+
+   • x = e2, y = o
+
+ We try both and choose the better one.
+
+
+
+
+
+                                                   2
+
+D: Robot Arms
+
+  For a ﬁxed robot arm, the parity of xm + ym is a constant (it must match the parity of the sum of di). Thus, in
+case (Xj + Yj) (mod 2) are not the same for all j, it is impossible to satisfy the conditions.
+  Assume that Xj + Yj is odd for all j. (In case they are all even, add a section of length 1 and we can reduce to the
+”all even” case.) It turns out that a robot arm with lengths 1, 2, 4, 8, . . . can cover all such positions:
+
+   • If the robot arm has only one section and its length is 1, the set of positions where the last joint can go is
+      {(1, 0), (0, 1), (−1, 0), (0, −1)}.
+
+   • If the robot arm has two sections and their lengths are {1, 2}, the set of positions where the last joint can go is
+      {(x, y)||x|+|y| ≤3, x ≡y (mod 2)}. In other words, it can cover all integer points (with correct parities) within
+     a ”rotated square” whose vertices are at (3, 0), (0, 3), (−3, 0), (0, −3).
+
+   • By induction, we can prove that, if the lengths of sections are {1, 2, . . . , 2k}, we can cover all vertices with correct
+      parities within a ”rotated square” whose vertices are at (M, 0), (0, M), (−M, 0), (0, −M), where M = 2k+1 −1.
+
+  Thus, if we use k = 30, we can reach all given points.
+
+  To ﬁnd a way to reach a given point, determine the mode of sections from the longest ones. For example, sup-
+pose that we know the position of (xi, yi).  If we determine the mode of Section i, we can get the coordinates of
+(xi−1, yi−1). We should choose it such that (xi−1, yi−1) ﬁts within the valid region (i.e., it should be reachable by
+lengths {1, 2, . . . , 2i−2}).
+
+
+E: Tr/ee
+
+  Clearly, the following conditions are necessary:
+
+   • s1 = 1 (If we cut a leaf we can get a component with size 1)
+
+   • sn = 0 (If we cut an edge the sizes of components are less than n)
+
+   • si = sn−i (When we have a component of size i, the other component has size n −i)
+
+  These conditions are actually suﬃcient. Suppose that 0 < x1 < x2 < · · · < xk < n are the positions where s is one
+(i.e., sxi = 1). Then, the following caterpillar (https://en.wikipedia.org/wiki/Caterpillar tree) satisﬁes the conditions:
+
+   1. The caterpillar has k + 1 ”body” vertices, labelled with 1, . . . , k + 1. They form a path in this order.
+
+   2. For each i (2 ≤i ≤k), the body vertex i has xi −xi−1 −1 ”feets”. (In other words, prepare xi −xi−1 −1 new
+      vertices and attach them to vertex i.)
+
+
+
+
+
+                                                   3
+
+F: Distance Sums
+
+  Consider a vertex v with the largest value of Dv. Intuitively, v is a vertex that is far from majority of other vertices.
+We can prove that v is a leaf, and if w is the only vertex adjacent to v, Dw = Dv −(n −2). We can determine one
+edge this way (vw), and by repeating similar process we can uniquely determine the entire tree. Let’s formalize this.
+  Without loss of generality, we can assume that D1 < D2 < · · · < DN. Consider the tree as a rooted tree whose root
+is Vertex 1. In the decreasing order of i, we want to determine the parent of Vertex i.
+
+  Suppose that the tree contains an edge uv, and when the edge uv is removed from the tree, the sizes (number
+of vertices) of the two connected components are nuv and nvu (nuv corresponds to the component with u). Then,
+Du = Dv + nvu −nuv = Dv + N −2nuv holds.
+  Consider a path 1, p1, p2, . . . , pk. Since D1 < Dp1, n1p1 > n2 . Also, since n1p1 < np1p2 < np2p3 < · · · < npk−1pk,
+npipi+1 > n2 holds for all i and Dpi < Dpi+1 holds. Thus, if Vertex j is the parent of Vertex i, j < i holds.
+  Suppose that we know the parents of Vertices i + 1, . . . , N. At this point, we know the subtree rooted at Vertex i.
+If Vertex j is the parent of Vertex i, as we mentioned above, Dj = Di + 2nji −N holds. Since nji is the size of the
+subtree rooted at i, we can uniquely determine j. (In case such j doens’t exist, we get a contradiction.)
+
+ We repeat this process until we determine the parents of Vertices 2, . . . , n. Then, we have a tree, and check if this
+
+tree really satisﬁes the conditions. If yes, this is the desired tree (otherwise we get a contradiction).
+
+
+
+
+
+                                                   4

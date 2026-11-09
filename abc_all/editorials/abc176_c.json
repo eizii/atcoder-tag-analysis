@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc176_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc176/editorial/61",
+      "text": "まず、考えるべき事は、以下のようなことです。\n自分より背の高い人が前にいる時、自分は踏み台を使って背を高くしなければならない。\n自分の背が高くなることにより、後ろの人が「背が低いままで良い」などの得をすることは起こらない。（逆に踏み台を使わないといけなくなることは起こりうる）\n以上を踏まえて、各人がそれぞれ出来るだけ踏み台を使わないようにするのが最善であることが予想できます。\n\\(i\\)\n番目がどれだけ踏み台を使うべきかについて考えてみましょう。自分より背が高い人がいるのであれば、踏み台を使って、その高さ以上にならなければなりません。つまり、\n\\(i\\)\n番目の人が最低限持つべき身長\n\\(B_i\\)\nは、\n\\(B_i = \\max(A_1, A_2, ... , A_i)\\)\nであると言えます。この数列\n\\(B\\)\nを考えた時、これは広義単調増加となっています。よって、必要条件と十分条件が一致したため、この\n\\(B\\)\nを目指すことが最善であることがわかります。\nこれを愚直に計算すると、計算量は\n\\(O(N^2)\\)\nとなってしまいます。ですが、前から順番に最大値を持ちながら計算することで、毎回ループを回して最大値を計算する必要がなくなり、\n\\(O(N)\\)\nで計算することが可能となります。\n答えは非常に大きくなるため、32bit変数では収まりきらないことに注意しましょう。\n回答例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main(){\n\tint N;\n\tcin >> N;\n\tvector<int> A(N);\n\tfor (int i = 0; i < N; i++)\n\t{\n\t\tcin >> A[i];\n\t}\n\n\tlong long ans = 0;\n\tint MaxNum = 0;\n\tfor (int i = 0; i < N; i++)\n\t{\n\t\t//MaxNumを使い回すことで計算を抑える\n\t\tMaxNum = max(MaxNum, A[i]);\n\t\tint Bi = MaxNum;\n\t\tans += Bi - A[i];\n\t}\n\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "52c6e6d1015ef66449fffd8ac3fabb3f99d9f31c7498e5a20dd31bf59173ba3e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc176/abc176_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

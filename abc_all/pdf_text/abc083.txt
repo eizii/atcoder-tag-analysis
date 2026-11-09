@@ -1,0 +1,436 @@
+            ARC 088/ABC 083 解説
+
+
+                            DEGwer
+
+                                  2017/12/23
+
+
+
+A: Libra
+
+ 整数A, B, C, D を読み込み、A + B とC + D の大小比較をすればよいです。
+
+#include <stdio . h>
+
+ int main ()
+
+{
+
+          int  a , b ,  c , d ;
+
+         scanf (”%d%d%d%d” , &a , &b , &c , &d ) ;
+
+                  i f  ( a + b > c + d) p r i n t f (” Left \n ” ) ;
+
+           e l s e    i f  ( a + b == c + d) p r i n t f (” Balanced\n ” ) ;
+
+           e l s e  p r i n t f (” Right\n ” ) ;
+
+}
+
+
+
+
+
+                                             1
+
+B: Some Sums
+
+ N 以下の整数の各桁の和を求め、適切に場合分けをして足し合わせてやればよいです。
+
+#include <stdio . h>
+
+ int main ()
+
+{
+
+          int n ,  a , b ;
+
+         scanf (”%d%d%d” , &n , &a , &b ) ;
+
+          int  r = 0;
+
+           fo r  ( int   i = 1;   i <= n ;  i++)
+
+          {
+
+                    int  c = 0 ,  t =  i ;
+
+                     fo r  ( int   j = 0;   j < 5;  j++)c +=  t % 10 ,  t /= 10;
+
+                                    i f  ( a <= c&&c <= b) r +=  i ;
+
+          }
+
+         p r i n t f (”%d\n” ,  r ) ;
+
+}
+
+
+C: Multiple Gift
+
+ 作る数列をA1, ..., A|A| とします。条件よりX ≤A1 であり、またすべてのi に対し2Ai ≤Ai+1 となり
+ます。よって、Ai ≥X × 2i−1 がわかります。
+ 逆に、Ai = X × 2i−1 とすれば、これは条件を満たします。すべてのi に対しAi の最小値を達成できてい
+るので、条件を満たす数列のうちこのようにして作られるもののみを考慮すればよく、時間計算量O(log BA)
+でこの問題を解くことができます。
+
+
+D: Wide Flip
+
+ 与えられる文字列の長さをn とします。
+
+  k 文字目とk +1 文字目が異なるとします。このとき、すべての文字を0 にするためには、k 文字目とk +1
+
+文字目の片方のみを書き換えるような操作を1 回以上行わなければなりません。すなわち、max(k, n −k) 文
+
+字以下の連続する部分を書き換えるような操作が必要となります。
+
+  S の、k 文字目とk + 1 文字目が異なるような箇所のうちの、max(k, n −k) の最小値をT(S) とします。
+
+K ≥T(S) のとき、T の値の最小値をとるk をとり、k = max(k, n −k) なら最初k 文字を、そうでないな
+
+ら最後n −k 文字を書きかえれば、連続する文字が異なるような箇所の個数を、T(S) を減らさずに1 減らす
+
+ことができます。また、T(S) = 0 のとき、もし全文字が0 ならこれが目的の文字列であり、そうでないなら
+
+全体に対して操作を行えば目的の文字列を作ることができます。
+
+ よって答えは最初の文字列S におけるT(S) の値で、これはO(n) 時間で求められます。
+
+
+                                             2
+
+E: Papple Sort
+
+ まず、奇数回しか出てこない文字が2 つ以上ある場合、回文を作ることはできません。以下、それ以外の場
+
+合を考えます。
+
+ 最終的に(最小の交換回数で) 作る回文をT とし、S で添え字i の文字がT では添え字pi となるとします。
+
+ 同じ文字同士を入れ替えるのは無意味なので、各文字に対してその文字の出現回数を求めれば、文字列中の
+
+すべての添え字の(|S| 個の) 文字に対し、その文字が最終的にT の左半分に属するか、ちょうど真ん中の文
+
+字となるか、右半分に属するかは一意に定めることができます。
+
+ 上述の3 つの添え字集合をそれぞれA, B, C とします。A の添え字の文字を順序を保ったまま左半分に、
+
+B の添え字の文字を真ん中に、C の添え字の文字を順序を保ったまま右半分に移動して作った文字列をX と
+
+します。このとき、これら3 種類の添え字の文字同士のswap が起こりますが、T に関する上述の条件より、
+
+i < j かつpi > pj となるような文字Si, Sj のswap のみが起こることがわかります。よって(バブルソート
+の交換回数とはそのような添え字(i, j) の組の個数に他ならないので) S からT への変換での交換回数は、S
+
+からX への変換での交換回数とX からT への変換での交換回数の合計と等しくなることが分かります。
+
+ さて、X からT に変換するとき、A 内の要素同士、またはC 内の要素同士のswap のみが起こります。も
+
+しA 内の要素同士のswap が起きる場合、その代わりにC 内での対応する要素同士をswap することにして
+
+も、最終的な文字列が回文になるという条件は依然満たされます。よって、A 内の要素同士はswap しないと
+
+して問題ありません。
+
+ A 内の要素の順番が定まればC 内の要素の順番も定まるので、結局pi の値がすべてのi に対して一意に
+定められたことになります。あとは、順列p のバブルソートの交換回数を、BIT などを用いて数えてやれば
+
+よいです。時間計算量はO(|S| log |S|) です。
+
+
+F: Christmas Tree
+
+ この問題は、以下の条件を満たす辞書順最小の(A, B) を求める問題だと言い換えることができます。
+
+    • 木の辺たちをA 色で塗り分ける。このとき、同じ色が塗られた辺の集合は、長さB 以下のパスをなし
+
+   ている必要がある。
+
+ まず、A の最小値を求めましょう。次数奇数の頂点に対し、その点を端点とするようなパスが1 つ以上必
+
+要です。逆に、次数奇数の頂点間のパスをとって取り除いていくことを考えれば、次数奇数の頂点の個数の半
+
+分の個数のパスがあれば十分であることもわかります。よって、A の最小値は、次数奇数の頂点の個数の半分
+
+です。
+
+ B の最小値を求めるために、二分探索を考えましょう。B の値を固定し、そのような塗りわけが存在する
+
+かどうかを求めるDP を考えましょう。
+
+ まず、次数1 の頂点を根として入力の木を根付き木にします。便宜上、根からも上向きに辺が出ているもの
+
+として扱います。各頂点v に対し、DP[v] を、v を根とする部分木に属するパスの長さがすべてB 以下とな
+
+るように塗り分けるときの、v から親方向にのびるパスの長さの最小値とします。
+
+ このDP 値はどのように求めればよいでしょうか。v の子をu1, ..., uk とし、DP[ui] の小さい順に並べ替
+え、改めて添え字を(u1, ..., uk と) つけなおしておきます。条件より、
+
+
+                                             3
+
+    • k が奇数のとき、ui たちから親方向に伸びるパスからペアをk−12 個作ってつなぎ合わせ、残ったパス
+   をv から親方向に伸ばすことにする
+    • k が偶数の時、ui たちから親方向に伸びるパスからからペアをk2 個作ってつなぎ合わせ、v から新し
+   いパスを親方向に伸ばすことにする、またはペアをk                                                              2 −1 個作ってつなぎ合わせ、残った2 本のパス
+   のうち1 本の端点をv にし、もう1 本のパスをv から親方向に伸ばすことにする
+
+ する必要があります。
+
+ パスたちをペアにするときは、各ペアについてその合計長さがB を超えないようにする必要があります。
+
+すなわち、合計の長さの最大値を最小にするようなペアの組み方を考え、そのときの最大長がB 以下かどう
+
+か判定すればよいです。このとき、greedy な考察により、2m 本のパスをm 個のペアに分けるとき、すべて
+
+のx に対し、x 番目に長いパスとx 番目に短いパスを組み合わせるのが最適であることがわかるので、この
+
+判定はO(m) 時間で行うことができます。
+
+ 上の場合分けでの前者の場合、1 本のパスを選んで取り除いた後に、パスをペアにしていく必要がありま
+
+す。取り除くパスは、DP 値の定義より、なるべく短いものを選びたいです。これは、「どのパスを取り除く
+
+べきか」で二分探索を行うことで最適化することができます。
+
+ 後者の場合、ペアをk                         2 個作る場合は上述のアルゴリズムが動作します。そうでない場合、端点をv にする
+パスは最も長いパスを選ぶのが良いです。このように選べば、あとはk が奇数の場合と同じ問題に帰着され
+
+ます。
+
+ 以上より、子をk 個もつ頂点でのDP 値の更新がO(k log k) 時間でできることが分かりました。最後に、
+
+(次数1 の頂点を根に選んだことに注意すれば) 根から親方向に伸びるパスの長さを評価することで外側の二
+分探索の評価関数が正しく動作し、よって全体でO(N log2 N) 時間でこの問題を解くことができました。
+
+
+
+
+
+                                             4
+
+           ARC 088/ABC 083 Editorial
+
+
+                            DEGwer
+
+                                  2017/12/23
+
+
+
+A: Libra
+
+
+#include <stdio . h>
+
+ int main ()
+
+{
+
+          int  a , b ,  c , d ;
+
+         scanf (”%d%d%d%d” , &a , &b , &c , &d ) ;
+
+                  i f  ( a + b > c + d) p r i n t f (” Left \n ” ) ;
+
+           e l s e    i f  ( a + b == c + d) p r i n t f (” Balanced\n ” ) ;
+
+           e l s e  p r i n t f (” Right\n ” ) ;
+
+}
+
+
+
+
+
+                                             1
+
+B: Some Sums
+
+
+#include <stdio . h>
+
+ int main ()
+
+{
+
+          int n ,  a , b ;
+
+         scanf (”%d%d%d” , &n , &a , &b ) ;
+
+          int  r = 0;
+
+           fo r  ( int   i = 1;   i <= n ;  i++)
+
+          {
+
+                    int  c = 0 ,  t =  i ;
+
+                     fo r  ( int   j = 0;   j < 5;  j++)c +=  t % 10 ,  t /= 10;
+
+                                    i f  ( a <= c&&c <= b) r +=  i ;
+
+          }
+
+         p r i n t f (”%d\n” ,  r ) ;
+
+}
+
+
+
+
+
+                                             2
+
+C: Multiple Gift
+
+  Let A1, ..., A|A| be the sequence. X ≤A1 must be satisﬁed, and for each i, 2Ai ≤Ai+1 must be
+satisﬁed. Thus, we get Ai ≥X × 2i−1.
+  Therefore, the maximum length can be achieved when Ai = X × 2i−1. (For all i, the lower bound of
+Ai is achieved by this sequence.)
+  This solution works in O(log BA) time.
+
+D: Wide Flip
+
+  Let n be the length of the string.
+
+   If the k-th and the k +1-th (1-based) characters of the string are diﬀerent, in order to achieve the goal,
+
+we must perform at least one operation that ﬂips exactly one of the two characters. In this operation,
+
+we ﬂip at most max(k, n −k) consecutive characters.
+
+  Let T(S) be the minimum vaule of max(k, n −k) such that the k-th and the k + 1-th characters of S
+
+are diﬀerent. As we see above, K must be at most T(S).
+
+ On the other hand, we can prove that when K = T(S), we can achieve the goal.
+
+    • If i <= N −K, we can ﬂip a single character Si by ﬂipping [i, N] and [i + 1, N].
+    • Similarly, if i > K, we can ﬂip a single character Si.
+    • By the deﬁnition of T(S), all characters between the N −K + 1-th and the K-th are the same.
+
+  Thus, by repeating the ﬁrst two types of operations, we can make all characters equal, and (possibly
+
+by performing the third operation once) we can achieve the goal.
+
+  Therefore, the answer is T(S), and it can be computed in O(n) time.
+
+
+
+
+
+                                             3
+
+E: Papple Sort
+
+   If two or more letters appear odd number of times, we can’t make a palindrome. For simplicity, suppose
+
+that each letter appears even number of times (when a letter appears odd number of times, we know
+
+which letter will go to the center of the ﬁnal string, and the solution doesn’t change a lot.)
+
+  Let n be the length of the string. Let T be the ﬁnal palindrome we make (by performing the minimum
+
+possible number of operations), and let Tpi be the destination of Si.
+  Consider a particular letter c, and suppose that it appears as i1-th, i2-th, . . ., i2k-th letters of S. Since
+
+it makes no sense to swap the same letters, the relative positions of these letters won’t change. Thus,
+
+we know that i1 and i2k will be paired in T (i.e., pi1 + pi2k = N + 1), i2 and i2k−1 will be paired, and so
+on. Therefore, we know which characters will be paired in T, and we can assume that S contains N/2
+
+diﬀerent types of characters, and each character appears exactly twice.
+
+  Now, consider two particular types of letters in S (call it ’A’, ’B’).
+
+  There are six possibilities for their relative positions. For example, they can appear as
+
+  ...A...A...B...B...
+
+   If the pair of A becomes ”outer” pair and the pair of B becomes ”inner” pair in T, we need two swaps
+
+among these characters.  If the pair of B becomes ”outer” pair and the pair of A becomes ”inner” pair
+
+in T, we need two swaps among these characters. Thus, it doesn’t matter.
+
+ By similar observations, it turns out that when they appear as
+
+  ...A...B...B...A...
+
+ A should be ”outer” and B should be ”inner”, and if they appear as
+
+  ...B...A...A...B...
+
+ B should be ”outer” and A should be ”inner”. In other cases it doesn’t matter.
+
+  Thus, when we sort the pairs, we should make sure that these properties hold. For example, when we
+
+compare two pairs at positions (l1, r1) and (l2, r2), we make (l1, r1) ”outer” if l1 < l2.
+  Now, we know which characters in A will go to which position in T  (i.e. we know the values of pi),
+and we can compute the inversion number in O(|S| log |S|).
+
+
+
+
+
+                                             4
+
+F: Christmas Tree
+
+ We want to paint the edges of the tree using A colors. The set of edges of a speciﬁc color must form
+
+a path of length at most B.
+
+ What is the minimum possible value of A? Suppose that the tree has O vertices with odd degree.
+
+Since an odd vertex must be an endpoint of at least one path, we need at least O/2 paths. On the other
+
+hand, by repeatedly removing a path that connects two odd vertices, we can achieve A = O/2.
+
+  Now, we want to minimize B under the condition that A = O/2. Let’s do a binary search on B. Now
+
+we want to check if a valid coloring exists for a ﬁxed B.
+
+  Choose an arbitrary leaf of the tree, and make it the root. For convenience, we attach an edge to the
+
+root (an edge between the root and ”the root’s parent”).
+
+  Let’s deﬁne DP[v] as follows. Consider a subtree rooted at v, plus an edge between v and v’s parent
+
+(we call it ev). We want to color each edge inside this subtree, such that
+
+    • The length of each color must be at most B (of course, each color must form a path).
+
+    • We should minimize the number of paths: each odd vertex is an endpoint of exactly one path, and
+
+      each even vertex is an endpoint of no path.
+
+    • Under these conditions, we want to minimize the length of the color that contains ev. Let DP[v]
+
+     be this length.
+
+ How do we compute DP[v]?  Suppose that a vertex v has k children u1, ..., uk, and assume that
+DP[u1] ≤DP[u2] ≤....
+   If k is odd, we need to make k−12  pairs among the children, and pair the only remaining child (call it
+ur) with ev. Obviously, we want to minimize r. Let’s do a binary search again on r. For a ﬁxed r, we
+want to check if the values DP[u1], . . . , DP[ur−1], DP[ur+1], . . . , DP[uk] can be divided into pairs whose
+
+sums are at most B. This can be done greedily by pairing the x-th largest value and the x-th smallest
+
+value. Then, DP[v] = DP[ur] + 1.
+   If k is even, add an imaginary child u0 such that DP[u0] = 0, and it reduces to the case with odd k.
+   If we don’t get contradictions and dp[root] ≤B + 1, the chosen value of B is valid.
+
+  Since we need O(k log k) time to handle a vertex with k children, we need O(N log N) per step, and
+in total this solution works in O(N log2 N) time.
+
+
+
+
+
+                                             5

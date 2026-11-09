@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc360_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc360/editorial/10319",
+      "text": "すべての箱に荷物が\n\\(1\\)\n個ずつある状態にするには、少なくとも\n\\(2\\)\n個以上荷物があるすべての箱について、箱に荷物を\n\\(1\\)\n個だけ残してそれ以外の荷物を移動させる必要があります。\n\\(2\\)\n個以上の荷物がある箱\n\\(i\\)\nに入っている\n\\(k(2\\leq k)\\)\n個の荷物の重さを\n\\(w_1,\\ldots,w_{k}\\)\nとすると、移動させる必要のある荷物の重さの最小値は、\n\\(\\sum_{i=1}^{k}w_i - max(w)\\)\nです。\nつまり、すべての箱に荷物が\n\\(1\\)\n個ずつある状態にするには\n\\(2\\)\n個以上の荷物がある箱について、この値の総和がかかるコストとしてありえる最小値となります。\nまた、この最小値を達成することができます。荷物も箱も互いに\n\\(N\\)\n個ずつあるため、移動させる必要がある荷物の個数は何も入っていない箱の個数と一致します。そのため、移動させる荷物を任意の何も入っていない箱に入れることですべての箱に荷物が\n\\(1\\)\nつずつ入っている状態にすることができます。\n実際に実装する際には、各箱に入っている荷物の重さの最大値を管理し、それらの総和をを\n\\(N\\)\n個の荷物の重さの総和から引くことで答えを求めることができます。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n), w(n);\n    vector<int> max_weight(n);\n    for (int i = 0; i < n; ++i)\n        cin >> a[i];\n    for (int i = 0; i < n; ++i)\n        cin >> w[i];\n\n    for (int i = 0; i < n; ++i){\n        a[i]--;\n        max_weight[a[i]]=max(max_weight[a[i]],w[i]);\n    }\n\n    const int sum_w=accumulate(w.begin(),w.end(),0);\n    const int sum_max=accumulate(max_weight.begin(),max_weight.end(),0);\n    cout << sum_w-sum_max << endl;\n}"
+      ],
+      "text_sha256": "0e9b5c7f90feb74a3b6108b94b6681f4a6af6b5560a7d1a60acdc452dbd460dc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc360/abc360_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

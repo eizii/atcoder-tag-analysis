@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc245_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc245/editorial/3650",
+      "text": "\\(A\\)\n時\n\\(B\\)\n分と\n\\(C\\)\n時\n\\(D\\)\n分を比較して、\n\\(C\\)\n時\n\\(D\\)\n分の方が早いならば\nAoki\nを、そうでない、すなわち等しいまたは\n\\(A\\)\n時\n\\(B\\)\n分の方が早いならば\nTakahashi\nを出力すればよいです。基準として、「時」の方が「分」より上位であることに注意して次のように分岐を行えばよいです。\n\\(A<C\\)\nのとき、\nTakahashi\nを出力する。\n\\(A>C\\)\nのとき、\nAoki\nを出力する。\n\\(A=C\\)\nのとき、\n\\(B\\leq D\\)\nならば\nTakahashi\nを、\n\\(B>D\\)\nならば\nAoki\nを出力する。\nc++による実装例:\nPythonによる実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint a, b, c, d;\n\tcin >> a >> b >> c >> d;\n\tif (a < c)cout << \"Takahashi\" << endl;\n\telse if (a > c)cout << \"Aoki\" << endl;\n\telse {\n\t\tif (b <= d)cout << \"Takahashi\" << endl;\n\t\telse cout << \"Aoki\" << endl;\n\t}\n\treturn 0;\n}",
+        "a,b,c,d= map(int, input().split())\nif a < c: \n    print(\"Takahashi\")\nelif a > c:\n\tprint(\"Aoki\")\nelse:\n    if b <= d:\n        print(\"Takahashi\")\n    else:\n        print(\"Aoki\")"
+      ],
+      "text_sha256": "9b919941f5d8e4783d42a4b94c6eb0c47a557184fbce5a11e825884d61768eb6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc245/abc245_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc245/editorial/3681",
+      "text": "\\(X\\)\n時\n\\(Y\\)\n分は\n\\(0\\)\n時\n\\(0\\)\n分から\n\\(60X+Y\\)\n分経過しているので、\n\\(P=60A+B,Q=60C+D\\)\nとして\n\\(P,Q\\)\nの大小を比較する方針を取ると場合分けが少なく済みます。",
+      "codes": [],
+      "text_sha256": "ced54e7494ac79c6dfde8aeaa1b9ce60b28a96dbea5b948e5b2ab00fc2a3961d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc245/abc245_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

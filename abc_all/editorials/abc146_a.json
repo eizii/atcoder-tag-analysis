@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc146_a",
+  "editorials": [
+    {
+      "text": "A: Can’t wait for holiday\n与えられた文字列がどの曜日に対応するものであるか調べて分岐し、答えを出力します。\nC++ での実装例は次のとおりです。\n1 #include <iostream>\n2 using namespace std;\n3 int main(){\n4\nstring s;\n5\ncin >> s;\n6\nint ans;\n7\nif(s == \"SUN\")ans = 7;\n8\nelse if(s == \"MON\")ans = 6;\n9\nelse if(s == \"TUE\")ans = 5;\n10\nelse if(s == \"WED\")ans = 4;\n11\nelse if(s == \"THU\")ans = 3;\n12\nelse if(s == \"FRI\")ans = 2;\n13\nelse if(s == \"SAT\")ans = 1;\n14\ncout << ans << endl;\n15 }\n",
+      "text_sha256": "92abb768b63482ef19f0e537c11bb1d581978cb33bb35e51ef7c6da80219fffb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc146/abc146_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

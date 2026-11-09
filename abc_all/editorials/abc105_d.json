@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc105_d",
+  "editorials": [
+    {
+      "text": "D: Candy Distribution\n数列A に対し、A の先頭i 項の和をBi とします。なお、便宜上B0 = 0 としておきます。\nいま、Al +...+Ar = Br −Bl−1 であり、Al +...+Ar がM の倍数であることはBr, Bl−1 をM で割った\nあまりが等しいことと同値です。よって、数えるべきは、Bi, Bj がmod M で等しいような0 ≤i < j ≤N\nの組の個数です。\nこれは、各x = 0, ..., M −1 について、Bi をM で割ったあまりがx であるようなi の個数を求めておく\nことで計算可能です。M は大きいので長さM の配列を持つことはできませんが、平衡二分木(C++ なら\nstd::map) やハッシュマップ(C++ ならstd::unordered map) を用いることで「Bi をM で割ったあまりが\nx であるようなi が存在するようなx」についてのみ値を持っておくことができます。この工夫を用いれば計\n算量が(O(N log N) や乱択O(N) 時間に) 改善でき、この問題を解くことができます。\n",
+      "text_sha256": "191cc3418aaf2a8136fb10a7c8b6423e3dc74910674a23139b72a2059745615b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc105/abc105_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc276_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc276/editorial/5158",
+      "text": "\\(S\\)\nの文字数を\n\\(n\\)\nとします。この問題は、次のような一連の処理を実現できれば解くことができます。\n\\(S\\)\nの\n\\(n\\)\n文字目が\na\nなら、\n\\(n\\)\nを出力して実行を終了する。\n次に、\n\\(S\\)\nの\n\\(n - 1\\)\n文字目が\na\nなら\n\\(n - 1\\)\nを出力して実行を終了する。\n次に、\n\\(S\\)\nの\n\\(n - 2\\)\n文字目が\na\nなら\n\\(n - 2\\)\nを出力して実行を終了する。\n次に、\n\\(S\\)\nの\n\\(n - 3\\)\n文字目が\na\nなら\n\\(n - 3\\)\nを出力して実行を終了する。\n\\(\\qquad \\vdots\\)\n次に、\n\\(S\\)\nの\n\\(1\\)\n文字目が\na\nなら\n\\(1\\)\nを出力して実行を終了する。\n最後に、ここまでで\na\nが見つかっていなければ、\n\\(-1\\)\nを出力して実行を終了する。\nこれら一つ一つの処理は、if 文を用いて実装することができます。しかし、この問題では\n\\(n\\)\nが最大で\n\\(100\\)\nになるので、このままだと\n\\(100\\)\n個もの if 文を書くことになってしまいます。\nそこで、これらの処理が、ほとんど同じ形をしていることに注目します。実際、最後の処理を除いて「\n\\(S\\)\nの\n\\(i\\)\n文字目が\na\nなら\n\\(i\\)\nを出力して実行を終了する」という形になっており、これを\n\\(i = n, n - 1, \\dots, 1\\)\nの順に行えばよいということがわかります。\nこのようなときに役立つのが\nループ\nであり、for 文や while 文などを用いて実装することができます。例えば、C++ での実装例は次のようになります。\nプログラム内における添字は 0-indexed なので、\n\\(S\\)\nの\n\\(i\\)\n文字目はプログラム内では\ns[i - 1]\nのようになることに注意してください。\nまた、補足ですが、\nreturn 0;\nという文は「\nmain\n関数の実行を終了する」ことを表すため、これを用いて「\n\\(i\\)\nを出力して実行を終了する」という処理を実現しています。\nなお、Python における実装例は次のようになります。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    int n = size(s);\n    for (int i = n; i >= 1; i -= 1) {\n        if (s[i - 1] == 'a') {\n            cout << i << '\\n';\n            return 0;\n        }\n    }\n    cout << -1 << '\\n';\n    return 0;\n}",
+        "def main():\n  s = input()\n  n = len(s)\n  for i in range(n, 0, -1):\n    if s[i - 1] == 'a':\n      print(i)\n      return\n  print(-1)\n\nmain()"
+      ],
+      "text_sha256": "e8e899842fdfb20f32d5cd38adc69c49029309db217c55607476b0010d4d4292",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc276/abc276_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc276/editorial/16470",
+      "text": "rfind\n関数を用いても実装することができます．",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  string s;\n  cin>>s;\n  auto x=s.rfind('a');\n  if(x!=string::npos)cout<<x+1<<endl;\n  else{\n    cout<<-1<<endl;\n  }\n}"
+      ],
+      "text_sha256": "3462c7139c2659e9990a713ce4f228a96874044034d1bf0dccd6daaeb9a03149",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc276/abc276_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

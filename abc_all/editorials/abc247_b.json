@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc247_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc247/editorial/3734",
+      "text": "まずは「人\n\\(i\\)\nにあだ名をつけることが可能か？」を判定する方法を考えてみましょう。\n人\n\\(i\\)\nにつけられるあだ名\n\\(a_i\\)\nの条件は次の\n\\(2\\)\nつです。\n\\(a_i = s_i\\)\nまたは\n\\(a_i = t_i\\)\nが成り立つ。\n\\(1 \\leq j \\leq N, i \\neq j\\)\nを満たすすべての整数\n\\(j\\)\nについて\n\\(a_i \\neq s_j\\)\nかつ\n\\(a_i \\neq t_j\\)\nが成り立つ。\n\\(1\\)\nつ目の条件から、\n\\(a_i\\)\nとしてあり得るのは\n\\(s_i\\)\nまたは\n\\(t_i\\)\nのいずれかに限られます。よって、\n\\(s_i\\)\nまたは\n\\(t_i\\)\nの少なくとも一方が\n\\(2\\)\nつ目の条件を満たせば、人\n\\(i\\)\nにあだ名をつけられることになります。\n文字列\n\\(S\\)\nが人\n\\(i\\)\nのあだ名として条件を満たすかどうかは、\n\\(j\\)\nを for-loop で走査して\n\\(s_j,t_j\\)\nと一致するものが存在するかを調べれば\n\\(\\mathrm{O}(N |s_i|)\\)\nで判定できます。 (\n\\(|S|\\)\nは文字列\n\\(S\\)\nの長さの意味。)\n以上のアルゴリズムを実装すれば、「人\n\\(i\\)\nにあだ名をつけることが可能かどうか？」を判定できます。これを人\n\\(1\\)\n、人\n\\(2\\)\n,\n\\(\\dots\\)\n, 人\n\\(N\\)\nすべての人に対して行えば、すべての人にあだ名をつけられるかを判定することができます。\n計算量は\n\\(\\mathrm{O} \\left(N^2 (\\max(|s_i|)+\\max(|t_i|)) \\right)\\)\nです。Python による実装例は次の通りです。",
+      "codes": [
+        "N = int(input())\ns, t = [], []\nfor i in range(N):\n  u, v = input().split()\n  s.append(u)\n  t.append(v)\n\nfor i in range(N):\n  can_give_a_nickname = False\n  for S in [s[i], t[i]]:\n    s_ok = True\n    for j in range(N):\n      if i != j:\n        if S == s[j] or S == t[j]:\n          s_ok = False\n    if s_ok == True:\n      can_give_a_nickname = True\n  if can_give_a_nickname == False:\n    print(\"No\")\n    exit()\n\nprint(\"Yes\")"
+      ],
+      "text_sha256": "d76cde657f003b8222601be4fe3bac23d1b6aa93ac4d827f40575e6e96d48e94",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc247/abc247_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc073_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc073/editorial.pdf",
+      "text": "A:  September 9\n\n 　整数N は二桁なので、N の十の位と一の位の少なくとも一方が9 であるとき「Yes」、\nそうでないとき「No」を出力すればよい。\n\n\n#include <cstdio >\nint N;\nint main ()\n{\n        scanf(\"%d\" ,&N);\n        if(N%10==9||N/10==9) puts(\"Yes\");\n         else puts(\"No\");\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "75ab2bdab14054eb9266535a355130ed942251b5b4f7f50fa122f678a7307845"
+    }
+  ],
+  "status": "available"
+}

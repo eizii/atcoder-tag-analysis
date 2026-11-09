@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc320_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc320/editorial/7157",
+      "text": "\\(A^B\\)\nと\n\\(B^A\\)\nの値をそれぞれ求め、足し合わせればよいです。\n\\(A^B\\)\nの値は for 文を用いて\n\\(1\\)\nに\n\\(A\\)\nをかける操作を\n\\(B\\)\n回行うなどの方法で求めることができます。\n\\(B^A\\)\nについても同様です。\n実装例",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n\tint a, b;\n\tcin >> a >> b;\n\tint x = 1, y = 1;\n\tfor (int _ = 0; _ < b; _++) x *= a;\n\tfor (int _ = 0; _ < a; _++) y *= b;\n\tcout << x + y << '\\n';\n}"
+      ],
+      "text_sha256": "9626067f947f27d6edf3b5a5faa7a78d29c0d2195c542fdf42180dfc5e663009",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc320/abc320_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

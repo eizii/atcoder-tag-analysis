@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc064_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc064/editorial.pdf",
+      "text": "C : Boxes and Candies\n\n 各1 ≤i ≤N −1 についてai + ai+1 ≤x となるように，a の各要素を(非負整数の範囲で) 減らしていき\nます．最後に，元のa と比べることで操作回数が分かります．この操作回数を最小化することを目指します．\n\n まず，a1 > x ならばa1 = x としておきます．次に，i = 1, 2, ..., N −1 の順にai + ai+1 ≤x を成立させ\nていきます．とりあえず，最初からai + ai+1 ≤x ならば何もする必要はありません．ai + ai+1 > x ならば，\nai + ai+1 = x となるまでai とai+1 を減らさなければなりませんが，このときai+1 だけを減らすのが最適\nであることが分かります．なぜならば，これから各j > i についてaj + aj+1 ≤x を成立させていくときに，\nai+1 が小さいほど操作回数が少なくなることが期待できるからです．\n\n 以上の貪欲法により正しく答えを求めることができます．なお，オーバーフローに注意してください．\n\n\n                                             1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "0bcd2a1b7bdf383af5c670ff24bc66808475b6511b0393f03ae1d1a7b3bfd76b"
+    }
+  ],
+  "status": "available"
+}

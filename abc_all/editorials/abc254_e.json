@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc254_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc254/editorial/4052",
+      "text": "\\(\\mathrm O (MQ)\\)\n解法\nクエリごとに幅優先探索(BFS)を行って頂点\n\\(x_i\\)\nから各頂点までの距離を求め、距離が\n\\(k_i\\)\n以下の頂点の番号の総和を求めれば答え自体は正しく求められます。しかし、BFS\n\\(1\\)\n回につき\n\\(\\mathrm O(M)\\)\nであるため、全体で\n\\(\\mathrm O (MQ)\\)\nとなり遅すぎます。\n条件を満たす頂点についての考察\n以下のように計算をすると、頂点\n\\(x_i\\)\nからの距離が\n\\(k_i(\\leq 3)\\)\n以下である頂点の個数は少ないことが分かります。\n距離が\n\\(0\\)\nの頂点は頂点\n\\(x_i\\)\nのみ\n距離が\n\\(1\\)\nの頂点は頂点\n\\(x_i\\)\nに隣接する頂点。次数が\n\\(3\\)\n以下なので高々\n\\(3\\)\n個。\n距離が\n\\(2\\)\nの頂点は距離が\n\\(1\\)\nの頂点に隣接する頂点(の一部)。距離が\n\\(1\\)\nの頂点が\n\\(3\\)\n個、次数が\n\\(3\\)\n以下なので高々\n\\(3 \\times 3 = 9\\)\n個。\n距離が\n\\(3\\)\nの頂点は距離が\n\\(2\\)\nの頂点に隣接する頂点(の一部)。距離が\n\\(2\\)\nの頂点が\n\\(9\\)\n個、次数が\n\\(3\\)\n以下なので高々\n\\(9 \\times 3 = 27\\)\n個。\n以上を合計すると\n\\(40\\)\n個\nなお、次数が\n\\(3\\)\n以下ということから距離が\n\\(k\\)\nの頂点の個数を距離が\n\\(k-1\\)\nの頂点の個数の\n\\(3\\)\n倍以下としていますが、距離が\n\\(2\\)\n以上の頂点に関しては\n\\(3\\)\n本の辺のうち少なくとも\n\\(1\\)\n本は距離がより短い頂点から来るのに使われるため\n\\(2\\)\n倍以下と評価することもできます。\nいずれにせよ、条件を満たす頂点のみを列挙して番号の総和を求める分には\n\\(Q\\)\n回繰り返してもTLEの心配がありません。\nBFS・DFSで条件を満たす頂点を列挙\n以上より、BFSを距離が\n\\(k_i\\)\n以下の部分のみ行う、つまり距離が\n\\(k_i\\)\nの頂点まで調べたらそれ以上調べないことにすれば本問題を解くことが出来ます。詳しくは実装例を参考にしてください。(距離配列の一部のみを使うために訪れた頂点をvsとして記録する等していますが、setやmapを使う方が簡便かもしれません)\nまた、上述の評価を考えると深さ優先探索(DFS)でも十分高速です。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N,M;\n\tcin>>N>>M;\n\tvector<vector<int>> E(N);\n\tfor(int i=0;i<M;i++){\n\t\tint a,b;\n\t\tcin>>a>>b;\n\t\ta--,b--;\n\t\tE[a].push_back(b);\n\t\tE[b].push_back(a);\n\t}\n\t\n\tvector<int> dis(N,-1);\n\t\n\tint Q;\n\tcin>>Q;\n\t\n\tfor(int i=0;i<Q;i++){\n\t\tint x,k;\n\t\tcin>>x>>k;\n\t\tx--;\n\t\tqueue<int> q;\n\t\tq.push(x);\n\t\tdis[x] = 0;\n\t\tvector<int> vs;\n\t\twhile(q.size()>0){\n\t\t\tint u = q.front();\n\t\t\tq.pop();\n\t\t\tvs.push_back(u);\n\t\t\tif(dis[u]==k){\n\t\t\t\tcontinue;\n\t\t\t}\n\t\t\tfor(int j=0;j<E[u].size();j++){\n\t\t\t\tint v = E[u][j];\n\t\t\t\tif(dis[v]!=-1)continue;\n\t\t\t\tdis[v] = dis[u] + 1;\n\t\t\t\tq.push(v);\n\t\t\t}\n\t\t}\n\t\tint ans = 0;\n\t\tfor(int j=0;j<vs.size();j++){\n\t\t\tans += vs[j]+1;\n\t\t\tdis[vs[j]] = -1;\n\t\t}\n\t\tcout<<ans<<endl;\n\t}\n\t\n    return 0;\n}"
+      ],
+      "text_sha256": "155a3a089deaade4688239edaa6981ee64a1981dc1d099a6c835e9ca035c2d69",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc254/abc254_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

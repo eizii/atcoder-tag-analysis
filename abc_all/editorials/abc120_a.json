@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc120_a",
+  "editorials": [
+    {
+      "text": "A: Favorite Sound\n最大C 回まで聞けるといった制約が無い場合、答えはB\nA の小数点以下切り捨てになります。従って、最大\nC 回の制約がある場合、この値とC の小さい方が答えになります。以下にC++ による回答例を示します。\n#include <bits/stdc ++.h>\nusing\nnamespace\nstd;\nint main () {\nint A, B, C; cin >> A >> B >> C;\nint ans = min(B / A, C);\ncout << ans << endl;\n}\n",
+      "text_sha256": "bfa2d71d30fd4ceb9ce02af5d9e2597d8003cef296c1e09122060eb7b64a7818",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc120/abc120_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

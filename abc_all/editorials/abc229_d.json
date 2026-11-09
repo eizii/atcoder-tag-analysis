@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc229_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc229/editorial/2956",
+      "text": "この問題は尺取り法というアルゴリズムを用いて解くことができます。\n尺取り法とは端的に言うと、区間の左端と右端を尺取り虫のように動かすことで、条件を満たす区間を高速に見つける、というアルゴリズムです。\n擬似コードで書くと以下のようになります。\nなお、擬似コード\n\\(3\\)\n行目の\n\\(S[l,r+1)\\)\nをすべて\nX\nに変えることが可能か？\n\\(\\cdots(*)\\)\nの判定は、ある程度高速に行う必要があります。\nたとえば、前計算として\n.\nの数の累積和を求めておくと、\n\\((*)\\)\nは\n\\(O(1)\\)\nで判定することができます。\n全体の計算量は\n\\(O(|S|)\\)\nです。\nC++ による実装例",
+      "codes": [
+        "r=0, ans=0\nfor l = 0 to |S| - 1\n    while S[l,r+1)をすべて 'X' に変えることが可能\n        r = r + 1\n    ans = max(ans, r - l)",
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nsigned main(){\n    string s;cin>>s;\n    ll k;cin>>k;\n    ll n=s.size();\n\n    vector<ll>cnt(n+1); //累積和\n    for(ll i=0;i<=n-1;i++){\n        if(s[i]=='.')cnt[i+1] = cnt[i] + 1;\n        else cnt[i+1] = cnt[i];\n    }// cnt[r] - cnt[l] で s[l,r) の '.' の数を表す\n\n    ll ans = 0;\n    ll r = 0;\n    for(ll l=0;l<=n-1;l++){\n        while(r<=n-1 && cnt[r+1]-cnt[l] <= k){\n            r = r+1;\n        }\n        ans = max(ans,r-l);\n    }\n    cout<<ans<<endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "3b220c2e6518415e89d96026c83b915ff5224c7b6f71ed3c380916dd495e7994",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc229/abc229_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

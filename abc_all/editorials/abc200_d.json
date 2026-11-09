@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc200_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc200/editorial/1246",
+      "text": "実は、数列\n\\(B\\)\n(または\n\\(C\\)\n)の候補を\n\\(201\\)\n通り探索すれば、その中で必ず条件を満たす数列の組を見つけることができます。\n\\(X+1\\)\n羽の鳩を\n\\(X\\)\n個の鳥かごに入れるとき、\n\\(2\\)\n羽以上の鳩が入った鳥かごが少なくとも\n\\(1\\)\nつ以上存在する\nこれは、「鳩ノ巣原理」と呼ばれます。今回の問題では、\n\\(201\\)\n個の数列を、含まれる要素の総和を\n\\(200\\)\nで割った余りという\n\\(200\\)\n個のグループに分けるとき、\n\\(2\\)\n個以上の数列を含んだグループが少なくとも\n\\(1\\)\nつ以上存在する\nと言い換えられます。\n数列の候補は全部で\n\\(2^N-1\\)\n通りあるので、\n\\(N \\ge 8\\)\nのケースについては、必ず答えが存在することが分かります。\nでは、どのようにして数列を\n\\(201\\)\n通り探索すればよいでしょうか。\n例えば、数列のうち先頭の\n\\(\\min(N,8)\\)\n要素を取り出して、その中で数列の候補をbit全探索するという方法があります。\n\\(N \\le 8\\)\nの場合は通常の全探索と変わらないので正しく動作します。\n\\(N \\ge 9\\)\nの場合でも、\n\\(8\\)\n要素の中での数列の候補は\n\\(255\\)\n通りあるので、答えを\n\\(1\\)\n組見つけるには十分です。\nこのbit全探索は、定数時間で動作します。\nC++による実装例:\n例えば、以下のケースで、答えが\nNo\nとなります。",
+      "codes": [
+        "#include<bits/stdc++.h>\n \nusing namespace std;\n \nvoid output(vector<int> &a){\n  cout << a.size();\n  for(auto &nx : a){\n    cout << ' ' << nx;\n  }\n  cout << '\\n';\n}\n \nint main(){\n  int n;\n  cin >> n;\n  vector<int> a(n);\n  for(auto &nx : a){cin >> nx;}\n  vector<vector<int>> bk(200,vector<int>(0));\n\n  int cnt=min(n,8);\n  for(int i=1;i<(1<<cnt);i++){\n    int sig=0;\n    vector<int> s;\n    for(int j=0;j<cnt;j++){\n      if(i&(1<<j)){\n        s.push_back(j+1);\n        sig+=a[j];sig%=200;\n      }\n    }\n    if(bk[sig].size()!=0){\n      cout << \"Yes\\n\";\n      output(bk[sig]);\n      output(s);\n      return 0;\n    }\n    else{bk[sig]=s;}\n  }\n  cout << \"No\\n\";\n  return 0;\n}",
+        "7\n1 2 4 8 16 32 64"
+      ],
+      "text_sha256": "dbcd58a1ed91698363c1ab6854e86b8188b8c20277598c8c33ea1da7f66b4379",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc200/abc200_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc200/editorial/1559",
+      "text": "\\(dp_k (0 \\le k \\lt 200)\\)\nを各要素の合計を\n\\(200\\)\nで割った余りが\n\\(k\\)\nとなる数列と定義します。\n初期状態では\n\\(dp_k = ∅\\)\nです。\n\\(A\\)\nの各要素\n\\(A_i (1 \\le i \\le N)\\)\nで次の判定をしながら順に見ていきます。\n\\(A_i\\)\nを\n\\(200\\)\nで割った余りを\n\\(r\\)\nとします。\n\\(dp_r \\ne ∅\\)\nの場合\n\\[B = dp_r\\]\n\\[C = (i)\\]\nとして判定を終了します。\n\\(dp_r =  ∅\\)\nの場合\nまず、\n\\(dp_r = ( i )\\)\nとして更新します。\n次の条件を満たす\n\\(j\\)\nについて考えます。\n\\(0 \\le j < 200\\)\n\\(dp_j \\ne ∅\\)\n\\(dp_jの最後の要素 \\ne i\\)\n(重複して追加してしまうのを防ぐため)\n加えて、以下のように変数を定義します。\n\\(j+r\\)\nを\n\\(200\\)\nで割った余りを\n\\(q\\)\nとします。\n\\(dp_j\\)\nの後ろに\n\\(i\\)\nを追加した数列を\n\\(X\\)\nとします。\nつまり、\n\\(X = (dp_{j,1}, \\dots, dp_{j, len(dp_j)}, i)\\)\nです。\n\\(dp_q \\ne  ∅\\)\nの場合\n\\[B = dp_q\\]\n\\[C = X\\]\nとして判定を終了します。\n\\(dp_q =  ∅\\)\nの場合\n\\(dp_q = X\\)\nと更新します。\nすべての要素を確認しても\n\\(B, C\\)\nが確定できなければ答えは\nNo\nになります。\n計算量については、公式解説にあるとおり\n\\(N>8\\)\nで必ず終了するため最大でも\n\\(200 \\times 200 \\times 8=320000\\)\n回程度、 判定を途中で終了しない場合でも\n\\(200 \\times 200 \\times N\\)\n回程度なので十分間に合います。",
+      "codes": [],
+      "text_sha256": "6c516e42700af5eba81c3e1f398c46f51d8da60b74e87e3bb53ded655306808c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc200/abc200_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc199_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc199/editorial/1161",
+      "text": "\\(A_i, B_i\\)\nは\n\\(1\\)\n以上\n\\(1000\\)\n以下なのであり得る\n\\(x\\)\nも\n\\(1\\)\n以上\n\\(1000\\)\n以下です。\nよって、それぞれの\n\\(x\\)\nについて、実際に\n\\(N\\)\n個の条件を満たすかをチェックすればよいです。\nまた別解として、\n\\(x\\)\nが満たす条件は\n\\(\\max(A_1, A_2, A_3, \\dots, A_N) \\le x\\le \\min(B_1, B_2, B_3, \\dots, B_N)\\)\nと言い換えられるので、答えは\n\\(\\max(0, \\min(B_1, B_2, B_3, \\dots, B_N) - \\max(A_1, A_2, A_3, \\dots, A_N) + 1)\\)\nと求めることができます。\n\\(1\\)\nつめの解法の計算量は\n\\(\\Theta (N \\max{B_i})\\)\nなのに対して、別解の計算量は\n\\(\\Theta(N)\\)\nなのでより高速です。\n解答例 (C)\n解答例 (Python)",
+      "codes": [
+        "#include <stdio.h>\n#include <stdbool.h>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tint n = ri();\n\tint a[n];\n\tfor (int i = 0; i < n; i++) a[i] = ri();\n\tint b[n];\n\tfor (int i = 0; i < n; i++) b[i] = ri();\n\t\n\tint res = 0;\n\tfor (int i = 1; i <= 1000; i++) {\n\t\tbool ok = true;\n\t\tfor (int j = 0; j < n; j++) if (i < a[j] || i > b[j]) ok = false;\n\t\tif (ok) res++;\n\t}\n\t\n\tprintf(\"%d\\n\", res);\n\treturn 0;\n}",
+        "n = int(input())\na = list(map(int, input().split()))\nb = list(map(int, input().split()))\n\nres = 0\nfor i in range(1, 1001) :\n\tok = True\n\tfor j in range(n) :\n\t\tif i < a[j] or i > b[j] : ok = False\n\tif ok : res += 1\n\nprint(res)"
+      ],
+      "text_sha256": "ba79c491ea227003e5e606f2021c904e17e08332039d90d5305e9cf9d0b82b70",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc199/abc199_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

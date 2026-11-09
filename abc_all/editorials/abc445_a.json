@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc445_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc445/editorial/15890",
+      "text": "\\(S\\)\nの先頭の文字と末尾の文字を比較すればよいです。\n文字列の先頭および末尾の文字を取得する方法は言語によって異なり、また同じ言語でも複数の方法が考えられます。以下に C++, Python の解答例を示します。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    string S;\n    cin >> S;\n    if (S.front() == S.back()) {\n        cout << \"Yes\" << endl;\n    } else {\n        cout << \"No\" << endl;\n    }\n}",
+        "S = input()\nif S[0] == S[-1]:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "e497c421c2a3c31c30d7dc61726b882ec06535b323b963614e72b1e0d5cd79e7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc445/abc445_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

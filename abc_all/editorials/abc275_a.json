@@ -1,0 +1,42 @@
+{
+  "problem_id": "abc275_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc275/editorial/5126",
+      "text": "最も高い橋を求めるためには、橋を一本目から順に見ていき、\nそれまでに見た橋の中で最も高い橋を覚えておけば良いです。\n新しい橋を見るときには、今までに見たうちで最も高い橋と、\n新しい橋の高さを比較して、高かった方を新しく覚えれば良いです。\nそのようにして、全ての橋を見終わった後で、最も高い橋が答えとなります。\nこれは for 文と if 文 を用いて書く事ができます。\n別解としては、それぞれの橋をそれ以外の全ての橋と比較する方針があります。こちらでも今回の問題では支障がありませんが、時間計算量は本解の方が良いため、本解の方針を覚えておくと良いと思います。\nc++ による実装例 :\nPython による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int n;\n  int h[101];\n  int ans;\n\n  cin >> n;\n  for(int i=1;i<=n;i++)cin>>h[i];\n\n  ans=1;\n  for(int i=2;i<=n;i++){\n    if(h[ans]<h[i])ans=i;\n  }\n\n  cout << ans <<endl;\n  return 0;\n}",
+        "n=int(input())\nh=list(map(int, input().split()))\n\nans=1\nfor i in range(2,len(h)+1):\n    if(h[ans-1]<h[i-1]):\n      ans=i\n\nprint(ans)"
+      ],
+      "text_sha256": "9532f0f82aae408446fa075a80a321dd4e657076347e772887d4fbd15173ac20",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc275/abc275_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc275/editorial/5150",
+      "text": "python の numpy.argmax\nこの問題で求めるものは一般に\nArgmax\nと呼ばれます。Pythonのライブラリの1つnumpyには、リストやnumpy配列のargmaxを求める関数が存在します。\n実装例(Python)\nnumpy.argmaxは先頭の添字を\n\\(0\\)\nとするので、\n\\(1\\)\nを足して出力します。\nC++のmax_element\nC++には、vector(配列)などの最大値のイテレータを返すmax_elementという関数が存在します。このイテレータとvectorの先頭までの距離を用いて答えを求めることができます。",
+      "codes": [
+        "import numpy as np\nN=int(input())\nH=list(map(int,input().split()))\nprint(np.argmax(H)+1)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n;\n\tcin >> n;\n\tvector<int>a(n);\n\tfor(int i=0;i<n;i++)cin >> a[i];\n\tcout << max_element(a.begin(),a.end())-a.begin()+1 << endl;\n}"
+      ],
+      "text_sha256": "dc0878906d9af41f12d706726edbf23da40dd69419b6ed871b2426e48580f623",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc275/abc275_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc275/editorial/5153",
+      "text": "この問題は(値,添字)の組の配列をソートすることで解くことができます。\n例えば、サンブルの\n\\(A=(50,80,70)\\)\nであれば、まず (値,添字) の組たち\n\\((50,1),(80,2),(70,3)\\)\nを要素に持つ配列を用意します。これをソートすると\n\\((50,1),(70,3),(80,2)\\)\nに並び替えられ、末尾に (最も大きな値,添字) の組を見つけることができます。\nタプル(ペア)の比較が定義されている言語では、多くの場合、辞書順にソートされます。すなわち、1番目の要素の昇順にソートし、1番目の要素が同じもの同士は2番目の要素の昇順にソートし、……となります。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n;\n\tcin >> n;\n\tvector<int>a(n);\n\tfor(int i=0;i<n;i++)cin >> a[i];\n\tvector<pair<int,int>>b(n);\n\tfor(int i=0;i<n;i++)b[i]={a[i],i+1};\n\tsort(b.begin(),b.end());\n\tcout << b.back().second << endl;\n}",
+        "N=int(input())\nA=list(map(int,input().split()))\nB=[(a,i+1) for i,a in enumerate(A)]\nB.sort()\nprint(B[-1][1])"
+      ],
+      "text_sha256": "670f363f52c7ba1bdc88b2c743240904f0275c8c4fbf15d05ba94ba516778194",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc275/abc275_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

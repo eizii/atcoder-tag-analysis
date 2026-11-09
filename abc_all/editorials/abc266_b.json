@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc266_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc266/editorial/4665",
+      "text": "この問題で求められていることは、\n\\(N\\)\nを\n\\(998244353\\)\nで割ったあまりを答えることです。\nあまりを求める演算子として、多くの言語では\n%\nを用いることができます。Python では、以下のようなコードで AC を得ることができます。\n実装例(Python):\nしかし c++ で同様の実装をすると WA となってしまいます。何故でしょうか？\nこの原因は、言語によって負の数に対するあまりの仕様が異なることです。言語によってはあまりが負になることがあるので、負の場合は\n\\(0\\)\n以上になるように修正する必要があります。\n実装例(c++):",
+      "codes": [
+        "n = int(input())\nprint(n % 998244353)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nconst int mod = 998244353;\n\nint main() {\n    long long n;\n    cin >> n;\n    n %= mod;\n    if(n < 0) n += mod;\n    cout << n << endl;\n}"
+      ],
+      "text_sha256": "5cb69197a4f91a12ee6375bfd51023dbdbf24705c7d53970a13049507098a3bf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc266/abc266_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

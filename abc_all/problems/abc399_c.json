@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc399_c",
+  "title": "Make it Forest",
+  "contests": [
+    {
+      "contest_id": "abc399",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 321,
+  "raw_difficulty": 312,
+  "contest_id": "abc399",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc399/tasks/abc399_c",
+  "statement": "配点 : 350 点 問題文 頂点に 1 から N の番号がついた N 頂点 M 辺の単純無向グラフが与えられます。 i 番目の辺は頂点 u_i と頂点 v_i を結ぶ辺です。 グラフを森にするためには辺を最低何本削除する必要がありますか？ 森とは 単純無向グラフ F が森であるとは、 F が閉路を含まないことを言います。 制約 1 \\leq N \\leq 2 \\times 10^5 0 \\leq M \\leq \\min \\left( \\frac{N(N-1)}{2}, 2 \\times 10^5\\right) 1 \\leq u_i \\lt v_i \\leq N 入力で与えられるグラフは単純 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M u_1 v_1 u_2 v_2 \\vdots u_M v_M 出力 答えを出力せよ。 入力例 1 4 4\r\n1 2\r\n1 3\r\n2 4\r\n3 4 出力例 1 1 例えば 1 番目の辺を削除すると、グラフは森になります。 入力例 2 5 0 出力例 2 0 入力例 3 10 10\r\n7 9\r\n4 6\r\n6 10\r\n2 5\r\n5 6\r\n5 9\r\n6 8\r\n4 8\r\n1 5\r\n1 4 出力例 3 2",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 頂点に 1 から N の番号がついた N 頂点 M 辺の単純無向グラフが与えられます。 i 番目の辺は頂点 u_i と頂点 v_i を結ぶ辺です。 グラフを森にするためには辺を最低何本削除する必要がありますか？ 森とは 単純無向グラフ F が森であるとは、 F が閉路を含まないことを言います。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2 \\times 10^5 0 \\leq M \\leq \\min \\left( \\frac{N(N-1)}{2}, 2 \\times 10^5\\right) 1 \\leq u_i \\lt v_i \\leq N 入力で与えられるグラフは単純 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M u_1 v_1 u_2 v_2 \\vdots u_M v_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 4\r\n1 2\r\n1 3\r\n2 4\r\n3 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1 例えば 1 番目の辺を削除すると、グラフは森になります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5 0"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10 10\r\n7 9\r\n4 6\r\n6 10\r\n2 5\r\n5 6\r\n5 9\r\n6 8\r\n4 8\r\n1 5\r\n1 4"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 2"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc399/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:28.742685+00:00",
+  "statement_sha256": "4765493831eecd0d43fe35e956d4a2cd2793b0222521207a4c27e82c00b9f116",
+  "editorials": []
+}

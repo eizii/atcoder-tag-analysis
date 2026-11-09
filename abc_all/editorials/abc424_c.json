@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc424_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc424/editorial/13899",
+      "text": "スキルを頂点とし、未習得な各スキル\n\\(i\\)\nについて、スキル\n\\(A_i\\)\nからスキル\n\\(i\\)\n、スキル\n\\(B_i\\)\nからスキル\n\\(i\\)\nへ有向辺を張ったグラフを考えます。このグラフにおいて、既に習得済みのスキルから到達可能であることが習得可能であることと同値になります。\nよって、このグラフ上で習得済みの各スキルを始点に DFS または BFS により各頂点に到達可能できるかどうかを判定すればよく、\n\\(O(N)\\)\nでこの問題を解くことができます。\nなお、仮想的な「スキル\n\\(0\\)\n」が存在するとし、スキル\n\\(0\\)\nのみが習得済みであると考えることで、単一始点とすることもできます。\nwriter解(Python)\nwriter解(C++)",
+      "codes": [
+        "import sys\nsys.setrecursionlimit(10**9)\n\nN=int(input())\nG=[[] for _ in range(N+1)]\n\nfor i in range(1,N+1):\n  a,b=map(int,input().split())\n  G[a].append(i)\n  G[b].append(i)\n\nok=[0]*(N+1)\nok[0]=1\n\ndef dfs(v):\n  ok[v]=1\n  for vv in G[v]:\n    if not ok[vv]:\n      dfs(vv)\n\ndfs(0)\n\nprint(sum(ok)-1)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint N;\n\tcin >> N;\n\tvector<vector<int>>G(N+1);\n\t\n\tfor(int i=1;i<=N;i++){\n\t\tint a,b;\n\t\tcin >> a >> b;\n\t\tG[a].push_back(i);\n\t\tG[b].push_back(i);\n\t}\n\n\tvector<bool>ok(N+1);\n\tok[0]=true;\n\n\tauto dfs=[&](auto self,int v)->void{\n\t\tok[v]=true;\n\t\tfor(auto vv:G[v])if(!ok[vv]){\n\t\t\tself(self,vv);\n\t\t}\n\t};\n\t\n\tdfs(dfs,0);\n\t\n\tint ans=0;\n\tfor(auto x:ok)ans+=x;\n\tcout << ans-1 << endl;\n}"
+      ],
+      "text_sha256": "15383581d9a561f7e2ae86aa0f8e08c6a7aca9d8849b2adbf23212bd7e827c4b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc424/abc424_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

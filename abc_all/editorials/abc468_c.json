@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc468_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc468/editorial/23508",
+      "text": "\\((1,2,\\ldots,N)\\) を並び替えてできる整数列は \\(N!\\) 通りあります。これは \\(N\\le 10\\) では最大でも \\(3628800\\) 通りなので、これら全てに対して条件を満たすかを判定すれば良いです。 \\((1,2,\\ldots,N)\\) を並び替えてできる整数列は例えば C++ なら next_permutation を用いることで全て重複なく列挙することができます。 実装例(C++) 実装例(Python) Bonus： \\(N\\le 10^5\\) で答えを \\(998244353\\) で割ったあまりを求めてみましょう。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> p(n), q(n);\n\tfor (int &v : p) cin >> v;\n\tfor (int &v : q) cin >> v;\n\tvector<int> a(n);\n\tiota(a.begin(), a.end(), 1);\n\tint ans = 0;\n\tdo {\n\t\tif (p < a && a < q) ans++;\n\t} while (next_permutation(a.begin(), a.end()));\n\tcout << ans << endl;\n}\n",
+        "from itertools import permutations\n\nn = int(input())\np = list(map(int, input().split()))\nq = list(map(int, input().split()))\nans = 0\nfor a in permutations([i + 1 for i in range(n)]):\n    ans += p < list(a) < q\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "6d336b4e81ea241047991ce395e6bc0e439f4f42835eac18f77a4939b44d215c"
+    }
+  ],
+  "status": "available"
+}

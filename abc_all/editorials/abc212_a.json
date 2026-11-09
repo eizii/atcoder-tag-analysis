@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc212_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc212/editorial/2361",
+      "text": "\\(A,B\\)\nを標準入力から読み取った上で、問題文に書かれている通りの場合分けをして\n\\(0 \\lt A\\)\nかつ\n\\(B=0\\)\nなら\nGold\n\\(A=0\\)\nかつ\n\\(0 \\lt B\\)\nなら\nSilver\n\\(0 \\lt A\\)\nかつ\n\\(0 \\lt B\\)\nなら\nAlloy\nと出力すればいいです。\n実装例 (Python)\nなお、Python における elif 文や else 文、および C++ における else if 文や else 文を用いるとより簡潔です。\n実装例 (Python)\n特に、以下のように場合分けをするとコードの長さが更に短くなります。\n実装例 (C++)",
+      "codes": [
+        "A,B = map(int,input().split())\nif 0 < A and B == 0:\n    print('Gold')\nif A == 0 and 0 < B:\n    print('Silver')\nif 0 < A and 0 < B:\n    print('Alloy')",
+        "A,B = map(int,input().split())\nif 0 < A and B == 0:\n    print('Gold')\nelif A == 0 and 0 < B:\n    print('Silver')\nelse:\n    print('Alloy')",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint A,B; cin >> A >> B;\n\tif(B == 0) cout << \"Gold\" << endl;\n\telse if(A == 0) cout << \"Silver\" << endl;\n\telse cout << \"Alloy\" << endl;\n}"
+      ],
+      "text_sha256": "983217f7e981fcf91db648fea5c498761d6dc7cf388edbf7ed482e90b84e23fc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc212/abc212_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

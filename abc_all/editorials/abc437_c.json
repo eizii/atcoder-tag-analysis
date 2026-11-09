@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc437_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc437/editorial/14856",
+      "text": "ソリに乗るトナカイの集合を\n\\(S\\)\nとすると，条件は\n\\[\\displaystyle \\sum_{i\\notin S}P_i\\geq \\sum_{i \\in S}W_i\\]\nです．\n\\(\\displaystyle \\sum_{i\\notin S}P_i=\\sum_{i=1}^N P_i - \\sum_{i \\in S}P_i\\)\nを代入してして整理すると\n\\[\\displaystyle \\sum_{i\\in S}(W_i+P_i)\\leq \\sum_{i=1}^N P_i\\]\nです．右辺は定数なので，\n\\(W_i+P_i\\)\nが小さいトナカイから貪欲にソリに乗せていくのが最適になります．\n計算量は\n\\(W_i+P_i\\)\nでソートするのがボトルネックになり\n\\(O(N\\log N)\\)\nです．",
+      "codes": [
+        "def solve():\n    n = int(input())\n    wp = [list(map(int, input().split())) for i in range(n)]\n    wp.sort(key=lambda x: x[0] + x[1]) # w_i + p_i でソート\n    sum_p = 0\n    for w, p in wp:\n        sum_p += p\n    res = 0\n    for i in range(n):\n        w, p = wp[i]\n        res += w + p\n        if sum_p < res:\n            print(i)\n            return\n\n\nfor _ in range(int(input())):\n    solve()"
+      ],
+      "text_sha256": "da0171a9bdf275a5699d3327fdbcb44cb478b7fcccfafa53bd4749a746d4b74b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc437/abc437_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc437/editorial/14862",
+      "text": "ソリを引くトナカイの力の総和から、ソリに乗るトナカイの重さの総和を引いたものを、余力と呼ぶことにします。問題は「余力が0以上で、ソリに乗るトナカイの数を最大化してください」となります。\n全てのトナカイがソリを引く状態から始めて、何匹かのトナカイをソリに乗せることを考えます。\n現在のトナカイの配置がどのようなものであっても、トナカイ\n\\(i\\)\nが「ソリを引く」状態から「ソリに乗る」状態になると、ソリを引く力が\n\\(P_i\\)\n減り、ソリの重さが\n\\(W_i\\)\n増えるので、余力が\n\\(P_i+W_i\\)\n減ります。\nよって、「ソリに乗る」状態のトナカイの数を最大化するには、余力をできるだけ減らさないように\n\\(P_i+W_i\\)\nが小さなトナカイから貪欲にソリに乗せるのが最適です。",
+      "codes": [],
+      "text_sha256": "e83d95b23544bc52246b27787935b9d0e648f5531dd2eae3be02765b8cc39976",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc437/abc437_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

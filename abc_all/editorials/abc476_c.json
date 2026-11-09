@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc476_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc476/editorial/25794",
+      "text": "\\(k\\) の昇順に答えを求めることを考えます。 \\(k=k_0\\) の場合に \\(A_1\\) から \\(A_k\\) までを降順に並べた時に先頭に来る \\(3\\) つの要素をそれぞれ \\(x_1,x_2,x_3\\) とします。このとき、 \\(k=k_0+1\\) の場合に先頭に来る \\(3\\) つの要素は \\(x_1,x_2,x_3,A_{k_0+1}\\) のうち大きい \\(3\\) つになります。 したがって、 \\(k\\) の昇順に \\(A_1\\) から \\(A_k\\) までのうち大きい \\(3\\) つの要素を保持し、各更新では \\(4\\) つの要素の中から大きい \\(3\\) つの値を取り出していけば良いです。 実装例(Python3) Bonus : \\(3\\) 番目の部分を \\(K\\) 番目に一般化して解いてみてください。（ABC - D 程度）",
+      "codes": [
+        "n = int(input())\na = list(map(int, input().split()))\ns = a[:3]\ns.sort(reverse=True)\nprint(s[2])\nfor k in range(3, n):\n    s.append(a[k])\n    s.sort(reverse=True)\n    s.pop()\n    print(s[2])\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "7ef3aa37d5ae351cdf0710210d9fe224740cabd45c24ba813ae137d328bbfa2c"
+    }
+  ],
+  "status": "available"
+}

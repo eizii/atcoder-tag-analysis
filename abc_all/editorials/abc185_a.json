@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc185_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc185/editorial/360",
+      "text": "\\(A_1, A_2, A_3, A_4\\)\nの最小値が答えです。\n解答例 (C)\n解答例 (Python)",
+      "codes": [
+        "#include <stdio.h>\n\nint main() {\n\tint a1, a2, a3, a4;\n\tscanf(\"%d%d%d%d\", &a1, &a2, &a3, &a4);\n\tint res = a1;\n\tif (res > a2) res = a2;\n\tif (res > a3) res = a3;\n\tif (res > a4) res = a4;\n\tprintf(\"%d\\n\", res);\n\treturn 0;\n}",
+        "print(min(map(int, input().split())))"
+      ],
+      "text_sha256": "effc8d53d05e2aa8ab365cf2cf127f454ff2982bf981a8fc6c3b69edca699511",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc185/abc185_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

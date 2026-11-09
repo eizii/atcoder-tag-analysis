@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc310_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc310/editorial/6784",
+      "text": "まず、次のような \\(\\Theta(N^2)\\) 時間の解法を考えます。\nはじめ、\\(S=(),\\operatorname{ans}=0\\) とする。\n\\(i=1,2,\\ldots,N\\) に対して、次の操作を行う。\n\\(S\\leftarrow(s_j\\barwedge A _ i) _ {j=1,2,\\ldots,i-1}\\mathbin{+\\mkern-10mu+}A _ i\\) とする。ここで、\\(s _ j\\) は \\(S\\) の \\(j\\) 番目の要素、\\(\\mathbin{+\\mkern-10mu+}\\) は列の連結を表す。\n\\(\\operatorname{ans}\\leftarrow\\operatorname{ans}+\\sum _ {j=1} ^ {i} s_j\\) とする。\nこのアルゴリズムが終了したときの \\(\\operatorname{ans}\\) は正しい答えを与えますが、実行時間制限に間に合いません。\nここで、\\(S\\) はつねに \\(\\{0,1\\}\\) の要素しか含まないことを利用します。\n\\(S\\) に \\(0\\) がいくつ、\\(1\\) がいくつ含まれているかを管理することで、この問題を \\(\\Theta(N)\\) 時間で解くことができます。\n実装例は以下のようになります。",
+      "codes": [
+        "N = int(input())\nA = input()\n\nzero, one = 0, 0\nans = 0\n\nfor a in A:\n    if a == '0':\n        zero, one = 1, zero + one\n    else:\n        zero, one = one, zero + 1\n    ans += one\n\nprint(ans)",
+        "#include <vector>\n#include <iostream>\n#include <utility>\n\nint main() {\n    using namespace std;\n\n    unsigned long N;\n    cin >> N;\n    vector<char> A(N);\n    for (auto &&a : A)cin >> a;\n\n    unsigned long ans{};\n\n    using count_t = pair<unsigned long, unsigned long>;\n    count_t counter{};\n    auto&&[zero, one]{counter};\n\n    for (const auto a : A) {\n        counter = a == '1' ? count_t{one, zero + 1} : count_t{1, one + zero};\n        ans += one;\n    }\n\n    cout << ans << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "cf74887779198c99b2d6c3837eb5dd60434f124ab01bc3c29c967e48de3b8b28",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc310/abc310_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc310/editorial/6805",
+      "text": "計算式から以下のことが分かります。\n\\(A_j=0, i<j\\)\nのとき\n\\(f(i,j)=1\\)\n\\(A_j=1, j\\geq2, i<j\\)\nのとき\n\\(f(i,j)\\)\nと\n\\(f(i,j-1)\\)\nのどちらか一方のみ\n\\(1\\)\n、つまり\n\\(f(i,j)+f(i,j-1)=1\\)\nこれらより、さらに以下のことが分かります。\n\\(A_j=0\\)\nのとき\n\\(\\sum_{1\\leq i\\leq j}f(i,j)=j-1\\)\n\\(A_j=1\\)\nのとき\n\\(\\sum_{1\\leq i\\leq j}(f(i,j-1)+f(i,j))=j\\)\n（ただし\n\\(i>j\\)\nのとき\n\\(f(i,j)=0\\)\nとする。）\nしたがって以下の方法で答えを得ることができます。\nはじめ、\n\\(ans=0\\)\nとする。\n\\(i=1,2,\\dots ,N\\)\nの降順に以下の操作を行う。\n\\(A_i=0\\)\nの場合\n\\(ans\\)\nに\n\\(i-1\\)\nを加算する。\n\\(A_i=1\\)\nの場合\n\\(ans\\)\nに\n\\(i\\)\nを加算する。\nさらに\n\\(i\\geq2\\)\nなら\n\\(A_{i-1}\\)\nを\n\\(2\\)\nに変更する。\n\\(A_i=2\\)\nの場合\n何もしない。\n操作終了後の\n\\(ans\\)\nが求める答えである。",
+      "codes": [],
+      "text_sha256": "10574a03d88eaabe755bdb835f4bb3523c8e0d7195876463af535dbd32d4e314",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc310/abc310_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

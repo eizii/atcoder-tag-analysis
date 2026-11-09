@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc097_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc097/editorial.pdf",
+      "text": "B: Exponential\n\n ֤ 1 Ҏ্X ҎԼͷ੔਺x ʹରͯ͠ɺexpox := x ͕΂͖৐਺͔ ͱ͍͏ਅِ஋Λߟ͑·͢ɻ͜Ε͕ਖ਼͘͠ܭ\nࢉͰ͖Ε͹౴͑͸ ٻ ·Γ·͢ɻ\n  1 Ҏ্ͷ੔਺b ͱɺ 2 Ҏ্ͷ੔਺p શͯͷϖΞʹରͯ͠ x := bp Λܭࢉ͠ɺx ͕ 1 Ҏ্X ҎԼͳΒ expox\nΛ true ʹॻ͖׵͑Δ ͱ͍͏͜ͱΛ͢ΔͱఆٛΑΓਖ਼͘͠ٻ·Γ·͕͢ɺ౰વ͢΂ͯͷ੔਺ͷϖΞΛࢼ͢ͷ͸\n\nෆՄೳͰ͢ɻ\n\n ·ͣɺ b ͱͯ͠ࢼ͢΂͖஋͸ 1 Ҏ্X ҎԼͷ੔਺ͷΈͰΑ͍Ͱ͢ (ͳͥͳΒɺ b > X ͳΒ೚ҙͷ p >= 2\nʹରͯ͠ bp > X ͔ͩΒ౴͑ʹӨڹΛٴ΅͞ͳ͍)ɻ\n\n ಉ༷ʹɺ p ͱͯ͠ ࢼ ͢΂͖஋͸ (ͱͯ΋ ࡶ ʹ ݟ ੵ΋ͬͯ΋) 2 Ҏ্X ҎԼͷ੔਺ͷΈͰे෼Ͱ͢ɻΑͬͯ\nೋॏϧʔϓͰ b, p ͷશͯͷϖΞΛࢼ͢͜ͱͰ expox ͕ਖ਼͘͠ٻ·Γ·͢ɻ ࣌ؒܭࢉྔ͸ O(X2) Ͱ͢ɻ\n ͔͠͠ɺΦʔόʔϑϩʔΛ ى͜͞ͳ͍ͨΊʹ΋ҎԼͷํ๏͕ྑ͍ͱࢥ͍·͢ɻ\n\n ֤ b ʹରͯ͠ɺp = 2, 3, .. ͱॱ൪ʹ, expobp Λ true ʹॻ͖ ׵ ͍͖͑ͯ·͢ɻ͜͜Ͱɺ΋͠ ࠓ ௐ΂͍ͯΔ஋\nbk ͕ X ΑΓେ͖͔ͬͨΒɺk Ҏ ߱ ͷ஋͸ p ͱͯ͠ ߟ ͑Δඞཁ͕͋Γ·ͤΜɻैͬͯͦ͜Ͱ p ͷϧʔϓΛଧ\n\nͪ੾ͬͯྑ͍Ͱ͢ɻͨͩ͠ b = 1 ͷ࣌ʹ͸͜ͷ৚݅Ͱͷଧͪ੾Γ͸ൃੜ͠ͳ͍ͷͰ஫ҙ͍ͯͩ͘͠͞ɻ\n\n#include <bits/stdc ++.h>\nusing namespace std;\n\n\n                                             1\n\f\nint main (){\n         int X;\n         cin >>X;\n         vector <bool > expo(X+1);\n\n\n         expo [1] = 1;\n        for(int b=2;b<=X;b++){\n                  int v = b*b;\n                while(v<=X){\n                         expo[v] = 1;\n                             v *= b;\n                   }\n          }\n        for(int i=X;i >=1;i--) if(expo[i]){\n                  cout <<i<<endl;\n                 return 0;\n          }\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "bc3f765c029bc90e125126fc4fa9b0be0eef5cfbbd9bed2f29caaf6707d91478"
+    }
+  ],
+  "status": "available"
+}

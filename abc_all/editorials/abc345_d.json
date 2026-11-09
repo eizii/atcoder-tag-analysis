@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc345_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc345/editorial/9579",
+      "text": "マス目の上から\n\\(i\\)\n行目かつ\n\\(j\\)\n列目のマスを\n\\((i,j)\\)\nとよび、\nまた\n\\(i\\)\n枚目のタイルを単にタイル\n\\(i\\)\nと呼びます。\n最初に、問題文の条件から回転は\n\\(90\\)\n度単位でしか許されず、各タイルを置くときの向きは 正方形型\n\\((A_i=B_i)\\)\n型のタイルで\n\\(1\\)\n通り、そうでないときに\n\\(2\\)\n通り(\n\\(A_i\\times B_i\\)\nまたは\n\\(B_i\\times A_i\\)\n) しかあり得ないことに注意します。\n次に、タイルを\n\\(1\\)\n枚ずつ置いていく方法を全探索する方法について考えます。\n問題文中の条件をみたすタイルの置き方が存在したとして、それが条件をみたすかどうかは使用したタイルを置いた順番によりません。\nそこで、次のような順番で置いていくという条件を付加しても答え (Yes/No) は変わりません。\nマス目の番号の辞書順、すなわち\n\\((1,1)\\)\n,\n\\((1,2)\\)\n,\n\\(\\ldots\\)\n,\n\\((1,W)\\)\n,\n\\((2,1)\\)\n,\n\\((2,2)\\)\n,\n\\(\\ldots\\)\n,\n\\((N,N-1)\\)\n,\n\\((N,N)\\)\nの順でマスを見た時、まだタイルで覆われていないマスのうち最初に出てきたものをマス\n\\(X\\)\nとする。（全てのマスがタイルで覆われていたらそこで直ちに操作を終了する。）その後、タイルとその向きを選び、マス\n\\(X\\)\nを覆うことができるように（かつマス目からはみ出したり他のタイルと重なることがないように）置く。\nこのとき、それぞれの時のマス\n\\(X\\)\nの\n\\(1\\)\nつ左と\n\\(1\\)\nつ上はマスが存在しない（マス目の外側）か、タイルの置かれたマスとなっています。よって、タイルの置き方はマス\n\\(X\\)\n（の左上角）にそのタイルの左上角を重ねるような置き方しかできません。\nタイルの向きが高々\n\\(2\\)\n通りしかないことを合わせると、\nこのような順で置いた時、それぞれのタイミングでタイルと向きを選ぶ方法は高々（まだ使用されていないタイルの枚数）\n\\(\\times 2\\)\n通りしかありません。\nよって、タイルを使用する順番とそれぞれのタイルを置く向きが決まっていれば、タイルの置き方はできるならば一意（途中でマス目からはみ出したり他のタイルと重なってしまったら失敗、そうでなければ置き方は一意）に定まります。さらに、もし問題文中の条件をみたす置き方が存在したとすると、必ずそれに対応する順番が存在します。なぜなら、条件をみたすようなタイルの配置を考え、そのマス目をマス目の番号の辞書順で見たときにタイルが登場する順番とそれらの向きを指定すれば、上記の置き方でかならず再現できるからです。\nよって、タイルを使用する順番とそれぞれのタイルを置く向きの組み合わせについて全探索を行なったとすると、条件をみたす置き方が存在するならばかならず発見することができます。\nこのとき、マス\n\\(X\\)\nを探すのに必要な計算回数は、それぞれの選び方と向きの組み合わせについて（その組み合わせについての最大\n\\(N\\)\n回の探索について）合計\n\\(HW\\)\n回であることから、全体での計算回数は\n\\(N!\\times 2^N\\times HW\\)\n回であり、今回の制約下で 高々\n\\(6.5\\times 10^7\\)\n回未満となるため、十分高速です。マス\n\\(X\\)\nの位置はそれまでに使用されたタイルの順番と向きにしか依存しないことから、再帰的に計算を行うとより早く計算を行うことができます。また、ある置き方について途中でマス目からはみ出したり他のタイルと重なったりした場合はそれ以降の置き方を調べる必要はないため、枝刈りを行うことができます。\n最後に注意点として、使用しないタイルが存在する可能性があるため、ある時点でマス\n\\(X\\)\nを探した際にすべてのマスが覆われていたら答えは\nYes\nとなることに注意してください。\nよって、この問題を解くことができました。\nなお、この問題にはいくつかの解法が存在します。特に、\n\\(N,H,W\\)\nが小さいため、何かしらの方法で全探索する方針が有効です。計算回数を見積もった上で時間制限に間に合うと考えられるものであれば、いずれも問題ありません。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\n#define MAX_N 7\n#define MAX_H 10\n#define MAX_W 10\n\nint n,h,w;\nint a[MAX_N];\nint b[MAX_N];\nint c[MAX_H][MAX_W];\nbool ans;\n\nvoid solve(int unused,int curi,int curj){\n\tbool can;\n\twhile(c[curi][curj]>=0){\n\t\tcurj++;\n\t\tif(curj>=w){curi++;curj=0;}\n\t\tif(curi>=h)break;\n\t}\n\tif(curi>=h){ans=true;return;}\n\trep(i,n){\n\t\tif(unused&(1<<i)){\n\t\t  \tcan=true;\n\t\t\trep(ii,a[i]){\n\t\t\t\trep(jj,b[i]){\n\t\t\t\t\tif(((curi+ii)<h)&&((curj+jj)<w)){\n\t\t\t\t\t\tif(c[curi+ii][curj+jj]<0)c[curi+ii][curj+jj]=i;\n\t\t\t\t\t\telse {can=false;}\n\t\t\t\t\t}\n\t\t\t\t\telse  {can=false;}\n\t\t\t\t}\n\t\t\t}\n\t\t\tif(can)solve(unused^(1<<i),curi,curj);\n\t\t\trep(ii,a[i]){\n\t\t\t\trep(jj,b[i]){\n\t\t\t\t\tif(((curi+ii)<h)&&((curj+jj)<w)){\n\t\t\t\t\t\tif(c[curi+ii][curj+jj]==i)c[curi+ii][curj+jj]=-1;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t\tif(a[i]!=b[i]){\n\t\t\t\tcan=true;\n\t\t\t\trep(ii,b[i]){\n\t\t\t\t\trep(jj,a[i]){\n\t\t\t\t\t\tif(((curi+ii)<h)&&((curj+jj)<w)){\n\t\t\t\t\t\t\tif(c[curi+ii][curj+jj]<0)c[curi+ii][curj+jj]=i;\n\t\t\t\t\t\t\telse can=false;\n\t\t\t\t\t\t}\n\t\t\t\t\t\telse can=false;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tif(can)solve(unused^(1<<i),curi,curj);\n\t\t\t\trep(ii,b[i]){\n\t\t\t\t\trep(jj,a[i]){\n\t\t\t\t\t\tif(((curi+ii)<h)&&((curj+jj)<w)){\n\t\t\t\t\t\t\tif(c[curi+ii][curj+jj]==i)c[curi+ii][curj+jj]=-1;\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t}\n\n\t\t}\n\t}\n\treturn;\n}\n\nint main(void){\n\tcin>>n>>h>>w;\n\trep(i,n)cin>>a[i]>>b[i];\n\trep(i,h)rep(j,w)c[i][j]=-1;\n\tans=false;\n\tsolve((1<<n)-1,0,0);\n\tif(ans)cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n}"
+      ],
+      "text_sha256": "851687aedab155fef3180676e6c255410d22650aa0d67307e63a5fce9d291ee4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc345/abc345_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc345/editorial/9613",
+      "text": "盤面を 2 進法で表された整数だと考えて処理すると、実装が簡単になり、並列計算の分だけ計算量も小さくなります。\n本問では 2 次元盤面なので、例えば右端に番兵を付けて\n\\(H \\times (W + 1)\\)\nビットの整数で表すと良いでしょう。なお本問の制約だと\n\\(64\\)\nビット整数に収まらないので、\n\\(128\\)\nビット整数を使うか Python のような多倍長整数を使う必要があります。\n探索の方法は、再帰 DFS や、順列をすべて列挙する方法などが考えられます。 後者の場合、 Python では itertools.permutations が便利です。\nAC コード\n（Python）再帰 DFS\nAC コード\n（Python）itertools の permutations を使用\n【参考】\n過去の類題（2 次元盤面を 2 進法の整数とみなして処理する方法が使える問題）\n問題\n解説\n問題\n解説",
+      "codes": [],
+      "text_sha256": "0acb894c891900cf83feae619e9b84ec0f1db9c5fc794459ecf019d90d1d4d51",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc345/abc345_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

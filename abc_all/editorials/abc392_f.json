@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc392_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc392/editorial/12145",
+      "text": "概略：操作を逆順に考えるとうまくいきます。\nまず次のような[問題☆]を考えます。\n\\(A'=(1,2,\\ldots,N)\\)\nに対し、\n\\(i=N,N-1,\\ldots,1\\)\nの順に以下の操作を行う\n操作：\n\\(A'\\)\nの\n\\(P_i\\)\n番目の要素を削除し、残りの要素は順序を保って詰める。\n各操作で削除される数を\n\\(B_i\\)\nとする。これを求めよ。\n次のような配列を用意します。\n\\(T[i]= i が A' に含まれていれば1、いなければ0\\)\n操作の過程で\n\\(A'\\)\nは単調増加の状態を保つので、\n\\(A'\\)\nの\n\\(p\\)\n番目の要素は、\n\\(\\sum_{i=1}^ {x}T[i]=p\\)\nを満たす最小の\n\\(x\\)\nです。よって、\n\\(T\\)\nの累積和を二分探索することができれば高速に求めることができます。\n\\(A'\\)\nから値\n\\(i\\)\nを削除することは、\n\\(T[i]\\)\nを\n\\(0\\)\nに変更することに対応することから、[問題☆]は\n\\(T\\)\nに対する1点更新・区間和取得が高速にできれば高速に解くことができます。fenwick tree や segment tree などを用いることで全体で\n\\(O(N\\log N)\\)\n時間で解くことができます。\n元の問題の答え、すなわち操作後の数列を\n\\(A=(A_1,\\ldots,A_N)\\)\nとします。\n[問題☆]との対応を考えると、\n\\(B_i\\)\nは直感的には「元の問題において\n\\(i\\)\n回目の操作で挿入される数は、全ての操作を終えたときどの位置にあるか」を表しているといえます。すなわち、\n\\(A_{B_i}=i\\)\nとなり、[問題☆]が解ければ\n\\(O(N)\\)\n時間で答えを求めることができます。",
+      "codes": [],
+      "text_sha256": "79d6475a970c43e4b0d67421463df1acc7b94dea2412b01c2f0df9d17c33c5b7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc392/abc392_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc392/editorial/14190",
+      "text": "配列\n\\(A\\)\nの指定位置に要素を挿入・取得するクエリは、 AVL 木などの平衡二分探索木を使うことで\n\\(O(\\log |A|)\\)\nで処理できます。\nよって本問題を\n\\(O(N\\log N)\\)\nで解くことができました。\nC++ の GCC を使う場合、 ext/rope が用意されているので、それを使うとよいです。詳しくは\nここ\nを参照してください。",
+      "codes": [],
+      "text_sha256": "5c69ea74bcb57748631b1631d648b9e2037b6819ae178c7c67a1cdba4ccc211c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc392/abc392_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

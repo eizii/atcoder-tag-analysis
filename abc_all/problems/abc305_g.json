@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc305_g",
+  "title": "Banned Substrings",
+  "contests": [
+    {
+      "contest_id": "abc305",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 1989,
+  "raw_difficulty": 1989,
+  "contest_id": "abc305",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc305/tasks/abc305_g",
+  "statement": "配点 : 550 点 問題文 a , b からなる長さ 6 以下の空でない文字列の集合 S=\\lbrace s _ 1,s _ 2,\\ldots,s _ M\\rbrace が与えられます。\r\n以下の条件を満たす a , b からなる長さ N の文字列 T はいくつあるか求めてください。 任意の s _ i\\in S に対して、 T は s _ i を連続する部分文字列として含まない ただし、答えは非常に大きくなる可能性があるので、答えを 998244353 で割った余りを求めてください。 制約 1\\leq N\\leq10^{18} 1\\leq M\\leq126 N,M は整数 s _ i は a , b からなる長さ 6 以下の空でない文字列 s _ i\\neq s _ j\\ (1\\leq i\\lt j\\leq M) 入力 入力は以下の形式で標準入力から与えられる。 N M s _ 1 s _ 2 \\vdots s _ M 出力 答えを 998244353 で割ったあまりを 1 行で出力せよ。 入力例 1 4 3\r\naab\r\nbbab\r\nabab 出力例 1 10 a , b からなる長さ 4 の文字列で、連続する部分列として aab , bbab , abab をもたないようなものは aaaa , abaa , abba , abbb , baaa , baba , babb , bbaa , bbba , bbbb の 10 個なので、 10 を出力してください。 入力例 2 20 1\r\naa 出力例 2 17711 入力例 3 1000000007 28\r\nbbabba\r\nbbbbaa\r\naabbab\r\nbbbaba\r\nbaaabb\r\nbabaab\r\nbbaaba\r\naabaaa\r\naaaaaa\r\naabbaa\r\nbbaaaa\r\nbbaabb\r\nbbabab\r\naababa\r\nbaaaba\r\nababab\r\nabbaba\r\naabaab\r\nababaa\r\nabbbba\r\nbaabaa\r\naabbbb\r\nabbbab\r\nbaaaab\r\nbaabbb\r\nababbb\r\nbaabba\r\nabaaaa 出力例 3 566756841 998244353 で割ったあまりを出力してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 a , b からなる長さ 6 以下の空でない文字列の集合 S=\\lbrace s _ 1,s _ 2,\\ldots,s _ M\\rbrace が与えられます。\r\n以下の条件を満たす a , b からなる長さ N の文字列 T はいくつあるか求めてください。 任意の s _ i\\in S に対して、 T は s _ i を連続する部分文字列として含まない ただし、答えは非常に大きくなる可能性があるので、答えを 998244353 で割った余りを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N\\leq10^{18} 1\\leq M\\leq126 N,M は整数 s _ i は a , b からなる長さ 6 以下の空でない文字列 s _ i\\neq s _ j\\ (1\\leq i\\lt j\\leq M)"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M s _ 1 s _ 2 \\vdots s _ M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを 998244353 で割ったあまりを 1 行で出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 3\r\naab\r\nbbab\r\nabab"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 10 a , b からなる長さ 4 の文字列で、連続する部分列として aab , bbab , abab をもたないようなものは aaaa , abaa , abba , abbb , baaa , baba , babb , bbaa , bbba , bbbb の 10 個なので、 10 を出力してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 20 1\r\naa"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 17711"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1000000007 28\r\nbbabba\r\nbbbbaa\r\naabbab\r\nbbbaba\r\nbaaabb\r\nbabaab\r\nbbaaba\r\naabaaa\r\naaaaaa\r\naabbaa\r\nbbaaaa\r\nbbaabb\r\nbbabab\r\naababa\r\nbaaaba\r\nababab\r\nabbaba\r\naabaab\r\nababaa\r\nabbbba\r\nbaabaa\r\naabbbb\r\nabbbab\r\nbaaaab\r\nbaabbb\r\nababbb\r\nbaabba\r\nabaaaa"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 566756841 998244353 で割ったあまりを出力してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc305/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:31.970847+00:00",
+  "statement_sha256": "540b74dc24be375ea804ae1c44c9149258d7a0b10b4792da2b700c0dc648c2c0",
+  "editorials": []
+}

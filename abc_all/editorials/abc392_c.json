@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc392_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc392/editorial/12147",
+      "text": "求める答えを\n\\(S_i\\)\nとします。\n人\n\\(i\\)\nはゼッケン\n\\(Q_i\\)\nを着けており、人\n\\(i\\)\nが見つめている人\n\\(P_i\\)\nはゼッケン\n\\(Q_{P_i}\\)\nを着けています。すなわち、\n\\(S_{Q_i}=Q_{P_i}\\)\nが成り立ちます。よって\nのようなfor文により答えを求めることができます。\n多くのプログラミング言語では配列の添字は\n\\(0\\)\nから始まることに注意してください。\nwriter解(Python)",
+      "codes": [
+        "for i in 1..n:\n  S[Q[i]]= Q[P[i]]"
+      ],
+      "text_sha256": "3ffe4eff65d8f2c457659fc84a9a2b9ab0a104165bab82023fe1b87dc221c734",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc392/abc392_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc246_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc246/editorial/3701",
+      "text": "以下、\n\\(f(a,b)=a^3+a^2b+ab^2+b^3\\)\nとします。\nまず、\n\\(N \\le 10^{18}\\)\nであるので、\n\\(f(a,b)\\)\nが答えとなるとき\n\\(a,b \\le 10^6\\)\nであることが分かります。(\n\\(f(10^6,0)=10^{18}\\)\nであり、もし\n\\(a,b\\)\nの少なくとも一方が\n\\(10^6\\)\nより大きいなら\n\\(f(a,b)>10^{18}\\)\nとなります。)\nなので、この問題での目標は、全ての\n\\(0 \\le i \\le 10^6\\)\nに対して\n\\(f(i,j) \\ge N\\)\nなる最小の非負整数\n\\(j\\)\nを求め、それら全てに対して\n\\(\\min f(i,j)\\)\nを求めることになります。\nここで、\n\\(i_1 \\le i_2\\)\nであるとき、\n\\(i=i_1\\)\nである場合の\n\\(j\\)\nを\n\\(j_1\\)\n、\n\\(i=i_2\\)\nである場合の\n\\(j\\)\nを\n\\(j_2\\)\nとすると、\n\\(j_1 \\ge j_2\\)\nとなります。 (\n\\(f(i_1,j_1) \\ge N\\)\nのとき、\n\\(f(i_2,j_1) \\ge N\\)\nとなります。)\nこの性質を利用して、以下のアルゴリズムが成立します。\nはじめ、変数\n\\(j=10^6\\)\nと初期化する。また、暫定的な解\n\\(X= \\infty\\)\nとしておく。\n\\(i = 0\\)\nから\n\\(10^6\\)\nまで、以下を繰り返す。\n\\(f(i,j) \\ge N\\)\nかつ\n\\(j \\ge 0\\)\nである限り、以下を繰り返す。\n\\(X=\\min(X,f(i,j))\\)\nとし、その後\n\\(j\\)\nを\n\\(1\\)\n減算する。\n実装例(C++):\nまた、このアルゴリズムと同等のことを以下のように実装すると定数倍高速です。この実装は、本質的には尺取り法です。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nlong long f(long long a,long long b){\n  return (a*a*a + a*a*b + a*b*b + b*b*b);\n}\n\nint main(){\n  long long n;\n  cin >> n;\n  long long x=8e18;\n  long long j=1000000;\n  for(long long i=0;i<=1000000;i++){\n    while(f(i,j)>=n && j>=0){\n      x=min(x,f(i,j));\n      j--;\n    }\n  }\n  cout << x << '\\n';\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nlong long f(long long a,long long b){\n  return (a*a*a + a*a*b + a*b*b + b*b*b);\n}\n\nint main(){\n  long long n;\n  cin >> n;\n  long long x=8e18;\n  long long i=0,j=1000000;\n  while(i<=j){\n    long long cf=f(i,j);\n    if(cf>=n){x=min(x,cf);j--;}\n    else{i++;}\n  }\n  cout << x << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "cf478f165108250354fbbfbd76c58afa0f848c73cc34f6cfbc7ca47ff5d437a4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc246/abc246_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

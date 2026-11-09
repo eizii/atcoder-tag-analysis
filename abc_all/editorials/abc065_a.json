@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc065_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc076/editorial.pdf",
+      "text": "A: Expired?\n\n  A ≥B, A < B ≤A + X, B > A + X の3 通りに場合分けをする問題です。C++ での実装例を以下に示\n\nします。\n\n #include <stdio . h>\n\n int main ()\n\n {\n\n           int x ,  a , b ;\n\n          scanf (”%d%d%d” , &x , &a , &b ) ;\n\n                    i f (−a + b <= 0) p r i n t f (” d e l i c i o u s \\n ” ) ;\n\n            e l s e   i f (−a + b <= x) p r i n t f (” s a f e \\n ” ) ;\n\n            e l s e  p r i n t f (” dangerous\\n ” ) ;\n\n }",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "67efabd43a2ffdecb243984efb721d1fae3a810518ac72340a846b243e4f7133"
+    }
+  ],
+  "status": "available"
+}

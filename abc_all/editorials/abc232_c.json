@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc232_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc232/editorial/3143",
+      "text": "整数\n\\(X_{i, j}\\)\nを、高橋君のおもちゃにおいてボール\n\\(i, j\\)\nを結ぶひもが存在するなら\n\\(1\\)\n、そうでないなら\n\\(0\\)\nと定めます。\n同様に、整数\n\\(Y_{i, j}\\)\nを、青木君のおもちゃにおいてボール\n\\(i, j\\)\nを結ぶひもが存在するなら\n\\(1\\)\n、そうでないなら\n\\(0\\)\nと定めます。\n\\((1, 2, \\dots, N)\\)\nを並べ替えて得られる順列\n\\(P\\)\nを全探索することを考えます。\n\\(P\\)\nが条件をみたすことは、次が成り立つことと同値です。\n任意の\n\\(1 \\leq i \\leq N, 1 \\leq j \\leq N\\)\nに対し\n\\(X_{i, j} =  Y_{P_i, P_j}\\)\nこれが成り立つかどうかは\n\\(O(N^2)\\)\nで判定することができます。\n\\(P\\)\nとしては\n\\(N!\\)\n通りあるので、全体の計算量は\n\\(O(N^2 \\times N!)\\)\nとなり、実行時間制限に間に合います。\n順列の全列挙は、C++ であれば\nstd::next_permutation\n、Python であれば\nitertools.permutations\nを使うのがよいでしょう。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector x(n, vector<bool>(n)), y(n, vector<bool>(n));\n    for (int i = 0; i < m; ++i) {\n        int a, b;\n        cin >> a >> b;\n        a -= 1, b -= 1;\n        x[a][b] = x[b][a] = true;\n    }\n    for (int i = 0; i < m; ++i) {\n        int c, d;\n        cin >> c >> d;\n        c -= 1, d -= 1;\n        y[c][d] = y[d][c] = true;\n    }\n    vector<int> p(n);\n    iota(begin(p), end(p), 0);\n    int ans = 0;\n    do {\n        bool ok = true;\n        for (int i = 0; i < n; ++i) {\n            for (int j = 0; j < n; ++j) {\n                if (x[i][j] != y[p[i]][p[j]]) {\n                    ok = false;\n                }\n            }\n        }\n        if (ok) {\n            cout << \"Yes\\n\";\n            return 0;\n        }\n    } while (next_permutation(begin(p), end(p)));\n    cout << \"No\\n\";\n}",
+        "import itertools\n\nn, m = map(int, input().split())\na = [[False] * n for _ in range(n)]\nb = [[False] * n for _ in range(n)]\n\nfor _ in range(m):\n  u, v = map(int, input().split())\n  u -= 1\n  v -= 1\n  a[u][v] = a[v][u] = True\n  \nfor _ in range(m):\n  u, v = map(int, input().split())\n  u -= 1\n  v -= 1\n  b[u][v] = b[v][u] = True\n  \nans = False\nfor p in itertools.permutations(range(n)):\n  ok = True\n  for i in range(n):\n    for j in range(n):\n      if a[i][j] != b[p[i]][p[j]]:\n      \tok = False\n  if ok:\n    ans = True\nprint(\"Yes\" if ans else \"No\")"
+      ],
+      "text_sha256": "81b4fb554d602d4a5944be7e10fb9301d99ca9dbac6a33f7a4780d665ad3b39e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc232/abc232_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

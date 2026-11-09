@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc233_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc233/editorial/3174",
+      "text": "まず、\n\\(X < 10^{500000}\\)\nという制約に注目しましょう。この値は通常の整数型として管理するにはとても大きすぎます。\nなので、この問題は\n\\(X\\)\nを文字列として受け取って解く必要があります。\n求める値がどのようなものか、\n\\(X=123456\\)\nの具体例を用いて検討しましょう。\n各項を横に並べてもよく分からないので、(\n\\(1\\)\n以上の)各項を縦に並べて筆算のような形で書いてみましょう。ただし、各項の小数点以下を切り捨ててから足し合わせることに注意してください。\nここで、「和の下から\n\\(k\\)\n桁目には、\n\\(X\\)\nの最も上の位から下から\n\\(k\\)\n桁目までが足されている」ことが見て取れます。\n実際、先ほどの筆算に以下のような計算過程を書き足すことができます。\nこれを(繰り上がりも含めて)上手く実装する必要があります。\n実装の方針はいくつかあると思われますが、ひとつの方針として、大まかに以下の手順で下の位から決定していくことができます。\n\\(s\\)\nを\n\\(X\\)\nの桁和、\n\\(c=0\\)\nとして初期化する。\n\\(c\\)\nに\n\\(s\\)\nを加算する。\n答えのうち現在着目している桁を、\n\\(c\\)\nを\n\\(10\\)\nで割った余りとして確定させる。\n\\(c\\)\nを\n\\(10\\)\nで割り小数点以下を切り捨てる。ここが繰り上がりに対応する。\n\\(s\\)\nから\n\\(X\\)\nの現在着目している桁の値を引き去る。(ただし、そのようなものがなければ引き去る値を\n\\(0\\)\nとする。) この時点で、\n\\(s\\)\nは\n\\(X\\)\nの先頭の桁から現在着目している桁のひとつ上の桁までの桁和となる。\n\\(X\\)\nの桁をすべて消化して、かつ\n\\(c=0\\)\nとなるまで 2. から 5. の流れを繰り返す。\n実装例(C++):",
+      "codes": [
+        "123456\n  12345 .6\n   1234 .56\n    123 .456\n     12 .3456\n+     1 .23456\n-------\n 137171",
+        "123456\n  12345\n   1234\n    123\n     12\n+     1\n-------\n     21\n    15\n   10\n   6\n  3\n+1\n-------\n 137171",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string x;\n  cin >> x;\n  int s=0,c=0;\n  for(auto &nx : x){s+=(nx-'0');}\n  string res;\n  for(int i=x.size()-1;;i--){\n    c+=s;\n    res.push_back('0'+(c%10));\n    c/=10;\n    if(i>=0){s-=(x[i]-'0');}\n    if(i<=0 && c==0){break;}\n  }\n  reverse(res.begin(),res.end());\n  cout << res << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "79101bba4538ac5dd5a43c52e0109913b480909d449a9f354e1f4007051abdb6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc233/abc233_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc233/editorial/3193",
+      "text": "多倍長演算を使って簡単に計算する方法を示します。\n\\(X_i\\)\nを\n\\(X\\)\nの下から\n\\(i\\)\n桁目の数字とします。\n\\(a \\bmod b\\)\nで\n\\(a\\)\nを\n\\(b\\)\nで割った余りを表すことにします。\nまた\n\\(\\displaystyle s = \\sum_{i}{X_i}\\)\nを\n\\(X\\)\nの各位の数の和とします。\n求めるものは、\n\\(\\displaystyle \\sum_{k=0}^{\\infty} \\left \\lfloor \\frac{X}{10^k} \\right \\rfloor\\)\n\\(=\\displaystyle \\sum_{k=0}^{\\infty} \\frac{X}{10^k} - \\sum_{k=0}^{\\infty} \\frac{X\\bmod 10^k}{10^k}\\)\n\\(=\\displaystyle \\sum_{k=0}^{\\infty} \\frac{X}{10^k} - \\sum_{i}\\sum_{k=1}^{\\infty} \\frac{X_i}{10^k}\\)\n\\(=\\displaystyle \\frac{10X}{9} - \\sum_{i}\\frac{X_i}{9}\\)\n\\(=\\displaystyle \\frac{10X-s}{9}\\)\nと表せます。これは多倍長演算ができる言語であれば簡単に計算できます。\nAC コード\n（PyPy3）",
+      "codes": [],
+      "text_sha256": "837fee18130df0f96a88eda48d4c6e7e453bebc3181849b8ae688317da7f7d15",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc233/abc233_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

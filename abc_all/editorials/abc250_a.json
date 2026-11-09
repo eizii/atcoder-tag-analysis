@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc250_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc250/editorial/3927",
+      "text": "ぱっと思いつきそうな解法として、場合分けに頼った解法が挙げられますが、非常に間違いが発生しやすいため危険です。そこで、この解説ではなるべく簡単に解く方針を紹介します。\n全体の方針としては、\nマス\n\\((R,C)\\)\nの左側にマスがある\nマス\n\\((R,C)\\)\nの右側にマスがある\nマス\n\\((R,C)\\)\nの上側にマスがある\nマス\n\\((R,C)\\)\nの下側にマスがある\nのうち、真であるようなものの数を数えます。\nまず、マス\n\\((R,C)\\)\nの左側にマスが存在する条件を考えます。\n「マス\n\\((R,C)\\)\nの左側にマスが存在する」ことは「\n\\(C \\neq 1\\)\n」と同値です。\n次に、マス\n\\((R,C)\\)\nの右側にマスが存在する条件を考えます。\n「マス\n\\((R,C)\\)\nの右側にマスが存在する」ことは「\n\\(C \\neq W\\)\n」と同値です。\n上下方向も同様にして判定することができます。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int h,w;\n  int r,c;\n  cin >> h >> w;\n  cin >> r >> c;\n  int res=0;\n  if(c!=1){res++;}\n  if(c!=w){res++;}\n  if(r!=1){res++;}\n  if(r!=h){res++;}\n  cout << res << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "6dbba6f5e53cf1367e7be7d6d102a899702b2c6894d39d3a30ef40c5dfb80bab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc250/abc250_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

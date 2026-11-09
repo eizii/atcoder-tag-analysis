@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc468_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc468/editorial/23741",
+      "text": "まず、順列 \\(P\\) は必ず \\((1)\\) と \\((1,2,\\ldots,N)\\) の並び替えを連続部分列として含むので \\(S_1=\\) x または \\(S_N=\\) x の場合答えは \\(0\\) です。以降は \\(S_1=S_N=\\) o の場合を考えます。 \\(d_n\\) を \\(S\\) が oxxx...xxo という形の長さ \\(n\\) の文字列であった場合の答えとします。 \\(S_i=\\) o となる \\(i\\) の集合を \\(1=A_1 < A_2< \\ldots <A_M = N\\) とします。 \\(P=()\\) とし、 \\(i=1,2,\\ldots,N\\) の順に \\(P\\) の好きな場所に要素 \\(i\\) を挿入して \\(P\\) を作ることを考えると、求める答えは \\(\\displaystyle \\prod_{i=1}^{M-1}d_{A_{i+1}-A_i+1}\\) となります。したがって、 \\(d_2,d_3,\\ldots,d_N\\) の値が求まれば良いです。 \\((1,2,\\ldots,N)\\) の順列 \\(P\\) は \\(N!\\) 個ありますが、それらを \\((1,2,\\ldots,k)\\) の並び替えを連続部分列として含むような \\(k\\geq 2\\) の最小値で分類します。 最小値が \\(k\\) であるような \\(P\\) は、 \\((1,2,\\ldots,k)\\) の並び替えが \\(d_k\\) 通り、それ以外の要素の並び替えが \\((N-k+1)!\\) 通りです。したがって、 \\(\\displaystyle N!=\\sum_{k=2}^N d_k(N-k+1)!\\) が成り立ちます。この漸化式を用いることで \\(d_2,d_3,\\ldots,d_N\\) の値を計算量 \\(O(N^2)\\) で求めることができます。 また、形式的冪級数を用いることで \\(O(N\\log N)\\) 時間に改善することもできます。 実装例(Python3)",
+      "codes": [
+        "n = int(input())\ns = input()\nMOD = 998244353\nif s[0] == \"x\" or s[-1] == \"x\":\n    print(0)\n    exit()\nfac = [1] * (n + 1)\nfor i in range(1, n + 1):\n    fac[i] = fac[i - 1] * i % MOD\nd = [0] * (n + 1)\nd[1] = 1\nfor i in range(2, n + 1):\n    d[i] = fac[i]\n    for k in range(2, i):\n        d[i] -= d[k] * fac[i - k + 1]\n        d[i] %= MOD\nans = 1\nfor x in s.split(\"o\")[1:-1]:\n    ans *= d[len(x) + 2]\n    ans %= MOD\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "19bfaa291fada93daf059c52fd2734da8b5d4b5b470e1776f3ff05ad42525a71"
+    }
+  ],
+  "status": "available"
+}

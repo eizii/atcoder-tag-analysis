@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc170_f",
+  "editorials": [
+    {
+      "text": "F: Pond Skater\nDijkstra 法を用います。以下のようなグラフを考えます。\n次のような状態量をグラフの頂点と見做します。\n• 現在いるマス\n• すぬけ君が東西南北のどの方向を向いているか\n次のように遷移します。\n• 向いている方向に1 つ進んだマスに蓮がないなら、「向いている方向に1 進んだマスにいて、\n向きはそのまま」という状態量に、今の状態量までの最短コストに1/K を足したコストで\n到達可能とする。\n•「同じマスにいて、向きが90 度回転した」という状態量に、今の状態量までの最短コストの\n小数点以下を切り上げたコストで到達可能とする。\n計算量はO(HWlog(HW)) です。\n",
+      "text_sha256": "7c247729628bc81b1821908850b34e655e52d5744801897d8a124f4e182b012f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc170/abc170_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

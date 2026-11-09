@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc282_h",
+  "title": "Min + Sum",
+  "contests": [
+    {
+      "contest_id": "abc282",
+      "problem_index": "Ex"
+    }
+  ],
+  "difficulty": 2621,
+  "raw_difficulty": 2621,
+  "contest_id": "abc282",
+  "problem_index": "Ex",
+  "url": "https://atcoder.jp/contests/abc282/tasks/abc282_h",
+  "statement": "配点 : 600 点 問題文 2 つの長さ N の整数列 A = (A_1, A_2, \\ldots, A_N) および B = (B_1, B_2, \\ldots, B_N) が与えられます。 1 \\leq l \\leq r \\leq N を満たす整数の組 (l, r) であって下記の条件を満たすものの個数を出力してください。 \\min\\lbrace A_l, A_{l+1}, \\ldots, A_r \\rbrace + (B_l + B_{l+1} + \\cdots + B_r) \\leq S 制約 1 \\leq N \\leq 2 \\times 10^5 0 \\leq S \\leq 3 \\times 10^{14} 0 \\leq A_i \\leq 10^{14} 0 \\leq B_i \\leq 10^9 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N S A_1 A_2 \\ldots A_N B_1 B_2 \\ldots B_N 出力 答えを出力せよ。 入力例 1 4 15\r\n9 2 6 5\r\n3 5 8 9 出力例 1 6 1 \\leq l \\leq r \\leq N を満たす整数の組 (l, r) であって問題文中の条件を満たすものは、 (1, 1), (1, 2), (2, 2), (2, 3), (3, 3), (4, 4) の 6 個です。 入力例 2 15 100\r\n39 9 36 94 40 26 12 26 28 66 73 85 62 5 20\r\n0 0 7 7 0 5 5 0 7 9 9 4 2 5 2 出力例 2 119",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 2 つの長さ N の整数列 A = (A_1, A_2, \\ldots, A_N) および B = (B_1, B_2, \\ldots, B_N) が与えられます。 1 \\leq l \\leq r \\leq N を満たす整数の組 (l, r) であって下記の条件を満たすものの個数を出力してください。 \\min\\lbrace A_l, A_{l+1}, \\ldots, A_r \\rbrace + (B_l + B_{l+1} + \\cdots + B_r) \\leq S"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2 \\times 10^5 0 \\leq S \\leq 3 \\times 10^{14} 0 \\leq A_i \\leq 10^{14} 0 \\leq B_i \\leq 10^9 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S A_1 A_2 \\ldots A_N B_1 B_2 \\ldots B_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 15\r\n9 2 6 5\r\n3 5 8 9"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 6 1 \\leq l \\leq r \\leq N を満たす整数の組 (l, r) であって問題文中の条件を満たすものは、 (1, 1), (1, 2), (2, 2), (2, 3), (3, 3), (4, 4) の 6 個です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 15 100\r\n39 9 36 94 40 26 12 26 28 66 73 85 62 5 20\r\n0 0 7 7 0 5 5 0 7 9 9 4 2 5 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 119"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc282/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:03.168412+00:00",
+  "statement_sha256": "009c8d590d8970b20a3ad41665ea8d2ae86492cd0286a62846e1775099514df7",
+  "editorials": []
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc197_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc197/editorial/999",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「\nWelcome to AtCoder\n」をお試しください。言語ごとに解答例が掲載されています。\n例えば\n\\(s\\)\nの\n\\(2\\)\n文字目、\n\\(3\\)\n文字目、\n\\(1\\)\n文字目を順に出力すればよいです。\n多くの言語で文字列の\n\\(i\\)\n番目を取得する際には先頭の文字を\n\\(0\\)\n番目として数えます。\n解答例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tstd::string s;\n\tstd::cin >> s;\n\tstd::cout << s[1] << s[2] << s[0] << std::endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "8bd72da405ee369f5e101b0e445c7000319094fe0dbb45c2d0039445cac24778",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc197/abc197_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

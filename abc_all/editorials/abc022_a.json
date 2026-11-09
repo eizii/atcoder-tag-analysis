@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc022_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc022/editorial.pdf",
+      "text": "A:Best Body\n\f\n       A-問題概要\n\n●N日間の高橋君の体重の情報が与えられる\n\n   –  1日目の体重はWキログラム\n\n   –   i日目の体重はi-1日目の体重 + A[i] キログラム\n●体重がSキログラム以上Tキログラム以下ならば\n BestBody\n●高橋君がBestBodyであった日数を求めよ\n\f\n         A-解法\n\n●N日分全ての体重を求めて、いちいちBestBody\n か確かめる\n\n\n●P[i] = i日目の高橋君の体重\n\n   –     P[1] = W\n\n   –      P[i] = P[i-1] + A[i]\n\n\n●入力を受け取りながらPを埋めていけばよい\n\f\n   ABC022解説",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "4c31c9d9911304ac20693207cfeb8e72ae6cc9df54c193c6fb659ead3d5dfc91"
+    }
+  ],
+  "status": "available"
+}

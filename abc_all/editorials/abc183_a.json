@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc183_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc183/editorial/283",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practicecontest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nこの問題では、\n\\(X\\)\nが\n\\(0\\)\n以上であるかを調べて条件分岐する必要があります。各言語での条件分岐(if文)の書き方を確認してください。\n回答例(Python)\n回答例(C++)\n回答例(C)",
+      "codes": [
+        "X = int(input())\n\nif X >= 0:\n\tprint(X)\nelse:\n\tprint(0)",
+        "#include <iostream>\nusing namespace std;\n\nint main(){\n\tint X;\n\tcin >> X;\n\tif(X >= 0){\n\t\tcout << X;\n\t}else{\n\t\tcout << 0;\n\t}\n}",
+        "#include<stdio.h>\n\nint main(){\n\tint X;\n\tscanf(\"%d\", X);\n\t\n\tif(X>=0){\n\t\tprintf(\"%d\", X);\n\t}else{\n\t\tprintf(\"0\");\n\t}\n}"
+      ],
+      "text_sha256": "71efab5623979c4d6bde708ff35cb3ca7642a07f8ff5ba3e1ac99ec43f8cbbb8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc183/abc183_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc141_b",
+  "editorials": [
+    {
+      "text": "B: Tap Dance\n条件を「奇数文字目がL でない，偶数文字目がR でない」と言い換えることで単純に書くことが\nできます．以下に実装例を示します．\nListing 1\nC での実装例\n1 #include <stdio.h>\n2 #include <string.h>\n3\n4 int main(void){\n5\nchar s[100 + 1];\n6\n7\nscanf(\"%s\", s);\n8\n9\nint n = strlen(s); // 文字列の長さを得るs\n10\nfor (int i = 0; i < n; i++) {\n11\nif (i % 2 == 0) {\n12\n// 奇数文字目\n13\nif (s[i] == 'L') {\n14\nputs(\"No\");\n15\nreturn 0;\n16\n}\n17\n} else {\n18\n// 偶数文字目\n19\nif (s[i] == 'R') {\n20\nputs(\"No\");\n21\nreturn 0;\n22\n}\n23\n}\n24\n}\n25\n26\nputs(\"Yes\");\n27\nreturn 0;\n28 }\nListing 2\nPython3 での実装例\n1 import re\n2\n3 s = input()\n4 p = re.compile(r'^([^L][^R])*[^L]?$')\n5 if p.match(s):\n\n6\nprint(\"Yes\")\n7 else:\n8\nprint(\"No\")\n",
+      "text_sha256": "ea0f7a2e58d4afe81cfbe12b931a2a794749553d6bf9b8524de53c200a3bd987",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc141/abc141_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

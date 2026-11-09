@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc331_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc331/editorial/7821",
+      "text": "この問題はいくつかの解法が考えられますが、本解説では優先度付きキューを利用した解法を説明します。\nはじめに、大まかな方針として次のようなアルゴリズムを考えます。\n提供されている定食を発見するまで次の操作を繰り返す。\nまだ選んでいない主菜と副菜の組のうち、価格の和が最も高い組のうち 1 つを(何か高速な方法で)選ぶ。\nその組が提供されている定食である場合は、その定食の価格を答えとして出力して操作を全て終了する。\nこのアルゴリズムのループは高々\n\\(L + 1\\)\n回しか回りません。よって、上のアルゴリズム内の「(何か高速な方法で)」という部分で適切なアルゴリズムを構成できればこの問題を十分高速に解くことが出来ます。\n選んでいない主菜と副菜のうち価格の和が最も高い組を高速に発見する方法を説明します。\n説明の簡単のため\n\\(b_1 \\geq b_2 \\geq \\dots \\geq b_M\\)\nとします。(そうでない場合は\n\\(b\\)\nを降順にソートしたときの index を利用すればよいです。) このとき、以下の手順によって価格の和が最も高い組を取り出す操作を実行することができます。\n補助変数として長さ\n\\(M\\)\nの配列\ncur\nを用意する。\ncur[i]\nは「主菜が\n\\(i\\)\nの定食をどこまで調べたか」を意味する配列で、はじめ\ncur[i] = 1\nで初期化されている。\n(コスト, 主菜の種類) の組を格納してコスト降順に取り出す優先度付きキュー\nQ\nを用意する。\n\\(i=1, 2, \\dots, N\\)\nについて、\nQ\nに\n\\((a_i + b_1, i)\\)\nを追加する。\n選んでいない主菜と副菜のうち価格の和が最も高い組を取り出す操作は次のように行う。\n\\(Q\\)\nの先頭の要素を\n\\((c, i)\\)\nとする。\n\\(Q\\)\nの先頭の要素を pop する。価格の和が最も高い主菜と副菜の組は\n\\((i, \\mathrm{cur}[i])\\)\nである。\nその後、\ncur[i]\nに\n\\(1\\)\nを加算する。\ncur[i]\nが\n\\(M\\)\n以下である場合は\nQ\nに\n\\((a_i + b_\\mathrm{cur[i]}, i)\\)\nを追加する。\n正当性については、「調べていない組のうちコスト最大である組が\nQ\nに必ず格納されている」という事実を証明することで確認できます。選挙のドント方式を知っている人は、ドント方式に似たアルゴリズムとして捉えると分かりやすいかもしれません。\n以上のアルゴリズムを適切に実装することで、この問題を\n\\(\\mathrm{O}(L (\\log N + \\log L) + N + M \\log M)\\)\nで解くことが出来て、これは十分高速です。",
+      "codes": [
+        "#include <algorithm>\n#include <iostream>\n#include <queue>\n#include <set>\n#include <utility>\n#include <vector>\nusing namespace std;\nint main() {\n  int N, M, L;\n  cin >> N >> M >> L;\n  vector<int> a(N), b(M);\n  for (auto& x : a) cin >> x;\n  for (auto& x : b) cin >> x;\n  set<pair<int, int>> bad;\n  for (int i = 0; i < L; i++) {\n    int c, d;\n    cin >> c >> d;\n    bad.emplace(c - 1, d - 1);\n  }\n\n  vector<int> ord_b(M);\n  for (int i = 0; i < M; i++) ord_b[i] = i;\n  sort(begin(ord_b), end(ord_b), [&](int i, int j) { return b[i] > b[j]; });\n\n  vector<int> cur(N);\n  priority_queue<pair<int, int>> Q;\n  for (int i = 0; i < N; i++) Q.emplace(a[i] + b[ord_b[cur[i]]], i);\n  while (true) {\n    auto [cost, i] = Q.top();\n    int j = cur[i];\n    Q.pop();\n    if (bad.count({i, ord_b[j]}) == 0) {\n      cout << cost << \"\\n\";\n      break;\n    }\n    cur[i]++;\n    if (cur[i] != M) Q.emplace(a[i] + b[ord_b[cur[i]]], i);\n  }\n}"
+      ],
+      "text_sha256": "7083fc3caf6ade990ac44ba0a64db2213c10bf58022819a9e9429121a64c1594",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc331/abc331_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc331/editorial/7883",
+      "text": "各\n\\(i\\)\nに対して、主菜\n\\(i\\)\nと合わせられない副菜の集合を高速に走査できるようにしておきます（隣接リストと似たような形式の配列などに入れておくとよい）。\nセグ木\n\\((s_1, s_2, \\dots, s_M)\\)\nを\n\\((b_1, b_2, \\dots, b_M)\\)\nで初期化しておきます。\n主菜\n\\(i\\)\nに対し、合わせられない副菜\n\\(j\\)\nたちについて\n\\(s_j \\gets -\\infty\\)\nで更新した後、セグ木の全体の最大値と\n\\(a_i\\)\nの和を求めます。これが、主菜\n\\(i\\)\nが選ばれる定食の価格の最大値となります。\n主菜\n\\(i\\)\nに対する計算をした後は、\n\\(s_j \\gets b_j\\)\nに戻し、次の主菜についての計算をします。\nセグ木の更新は全体で\n\\(2L\\)\n回、最大値計算は\n\\(N\\)\n回なので、計算量は\n\\(O((N+L)\\log(M))\\)\n時間です。",
+      "codes": [],
+      "text_sha256": "0afa890fd8347f07820ddee21f6f7b0c7b3ca8dbd06d770f6fe2f6aabcb5145a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc331/abc331_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc331/editorial/7885",
+      "text": "簡単のため、価格\n\\(a, b\\)\nは降順にソートされているものとします。\n\\(l := \\lceil{\\sqrt{L+1} \\rceil}\\)\nとすると、最も価格の高い定食は\n主菜の価格が\n\\(a_1, a_2, \\ldots, a_l\\)\nのいずれか\n副菜の価格が\n\\(b_1, b_2, \\ldots, b_l\\)\nのいずれか\nのどちらかを必ず満たします（両方の条件を満たさない任意の定食に対し、それ以上に高価な組み合わせが\n\\(L+1\\)\n個以上存在するため）。\nしたがって、\n\\((a_1, a_2, \\ldots, a_l) \\times (b_1, b_2, \\ldots, b_M)\\)\nまたは\n\\((a_1, a_2, \\ldots, a_N) \\times (b_1, b_2, \\ldots, b_l)\\)\nという組み合わせを全探索すればよいです。\n計算量は\n\\(O((N+M) \\sqrt{L} + (N+M)\\log{(N+M)})\\)\n時間です。\n実装例\nさらに工夫することで\n\\(O(L \\log{L} + (N+M)\\log{(N+M)})\\)\n時間の解法になります。\n再び、価格\n\\(a, b\\)\nは降順にソートされているものとします。また、インデックス\n\\(i, j\\)\nは 1-based とします。\n自身以上に高価な組み合わせが\n\\(L+1\\)\n個より多く存在する場合、その組み合わせは最も価格の高い定食になりえません。\nしたがって、\n\\(i \\times j \\leq L+1\\)\nを満たす\n\\((a_i, b_j)\\)\nの組だけ調べれば十分です。\nこのとき、ソートを除いた計算量は\n\\(O(L \\log{L})\\)\n時間になります。\n実装例",
+      "codes": [],
+      "text_sha256": "241f8027a6b9e84529b9f044f3dccdf85223543be26541b10214e61d45b105ef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc331/abc331_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc331/editorial/7886",
+      "text": "rsk0315 さんの解説\nのセグ木パートは std::set 等でもできます。\n\\((b_j, j)\\)\nをすべて入れた set を用意しておき、各主菜\n\\(i\\)\nに対する計算では\n合わせられない副菜を set から削除\nset に入っているうち\n\\(b_j\\)\nが最大のものを取得\n1. で削除した要素を set に入れ直す\nを行えばよいです。計算量は同様に\n\\(O((N+L)\\log M)\\)\n時間です。",
+      "codes": [],
+      "text_sha256": "6b91c9f3747baefdf9c4476e443d99c8357fdb486ec2bc13b01f28fc60e503e5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc331/abc331_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc331/editorial/7849",
+      "text": "https://atcoder.jp/contests/abc176/tasks/abc176_e\nhttps://atcoder.jp/contests/abc298/tasks/abc298_f",
+      "codes": [],
+      "text_sha256": "9c4613ec53a7b15def3ca7ebca7633ff0456393776eb3f232962df21a701d052",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc331/abc331_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc331/editorial/7853",
+      "text": "主菜を一つずつ試します。副菜については、事前に価格の降順にソートしておき、いま調べている主菜と組み合わせられるものを発見したら終了することにします。すると合計で高々\n\\(N + L\\)\n品の副菜を試すことになり、\n\\(O(M \\log M + N + L)\\)\n時間の解法を得ます（ある主菜と副菜が組み合わせられるかの判定は、ハッシュ集合を使えば定数時間で行えます）。\n実装例（Python）",
+      "codes": [
+        "N, M, L = map(int, input().split())\na = list(map(int, input().split()))\nb = list(map(int, input().split()))\ng = [set() for _ in range(N)]\nfor _ in range(L):\n    c, d = map(lambda x: int(x) - 1, input().split())\n    g[c].add(d)\n\ns = sorted([(p, j) for j, p in enumerate(b)], reverse=True)\nans = 0\nfor i in range(N):\n    for p, j in s:\n        if j not in g[i]:\n            ans = max(ans, a[i] + p)\n            break\nprint(ans)"
+      ],
+      "text_sha256": "adb952c66e88443a6edd25933311babd5ee3878a7abd322caa74348aa269ea40",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc331/abc331_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

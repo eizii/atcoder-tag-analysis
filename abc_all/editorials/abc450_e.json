@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc450_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc450/editorial/17731",
+      "text": "原案：toam\nこの問題は再帰関数を用いて解くことができます。\n文字列\n\\(T\\)\nの長さを\n\\(|T|\\)\nと表します。\n\\(i \\geq 2\\)\nのとき、\n\\(S_i\\)\nは\n\\(S_{i+1}\\)\nの prefix です。よって、\n\\(|S_K| \\geq \\max R_i\\)\nとなる最小の\n\\(K\\)\nをとり、\n\\(S_{10^{18}}\\)\nの代わりに\n\\(S_K\\)\nを考えてよいです。\n\\(|S_i|\\)\nは\n\\(i\\)\n番目のフィボナッチ数以上になることから、\n\\(K=O(\\log\\max R_i)\\)\nです。（特に今回は高々\n\\(88\\)\nです）\n\\(L\\)\n文字目から\n\\(R\\)\n文字目までの個数は「先頭から\n\\(R\\)\n文字目までの個数」から「先頭から\n\\(L-1\\)\n文字目までの個数」を引いたものです。よって「先頭から\n\\(N\\)\n文字目までの個数は？」という形の問題を\n\\(2\\)\n回解けばもとの問題に答えることができます。以下この問題を考えます。\n\\(f_c(k,n)\\)\nを、\n\\(S_k\\)\nの\n\\(n\\)\n文字目までに含まれる文字\n\\(c\\)\nの個数と定めます。\n\\(k\\geq 3\\)\nなら\n\\(S_k\\)\nが\n\\(S_{k-1}\\)\nと\n\\(S_{k-2}\\)\nをこの順に連結した文字列であることから、\n\\(n\\leq |S_{k-1}|\\)\nであるかどうかによって場合分けすることで、以下の式を得ます。\n\\(f_c(k,n)=\\begin{cases}\nX \\text { の } n \\text{ 文字目までに含まれる } c \\text{ の個数} & k=1 \\text{ のとき} \\\\\nY \\text { の } n \\text{ 文字目までに含まれる } c \\text{ の個数} & k=2 \\text{ のとき} \\\\\nf_c(k-1,x) & k\\geq 3 \\text{ かつ } n \\leq |S_{k-1}| \\text{ のとき}\\\\\n(S_{k-1} \\text{ に含まれる } c \\text{ の個数}) +  f_c(k-2,n-|S_{k-1}|) & k\\geq 3 \\text{ かつ } n > |S_{k-1}| \\text{ のとき}\n\\end{cases}\\)\nよって、予め\n\\(|S_1|,\\ldots,|S_K|\\)\n\\(X\\)\nの先頭から\n\\(i\\)\n文字目までに含まれる文字\n\\(c\\)\nの個数\n\\(Y\\)\nの先頭から\n\\(i\\)\n文字目までに含まれる文字\n\\(c\\)\nの個数\n\\(S_k\\)\nに含まれる文字\n\\(c\\)\nの個数\nをそれぞれ前計算して\n\\(O(1)\\)\nで得られる状態にしておけば、この再帰を用いて\n\\(f_c(K,n)\\)\nに\n\\(O(K)\\)\nで答えることができます。\n文字種数を\n\\(\\sigma\\)\nとして、前計算を含め\n\\(O(\\sigma(|X|+|Y|+\\log \\max R_i)+Q\\log\\max R_i)\\)\nでこの問題を解くことができました。",
+      "codes": [],
+      "text_sha256": "eb4ffbbfb98e53529bba943923e4d3f45ec626891a6bc32bf9f0e008dadeb7a0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc450/abc450_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

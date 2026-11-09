@@ -1,0 +1,367 @@
+   AtCoder Beginner Contest 071 / AtCoder Regular Contest 081 解説
+
+
+                                             writer: semiexp
+
+                                    2017 年8 月20 日
+
+
+
+                         For International Readers: English editorial starts on page 5.
+
+
+ A: Meal Delivery
+
+  定義どおりに，すぬけ君の住んでいる位置と，店A, B の間の距離を求めます．この距離の大小に応じて，より近いほ
+
+うを出力すればよいです．
+
+    • C++ による解答例: https://abc071.contest.atcoder.jp/submissions/1518940
+
+    • Ruby による解答例: https://abc071.contest.atcoder.jp/submissions/1518942
+
+    • Rust による解答例: https://abc071.contest.atcoder.jp/submissions/1516215
+
+
+ B: Not Found
+
+  英小文字26 種類のそれぞれについて，S の中に現れるかを記録する配列を持っておきます．この配列は最初すべて
+「現れない」(false) で初期化しておきます．S を1 文字目から順に見ていって，出てきた文字それぞれについて，配列
+ 上でその文字に対応する位置を「現れる」(true) に更新します．S の最後の文字まで見終わった後には，この配列を見
+るだけである文字がS の中に現れるかわかるようになります．
+  最後に，この配列を，a, b, ..., z の順に見ていって，false となった最初の文字を出力すればよいです．ただし，z ま
+ で見終わってもfalse が現れなかった場合は，すべての英小文字がS 中に現れているということなので，None を出力
+
+します．
+
+    • C++ による解答例: https://abc071.contest.atcoder.jp/submissions/1518956
+
+    • Ruby による解答例: https://abc071.contest.atcoder.jp/submissions/1518966
+
+    • Rust による解答例: https://abc071.contest.atcoder.jp/submissions/1516216
+
+
+ C: Make a Rectangle
+
+  H × W の長方形を作るためには，長さH, W の棒が2 本ずつ必要です．ただし，H = W の場合は，長さH の棒が
+ 4 本必要です．
+  各辺に使う棒は，上の条件のもとで，できるだけ長い棒を貪欲に使えばよいです．{Ai} をソートすると，同じ値は連
+続した区間に集まるため，各長さの棒が何本あるかを知ることができます．なので，長さの長い順に見ていって，次の
+
+ように辺の長さを決定すればよいです．
+
+
+
+                                                    1
+
+   • 同じ長さの棒が全部で4 本以上ある場合: その長さの棒を縦，横両方に使う(すでに片方の辺が決定している場合
+   はそちらを優先)
+
+   • 同じ長さの棒が全部で2 本または3 本ある場合: その長さの棒を縦，横のうち片方に使う
+
+   • 同じ長さの棒が全部で1 本しかない場合: その長さの棒は使えない
+
+途中で両方の辺が決定した場合は，長方形が作れているので，その長方形の面積(縦× 横) を出力します．最後の辺ま
+で見ても長方形の辺が足りない場合は，長方形を作ることはできないので，0 を出力します．
+
+
+D: Coloring Dominoes
+
+ ドミノの並べ方は，縦2 × 横1 のドミノを1 個並べるか(X) ，縦1 × 横2 のドミノを2 個縦に並べるか(Y ) のど
+
+ちらかを，横につなげたような並べ方になります．
+
+
+
+
+
+ 左から順にドミノを塗ることを考えます．縦に2 個ドミノが並んでいる箇所については，この2 個を同時に塗ります．
+
+ 一番左の箇所については，
+
+   • X: 3 通り
+
+   • Y : 6 通り
+
+の塗り方があります．
+
+
+
+
+
+ また，それ以外の箇所については，それより左の箇所がすべて塗られているとしたとき，
+
+   • X (すぐ左がX): 2 通り
+
+   • X (すぐ左がY ): 1 通り
+
+   • Y (すぐ左がX): 2 通り
+
+   • Y (すぐ左がY ): 3 通り
+
+の塗り方があります．
+
+
+
+
+
+                                                   2
+
+ よって，ドミノの並べ方を判定した上で，左から順に上の規則で並べ方の個数を求めていけばよいです．
+
+
+E: Don’t Be a Subsequence
+
+ 以下，文字列は英小文字のみからなるもののみを考えます．
+ 文字列A に対して，「その文字列のsuﬃx であって，すべての英小文字を含むもののうち，最も短いもの」を順次取り
+除くことを考えます．ただし，そのようなものが存在しなくなったら終了します．この時，suﬃx を取り除くことができ
+た回数をK とします．また，i 番目に取り除いたsuﬃx をSK−1−i，最後に残った文字列をA′ とします．このとき，A
+はA′, S1, S2, . . . , SK をこの順に並べた文字列になります．
+ A の部分列でない最短の文字列の長さはK + 1 になることを示します．まず，長さK の任意の文字列B がA の部
+分列であることを示します．(長さK 未満の場合は，末尾に適当に文字を加えて長さK にした場合について示されるの
+で十分です) S1, . . . , SK はいずれもすべての英小文字を含むため，Si を構成する文字をB のi 文字目に一致する文字1
+個を除いて取り除くことができます．また，A′ を構成する文字はすべて取り除きます．すると，S から文字を取り除い
+てB が得られるため，B はS の部分列です．
+ 次に，A の部分列でない長さK + 1 の文字列が存在することを示します．文字列C = c0c1 . . . cK を次で定めます．
+
+   • c0 は，A′ に現れない文字のうち1 つとする(A′ からはsuﬃx を取り除けなかったことから，このような文字は必
+   ず存在します)．
+
+   • ci (i = 1, 2, . . . , K) は，Si の最初の文字とする．
+
+すると，C はA の部分列ではありません．実際，A を構成する文字をいくつか取り除いてC を得ようとすると，
+
+   • c0 がA の中で初めて現れるのはS1 の中であるため，A′ はすべて取り除かなければなりません．
+
+   • c1 はS1 の中では1 文字目にしか現れないため(取り除くsuﬃx の最小性より)，c0 の次にc1 を得るためには，S1
+    はc0 を得るために残した文字を除いてすべて取り除かなければなりません．
+
+   •  ...
+
+   • cK はSK の中では1 文字目にしか現れないため，cK−1 の次にcK を得るためには，SK はcK−1 を得るために
+   残した文字を除いてすべて取り除かなければなりません．すると，cK のために使える文字がA にまったく残らな
+   くなってしまします．
+
+よって，A の部分列でない最短の文字列の長さはK + 1 になることがわかりました．
+
+
+
+
+                                                   3
+
+ 上の議論から，suﬃx を取り除く作業を行うことで，A の任意のsuﬃx についても「部分列でない最短の文字列の長
+
+さ」を求めることができます．
+ すると，1 文字目から貪欲に文字を決定していくことで，辞書順最小の答えを求めることができます．文字c を使う
+ことができるかどうかは，現在の位置以降の最初のc の現れの位置pc を求め，S のpc 文字目以降についての「部分列
+でない最短の文字列の長さ」が，現在の位置以降の「部分列でない最短の文字列の長さ」よりちょうど1 小さくなって
+いるかで判定することができます．pc は，各文字の現れる位置をソートして持っておくと，二分探索でO(log |A|) で求
+めることができます．
+ 各位置に対しては文字種をm としてO(m log |A|) で次の文字を決定することができ，答えの長さはO(|A|/m) なの
+で，以上のアルゴリズムにより，答えをO(|A| log |A|) で求めることができます．
+
+
+F: Flip and Rectangles
+
+ マス目に含まれる2 × 2 の部分であって，黒マスを奇数個(1 個または3 個) 含むものを「悪い部分」とよぶことにし
+ます．うまく操作を行えば長方形S を選ぶことができることと，S が悪い部分を含まないことは同値です．
+ 実際，S が悪い部分を含むならば，どう操作を行ってもその部分をすべて黒で塗られた状態にすることはできません．
+ 次にS が悪い部分を含まない場合を考えます．このとき，S の一番上の行，一番左の列をすべて黒く塗られた状態に
+
+することができます．ここで，どのような操作を行っても，悪い部分が悪くない部分に変わったり，その逆が起きたりす
+ることはないことに注意します．よって，この状態においても，S は悪い部分を含まないため，S の上から2 行目，左
+から2 列目のマスは黒で塗られています．同様に，上から2 行目，左から3 列目，... のマスはすべて黒で塗られてい
+ることがわかり，上から2 行目はすべて黒で塗られていることがわかります．さらに同様にして，上から3 行目，... の
+マスもすべて黒で塗られていることがわかり，結果としてS 全体が黒で塗られていることがわかります．よって，S 全
+体を黒で塗られた状態にすることができ，S を選ぶことができることがわかります．
+
+ ここで，マス目において．すべての悪い部分の中心の格子点に，印を付けることを考えます．すると，選ぶことがで
+きる長方形は，内部に(頂点や辺上にはあってもよい) 印を含まない長方形になります．
+
+
+
+
+
+ この「印を含まない長方形」は，最大長方形のアルゴリズムを用いるとO(HW) で求めることができます．
+
+
+
+
+
+                                                   4
+
+AtCoder Beginner Contest 071 / AtCoder Regular Contest 081 Editorial
+
+
+                                             writer: semiexp
+
+                                  August 20th, 2017
+
+
+
+A: Meal Delivery
+
+   • C++ solution: https://abc071.contest.atcoder.jp/submissions/1518940
+
+   • Ruby solution: https://abc071.contest.atcoder.jp/submissions/1518942
+
+   • Rust solution: https://abc071.contest.atcoder.jp/submissions/1516215
+
+
+B: Not Found
+
+   • C++ solution: https://abc071.contest.atcoder.jp/submissions/1518956
+
+   • Ruby solution: https://abc071.contest.atcoder.jp/submissions/1518966
+
+   • Rust solution: https://abc071.contest.atcoder.jp/submissions/1516216
+
+
+
+
+
+                                                   1
+
+C: Make a Rectangle
+
+  In order to make an H × W rectangle, you need two sticks of length H and two sticks of length W. In case H = W,
+you need four sticks of length H.
+  Under the constraints above, you should choose the longest possible sticks greedily.  First, you sort {Ai} in the
+decreasing order. Since sticks of the same lengths are grouped together after the sorting, we can count the number of
+sticks of each length. We check the sticks in the decreasing order of their lengths, and do the following:
+
+   •  If we haven’t chosen any sticks and we ﬁnd four (or more) sticks of the same length, we choose them and ﬁnish
+     the process.
+
+   •  If we haven’t chosen any sticks and we ﬁnd two or three sticks of the same length, we choose them (and continue
+     the process).
+
+   •  If we have chosen two sticks and we ﬁnd two (or more) sticks of the same length, choose two of them and ﬁnish
+     the process.
+
+   • Otherwise, skip sticks of current length.
+
+
+   If we successfully choose four sticks after this process, print the area of the rectangle. Otherwise, print 0 instead.
+
+
+
+
+
+                                                   2
+
+D: Coloring Dominoes
+
+  The arrangement of dominoes is a concatenation of the following two patterns:
+
+
+
+
+
+ We paint dominoes from left to right.
+
+  The number of ways to paint the leftmost part is as follows:
+
+   • X: 3
+
+   • Y : 6
+
+
+
+
+
+  For other parts, the number of ways to paint a part is as follows (assuming that the left part is already painted):
+
+   • X (to the right of X): 2
+
+   • X (to the right of Y ): 1
+
+   • Y (to the right of X): 2
+
+   • Y (to the right of Y ): 3
+
+
+
+
+
+  The answer is the product of these numbers.
+
+
+
+
+
+                                                   3
+
+E: Don’t Be a Subsequence
+
+  First, let’s compute the length of the desired string. Later, we’ll describe how to extend the solution to compute
+the lexicographically smallest string.
+
+  Let f(s) be the length of the shortest string that is not a subsequence of s. Suppose that t is not a subsequence of
+s. What t should we choose, assuming that t starts with a c (arbitrary character)?
+
+   •  If s doesn’t contain c, the length of t can be 1: a single c.
+
+   • Otherwise, let i be the leftmost occurrence of c in s (s[i] = c). t is not a subsequence of s if and only if t.substr(1)
+       is not a subsequence of s.substr(i + 1).
+
+
+  Here, s.substr(i) means the suﬃx of s from the i-th character.
+  Therefore, we can compute the length of f(s) using the following DP:
+  Deﬁne dp[i] as the length of f(s.substr(i)). Also, precompute next(i, c): the minimum index j such that j ≥i and
+s[j] = c. Then,
+
+
+
+                                             dp[i] = min{dp[next(i, c) + 1]} + 1                                          (1)
+                                                           c
+
+  holds.
+ How can we compute the lexicographically smallest string? The ﬁrst character of the answer should be the lexico-
+
+graphically smallest character c that satisﬁes:
+
+
+
+                                                dp[i] = dp[next(i, c) + 1] + 1                                             (2)
+
+  The remaining part of the solution should be the lexicographically smallest shortest string that is not a subsequence
+
+of s.substr(next(0, c)), so we can repeat the same process.
+  This solution works in O(|A|m), where m = 26 is the number of characters.
+
+
+
+
+
+                                                   4
+
+F: Flip and Rectangles
+
+  Consider a 2 × 2 subsquare inside the grid. If it contains odd (1 or 3) number of black squares, we call it ”bad”. We
+can prove that, we can choose a rectangle S (after some ”invert” operations) if and only if S doesn’t contain any bad
+
+parts.
+   If S contains a bad part, the bad part always contain odd number of black squares even after operations, so we can
+never choose S.
+
+  Suppose that S doesn’t contain bad parts. By performing operations properly, we can make all squares in the
+topmost row and the leftmost column of S black. Notice that a good part (not bad part) always remain good after
+operations. Thus, when all squares in the topmost row and the leftmost column of S are black, the square on the
+second row of the second column of S must be black. Similarly, we can prove that all squares in S are black.
+  Now, let’s put a token on the center of each bad part. We can choose a rectangle S if and only if S doesn’t contain
+
+any tokens.
+
+
+
+
+
+  This problem can be solved in the same way as the well-known problem ”ﬁnd the largest rectangle that consists
+only of black squares”.
+
+
+
+
+
+                                                   5

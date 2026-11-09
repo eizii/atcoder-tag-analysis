@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc438_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc438/editorial/14945",
+      "text": "\\(f(i,j) \\geq k\\)\nを満たす\n\\((i,j)\\)\nの組の個数を\n\\(c_k\\)\nとすると、\n\\(f(i,j) = k\\)\nを満たす\n\\((i,j)\\)\nの組の個数は\n\\(c_k-c_{k+1}\\)\nと表せます。したがって、求める答えは\n\\[\n\\begin{aligned}\n&\\phantom{=}\\sum_{k\\geq 1} k(c_k-c_{k+1})\\\\\n&=\\sum_{k\\geq 1} kc_k-\\sum_{k\\geq 1} (k-1)c_k\\\\\n&=\\sum_{k\\geq 1} c_k\n\\end{aligned}\n\\]\nより、\n\\(c\\)\nの総和となります。以降は\n\\(c_1,c_2,\\ldots,c_N\\)\nの値を順に求めることを考えます。\nまず、\n\\(f(i,j) \\geq k\\)\nが成り立つためには頂点\n\\(i\\)\nから頂点\n\\(j\\)\nまでのパスに頂点\n\\(0,1,\\ldots,k-1\\)\nが全て含まれる必要があります（そしてこれらの条件は同値です）。頂点\n\\(0,1,\\ldots,k-1\\)\nを全て含むパスが存在する場合、ある\n\\(2\\)\nつの頂点\n\\(x_k,y_k\\)\nが存在して以下の\n\\(2\\)\nつの条件は同値になります。\nパスが頂点\n\\(0,1,\\ldots,k-1\\)\nを全て含む。\nパスが頂点\n\\(x_k\\)\nから頂点\n\\(y_k\\)\nまでのパスを含む。\nこの\n\\(x_k,y_k\\)\nを\n\\(k\\)\nの昇順に求めていくことを考えます。\nまず、\n\\(k=0\\)\nの場合明らかに\n\\(x_0=y_0=0\\)\nです。\nまた、\n\\(x_{k-1},y_{k-1}\\)\nから\n\\(x_k,y_k\\)\nは以下のように求めることができます：\n頂点\n\\(x_{k-1},k\\)\nのパスに頂点\n\\(y_{k-1}\\)\nが含まれる場合、\n\\((x_k,y_k)=(x_{k-1},k)\\)\n頂点\n\\(k,y_{k-1}\\)\nのパスに頂点\n\\(x_{k-1}\\)\nが含まれる場合、\n\\((x_k,y_k)=(k,y_{k-1})\\)\n上\n\\(2\\)\nつのどちらにも該当しない場合、条件を満たす\n\\(x_k,y_k\\)\nは存在しない。つまり、頂点\n\\(0,1,\\ldots,k-1\\)\nを全て含むパスが存在しない。\nあるパスにある頂点が含まれるかの判定は LCA などを用いることで\n\\(O(\\log N)\\)\n時間で判定できます。\n以上を適切に実装することでこの問題に正答することができます。計算量は\n\\(O(N \\log N)\\)\nです。",
+      "codes": [],
+      "text_sha256": "a9367019b27d4c6a9fefc5a2ff97e2e880ee6b37da7e4b6c33a9f0ea6acf6cd5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc438/abc438_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

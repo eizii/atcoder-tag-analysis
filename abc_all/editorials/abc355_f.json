@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc355_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc355/editorial/10072",
+      "text": "辺の重みの最大値を\n\\(W=10\\)\nとします．グラフ\n\\(G\\)\nの部分グラフであって，\n\\(G\\)\nの辺のうち重みが\n\\(k\\)\n以下であるものからなる（重みなし）グラフを\n\\(G_k (0\\leq k\\leq W)\\)\nとします．グラフ\n\\(H\\)\nの連結成分数を\n\\(c(H)\\)\nとするとき，グラフ\n\\(G\\)\nの MST （最小全域木）に含まれる辺の重みの和は\n\\(\\displaystyle \\sum_{k=0}^{W-1}\\left( c(G_k)-1\\right)\\)\nと等しくなります．\n（証明）\n（方針 1）\n\\(G\\)\nの MST に含まれる辺のうち，重みが\n\\(k\\)\n以下\nであるものは\n\\(N-c(G_k)\\)\n個です（クラスカル法のアルゴリズムより，重みが小さい辺を MST に追加できるだけ追加するべきであるため）．したがって，重みが\nちょうど\n\\(k\\)\nであるものは\n\\(\\left(N-c(G_k)\\right)-\\left(N-c(G_{k-1})\\right)=c(G_{k-1})-c(G_k)\\)\n個あり，グラフ\n\\(G\\)\nの MST に含まれる辺の重みの和は\n\\(\\displaystyle \\sum_{k=1}^{W}k\\left(c(G_{k-1})-c(G_k)\\right)=\\displaystyle \\sum_{k=0}^{W-1}\\left( c(G_k)\\right)-W\\cdot c(G_W)=\\displaystyle \\sum_{k=0}^{W-1}\\left( c(G_k)-1\\right)\\)\nです．\n（方針 2）\n\\(G\\)\nの MST に含まれる辺のうち，重みが\n\\(k\\)\n以上のものは\n\\(c(G_{k-1})-1\\)\n個です（\n\\(G_{k-1}\\)\nを連結にするためには\n\\(c(G_{k-1})-1\\)\n個の辺を追加する必要があるため）．したがって，主客転倒によりグラフ\n\\(G\\)\nの MST に含まれる辺の重みの和は\n\\(\\displaystyle\\sum_{k=1}^{W}\\left(c(G_{k-1})-1\\right)=\\displaystyle \\sum_{k=0}^{W-1}\\left(c(G_k)-1\\right)\\)\nです（証明終）\n各\n\\(k(0\\leq k\\lt W)\\)\nに対して，\n\\(G_k\\)\nの連結成分数を Union-Find で管理することによってこの問題を計算量\n\\(O(W(N+Q)\\alpha(N))\\)\nで解くことができます．（計算量は\n\\(O((WN+Q)\\alpha(N))\\)\nに落とすことが可能です．）\n以下の実装例では次のような工夫をしています．\n\\(G\\)\nには最初から\n\\(N-1\\)\n個の重み\n\\(10\\)\nの辺\n\\(\\{1,2\\},\\{1,3\\},\\dots,\\{1,N\\}\\)\nが貼られており，\n\\(N-1+Q\\)\n個の辺追加クエリがあるとみなす．\n答えを直接管理する．最初の時点では\n\\(c(G_{k})=N(0\\leq k\\lt 10)\\)\nであるため\n\\(\\mathrm{ans}=10N-10\\)\nである．各クエリに対して，連結成分数が減るごとに答えを更新する．",
+      "codes": [
+        "from atcoder.dsu import DSU\n\nN, Q = map(int, input().split())\nuf = [DSU(N + 1) for i in range(10)]\nans = 10 * N - 10\nfor i in range(N - 1 + Q):\n    a, b, c = map(int, input().split())\n    for j in range(c, 10):\n        if not uf[j].same(a, b):\n            ans -= 1\n            uf[j].merge(a, b)\n    if i >= N - 1:\n        print(ans)"
+      ],
+      "text_sha256": "b3b8efcc9670f69b79bb42b09848dfe3b5efc7f1e9f385cd061c467411c0bd6d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc355/abc355_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

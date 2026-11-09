@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc230_g",
+  "title": "GCD Permutation",
+  "contests": [
+    {
+      "contest_id": "abc230",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2516,
+  "raw_difficulty": 2516,
+  "contest_id": "abc230",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc230/tasks/abc230_g",
+  "statement": "配点 : 600 点 問題文 1 以上 N 以下の整数の並び替え P=(P_1,P_2,\\ldots,P_N) が与えられます。 1\\leq i\\leq j\\leq N をみたす整数の組 (i,j) であって、 GCD(i,j)\\neq 1 かつ GCD(P_i,P_j)\\neq 1 をみたすものの個数を求めてください。 ただし、正整数 x , y に対して、 GCD(x,y) で x と y の最大公約数を表します。 制約 1 \\leq N \\leq 2\\times 10^5 (P_1,P_2,\\ldots,P_N) は (1,2,\\ldots,N) の並び替えである。 入力は全て整数である。 入力 入力は以下の形式で標準入力から与えられる。 N P_1 P_2 \\ldots P_N 出力 答えを出力せよ。 入力例 1 6\r\n5 1 3 2 4 6 出力例 1 6 条件をみたす組は (3,3) , (3,6) , (4,4) , (4,6) , (5,5) , (6,6) の 6 つです。\r\nよって、 6 を出力します。 入力例 2 12\r\n1 2 3 4 5 6 7 8 9 10 11 12 出力例 2 32",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1 以上 N 以下の整数の並び替え P=(P_1,P_2,\\ldots,P_N) が与えられます。 1\\leq i\\leq j\\leq N をみたす整数の組 (i,j) であって、 GCD(i,j)\\neq 1 かつ GCD(P_i,P_j)\\neq 1 をみたすものの個数を求めてください。 ただし、正整数 x , y に対して、 GCD(x,y) で x と y の最大公約数を表します。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2\\times 10^5 (P_1,P_2,\\ldots,P_N) は (1,2,\\ldots,N) の並び替えである。 入力は全て整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N P_1 P_2 \\ldots P_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 6\r\n5 1 3 2 4 6"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 6 条件をみたす組は (3,3) , (3,6) , (4,4) , (4,6) , (5,5) , (6,6) の 6 つです。\r\nよって、 6 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 12\r\n1 2 3 4 5 6 7 8 9 10 11 12"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 32"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc230/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:57.637194+00:00",
+  "statement_sha256": "8e484d40b6a1070f966eea0275aaaf06c6186ac43f8850d6f35645d06ef697db",
+  "editorials": []
+}

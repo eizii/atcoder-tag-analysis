@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc094_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc094/editorial.pdf",
+      "text": "D: Worst Case\n\n  Let us denote a participant who was ranked x-th in the ﬁrst contest and y-th in the second contest as\n\n(x, y). Takahashi is (A, B). Without loss of generality, assume that A ≤B.\n\n  One possible way to solve the problem is to consider the following cases:\n\n    • If A = B, the answer is at most 2A −2 because you must get top A −1 places in at least one\n\n      contest to beat Takahashi. We can achieve this value by (1, 2A−1), · · · , (A−1, A+1), (A+1, A−\n\n       1), · · · , (2A −1, 1). Thus, the answer is 2A −2.\n\n    • If A + 1 = B, the answer is at most 2A −2 because you must get top A −1 places in at least one\n\n      contest to beat Takahashi. (Note that the A-th place in the ﬁrst contest is ﬁlled by Takahashi,\n\n     and getting the A + 1-th in the ﬁrst and A-th in the second is not enough.) We can achieve this\n\n      value by (1, 2A), · · · , (A −1, A + 2), (A + 2, A −1), · · · , (2A, 1). Thus, the answer is 2A −2.\n    • Otherwise, let C be the maximum integer such that C2 < AB.\n\n      – If C(C + 1) ≥AB, the answer is at most 2C −2 because you must get top C −1 places in the\n\n           ﬁrst contest or top C places in the second contest to beat Takahashi. (Note that one of ”the\n\n          top C −1 places in the ﬁrst contest” is Takahashi, we shouldn’t count him.) We can achieve\n\n           this value by (1, A+B −1), · · · , (A−1, B +1), (A+1, 2C −A−1), · · · , (C, C), · · · , (2C −1, 1).\n\n         Thus, the answer is 2C −2.\n\n      – If C(C +1) < AB, the answer is at most 2C −1 because you must get top C places in the ﬁrst\n\n          contest or top C places in the second contest to beat Takahashi. (Note that one of ”the top C\n\n           places in the ﬁrst contest” is Takahashi, we shouldn’t count him.) We can achieve this value\n\n         by (1, A + B −1), · · · , (A −1, B + 1), (A + 1, 2C −A), · · · , (C, C + 1), (C + 1, C), · · · , (2C, 1).\n\n         Thus, the answer is 2C −1.\n\n  Another possible solution is binary search on the answer: for a ﬁxed X, we want to know the following:\n\n    • Consider the smallest X positive integers except for A.\n\n    • Consider the smallest X positive integers except for B, and reverse the order.\n\n    • Check if for all i, the product of the i-th integer in the ﬁrst list and the i-th integer in the second\n\n        list is smaller than AB.\n\n  To do this, use the fact that the lists are ”piecewise” arithmetic sequences (and the number of pieces\n\nis constant).\n\n\n\n\n\n                                             4",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "aaee301a6f6bc0335e0ad311f912630f6e283836449a367ace482290327f0c00"
+    }
+  ],
+  "status": "available"
+}

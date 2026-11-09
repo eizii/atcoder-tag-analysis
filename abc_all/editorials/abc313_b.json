@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc313_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc313/editorial/6906",
+      "text": "この問題のポイントは「最強のプログラマーの候補がちょうど 1 人である条件を整理する」という点です。この部分で方針を誤ると実装が少し大変になってしまいます。\n条件を整理すると、実は以下のアルゴリズムで解くことができます。\n\\(s[i]\\)\nを「自分より強い人の人数」を管理する配列とする。はじめ\ns\nは\n\\(0\\)\nで初期化されている。\n\\(i=1,2,\\dots,M\\)\nの順に、\n\\(s[A[i]]\\)\nに\n\\(1\\)\nを加算するという操作を行う。\n操作後に\n\\(s[x] = 0\\)\nである人がちょうど\n\\(1\\)\n人であれば\n\\(s[x] = 0\\)\nである\n\\(x\\)\nが答えとなる。\n\\(2\\)\n人以上いれば答えは\n-1\nとなる。\nアルゴリズムの正当性に関して、全てを説明しようとすると煩雑になるので要点をかいつまんで説明します。\n下の図で表される例を考えます。(\n\\(1 \\gets 2\\)\nは「人\n\\(1\\)\nは人\n\\(2\\)\nより強い」という意味。他も同様)\nこのとき、問題文の条件にもある\n推移律\nを満たすような強さの割り当て方は次の 2 通りです。\n左側の割り当て方に注目すると、「\n\\(1\\)\nが最強で、\n\\(2\\)\nがその次に強く、\n\\(3\\)\nがその次に強く、\n\\(4\\)\nが最下位」という順序関係が成り立つことがわかります。つまり、\n\\(1, 2, 3, 4\\)\nという数列を考えると「左に番号が出て来る人は右に番号が出て来る人よりも強い」という関係が成り立ちます。\n右側の割り当て方についても同様に\n\\(1, 2, 4, 3\\)\nという数列が「左に番号が出て来る人は右に番号が出て来る人よりも強い」という条件を満たします。\nこのように、問題文の条件を満たすように強さを割り当てると、ある\n\\(1, 2, \\dots, N\\)\nを並べ替えて出来る数列\n\\(p\\)\nが存在して、強さが\n\\(p\\)\nで番号が登場する順番として表すことができます。(これを\n全順序\nと呼びます)\nこの事実を利用すると、命題\n\\(P, Q\\)\nを\n\\(P\\)\n:\n\\(s[x] = 0\\)\nである人がちょうど\n\\(1\\)\n人\n\\(Q\\)\n: 最強のプログラマーが人\n\\(x\\)\nに特定できる\nとしたときに 「\n\\(P\\)\nならば\n\\(Q\\)\nである」「\n\\(P\\)\nでなければ\n\\(Q\\)\nでない」という 2 点が証明できて、ここからアルゴリズムが正しい答えを返すことが確認できます。\n計算量は\n\\(\\mathrm{O}(N + M)\\)\nで十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int N, M;\n  cin >> N >> M;\n  vector<int> deg(N);\n\n  for (int _ = 0; _ < M; _++) {\n    int a, b;\n    cin >> a >> b;\n    --a, --b;\n    deg[b]++;\n  }\n  int ans = -1;\n  for (int i = 0; i < N; i++) {\n    if (deg[i] == 0) {\n      if (ans != -1) {\n        cout << -1 << endl;\n        exit(0);\n      } else {\n        ans = i + 1;\n      }\n    }\n  }\n  cout << ans << endl;\n}"
+      ],
+      "text_sha256": "6b7c0c6e026663ea017b7c1582e1d22fc2fd81cc2a37e0815904e89ec21c8bb8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc313/abc313_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc313/editorial/6920",
+      "text": "公式解説と同じです。\n\\(X\\)\nが最強であるための必要条件は、「誰かが\n\\(X\\)\nより強い」という情報が存在しないことです。 この必要条件を満たすとき、\n\\(X\\)\nは最強である可能性があります。\nしたがって、全員が最強候補である状態から始めて、誰かより弱いことが判明した人を候補から取り除いていき、最後に残るのが1人であるかどうかを確かめることで問題を解くことができます。\n実装例(Python)",
+      "codes": [
+        "N,M = map(int,input().split())\ns=set(range(1,N+1))\nfor _ in range(M):\n  win,lose=map(int,input().split())\n  s.discard(lose)\nprint(-1 if len(s)!=1 else s.pop())"
+      ],
+      "text_sha256": "781275908b45b0d0b097a5d90913b44c26166193c2693961cc78b2fe1f106754",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc313/abc313_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

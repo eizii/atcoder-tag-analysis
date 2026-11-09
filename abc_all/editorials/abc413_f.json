@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc413_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13408",
+      "text": "コマがマス\n\\((i,j)\\)\nにある状態から始めたときにゴールに到達するまでの移動回数の最小値を\n\\(\\text{dist}[i][j]\\)\nとします。ただし、ゴールに到達できないマス\n\\((i,j)\\)\nについては\n\\(\\text{dist}[i][j]=\\infty\\)\nとします。\nまずゴールのマス\n\\((R_i,C_i)\\)\n\\((1 \\leq i \\leq K)\\)\nについては\n\\(\\text{dist}[R_i][C_i]=0\\)\nです。\nそうでないマスについては\n\\(dist[i][j]\\)\nは\n\\(dist[i-1][j]+1,dist[i][j-1]+1,dist[i+1][j]+1,dist[i][j+1]+1\\)\nを昇順に並べ替えたときに 小さい方から\n\\(2\\)\n番目の値となります。青木君が高橋君にとって最適な方向のうち\n\\(1\\)\n方向への移動を禁止することができることから言えます。\nしかし、この遷移からでは\n\\(\\text{dist}[i][j]\\)\nを求める際に条件がループしてしまいます。そこで、ゴールに到達した状態からゲームを逆順に進めていくことで\n\\(\\text{dist}\\)\nを求めていくことを考えます。これは一般に後退解析と呼ばれます。\n移動回数が小さい順に\n\\(dist\\)\nを求めていきます。初め、ゴールマスについて\n\\(\\text{dist}[R_i][C_i]=0\\)\nと確定させます。 隣接するマスのうち\n\\(2\\)\nマス以上で\n\\(dist\\)\nの値が確定しているマス\n\\((i,j)\\)\nについて、先ほどの事実から\n\\(dist[i][j]\\)\nの値も確定させることができます。よって、各マスについて隣接するマスのうち\n\\(dist\\)\nが求まっているマスの個数を管理しながら、 更新する箇所がなくなるまで\n\\(\\text{dist}\\)\nの値を確定させていくと最終的に\n\\(\\text{dist}\\)\nが求まります。\nまた、あるマス\n\\((i,j)\\)\nについて\n\\(\\text{dist}[i][j]\\)\nが確定したことによって、\n\\(\\text{dist}\\)\nの値が確定しうるマスは\n\\((i,j)\\)\nに隣接するマスのみです。したがって、BFSをすることで\n\\(\\text{dist}\\)\nを時間計算量\n\\(\\mathrm{O}(NM)\\)\nで求めることができます。\n類題:\nABC209E - Shiritori\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nconst int dx[] = {0, 1, 0, -1};\nconst int dy[] = {1, 0, -1, 0};\nint main() {\n    int h, w, k;\n    cin >> h >> w >> k;\n    vector<vector<int>> dist(h, vector<int>(w, -1)); // マス (i,j) から始めたときにゴールに到達するまでの移動回数の最小値\n    vector<vector<int>> cnt(h, vector<int>(w, 0)); // 隣接するマスのうちdistが決定したマスが何個あるか\n    queue<pair<int, int>> que; // distが確定したマスのキュー\n    for (int i = 0; i < k; ++i) {\n        int x, y;\n        cin >> x >> y;\n        x--, y--;\n        dist[x][y] = 0;\n        cnt[x][y] = 4;\n        que.emplace(x, y);\n    }\n    long long ans = 0;\n    while (!que.empty()) {\n        auto [x, y] = que.front();\n        que.pop();\n        ans += dist[x][y];\n        for (int d = 0; d < 4; ++d) {\n            int nx = x + dx[d], ny = y + dy[d];\n            if (nx < 0 || nx >= h || ny < 0 || ny >= w)\n                continue;\n            cnt[nx][ny]++;\n            if (dist[nx][ny] == -1 && cnt[nx][ny] == 2) {\n                // distが確定しておらず、隣接するマスのうちdistが決定しているマスが2マス存在するためdistが確定する\n                dist[nx][ny] = dist[x][y] + 1;\n                que.emplace(nx, ny);\n            }\n        }\n    }\n    cout << ans << \"\\n\";\n}"
+      ],
+      "text_sha256": "3d048b7d0e00e3e9414e81a1c2a6ee13b666be953ad42988072df333ae55ccff",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13410",
+      "text": "青木君がいない場合は多点スタートBFSにより答えを求めることができます。\n青木君がいる場合、マスから可能な移動のうち、移動後のゴールまでの操作回数が最短になるものは塞がれてしまうので、最短から2番目のものが答えになります。よってBFSにおいてそのマスに2回目に訪れたときに最短距離を更新すればよいです。\nBFSにおいて、各マスに到達した回数を記録し、2回目に到達した際に答えの更新とキューへの追加を行うことで実現できます。\n実装例(Python)",
+      "codes": [],
+      "text_sha256": "4620eb488e7dcb5864b3c6f43d53e9495b669614aed38aa2084d875c87ed6c76",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

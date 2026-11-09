@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc344_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc344/editorial/9485",
+      "text": "この問題にはいくつも解法が考えられます。\n解法1\n\\(S\\)\nを\n|\nで\n\\(3\\)\nつに分け、\n\\(1\\)\n番目と\n\\(3\\)\n番目の文字列を連結したものが答えです。例えば Python で\nsplit\nメソッドにより実装できます。\n実装例(Python)\n解法2\n\\(S\\)\nに\n\\(2\\)\n度含まれる\n|\nの位置をそれぞれ\n\\(x,y\\)\n文字目としたとき、「\n\\(x\\)\n文字目より前」と「\n\\(y\\)\n文字目より後」を連結したものが求める文字列です。例えば C++ では\nfind\nメソッドと\nsubstr\nメソッドにより実装できます。\n実装例(C++)\n解法3\n「空文字列\n\\(T\\)\nを用意し、\n\\(S\\)\nの先頭の文字から順に、\n\\(1\\)\n度目の\n|\nから\n\\(2\\)\n度目の\n|\nの間の文字を無視、それ以外の文字は\n\\(T\\)\nの末尾に加える」とすることで求める文字列を構築できます。例えば C++ では次のように実装できます。\n実装例(C++)\n解法4\n正規表現により置換して求める文字列を得ます。\n|\nはエスケープが必要な文字であることに注意してください。例えば Python では\nre.sub\nメソッドにより実装できます。\n実装例(Python)",
+      "codes": [
+        "S = input()\na, b, c = S.split('|')\nprint(a+c)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tstring s;\n\tcin >> s;\n\tint x = s.find(\"|\");  // 先頭から見て最初に '|' が現れる位置\n\tint y = s.rfind(\"|\");  // 末尾から見て最初に '|' が現れる位置\n\tcout << s.substr(0,x) + s.substr(y+1) << endl;\n}",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tstring s;\n\tcin >> s;\n\tstring t;\n\tint count = 0;\n\tfor(char c: s){\n\t\tif(c == '|'){\n\t\t\tcount++;\n\t\t}else{\n\t\t\tif(count != 1) t+=c;\n\t\t}\n\t}\n\tcout << t << endl;\n}",
+        "import re\nS = input()\nprint(re.sub(\"\\|.*\\|\", \"\", S))"
+      ],
+      "text_sha256": "69fdcaf0a89dc0cbd5c9c9c3e1f0d98dd83139b963d1e326d5647f8cff29967d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc344/abc344_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

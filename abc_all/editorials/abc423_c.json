@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc423_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc423/editorial/13867",
+      "text": "開閉操作について、開いている鍵を閉める操作を\n閉操作\n、閉まっている鍵を開ける操作を\n開操作\nと呼ぶこととします。\n開閉操作の回数が最小となるとき、閉操作の後に開操作を行うことはないとしてよいです。これは、開操作を行う鍵の集合を決め打ったとき、それらに対してまず開操作を行うとしてよいことからわかります。特に、同じ鍵に対して開操作と閉操作はいずれも高々\n\\(1\\)\n回しか行いません。\n閉操作の回数は開操作の回数とはじめに開いていた鍵の個数の和なので、開操作の回数として考えられる最小値を求めればよいです。\nすべてのドアの鍵を閉まった状態にできるための必要十分条件は開操作をすべて行った後に開いているドアの鍵の番号の集合が\n\\(\\lbrace i \\mid X \\leq i \\leq Y \\rbrace (X \\leq R, R - 1 \\leq Y)\\)\nの形になっていることです。\nしたがって、\n\\(L_i = 0\\)\nなる最小の\n\\(i\\)\nを\n\\(x\\)\n、最大の\n\\(i\\)\nを\n\\(y\\)\nとして\n\\(x \\leq R - 1\\)\nのときドア\n\\(x, x + 1, \\ldots, R - 1\\)\nの鍵がすべて開くような操作を行い、\n\\(y \\geq R\\)\nのときドア\n\\(R, R + 1, \\ldots, y\\)\nの鍵がすべて開くような操作を行えばよいです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, r;\n\tcin >> n >> r;\n\tvector<int> l(n);\n\tfor (int i = 0; i < n; i++) cin >> l[i];\n\tint x = n, y = 0;\n\tfor (int i = 0; i < n; i++) {\n\t\tif (l[i] == 0) {\n\t\t\tx = i;\n\t\t\tbreak;\n\t\t}\n\t}\n\tfor (int i = n - 1; i >= 0; i--) {\n\t\tif (l[i] == 0) {\n\t\t\ty = i;\n\t\t\tbreak;\n\t\t}\n\t}\n\tint open = count(l.begin(), l.end(), 0);\n\tint t = 0;\n\tif (x <= r - 1) for (int i = x + 1; i < r; i++) if (l[i] == 1) t++;\n\tif (y >= r) for (int i = r; i < y; i++) if (l[i] == 1) t++;\n\tint ans = 2 * t + open;\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "f4227d7f9850dd7fc528e81f3ebc1b29f27f9e7b75b01affc512263dd8a93e50",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc423/abc423_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc423/editorial/13870",
+      "text": "番号が小さい部屋が左、大きい部屋が右にあるとします。\nまず、最初にいる部屋より左に開いているドアがあれば、そのドアを操作できる部屋まで移動する必要があります。よって、そこまでのドアを一旦全て開くとしてよいです。同様に、最初にいる部屋より右に開いているドアがあれば、そこまでのドアを一旦全て開くとしてよいです。\nそうすると、開いているドアは全てひと繋がりになるので、端から順に閉じていけばよいです。\n例 1\n例 2\n最初に開いていた最も左のドアの番号を\n\\(i_L\\)\n、最も右のドアの番号を\n\\(i_R\\)\nとすると、「一旦開く」が終わった時点で空いている最も左のドアの番号は\n\\(\\min(i_L,R+1)\\)\n、最も右のドアの番号は\n\\(\\max(i_R,R)\\)\nとなります。よって、「一旦開く」での操作の回数はこの区間にある最初に閉じていたドアの個数であり、その後の操作回数はこの区間にあるドアの個数となります。\n実装例(Python)\n開いているドアのindexを右半開区間で保持していることに注意してください",
+      "codes": [
+        "1 0 1 0 0 1 1 0 1 1 1\n↓      ^ ここからスタート\n1 0 0 0 0 0 0 0 1 1 1\n↓\n1 1 1 1 1 1 1 1 1 1 1",
+        "1 0 1 0 0 1 1 0 1 1 1\n↓                  ^ ここからスタート\n1 0 0 0 0 0 0 0 0 0 1\n↓\n1 1 1 1 1 1 1 1 1 1 1",
+        "N,S=map(int,input().split())\nA=list(map(int,input().split()))\n\nidx0=[i for i,a in enumerate(A) if a==0]\n\nif len(idx0)==0:\n  print(0)\n  exit()\n\nL=min(S,idx0[0])\nR=max(S,idx0[-1]+1)\nprint(sum(A[L:R])+(R-L))"
+      ],
+      "text_sha256": "9ae79f80ca6d637f380906fc1d3bfffe37eee1a2f40df7a5a69987f289ed5f25",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc423/abc423_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

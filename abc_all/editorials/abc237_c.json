@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc237_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc237/editorial/3338",
+      "text": "文字列\n\\(S\\)\nが\na\nのみからなっているとき\n、明らかに\n\\(S\\)\nは回文ですので、\nYes\nを出力します。\n以下、\n\\(S\\)\nに\na\n以外の文字が含まれる場合について考えます。\n一番愚直な方針としては先頭に\na\nを付け加えなかった時、\n\\(1\\)\nつ加えた時、\n\\(\\ldots\\)\nと試す方法があります。ここで、\n\\(\\lvert S\\rvert\\)\n個以上\n\\(a\\)\nを付け加えると\na\nでない文字と対称な位置に\na\nが来てしまう事から\n\\(\\lvert S \\rvert-1\\)\n個以下の場合について調べればよいです(参考 : ABC198-B) 。しかし、回文の判定には基本的に\n\\(O(\\lvert S\\rvert)\\)\nだけ計算量がかかるため、全体で最悪\n\\(O(\\lvert S\\rvert^2)\\)\nかかり、これでは時間制限にかかってしまいます。\nそこで、\na\nを付け加える個数としてあり得るものが絞れないか考えてみます。ここで、文字列\n\\(X\\)\nについて、先頭から見て\n\\(1\\)\n文字目から\n\\(i\\)\n文字目までがすべて\na\nであり、\n\\(i+1\\)\n文字目が\na\nでないとき、\n\\(i\\)\nを「\n\\(X\\)\nにおいて先頭から連続する\na\nの個数」という事にします (ただし、\n\\(1\\)\n文字目が\na\nでないならば\n\\(i=0\\)\n) 。「末尾から連続する\na\nの個数」についても同様に定義します。このとき回文であるような文字列\n\\(T\\)\nについて、\n\\(T\\)\nにおいて先頭から連続する\na\nの個数と末尾から連続する\na\nの個数は等しくなければなりません。\n一方で、\n\\(S\\)\nにおいて先頭から連続する\na\nの個数を\n\\(x\\)\n, 末尾から連続する\na\nの個数を\n\\(y\\)\nとし、\n\\(S\\)\nに\na\nを\n\\(k\\)\n個\n\\((0\\leq k)\\)\n付け加えた文字列を\n\\(S_k\\)\nとすると、\n\\(S\\)\nには\na\nでない文字が含まれていることから、\n\\(S_k\\)\nにおいて先頭から連続する\na\nの個数は\n\\(x+k\\)\n, 末尾から連続する\na\nの個数は\n\\(y\\)\nとなります。\nよって、\n\\(x>y\\)\nならば\n\\(S\\)\nの先頭にいくつ\na\nを付け加えても回文となる事はなく、\n\\(x\\leq y\\)\nのとき、\n\\(S_k\\)\nが回文となり得るのは\n\\(k=y-x\\)\nのときだけです。よって、この場合は\n\\(S_{y-x}\\)\nについてだけ回文かを判定すればよいです。\n\\(x\\)\n,\n\\(y\\)\nの値は\n\\(O(\\lvert S\\rvert)\\)\nで求めることができ、\n\\(S\\)\nに\na\nを\n\\((y-x)\\)\n個付け加えた時の回文判定も\n\\(O(\\lvert S\\rvert)\\)\nで行えるため、全体で時間計算量は\n\\(O(\\lvert S\\rvert)\\)\nであり、よってこの問題を解く事が出来ました。\nc++による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint n, x, y;\n\tstring a;\n\n\tcin >> a;\n\tn = a.size();\n\n\tx = 0;\n\tfor (int i = 0; i < n; i++) {\n\t\tif (a[i] == 'a')x++;\n\t\telse break;\n\t}\n\ty = 0;\n\tfor (int i = n - 1; i >= 0; i--) {\n\t\tif (a[i] == 'a')y++;\n\t\telse break;\n\t}\n\n\tif (x == n) {\n\t\tcout << \"Yes\" << endl;\n\t\treturn 0;\n\t}\n\tif (x > y) {\n\t\tcout << \"No\" << endl;\n\t\treturn 0;\n\t}\n\tfor (int i = x; i < (n - y); i++) {\n\t\tif (a[i] != a[x + n - y - i - 1]) {\n\t\t\tcout << \"No\" << endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\tcout << \"Yes\" << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "d46a2d4c9bda91e7cda2492a46bf961d5d577a5fe231dbbccca886081791e097",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc237/abc237_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,356 @@
+  AtCoder Beginner Contest 101 / AtCoder Regular Contest 099 解説
+
+
+                                             writer: semiexp
+
+                                   2018 年6 月23 日
+
+
+
+                        For International Readers: English editorial starts on page 5.
+
+
+A: Eating Symbols Easy
+
+ 高橋君が思い浮かべている整数を，S の各文字ごとに更新していけばよいです．あるいは，S の中に現れる+ の個数
+から，- の個数を引くことでも求められます．
+
+   • C++ による解答例: https://abc101.contest.atcoder.jp/submissions/2711190
+
+   • Ruby による解答例: https://abc101.contest.atcoder.jp/submissions/2711191
+
+   • Python による解答例: https://abc101.contest.atcoder.jp/submissions/2711198
+
+
+B: Digit Sums Easy
+
+  S(n) を計算できればよいです．これは，「現在のn の1 の位を求め合計値に足し込み，1 の位を取り去る」ことを繰
+り返せばよいです．1 の位は10 で割った余りとして求められます．また，1 の位を取り去った値は10 で割った商とし
+
+て求められます．
+
+   • C++ による解答例: https://abc101.contest.atcoder.jp/submissions/2711205
+
+   • Ruby による解答例: https://abc101.contest.atcoder.jp/submissions/2711210
+
+   • Python による解答例: https://abc101.contest.atcoder.jp/submissions/2711212
+
+
+C: Minimization
+
+ 数列の最小値は1 です．どのように操作を行っても，最小値が1 以外に変化することはありません．なので，数列の
+要素をすべて1 にすることを考えます．
+ 数列中の1 の個数は，はじめ1 です．この個数は，1 回の操作でK −1 までしか増やすことができません．なぜな
+らば，1 の個数を増やすためには，操作で選ぶ要素の中に1 が含まれている必要があるためです．よって，少なくとも
+⌈N−1K−1⌉回の操作が必要であることがわかります．
+ 一方，うまく操作を行うことで，⌈N−1K−1⌉回の操作ですべての要素を1 にすることが可能です．はじめAp = 1 である
+とします．ここで，1 + g(K −1) ≤p ≤1 + (g + 1)(K −1) なる整数g をとります．このとき，次のように操作を行え
+
+ばよいです：
+
+   • i = g, g −1, g −2, . . . , 1 に対して，この順で要素i(K −1)+1, i(K −1)+2, . . . , i(K −1)+K を選んで操作を行う．
+
+
+                                                   1
+
+   • i = g + 1, g + 2, . . . , ⌈N−1K−1 −1⌉に対して，この順で要素i(K −1) + 1, i(K −1) + 2, . . . , i(K −1) + K を選んで操
+   作を行う．
+
+   • 要素N −K + 1, N −K + 2, . . . , N を選んで操作を行う．
+
+
+D: Snuke Numbers
+
+ 「N 以上の整数n であって， S(n)n を最小にするもの(複数ある場合は，そのうちn が最小になるもの)」をf(N) で
+表します．すると，N = 1 から始めて，N ←f(N + 1) という更新を順次繰り返すことで，すぬけ数を小さいほうから
+順に列挙することができます．以降，このf(N) について考えます．
+ まず， S(x)x のx ≥N での最小値が常に存在することを示しておきます．10d−1 ≤n < 10d のとき，n の最小値は
+10d−1，S(n) の最大値は9d であることから， S(x)x  ≥10d−19d です．この下界はd ≥1 ではd を1 増加させると少なくと
+も5 倍になるので，十分d を大きくすると S(N)N より大きくなります．よって，このようなd に対して10d 未満の整数
+x のみを考えればよいことから，最小値は存在します．
+  x ≥N で S(x)x を最小にするx (複数ある場合は，そのうち最小のもの) をとります．x > N と仮定して，x とN を
+上位の桁から比較していったとき，初めて異なる値になる桁を10d の位とします．このとき，x = 10d+1⌊ 10d+1N + 1⌋−1
+であること（つまり，x の100, . . . , 10d の位の数字がすべて9 であること）を示します．
+ まず，x の100, 101, . . . , 10d−1 の位の数字はすべて9 です．さもなくば，x′ = 10d+1⌊ 10d+1N ⌋−1 を考えると，N ≤x′ < x
+かつS(x′) ≥S(x) であることから，x が S(x)x を最小にすることに反します．
+ よって，x0 = 10d⌊N10d + 1⌋−1 とおくと，ある1 ≤w ≤9 が存在して，x = x0 + w · 10d かつS(x) = S(x0) + w とな
+                              x0      x     x0+w·10dります．x の最適性より，                             S(x0)                  > S(x) = S(x0)+w が成立します．よって，x0 > S(x0 · 10d が成り立ちます．一方，同
+様にして，w を大きくすればするほど S(x)x が小さくなることもわかります．実際にはx の10d の位が9 を超えること
+はできないので，その範囲でw を大きくするのが最適です．よって，x の10d の位も9 であることが示されました．
+ よって，x の候補として考えられるものがN 並びにd = 0, 1, 2, ..., に対してx = 10d+1⌊ 10d+1N + 1⌋−1 の形で書ける
+ものに限られることがわかりました．ここで，d としてはlog10 N + 1 以下で考えれば十分です．よって，候補を十分少
+なく絞ることができたので，これらすべてに対して S(x)x を計算して比較すれば答えが得られます．
+
+
+E: Independence
+
+ 問題を言い換えると，次のようになります：
+
+   グラフから，できるだけ多くの辺を取り除いて，グラフ全体がちょうど2 つのクリークの合併になるように
+
+   する．
+
+
+ これを，グラフを補グラフ（グラフの辺の有無を反転して得られるグラフ）にして考えると，次のように言い換える
+
+ことができます：
+
+
+   グラフに，できるだけ多くの辺を加えて，グラフ全体が完全二部グラフになるようにする．
+
+
+ 以降，補グラフについて考えることにします．
+
+ 元のグラフが二部グラフでなければ，如何に辺を加えてもグラフ全体を完全二部グラフにすることは不可能です．一
+方，元のグラフが二部グラフの場合は，頂点集合を2 つのdisjoint な集合S, T に分割して，S, T にまたがる辺のみが
+存在するようにできるので，S, T にまたがる辺すべてを追加することで，グラフ全体を完全二部グラフにすることがで
+
+きます．
+
+ グラフを連結成分分解すると，各成分においては頂点集合の（いずれの辺も異なる集合間にまたがるような）二分割
+は，集合の入れ替えを除いて一意に定まります．i 番目の連結成分の頂点集合をこのように二分割したものをSi, Ti とし
+
+
+                                                   2
+
+ます．すると，S は各i に対してSi, Ti のちょうど片方を選んで，それらの和集合をとることで構成することができま
+す．（T は頂点全体からS に含まれる頂点を除くことで得られます）
+ さて，この問題中で問われている「両端の都市が同じ州内に属しているような道の本数」は，S の大きさのみによっ
+て定まることがわかります．よって，S の大きさとしてありうるものをすべて列挙すればこの問題を解くことができま
+す．これは，「1, 2, ..., i 番目の連結成分に対してSi, Ti のうち選ぶほうを決めて，和集合をとることでできる集合の大き
+さ」を動的計画法で順次求めることで計算することができます．
+
+
+F: Eating Symbols Hard
+
+ L = 109 とおきます．A, P を定めたとき，X の多項式fA,P を次で定めます：
+
+                 ∑L
+                                              fA,P =    AiXi−P
+                                               i=−L
+
+明らかに，A とA′ の各要素が一致することと，fA,0 ≡fA′,0 は同値です．
+ 文字列S に対して，高橋君がS を1 文字目から順に食べた後に高橋君が思い浮かべている数列A をT(S) で表し，
+t(S) = fT (S),0 とします．このとき，t(S) に対して，次の関係が成り立つことがわかります：
+
+   • t(ϵ) = 0 (ϵ は空文字列)
+
+   • t(+S) = t(S) + 1 (+S は，文字+ と文字列S をこの順でつなげたもの．以下同様)
+
+   • t(-S) = t(S) −1
+
+   • t(>S) = t(S)X−1
+
+   • t(<S) = t(S)X
+
+ よって，X の多項式からX の多項式への関数τ+, τ-, τ>, τ< を次で定めると，t(S) = τS1 ◦τS2 ◦· · · ◦τS|S|(0) となる
+ことがわかります（◦は関数合成）：
+
+   • τ+(p) = p + 1
+
+   • τ-(p) = p −1
+
+   • τ>(p) = pX−1
+
+   • τ<(p) = pX
+
+ よって，求める値は，組(i, j) (1 ≤i ≤j ≤|S|) であって，τSi ◦· · · ◦τSj(0) = t(S) なるものの個数です．i を固定し
+たときに，これを満たすj が何個あるかを効率的に数えることを考えます．
+ ここで，τc を合成して得られる関数は，p 7→Ap + B (A, B はX の多項式，A ̸≡0) の形をしています．A[i,j), B[i,j)
+を，それぞれτSi ◦· · · ◦τSj−1 をp 7→Ap + B の形で書いたときのA, B とします．A[i,j), B[i,j), A[j,k), B[j,k) がわかって
+いるとき，A[i,k), B[i,k) は次のようにして求められます：
+
+                                       A[i,k) = A[i,j) · A[j,k), B[i,k) = A[i,j) · B[j,k) + B[i,j)
+
+
+このことから，
+                                                   (B[i,k)              · B[j,k) )         (B[i,k)     )                 B[i,j) = B[i,k) −A[i, j) · B[i,k) = A[i,k)        −A[i,j)     = A[i,k)        −B[j,k)
+                                                               A[i,k)        A[i,k)                   A[i,k)    A[j,k)
+
+
+                                                   3
+
+がわかります．よって，τSi ◦· · · ◦τSj−1(0) = t(S) のとき，
+
+                                                  B[j,|S|+1)    B[i,|S|+1) −t(S)
+                              =
+                                                  A[j,|S|+1)        A[i,|S|+1)
+
+                                                      B[j,|S|+1)                                                                          B[j,|S|+1)
+が成り立ちます．よって，各j に対して     を計算しておけば，i を固定したとき，j > i であって      =                                                      A[j,|S|+1)                                                                          A[j,|S|+1)
+B[i,|S|+1)−t(S)
+       なるj の個数を求めることで，問題の答えが得られます．   A[i,|S|+1)
+                 B[j,|S|+1)
+ ところで，    は，一般には(N 次多項式) / (N 次多項式) の有理式になるため，これをすべてのj に対して求                 A[j,|S|+1)
+めて記録することは難しいです．一方，この有理式を直接記録する代わりに，十分多くのX およびmod M で有理式の
+
+値を計算しておくことは可能です．
+ 十分多くのX, M に対して有理式の値が一致すれば，十分高い確率で正しい答えが得られることを示します．この問
+題で考える有理式は，高々(N 次多項式) / (N 次多項式) であるため，P/Q = P ′/Q′ すなわちPQ′ = QP ′ かの判定は，
+高々2N 次の多項式同士の比較に相当します．PQ′ ̸= QP ′ であるにもかかわらず(PQ′)(X) = (QP ′)(X) (mod M) と
+なるようなX は，高々2N 個しか存在しません．よって，X を一様ランダムに選んでくると，高々確率2NM でこの2
+つは一致していると誤って判定されます．
+ 比較すべき有理式の組は(N+1)N2  組です．よって，ランダムにX をk 個とって比較する場合，いずれかの組で誤っ                                     (                                  2N )kた判定が起きる確率は，高々(N+1)N2      · M  です．M ∼109 程度の素数をとれば，例えばk = 6 でこの確率は10−12
+未満となり，十分高確率で正解することができます．
+ このアルゴリズムの計算量は，i ごとに一致するj の発見をmap などを用いて行うと，O(kN log N) となります．
+
+
+
+
+
+                                                   4
+
+AtCoder Beginner Contest 101 / AtCoder Regular Contest 099 Editorial
+
+
+                                             writer: semiexp
+
+                                   June 23rd, 2018
+
+
+
+A: Eating Symbols Easy
+
+   • C++ example: https://abc101.contest.atcoder.jp/submissions/2711190
+
+   • Ruby example: https://abc101.contest.atcoder.jp/submissions/2711191
+
+   • Python example: https://abc101.contest.atcoder.jp/submissions/2711198
+
+
+B: Digit Sums Easy
+
+   • C++ example: https://abc101.contest.atcoder.jp/submissions/2711205
+
+   • Ruby example: https://abc101.contest.atcoder.jp/submissions/2711210
+
+   • Python example: https://abc101.contest.atcoder.jp/submissions/2711212
+
+
+C: Minimization
+
+  The minimum of the entire sequence is 1. Since this value never changes, we want to make all elements equal to 1.
+   Initially, the sequence contains only one 1. In each step, the number of 1s increases by at most K −1 (because the
+minimum of the chosen interval doesnt’t change). Thus, we need at least ⌈N−1K−1⌉steps.
+ On the other hand, we can always achieve the goal within this number of steps, as follows. Let Ic be the interval
+c(K −1) + 1, c(K −1) + 2, . . . , c(K −1) + K.
+  Note that for each c, Ic and Ic+1 shares an element, and I1, . . . , I⌈N−1K−1 −1⌉covers the entire sequence.  (Strictly
+speaking, to avoid the intervals going outside the sequence, we shuold shift the last interval to ﬁt within the sequence.)
+  Suppose that initially, Ig contains the only 1. Then, perform the following:
+
+   • For each i = g, g −1, g −2, . . . , 1 in this order, perform an operation on the interval Ii.
+
+   • For each i = g + 1, g + 2, . . . , ⌈N−1K−1 −1⌉in this order, perform an operation on the interval Ii.
+
+
+
+
+
+                                                   1
+
+D: Snuke Numbers
+
+  Let f(N) be the integer n ≥N that minimizes the value of S(n)n   (in case of tie, choose the smallest one). We start
+with N = 1, and by repeating N ←f(N + 1), we can list all Snuke numbers in the increasing order. Now we want to
+
+compute f(N) for a given N.
+  We’ll prove that f(N) can be always obtained by changing the last (least important) k digits of N to 9 for some k.
+  Let x = f(N). For simplicity, let xi denote the i-th digit of x (i.e., the digit with coeﬃcient 10i). Assume that
+x > N and the d-th digit is the ﬁrst (most signiﬁcant) digit where x and N diﬀer. (Note that N and x always have
+the same number of digits - it’s easy to check that 999...999 is always a Snuke Number.) We want to prove that
+x0 = · · · = xd = 9.
+  Suppose that for some i < d, xi < 9. Let y be the integer obtained by changing xi to 9 and xd to xd −1. Clearly,
+N ≤y < x and S(y) ≥S(x) holds. This contradicts the minimality of S(x).x   Thus, x0 = · · · = xd−1 = 9.
+  Now, we know that x0 = · · · = xd−1 = 9, xd is unknown, and xd+1, . . . are the same as corresponding digits of
+N. Let z be the value of x in case xd = 0, and let w = xd. Then, we get x = z + w · 10d, S(x) = S(z) + w, and
+  x     z+w·10d
+S(x) = S(z)+w . Since this is a monotonous function of w, the optimal value of w is either the smallest valid value (the
+d-th digit of N) or the largest valid value (9). We know that d-th digit is the digit where x and N diﬀer, thus, xd = 9.
+(This observation is not necessary - even without this observation, the number of candidates is limited enough.)
+ Now we have limited candidates for x. For each candidate compute the value of S(x),x   and f(N) is the one that
+minimizes this value.
+
+
+E: Independence
+
+  By taking the complement of the graph, we can restate the condition of the problem as follows:
+
+
+     Color the vertices of the graph with two colors. Between two vertices of the same color, there must not be
+     an edge (of the complement graph).
+
+
+  From now on, simply the ”graph” means ”complement graph”.
+
+  The condition above is equivalent to the standard rule of coloring: for each edge, the color of its two endpoints must
+be diﬀerent. Clearly, if the given graph is not bipartite, the answer is −1.
+  Otherwise, for each connected component, we can uniquely determine a valid coloring (except for swapping two
+colors). Let Si, Ti be the set of vertices of each color in the i-th component. Then, the set of vertices in State Taka
+must be formed in the following way: for each i, choose one of Si or Ti, and take their union.
+  ”The number of roads whose endpoint cities belong to the same state” only depends on the size of S. Since we can
+
+list all possible sizes of S by a simple DP, we can solve the problem.
+
+
+
+
+
+                                                   2
+
+F: Eating Symbols Hard
+
+  Let’s use rolling hashes. Fix a large prime M, and also ﬁx a random integer X. For a string (of symbols) S, we
+deﬁne t(S) as follows. Let A be the sequence we get when we eat S. Then,
+
+                ∑
+                                          t(S) = (   AiXi)  (mod M)
+                                                                                  i
+ We can use the following properties to compute t(S) (note that all equations will be evaluated modulo M):
+
+   • t(ϵ) = 0 (ϵ is an empty string)
+
+   • t(+S) = t(S) + 1 (+S is a concatenation of a character + and a string S in this order)
+
+   • t(-S) = t(S) −1
+
+   • t(>S) = t(S)X−1
+
+   • t(<S) = t(S)X
+
+  Thus, t(S) = τS1 ◦τS2 ◦· · · ◦τS|S|(0) （◦are compositions of functions）, where functions τ+, τ-, τ>, τ< are deﬁned
+as follows:
+
+   • τ+(p) = p + 1
+
+   • τ-(p) = p −1
+
+   • τ>(p) = pX−1
+
+   • τ<(p) = pX
+
+  Let c be the hash value we get when we execute the entire sequence. We want to count the number of pairs (i, j)
+such that τSi ◦· · · ◦τSj(0) = c.
+  Notice that the functions τ+, τ-, τ>, τ< are bijective, and we can deﬁne their inverses. We have the following:
+
+
+                                       τSi ◦· · · ◦τSj(0) = c
+              ⇔  τSN−1 ◦· · · ◦τSi−1 ◦τSi ◦· · · ◦τSj(0) = τSN−1 ◦· · · ◦τSi−1 (c)
+              ⇔  τSN−1 ◦· · · ◦τSj+1(0)−1   = τSN−1 ◦· · · ◦τSi−1 (c)
+
+  For an integer i, deﬁne ai, bi as follows:
+
+   • ai = τ SN−1 ◦· · · ◦τ Si−1 (0)
+   • bi = τ SN−1 ◦· · · ◦τ Si−1 (c)
+
+  Notice that the inverses of τ+, τ-, τ>, τ< are linear functions, and their compositions are also linear functions. Thus,
+by keeping τ SN−1 ◦· · · ◦τSi as a linear function, we can compute ai, bi for all i in linear time.
+ Now our task is to count the number of pairs (i, j) such that aj+1 = bi. It can be easily done with maps, and works
+in O(N log N) time.
+  Let’s estimate the collision probability of hashes.  If we regard t(S) as a function of X, S = S′  if and only  if
+t(S) = t(S′). Otherwise, t(S) and t(S′) are diﬀerent as functions, and since they are polynomials of degree 2N (after
+some scaling), the number of X that makes t(S) = t(S′) is at most 2N. By choosing X uniformly at random from
+the ﬁeld FM, the probability of collision is 2NM . By using k diﬀerent values for X, since we compare (N+1)N2    pairs of
+                                              (N+1)N  ( 2Npolynomials, the total failure probability is at most    2      · M )k. This is less than 10−12 for M ∼109 and k = 6.
+
+
+                                                   3

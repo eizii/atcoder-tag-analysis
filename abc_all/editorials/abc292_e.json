@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc292_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5874",
+      "text": "相異なる頂点\n\\(a,b,c\\)\nであって、頂点\n\\(a\\)\nから頂点\n\\(b\\)\nへの有向辺と頂点\n\\(b\\)\nから頂点\n\\(c\\)\nへの有向辺がともに存在するが頂点\n\\(a\\)\nから頂点\n\\(c\\)\nへの有向辺が存在しないようなものが存在する場合に頂点\n\\(a\\)\nから頂点\n\\(c\\)\nへの有向辺を追加する、という操作を繰り返すのが最小回数で目的を達成する上で最適です。しかし、このシミュレーションを実行時間制限に間に合うように行うのは少し大変です。\n実は、最終的なグラフの状態において存在する頂点\n\\(x\\)\nを始点とする有向辺は、初期状態において頂点\n\\(x\\)\nから到達可能な頂点(\n\\(x\\)\nを除く)を終点とするもの及びそれに限ります。\nこのことから、初期状態のグラフに対し、各頂点から到達可能な頂点をBFSやDFSで調べれば良いです。ある始点からのBFSやDFSは\n\\(\\mathrm{O}(M)\\)\nで行えるため、全体の計算量は\n\\(\\mathrm{O}(NM)\\)\nとなります。\n実装例(C++, BFSによる実装)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N,M;\n\tcin>>N>>M;\n\tvector<vector<int>> E(N);\n\t\n\tfor(int i=0;i<M;i++){\n\t\tint u,v;\n\t\tcin>>u>>v;\n\t\tE[u-1].push_back(v-1);\n\t}\n\t\n\tint ans = 0;\n\t\n\tfor(int i=0;i<N;i++){\n\t\tvector<bool> f(N,false);\n\t\tf[i] = true;\n\t\tqueue<int> Q;\n\t\tQ.push(i);\n\t\t\n\t\twhile(Q.size()>0){\n\t\t\tint x = Q.front();\n\t\t\tQ.pop();\n\t\t\tfor(int j=0;j<E[x].size();j++){\n\t\t\t\tint y = E[x][j];\n\t\t\t\tif(f[y])continue;\n\t\t\t\tf[y] = true;\n\t\t\t\tQ.push(y);\n\t\t\t\tans++;\n\t\t\t}\n\t\t}\n\t}\n\t\n\tans -= M;\n\tcout<<ans<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "6efc4347875b812c0c46bc70d7973642df9ae299adb74264b1b84dfd3f755acf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc292/abc292_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5941",
+      "text": "公式解説よりも漸近的に遅い解法ですが、実行時間には余裕で間に合うため、ご紹介です。\nFloyd–Warshall  のアルゴリズムにより推移閉包を計算すると\n\\(O ( N ^ 3 )\\)\n時間で計算できますが、これを bitset （AtCoder では\nFixedBitSet\nというクレートが使えます。）で高速化すると、\n\\(O ( N ^ 3 / w )\\)\n時間（\n\\(w\\)\nはワードサイズ）となります。\nRust 78 ms",
+      "codes": [
+        "use fixedbitset::FixedBitSet;\nuse proconio::{input, marker::Usize1};\n\nfn main() {\n    input! {\n        n: usize,\n        m: usize,\n        edges: [(Usize1, Usize1); m],\n    }\n    let mut trans = vec![FixedBitSet::with_capacity(n); n];\n    (0..n).for_each(|i| trans[i].insert(i));\n    for &(i, j) in &edges {\n        trans[i].insert(j);\n    }\n    for j in 0..n {\n        for i in 0..n {\n            if trans[i][j] {\n                let x = trans[j].clone();\n                trans[i] |= x;\n            }\n        }\n    }\n    let ans = trans.iter().map(|row| row.count_ones(..)).sum::<usize>() - m - n;\n    println!(\"{}\", ans);\n}"
+      ],
+      "text_sha256": "6cbfbcd7cd7bd3e8e0a2acc68da7288f48506a6582047a0e58340884c5ca5c7f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc292/abc292_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,22 @@
+{
+  "problem_id": "abc111_a",
+  "editorials": [
+    {
+      "text": "A: AtCoder Beginner Contest 999\n与えられる3 文字をそれぞれ問題文のとおりに置き換えればよいです。\n1 #include<iostream>\n2\n3 using namespace std;\n4\n5 int main(){\n6\nstring n;\n7\ncin >> n;\n8\nfor(char c:n){\n9\nif(c == ’1’){\n10\ncout << 9;\n11\n}else{\n12\ncout << 1;\n13\n}\n14\n}\n15\nreturn 0;\n16 }\n文字列を相互に置き換える処理は次のようにも書けます。\n1 #include<iostream>\n2\n3 using namespace std;\n4\n5 int main(){\n6\nstring n;\n7\ncin >> n;\n8\nfor(char c:n){\n9\ncout << (char)(’1’ + ’9’ −c);\n10\n}\n11\nreturn 0;\n12 }\nこれを応用して次のようなシンプルなコードでも解けます。\n1 #include<iostream>\n2\n3 using namespace std;\n4\n5 int main(){\n6\nint n;\n7\ncin >> n;\n8\ncout << 111 + 999 −n << endl;\n9\nreturn 0;\n10 }\n",
+      "text_sha256": "c60ec64fa0068eade597045b00f0174cbab80236df6fc3d5e20e83dc7dcf4c5e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc111/abc111_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://img.atcoder.jp/arc103/editorial.pdf",
+      "text": "A: AtCoder Beginner Contest 999\n\n 与えられる3 文字をそれぞれ問題文のとおりに置き換えればよいです。\n\n    1 #include<iostream>\n    2\n    3  using namespace std;\n    4\n    5  int main(){\n    6          string n;\n    7          cin >> n;\n    8         for(char c:n){\n    9                     if(c == ’1’){\n   10                        cout << 9;\n   11                 }else{\n   12                        cout << 1;\n   13                }\n   14         }\n   15        return 0;\n   16 }\n\n 文字列を相互に置き換える処理は次のようにも書けます。\n\n    1 #include<iostream>\n    2\n    3  using namespace std;\n    4\n    5  int main(){\n    6          string n;\n    7          cin >> n;\n    8         for(char c:n){\n    9                 cout << (char)(’1’ + ’9’ −c);\n   10         }\n   11        return 0;\n   12 }\n\n これを応用して次のようなシンプルなコードでも解けます。\n\n    1 #include<iostream>\n    2\n    3  using namespace std;\n    4\n    5  int main(){\n    6         int n;\n    7          cin >> n;\n    8         cout << 111 + 999 −n << endl;\n    9        return 0;\n   10 }\n\n\n\n\n\n                                                   1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "76b867bfbf1f617e40685958f09867817d913e67cbe66304a792d250a59880c1"
+    }
+  ],
+  "status": "available"
+}

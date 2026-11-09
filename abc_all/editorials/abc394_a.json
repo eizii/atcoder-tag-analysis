@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc394_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc394/editorial/12277",
+      "text": "\\(S\\)\nに含まれる\n2\nの個数を数え、その個数の分だけ\n2\nを出力すればよいです。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tint k = count(s.begin(), s.end(), '2');\n\tcout << string(k, '2') << '\\n';\n}",
+        "print('2' * input().count('2'))"
+      ],
+      "text_sha256": "2175750b7b3fdd2e519155aafe053f08f24c05e20b382871c2918f8c77326c92",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc394/abc394_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

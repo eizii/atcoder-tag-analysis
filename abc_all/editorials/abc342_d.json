@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc342_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc342/editorial/9346",
+      "text": "\\(A_i,A_j\\)\nのいずれかが\n\\(0\\)\nの場合は明らかに条件を満たします。以下、\n\\(A_i,A_j\\)\nが共に正の場合を考えましょう。\n整数\n\\(x\\)\nについて、\n\\(x\\)\nを割り切る最大の平方数を\n\\(d_x\\)\nとします。このとき、\n\\(A_xA_y\\)\nが平方数であることと、\n\\(\\displaystyle \\frac{A_x}{d_{A_x}}\\frac{A_y}{d_{A_y}}\\)\nが平方数であることは同値です。更に、これは\n\\(\\displaystyle \\frac{A_x}{d_{A_x}}=\\frac{A_y}{d_{A_y}}\\)\nと同値であることが簡単に示せます。\nつまり、各\n\\(A_i\\)\nについて\n\\(d_{A_i}\\)\nを求めればこの問題を解くことが出来ます。\n\\(d_{A_i}\\)\nの候補が\n\\(\\mathrm{O}(\\sqrt{A_i})\\)\nであることから、全てを試しても、この問題を\n\\(\\mathrm{O}(N\\sqrt{A_i})\\)\nで解くことが出来ました。",
+      "codes": [],
+      "text_sha256": "5a054782d8c606f67a3662389b750629d0094e24ad6f5c8f226e9e9931178493",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc342/abc342_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc342/editorial/9365",
+      "text": "概略：\n\\(\\max A\\)\nが小さいので、エラトステネスの篩のようにやれば\n\\(O(N+\\max A)\\)\nでできます。\n\\(s_x\\)\nを「\n\\(x\\)\nを平方数で割れるだけ割った残り」とします。例えば\n\\(s_{12}=3\\)\n、\n\\(s_{72}=2\\)\nです。\nエラトステネスの篩のような以下のアルゴリズムにより、\n\\(s_1,\\ldots,s_X\\)\nを\n\\(O(X)\\)\n時間で列挙することができます。\n※\n\\(\\frac{1}{1^2}+\\frac{1}{2^2}+\\frac{1}{3^2}+\\ldots=O(1)\\)\nこうして計算した\n\\(s\\)\nを用いて公式解説と同様のことを行うことで、全体で\n\\(O(N+\\max A)\\)\n時間で答えを求めることができます。\n実装例(C++)",
+      "codes": [
+        "for i = 1 to X:\n  s[i]=i\nfor d = sqrt(X) to 2:\n  for k = 1 to X/d/d:\n    if s[k*d*d]%(d*d)==0:\n      s[k*d*d]/=d*d"
+      ],
+      "text_sha256": "cb7876bd8132fb4c0dbc96efa6698f1b0a872b0d133c34e1a897ff481c865292",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc342/abc342_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

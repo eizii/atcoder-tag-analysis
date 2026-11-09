@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc174_e",
+  "editorials": [
+    {
+      "text": "E: Logs\n（解説：ynymxiaolongbao）\n答えがX 以下であるか？という問題を考えます。この問題は言い換えれば、K 回以内のカットで\nすべての丸太の長さをX 以下にすることができるか？という問題になります。はじめ長さAi の丸\n太を切り分けて長さX 以下にするためには、⌈Ai\nX ⌉−1 回切る必要があります。そして、この回数の\n合計がK 以下であれば答えはYes、そうでなければ答えはNo です。\n二分探索を用いて、答えがX 以下であるか？という問題の答えがYes になる最も小さな整数X を\n求め、それを出力すれば良いです。計算量はO(Nlog(maxA)) になります。\n",
+      "text_sha256": "f99ebb26bc42fcf925d97973de69f6a90d3272cc375d07150598e2052964986b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc174/abc174_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

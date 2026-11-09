@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc379_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc379/editorial/11318",
+      "text": "この問題では整数\n\\(N\\)\nの入力の仕方によって実装が異なります。それぞれ紹介します。\n実装方針1\n入力を\n\\(1\\)\n文字毎に受け取る\n\\(1\\)\n文字ずつ入力を受け取り、順に\n\\(a,b,c\\)\nとします。このとき、問題文の指示通りの順序で\n\\(a,b,c\\)\nを出力すればよいです。\n実装例(C++)\n実装例(Python3)\n実装方針2\n整数\n\\(N\\)\nを整数型として受け取る\n整数\n\\(N\\)\nの\n\\(100\\)\nの位、\n\\(10\\)\nの位、\n\\(1\\)\nの位をそれぞれ計算すれば、問題文通りに出力すればよいです。\n今回の問題では、\n\\(100\\)\nの位は\n\\(\\lfloor \\frac{N}{100} \\rfloor\\)\n、\n\\(10\\)\nの位は\n\\(\\lfloor \\frac{N}{10} \\rfloor\\)\nを\n\\(10\\)\nで割った余り、\n\\(1\\)\nの位は\n\\(N\\)\nを\n\\(10\\)\nで割った余りとなります。\n実装例(C++)\n実装例(Python3)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    char a, b, c;\n    cin >> a >> b >> c;\n    cout << b << c << a << \" \" << c << a << b << endl;\n}",
+        "a, b, c = input()\nprint(f\"{b}{c}{a} {c}{a}{b}\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    int a = n / 100, b = (n / 10) % 10, c = n % 10;\n    cout << b << c << a << \" \" << c << a << b << endl;\n}",
+        "n = int(input())\na = n // 100\nb = (n // 10) % 10\nc = n % 10\nprint(f\"{b}{c}{a} {c}{a}{b}\")"
+      ],
+      "text_sha256": "f5c5667aa2ffa2b3b0f063e0762693043776a7cd260589e79c255494573114f0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc379/abc379_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc281_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc281/editorial/5364",
+      "text": "愚直にシミュレーションを行うと、最大で\n\\(O(T)\\)\n回の曲の切り替わりが発生するため、実行時間制限に間に合いません。そこで、周期性を利用します。\n\\(S = A_1 + \\dots + A_N\\)\nとおきます。プレイリストを再生してから\n\\(S\\)\n秒後には、再び曲\n\\(1\\)\nが流れ始めます。よって、\n\\(T_0 \\geq S\\)\nのとき、\n\\(T = T_0\\)\nのときの答えと\n\\(T = T_0 - S\\)\nのときの答えは同じであることがわかります。これを繰り返し用いることで、\n\\(T\\)\nを\n\\(S\\)\nで割った余りを考えれば、\n\\(T \\lt S\\)\nの場合に帰着することができます。\n\\(T \\lt S\\)\nの場合、愚直にシミュレーションを行っても最大\n\\(N-1\\)\n回しか曲の切り替わりは起きません。よって、この問題を\n\\(O(N)\\)\nで解くことができました。\n実装例 (C++)",
+      "codes": [],
+      "text_sha256": "df826510524b53f4f1553c85fa915f2a92bf84345e5e0e10644ed495c916bd5c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc281/abc281_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

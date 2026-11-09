@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc102_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc102/editorial.pdf",
+      "text": "D: All Your Paths are Diﬀerent Lengths\n\n  2r ≤L なる最大のr を取ります(r ≤19 に注意)。まず、以下のようにすれば、長さ0 以上2r −1 以下の\n\nパスをすべて1 本ずつ作ることができます。\n\n    • r + 1 個の頂点1, ..., r + 1 を用意し、N = r + 1 とする\n    • 頂点i から頂点i + 1 へ、長さ0 の辺と長さ2i の辺を1 本ずつ張る\n\n さて、こうして作ったグラフの頂点t から頂点N に長さX の辺を張れば、長さX, X +1, ..., X +2t−1 −1\nのパスを1 本ずつ作ることができます。よって、t = N −1, ..., 1 の順に見て、L −2t−1 ≥2r なら頂点t か\nら頂点N に長さL −2t−1 の辺を張り、L を2t−1 だけ減らし、そうでなければ何もしないことを繰り返せば\n\nよいです。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "ad2d513daf76addbef10a6eb79507626d939a0a935caa78ec822904fb4349a68"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc378_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc378/editorial/11288",
+      "text": "まず，条件を満たす経路の個数を見積もってみましょう．\n\\((x_0,y_0)\\)\nの選び方：たかだか\n\\(HW\\)\n通り\n\\((x_1,y_1)\\)\nの選び方：\n\\((x_0,y_0)\\)\nの上下左右に隣接しているマスから選ばれるから，たかだか\n\\(4\\)\n通り\n\\((x_k,y_k)\\;(2 \\leq k \\leq K)\\)\nの選び方：\n\\((x_{k-1},y_{k-1})\\)\nの上下左右に隣接しているたかだか\n\\(4\\)\nマスのうち，\n\\((x_{k-2},y_{k-2})\\)\nと異なるマスから選ばれるから，たかだか\n\\(3\\)\n通り\n以上を合わせて，条件を満たす経路の個数は\n\\(HW \\times 4 \\times 3^{K-1} \\leq 2.3 \\times 10^7\\)\nです．このくらいであれば，可能な経路をすべて列挙しても実行時間制限に間に合います．\n可能な経路の列挙は，\n深さ優先探索\nを使うのが便利です．（現在の位置，移動回数，すでに訪れたマス）の状態を持っておいて，次に移動できる場所をすべて試して再帰的に計算することで，経路を列挙することができます．\n実装例 (Python)",
+      "codes": [
+        "H, W, K = map(int, input().split())\nS = [input() for _ in range(H)]\n\nans = 0\n# すでに訪れたマスを記録する配列\nvisited = [[False] * W for _ in range(H)]\n\n\n# k 回移動してマス (i, j) にいる状態から探索を開始する\ndef rec(i, j, k):\n    global ans\n    if k == K:\n        # K 回移動することができたら，答えに 1 を足して探索を終了\n        ans += 1\n        return\n    # (i, j) を訪問済として記録する\n    visited[i][j] = True\n    # 隣接する 4 マスへの移動を試す\n    for di, dj in [(1, 0), (0, 1), (-1, 0), (0, -1)]:\n        ni, nj = i + di, j + dj\n        # 移動先がマス目の中にあり，空きマスであり，まだ訪れていないならば，そこへ移動し再帰的に探索する\n        if 0 <= ni < H and 0 <= nj < W and S[ni][nj] == \".\" and not visited[ni][nj]:\n            rec(ni, nj, k + 1)\n    # (i, j) を訪れなかったことにする\n    visited[i][j] = False\n\n\n# (i0, j0) をすべて試す\nfor i in range(H):\n    for j in range(W):\n        if S[i][j] == \".\":\n            rec(i, j, 0)\nprint(ans)"
+      ],
+      "text_sha256": "5ba5f03fea5ffa024cde8e254038d516070bc11a4a051a096d2f74bf93330fc5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc378/abc378_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

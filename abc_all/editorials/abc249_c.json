@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc249_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc249/editorial/3839",
+      "text": "\\(N\\)\n個の文字列のうち、いくつか選ぶ方法は\n\\(2^N\\)\n通りあります。\nこの全てに対して、「選んだ文字列の中でちょうど\n\\(K\\)\n個の文字列に登場する英小文字」の種類数を求めて最大値を出力すればよいです。\n計算量は\n\\(\\mathrm{O}(2^N \\times N \\times σ)\\)\nとなります。ただし、\n\\(σ\\)\nは英小文字の種類数です。\n実装の際には、それぞれの文字列を選ぶかどうかを\n\\(N\\)\n桁の\n\\(2\\)\n進数とみなし、\n\\(0\\)\n以上\n\\(2^N-1\\)\n以下の整数と対応させる bit 全探索と呼ばれている手法が便利です。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int n,k;\n  cin>>n>>k;\n  vector<string> s(n);\n  for(int i=0;i<n;i++) cin>>s[i];\n  int ans=0;\n  for(int i=0;i<(1<<n);i++){\n    vector<int> sum(26);\n    for(int j=0;j<n;j++){\n      if((i>>j)&1){\n        for(int x=0;x<s[j].size();x++) sum[s[j][x]-'a']++;\n      }\n    }\n    int now=0;\n    for(int j=0;j<26;j++) if(sum[j]==k) now++;\n    ans=max(ans,now);\n  }\n  cout<<ans<<endl;\n}"
+      ],
+      "text_sha256": "9433cde3fac360acb48fd547b3029f803519b554b7372d979ec2b6610f0e8357",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc249/abc249_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

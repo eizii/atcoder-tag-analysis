@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc054_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc054/editorial.pdf",
+      "text": "C:  One-stroke Path\n\n  簡単のために、与えられた無向グラフを隣接行列を用いて受け取ります。与えられた無向グラフに対して、頂点\n\n  1 を始点とする深さ優先探索(DFS) を用いて、候補となるパスを数え上げることを考えます。まず、頂点1 を訪\n 問済みとします。その後に、頂点1 を引数として以下の再帰関数を呼びます。この再帰関数は、隣接頂点が全て訪\n 問済みとなるまでグラフを辿っていくことで、パスを列挙します。\n\n     1: procedure DFS(現在の頂点v)\n     2:      if 全ての頂点を訪問済みthen\n     3:    答えを1 増やす。\n\n     4:       return\n     5:   end if\n     6:    for 頂点i: 頂点v に隣接しているかつ未訪問do\n     7:    頂点i を訪問済みとする。\n     8:       DFS(i)\n     9:    頂点i を未訪問とする。\n\n    10:   end for\n\n    11:    return\n\n    12: end procedure\n\n\n  ここで、候補となるパスの数の上限を考えます。パスの始点は頂点1 かつ全ての頂点は1 度しか訪れないため、\n  2 番目からN 番目までに訪れる頂点は{2, . . . , N} の順列で表されます。このため、パスの候補は最大で(N −1)!\n 通りです。頂点数の上限はN ≤8 であるため、最大で7! = 5040 通りしか存在しません。この解法の時間計算量\n  は、O(N!) となるため間に合います。\n   別解としては、{2, . . . , N} の順列を列挙を行い、条件を満たしたパスを数え上げます。先ほどと同様に、この\n 解法の時間計算量は、O(N!) となります。\n   より高速な解法として、bitDP を用いた時間計算量O(2NN 2) となる解法が存在します。(詳細は略)\n\n\n   C++のコード例(DFS 解)\n\n\n\n 1 const int nmax=8;\n 2 bool graph[nmax][nmax];\n\n\n 3\n\n 4 int dfs(int v,int N,bool visited[nmax]){\n\n\n 5\n\n 6     bool all_visited=true;\n\n\n 7\n\n 8     for(int i=0;i<N;++i){\n\n 9         if(visited[i]==false)\n\n10             all_visited=false;\n\n11     }\n\n\n12\n\n13     if(all_visited){\n\n14         return 1;\n\n15     }\n\n\n                                                  3\n\f\n16\n\n17     int ret=0;\n\n\n18\n\n19     for(int i=0;i<N;++i){\n\n20         if(graph[v][i]==false) continue;\n\n21         if(visited[i]) continue;\n\n\n22\n\n23         visited[i]=true;\n\n24         ret+=dfs(i,N,visited);\n\n25         visited[i]=false;\n\n26     }\n\n\n27\n\n28     return ret;\n\n29 }\n\n\n30\n\n31 int main(void){\n\n32     int N,M;\n\n33     cin >> N >> M;\n\n\n34\n\n35     for(int i=0;i<M;++i){\n\n36         int A,B;\n\n37         cin >> A >> B;\n\n38         graph[A-1][B-1]=graph[B-1][A-1]=true;\n\n39     }\n\n\n40\n\n41     bool visited[nmax];\n42     for(int i=0;i<N;++i){\n\n43         visited[i]=false;\n\n44     }\n\n\n45\n\n46     visited[0]=true;\n\n47     cout << dfs(0,N,visited) << endl;\n\n48     return 0;\n\n49 }",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "a7d1d581b7bdd08ab038254e49672868f111a88a4e1c40e5ba529ad10b2312cd"
+    }
+  ],
+  "status": "available"
+}

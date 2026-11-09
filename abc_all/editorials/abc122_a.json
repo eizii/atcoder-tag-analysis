@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc122_a",
+  "editorials": [
+    {
+      "text": "A: Double Helix\n正解までの道のりを細かく分割すると次の通りです。\n1. 標準入力から文字b を受け取る。\n2. 何らかの方法でb と対になる塩基を表す文字b′ を得る。\n3. b′ を標準出力に出力する。\n手順1, 3 についてはpractice contest 問題A の言語別サンプルコードが参考になります。手順2 につい\nては、結局のところb = A ならb′ = G、b = G ならb′ = A、. . . と4 つの文字それぞれに相方を指定すること\nになるでしょう。方法は大きく分けて二つ考えられ、if, else if, else やswitch にあたる構文でb に応じてプ\nログラムを分岐させるか、「答えの一覧」にあたるデータ構造を連想配列などで作ってb に対応する値を参照\nするかです。C++, Python3 による後者のアプローチの実装例を示します。\n1 #include <iostream>\n2 using namespace std;\n3 int main(){\n4\nchar b, c[128];\n5\nc['A'] = 'G';\n6\nc['G'] = 'A';\n7\nc['C'] = 'T';\n8\nc['T'] = 'C';\n9\ncin >> b;\n10\ncout << c[(int)b] << endl;\n11 }\n1 b = input()\n2 c = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}\n3 print(c[b])\n",
+      "text_sha256": "7ae67918186db07fe31e57b2561f6ba5d3225a23011b9056a676462bc0de37b9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc122/abc122_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

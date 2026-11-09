@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc232_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc232/editorial/3140",
+      "text": "実装方針によっては、ゴール \\((a, b)\\) が盤面の端にある場合などに対する場合分けが複雑になるため注意が必要です。 ここでは、複雑な場合分けをできるだけ免れるために、\n与えられた問題をサイズがより小さい問題に帰着して再帰的に解く方針を取ります。 (1) \\(H = 2\\) のとき 次の図に示すようなツアーを構成すれば良いです。 すなわち、 \\((1, 1) \\rightarrow (2, 1) \\rightarrow (1, 2) \\rightarrow (2, 2) \\rightarrow (1, 3) \\rightarrow (2, 3) \\rightarrow \\cdots \\rightarrow (1, b-1)  \\rightarrow (2, b-1) \\rightarrow (3-a, b) \\rightarrow\\) に続けて \\(\\rightarrow (1, b+1) \\rightarrow (1, b+2) \\rightarrow \\cdots \\rightarrow (1, W) \\rightarrow (2, W) \\rightarrow (2, W-1) \\rightarrow \\cdots \\rightarrow (2, b+1) \\rightarrow (a, b)\\) とキングを動かします。 (2) \\(H > 2\\) かつ \\(W=2\\) のとき 行と列の役割を交換することにより、上記「(1) \\(H=2\\) のとき」に帰着できます。 (3) \\(H > 2\\) かつ \\(W>2\\) のとき 次の図に示す \\(S\\) の領域にゴール \\((a, b)\\) があるかないかで場合分けします。 すなわち、 \\(S := \\lbrace (1, 1), (2, 1) (3, 1), \\ldots, (H, 1), (H, 2) \\rbrace\\) として、 \\((a, b) \\in S\\) かどうかで場合分けします。 ・ \\((a, b) \\not\\in S\\) のとき \\((1, 1) \\rightarrow (2, 1) \\rightarrow (3, 1) \\rightarrow \\cdots \\rightarrow (H, 1) \\rightarrow (H, 2)\\) とキングを動かすと、その後「 \\((H, 2)\\) から始めて、残りのマスをすべて通って、最後に \\((a, b)\\) に辿り着くようにキングを動かす」問題に帰着されます。\nよって、盤面から \\(1\\) 列目を取り除き、盤面の上下を反転することで、元の問題より \\(W\\) が \\(1\\) 小さい問題に帰着できます。 ・ \\((a, b) \\in S\\) のとき 行と列の役割を交換することにより、上記「 \\((a, b) \\not\\in S\\) のとき」に帰着できます。 C++ 言語による実装例を以下に記載します。",
+      "codes": [
+        "#include <iostream>\n#include <utility>\n#include <vector>\nusing namespace std;\ntypedef pair<int, int> P;\n\nvector<P> solve(int h, int w, int a, int b)\n{\n\tvector<P> ret;\n\tif(h == 2){\n\t\tfor(int i = 1; i <= b-1; i++) ret.push_back(P(1, i)), ret.push_back(P(2, i));\n\t\tret.push_back(P(3-a, b));\n\t\tfor(int i = b+1; i <= w; i++) ret.push_back(P(1, i));\n\t\tfor(int i = w; i >= b+1; i--) ret.push_back(P(2, i));\n\t\tret.push_back(P(a, b));\n\t}\n\telse if(h > 2 && w == 2 || b == 1 || a == h && b == 2){\n\t\tret = solve(w, h, b, a);\n\t\tfor(auto &p : ret) swap(p.first, p.second);\n\t}\n\telse{\n\t\tfor(int i = 1; i <= h; i++) ret.push_back(P(i, 1));\n\t\tvector<P> res = solve(h, w-1, h+1-a, b-1);\n\t\tfor(auto &p : res) p.first = h+1-p.first, p.second++;\n\t\tret.insert(ret.end(), res.begin(), res.end());\n\t}\n\treturn ret;\n}\n\nint main(void)\n{\n\tint h, w, a, b;\n\tcin >> h >> w >> a >> b;\n\tvector<P> ans = solve(h, w, a, b);\n\tfor(auto p : ans) cout << p.first << \" \" << p.second << endl;\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "d465bb22be67c92bcfbf79c5e26844b92c85215e6d74fb44d3aee85fe29cd93f"
+    }
+  ],
+  "status": "available"
+}

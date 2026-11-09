@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc466_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc466/editorial/22625",
+      "text": "\\(1\\) つずつ要素を確認し、 \\(X_i \\geq 0\\) である \\(i\\) が存在するかを判定すればよいです。また、答えが No であることは \\(\\max X_i \\geq 0\\) であることと同値なので、これを用いてもよいです。 実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tstring ans = \"Yes\";\n\tfor (int i = 0; i < n; i++) {\n\t\tint x;\n\t\tcin >> x;\n\t\tif (x >= 0) ans = \"No\";\n\t}\n\tcout << ans << '\\n';\n}\n",
+        "N = int(input())\nX = list(map(int, input().split()))\nprint(\"No\" if max(X) >= 0 else \"Yes\")\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "509812d0e1d3f6f542b313b7429e17deaed8fb2a7063e667a1cd6a96ef44cf05"
+    }
+  ],
+  "status": "available"
+}

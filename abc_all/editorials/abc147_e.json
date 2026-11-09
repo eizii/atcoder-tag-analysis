@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc147_e",
+  "editorials": [
+    {
+      "text": "E: Balanced path\n色の塗り方と移動経路を決める順番は答えに影響しません。そこで、移動しながら塗り方を決める\nことで、bool 値のテーブルを持つことを考えます。\nDP[i][j][k] = マス(i, j) までの経路の偏りがk になることがあるか？\nマス(i, j) で偏りがk であるとき、マス(i + 1, j) での偏りは、マス(i + 1, j) の数の色の塗り方によ\nりk + |Ai+1,j −Bi+1,j| か|k −|Ai+1,j −Bi+1,j|| となります。マス(i, j + 1) についても同様です。\nしたがって、i, j が小さい方から順にテーブルを埋めていくことができます。\nM = max{|A11 −B11|, ..., |AHW −BHW |} として、偏りは最大でO((H + W)M) 程度まで考慮\nする必要があるので、全体でO(HW(H + W)M) で解くことができました。なお、計算の順序を工\n夫することで空間計算量O(min{H, W}(H + W)M) で解くことや、bitset を用いた高速化をするこ\nともできます。\n",
+      "text_sha256": "e9832b955b8464b8ca38ed2f3cc021a465e5dfb798f88c29a081d18b90217b01",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc147/abc147_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

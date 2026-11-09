@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc277_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc277/editorial/5208",
+      "text": "この問題を解くためには、各\n\\(i = 1, 2, \\ldots ,N\\)\nに対して\n\\(P_i = X\\)\nかどうかの判定を行えばよいです。\n「各\n\\(i = 1, 2, \\ldots ,N\\)\nに対して」の部分は for 文、「\n\\(P_i = X\\)\nかどうか」の部分は if 文を用いることにより処理できます。\n実装例（C++）\n実装例（Python）\nこれらの実装例では、問題文とは違い途中の処理を 0-indexed （0 から始まる添字付け）で行っていることに注意してください。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n\tint n, x;\n\tcin >> n >> x;\n\tvector<int> p(n);\n\tfor (int i = 0; i < n; i++) cin >> p[i];\n\tfor (int i = 0; i < n; i++) if (p[i] == x) cout << i + 1 << '\\n';\n}",
+        "n, x = map(int, input().split())\np = list(map(int, input().split()))\nfor i in range(n):\n\tif p[i] == x:\n\t\tprint(i + 1)"
+      ],
+      "text_sha256": "f5351ee4a1e4fb9f5448bc1e4aeff35d868edcf231804a0aefbee09efa8a752b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc277/abc277_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

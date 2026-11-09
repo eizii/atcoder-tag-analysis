@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc429_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc429/editorial/14274",
+      "text": "まず、重要な事実として\n\\((1,1)\\)\nから\n\\((3,N)\\)\nまでの最短経路では\n\\((x,y)\\)\nから\n\\((x,y-1)\\)\nへ “逆戻り” するようなタイミングが存在しません。したがって、\n\\(d_{i,j}\\)\nを「マス\n\\((1,1)\\)\nからマス\n\\((i,j)\\)\nへ逆戻りせずに移動する際の最短距離」とすると、求める答えは\n\\(d_{3,N}\\)\nと一致します。\nさらに、\n\\(d_{*,j}\\)\nは\n\\(d_{*,j-1}\\)\nとマス\n\\(S_{*,j}\\)\nの情報のみから決まります。ここで、\n\\(S_{*,j}\\)\nを\n\\(d_{*,j}\\)\nから\n\\(d_{*,j-1}\\)\nを決める写像であると捉えると、これらの写像はモノイドとなります。したがって、\n\\(S_{*,j}\\)\nを載せたセグメント木を持ち、一点更新と全体積取得を行うことで答えを求めることができます。\n以上を適切に実装することで答えを求めることができます。計算量は\n\\(O(N+Q\\log N)\\)\nです。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#include <atcoder/all>\n#define rep(i, n) for (int i = 0; i < (n); i++)\ntemplate <typename T> bool chmin(T &x, T y) {\n\tif (x > y) {\n\t\tx = y;\n\t\treturn true;\n\t}\n\treturn false;\n}\nusing SS = array<int, 3>;\nusing S = array<SS, 3>;\narray<S, 9> e8;\nS op(S x, S y) {\n\tS res = e8[7];\n\trep(i, 3) rep(j, 3) rep(k, 3) chmin(res[i][j], x[k][j] + y[i][k]);\n\treturn res;\n}\nS e() { return e8[8]; }\nconstexpr int INF = 1e9;\nint main() {\n\te8[0] = S{SS{0, 1, 2}, SS{1, 0, 1}, SS{2, 1, 0}};\n\te8[1] = S{SS{INF, INF, INF}, SS{INF, 0, 1}, SS{INF, 1, 0}};\n\te8[2] = S{SS{0, INF, INF}, SS{INF, INF, INF}, SS{INF, INF, 0}};\n\te8[3] = S{SS{INF, INF, INF}, SS{INF, INF, INF}, SS{INF, INF, 0}};\n\te8[4] = S{SS{0, 1, INF}, SS{1, 0, INF}, SS{INF, INF, INF}};\n\te8[5] = S{SS{INF, INF, INF}, SS{INF, 0, INF}, SS{INF, INF, INF}};\n\te8[6] = S{SS{0, INF, INF}, SS{INF, INF, INF}, SS{INF, INF, INF}};\n\te8[7] = S{SS{INF, INF, INF}, SS{INF, INF, INF}, SS{INF, INF, INF}};\n\te8[8] = S{SS{0, INF, INF}, SS{INF, 0, INF}, SS{INF, INF, 0}};\n\tint n;\n\tcin >> n;\n\tvector<int> s(n);\n\trep(j, 3) {\n\t\tstring ss;\n\t\tcin >> ss;\n\t\trep(i, n) if (ss[i] == '#') s[i] |= 1 << j;\n\t}\n\tvector<S> to_seg(n);\n\trep(i, n) to_seg[i] = e8[s[i]];\n\tatcoder::segtree<S, op, e> seg(to_seg);\n\tint que;\n\tcin >> que;\n\twhile (que--) {\n\t\tint r, c;\n\t\tcin >> r >> c;\n\t\tr--, c--;\n\t\ts[c] ^= 1 << r;\n\t\tseg.set(c, e8[s[c]]);\n\t\tauto res = seg.all_prod();\n\t\tcout << (res[2][0] == INF ? -1 : n - 1 + res[2][0]) << '\\n';\n\t}\n}"
+      ],
+      "text_sha256": "86954d127b154c1dcb1092a81bacffd8438b036762fbdaba2f008d7914899a37",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc429/abc429_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc425_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc425/editorial/14087",
+      "text": "Trie 木を陽に持たずに再帰的に問題を解くことを考えます。 整数 \\(k\\) と \\(2^k\\) いかの整数 \\(M\\) 、各要素が \\(2^k\\) 未満の整数の集合 \\(A\\) に対して \\(\\displaystyle f(A,M,k)=\\sum_{x =0}^{M-1} \\min_i (x \\oplus A_i)\\) と定義します。求める値は \\(f(A,M,30)\\) となります。 この \\( f(A,M,k)\\) の値を再帰的に求めることを考えます。 まず、 \\(k=0\\) または \\(M=0\\) の場合は \\(f(A,M,k)=0\\) です。以降は これ以外の場合を考えます。 集合 \\(B_0,B_1\\) をそれぞれ \\(B_0=\\lbrace 0\\le x < 2^{k-1}| x \\in A\\rbrace, \\ B_1=\\lbrace 0\\le (x - 2^{k-1}) < 2^{k-1}| x \\in A\\rbrace\\) と定義します（直感的には \\(A\\) の要素の \\(2^{k-1}\\) 未満の要素の集合が \\(B_0\\) 、 \\(2^{k-1}\\) 以上の要素から \\(2^{k-1}\\) 引いた要素の集合を \\(B_1\\) とします）。 1. \\(M=2^k\\) のとき もし \\(B_0,B_1\\) 両方空集合でない場合の答えは \\(\\displaystyle f(B_0,2^{k-1},k-1)+f(B_1,2^{k-1},k-1)\\) です。 また、 \\(B_0\\) のみ空集合である場合の答えは \\(\\displaystyle 2f(B_1,2^{k-1},k-1)+2^{2k-2}\\) です。 \\(B_1\\) のみ空集合である場合の答えも同様に \\(\\displaystyle 2f(B_0,2^{k-1},k-1)+2^{2k-2}\\) です。 2. \\(M \\le 2^{k-1}\\) のとき \\(B_0\\) が空集合なら答えは \\(f(B_1,M,k-1) + M2^{k-1}\\) です。 \\(B_0\\) が空集合でないなら、 \\(B_1\\) 側の要素が最小値になることはありません。したがって、答えは \\(\\displaystyle f(B_0,M,k-1)\\) です。 3. \\( 2^{k-1} < M < 2^k\\) のとき \\(0\\le x < 2^{k-1}\\) 側の貢献度は \\(B_0\\) が空集合のとき \\(f(B_1,2^{k-1},k-1) + 2^{2k-2}\\) 、そうでないとき \\(f(B_0,2^{k-1},k-1)\\) です。 \\(2^{k-1}\\le x < M\\) 側の貢献度は \\(B_1\\) が空集合のとき \\(f(B_0,M-2^{k-1},k-1) + 2^{k-1}(M-2^{k-1})\\) 、そうでないとき \\(f(B_1,M-2^{k-1},k-1)\\) です。 これらを足し合わせた値が求める答えとなります。 以上を適切に実装することでこの問題に正答することができます。計算量は \\(O(N\\log \\max A)\\) です。 実装例(Python3)",
+      "codes": [
+        "def f(A, M, k):\n    if k == 0:\n        return 0\n    B = [[], []]\n    for i in A:\n        B[(i >> (k - 1)) & 1].append(i & ~(1 << (k - 1)))\n    mid = 1 << (k - 1)\n    if M == 1 << k:\n        if B[0] and B[1]:\n            return f(B[0], mid, k - 1) + f(B[1], mid, k - 1)\n        return 2 * f(A, mid, k - 1) + mid * mid\n    ans = f(B[0], min(M, mid), k - 1) if B[0] else f(A, min(M, mid), k - 1) + mid * min(M, mid)\n    if M > mid:\n        ans += f(B[1], M - mid, k - 1) if B[1] else f(A, M - mid, k - 1) + mid * (M - mid)\n    return ans\n\nN, M = map(int,input().split())\nA = list(map(int,input().split()))\nprint(f(A, M, 30))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "f9c1659b812ba2832715810b42d78a374afda2751b19414764128bb8dd11b9c8"
+    }
+  ],
+  "status": "available"
+}

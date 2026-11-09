@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc422_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc422/editorial/13820",
+      "text": "この問題は\n乱択アルゴリズム\nを使用することで高速かつ十分高確率で問題を解くことが出来ます。\n過半数の点を通る直線\n\\(ax+by+c=0\\)\nが存在すると仮定します。この時、直線上には\n\\(\\frac{N+1}{2}\\)\n個以上の点が存在します。よって、\n\\(N\\)\n点からランダムに異なる 2 点\n\\(p_1, p_2\\)\nを選んだとすると、両方の点が直線上に存在する確率は\n\\[\\frac{\\frac{N+1}{2}}{N} \\cdot \\frac{\\frac{N+1}{2}-1}{N-1} = \\frac{N+1}{4N} \\gt \\frac{1}{4}\\]\nです。すなわち、\n\\(\\frac{1}{4}\\)\n以上の確率で\n\\(p_1, p_2\\)\nはともに直線上に存在します。\nまた、異なる 2 点\n\\(p_1, p_2\\)\nを選んだ時に、両方の点を通る直線は一意に定まります。\nよって、答えが存在する時は次の乱択アルゴリズム\n\\((\\ast)\\)\nが\n\\(\\frac{1}{4}\\)\nの確率で正答を返します。\n\\(N\\)\n点の中から 2 点\n\\(p_1, p_2\\)\nをランダムに選んで、\n\\(p_1, p_2\\)\nを両方通る直線\n\\(l\\)\nを取ってくる。\n\\(l\\)\nが過半数の点を通るか調べて、もし通るならばその\n\\(l\\)\nを出力する。\n\\(\\cdots(\\ast)\\)\n\\((\\ast)\\)\nのままでは誤答する確率が\n\\(\\frac{3}{4}\\)\nと非常に高いので次のように改善します：\n\\((\\ast)\\)\nを\n\\(T\\)\n回行う。条件を満たす直線を発見できなかった時は No を返す。\n\\((\\ast)\\)\nは\n\\(\\mathrm{O}(N)\\)\nで動作するので、このアルゴリズムは\n\\(\\mathrm{O}(TN)\\)\nで動作して、誤答する確率は解が存在する場合で高々\n\\(\\left(\\frac{3}{4}\\right)^T\\)\nになります。よって\n\\(T=100\\)\n程度を取れば誤答確率が約\n\\(3.2 \\times 10^{-13}\\)\nと十分低いアルゴリズムを構成出来て、これは十分高速かつ正確です。\nなお、2 点\n\\(p_1 = (x_1, y_1), p_2 = (x_2, y_2)\\)\nを通る直線は\n\\[\n\\begin{aligned}\n&(x - x_1) (y - y_2) = (x - x_2) (y - y_1) \\\\\n&\\iff (y_1 - y_2) x + (x_2 - x_1)y + x_1 y_2 - x_2 y_1 = 0\n\\end{aligned}\n\\]\nと表すことが出来ます。制約下において\n\\((y_1 - y_2) x + (x_2 - x_1)y + x_1 y_2 - x_2 y_1\\)\nは(計算過程の値も含めて) 絶対値が\n\\(10^{18}\\)\n以下に収まるので 64 bit 整数を用いて計算して問題ないです。",
+      "codes": [
+        "#include <iostream>\n#include <random>\nusing namespace std;\nusing ll = long long;\n\nll N, X[500500], Y[500500];\n\nint main() {\n  cin >> N;\n  for (int i = 0; i < N; i++) cin >> X[i] >> Y[i];\n\n  // 疑似乱数を返す型。58 はシード\n  // CodeForces などの hack 可能なコンテストでは使用に注意が要る\n  mt19937_64 rng(58);\n\n  int T = 100;\n  for (int t = 0; t < T; t++) {\n    int i, j;\n    do {\n      i = rng() % N, j = rng() % N;\n    } while (i == j);\n    ll a = Y[i] - Y[j];\n    ll b = X[j] - X[i];\n    ll c = X[i] * Y[j] - X[j] * Y[i];\n    int num = 0;\n    for (int k = 0; k < N; k++) num += a * X[k] + b * Y[k] + c == 0;\n    if (num * 2 > N) {\n      cout << \"Yes\\n\";\n      cout << a << \" \" << b << \" \" << c << \"\\n\";\n      return 0;\n    }\n  }\n  cout << \"No\\n\";\n}"
+      ],
+      "text_sha256": "369cb1ae20bb5f47d9acd46d0afa73a28ff6e33bbd6257273231f98850c015ba",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc422/abc422_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc422/editorial/13859",
+      "text": "準備\n以下が成り立ちます.\n答えとなる直線は高々3つしか存在しない\n前提: 2つの異なる直線は点を高々1つしか共有しません.\n\\(N\\)\nが偶数の場合\n\\(N = 2M\\)\nとします. 答えとなる直線は点を\n\\(M+1\\)\n個以上含むので, 答えとなる直線が2つあった場合, そのどちらかに含まれる点の個数は\n\\(2(M+1) - 1 = N+1\\)\n個以上になります. これは\n\\(N\\)\nより大きいため矛盾し, 背理法により答えとなる直線は高々1つと示せました.\n\\(N=3\\)\nの場合\n\\(3\\)\nつの点から過半数(\n\\(2\\)\nつ)を選ぶ組合せが\n\\(3\\)\n通りであることから, 過半数の点を通る直線の個数は\n\\(3\\)\n個以下になります.\n\\(N\\)\nが\n\\(5\\)\n以上の奇数の場合\n\\(N = 2M-1\\)\nとします. 仮定から\n\\(M\\ge3\\)\nです. 答えとなる直線は点を\n\\(M\\)\n個以上含むので, 答えとなる直線が3つあった場合, そのどれかに含まれる点の個数は\n\\(3M - 3 = N+M-2 \\ge N+1\\)\n個以上になります. これは\n\\(N\\)\nより大きいため矛盾し, 背理法により答えとなる直線は高々2つと示せました.\n方針\n\\(S\\)\nを点の集合としたとき,\n\\(f(S)\\)\nを\n\\(S\\)\nのうち過半数の点を含む全ての直線の集合とします. 分割統治的に\n\\(f(A)\\)\nを求めます.\n\\(\\left|S\\right| \\lt 6\\)\nの場合\n\\(S\\)\nに含まれる\n\\(2\\)\nつの点を選ぶ組合せを総当たりすることで\n\\(f(S)\\)\nが求められます.\n\\(\\left|S\\right| \\ge 6\\)\nの場合\n\\(N \\coloneqq \\left|S\\right|\\)\nとします.\n\\(X\\sqcup Y = S\\)\n,\n\\(\\left|X\\right|=\\left\\lfloor\\frac N2\\right\\rfloor\\)\n,\n\\(\\left|Y\\right|=\\left\\lceil\\frac N2\\right\\rceil\\)\nとなるように2つの集合\n\\(X\\)\n,\n\\(Y\\)\nをとれます (ここで,\n\\(X\\sqcup Y\\)\nは非交和). このとき\n\\(\\left|X\\right|,\\left|Y\\right|\\ge3\\)\nになります.\n過半数の性質から,\n\\(f(S) \\subseteq f(X) \\cup f(Y)\\)\nになります. そのため,\n\\(f(X)\\)\n,\n\\(f(Y)\\)\nを求める.\n\\(f(X) \\cup f(Y)\\)\nに含まれる直線全てについて,\n\\(S\\)\n全体で過半数の点を含むか調べる\nとすることで\n\\(f(S)\\)\nを求めることができます.\n準備で示した命題から\n\\(\\left|f(X)\\cup f(Y)\\right|\\le6\\)\nと定数で抑えられるため, 2.の計算量は\n\\(O(N)\\)\nになり, 全体で計算量は\n\\(O(N\\log N)\\)\nです.\n実装例\n(Rust, 109ms)",
+      "codes": [],
+      "text_sha256": "bf5af191677e4d05e8ec15ea9af79e2274d0f6330e814617550a9848997adb15",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc422/abc422_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

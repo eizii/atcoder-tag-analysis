@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc479_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc479/editorial/27130",
+      "text": "for ループなどで文字列を先頭から順に調べます。 現在続いている R の個数 \\(cur=0\\) 、答え \\(res=0\\) と初期化する。 \\(i=1,2,\\dots,N\\) について、以下を繰り返す。 もし \\(S\\) の \\(i\\) 文字目が R なら \\(cur\\) に \\(1\\) 加算する。 そうでなければ R の連続が途切れるため、 \\(cur=0\\) とする。 \\(res\\) を \\(\\max(res,cur)\\) に更新する。 こうすることで、最も多くの R が連続しているタイミングでその数を確実に記録しておけます。 実装例 (C++): 原案: admin",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int n;\n  cin >> n;\n  string s;\n  cin >> s;\n  int cur=0,res=0;\n  for(auto &nx : s){\n    if(nx=='R'){cur++;}\n    else{cur=0;}\n    res=max(res,cur);\n  }\n  cout << res << \"\\n\";\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "c43e33ca5c11c37c6ea9aec1e1180a4a78e0dffdde634416be6f4ff708f99608"
+    }
+  ],
+  "status": "available"
+}

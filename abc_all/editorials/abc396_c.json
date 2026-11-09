@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc396_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc396/editorial/12387",
+      "text": "はじめに，あらかじめ\n\\(A,B\\)\nをそれぞれ降順ソートしておきます．すると，価値の最大値は，数列\n\\(A\\)\nの最初のいくつかの項と数列\n\\(B\\)\nの最初のいくつかの項の合計になります．\n\\(\\displaystyle S_i=\\sum_{j=1}^i A_i, T_i=\\sum_{j=1}^iB_j\\)\nとおきます．ただし，\n\\(S_0=0, T_0=0\\)\nとします．求める答えは\n\\(0\\leq i\\leq N, 0\\leq j\\leq M, j\\leq i\\)\nを満たすときの\n\\(S_i+T_j\\)\nの最大値です．すべての\n\\(i,j\\)\nに対して上の値を求めると計算量が\n\\(O(NM)\\)\nとなり間に合いません．\n\\(i\\)\nを固定したときの\n\\(S_i+T_j\\)\nの最大値を考えます．\n\\(j\\)\nは\n\\(0\\leq j\\leq \\min(i,M)\\)\nを満たす範囲を動くので，\n\\(T_0,T_1,\\ldots,T_{\\min(i,M)}\\)\nの最大値が分かればよいです．これは，あらかじめ\n\\(T\\)\nの累積 max を\n\\(O(M)\\)\nかけて前計算しておくことで，\n\\(O(1)\\)\nで求めることができます．\n計算量はソートがボトルネックとなり\n\\(O(N\\log N + M\\log M)\\)\nです．",
+      "codes": [
+        "N, M = map(int, input().split())\nA = list(map(int, input().split()))\nB = list(map(int, input().split()))\nA.sort(reverse=True)\nB.sort(reverse=True)\nS, T, maxT = [0] * (N + 1), [0] * (M + 1), [0] * (M + 1)\nfor i in range(N):\n    S[i + 1] = S[i] + A[i]\nfor i in range(M):\n    T[i + 1] = T[i] + B[i]\n    maxT[i + 1] = max(maxT[i], T[i + 1])\n\nans = 0\nfor i in range(N + 1):\n    ans = max(ans, S[i] + maxT[min(i, M)])\nprint(ans)"
+      ],
+      "text_sha256": "095b8037bbbdeef57d679774399350bc00b6dcb60f6f1b9f9924b4efd9e58c99",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc396/abc396_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

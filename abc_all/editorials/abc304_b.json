@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc304_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc304/editorial/6510",
+      "text": "\\(N\\) の \\(10^d\\) の位を切り捨てることは、 \\(N\\) を \\(10^{d+1}\\) で割った余りを \\(M\\) として、 \\(N\\) を \\(N-M\\) に置き換える \\(N\\) を文字列と捉え、 \\(4\\) 文字目以降をすべて 0 に置き換える などというように言い換えができます。 したがって、以下のような実装例で正解を得ることができます。 実装例 1 実装例 2 実装例 3",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tif (n < 1000) cout << n << '\\n';\n\tif (1000 <= n && n <= 9999) cout << n - n % 10 << '\\n';\n\tif (10000 <= n && n <= 99999) cout << n - n % 100 << '\\n';\n\tif (100000 <= n && n <= 999999) cout << n - n % 1000 << '\\n';\n\tif (1000000 <= n && n <= 9999999) cout << n - n % 10000 << '\\n';\n\tif (10000000 <= n && n <= 99999999) cout << n - n % 100000 << '\\n';\n\tif (100000000 <= n && n <= 999999999) cout << n - n % 1000000 << '\\n';\n}\n",
+        "#include <iostream>\nusing namespace std;\nconstexpr ll ten(int n) { return n ? 10 * ten(n - 1) : 1; };\n\nint main() {\n\tint n;\n\tcin >> n;\n\tif (n < 1000) cout << n << '\\n';\n\tfor (int i = 1; i <= 6; i++) if (ten(i + 2) <= n && n < ten(i + 3)) cout << n - n % ten(i) << '\\n';\n}\n",
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tif (s.size() <= 3) cout << s << '\\n';\n\telse cout << s.substr(0, 3) << string(s.size() - 3, '0') << '\\n';\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "89472cc59cafa5c55887b66a2a2ad8b1a08b5aecf05afe9935736c8b630dc919"
+    }
+  ],
+  "status": "available"
+}

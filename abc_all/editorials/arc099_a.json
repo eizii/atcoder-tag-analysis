@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc099_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc099/editorial.pdf",
+      "text": "C: Minimization\n\n 数列の最小値は1 です．どのように操作を行っても，最小値が1 以外に変化することはありません．なので，数列の\n要素をすべて1 にすることを考えます．\n 数列中の1 の個数は，はじめ1 です．この個数は，1 回の操作でK −1 までしか増やすことができません．なぜな\nらば，1 の個数を増やすためには，操作で選ぶ要素の中に1 が含まれている必要があるためです．よって，少なくとも\n⌈N−1K−1⌉回の操作が必要であることがわかります．\n 一方，うまく操作を行うことで，⌈N−1K−1⌉回の操作ですべての要素を1 にすることが可能です．はじめAp = 1 である\nとします．ここで，1 + g(K −1) ≤p ≤1 + (g + 1)(K −1) なる整数g をとります．このとき，次のように操作を行え\n\nばよいです：\n\n   • i = g, g −1, g −2, . . . , 1 に対して，この順で要素i(K −1)+1, i(K −1)+2, . . . , i(K −1)+K を選んで操作を行う．\n\n\n                                                   1\n\f\n   • i = g + 1, g + 2, . . . , ⌈N−1K−1 −1⌉に対して，この順で要素i(K −1) + 1, i(K −1) + 2, . . . , i(K −1) + K を選んで操\n   作を行う．\n\n   • 要素N −K + 1, N −K + 2, . . . , N を選んで操作を行う．",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "1efec9ff91baa7b89bb00b0a20db231472eda5c92be89058d362913cff9b7df6"
+    }
+  ],
+  "status": "available"
+}

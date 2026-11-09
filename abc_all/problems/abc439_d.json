@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc439_d",
+  "title": "Kadomatsu Subsequence",
+  "contests": [
+    {
+      "contest_id": "abc439",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 627,
+  "raw_difficulty": 627,
+  "contest_id": "abc439",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc439/tasks/abc439_d",
+  "statement": "配点 : 425 点 問題文 長さ N の整数列 A=(A_1,A_2,\\dots,A_N) が与えられます。 以下を全て満たす整数の 3 つ組 (i,j,k) がいくつあるか求めてください。 1 \\le i,j,k \\le N A_i : A_j : A_k = 7:5:3 \\min(i,j,k) = j または \\max(i,j,k) = j 制約 入力は全て整数 1 \\le N \\le 3 \\times 10^5 1 \\le A_i \\le 10^9 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N 出力 答えを出力せよ。 入力例 1 10\r\n3 10 7 10 7 6 7 6 5 14 出力例 1 7 条件を満たす整数の 3 つ組 (i,j,k) は以下の 7 個です。 (3,9,1) A_i : A_j : A_k = 7:5:3 であり、 \\max(i,j,k) = j です。 (5,9,1) A_i : A_j : A_k = 7:5:3 であり、 \\max(i,j,k) = j です。 (7,9,1) A_i : A_j : A_k = 7:5:3 であり、 \\max(i,j,k) = j です。 (10,2,6) A_i : A_j : A_k = 14:10:6 = 7:5:3 であり、 \\min(i,j,k) = j です。 (10,2,8) A_i : A_j : A_k = 14:10:6 = 7:5:3 であり、 \\min(i,j,k) = j です。 (10,4,6) A_i : A_j : A_k = 14:10:6 = 7:5:3 であり、 \\min(i,j,k) = j です。 (10,4,8) A_i : A_j : A_k = 14:10:6 = 7:5:3 であり、 \\min(i,j,k) = j です。 入力例 2 6\r\n210 210 210 210 210 210 出力例 2 0 入力例 3 21\r\n49 30 50 21 35 15 21 70 35 9 50 70 21 49 30 50 70 15 9 21 30 出力例 3 34",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の整数列 A=(A_1,A_2,\\dots,A_N) が与えられます。 以下を全て満たす整数の 3 つ組 (i,j,k) がいくつあるか求めてください。 1 \\le i,j,k \\le N A_i : A_j : A_k = 7:5:3 \\min(i,j,k) = j または \\max(i,j,k) = j"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 入力は全て整数 1 \\le N \\le 3 \\times 10^5 1 \\le A_i \\le 10^9"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 10\r\n3 10 7 10 7 6 7 6 5 14"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 7 条件を満たす整数の 3 つ組 (i,j,k) は以下の 7 個です。 (3,9,1) A_i : A_j : A_k = 7:5:3 であり、 \\max(i,j,k) = j です。 (5,9,1) A_i : A_j : A_k = 7:5:3 であり、 \\max(i,j,k) = j です。 (7,9,1) A_i : A_j : A_k = 7:5:3 であり、 \\max(i,j,k) = j です。 (10,2,6) A_i : A_j : A_k = 14:10:6 = 7:5:3 であり、 \\min(i,j,k) = j です。 (10,2,8) A_i : A_j : A_k = 14:10:6 = 7:5:3 であり、 \\min(i,j,k) = j です。 (10,4,6) A_i : A_j : A_k = 14:10:6 = 7:5:3 であり、 \\min(i,j,k) = j です。 (10,4,8) A_i : A_j : A_k = 14:10:6 = 7:5:3 であり、 \\min(i,j,k) = j です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 6\r\n210 210 210 210 210 210"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 21\r\n49 30 50 21 35 15 21 70 35 9 50 70 21 49 30 50 70 15 9 21 30"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 34"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc439/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:18.917025+00:00",
+  "statement_sha256": "1077b0715fb8c96526d676ca5806c63151ea5a6fe21ccd398797af5c6c4a9a92",
+  "editorials": []
+}

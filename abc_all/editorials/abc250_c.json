@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc250_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc250/editorial/3905",
+      "text": "基本方針\n基本的には各位置のボールに書かれている整数が何かに注目して操作をシミュレーションし、最終的な並びを求めることになります。\n左から\n\\(i\\)\n番目のボールに書かれている整数を表す変数を\n\\(val[i]\\)\nとします。\n初め、左から\n\\(i(1 \\leq i \\leq N)\\)\n番目のボールには整数\n\\(i\\)\nが書かれています。\nという記述に従い、\n\\(val\\)\nは次のように初期化を行います。\nそして、\n\\(Q\\)\n回の操作は以下のようにしてシミュレーション出来ます。\nしかし、このシミュレーションの時間計算量は\n\\(\\mathrm{O}(NQ)\\)\nであり、本問の制約の下で実行時間制限に間に合わせるには改善が必要です。\n\\(\\mathrm{O}(Q)\\)\nへの改善\n上のコードでは\n\\(Q\\)\n回のループ内で\n\\(val[j]=x[i]\\)\nとなる\n\\(j\\)\nを\n\\(\\mathrm{O}(N)\\)\nかけて求めていますが、整数\n\\(j\\)\nが書かれているボールが左から何番目かを表す変数\n\\(pos[j]\\)\nを管理することでこの部分を\n\\(\\mathrm{O}(1)\\)\nに出来、十分高速に本問を解くことが出来ます。\n実装例",
+      "codes": [
+        "vector<int> val(N+1);\nfor(int i=1;i<=N;i++)val[i] = i;",
+        "for(int i=0;i<Q;i++){\n\tfor(int j=1;j<=N;j++){\n\t\tif(val[j]==x[i]){\n\t\t\tif(j!=N)swap(val[j],val[j+1]);\n\t\t\telse swap(val[j],val[j-1]);\n\t\t\tbreak;\n\t\t}\n\t}\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N;\n\tcin>>N;\n\t\n\tvector<int> val(N+1),pos(N+1);\n\tfor(int i=1;i<=N;i++)val[i] = i,pos[i] = i;\n\t\n\tint Q;\n\tcin>>Q;\n\t\n\tvector<int> x(Q);\n\tfor(int i=0;i<Q;i++)cin>>x[i];\n\t\n\tfor(int i=0;i<Q;i++){\n\t\tint p0 = pos[x[i]];\n\t\tint p1 = p0;\n\t\tif(p0!=N)p1++;\n\t\telse p1--;\n\t\tint v0 = val[p0];\n\t\tint v1 = val[p1];\n\t\tswap(val[p0],val[p1]);\n\t\tswap(pos[v0],pos[v1]);\n\t}\n\t\n\tfor(int i=1;i<=N;i++){\n\t\tif(i!=1)cout<<' ';\n\t\tcout<<val[i];\n\t}\n\tcout<<endl;\n\t\n    return 0;\n}"
+      ],
+      "text_sha256": "c25d5b31f468184dd030cd8614e710236e309c061d5d788373955d87f6bcbf4c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc250/abc250_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

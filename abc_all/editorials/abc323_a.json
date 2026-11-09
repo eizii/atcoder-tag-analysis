@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc323_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc323/editorial/7347",
+      "text": "文字列\n\\(S\\)\nを標準入力から読み込み、問題文の指示通り、\n\\(2\\)\n以上\n\\(16\\)\n以下の偶数\n\\(i\\)\nについて\n\\(S\\)\nの\n\\(i\\)\n文字目が\n1\nであるかを確認すれば良いです。これは for 文と if 文を用いて実装することができます。今回は文字数が決まっているため、調べるのは\n\\(2,4,6,8,10,12,14,16\\)\n文字と完全に決まっており、if 文のみで実装する事も十分可能です。よって、この問題を解くことができました。\n以下は、実装時の注意点です。\n文字列中の文字を参照する時、多くの言語ではインデックスが zero-basedである事に注意してください。すなわち変数\n\\(s\\)\nの中に文字列が格納されている時、\n\\(s[0]\\)\nが\n\\(1\\)\n文字目、\n\\(s[1]\\)\nが\n\\(2\\)\n文字目,…を表します。すなわち今回の問題で言えば\n\\(s[2],s[4],\\ldots, s[16]\\)\nでなく、\n\\(s[1],s[3],\\ldots, s[15]\\)\nを調べる必要があります。問題文中との添字のズレに注意してください。\nまた、\n\\(S\\)\nの\n\\(i\\)\n文字目が\n1\nであるような\n\\(16\\)\n以下の偶数\n\\(i\\)\nが複数存在する時、\nNo\nを複数回出力しないように気をつけてください。\nNo\nを出力したらすぐに終了するようにするか、bool 型変数のフラッグなどで管理して最後にまとめて出力すると良いでしょう。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tstring s;\n\tcin>>s;\n\tfor(int i=1;i<16;i+=2){\n\t\tif(s[i]!='0'){\n\t\t\tcout<<\"No\"<<endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\tcout<<\"Yes\"<<endl;\n\treturn 0;\n}",
+        "s=input()\n\nflag=True\nfor i in range(1,16,2):\n\tif s[i]!='0':\n\t\tflag=False\n\nif flag:\n\tprint(\"Yes\")\nelse:\n\tprint(\"No\")"
+      ],
+      "text_sha256": "b17435bdbfd2a70c997d6383a1b4ac4c366c1f9cd6468529a9ceb8848bec3703",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc323/abc323_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc323/editorial/7363",
+      "text": "コンピュータでは整数は\n\\(2\\)\n進法で管理されています。入力を\n\\(2\\)\n進法の整数だと考えると、問題文の条件は、上から偶数桁目（下から奇数桁目）がすべて\n\\(0\\)\nであることです。\n下から奇数桁目のみを取り出したものは、\n\\(2\\)\n進法の\n\\(0101010101010101\\)\n（\n\\(10\\)\n進法では\n\\(21845\\)\n）と bitwise AND を取れば良いです。この結果が\n\\(0\\)\nであれば答えは\nYes\n、そうでなければ\nNo\nです。\n例えば Python では\n\\(2\\)\n進法で受け取るのは\nint(input(), 2)\nと書けるので、次のようなコードで AC を得ることができます。\nAC コード\n（PyPy3）",
+      "codes": [
+        "print(\"No\" if int(input(), 2) & 21845 else \"Yes\")"
+      ],
+      "text_sha256": "f24a0e694d598d39a627b4c80e2df3c752aee709957d96003b9578a5e48639ad",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc323/abc323_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

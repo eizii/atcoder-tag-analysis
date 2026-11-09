@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc395_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc395/editorial/12344",
+      "text": "最終的な上下の歯の高さの和 \\(H\\) を固定したとき、支払う金額は \\(\\displaystyle\\sum _ {i=1} ^ N(U _ i+D _ i)-NH\\) であり、具体的な削り方によりません（\\(1\\) 円を支払うと高さの総和は必ず \\(1\\) だけ減少します）。\nよって、条件を満たすような削り方ができる最大の \\(H\\) を求めたいです。\nある \\(H\\) で条件を満たすことができる場合、\\(H ^ \\prime\\lt H\\) なる \\(H ^ \\prime\\) でも満たすことができます（\\(H\\) を実現する状態からなるべく下の歯を削り、削れなくなったら上の歯を削るようにすることで具体的に構成できます）。\nこのことから、 \\(H\\) を固定したときに条件を満たせるかを高速に判定できれば、二分探索を行うことでこの問題を解くことができます。\n\\(H\\) を固定したとき、次の問題を解くことになります。\n区間の列 \\(([L _ 1,R _ 1],[L _ 2,R _ 2],\\ldots,[L _ N,R _ N])\\) が与えられる。\n整数列 \\((A _ 1,A _ 2,\\ldots,A _ N)\\) であって、次の条件を満たすものが存在するか判定せよ。\n\\(L _ i\\leq A _ i\\leq R _ i\\ (1\\leq i\\leq N)\\)\n\\(\\vert A _ i-A _ {i+1}\\vert\\leq X\\ (1\\leq i\\lt N)\\)\nこれは、左から見て \\(A _ i\\) がとりうる範囲を区間で持つことで \\(O(N)\\) 時間で判定ができます。\n以上でこの問題を解くことができました。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <ranges>\n#include <algorithm>\n#include <numeric>\n\nint main() {\n    using namespace std;\n    unsigned N, X;\n    cin >> N >> X;\n\n    vector<pair<unsigned, unsigned>> teeth(N);\n    for (auto&& [U, D] : teeth)\n        cin >> U >> D;\n\n    const auto check{[X, &teeth](const unsigned H) {\n        // 上の歯が存在できる区間が空にならないか調べる\n        unsigned interval_L{}, interval_R{H};\n        for (const auto& [U, D] : teeth) {\n            // 直前の区間を [L, R] として\n            // - 距離が X 以下 : [L - X, R + X]\n            // - 削ってできる : [H - D, U]\n            // の共通部分が求めるもの\n            interval_L = max({interval_L + D, H + X, X + D}) - X - D;\n            interval_R = min(interval_R + X, U);\n\n            // 空になったら false\n            if (interval_L > interval_R)\n                return false;\n        }\n        return true;\n    }};\n\n    // H は U[i] + D[i] より大きくはできない\n    unsigned R{ranges::min(teeth | views::transform([](const auto& tooth) { return tooth.first + tooth.second; })) + 1};\n    // H が X 以下かつすべての U[i] + D[i] 以下ならかならず条件を満たす\n    unsigned L{min(X, R - 1)};\n\n    while (L + 1 < R) {\n        const auto M{(L + R) / 2};\n        (check(M) ? L : R) = M;\n    }\n\n    // ∑ (U[i] + D[i]) - LN が答え\n    cout << transform_reduce(begin(teeth), end(teeth), 0UL, plus{}, [](const auto& tooth) { return tooth.first + tooth.second; }) - static_cast<unsigned long>(L) * N << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "d90994bca803c9a12d19ce625bbf40774811498196d4499f5f5b6a448a4c5f58",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc395/abc395_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc395/editorial/12345",
+      "text": "公式解説\nの判定問題を解くアルゴリズムの挙動についてさらに考察します。\n\\(H\\) を固定したとき、以下のようなアルゴリズムを考えることができます。\nはじめ、\\((L,R)=(-\\infty,\\infty)\\) とする。\n\\(i=1,2,\\ldots,N\\) について以下を繰り返す。\n区間 \\(I=[L-X,R+X]\\cap[H-D _ i,U _ i]\\) が空ならば、条件を満たす削り方は存在しない。\n空でなければ \\([L,R]=I\\) となるよう \\(L,R\\) を更新する。\n\\(i=N\\) まで処理が終了したら、条件を満たす削り方が存在する。\nこのアルゴリズムについて、\\(H\\) を動かしたときにそれぞれのステップでの \\([L,R]\\) の値がどのように変わるかを考えます。\n\\(H\\) を少し小さくすると、すべての区間の下端も同じだけ小さくなることが観察によってわかります。\nより厳密には、ある整数の \\(2\\) つ組の列 \\(\\bigl((u _ i,d _ i)\\bigr) _ {i=1,2,\\ldots,N}\\) が存在して、\\(i\\) 番目の処理が終了した時点で（そこまでで区間が空になっていなければ）\\((L,R)=(H-d _ i,u _ i)\\) となることが示せます。\nこれが求められれば、\\(H\\) としてありえる最大の値を \\(\\displaystyle\\min _i(u _ i+d _ i)\\) と求めることができます。\n判定問題を解くアルゴリズムで \\((L,R)\\) ではなく \\((H-d,u)\\) の組を管理していると考えることで、次のようなアルゴリズムで \\(u _ i,d _ i\\) を求めることができます。\nはじめ、\\(u=d=\\infty\\) とする。\\(i=1,2,\\ldots,N\\) について以下を繰り返す。\n\\(u\\leftarrow\\min\\lbrace u+X,U _ i\\rbrace,d\\leftarrow\\min\\lbrace d+X,D _ i\\rbrace\\) と更新する。\n上のアルゴリズムをそのまま実装することで、時間計算量を \\(\\Theta(N)\\) 、空間計算量を \\(\\Theta(1)\\) ワードとすることができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n\nint main() {\n    using namespace std;\n    unsigned N, X;\n    cin >> N >> X;\n    \n    unsigned long sum{};\n    unsigned height{2000000000}, u{1000000000}, d{1000000000};\n    for (unsigned i{}, U, D; i < N; ++i) {\n        cin >> U >> D;\n        sum += U;\n        sum += D;\n        u = min(u + X, U);\n        d = min(d + X, D);\n        height = min(height, u + d);\n    }\n\n    cout << sum - static_cast<unsigned long>(height) * N << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "01d04d54c2f5a79ebd9d0d6592c3db81d6765136f6c355ca45784c5779726e78",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc395/abc395_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc395/editorial/12359",
+      "text": "準備：牛ゲーについて\n次の形の最適化問題を考えます。\n\\[\\begin{aligned}\n\\max_{x_1, \\dots, x_N} \\quad & x_T - x_S \\\\\n\\textrm{s.t.} \\quad & x_{V_j} - x_{U_j} \\leq W_j \\: (1 \\leq j \\leq M)\n\\end{aligned}\\]\nこの問題の解は、\n\\(N\\)\n頂点\n\\(M\\)\n辺からなり、\n\\(j\\)\n番目の辺が\n\\(U_j \\to V_j\\)\nに向かう重み\n\\(W_j\\)\nの有向辺であるようなグラフ\n\\(G\\)\nを考えると、（\n\\(G\\)\nに負閉路が存在せず、\n\\(S\\textrm{-}T\\)\nパスが存在するとき）\n\\(G\\)\nの\n\\(S\\textrm{-}T\\)\n最短路長に一致することが知られています。この典型は俗に「牛ゲー」と呼ばれています。\n牛ゲーの中身についての解説は蟻本やインターネット上の記事などを参考にするとよいと思います。（概要：線形計画問題である。双対問題を考える。有向グラフの接続行列が完全ユニモジュラであることから整数計画問題としてよく、最短路問題のような問題（ただし閉路の扱いが異なる）と解釈できる。）\n本問題の解法\n最終的な上の歯の長さ\n\\(u_i\\)\n、上の歯と下の歯の長さの和\n\\(h\\)\nを変数とすると、\n\\(h\\)\nを最大化する問題と考えることができ、制約条件は\n上の歯の長さ\n\\(0 \\leq u_i \\leq U_i\\)\n下の歯の長さ\n\\(0 \\leq h - u_i \\leq D_i\\)\n\\(|u_i - u_{i+1}| \\leq X\\)\nと書くことができます。ここで\n\\(h = c_T - c_S, c_i = c_T - u_i\\)\nとおくと、最大化するものは\n\\(c_T - c_S\\)\nで、それぞれの制約条件は\n\\(0 \\leq c_T - c_i \\leq U_i\\)\n\\(0 \\leq c_i - c_S \\leq D_i\\)\n\\(-X \\leq c_{i+1} - c_i \\leq X\\)\nと整理されるので、牛ゲーの形に帰着できました（注：たとえば\n\\(0 \\leq c_T - c_i \\leq U_i\\)\nは\n\\(c_T - c_i \\leq U_i\\)\nかつ\n\\(c_i - c_T \\leq 0\\)\nと考えればよいです）。\n変数のおきかたによっては辺重みが負の最短路問題に帰着されてしまうことがあるので注意してください。",
+      "codes": [],
+      "text_sha256": "fa8da0b38a0bc6ac335d60e0a7e44576a47f63b71920bc843fcba5d54fb0c732",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc395/abc395_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

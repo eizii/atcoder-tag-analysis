@@ -1,0 +1,394 @@
+         ABC #082 / ARC #087 Editorial
+
+
+                                    writer : sugim48
+
+                              2017 年12 月16 日
+
+
+
+                  For International Readers: English editorial starts on page 5.
+
+
+A: Round Up the Mean
+
+    • C++ のコード例: https://beta.atcoder.jp/contests/abc082/submissions/1872729
+
+    • Java のコード例: https://beta.atcoder.jp/contests/abc082/submissions/1872732
+
+    • Python 3 のコード例: https://beta.atcoder.jp/contests/abc082/submissions/1872734
+
+
+B: Two Anagrams
+
+  s の文字を昇順にソートし，t の文字を降順にソートした後，s < t を判定すればよいです．
+
+    • C++ のコード例: https://beta.atcoder.jp/contests/abc082/submissions/1872811
+
+    • Java のコード例: https://beta.atcoder.jp/contests/abc082/submissions/1872812
+
+    • Python 3 のコード例: https://beta.atcoder.jp/contests/abc082/submissions/1872814
+
+
+C: Good Sequence
+
+ それぞれの正の整数x について，a 中の値x の個数をnx とします．nx < x の場合，a 中の値x はすべて
+取り除かなければならないので，nx 回の操作が必要です．nx ≥x の場合，a 中の値x の個数をx にすれば
+よいので，nx −x 回の操作が必要です．すべてのx についてこれらの操作回数を合計したものが答えです．
+ 実際には，すべてのx ではなく，a 中の値x のみ調べればよいです．x の値は最大で109 と大きいので，
+
+普通の配列の代わりに連想配列を用いて各nx を数えればよいです．
+
+    • C++ のコード例: https://beta.atcoder.jp/contests/abc082/submissions/1872852
+
+
+D: FT Robot
+
+  s の長さをN とし，目標の座標を(xt, yt) とします．
+ まず思いつく解法は，dpi,x,y,k := (i 文字目の命令後に座標(x, y) に向きk ∈{ 左, 上, 右, 下} でいられるか)
+
+
+
+                                             1
+
+と定義し，DP をする解法です．しかし，このDP の状態数はO(N 3) で，遷移はO(1) なので，全体の時間
+計算量はO(N 3) となり，TLE してしまいます．
+
+ ロボットの動き方をよく観察することで，DP の状態数を減らしましょう．命令列をT を区切り文字として
+分割したとき，i 番目の区間に含まれるF の個数をdi とします．このとき，ロボットの動き方は
+
+    • 右に距離d1 だけ動く
+    • 上または下の好きな向きに距離d2 だけ動く
+    • 左または右の好きな向きに距離d3 だけ動く
+    • 上または下の好きな向きに距離d4 だけ動く
+    • 左または右の好きな向きに距離d5 だけ動く
+    • 以下同様
+
+となっています．よって，x 軸方向の移動とy 軸方向の移動を独立に考えることができます．例えば，x 軸方
+
+向の移動については，
+
+    • 右に距離d1 だけ動く
+    • 左または右の好きな向きに距離d3 だけ動く
+    • 左または右の好きな向きに距離d5 だけ動く
+    • 以下同様
+
+という移動を終えた後，x 座標がxt になっているようにできるか判定すればよいです．
+ これは次のようなDP で計算できます．
+
+    • 定義: dpi,x := (i 回目のx 軸方向の移動の後にx 座標がx になっているようにできるか)．
+    • 初期化: 1 回目のx 軸方向の移動距離をd1 とすると，dp0,d1 = true．
+    • 漸化式: i (i ≥2) 回目のx 軸方向の移動距離をdi とすると，dpi,x = dpi−1,x−di ∨dpi−1,x+di．
+
+このDP の状態数はO(N 2) で，遷移はO(1) なので，全体の時間計算量はO(N 2) となり，十分に高速です．
+
+y 軸方向の移動についても，同様のDP で計算できます．
+
+
+E: Preﬁx-free Game
+
+ 長さL 以下の0, 1 のみからなる文字列全体からトライ木を作ると，これは高さL + 1 の完全二分木となり
+
+ます．ただし，完全二分木の高さは，根から葉までのパスに含まれる頂点の個数と定義します．この完全二分
+
+木を用いると，ゲームは次のように言い換えられます．
+
+
+ 高さL + 1 の完全二分木がある．最初，いくつかの頂点には駒が置かれている．ただし，どの駒どうし
+
+ も先祖-子孫の関係ではない．Alice とBob は交互に，駒のない頂点をひとつ選んで駒を置く．ただし，
+
+ どの駒どうしも先祖-子孫の関係ではないという条件を保つようにする．先に駒を置けなくなった方が負
+
+ けである．
+
+
+
+
+
+                                             2
+
+ 上図は初期状態の例(L = 3) です．青いマル印は駒を表しており，赤いバツ印は駒を置けない頂点を表して
+
+います．このとき，駒を置ける頂点の集合は，いくつかの完全二分木(緑の三角形) の和になっています．こ
+
+れらの完全二分木は先祖-子孫の関係ではないので，独立に考えることができます．また，完全二分木のある頂
+
+点に駒を置くと，その完全二分木はいくつかの完全二分木に分裂します．具体的には，高さi の完全二分木の
+
+深さj (0 ≤j ≤i −1) の頂点に駒を置くと，高さi −1, i −2, ..., i −j の完全二分木1 個ずつに分裂します．
+
+ 以上より，ゲームはさらに次のように言い換えられます．
+
+
+ 最初，いくつかのアイテムがある．各アイテムには正整数のレベルが設定されている．Alice とBob は
+
+ 交互に次の操作を行う．
+
+      • アイテムを1 個選ぶ．選んだアイテムのレベルをi とする．選んだアイテムを取り除き，整数k
+
+         (1 ≤k ≤i) を選んでレベルi −1, i −2, ..., k のアイテムを1 個ずつ追加する．
+
+ 先に操作を行えなくなった方が負けである．
+
+
+このようなゲームの勝敗判定にはGrundy 数が有用です．レベルi (i ≥1) のアイテムのGrundy 数をgi と
+します．すると，gi は
+
+    • 0
+
+    • gi−1
+    • gi−1 ⊕gi−2
+    •     ...
+
+    • gi−1 ⊕gi−2 ⊕· · · ⊕g1
+
+に含まれない最小の非負整数です．実験すると，(g1, g2, g3, g4, g5, g6, g7, g8, . . .) = (1, 2, 1, 4, 1, 2, 1, 8, . . .) と
+なっています．実験結果から分かるように，gi = (i を割り切る最大の2 の冪) であることが示せます．各ア
+イテムのGrundy 数の総XOR が0 でないならばAlice が勝ち，0 ならばBob が勝ちます．
+
+ 元の問題に戻ると，レベルi のアイテムは高さi の平衡二分木に対応します．よって，初期状態におけるそ
+
+れぞれの完全二分木の高さを求められればよいことになります．これは，入力文字列から作られるトライ木を
+
+辿り，子の個数がちょうど1 個の頂点を見ていくことで可能です．
+
+
+                                             3
+
+F: Squirrel Migration
+
+ まず，移動距離の総和を最大化するような移動方法がどのようなものか考えます．そのために，移動距離
+
+の総和の最大値がどのような値か考えます．まずは，移動距離の総和の上限を見積もってみましょう．あ
+
+る移動方法に対して，各辺e についてe を通過したリスの個数をse とします．すると，移動距離の総和
+は∑      e se となります．ここで，辺e = (v, w) のv 側の頂点数をnv とし，w 側の頂点数をnw とすると，
+se ≤2 min{nv, nw} です．よって，移動距離の総和の上限はこれらの総和となります．実は，この上限を達
+
+成するような移動方法が常に存在します．それは次のような移動方法です．
+
+ 木の重心に注目します．重心は1 個または2 個です．重心が1 個の場合，それをc とします．すると，ど
+
+のリスの移動経路にもc が含まれるとき，かつそのときに限り，移動距離の総和は上限を達成することが分か
+
+ります．また，重心が2 個の場合，それらをc1, c2 とします．すると，どのリスの移動経路にも辺(c1, c2)
+
+が含まれるとき，かつそのときに限り，移動距離の総和は上限を達成することが分かります．
+
+ 以上の移動方法を数え上げます．重心が2 個の場合の方が簡単なので，先に考えます．重心をc1, c2 とし
+ます．さらに，c1 側の部分木をT1 とし，c2 側の部分木をT2 とします．このとき，木の頂点数N は偶数で
+あり，T1, T2 の頂点数はともにN/2 です．T1 の各リスは，T2 のどの頂点へも移動できます．同様に，T2 の
+各リスは，T1 のどの頂点へも移動できます．よって，移動方法は(N/2)! × (N/2)! 通りです．
+ 次に，重心が1 個の場合を考えます．重心をc とします．さらに，c の周りの部分木をT1, T2, ..., TK と
+します．このとき，c のリスはどの頂点へも移動できます．また，各i について，Ti のリスはTi 以外のどの
+頂点へも移動できます．この移動方法をO(N 2) 時間で直接数え上げるのは難しいです．
+
+ そこで，包除原理を用います．T  :=  T1 ∪T2 ∪· · · ∪TK とします(すなわち，T は木の頂
+点集合からc を除いたもの)．すると，答えは∑S⊆T (−1)|S|fS となります．ただし，fS  :=
+(「S 中の各リスは自分の部分木の頂点へ移動する」という条件を満たす移動方法の通り数) です．各S1 ⊆T1,
+..., SK ⊆TK について，次が成り立ちます．
+                       (       )
+               ∑K   ∏K                                                         (|Tk| )2
+                              fS1∪···∪SK = N −    |Sk|   !              |Sk|!
+                                                                    |Sk|
+                                            k=1      k=1
+
+よって，答えは                           (       )
+        ∑                 ∑K                       ∏K                         ∑K                                                                (|Tk| )2
+                               (−1)                                             k=1 |Sk| N −                                                               |Sk|   !                                                                                        |Sk|!
+                                                                            |Sk|
+                      S1⊆T1,...,SK⊆TK                  k=1      k=1
+                  (|Tk|                  ごとに独立に計算できることに注目します．また，となります．                     )2|Sk|! の部分は，各k
+          ( |Sk|                      )   ∑K
+                        さえ分かっていれば計算できることに注目し(−1)  k=1 |Sk| N −∑Kk=1 |Sk|  ! の部分は，∑Kk=1 |Sk|
+ます．
+
+ 以上の考察をもとにDP を設計します．
+              (∑i                              (|Tk|          )                   のとき∏i                             の総和 ．    • 定義: dpi,x :=    k=1 |Sk| = x                                          k=1  |Sk| )2|Sk|!
+    • 初期化: dp0,0 = 1．
+                                                                           (|Ti|                                を足し込む．    • 遷移: 各0 ≤y ≤|Ti| について，dpi,x+y にdpi−1,x ×   y )2y!
+
+x の状態数はO(N) で，遷移は1 ≤i ≤K の合計でO(N) なので，全体の時間計算量はO(N 2) となり，十
+分に高速です．最終的に，∑N−1                         x=0 (−1)x(N −x)! × dpK,x が答えです．
+
+
+                                             4
+
+     ABC #082 / ARC #087 Editorial
+
+
+                         writer : sugim48
+
+                    December 16, 2017
+
+
+A: Round Up the Mean
+
+   • C++ Code Example : https://beta.atcoder.jp/contests/abc082/submissions/1872729
+
+   • Java Code Example : https://beta.atcoder.jp/contests/abc082/submissions/1872732
+
+   • Python 3 Code Example : https://beta.atcoder.jp/contests/abc082/submissions/1872734
+
+B: Two Anagrams
+
+Sort s, sort t, reverse t, and check if s < t.
+
+   • C++ Code Example : https://beta.atcoder.jp/contests/abc082/submissions/1872811
+
+   • Java Code Example : https://beta.atcoder.jp/contests/abc082/submissions/1872812
+
+   • Python 3 Code Example : https://beta.atcoder.jp/contests/abc082/submissions/1872814
+
+C: Good Sequence
+
+Let nx be the number of occurrences of x in a. If nx < x, add nx to the answer.
+If nx ≥x, add nx −x to the answer.
+
+   • C++ Code Example : https://beta.atcoder.jp/contests/abc082/submissions/1872852
+
+
+
+
+
+                                  1
+
+D: FT Robot
+
+Let N be the length of s and (xt, yt) be the coordinates of the goal.
+    Let’s separate the sequence of operations by T, and let di be the number of F
+in the i-th part. Then, the movement of the robot can be described as follows:
+
+   • Move d1 to right.
+
+   • Move d2 upward or downward.
+
+   • Move d3 to left or right.
+
+   • Move d4 upward or downward.
+
+   • Move d5 to left or right.
+
+   • And so on.
+
+   Thus, the x-coordinate and the y-coordinate can be handled independently.
+For example, for the x-coordinate, the robot will perform the following opera-
+tions:
+
+   • Move d1 to right.
+
+   • Move d3 to left or right.
+
+   • Move d5 to left or right.
+
+   • And so on.
+
+  We want to check if x can be xt after all operations. This can be done by a
+straightforward DP in O(N 2). The y-coordinate can be handled similarly.
+
+
+
+
+
+                                  2
+
+E: Preﬁx-free Game
+
+Let’s construct a trie of all strings of length L.  It will be a complete binary
+tree. On this tree, the game can be described as follows:
+
+   Initially, some vertices contain tokens. Alice and Bob alternately put to-
+  kens.  Here, no two tokens can be put on two vertices with ”ancestor -
+  descendant” relation. The player who fails to put a token loses.
+
+   For example, the picture below shows the case with L = 3 and two strings
+000 and 10.
+
+
+
+
+
+   Blue vertices contain tokens, red vertices are forbidden, and you can put
+tokens on green vertices. The green vertices will be a disjoint union of complete
+binary trees, and each part (complete binary tree) can be handled independently.
+Thus, we can use Grundy Numbers.
+   Let gi be the Grundy Number of a complete binary tree of height i (i.e., a
+complete binary tree with i layers). If you perform an operation on a complete
+binary tree of height i, it will be splitted into complete binary trees with heights
+i −1, i −2, ..., i −j for some j (0 ≤j ≤i −1). Thus, gi is the smallest integer
+that doesn’t appear in the following:
+
+   • 0
+
+   • gi−1
+
+   • gi−1 ⊕gi−2
+   •     ...
+
+   • gi−1 ⊕gi−2 ⊕· · · ⊕g1
+
+
+                                  3
+
+    If you perform an experiment, you get (g1, g2, g3, g4, g5, g6, g7, g8, . . .) = (1, 2, 1, 4, 1, 2, 1, 8, . . .).
+In general, gi is the maximum power of two that divides i. (We omit the proof, it
+is straightforward.) If the XOR of all Grundy Numbers is 0, Bob wins, otherwise
+Alice wins.
+   To get the set of green binary trees, you should construct a trie for all input
+strings, and check all nodes with exactly one child.
+
+
+
+
+
+                                  4
+
+F: Squirrel Migration
+
+Consider an edge e = (v, w) in the tree. Let nv, nw be the sizes of two subtrees
+we get when we cut the tree by e.  Then, the number of squirrels that pass
+through this edge (call it se) is st most 2 min{nv, nw}.
+   The total distance deﬁned in the statement is the sum of se, thus it is at
+most ∑2 min{nv, nw}. It turns out that this value is always achievable. There
+are two diﬀerent cases:
+
+The tree has two centroids
+
+Call them c1, c2. The maximum can be achieved when all squirrels pass through
+an edge between c1 and c2. There are (N/2)! × (N/2)! such ways.
+
+The tree has one centroid
+
+Call it c. The maximum can be achieved when all squirrels pass through the
+vertex c.
+   Let T1, T2, ..., TK be the subtrees we get when we remove c from the tree.
+We want to count the number of permutations such that for each i, no squirrel
+in Ti moves to a vertex in Ti.
+  We use inclusion-exclusion principle. Let T := T1 ∪T2 ∪· · · ∪TK (i.e., the                   ∑
+entire vertex set minus c). The answer is   S⊆T (−1)|S|fS, where fS  is the
+number of permutations of squirrels such that each squirrel in S moves to a
+vertex in the same group.
+   Now, for each k, we want to compute the sum of fS for all S such that
+|S| = k.
+   Let gk be the number of ways to choose k squirrels and there destinations,
+such that all chosen squirrels will travel to a vertex in the same group. Formally,
+gk is the number of pairs of two k-tuples of vertices (s1, . . . , sk), (t1, . . . , tk) such
+that:
+
+   • s1 < s2 < · · · (the order of chosen squirrels doesn’t matter)
+
+   • For each i, si and ti are in the same subtree (and they are not c).
+
+   •  ti are pairwise distinct.
+
+   Since we can freely choose destinations for unchosen squirrels, the sum of fS                                         ∑N−1
+for all S such that |S| = k is gk(N −k)!. Therefore, the answer is   k=0 gk(N −
+k)!(−1)k. Since gk can be easily computed in O(N 2) by a simple DP, we can
+also get the answer in O(N 2).
+
+
+
+
+
+                                  5

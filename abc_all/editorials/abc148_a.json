@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc148_a",
+  "editorials": [
+    {
+      "text": "A: Round One\n6 −A −B を計算し，その値を出力すればよいです．\n入力および出力の方法は言語によって異なりますが，たとえばC++ であればcin, cout を使うこ\nとで実現できます．\nListing 1\nC での実装例\n1 #include <stdio.h>\n2\n3 int main(void){\n4\nint A, B;\n5\nscanf(\"%d%d\", &A, &B); // 入力からA, B を受け取る\n6\n7\nint result = 6 - A - B; // 6-A-B を計算し，変数result に格納する\n8\nprintf(\"%d\\n\", result); // 出力\n9\n10\nreturn 0;\n11 }\nListing 2\nferNANDo での実装例\n1 r a7 a6 a5 a4 a3 a2 a1 a0\n2 r f e r n a nn d o\n3 r b7 b6 b5 b4 b3 b2 b1 b0\n4 d a7 b7\n5 e a7 d\n6 f b7 d\n7 x7 e f\n8 d a6 b6\n9 e a6 d\n\n10 f b6 d\n11 x6 e f\n12 d a5 b5\n13 e a5 d\n14 f b5 d\n15 x5 e f\n16 d a4 b4\n17 e a4 d\n18 f b4 d\n19 x4 e f\n20 d a3 b3\n21 e a3 d\n22 f b3 d\n23 x3 e f\n24 d a2 b2\n25 e a2 d\n26 f b2 d\n27 x2 e f\n28 d a1 b1\n29 e a1 d\n30 f b1 d\n31 x1 e f\n32 d a0 b0\n33 e a0 d\n34 f b0 d\n35 x0 e f\n36 x4 x4 x4\n37 x5 x5 x5\n38 x7 x6 x5 x4 x3 x2 x1 x0\n",
+      "text_sha256": "ac8a557adecd81f37cb2c98b1fd1efb58fff6086cb3a0857984c78d63b5a5a7e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc148/abc148_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

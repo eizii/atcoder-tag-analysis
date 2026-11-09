@@ -1,0 +1,38 @@
+{
+  "problem_id": "abc255_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc255/editorial/4111",
+      "text": "まず、\n\\(D<0\\)\nであるケースがあると非常に扱いづらいので、以下のように\n\\(D \\ge 0\\)\nとなるよう正規化します。\n\\(A=A+D \\times (N-1)\\)\n、\n\\(D=-D\\)\nと(同時に)置き換える。\nこれは等差数列の反転に相当します。例えば、\n\\(A=8,D=-3,N=3\\)\nであるとき数列\n\\(S=(8,5,2)\\)\nですが、\n\\(A=2,D=3,N=3\\)\nと置き換えると\n\\(S=(2,5,8)\\)\nとなり、数列が前後反転しただけで「良い数」の集合は変化しません。\n方針1:\n\\(X\\)\nに最も近い\n\\(S\\)\nの要素を二分探索で求める\n数列\n\\(S\\)\nには\n\\(0 \\le k \\le N-1\\)\nなる全ての整数\n\\(k\\)\nに対して\n\\(A+kD\\)\nが含まれますが、\n\\(D \\ge 0\\)\nで\n\\(S\\)\nが広義単調増加であるため、\n\\(k\\)\nを調整する二分探索によって\n\\(X\\)\nに最も近い\n\\(S\\)\nの要素を見つけようとする解法が成立します。\n実装例(C++)\n方針2: 場合分けで解き切る\n等差数列に含まれる最小値\n\\(st=A\\)\n、 最大値\n\\(fi=A+(N-1)D\\)\nとします。\n\\(st \\le X \\le fi\\)\nであるとき、\n\\(D=0\\)\nのとき、答えは\n\\(0\\)\nです。\nそうでないとき、\n\\(S\\)\nには\n\\(0 \\le k \\le N-1\\)\nなる全ての整数\n\\(k\\)\nに対して、\n\\(A+kD\\)\nが含まれ、さらに\n\\(A \\le X \\le A+(N-1)D\\)\nが成立するため、答えは\n\\(\\min((X-A)\\%D,D-(X-A)\\%D)\\)\nです。(但し、\n\\(p\\%q\\)\nで\n\\(p\\)\nを\n\\(q\\)\nで割った余り)\n\\(X < st\\)\nであるとき、答えは\n\\(st-X\\)\nです。\n\\(fi < X\\)\nであるとき、答えは\n\\(X-fi\\)\nです。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long x,a,d,n;\n  cin >> x >> a >> d >> n;\n\n  if(d<0){\n    long long fi=a+d*(n-1);\n    a=fi;\n    d*=-1;\n  }\n\n  long long st=0,fi=(n-1);\n  while(st<=fi){\n    long long te=(st+fi)/2;\n    if((a+d*te)<x){st=te+1;}\n    else{fi=te-1;}\n  }\n  long long res=8e18;\n  for(long long i=max(0ll,st-5);i<=min((n-1),st+5);i++){\n    res=min(abs(a+d*i-x),res);\n  }\n  cout << res << '\\n';\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long x,a,d,n;\n  cin >> x >> a >> d >> n;\n\n  if(d<0){\n    long long fi=a+d*(n-1);\n    a=fi;\n    d*=-1;\n  }\n\n  long long st=a;\n  long long fi=a+d*(n-1);\n  if(st<=x && x<=fi){\n    long long m;\n    if(d!=0){m=(x-st)%d;}\n    else{m=0;}\n    cout << min(m,d-m) << '\\n';\n  }\n  else if(x<st){cout << st-x << '\\n';}\n  else{cout << x-fi << '\\n';}\n  return 0;\n}"
+      ],
+      "text_sha256": "9b92215a55607ba523c157b8e6a5bba7f0cbd196ea4438c223b3dae972797df1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc255/abc255_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc255/editorial/4119",
+      "text": "\\(D = 0\\)\nのとき、「良い数」は\n\\(A\\)\nしかないので、答えは\n\\(|A - X|\\)\nです。以下\n\\(D \\neq 0\\)\nとします。\n「良い数」は、\n\\(0 \\leq k \\leq N - 1\\)\nを満たす整数\n\\(k\\)\nを用いて\n\\(A + kD\\)\nと表される整数です。ここで、いったん\n\\(k\\)\nの範囲を無視して考えると、整数\n\\(k\\)\nを用いて\n\\(A + kD\\)\nと表される整数のうちで\n\\(X\\)\nに「ある程度」近いものとして\n\\(A + \\lfloor \\frac{X - A}{D} \\rfloor D\\)\nがとれます（\n\\(\\lfloor x \\rfloor\\)\nで実数\n\\(x\\)\n以下の最大の整数を表します）。あとはこの付近の数個を探索すれば、\n\\(X\\)\nに最も近い整数が求まります。この付近に\n\\(A\\)\nと\n\\(A + (N - 1)D\\)\nの間にある整数が存在しないときは、\n\\(A\\)\nか\n\\(A + (N - 1)D\\)\nが\n\\(X\\)\nに最も近い整数になります。（\n\\(A + kD\\)\nが\n\\(k\\)\nに対して単調性をもつことに注意）\nなお実際には、\n\\(D > 0\\)\nのときは\n\\(A + \\lfloor \\frac{X - A}{D} \\rfloor D \\leq X \\leq A + \\lceil \\frac{X - A}{D} \\rceil D\\)\nが、\n\\(D < 0\\)\nのときは\n\\(A + \\lceil \\frac{X - A}{D} \\rceil D \\leq X \\leq A + \\lfloor \\frac{X - A}{D} \\rfloor D\\)\nが成り立つため、調べる値は\n\\(A + \\lfloor \\frac{X - A}{D} \\rfloor D\\)\nと\n\\(A + \\lceil \\frac{X - A}{D} \\rceil D\\)\nの\n\\(2\\)\nつで十分です（\n\\(\\lceil x \\rceil\\)\nで実数\n\\(x\\)\n以上の最小の整数を表します）。\nPython による実装例：",
+      "codes": [
+        "import sys\n\nx, a, d, n = map(int, input().split())\nif d == 0:\n  print(abs(a - x))\n  sys.exit()\nm = a + (n - 1) * d # 末項\nans = min(abs(a - x), abs(m - x))\ny = a + (x - a) // d * d\nfor i in range(-2, 3): # 周辺 ±2 程度を探索\n  z = y + i * d\n  if a <= z <= m or m <= z <= a: # 探索している数が範囲内にあるかどうか\n    ans = min(ans, abs(z - x))\nprint(ans)"
+      ],
+      "text_sha256": "76b1db5f79a0c946aa8e24512dccdd1a084d4bb708eb06e3dfeb72758d4dac9c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc255/abc255_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc255/editorial/5254",
+      "text": "全探索の処理を用いる解法を紹介します．\n\\(D=0\\)\nであるときは明らかに答えは\n\\(|X - A|\\)\nです．\n\\(D<0\\)\nであるときは\n公式解説\nと同様に，\n\\(D>0\\)\nとなるように正規化を行うことで，\n\\(D>0\\)\nの場合に帰着できます．以下では\n\\(D>0\\)\nの場合のみを考えます．\n数列\n\\(S\\)\nの初項は\n\\(A\\)\n，末項は\n\\(A+D(N-1)\\)\nです．\n\\(X\\)\nが初項以下であるときは，初項に合わせるのが最適です．また，\n\\(X\\)\nが末項以上であるときは，末項に合わせるのが最適です．このことを考えると，\n\\(X \\leq A\\)\nのときは答えは\n\\(A-X\\)\n，\n\\(X \\geq A+D(N-1)\\)\nのときは答えは\n\\(X-A-D(N-1)\\)\nとなります．\n\\(A < X < A+D(N-1)\\)\nのときの答えを求めることを考えましょう．数列\n\\(S\\)\nは等差数列であるので，その値は\n\\(D\\)\n個おきに現れることがわかります．したがって，「\n\\(1\\)\nを加算する」もしくは「\n\\(1\\)\nを減算する」のどちらかを高々\n\\(D-1\\)\n回行うことで，必ず\n\\(X\\)\nを数列\n\\(S\\)\nに含まれる要素にすることができます．\n操作後の\n\\(X\\)\nが数列\n\\(S\\)\nに含まれるかどうかの判定は，数列\n\\(S\\)\nが等差数列であることを利用し，\n\\(X\\)\nと数列\n\\(S\\)\nの初項\n\\(A\\)\nとの差が\n\\(D\\)\nの倍数であるかを判定すればできます．\n本問では\n\\(D \\leq 10^6\\)\nであるため，この方法で十分高速に答えを求めることができます．\n実装例（Python）",
+      "codes": [],
+      "text_sha256": "3bf3e63d2dd8c5d0fce84604b79981c42d97f5ac303e166f5f69dee2e78268bc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc255/abc255_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

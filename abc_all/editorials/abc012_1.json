@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc012_1",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc012/editorial.pdf",
+      "text": "A問題スワップ\n\n  問題概要 1.\n  アルゴリズム 2.\n\n\n\n\n\n2023/1/20                             ©AtCoder Inc. All rights reserved.                                      33\n\f\nA問題問題概要\n\n• 整数A, Bが与えられる\n• AとBの中身を入れ替える\n• A, Bを出力しなさい。\n\n\n• 制約\n• 1 ≦A, B ≦100\n\n\n\n\n\n2023/1/20                                                                                               4\n\f\nA問題アルゴリズム\n\n• 基本的なプログラムの流れ\n   – 標準入力から、必要な入力を受け取る\n          • 今回の場合は、A, B という2つの整数\n   – 問題で与えられた処理を行う\n          • 今回は、AとBの中身を入れ替える\n   – 標準出力へ、答えを出力する\n\n\n\n\n\n2023/1/20                                                                                               5\n\f\nA問題アルゴリズム\n\n• 入力\n   – 2つの整数を、標準入力から受け取る\n          • Cであれば、scanf(“%d %d”, &A, &B); など\n          • C++であれば、cin >> A >> B;\n          • 入力の受け取り方は、下記の練習問題に記載があります。\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2023/1/20                                                                                               6\n\f\nA問題アルゴリズム\n\n• 処理部分\n   – 今回は、AとBを入れ替える！\n   – 入れ替え方はいくつか存在する\n          • 標準ライブラリとかのswapを使う\n           – Swap(A, B)みたいな感じ\n           – 言語によってあったりなかったり\n          • 普通に入れ替える\n           – Int C = A; A = B; B = C;\n           – 1回別の変数に数字を避難させておくことで、簡単にできる！\n          • かっこよく入れ替える\n           – A ^= B; B ^= A; A ^= B;\n           – XOR交換アルゴリズムと呼ばれるテクニック\n                » 無駄にかっこいいけど競技プログラミングで役に立つことは少ない\n\n\n\n\n2023/1/20                                                                                               7\n\f\nA問題アルゴリズム\n\n• 出力\n   – 求めた答えを、標準出力より出力する。\n   – 言語によって違います。\n          • printf(“%d %d¥n”, A, B); (C)\n          • cout << A << “ “ << B << endl; (C++)\n          • System.out.println(A + “ “ + B); (Java)\n          • 各言語の標準出力は、下記の練習問題に記載があります。\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2023/1/20                                                                                               8\n\f\nA問題アルゴリズム\n\n• おまけ\n   – AとBを入れ替える、と問題文に書かれている\n   – しかし、AとBを入れ替える必要はない！\n   – B, Aの順番で出力すればいいだけ\n          • 問題文で「○○しろ」と書かれているからといって、必ずしもそれ\n     に従う必要はない\n          • 「こうしたら同じことがもっと簡単に出来るのではないか」というの\n     を常に考えるようにしよう！\n\n\n\n\n\n2023/1/20                                                                                               9",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "6b0c718bce07b9f54a66a1c77f39e528cb4047854d462769c51e3d3d405c3168"
+    }
+  ],
+  "status": "available"
+}

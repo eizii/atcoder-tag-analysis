@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc446_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc446/editorial/16370",
+      "text": "考察\n漸化式\n\\(s_n = As_{n-1} + Bs_{n-2}\\)\nを\n\\(s_n = (As_{n-1} + Bs_{n-2}) \\bmod{M}\\)\nで置き換えて得られる数列を考えます．この数列と元の数列は，各要素を\n\\(\\mod{M}\\)\nのもとで比較すれば等しいです．この数列の要素はすべて\n\\(0\\)\n以上\n\\(M-1\\)\n以下であり，問題文中の条件はこの数列が\n\\(0\\)\nを含むことと言い換えられます．以下ではこの数列を\n\\(s\\)\nとして扱います．\n\\(0 \\leq x, y \\leq M-1\\)\nの範囲の整数組\n\\((x, y)\\)\nを状態にもつオートマトンをおき，状態\n\\((x, y)\\)\nからは状態\n\\((y, (Ay + Bx) \\bmod{M})\\)\nにのみ遷移するとします．これは，数列\n\\(s\\)\nの任意の位置にある連続\n\\(2\\)\n要素\n\\((s_{n-2}, s_{n-1})\\)\nに対する「\n\\(1\\)\nつ次の位置」の連続\n\\(2\\)\n要素\n\\((s_{n-1}, s_{n-0})\\)\nに対応します．\n\\(M = 4,\\ A = 1,\\ B = 2\\)\nのとき (入力例 1) のオートマトンを以下の図に示します．\nこのとき，どのような初期値\n\\(s_1, s_2\\)\nをもつ数列\n\\(s\\)\nにおいても，オートマトン上で状態\n\\((s_{1}, s_{2})\\)\nから\n\\(k-1\\)\n回遷移した先は状態\n\\((s_{k}, s_{k+1})\\)\nです．ここから，\n\\(s\\)\nが\n\\(0\\)\nを含むことは，状態\n\\((s_{1}, s_{2})\\)\nから任意回の遷移で状態\n\\((0, t)\\)\n(\n\\(t\\)\nは任意) にたどり着けることとして言い換えられます．したがって，状態\n\\((s_1, s_2) = (x, y)\\)\nがこれを満たすかどうかを\n\\(M^2\\)\n通りの\n\\((x, y)\\)\nすべてについて判定できれば，満たさないものの個数が答えとなります．\n状態\n\\((0, t)\\)\n(\n\\(t\\)\nは任意) からなる集合を\n\\(W\\)\nとおきます．\nオートマトンの状態・遷移を有向グラフの頂点・辺として見たとき，各頂点\n\\(v\\)\nについて，そこから集合\n\\(W\\)\n内のいずれかの頂点\n\\(w \\in W\\)\nにたどり着くパスが存在するかを判定できればよいです．これは，辺の向きを逆にした有向グラフ上で，\n\\(W\\)\n内のいずれかの頂点\n\\(w \\in W\\)\nからその頂点\n\\(v\\)\nにたどり着くパスが存在するかどうかとして言い換えられ，BFS や DFS といった探索によってまとめて結果を得ることができます．\n時間計算量は\n\\(O(M^2)\\)\nとなり，十分高速です．\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n#include <string>\nusing std::string;\n#include <algorithm>\n#include <vector>\nusing std::vector;\n#include <queue>\nusing std::queue;\n\ntypedef long long int ll;\n\nll m, a, b;\n\nvector<vector<ll> > edges;\nvector<ll> isseen;\nvoid solve () {\n\t// backward edges\n\tedges.resize(m*m);\n\tfor (ll i = 0; i < m; i++) {\n\t\tfor (ll j = 0; j < m; j++) {\n\t\t\t// (i, j) <- (j, i*b+j*a)\n\t\t\tll k = (i * b + j * a) % m;\n\t\t\tedges[j * m + k].push_back(i * m + j);\n\t\t}\n\t}\n\n\t// bfs init\n\tisseen.assign(m*m, 0);\n\tqueue<ll> que;\n\tfor (ll i = 0; i < m; i++) {\n\t\tfor (ll j = 0; j < m; j++) {\n\t\t\tif (i == 0 || j == 0) {\n\t\t\t\tll v = i*m + j;\n\t\t\t\tisseen[v] = 1;\n\t\t\t\tque.push(v);\n\t\t\t}\n\t\t}\n\t}\n\t// bfs run\n\twhile (!que.empty()) {\n\t\tll v = que.front();\n\t\tque.pop();\n\n\t\tfor (ll u : edges[v]) {\n\t\t\tif (!isseen[u])\t{\n\t\t\t\tisseen[u] = 1;\n\t\t\t\tque.push(u);\n\t\t\t}\n\t\t}\n\t}\n\n\t// count answers\n\tll ans = 0;\n\tfor (ll i = 0; i < m; i++) {\n\t\tfor (ll j = 0; j < m; j++) {\n\t\t\tif (isseen[i * m + j] == 0) ans++;\n\t\t}\n\t}\n\t\n\tcout << ans << \"\\n\";\n\n}\n\nint main (void) {\n\tstd::cin.tie(nullptr);\n\tstd::ios_base::sync_with_stdio(false);\n\n\tcin >> m >> a >> b;\n\t\n\tsolve();\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "3974b169bf6e3ea26ecac3d45612dade9829f0c30bffb5588af61532ee972e61",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc446/abc446_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc446/editorial/16426",
+      "text": "解説同様、頂点\n\\((i,j)\\to (j,(A\\times j+B\\times i)\\pmod M)\\)\nに辺を張ったfunctional graph を考えます。またそれぞれの頂点\n\\((i,j)\\)\nに\n\\[\nC_{i,j} = \\begin{cases}\n    1 & (i=0 \\ \\text{または}\\  j=0) \\\\\n    0 & (\\text{otherwise})\n  \\end{cases}\n\\]\nのように値を書きます。このとき、\n\\((i,j)\\)\nから無限回辺をたどったときに通った頂点（\n\\((i,j)\\)\nを含む ）に書かれた数字の総和が\n\\(0\\)\n\\(\\iff\\)\n\\((x,y)=(i,j)\\)\nのときに数列が\n\\(M\\)\nの倍数を全く含まないとなります。\nfunctional graph の性質から\n\\((i,j)\\)\nから十分大きい回数（ 具体的には\n\\(M^2\\)\n回以上 ）辺をたどった時の総和を計算すれば十分で、この総和はダブリングと同じ要領で計算でき、\n\\(O(M^2\\log M)\\)\nで問題を解くことができます。\n実装 (C++ 144ms)",
+      "codes": [],
+      "text_sha256": "442c7e3842124948151e6f44fdae86c72443d0f97a14ff2b02ceeb4904c427e2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc446/abc446_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc446/editorial/16435",
+      "text": "今回の問題は\n\\((x, y)\\)\nとしてあり得るものが\n\\(O(M^2)\\)\n通りしかなく、また漸化式の形をしていることから、メモ化再帰で解く方法が有効です。\nメモ化再帰で解くことを考えます。\n初めにメモ用の配列の状態として、\n\\(M\\)\nの倍数が含まれたことを示す\nNG\n、\n\\(M\\)\nの倍数を含まなかったことを示す\nOK\n、未計算であることを示す\nUNKNOWN\nの3状態を用意します。\nそして、メモ化配列を全て\nUNKNOWN\nで埋めておきます。\n次にメモ化再帰を行う関数\nsolve(x, y)\nを用意します。  これは、数列の末尾2項が\n\\((\\ldots, x, y)\\)\nだった時の答えを求める関数です。\nまず、自明に\nmemo[x][y]\nが\nUNKNOWN\nではなかった場合、その値を返します。\nUNKNOWN\nだった場合、\n\\(x=0\\)\nもしくは\n\\(y=0\\)\nならば\nNG\n、そうでなければ\n\\((\\ldots, y, Ay + Bx \\bmod M)\\)\nの解に等しいです。\nこれをそのまま解くと無限ループする可能性がありますが、無限ループした場合はまさに\nOK\nということになるので、予め\nmemo[x][y]\nに\nOK\nを入れておくと無限ループを回避できます。\n以上を纏めると、以下のようなコードになります。\n計算量を求めます。\nメモ化配列に値を代入する回数を考えると、\nUNKNOWN\nが入っている時のみそれ以外の値を\n\\(O(1)\\)\n回代入するので配列長と同じ\n\\(O(M^2)\\)\nとなります。\nこのように、漸化式など直前の状態から計算可能な形で与えられる問題で、全状態を管理しても空間計算量が小さいものにはメモ化再帰が実装を軽くするテクニックとして有効です。\nグラフ上のDFSや木DP、フラクタルな構造をしている問題にも使える場合が多いので、まずメモ化再帰を検討してみるのも良いかもしれません。",
+      "codes": [
+        "enum class State {\n    OK, NG, UNKNOWN\n}\nclass Solver(val M: Int, val A: Int, val B: Int) {\n    val memo = Array(M) { Array(M) { State.UNKNOWN } }\n}",
+        "fun solve(x: Int, y: Int): State {\n    if (memo[x][y] == State.UNKNOWN) {\n        memo[x][y] = State.OK\n        val next = (A * y + B * x) % M\n        memo[x][y] = if (x == 0 || y == 0) State.NG else solve(y, next)\n    }\n    return memo[x][y]\n}",
+        "enum class State {\n    OK, NG, UNKNOWN\n}\nclass Solver(val M: Int, val A: Int, val B: Int) {\n    val memo = Array(M) { Array(M) { State.UNKNOWN } }\n    fun solve(x: Int, y: Int): State {\n        if (memo[x][y] == State.UNKNOWN) {\n            memo[x][y] = State.OK\n            val next = (A * y + B * x) % M\n            memo[x][y] = if (x == 0 || y == 0) State.NG else solve(y, next)\n        }\n        return memo[x][y]\n    }\n    fun ans(): Int {\n        return (0 until M).sumOf { i ->\n            (0 until M).count { j -> solve(i, j) == State.OK }\n        }\n    }\n}\nfun main() {\n    val (M, A, B) = readLine()!!.split(\" \").map { it.toInt() }\n    println(Solver(M, A, B).ans())\n}"
+      ],
+      "text_sha256": "3af45466832594504f4feca6c97435f6e3c5f2b368d989defc22d59ce4588398",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc446/abc446_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

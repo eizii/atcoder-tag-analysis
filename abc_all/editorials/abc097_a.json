@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc097_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc097/editorial.pdf",
+      "text": "A: Colorful Transceivers\n\n ໰୊จͷ௨Γ ࣮ ૷͠·͢ɻೋ఺a,b ؒ ͷ ڑ ཭͸ඪ४తͳ ݴޠ ͳΒઈର஋ ؔ ਺Ͱ ܭࢉ Ͱ͖ΔͰ͠ΐ͏ɻࣗ ෼\nͰఆ ٛ ͯ͠΋ྑ͍ͱ ࢥ ͍·͢ɻͨͱ͑͹ C++ ͳΒ abs(a −b) ͱॻ͚·͢ɻ͋ͱ͸ɺ(A ͱ C ͕௚઀ձ࿩Մ\nೳ) ·ͨ͸ ((A ͱ B ͕௚઀ձ࿩Մೳ) ͔ͭ (B ͱ C ͕௚઀ձ࿩Մೳ)) ͱ͍͏࿦ཧ ߏ ଄Λɺ࿦ཧԋ ࢉࢠ Λ ࢖ ͬ\n\nͯίʔυʹམͱ͠ ࠐ Ί͹Α͍Ͱ͢ɻҎԼ͸ C++ ͷίʔυྫͰ͢ɻ\n\n#include <bits/stdc ++.h>\nusing namespace std;\nint main (){\n         int a,b,c,d;\n         cin >>a>>b>>c>>d;\n        if(abs(a-c)<=d || (abs(a-b)<=d && abs(b-c)<=d)) puts (\" Yes \");\n         else puts (\"No \");\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "a6a6166bf287f5ed842d34cef0a8a28c4bf9e30d85daec1ba5d5c5311ac9b5a9"
+    }
+  ],
+  "status": "available"
+}

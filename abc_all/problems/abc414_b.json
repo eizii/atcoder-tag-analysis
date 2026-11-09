@@ -1,0 +1,72 @@
+{
+  "problem_id": "abc414_b",
+  "title": "String Too Long ",
+  "contests": [
+    {
+      "contest_id": "abc414",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 37,
+  "raw_difficulty": -553,
+  "contest_id": "abc414",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc414/tasks/abc414_b",
+  "statement": "配点 : 200 点 問題文 連長圧縮（ランレングス圧縮）を復元してください。ただし、長すぎる場合には Too Long と出力してください。 N 個の文字と整数の組 (c_1,l_1),(c_2,l_2),\\ldots,(c_N,l_N) が与えられます。 l_1 個の文字 c_1 、 l_2 個の文字 c_2 、 \\ldots 、 l_N 個の文字 c_N をこの順に連結させた文字列を S とします。 S を出力してください。ただし、 S の長さが 100 を超える場合には代わりに Too Long と出力してください。 制約 1\\leq N\\leq 100 1\\leq l_i\\leq 10^{18} N,l_i は整数 c_i は英小文字 c_i\\neq c_{i+1} 入力 入力は以下の形式で標準入力から与えられる。 N c_1 l_1 c_2 l_2 \\vdots c_N l_N 出力 S の長さが 100 以下なら S を、そうでないなら Too Long と出力せよ。 入力例 1 8\r\nm 1\r\ni 1\r\ns 2\r\ni 1\r\ns 2\r\ni 1\r\np 2\r\ni 1 出力例 1 mississippi S は mississippi です。 S の長さは 100 以下であるため S を出力します。 入力例 2 7\r\na 1000000000000000000\r\nt 1000000000000000000\r\nc 1000000000000000000\r\no 1000000000000000000\r\nd 1000000000000000000\r\ne 1000000000000000000\r\nr 1000000000000000000 出力例 2 Too Long S の長さは 7\\times 10^{18} であるため、 Too Long を出力します。 入力例 3 1\r\na 100 出力例 3 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 入力例 4 6\r\ng 4\r\nj 1\r\nm 4\r\ne 4\r\nd 3\r\ni 4 出力例 4 ggggjmmmmeeeedddiiii",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 連長圧縮（ランレングス圧縮）を復元してください。ただし、長すぎる場合には Too Long と出力してください。 N 個の文字と整数の組 (c_1,l_1),(c_2,l_2),\\ldots,(c_N,l_N) が与えられます。 l_1 個の文字 c_1 、 l_2 個の文字 c_2 、 \\ldots 、 l_N 個の文字 c_N をこの順に連結させた文字列を S とします。 S を出力してください。ただし、 S の長さが 100 を超える場合には代わりに Too Long と出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N\\leq 100 1\\leq l_i\\leq 10^{18} N,l_i は整数 c_i は英小文字 c_i\\neq c_{i+1}"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N c_1 l_1 c_2 l_2 \\vdots c_N l_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 S の長さが 100 以下なら S を、そうでないなら Too Long と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 8\r\nm 1\r\ni 1\r\ns 2\r\ni 1\r\ns 2\r\ni 1\r\np 2\r\ni 1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 mississippi S は mississippi です。 S の長さは 100 以下であるため S を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 7\r\na 1000000000000000000\r\nt 1000000000000000000\r\nc 1000000000000000000\r\no 1000000000000000000\r\nd 1000000000000000000\r\ne 1000000000000000000\r\nr 1000000000000000000"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 Too Long S の長さは 7\\times 10^{18} であるため、 Too Long を出力します。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1\r\na 100"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "heading": "入力例 4",
+      "text": "入力例 4 6\r\ng 4\r\nj 1\r\nm 4\r\ne 4\r\nd 3\r\ni 4"
+    },
+    {
+      "heading": "出力例 4",
+      "text": "出力例 4 ggggjmmmmeeeedddiiii"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc414/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:47.648885+00:00",
+  "statement_sha256": "2a86503ec8ad163f195526c735b0de7b6deebe0f51aa3a0734c2899fbd72902b",
+  "editorials": []
+}

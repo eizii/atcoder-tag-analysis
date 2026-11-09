@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc321_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc321/editorial/7267",
+      "text": "以下、頂点\n\\(1\\)\nを根とした根つき木として考えます。\n本問題で与えられる木は完全二分木の一種であり、以下のような特徴があることから、しばしば問題の題材やデータ構造（segment tree など）の実装手段として用いられます。\n木の高さが\n\\(\\log_2N\\)\nである\n頂点\n\\(i\\)\nの親、左の子、右の子の番号がそれぞれ\n\\(\\lfloor \\frac{i}{2} \\rfloor,2i, 2i+1\\)\nと簡単な形で表せる\n後者の特徴から、更に以下の事実が導けます。\n頂点\n\\(i\\)\nの子孫であって、頂点\n\\(i\\)\nとの距離が\n\\(d\\)\nである頂点の番号の集合は、区間\n\\([i\\times 2^d, (i+1)\\times 2^d)\\)\nと\n\\([1,N]\\)\nの共通区間である（＊）\nここからは本問題について考えます。頂点\n\\(X\\)\nとの距離が\n\\(K\\)\nである頂点を\n\\(Y\\)\nとし、\n\\(X\\)\nと\n\\(Y\\)\nの最小共通祖先を\n\\(Z\\)\nとおきます。木の高さが\n\\(\\log_2N\\)\nであることから\n\\(Z\\)\nとしてありうるものは高々\n\\(\\log_2N+1\\)\n通りしかなく、また\n\\(Z\\)\nを固定したときに「\n\\(X\\)\nとの最小共通祖先が\n\\(Z\\)\nであり、\n\\(X\\)\nとの距離が\n\\(K\\)\nであるような頂点\n\\(Y\\)\nの数」は事実（＊）を用いて\n\\(O(1)\\)\nで計算可能なことから、本問題はクエリあたり\n\\(O(\\log N)\\)\nで解くことができます。\n例えば、\n\\(X=8,K=5\\)\nであり、\n\\(Z=2\\)\nを固定したときのことを考えます。頂点\n\\(X,Z\\)\nの距離は\n\\(2\\)\nですから、「頂点\n\\(8\\)\nとの最小共通祖先が頂点\n\\(2\\)\nであり、頂点\n\\(8\\)\nとの距離が\n\\(5\\)\nであるような頂点の数」は、「頂点\n\\(2\\)\nの子孫であるが頂点\n\\(4\\)\nの子孫ではない頂点のうち、頂点\n\\(2\\)\nとの距離が\n\\(3\\)\nであるような頂点の数」というように事実（＊）を適用可能な形へと言い換えることができます。ここから先は実装方針によりますが、条件を満たす頂点の区間を場合分けで陽に求めることも、「頂点\n\\(2\\)\nの子孫であって、頂点\n\\(2\\)\nとの距離が\n\\(3\\)\nであるような頂点の数」から「頂点\n\\(4\\)\nの子孫であって、頂点\n\\(4\\)\nとの距離が\n\\(2\\)\nであるような頂点の数」を引いて求めることもできます。以下の実装例では前者を用いています。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint depth(ll n) {\n    int d = 0;\n    while (true) {\n        n >>= 1;\n        if (!n) break;\n        ++d;\n    }\n    return d;\n}\n\nint main() {\n    int t;\n    cin >> t;\n    while (t--) {\n        ll n, x, k;\n        cin >> n >> x >> k;\n        int dn = depth(n);\n        int dx = depth(x);\n        ll ans = 0;\n        for (int i = 0; i <= dx; i++) { // i = depth(lca(x, y))\n            if (dx - i > k) continue;\n            if (i + k - (dx - i) > dn) continue;\n            ll l, r;\n            if (i == dx) {\n                l = x << k;\n                r = (x + 1) << k;\n            } else {\n                ll z = x >> (dx - i);\n                if (dx - i < k) {\n                    l = z * 2 + (~x >> (dx - i - 1) & 1);\n                    l <<= (k - (dx - i) - 1);\n                    r = l + (1LL << (k - (dx - i) - 1));\n                } else {\n                    l = z, r = z + 1;\n                }\n            }\n            if (l > n) continue;\n            r = min(r, n + 1);\n            ans += r - l;\n        }\n        cout << ans << '\\n';\n    }\n}"
+      ],
+      "text_sha256": "dd6f9907088c2a7c9ede61f0cf6cd9a4bb53f1e67a29f7184347702ec0cc1aaf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc321/abc321_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

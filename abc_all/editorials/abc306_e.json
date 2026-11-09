@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc306_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc306/editorial/6607",
+      "text": "この問題には様々な解法がありますが、ここでは「同じデータ構造を\n\\(2\\)\nつ使う」方針を使います。\n今回はデータ構造として multiset(多重集合を管理するデータ構造) を用います。使う機能は以下の通りなので、同等の操作ができるならどれを使っても構いません。\n多重集合を管理する。即ち、同一の値を複数保持することができる。\n最大値(または最小値、またはその両方) にアクセスできる。\n特定の値を\n\\(1\\)\nつ削除することができる。\n「大きい方から\n\\(K\\)\n個の値を管理する multiset\n\\(X\\)\n」「それ以外の値を管理する multiset\n\\(Y\\)\n」「\n\\(X\\)\nの総和\n\\(s\\)\n」という\n\\(3\\)\nつの要素を管理していくことを考えます。\n最初\n\\(X\\)\nは大きい方から\n\\(K\\)\n個の値 (今回は\n\\(K\\)\n個の\n\\(0\\)\n) 、\n\\(Y\\)\nは\n\\(A\\)\n内のそれ以外の値 (今回は\n\\(N-K\\)\n個の\n\\(0\\)\n) 、\n\\(s\\)\nは\n\\(X\\)\nの総和と初期化します。\n以下の操作\nbalance\n,\nadd\n,\nerase\nを定義します。これは\n\\(2\\)\nつの multiset で実装できます。各操作を実装していく道中で\n\\(s\\)\nも更新していきます。\nbalance\n…\n\\(X\\)\nの要素数が\n\\(K\\)\n個でないなら、\n\\(K\\)\n個になるまで\n\\(Y\\)\nの要素のうち最大のものを\n\\(X\\)\nに移動することを繰り返す。そのうえで、 (\n\\(X\\)\nの最小値)\n\\(<\\)\n(\n\\(Y\\)\nの最大値) が満たされる限りこれらを入れ替えることを繰り返す。\nadd\n…\n\\(Y\\)\nに特定の値\n\\(v\\)\nを追加した上で\nbalance\nする。\nerase\n… 特定の値\n\\(v\\)\nを削除する。\n\\(X\\)\nに\n\\(v\\)\nが含まれるならそれを消し、そうでないなら\n\\(Y\\)\nから\n\\(v\\)\nを消す。その後\nbalance\nする。\n(おまけ: 今回の操作では\n\\(X\\)\nの要素数が\n\\(K\\)\nを上回ることはないですが、\n\\(X\\)\nの要素数が\n\\(K\\)\nを上回るような更新があるようなケースでも\n\\(X\\)\nのうち小さい要素を\n\\(Y\\)\nに移動させれば上手く取り扱えます。)\n\\(A_i\\)\nを変更する時は以下の操作をかければよいです。\n新しい\n\\(A_i\\)\nを\nadd\nする。\nその後、元の\n\\(A_i\\)\nを\nerase\nする。\n(この順番は逆でも良いですが\n\\(X\\)\nと\n\\(Y\\)\nの大きさの合計が\n\\(K\\)\nを下回るケースや\n\\(N=1\\)\nの時に\n\\(X,Y\\)\nが双方空になるケースなどがあり実装がしづらくなります。なお、今回の問題では番兵として\n\\(0\\)\nをたくさん入れるという対処法もあります。)\n今回の問題では、\nbalance\n内での swap の回数が\n\\(O(1)\\)\nであると見積もられるので、全体の計算量は\n\\(O(Q \\log N)\\)\nとなります。\nこの解法は他の問題にも応用できますが、実装上の注意として、操作の道中で\n\\(X\\)\nや\n\\(Y\\)\nが空集合になったりする可能性があることに注意してください。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint k;\nmultiset<int> x,y;\nlong long s;\n\nvoid balance(){\n  while(x.size()<k){\n    auto iy=y.end();iy--;\n    x.insert((*iy));\n    s+=(*iy);\n    y.erase(iy);\n  }\n  if(x.empty() || y.empty()){return;}\n\n  while(1){\n    auto ix=x.begin();\n    auto iy=y.end();iy--;\n    int ex=(*ix);\n    int ey=(*iy);\n    if(ex >= ey){break;}\n    s+=(ey-ex);\n    x.erase(ix);\n    y.erase(iy);\n    x.insert(ey);\n    y.insert(ex);\n  }\n}\n\nvoid add(int v){\n  y.insert(v);\n  balance();\n}\n\nvoid erase(int v){\n  auto ix=x.find(v);\n  if(ix!=x.end()){ s-=v; x.erase(ix); }\n  else{ y.erase(y.find(v)); }\n  balance();\n}\n\nint main(){\n  int n;\n  cin >> n >> k;\n  vector<int> a(n,0);\n  for(int i=0;i<k;i++){ x.insert(0); }\n  for(int i=k;i<n;i++){ y.insert(0); }\n  s=0;\n  \n  int q;\n  cin >> q;\n  while(q>0){\n    q--;\n    int p,w;\n    cin >> p >> w;\n    p--;\n    add(w);\n    erase(a[p]);\n    a[p]=w;\n    cout << s << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "20e5b44cf8c37947b408ee99d9e130e8a3d292168a95144fd7c9c5bd1f54942e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc306/abc306_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

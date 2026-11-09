@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc267_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc267/editorial/4727",
+      "text": "まず、長さ\n\\(M\\)\nの連続部分列は\n\\(N-M+1\\)\n通りしかないため、全ての連続部分列に対して\n\\(\\displaystyle \\sum_{i=1}^{M} i \\times B_i\\)\nを愚直に求めることで\n\\(\\mathrm{O}(N^2)\\)\nで本問題を解くことができますが、このままだと制限実行時間に間に合いません。\nですが、\n\\(\\displaystyle \\sum_{i=1}^{M} i \\times A_i-\\displaystyle \\sum_{i=1}^{M} i \\times A_{i+1} = \\left(\\sum_{i=1}^{M} A_i\\right)-M \\times A_{M+1}\\)\nであるため、前もって\n\\(\\displaystyle A_1,A_1+A_2,A_1+A_2+A_3,\\dots,\\sum_{i=1}^{N} A_i\\)\nを\n\\(\\mathrm{O}(N)\\)\nで計算しておくことにより、\n\\(\\displaystyle \\sum_{i=1}^{M} i \\times A_{i+j}\\)\nから\n\\(\\displaystyle \\sum_{i=1}^{M} i \\times A_{i+j+1}\\)\nを\n\\(\\mathrm{O}(1)\\)\nで求めることができます。\nよって、\n\\(\\displaystyle \\sum_{i=1}^{M} i \\times A_i\\)\nをはじめに\n\\(\\mathrm{O}(M)\\)\nで求め、上記の式を使うことにより\n\\(\\mathrm{O}(N)\\)\n時間で全ての連続部分列に対して\n\\(\\displaystyle \\sum_{i=1}^{M} i \\times B_i\\)\nを求めることができます。\nあとはこれらの最大値を出力すればよいです。計算量は\n\\(\\mathrm{O}(N)\\)\nです。\n答えや\n\\(A\\)\nの累積和は最大で\n\\(4 \\times 10^{15}\\)\n程になるため、32 bit 型整数を使うとオーバーフローしてしまうことに注意してください。また、答えは負にもなり得るため最大値を求める際に初期値を\n\\(0\\)\nにしてしまう間違いにも注意してください。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main(){\n  int n,m;\n  cin>>n>>m;\n  vector<long long> a(n);\n  for(int i=0;i<n;i++) cin>>a[i];\n  vector<long long> sum(n+1);//sum[i] = a_1 + a_2 + ... + a_{i-1}\n  for(int i=1;i<=n;i++) sum[i]=sum[i-1]+a[i-1];\n  vector<long long> sumi(n-m+1);\n  long long now=0;\n  for(int i=0;i<m;i++) now+=a[i]*(i+1);\n  sumi[0]=now;\n  for(int i=1;i<n-m+1;i++) sumi[i]=sumi[i-1]+m*a[m+i-1]-(sum[m+i-1]-sum[i-1]);\n  long long ans = -1000000000000000000ll;\n  for(int i=0;i<n-m+1;i++) ans=max(ans,sumi[i]);\n  cout<<ans<<endl;\n}"
+      ],
+      "text_sha256": "d462b2e4480b66d31c01109725199e4327b4b62d6397b45f811761456e93a102",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc267/abc267_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc267/editorial/4760",
+      "text": "\\(A\\)\nを 0-indexed で扱い、\n\\(l\\)\nから始まる長さ\n\\(M\\)\nの連続部分列のスコア（問題で要求されている最大化したい値）を考えます。半開区間として扱い、終端位置を\n\\(r = l+M\\)\nとします。\n\\(\\sum\\)\nの中に\n\\(i\\)\nではなく\n\\(l\\)\nが含まれていると累積和で高速化しにくい（後述）ので、それを分離するのを意識して変形します。\n\\[\n\\begin{aligned}\nf(l, r) &= \\sum_{i=l}^{r-1}\\, (i-l+1) \\times A_i \\\\\n&= \\sum_{i=l}^{r-1}\\, (i+1)\\times A_i - l\\cdot\\sum_{i=l}^{r-1} A_i.\n\\end{aligned}\n\\]\nここで、\n\\(S_0(r) = \\sum_{i=0}^{r-1} A_i\\)\n、\n\\(S_1(r) = \\sum_{i=0}^{r-1}\\, (i+1)\\times A_i\\)\nとおくと、\n\\[\nf(l, r) = (S_1(r) - S_1(l))-l\\cdot(S_0(r) - S_0(l))\n\\]\nとできます。よって、求めたい値\n\\[\n\\max_{M\\le i\\le N} f(i-M, i)\n\\]\nを\n\\(O(N)\\)\n時間で計算できるようになります。\n提出 #34581466\nこのように、高速化しやすい形を意識して式変形すると見通しがよくなる気がします。\n累積和を用いて\n\\(f(l, r)\\)\nを\n\\(O(1)\\)\n時間で求められるので、「クエリ形式で与えられる区間\n\\([l, r)\\)\nについて\n\\(f(l, r)\\)\nを出力せよ」のような問題にも答えられます。\n実装の際に 0-indexed・半開区間で扱うのがやりやすいことが多いので、（特に添字の +1/-1 が関わる場合は）考察の段階でも 0-indexed にして式変形などを行う方がよいでしょう。\nbonus\n:\n\\(M\\)\nが与えられない場合の問題、すなわち任意の区間における最大値\n\\(\\max_{0\\le l\\le r\\le N} f(l, r)\\)\nを\n\\(1\\le N\\le 2\\cdot 10^5\\)\nで求めてみましょう。難易度は F 問題くらいだと思います。\nジャッジ\n\\(\\sum\\)\nの中に\n\\(i\\)\n（ループ変数）ではなく\n\\(l\\)\n（区間の始端）が入っていると累積和で高速化しにくいという話について。\n\\(f(l, r) = \\sum_{i=l}^{r-1} g(i)\\)\nという関数を累積和で高速化するときは、\n\\(S(r) = \\sum_{i=0}^{r-1} g(i)\\)\nという関数を作る（始端を適当な箇所に固定する）ことで、\n\\(f(l, r) = S(r) - S(l)\\)\nと変形します。場合によっては終端を固定しますが今回の本筋ではありません。\nこのとき、（解説冒頭の式のように）始端である\n\\(l\\)\nも\n\\(\\sum\\)\nの中に含まれている（\n\\(\\sum_{i=l}^{r-1} g(i, l)\\)\nなど）と、「（終端が変わるのはいいが）始端が変わると前計算した\n\\(S\\)\nが使えなくなってしまう」という状況になり、\n\\(\\Theta(n^2)\\)\n個の前計算テーブルが必要になってしまいます。これでは愚直と同じです。\nそこで、たとえば\n\\[ f(l, r) = \\sum_{i=l}^{r-1} g_0(i) + c(l)\\cdot\\sum_{i=l}^{r-1} g_1(i) \\]\nのように、各々の\n\\(\\sum\\)\nの中から\n\\(l\\)\nを分離することで、それぞれを\n\\(S(r)-S(l)\\)\nの形にできるようになり、\n\\(\\Theta(n)\\)\n個のテーブルで済むようになります。\n問題によっては、和に分解するのではなく\n\\[ f(l, r) = \\left(\\sum_{i=l}^{r-1} g_0(i)\\right)\\times\\left(\\sum_{i=l}^{r-1} g_1(i)\\right) \\]\nのように積に分解するケースもあるかもしれません。\nいずれにせよ、無闇に式変形するのではなく、（累積和やその他の勉強したテクを用いて）高速化するにはどういう形であればいいかを意識して式変形するのがよいでしょう。考察前の段階ではどうしてそのテクで高速化できなくて、どうすれば解消するかを意識するということです。",
+      "codes": [],
+      "text_sha256": "9cce4543731743cbaf574ce884708f805d964f9241d1cde61d49ce072b1758c4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc267/abc267_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

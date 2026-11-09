@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc287_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc287/editorial/5631",
+      "text": "文字\n\\(a, b\\)\nに対し、\n\\(a=b\\)\nであるか、少なくとも一方が\n?\nであるときに\n\\(a\\)\nと\n\\(b\\)\nがマッチするということにします。すると、文字列\n\\(S,T\\)\nがマッチするとは\n\\(i=1,2,\\ldots,|S|\\)\nに対し\n\\(S\\)\nの\n\\(i\\)\n文字目と\n\\(T\\)\nの\n\\(i\\)\n文字目がマッチする、と言い換えられます。\nさらに、各\n\\(x\\)\nについて\n\\(S'\\)\nと\n\\(T\\)\nがマッチするというのは「\n\\(S\\)\nの先頭\n\\(x\\)\n文字と\n\\(T\\)\nの先頭\n\\(x\\)\n文字がそれぞれマッチし、さらに\n\\(S\\)\nの末尾\n\\(|T|-x\\)\n文字と\n\\(T\\)\nの末尾\n\\(|T|-x\\)\n文字がそれぞれマッチする」と言い換えられます。\nそこで、\n\\(\\mathrm{pre}_i\\)\nを\n\\(S\\)\nの先頭\n\\(i\\)\n文字と\n\\(T\\)\nの先頭\n\\(i\\)\n文字がマッチするかどうかを表す配列、\n\\(\\mathrm{suf}_i\\)\nを\n\\(S\\)\nの末尾\n\\(i\\)\n文字と\n\\(T\\)\nの末尾\n\\(i\\)\n文字がマッチするかどうかを表す配列とし、前計算を行う事で\n\\(x=0,1,2,\\ldots,|T|\\)\nそれぞれに対して\n\\(\\mathrm{O}(1)\\)\nで答えることが可能になります。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nbool match_or_not(char a,char b){\n\treturn a=='?' || b=='?' || a==b;\n}\n\nint main() {\n    \n\tstring S,T;\n\tcin>>S>>T;\n\t\n\tvector<int> pre(S.size()+1,false),suf(S.size()+1,false);\n\t\n\tpre[0] = true;\n\tfor(int i=0;i<T.size();i++){\n\t\tif(!match_or_not(S[i],T[i]))break;\n\t\tpre[i+1] = true;\n\t}\n\t\n\treverse(S.begin(),S.end());\n\treverse(T.begin(),T.end());\n\t\n\tsuf[0] = true;\n\tfor(int i=0;i<T.size();i++){\n\t\tif(!match_or_not(S[i],T[i]))break;\n\t\tsuf[i+1] = true;\n\t}\n\t\n\tfor(int i=0;i<=T.size();i++){\n\t\tif(pre[i] && suf[T.size()-i])printf(\"Yes\\n\");\n\t\telse printf(\"No\\n\");\n\t}\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "d5fd585091fcc9d4836faba48aed18927157cc75be7f1f8afbb9edf024590049",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc287/abc287_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

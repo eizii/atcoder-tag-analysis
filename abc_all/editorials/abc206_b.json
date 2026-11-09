@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc206_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc206/editorial/2095",
+      "text": "まず、答えの最大値を見積もります。\n今回の問題では、\n\\(N \\le 10^9\\)\nです。明らかに、答えは\n\\(10^9\\)\n以下ですが、本当にこのくらい答えが大きくなってしまうでしょうか？\n少し考えると、 例えば、\n\\(1000\\)\n日目以降は少なくとも毎日\n\\(1000\\)\n円以上貯金額が増え続けることが分かります。なので、このペースで\n\\(10^9\\)\n円に到達するのは、どれだけ遅くとも\n\\(10^6+1000\\)\n日後であることがわかります。\nこの程度の日数であれば、forループによるシミュレーションを\n\\(1\\)\n日ごとに実行しても余裕をもって実行時間制限に間に合います。\nなお、実装の方針としては、 while(1) のような無限ループの形でプログラムを記述し、貯金額が\n\\(N\\)\n円以上になったタイミングで即座にループを抜け出す、というような方針をとるとより簡潔です。実装例も参照してください。\nOctaveによる実装例:\nPHPによる実装例:\nBONUS!\n\\(N \\le 10^{18}\\)\nで今回の問題を解いてみましょう。",
+      "codes": [
+        "n = scanf('%d', 'C');\n\ni = 1;\nmoney = 0;\n\nwhile 1\n  money += i;\n  if money >= n\n    break;\n  end\n  i++;\nend\n\nprintf('%d\\n',i);",
+        "<?php\n$n = fgets(STDIN);\n\nfor($i = 1 ; ; $i++){\n  $n -= $i;\n  if($n <= 0){\n    printf(\"%d\\n\",$i);\n    break;\n  }\n}\n?>",
+        "package main\n\nimport \"fmt\"\n\nfunc f(n int64) int64 {\n  return (n*(n+1))/2\n}\n\nfunc main() {\n  var n,ng,ok,mid int64\n  fmt.Scan(&n)\n  ng = 0\n  ok = 3000000000\n  for (ok - ng) > 1 {\n    mid = (ok + ng) / 2\n    if f(mid) < n {\n      ng = mid\n    } else {\n      ok = mid\n    }\n  }\n  fmt.Println(ok)\n}"
+      ],
+      "text_sha256": "acd67c42beeb5541f04a34196e70a39173cee8975d2c23f35b7a69d803874c04",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc206/abc206_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

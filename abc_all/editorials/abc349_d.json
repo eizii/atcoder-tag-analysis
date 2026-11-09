@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc349_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc349/editorial/9772",
+      "text": "良い数列は，セグメント木の区間に対応しています．例えば入力例\n\\(1\\)\nの\n\\(S(3,19)\\)\nを良い数列に分割する方法は，下の図の赤い区間で表現することができます．\n左から順番に分割する方法を決めていくことにします．個数が最小になるようにするとき，できるだけ長い区間を貪欲に取っていくことが最善です．\n入力例\n\\(1\\ S(3,19)\\)\nを例にとってみます．\n現在の残っている数列は\n\\(S(3,19)\\)\nである．\n\\(3\\)\nを左端とする良い数列は\n\\(S(3,4)\\)\nのみなので\n\\(S(3,4)\\)\nを選択する．残りの数列は\n\\(S(4,19)\\)\nである．\n現在の残っている数列は\n\\(S(4,19)\\)\nである．\n\\(4\\)\nを左端とする良い数列は\n\\(S(4,5),S(4,6),S(4,8)\\)\nなので最も長いの\n\\(S(4,8)\\)\nを選択する．残りの数列は\n\\(S(8,19)\\)\nである．\n現在残っている数列は\n\\(S(8,19)\\)\nである．\n\\(8\\)\nを左端とする良い数列は\n\\((8,9),(8,10),S(8,12),S(8,16)\\)\nなので最も長い\n\\((8,16)\\)\nを選択する．残りの数列は\n\\(S(16,19)\\)\nである．\n現在残っている数列は\n\\(S(16,19)\\)\nである．\n\\(16\\)\nを左端とする良い数列は\n\\(S(16,17),S(16,18),S(16,20)\\)\nである．\n\\(S(16,20)\\)\nは残っている数列を超えているので，それ以外のうち最も長い\n\\(S(16,18)\\)\nを選択する．残りの数列は\n\\(S(18,19)\\)\nである．\n現在残っている数列は\n\\(S(18,19)\\)\nである．\n\\(18\\)\nを左端とする良い数列は\n\\(S(18,19),S(18,20)\\)\nである．\n\\(S(18,20)\\)\nは残っている数列を超えているので，それ以外のうち最も長い\n\\(S(18,19)\\)\nを選択する．残りの数列はない．\n左端が\n\\(l\\)\nのとき，あり得る数列の長さは\n\\(2\\)\nべき（非負整数\n\\(i\\)\nを用いて\n\\(2^i\\)\nと表わされる整数）のうち\n\\(l\\)\nを割り切るものです．よって，左端が\n\\(l\\)\nのときに選択するべき数列は\n\\(l\\equiv 0\\pmod {2^i}\\)\n\\(l+2^i\\leq R\\)\n（残っている区間を超えないための条件）\nを同時に満たすような最大の\n\\(i\\)\nを\n\\(i_0\\)\nとしたとき\n\\(S(l,l+2^{i_0})\\)\nになります．\n実装例 (Python)\nまた，よい数列に分割する方法をセグメント木の区間に対応させるとき，区間は山型（右上がり→右下がり）になるという性質があります（すなわち，良い数列を\n\\(S(l_1,r_1)=(2^{i_1}j_1,2^{i_1}(j_1+1)),\\ldots,S(l_M,r_M)=(2^{i_M}j_M,2^{i_M}(j_M+1))\\)\nとしたとき，ある整数\n\\(k\\)\nが存在して\n\\(i_1<\\dots<i_k>\\ldots>i_M\\)\nになっています）．これを利用して解くこともできます．\n実装例 (Python)\nさらに別の方法として，下から決めていくこともできます．多くのセグメント木の実装では区間クエリを下側から順番に見ていきながら処理していますが，それと同じことをすればよいです．下から順番に見ていって，左側と右側それぞれで長さ\n\\(2^i\\)\nの数列を選択するかを決めていきます．左側で長さ\n\\(2^i\\)\nの数列を選択する条件は\n\\(L\\)\nの\n\\(i\\)\nbit 目が立っている．\n\\(L<R\\)\nです．右側も同様です．\n実装例 (Python)",
+      "codes": [
+        "L, R = map(int, input().split())\nans = []\nwhile L != R:\n    i = 0\n    while L % pow(2, i+1) == 0 and L+pow(2, i+1) <= R:\n        i += 1\n    ans.append([L, L+pow(2, i)])\n    L += pow(2, i)\nprint(len(ans))\nfor l, r in ans:\n    print(l, r)",
+        "L, R = map(int, input().split())\nans = []\nfor i in range(61):\n    if L % (pow(2, i+1)) == pow(2, i) and L+pow(2, i) <= R:\n        ans.append([L, L+pow(2, i)])\n        L += pow(2, i)\nfor i in range(60, -1, -1):\n    if L+pow(2, i) <= R:\n        ans.append([L, L+pow(2, i)])\n        L += pow(2, i)\nprint(len(ans))\nfor l, r in ans:\n    print(l, r)",
+        "L, R = map(int, input().split())\nans_left, ans_right = [], []\ni = 0\nwhile L < R:\n    if (L >> i) & 1:\n        ans_left.append([L, L+(1 << i)])\n        L += 1 << i\n    if (R >> i) & 1:\n        ans_right.append([R-(1 << i), R])\n        R -= 1 << i\n    i += 1\nans = ans_left+ans_right[::-1]\nprint(len(ans))\nfor l, r in ans:\n    print(l, r)"
+      ],
+      "text_sha256": "f88974d0ce20abf984a2385c39608ab484456ed4968d78aa2bbb059d5962dd79",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc349/abc349_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc349/editorial/9797",
+      "text": "与えられた\n\\((L, R)\\)\nに対して、\n\\((l_i, r_i)\\)\nがわかっている状態で\n\\((l_{i+1}, r_{i+1})\\)\nを\n\\(O(1)\\)\n時間で求められればよいです（ここで\n\\(r_i < R\\)\nとします）。\nこれは、\n与えられた\n\\((L, R)\\)\nに対して、ABC 349 D で言うところの\n\\((l_1, r_1)\\)\nを\n\\(O(1)\\)\n時間で求めてください。\nという問題で\n\\((r_i, R)\\)\nが与えられるケースに帰着できます。\nまた、\n\\(l_1 = L\\)\nなので、以下では\n\\(r_1\\)\nを\n\\(O(1)\\)\n時間で求めることだけ考えます。\n公式解説\nも適宜参考にしてください。\nセグ木において、\n\\(L\\)\nを左端とする区間幅全体からなる集合\n\\(A\\)\nは\n\\(\\gdef{\\ctz}{\\operatorname{ctz}}\\)\n\\(\\gdef\\hfloor#1{\\lfloor\\hspace{-.25em}\\lfloor#1\\rfloor\\hspace{-.25em}\\rfloor}\\)\n\\[\n\\begin{aligned}\nA &= \\{2^i\\mid (L\\bmod 2^i) = 0\\} \\\\\n&= \\{1, 2, 4, \\dots, 2^{\\ctz(L)}\\}\n\\end{aligned}\n\\]\nと表せます。ただし、\n\\(\\ctz(n)\\)\nは\n\\(n\\)\nを 2 進法で表したときの末尾の\n\\(0\\)\nの個数とし、\n\\(\\ctz(0)=\\infty\\)\nとします。\nさて、\n\\(r_1\\)\nは次のように表せます。\n\\[\n\\begin{aligned}\nr_1 &= \\max_{j\\in A} {\\{L+j\\mid L+j\\le R\\}} \\\\\n&= \\max_{j\\in A} {\\{L+j \\mid j \\le R-L\\}}.\n\\end{aligned}\n\\]\nすなわち、\n\\[\n\\begin{aligned}\nr_1 &= \\max_{0\\le i\\le\\ctz(L)} {\\{L+2^i \\mid 2^i\\le R-L\\}} \\\\\n&= L + \\min{\\{2^{\\ctz(L)}, \\hfloor{R-L}\\}}\n\\end{aligned}\n\\]\nとなります。ここで、\n\\(\\hfloor n\\)\nは\n\\(n\\)\n以下の最大の 2 べきの整数を表します。\nあとは\n\\(2^{\\ctz(n)}\\)\nと\n\\(\\hfloor n\\)\nを\n\\(O(1)\\)\n時間で求められればよいです。\n\\(n\\ge 1\\)\nに対して\n\\(2^{\\ctz(n)}\\)\nは「\n\\(n\\)\nを 2 進法で表したときに、一番右にある\n\\(1\\)\n以外の桁を\n\\(0\\)\nにしたもの」に相当します。これは、ビット演算を用いて\nn & (!n + 1)\nや（2 の補数表現を前提として）\nn & -n\nと書けることが広く知られています。\n\\(\\hfloor n\\)\nに関しては、たとえば「\n\\(n\\)\nを 2 進法で表したときに、一番左にある\n\\(1\\)\nが\n\\(2^k\\)\nの位であるとして\n\\(2^k\\)\n」として求められます。\nこれは、word RAM においては\n\\(O(1)\\)\n時間で求められることが（\n\\(2^{\\ctz(n)}\\)\nほどは有名ではなさそうですが）知られています。\n関連記事 1\n関連記事 2\nまた、Rust のような言語では、整数に\n.next_power_of_two()\nや\n.is_power_of_two()\nのようなメソッドも用意されています（計算量規定はなさそうです）。\n提出 #52366131",
+      "codes": [],
+      "text_sha256": "645255fb568f0a67ed3f566694e401da55fd93aaa6db7f8fa6168f774d8e5ffa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc349/abc349_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc349/editorial/9788",
+      "text": "トップダウンに再帰する方針を述べます。（セグメントツリーの再帰的な実装とほぼ同じです。）以下、数列\n\\(l, l+1, \\dots, r-2, r-1\\)\nを\n\\([l, r)\\)\nと書きます。\n良い数列\n\\([l, r)\\)\nに対し、それと入力で与えられた数列\n\\([L, R)\\)\nの共通部分の最適な分割を\n\\(f(l, r, L, R)\\)\nとします。（共通部分がない場合は考えません。）答えは\n\\(f(0, 2^{60}, L, R)\\)\nです。\n\\(f(l, r, L, R)\\)\nを再帰的に求めましょう。\n\\([l, r)\\)\nの全体が\n\\([L, R)\\)\nに含まれる場合、共通部分は\n\\([l, r)\\)\nで、これ自体が最適な「分割」です。\nそうでない場合、\n\\(m = (l + r) / 2\\)\nとします。ここで、\n\\([l, r)\\)\nの左半分\n\\([l, m)\\)\nと右半分\n\\([m, r)\\)\nはともに良い数列です。\n\\([L, R)\\)\nの全体が\n\\([l, r)\\)\nの左半分\n\\([l, m)\\)\nに含まれるなら、つまり\n\\(R \\leq m\\)\nなら、右半分は無視でき、最適な分割は\n\\(f(l, m, L, R)\\)\nです。\n\\([L, R)\\)\nの全体が\n\\([l, r)\\)\nの右半分\n\\([m, r)\\)\nに含まれるなら、つまり\n\\(m \\leq L\\)\nなら、左半分は無視でき、最適な分割は\n\\(f(m, r, L, R)\\)\nです。\n上記のどちらでもないなら、\n\\([L, R)\\)\nは\n\\([l, r)\\)\nの左半分と右半分の双方と共通部分を持ち、 最適な分割は\n\\(f(l, m, L, R)\\)\nと\n\\(f(m, r, L, R)\\)\nを連結したものです。\nこれを再帰関数として実装して\n\\(f(0, 2^{60}, L, R)\\)\nを呼んだ際の再帰呼び出しの回数は、各層（\n公式解説\nの図を参照）で\n\\(4\\)\n回以下、合計で\n\\(60 \\times 4\\)\n回以下です。\n実装例（Python）",
+      "codes": [
+        "def f(l, r, L, R):\n    if L <= l and r <= R:\n        return [(l, r)]\n    m = (l + r) // 2\n    if R <= m:\n        return f(l, m, L, R)\n    if m <= L:\n        return f(m, r, L, R)\n    return f(l, m, L, R) + f(m, r, L, R)\n\n\nL, R = map(int, input().split())\nans = f(0, 1 << 60, L, R)\nprint(len(ans))\nfor l, r in ans:\n    print(l, r)"
+      ],
+      "text_sha256": "45955db4af8a3b55905830ad899060286736228a265eba80328962d7edff1b05",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc349/abc349_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

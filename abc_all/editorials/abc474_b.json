@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc474_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc474/editorial/25370",
+      "text": "原案:vwxyz 座席番号 \\(P_i\\) の客は \\(\\lfloor\\frac{P_i+9}{10}\\rfloor\\) 番目のグループに属します。 また、ルールに従った退場中において、 \\(i\\) 番目に退場した客は \\(\\lfloor\\frac{i+9}{10}\\rfloor\\) 番目のグループに属しているはずです。 したがって、各 \\(i=1,2,\\dots,N\\) について、 \\(\\lfloor\\frac{P_i+9}{10}\\rfloor\\) と \\(\\lfloor\\frac{i+9}{10}\\rfloor\\) が一致しているかを判定すればよいです。 c++の実装例 Pythonの実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N;\n    cin>>N;\n    vector<int> P(N);\n    string ans=\"Yes\";\n    for(int i=0;i<N;i++){\n        cin>>P[i];\n        if(i/10!=(P[i]-1)/10){\n            ans=\"No\";\n        }\n    }\n    cout<<ans<<\"\\n\";\n}\n",
+        "N=int(input())\nP=list(map(int,input().split()))\nif all(i//10==(P[i]-1)//10 for i in range(N)):\n    ans=\"Yes\"\nelse:\n    ans=\"No\"\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "5f6e3e2b2eb925a624415bfe7cee97b2b630d0ddeb12ad42802adf1aaf9a5c26"
+    }
+  ],
+  "status": "available"
+}

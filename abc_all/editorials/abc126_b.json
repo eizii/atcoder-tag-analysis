@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc126_b",
+  "editorials": [
+    {
+      "text": "B: YYMM or MMYY\nまず、与えられる入力を長さ4 の文字列とみなしたとき、前半2 文字から2 桁の整数と後半2 文字から2 桁の\n整数に変換してみましょう。例えば前半2 文字から2 桁の整数に変換するのは、(s[0]-’0’)*10+s[1]-’0’\nなどと計算することで得られます。\n代わりの手段として、入力が数字列であるため、これを整数とみなし、4 桁の整数から2 桁の整数を2 つ取\nり出すこともできます。この場合では、前半の2 桁の整数は例えばa/100 、後半の2 桁の整数はa%100 と\nなります。\nその後、各種フォーマットの条件を満たすかを判定します。\nYYMM フォーマットであるためには、後半の2 桁の整数が1 以上12 以下である必要があります。\nMMYY フォーマットであるためには、前半の2 桁の整数が1 以上12 以下である必要があります。\n上の2 つを判定することで、4 つの答えのうちどれであるかが決まります。\nC++ での実装例は以下の通りです。\nint main(){\nint a;scanf(\"%d\",&a);\nint L=a/100;\nint R=a%100;\nif(1<=L&&L<=12){\nif(1<=R&&R<=12)printf(\"AMBIGUOUS\\n\");\nelse printf(\"MMYY\\n\");\n}else{\nif(1<=R&&R<=12)printf(\"YYMM\\n\");\nelse printf(\"NA\\n\");\n}\n}\n",
+      "text_sha256": "15402db251d8d9f3853fe32e3b8006caec33186459e4af34f74487c51680f044",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc126/abc126_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

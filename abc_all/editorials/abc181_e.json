@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc181_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc181/editorial/261",
+      "text": "先生の身長を固定し、先生と児童の身長を昇順に並べ替えたものを\n\\(h_0, h_1, \\dots, h_N\\)\nとします。\nこのとき、\n\\((h_0, h_1), (h_2, h_3), \\dots, (h_{N-1}, h_N)\\)\nでペアを作るのが最適です。\nしたがって、\n\\(H\\)\nをソートしておき、すべての変身形態\n\\(w\\)\nについて、\n\\(H\\)\nの適切な位置に\n\\(w\\)\nを挿入して身長の差の合計を求めることで、\n\\(O(NM+N\\log N)\\)\nでこの問題を解くことができます。\nしかし、このままでは TLE です。\n回答例 (Python) :\nhttps://atcoder.jp/contests/abc181/submissions/17733459\nそこで、\n\\(|H_{2i-1}-H_{2i}|\\)\nの累積和 と\n\\(|H_{2i}-H_{2i+1}|\\)\nの累積和を持つと、挿入や合計に\n\\(O(N)\\)\nかける必要がなくなり、\n\\(O((N + M) \\log N + M \\log M)\\)\nでこの問題を解くことができます。\n回答例 (C++) :\nhttps://atcoder.jp/contests/abc181/submissions/17734513\n回答例 (Python) :\nhttps://atcoder.jp/contests/abc181/submissions/17733390\nまた、\n\\(W\\)\nをソートしておき、\n\\((H_{2i-1},H_{2i})\\)\nでペアになる部分と\n\\((H_{2i},H_{2i+1})\\)\nでペアになる部分の境界と身長の差の合計を持って、しゃくとり法をしてもこの問題を解くことができます。\n回答例 (Python) :\nhttps://atcoder.jp/contests/abc181/submissions/17733416",
+      "codes": [],
+      "text_sha256": "b145252611237ea539504d32bb69553aa5c7286e4de655d1fd76700e2b5facbf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc181/abc181_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

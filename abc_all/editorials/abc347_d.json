@@ -1,0 +1,44 @@
+{
+  "problem_id": "abc347_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc347/editorial/9675",
+      "text": "\\(X,Y\\) を \\(2\\) 進法で表したときの \\(k\\) 桁目 \\((0\\leq k\\lt60)\\) がそれぞれ \\(i,j\\ (i,j\\in\\lbrace0,1\\rbrace)\\) となるような \\(k\\) の個数を \\(n _ {i,j}\\) とします。\nそれぞれの条件から、以下のことがわかります。\n\\(\\operatorname{popcount}(X)=a\\iff n _ {1,0}+n _ {1,1}=a\\)\n\\(\\operatorname{popcount}(Y)=b\\iff n _ {0,1}+n _ {1,1}=b\\)\n\\(X\\oplus Y=C\\implies n _ {1,0}+n _ {0,1}=\\operatorname{popcount}( C)\\)\n\\(c\\coloneqq\\operatorname{popcount}( C)\\) とします。\n\\(n _ {0,0}+n _ {0,1}+n _ {1,0}+n _ {1,1}=60\\) なので、以上から各 \\(n _ {i,j}\\) の値は以下の式を満たす必要があります。\n\\[\\begin{aligned}\nn _ {0,0}&=60-\\dfrac{a+b+c}2\\\\\nn _ {0,1}&=\\dfrac{-a+b+c}2\\\\\nn _ {1,0}&=\\dfrac{a-b+c}2\\\\\nn _ {1,1}&=\\dfrac{a+b-c}2\n\\end{aligned}\\]\nこれらは非負整数でなければならないため、\n\\(a+b+c\\equiv1\\pmod2\\)\n\\(a+b+c\\gt120\\)\n\\(a\\gt b+c,b\\gt c+a,c\\gt a+b\\)\nのいずれかが成り立っているとき、条件を満たすような \\((X,Y)\\) は存在しません。\nこれらがすべて成り立たないとき \\(n _ {i,j}\\) は非負整数です。\nこのとき、例えば以下のような操作によって実際に \\((X,Y)\\) を構築することができます。\n\\(S _ 0\\) を \\(n _ {0,0}\\) 個の \\((0,0)\\) と \\(n _ {1,1}\\) 個の \\((1,1)\\) からなる列、\\(S _ 1\\) を \\(n _ {0,1}\\) 個の \\((0,1)\\) と \\(n _ {1,0}\\) 個の \\((1,0)\\) からなる列とする。\n\\(k=0,1,2,\\ldots,59\\) に対して順に次の操作を行う。\n\\(C\\) の \\(2 ^ k\\) の位の値を \\(b\\) とし、\\(S _ b\\) の末尾から要素を取り出し、削除する。\n取り出した要素を \\((x,y)\\)として、\\(X,Y\\) の \\(2 ^ k\\) の位の値をそれぞれ \\(x,y\\) とする。\n実装例は以下のようになります。\n以下の実装例では、列 \\(S _ 0,S _ 1\\) を明示的に持たず、\\((0,0),(0,1),(1,0),(1,1)\\) のそれぞれについて残っている個数のみを管理しています。\nまた、上のビットから計算を行うことで \\(2\\) 進法の各位の値から整数の値を求める処理を簡単にしています。",
+      "codes": [
+        "#include <iostream>\n#include <bit>\n\nint main() {\n    using namespace std;\n    unsigned a, b;\n    unsigned long C;\n    cin >> a >> b >> C;\n    unsigned c = popcount(C);\n\n    if((a + b + c) % 2 != 0 || a + b + c > 120 || a > b + c || b > c + a || c > a + b){\n        cout << \"-1\" << endl;\n        return 0;\n    }\n\n    // n?? = X, Y の k 桁目が ?? であるような k の個数\n    unsigned n00{60 - (a + b + c) / 2}, n01{(-a + b + c) / 2}, n10{(a - b + c) / 2}, n11{(a + b - c) / 2};\n\n    unsigned long X{}, Y{};\n    for(unsigned B = 60; B--;){ // 上の bit から見る\n        // 1 bit ずつ上に持ち上げて\n        X *= 2;\n        Y *= 2;\n\n        if(1 & (C >> B)){ // C の B bit 目が 1 なら\n            if(n10){ // (1, 0) が余っていれば\n                ++X; // X の B bit 目を 1, Y の b bit 目を 0 に\n                --n10; // 在庫を減らす\n            }else{ // 余っていなければ\n                ++Y; // Y のほうを 1 に\n                --n01; // 在庫を減らしておく\n            }\n        }else{ // B bit 目が 0 なら\n            if(n00){ // (0, 0) が余っていれば\n                --n00; // どちらも 0 にし、在庫を減らす\n            }else{ // 余っていなければ\n                ++X; // どちらも 1 にし、\n                ++Y;\n                --n11; // 在庫を減らす\n            }\n        }\n    }\n\n    cout << X << \" \" << Y << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "73a55afceaf1f846094f85d8ee3c212cc06e5703cd0957f441bad516d6a80a0c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc347/abc347_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc347/editorial/9703",
+      "text": "下の bit から順に決めていく動的計画法を用いることで場合分けをせずに解くことができます。\n具体的には\n\\[ dp[i][j][k] = (\\text{下から } i \\text{ bit 決めていて、} \\text{popcount}(X) = j, \\text{popcount}(Y) = k \\text{のときの} (X, Y)) \\]\nとすればよいです。\nただし、そのような定め方が存在するかどうかのフラグを別で持っておく必要があります。",
+      "codes": [],
+      "text_sha256": "14bb59d864691b714b1eb6dd29cb2c23d6bfdbb1416ee41a5d74c6c88bf4a8b5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc347/abc347_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc347/editorial/9729",
+      "text": "\\(C = \\sum_{i=0}^{59} 2^i\\cdot c_i\\)\n(where\n\\(c_i\\in\\{0, 1\\}\\)\n) とします。\nこのとき、\n\\(c_i = 0\\)\nであるような\n\\(i\\)\nの集合を\n\\(S_0\\)\n、\n\\(c_i = 1\\)\nであるような\n\\(i\\)\nの集合を\n\\(S_1\\)\nとします。\n\\(S_0\\)\n,\n\\(S_1\\)\nの部分集合のうち要素数が\n\\(p\\)\n個,\n\\(q\\)\n個のもの（のうち任意に固定したもの）を\n\\(S_0^p\\)\n,\n\\(S_1^q\\)\nとおきます。\nこのとき、下記のように\n\\(x\\)\n,\n\\(y\\)\nを定義します。\n\\[\n\\begin{aligned}\nx &= \\sum_{i\\in S_0^p\\vee S_1^q} 2^i, \\\\\ny &= \\sum_{i\\in S_0^p\\vee(S_1\\smallsetminus S_1^q)} 2^i.\n\\end{aligned}\n\\]\n構成から、\n\\(x\\oplus y = C\\)\nとなることはわかります。\nすなわち、\n\\(S_0^p\\)\nと\n\\(S_1^q\\)\nの選び方によって\n\\(x\\oplus y\\)\nが変わることはありません。\nまた、xor の性質から、上記以外の選び方で\n\\(x\\oplus y = C\\)\nとなることはありません。\nよって、\n\\(p\\)\n,\n\\(q\\)\nを\n\\(0\\)\n以上\n\\(60\\)\n以下の範囲で全探索し、popcount に関する条件を調べればよいです。\n実装例においては、\n\\(S_0^p\\)\nを考える代わりに、「\n\\(S_0\\)\nのうち値が\n\\(i\\)\n以下のもの」を使っています（\n\\(S_1^q\\)\nも同様）。\n提出 #51955920\n実際には、\n\\(p\\)\n,\n\\(q\\)\nは一意（存在しないか、存在すれば一通り）なので、二重ループの部分は削ることができます。",
+      "codes": [],
+      "text_sha256": "07a09738a86c8926cb141836a13c2d7a945917c512a42ef033b1f1229b9f7d56",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc347/abc347_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc347/editorial/9704",
+      "text": "次の手順で答えを求めることができます。\n\\(X\\)\nと\n\\(Y\\)\nを\n\\(0\\)\nで初期化する。\n\\(C\\)\nの立っている bit をすべて調べる。各 bit について、\n\\(X\\)\nと\n\\(Y\\)\nのうち、popcount が目標数により足りない方のその bit を立てる。\n\\(C\\)\nの立っていない bit をすべて調べる。目標が達成されていない限り、そのような bit を\n\\(X, Y\\)\nの両方で立てる。\nここまでで目標が達成されていれば\n\\(X, Y\\)\nが解であり、達成されていなければ解は存在しない。\n正当性を示します。\n\\(A = a - \\mathrm{popcount}(X), B = b - \\mathrm{popcount}(Y)\\)\nとします。\n\\(A, B\\)\nは「その時点で、\n\\(X\\)\nや\n\\(Y\\)\nの popcount が目標数にどれだけ足りないか」を表します。目標は、\n\\(A = B = 0\\)\nとすることです。\nここで次の事実が重要です。\n\\(C\\)\nの立っている bit をひとつ確定させるたびに、\n\\(A + B\\)\nの値は必ず\n\\(1\\)\n減る。そのため、\n\\(C\\)\nの立っている bit をすべて確定させた時点での\n\\(A + B\\)\nの値は、それらの bit の決め方によらない。\n\\(C\\)\nの立っていない bit を変化させても、\n\\(A - B\\)\nの値は変化しない。\n2. より、\n\\(C\\)\nの立っている bit をすべて確定させた時点で、\n\\(A = B\\)\nとなっていなければなりません。さらに 1. より、\n\\(A = B\\)\nとなってさえいれば、どのように決めても目標達成の可否に影響しません。（\n\\(A = B = 0 \\iff A+B = A-B = 0\\)\nに注意してください。）\nしたがって、\n\\(C\\)\nの立っている bit を決めるパートで、\n\\(|A - B|\\)\nを最小化するように決めていけばよいです。",
+      "codes": [],
+      "text_sha256": "b64dca71c63caf1465d53477be82b0a47b6daf2956a22e70327c78c8bdd8cd40",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc347/abc347_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

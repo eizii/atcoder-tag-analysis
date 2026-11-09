@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc166_b",
+  "editorials": [
+    {
+      "text": "B: Trick or Treat\n各すぬけ君について, お菓子を持っているか否かを調べます.\n以下はC++ での実装例です.\n1 #include <bits/stdc++.h>\n2 using namespace std;\n3\n4 int N, K;\n5 vector<int> d;\n6 vector<vector<int>> A;\n7\n8 void input() {\n9\ncin >> N >> K;\n10\nd.resize(K);\n11\nA.resize(K, vector<int>());\n12\nfor(int i = 0; i < K; i++) {\n13\ncin >> d[i];\n14\nA[i].resize(d[i]);\n15\nfor(int j = 0; j < d[i]; j++) {\n16\ncin >> A[i][j];\n17\n}\n18\n}\n19 }\n20\n21 void solve() {\n22\nint ans = 0;\n23\nfor(int i = 1; i <= N; i++) {\n24\nbool have = false;\n25\nfor(auto v : A) {\n26\nfor(auto p : v) {\n27\nif(p == i) have = true;\n28\n}\n29\n}\n30\nif(!have) ans++;\n31\n}\n32\ncout << ans << endl;\n33 }\n34\n35 int main() {\n36\ninput();\n37\nsolve();\n\n38\nreturn 0;\n39 }\n",
+      "text_sha256": "ba7ac6216f728f422c4644ecca2a6c98ecd6b8f12f2cd3499a427e136f03cc51",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc166/abc166_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

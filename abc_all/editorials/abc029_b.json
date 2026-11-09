@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc029_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc029/editorial.pdf",
+      "text": "問題 B - カキ\n\f\n           B: 問題内容\n\n●12 個の文字列が入力されるので\n 「牡蠣を食べてもいい月」 ('r' がつく月)\n の個数を数えてください\n\n\n  “September” : 食べていい\n  “August” : 食べちゃダメ\n\f\n              B: 解説\n\n\n●文字列が 12 個あることはとりあえず忘れて、\n まずは 1 個の文字列に 'r' が入っているか判定\n\n\n●言語によって細部は異なるが\n おおむねこのようなコードでできる\n\n\n  found = 0    // 文字列 S に 'r' が 入っていれば 1, 入っていなければ 0 に\n  for i = 0 .. |S|-1 do\n     if S[i] = 'r' then found = 1\n end for\n   // この時点で found に判定結果が入っている\n\f\n             B: 解説\n\n\n●1 個の文字列について判定できたら、\n それを 12 回繰り返して結果を集計する\n\n\n ans = 0    // 答えをここに入れる\n  for i = 0 .. 11 do\n 標準入力から文字列を読み込んで S に入れる\n  （ここに前ページのコード）\n   ans = ans + found\n end for\n  print ans\n\f\nB: ソースコード例 (C++)\n\n\n\n\n\n               言語の標準ライブラリを\n               使ったりすると\n               少し楽ができるかも",
+      "codes": [],
+      "source": "official_pdf_letter_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "0fcd43d83c56555cf628a4f1cda8a0506e3e514729aa9f761ac2990250db6d8f"
+    }
+  ],
+  "status": "available"
+}

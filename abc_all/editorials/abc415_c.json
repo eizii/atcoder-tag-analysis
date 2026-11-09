@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc415_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc415/editorial/13483",
+      "text": "事前知識\nこの問題では、ビット列で表現された集合について扱います。以下の記事のうち基本的な内容を理解することが、この問題の解説の理解の助けになるかもしれません。\nAPG4b-AC 3.05.ビット演算\nビット列による部分集合表現 【ビット演算テクニック Advent Calendar 2016 1日目】\nまず、薬をひとつも混ぜていない状態を状態\n\\(0\\)\nとし、これを安全な状態として定義しておくと便利です。\nつまり、あらかじめ文字列\n\\(S\\)\nを “\n0\n”+\n\\(S\\)\nに変更しておくと、 (多くの言語では文字列の始まりが\n\\(0\\)\n文字目であるという点からも) 後の実装が楽です。\nこの問題で要求されていることは、状態\n\\(0\\)\nから薬品を\n\\(1\\)\n種類ずつ追加して状態\n\\(2^N-1\\)\nに到達できるか判定することです。\n当然ながら状態\n\\(0\\)\nには到達可能であり、あとは各状態から次に到達できる状態がどのようなものかを調べていけば良いです。\nある状態\n\\(x\\)\nから次に到達できる状態を調べる方法は次の通りです。\n状態\n\\(x\\)\nに到達できない場合は、状態\n\\(x\\)\nから先に進むことを考える必要はない。\nそうでなければ\n\\(k=1,2,\\dots,N\\)\nについて以下を繰り返す。\nもし\n\\(x\\)\nの下から\n\\(k\\)\nビット目が立っていなければ薬品\n\\(k\\)\nはまだ混ぜられておらず、薬品\n\\(k\\)\nを加えることで状態\n\\(y=x+2^{k-1}\\)\nとなる。\nこの状態\n\\(y\\)\nが安全であれば、状態\n\\(y\\)\nに到達できることが分かる。\n以上の判定を状態の番号の昇順に行い、各状態に到達できるかどうかを求めていけば良いです。\n時間計算量はケース当たり\n\\(O(2^N N)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int t;\n  cin >> t;\n  while(t>0){\n    t--;\n    int n;\n    cin >> n;\n    string s;\n    cin >> s;\n    s=\"0\"+s;\n    vector<int> ok(1<<n,0);\n    ok[0]=1;\n    for(int i=0;i<(1<<n);i++){\n      if(ok[i]==0){continue;}\n      for(int j=0;j<n;j++){\n        if(i&(1<<j)){continue;}\n        int next=(i|(1<<j));\n        if(s[next]=='0'){ ok[next]=1; }\n      }\n    }\n    if(ok[(1<<n)-1]){cout << \"Yes\\n\";}\n    else{cout << \"No\\n\";}\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "968287426ae9aff95494a6c0bd8c2a001a8de58b98a2282adf1c232954ab98e1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc415/abc415_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

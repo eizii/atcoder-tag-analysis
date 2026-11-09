@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc168_a",
+  "editorials": [
+    {
+      "text": "A: ∴(Therefore)\n1 の位ごとに場合分けをしても解けますが，より簡潔に書けないでしょうか？\nC/C++ やC#, Java などにはswitch 文というものがあり，これを使うことで問題文通りの記述\nを直感的に書けます(C での実装例を以下に示します)．\n余談ですが，Ruby ではcase 文がこれにあたり，もっと高機能です．\nListing 1\nC での実装例\n1 #include <stdio.h>\n2\n3 int main(void) {\n4\nint n;\n5\nscanf(\"%d\", &n);\n6\n7\nswitch (n % 10) {\n8\ncase 2:\n9\ncase 4:\n10\ncase 5:\n11\ncase 7:\n12\ncase 9:\n13\nputs(\"hon\");\n14\nbreak;\n15\ncase 0:\n16\ncase 1:\n17\ncase 6:\n18\ncase 8:\n19\nputs(\"pon\");\n20\nbreak;\n21\ncase 3:\n\n22\nputs(\"bon\");\n23\nbreak;\n24\n}\n25\n26\nreturn 0;\n27 }\n",
+      "text_sha256": "6415d50ee837e50151c024d17daa38543d6f140e4988cfff86467337b379df81",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc168/abc168_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

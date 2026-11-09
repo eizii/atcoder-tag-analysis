@@ -1,0 +1,64 @@
+{
+  "problem_id": "arc061_b",
+  "title": "Snuke's Coloring",
+  "contests": [
+    {
+      "contest_id": "abc045",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 1682,
+  "raw_difficulty": 1682,
+  "contest_id": "abc045",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc045/tasks/arc061_b",
+  "statement": "配点 : 400 点 問題文 縦 H 行、横 W 列のマス目からなる盤があります。最初、どのマス目も白く塗られています。 すぬけ君が、このうち N マスを黒く塗りつぶしました。 i 回目 ( 1 \\leq i \\leq N ) に塗りつぶしたのは、\r\n上から a_i 行目で左から b_i 列目のマスでした。 すぬけ君がマス目を塗りつぶした後の盤の状態について、以下のものの個数を計算してください。 各整数 j ( 0 \\leq j \\leq 9 ) について、盤の中に完全に含まれるすべての 3 行 3 列の連続するマス目のうち、黒いマスがちょうど j 個あるもの。 制約 3 \\leq H \\leq 10^9 3 \\leq W \\leq 10^9 0 \\leq N \\leq min(10^5,H×W) 1 \\leq a_i \\leq H (1 \\leq i \\leq N) 1 \\leq b_i \\leq W (1 \\leq i \\leq N) (a_i, b_i) \\neq (a_j, b_j) (i \\neq j) 入力 入力は以下の形式で標準入力から与えられる。 H W N a_1 b_1 : a_N b_N 出力 出力は 10 行からなる。 j+1 行目 ( 0 \\leq j \\leq 9 ) には、盤の中に完全に含まれるすべての 3 行 3 列の連続するマス目のうち、黒いマスがちょうど j 個あるものの\r\n総数を出力せよ。 入力例 1 4 5 8\r\n1 1\r\n1 4\r\n1 5\r\n2 3\r\n3 1\r\n3 2\r\n3 4\r\n4 4 出力例 1 0\r\n0\r\n0\r\n2\r\n4\r\n0\r\n0\r\n0\r\n0\r\n0 この盤に含まれる 3×3 の正方形は全部で 6 個ありますが、これらのうち 2 個の内部には黒いマスが 3 個、残りの 4 個の内部には黒いマスが 4 個含まれています。 入力例 2 10 10 20\r\n1 1\r\n1 4\r\n1 9\r\n2 5\r\n3 10\r\n4 2\r\n4 7\r\n5 9\r\n6 4\r\n6 6\r\n6 7\r\n7 1\r\n7 3\r\n7 7\r\n8 1\r\n8 5\r\n8 10\r\n9 2\r\n10 4\r\n10 9 出力例 2 4\r\n26\r\n22\r\n10\r\n2\r\n0\r\n0\r\n0\r\n0\r\n0 入力例 3 1000000000 1000000000 0 出力例 3 999999996000000004\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 縦 H 行、横 W 列のマス目からなる盤があります。最初、どのマス目も白く塗られています。 すぬけ君が、このうち N マスを黒く塗りつぶしました。 i 回目 ( 1 \\leq i \\leq N ) に塗りつぶしたのは、\r\n上から a_i 行目で左から b_i 列目のマスでした。 すぬけ君がマス目を塗りつぶした後の盤の状態について、以下のものの個数を計算してください。 各整数 j ( 0 \\leq j \\leq 9 ) について、盤の中に完全に含まれるすべての 3 行 3 列の連続するマス目のうち、黒いマスがちょうど j 個あるもの。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 3 \\leq H \\leq 10^9 3 \\leq W \\leq 10^9 0 \\leq N \\leq min(10^5,H×W) 1 \\leq a_i \\leq H (1 \\leq i \\leq N) 1 \\leq b_i \\leq W (1 \\leq i \\leq N) (a_i, b_i) \\neq (a_j, b_j) (i \\neq j)"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 H W N a_1 b_1 : a_N b_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 出力は 10 行からなる。 j+1 行目 ( 0 \\leq j \\leq 9 ) には、盤の中に完全に含まれるすべての 3 行 3 列の連続するマス目のうち、黒いマスがちょうど j 個あるものの\r\n総数を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 5 8\r\n1 1\r\n1 4\r\n1 5\r\n2 3\r\n3 1\r\n3 2\r\n3 4\r\n4 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 0\r\n0\r\n0\r\n2\r\n4\r\n0\r\n0\r\n0\r\n0\r\n0 この盤に含まれる 3×3 の正方形は全部で 6 個ありますが、これらのうち 2 個の内部には黒いマスが 3 個、残りの 4 個の内部には黒いマスが 4 個含まれています。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 10 20\r\n1 1\r\n1 4\r\n1 9\r\n2 5\r\n3 10\r\n4 2\r\n4 7\r\n5 9\r\n6 4\r\n6 6\r\n6 7\r\n7 1\r\n7 3\r\n7 7\r\n8 1\r\n8 5\r\n8 10\r\n9 2\r\n10 4\r\n10 9"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 4\r\n26\r\n22\r\n10\r\n2\r\n0\r\n0\r\n0\r\n0\r\n0"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1000000000 1000000000 0"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 999999996000000004\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0\r\n0"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc045/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:33:39.606497+00:00",
+  "statement_sha256": "2be7e3868c12c45ab8d13475d0c7ce7cdf861f6d1141d87d3a5e35e1db9533e4",
+  "editorials": []
+}

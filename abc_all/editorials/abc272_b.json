@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc272_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc272/editorial/4969",
+      "text": "人\n\\(i\\)\nと人\n\\(j\\)\nは同じ舞踏会に参加したことがあるかを、二次元配列を使って管理します。\n各舞踏会について、参加している二人の組を全探索し、上述の配列を更新することでこの問題に\n\\(\\mathrm{O}(N^2M)\\)\nで答えられます。\n二次元配列については、\n前回のABC-B\nの解説が参考になります。\nまた以下の実装例も参考にしてください。\n実装例(c++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<vector<bool>> chk(n, vector<bool>(n, false));\n    for(int i = 0; i < m; i++) {\n        int k;\n        cin >> k;\n        vector<int> a(k);\n        for(auto &v : a) cin >> v, --v;\n        for(int j = 0; j < (int)a.size() - 1; j++) {\n            for(int k = j + 1; k < (int)a.size(); k++) {\n                chk[a[j]][a[k]] = true;\n            }\n        }\n    }\n    bool ans = 1;\n    for(int i = 0; i < n; i++) {\n        for(int j = i + 1; j < n; j++) {\n            ans &= chk[i][j];\n        }\n    }\n    cout << (ans ? \"Yes\" : \"No\") << endl;\n}"
+      ],
+      "text_sha256": "0496b15735a60573c392a6a376d4605c1fb9aba40886bf06b35c6284f71774ef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc272/abc272_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc272/editorial/5411",
+      "text": "\\(Boolean\\)\n型の\n\\(M×N行列X\\)\nを\n\\(X[i][j] = (i回目の舞踏会に人jが参加したならTrue, そうでないならFalse)\\)\nとします。\nこのとき、\n\\(^t\\!X\\)\nと\n\\(X\\)\nの行列積\n\\(^t\\!X\\times X\\)\nをY(N×N行列)とおくと、\n\\((Yの(i, j)成分)= \\lor_{k = 1}^M X[k][i] \\land X[k][j] = (人iと人jが少なくとも1回同じ舞踏会に参加していればTrue, そうでないならFalse)\\)\nとなります。\n従って\n\\(Y\\)\nの全ての要素が\n\\(True\\)\nならば答えはYes, そうでないなら答えはFalseです。\n提出",
+      "codes": [
+        "import sys\nimport numpy as np\n\n\n# 入力\nN, M = map(int, input().split())\n\n# X[i][j] = (i回目の舞踏会に人jが参加したならTrue, そうでないならFalse) M×N行列\nX = np.zeros(shape=(M, N), dtype='?')\nfor i, line in enumerate(sys.stdin.readlines()):\n  x = np.fromstring(line, sep=' ', dtype=int)[1:]\n  X[i][x - 1] = True\n\n# Y[i][j] = (人iと人jが少なくとも1回同じ舞踏会に参加していればTrue, そうでないならFalse) N×N行列\nY = X.T @ X\n\n# Yの要素が全てTrueならYes, そうでないならNo\nprint('Yes' if Y.all() else 'No')"
+      ],
+      "text_sha256": "158fdfd4fcc72cdada3861e44b0b8abce5c52ba1d9ad8ff624c4d1a1d14a996d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc272/abc272_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

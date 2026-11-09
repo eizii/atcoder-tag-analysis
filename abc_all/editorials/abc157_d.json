@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc157_d",
+  "editorials": [
+    {
+      "text": "D: Friend Suggestions\n人を頂点、友達関係を辺とした無向グラフを考えると、人i に対する答えは、\n(頂点i の連結成分のサイズ)\n−(頂点i と頂点j が同じ連結成分に含まれて、人i と人j が友達関係もしくはブロック関係にあるよ\nうなj の数)\n−1\nです(最後の1 は自分自身)。\n各頂点が属する連結成分を求め、各連結成分のサイズを求めておけば、各人ごとの上記の値を高速に\n計算することが出来ます。\nこれは、Union Find のようなデータ構造を用いるか、もしくはグラフ上でDFS を行うこと等により\n実現出来ます。\n時間計算量は、例えばDFS の場合はO (N + M + K) です。\n",
+      "text_sha256": "cb0908a3bb2607709a7ad2fc088b65d6ba079d347e9f7a96995f4e2b0063832e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc157/abc157_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc443_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc443/editorial/15184",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nこの問題は、入力から受け取った文字列の末尾に\ns\nをつけた文字列を出力することで正答することができます。\n入力の受け取りや文字列の末尾に文字を追加する操作、出力の方法は言語によって異なります。以下に C++、Python3、Java の解答例を示します。\n実装例(C++)\n実装例(Python3)\n実装例(Java)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tstring s;\n\tcin >> s;\n\ts += 's';\n\tcout << s << endl;\n\treturn 0;\n}",
+        "s = input()\ns += 's'\nprint(s)",
+        "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.next();\n        s += \"s\";\n        System.out.println(s);\n    }\n}"
+      ],
+      "text_sha256": "6480095964cc22c1352e4752ff3ac18a4c06761afe9bdf51a97e96ca9a519f06",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc443/abc443_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

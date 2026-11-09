@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc452_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc452/editorial/18411",
+      "text": "実装方針\n五節句の日付\n\\(5\\)\nつをリストとして管理し，その各要素について\n\\((M,D)\\)\nが一致するかどうかを判定すればよいです．\n実装例 (Python3, C++)\nPython3 での実装例を以下に示します．\nC++ での実装例を以下に示します．",
+      "codes": [
+        "m, d = map(int, input().split())\n\ngossekulist = [(1,7), (3,3), (5,5), (7,7), (9,9)]\n\nif ((m,d) in gossekulist):\n\tprint(\"Yes\")\nelse:\n\tprint(\"No\")",
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n#include <vector>\nusing std::vector;\nusing std::pair;\nusing std::make_pair;\n\nint main (void) {\n\tstd::cin.tie(nullptr);\n\tstd::ios_base::sync_with_stdio(false);\n\n\tint m, d;\n\tcin >> m >> d;\n\n\tvector<pair<int, int> > gosekkulist = {\n\t\t{1,7},\n\t\t{3,3},\n\t\t{5,5},\n\t\t{7,7},\n\t\t{9,9}\n\t};\n\tbool isgosekku = false;\n\tfor (const pair<int,int> &date : gosekkulist) {\n\t\tif (make_pair(m,d) == date) isgosekku = true;\n\t}\n\n\tif (isgosekku) {\n\t\tcout << \"Yes\" << \"\\n\";\n\t} else {\n\t\tcout << \"No\"  << \"\\n\";\n\t}\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "2fca14cf4ab60cf40c2a7f96304589c00302fabee8802f18f61a26a023ccad4b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc452/abc452_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

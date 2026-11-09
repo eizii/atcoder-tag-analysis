@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc226_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc226/editorial/2880",
+      "text": "サンプル 2 を例に考えてみましょう。すべての街同士を行き来したい場合は\n\\((\\pm1,0),(\\pm2,0),(\\pm3,0)\\)\nが必要ですが、後ろの\n\\(2\\)\nつは\n\\((\\pm1, 0)\\)\nを複数回繰り返せば移動できるので不要でることがわかります。\nこれをより一般化すると、次のようなことが言えると思います。\n街\n\\(i\\)\nから街\n\\(j\\)\nへ行くときの座標の変化が\n\\((X,Y)\\)\nだとする。また、\n\\(X, Y\\)\nはどちらも\n\\(d\\)\nで割り切れる。このとき、魔法\n\\((X,Y)\\)\nを覚えるよりも魔法\n\\((\\frac{X}{d}, \\frac{Y}{d})\\)\nを覚える方がよい。\nここから、座標の変化\n\\((X,Y)\\)\nが分かった時に、\n\\(X,Y\\)\nに共通する\n\\(2\\)\n以上の約数が存在しなくなるまで\n\\(X,Y\\)\nから同じ数を割り続ければ覚えるべき魔法が特定できます。このような操作を行いたい場合、実は\n\\(X\\)\nと\n\\(Y\\)\nの最大公約数 (GCD) と呼ばれる数を割ればよいということが知られています。\n以上の考察により、すべての異なる街の組\n\\((i,j)\\)\nに対して次の操作を行うことが最適であることが示せます。\n\\((x_i, y_i)\\)\nから\n\\((x_j, y_j)\\)\nに行くことを考える。\nまず、\n\\(X = x_j - x_i, Y = y_j - y_i\\)\nとする。\n次に\n\\(g = \\gcd(X, Y)\\)\nとして\n\\(X \\gets \\frac{X}{g}, Y \\gets \\frac{Y}{g}\\)\nに変換する。そして、魔法\n\\((X, Y)\\)\nを覚える。\n\\(\\gcd(X,Y)\\)\nの計算量は\n\\(\\mathrm{O}(\\log \\max(X,Y))\\)\nです。以上よりこの問題を\n\\(\\mathrm{O}(N^2 \\log \\max(X,Y))\\)\nで解くことができました。",
+      "codes": [],
+      "text_sha256": "9a9c3f8d9aa8ec8175d8207e234aae489c00924ef245b4be70c336f3a425f338",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc226/abc226_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

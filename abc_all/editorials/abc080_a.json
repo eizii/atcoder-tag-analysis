@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc080_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc080/editorial.pdf",
+      "text": "A:  Parking\n\n プラン1 を選んで駐車した場合、駐車料金はA × N 円となり、プラン2 を選んで駐車した場\n合、駐車料金はB 円となるので、A × N とB の小さいほうを出力するとよいです。\n\n#include <cstdio >\nint N,A,B;\nint main ()\n{\n         scanf (\"%d%d%d\",&N,&A,&B);\n        if(N*A<=B)printf (\"%d\\n\",N*A);\n         else printf (\"%d\\n\",B);\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "ccefc3df6e36a0625f715d80f903826281f838cf445d0714cf850e2695c4c94c"
+    }
+  ],
+  "status": "available"
+}

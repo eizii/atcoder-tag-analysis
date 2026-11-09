@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc205_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc205/editorial/2057",
+      "text": "問題を次のように言い換えます : 食べ物 \\(R_1, R_2, \\dots, R_H\\) と飲み物 \\(C_1, C_2, \\dots, C_W\\) がある。 \\(N\\) 人がそれぞれ食べ物と飲み物についての要望を出している。 人 \\(i \\, (1 \\leq i \\leq N)\\) の要望は以下のようである : \\(R_{a_i}, R_{a_i + 1}, \\dots, R_{c_i}\\) のうち一つと、 \\(C_{b_i}, C_{b_i + 1}, \\dots, C_{d_i}\\) のうち一つが欲しい。 同じ食べ物や飲み物を複数の人に割り当てることはできないとき、最大で何人の要望を満たすことができるか？ これは最大流問題に帰着することができます。 以下の頂点を用意する。 \\(\\mathrm{src}, \\mathrm{dst}\\) \\(R_1, \\dots, R_H\\) \\(C_1, \\dots, C_W\\) \\(U_1, \\dots, U_N\\) \\(V_1, \\dots, V_N\\) \\(\\mathrm{src}\\) から全ての \\(R_i\\) へ容量 \\(1\\) の辺を張る。 各 \\(i \\, (1 \\leq i \\leq N)\\) について以下の処理を行う。 \\(R_{a_i}, R_{a_i + 1}, \\dots, R_{c_i}\\) から \\(U_i\\) ヘ容量 \\(1\\) の辺を張る。 \\(U_i\\) から \\(V_i\\) へ容量 \\(1\\) の辺を張る。 \\(V_i\\) から \\(C_{b_i}, C_{b_i + 1}, \\dots, C_{d_i}\\) へ容量 \\(1\\) の辺を張る。 全ての \\(C_i\\) から \\(\\mathrm{dst}\\) へ容量 \\(1\\) の辺を張る。 \\(\\mathrm{src}\\) から \\(\\mathrm{dst}\\) への最大流を求める。 入力例 \\(1\\) に対応するグラフは下の図のようになります。 \\(V = H + W + N, E = (H + W)N, F = \\min(H, W, N)\\) として、Ford-Fulkerson のアルゴリズムを用いると \\(O(FE)\\) 、Dinic のアルゴリズムを用いると \\(O(E\\sqrt V)\\) の時間計算量で解くことができます。 実装例 (C++)",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "b86a5178ebb2addf70aea3eef5d0c7dff6685293bddf9406cb49a4cb53739b99"
+    }
+  ],
+  "status": "available"
+}

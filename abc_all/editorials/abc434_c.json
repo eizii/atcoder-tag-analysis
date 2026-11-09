@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc434_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc434/editorial/14685",
+      "text": "まず、高橋君の移動としてあり得るものは様々ですから、高橋君の行動を 1 点読みして計算していくのは大変そうです。\nそこで、高橋君が飛ぶことが出来る高度の範囲を考えてみることにします。すると、高橋君がこれまでの目標を全て達成しながら飛ぶことが出来る高度の範囲は、\n空である、すなわちどのように飛行しても高橋君はこれまでの目標を満たせないか、あるいは\nある\n\\(L \\leq U\\)\nを用いて\n\\(L \\leq x \\leq U\\)\nあるいは\n\\(L \\lt x \\leq U\\)\nと表せるか\nのどちらかです。\n後者が「\n\\(L \\leq x \\leq U\\)\nあるいは\n\\(L \\lt x \\leq U\\)\n」という中途半端な条件になっているのは「高橋君は\n高度\n\\(0\\)\n以下\nにいられない」という制約によるものです。この条件を 「高橋君は\n高度\n\\(1\\)\n未満\nにいられない」と厳しくしても答えが変わらないことが証明できるので(理由の説明は省略します)、簡単のためこちらの条件で問題を解きましょう。そうすると、高橋君がこれまでの目標を全て達成しながら飛ぶことが出来る高度の範囲は、\n空であるか、あるいは\nある\n\\(L \\leq U\\)\nを用いて\n\\(L \\leq x \\leq U\\)\nと表せるか\nのどちらかになることが証明できます。\n理由を説明します。時刻\n\\(t\\)\nに高橋君が\n\\(L_t \\leq x \\leq U_t\\)\nの範囲を飛行できたとします。この時、時刻が\n\\(d\\)\n進んで時刻\n\\(t+d\\)\nになった時の高橋君が飛行可能な範囲は以下のように計算できます：\n時刻が\n\\(d\\)\n進むと\n\\(d\\)\nだけ移動できるので\n\\(L = L_t - d, U = U_t + d\\)\nとする。\n高度\n\\(1\\)\n未満は飛行できないので\n\\(L = \\max(1, L)\\)\nとする。\n入力で与えられる目標\n\\(t_i, l_i, u_i\\)\nについて\n\\(t_i = t+d\\)\nとなる\n\\(i\\)\nが存在したとする。すると高橋君は\n\\(l_i \\leq x \\leq u_i\\)\nの範囲にいる必要があるので\n\\(L = \\max(L, l_i), U = \\min(U, u_i)\\)\nとする。この操作によって\n\\(L \\gt U\\)\nとなった場合、高橋君が飛行可能な範囲は空となる。\nこの計算によって得られる高橋君が飛行可能な範囲は空であるか\n\\(L \\leq x \\leq U\\)\nを満たすかのどちらかです。よって前述の内容が証明できました。\nよって、各目標の時刻について高橋君が飛行可能な範囲が空にならないかを判定すればよいことが確認できるので、これを計算すれば最終的な高橋君が飛行可能な範囲が空かどうかが計算できます。計算量は\n\\(\\mathrm{O}(N)\\)\nで十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n  int N, H;\n  cin >> N >> H;\n  vector<int> T(N), L(N), U(N);\n  for (int i = 0; i < N; i++) cin >> T[i] >> L[i] >> U[i];\n\n  int t_prev = 0, l = H, u = H;\n  for (int i = 0; i < N; i++) {\n    int d = T[i] - t_prev;\n    l -= d, u += d;\n    t_prev = T[i];\n\n    l = max(l, L[i]);\n    u = min(u, U[i]);\n\n    if (l > u) {\n      cout << \"No\\n\";\n      return;\n    }\n  }\n  cout << \"Yes\\n\";\n}\n\nint main() {\n  cin.tie(0)->sync_with_stdio(0);\n  int T;\n  cin >> T;\n  while (T--) solve();\n}"
+      ],
+      "text_sha256": "182ad626293699d71a9a48e218d59180da3822d7b411ef2f318ea88e2ba34921",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc434/abc434_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

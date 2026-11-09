@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc254_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc254/editorial/4050",
+      "text": "解法\n問題文の記述に従って\n\\(a_{i,j}\\)\nの値を求めていくことにします。\n各\n\\(i\\)\n\\((0\\leq i \\leq N-1)\\)\nについて、\n\\(A_i\\)\nの長さは\n\\(i+1\\)\nである。\nという記述より、各数列(プログラム上では配列)を適切なサイズにします。\n記述に素直な書き方をするとこのようになるでしょう。\nあるいは、今回の問題では配列を\n\\(N \\times N\\)\nサイズで作っても問題ないため、そのように作って一部だけ使うことにしても良いです。\n続いて、\n各\n\\(i,j\\)\n\\((0\\leq i \\leq N-1, 0 \\leq j \\leq i)\\)\nについて、\n\\(A_i\\)\nの\n\\(j+1\\)\n番目の値\n\\(a_{i,j}\\)\nは次のように定められる。\n\\(j=0\\)\nまたは\n\\(j=i\\)\nの時、\n\\(a_{i,j}=1\\)\nそれ以外の時、\n\\(a_{i,j} = a_{i-1,j-1} + a_{i-1,j}\\)\nという記述に従って\n\\(a_{i,j}\\)\nの値を求めていきます。\n「\n\\(j=0\\)\nまたは\n\\(j=i\\)\nの時、\n\\(a_{i,j}=1\\)\n」という部分に関しては、\n\\(a_{i,j}\\)\nを求める時にまず「\n\\(j=0\\)\nまたは\n\\(j=i\\)\n」という条件を満たすかどうかを調べ、満たすならば\n\\(a_{i,j}=1\\)\nとすれば良いです。\n「それ以外の時、\n\\(a_{i,j} = a_{i-1,j-1} + a_{i-1,j}\\)\n」とありますが、これは\n\\(a_{i,j}\\)\nを求めるにあたって\n\\(a_{i-1,j-1}\\)\nと\n\\(a_{i-1,j}\\)\nを先に求める必要があるということを示唆しています. よって、\n\\(i=0,1,\\ldots\\)\nの順に\n\\(a_{i,j}\\)\nを求めるようなループ文を書くと良いでしょう。 (なお、\n\\(i=0\\)\nの場合は\n\\(a_{i-1,j-1}\\)\n等が存在しませんが、\n\\(i=0\\)\nの場合の\n\\(j\\)\nとして考えられるものは\n\\(j=0\\)\nのみなので\n\\(j=0\\)\nまたは\n\\(j=i\\)\nの時に該当し、問題ないことが確かめられます。)\n実装例\n余談\n本問で問われている数の並びは\nパスカルの三角形\nと呼ばれるものです。\n\\(a_{n,r}\\)\nの値は\n\\({}_nC_r\\)\n、 すなわち\n\\(n\\)\n個のうちから\n\\(r\\)\n個選ぶ方法の個数に等しいことが知られています。",
+      "codes": [
+        "vector<vector<int>> a(N);\n\nfor(int i=0;i<N;i++){\n\ta[i] = vector<int>(i+1);\n}",
+        "vector a(N,vector<int>(N));",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\t\n\tint N;\n\tcin>>N;\n\t\n\tvector a(N,vector<int>(N));\n\n\tfor(int i=0;i<N;i++){\n\t\ta[i] = vector<int>(i+1);\n\t}\n\t\n\tfor(int i=0;i<N;i++){\n\t\tfor(int j=0;j<i+1;j++){\n\t\t\tif(j==0||j==i)a[i][j] = 1;\n\t\t\telse{\n\t\t\t\ta[i][j] = a[i-1][j-1] + a[i-1][j];\n\t\t\t}\n\t\t}\n\t}\n\t\n\tfor(int i=0;i<N;i++){\n\t\tfor(int j=0;j<i+1;j++){\n\t\t\tif(j!=0)cout<<' ';\n\t\t\tcout<<a[i][j];\n\t\t}\n\t\tcout<<endl;\n\t}\n\t\n    return 0;\n}"
+      ],
+      "text_sha256": "c3e5ec5ef9f2014c7f44bed0e6b7fc3ca712fb19f6244f6bb3690c5b1804b143",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc254/abc254_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

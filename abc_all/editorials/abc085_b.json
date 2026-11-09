@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc085_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc085/editorial.pdf",
+      "text": "B: Kagami Mochi\n\n  問題文は遠回しな言い方をしていますが、要するに「d1, d2, . . . , dN には何種類の異なる値があるか？」と\n\n 聞いています。\n\n\n 方針1: 「自分でやる」\n\n   配列flag を用意し、はじめflag[1] = flag[2] = . . . = flag[100] = 0 とします。d1 からdN まで\n のそれぞれの値d に対してflag[d] = 1 とすると、flag の要素の和が答えとなります。\n\n   C++ での実装例:\n\n\n\n 1 #include <iostream>\n\n 2 using namespace std;\n\n 3 int N, flag[101];   // Global variables are initially all 0.\n\n 4                     // Also note that we need [101], not [100]!\n\n 5 int main(){\n\n 6     cin >> N;\n\n 7     for(int i = 0; i < N; ++i){\n\n 8         int d;\n\n 9         cin >> d;\n\n10         flag[d] = 1;\n\n11     }\n\n12     int ans = 0;\n\n13     for(int i = 0; i < N; ++i){\n\n14         ans += flag[i];\n\n15     }\n\n16     cout << ans << endl;\n\n17 }\n\n\n\n 方針2: 「set を使う」\n\n  多くの言語には重複を省いた集合を表すデータ構造が実装されており、たいていset か似たような名前を持\n\n  ちます。d1, d2, . . . , dN を入れたset の要素数がそのまま答えとなります。\n    Python での実装例（少し遊んでいます）:\n\n\n\n 1 1 print(len(set(input() for i in range(int(input())))))\n\n\n\n\n\n                                               2",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "b4cc37a4250f3d04218ac4de6bb128d00dba417bd0928162190a1cf4d460e696"
+    }
+  ],
+  "status": "available"
+}

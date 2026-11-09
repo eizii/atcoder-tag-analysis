@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc286_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5572",
+      "text": "まず、お土産の事を考えずに、都市\n\\(S\\)\nから都市\n\\(T\\)\nに移動する事が可能か判定し、移動できる場合は使用する直行便の本数の最小値を求める事を考えます。これは都市を頂点、直行便を重さ\n\\(1\\)\nの有向辺としたグラフにおいて最短経路問題を解くことによって求める事ができます。これを改良して、最短経路の中での購入するお土産の価値の総和の最大値を求められるようにしたいです。\n現状ではお土産の価値は頂点と紐づけられており、直接、最短経路問題として解くことはできません。\nしかし、ここで、最短経路の性質について考えると、同じ都市を\n\\(2\\)\n回以上訪れることはありません。そのため、都市\n\\(S\\)\nから都市\n\\(T\\)\nへ移動する高橋君の行動を次のように書き換える事ができます。\n高橋君はまず出発都市で 価値\n\\(A_S\\)\nのお土産を購入する。\nその後、「都市\n\\(U_i\\)\nから 都市\n\\(V_i\\)\nへ移動し、価値\n\\(A_{V_i}\\)\nのお土産を購入する」という行動を繰り返し、都市\n\\(T\\)\nへ移動する。\n\\(S,T\\)\nを固定した時、任意の経路において\n\\(1\\)\nつめのステップは共通なので、\n\\(2\\)\nつめのステップにおける(最短距離, 最短経路の中での価値の総和の最大値)を求めれば良いです。\n\\(\\cdots (*)\\)\nこれは、普通の最短経路問題において\n\\(d(X,Y)\\)\nで都市\n\\(X\\)\nから都市\n\\(Y\\)\nへの(暫定的な)最短距離を表し更新する部分を、\n\\((d(X,Y), val(X,Y))\\)\nで(都市\n\\(X\\)\nから都市\n\\(Y\\)\nへの(暫定的な)最短距離, (暫定的な)最短距離を達成する経路の中でのお土産の価値の総和の(暫定的な)最大値)を更新するように書き換えれば良いと分かります。\nこの時、辺\n\\(i\\)\nによる更新は、\n\\(d(X,U_i)+1<d(X,V_i)\\)\nまたは\n\\(d(X,U_i)+1=d(X,V_i)\\)\nかつ\n\\(val(X,U_i)+A_{V_i}>val(X,V_i)\\)\nの時に\n\\((d(X,V_i),val(X,V_i))\\leftarrow (d(X,U_i)+1,val(X,U_i)+A_{V_i})\\)\nと更新すれば良いです。(\n\\(val(X,Y)\\)\nの符号を反転させれば、辞書順で小さいものに書き換えるということもできます。)\nよって、このような更新を用いて、ワーシャルフロイド法を用いて任意の\n\\(2\\)\n点対間について答えを求める事ができます。計算量は\n\\(O(N^3)\\)\nであり、十分高速です。\nなお、先頭の基準となる\n\\(d(X,Y)\\)\nの値が辺を通ることによって必ず増加するため、いわゆる負閉路は存在しません。\nよって、始点を固定した ダイクストラ法等のアルゴリズム でも\n\\(O(N(M+N\\log N))\\)\n,\n\\(O(NM\\log N)\\)\n等の現実的な時間計算量で解く事ができます。\nよって、この問題を解く事ができました。\nc++による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint n;\n\tlong long a[300];\n\tstring s;\n\tint d[300][300];\n    long long val[300][300];\n\n\tcin >>n;\n\tfor(int i=0;i<n;i++)cin>>a[i];\n\n\tfor(int i=0;i<n;i++)for(int j=0;j<n;j++)d[i][j]=n,val[i][j]=0;\n\tfor(int i=0;i<n;i++)d[i][i]=0,val[i][i]=0;\n\tfor(int i=0;i<n;i++){\n\t\tcin >> s;\n\t\tfor(int j=0;j<n;j++){\n\t\t\tif(s[j]=='Y')d[i][j]=1,val[i][j]=a[j];\n\t\t}\n\t}\n\n\tfor(int j=0;j<n;j++){\n\t\tfor(int i=0;i<n;i++){\n\t\t\tfor(int k=0;k<n;k++){\n\t\t\t\tif((d[i][j]+d[j][k])<d[i][k]){\n\t\t\t\t\td[i][k]=d[i][j]+d[j][k];\n\t\t\t\t\tval[i][k]=val[i][j]+val[j][k];\n\t\t\t\t}\n\t\t\t\telse if(((d[i][j]+d[j][k])==d[i][k])&&((val[i][j]+val[j][k])>val[i][k])){\n\t\t\t\t\tval[i][k]=val[i][j]+val[j][k];\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\tint q,u,v;\n\tcin >> q;\n\tfor(int i=0;i<q;i++){\n\t\tcin >> u >> v;\n\t\tif(d[u-1][v-1]==n)cout<<\"Impossible\\n\";\n\t\telse cout<<d[u-1][v-1]<<\" \"<<(val[u-1][v-1]+a[u-1])<<\"\\n\";\n\t}\n\treturn 0;\n}"
+      ],
+      "text_sha256": "fc048aa976f7134ff6fa9450cfb6476f6aa9714aaafe6ef80a7278bd15ab7eff",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc286/abc286_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

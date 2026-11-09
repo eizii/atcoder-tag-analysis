@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc005_2",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc005/editorial.pdf",
+      "text": "B問題 おいしいたこ焼きの食べ方\n\n  問題概要 1.\n  アルゴリズム 2.\n\n\n\n\n\n2014/3/22                             ©AtCoder Inc. All rights reserved.                                    1010\n\f\nB問題 問題概要\n\n• たこ焼きがN個作られている\n• それぞれのたこ焼きが、何秒前に作られているかが\n 与えられる\n• 一番できたてのたこ焼きが、何秒前に出来ているか\n を出力しなさい\n\n\n\n\n\n2014/3/22                                                                                             11\n\f\nB問題 アルゴリズム\n\n• 入力\n   – まずたこ焼きの数を表す整数Nを受け取る\n   – 次に、長さNの配列を確保する\n          • リストなどの動的な配列でも問題ない\n   – N回のループを回す\n          • それぞれのたこ焼きが、何秒後に出来ているかを配列に格納す\n     る\n\n\n\n\n\n2014/3/22                                                                                             12\n\f\nB問題 アルゴリズム\n\n• 処理\n   – 解法１：最小値を順番に探す\n          •  int ret = 9999999;など、大き目の値を答えに入れておく。\n          • ループを回し、１個ずつ、retより小さいかどうか調べる\n           – If(ret > T[i]) ret = T[i];\n   – 解法２：ソートしてしまう\n          • 配列に入っている値をソートする\n           – Sort(T); みたいな。大抵の言語に標準で入っている。\n          • 最初の値を出力\n\n\n\n\n\n2014/3/22                                                                                             13\n\f\nB問題 アルゴリズム\n\n• 出力\n   – A問題と同じく、答えを出力するだけ\n\n\n\n\n\n2014/3/22                                                                                             14\n\f\nB問題 アルゴリズム\n\n• おまけ\n   – 入力を配列に格納しなくても解ける\n          • 解法1であれば、配列に格納していなくても、順番に数字を読んで\n     いけば良い。\n\n\n\n\n\n2014/3/22                                                                                             15",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "38b0096c4dfb94a44247432f018be01655c820601d0e48f17c09b2194161a5e8"
+    }
+  ],
+  "status": "available"
+}

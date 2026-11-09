@@ -1,0 +1,40 @@
+{
+  "problem_id": "abc300_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6273",
+      "text": "ヒント: この問題の最後のサンプルは最大ケースです。\nサンプルに最大ケースが入っている場合、そこから何らかの情報を読み取ったり最大ケースに対して正解できるかの判定が(提出前に)行えたりします。\n重要な観察として、以下が挙げられます。\n\\(2^2 \\times 3 \\times c^2 \\le 10^{12}\\)\nより、\n\\(c \\le 288675\\)\nつまり、まずは\n\\(3 \\times 10^5\\)\n以下の素数を列挙した配列\n\\(P\\)\n(1-indexed とします) を用意することになりそうです。これはエラトステネスの篩を用いて実現可能です。そして\n\\(3 \\times 10^5\\)\n以下の素数は全部で\n\\(25997\\)\n個です。\nこのとき、以下のアルゴリズムを考えます。\n\\(i=1\\)\nから\n\\(|P|\\)\n(\n\\(=P\\)\nのサイズ ) まで以下を繰り返す。\n変数\n\\(k = |P|\\)\nを用意する。\n\\(j<k\\)\nが満たされる限り、\n\\(j=i+1\\)\nから\n\\(|P|\\)\nまで以下を繰り返す。\n\\(P_i^2 \\times P_j \\times P_k^2 > N\\)\nかつ\n\\(j<k\\)\nである限り、\n\\(k\\)\nを\n\\(1\\)\n減算することを繰り返す。\n\\(j < k' \\le k\\)\nなる全ての整数\n\\(k\\)\nについて\n\\(P_i ^2 \\times P_j \n\\times P_{k'}^2\\)\nが答えとなるので、答えに\n\\(k-j\\)\nを加算して\n\\(j\\)\nループを進める。\nこれにより漏れなくダブりなく数え上げることができます。\n時間計算量を\n\\(O(|P|^2)\\)\nと評価でき、この評価からでもギリギリ実行制限に間に合いそうという結論を得ますが実際は\n\\(j\\)\nループの中で辿る必要のない部分が非常に多いため、十分高速に動作します。\n実装例 (C++):\n実はこの問題はさらにシンプルに正解することができます。\n\\(i=1\\)\nから\n\\(|P|\\)\nまで以下を繰り返す。\n\\(j=i+1\\)\nから\n\\(|P|\\)\nまで以下を繰り返す。\n\\(k=j+1\\)\nから\n\\(|P|\\)\nまで以下を繰り返す。\n\\(P_i^2 \\times P_j \\times P_k^2 > N\\)\nなら\n\\(k\\)\nループを終了する。\nそうでないなら答えに\n\\(1\\)\n加算する。\nこれは紛れもなく愚直な\n\\(3\\)\n重ループによる全探索です。なぜこのコードで正解できるのでしょうか。\n実は「 答え\n\\(\\le 3 \\times 10^6\\)\n」が最後のサンプルより読み取れるので、ループの回数を\n\\(O(|P|^2 + ans)\\)\n(\n\\(ans\\)\nは問題の答え) と見積もることが出来ます。\nこのままでも実行時間制限に間に合い、\n\\(i\\)\nループに「\n\\(P_i^2 \\times P_{i+1} \\times P_{i+2}^2 > N\\)\nなら\n\\(i\\)\nループを終了する」、\n\\(j\\)\nループに「\n\\(P_i^2 \\times P_j \\times P_{j+1}^2 > N\\)\nなら\n\\(j\\)\nループを終了する」というような枝刈りを入れると更に高速になります。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\n#define MAXP 300005\n\nvector<long long> sieve(){\n  vector<long long> res;\n  vector<int> mem(MAXP,0);\n  for(int i=2;i<MAXP;i++){\n    if(mem[i]){continue;}\n    res.push_back(i);\n    for(int j=i;j<MAXP;j+=i){mem[j]=1;}\n  }\n  return res;\n}\n\nint main(){\n  vector<long long> p=sieve();\n  long long n;\n  cin >> n;\n  int sz=p.size();\n  int res=0;\n  for(int i=0;i<sz;i++){\n    int k=sz-1;\n    for(int j=i+1;j<k && j<sz;j++){\n      while(j<k){\n        long long v=p[i]*p[i]*p[j]; // <= 10^{18}, won't overflow\n        if(v>n){k--;continue;}\n        v*=p[k]; // <= 10^{18} because (<= n <= 10^12) * (<= 10^6)\n        if(v>n){k--;continue;}\n        v*=p[k];\n        if(v>n){k--;continue;}\n        break;\n      }\n      res+=(k-j);\n    }\n  }\n  cout << res << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\n#define MAXP 300005\n\nvector<long long> sieve(){\n  vector<long long> res;\n  vector<int> mem(MAXP,0);\n  for(int i=2;i<MAXP;i++){\n    if(mem[i]){continue;}\n    res.push_back(i);\n    for(int j=i;j<MAXP;j+=i){mem[j]=1;}\n  }\n  return res;\n}\n\nint main(){\n  vector<long long> p=sieve();\n  long long n;\n  cin >> n;\n  int sz=p.size();\n  int res=0;\n  for(int i=0;i<sz;i++){\n    for(int j=i+1;j<sz;j++){\n      for(int k=j+1;k<sz;k++){\n        long long v=p[i]*p[i]*p[j];\n        if(v>n){break;}\n        v*=p[k];\n        if(v>n){break;}\n        v*=p[k];\n        if(v>n){break;}\n        res++;\n      }\n    }\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "b3997e3c091acf210de1cb992a33c364da91b5ccded20358c4a35555e3b6b262",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc300/abc300_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6295",
+      "text": "\\(a,b,c\\)\nの値として考慮すべき値はすべて\n\\(\\sqrt{N}\\)\n以下です。特に、\n\\(ac\\)\nの値は\n\\(\\sqrt{N}\\)\n以下です。\n\\((ac)^2 \\leq N\\)\nを満たす\n\\((a,c)\\)\nの組を探索し、\n\\(a\\lt b\\lt c\\)\nかつ\n\\(b \\leq N/(ac)^2\\)\nを満たす素数\n\\(b\\)\nがいくつあるか求められればよいです。\n\\((a,c)\\)\nが組として異なるとき\n\\(ac\\)\nの値は一致しないので、探索すべき組\n\\((a,c)\\)\nの個数は\n\\(\\sqrt{N}\\)\n以下です。\n\\(a\\)\nも\n\\(c\\)\nも素数の小さい順に探索すると、必要な組の列挙は\n\\(O(\\sqrt{N})\\)\n時間です。\n素数を数えるときは列挙した素数の列を二分探索します。計算量は\n\\(\\tilde{O}(\\sqrt{N})\\)\n（\n\\(\\log N\\)\nがいくつ掛かるかは無視する）です。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nconst long long Z = 1000000;\nbool isprime[Z+1] = {};\nint count_primes[Z+1] = {};\nvector<long long> primes;\n\n\nint main(){\n    for(int p=2; p<=Z; p++) isprime[p] = true;\n    for(int p=2; p*p<=Z; p++) if(isprime[p]){\n        for(int q=p*p; q<=Z; q+=p) isprime[q] = false;\n    }\n    for(int p=2; p<=Z; p++) if(isprime[p]){\n        primes.push_back(p);\n        count_primes[p] = 1;\n    }\n    for(int p=2; p<=Z; p++) count_primes[p] += count_primes[p-1];\n\n    long long N; cin >> N;\n    long long ans = 0;\n    for(long long a=2; a*a*a*a*a<=N; a++) if(isprime[a]) {\n        for(long long c=a+1; a*a*a*c*c<=N; c++) if(isprime[c]) {\n            long long br = min(c-1, N/(a*a*c*c));\n            long long bl = a;\n            if(bl < br) {\n                ans += count_primes[br];\n                ans -= count_primes[bl];\n            }\n        }\n    }\n    cout << ans << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "18b9ec907a920262ca06b848466e166b522d21dbbc219796b3a057267d76cdab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc300/abc300_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6294",
+      "text": "原案者でした。原案者としての想定解を紹介します。(この解法は計算量の見積もりが公式解説より容易だと思います。)\nまず、重要な観察として、\n\\(a\\)\nと\n\\(b\\)\nの最大値を見積もります。すると\n\\[a^5 \\leq a^2 b c^2 \\leq N \\to a \\leq N^{1/5}\\]\n\\[b^3 \\leq b c^2 \\leq N \\to b \\leq N^{1/3}\\]\nより、(\n\\(a \\lt b\\)\nの条件も合わせると)\n\\(a \\leq N^{1/5}, a \\lt b \\leq N^{1/3}\\)\nの範囲に含まれる素数の組のみを調べればよいわかります。よって、\n\\(a, b\\)\nを全探索しても\n\\(N^{8/15}\\)\n回 (\n\\(N = 10^{12}\\)\nのときは\n\\(10^{6.4}\\)\n回) 以下の探索で済むことが分かります。\n\\(a, b\\)\nを固定した場合を考えます。このときの\n\\(c\\)\nとしてあり得る値は、\n\\[a^2 b c^2 \\leq N \\to c \\leq \\sqrt{\\dfrac{N}{a^2b}}\\]\nより、\n\\(b\\)\nより大きく、\n\\(\\sqrt{\\dfrac{N}{a^2 b}}\\)\n以下である素数\nであるとわかります。(以降では見やすさのため\n\\(\\sqrt{\\dfrac{N}{a^2 b}}\\)\nを\n\\(D\\)\nとおきます。)\nここで\n\\(S(n)\\)\nを\n\\(S(n) =\\)\n(\n\\(n\\)\n以下の素数の個数)\nと定義すると、条件を満たすような\n\\(c\\)\nの個数は\n\\(b \\leq D\\)\nのとき :\n\\(S(D) - S(b)\\)\n個\n\\(b \\gt D\\)\nのとき :\n\\(0\\)\n個\nであり、また、\n\\(D \\leq \\sqrt{N} (\\leq 10^6)\\)\nです。よって、あらかじめ\n\\(\\sqrt{N}\\)\n以下の素数を列挙して、その後\n\\(S(1), S(2), \\dots, S(\\sqrt{N})\\)\nを累積和を利用して前計算しておけば、\n\\(a, b\\)\nを固定したときの\n\\(c\\)\nの個数を\n\\(\\mathrm{O}(1)\\)\nで計算できます。\n以上よりこの問題を\n\\(\\mathrm{O}(N^{8/15})\\)\nで解くことができました。詳しいアルゴリズムは実装例をご参考ください。\n実装例 (Python)",
+      "codes": [
+        "from math import isqrt\n\nN = int(input())\n\n# sqrt(N) 以下の素数の列挙\nsieve = [1] * (isqrt(N) + 1)\nprimes = []\nfor p in range(2, len(sieve)):\n  if sieve[p] == 0:\n    continue\n  primes.append(p)\n  for j in range(p * p, len(sieve), p):\n    sieve[j] = 0\n\n# prefix_sum[n] : (n 以下の素数の個数) \nprefix_sum = sieve\nfor i in range(len(prefix_sum) - 1):\n  prefix_sum[i + 1] += prefix_sum[i]\n\nans = 0\n\n# a, b を全探索する\nfor i in range(len(primes)):\n  a = primes[i]\n  if a * a * a * a * a >= N:\n    break\n  for j in range(i + 1, len(primes)):\n    b = primes[j]\n    if a * a * b * b * b >= N:\n      break\n    ans += prefix_sum[isqrt(N // (a * a * b))] - prefix_sum[b]\nprint(ans)"
+      ],
+      "text_sha256": "4a5975d7bb589e20e12a987dc75e0c32e3b36c738bb77315fb95aa8ffc227f51",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc300/abc300_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc357_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc357/editorial/10183",
+      "text": "\\(N\\)\nの桁数を\n\\(K\\)\n、また\n\\(P=998244353\\)\nとします。\nこのとき、\n\\(V_N\\)\nを 式で表すと、\n\\(V_N=N+N\\cdot 10^K+N\\cdot 10^{2K}+\\cdots+N\\cdot 10^{(N-1)K}\\)\nと書けます。\nこれを整理すると、\n\\(V_N=N(1+10^K+10^{2K}+\\cdots+10^{(N-1)K})=\\frac{N(10^{NK}-1)}{10^K-1}\\)\nとなります。\nここで、\n\\(K\\)\nの取り得る範囲は\n\\(1\\)\n以上\n\\(19\\)\n以下ですが、この中に\n\\(10^K-1\\)\nが\n\\(P\\)\nの倍数となるようなものはありません。よって、\n\\(P\\)\nが素数であることに注意すると、\n\\(R_K(10^K-1)\\equiv 1\\pmod{P}\\)\nとなるような\n\\(1\\leq R_K\\leq P-1\\)\nがただ一つ存在します。\nこのとき、\n\\(NR_K(10^{NK}-1)\\)\nと\n\\(\\frac{N(10^{NK}-1)}{10^K-1}\\)\nは\n\\(P\\)\nで割った余りが等しいため、\n\\(NR_K(10^{NK}-1)\\)\n. を\n\\(P\\)\nで割った余りを計算すれば良いです。これは例えば AtCoder Library の modint を用いて計算することができます。（自身で計算する際はフェルマーの小定理より\n\\(R_K\\equiv(10^K-1)^{P-2} \\pmod{P}\\)\nなどを用いれば良いです。）計算量は\n\\(O(\\log( NK)+\\log P)\\)\nであり、十分高速です。\nよってこの問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\n\nusing namespace std;\nusing namespace atcoder;\nusing mint = modint998244353;\n\nint main() {\n\tlong long n,x;\n\tmint r = 1;\n\n\tcin>>n;\n\tx=n;\n\twhile(x){\n\t\tx/=10;\n\t\tr*=mint(10);\n\t}\n    \n\tmint ans=mint(n)*(r.pow(n)-mint(1))*((r-mint(1)).inv());\n\tcout<<(ans.val())<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "6323641531b6b2865e5e46f63ce62497889013f4bec525f896bde2761677ec64",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc357/abc357_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc357/editorial/10198",
+      "text": "\\(V_N\\bmod 998244353\\)\nの値を繰り返し二乗法で直接求めます。\n公式解説と同様に、\n\\(N\\)\nの桁数を\n\\(K\\)\nとし、\n\\(P=998244353\\)\nとします。\nまた、\n\\(N\\)\nを\n\\(i\\)\n個つなげた整数を\n\\(f(N,i)\\)\nと書くことにします。\nここで、\n\\(f(N,i)\\)\nの桁数が\n\\(iK\\)\nであることを考えると、\n\\(\\begin{aligned}f(N,i)\\bmod P=\\begin{cases}N\\bmod P&(i=1)\\\\\\left(f\\left(N,\\frac{i}{2}\\right)\\cdot 10^{\\frac{i}{2}\\cdot K}+f\\left(N,\\frac{i}{2}\\right)\\right)\\bmod P&(iが2以上の偶数)\\\\\\left(f(N,i-1)\\cdot 10^K+N\\right)\\bmod P&(iが3以上の奇数)\\end{cases}\\end{aligned}\\)\nが成立することがわかります。\n（一般に、「整数\n\\(a\\)\n」と「\n\\(m\\)\n桁の整数\n\\(b\\)\n」をこの順につなげた整数は\n\\(a\\cdot 10^m+b\\)\nとなります。）\nしたがって、上の式に基づいて再帰的に\n\\(V_N\\bmod P=f(N,N)\\bmod P\\)\nを求めることができます。\n実装例(Python)\n（また、この解法は\n\\(P\\)\nが素数でないときにも用いることができます。）",
+      "codes": [],
+      "text_sha256": "2e50a5c40a7d758a4224cca2ea99d68d815d7491a7d1e4ed4a803b06a0fbbcdb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc357/abc357_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

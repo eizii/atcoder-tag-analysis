@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc276_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc276/editorial/5167",
+      "text": "\\(a_i\\)\nは、(素因数分解を考えると)非負整数\n\\(x_i,y_i\\)\n及び\n\\(2\\)\nでも\n\\(3\\)\nでも割り切れない正整数\n\\(z_i\\)\nを用いて\n\\(a_i=2^{x_i} \\times 3^{y_i} \\times z_i\\)\nと一意に表すことが出来ます。ここで、\n\\(2\\)\n種類の操作のうち前者は\n\\(x_i\\)\nを、後者は\n\\(y_i\\)\nを\n\\(1\\)\n減らすことに相当します。\n\\(2\\)\nでも\n\\(3\\)\nでも割り切れない正整数である\n\\(z_i\\)\nを変えることは出来ないため、\n\\(z_i \\neq z_j\\)\nとなる\n\\(i,j\\)\nが存在する場合の答えは\n-1\nです。\n\\(x_i,y_i\\)\nを増やすことは出来ないため、それぞれ\n\\(x_i\\)\nの最小値\n\\(x_m\\)\n、\n\\(y_i\\)\nの最小値\n\\(y_m\\)\nに揃える必要があります。一方、最小値より小さな値に揃えるのは操作回数がより多く必要となるため無駄です。以上より、\n\\(x_i,y_i\\)\nをそれぞれ\n\\(x_m,y_m\\)\nに揃えるのに必要な回数を求めれば、すなわち\n\\(x_i,y_i\\)\nと\n\\(x_m,y_m\\)\nの差の総和を求めれば答えを求められます。\n下記実装例では初めに\n\\(a_i\\)\nの最大公約数\n\\(g\\)\nを求め、\n\\(\\frac {a_i}{g}\\)\nを考えて答えを求めています。(\n\\(g=2^{x_m} \\times 3^{y_m} \\times z_i\\)\nとなることに気を付けてください)\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N;\n\tcin>>N;\n\t\n\tvector<int> a(N);\n\tfor(int i=0;i<N;i++){\n\t\tcin>>a[i];\n\t}\n\t\n\tint g = 0;\n\tfor(int i=0;i<N;i++){\n\t\tg = gcd(g,a[i]);\n\t}\n\t\n\tint ans = 0;\n\t\n\tfor(int i=0;i<N;i++){\n\t\ta[i] /= g;\n\t\twhile(a[i]%2==0){\n\t\t\ta[i] /= 2;\n\t\t\tans++;\n\t\t}\n\t\twhile(a[i]%3==0){\n\t\t\ta[i] /= 3;\n\t\t\tans++;\n\t\t}\n\t\tif(a[i]!=1){\n\t\t\tcout<<-1<<endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\t\n\tcout<<ans<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "29e421cbb2fe8d2eb5d161293305748c463eaf199b22fbc922f4f6b05a2ac98c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc276/abc276_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc135_e",
+  "editorials": [
+    {
+      "text": "E: Golf\n話を簡単にするため，X ≥Y ≥0 としてよいです(適当に変換することで帰着できます)．n をスコアの最\n小値とします．\nK が偶数，X + Y が奇数のときは不可能です．逆に，それ以外のケースでは常に，以下のどちらかの形式\nで構築できます．\nタイプA:\nO\nKn−X−Y\n2\nX\nKn−X+Y\n2\nタイプB (常にn = 3):\nO\nK −X\nX + K+X−Y\n2\nK −X + Y\nK+X−Y\n2\nc := (K −(X + Y mod K)) mod K とします．X + Y < K かつX + Y が奇数のときタイプB が，それ\n以外のときは次のようにn の値を決めることでタイプA が適用できます．\n• X + Y < K かつX + Y が偶数のとき，n = 2．\n• X + Y ≥K かつc が偶数のとき，n = ⌈X+Y\nK ⌉．\n• X + Y ≥K かつc が奇数のとき，n = ⌈X+Y\nK ⌉+ 1．\nこれらの構築方法が正しいことの証明は容易です．\n",
+      "text_sha256": "84099828d388253e41bf277f1580aaffcd78240ce9837a86c6bc82688532cb4f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc135/abc135_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

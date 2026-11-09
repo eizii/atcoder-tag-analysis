@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc364_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc364/editorial/10549",
+      "text": "本問題のように「\n\\(k\\)\n番目に○○な△△を求める」という問題では、しばしば二分探索が解法の初手として用いられます。実際、本問題においても二分探索を用いることができます。具体的には、\n\\(f_j(x)=(\\)\n点\n\\(A_1,A_2,\\dots,A_N\\)\nのうち点\n\\(B_j\\)\nとの距離が\n\\(x\\)\n以下であるようなものの数\n\\()\\)\nと定めると、「点\n\\(A_1,A_2,\\dots,A_N\\)\nのうち点\n\\(B_j\\)\nとの距離が\n\\(k_j\\)\n番目に近い点を求める」という問題は「\n\\(f_j(x)\\geq k_j\\)\nを満たす最小の\n\\(x\\)\nを求める」という問題に帰着されます。\n\\(f_j(x)\\)\nには明らかに単調性があることから、二分探索を用いれば、「ある\n\\(j,x\\)\nに対して\n\\(f_j(x)\\)\nを求める」というクエリを\n\\(O(Q\\log A)\\)\n回（ここで\n\\(A\\)\nは座標としてありうる数の範囲）処理することで本問題を解くことができます。\n「ある\n\\(j,x\\)\nに対して\n\\(f_j(x)\\)\nを求める」すなわち「\n\\(b_j-x\\)\n以上\n\\(b_j+x\\)\n以下の範囲内にある\n\\(a\\)\nの要素数を求める」という問題は、最初に\n\\(a\\)\nをソートしておけば、これもまた二分探索によって高速に処理することができます。\n全体の計算量は\n\\(O(N\\log N + Q\\log A\\log N)\\)\nです。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, q;\n    cin >> n >> q;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n    }\n    sort(a.begin(), a.end());\n    while (q--) {\n        int b, k;\n        cin >> b >> k;\n        auto f = [&](int x) -> bool {\n            // (# of points in [b-x, b+x]) >= k\n            auto lb = lower_bound(a.begin(), a.end(), b - x);\n            auto ub = upper_bound(a.begin(), a.end(), b + x);\n            return ub - lb >= k;\n        };\n        int ng = -1, ok = (int) 2e8 + 10;\n        while (ok - ng > 1) {\n            int mid = (ok + ng) / 2;\n            if (f(mid)) ok = mid;\n            else ng = mid;\n        }\n        cout << ok << '\\n';\n    }\n}"
+      ],
+      "text_sha256": "eb688af8839c58fdc9a2ad727ebd1874fb3cb51ddee5897f77ad539cbb5d7b29",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc364/abc364_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc364/editorial/10566",
+      "text": "\\(O((N + Q)\\log(N)))\\)\nで解くことができます。\n\\(A\\)\nがソートされているとします。\n各クエリに対して、以下の条件を満たす整数\n\\(i\\)\nを求めます。\n\\(A_{i} < b\\)\nかつ、\n\\(b - A_{i} > A_{i + k - 1} - b\\)\nかつ、\n\\(b - A_{i + 1} \\leq A_{i + k} - b\\)\n\\(A\\)\nに適当な番兵を追加することで、このような\n\\(i\\)\nは必ず存在することができます。\nまた、このような\n\\(i\\)\nは\n\\(1\\)\nつしか存在しませんし、二分探索をすることで時間計算量\n\\(O(\\log(N))\\)\nで求められます。\nそのような\n\\(i\\)\nに対して、以下が成り立ちます。\n\\(i < j < i + k \\)\nならば、\n\\(|A_{j} - b| \\leq \\min(|A_{i} -b|, |A_{i + k} - b|)\\)\n\\(j < i\\)\nまたは\n\\(i + k < j\\)\nならば、\n\\(|A_{j} - b| \\geq \\min(|A_{i} -b|, |A_{i + k} - b|)\\)\n\\(i < j < i + k \\)\nを満たす\n\\(j\\)\nは\n\\(k - 1\\)\n個であることから、答えは\n\\(\\min(|A_{i} -b|, |A_{i + k} - b|)\\)\nとなります。\nクエリごとに時間計算量\n\\(O(\\log(N))\\)\nで解けるため、全体の時間計算量は\n\\(O((N + Q)\\log(N))\\)\nで解けます。\n実装例 C++",
+      "codes": [],
+      "text_sha256": "104d523f5fe15486f2ecdf213bc566500157e5909192d8bfa457b9a1a17b94ff",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc364/abc364_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

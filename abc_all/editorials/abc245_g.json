@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc245_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc245/editorial/3662",
+      "text": "ある \\(2\\) 人を間接的に友達にするのに必要な最小コストは、人を頂点、友達にできる関係を辺とみなして作ったグラフにおける頂点間の最短距離と言い換えることができます。 解法の基本となるのはDijkstra法です。\nこれを \\(2\\) 段階に分けて変化させます。 Step1: 始点が複数の時のDijkstra法 まず、「自分と異なる国に属する」という条件を除いて、各人について人気者と間接的に友達になるための最小コストを求める方法を考えてみます。 シンプルな解法としては、人気者それぞれに対して、その人気者が他の人と間接的に友達になるための最小コストを求め、その最小値を取ればよいですが、これでは 計算量が \\(\\Theta(LN\\log M)\\) または \\(\\Theta(L(M+N\\log N))\\) 程度かかってしまい間に合いません。 ここで、仮想頂点 \\(S\\) を \\(1\\) つ取り、 \\(S\\) から \\(L\\) 人の人気者に対応する頂点に対してコスト \\(0\\) の辺を張ることで、求めたいものは 頂点 \\(S\\) からそれぞれの頂点に対する最短距離という形で求めることができます。 Step2: 各頂点を複数回調べるDijkstra法 さて、「自分と異なる国に属する」という条件を付加した問題を解くことを考えます。「頂点集合」のうち「始点からの距離」が最も近い頂点から順に確定させていくのが通常のDijkstra法ですが、これを「（国 \\(i\\) 、人 \\(j\\) ）のペアの集合」のうち「国 \\(i\\) に属する人気者が人 \\(j\\) と間接的に友達となるための最小コスト」が小さいものから順に確定させていくことで同様に解くことができます。しかし、これをそのまま実装すると計算量は \\(\\Theta(KN\\log KM)\\) または \\(\\Theta(K(M+N\\log KN))\\) となってしまいます。 しかし、ここでそれぞれの 人 \\(j\\) について、「（国 \\(i\\) 、人 \\(j\\) ）のペアの集合」のうち「国 \\(i\\) に属する人気者が人 \\(j\\) と間接的に友達となるための最小コスト」が小さい方から \\(2\\) つ分かれば十分です。この国を \\(i_1\\) , \\(i_2\\) \\((i_1\\neq i_2)\\) とすると、人 \\(j\\) は必ず \\(i_1\\) , \\(i_2\\) の少なくとも一方には属しておらず、また、 \\(S\\) からある頂点までのパスとして短い方から \\(3\\) 番目以降のものを含む経路が \\(S\\) から他の頂点へのパスとして \\(2\\) 番目以内に入ってくることはないからです。\nこのとき各頂点は \\(2\\) 回までしか調べられないため、計算量は二分木を用いた優先度付きキューで \\(O(N\\log M)\\) となります。 よって、この問題を解くことができました。 c++による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, m, k, l;\n\tint u, v, sz;\n\tlong long c;\n\tcin >> n >> m >> k >> l;\n\n\tvector<int>a(n);\n\tvector<vector<pair<int, long long> > >e(n);\n\tvector<int>cnt(n, 0);\n\tvector<long long>d(n, -1);\n\tvector<int>country(n);\n\tvector<long long>d2(n, -1);\n\tpriority_queue<tuple<long long, int, int> >pq;\n\n\tfor (int i = 0; i < n; i++)cin >> a[i];\n\tfor (int i = 0; i < l; i++) {\n\t\tcin >> u;\n\t\tpq.push({ 0LL,u - 1,a[u - 1] });\n\t}\n\tfor (int i = 0; i < m; i++) {\n\t\tcin >> u >> v >> c;\n\t\te[u - 1].push_back({ v - 1,c });\n\t\te[v - 1].push_back({ u - 1, c });\n\t}\n\twhile (!pq.empty()) {\n\t\tauto[z, x, y] = pq.top();\n\t\tpq.pop();\n\t\tif (cnt[x] == 0) {\n\t\t\td[x] = -z;\n\t\t\tcountry[x] = y;\n\t\t}\n\t\telse if ((cnt[x] == 1) && (y != country[x])) {\n\t\t\td2[x] = -z;\n\t\t}\n\t\telse continue;\n\t\tcnt[x]++;\n\t\tsz = e[x].size();\n\t\tfor (int i = 0; i < sz; i++)pq.push({ z - e[x][i].second,e[x][i].first,y });\n\t}\n\tfor (int i = 0; i < n; i++) {\n\t\tif (a[i] != country[i])cout << d[i];\n\t\telse cout << d2[i];\n\t\tif (i < (n - 1))cout << \" \";\n\t\telse cout << endl;\n\t}\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "2e3174c20e63b49e083d0e23304a290348de76cb2c4d997ad5fb4237dbfc9169"
+    }
+  ],
+  "status": "available"
+}

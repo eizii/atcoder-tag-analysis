@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc464_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc464/editorial/22268",
+      "text": "問題文にかかれている操作を愚直に実装しても良いでしょう。しかし、実装を楽にする工夫がいくつかあるので紹介します。\n実装 1\n「すべての黒いピクセルが含まれるような最小の長方形」を考えて、その範囲のみを出力する\nと考えるとよいかもしれません。これは以下のように実装できます。\n実装例(Python)\n実装例(C++)\n実装 2\n具体的に操作を実装しますが、削除する行・列が変わるのが厄介です。そのため、削除する順番は自由であることを利用して\n「グリッドを\n\\(90^{\\circ} \\)\n回転させ、消せなくなるまで一番上の行を削除する」を\n\\(4\\)\n回繰り返す\nと考えてもよいかもしれません。\n「グリッドの回転」はたまに用いられるので、関数として用意している方も少なくないかもしれません。\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "H, W = map(int, input().split())\nC = [input() for _ in range(H)]\n\nu, d = H, -1\nl, r = W, -1\n\nfor i in range(H):\n    for j in range(W):\n        if C[i][j] == \"#\":\n            u, d = min(u, i), max(d, i)\n            l, r = min(l, j), max(r, j)\n\nfor i in range(u, d + 1):\n    print(C[i][l:r + 1])",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int H, W;\n    cin >> H >> W;\n\n    vector<string> C(H);\n    for (int i = 0; i < H; i++) cin >> C[i];\n\n    int u = H, d = -1;\n    int l = W, r = -1;\n\n    for (int i = 0; i < H; i++) for (int j = 0; j < W; j++) {\n        if (C[i][j] == '#') {\n            u = min(u, i); d = max(d, i);\n            l = min(l, j); r = max(r, j);\n        }\n    }\n\n    for (int i = u; i <= d; i++) {\n        for (int j = l; j <= r; j++) {\n            cout << C[i][j];\n        }\n        cout << endl;\n    }\n\n    return 0;\n}",
+        "def rotate(a): return [\"\".join(r) for r in zip(*a[::-1])]\n    \nH, W = map(int, input().split())\nC = [input() for _ in range(H)]\n\nfor _ in range(4):\n    while not \"#\" in C[0]:\n        C = C[1:]\n    C = rotate(C)\n\nprint(*C, sep = \"\\n\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nvector<string> rotate(vector<string> a) {\n    int h = a.size(), w = a[0].size();\n    vector<string> res(w, string(h, '.'));\n    for (int i = 0; i < h; i++) for (int j = 0; j < w; j++) {\n        res[j][h - 1 - i] = a[i][j];\n    }\n    return res;\n}\n\nint main() {\n    int H, W;\n    cin >> H >> W;\n\n    vector<string> C(H);\n    for (int i = 0; i < H; i++) cin >> C[i];\n\n    for (int t = 0; t < 4; t++) {\n        while (true) {\n            int ok = 1;\n            for (int j = 0; j < C[0].size(); j++) ok &= C[0][j] == '.';\n            if (!ok) break;\n            C.erase(begin(C));\n        }\n        C = rotate(C);\n    }\n    \n    for(auto c : C) cout << c << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "9278a71556647e148b11b6c1389ca2f5b78a7e748017d51979502f2b9eea46c2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc464/abc464_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

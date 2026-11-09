@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc178_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc178/editorial/102",
+      "text": "\\(a,b,c,d\\)\nの絶対値が大きいため、\n\\(x\\)\nや\n\\(y\\)\nの値を全通り試すとTLE(実行時間超過)の不正解になってしまいます。\nここでは、候補を絞ることで実行時間に間に合うようにする方法を紹介します。\n\\(x \\times y\\)\nは\n\\(y\\)\nを定数としたとき、\n\\(x\\)\nの一次関数になります。一次関数の性質より、\n\\(x\\)\nがある範囲の中を動くとき、必ず、\n\\(x\\)\nが範囲の左端にあるときと右端にあるときの少なくとも一方で\n\\(x \\times y\\)\nは最大になります。（グラフを書いてみると分かりやすいです。）これは\n\\(y\\)\nがどんな値のときでも成り立つため、\n\\(x=a\\)\nのケースと\n\\(x=b\\)\nのケースだけ考えれば良いです。\n今度は\n\\(x\\)\nを定数とすると、同様に、\n\\(y=c\\)\nのケースと\n\\(y=d\\)\nのケースだけ考えれば良いことがわかります。\nしたがって\n\\((x,y)\\)\nが\n\\((a,c),(a,d),(b,c),(b,d)\\)\nのケースだけを考えれば良くなり、\n\\(a \\times c,a\\times d,b\\times c,b\\times d\\)\nの最大値を出力すれば正解できます。\nまた、\n\\(a,b,c,d\\)\nの絶対値が最大で\n\\(10^9\\)\nであるため、答えは最大で\n\\(10^{18}\\)\nになります。\n\\(32\\)\nビット整数型（C++であればint型）に収まらないため、\n\\(64\\)\nビット整数型（C++であればlong long型）などを使うと良いです。\n解答例（C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    long long a,b,c,d;\n    cin>>a>>b>>c>>d;\n    cout<<max(max(a*c,a*d),max(b*c,b*d))<<\"\\n\";\n}"
+      ],
+      "text_sha256": "fd2c9aab99cbe05f2303b51a1e5eb3c6b220e78c45fea1ca93fae576c2734b8d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc178/abc178_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

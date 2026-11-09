@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc449_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc449/editorial/17131",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n円の面積は半径\n\\(r\\)\nと円周率\n\\(\\pi\\)\nを用いて\n\\(\\pi r^2\\)\nと表すことができます。\n半径は直径の半分なので\n\\(\\displaystyle r=\\frac d2\\)\nが成り立ちます。したがって、求める面積は\n\\(\\displaystyle \\frac{\\pi d^2}4\\)\nと表せます。\nあとはこの値を計算して出力すれば良いです。円周率は例えば Python であれば\nmath\nライブラリの中に\npi\nが、C++ であれば\ncmath\nライブラリの中に\nM_PI\nがあるので、この定数を使えば良いです。\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "from math import pi\nd = int(input())\nprint(d * d * pi / 4)",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint d;\n\tcin >> d;\n\tcout << fixed << setprecision(20) << M_PI * d * d / 4 << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "e5a2a0e9b2fbd674802d74ac4b2ef095ba8bbdc85c46c96bf4bdfe21be41fe6b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc449/abc449_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

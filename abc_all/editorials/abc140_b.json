@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc140_b",
+  "editorials": [
+    {
+      "text": "B: Buﬀet\n次のようにシミュレーションを行うことで答えを求めることができます。まず、A1 種類目の料理\nを食べるので、BA1 の満足度を得ます。次に、A2 種類目の料理を食べるので、BA2 の満足度と、\nA2 = A1 + 1 ならばCA1 の満足度を得ます。i (2 ≤i ≤N) 番目にはAi 種類目の料理を食べるの\nで、BAi の満足度とAi = Ai−1 + 1 ならばCAi−1 の満足度を得ます。これをC++ 言語で実装した\n例を以下に挙げます。\n1 #include <bits/stdc++.h>\n2\n3 using namespace std;\n4\n5 int main() {\n6\nint N; cin >> N;\n7\n// input\n8\nvector<int> A(N);\n9\nfor (int i = 0; i < N; ++i) {\n10\ncin >> A[i];\n11\n--A[i];\n12\n}\n13\nvector<int> B(N);\n14\nfor (int i = 0; i < N; ++i) {\n15\ncin >> B[i];\n16\n}\n17\nvector<int> C(N-1);\n18\nfor (int i = 0; i < N; ++i) {\n19\ncin >> C[i];\n20\n}\n21\n// calc\n22\nint ans = 0;\n23\nfor (int i = 0; i < N; ++i) {\n24\nans += B[A[i]];\n25\nif (i > 0 && A[i] == A[i-1]+1) {\n26\nans += C[A[i-1]];\n27\n}\n28\n}\n29\n// output\n30\ncout << ans << endl;\n31 }\n",
+      "text_sha256": "ef80416af4906afee5ef68689cecca175a4fe9e627ecfed216e13ea7827e3443",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc140/abc140_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

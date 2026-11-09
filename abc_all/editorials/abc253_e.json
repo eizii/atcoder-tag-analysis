@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc253_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc253/editorial/4018",
+      "text": "動的計画法で解きます。\n\\(\\mathrm{dp}[i][j]\\)\nを、\n\\(A\\)\nの先頭から\n\\(i\\)\n項を決めて、\n\\(i\\)\n項目が\n\\(j\\)\nであるような場合の数とします。\nこの\n\\(\\mathrm{dp}\\)\nの遷移は\n\\(\\mathrm{dp}[i + 1][j] = (\\mathrm{dp}[i][1]+\\ldots + \\mathrm{dp}[i][j - K])+(\\mathrm{dp}[i][j + K]+\\ldots + \\mathrm{dp}[i][M])\\)\nです。（なお、\n\\(1 > j - K\\)\nのときや\n\\(j + K>M\\)\nのとき、\n\\(K=0\\)\nのときは微妙に遷移が異なるので注意してください。）この\n\\(\\mathrm{dp}\\)\nでは状態数が\n\\(\\mathrm{Ο}(NM)\\)\n、遷移が\n\\(\\mathrm{Ο}(M)\\)\nとなり、全体の計算量は\n\\(\\mathrm{Ο}(NM^2)\\)\nとなり実行時間制限に間に合いません。\nここで、\n\\(\\mathrm{dp}[i + 1]\\)\nへの遷移を考える際に事前に\n\\(\\mathrm{dp}[i]\\)\nの累積和を求めておくことで、遷移が\n\\(\\mathrm{Ο}(1)\\)\nで可能になり、全体の計算量が\n\\(\\mathrm{Ο}(NM)\\)\nになります。これは十分高速です。",
+      "codes": [],
+      "text_sha256": "a1396ade4bde38679f723d180d03975951b94172429a8e4a78f86006a3c3b8df",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc253/abc253_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

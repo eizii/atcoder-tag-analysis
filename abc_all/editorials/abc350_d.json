@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc350_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc350/editorial/9811",
+      "text": "ユーザを頂点、友達関係を辺としたグラフを考えます。\n操作は、すでに同じ連結成分に属する頂点の間に辺を追加するものであるため、連結成分が変化することはありません。\n逆に同じ連結成分に属する頂点同士は、操作の繰り返しにより必ず直接辺で結ぶことができます。\n頂点数\n\\(n\\)\nの連結成分には最大で\n\\(\\frac{n(n-1)}{2}\\)\n本の辺が存在できるため、求める答えは、この値の連結成分ごとの和からもともと存在する辺の個数を引いたものです。\nよって、BFS/DFSやUnion-Findなどにより各連結成分の頂点数を求めることでこの問題を解くことができます。計算量は\n\\(O(N+M)\\)\nです。",
+      "codes": [],
+      "text_sha256": "ac871e0cf7d80d285f9a52aebdf93e232d6daef9fbd89c026ffbcee98278578d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc350/abc350_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

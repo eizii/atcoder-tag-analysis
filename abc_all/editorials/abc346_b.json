@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc346_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc346/editorial/9642",
+      "text": "\\(S\\)\nの長さ\n\\(W+B\\)\nの部分文字列を全探索し、それぞれについてその部分文字列に含まれる\nw\nと\nb\nの数が条件と一致しているか確認すればよいです。\n\\(S\\)\nの長さ\n\\(W+B\\)\nの部分文字列はある正整数\n\\(l\\)\nを用いて\n\\(S_lS_{l+1}\\dots S_{l+W+B-1}\\)\nと表されますが、この\n\\(l\\)\nを全探索することはできません。そこで、以下の性質を用います。\n\\(l_1\\)\nと\n\\(l_2\\)\nを\n\\(12\\)\nで割った余りが等しいとき、\n\\(S\\)\nの\n\\(l_1\\)\n文字目から始まる長さ\n\\(W+B\\)\nの部分文字列と、\n\\(S\\)\nの\n\\(l_2\\)\n文字目から始まる長さ\n\\(W+B\\)\nの部分文字列は、文字列として等しい。（なお、\n\\(12\\)\nは\n\\(S\\)\nの繰り返し単位\nwbwbwwbwbwbw\nの長さに該当する。）\nよって、\n\\(l\\)\nとしては\n\\(1,2,\\dots,12\\)\nのみを調べればよいため、\n\\(12(W+B)\\)\n回程度の計算でこの問題を解くことができます。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nconst string t = \"wbwbwwbwbwbw\";\n\nint main() {\n    int w, b;\n    cin >> w >> b;\n    for (int i = 0; i < (int) t.size(); i++) {\n        int nw = 0, nb = 0;\n        for (int j = 0; j < w + b; j++) {\n            if (t[(i + j) % t.size()] == 'w') ++nw;\n            else ++nb;\n        }\n        if (w == nw and b == nb) {\n            cout << \"Yes\" << endl;\n            return 0;\n        }\n    }\n    cout << \"No\" << endl;\n}",
+        "t = \"wbwbwwbwbwbw\"\nw, b = map(int, input().split())\nfor i in range(len(t)):\n    nw = 0\n    nb = 0\n    for j in range(w + b):\n        if t[(i + j) % len(t)] == 'w':\n            nw += 1\n        else:\n            nb += 1\n    if w == nw and b == nb:\n        print(\"Yes\")\n        exit(0)\nprint(\"No\")"
+      ],
+      "text_sha256": "3c15bc89cb078c8bbf2bee96d11ce989f1cc9bc4842aa551c3f79a188c392130",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc346/abc346_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

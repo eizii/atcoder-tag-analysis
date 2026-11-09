@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc131_a",
+  "editorials": [
+    {
+      "text": "A: Security\n正解までの道のりを細かく分割すると次の通りです．\n1. 標準入力から文字列を受け取る．\n2. 文字列の隣り合う文字同士を比較することで，文字列が「入力しずらい」かを判定する．\n3. 判定結果に対応する文字列(“Good” か“Bad”) を標準出力に出力する．\n手順2 (判定) については，正規表現を用いて簡潔に書くことも可能です．実装例を以下に示します．\nListing 1\nC++ での実装例\n1 #include <iostream>\n2 #include <string>\n3 using std::cin;\n4 using std::cout;\n5 using std::endl;\n6 using std::string;\n7\n8 int main(void){\n9\nstring s;\n10\n11\n// 入力\n12\ncin >> s;\n13\n14\n// 隣り合う文字を比較して判定\n15\nbool isgood = true;\n16\nif (s[0] == s[1]) isgood = false;\n17\nif (s[1] == s[2]) isgood = false;\n18\nif (s[2] == s[3]) isgood = false;\n19\n20\n// 出力\n21\nif (isgood) {\n22\ncout << \"Good\" << endl;\n\n23\n} else {\n24\ncout << \"Bad\" << endl;\n25\n}\n26\n27\nreturn 0;\n28 }\nListing 2\nRuby での実装例\n1 # 入力\n2 s = gets().chomp()\n3\n4 # 正規表現を使って判定・出力\n5 if s =~ /(.)\\1/ then\n6\nputs \"Bad\"\n7 else\n8\nputs \"Good\"\n9 end\nListing 3\nBrainf*ck での実装例\n1 >+++>>,<+++[->>,[-<->>+<]<[[-]<<->>]>>[-<<+>>]<<<]+<[[-]>++++++++++[-<++++++>]<.\n2 [--<+++>]<--.+++>]>[++++++++[-<++++++++>]<-.+++[-->+++<]>..[-<<+>>]<<-----------\n3 >>]]<<.\n",
+      "text_sha256": "a760ecc924e3bfd63117e8c4c6a09f325109055bc186221c91e1860c28d181d5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc131/abc131_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

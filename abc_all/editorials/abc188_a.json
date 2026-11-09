@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc188_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc188/editorial/493",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nこの問題では、\n\\(\\min(X, Y) + 3 > \\max(X, Y)\\)\nかを判定すればよいです。\n解答例 (C++)\n解答例 (Python)",
+      "codes": [
+        "#include <stdio.h>\n#include <algorithm>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tint x = ri();\n\tint y = ri();\n\tputs(std::min(x, y) + 3 > std::max(x, y) ? \"Yes\" : \"No\");\n\t\n\treturn 0;\n}",
+        "x, y = map(int, input().split())\nprint('Yes' if min(x, y) + 3 > max(x, y) else 'No')"
+      ],
+      "text_sha256": "22322f09bfaa3ef31c1be029c868200fd33876487e4e90aed5730b9ec4419471",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc188/abc188_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc188/editorial/578",
+      "text": "プログラミング初心者を対象にA問題の解き方を解説します。ご意見などがあれば、dokinのtwitterまでご連絡ください。\n注意\nC++の利用を想定した解説です。  Pythonなど他言語を利用される方は、別の解説をご覧ください。\n必要な知識\nプログラミング言語C++の勉強には、AtCoder公式の学習教材\nAPG4b\nがおすすめです。\n今回の問題では、以下の項目が参考になります。\n基礎知識(標準入出力、変数など)\nA - 1.00.はじめに\nから\nF - 1.05.実行順序と入力\nまで\nif文、else句の使い方\nG - 1.06.if文・比較演算子・論理演算子\nまた、APG4bには記載がありませんが、\nSTLの関数\nabs\nを知っていると簡単に問題を解くことができます。\nabs(a)\n: aの\n絶対値\n(absolute value)を返す。(例: abs(3) = 3, abs(-2) = 2, abs(0) = 0)\nこれらの知識について、正確に覚える必要はありません。\n忘れてしまったときには自力で解決しようとせず、APG4bなどで調べなおす習慣をつけましょう。\n考え方\n問題文に書かれている条件を整理し、数式の形にします。\n「得点状況\n\\(X\\)\n対\n\\(Y\\)\nから劣勢のチームが3 点入れると逆転が起こる」\n\\(\\iff\\)\n「\n\\(X\\)\nと\n\\(Y\\)\nの 差が3未満」\n\\(\\iff\\)\n「\n\\(\\mathrm{abs}(X-Y)<3\\)\n」\nしたがって、\n\\(\\mathrm{abs}(X-Y)<3\\)\nならば、Yes を出力する\nそうでないならば、Noを出力する\nコードを書きたいです。\n実装\n次のような順番で実装します。\nint型の変数 X,Y を宣言する。\n入力からX,Yの値を受け取る。\nabs( X - Y) < 3 ならば、Yesを出力する。\nそうでないならば、Noを出力する。\n1-2行目\n現時点では、この部分を「おまじない」だと思っていただいて問題ありません。\nmain関数の内側(5-19行目 )にコードを書いていきます。\n5-6行目\n(変数の型) (変数名1), (変数名2), … ;　\nにより、変数を宣言できます。\n変数の型とは、変数に書き込めるデータの種類のことです。\n今回は整数を扱うので、int型の変数を宣言します。\n変数名には、アルファベットであれば原則好きな名前をつけることができます。今回は問題文に合わせ、X,Yと名前をつけます。\n8-9行目\ncin >> (変数1) >> (変数2) >> … ; により、入力を受け取ります。今回は、X,Yの値を入力から順番に受け取ります。\n11-14行目\n条件式「abs(X - Y) < 3 」を満たすとき Yes を出力したいです。\nif (条件式) {  処理 }\nにより、条件式をみたすかどうかを判定し、満たした場合に処理を実行することができます。\nまた、cout << “文字列” ; と書くことで、文字列を出力することができます。\n今回のコードでは、最後に endl を出力することで改行しています。\n16-19行目\nif文のあとにelse句を付け加えることで、条件式を満たさなかった場合の処理を書くことができます。\n今回のコードでは、条件式「abs(X - Y) < 3 」を満たしていないとき、No を出力します。\n不正解の時は…\n出力の間違い\n“Yes”, “No”と出力すべきところを、”YES”, ”NO”と出力している。\n条件式の間違い\nX - Y > -3 || X - Y < 3\nabs(X - Y) <= 3\nなど、間違えた条件式を書くとWAになります。\n複雑なコードを書いた結果、どこかにバグを埋め込んでいる。\n今回の問題では、問題文に書かれている通りに実装するとコードが複雑になってしまいます (\n提出例\n)。\n紙の上で条件を整理し、シンプルなコードを書くように心がけると、バグを減らすことができます。\n類題\nif文による判定問題\nabs関数を用いる問題\n工事中",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main() {\n        // int型の変数 X,Y を宣言する。  \n\tint X, Y;\n\n        //入力からX,Yの値を受け取る。\n\tcin >> X >> Y;\n\n\t//abs(X-Y)<3であれば、Yesを出力する。 \n\tif (abs(X - Y) < 3) {\n\t\tcout << \"Yes\" << endl;\n\t}\n\n\t//そうでないならば、Noを出力する。\n\telse {   \n\t\tcout << \"No\" << endl;\n\t}\n}"
+      ],
+      "text_sha256": "38be25a37eb1938f0f81c617eb6dd791df361e460af127fb7b39b36cdf787904",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc188/abc188_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

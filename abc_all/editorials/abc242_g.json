@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc242_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc242/editorial/3517",
+      "text": "クエリ\n\\((l,r)\\)\nに対して、求めるべき答えは以下です。\n\\(\\sum_{i=1}^{N} \\lfloor(\\)\n区間\n\\([l,r]\\)\n内で色\n\\(i\\)\nを着ている人数\n\\()/2 \\rfloor\\)\n区間\n\\([l,r]\\)\nに対して何らかの方法でこれを求めたとして、この区間の両端を\n\\(1\\)\nつ追加したり両端のどちらかを削除したりすることを考えます。\n\\(A_x\\)\nを区間に追加する場合 : 追加する前の区間で\n\\(A_x\\)\nが奇数個含まれていれば、答えが\n\\(1\\)\n増加します。\n\\(A_x\\)\nを区間から削除する場合 : 削除する前の区間で\n\\(A_x\\)\nが偶数個含まれていれば、答えが\n\\(1\\)\n減少します。\nバケットソートを利用すれば、この区間の伸び縮みは\n\\(1\\)\n要素あたり\n\\(O(1)\\)\nで対応可能であることが分かります。\nこれにより、この問題は、 Mo’s algorithm によって解くことができます。\nMo’s algorithm とは、区間をいくつかのブロックに分割し、区間の左端のブロック別に区間たちを分割し、\nブロック順(左端がより左にあるブロックから順)にクエリを処理する。\n同一ブロック中では、適切にソートされた順番(例えば、区間の右端が左にあるものから順)でクエリを処理する\nというテクニックです。\n日本語による解説記事をいくつか示します。\nei1333の日記 - Mo’s algorithm\n@ageprocppさんの記事 - Mo’s algorithm(クエリ平方分割)の話\n計算量はブロックの個数を\n\\(B\\)\nとして\n\\(O(NB + Q(N/B))\\)\nなので、\n\\(B = \\Theta(\\sqrt{Q})\\)\nとすれば、\n\\(O(N\\sqrt{Q})\\)\nになります。\n実装例(C++)\n類題:\nPowerful array (Yandex.Algorithm 2011: Round 2)",
+      "codes": [],
+      "text_sha256": "ea10f0da234a2d05c019d454e8f06d81155daaea1fa7b345705bad6faa5ba354",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc242/abc242_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

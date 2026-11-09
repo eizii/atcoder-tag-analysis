@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc151_a",
+  "editorials": [
+    {
+      "text": "A: Next Alphabet\n一つの方法として考えられるのは、25 種類の入力に対してif 文を書き、出力する文字を決めると\nいうものです。\nしかし、英小文字は文字コード上で順に並んでいるため、入力に1 を足すことで正解を得られま\nす。(実は厳密にはどのような環境でも文字コード上で順に並んでいることが保証されているわけで\nはありません。しかしAtCoder を含む現代のパソコン上では、ほとんどの場合このように順に並ん\nでいます。)\nListing 1\nC++ での実装例\n1 #include <stdio.h>\n2\n3 char in[2];\n4 int main(){\n5\nscanf(\"%s\",in);\n6\nin[0]++;\n7\nprintf(\"%s\\n\",in);\n8 }\n",
+      "text_sha256": "fdf469538834eabdf6d49b009d32ea5b80a69b1a33c7c1aa57f6f492efcdad25",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc151/abc151_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,417 @@
+       ARC 091/ABC 090 解説
+
+
+                  Kohei Morita(yosupo)
+
+            平成30 年3 月19 日
+
+
+
+      For International Readers: English editorial starts on page 7.
+
+
+A: Two Coins
+
+  A, B, C を入力し，A + B ≥C を判定すれば良いです。
+
+  [https://beta.atcoder.jp/contests/abc091/submissions/2218039]
+
+
+
+
+
+                                1
+
+B: Two Colors Card Game
+
+ どのカードにも書かれていない，めちゃくちゃな文字列を言えば0 点を取
+ることが出来ます。そして，1 点以上を取るためには，少なくとも青いカー
+ドのうちどれかに書かれた文字列を言う必要があります。
+
+ よって，青いカードに書かれた文字列それぞれについて，その文字列を言っ
+
+たら何点貰えるかを計算し，その最大値を計算すれば良いです。
+
+  [https://beta.atcoder.jp/contests/abc091/submissions/2218376]
+
+
+
+
+
+                                2
+
+C: 2D Plane 2N Points
+
+ 青い点のうち，最もx 座標が小さいもの(bA とします) に注目します。こ
+の点と仲良しペアになれる点が存在した場合，そのような点のうち最もy 座
+標が大きいもの(rA とします) と仲良しペアにしてよいです。
+ 証明ですが，bA がどの点ともペアにならなかった場合と，rA 以外とペア
+になった場合それぞれについて，bA とrA をペアにしても同じ個数，もしく
+はそれ以上の個数の仲良しペアが作れることを示します。
+
+
+bA がどの点ともペアにならなかった場合  rA がどの点ともペアになってい
+なかったら，bA とrA をペアにすれば良いです。rA が他の青い点(bB とし
+ます) とペアになっていたら，そのペアを解消し，bA とrA をペアにすれば
+良いです。
+
+
+bA がrA 以外とペアになった場合(bA とペアになっている点をrB としま
+す)  rA がどの点ともペアになっていなかったら，bA の仲良しペアを解消
+し，bA とrA をペアにすれば良いです。
+  rA が他の青い点(bB とします) とペアになっていた場合，つまりbA-rB,
+rA-bB というペアが出来ていた場合を考えます。この場合は，ペアの相手を
+交換し，必ずbA-rA, rB-bB というペアに出来ます。これは，以下の2 つか
+ら示せます。
+
+   • bA が青い点のなかで一番x 座標が小さいので，bB のx 座標は必ずbA
+   より大きい，つまりrB よりも大きいです。
+
+   • rB は(bA とマッチング出来ていたので，) 必ずrA よりy 座標が小さい
+   です。また，bB は(rA とマッチング出来ていたので，) 必ずrA よりy
+   座標が大きいです。よって，bB のy 座標は，必ずrB より大きいです。
+
+ 以上より，bA はかならずrA とペアにしていいことが示せます。
+ この性質より，青い点をx 座標の小さい順に見ていき，
+
+   • 青い点よりx, y 座標が小さく，まだ仲良しペアになっていない赤い点
+   を探す
+
+   • なかったらなにもしない
+
+   • あったら，その中で最もy 座標が大きいものを探し，仲良しペアにする
+
+ というアルゴリズムで最適解が求まります。
+
+
+余談 この問題は，二部グラフの最大マッチング問題としても考えることが
+
+可能で，これは最大流アルゴリズムを使用すれば解くことが出来ます。
+
+
+                                3
+
+D: Two Sequences
+
+ まず，この問題ではbit は0-indexed とします。つまり，2 進数で一番下の
+桁から，0-bit 目，1-bit 目, ..., と呼びます。
+ 答えを各bit ごとに求めます。k-bit 目を求めたいとします。
+  xor の定義より，N 2 個のai + bj のうち，k-bit 目が1 のものが偶数個ある
+か奇数個あるか判定できれば良いです。
+ ここで重要な考察として，ai + bj のk-bit 目を考えているので，ai, bj の
+k +1-bit 目以降は無視してよい，つまりai, bj は2k+1 でmod を取ってしまっ
+て良いというのがあります。
+ すると，ai+bj はたかだか4T(T = 2k) 未満です。そして，k-bit 目が1 の範
+囲は，[T, 2T), [3T, 4T), [5T, 6T), ... なので，ai + bj のうち，[T, 2T), [3T, 4T)
+の範囲にあるものの個数を求めればよいことがわかります。
+ これは，ai を固定してしまえば，bj のうち[T −ai, 2T −ai), [3T −ai, 4T −ai)
+の範囲にあるものの個数を求めれば良くなり，これはbj をsort しておけば
+二分探索でO(logN) で求められます。
+
+
+余談 この問題のO(N 2) 解は非常に単純なうえ，SIMD で高速化が効き，と
+てつもなく高速に動作します。
+  writer が素直なO(N 2) を書き，ブロック化を行ったら3770ms となったの
+で，SIMD が得意な人ならばもしかすると愚直解で通せてしまうのではとも
+考えています。
+
+ ぜひSIMD が得意な人は挑戦してみてください。
+
+
+
+
+
+                                4
+
+E: Both Sides Merger
+
+ 最終的な数列の要素は，当然ai をいくつか足したものになります。
+ ここで，このi の集合に注目します。例えばサンプル1 なら最終的な要素
+はa2 + a4 なので，{2, 4} という集合に注目します。
+ この集合にはどのような性質があるでしょうか？実は，必ずこの集合の要
+
+素は，偶奇は全て等しくなります。
+ つまり，偶奇の違うペア，例えばa1, a2 やa4, a7 は，絶対に一つの要素に
+合わせられないです。
+
+ これは，どのような操作をしてもこのペアの要素は偶奇が異なったまま(な
+ので，一つの要素にまとめることは不可能) であることから示せます。
+ 実は，これが必要十分です。つまり，すべての要素が偶奇が等しい集合が
+
+与えれば，最終的な要素がそれに対応した要素の和になるような手順が必ず
+
+存在します。
+
+ 構築の方法ですが，両端のいらない要素をまず全てカットします。その後
+
+   • 両端がどちらも残したい要素，かつ自分自身は残したくない要素(A)
+
+   • 両端がどちらも残したくない，かつ自分自身も残したくない要素(B)
+
+ このA, B を満たす要素のうちどちらかは必ず取れるので，これを取って
+いけばかならず要素数が少なくなっていき，最終的に1 つになります。
+ なぜこのどちらかは必ず存在するのかというと，集合の要素の偶奇が等し
+
+いということは，oxxxoxo，のように残したい要素同士の間には，残したく
+ない要素が奇数個挟まっています。
+
+ もし1 個挟まっていれば，その要素はA の条件を満たし，3 個以上挟まっ
+ていれば，(そのうち両端以外は)B の条件を満たします。よって，必ずどち
+らかを満たす要素が存在します。
+
+ 以上より，この問題は，「数列から添字の偶奇が同じように要素を取って，
+
+総和を最大化してください」という問題になります。これは，偶奇を固定し，
+
+0 以上の要素をすべて取るだけでよいです。
+ コーナーケースは全部の要素が負の場合です。十分注意してください。
+
+
+
+
+
+                                5
+
+F: Two Faced Edges
+
+ 各辺i に対し，以下の条件を満たすかを調べたいです。
+
+   • 1. もし辺(ai, bi) を消したとしても，ai からbi に到達可能か？
+
+   • 2. bi からai に到達可能か？
+
+ この2 つの条件を両方達成するか，両方達成しない場合，辺の反転でSCC
+の成分数が変わらないことが容易に示せます。
+
+ 条件2 はO(N + M) やO(N(N + M)) で容易に調べられます。ですので，
+この問題の本質は条件1 を高速に求めることです。
+ 方針としては，頂点を固定し，そこから出ていく辺すべてについての条件
+1 をO(N + M) で求めます。つまり，ai を固定します。
+ まず，ai から出てくる辺に，適当に連番を振っておきます。
+  当然(ai, bi) を使わずにai からbi に到達可能ならば，ai から出ていく他
+の辺を使う必要があります。そしてその辺の番号は(ai, bi) より小さいかま
+たは大きいです。
+
+ よって，まずは小さい辺を使った場合のみ，つまり以下の条件を考えます。
+
+当然小さい辺を使った場合のみに限定して解ければ，辺に降った番号を逆順
+
+にしてもう一度同じ問題を解けば良いので，この問題が解けます。
+
+   • 3. もし辺(ai, bi) を消したとしても，ai から(ai, bi) より小さい番号の
+   辺を使い，bi に到達可能か？
+
+ 条件3 は，辺の番号が小さい順に辺を追加していき，追加する直前に今ま
+で追加した辺を利用してbi に到達できるか，を調べられれば良いです。
+ これは，辺を追加するたびにdfs を走らせ，二度同じ頂点は辿らないよう
+にするだけで，まとめてO(N + M) となります。
+ よってこの問題はまとめてO(N(N + M)) で解けました。
+
+
+
+
+
+                                6
+
+A: Two Coins
+
+  [https://beta.atcoder.jp/contests/abc091/submissions/2218039]
+
+
+
+
+
+                                7
+
+B: Two Colors Card Game
+
+  [https://beta.atcoder.jp/contests/abc091/submissions/2218376]
+
+
+
+
+
+                                8
+
+C: 2D Plane 2N Points
+
+  Let A be a blue point with the minimum x-coordinate.   If A can be
+
+paired with red points, we should choose a red point B such that B can be
+
+paired with A, and among all such points the y-coordinate is the maximum
+possible.
+   (If B is paired with other point, for example if there are pairs B −C and
+A −D, we can rearrange them because A −C and B −D are also valid
+
+pairs).
+
+  By doing this, we can reduce the number of points by 1 (if A can’t be
+paired at all) or 2 (if we ﬁnd a pair A −B).
+
+  In summary, we ﬁrst sort all 2N points together by x-coordinates, and
+
+process points in this order. We also keep a set of points (initially this is
+
+empty). Then, for each point, do the following:
+
+   • If a red point appears, add its y-coordinate to the set.
+
+   • If a blue point appears, let p be its y-coordinate.  If all elements in
+
+     the set are greater than p, do nothing (we can’t do anything with this
+
+     blue point). Otherwise, choose the maximum element q in the set such
+
+     that q < p, remove it, and increase the answer by one (the current
+
+     blue point and the point that corresponds to q are paired).
+
+
+
+
+
+                                9
+
+D: Two Sequences
+
+  Since we can handle each bit independently, let’s consider only the k-th
+
+bit. We want to count the number of pairs (i, j) such that the k-th bit of
+ai + bj is one. (And if this number is add, we should add 2k to the answer.)
+  Let T = 2k. An important observation is that, we are only interested in
+the values of ai, bi in modulo 2T. Thus, let’s replace ai with ai%(2T) and
+bi with bi%(2T), and assume that ai, bi < 2T.
+  Then, there are two cases when the k-th bit of ai + bj is one:
+
+   • T ≤ai + bj < 2T
+
+   • 3T ≤ai + bj < 4T
+
+  Let’s sort b in an increasing order. For a ﬁxed i, the set of j that satisﬁes
+T ≤ai +bj < 2T forms an interval. Thus, we can count the number of such
+js by binary search (or two-pointers). Similarly, we can handle the second
+
+case.
+
+  This solution works in O(NlogNlogMAX) time, where MAX is the max-
+
+imum number that can appear in the input.
+
+
+
+
+
+                                10
+
+E: Both Sides Merger
+
+  The answer of this problem will be the sum of a subset of {ai}.
+  For example, consider example 1. In this sample, the answer is a2 + a4,
+so the set of indices is {2, 4}
+  Suppose that we are given a set of indices, I. Let’s check if we can perform
+
+operations such that the ﬁnal integer corresponds to the sum of all elements
+
+with indices in I.
+
+   It turns out that the following are neccesary and suﬃcient conditions:
+
+   • The parity of all indices in I are the same.
+
+   • I is non-empty.
+
+
+   It’s easy to prove that these conditions are necessary. Suppose that ini-
+
+tially, x is in an odd-indexed position and y is in an even-indexed position.
+
+Then, no matter what operations we perform, the parities of the indices of
+
+x, y never become the same.
+  These are also suﬃcient conditions because we can construct a sequence
+
+of operations, as we describe below.
+
+  To compute the answer, ﬁx a parity, and take all non-negative elements
+
+in the positions with chosen parity. When all elements are negative, you
+
+need to be careful not to make it empty.
+
+  To construct a sequence of operations, we ﬁrst remove all unnecessary
+
+elements from both ends. Then, we repeat choosing elements while we have
+
+more than one elements. We can choose an element x if one of the following
+
+holds:
+
+   • x is adjacent to two elements (call it y, z), and we want to keep both
+
+     y and z in the ﬁnal element.
+
+   • x is adjacent to two elements (call it y, z), and we want to remove
+
+     both y and z from the array.
+
+   It’s easy to see that such elements always exist.
+
+
+
+
+
+                                11
+
+F: Two Faced Edges
+
+  For each edge i, we want to determine the following two things:
+
+   • 1. If we remove an edge from ai to bi, is bi still reachable from ai (by
+     using other edges)?
+
+   • 2. Is ai reachable from bi?
+
+   It’s easy to see that the number of SCCs won’t change after the reversion
+
+of edge i if and only if the answers to the two questions above are the same
+
+(i.e., both are yes or both are no). Since the second question can be solved
+
+easily in O(NM) by running dfs from all vertices, we will focus on the ﬁrst
+
+question.
+
+  Consider a particular vertex x. We will solve the ﬁrst question for all
+edges such that ai = x, in O(M) time.  Then, we can solve the entire
+problem in O(NM).
+  Suppose that there are k edges that goes out of the vertex x, and let’s
+name the destinations y1, . . . , yk. We will do the following:
+
+   • By running a dfs from y1, we mark all vertices that are reachable from
+      y1 without visiting x.
+
+   • By running a dfs from y2, we mark all unmarked vertices that are
+      reachable from y2 without visiting x.
+
+   • By running a dfs from y3, we mark all unmarked vertices that are
+      reachable from y3 without visiting x.
+
+   • And so on.
+
+
+  Then, for each vertex z, we know the minimum integer p(z) such that
+z is reachable from x by using an edge x−> yp(z) (and without visiting
+the vertex x again). Similarly, by running dfs in the reverse order, for each
+
+vertex z, we know the maximum integer q(z) such that z is reachable from
+x by using an edge x−> yq(z) (and without visiting the vertex x again).
+The question 1 for an edge x−> yi is ”yes” if and only if at least one of
+p(yi) ̸= i or q(yi) ̸= i holds.
+  This solution works in O(NM) time.
+
+
+
+
+
+                                12

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc406_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc406/editorial/13041",
+      "text": "締切前に提出しているかの判定は次のように行うことができます。\n\\(A>C\\)\nならば\nYes\n\\(A<C\\)\nならば\nNo\n\\(A=C\\)\nのとき、\n\\(B>D\\)\nならば\nYes\n,\n\\(B<D\\)\nならば\nNo\nこれらは if 文を用いて実装することができます。\nなお、\n\\(5\\)\n月\n\\(17\\)\n日が開始してからの時間で比較することもできます。すなわち、\n\\((60*A+B)>(60*C+D)\\)\nならば\nYes\n、\n\\((60*A+B)<(60*C+D)\\)\nならば\nNo\nとしても正しく判定することができます。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint a,b,c,d;\n\n\tcin>>a>>b>>c>>d;\n\n\tif(a>c)cout<<\"Yes\"<<endl;\n\telse if(a<c)cout<<\"No\"<<endl;\n\telse if(b>d)cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n\t\n\treturn 0;\n}",
+        "a,b,c,d=map(int, input().split())\n\nif a>c:\n    print(\"Yes\")\nelif a<c:\n    print(\"No\")\nelif b>d:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "43a216d6eede3a2f0c1aaf5fe7a7a1200b802eed70ce511999a47c8ede158395",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc406/abc406_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

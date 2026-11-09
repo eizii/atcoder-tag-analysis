@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc289_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc289/editorial/5733",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nこの問題は、\n入力から文字列を読み込む\n文字列の文字を対応する文字に変更する\n変更された文字列を出力する\nことができれば解くことができます。\n実装例のみが気になる人のために、C++ と Python での実装例を置いておきます。\n実装例の下に、言語機能の差による実装方針の違いについての話があります。\n使っている言語にどのような機能があるかによって、どのように実装するのが簡単かが変わります。\nまず、「文字列の文字を対応する文字に変更する」処理について、\n複数の対応する文字どうしを一斉に置き換える方法が用意されている\nBash 、Ruby など\n文字列中に出現するある \\(1\\) 文字を、対応する別の \\(1\\) 文字に一斉に置き換える方法が用意されている\nPython など\n上のような方法が用意されていないか、少し高度な概念を使うため自分で書くほうが簡単になる場合がある\nC++ 、Haskell など\nような言語に分けることができます。\nまた、「入力から文字列を読み込む」「変更された文字列を出力する」処理について、\n入力の文字列をそのまま変更して出力する方法がある\nBash 、Haskell など\n入力の文字列を読み込んで変数に入れる方法、変数に入った文字列を出力する方法がある\nRuby 、Python 、C++ など\n\\(1\\) 文字ずつ読み込む方法しかない\nここでは解説しませんが、Brainfuck などがあたります\nような言語に分けることができます。\nBash 、Haskell 、Ruby 、Python 、C++ について、実装例とともに解説をします。\nBash\nBash の\ntr\nコマンドを使うと、入力に含まれる文字をそれぞれ対応する文字に変更して出力することができます。\ntr ab cd\nのように書くと、入力の\na\nを\nc\nに、\nb\nを\nd\nに変更した文字列が出力されます。\n実装例は以下のようになります。\nHaskell\nHaskell には interact という関数があり、文字列を変換する関数を渡すと入力を変換して出力することができます。\nmap という関数を用いると、文字を変換する関数を渡すことで文字列のそれぞれの文字を変換する関数を得ることができます。\n0\nを\n1\nに、\n1\nを\n0\nに変更するパートは自分でロジックを書くほうが（おそらく）シンプルになります。\nRuby\nRuby の文字列には tr というメソッドがあり、\ns.tr(\"ab\", \"cd\")\nなどと書くことで\na\nを\nc\nに、\nb\nを\nd\nに変換することができます。\ngets\nで入力を受け取り、\ntr\nで文字を置き換えて\nputs\nで出力をするような形になります。\nPython\nPython の文字列には replace というメソッドがあり、\ns.replace('a', 'b')\nなどと書くと文字列中の\na\nを\nb\nに変換することができます。\n今回のような \\(2\\) つを入れ替えるような操作は\nのように続けて書くとうまくいきません。\n一度目の\nreplace('0', '1')\nで文字列がすべて\n1\nになってしまうためです。\nこのような場合、一旦\n0\nを関係のない文字に置換してしまうことで正しい操作が行えます。\ninput\nで入力を受け取り、\nreplace\nで文字を置き換えて\nprint\nで出力をするとこの問題を解くことができます。\nまた、Python の文字列には translate というメソッドがあり、適切な map を渡すことでそれぞれの文字を与えた文字列で変更することができます。\ntranslate に渡す map は str.maketrans 関数を用いて作成するのがよいでしょう。\nや\nのような書き方ができます。\nC++\nC++ では、string 型の変数に入力を受け取ったあと、\\(1\\) 文字ずつ変換して変換した結果を出力することができます。\n\\(s\\) を編集して、最後に \\(s\\) を出力する形式にすることもできます。\nC++ には replace という関数があり、範囲内のある値を別の値に変更することができます。\nreplace 関数を用いると、次のように実装できます。\nPython での例と同様に、一度無関係な文字を挟まないとうまくいかないことに注意してください。",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    \n    for (char c : s)\n        if (c == '0')\n            cout << '1';\n        else\n            cout << '0';\n\n    cout << endl;\n\n    return 0;\n}",
+        "s = input()\nprint(s.replace('0', 'x').replace('1', '0').replace('x', '1'))",
+        "tr 01 10",
+        "main = interact $ map (\n    \\c -> if c == '0' then\n              '1'\n          else if c == '1' then\n              '0'\n          else\n              c\n    )",
+        "puts gets.tr(\"01\", \"10\")",
+        "s.replace('0', '1').replace('1', '0') # うまくいかない例",
+        "s.replace('0', 'x').replace('1', '0').replace('x', '1') # うまくいく例",
+        "print(input().replace('0', 'x').replace('1', '0').replace('x', '1'))",
+        "print(input().translate({ord('0'): '1', ord('1'): '0'}))",
+        "print(input().translate(str.maketrans({'0': '1', '1': '0'})))",
+        "print(input().translate(str.maketrans('01', '10')))",
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n\n    for (char c : s)\n        if (c == '0')\n            cout << '1';\n        else\n            cout << '0';\n\n    cout << endl;\n\n    return 0;\n}",
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n\n    for (char& c : s)\n        if (c == '0')\n            c = '1';\n        else\n            c = '0';\n\n    cout << s << endl;\n\n    return 0;\n}",
+        "#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n\n    replace(s.begin(), s.end(), '0', 'x');\n    replace(s.begin(), s.end(), '1', '0');\n    replace(s.begin(), s.end(), 'x', '1');\n\n    cout << s << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "90be04046cb770db7414173afe6357929e0bbdc3f5ebad8166250f86304bd456",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc289/abc289_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

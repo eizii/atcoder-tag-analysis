@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc244_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc244/editorial/3596",
+      "text": "本問題に正解するには、高橋君の行動を実際にシミュレーションするプログラムを作成すれば良いです。\n具体的には、与えられた文字列\n\\(T\\)\nを先頭から走査し、各文字が\nS\nであるか\nR\nであるかに応じて移動または向きの変更を行います。その後、最終的な高橋君の位置を出力します。\n文字列\n\\(T\\)\nを先頭から走査するには、プログラミング言語の標準的な機能である繰り返しの機能（ for 文など）を用いることができます。\n\\(T\\)\nを走査する過程で、高橋君の位置\n\\((x, y)\\)\nと向き\n\\(d\\)\n（東/南/西/北）を変数として保持し、移動や向きの変更の際にそれらを適切に変更していきます。\nC++ 言語による本問題の正解例を以下に記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(void)\n{\n  int n;\n  string s;\n  cin >> n >> s;\n  \n  int x = 0, y = 0, d = 0;\n  for(int i = 0; i < n; i++){\n    if(s[i] == 'S'){\n      if(d == 0) x++;\n      if(d == 1) y--;\n      if(d == 2) x--;\n      if(d == 3) y++;\n    }\n    if(s[i] == 'R') d = (d+1) % 4;\n  }\n  cout << x << \" \" << y << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "3405ec74e7a5509caa5691ceafb63be29b7837d921ec13442bb79653e96dd9f0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc244/abc244_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc244/editorial/3641",
+      "text": "B - Go Straight and Turn Right\n解説\nby\ncirno3153\n\\(90\\)\n度回転を簡便に実装する方法について説明します。\nまず、\nS\nによる移動量を\n\\((dx, dy)\\)\nとして定義します。\n初めは\n\\((dx, dy) = (1, 0)\\)\nです。\nそして、\nR\nが呼ばれる度に、\n\\((dx, dy) \\leftarrow (dy, -dx)\\)\nとすることで、正しく動作します。\n何故これが正しく動くのでしょうか？\nこれは、アフィン変換という概念を考えることで理解することができます。\nまず、\n\\((x, y)\\)\n方向への移動量を表すベクトルを\n\\(\\begin{pmatrix}x \\\\ y \\\\ 1 \\\\ \\end{pmatrix}\\)\nとします。(\n\\(x, y\\)\nだけでなく余分な情報として\n\\(1\\)\nが追加で付いていますが、これは気にしないでください。詳しく知りたい場合は同次座標系などで調べると良いです。)\nベクトルに対する平行移動や回転は行列を作用させることで表すことができ、次のように表すことができます。\n平行移動\nベクトルを\n\\(X\\)\n軸方向に\n\\(T_x\\)\n、\n\\(Y\\)\n軸方向に\n\\(T_y\\)\n移動させる変換行列は、以下のように表せます。\n\\(\n\\begin{pmatrix}\nx' \\\\\ny' \\\\\n1 \\\\\n\\end{pmatrix}\n =\n \\begin{pmatrix}\n1 & 0 & T_x \\\\\n0 & 1 & T_y \\\\\n0 & 0 & 1 - T_x - T_y \\\\\n\\end{pmatrix}\n\\begin{pmatrix}\nx \\\\\ny \\\\\n1 \\\\\n\\end{pmatrix}\n\\)\n拡大縮小\nベクトルを\n\\(X\\)\n軸方向に\n\\(S_x\\)\n、\n\\(Y\\)\n軸方向に\n\\(S_y\\)\n拡大させる変換行列は、以下のように表せます。\n\\(\n\\begin{pmatrix}\nx' \\\\\ny' \\\\\n1 \\\\\n\\end{pmatrix}\n =\n \\begin{pmatrix}\nS_x & 0 & 0 \\\\\n0 & S_y & 0 \\\\\n0 & 0 & 1 \\\\\n\\end{pmatrix}\n\\begin{pmatrix}\nx \\\\\ny \\\\\n1 \\\\\n\\end{pmatrix}\n\\)\n鏡映\nベクトルを直線\n\\(y=ax+b\\)\nを基準に鏡像を取る変換行列は、以下のように表せます。\n\\(\n\\begin{pmatrix}\nx' \\\\\ny' \\\\\n1 \\\\\n\\end{pmatrix}\n =\n \\begin{pmatrix}\n\\frac{1-a^2}{a^2+1} & \\frac{2a}{a^2+1} & \\frac{-2ab}{a^2+1} \\\\\n\\frac{2a}{a^2+1} & \\frac{a^2-1}{a^2+1/} & \\frac{2b}{a^2+1} \\\\\n0 & 0 & \\frac{a^2+2ab-2b+1}{a^2+1} \\\\\n\\end{pmatrix}\n\\begin{pmatrix}\nx \\\\\ny \\\\\n1 \\\\\n\\end{pmatrix}\n\\)\n回転\nベクトルを\n\\(\\theta\\)\n回転させる変換行列は、以下のように表せます。\n\\(\n\\begin{pmatrix}\nx' \\\\\ny' \\\\\n1 \\\\\n\\end{pmatrix}\n =\n \\begin{pmatrix}\n\\cos\\theta & -\\sin\\theta & 0 \\\\\n\\sin\\theta & \\cos\\theta & 0 \\\\\n0 & 0 & 1 \\\\\n\\end{pmatrix}\n\\begin{pmatrix}\nx \\\\\ny \\\\\n1 \\\\\n\\end{pmatrix}\n\\)\nここで\n\\(\\theta=\\frac{3\\pi}{2}\\)\n、つまり右に\n\\(90\\)\n度回転させると\n\\(\n\\begin{pmatrix}\nx' \\\\\ny' \\\\\n1 \\\\\n\\end{pmatrix}\n =\n \\begin{pmatrix}\n0 & 1 & 0 \\\\\n-1 &0 & 0 \\\\\n0 & 0 & 1 \\\\\n\\end{pmatrix}\n\\begin{pmatrix}\nx \\\\\ny \\\\\n1 \\\\\n\\end{pmatrix}\n\\)\nとなり、\n\\((x', y', 1)^{\\top} = (y, -x, 1)^{\\top}\\)\nとなることから元の問題で用いた手法が導かれます。\nアフィン変換行列を覚えることで、解ける問題の幅は広がります。\nこの機会に、学んでみるのはいかがでしょうか？\nABC197-D Opposite\n第七回アルゴリズム実技検定-I ほくろ\nABC189-E Rotate and Flip\nアフィン変換が行列であることを利用しています。",
+      "codes": [
+        "N = int(input())\nT = input()\n\nx, y = 0, 0\ndx, dy = 1, 0\nfor t in T:\n  if t == 'S': x, y = x + dx, y + dy\n  else: dx, dy = dy, -dx\nprint(x, y)"
+      ],
+      "text_sha256": "d79f2ce1ce4151cb521de35e940d8f83ef412b77f71c4981d0c7e04ce7c43db0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc244/abc244_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc032_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc032/editorial.pdf",
+      "text": "高橋君と青木君の好きな数A -\n\n\n\n\n\n                                                                                                        2\n\f\n問題概要\n\n• 整数𝑎, 𝑏, 𝑛(1 ≦𝑎, 𝑏≦100, 𝑛≦20000) が与えられる．\n• aとbの公倍数で，n以上で最小のものを求めよ．\n\n• 例) a=2,b=3,n=8 → 12 (n以上で最小の，2と3の公倍数は12)\n\n\n\n\n\n                                                                                                                                     3\n\f\n解法\n\n• 与えられたnを，aとbの両方で割り切れるようになるまで愚直にイン\n クリメントして，割り切れたらそれを出力．\n\n\n• 高々a*b-1回インクリメントすればそのような数は見つかるので，\n 時間計算量はO(ab) で間に合う．\n\n\n\n\n\n                                                                                                                                     4\n\f\n別解\n\n• まず𝑎と𝑏の最大公約数gcd(𝑎, 𝑏)をユークリッドの互除法で求める．\n                                          a𝑏\n• そして𝑎と𝑏の最小公倍数lcm 𝑎, 𝑏= gcd(𝑎,𝑏)を求めてから，\n                      𝑛\n            lcm 𝑎, 𝑏∗                      lcm 𝑎, 𝑏を切り上げたもの\n                                                 [余談]\n                                                                            𝑎• を計算するとそれが答え．              一般に                                         𝑏の切り上げは，\n                                                                  𝑎+𝑏−1\n                                     を整数で計算すると求まる\n                                                                           𝑏\n• この方法だとn,a,bが大きくても解けるが今回は必要ない．\n\n\n\n\n\n                                                                                                                                     5",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "20325dd4e4567ce4f6b58d0831fa1bd9287c12544678e70611b7ade0a40d4e0b"
+    }
+  ],
+  "status": "available"
+}

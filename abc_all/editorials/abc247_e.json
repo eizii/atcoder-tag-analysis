@@ -1,0 +1,40 @@
+{
+  "problem_id": "abc247_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc247/editorial/3736",
+      "text": "まず、愚直に\n\\(L,R\\)\nを全探索すれば\n\\(\\mathrm{O}(N^3)\\)\nあるいは\n\\(\\mathrm{O}(N^2)\\)\nでこの問題を解くことができますが、\n\\(N \\leq 2\\times 10^5\\)\nなので TLE してしまいます。そこで、アルゴリズムを上手く用いて\n\\(\\mathrm{O}(N)\\)\nでこの問題を解く方法を紹介します。\nまず、この問題は条件を満たす整数の組\n\\((L,R)\\)\nの数え上げですが、少し見方を変えると次のように言い換えられます。\n\\(A\\)\nの連続部分列\n\\(A_{L}, A_{L+1}, \\dots, A_{R}\\)\nのうち、最大値が\n\\(X\\)\n, 最小値が\n\\(Y\\)\nとなるものは何個あるか。\nこのように\n\\((L,R)\\)\nの数え上げを区間の数え上げとみなすと見通しが良くなります。\nただ、これでもまだ以下に述べる通り厄介な要素が残っているので、条件を満たす連続部分列がどのようなものかを考察して問題を単純化できないか考えてみましょう。\n\\[A = (4,2,5,4,3,4,2), X=4, Y=2\\]\nの場合を考えましょう。\nこの例では\n\\(A_3 = 5\\)\nが厄介です。\n\\(A_3 = 5\\)\nは\n\\(X = 4\\)\nよりも大きいので、\n\\(A_3\\)\nを含む連続部分列はすべて条件を満たしません。このような数を残したまま考察を進めると少し面倒な場合分けが必要になります。\n少し考察を進めると、よくよく考えると\n\\(A_3\\)\nを含む連続部分列が条件を満たさないということは、列から\n\\(A_3\\)\nを取り除いて前後で分割して、それぞれの列に対して条件を満たす列を数え上げてもよい、ということになります。すなわち、\n\\(A\\)\nの前\n\\(2\\)\nつを\n\\(A_1\\)\n, 後ろ\n\\(4\\)\nつを\n\\(A_2\\)\nとして\n\\[ A_1 = (4, 2), X=4, Y=2\\]\n\\[A_2 = (4,3,4,2), X=4, Y=2\\]\nの\n\\(2\\)\nつの場合について問題を解いて答えを足し合わせたものが全体の答えとなります。\n一般の場合についても同様です。\n\\(A_i\\)\nが\n\\(X \\leq A_i \\leq Y\\)\nを満たさない場合は、\n\\(A_i\\)\nを取り除いて列を分割して、分割された列に対して数え上げを行えばよいです。\nさて、言い換えの結果、分割された列を\n\\(1\\)\nつ取ってきて\n\\(B\\)\nとしたとき、次の部分問題 1 が高速に解ければよいことになります。\n部分問題 1\n\\(B\\)\nの連続部分列\n\\(B_{L}, B_{L+1}, \\dots, B_{R}\\)\nのうち、最大値が\n\\(X\\)\n, 最小値が\n\\(Y\\)\nとなるものは何個あるか。\nただし\n\\(B\\)\nの要素は\n\\(Y\\)\n以上\n\\(X\\)\n以下である。\n元の問題と比べて太線で強調した条件が追加されています。実はこの条件をうまく利用することで、解くべき部分問題は更に言い換えられます。\n列の要素は\n\\(Y\\)\n以上\n\\(X\\)\n以下という条件がすでに満たされているので、「最大値が\n\\(X\\)\n, 最小値が\n\\(Y\\)\nとなる」という条件は「\n\\(X,Y\\)\nがともに列に含まれる」という条件と等価になっています。\nよって次の部分問題 2 を高速に計算できればよいです。\n部分問題 2\n\\(B\\)\nの連続部分列\n\\(B_{L}, B_{L+1}, \\dots, B_{R}\\)\nのうち、\n\\(X, Y\\)\nがともに含まれる列\nは何個あるか。\n上の問題を線形時間、すなわち\n\\(\\mathrm{O}(|B|)\\)\nで解ければ、\n\\(A\\)\nを分割した列の長さの 和は\n\\(N\\)\nを超えないので、全体の計算量は\n\\(\\mathrm{O}(\\sum_{B \\in (A を分割した列の集合)} B) = \\mathrm{O}(N)\\)\nとなります。\n部分問題 2 を高速に解く方法はいくつかあります。1 つずつ説明していきましょう。\n解法 1  : 尺取り法\n以下では\n\\(B_L,B_{L+1},\\dots,B_R\\)\nを 「区間\n\\([L,R]\\)\n」と表現します。\n部分問題 2 では、次のような性質が成り立ちます。\n区間\n\\([k,l]\\)\nが区間\n\\([i,j]\\)\nを含んでいる、すなわち\n\\(i,j,k,l\\)\nが\n\\(1 \\leq k \\leq i \\leq j \\leq l \\leq |B|\\)\nの関係にあるとき、区間\n\\([i,j]\\)\nが条件を満たすならば\n\\([k,l]\\)\nが条件を満たす。\nこのような場合は次のようなアルゴリズムによって、条件を満たす区間を数え上げることができます。\nはじめ、\n\\(L=R=1\\)\nとする。\n\\(L\\)\nが\n\\(N\\)\n以下の間、次の操作を行う。\n区間\n\\([L,R]\\)\nが条件を満たさない間、\n\\(R\\)\nに\n\\(1\\)\nを足す。\n条件を満たす\n\\([L,R]\\)\nが見つかれば、区間\n\\([L,x]\\)\n\\((R\\leq x \\leq B)\\)\nはすべて条件を満たすことになるので、その分を答えに加算する。\n\\(L\\)\nに\n\\(1\\)\nを加える。\nこのように両端を\n\\(1\\)\nずつズラしてすべての極小な区間を走査するアルゴリズムを\n尺取り法\nと呼びます。\n\\(L,R\\)\nをインクリメントする回数が\n\\(|B|\\)\n回で抑えられているので、条件判定を\n\\(\\mathrm{O}(1)\\)\nで処理できれば全体で\n\\(\\mathrm{O}(|B|)\\)\nとなります。\nPython による実装例は次の通りです。\n解法 2 : 包除原理\n2 番目の想定解として\n包除原理\nを紹介します。\n包除原理とは数え上げで非常によく出てくるアルゴリズムです。特に条件が\n\\(2\\)\n個の場合は次の\n\\(2\\)\n種類の式が知られています。\n\\[\n\\begin{aligned}\n&(P か Q の少なくとも一方が真である集合) \\\\\n&=(P が真である集合) + (Q が真である集合)-(P,Q 両方が真である集合)\n\\end{aligned}\n\\]\n\\[\n\\begin{aligned}\n&(P か Q の両方が真である集合) \\\\\n&=(全集合) - (P が偽である集合) - (Q が偽である集合) + (P,Q 両方が偽である集合)\n\\end{aligned}\n\\]\n高校数学の「集合と論理」で学習した内容を覚えている方は、ベン図を書いてみるとわかりやすいと思います。\n求めたいのは「\n\\(X\\)\nを含み、かつ\n\\(Y\\)\nを含む列」の個数ですが、この条件に包除原理を適用すると\n\\[\n\\begin{aligned}\n&(全ての列)\\\\\n&-(X を含まない列)\\\\ \n&-(Y を含まない列)\\\\\n&+(X,Y ともに含まない列)\n\\end{aligned}\n\\]\nという式で表せます。「～～を含まない列」は実は「～～を含む列」よりも数えやすいので、このように包除原理を適用することでこの問題を解くことができます。(詳しいアルゴリズムは実装例を参照ください。)計算量は\n\\(\\mathrm{O}(|B|)\\)\nです。\n他にも次のような\n\\(\\mathrm{O}(N \\log N)\\)\n解法も考えられて、計算量は少し劣りますがこれでも十分高速なので AC できます。\nすべての\n\\(i\\)\nに対して「\n\\(i\\)\nより右で\n\\(X,Y\\)\nが初めて出現する箇所は？」というクエリを処理できれば良い。これは\n\\(X,Y\\)\nの出現箇所を累積和や Segment Tree で記録して二分探索を行ったり、\nstd::map\nで管理して\nlower_bound\nを使えば クエリ当たり\n\\(\\mathrm{O}(\\log N)\\)\nで処理できる。",
+      "codes": [
+        "N, X, Y = map(int, input().split())\nA = list(map(int, input().split()))\n\ndef calc(B):\n  i, j, countX, countY, res = 0, 0, 0, 0, 0\n  while i != len(B):\n    while j != len(B) and (countX == 0 or countY == 0):\n      if B[j] == X:\n        countX += 1\n      if B[j] == Y:\n        countY += 1\n      j += 1\n    if countX > 0 and countY > 0:\n      res += len(B) + 1 - j\n    if B[i] == X:\n      countX -= 1\n    if B[i] == Y:\n      countY -= 1\n    i += 1\n  return res\n\n\ni, ans = 0, 0\nwhile i != N:\n  B = []\n  while i != N and Y <= A[i] <= X:\n    B.append(A[i])\n    i += 1\n  if len(B) != 0:\n    ans += calc(B)\n  else:\n    i += 1\nprint(ans)",
+        "def f(a):\n  ret, s = 0, 0\n  for x in a:\n    if x == 1:\n      ret += s * (s + 1) // 2\n      s = 0\n    else:\n      s += 1\n  ret += s * (s + 1) // 2\n  return ret\n\n\nN, X, Y = map(int, input().split())\nA = list(map(int, input().split()))\n__, X_, _Y, XY = [0] * N, [0] * N, [0] * N, [0] * N\n\nfor i in range(N):\n  if not (Y <= A[i] and A[i] <= X):\n    __[i], X_[i], _Y[i], XY[i] = 1, 1, 1, 1\n  if A[i] == X:\n    X_[i], XY[i] = 1, 1\n  if A[i] == Y:\n    _Y[i], XY[i] = 1, 1\n\nprint(f(__) - f(X_) - f(_Y) + f(XY))"
+      ],
+      "text_sha256": "57f4d667e346b5111fc20ba944a3acd917554cd611b9bb210eb12eb565d83f61",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc247/abc247_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc247/editorial/3777",
+      "text": "整数の組\n\\((L, R)\\)\nが条件を満たすのは、以下の 2 条件が共に成立する時です。\n区間\n\\([L, R]\\)\nの中に\n\\(X, Y\\)\nがそれぞれ\n\\(1\\)\nつ以上存在する。\n区間\n\\([L, R]\\)\nの中に\n\\(Y\\)\n未満の要素や\n\\(X\\)\nより大きい要素が存在しない。\n1 つ目の条件は、区間\n\\([1, R]\\)\nの中で最も右にある\n\\(X, Y\\)\nの位置をそれぞれ\n\\(\\mathrm{pos}_X, \\mathrm{pos}_Y\\)\n(存在しないなら\n\\(0\\)\n) として、\n\\(L \\leq \\min(\\mathrm{pos}_X, \\mathrm{pos}_Y)\\)\nであることと同値です。\n2 つ目の条件は、区間\n\\([1, R]\\)\nの中で最も右にある「\n\\(Y\\)\n未満または\n\\(X\\)\nより大きい要素」の位置を\n\\(B\\)\n(存在しないなら\n\\(0\\)\n) として、\n\\(B < L\\)\nであることと同値です。\nよって、\n\\(\\mathrm{pos}_X, \\mathrm{pos}_Y, B\\)\nを更新しつつ、\n\\(R = 1, \\dots, N\\)\nの順に条件を満たす\n\\(L\\)\nの個数を求めれば良いです。\n実装例 (C++) :\nhttps://atcoder.jp/contests/abc247/submissions/30895819",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int N, X, Y;\n    cin>>N>>X>>Y;\n    vector<int> a(N);\n    for(int i = 0; i < N; ++i) cin>>a[i];\n    \n    int posX{-1}, posY{-1}, B{-1};\n    long long res{};\n    for(int i = 0; i < N; ++i) {\n        if(a[i] == X) posX = i;\n        if(a[i] == Y) posY = i;\n        if(a[i] < Y or X < a[i]) B = i;\n        res += max(0, min(posX, posY) - B);\n    }\n    cout<<res<<endl;\n}"
+      ],
+      "text_sha256": "7ea9a01c0f00ec3fe77a506dbd01901c49fecc6d81809178c665bd150fce22ef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc247/abc247_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc247/editorial/14521",
+      "text": "「\n\\(A\\)\n連続部分列で、minが\n\\(m\\)\n以上かつmaxが\n\\(M\\)\n以下であるものの個数」を\n\\(f(m,M)\\)\nとすると、包除原理より求めるものは\n\\(f(Y,X)-f(Y+1,X)-f(Y,X-1)+(Y+1,X-1)\\)\nとなります。\n\\(f(x,y)\\)\nは、\n\\(x\\)\n未満または\n\\(y\\)\nより大きな要素によって数列を分割したときの、長さのみから求めることができます。\npythonの場合 groupby メソッドを用いると実装が容易です。\npython",
+      "codes": [
+        "from itertools import groupby\nN,M,m=map(int,input().split())\nA=list(map(int,input().split()))\n\ndef f(l,r):\n\tans=0\n\tfor ok, group in groupby(l<=x<=r for x in A):\n\t\tif ok:\n\t\t\tL=len(list(group))\n\t\t\tans+=L*(L+1)//2\n\treturn ans\n\nprint(f(m,M)-f(m+1,M)-f(m,M-1)+f(m+1,M-1))"
+      ],
+      "text_sha256": "891a481deb4283e19ece54bd0fbb77c8128f2f86a013c8f2ebbef02036787284",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc247/abc247_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

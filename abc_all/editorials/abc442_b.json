@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc442_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc442/editorial/15140",
+      "text": "現在の音量を表す変数と曲が再生中であるかを表す変数の\n\\(2\\)\nつの変数を管理しながら操作をしていけばよいです。\n\\(x\\)\nを現在の音量を表す変数、\n\\(y\\)\nを曲が停止中ならば\n\\(y = 0\\)\n、曲が再生中ならば\n\\(y = 1\\)\nであるような変数とすると、各操作に対して\n\\(x, y\\)\nは以下のように変化します。\n\\(A_i = 1\\)\nのとき、\n\\(x\\)\nを\n\\(x + 1\\)\nで置き換える。\n\\(A_i = 2\\)\nのとき、\n\\(x > 0\\)\nならば\n\\(x\\)\nを\n\\(x - 1\\)\nで置き換える。そうでないならば何もしない。\n\\(A_i = 3\\)\nのとき、\n\\(y\\)\nを\n\\(1-y\\)\nで置き換える。\n\\(y\\)\nを\n\\(1-y\\)\nで置き換える操作は\n\\(0\\)\nと\n\\(1\\)\nを切り替える操作になっていることに注意してください。\n操作を終えたとき、\n\\(x \\geq 3\\)\nかつ\n\\(y = 1\\)\nならば答えは\nYes\n、そうでないならば答えは\nNo\nです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint x = 0, y = 0;\n\tint q;\n\tcin >> q;\n\twhile (q--) {\n\t\tint a;\n\t\tcin >> a;\n\t\tif (a == 1) x++;\n\t\telse if (a == 2 && x > 0) x--;\n\t\telse if (a == 3) y = 1 - y;\n\t\tif (x >= 3 && y == 1) cout << \"Yes\\n\";\n\t\telse cout << \"No\\n\";\n\t}\n}"
+      ],
+      "text_sha256": "99d22d4d4c815c92f98417c4e1d81c88c9551efff8b99514d82a3298a0ad6c4a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc442/abc442_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

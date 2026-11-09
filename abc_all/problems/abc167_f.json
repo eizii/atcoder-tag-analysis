@@ -1,0 +1,72 @@
+{
+  "problem_id": "abc167_f",
+  "title": "Bracket Sequencing",
+  "contests": [
+    {
+      "contest_id": "abc167",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1961,
+  "raw_difficulty": 1961,
+  "contest_id": "abc167",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc167/tasks/abc167_f",
+  "statement": "配点 : 600 点 問題文 以下のいずれかの条件を満たす文字列を 括弧列 と定義します。 空文字列 ある括弧列 A が存在して、 ( , A , ) をこの順に連結した文字列 ある空でない括弧列 A , B が存在して、 A , B をこの順に連結した文字列 N 個の文字列 S_i が与えられます。 S_i 全てを好きな順序で連結するとき、括弧列を構成することはできますか。 制約 1 \\leq N \\leq 10^6 S_i の文字列長の合計は 10^6 以下 S_i は ( , ) のみからなる空でない文字列 入力 入力は以下の形式で標準入力から与えられる。 N S_1 : S_N 出力 S_i を任意の順序で連結するとき、括弧列を構成できるなら Yes 、できないなら No を出力せよ。 入力例 1 2\r\n)\r\n(() 出力例 1 Yes (() , ) の順に連結すると括弧列になります。 入力例 2 2\r\n)(\r\n() 出力例 2 No 入力例 3 4\r\n((()))\r\n((((((\r\n))))))\r\n()()() 出力例 3 Yes 入力例 4 3\r\n(((\r\n)\r\n) 出力例 4 No",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 以下のいずれかの条件を満たす文字列を 括弧列 と定義します。 空文字列 ある括弧列 A が存在して、 ( , A , ) をこの順に連結した文字列 ある空でない括弧列 A , B が存在して、 A , B をこの順に連結した文字列 N 個の文字列 S_i が与えられます。 S_i 全てを好きな順序で連結するとき、括弧列を構成することはできますか。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 10^6 S_i の文字列長の合計は 10^6 以下 S_i は ( , ) のみからなる空でない文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S_1 : S_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 S_i を任意の順序で連結するとき、括弧列を構成できるなら Yes 、できないなら No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2\r\n)\r\n(()"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes (() , ) の順に連結すると括弧列になります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2\r\n)(\r\n()"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 4\r\n((()))\r\n((((((\r\n))))))\r\n()()()"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes"
+    },
+    {
+      "heading": "入力例 4",
+      "text": "入力例 4 3\r\n(((\r\n)\r\n)"
+    },
+    {
+      "heading": "出力例 4",
+      "text": "出力例 4 No"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc167/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:35:37.817690+00:00",
+  "statement_sha256": "8e7e14dbf9a016af92849e00f3d6aae9198cb8276f8c0c110fc75b19aa65b043",
+  "editorials": []
+}

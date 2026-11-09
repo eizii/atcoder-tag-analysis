@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc476_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc476/editorial/25809",
+      "text": "達成可能な組合せ 商品の組合せ \\(A_{i_1}, \\dots, A_{i_n}, B_{j_1}, \\dots, B_{j_m}\\) は，以下を満たすとき，またその時に限り購入可能です． 合計金額 \\(\\displaystyle \\sum_{1 \\leq k \\leq n} A_{i_k} + \\sum_{1 \\leq k \\leq m} B_{j_k}\\) が \\(X+KY\\) 以下 必要な \\(K\\) ドル紙幣の枚数 \\(\\displaystyle \\sum_{1 \\leq k \\leq m} \\lceil B_{j_k} / K \\rceil\\) が \\(Y\\) 以下 必要性は明らかです．ドリンク \\(m\\) 個を先にすべて買い，そのあとデザート \\(n\\) 個をすべて買うとすることで，上を満たす組合せは購入可能であることが分かります． 解法 \\(B\\) から \\(m\\) 個とるとします．このとき， \\(B\\) からは価格が小さいほうから \\(m\\) 個取るのが最適です．同様に， \\(A\\) も価格が小さいほうからとるとしてよいです． \\(B\\) からとる個数を固定したとき， \\(A\\) にかけることができる金額が決まるので，二分探索によって \\(A\\) からとれる個数が求まります． したがって， \\(B\\) からとる個数を全探索し，それぞれ二分探索によって \\(A\\) からとる個数を求めることで， \\(O((N+M) \\log (N+M))\\) 時間で答えが求まります． なお， \\(B\\) からとる個数が小さいほど， \\(A\\) にかけられる金額は広義単調増加するので，尺取り法によってソート以外の処理を \\(O(N+M)\\) 時間で行うこともできます． 余談 この問題設定においては，「価格が小さいほうから商品を見ていって，その商品を追加した組合せが購入可能なら追加し，不可能ならスルーする」として商品の組合せを構成したとき，それが最大値を達成することが証明できます． 実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\n#include <vector>\nusing std::vector;\nusing std::pair;\n#include <map>\nusing std::map;\nusing std::max;\nusing std::min;\n\n\n#ifdef DEBUG\nconst int debug = 1;\n#else\nconst int debug = 0;\n#endif\n\nusing ll = int64_t;\nusing P = pair<ll, ll>;\n\nconst ll FOD = 998244353;\n#include <atcoder/modint>\nusing mint = atcoder::modint998244353;\n#include <atcoder/convolution>\nusing atcoder::convolution;\n\nll n, m, k;\nll x, y;\nvector<ll> a, b;\n\ninline void output (const ll x) {\n\tcout << x << \"\\n\";\n}\n\nvector<ll> accum (const vector<ll> &a) {\n\tll sz = (ll)a.size();\n\tvector<ll> b(sz+1, 0);\n\tb[0] = 0;\n\tfor (ll i = 0; i < sz; i++) {\n\t\tb[i+1] = b[i] + a[i];\n\t}\n\treturn b;\n}\n\nvoid solve() {\n\tsort(a.begin(), a.end());\n\tsort(b.begin(), b.end());\n\n\tvector<ll> bk(m);\n\tfor (ll i = 0; i < m; i++) {\n\t\tbk[i] = (b[i] - 1) / k + 1;\n\t}\n\n\tvector<ll> ac = accum(a);\n\tvector<ll> bc = accum(b);\n\tvector<ll> bkc = accum(bk);\n\n\tll ans = 0;\n\tfor (ll ri = 0; ri <= m; ri++) {\n\t\tll s = (x+y*k) - bc[ri];\n\t\tll sk = y - bkc[ri];\n\t\tif (s < 0 || sk < 0) break;\n\n\t\tll li = ([&]() -> ll {\n\t\t\tll ok = 0, ng = n+1;\n\t\t\twhile (ok + 1 < ng) {\n\t\t\t\tll med = (ok + ng) / 2;\n\t\t\t\tif (ac[med] <= s) {\n\t\t\t\t\tok = med;\n\t\t\t\t} else {\n\t\t\t\t\tng = med;\n\t\t\t\t}\n\t\t\t}\n\t\t\treturn ok;\n\t\t})();\n\n\t\tans = max(ans, li + ri);\n\t}\n\n\toutput(ans);\n\n\n\treturn;\n}\n\nint main (void) {\n\tstd::cin.tie(nullptr);\n\tstd::ios_base::sync_with_stdio(false);\n\n\tcin >> n >> m >> k;\n\tcin >> x >> y;\n\ta.resize(n);\n\tb.resize(m);\n\tfor (ll i = 0; i < n; i++) {\n\t\tcin >> a[i];\n\t}\n\tfor (ll i = 0; i < m; i++) {\n\t\tcin >> b[i];\n\t}\n\n\t\n\tsolve();\n\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "008f22de761c58d08d4cfac791032bb5221e5a36da6d19ef6e72662ff86a2d72"
+    }
+  ],
+  "status": "available"
+}

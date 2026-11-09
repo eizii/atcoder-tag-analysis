@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc128_d",
+  "editorials": [
+    {
+      "text": "D: equeue\n操作C, D は最後に行っても構いません。すると、操作C, D は等価で、「宝石を捨てる」操作になります。\n操作A をA 回、操作B をB 回行うとします。A + B ≤min{N, K} です。このとき、左からA 個、右\nからB 個の宝石を手に入れ、捨てる操作はK −(A + B) 回までできます。負の価値の宝石を捨てるとその\n絶対値分だけ合計価値が上がるので、価値が負でできるだけ絶対値が大きいものからK −(A + B) 個まで捨\nてるのが最適です。価値が0 や正の宝石を捨てる必要はありません。\nA, B を全探索することで、R = min{N, K} としてO(R3logR) の時間計算量で解くことができます。\n余談ですが、この探索を高速化してO(R2logR) で解くこともできます*1。\n",
+      "text_sha256": "22f5a85af345eea900da153d6c870d9232fc563fd23ca9a25b0f8e2dbaf1c499",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc128/abc128_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

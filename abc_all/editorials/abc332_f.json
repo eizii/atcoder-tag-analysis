@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc332_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc332/editorial/7890",
+      "text": "まだ操作を一度も行っていない初期状態での各\n\\(A_i\\)\nの期待値\n\\(E_i\\)\nは、明らかに、入力で与えられた\n\\(A_i\\)\nの値そのものです。\nその後操作を行うに伴って、その時点までにおける各\n\\(A_i\\)\nの期待値\n\\(E_i\\)\nは変化していきます。\n具体的には、\n\\(i\\)\n回目の操作では、対象区間\n\\([L_i, R_i]\\)\nのある一つの要素\n\\(A_p\\)\nに注目したとき、その値は\n\\(\\frac{1}{\\lambda_i}\\)\nの確率で\n\\(X_i\\)\nに変更され、\n\\(\\frac{\\lambda_i-1}{\\lambda_i}\\)\nの確率でそのままです（ただし、\n\\(\\lambda_i \\coloneqq R_i - L_i + 1\\)\n）。\nこれによって、区間内の各要素\n\\(A_p\\)\nについて操作後の期待値\n\\(E' _p\\)\nは操作前の期待値\n\\(E_p\\)\nから\n\\(E'_p = \\frac{\\lambda_i-1}{\\lambda_i}E_p + \\frac{1}{\\lambda_i}X_i\\)\nへと変化します。\nしたがって本問題を解くには、\n\\(E = (E_1, E_2, \\ldots, E_N)\\)\nを、各\n\\(E_i\\)\nを入力で与えられた\n\\(A_i\\)\nで初期化した状態から始め、\n\\(i = 1, 2, \\ldots, M\\)\nの順に下記の操作を行い、その結果得られた\n\\(E\\)\nを出力すれば良いです。\n\\(E\\)\nの区間\n\\([L_i, R_i]\\)\nの各要素について、\nその値\n\\(x\\)\nを\n\\(\\frac{\\lambda_i-1}{\\lambda_i}x + \\frac{1}{\\lambda_i}X_i\\)\nに置き換える。\nこれは遅延伝搬セグメント木（AtCoder Library では lazy_segtree）を用いることで高速に実現可能です。",
+      "codes": [],
+      "text_sha256": "dc124552bb840bb4c8e32d48100e6c66f13df75baf00ba5a05fd0745ffd9759f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc332/abc332_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc332/editorial/7932",
+      "text": "普通の segment tree で解くことができます。\n\\(i=1,2,\\dots N\\)\nについて以下の\n\\(2\\)\nつの値が求まれば良いです。\n一度も変更されない確率\nはじめ、\n\\(A_{i}=0\\)\nであったときの最終的な\n\\(A_{i}\\)\nの期待値\n\\([a,b)\\)\nの区間の操作での上記の値をそれぞれ\n\\(pro_{l},val_{l}\\)\n、\n\\([b,c)\\)\nの区間の操作での上記の値をそれぞれ\n\\(pro_{r},val_{r}\\)\nとしたとき、\n\\([a,c)\\)\nの区間での操作での上記の値は以下のようになります。\n\\(pro=pro_{l}* pro_{r}\\)\n\\(val=val_{l}*pro_{r}+val_{r}\\)\nよって、この\n\\(2\\)\nつの値は segment tree に載せることができます。\nあとは平面操作をすれば\n\\(O(N+M\\log(M))\\)\nで解くことができます。\n具体的には、 長さ\n\\(M\\)\nの上記の\n\\(2\\)\nつの値をもつ構造体を要素とした segment tree を持ち、\n\\(j\\)\n番目の要素が\n\\(L_{j}\\leq i\\leq R_{j}\\)\nなら\n\\((1-\\dfrac{1}{R_{j}-L_{j}+1},\\dfrac{X_{j}}{R_{j}-L_{j}+1})\\)\n、そうでないなら\n\\((1,0)\\)\nとすることで、上記の\n\\(2\\)\nつの値は区間全体を取ることで求めることができます。愚直に見ると\n\\(O(NM)\\)\nかかりますが、\n\\(i=1,2,\\dots N\\)\nの順番に見ると、segment tree の\n\\(j\\)\n番目の要素が変更される回数は高々\n\\(2\\)\n回なので、計算量を抑えることができます。\nACL を用いた C++ の実装例",
+      "codes": [],
+      "text_sha256": "6a30b0d04b43d54bc2fdc9fc4dc437a0552036699d09961734e0426b104a761f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc332/abc332_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

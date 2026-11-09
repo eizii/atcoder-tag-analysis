@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc292_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5884",
+      "text": "最適な正三角形の描き方において、正三角形と長方形は頂点を 少なくとも\n\\(1\\)\n個共有するものとして良いです。\n頂点であって、正三角形上で最も上かつ最も右にあるようなものが存在する\n頂点であって、正三角形上で最も上かつ最も左にあるようなものが存在する\n頂点であって、正三角形上で最も下かつ最も右にあるようなものが存在する\n頂点であって、正三角形上で最も下かつ最も左にあるようなものが存在する\nたとえば\n\\(1\\)\n番目のことがいえる場合、その頂点が長方形の右上と一致するように正三角形を平行移動させることで正三角形と長方形が頂点を少なくとも\n\\(1\\)\n個共有するように出来るため、最適な正三角形の描き方においてもこのように仮定出来ます。\n正三角形の一辺の長さが\n\\(l\\)\nの時に長方形内部に描けるかの判定を考えます。(本問の解法を先に書くと、判定が出来た場合、これを利用して長方形内部に描ける正三角形の一辺の長さ\n\\(l\\)\nの最大値を二分探索すれば良いです)\n適当に回転や反転をし、長方形の左下の頂点が正三角形の頂点と一致するものとします。長方形の下側の辺と正三角形の下側の辺のなす角を\n\\(\\theta\\)\nとすると、長方形の下側の辺と正三角形の上側の辺のなす角は\n\\(\\theta + 60^\\circ\\)\nとなります。また、\n\\(\\theta \\geq 0^\\circ, \\theta + 60^\\circ \\leq 90 ^ \\circ\\)\nより\n\\(0^\\circ \\leq \\theta \\leq 30^\\circ\\)\nです。\nここで、正三角形の横幅は\n\\(l \\cos \\theta\\)\n、縦幅は\n\\(l \\sin \\theta\\)\nとなるため、\n\\(\\cos \\theta \\leq \\frac{B}{l}, \\sin\\theta \\leq \\frac{A}{l}, 0^\\circ \\leq \\theta \\leq 30^\\circ\\)\nを満たす\n\\(\\theta\\)\nが存在するかどうかを考えることになります。\n(\n\\(0^\\circ \\leq \\theta \\leq 30^\\circ\\)\nの範囲内で)\n\\(\\cos \\theta\\)\nは\n\\(\\theta\\)\nの増加に伴って減少し、\n\\(\\sin\\theta\\)\nは\n\\(\\theta\\)\nの増加に伴って増加します。このことから、\n\\(\\cos \\theta \\leq \\frac{B}{l}\\)\nを満たす最小の\n\\(\\theta\\)\nを値域内で求め(二分探索を使うか、\n\\(\\frac{B}{l}\\)\nが\n\\(0\\)\n以上\n\\(\\frac{\\sqrt{3}}{2}\\)\n以下であるかどうかで場合分けをしながら\n\\(\\cos^{-1} \\theta\\)\nを使うことで可能です), これが\n\\(\\sin \\theta \\leq \\frac{A}{l}\\)\nを満たすかどうかを確認すれば良いです。",
+      "codes": [],
+      "text_sha256": "0de81dbb7097c3b782c26e234ec63f3b20b46e0bb9e002985337bfa5e66756db",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc292/abc292_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5924",
+      "text": "markdown での図の貼り付け方が分からないので、\nこちらのツイート\nの図を参照してください。\n\\(A\\le B\\)\nとして一般性を失わないのでそう仮定します。\n①\n\\(B\\)\nが\n\\(A\\)\nに比べて十分大きいときは、正三角形の一辺が長方形の辺と平行になるときは最善で、このときの最大値は\n\\(\\displaystyle\\frac{A}{\\sin \\frac{\\pi}{3}}\\)\nです。これは\n\\(A \\le  B\\sin \\frac{\\pi}{3}\\)\nのときに起こります。\n② そうでないときは「斜め」になるときが最善です。\nこのとき、正三角形の一辺の長さを\n\\(r\\)\n、長さ\n\\(A\\)\nの辺と正三角形のなす角を\n\\(\\theta\\)\nとする（画像 2 枚目参照）と\n\\[r\\cos\\theta=A\\]\n\\[r\\cos(\\frac{\\pi}{6}-\\theta)=B\\]\nが成立します。辺々割って整理すると\n\\(\\theta = \\arctan\\Big(\\displaystyle\\frac{2B}{A}-\\sqrt{3} \\Big)\\)\nが言えます。\n一辺の長さは\n\\(\\displaystyle\\frac{A}{\\cos\\theta}\\)\nです。\n実装上は、①・②の 2 つの式の小さい方を出力すれば AC を得ることができます。\n実装例\n（PyPy 3）",
+      "codes": [],
+      "text_sha256": "e8d8a6af158a0634d3e1d6b7a60a4599519a0c9f129a4a735d016171cd14d986",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc292/abc292_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5933",
+      "text": "正方形に近いとき\n\\(a \\le 2b / { \\sqrt 3 }\\)\nかつ\n\\(b \\le 2a / { \\sqrt 3 }\\)\nのとき、斜めな感じでしまうのが最適です。\nこの正三角形の一辺の長さを\n\\(L\\)\nとおき、次の図のように点を命名しておきます。（ただし、\n\\(\\triangle OAD, \\triangle OPQ\\)\nはともに正三角形です。）最初に正三角形を下にくっつけて（\n\\(\\triangle OAD\\)\n）おいて、そこから青い\n\\(2\\)\nつの互いに合同な直角三角形に沿って拡大・回転をした（\n\\(\\triangle OPQ\\)\n）と思うとわかりやすいかもです。\nすると\n\\(\\angle OED = 30 ^ \\circ\\)\nから\n\\[\n\\begin{aligned}\nDE &= \\sqrt 3 a\\\\\nQE &= 2 b\n\\end{aligned}\n\\]\nがわかりますから、\n\\[\n\\begin{aligned}\nQD &= QE - DE = 2 b - \\sqrt 3 a \\\\\nL &= OQ = \\sqrt { OD ^ 2 + QD ^ 2 } = 2 \\sqrt { a ^ 2 - \\sqrt 3 a b + b ^ 2 }\n\\end{aligned}\n\\]\nとなります。\n\\(\\angle OED = 30 ^ \\circ\\)\nの三角形の辺の比のところを除くと三平方の定理を一度しか使わないあたり、とても面白いと私は思うわけです。\n一般の場合\n答えと\n\\(2a / \\sqrt 3, 2b / \\sqrt 3 \\)\nの min をとるなり、あらかじめ入力を\n\\(\\sqrt 3 : 2\\)\n以下になるように縮めておくなりするとよいです。\n私の解法、結局何がポイントだったのか\n点\n\\(B\\)\nから横にッ ﾋﾞｨｲｲｲｰﾝﾑ、点\n\\(D\\)\nから左上斜め\n\\(30 ^ {\\circ}\\)\n方向にッ ﾋﾞｨｲｲｲｰﾝﾑをしたときに ﾄﾞﾝｶﾞﾗｶﾞｯｼｬｧｱｰﾝ な点が\n\\(Q\\)\nですよというのがポイントなわけです。\n以下、この事実に基づいた解法をいくつかご紹介させていただきます。\n別解 1\n余弦定理で線分\n\\(DB\\)\nの長さを求めれば、あとは四角形\n\\(ODQB\\)\nが直径\n\\(L\\)\nの円に内接することから正弦定理で求まります。（力技ですが、補助線が少なくて済むため思いつきやすいです。ちなみに私が最初に思いついたのはこちらです。）\n別解 2\n横ビームと斜めビームの方程式をそれぞれ求めて交点計算でもよいです。\n補助線系の別解\n直線\n\\(DQ\\)\nと直線\n\\(OB\\)\nの交点を取る方法、点\n\\(Q\\)\nから直線\n\\(OA\\)\nに垂線を下ろす方法など、いろいろありえそうです。中でも最も簡単と判断した解法を主解法とさせていただきました。",
+      "codes": [],
+      "text_sha256": "797cf6bc78081a2a35b089e370ff58f68de6c7192fab2bdade14b6d902c8dfed",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc292/abc292_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

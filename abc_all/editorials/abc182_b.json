@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc182_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc182/editorial/289",
+      "text": "まず、\n\\(A_i\\)\nの上限である\n\\(1000\\)\nより大きい数は GCD 度が\n\\(0\\)\nです。ところが\n\\(2 \\le A_i\\)\nより\n\\(A_1\\)\nの GCD 度は少なくとも\n\\(1\\)\nなので\n\\(1000\\)\nより大きい数は考慮に入れる必要がないことが分かります。\nすると、\n\\(2\\)\n以上\n\\(1000\\)\n以下のそれぞれの整数\n\\(k\\)\nについて GCD 度を計算してその中で GCD 度が最大だったときの\n\\(k\\)\nを出力すればよいことになります。\n「\n\\(2\\)\n以上\n\\(1000\\)\n以下のそれぞれの整数\n\\(k\\)\nについて 」の処理や、ある整数の GCD 度の計算は繰り返し文を使うと実現できます。GCD 度が最大になるような\n\\(k\\)\nを求めるのは、今までの GCD 度の最大値と、そのときの\n\\(k\\)\nを持つ\n\\(2\\)\nつの変数を用意して、今の GCD 度が今までの GCD 度より大きかったらこの\n\\(2\\)\nつの変数を更新することでできます。\n解答例 (C) ※C99 を仮定しています\n解答例 (Python)",
+      "codes": [
+        "#include <stdio.h>\n\nint main() {\n\tint n;\n\tscanf(\"%d\", &n);\n\tint a[n];\n\tfor (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n\t\n\tint max = 0;\n\tint res = -1;\n\tfor (int i = 2; i <= 1000; i++) {\n\t\tint cnt = 0;\n\t\tfor (int j = 0; j < n; j++) if (a[j] % i == 0) cnt++;\n\t\tif (max < cnt) max = cnt, res = i;\n\t}\n\tprintf(\"%d\\n\", res);\n\treturn 0;\n}",
+        "N = int(input())\nA = list(map(int, input().split()))\n \nans = -1\nmx = 0\n \nfor x in range(2, 1001):\n\ts = sum(a % x == 0 for a in A)\n\tif mx < s:\n\t\tmx = s\n\t\tans = x\n \nprint(ans)"
+      ],
+      "text_sha256": "783b8f2394041d34d3e853ac5c1e20b9d196af9b7594174b9e3cd94ff69922b2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc182/abc182_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

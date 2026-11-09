@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc387_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc387/editorial/11832",
+      "text": "問題文中では\n\\(10\\)\n以上の整数についてのみヘビ数が定義されていますが、簡単のため、本解説では\n\\(10\\)\n未満の正整数も全てヘビ数であると定義することにします。（\n\\(L \\geq 10\\)\nのため、\n\\(10\\)\n未満の整数については好きにヘビ数を定義して問題ありません。）\n\\(f(R)\\)\nを\n\\(R\\)\n以下のヘビ数の個数と定義します。求める答えは\n\\(f(R)-f(L-1)\\)\nと表せるので、一般に、与えられた正整数\n\\(R\\)\nについて\n\\(f(R)\\)\nを求められればよいです。 以下その方法を解説します。\nまず前提として、\n\\(R\\)\nは最大で\n\\(10^{18}\\)\nになるため、\n\\(R\\)\n以下の正整数それぞれについて一つずつヘビ数であるか確かめることはできません。 そのため、\n\\(R\\)\nの十進数表記に着目して、より効率的に\n\\(R\\)\n以下のヘビ数の個数を求める必要があります。\n\\(R\\)\nが十進数で\n\\(n\\)\n桁の数であり、上から\n\\(i\\ (1\\leq i\\leq n)\\)\n桁目の数が\n\\(d_i\\)\nであるとします。このとき、\n\\(R\\)\n以下の任意の正整数\n\\(x\\)\nは以下のいずれかちょうど一つの条件を満たします。逆に、以下のいずれかを満たす正整数\n\\(x\\)\nは全て\n\\(R\\)\n以下です。\n\\(x=R\\)\nである\n\\(x\\)\nは\n\\(n\\)\n桁の数であり、上から\n\\(k\\ (1\\leq k\\leq n-1)\\)\n桁目までの数が\n\\(R\\)\nと一致し、上から\n\\(k+1\\)\n桁目の数が\n\\(d_{k+1}\\)\nより小さい\n\\(x\\)\nは\n\\(n\\)\n桁の数であり、上から\n\\(1\\)\n桁目の数が\n\\(d_1\\)\nより小さい\n\\(x\\)\nは\n\\(k\\ (1\\leq k\\leq n-1)\\)\n桁の数である\n上記 1~4 のそれぞれについて、その条件を満たす正整数\n\\(x\\)\nのうちヘビ数であるものの個数を計算することを考えましょう。すると、以下のようになります：\n\\(R\\)\nがヘビ数ならば（すなわち、全ての\n\\(i\\ (2\\leq i\\leq n)\\)\nについて\n\\(d_1 > d_i\\)\nを満たすならば）\n\\(1\\)\n個。そうでないならば\n\\(0\\)\n個。\nある\n\\(i\\ (2\\leq i\\leq k)\\)\nについて\n\\(d_1 \\leq d_i\\)\nならば\n\\(0\\)\n個。そうでないならば、\n\\(k+1\\)\n桁目の数が\n\\(d_1\\)\n未満かつ\n\\(d_{k+1}\\)\n未満で、\n\\(k+2\\)\n桁目以降の数が全て\n\\(d_1\\)\n未満ならば良いので、\n\\(\\min\\{d_1, d_{k+1}\\}\\times d_1^{n-(k+1)}\\)\n個。\n上から\n\\(1\\)\n桁目の数が\n\\(1\\)\n以上\n\\(d_1\\)\n未満で、\n\\(2\\)\n桁目以降の数がそれより小さければ良いので、\n\\(\\displaystyle \\sum_{i=1}^{d_1-1} i^{n-1}\\)\n個。\n上から\n\\(1\\)\n桁目の数が\n\\(1\\)\n以上\n\\(9\\)\n以下で、\n\\(2\\)\n桁目以降の数がそれより小さければ良いので、\n\\(\\displaystyle \\sum_{i=1}^{9} i^{k-1}\\)\n個。\n以上の数を全て計算して足し合わせれば答えがもとまります。2 と 4 については\n\\(k=1,2,\\dots,n-1\\)\nそれぞれについて計算する必要があることに注意してください。\nなお、下記の実装例においては、1 と 2、3 と 4 をそれぞれまとめて計算しています。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nll int_pow(ll a, ll t) {\n    ll res = 1;\n    for (int i = 0; i < t; i++) res *= a;\n    return res;\n}\n\nll count(ll r) {\n    vector<int> digit;\n    while (r) {\n        digit.push_back(r % 10);\n        r /= 10;\n    }\n    reverse(digit.begin(), digit.end());\n    int n = digit.size();\n    ll res = 0;\n    for (int i = 1; i <= n; i++) {\n        if (i == n) {\n            res++;\n            break;\n        }\n        res += int_pow(digit[0], n - 1 - i) * min(digit[0], digit[i]);\n        if (digit[i] >= digit[0]) break;\n    }\n    for (int i = 0; i < n; i++) {\n        int mx = (i ? 9 : digit[0] - 1);\n        for (int j = 1; j <= mx; j++) {\n            res += int_pow(j, n - 1 - i);\n        }\n    }\n    return res;\n}\n\nint main() {\n    ll l, r;\n    cin >> l >> r;\n    cout << count(r) - count(l - 1) << endl;\n}"
+      ],
+      "text_sha256": "9e0d87f93b39ddafd36172a6d8f34a9d09226499c2415a0006ac5f6f76813a78",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc387/abc387_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc387/editorial/11874",
+      "text": "以下では\n\\(10\\)\n未満の正整数もすべてヘビ数であるとして考えます。\n\\(g(n,k)\\)\nを「\n\\(n\\)\n以下の正整数のうち、ヘビ数であり、かつ先頭の桁の数字が\n\\(k\\)\nより真に大きいものの個数」とします。すると、求める答えは\n\\(g(R,0)-g(L-1,0)\\)\nとなります。\nここで、\n\\(1\\)\nの位で場合分けをすると、\n\\(\\begin{aligned}g(n,k)=\\sum_{i=0}^9g\\left(\\left\\lfloor\\frac{n-i}{10}\\right\\rfloor,\\max(k,i)\\right)+\\max(\\min(n,9)-k,0)\\end{aligned}\\)\nが成り立ちます。\n（右辺の第\n\\(1\\)\n項はヘビ数が\n\\(2\\)\n桁以上の場合に対応し、第\n\\(2\\)\n項はヘビ数が\n\\(1\\)\n桁の場合に対応しています。）\nまた、\n\\(n\\leq0\\)\nのときは\n\\(g(n,k)=0\\)\nとなります。\nあとはこの漸化式に従って再帰的に\n\\(g(R,0),f(L-1,0)\\)\nの値を求めればよいです。\nここで、一般に正整数\n\\(N\\)\nについて、\n\\(g(N,k)\\)\nを求める際に呼び出される\n\\(g(n,l)\\)\nの\n\\(n\\)\nとして出てくるのは、\n\\(N\\)\nの左から何桁かだけを見た数か、もしくはそれから\n\\(1\\)\n引いた数のみです。\n（例：\n\\(N=4025\\)\nのとき、\n\\(n\\)\nとして出てくるのは\n\\(4025,402,401,40,39,4,3,0,-1\\)\nのいずれか）\nしたがって、十分高速に答えを求めることができます。\n実装例（Python）",
+      "codes": [],
+      "text_sha256": "597c85434d9410d8af1231585010a3afc1c90928d090c07e08f0638e32a6eb9a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc387/abc387_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc387/editorial/11870",
+      "text": "公式解説と同じく、\n\\(f(x) =\\)\n（\n\\(x\\)\n以下の良い整数の個数）を求めることにします。\n\\(dp_{i, j, k, l}\\)\n= （\n\\(i\\)\n桁目まで決めて\n\\(0\\)\nでない最初の数字が\n\\(j\\)\nであり、\n\\(x\\)\nより小さいことが確定しているかどうか（\n\\(k\\)\n）と先頭から\n\\(0\\)\nが続くかどうか（\n\\(l\\)\n））\nの状態を持つ桁DPをすることで、\n\\(f(x)\\)\nの値を求めることができます。\n実装例（C++）\n実装例（Nim）",
+      "codes": [],
+      "text_sha256": "231c90e7fc0f63e8781d80b02fac979917d7cda26ed0379f45c6afcedbfd49ae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc387/abc387_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

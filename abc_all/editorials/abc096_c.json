@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc096_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc096/editorial.pdf",
+      "text": "C – Grid Repainting 2\n\n  以下の図のような 「上下左右に隣り合うマスに黒いマスがない, 黒いマス」 がある場合を考えましょう.\n\n\n\n\n\n  square1001 君は, あるマスを黒で塗る際に隣り合ったマスも一緒に黒で塗らなければならないので,\n\n他の隣り合ったマスを塗らずにある特定のマスのみを塗るのは不可能です. ですので, このような場合にお\n\nける答えは必ず “No” となります.\n\n  逆に, それ以外の場合, どの黒いマスに対しても 「上下左右に隣り合うマスのうち最低 1 つは黒」\n\nという条件を満たすことになります. その場合, 全ての黒いマス 𝐴 に対して、「黒いマス 𝐴 と, 𝐴 と隣り\n\n合う黒いマスのうちの 1 つ 𝐵 を両方塗る」 という操作をすれば, 白にすべきマスを黒にすることなく, 黒\n\nにすべきマスをすべて黒にすることができます. よって, この場合答えは “Yes” となります。\n\n\n  「上下左右に隣り合うマスに黒いマスがない, 黒いマス」 が存在するかどうか判定すればよいので, 個\n\nの問題は計算量 𝑂(𝐻𝑊) で解くことができます.\n\n\nソースコード (C++)：https://beta.atcoder.jp/contests/abc096/submissions/2447972",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "fa7ef3850e10022a452c4415106878c0a4955a74678b89ba23038900fcabb111"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,32 @@
+{
+  "problem_id": "abc254_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc254/editorial/4064",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\n整数\n\\(N\\)\nの一の位は\n\\(N\\)\nを\n\\(10\\)\nで割った余りです。また、整数\n\\(N\\)\nの十の位は\n\\(N\\)\nを\n\\(100\\)\nで割った余りを\n\\(10\\)\nで割った商です。\nなので、これを連続して出力すればよいです。\n\\(N\\)\nを\n\\(100\\)\nで割った余りを出力してしまうと、\n\\(304\\)\nなどのケースで\n\\(4\\)\nを出力してしまうことに注意してください。この場合、正答は\n\\(04\\)\nです。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main(){\n  int n;\n  cin>>n;\n  cout<<(n%100)/10<<n%10<<endl;\n}"
+      ],
+      "text_sha256": "7bc64e9e30e8911e30c1dee8395f0740e0d2abf0f8c2a92083c600481cd68bea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc254/abc254_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc254/editorial/4084",
+      "text": "\\(N\\)\nの下\n\\(2\\)\n桁ということは、\n\\(N\\)\nを文字列として見た際の末尾\n\\(2\\)\n文字を出力すれば良いことが分かります。",
+      "codes": [
+        "#include<iostream>\nint main() {\n  std::string N;\n  std::cin >> N;\n  std::cout << N.substr(N.size() - 2) << std::endl;\n}",
+        "import static java.lang.System.*;\npublic class Main {\n  public static void main(String[] args) {\n    try (java.util.Scanner sc = new java.util.Scanner(in)) {\n      String N = sc.next();\n      out.println(N.substring(N.length() - 2));\n    }\n  }\n}",
+        "fun main() {\n  val N = readLine()!!\n  println(N.takeLast(2))\n}",
+        "N = input()\nprint(N[-2:])",
+        "use proconio::input;\n \nfn main() {\n    input! {\n        N: String,\n    }\n    println!(\"{}\", &N[N.len() - 2..]);\n}"
+      ],
+      "text_sha256": "a6bbfc51aff3b7d85447deba722d20d611ede879da4c4152863977d083924bb6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc254/abc254_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

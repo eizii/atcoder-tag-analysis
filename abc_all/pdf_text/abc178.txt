@@ -1,0 +1,45 @@
+E:Dist Max
+
+  （解説：ynymxiaolongbao）
+
+
+
+
+       |xi −xj| + |yi −yj|
+
+    =  max(xi −xj, xj −xi) + max(yi −yj, yj −yi)
+
+    =  max((xi −xj) + (yi −yj), (xi −xj) + (yj −yi), (xj −xi) + (yi −yj), (xj −xi) + (yj −yi))
+
+    =  max(xi + yi −(xj + yj), xi −yi −(xj −yj), −(xi −yi) + (xj −yj), −(xi + yi) + xj + yj)
+
+    =  max(|xi + yi −(xj + yj)|, |xi −yi −(xj −yj)|)
+
+ よって、zi = xi + yi, wi = xi −yi とすると、|xi −xj| + |yi −yj| =
+max(|zi −zj|, |wi −wj|) となります。この変形は45 度回転とも呼ばれ、マ
+ンハッタン距離を扱う問題でよく使われます。これを用いると答えは以下の
+
+ように表せます。
+
+
+
+
+       max     |xi −xj| + |yi −yj|
+     1≤i≤N,1≤j≤N
+    =     max    max(|zi −zj|, |wi −wj|)
+           1≤i≤N,1≤j≤N
+    =  max(   max      |zi −zj|,   max     |wi −wj|)
+               1≤i≤N,1≤j≤N        1≤i≤N,1≤j≤N
+    =  max( max zi −min  zi, max wi −min wi)
+               1≤i≤N    1≤i≤N   1≤i≤N     1≤i≤N
+
+   zi, wi の最大値・最小値はO(N) で求めることができるので、それから答
+えも求めることができます。
+
+ 解答例
+
+
+
+
+
+                                1

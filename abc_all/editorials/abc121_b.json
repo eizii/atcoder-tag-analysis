@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc121_b",
+  "editorials": [
+    {
+      "text": "B: Can you solve this?\n各i について、sum(i) = Ai1B1 + Ai2B2 + ... + AiMBM を計算し、sum(i) + C > 0 であるようなi の個\n数が答えになります。これを実装できれば正答することができますが、実装に慣れていない場合特に入力を受\nけ取る部分の実装が難しいと思います。以下の実装例では、\n1. 入力を受け取り、変数に格納する\n2. 計算し、答えを求める\n3. 答えを出力する\nの3 つのパートに分けて実装しています。他の問題でも、入力・計算・出力に分けて実装するのが分かりや\nすいのでおすすめです。今回の場合、変数の型としては、A は整数型の2 次元配列、B は整数型の1 次元配\n列、N, M, C は整数型とするのが良いでしょう。\n#include <bits/stdc ++.h>\nusing\nnamespace\nstd;\nint main () {\n// input\nint N, M, C; cin >> N >> M >> C;\nvector <int > B(M);\nfor (int i = 0; i < M; ++i) {\ncin >> B[i];\n}\nvector <vector <int >> A(N, vector <int >(M));\nfor (int i = 0; i < N; ++i) {\nfor (int j = 0; j < M; ++j) {\ncin >> A[i][j];\n}\n}\n// compute\nint ans = 0;\nfor (int i = 0; i < N; ++i) {\n// check\nwhether i-th source\ncode\nsolves\nthis\nproblem\nint sum = 0;\nfor (int j = 0; j < M; ++j) {\nsum += A[i][j] * B[j];\n}\nif (sum + C > 0) {\n\n++ans;\n}\n}\n// output\ncout << ans << endl;\n}\n",
+      "text_sha256": "149743ab98f05ac10a070ffed8018f08711419aa7ea2483e1d12d69a5cbab1d6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc121/abc121_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

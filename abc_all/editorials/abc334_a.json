@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc334_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc334/editorial/8985",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n入出力と単純な条件分岐が書けるかを問う問題です。\n\\(2\\)\nつの整数を入力として受け取り、大小を比較して、その結果に応じて答えとなる文字列を出力すればよいです。\n実装の詳細は以下の実装例 (C++, Python) を参考にしてください。このようなシンプルな条件分岐は三項演算子を用いると便利です。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int b, g;\n    cin >> b >> g;\n    cout << (b > g ? \"Bat\" : \"Glove\") << endl;\n}",
+        "b, g = map(int, input().split())\nprint(\"Bat\" if b > g else \"Glove\");"
+      ],
+      "text_sha256": "029523c5c1a62c1cf6c3c5281bbf128f60a6becb6744d3fd8aa8e55f851e3378",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc334/abc334_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

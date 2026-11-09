@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc319_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc319/editorial/7100",
+      "text": "バス停\n\\(i\\)\nに着く時刻が\n\\(x_i\\)\nのとき、次に乗ることができる最も早いバスは時刻\n\\(\\lceil \\frac{x_i}{P_i} \\rceil \\cdot P_i\\)\nに発車するバスであるため、バス停\n\\((i+1)\\)\nに着く時刻\n\\(x_{i+1}\\)\nは\n\\[x_{i+1} = \\left\\lceil \\frac{x_i}{P_i} \\right\\rceil \\cdot P_i + T_i \\tag{1}\\]\nと求まります。\nよって、高橋君がある時刻\n\\(q\\)\nに自宅を出発するときの、出発してから青木君の家に到着するまでにかかる時間\n\\(f(q)\\)\nは、\n上式 (1) によって\n\\(i\\)\nの小さい方から順に\n\\(x_i\\)\nを計算していくことで、全体で\n\\(\\Theta(N)\\)\n時間で計算できます。\nしかし、\n\\(Q\\)\n個のクエリ\n\\(q_1, q_2, \\ldots, q_Q\\)\nそれぞれについて\n\\(f(q_j)\\)\nを愚直に計算すると全体で\n\\(\\Theta(NQ)\\)\n時間かかり、実行制限時間に間に合わせることは絶望的です。\n実は、後で述べるように\n\\(f\\)\nは\n\\(L \\coloneqq \\mathrm{lcm}(P_1, P_2, \\ldots, P_{N-1}) \\leq \\mathrm{lcm}(1, 2, \\ldots, 8) = 840\\)\nを周期とします。\nよって、\n\\(f(0), f(1), \\ldots, f(L-1)\\)\nの\n\\(L\\)\n個の値だけを、あらかじめ全体で\n\\(O(NL)\\)\n時間で求めておけば、\n各クエリ\n\\(q_j\\)\nに対する\n\\(f(q_j)\\)\nの値は、\n\\(q_j\\)\nを\n\\(L\\)\nで割った余り\n\\(q_i \\% L\\)\nに対する\n\\(f\\)\nの値\n\\(f(q_i \\% L)\\)\nと等しいため、\nこれを参照して\n\\(O(1)\\)\n時間で求めることができ、本問題を全体で\n\\(O(NL + Q)\\)\n時間で解くことができます。\n\\(f\\)\nが\n\\(L\\)\nを周期とすることの証明\n\\(q \\equiv q' \\pmod{L}\\)\nを仮定して\n\\(f(q) = f(q')\\)\nとなることを示します。\nそのためには、高橋君が自宅を出発する時刻が\n\\(q, q'\\)\nである場合それぞれの、バス停\n\\(i\\)\nに到着する時刻を\n\\(x_i, x'_i\\)\nとし、\nすべての\n\\(i\\)\nについて、\n\\(x_i \\equiv x'_i \\pmod{L}\\)\nと\n\\(x_i\n - x_{i-1} = x'_i - x'_{i-1}\\)\nが成り立つ\nを示せば十分です。(\n\\(x_i - x_{i-1}\\)\nと\n\\(x'_i - x'_{i-1}\\)\nが、それぞれ\n\\(q, q'\\)\nに対応する、「バス停\n\\((i-1)\\)\nに着いてからバス停\n\\(i\\)\nに着くまでにかかる時間」であるため、これが全ての\n\\(i\\)\nで等しいことが言えれば、\n\\(f(q) = f(q')\\)\nが言えます。)\n\\(i\\)\nに関する帰納法で示します。\nまず、仮定\n\\(q \\equiv q' \\pmod{L}\\)\nから\n\\(x_1 = q + X \\equiv q' + X = x'_1 \\pmod{L}\\)\nです。\n以下、\n\\(i\\)\nで主張が成り立つと仮定し、\n\\((i+1)\\)\nでも成り立つことを示します。\nまず、\n\\(x_{i+1} - x_i\\)\nについて、式 (1) から\n\\[\n\\begin{aligned}\nx_{i+1} - x_i\n&= \\left\\lceil \\frac{x_i}{P_i} \\right\\rceil \\cdot P_i + T_i - x_i\\\\\n&= \\left\\lfloor \\frac{x_i + P_i - 1}{P_i} \\right\\rfloor \\cdot P_i + T_i - x_i\\\\\n&= (x_i + P_i - 1) -  ((x_i + P_i - 1) \\% P_i )+ T_i - x_i\\\\\n&= P_i + T_i - 1 -  ((x_i - 1) \\% P_i ) \\tag{2}\n\\end{aligned}\n\\]\nです。\n\\(x'_{i+1} - x'_i\\)\nについても同様に、\n\\[\nx'_{i+1} - x'_i = P_i + T_i - 1 -  ((x'_i - 1) \\% P_i ) \\tag{3}\n\\]\nです。\n帰納法の仮定\n\\(x_i \\equiv x'_i \\pmod{L}\\)\nと\n\\(L\\)\nが\n\\(P_i\\)\nの倍数であることから、\n\\(x_i \\equiv x'_i \\pmod{P_i}\\)\nであり、よって\n\\((x_i - 1) \\% P_i  = (x'_i - 1) \\% P_i \\)\nです。したがって、式 (2), (3) の最右辺は等しく、\n\\(x_{i+1} - x_i = x'_{i+1} - x'_i\\)\nが成り立ちます。\nまた、これと帰納法の仮定\n\\(x_i \\equiv x'_i \\pmod{L}\\)\nから直ちに\n\\(x_{i+1} \\equiv x'_{i+1}\\pmod{L}\\)\nも得られます。",
+      "codes": [],
+      "text_sha256": "b7086547041261726cad8d62657b92ae63b992d3e73c2a0ac13d9a1d1ec02f73",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc319/abc319_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

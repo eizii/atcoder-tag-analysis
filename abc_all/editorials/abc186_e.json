@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc186_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc186/editorial/401",
+      "text": "\\(x\\)\n回の行動で玉座に座れることと、\n\\(S+xK \\equiv 0 \\bmod N\\)\nが成り立つことは同値です。\nよって「\n\\(Ax \\equiv B \\bmod M\\)\nとなる最小の\n\\(x\\)\nを求めよ」という形の問題が解ければよいです。この問題は次のように解くことができます。\n\\(d=\\gcd(A,B,M)\\)\nとし、\n\\(A,B,M\\)\nをそれぞれ\n\\(A/d,B/d,M/d\\)\nに置き換える。\n\\(\\gcd(A,M) \\neq 1\\)\nのとき解なし\n\\(\\gcd(A,M) = 1\\)\nのとき、\n\\(\\bmod M\\)\nにおける\n\\(A\\)\nの逆元を\n\\(A^{-1}\\)\nとして、\n\\(x=A^{-1}B\\)\nが解\n\\(\\bmod M\\)\nにおける逆元は拡張ユークリッドの互除法などを用いて求めることができます。（\n\\(M\\)\nが素数でない場合、\n\\(A^{M-2}\\)\nが\n\\(A\\)\nの逆元になるとは限らないことに注意してください）",
+      "codes": [],
+      "text_sha256": "808aec442a5daf771ecca39be51baa5246dd14e4fd6ae3980634cab749938132",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc186/abc186_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

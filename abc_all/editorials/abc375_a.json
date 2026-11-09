@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc375_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc375/editorial/11138",
+      "text": "for 文などを用いて、各\n\\(i\\)\nに対して条件を満たすか判定すればよいです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tstring s;\n\tcin >> s;\n\tint ans = 0;\n\tfor (int i = 0; i < n - 2; i++) if (s[i] == '#' && s[i + 1] == '.' && s[i + 2] == '#') ans++;\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "851c777615061e242fe59819ec6f9a31b87363e6c65aaebc7d5f028f2f3bdec0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc375/abc375_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

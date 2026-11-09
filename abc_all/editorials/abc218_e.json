@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc218_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc218/editorial/2580",
+      "text": "最初に全ての辺を削除して報酬をもらってしまい、「辺\n\\(i\\)\nを元に戻す(削除しない)場合\n\\(C_i\\)\nの罰金」と考えることにします。元の問題は罰金を最小化してグラフを連結にする問題と読み替えることができるため、辺\n\\(i\\)\nの重みを\n\\(C_i\\)\nとしたときの最小全域木を求めることで解くことができます。\nただし、\n\\(C_i<0\\)\nの辺は最小全域木に含まれなかった場合でも削除しないことに注意してください。\nなおこの問題は「\n\\(C_i\\)\nが大きな辺から順に、その辺を削除しても連結なままなら削除する」という貪欲法でも正しい答えを得ることができますが、辺を削除した際の連結性の判定を高速に行うには高度なアルゴリズムが必要となります。",
+      "codes": [],
+      "text_sha256": "b905ab8b40eeaa4feb6f8e409fa54a28af2ded79c0a516d40daccbdf129099e9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc218/abc218_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

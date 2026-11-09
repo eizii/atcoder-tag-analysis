@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc412_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc412/editorial/13388",
+      "text": "\\(A_i < B_i\\)\nなる\n\\(i\\)\nの個数を数えればよいです。これは、for 文などを用いて各\n\\(i\\)\nについて\n\\(A_i < B_i\\)\nであるか判定することによって実現できます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tint ans = 0;\n\tfor (int i = 0; i < n; i++) {\n\t\tint a, b;\n\t\tcin >> a >> b;\n\t\tif (a < b) ans++;\n\t}\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "8f206fe3071953394cfe7bb91dac73298cde784eccde2395d61109d0a639ff1f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc412/abc412_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

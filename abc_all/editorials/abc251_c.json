@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc251_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc251/editorial/3968",
+      "text": "この問題はいくつかの解法が考えられると思いますが、例えば for-loop を用いて前から調べていく方法を使って解けないか考えてみましょう。すると、一例として次のような手順が考えられます。\n暫定的に優秀な提出\nbest\n、およびその得点\nbest_score\nを変数として用意する。\n\\(1\\)\n番目の提出から昇順に調べていく。\n\\(i\\)\n番目の提出を調べるときは、まずその提出がオリジナルかを判定する。\nもしオリジナルであれば、得点\nT_i\nが\nbest_score\nより大きいかを判定する。\n大きければ\nbest\nを\ni\nに、\nbest_score\nを\nT_i\nに更新する。\nそうでなければ何もしない。\nもしオリジナルでなければ何もしない。\nこれを 2 重の for-loop を用いて Python でナイーブに実装すると以下のようになります。\nしかしこのままでは提出\n\\(i\\)\nがオリジナルか判定する部分に\n\\(\\mathrm{O}(N)\\)\nかかっており、全体で\n\\(\\mathrm{O}(N^2)\\)\n時間かかり TLE してしまいます。\nそこで、今まで出てきた文字列を Python の\nset\nや C++ の\nstd::set\nのような集合型や連想配列(辞書)を用いて管理しましょう。\n集合型は次の操作を\n\\(\\mathrm{O}(1)\\)\nあるいは\n\\(\\mathrm{O}(\\log (集合の要素数) )\\)\nで行うことができるデータ構造です。\nある文字列が集合に含まれているか判定する\n集合を文字列に追加する\nこのようなデータ構造を用いることで、ボトルネックの部分であった「文字列が前に登場したか判定する」部分を高速に行うことができるので AC することができます。",
+      "codes": [
+        "# TLE する解法\n\nN = int(input())\nS, T = [], []\nfor i in range(N):\n  s, t = input().split()\n  S.append(s)\n  T.append(int(t))\n\nbest = -1\nbest_score = -1\n\nfor i in range(N):\n  original = True\n  for j in range(i):\n    if S[i] == S[j]:\n      original = False\n  if original == False:\n    continue\n  if best_score < T[i]:\n    best = i\n    best_score = T[i]\n\nprint(best + 1)",
+        "# AC する解法\n\nN = int(input())\nS, T = [], []\nfor i in range(N):\n  s, t = input().split()\n  S.append(s)\n  T.append(int(t))\n\nbest = -1\nbest_score = -1\n\nappeared = set()\nfor i in range(N):\n  if S[i] in appeared:\n    continue\n  appeared.add(S[i])\n  if best_score < T[i]:\n    best = i\n    best_score = T[i]\n\nprint(best + 1)"
+      ],
+      "text_sha256": "da04410db715aac2c9146b4a6b2acdcccf621acc44d90eacdbab4b8c0608393b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc251/abc251_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc115_d",
+  "editorials": [
+    {
+      "text": "D: Christmas\n「レベルi バーガーの厚さ(層の総数)」をai、「レベルi バーガーに含まれるパティの総数」をpi とします\n(i ≥0)。これらの値はa0 = 1, ai = 2ai−1 + 3 (i ≥1), p0 = 1, pi = 2pi−1 + 1 (i ≥1) と順次求められます。\n求めるべき数、「レベルN バーガーの下からX 層に含まれるパティの枚数」をf(N, X) と書きます。\nN = 0 の場合は問題ないので、N ≥1 の場合を考えましょう。N = 0 の場合が問題ないことを活用して、「レ\nベルN −1 バーガーについてなら何を聞かれてもわかる。つまり、どんな整数Y を指定されてもf(N −1, Y )\nを知れる」と仮定してみると、次のようにレベルN バーガーについても何を聞かれてもわかってしまいます。\n1. X = 1 のとき: f(N, X) = 0 (一番下のバンだけ)\n2. 1 < X ≤1 + ai−1 のとき: f(N, X) = f(N −1, X −1)\n(一番下のバン+ その上のレベルN −1 バーガーの下からX −1 層)\n3. X = 2 + ai−1 のとき: f(N, X) = pi−1 + 1\n(一番下のバン+ その上のレベルN −1 バーガー+ その上のパティ)\n4. 2 + ai−1 < X ≤2 + 2ai−1 のとき: f(N, X) = pi−1 + 1 + f(N −1, X −2 −ai−1)\n( (前略) + その上のパティ+ その上のレベルN −1 バーガーの下からX −2 −ai−1 層)\n5. X = 3 + 2ai−1 のとき: f(N, X) = 2pi−1 + 1\n( (前略) + その上のパティ+ その上のレベルN −1 バーガー+ その上のバン)\nこれをそのまま再帰関数として実装すれば、N + 1 回以下の計算ステップで答えが求まります。\n1 N, X = map(int, input().split())\n2\n3 a, p = [1], [1]\n4 for i in range(N):\n5\na.append(a[i] * 2 + 3)\n6\np.append(p[i] * 2 + 1)\n7\n8 def f(N, X):\n# X <= 0 やX > a_N を許容し解説本文から簡略化\n9\nif N == 0:\n10\nreturn 0 if X <= 0 else 1\n11\nelif X <= 1 + a[N-1]:\n12\nreturn f(N-1, X-1)\n13\nelse:\n14\nreturn p[N-1] + 1 + f(N-1, X-2-a[N-1])\n15\n16 print(f(N, X))\n",
+      "text_sha256": "afbed2b08e9337ab0fad5249240ef173bb3cb3d50d4e6fbb192703749c8c1665",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc115/abc115_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

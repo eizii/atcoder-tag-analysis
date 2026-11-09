@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc266_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc266/editorial/4698",
+      "text": "\\(N\\)\n頂点\n\\(N\\)\n辺の連結なグラフ（通称 なもりグラフ）は、ちょうど一つの閉路及びその閉路上の頂点を根とする木として見ることができます。\nこの問題では、閉路を検出し、次に各頂点がどの閉路上の頂点を根とする木に属しているかが分かればよいです。何故ならば、同じ頂点を根としている場合単純パスは一意であり、そうでない場合閉路の通り方が\n\\(2\\)\n通りあるため単純パスは一意でないからです。\n様々な実装方針がありますが、ここではそのうち一例を紹介します。\nstep 1\n次数\n\\(1\\)\nの頂点及びその頂点から伸びる辺を削除することを、次数\n\\(1\\)\nの頂点がなくなるまで繰り返します。この操作の後に残った頂点が、閉路上の頂点です。\nstep 2\n閉路上の各頂点から dfs をすることで、各頂点がどの閉路上の頂点を根とする木に属しているか求めます。\n実装例(c++)",
+      "codes": [],
+      "text_sha256": "6033a2a5347bb62957af07d1997850d5930e340a28d1a070ee50bae93707beb7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc266/abc266_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc266/editorial/4716",
+      "text": "今回の問題は\n\\(N\\)\n頂点,\n\\(N\\)\n辺の連結グラフでしたが,  実は一般のグラフ  (非連結, 非単純の場合も含む) の場合でも\n\\(N\\)\n頂点\n\\(M\\)\n辺のグラフにおいて 前計算\n\\(O(N+M)\\)\n時間, 1クエリあたり\n\\(O(1)\\)\n時間で判定できる必要十分条件がわかっています.  私が作成した問題ですが, 興味のあるかたはぜひ解いてみてください.\n[問題]\nyukicoder No 1983 南の島のマーメイド\n[解説]\n解説 PDF\n(※ 18ページから)\n橋のみからなる部分グラフ上で連結である.\nグラフに存在するサイクル基底になる辺を全て取り除いたグラフ上で連結である (こちらの条件は前計算が\n\\(O((N+M) \\log N)\\)\n時間になる).",
+      "codes": [],
+      "text_sha256": "dfec03ba03d4e4e00a19522f181262882637989cd0bfe7fcbfdabc183af2f845",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc266/abc266_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

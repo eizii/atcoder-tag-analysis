@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc193_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc193/editorial/808",
+      "text": "\\(N ≤ 10^{10}\\)\nであるので、\n\\(1\\)\nから\n\\(N\\)\nまでの整数をそれぞれ判定することができません。\nそこで、\n\\(a^b\\)\nと表せる整数が非常に少ないことに注目します。\n\\(2\\)\n以上の整数の組\n\\((a, b)\\)\nであって、\n\\(a^b ≤ N\\)\nであるものは、\n\\[\n\\sum_{x=2}^{\\lfloor\\log_2N\\rfloor}(\\lfloor\\sqrt[x]{N}\\rfloor - 1) ≤ 102719\n\\]\n個なので、\n\\(a^b ≤ N\\)\nの範囲で\n\\(a, b\\)\nを全探索し、\n\\(a^b\\)\nと表せるものを HashSet で管理することで十分高速にこの問題を解くことができます。\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <iostream>\n#include <unordered_set>\nusing namespace std;\nusing ll = int64_t;\n\nint main(){\n    ll N;\n    cin >> N;\n    unordered_set<ll> s;\n    for(ll a = 2; a * a <= N; a++){\n        ll x = a * a;\n        while(x <= N){\n            s.insert(x);\n            x *= a;\n        }\n    }\n    cout << N - s.size() << endl;\n}",
+        "N = int(input())\nsq = int(N ** 0.5)\ns = set()\nfor a in range(2, sq + 1):\n    x = a * a\n    while x <= N:\n        s.add(x)\n        x *= a\nprint(N - len(s))"
+      ],
+      "text_sha256": "8d7b7ceb69f1fd37441781f4295153ae1583b47b42caf777e79caee9101b8dad",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc193/abc193_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc193/editorial/1093",
+      "text": "ここでは、setを使わない解法について解説します。\nまず、1は\n\\(a^b\\)\nの形で表すことはできません。\nよって、\n\\(2\\leq k\\leq N\\)\nの範囲内で条件を満たすものを答えればよいです。\n全体集合は\n\\(N-1\\)\n個の要素があります。ここから\n\\(a^2\\)\nの形で書けるものを引きます。個数については二分探索でもできますし、愚直に数えても問題ないです。\nさらに\n\\(a^3\\)\nの形で書けるものを引きます。これについては\n\\(a^2\\)\nと同様です。\n\\(a^4\\)\nで書ける形のものは\n\\(a^2\\)\nの形でも書けるので、これについてはさらに引く必要はありません。\n\\(a^5\\)\nで書けるものについては引きます。\n\\(a^6\\)\nの形で書けるものは、\n\\(a^2\\)\nの形でも書けるし、\n\\(a^3\\)\nの形でも書くことができます。つまり2回分引いてしまっていて、余計に引いてしまっているので足します。\n…\n以上を繰り返すと、答えは以下の通りになります。\n\\(cnt(b)\\)\nを\n\\(2\\leq a^b\\leq N\\)\nを満たす整数\n\\(a\\)\nの個数とします。このとき答えは\n\\[ans=\\sum_{b=1}^{\\infty}\\mu(b)\\cdot cnt(b)\\]\nここで、\n\\(\\mu(b)\\)\nは\nメビウス関数\nです。\nさらに、\n\\(b\\)\nの足す範囲は、\n\\(2^b\\leq N\\)\nを満たす\n\\(b\\)\nまででOKです。それ以降では\n\\(cnt(b)=0\\)\nとなるため考慮する必要がありません。\n\\(cnt(b)\\)\nを求めるときには、\n\\(b=1\\)\nのときは別途処理して（\n\\(cnt(1)=N-1\\)\nとなる！）、それ以外では愚直に数えると、計算量は\n\\(O(N^{1/2}+N^{1/3}+\\cdots+N^{\\lfloor\\log_{2}{N}\\rfloor})\\)\nとなり、間に合います。\n提出例(pypy)",
+      "codes": [],
+      "text_sha256": "4b01ec7bc0b346d4f377ecd3c207661a6ada678755a97d376f8a20a55f7a9c79",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc193/abc193_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

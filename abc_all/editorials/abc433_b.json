@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc433_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc433/editorial/14618",
+      "text": "各\n\\(i\\)\nについて、人\n\\(i\\)\nより左に人\n\\(i\\)\nより身長が高い人がいるか、またいる場合はその中で人\n\\(i\\)\nに最も近い人が誰かを求める問題です。\nこの問題の答えは以下のように求めることができます。\n人\n\\(i-1\\)\nが人\n\\(i\\)\nより身長が高いか調べる。もし人\n\\(i-1\\)\nの方が高いなら問題の答えは\n\\(i-1\\)\nであり、探索を終了する。\n人\n\\(i-2\\)\nが人\n\\(i\\)\nより身長が高いか調べる。もし人\n\\(i-2\\)\nの方が高いなら問題の答えは\n\\(i-2\\)\nであり、探索を終了する。\n\\(\\vdots\\)\n人\n\\(1\\)\nが人\n\\(i\\)\nより身長が高いか調べる。もし人\n\\(1\\)\nの方が高いなら問題の答えは\n\\(1\\)\nであり、探索を終了する。\nここまで探索して答えが見つからなかった場合は人\n\\(i\\)\nより左に人\n\\(i\\)\nより身長が高い人は存在しない。したがって、答えは\n\\(-1\\)\nである。\nこれは for 文を逆順にループさせることで求めることができます。\n以上を適切に実装することでこの問題の答えを求めることができます。二重 for 文の実装に注意してください。\n実装例(Python3)",
+      "codes": [
+        "n = int(input())\na = list(map(int, input().split()))\nfor i in range(n):\n    ans = -1\n    for j in range(i - 1, -1, -1):\n        if a[j] > a[i]:\n            ans = j + 1\n            break\n    print(ans)"
+      ],
+      "text_sha256": "8dbdb216378bed90a92db26f9a0fa912309b0814b1fea252b44ba382f7c9c767",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc433/abc433_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc433/editorial/14658",
+      "text": "公式解説の方法の時間計算量を評価すると\n\\(O(N^2)\\)\nになりますが、このユーザー解説では時間計算量\n\\(O(N)\\)\nの解法を紹介します。\n単調スタック\n(Monotonic Stack) （蟻本 p.298 で使われるテクニック）を利用した解法で、公式解説より難易度が高くなっています。\n長さ\n\\(N\\)\nの配列\n\\(A = (A_1, A_2, \\cdots, A_N)\\)\nと、各\n\\(i = 0, 1, 2, \\cdots, N\\)\nについて、次に定める列を\n\\(C_i\\)\nとします。直感的に、\n\\(C_i\\)\nは\n\\(i\\)\nから左に進んだときの累積 max の更新点を記録したものです。\n\\(C_i\\)\nの値は (値, index) のペアを保持するとします。\n最初は\n\\(x = - \\infty\\)\nであるとする。また、列\n\\(T\\)\nは空列とする。\n\\(j = i, i-1, \\cdots, 1\\)\nについて、\n\\(x < A_j\\)\nならば、\n\\(x\\)\nを\n\\(A_j\\)\nに更新し、\n\\(T\\)\nの先頭に\n\\((A_j, j)\\)\nを挿入する。\n\\(C_i\\)\nを最終的な列\n\\(T\\)\nとする。\nこのとき、人\n\\(i\\)\nの答えは、\n\\(C_i\\)\nの末尾から 2 番目の要素\n\\((v, j)\\)\nについての\n\\(j\\)\n（なければ\n\\(-1\\)\n）となります。なぜなら、\n\\(C_i\\)\nの末尾の要素は\n\\((A_i, i)\\)\nであり、\n\\(C_i\\)\nの構成方法から\n\\(v > A_i\\)\nで、\n\\(j<k<i\\)\nに対しては\n\\(A_k \\le A_i\\)\nとなるからです。\nたとえば、\n\\(A = (17,10,12,7,8)\\)\nのとき、\n\\(C_5 = ((17, 1), (12,3),(8,5))\\)\nとなり、人\n\\(5\\)\nに対する答えは\n\\(3\\)\nとなります。\n\\(C_{i-1}\\)\nから\n\\(C_{i}\\)\nを得る\n\\(C_i\\)\nを stack （C++ の std::vector や python の list で代用可能）として管理することを考えます。\n\\(C_{i-1}\\)\nから\n\\(C_{i}\\)\nを得るには、\nまず、\n\\(X=C_{i-1}\\)\nとする。\n\\(X\\)\nが空でなく、\n\\(X\\)\nの末尾\n\\((v, j)\\)\nについて\n\\(v \\le A_{i}\\)\nである限り\n\\(X\\)\nの末尾を削除 (pop) する。\nその後、\n\\(X\\)\nの末尾に\n\\((A_{i}, i)\\)\nを追加 (push) したものを\n\\(C_{i}\\)\nとする。\nとして得られます。\n人\n\\(i\\)\nについての答えは、\n\\(X\\)\nの末尾に\n\\((A_{i}, i)\\)\nを追加する前の末尾\n\\((v,j)\\)\nについての\n\\(j\\)\nの値（なければ\n\\(-1\\)\n）となります。\n以上のアルゴリズムを\n\\(i=1,2,\\cdots, N\\)\nに対して行い答えをすべて求めることが可能です。計算量は全体で\n\\(O(N)\\)\nとなります。計算量評価は特に各要素\n\\(A_i\\)\nが stack に最大で 1 回 push され、最大で 1 回 pop されることから行うことができます。\n実装\n以下の実装では\n\\(C_0\\)\nは空列ではなく、\n\\(M\\)\nを\n\\(\\max A\\)\nより大きい値（今回は\n\\(M=10^9\\)\n）として、代わりに\n\\(C_0 = ((M,-1))\\)\nとしています。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint n; cin >> n;\n\tvector<int> a(n);\n\tfor (int i=0; i<n; i++) {\n\t\tcin >> a[i];\n\t}\n\tvector<int> val = {int(1e9)}; // stack の値\n\tvector<int> ind = {-1}; // その座標\n\tfor (int i=0; i<n; i++) {\n\t\twhile (val.back() <= a[i]) {\n\t\t\tval.pop_back();\n\t\t\tind.pop_back();\n\t\t}\n\t\tcout << ind.back() << '\\n';\n\t\tval.push_back(a[i]);\n\t\tind.push_back(i + 1);\n\t}\n}"
+      ],
+      "text_sha256": "a05de9cb648c452b56c09a1ac893f455561c820e5c0b511e9de2f33fb8460ae5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc433/abc433_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc348_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc348/editorial/9727",
+      "text": "この問題では入出力、for文を用いた繰り返し処理、四則演算、文字列に対する操作などが求められています。\nこの問題では例えば、最初に空の文字列を用意し、\n\\(1\\)\n回目から\n\\(N\\)\n回目まで順に見て行って、成功した場合は\no\nを、失敗した場合は\nx\nを文字列の末尾に追加することで答えの文字列を得ることができます。具体的な実装方法は下記の実装例を参考にしてください。\n実装例 (C++):\n実装例(Python):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int N;\n  cin >> N;\n  string S = \"\";\n  for (int i = 1; i <= N; ++i) {\n    if (i % 3 == 0) S += 'x';\n    else S += 'o';\n  }\n  cout << S << endl;\n}",
+        "N = int(input())\nS = \"\"\n\nfor i in range(1,N+1):\n    if i%3 == 0:\n        S += \"x\"\n    else:\n        S += \"o\"\n\nprint(S)"
+      ],
+      "text_sha256": "213dd2448c95cde044159c60a766b0a32edc889a9a19e8541fb47d047d00fd36",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc348/abc348_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

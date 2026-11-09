@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc467_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc467/editorial/23429",
+      "text": "それぞれの店で「お釣りを受け取った場合に比べて何円損したか」を計算してみましょう。 \\(S_i=\\) take の場合、どちらの場合でもお釣りを受け取っているので、損した金額は \\(0\\) 円です。 \\(S_i=\\) keep の場合、実際はお釣りを受け取っていないのでお釣りの分だけ損をしています。商品の価格が \\(A_i\\) 円で払った金額が \\(B_i\\) 円なのでお釣りは \\(B_i-A_i\\) 円となるため、損した金額は \\(B_i-A_i\\) 円です。 よって、答えは \\(S_i=\\) keep である店について \\(B_i - A_i\\) を合計した値 となります。これは入力を適切に受け取って if 文を用いることで計算可能です。計算量は \\(\\mathrm{O}(N)\\) で十分高速です。 実装例 (C++)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int N;\n  cin >> N;\n  int ans = 0;\n  for (int i = 0; i < N; i++) {\n    int A, B;\n    cin >> A >> B;\n    string S;\n    cin >> S;\n    if (S == \"keep\") ans += B - A;\n  }\n  cout << ans << \"\\n\";\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "6b1dfc11bee6860f8bfff5af6b5d3bd495d91f3de0720532e2e4f5f9bdc1513a"
+    }
+  ],
+  "status": "available"
+}

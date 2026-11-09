@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc464_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc464/editorial/22254",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n問題文中にもある通り、\n\\(S\\)\nの長さは奇数なので\nE\n,\nW\nが\n\\(S\\)\n中に同数含まれることはありえず、\nE\n,\nW\nどちらかがもう一方より真に多いです。\nどちらが多いかの判定法には色々ありますが、一例を示します。\n変数\n\\(h=0\\)\nを用意する。\n\\(S\\)\nを\n\\(1\\)\n文字ずつ調べ、出てきた文字が\nE\nなら\n\\(h\\)\nに\n\\(1\\)\n加算、\nW\nなら\n\\(h\\)\nから\n\\(1\\)\n減算するということを\n\\(S\\)\nの全ての文字について繰り返す。\n全文字を調べた後、\n\\(h>0\\)\nなら\nE\nがより多く、そうでなければ\nW\nがより多い。\nこうすることで、具体的にどちらがいくつかあるかの情報を捨てる代わりに、変数ひとつでどちらが多数派かを判定できます。\n一連の実装は、例えば for 文と if 文を組み合わせることで実現可能です。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  int h=0;\n  for(auto &nx : s){\n    if(nx=='E'){h++;}\n    else{h--;}\n  }\n  if(h>0){cout << \"East\\n\";}\n  else{cout << \"West\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "03f841d7f67f9e2a89c6a92c8f8af6a2a1f1c28cf8737c90a6711da7c6594d9f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc464/abc464_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

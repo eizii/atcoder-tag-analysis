@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc369_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc369/editorial/10841",
+      "text": "この問題は動的計画法によって解くことができます。\n「\n\\(k\\)\n匹目までのモンスターと出会い、\n偶数（\n\\(0\\)\nを含む）匹\n倒した時に得られる経験値の最大値」と「\n\\(k\\)\n匹目までのモンスターと出会い、\n奇数匹\n倒した時に得られる経験値の最大値」（そのようなことが不可能な場合は\n\\(-\\infty\\)\n）をそれぞれ\n\\(dp_{even}[k]\\)\n,\n\\(dp_{odd}[k]\\)\nとします。\n最初、\n\\(dp_{even}[0]=0\\)\n,\n\\(dp_{odd}[0]=-\\infty\\)\nです。\nここで、\n\\(1\\leq i\\leq N\\)\nについて、\n\\(i\\)\n匹目のモンスターから得られる経験値は、\n高橋君が逃がすと倒すのどちらを選択したか\n（倒すことを選択した際）それまでに倒したモンスターの数が偶数か奇数か\nにのみ依存して決まることに注意します。さらに、「\n\\(i\\)\n匹目までのモンスターと出会い、偶数匹倒す」パターンは以下のどちらかしかありません。\n\\(k-1\\)\n匹目までの間に偶数匹倒し、\n\\(k\\)\n匹目のモンスターを逃がした場合\n\\(k-1\\)\n匹目までの間に奇数匹倒し、\n\\(k\\)\n匹目のモンスターを倒した場合\nよって、\n\\(dp_{even}[i-1]\\)\n,\n\\(dp_{odd}[i-1]\\)\nの値が求まっている時、\n\\(dp_{even}[i]\\)\nは、\n\\[\ndp_{even}[i]=\\max(dp_{even}[i-1],dp_{odd}[i-1]+2A_i)\n\\]\nとして求めることができます。同様に\n\\(dp_{odd}[i]\\)\nは、\n\\[\ndp_{odd}[i]=\\max(dp_{odd}[i-1],dp_{even}[i-1]+A_i)\n\\]\nとして求めることができます。\n最終的な答えは\n\\(\\max(dp_{even}[N],dp_{odd}[N])\\)\nとなります。\nこのときの計算量は\n\\(O(N)\\)\nであり、今回の制約下で十分高速です。\nよってこの問題を解くことができました。\nC++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\n#define INF (long long)1e+18\n\nint main(void){\n\tint n;\n\tlong long x,dp0=0,dp1=-INF,tmp;\n\tcin>>n;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>x;\n\t\ttmp=dp0;\n\t\tdp0=max(dp1+2*x,dp0);\n\t\tdp1=max(tmp+x,dp1);\n\t}\n\tcout<<max(dp0,dp1)<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "f220cbbcb07db34e733ffa98890e810f644faee02c39761dd51fadaa95e878eb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc369/abc369_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

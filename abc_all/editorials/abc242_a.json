@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc242_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc242/editorial/3514",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\n以下の流れで答えを求めていけばよいです。\nもし\n\\(X \\le A\\)\nなら、答えは\n\\(1\\)\nそうでなく、\n\\(X \\le B\\)\nなら、答えは\n\\(\\frac{C}{B-A}\\)\nそうでないなら、答えは\n\\(0\\)\nこれは if 文を用いて実装可能です。\n実数の出力方法に注意しましょう。特に、出力する桁数が不足して不正解となる場合があります。\n言語によって対応方法は様々ですが、例えば C++ における解決策のひとつとして、 printf を用いると便利です。実装例では実数を小数点以下\n\\(12\\)\n桁出力することを指定しています。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n \nusing namespace std;\n \nint main(){\n  int a,b,c,x;\n  cin >> a >> b >> c >> x;\n  \n  if(x<=a){printf(\"%.12lf\\n\",1.0);}\n  else if(x<=b){\n    double res=c;\n    res/=(b-a);\n    printf(\"%.12lf\\n\",res);\n  }\n  else{\n    printf(\"%.12lf\\n\",0.0);\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "8fd58ab721f8203461d02b123a9697b57f52831f2440cb14870953cb6a4587fe",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc242/abc242_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

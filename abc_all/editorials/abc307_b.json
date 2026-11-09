@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc307_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc307/editorial/6659",
+      "text": "基本的には問題文の指示に従って、\n\\(1\\leq i,j\\leq N\\)\nをみたす\n\\(i,j\\)\nに対して、\n\\(i\\neq j\\)\nであるか判定する。\n1.の条件をみたしているとき、\n\\(S_i\\)\nと\n\\(S_j\\)\nを連結した文字列\n\\(T_{i,j}\\equiv S_i+S_j\\)\nを作る。\n(1.の条件をみたしているとき、)\n\\(T_{i,j}\\)\nが回文であるか判定する。具体的には、\n\\(1\\leq k\\leq \\lvert T_{i,j}\\rvert\\)\nをみたすすべての整数\n\\(k\\)\nについて、\n\\(T_{i,j}\\)\nの\n\\(k\\)\n文字目と\n\\( \\lvert T_{i,j}\\rvert+1-k\\)\n文字目が同一か判定する。\nということを行い、一度でも\n\\(T_{i,j}\\)\nが回文であれば\nYes\n、そうでなければ\nNo\nを出力すれば良いです。\nif 文と for文および 文字列の長さを得る方法や文字列を連結する方法が分かっていればこれを実装する事ができます。\n愚直に行っても計算量は\n\\(O(N^2\\max(\\lvert S_i\\rvert))\\)\n程度のため、十分高速にこの問題を解く事ができます。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n\nint main() {\n\tint n,l;\n\tbool flag;\n\tstring s[100];\n\tstring t;\n\n\tcin>>n;\n\tfor(int i=0;i<n;i++)cin>>s[i];\n\n\tfor(int i=0;i<n;i++){\n\t\tfor(int j=0;j<n;j++){\n\t\t\tif(i!=j){\n\t\t\t\tt=s[i]+s[j];\n\t\t\t\tl=t.size();\n\t\t\t\tflag=true;\n\t\t\t\tfor(int k=0;k<l;k++)if(t[k]!=t[l-k-1])flag=false;\n\t\t\t\tif(flag){\n\t\t\t\t\tcout<<\"Yes\"<<endl;\n\t\t\t\t\treturn 0;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\tcout<<\"No\"<<endl;\n\treturn 0;\n}",
+        "n=int(input())\ns=[input() for i in range(n)]\nans=\"No\"\n\nfor i in range(n):\n    for j in range(n):\n        if i!=j:\n            t=s[i]+s[j]\n            flag=True\n            for k in range(len(t)):\n                if t[k]!=t[-k-1]:\n                    flag=False\n            if flag:\n                ans=\"Yes\"\n\nprint(ans)"
+      ],
+      "text_sha256": "8450c06b079c772fec9d0adb7da3afcca436da4a7ee6746da008098fde924428",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc307/abc307_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

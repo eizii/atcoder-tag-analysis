@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc162_b",
+  "editorials": [
+    {
+      "text": "B:FizzBuzz Sum\n実際に各項が数かどうかを判定し、数ならば足すことで答えを求めることができます。\n1 int main(){\n2\nint n;\n3\nscanf(\"%d\",&n);\n4\nlong long ans=0;\n5\nfor(int i=1;i<=n;i++){\n6\nif(i%3!=0 && i%5!=0)ans+=i;\n7\n}\n8\nprintf(\"%lld\\n\",ans);\n9 }\nなお、この問題はO(1) で解くこともできます。\n1 long long sum(long long n){return n*(n+1)/2;}\n2 int main(){\n3\nint n;\n4\nscanf(\"%d\",&n);\n5\nlong long ans;\n6\nans=sum(n)-sum(n/3)*3-sum(n/5)*5+sum(n/15)*15;\n7\nprintf(\"%lld\\n\",ans);\n8 }\n",
+      "text_sha256": "cb2405dbaa03fc2a3c047cd203467e388e9637252f2a45ca8e7933bd70ba18e2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc162/abc162_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

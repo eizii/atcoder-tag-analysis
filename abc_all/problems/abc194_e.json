@@ -1,0 +1,72 @@
+{
+  "problem_id": "abc194_e",
+  "title": "Mex Min",
+  "contests": [
+    {
+      "contest_id": "abc194",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1088,
+  "raw_difficulty": 1088,
+  "contest_id": "abc194",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc194/tasks/abc194_e",
+  "statement": "配点 : 500 点 問題文 \\mathrm{mex}(x_1, x_2, x_3, \\dots, x_k) を、 x_1, x_2, x_3, \\dots, x_k に含まれない最小の非負整数と定義します。 長さ N の整数列 A = (A_1, A_2, A_3, \\dots, A_N) が与えられます。 0 \\le i \\le N - M を満たす全ての整数 i について \\mathrm{mex}(A_{i + 1}, A_{i + 2}, A_{i + 3}, \\dots, A_{i + M}) を計算したとき、この N - M + 1 個の値のうちの最小値を求めてください。 制約 1 \\le M \\le N \\le 1.5 \\times 10^6 0 \\le A_i \\lt N 入力に含まれる値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M A_1 A_2 A_3 \\cdots A_N 出力 答えを出力せよ。 入力例 1 3 2\r\n0 0 1 出力例 1 1 i = 0 のとき : \\mathrm{mex}(A_{i + 1}, A_{i + 2}) = \\mathrm{mex}(0, 0) = 1 i = 1 のとき : \\mathrm{mex}(A_{i + 1}, A_{i + 2}) = \\mathrm{mex}(0, 1) = 2 よって 1 と 2 のうちの最小値である 1 が答えです。 入力例 2 3 2\r\n1 1 1 出力例 2 0 i = 0 のとき : \\mathrm{mex}(A_{i + 1}, A_{i + 2}) = \\mathrm{mex}(1, 1) = 0 i = 1 のとき : \\mathrm{mex}(A_{i + 1}, A_{i + 2}) = \\mathrm{mex}(1, 1) = 0 となります。 入力例 3 3 2\r\n0 1 0 出力例 3 2 i = 0 のとき : \\mathrm{mex}(A_{i + 1}, A_{i + 2}) = \\mathrm{mex}(0, 1) = 2 i = 1 のとき : \\mathrm{mex}(A_{i + 1}, A_{i + 2}) = \\mathrm{mex}(1, 0) = 2 となります。 入力例 4 7 3\r\n0 0 1 2 0 1 0 出力例 4 2",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 \\mathrm{mex}(x_1, x_2, x_3, \\dots, x_k) を、 x_1, x_2, x_3, \\dots, x_k に含まれない最小の非負整数と定義します。 長さ N の整数列 A = (A_1, A_2, A_3, \\dots, A_N) が与えられます。 0 \\le i \\le N - M を満たす全ての整数 i について \\mathrm{mex}(A_{i + 1}, A_{i + 2}, A_{i + 3}, \\dots, A_{i + M}) を計算したとき、この N - M + 1 個の値のうちの最小値を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\le M \\le N \\le 1.5 \\times 10^6 0 \\le A_i \\lt N 入力に含まれる値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M A_1 A_2 A_3 \\cdots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 2\r\n0 0 1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1 i = 0 のとき : \\mathrm{mex}(A_{i + 1}, A_{i + 2}) = \\mathrm{mex}(0, 0) = 1 i = 1 のとき : \\mathrm{mex}(A_{i + 1}, A_{i + 2}) = \\mathrm{mex}(0, 1) = 2 よって 1 と 2 のうちの最小値である 1 が答えです。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 2\r\n1 1 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0 i = 0 のとき : \\mathrm{mex}(A_{i + 1}, A_{i + 2}) = \\mathrm{mex}(1, 1) = 0 i = 1 のとき : \\mathrm{mex}(A_{i + 1}, A_{i + 2}) = \\mathrm{mex}(1, 1) = 0 となります。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 3 2\r\n0 1 0"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 2 i = 0 のとき : \\mathrm{mex}(A_{i + 1}, A_{i + 2}) = \\mathrm{mex}(0, 1) = 2 i = 1 のとき : \\mathrm{mex}(A_{i + 1}, A_{i + 2}) = \\mathrm{mex}(1, 0) = 2 となります。"
+    },
+    {
+      "heading": "入力例 4",
+      "text": "入力例 4 7 3\r\n0 0 1 2 0 1 0"
+    },
+    {
+      "heading": "出力例 4",
+      "text": "出力例 4 2"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc194/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:12.088547+00:00",
+  "statement_sha256": "2dbbb1a6cfe26bc22a905586ee96051a086abe9f89b50e9585955e118fbe42c6",
+  "editorials": []
+}

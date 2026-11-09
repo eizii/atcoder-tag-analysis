@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc265_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc265/editorial/4587",
+      "text": "障害物のある座標を set で保持することで、ある座標に移動可能かどうかは\n\\(O(\\log M)\\)\nで判定できます。\nまずはより簡単な次の問題を考えます。\n行えるワープは\n\\((x+1,y),(x,y+1)\\)\nの\n\\(2\\)\n種類。その他は元の問題と同じ\nこの問題は\n\\({\\rm dp}[n][x][y]=n\\)\n回のワープ後に\n\\((x,y)\\)\nにいるような移動経路の個数\nとするDPにより\n\\(O(N^3 \\log M)\\)\n時間で問題を解くことができます。\n元の問題に戻ります。この場合も、取りうる\n\\((x,y)\\)\nの値の種類が少ないことに着目し、DPテーブルを辞書などで保持することにより\n\\(O(N^3(\\log N+\\log M))\\)\nで解くことができます。高速な言語であればこの解法でACを得ることができます。\n実装例(C++)\n座標ではなく、移動回数の情報を持つ次のようなDPを行うと\n\\(O(N^3\\log M)\\)\nで解くことができます。\n\\({\\rm dp}[n][x][y][z]=n\\)\n回のワープのうち\n\\(3\\)\n種類のワープをそれぞれ\n\\(x,y,z\\)\n回行うような移動経路の個数\n上記テーブルをそのまま配列で持つと空間計算量が\n\\(O(N^4)\\)\nになりますが、\n\\(n=x+y+z\\)\nであることから、\n\\(z\\)\nを状態として持つ必要はなく、\n\\(O(N^3)\\)\nになります。\n以下の実装例では、\n\\({\\rm dp}[n-1],{\\rm dp}[n]\\)\nのみを保持することで空間計算量を\n\\(O(N^2)\\)\nにしています。\n実装例(C++)\n実装例(Python)",
+      "codes": [],
+      "text_sha256": "dc40617099fc0acb94eb887780ce5e327d84907b5c8c2a3f473cb8a0e6550aeb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc265/abc265_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

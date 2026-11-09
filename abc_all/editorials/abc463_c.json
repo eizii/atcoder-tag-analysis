@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc463_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc463/editorial/21941",
+      "text": "この問題はいくつかの方法で解くことができますが、この解説では「最も身長の高い高橋くんになる可能性がある高橋くん」の情報のみを保持することで高速に解く方法について解説します。\n\\(2\\) 人の高橋くんについて、一方の高橋くんがもう一方の高橋くんより背が高く、より遅くまで会議室にいる場合、後者の高橋くんははじめから会議室にいなくても答えが変わりません。\nこのような高橋くんをはじめに全員会議室から出しておくことで、\\(H _ 1\\ge H _ 2\\ge\\cdots\\ge H _ N\\) および \\(L _ 1\\le L _ 2\\le\\cdots\\le L _ N\\) を満たすようにできます。\nすると、この問題は二分探索を使って解くことができます。\nいなくても答えが変わらない高橋くんを会議室から出す部分については、stack を使って \\(O(N)\\) 時間で実現することができます。\n全体の時間計算量は \\(O(N+Q\\log N)\\) となります。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n\n    unsigned N;\n    cin >> N;\n\n    vector<pair<unsigned, unsigned>> takahashi;\n    for (unsigned i = 0; i < N; ++i) {\n        unsigned H, L;\n        cin >> H >> L;\n        while (!empty(takahashi) && takahashi.back().first <= H) // より早く退室するより背が低い高橋くんがいたら\n            takahashi.pop_back(); // はじめに退室してもらう\n        takahashi.emplace_back(H, L);\n    }\n\n    unsigned Q;\n    cin >> Q;\n\n    for (unsigned i = 0; i < Q; ++i) {\n        unsigned T;\n        cin >> T;\n        // pair の第二要素で二分探索し、T 分より後に退出する中で最も背が高い高橋くんを見つける\n        cout << ranges::upper_bound(takahashi, T, {}, &pair<unsigned, unsigned>::second)->first << endl;\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "418fd2f502fdc7ae06f2359ac4a97976103cb66b2bdd1a73b4336399611e2898",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc463/abc463_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc463/editorial/21955",
+      "text": "イベントソート\n（平面走査）と呼ばれる方法で解くことができます。イベントソートとは、起こる出来事を時刻の順に並べて、その順に処理するテクニックです。\nまず、「高橋くんの離脱」と「身長の最大値クエリ」を合わせた列を時刻順にソートします。\nまた、「現在会議室にいる高橋くんの身長」の多重集合\n\\(S\\)\nも保持します。\n\\(S\\)\nは時刻\n\\(0\\)\nでは\n\\(S=\\{H_1,H_2,\\cdots, H_N\\}\\)\nです。\nそして、時刻の昇順に処理していきます。\n時刻\n\\(L_i\\)\nに到達したら\n\\(H_i\\)\nを\n\\(S\\)\nから削除します。\n時刻\n\\(T_i +1/2\\)\nに到達したら、クエリ番号\n\\(i\\)\nの答えはそのときの\n\\(S\\)\nの最大値です。\nC++ では最大値が取得できる多重集合\n\\(S\\)\nは\nstd::multiset\nで管理できます。\nよって、この問題を時間計算量\n\\(O((N+Q) \\log (N+Q))\\)\n、空間計算量\n\\(O(N+Q)\\)\nで解くことができます。\nまた、今回の問題の場合、時刻\n\\(T_i + 1/2\\)\nの代わりに、すべての時刻を\n\\(2\\)\n倍にして、\n\\(L_i \\to 2L_i\\)\n\\(T_i+1/2 \\to 2T_i+1\\)\nとするとすべての時刻が整数で表せて便利です。\n実装例1 (C++, 307ms)\n実装例2 (pypy3, 1562ms)\n想定解でないイベントソートは特に Python だと TLE ギリギリ、もしくは TLE しがちだと感じます。\nイベントの中身を tuple ではなく（64 bit の範囲に収まる） 1 つの整数にすると定数倍高速化できます。\n定数倍高速化版 PyPy3 で 1016 ms\n定数倍高速化していない↓",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nint main(){\n\t// 入力高速化\n\tios_base::sync_with_stdio(false);\n\tcin.tie(NULL);\n\t\n\t// イベント (時刻, タイプ, 番号 i)\n\t// タイプ 0 なら, 番号 i の高橋くんが離脱\n\t// タイプ 1 なら, クエリ番号 i に答える.\n\tvector<tuple<ll,int,int>> event;\n\tmultiset<ll> st; // 高橋くんの身長の多重集合\n\n\tint n; cin >> n;\n\tvector<ll> h(n), l(n);\n\n\tfor (int i=0; i<n; i++) {\n\t\tcin >> h[i] >> l[i];\n\t\tst.insert(h[i]);\n\t\tevent.emplace_back(l[i] * 2, 0, i);\n\t}\n\n\tint q; cin >> q;\n\tvector<ll> t(q);\n\t\n\tfor (int i=0; i<q; i++) {\n\t\tcin >> t[i];\n\t\tevent.emplace_back(t[i] * 2 + 1, 1, i); \n\t}\n\n\tsort(event.begin(), event.end());\n\n\tvector<ll> ans(q);\n\tfor (auto [tim, typ, i]: event) {\n\t\tif (typ == 0) {\n\t\t\tst.erase(st.find(h[i])); // 多重集合から h[i] を 1 個だけ削除\n\t\t} else {\n\t\t\tans[i] = *st.rbegin(); // 末尾の値を ans[i] に格納\n\t\t}\n\t}\n\n\tfor (int i=0; i<q; i++) {\n\t\tcout << ans[i] << '\\n';\n\t}\n\n}",
+        "from sortedcontainers import SortedList\n\n# イベント (時刻, タイプ, 番号 i)\n# タイプ 0 なら, 番号 i の高橋くんが離脱\n# タイプ 1 なら, クエリ番号 i に答える.\nevent = []\nst = SortedList() # 高橋くんの身長の多重集合\n\nn = int(input())\nh = [0] * n\nl = [0] * n\n\nfor i in range(n):\n\th[i], l[i] = map(int,input().split())\n\tst.add(h[i])\n\tevent.append((l[i] * 2, 0, i))\n\nq = int(input())\nt = list(map(int,input().split()))\n\nfor i in range(q):\n\tevent.append((t[i] * 2 + 1, 1, i))\n\nevent.sort()\n\nans = [0] * q\nfor tim, typ, i in event:\n\tif typ == 0:\n\t\t# 多重集合から h[i] を 1 個だけ削除\n\t\tst.discard(h[i])\n\telse:\n\t\t# 末尾の値を ans[i] に格納\n\t\tans[i] = st[-1]\n\nprint(*ans, sep='\\n')"
+      ],
+      "text_sha256": "59c7040a217c64c989762a7d432160e8ec4e9770d47a498f2db96ea917b70abc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc463/abc463_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc154_a",
+  "editorials": [
+    {
+      "text": "A: Remaining Balls\nS = U, T = U のどちらであるか判定し、場合分けすればよいです。以下はC++ における実装例\nです。\n1 #include<iostream>\n2 using namespace std;\n3\n4 int main(){\n5\nstring S,T,U;\n6\nint A,B;\n7\ncin>>S>>T>>A>>B>>U;\n8\nif(S==U)A--;\n9\nelse B--;\n10\ncout<<A<<\"␣\"<<B<<endl;\n11 }\n",
+      "text_sha256": "654d2ee5482514acd927ad47bb5f1dbcc0dbd025311ec17e91d2f627fe1cce32",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc154/abc154_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc121_c",
+  "editorials": [
+    {
+      "text": "C: Energy Drink Collector\n安い店から順にM 本のエナドリを買うのが最善です。したがって、Ai の小さい順にソートして、M 本に\n達するまで前から順に買えるだけ買うことをシミュレーションすれば答えを求めることができます。ソートの\n方法はいくつかありますが、例えばC++ ではvector<pair<int,int>>に組(Ai, Bi) を全て入れてsort 関数を\n呼ぶことでソートすることができます。計算量は、ソート部分がボトルネックでO(NlogN) です。\n",
+      "text_sha256": "d55b1516248d0ddcc030279c33a95128146fe39b56adcd9a63599d857dc12744",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc121/abc121_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

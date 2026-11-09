@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc400_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc400/editorial/12630",
+      "text": "高橋君の住む町に対して、次のような重み付き有向グラフ\n\\(G\\)\nを考えます。\n頂点は区画と一対一に対応する。特に、\n\\(G\\)\nは\n\\((H\\times W)\\)\n個の頂点を持つ。\nそれぞれの区画\n\\(C\\)\nについて、上下左右に隣接する区画\n\\(C'\\)\nであって、\n道\nであるようなものについて、\n\\(C\\)\nに対応する頂点から\n\\(C'\\)\nに対応する頂点へ向けてコスト\n\\(0\\)\nの辺を張る。\nそれぞれの区画\n\\(C\\)\nについて、上下左右に隣接する区画\n\\(C'\\)\nであって、\n壁\nであるようなものについて、\n\\(C\\)\nに対応する頂点から\n\\(C'\\)\nに対応する頂点へ向けてコスト\n\\(1\\)\nの辺を張る。\nそれぞれの区画\n\\(C\\)\nについて、その区画において上下左右方向いずれかを向いたときに\n\\(2\\)\nつ前にあるような区画\n\\(C'\\)\nであって、\n\\(C\\)\nと\n\\(C'\\)\nの間にある区画または区画\n\\(C'\\)\nが壁であるようなものについて、\n\\(C\\)\nに対応する頂点から\n\\(C'\\)\nに対応する頂点へ向けてコスト\n\\(1\\)\nの辺を張る。\nこのとき、\n\\(G\\)\nにおける、高橋君が最初にいる区画に対応する頂点から魚屋がある区画に対応する頂点への最短距離（経路上の辺の重みの総和の最小値）は答えと一致します。\nまず、\n\\(G\\)\nにおける最短経路を考えると、コスト\n\\(0\\)\nの辺を通る行動を上下左右に隣接する道であるマスへの移動に対応させ、コスト\n\\(1\\)\nの辺を通る行動を、前蹴りしその道になった区画への移動に対応させることで、前蹴りの回数が「\n\\(G\\)\nにおける最短距離」以下になるような、魚屋までの行動順を構築できます。\n一方で、高橋君が最初にいる区画から前蹴りを\n\\(k\\)\n回以下行って到達可能な区画について、その区画に該当する頂点まで高橋君が最初にいる区画に対応する頂点から距離が高々\n\\(k\\)\nとなるような経路が構築できることを数学的帰納法によって示すことができます。\nこれらにより、「必要な前蹴りの回数」\n\\(\\leq\\)\n「\n\\(G\\)\nにおける最短距離」、「必要な前蹴りの回数」\n\\(\\geq\\)\n「\n\\(G\\)\nにおける最短距離」が示され、等しいことがわかりました。\n上記のグラフにおける最短距離は Dijkstra 法などでも適切な実装で時間内に解くことが可能ですが、今回は辺の重みが\n\\(0\\)\nまたは\n\\(1\\)\nしかないため 01-BFS を用いることでより高速に問題を解くことができます。\n01-BFSは、基本的な考え方は Dijkstra 法と同じですが、探索中にキューに入る頂点の暫定距離が高々\n\\(1\\)\nしか異ならないことを活かして、優先度付きキューの代わりに両端キューなどを用いることで、この問題を\n\\(O(HW)\\)\nで解くことができます。\n01-BFSについては、\nABC246-Eの公式解説\nにも詳細が記述されているため、参照してみてください。\nよって、グラフ\n\\(G\\)\nの構築、最短距離の計算いずれも\n\\(O(HW)\\)\nで行えるため、十分高速です。\nゆえに、この問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint h,w;\n\tint a,b,c,d;\n\tint x,y,z,nx,ny;\n\tbool wall;\n\tdeque<int>dq;\n\n\tconst int dx[4]={-1,1,0,0};\n\tconst int dy[4]={0,0,-1,1};\n\n\tcin>>h>>w;\n\tvector<string>s(h);\n\tvector<vector<int> >ans(h,vector<int>(w,h*w)); \n\n\tfor(int i=0;i<h;i++)cin>>s[i];\n\tcin>>a>>b>>c>>d;\n\ta--,b--,c--,d--;\n\t\n\tans[a][b]=0;\n\tdq.push_front(a*w+b);\n\twhile(!dq.empty()){\n\t\tz=dq.front();\n\t\tdq.pop_front();\n\t\tif(z==(c*w+d)){\n\t\t\tcout<<ans[c][d]<<endl;\n\t\t\treturn 0;\n\t\t}\n\t\tx=z/w,y=z%w;\n\t\tfor(int i=0;i<4;i++){\n\t\t\twall=false;\n\t\t\tfor(int j=1;j<=2;j++){\n\t\t\t\tnx=x+dx[i]*j;\n\t\t\t\tny=y+dy[i]*j;\n\t\t\t\tif((nx<0)||(nx>=h)||(ny<0)||(ny>=w))break;\n\t\t\t\tif(s[nx][ny]=='#')wall=true;\n\t\t\t\tif(!wall){\n\t\t\t\t\tif(j==1){\n\t\t\t\t\t\tif(ans[nx][ny]>ans[x][y]){\n\t\t\t\t\t\t\tans[nx][ny]=ans[x][y];\n\t\t\t\t\t\t\tdq.push_front(nx*w+ny);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\telse{\n\t\t\t\t\tif(ans[nx][ny]>ans[x][y]+1){\n\t\t\t\t\t\tans[nx][ny]=ans[x][y]+1;\n\t\t\t\t\t\tdq.push_back(nx*w+ny);\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t}\n\t\t}\n\t}\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "69a31b5155c9877b37adc4c98c394011d1f273ed750a40cc475a409c1eac1468",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc400/abc400_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

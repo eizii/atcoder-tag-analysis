@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc356_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc356/editorial/10116",
+      "text": "簡単のため、\n\\(A\\)\nが相異なる場合を考えます。\n\\(\\max A=M\\)\nとします。\n和を取るのは\n\\(i<j\\)\nを満たす全てのペア\n\\((i,j)\\)\nに対してであり、和を取る対象が\n\\(i,j\\)\nに関して対称であるため、数列\n\\(A\\)\nを並び替えても答えは変わりません。よって\n\\(A\\)\nは昇順にソートされているとしてよいです。\n\\(A\\)\nが昇順にソートされているとき、\n\\(i<j\\)\nならば\n\\(A_i \\leq A_j\\)\nであることから、\n\\(\\displaystyle \\left\\lfloor\\frac{\\max(A_i,A_j)}{\\min(A_i,A_j)}\\right\\rfloor = \\left\\lfloor\\frac{A_j}{A_i}\\right\\rfloor\\)\nとなります。\n\\(i\\)\nを固定したとき、\n\\(j\\)\nを動かすのではなく、\n\\(\\displaystyle \\left\\lfloor\\frac{A_j}{A_i}\\right\\rfloor\\)\nの値を動かすことを考えます。すなわち、\n\\(\\displaystyle \\sum_{i=1}^{N-1}\\sum_{j=i+1}^{N}\\displaystyle \\left\\lfloor\\frac{A_j}{A_i}\\right\\rfloor = \\sum_{i=1}^{N-1}\\sum_{n}n*f(A_i,n)\\)\nと変形します。ここで、\n\\(f(d,n)\\)\nは\n\\(\\displaystyle \\left\\lfloor\\frac{A_j}{d}\\right\\rfloor=n\\)\nを満たす\n\\(j\\)\nの個数とします。（この変形は、例えば「1+1+1+2+2+2+2+5+5」を「1×3 + 2×4 + 3×0 + 4×0 + 5×2」と計算するものです）\n\\(A_i=X\\)\nとなる\n\\(i\\)\nの個数を\n\\(C_X\\)\nとして、あらかじめ\n\\(C\\)\nの累積和を計算しておくことで\n\\(f(d,n)\\)\nは\n\\(O(1)\\)\nで求めることができます。また、\n\\(i\\)\nを固定したとき\n\\(n\\)\nの動く範囲は\n\\(n\\leq \\frac{M}{A_i}\\)\nであることから、和を取る項の個数は\n\\(\\sum_{i=1}^{N-1}\\frac{M}{A_i}\\leq \\sum_{d=1}^{N}\\frac{M}{d}=O(M\\log N)\\)\nです。（調和級数の和）\nよって以上より\n\\(O(M\\log N)\\)\nでこの問題が解けました。\n\\(A_i\\)\nが同じ要素を持つ場合も、それらを適切にまとめて計算することで同じ計算量で求めることができます。\nwriter解(C)\nwriter解(Python)",
+      "codes": [],
+      "text_sha256": "85fa0b2b1d756a6aae5b76cef27bdfb068115d609565c4470301714c4adba950",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc356/abc356_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

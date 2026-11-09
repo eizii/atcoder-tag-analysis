@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc253_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc253/editorial/4019",
+      "text": "この問題文中のクエリは、例えば c++ なら std::multiset を用いることにより高速に処理できます。\n実装例：\nこの問題を解くために必要なデータ構造、 std::multiset を用いる際には注意すべき点があります。以下ではそれらの注意点と対処法をお伝えしようと思います。\n最初に、\nと宣言しているものとします。\n1. erase() の仕様\n例えば、st の中身が\n\\(\\{3,3,4\\}\\)\nのときに、\nと行うとどうなるでしょうか？\n\\(3\\)\nが一つだけ消えてくれると嬉しいのですが、実際には st の中身は\n\\(\\{4\\}\\)\nとなります。このように、erase() の引数に値を渡すと、その値を全て削除してしまうため、注意が必要です。\n\\(x\\)\nを一つだけ消したい場合は、以下のように書く必要があります。\n詳しくは、c++ のイテレータについて調べてみてください。\n2. count() の計算量\nst.count(x)\nは、st の要素数を\n\\(N\\)\n、st に含まれる\n\\(x\\)\nの個数を\n\\(k\\)\nとすると、\n\\(\\mathrm{Ο}(k+\\log N)\\)\nの計算量がかかります。\nそのため、今回の問題でクエリ\n\\(2\\)\nを処理する際に\nst.count(x)\nを用いると最悪の場合の計算量が\n\\(\\mathrm{Ο}(Q^2)\\)\nになってしまいます。そのため、計算量が\n\\(\\mathrm{Ο}(\\log N)\\)\nである\nst.find(x)\nを用いる必要があります。\nst.find(x)\nが呼ばれる回数は高々\n\\(\\mathrm{Ο}(Q)\\)\n回のため、この工夫により実行時間に間に合います。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int q;\n    cin >> q;\n    multiset<int> st;\n    while (q--) {\n        int t;\n        cin >> t;\n        if (t == 1) {\n            int x;\n            cin >> x;\n            st.insert(x);\n        } else if (t == 2) {\n            int x, c;\n            cin >> x >> c;\n            while (c-- and st.find(x) != st.end()) {\n                st.erase(st.find(x));\n            }\n        } else {\n            cout << *st.rbegin() - *st.begin() << endl;\n        }\n    }\n}",
+        "std::multiset<int> st;",
+        "st.erase(3)",
+        "st.erase(st.find(x))"
+      ],
+      "text_sha256": "25895e602af60de6e2c21af644578d3ab26518383942dc8e15ea5a6487e39b7d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc253/abc253_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc253/editorial/4040",
+      "text": "ABC ではしばしば c++ における multiset/set を要求するような問題が出ますが，python にはそのような機能が備わっていないため，苦労した人も多いかと思います．ここでは multiset を用いない解法を紹介します．\n\\(S\\)\nに含まれるそれぞれの要素の個数を管理する連想配列\n\\(\\mathrm{cnt}\\)\nおよび最大値，最小値それぞれを管理する優先度付きキュー\n\\(\\mathrm{MAX,MIN}\\)\nを用意します．\nクエリ 1 に対して，\n\\(\\mathrm{cnt}[x]\\leftarrow \\mathrm{cnt}[x]+1\\)\nとします．また，\n\\(\\mathrm{MIN,MAX}\\)\nそれぞれに\n\\(x\\)\nを追加します．\nクエリ 2 に対して，\n\\(\\mathrm{cnt}[x]\\leftarrow \\max(0,\\mathrm{cnt}[x]-c)\\)\nとします．\nクエリ 3 に対して，\n\\(\\mathrm{cnt}[\\mathrm{MIN}[0]]>0\\)\nとなるまで\n\\(\\mathrm{MIN}\\)\nを  pop し続けます．最大値も同様に処理します．このとき，\n\\(\\mathrm{MAX}[0]-\\mathrm{MIN}[0]\\)\nが答えです．\n計算量は\n\\(O(N \\log N)\\)\nです．\n実装例\nまた，multiset/set の代用ができるものがウェブ上に公開されているので，いくつか紹介します．これらを駆使することで，想定解が multiset/set を用いるものであっても，Python で解くことができる問題が多くあります．\n平方分割を用いるもの ( tatyam さん)\nheapq を用いるもの ( Tsubo さん)\nBinary Indexed Tree を用いるもの ( jupy さん)",
+      "codes": [],
+      "text_sha256": "ebdf702084edccd852d9a589e1693a2a3056ecff8c3d3f2f2038f75d84d85315",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc253/abc253_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

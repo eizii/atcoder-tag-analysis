@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc413_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13406",
+      "text": "\\(P\\)\nに対して操作を何回か行って順列\n\\(Q\\)\nが得られた場合を考えます。\nこの時、\n\\(\\{P_0,P_1,\\ldots,P_{2^{N-1}-1}\\}=\\{Q_0,Q_1,Q_2,\\ldots,Q_{2^{N-1}-1}\\}\\)\nまたは\n\\(\\{P_0,P_1,\\ldots,P_{2^{N-1}-1}\\}=\\{Q_{2^{N-1}},Q_{2^{N-1}+1},\\ldots,Q_{2^N-1}\\}\\)\nが成り立ちます。これは\n\\((a,b)=(0,N)\\)\n以外の操作では\n\\(P_0,P_1,\\ldots,P_{2^{N-1}-1}\\)\nと\n\\(P_{2^{N-1}},P_{2^{N-1}+1},\\ldots,P_{2^N-1}\\)\nの間で入れ替わる要素が存在しないこと、\n\\((a,b)=(0,N)\\)\nの操作を行っても互いに完全に入れ替わることから言えます。また、得られるすべての順列\n\\(Q\\)\nについて、\n\\((a,b)=(0,N)\\)\nの操作を最後の操作以外では行わないで得ることができます。\n\\((a,b)=(0,N)\\)\nの操作を行わず、\n\\((P_0,P_1,\\ldots,P_{2^{N-1}-1})\\)\nに対して操作を行うことで得られる辞書順最小の数列を\n\\(A\\)\n、\n\\((P_{2^{N-1}},P_{2^{N-1}+1},\\ldots,P_{2^N-1})\\)\nに対して操作を行うことで得られる最小の数列を\n\\(B\\)\nとします。\n\\(A_0<B_0\\)\nのとき\n\\((a,b)=(0,N)\\)\nの操作を行わないで\n\\(A\\)\nと\n\\(B\\)\nをこの順でつなげたものが得られる辞書順最小の数列です。\n\\(A_0>B_0\\)\nのとき\n\\((a,b)=(0,N-1),(1,N-1)\\)\nの操作を行ったあと、\n\\((a,b)=(0,N)\\)\nの操作を行うことで\n\\(B\\)\nと\n\\(A\\)\nをこの順でつなげた数列が得られます。また、これが得られる辞書順最小の数列になります。\nつまり、数列の大きさが半分にした問題を\n\\(2\\)\n回解き、その結果から元の数列から得られる辞書順最小の数列が求められます。また、大きさが\n\\(1\\)\nの数列は当然操作を行わなくてよいです。\nよって、再帰的にこの問題を解くことができます。時間計算量は\n\\(\\mathrm{O}(N 2^N)\\)\nになります。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    int t;\n    cin >> t;\n    for (int test = 0; test < t; ++test) {\n        int n;\n        cin >> n;\n        vector<int> p(1 << n);\n        for (auto& e : p)\n            cin >> e;\n        auto solve = [&](auto&& solve, int l, int r) -> vector<int> {\n            if (r - l == 1) return {p[l]};\n            int mid = (l + r) / 2;\n            vector<int> a = solve(solve, l, mid);\n            vector<int> b = solve(solve, mid, r);\n            if (a[0] > b[0]) swap(a, b);\n            a.insert(a.end(), b.begin(), b.end());\n            return a;\n        };\n        vector<int> ans = solve(solve, 0, 1 << n);\n        for (int i = 0; i < (1 << n); ++i) {\n            cout << ans[i] << \" \\n\"[i == (1 << n) - 1];\n        }\n    }\n}"
+      ],
+      "text_sha256": "fcb7d193e9b85ca603aae5e8f0117d61996cae031520271e5061a4f83f7eed3b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13418",
+      "text": "問題文の条件を満たすすべての\n\\((a, b)\\)\nについて\n\\(b\\)\nの降順に、\n\\(\\min(P_{a \\times 2^b}, \\ldots , P_{(a + \\frac12) \\times 2^{b} - 1}) > \\min(P_{(a + \\frac12) \\times 2^{b} }, \\ldots  P_{(a + 1) \\times 2^{b} - 1})\\)\nであるならば、かつそのときに限り\n\\(P_{a \\times 2^b} \\ldots P_{(a + 1) \\times 2^{b} - 1}\\)\nを反転するという操作を行えばよいです。\n\\(P\\)\nは順列なので上記の不等式において両辺が等しくなることはありません。また、上記の手順における任意の\n\\((a, b)\\)\nについて、それ以降の操作を適切に行うことで\n\\(P_{a \\times 2^b}, \\ldots , P_{(a + \\frac12) \\times 2^{b} - 1}\\)\nと\n\\(P_{(a + \\frac12) \\times 2^{b} }, \\ldots  P_{(a + 1) \\times 2^{b} - 1}\\)\nそれぞれの区間について最小値を区間の先頭に持ってくることができるので、これによって辞書順最小が達成できることがわかります。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nvoid solve() {\n    int N;\n    cin >> N;\n    vector<int> P(1 << N);\n    for (int i = 0; i < (1 << N); ++i) {\n        cin >> P[i];\n    }\n    for (int b = N; b >= 1; --b) {\n        for (int a = 0; a < (1 << (N - b)); ++a) {\n            int l = a * (1 << b);\n            int m = l + (1 << (b - 1));\n            int r = l + (1 << b);\n            int lmin = *min_element(P.begin() + l, P.begin() + m);\n            int rmin = *min_element(P.begin() + m, P.begin() + r);\n            if (lmin > rmin) {\n                reverse(P.begin() + l, P.begin() + r);\n            }\n        }\n    }\n    for (int i = 0; i < (1 << N); ++i) {\n        cout << P[i] << \" \\n\"[i == (1 << N) - 1];\n    }\n}\n\nint main() {\n    int T;\n    cin >> T;\n    while (T--) solve();\n}"
+      ],
+      "text_sha256": "7ddf4038ddedac5c9f2d2ff498bd621057d74b54364e90ca3347bab16a8a423c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13416",
+      "text": "問題文にある操作をすべての\n\\((a, b)\\)\nに対して、\n\\(b\\)\nに関して昇順に、「改善するならばスワップ」と繰り返せばよいです。（結論、公式解説と同じ操作になります。）\nコード\nRust 109 ms\n別解法\nSolalyth さんによると、\n\\(b\\)\nの大きい順に reverse していく方法でもできるみたいです。\nchunks_mut\nを使う実装アイデアも賢いですね。\nhttps://x.com/alyth_sol/status/1941724831021670479",
+      "codes": [
+        "use itertools::Itertools;\nuse proconio::input;\n\nfn main() {\n    input! {\n        t: usize,\n    }\n    for _ in 0..t {\n        input! {\n            n: usize,\n            mut p: [u32; 1 << n],\n        }\n        for b in 0..n {\n            for a in (0..1 << n).filter(|&a| a & ((1 << (b + 1)) - 1) == 0) {\n                if p[a] > p[a | 1 << b] {\n                    for i in a..a | 1 << b {\n                        p.swap(i, i | 1 << b);\n                    }\n                }\n            }\n        }\n        println!(\"{}\", p.iter().join(\" \"));\n    }\n}"
+      ],
+      "text_sha256": "72ef029ad85cf3933d37e86629a24d2d0da878b9ebb4f2b329911874ad48b680",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

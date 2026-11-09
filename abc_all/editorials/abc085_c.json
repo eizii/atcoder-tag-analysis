@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc085_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc085/editorial.pdf",
+      "text": "C: Otoshidama\n\n 袋の中身を「10000 円札x 枚、5000 円札y 枚、1000 円札z 枚」とします。当然ですが重要な点として、\n\nx, y, z はどれも0 以上N 以下の整数でなければなりません。\n\n\n もっとも単純な方針は、三重ループでx, y, z の値の決め方をすべて試し、x+y +z = N, 10000x+5000y +\n1000z = Y が成立するか確かめるものですが、N ≤2000、実行制限時間2 秒という設定でO(N 3) 時間の解\n\n法は分が悪いです（間に合わせることも不可能ではありません）。しかし、x とy の値が決定されるとz の値\n\nがz = N −x −y に限られることを利用すると、三重ループではなく二重ループですべての可能性を列挙す\n\nることができます（ただし、z が負になるケースを取り除く必要があります）。これらのすべての可能性に対\nして10000x + 5000y + 1000z = Y が成り立つか調べることで、問題をO(N 2) 時間で解くことができます。\n\n\n なお、O(N) 時間やO(1) 時間の解法も考えられますが、コンテスト中に追求する必要はないでしょう。\n\n\n\n\n\n                                             3",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "f63dde4a28f8fdaa12548ec6488f85cd85748fbddcadf07c01127871561bf333"
+    }
+  ],
+  "status": "available"
+}

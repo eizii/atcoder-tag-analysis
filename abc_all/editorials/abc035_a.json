@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc035_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc035/editorial.pdf",
+      "text": "A: テレビ\n\f\n問題概要と解法\n • 幅W 高さH のテレビがある\n • 画面のアスペクト比が4:3 か16:9 のどちらか判定せよ\n\n • 3W = 4H      を満たすならば4:3 そうでないならば16:9\n\f\n別解\n • GCD(最大公約数)を求めて割る\n    – 4    と3 、16 と9 は互いに素なので大丈夫\n • W  とH の両方を割りきれる数を探して割り続ける\n • 4:3   であるような画面サイズ全てを全探索\n    – 4:3, 8:6, 12:9, …, 100000:75000                にあてはまるか調べる",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "e5943bc5b6946de17bc74a825867c55b6fbeed8ab7896dd76494a84a6573a0f7"
+    }
+  ],
+  "status": "available"
+}

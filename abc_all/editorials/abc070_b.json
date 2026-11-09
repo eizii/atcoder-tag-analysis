@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc070_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc070/editorial.pdf",
+      "text": "B:  Two Switches\n\n     Alice とBob が、2 人ともスイッチを押している状況を考えてみます。そうすると、ロボットを動かし始めてか\n  らmax(A, C) 秒後からmin(B, D) 秒後までの間、2 人がスイッチを押していることが分かります。したがって、\n 答えは次のようになります。\n\n\n    \n             min(B, D) −max(A, C) 秒  (max(A, C) ≤min(B, D))\n             0 秒                     (max(A, C) > min(B, D))\n\n  ここで、min(·) は最小値、max(·) は最大値を表します。\n  なお、問題の制約条件が小さいので、ループを利用したシミュレーションでも通すことができます。\n\n  C++のコード例\n\n\n\n 1 int main(void) {\n\n 2     int A,B,C,D;\n\n 3     cin >> A >> B >> C >> D;\n\n\n 4\n\n 5     const int lower = max(A,C);\n\n 6     const int upper = min(B,D);\n\n\n 7\n\n 8     cout << max(0,upper-lower) << endl;\n\n\n 9\n\n10     return 0;\n11 }\n\n\n\n\n\n                                                  2",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "da388f236fd4998a7b4859c871c6a55417c5193ffc0e1c586fe528a808808aba"
+    }
+  ],
+  "status": "available"
+}

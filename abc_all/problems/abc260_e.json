@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc260_e",
+  "title": "At Least One",
+  "contests": [
+    {
+      "contest_id": "abc260",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1692,
+  "raw_difficulty": 1692,
+  "contest_id": "abc260",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc260/tasks/abc260_e",
+  "statement": "配点 : 500 点 問題文 整数 M および N 個の整数の組 (A_1, B_1), (A_2, B_2), \\dots, (A_N, B_N) が与えられます。 すべての i について 1 \\leq A_i \\lt B_i \\leq M が成り立っています。 次の条件を満たす数列 S を 良い数列 と呼びます。 S は数列 (1,2,3,..., M) の連続部分列である。 すべての i について S は A_i, B_i の少なくとも一方を含んでいる。 長さ k の良い数列としてあり得るものの個数を f(k) とします。 f(1), f(2), \\dots, f(M) を列挙してください。 制約 1 \\leq N \\leq 2 \\times 10^5 2 \\leq M \\leq 2 \\times 10^5 1 \\leq A_i \\lt B_i \\leq M 入力される値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N M A_1 B_1 A_2 B_2 \\vdots A_N B_N 出力 答えを以下の形式で出力せよ。 f(1) f(2) \\dots f(M) 入力例 1 3 5\r\n1 3\r\n1 4\r\n2 5 出力例 1 0 1 3 2 1 良い数列としてあり得るものを列挙すると次のようになります。 (1,2) (1,2,3) (2,3,4) (3,4,5) (1,2,3,4) (2,3,4,5) (1,2,3,4,5) 入力例 2 1 2\r\n1 2 出力例 2 2 1 入力例 3 5 9\r\n1 5\r\n1 7\r\n5 6\r\n5 8\r\n2 6 出力例 3 0 0 1 2 4 4 3 2 1",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 整数 M および N 個の整数の組 (A_1, B_1), (A_2, B_2), \\dots, (A_N, B_N) が与えられます。 すべての i について 1 \\leq A_i \\lt B_i \\leq M が成り立っています。 次の条件を満たす数列 S を 良い数列 と呼びます。 S は数列 (1,2,3,..., M) の連続部分列である。 すべての i について S は A_i, B_i の少なくとも一方を含んでいる。 長さ k の良い数列としてあり得るものの個数を f(k) とします。 f(1), f(2), \\dots, f(M) を列挙してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2 \\times 10^5 2 \\leq M \\leq 2 \\times 10^5 1 \\leq A_i \\lt B_i \\leq M 入力される値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M A_1 B_1 A_2 B_2 \\vdots A_N B_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを以下の形式で出力せよ。 f(1) f(2) \\dots f(M)"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 5\r\n1 3\r\n1 4\r\n2 5"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 0 1 3 2 1 良い数列としてあり得るものを列挙すると次のようになります。 (1,2) (1,2,3) (2,3,4) (3,4,5) (1,2,3,4) (2,3,4,5) (1,2,3,4,5)"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 1 2\r\n1 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 2 1"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 5 9\r\n1 5\r\n1 7\r\n5 6\r\n5 8\r\n2 6"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 0 0 1 2 4 4 3 2 1"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc260/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:35.388777+00:00",
+  "statement_sha256": "5b480f76ac900f5c635d1bacadb9bf1d107996226d231150919ce561d765e0bd",
+  "editorials": []
+}

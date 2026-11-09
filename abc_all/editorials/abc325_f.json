@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc325_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc325/editorial/7449",
+      "text": "DP を用いて解くことを考えます。一番簡単に思いつくのは「何個目の区間まで見たか」「センサー\n\\(1\\)\nを何個使ったか」「センサー\n\\(2\\)\nを何個使ったか」をキーとして持つ DP ですが、これでは実行時間制限に間に合いません。ここで、今までに使ったセンサー\n\\(1\\)\nの個数が固定されているとき、使ったセンサー\n\\(2\\)\nの個数は最小のもの以外考える必要がないことから、以下のような DP が自然に導出されます。\n\\[dp[i][j] =(i\\text{ 個目の区間まで見て、使ったセンサー }1\\text{ の個数が }j\\text{ であるときの、使ったセンサー }2\\text{ の個数の最小値})\\]\n遷移は、\n\\(i\\)\n個目の区間を監視するために使うセンサー\n\\(1\\)\nの個数を全探索することで、\n\\[dp[i][j] = \\min_{0 \\leq k \\leq j} \\bigg(dp[i-1][j-k] + \\Big\\lceil \\frac{\\max(D_i-kL_1,0)}{L_2} \\Big\\rceil \\bigg)\\]\nとなります。状態が\n\\(O(NK_1)\\)\n、遷移が\n\\(O(K_1)\\)\nなので全体の計算量は\n\\(O(NK_1^2)\\)\nとなり、十分高速です。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> d(n);\n    for (int &i: d) cin >> i;\n    vector<int> l(2), c(2), k(2);\n    for (int i = 0; i < 2; i++) {\n        cin >> l[i] >> c[i] >> k[i];\n    }\n    vector dp(n + 1, vector<int>(k[0] + 1, 1e9));\n    dp[0][0] = 0;\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j <= k[0]; j++) {\n            int rem = d[i];\n            for (int nj = j; nj <= k[0]; nj++) {\n                dp[i + 1][nj] = min(dp[i + 1][nj], dp[i][j] + (rem + l[1] - 1) / l[1]);\n                rem = max(rem - l[0], 0);\n            }\n        }\n    }\n    ll ans = 2e18;\n    for (int i = 0; i <= k[0]; i++) {\n        if (dp[n][i] > k[1]) continue;\n        ans = min(ans, (ll) c[0] * i + (ll) c[1] * dp[n][i]);\n    }\n    if (ans > 1e18) ans = -1;\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "d9f52ca0f5bc1538b697e8053f73a9fc1f4fac52a0337010cefb65e60823cad1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc325/abc325_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc325/editorial/7492",
+      "text": "DPのキーとして、公式解説で挙げられている「何個目の区間まで見たか」「センサー\n\\(1\\)\nを何個使ったか」「センサー\n\\(2\\)\nを何個使ったか」 のうち、この解法では後者\n\\(2\\)\nつを使います。\nDPの状態\n\\(\\text{dp} [i][j] = (センサー1を i 個、センサー2をj個使ったときに、(最大何個目の区間の途中のまで監視できるか, その区間を何メートルまで監視できるか)の\\text{pair})\\)\nここでいうpairは、C++のstd::pair、Pythonのtupleを想像していただくとわかりやすいと思います。\npair\n\\((i_1, j_1)\\)\nと\n\\((i_2, j_2)\\)\nの大小比較は以下のようになります。\n\\(i_1 \\neq i_2\\)\nのとき、\n\\(i_1\\)\nと\n\\(i_2\\)\nの比較結果がpairの比較結果となる。\n\\(i_1 = i_2\\)\nのとき、\n\\(j_1\\)\nと\n\\(j_2\\)\nの比較結果がpairの比較結果となる。\n例としては、\n\\(1\\)\n個目の区間の\n\\(2\\)\nメートルまで監視できるより、\n\\(2\\)\n個目の区間の\n\\(1\\)\nメートル まで監視できる方が、より進めているといえます。\nDPの遷移\n遷移は、今いる状態からセンサー\n\\(1\\)\nを\n\\(1\\)\n個使用、センサー\n\\(2\\)\nを\n\\(1\\)\n個使用の\n\\(2\\)\nつを考えればよいです。\n初期化は、「\n\\(1\\)\n番目の区間の\n\\(0\\)\nメートルの地点まで監視できる」です。\n今、センサー\n\\(1\\)\nを\n\\(i\\)\n個、センサー\n\\(2\\)\nを\n\\(j\\)\n個使用して、\n\\(a\\)\n番目の区間の\n\\(b\\)\nメートルまで監視できるとします。\n\\(a\\)\nが\n\\(N+1\\)\nであれば既にゴールしているとして、省略します。\nそうでないとき、センサー\n\\(1\\)\nを次に使う場合、\n\\(b + L_1\\)\nメートルまで監視できることになりますが、\n\\(b + L_1 \\geq D_a\\)\nのとき、\n\\(a\\)\n番目の区間はすべて監視ができるため、 「\n\\(a+1\\)\n番目の区間の\n\\(0\\)\nメートルまで監視できる」とすることができます。\nセンサー\n\\(2\\)\nを使う場合も同様に考えることができます。\n実装\nあとは、DPの状態を見ていき、pairの1つ目の値が\n\\(N+1\\)\nであるようなもののうち、使用したセンサー\n\\(1, 2\\)\nの個数から価格の合計の最小値を求めることができます。\n計算量は、入力に\n\\(\\Theta(N)\\)\n、DPに\n\\(\\Theta(K_1 K_2)\\)\nかかるため、\n\\(\\Theta(N + K_1 K_2)\\)\nとなります。\n実装例 (C++)\nhttps://atcoder.jp/contests/abc325/submissions/46837144",
+      "codes": [],
+      "text_sha256": "b4d711b3652234f86410128adb928de99f92c5a6680948faf74d587f2854502c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc325/abc325_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc325/editorial/7490",
+      "text": "公式解説と同じ動的計画法を行います。以下が遷移の式です。\n\\[\n\\mathrm{dp}[i][j] = \\min_{0 \\leq k \\leq j} \\left\\lbrace \\mathrm{dp}[i-1][j-k] + \\left\\lceil \\frac{\\max \\left\\lbrace D_i-kL_1, 0 \\right\\rbrace}{L_2} \\right\\rceil \\right\\rbrace\n\\]\n\\(\\min\\)\nの添え字を遷移元を基準に書き換えて\n\\[\n\\mathrm{dp}[i][j] = \\min_{0 \\leq k \\leq j} \\left\\lbrace \\mathrm{dp}[i-1][k] + \\left\\lceil \\frac{\\max \\left\\lbrace D_i-(j-k)L_1, 0 \\right\\rbrace}{L_2} \\right\\rceil \\right\\rbrace\n\\]\n更に内側の\n\\(\\max\\)\nを場合分けして外します\n\\[\n\\mathrm{dp}[i][j] = \\min_{0 \\leq k \\leq j} \\begin{cases} \\mathrm{dp}[i-1][k] + \\left\\lceil \\frac{D_i-(j-k)L_1}{L_2} \\right\\rceil \\quad & \\left( \nD_i-(j-k)L_1 \\geq 0 \\right)  \\\\ \\mathrm{dp}[i-1][k] \\quad & \\left( D_i - (j-k)L_1 \\lt 0 \\right) \\end{cases}\n\\]\n場合分けのそれぞれに該当する\n\\(k\\)\nは区間になっているため、\n\\(D_i - (j-k)L_1 \\lt 0\\)\nのケースは累積\n\\(\\min\\)\nで容易に計算できます。よって、以下の式を高速に計算することを考えましょう (\n\\(s\\)\nは\n\\(D_i - (j-s)L_1 \\geq 0\\)\nを満たす最小の\n\\(s\\)\nです )。\n\\[\n\\min_{s \\leq k \\leq j} \\left\\lbrace \\mathrm{dp}[i-1][k] + \\left\\lceil \\frac{D_i-(j-k)L_1}{L_2} \\right\\rceil \\right\\rbrace\n\\]\n\\(\\mathrm{dp}\\)\nが整数であるため、切り上げを外側に持ってくることができます。\n\\[\n\\left\\lceil \\min_{s \\leq k \\leq j} \\left\\lbrace \\mathrm{dp}[i-1][k] +  \\frac{D_i-(j-k)L_1}{L_2} \\right\\rbrace \\right\\rceil\n\\]\n更に\n\\(k\\)\nに依存しない部分を括り出して\n\\[\n\\left\\lceil \\frac{D_i - jL_1}{L_2} + \\min_{s \\leq k \\leq j} \\left\\lbrace \\mathrm{dp}[i-1][k] + \\frac{kL_1}{L_2} \\right\\rbrace \\right\\rceil\n\\]\n\\(\\min\\)\nの中はスライド最小値で複数の\n\\(j\\)\nについて同時に計算できます。全体で時間計算量は\n\\(\\Theta(N K_1)\\)\nです。",
+      "codes": [],
+      "text_sha256": "6d87347966906d01a56aeff545e8ed3253d099e33e58b936a75a934fbfd50886",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc325/abc325_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

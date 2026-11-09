@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc214_h",
+  "title": "Collecting",
+  "contests": [
+    {
+      "contest_id": "abc214",
+      "problem_index": "H"
+    }
+  ],
+  "difficulty": 3138,
+  "raw_difficulty": 3138,
+  "contest_id": "abc214",
+  "problem_index": "H",
+  "url": "https://atcoder.jp/contests/abc214/tasks/abc214_h",
+  "statement": "配点 : 600 点 問題文 N 頂点 M 辺の有向グラフがあります。 頂点は 1, \\dots, N と番号付けられており、 i \\, (1 \\leq i \\leq M) 番目の辺は頂点 A_i から頂点 B_i に向けて張られています。 はじめ、頂点 i \\, ( 1 \\leq i \\leq N) には X_i 個の落とし物があります。これらの落とし物を K 人で拾うことになりました。 K 人は 1 人ずつグラフ上を移動します。各々は次のような行動をとります。 頂点 1 から出発し、辺をたどって移動することを任意の有限回繰り返す。訪れた各頂点（頂点 1 も含む）について、落とし物がまだ拾われていなければ、全て拾う。 合計で最大何個の落とし物を拾うことができるか求めてください。 制約 2 \\leq N \\leq 2 \\times 10^5 1 \\leq M \\leq 2 \\times 10^5 1 \\leq K \\leq 10 1 \\leq A_i, B_i \\leq N A_i \\neq B_i i \\neq j ならば、 A_i \\neq A_j または B_i \\neq B_j 1 \\leq X_i \\leq 10^9 入力は全て整数である。 入力 入力は以下の形式で標準入力から与えられる。 N M K A_1 B_1 \\vdots A_M B_M X_1 \\ldots X_N 出力 答えを出力せよ。 入力例 1 5 5 2\r\n1 2\r\n2 3\r\n3 2\r\n1 4\r\n1 5\r\n1 4 5 2 8 出力例 1 18 2 人がそれぞれ次のように行動することで、 18 個の落とし物を拾うことができます。 1 人目は、頂点 1 \\rightarrow 2 \\rightarrow 3 \\rightarrow 2 の順に移動し、頂点 1, 2, 3 にある落とし物を拾う。 2 人目は、頂点 1 \\rightarrow 5 の順に移動し、頂点 5 にある落とし物を拾う。 19 個以上の落とし物を拾うことはできないので、 18 を出力します。 入力例 2 3 1 10\r\n2 3\r\n1 100 100 出力例 2 1",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 頂点 M 辺の有向グラフがあります。 頂点は 1, \\dots, N と番号付けられており、 i \\, (1 \\leq i \\leq M) 番目の辺は頂点 A_i から頂点 B_i に向けて張られています。 はじめ、頂点 i \\, ( 1 \\leq i \\leq N) には X_i 個の落とし物があります。これらの落とし物を K 人で拾うことになりました。 K 人は 1 人ずつグラフ上を移動します。各々は次のような行動をとります。 頂点 1 から出発し、辺をたどって移動することを任意の有限回繰り返す。訪れた各頂点（頂点 1 も含む）について、落とし物がまだ拾われていなければ、全て拾う。 合計で最大何個の落とし物を拾うことができるか求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 2 \\times 10^5 1 \\leq M \\leq 2 \\times 10^5 1 \\leq K \\leq 10 1 \\leq A_i, B_i \\leq N A_i \\neq B_i i \\neq j ならば、 A_i \\neq A_j または B_i \\neq B_j 1 \\leq X_i \\leq 10^9 入力は全て整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M K A_1 B_1 \\vdots A_M B_M X_1 \\ldots X_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5 5 2\r\n1 2\r\n2 3\r\n3 2\r\n1 4\r\n1 5\r\n1 4 5 2 8"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 18 2 人がそれぞれ次のように行動することで、 18 個の落とし物を拾うことができます。 1 人目は、頂点 1 \\rightarrow 2 \\rightarrow 3 \\rightarrow 2 の順に移動し、頂点 1, 2, 3 にある落とし物を拾う。 2 人目は、頂点 1 \\rightarrow 5 の順に移動し、頂点 5 にある落とし物を拾う。 19 個以上の落とし物を拾うことはできないので、 18 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 1 10\r\n2 3\r\n1 100 100"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc214/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:37.422202+00:00",
+  "statement_sha256": "86d37b54a95b1cdfe552ccae514c4d864b4c5120d41f9476b073a1bc2811cfc3",
+  "editorials": []
+}

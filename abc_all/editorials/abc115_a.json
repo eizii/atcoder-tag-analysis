@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc115_a",
+  "editorials": [
+    {
+      "text": "A: Christmas Eve Eve Eve\n正解までの道のりを細かく分割すると次の通りです。\n1. 標準入力から整数D を受け取る。\n2. X から何らかの方法で答えとなる文字列Christmas... を得る。\n3. 得た文字列を標準出力に出す。\n手順1, 3 についてはpractice contest 問題A の言語別サンプルコードが参考になります。手順2 につい\nてはif 文を使う、for 文を25 −D 周回す(100 点問題の要求レベルを少し超える)、文字列に+ や* といっ\nた演算子を使う(あれば) といった手が考えられます。C++, Python3 による実装例を示します。\n1 #include <iostream>\n2 using namespace std;\n3 int main(){\n4\nint D;\n5\ncin >> D;\n6\nstring ans;\n7\nif(D == 25) ans = \"Christmas\";\n8\nelse if(D == 24) ans = \"Christmas Eve\";\n9\nelse if(D == 23) ans = \"Christmas Eve Eve\";\n10\nelse ans = \"Christmas Eve Eve Eve\";\n11\ncout << ans << endl;\n12 }\n1 print('Christmas' + ' Eve' * (25 - int(input())))\n",
+      "text_sha256": "3b45d91c564b4f33f7c9ff9cfc4e950b7b4bea3a2510eb78c36e006ef565b3e7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc115/abc115_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

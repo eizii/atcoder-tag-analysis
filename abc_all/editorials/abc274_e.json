@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc274_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc274/editorial/5020",
+      "text": "この問題はbitDPを用いて\n\\(O((N+M)^2 2^{N+M})\\)\nで解くことができます。\nより基本的な類題：\nABC180E『Traveling Salesman among Aerial Cities』\n\\(M=0\\)\nの場合、次のようなDPで解くことができます。\n\\(DP[i][S]=\\)\n現在地が街\n\\(i\\)\nで、訪問済みの街の集合が\n\\(S\\)\nであるときの所要時間の最小値\n\\(DP[i][S]=\\min\\{DP[j][S\\setminus \\{i\\}]+\\mathrm{time}(i,j) \\mid j\\in S\\setminus\\{i\\}\\}\\)\nただし、\n\\(\\mathrm{time}\\)\nは街\n\\(i\\)\nから街\n\\(j\\)\nへの所要時間を表す。\n\\(M>0\\)\nの場合も、「宝箱も街と同様に扱い、宝箱は訪問せずに原点に戻っても良い」とすることで同様のDPで解くことができます。何個のブースターを拾っているかは\n\\(S\\)\nから判別可能なので、改めて情報を持つ必要はありません。\n実装例(C)\n実装例(Python)\nなお、「訪問する宝箱の集合を固定し、\n\\(2^M\\)\n通りそれぞれについて TSP を解く」とした場合、計算量は\n\\(O((N+M)^2 2^N3^M)\\)\nとなります。高速な言語ではこちらの方針でも実行時間制限に間に合わせることができます。",
+      "codes": [],
+      "text_sha256": "08eaf26878281e2bc37dda2e31dc99fee08729897fe8dcc7b241585bc8cb2fbf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc274/abc274_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

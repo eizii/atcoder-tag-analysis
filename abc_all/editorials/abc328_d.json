@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc328_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc328/editorial/7655",
+      "text": "問題文中の操作をシミュレーションすれば答えを得ることは出来ますが、愚直な実装では最悪時間計算量が\n\\(\\Theta(N^2)\\)\nとなり実行制限時間超過（TLE）を招きうるため、実装方針には注意と工夫が必要です。\n例えば、文字列\n\\(S\\)\nを保持するデータ構造によっては、\n\\(S\\)\nからある文字を削除した際、削除で生じた隙間を詰めるために削除箇所より後ろの部分を先頭にずらす処理が生じます。\n（例えば\n\\(S = S_1S_2S_3S_4S_5\\)\nの先頭から\n\\(2\\)\n文字目\n\\(S_2\\)\nを削除すると、先程まで\n\\(S_3\\)\nだった文字を\n\\(S_2\\)\nに、\n\\(S_4\\)\nだった文字を\n\\(S_3\\)\nに、\n\\(S_5\\)\nだった文字を\n\\(S_4\\)\nにずらす処理がそれぞれ生じます。）\nこの処理は最悪の場合（\n\\(S\\)\nの先頭の文字を削除する場合） に\n\\(\\Theta(N)\\)\n時間かかるため、これを繰り返すと、入力で与えられる文字列によってはシミュレーション全体で\n\\(\\Theta(N^2)\\)\n時間かかってしまいます。\nそこで、実行制限時間に間に合う方針として、スタックを使った以下の手順でシミュレーションを行うことによって、 全体で\n\\(O(N)\\)\n時間で本問題を解くことができます。\n空のスタックを準備し、\n\\(S\\)\nの文字を先頭から順に\n\\(1\\)\n文字ずつスタックの先頭にpushしていく。\nただしその過程で、スタックの先頭に文字列\nABC\nが作られる（つまり、スタックの先頭の文字（最後に push した文字）が\nC\n、先頭から\n\\(2\\)\n番目の文字が\nB\n、先頭から\n\\(3\\)\n番目の文字が\nA\nの状態になる）たびに、スタックの先頭からその\n\\(3\\)\n文字\nABC\nを随時 pop する。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(void)\n{\n  string s, ans;\n  cin >> s;\n  \n  for(auto c : s){\n    ans += c;\n    if(ans.size() >= 3 && ans.substr(ans.size()-3) == \"ABC\") ans.erase(ans.end()-3, ans.end());\n  }\n  cout << ans << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "bf0118f32676604f2e2e8778ba2f9e539a0851834712e246f252022fbc92a9f5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc328/abc328_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

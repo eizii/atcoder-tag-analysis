@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc281_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc281/editorial/5365",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\nある処理を\n\\(N\\)\n回繰り返す、というのはC++ではfor文を用いて以下のように書けます。\nまた、{}で囲われた内部では変数\n\\(i\\)\nの値が\n\\(0,1,\\ldots,N-1\\)\nとなり、処理中で利用することができます。\nそこで、\nとすると\n\\(i=0,1,\\ldots,N\\)\nに対して順番に\n\\(N-i\\)\nの値を出力することができ、本問の目的を達成できます。(\n\\(N\\)\n以下の非負整数は\n\\(N+1\\)\n個あるため、処理が\n\\(N+1\\)\n回行われるように制御文を変えてあります)\nあるいは、for文の処理の流れを考えると\nとすれば\n\\(i\\)\nが\n\\(N,N-1,\\ldots,0\\)\nとなるため、単に\n\\(i\\)\nと出力すればよくなります。\n実装例 (C++)",
+      "codes": [
+        "for(int i=0;i<N;i++){\n\t//N回繰り返したい処理\n}",
+        "for(int i=0;i<N+1;i++){\n\tcout<<N-i<<endl;\n}",
+        "for(int i=N;i>=0;i--){\n\tcout<<i<<endl;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\n\tint N;\n\tcin>>N;\n\t\n\tfor(int i=N;i>=0;i--){\n\t\tcout<<i<<endl;\n\t}\n\t\n\treturn 0;\n\n}"
+      ],
+      "text_sha256": "c525722fd475d4b1a0e2fb07d6b018887f2811d153a4b221b8e17bef3139a160",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc281/abc281_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

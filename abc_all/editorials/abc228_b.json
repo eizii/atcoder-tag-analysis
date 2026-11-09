@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc228_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc228/editorial/2941",
+      "text": "初めに高橋君の秘密を知った友達\n\\(X\\)\nが友達\n\\(A_X\\)\nにその秘密を教え、\n友達\n\\(A_X\\)\nはさらに友達\n\\(A_{A_X}\\)\nに秘密を教え、\n友達\n\\(A_{A_X}\\)\nはさらに友達\n\\(A_{A_{A_X}}\\)\nに秘密を教え、\n\\(\\cdots\\)\nというように「ある友達が別の友達に秘密を教える」ことが繰り返されることで、高橋君の秘密は知れ渡っていきます。\nこの繰り返しは「ある友達\n\\(i\\)\nが友達\n\\(A_i\\)\nに秘密を教えようとしたが、友達\n\\(A_i \\)\nはすでに秘密を知っていた」ということが起きるまで続きます。\n秘密が伝わっていく上記の過程をシミュレーションすることでこの問題を解きます。\n例えば、変数\n\\(i\\)\nと、友達\n\\(i\\)\nが高橋君の秘密をすでに知っている (\n\\(true\\)\n) かまだ知らないか (\n\\(false\\)\n) を記録するためのブーリアン型の配列\n\\(b[\\ast]\\)\nを用意し、下記のアルゴリズムを実行することで、秘密が伝わっていく過程をシミュレーションできます。\n\\(i \\leftarrow X\\)\nとし、\n\\(b[\\ast]\\)\nの要素をすべて\n\\(false\\)\nで初期化する。\n\\(b[i] \\leftarrow true\\)\n\\(i \\leftarrow A_i\\)\n\\(b[i] = true\\)\nなら終了する。そうでなければ2.に戻る。\nその後、秘密を知っている友達の数（すなわち\n\\(i = 1, 2, \\ldots, N\\)\nのうち\n\\(b[i] = true\\)\nとなる\n\\(i\\)\nの個数）を数えて出力すればこの問題に正解できます。\nC++言語による実装例を以下に記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint n, x;\nint a[100001];\nbool b[100001];\n\nint main(void)\n{\n  cin >> n >> x;\n  for(int i = 1; i <= n; i++) cin >> a[i];\n  \n  int i = x;\n  do{\n    b[i] = true;\n    i = a[i];\n  }while(!b[i]);\n  \n  int ans = 0;\n  for(int i = 1; i <= n; i++) if(b[i]) ans++;\n  cout << ans << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "eebc03e70d3f13506a20fd9a03c5e8c2ef744fb3b4bc30bc992361467cdea2a7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc228/abc228_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

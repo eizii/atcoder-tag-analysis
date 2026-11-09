@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc332_f",
+  "source_url": "https://atcoder.jp/contests/abc332/tasks/abc332_f?lang=ja",
+  "statement": "問題文\n長さ\nN\nの整数列\nA = (A_1, A_2, \\ldots, A_N)\nが与えられます。\nA\nに対して、\ni = 1, 2, \\ldots, M\nの順に下記の操作を行います。\nまず、\nL_i\n以上\nR_i\n以下の整数を等確率でランダムに\n1\n個を選び、それを\np\nとおく。\nそして、\nA_p\nの値を整数\nX_i\nに変更する。\n上記の手順を行った後の最終的な\nA\nにおける、\nA_i\nの期待値\n\\text{mod } 998244353\nを、\r\n各\ni = 1, 2, \\ldots, N\nについて出力してください。\n期待値\n\\text{mod } 998244353\nの定義\nこの問題で求める期待値は必ず有理数になることが証明できます。 また、この問題の制約下では、求める期待値を既約分数\n\\frac{y}{x}\nで表したときに\nx\nが\n998244353\nで割り切れないことが保証されます。\nこのとき\nxz \\equiv y \\pmod{998244353}\nを満たすような\n0\n以上\n998244352\n以下の整数\nz\nが一意に定まります。この\nz\nを答えてください。\n制約\n入力される値は全て整数\n1 \\leq N, M \\leq 2 \\times 10^5\n0 \\leq A_i \\leq 10^9\n1 \\leq L_i \\leq R_i \\leq N\n0 \\leq X_i \\leq 10^9",
+  "html_sha256": "8377345a14b1c30e947bb01b88572fc03989807b405066273765028cf12f473f",
+  "extractor": "section_headings_v1"
+}

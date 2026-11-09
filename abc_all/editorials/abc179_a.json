@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc179_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc179/editorial/117",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practicecontest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to Atcoder」をお試しください。言語ごとに解答例が掲載されています。\nこの問題では、「入力された文字列の最後の1文字」を見て条件分岐する必要があります。各言語で「文字列の\n\\(i\\)\n番目の文字」を得る方法を確認してください。（多くの言語では、配列のように\n\\(S[i]\\)\nで得ることができます）\n回答例(Python)\n回答例(C++)\n回答例(C)",
+      "codes": [
+        "S = input()\n\nif S[-1] == \"s\":\n\tS += \"es\"\nelse:\n\tS += \"s\"\n\nprint(S)",
+        "#include <iostream>\nusing namespace std;\n\nint main(){\n\tstring S;\n\tcin >> S;\n\tint len=S.length();\n\t\n\tif(S[len-1]=='s'){\n\t\tS += \"es\";\n\t}else{\n\t\tS += \"s\";\n\t}\n\n\tcout << S;\n}",
+        "#include<stdio.h>\n#include<string.h>\n\nint main(){\n\tchar S[1010];\n\tscanf(\"%s\",S);\n\tint len=strlen(S);\n\t\n\tif(S[len-1]=='s'){\n\t\tprintf(\"%ses\",S);\n\t}else{\n\t\tprintf(\"%ss\",S);\n\t}\n}"
+      ],
+      "text_sha256": "5189b509b10145b8dc0e54687961d44964fcf4077767900f4e57b8acf432a7f2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc179/abc179_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

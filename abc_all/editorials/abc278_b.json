@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc278_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5227",
+      "text": "この問題は実装をテーマとした問題です。\nまず、\n\\(h\\)\n時\n\\(m\\)\n分という時刻が見間違えやすい時刻か？を判定する方法を考えましょう。\nこれは次のような手続きで判定することができます。(詳しくは実装例をご参照ください。)\n\\(h\\)\nの\n\\(10\\)\nの位\n\\(A\\)\nと\n\\(1\\)\nの位\n\\(B\\)\nを整数除算 (C++ の\n/\n, Python の\n//\n) と剰余算 (\n%\n) を利用して求める。\n\\(m\\)\nの\n\\(10\\)\nの位\n\\(C\\)\nと\n\\(1\\)\nの位\n\\(D\\)\nも同様に求める。\n\\(\\mathrm{AC}\\)\nと\n\\(\\mathrm{BD}\\)\nを加算・乗算を利用して計算する。\n\\(\\mathrm{AC}\\)\n時\n\\(\\mathrm{BD}\\)\n分が\n\\(24\\)\n時制に存在するかを判定する。これは\n\\(0 \\leq \\mathrm{AC} \\leq 23\\)\nかつ\n\\(0 \\leq \\mathrm{BD} \\leq 59\\)\nが成り立つかを調べれば判定できる。\n上の判定で得られた bool 値 (Yes/No) が、そのまま「\n\\(h\\)\n時\n\\(m\\)\n分という時刻が見間違えやすい時刻か？」という問題の答えになる。\n見間違えやすい時刻の判定ができれば、この問題は\nwhile\n文などのループ構造を利用すれば解くことができます。すなわち、\n\\(H\\)\n時\n\\(M\\)\n分が見間違えやすい時刻でないあいだ\n\\(1\\)\n分を足す、という操作を繰り返せばよいです。\nただし\n\\(H\\)\n時\n\\(M\\)\n分に\n\\(1\\)\n分を足すと基本的には\n\\(H\\)\n時\n\\(M+1\\)\n分になりますが、足した後に\n\\(H=24\\)\nや\n\\(M=60\\)\nになったときは繰り上がりが必要なのに注意してください。\n計算量は\n\\(\\mathrm{O}( \\text{(24 時制で表現できる時刻の通り数)})\\)\nで、 24 時制で表現できる時刻は\n\\(1440\\)\n通りなので十分高速に判定できると分かります。\nPython による実装例は次の通りです。",
+      "codes": [
+        "def is_in_24_hours(h, m):\n  return 0 <= h <= 23 and 0 <= m <= 59\n\ndef misjudged(h, m):\n  A, B = h // 10, h % 10\n  C, D = m // 10, m % 10\n  AC = A * 10 + C\n  BD = B * 10 + D\n  return is_in_24_hours(AC, BD)\n\nH, M = map(int, input().split())\nwhile not misjudged(H, M):\n  M += 1\n  if M == 60:\n    H, M = H + 1, 0\n  if H == 24:\n    H = 0\nprint(H, M)"
+      ],
+      "text_sha256": "f2a9c63744147aee428064c0898fe47c9d8eb818d3f51860a3406e9789c3e640",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

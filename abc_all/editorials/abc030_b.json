@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc030_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc030/editorial.pdf",
+      "text": "B問題 時計盤\n\n  問題概要 1.\n  アルゴリズム 2.\n\n\n\n\n\n2015/10/24                            ©AtCoder Inc. All rights reserved.                                      66\n\f\nB問題 問題概要\n\n• アナログ時計がある。長針と短針のなす角を求めよ\n• 制約\n   – 0 ≦ n ≦ 23\n   – 0 ≦ m ≦ 59\n\n\n\n\n\n2015/10/24                                                                                              7\n\f\nB問題 アルゴリズム\n\n• 長針は1時間ごとに360/12で30度、1分ごとに\n  360/12/60で0.5度動きます。\n• 短針は1分ごとに360/60で6度動きます。\n\n• 長針と短針が12時の方向から見てどれだけ進んで\n いるかを0～360度の小数で表し、差を取ります。\n• ただし、180度より大きいとき、大きい方の角を見て\n しまっているため、360度から差の角を引いたものが\n 答え。\n   – 整数/整数は言語によっては切り捨てられてしまうため注意！\n\n\n\n\n2015/10/24                                                                                              8",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "815a7f23fed384e3820850dee2e3d601c5796657cbc981d230d1c1b54a2c331a"
+    }
+  ],
+  "status": "available"
+}

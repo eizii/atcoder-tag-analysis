@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc368_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc368/editorial/10751",
+      "text": "操作後の山の一番上にあるのは、もともと下から\n\\(K\\)\n番目にあったカードです。下から\n\\(K\\)\n番目は上から\n\\(N-K+1\\)\n番目なので、操作後の山のカードには、上から順に\n\\(A_{N-K+1},A_{N-K+2},\\ldots,A_{N},A_{1},A_{2},\\ldots,A_{N-K}\\)\nが書かれています。これを出力すればよいです。\n多くのプログラミング言語では、配列の添字は\n\\(0\\)\nから始まるため、添字に注意してください。\n実装例(C++)\n実装例(Python)\nなおPython などの言語では、問題文の通りに「山を上下にわけ、下側を上に移す」という操作を以下の通り簡単に行うことができます。\n実装例(Python)\nまた、C++には問題文の操作そのものを行うrotateという関数があり、これを用いて解くこともできます。\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int n, k;\n  cin >> n >> k;\n  vector<int> a(n);\n  for(int i=0; i<n; i++) cin >> a[i];\n  for(int i=n-k; i<n; i++) cout << a[i] << ' ';\n  for(int i=0; i<n-k; i++) cout << a[i] << ' ';\n}",
+        "N,K = map(int,input().split())\nA = list(map(int,input().split()))\nfor i in range(N-K,N): print(A[i])\nfor i in range(N-K): print(A[i])",
+        "N,K = map(int,input().split())\nA = list(map(int,input().split()))\ntop = A[:-K]  # 上側\nbottom = A[-K:]  # 下側\nB = bottom + top  # 下側を上に持ってくる\nprint(*B)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int n, k;\n  cin >> n >> k;\n  vector<int> a(n);\n  for(int i=0; i<n; i++) cin >> a[i];\n  rotate(a.begin(), a.begin()+n-k, a.end());\n  for(int i=0; i<n; i++) cout << a[i] << ' ';\n}"
+      ],
+      "text_sha256": "daccce1300b5bade0384acf9732f505a36b69d4d51818a89fd3e781b8ceabfc9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc368/abc368_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

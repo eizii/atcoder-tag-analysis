@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc362_c",
+  "title": "Sum = 0",
+  "contests": [
+    {
+      "contest_id": "abc362",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 521,
+  "raw_difficulty": 521,
+  "contest_id": "abc362",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc362/tasks/abc362_c",
+  "statement": "配点 : 350 点 問題文 N 個の整数の組 (L_1,R_1),(L_2,R_2),\\ldots,(L_N,R_N) が与えられます。 以下の条件を満たす長さ N の整数列 X=(X_1,X_2,\\ldots,X_N) が存在するか判定し、存在するならば一つ出力してください。 各 i=1,2,\\ldots,N に対して L_i\\leq X_i\\leq R_i \\displaystyle \\sum_{i=1}^N X_i=0 制約 1\\leq N\\leq 2\\times 10^5 -10^9\\leq L_i\\leq R_i\\leq 10^9 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N L_1 R_1 L_2 R_2 \\vdots L_N R_N 出力 存在しない場合は No を出力せよ。存在する場合は条件を満たす整数列 X を以下の形式で出力せよ。 Yes X_1 X_2 \\ldots X_N 答えが複数存在する場合、どれを出力しても正解とみなされる。 入力例 1 3\r\n3 5\r\n-4 1\r\n-2 3 出力例 1 Yes\r\n4 -3 -1 数列 X=(4,-3,-1) は問題の条件をすべて満たします。ほかにも (3,-3,0) や (5,-4,-1) などが条件を満たします。 入力例 2 3\r\n1 2\r\n1 2\r\n1 2 出力例 2 No 条件を満たす整数列 X は存在しません。 入力例 3 6\r\n-87 12\r\n-60 -54\r\n2 38\r\n-76 6\r\n87 96\r\n-17 38 出力例 3 Yes\r\n-66 -57 31 -6 89 9",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 個の整数の組 (L_1,R_1),(L_2,R_2),\\ldots,(L_N,R_N) が与えられます。 以下の条件を満たす長さ N の整数列 X=(X_1,X_2,\\ldots,X_N) が存在するか判定し、存在するならば一つ出力してください。 各 i=1,2,\\ldots,N に対して L_i\\leq X_i\\leq R_i \\displaystyle \\sum_{i=1}^N X_i=0"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N\\leq 2\\times 10^5 -10^9\\leq L_i\\leq R_i\\leq 10^9 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N L_1 R_1 L_2 R_2 \\vdots L_N R_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 存在しない場合は No を出力せよ。存在する場合は条件を満たす整数列 X を以下の形式で出力せよ。 Yes X_1 X_2 \\ldots X_N 答えが複数存在する場合、どれを出力しても正解とみなされる。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\n3 5\r\n-4 1\r\n-2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\r\n4 -3 -1 数列 X=(4,-3,-1) は問題の条件をすべて満たします。ほかにも (3,-3,0) や (5,-4,-1) などが条件を満たします。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\r\n1 2\r\n1 2\r\n1 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No 条件を満たす整数列 X は存在しません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 6\r\n-87 12\r\n-60 -54\r\n2 38\r\n-76 6\r\n87 96\r\n-17 38"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes\r\n-66 -57 31 -6 89 9"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc362/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:42.183369+00:00",
+  "statement_sha256": "3d71d49b31439523b516764fa7b3a0b0fe767957a495cae52a0333405d29351e",
+  "editorials": []
+}

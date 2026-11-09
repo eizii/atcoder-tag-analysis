@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc421_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc421/editorial/13786",
+      "text": "基本的には問題文に書かれた通りの方法で\n\\(a_3,a_4,\\dots,a_{10}\\)\nを順番に求めていけばよいですが、実装にあたっては整数と文字列の相互変換や文字列の反転が必要になります。これらは自力で (for 文等を用いて) 実装することも難しくはないですが、多くのプログラミング言語においては標準機能として元から実装されているため、それらを用いるのが手軽です。C++ および Python に関しては下記の実装例を参考にしてください。\n答えは 32 bit 整数型 (C++ における\nint\n型など) に収まらない可能性があることに注意してください。\n実装例 (C++, Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    vector<long long> a(10);\n    cin >> a[0] >> a[1];\n    for (int i = 2; i < 10; i++) {\n        string s = to_string(a[i - 2] + a[i - 1]);\n        reverse(s.begin(), s.end());\n        a[i] = stoll(s);\n    }\n    cout << a[9] << endl;\n}",
+        "a = [0] * 10\na[0], a[1] = map(int, input().split())\n\nfor i in range(2, 10):\n    s = str(a[i - 2] + a[i - 1])\n    a[i] = int(s[::-1])\n  \nprint(a[9])"
+      ],
+      "text_sha256": "92bda5129a433630578270154aa47cdae954074ee1682c854663992ed448b359",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc421/abc421_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

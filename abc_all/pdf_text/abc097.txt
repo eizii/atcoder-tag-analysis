@@ -1,0 +1,405 @@
+              ABC097 / ARC097 ղઆ
+
+
+                                   sigma425
+
+
+
+  For International Readers: English editorial starts on page ???.
+
+
+A: Colorful Transceivers
+
+ ໰୊จͷ௨Γ ࣮ ૷͠·͢ɻೋ఺a,b ؒ ͷ ڑ ཭͸ඪ४తͳ ݴޠ ͳΒઈର஋ ؔ ਺Ͱ ܭࢉ Ͱ͖ΔͰ͠ΐ͏ɻࣗ ෼
+Ͱఆ ٛ ͯ͠΋ྑ͍ͱ ࢥ ͍·͢ɻͨͱ͑͹ C++ ͳΒ abs(a −b) ͱॻ͚·͢ɻ͋ͱ͸ɺ(A ͱ C ͕௚઀ձ࿩Մ
+ೳ) ·ͨ͸ ((A ͱ B ͕௚઀ձ࿩Մೳ) ͔ͭ (B ͱ C ͕௚઀ձ࿩Մೳ)) ͱ͍͏࿦ཧ ߏ ଄Λɺ࿦ཧԋ ࢉࢠ Λ ࢖ ͬ
+
+ͯίʔυʹམͱ͠ ࠐ Ί͹Α͍Ͱ͢ɻҎԼ͸ C++ ͷίʔυྫͰ͢ɻ
+
+#include <bits/stdc ++.h>
+using namespace std;
+int main (){
+         int a,b,c,d;
+         cin >>a>>b>>c>>d;
+        if(abs(a-c)<=d || (abs(a-b)<=d && abs(b-c)<=d)) puts (" Yes ");
+         else puts ("No ");
+}
+
+
+B: Exponential
+
+ ֤ 1 Ҏ্X ҎԼͷ੔਺x ʹରͯ͠ɺexpox := x ͕΂͖৐਺͔ ͱ͍͏ਅِ஋Λߟ͑·͢ɻ͜Ε͕ਖ਼͘͠ܭ
+ࢉͰ͖Ε͹౴͑͸ ٻ ·Γ·͢ɻ
+  1 Ҏ্ͷ੔਺b ͱɺ 2 Ҏ্ͷ੔਺p શͯͷϖΞʹରͯ͠ x := bp Λܭࢉ͠ɺx ͕ 1 Ҏ্X ҎԼͳΒ expox
+Λ true ʹॻ͖׵͑Δ ͱ͍͏͜ͱΛ͢ΔͱఆٛΑΓਖ਼͘͠ٻ·Γ·͕͢ɺ౰વ͢΂ͯͷ੔਺ͷϖΞΛࢼ͢ͷ͸
+
+ෆՄೳͰ͢ɻ
+
+ ·ͣɺ b ͱͯ͠ࢼ͢΂͖஋͸ 1 Ҏ্X ҎԼͷ੔਺ͷΈͰΑ͍Ͱ͢ (ͳͥͳΒɺ b > X ͳΒ೚ҙͷ p >= 2
+ʹରͯ͠ bp > X ͔ͩΒ౴͑ʹӨڹΛٴ΅͞ͳ͍)ɻ
+
+ ಉ༷ʹɺ p ͱͯ͠ ࢼ ͢΂͖஋͸ (ͱͯ΋ ࡶ ʹ ݟ ੵ΋ͬͯ΋) 2 Ҏ্X ҎԼͷ੔਺ͷΈͰे෼Ͱ͢ɻΑͬͯ
+ೋॏϧʔϓͰ b, p ͷશͯͷϖΞΛࢼ͢͜ͱͰ expox ͕ਖ਼͘͠ٻ·Γ·͢ɻ ࣌ؒܭࢉྔ͸ O(X2) Ͱ͢ɻ
+ ͔͠͠ɺΦʔόʔϑϩʔΛ ى͜͞ͳ͍ͨΊʹ΋ҎԼͷํ๏͕ྑ͍ͱࢥ͍·͢ɻ
+
+ ֤ b ʹରͯ͠ɺp = 2, 3, .. ͱॱ൪ʹ, expobp Λ true ʹॻ͖ ׵ ͍͖͑ͯ·͢ɻ͜͜Ͱɺ΋͠ ࠓ ௐ΂͍ͯΔ஋
+bk ͕ X ΑΓେ͖͔ͬͨΒɺk Ҏ ߱ ͷ஋͸ p ͱͯ͠ ߟ ͑Δඞཁ͕͋Γ·ͤΜɻैͬͯͦ͜Ͱ p ͷϧʔϓΛଧ
+
+ͪ੾ͬͯྑ͍Ͱ͢ɻͨͩ͠ b = 1 ͷ࣌ʹ͸͜ͷ৚݅Ͱͷଧͪ੾Γ͸ൃੜ͠ͳ͍ͷͰ஫ҙ͍ͯͩ͘͠͞ɻ
+
+#include <bits/stdc ++.h>
+using namespace std;
+
+
+                                             1
+
+int main (){
+         int X;
+         cin >>X;
+         vector <bool > expo(X+1);
+
+
+         expo [1] = 1;
+        for(int b=2;b<=X;b++){
+                  int v = b*b;
+                while(v<=X){
+                         expo[v] = 1;
+                             v *= b;
+                   }
+          }
+        for(int i=X;i >=1;i--) if(expo[i]){
+                  cout <<i<<endl;
+                 return 0;
+          }
+}
+
+
+C: K-th Substring
+
+ ղઆͰ͸ N := |s| ͱ͓͖·͢ɻ
+ ·ͣ෦෼఺ղ๏(N < 50) Λઆ໌͠·͢ɻશͯͷ s ͷ substring Λྻڍ͠ɺॏෳΛআ͖ɺιʔτ͠·͢ɻ͜
+
+Εʹ͸͍Ζ͍Ζͳํ๏͕͋Γ·͕͢ɺྫ͑͹ C++ ͩͱ sort ͨ͋͠ͱ unique ؔ਺Λ࢖ͬͨΓɺset Λ࢖͏ͳ
+
+Ͳ͕ߟ͑ΒΕ·͢ɻͦͷޙ ɺখ͍͞ํ͔Β K ൪໨ͷจࣈྻΛग़ྗ͢Ε͹Α͍Ͱ͢ɻ
+ ܭࢉ ྔ͸, O(N 2) ݸ ͷ ௕͞ O(N) ͷจ ࣈ ྻΛιʔτ͢ΔͷͰɺ O(N 3logN) ʹͳΓ·͢ɻ(ൺ ֱ ճ਺͕
+O(N 2logN), 1 ճͷൺֱ ʹ͔͔Δ͕࣌ؒ O(N))
+
+ ຬ఺ղ๏Ͱ͸ɺ౴͑ͷจ ࣈ ྻͷ௕͕͞ ߴ ʑ K Ͱ͋Δͱ͍͏͜ͱʹண໨͠·͢ɻ(͜Ε͸ɺจ ࣈ ྻt ͷ
+
+preﬁx(Ͱ͋ͬͯ t Ͱͳ͍΋ͷ) ͕ શͯҟͳΓɺ͔ͭ strict ʹ t ΑΓখ͍͜͞ͱ͔Βࣔͤ·͢ɻ) ͜ͷࣄ࣮͔Β
+
+͸͡Ίʹྻ ڍ ͢Δඞཁ͕͋Δͷ͸ ௕͞ K ҎԼͷ substring O(NK) ݸ ͚ͩͰ͢ɻ͜ΕΛιʔτ͢Δͱɺ ࣌
+ؒܭࢉྔ͸ O(NK2(logNK)) ͱͳΓɺे෼ߴ଎Ͱ͢ɻ
+
+
+D: Equals
+
+ ҎԼͷΑ͏ͳແ޲ άϥϑ G Λߟ͑·͢ɻ
+
+ ௖఺ू߹: 1 Ҏ্N ҎԼͷ੔਺
+ ลू߹ : ֤ 1 ≤j ≤M ʹରͯ͠ɺ(xj, yj) ͱ͍͏ลΛுΔ
+ ͢Δͱ࣍ͷ͜ͱ͕ ࣔ ͤ·͢:
+  S := {i|G ʹ͓͍ͯ i ͱ pi͕ಉ͡࿈ ݁ ੒෼ʹ͋Δ } ͱ͓͘ͱɺ ࠷ ऴঢ়ଶͰશͯͷ i ∈S ʹରͯ͠ಉ ࣌ ʹ
+pi = i ͱ͢Δ͜ͱ͕ग़དྷΔ
+ ূ໌͸ ޙ ʹճ͠·͢ɻ ٯ ʹ G ʹ͓͍ͯ i ͱ pi ͕ҟͳΔ࿈ ݁ ੒෼ʹଐͯ͠͠·͍ͬͯΔ৔ ߹ , ૢ࡞ Λ ߦ ͬͯ
+΋ pi = i ͱग़དྷͳ͍͜ͱ͸໌Β͔Ͱ͢ɻैͬͯɺ|S| ͕౴͑ʹͳΓ·͢ɻ֤ i ͕ S ʹ ଐ͢Δ͔͸ UnionFind
+౳Λ࢖͏ͱٻΊΔ͜ͱ͕ग़དྷ·͢ɻ
+
+ ূ໌: ؾ࣋ ͪతʹ͸ಉ͡࿈ ݁ ੒෼಺Ͱ͸ ޷ ͖ʹ஋ΛೖΕସ͑ΒΕΔ͜ͱ͔ΒΘ͔Γ·͢ɻͪΌΜͱ΍Δͱɺ
+֤࿈݁੒෼C ʹରͯ͠ɺ C ͔Β {pi|i ∈C} ΁ͷશ୯ࣹ f Ͱ͋ͬͯ i ∈S ͳΒ f(i) = i ͱͳΔΑ͏ͳ΋ͷ͕
+
+                                             2
+
+ͱΕͯɺ࿈݁੒෼ͷશҬ໦Λͱͬͯɺͻͱͭͷ༿i ʹਖ਼͍͠஋f(i) Λஔ͘ͱ͍͏͜ͱΛ܁Γฦͤ͹ࣔͤ·͢ɻ
+
+
+E: Sorted and Sorted
+
+ ؆୯ͷͨΊɺ i ͕ॻ͔Εͨ ࠇ͍/ന͍ ϘʔϧΛ ࠇ /നͷ i ͱݺͼ·͢ɻ
+
+ ࠷ ऴঢ়ଶΛҰͭ ݻ ఆͨ͠ ࣌ ʹɺͦͷঢ়ଶʹͳΔ·Ͱʹඞཁͳ ࠷ খͷૢ ࡞ ճ਺f ͸స౗਺Ͱදͤ·͢ɻ͢ͳ
+Θͪɺf = #{(x, y) : Ϙʔϧͷ૊|x ͸ॳظঢ়ଶͰ y ΑΓࠨʹ͋Δ ∧x ͸࠷ऴঢ়ଶͰ!y ΑΓӈʹ͋Δ }
+ Ϙʔϧ x Λݻఆͨ࣌͠ʹ্ͷू߹ʹೖΔ (x, y) ͷݸ਺Λ fx ͱஔ͖·͢ɻ f =   fx Ͱ͢ɻ
+ ࣍ ͷΑ͏ͳ DP Λ ߟ ͑·͢ɻdpi,j = ࠷ ऴঢ়ଶʹ͓͍ͯϘʔϧΛ ࠨ ͔Βॱʹஔ͍͍ͯͬͯɺࠇ ͍ϘʔϧΛ i
+ݸ, ന͍ϘʔϧΛ j ݸ ஔ͍ͨ࣌ ͷ, ͜Ε·Ͱஔ͍ͨϘʔϧ x ʹؔ͢Δ fx ͷ࿨ͷ࠷খ஋
+ ͜Ε͸ ࣍ ͷΑ͏ʹ ߋ ৽Ͱ͖·͢ɻdpi,j = min(dpi−1,j + costbi−1,j, dpi,j−1 + costwi,j−1) ͜͜Ͱɺcostbi,j
+ͱ͸ɺ ࠇ͍ϘʔϧΛ i ݸ, ന͍ϘʔϧΛ j ݸطʹஔ͍͍ͯΔ࣌ʹ ࠇͷ i + 1 Λஔ͍ͨ࣌ͷ f ࠇͷ i+1 ͷ஋Ͱ͢ɻ
+͜Ε͸ well-deﬁned Ͱ͢ɻ(ͭ·Γɺ͜Ε͔ΒͲ͏ஔ͔͘΍ɺ͜Ε·ͰͲ͏ஔ͍͔ͨʹ͸ґଘ͍ͯ͠·ͤΜ) ͜
+
+ͷ͜ͱ͸ x ͷࠨʹ͋ΔϘʔϧͷू߹͕ i, j ͚͔ͩΒҰҙʹఆ·Δ͜ͱ͔ΒΘ͔Γ·͢ɻcostw ΋ಉ༷Ͱ͢ɻ
+  costb, costw ͸ BIT Λ ࢖ ͬͯ O(N 2logN) ͰٻΊͨΓ, “ ࠨ k ݸʹ͋Δ i ҎԼͷࠇ͍Ϙʔϧͷݸ਺” ͳͲΛ
+લ ܭࢉ ͨ͠Γ͢Δ͜ͱͰ O(N 2) Ͱ ٻ ΊΔ͜ͱ͕ՄೳͰ͢ɻ͢Δͱશͯͷ dpi,j ΋ O(N 2) Ͱ ٻ ΊΒΕ·͢ɻ
+౴͑͸ dpN,N Ͱ͢ɻ
+
+
+F: Monochrome Cat
+
+ ·ͣࠇ͍༿ΛΘ͟Θ͟๚ΕΔඞཁ͸͋Γ·ͤΜɻͳͷͰɺࠇ͍༿͕͋Ε͹ͦΕΛফ͢ɺͱ͍͏͜ͱΛͰ͖Δ
+
+͚ͩ ܁ Γฦ͠·͢ (͜Ε͸ queue ౳Λ ࢖ ͏ͱ ؆ ୯ʹͰ͖·͢)ɻ͢Δͱ͍͔ͭ͸શͯͷ༿͕ന͘ͳΓ·͢ɻҎ
+
+Լ͜ͷ໦ʹ͍ͭͯ ߟ ͑·͢ɻ
+
+  “ݱࡏ͍Δ௖఺ͱྡ઀ͨ͠௖఺Λͻͱͭબͼͦͷ௖఺ʹҠಈ͢ΔɻͦͷޙɺҠಈઌͷ௖఺ͷ৭Λ൓స͢Δɻ”
+ͱ͍͏ૢ࡞Ͱ ௖఺a ͔Β ௖఺b ʹҠಈͨ͠৔߹ɺ͜ͷૢ࡞Λ a ⇒b Ͱද͠·͢ɻ
+ ·ͨɺ” ࠓ͍Δ௖఺ͷ৭Λ൓స͢Δ” ͱ͍͏ૢ࡞Λ ௖఺a Ͱߦͬͨ৔߹ɺ͜ͷૢ࡞Λ ﬂip a Ͱද͠·͢ɻ
+ ·ͣɺͻͱͭͷลΛ 3 ճҎ্౉Δ͜ͱ͸͋Γ·ͤΜɻͳͥͳΒɺ(ૢ ࡞ ྻ1) →(a ⇒b) →(ૢ ࡞ ྻ2) →
+(b ⇒a) →(ૢ ࡞ ྻ3) →(a ⇒b) →(ૢ ࡞ ྻ4) ͱ͍͏ૢ ࡞ ྻ͸ɺ(ૢ ࡞ ྻ1) →(ૢ ࡞ ྻ3) →(ﬂip a) →
+(a ⇒b) →(ﬂip b) →(ૢ ࡞ ྻ2) →(ૢ ࡞ ྻ4) ͱม ߋ ͢Δͱɺૢ ࡞ ճ਺͸อͬͨ··ɺଞͷลͷ ࢖ ༻ճ਺Λ
+ม͑ͣʹɺล(a, b) ͷ ࢖ ༻ճ਺ΛݮΒͤΔ͔ΒͰ͢ɻ
+
+ Α֤ͬͯล͸ߴʑ 2 ճ͔͠࢖ Θͳ͍ͱͯ͠Α͍Ͱ͢ɻ
+
+ ·ͨɺશͯͷ༿͕നͳͷͰҰ౓͸๚ΕΔඞཁ͕͋Δ͜ͱ͔Βɺ͢΂ͯͷ௖఺Λ๚ΕΔඞཁ͕͋Δ͜ͱ͕Θ͔
+
+Γ·͢ɻಛʹ֤ลΛগͳ͘ͱ΋ 1 ճ͸࢖͍·͢ɻ
+
+ ͜ͷ 2 ͭͷߟ࡯͔ΒɺೣͷҠಈͷ༷ࢠ͸࣍ͷਤͷ੺ઢͷΑ͏ʹݶఆ͞Ε·͢:
+
+
+
+
+
+                                             3
+
+ ͢ͳΘͪɺ࢝௖఺s ͔Β Euler tour Λ͢Δ్தɺ͢΂ͯͷ௖఺Λ๚Εͨ͋ͱͳΒ ऴ௖఺t ͰҠಈΛ΍Ίͯ
+
+ྑ͍ ͱ͍͏ܗͰ͢ɻ
+
+ Ҡಈૢ࡞ͷྻ͕ܾ·͍ͬͯΔ࣌ɺﬂip ૢ࡞ ΛԿճߦ͑͹͍͍͔͸Ұҙʹఆ·Γ·͢ɻͳͥͳΒɺ֤௖఺Λগ
+
+ͳ͘ͱ΋Ұ౓͸๚Ε͍ͯΔͷͰɺ΋͠” ͢΂ͯͷҠಈૢ࡞͕ऴΘͬͨ͋ͱʹ௖఺v ͷ৭͕നʹͳ͍ͬͯΔ” ͳ
+
+Β͹ɺ ௖఺v Λ๚ΕͨλΠϛϯάͰ ﬂip v Λ͢Δ͜ͱʹ͢Ε͹Α͍͔ΒͰ͢ɻ
+
+ ͜͜ͰɺEuler tour ͕࠷ޙ·Ͱ׬ྃ͢ΔΑ͏ʹɺૢ࡞ྻʹ੨ͷഁઢͷΑ͏ʹ௥Ճ͢Δ͜ͱΛߟ͑·͢ɻ͜ͷ
+࣌ ͷૢ ࡞ ճ਺͸ɺ2(N −1) + #{v ∈G| (v : white) xor (degv is odd) } ͱͳΓɺs,t ΍ಈ͖ํʹ͸ґଘ͠·
+ͤΜɻ
+
+ ͔͜͜Β੨ͷ௥Ճ෼Λফ͢͜ͱΛ ߟ ͑·͢ɻૢ ࡞ ճ਺͕Ͳͷ͘Β͍ ݮ Δ͔͸ɺ੨ͷഁઢͷ path Λ t =
+b0, b1, .., bK−1, bK = s ͱ͓͘ͱɺ࣍ͷ f Ͱදͤ·͢ɻ
+  f := K + #{v ∈{b1, b2, ., bK}| (v : white) xor (degv is odd) } - #{v ∈{b1, b2, ., bK}| (v : white) xor
+(degv is even) }
+ มܗͯ͠ɺ
+  f = 2 × #{v ∈{b1, b2, ., bK}| (v : white) xor (degv is odd) }
+ ͜ͷ f Λ࠷େԽ͢Δͷ͕໨తͰ͢ɻ͜Ε͸ t, s ͷΈʹґଘ͢Δ͜ͱʹ஫ҙ͍ͯͩ͘͠͞ɻ
+
+ ͜ͷ໰୊͸࣍ͷΑ͏ʹݴ͍ ׵͑ΒΕ·͢:
+
+ ແ ޲ άϥϑ͕༩͑ΒΕΔɻ ֤ ௖఺ʹ͸஋0 ͔ 1 ͕ॻ͍ͯ͋Δɻ࠷ େͰԿ ݸ 1 ͕ॻ͍ͯ͋Δ௖఺Λ ؚ ΊΔ
+
+path ͕ͱΕΔ͔?
+  (∵b0, .., bK ͸೚ҙͷ path ΛͱΕ·͢. path ΛΘ͟Θ͟୹͘͢Δඞཁ͸ͳ͍ͷͰ, b0, bK ͸༿ͱͯ͠Α͍
+Ͱ͢ɻ௖఺਺͕ 2 Ҏ্ͳΒ ఆٛ ͔Β༿, ಛʹ b0 ʹॻ͍ͯ͋Δ஋͸ 0 ͳͷͰɺ݁ہ (্ͷ໰୊ͷ౴͑) ×2 ͕ f
+ʹͳΓ·͢ɻ)
+
+ ͜Ε͸໦ͷ௚ ܘ Λ ٻ ΊΔͷͱಉ༷ͷΞϧΰϦζϜͰ dfs 2 ճͰՄೳͰ͢ɻ ͜ΕͰ O(N) Ͱ ݩ ͷ໰୊ͷ౴͑
+
+͕ٻ·Γ·ͨ͠ɻ
+ ॳ ظ ঢ়ଶͰന͍௖఺͕ 0 ݸ,1 ݸ ͷίʔφʔέʔεʹ஫ҙ͍ͯͩ͘͠͞ɻ(1 ݸ ͷ৔ ߹ ͸্ͷ ∵಺ͷଠ ࣈ ෦෼
+͕੒Γཱͨͳ͍ͷͰ)
+
+
+
+
+
+                                             4
+
+             ABC097 / ARC097 Editorial
+
+
+                                  sigma425
+
+
+
+A: Colorful Transceivers
+
+ C++ example:
+
+#include <bits/stdc ++.h>
+using namespace std;
+int main (){
+         int a,b,c,d;
+         cin >>a>>b>>c>>d;
+        if(abs(a-c)<=d || (abs(a-b)<=d && abs(b-c)<=d)) puts (" Yes ");
+         else puts ("No ");
+}
+
+
+B: Exponential
+
+ C++ example:
+
+#include <bits/stdc ++.h>
+using namespace std;
+int main (){
+         int X;
+         cin >>X;
+         vector <bool > expo(X+1);
+
+
+         expo [1] = 1;
+        for(int b=2;b<=X;b++){
+                  int v = b*b;
+                while(v<=X){
+                         expo[v] = 1;
+                             v *= b;
+                   }
+          }
+        for(int i=X;i >=1;i--) if(expo[i]){
+                  cout <<i<<endl;
+                 return 0;
+          }
+}
+
+
+
+
+
+                                             1
+
+C: K-th Substring
+
+  For an arbitrary string t, each of its proper suﬃx is lexicographically smaller than t, and the lexico-
+
+graphic rank of t is at least |t|. Thus, the length of the answer is at most K.
+
+  Generate all substrings of s whose lengths are at most K. Sort them, unique them, and print the K-th
+one. This solution works in O(NK2(logNK)) time, where N = |S|.
+
+
+D: Equals
+
+  Consider a graph G: there are N vertices numbered 1 through N, and for each j there is an edge
+
+(xj, yj).
+  Then, by performing some operations, pi can be i if they are in the same connected component of the
+graph. We can also prove that we can satisfy pi = i for all such i simultaneously. (Formal proof: take
+a spanning tree of a connected component. Choose its leaf v, perform opeartions such that pv = v is
+
+satisﬁed, and never make operations involving v after that.)
+
+ We can compute the number of such i by DFS or DSU.
+
+
+
+
+
+                                             2
+
+E: Sorted and Sorted
+
+  Suppose that we know the ﬁnal order of balls. Then, we can compute the number of operations as an
+
+inversion number: the number of ordered pairs of two balls (x, y) such that x is to the left of y at the
+
+beginning, but x is to the right of y in the ﬁnal order.
+
+  Let’s decide the positions of balls and place them one by one, from left to right (in the ﬁnal order).
+
+From the constraints in the statement, at any moment, the set of placed balls must be of the form ”i
+
+black balls numbered 1 through i, and j white balls numbered 1 through j”. Deﬁne dpi,j as the minimum
+possible inversion number among them when we place those balls. The answer is dpN,N.
+
+  Then, the recurrence formula will be as follows:
+
+  dpi,j = min(dpi−1,j + costbi−1,j, dpi,j−1 + costwi,j−1)
+  Here, costbi,j is the cost required to append black i+1 when the ﬁrst i black balls and the ﬁrst j white
+
+balls are already placed. That is, the number of balls that are already placed and initially placed to the
+
+right of black i + 1. Similarly, costwi,j are deﬁned.
+ We can pre-compute the arrays costbi,j, costwi,j like preﬁx sums in O(N 2). Thus, this solution works
+in O(N 2) time.
+
+
+
+
+
+                                             3
+
+F: Monochrome Cat
+
+   If the tree contains a black leaf, it never makes sense to visit it. Thus, we can repeatedly remove black
+
+leaves until all leaves become white. (This can be implemented by, for example, using a queue.) From
+
+now on, we assume that all leaves in the input tree are white. We also assume that the tree has at least
+
+two white vertices to avoid some special cases.
+
+  Suppose that we are given two vertices s and t, and the cat must start at s and end at t. How many
+
+operations do we need in this case?
+
+  First, for each edge e, let’s compute the number of times the cat passes through e.
+
+    • It never makes sense to pass through it three or more times. For example, suppose that we move
+
+      between two vertices a and b three times. The sequence of operations will look like ”W →(a ⇒b)
+
+   →X →(b ⇒a) →Y →(a ⇒b) →Z” However, we can replace it with ”W →Y →(ﬂip a) →
+
+      (a ⇒b) →(ﬂip b) →X →Z” and the number of operations will be smaller. Here, W, X, Y, Z
+
+      represent some sequences of operations, a ⇒b denotes an operation of the ﬁrst type, and ﬂip a
+
+      denotes an operation of the second type.
+
+    • We must pass through each edge at least once (otherwise some white leaves will be left unvisited.)
+
+  Thus, if e is on the path between s and t, we pass through it exactly once, otherwise we pass through
+
+it exactly twice. The trajectory of the cat will look as follows:
+
+
+
+
+
+  Now, we know the number of operations of the ﬁrst type. How can we compute the number of
+
+operations of the second type?
+
+  Suppose that if we never make operations of the second type, k white vertices remains. Then, we need
+
+k extra steps to change the color of those vertices. This is always possible because we visit all vertices.
+
+  Let’s call those k vertices ”bad vertices”, and other vertices ”good vertices”. Depending on the initial
+
+color and the parity of degree of the vertex, there are two types of vertices:
+
+    • It becomes a bad vertex if it is on the s −t path, otherwise it becomes a good vertex.
+
+    • It becomes a good vertex if it is on the s −t path, otherwise it becomes a bad vertex.
+
+  In summary, the total number of opeartions can be computed as follows (for a given pair of s, t):
+
+    • Add twice the total number of edges.
+
+
+
+                                             4
+
+    • Subtract the distance between s and t.
+
+    • Subtract the number of bad vertices.
+
+  This can be simpliﬁed as follows. For each vertex, the cost of zero or two is assigned depending on the
+
+type of the vertex mentioned above. Then,
+
+    • Add twice the total number of edges, plus one.
+
+    • Subtract the total cost of all vertices on the path between s and t.
+
+ Now our objective is to ﬁnd a path that maximize the total cost of vertices on it. This is similar to
+
+the computation of diamater of a weighted tree, and can be done in O(N).
+
+
+
+
+
+                                             5

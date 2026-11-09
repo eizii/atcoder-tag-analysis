@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc304_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc304/editorial/6494",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは practice contest の問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。 また、プログラミングコンテストの問題に慣れていない方は、 AtCoder Beginners Selection の問題をいくつか解いてみることをおすすめします。 問題文中に指示された通りの処理を実際に行うプログラムを作成することで本問題に正解できます。具体的には、 まず、 \\(N\\) 人全員の年齢を順に調べて、最も若い人の番号 \\(p\\) を求め、 その後、人 \\(p\\) から時計回りに \\(N\\) 人全員の名前を出力する ことを行えば良いです。 \\(N\\) 人全員の年齢を調べる・名前を出力するには、プログラミング言語の標準的な機能である繰り返しの機能（ for 文など）を用いることができます。 また実装上の工夫として、 \\(N\\) 人を \\(1, 2, \\ldots, N\\) と番号付けする代わりに、それぞれの番号を \\(1\\) 減らした \\(0, 1, \\ldots, N-1\\) という番号付けを用いることで、人 \\(p\\) から時計回りで \\(i\\) 番目の人（人 \\(p\\) 自身を \\(0\\) 番目として起算）の番号は \\((p + i) \\bmod N\\) と表すことができて便利です（ここで \\(x \\bmod y\\) は \\(x\\) を \\(y\\) で割ったあまりを表します）。 以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <utility>\nusing namespace std;\n\nint main(void)\n{\n  int n, a[100];\n  string s[100];\n  \n  cin >> n;\n  for(int i = 0; i < n; i++) cin >> s[i] >> a[i];\n  \n  pair<int, int> m = {a[0], 0};\n  for(int i = 1; i < n; i++) m = min(m, {a[i], i});\n  int p = m.second;\n  \n  for(int i = 0; i < n; i++) cout << s[(p+i)%n] << endl;\n  \n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "d6fdc4a33aaa0d5490a1e759d315533b520586a0826268a8b59f7a2aa46f35d0"
+    }
+  ],
+  "status": "available"
+}

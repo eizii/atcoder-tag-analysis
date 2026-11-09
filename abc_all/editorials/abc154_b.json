@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc154_b",
+  "editorials": [
+    {
+      "text": "B: I miss you...\n問題文の通りに実装してもよいですし，S の長さと同じ数だけx を出力すると捉えて簡潔に書くこ\nともできます．\n実装例は次のとおりです．\nListing 1\nC での実装例\n1 #include <stdio.h>\n2\n3 char s[101];\n4\n5 int main(void){\n6\nscanf(\"%s\", s);\n7\n8\nfor (int i = 0; s[i]; i++) {\n9\ns[i] = 'x';\n10\n}\n11\n12\nputs(s);\n13\n14\nreturn 0;\n15 }\nListing 2\nPython3 での実装例\n1 s = input().rstrip()\n2 print('x' * len(s))\n",
+      "text_sha256": "d6941ee364d9ae23aaa7d8beac918fb22f98143c0afa766f5cc09d41dbf86161",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc154/abc154_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

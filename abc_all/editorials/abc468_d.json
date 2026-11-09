@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc468_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc468/editorial/23736",
+      "text": "まず奇数長の良い文字列の個数を求めます。 良い文字列の中央の文字の位置を全探索します。この中央の文字を \\(i\\) 番目とします。 中央が \\(i\\) 番目で長さ \\(2k+1\\) の部分文字列が良い文字列になることは \\(S_{i-j}\\neq S_{i+j}\\) を満たす \\(j=1,2,\\ldots,k\\) の個数が \\(1\\) 個以下となることと同値です。したがって、 \\(k\\) の昇順に \\(S_{i-j}\\neq S_{i+j}\\) となる \\(1\\le j\\le k\\) の個数が \\(1\\) 個以下であるか判定すれば良いです。 偶数長の良い文字列の個数も同様に求めることができます。 以上を適切に実装することでこの問題に正答することができます。計算量は \\(O(N^2)\\) です。 実装例(Python3) Bonus： \\(|S| \\le 10^5\\) で解いてみてください。",
+      "codes": [
+        "s = input()\nn = len(s)\nans = 0\nfor k in range(2):\n    for st in range(n):\n        l, r = st - k, st\n        cnt = 0\n        while 0 <= l and r < n:\n            if s[l] != s[r]:\n                cnt += 1\n                if cnt == 2:\n                    break\n            l -= 1\n            r += 1\n            ans += 1\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "2386a0f2cfde98bb85b679131e15d7cac3b9975d32907e5c5f8da5dffed70914"
+    }
+  ],
+  "status": "available"
+}

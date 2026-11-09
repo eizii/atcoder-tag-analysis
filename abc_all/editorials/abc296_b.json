@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc296_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc296/editorial/6081",
+      "text": "*\nが書かれているマスがどこにあるかを見つけ、そのマスの名前を求めます。添字のindexが盤面の縦と横のどちらに対応するのか、indexが増える向きが盤面の上下/左右どちらに対応するのか、配列や文字列の添字が0から始まるのか1から始まるのかに注意して実装しましょう。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tvector<string>s(8);\n\tfor(int i=0;i<8;i++)cin >> s[i];\n\tfor(int i=0;i<8;i++)for(int j=0;j<8;j++){\n\t\tif(s[i][j]=='*'){\n\t\t\tcout << \"abcdefgh\"[j] << 8-i << endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n}",
+        "S=[input() for _ in range(8)]\nfor i in range(8):\n  for j in range(8):\n    if S[i][j]=='*':\n      print(f\"{'abcdefgh'[j]}{8-i}\")\n      exit()"
+      ],
+      "text_sha256": "43dcb3438f100141e9048374d520936655e494356e33760be981e3ea983807d5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc296/abc296_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

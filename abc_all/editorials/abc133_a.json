@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc133_a",
+  "editorials": [
+    {
+      "text": "A: T or T\n電車を使った場合はN × A 円、タクシーを使った場合はB 円かかります。よって、N × A とB の小さい\n方を出力すれば良いことになります。これをC++ で実装した例を以下に示します。\n1 #include <bits/stdc++.h>\n2\n3 using namespace std;\n4\n5 int main() {\n6\nint N, A, B; cin >> N >> A >> B;\n7\nint ans = min(N * A, B);\n8\ncout << ans << endl;\n9 }\n",
+      "text_sha256": "e286caf9998b64643c6b574b44a79b0e3f548233f8a20bbaed19ef0aab47dccc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc133/abc133_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc377_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc377/editorial/11246",
+      "text": "置くことができるマスも置くことができないマスも非常に大きくなる場合があるため、それらを直接管理することは難しいです。 ここで、複数の異なる方向からコマが効いているマスについて考えます。\nこのようなマスの個数は \\(O(M ^ 2)\\) 個と評価できます。 よって、例えば、コマが効いている縦・横・斜めのマスの連なりごとに、これまでに見たマスを数えることでこの問題を解くことができます（同一の連なりを排除した上で、これまでに見たマスとして数えられるマスが全体で \\(O(M ^ 2)\\) 個となります）。 時間計算量は \\(O(M ^ 2)\\) や \\(O(M ^ 2\\log M)\\) などとなります。 実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <set>\n\nint main(){\n    using namespace std;\n    unsigned N, Q;\n    cin >> N >> Q;\n\n    // 横・縦・斜めの効き\n    set<unsigned> horizontal, vertical, diagonal_slash, diagonal_backslash;\n    for (unsigned i{}; i < Q; ++i){\n        unsigned x, y;\n        cin >> x >> y;\n        horizontal.emplace(x);\n        vertical.emplace(y);\n        diagonal_slash.emplace(x + y);\n        diagonal_backslash.emplace(x - y);\n    }\n\n    // 縦と横はすぐに計算できる\n    unsigned long ans{(N - size(horizontal)) * (N - size(vertical))};\n\n    // 斜め方向 1（x + y が一定）\n    for (const auto d : diagonal_slash) {\n        // すでに見たマスの x 座標\n        set<unsigned> cross_x;\n        for (const auto x : horizontal)\n            // 交点が内側なら追加\n            if (1 <= d - x && d - x <= N)\n                cross_x.emplace(x);\n        for (const auto y : vertical)\n            // 交点が内側なら追加\n            if (1 <= d - y && d - y <= N)\n                cross_x.emplace(d - y);\n\n        // マスの個数 2 min(d, N + 1) - d - 1 から、すでに見たマスの個数を除いたものが新しく見たマスの個数\n        ans -= 2 * min(d, N + 1) - d - 1 - size(cross_x);\n    }\n\n    // 斜め方向 2（x - y が一定）\n    for (const auto d : diagonal_backslash) {\n        // すでに見たマスの x 座標\n        set<unsigned> cross_x;\n        for (const auto x : horizontal)\n            // 交点が内側なら追加\n            if (1 <= x - d && x - d <= N)\n                cross_x.emplace(x);\n        for (const auto y : vertical)\n            // 交点が内側なら追加\n            if (1 <= d + y && d + y <= N)\n                cross_x.emplace(d + y);\n        for (const auto e : diagonal_slash)\n            // 交点が内側なら追加\n            if ((d + e) % 2 == 0 && 1 <= (d + e) / 2 && (d + e) / 2 <= N && 1 <= (e - d) / 2 && (e - d) / 2 <= N)\n                cross_x.emplace((d + e) / 2);\n        \n        // マスの個数 N - |d| から、すでに見たマスの個数を除いたものが新しく見たマスの個数\n        ans -= N - min(d, -d) - size(cross_x);\n    }\n\n    cout << ans << endl;\n    return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "0c1f1d339f7d9c2bc034d0a3b3e62a12fb7bf8361e9c1244c7c70e39e37a0354"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc290_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc290/editorial/5767",
+      "text": "この問題を解くには、まず以下の事実を知っている (あるいは実験などで見つける) 必要があります。\n\\(A,B\\)\nを正整数とし、\n\\(A\\)\nと\n\\(B\\)\nの最大公約数を\n\\(g\\)\nとおく。\n\\(A=ag,B=bg\\)\nと表されるとき、\n\\(a\\)\n個の数\n\\(0,B \\bmod A,2B \\bmod A,\\dots,(a-1)B\\bmod A\\)\nの中には、\n\\(0,g,2g,\\dots,(a-1)g\\)\n(すなわち\n\\(0\\)\n以上\n\\(A\\)\n未満の\n\\(g\\)\nの倍数) がちょうど\n\\(1\\)\n回ずつ現れる。\n例えば\n\\(A=12,B=9\\)\nのとき、\n\\(g=3,a=4,b=3\\)\nです。このとき、\n\\(0,B\\bmod A,2B\\bmod A, 3B\\bmod A\\)\nの値はそれぞれ\n\\(0,9,6,3\\)\nですから、\n\\(0\\)\n以上\n\\(A\\)\n未満の\n\\(g\\)\nの倍数がちょうど\n\\(1\\)\n回ずつ現れています。\nこの事実を用いて元の問題を解いていきましょう。以下、\n\\(N\\)\nと\n\\(D\\)\nの最大公約数を\n\\(g\\)\nとおき、\n\\(N=gn,D=gd\\)\nとします。\n\\(0,D \\bmod N,2D \\bmod N,\\dots,(n-1)D\\bmod N\\)\nが全て異なることから、\n\\(i\\ (1\\leq i \\leq n)\\)\n番目に印をつけるマスは\n\\((i-1)D\\bmod N\\)\nです。\n\\(n <N\\)\nすなわち\n\\(g\\geq2\\)\nのととき、\n\\(n+1\\)\n番目に印をつけるマスを考えましょう。はじめ\n\\(x\\)\nは\n\\(nD\\bmod N\\)\nで初期化されますが、\n\\(nD = gnd=Nd\\)\nより\n\\(x=0\\)\nであるため、既に印が付いています。したがって\n\\(x=1\\)\nと更新されますが、\n\\(g\\geq2\\)\nよりマス\n\\(1\\)\nにはまだ印がついていないので、\n\\(n+1\\)\n番目に印をつけるのはマス\n\\(1\\)\nになります。その後は、先ほどと同様\n\\(1,1+(D \\bmod N),1+(2D \\bmod N),\\dots,1+((n-1)D\\bmod N)\\)\nに順に印をつけた後、\n\\(x=1\\)\nと初期化されるので\n\\(x=2\\)\nと更新し… と続いていきます。まとめると、\n\\(i\\ (1\\leq i \\leq n)\\)\n番目に印をつけるマスは\n\\((i-1)D\\bmod N\\)\nであり、これによって\n\\(g\\)\nの倍数のマス全てに印がつく。\n\\(n+i\\ (1\\leq i \\leq n)\\)\n番目に印をつけるマスは\n\\(1+((i-1)D\\bmod N)\\)\nであり、これによって\n\\(g\\)\nで割ると\n\\(1\\)\n余るマス全てに印がつく。\n\\(2n+i\\ (1\\leq i \\leq n)\\)\n番目に印をつけるマスは\n\\(2+((i-1)D\\bmod N)\\)\nであり、これによって\n\\(g\\)\nで割ると\n\\(2\\)\n余るマス全てに印がつく。\n(以下同様)\nというように操作が進んでいきます。よって、\n\\(K\\)\n番目に印をつけるマスは\n\\(\\lfloor \\frac{K-1}{n} \\rfloor + ((K-1)D \\bmod N)\\)\nと計算できます。\n想定解 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int t;\n    cin >> t;\n    while (t--) {\n        int n, d, k;\n        cin >> n >> d >> k;\n        --k;\n        int a = n / gcd(n, d);\n        cout << (long long) d * k % n + k / a << '\\n';\n    }\n}"
+      ],
+      "text_sha256": "526d4d8ac452e373e5cf6410f50d3a9b7e5362ea792546247b91cd221430d7cb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc290/abc290_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

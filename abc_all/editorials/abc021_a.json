@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc021_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc021/editorial.pdf",
+      "text": "A問題 足し算\n\n  問題概要 1.\n  アルゴリズム 2.\n\n\n\n\n\n2015/4/11                             ©AtCoder Inc. All rights reserved.                                      33\n\f\nA問題 問題概要\n\n• 整数 N が与えられる\n• 2の累乗数(1,2,4,8)のみの和で表わせ．\n• 同じものを使ってもよい．\n• 制約\n   – 1 ≦ N≦ 10\n\n\n\n\n\n2015/4/11                                                                                               4\n\f\nA問題 アルゴリズム\n\n• 同じものを使ってもよいという制約があるので1だけ\n 使って表せばよい\n• 組み合わせを構成する個数としてNを出力した後，\n N個の1を出力すれば満点\n\n\n入力例\n4\nこのアルゴリズムでの出力例\n4\n1\n1\n1\n1\n\n\n\n\n\n2015/4/11                                                                                               5\n\f\nA問題 アルゴリズム\n\n• 別解\n   – 同じものを使ってもよいという制約はなくても解ける\n   – Nの2進表現を考えれば，異なる2の累乗数(1,2,4,8,16,…)\n   を使って任意のNが表せる\n   – Nの2進表現において下からk桁目のビットが立っているな\n   ら2^kを組み合わせに加える．\n   – ビット演算についてはネットで検索しましょう\n\n\n\n\n\n2015/4/11                                                                                               6",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "cbdc5286ea018c652cd61511dbec0166ada1423623edd9c4599382c12c2eaeb5"
+    }
+  ],
+  "status": "available"
+}

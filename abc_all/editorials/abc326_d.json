@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc326_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc326/editorial/7539",
+      "text": "実は、「 各行 / 各列 に\nA\n,\nB\n,\nC\nがちょうど\n1 個ずつ含まれる 」を満たすグリッドは\n\\(N=5\\)\nの場合でも\n\\(66240\\)\n個しか存在しません。\nなので、様々な方針の枝刈り全探索でこの問題に正解することができます。この解説ではその一例を示します。\n以下、\n\\(N=5\\)\nであったとして説明します。\nまず、行の制約のみに着目します。このとき、以下の\n\\(2\\)\nつの条件を守ることになります。\n全ての行は\nABC..\nの並べ替えである\n上から\n\\(i\\)\n行目の最も左にある\n.\n以外の文字は\n\\(R_i\\)\nである\n各行についてこれを満たすものは\n\\(20\\)\n通りしかありません。 (\n\\((5 \\times 4 \\times 3 )/ 3 = 20\\)\n)\nこれを\n\\(5\\)\n行分試すことを考えます (合計\n\\(20^5\\)\n通り)\n上の行から順に決定していくことを考えます。このとき、以下の条件に違反してはなりません。\n各列は\nA\n,\nB\n,\nC\nを高々\n\\(1\\)\nつずつ含む。\n左から\n\\(j\\)\n列目の最も上にある\n.\n以外の文字は\n\\(C_j\\)\nである\nこれに違反したことが発覚した時点で、そこで探索を打ち切って構いません。\nそうして\n\\(N\\)\n行全てが決まった場合、最後に以下をチェックします。\n各行は\nA\n,\nB\n,\nC\nを丁度\n\\(1\\)\nつ含む。\nこの条件も満たしていれば、そのグリッドは問題文中の条件を全て満たしています。\nこの解法中で演算を行う回数は高々\n\\(20^5 \\times 5^2 = 8 \\times 10^7 \\times \\)\n( 小さな定数倍 ) 回程度と見積もれますが、実際は非常に高速に動作します。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nvector<vector<string>> row(3);\nbool fnd=false;\nint n;\nstring r,c;\nvector<string> grid;\n\nvoid dfs(int i,int fl){\n  if(fnd){return;}\n  if(i==n){\n    if(fl==0){\n      cout << \"Yes\\n\";\n      for(auto &nx : grid){cout << nx << \"\\n\";}\n      fnd=true;\n    }\n    return;\n  }\n  for(auto &nx : row[r[i]-'A']){\n    grid.push_back(nx);\n\n    int ufl=fl;\n    bool und=true;\n    for(int j=0;j<n;j++){\n      if(nx[j]=='.'){continue;}\n      int kind=(nx[j]-'A');\n      if((fl&(1<<(4*j+kind)))==0){und=false;break;}\n      ufl^=(1<<(4*j+kind));\n      if((fl&(1<<(4*j+3)))!=0){\n        if(nx[j]!=c[j]){und=false;break;}\n        ufl^=(1<<(4*j+3));\n      }\n    }\n\n    if(und){dfs(i+1,ufl);}\n    grid.pop_back();\n  }\n}\n\nint main(){\n  cin >> n >> r >> c;\n  string abc=\"ABC\";\n  while(abc.size()<n){abc.push_back('.');}\n  sort(abc.begin(),abc.end());\n  do{\n    char tg='.';\n    for(auto &nx : abc){\n      if(nx!='.'){tg=nx;break;}\n    }\n    row[tg-'A'].push_back(abc);\n  }while(next_permutation(abc.begin(),abc.end()));\n\n  dfs(0,(1<<(4*n))-1);\n  if(!fnd){cout << \"No\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "571178d25e159680cd0a5fd7988f8ae8d9f473268e0cba31ad0afb52d91a61bc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc326/abc326_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc326/editorial/7540",
+      "text": "各行各列に\nA\nがちょうど 1 個あるような\nA\nの置き方は\n\\(5!=120\\)\n通りあります。よって、問題文中の\n\\(1\\)\n番目の条件を満たすような\nA\n,\nB\n,\nC\nの配置の仕方は高々\n\\(120^3\\)\n通りです。これを全探索します。",
+      "codes": [
+        "import itertools\nN=int(input())\nR=input()\nC=input()\n\ndef head(s):\n  for c in s:\n    if c!=\".\":\n      return c\n\nfor a,b,c in itertools.product(itertools.permutations(range(N)),repeat=3):\n  if any(ai==bi or bi==ci or ci==ai for ai,bi,ci in zip(a,b,c)): continue\n  S=[[\".\"]*N for _ in range(N)]\n  for i,j in enumerate(a): S[i][j]=\"A\"\n  for i,j in enumerate(b): S[i][j]=\"B\"\n  for i,j in enumerate(c): S[i][j]=\"C\"\n  if \"\".join(map(head,S))==R and \"\".join(map(head,zip(*S)))==C:\n    print(\"Yes\")\n    print(*map(lambda s:\"\".join(s),S),sep=\"\\n\")\n    exit()\nprint(\"No\")"
+      ],
+      "text_sha256": "f9eedb7c40f1c69b5a03d3ef3e4bdd0ac43d98fc345e0422d8466d33e91d4ecc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc326/abc326_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

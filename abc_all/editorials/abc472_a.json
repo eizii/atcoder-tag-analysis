@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc472_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc472/editorial/24786",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは practice contest の問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。 また、プログラミングコンテストの問題に慣れていない方は、 AtCoder Beginners Selection の問題をいくつか解いてみることをおすすめします。 様々な実装方針が考えられます。実装例を参考にしてください。\nページの下部ではリンク先の実装例をいくつか抜粋して掲載しています。 文字列を一文字ずつ書き換える： 実装例(C++) 一文字ずつ答えを出力する： 実装例(C++) / 実装例(Python) 答えの文字列を別途構築する： 実装例(C++) / 実装例(Python) （発展）標準ライブラリの文字列・列操作を利用する： 実装例(C++, replace_if) / 実装例(Python, 正規表現) (C++) 文字列を一文字ずつ書き換える (Python) 一文字ずつ答えを出力する (C++)  答えの文字列を別途構築する (Python) 答えの文字列を別途構築する",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n  string S;\n  cin >> S;\n  for (int i = 0; i < S.size(); i++)\n    if (S[i] != 'A')\n      S[i] = '.';\n  /*\n  範囲 for 文を利用すれば以下のようにも書ける\n  for (char& c : S)\n    if (c != 'A')\n      c = '.';\n  */\n  cout << S << endl;\n}\n",
+        "S = input()\nfor c in S:\n  # 以下は print(\"A\" if c == \"A\" else \".\", end=\"\") とも書ける\n  if c == \"A\":\n    print(\"A\", end=\"\")\n  else:\n    print(\".\", end=\"\")\n",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n  string S;\n  cin >> S;\n  string T = \"\";\n  for (char c : S)\n    // 以下は T += c == 'A' ? 'A' : '.' とも書ける\n    if (c == 'A')\n      T += 'A';\n    else\n      T += '.';\n  cout << T << endl;\n}\n",
+        "S = input()\n# リスト内包表記と join を組み合わせる\nprint(\"\".join(\"A\" if c == \"A\" else \".\" for c in S))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "917f0dd2a590bcdbf865c5605f5a0c95a4fee14cd4ccd218b68f28a299b72fdb"
+    }
+  ],
+  "status": "available"
+}

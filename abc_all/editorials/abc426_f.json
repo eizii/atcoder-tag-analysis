@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc426_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc426/editorial/14143",
+      "text": "商品が売れていく過程を追跡すると、次の通りになります。\n注文に対し、商品の在庫が十分ある状態である。その商品を\n\\(k_i\\)\n個買える。\n商品はあるが、在庫が足りないような注文が高々ひとつ存在する。その商品を\n\\(0\\)\n個以上\n\\(k_i\\)\n個以下買える。\n注文に対し、商品の在庫が全くない状態である。その商品を\n\\(0\\)\n個買える。\n在庫の有無を管理した上で、真ん中のイベントを商品ごとに管理していけば、この問題を解くことができそうです。これをデータ構造を利用して実現しましょう。\n以下の手続きでこの問題を解くことができます。\n\\(i=1,2,\\dots,Q\\)\nの順に、\n\\(i\\)\n件目の注文を処理する。\n商品\n\\(l_i,l_i+1,\\dots,r_i\\)\nのうち、在庫切れイベント(後述) がまだ発生していないものの個数を\n\\(c\\)\nとすると、暫定的に答えを\n\\(c \\times k_i\\)\nとする。\n商品\n\\(l_i,l_i+1,\\dots,r_i\\)\nを\n\\(k_i\\)\n個ずつ減らす。\n減らした結果この区間に在庫が負の個数である商品が存在する限り、そのような商品\n\\(x\\)\nに対して以下の「在庫切れイベント」を発生させる。\n商品\n\\(x\\)\nの在庫が\n\\(-s\\)\n個である時、答えから\n\\(s\\)\n減算する。\nその後、商品\n\\(x\\)\nに対して再び在庫切れイベントが発生しないよう、便宜上商品\n\\(x\\)\nの在庫を十分大きく再設定する。\n在庫が負の個数である商品はセグメント木上の二分探索を用いて発見できる。\n一連の操作は、遅延伝搬セグメント木を利用するなどの方法で実装可能です。\n時間計算量は\n\\(O(N+Q \\log N)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/all>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing ll=long long;\nconst ll big=4e18;\n\nll op_pls(ll a,ll b){return a+b;}\nll e_pls(){return 0;}\n\nll op(ll a,ll b){return min(a,b);}\nll e(){return big;}\nll mapping(ll l,ll r){return l+r;}\nll composition(ll l,ll r){return l+r;}\nll id(){return 0;}\n\nbool g(ll x){ return (x>=0); }\n\nint main(){\n  ll n;\n  cin >> n;\n  vector<ll> a(n);\n  for(auto &nx : a){cin >> nx;}\n  vector<ll> ini_pls(n,1);\n  segtree<ll,op_pls,e_pls> seg_pls(ini_pls);\n  lazy_segtree<ll, op, e, ll, mapping, composition, id> seg(a);\n\n  ll q;\n  cin >> q;\n  while(q--){\n    ll l,r,k;\n    cin >> l >> r >> k;\n    l--;\n    ll res=seg_pls.prod(l,r)*k;\n    seg.apply(l,r,-k);\n    while(seg.prod(l,r)<0){\n      ll pos=seg.max_right<g>(l);\n      res+=seg.get(pos);\n      seg.set(pos,big);\n      seg_pls.set(pos,0);\n    }\n    cout << res << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "f27d56b5f3ccd1714073d569c62744ace9a8b0e65c51821c9de90e45e5ef4c6b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc426/abc426_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

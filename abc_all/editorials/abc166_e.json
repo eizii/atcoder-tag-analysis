@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc166_e",
+  "editorials": [
+    {
+      "text": "E: This Message Will Self-Destruct in Five Seconds\n参加者i, j (i < j) について，条件は以下のように書けます:\nj −i = Ai + Aj\nこれを式変形すると，以下のようになります:\ni + Ai = j −Aj\nそこで，Li = i + Ai, Ri = i −Ai と定義すると，条件はLi = Rj と言い換えられます．したがっ\nて，とり得る値X を全て試し，\n{\nLi = X\nRj = X\nを満たす(i, j) の組を求めればいいですが，上と下の条件は独立なので，たとえば連想配列を使えば\n簡単に求まります．\n計算量はO(N log N) 時間(X を見る範囲を少し工夫すればΘ(N) 時間) です．\n",
+      "text_sha256": "eb43c93cb02a2b904450559e787e1f154d3b33d0f430987eb653d3d87c130fe4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc166/abc166_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

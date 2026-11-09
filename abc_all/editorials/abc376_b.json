@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc376_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc376/editorial/11192",
+      "text": "\\(Q\\)\n個の指示を順番に見ていきながら、現在の左手・右手の位置、および今までに行なった操作回数の最小値を管理することを考えます。手の位置の管理は簡単なので、この問題を解く上でメインとなるのは、以下のようなクエリに答えるためのプログラムを書くことです。\n\\(1\\)\n以上\n\\(N\\)\n以下の整数\n\\(\\mathrm{from},\\mathrm{to},\\mathrm{ng}\\)\nが与えられる。円環上でパーツ\n\\(\\mathrm{from}\\)\nからパーツ\n\\(\\mathrm{to}\\)\nまで、パーツ\n\\(\\mathrm{ng}\\)\nを\n通らない\nように移動したいとき、移動回数の最小値は？（ただし、\n\\(\\mathrm{from}\\neq\\mathrm{ng},\\mathrm{to}\\neq\\mathrm{ng}\\)\nが保証される）\nこれは、\n\\(\\mathrm{from},\\mathrm{to},\\mathrm{ng}\\)\nの大小関係によって場合分けをすることで解くことができます。\n\\(3\\)\nつの整数の大小関係は\n\\(6\\)\n通りあるので、それらすべてを分けて考えてもよいですが、以下のようにすると\n\\(2\\)\n通りの場合分けで済み簡潔です。\nまず、\n\\(\\mathrm{from},\\mathrm{to}\\)\nは入れ替えてしまっても問題ない（すなわち、\n\\(\\mathrm{from}\\)\nから\n\\(\\mathrm{to}\\)\nに移動しても\n\\(\\mathrm{to}\\)\nから\n\\(\\mathrm{from}\\)\nに移動しても移動回数は変わらない）ことに着目します。これにより、\n\\(\\mathrm{from}>\\mathrm{to}\\)\nの場合は\n\\(\\mathrm{from}\\)\nと\n\\(\\mathrm{to}\\)\nを入れ替えることで、常に\n\\(\\mathrm{from}\\leq \\mathrm{to}\\)\nを満たすようにすることができます。（このように、固定できる大小関係を固定しておくことで場合分けを減らすテクニックはしばしば有効です。）\nあとは\n\\(\\mathrm{ng}\\)\nがどこにあるかが問題ですが、これは本質的には\n\\(2\\)\n通りしかありません：\n\\(\\mathrm{from}<\\mathrm{ng}<\\mathrm{to}\\)\nである場合とそれ以外の場合です。\n前者については、\n\\(\\mathrm{from}\\rightarrow\\mathrm{(from-1)}\\rightarrow\\dots\\rightarrow 1 \\rightarrow N\\rightarrow \\dots\\rightarrow \\mathrm{(to+1)}\\rightarrow\\mathrm{to}\\)\nと移動するのが最適なので、移動回数は\n\\((\\mathrm{from}-1)+1+(N-\\mathrm{to})=N+\\mathrm{from}-\\mathrm{to}\\)\nです。\n後者については、\n\\(\\mathrm{from}\\rightarrow\\mathrm{(from+1)}\\rightarrow\\dots\\rightarrow \\mathrm{(to-1)}\\rightarrow\\mathrm{to}\\)\nと移動するのが最適なので、移動回数は\n\\(\\mathrm{to}-\\mathrm{from}\\)\nです。\nよって、この場合分けを実装することで本問題を\n\\(O(N)\\)\nで解くことができます。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint num_move(int n, int from, int to, int ng) {\n    if (from > to) swap(from, to);\n    if (from < ng and ng < to) {\n        return n + from - to;\n    } else {\n        return to - from;\n    }\n}\n\nint main() {\n    int n, q;\n    cin >> n >> q;\n    int l = 1, r = 2;\n    int ans = 0;\n    for (int i = 0; i < q; i++) {\n        char h;\n        int t;\n        cin >> h >> t;\n        if (h == 'L') {\n            ans += num_move(n, l, t, r);\n            l = t;\n        } else {\n            ans += num_move(n, r, t, l);\n            r = t;\n        }\n    }\n    cout << ans << endl;\n}",
+        "def num_move(n, from_, to, ng):\n    if from_ > to:\n        from_, to = to, from_\n    if from_ < ng < to:\n        return n + from_ - to\n    else:\n        return to - from_\n\nn, q = map(int, input().split())\nl, r = 1, 2\nans = 0\n\nfor _ in range(q):\n    h, t = input().split()\n    t = int(t)\n    if h == 'L':\n        ans += num_move(n, l, t, r)\n        l = t\n    else:\n        ans += num_move(n, r, t, l)\n        r = t\n\nprint(ans)"
+      ],
+      "text_sha256": "a1d17adcfea3684e26a411da5f52ae1f90ede176d5bc5523b55f5ed19e32b4fc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc376/abc376_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc376/editorial/11206",
+      "text": "「\n\\(\\mathrm{ng}\\)\nを通らないように\n\\(\\mathrm{from}\\)\nから\n\\(\\mathrm{to}\\)\nまで行く移動回数の最小値は？」と問題を読み替えるところまでは同じです。\n以下のようにindexを振り直しても答えが変わらないので、\n\\(\\mathrm{from}\\)\nが\n\\(0\\)\nになるようにindexを振り直します。具体的には\n\\(i\\)\nを\n\\((i-\\mathrm{from})\\bmod N\\)\nに置きまえます。\nあとは\n\\(0<\\mathrm{to}<\\mathrm{ng}\\)\nなら\n\\(0\\to 1\\to\\ldots\\to\\mathrm{to}\\)\n、そうでないなら\n\\(0\\to N-1\\to\\ldots\\to\\mathrm{to}\\)\nと移動するのが最小です。",
+      "codes": [
+        "N,Q=map(int,input().split())\nL,R=1,2\nans=0\nfor _ in range(Q):\n  H,T=input().split()\n  T=int(T)\n  if H=='L':\n    to=(T-L)%N\n    ng=(R-L)%N\n    if ng<to: ans+=N-to\n    else: ans+=to\n    L=T\n  else:\n    to=(T-R)%N\n    ng=(L-R)%N\n    if ng<to: ans+=N-to\n    else: ans+=to\n    R=T\n\nprint(ans)"
+      ],
+      "text_sha256": "61d0043bffa8886dc742f03727b69fa35428f82361f50b495a33a10f24155a24",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc376/abc376_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

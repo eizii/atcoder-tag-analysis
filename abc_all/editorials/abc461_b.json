@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc461_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc461/editorial/21373",
+      "text": "原案:vwxyz\n斧\n\\(i\\)\nを持っていたのは木こり\n\\(B_i\\)\nであり、木こり\n\\(B_i\\)\nは斧\n\\(A_{B_i}\\)\nを持っていたと主張しています。\nしたがって、木こり\n\\(B_i\\)\nが本当のことを言っている条件は\n\\(A_{B_i}=i\\)\nです。\n制約から、\n\\(B_1,B_2,\\dots,B_N\\)\nに\n\\(1,2,\\dots,N\\)\nはちょうど\n\\(1\\)\n回ずつ登場します。\nしたがって、各\n\\(i\\)\nについて\n\\(A_{B_i}=i\\)\nを満たしているかどうかを判定すればよいです。\n計算量は\n\\(O(N)\\)\nです。\n本問題の答えが\nYes\nとなるようとき、\n\\(A\\)\nと\n\\(B\\)\nはそれぞれもう一方の逆順列と呼ばれます。\n\\(A\\)\nと\n\\(B\\)\nが長さ\n\\(N\\)\nの順列であるとき、\n\\(A\\)\nは\n\\(B\\)\nの逆順列である\n\\(\\Leftrightarrow\\)\n\\(B\\)\nは\n\\(A\\)\nの逆順列である\n\\(\\Leftrightarrow\\)\nすべての\n\\(i\\)\nで\n\\(A_{B_i}=i\\)\n\\(\\Leftrightarrow\\)\nすべての\n\\(i\\)\nで\n\\(B_{A_i}=i\\)\nが成り立ちます。",
+      "codes": [],
+      "text_sha256": "2a1fb9001b10d3dec6e042e24bcb2dd55b1be720bfe1efc24767cc303828380a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc461/abc461_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

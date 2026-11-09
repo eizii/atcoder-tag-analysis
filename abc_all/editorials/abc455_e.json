@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc455_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc455/editorial/19240",
+      "text": "原案:vwxyz\n部分文字列に含まれる\nA\n,\nB\n,\nC\nの個数をそれぞれ\n\\(A,B,C\\)\nとします。\n条件\n\\(X\\)\nを満たすような部分文字列の個数を\n\\(f(X)\\)\nと表すことにします。\n包除原理より、求める答えは\n\\(\\frac{N(N+1)}{2}-f(A=B)-f(A=C)-f(B=C)+3f(A=B=C)-f(A=B=C)\\\\\n=\\frac{N(N+1)}{2}-f(A=B)-f(A=C)-f(B=C)+2 f(A=B=C)\\)\nと変形できます。\n\\(f(A=B=C)\\)\nの求め方を書きます（それ以外も同様に求めることができます）。\n\\(S\\)\nの先頭から\n\\(i(0 \\leq i \\leq N)\\)\n文字に含まれる\nA\n,\nB\n,\nC\nの個数をそれぞれ\n\\(A_i,B_i,C_i\\)\nと表すことにすると、\n\\(S\\)\nの\n\\(l+1\\)\n文字目から\n\\(r\\)\n文字目まで(\n\\(0 \\leq l \\lt r \\leq N\\)\n)に含まれる\nA\n,\nB\n,\nC\nの個数はそれぞれ\n\\(A_r-A_l,B_r-B_l,C_r-C_l\\)\nです。\n\\(A_r-A_l=B_r-B_l=C_r-C_l\\)\nは\n\\((A_l-B_l,A_l-C_l)=(A_r-B_r,A_r-C_r)\\)\nと同値なので、各\n\\(i\\)\nについて\n\\((A_i-B_i,A_i-C_i)\\)\nを求め、これが等しいような\n\\(l,r\\)\nのペアの個数を求めればよいです。\n\\((A_i-B_i,A_i-C_i)\\)\nの出現回数を連想配列などで管理します。\n同じペアが\n\\(c\\)\n回出現するとき、その中から\n\\(l,r\\)\nを選ぶ方法は\n\\(\\frac{c(c-1)}{2}\\)\n通りあり、これを足し合わせていくことで\n\\(f(A=B=C)\\)\nを\n\\(O(N)\\)\nや\n\\(O(N\\log N)\\)\nで計算することができます。\n同様に\n\\(f(A=B),f(A=C),f(B=C)\\)\nも求めることができ、答えを求めることができます。",
+      "codes": [],
+      "text_sha256": "2ccfc4ebd0176231f810ab1c0d7776bc41962d938526b5b96e7fa63c1d47d135",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc455/abc455_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc455/editorial/19891",
+      "text": "文字列\n\\(S\\)\nの先頭から\n\\(i\\)\n文字（\n\\(0 \\le i \\le N\\)\n）に含まれる\nA\n,\nB\n,\nC\nの個数をそれぞれ\n\\(A_i,  B_i, C_i\\)\nとします。\nさらに、次のように差分を定義します。\n\\[\nx_i := B_i - A_i,\\quad y_i := C_i - A_i\n\\]\n区間\n\\((i, j]\\)\n（すなわち\n\\(i+1\\)\n文字目から\n\\(j\\)\n文字目）の部分文字列を考えます。\nこの部分文字列における各文字の出現回数は、\n\\[\nA_j - A_i,\\; B_j - B_i,\\; C_j - C_i\n\\]\nです。\nこれらが\nすべて異なる\nための条件は、以下の3つです。\n\\(A\\)\nと\n\\(B\\)\nが異なる\n\\(\nB_j - B_i \\ne A_j - A_i \\;\\Longleftrightarrow\\; x_j \\ne x_i\n\\)\n\\(A\\)\nと\n\\(C\\)\nが異なる\n\\(\nC_j - C_i \\ne A_j - A_i \\;\\Longleftrightarrow\\; y_j \\ne y_i\n\\)\n\\(B\\)\nと\n\\(C\\)\nが異なる\n\\(\nB_j - B_i \\ne C_j - C_i\n\\;\\Longleftrightarrow\\;\nx_j - x_i \\ne y_j - y_i\n\\)\n最後の条件は変形して\n\\[\ny_j - x_j \\ne y_i - x_i\n\\]\nと書けます。\nここで重要な観察として、\n\\(x_i \\ne x_j\\)\nのもとでは\n\\(y_i = y_j\\)\nと\n\\(y_i - x_i = y_j - x_j\\)\nが同時に成立することはない\nという点があります。\nしたがって、\n\\(x_i\\)\nごとにグループ化し、その中で\n\\(y_i\\)\nの一致数\n\\(y_i - x_i\\)\nの一致数\nを数えることで、重複を気にせずそれぞれ独立に引いてよいです。\n実装例 (C++)",
+      "codes": [],
+      "text_sha256": "8f180f7b3c19dfed596d7611f7512b28b56621206907233c58e408afe3bbe705",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc455/abc455_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

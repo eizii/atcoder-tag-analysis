@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc402_g",
+  "title": "Sum of Prod of Mod of Linear",
+  "contests": [
+    {
+      "contest_id": "abc402",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 3381,
+  "raw_difficulty": 3381,
+  "contest_id": "abc402",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc402/tasks/abc402_g",
+  "statement": "配点 : 650 点 問題文 整数 N,M,A,B_1,B_2 が与えられます。 \\displaystyle\\sum_{k=0}^{N-1}\\left\\lbrace (Ak+B_1)\\ \\text{mod}\\ M \\right\\rbrace\\left\\lbrace (Ak+B_2)\\ \\text{mod}\\ M \\right\\rbrace を求めてください。 T 個のテストケースが与えられるので、それぞれについて答えを求めてください。 制約 1\\le T\\le 10^5 1\\le N\\le 10^6 1\\le M\\le 10^6 0\\le A,B_1,B_2 < M 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 T \\text{case}_1 \\text{case}_2 \\vdots \\text{case}_T ただし、 \\text{case}_i は i 個目のテストケースを表す。 各テストケースは以下の形式で与えられる。 N M A B_1 B_2 出力 T 行出力せよ。 i 行目には i 番目のテストケースの答えを出力せよ。 入力例 1 5\r\n4 7 2 1 4\r\n12 15 2 8 7\r\n777 1 0 0 0\r\n100 101 0 100 100\r\n402 402 4 19 256 出力例 1 27\r\n866\r\n0\r\n1000000\r\n13728568 1 番目のテストケースについて考えます。 k=0 のとき： \\left\\lbrace (2k+1)\\ \\text{mod}\\ 7 \\right\\rbrace=1,\\ \\left\\lbrace (2k+4)\\ \\text{mod}\\ 7 \\right\\rbrace=4 です。 k=1 のとき： \\left\\lbrace (2k+1)\\ \\text{mod}\\ 7 \\right\\rbrace=3,\\ \\left\\lbrace (2k+4)\\ \\text{mod}\\ 7 \\right\\rbrace=6 です。 k=2 のとき： \\left\\lbrace (2k+1)\\ \\text{mod}\\ 7 \\right\\rbrace=5,\\ \\left\\lbrace (2k+4)\\ \\text{mod}\\ 7 \\right\\rbrace=1 です。 k=3 のとき： \\left\\lbrace (2k+1)\\ \\text{mod}\\ 7 \\right\\rbrace=0,\\ \\left\\lbrace (2k+4)\\ \\text{mod}\\ 7 \\right\\rbrace=3 です。 よって、求める値は 1\\times 4+3\\times 6+5\\times 1+0\\times 3=27 です。したがって、 1 行目には 27 を出力してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 整数 N,M,A,B_1,B_2 が与えられます。 \\displaystyle\\sum_{k=0}^{N-1}\\left\\lbrace (Ak+B_1)\\ \\text{mod}\\ M \\right\\rbrace\\left\\lbrace (Ak+B_2)\\ \\text{mod}\\ M \\right\\rbrace を求めてください。 T 個のテストケースが与えられるので、それぞれについて答えを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\le T\\le 10^5 1\\le N\\le 10^6 1\\le M\\le 10^6 0\\le A,B_1,B_2 < M 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 T \\text{case}_1 \\text{case}_2 \\vdots \\text{case}_T ただし、 \\text{case}_i は i 個目のテストケースを表す。 各テストケースは以下の形式で与えられる。 N M A B_1 B_2"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 T 行出力せよ。 i 行目には i 番目のテストケースの答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\n4 7 2 1 4\r\n12 15 2 8 7\r\n777 1 0 0 0\r\n100 101 0 100 100\r\n402 402 4 19 256"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 27\r\n866\r\n0\r\n1000000\r\n13728568 1 番目のテストケースについて考えます。 k=0 のとき： \\left\\lbrace (2k+1)\\ \\text{mod}\\ 7 \\right\\rbrace=1,\\ \\left\\lbrace (2k+4)\\ \\text{mod}\\ 7 \\right\\rbrace=4 です。 k=1 のとき： \\left\\lbrace (2k+1)\\ \\text{mod}\\ 7 \\right\\rbrace=3,\\ \\left\\lbrace (2k+4)\\ \\text{mod}\\ 7 \\right\\rbrace=6 です。 k=2 のとき： \\left\\lbrace (2k+1)\\ \\text{mod}\\ 7 \\right\\rbrace=5,\\ \\left\\lbrace (2k+4)\\ \\text{mod}\\ 7 \\right\\rbrace=1 です。 k=3 のとき： \\left\\lbrace (2k+1)\\ \\text{mod}\\ 7 \\right\\rbrace=0,\\ \\left\\lbrace (2k+4)\\ \\text{mod}\\ 7 \\right\\rbrace=3 です。 よって、求める値は 1\\times 4+3\\times 6+5\\times 1+0\\times 3=27 です。したがって、 1 行目には 27 を出力してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc402/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:32.509685+00:00",
+  "statement_sha256": "8f63cac8f46313576e0cb6e3aa34c6acff7a7154bb5b5d38f2b7a687e0454a11",
+  "editorials": []
+}

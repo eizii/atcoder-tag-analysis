@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc405_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13008",
+      "text": "\\(i < j\\)\nなる全ての\n\\(i,j\\)\nの組について愚直に\n\\(A_iA_j\\)\nの値を計算していると、計算量が\n\\(O(N^2)\\)\nとなってしまい間に合いません。したがって、何らかの高速化を行う必要があります。\n少し唐突ですが、\n\\(i=1,2,\\dots,N\\)\nそれぞれについて、\n\\(S_i=A_1+A_2+\\dots+A_i\\)\nと定義します。すると、\n\\(\\displaystyle \\sum_{1\\leq i< j\\leq N} A_iA_j = \\sum_{j=2}^{N}\\sum_{i=1}^{j-1} A_iA_j = \\sum_{j=2}^{N}\\left(A_j\\cdot\\left(\\sum_{i=1}^{j-1} A_i\\right)\\right)=\\sum_{j=2}^{N}A_jS_{j-1}\\)\nとなるため、数列\n\\(S=(S_1,S_2,\\dots,S_N)\\)\nの各要素の値を事前に求めておけば、\n\\(O(N)\\)\nで答えを計算することができます。\n数列\n\\(S\\)\nの各要素の値については、\n\\(S_{i+1}=S_i+A_{i+1}\\)\nという式によって\n\\(S_i\\)\nの値から\n\\(S_{i+1}\\)\nの値が簡単に求まることを利用し、\n\\(S_1,S_2,\\dots,S_N\\)\nの順に求めていくと、\n\\(O(N)\\)\nで全ての値を求めることができます。（これは\n累積和\nとよばれる非常に重要なアルゴリズムです。）\nよって、累積和を用いることで、全体で\n\\(O(N)\\)\nの計算量で本問題を解くことができました。\nなお、下記の実装例のように、数列\n\\(S\\)\nを陽に構築せず、答えの計算と各\n\\(S_i\\)\nの値の計算を同時に行うこともできます。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n    }\n\n    ll ans = 0, sum = 0;\n    for (int i = 0; i < n; i++) {\n        ans += sum * a[i];\n        sum += a[i];\n    }\n\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "3d7977025f9ebc4d2059a07c52d65392b083a7c390ef148f4c354697e3353c7b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13021",
+      "text": "\\( \\displaystyle \\sum_{i=1}^N \\sum_{j=1}^N A_i A_j  \\)\nという式を考えます。これは、\n\\(i\\)\nと\n\\(j\\)\nごとに分けたあと、添字を取り替えることで\n\\[\n\\sum_{i=1}^N \\sum_{j=1}^N A_i A_j = \\left( \\sum_{i=1}^N A_i \\right) \\left( \\sum_{j=1}^N A_j \\right) = \\left( \\sum_{i=1}^N A_i \\right)^2\n\\]\nのように変形できます。\nところで、\n\\( \\displaystyle \\sum_{i=1}^N \\sum_{j=1}^N A_i A_j  \\)\nは\n\\(i,j\\)\nの大小関係に着目して分解すると\n\\[\n\\sum_{i=1}^N \\sum_{j=1}^N A_i A_j = \\sum_{1 \\le i < j \\le N} A_i A_j + \\sum_{1 \\le i = j \\le N} A_i A_j + \\sum_{1 \\le j < i \\le N} A_i A_j\n\\]\nのように変形できますが、対称性から第一項と第三項が等しいことに着目し、さらに第二項の添字を取り替えることで\n\\[\n\\sum_{i=1}^N \\sum_{j=1}^N A_i A_j = 2 \\sum_{1 \\le i < j \\le N} A_i A_j + \\sum_{i=1}^N A_i^2 \n\\]\nとすることができます。移行して最初の式変形と合わせることで結局\n\\[\n \\sum_{1 \\le i < j \\le N} A_i A_j = \\frac{\\left( \\sum_{i=1}^N A_i \\right)^2 - \\sum_{i=1}^N A_i^2 }{2}\n\\]\nが得られます。右辺の2つの総和はいずれも\n\\(O(N)\\)\nで計算可能なので、この問題を\n\\(O(N)\\)\nで解くことができます。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n    int n; cin >> n;\n    vector<ll> a(n);\n    for (int i=0; i<n; i++) cin >> a[i];\n    ll sum = 0, square_sum = 0;\n    for (int i=0; i<n; i++) {\n        sum += a[i];\n        square_sum += a[i] * a[i];\n    }\n    ll ans = (sum * sum - square_sum) / 2;\n    cout << ans << \"\\n\";\n}"
+      ],
+      "text_sha256": "6880a7e4f0baf43d5fd14dd0a27f92c8ced84aa9448103226abdabb0c6de6e2f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13016",
+      "text": "同じ数同士の掛け算をまとめて一回で行うことを考えます。\n\\(A_i=k\\)\nを満たす\n\\(i\\)\nの数を\n\\(C_k\\)\nとすると\n\\(i\\)\nと\n\\(j(>i)\\)\nの掛け算が\n\\(C_iC_j\\)\n回行われ、\n\\(i\\)\nと\n\\(i\\)\nの掛け算が\n\\(\\frac{C_i(C_i-1)}{2}\\)\n回行われることから\n\\[\\sum_{1\\le i<j\\le N}A_i A_j=\\left(\\sum_{1\\le  i <j\\le \\max{C} }ijC_iC_j\\right)+\\left(\\sum_{1\\le  i \\le \\max{C} }i^2\\frac{C_i(C_i-1)}{2}\\right)\\]\nのように変形可能です。\n\\(1\\le A_i \\le 10^4\\)\nから\n\\(\\max{C}\\)\nは最大でも\n\\(10^4\\)\nですので\n\\(O((\\max{C})^2)\\)\nでも間に合います。\nACコード例\n(C++)",
+      "codes": [],
+      "text_sha256": "1b81f910126e1806e32a7430283e87eb6e73914aa6037d1825a2b901ec646e4d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

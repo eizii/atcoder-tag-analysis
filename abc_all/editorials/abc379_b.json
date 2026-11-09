@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc379_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc379/editorial/11320",
+      "text": "\\(S\\)\nの\n\\(i\\)\n文字目から\n\\(i+K-1\\)\n文字目までがすべて丈夫であるときに左から\n\\(i,i+1,\\ldots,i+K\\)\n番目にある歯を使ってイチゴを食べ、\n\\(S\\)\nの\n\\(i\\)\n文字目から\n\\(i+K-1\\)\n文字目までをすべて\nX\nに変更するという操作を\n\\(i=1,2,\\ldots,N-K+1\\)\nの順番で行うことで最大数のイチゴを食べることができます。\n実際にこの方法で食べることでイチゴを最大の個数食べられることは、ある連続した丈夫な歯を使って最大の個数のイチゴを食べるには左から順に\n\\(K\\)\n本ずつ歯を使うことでできることより示せます。\n実装する際には、文字列に対する操作が求められます。各言語における文字列の機能などを知っておくことで簡単に、短く実装できる場合があります。例えばある部分文字列を取得する時はC++では\nsubstr\nを用いることでよりシンプルに実装出来ます。\n実装例(C++)\n実装例(Python3)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, k;\n    cin >> n >> k;\n    string s;\n    cin >> s;\n    int ans = 0;\n    string t = string(k, 'O');\n    for (int i = 0; i < n - k + 1; ++i) {\n        if (s.substr(i, k) == t) {\n            ans++;\n            for (int j = i; j < i + k; j++) {\n                s[j] = 'X';\n            }\n        }\n    }\n    cout << ans << endl;\n}",
+        "n, k = map(int, input().split())\ns = list(input())\nans = 0\nt = 'O' * k\n\nfor i in range(n - k + 1):\n    if s[i:i + k] == list(t):\n        ans += 1\n        for j in range(i, i + k):\n            s[j] = 'X'\n\nprint(ans)"
+      ],
+      "text_sha256": "80768391510f02d0b1ac441442e825ccca75197a9db709b2e0a44e68f81461c9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc379/abc379_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,41 @@
+{
+  "problem_id": "abc431_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc431/editorial/14530",
+      "text": "それぞれの種類の部品について、「現在ロボットについているか」を管理することができれば、クエリではその情報を更新しつつ、情報をもとに重さを計算することでこの問題を解くことができます。\n\\(N\\) 個の「ついている/ついていない」の情報を管理するために、配列やリストなどの言語機能を用いるとよいでしょう。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n\nint main() {\n    using namespace std;\n    int X, N;\n    cin >> X >> N;\n    vector<int> W(N);\n    for (auto&& w : W)\n        cin >> w;\n    vector<bool> b(N); // b[i] := i 種類目のパーツがついていれば true, そうでなければ false\n\n    int Q;\n    cin >> Q;\n    for (int q = 0; q < Q; ++q) {\n        int P;\n        cin >> P;\n        --P;\n        if (b[P]) { // すでについていたら\n            b[P] = false; // 外す\n        } else { // ついていなければ\n            b[P] = true; // つける\n        }\n\n        // 重さを求める\n        int weight = X;\n        for (int i = 0; i < N; ++i) {\n            if (b[i]) { // i 番目のパーツがついていれば\n                weight += W[i]; // 重さを足す\n            }\n        }\n        cout << weight << endl;\n        // #include <numeric> して\n        // cout << transform_reduce(begin(W), end(W), begin(b), X) << endl;\n        // と書いてもいい\n    }\n    return 0;\n}",
+        "X = int(input())\nN = int(input())\nW = list(map(int, input().split()))\n\nb = [False] * N # b[i] := i 種類目のパーツがついていれば True, そうでなければ False\n\nQ = int(input())\n\nfor q in range(Q):\n    P = int(input())\n    P -= 1\n    if b[P]: # すでについていたら\n        b[P] = False # 外す\n    else: # ついていなければ\n        b[P] = True # つける\n\n    # 重さを求める\n    weight = X\n    for i in range(N):\n        if b[i]: # i 番目のパーツがついていれば\n            weight += W[i] # 重さを足す\n    print(weight)\n    # print(sum((w if f else 0 for w, f in zip(W, b)), X))\n    # と書いてもいい"
+      ],
+      "text_sha256": "db260a5ac616bf6eebd9bd0c57d55bd0180514afd58006e8668b144a02e0192f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc431/abc431_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc431/editorial/14544",
+      "text": "時間計算量\n\\(O(N+Q)\\)\nの解法における、簡潔な実装を紹介します。\nある部品\n\\(P\\)\nが取り付けられるとき、「現在のロボットの重さ」は\n\\(W_P\\)\nだけ増加します。この後に、再び\n\\(P\\)\nのクエリが処理されるとき、「現在のロボットの重さ」は\n\\(W_P\\)\nだけ減少、つまり\n\\(-W_P\\)\nだけ増加します。(これは、部品が取り外されたときにも、同じようなことが言えます。)\nよって、クエリが処理されたとき、\n\\(W_P \\leftarrow -W_P\\)\nと更新することで、毎クエリの最初には\n\\(W_P\\)\nを加算するだけでよく、条件分岐が必要なくなります。\nそのため、このように、陽にフラグ用の配列を持たずに実装することが可能です。\n実装例(Piet)\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#define rep(i, n) for (int i = 0; i < (int)(n); ++i)\n\nint main() {\n    int X, N;\n    cin >> X >> N;\n    vector<int> W(N);\n    rep(i, N) cin >> W[i];\n    \n    int Q;\n    cin >> Q;\n    rep(q, Q) {\n        int P;\n        cin >> P;\n        --P;\n        \n        X += W[P];\n        W[P] *= -1;\n        \n        cout << X << endl;\n    }\n}"
+      ],
+      "text_sha256": "7ce982b2400fd48437ec3468b3e82d8969b3381d758b0208dcf3197ad55bd371",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc431/abc431_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc431/editorial/14531",
+      "text": "それぞれの種類のパーツが現在ついているかの情報とあわせて、「現在のロボットの重さ」を保存しておくことで、この問題をより高速に解くことができます。\nそれぞれのクエリでは、\\(1\\) つの部品がつけられるか外されるだけなので、ロボットの重さに \\(1\\) つの部品の重さを足すもしくは引くことで更新を完了することができます。\n適切に実装することで時間計算量は \\(O(N+Q)\\) となり、\\(N,Q\\) が \\(2\\times10 ^ 5\\) 程度になっても十分高速に解くことができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n\nint main() {\n    using namespace std;\n    int X, N;\n    cin >> X >> N;\n    vector<int> W(N);\n    for (auto&& w : W)\n        cin >> w;\n    vector<bool> b(N); // b[i] := i 種類目のパーツがついていれば true, そうでなければ false\n    int weight = X; // 現在の重さ\n\n    int Q;\n    cin >> Q;\n    for (int q = 0; q < Q; ++q) {\n        int P;\n        cin >> P;\n        --P;\n\n        if (b[P]) { // すでについていたら\n            b[P] = false; // 外して\n            weight -= W[P]; // 重さも減らす\n        } else { // ついていなければ\n            b[P] = true; // つけて\n            weight += W[P]; // 重さを増やす\n        }\n\n        cout << weight << endl;\n    }\n    return 0;\n}",
+        "X = int(input())\nN = int(input())\nW = list(map(int, input().split()))\n\nb = [False] * N # b[i] := i 種類目のパーツがついていれば True, そうでなければ False\nweight = X # 現在の重さ\n\nQ = int(input())\n\nfor q in range(Q):\n    P = int(input())\n    P -= 1\n\n    if b[P]: # すでについていたら\n        b[P] = False # 外して\n        weight -= W[P] # 重さも減らす\n    else: # ついていなければ\n        b[P] = True # つけて\n        weight += W[P] # 重さを増やす\n\n    print(weight)"
+      ],
+      "text_sha256": "3d866ebc515d8f010efaa8a59305e4002a8a91c790ab50c20d32a499870f7578",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc431/abc431_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

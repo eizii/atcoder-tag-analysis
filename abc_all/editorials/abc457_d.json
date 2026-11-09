@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc457_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc457/editorial/20126",
+      "text": "観察\n配列\n\\(A = (1, 2, 3)\\)\nが与えられた時 、\n\\(K\\)\n回操作したときの\n\\(ans\\)\nはどうなるでしょうか？（\n\\(ans\\)\nが達成される\n\\(A\\)\nの一例も挙げますが、一例であることに注意してください）\n\\(K = 1\\)\nでは\n\\(A = (2, 2, 3)\\)\nで\n\\(ans = 2\\)\n\\(K = 2\\)\nでは\n\\(A = (3, 2, 3)\\)\nで\n\\(ans = 2\\)\n\\(K = 3\\)\nでは\n\\(A = (3, 4, 3)\\)\nで\n\\(ans = 3\\)\n\\(K = 4\\)\nでは\n\\(A = (4, 4, 3)\\)\nで\n\\(ans = 3\\)\n\\(K = 5\\)\nでは\n\\(A = (4, 4, 6)\\)\nで\n\\(ans = 4\\)\nこのように\n\\(K\\)\nに対して\n\\(ans\\)\nが「単調増加」であるような性質があります。これを「解が単調」などと呼ぶことがあります。\n解の二分探索\n「解が単調」である問題では、しばしば\n解の二分探索\nが有用です。\n\\(ans\\)\nを直接求めるのではなく、「\n\\(ans\\)\nを\n\\(X\\)\n以上にすることが可能ですか？」という質問で解を二分探索することで、解を特定するというテクニックです。\nこれは多くの問題において、いわゆる「\n\\(ans\\)\nを\n\\(X\\)\n以上にすることが可能ですか？」などの\n判定問題\nのほうが解くほうが（直接元の問題を解くより）簡単であることが多いことを利用しています。\n判定問題を解く\n今回の問題で解くべき判定問題は\n「（\n\\(K\\)\n回の操作で）\n\\(ans\\)\nを\n\\(X\\)\n以上にできるか？」\nです。これは\n「\n\\(ans\\)\nを\n\\(X\\)\n以上にするのに、必要な操作回数は\n\\(K\\)\n回以下か？」\nと同じことですし、\n「すべての要素を\n\\(X\\)\n以上にするのに、必要な操作回数は\n\\(K\\)\n回以下か？」\nと同じことです。\n最後の問題であれば簡単に解けます。すべての\n\\(i ~(1 \\le i \\le  N)\\)\nについて\n\\(A_i \\ge X\\)\nのとき、\n\\(0\\)\n\\(A_i\\lt X\\)\nのとき、\n\\(\\displaystyle \\Big\\lceil \\frac{X - A_i}{i} \\Big\\rceil\\)\nを足したものが最小の操作回数です。これが\n\\(K\\)\n以下か判定すればよいです。\n解法\n今回であれば、必ず\n\\(ans\\)\nは\n\\(1\\)\n以上になります。また\n\\(A_1 + K + 1\\)\n未満です。（\n\\(A_1\\)\nに\n\\(K\\)\n回すべて操作を行っても届かないためです）よって、この範囲で解の二分探索をすればよいです。\n上の判定問題の計算量は\n\\(O(N)\\)\nです。判定問題を\n\\(O( \\log (A_1 + K))\\)\n回解けばよいので、計算量は\n\\(O(N \\log(A_1 + K))\\)\nとなります。\n実装例\n注意\nceil\nを小数で計算しようとすると、その精度によっては\nWA\nとなります。基本的には整数範囲で行うことを意識するよいでしょう。\noverflow も注意してください。\nng\nも実装方針によってはしますし、判定問題内の\nnk\nの overflow は気が付きにくいです。",
+      "codes": [
+        "n, k = map(int, input().split())\na = [0] + list(map(int, input().split())) # 1-indexed で扱えるようにする\n\ndef isok(x):\n    # ans を x 以上にすることができますか？\n    nk = 0\n    for i in range(1, n + 1):\n        if a[i] < x:\n            nk += (x - a[i] + i - 1) // i # ceil((x - a[i]) / i)\n            if nk > k:\n                return False\n    return True\n\nok = 1\nng = a[1] + k + 1\n\nwhile ng - ok > 1:\n    m = (ok + ng) // 2\n    if isok(m):\n        ok = m\n    else:\n        ng = m\n\nprint(ok)"
+      ],
+      "text_sha256": "6e389fdf4e602590cbaacdcf409def37e7209d405c7f667a64885d9ae75d4086",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc457/abc457_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

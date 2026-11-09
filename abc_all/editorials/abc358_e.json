@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc358_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc358/editorial/10224",
+      "text": "問題文と同様に辞書順で\n\\(i\\)\n番目の英大文字を\n\\(a_i\\)\nとおきます。\n文字列のうち\nz\nが出現する個数ごとに条件を満たす文字列の個数を求め、これらを足し合わせることで答えを求めることを考えます（説明の都合上\nz\nの個数ごとに考えていますが、\nz\nであることは本質ではなく、\n\\(1\\)\nつのアルファベットを使う個数ごとに考えると捉えてよいです）。\n長さ\n\\(s\\)\nの文字列中に\nz\nが\n\\(t\\)\n個存在するとします。このとき、\nz\nの位置の決め方が\n\\(\\binom{s}{t}\\)\n通りあります。\nz\n以外の部分については、\nz\nを除いた長さ\n\\(s-t\\)\nの文字列を考えることによって\n\\(\\binom{s}{t}\\)\n通りそれぞれに対し、\nz\nを含まない長さ\n\\(s-t\\)\nの文字列であって\n\\(a_i\\)\nが\n\\(0\\)\n個以上\n\\(C_i\\)\n個以下であるものが対応していることがわかります。\nしたがって\na\n,\nb\n,\n\\(\\ldots\\)\n,\nz\nについて考えていたものを\na\n,\nb\n,\n\\(\\ldots\\)\n,\ny\nについて帰着できることがわかりました。\n同様に考えると、\na\n,\nb\n,\n\\(\\ldots\\)\n,\ny\nについての問題は\na\n,\nb\n,\n\\(\\ldots\\)\n,\nx\nについて帰着でき、これを繰り返すことにより本問題を解くことができそうだと考えられます。\nこのように小さいサイズに問題を帰着できたときには dp が有効なことが多いです。\n実際、\n\\(dp_{i,j}\\)\nを\n\\(a_1, a_2, \\ldots, a_i\\)\nからなる長さ\n\\(j\\)\nの文字列であって、各\n\\(1 \\leq k \\leq i\\)\nに対して\n\\(a_k\\)\nが\n\\(0\\)\n個以上\n\\(C_k\\)\n個以下であるものの個数とおくと、上の考察から\n\\(dp_{i + 1, j} = \\sum_{k = 0}^{\\min(j, C_{i+1})} dp_{i,j-k} \\binom{j}{k}\\)\nとなります（\n\\(a_{i + 1}\\)\nの個数を\n\\(k\\)\nとして\n\\(k\\)\nごとに足し合わせています）。\n答えは\n\\(\\sum_{j= 1}^{K}dp_{26, j}\\)\nであり、dp は\n\\(j \\leq K\\)\nの範囲で計算すれば十分であることに注意してください。\n二項係数を階乗およびその逆元の前計算、あるいはパスカルの三角形の要領で二項係数自体を前計算することでこの dp は文字の種類数を\n\\(\\sigma\\)\nとおいて（本問題では\n\\(\\sigma = 26\\)\nです）時間計算量\n\\(O(\\sigma K^2)\\)\nで計算することができ、本問題の制約下では十分高速です。\n実装例\n(C++)",
+      "codes": [],
+      "text_sha256": "f34450152044dfe87282f04b9199c3547366fcaf5c9f1e4f00e6dc0c82d992b7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc358/abc358_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc358/editorial/10231",
+      "text": "DP を経由せず多項式を利用して数えます。\n各文字\n\\(i\\)\nの個数が丁度\n\\(a_i\\)\n個であるような文字列の個数は多項係数\n\\(\\displaystyle \\binom{a_1+a_2+\\cdots+a_{26}}{a_1, a_2, \\ldots, a_{26}}=\\dfrac{(a_1+a_2+\\cdots+a_{26})!}{a_1!\\times a_2!\\times \\cdots \\times a_{26}!}\\)\nなので答えは\n\\(\\displaystyle \\sum_{l=1}^K l!\\lbrack x^l \\rbrack\\prod_{i=1}^{26}\\left(\\sum_{j=0}^{C_i}\\dfrac{1}{j!}x^j\\right)\\)\nと表せます。ここで\n\\(\\lbrack x^l\\rbrack f(x)\\)\nは多項式\n\\(f\\)\nの\n\\(l\\)\n次の係数です。\n従って\n\\(\\displaystyle\\prod_{i=1}^{26}\\left(\\sum_{j=0}^{C_i}\\dfrac{1}{j!}x^j\\right)\\)\nの\n\\(K\\)\n次以下の部分を計算できればよいですが、\nこれは\n\\(O(\\sigma K ^ 2)\\)\n時間で可能です。また、多項式乗算に FFT を利用すれば\n\\(O(\\sigma K\\log K)\\)\n時間に削減されます (公式解説の DP もFFT を用いた畳み込みで同様の計算時間が達成されます)。\nなお\n\\(\\sigma\\)\nは文字種数であり、本問では\n\\(\\sigma=26\\)\nに固定されています。",
+      "codes": [],
+      "text_sha256": "b7f2e288359304dc3a9fde4d932af130cb4107b0e109f3a093b1d5e5ea2d08d2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc358/abc358_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

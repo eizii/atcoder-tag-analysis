@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc169_f",
+  "editorials": [
+    {
+      "text": "F: Knapsack for All Subsets\n問題は以下のように言い換えることができます。\n{1, 2, . . . , N} の空でない部分集合(T, U) の組であって以下の条件を満たすものは何通りありま\nすか？\n1. U はT の部分集合である\n2. U = {x1, x2, . . . , xk} とするとax1 + ax2 + · · · + axk = S\nこのとき、各i (1 ≤i ≤N) について、\n1. U にもT にも入れる\n2. T には入れるがU には入れない\n3. U にもT にも入れない\nの3 つの選択肢があり、1 つめの選択肢を選んだときのみ和がai だけ増えます。\n以上の考察により、\ndp[i][ j] = i 番目までの選択をして、1 つめの選択肢を選んだk に対するak の和がj であるような場合の数\nと定め、動的計画法を用いるとよいということがわかります。\n求めたい答えはdp[N][S ] であり、計算量はO(NS ) です。\n実装例: https://atcoder.jp/contests/abc169/submissions/13772481\n",
+      "text_sha256": "aba8694db2ae048ca12b40162651947945f9e3a68e3ff1ee47a09480614928a5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc169/abc169_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

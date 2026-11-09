@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc154_c",
+  "editorials": [
+    {
+      "text": "C: Distinct\n単純に全ての2 つの整数の組に関してループで回し等しいか判定する場合、計算量がO(N 2) とな\nり間に合いません。\nところが、与えられた整数列に等しい値がある場合、この整数列をソートすると隣接する場所にこ\nれらの値が集まることになります。\nそのため、一度与えられた数列をソートすると、全ての隣接する2 項を比較し、等しい値がなけれ\nばYES で、等しい値があればNO です。\nC++ のstd::set のようなデータ構造を用いて異なる要素数を取得しても大丈夫です。\nListing 3\nC++ での実装例\n1 #include <stdio.h>\n2 #include <algorithm>\n3 using namespace std;\n4 int A[210000];\n5 int main(){\n6\nint N;scanf(\"%d\",&N);\n7\nfor(int i=0;i<N;i++)scanf(\"%d\",A+i);\n8\nstd::sort(A,A+N);\n9\nfor(int i=0;i<N-1;i++){\n10\nif(A[i]==A[i+1]){\n11\nprintf(\"NO\\n\");return 0;\n12\n}\n13\n}\n14\nprintf(\"YES\\n\");\n15 }\n",
+      "text_sha256": "bfc389c2eae2e17f2e371070b2dbd87f7d5e8e9aac54598a8c9742088d9b2934",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc154/abc154_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

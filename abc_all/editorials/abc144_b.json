@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc144_b",
+  "editorials": [
+    {
+      "text": "B: 81\nA × B = N となるような1 以上9 以下の整数A, B が存在するかどうか全探索で確かめます。以\n下はC 言語での実装例です。\n1 #include<stdio.h>\n2 int main(){\n3\nint n;\n4\nscanf(\"%d\",&n);\n5\nfor(int a=1;a<=9;a++)for(int b=1;b<=9;b++){\n6\nif(a*b==n){\n7\nputs(\"Yes\");\n8\nreturn 0;\n9\n}\n10\n}\n11\nputs(\"No\");\n12 }\n",
+      "text_sha256": "54e4752188b581a54ac097180acc8557a59983c847f35c3b23a2d47f9e22210c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc144/abc144_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

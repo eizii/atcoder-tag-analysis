@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc310_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc310/editorial/6790",
+      "text": "\\(0\\)\nで初期化したカウンタ変数を準備します。そして、\n\\(N\\)\n本の棒を棒\n\\(1\\)\n、棒\n\\(2\\)\n、\n\\(\\ldots\\)\n、棒\n\\(N\\)\nの順に見ていき、今までに見たどの棒とも同じでない棒を見るたびにカウンタの値を\n\\(1\\)\n増やすことで、\n棒の種類数、すなわち本問題の答えが最終的なカウンタの値として得られます。\nある棒\n\\(i\\)\nを見たときに、それが今までに見た棒\n\\(1, 2, \\ldots, i-1\\)\nのどれとも同じでないことを判定するには、\n（\n\\(\\star\\)\n） 文字列\n\\(S_i\\)\nが、\n\\(S_1, S_2, \\ldots, S_{i-1}\\)\nおよびそれらを前後反転した文字列たちのどれとも異なるか\nを判定すれば良いです。\nこれら全ての文字列と愚直に比較するとアルゴリズム全体で\n\\(\\Omega(N\\sum_{i = 1}^N|S_i|)\\)\n時間かかるため実行制限時間に間に合わせるのは絶望的ですが、これまでに既に見た棒の文字列およびそれを前後反転した文字列たちを平衡二分木で保持することで、上記（\n\\(\\star\\)\n）の判定はその平衡二分木に文字列\n\\(S_i\\)\nが含まれるかの判定として十分高速に行うことができ、\nアルゴリズム全体で\n\\(O((\\log N) \\cdot\\sum_{i = 1}^N|S_i|)\\)\n時間で本問題を解くことができます。\n以下に、 C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <set>\n#include <algorithm>\nusing namespace std;\n\nint main(void)\n{\n  int n;\n  cin >> n;\n  \n  int ans = 0; set<string> T; string s;\n  for(int i = 1; i <= n; i++){\n    cin >> s;\n    if(T.count(s) == 0) ans++;\n    T.insert(s);\n    reverse(s.begin(), s.end());\n    T.insert(s);\n  }\n  cout << ans << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "ef2f1dd2039a7315236a35d87e08fd67b8db5f0932916bc640860cfb10e622b9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc310/abc310_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc310/editorial/6792",
+      "text": "入力された各文字列\n\\(S_i\\)\nについて、\n\\(S_i\\)\nと\n\\(S_i\\)\nを反転したもののうち辞書順で小さい方を標準状態として、標準状態同士で比較を行うこともできます。\n実装例 (Python)",
+      "codes": [
+        "N = int(input())\nt = set()\nfor _ in range(N):\n    S = input()\n    t.add(min(S, S[::-1]))\nprint(len(t))"
+      ],
+      "text_sha256": "0c73421ee7267a2caa74ec4457163447c4e8562262076d8714a1f1ffaf9e4cab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc310/abc310_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

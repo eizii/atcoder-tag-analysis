@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc303_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc303/editorial/6434",
+      "text": "\\(T\\)\nのグラフで葉である頂点は、はじめの星においても葉です。また、そのような頂点から\n\\(T\\)\n上で距離が\n\\(2\\)\n以下の頂点が同じ星に属します。このことから、以下のアルゴリズムが考えられます。\n\\(T\\)\nで葉の頂点を一つ選ぶ。\n選んだ頂点から距離が\n\\(2\\)\n以下の頂点の個数（自分含む）を数える。頂点の個数が\n\\(x\\)\n個のとき、レベル\n\\(x-1\\)\nの星があったことがわかる。\n数えた頂点および隣接する辺を\n\\(T\\)\nから削除する。\nこれを、\n\\(T\\)\nの頂点がなくなるまで繰り返すと、答えが得られます。これは適切な実装のもと\n\\(\\mathrm{O}(N)\\)\nで動作しますが、些か実装が面倒です。ここでは、簡単な考察のもと実装を楽にする方法を説明します。\n以下の補題が成立します。\n元の星で葉でない頂点を中心とよぶ。\n\\(T\\)\nにおいて、中心同士の距離は必ず\n\\(3\\)\nの倍数であり、中心と葉の距離は必ず\n\\(3\\)\nの倍数ではない。\nこれは帰納法により示せます。この補題を用いると、以下のアルゴリズムが考えられます。\n\\(T\\)\nの中で、元の星で中心であった頂点を一つ選ぶ。これは、\n\\(T\\)\nの葉と結ばれた頂点を選べばよい。\n選んだ頂点からの最短距離を各頂点について求める。\n最短距離が\n\\(3\\)\nの倍数であるような各頂点について、その頂点の次数を\n\\(L\\)\nに追加する。\nこのアルゴリズムは、 bfs または dfs 等により簡単に実装できて、\n\\(\\mathrm{O}(N)\\)\nで動作します。",
+      "codes": [],
+      "text_sha256": "69743c2be59b96b7e2cdb8d8d9fad3400bdf3e19783d582eaf835d3deb0f813a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc303/abc303_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc303/editorial/6465",
+      "text": "次数が\n\\(1\\)\nとなる頂点の個数に着目します。最初星が\n\\(M\\)\n個のとき、そのような頂点は\n\\(N-M\\)\n個あります。また操作によって次数が\n\\(1\\)\nの頂点\n\\(2\\)\nつが次数\n\\(2\\)\nとなるので、終了時の木には\n\\(N-3M+2\\)\n個あります。よって\n\\(M\\)\nの値は簡単に求められます。\nまた、操作によって次数が\n\\(1\\)\nの頂点\n\\(2\\)\nつが次数\n\\(2\\)\nとなるので、終了時の木における次数を大きい順に\n\\(M\\)\n個取れば、それが開始前の状況において星の真ん中の頂点の次数に対応します。\n以上より次数列を sort することがボトルネックとなり\n\\(O \\left( N \\log N \\right)\\)\nで解けます。頻度を持つことで\n\\(O \\left( N \\right)\\)\nでも解けます。\n実装例",
+      "codes": [],
+      "text_sha256": "37e5c5cdd331831577ef2d600ac7fd99c30d6dbbd86fa6b727ce48b29dad472d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc303/abc303_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc303/editorial/6437",
+      "text": "レベル\n\\(k\\)\nの星は、次数が\n\\(k\\)\nの頂点を\n\\(1\\)\n個、次数が\n\\(1\\)\nの頂点を\n\\(k\\)\n個持ちます。\n問題文中の操作で星のなす森に辺を加える操作では次数\n\\(3\\)\n以上の頂点の個数はそれぞれ変化しません。\nよって、与えられたグラフの次数\n\\(3\\)\n以上の頂点の個数を数えることで、元々あったレベル\n\\(3\\)\n以上の星の個数がわかります。レベル\n\\(2\\)\nの星の個数は、残りの頂点数を数えることでわかります。\n実装例 (Python)",
+      "codes": [
+        "N=int(input())\ndeg=[0]*N\nfor _ in range(N-1):\n  a,b=map(int,input().split())\n  deg[a-1]+=1\n  deg[b-1]+=1\n\ncnt=[0]*N\nfor x in deg: cnt[x]+=1\n\nans=[]\nvs=0\nfor i,x in enumerate(cnt):\n  if i>=3:\n    vs+=(i+1)*x\n    ans+=[i]*x\n\nans=[2]*((N-vs)//3)+ans\nprint(*ans)"
+      ],
+      "text_sha256": "991961b041187b0c1de9bd52f595dbb3787d7dc952e7341b6cde66595f0ee634",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc303/abc303_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

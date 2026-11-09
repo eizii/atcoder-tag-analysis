@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc073_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc073/editorial.pdf",
+      "text": "B:  Theater\n\n  　li 番目からri 番目までの連続した席に人が座っているとき、それらはri −li + 1 人\nである。　条件より、同じ席に複数の人が座ることはないので、∑Ni=1(ri −li + 1) が答え\nとなる。よって、これを計算して出力すればよい。\n　それ以外にも、席数と人数が高々100000 なため、席1 から席100000 までのすべての席\nにおいて、人がいるかいないかをフラグで持っておき、各i においてli からri までにフ\nラグを立てていく方法でも解くことができる。\n\n#include <cstdio >\nint N,res ,l,r;\nint main ()\n{\n        scanf(\"%d\" ,&N);\n        for(int i=0;i<N;i++) scanf(\"%d%d\" ,&l,&r),res+=r-l+1;\n        printf(\"%d\\n\",res);\n}\n\n\n\n\n\n                                      1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "292af50fd7ca3094c2805caf319557ef5918509d804e4e4c07c903ca70309335"
+    }
+  ],
+  "status": "available"
+}

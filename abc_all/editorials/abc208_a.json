@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc208_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc208/editorial/2186",
+      "text": "出目の合計が一番小さい場合は全て\n\\(1\\)\nの目が出た時で\n\\(A \\times 1 = A\\)\nです。また、出目の合計が一番大きい場合は全て\n\\(6\\)\nの目が出た時で\n\\(A \\times 6 = 6A\\)\nです。\nよって、\n\\(B\\)\nが\n\\(A\\)\n以上かつ\n\\(6A\\)\n以下であるかどうかを判定すればよいとわかり、これはif文を利用すれば実装することが出来ます。\n以下に C++ と Python による解答例を掲載します。\nC++\nPython",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n \nint main() {\n  int A, B;\n  cin >> A >> B;\n  if(A <= B && B <= 6 * A) {\n    cout << \"Yes\" << endl;\n  } else {\n    cout << \"No\" << endl;\n  }\n}",
+        "A, B = map(int,input().split())\nif A <= B <= 6 * A:\n  print(\"Yes\")\nelse:\n  print(\"No\")"
+      ],
+      "text_sha256": "d2664c91f2a864246dfb30c33fde287361d9c6c89e2bab8d5aa9d00ce458d8ac",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc208/abc208_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc312_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6856",
+      "text": "この問題は二分探索を用いて解くことができます。\n\\(f(x)\\)\nを、りんごを\n\\(x\\)\n円で売ってもよいと考える売り手の人数、すなわち\n\\(A_i\\leq x\\)\nを満たす\n\\(i\\)\nの個数とします。\n\\(g(x)\\)\nを、りんごを\n\\(x\\)\n円で買ってもよいと考える買い手の人数、すなわち\n\\(B_i\\geq x\\)\nを満たす\n\\(i\\)\nの個数とします。\n求めるものは\n\\(f(x)\\geq g(x)\\)\nを満たす最小の\n\\(x\\)\nです。\nここで、\n\\(f(x)\\)\nは\n\\(x\\)\nの増加に伴い(広義)単調増加し、\n\\(g(x)\\)\nは\n\\(x\\)\nの増加に伴い(広義)単調減少します。\n（値段を釣り上げると売り手は増え買い手は減ります）\nしたがって、ある\n\\(x\\)\nで\n\\(f(x)\\geq g(x)\\)\nとなるなら、\n\\(x\\leq y\\)\nとなる任意の\n\\(y\\)\nで\n\\(f(y)\\geq f(x)\\geq g(x)\\geq g(y)\\)\nを満たします。すなわち、\n\\(f(x)\\geq g(x)\\)\nであるかどうかには単調性があるため、これを満たす最小の値は二分探索により求めることができます。\n与えられた\n\\(x\\)\nに対して\n\\(f(x),g(x)\\)\nの値を求めるには\n\\(O(N+M)\\)\n時間かかるので、問題は\n\\(O((N+M)\\log \\max A_i)\\)\nで解けます。\n別解\n答えとなりうるのは、\n\\(A_i\\)\nの値か\n\\(B_i+1\\)\nの値に限ることがわかります（証明略）。したがって、これらの値を小さい順に調べ、\n\\(f(x),g(x)\\)\nの計算の際には前の値との差分のみを調べることで、全体で\n\\(O((N+M)\\log (N+M))\\)\nで問題を解くことができます。\n\\(\\log\\)\nはソートによるものです。",
+      "codes": [],
+      "text_sha256": "f9fd0902662939fb4b9a82bcd37e693309b9754a4dab8626f2d071cab56be8b6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6859",
+      "text": "公式解説\nの「別解」をもう少し整理すると、\n\\(N + M\\)\n個の値\n\\(A_1, \\dots, A_N, B_1 + 1, \\dots, B_M + 1\\)\nを昇順にソートした際の\n\\(M\\)\n番目の値が答えであることが分かります。（以下、公式解説の記号を使います。）これは、\n\\(x = 0\\)\nのとき\n\\(f(x) - g(x) = -M\\)\nであり、\n\\(x\\)\nを増やしていくと\n\\(x = A_1, \\dots, A_N, B_1 + 1, \\dots, B_M + 1\\)\nで\n\\(f(x) - g(x)\\)\nが\n\\(1\\)\nずつ増加するためです。\n実装例 (Python)",
+      "codes": [
+        "N, M = map(int, input().split())\nA = list(map(int, input().split()))\nB = list(map(int, input().split()))\nprint(sorted(A + list(map(lambda x: x + 1, B)))[M - 1])"
+      ],
+      "text_sha256": "ffa28c898911b8828b711bc588578554c045f8b5a4432a27a82660da45d8a879",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

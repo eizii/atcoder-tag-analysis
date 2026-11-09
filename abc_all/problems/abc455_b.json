@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc455_b",
+  "title": "Spiral Galaxy",
+  "contests": [
+    {
+      "contest_id": "abc455",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 187,
+  "raw_difficulty": 96,
+  "contest_id": "abc455",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc455/tasks/abc455_b",
+  "statement": "配点 : 200 点 問題文 H 行 W 列のグリッドがあります。このグリッドの上から i 行目、左から j 列目のマスをマス (i, j) と表記します。 グリッドの各マスは白または黒で塗られています。グリッドの情報は H 個の長さ W の文字列 S_1, S_2, \\ldots, S_H によって与えられ、 S_i の j 文字目が . のときマス (i, j) は白で、 S_i の j 文字目が # のときマス (i, j) は黒で塗られています。 グリッドの長方形領域であって、点対称に塗られているものの個数を求めてください。 より形式的には、以下の条件をすべて満たす整数の組 (h_1, h_2, w_1, w_2) の個数を求めてください。 1 \\leq h_1 \\leq h_2 \\leq H 1 \\leq w_1 \\leq w_2 \\leq W h_1 \\leq i \\leq h_2 かつ w_1 \\leq j \\leq w_2 を満たすすべての整数 i, j についてマス (i, j) とマス (h_1 + h_2 - i, w_1 + w_2 - j) は同じ色で塗られている 制約 1 \\leq H, W \\leq 10 H, W は整数 S_i は . , # からなる長さ W の文字列 入力 入力は以下の形式で標準入力から与えられる。 H W S_1 S_2 \\vdots S_H 出力 答えを出力せよ。 入力例 1 3 2\r\n.#\r\n#.\r\n## 出力例 1 10 上の図のように、答えは 10 となります。 入力例 2 4 5\r\n.#.#.\r\n####.\r\n##..#\r\n....# 出力例 2 54",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 H 行 W 列のグリッドがあります。このグリッドの上から i 行目、左から j 列目のマスをマス (i, j) と表記します。 グリッドの各マスは白または黒で塗られています。グリッドの情報は H 個の長さ W の文字列 S_1, S_2, \\ldots, S_H によって与えられ、 S_i の j 文字目が . のときマス (i, j) は白で、 S_i の j 文字目が # のときマス (i, j) は黒で塗られています。 グリッドの長方形領域であって、点対称に塗られているものの個数を求めてください。 より形式的には、以下の条件をすべて満たす整数の組 (h_1, h_2, w_1, w_2) の個数を求めてください。 1 \\leq h_1 \\leq h_2 \\leq H 1 \\leq w_1 \\leq w_2 \\leq W h_1 \\leq i \\leq h_2 かつ w_1 \\leq j \\leq w_2 を満たすすべての整数 i, j についてマス (i, j) とマス (h_1 + h_2 - i, w_1 + w_2 - j) は同じ色で塗られている"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq H, W \\leq 10 H, W は整数 S_i は . , # からなる長さ W の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 H W S_1 S_2 \\vdots S_H"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 2\r\n.#\r\n#.\r\n##"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 10 上の図のように、答えは 10 となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4 5\r\n.#.#.\r\n####.\r\n##..#\r\n....#"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 54"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc455/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:39.006000+00:00",
+  "statement_sha256": "dc910e3b0fdc29439d617e8da460a4e1010812abfa935d6f8c331cbaf30d8545",
+  "editorials": []
+}

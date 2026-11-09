@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc434_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc434/editorial/14668",
+      "text": "問題原案: admin\nfor ループを活用することで、バケットソートの要領で次のものを管理すればこの問題に正解できます。\n種類\n\\(i\\)\nの鳥の大きさの合計\n\\(S_i\\)\n種類\n\\(i\\)\nの鳥の数\n\\(C_i\\)\n各種類ごとの答えは\n\\(S_i/C_i\\)\nと求められます。\n出力の桁数不足に注意してください。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,m;\n  cin >> n >> m;\n  vector<int> S(m+1,0);\n  vector<int> C(m+1,0);\n  for(int i=0;i<n;i++){\n    int a,b;\n    cin >> a >> b;\n    S[a]+=b;\n    C[a]++;\n  }\n  for(int i=1;i<=m;i++){\n    double oup=S[i];\n    oup/=C[i];\n    cout << fixed << setprecision(12) << oup << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "1bb98fcd49c6bed7a3b63a77ca8b43aee4a70513eed943f5e1e25352dd8c853c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc434/abc434_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

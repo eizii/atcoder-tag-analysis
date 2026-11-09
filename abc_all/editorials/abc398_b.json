@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc398_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc398/editorial/12499",
+      "text": "解法1. 実際に\n\\(5\\)\n枚選び出して試す\n\\(7\\)\n枚のカードから\n\\(5\\)\n枚選び出して全探索します。\n実装の方法はいくつかありますが、今回は\nbit 全探索\nを利用します。\nbit 全探索とは何かの説明は、以下のような解説記事に譲ります。\nbit 全探索\nbit全探索について簡単にまとめる\nAPG4b - AC - 3.05.ビット演算\n\\(7\\)\n枚のカードそれぞれについて「選ぶ」「選ばない」を指定し、以下の条件を判定します。\nカードがちょうど\n\\(5\\)\n枚選ばれている。\nこちらは、 bit 全探索中に立っている bit の数を数えれば良いです。\n選ばれたカードでフルハウスを作ることができる。\nこちらは、例えば選ばれたカード\n\\(B_1,B_2,\\dots,B_5\\)\nをソートして以下のどちらかが成り立つか判定すれば良いです。\n\\(B_1=B_2=B_3 \\neq B_4=B_5\\)\n\\(B_1=B_2 \\neq B_3=B_4=B_5\\)\n実装例 (C++):\n解法2. フルハウスが作れる条件を精査する\nまず、各カードが何枚あるかを調べます。このとき、フルハウスが作れる必要十分条件は次の通りです。\n整数\n\\(x\\)\nの書かれたカードが\n\\(3\\)\n枚以上存在する\nさらに、\n\\(x \\neq y\\)\nであって整数\n\\(y\\)\nの書かれたカードが\n\\(2\\)\n枚以上存在する\nこれは、カードを登場頻度の多い方から順に並べ、\n最も頻度の多いものが\n\\(3\\)\n回以上登場するか\n次に頻度の多いものが\n\\(2\\)\n回以上登場するか\nを判定すればよいです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nbool isFull(vector<int> &b){\n  sort(b.begin(),b.end());\n  if(b[0]==b[1] && b[1]==b[2] && b[2]!=b[3] && b[3]==b[4]){return true;}\n  if(b[0]==b[1] && b[1]!=b[2] && b[2]==b[3] && b[3]==b[4]){return true;}\n  return false;\n}\n\nint main(){\n  vector<int> a(7);\n  for(auto &nx : a){cin >> nx;}\n  for(int i=0;i<(1<<7);i++){\n    vector<int> b;\n    for(int j=0;j<7;j++){\n      if(i&(1<<j)){b.push_back(a[j]);}\n    }\n    if(b.size()==5){\n      sort(b.begin(),b.end());\n      if(isFull(b)){\n        cout << \"Yes\\n\";\n        return 0;\n      }\n    }\n  }\n  cout << \"No\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  vector<int> bk(13,0);\n  for(int i=0;i<7;i++){\n    int x;\n    cin >> x;\n    bk[x-1]++;\n  }\n  sort(bk.rbegin(),bk.rend());\n  if(bk[0]>=3 && bk[1]>=2){cout << \"Yes\\n\";}\n  else{cout << \"No\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "4104ebdcb3c209f7379656085e4f915e27e2b4bf1fcae5bb6688658dbd4ce1da",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc398/abc398_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc153_e",
+  "editorials": [
+    {
+      "text": "E: Crested Ibis vs Monster\n次のようなDP を考えることで解くことができます。\nDP[i] = モンスターの体力をi 減らすため消耗する魔力の最小値\n同じ魔法を複数回使うことができるので、DP 配列の更新順序には気をつけてください。答えは\nmin\nH≤i<H+max Ai DP[i] になります(モンスターの体力をH + max Ai 以上減らすには、H 以上減らし\nてからさらに魔法を使う必要があるので無駄です)。この部分は、「i ≥H であるような部分について\n予めまとめた状態でDP 配列を持つ」という実装の工夫により簡略化することもできます。計算量は\nO(NH) です。\nなお、答えは最大でH ∗max Ai 程度になるので、次のようなDP では解けないことに注意してく\nださい。\nDP[i] = 魔力をi 消耗したときに減らせるモンスターの体力の最大値\n",
+      "text_sha256": "51067aa1099640019b3fa09af0bf3e8f23800fcd739125cea10d34d788b6cb2d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc153/abc153_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

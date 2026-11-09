@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc307_b",
+  "title": "racecar",
+  "contests": [
+    {
+      "contest_id": "abc307",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 70,
+  "raw_difficulty": -298,
+  "contest_id": "abc307",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc307/tasks/abc307_b",
+  "statement": "配点 : 200 点 問題文 英小文字のみからなる N 個の文字列 S_1,S_2,\\ldots,S_N が与えられます。 1 以上 N 以下の 相異なる 整数 i,j であって、 S_i と S_j をこの順に連結した文字列が回文となるようなものが存在するか判定してください。 ただし、長さ M の文字列 T が回文であるとは、任意の 1\\leq i\\leq M について、 T の i 文字目と (M+1-i) 文字目が一致していることをいいます。 制約 2\\leq N\\leq 100 1\\leq \\lvert S_i\\rvert \\leq 50 N は整数 S_i は英小文字のみからなる文字列 S_i はすべて異なる。 入力 入力は以下の形式で標準入力から与えられる。 N S_1 S_2 \\vdots S_N 出力 問題文の条件をみたす i,j が存在するならば Yes を、そうでないならば No を出力せよ。 入力例 1 5\r\nab\r\nccef\r\nda\r\na\r\nfe 出力例 1 Yes (i,j)=(1,4) とすると、 S_1= ab と S_4= a をこの順に連結した文字列は aba となり、\r\nこれは回文であるため条件をみたしています。 よって、 Yes を出力します。 また、 (i,j)=(5,2) としても、 S_5= fe と S_2= ccef をこの順に連結した文字列は feccef となり、やはり条件をみたしています。 入力例 2 3\r\na\r\nb\r\naba 出力例 2 No S_1 , S_2 , S_3 のうち、どの相異なる 2 つの文字列を繋げても回文となりません。\r\nよって、 No を出力します。 問題文における i,j は相異なる必要があることに注意してください。 入力例 3 2\r\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\r\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 出力例 3 Yes",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英小文字のみからなる N 個の文字列 S_1,S_2,\\ldots,S_N が与えられます。 1 以上 N 以下の 相異なる 整数 i,j であって、 S_i と S_j をこの順に連結した文字列が回文となるようなものが存在するか判定してください。 ただし、長さ M の文字列 T が回文であるとは、任意の 1\\leq i\\leq M について、 T の i 文字目と (M+1-i) 文字目が一致していることをいいます。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2\\leq N\\leq 100 1\\leq \\lvert S_i\\rvert \\leq 50 N は整数 S_i は英小文字のみからなる文字列 S_i はすべて異なる。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S_1 S_2 \\vdots S_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 問題文の条件をみたす i,j が存在するならば Yes を、そうでないならば No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\nab\r\nccef\r\nda\r\na\r\nfe"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes (i,j)=(1,4) とすると、 S_1= ab と S_4= a をこの順に連結した文字列は aba となり、\r\nこれは回文であるため条件をみたしています。 よって、 Yes を出力します。 また、 (i,j)=(5,2) としても、 S_5= fe と S_2= ccef をこの順に連結した文字列は feccef となり、やはり条件をみたしています。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\r\na\r\nb\r\naba"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No S_1 , S_2 , S_3 のうち、どの相異なる 2 つの文字列を繋げても回文となりません。\r\nよって、 No を出力します。 問題文における i,j は相異なる必要があることに注意してください。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 2\r\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\r\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc307/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:34.415171+00:00",
+  "statement_sha256": "2c03484e9426b3c7ea0d48edc5f998b45513058ff3038d581b4c0c09ba875c72",
+  "editorials": []
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc164_b",
+  "editorials": [
+    {
+      "text": "B. Battle\n仮にどちらかのモンスターの体力が0 以下になっても攻撃を続けたとき、高橋君のモンスターの体\n力が0 以下になるのは青木君の⌈A\nD⌉回目の攻撃のとき、青木君のモンスターの体力が0 以下になる\nのは高橋君の⌈B\nC ⌉回目の攻撃のときです。したがって、⌈A\nD⌉をX、⌈B\nC ⌉をY として、X ≥Y な\nら高橋君の勝ち、そうでななら青木君の勝ちです。高橋君が先攻であるためX = Y のとき高橋君の\n勝ちであることに注意してください。\n以下が、c++ のサンプルコードです。\n1 #include<iostream>\n2 using namespace std;\n3 int main(){\n4\nint A,B,C,D;\n5\ncin>>A>>B>>C>>D;\n6\nint X=(A+D-1)/D;\n7\nint Y=(C+B-1)/B;\n8\ncout<<(X>=Y?\"Yes\":\"No\")<<\"\\n\";\n9 }\n",
+      "text_sha256": "0e05adfa5bd03e84e12fbb3b947836384b7a7eca4cff8712e7b8133f21ae4c28",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc164/abc164_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

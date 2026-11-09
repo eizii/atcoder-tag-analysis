@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc180_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc180/editorial/181",
+      "text": "要するに「\n\\(N\\)\nの約数を列挙してください」という問題です。\n制約が大きいため、\n\\(1\\)\n～\n\\(N\\)\nまですべてを試していては間に合いません。計算量を減らす方法を考えましょう。\n「\n\\(d\\)\nが\n\\(N\\)\nの約数である」ことと「\n\\(N/d\\)\nが\n\\(N\\)\nの約数である」ことは同値です。つまり、\n\\(\\sqrt{N}\\)\nより大きな\n\\(N\\)\nの約数は、必ず\n\\(\\sqrt{N}\\)\nより小さな\n\\(N\\)\nの約数と対になります。\n例えば\n\\(N=20\\)\nのとき、\n\\(20\\)\nは\n\\(1\\)\nと、\n\\(10\\)\nは\n\\(2\\)\nと、\n\\(5\\)\nは\n\\(4\\)\nと対になります。\nよって、\n\\(\\sqrt{N}\\)\nまでを全探索しながら、\n\\(d\\)\nと\n\\(N/d\\)\nを同時に約数として記録していくことで、\n\\(O(\\sqrt{N})\\)\nの時間でこの問題を解くことができました。\n実装によっては、\n\\(N\\)\nが平方数の場合に注意が必要です。\n以下の解答例ではsetを使っているため計算量は約数の個数を\n\\(k\\)\nとして\n\\(O(\\sqrt{N}+k\\log k)\\)\nになっています。\n解答例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tlong n;\n\tcin >> n;\n\n\tset<long> ans;\n\tfor(long d=1;d*d<=n;d++){\n\t\tif(n%d==0){\n\t\t\tans.insert(d);\n\t\t\tans.insert(n/d);\n\t\t}\n\t}\n\t\n\tfor(auto x:ans)cout << x << endl;\n}"
+      ],
+      "text_sha256": "50715257bebde27d227dc2b923293dd92d719266e1f5acd9f37c05f6ae5733dd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc180/abc180_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

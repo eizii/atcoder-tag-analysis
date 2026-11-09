@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc464_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc464/editorial/22267",
+      "text": "このような 条件を満たさなくなるまで、\nランダムに残りから選ぶ という設定の問題では、 ランダムに一列にならべて、前から条件を満たさなくなるまで選ぶ と考えるとわかりやすいかもしれません。 以下金庫の集合を \\(T\\) として \\(A_{\\text{all}} = \\sum_{i \\in T} A_i \\) とします。 強盗が盗む条件を 今盗んだ金庫の集合を \\(S\\) としたとき、 \\(\\sum_{i \\in S} A_i \\lt X\\) であれば次の金庫を開ける と言い換えてみましょう。すると、求める期待値は以下のように言い換えることができます。 すべての \\(\\sum_{i \\in S} A_i \\lt X\\) である \\(S\\) について、 「集合 \\(S\\) を盗んだ」という状態に到達する確率 \\(\\times\\) その次に盗む金額の期待値 の総和 前者は「 \\(N\\) 個の金庫を一列に並べた時、特定の \\(|S|\\) 個が prefix である確率」ですから \\(\\displaystyle \\frac{1}{\\binom{N}{|S|}}\\) です。 後者は、残った \\(S\\) 以外の金庫から一様ランダムに選ばれますから \\(\\displaystyle \\frac{A_{\\text{all}} - \\sum_{i \\in S} A_i}{N - |S|}\\) です。 \\(\\sum_{i \\in S} A_i \\lt X\\) であるすべての \\(S\\) について上の値を求めたいですが、 \\(S\\) は最大 \\(2^N\\) 通り存在し、実行制限時間に間に合いません。 しかし、 \\(|S| = k\\) が同じであれば、分母の値がすべて同じです。よって、すべての \\(k\\) について 条件を満たすサイズ \\(k\\) の集合が何個あるか それらの \\(\\sum_{i \\in S} A_i\\) の総和はいくつか が分かればよいです。これを直接用いるのは難しいですが、この工夫によって高速に求めることができます。 半分全列挙 を用いましょう。 \\(T\\) を \\(T_l\\) と \\(T_r\\) の \\(2\\) つに分けます。 「 \\(T_l\\) から集合 \\(S_l\\) を選び、 \\(T_r\\) から \\(k\\) 要素を選ぶような \\(S\\) 」についてまとめて計算することを考えると \\(|S_r| = k\\) \\(\\sum_{i \\in S_r} A_i \\lt X - \\sum_{i \\in S_l} A_i\\) という条件を満たす \\(S_r \\subset T_r\\) について 条件を満たす \\(S_r\\) が何個あるか それらの \\(\\sum_{i \\in S_r} A_i\\) の総和はいくつか が求まればよいです。 これは、事前に \\(|S_r| = k\\) ごとに \\(\\sum_{i \\in S_r} A_i\\) の昇順に並べた配列 その prefix sum を用意しておけば二分探索などで求めることができます。そして、すべての \\((S_l, k)\\) について期待値を求め、その総和を取ればよいです。 計算量を考えましょう。以下 \\(l = |T_l|, r = |T_r|\\) とします。 前計算では \\(2^r\\) 要素の列挙と、要素数 \\(k\\) ごとの sort が必要なので \\(O(r \\cdot 2 ^ {r})\\) かかります。そして \\(2^l\\) 個ある集合 \\(S_l\\) と \\(k ~ (0 \\le k \\le r)\\) について、二分探索が必要なので \\(O(2^l \\cdot r^2)\\) かかります。 \\(l, r\\) をともに \\(N/2\\) 程度にとることで、全体で \\(O(N^2 2^{N/2})\\) で解くことができます。 \\(S_l\\) をあらかじめ sort しておき、二分探索を尺取法にすることで \\(O(N 2^{N/2})\\) で解くことができます。 また TL が厳しいと感じた場合、 \\(O(r2^r + r^22^l)\\) からわかるように \\(r\\) を大きめにとると良いでしょう。 実装例(PyPy)",
+      "codes": [
+        "from math import comb\nfrom bisect import bisect_left\n\nn, x = map(int, input().split())\na = list(map(int, input().split()))\n\nmod = 998244353\n\ndef gen(a):\n    n = len(a)\n    r = [[] for _ in range(n + 1)]\n    r[0].append(0)\n    for x in a:\n        for k in reversed(range(n)):\n            if r[k]: r[k+1].extend(s + x for s in r[k])\n    return r\n\nh = n // 2\ntls, trs = gen(a[:h]), gen(a[h:])\n\na_all = sum(a) % mod\nq = [pow((n - k) * comb(n, k), -1, mod) for k in range(n)] + [0] # 分母の値\n\nans = 0\nfor k, tr in enumerate(trs):\n    tr.sort()\n    \n    pre = [0] * (len(tr) + 1) # prefix sum\n    for i in range(len(tr)):\n        pre[i+1] = (pre[i] + tr[i]) % mod\n    \n    for i, tl in enumerate(tls):\n        for sl in tl:\n            c = bisect_left(tr, x - sl)\n            p = (c * (a_all - sl % mod) - pre[c]) % mod\n            ans += q[i+k] * p % mod\n            ans %= mod\n\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "9c1dbf44ea01d9a0710cbf94a9b7a14bcda06de3e3d18cf3202b6016615f8906"
+    }
+  ],
+  "status": "available"
+}

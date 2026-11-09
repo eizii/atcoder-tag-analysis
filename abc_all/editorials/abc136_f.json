@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc136_f",
+  "editorials": [
+    {
+      "text": "F: Enclosed Points\nまず、空でない部分集合は2N −1 通りあります。これらについて直接f の値を考えるのではなく、各点が\n長方形に含まれるような集合が何個あるかを各点について求めることを考えます。\nある点P に注目しているとしましょう。P を中心に、P とのx, y 座標の大小関係は4 方向ありますが、\nこのそれぞれに点が存在するかどうかという状態を固定すればこのP が長方形に含まれるかどうかが決まる\nことがわかります。ある領域にK 個の点があるとした時、この領域に点が存在する場合は2K −1 通りで、\n点が存在しない場合は1 通りです。例えばですが、点がそれぞれに存在するかどうかの24 通りについて、長\n方形にP が含まれる場合にこれらをかけ合わせて足していけばよいです。(P が集合に含まれるかどうかに\nついても場合分けが必要です)\nよって、各点(xi, yi) についてx < xi, y < yi、x < xi, y > yi、x > xi, y < yi、x > xi, y > yi それぞれ\nの領域についてそれぞれ何点存在するかが求まれば、答えを求めることができます。これはまず点の座標を\n1 −N に圧縮した後、点をx 座標についてソートし、x の小さい方からと大きい方からで2 回segment tree\n/ BIT (fenwick tree) を用いて各y に存在する点の個数を管理していけばO(NlogN) で計算できます。\n以上でこの問題はO(NlogN) で解けました。\n解答例\n\nABC 136 Editorial\nDEGwer, drafear, evima, satashun\nAugust 4, 2019\n",
+      "text_sha256": "d6eb194d4c61045d32117d515aa380e2f80066987681ec5418cc814f8a5b4ee2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc136/abc136_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

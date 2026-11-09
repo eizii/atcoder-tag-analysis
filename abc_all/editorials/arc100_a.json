@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc100_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc100/editorial.pdf",
+      "text": "C : Linear Approximation\n\n  Bi = Ai −i と定義すれば、問題は、自由に整数b を選び、abs(Bi −b) の総和を最小化する問\n題です。ここで、b をBi の中央値にするのが最適であることがわかります。中央値でない場合は、\n中央値に近づけることで損をしないことからこれはわかります。よって、Bi をソートして中央値\nを求め、実際に答えを計算すればよいです。ソートがボトルネックとなり、この問題はO(NlogN)\n\nで解けます。\n\n\n\n\n\n                                         3",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "08955c337aba3ad441468c2da531542b8794efeb6bf05c8003c378a4ab94c0cb"
+    }
+  ],
+  "status": "available"
+}

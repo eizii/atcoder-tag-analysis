@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc382_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc382/editorial/11475",
+      "text": "\\(K=\\max B_i\\)\nとおきます。\n具体的な解法を説明する前に、美味しさ\n\\(1,2,\\dots,K\\)\nの寿司が\n\\(1\\)\nつずつ流れてきたときに何が起こるかを考えてみましょう。このとき、\n\\(i=1,2,\\dots,N\\)\nの順に以下のことが起こります：\n残っている寿司の中に美味しさが\n\\(A_i\\)\n以上のものがあるならば、それらをすべて人\n\\(i\\)\nが取って食べる。次の人\n\\(i+1\\)\nには美味しさ\n\\(1,2,\\dots,A_i-1\\)\nの寿司が\n\\(1\\)\nつずつ流れることになる。\n美味しさ\n\\(i\\)\nの寿司が流れたきたときにそれを食べる人の番号（誰も食べないならば\n\\(-1\\)\n）を\n\\(\\text{id}_i\\)\nと定義します。（なお、同じ美味しさの寿司は常に同じ人によって食べられるということを前提の考察としています。） 前段落で述べた内容をふまえると、\n\\(\\text{id}_1,\\text{id}_2,\\dots,\\text{id}_K\\)\nを以下のようにして求められることが分かります：\n変数\n\\(r\\)\nを用意し、\n\\(r\\leftarrow K\\)\nと初期化する\n\\(i=1,2,\\dots,N\\)\nの順に以下を行う：\n\\(A_i \\leq r\\)\nならば、\n\\(j=A_i,A_i+1,\\dots,r\\)\nそれぞれについて\n\\(\\text{id}_j \\leftarrow i\\)\nとし、\n\\(r\\leftarrow A_i-1\\)\nと更新する\n\\(j=1,2,\\dots,r\\)\nそれぞれについて\n\\(\\text{id}_j \\leftarrow -1\\)\nとする\n\\(\\text{id}_1,\\text{id}_2,\\dots,\\text{id}_K\\)\nをすべて求めてしまえば、美味しさ\n\\(B_i\\ (1\\leq i\\leq M)\\)\nの寿司を食べる人の番号は\n\\(\\text{id}_{B_i}\\)\nの値を参照するだけで求められます。\nよって本問題を\n\\(O(N+M+\\max B_i)\\)\nで解くことができました。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nconst int K = 200010;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, m;\n    cin >> n >> m;\n    vector<int> id(K, -1);\n    int r = K;\n    for (int i = 0; i < n; i++) {\n        int a;\n        cin >> a;\n        while (r > a) {\n            --r;\n            id[r] = i + 1;\n        }\n    }\n    for (int i = 0; i < m; i++) {\n        int b;\n        cin >> b;\n        cout << id[b] << '\\n';\n    }\n}"
+      ],
+      "text_sha256": "116829a9a5bdbe85f73acf1e3a9dc47da4b1f77f3cf655a826b18cefa9c74200",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc382/abc382_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc382/editorial/11495",
+      "text": "\\(B_i\\)\nの値ごとに独立に解きます．\n求めたいものは，\n\\(B_i \\geq A_j\\)\nを満たす整数\n\\(j\\)\nのうち\n\\(j\\)\nの値が最小のものです．これは，配列\n\\(A\\)\nを\n\\(C_1 = A_1, C_i = \\mathrm{min}(A_i, C_{i-1})(2 \\leq i \\leq N)\\)\nのように生成される配列\n\\(C\\)\n（すなわち，\n\\(A\\)\nの累積最小値を表す配列）に置き換えても結果は変わりません．\nまた，この配列\n\\(C\\)\nは広義単調減少です．このことを利用して，\n\\(C\\)\n上で二分探索を行うことで答えを求められます．\n時間計算量は\n\\(\\Theta(M \\log N)\\)\nと公式解説より悪化しますが，制約下において十分高速に答えを求められます．",
+      "codes": [],
+      "text_sha256": "a7254480e1fee17b214241150e8f436bcebffe6d2ce92b003d773440eba00e45",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc382/abc382_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

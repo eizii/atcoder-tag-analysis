@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc109_a",
+  "editorials": [
+    {
+      "text": "A: ABC333\nA × B が奇数ならC = 1 とすることでA × B × C が奇数になります。一方、A × B が偶数なら、偶数\nにどんな自然数をかけても偶数のままです。従って、A × B が偶数かどうかで場合分けするとスマートです。\nC++ による実装例を以下に挙げます。\n#include <iostream >\nusing\nnamespace\nstd;\nint main () {\nint A, B; cin >> A >> B;\nif (A * B % 2 == 1) {\ncout << \"Yes\" << endl;\n}\nelse {\ncout << \"No\" << endl;\n}\n}\nしかし、この事実に気付かなくとも全てのC = 1, 2, 3 に対してA × B × C の偶奇を調べる方法でも正答\nできます。その場合のC++ による実装例は次のようになります。\n#include <iostream >\nusing\nnamespace\nstd;\nint main () {\nint A, B; cin >> A >> B;\nif (A * B * 1 % 2 == 1 || A * B * 2 % 2 == 1 || A * B * 3 % 2 == 1) {\ncout << \"Yes\" << endl;\n}\n\nelse {\ncout << \"No\" << endl;\n}\n}\n",
+      "text_sha256": "7627205e631e45bd062db245f6397d6b5566dd77db47c45a76a44f1602ca6b80",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc109/abc109_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

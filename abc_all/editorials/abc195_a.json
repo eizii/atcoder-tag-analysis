@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc195_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc195/editorial/831",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「\nWelcome to AtCoder\n」をお試しください。言語ごとに解答例が掲載されています。\nこの問題では、\n\\(H\\)\nが\n\\(M\\)\nの倍数かどうか判定すればよいです。多くの言語では、「\n\\(H\\)\nを\n\\(M\\)\nで割ったあまり」を求める演算子として\n%\nが使われています。\n回答例(C)\n回答例(Python)",
+      "codes": [
+        "#include<stdio.h>\n\nint main(){\n\tint m,h;\n\tscanf(\"%d%d\",&m,&h);\n\tif(h%m==0)puts(\"Yes\");\n\telse puts(\"No\");\n}",
+        "M,H=map(int,input().split())\nif H%M==0:\n\tprint(\"Yes\")\nelse:\n\tprint(\"No\")"
+      ],
+      "text_sha256": "e847666eb8bbf1e2d4cc60df72061059764aed03eb5bdfb71456b00f16ac99f1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc195/abc195_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

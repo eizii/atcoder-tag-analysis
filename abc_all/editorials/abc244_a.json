@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc244_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc244/editorial/3593",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\n問題文の通りに、文字列\n\\(S\\)\nを受け取り、\n\\(S\\)\nの末尾の文字を出力すれば良いです。自分の使う言語での文字列の扱い方を確認しておきましょう。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main(){\n    string S;\n    cin >> S >> S;\n    cout << S.back() << endl;\n}",
+        "input()\nprint(input()[-1])"
+      ],
+      "text_sha256": "a275878569273b748c4f16f30d961907b051794f269954395df76703e79abe69",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc244/abc244_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

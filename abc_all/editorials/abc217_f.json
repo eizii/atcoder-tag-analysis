@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc217_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc217/editorial/2584",
+      "text": "この問題は区間 DP によって解くことができます。\n区間 DP は区間を添え字として持って行う動的計画法で、今回の問題のように例えば右端の添え字だけ等で動的計画法を行うのが難しく、また最低でも\n\\(2\\)\n乗の計算量を許す制約の時に使えることが多いです。\n今回の問題では\n\\[\ndp[i][j]=(生徒 i+1 , 生徒 i+2 , \\ldots 生徒 i+2j から j 組のペアを選ぶ方法 )\n\\]\nとして定めてあげれば良いです。答えは\n\\(dp[0][N]\\)\nです。\n他にも添え字を左端の生徒番号、右端の生徒番号という形などにしても構いません。\nさて、\n\\(j\\)\nについて昇順に\n\\(dp[i][j]\\)\nの値を求めることを考えます。\n更新の仕方としてはいくつかありますが、過不足ないように数え上げなければならないことに注意してください。\n例えば、生徒\n\\(i+1\\)\nがペアとなるような相手ごとに足し合わせていけばよいです。偶奇の関係から生徒\n\\(i+1\\)\nは生徒\n\\(i+2k\\)\nと書ける相手としかペアにならないことに注意しましょう。\n生徒\n\\(i+1\\)\n, 生徒\n\\(i+2\\)\n,\n\\(\\ldots\\)\n, 生徒\n\\(i+2j\\)\nから\n\\(j\\)\n組のペアを選ぶ方法 のうち、生徒\n\\(i+1\\)\nと生徒\n\\(i+2k\\)\nがペアとなるような場合の数を考えます。\nまず前の\n\\(2k\\)\n人と後ろの\n\\(2(j-k)\\)\n人はそれぞれのグループの中の人とペアを組むことになります。生徒\n\\(i+1\\)\n,\n\\(\\ldots\\)\n, 生徒\n\\(i+2k\\)\nからの選び方の場合の数は生徒\n\\(i+1\\)\nと生徒\n\\(i+2k\\)\nの仲が悪い場合は\n\\(0\\)\n通り、仲が良い場合は生徒\n\\(i+2\\)\n,\n\\(\\ldots\\)\n, 生徒\n\\(i+2k-1\\)\nから\n\\(k-1\\)\n組のペアを選んでから最後に生徒\n\\(i+1\\)\nと生徒\n\\(i+2k\\)\nがペアとなる方法しかないので、\n\\(k-1\\)\n組のペアの選び方に等しく\n\\(dp[i+1][k-1]\\)\n通りとなります。\n一方、生徒\n\\(i+2k+1\\)\n,\n\\(\\ldots\\)\n, 生徒\n\\(i+2j\\)\nから\n\\(j-k\\)\n組のペアを選ぶ方法が\n\\(dp[i+2k][j-k]\\)\n通りで、最後に順序として生徒\n\\(i+1\\)\n,\n\\(\\ldots\\)\n, 生徒\n\\(i+2k\\)\nと生徒\n\\(i+2k+1\\)\n,\n\\(\\ldots\\)\n, 生徒\n\\(i+2j\\)\nのどちらから選ぶかの順序は自由に決められるから、\n\\[\ndp[i][j]=\\sum_{k=1}^j (dp[i+1][k-1]\\times dp[i+2k][j-k]\\times {}_jC_k  \\times \\mathrm{friends}[i+1][i+2k])\n\\]\nとして求まります。ただし、\n\\(\\mathrm{friends}[i][j]\\)\nは生徒\n\\(i\\)\nと生徒\n\\(j\\)\nの仲が良いならば\n\\(1\\)\n, 悪いならば\n\\(0\\)\nです。\n初期状態は\n\\(dp[0][0]=dp[1][0]=\\cdots =dp[2N][0]=1\\)\nとして\n上の式を使って更新していけば解は求まります。\nこの時、各更新は\n\\(O(N)\\)\nの時間計算量でできるので、全体で\n\\(O(N^3)\\)\nとなり、十分間に合います。よって、この問題を解く事が出来ました。\nC++による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\n#define N 410\n#define ll long long\n#define MOD 998244353\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nint main(void) {\n\tint n, m;\n\tint a, b;\n\tll x, y, z;\n\tbool can[N][N];\n\tll dp[N][(N / 2)];\n    ll binom[N][N];\n\tbinom[0][0] = 1;\n\tfor (int i = 1; i < N; i++) {\n\t\tbinom[i][0] = 1;\n\t\tbinom[i][i] = 1;\n\t\trep(j, i - 1) {\n\t\t\tbinom[i][j + 1] = (binom[i - 1][j] + binom[i - 1][j + 1]) % MOD;\n\t\t}\n\t}\n\n\tcin >> n >> m;\n\trep(i, 2 * n)rep(j, 2 * n)can[i][j] = false;\n\trep(i, m) {\n\t\tcin >> a >> b;\n\t\tcan[a - 1][b - 1] = true;\n\t\tcan[b - 1][a - 1] = true;\n\t}\n\trep(i, 2 * n + 1)dp[i][0] = 1;\n\tfor (int j = 1; j <= n; j++) {\n\t\trep(i, 2 * (n - j) + 1) {\n\t\t\tdp[i][j] = 0;\n\t\t\trep(k, j) {\n\t\t\t\tif (can[i][i + (2 * k) + 1]) {\n\t\t\t\t\tx = (dp[i + 1][k] * dp[i + (2 * k) + 2][j - k - 1]) % MOD;\n\t\t\t\t\tdp[i][j] = ((x*binom[j][k + 1]) + dp[i][j]) % MOD;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tcout << dp[0][n] << endl;\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "3860e4d38ada3be8ba67f20875094ba96b6e506e924c25e2e376cc936154f6b7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc217/abc217_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc217/editorial/2616",
+      "text": "公式解説と同様，区間 DP を行います．\n\\(dp[i][j]\\)\nで区間\n\\([i,j)\\)\nにおけるペアの選び方を表すことにします．\n区間\n\\([i,j)\\)\nにおけるペアの選び方のうち，生徒\n\\(l\\)\nと生徒\n\\(r\\)\nの組を最後に選ぶ場合を考えます．\nこの時の場合の数は\n\\[dp[i][l] \\cdot dp[l+1][r] \\cdot dp[r+1][j] \\cdot \\binom{\\frac{j-i-2}2}{\\frac{l-i}2} \\cdot \\binom\n{\\frac{j-l-2}2}{\\frac{j-r-1}2}\\]\nです．（これは，生徒\n\\(l\\)\nより左のグループ，生徒\n\\(l\\)\nと\n\\(r\\)\nの間のグループ，生徒\n\\(r\\)\nより右のグループに分けたと考えれば良いです．）\nさて，これにより次の漸化式が立てられます：\n\\[\\displaystyle dp[i][j]=\\sum_{(l,r)\\in S}dp[i][l] \\cdot dp[l+1][r] \\cdot dp[r+1][j] \\cdot \\binom{\\frac{j-i-2}2}{\\frac{l-i}2}   \\binom\n{\\frac{j-l-2}2}{\\frac{j-r-1}2}\\]\nただし，\n\\(S=\\{(l,r) \\mid i\\leq l \\lt r \\lt j, l\\)\nと\n\\(r\\)\nは仲が良い\n\\(\\}\\)\nとします．\nこの漸化式を愚直に計算すると最悪の場合で\n\\(O(N^4)\\)\n程度かかるので，高速化することを考えて整理します：\n\\[\\displaystyle dp[i][j]=\\sum_{l=i}^{j-1}dp[i][l]\\cdot\\binom{\\frac{j-i-2}2}{\\frac{l-i}2} \\cdot\\sum_{r} \\left(dp[l+1][r] \\cdot dp[r+1][j] \\cdot \\binom\n{\\frac{j-l-2}2}{\\frac{j-r-1}2}\\right)\\]\n（ただし，\n\\(r\\)\nについての和は\n\\((l,r)\\in S\\)\nであるようなものについてのみとります．）\nここで，\n\\(r\\)\nについての和の部分を\n\\(dp2[l][j]\\)\nと定義します．つまり，\n\\[\\displaystyle dp2[l][j]=\\sum_{r} dp[l+1][r] \\cdot dp[r+1][j] \\cdot \\binom\n{\\frac{j-l-2}2}{\\frac{j-r-1}2}\\]\nです．（\n\\(r\\)\nの動く範囲は上と同様です．）\nあとは，\n\\(dp[i][j], dp2[i][j]\\)\nを\n\\(j-i\\)\nが小さい方から計算するか，メモ化再帰により計算すれば良いです．\nC++でのメモ化再帰による実装例：\nhttps://atcoder.jp/contests/abc217/submissions/25629426",
+      "codes": [],
+      "text_sha256": "0dc1b42b4260729becd3f7023c15b1be5b9adf1a6fe0b3c3e88a17cf683fb5d8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc217/abc217_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

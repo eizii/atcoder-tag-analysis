@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc172_c",
+  "editorials": [
+    {
+      "text": "C: Tsundoku\n(解説: evima)\n結局のところ、机A, B からそれぞれ何冊の本を読むか以外に行うべき選択はありません。a0 =\n0, a1 = A1, a2 = A1+A2, a3 = A1+A2+A3, . . . , aN = A1+· · ·+AN とします。b0, b1, . . . , bM も同\n様に定義します。これらの値をプログラムで求める際は、a1 = a0+A1, a2 = a1+A2, a3 = a2+A3, . . .\nなどとします(毎回A1 から足していくと時間切れになります)。すると、机A からi 冊、机B から\nj 冊読むことを考えれば、問題は次のように言い換えられます。\n整数i, j (0 ≤i ≤N, 0 ≤j ≤M) をai + bj ≤K となるように選ぶとき、i + j がとりうる最\n大の値を求めよ。\nN, M がある程度小さければ、(i, j) = (0, 0), (0, 1), . . . , (0, M), (1, 0), . . . , (N, M) という(N +\n1) × (M + 1) 通りすべての選択を実際に試すことでこの問題を解くことができます。しかし、\nN = M = 200000 の場合には少なくとも数十秒の実行時間が必要で、間に合いません。\nそこで、i についてのみi = 0, 1, . . . , N というすべての選択を試し、このそれぞれについて選択可\n能なj の最大値、つまりbj ≤K −ai であるようなj の最大値を求めることにします。\nまず、i = 0 のときに選択可能なj の最大値を求めます。これは、j = M, M −1, . . . と降順に走査\nすると、bj ≤K −a0 が最初に成立したj として求まります。このj の値をbest0 とします。\n次に、i = 1 のときに選択可能なj の最大値を求めます。ここで、本一冊を読むのにかかる時間が\n正であること(a, b がともに単調増加数列であること) から、この最大値はbest0 以下です。よって、\n降順の走査をj = M から始める必要はなく、j = best0 から始めることができます。\nこの要領でi = N まで計算を続ける(ただしai > K となったら打ち切る) ことで、計算量を大幅\nに削減することができます。次ページの実装例(Python のコードではありますが、主要部である11\n行目から18 行目まではほぼ疑似コードといえるでしょう) で考えると、15, 16 行目のwhile ループ\nの内部は合計でM 回以下しか実行されないため、時間計算量はO(N + M) となります。\n\nPython での実装例:\n1 N, M, K = map(int, input().split())\n2 A = list(map(int, input().split()))\n3 B = list(map(int, input().split()))\n4\n5 a, b = [0], [0]\n6 for i in range(N):\n7\na.append(a[i] + A[i])\n8 for i in range(M):\n9\nb.append(b[i] + B[i])\n10\n11 ans, j = 0, M\n12 for i in range(N + 1):\n13\nif a[i] > K:\n14\nbreak\n15\nwhile b[j] > K - a[i]:\n16\nj -= 1\n17\nans = max(ans, i + j)\n18 print(ans)\n",
+      "text_sha256": "a9302d4bbb3bee3b6b2a1676f712ba54b1efa22fc29b5b542d878099cd86c3c7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc172/abc172_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

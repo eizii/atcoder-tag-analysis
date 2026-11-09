@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc423_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc423/editorial/13868",
+      "text": "実装方針\n引き出し額を\n\\(1000m\\)\n円とおくと，満たすべき条件は\n\\(1000m + Cm \\leq X\\)\nと書けます．\nしたがって，\n\\(X\\)\nを\n\\((1000+C)\\)\nで割って小数点以下を切り捨てた値が\n\\(m\\)\nとしてありえる最大値であり，これを\n\\(1000\\)\n倍すれば求める答えが得られます．\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n\nint main (void) {\n\tint x, c;\n\tcin >> x >> c;\n\n\tint cnt = x / (1000 + c);\n\tint ans = cnt * 1000;\n\t\n\tcout << ans << \"\\n\";\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "6180dd1accda97e23e56f8c9b5e86859f7e44a2023bf7486df2f0e6190eb311f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc423/abc423_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc408_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc408/editorial/13158",
+      "text": "この問題は\nset\nと呼ばれるデータ構造を使うことで解くことができます。\nset はいくつかの要素の集合を保持するデータ構造です。特徴として、配列は要素の順番を保持しますが set は数学の集合と同じように順番や各要素の個数を区別しません。\nこの問題は\n\\(A\\)\nの要素を全て set に代入し、set の中に残った要素を小さい順に並べることで正答することができます。\n実装例(Python3)\n実装例(C++)\nまた、 C++ には\nstd::unique\nという関数が存在し、この関数を使うと楽に実装することができます。\n実装例(C++)",
+      "codes": [
+        "n = int(input())\na = list(map(int, input().split()))\ns = set(a)\nans = list(s)\nans.sort()\nprint(len(ans))\nprint(*ans)",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> a(n);\n\tfor (int &i : a)\n\t\tcin >> i;\n\tset<int> s(a.begin(), a.end());\n\tvector<int> ans(s.begin(), s.end());\n\tsort(ans.begin(), ans.end());\n\tcout << ans.size() << endl;\n\tfor (int i = 0; i < ans.size(); i++)\n\t\tcout << ans[i] << \" \\n\"[i + 1 == ans.size()];\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> a(n);\n\tfor (int &i : a)\n\t\tcin >> i;\n\tsort(a.begin(), a.end());\n\ta.erase(unique(a.begin(), a.end()), a.end());\n\tcout << a.size() << endl;\n\tfor (int i = 0; i < a.size(); i++)\n\t\tcout << a[i] << \" \\n\"[i + 1 == a.size()];\n}"
+      ],
+      "text_sha256": "fa7a90b34b1b66ea51b75c880b716b52217965628970c95ca4355903500db590",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc408/abc408_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc377_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc377/editorial/11234",
+      "text": "置くことができるマス全体は最大で \\(10 ^ {18}-3\\) 個などと非常に大きくなる可能性がありますが、置くことができないマスはたかだか \\(9M\\) 個なので、これをすべて管理することができます。\n置くことができないマスをハッシュセットなどで管理し、重複を取り除いて個数を数えることで、この問題を解くことができます。\n時間計算量は \\(O(M)\\) や \\(O(M\\log M)\\) などになります。\n実装例は以下のようになります。",
+      "codes": [
+        "﻿#include <iostream>\n#include <set>\n#include <vector>\n\nint main() {\n    using namespace std;\n    int N, M;\n    cin >> N >> M;\n\n    // 置くことができないマスの集合\n    set<pair<int, int>> bad_cell;\n    // コマの動く先\n    vector<pair<int, int>> knight_move{{2, 1}, {1, 2}, {-1, 2}, {-2, 1}, {-2, -1}, {-1, -2}, {1, -2}, {2, -1}};\n    for (int i = 0; i < M; ++i) {\n        int x, y;\n        cin >> x >> y;\n        bad_cell.emplace(x, y);\n        for (const auto& [dx, dy] : knight_move)\n            // 取れる先が存在するマスなら\n            if (1 <= x + dx && x + dx <= N && 1 <= y + dy && y + dy <= N)\n                bad_cell.emplace(x + dx, y + dy);\n    }\n\n    // マス全体から置けないマスを引いたものが答え\n    cout << static_cast<long>(N) * N - size(bad_cell) << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "fff1d05f89458ccef4357d846a6886de264469900ed2ce6a7cfaa2124c8b467f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc377/abc377_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc377/editorial/11250",
+      "text": "解法は公式解説と同じです。\n\\(8\\)\n通りの移動先について、以下のように実装することで実装量を軽くすることができます。（例としてC++とPythonによる実装を記載していますが、他の言語でも同様に書くことができると思います。）\nこのように、「少し数字は違うがほとんど同じ処理」は、今回のようにforeach文を使ったり関数化したりすることで実装量を軽くすることができるので、覚えておくとよいでしょう。\n提出コード(C++)\n提出コード(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n\tint n,m;cin >> n >> m;\n\tset<pair<int,int>>s;\n\tfor(;m--;){\n\t  int a,b;cin >> a >> b;\n\t\ts.insert({a,b});\n\t\tfor(int i:{-1,1}){\n\t\t\tfor(int j:{-2,2}){\n\t\t\t\ts.insert({a+i,b+j});\n\t\t\t\ts.insert({a+j,b+i});\n\t\t\t}\n\t\t}\n\t}\n\tlong long ans = n;\n\tans *= n;\n\tfor(auto[x,y]:s){\n\t\tif(1<=x&&1<=y&&x<=n&&y<=n)ans--;\n\t}\n\tcout << ans << endl;\n\treturn 0;\n}",
+        "n,m = map(int,input().split())\ns = set()\nfor _ in range(m):\n  a,b = map(int,input().split())\n  s.add((a,b))\n  for i in [-1,1]:\n    for j in [-2,2]:\n      s.add((a+i,b+j))\n      s.add((a+j,b+i))\nans = n*n\nfor i,j in s:\n  if 1<=i<=n and 1<=j<=n:\n    ans-=1\nprint(ans)"
+      ],
+      "text_sha256": "1724ec7ea5cb4974244c721e2839c9ef2366c127e9caf382cae7744d4430f1b2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc377/abc377_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

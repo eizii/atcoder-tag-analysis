@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc458_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc458/editorial/20465",
+      "text": "実装方針\nC++, Python を含む多くの主流な言語では，ある文字列の部分文字列をとる関数が標準で用意されています．その仕様にしたがって実装するのが簡潔です．\nたとえば Python では\ns[i:j]\nによって，0-indexed で\n\\(i\\)\n文字目以上\n\\(j\\)\n文字目未満の範囲を取得できます．\n一方で C++ では\ns.substr(i, x)\nによって，0-indexed で\n\\(i\\)\n文字目からはじめて長さ\n\\(x\\)\nの範囲を取得できます．\n実装例 (Python3, C++)\nPython3 での実装例を以下に示します．\nC++ での実装例を以下に示します．",
+      "codes": [
+        "s = input()\nn = int(input())\n\nans = s[n:(len(s) - n)]\n\nprint(ans)",
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n#include <string>\nusing std::string;\n\nint main (void) {\n\tstring s;\n\tint n;\n\n\tcin >> s;\n\tcin >> n;\n\t\n\tstring ans = s.substr(n, s.size() - n*2);\n\tcout << ans << \"\\n\";\n\t\t\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "7da9e3a4a79e28efea5456c0b6a870528f4acf74c9116730d8ffc23c0e104d11",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc458/abc458_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

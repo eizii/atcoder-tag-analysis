@@ -1,0 +1,38 @@
+{
+  "problem_id": "abc339_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc339/editorial/9206",
+      "text": "\\(2\\)\n変数を選んで掛け算をする方法は\n\\(N^2\\)\n通りあります。\nただし、各変数は非常に大きいので、これらを愚直に求めるとき (オーバーフローなどを考慮せず) 多倍長演算に頼るとしても、桁数を\n\\(d\\)\nとして\n\\(O(N^2 d \\log d)\\)\n程度の計算量が予想され、これでこの問題に正解することは厳しいです。\nひとまず、ある\n\\(3\\)\n変数\n\\(p,q,r\\)\nに対して\n\\(p \\times q = r\\)\nとなるか判定しましょう。\nここで、少し大胆な以下の判定をすることを考えます。\nある整数\n\\(x\\)\nを選択し、\n\\(p \\times q \\equiv r\\)\n(\n\\(\\rm{mod}\\)\n\\(x\\)\n) であれば\n\\(p \\times q = r\\)\nであると判定する。\nこの方法は、\n\\((p \\times q - r) \\equiv 0\\)\n(\n\\(\\rm{mod}\\)\n\\(x\\)\n) であるとき失敗します。\nここで、例えば\n\\(x\\)\nとして\n\\(10^9\\)\n以上の素数を選択することを考えます。\nこのとき、この判定が失敗する\n\\(x\\)\nは高々\n\\(222\\)\n個しかありません(理由:\n\\(|p \\times q - r| \\le 10^{2000}\\)\n)。これに対して、\n\\(10^9\\)\n以上\n\\(2 \\times 10^9\\)\n以下の素数は数千万個あります。\nこのため、実は以下の乱択アルゴリズムが正当な解法となります。\n\\(S = \\)\n乱択した素数の集合 ( 各値は\n\\(10^9\\)\n以上\n\\(2 \\times 10^9\\)\n以下の素数 ) とする。\n\\(S\\)\n中全ての要素\n\\(x\\)\nについて、\n\\(A_i \\times A_j \\equiv A_k\\)\n(\n\\(\\rm{mod}\\)\n\\(x\\)\n) が成り立てば、\n\\(A_i \\times A_j = A_k\\)\nと判定する。\n先に全ての\n\\(A_k\\)\nに対して\n\\(S\\)\n中の各要素\n\\(x\\)\nで\n\\(\\rm{mod}\\)\nを取った値を準備しておき、それらに\n\\(A_i \\times A_j\\)\nの\n\\(\\rm{mod}\\)\nを取ったものがマッチするか判定する。\nこれにより、\n\\(O(|S| \\times N^2 \\log N)\\)\nでこの問題に正解することができます。成功確率を精密に見積もることはこの解説では省略しますが、\n\\(|S|\\)\nとして\n\\(20\\)\n程度の適当な整数を選択すると良いでしょう。\nまた、\n\\(x\\)\nに対して素数判定を行わず、ただ適当に大きい整数を選択するだけでもこの問題に正解することができます。(そのような解法を撃墜する (不正解にするようなテストケースを用意する) ことは非常に難しいです。)\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nlong long takemod(string &s,long long mod){\n  long long res=0;\n  for(auto &nx : s){\n    res*=10;res%=mod;\n    res+=(nx-'0');res%=mod;\n  }\n  return res;\n}\n\nint lb(vector<long long> &x,vector<vector<long long>> &lis){\n  int l=0,r=lis.size()-1;\n  while(l<=r){\n    int te=(l+r)/2;\n    if(lis[te] < x){l=te+1;}\n    else{r=te-1;}\n  }\n  return l;\n}\n\nint ub(vector<long long> &x,vector<vector<long long>> &lis){\n  int l=0,r=lis.size()-1;\n  while(l<=r){\n    int te=(l+r)/2;\n    if(lis[te] <= x){l=te+1;}\n    else{r=te-1;}\n  }\n  return l;\n}\n\nint main(){\n  std::random_device seed_gen;\n  std::mt19937_64 engine(seed_gen());\n\n  int n;\n  cin >> n;\n  int ss=20;\n  vector<long long> S;\n  for(int i=0;i<ss;i++){\n    S.push_back(1000000000+engine()%1000000000);\n  }\n  vector<vector<long long>> md;\n  for(int i=0;i<n;i++){\n    string a;\n    cin >> a;\n    vector<long long> cv;\n    for(int j=0;j<ss;j++){\n      cv.push_back(takemod(a,S[j]));\n    }\n    md.push_back(cv);\n  }\n  sort(md.begin(),md.end());\n\n  long long res=0;\n  for(int i=0;i<n;i++){\n    for(int j=0;j<n;j++){\n      vector<long long> cp;\n      for(int k=0;k<ss;k++){\n        cp.push_back((md[i][k]*md[j][k])%S[k]);\n      }\n      res+=ub(cp,md)-lb(cp,md);\n    }\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "ab77e9633f4d0b564d2e4c73a527b1b8219f72ca2a7fa5722d57148dcf59baba",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc339/abc339_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc339/editorial/9220",
+      "text": "多倍長整数の四則演算は桁数が大きいほど計算するのに時間がかかります。よって、桁数が大きい四則演算をする回数を減らせば時間を減らせるのではないかと考えます。\nこの問題を愚直に解くことを考えます。\n\\(i,j\\)\nを全探索し、積が\n\\(A_{k}\\)\nと一致するような\n\\(k\\)\nが個数の総和をとる\nこの方針を C++ で\nboost の多倍長整数\nを用いて書くと以下のようになります。\nこの実装では TLE してしまいます。なぜなら桁数の大きい掛け算をたくさんの回数しているからです。\nよって、桁数の大きい掛け算の回数を減らすことを考えます。\n\\(A\\)\nがソートされていて、\n\\((i,j)\\)\nの組が\n\\(A_{i}\\times A_{j} > A_{N}\\)\nを満たしているとします。このとき、\n\\(j < l\\)\nを満たす\n\\(l\\)\nについては\n\\((i,l)\\)\nに対する答えの探索をしなくて済みます。\nこの考察を用いて実装すると以下のようになります。\nこの実装は今回のテストケースでは AC を得ることができます。\nこの実装に対する最悪ケースとして\n\\(N=1000,A_{1} = A_{2} =\\cdots A_{N-1} = 10 ^{499}, A_{N} = 10^{998}\\)\nが考えられますが、この入力に対して時間内に答えが出力できるか否かに関しては調べていません。\n提出例 C++ 340ms\nPython ではいつも通り多倍長整数を用いることができます。\nKiri8128 さんによる提出例 pypy 428ms\nまた、\n\\(A\\)\nがソートされているとき、\n\\(i\\leq j\\)\nの場合のみ調べれば答えを計算することができます。これを用いるとボトルネックとなる掛け算の回数を約半分にすることができます。\n提出例 C++ 168ms\nKiri8128 さんによる提出例 pypy 263ms",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#include <boost/multiprecision/cpp_int.hpp>\nusing namespace boost::multiprecision;\n\nint main(){\n    using F = cpp_int;\n    int N, ans = 0;\n    cin >> N;\n    vector<F> A(N);\n    unordered_map<F, int> m;\n    for(int i = 0; i < N; i++) cin >> A[i], m[A[i]]++;\n    for(F a: A) for(F b: A){\n        F tmp = a * b;\n        if(m.count(tmp)) ans += m[tmp];\n    }\n    cout << ans << \"\\n\";\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n#include <boost/multiprecision/cpp_int.hpp>\nusing namespace boost::multiprecision;\n\nint main(){\n    using F = cpp_int;\n    int N, ans = 0;\n    cin >> N;\n    vector<F> A(N);\n    unordered_map<F, int> m;\n    for(int i = 0; i < N; i++) cin >> A[i], m[A[i]]++;\n    sort(A.begin() , A.end()); // ソートしておく\n    for(F a: A) for(F b: A){\n        F tmp = a * b;\n        if(tmp > A[N - 1]) break; // これ以上 j を増やす必要はない\n        if(m.count(tmp)) ans += m[tmp];\n    }\n    cout << ans << \"\\n\";\n}"
+      ],
+      "text_sha256": "b6dc42a5401ea4dfaf34d449f516e57dc4d7ff436ab81cb17ed5bfeb2b2f0936",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc339/abc339_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc339/editorial/9244",
+      "text": "公式解説の補足です。\n公式解説では乱択アルゴリズムとして紹介されていますが、\n\\(S\\)\nに含める数を増やせば決定的なアルゴリズムになります。\n具体的には、\n\\(10^{9}\\)\n以上\n\\(2\\times10^{9}\\)\n以下の素数を\n\\(223\\)\n個以上\n\\(S\\)\nに含めれば、中国剰余定理により確実に判定できます。\n公式解説に書かれている、「この判定が失敗する\n\\(x\\)\nは高々\n\\(222\\)\n個しかありません」という事実からも、\n\\(223\\)\n個あれば十分であることがわかります。\nまた、中国の剰余定理は素数であることが必須ではありません。ただ、無駄がないように\n\\(S\\)\nに含める数は互いに素であることが望ましいです。\nそのため、小さい方から順に素数をとっていき、その素数の累乗で\n\\(2\\times10^{9}\\)\nを超えない最大のものを\n\\(S\\)\nに入れていくことで\n\\(S\\)\nを構成することも考えられます。\nこの場合に決定的なアルゴリズムにするためには、厳密な値は確認していませんが、少なくとも\n\\(333\\)\n番目あたりの素数まで考えれば十分だと思われます。\n\\(333\\)\n番目辺りの素数は\n\\(2000\\)\n程度であるため、\n\\(333\\)\n番目までの素数について、その素数の累乗で\n\\(2\\times10^{9}\\)\nを超えない最大のものは最悪でも\n\\(10^{6}\\)\nを少し下回る程度です。\n実際には\n\\(10^{6}\\)\nを超えるものも多いことを考慮すると、\n\\(333\\)\n個で十分だと思われます。\n以下は後者の方針の提出です。\nhttps://atcoder.jp/contests/abc339/submissions/50060729\nhttps://atcoder.jp/contests/abc339/submissions/50101006",
+      "codes": [],
+      "text_sha256": "7a3a27cc3d4ae6b0646ec6317e414de7b039044b0777d9d9aab74f310a934842",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc339/abc339_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

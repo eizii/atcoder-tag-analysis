@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc412_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc412/editorial/13386",
+      "text": "ドミノを左から順に置いていくことを考えましょう。\n末尾にドミノ\n\\(i\\)\nが置かれている時、次に置けるドミノ\n\\(j\\)\nは\n\\(S_j \\leq 2 S_i\\)\nを満たすドミノです。この条件は\n\\(S_i\\)\nが大きければ大きいほど緩和されます。よって、毎回できるだけ大きいドミノを置いていく方がよいことがわかります。\nここから、以下の貪欲法が動作します。\nはじめにドミノ\n\\(1\\)\nを左端に置く。\n以下の操作を繰り返す。\n現在一番右に置かれているドミノをドミノ\n\\(i\\)\nとする。\n\\(2 S_i \\geq S_N\\)\nが成り立つ場合、ドミノ\n\\(N\\)\nを右端に置いて操作を終了して、現在置いたドミノの個数を出力する。\nそうでない、すなわち\n\\(2S_i \\lt S_N\\)\nの場合を考える。\n\\(2S_i \\geq S_j\\)\nを満たすドミノ\n\\(j\\)\nのうち最大のものを選ぶ。\n条件を満たす\n\\(j\\)\nが存在しないか\n\\(S_i \\geq S_j\\)\nである場合、これ以降も\n\\(S_i\\)\nより大きいドミノが置けることはないので、ドミノ\n\\(N\\)\nも置けない。よって\n\\(-1\\)\nを出力してアルゴリズムを終了する。\nそうでない場合、ドミノ\n\\(i\\)\nの右にドミノ\n\\(j\\)\nを置く。\n操作を終了した時点で置いたドミノの個数を出力して、アルゴリズムを終了する。\nこの貪欲はドミノを置いた個数を\n\\(K\\)\nとして\n\\(\\mathrm{O}(K N)\\)\n回で終了します。そして、これは少し難しいのですが\n\\(K\\)\nは高々\n\\(60\\)\n回 (\n\\( = 2 \\lceil \\log_2 \\max(A) \\rceil\\)\n回) であることが証明できます。\n(証明) 最終的においたドミノの大きさの列を\n\\(s_1, s_2, \\dots, s_K\\)\nとする。ここで\n\\(s_1, s_2, s_3\\)\nに注目する。もし\n\\(s_1 \\times 2 \\geq s_3\\)\nの場合、\n\\(s_2\\)\nを飛ばして\n\\(s_3\\)\nが置けることになりアルゴリズムに矛盾する。よって\n\\(s_1 \\times 2 \\lt s_3\\)\n、すなわち\n\\(s_3\\)\nは\n\\(s_1\\)\nの\n\\(2\\)\n倍より大きい。\n同様にして\n\\(s_{i+2}\\)\nは\n\\(s_i\\)\nの\n\\(2\\)\n倍大きいことが証明できるため、仮に\n\\(K \\geq 61\\)\nとすると\n\\(s_{61}\\)\nは\n\\(s_1\\)\nの\n\\(2^{30}=1073741824\\)\n倍より大きいことになるが、これは入力の制約\n\\(A_i \\leq 10^9\\)\nに反する。よって\n\\(K \\leq 60\\)\nであることが示された。\nよってこの問題を\n\\(\\mathrm{O}(N \\log \\max(A))\\)\n回で解くことができて、これは十分高速です。\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n  int N;\n  cin >> N;\n  vector<int> A(N);\n  for (auto& a : A) cin >> a;\n\n  vector<int> used(N);\n  int ans = 1, last = 0;\n  while (true) {\n    if (A[last] * 2 >= A[N - 1]) {\n      ans += 1;\n      break;\n    }\n    int nxt = -1;\n    for (int i = 1; i <= N - 1; i++) {\n      if (used[i]) continue;\n      if (A[last] * 2 >= A[i]) {\n        if (nxt != -1 && A[nxt] >= A[i]) continue;\n        nxt = i;\n      }\n    }\n    if (nxt == -1 || A[nxt] <= A[last]) {\n      cout << -1 << endl;\n      return;\n    }\n    ans++, last = nxt, used[nxt] = 1;\n  }\n  cout << ans << endl;\n}\n\nint main() {\n  int T;\n  cin >> T;\n  while (T--) solve();\n}"
+      ],
+      "text_sha256": "01e149f2bb26fcd31cd49fd411a3ffb291421482664fb34fa1ee771ad3bd73de",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc412/abc412_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

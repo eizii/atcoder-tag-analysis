@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc227_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc227/editorial/2911",
+      "text": "この問題の原案はキーエンス社の社員により提供されました\n\\(P\\)\n個以上のプロジェクトを作ることができるための条件を考えます。\n各\n\\(i\\,(1 \\leq i \\leq N)\\)\nについて\n\\(\\min(A_i,P)\\)\nを足し合わせたものを\n\\(sum\\)\nとします。\n\\(P \\times K > sum\\)\nの時は明らかに\n\\(P\\)\n個以上のプロジェクトを作ることは不可能です。実は、逆に\n\\(P \\times K \\leq sum\\)\nの時は\n\\(P\\)\n個以上のプロジェクトを作ることが可能であることが証明できます。\nよって解を決め打ち二分探索することで、この問題が解けました。\n\\(P\\times K > sum\\)\nを判定する際はオーバーフローに気を付けてください。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n, k; cin >> n >> k;\n    vector<long long> v(n);\n    for(long long &x : v) cin >> x;\n    long long ok = 0, ng = 1e18 / k;\n    while(ng - ok > 1){\n        long long md = (ok + ng) / 2, sum = 0;\n        for(long long x : v) sum += min(x, md);\n        if(sum >= k * md) ok = md;\n        else ng = md;\n    }\n    cout << ok << endl;\n}"
+      ],
+      "text_sha256": "36af03728042021568771718755cd48efc2e07bc2c916ee3f006d139326c37c4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc227/abc227_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc227/editorial/2928",
+      "text": "「\n\\(x\\)\n個のプロジェクトを作れる」ことの必要十分条件が\n\\(\\sum\\min(x,A_i)\\geq Kx\\)\nであることは、以下の図が理解の助けになります。",
+      "codes": [],
+      "text_sha256": "26d2b2c6dc93588cc78b311f94e55d3d513f0d708df3afc3ad084acf4efac09e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc227/abc227_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc216_c",
+  "title": "Many Balls",
+  "contests": [
+    {
+      "contest_id": "abc216",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 145,
+  "raw_difficulty": -6,
+  "contest_id": "abc216",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc216/tasks/abc216_c",
+  "statement": "配点 : 300 点 問題文 空の箱があります。 髙橋君は以下の 2 種類の魔法を好きな順番で好きな回数使えます。 魔法 A ：箱の中にボールを 1 つ増やす 魔法 B ：箱の中のボールの数を 2 倍にする 合計 \\mathbf{120} 回以内 の魔法で、箱の中のボールの数をちょうど N 個にする方法を 1 つ教えてください。 なお、与えられた制約のもとで条件を満たす方法が必ず存在することが示せます。 魔法以外の方法でボールの数を変化させることはできません。 制約 1 \\leq N \\leq 10^{18} 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N 出力 A , B のみからなる文字列 S を出力せよ。 S の i 文字目が A ならば、髙橋君が i 回目に使う魔法が魔法 A であることを表し、 B ならば魔法 B であることを表す。 S の長さは \\mathbf{120} 以下 でなければならない。 入力例 1 5 出力例 1 AABA ボールの数は、 0 \\xrightarrow{A} 1\\xrightarrow{A} 2 \\xrightarrow{B}4\\xrightarrow{A} 5 と変化します。 AAAAA などの答えも正解になります。 入力例 2 14 出力例 2 BBABBAAAB ボールの数は、 0 \\xrightarrow{B} 0 \\xrightarrow{B} 0  \\xrightarrow{A}1 \\xrightarrow{B} 2 \\xrightarrow{B} 4  \\xrightarrow{A}5  \\xrightarrow{A}6 \\xrightarrow{A} 7  \\xrightarrow{B}14 と変化します。 S の長さを最小化する必要はありません。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 空の箱があります。 髙橋君は以下の 2 種類の魔法を好きな順番で好きな回数使えます。 魔法 A ：箱の中にボールを 1 つ増やす 魔法 B ：箱の中のボールの数を 2 倍にする 合計 \\mathbf{120} 回以内 の魔法で、箱の中のボールの数をちょうど N 個にする方法を 1 つ教えてください。 なお、与えられた制約のもとで条件を満たす方法が必ず存在することが示せます。 魔法以外の方法でボールの数を変化させることはできません。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 10^{18} 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 A , B のみからなる文字列 S を出力せよ。 S の i 文字目が A ならば、髙橋君が i 回目に使う魔法が魔法 A であることを表し、 B ならば魔法 B であることを表す。 S の長さは \\mathbf{120} 以下 でなければならない。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 AABA ボールの数は、 0 \\xrightarrow{A} 1\\xrightarrow{A} 2 \\xrightarrow{B}4\\xrightarrow{A} 5 と変化します。 AAAAA などの答えも正解になります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 14"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 BBABBAAAB ボールの数は、 0 \\xrightarrow{B} 0 \\xrightarrow{B} 0  \\xrightarrow{A}1 \\xrightarrow{B} 2 \\xrightarrow{B} 4  \\xrightarrow{A}5  \\xrightarrow{A}6 \\xrightarrow{A} 7  \\xrightarrow{B}14 と変化します。 S の長さを最小化する必要はありません。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc216/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:39.953809+00:00",
+  "statement_sha256": "4fc694b47fdf673aca4d50da183ac7d38a26656d1e3ada28ad030f5e0bd1ff1d",
+  "editorials": []
+}

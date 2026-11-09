@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc362_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc362/editorial/10398",
+      "text": "この問題は，グラフの最短経路長を求めるアルゴリズムの練習問題です．非負の辺重みを持つグラフに対し，ある始点から各頂点への最短経路長は，\nダイクストラ法\nにより高速に求めることができます．\nこの問題では頂点にも重みがあるので，そのままではダイクストラ法を適用できません．そこで，辺のみに重みを持つ問題に言い換えます．\n頂点\n\\(U_j\\)\nにいる状態から辺\n\\(j\\)\nを使って頂点\n\\(V_j\\)\nに移動するとき，新たにかかるコストは，「辺\n\\(j\\)\nを通るコスト」と「頂点\n\\(V_j\\)\nを通るコスト」の和，すなわち\n\\(B_j + A_{V_j}\\)\nです．\n逆に，頂点\n\\(V_j\\)\nにいる状態から辺\n\\(j\\)\nを使って頂点\n\\(U_j\\)\nに移動するとき，新たにかかるコストは，「辺\n\\(j\\)\nを通るコスト」と「頂点\n\\(U_j\\)\nを通るコスト」の和，すなわち\n\\(B_j + A_{U_j}\\)\nです．\nよって，各辺\n\\(j\\)\nに対し，\n\\(U_j \\to V_j\\)\nの向きに重み\n\\(B_j + A_{V_j}\\)\nの辺を，\n\\(V_j \\to U_j\\)\nの向きに重み\n\\(B_j + A_{U_j}\\)\nの辺を張ることで，すべてのコストを辺重みのみで表現できます．この新しいグラフ上でダイクストラ法を実行し，最後に始点の重み\n\\(A_1\\)\nを足すことで，答えを求めることができます．時間計算量は\n\\(O(M \\log N)\\)\nです．\n実装例 (PyPy)",
+      "codes": [],
+      "text_sha256": "e363b4513ad5307e02eee1cfe6f8eba7e4b4df2028ed3d357a5d2b9d11fee448",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc362/abc362_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc362/editorial/10421",
+      "text": "次のような\n\\(2N\\)\n頂点\n\\(N + 2M\\)\n辺の有向グラフ（辺にのみコストあり）を作ると、頂点\n\\(1_\\text{in}\\)\nから頂点\n\\(i_\\text{out}\\)\nまでの経路の最小コストが求めるものです。\n元のグラフの各頂点\n\\(i\\)\nに対し、二つの頂点\n\\(i_\\text{in}\\)\nと\n\\(i_\\text{out}\\)\nを作り、コスト\n\\(A_i\\)\nの有向辺\n\\(i_\\text{in} \\to i_\\text{out}\\)\nを張る。\n元のグラフの各辺\n\\(u \\leftrightarrow v\\)\nに対し、同コストの二本の有向辺\n\\(u_\\text{out} \\to v_\\text{in}\\)\nと\n\\(v_\\text{out} \\to u_\\text{in}\\)\nを張る。\nこの最小コストはダイクストラ法で\n\\(O(M \\log N)\\)\n時間で求められます。（\n公式解法\nより定数倍が大きいですが、この手法は他の用途にも使えます。）",
+      "codes": [],
+      "text_sha256": "cc3f9066ca331feaf757b349178fd136d0df69acdf7d04a09574735bbfa93656",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc362/abc362_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

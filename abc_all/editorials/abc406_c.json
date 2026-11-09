@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc406_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc406/editorial/13047",
+      "text": "\\(P\\)\nの隣接要素の大小関係を表す長さ\n\\(N - 1\\)\nの文字列\n\\(S\\)\nをとります。すなわち、\n<\n,\n>\nからなる長さ\n\\(N - 1\\)\nの文字列\n\\(S\\)\nであって、\n\\(P_i < P_{i + 1}\\)\nのとき\n\\(S_i =\\)\n<\n、\n\\(P_i > P_{i + 1}\\)\nのとき\n\\(S_i =\\)\n>\nであるものをとります。\nこのとき、数列\n\\((P_l, P_{l + 1}, \\ldots, P_r)\\)\nがチルダ型であることは\n\\(S\\)\nの部分文字列\n\\(S_lS_{l + 1} \\ldots S_{r - 1}\\)\nが\n\\(1\\)\n個以上の\n<\n,\n\\(1\\)\n個以上の\n>\n,\n\\(1\\)\n個以上の\n<\nをこの順に結合した文字列となることと同値です。\n以上により、本問題は\n\\(S\\)\nの連続部分列であって\n\\(1\\)\n個以上の\n<\n,\n\\(1\\)\n個以上の\n>\n,\n\\(1\\)\n個以上の\n<\nをこの順に結合した文字列であるものの個数を数えることに帰着されます。\nここで、\n\\(S\\)\nのランレングス圧縮を考えます。例えば、\n\\(S =\\)\n><<>><<<<>\nのとき、ランレングス圧縮により得られる列は\n\\((\\)\n>1\n,\n<2\n,\n>2\n,\n<4\n,\n>1\n\\()\\)\nのようになります。\n「\n\\(1\\)\n個以上の\n>\n」の部分に着目すると、これはランレングス圧縮後の（文字が\n>\nである）一つの要素に対応します。これにより数え上げるべき文字列の「\n\\(1\\)\n個以上の\n>\n」の部分を全探索する方針が立ちます。「\n\\(1\\)\n個以上の\n>\n」の部分を固定したとき、ランレングス圧縮した列における左の要素の\n<\nの個数を\n\\(a\\)\n、右の要素の\n<\nの個数を\n\\(b\\)\nとすると、左に続く\n<\nの個数は\n\\(1, 2, \\ldots, a\\)\n、右に続く\n<\nの個数は\n\\(1, 2, \\ldots, b\\)\nが考えられるため、数え上げるべき文字列の個数は\n\\(ab\\)\nです。この値を足し合わせることにより、答えを得ることができます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> p(n);\n\tfor (int i = 0; i < n; i++) cin >> p[i];\n\tvector<pair<char, ll>> v;\n\tfor (int i = 0; i < n - 1; i++) {\n\t\tif (p[i] < p[i + 1]) {\n\t\t\tif (v.empty() or v.back().first == '>') v.push_back({ '<', 1 });\n\t\t\telse v.back().second++;\n\t\t}\n\t\telse {\n\t\t\tif (v.empty() or v.back().first == '<') v.push_back({ '>', 1 });\n\t\t\telse v.back().second++;\n\t\t}\n\t}\n\tint sz = ssize(v);\n\tll ans = 0;\n\tfor (int i = 1; i < sz - 1; i++) if (v[i].first == '>') ans += v[i - 1].second * v[i + 1].second;\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "41cfe576a61bf2ffe48a819c8b5bf9f77c66ab6843d52dfca3462a208a83a1f0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc406/abc406_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc406/editorial/13058",
+      "text": "次の 3 種類の連続部分列の個数を数えるために、以下の DP 配列を定義する：\n\\(dp_i\\)\n: 添字\n\\(i\\)\nを終点とする連続増加部分列（長さ 2以上）の個数\n\\(dp\\_id_i\\)\n: 添字\n\\(i\\)\nを終点とする「山型」部分列（長さ 3 以上）の個数\n山型とは、長さが 3 以上で、先頭が増加し、途中に唯一の極大点\n\\(A_{j-1} < A_j > A_{j+1}\\)\nを持って、極小点\n\\(A_{j-1} > A_j < A_{j+1}\\)\nを持たないようなもの\n\\(dp\\_idi_i\\)\n: 添字\n\\(i\\)\nを終点とする「チルダ型」部分列の個数\n数列\n\\(A\\)\nの各要素について、以下のように状態を更新する：\n\\(A_i < A_{i-1}\\)\nのとき：\n\\(  dp\\_id_i = dp_{i-1} + dp\\_id_{i-1} \\)\n\\(dp_i, dp\\_idi_i=0\\)\n\\(A_i > A_{i-1}\\)\nのとき：\n\\(dp_i = dp_{i-1} + 1\\)\n\\(dp\\_idi_i = dp\\_id_{i-1} + dp\\_idi_{i-1}\\)\n\\(dp\\_id_i=0\\)\n答え\n\\(\\sum_{i=0}^{N-1} dp\\_idi_i\\)\nが\n\\(O(N)\\)\nの時間で得られる。",
+      "codes": [],
+      "text_sha256": "fb666a4bfdb0fc1bc87a7d846d44abd97156ada1581c41946464db0085445a60",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc406/abc406_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc279_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5282",
+      "text": "制約が\n\\(|S|,|T| \\le 100\\)\nと小さいので、以下の解法が成立します。\n\\(S\\)\nの(連続する)部分文字列であって、長さが\n\\(|T|\\)\nであるようなものを全て列挙する。\n列挙された部分文字列の中に\n\\(T\\)\nと等しいものがあれば\nYes\n、そうでなければ\nNo\nと出力する。\n\\(S\\)\nの(連続する)部分文字列であって、長さが\n\\(|T|\\)\nであるようなものを全て列挙する方法は以下の通りです。\n各先頭位置\n\\(i=1,2,\\dots,|S|-|T|+1\\)\nについて、文字列の\n\\(i\\)\n文字目から\n\\(i+|T|-1\\)\n文字目までを抜き出す。\n但し、\n\\(|S| < |T|\\)\nとなる場合は答えは必ず\nNo\nです。\nこれをコードに起こすと、以下のようになります。\n実装例(C++):\nなお、\nfor(auto &nx : s_sub){}\nのような記法は\n範囲for文\nと呼ばれ、\nvector\nや\nset\nなどのデータ構造の中身を全て調べるのに便利な記法です。\nこの問題に対するより短い実装を以下に示します。\n実装例(C++):\n(メモ: 9行目\nsl-tl\nを\ns.size()-t.size()\nに書き換えると不正解になります。 C++ の\nstring\n型の\n.size()\nは符号なし整数型を返すので、そのままでは値が負になる演算を正しく行うことができません。)",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s,t;\n  cin >> s >> t;\n  int sl=s.size(),tl=t.size();\n  if(sl<tl){\n    cout << \"No\\n\";\n    return 0;\n  }\n  vector<string> s_sub;\n  for(int i=0;i<sl-tl+1;i++){\n    string cur;\n    for(int j=0;j<tl;j++){\n      cur.push_back(s[i+j]);\n    }\n    s_sub.push_back(cur);\n  }\n  for(auto &nx : s_sub){\n    if(nx==t){\n      cout << \"Yes\\n\";\n      return 0;\n    }\n  }\n  cout << \"No\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s,t;\n  cin >> s >> t;\n  int sl=s.size(),tl=t.size();\n  for(int i=0;i<=sl-tl;i++){\n    string cur;\n    for(int j=0;j<tl;j++){\n      cur.push_back(s[i+j]);\n    }\n    if(cur==t){\n      cout << \"Yes\\n\";\n      return 0;\n    }\n  }\n  cout << \"No\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "f25ccd9afacdfc43970f08d23e8d0afb33b6d8c222a7d881a226a5573a96e0b5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc279/abc279_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5297",
+      "text": "Python では，連続部分文字列が含まれるかどうかの判定は以下のように非常に簡単に行うことができます．",
+      "codes": [
+        "S = input()\nT = input()\nif T in S:\n  print('Yes')\nelse:\n  print('No')"
+      ],
+      "text_sha256": "334a80e8d6c3d3e31923e118f32b31cb207a60051a8512ac2d00a4db33f3bf9b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc279/abc279_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

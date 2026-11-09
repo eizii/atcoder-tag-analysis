@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc016_3",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc016/editorial.pdf",
+      "text": "友達の友達\n\f\n問題概要\n\n\n SNSの友達関係が与えられるので、\n 各ユーザの友達の友達の人数を求めよ\n\n 要するに、\n 無向グラフが与えられるので、\n 各頂点から距離２の頂点がいくつあるか求めよ\n\n\n  入力例1のグラフ\n\n             頂点                          辺\n                      ユーザ2\n             ユーザ1                               ユーザ3\n\f\n解法１\n\n\n ・探索して友達の友達を数える\n   すでに見た友達を記録しておく\n\f\n解法２\n\n\n ・頂点を２つ選んで友達の友達か調べる\n   → 共通の友達がいる\n    （かつ、自分自身または友達ではない）\n\n\n\n\n\n             共通の友達\n\f\n解法３\n\n\n ・全頂点間の最短経路を求め、\n  各頂点から距離２の頂点を数える\n\n\n   →ワーシャル-フロイド法や\n    ダイクストラ法などを使いましょう\n\n\n  （類題）ABC#012 D問題\n\f\n 問題D",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "3535129618a071ac34c38fc2a3052f64dfdb645d46ac590f2d40a5cf35b51ac0"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc137_c",
+  "editorials": [
+    {
+      "text": "C: Green Bin\n(原案: yokozuna57, 準備・解説: evima)\nまず、二つの文字列s, t が与えられた際にs がt のアナグラムであるかを判定する方法には次の二つがあ\nります。\n1. 26 種のアルファベットそれぞれがs とt にそれぞれ何回出現するか数え、どのアルファベットについ\nても出現回数が同じか確認する。\n2. 両方の文字列をソートし、一致するか確認する。\n今回の問題では最大で10 万個の文字列が与えられ、すべてのペア(最大で50 億個程度) について上の方\n法をそのまま実行すると2 秒という時間制限を過ぎてしまうでしょう。しかし、上の方法で文字列から得る\n「エッセンス」を元に文字列をグループに分けることで計算を効率化できます。入力例3 を用いて、方法2 を\n元に効率化した計算の例を以下に示します。\n1. s1 = abaaaaaaaa をソートしてaaaaaaaaab を得る。\n2. s2 = oneplustwo をソートしてelnoopstuw を得る。\n3. s3 = aaaaaaaaba をソートしてaaaaaaaaab を得る。この結果はすでに1 回現れているので、答えに\n1 を足す。\n4. s4 = twoplusone をソートしてelnoopstuw を得る。この結果はすでに1 回現れているので、答えに\n1 を足す。\n5. s5 = aaaaaaaaba をソートしてaaaaaaaaab を得る。この結果はすでに2 回現れているので、答えに\n2 を足す。\n「この結果はすでに1 回現れているので」などの部分は、ハッシュテーブル(C++ のundered map, Java\nのHashMap, Python のdictionary など) を用いて実装すれば線形時間で動作します。他に、N 個の文字\n列から得られるN 個の「エッセンス」をソートするという解法も考えられますが、こちらは言語によっては\n実行が間に合わないかもしれません。\n",
+      "text_sha256": "d5335028376574db051c807e3100b211a11fd5d618fa7edf8e49f7dde0cf49ba",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc137/abc137_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

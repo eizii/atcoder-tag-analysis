@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc340_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc340/editorial/9252",
+      "text": "この問題は最短経路問題とみなすことができます。\n各ステージを頂点とし、各ステージでの行動を辺とすることで、「\n\\(1,2,\\ldots,N\\)\nの\n\\(N\\)\n個の頂点を持ち、頂点\n\\(i\\)\nから頂点\n\\(i+1\\)\nへ向かうコスト\n\\(A_i\\)\nの辺と、頂点\n\\(i\\)\nから頂点\n\\(X_i\\)\nへ向かうコスト\n\\(B_i\\)\nの辺があるとき、頂点\n\\(1\\)\nから頂点\n\\(N\\)\nへ移動するための最小コストは？」という問題になります。\nこれは最短経路問題そのものなので、ダイクストラ法を用いることで\n\\(O(N\\log N)\\)\n時間で答えを求めることができます。\n図：入力例1に対応するグラフ",
+      "codes": [],
+      "text_sha256": "1f108c7fc875c12e30a8580afe6bc408b7b28c18858a00465fe340112e15d2e7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc340/abc340_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

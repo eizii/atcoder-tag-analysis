@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc152_e",
+  "editorials": [
+    {
+      "text": "E: Flatten\n条件を満たすようなBi を決めたとします。このときK = A1B1 とおくと、条件より全ての\nj > 1 についてK = A1B1 = AjBj となります。よってK はA1, ..., AN の公倍数です。逆にL を\nA1, ..., AN の最小公倍数とおいたとき、Bi = L/Ai と定めると、このようなBi たちは条件を満た\nします。よって求める答えは、∑L/Ai です。しかし、L は非常に大きな数となることがあるため、\nそのまま計算することはできません。そこで、L を素因数分解した形で保持し、計算することを考え\nます。\npi を素数とし、X = ∏pei\ni , Y = ∏pe′\ni\ni\nと*1素因数分解されているとします(ei, e′\ni の一方は0\nでもよい)。このとき、X とY の最小公倍数は∏pmax(ei,e′\ni)\ni\nになります。このことを用いると、\nA1, ..., AN の最小公倍数を素因数分解された形で求めることができます。\n以上より、この問題はA = max Ai として、O(N\n√\nA) で解くことができました。また、適当な前\n計算により素因数分解を高速化するなどの工夫によりO(A + N log A) で求めることもできます。\nは、∑\nの”掛け算バージョン”です\n",
+      "text_sha256": "ae52eb65ea00a3f761dd350598efc14ccdb6a7c122d01e4ae0465541e980838a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc152/abc152_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

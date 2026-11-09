@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc304_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc304/editorial/6512",
+      "text": "\\(1,2, \\ldots, N\\)\nの\n\\(N\\)\n頂点からなるグラフにおいて、\n\\((X_i,Y_i)\\)\nと\n\\((X_j,Y_j)\\)\nの距離が\n\\(D\\)\n以下であるとき、またそのときに限り頂点\n\\(i\\)\nと頂点\n\\(j\\)\nを結ぶ無向辺が存在するとします。\n人\n\\(i\\)\nがウイルスに感染する必要十分条件は、上で定めたグラフにおいて頂点\n\\(1\\)\nと頂点\n\\(i\\)\nを結ぶパスが存在する、すなわち頂点\n\\(1\\)\nと頂点\n\\(i\\)\nが同じ連結成分に属することです。\nしたがって、DFS や BFS, Union-Find などのグラフ上の探索アルゴリズムを用いて正答を得ることができます。\nDFS や BFS を用いるとグラフの頂点数は\n\\(N\\)\n、辺の数は\n\\(O(N^2)\\)\nであるため時間計算量は\n\\(O(N^2)\\)\nであり、Union-Find を用いるとオーダーの面では少し悪化しますが十分高速です。（追記：オーダーが悪化するというのは筆者の勘違いで、実際には適切な実装のもと最悪計算量のオーダーは悪化しないようです。詳しくはこちらの\nユーザ解説\nを参照ください。）\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\n\nint main() {\n\tint n, d;\n\tcin >> n >> d;\n\tvector<int> x(n), y(n);\n\tfor (int i = 0; i < n; i++) cin >> x[i] >> y[i];\n\tvector<vector<bool>> graph(n, vector<bool>(n));\n\tfor (int i = 0; i < n; i++) for (int j = 0; j < n; j++) if ((x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j]) <= d * d) graph[i][j] = true;\n\tvector<bool> ans(n);\n\tans[0] = true;\n\tqueue<int> que; que.push(0);\n\twhile (!que.empty()) {\n\t\tint q = que.front(); que.pop();\n\t\tfor (int i = 0; i < n; i++) {\n\t\t\tif (graph[q][i] && !ans[i]) {\n\t\t\t\tans[i] = true;\n\t\t\t\tque.push(i);\n\t\t\t}\n\t\t}\n\t}\n\tfor (int i = 0; i < n; i++) cout << (ans[i] ? \"Yes\" : \"No\") << '\\n';\n}"
+      ],
+      "text_sha256": "8276a5b0af2ecc1c01ca1c0a4d1b292e379412308b5f98d348f52627aac081f3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc304/abc304_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc304/editorial/6520",
+      "text": "頂点数が\n\\(n\\)\nの union-find に対してクエリを\n\\(m\\)\n回行った際の計算量は\n\\(O(n+m\\alpha(m, n))\\)\nです（ただし、いわゆる経路圧縮とマージテクの両方の高速化をしている実装とします）。\nさて、\n\\(\\alpha(m, n)\\)\nの性質から、\n\\(\\alpha(n^2, n) = O(1)\\)\nとなります（よくある誤解であるところの「\n\\(\\alpha(n)\\)\nは非常に発散が遅いので実質\n\\(O(1)\\)\nである」という主張とは異なります）。\nよって、各頂点の判定を union-find で行ったとしても、最悪計算量のオーダーは BFS と比べて悪化しません。\n参考：\nhttps://rsk0315.hatenablog.com/entry/2022/05/04/215704\nNote:\n\\(m = \\Omega(n\\log(n))\\)\nや\n\\(m = \\Omega(n\\log^{\\star}(n))\\)\nであっても\n\\(\\alpha(m, n) = O(1)\\)\nとなります。",
+      "codes": [],
+      "text_sha256": "08e796ef5b34fec711c49852ed519686950befbcb269ec3e6dcc2329a2be308f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc304/abc304_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

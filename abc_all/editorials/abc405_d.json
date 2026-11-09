@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc405_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13003",
+      "text": "この問題は\n多始点 BFS(幅優先探索)\nをテーマとした問題です。\n全ての通路マス\n\\((i, j)\\)\nについて、最寄りの非常口との距離\n\\(d(i, j)\\)\nを計算することを考えます。これは以下の手順で行うことができます。\nはじめ、すべてのマスについて\n\\(d(i, j) = \\infty\\)\nとする。\nすべてのマスを走査して非常口のマス\n\\((i, j)\\)\nについて\n\\(d(i, j) = 0\\)\nとする。\n非常口のマスすべてを BFS の開始地点として BFS を行う。\nまた、BFS を行いながら各通路マスについて「そのマスに来る直前にどこのマスにいたか」に応じて通路マスに矢印を書き込んでいきます。このようにして書き込んだ矢印が問題文の条件を満たすことは最短経路の性質から従います。\n以上の方法を適切に実装することで今回の問題を解くことができます。計算量は\n\\(\\mathrm{O}(HW)\\)\nで十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <queue>\n#include <string>\nusing namespace std;\n\nint main() {\n  int H, W;\n  cin >> H >> W;\n  vector<string> S(H);\n  for (auto& s : S) cin >> s;\n\n  queue<pair<int, int>> Q;\n  for (int i = 0; i < H; i++) {\n    for (int j = 0; j < W; j++) {\n      if (S[i][j] == 'E') Q.emplace(i, j);\n    }\n  }\n  int dx[] = {1, 0, -1, 0};\n  int dy[] = {0, 1, 0, -1};\n  auto ok = [&](int i, int j) { return 0 <= i and i < H and 0 <= j and j < W; };\n  string A = \"^<v>\";\n  while (!Q.empty()) {\n    auto [i, j] = Q.front();\n    Q.pop();\n    for (int k = 0; k < 4; k++) {\n      int ni = i + dx[k];\n      int nj = j + dy[k];\n      if (!ok(ni, nj)) continue;\n      if (S[ni][nj] != '.') continue;\n      S[ni][nj] = A[k];\n      Q.emplace(ni, nj);\n    }\n  }\n\n  for (auto& s : S) cout << s << \"\\n\";\n}"
+      ],
+      "text_sha256": "fbd045274ff48ac5c0edc15e7c890e9baebe0775aa45e04752f23d4091927ec0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

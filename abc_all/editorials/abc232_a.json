@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc232_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc232/editorial/3142",
+      "text": "与えられた文字列から\n\\(2\\)\nつの整数を取り出し、それらの積を出力すればよいです。\n\\(2\\)\n種類の言語での解答例を以下に説明します。\nC++ での実装\nchar\n型を用いると一文字ずつ入力を受け取ることができます。\n\\(3\\)\n文字受け取ると、\n\\(1\\)\n文字目と\n\\(3\\)\n文字目が与えられた整数を表します。\nchar\n型の数字と\nint\n型の数値は異なるものであることに注意してください。そのため、\nchar\n型で受け取った文字どうしをそのまま掛けて出力しても正解することはできません。一度\nchar\n型から\nint\n型などに変換する必要があります。\nchar\n型の文字は\n\\(1\\)\nバイトのビット列で表現されており、そのエンコード方法には ASCII や Unicode などと呼ばれる規格が存在します。例えば ASCII では、文字としての\n0\nは\n\\(48\\)\nという数値が対応しています。多くの規格で\n0\n\\(, \\dots, \\)\n9\nは連番になっているので、\nc\nという変数が\nchar\n型の数字を表しているとき、\nc - '0'\nはその内部表現の整数どうしの差、すなわち\nc\nが\n'0'\nよりいくつ大きいかを表します。これにより、\nc\nを\nint\n型の数値に変換することができます。\n以上をまとめると、次に示す実装例のようになります。\nPython での実装\ninput()\nで入力を文字列として受け取り、\nsplit()\nによって文字列を\nx\nの位置によって区切ります。それらに\nint()\n関数を適用することで文字列から数値型に変換することで、\n\\(2\\)\nつの整数を受け取ることができます。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n  char a, x, b;\n  cin >> a >> x >> b;\n  cout << (int)(a - '0') * (int)(b - '0') << '\\n';\n}",
+        "a, b = map(int, input().split('x'))\nprint(a * b);"
+      ],
+      "text_sha256": "d3c2d17cff9f3ba04d488be33ad3dc504470354f135c9de45e16841c0b9a06a4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc232/abc232_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

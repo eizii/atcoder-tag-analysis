@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc420_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc420/editorial/13740",
+      "text": "例えば、以下のクエリなら UnionFind を用いることで解くことが出来ます。\nタイプ\n\\(a\\)\n: 頂点\n\\(u,v\\)\nを結ぶ無向辺を追加する。\nタイプ\n\\(b\\)\n: 頂点\n\\(u\\)\nから頂点\n\\(v\\)\nに辺を辿って到達できるか判定する。\nなので、 UnionFind を改造してこの問題を解くことを考えましょう。\n連結成分ごとに以下の情報を保持すればよいです。\nその連結成分に含まれる黒色の頂点の個数\nこの情報を保持すれば、タイプ\n\\(3\\)\nのクエリへの返答はその連結成分に黒色の頂点が\n\\(1\\)\n個以上存在するかどうかを判定することで対応可能です。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/dsu>\n\nusing namespace std;\nusing namespace atcoder;\n\nint main(){\n  int n,q;\n  cin >> n >> q;\n  dsu d(n+1);\n  vector<int> c(n+1,0);\n  vector<int> s(n+1,0);\n\n  while(q--){\n    int typ;\n    cin >> typ;\n    if(typ==1){\n      int u,v;\n      cin >> u >> v;\n      u=d.leader(u);\n      v=d.leader(v);\n      if(u!=v){\n        d.merge(u,v);\n        int w=d.leader(u);\n        s[w]=s[u]+s[v];\n        s[u^v^w]=0;\n      }\n    }\n    else if(typ==2){\n      int u;\n      cin >> u;\n      s[d.leader(u)]-=c[u];\n      c[u]^=1;\n      s[d.leader(u)]+=c[u];\n    }\n    else{\n      int u;\n      cin >> u;\n      if(s[d.leader(u)]){cout << \"Yes\\n\";}\n      else{cout << \"No\\n\";}\n    }\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "aa1dc37555d2d571d408ccdc62ebb3ddbc4a7c383152bec1f9bea3a555c34b1c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc420/abc420_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

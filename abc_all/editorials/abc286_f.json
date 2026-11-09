@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc286_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5588",
+      "text": "この問題は\n中国剰余定理\nの練習問題です。\n中国剰余定理とは？\n長さ\n\\(N\\)\nの整数組\n\\((r_i, m_i)\\)\nが与えられたとき、\n\\(0\\)\n以上\n\\(\\mathrm{LCM}(m_1,m_2,\\ldots,m_N)\\)\n未満の整数\n\\(x\\)\nであって、\n\\(x \\bmod m_i = r_i\\ (1\\leq i \\leq N)\\)\nを満たすものが\n\\(m_i\\)\nが互いに素な場合一意に定まるという定理です。\n例えばAtCoder Library を用いると、一意に定まるときそのような\n\\(x\\)\nを\n\\(\\mathrm{O}(N\\log(\\mathrm{LCM}(m_1,m_2,\\ldots,m_N)))\\)\nで求めることが出来ます。\n本問題の解説\n\\(A\\)\nについて、\n\\(i\\to A_i\\)\nの辺を貼ったグラフを考えたとき、長さ\n\\( c\\)\nのサイクルがあれば\n\\(B\\)\nから\n\\(N\\bmod {c}\\)\nが特定できることに着目しましょう。\n一番最初に思い付く方針としてはサイクルの長さとして\n\\(2,3,5,\\ldots,23,29\\)\n(\n\\(29\\)\n以下の素数全体) を採用すれば\n\\(\\mathrm{LCM}(2,3,5,\\ldots,23,29) = 6469693230 \\geq 10^9\\)\nより\n\\(N\\)\nが中国剰余定理から復元できますが、残念ながら\n\\(2+3+5+\\ldots+23+29=129 > 110\\)\nより\n\\(M\\)\nの制約をオーバーしてしまいます。\nここでサイクルの長さとして\n\\(4,9,5\\ldots,19,23\\)\nを採用すると、\n\\(\\mathrm{LCM}(4,9,5,\\ldots,19,23) =1338557220 \\geq 10^9\\)\nかつ\n\\(4+9+5+\\ldots+19+23=108 \\leq 110\\)\nより\n\\(N,M\\)\n両方の条件を満たし、AC することができます。",
+      "codes": [],
+      "text_sha256": "39dfdaac5d4bdb1a2e3c0f955b99069189210c101b6716657ff6b5a5f45865df",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc286/abc286_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,21 @@
+{
+  "problem_id": "abc439_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc439/editorial/14982",
+      "text": "原案: admin\n「\n\\(2\\)\nの\n\\(N\\)\n乗 」と「\n\\(2 \\times N\\)\n」とを計算し、それらの差を求めることができればこの問題に正解できます。\n掛け算と引き算は比較的簡単そうです。では、「\n\\(2\\)\nの\n\\(N\\)\n乗 」を求めるにはどうすればよいでしょうか？\n解法\n\\(1\\)\n: for ループで求める\n\\(2\\)\nの\n\\(N\\)\n乗は for ループを利用して求めることができます。\n実装例 (C++):\n解法\n\\(2\\)\n: 繰り返し二乗法を利用する\n累乗を高速に計算するアルゴリズムである「繰り返し二乗法」を利用しても構いません。\n実装例 (C++):\n解法\n\\(3\\)\n: 標準の関数を利用する\n例えば Python では\n**\nを用いることで累乗を計算することができます。\n実装例 (Python):\nC++ でも\npow\nを活用することでこの問題には正解できますが、\nint\n型を用いて\npow(int,int)\nを呼ぶと返答は\ndouble\nとなり、無警戒に使うと精度落ちや出力形式ミスなどが発生するので十分注意してください。\n実装例 (C++):\n解法\n\\(4\\)\n: ビットシフト演算を利用する\nビットシフト演算を利用することで、\na<<k\nと書くと (オーバーフローが起きない範囲で)\n\\(a \\times 2^k\\)\nの値を得ることができます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  int p=1;\n  for(int i=0;i<n;i++){\n    p=p*2;\n  }\n  cout << p-2*n << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  int a=1,b=2,p=n;\n  while(p>0){\n    if(p%2==1){ a*=b; }\n    b*=b;\n    p/=2;\n  }\n  cout << a-2*n << \"\\n\";\n  return 0;\n}",
+        "n = int(input())\nprint(2**n-2*n)",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  cout << pow(2,n)-2*n << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  cout << (1<<n)-2*n << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "e5a5eff6fb2fa495c154065ff4d71388190d0b7642aba83141946fd3b5117228",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc439/abc439_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

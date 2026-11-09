@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc298_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc298/editorial/6212",
+      "text": "最終的なケーキ一切れとして考えられるものはケーキの部分長方形であり、そこに載せられているイチゴの個数として考えられる値は高々 \\(\\frac{H(H+1)W(W+1)}{4}\\) 通りです。これらの値を順に \\(a_1,\\ldots,a_X\\) とします。 \\(i=1,2,\\ldots,X\\) の順に、「各ケーキに載っているイチゴの個数の最小値が \\(a_i\\) 個以上であるように切った時のイチゴの個数の最大値の最小値 \\(M\\) 」を求めます。すると、最終的な答えは \\(M-a_i\\) の最小値です。 上の問題は \\(\\mathrm{dp}_{i,j,k,l,m}\\) を「 \\(i\\leq x \\lt j, k \\leq y \\lt l\\) を満たす \\((x,y)\\) 全体に等しい部分長方形を、各ケーキのイチゴの個数の最小値が \\(a_i\\) 以上になるよう \\(m\\) 個に切り分ける時の各ケーキのイチゴの個数の最大値の最小値(不可能なら \\(\\infty\\) )」とし、遷移として上下・左右のどの位置で分けるか、およびケーキの個数をどのように分けるかをすべて考えれば良いです。 \\(X\\) は \\(\\mathrm{O}(H^2W^2)\\) 、 \\(\\mathrm{dp}\\) の状態数は \\(\\mathrm{O}(H^2W^2T)\\) 、遷移は \\(\\mathrm{O}((H+W)T)\\) となるため、計算量は \\(\\mathrm{O}((H^5W^4 + H^4W^5)T^2)\\) です。特に、 \\(H, W\\) の最大値を \\(N\\) 、 \\(T\\) の最大値を \\(N^2\\) とすると \\(\\mathrm{O}(N^{13})\\) になります。これに \\(N=6\\) とすると \\(N^{13}\\) は \\(10^{10}\\) を超えますが、定数倍が軽いため十分高速となります。 特に、「 \\(\\mathrm{dp}\\) の添え字について、 \\((j-i+1)(l-k+1) \\lt m\\) の場合は処理をしない」とした場合の各状態に対応する遷移の総和は以下のようにして \\(10^5\\) 程度と分かり、全体でも十分高速に正解を得られると分かります。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\t\n\tint sum = 0;\n\tfor(int i=0;i<6;i++){\n\t\tfor(int j=i+1;j<=6;j++){\n\t\t\tfor(int k=0;k<6;k++){\n\t\t\t\tfor(int l=k+1;l<=6;l++){\n\t\t\t\t\tint h = j-i;\n\t\t\t\t\tint w = l-k;\n\t\t\t\t\tfor(int m=2;m<=h*w;m++){\n\t\t\t\t\t\tsum += (h-1+w-1) * (m-1);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tcout<<sum<<endl;\n\t\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "e986d751209a83ab27c462eb5478f92061bc59054ee4b0f8c7ecf3b3cbfd0a8f"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc118_b",
+  "editorials": [
+    {
+      "text": "B: Foods Loved by Everyone\n各食べ物i についてそれを好きだと答えた人数をカウントし、ci とします。すると、ci = N であるi の数\nが答えとなります。これをC++ で実装すると次のようになります。\n#include <bits/stdc ++.h>\nusing\nnamespace\nstd;\nint main () {\nint N, M; cin >> N >> M;\nvector <int > cnt(M, 0);\nfor (int i = 0; i < N; ++i) {\nint K; cin >> K;\nfor (int j = 0; j < K; ++j) {\nint A; cin >> A; --A;\n++cnt[A];\n}\n}\nint ans = 0;\nfor (int i = 0; i < M; ++i) {\nif (cnt[i] == N) {\n++ans;\n}\n}\ncout << ans << endl;\n}\n",
+      "text_sha256": "539f940154434551e992b2a9a77a6909fcbeb25a80dff8689f6d3d49333c4bad",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc118/abc118_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

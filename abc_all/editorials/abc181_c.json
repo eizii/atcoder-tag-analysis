@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc181_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc181/editorial/258",
+      "text": "\\(N ≤ 10^2\\)\nなので、\n\\(3\\)\n点が同一直線上にあるかを高速に判定できれば、全ての\n\\(3\\)\n点の選び方について同一直線上にあるか判定することで AC できます。\n\\(1\\)\nつの点が原点になるように\n\\(3\\)\n点を平行移動しておきます。\n3 点\n\\(A(0, 0), B(x_1, y_1), C(x_2, y_2)\\)\nが同一直線上にあるかは、\n\\(AB\\)\nと\n\\(AC\\)\nの傾きが等しいかで判定できます。\n\\(\\dfrac{y_1}{x_1}=\\dfrac{y_2}{x_2}\\)\nで判定すると\n\\(0\\)\n除算が発生するため、両辺に\n\\(x_1x_2\\)\nを掛けて、\n\\(x_2y_1=x_1y_2\\)\nで判定すると良いでしょう。\n\\(1\\)\n回の判定は\n\\(O(1)\\)\nでできるので、全体で\n\\(O(N^3)\\)\nで解くことができます。\n回答例 (Python)\n回答例 (C++)",
+      "codes": [
+        "n = int(input())\np = [tuple(map(int, input().split())) for i in range(n)]\n\nfor i in range(n):\n    for j in range(i):\n        for k in range(j):\n            x1, y1 = p[i]\n            x2, y2 = p[j]\n            x3, y3 = p[k]\n            x1 -= x3\n            x2 -= x3\n            y1 -= y3\n            y2 -= y3\n            if x1 * y2 == x2 * y1:\n                print(\"Yes\")\n                exit()\n\nprint(\"No\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n;\n    cin >> n;\n    vector<pair<int, int>> p(n);\n    for(auto& [x, y] : p) cin >> x >> y;\n    for(int i = n; i--; ) for(int j = i; j--; ) for(int k = j; k--; ){\n        auto [x1, y1] = p[i];\n        auto [x2, y2] = p[j];\n        auto [x3, y3] = p[k];\n        x1 -= x3;\n        x2 -= x3;\n        y1 -= y3;\n        y2 -= y3;\n        if(x1 * y2 == x2 * y1){\n            puts(\"Yes\");\n            return 0;\n        }\n    }\n    puts(\"No\");\n}"
+      ],
+      "text_sha256": "d2fc878d4e9e5af2d15bb22a1cec7a6890e37b14466e45869e12f50bd8f3132e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc181/abc181_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc374_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc374/editorial/11098",
+      "text": "\\(N\\)\n個の部署をそれぞれグループ\n\\(A,B\\)\nに割り当てる方法は\n\\(2^N\\)\n通り（\n\\(A,B\\)\nの入れ替えを除けば\n\\(2^{N-1}\\)\n通り）あります。\nそれぞれの場合について各グループに属する人数は\n\\(O(N)\\)\nの計算量で求めることができます。\nよって、愚直にすべての場合について「同時に昼休みをとる最大人数」を計算し、その最小値を求めるのにかかる計算量は\n\\(O(N\\cdot 2^N)\\)\nとなります。\n今回の\n\\(N\\leq 20\\)\nの制約の下でこれは十分に高速です。\n\\(N\\)\n個の部署をそれぞれグループ\n\\(A,B\\)\nに割り当てる方法は bit 全探索などによって全列挙することができます。\nよって、この問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define N 20\n#define INF (int)2e+9\n\nint main() {\n\tint n,k,s,ss=0,ans=INF;\n\tint a[N];\n\n\tcin>>n;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>a[i];\n\t\tss+=a[i];\n\t}\t\n\tfor(int i=0;i<(1<<n);i++){\n\t\tk=i,s=0;\n\t\tfor(int j=0;j<n;j++){\n\t\t\tif(k&(1<<j))s+=a[j];\n\t\t}\n\t\tans=min(ans,max(s,ss-s));\n\t}\n\tcout<<ans<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "2f4801cb8363522eb0c60c84e52e21e8ab934c8b980fabc189ae54734a77f53b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc374/abc374_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc374/editorial/11101",
+      "text": "再帰関数による実装を示します。\nbit全探索は再帰関数でも実装することができます。また、bit全探索は各iに対して0か1の2通りしか試すことができませんが、再帰関数による実装では3通り以上の選択肢に対応することができます。こちらの書き方も知っておくと良いでしょう。\n提出コード(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\n//変数をグローバル宣言しておくことで、関数dfs内で参照できるようにする。\nint n,k[20];\nlong long a,b;\n//答えは最大で2×10^9程度になるため、オーバーフローが心配な場合はlong longを使用する。\nlong long ans;\n\n//再帰関数\nvoid dfs(int pos){\n  //N個の部署について割り当てを決め終わったら、答えを更新する。\n  if(pos==n){\n    ans = min(ans,max(a,b));\n    return;\n  }\n  //pos番目の部署をAに割り当てた場合\n  a += k[pos];\n  dfs(pos+1);\n  a -= k[pos];\n  //pos番目の部署をBに割り当てた場合\n  b += k[pos];\n  dfs(pos+1);\n  b -= k[pos];\n  return;\n}\n\nint main(){\n  //入力を受け取る\n  cin >> n;\n  for(int i = 0;i<n;i++)cin >> k[i];\n  //変数を初期化する\n  ans = 3000000000;\n  a = 0;\n  b = 0;\n  //再帰関数を呼び出す\n  dfs(0);\n  cout << ans << endl;\n}"
+      ],
+      "text_sha256": "eb56bdb939303197c733e8d0c3ffe1d6a0f4381cc5b59461bfb3142773d369a0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc374/abc374_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

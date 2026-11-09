@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc368_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc368/editorial/10752",
+      "text": "\\(S_i,T_i\\) を「時刻表上の発車・到着時刻」、 \\(S_i+X_i,T_i+X_i\\) を「実際の発車・到着時刻」と呼ぶことにします。 電車の発車を遅らせても他の電車の発車を早めることはできないため、全ての電車は発車可能な最も早い時刻に発車するとしてよいです。 ある電車 \\(i\\) が発車可能かどうかに影響するのは、時刻表上の到着時刻が電車 \\(i\\) の時刻表上の発車時刻より前の電車に限ります。よって、時刻表上の発車・到着時刻の順に電車を処理することでうまくいきそうです。 実際、 \\(2M\\) 個の発車・到着イベントを時刻表上の発車・到着時刻の順に ソートしたあと、順に次のような処理を行うことで処理できます。 電車 \\(i\\) が発車する際には、現在までに処理した電車（すなわち時刻表上の到着時刻が電車 \\(i\\) の時刻表上の発車時刻までの電車）の駅 \\(A_i\\) への実際の到着時刻に基づいて \\(X_i\\) を計算する 電車 \\(i\\) が到着する際には、 \\(X_i\\) に基づいて、駅 \\(B_i\\) に実際に到着した到着時刻を記録する これらの処理は、各駅 について「現在までに到着処理を行った電車のうち、もっとも遅い実際の到着時刻」を管理することで、どちらも \\(O(1)\\) で行うことができます。 発車と到着が同じ時刻に起こる際は、到着の処理を先に行う必要があることに注意してください。 writer解(Python)",
+      "codes": [
+        "N,M,X=map(int,input().split())\nA,B,S,T=zip(*[tuple(map(int,input().split())) for _ in range(M)])\n\nevent=sorted([(S[i],1,i) for i in range(M)] + [(T[i],0,i) for i in range(M)])\n\nans=[0]*M\nans[0]=X\n\nstation=[0]*(N+1)\nfor t,f,i in event:\n  if f:\n    # 出発　駅A[i]に来るのが最も遅い電車に合わせて発車する（電車1以外）\n    if i:\n      ans[i]=max(0,station[A[i]]-t)\n  else:\n    # 到着　駅B[i]に着いた最も遅い電車の情報を更新する\n    station[B[i]]=max(station[B[i]],t+ans[i])\n\nprint(*ans[1:])\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "aa92c77661cd5aa0ca8543848d3f0f5f712e0bc8207c0ab5e94f9a93e48e1a0e"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc219_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc219/editorial/2656",
+      "text": "問題文の指示通りに実装することで正答することができます。\nなお、\n\\(S_1, S_2, S_3\\)\nを個別に変数として持つのではなく、長さ\n\\(3\\)\nの配列に格納することで、場合分けを行うことなく実装することができます。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    vector<string> S(3);\n    for (string& s : S) {\n        cin >> s;\n    }\n    string T;\n    cin >> T;\n    string ans;\n    for (const char t : T) {\n        ans += S[t - '1'];\n    }\n    cout << ans << '\\n';\n    return 0;\n}"
+      ],
+      "text_sha256": "3a0bd3a4a2db329b971f99112ad4c444742f0d439801d56abe7cef3c8cbc5285",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc219/abc219_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

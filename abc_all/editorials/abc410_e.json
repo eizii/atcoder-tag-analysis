@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc410_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc410/editorial/13207",
+      "text": "この問題はDPにより解くことができます。\n\\(\\mathrm{DP}[i][m]\\)\nを、\n\\(i\\)\n体目のモンスターまで倒した時点で魔力が\n\\(m\\)\nであるときの体力の最大値とします。（\n\\(i\\)\n体目のモンスターまで倒した時点で魔力が\n\\(m\\)\nになることがなければ\n\\(-1\\)\nとする）\n\\(i\\)\n体目のモンスターに対して魔法を使うかどうかを考えることで\n\\(\\mathrm{DP}[i][m]=\\max(\\mathrm{DP}[i-1][m]-A_i, \\mathrm{DP}[i-1][m+B_i])\\)\nのような漸化式により\n\\(\\mathrm{DP}[i-1][*]\\)\nから\n\\(\\mathrm{DP}[i][*]\\)\nを求めることができます。境界条件などに注意しましょう。\n\\(\\max_m\\mathrm{DP}[i][m]\\geq 0\\)\nのとき\n\\(i\\)\n体目のモンスターまで倒す方法が存在し、そうでないとき存在しません。\nDP の状態数は\n\\(O(NM)\\)\nであり、遷移は\n\\(O(1)\\)\nなので、全体で\n\\(O(NM)\\)\nでこの問題が解けました。\n別解\n\\(\\mathrm{DP}[i][h][m]\\)\nを、\n\\(i\\)\n体目のモンスターまで倒した時点で体力が\n\\(h\\)\n魔力が\n\\(m\\)\nの状態になることがあるかの真偽値とします。\nこのDPは\n\\(O(NHW)\\)\n時間かかりますが、bitsetを用いるなどの実装上の工夫により、C++,PyPyなどの高速な言語であれば実行時間制限に間に合わせることができます。",
+      "codes": [],
+      "text_sha256": "eeaeefb8b50988d22046dfc43b2954555253e20dcec38f09fdf71608aff92c8f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc410/abc410_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc410/editorial/13313",
+      "text": "DP を考えます。\n\\(dp[h][m]:=(\\)\n体力が\n\\(h\\)\n、魔力が\n\\(m\\)\nのときに倒せるモンスターの数の最大値\n\\()\\)\nとします。\n\\(t=dp[h][m]\\)\nとして以下のような遷移を考えます。（ 説明の都合上\n\\(A,B\\)\nを 0-indexed として考えます。）\n\\(dp[h+1][m]\\gets \\max(dp[h+1][m],t)\\)\n\\(dp[h][m+1]\\gets \\max(dp[h][m+1],t)\\)\n\\(t< N\\)\nならば\n\\(dp[h+A_t][m]\\gets \\max(dp[h+A_t][m],t+1)\\)\n\\(dp[h][m+B_t]\\gets \\max(dp[h][m+B_t],t+1)\\)\n\\((h,m)\\)\nの昇順に DP を行うことで、答えは\n\\(dp[H][M]\\)\nとなります。\nDP の遷移は\n\\(O(1)\\)\nなので、DP の計算量は\n\\(O(HM)\\)\n、よって全体の計算量は\n\\(O(HM+N)\\)\nとなります。（\n\\(N\\leq2\\times 10^5\\)\nでもこの問題を解くことができます。）\n実装例 (C++ , 85 ms)\n実装例 (Python , 425 ms)",
+      "codes": [],
+      "text_sha256": "c8e35a1a60677a8a0d21b8a85501d1a351c802dc9bae0f0b3bcb1f30f4999846",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc410/abc410_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc139_b",
+  "editorials": [
+    {
+      "text": "B: Power Socket\nB 口以上になるまで、電源タップを1 つずつ使うシミュレーションを行うことで答えを求めるこ\nとができます。すなわち、最初差込口を1 口として、差込口がB 口未満である間、電源タップ1 つ\nと差込口1 口を使って差込口をA 口増やすことを続けます。これをC++ 言語で実装した例を以下\nに示します。\n1 #include <bits/stdc++.h>\n2\n3 using namespace std;\n4\n5 int main() {\n6\nint A, B; cin >> A >> B;\n7\nint ans = 0;\n8\nint outlet = 1;\n9\nwhile (outlet < B) {\n10\n--outlet;\n11\noutlet += A;\n12\n++ans;\n13\n}\n14\ncout << ans << endl;\n15 }\n他の解法としては、電源タップを1 つ使うごとに差込口がA −1 口増え、最終的に初期状態から\nB −1 口増やしたいと考えれば、答えは⌈B−1\nA−1⌉(B −1 をA −1 で割った切り上げ) になります。\n⌈B−1\nA−1⌉= ⌊B−1+A−2\nA−1\n⌋なので、切り捨てで計算することもできます。\nさらなる別解(苦肉の策) として、入力の約400 通りを手計算して埋め込んでも正答することがで\nきますが、おすすめはしません。\n",
+      "text_sha256": "f5854991197b72fd9f71a5c923d91e44bb8926eb02bcb54920f435eaeb752dbb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc139/abc139_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

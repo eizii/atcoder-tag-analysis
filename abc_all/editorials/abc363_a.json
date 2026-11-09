@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc363_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc363/editorial/10479",
+      "text": "表示される\n^\nの数を現在より増やすために上げる必要のあるレートは、現在のレート\n\\(R\\)\nが\n\\(1\\leq R\\leq 99\\)\nのとき、\n\\((100-R)\\)\n,\n\\(100\\leq R\\leq 199\\)\nのとき、\n\\((200-R)\\)\n,\n\\(200\\leq R\\leq 299\\)\nのとき、\n\\((300-R)\\)\nとなるため、この値を出力すれば良いです。これは if 文を用いることで実装することができます。よって、この問題を解くことができました。\nなお、\n^\nが\n\\(100\\)\nの倍数ごとに増えていることに注目することで、\n\\(R\\)\nを\n\\(100\\)\nで割ったあまりを用いて条件分岐を用いることなく実装することもできます。\nc++ による実装例:\nPython による実装例:\nc++ による実装例(別解):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint r;\t\n\tcin >> r;\n\n\tif(r<100)cout << (100-r) << endl;\n\telse if(r<200)cout << (200-r) << endl;\n\telse cout << (300-r) << endl;\n\n\treturn 0;\n}",
+        "r=int(input())\nif r<100:\n    print(100-r)\nelif r<200:\n    print(200-r)\nelse:\n    print(300-r)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint r;\t\n\tcin >> r;\n\n\tcout << 100-(r%100) << endl;\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "fc65ca76abb3b9345bab7007e42adbed447fd75b8c02b46438218c53da302921",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc363/abc363_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

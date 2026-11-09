@@ -1,0 +1,331 @@
+       ARC 085/ABC 078 解説
+
+
+                  Kohei Morita(yosupo)
+
+            平成29 年11 月11 日
+
+
+
+      For International Readers: English editorial starts on page 8.
+
+
+A: HEX
+
+  16 進数に直さずとも，実は入力した文字のASCII コードを比較するだけ
+で十分です(C, C++ならばchar 型のまま比較すればASCII コードで比較で
+きます)。
+ 想定解
+
+
+
+
+
+                                1
+
+B: ISU
+
+ 人がn 人座るためには椅子の幅は何センチメートルあればよいでしょうか？
+ これはY × n + Z × (n + 1) センチメートルです。Y × n が人の占有する
+幅で，Z × (n + 1) が人と人，人と椅子の間に開ける幅です。
+ よってn = 1, 2, ... と順に増やしていき，座れる人数のうち最も多い人数を
+調べればよいです。なお，人数の最大は入力例3 の49999 人です。
+ 想定解
+
+
+
+
+
+                                2
+
+C: HSI
+
+  1 回の実行にかかる時間をx ms，全てのケースに正解する確率をp，この
+問題の答えをy ms とします。x = 1900M + 100(N −M), p = 1/2M です。
+ まず，一回目の提出で必ずx ms はかかります。その後は，確率p で終了し
+ます，そして確率1 −p でその提出には失敗し，更に提出を繰り返します。確
+率1 −p で失敗した場合の，その時点からかかる時間の期待値はy ms です。
+ よって，y = x + (1 −p) × y が成立し，これを解くとy = x/p が得られ
+ます。
+ よって答えはx/p = (1900M + 100(N −M)) × 2M です。
+
+
+
+
+
+                                3
+
+D: ABS
+
+ まず，N=1 の場合の答えは|a1 −W| です。
+  2 ≤N の場合を考えます。X は初手で全部のカードを引くことにより，
+|aN −W| が達成できます。また，初手でN −1 枚のカードを引くことで
+|aN−1 −aN| が達成できます。
+ 実は，初手で行うべき操作はこの2 通りのみ，つまり2 枚以上カードを残
+す理由はありません。なぜならば，その直後の手番でY さんは，残り1 枚に
+なるようにカードを引くと|aN−1 −aN| を達成できます。よって2 枚以上カー
+ドを残してもスコアが|aN−1 −aN| より高くなることはないからです。
+ 以上より，この問題の(2 ≤N の時の) 答えはmax(|aN −W|, |aN−1 −aN|)
+です。
+
+
+
+
+
+                                4
+
+E: MUL
+
+ 結論から言うと，この問題は最大流問題の双対問題である最小カットを使
+
+い解くことができます。
+
+ 具体的には，頂点S, V, 1, 2, ..., N を用意し，各i について，
+
+   • ai ≤0 ならば，S →i に容量−ai の辺を張る
+
+   • ai > 0 ならば，i →T に容量ai の辺を張る
+
+   • 各j = 2i, 3i, 4i, ... について，i →j に容量∞の辺を張る
+
+ と辺を張り，ai > 0 なるai の総和から，構築したグラフの最小カットを引
+いたものが答えです。
+
+ 最小カット問題の答えは最大流問題を解くことで得られます。頂点数がO(N)
+で，変数はO(N log N)，そしてN ≤100 と小さいため，計算量が流量に依
+存しない最大流アルゴリズムならだいたい間に合うと思います。
+
+
+理由
+
+ 最小カット問題とは，S, T 以外の頂点をS 側とT 側に振り分け，S 側から
+T 側へ張られる辺の容量の総和を最小化する問題です。
+ ここで，S 側を0，T 側を1 として見ると，S には0, T には1，それ以外の
+頂点には0, 1 を割り振り，(0 が割り振られた頂点) から(1 が割り振られた頂
+点) へ張られる辺の容量の総和を最小化する問題，と考えられます。
+ これを更に言い換えると，以下のような問題が解けることがわかります。
+
+   • 変数qs, qt, q1, q2, ..., qv を考える
+
+   • 罰金条件(x, y, z) がたくさん与えられる。これは，qx が0 でqy が1 な
+   ら罰金z 円，という意味である。
+
+   • あなたは変数にそれぞれ0, 1 のどちらかを割り当て，罰金を最小化し
+   たい。ただしqs = 0, qt = 1 は固定である。
+
+ 当然，変数が頂点，罰金条件が辺に対応します。なお，罰金条件の罰金z は
+必ず非負でないといけないことに注意してください。非負を許した場合，こ
+
+の問題は最大カット問題も含み，NP-hard となります。
+ では，元の問題をこのような問題に変形することを考えます。
+
+ まず，あるi, j(j はi の倍数) について，i が破壊されていて，j が破壊され
+ていない場合，明らかにおかしいです。
+
+ よって，この条件を表すために，i が破壊されていてj が破壊されていない
+と罰金∞円とすることを考えます。
+
+
+
+                                5
+
+ これは，(0 を割り振る)=破壊されている，(1 を割り振る)=破壊されてい
+ない，とし，罰金条件(i, j, ∞) を足せばよいです。
+ 実は，全てのi, j(j はi の倍数) について，「i が破壊されているならば，j が
+破壊されている」が成立する場合，このような破壊の方法が存在します。
+ よって，あとは破壊されていないとai 円，つまりqi = 1 ならばai 貰える，
+という処理です。
+  ai ≤0ならばこれは罰金と考えられるので問題ないです。罰金条件(S, i, −ai)
+を足します。
+  ai > 0 ならば，言い換えて，「i が破壊されていると，ai 円が貰えない=ai
+円罰金」と考えます。すると事前に答えにai を貰っておくことにし，罰金条
+件(i, T, ai) を足します。
+ 以上より，この問題は最小カット問題に帰着できました。
+
+ 今回の問題はN 個の宝石に破壊された，破壊されていない，の2 つの状態
+を割り振る問題でした。このように，幾つかの要素に2 つの状態を割り振り，
+何かを最大化/最小化する問題で，更にDP ではとても解けそうにない場合，
+最小カットを疑うとよいです。
+
+
+
+
+
+                                6
+
+F: MUL
+
+ この問題は，ai ̸= bi，つまり(ai, bi) = (0, 1), (1, 0) の個数を最小化する問
+題です。
+
+
+
+  ((ai, bi) = (0, 1), (1, 0) の個数)
+
+  = ((ai, bi) = (0, 1) の個数) + ((ai, bi) = (1, 0) の個数)
+
+  = ((ai, bi) = (0, 1) の個数) + (bi = 0 の個数) −((ai, bi) = (0, 0) の個数)
+
+ であり，bi = 0 の個数は定数であるため，((ai, bi) =  (0, 1) の個数) −
+((ai, bi) = (0, 0) の個数) を最小化することを考えても良いです。
+ 言い換えると，ai = 1，つまり塗った場合のコストは0 で，塗らなかった
+場合のコストは1 だったり−1 するので，コストの総和を最小化してくださ
+いという問題です。
+
+ 操作それぞれについて行うかどうかを全探索していてはとても間に合いま
+
+せん。うまく探索する必要があります。
+
+ 操作を行うかどうかとスコアの計算を並び換え，
+   li = 1 の操作たちを行うかどうか決め，a1 のスコアを計算する
+→li = 2 の操作たちを行うかどうか決め，a2 のスコアを計算する
+→li = 3 の操作たちを行うかどうか決め，a3 のスコアを計算する
+→li = 4 の操作たちを行うかどうか決め，a4 のスコアを計算する
+→…
+
+ という風に，操作を行うかどうかとスコアの計算を交互に行うことを考え
+
+ます。このような順番にしても答えは変わりません。
+ なぜこのような順番にするかというと，ax のスコアを計算した後はa1, a2, ..., ax
+の色は忘れてよく，更にax+1, ax+2, ..., aN については，あるところまでは1，
+その後全て0 という形になっているからです。
+ よって，この並び替えを行うだけで(まだTLE ですが)DP を行い，計算量
+を多項式にすることができます。DP のキーは(x, y) の2 つで，「ax のスコア
+まで計算し，ay まで1 になっている」という状態を現します。
+  (x, x), (x, x + 1), (x, x + 2), ..., (x, N) から(x + 1, x + 1), (x + 1, x + 2), (x +
+1, x + 3), ..., (x, N) まで同時に遷移することを考え，この遷移をSegTree で
+高速化します。
+
+ 区間l(= x), r の操作については，(x, x), (x, x + 1), ..., (x, r) の最小値を
+(x + 1, r) に遷移させれば良いです。ax のスコアを計算する，のパートは簡
+単です。最初の考察により，ax = 0，つまりy = x の場合以外はスコアが0
+だからです。
+
+ 以上より，区間のmin を取るのが本質であり，この操作はSegTree で簡
+単に実装できます。
+
+
+
+                                7
+
+      ARC 085/ABC 078 Editorial
+
+
+                   Kohei Morita(yosupo)
+
+                   November 11, 2017
+
+
+A: HEX
+
+https://abc078.contest.atcoder.jp/submissions/1751369
+
+B: ISU
+
+https://abc078.contest.atcoder.jp/submissions/1751697
+
+C: HSI
+
+Let x = 1900M + 100(N −M) be the time required to submit (and judge) one
+solution. Let p = 2M1  be the probability that one submission passes. Let y be
+the answer of this problem.
+    It takes x ms to submit once. With probability p, it passes and the process
+ends, and with probability 1−p, you need more submissions and you need y ms
+more on average.
+   Thus, you get y = x + (1 −p) × y, and y = x/p.
+   Therefore, the answer is y = x/p = (1900M + 100(N −M)) × 2M.
+
+D: ABS
+
+If N = 1, the answer is |a1 −W|.
+   Suppose that 2 ≤N. X can achieve the ﬁnal result of |aN −W| all cards in
+his ﬁrst turn. Also, X can achieve the ﬁnal result of |aN−1 −aN| by drawing
+N −1 cards in his ﬁnal turn.
+    It turns out that X can’t do better than the two strategies above. Suppose
+that X leaves at least two cards (k cards) in his ﬁrst turn. Then, Y can take
+k −1 cards in the next turn and the result will be |aN−1 −aN|.
+   Therefore, the answer is max(|aN −W|, |aN−1 −aN|).
+
+
+
+
+
+                                  1
+
+E: MUL
+
+Let’s solve this problem as a minimum S-T cut problem.
+  We divide all integers 1, 2, . . . , N into two groups. Group S is a set of integers
+that are smashed, and Group T is a set of integers that are not smashed.
+    Ideally, we should smash all integers with negative costs, and we shouldn’t
+smash any integers with non-negatove costs. Let X be the total money you can
+get in this ideal situation.
+   However, this situation is not always possible. If for some i, j such that j is
+a multiple of i, i is smashed and j is not smashed, we get a contradiction. (Note
+that this is a suﬃcient condition:  if a set of integers satisﬁes this condition,
+we can perform operations on all smashed integers and still we don’t smash
+anything else.)
+   Now, you get the following penalties:
+
+   • If for some i, j such that j is a multiple of i, i is in group S and j is in
+     group T, we get an inﬁnite penalty.
+
+   • If ai ≤0 and i is in group T, we get a penalty of −ai.
+
+   • If ai > 0 and i is in group S, we get a penalty of ai.
+
+   To represent these penalties, construct the following graph:
+   Construct a graph with N + 2 vertices.  The vertices are labelled with
+S, T, 1, 2, ..., N, and for each i, we add the following edges:
+
+   • If ai ≤0, add an edge S →i with capacity −ai.
+
+   • If ai > 0, add an edge i →T with capacity ai.
+
+   • For each j = 2i, 3i, 4i, ..., add an edge i →j with capacity ∞.
+
+   The answer is X minus the minimum S-T cut of the graph above.
+   Since there are O(N) vertices and O(N log N) edges, it works in time.
+
+
+
+
+
+                                  2
+
+F: NRE
+
+In this problem, we want to minimize the number of i such that ai ̸= bi, that
+is, (ai, bi) = (0, 1)or(1, 0).
+   The number of i such that (ai, bi) = (0, 1), (1, 0)
+= (The number of i such that(ai, bi) = (0, 1)) + (The number of i such that
+bi = 0) - (The number of i such that (ai, bi) = (0, 0))
+   Here, since the number of i such that bi = 0 is a constant, we want to
+minimize (The number of i such that(ai, bi) = (0, 1)) - (The number of i such
+that (ai, bi) = (0, 0))
+   In other words, when you paint the i-th cell (ai = 1), there’s no cost, and
+when you don’t paint it (ai = 0), you get a cost of 1 or −1.
+    Let’s perform the operations and compute the cost in the following order:
+   Perform some operations with li = 1 and compute the cost of a1
+→Perform some operations with li = 2 and compute the cost of a2
+→Perform some operations with li = 3 and compute the cost of a3
+→Perform some operations with li = 4 and compute the cost of a4
+→…
+   Here, after you compute the cost of ax, you can forget about a1, a2, ..., ax,
+and at this point, ax+1, ax+2, ..., aN is of the form ”111...111000...000”.
+   Therefore, we get the following DP, and it works in polynomial time. dp(x, y)
+means the minimum possible cost you get from a1, . . . , ax, given that at this
+point ax+1, . . . , ay = 1 and the remaining elements are zeroes.
+   Now, how can we get the DP values of (x+1, x+1), (x+1, x+2), (x+1, x+
+3), ..., (x, N) from (x, x), (x, x + 1), (x, x + 2), ..., (x, N)?
+   To handle an operation in the interval [l(= x), r], we replace (x + 1, r) with
+the minimum of (x, x), (x, x + 1), ..., (x, r). It’s easy to compute the cost of ax
+because when ax = 0, you get no cost.
+   Therefore, the only data structure you need is to get the minimum of an
+interval, and this can be done in segment tree (or RMQ).
+
+
+
+
+
+                                  3

@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc468_e",
+  "title": "Sum of Average",
+  "contests": [
+    {
+      "contest_id": "abc468",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1038,
+  "raw_difficulty": 1038,
+  "contest_id": "abc468",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc468/tasks/abc468_e",
+  "statement": "配点 : 450 点 問題文 正整数 N と長さ N の整数列 A=(A_1,A_2,\\ldots,A_N) が与えられます。 f(l,r) を A_l,A_{l+1},\\ldots,A_r の（算術）平均として定義します。 \\displaystyle \\sum_{1\\le l\\le r\\le N} f(l,r) を \\text{mod }{998244353} で求めてください。 有理数 \\text{mod }{998244353} の定義 この問題の制約のもとでは、求める有理数を既約分数 \\frac{P}{Q} で表した時、 Q {{}\\not\\equiv{}} 0 \\pmod{998244353} となることが証明できます。 よって、 R \\times Q \\equiv P \\pmod{998244353}, 0 \\leq R < 998244353 を満たす整数 R が一意に定まります。 この R を答えてください。 制約 1\\le N\\le 5\\times 10^5 0\\le A_i < 998244353 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N 出力 答えを出力せよ。 入力例 1 2\r\n2 3 出力例 1 499122184 \\displaystyle f(1,1)=2,f(1,2)=\\frac{2+3}2=\\frac52,f(2,2)=3 です。したがって、 \\displaystyle \\sum_{1\\le l\\le r\\le N} f(l,r)=2+\\frac52+3=\\frac{15}2 です。 \\displaystyle \\frac{15}2 は \\text{mod }{998244353} で 499122184 なので、 499122184 を出力してください。 入力例 2 6\r\n1 2 3 4 5 6 出力例 2 499122250 入力例 3 9\r\n3 1 4 1 5 9 2 6 5 出力例 3 855638200",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 正整数 N と長さ N の整数列 A=(A_1,A_2,\\ldots,A_N) が与えられます。 f(l,r) を A_l,A_{l+1},\\ldots,A_r の（算術）平均として定義します。 \\displaystyle \\sum_{1\\le l\\le r\\le N} f(l,r) を \\text{mod }{998244353} で求めてください。 有理数 \\text{mod }{998244353} の定義 この問題の制約のもとでは、求める有理数を既約分数 \\frac{P}{Q} で表した時、 Q {{}\\not\\equiv{}} 0 \\pmod{998244353} となることが証明できます。 よって、 R \\times Q \\equiv P \\pmod{998244353}, 0 \\leq R < 998244353 を満たす整数 R が一意に定まります。 この R を答えてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\le N\\le 5\\times 10^5 0\\le A_i < 998244353 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2\r\n2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 499122184 \\displaystyle f(1,1)=2,f(1,2)=\\frac{2+3}2=\\frac52,f(2,2)=3 です。したがって、 \\displaystyle \\sum_{1\\le l\\le r\\le N} f(l,r)=2+\\frac52+3=\\frac{15}2 です。 \\displaystyle \\frac{15}2 は \\text{mod }{998244353} で 499122184 なので、 499122184 を出力してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 6\r\n1 2 3 4 5 6"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 499122250"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 9\r\n3 1 4 1 5 9 2 6 5"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 855638200"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc468/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:55.383445+00:00",
+  "statement_sha256": "577fd5c24709528c0f489c38cc077c7298eed7344562044073715c24a274fcb5",
+  "editorials": []
+}

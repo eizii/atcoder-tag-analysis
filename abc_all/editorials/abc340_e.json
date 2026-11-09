@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc340_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc340/editorial/9251",
+      "text": "ボールを配る操作を\n\\(N\\)\n回ずつまとめることで、操作は次のようになります。\n箱\n\\(B_i\\)\n​ の中のボールを全て取り出し、手に持つ。\n手に持っているボールの個数を\n\\(X\\)\nとして、全ての箱に\n\\(\\left\\lfloor\\frac{X}{N}\\right\\rfloor\\)\n個ずつボールを入れる。\nまだ手に持っているボールの個数を\n\\(X\\)\nとして、箱\n\\(B_i+1\\)\nから箱\n\\(B_i+X\\)\nに\n\\(1\\)\n個ずつボールを入れる。\n（\n\\(B_i+X\\geq N\\)\nのとき、「箱\n\\(B_i+1\\)\nから箱\n\\(B_i+X\\)\n」は「『箱\n\\(B_i+1\\)\nから箱\n\\(N-1\\)\n』及び『箱\n\\(0\\)\nから箱\n\\(B_i+X-N\\)\n』」を意味する）\n各箱に入っているボールの個数を表す配列に対するこれらの処理は\n\\(1\\)\n点更新と区間加算になので、遅延セグメントツリーなどのデータ構造を用いることで\n\\(O(\\log N)\\)\n時間で処理でき、全体で\n\\(O((M+N)\\log N)\\)\n時間で問題に答えることができます。",
+      "codes": [],
+      "text_sha256": "be2e1703c89710ce338259a0aef5353df1000cdc29294094466e02e1c1e97320",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc340/abc340_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc340/editorial/9267",
+      "text": "この問題は、数列 \\(A\\) に対して区間 \\((A _ L,A _ {L+1},\\ldots,A _ R)\\) への一様な加算と、一点 \\(A _ x\\) へのアクセスが管理できればよいです。\nここで、数列 \\(D=(D _ 0,D _ 1,\\ldots,D _ {N-1})\\) を \\(\\displaystyle A _ i=\\sum _ {j=0} ^ iD _ j\\) を満たすものとし、\\(D\\) を管理することにします。\nすると、上の \\(2\\) 種類のクエリは \\(2\\) 点 \\(D _ L,D _ {R+1}\\) へそれぞれ \\(+k,-k\\) することと、 prefix sum \\(\\displaystyle\\sum _ {j=0} ^  xD _ j\\) を求めることと言い換えられます。\nこれは（遅延評価の対応をしない）セグメント木や Binary Indexed Tree によって処理することができます。\n公式解説の解法を遅延評価セグメント木で実装した場合と比較し、計算量の漸近的なオーダーは時間 \\(O((N+M)\\log N)\\) および空間 \\(O(N)\\) となり変わりませんが、時間計算量や空間計算量をより削減することができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <atcoder/fenwicktree>\n\nint main() {\n    using namespace std;\n    unsigned N, M;\n    cin >> N >> M;\n\n    atcoder::fenwick_tree<unsigned long> D(N);\n    { // BIT を初期化\n        unsigned long A, prev_A{};\n        for(unsigned i = 0; i < N; ++i){\n            cin >> A;\n            // ∑_j D[j] = A[i] とするには D[i] = A[i] - A[i - 1] とすればよい\n            D.add(i, A - prev_A);\n            prev_A = A;\n        }\n    }\n\n    for(unsigned i = 0; i < M; ++i){\n        unsigned B;\n        cin >> B;\n        auto x{D.sum(0, B + 1)}; // A[B] の値は ∑_{0 <= j <= B} D[j]\n\n        // A[B] の値を 0 にする\n        D.add(B, -x);\n        if(B + 1 < N)D.add(B + 1, x);\n\n        // 全体には足さないぶんの処理\n        D.add((B + 1) % N, 1); // 配り始めから末尾まで +1\n        D.add((B + 1 + x) % N, -1); // 配り終わりから末尾まで -1\n        x += (B + 1) % N - (B + 1 + x) % N; // 足したぶんを引いておく\n\n        // 全体に x / N を足す\n        D.add(0, x / N);\n    }\n\n    for(unsigned i = 1; i <= N; ++i)\n        cout << D.sum(0, i) << \" \";\n    cout << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "d961ed1672d68b488a52dd7488f21900c86b7c1cc7d9d0ceade4f21298be1ab5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc340/abc340_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

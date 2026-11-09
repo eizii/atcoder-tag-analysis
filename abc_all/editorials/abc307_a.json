@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc307_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc307/editorial/6648",
+      "text": "この問題は配列とfor文を使うことで解くことができます。使っている言語において、配列の使い方、for文の使い方を確認しておきましょう。\n\\(7\\)\n日分の合計を求めるには、for文を使って\n\\(7\\)\n回ループする方法の他、sumなどの組み込み関数を用いる方法もあります。\n実装例(C++)\n実装例(Python)\n実装例(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n;\n\tcin >> n;\n\tvector<int>a(7*n);\n\tfor(int i=0;i<7*n;i++)cin >> a[i];\n\n\tfor(int i=0;i<n;i++){\n\t\tint sum=0;\n\t\tfor(int j=0;j<7;j++)sum+=a[7*i+j];\n\t\tif(i!=n-1){\n\t\t\tcout << sum << ' ';\n\t\t}else {\n\t\t\tcout << sum << endl;\n\t\t}\n\t}\n}",
+        "N=int(input())\nA=list(map(int,input().split()))\n\nfor i in range(N):\n  sum=0\n  for j in range(7):\n    sum+=A[7*i+j]\n  if i!=N-1:\n    print(sum,end=\" \")\n  else:\n    print(sum,end=\"\\n\")",
+        "N=int(input())\nA=list(map(int,input().split()))\n\nans=[sum(A[7*i:7*i+7]) for i in range(N)]\nprint(*ans)"
+      ],
+      "text_sha256": "854e05d9b046bba2da59373f6401462088ea5f70fde9b6627afdc0b2c6b12d79",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc307/abc307_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc337_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc337/editorial/9121",
+      "text": "次のような数列 \\((B _ i) _ {1\\leq i\\leq N}\\) を考えます。\n\\[B _ i=\\left\\lbrace\\begin{matrix}j&(A _ j=i)\\hphantom{\\text{otherwise}}\\\\-1&(\\text{otherwise})\\hphantom{A _ j=i}\\end{matrix}\\right.\\]\nこれは、「人 \\(i\\) の直後の人は人 \\(B _ i\\)（ただし、存在しなければ \\(-1\\)）」を満たす数列です。\nこの \\((B _ i) _ {1\\leq i\\leq N}\\) が求められれば、\\(A _ x=-1\\) を満たす \\(x\\) を用いて、列の並びを人 \\(x,\\) 人 \\(B _ x,\\) 人 \\(B _ {B _ x},\\) 人 \\(B _ {B _ {B _ x}},\\ldots,\\) 人 \\(B _ {B _ {{}_{\\ddots _ {B _ x}}}}\\) と書くことができます。\nよって、数列 \\((B _ i)\\) と先頭の人を求めて \\(x\\leftarrow B _ x\\) を適切に繰り返せばよいです。\n実装例は以下のようになります。\n直後の人が存在しないときの \\(B _ i\\) の値は（存在するときの値とかぶらない範囲で）自由に定めてよいことを利用しています。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    cin >> N;\n\n    vector<unsigned> B(N, N); // B[i] := 人 i の直後の人（いなければ N）\n    unsigned front;\n\n    for(unsigned i = 0; i < N; ++i){\n        int A;\n        cin >> A;\n        --A; // 0-indexed に直しておく\n        if(A < 0)\n            front = i;\n        else\n            B[A] = i; // 人 i の直前が人 A ⇔ 人 A の直後が人 i\n    }\n\n    while(front < N){ // N になるまで（= 直後の人がいなくなるまで）直後に移動を繰り返す\n        cout << front + 1 << \" \";\n        front = B[front];\n    }\n    cout << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "7dd7a9bf8c25ac7b76546977f74015f7e728fcb0d6c9e68c4458210aa68f5b5c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc337/abc337_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

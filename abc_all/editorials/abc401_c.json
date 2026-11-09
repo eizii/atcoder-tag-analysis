@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc401_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc401/editorial/12689",
+      "text": "愚直に毎回\n\\(A_i\\)\nを求めると\n\\(\\mathrm{O}(NK)\\)\nかかってしまい実行時間制限に間に合いません。\nここで、\n\\(A_n\\)\nを計算するときには\n\\(S:=A_{n-K}+\\ldots+A_{n-1}\\)\nをデータとして保持することにして、\n\\(S\\)\nを適宜更新することを考えます。\nまず、\n\\(S=K\\)\nで初期化します。次に、\n\\(n=K,K+1,\\ldots,N\\)\nの順に以下を行います。\n\\(A_n=S\\)\nとする\n\\(S\\)\nから\n\\(A_{n-K}\\)\nを引く\n\\(S\\)\nに\n\\(A_n\\)\nを足す。\n以上の手続きにより\n\\(\\mathrm{O}(N)\\)\nで答えを求めることができます。実装例も参考にしてください。\n実装例(Python):",
+      "codes": [
+        "n, k = map(int, input().split())\ns = k\na = [1 for i in range(n + 1)]\nfor i in range(k, n + 1):\n    a[i] = s\n    s -= a[i-k]\n    s += a[i]\n    s %= 1000000000\nprint(a[n])"
+      ],
+      "text_sha256": "d205446c6021e08eff8903e6ad7b266ff3583445042f0b8436a2d2971caffbe5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc401/abc401_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

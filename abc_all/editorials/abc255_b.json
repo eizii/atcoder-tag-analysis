@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc255_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc255/editorial/4108",
+      "text": "ある人が少なくとも\n\\(1\\)\nつの明かりに照らされるとは、どういうことでしょうか？\n実は、これは「ある人から距離\n\\(R\\)\n以内に明かりを持った人が少なくとも\n\\(1\\)\n人いる」と言い換えることができます。\nさらにこれを言い換えると、「ある人から最も近い『明かりを持った人』が距離\n\\(D\\)\nの位置にいるとすると、\n\\(D \\le R\\)\nであるとき、ある人は少なくとも\n\\(1\\)\nつの明かりに照らされる」と言い換えられます。\n結局、この問題の答えは、全ての人について、その人から最も近い『明かりを持った人』までの距離の最大値となります。そして、これは二重ループによって時間計算量\n\\(O(NK)\\)\nで求めることが出来ます。\n注意点1: 距離の比較を行う時には、可能なら整数性を崩さずに比較を行いましょう。\n具体的には、\n\\(2\\)\n点\n\\((a,b),(c,d)\\)\n間の距離は\n\\(\\sqrt{(a-c)^2+(b-d)^2}\\)\nですが、この根号内が整数なら、大小の評価などを根号内の整数で行った上で、出力を行ったりと実数値が必要になったタイミングで\n\\(\\sqrt{}\\)\nをとることをおすすめします。\n注意点2: 出力形式に注意してください。\nたとえば\n2.55e22\nのような指数表記は、競技プログラミングにおいて不正解として扱われることがあります。特別な指示がない限り指数表記を使わずに出力することを推奨します。\nまた、出力する桁数が少ないと、せっかく十分精度がある答えを求めることが出来ても出力する際に許容される誤差を超えてしまう可能性があるので、許容誤差に対して十分多い桁数を出力することを推奨します。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,k;\n  cin >> n >> k;\n  vector<int> a(k);\n  for(auto &nx : a){\n    cin >> nx;\n    nx--;\n  }\n  vector<long long> x(n),y(n);\n  for(int i=0;i<n;i++){cin >> x[i] >> y[i];}\n\n  long long res=0;\n  for(int i=0;i<n;i++){\n    long long cres=8e18;\n    for(auto &nx : a){\n      cres=min(cres,(x[i]-x[nx])*(x[i]-x[nx]) + (y[i]-y[nx])*(y[i]-y[nx]));\n    }\n    res=max(res,cres);\n  }\n  printf(\"%.12lf\\n\",sqrt((double)res));\n  return 0;\n}"
+      ],
+      "text_sha256": "21ab9ff6f6f5e69fca89f98df7b4289f9d0709ce42e536feaa0117f9b113bfc2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc255/abc255_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc370_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc370/editorial/10892",
+      "text": "\\(L, R\\)\nの値によって場合分けを行います。\n\\(L = 0, R = 0\\)\nのとき\nInvalid\n、\n\\(L = 0, R = 1\\)\nのとき\nNo\n、\n\\(L = 1, R = 0\\)\nのとき\nYes\n、\n\\(L = 1, R = 1\\)\nのとき\nInvalid\nを出力すればよいです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint l, r;\n\tcin >> l >> r;\n\tif (l == 0 && r == 0) cout << \"Invalid\\n\";\n\telse if (l == 0 && r == 1) cout << \"No\\n\";\n\telse if (l == 1 && r == 0) cout << \"Yes\\n\";\n\telse cout << \"Invalid\\n\";\n}"
+      ],
+      "text_sha256": "169ff179891427c002296af5eade50e309e39e45fdd438f8b98c85efe84ab599",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc370/abc370_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

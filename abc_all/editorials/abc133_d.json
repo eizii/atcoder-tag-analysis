@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc133_d",
+  "editorials": [
+    {
+      "text": "D: Rain ﬂows into dams\ni 番目の山に降った雨の量(答え) をXi とします。すると、\nA1 + ... + AN = X1 + ... + XN\nが成り立ちます。この和をS とおきます。\nまた、便宜上XN+1 = X1 とすると\nXi + Xi+1\n2\n= Ai\nより\nXi + Xi+1 = 2Ai\nです。\nしたがって、\nX1 = S −(X2 + ... + XN) = S −2(A2 + A4 + ... + AN−1)\nとX1 を求めることができます。同様にX2, X3, ..., XN を求めることができますが、O(N 2) の時間はかけら\nれないため、実装が少し大変です。\nそこで、Xi + Xi+1 = 2Ai を利用し、Xi+1 = 2Ai −Xi の漸化式に従ってX2, X3, ..., XN を前から順に計\n算していきます。\nこのアルゴリズムは時間計算量O(N) で動作し、十分間に合います。\n",
+      "text_sha256": "814b8b10dacb945fa03596d9a37e4152b25678f57fa61e1208beb71f74e0d955",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc133/abc133_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

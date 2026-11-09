@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc342_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc342/editorial/9356",
+      "text": "最終的な \\(S\\) の \\(i\\) 文字目 \\(S _ i\\) は、はじめ \\(S _ i\\) が何であったかのみによって決まります。\nよって、すべての英小文字に対して最終的にどの文字になるかがわかれば、その情報を用いて答えを出すことができます。\n\\(S\\) に対して操作を行う代わりに\nabcdefghijklmnopqrstuvwxyz\nなどに対して操作を行うと考えることもできます。\n計算量はアルファベットサイズを \\(\\sigma(=26)\\) として \\(O(\\sigma(N+Q))\\) などになります。\n実装例は以下のようになります。",
+      "codes": [
+        "from string import ascii_lowercase\n\nN = int(input())\nS = input()\n\nQ = int(input())\n\n# 変換前と変換後の文字列を作る\n# 'abcdefghijklmnopqrstuvwxyz' で初期化\nmapping_from = ascii_lowercase\nmapping_to = ascii_lowercase\n\nfor _ in range(Q):\n    c, d = input().split()\n    mapping_to = mapping_to.replace(c, d) # c を d に置き換える\n\n# 対応する文字をそれぞれ置き換える\nprint(S.translate(str.maketrans(mapping_from, mapping_to)))",
+        "#include <iostream>\n#include <string>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    cin >> N;\n    string S;\n    cin >> S;\n\n    unsigned Q;\n    cin >> Q;\n\n    // 変換前と変換後の文字列を作る\n    string from, to;\n    // すべての英小文字が含まれる文字列で初期化\n    from = to = \"abcdefghijklmnopqrstuvwxyz\"s;\n\n    for (unsigned i = 0; i < Q; ++i) {\n        char c, d;\n        cin >> c >> d;\n        for (auto &&m : to)\n            if (m == c) // c があったら\n                m = d; // d に変換\n    }\n\n    for (const auto c : S)\n        for (unsigned i = 0; i < 26; ++i)\n            if (c == from[i]) // 変換前の文字から\n                cout << to[i]; // 変換後の文字を求める\n    cout << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "9f9a77ea693a4b6a934da6a6eb4b906bb03c2f6a9bb487f1045e8895dbb6dd38",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc342/abc342_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc342/editorial/9357",
+      "text": "この問題は \\(O(N+Q+\\sigma)\\) 時間で解くことができます。\n同じ文字になるインデックスを根つき森の形で保持することを考え、文字から連結成分（の根）を求められるようにしておきます。\nまず、与えられた文字列に対応する根つき森および根の索引を \\(O(N+\\sigma)\\) 時間で作ることができます。\n先頭から文字列を走査し、すでに対応する森が存在するか見ながら頂点を追加していけばよいです。\nまた、操作ごとに定数回の演算で根つき森を更新することができます。\n具体的には、\\(c\\) に対応する連結成分の根から \\(d\\) に対応する連結成分の根に辺を貼ればよいです。\n実装の際はどちらかが存在しない場合や \\(c=d\\) の場合に注意してください。\nすべての操作が終了したら、この森に対して適切に探索を行うことで \\(O(N+Q)\\) 時間で求める文字列を得ることができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <optional>\n#include <vector>\n#include <utility>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    cin >> N;\n    string S;\n    cin >> S;\n\n    unsigned Q;\n    cin >> Q;\n\n    // root[c] := 文字 c に対応する根\n    // parent[i] := 頂点 i の親\n    vector<optional<unsigned>> root(26), parent(N);\n\n    for (unsigned i = 0; i < N; ++i) {\n        const auto c = S[i] - 'a';\n        if (root[c]) // c の根があれば\n            parent[*root[c]] = i; // 今の c の根の親を i に\n        root[c] = i; // c の根を i に\n    }\n\n    for (unsigned i = 0; i < Q; ++i) {\n        char c, d;\n        cin >> c >> d;\n        c -= 'a';\n        d -= 'a';\n\n        if (c == d) // c = d なら\n            continue; // 何もしない\n\n        if (!root[c]) // いま c がなければ\n            continue; // 何もしない\n\n        if (!root[d]) { // いま d がなければ\n            swap(root[d], root[c]); // c の根が新しく d の根になる\n            continue;\n        }\n\n        // どちらもあれば\n        parent[*exchange(root[c], nullopt)] = *root[d]; // c の根を d の根の子にし、c に対応する連結成分がなくなる\n    }\n\n    vector<optional<char>> result(N);\n    for (unsigned c = 0; c < 26; ++c)\n        if (root[c])\n            result[*root[c]] = c + 'a'; // それぞれの根はそれぞれの文字に\n\n    for (unsigned i = 0; i < N; ++i){\n        if (!result[i]) { // まだ求まっていなければ\n            vector<unsigned> index;\n            auto now = i;\n            while (!result[now]) // 値がわかるところまで\n                index.emplace_back(exchange(now, *parent[now])); // 親をたどって\n            for (const auto j : index)\n                result[j] = result[now]; // たどった頂点の値を確定する\n        }\n        cout << *result[i];\n    }\n    cout << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "b4ee9b051b760119a2c8ee039e41a6ec2c1ce8329774d462be9bd8d08ce1f741",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc342/abc342_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

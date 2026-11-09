@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc223_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc223/editorial/2772",
+      "text": "\\(X\\)\nが\n\\(0\\)\nでなく、かつ\n\\(X\\)\nが\n\\(100\\)\nで割り切れることが必要十分条件です。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int x; cin >> x;\n    if(x == 0 || x % 100 != 0) cout << \"No\" << endl;\n    else cout << \"Yes\" << endl;\n}"
+      ],
+      "text_sha256": "c28486dd3ec7fc02b29e0de7f5ef77ffd1de31e554d1e31ccad4b0dc5dbbda6f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc223/abc223_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc375_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc375/editorial/11135",
+      "text": "問題文の指示通りに実装しましょう。最後に原点に戻る必要があることに注意してください。\n多くの言語では\nsqrt\nという名前の関数を用いて平方根の計算を行うことができます。\n\\(\\sqrt{x^2+y^2}\\)\nを計算することができる\nhypot(x,y)\nという関数を持つ言語もあります。\n言語によっては、答えを出力する際の小数点以下の桁数にも注意が必要です。\n実装例(Python)\n実装例(C)",
+      "codes": [
+        "import math\n\nN = int(input())\npoints = [tuple(map(int,input().split())) for _ in range(N)]\npoints = [(0,0)] + points + [(0,0)]\n\nans = 0\nfor i in range(N+1):\n  px, py = points[i]\n  qx, qy = points[i+1]\n  ans += math.hypot(px-qx, py-qy)\n\nprint(ans)",
+        "#include<stdio.h>\n#include<math.h>\n\nint main(){\n\tint n;\n\tscanf(\"%d\", &n);\n\n\tdouble ans = 0;\n\tint crrx = 0;\n\tint crry = 0;\n\tfor(int i=0; i<n; i++){\n\t\tint x, y;\n\t\tscanf(\"%d%d\", &x, &y);\n\t\tans += hypot(x-crrx, y-crry);\n\t\tcrrx = x;\n\t\tcrry = y;\n\t}\n\tans += hypot(crrx, crry);\n\tprintf(\"%.10f\\n\", ans);\n}"
+      ],
+      "text_sha256": "ff09d3d618c785e26aaacf4cc47f195f028bd71296c9a8781acf08912d99d34d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc375/abc375_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

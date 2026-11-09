@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc386_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc386/editorial/11692",
+      "text": "解法1. カードを\n\\(1\\)\n枚追加することを試す\n追加するカードとして\n\\(1,2,\\dots,13\\)\nのみ考えればよいです。\nこれを全通り試すことでこの問題に正解できます。\nなお、フルハウスかどうかの判定は\nABC263-A\nにて既出です (後述の解法を応用して判定可能です)。\n実装例 (C++):\n問題条件の言い換え\n実は、あと\n\\(1\\)\n枚加えてフルハウスとなる組は以下の条件のどちらかを満たすものに限られます。\n同じ数が書かれたカード\n\\(3\\)\n枚と、別の同じ数が書かれたカード\n\\(1\\)\n枚からなる。\n同じ数が書かれたカード\n\\(2\\)\n枚と、別の同じ数が書かれたカード\n\\(2\\)\n枚からなる。\n証明は、フルハウスから\n\\(1\\)\n枚除くことを考えると直ちに導かれます。\n解法2. ソートして判定\nソートした\n\\(4\\)\n枚のカードを\n\\(A_1,A_2,A_3,A_4\\)\nとします。\n同じ数が書かれたカード\n\\(3\\)\n枚と、別の同じ数が書かれたカード\n\\(1\\)\n枚からなる。\nこの条件は、以下の条件のどちらかを満たすことと同値です。\n\\(A_1 = A_2 = A_3 \\neq A_4\\)\n\\(A_1 \\neq A_2 = A_3 = A_4\\)\n同じ数が書かれたカード\n\\(2\\)\n枚と、別の同じ数が書かれたカード\n\\(2\\)\n枚からなる。\nこの条件は、以下の条件のどちらかを満たすことと同値です。\n\\(A_1 = A_2 \\neq A_3 = A_4\\)\nこれを利用するとこの問題に正解できます。\n実装例 (C++):\nこの解法をよく観察すると、更に次の通りに変形できます。\n\\(A_1 \\neq A_2, A_2 \\neq A_3, A_3 \\neq A_4\\)\nのうち丁度\n\\(1\\)\nつが満たされる時に限り、答えは\nYes\n実装例 (C++):\n解法3. バケットソートの要領で判定\n言い換えた条件を、バケットソートの要領で判定します。実装例では、 C++ の\nmap\nを活用しています。\n実装例 (C++):\nおまけ\n実は、\n\\(4\\)\n枚のカードをどの種類に振り分けるかは以下の\n\\(5\\)\n通りに限られ、この\n\\(5\\)\n通りはサンプルで尽くされています。\n\\((1,1,1,1)\\)\n\\((2,1,1)\\)\n\\((2,2)\\)\n\\((3,1)\\)\n\\((4)\\)\nこのような振り分けの個数は、\n分割数\nというトピックで知られています。",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nbool isFullHouse(int a,int b,int c,int d,int e){\n  vector<int> card={a,b,c,d,e};\n  sort(card.begin(),card.end());\n  if(\n    card[0]==card[1] && card[1]==card[2] &&\n    card[2]!=card[3] &&\n    card[3]==card[4]\n  ){\n    return true;\n  }\n  if(\n    card[0]==card[1] &&\n    card[1]!=card[2] &&\n    card[2]==card[3] && card[3]==card[4]\n  ){\n    return true;\n  }\n  return false;\n}\n\nint main(){\n  int a,b,c,d;\n  cin >> a >> b >> c >> d;\n  for(int e=1;e<=13;e++){\n    if(isFullHouse(a,b,c,d,e)){\n      cout << \"Yes\\n\";\n      return 0;\n    }\n  }\n  cout << \"No\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  vector<int> a(4);\n  cin >> a[0] >> a[1] >> a[2] >> a[3];\n  sort(a.begin(),a.end());\n  if(a[0]==a[1] && a[1]==a[2] && a[2]!=a[3]){\n    cout << \"Yes\\n\";\n    return 0;\n  }\n  if(a[0]!=a[1] && a[1]==a[2] && a[2]==a[3]){\n    cout << \"Yes\\n\";\n    return 0;\n  }\n  if(a[0]==a[1] && a[1]!=a[2] && a[2]==a[3]){\n    cout << \"Yes\\n\";\n    return 0;\n  }\n  cout << \"No\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  vector<int> a(4);\n  cin >> a[0] >> a[1] >> a[2] >> a[3];\n  sort(a.begin(),a.end());\n  int c=0;\n  if(a[0]!=a[1]){c++;}\n  if(a[1]!=a[2]){c++;}\n  if(a[2]!=a[3]){c++;}\n  if(c==1){cout << \"Yes\\n\";}\n  else{cout << \"No\\n\";}\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  map<int,int> m1,m2;\n  for(int i=0;i<4;i++){\n    int a;\n    cin >> a;\n    m1[a]++;\n  }\n  for(auto &nx : m1){\n    m2[nx.second]++;\n  }\n  if(m2[1]==1 && m2[3]==1){\n    cout << \"Yes\\n\";\n  }\n  else if(m2[2]==2){\n    cout << \"Yes\\n\";\n  }\n  else{\n    cout << \"No\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "a741bc0ba18009c799e17f7a1300ee316ab45ab8ac6f0846a39b4550c39d4caf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc386/abc386_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc364_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc364/editorial/10543",
+      "text": "ある\n\\(1\\)\n以上\n\\(N-2\\)\n以下の整数\n\\(i\\)\nが存在して\n\\(i, i + 1\\)\n番目に食べようとしている料理がともに甘い料理のとき、\n\\(i + 2\\)\n番目以降に食べようとしている料理が食べられなくなってしまうのですべての料理を食べることができません。\n逆にそうでないとき、最後の料理を食べるまでは高橋君が気持ち悪くなることがないためすべての料理を食べることができます。\n下記の実装例では添え字を\n\\(0\\)\nから始めていることに注意してください。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<string> s(n);\n\tfor (int i = 0; i < n; i++) cin >> s[i];\n\tstring ans = \"Yes\";\n\tfor (int i = 0; i < n - 2; i++) if (s[i] == \"sweet\" && s[i + 1] == \"sweet\") ans = \"No\";\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "dcf4f485de58f7ee11f7d76e29d61a00782902423b489bdd1534315ebeb31a5b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc364/abc364_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

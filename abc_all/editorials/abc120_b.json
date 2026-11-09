@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc120_b",
+  "editorials": [
+    {
+      "text": "B: K-th Common Divisor\n正整数i がA もB も割り切るなら、1 ≤i ≤min(A, B) を満たします。したがって、M = min(A, B) と\nしてi = M, M −1, M −2, ..., 1 と順にi がA, B を共に割り切るか調べていき、K 番目に見つけた数を出力\nすれば正答できます。M をmin(A, B) とする代わりに、単にA やB，100 などM がmin(A, B) 以上であ\nれば正答できます。以下にC++ での実装例を示します。\n#include <bits/stdc ++.h>\nusing\nnamespace\nstd;\nint main () {\nint A, B, K; cin >> A >> B >> K;\nfor (int i = min(A, B); i >= 1; --i) {\nif (A % i == 0 && B % i == 0) {\n--K;\nif (K == 0) {\ncout << i << endl;\nreturn 0;\n}\n}\n}\nassert(false );\n}\n別解として、A もB も割り切る数(A とB の公約数) はA とB の最大公約数の約数なので、これを列挙\nして大きい方からK 番目の数を出力する方法もあります。\n",
+      "text_sha256": "2c9dc1d276f480675b23a040d9bf34987276465819aaabf75b5cfc764f1de9e2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc120/abc120_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

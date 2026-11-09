@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc305_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc305/editorial/6540",
+      "text": "\\(1\\) 文字ずつ文字を伸ばしていくことを考えると、末尾のたかだか \\(L=6\\) 文字を状態としてもつ DP を考えることができます。\nこの DP を行列累乗を使って高速化することでこの問題を解くことができます。\n計算量は \\(O(8^L\\log N)\\) 時間となり、十分高速です。\nまた、\\(N\\lt L\\) の場合はすべての長さ \\(N\\) の文字列に対して愚直に判定し、\\(N\\geq L\\) の場合は \\(N=L,L+1,\\ldots,L+2^{L+1}\\) の場合の問題を解いたあと Berlekamp–Massey 法で漸化式を求め、Bostan–Mori 法で求めたい値を得ることで時間計算量は \\(O(4^L+2^L\\log N)\\) になります。",
+      "codes": [
+        "#include <bits/extc++.h>\n#include <atcoder/modint>\n\nint main() {\n    using namespace std;\n    using modint = atcoder::static_modint<998244353>;\n\n    constexpr unsigned long max_bit_length{6};\n    constexpr unsigned long dp_size{2UL << max_bit_length};\n\n    // 1 回の遷移を表す行列\n    vector coef(dp_size, vector<modint>(dp_size));\n    for(unsigned long i{1}; i < dp_size / 2; ++i)coef[i * 2 % dp_size][i] = coef[i * 2 % dp_size + 1][i] = 1;\n    for(unsigned long i{dp_size / 2}; i < dp_size; ++i)coef[i * 2 % dp_size | dp_size / 2][i] = coef[i * 2 % dp_size + 1 | dp_size / 2][i] = 1;\n\n    unsigned long N, M;\n    cin >> N >> M;\n\n    // 部分文字列として s_i を含むような遷移を削除\n    for(unsigned long i{}; i < M; ++i){\n        string s;\n        cin >> s;\n        unsigned long x{};\n        for(const auto c : s)(x *= 2) += c - 'a';\n        const auto k{size(s)};\n        for(unsigned long j{1}, j_upto{dp_size >> k}; j < j_upto; ++j)coef[(j << k) + x] = vector<modint>(dp_size);\n    }\n\n    // 行列積\n    const auto mat_mul{[](auto&& lhs, auto&& rhs){\n        const auto n{size(lhs)};\n        vector ret(n, vector<modint>(n));\n        for(unsigned long i{}; i < n; ++i)\n            for(unsigned long j{}; j < n; ++j)\n                for(unsigned long k{}; k < n; ++k)\n                    ret[i][k] += lhs[i][j] * rhs[j][k];\n        return ret;\n    }};\n    \n    // 答えを求める\n    vector result(dp_size, vector<modint>(dp_size));\n    for(unsigned long i{}; i < dp_size; ++i)result[i][i] = 1;\n    while(N){\n        if(N & 1)result = mat_mul(result, coef);\n        coef = mat_mul(coef, coef);\n        N /= 2;\n    }\n    cout << transform_reduce(begin(result), end(result), modint{}, plus<>{}, [](auto&& i){return i[1];}).val() << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "1d667272386372f33fcb9a082be5892946be1cb39968b268aa0a02c8ddb707db",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc305/abc305_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

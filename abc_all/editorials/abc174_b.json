@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc174_b",
+  "editorials": [
+    {
+      "text": "B: Distance\n(解説: evima)\n前問と同様に架空の言語で正解例を示し、各行について述べます。\n1 read N, D as int\n2 ans = 0\n3 for i = 1, ..., N:\n4\nread X, Y as int\n5\nif X * X + Y * Y <= D * D:\n6\nans += 1\n7 write ans\n1 行目: 入力された値N, D を整数として読み込みます。\n2 行目: カウンターとして用いる変数ans を宣言し、0 で初期化します。\n3 行目: 4 行目から6 行目までをN 回繰り返し実行させます。言語ごとのfor 文の書き方につい\nては、検索エンジンで「(言語名) for 文」などと検索してください。\n4 行目: i 個目の点の座標Xi, Yi を整数変数X, Y に読み込みます。N 個すべての点の座標を配列\nに保存する手もありますが、この解答例では処理した点の座標は「忘れる」ことにしています。\n5, 6 行目: 距離\n√\nX2 + Y 2 がD 以下であるか判定し、そうであればans に1 を加算します。た\nだし、これら二つの値を直接比較する代わりに両者の二乗同士を比較しています(入力されるD の値\nは0 以上であることが保証されているため、単に二乗同士を比較しても結果は変わりません)。一般\nに、計算機上での実数の計算は浮動小数による近似計算であり、その結果には誤差が含まれる*2ため、\n可能な限り避けるべきです。\n7 行目: カウンターとして用いた変数ans の最終的な値を出力します。\n",
+      "text_sha256": "13097aa5f1fe4c6992ab2fba9174dbabbb7e31f7a5eaa14931267d5d453d43e7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc174/abc174_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

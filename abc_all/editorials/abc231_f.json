@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc231_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc231/editorial/3059",
+      "text": "この問題を数式で表すと「\n\\(A_i\\geq A_j\\)\nかつ\n\\(B_i\\leq B_j\\)\nを満たす\n\\((i,j)\\)\nの組は何個あるか？」\nとなります。(\n\\(i\\)\nが高橋君に渡すプレゼント、\n\\(j\\)\nが青木君に渡すプレゼント)\n座標圧縮を行うことで、\n\\(1\\leq A_i,B_i\\leq N\\)\nであるとしてよいです。簡単のため、\n\\((A_i,B_i)=(A_j,B_j)\\)\nとなる\n\\((i,j)\\)\nが存在しない場合をまず考えます。\n\\(i\\)\nを\n\\(A_i\\)\nの昇順・タイなら\n\\(B_i\\)\nの降順でプレゼントを見ていくことにすると\n\\(i\\)\nと対になって条件を満たす\n\\(j\\)\nの個数は、今までに見たプレゼント(自身を含む)のうち、\n\\(B_i\\leq B_j\\)\nを満たすものの個数になります。これはセグメントツリーを用いることで高速に求めることができます。\n\\((A_i,B_i)=(A_j,B_j)\\)\nとなる\n\\((i,j)\\)\nが存在する場合も、適切にそれらをまとめることで同様に解くことができます。\n以上より\n\\(O(N\\log N)\\)\nでこの問題が解けました。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "2593c5a8e835281420c2d69e81ec5121e52f90a2813e3ab7c04549c79b321847",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc231/abc231_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc231/editorial/3093",
+      "text": "「\n\\(A_i \\geq A_j\\)\nかつ\n\\(B_i \\leq B_j\\)\nを満たす\n\\((i,j)\\)\nの組は何個あるか？」という問題の答えは、\n\\( (A_i,B_i) \\)\nを\n\\(A_i\\)\nの昇順にソートしても変わりません。以下、\n\\(i \\leq j \\)\nならば\n\\(A_j \\geq A_i\\)\nが成り立つとします。また、公式解説と同様に座標圧縮を行い\n\\(1 \\leq A_i,B_i \\leq N \\)\nであるとします。\n各\n\\(k (1 \\leq k \\leq N)\\)\nについて、\n\\(A_k \\geq A_j\\)\nかつ\n\\(B_k \\leq B_j\\)\nであるような\n\\(j\\)\nの個数が求められれば良いです。(それらを足し合わせたものが答えになるので)\n\\(A_i\\)\nが単調増加することから、ある整数\n\\(r (1 \\leq r \\leq N)\\)\nが存在し、\n\\(j \\leq r\\)\nであるような全ての\n\\(j\\)\nについて\n\\(A_k\\geq A_j\\)\nが成り立ちます。そのような\n\\(r\\)\nの最大値を\n\\(r'\\)\nとすると、\n\\(j\\)\nが区間\n\\([1, r']\\)\nに含まれるならば、またその時に限り\n\\(A_k\\geq A_j\\)\nが成り立ちます。\n\\(r'\\)\nは二分探索を行うことにより\n\\(O(\\rm{log}\\)\n\\( N)\\)\nで求めることが出来ます。\nあとは、区間\n\\([1,r']\\)\nに含まれる\n\\(j\\)\nのうち\n\\(2\\)\nつ目の条件である\n\\(B_k \\leq B_j\\)\nを満たすものの個数が求められれば良いです。これはWavelet Matrixのrangefreq関数を用いることにより\n\\(O(\\rm{log}\\)\n\\( N )\\)\nで求められます。(Wavelet Matrixについては、Google検索を行うと複数の記事がヒットするのでそちらを参照してください)\nWavelet Matrixの構築に\n\\(O(N\\)\n\\(\\rm{log}\\)\n\\( N )\\)\nかかり、条件を満たす\n\\((i,j)\\)\nの組の個数を数えるのに\n\\(O(N\\)\n\\(\\rm{log}\\)\n\\( N )\\)\nかかるため、全体で\n\\(O(N\\)\n\\(\\rm{log}\\)\n\\( N )\\)\nでこの問題の答えを求めることが出来ます。",
+      "codes": [],
+      "text_sha256": "59b9c7e7f22f42ff189315a472acd3da71caaa05868b378621246c9858b78d92",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc231/abc231_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

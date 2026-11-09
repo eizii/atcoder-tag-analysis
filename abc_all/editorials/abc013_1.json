@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc013_1",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc013/editorial.pdf",
+      "text": "A問題\n A\n\f\n       A - 問題概要\n\n問題 \n英語のアルファベット X が与えられるので、 \n\n から数えて何番目のアルファベットかを答えよ。A\n\n制限 \nX は A, B, C, D, E のどれか\n\f\n  A - プログラムの流れ\n\n N を入力する   入力、出力でつまずく場合 \n          →入出力について復習！ \n                                  http://www.slideshare.net/chokudai/abc004 \n答えを計算する\n                                     http://practice.contest.atcoder.jp/\n\n\n答えを出力する\n\f\n     A - プログラムの流れ\n\n    N を入力する   入力、出力でつまずく場合 \n            →入出力について復習！ \n                                           http://www.slideshare.net/chokudai/abc004 \n  答えを計算する\n                                              http://practice.contest.atcoder.jp/\n\n\n  答えを出力する\n\n         残りは答えの計算 \n                       ↓ \n答えを計算する方法（＝アルゴリズム）を考えよう！\n\f\n        A - 解き方\n\n\nいろんな解き方がある\n\n・条件分岐をたくさん書く \n・ループを回して調べる \n・文字コードを利用する\n\f\n        A - 解き方\n\n\nいろんな解き方がある\n                        if X == ‘A’:\n                          res = 1\n・条件分岐をたくさん書く  else if X == ‘B’:\n                          res = 2・ループを回して調べる \n                        else if X == ‘C’:\n・文字コードを利用する                          …\n\n特徴 \n記述量が多くミスをしやすい \nアルファベットの種類が増えたときに大変\n\f\n        A - 解き方\n\n\nいろんな解き方がある\n\n                        S = “ABCDE”・条件分岐をたくさん書く \n                        for i = 0 to 4:\n・ループを回して調べる                           if S[i] == X:\n・文字コードを利用する       res = i + 1\n\n特徴 \nさっきの条件分岐羅列の欠点を克服 \n（こっちの方がおすすめ）\n\f\n        A - 解き方\n\n\nいろんな解き方がある\n                    C言語\n\n                        res = X - ‘A’ + 1;・条件分岐をたくさん書く \n・ループを回して調べる     Python\n                        res =・文字コードを利用する\n                         ord(X) -ord(‘A’) + 1\n\n特徴 \n文字コードに依存する方法だが、コンテストでは \nふつう ASCII 以外考えなくてよい。",
+      "codes": [],
+      "source": "official_pdf_letter_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "5fdcdd1a79fdfe0157efaaf5c417e09749804374aa5826aeddb191469c0ec3cb"
+    }
+  ],
+  "status": "available"
+}

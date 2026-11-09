@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc404_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc404/editorial/12861",
+      "text": "与えられたグラフがサイクルグラフであることの必要十分条件は次の2つをともに満たすことです\n全ての頂点の次数が\n\\(2\\)\nである\n連結である\nこれはDFS/BFS/Union-Findなどを用いることで判定することができます。\nUnion-Findの練習問題：\nALPC A\n（この練習問題は連結性を動的に管理する問題であるため、DFS/BFSでは解けません）\n想定誤解法1\n全ての頂点の次数が\n\\(2\\)\nである\n反例\n想定誤解法2\n連結である\n\\(N=M\\)\nである\n反例",
+      "codes": [
+        "6 6\n1 2\n2 3\n3 1\n4 5\n5 6\n6 4",
+        "4 4\n1 2\n2 3\n3 1\n1 4"
+      ],
+      "text_sha256": "5081ef14660ddf668d532dc1df6b3d035fa34c091d053109686777b6dcd9a762",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc404/abc404_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

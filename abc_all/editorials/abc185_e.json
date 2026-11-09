@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc185_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc185/editorial/356",
+      "text": "dp[\n\\(i\\)\n][\n\\(j\\)\n]\n\\(= A\\)\nが先頭\n\\(i\\)\n文字だけで、\n\\(B\\)\nが先頭\n\\(j\\)\n文字だけだった場合の答え\nとして動的計画法を使います。\n\\(i = 0\\)\nまたは\n\\(j = 0\\)\nのときの dp[\n\\(i\\)\n][\n\\(j\\)\n] の値は自明です。\n\\(i \\neq 0\\)\nかつ\n\\(j \\neq 0\\)\nのときの dp[\n\\(i\\)\n][\n\\(j\\)\n] の値を考えると、\n\\(A_i\\)\nと\n\\(B_j\\)\nは両方列の最後なので、\n\\(A_i, B_j\\)\nの少なくとも一方を消すか、\n\\(A_i, B_j\\)\nを最終的な列で同じ位置に来るように残すしかないことが分かります。\nよってdp[\n\\(i\\)\n][\n\\(j\\)\n] の値は以下の中で一番小さいものです\ndp[\n\\(i - 1\\)\n][\n\\(j\\)\n]\n\\( + 1\\)\n(\n\\(A_i\\)\nを消すことにするとき)\ndp[\n\\(i\\)\n][\n\\(j - 1\\)\n]\n\\( + 1\\)\n(\n\\(B_j\\)\nを消すことにするとき)\ndp[\n\\(i - 1\\)\n][\n\\(j - 1\\)\n]\n\\(+ (A_i \\neq B_j \\)\nなら\n\\(1\\)\n、そうでなければ\n\\(0)\\)\n(\n\\(A_i\\)\nと\n\\(B_j\\)\nを、最終的に同じ位置になるように残すことにするとき)",
+      "codes": [],
+      "text_sha256": "c856cbd4d874ad36acb066f5d92afde647797296133de62838e4dcc7fbaf6826",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc185/abc185_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

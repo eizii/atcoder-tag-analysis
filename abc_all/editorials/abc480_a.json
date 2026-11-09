@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc480_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc480/editorial/27140",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは practice contest の問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。 また、プログラミングコンテストの問題に慣れていない方は、 AtCoder Beginners Selection の問題をいくつか解いてみることをおすすめします。 原案:vwxyz 上から \\(i\\) 行目、左から \\(j\\) 列目のマスを \\((i,j)\\) と表すことにします。 \\((i_1,j_1)\\) と \\((i_2,j_2)\\) が隣接するのは以下のいずれかが成り立つときです。 \\(i_1=i_2\\) \\(j_1=j_2\\) A と D が書かれているマスの場所を特定し、これが成り立つかどうかを判定すればいいです。 また、隣接するような \\(2\\) マスの組は \\(4\\) つなので、場合分けしても解くことができます。 c++の実装例 Pythonの実装例",
+      "codes": [
+        "#include \"bits/stdc++.h\"\n\nusing namespace std;\nusing ll=long long;\n\nint main(){\n    string S,T,ST;\n    cin>>S>>T;\n    ST=S+T;\n    int a=ST.find('A');\n    int d=ST.find('D');\n    if(a%2==d%2||a/2==d/2){\n        cout<<\"Yes\"<<\"\\n\";\n    }\n    else{\n        cout<<\"No\"<<\"\\n\";\n    }\n}\n",
+        "S=input()+input()\na=S.index(\"A\")\nd=S.index(\"D\")\nif a//2==d//2 or a%2==d%2:\n    ans=\"Yes\"\nelse:\n    ans=\"No\"\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "cdf4aeebe78effac5fea0f5ab0e74aa284fdf5e6f48ed7a7e93190fcbbf64a4a"
+    }
+  ],
+  "status": "available"
+}

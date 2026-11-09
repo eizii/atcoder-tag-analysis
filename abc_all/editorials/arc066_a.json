@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc066_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc066/editorial.pdf",
+      "text": "C : Lining Up\n\n N が偶数である場合を考えます。N 人が並んだ場合、「自分の左に並んでいた人数と自分の右に並んでいた\n\n人数の差の絶対値」は、N −1, N −3, N −5, ...3, 1, 1, 3, ...N −5, N −3, N −1 となるはずです。この配列\n\nをBi とします。\n するとこの問題は、Ai を並び替えてBi にする方法は何通りか、という問題になります。まず、Ai とBi\n\nで、ある値の登場する回数が等しくなかった場合、明らかに答えは0 です。\n\n では、等しい場合はどうなるでしょうか。この配列には、N/2 種類の値が、それぞれ2 回ずつ登場している\n\nはずです。それぞれの値について、並び替える方法は、「Ai で前にあったものがBi で前にある」と、「Ai で\n前にあったものがBi で後ろにある」の2 通り考えられます。\n  N/2 種類の値で独立に並び替えがあるので、求める答えは2(N/2) になります。N が奇数である場合も同様\n\n\n                                             1\n\f\nに解けますが、その場合Ai やBi の中に0 という値が1 度だけ登場することに注意してください。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "4c089b0da978b3a9318c1d3041f2867bb2b30c542d6174703e3a4e4e4a21c085"
+    }
+  ],
+  "status": "available"
+}

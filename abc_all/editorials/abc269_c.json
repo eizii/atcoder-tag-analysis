@@ -1,0 +1,41 @@
+{
+  "problem_id": "abc269_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc269/editorial/4844",
+      "text": "以下の解説で、\n\\(2\\)\n進表記での\n\\(2^k\\)\nの位を\n\\(k\\)\nbit 目と呼びます。\n解法1. 集合を徐々に大きくして構成する\n以下を順次行うことにより、答えを構成することができます。\n最初、\n\\(S=\\{0\\}\\)\nとする。\n\\(i=0,1,\\dots,59\\)\nまで以下を繰り返す。\nもし\n\\(N\\)\nの\n\\(i\\)\nbit 目が\n\\(1\\)\nなら、以下の更新を行う。\n\\(S\\)\nの全ての要素\n\\(x\\)\nについて同時に、\n\\(x\\)\nの\n\\(i\\)\nbit 目を\n\\(1\\)\nにした新たな要素\n\\(y\\)\nを追加する。\n実装例(C++):\nBonus: 実装例\n\\(17\\)\n行目 (\nsort\n) を丸ごと削除してもこのコードは AC します。理由を考えてみましょう。\n解法2. bit 全探索の要領で構成する\nはじめに、\n\\(N\\)\nのうち何 bit 目が\n\\(1\\)\nであるかを列挙しておきます。 ( 列挙した数列を\n\\(A=(A_1,A_2,\\dots,A_k)\\)\nとします )\nその後、\n\\(1\\)\nである bit の数を\n\\(k\\)\nとして\n\\(0\\)\nから\n\\(2^k-1\\)\nまでの整数\n\\(i\\)\nでループを回します。\nこのとき、\n\\(i\\)\nの\n\\(j\\)\nbit 目が\n\\(1\\)\nなら\n\\(A_j\\)\nbit 目を立てるようにすると、目的の集合を得ることができます。\n実装例(C++):\nBonus: 実装例\n\\(21\\)\n行目 (\nsort\n) を丸ごと削除してもこのコードは AC します。理由を考えてみましょう。\n解法3. ループを上手く回す\nこの問題を bit 列で集合を扱う問題に言い換えると、ある集合の部分集合全体を渡る問題になります。実装例のようにループを回せばこの問題に正解できます。\n(部分集合を値の大きい方から渡るので、出力する際に逆順にする必要があることに注意してください。)\n以下の日本語の記事には、他にも bit 列で集合を扱う際のテクニックが掲載されています。\nビット列による部分集合表現 【ビット演算テクニック Advent Calendar 2016 1日目】\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long x;\n  cin >> x;\n  vector<long long> res={0};\n  for(int d=0;d<60;d++){\n    if(x&(1ll<<d)){\n      int sz=res.size();\n      for(int i=0;i<sz;i++){\n        res.push_back(res[i]|(1ll<<d));\n      }\n    }\n  }\n  sort(res.begin(),res.end());\n  for(auto &nx : res){cout << nx << \"\\n\";}\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long n;\n  cin >> n;\n  vector<int> a;\n  for(int i=0;i<60;i++){\n    if(n&(1ll<<i)){a.push_back(i);}\n  }\n  int k=a.size();\n  vector<long long> res;\n  for(int i=0;i<(1<<k);i++){\n    long long cur=0;\n    for(int j=0;j<k;j++){\n      if(i&(1<<j)){cur|=(1ll<<a[j]);}\n    }\n    res.push_back(cur);\n  }\n  sort(res.begin(),res.end());\n  for(auto &nx : res){cout << nx << \"\\n\";}\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long x;\n  cin >> x;\n  vector<long long> res;\n  for(long long i=(1ll<<60)-1; i>=0; i--){\n    i&=x;\n    res.push_back(i);\n  }\n  reverse(res.begin(),res.end());\n  for(auto &nx : res){cout << nx << \"\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "301d31bce9d812ef2ae576908962050b5dc3f1c807d1bb26665a47c2b44b69dc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc269/abc269_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc269/editorial/4858",
+      "text": "note\n: 競プロ初心者にとっては、\n公式解説\nの方法を身につける方が有益だと思います。\n公式解説の\n解法2. bit 全探索の要領で構成する\nを高速に行うのに相当する方法です。\npdep (\np\narallel bits\ndep\nosit) という CPU 命令があります。これは、二つの整数\nsrc\n,\nmask\nを引数に取り、各 bit が以下のように定まる値\ndst\nを返します。ただし、bit は下（右、小さい方）から数え、0-indexed とします。\nmask\nの\n\\(i\\)\nbit 目が\n0\nのとき、\ndst\nの\n\\(i\\)\nbit 目は\n0\nである\nmask\nの\n\\(i\\)\nbit 目が\n1\nのとき、\ndst\nの\n\\(i\\)\nbit 目は\nsrc\nの\n\\(j\\)\nbit 目である\nここで、\nmask\nの\n\\(i\\)\nbit 目が\n\\(j\\)\n個目の\n1\nであるとする\n言い換えると、\nmask\nで bit が立っている場所に、\nsrc\nの下位 bit たち（\nmask\nの立っている bit の個数ぶん）を順にばら撒くようなイメージです。\n例\n：\nさて、今回の問題では、\n0...00\n,\n0...01\n,\n0...10\n, …,\n1...11\nを、入力で与えられた\nn\nで bit が立っている場所にばら撒けばよいです。\n例\n(\n\\(n = 11_{(10)} = 1011_{(2)}\\)\n)：\nよって、\n\\(n\\)\nの立っている bit の個数を\n\\(m\\)\nとして、\n\\(0\\)\n以上\n\\(2^m\\)\n未満の各整数\n\\(i\\)\nに対して、\npdep(src = i, mask = n)\nを計算すればよいとわかります。\n提出 #34956314, C++\n提出 #34956469, Rust\n余談\npdep の逆処理、すなわち\ndst\nと\nmask\nから\nsrc\nを得る命令は、pext (\np\narallel bits\next\nract) と呼ばれています。\npext(src, mask)\nは、\nsrc\nの bit のうち、\nmask\nで bit が立っているものを下位に集める命令です。\npdep や pext は、環境によっては使えない命令なので、使おうとする場合は注意しましょう。AtCoder の環境や、\nwandbox\n,\nRust Playground\nの環境では使えるようです。\nCPU 命令として用意されていない場合でも、ワードサイズ\n\\(w\\)\nに対し、\n\\(O(\\log(w)^2)\\)\n時間などで計算するアルゴリズムがあります。また、\nmask\nが予めわかっている場合であれば、前処理\n\\(O(\\log(w)^2)\\)\n時間、クエリあたり\n\\(O(\\log(w))\\)\n時間でも計算できます。\n命令名の parallel は、ループで各ビットを処理する（公式解説解法 2 のように）のではなく、複数のビットを並列で処理することに由来していそうです。\nbit-level parallelism\nとかで調べるといいかもしれません。\nC 言語での実装例\nビット並列手法に関する記事\nも書きました。\n追記\nループの上限を求める際に、\npext(n, n)\nを使えばいいと指摘を受けました。賢いと思いました。",
+      "codes": [
+        "src:  0000_0000_0000_0000_0000_1010_0101_0000\nmask: 0100_1001_1001_1010_0100_0100_0101_0100\n       1   0  1 0  0 1 0   1    0    0 0  0\ndst:  0100_0001_0000_1000_0100_0000_0000_0000",
+        "000 -> 0000\n001 -> 0001\n010 -> 0010\n011 -> 0011\n100 -> 1000\n101 -> 1001\n110 -> 1010\n111 -> 1011",
+        "src:  0100_0001_0000_1000_0100_0000_0000_0000\nmask: 0100_1001_1001_1010_0100_0100_0101_0100\n       1   0  1 0  0 1 0   1    0    0 0  0\ndst:  0000_0000_0000_0000_0000_1010_0101_0000"
+      ],
+      "text_sha256": "f5752e9bb95dcb7f339946e6023ff3e822c22cee1bfa0b98d4b465bd1ed72dda",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc269/abc269_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc269/editorial/4860",
+      "text": "https://twitter.com/kyopro_friends/status/1571133784799744000\n(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",
+      "codes": [],
+      "text_sha256": "2d5ef06ee3eede787b6606e9ddf9c5ea742012c4e2a414555673655d0efc32fa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc269/abc269_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

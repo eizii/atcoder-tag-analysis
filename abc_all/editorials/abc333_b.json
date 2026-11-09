@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc333_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc333/editorial/7978",
+      "text": "線分の長さは\n\\(2\\)\n通りしかないことに着目します。\n線分\n\\(AB\\)\n,\n\\(BC\\)\n,\n\\(CD\\)\n,\n\\(DE\\)\n,\n\\(EA\\)\nは短く、残りの線分は長いです。そのため、与えられた線分が短いか長いかを判定すればよいです。実装例も参考にしてください。\n（補足）：与えられた線分が短いことは、点が\n\\(P\\)\n上で隣接していることと同値です。文字同士の引き算を用いると場合分けが減り簡単です。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tchar a, b, c, d;\n\tcin >> a >> b >> c >> d;\n\tauto near = [](char x, char y) {\n\t\tif(x > y) swap(x, y);\n\t\treturn y - x == 1 or y - x == 4;\n\t};\n\tif(near(a, b) == near(c, d))\n\t\tcout << \"Yes\\n\";\n\telse\n\t\tcout << \"No\\n\";\n}"
+      ],
+      "text_sha256": "d586b2e9dd989d1724a21cdb602164c76866272aa01e1b15ebe3653951a8b4b9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc333/abc333_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc333/editorial/7985",
+      "text": "ABCDEAEDCBA\nに部分文字列として含まれている辺は短く、そうでない辺は長いと判定できます。\n実装例（Python）",
+      "codes": [
+        "P = \"ABCDEAEDCBA\"\nS = input()\nT = input()\nprint(\"Yes\" if (S in P) == (T in P) else \"No\")"
+      ],
+      "text_sha256": "2bdc8ba695f5dd4dcf97ffde6a85773a0b33ab1440f62cb0671caa18f1a04a9c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc333/abc333_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

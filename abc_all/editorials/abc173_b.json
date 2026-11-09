@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc173_b",
+  "editorials": [
+    {
+      "text": "B: Judge Status\n(解説: evima)\n仮にテストケース数N が3 などの値に固定されていれば、if 文のみでも処理することができます。\nしかし、現実にはN は1 以上10 万以下と一定でない上に大きく、for 文の出番です。\n最も単純な方針は、以下の疑似コードの内容を実装することです。\n1 N := input\n2 C0, C1, C2, C3 := 0, 0, 0, 0\n3 for i = 0, ..., N-1:\n4\nS := input\n5\nif S == \"AC\": C0 = C0 + 1\n6\nelse if S == \"WA\": C1 = C1 + 1\n7\nelse if S == \"TLE\": C2 = C2 + 1\n8\nelse: C3 = C3 + 1\n9 print C0, C1, C2, C3\n多くの言語で、この疑似コードを言語に合わせて修正することでこの問題を解くことができます。\nただし、文字列を比較する際に言語によっては特別な注意を要します。言語ごとの詳細な情報は、検\n索エンジンで「[言語名] for 文」「[言語名] 文字列比較」などと検索すれば手に入るはずです。以下\nに、疑似コードをJava のソースコードに変換したものを挙げます。\n1 import java.util.*;\n2 public class Main {\n3\npublic static void main(String[] args){\n4\nScanner sc = new Scanner(System.in);\n5\nint N = sc.nextInt();\n6\nint C0 = 0, C1 = 0, C2 = 0, C3 = 0;\n7\nfor(int i = 0; i < N; ++i){\n8\nString S = sc.nextLine();\n9\nif(S.equals(\"AC\")) ++C0;\n10\nelse if(S.equals(\"WA\")) ++C1;\n11\nelse if(S.equals(\"TLE\")) ++C2;\n12\nelse ++C3;\n\n13\n}\n14\nSystem.out.println(\"AC x \" + C0);\n15\nSystem.out.println(\"WA x \" + C1);\n16\nSystem.out.println(\"TLE x \" + C2);\n17\nSystem.out.println(\"RE x \" + C3);\n18\n}\n19 }\nもちろん、上記の疑似コードと見た目が異なるコードを書くことも可能です。その一例として、以\n下にPython での実装例を挙げます。\n1 N = int(input())\n2 s = [input() for i in range(N)]\n3 for v in ['AC', 'WA', 'TLE', 'RE']:\n4\nprint('{0} x {1}'.format(v, s.count(v)))\n",
+      "text_sha256": "f4b09222afad06fcba8545e03303be4df162a7daf430780fe577c50d724e5dee",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc173/abc173_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

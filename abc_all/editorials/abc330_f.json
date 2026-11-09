@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc330_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc330/editorial/7753",
+      "text": "この問題にはいくつかのヒントが用意されています。各項目をクリックすると内容を見ることができます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing pl=pair<long long,long long>;\n\nint main(){\n  long long n,k;\n  cin >> n >> k;\n\n  vector<long long> x(n),y(n);\n  map<long long,long long> mx,my;\n  for(long long i=0;i<n;i++){\n    cin >> x[i] >> y[i];\n    mx[x[i]]++;\n    my[y[i]]++;\n  }\n\n  vector<pl> xv,yv;\n  for(auto &nx : mx){\n    xv.push_back(nx);\n  }\n  for(auto &nx : my){\n    yv.push_back(nx);\n  }\n\n  long long xl=0,xr=xv.size()-1;\n  long long yl=0,yr=yv.size()-1;\n\n  while(k>0){\n    long long gx=xv[xr].first-xv[xl].first;\n    long long gy=yv[yr].first-yv[yl].first;\n\n    long long fx,fy;\n    long long hx,hy;\n    long long cx,cy;\n    if(gx!=0){\n      if(xv[xl].second<xv[xr].second){\n        hx=xv[xl+1].first-xv[xl].first;\n        cx=xv[xl].second;\n        fx=-1;\n      }\n      else{\n        hx=xv[xr].first-xv[xr-1].first;\n        cx=xv[xr].second;\n        fx=1;\n      }\n    }\n    if(gy!=0){\n      if(yv[yl].second<yv[yr].second){\n        hy=yv[yl+1].first-yv[yl].first;\n        cy=yv[yl].second;\n        fy=-1;\n      }\n      else{\n        hy=yv[yr].first-yv[yr-1].first;\n        cy=yv[yr].second;\n        fy=1;\n      }\n    }\n\n    if(gx==0 && gy==0){break;}\n    else if(gx<gy){\n      // shorten y\n      long long opt=min({k/cy,hy,gy-gx});\n      if(opt==0){break;}\n      k-=cy*opt;\n      if(fy==-1){yv[yl].first+=opt;}\n      else{yv[yr].first-=opt;}\n    }\n    else if(gx>gy){\n      // shorten x\n      long long opt=min({k/cx,hx,gx-gy});\n      if(opt==0){break;}\n      k-=cx*opt;\n      if(fx==-1){xv[xl].first+=opt;}\n      else{xv[xr].first-=opt;}\n    }\n    else{\n      // once x==y, let's keep it\n      // shorten x&y\n      long long opt=min({k/(cx+cy),hx,hy});\n      if(opt==0){break;}\n      k-=(cx+cy)*opt;\n\n      if(fy==-1){yv[yl].first+=opt;}\n      else{yv[yr].first-=opt;}\n      \n      if(fx==-1){xv[xl].first+=opt;}\n      else{xv[xr].first-=opt;}\n    }\n\n    if(xl!=xr){\n      if(xv[xl].first==xv[xl+1].first){\n        xv[xl+1].second+=xv[xl].second;\n        xl++;\n      }\n      else if(xv[xr].first==xv[xr-1].first){\n        xv[xr-1].second+=xv[xr].second;\n        xr--;\n      }\n    }\n    if(yl!=yr){\n      if(yv[yl].first==yv[yl+1].first){\n        yv[yl+1].second+=yv[yl].second;\n        yl++;\n      }\n      else if(yv[yr].first==yv[yr-1].first){\n        yv[yr-1].second+=yv[yr].second;\n        yr--;\n      }\n    }\n  }\n\n  {\n    long long gx=xv[xr].first-xv[xl].first;\n    long long gy=yv[yr].first-yv[yl].first;\n    cout << max(gx,gy) << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "b6b04c499e3531d3c0974a450267c2a1193e04f7fcb5a1fa26e008cecd8ff011",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc330/abc330_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc330/editorial/7777",
+      "text": "(雑です。後でしっかりしたものになるかもしれません。)\n答えで二分探索して、「答えを\n\\(a\\)\n以下にできるか？」を解きます。\nまた、x座標とy座標は独立に考えて何ら支障がないので、分離します。\nそうすると、以下の問題を解くことになります。\n長さ\n\\(N\\)\nの数列\n\\(A\\)\nがある。\n\\(f(x)=\\sum_{i \\in A} \\max(0,i-x)+\\max(0,x-(i+a))\\)\nの最小値を求めよ。\nこれは、\nSlope Trick\nというデータ構造(テクニック？)を使用して高速に解くことが可能です。\n(追記:\n\\(2N\\)\n個の座標の中央値を求める方が賢いです。\n)",
+      "codes": [],
+      "text_sha256": "1eab78ccc19e65211df9612d0889eaa49e7485c7a212dd70ee7ff08442d8a4ab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc330/abc330_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc330/editorial/7774",
+      "text": "入力される座標の最大値を\n\\(M\\)\nとします。求めるべき値に対して二分探索を行い、「辺の長さが\n\\(S\\)\nの正方形を描いてすべての点を収めることができるか？」という問題を\n\\(O(\\log M)\\)\n回解きます。\n\\(x\\)\n座標のみに注目すると以下の問題を得ます。\n（問題）数直線上の座標\n\\(x_1, \\dots, x_N\\)\nに\n\\(N\\)\n個の点がある。閉区間\n\\([l, l+S]\\)\nを選んで\n\\(N\\)\n個の点すべてをその中に移動させる（元の問題と同じ操作が使える）。これに必要な最小の合計費用を求めよ。\nこの問題を\n\\(x\\)\n座標・\n\\(y\\)\n座標について個別に解き、答えの合計が\n\\(K\\)\n以下であれば冒頭の問題の答えは Yes、そうでなければ No です。\nあとは、\n\\(l\\)\nを適切に選ぶのみです。最適な選択は、\n\\(2N\\)\n個の値\n\\(x_1, x_2, \\dots, x_N, x_1 - S, x_2 - S, \\dots, x_N - S\\)\nを昇順に並べた際の\n\\(N\\)\n番目の値です（正確には、\n\\(N\\)\n番目と\n\\(N+1\\)\n番目の値の間であれば何でも構いません）。これは、横軸に\n\\(l\\)\n、縦軸に合計費用をプロットして得られる折れ線グラフの傾きの変化を考えれば示せます（十分小さい\n\\(l\\)\nでの傾きは\n\\(-N\\)\nで、\n\\(l\\)\nを大きくしていくと上記の\n\\(2N\\)\n個の値で\n\\(1\\)\nずつ増加し、傾き\n\\(0\\)\nに対応する点が最適です）。\n事前に\n\\(x_1, x_2, \\dots, x_N\\)\nをソートしておけば、「\n\\(x_1, x_2, \\dots, x_N, x_1 - S, x_2 - S, \\dots, x_N - S\\)\nを昇順に並べた際の\n\\(N\\)\n番目の値」はマージソートの要領で\n\\(O(N)\\)\n時間で求められるため（C++ の std::merge や Python の heapq.merge が使えます）、元の問題を\n\\(O(N (\\log N + \\log M))\\)\n時間で解くことができます。（速い言語であれば、\n\\(2N\\)\n個の値を毎回\n\\(O(N \\log N)\\)\n時間でソートして全体で\n\\(O(N \\log N  \\log M)\\)\n時間かけても何とか間に合うでしょう。）\n実装例（Python）",
+      "codes": [
+        "import heapq\n\nN, K = map(int, input().split())\nX, Y = [], []\nfor _ in range(N):\n    x, y = map(int, input().split())\n    X.append(x)\n    Y.append(y)\nX.sort()\nY.sort()\n\n\ndef cost(z, l):\n    p = list(heapq.merge(z, map(lambda x: x - l, z)))[N]\n    c = 0\n    for x in z:\n        if x < p:\n            c += p - x\n        elif x > p + l:\n            c += x - (p + l)\n    return c\n\n\nlo, hi = -1, 10**9\nwhile hi - lo > 1:\n    mi = (lo + hi) // 2\n    if cost(X, mi) + cost(Y, mi) <= K:\n        hi = mi\n    else:\n        lo = mi\nprint(hi)"
+      ],
+      "text_sha256": "76931b50289b602ffde9afd5b6230948ef01a0dbd0d917e9c2ac0e9455c58783",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc330/abc330_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

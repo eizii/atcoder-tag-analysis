@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc227_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc227/editorial/2905",
+      "text": "この問題の原案はキーエンス社の社員により提供されました\n「\n\\(S\\)\nが与えられる。面積が\n\\(S\\)\nになるような\n\\(a,b\\)\nが存在するか？」という問題を\n\\(N\\)\n回解けばよいです。\n\\(a,b\\)\nを全探索することを考えましょう。\n\\(a>S\\)\nまたは\n\\(b>S\\)\nのときには、面積\n\\(4ab+3a+3b\\)\nは明らかに\n\\(S\\)\nより大きくなります。よって、\n\\(a\\le S\\)\nかつ\n\\(b\\leq S\\)\nの範囲を全探索すればよいです。\n計算量は\n\\(O(N \\max(S_i)^2)\\)\nとなります。\n実装例(C)\n実装例(Python)\nBonus 1：\n\\(N\\leq 10^6\\)\n、\n\\(S_i\\leq 10^3\\)\nで解いてみましょう (300点相当？)\nBonus 2：\n\\(N\\leq 10^6\\)\n、\n\\(S_i\\leq 10^5\\)\nで解いてみましょう (400点相当？)\nBonus 3：\n\\(N\\leq 10^3\\)\n、\n\\(S_i\\leq 10^8\\)\nで解いてみましょう (400点相当？)",
+      "codes": [],
+      "text_sha256": "dd7efbe01999884a463c7961f3627b25b8f585a221dc01a038166da1910fdfac",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc227/abc227_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc227/editorial/2926",
+      "text": "Bonus の解説を書きます。( おそらく合っていると思いますが、間違っていたらすいません。 ) $S_i$ の最大値を $S_{max}$ とします。\nBonus 1\n前準備として $S=i$ となりうるかを $1 \\leq i \\leq 10^3$ について求めておけば問題には $O(1)$ で答えられます。\n公式解説と同様に考えることで $a,b \\leq 10^3$ の範囲で $S$ の値を全て求めればよいので、前準備は $O({S_{max}}^2)$ で行えます。よってこの問題は $O(N+{S_{max}}^2)$ で解けました。\nBonus 2\n同様に前準備することを考えます。 $a$ を決めた時に調べる必要のある $b$ の値を考えます。 $(4a+3)b + 3a = 4ab+3a+3b \\leq S_{max}$ より $b \\leq \\frac{S_{max}-3a}{4a+3}$ であり、個数の上界は $\\frac{S_{max}}{a}$ 個です。\n$1 \\leq a \\leq S_{max}$ より $S$ を求める必要のある $\\left(a ,b \\right)$ の個数の上界は $S_{max} \\left( \\frac{1}{1} + \\frac{1}{2} + \\cdots + \\frac{1}{S_{max}} \\right)$ です。直感的にこれは $O( {S_{max}}^2)$ に思えますが積分を用いることで、これは $O(S_{max} \\log S_{max})$ になることが示せます。 (\n調和級数\nで調べると参考になるでしょう。 )\n結論として前準備は $O(S_{max} \\log S_{max})$ でできるので、この問題は $O(N+S_{max} \\log S_{max})$ で解けました。\nBonus 3\n\\(a \\leq b\\)\nとしても構いません。ここで、\n\\(4a^2 \\leq 4ab < S_i\\)\nより\n\\(a \\leq \\sqrt{S_i}\\)\nです。\n\\(a\\)\nを決めた時、\n\\(4ab+3a+3b=S_i\\)\nを満たす\n\\(b\\)\nが存在するかは一次方程式を解く要領で\n\\(O(1)\\)\nで判定できます。\nよって、各問題につき\n\\(O(\\sqrt{S_i})\\)\nで解けるので、この問題は\n\\(O(N \\sqrt{S_{max}})\\)\nで解けました。",
+      "codes": [],
+      "text_sha256": "62d30b07e7d085215beef6c66c62a2019c60a9c5a9fe28b5cf3d69742b5fb5dc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc227/abc227_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

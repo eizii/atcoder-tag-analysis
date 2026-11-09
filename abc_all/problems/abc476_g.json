@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc476_g",
+  "title": "Increasing Popcount",
+  "contests": [
+    {
+      "contest_id": "abc476",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2477,
+  "raw_difficulty": 2477,
+  "contest_id": "abc476",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc476/tasks/abc476_g",
+  "statement": "配点 : 625 点 問題文 L\\le R を満たす正整数 L,R が与えられます。 以下の条件を満たす長さ R-L+1 の正整数列 A=(A_L,A_{L+1},\\ldots,A_R) を 良い整数列 と呼びます： L\\le i < j\\le R を満たすすべての整数の組 (i,j) に対し、 A_i = A_j ならば \\operatorname{popcount}(i)<\\operatorname{popcount}(j) が成り立つ。 良い整数列 A=(A_L,A_{L+1},\\ldots,A_R) 全てに対する \\max(A_L,A_{L+1},\\ldots,A_R) の最小値を求めてください。 T 個のテストケースが与えられるので、それぞれについて答えを求めてください。 \\operatorname{popcount} とは？ 非負整数 x について \\operatorname{popcount}(x) とは、 x を 2 進法で表記したときの 1 の個数です。 より厳密には、非負整数 x について \\displaystyle x=\\sum _ {i=0} ^ \\infty b _ i2 ^ i\\ (b _ i\\in\\lbrace0,1\\rbrace) が成り立っているとき \\displaystyle\\operatorname{popcount}(x)=\\sum _ {i=0} ^ \\infty b _ i です。 例えば、 13 を 2 進法で表記すると 1101 なので、 \\operatorname{popcount}(13)=3 となります。 制約 1\\le T\\le 10^4 1\\le L \\le R\\le 10^{18} 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 T \\text{case}_1 \\text{case}_2 \\vdots \\text{case}_T 各テストケースは以下の形式で与えられる。 L R 出力 T 行出力せよ。 i 行目 (1\\le i\\le T) には、 i 番目のテストケース \\text{case}_i に対する答えを出力せよ。 入力例 1 5\r\n3 6\r\n1 1\r\n2 15\r\n100 10000000\r\n514284786278117031 620546740167642909 出力例 1 3\r\n1\r\n6\r\n1636985\r\n11375123021856567 1 番目のテストケースについて考えます。 (A_3,A_4,A_5,A_6)=(1,2,2,3) は良い整数列で、 \\max(A_3,A_4,A_5,A_6)=3 となります。 \\max(A_3,A_4,A_5,A_6) < 3 を満たす良い整数列は存在しないので、 1 行目には 3 を出力してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 L\\le R を満たす正整数 L,R が与えられます。 以下の条件を満たす長さ R-L+1 の正整数列 A=(A_L,A_{L+1},\\ldots,A_R) を 良い整数列 と呼びます： L\\le i < j\\le R を満たすすべての整数の組 (i,j) に対し、 A_i = A_j ならば \\operatorname{popcount}(i)<\\operatorname{popcount}(j) が成り立つ。 良い整数列 A=(A_L,A_{L+1},\\ldots,A_R) 全てに対する \\max(A_L,A_{L+1},\\ldots,A_R) の最小値を求めてください。 T 個のテストケースが与えられるので、それぞれについて答えを求めてください。 \\operatorname{popcount} とは？ 非負整数 x について \\operatorname{popcount}(x) とは、 x を 2 進法で表記したときの 1 の個数です。 より厳密には、非負整数 x について \\displaystyle x=\\sum _ {i=0} ^ \\infty b _ i2 ^ i\\ (b _ i\\in\\lbrace0,1\\rbrace) が成り立っているとき \\displaystyle\\operatorname{popcount}(x)=\\sum _ {i=0} ^ \\infty b _ i です。 例えば、 13 を 2 進法で表記すると 1101 なので、 \\operatorname{popcount}(13)=3 となります。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\le T\\le 10^4 1\\le L \\le R\\le 10^{18} 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 T \\text{case}_1 \\text{case}_2 \\vdots \\text{case}_T 各テストケースは以下の形式で与えられる。 L R"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 T 行出力せよ。 i 行目 (1\\le i\\le T) には、 i 番目のテストケース \\text{case}_i に対する答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\n3 6\r\n1 1\r\n2 15\r\n100 10000000\r\n514284786278117031 620546740167642909"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3\r\n1\r\n6\r\n1636985\r\n11375123021856567 1 番目のテストケースについて考えます。 (A_3,A_4,A_5,A_6)=(1,2,2,3) は良い整数列で、 \\max(A_3,A_4,A_5,A_6)=3 となります。 \\max(A_3,A_4,A_5,A_6) < 3 を満たす良い整数列は存在しないので、 1 行目には 3 を出力してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc476/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:42:05.431796+00:00",
+  "statement_sha256": "87f86c4453d0e6bbcd49023e0f0c45b7c8b28716f66e7b553141991e9780e0ad",
+  "editorials": []
+}

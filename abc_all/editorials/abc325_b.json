@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc325_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc325/editorial/7447",
+      "text": "まず、長さ\n\\(24\\)\nの配列\n\\(\\mathrm{cnt}\\)\nを以下のように定義します。\n\\[\\mathrm{cnt}[j]=(X_i=j\\text{ であるような拠点に所属している社員の総数)}\\]\n世界標準時における会議の開始時刻を全探索することを考えます。このとき、開始時刻として考えるべきは 0:00, 1:00, …, 23:00 の\n\\(24\\)\n通りです（中途半端な時刻に開始しても得しないことが証明できます）。\n開始時刻を世界標準時で\n\\(t\\)\n時ちょうどに固定します。このとき、拠点\n\\(i\\)\nの社員が会議に参加できる条件は\n\\(9 \\leq (t+X_i)\\bmod 24 < 18\\)\nです（\n\\(x\\bmod 24\\)\nは\n\\(x\\)\nを\n\\(24\\)\nで割ったあまりを表します）。これは\n\\((9-t) \\bmod 24  \\leq X_i < (18-t)\\bmod 24\\)\nと変形できるので、この会議に参加できる社員の総数は\n\\(\\mathrm{cnt}[(9-t) \\bmod 24] + \\mathrm{cnt}[(10-t) \\bmod 24] +\\dots + \\mathrm{cnt}[(17-t) \\bmod 24] \\)\nと計算できます。\nよって、これを用いて\n\\(24\\)\n通りの開始時刻すべてに対して参加できる社員の総数を計算し、その最大値を出力すればよいです。\nなお、単に\n\\(i=0,1,...,23\\)\nに対する\n\\(\\mathrm{cnt}[i \\bmod 24] + \\mathrm{cnt}[(i+1) \\bmod 24] +\\dots + \\mathrm{cnt}[(i+8) \\bmod 24] \\)\nの最大値を計算しても正しい答えが求まることが示せます。下記の実装例ではこの方針を用いています。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> cnt(24);\n    for (int i = 0; i < n; i++) {\n        int w, x;\n        cin >> w >> x;\n        cnt[x] += w;\n    }\n    int ans = 0;\n    for (int i = 0; i < 24; i++) {\n        int sum = 0;\n        for (int j = 0; j < 9; j++) {\n            sum += cnt[(i + j) % 24];\n        }\n        ans = max(ans, sum);\n    }\n    cout << ans << endl;\n}",
+        "n = int(input())\ncnt = [0 for _ in range(24)]\nfor i in range(0, n):\n    w, x = map(int, input().split())\n    cnt[x] += w\n\nans = 0\nfor i in range(24):\n    sum = 0\n    for j in range(9):\n        sum += cnt[(i + j) % 24]\n    ans = max(ans, sum)\n    \nprint(ans)"
+      ],
+      "text_sha256": "ceb72947359f8f7c76d0cef1f7633c3f3c1b8600b3fa35888962871b14afe8df",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc325/abc325_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc212_c",
+  "title": "Min Difference",
+  "contests": [
+    {
+      "contest_id": "abc212",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 246,
+  "raw_difficulty": 205,
+  "contest_id": "abc212",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc212/tasks/abc212_c",
+  "statement": "配点 : 300 点 問題文 それぞれ N 個、 M 個の正整数からなる 2 つの数列 A=(A_1,A_2, \\ldots ,A_N) と B=(B_1, \\ldots ,B_M) が与えられます。 それぞれの数列から 1 つずつ要素を選んだときの 2 つの値の差の最小値、すなわち、 \\displaystyle \\min_{ 1\\leq i\\leq N}\\displaystyle\\min_{1\\leq j\\leq M} \\lvert A_i-B_j\\rvert を求めてください。 制約 1 \\leq N,M \\leq 2\\times 10^5 1 \\leq A_i \\leq 10^9 1 \\leq B_i \\leq 10^9 入力は全て整数である。 入力 入力は以下の形式で標準入力から与えられる。 N M A_1 A_2 \\ldots A_N B_1 B_2 \\ldots B_M 出力 答えを出力せよ。 入力例 1 2 2\r\n1 6\r\n4 9 出力例 1 2 それぞれの数列から 1 つずつ要素を選んだときの 2 つの値の差としてあり得るのは、 \\lvert 1-4\\rvert=3 、 \\lvert 1-9\\rvert=8 、 \\lvert 6-4\\rvert=2 、 \\lvert 6-9\\rvert=3 の 4 つです。\r\nこの中で最小である 2 を出力します。 入力例 2 1 1\r\n10\r\n10 出力例 2 0 入力例 3 6 8\r\n82 76 82 82 71 70\r\n17 39 67 2 45 35 22 24 出力例 3 3",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 それぞれ N 個、 M 個の正整数からなる 2 つの数列 A=(A_1,A_2, \\ldots ,A_N) と B=(B_1, \\ldots ,B_M) が与えられます。 それぞれの数列から 1 つずつ要素を選んだときの 2 つの値の差の最小値、すなわち、 \\displaystyle \\min_{ 1\\leq i\\leq N}\\displaystyle\\min_{1\\leq j\\leq M} \\lvert A_i-B_j\\rvert を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N,M \\leq 2\\times 10^5 1 \\leq A_i \\leq 10^9 1 \\leq B_i \\leq 10^9 入力は全て整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M A_1 A_2 \\ldots A_N B_1 B_2 \\ldots B_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2 2\r\n1 6\r\n4 9"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2 それぞれの数列から 1 つずつ要素を選んだときの 2 つの値の差としてあり得るのは、 \\lvert 1-4\\rvert=3 、 \\lvert 1-9\\rvert=8 、 \\lvert 6-4\\rvert=2 、 \\lvert 6-9\\rvert=3 の 4 つです。\r\nこの中で最小である 2 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 1 1\r\n10\r\n10"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 6 8\r\n82 76 82 82 71 70\r\n17 39 67 2 45 35 22 24"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 3"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc212/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:34.904891+00:00",
+  "statement_sha256": "39cb6415f1145816a7684782351fb3e6b02057bfad922b3ae7da7a1a7ee737f3",
+  "editorials": []
+}

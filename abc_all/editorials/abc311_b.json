@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc311_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/6818",
+      "text": "はじめに、問題をいくつかのパートに分解してみましょう。\nまず、この問題を解くには、部分問題として「\n\\(j\\)\n日目は全員が暇な日ですか？」という問題を\n\\(j=1, 2, \\dots, D\\)\nについて解く必要があります。これは各\n\\(j\\)\nについて「\n\\(i=1,2,\\dots,N\\)\nについて\n\\(S_{i, j}\\)\nは全て\no\nか？」という問題が解ければよく、for-loop 等を利用して走査すれば\n\\(\\mathrm{O}(ND)\\)\nで求まります。\n部分問題の答えを文字列\n\\(T\\)\nに記録したとします。 (\n\\(T\\)\nの\n\\(j\\)\n文字目が\no\nのときは全員暇,\nx\nの時はそうでない) すると、次の問題の答えが元の問題の答えとなります。\n長さ\n\\(D\\)\nの文字列\n\\(T\\)\nがあります。\no\nが連続している個数は最大で何個ですか？\nこれは以下に説明するアルゴリズムで\n\\(\\mathrm{O}(D)\\)\nで高速に計算できます。(典型問題なので解法を覚えておくとよいでしょう)\no\nが連続している個数の最大値を記録する変数を\n\\(\\mathrm{ans}\\)\nとする。はじめ\n\\(\\mathrm{ans} = 0\\)\nである。\nまた、(文字列を左から見ていくとして) 今まで見た文字列の末尾に連続する\no\nの個数を\n\\(\\mathrm{cur}\\)\nとする。はじめ\n\\(\\mathrm{cur} = 0\\)\nである。\n\\(i=1, 2, \\dots, D\\)\nについて次の操作を行う。\n\\(T[i] =\\)\no\nである場合は、今まで見た文字列の末尾の\no\nが 1 個増えるので\n\\(\\mathrm{cur}\\)\nを\n\\(\\mathrm{cur} + 1\\)\nに更新する。\n\\(T[i] =\\)\nx\nである場合は、末尾が\nx\nになるので、\n\\(\\mathrm{cur}\\)\nを\n\\(0\\)\nに更新する。\nその後、\n\\(\\mathrm{ans}\\)\nを\n\\(\\max(\\mathrm{ans}, \\mathrm{cur})\\)\nに更新する。\nほかにもやり方はありますが、ともすれば計算量が\n\\(\\mathrm{O}(D^2)\\)\nや\n\\(\\mathrm{O}(D^3)\\)\nとなり制約が大きい条件下では TLE する低速なアルゴリズムになってしまうのに注意しましょう。(この問題では\n\\(D \\leq 100\\)\nなので問題ありません。)\n以上よりこの問題を\n\\(\\mathrm{O}(ND)\\)\nで解くことができて、十分高速です。\nC++ による実装例(この実装例では\n\\(T\\)\nを実際に構築せずに部分問題を1 回ずつ解きながら\n\\(\\mathrm{ans}, \\mathrm{cur}\\)\nの値を更新しています。)",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int N, D;\n  cin >> N >> D;\n  vector<string> S(N);\n  for (auto& s : S) cin >> s;\n\n  int ans = 0, cur = 0;\n  for (int j = 0; j < D; j++) {\n    int can = 1;\n    for (int i = 0; i < N; i++) {\n      can &= S[i][j] == 'o';\n    }\n    if (can) {\n      cur++;\n    } else {\n      cur = 0;\n    }\n    ans = max(ans, cur);\n  }\n  cout << ans << \"\\n\";\n}"
+      ],
+      "text_sha256": "eb1ca330e02dc4f88034bdba70c3f82fbf08bcfe3e2476deb4ac29bea4f65446",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc311/abc311_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,309 @@
+             Atcoder Regular Contest 解説
+
+
+                                writer : maroonrk
+
+                 平成30 年5 月26 日
+
+
+
+              For International Readers: English editorial starts from page 7.
+
+
+A : Add Sub Mul
+
+ 整数の足し算、引き算、掛け算はほとんどのプログラミング言語で標準サポートされているで
+しょう。あとは、3 つの整数の最大値が求められれば良いです。これはif 文による条件分岐で実装
+
+出来ますが、プログラミング言語によっては、与えられたいくつかの整数の最大値を求める関数が
+
+用意されている場合もあります。
+ C++による解答コード
+
+
+
+
+
+                                         1
+
+B :　Cut and Count
+
+ 文字列を分割する位置を全探索します。英小文字26 種類すべてについて、分割されたあとの2
+つの文字列の両方に含まれるかの判定を行えば、「X とY の両方に含まれる文字の種類数」が求ま
+
+ります。あとはその中で最大値を求めれば良いです。
+  26 種類の文字全てに対して、if(s[i] == ‘a‘), if(s[i] == ‘b‘)  · · · と言ったふうに判定関数を書
+くのは骨の折れる作業ですが、ASCII コードで、‘a‘ ‘b‘  · · · ‘z‘ が並んでいるという性質を利用する
+
+とコードが簡単になります。
+ C++による解答コード
+
+
+
+
+
+                                         2
+
+C : Attention
+
+ 西からi 番目の人がリーダーになった際、向く方向を変える必要のある人は、西からj(j < i) 番
+目に並んでいて西を向いている人と、西からj(j > i) 番目に並んでいて東を向いている人です。
+ ここで、「ある範囲に存在する西(東) を向いている人の人数」は、累積和を使うと、前処理O(N)
+時間、1 クエリあたりO(N) 時間で求められます。
+ よって、まず最初にO(N) 時間で累積和を求めておくと、各人について、その人がリーダーに
+なった際に向く方向を変える必要のある人の人数を求めることがO(1) 時間ででき、合計O(N) 時
+
+間で全員分求まります。あとはその中で最小値を求めればよいです。
+
+
+
+
+
+                                         3
+
+D : Xor Sum 2
+
+ 整数列c1, c2,  · · · , cm が、c1 xor c2  · · · xor cm = c1 + c2 +  · · · + cm を満たす条件を考える
+と、これは、すべてのk(0 ≤k) に対して、2 進法表記したときの2k の位が1 であるようci の個数
+が1 以下であることと同値です。これは、a + b −(a xor b) = 2 × (a and b)（ただしここでand
+
+はビットごとの論理積を表す）であることからわかります。
+   l を固定したときに、(l, r) が条件を満たすような最大のr をf(l) とおきます。すると、f はl に
+対して広義単調増加です。よって、l を増加させながら尺取り法の要領でf(l) を求めることができ、
+O(N) で答えを求めることが出来ます。
+ この他にも、各bit についてそのビットが立っている位置を保存することで、直接的にf(l) を求
+
+める解法も存在します。
+
+
+
+
+
+                                         4
+
+E : Range Minimum Queries
+
+ 取り除いく要素の最小値X を決めたとします。この条件のもので、乗り除く要素の最大値Y を
+
+最小化することを考えます。
+ 最小値がX という条件を守るためには、X より小さい要素を含むような区間に対して操作をす
+ることは出来ません。そこで、与えられた数列を、X より小さい要素の位置で切ると、いくつか
+
+の列に分割されます。分割されたあとの列の中で完結する操作は自由に行なえます。
+ 分割したあとの列の一つをc1, c2,  · · · , cm とします。この列からは、高々m −K + 1 個の要素
+を取り除くことが出来ます。小さい方から取り除くほうが好ましいので、この列から取り除かれる
+可能性があるのは、c1, c2,  · · · , cm の中で小さい方からm −K + 1 個の要素です。
+ 分割したあとの各列について、取り除かれる可能性のある値を列挙すると、それらすべての中で
+Q 番目に小さいものが、Y の最小値になります。
+ 列の要素の小さい方から何要素かを得るのは、列をソートすれば出来ます。よって、X を決めて
+おくと、Y の最小値はO(NlogN) で求まることになります。
+ X はN 通りあるので、合計O(N 2logN) でこの問題は解けます。
+ 余談ですが、実はこの問題はN ≤105 で解くことが出来ます。
+
+
+
+
+
+                                         5
+
+F : Donation
+
+ 各頂点v について、Cv = max(Av −Bv, 0) と定義します。ここで、問題で行う操作を逆から見
+ると、次のようなゲームをしていると思うことが出来ます。
+
+ 適当な頂点s から、スタートする。このときの所持金は好きな値でよい。これから、以下の2
+
+ つの操作を好きな順序で好きなだけ繰り返す。
+
+     • 今いる頂点をv としたとき、Bv 円を得る。ただし、今いる頂点をでお金をもらえるの
+    は1 度だけである。
+
+     • 今いる頂点をv としたとき、所持金がAv 円以上なら、隣接する頂点から好きなものを
+    選んでそこに移動する。
+
+ すべての頂点でお金をもらい、かつ、最後に立っている頂点をt としたときに、所持金がAt
+ 円以上ならゲームクリアとなる。
+
+
+ このゲームの性質を考えると、今まで訪れたことのない頂点に移動してきた際には、すぐにお
+
+金を得るのが最善です。また、一度訪れた頂点は、その後自由に移動できます。以上の考察より、
+
+ゲームを更に次のように簡略化出来ます。
+
+ 適当な頂点s から、スタートする。このときの所持金はCs 円以上でなくてはならない。これ
+ から、以下の操作を、すべての頂点を訪れるまで繰り返す。
+
+     • 今まで訪れた頂点に隣接する、まだ訪れていない頂点を一つ選び、移動する。移動先の
+    頂点をv とすると、このときの所持金はCv 円以上でなくてはならない。そして、移動
+    したあとBv 円を得る。
+
+ すべての頂点を訪れることができればゲームクリアとなる。
+
+
+ このゲームでは、次に移動可能な頂点の中でCv が最小のものを選び、移動するという戦略が最
+適だとわかります。
+  Cv が最大の頂点をz とします。ここで、z をグラフから取り除いたあとの連結成分をP1, P2, · · · PL
+とおきます。（ここでL は0 かもしれません）最適解においてスタートする頂点がz だとします。そ
+の場合、ゲームクリアのための所持金の最小値は、Cz に、Bv の総和を足したものになります。最適
+解においてスタートする頂点がPi 内にあったとします。その場合、ゲームクリアのための所持金の
+最小値は、Pi だけでゲームをクリアするための所持金の最小値をQi とすると、max(Qi, Cz) + Pi
+以外の頂点のBvの総和となります。
+ これで多項式解法が得られましたが、愚直にグラフを分割していては間に合いません。グラフが
+分割される様子を逆から見ると、Cv の小さい頂点だけでできるだけ大きな連結成分を作っている
+と思うことが出来ます。よって、各辺のコストを、端点のCv のmax だと思って、小さいコストの
+辺から優先的に使っていくと考えれば、Union-Find を使って、グラフが分割される様子を表す根
+付き木を作ることが出来ます。この木の各頂点は、Cv がある一定の値以下の頂点のみからなるあ
+る連結成分に対応することになります。この木の各頂点に対して、対応するグラフ内だけの問題を
+解いたときの答え、及びBv の総和を求めると、木DP によって全体の答えが求まります。
+  Cv の昇順に頂点を並べたり、Union-Find の操作をするのがボトルネックになり、この問題は
+O(NlogN) で解けます。
+
+
+                                         6
+
+           Atcoder Regular Contest Editorial
+
+
+                                writer : maroonrk
+
+                 平成30 年5 月26 日
+
+
+
+A : Add Sub Mul
+
+ C++ Example
+
+
+B :　Cut and Count
+
+ C++ Example
+
+
+C : Attention
+
+   If the i-th (from the west) person is chosen as the leader, the j-th person have to change the
+
+direction in the following two cases:
+
+   • j < i and the j-th person is facing west.
+
+   • j > i and the j-th person is facing east.
+
+  First, let’s pre-compute preﬁx sums: for each i, count the number of people among the west-
+
+most i people who are facing east. This can be done in O(N) time. After that, we can answer
+a query of the form ”How many people in a given range are facing east (west)?” in O(1) time,
+thus the two values above can be computed in O(1) after we ﬁx the leader.
+
+  This solution works in O(N) time in total.
+
+
+
+
+
+                                         1
+
+D : Xor Sum 2
+
+  Notice that a + b −(a xor b) = 2 × (a and b). The inequality a + b ≥a xor b always hold,
+
+and the equality holds if and only if a and b = 0.  (Intuitively, the equality holds if we get no
+”carries” when we add a and b as binary numbers.)
+  Therefore, for a sequence of non-negative integers c1, c2,  · · · , cm, the equation
+  c1 xor c2  · · · xor cm = c1 + c2 +  · · · + cm
+  holds if and only if for all k, the number of elements among c1, . . . , cm that contains the k-th
+bit (in binary representation) is at most one.
+  For a ﬁxed l, the interval [l, r] satisﬁes the condition in the statement if no bit is repeated
+among al, . . . , ar. Thus, there exists an integer f(l), and the condition is satisﬁed if and only if
+r ≤f(l). Since f(l) is monotonously non-decreasing, we can compute the value of f(l) for all l
+in O(N) time using two-pointers.
+
+   It is also possible to directly compute f(l):  for each k, list the indices of all elements that
+contains the k-th bit.
+
+
+E : Range Minimum Queries
+
+  Let’s ﬁx the value X: the lower bound of removed integers. Under the condition that we are
+
+never allowed to remove integers less than X, let’s minimize the value of Y (the upper bound of
+removed integers). Note that we slightly modiﬁed the deﬁnition of X: now it is not necessary to
+remove X.
+
+  In order to satisfy the condition, we can never choose an interval that contains an integer
+less than X. Thus, let’s split the entire sequence by integers less than X. Now we get (possibly
+
+multiple) sequences that don’t contain integers less than X, and we can freely perform operations
+within each of these sequences.
+  Let c1, c2,  · · · , cm be one of the sequences we get after the split. We can remove at most
+m −K + 1 elements from this sequence (because before the last operation there must be at least
+K elements). It is clearly optimal to remove integers from the smallest ones. Thus, the m−K +1
+
+smallest elements in this sequence have possibility to be removed.
+ We do the same thing for each part of splitted sequences, and list all elements that may be
+removed.  If there are Q or more such elements, the minimum possible value for Y  is the Q-th
+
+smallest element among them.
+ We can do this in O(N log N) for a ﬁxed X.  If we try all N possibilities for X, this solution
+works in O(N 2 log N) time in total.
+  Note that this problem is solvable even for N ≤105. This part is left as an exercise for readers.
+
+
+
+
+
+                                         2
+
+F : Donation
+
+  Let’s modify the problem a bit. Instead of the condition about Av, we require the following
+constraint:  for each vertex v, whenever you are at vertex v, your money must be at least
+Cv := max(Av −Bv, 0) (even after you donate money to the vertex).
+   It turns out that this problem is equivalent to the original problem.  It’s clear that a valid
+
+sequence of moves in the original problem is also a valid sequence of moves in the modiﬁed
+problem. On the other hand, since it never makes sense to visit a vertex again after you donate
+
+for this vertex (in this case, we can ”postpone” the donation), a valid sequence of moves in the
+modiﬁed problem can be converted to a valid sequence of moves in the original problem.
+  Let v be the vertex that maximizes the value of Cv. From the observation above, we can
+assume that, after we donate for this vertex we never visit this vertex.  Let G1, . . . , Gk be
+connected components we get when we remove the vertex v from the graph. Suppose that we
+end the game inside Gi. Then, after we donate for v, we must move inside Gi.
+ We claim that (one of) optimal solutions is of the following form:
+
+   • We donate for all vertices in G1, . . . , Gi−1, Gi+1, . . . , Gk.
+
+   • Move to the vertex v, and donate for it.
+
+   • We donate for all vertices in Gi. We never go out of this subgraph during this phase.
+
+  Suppose that there is an optimal solution that is not of this form. Then, there exists a vertex
+w in Gi such that we donate for w before v. In this case, we can cancel the donation for w,
+and instead we add a donation for w right after the donation for v, and improve the solution.
+Therefore, we proved the claim above.
+
+  Let’s construct a rooted tree as follows:
+
+   • v (the vertex that maximizes Cv) is the root of the tree.
+
+   • Recursively construct rooted trees for subgraphs G1, . . . , Gk.
+
+   • Add an edge between v and the root of the tree for Gi for each i.
+
+ We can construct this tree in O(N log N) time in the order from leaves to root by handling
+vertices in the increasing order of C.
+
+  Now, we can do a DP on this tree. For each vertex u, deﬁne dp[u] as the minimum amount
+of money required to donate for all vertices in the subtree rooted at u. Then we can ﬁll the DP
+table in the order from leaves to the root.
+
+  This solution works in O(N log N) time.
+
+
+
+
+
+                                         3

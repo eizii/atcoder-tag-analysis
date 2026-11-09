@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc427_d",
+  "source_url": "https://atcoder.jp/contests/abc427/tasks/abc427_d?lang=ja",
+  "statement": "問題文\nN\n頂点\nM\n辺の有向グラフがあります。頂点には\n1\nから\nN\nまでの番号が付けられており、\ni\n番目の辺は頂点\nU_i\nから頂点\nV_i\nへ向かう有向辺です。ここで、各頂点の出次数は\n1\n以上です。\nまた、各頂点には文字が書かれており、頂点\ni\nに書かれている文字は\nS_i\nです。ただし、\nS_i\nとは\nS\nの\ni\n文字目を指します。\nAlice と Bob はこのグラフ上で\n1\nつの駒を用いて以下のゲームを行います。\nはじめ、駒は頂点\n1\nに置かれており、Alice が先手、Bob が後手となって以下の操作を交互に\nK\n回ずつ行う。\n現在駒が置かれている頂点を\nu\nとする。頂点\nu\nから頂点\nv\nに向かう辺が存在するような頂点\nv\nを選び、駒を頂点\nv\nに移動させる。\n最終的に駒が置かれている頂点を\nv\nとして、\nS_v =\nA\nのとき Alice の勝ち、\nS_v =\nB\nのとき Bob の勝ちである。\n両者が最適に行動したときのゲームの勝者を求めてください。\n1\nつの入力において\nT\n個のテストケースが与えられます。それぞれについて答えてください。\n制約\n1 \\leq T\n2 \\leq N, M \\leq 2 \\times 10^5\n1 \\leq K \\leq 10\nS\nは\nA\n,\nB\nからなる長さ\nN\nの文字列\n1 \\leq U_i, V_i \\leq N\ni \\neq j\nのとき\n(U_i, V_i) \\neq (U_j, V_j)\n各頂点の出次数は\n1\n以上\n1\nつの入力に含まれるテストケースについて、\nN\nの総和は\n2 \\times 10^5\n以下\n1\nつの入力に含まれるテストケースについて、\nM\nの総和は\n2 \\times 10^5\n以下",
+  "html_sha256": "b0dcb19a723938107a617f34f3af339f0592fd3358522ebfb72757421a800140",
+  "extractor": "section_headings_v1"
+}

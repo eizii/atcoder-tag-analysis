@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc072_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc082/editorial.pdf",
+      "text": "B: OddString\n\n  for 文をまわすなどして答えの文字列を求めると良いです。\n\nint main (){\n         string s;\n         cin >>s;\n         int N = s.size ();\n         string ans;\n        for(int i=0;i<N;i+=2) ans += s[i];\n         cout <<ans <<endl;\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "20d8c46a767811e3b5937a9c9684e61b52bd86871c51330898265f3da10fec15"
+    }
+  ],
+  "status": "available"
+}

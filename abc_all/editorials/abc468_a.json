@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc468_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc468/editorial/23477",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは practice contest の問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。 また、プログラミングコンテストの問題に慣れていない方は、 AtCoder Beginners Selection の問題をいくつか解いてみることをおすすめします。 条件を満たす \\(i\\) の個数を for 文を用いて求めれば良いです。 答えは以下のアルゴリズムで求めることができます： \\(\\text{ans}=0\\) とする。 \\(i=1,2,\\ldots,N-2\\) の順に以下を行う： \\(A_{i}<A_{i+1}>A_{i+2}\\) を満たす場合、 \\(\\text{ans}\\) に \\(1\\) を足す。 \\(\\text{ans}\\) を出力する。 実装例(Python3) 実装例(C++)",
+      "codes": [
+        "n = int(input())\na = list(map(int, input().split()))\nans = 0\nfor i in range(n - 2):\n    ans += a[i] < a[i + 1] > a[i + 2]\nprint(ans)\n",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> a(n);\n\tfor (int i = 0; i < n; i++) {\n\t\tcin >> a[i];\n\t}\n\tint ans = 0;\n\tfor (int i = 0; i < n - 2; i++) {\n\t\tif (a[i] < a[i + 1] && a[i + 1] > a[i + 2]) {\n\t\t\tans++;\n\t\t}\n\t}\n\tcout << ans << endl;\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "94c6f6e89f9ac374bf68099143a086c63a91bff596b023535333b197a2cfdee0"
+    }
+  ],
+  "status": "available"
+}

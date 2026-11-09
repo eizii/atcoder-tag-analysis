@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc243_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc243/editorial/3542",
+      "text": "まず、競技プログラミングを始めたばかりの人は愚直に人を左右に動かしてシミュレーションすることを考えてしまうかもしれません。しかし、この問題では\n\\(N \\leq 2\\times 10^5, x,y \\leq 10^9\\)\nと膨大な人数および空間での話をシミュレートしないといけないため、愚直なシミュレーションでは計算資源が到底足りません。\nこのような場合は、適切な考察によって高速な判定アルゴリズムを構成する必要があります。そのためには、まず「どのような条件の時に衝突が発生するか？」を定式化するのが大事です。これ無しでは適切なアルゴリズムを構成することができません。\nさて、さっそく衝突が発生する必要十分条件を求めましょう。すると、適切な考察により、人\n\\(p\\)\nと人\n\\(q\\)\nが衝突する必要十分条件は次の通りとなります。\n人\n\\(p\\)\nと人\n\\(q\\)\nの\n\\(y\\)\n座標が同じである。\n人\n\\(p\\)\nの\n\\(x\\)\n座標が 人\n\\(q\\)\nより小さいならば、人\n\\(p\\)\nは右を、人\n\\(q\\)\nは左を向いている。(逆の場合は向きも逆になる。)\nこのように条件を言い換えることで、この問題は「上の条件を満たす人の組\n\\((p, q)\\)\nが存在するか？」という問題に帰着することができました。よって for 文で\n\\(p, q\\)\nをすべて走査すれば解ける…と言いたいところですがこれでは\n\\(\\mathrm{O}(N^2)\\)\nかかってしまい TLE するので更なる高速化が必要です。\nもう少し考察を深めてみましょう。\n\\(y\\)\n座標が同じ人たちを集めたとき、「この人たちの間に衝突が発生するのはどのような条件か？」というのを整理しましょう。するとこれは、\n(右を向いている人のうち一番左にいる人) と\n(左を向いている人のうち一番右にいる人)\nが衝突するかどうか？が必要十分条件になっていることがわかります。言い換えると、\n\\(y\\)\n座標が同じ人からなる集合の中では、上の説明にある\n\\(2\\)\n人以外は重要でない、ということです。\nよって、次の\n\\(2\\)\nつの (キー, 値) を要素とする連想配列を持って適切計算していけば、衝突の有無を高速に判定できます。(詳細なアルゴリズムは実装例を参考にしてください。)\nright_min\n: キーを\n\\(k\\)\nとしたとき、\n\\(y=k\\)\nでありかつ右を向いている人のうち最も\n\\(x\\)\n座標が小さい人\nleft_max\n: キーを\n\\(k\\)\nとしたとき、\n\\(y=k\\)\nでありかつ左を向いている人のうち最も\n\\(x\\)\n座標が大きい人\n計算量は\n\\(\\mathrm{O}(N)\\)\nあるいは\n\\(\\mathrm{O}(N \\log N)\\)\nです。以下に Python での実装例を貼ります。",
+      "codes": [
+        "def Yes():\n  print(\"Yes\")\n  exit(0)\n\n\nN = int(input())\nX, Y = [], []\nfor _ in range(N):\n  x, y = map(int, input().split())\n  X.append(x)\n  Y.append(y)\nS = input()\n\nright_min, left_max = dict(), dict()\n\nfor i in range(N):\n  if S[i] == 'R':\n    if Y[i] in left_max and X[i] < left_max[Y[i]]:\n      Yes()\n  else:\n    if Y[i] in right_min and right_min[Y[i]] < X[i]:\n      Yes()\n\n  if S[i] == 'R':\n    if Y[i] in right_min:\n      right_min[Y[i]] = min(X[i], right_min[Y[i]])\n    else:\n      right_min[Y[i]] = X[i]\n  else:\n    if Y[i] in left_max:\n      left_max[Y[i]] = max(X[i], left_max[Y[i]])\n    else:\n      left_max[Y[i]] = X[i]\n\nprint(\"No\")"
+      ],
+      "text_sha256": "b02fd81b376a94aa55bc62a78e7076b95323329df2996a349008e3b416e78f06",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc243/abc243_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

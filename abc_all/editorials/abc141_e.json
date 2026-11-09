@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc141_e",
+  "editorials": [
+    {
+      "text": "E: Who Says a Pun?\nZ-Algorithm と呼ばれるアルゴリズムを使うと、長さN の文字列S について、i = 2, 3, ..., N で\nのS のi 文字目以降から成る文字列とS の最長共通接頭辞の長さをO (N) で求めることが出来ま\nす。\nこれにより、l1 = 1 に制限した場合の答えは、O (N) で求めることが出来ます。\nあとは、同様の処理をS[2 : N], S[3 : N], ..., S[N : N] についても行うことにより、問題の答えを得\nることが出来ます。全体での時間計算量はO\n(\nN 2)\nです。\n別解として、ローリングハッシュを用いて文字列比較をO (1) で処理すると、二分法及び平衡二分探\n索木を用いたハッシュ値の既出判定を行うことにより、O\n(\nN (log N)2)\nで答えを求めることが出来\nます。ハッシュ値の衝突には十分に注意してください。\n",
+      "text_sha256": "f3ef5e74b01369e16cecd6bfc49fe8caec326f8ecb7d64cacf266705d0704703",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc141/abc141_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

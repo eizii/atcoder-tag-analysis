@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc359_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc359/editorial/10264",
+      "text": "簡単のため、スタートとゴールはタイルの左側にあることにしてよいです（つまり、\\(S _ x+S _ y\\) が奇数なら \\(S _ x\\) を \\(1\\) 減らしておきます）。\nタイルの左側と右側は自由に行き来できるので、左側を出発して左側へ到着する移動を一塊として考えます。\n交通量を \\(1\\) 支払うことで次の \\(2\\) つの行動のどちらかができます。\n上下方向に \\(1\\) 移動し、左右方向に \\(1\\) 移動する\n左右方向に \\(2\\) 移動する\n前者を \\(a\\) 回、後者を \\(b\\) 回 \\((0\\leq a,0\\leq b)\\) 行うことで \\((S _ x,S _ y)\\) から \\((T _ x,T _ y)\\) へ移動できたとします。\nこのとき、次が成り立ちます。\n\\(\\lvert S _ y-T _ y\\rvert\\leq a\\)\n\\(\\lvert S _ x-T _ x\\rvert\\leq a+2b\\)\n\\(a\\gt0\\) もしくは \\(S _ x-T _ x\\equiv2b\\pmod4\\)\n逆に、非負整数の組 \\((a,b)\\) が上の条件を満たすならば、前者を \\(a\\) 回と後者を \\(b\\) 回行うことで \\((S _ x,S _ y)\\) から \\((T _ x,T _ y)\\) へ移動できます。\nよって、\\(0\\leq a,0\\leq b\\) と上の条件のもとで通行料 \\(a+b\\) を最小化したいです。\n\\(0\\leq b,\\lvert S _ y-T _ y\\rvert\\leq a\\) より、\\[\\lvert S _ y-T _ y\\rvert\\leq a+b\\quad\\cdots\\ (1)\\] が必要です。\n\\(\\lvert S _ y-T _ y\\rvert\\leq a,\\lvert S _ x-T _ x\\rvert\\leq a+2b\\) より、\\[\\dfrac{\\lvert S _ y-T _ y\\rvert+\\lvert S _ x-T _ x\\rvert}2\\leq a+b\\quad\\cdots\\ (2)\\] が必要です。\n逆に、\\((a,b)=\\left(\\lvert S _ y-T _ y\\rvert,\\max\\left\\lbrace0,\\dfrac{\\lvert S _ x-T _ x\\rvert-\\lvert S _ y-T _ y\\rvert}2\\right\\rbrace\\right)\\) はすべての条件を満たし、\\((1),(2)\\) のどちらかが等号で成立します。\nよって、求める通行料の最小値は \\[\\max\\left\\lbrace\\lvert S _ y-T _ y\\rvert,\\dfrac{\\lvert S _ x-T _ x\\rvert+\\lvert S _ y-T _ y\\rvert}2\\right\\rbrace=\\dfrac{\\lvert S _ y-T _ y\\rvert+\\max\\lbrace\\lvert S _ x-T _ x\\rvert,\\lvert S _ y-T _ y\\rvert\\rbrace}2\\] のように表せることがわかります。\n折りたたみ部で述べたように条件を整理することによって導出することもできますが、小さなケースで実験し、規則性を予測・証明することでもこの式を導出することができるでしょう。\n下の図のように平面を少し変形することでも、この式を思いつきやすくなるかもしれません。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <cmath>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    long Sx, Sy, Tx, Ty;\n    cin >> Sx >> Sy >> Tx >> Ty;\n\n    // タイルの左側に寄せておく\n    if ((Sx + Sy) % 2 == 1) {\n        --Sx;\n    }\n    if ((Tx + Ty) % 2 == 1) {\n        --Tx;\n    }\n\n    // 答えは (|Sy - Ty| + max(|Sx - Tx|, |Sy - Ty|)) / 2\n    long Dx = abs(Sx - Tx);\n    long Dy = abs(Sy - Ty);\n    \n    cout << (Dy + max(Dx, Dy)) / 2 << endl;\n    return 0;\n}",
+        "Sx, Sy = map(int, input().split())\nTx, Ty = map(int, input().split())\n\n# タイルの左側に寄せておく\nif (Sx + Sy) % 2 == 1:\n    Sx -= 1\nif (Tx + Ty) % 2 == 1:\n    Tx -= 1\n\n# 答えは (|Sy - Ty| + max(|Sx - Tx|, |Sy - Ty|)) / 2\nDx = abs(Sx - Tx)\nDy = abs(Sy - Ty)\n\nprint((Dy + max(Dx, Dy)) // 2)"
+      ],
+      "text_sha256": "694d745c0ac8e66b087611a4d3d12c99abed0a3ba8d2e3c160e9a7d4ab0bb908",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc359/abc359_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc359/editorial/10278",
+      "text": "左下の頂点が\n\\((x, y)\\)\nであるようなタイルを\n\\([x, y]\\)\nと呼びます。\n\\((x + 0.5, y + 0.5)\\)\nは、\n\\(x\\)\nと\n\\(y\\)\nの偶奇が同じならタイル\n\\([x, y]\\)\nにあり、そうでないならタイル\n\\([x - 1, y]\\)\nにあります。以下、\n\\([s_x, s_y]\\)\nから\n\\([t_x, t_y]\\)\nへの移動を考えます。\nまず、\n\\([s_x, s_y]\\)\nと\n\\([t_x, t_y]\\)\nをそれぞれ\n\\((-s_x, -s_y)\\)\nだけ平行移動すると、\n\\([0, 0]\\)\nから\n\\([t_x-s_x, t_y-s_y]\\)\nへの移動を考えればよくなります。以下、\n\\([0, 0]\\)\nから\n\\([x, y]\\)\nへの移動を考えます。\nタイル\n\\([0, 0]\\)\nの中心を通って\n\\(x\\)\n軸に平行な直線を考えると、敷き詰めはこの直線について対称です。よって、\n\\(y < 0\\)\nのときは代わりに\n\\([0, 0]\\)\nから\n\\([x, -y]\\)\nへの移動を考えることで、\n\\(y \\geq 0\\)\nを保証できます。同様に、\n\\(x \\geq 0\\)\nを保証できます。\n下の図を見てください。\n\\([0, 0]\\)\nから\n\\([x, y]\\)\nに行くのに必要な最小のタイル間の移動回数は、右上方向と左上方向に合計\n\\(y\\)\n回の移動が必要であることに注目すると、\n\\(y \\geq x\\)\nなら右方向の移動が不要なため\n\\(y\\)\n回、そうでないなら右方向に\n\\((x - y) / 2\\)\n回（この値は整数です）の移動が必要なため\n\\(y + (x - y) / 2\\)\n回です。\n実装例（Python）",
+      "codes": [
+        "Sx, Sy = map(int, input().split())\nTx, Ty = map(int, input().split())\n\nSx -= (Sy - Sx) % 2\nTx -= (Ty - Tx) % 2\n\nTx -= Sx\nTy -= Sy\n\nTx = abs(Tx)\nTy = abs(Ty)\n\nprint(Ty + max(0, Tx - Ty) // 2)"
+      ],
+      "text_sha256": "9affc7f03dd2014e0ae58470683dddea19353965f05cfb1074be5c738b55e80f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc359/abc359_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

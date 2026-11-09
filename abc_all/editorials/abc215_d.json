@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc215_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc215/editorial/2482",
+      "text": "\\(\\gcd(a,b) \\neq 1\\)\nであるとは、\n\\(a\\)\nと\n\\(b\\)\nとが何らかの共通の素因数を持っているということです。\nこのことから、エラトステネスの篩の要領の、以下の解法が成立します。\n集合\n\\(S\\)\nに\n\\(1\\)\nから\n\\(M\\)\nまで全ての整数を入れる。\n\\(i\\)\nが\n\\(1\\)\nから\n\\(N\\)\nまで、以下を繰り返す。\n\\(A_i\\)\nを素因数分解する。素因数の集合を\n\\(P\\)\nとする。\n\\(P\\)\nに含まれる全ての素因数\n\\(k\\)\nについて、「\n\\(S\\)\nから\n\\(k\\)\nの倍数をすべて削除する」という操作を行う。\nなお、全体を通して同じ素因数に関して\n\\(2\\)\n度以上操作を行う必要がないことを利用して、計算量を改善できる。(この部分を行わないとTLEします)\n操作終了後に\n\\(S\\)\nに残った整数が、解である。\nとる方針により計算量は変化しますが、素因数分解を\n\\(O(\\sqrt{\\max A})\\)\nで行うことにより、遅くとも時間計算量\n\\(O(N \\sqrt{\\max  A})\\)\nの解法が達成されます。\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\n#define SIZE 100005\n\nusing namespace std;\n\nvector<int> pfact(int x){\n  vector<int> res;\n  for(int i=2;i*i<=x;i++){\n    while(x%i==0){\n      x/=i;\n      res.push_back(i);\n    }\n  }\n  if(x!=1){res.push_back(x);}\n  return res;\n}\n\nint main(){\n  int n,m;\n  cin >> n >> m;\n  vector<bool> fl(SIZE,true);\n  for(int i=0;i<n;i++){\n    int a;\n    cin >> a;\n    vector<int> v=pfact(a);\n    for(auto &nx : v){\n      if(fl[nx]){\n        for(int j=nx;j<SIZE;j+=nx){fl[j]=false;}\n      }\n    }\n  }\n  vector<int> res;\n  for(int i=1;i<=m;i++){\n    if(fl[i]){res.push_back(i);}\n  }\n  cout << res.size() << '\\n';\n  for(auto &nx : res){cout << nx << '\\n';}\n  return 0;\n}"
+      ],
+      "text_sha256": "0addda53b6ccf9259e61c018b7c7ce247f391c58b289216094e1995611ad9226",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc215/abc215_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc215/editorial/2539",
+      "text": "時間計算量 \\(\\mathrm{O}(N + M + \\max A_i)\\)  の解法の概略です。まず線形篩と呼ばれる方法で、各数について最小素因数を求めます。次にそれを用いた動的計画法により、\\(A_i\\)  のいずれかと共通の素因数をもつ数を特定します。\n実装例 (C++)",
+      "codes": [],
+      "text_sha256": "35787bab9c3db689b4b600d460802fdfaf76ba0d7ce1f797787a1d67ad84490f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc215/abc215_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

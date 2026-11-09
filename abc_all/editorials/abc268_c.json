@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc268_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc268/editorial/4776",
+      "text": "操作回数についての考察\n回転テーブルを回す操作を\n\\(k\\)\n回行った場合、料理\n\\(p_i\\)\nは人\n\\((i+k) \\bmod N\\)\nの目の前に移動してきます。ここで、\n\\(k\\)\nを\n\\(N\\)\nで割った余りが等しい場合は\n\\((i+k) \\bmod N\\)\nの値も等しくなるため、\n\\(k\\)\nは\n\\(0\\)\n以上\n\\(N-1\\)\nの整数に限って良いです。\n\\(\\mathrm{O}(N^2)\\)\n解法\n操作を\n\\(k\\)\n回行った場合に喜ぶ人数を\n\\(c_k\\)\nとします。すると、答えは\n\\(c_0,c_1,\\ldots,c_{N-1}\\)\nのうち最大の値です。よって、実際に操作を\n\\(k=0,1,\\ldots,N-1\\)\n回行った場合に対して喜ぶ人数を数えれば答えを求めることは出来ますが、各\n\\(k\\)\nに対して\n\\(N\\)\n人の人がそれぞれ喜ぶかどうかを調べると\n\\(\\mathrm{O}(N^2)\\)\nとなり、実行時間制限に間に合いません。\n\\(\\mathrm {O}(N)\\)\nへの改善\n料理\n\\(i\\)\nが初め人\n\\(j\\)\nの目の前にあるとします。この時、料理\n\\(i\\)\nを人\n\\((i-1)\\bmod N\\)\n、人\n\\(i\\)\n、人\n\\((i+1)\\bmod N\\)\nの目の前に移動させるのに必要な操作回数はそれぞれ\n\\((i-1-j) \\bmod N\\)\n回、\n\\((i-j)\\bmod N\\)\n回、\n\\((i+1-j) \\bmod N\\)\n回です。よって、人\n\\(i=0,1,\\ldots,N-1\\)\nに対して\n\\(c_{(i-1-j) \\bmod N}, c_{(i-j) \\bmod N}, c_{(i+1-j) \\bmod N}\\)\nをそれぞれ\n\\(1\\)\nずつ増やす処理を行えば\n\\(\\mathrm{O}(N)\\)\nで\n\\(c_0,c_1,\\ldots,c_{N-1}\\)\nを求めることが出来ます。\nなお、人\n\\(0\\)\n、人\n\\(1\\)\n、\n\\(\\ldots\\)\n、人\n\\(N-1\\)\nの順で処理をしようとすると料理\n\\(i\\)\nが初め誰の目の前にあるのかを求めるための前計算が必要になりますが、人\n\\(p_0\\)\n、人\n\\(p_1\\)\n、\n\\(\\ldots\\)\n、人\n\\(p_{N-1}\\)\nの順に処理をすれば問題ありません。(実装例でもそのようにしています。)\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N;\n\tcin>>N;\n\t\n\tvector<int> p(N);\n\t\n\tfor(int i=0;i<N;i++)cin>>p[i];\n\t\n\tvector<int> cnt(N,0);\n\t\n\tfor(int i=0;i<N;i++){\n\t\tfor(int j=0;j<3;j++){\n\t\t\tcnt[(p[i]-1-i+j+N)%N]++;\n\t\t}\n\t}\n\t\n\tint ans = 0;\n\tfor(int i=0;i<N;i++)ans = max(ans,cnt[i]);\n\t\n\tcout<<ans<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "239f6e68d2c4883df33800af7cded013269a5a789a3995a67a9956272d556843",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc268/abc268_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

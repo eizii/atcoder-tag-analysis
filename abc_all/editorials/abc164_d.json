@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc164_d",
+  "editorials": [
+    {
+      "text": "D: Multiple of 2019\n(4 月27 日: 誤りを訂正しました。)\nS の長さをn、S の左からk 番目の数字をak とします。\n左からk + 1 文字目以降の数字列を整数とみなした時の値an + 10an−1 + ... + 10n−k−1ak+1 を\nTk とします(Tn = 0)。すると、(i, j) が条件をみたすのはTi−1 == Tj(mod2019) のときです。\n各Timod2019 を計算し、mod の値が同じごとに個数を計算して足したものが答えです。Ti =\nTi+1 + 10n−i−1ai より、これはDP で計算でき、mod ごとにm(m −1)/2 (m はTimod2019 があ\nる値になる0 ≤i ≤n の個数) を足せば良いです。\n",
+      "text_sha256": "d2ff7d06a42edd40eea54e8998a8c4b33d4a723bce25c559847e4aa485c0df5d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc164/abc164_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

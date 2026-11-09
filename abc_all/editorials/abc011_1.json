@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc011_1",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc011/editorial.pdf",
+      "text": "A問題 来月は何月？\n\n  問題概要 1.\n  アルゴリズム 2.\n\n\n\n\n\n2014/6/21                             ©AtCoder Inc. All rights reserved.                                      33\n\f\nA問題 問題概要\n\n• 今月の月を表す整数Nが与えられる\n• 来月は何月か出力\n\n\n• 制約\n• 1 ≦ N ≦ 12\n\n\n\n\n\n2014/6/21                                                                                               4\n\f\nA問題 アルゴリズム\n\n• 基本的なプログラムの流れ\n   – 標準入力から、必要な入力を受け取る\n          • 今回の場合は、 N という1つの整数\n   – 問題で与えられた処理を行う\n          • 今回は、Nから、来月の値を算出\n   – 標準出力へ、答えを出力する\n\n\n\n\n\n2014/6/21                                                                                               5\n\f\nA問題 アルゴリズム\n\n• 入力\n   – 1つの整数を、標準入力から受け取る\n          • Cであれば、scanf(“%d”, &N); など\n          • C++であれば、cin >> N;\n          • 入力の受け取り方は、下記の練習問題に記載があります。\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2014/6/21                                                                                               6\n\f\nA問題 アルゴリズム\n\n• 処理部分\n   – 今回は、与えられた整数が表す月の、次の月を計算する\n   – 計算方法は色々\n          • オーソドックスな方法\n           – まず、Nに1を足す。\n           – Nが13になってしまったら、Nを1にする\n          • ちょっと器用な方法\n           – N %= 12; N += 1;\n           – 12で割った余りを計算すると、12月が0月っぽくなる。\n                » こっちの方がかっこいいから個人的に好きだけれども、別にこんなこと\n            しなくても良い。\n          • 1を足すが思いつかなかった人用\n           – 配列に来月の月の番号を全部書いちゃう。\n           – Int[] nextMonth = new int[]{-1, 2,3,4,5,6,7,8,9,10,11,12,1};\n           – おすすめはしません。\n\n\n\n2014/6/21                                                                                               7\n\f\nA問題 アルゴリズム\n\n• 出力\n   – 求めた答えを、標準出力より出力する。\n   – 言語によって違います。\n          • printf(“%d¥n”, N); (C)\n          • cout << N << endl; (C++)\n          • System.out.println(N); (Java)\n          • 各言語の標準出力は、下記の練習問題に記載があります。\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2014/6/21                                                                                               8",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "42be15ac7d5ad2587ce89f71ca2d85e018cae8323b49fe3bc338dd0fb3cabbf8"
+    }
+  ],
+  "status": "available"
+}

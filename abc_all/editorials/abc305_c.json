@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc305_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc305/editorial/6538",
+      "text": "まず、素直な方針として、次のアルゴリズムがまず考えられる解法だと思います。\n\\(1 \\leq a \\lt b \\leq H, 1 \\leq c \\lt d \\leq W\\)\nを満たす範囲の整数の組\n\\((a,b,c,d)\\)\nについて, 次の条件を満たすかを判定する。\n\\((a, b)\\)\nを左上,\n\\((c, d)\\)\nを右下とする長方形領域内部の\n.\nの個数を調べる。\n.\nがちょうど 1 個だった場合、そのマスがすぬけ君がクッキーを取ったマスになる。\nしかしこのアルゴリズムは 6 乗の for-loop を必要とするため時間計算量が\n\\(\\mathrm{O}(H^3 W^3)\\)\nとなり非常に遅いです。どうにか高速化する方法を考えましょう。\n重要な気づきとして、次の事実があります。\n\\(U\\)\nを(クッキーが置かれている行の番号の最小値) とする。このとき、すぬけ君がクッキーを食べる前と食べた後で、\n\\(U\\)\nの値は変わらない。\n(証明) 部分長方形は縦横ともに 2 マス以上の大きさがあります。よって、すぬけ君がクッキーを食べる前の時点で最上段のクッキーは  2 個以上あります。すぬけ君はクッキーを 1 個しか食べないので、すぬけ君がクッキーを食べた後も最上段のクッキーは 1 個以上残っています。よって\n\\(U\\)\nの値もまた変わりません。(証明終わり)\n同様の考え方で、次の 3 つの値もクッキーを食べる前と食べた後で変わらないことが分かります。\n\\(D :=\\)\n(クッキーが置かれている行の番号の最大値)\n\\(L :=\\)\n(クッキーが置かれている列の番号の最小値)\n\\(R :=\\)\n(クッキーが置かれている列の番号の最大値)\nよって、次のような方針のアルゴリズムでこの問題を解くことができます。\n\\(U, D, L, R\\)\nを求める。これは全てのマスについて全探索すれば計算できる。\n\\((U, L)\\)\nを左上、\n\\((D, R)\\)\nを右下とする部分長方形の範囲で\n.\nになっているマスが答えである。\n時間計算量は\n\\(\\mathrm{O}(HW)\\)\nで、AC するのに十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <algorithm>\n#include <iostream>\nusing namespace std;\n\nint H, W, U = 1e9, D = -1e9, L = 1e9, R = -1e9;\nchar S[502][502];\n\nint main() {\n  cin >> H >> W;\n  for (int i = 0; i < H; i++) cin >> S[i];\n\n  for (int i = 0; i < H; i++) {\n    for (int j = 0; j < W; j++) {\n      if (S[i][j] == '#') {\n        U = min(U, i), D = max(D, i);\n        L = min(L, j), R = max(R, j);\n      }\n    }\n  }\n  for (int i = U; i <= D; i++) {\n    for (int j = L; j <= R; j++) {\n      if (S[i][j] == '.') cout << i + 1 << \" \" << j + 1 << endl;\n    }\n  }\n}"
+      ],
+      "text_sha256": "6ada508b4dfff8dfd0ec7073db34dfdc466ab5fc8e0c7029c94218bc4b7a4625",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc305/abc305_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc305/editorial/6559",
+      "text": ".\nのマスであって、上下左右にある\n#\nの数が2以上であるような場所が答えです。計算量は\n\\(O(HW)\\)\nです。\n上下左右に隣接するマスの\n#\nの数に注目します。すぬけ君がクッキーを食べる前、クッキーがあるマスでは、この数は2以上です（角の部分では2、辺の部分では3、内側は4）。いっぽう、クッキーがない場所では、この値は高々1です（クッキーのある長方形に隣接している部分では1、それ以外は0）。すぬけ君がクッキーを食べた後、そのマスは\n#\nから\n.\nになりますが、隣接する\n#\nの数は変わりません。また、もとから\n.\nであった場所で、隣接する\n#\nの数が増えることもありません。結局、上に書いた条件を満たすのは、すぬけ君がクッキーを食べた場所だけです。",
+      "codes": [],
+      "text_sha256": "ec6cb28036304c01474623fbe21d8b12c6858d9bc538a14476f567975ca7771a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc305/abc305_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

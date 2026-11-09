@@ -1,0 +1,44 @@
+{
+  "problem_id": "abc453_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc453/editorial/18526",
+      "text": "この問題は、\n永続 segment tree\nを用いることで正答できます。\n永続 segment tree\n自体の説明は、先日オープンした\nAtCoder Algorithm Lectures\n中に存在するため、そちらをお読みください。\n数列そのものを保持するのではなく、代わりに永続 segment tree のある時点での根を保持します。\n数列\n\\(A_i\\)\nに対応する根を\n\\(R_i\\)\nとすると、各タイプのクエリは以下に対応します。\nタイプ\n\\(1\\)\n:\n\\(R_{X_i}\\)\nを\n\\(R_{Y_i}\\)\nで置き換える。時間計算量は\n\\(O(1)\\)\nである。\nタイプ\n\\(2\\)\n:\n\\(R_{X_i}\\)\nが対応する時点の segment tree に対し、一点更新を行う。時間計算量は\n\\(O(\\log N)\\)\nである。\nタイプ\n\\(3\\)\n:\n\\(R_{X_i}\\)\nが対応する時点の segment tree に対し、区間演算を行う。時間計算量は\n\\(O(\\log N)\\)\nである。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\n// https://ei1333.github.io/library/structure/segment-tree/persistent-segment-tree.hpp.html\ntemplate <typename Monoid>\nstruct PersistentSegmentTree {\n  using S = typename Monoid::S;\n  struct Node {\n    S d;\n    Node *l, *r;\n  };\n  using NP = Node*;\n\n private:\n  int n{};\n  Monoid m;\n\n  NP merge(NP l, NP r) const { return new Node{m.op(l->d, r->d), l, r}; }\n\n  NP build(int l, int r, const vector<S>& v) const {\n    if (l + 1 == r) return new Node{v[l], nullptr, nullptr};\n    NP lp = build(l, (l + r) / 2, v);\n    NP rp = build((l + r) / 2, r, v);\n    return merge(lp, rp);\n  }\n\n  NP set(int a, const S& x, NP k, int l, int r) const {\n    if (r <= a || a + 1 <= l) {\n      return k;\n    } else if (a <= l && r <= a + 1) {\n      return new Node{x, nullptr, nullptr};\n    } else {\n      return merge(set(a, x, k->l, l, (l + r) >> 1),\n                   set(a, x, k->r, (l + r) >> 1, r));\n    }\n  }\n\n  NP apply(int a, const S& x, NP k, int l, int r) const {\n    if (r <= a || a + 1 <= l) {\n      return k;\n    } else if (a <= l && r <= a + 1) {\n      return new Node{m.op(k->d, x), nullptr, nullptr};\n    } else {\n      return merge(apply(a, x, k->l, l, (l + r) >> 1),\n                   apply(a, x, k->r, (l + r) >> 1, r));\n    }\n  }\n\n  S prod(int a, int b, NP k, int l, int r) const {\n    if (r <= a || b <= l) {\n      return m.e();\n    } else if (a <= l && r <= b) {\n      return k->d;\n    } else {\n      return m.op(prod(a, b, k->l, l, (l + r) >> 1),\n                  prod(a, b, k->r, (l + r) >> 1, r));\n    }\n  }\n\n public:\n  PersistentSegmentTree() = default;\n\n  explicit PersistentSegmentTree(Monoid m, int n) : m(m), n(n) {}\n\n  NP build(const vector<S>& v) const {\n    assert(n == (int)v.size());\n    return build(0, n, v);\n  }\n\n  NP set(NP t, int k, const S& x) const { return set(k, x, t, 0, n); }\n\n  S get(NP t, int k) const {\n    int l = 0, r = n;\n    while (l + 1 < r) {\n      int p = (l + r) / 2;\n      if (k < p) {\n        t = t->l;\n        r = p;\n      } else {\n        t = t->r;\n        l = p;\n      }\n    }\n    return t->d;\n  }\n\n  NP apply(NP t, int k, const S& x) const { return apply(k, x, t, 0, n); }\n\n  S prod(NP t, int a, int b) const { return prod(a, b, t, 0, n); }\n\n  S all_prod(NP t) const { return t->d; }\n};\n\nusing ll=long long;\n\nstruct Mnd {\n  using S = ll;\n  static constexpr S op(const S& a, const S& b) { return (a+b); }\n  static constexpr S e() { return 0; }\n};\n\nint main(){\n  ll n,m,q;\n  cin >> n >> m >> q;\n  PersistentSegmentTree pseg(Mnd(),m);\n  vector<ll> ini(m,0);\n  auto iseg=pseg.build(ini);\n  vector< decltype(pseg)::NP > root(n,iseg);\n\n  vector<ll> res;\n  while(q--){\n    ll typ;\n    cin >> typ;\n    if(typ==1){\n      ll x,y;\n      cin >> x >> y;\n      x--; y--;\n      root[x]=root[y];\n    }\n    else if(typ==2){\n      ll x,y,z;\n      cin >> x >> y >> z;\n      x--; y--;\n      root[x]=pseg.set(root[x],y,z);\n    }\n    else{\n      ll x,l,r;\n      cin >> x >> l >> r;\n      x--; l--;\n      res.push_back(pseg.prod(root[x],l,r));\n    }\n  }\n  for(auto &nx : res){\n    cout << nx << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "00f53228d3aef20d22c832abadd1e916a8f9f400d1913cb4846792312cd735eb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc453/abc453_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc453/editorial/18564",
+      "text": "こちらのユーザー解説\nと同様ですが、Gitの概念を用いて説明します。\n永続SegmentTreeは強力ですが、整備していない人も多いでしょう。\nこの問題ではどの時点の状態からどのような変更があったかを管理できれば十分です。\nこれはGitでのバージョン管理に似ていて、\n\\(A_i\\)\nをbranch\n\\(i\\)\nbranch\n\\(i\\)\nのHEADは commit hash\n\\(P_i\\)\nを指す\nと思えば、\n操作1: branch\n\\(X_i\\)\nのHEADをbranch\n\\(Y_i\\)\nのHEADにresetする\n操作2: branch\n\\(X_i\\)\nのHEAD\n\\(P_{X_i}\\)\nから\n\\(data[Y_i]\\)\nを\n\\(Z_i\\)\nに書き換えcommitを行う\nに対応します。\nGitのcommit hashの関係が木構造のようになっていることを考えると、\nFenwick Treeなど点加算・区間和取得が高速にできるデータ構造を持つことで、\nクエリを先読みしてオイラーツアーの要領で解くことができます。\n具体的にはDFSの行きがけがcommit履歴を進め(点加算)、戻りがけで親commitにcheckout(ロールバック)することに対応します。\n詳細はコードを読むのが早いでしょう。\n実装例 C++ 68ms\n※Gitの仕組みは実際にはもっと複雑で面白いです。",
+      "codes": [],
+      "text_sha256": "c13412846abd58749455ec3bf1543113f07dec81a3fe17becffc0c7958eb8a94",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc453/abc453_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc453/editorial/18562",
+      "text": "クエリをオフラインで処理する代わりに、高度なデータ構造を使わない解法を紹介します。\n有向木を用意します。木の辺には、「タイプ\n\\(2\\)\nのクエリである数列\n\\(S\\)\nの\n\\(S_{Y_i}\\)\n項目を更新せよ」という命令を持っておきます。\nまた、頂点\n\\(i\\)\nに対応する数列を、一番最初のクエリが前の各数列に、有向木の辺を使って頂点\n\\(0\\)\nから頂点\n\\(i\\)\nに行くときに通る辺にある命令を通る順に実行した結果の数列と定めます。\nさらに、\n\\(N\\)\n個の駒を用意し、\n\\(i\\)\n個目の駒が置かれている頂点に対応する数列が\n\\(A_i\\)\nに等しいとします。\nまず、クエリを先読みし、先ほど述べたような木を作成しながら駒を適切に動かします。このとき、タイプ\n\\(1\\)\nの操作では駒を別の駒と同じ頂点に移動する操作、タイプ\n\\(2\\)\nでは新しい頂点を作ってそこに駒を移動させる操作を行えば良いです。クエリ\n\\(3\\)\nが飛んできた場合、そのクエリではどの頂点に対応する数列にクエリを飛ばしているかということを配列に記録します。\n有向木を作成した後、セグメント木を管理しながらその木に対して dfs を行い、先ほどの配列を利用して各クエリに答えれば良いです。木の辺を戻る場合に少し問題が生じますが、これは更新クエリを加算クエリだと思ってしまうことで解決することができます。これでこの問題を解くことができました。",
+      "codes": [],
+      "text_sha256": "fa12dfab08439efbb1f9bd870802f3fd14376c45a72934dbd4d1d723993fcade",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc453/abc453_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc453/editorial/18565",
+      "text": "各\n\\(i=1,2 \\ldots N\\)\nについて、\n\\(A_i\\)\nを陽に持つのではなく「スナップショット配列」\n\\(S_i\\)\nと「更新履歴」\n\\(H_i\\)\nの\n\\(2\\)\nつを持っておくようにします。\n具体的には、各\n\\(i\\)\nに対してある地点における\n\\(A_i\\)\nの状態を\n\\(S_i\\)\nに、そこから先「\n\\(A_{i,p}\\)\nが\n\\(x\\)\nに更新された」という内容を示す整数ペア\n\\((p,x)\\)\nを更新が行われた順に配列として\n\\(H_i\\)\nに持っておけば、\n\\(S_i\\)\nと\n\\(H_i\\)\nの情報のみから現在の\n\\(A_i\\)\nを復元することが可能です。\nこのデータの持ち方を行った場合、タイプ\n\\(1\\)\nのクエリは\n\\(H_{X_i}\\)\nを\n\\(H_{Y_i}\\)\nに、\n\\(S_{X_i}\\)\nを\n\\(S_{Y_i}\\)\nに置き換えることに対応し、タイプ\n\\(2\\)\nのクエリは\n\\(H_{X_i}\\)\nの末尾に\n\\((Y_i,Z_i)\\)\nを追加することに対応します。\n\\(S_i\\)\nと\n\\(S_i\\)\nの累積和が事前に保存されている場合、クエリ\n\\(3\\)\nで\n\\((X_i,L_i,R_i)\\)\nが飛んできた場合における答えの計算は\n\\(O(|H_{X_i}|)\\)\n時間で行うことができます。まとめると、以上\n\\(3\\)\nつのクエリは全て\n\\(|H_i|\\)\nに対し線形以下の計算量で行うことができます。\nここで、クエリに答えている間に次のような処理を行うことで、\n\\(H_i\\)\nの長さが短くなるようにします：\n\\(H_i\\)\nのサイズが\n\\(B\\)\nを超えた場合、 現在の\n\\(A_i\\)\nをスナップショット配列として保存し、変更履歴を空にする (\n\\(H_i\\)\nのサイズを\n\\(0\\)\nにする)。\nこの処理を行うことで、\n\\(H_i\\)\nのサイズは最大でも\n\\(B\\)\nになります。処理を行う回数は悪意のあるケースでなければ\n\\(O(\\frac{Q}{B})\\)\n回程度になり、処理一回当たりの計算量は\n\\(O(M)\\)\nになるので、\n\\(B=\\sqrt Q\\)\nとすれば、\n\\(O(N+(M+Q)√Q)\\)\n時間で答えを求めることができます。\n実際の実装にて\n\\(S_i\\)\nと\n\\(S_i\\)\nの累積和を陽に持つと\n\\(NM\\)\n個の整数型を持つ必要が生まれてしまいます。\n\\(S_i\\)\nの種類数は高々\n\\(O(\\frac{N}{B})\\)\nなので、メモリプールの要領で保存しておき、各\n\\(i\\)\nについてインデックスを参照する形式をとるなどして、対策する必要があります。\nなお、このアルゴリズムには Hack ケースが存在します。\n例えば、\n\\(|H_i| = B-1\\)\nとなっているものをクエリ\n\\(1\\)\nで大量にコピーし、コピーした数列それぞれに対してクエリ\n\\(2\\)\nで更新履歴を\n\\(1\\)\nつずつ増やすことで、スナップショット配列の再計算を大量に行わせることができます（実際には、実装で用いた\n\\(B\\)\nの具体値はテストケースが用意される際に知られることはないので落とされることはないと思います）。\nこの Hack を解消する方法として、更新を「\n\\(|H_i|=B\\)\nとなったタイミング」にて行うのではなく、クエリ\n\\(2\\)\nが行われた際に独立に\n\\(\\frac{1}{B}\\)\nで行うなどといった方法があります。",
+      "codes": [],
+      "text_sha256": "53129c24c47bea236d028ce447f473e5e82b3343e735680b60f58b0d1f0419d6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc453/abc453_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

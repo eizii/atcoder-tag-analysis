@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc095_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc095/editorial.pdf",
+      "text": "C: Many Medians\n\n 入力をソートしたものをY1 ≤Y2 ≤· · · ≤YN とします．このときBi を考えます．ソートした後にAi がli 番目に現\nれるとします（すなわちYli = Ai が成り立ちます）．Bi はY1, . . . , Yli−1, Yli+1, . . . , YN の中央値であることに注意しま\nす．すると，Y1 ≤· · · ≤Yli−1 ≤Yli+1 ≤· · · ≤YN より，このN −1 個の値のうちN2 番目の値を求めればよいことが\nわかります．これは，li ≤N2 であればYN/2+1，li ≥N2 + 1 であればYN/2 になることが確かめられます．\n\n\n\n\n\n                                                   3",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "d64a1fd20929e040c614273a84a692c885378e57f57d32ef96bb8fccd44e1159"
+    }
+  ],
+  "status": "available"
+}

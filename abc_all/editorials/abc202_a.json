@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc202_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc202/editorial/1857",
+      "text": "サイコロは「ある面とその反対側の面が表す整数を足すと\n\\(7\\)\nになる」という性質を持ちます。よって、\n\\(n\\)\nの目が出たとき、反対側の面が表す整数は\n\\(7 - n\\)\nです。\nしたがって答えは\n\\((7 - a) + (7 - b) + (7 - c) = 21 - (a + b + c)\\)\nとなるので、これを出力すればよいです。\nC++ での実装例：\nPython での実装例：\nRust での実装例：",
+      "codes": [
+        "#include <iostream>\n\nint main() {\n    int a, b, c;\n    std::cin >> a >> b >> c;\n    std::cout << 21 - (a + b + c) << '\\n';\n    return 0;\n}",
+        "a, b, c = map(int, input().split())\nprint(21 - (a + b + c))",
+        "use proconio::input;\n\nfn main() {\n\tinput!(num: [i32; 3]);\n  \tprintln!(\"{}\", 21 - num.into_iter().sum::<i32>());\n}"
+      ],
+      "text_sha256": "e215d24a84922746d30f2e0d6c49c5fc30f9a94b2fc14c54e9305f247f4561b9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc202/abc202_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

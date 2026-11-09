@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc388_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc388/editorial/11900",
+      "text": "鏡餅を構成する \\(2\\) つの餅のうち大きいほうを固定して、つまり「ある餅をひとつ取ってきて、その餅が下になる鏡餅についてのみ」考えます。\n大きさ \\(a\\) の餅が下になる鏡餅の種類数は、大きさが \\(\\dfrac a2\\) 以下である餅の個数と等しいです。\nよって、すべての餅について、大きさが自身の半分以下である餅の個数を求め、それを合計することでこの問題を解くことができます。\nしかし、\\(i\\) 番目の餅に対して大きさが自身の半分以下である餅の個数は \\(\\Theta(i)\\) 個程度まで多くなることがあり、一つ一つ数えていては実行時間制限に間に合いません（\\(A _ i=i\\) とすることで個数を \\(\\dfrac i2\\) 個とできます。適切なケースを作ることでより多くすることもできます）。\nここで、尺取り法や二分探索を用いるとこの問題を十分高速に解くことができます。\nより具体的には、餅が小さいほうから並んでいることから「どこまでの餅が大きさが \\(x\\) 以下でどこからが \\(x\\) より大きいか」がわかれば \\(x\\) 以下の餅の個数を求めることができます。\n尺取り法を用いることで全体の時間計算量を \\(\\Theta(N)\\) に、二分探索を用いた場合は時間計算量を \\(\\Theta(N\\log N)\\) とすることができます。\n答えが \\(32\\operatorname{bit}\\) 整数に収まらない大きさになる場合があることに注意してください。\n実装例は以下のようになります。\n(C++, 二分探索)\n(Python, 二分探索)\n(C++, 尺取り法)\n(Python, 尺取り法)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\n    vector<int> A(N);\n    for (auto&& a : A)\n        cin >> a;\n\n    long ans = 0;\n    for (const auto a : A)\n        // a / 2 以下の餅の個数 = a / 2 を超える餅と先頭との距離\n        ans += ranges::upper_bound(A, a / 2) - begin(A);\n\n    // 合計が答え\n    cout << ans << endl;\n\n    return 0;\n}",
+        "from bisect import bisect\n\n\nN = int(input())\nA = list(map(int, input().split()))\n\nans = 0\n\nfor a in A:\n    # A の要素のうち a / 2 以下のものの個数を合計する\n    ans += bisect(A, a // 2)\n\nprint(ans)",
+        "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\n    vector<int> A(N);\n    for (auto&& a : A)\n        cin >> a;\n\n    long ans = 0;\n    // a / 2 より大きい最初の要素（なければ最後の次）を表す値 j\n    for (int j = 0; const auto a : A) {\n        // 越えるまで進める\n        while (j < N && A[j] * 2 <= a) j++;\n        ans += j;\n    }\n\n    cout << ans << endl;\n\n    return 0;\n}",
+        "N = int(input())\nA = list(map(int, input().split()))\n\nans = 0\n\n# a / 2 より大きい最初の要素（なければ最後の次）を表す値 j\nj = 0\n\nfor a in A:\n    # 越えるまで進める\n    while j < N and A[j] * 2 <= a:\n        j += 1\n    ans += j\n\nprint(ans)"
+      ],
+      "text_sha256": "cb0b621d1a56687f0d8b60896448de6b4cd4f3ed4ce90ecfb1d2d81fd94becd9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc388/abc388_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

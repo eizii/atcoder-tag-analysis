@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc310_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc310/editorial/6783",
+      "text": "この問題は、選手を順にチームに追加していく方法と、チームごとにまとめて決定する方法で解くことができます。\n1. 選手を順にチームに追加する解法 \\(O(N\\times N!)\\) 時間\n\\(1,2,\\ldots,i-1\\) 番目の選手を、互いに相性の悪い選手が同じチームにならないようにたかだか \\(T\\) チームに分けているとします。\nここに \\(i\\) 番目の選手を追加するには、たかだか \\(T\\) チームのいずれかに \\(i\\) 番目の選手を入れるか、（チーム数が \\(T\\) より少ないとき）新しく \\(i\\) 番目の選手しかいないチームを作るかのどちらかです。\nこの処理を再帰関数を用いて書くことで、\\(O(N\\times N!)\\) 時間でこの問題を解くことができます。\n\\(i\\) 番目の選手と相性が悪い選手や現在のチーム分けを連続する \\(N\\operatorname{bit}\\) で保存することで、ワードサイズ \\(w\\) に対して \\(O(N/w\\times N!)\\) 時間とすることもできます。\n実装例は以下のようになります。\n2. チームごとにメンバーをまとめて決定する解法 \\(O(3^NT)\\) 時間\n\\(\\operatorname{dp}[S][t]\\coloneqq\\bigl(S\\) に含まれる選手を、互いに相性の悪い選手を含まない \\(t\\) チームに分ける場合の数 \\(\\bigr)\\) と定めます。\n\\(S\\) の（二進法に基づいて非負整数へ変換した値による）昇順に DP テーブルを走査し、\\(\\{1,2,\\ldots,N\\}\\setminus S\\) のうち最小の整数に対応する選手が属するチームのメンバーを全探索することで、DP テーブルを埋めることができます（メモ化再帰でも実装可能です）。\n\\(O(2^N\\operatorname{poly}(N))\\) 時間の前計算を行って、相性の悪い選手の組を含まないチームをすべて列挙しておくことで、計算量を \\(O(3^NT)\\) 時間とできます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\nunsigned N, T, M;\nvector<unsigned> hate, teams;\n\n// 再帰関数でチーム分け\nunsigned dfs(unsigned now) {\n    // 最後の選手まで見て T チームに分かれていれば OK\n    if (now == N)\n        return size(teams) == T;\n\n    unsigned ans{};\n\n    // すでにあるチームに now 番目の選手を追加する\n    for (auto &&team : teams)\n        // チームに now 番目の選手と相性の悪い選手がいなければ\n        if (!(team & hate[now])) {\n            team ^= 1U << now;\n            ans += dfs(now + 1);\n            team ^= 1U << now;\n        }\n\n    // チーム数に余裕があるとき、新しいチームを作る\n    if (size(teams) < T) {\n        teams.emplace_back(1U << now);\n        ans += dfs(now + 1);\n        teams.pop_back();\n    }\n\n    return ans;\n}\n\nint main() {\n    using namespace std;\n    cin >> N >> T >> M;\n\n    // hate[i] の j ビットめが 1 ⟹ i 番目の選手と j 番目の選手の相性が悪い (0-indexed)\n    hate = vector<unsigned>(N);\n    for (unsigned i{}, a, b; i < M; ++i) {\n        cin >> a >> b;\n        hate[--b] |= 1U << --a;\n    }\n\n    teams.reserve(T);\n    cout << dfs(0) << endl;\n\n    return 0;\n}",
+        "#include <iostream>\n#include <vector>\n#include <bitset>\n\nint main() {\n    using namespace std;\n    unsigned N, T, M;\n    cin >> N >> T >> M;\n\n    vector<unsigned> hate(N);\n    for(unsigned i{}, a, b; i < M; ++i){\n        cin >> a >> b;\n        hate[--b] |= 1U << --a;\n    }\n\n    // possible_team[S] := S からなるチームを作ったとき、相性の悪い選手の組がいない\n    // O(2^N N^2/w) 時間\n    bitset<1024> possible_team;\n    for(unsigned i{}; i < 1U << N; ++i){\n        unsigned m{};\n        for(unsigned j{}; j < N; ++j)if(1U & (i >> j))m |= hate[j];\n        if(!(i & m))\n            possible_team[i] = true;\n    }\n\n    vector dp(1U << N, vector<unsigned>(T + 1));\n    dp.front().front() = 1;\n    for(unsigned i{}; i < 1U << N; ++i)\n        // 残っているうち番号の一番小さい選手が属するチームを全探索\n        for(unsigned c{i + 1 | i}, j{c}; j < 1U << N; ++j |= c)\n            if(possible_team[j ^ i])\n                for(unsigned k{}; k < T; ++k)\n                    dp[j][k + 1] += dp[i][k];\n\n    cout << dp.back().back() << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "7398028741a50b63e71b7847f826c78124db26d893698378f7298f0eaaf2c27e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc310/abc310_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

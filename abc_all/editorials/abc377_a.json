@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc377_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc377/editorial/11219",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n解法1：あり得る答えを全て試す\n各文字を並び替えることで\nABC\nにすることができる文字列は、\nABC\n、\nACB\n、\nBAC\n、\nBCA\n、\nCAB\n、\nCBA\nの\n\\(6\\)\n通りです。したがって、入力として与えられる\n\\(S\\)\nがこれらのいずれかと一致しているかどうかを判定すれば良いです。\n解答例(Python3)\n解法2：条件をより簡単にする\n\\(S\\)\nは長さ\n\\(3\\)\nであるので、答えが\nYes\nとなる条件は\n\\(S\\)\nが文字\nA\n、\nB\n、\nC\nを全て含むことと同値です。\nしたがって、これらの文字が\n\\(S\\)\nの中に全て含まれていれば\nYes\nを、そうでないなら\nNo\nを出力すれば良いです。\n解答例(Python3)",
+      "codes": [
+        "S = input()\nif S in [\"ABC\", \"ACB\", \"BAC\", \"BCA\", \"CAB\", \"CBA\"]:\n    print(\"Yes\")\nelse:\n    print(\"No\")",
+        "S = input()\nif \"A\" in S and \"B\" in S and \"C\" in S:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "e5ce38465f9a7b05279e29e959b737f60077cb8e70009405c1e51668f6938533",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc377/abc377_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

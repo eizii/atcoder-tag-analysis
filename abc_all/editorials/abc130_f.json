@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc130_f",
+  "editorials": [
+    {
+      "text": "F: Minimum Bounding Box\n以下(xmax −xmin) × (ymax −ymin) をbounding box と呼ぶことにします。\n点の移動開始後、xmax の変化量は減少、不変、増加と推移していきます（各区間が0 に潰れる場合もあり\nます）。変化量が変わるタイミングは、単調性を利用した二分探索などで求めることができます。同様のこと\nはxmin やymax やymin でも成り立ちます。\nこの性質を利用すると、点の移動開始後の時間軸を各最大最小値の変化量が不変ないくつかの区間に分割で\nきます。そして実はbounding box が最小値をとるタイミングは、そのような区間の端点のいずれかです。\nこのことを示します。\nまずdx = xmax −xmin, dy = ymax −ymin のように定めます。dx およびdy が広義単調増加するような\n区間では、bounding box は増加します。よってそのような区間では、区間の開始地点でbounding box は\n最小値をとります。同様にdx およびdy が広義単調減少するような区間では、区間の終了地点でbounding\nbox は最小値をとります。\n次にdx が狭義増加dy が狭義減少である場合を考えます（逆の場合も同様です）。このときのbounding\nbox の変化量はdx とdy の比率に左右されます。dx がdy と比べて一定以上小さい間はbounding box は\n増加します。dx が増加を続けると（あるいは最初から）減少の影響力のほうが強くなり、bounding box は\n減少します。結局このような区間ではbounding box の値は上に凸になり、区間端点のいずれかで最小値を\nとります。\n以上より、先述の事実が示せました。\n\nABC 130\nsatashun, DEGwer, yuma000, yosupo, gazelle\n06/15/2019\n",
+      "text_sha256": "d387228d4a003851a5fb0b8a4da761b9d0cbe07fabbaefc834634a937d118d91",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc130/abc130_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

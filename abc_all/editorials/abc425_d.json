@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc425_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc425/editorial/14073",
+      "text": "\\(i\\)\n回目の操作の\n\\(T\\)\nを\n\\(T_i\\)\nとします．このとき，以下が成り立ちます．\n任意の\n\\((x_1,y_1)\\in T_{i+1}\\)\nに対し，ある\n\\((x_2, y_2)\\in T_i\\)\nが存在して\n\\(|x_1-x_2|+|y_1-y_2|=1\\)\nである．\nすなわち，\n\\(i+1\\)\n回目に操作対象となるマスは，\n\\(i\\)\n回目で操作したいずれかのマスに必ず隣接している．\nよって，\n\\(T_{i+1}\\)\nを求めるためには，\n\\(T_i\\)\nのマスに隣接するマスのみを調べれば十分です．\n\\(T_i=\\varnothing\\)\nならば\n\\(T_{i+1}=\\varnothing\\)\nなので，\n\\(T_i=\\varnothing\\)\nとなったタイミングで探索を打ち切ってよいです．さらに，\n\\(T_1, T_2, \\ldots, \\)\nは互いに素であるため，\n\\(|T_1|+|T_2|+\\ldots\\leq HW\\)\nです．よってこの問題は\n\\(O(HW)\\)\nで解くことができます．",
+      "codes": [
+        "H, W = map(int, input().split())\nS = [list(input()) for i in range(H)]\n\n\ndxdy = [(1, 0), (0, 1), (-1, 0), (0, -1)]\n\n\ndef in_grid(x, y):\n    return 0 <= x < H and 0 <= y < W\n\n\ndef count(x, y):\n    c = 0\n    for dx, dy in dxdy:\n        nx, ny = x + dx, y + dy\n        if in_grid(nx, ny) and S[nx][ny] == \"#\":\n            c += 1\n    return c\n\n\nfor i in range(H * W):\n    if i == 0:\n        T = []\n        for x in range(H):\n            for y in range(W):\n                if S[x][y] == \".\" and count(x, y) == 1:\n                    T.append((x, y))\n    else:\n        nT = []\n        for x, y in T:\n            for dx, dy in dxdy:\n                nx, ny = x + dx, y + dy\n                if in_grid(nx, ny) and S[nx][ny] == \".\" and count(nx, ny) == 1:\n                    nT.append((nx, ny))\n        T = nT\n\n    if len(T) == 0:\n        break\n    for x, y in T:\n        S[x][y] = \"#\"\n\n\nans = 0\nfor x in range(H):\n    for y in range(W):\n        ans += int(S[x][y] == \"#\")\n\nprint(ans)"
+      ],
+      "text_sha256": "c2806577ca9bcc90724431b3cdc008b7a62aae6ed58d209096e259eb22d82bb2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc425/abc425_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

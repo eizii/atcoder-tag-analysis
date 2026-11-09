@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc184_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc184/editorial/339",
+      "text": "マス\n\\((a, b)\\)\nからマス\n\\((c, d)\\)\nに移動できる\n\\(3\\)\nつの条件\n\\(a + b = c + d\\)\n\\(a - b = c - d\\)\n\\(|a - c| + |b - d| \\le 3\\)\nのそれぞれによる移動を移動 A, B, C と呼ぶことにします。\nまずは、より遠くに移動することができる移動 A と移動 B について考えましょう。\n移動 A と移動 B を 1 回ずつ使うと、パリティの等しい (下図において色の同じ) 任意のマスに 2 手で移動することができます。\n(これは、グリッド全体を\n\\(45\\)\n度回転させると分かりやすいです。)\nしたがって、移動  C も合わせると、任意のマスに\n\\(3\\)\n手で移動できることが分かります。\n答えが\n\\(3\\)\n以下になることがわかったので、\n\\(0\\)\n手、\n\\(1\\)\n手、\n\\(2\\)\n手でそれぞれ移動できるかを判定できれば、この問題を解くことができます。\n\\(0\\)\n手は同じマスかどうか、\n\\(1\\)\n手は上の\n\\(3\\)\nつの条件を調べれば良いです。\n\\(2\\)\n手については、いくつかのパターンに分けられます。\n移動 A + 移動 B :\nパリティが等しい (上図において色が同じ) かどうか\n\\((a + b + c + d) \\bmod 2 = 0\\)\n移動 C + 移動 C :\nマンハッタン距離が\n\\(6\\)\n以下かどうか\n\\(|a - c| + |b - d| \\le 6\\)\n移動 A + 移動 C :\n下図参照\n\\(|(a + b) - (c + d)| \\le 3\\)\n移動 B + 移動 C :\n下図参照\n\\(|(a - b) - (c - d)| \\le 3\\)\nこれらを実装すると、 AC が得られます。\n実装例 (Python)\n実装例 (C++)",
+      "codes": [
+        "r1, c1 = map(int, input().split())\nr2, c2 = map(int, input().split())\nr = r2 - r1\nc = c2 - c1\n\nif (r, c) == (0, 0):\n    ans = 0\nelif r == c or r == -c: \n    ans = 1\nelif abs(r) + abs(c) <= 3:\n    ans = 1\nelif (r ^ c ^ 1) & 1:\n    ans = 2\nelif abs(r) + abs(c) <= 6:\n    ans = 2\nelif abs(r + c) <= 3 or abs(r - c) <= 3:\n    ans = 2\nelse:\n    ans = 3\n\nprint(ans)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int r1, c1, r2, c2;\n    cin >> r1 >> c1 >> r2 >> c2;\n    int r = r2 - r1, c = c2 - c1;\n    int ans = 3;\n    if(!r && !c) ans = 0;\n    else if(r == c || r == -c || abs(r) + abs(c) <= 3) ans = 1;\n    else if((r ^ c ^ 1) & 1 || abs(r + c) <= 3 || abs(r - c) <= 3 || abs(r) + abs(c) <= 6) ans = 2;\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "1f83265d7805b0c9be7375ac66b9f42c9bff48b5c0a16d0cd5cb75ad7e4300a8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc184/abc184_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

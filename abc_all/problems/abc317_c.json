@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc317_c",
+  "title": "Remembering the Days",
+  "contests": [
+    {
+      "contest_id": "abc317",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 604,
+  "raw_difficulty": 604,
+  "contest_id": "abc317",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc317/tasks/abc317_c",
+  "statement": "配点 : 300 点 問題文 ある地方に、 1 から N の番号がついた N 個の街と、 1 から M の番号がついた M 本の道路があります。 i 番目の道路は街 A_i と街 B_i を双方向に結び、長さは C_i です。 好きな街からスタートして同じ街を二度以上通らずに別の街へ移動するときの、通る道路の長さの和としてありえる最大値を求めてください。 制約 2 \\leq N \\leq 10 1 \\leq M \\leq \\frac{N(N-1)}{2} 1\\leq A_i < B_i \\leq N (A_i,B_i) は相異なる 1\\leq C_i \\leq 10^8 入力は全て整数である 入力 入力は以下の形式で標準入力から与えられる。 N M A_1 B_1 C_1 \\vdots A_M B_M C_M 出力 答えを出力せよ。 入力例 1 4 4\r\n1 2 1\r\n2 3 10\r\n1 3 100\r\n1 4 1000 出力例 1 1110 4\\to 1\\to 3\\to 2 と移動すると、通る道路の長さの和は 1110 となります。 入力例 2 10 1\r\n5 9 1 出力例 2 1 道路と繋がっていない街が存在するかもしれません。 入力例 3 10 13\r\n1 2 1\r\n1 10 1\r\n2 3 1\r\n3 4 4\r\n4 7 2\r\n4 8 1\r\n5 8 1\r\n5 9 3\r\n6 8 1\r\n6 9 5\r\n7 8 1\r\n7 9 4\r\n9 10 3 出力例 3 20",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 ある地方に、 1 から N の番号がついた N 個の街と、 1 から M の番号がついた M 本の道路があります。 i 番目の道路は街 A_i と街 B_i を双方向に結び、長さは C_i です。 好きな街からスタートして同じ街を二度以上通らずに別の街へ移動するときの、通る道路の長さの和としてありえる最大値を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 10 1 \\leq M \\leq \\frac{N(N-1)}{2} 1\\leq A_i < B_i \\leq N (A_i,B_i) は相異なる 1\\leq C_i \\leq 10^8 入力は全て整数である"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M A_1 B_1 C_1 \\vdots A_M B_M C_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 4\r\n1 2 1\r\n2 3 10\r\n1 3 100\r\n1 4 1000"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1110 4\\to 1\\to 3\\to 2 と移動すると、通る道路の長さの和は 1110 となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 1\r\n5 9 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1 道路と繋がっていない街が存在するかもしれません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10 13\r\n1 2 1\r\n1 10 1\r\n2 3 1\r\n3 4 4\r\n4 7 2\r\n4 8 1\r\n5 8 1\r\n5 9 3\r\n6 8 1\r\n6 9 5\r\n7 8 1\r\n7 9 4\r\n9 10 3"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 20"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc317/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:45.682257+00:00",
+  "statement_sha256": "e138dc97199eb94eae4e2a9b9867d01afcfd11e6aeca3836cb461d3bbc3b911a",
+  "editorials": []
+}

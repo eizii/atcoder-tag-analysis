@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc465_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc465/editorial/22563",
+      "text": "桁 DP\nと呼ばれる手法によって解くことができます．\nDP 上では，扱う整数の桁数を\n\\(N\\)\nと揃えるため，leading-zero を特例として許すものとします．\n扱う整数の冒頭\n\\(i\\)\n桁の状態を表す添字として，以下を持てば十分です．\n使う数字の集合\n\\(b\\)\n\\(3\\)\nで割ったあまり\n\\(m\\)\n\\(N\\)\nの冒頭\n\\(i\\)\n桁と比べて小さいか等しいかを表す変数\n\\(l\\)\n状態\n\\(dp[i-1][b][m][l]\\)\nおよび\n\\(i+1\\)\n文字目の数字\n\\(d\\)\nを固定したとき，これらの変数から遷移先の状態\n\\(dp[i][\\cdot][\\cdot][\\cdot]\\)\nの添字と係数が求まります．具体的な遷移は実装例を参照してください．\n実装時の注意点として，leading-zero を置いたときに\n0\nを使ったことにならないようにする必要があります．\n時間計算量は\n\\(D=10\\)\nとおいて\n\\(O(2^D D \\log N)\\)\nです．\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\n#include <vector>\nusing std::vector;\n#include <string>\nusing std::string;\nusing std::to_string;\n#include <bit>\nusing std::popcount;\n\ntypedef long long int ll;\n\nconst ll FOD = 998244353;\n\nstring s;\n\nll dp[505][1 << 10][3][2];\nvoid solve() {\n\t// init dp[0]\n\tfor (ll bi = 0; bi < (1<<10); bi++) {\n\t\tfor (ll mi = 0; mi < 3; mi++) {\n\t\t\tfor (ll li = 0; li < 2; li++) {\n\t\t\t\tdp[0][bi][mi][li] = 0;\n\t\t\t}\n\t\t}\n\t}\n\tdp[0][0][0][0] = 1;\n\t\n\tfor (ll i = 0; i < s.size(); i++) {\n\t\tll si = (s[i] - '0');\n\n\t\t// init dp[i+1]\n\t\tfor (ll bi = 0; bi < (1<<10); bi++) {\n\t\t\tfor (ll mi = 0; mi < 3; mi++) {\n\t\t\t\tfor (ll li = 0; li < 2; li++) {\n\t\t\t\t\tdp[i+1][bi][mi][li] = 0;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\t// dp[i] -> dp[i+1]\n\t\tfor (ll bi = 0; bi < (1<<10); bi++) {\n\t\t\tfor (ll mi = 0; mi < 3; mi++) {\n\t\t\t\t// unroll loop for li\n\t\t\t\tfor (ll d = 0; d <= 9; d++) {\n\t\t\t\t\tll bx = ((bi == 0 && d == 0) ? 0 : (bi | (1LL << d)));\n\t\t\t\t\tll mx = (mi * 10 + d) % 3;\n\t\t\t\t\t// li 0\n\t\t\t\t\tif (d <= si) {\n\t\t\t\t\t\tdp[i+1][bx][mx][(d == si) ? 0 : 1] += dp[i][bi][mi][0];\n\t\t\t\t\t}\n\t\t\t\t\tdp[i+1][bx][mx][1] += dp[i][bi][mi][1];\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\t// modulo\n\t\tfor (ll bi = 0; bi < (1<<10); bi++) {\n\t\t\tfor (ll mi = 0; mi < 3; mi++) {\n\t\t\t\tfor (ll li = 0; li < 2; li++) {\n\t\t\t\t\tdp[i+1][bi][mi][li] %= FOD;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\t// dp[n] -> ans\n\tll ans = 0;\n\tfor (ll bi = 1; bi < (1<<10); bi++) {\n\t\tfor (ll mi = 0; mi < 3; mi++) {\n\t\t\tfor (ll li = 0; li < 2; li++) {\n\t\t\t\tll cond = 0;\n\t\t\t\tif (popcount((uint64_t)bi) == 3) cond++;\n\t\t\t\tif (bi & (1LL << 3)) cond++;\n\t\t\t\tif (mi == 0) cond++;\n\n\t\t\t\tif (cond == 1) {\n\t\t\t\t\tans += dp[s.size()][bi][mi][li];\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tans %= FOD;\n\n\tcout << ans << \"\\n\";\n}\n\nint main (void) {\n\tstd::cin.tie(nullptr);\n\tstd::ios_base::sync_with_stdio(false);\n\n\tcin >> s;\n\t\n\tsolve();\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "40d063cb71115d629fa023efbbf78672ef973d45068584c001a612ed63bedcd5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc465/abc465_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

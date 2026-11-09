@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc177_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc177/editorial/82",
+      "text": "pairwise coprimeであるかどうか判定するために、定義通りに\n\\(O(N^2)\\)\n個のペアについてGCDを計算するとTLEになります。\npairwise coprimeであることの条件は「任意の素数\n\\(p\\)\nについて、\n\\(\\{A_i\\}\\)\nの中に\n\\(p\\)\nの倍数は高々1個である」と同値です\n（\nもし\n\\(A_i\\)\nと\n\\(A_j\\)\nがともに\n\\(p\\)\nの倍数なら、\n\\(GCD(A_i,A_j)\\)\nは\n\\(p\\)\nの倍数となるので、\n\\(\\{A_i\\}\\)\nはpairwise coprimeではありません。逆に、\n\\(\\{A_i\\}\\)\nがpairwise coprimeでないなら、\n\\(GCD(A_i,A_j) > 1\\)\nとなる\n\\(A_i,A_j\\)\nは、ともに\n\\(GCD(A_i,A_j)\\)\nの素因数\n\\(p\\)\nの倍数です）。\nしたがって、\n\\(A_i\\)\nたちを素因数分解し、素因子に重複があるかどうかを調べればよいです。このためには各\n\\(A_i\\)\nを高速に素因数分解できればよく、以下に述べる方法により、\n\\(A=\\max\\{A_i\\}\\)\nとして\n\\(O(A\\log\\log A+N\\log A)\\)\nで行うことができます。\nsetwise coprimeであるかどうかの判定は、GCDを計算するだけなので容易です。以上により全体で\n\\(O(A\\log\\log A + N\\log A)\\)\nで解けました。なおこの解法は適切な実装により\n\\(O(N+A)\\)\nになります。\n高速素因数分解\n問題：\n\\(A\\)\n以下の数が\n\\(N\\)\n個与えられる。全て素因数分解せよ。\n前計算としてエラトステネスの篩を行い、「その数をふるい落とした素数」を配列\n\\(D\\)\nに記録します。例えば\n\\(D[4]=D[6]=2,D[35]=5\\)\nです。\n\\(x\\)\nが素数のときは\n\\(D[x]=x\\)\nとしておきます。この配列はエラトステネスの篩と同様\n\\(O(A\\log\\log A)\\)\nで構築できます。\n\\(D[x]\\)\nは\n\\(x\\)\nを割り切る最小の素数なので、この配列\n\\(D\\)\nを利用すると素因数分解を行うときに「試し割り」をする必要がなくなり(\n\\(D[x]\\)\nで割ればよい)、1つの数の素因数分解が素因数の個数である\n\\(O(\\log A)\\)\nでできるようになります。",
+      "codes": [],
+      "text_sha256": "e2836f52609b1c12e185fbb353110deb5514c6f3a71f21f75a0772fad97b1035",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc177/abc177_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

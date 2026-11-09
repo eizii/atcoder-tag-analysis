@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc285_b",
+  "title": "Longest Uncommon Prefix",
+  "contests": [
+    {
+      "contest_id": "abc285",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 108,
+  "raw_difficulty": -123,
+  "contest_id": "abc285",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc285/tasks/abc285_b",
+  "statement": "配点 : 200 点 問題文 英小文字からなる長さ N の文字列 S が与えられます。 S の x 文字目 (1 \\le x \\le N) は S_x です。 i=1,2,\\dots,N-1 それぞれについて、以下の条件を全て満たす最大の非負整数 l を求めてください。 l+i \\le N である。 全ての 1 \\le k \\le l を満たす整数 k について、 S_{k} \\neq S_{k+i} を満たす。 なお、 l=0 は常に条件を満たすことに注意してください。 制約 N は 2 \\le N \\le 5000 を満たす整数 S は英小文字からなる長さ N の文字列 入力 入力は以下の形式で標準入力から与えられる。 N S 出力 N-1 行にわたって出力せよ。そのうち x 行目 (1 \\le x < N) には i=x とした場合の答えを整数として出力せよ。 入力例 1 6\nabcbac 出力例 1 5\n1\n2\n0\n1 この入力では、 S= abcbac です。 i=1 のとき、 S_1 \\neq S_2, S_2 \\neq S_3, \\dots ,S_5 \\neq S_6 であるため、 最大値は l=5 です。 i=2 のとき、 S_1 \\neq S_3 ですが S_2 = S_4 であるため、 最大値は l=1 です。 i=3 のとき、 S_1 \\neq S_4, S_2 \\neq S_5 ですが S_3 = S_6 であるため、 最大値は l=2 です。 i=4 のとき、 S_1 = S_5 であるため、 最大値は l=0 です。 i=5 のとき、 S_1 \\neq S_6 であるため、 最大値は l=1 です。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英小文字からなる長さ N の文字列 S が与えられます。 S の x 文字目 (1 \\le x \\le N) は S_x です。 i=1,2,\\dots,N-1 それぞれについて、以下の条件を全て満たす最大の非負整数 l を求めてください。 l+i \\le N である。 全ての 1 \\le k \\le l を満たす整数 k について、 S_{k} \\neq S_{k+i} を満たす。 なお、 l=0 は常に条件を満たすことに注意してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 N は 2 \\le N \\le 5000 を満たす整数 S は英小文字からなる長さ N の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N-1 行にわたって出力せよ。そのうち x 行目 (1 \\le x < N) には i=x とした場合の答えを整数として出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 6\nabcbac"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 5\n1\n2\n0\n1 この入力では、 S= abcbac です。 i=1 のとき、 S_1 \\neq S_2, S_2 \\neq S_3, \\dots ,S_5 \\neq S_6 であるため、 最大値は l=5 です。 i=2 のとき、 S_1 \\neq S_3 ですが S_2 = S_4 であるため、 最大値は l=1 です。 i=3 のとき、 S_1 \\neq S_4, S_2 \\neq S_5 ですが S_3 = S_6 であるため、 最大値は l=2 です。 i=4 のとき、 S_1 = S_5 であるため、 最大値は l=0 です。 i=5 のとき、 S_1 \\neq S_6 であるため、 最大値は l=1 です。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc285/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:06.884509+00:00",
+  "statement_sha256": "33d53af186c79289c8b6a504e23f4e878f5dd6cff100491d9631f78f2fb3f43e",
+  "editorials": []
+}

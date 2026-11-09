@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc432_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc432/editorial/14570",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n\\(3\\)\nつの整数を入力として受け取り、大きい順に並び替えた上で順番に出力する必要があります。いくつかの整数を小さい順や大きい順に並び替える操作は\nソート\nと呼ばれ、下記の実装例 (C++, Python) のように、主要なプログラミング言語においては元々から組み込まれている関数を呼ぶだけで実行できることがほとんどです。ただし、本問題では\n\\(3\\)\nつの整数を並び替えるだけなので、単純な条件分岐のみを用いて実現することも可能です。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    cin >> a >> b >> c;\n    vector<int> v = {a, b, c};\n    sort(v.begin(), v.end());\n    cout << v[2] << v[1] << v[0] << endl;\n}",
+        "a, b, c = input().split()\nv = sorted([a, b, c])\nprint(v[2] + v[1] + v[0])"
+      ],
+      "text_sha256": "50b1401de44372031deee4e40657d58979f5a33aad8c374483a685bae9677074",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc432/abc432_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc155_d",
+  "editorials": [
+    {
+      "text": "D: Pairs\n積が負のペア，0 のペア，正のペアの各個数は簡単に求まるので，答えが負・0・正のどれになるか\nはこれでわかります．\n答えが負になる場合は，負の数と正の数を1 つずつ選んでx 以上になるペアがいくつあるかを数\nえることが尺取り法によって可能なので，二分探索を用いて答えが求まります．\n答えが正になる場合も全く同様ですが，同じ要素を2 回選ぶこと，それを差し引くと各ペアをちょ\nうど2 回数えることを考慮しましょう．\n",
+      "text_sha256": "b47d374c8ab2c25c4a4196e7738b1f3392e0c4e0f3e114d141169dfcd5cafd2d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc155/abc155_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

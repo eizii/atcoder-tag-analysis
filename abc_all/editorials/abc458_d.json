@@ -1,0 +1,36 @@
+{
+  "problem_id": "abc458_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc458/editorial/20424",
+      "text": "黒板に書かれた整数の多重集合を\n\\(S\\)\nとします。\n\\(S\\)\nに対する要素の追加クエリが\n\\(Q\\)\n回くるので、それぞれに対して\n\\(S\\)\nの中央値を求めれば良いです。\nここで、\n\\(S\\)\nを以下の条件を満たすように\n\\(2\\)\nつの多重集合\n\\(S_1,S_2\\)\nに分けることを考えます。\n\\(|S_1|-|S_2|\\)\nは\n\\(0\\)\nまたは\n\\(1\\)\nである。\n\\(x \\in S_1,\\ y\\in S_2\\)\nに対し\n\\(x \\geq y\\)\nが成り立つ。\n直感的に言うと、\n\\(S\\)\nを大きい半分\n\\(S_1\\)\nと小さい半分\n\\(S_2\\)\nに分割するということです（ただし\n\\(|S|\\)\nが奇数である場合は\n\\(S_1\\)\nの方が要素が\n\\(1\\)\nつだけ多くなるようにする）。\nこのように分割すると、\n\\(S\\)\nの中央値は\n\\(S_1\\)\nの最小値と一致することが分かります。\nさらに、\n\\(S\\)\nへ\n\\(x\\)\nを追加するようなクエリは\n\\(S_1,S_2\\)\nに対して以下のように作用させることで対応できます：\n\\(x\\)\nが\n\\(\\min S_1\\)\n以上である場合、\n\\(S_1\\)\nに\n\\(x\\)\nを追加する。そうでない場合、\n\\(S_2\\)\nに\n\\(x\\)\nを追加する。（これにより\n\\(x \\in S_1,\\ y\\in S_2\\)\nに対し\n\\(x \\geq y\\)\nは保たれたままであるが、\n\\(|S_1|-|S_2| \\in \\lbrace 0,1\\rbrace\\)\nは成り立たない場合がある。）\n\\(|S_1| > |S_2|+1\\)\nである場合、\n\\(\\min S_1\\)\nを\n\\(S_1\\)\nから\n\\(1\\)\nつ削除し、代わりに\n\\(S_2\\)\nに追加する。\n\\(|S_2| > |S_1|+1\\)\nである場合、\n\\(\\max S_2\\)\nを\n\\(S_2\\)\nから\n\\(1\\)\nつ削除し、代わりに\n\\(S_1\\)\nに追加する。\nこれらの操作は\n\\(S_1,S_2\\)\nをそれぞれ優先度付きキューで表現することで簡単に実装することができます。\n以上を適切に実装することでこの問題に正答することができます。計算量は\n\\(O(Q \\log Q)\\)\nです。\n実装例(C++)\n実装例(Python3)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tios::sync_with_stdio(false);\n\tcin.tie(nullptr);\n\tint x;\n\tcin >> x;\n\tpriority_queue<int> L;\n\tpriority_queue<int, vector<int>, greater<int>> R;\n\tL.push(x);\n\tauto add = [&](int val) {\n\t\tif (val <= L.top()) {\n\t\t\tL.push(val);\n\t\t} else {\n\t\t\tR.push(val);\n\t\t}\n\t\tif (L.size() < R.size() + 1) {\n\t\t\tL.push(R.top());\n\t\t\tR.pop();\n\t\t}\n\t\tif (L.size() > R.size() + 1) {\n\t\t\tR.push(L.top());\n\t\t\tL.pop();\n\t\t}\n\t};\n\tint Q;\n\tcin >> Q;\n\twhile (Q--) {\n\t\tint a, b;\n\t\tcin >> a >> b;\n\t\tadd(a), add(b);\n\t\tcout << L.top() << '\\n';\n\t}\n\treturn 0;\n}",
+        "import sys\n\ninput = sys.stdin.readline\nfrom heapq import heappush, heappop\n\nL = [-int(input())]\nR = []\n\n\ndef add(x):\n    if x <= -L[0]:\n        heappush(L, -x)\n    else:\n        heappush(R, x)\n\n    if len(L) < len(R) + 1:\n        heappush(L, -heappop(R))\n    if len(L) > len(R) + 1:\n        heappush(R, -heappop(L))\n\n\nfor _ in range(int(input())):\n    a, b = map(int, input().split())\n    add(a), add(b)\n    print(-L[0])"
+      ],
+      "text_sha256": "fd5dc24daafc2bd1927a716f9ace83d9a264d73aede577680cfb408d38482498",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc458/abc458_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc458/editorial/20485",
+      "text": "\\(X,A_i,B_i\\)\nをまとめて座標圧縮し、 fenwick tree 上で二分探索を行うことで解けます。\n計算量は\n\\(O(N\\log N)\\)\nで、\n\\(O(N(\\log N)^2)\\)\n解法も通ると思われます。",
+      "codes": [],
+      "text_sha256": "a5e6311faefa9fac0ef845578c3f8cfcb2196bbc234a40fd859b7d0d3a0eb5c4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc458/abc458_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc458/editorial/20479",
+      "text": "共著 :\nmiroqqwy\nGCC拡張である #include  に含まれる tree を用いることで、set のように要素をソートした状態で管理しつつ、find_by_order により k 番目の要素へ\n\\( O(\\log N) \\)\nでアクセスできるデータ構造を扱うことができます。\nこの構造では、要素の挿入および k 番目の要素へのアクセスはいずれも\n\\( O(\\log N)\\)\nで行えるため、クエリ数を\n\\(Q\\)\nとすると、全体の計算量は\n\\( O(Q \\log Q) \\)\nとなり、十分高速にこの問題を解くことが出来ます。\nただし、tree は set と同様に要素の重複を許さないため、重複を扱う場合には pair<値, id> のように一意な識別子を付加して管理する必要があります（このとき、id は出力には影響しない補助的な値です）。\n実装例",
+      "codes": [],
+      "text_sha256": "670148c92c07d8d6a55ab648d5e2dee31f50e55ad1ed98bd06a8aaa6aa7e2978",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc458/abc458_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc313_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc313/editorial/6911",
+      "text": "はじめに、\n\\(S\\)\nの中で\n2\n以上の数字が隣り合っている箇所があったら答えは\n-1\nです。\nそうでない場合を考えます。たとえば\n\\(S=\\)\n1121131\nとします。操作を行うごとに\nS\nは以下のように変化します。\n1121131\n111211113\n11112111111\n11111211111\n111111211111\n\\(\\vdots\\)\n列を観察すると次のような事実が分かります。\n末尾に連なる連続した同じ数字 (上の例での\n3\nや\n111111\n) は長さが 1 ずつ減っていきやがて無くなる。\n末尾でない箇所の\n2\nから\n9\nは個数が変化しない。\n末尾でない箇所の連続する\n1\nは, 直後の数字の値を\n\\(x\\)\nとして\n\\(x-1\\)\n個ずつ増えていく。\n例えば先頭の\n11\nは, その直後の数字の値が\n\\(2\\)\nなので\n\\(2-1=1\\)\n個ずつ増える。\nこの法則のポイントは「同じ数字が連続する列は末尾の要素しか減っていかない」という点です。これを利用することで、\n\\(S\\)\nを連長圧縮 (Run Length Encoding) した列を持ち、連長圧縮した列の末尾を pop しながら\n\\(S\\)\nの文字数・操作回数をシミュレーションするアルゴリズムで解くことができるとわかります。(詳細は実装例を参照ください)\n計算量は\n\\(\\mathrm{O}(N)\\)\nで十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#include \"atcoder/modint.hpp\"\nusing mint = atcoder::modint998244353;\n\nvector<pair<char, int>> RunLengthEncoding(string& S) {\n  if (S.empty()) return {};\n  vector<pair<char, int>> ret;\n  char c = S[0];\n  int n = 1;\n  for (int i = 1; i < (int)S.size(); i++) {\n    if (S[i] == c)\n      n++;\n    else {\n      ret.emplace_back(c, n);\n      c = S[i], n = 1;\n    }\n  }\n  ret.emplace_back(c, n);\n  return ret;\n}\n\nint main() {\n  int N;\n  string S;\n  cin >> N >> S;\n  for (int i = 0; i + 1 < N; i++) {\n    if (S[i] >= '2' and S[i + 1] >= '2') {\n      cout << \"-1\\n\";\n      exit(0);\n    }\n  }\n  auto rle = RunLengthEncoding(S);\n  mint t = 0;\n  char last = '1';\n  while (!rle.empty()) {\n    char c;\n    mint n;\n    tie(c, n) = rle.back();\n    rle.pop_back();\n    if (c == '1') {\n      n += t * (last - '1');\n      t += n;\n    } else {\n      t += 1;\n    }\n    last = c;\n  }\n  cout << (t - 1).val() << \"\\n\";\n}"
+      ],
+      "text_sha256": "5363120ebcf4b86f7a93b479f6728b3126886a5b681836323416ccaf1431786e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc313/abc313_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc313/editorial/6933",
+      "text": "公式解説ではランレングス圧縮を用いていますが、使わなくても実装できます。詳しくは以下の実装例を参照してください。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#include \"atcoder/modint.hpp\"\nusing mint = atcoder::modint998244353;\n\nint main() {\n  int N;\n  string S;\n  cin >> N >> S;\n  for(int i=0; i+1<N; i++){\n    if(S[i]!='1' && S[i+1]!='1'){\n      cout << \"-1\";\n      return 0;\n    }\n  }\n  mint ans=0;\n  for(int i=N-1; i>=1; i--){\n    ans++; //S[i]を消すのに1手かかる\n    ans += ans*(S[i]-'1'); //S[i]によって増える'1'の個数をansに加算\n  }\n  cout << ans.val();\n  return 0;\n}"
+      ],
+      "text_sha256": "5aa0bf44f59ae4f628bc10bdb8f847bf1ffe6cf0e464671065b0ca8dcb512160",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc313/abc313_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

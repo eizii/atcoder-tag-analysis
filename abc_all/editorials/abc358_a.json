@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc358_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc358/editorial/10219",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n\\(2\\)\nつの文字列を入力として受け取ったのち、問題文で指示されている通りに条件分岐を行って答えを出力すれば良いです。条件分岐の際に必要な条件式では、文字列の一致比較および\n\\(2\\)\nつの条件の論理積を取る必要があります。これらを具体的に実現する方法については、下記の実装例 (C++, Python) 等を参考にしてください。\n実装例  (C++) :\n実装例  (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    string s, t;\n    cin >> s >> t;\n    if (s == \"AtCoder\" && t == \"Land\") {\n        cout << \"Yes\" << endl;\n    } else {\n        cout << \"No\" << endl;\n    }\n}",
+        "s, t = input().split()\nif s == \"AtCoder\" and t == \"Land\":\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "0de95ee99736bdecb5f8baccf53eea9605dbcde431f48a95bde2285ebfb6f9d8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc358/abc358_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

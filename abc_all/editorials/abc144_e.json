@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc144_e",
+  "editorials": [
+    {
+      "text": "E: Gluttony\nメンバーをAi で昇順に，食べ物をFi で降順にソートし，i 番目のメンバーにi 番目の食べ物を担\n当させるのが最適です．以下にそれを示します．\nbabababababababababababababababababab\nある2 人X, Y の，修行前の消化コストAx, Ay および担当する食べ物の食べにくさFx, Fy\nにおいて，Ax < Ay かつFx < Fy が成り立つとします．このとき，修行後のコストを\nA′\nx, A′\ny とおくと，\n A′\nx < A′\ny のとき，両名の担当する食べ物のみを入れ替えることで，\n A′\nx ≥A′\ny のとき，両名の担当する食べ物と修行後のコストを入れ替えることで，\n修行の総数も成績も，何も損することなく両名の担当をswap できます．これを繰り返すと\n有限回で行き詰まり，その結果できた選び方は先述の条件を満たします．\nあとは「全てのメンバーについて完食にかかる時間をx 以下にできるか」という問題を考えて，二\n分探索をすることで解けます．時間計算量はΘ(N log X) です(ここでX は答えの値)．\n",
+      "text_sha256": "9b79d78eb983f7fc7b3f68ef6e9ed7196c385b935ed99f10ab99ed1237155646",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc144/abc144_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

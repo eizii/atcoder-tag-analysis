@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc055_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc069/editorial.pdf",
+      "text": "A : Restaurant\n\n 「何回200 円もらえるか？」というのが本質的な問題です．n/15 とすることでC++ などの\n\nプログラミング言語ではn を15 で割った値の小数点以下切り捨てを求めることが可能です．\n\n200 ∗n/15 としてしまうと、正しい値を求めることができないことにも注意が必要です．\n\n#include <iostream>\n\nusing namespace std;\n\nint main(){\n\n    int n;\n\n    cin >> n;\n\n    cout<<n*800-(n/15)*200<<endl;\n\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "38dc7a4e8e781d08851d140158f91c86d1e5e41871756aab2db2970fff7da63a"
+    }
+  ],
+  "status": "available"
+}

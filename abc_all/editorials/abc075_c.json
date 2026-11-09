@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc075_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc075/editorial.pdf",
+      "text": "C:  Bridge\n\n  ·ͣɺ֤ ลʹ͍ͭͯ ڮ Ͱ͋Δ͔Λ൑ఆ͢Δ͜ͱΛ ߟ ͑·͢ɻάϥϑ͔ΒลΛऔΓআ͍ͨͱ͖ʹɺඇ࿈ ݁ άϥϑ\n\n ͱͳΔลΛ ڮ ͱ ݺ ͿͷͰɺ͜ͷఆ ٛ ʹͦͬͯௐ΂͍͖ͯ·͢ɻ͕ͨͬͯ͠ɺ֤ ลΛάϥϑ͔ΒऔΓআ͍ͯɺάϥ\n ϑ͕࿈݁Ͱ͋Δ͔Λ൑ఆ͠·͢ɻάϥϑͷ࿈݁൑ఆʹ͸ɺਂ͞༏ઌ୳ࡧ (DFS)ɺ෯༏ઌ୳ࡧ (BFS)ɺUnion ﬁndɺ\n ϫʔγϟϧϑϩΠυ๏ͳͲ͕ ࢖ ͑·͢ɻࠓ ճͷ໰୊ͷ੍໿Ͱ͋Ε͹ɺ͜͜Ͱ ڍ ͛ͨΞϧΰϦζϜͷͲΕΛ ࢖ͬͯ\n\n ΋ɺे෼ʹ ؒ ʹ߹͍·͢ɻ\n  ͜͜Ͱ͸ɺάϥϑͷ࿈݁൑ఆͷͨΊͷ DFS ͷ࣮૷ʹ͍ͭͯઆ໌͠·͢ɻάϥϑͷ࿈݁൑ఆͷͨΊͷ DFS ͸ɺҎ\n Լͷ ٙࣅίʔυͰදΘ͞ΕΔ ࠶ؼؔ਺Ͱ࣮૷͢Δ͜ͱ͕Ͱ͖·͢ɻ\n\n     1: procedure DFS( ݱࡏ ͷ௖఺v)\n     2:  ௖఺v Λ๚໰ࡁΈʹ͢Δ\n     3:    for ௖఺v2: ௖఺v ʹྡ઀͍ͯ͠Δ͔ͭະ๚໰do\n\n     4:      DFS(v2)\n\n     5:   end for\n\n     6:    return\n\n     7: end procedure\n\n\n  ࿈݁൑ఆΛ͢Δࡍʹ͸ɺશͯͷ௖఺Λະ๚໰ʹ͔ͯ͠Βɺ೚ҙͷ 1 ͭͷ௖఺͔Β DFS Λݺͼ·͢ɻͦͷޙʹશ\n ͯͷ௖఺͕๚໰ࡁΈͳΒ͹࿈݁Ͱ͋Γɺͦ͏Ͱͳ͍৔߹͸ඇ࿈݁Ͱ͢ɻ·ͨɺάϥϑͷลͷܨ͕Γ͸ྡ઀ߦྻͰ؅\n ཧͰ͖ɺྡ઀ ߦྻ͸ 2 ࣍ݩ഑ྻͰ࣮૷͢Δ͜ͱ͕Ͱ͖·͢ɻ\n  Ҏ্Λ·ͱΊΔͱɺ֤ ลΛάϥϑ͔ΒऔΓআ͍ͯɺάϥϑ͕࿈ ݁ Ͱ͋Δ͔Λ൑ఆͯ͠ɺඇ࿈ ݁ ͱͳΔ৔ ߹ Λ਺\n ্͑͛·͢ɻDFS Λ༻͍ͨ৔ ߹ ͷ ࣌ؒܭࢉ ྔ͸ɺάϥϑͷ࿈ ݁ ൑ఆʹ O(N + M) Ͱ͔͔ΔͨΊɺશମͷ ࣌ؒܭ\n ࢉྔ͸ O(M(N + M)) ͱͳΓؒʹ߹͍·͢ɻ\n\n\n  C++ͷίʔυྫ(ྡ઀ ߦྻͰάϥϑΛ؅ཧͯ͠ɺDFS Ͱ࿈݁൑ఆ͢Δ)\n\n\n\n 1 const int limit = 50;\n\n\n 2\n\n 3 int n, m;\n 4 int a[limit], b[limit];\n\n\n 5\n\n 6 bool graph[limit][limit];\n\n 7 bool visited[limit];\n\n\n 8\n\n 9 void dfs(int v) {\n\n10     visited[v] = true;\n11     for (int v2 = 0; v2 < n; ++v2) {\n\n12         if (graph[v][v2] == false) continue;\n13         if (visited[v2] == true) continue;\n\n14         dfs(v2);\n15     }\n\n16 }\n\n\n17\n\n18 int main(void) {\n\n\n                                                  3\n\f\n19     cin >> n >> m;\n\n\n20\n\n21     for (int i = 0; i < m; ++i) {\n\n22         cin >> a[i] >> b[i];\n\n23         a[i]--, b[i]--;\n\n24         graph[a[i]][b[i]] = graph[b[i]][a[i]] = true;\n\n25     }\n\n\n26\n\n27     int ans = 0;\n\n\n28\n\n29     for (int i = 0; i < m; ++i) {\n\n30         graph[a[i]][b[i]] = graph[b[i]][a[i]] = false;\n\n\n31\n\n32         for (int j = 0; j < n; ++j) visited[j] = false;\n\n\n33\n\n34         dfs(0);\n\n\n35\n\n36         bool bridge = false;\n\n37         for (int j = 0; j < n; ++j) if (visited[j] == false) bridge = true;\n\n38         if (bridge) ans += 1;\n\n\n39\n\n40         graph[a[i]][b[i]] = graph[b[i]][a[i]] = true;\n\n41     }\n\n\n42\n\n43     cout << ans << endl;\n\n\n44\n\n45     return 0;\n\n46 }\n\n\n\n\n\n                                                  4",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "89318a4839221abd3e167af9418bbb0b5261ee89999307834b7fa4b27dfca05f"
+    }
+  ],
+  "status": "available"
+}

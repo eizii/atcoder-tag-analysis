@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc179_e",
+  "title": "Sequence Sum",
+  "contests": [
+    {
+      "contest_id": "abc179",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1175,
+  "raw_difficulty": 1175,
+  "contest_id": "abc179",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc179/tasks/abc179_e",
+  "statement": "配点 : 500 点 問題文 x を m で割った余りを f(x,m) と表します。 初期値 A_1=X および漸化式 A_{n+1}= f(A_n^2, M) で定まる数列を A とします。 \\displaystyle{\\sum_{i=1}^N A_i} を求めてください。 制約 1 \\leq N \\leq 10^{10} 0 \\leq X < M \\leq 10^5 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N X M 出力 \\displaystyle{\\sum_{i=1}^N A_i} を出力せよ。 入力例 1 6 2 1001 出力例 1 1369 数列 A は 2,4,16,256,471,620,\\ldots となるので、答えは 2+4+16+256+471+620=1369 となります。 入力例 2 1000 2 16 出力例 2 6 数列 A は 2,4,0,0,\\ldots となるので、答えは 6 となります。 入力例 3 10000000000 10 99959 出力例 3 492443256176507",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 x を m で割った余りを f(x,m) と表します。 初期値 A_1=X および漸化式 A_{n+1}= f(A_n^2, M) で定まる数列を A とします。 \\displaystyle{\\sum_{i=1}^N A_i} を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 10^{10} 0 \\leq X < M \\leq 10^5 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N X M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 \\displaystyle{\\sum_{i=1}^N A_i} を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 6 2 1001"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1369 数列 A は 2,4,16,256,471,620,\\ldots となるので、答えは 2+4+16+256+471+620=1369 となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 1000 2 16"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 6 数列 A は 2,4,0,0,\\ldots となるので、答えは 6 となります。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10000000000 10 99959"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 492443256176507"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc179/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:35:53.262851+00:00",
+  "statement_sha256": "146de1575a10e85bb5eb5f7839d958f13b41098fda96873337bb4f39854cfe5a",
+  "editorials": []
+}

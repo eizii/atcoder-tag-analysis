@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc482_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc482/editorial/28016",
+      "text": "この問題では行と列を別々に考えることがポイントです。なぜかというと、クエリ 1 u d ではそれぞれの駒について \\[u \\leq R_i \\leq d\\] を満たす \\(i\\) の個数を数えればよく、このとき列番号 \\(C_i\\) は答えに影響しません。同様にクエリ 2 l r では \\[l \\leq C_i \\leq r\\] を満たす \\(i\\) の個数を数えればよく、このとき行番号 \\(R_i\\) は答えに影響しません。ここから、行番号と列番号は別々に考えてよいことが分かります。 次の \\(2\\) つの配列を作ります。 すべての駒の行番号を並べた配列 \\(A=(R_1,R_2,\\dots,R_N)\\) すべての駒の列番号を並べた配列 \\(B=(C_1,C_2,\\dots,C_N)\\) この 2 個を昇順にソートします。すると、どちらの種類のクエリも、ソート済配列の中に、値が \\(L\\) 以上 \\(R\\) 以下である要素が何個あるかという問題になります。 言い換えた後の問題は二分探索を用いてクエリあたり \\(\\mathrm{O}(\\log N)\\) で計算できます。よってこの問題を \\(\\mathrm{O}((N+Q) \\log N)\\) で解くことが出来て、これは十分高速です。 実装例 (PyPy) C++ などの他の言語と同様に、PyPy でも入出力高速化が必要となる場面があります。実装例では入出力高速化を行っているので参考にしてみてください。",
+      "codes": [
+        "import bisect\nimport sys\n\ninput = sys.stdin.readline\nH, W, N, Q = [int(x) for x in input().split()]\nA, B = [], []\nfor n in range(N):\n    r, c = [int(x) for x in input().split()]\n    A.append(r)\n    B.append(c)\nA.sort()\nB.sort()\nans = []\nfor q in range(Q):\n    cmd, l, r = [int(x) for x in input().split()]\n    if cmd == 1:\n        ans.append(bisect.bisect_right(A, r) - bisect.bisect_left(A, l))\n    else:\n        ans.append(bisect.bisect_right(B, r) - bisect.bisect_left(B, l))\nprint(\"\\n\".join(map(str, ans)))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "d76ef6621bf5ff968a8fb1da2e5fd671235063e46448a5de3959c20fa8cc1680"
+    }
+  ],
+  "status": "available"
+}

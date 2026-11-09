@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc223_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc223/editorial/2774",
+      "text": "まず、長さ\n\\(M\\)\nの括弧列\n\\(S\\)\nが正しい括弧列であるかを判定する方法を考えます。\n\\(S\\)\nの\n(\nを\n\\(+1\\)\n、\n)\nを\n\\(-1\\)\nに置き換えた数列を\n\\(A=(A_1,A_2,\\ldots,A_M)\\)\nとし、\n\\(A\\)\nの前から累積和をとった数列を\n\\(B=(B_0,B_1,\\ldots,B_M)\\)\nとします。例えば、\n\\(S=\\)\n(())\nのとき\n\\(A=(1,1,-1,-1)\\)\n、\n\\(B=(0,1,2,1,0)\\)\nです。このとき、\n\\(S\\)\nが正しい括弧列であるための条件は以下です。\n\\(B_M=0\\)\nであり、かつ\n\\(B\\)\nの要素の最小値が\n\\(0\\)\nである\n元の問題でのクエリは区間に対するクエリなので、セグメント木を用いることを考えます。セグメント木の各ノードには対応する連続部分文字列に対する\n\\(B\\)\nの要素の最小値と\n\\(B_M\\)\nの値を管理しておきます。これらの情報から\n\\(2\\)\nつの区間を\n\\(O(1)\\)\nでマージすることができるので、一点更新区間取得のセグメント木を用いることでこの問題が解けました。\n別解として、\n\\(B\\)\n自体をセグ木で管理すると、区間加算区間最小値取得のセグメント木を用いることで解くことも可能です。\n実装例 (C++)\n実装例（C++）（別解）",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/all>\nusing namespace std;\nusing namespace atcoder;\n\npair<int, int> op(pair<int, int> a,pair<int, int> b){\n    return make_pair(min(a.first, a.second + b.first), a.second + b.second);\n}\npair<int, int> e(){\n    return make_pair(0, 0);\n}\n\nint main(){\n    int n, q; cin >> n >> q;\n    string s; cin >> s;\n    vector<pair<int, int>> v(n);\n    for(int i = 0; i < n; i++){\n        if(s[i] == '(') v[i] = make_pair(0, 1);\n        else v[i] = make_pair(-1, -1);\n    }\n    segtree<pair<int, int>, op, e> seg(v);\n    for(int i = 0; i < q; i++){\n        int t, l, r; cin >> t >> l >> r; l--; r--;\n        if(t == 1){\n            swap(v[l], v[r]);\n            seg.set(l, v[l]);\n            seg.set(r, v[r]);\n        }\n        else{\n            if(seg.prod(l, r + 1) == make_pair(0, 0)) cout << \"Yes\" << endl;\n            else cout << \"No\" << endl;\n        }\n    }\n}",
+        "#include <bits/stdc++.h>\n#include <atcoder/all>\nusing namespace std;\nusing namespace atcoder;\n\nint op(int a, int b){ return min(a, b); }\nint e(){ return 1001001001; }\nint mapping(int f, int x){ return f+x; }\nint composition(int f, int g){ return f+g; }\nint id(){ return 0; }\n\nint main(){\n    int n, q; cin >> n >> q;\n    string s; cin >> s;\n    vector<int> v(n + 1);\n    for(int i = 0; i < n; i++){\n        if(s[i] == '(') v[i + 1] = v[i] + 1;\n        else v[i + 1] = v[i] - 1;\n    }\n    lazy_segtree<int, op, e, int, mapping, composition, id> seg(v);\n    for(int i = 0; i < q; i++){\n        int t, l, r; cin >> t >> l >> r;\n        if(t == 1){\n            if(s[l - 1] == '(' && s[r - 1] == ')') seg.apply(l, r, -2);\n            if(s[l - 1] == ')' && s[r - 1] == '(') seg.apply(l, r, 2);\n            swap(s[l - 1], s[r - 1]);\n        }\n        else{\n            if(seg.prod(l - 1, r + 1) == seg.get(l - 1) && seg.get(l - 1) == seg.get(r)) cout << \"Yes\" << endl;\n            else cout << \"No\" << endl;\n        }\n    }\n}"
+      ],
+      "text_sha256": "3d6b0cbaa9afd8f5a19a7b49931268b8007395a27e15762bbe6885551def768d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc223/abc223_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

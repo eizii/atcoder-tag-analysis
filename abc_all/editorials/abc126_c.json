@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc126_c",
+  "editorials": [
+    {
+      "text": "C: Dice and Coin\n最初に出たサイコロの目ごとに処理していき、最後にそれぞれの確率を合計します。\nそれぞれ、何回コインの表を出し続けることで初めて得点がK 以上になるかは、ループで数えることで求\nめることができます。この回数だけコインが表を出し続けることが必要です。(途中で裏が出てしまったら得\n点は0 となるので、勝つことはできません)。\nサイコロを1 回振りi (1 ≤i ≤N) が出る確率は1/N です。そのそれぞれに対し、t 回コインの表を出し\n続ける必要がある場合、成功率は0.5t となります。1/N × 0.5t のすべての合計が求める答えになります。\n以上の方法で計算すると、計算量はO(NlogK) となり、間に合います。\nC++ での実装例は以下の通りです。\nint main(){\nint a,b;scanf(\"%d%d\",&a,&b);\ndouble ret=0;\nfor(int i=1;i<=a;i++){\ndouble tmp=1.0/a;\nint now=i;\nwhile(now<b){\nnow*=2;\ntmp/=2;\n}\nret+=tmp;\n}\nprintf(\"%.12f\\n\",ret);\n}\n",
+      "text_sha256": "5c230099f624f184626e32d6e7fc6d590862d2637c4d719efb10282ee1dbca20",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc126/abc126_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc308_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc308/editorial/6705",
+      "text": "各マスを頂点とした有向グラフ\n\\(G\\)\nを考えます。以下の条件を満たすマスの組\n\\((i_1,j_1),(i_2,j_2)\\)\nに対して、\n\\((i_1,j_1)\\)\nから\n\\((i_2,j_2)\\)\nに向かって辺を張ります。\n\\((i_1,j_1)\\)\nと\n\\((i_2,j_2)\\)\nは辺で隣接する\n\\((i_1,j_1)\\)\nに書かれた文字は\ns\n,\nn\n,\nu\n,\nk\n,\ne\nのいずれかである\n\\((i_1,j_1)\\)\nに書かれた文字が\ns\nであるならば、\n\\((i_2,j_2)\\)\nに書かれた文字は\nn\nである\n\\((i_1,j_1)\\)\nに書かれた文字が\nn\nであるならば、\n\\((i_2,j_2)\\)\nに書かれた文字は\nu\nである\n\\(\\vdots\\)\n\\((i_1,j_1)\\)\nに書かれた文字が\ne\nであるならば、\n\\((i_2,j_2)\\)\nに書かれた文字は\ns\nである\nこのとき、問題文中の条件は、\n\\(G\\)\n上で\n\\((1,1)\\)\nから\n\\((H,W)\\)\nへのパスが存在することと同値です。よって、\n\\(G\\)\n上で DFS や BFS をすることで、この問題を\n\\(O(HW)\\)\nで解くことができます。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nconst vector<int> dx = {0, 0, 1, -1};\nconst vector<int> dy = {1, -1, 0, 0};\n\nint main() {\n    int h, w;\n    cin >> h >> w;\n    vector<string> s(h);\n    for (int i = 0; i < h; i++) cin >> s[i];\n    if (s[0][0] != 's') {\n        cout << \"No\" << endl;\n        return 0;\n    }\n    vector<char> next(256);\n    next['s'] = 'n';\n    next['n'] = 'u';\n    next['u'] = 'k';\n    next['k'] = 'e';\n    next['e'] = 's';\n    vector seen(h, vector<bool>(w));\n    auto dfs = [&](auto &dfs, int i, int j) -> void {\n        seen[i][j] = true;\n        for (int k = 0; k < 4; k++) {\n            int ni = i + dx[k];\n            int nj = j + dy[k];\n            if (ni < 0 or ni >= h or nj < 0 or nj >= w) continue;\n            if (s[ni][nj] != next[s[i][j]]) continue;\n            if (seen[ni][nj]) continue;\n            dfs(dfs, ni, nj);\n        }\n    };\n    dfs(dfs, 0, 0);\n    cout << (seen[h - 1][w - 1] ? \"Yes\" : \"No\") << endl;\n}"
+      ],
+      "text_sha256": "b7aa935907ee1d071edc4ee6bdfc2e1a66e54695679cc65b8cc09a47f7d57189",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc308/abc308_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

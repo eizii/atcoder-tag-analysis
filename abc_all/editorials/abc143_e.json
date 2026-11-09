@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc143_e",
+  "editorials": [
+    {
+      "text": "E: Travel by Car\nワーシャルフロイド法というアルゴリズムを用いると、O\n(\nN 3)\nで全点間の最短距離を求めること\nが出来ます。\nまず、各町を頂点とし、各道を辺とした重み付き無向グラフを作ります。各辺の距離は、問題におけ\nる道の距離とします。\nこのグラフにワーシャルフロイド法を適用することで、各町間の最短距離を求めることが出来ます。\n次に、もう1 つグラフを作ります。各町を頂点とし、最短距離がL 以下である町の組の間に、距離1\nの辺を張ります。\nこのグラフにワーシャルフロイド法を適用することで、各町間を移動する際に必要な燃料補給回数の\n最小値が求められます。\nあとは、この結果に基づいて各クエリに答えれば良いです。時間計算量はO\n(\nN 3 + Q\n)\nです。\nC++ による解答例:https://atcoder.jp/contests/abc143/submissions/8034843\n",
+      "text_sha256": "dc8c5d53913dd6a9694bd272a4285032971b207967cdb9e1951b4fd13afbf5fe",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc143/abc143_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

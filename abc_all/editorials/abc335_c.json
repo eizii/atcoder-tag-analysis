@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc335_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc335/editorial/9026",
+      "text": "\\(A[i]=\\)\nパーツ\n\\(i\\)\nが存在する座標\nという配列のようなもので情報を持つことを考えます。クエリを処理するために必要な操作は\n末尾の要素を取り除く\n先頭に要素を追加する\n\\(p\\)\n番目要素を答える\nの\n\\(3\\)\n種類です。これらの処理を配列に対して直接行うと「先頭に要素を追加する」に\n\\(\\Omega(N)\\)\n時間かかるため、実行時間制限に間に合わせることは極めて困難です。\nC++ など、deque に対する添字アクセスが高速な言語では、deque を使うことで AC することができます。\n実装例(C++)\nPython など、deque に対する添字アクセスが高速でない言語では、配列をリバースし「先頭の要素を取り除く」処理を実際には行わないことで、すべての処理を高速に行うことができます。\n実装例(Python)",
+      "codes": [],
+      "text_sha256": "ce7413fb5aaa53bf0b17aa72888143762121f8d11ae1cc2868598a0f14c4fb0a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc335/abc335_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc335/editorial/9053",
+      "text": "頭が\n\\(N\\)\n個だと思うと全ての頭を移動させる処理が必要になり、ランダムアクセス可能なDequeが無い場合には実装が難しくなります。\nそこで、問題文を次のように言い換えましょう。\n龍は頭を一つ持ち、最初の頭の座標は\n\\((N, 0)\\)\nです。\n龍が移動するたび、頭の残像が元々頭があった座標に最大\n\\(N-1\\)\n個まで残ります。\nこの言い換えの元では全ての頭を管理する必要はなく、1個の頭の軌跡が分かれば良いことになります。\nこれは頭の軌跡を履歴として保持すればよく、必要な操作は以下の二つになります。\n末尾に新しい頭の座標を追加する\n末尾から見て\n\\(p\\)\n個目に入っている座標を出力する\nこれはどちらも動的配列(vectorやArrayListなど)を用いれば\n\\(O(1)\\)\nで解くことができます。",
+      "codes": [
+        "import java.util.Scanner\nimport java.awt.Point\nfun main() {\n  Scanner(System.`in`).use { sc -> \n    val N = sc.nextInt()\n    val Q = sc.nextInt()\n    val heads = MutableList(N) { Point(N - it, 0) } // 最初の頭の座標を、N-1回の頭1の移動だと思って設定する\n    repeat(Q) {\n      if (sc.nextInt() == 1) {\n        when(sc.next()) { // Rの途中まで書いたらGitHub Copilotが全部書いてくれて便利だった\n          \"R\" -> heads.add(Point(heads.get(heads.size - 1).x + 1, heads.get(heads.size - 1).y))\n          \"L\" -> heads.add(Point(heads.get(heads.size - 1).x - 1, heads.get(heads.size - 1).y))\n          \"U\" -> heads.add(Point(heads.get(heads.size - 1).x, heads.get(heads.size - 1).y + 1))\n          \"D\" -> heads.add(Point(heads.get(heads.size - 1).x, heads.get(heads.size - 1).y - 1))\n        }\n      } else {\n        val p = sc.nextInt() // 末尾から見てp個目=p-1個前の頭の残像の座標\n        println(\"${heads.get(heads.size - p).x} ${heads.get(heads.size - p).y}\")\n      }\n    }\n  }\n}"
+      ],
+      "text_sha256": "b53bf3312f4b1f2689dc53c87994dd697c88e9809dc2449b1c4da887d8241756",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc335/abc335_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

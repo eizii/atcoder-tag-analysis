@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc427_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc427/editorial/14194",
+      "text": "まず、\\(N\\) 個の頂点をそれぞれ白か黒で塗る方法を固定して、次の条件を満たすために削除する必要がある辺の本数を求める問題を考えます。\nどの辺についても、その辺が結んでいるふたつの頂点に塗られた色は異なる。\nこれは、同じ色の頂点を結んでいる辺の本数と等しいため、\\(O(M)\\) 時間で求めることができます。\nこれを \\(N\\) 頂点の塗り方 \\(2 ^ N\\) 通りすべてに対して求めたときの最小値 \\(m\\) がもとの問題の答えになります。\nどのような塗り方に対しても、上記の条件を満たすように辺を削除したあとに得られるグラフは二部グラフになっています。\nよって、\\(m\\) はもとの問題の答え以上です（つまり、\\(m\\) 本削除することで二部グラフにすることができる）。\nまた、最適な（削除する辺の本数が最小であるような）操作で得られた二部グラフは、適切に白と黒で頂点を塗り分けることで上の条件を満たすようにすることができます。\n\\(m\\) はこの塗り方も含めたすべての塗り方にわたって削除する必要がある辺の本数の最小値を求めているため、\\(m\\) はもとの問題の答え以下です（つまり、二部グラフにするためには \\(m\\) 本以上削除する必要がある）。\n以上より、もとの問題の答えが \\(m\\) と等しいことが示されました。\nよって、\\(O(2 ^ NM)\\) 時間でこの問題を解くことができました。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <utility>\n#include <vector>\n\nint main() {\n    using namespace std;\n    int N, M;\n    cin >> N >> M;\n    vector<pair<int, int>> edges(M);\n    for (auto&& [u, v] : edges) {\n        cin >> u >> v;\n        --u; // 0-indexed にしておく\n        --v;\n    }\n\n    int ans = M;\n    // 2^N 通りの塗り方を全部探索する\n    for (int bit = 0; bit < 1 << N; ++bit) {\n        int delete_count = 0;\n        for (const auto& [u, v] : edges) { // それぞれの辺を見て\n            if ((1 & (bit >> u)) == (1 & (bit >> v))) // 結んでいる頂点が同じ色で塗られていたら\n                ++delete_count; // カウントを増やす\n        }\n        ans = min(ans, delete_count); // 全部の塗り方にわたる最小値が答え\n    }\n    cout << ans << endl;\n    return 0;\n}",
+        "N, M = map(int, input().split())\n\nedges = [tuple(map(int, input().split())) for _ in range(M)]\n\nans = M\n# 2^N 通りの塗り方を全部探索する\nfor bit in range(2 ** N):\n    delete_count = 0\n    for u, v in edges: # それぞれの辺を見て\n        if (1 & (bit >> u)) == (1 & (bit >> v)): # 結んでいる頂点が同じ色で塗られていたら\n                delete_count += 1 # カウントを増やす\n    ans = min(ans, delete_count)\n\nprint(ans)"
+      ],
+      "text_sha256": "1a061ee0500382d66612192e028537a87eb811d78e6552fa5f433eb8c1340be6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc427/abc427_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

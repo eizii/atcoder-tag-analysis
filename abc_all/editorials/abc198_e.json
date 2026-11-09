@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc198_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc198/editorial/540",
+      "text": "この問題はDFSにより解くことが出来ます。\n「頂点1からいまいる頂点までの経路上に存在する各色の頂点の個数」の配列を用意しておき、頂点への進入/退出時にこれを更新すればよいです。\nこの配列の更新は\n\\(O(1)\\)\nであり、この配列を使えばよい頂点かどうかの判定は\n\\(O(1)\\)\nで行えるので、全体で\n\\(O(N)\\)\nで解けました。",
+      "codes": [],
+      "text_sha256": "ab57dcc468eb1845cf1118074bf67ac9f20e75f923b8b0b6d566abfd5e22cd87",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc198/abc198_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

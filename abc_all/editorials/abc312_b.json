@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc312_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6855",
+      "text": "\\((i,j)\\)\nの辞書順に「上から\n\\(i\\)\n行目左から\n\\(j\\)\n列目を左上とする縦\n\\(9\\)\nマス横\n\\(9\\)\nマスの領域がTaK Code の条件を満たすか」を判定し、満たすならばその場で\n\\((i,j)\\)\nを出力すればよいです。\n配列外参照をしないよう、\n\\(i,j\\)\nのループ範囲に注意してください。\n判定部分は次のように、真偽値を返す関数を用意します。\nwriter解(C)",
+      "codes": [
+        "for i = 1..N-8 :\n  for j = 1..M-8 :\n    if (i,j)を左上とする領域が条件を満たす:\n      print(i,j)",
+        "func check(i, j):\n  // 左上の黒をチェック\n  for ii = 0..2 :\n    for jj = 0..2 :\n      if S[i+ii][j+jj] != '#':\n        return false\n  // 右下の黒をチェック\n  for ii = 6..8 :\n    for jj = 6..8 :\n      if S[i+ii][j+jj] != '#':\n        return false\n  // 左上の白をチェック\n  for ii = 0..3:\n    if S[i+ii][j+3] != '.':\n      return false\n  for jj = 0..3:\n    if S[i+3][j+jj] != '.':\n      return false\n  //右下の白をチェック\n  for ii = 5..8:\n    if S[i+ii][j+5] != '.':\n      return false\n  for jj = 5..8:\n    if S[i+5][j+jj] != '.':\n      return false\n  // 全ての条件を満たす\n  return true"
+      ],
+      "text_sha256": "2981a97e4d638bb573b104ce3a9fc6a2478fa2155634e55594d063644eb0e93c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6857",
+      "text": "入出力例 1 の説明に以下のテキストがありました。\nこれをコードに埋め込むことで実装が多少楽になるかもしれません。\n実装例 (Python)",
+      "codes": [
+        "###.?????\n###.?????\n###.?????\n....?????\n?????????\n?????....\n?????.###\n?????.###\n?????.###",
+        "N, M = map(int, input().split())\nS = [input() for _ in range(N)]\ntarget = [\n    '###.?????',\n    '###.?????',\n    '###.?????',\n    '....?????',\n    '?????????',\n    '?????....',\n    '?????.###',\n    '?????.###',\n    '?????.###'\n]\nn, m = len(target), len(target[0])\n\nfor y in range(N - n + 1):\n    for x in range(M - m + 1):\n        ok = True\n        for dy in range(n):\n            for dx in range(m):\n                ok &= S[y + dy][x + dx] == target[dy][dx] or target[dy][dx] == '?'\n        if ok:\n            print(y + 1, x + 1)"
+      ],
+      "text_sha256": "77150ac1c2dff880db3ddde71b00a0ba850e1586a47f0fb2a2b58ea442f0f011",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

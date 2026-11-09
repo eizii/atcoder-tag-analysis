@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc460_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc460/editorial/21009",
+      "text": "\\(y\\)\nの桁数を\n\\(d\\)\nとすると\n\\[\\mathrm{concat}(x,y) = x \\cdot 10^d + y\\]\nであり、条件は\n\\[\n\\begin{aligned}\n\\mathrm{concat}(x,y) &\\equiv x+y \\pmod{M}\\\\\n\\iff x \\cdot10^d + y &\\equiv x+y \\pmod{M} \\\\\n\\iff (10^d - 1) x &\\equiv 0 \\pmod{M}\n\\end{aligned}\n\\]\nと同値変形できます。このことから\n\\(x\\)\n、および\n\\(y\\)\nの桁数\n\\(d\\)\nのみによって条件を満たすかどうかが決まることがわかります。\n\\(y\\)\nの桁数\n\\(d\\)\nは\n\\(1 \\leq d \\leq 19\\)\nを満たします。それぞれの\n\\(d\\)\nに対して問題を解くことを考えます。つまり、\n\\(d\\)\nを固定して考えましょう。求めたい\n\\(x\\)\nは\n\\[(10^d - 1) x \\equiv 0 \\pmod{M}\\]\nを満たす\n\\(x\\)\nです。ここで\n\\(g = \\gcd(10^d - 1, M)\\)\nと置くと条件は\n\\[x \\equiv 0 \\pmod{M / g}\\]\nと等価です。よって条件を満たす\n\\(N\\)\n以下の正整数\n\\(x\\)\nの個数は\n\\[\\left\\lfloor \\frac{N}{M/g} \\right\\rfloor\\]\n個になります。桁数が\n\\(d\\)\nである\n\\(y\\)\nの個数も求まるので、この時に条件を満たす\n\\((x,y)\\)\nの個数はこの\n\\(2\\)\nつの値の積として求まります。\n以上の内容を踏まえて適切に実装することでこの問題を解くことが出来ます。時間計算量は最大公約数\n\\(g\\)\nを求める部分がボトルネックとなり\n\\(\\mathrm{O}(\\log N \\log M)\\)\nです。\n計算方法によっては変数に格納する値に\n\\(10^{19}\\)\nが登場して符号付き\n\\(64\\)\nbit 整数がオーバーフローしうる点に注意してください。\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\n#include <numeric>\nusing namespace std;\n\nusing u64 = unsigned long long;\nconst u64 mod = 998244353;\nconst int dmax = 19;\nu64 p10[dmax + 1];\nint main() {\n  p10[0] = 1;\n  for (int i = 1; i <= dmax; i++) p10[i] = p10[i - 1] * 10;\n\n  int T;\n  cin >> T;\n  while (T--) {\n    u64 N, M;\n    cin >> N >> M;\n    u64 ans = 0;\n    for (int d = 1; d <= dmax; d++) {\n      u64 L = p10[d - 1];\n      u64 R = min(p10[d], N + 1);\n      if (L >= R) break;\n      u64 g = gcd(p10[d] - 1, M);\n      ans += ((R - L) % mod) * ((N / (M / g)) % mod);\n      ans %= mod;\n    }\n    cout << ans << \"\\n\";\n  }\n}"
+      ],
+      "text_sha256": "c2e21ec1c07ecbf4d85008f05d163e64f967fe2398323028faa09e6afef63289",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc460/abc460_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc395_c",
+  "title": "Shortest Duplicate Subarray",
+  "contests": [
+    {
+      "contest_id": "abc395",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 161,
+  "raw_difficulty": 36,
+  "contest_id": "abc395",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc395/tasks/abc395_c",
+  "statement": "配点 : 300 点 問題文 正整数 N と、長さ N の整数列 A=(A_1,A_2,\\dots,A_N) が与えられます。 A の空でない連続部分列であって、同じ値を複数個含むようなものが存在するか判定してください。存在するならばそのようなもののうち最も短いものの長さを求めてください。 制約 1\\leq N\\leq 2\\times 10^5 1\\leq A_i\\leq 10^6 (1\\leq i\\leq N) 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N 出力 問題文中の条件を満たす連続部分列が存在しないならば -1 と出力せよ。存在するならば、そのようなもののうち最も短いものの長さを出力せよ。 入力例 1 5\r\n3 9 5 3 1 出力例 1 4 (3,9,5,3) と (3,9,5,3,1) が条件を満たします。短いのは (3,9,5,3) で、その長さは 4 です。 入力例 2 4\r\n2 5 3 1 出力例 2 -1 条件を満たす連続部分列は存在しません。 入力例 3 10\r\n1 1 2 3 5 8 13 21 34 55 出力例 3 2",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 正整数 N と、長さ N の整数列 A=(A_1,A_2,\\dots,A_N) が与えられます。 A の空でない連続部分列であって、同じ値を複数個含むようなものが存在するか判定してください。存在するならばそのようなもののうち最も短いものの長さを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N\\leq 2\\times 10^5 1\\leq A_i\\leq 10^6 (1\\leq i\\leq N) 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 問題文中の条件を満たす連続部分列が存在しないならば -1 と出力せよ。存在するならば、そのようなもののうち最も短いものの長さを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\n3 9 5 3 1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 (3,9,5,3) と (3,9,5,3,1) が条件を満たします。短いのは (3,9,5,3) で、その長さは 4 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4\r\n2 5 3 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 -1 条件を満たす連続部分列は存在しません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10\r\n1 1 2 3 5 8 13 21 34 55"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 2"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc395/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:23.680513+00:00",
+  "statement_sha256": "182d38b77f98a92bcba5dcc6ef38dc360303e9f518d6c88447e3a9773e3c0533",
+  "editorials": []
+}

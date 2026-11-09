@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc296_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc296/editorial/6116",
+      "text": "\\(1\\)\n以上\n\\(N\\)\n以下の整数からなる集合を\n\\(S\\)\n(問題文中に登場する\n\\(S\\)\nと定義が異なるため注意) とし、\n\\(S\\)\nから\n\\(S\\)\nへの写像\n\\(f\\)\nを\n\\(f(x)=A_x\\)\nで定めます。\nさらに集合の列\n\\(S_0,S_1,\\ldots\\)\nを、\n\\(S_0=S\\)\nおよび、\n\\(1\\leq i\\)\nについて\n\\(S_i=f(S_{i-1})\\)\n(すなわち、\n\\(S_i=\\{f(x)|x\\in S_{i-1} \\}\\)\n) で定めます。\nこのとき、元の問題で高橋君が\n\\(x\\)\n回目のゲームに勝つ必要十分条件は 任意の正整数\n\\(k\\)\nについて、\n\\(x\\in S_k\\)\nである事と言い換える事ができます。\nさて、この集合の列\n\\(S_0,S_1,\\ldots\\)\nについて、\n\\(S_0\\supseteq S_1\\)\nであり、定義から\n\\(S_{i-1}\\supseteq S_i\\)\nならば\n\\(S_i\\supseteq S_{i+1}\\)\nが成り立つため、\n帰納的に\n\\(S_0\\supseteq S_1\\supseteq S_2\\cdots\\)\nが成り立ちます。\n\\(|S_0|=N\\)\nであるから\n\\(S_i\\)\nは有限集合であり、\n\\(S_i\\supsetneq S_{i+1}\\)\nのとき\n\\(|S_i|-1\\geq |S_{i+1}|\\)\nとなる事に注意すると、\n定義から 任意の\n\\(i\\)\nについて\n\\(|S_i|>0\\)\nであることから、\nある\n\\(0\\leq i_0\\leq N-1\\)\nが存在して\n\\(S_{i_0}=S_{i_0+1}\\)\nとなります。\nこのとき、\n\\(S_i\\)\nの定義から\n\\(S_{i}=S_{i+1}\\)\nならば\n\\(S_{i+1}=S_{i+2}\\)\nであるから帰納的に\n\\(S_{i_0}=S_{i_0+1}=S_{i_0+2}=\\cdots\\)\nとなります。\nゆえに、このような\n\\(i_0\\)\nと\n\\(S_{i_0}\\)\nを求める事ができれば、\n\\(S_{i_0}\\)\nのサイズが答えとなります。\nこれを求める方法はいくつかありますが、例えば、\n各\n\\(0\\leq i\\)\n,\n\\(1\\leq y\\leq N\\)\nについて、\n\\(S_i\\)\nの要素\n\\(x\\)\nのうち\n\\(f(x)=y\\)\nとなるものの個数\n\\(c_{i,y}\\)\nを管理すれば良いです。\n\\(c_{0,y}\\)\nは\n\\(A_x=y\\)\nであるような\n\\(y\\)\nの個数なので簡単に求める事ができます。\nここで、ある\n\\(y\\)\nが\n\\(S_1\\)\nに含まれる必要十分条件は定義より\n\\(c_{0,y}>0\\)\nです。\n次に、\n\\(c_{1,y}\\)\nを求める事を考えますが、これは\n\\(c_{0,y}\\)\nと\n\\(c_{1,y}\\)\nの差分を考えると、\n\\(x\\in(S_0\\backslash S_1)\\)\nであるような\n\\(x\\)\nであって、\n\\(f(x)=y\\)\nであるようなものの個数を\n\\(d_{1,y}\\)\nとして、\n\\(c_{1,y}=c_{0,y}-d_{1,y}\\)\nとなります。\n\\(y\\)\nが\n\\(S_2\\)\nに含まれる必要十分条件は\n\\(c_{1,y}>0\\)\nであり、以下同様にして繰り返せば良いです。\nこれを愚直に行うと\n\\(\\Theta(N^2)\\)\nの時間計算量がかかりますが、\n\\(c_{i,y}\\)\nの配列を使い回し、\n\\(d_{i,y}\\)\nを求めて引く代わりに\n\\(x\\in(S_i\\backslash S_{i+1})\\)\nについて\n\\(c_{i,f(x)}\\)\nの値をデクリメントする事でも同様の更新ができます。\nまた、\n\\((S_i\\backslash S_{i+1})\\)\nの要素の候補としてあり得るのは上記のステップでデクリメントが行われたもののみであることに注意すると、いずれも全体で高々\n\\(N\\)\n回しか行われません。よって\n\\(O(N)\\)\nで計算する事ができ、十分高速にこの問題を解くことができました。\nなお、実際は\n\\(i\\)\nについて区別する事なく、最初に\n\\(c_y\\)\nが\n\\(0\\)\nであるものをqueue に加え、queue の要素\n\\(x\\)\nに対して\n\\(c_{f(x)}\\)\nをデクリメントし、\n\\(c_{f(x)}=0\\)\nとなったものをqueue に加える事を繰り返すことで答えを求めることができます。これは、頂点\n\\(i\\)\nから 頂点\n\\(A_i\\)\nに対して 辺を張った\n\\(N\\)\n頂点\n\\(N\\)\n辺の有向グラフ上でこの問題を考えると分かりやすいです。\nC++ による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nint main(void){\n\tint n,sz;\n\tcin>>n;\n\tvector<int>a(n),c(n);\n\tvector<vector<int> >b(n);\n\tint ans=n;\n\trep(i,n){\n\t\tcin>>a[i];\n\t\ta[i]--,c[a[i]]++;\n\t}\n\trep(i,n)if(c[i]==0){\n\t\tans--;\n\t\tb[0].push_back(i);\n\t}\n\trep(i,n-1){\n\t\tsz=b[i].size();\n\t\tif(sz==0)break;\n\t\trep(j,sz){\n\t\t\tc[a[b[i][j]]]--;\n\t\t\tif(c[a[b[i][j]]]==0)ans--,b[i+1].push_back(a[b[i][j]]);\n\t\t}\n\t}\n    cout<<ans<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "eb391e7a1830c2a4184cbc02bdb30d53213e6e6fe8318d12da0132fc9b0d7a0e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc296/abc296_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc296/editorial/6135",
+      "text": "evimaさんの解説\nにあるように、\n\\(i\\to A_i\\)\nに辺を張ったときのサイクル上にある頂点の個数を求める問題に帰着されます。\n結論から言うと以下のような実装でACすることができます。\n\\(i\\to A_i\\to A_{A_i}\\to A_{A_{A_i}}\\to A_{A_{A_{A_i}}}\\to \\cdots \\)\nと辿った場合、\n\\(i\\)\nの出発点をどこにしても何回か辿ったらサイクルにたどり着きます。\nこのとき、\n\\(x_n\\)\nは\n\\(1\\)\n以上\n\\(N\\)\n以下の\n\\(N\\)\n通りの値しか取りえません。\nそこで、先頭の\n\\(N+1\\)\n項\n\\(x_0,x_1,\\ldots,x_N\\)\nを考えると、鳩の巣原理でどこか一致するペアが存在します。それを\n\\(x_a,x_b(a\\lt b)\\)\nとします。\nこのとき、\n\\(x_a\\to x_{a+1}\\to \\cdots x_{b-1}\\to \\)\nは長さ\n\\(b-a\\)\nのサイクルとなります。\nよって\n\\(x_n\\)\nは\n\\(n=a\\)\n以降は\n\\(x_a\\to x_{a+1}\\to \\cdots x_{b-1}\\to x_a\\to x_{a+1}\\to \\cdots x_{b-1}\\to\\cdots  \\)\nの繰り返しとなるため常にサイクル上に存在することとなります。\n証明より、\n\\(N+1\\)\n回以上の十分大きい回数を辿ったら必ずサイクル上の点となることがわかります。\n（注：サイクルが一つだけとは限りません。サイクルが\n\\(p\\)\n個ある場合、\n\\(p\\)\n個全てのサイクルのサイズの総和を求めることとなります。）\n\\(A_k\\leftarrow A_{A_k}\\)\nというような変換をした場合、\n\\(A_k\\)\nは\n\\(k\\)\nからちょうど2本辺を辿ったときの行き先となります。\nその状態でさらに\n\\(A_k\\leftarrow A_{A_k}\\)\nという変換をしたときには\n\\(A_k\\)\nは\n\\(k\\)\nからちょうど辺を4本辿ったときの行き先となります\n同様な操作を30回ほど繰り返したとき、\n\\(A_k\\)\nは\n\\(k\\)\nからちょうど辺を\n\\(2^{30}\\)\n本辿ったときの行き先となります。\nここで、制約より\n\\(2^{30}\\gt N\\)\nなので、この時点で更新された後の\n\\(A_i\\)\nにおいて、全ての\n\\(i\\)\nについて\n\\(A_i\\)\nはサイクル上にある頂点となります。\n全てのサイクルの点\n\\(j\\)\nについて\n\\(A_i=j\\)\nとなるような\n\\(i\\)\nが存在するかどうかですが、結論を言うとこれは必ず存在します。\nサイクル\n\\(y_0,\\ldots,y_{k-1}\\)\nがあったとき、それぞれから\n\\(m\\)\n回辿った先は\n\\(y_i\\to y_{(i+m)\\% k}\\)\nとなります。\nここで、\n\\[\\{y_i;0\\leq i\\lt k\\}=\\{y_{(i+m)\\%k};0\\leq i\\lt k\\} \\]\nと2つの集合は等しくなります。よって、サイクル上の点は全て網羅されることが言えます。\nつまり、サイクル上の点の移動先は常にサイクル上に存在して、かつすべて異なるため、全てちょうど一つずつ網羅されます。\nさらにサイクルにない頂点は移動先がサイクルの点となるため、集合として重複を消せば答えを数え上げることができます。",
+      "codes": [
+        "N=int(input())\nA=[int(i)-1 for i in input().split()]\nfor i in range(30):\n    A=[A[a] for a in A]\nprint(len(set(A)))"
+      ],
+      "text_sha256": "7d8a0fc36c4b17577f43d5dd3bbb56e6e3790da3c1410d1ddd772b2e771b13d1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc296/abc296_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc296/editorial/6118",
+      "text": "問われている内容をグラフ理論の用語を使って簡潔に述べると次の通りです。\n全頂点の出次数が\n\\(1\\)\nであるような\n\\(N\\)\n頂点の有向グラフ (functional graph) がある。頂点\n\\(i\\)\nからは頂点\n\\(A_i\\)\nへの辺がある。サイクルに含まれる頂点の個数を求めよ。\nこれには強連結成分分解を用いるのが手っ取り早いでしょう。\n実装例（C++、AtCoder Library を利用）",
+      "codes": [
+        "#include <iostream>\n#include <atcoder/scc>\n\nusing namespace std;\nusing namespace atcoder;\n\nint main(){\n    int N;\n    cin >> N;\n    scc_graph g(N);\n    int ans = 0;\n    for(int i = 0; i < N; ++i){\n        int A;\n        cin >> A, --A;\n        g.add_edge(i, A);\n        if(i == A){\n            ++ans;\n        }\n    }\n    for(auto c: g.scc()){\n        if(c.size() >= 2){\n            ans += c.size();\n        }\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "df69aa639b06cd2b9194946e13d5a4aef0d9f707d56dd8d523cf6538646fb9b3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc296/abc296_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

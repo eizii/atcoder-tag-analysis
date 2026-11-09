@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc154_d",
+  "editorials": [
+    {
+      "text": "D: Dice in Line\nそれぞれのサイコロの出目は独立に決まります。そのため、いくつかのサイコロの出目の合計の期\n待値は、それぞれのサイコロの出目の期待値の合計に等しいです。\nそのため、あらかじめそれぞれのサイコロの出目の期待値を求めておけば、それらを合計すること\nでサイコロの出目の合計の期待値を求めることができます。\n1 からP までのP 種類の目が等確率で出るサイコロの出目の期待値は(1 + P)/2 です。\n全ての隣接するK 個のサイコロについて、この値の合計を高速に求める必要があります。これは、\n累積和を使って求めることができます。具体的には、Ei をi 番目のサイコロの出目の期待値とした\nとき、Si = E1 + ... + Ei となるSi (0 ≤i ≤N) を計算しておけば、隣接するK 個のEi の和は\nSj+K −Sj のように求められます。\n計算量は期待値の前計算、累積和の計算、隣接するK 項の和の計算、どれもO(N) となります。\n",
+      "text_sha256": "7d53e8e722529419a6fda0f24897ecfcd9e2b8ceea80f2f530cf82c03e02eefb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc154/abc154_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

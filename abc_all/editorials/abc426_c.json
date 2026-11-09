@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc426_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc426/editorial/14142",
+      "text": "この解説では、時間計算量\n\\(O(N+Q)\\)\nの方針を示します。\n他の方針も (計算量が少し悪くなるものも含めて) 多く存在します。\nまず、バージョン\n\\(X\\)\n以前の PC をバージョン\n\\(Y\\)\nにアップグレードした時に起きることを整理しましょう。\n現在の PC のうち最古のバージョンを\n\\(O\\)\nとすると、\n\\(O\\)\n以上\n\\(X\\)\n以下の全てのバージョンの PC がアップグレードの対象となる。\n制約より\n\\(X<Y\\)\nなので、このアップグレードが終わると、\n\\(X\\)\n以前のバージョンの PC は存在しなくなる。\n以降のアップデートに対して、\n\\(O=X+1\\)\n以上になる。\nこのことから、最古のバージョン\n\\(O\\)\nに着目しながらアップグレードを行うと高速にアップグレードを処理できそうです。\nここから、以下の解法が成り立ちます。\n最初、最古のバージョンは\n\\(O=1\\)\nである。\n\\(i=1,2,\\dots,Q\\)\nについて、\n\\(i\\)\n回目の操作を行う。\n\\(X_i < O\\)\nである時、\n\\(X_i\\)\n以前のバージョンの PC はもう存在しないのでこの操作をスキップする。\nそうでない時、\n\\(O \\le X_i\\)\nである限り次の操作を繰り返す。\nバージョン\n\\(O\\)\nの PC を全てバージョン\n\\(Y_i\\)\nにアップグレードする。\nその後、\n\\(O \\rightarrow O+1\\)\nとする。\n一連の解法は、配列とループの組み合わせで表現できます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,q;\n  cin >> n >> q;\n  vector<int> pc(n+1,1);\n  pc[0]=0;\n  int o=1;\n  while(q--){\n    int x,y;\n    cin >> x >> y;\n    int res=0;\n    while(o<=x){\n      res+=pc[o];\n      pc[y]+=pc[o];\n      o++;\n    }\n    cout << res << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "c0c10bd5d474c0c670dd49d999c68166e5b75c3ababda3a33af6ecfeb03363c2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc426/abc426_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc426/editorial/14144",
+      "text": "データ構造を利用して、いわゆる「殴る」解法をいくつか紹介します。\nmultiset を用いてシミュレートする方法\npair<バージョン, 台数> を multiset で管理しながらシミュレートすることでこの問題に正解できます。\n実装例について、時間計算量は\n\\(O((N+Q) \\log (N+Q))\\)\nです。\n実装例 (C++):\nnote: このコード中の multiset を set にすると WA になります。何故でしょうか?\npriority_queue を利用する方法\nシミュレートに priority_queue を利用しても構いません。\n実装例について、時間計算量は\n\\(O((N+Q) \\log (N+Q))\\)\nです。\n実装例 (C++):\nlazy_segtree を利用する方法\nACL にも含まれる、 lazy_segtree (遅延伝播セグメント木) を利用することでもこの問題に正解できます。\n実装例について、時間計算量は\n\\(O((N+Q) \\log N)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing pi=pair<int,int>;\n\nint main(){\n  int n,q;\n  cin >> n >> q;\n  multiset<pi> st;\n  for(int i=1;i<=n;i++){\n    st.insert({i,1});\n  }\n  while(q--){\n    int x,y;\n    cin >> x >> y;\n    int res=0;\n    while(!st.empty()){\n      auto it=st.begin();\n      if((*it).first>x){break;}\n      res+=(*it).second;\n      st.erase(it);\n    }\n    if(st.size()>0){ st.insert({y,res}); }\n    cout << res << \"\\n\";\n  }\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing pi=pair<int,int>;\n\nint main(){\n  int n,q;\n  cin >> n >> q;\n  priority_queue<pi,vector<pi>,greater<pi>> pq;\n  for(int i=1;i<=n;i++){\n    pq.push({i,1});\n  }\n  while(q--){\n    int x,y;\n    cin >> x >> y;\n    int res=0;\n    while(!pq.empty()){\n      if(pq.top().first>x){break;}\n      res+=pq.top().second; pq.pop();\n    }\n    if(res>0){ pq.push({y,res}); }\n    cout << res << \"\\n\";\n  }\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n#include<atcoder/lazysegtree>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing ll=long long;\n\nstruct S{\n  ll val,len;\n};\nusing F=ll;\n\nconst F ID=8e18;\n\nS op(S a,S b){ return {a.val+b.val,a.len+b.len}; }\nS e(){ return {0,0}; }\nS mapping(F f,S x){\n  if(f!=ID){ x.val=f*x.len; }\n  return x;\n}\nF composition(F f,F g){ return (f==ID)?g:f; }\nF id(){ return ID; }\n\nint main(){\n  ll n,q;\n  cin >> n >> q;\n  vector<S> v(n+1,{1,1});\n  v[0]={0,1};\n  lazy_segtree<S, op, e, F, mapping, composition, id> seg(v);\n\n  while(q--){\n    ll x,y;\n    cin >> x >> y;\n    ll res=seg.prod(0,x+1).val;\n    seg.apply(0,x+1,0);\n    seg.set(y,{seg.get(y).val+res,1});\n    cout << res << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "687d04a2f25ad40f30a5c4adaeb09024b8b38a1c14b8268f76c034b25ad24019",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc426/abc426_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

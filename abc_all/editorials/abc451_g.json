@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc451_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc451/editorial/18047",
+      "text": "辺 \\(e\\) の重みを \\(W_e\\) で表します．また \\(L=30\\) とします． 全域木 \\(T\\) を固定して， \\(T\\) 上で頂点 \\(1\\) と \\(v\\) を結ぶ単純パスの重みを \\(A_v\\) とおきます． 頂点 \\(u,v\\) を結ぶ辺 \\(e\\) に対して \\(W'_e=W_e\\oplus A_u\\oplus A_v\\) とすると，ウォーク \\((v_1,e_1,v_2,e_2,v_3,\\dots,v_{k-1},e_{k-1},v_k)\\) の重みは \\(A_{v_1}\\oplus W'_{e_1}\\oplus W'_{e_2}\\oplus \\cdots \\oplus W'_{e_{k-1}}\\oplus A_{v_k}\\) となります． 一方で \\(T\\) に含まれる辺 \\(e\\) に対しては \\(W'_e=0\\) であるため，\n任意の頂点 \\(u,v\\) と辺の列 \\(e_1,e_2,\\dots,e_l\\) に対して \\(u,v\\) を結ぶ重み \\(A_u\\oplus W'_{e_1} \\oplus W'_{e_2}\\oplus \\cdots \\oplus W'_{e_l} \\oplus A_v\\) のウォークが存在します． 従って \\(X=\\{W'_e\\mid e\\in E(G)\\}\\) とおくと，以下の問題に帰着されます． 非負整数列 \\((A_1,\\dots,A_N)\\) ，非負整数 \\(K\\) および非負整数からなる集合 \\(X\\) が与えられる． 整数組 \\((i,j)\\ (1\\leq i\\lt j\\leq N)\\) で \\(\\min\\{A_i \\oplus A_j \\oplus w_1\\oplus\\cdots \\oplus w_k \\mid w_1,\\dots,w_k \\in X\\}\\leq K\\) なるものの個数を求めよ． \\(F(x)=\\{x\\oplus w_1\\oplus\\cdots \\oplus w_k \\mid w_1,\\dots,w_k \\in X,k\\geq 0\\},f(x)=\\min F(x)\\) とします． \\(f(x)\\) の値は \\(\\operatorname{span} X\\) の xor 基底を \\(O(ML)\\) 時間で前計算することで，一つあたり \\(O(L)\\) 時間で計算できます． ここで任意の非負整数 \\(x,y\\) に対し \\(f(x\\oplus y)=f(x)\\oplus f(y)\\) が成り立ちます． 証明 $\\operatorname{span} X$ の xor 基底 $B$ で，全ての要素について最上位 bit の位置が相異なるものをとります．\n$f$ の定義より $f(x\\oplus y) \\leq f(x)\\oplus f(y)$ はすぐに従います．\n\n$f(x\\oplus y) \\lt f(x)\\oplus f(y)$ と仮定すると，相異なる $B$ の要素 $b_1,\\dots,b_k\\ (k\\geq 1)$ によって以下の形に表せます：\n\n$$f(x\\oplus y)\\oplus f(x)\\oplus f(y)=b_1 \\oplus \\cdots \\oplus b_k.$$\n\n$b=\\max\\{b_1,\\dots,b_k\\}$ として $b$ の最上位 bit が $2^i$ の位であるとします．\nこのとき $b$ の取り方から上式の右辺の最上位 bit も $2^i$ の位であり，$f(x\\oplus y)\\lt f(x)\\oplus f(y)$ より $f(x\\oplus y)$ の $2^i$ の位は $0$，$f(x)\\oplus f(y)$ の $2^i$ の位は $1$ です．\n\n従って $f(x),f(y)$ の $2^i$ の位は相異なります．$x,y$ の対称性から $f(x)$ の $2^i$ の位が $1$ であるとしてよく，このとき $f(x)\\oplus b \\lt f(x)$ かつ $f(x)\\oplus b \\in F(x)$ ですが，これは $f(x)=\\min F(x)$ と矛盾します．\nよって背理法により $f(x\\oplus y)=f(x)\\oplus f(y)$ が従います．\n(証明終) 従って \\(B_i=f(A_i)\\) とすれば以下の問題に帰着されます． 非負整数列 \\((B_1,\\dots,B_N)\\) および非負整数 \\(K\\) が与えられる． 整数組 \\((i,j)\\ (1\\leq i\\lt j\\leq N)\\) で \\(B_i\\oplus B_j\\leq K\\) なるものの個数を求めよ． この問題は上の桁から見る Binary Trie を利用することで \\(O(NL)\\) 時間で解くことができます． 実装例(C++) / 実装例(PyPy)",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "7c86777a4507dc7a9174c57815e11fbed8aa591d9158d510e06616056e34d584"
+    }
+  ],
+  "status": "available"
+}

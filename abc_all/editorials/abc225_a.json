@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc225_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc225/editorial/2843",
+      "text": "以下のような場合分けが可能です。\n\\(S\\)\nに含まれる\n\\(3\\)\n文字が全て同じである場合、答えは明らかに\n\\(1\\)\n通りである。\nそうでなく、\n\\(S\\)\nに含まれる\n\\(3\\)\n文字が互いに異なる場合、答えは\n\\(3!=6\\)\n通りである。\n上記\n\\(2\\)\nつのどれでもない場合、\n\\(S\\)\nは等しい\n\\(2\\)\n文字とそれとは異なる\n\\(1\\)\n文字によって構成されており、故に答えは\n\\(3\\)\n通りである。\nこれをこのままコードに移すと AC となります。\n実装例 (C++)\n実装例 (Python)\nなお、順列全探索と呼ばれる手法を用いることで場合分けをすることなく解くことも可能です。\n実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    string S; cin >> S;\n    int ans = 3;\n    if(S[0]==S[1] && S[1]==S[2]) ans = 1;\n    else if(S[0]!=S[1] && S[1]!=S[2] && S[2]!=S[0]) ans = 6;\n    cout << ans << endl;\n}",
+        "S = input()\nans = 3\nif S[0] == S[1] and S[1] == S[2]:\n    ans = 1\nelif S[0] != S[1] and S[1] != S[2] and S[0] != S[2]:\n    ans = 6\nprint(ans)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    string S; cin >> S;\n    sort(S.begin(),S.end());\n    set<string> s;\n    do{\n        s.insert(S);\n    }while(next_permutation(S.begin(),S.end()));\n    cout << s.size() << endl;\n}"
+      ],
+      "text_sha256": "d5b2c1193b2c4579a3a89272c3031ffa46040b480921cd6e1ffba095803622f8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc225/abc225_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

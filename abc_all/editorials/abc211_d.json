@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc211_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc211/editorial/2003",
+      "text": "まずは頂点\n\\(1\\)\nから頂点\n\\(N\\)\nまでの最短距離を求める問題を考えてみましょう。辺の重みが全て\n\\(1\\)\nであることから、この問題はBFS(幅優先探索)を用いることで\n\\(O(N+M)\\)\nで解くことができます。\n元の問題も同様に、BFSを用いて\n\\(O(N+M)\\)\nで解くことができます。始点からの距離だけでなく、それを達成する経路の数も同時に計算します。\n最短距離を求めるBFSでは、最短距離を表す配列を\n\\(\\text{dist}\\)\nとして\n\\(v\\)\nから遷移できる各\n\\(v'\\)\nに対して次を行う\n\\(v'\\)\nに未到達なら\n\\(\\text{dist}[v']\\)\nを\n\\(\\text{dist}[v]+1\\)\nに更新\nそうでないなら何もしない\nという処理をしますが、最短経路の数を表す配列\n\\(\\text{cnt}\\)\nを新たに用意することで、次のように更新することができます。\n\\(v\\)\nから遷移できる各\n\\(v'\\)\nに対して次を行う\n\\(v'\\)\nに未到達なら\n\\(\\text{dist}[v']\\)\nを\n\\(\\text{dist}[v]+1\\)\nに更新し、\n\\(\\text{cnt}[v']\\)\nに\n\\(\\text{cnt}[v]\\)\nを代入する\n\\(v'\\)\nに到達済みかつ\n\\(\\text{dist}[v']=\\text{dist}[v]+1\\)\nなら、\n\\(\\text{cnt}[v']\\)\nに\n\\(\\text{cnt}[v]\\)\nを加算する\nそうでないなら何もしない\n実装例(Python)",
+      "codes": [
+        "# 入力の読み込み\nN,M=map(int,input().split())\nG=[[] for i in range(N)]\nfor i in range(M):\n\tA,B=map(int,input().split())\n\tA-=1\n\tB-=1\n\tG[A].append(B)\n\tG[B].append(A)\n\n# 初期化\nque=[0]\ndist=[None]*N\ncnt=[0]*N\ndist[0]=0\ncnt[0]=1\n\n# BFS\nfor v in que:\n\tfor vv in G[v]:\n\t\tif dist[vv] is None:\n\t\t\tdist[vv]=dist[v]+1\n\t\t\tque.append(vv)\n\t\t\tcnt[vv]=cnt[v]\n\t\telif dist[vv]==dist[v]+1:\n\t\t\tcnt[vv]+=cnt[v]\n\t\t\tcnt[vv]%=10**9+7\n\nprint(cnt[N-1])"
+      ],
+      "text_sha256": "fd2eb543aab3588b4380a46940f23e243d30614dcfdbf80848792e09b3b66e8e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc211/abc211_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

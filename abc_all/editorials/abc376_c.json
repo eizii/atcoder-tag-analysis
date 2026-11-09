@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc376_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc376/editorial/11193",
+      "text": "まずは、新しく購入する箱の大きさ\n\\(x\\)\nを\n\\(1\\)\nつ決めた際に、操作\n\\(2\\)\nを行えるかどうかを判定する方法について考えます。\n結論としては、これは以下の命題を用いて判定できます。\n\\(A\\)\nを昇順にソートして得られる列を\n\\(a=(a_1,a_2,\\dots,a_N)\\)\n、\n\\(B\\)\nに\n\\(x\\)\nを追加した上で昇順にソートして得られる列を\n\\(b=(b_1,b_2,\\dots,b_N)\\)\nとおく。このとき、操作\n\\(2\\)\nを実行できる必要十分条件は、すべての\n\\(i\\ (1\\leq i\\leq N)\\)\nについて\n\\(a_i \\leq b_i\\)\nが成り立つことである。\nよって、この判定法を用いれば、条件を満たす\n\\(x\\)\nの最小値を\n二分探索\nで求めることができます。判定のたびに列\n\\(a,b\\)\nをソートで求めると\n\\(O(N\\log (\\max A_i)\\log N)\\)\nになり、これでも実行時間制限に間に合いますし、少し工夫をすれば\n\\(O(N\\log (\\max A_i))\\)\nにすることもできます。\nまた、二分探索を使わずに、以下のような貪欲法でこの問題を解くこともできます。（正当性は上記の\n\\(x\\)\nを固定した際の判定方法から示せます。）計算量はソートがボトルネックとなって\n\\(O(N\\log N)\\)\nです。\n今ある中で最も大きいおもちゃをおもちゃ\n\\(i\\)\n、最も大きい箱を箱\n\\(j\\)\nとおく。\n\\(A_i\\leq B_j\\)\nである場合：おもちゃ\n\\(i\\)\nを箱\n\\(j\\)\nに入れるのが最適である。おもちゃの集合からおもちゃ\n\\(i\\)\nを除き、箱の集合から箱\n\\(j\\)\nを除いた上で、ステップ 1.  に戻る。\n\\(A_i> B_j\\)\nである場合：今あるどの箱にもおもちゃ\n\\(i\\)\nを入れることができないので、大きさ\n\\(A_i\\)\n以上の箱を新しく購入する必要がある。大きさが\n\\(A_i\\)\nより大きい箱を買うメリットはないので、\n\\(x=A_i\\)\nとした上で上記の判定法を適用し、条件を満たすならば答えは\n\\(A_i\\)\n、満たさないならば\n\\(-1\\)\nである。\nなお、この貪欲法の動作を観察すれば、以下のような簡単な方法で答えを求められることもわかります。計算量は変わらず\n\\(O(N\\log N)\\)\nです。\n\\(A,B\\)\nそれぞれを昇順にソートする。\n\\(A_i > B_i\\)\nなる\n\\(i\\ (1\\leq i\\leq N-1)\\)\nが存在する場合：答えは\n\\(-1\\)\n。\nそうでない場合：\n\\(A_{i+1} > B_i\\)\nなる最大の\n\\(i\\ (1\\leq i\\leq N-1)\\)\n（存在しなければ\n\\(0\\)\n） を\n\\(i'\\)\nとして、答えは\n\\(A_{i'+1}\\)\n。\n実装例 (C++、二分探索、\n\\(O(N\\log (\\max A_i)\\log N)\\)\n) :\n実装例 (C++、\n\\(O(N\\log N)\\)\n) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n), b(n - 1);\n    for (int &i: a) cin >> i;\n    for (int &i: b) cin >> i;\n    sort(a.begin(), a.end());\n    int ok = 1 << 30, ng = 0;\n    auto f = [&](int x) -> bool {\n        vector<int> nb = b;\n        nb.push_back(x);\n        sort(nb.begin(), nb.end());\n        for (int i = 0; i < n; i++) {\n            if (a[i] > nb[i]) return false;\n        }\n        return true;\n    };\n    if(!f(ok)) {\n        cout << -1 << endl;\n        return 0;\n    }\n    while (ok - ng > 1) {\n        int mid = (ok + ng) / 2;\n        if (f(mid)) ok = mid;\n        else ng = mid;\n    }\n    cout << ok << endl;\n}",
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n), b(n - 1);\n    for (int &i: a) cin >> i;\n    for (int &i: b) cin >> i;\n    sort(a.begin(), a.end());\n    sort(b.begin(), b.end());\n    for (int i = 0; i < n - 1; i++) {\n        if (a[i] > b[i]) {\n            cout << -1 << endl;\n            return 0;\n        }\n    }\n    for (int i = n - 2; i >= 0; i--) {\n        if (a[i + 1] > b[i]) {\n            cout << a[i + 1] << endl;\n            return 0;\n        }\n    }\n    cout << a[0] << endl;\n}"
+      ],
+      "text_sha256": "2504167019339a61423af770c60d409df2588c43f0321e048dbbbebf8cbe6c8f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc376/abc376_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

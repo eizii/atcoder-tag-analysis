@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc400_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc400/editorial/12624",
+      "text": "400 number であるための\n\\(2\\)\nつ目の条件は\n\\(N\\)\nが平方数であることと同値です。\n\\(10^{12}\\)\n以下の平方数は\n\\(10^6\\)\n個しかないため、それぞれについて 400 number であるか判定し、400 number を列挙することを目指します。\n\\(k\\)\nの素因数の集合と\n\\(k^2\\)\nの素因数の集合は一致するため、\n\\(k = 1, 2, \\ldots, 10^6\\)\nに対して素因数の種類数が求まれば 400 number をすべて列挙することができます。\n\\(k = 1, 2, \\ldots, 10^6\\)\nに対する素因数の種類数はエラトステネスの篩と同様の原理によって求めることができます。具体的には、数列\n\\(V = (V_1, V_2, \\ldots, V_{10^6})\\)\nを\n\\(0\\)\nで初期化しておき、\n\\(10^6\\)\n以下の各素数\n\\(p\\)\nについて、すべての\n\\(p\\)\nの倍数\n\\(i\\)\nに対し\n\\(V_i\\)\nに\n\\(1\\)\nを加算する操作を行うと最終的な\n\\(V_i\\)\nの値が\n\\(i\\)\nの素因数の種類数となります。\n\\(10^{12}\\)\n以下の 400 number がすべて列挙できれば 400 number をソートした列に対して二分探索を行うことで\n\\(A\\)\n以下の最大の 400 number を求めることができます。\nなお、\n\\(10^{12}\\)\n以下の 400 number の個数は全部で\n\\(288726\\)\n個です（実行時間制限に間に合う確信をもつためには\n\\(10^6\\)\n以下であることさえ分かっていれば十分です）。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n\tint A = 1000001;\n\tvector<int> v(A);\n\tfor (int i = 2; i < A; i++) {\n\t\tif (v[i] == 0) for (int j = i; j < A; j += i) v[j]++;\n\t}\n\tvector<ll> vec;\n\tfor (ll i = 2; i < A; i++) if (v[i] == 2) vec.push_back(i * i);\n\tint q;\n\tcin >> q;\n\twhile (q--) {\n\t\tll a;\n\t\tcin >> a;\n\t\tcout << *prev(upper_bound(vec.begin(), vec.end(), a)) << '\\n';\n\t}\n}"
+      ],
+      "text_sha256": "f0477cc5b1eb314a5e73c6b85dc52eb119b82e0689ec147945f9c24416475748",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc400/abc400_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

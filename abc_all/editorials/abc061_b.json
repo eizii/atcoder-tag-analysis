@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc061_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc061/editorial.pdf",
+      "text": "B:  Counting Roads\n\n  ֤ ౎ ࢢ ͔Βଞͷ౎ ࢢ ʹԿຊͷಓ࿏͕৳ͼ͍ͯΔ͔Λௐ΂·͢ɻ·ͣɺϧʔϓΛ ࢖ ͍ͯ i(1 ≤i ≤N) ൪໨ͷ౎ ࢢ\n ʹ஫໨͠·͢ɻ ࣍ ʹɺϧʔϓΛ༻͍ͯશͯͷಓ࿏Λௐ΂͍͖ͯɺಓ࿏ͷ྆୺ʹ i ൪໨ͷ౎ ࢢ ͕ ؚ ·Ε͍ͯΔ͔Λ\n ൑ఆ͠ɺ਺͍͖͑ͯ·͢ɻͦͷ ޙ ʹɺ਺͑ͨಓ࿏ͷຊ਺Λ i(1 ≤i ≤N) ൪໨ͷ౎ ࢢ͔Β৳ͼ͍ͯΔಓ࿏ͷຊ਺ͱ\n ͯ͠ग़ྗ͠·͢ɻ͜ΕΒͷૢ࡞͸ɺ2 ॏϧʔϓΛ༻͍Δ͜ͱͰ࣮૷͕Ͱ͖·͢ɻ࣌ؒܭࢉྔ͸ O(NM) ͱͳΓɺ͜\n Ε͸ ؒʹ߹ ͍·͢ɻ\n\n  ഑ྻΛར༻͢ΔͱɺΑΓߴ଎ʹ౴͑ΛٻΊΔ͜ͱ͕ՄೳͰ͢ɻ·ͣɺ֤౎ࢢ͔ΒԿຊͷಓ࿏͕৳ͼ͍ͯΔ͔Λ؅\n ཧ͢Δ௕͞ N ͷ഑ྻroad Λ༻ҙ͠ɺશͯͷཁૉΛ 0 ʹॳ ظ Խ͠·͢ɻ࣍ ʹɺϧʔϓΛ ࢖ͬͯશͯͷಓ࿏ʹ͍ͭ\n ͯௐ΂͍͖ͯ·͢ɻ͜ͷ࣌ɺ͋Δಓ࿏ͷ྆୺͕౎ࢢ a ͱ ౎ࢢ b ͩͬͨͱ͖ʹɺroad[a −1] ͱ road[b −1] ͷ஋Λ 1\n ૿΍͠·͢ɻ࠷ޙʹɺ֤౎ࢢ͔ΒԿຊͷಓ࿏͕৳ͼ͍ͯΔ͔Λ road Λ༻͍ͯग़ྗ͠·͢ɻ͜ͷղ๏ͷ࣌ؒܭࢉྔ\n ͸ɺO(N + M) ͱͳΓ·͢ɻ\n\n\n  C++ͷίʔυྫ( ࣌ؒܭࢉ ྔO(N + M))\n\n\n\n\n\n                                                  1\n\f\n 1 int main(void) {\n 2     int N, M;\n\n 3     cin >> N >> M;\n\n\n 4\n\n 5     const int NMMAX = 50;\n\n 6     int A[NMMAX], B[NMMAX];\n\n\n 7\n\n 8     for (int i = 0; i < M; ++i) {\n\n 9         cin >> A[i] >> B[i];\n\n10     }\n\n\n11\n\n12     int road[NMMAX];\n\n13     for (int i = 0; i < N; ++i) {\n\n14         road[i] = 0;\n\n15     }\n\n\n16\n\n17     for (int i = 0; i < M; ++i) {\n\n18         road[A[i] - 1] += 1;\n\n19         road[B[i] - 1] += 1;\n\n20     }\n\n\n21\n\n22     for (int i = 0; i < N; ++i) {\n\n23         cout << road[i] << endl;\n\n24     }\n\n\n25\n\n26     return 0;\n27 }",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "6fa9c0fd518b1b195eb5c0174059f4f26445ac5f44901c4efcdaceed1e557453"
+    }
+  ],
+  "status": "available"
+}

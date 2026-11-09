@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc351_f",
+  "title": "Double Sum",
+  "contests": [
+    {
+      "contest_id": "abc351",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1253,
+  "raw_difficulty": 1253,
+  "contest_id": "abc351",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc351/tasks/abc351_f",
+  "statement": "配点 : 500 点 問題文 整数列 A = (A_1, A_2, \\dots, A_N) が与えられます。 次の式を計算してください。 \\displaystyle \\sum_{i=1}^N \\sum_{j=i+1}^N \\max(A_j - A_i, 0) なお、制約下において答えが 2^{63} 未満となることは保証されています。 制約 2 \\leq N \\leq 4 \\times 10^5 0 \\leq A_i \\leq 10^8 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N 出力 式の値を出力せよ。 入力例 1 3\r\n2 5 3 出力例 1 4 (i, j) = (1, 2) のとき \\max(A_j - A_i, 0) = \\max(3, 0) = 3 です。 (i, j) = (1, 3) のとき \\max(A_j - A_i, 0) = \\max(1, 0) = 1 です。 (i, j) = (2, 3) のとき \\max(A_j - A_i, 0) = \\max(-2, 0) = 0 です。 これらを足し合わせた 3 + 1 + 0 = 4 が答えとなります。 入力例 2 10\r\n5 9 3 0 4 8 7 5 4 0 出力例 2 58",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 整数列 A = (A_1, A_2, \\dots, A_N) が与えられます。 次の式を計算してください。 \\displaystyle \\sum_{i=1}^N \\sum_{j=i+1}^N \\max(A_j - A_i, 0) なお、制約下において答えが 2^{63} 未満となることは保証されています。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 4 \\times 10^5 0 \\leq A_i \\leq 10^8 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 式の値を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\n2 5 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 (i, j) = (1, 2) のとき \\max(A_j - A_i, 0) = \\max(3, 0) = 3 です。 (i, j) = (1, 3) のとき \\max(A_j - A_i, 0) = \\max(1, 0) = 1 です。 (i, j) = (2, 3) のとき \\max(A_j - A_i, 0) = \\max(-2, 0) = 0 です。 これらを足し合わせた 3 + 1 + 0 = 4 が答えとなります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10\r\n5 9 3 0 4 8 7 5 4 0"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 58"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc351/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:28.339902+00:00",
+  "statement_sha256": "2fc4d99f0ced2696c0faa120b48ddfcae655df442627c89058f61e2ddb3f12e3",
+  "editorials": []
+}

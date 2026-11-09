@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc254_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc254/editorial/4051",
+      "text": "\\(K=1\\)\nの場合\n\\(K=1\\)\nの場合、操作は\nバブルソート\nと呼ばれるアルゴリズムに登場するものとなります。\nバブルソートが正当であることから分かるように、\n\\(K=1\\)\nの場合の答えは\nYes\nとなります。より具体的には、まず一番小さい値を左端に、二番目に小さい値を左から\n\\(2\\)\n番目に、\n\\(\\ldots\\)\nという順にすると良いです。\n\\(K\\)\nが一般の場合\n\\(K\\)\n個の数列\n\\(B_0,\\ldots,B_{K-1}\\)\nを次のように定めます。\n\\(i=0,\\ldots,K-1\\)\nに対し、\n\\(B_i=(a_{i+1},a_{K+i+1},a_{2K+i+1},\\ldots)\\)\nこの時、操作は「ある\n\\(B_i\\)\nにおいて隣り合う\n\\(2\\)\nつの項を入れ替える」といえます。\nある数列\n\\(B_i\\)\nでどのように操作したかは他の数列に影響しないため、それぞれについて独立に昇順に並び替えた上で元の位置に戻す形で操作後の\n\\(A\\)\nを考え、これが昇順かどうかを調べることで本問題を解くことが出来ます。\n効率の良いソートアルゴリズムの利用\n本解説の冒頭でバブルソートについて触れましたが、実際にこれを用いて並び替えを行うとTLE(実行時間制限超過)となります。これは、バブルソートの時間計算量が\n\\(\\mathrm O(N^2)\\)\nであり、本問題の制約・実行時間制限に対して効率が悪すぎるためです。\nより効率の良い\n\\(\\mathrm O(N\\log N)\\)\nのソートアルゴリズムとして\nマージソート\nや\nヒープソート\n等が知られており、それらを使うことで本問題に正答することが出来ます。また、これらのアルゴリズムの実装を自力で行う必要は必ずしもなく、たとえばC++では次のように書くことでソートを\n\\(\\mathrm O(N\\log N)\\)\nで行えます。\n実装例",
+      "codes": [
+        "sort(a.begin(),a.end());",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N,K;\n\tcin>>N>>K;\n\t\n\tvector<vector<int>> b(K);\n\t\n\tvector<int> a(N);\n\tfor(int i=0;i<N;i++){\n\t\tcin>>a[i];\n\t\tb[i%K].push_back(a[i]);\n\t}\n\t\n\tfor(int i=0;i<K;i++){\n\t\tsort(b[i].rbegin(),b[i].rend());\n\t}\n\t\n\tsort(a.begin(),a.end());\n\t\n\tvector<int> na;\n\tfor(int i=0;i<N;i++){\n\t\tna.push_back(b[i%K].back());\n\t\tb[i%K].pop_back();\n\t}\n\t\n\tif(a==na)cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n\t\n    return 0;\n}"
+      ],
+      "text_sha256": "f9498144af482aa289196448fb3368c9d4c4333707ae1740e5e5eb18272cfd4f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc254/abc254_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

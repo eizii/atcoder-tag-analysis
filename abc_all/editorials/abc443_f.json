@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc443_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc443/editorial/15197",
+      "text": "\\(\\text{d}[x][c]\\)\nを「\n\\(N\\)\nで割ったあまりが\n\\(x\\)\nとなり、末尾につけられる整数が\n\\(c\\)\n以上であるような良い整数の\n桁数\nの最小値」と定義します。この動的計画法は\n\\(c'=c,c+1,\\ldots,9\\)\nに対し\n\\(\\text{d}[(10x+c') \\bmod N][c'] \\leftarrow \\text{d}[x][c]+1\\)\nという遷移を行う幅優先探索によって\n\\(\\sigma=10\\)\nとして\n\\(O(N\\sigma^2)\\)\n時間で計算することができます（\n\\(c'\\)\nを昇順に見ていき、既に探索済みの DP テーブルに到達した場合に break することで\n\\(O(N\\sigma)\\)\n時間に簡単に改善できます）。\nこの DP テーブルから答えを復元することを考えます。この DP テーブルの他に、各 DP テーブルがどこから遷移してきたかを持つ別の二次元配列を用意します。さらに、幅優先探索を桁の昇順に行うことで、\n\\(x=0\\)\nとなる DP テーブルに到達した瞬間に逆順に復元していくことで最小値を得ることができます。詳しくは実装例を参考にしてください。（以下の実装例では高速化のために\n\\(2\\)\n次元配列\n\\(\\text{d}[x][c]\\)\nを\n\\(1\\)\n次元配列\n\\(\\text{d}[10\\times x+c]\\)\nで表現しています。）\n実装例(Python3)\nまた、上の実装では\n\\(\\text{d}\\)\nは中に入った数字が\n\\(\\text{INF}\\)\nと同じかどうかの確認にしか使っておらず、それは\n\\(\\text{to}\\)\nの中が\n\\(-1\\)\nであることと同値なので\n\\(\\text{d}\\)\nを作らずに\n\\(\\text{to}\\)\nのみを構築する解法でも正答することができます。\n実装例(Python3)",
+      "codes": [
+        "from collections import deque\n\nn = int(input())\nINF = 10**9\nd = [INF] * (10 * n)\nto = [-1] * (10 * n)\nd[0] = 0\nq = deque([0])\nwhile q:\n    idx = q.popleft()\n    c, x = idx % 10, idx // 10\n    for cc in range(max(1, c), 10):\n        xx = (10 * x + cc) % n\n        idx2 = 10 * xx + cc\n        if d[idx2] != INF:\n            break\n        d[idx2] = d[idx] + 1\n        q.append(idx2)\n        to[idx2] = idx\n        if xx == 0:\n            ans = []\n            cur = idx2\n            while cur != 0:\n                ans.append(str(cur % 10))\n                cur = to[cur]\n            print(\"\".join(ans[::-1]))\n            exit()\nprint(-1)",
+        "from collections import deque\n\nn = int(input())\nINF = 10**9\nto = [-1] * (10 * n)\nq = deque([0])\nwhile q:\n    idx = q.popleft()\n    c, x = idx % 10, idx // 10\n    for cc in range(max(1, c), 10):\n        xx = (10 * x + cc) % n\n        idx2 = 10 * xx + cc\n        if to[idx2] != -1:\n            break\n        q.append(idx2)\n        to[idx2] = idx\n        if xx == 0:\n            ans = []\n            cur = idx2\n            while cur != 0:\n                ans.append(str(cur % 10))\n                cur = to[cur]\n            print(\"\".join(ans[::-1]))\n            exit()\nprint(-1)"
+      ],
+      "text_sha256": "9673a8d23a0b7379774182a4799a696b0bb671ff9859bd9de8c457f85f9ab086",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc443/abc443_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

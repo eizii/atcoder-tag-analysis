@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc245_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc245/editorial/3635",
+      "text": "まず、チョコレートと箱をまとめて、縦の長さの降順にソートしておきます。ただし、縦の長さが同じチョコレートと箱があるときは、箱を前に並べておきます。\n空の数列\n\\(S=()\\)\nを用意し、要素を前から次のように見ていきます。\n見ている要素が箱\n\\((C_i,D_i)\\)\nのとき\n\\(S\\)\nに\n\\(D_i\\)\nを追加します。\n見ている要素がチョコレート\n\\((A_i,B_i)\\)\nのとき\n\\(S\\)\nの要素で\n\\(B_i\\)\n以上のもののうち最小のものを削除します。もし削除するものが存在しなければ、答えは\nNo\nです。\n最後の要素まで見終えることができたら、答えは\nYes\nです。\n上記を愚直に実装したときの計算量は\n\\(O(NM)\\)\nと遅いですが、\n\\(S\\)\nとして C++ の\nstd::multiset\nを用いたり、座標圧縮してセグメントツリーを用いたりすれば\n\\(O((N+M)\\log (N+M))\\)\nになり十分高速です。",
+      "codes": [],
+      "text_sha256": "5b5eaa02cfe811fa98c8fe3c3b3aaf0b5bfacf2508517de14ab534e68496cf49",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc245/abc245_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

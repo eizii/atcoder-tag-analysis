@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc322_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc322/editorial/7302",
+      "text": "この問題は上手な実装方針を選べるかによって実装量が大きく変わってくる問題だと思います。上手く実装できなかった人は、この解説や他の人の提出コードを読んでよい方針を探してみましょう。\nこの問題は制約が小さいので、なんらかの高度なアルゴリズム等を利用せずに単純にあり得る配置を全探索すれば解くことが出来ます。具体的には、以下のようにすべての要素を 1 個 1 個決め打っていけばよいです。\n\\(1\\)\n番目のポリオミノの向きを固定して、\n\\(2\\)\n番目,\n\\(3\\)\n番目のポリオミノの向き\n\\(4 \\times 4 = 16\\)\n通りを全探索する。\n\\(1\\)\n番目のポリオミノをどこに置くかを全探索する。\n\\(2\\)\n番目のポリオミノをどこに置くかを全探索する。\n\\(3\\)\n番目のポリオミノをどこに置くかを全探索する。\n条件を満たす配置が見つかれば\nYes\nを出力する。そうでない場合、\nNo\nを出力する。\nこのアルゴリズムを適切に実装すればこの問題を解くことが出来ます。\nアルゴリズムの手順の中でおそらく一番難しいのはポリオミノを回転した状態を全列挙する部分だと思うのでその部分を詳しく説明します。( ポリオミノを配置する方は\nABC307 の C 問題\nなどの類題もあり比較的慣れている人も多いと考えています。)\nこの問題ではポリオミノの回転が認められているため、それぞれのポリオミノを回転させて全探索する必要があります。グリッドが正方形の形をしているため\n\\(1\\)\n番目のポリオミノは回転させなくてよいとしても問題なく、\n\\(1\\)\n番目の回転の分は省略できますが、それでも\n\\(2\\)\n番目と\n\\(3\\)\n番目のポリオミノの向き\n\\(4 \\times 4 = 16\\)\n通りを調べる必要があります。\nこの部分は方針によっては扱う変数の量がかなり増えて面倒な実装になりそうですが、このような問題で典型的な実装方法を紹介します。\nまず、ポリオミノを回転させる部分を関数化しておきましょう。\nそして、次のような二重ループを書きます。\n実は、この二重ループによって\n\\(4 \\times 4 = 16\\)\n通り全てを調べることができています。具体的には、\n\\(2\\)\n番目のポリオミノを\n\\(a\\)\n回,\n\\(3\\)\n番目のポリオミノを\n\\(b\\)\n回右に\n\\(90\\)\n度回した状態は、for 文のループ変数が\n\\(t = a, u = b\\)\nであるタイミングで調べられています。\nこのように変数をクルクル回しながら全探索する手法は、テクニカルですが応用範囲の広い実装方法なので (特に列の reverse が絡む実装で頻出) ぜひ覚えてみてください。\n問題全体の実装例は以下の通りです。\n実装例(C++)",
+      "codes": [
+        "#define rep(i, n) for (int i = 0; i < (n); i++)\n\n// ポリオミノを右に 90 度回転\nvoid Rotate(vector<string>& v) {\n  vector<string> w = v;\n  rep(i, 4) rep(j, 4) w[j][3 - i] = v[i][j];\n  v = w;\n}",
+        "// ps[0], ps[1], ps[2] にポリオミノを格納しているとする\nrep(t, 4) {\n  rep(u, 4) {\n    // check : 今の向きで固定したときに配置可能か調べる関数とする\n    check();\n    // ps[2] を 90 度回す\n    Rotate(ps[2]);\n  }\n  // ps[1] を 90 度回す\n  Rotate(ps[1]);\n}",
+        "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\n#define rep(i, n) for (int i = 0; i < (n); i++)\n\n// s を出力してプログラムを終了\nvoid Print(const string& s) {\n  cout << s << \"\\n\";\n  exit(0);\n}\n\n// 右に 90 度回転\nvoid Rotate(vector<string>& v) {\n  vector<string> w = v;\n  rep(i, 4) rep(j, 4) w[j][3 - i] = v[i][j];\n  v = w;\n}\n\n// (i, j) がグリッド内部かを判定する\nbool in(int i, int j) { return 0 <= i and i < 4 and 0 <= j and j < 4; }\n\n// p を (di, dj) を左上の位置として配置できるか？\nbool can_put(vector<vector<int>>& exist, const vector<string>& p, int di,\n             int dj) {\n  rep(i, 4) rep(j, 4) {\n    if (p[i][j] == '#') {\n      int ni = i + di;\n      int nj = j + dj;\n      if (!in(ni, nj)) return false;\n      if (exist[ni][nj] == 1) return false;\n      exist[ni][nj] = 1;\n    }\n  }\n  return true;\n}\n\n// ポリオミノを再帰で置いていく関数\nvoid dfs(int i, const vector<vector<int>>& exist,\n         const vector<vector<string>>& ps) {\n  if (i == 3) {\n    int ok = 1;\n    rep(u, 4) rep(v, 4) ok &= exist[u][v];\n    if (ok) Print(\"Yes\");\n    return;\n  }\n  for (int di = -3; di <= 3; di++) {\n    for (int dj = -3; dj <= 3; dj++) {\n      auto ex2 = exist;\n      bool flag = can_put(ex2, ps[i], di, dj);\n      if (flag) dfs(i + 1, ex2, ps);\n    }\n  }\n}\n\nint main() {\n  vector<vector<string>> ps(3);\n  rep(i, 3) {\n    ps[i].resize(4);\n    for (auto& s : ps[i]) cin >> s;\n  }\n  rep(t, 4) {\n    rep(u, 4) {\n      dfs(0, vector(4, vector(4, 0)), ps);\n      Rotate(ps[2]);\n    }\n    Rotate(ps[1]);\n  }\n  Print(\"No\");\n}"
+      ],
+      "text_sha256": "86ce9e7b9d72d0729acb173ea9bc3a98ff699b0ea8b1289e80b54d7e1166915d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc322/abc322_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc322/editorial/7369",
+      "text": "本質的には\n公式解説\nと変わりませんが、グリッド状のものはそのまま扱うよりも\n\\((x,y)\\)\nの組を集合として持つほうが、配列外参照や回転の方法などを注意深く考える必要がなくなり非常に簡潔になります。\n明らかに3つのパーツのマス数の合計が16でないとき\nNo\nであるので、そうでないものを考えます。以降、左上のマスの座標を\n\\((0,0)\\)\nとします。\n平行移動は、集合のすべての\n\\(x,y\\)\nに一定の値を加算すればよいです。この問題の場合、集合の中での\n\\(x,y\\)\nの最小値が\n\\(0\\)\nから\n\\(3\\)\nとなる範囲を考えればよいことがわかります。\n90度回転は、\n\\((x,y)\\)\nを\n\\((y,-x)\\)\nに置き換えるなどとすればよいです。二次元平面上で考えるとわかりやすいでしょう。\n敷き詰められているかの判定は、3つの和集合に\n\\((0,0),(0,1),\\dots,(3,2),(3,3)\\)\nすべての座標が含まれていることを判定すればよいです。\n同じような手法は\nABC307 - C\nや\nABC218 - C\nなど、グリッドの重実装問題で使えます。\n実装例\n(コンテスト中に書いたものなので非常に難読となってしまっています)",
+      "codes": [],
+      "text_sha256": "8b720b381e5599c111e250d34897683e3e9d3f4e9461a3d6ff00b95f75a28014",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc322/abc322_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc322/editorial/7310",
+      "text": "この\n問題\nの\n解説\nの方法と同様、盤面を 2 進法で表された整数だと考えて処理すると、実装が簡単になり、並列計算の分だけ計算量も小さくなります。\n本問では、前回の問題に比べ回転があるところの処理が難しくなっています。\n公式解説\nのように\n\\(2\\)\n次元配列としてしても良いですが、並列計算を生かす方法もあります。具体的には、例えば、横向きのときは\n\\(2\\)\n進法、縦向きのときは\n\\(32\\)\n進法と思って入力を変換すると良いです。\n（方針）\n\\(2\\)\n進法で考えます\n右端に番兵を\n\\(1\\)\nマスずつ付けて、盤面を横\n\\(5\\)\nマス、縦\n\\(4\\)\nマスの\n\\(20\\)\nマスを並べたひとつの\n\\(20\\)\nビットの整数で表現することを考えます\n入力を回転させる必要があるので、受け取った直後に\n\\(2\\)\n進法・\n\\(32\\)\n進法で変換します\n上下・左右を含む平行移動はすべてビットシフトで表現できます\n入力（を回転させたもの）の末尾の\n\\(0\\)\nを消した状態から、最大で\n\\(18\\)\nビット左シフトすれば十分です\na\nの末尾の\n\\(0\\)\nを消したものは\na // (a & -a)\nで計算できます\n全体を覆っていることは、盤面が\n\\(507375\\)\n（\n\\(=1+2+2^{2}+2^{3}+2^{5}+2^{6}+2^{7}+2^{8}+2^{10}+2^{11}+2^{12}+2^{13}+2^{15}+2^{16}+2^{17}+2^{18}\\)\n）と一致することを確認すれば良いです\n\\(2\\)\nつが「重ならない」は、例えば\na & b == 0\nで表現できます（popcount で確認する方法もあります）\nAC コード\n（PyPy3）",
+      "codes": [],
+      "text_sha256": "f3eb44c2056179f13190cf326a9c3a8a78392c0faef3865b69aa6612c1575b5a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc322/abc322_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

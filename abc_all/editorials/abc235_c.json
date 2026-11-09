@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc235_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc235/editorial/3256",
+      "text": "この問題は\n連想配列\nと呼ばれるデータ構造を利用することで効率よく解くことができる問題です。\nキーを「\n\\(A\\)\nに登場する整数」、値を「\n\\(A\\)\nに登場した場所が昇順に入っている配列」とした連想配列を用意しましょう。\nたとえば\n\\(N = 6, A = (1, 1, 2, 3, 1, 2)\\)\nの場合は、データ構造の名前を\n\\(m\\)\nとして\n\\[\n\\begin{aligned}\nm\\lbrack 1 \\rbrack &= \\lbrace 1, 2, 5 \\rbrace \\\\\nm \\lbrack 2 \\rbrack &= \\lbrace 3, 6 \\rbrace \\\\\nm \\lbrack 3 \\rbrack &= \\lbrace 4 \\rbrace \n\\end{aligned}\n\\]\nというような連想配列が構成されます。\n上記の連想配列があればクエリを高速に処理することができます。\n具体的なアルゴリズムとしては、\n\\((x, k)\\)\nを要素とするクエリが飛んできた場合に以下の操作を行います。\n\\(m\\lbrack x \\rbrack\\)\nおよびその長さを参照する。\n\\(m \\lbrack x \\rbrack\\)\nの長さが\n\\(k\\)\n以上の場合は、\n\\(m\\lbrack x \\rbrack\\)\nの前から\n\\(k\\)\n番目の要素を出力する。\n\\(m \\lbrack x \\rbrack\\)\nの長さが\n\\(k\\)\n未満の場合は、\n\\(-1\\)\nを出力する。\n計算量は連想配列の要素を検索する計算量を\n\\(T\\)\nとして\n\\(\\mathrm{O}((N + Q)T)\\)\nです。たとえば C++ の\nstd::map\nの場合は\n\\(T = \\mathrm{O}(\\log N)\\)\nなので全体の計算量は\n\\(\\mathrm{O}((N + Q)\\log N)\\)\nになります。\nPython による実装例は次の通りです。",
+      "codes": [
+        "from collections import defaultdict\n\nN, Q = map(int, input().split())\nA = list(map(int, input().split()))\n\nm = defaultdict(list)\nfor i in range(N):\n  m[A[i]].append(i + 1)\n\nfor _ in range(Q):\n  x, k = map(int, input().split())\n  if k <= len(m[x]):\n    print(m[x][k - 1])\n  else:\n    print(-1)"
+      ],
+      "text_sha256": "a8dc18136ca4b3da4c9c4b46b70af97b53a5b76e6c16e29199e432c03d337f5b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc235/abc235_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

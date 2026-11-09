@@ -1,0 +1,337 @@
+            ARC100 / ABC102 解説
+
+
+                                writer : maroonrk
+
+                 平成30 年7 月1 日
+
+
+
+              For International Readers: English editorial starts from page 8.
+
+
+A : Multiple of 2 and N
+
+ N が偶数のとき、答えはN です。また、N が奇数のとき、答えは2N です。
+ C++による解答コード
+
+
+
+
+
+                                         1
+
+B :　Maximum Diﬀerence
+
+ 数列の最大値を最小値を求め、その差を答えればよいです。最大値と最小値が一致する場合、添
+
+字が異なる、という条件を無視してしまうように思えますが、最大値と最小値が一致するというこ
+
+とは、すべての要素が等しいので、問題ありません。
+ C++による解答コード
+
+
+
+
+
+                                         2
+
+C : Linear Approximation
+
+  Bi = Ai −i と定義すれば、問題は、自由に整数b を選び、abs(Bi −b) の総和を最小化する問
+題です。ここで、b をBi の中央値にするのが最適であることがわかります。中央値でない場合は、
+中央値に近づけることで損をしないことからこれはわかります。よって、Bi をソートして中央値
+を求め、実際に答えを計算すればよいです。ソートがボトルネックとなり、この問題はO(NlogN)
+
+で解けます。
+
+
+
+
+
+                                         3
+
+D : Equal Cut
+
+ 予め累積和を求めておき、ある区間の和をO(1) で求められるようにしておきます。
+ 切り込みを入れる3 箇所のうち、真ん中の切れ込みを1 つ固定したとします。真ん中の切れ込み
+で切ったあとの2 つの数列をL,R とします。あとは、L とR をそれぞれ1 回ずつ切ることを考え
+
+ます。
+ L の切り方を考えると、切ったあとの2 つの数列の要素の総和ができるだけ近いほうが良いこと
+
+がわかります。よって、真ん中の切れ込みを固定すると、左の切れ込みの位置を決めることが出来
+ます。真ん中の切れ込みの位置が、i 番目の要素とi + 1 番目の要素の間の時、最適な左の切れ込
+みの位置をF(i) とおきます。このとき、F(i) はi に関して単調増加であり、尺取り方を用ること
+でF(i) をすべてのi に対してO(N) で求めることが出来ます。
+
+ 右の切れ込みについても、同様にして求めることが出来ます。これで、すべての真ん中の切れ込
+みの位置に対して、残りの2 つの切れ込みの位置を求めることが出来ました。あとは、実際にそれ
+
+ぞれの場合に対して答えを計算すれば、答えが求まります。
+ よって、O(N) でこの問題は解けました。
+
+
+
+
+
+                                         4
+
+E : Or Plus Max
+
+ 各x について、max Ai + Aj s.t. (i or j) = x が求められれば、あとは単に累積max を取れば良
+いので、この問題は簡単です。しかし、これを求めるのは難しいです。そこで代わりに、各x につい
+て、max Ai +Aj s.t. (i or j) ⊆x を求めます。ただしここで便宜的に、a ⊆b を、a をbit で表した
+ときの1 の位置が、b をbit で表したときの1 の位置の部分集合となっている、の意味で使います。
+これを求めたあと累積max を求めても、正しい答えは得られます。（(i or j) ⊆x →(i or j) ≤x
+
+なので）
+ これを求めるためには、各x について、i ⊆x なるi についてAi を列挙したときの上位2 つが
+求まれば良いです。逆から見ると、各i について、i ⊆x なるすべてのx について、Ai で上位2
+つを更新する、という操作ができれば良いです。これは、高速ゼータ変換の要領で、高速に行うこ
+とができます。よってこの問題は、O(N2N) で解くことが出来ます。
+
+
+
+
+
+                                         5
+
+F : Colorful Sequences
+
+ カラフルとは限らない、長さN で、各要素が1 以上K 以下の整数列すべてについて、A を含
+む個数の総和を求めるのは簡単です。A が登場する位置がN −M + 1 通り考えられ、それを一つ
+固定すると、残りのN −M 要素を自由に決定できるので、その位置にA を含む整数列の総数は
+KN−M 個になります。
+ あとは、カラフルでない長さN の整数列すべてについてA を含む個数を数える問題を解きます。
+
+これが解ければ、引き算をして答えが求まります。
+ まず、そもそもA がカラフルであった場合、答えは0 です。
+
+ 残りのパターンを考える前に、次の問題を解いておきます。
+
+ 長さN のカラフルでない整数列の個数を求めよ。
+
+
+ DP をします。dp[i][j] = 長さi で、最後のj 個の要素はすべて異なるが、最後の(j + 1) 個の要
+素の中には重複があるような整数列の個数と定めます。このDP の遷移を考えます。dp[i][j] から
+dp[i + 1][j′] への遷移にかかる係数は、以下のようになります。
+
+   • j + 1 < j′ のとき: 0
+
+   • j + 1 = j′ のとき: K −j
+
+   • j + 1 > j′ のとき: 1
+
+ 最初のパターンは簡単です。どんな要素を追加しても、最後の(j + 2) 個の中に必ず重複は存在
+するので、このような遷移はありません。次のパターンは、元の数列の最後j 個以外の要素を追加
+することで起こる遷移です。追加する要素の候補はK −j 個なので、この遷移になります。最後の
+パターンは、j′ の値を決めると、追加する要素が一意に定まるので、この遷移になります。
+ このDP を愚直に書くと、状態数O(NK)、遷移(K) で合計O(NK2) となり間に合いませんが、
+累積和を用いると遷移を高速化でき、O(NK) で解くことが出来ます。
+ このDP の結果を用いて、A がカラフルでない場合を解きます。
+ まず、A 内に重複する要素がない場合を考えます。ここで、次の問題を考えてみます。
+
+ 長さN のカラフルでない整数列すべてについて、長さM 個の連続する部分列であって、重
+
+ 複する値を含まないものの個数を数える。
+
+
+ この問題では、A の要素には一切関知せず、M だけを考えている点に注意してください。この問
+題は、カラフルでない数列を数える上記のDP を変形して（長さM の重複を含まない連続部分列
+がすでに登場したか、という0, 1 の次元を足す）答えを求めることが出来ます。長さM で、各要素
+が1 以上K 以下の、重複する要素を含まない整数列は、N!/(N −M)! 通りありますが、この問題
+において、これら全ては同じ回数だけ数え上げられます。よって、この問題の答えをN!/(N −M)!
+で割れば、A を含む個数の総和が求まることになります。
+ 最後に、A 内に重複する要素がある場合を考えます。A 内に重複する要素があるので、次の条件
+を満たす整数F,B を定義することが出来ます。
+
+   • A の先頭F 個の要素はすべて異なるが、A の先頭F + 1 個の要素の中には重複がある
+
+   • A の末尾B 個の要素はすべて異なるが、A の末尾B + 1 個の要素の中には重複がある
+
+
+                                         6
+
+ すべてのi(0 ≤i ≤N −M) について、A の先頭にi 個の要素を足し、A の末尾にN −M −i
+
+個の要素を足して、カラフルでない整数列を作る方法が何通りあるかを求めます。ここで、長さ
+i + F で、最後のF 要素がすべて異なるカラフルでない数列の個数、を求めることが出来ます。こ
+れは単に、上記のDP の結果を利用すれば良いです。長さF で、各要素が1 以上K 以下の、重
+複する要素を含まない整数列は、N!/(N −F)! 通りありますが、これらはすべて、先程数えた数
+列の末尾F 個として均等に登場します。よって、割り算をすることで、長さがi + F で、最後の
+F 要素がA の先頭F 個と一致するカラフルでない数列の個数が求まります。同様にして、長さが
+B + N −M −i で、先頭のB 要素がA の末尾B 個と一致するカラフルでない数列の個数が求ま
+ります。この2 つの通り数を掛け合わせれば、あるi に対する答えを求められます。ここで数えた
+
+先頭、末尾に足される数列の組合せが必要十分であることは、簡単に確かめられます。
+ これで、すべてのパターンを数え上げることが出来ました。最初のDP がボトルネックとなり、
+O(NK) でこの問題は解くことが出来ます。
+
+
+
+
+
+                                         7
+
+       Atcoder Regular Contest Editorial
+
+                         writer : maroonrk
+
+                          July 1, 2018
+
+
+A : Multiple of 2 and N
+
+If N is even, the answer is N; otherwise the answer is 2N.
+  C++ solution
+
+B :　Maximum Diﬀerence
+
+Print max minus min.
+  C++ solution
+
+C : Linear Approximation
+
+Deﬁne Bi = Ai−i. Then, we want to minimize the value of the sum of abs(Bi−b)
+by choosing a variable b.
+    It turns out that the optimal value of b is the median of Bi. This is because,
+if b is not the median, if we continuously change b to the direction of the median,
+the sum of abs(Bi −b) never increases.
+  We can get the median by sorting the array B.  This solution works in
+O(NlogN) time.
+
+
+
+
+
+                                  1
+
+D : Equal Cut
+
+Let’s pre-compute preﬁx sums (and now we can get interval sums in O(1).
+  We need to make three cuts. Let’s ﬁx the position of the second (the middle)
+cut. Now we have two parts, and we need to make one more cut for each of the
+two parts.
+   Let L, R be the sum of all elements in left and right parts, respectively. Let
+L1, L2 be the sum of all elements in the two smaller parts we get from the left
+part (deﬁne R1, R2 similarly). How should we choose L1, L2?
+   Notice that we should always make a cut that minimizes the value of |L1 −
+L2|, regardless of the value of R1 and R2.  No matter what the values of
+R1 and R2, this choice always minimizes max{L1, L2, R1, R2} and maximizes
+mub{L1, L2, R1, R2}. (This is because the average of L1 and L2 is always L/2.
+The value of max{L1, L2} becomes the closest to L/2 (and the smallest) when
+|L1 −L2| is minimized. The same observation holds for the min.)
+   Thus, once we decide the position of the second cut, we can uniquely deter-
+mine the positions of the ﬁrst cut and the third cut. Let F(i) be the optimal
+position of the ﬁrst cut when the second cut is made at position i. Since F(i) is
+monotonously increasing, we can compute this function by using two-pointers.
+Similarly, we can compute the position of the third cut.
+   This solution works in O(N) time.
+
+E : Or Plus Max
+
+In this editorial, for two integers a and b, ”a ⊆b” means that the set of positions
+of ones in the binary representation of a is a subset of that of b.
+    Ideally, for each x, we want to compute max Ai +Aj s.t. (i or j) = x. Then,
+we can compute the solutions as preﬁx maximums of this array. However, this
+is diﬃcult.
+   Instead, for each x, compute max Ai + Aj s.t. (i or j) ⊆x. Notice that the
+preﬁx maximums of this array give the same results because (i or j) ⊆x →
+(i or j) ≤x.
+   To compute this, for each x, we want to get the two largest values of Ai such
+that i ⊆x.
+    Let’s use an algorithm similar to Fast Zeta Transform. Imagine a set Sx,
+the (multi)set of all Ai such that i ⊆x. We are only interested in the largest
+two elements of Sx.
+
+   • For each k from 0 to N −1,
+
+      – For each x from 0 to 2N−1 such that the k-th bit of x is zero,
+           ∗Sx|(1<<k) := Sx|(1<<k) ∪Sx
+          ∗If Sx|(1<<k) contains more than two elements, discard small ele-
+             ments while it has more than two elements.
+
+   This solution works in O(N2N) time.
+
+
+                                  2
+
+F : Colorful Sequences
+
+It’s easy to compute the total number of occurrences of A in (not necessarily
+colorful) all sequences of length N: since there are N −M + 1 possibilities for
+the position of A and you can freely choose the remaining N −M elements, this
+is (N −M + 1)KN−M.
+   From now on, let’s compute the total number of occurrences of A in non-
+colorful sequences of length N. The answer to the original problem is (N −M +
+1)KN−M minus this number.
+   As a warm-up, consider the following problem:
+
+  Count the number of non-coloful sequences of length N.
+
+   Deﬁne dp[i][j] as the number of non-colorful sequences of length i, such that
+the last j elements are pairwise distinct but the last j +1 elements are not. The
+transition coeﬃcients from dp[i][j] to dp[i + 1][j′] is as follows:
+
+   • In case j + 1 < j′, 0.
+
+   • In case j + 1 = j′, K −j.
+
+   • In case j + 1 > j′, 1.
+
+   This is O(NK2) with straightforward implementation, but with preﬁx sums
+we can do it in O(NK).
+    Let’s return to the problem. Consider three cases:
+
+Case 1. A is colorful.
+
+Obviously, the answer is 0.
+
+Case 2. All elements in A are pairwise distinct. A is not
+colorful.
+
+Consider the following problem:
+
+  For each non-colorful sequence of length N, count the number of contiguous
+  subsequences of length M whose elements are pairwise distinct. Find the
+  sum of these counts.
+
+   Note that the elements in A are irrelevant to this problem: we only care the
+value of M. This problem can be solved in the almost same way as the DP
+solution in warm-up problem. Notice that each of K!/(K −M)! sequences of
+length M occur in all non-colorful sequences the same number of times. Thus,
+the solution to the original problem is the solution to this problem, divided by
+K!/(K −M)!.
+
+
+
+
+                                  3
+
+Case 3. There are duplicated elements in A. A is not col-
+orful.
+
+Deﬁne F, B as follows:
+
+   • The ﬁrst F elements of A are pairwise distinct, but the ﬁrst F +1 elements
+      are not.
+
+   • The last B elements of A are pairwise distinct, but the last B +1 elements
+      are not.
+
+   For each i(0 ≤i ≤N −M), let’s compute the number of ways to make a non-
+colorful sequence by attaching i elements to the beginning of A and N −M −i to
+the end of A (the answer is the sum of these values). Notice that we can handle
+two directions independently. That is, this is the product of (the number of ways
+to make a non-colorful sequence (of length M +i) by attaching i elements to the
+beginning of A) and (the number of ways to make a non-colorful sequence by
+attaching N −M −i elements to the end of A). These values can be computed
+in the same way as the warm-up problem.
+   For all three cases, this solution works in O(NK) time.
+
+
+
+
+
+                                  4

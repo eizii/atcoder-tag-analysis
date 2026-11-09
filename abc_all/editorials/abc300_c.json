@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc300_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6280",
+      "text": "この問題は上手な実装方針を選ぶことができるかを聞いている問題です。バツ印の特徴をつかんだ実装方針を選ばないと場合によっては実装が大変になると思います。\n想定解は次の事実に注目しています。\nすべてのバツ印は、中央にサイズ\n\\(1\\)\nの部分的なバツ印を含んでる。\n逆に、サイズ\n\\(1\\)\nの部分的なバツ印の\n#\nの配置は、サイズ\n\\(1\\)\n以上のバツ印の中央でしか登場しない。\nここで「サイズ\n\\(1\\)\nの部分的なバツ印」というのは、砕けた言い方をすると、\nが部分的に登場する箇所に注目してバツ印を検出するということです。例えば 問題文に載っている図(下図) では\n\\((i, j) = (2, 2), (7, 3)\\)\nにサイズ\n\\(1\\)\nの部分的なバツ印が登場していて、これ以外にはバツ印は存在しません。\nサイズ\n\\(1\\)\nのバツ印に注目すると、次のようなアルゴリズムで答えを求めることができます。\n\\(\\mathrm{ans}\\)\nを答えを管理する 0 初期化された配列とする。\n\\(1 \\leq i \\leq H, 1 \\leq j \\leq W\\)\nを満たす\n\\((i, j)\\)\nの組について次の操作を行う。\n\\((i, j), (i+1,j+1), (i+1,j-1), (i-1,j+1),(i-1,j-1)\\)\nに\n#\nが置かれているかを判定する。どこか 1 ヵ所でも\n.\nである場合は操作を終了する。\n上記の\n\\(5\\)\nヵ所が全て\n#\nであるとき、サイズ\n\\(1\\)\nのバツ印が部分的に登場していることになる。この場合、\n\\((i, j)\\)\nを中心とするバツ印のサイズを for-loop を用いて計算する。\n\\((i, j)\\)\nを中心とするバツ印のサイズを\n\\(d\\)\nとして、\n\\(\\mathrm{ans}[d]\\)\nに\n\\(1\\)\nを加える。\n操作を終了した時点での\n\\(\\mathrm{ans}[1], \\mathrm{ans}[2], \\dots, \\mathrm{ans}[N]\\)\nが答えである。\n計算量は\n\\(\\mathrm{O}(HW)\\)\n程度で、十分高速です。\n実装例(C++)",
+      "codes": [
+        "#.#\n.#.\n#.#",
+        "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int H, W;\n  cin >> H >> W;\n  vector<string> g(H);\n  for (auto& x : g) cin >> x;\n\n  auto ok = [&](int i, int j) { return 0 <= i and i < H and 0 <= j and j < W; };\n  auto test = [&](int i, int j, int d) {\n    for (auto& x : vector{+d, -d}) {\n      for (auto& y : vector{+d, -d}) {\n        int s = i + x, t = j + y;\n        if (!ok(s, t) or g[s][t] != '#') return false;\n      }\n    }\n    return true;\n  };\n\n  int N = min(H, W);\n  vector<int> ans(N + 1);\n  for (int i = 0; i < H; i++) {\n    for (int j = 0; j < W; j++) {\n      if (g[i][j] != '#') continue;\n      if (test(i, j, 1)) {\n        int d = 1;\n        while (test(i, j, d + 1)) d++;\n        ans[d]++;\n      }\n    }\n  }\n  for (int i = 1; i <= N; i++) cout << ans[i] << \" \\n\"[i == N];\n}"
+      ],
+      "text_sha256": "665c4146b8d55ee69a12cbdeb68bbd29cbadcbd0d2f85328bef1b1e0d682b287",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc300/abc300_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc300/editorial/6284",
+      "text": "印同士が離れていることを利用して、印の形状をあまり気にせずに黒マスの「連結成分」を数えることができます。深さ優先探索を行うか Union-Find を使うことになるでしょう。印のサイズは、マスの個数を\n\\(4\\)\nで割れば求められます。\n実装例 (Python)",
+      "codes": [
+        "H, W = map(int, input().split())\nC = [list(input()) for _ in range(H)]\n\ndef dfs(y, x):\n    cnt = 1\n    C[y][x] = '.'\n    for dy in range(-1, 2):\n        for dx in range(-1, 2):\n            y2, x2 = y + dy, x + dx\n            if 0 <= y2 < H and 0 <= x2 < W and C[y2][x2] == '#':\n                cnt += dfs(y2, x2)\n    return cnt\n\nans = [0 for _ in range(min(H, W))]\nfor y in range(H):\n    for x in range(W):\n        if C[y][x] == '#':\n            ans[dfs(y, x) // 4 - 1] += 1\nprint(' '.join(map(str, ans)))"
+      ],
+      "text_sha256": "4ae3060dc882d21100983b2598de3999d9a4cabba9aa74eb34135486347ea800",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc300/abc300_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

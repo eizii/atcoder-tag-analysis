@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc454_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc454/editorial/19007",
+      "text": "まず、各マスを市松模様に白か黒で塗ることを考えます。マス\n\\((i,j)\\)\nに対し\n\\(i+j\\)\nが偶数なら黒で、奇数なら白で塗ります。このとき、\n\\(1\\)\n回の移動でコマがあるマスの色は必ず変わります。\nこれを元に答えが\nYes\nとなる必要条件を考えます。\n[1]\n\\(N\\)\nが奇数の時\nマス\n\\((1,1),(N,N)\\)\nはどちらも黒で塗られています。したがって、途中に通る\n\\(N^2-3\\)\nマスは順に白→黒→白→…→白となる必要がありますが、\n\\(N^2-3\\)\nは偶数なのでそのようなことは起こり得ません。したがって、答えは\nNo\nになります。\n[2]\n\\(N\\)\nが偶数の時\n[1] と同じ議論により、途中に通る\n\\(N^2-3\\)\nマスは順に白→黒→白→…→白となる必要があります。もし\n\\(A+B\\)\nが偶数なら黒マスの方が多くなり答えは\nNo\nになります。\n以上より、答えが\nYes\nになる必要条件は\n\\(N\\)\nが偶数\n\\(A+B\\)\nが奇数\nとなります。そして、これが必要十分条件となります。\nこの\n\\(2\\)\nつを満たしている\n\\(N,A,B\\)\nに対し、実際に条件を満たす\nLRUD\n文字列を構成します。\n上の問題では\n\\(N\\times N\\)\nのグリッドを考えていますが、以下ではより拡張し\n\\(H\\times W\\)\nのグリッドで考えます。\nこの問題を再帰的に解くことを考えます。\nまず、\n\\(A > 2\\)\nであるならば最初に\nRR...RDLL...LD\nと移動することで\n\\((H,W,A,B) \\leftarrow (H-2,W,A-2,B)\\)\nの場合に帰着できます。また、\n\\(H-A+1 > 2\\)\nであるならば最後に\nRR...RDLL...LD\nと移動することで\n\\((H,W,A,B) \\leftarrow (H-2,W,A,B)\\)\nの場合に帰着できます。これらの操作を繰り返すことで\n\\(H=2\\)\nの場合に帰着することができます。\n同様の操作を\n\\(W\\)\n側に対しても考えることで、この問題を\n\\((H,W)=(2,2)\\)\nの場合まで小さくすることができます。\n\\((H,W)=(2,2)\\)\nの場合\n\\((A,B)=(1,2),(2,1)\\)\nのいずれかなので、それぞれ場合分けして解くことができます。\n以上を適切に実装することでこの問題に正答することができます。計算量はテストケース毎に\n\\(O(N^2)\\)\nです。\n以下では再帰的に解くとした部分を先頭・末尾につける文字列をそれぞれ保持しループを用いて実装しています。\n実装例(Python3)",
+      "codes": [
+        "for _ in range(int(input())):\n    n, a, b = map(int, input().split())\n    a, b = a - 1, b - 1\n    if n % 2 == 1 or (a + b) % 2 == 0:\n        print(\"No\")\n        continue\n    s1 = []\n    s2 = []\n    for _ in range(n // 2 - 1):\n        s = \"R\" * (n - 1) + \"D\" + \"L\" * (n - 1) + \"D\"\n        if a >= 2:\n            s1.append(s)\n            a -= 2\n        else:\n            s2.append(s[::-1])\n    for _ in range(n // 2 - 1):\n        s = \"DRUR\"\n        if b >= 2:\n            s1.append(s)\n            b -= 2\n        else:\n            s2.append(s[::-1])\n    assert (a, b) in ((0, 1), (1, 0))\n    if (a, b) == (0, 1):\n        s1.append(\"DR\")\n    else:\n        s1.append(\"RD\")\n    ans = \"\".join(s1) + \"\".join(s2[::-1])\n    print(\"Yes\")\n    print(ans)"
+      ],
+      "text_sha256": "cb26009fb0bd032bac27e9ea1e76440bff67184a75d1d2f1918e7db4afd8cfe7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc454/abc454_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc454/editorial/19141",
+      "text": "Yes\nNo\nの判定は公式解説を参照してください。\nYes\nの場合を考えます。\n\\(r = \\min(A,~ N-1)\\)\nとします。(\n\\(r,~ r+1\\)\n行のどちらかにマス\n\\((A, B)\\)\nが存在するような\n\\(r\\)\nを取ればよいです。)\n基本的には左右に進み続け、進めなくなったら下に 1 回進みます。\n\\(r,~ r+1\\)\n行目では、マス\n\\((A, B)\\)\nを避けつつ、この 2 行にまたがってくねくね進み、同様に進めなくなったら下に進みます。\nこの戦略を取ることで、条件に適したパスが得られることが証明できます。\nよって、現在居るマスが\n\\((N, N)\\)\nとなるまで\n\\(r\\)\n行目のとき …\nD -> LR\n\\(r+1\\)\n行目のとき …\nU -> LR -> D\nそれ以外のとき …\nLR -> D\nこのとき上に進めないため\nU -> LR -> D\nとしてよい\nの順に探索し、進めるなら進むことを繰り返せばよいです。\n実装例 (Rust)",
+      "codes": [],
+      "text_sha256": "62c85b2708ba4582d75bba2eb8dbe06c515363252879c6e858979317ed2952b7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc454/abc454_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc454/editorial/19134",
+      "text": "Yes\n,\nNo\nの判定については公式解説の通りです。\n以下は\nYes\nの場合のルートの構築について説明します。\n\\(A\\)\nが偶数、\n\\(B\\)\nが奇数の場合を考えます。\nグリッド全体を以下の\n\\(3\\)\nつの長方形に分割します。\n左上が\n\\((1,1)\\)\n右下が\n\\((A,B-1)\\)\n左上が\n\\((1,B)\\)\n右下が\n\\((A,N)\\)\n左上が\n\\((A+1,1)\\)\n右下が\n\\((N,N)\\)\nこの\n\\(3\\)\nつの長方形を順に、全てのマスを訪れるようにします。\n\\(1\\)\nつ目は\nDD...DRUU...UR\nを\n\\((B-1)/2\\)\n回繰り返せば良いです。\n\\(2\\)\nつ目は\nRR...RDLL...LD\nを\n\\(A/2-1\\)\n回繰り返して\n\\((A-1,B)\\)\nに訪れた後、\nRDRURDRU...RDD\nとすれば良いです。\n\\(3\\)\nつ目は\nLL...LDRR...RD\nを繰り返せば良いです。(最後の\nD\nは除外)\n次に\n\\(A\\)\nが偶数、\n\\(B\\)\nが奇数の場合を考えます。\nこれはグリッド全体を対角線で反転し、上と同様に解けば良いです。\n具体的には\n\\(A,B\\)\nを入れ替えて上のアルゴリズムを適用し、出力の文字列について\nU\n\\(\\leftrightarrow\\)\nL\n,\nD\n\\(\\leftrightarrow\\)\nR\nと置き換えれば良いです。",
+      "codes": [],
+      "text_sha256": "dd847d36978714c96956ea22e5cfd4dfbf32e5532ce6817e2df79931b9287b1d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc454/abc454_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

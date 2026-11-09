@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc156_f",
+  "editorials": [
+    {
+      "text": "F: Modularness\n(原案・準備・解説: gazelle)\n1 つのクエリにO(k) で答えることを目指します。i 番目のクエリに答えるものとして、n =\nni, x = xi, m = mi と書くことにします。あらかじめd の要素それぞれをm で割った余りで置き\n換えておいても、クエリに対する答えは変わりません。以下そのように置き換えたものとして議論を\n進めます。\n(ai mod m) < (ai+1 mod m) とならない、つまり(ai mod m) = (ai+1 mod m) もしくは\n(ai mod m) > (ai+1 mod m) となるようなi (0 ≤i < n −1) がいくつあるかを考えます。\n(ai mod m) = (ai+1 mod m) となる場合\nこのとき、di mod k = 0 になっています。そのようなi の個数は、d の0 である要素がそれぞ\nれ数列a に何回足されるかを考えることでO(k) で計算可能です。\n(ai mod m) > (ai+1 mod m) となる場合\nこのとき、d の要素が非負であること、およびあらかじめ行った前処理を考えると、ai+1 をm\nで割った商がai をm で割った商よりちょうど1 大きくなっています。また商が増えるのは、\nそのような場合に限ることも分かります。そのようなi の個数は、an−1 をm で割った商から\na0 をm で割った商を引くことで求めることができます。an−1 の値は、d の要素がそれぞれ\n数列a に何回足されるかを考えることでO(k) で計算可能です。\n以上より、(ai mod m) < (ai+1 mod m) とならないi の個数をO(k) で求めることができます。\nこれらをn −1 から引くことで、クエリにO(k) で答えることができました。\n",
+      "text_sha256": "57d0667629ba22118f6f27a56cb39de1bf90a63368b3a54ce35d85f474cd7f02",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc156/abc156_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

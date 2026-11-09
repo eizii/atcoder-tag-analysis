@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc446_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc446/editorial/16361",
+      "text": "\\(d[i][v]\\)\nを「\n\\(A_1\\)\nから\n\\(A_i\\)\nまでの連続部分列のみを考えた時に、末尾の要素が\n\\(v\\)\nであるような条件を満たす部分列の長さの最大値」とします。求める答えは\n\\(d[i][v]\\)\nの最大値です。\nこの動的計画法の遷移を考えると、\n\\(d[i][v]\\)\nは\n\\(v=A_i\\)\nなら\n\\(d[i][v]=\\max(d[i-1][v], d[i-1][v-1]+1)\\)\n、\n\\(v\\neq A_i\\)\nなら\n\\(d[i][v]=d[i-1][v]\\)\nとなります。\n\\(d[i]\\)\nを in-place に更新する（配列を使い回す）ことにし、さらに要素が非ゼロである部分のみ map で持ちながら動的計画法の更新を行うことで計算量\n\\(O(N \\log N)\\)\nで解くことができます。\n以上を適切に実装することでこの問題を解くことができます。詳しくは実装例を参考にしてください。\n実装例(Python3)\n実装例(C++)",
+      "codes": [
+        "from collections import defaultdict\n\nn = int(input())\na = list(map(int, input().split()))\nd = defaultdict(int)\nfor v in a:\n    d[v] = max(d[v], d[v - 1] + 1)\nprint(max(d.values()))",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tios::sync_with_stdio(false);\n\tcin.tie(nullptr);\n\tint n;\n\tcin >> n;\n\tunordered_map<int, int> d;\n\tint ans = 0;\n\tfor (int i = 0; i < n; i++) {\n\t\tint ai;\n\t\tcin >> ai;\n\t\td[ai] = max(d[ai], d[ai - 1] + 1);\n\t\tans = max(ans, d[ai]);\n\t}\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "955671ea055a0c2988e2202f5e940dcb2fe8a5c4b54b47278ec3cde109d7be4f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc446/abc446_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc446/editorial/16427",
+      "text": "\\(\\mathrm{dp}[i]\\)\nを、\n\\(A_1, \\dots, A_i\\)\nの部分列であって条件を満たすもののうち、末尾の要素が\n\\(A_i\\)\nであるものの長さの最大値とします。答えは\n\\(\\mathrm{dp}[i]\\)\nたちの最大値です。\n\\(\\mathrm{dp}[i]\\)\nからの遷移は、\n\\(i < j\\)\nかつ\n\\(A_i + 1 = A_j\\)\nを満たす\n\\(j\\)\nのうち最小のものに対して\n\\(\\mathrm{dp}[j] \\leftarrow \\max(\\mathrm{dp}[j], \\mathrm{dp}[i] + 1)\\)\nとするもののみを考える（最小でない\n\\(j\\)\nに対する遷移を考えない）ことにしても問題ありません。このような\n\\(j\\)\nは\n\\(A_i\\)\nの値ごとに添字を並べた配列を作成し、その上を二分探索することで求められます。\n時間計算量は全体で\n\\(O(N \\log N)\\)\nです。\nC++ による実装例：",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main()\n{\n  int N;\n  cin >> N;\n  vector<int> A(N);\n  for (int i = 0; i < N; i++)\n    cin >> A[i];\n\n  map<int, vector<int>> mps;\n  for (int i = 0; i < N; i++)\n    mps[A[i]].push_back(i);\n\n  vector<int> dp(N, 1);\n  for (int i = 0; i < N; i++)\n  {\n    const auto &vec = mps[A[i] + 1];\n    int k = ranges::lower_bound(vec, i) - vec.begin();\n    if (k < (int)vec.size())\n    {\n      int j = vec[k];\n      dp[j] = max(dp[j], dp[i] + 1);\n    }\n  }\n  cout << ranges::max(dp) << endl;\n}"
+      ],
+      "text_sha256": "e244a481576e52759c07b2510a33fd78979e29474aee7346fad3c6112b3bb77f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc446/abc446_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

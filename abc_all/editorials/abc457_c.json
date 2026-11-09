@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc457_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc457/editorial/20133",
+      "text": "手順通りに愚直に配列を連結していくと実行時間制限やメモリ制限に引っかかるので、別の方法を考えます。\n\\(B_K\\)\nが\n\\(A\\)\nの中のどの整数列の何番目の要素かを求めることを考えます。\n手順を順に考えることで、\n\\(A\\)\nの中のどの整数列の要素かは\n\\(\\displaystyle \\sum_{j=1}^{k-1} L_jC_j < K\\)\nを満たす最大の\n\\(k\\)\nに対する\n\\(A_k\\)\nであることが分かります。\nこれらを踏まえると、答えは以下のステップで求めることができることが分かります：\n\\(i=1,2,\\ldots,N\\)\nに対して以下を行う：\nもし\n\\(K \\le L_iC_i\\)\nならば求める値は\n\\(A_i\\)\nを\n\\(C_i\\)\n回連結させた整数列の\n\\(K\\)\n番目の要素、つまり\n\\(A_{i,(K-1)\\bmod L_i + 1}\\)\nが答えである。\nそれ以外の場合、\n\\(K\\)\nを\n\\(K-L_iC_i\\)\nに置き換える。\n以上を適切に実装することでこの問題に正答することができます。\n実装例(Python3)",
+      "codes": [
+        "import sys\ninput = sys.stdin.readline\n\nn, k = map(int, input().split())\nk -= 1\na = []\nfor i in range(n):\n    aa = list(map(int, input().split()))[1:]\n    a.append(aa)\nc = list(map(int, input().split()))\nfor i in range(n):\n    if k < c[i] * len(a[i]):\n        print(a[i][k % len(a[i])])\n        break\n    k -= c[i] * len(a[i])"
+      ],
+      "text_sha256": "a4722400cd59f34ba4978e5f1e53d3f016701d62da2e19c9cc7edb51af81e88a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc457/abc457_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

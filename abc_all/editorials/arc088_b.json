@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc088_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc088/editorial.pdf",
+      "text": "D: Wide Flip\n\n 与えられる文字列の長さをn とします。\n\n  k 文字目とk +1 文字目が異なるとします。このとき、すべての文字を0 にするためには、k 文字目とk +1\n\n文字目の片方のみを書き換えるような操作を1 回以上行わなければなりません。すなわち、max(k, n −k) 文\n\n字以下の連続する部分を書き換えるような操作が必要となります。\n\n  S の、k 文字目とk + 1 文字目が異なるような箇所のうちの、max(k, n −k) の最小値をT(S) とします。\n\nK ≥T(S) のとき、T の値の最小値をとるk をとり、k = max(k, n −k) なら最初k 文字を、そうでないな\n\nら最後n −k 文字を書きかえれば、連続する文字が異なるような箇所の個数を、T(S) を減らさずに1 減らす\n\nことができます。また、T(S) = 0 のとき、もし全文字が0 ならこれが目的の文字列であり、そうでないなら\n\n全体に対して操作を行えば目的の文字列を作ることができます。\n\n よって答えは最初の文字列S におけるT(S) の値で、これはO(n) 時間で求められます。\n\n\n                                             2",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "344590b7a7faa0924aa47e3b3cf18cc0e1602da8408486a7d04e264c20485e45"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc251_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc251/editorial/3957",
+      "text": "まず、この問題文をプログラミング的な手続きに言い換えると次のような問題になります。この手順を十分高速に計算できればこの問題を解くことができます。\n\\(1\\)\n以上\n\\(W\\)\n以下のすべての整数について「\n\\(n\\)\nはよい整数か」を管理するフラグ用の配列\nflag\nを用意する。\nflag\nははじめ\nfalse\nで初期化されている。\n\\(3\\)\n個以下であるおもりの集合全てを調べる。各集合についておもりの重さの和\n\\(w\\)\nを求める。そして、\n\\(w\\)\nが\n\\(W\\)\n以下ならば\nflag[w]\nを\ntrue\nにする。\n最終的に\ntrue\nであるフラグの個数が答えとなる。\n上の手順の中で一番難しいのが「\n\\(3\\)\n個以下であるおもりの集合全てを調べる」という部分で、ここで探索の方法を間違えると計算量が膨大になって TLE しています。\nこの部分は「\n\\(3\\)\n個以下である」を「\n\\(1\\)\n個 または\n\\(2\\)\n個または\n\\(3\\)\n個である」と言い換えるのがポイントです。「おもりの個数がちょうど\n\\(x\\)\n個である集合」の場合は 以下のような for-loop を用いた実装で\n\\(\\mathrm{O}(N^x)\\)\nで計算することができるので、このように言い換えたあと\n\\(1\\)\n個の場合,\n\\(2\\)\n個の場合,\n\\(3\\)\n個の場合を別々に計算すれば、この問題は for-loop で実装できる問題に帰着します。\n計算量はフラグ用配列の分の\n\\(\\mathrm{O}(W)\\)\nと for-loop の\n\\(\\mathrm{O}(N+N^2+N^3) = \\mathrm{O}(N^3)\\)\nを合わせて\n\\(\\mathrm{O}(W + N^3)\\)\nとなり、これは十分高速に動作します。\nC++ による実装例は次の通りです。",
+      "codes": [
+        "// for-loop の x = 2 のときの例\n  for(int i = 0; i < N; i++) {\n    for(int j = i + 1; j < N; j++) {\n      // 異なるおもりの組 (i, j) について計算する\n    }\n  }",
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int N, W;\n  cin >> N >> W;\n  vector<int> A(N);\n  for (auto& x : A) cin >> x;\n  \n  vector<int> flag(W + 1);\n\n  for (int i = 0; i < N; i++) {\n    int s = A[i];\n    if (s <= W) flag[s] = 1;\n  }\n\n  for (int i = 0; i < N; i++) {\n    for (int j = i + 1; j < N; j++) {\n      int s = A[i] + A[j];\n      if (s <= W) flag[s] = 1;\n    }\n  }\n  \n  for (int i = 0; i < N; i++) {\n    for (int j = i + 1; j < N; j++) {\n      for (int k = j + 1; k < N; k++) {\n        int s = A[i] + A[j] + A[k];\n        if (s <= W) flag[s] = 1;\n      }\n    }\n  }\n  \n  int ans = 0;\n  for (int i = 1; i <= W; i++) ans += flag[i];\n  cout << ans << endl;\n}"
+      ],
+      "text_sha256": "fed384e0c5882b9f1c559c9169ce0ed10bce924c1c3f79203dd7369e6670a534",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc251/abc251_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

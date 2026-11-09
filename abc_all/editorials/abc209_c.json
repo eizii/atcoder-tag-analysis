@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc209_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc209/editorial/2228",
+      "text": "解けない問題にあたった時、具体例を考えてみるという戦略はどの問題においても有用です。\n本解説では具体例として、\n\\(C=(100,100,100)\\)\nの場合を考えてみます。\nまず、\n\\(A_1\\)\nの値としてありうるのは\n\\(1,2, \\ldots ,100\\)\nの\n\\(100\\)\n通りです。\n次に、\n\\(A_2\\)\nの値としてありうるのは\n\\(1,2, \\ldots ,100\\)\nから\n\\(A_1\\)\nとしてすでに用いた\n\\(1\\)\nつを取り除いた\n\\(99\\)\n通りです。\n最後に、\n\\(A_3\\)\nの値としてありうるのは\n\\(1,2, \\ldots ,100\\)\nから\n\\(A_1,A_2\\)\nとしてすでに用いた\n\\(2\\)\nつを取り除いた\n\\(98\\)\n通りです。\nよって\n\\(A\\)\nとしてありうるのは\n\\(100 \\times 99 \\times 98\\)\n通りと求められます。\n同じように考えると\n\\(C\\)\nが昇順に並んでいるとき、条件を満たす\n\\(A\\)\nの個数は\n\\((C_i-i+1)\\)\nを掛け合わせた値であることが分かります。証明としては、\n\\(A_1, A_2, \\ldots \\)\nの順に値を決めていったときに、\n\\(A_i\\)\nの値の候補が\n\\(1,2, \\ldots C_i\\)\nから\n\\(A_1, A_2, \\ldots A_{i-1}\\)\n(これらは相異なり、全て\n\\(1\\)\n以上\n\\(C_i\\)\n以下) を除いた計\n\\(C_i-i+1\\)\n個であるからです。ただし、\n\\(C_i-i+1<0\\)\nとなる\n\\(i\\)\nが一つでも存在すれば答えは\n\\(0\\)\nです。\nなお、入力で与えられる\n\\(C\\)\nは昇順に並んでいるとは限らないので昇順に並び替える必要があります。\n32-bit 型を用いると計算途中でオーバーフローしてしまう可能性があることに注意してください。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N; cin >> N;\n    vector<int> C(N);\n    for(int i = 0; i < N; i++) cin >> C[i];\n    sort(C.begin(),C.end());\n    long long ans = 1;\n    for(int i = 0; i < N; i++) ans = ans * max(0, C[i] - i) % 1000000007;\n    cout << ans << endl;\n}",
+        "N = int(input())\nC = list(map(int, input().split()))\nC.sort()\nans=1\nfor i in range(N):\n    ans = ans * max(0, C[i] - i) % 1000000007\nprint(ans)"
+      ],
+      "text_sha256": "228fce16037e55a93483b28e2965903779da33f2f60fa7f2b8ace0cb2be470bf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc209/abc209_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

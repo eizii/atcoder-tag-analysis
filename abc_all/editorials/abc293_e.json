@@ -1,0 +1,49 @@
+{
+  "problem_id": "abc293_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc293/editorial/5955",
+      "text": "数列\n\\((a_n)\\)\nを\n\\(a_n = \\displaystyle\\sum_{i=0}^{n-1} A^i\\)\nで定めると、\n\\(a_0 = 0\\)\n、\n\\(a_{n+1} = Aa_n + 1\\)\nを満たします。求めるべきものは\n\\(a_X \\bmod M\\)\nです。\nここで、上の漸化式より行列を用いて\n\\(\\begin{pmatrix} a_{n+1} \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} A & 1 \\\\ 0 & 1 \\end{pmatrix} \\begin{pmatrix} a_n \\\\ 1 \\end{pmatrix}\\)\nと表すことができます。\n\\(a_0 = 0\\)\nであったため、\n\\(\\begin{pmatrix} a_X \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} A & 1 \\\\ 0 & 1 \\end{pmatrix}^X \\begin{pmatrix} 0 \\\\ 1 \\end{pmatrix}\\)\nです。\n\\(\\begin{pmatrix} A & 1 \\\\ 0 & 1 \\end{pmatrix}^X\\)\nの各成分を\n\\(M\\)\nで割った余りは繰り返し二乗法を用いて\n\\(O(\\log X)\\)\nで求めることができます（整数の\n\\(X\\)\n乗を\n\\(M\\)\nで割った余りを求めるのと同様の要領です）。\nよってこの問題を\n\\(O(\\log X)\\)\nで解くことができました。\nなお、\n\\(\\displaystyle\\sum_{i=0}^{X-1} A^i = \\frac{A^X-1}{A-1}\\)\nですが、これを利用して解こうとする場合\n\\(\\text{mod } M\\)\nにおける\n\\(A-1\\)\nの逆元が存在するとは限らないことに注意してください。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\nusing ll = long long;\n\nvector<vector<ll>> mat_mul(vector<vector<ll>> a, vector<vector<ll>> b, ll mod) {\n\t// 行列乗算\n\tint n = a.size();\n\tvector<vector<ll>> res(n, vector<ll>(n));\n\tfor (int i = 0; i < n; i++) {\n\t\tfor (int j = 0; j < n; j++) {\n\t\t\tfor (int k = 0; k < n; k++) {\n\t\t\t\tres[i][j] += a[i][k] * b[k][j];\n\t\t\t\tres[i][j] %= mod;\n\t\t\t}\n\t\t}\n\t}\n\treturn res;\n}\n\nvector<vector<ll>> mat_pow(vector<vector<ll>> a, ll b, ll mod) {\n\t// 行列累乗\n\tint n = a.size();\n\tvector<vector<ll>> res(n, vector<ll>(n));\n\tfor (int i = 0; i < n; i++) res[i][i] = 1;\n\twhile (b) {\n\t\tif (b & 1) res = mat_mul(res, a, mod);\n\t\ta = mat_mul(a, a, mod);\n\t\tb >>= 1;\n\t}\n\treturn res;\n}\n\nint main() {\n\tll a, x, m;\n\tcin >> a >> x >> m;\n\tvector<vector<ll>> f = { {a,1},{0,1} };\n\tvector<vector<ll>> g = mat_pow(f, x, m);\n\tcout << g[0][1] << '\\n';\n}"
+      ],
+      "text_sha256": "9b21065a61de7ee04db9c78f481106ec84b385e33862d4400043358b60b474b8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc293/abc293_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc293/editorial/5972",
+      "text": "答えを\n\\(f(A,X,M)\\)\nとします.\nこのとき、\n\\(X=0\\)\nならば\n\\(f(A,0,M)=0\\)\nです。\nさらに、\n\\(X\\)\nが奇数のときは\n\\(f(A,X,M)=1+Af(A,X-1,M)\\)\nまたは\n\\(f(A,X,M)=f(A,X-1,M)+A^{X-1} \\mod M\\)\nとなります。\nさらに、\n\\(X\\)\nが偶数のときは(\n\\(X=2n\\)\n)\n\\(f(A,2n,M)=f(A,n,M)\\cdot (1+A^n) \\mod M\\)\nまたは\n\\(f(A,2n,M)=f(A^2\\mod M,n,M)\\cdot (1+A) \\mod M\\)\nとなります\n以上をもとに再帰関数を書けばACするコードがかけます。\nここで、\n\\(A^n \\mod M\\)\nは繰り返し二乗法を使うと\n\\(O(\\log{n})\\)\nで求められることに注意です。\n実装例1\n実装例2",
+      "codes": [
+        "def solve(A,X,M):\n    if X==0:\n        return 0\n    if X%2==1:\n        return (solve(A,X-1,M)*A+1)%M\n    if X%2==0:\n        return (solve(A*A%M,X//2,M)*(1+A))%M\na,x,m=map(int,input().split())\nprint(solve(a,x,m))",
+        "def solve(A,X,M):\n    if X==0:\n        return 0\n    if X%2==1:\n        return (solve(A,X-1,M)+pow(A,X-1,M))%M\n    if X%2==0:\n        return (solve(A,X//2,M)*(1+pow(A,X//2,M)))%M\na,x,m=map(int,input().split())\nprint(solve(a,x,m))"
+      ],
+      "text_sha256": "20fec21e5732063343fba6a67ce245cbbfcd4635c6034d442629406be7b8bd45",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc293/abc293_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc293/editorial/5976",
+      "text": "\\(X <= 10^{12}\\)\nなので平方分割することを考えます。\n\\(\\sqrt{X}\\)\nは\n\\( 10^{6}\\)\n程度なので、\n\\[\nB = 1+A+A^2+...+A^{[\\sqrt{X}]-1}\n\\]\nを時間内に求めることは十分できます。ここで[]はガウス記号です。\nさらに\n\\(D = A^{[\\sqrt{X}]}\\)\nとして、\n\\[\nC = B+B*D+B*D^{2}+...+B*D^{[\\sqrt{x}]}\n\\]\nを求めます。これも10^6程度のstepで求めることができます。\nここで\n\\[\nC = 1+A+A^2+...+A^{[\\sqrt{X}]*[\\sqrt{X}]-1}\n\\]\nです。\nさて、まだ残る項が\n\\(X-[\\sqrt{X}]*[\\sqrt{X}]\\)\nほどありますが、これは高々\n\\(\\sqrt{X}\\)\n程度の大きさです。\n\\(X-[\\sqrt{X}]*[\\sqrt{X}]\\)\n回、\n\\[\nC *= A\n\\]\n\\[\nC += 1\n\\]\nすると、Cは求めたいものに一致します。\n例(Rust):\nhttps://atcoder.jp/contests/abc293/submissions/39633707",
+      "codes": [],
+      "text_sha256": "db4e04304338b8fba0a4479bbef34c15afbea2bfd3a67e66bad22bf502f1b80f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc293/abc293_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc293/editorial/5966",
+      "text": "剰余の法\n\\(M\\)\nと互いに素とは限らない数\n\\(K\\)\nで最後に一度だけ除算を行いたい場合、予め途中の計算を全て\n\\(\\bmod MK\\)\nで行えばよいです。\n今回求めるものは\n\\(\\displaystyle \\frac{A^X-1}{A-1}\\)\nなので\n\\(A^X-1\\)\nを\n\\(\\bmod (M(A-1))\\)\nで求めればよいです。\n\\(M(A-1)\\)\nは\n\\(10^{18}\\)\n程度の大きさになるため、計算には多倍長整数(128bit整数)を用いるなどの工夫が必要です。（繰り返し”二倍法”により64bitの範囲で計算することもできます）\n\\(A=1\\)\nのケースに注意しましょう。\n実装例(Python)",
+      "codes": [
+        "A,X,M=map(int,input().split())\nif A==1:\n  print(X%M)\nelse:\n  print( (pow(A,X,M*(A-1))-1) // (A-1) % M)"
+      ],
+      "text_sha256": "3a19cf5a43b394e6fadc0597429b13640403db1bf086f14fc430f237b7a8d4d1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc293/abc293_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

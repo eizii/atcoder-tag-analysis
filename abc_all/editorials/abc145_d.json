@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc145_d",
+  "editorials": [
+    {
+      "text": "D: Knight\n1 回の移動でx 座標+y 座標の値は3 増えます。なのでX+Y が3 の倍数でないとき答えは0 で\nす。\n3 の倍数のとき、(+1,+2) の移動の回数をn、(+2,+1) の移動の回数をm とすると、各座標の値から\nn + 2m = X, 2n + m = Y という連立方程式が得られ、n, m が求まります。n < 0 またはm < 0 の\nとき答えは0 です。\nそうでないとき、計n + m 回の移動のうち、どのn 回で(+1,+2) の移動をするか決めればよいので、\n答えはn+mCn です。\nこの値は階乗とその逆元を計算することでO(n + m + log mod) で求める事ができます。工夫により\nO(min{n, m}) で求めることもできます。\n",
+      "text_sha256": "f2015f6172d296c3e11b05344ca9d018e766c33bbb55fda4b13daa3054731aa9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc145/abc145_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

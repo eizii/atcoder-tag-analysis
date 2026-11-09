@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc435_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc435/editorial/14708",
+      "text": "原案：admin\nグラフ\n\\(G\\)\nの辺を全て逆向きにしたグラフを\n\\(G'\\)\nとします。\n2種類目のクエリは「\n\\(G'\\)\nにおいて、黒い頂点から頂点\n\\(v\\)\nに到達できるか？」と同値です。以下、\n\\(G'\\)\n上で問題を考えます。\n各頂点\n\\(v\\)\nに対して「黒い頂点から\n\\(v\\)\nに到達できるか」を\n\\(A_v\\)\nとし、この値を保持/更新することを考えます。\n2種類目のクエリは\n\\(A_v\\)\nを答えればよく\n\\(O(1)\\)\nで処理できます。\n1種類目のクエリでは、新たに黒色になった頂点から BFS/DFS により 各\n\\(A_v\\)\nを更新します。この BFS/ DFS においてある頂点\n\\(v\\)\nの遷移先を確認する必要があるのは、\n\\(A_v\\)\nが偽から真に変わったタイミングでのみです。（\n\\(A_v\\)\nが元々真である場合、\n\\(v\\)\nから到達可能な頂点は既に以前の BFS/DFS で到達済みです）。よって各頂点からの遷移は高々\n\\(1\\)\n回しか起こらず、クエリ全体で\n\\(O(Q+N+M)\\)\n時間で処理できます。\n以上によりこの問題を\n\\(O(Q+N+M)\\)\n時間で解くことができます。",
+      "codes": [],
+      "text_sha256": "17554f9d1263dbce853b92b46eed50f3f6ec3448c55c20b430d2dc49ea781e67",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc435/abc435_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc159_c",
+  "editorials": [
+    {
+      "text": "C: Maximum Volume\n縦、横、高さをそれぞれa, b, c とおくと、a + b + c = L をみたす中でabc を最大化する問題とな\nります。\n相加相乗平均不等式より、(abc)\n1\n3 ≤a+b+c\n3\n、すなわちabc ≤\n( a+b+c\n3\n)3 です。等号成立条件は\na = b = c です。\nよって、a = b = c = L\n3 のとき体積最大となり、その時の体積はL3\n27 となります。\nListing 1\nC++ での実装例\n1 #include <stdio.h>\n2 int main(){\n3\nint L;\n4\nscanf(\"%d\",&L);\n5\nprintf(\"%.12f\\n\",(double)L*L*L/27);\n6 }\n",
+      "text_sha256": "da267edd76ad0713383cf2d4d282e2c86f904c1d846b53745265c0e0944b9faa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc159/abc159_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

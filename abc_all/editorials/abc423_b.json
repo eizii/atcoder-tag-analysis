@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc423_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc423/editorial/13864",
+      "text": "すべての\n\\(i\\)\nについて\n\\(L_i = 0\\)\nであるとき\n\\(2\\)\n人の人はいずれも部屋\n\\(0, 1, \\ldots, N\\)\nに到達できます。したがって、この場合の答えは\n\\(0\\)\nとなります。\n\\(L_i = 1\\)\nなる\n\\(i\\)\nが存在するとき\n\\(L_i = 1\\)\nを満たす最小の\n\\(i\\)\nを\n\\(X\\)\n、最大の\n\\(i\\)\nを\n\\(Y\\)\nとおきます。はじめに部屋\n\\(0\\)\nにいる人は部屋\n\\(0, 1, \\ldots, X - 1\\)\nに、部屋\n\\(N\\)\nにいる人は部屋\n\\(Y, Y + 1, \\ldots, N\\)\nに到達できます。したがって、\n\\(2\\)\n人のいずれも到達できない部屋は部屋\n\\(X, X + 1, \\ldots, Y - 1\\)\nの\n\\(Y - X\\)\n個です。特に、\n\\(X = Y\\)\nのときは答えは\n\\(0\\)\nとなります。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<int> l(n);\n\tfor (int i = 0; i < n; i++) cin >> l[i];\n\tint x = 0, y = 0;\n\tfor (int i = 0; i < n; i++) {\n\t\tif (l[i] == 1) {\n\t\t\tx = i;\n\t\t\tbreak;\n\t\t}\n\t}\n\tfor (int i = n - 1; i >= 0; i--) {\n\t\tif (l[i] == 1) {\n\t\t\ty = i;\n\t\t\tbreak;\n\t\t}\n\t}\n\tcout << y - x << '\\n';\n}"
+      ],
+      "text_sha256": "c30cacaa58d2e50c8c2665bd7c3f9c9c39c4b28aa65fbd4863f5680e17dd3dcf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc423/abc423_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

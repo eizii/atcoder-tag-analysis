@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc067_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc078/editorial.pdf",
+      "text": "B : Snake Toy\n\n N 個の棒が長さの昇順に並んでいる場合には，末尾からK 個の棒の長さの和が答えとなる．\n\nよって，初めに棒たちを長さの昇順に並び替えたのち，上述したような貪欲法を適用すればよい．\n\n C++ などの多くのプログラミング言語では，ソート用の関数が予め用意されていることが多い\n\nため，ソート関数を実装する必要はないだろう．\n\n#include <algorithm>\n\n#include <iostream>\n\n#include <vector>\n\nusing namespace std;\n\nint main(){\n\n    int n,k;\n\n    cin>>n>>k;\n\n    vector<int> l(n);\n\n    for(int i=0;i<n;i++){\n\n        cin>>l[i];\n\n    }\n\n    sort(l.begin(),l.end());\n\n    int ans=0;\n\n    for(int i=0;i<k;i++){\n\n        ans+=l[n-1-i];\n\n    }\n\n    cout<<ans<<endl;\n\n}\n\n\n\n\n\n                                        2",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "daceffead14d739542937187b3683f38fe5ac8b08f35ec7e25942c2d81938d3c"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc116_c",
+  "editorials": [
+    {
+      "text": "C - Grand Garden\n⻑さN の数列h に対する「⽔やり」の組をw(h) とする。w(h) の取りうる要素数の最⼩値を\nf(h) とする。\n定理1\nha = {h1, h2, ....hN}(hi ≧1),\nhb = {h1 −1, h2 −1, ....hN −1}\nに対して、f(ha) = f(hb) + 1 である。\n[証明1]\nhi ≦1 より、w(ha) には、(1, r1), (l2, r2), (l3, r3)..., (lx, N) が含まれる。(rk ≦lk+1(1 ≦k ≦N−1)\n(1, r1), (l2, r2), (l3, r3)..., (lx, N) は、(1, N), (l2, r1), (l3, r2)..., (lx, rx−1) で置き換えられる。つ\nまり、最⼩要素数のw(ha) の中に、(1, N) が含まれているものが必ず存在する。w(ha) に(1, N)\nを加えたものは、w(ha) となるので、f(ha) = f(hb) + 1 が⽰される。\n定理2\nha = {h1, h2, ..., hx−1, hx = 0, hx+1, ...hN},\nhb = {h1, h2, ..., hx−1, 0, ...0\n| {z }\nN−x+1\n},\nhc = {0, ..., 0\n| {z }\nx\n, hx+1, ...hN}\nに対して、f(ha) = f(hb) + f(hc) である。\n[証明2]\nhx = 0 より、w(ha) に含まれる要素(l, r) に対して、x < l もしくは  r < x のどちらか⼀⽅\nが成り⽴つ。前者からなる集合は、w(hb) であり、後者からなる集合はw(hc) である。よって、\nf(ha) = f(hb) + f(hc)\nまた、明らかに、以下の定理も成り⽴ちます。\n定理3\nha = {h1, h2, ...hN, 0},\nhb = {h1, h2, ..., hN},\nhc = {0, h1, h2, ..., hN}\nに対して、f(ha) = f(hb) = f(hc) である。\nこれら三つの定理から、\n\n• 伸ばすべき⾼さが全ての花に対して1 以上ならば、全ての花に⽔をやる。\n• ある花x をもはや伸ばす必要がないならば、花1 ∼x −1 と花x + 1 ∼N についての最⼩\n⼿数を別々に求めて、それらの必要⼿数を合計する。\nこの操作を繰り返すことで、この問題に正答することができます。\n",
+      "text_sha256": "69e945c0ac19b4bf5f7e21991bac4d9b11d6354bf6a870e665ad16fef621fd32",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc116/abc116_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

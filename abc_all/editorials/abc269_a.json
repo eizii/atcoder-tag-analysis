@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc269_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc269/editorial/4839",
+      "text": "この問題は、AtCoder を楽しむうえで欠かせない\n標準入出力\nの使い方を学ぶための問題です。\n標準入力\n・\n標準出力\nとは、標準的な、すなわちプログラムがコマンド等で特に入力先・出力先を指定されなかった場合に使用できる入力・出力のことを言います。(この 2 つを合わせて標準入出力と呼びます。) 一般的なシステムでは、標準入力はキーボードによる利用者の文字入力が、標準出力はディスプレイへの表示が対応しています。\n競技プログラミングでは標準入出力を利用してジャッジとプログラムの間でデータのやり取りを行うため、問題を解くためには標準入出力の使い方を理解する必要があります。\n例えば C++ では、\ncin\n,\ncout\nと入出力演算子\n>>\n,\n<<\nを利用すれば標準入力からの入力の受け取りと標準出力への出力を行うことができます。\nC++, Python3(PyPy3) による解答例を以下に示します。 (他の言語については\npractice contest A: Welcome to AtCoder\nの補足の欄を参照ください。)\nC++\nPython3(PyPy3)",
+      "codes": [
+        "int x;\n// 整数を入力\ncin >> x; \n// 整数を出力して改行\ncout << x << endl;",
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n  // スペース区切りの整数の入力\n  int a, b, c, d;\n  cin >> a >> b >> c >> d;\n  int answer = (a + b) * (c - d);\n  // 整数の出力\n  cout << answer << endl;\n  // 文字列の出力\n  cout << \"Takahashi\" << endl;\n}",
+        "# スペース区切りの整数の入力\na, b, c, d = map(int, input().split())\nanswer = (a + b) * (c - d)\n# 整数の出力\nprint(answer)\n# 文字列の出力\nprint(\"Takahashi\")"
+      ],
+      "text_sha256": "c0a38dfc2c37e60690eaf1aaa942ad0e5306f5bb6898e4cdef44484c82e02de3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc269/abc269_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc269/editorial/4860",
+      "text": "https://twitter.com/kyopro_friends/status/1571133784799744000\n(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",
+      "codes": [],
+      "text_sha256": "2d5ef06ee3eede787b6606e9ddf9c5ea742012c4e2a414555673655d0efc32fa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc269/abc269_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

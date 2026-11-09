@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc409_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc409/editorial/13227",
+      "text": "はじめに，各点\n\\(i=1,2,\\ldots,N\\)\nに対して点\n\\(1\\)\nと点\n\\(i\\)\nの相対的な位置関係を求めます．点\n\\(1\\)\nの場所を座標\n\\(0\\)\nとして，そこから時計回りに\n\\(d\\ (0\\leq d\\lt L)\\)\n進んだ位置にある場所を座標\n\\(d\\)\nとします．\n点\n\\(i\\)\nは点\n\\(1\\)\nから時計方向に\n\\(d_1+d_2+\\dots+d_{i-1}\\)\nだけ進んだ距離にあるため，その座標\n\\(x_i\\)\nは\n\\(x_i=d_1+d_2+\\dots+d_{i-1}\\ (\\mathrm{mod}\\ L)\\)\nです．累積和を用いることで，\n\\(x_1,x_2,\\ldots,x_N\\)\nを\n\\(O(N)\\)\nで求めることができます．\n\\(3\\)\n点\n\\(a,b,c\\)\nが正三角形をなすということは，この\n\\(3\\)\n点が円周上に等間隔に並んでいるということです．たとえば\n\\(x_a<x_b<x_c\\)\nのとき，この条件を数式で表すと\n\\(x_b=x_a+L/3\\)\nかつ\n\\(x_c=x_b+L/3\\)\nです．より一般に，\n\\(3\\)\n点が等間隔に並ぶ条件は次のように表せます．\nある整数\n\\(k\\ (0\\leq k\\lt L/3\\)\nが存在して，\n\\(\\lbrace x_a,x_b,x_c\\rbrace=\\lbrace k,k+L/3,k+2L/3\\rbrace\\)\nしたがって，\n\\(x_1,x_2,\\dots,x_N\\)\nの頻度配列を\n\\(\\mathrm{cnt}\\)\nとすれば，求める答えは\n\\(\\displaystyle \\sum_{k=0}^{L/3-1} \\mathrm{cnt}[k]\\times \\mathrm{cnt}[k+L/3]\\times \\mathrm{cnt}[k+2L/3]\\)\nです．\n\\(L\\)\nが\n\\(3\\)\nで割り切れないときは答えは\n\\(0\\)\nになります．\n実装例(Python)",
+      "codes": [
+        "N, L = map(int, input().split())\nif L % 3 != 0:\n    print(0)\n    exit()\nd = list(map(int, input().split()))\nx = 0\ncnt = [0] * L\nfor i in range(N):\n    if i != 0:\n        x += d[i - 1]\n    x %= L\n    cnt[x] += 1\n\nans = 0\nfor i in range(L // 3):\n    ans += cnt[i] * cnt[i + L // 3] * cnt[i + 2 * L // 3]\nprint(ans)"
+      ],
+      "text_sha256": "63d7b368e0126deb2248363a0d7965fcc08bb55f427770f9c28a71e48fcf700c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc409/abc409_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

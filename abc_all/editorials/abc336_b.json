@@ -1,0 +1,50 @@
+{
+  "problem_id": "abc336_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc336/editorial/9065",
+      "text": "\\(\\text{ctz}(n)\\)\nの値は\n\\(i=1,2,\\ldots\\)\nの順で次の操作を行うことで得る事ができます。\n\\(n\\)\nを\n\\(2\\)\n進表記した時の末尾から\n\\(i\\)\n文字目を参照する。\n0\nならば何も行わない。\n1\nならば直ちに操作を終了する。この時の\n\\(i\\)\nの値から\n\\(1\\)\nを引いたものが\n\\(\\text{ctz}(n)\\)\nの値である。\nここで、\n\\(n\\)\nを\n\\(2\\)\n進表記した時の末尾から\n\\(i\\)\n文字目の数字（\n0\nまたは\n1\n）は\n\\(n\\)\nを\n\\((i-1)\\)\nビットだけ右シフトしたものと\n\\(1\\)\nの論理積 (AND) を取ることで得る事ができます。\n\\(n\\leq 10^9<2^{30}\\)\nであるため、上の操作は高々\n\\(30\\)\n回しか繰り返されず、十分高速にこの問題を解く事ができます。\nよってこの問題を解く事ができました。\n（参考:\nビット演算について\n）\n他にも、あらかじめ整数型あるいは bool 型の配列に\n\\(n\\)\nを\n\\(2\\)\n進表記した時のビット列を保存しておく方法や、\n\\(n\\)\nを\n\\(1\\)\nビットずつ右シフトしながら末尾を見る方法などもあります。いずれも十分高速です。\nまた、ビット列の操作に慣れていない場合は、それぞれの操作を整数に対しての操作に置き換えて解くこともできます。それぞれ、\n\\(n\\)\nを\n\\(2\\)\n進表記した時の末尾の値\n\\(\\to\\)\n\\(n\\)\nを\n\\(2\\)\nで割った余り\n\\(n\\)\nに対する\n\\(1\\)\nビットの右シフト演算操作\n\\(\\to\\)\n\\(n\\)\nを\n\\(2\\)\nで割る除算操作 (小数点以下切り捨て)\nに置き換える事ができるためこれらを組み合わせる事で同様の操作を実現できます。\n今回の制約の下では十分高速であり、問題ありません。\n中〜比較的高難易度の bitsetを用いた高速化などの定数倍高速化を求められる問題では高速なビット演算が必要となる事があるため、ビット演算に慣れておくと良いかもしれません。\nc++ による実装例\nPython による実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin>>n;\n\tfor(int i=0;;i++){\n\t\tif(n&(1<<i)){\n\t\t\tcout<<i<<endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n}",
+        "n=int(input())\nfor i in range(30):\n    if n&(1<<i):\n        print(i)\n        break"
+      ],
+      "text_sha256": "582e8a6d57335367a1b6f2c5dda10c6761b05c07f6f97c60069af51951af2518",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc336/abc336_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc336/editorial/9093",
+      "text": "下記のことに注意します。\n整数\nn\nを 2 進法で表したとき、一番右の\n1\nのみを取り出したものは\nn & -n\nと書ける\ne.g.\nn == 0b11111101000\nのとき\nn & -n == 0b1000\n整数\nm\nに対して、\nm\nを表すためのビット数は\nm.bit_length()\nで得られる\ne.g.\nm == 0b1000\nのとき\nm.bit_length() == 4\nこのことから、\n(n & -n).bit_length() - 1\nを出力すればよいです。\n提出 #49317947",
+      "codes": [],
+      "text_sha256": "55e1c5f73c9189abdad246192332abf76e80f431b9cc3f990df1e2cb9fd9fea7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc336/abc336_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc336/editorial/9075",
+      "text": "整数 \\(n\\) から \\(\\operatorname{ctz}(n)\\) を求める関数が標準に存在する言語もあります。\n例えば、C++ では\nstd::countr_zero\nが、Rust では\ntrailing_zeros\nが \\(\\operatorname{ctz}(n)\\) を求める関数です。\nそのような言語でその関数を用いることによってもこの問題を解くことができます。\n実装例は以下のようになります。\nC++ による実装例\nRust による実装例",
+      "codes": [
+        "#include <iostream>\n#include <bit>\nusing namespace std;\n\nint main(){\n    unsigned N;\n    cin >> N;\n\n    cout << countr_zero(N) << endl;\n\n    return 0;\n}",
+        "use proconio::input;\n\nfn main() {\n    input! {\n        N: u32,\n    }\n\n    println!(\"{}\", N.trailing_zeros());\n}"
+      ],
+      "text_sha256": "0ca5131088eb729af19ca2c8ac4880702548ee0302d24d1e25343f7303943019",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc336/abc336_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc336/editorial/16468",
+      "text": "\\(\\mathrm{ctz}(n)\\)\nは\n\\(n\\)\nが\n\\(2\\)\nで割り切れる最大の回数と等しいです．",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  int n;\n  cin>>n;\n  int ans=0;\n  while(n%2==0){\n    ans++;\n    n/=2;\n  }\n  cout<<ans<<endl;\n}"
+      ],
+      "text_sha256": "812a884bd4a47ae2e46b808cfa928efb87eb996f1e5f9030413eea392cd540a2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc336/abc336_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

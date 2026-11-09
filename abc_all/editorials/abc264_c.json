@@ -1,0 +1,40 @@
+{
+  "problem_id": "abc264_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4579",
+      "text": "元の問題文のように\n\\(1\\)\nつずつ行や列を削除するのではなく、\n「初期状態の\n\\(A\\)\nからいくつか（\n\\(0\\)\n個でも良い）の行と列を選んで、選んだ行と列たちを同時にまとめて削除する」\nのをちょうど\n\\(1\\)\n回やると考えても問題ありません。\n例えば、下記の入力例１の\n\\(A\\)\nからは、\n\\(1\\)\n行目、\n\\(3\\)\n行目、\n\\(2\\)\n列目、\n\\(5\\)\n列目を選んで同時に削除することで、\n下記の入力例１の\n\\(B\\)\nと一致させることができます。\n操作によって\n\\(A\\)\nを\n\\(B\\)\nと一致させることができるかを判定するには、\n「\n\\(H_1\\)\n個の行のそれぞれについて、その行を削除するかどうか」を選ぶ\n\\(2^{H_1}\\)\n通りの方法と、\n「\n\\(W_1\\)\n個の列のそれぞれについて、その列を削除するかどうか」を選ぶ\n\\(2^{W_1}\\)\n通りの方法の組み合わせ（全\n\\(2^{(H_1+W_1)}\\)\n通り）のすべてを実際に試して、その中に操作後の\n\\(A\\)\nが\n\\(B\\)\nと一致するものがあるかを判定すれば良いです。\n\\(2^{(H_1+W_1)}\\)\n通りある行と列の選び方の組み合わせを列挙するには、\nbit全探索\nと呼ばれる以下に述べる方法を用いるのが簡潔でしょう。\n「\n\\(H_1\\)\n個の行のそれぞれについて、その行を削除するかどうかを選ぶ選び方」のそれぞれを、下記を満たすような\n\\(2\\)\n進数表記で\n\\(H_1\\)\n桁の非負整数\n\\(X\\)\nで表現します。\n\\(i = 0, 1, 2, \\ldots, H_1-1\\)\nについて\n\\(i\\)\n行目を削除するときは、\n\\(X\\)\nの下から\n\\(i\\)\n桁目は\n\\(1\\)\nであり、\n\\(i\\)\n行目を削除しないときは、\n\\(X\\)\nの下から\n\\(i\\)\n桁目は\n\\(0\\)\nである。\n例えば、\n\\(5\\)\n個の行のうち\n\\(1\\)\n行目と\n\\(3\\)\n行目を削除するという選び方は、\n\\(2\\)\n進数表記で\n\\(00101\\)\nと表せます。\nこのようにして、\n\\(2^{H_1}\\)\n通りある行の選び方は、\n\\(2\\)\n進数表記でそれぞれ\n\\(000\\cdots 00, 000\\cdots 01,  \\ldots, 111\\cdots 11\\)\n、\nすなわち、\n\\(10\\)\n進数表記でそれぞれ\n\\(0, 1, \\ldots, 2^{H_1}-1\\)\nで表現できます。\n同様に、「\n\\(W_1\\)\n個の列のそれぞれについて、その列を削除するかどうかを選ぶ選び方」も、\n\\(0, 1, \\ldots, 2^{W_1}-1\\)\nと表現できます。\nよって、行の選び方\n\\(0, 1, \\ldots, 2^{H_1}-1\\)\nを走査するループと、列の選び方\n\\(0, 1, \\ldots, 2^{W_1}-1\\)\nを走査するループの、二重ループによって行の選び方と列の選び方の組み合わせを全探索できます。その二重ループの内部で、それぞれの行と列の選び方が\n\\(A\\)\nを\n\\(B\\)\nに一致させるかを判定すれば良いです。\n以下に、C++ 言語による正解例を記載します。",
+      "codes": [
+        "1 2 3 4 5 \n6 7 8 9 10 \n11 12 13 14 15 \n16 17 18 19 20",
+        "6 8 9\n16 18 19",
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main(void)\n{\n  int h1, h2, w1, w2;\n  int a[15][15], b[15][15];\n  \n  cin >> h1 >> w1;\n  for(int i = 1; i <= h1; i++) for(int j = 1; j <= w1; j++) cin >> a[i][j];\n  cin >> h2 >> w2;\n  for(int i = 1; i <= h2; i++) for(int j = 1; j <= w2; j++) cin >> b[i][j];\n\n  for(int i = 0; i < (1<<h1); i++){\n    for(int j = 0; j < (1<<w1); j++){\n      \n      vector<int> hvec, wvec;\n      for(int k = 1; k <= h1; k++) if((i & (1<<(k-1))) == 0) hvec.push_back(k);\n      for(int k = 1; k <= w1; k++) if((j & (1<<(k-1))) == 0) wvec.push_back(k);\n      if(hvec.size() != h2 || wvec.size() != w2) continue;\n     \n      bool match = true;\n      for(int k = 1; k <= h2; k++){\n        for(int l = 1; l <= w2; l++){\n          if(a[hvec[k-1]][wvec[l-1]] != b[k][l]){\n            match = false;\n            break;\n          }\n        }\n      }\n      if(match){\n        cout << \"Yes\" << endl;\n        return 0;\n      }\n       \n    }\n  }\n  cout << \"No\" << endl;\n\n  return 0;\n}"
+      ],
+      "text_sha256": "cd9282a116e3152e9f1effc20d6c8dffbc8f8f8134d95b788f7f105f325958c2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc264/abc264_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4605",
+      "text": "bit演算を用いて、\n\\(0\\)\n以上\n\\(2^n\\)\n未満の整数であって丁度\n\\(k\\)\n個のbitが立っているようなものを\n\\(O(_n C _k)\\)\n時間で列挙することができます。\nここで、numberOfTrailingZerosは\n\\(O(1)\\)\nなのか？と疑問に思うかもしれません。\nしかし、例えば次のような実装を行うことで\n\\(O(1)\\)\nで求めることができるため、計算量上は問題ありません。\nこれを用いれば、この問題は\n\\(O( _{H_1} C _{H_2} \\ _{W_1} C_{W_2} \n \\ H_2 \\  W_2) = O(\\frac{2^{H_1 + W_1} H_2 W_2}{\\sqrt{ H_1 W_1}})\\)\nで解くことができます。\n参考:\nbit演算による集合の列挙",
+      "codes": [
+        "for (int s = (1 << k) - 1;s < 1 << n;) {\n  // この時点のsは条件を満たした整数\n  int t = s | s - 1;\n  s = t + 1 | (~t & -~t) - 1 >> Integer.numberOfTrailingZeros(s) + 1;\n}",
+        "static int[] deBrujin32 = {0, 1, 28, 2, 29, 14, 24, 3, 30, 22, 20, 15, 25, 17, 4, 8, 31, 27, 13, 23, 21, 19, 16, 7, 26, 12, 18, 6, 11, 5, 10, 9};\nint numberOfTrailingZeros(int x) {\n  if (x == 0) return 32;\n  return deBrujin32[(x & -x) * 0x077CB531 >>> 27];\n}"
+      ],
+      "text_sha256": "246193dd9f116d0fb5fa6ef27eeed90e943ec60524c0f49e40b57a3b01490593",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc264/abc264_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4604",
+      "text": "いくつかの言語では「与えられたリストから重複なく\n\\(X\\)\n個選ぶ方法全て」を列挙するメソッドが存在します。これを用いると容易に実装できます。\n実装例(Python)\n実装例2(Python, numpy)\nリファレンス\nRuby\ncombination\nPython\ncombinations",
+      "codes": [],
+      "text_sha256": "fda3d9bf111834d948cd872e433a420211bc19173b56f9ff9bb12b0bf30cd3aa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc264/abc264_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

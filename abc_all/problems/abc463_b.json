@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc463_b",
+  "title": "Train Reservation",
+  "contests": [
+    {
+      "contest_id": "abc463",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 30,
+  "raw_difficulty": -630,
+  "contest_id": "abc463",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc463/tasks/abc463_b",
+  "statement": "配点 : 200 点 問題文 高橋君は列車の座席を予約しようとしています。 高橋君が予約する候補としている列車は N 本あり、列車 1,2,\\dots,N と番号が付けられています。\nいずれの列車も座席は 5 列からなり、それぞれ A 列、B 列、C 列、D 列、E 列と呼ばれています。 各列車の現在の空席情報が文字列 S_1,S_2,\\dots,S_N として与えられます。\nここで S_1,S_2,\\dots,S_N はすべて長さ 5 で、列車 i の A 列から E 列までがそれぞれ S_i の 1 文字目から 5 文字目と対応しており、その文字が o ならば対応する列に空席があることを、 x ならば対応する列に空席がないことを意味します。 高橋君は X 列の席を予約したいです。ここで X は A 、 B 、 C 、 D 、 E のいずれかです。 1 本以上の列車において X 列に空席があるか判定してください。 制約 N は 1 以上 100 以下の整数 X は A 、 B 、 C 、 D 、 E のいずれか S_i は o 、 x からなる長さ 5 の文字列 入力 入力は以下の形式で標準入力から与えられる。 N X S_1 S_2 \\vdots S_N 出力 1 本以上の列車において X 列に空席があるならば Yes を、そうでないならば No を出力せよ。 入力例 1 3 A\nxoxox\nxxooo\noxxxx 出力例 1 Yes 列車 3 の A 列には空席があります。したがって Yes を出力してください。 入力例 2 5 C\nxoxoo\noxxoo\noxxxo\nxoxxx\noxxoo 出力例 2 No どの列車の C 列にも空席がありません。したがって No を出力してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 高橋君は列車の座席を予約しようとしています。 高橋君が予約する候補としている列車は N 本あり、列車 1,2,\\dots,N と番号が付けられています。\nいずれの列車も座席は 5 列からなり、それぞれ A 列、B 列、C 列、D 列、E 列と呼ばれています。 各列車の現在の空席情報が文字列 S_1,S_2,\\dots,S_N として与えられます。\nここで S_1,S_2,\\dots,S_N はすべて長さ 5 で、列車 i の A 列から E 列までがそれぞれ S_i の 1 文字目から 5 文字目と対応しており、その文字が o ならば対応する列に空席があることを、 x ならば対応する列に空席がないことを意味します。 高橋君は X 列の席を予約したいです。ここで X は A 、 B 、 C 、 D 、 E のいずれかです。 1 本以上の列車において X 列に空席があるか判定してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 N は 1 以上 100 以下の整数 X は A 、 B 、 C 、 D 、 E のいずれか S_i は o 、 x からなる長さ 5 の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N X S_1 S_2 \\vdots S_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 1 本以上の列車において X 列に空席があるならば Yes を、そうでないならば No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 A\nxoxox\nxxooo\noxxxx"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes 列車 3 の A 列には空席があります。したがって Yes を出力してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5 C\nxoxoo\noxxoo\noxxxo\nxoxxx\noxxoo"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No どの列車の C 列にも空席がありません。したがって No を出力してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc463/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:49.085586+00:00",
+  "statement_sha256": "eee71d49abcd7308380ae9a613c769a6c4a364c44b9724633f396d50ce19f27e",
+  "editorials": []
+}

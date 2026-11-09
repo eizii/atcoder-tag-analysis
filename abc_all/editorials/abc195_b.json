@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc195_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc195/editorial/836",
+      "text": "次のような判定問題を考えます。\n問題：\n\\(1\\)\n個が\n\\(A\\)\nグラム以上\n\\(B\\)\nグラム以下のみかんをちょうど\n\\(N\\)\n個選んで\n\\(W\\)\nキログラムにすることはできるか？\nこの問題に対する答えは、\n\\(AN \\leq 1000W \\leq BN\\)\nが成り立つとき Yes、成り立たないとき No です。（最初に\n\\(A\\)\nグラムのみかんを\n\\(N\\)\n個選んで、少しずつ大きなみかんと交換することをイメージしてみましょう）\nしたがって\n\\(N\\)\nを全探索することで答えを求めることができます。重さは最大で\n\\(1000\\)\nキログラム、みかん\n\\(1\\)\n個は最小で\n\\(1\\)\nグラムなので、選んだみかんの個数として考えられる最大値は\n\\(1000000\\)\n個です。探索範囲に注意してください。\n回答例(C++)\nなお、この問題は適切な計算により\n\\(O(1)\\)\nで求めることもできます。切り上げと切り捨てのどちらで計算すべきかに注意しましょう。\n回答例(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int a,b,w;\n  cin >> a >> b >> w;\n  int m=1e9,M=0;\n  for(int n=1;n<=1000000;n++){\n    if(a*n<=1000*w && 1000*w<=b*n){\n      m=min(m,n);\n      M=max(M,n);\n    }\n  }\n  if(M==0)cout << \"UNSATISFIABLE\";\n  else cout << m << ' ' << M;\n}",
+        "import math\n\na,b,w=map(int,input().split())\nupper=int(math.floor(1000*w/a))\nlower=int(math.ceil(1000*w/b))\n\nif lower>upper:\n  print(\"UNSATISFIABLE\")\nelse:\n  print(lower,upper)"
+      ],
+      "text_sha256": "0abe9058939a5970478e8a61c43a845b3109274585e4a83589d70624db921796",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc195/abc195_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

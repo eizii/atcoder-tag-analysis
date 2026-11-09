@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc215_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc215/editorial/2492",
+      "text": "最小値の最大化は二分探索で解けることが多いです。\nまず距離が\n\\(K\\)\n以上の点のペアが存在するか？という判定問題の解法を考えてみましょう。\n\\(\\min(|x_i - x_j|, |y_i - y_j|) \\geq K \\)\nを同値変形すると、\n\\(|x_i - x_j| \\geq K\\)\nかつ\n\\(|y_i - y_j| \\geq K\\)\nとなります。よって、距離が\n\\(K\\)\n以上の点対が存在するための条件は以下の通りです。\nある点\n\\((x_i,y_i)\\)\nに対して、\n\\(x\\)\n座標が\n\\(x_i-K\\)\n以下の点の\n\\(y\\)\n座標の最小値が\n\\(y_i-K\\)\n以下または最大値が\n\\(y_i+K\\)\n以上\nこれはあらかじめ点を\n\\(x\\)\n座標でソートしておくことにより、尺取り法を使って\n\\(O(N)\\)\nで判定することができます。\nしたがって、答えで決め打ち二分探索をすると全体の計算量は\n\\(O(N\\log N+N\\log \\max(x_i))\\)\nとなります。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n; cin >> n;\n    vector<pair<int,int>> v(n);\n    for(int i = 0; i < n; i++) cin >> v[i].first >> v[i].second;\n    sort(v.begin(), v.end());\n    int ok = 0, ng = 1000000001;\n    while(ng - ok > 1){\n        int md = (ok + ng)/2;\n        queue<pair<int,int>> que;\n        bool able = false;\n        int mi = 1000000001, ma = 0;\n        for(auto p:v){\n            while(!que.empty()){\n                if(que.front().first > p.first - md)break;\n                mi = min(mi, que.front().second); ma = max(ma, que.front().second);\n                que.pop();\n            }\n            if(mi <= p.second - md || ma >= p.second + md) able=true;\n            que.push(p);\n        }\n        if(able) ok = md;\n        else ng = md;\n    }\n    cout << ok << endl;\n}"
+      ],
+      "text_sha256": "ae85d0181887ce03c206a6f8d5fb624e468d4815e996c970dc6efba5e78d491e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc215/abc215_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc215/editorial/2523",
+      "text": "点集合を\n\\((x_i, y_i)\\)\nの辞書順で昇順にソートします．すなわち，任意のペア\n\\((i, j)\\)\n\\((i < j)\\)\nに対して，\n\\(x_i < x_j\\)\nまたは [\n\\(x_i = x_j\\)\nかつ\n\\(y_i < y_j\\)\n] が成り立つとします．\n最大を達成するペア\n\\((i, j)\\)\n\\((i < j)\\)\nが\n\\(x_i < x_j\\)\n,\n\\(y_i < y_j\\)\nを満たす場合を考えましょう．\n\\(x_i < x_j\\)\n,\n\\(y_i > y_j\\)\nの場合については，\n\\(y\\)\n座標をすべて\n\\(-1\\)\n倍してから同じことをすればよいです．\n点を添字順に処理していきます．\n\\(j\\)\n番目の点\n\\((x_j, y_j)\\)\nを処理するときには，既に処理済みの\n\\(i \\ (< j)\\)\nであって，\n\\(x_i < x_j\\)\nかつ\n\\(y_i < y_j\\)\nを満たすもののうち，\n\\(j\\)\nとの距離が最大になるものを見つけたいです．そのために，処理済みの点の\n\\(x\\)\n座標ごとの\n\\(y\\)\n座標の最小値を，\n\\(y\\)\n座標の値が単調減少になるように\n（\n\\(x_{i'} > x_i\\)\nかつ\n\\(y_{i'} > y_i\\)\nとなる\n\\(i' > i\\)\nは不要なので追加しないように）管理しておきます．これは，\n\\(x\\)\n座標が単調増加かつ\n\\(y\\)\n座標が単調減少なので，配列の末尾に追加していくだけで可能です．その配列の中で，\n\\(x\\)\n側が距離を達成する点（後半に固まっている）と\n\\(y\\)\n側が距離を達成する点（前半に固まっている）の境界を二分探索で求めれば，その両側のいずれかが欲しい値を達成しています．\n最初のソートと毎回の二分探索がボトルネックになり，全体の計算量は\n\\(\\mathrm{O}(N \\log N)\\)\nです．",
+      "codes": [],
+      "text_sha256": "d935467ba5568a759c7468bbbb02be124fbdebabad5704d787b86ffd7334814e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc215/abc215_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

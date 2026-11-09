@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc178_e",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc178/editorial-E-phcdiydzyqa.pdf",
+      "text": "E:Dist Max\n\n  （解説：ynymxiaolongbao）\n\n\n\n\n       |xi −xj| + |yi −yj|\n\n    =  max(xi −xj, xj −xi) + max(yi −yj, yj −yi)\n\n    =  max((xi −xj) + (yi −yj), (xi −xj) + (yj −yi), (xj −xi) + (yi −yj), (xj −xi) + (yj −yi))\n\n    =  max(xi + yi −(xj + yj), xi −yi −(xj −yj), −(xi −yi) + (xj −yj), −(xi + yi) + xj + yj)\n\n    =  max(|xi + yi −(xj + yj)|, |xi −yi −(xj −yj)|)\n\n よって、zi = xi + yi, wi = xi −yi とすると、|xi −xj| + |yi −yj| =\nmax(|zi −zj|, |wi −wj|) となります。この変形は45 度回転とも呼ばれ、マ\nンハッタン距離を扱う問題でよく使われます。これを用いると答えは以下の\n\nように表せます。\n\n\n\n\n       max     |xi −xj| + |yi −yj|\n     1≤i≤N,1≤j≤N\n    =     max    max(|zi −zj|, |wi −wj|)\n           1≤i≤N,1≤j≤N\n    =  max(   max      |zi −zj|,   max     |wi −wj|)\n               1≤i≤N,1≤j≤N        1≤i≤N,1≤j≤N\n    =  max( max zi −min  zi, max wi −min wi)\n               1≤i≤N    1≤i≤N   1≤i≤N     1≤i≤N\n\n   zi, wi の最大値・最小値はO(N) で求めることができるので、それから答\nえも求めることができます。\n\n 解答例\n\n\n\n\n\n                                1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "c48cc831a52f70c9ee81f4cd2e4f95c4cf911eb39417aea20aef364912e93a46"
+    }
+  ],
+  "status": "available"
+}

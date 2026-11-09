@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc398_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc398/editorial/12501",
+      "text": "まず、\n\\(S\\)\nと\n\\(S\\)\nを反転させた文字列をこの順に連結した文字列は明らかに回文なので、正解となる文字列の長さが\n\\(2 \\times |S|\\)\n以下であることが分かります。\n\\(S\\)\nを接頭辞に持つ長さ\n\\(|S|+k\\)\n(\n\\(0 \\le k \\le |S|\\)\n) の回文がどのようなものか考えてみましょう。\nできた回文を\n\\(S_1S_2 \\dots S_{|S|}T_1T_2 \\dots T_k\\)\nとします。このとき、回文の定義より以下の等式を得ます。\n\\(S_1 = T_k\\)\n\\(S_2 = T_{k-1}\\)\n\\(\\dots\\)\n\\(S_k = T_1\\)\n\\(S_{k+1} = S_{|S|}\\)\n\\(\\dots\\)\n\\(S_{ \\lfloor (|S|+k+1)/2 \\rfloor}=S_{\\lfloor (|S|+k+2)/2 \\rfloor}\\)\nこれを解釈すると、「\n\\(S\\)\nの末尾\n\\(|S|-k\\)\n文字が回文をなす」となります。また、\n\\(T_1,T_2,\\dots,T_k\\)\nは\n\\(S\\)\nの内容から一意に定まることも分かります。\nつまり、解くべき問題は次のものになりました。\n\\(S\\)\nの接尾辞であって、最長の回文を求めよ。\nこの問題には種々の解法があります。そのうち最も直接的なものは\nManacherのアルゴリズム\nを活用する方針でしょう。\nあとは、先ほどの問題を解いた結果から元の問題の答えを復元すればよいです。 Manacher のアルゴリズムを利用すると、時間計算量は\n\\(O(N)\\)\nとなります。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nvector<int> manacher(string &S){\n  vector<int> R(S.size());\n  int i = 0, j = 0;\n  while (i < S.size()) {\n    while (i-j >= 0 && i+j < S.size() && S[i-j] == S[i+j]) ++j;\n    R[i] = j;\n    int k = 1;\n    while (i-k >= 0 && k+R[i-k] < j) R[i+k] = R[i-k], ++k;\n    i += k; j -= k;\n  }\n  return R;\n}\n\nint main(){\n  string s;\n  cin >> s;\n  string ms=\"$\";\n  for(auto &nx : s){\n    ms.push_back(nx);\n    ms.push_back('$');\n  }\n  auto r=manacher(ms);\n  int k=0;\n  for(int i=s.size();;i++){\n    if(r[i]>=s.size()-k){break;}\n    k++;\n  }\n\n  cout << s;\n  for(int i=0;i<k;i++){\n    cout << s[k-1-i];\n  }cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "054521aff1e0f3a12762cba986caba96148644ba0d519f5e9fae79b081f44f5a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc398/abc398_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc402_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc402/editorial/12729",
+      "text": "この問題は文字列の扱い、その中でも特に英大文字と英小文字の区別が問われている問題です。\nC++ の場合は isupper 関数を使うことである文字が英大文字であるかそうでないかを判定できます。　Python などの他の言語でも同様の機能が標準ライブラリにある場合が多いです。\n他にも文字コードを利用した判定方法があります。\nord(x)\nを文字\n\\(x\\)\nの対応する文字コードであるとしたとき、ある文字\n\\(c\\)\nが英大文字であることは\nord('A')\n\\(\\leq \\)\nord(c)\n\\(\\leq\\)\nord('Z')\nを見たすことと同値です。なぜならば、ASCIIコード表上で英大文字が連続しているからです。よって、これを利用して判定することができます。文字コードを用いるこの方法も多くのプログラミング言語で使うことができます。\n実装例1(C++):\n実装例2(C++):\n実装例1(Python):\n実装例2(Python):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    string s;\n    cin >> s;\n    for (char c : s) {\n        if (isupper(c)) cout << c;\n    }\n    cout << endl;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    string s;\n    cin >> s;\n    for (char c : s) {\n        if ('A' <= c && c <= 'Z') cout << c;\n    }\n    cout << endl;\n}",
+        "s = input()\nans = \"\"\nfor c in s:\n    if c.isupper():\n        ans += c\n\nprint(ans)",
+        "s = input()\nans = \"\"\nfor c in s:\n    if ord('A') <= ord(c) and ord(c) <= ord('Z'):\n        ans += c\n\nprint(ans)"
+      ],
+      "text_sha256": "885fdb53ca37e90b9c5a89b969fae643fce933759e627eb6bb4a2c9a42715679",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc402/abc402_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

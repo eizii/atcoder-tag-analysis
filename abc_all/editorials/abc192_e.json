@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc192_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc192/editorial/723",
+      "text": "各都市へ最も早く到達する移動経路のみを考えれば十分です。\nまず、次のような問題を考えます。\n問題：鉄道\n\\(i\\)\nを使って都市\n\\(A_i\\)\nから都市\n\\(B_i\\)\nに移動する。時刻\n\\(T\\)\nに都市\n\\(A_i\\)\nにいるとき、都市\n\\(B_i\\)\nには最短でいつ着けるか？\nこの問題に対する答えは\n\\(\\displaystyle{ \\left\\lceil \\frac{T}{K_i} \\right\\rceil K_i + T_i}\\)\nです。このことを使い、ダイクストラ法を用いて元の問題を解くことができます。計算量は\n\\(O(N+M\\log N)\\)\nです。",
+      "codes": [],
+      "text_sha256": "dffccc9de95f8c9c849cb43b4b7d9cc3edc0e3c45683275d533185edf74fa5f9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc192/abc192_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

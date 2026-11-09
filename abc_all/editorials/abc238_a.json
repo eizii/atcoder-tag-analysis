@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc238_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc238/editorial/3355",
+      "text": "結論から言うと、\n\\(2 \\leq n \\leq 4\\)\nのとき答えは\nNo\n、そうでないとき答えは\nYes\nとなります。\n\\(n=1\\)\nのとき\n\\(2^n \\gt n^2\\)\nであること、および\n\\(2 \\leq n \\leq 4\\)\nにおいて\n\\(2^n \\leq n^2\\)\nであることは実際に計算すれば明らかです。\n問題は\n\\(5 \\leq n\\)\nのときですが、これは数学的帰納法により\n\\(2^n \\gt n^2\\)\nであることを示すことが可能です。\n実装例 (C++)\nなお、この他にも\n\\(n\\)\nがある程度大きい値であれば\n\\(2^n \\gt n^2\\)\nが成り立つと予想し、それを元に問題を解くことも可能です。\n実装例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n; cin >> n;\n\tif(2 <= n && n <= 4) cout << \"No\" << endl;\n\telse cout << \"Yes\" << endl;\n}",
+        "n = int(input())\nn = min(n,10)\nans = 'No'\nif pow(2,n) > n*n:\n    ans = 'Yes'\nprint(ans)"
+      ],
+      "text_sha256": "f44313f99b23a3ddf1ee5da149d10f03d80a4b96f2c526b2fbdb5f58e647746d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc238/abc238_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

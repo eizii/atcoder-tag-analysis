@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc454_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc454/editorial/19003",
+      "text": "\\(N\\)\n頂点\n\\(M\\)\n辺の、頂点\n\\(A_i\\)\nから頂点\n\\(B_i\\)\nに有向辺が張られたようなグラフを考えます。この問題の答えはこのグラフで頂点\n\\(1\\)\nから到達可能な頂点の個数です。\nそして、これは幅優先探索を用いて解くことができます。具体的には、以下のようにして解くことができます：\n到達済みの頂点集合を\n\\(S\\)\nで持つ。はじめ、\n\\(S=\\lbrace 1\\rbrace\\)\nである。\n到達済みであるが、まだその頂点から探索していない頂点集合\n\\(q\\)\nを持つ。はじめ、\n\\(q=\\lbrace 1\\rbrace\\)\nである。\n\\(q\\)\nが空でない限り、以下の操作を繰り返す。\n\\(q\\)\nの要素を\n\\(1\\)\nつ取り、\n\\(x\\)\nとする。\n\\(x\\)\nを\n\\(q\\)\nから削除する。\n\\(x\\)\nと辺で繋がっている頂点\n\\(y\\)\nそれぞれに対し、以下の操作を行う。\n\\(y\\)\nが既に到達済み、つまり\n\\(y \\in S\\)\nであるなら何もしない。\n到達済みでない場合、\n\\(S\\)\nに\n\\(y\\)\nを入れ\n\\(q\\)\nに\n\\(y\\)\nを入れる。\n以上を適切に実装することでこの問題に正答することができます。\n実装上は、\n\\(S\\)\nを長さ\n\\(N\\)\nの bool 配列で\n\\(S[i]\\)\nが True なら\n\\(i \\in S\\)\n、False なら\n\\(i \\not \\in S\\)\nと表現し、さらに\n\\(q\\)\nを queue で表現するのが一般的です。\n実装例(Python3)",
+      "codes": [
+        "import sys\nfrom collections import deque\ninput = sys.stdin.readline\nn, m = map(int, input().split())\ng = [[] for _ in range(n)]\nfor _ in range(m):\n    x, y = map(int, input().split())\n    g[x - 1].append(y - 1)\nq = deque()\nd = [False] * n\nq.append(0)\nd[0] = True\nwhile q:\n    x = q.popleft()\n    for i in g[x]:\n        if d[i]:\n            continue\n        d[i] = True\n        q.append(i)\nprint(d.count(True))"
+      ],
+      "text_sha256": "06a3401e82ee542cb86115f48a20cfdc4be5f64a23b8bbca0f366679a8f8b817",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc454/abc454_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

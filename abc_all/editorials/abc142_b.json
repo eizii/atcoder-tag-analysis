@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc142_b",
+  "editorials": [
+    {
+      "text": "B: Roller Coaster writer: beet\nN 個の整数を入力し、そのうちK 以上の整数がいくつあるかを数える問題です。\n各整数についてK 以上であるかを判定すればいいです。\n以下はC++ における実装例です。\n1 #include <iostream>\n2 using namespace std;\n3 int main(){\n4\nint N,K;\n5\ncin>>N>>K;\n6\n7\nint cnt=0;\n8\nfor(int i=0;i<N;i++){\n9\nint h;\n10\ncin>>h;\n11\nif(h>=K) cnt++;\n12\n}\n13\n14\ncout<<cnt<<endl;\n15\nreturn 0;\n16 }\n",
+      "text_sha256": "eadc9ce0bab450300fb2ffddd51b78b88a8a89100fdd7107937dc79b61b0817d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc142/abc142_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

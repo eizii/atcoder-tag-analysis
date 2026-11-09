@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc464_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc464/editorial/22255",
+      "text": "鳥の情報を以下の通りに分解して読み取ります。\n初期状態に色\n\\(A_i\\)\nの鳥が\n\\(1\\)\n羽増える。\n\\(D_i\\)\n日目に色\n\\(A_i\\)\nの鳥が\n\\(1\\)\n羽減る。\n\\(D_i\\)\n日目に色\n\\(B_i\\)\nの鳥が\n\\(1\\)\n羽増える。\nこれで、「鳥が\n\\(1\\)\n羽増える」「鳥が\n\\(1\\)\n羽減る」という扱いやすい形になりました。\n次の情報を持つと、各情報を以下の通りに処理できます。\n現在の鳥の色の種類数\n\\(kind\\)\n色\n\\(k\\)\nの鳥の数\n\\(C_k\\)\n色\n\\(k\\)\nの鳥が\n\\(1\\)\n羽増える場合:\n\\(C_k=0\\)\nなら\n\\(kind\\)\nに\n\\(1\\)\n加算する。\n\\(C_k\\)\nに\n\\(1\\)\n加算する。\n色\n\\(k\\)\nの鳥が\n\\(1\\)\n羽減る場合:\n\\(C_k\\)\nから\n\\(1\\)\n減算する。\n\\(C_k=0\\)\nなら\n\\(kind\\)\nから\n\\(1\\)\n減算する。\nメモ: この\n\\(2\\)\nつは互いに逆操作の関係にあります。一方をかけた後もう一方をかけると元の状態に戻ることが必要ですし、現にそのようになることが確認できます。\nこの性質を利用することで、自身の設計した操作が正当かどうかをある程度検討できます。\n結局、本問題全体は以下のように解くことができます。\n鳥の情報を受け取りながら、鳥の色の変化の情報を\n\\(D_i\\)\n日目に記録する。\nバケットソートの要領で、各日の「色の変化の情報たちを表す配列」の配列を保持し、\n\\(D_i\\)\n日目にあたる部分に色の変化の情報を追加する方法があります。\n\\(i=1,2,\\dots,N\\)\nについて、以下を繰り返す。\n\\(i\\)\n日目に起きる鳥の色の変化(鳥の増加・減少)を反映させる。\nこの時点での鳥の色の種類数が\n\\(i\\)\n日目時点での解である。\n本解法の時間計算量は\n\\(O(N+M)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing pi=pair<int,int>;\n\nint main(){\n  int n,m;\n  cin >> n >> m;\n  int kind=0;\n  vector<int> cnt(n+1);\n  vector<vector<pi>> change(m+1);\n  for(int i=0;i<n;i++){\n    int a,b,d;\n    cin >> a >> d >> b;\n    if(cnt[a]==0){kind++;}\n    cnt[a]++;\n    change[d].push_back({a,b});\n  }\n  for(int i=1;i<=m;i++){\n    for(auto &nx : change[i]){\n      cnt[nx.first]--;\n      if(cnt[nx.first]==0){kind--;}\n      if(cnt[nx.second]==0){kind++;}\n      cnt[nx.second]++;\n    }\n    cout << kind << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "d79e572e3afcbb170e52a66d71da4377eccc46113024c1aa496cb9baed955772",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc464/abc464_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

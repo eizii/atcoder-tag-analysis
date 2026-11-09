@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc449_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc449/editorial/17253",
+      "text": "各操作を出現回数が同じ要素をまとめて追加することを考えると、操作は以下のようにまとめることができます。\n\\(A\\)\nにおける出現回数順に\n\\((1,2,\\ldots,M)\\)\nを安定ソートした列を\n\\((P_1,P_2,\\ldots,P_M)\\)\nとする。また、\n\\(A\\)\nにおける\n\\(P_i\\)\nの出現回数を\n\\(V_i\\)\nとする。\n\\(k=1,2,\\ldots,M\\)\nに対して以下を行う。\n\\(A\\)\nの末尾に\n\\((P_1,P_2,\\ldots,P_k)\\)\nをソートした列を追加する操作を\n\\(V_{k+1}-V_k\\)\n回行う。ただし、\n\\(V_{M+1}=\\infty\\)\nとする。\n\\(k=k_0\\)\nの場合の操作が終わった際の\n\\(A\\)\nの長さは\n\\(\\displaystyle N+\\sum_{i=1}^{k_0}k(V_{k+1}-V_k)\\)\nと表せるので、\n\\(A_X\\)\nは\n\\(k\\)\nがいくつの時に追加された要素か・\n\\((P_1,P_2,\\ldots,P_k)\\)\nをソートした列の何番目の要素かを二分探索で求めることができます。\nまた、\n\\((k,v)\\)\nのペアが与えられ、\n\\((P_1,P_2,\\ldots,P_k)\\)\nの中で小さい方から\n\\(v\\)\n番目の要素を求めるクエリはオフラインで Fenwick Tree を用いることで高速に計算することができます。\n以上を適切に実装することでこの問題に正答することができます。\n実装例(Python3)",
+      "codes": [
+        "import sys\ninput = sys.stdin.readline\n\n\nclass BIT:\n    def __init__(self, n: int):\n        self.a = [0] * (n + 1)\n\n    def add(self, i: int, x: int) -> None:\n        i += 1\n        while i < len(self.a):\n            self.a[i] += x\n            i += i & -i\n\n    def sum(self, *args) -> int:\n        if len(args) == 1:\n            r = args[0]\n            s = 0\n            while r:\n                s += self.a[r]\n                r -= r & -r\n            return s\n        else:\n            l, r = args\n            return self.sum(r) - self.sum(l)\n\n    # minimize i s.t. sum(i) >= w\n    def lower_bound(self, w: int) -> int:\n        x = 0\n        n = len(self.a) - 1\n        k = 1 << (n.bit_length() - 1)\n        while k:\n            if x + k <= n and self.a[x + k] < w:\n                w -= self.a[x + k]\n                x += k\n            k >>= 1\n        return x + 1\n\n\nn, m = map(int, input().split())\na = [int(x) - 1 for x in input().split()]\nc = [0] * m\nfor v in a:\n    c[v] += 1\ns = [(c[i], i) for i in range(m)]\ns.sort()\nr = [0] * (m + 1)\nr[0] = n\nfor i in range(m - 1):\n    r[i + 1] = (i + 1) * (s[i + 1][0] - s[i][0]) + r[i]\nr[m] = 10**18 + 2026\nq = int(input())\nans = [-1] * q\nque = []\nfor i in range(q):\n    x = int(input())\n    if x <= n:\n        ans[i] = a[x - 1]\n        continue\n    ng, ok = 0, m\n    while ok - ng != 1:\n        vs = (ok + ng) >> 1\n        if r[vs] >= x:\n            ok = vs\n        else:\n            ng = vs\n    x -= r[ng] + 1\n    x %= ok\n    que.append((ok, x, i))\nque.sort()\nfw = BIT(m)\nidx = 0\nfor ok, x, i in que:\n    while idx < ok:\n        fw.add(s[idx][1], 1)\n        idx += 1\n    ans[i] = fw.lower_bound(x + 1) - 1\nfor v in ans:\n    print(v + 1)"
+      ],
+      "text_sha256": "ae32aa59b196eb89706acfd38db5434a45d1acd1bbbc3f19eaf38ef4387bce98",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc449/abc449_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc449/editorial/17125",
+      "text": "「出現回数が\n\\(c\\)\n回の要素を追加する操作」をまとめて「ステップ\n\\(c\\)\n」と呼ぶことにします。\nステップ\n\\(c\\)\nは「\n\\(A\\)\nにおける出現回数が\n\\(c\\)\n以下の値を昇順に追加する」ことになるはずです。このときに追加される値を順に並べた配列を\n\\(B_c\\)\nとします。\nこの\n\\(B_c\\)\nは高々\n\\(O(\\sqrt N)\\)\n回しか変化しません。\n集合としてみれば\n\\(B_{c-1} \\subseteq B_{c}\\)\nです。\n\\(B_{c-1} \\subsetneq B_{c}\\)\nとなるのは\n\\(A\\)\nにおいて\n\\(c\\)\n回出現する要素があるときです。\nこの\n\\(c\\)\nの種類数（\n\\(=\\)\n\\(B_c\\)\nの変化回数）を\n\\(k\\)\nとします。\n\\(k\\)\nが最大となるのは、（一例としては）出現回数が\n\\(k-1 + \\alpha, k-2, \\dots , 2, 1, 0, 0,  \\dots , 0, 0\\)\nのようになっているときです。このときの出現回数の総和は\n\\(\\frac{k(k-1)}{2} + \\alpha\\)\nであり、\n\\(\\frac{k(k-1)}{2} \\le N\\)\nであることを考えれば\n\\(k = O(\\sqrt N)\\)\nです。\nよって、すべての\n\\(B_c\\)\nの列挙が（\n\\(B_c\\)\nがおなじ\n\\(c\\)\nを適切にまとめれば）空間・時間計算量ともに\n\\(O(M\\sqrt N)\\)\nです。メモリに余裕があればこれを列挙しても構いませんが、今回の制約下ではおそらく\nMLE\nとなるでしょう。\nしかし、\n\\(c\\)\nの昇順にクエリを処理しながら\n\\(B_c\\)\nを適宜再構築すれば、空間計算量に余裕が生まれるため、高速な言語であれば\nAC\n可能です。時間計算量は全体で\n\\(O(M \\sqrt N + Q \\log Q)\\)\n空間計算量は\n\\(O(N + M + Q)\\)\nとなります。\n実装例  codon\np.s. 空間計算量に余裕があれば、この解法はオンラインクエリに対応できる解法です。しかし、クエリ先読みをするのであれば、想定解の実装にほとんど合流する（対数時間の要素の追加ではなく、単に愚直な再構築でよいというのみ）ということになるでしょう。",
+      "codes": [
+        "from bisect import bisect_right\nfrom heapq import heapify, heappop\n\nn, m = [int(v) for v in input().split()]\na = [int(v) for v in input().split()]\n\nc = [0] * (m + 1)\nfor x in a:\n    c[x] += 1\n\nmc = max(c)\nch = [0] * (mc + 1)\nfor x in range(1, m + 1):\n    ch[c[x]] = 1\n\nq = int(input())\nque = [(int(input())-1, i) for i in range(q)]\nheapify(que)\nans = [0] * q\n\nwhile que and que[0][0] < n:\n    x, i = heappop(que)\n    ans[i] = a[x]\n\nl = n\nb = []\nfor nc in range(mc + 1):\n    if ch[nc]:\n        b = [x for x in range(1, m + 1) if c[x] <= nc]\n    l += len(b)  \n    while que and que[0][0] < l:\n        x, i = heappop(que)\n        ans[i] = b[x-l+len(b)]\nelse:\n    while que:\n        x, i = heappop(que)\n        ans[i] = (x-l) % m + 1\n\nprint(\"\\n\".join(map(str, ans)))"
+      ],
+      "text_sha256": "65a9286f52bae97fe84d24c7913c4e979fe9d0d9618ce6ddd7d612e40fa9149c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc449/abc449_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

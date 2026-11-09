@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc204_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc204/editorial/1989",
+      "text": "問題文にある指示の通りの条件で全ての木を調べればよいです。for文とif文を適切に組み合わせましょう。\n実装例(c)\n実装例(Python)",
+      "codes": [
+        "int a[200010];\nint main(){\n  int n;\n  scanf(\"%d\",&n);\n  for(int i=0;i<n;i++)scanf(\"%d\",&a[i]);\n  int ans=0;\n  for(int i=0;i<n;i++){\n    if(a[i]>10)ans+=a[i]-10;\n  }\n  printf(\"%d\",ans);\n}",
+        "N=int(input())\nA=list(map(int,input().split()))\nans=0\nfor a in A:\n  if a>10: ans+=a-10\nprint(ans)"
+      ],
+      "text_sha256": "471fb75868f83801ffd53bae4d9bcf5c71577615d22feb04c4669ce4edbe1ba4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc204/abc204_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

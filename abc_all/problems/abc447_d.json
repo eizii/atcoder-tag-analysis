@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc447_d",
+  "title": "Take ABC 2",
+  "contests": [
+    {
+      "contest_id": "abc447",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 430,
+  "raw_difficulty": 430,
+  "contest_id": "abc447",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc447/tasks/abc447_d",
+  "statement": "配点 : 400 点 問題文 A , B , C の 3 種類の文字のみからなる文字列 S が与えられます。 操作を以下のように定義します。 1 \\le i \\lt j \\lt k \\le |S| かつ S_i = A , S_j = B , S_k = C を満たす (i, j, k) の組を選び、 S の i, j, k 文字目を取り除く。残った文字を元の順序を保ったまま左に詰める。 文字列 S に対して最大で何回操作を行うことができるかを求めてください。 制約 1 \\le |S| \\le 10 ^{6} S は A , B , C のみからなる文字列である 入力 入力は以下の形式で標準入力から与えられる。 S 出力 答えを出力せよ。 入力例 1 ABACBCC 出力例 1 2 以下のように操作をすることで 2 回操作できます。 ABACBCC に対して (i, j, k) = (1, 2, 7) として操作する。残った文字列は ACBC となる。 ACBC に対して (i, j, k) = (1, 3, 4) として操作する。残った文字列は C となる。 3 回以上操作することはできないため、答えは 2 となります。よって 2 と出力してください。 入力例 2 CBACBB 出力例 2 0 入力例 3 BBBAAABCBCBAACBBCAAC 出力例 3 5",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 A , B , C の 3 種類の文字のみからなる文字列 S が与えられます。 操作を以下のように定義します。 1 \\le i \\lt j \\lt k \\le |S| かつ S_i = A , S_j = B , S_k = C を満たす (i, j, k) の組を選び、 S の i, j, k 文字目を取り除く。残った文字を元の順序を保ったまま左に詰める。 文字列 S に対して最大で何回操作を行うことができるかを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\le |S| \\le 10 ^{6} S は A , B , C のみからなる文字列である"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 ABACBCC"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2 以下のように操作をすることで 2 回操作できます。 ABACBCC に対して (i, j, k) = (1, 2, 7) として操作する。残った文字列は ACBC となる。 ACBC に対して (i, j, k) = (1, 3, 4) として操作する。残った文字列は C となる。 3 回以上操作することはできないため、答えは 2 となります。よって 2 と出力してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 CBACBB"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 BBBAAABCBCBAACBBCAAC"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 5"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc447/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:28.975497+00:00",
+  "statement_sha256": "c5226db7d8e8cfc008b2c5b27fad9e1e76313938875d222e1b6ed99abea65522",
+  "editorials": []
+}

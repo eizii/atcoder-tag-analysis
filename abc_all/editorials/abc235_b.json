@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc235_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc235/editorial/3249",
+      "text": "この問題のように「～である限り～する」という処理を行うには、while 文が便利です。実装によっては高橋君が右端の台まで到達するケースに注意してください。\n実装例(C)\n実装例(Python)",
+      "codes": [
+        "#include<stdio.h>\n\nint h[100010];\nint main(){\n\tint n;\n\tscanf(\"%d\",&n);\n\tfor(int i=0;i<n;i++)scanf(\"%d\",h+i);\n\t\n\tint pos=0;\n\twhile(pos+1<n&&h[pos]<h[pos+1])pos++;\n\tprintf(\"%d\\n\",h[pos]);\n}",
+        "N=int(input())\nH=list(map(int,input().split()))\npos=0\nwhile pos+1<N and H[pos]<H[pos+1]: pos+=1\nprint(H[pos])"
+      ],
+      "text_sha256": "3bea7968e7441360b74ba9751fd33351cbd6f1bcc561692431308aba5a63503c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc235/abc235_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

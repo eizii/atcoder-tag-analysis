@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc163_e",
+  "editorials": [
+    {
+      "text": "E: Active Infants\n　はじめ左からi 番目にいる幼児の移動先をpi とすると、求めるものはAi ∗|i −pi| を足し合わ\nせた値の最大値になります。|x −y| = max(x −y, y −x) であることから、” Ai ∗|i −pi| をスコア\nに足す” と言う代わりに” Ai ∗(i −pi) とAi ∗(pi −i) の好きな方を選んでスコアに足す” と言い換\nえても同値な問題になります。\nすると、Ai ∗(i−pi) の方を選んだ添字i の集合に対してはAi の値の大きい方からpi を1, 2, 3, . . .\nとし、Ai∗(pi−i) の方を選んだ添字i の集合に対してはAi の大きい方からpi をN, N −1, N −2, . . .\nとするのが最適だということが言えます。\n以上のことを踏まえれば、原始的な動的計画法を用いることでO(N 2) の計算量で答えを求めるこ\nとができます。具体的には、DP[x][y] を活発度の高い方からx + y 人を既に配置しそのうちx 人で\nはAi ∗(i −pi) を選択しy 人ではAi ∗(pi −i) を選択したときのスコアの最大値と定義し、x + y の\n昇順に計算していけば良いです。\n",
+      "text_sha256": "d00db2c11f26e16236fe3217f01e3aaf044b80340a03582dcde138baf7654dad",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc163/abc163_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

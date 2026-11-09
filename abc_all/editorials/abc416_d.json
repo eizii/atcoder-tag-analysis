@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc416_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc416/editorial/13487",
+      "text": "\\(A_i+B_i \\geq M\\)\nを満たす\n\\(i\\)\nの個数を\n\\(C\\)\nとすると\n\\(\\displaystyle \\sum_{i=1}^N ((A_i+B_i) \\bmod M) = \\sum_{i=1}^N (A_i+B_i) - CM\\)\nが成り立ちます。\n\\(\\displaystyle \\sum_{i=1}^N (A_i+B_i)\\)\nと\n\\(M\\)\nは両方入力から定まる定数であるため、\n\\(C\\)\nの値を最大化するような\n\\(A\\)\nの並び替えを求めれば良いことが分かります。以降は\n\\(C\\)\nの最大化を考えます。\nこの\n\\(C\\)\nの最大値は以下のような貪欲法で求めることができます：\n\\(A\\)\nを降順に、\n\\(B\\)\nを昇順にソートする。\n\\(k=1,2,\\ldots,N\\)\nに対し、まだ選ばれていない\n\\(B\\)\nの要素のうち\n\\(A_k+B_i \\geq M\\)\nを満たす最小の\n\\(B_i\\)\nを選ぶ。\nそのような\n\\(B_i\\)\nが存在する場合、\n\\(A_k\\)\nと\n\\(B_i\\)\nをマッチングさせる。\nマッチングされた（選ばれた）\n\\(B\\)\nの要素数が\n\\(C\\)\nの最大値となる。\nこの貪欲法は尺取り法を用いることで実装することができます。\n以上を適切に実装することでこの問題に正答することができます。計算量はテストケース毎に\n\\(O(N \\log N)\\)\n時間です。\n実装例(Python3)",
+      "codes": [
+        "for _ in range(int(input())):\n    n, m = map(int, input().split())\n    a = sorted(list(map(int, input().split())), reverse=True)\n    b = sorted(list(map(int, input().split())))\n    c, idx = 0, 0\n    for v in a:\n        while idx < n and b[idx] + v < m:\n            idx += 1\n        if idx >= n:\n            break\n        c += 1\n        idx += 1\n    print(sum(a) + sum(b) - m * c)"
+      ],
+      "text_sha256": "dddaea457ac5d62213fac7592cdf6abccceca15bf83e19e18ab78d9c998b5c17",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc416/abc416_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

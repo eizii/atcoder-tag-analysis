@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc146_e",
+  "editorials": [
+    {
+      "text": "E: Rem of Sum is Num\n数列{Sn} をSi = A1 + A2 + · · · Ai と定めます。S0 = 0 とします。\nすると、連続部分列Ai+1, . . . , Aj がみたすべき条件を式で表すと、\n(Sj −Si)%K = j −i\nと書けることがわかります。上の式をさらに変形すると、\n(Sj −j)%K = (Si −i)%K かつj −i < K\nと同値です。したがって、各j (1 ≤j ≤N) について、(Sj −j)%K = (Si −i)%K をみたすような\nj −K < i < j の個数を数えるといいです。\nこれをそのまま1 つずつ調べていては間に合いませんが、j に対して調べるべき区間(j −K, j) と\nj + 1 に対して調べるべき区間(j −K + 1, j + 1) は左右が1 つずつ違うだけなので、j 番目につい\nて調べたあとj + 1 番目について調べるには、左の要素を1 つ捨てて、右の要素を1 つ加えるだけで\nよいです。\n捨てる、加えるなどの操作は連想配列(C++ のmap やPython のdict など) を用いてSi −i たち\nの個数を管理することで、高速に実現することができます。\n計算量は全体でO(N log K) 程度です。\n",
+      "text_sha256": "ac83918308fbcbbe8100216377afa6627eab2edded2f2c3c005bd93acb8a0400",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc146/abc146_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

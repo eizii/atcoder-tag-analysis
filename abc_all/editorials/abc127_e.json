@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc127_e",
+  "editorials": [
+    {
+      "text": "E: Cell Distance\nN × M のマス目のうちK マス選ぶ時のマンハッタン距離の和を求めよという問題です。式は明らかにX\nとY について独立なので、X の差の絶対値の和とY の差の絶対値の和をそれぞれ求めることにします。\n以下ではX の差について考えます。ある2 マスの組み合わせを固定したとき、これら以外からK −2 マ\nス選ぶ場合全てに1 度ずつこれらの差が寄与するので、この組を固定して考えると\n(N×M−2\nK−2\n)\n通りあります。\nさらに、X が同じ場合は差が0 なので、X が異なると仮定すると、X の差の絶対値がd となるように2 マ\nス選ぶ方法は(N −d) × M 2 通りあります。これを全てのd に対して足し合わせるとX についての答えが\n求まります。Y についてもN とM を入れ替えると同様に解くことができ、時間計算量としては二項係数を\n求めるパートがボトルネックとなりO(NM) でこの問題が解けました。\n",
+      "text_sha256": "d224b0f9dc2922b11c38a0f5151bdb7baff42520559ba9334c2cfe94da8e4e3c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc127/abc127_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

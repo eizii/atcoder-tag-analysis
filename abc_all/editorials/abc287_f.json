@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc287_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc287/editorial/5632",
+      "text": "概要 木をある頂点を根とした部分木とみなし、葉から順になんらかの値を計算する動的計画法の問題はよく見られ、競技プログラミングの文脈では木DPと呼ばれます。本問もその一種で、概ね以下のような定義の \\(\\mathrm{dp}\\) 配列を計算します。 \\(\\mathrm{dp}_{i,j}\\) 頂点 \\(i\\) を根とする部分木に含まれる頂点を \\(V\\) として選ぶかどうかを決める方法であって、連結成分数が \\(j\\) であるようなものの個数 森の連結成分数の性質 実際に用いる \\(\\mathrm{dp}\\) の定義や遷移の詳細を述べる前に、連結成分数に関する性質を説明します。 今回扱われる誘導部分グラフのようにどの連結成分も木になっているグラフは森と呼ばれます。任意の森について、その頂点数を \\(n\\) 、辺数を \\(m\\) 、連結成分数を \\(c\\) とした時、 \\(c=n-m\\) が成り立ちます。このため、頂点を選ぶか選ばないか決めるときの連結成分数の変化は以下のように考えられます。 頂点を選ぶ場合は連結成分数が \\(1\\) 増える( \\(n\\) が \\(1\\) 増えるため) 隣接している頂点をともに選ぶ場合は連結成分数が \\(1\\) 減る( \\(m\\) が \\(1\\) 増えるため) \\(\\mathrm{dp}\\) の定義 次のように \\(\\mathrm{dp}\\) を定めます。 \\(\\mathrm{dp}_{i,j,k}\\) 頂点 \\(i\\) を根とする部分木に含まれる頂点を \\(V\\) として選ぶかどうかを決める方法であって、連結成分数が \\(j\\) であるようなものの個数。ただし、 \\(k=0\\) ならば頂点 \\(i\\) は選ばれず、 \\(k=1\\) ならば選ばれている。 隣接する頂点をともに選ぶ場合の連結成分数の変化を考慮するために頂点 \\(i\\) を選んだかどうかを表す添え字 \\(k\\) が付いていることに気を付けてください。 愚直な遷移を考えます。基本的には子それぞれに対し \\(j\\) (連結成分数)を足して新たな \\(j\\) とします。頂点 \\(i\\) を選ぶ場合、子の添え字 \\(k\\) が \\(1\\) ならばそのたびに \\(j\\) を \\(1\\) 減らします。詳しくは実装例を参考にしてください。 計算量解析 \\(\\mathrm{dp}_{i,j,k}\\) は、 \\(i,j\\) の取り得る値がそれぞれ \\(\\mathrm{O}(N)\\) 個、 \\(k\\) の取り得る値が定数個あり、遷移に最悪 \\(\\mathrm{O}(N)\\) かかるので全体で \\(\\mathrm{O}(N^3)\\) になるように思われます。しかし、「 \\(j\\) が頂点 \\(i\\) の部分木に含まれる頂点数を超える部分を無視する」ことで全体で \\(\\mathrm{O}(N^2)\\) になり、十分高速となります。(参考 https://snuke.hatenablog.com/entry/2019/01/15/211812 ) このような木DPは二乗の木DPと呼ばれます。 実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\nusing namespace atcoder;\nusing mint = modint998244353;\nusing namespace std;\n\nvector<vector<mint>> dfs(int c,int p,vector<vector<int>> &E){\n\tvector dp(2,vector<mint>(2,0));\n\tdp[0][0] = 1;\n\tdp[1][1] = 1;\n\tfor(int i=0;i<E[c].size();i++){\n\t\tint to = E[c][i];\n\t\tif(to==p)continue;\n\t\t\n\t\tauto ret = dfs(to,c,E);\n\t\tvector ndp(2,vector<mint>(dp[0].size()+ret[0].size()-1,0));\n\t\tfor(int j=0;j<dp[0].size();j++){\n\t\t\tfor(int k=0;k<ret[0].size();k++){\n\t\t\t\tndp[0][j+k] += dp[0][j] * (ret[0][k] + ret[1][k]);\n\t\t\t\tndp[1][j+k] += dp[1][j] * ret[0][k];\n\t\t\t\tif(j+k>0)ndp[1][j+k-1] += dp[1][j] * ret[1][k];\n\t\t\t}\n\t\t}\n\t\tswap(dp,ndp);\n\t}\n\treturn dp;\n}\n\nint main() {\n    \n\tint N;\n\tcin>>N;\n\t\n\tvector<vector<int>> E(N);\n\tfor(int i=0;i<N-1;i++){\n\t\tint a,b;\n\t\tcin>>a>>b;\n\t\ta--,b--;\n\t\tE[a].push_back(b);\n\t\tE[b].push_back(a);\n\t}\n\t\n\tauto ret = dfs(0,-1,E);\n\t\n\tfor(int i=1;i<=N;i++){\n\t\tcout<<(ret[0][i] + ret[1][i]).val()<<endl;\n\t}\n\t\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "8c68e9fbe1cf1f41afc67f7d6ca7ce6e66b1e9c6b1507d6fc4f4f586e529d67e"
+    }
+  ],
+  "status": "available"
+}

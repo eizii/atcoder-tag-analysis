@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc415_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc415/editorial/13482",
+      "text": "荷物は区画番号の小さい方から\n\\(2\\)\n個ずつ組にして運び出されることになります。\nよって、荷物のある区画番号を小さい方から順に全て知ることができれば、それらを\n\\(2\\)\n個ずつ組にして出力すればこの問題に正解できます。\nこの問題で与えられるのは倉庫の状態を表現する文字列\n\\(S\\)\nのみです。この\n\\(S\\)\nから荷物のある区画番号を小さい順に全てリストアップするためにはどうすれば良いでしょうか？\n例えば、以下の手順を踏めば良いです。\nまず、\n\\(S\\)\nの長さを調べる。\n多くの言語には文字列の長さを調べる機能があるので、それを利用すると便利です。\n次に、\n\\(S\\)\nを前から順に調べる。\nもし\n#\nが見つかれば、そこに荷物が存在することが分かる。\nこのとき、荷物のある区画番号のリストの末尾に要素を\n\\(1\\)\nつ追加する。可変長の配列を利用すると便利です。\n詳しくは以下の実装例も参照してください。\nなお、言語によっては文字列の最初の文字が\n\\(0\\)\n文字目となり、正しく求解するためには\n\\(1\\)\nを足さなければいけない場合もあることに注意してください。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string S;\n  cin >> S;\n  vector<int> a;\n  for(int i=0;i<S.size();i++){\n    if(S[i]=='#'){ a.push_back(i+1); }\n  }\n  for(int i=0;i<a.size();i+=2){\n    cout << a[i] << \",\" << a[i+1] << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "f377c8b29d5e5591b9e66d0ecd52453b5f9e16d1356fe3af9f47c2efa5898d31",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc415/abc415_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc371_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc371/editorial/10927",
+      "text": "以下では、\\(i\\rightarrow P _ i\\) を \\(n\\ (n\\geq0)\\) 回繰り返したものを \\(P ^ n _ i\\) と書くことにします。\nまた、\\(i=P ^ n _ i\\) を満たす最小の正の整数 \\(n\\) を \\(L _ i\\) と書くことにします。 先頭から \\(A\\) を最小化することを考えます。 ありえる \\(A _ 1\\) の最小値は、\\(A _ {P ^ n _ 1}\\ (0\\leq n\\lt L _ 1)\\) のうち最小のものです。\nこの最小値を与える \\(n\\) を \\(n _ 1\\) とすると、操作を \\(x\\) 回したものが答えなら \\(x\\equiv n _ 1\\pmod{L _ 1}\\) であることがわかります。 \\(A _ 1\\) が上記の最小値をとる条件のもとで、ありえる \\(A _ 2\\) の最小値は \\(A _ {P ^ {n _ 1+nL _ 1} _ 2}\\ (0\\leq n\\lt L _ 2/\\gcd(L _ 1,L _ 2))\\) です。\nよって、同様にして答えの \\({}\\bmod{\\operatorname{lcm}(L _ 1,L _ 2)}\\) での値が確定します。 これを繰り返すことでこの問題を解くことができます。 \\(i\\) ごとに毎回 \\(L _ i\\) を求めていては間に合いませんが、\\(i\\) についての答えが確定したときに \\(P ^ n _ i\\ (0\\leq n\\lt L _ i)\\) を一斉に操作すると \\(O(N)\\) などとでき十分高速です。 実装例は以下のようになります。 計算途中で \\(\\operatorname{lcm}(L _ 1,L _ 2,\\ldots,L _ i)\\) が大きくなる場合があるので、固定長整数を用いる場合は注意する必要があります。\n具体的には、計算途中で \\(2 ^ {2367}\\) 程度の大きさの整数を扱う必要がある場合があります。",
+      "codes": [
+        "from math import gcd\n\n\nN = int(input())\nP = [int(x) - 1 for x in input().split()]\nA = list(map(int, input().split()))\n\nused = [False for i in range(N)]\n\n# そこまでの結果から、操作回数は mod period で ans と等しいことが確定している\nperiod = 1\nans = 0\n\nresult = [0 for i in range(N)]\n\nfor i in range(N):\n    if not used[i]:\n        # i を含むサイクルを列挙\n        cycle = [i]\n        while P[cycle[-1]] != i:\n            used[P[cycle[-1]]] = True\n            cycle.append(P[cycle[-1]])\n            \n        # A[i] を最小化する\n        L = len(cycle)\n        # 選べるのは L / gcd(L, period) 通り\n        choose = L // gcd(L, period)\n        \n        # 選べる中から最小値を選べばよい\n        offset = min((A[cycle[(ans + i * period) % L]], i) for i in range(choose))[1]\n        \n        # 答えを更新\n        ans += offset * period\n        period *= choose\n        \n        # 結果の配列を求める\n        for i in range(L):\n            result[cycle[i]] = A[cycle[(i + ans) % L]]\n\nprint(*result)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "00a9daca23fcbe55ae10e84373418d5b2a9987140607e82aaed843561b36c7c3"
+    }
+  ],
+  "status": "available"
+}

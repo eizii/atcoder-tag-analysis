@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc027_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc027/editorial.pdf",
+      "text": "問題A – 長方形\n\f\n問題概要\n\n• ある長方形（正方形も含む）の3 つの辺の長さが与えられる。残り1\n つの辺の長さを求めよ。\n\n                                5\n            4\n\n     3                         5               ?                               ?\n\n            4\n                                5\n\f\n考察\n\n• 向かい合う辺の長さは等しい。\n\n\n                                5\n            4\n\n     3                         5               ?                               ?\n\n            4\n                                5\n\f\n解法\n\n• 与えられた3 つの数のうち、等しい組を見つけたら、余った数がその\n まま答えになる。\n\n      =       =\n      4 3 4       5 5 5\n\n            𝑎𝑛𝑠                   𝑎𝑛𝑠\n\f\n解答例(C++)\n\n\n int x, y, z;\n cin >> x >> y >> z;\n\n\n int ans;\n if (x == y) ans = z;\n if (y == z) ans = x;\n if (z == x) ans = y;\n\n\n cout << ans << endl;",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "675a91c6b1dd251cffed03d484cb7c35422fdf08b057106b40158d82c6df882c"
+    }
+  ],
+  "status": "available"
+}

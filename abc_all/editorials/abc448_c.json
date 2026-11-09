@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc448_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc448/editorial/16979",
+      "text": "各クエリでは高々\n\\(K\\)\n個\n\\((K \\leq 5)\\)\nのボールを取り出して、残ったボールの最小値を答えます。\nここで、全てのボールを書かれた値\n\\(A_i\\)\nの昇順に並べた列を考えます。そして、先頭\n\\(6\\)\n個のボールに注目します。すると、ボールを取り出した時に\n\\(6\\)\n個の中には必ず取り出されていないボールが\n\\(1\\)\n個残ります。なぜならば、先頭\n\\(6\\)\n個を取り出すためには最低\n\\(6\\)\n個のボールを取り出す必要がありますが、一度に取り出すのは最大\n\\(5\\)\n個までだからです。\nよって、次の方針でこの問題を解くことが出来ます。\n全てのボールを書かれた値\n\\(A_i\\)\nの昇順に並べた列を考えた時に、先頭\n\\(6\\)\n個に来るボールを計算する。\n各クエリでは先頭から順に「そのボールが取り出されたか？」を調べる。取り出されていない最初のボールが答えとなる。\n1.について、先頭\n\\(6\\)\n個を取得する方法はいくつかありますが、\n\\((A_i, i)\\)\nの組をソートする方法が最も簡明です。先頭\n\\(6\\)\n個を挿入ソートの要領で管理する方法もあり、この方法だと計算量が\n\\(\\mathrm{O}(N)\\)\nになる (ソートだと\n\\(\\mathrm{O}(N \\log N)\\)\nかかってしまう) ので計算量の面ではこちらに分があります。\nいずれの方法でも計算量は全体で\n\\(\\mathrm{O}(N + Q)\\)\nや\n\\(\\mathrm{O}(N \\log N + Q)\\)\nで解くことができて、十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <algorithm>\n#include <iostream>\n#include <set>\n#include <utility>\n#include <vector>\nusing namespace std;\n\nint main() {\n  cin.tie(0)->sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n  vector<pair<int, int>> A(N);\n  for (int i = 0; i < N; i++) {\n    cin >> A[i].first;\n    A[i].second = i;\n  }\n  sort(begin(A), end(A));\n\n  while (Q--) {\n    int K;\n    cin >> K;\n    vector<int> B(K);\n    for (auto& b : B) cin >> b;\n    for (int i = 0;; i++) {\n      if (find(begin(B), end(B), A[i].second + 1) != end(B)) continue;\n      cout << A[i].first << \"\\n\";\n      break;\n    }\n  }\n}"
+      ],
+      "text_sha256": "f4a366b6d79acb9fe86814e0441b856c00732c396daca3d269aa179e34150a77",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc448/abc448_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc448/editorial/16997",
+      "text": "二分探索し、「最小値は\n\\(x\\)\n以上か？」という判定問題を解きます。\n最小値が\n\\(x\\)\n以上であることは、\n\\(x\\)\n未満の値が存在しない、すなわち全て取り出されていることと同値です。つまり、元の値および取り出された値をソートし、二分探索により\n\\(x\\)\n未満の値の個数を求め、等しいかどうか確認すれば良いです。\n計算量は\n\\(O(\\sum K\\log N\\log\\max A)\\)\nであり十分高速です。\nコード(C++)",
+      "codes": [],
+      "text_sha256": "53c617eb113dd03bec6e7a6b9eedaad6038b77a6363a0f6b5c5bd0d03be7902c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc448/abc448_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

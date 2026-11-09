@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc371_d",
+  "title": "1D Country",
+  "contests": [
+    {
+      "contest_id": "abc371",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 408,
+  "raw_difficulty": 408,
+  "contest_id": "abc371",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc371/tasks/abc371_d",
+  "statement": "配点 : 350 点 問題文 数直線上に N 個の村があります。 i 番目の村は座標 X_i にあり、 P_i 人の村人がいます。 Q 個のクエリに答えてください。 i 番目のクエリは以下の形式です。 整数 L_i,R_i が与えられる。座標が L_i 以上 R_i 以下の村に住んでいる村人の人数の総数を求めよ。 制約 1\\leq N,Q\\leq 2\\times 10^5 -10^9\\leq X_1 < X_2 < \\ldots < X_N \\leq 10^9 1\\leq P_i\\leq 10^9 -10^9\\leq L_i \\leq R_i \\leq 10^9 入力される数値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N X_1 \\ldots X_N P_1 \\ldots P_N Q L_1 R_1 \\vdots L_Q R_Q 出力 Q 行出力せよ。 i\\ (1\\leq i \\leq Q) 行目には、 i 番目のクエリに対する答えを出力せよ。 入力例 1 4\n1 3 5 7\n1 2 3 4\n4\n1 1\n2 6\n0 10\n2 2 出力例 1 1\n5\n10\n0 1 番目のクエリについて考えます。座標が 1 以上 1 以下の村は、座標 1 にある村で、村人は 1 人います。よって答えは 1 です。 2 番目のクエリについて考えます。座標が 2 以上 6 以下の村は、座標 3 にある村と座標 5 にある村で、村人はそれぞれ 2 人と 3 人います。よって答えは 2+3=5 です。 入力例 2 7\n-10 -5 -3 -1 0 1 4\n2 5 6 5 2 1 7\n8\n-7 7\n-1 5\n-10 -4\n-8 10\n-5 0\n-10 5\n-8 7\n-8 -3 出力例 2 26\n15\n7\n26\n18\n28\n26\n11",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 数直線上に N 個の村があります。 i 番目の村は座標 X_i にあり、 P_i 人の村人がいます。 Q 個のクエリに答えてください。 i 番目のクエリは以下の形式です。 整数 L_i,R_i が与えられる。座標が L_i 以上 R_i 以下の村に住んでいる村人の人数の総数を求めよ。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N,Q\\leq 2\\times 10^5 -10^9\\leq X_1 < X_2 < \\ldots < X_N \\leq 10^9 1\\leq P_i\\leq 10^9 -10^9\\leq L_i \\leq R_i \\leq 10^9 入力される数値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N X_1 \\ldots X_N P_1 \\ldots P_N Q L_1 R_1 \\vdots L_Q R_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 i\\ (1\\leq i \\leq Q) 行目には、 i 番目のクエリに対する答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\n1 3 5 7\n1 2 3 4\n4\n1 1\n2 6\n0 10\n2 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1\n5\n10\n0 1 番目のクエリについて考えます。座標が 1 以上 1 以下の村は、座標 1 にある村で、村人は 1 人います。よって答えは 1 です。 2 番目のクエリについて考えます。座標が 2 以上 6 以下の村は、座標 3 にある村と座標 5 にある村で、村人はそれぞれ 2 人と 3 人います。よって答えは 2+3=5 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 7\n-10 -5 -3 -1 0 1 4\n2 5 6 5 2 1 7\n8\n-7 7\n-1 5\n-10 -4\n-8 10\n-5 0\n-10 5\n-8 7\n-8 -3"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 26\n15\n7\n26\n18\n28\n26\n11"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc371/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:53.512670+00:00",
+  "statement_sha256": "dc8cec6e84774366e94bae92115ef6a9be0c399011c1b039662c28974228216d",
+  "editorials": []
+}

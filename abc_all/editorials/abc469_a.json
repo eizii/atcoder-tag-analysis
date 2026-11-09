@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc469_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc469/editorial/23757",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは practice contest の問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。 また、プログラミングコンテストの問題に慣れていない方は、 AtCoder Beginners Selection の問題をいくつか解いてみることをおすすめします。 原案:vwxyz 各車両に対して前から順番に \\(1,2,\\dots,N\\) の番号を付けます。 前から \\(K\\) 両目の車両番号は \\(K\\) です。\nこれより後ろには \\(K+1,K+2,\\dots,N\\) の \\(N-K\\) 個の車両があります。 よって、車両 \\(K\\) は後ろから \\(N-K+1\\) 両目です。 c++の実装例 Pythonの実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N,K;\n    cin>>N>>K;\n    cout<<N-K+1<<\"\\n\";\n}\n",
+        "N,K=map(int,input().split())\nprint(N-K+1)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "5e3d253e61e8f4bda73be28d6f4d104bd6efdfc26095e1f0fc7a1fcf943d20f3"
+    }
+  ],
+  "status": "available"
+}

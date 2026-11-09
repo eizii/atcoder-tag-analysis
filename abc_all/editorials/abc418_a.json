@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc418_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc418/editorial/13621",
+      "text": "まず、\n\\(S\\)\nの長さが 3 未満である場合、答えは\nNo\nです。\nそうでない場合、次の 3 個の条件が全て成立すれば答えは\nYes\n、そうでなければ答えは\nNo\nです。\n\\(S\\)\nの\n\\(N-2\\)\n文字目が\nt\nである。\n\\(S\\)\nの\n\\(N-1\\)\n文字目が\ne\nである。\n\\(S\\)\nの\n\\(N\\)\n文字目が\na\nである。\nよって、これらを 1 個 1 個調べていけばよいです。\n注意点として、\n\\(S\\)\nの長さが 3 未満である場合に\n\\(N-2\\)\n文字目を調べようとすると言語および状況によっては配列外参照と呼ばれる実行時エラーが発生します。(やや不正確ですが簡単に言うと、添え字がマイナスになってしまい文字列の外側を調べようとしてエラーが起きます。) そのため、文字を調べる前に長さを確認して配列外参照が発生しないように実装しましょう。\nなお、別解として、C++ の\nsubstr\n関数や Python のスライス機能を用いて末尾 3 文字を取り出して判定する方法もあります。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n  int N;\n  string S;\n  cin >> N >> S;\n  if (N < 3) {\n    cout << \"No\\n\";\n  } else {\n    if (S[N - 3] == 't' and S[N - 2] == 'e' and S[N - 1] == 'a') {\n      cout << \"Yes\\n\";\n    } else {\n      cout << \"No\\n\";\n    }\n  }\n}"
+      ],
+      "text_sha256": "92bedad2ba2d61c68e8433d41b933f480ba038e3e66b0b807df2175c1b3af0a0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc418/abc418_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc418/editorial/16466",
+      "text": "公式解説中の別解として挙げられるように，C++の\nsubstr\n関数を用いることでも解くことができます．",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  int n;\n  cin>>n;\n  string s;\n  cin>>s;\n  if(s.size()<3){\n    cout<<\"No\"<<endl;\n    return 0;\n  }\n  if(s.substr(s.size()-3)==\"tea\")cout<<\"Yes\"<<endl;\n  else cout<<\"No\"<<endl;\n}"
+      ],
+      "text_sha256": "294a7f83fecfbc4265abea26d624ad08c1ea5f00034622f383aacd8ebd461815",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc418/abc418_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

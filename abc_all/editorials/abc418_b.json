@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc418_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc418/editorial/13628",
+      "text": "実装方針\n\\(S\\)\nの部分文字列を列挙し，各部分文字列\n\\(t\\)\nについて充填率を求めてそれらの最大値をとる実装方針をとります．\n\\(f\\)\nを\n\\(0\\)\nで初期化したあと，すべての部分文字列について以下の手順を実行すればよいです．\n文字列\n\\(t\\)\nの充填率を以下の手順で求める．\n\\(|t| < 3\\)\nの場合，\n\\(0\\)\n．\n\\(t\\)\nの先頭の文字が\nt\nでない場合，\n\\(0\\)\n．\n\\(t\\)\nの末尾の文字が\nt\nでない場合，\n\\(0\\)\n．\n上のいずれにも当てはまらない場合，\n\\(t\\)\nに含まれる\nt\nの個数\n\\(x\\)\nを求め，\n\\(\\frac{x-2}{|t|-2}\\)\nを計算する．\n上で求めた充填率が\n\\(f\\)\nよりも大きいかを判定し，大きいならば\n\\(f\\)\nをその値に更新する．\n部分文字列は\n\\(\\Theta(N^2)\\)\n通りあり，充填率の計算には\n\\(O(N)\\)\n時間かかるので，全体の時間計算量は\n\\(O(N^3)\\)\nとなり，十分高速です．\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\n#include <cstdio>\n#include <vector>\n#include <string>\n#include <iomanip>\n#include <limits>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\nusing std::pair;\nusing std::make_pair;\nusing std::vector;\nusing std::min;\nusing std::max;\nusing std::string;\n\nstring s;\n\nvoid solve () {\n\tint n = s.size();\n\tlong double ans = 0;\n\tfor (int i = 0; i < n; i++) {\n\t\tif (s[i] != 't') continue;\n\n\t\tfor (int j = i + 2; j < n; j++) {\n\t\t\tif (s[j] != 't') continue;\n\n\t\t\tint x = 0;\n\t\t\tfor (int ki = i; ki <= j; ki++) {\n\t\t\t\tif (s[ki] == 't') x++;\n\t\t\t}\n\t\t\tint len = (j - i + 1);\n\n\t\t\tlong double item = (long double)(x - 2) / (long double)(len - 2);\n\t\t\tif (item > ans) ans = item;\n\t\t}\n\t}\n\n\tcout << std::fixed << std::setprecision(17) << ans << \"\\n\";\n\n\treturn;\n}\n\nint main (void) {\n\tstd::ios_base::sync_with_stdio(false);\n\tcin.tie(nullptr);\n\t\n\tcin >> s;\n\n\tsolve();\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "440ccc4dac1c2025099b8b1a2830a4f91a6ca9bcf3166e96e2d8e6159f5ab1b3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc418/abc418_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc418/editorial/13635",
+      "text": "よりよい計算量でこの問題を解く解法を紹介します。（この解法は ABC-B 問題としては難しく、ABC-F 程度の難易度です。）\n\\(0\\)\n以上\n\\(1\\)\n以下の実数\n\\(K\\)\nを決めたときに「答えは\n\\(K\\)\n以上か？」という判定問題を解くことを考えます。\n条件を満たすような部分列に対して\n\\(\\frac{x - 2}{|t| - 2} \\ge K\\)\nかどうかを判定する方法を考えます。式変形をすると\n\\(x - K |t| \\ge 2 - 2 K\\)\nとなるような、条件を満たす部分列が存在するかどうかを判定すればよいです。不等号の右辺は\n\\(K\\)\nを固定すると定数として扱うことができ、左辺値は\n\\[\na[i] = \\begin{cases}\n1 - K \\quad (S[i] = \\text{'t'})\\\\\n- K \\quad (S[i] \\neq \\text{'t'})\n\\end{cases}\n\\]\nと定めた数列\n\\(a\\)\nの区間和とみなすことができます。したがって、累積和を順次計算していきながら、条件を満たすような部分列の左端について累積和の最小値を保存しておくことで不等号の左辺の最大値を計算することができ、この判定問題を解くことができます。\n上記を使って、条件を満たす\n\\(K\\)\nの値を二分探索することでこの問題を解くことができます。解に求める精度を\n\\(d\\)\nとして計算量は\n\\(O(|S| \\log d)\\)\nです。\n実装例：\nhttps://atcoder.jp/contests/abc418/submissions/68388461",
+      "codes": [],
+      "text_sha256": "536b47a32bf9d143ce266f3491b5daf3a282e6fea1b6affd43e2dfb9acad6996",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc418/abc418_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

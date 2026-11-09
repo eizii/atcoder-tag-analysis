@@ -1,0 +1,34 @@
+{
+  "problem_id": "abc277_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc277/editorial/5211",
+      "text": "この問題では、与えられた条件を for 文と if 文を用いて丁寧に処理すればよいですが、何点か実装に関して気を付けるとよいことがあります。\n「すべての条件を満たす」の処理に関して\n以下のような方針が考えられます（あくまで例であり、他の方針でも正しく動けば問題ないです）。\n答えとなる変数を True で初期化して持つ。各条件に対して判定を行い、条件に反するものがあった場合その変数を False へと変更する。\n各条件に対して判定を行い、条件に反するものがあった場合\nNo\nを出力しプログラムを終了する。最後まで実行された場合、\nYes\nを出力する。\n\\(2\\)\nつめの条件に関して\n素直に判定を行おうとすると\nあるいは\nなどのように多くの条件を繋いで並べるという方針が考えられますが、この方針ではタイプ量が多くなりミスが生じやすいため、別の方法により処理することを推奨します。\nたとえば、C++ であれば\nPython であれば\nなどの記述が簡潔でしょう（これに関しても当然他の楽な方針も存在します）。もちろんこれは\n\\(1\\)\nつめの条件に対しても使うことができます。\n\\(3\\)\nつめの条件に関して\nもちろん set などを用いることにより高速に判定してもよいですが、制約が小さいため単に\n\\(2\\)\n重ループを回しても何の問題もないことに注意してください。本問題では実装量はさほど変わりませんが、TL に十分余裕があると考えられる場合は計算量を多少犠牲にして楽な実装をするというのも競技プログラミングの戦略の一種です。また、\n\\(2\\)\n重ループを回す際には\n\\(i\\)\nと\n\\(j\\)\nの対称性より大小関係を決め打っても問題がないです。\n実装例（C++）\n実装例（Python）",
+      "codes": [
+        "for (int i = 0; i < n; i++) {\n\tif (s[i][1] == 'A' or s[i][1] == '2' or s[i][1] == '3' or s[i][1] == '4' or s[i][1] == '5' or s[i][1] == '6' or s[i][1] == '7' or s[i][1] == '8' or s[i][1] == '9' or s[i][1] == 'T' or s[i][1] == 'J' or s[i][1] == 'Q' or S[i][1] == 'K') {\n\t\t// 処理を行う\n\t}\n}",
+        "for (int i = 0; i < n; i++) {\n\tif (s[i][1] != 'A' and s[i][1] != '2' and s[i][1] != '3' and s[i][1] != '4' and s[i][1] != '5' and s[i][1] != '6' and s[i][1] != '7' and s[i][1] != '8' and s[i][1] != '9' and s[i][1] != 'T' and s[i][1] != 'J' and s[i][1] != 'Q' and S[i][1] != 'K') {\n\t\t// 処理を行う\n\t}\n}",
+        "string s2 = \"A23456789TJQK\";\nfor (int i = 0; i < n; i++) {\n\tif (!count(s2.begin(), s2.end(), s[i][1])) // 処理を行う\n}",
+        "s2 = \"A23456789TJQK\"\nfor i in range(n):\n\tif !s2.count(s[i][1]):\n\t\t# 処理を行う",
+        "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<string> s(n);\n\tfor (int i = 0; i < n; i++) cin >> s[i];\n\tbool ans = true;\n\tfor (int i = 0; i < n; i++) for (int j = 0; j < i; j++) if (s[i] == s[j]) ans = false;\n\tstring s1 = \"HDCS\";\n\tstring s2 = \"A23456789TJQK\";\n\tfor (int i = 0; i < n; i++) {\n\t\tif (!count(s1.begin(), s1.end(), s[i][0]) || !count(s2.begin(), s2.end(), s[i][1])) ans = false;\n\t}\n\tcout << (ans ? \"Yes\" : \"No\") << '\\n';\n}",
+        "n = int(input())\ns = [input() for _ in range(n)]\ns1 = \"HDCS\"\ns2 = \"A23456789TJQK\"\nans = True\nfor i in range(n):\n\tfor j in range(i):\n\t\tif s[i] == s[j]:\n\t\t\tans = False\nfor i in range(n):\n\tif not s1.count(s[i][0]) or not s2.count(s[i][1]):\n\t\tans = False\nprint(\"Yes\" if ans else \"No\")"
+      ],
+      "text_sha256": "28657c5afb07037203a25b2933364e63266eed8991c27037ef9b356934d6aec0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc277/abc277_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc277/editorial/5218",
+      "text": "一つ目と二つ目の条件にマッチしているかどうかを判定する際、正規表現を用いると比較的簡潔に行うことができます。\n以下はC++とPython3による実装例となります。\n[C++]\n[Python3]\n(参考)Python3における正規表現を扱うためのreモジュールのドキュメント",
+      "codes": [
+        "#include<iostream>\n#include<regex>\n#include<set>\n#include<vector>\n\nusing namespace std;\n\nint main(){\n    int n; \n    cin >> n;\n\n    vector<string> strs(n);\n\n    for (int i = 0; i < n; i++){\n        cin >> strs[i];\n    }\n\n    regex pattern(R\"([HDCS][A2-9TJQK])\");\n\n    if (any_of(strs.begin(), strs.end(), [&](string s) { return !regex_match(s, pattern); } )){\n        cout << \"No\" << endl;\n    }else{\n        multiset<string> strs_set(strs.begin(), strs.end());\n        bool duplicated = false;\n\n        for (auto & s : strs){\n            if (strs_set.count(s) > 1){\n                duplicated = true;\n            }\n        }\n\n        cout << (!duplicated ? \"Yes\" : \"No\") << endl;\n    }\n\n    return 0;\n}",
+        "import re\n\npattern = re.compile(r'[HDCS][A2-9TJQK]')\n\nn = int(input())\nstrs = [input() for i in range(n)]\n\nif any(not pattern.match(s) for s in strs):\n    print(\"No\")\n\nelse:\n    print(\"Yes\" if len(set(strs)) == n else \"No\")"
+      ],
+      "text_sha256": "bfc160b9bf4b23988dc5b6c206ba022753b91f3468884a7fd7becf2818d99a7e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc277/abc277_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc354_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc354/editorial/10034",
+      "text": "場にあるカードの集合としてありえるものは\n\\(2^{N}\\)\n通りです。\nこの全ての場合について、それが先手が操作をする直前の時に場にあるカードの集合であったときに先手が勝つか後手が勝つか判定することができれば良いです。\nこれはいわゆる bitDP というテクニックを利用して解くことができます。\n\\(dp[S]\\)\n= 場にあるカードの集合が\n\\(S\\)\nの状態で先手から始まる時に先手が勝つことができる時\ntrue\nそうでない時\nfalse\nとし、遷移は以下の通りです。\nカードの集合\n\\(S\\)\nについて、ある\n\\(i,j \\in S\\)\nで\n\\(A_i=A_j\\)\nまたは\n\\(B_i=B_j\\)\nを満たす\n\\(i,j\\)\nについて\n\\(dp[S \\setminus \\{i,j\\}]\\)\nが\nfalse\nである時に\n\\(dp[S]\\)\nは\ntrue\n、それ以外の場合では\n\\(dp[S]\\)\nは\nfalse\n最終的に答えは、\n\\(S=\\{1,2,\\ldots,N\\}\\)\nの時の\n\\(dp[S]\\)\nが\ntrue\nである時に\nTakahashi\n、\nfalse\nである時に\nAoki\nとなります。\n状態数は\n\\(O(2^{N})\\)\nで遷移は\n\\(O(N^{2})\\)\nであるため、計算量は\n\\(O(2^{N} {N}^{2})\\)\nとなり、十分高速です。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n), b(n);\n    for (int i = 0; i < n; ++i)\n        cin >> a[i] >> b[i];\n    vector<int> dp(1 << n, -1);\n    dp[0] = 0;\n    for (int i = 1; i < (1 << n); ++i) {\n        bool f = false;\n        for (int j = 0; j < n; ++j)\n            for (int k = j + 1; k < n; ++k) {\n                if (((i >> j) & 1) && ((i >> k) & 1)) {\n                    if ((a[j] == a[k] || b[j] == b[k]) && dp[i ^ (1 << j) ^ (1 << k)] == 0) {\n                        f = true;\n                    }\n                }\n            }\n        dp[i] = f;\n    }\n    cout << (dp.back() ? \"Takahashi\" : \"Aoki\") << endl;\n}"
+      ],
+      "text_sha256": "22021707678b9e953f74291fc16593862a06c2fca34834816d90e02c53b968ef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc354/abc354_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

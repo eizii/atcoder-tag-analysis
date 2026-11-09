@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc406_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc406/editorial/13042",
+      "text": "計算機に\n\\(X\\)\nが表示されているとき、\n\\(A_i\\)\nをかけた後表示される数は次のようになります。\n\\((X\\times A_i)>10^K-1\\)\nならば\n\\(1\\)\nそうでないならば、\n\\((X\\times A_i)\\)\nこれを\n\\(i=1,2,\\ldots,K\\)\nの順で行い、最終的に表示されている数を求めれば良いです。\nただし、\n\\((X\\times A_i)\\)\nは最大で\n\\((10^{18}-1)^2\\)\n. となり、\n\\(64\\)\nビット整数型で計算する場合はオーバーフローを起こすため、計算を工夫する必要があります。\n例えば、\n\\(Y=10^K-1\\)\nとして、\n\\((X\\times A_i)>Y\\)\nと\n\\(X> \\left\\lfloor \\frac{Y}{A_i}\\right\\rfloor\\)\nが同値であることが利用できます。ここで、\n\\(\\left\\lfloor \\frac{Y}{A_i}\\right\\rfloor\\)\nは\n\\( \\frac{Y}{A_i}\\)\n以下の最大の整数を表します。\nこのとき、\n\\(X\\)\n,\n\\(\\left\\lfloor \\frac{Y}{A_i}\\right\\rfloor\\)\nはともに\n\\(10^{18}\\)\n未満であり、後者は整数間の除算によって求めることができるため、\n\\(64\\)\nビット整数型の範囲でオーバーフローを起こす事なく計算できます。他にも、多倍長整数を用いる方法などもあります。\nc++ による実装例:\nPython による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint n,k;\n\tlong long a,y=1,x=1;\n\n\tcin>>n>>k;\n\n\tfor(int i=0;i<k;i++)y*=10;\n\ty--;\n\n\tfor(int i=0;i<n;i++){\n\t\tcin>>a;\n\t\tif(x>(y/a))x=1;\n\t\telse x*=a;\n\t}\n\n\tcout<<x<<endl;\n\treturn 0;\n}",
+        "n,k=map(int, input().split())\na=list(map(int, input().split()))\n\nx,y=1,10**k-1\n\nfor i in range(n):\n   x*=a[i]\n   if x>y:\n       x=1\n\nprint(x)"
+      ],
+      "text_sha256": "328c5696e1fa08f7400e17d7c099b3300a5752ea1fa81b51e45beac4e1493218",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc406/abc406_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

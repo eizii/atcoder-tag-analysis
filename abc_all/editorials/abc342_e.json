@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc342_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc342/editorial/9396",
+      "text": "時間を逆方向に見ることにして、駅 \\(B _ i\\) を時刻 \\(-t-c _ i\\) に出発して駅 \\(A _ i\\) に時刻 \\(-t\\) に到着する電車があるような形にします。\nすると、解くべき問題は次のようになります。\n駅 \\(N\\) に十分早く（たとえば時刻 \\(-2\\times10 ^ {18}\\) など）いるとする。駅 \\(S\\) に到着することができる最小の時刻 \\(-f(S)\\) を求めよ（ただし、駅 \\(S\\) に到着することができないとき \\(f(S)=-\\infty\\) とする）。\nこの問題は、それぞれの情報のうち「時刻 \\(-f(S)\\) 以降に駅 \\(B _ i\\) を出発する電車のうち最初に出発するもの」だけを見ることで解けます（同じ情報の中で遅く出るほうの列車に乗っても得をしません）。\nよって、Dijkstra 法のように「これまでに見ていない駅のうち、もっとも早い時刻に到着できるもの」を順に探索することで解くことができます。\n実装例は以下のようになります。\nこの実装例では時間を順方向に戻して「もっとも遅く出発してよい駅」から探索していることに注意してください。",
+      "codes": [
+        "#include <iostream>\n#include <utility>\n#include <optional>\n#include <vector>\n#include <queue>\n#include <limits>\n#include <ranges>\n\nint main() {\n    using namespace std;\n    unsigned N, M;\n    cin >> N >> M;\n\n    // 電車の情報を保持する構造体\n    struct train {\n        unsigned from, to;\n        unsigned long first_train;\n        unsigned long interval;\n        unsigned long count;\n        unsigned long distance;\n\n        // time_limit までに駅 to へ到着するような列車の出発時刻のうち最小のものを求める\n        // 存在しなければ nullopt を返す\n        optional<unsigned long> get_last_train(unsigned long time_limit) const {\n            if (time_limit < first_train + distance)\n                return nullopt;\n            return first_train + min(count - 1, (time_limit - first_train - distance) / interval) * interval;\n        }\n    };\n    vector<vector<train>> train_info(N);\n    for (const auto _ : views::iota(0U, M)) {\n        unsigned long l, d, k, c;\n        unsigned A, B;\n        cin >> l >> d >> k >> c >> A >> B;\n        train_info[--B].push_back({--A, --B, l, d, k, c});\n    }\n\n    priority_queue<pair<unsigned long, unsigned>> pq;\n    vector<unsigned long> ans(N);\n\n    // 駅 N に十分遅い時間にいるところから探索を始める\n    pq.emplace(ans.back() = numeric_limits<unsigned long>::max(), N - 1);\n    while (!empty(pq)) {\n        // まだ探索していない駅のうちもっとも遅くまでいられる駅を探索する\n        const auto[time_limit, now]{pq.top()};\n        pq.pop();\n        if (ans[now] > time_limit)continue;\n\n        // 駅 now に向かう電車情報に対して\n        for (const auto &e : train_info[now]) {\n            const auto next{e.from};\n            const auto next_time{e.get_last_train(time_limit)};\n            // 駅 next の最終時刻 ≥ 駅 now の最終時刻に間に合う電車の発射時刻\n            if (next_time && ans[next] < *next_time) // 更新できるなら\n                pq.emplace(ans[next] = *next_time, next); // 優先度つきキューに入れる\n        }\n    }\n\n    for (const auto d : ans | views::take(N - 1))\n        if (d)\n            cout << d << endl;\n        else\n            cout << \"Unreachable\" << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "f2a5cc73f4e93da027caf79c3edddf98f4507e7e3db56176dbbcff64aaba4d6f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc342/abc342_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

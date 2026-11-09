@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc183_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc183/editorial/179",
+      "text": "次のようなDPを考えます。\nDP[i][j]=マス(i,j)まで移動する方法の数\nこのとき、\n\\[\n\\begin{aligned}\nDP[i][j]&=&DP[i][j-1]+DP[i][j-2]+\\ldots\\\\\n&+& DP[i-1][j]+DP[i-2][j]+\\ldots\\\\\n&+& DP[i-1][j-1]+dp[i-2][j-2]+\\ldots\n\\end{aligned}\n\\]\nとしてDPを行うことができます。この方法は時間計算量\n\\(O(HW(H+W))\\)\nであり、TLEとなります。\n縦横ななめそれぞれの方向について、累積和を求めながらDPを行うことで遷移を高速化することができます。具体的には\n\\(X[i][j]=DP[i][j-1]+DP[i][j-2]+\\ldots\\\\\nY[i][j]=DP[i-1][j]+DP[i-2][j]+\\ldots\\\\\nZ[i][j]=DP[i-1][j-1]+dp[i-2][j-2]+\\ldots\\)\nとすると、次のような擬似コードにより求めることができます（初期値や境界、壁のマスに対する処理を省略しています）。\n\\(\n\\text{for } i \\text{ in } 1..H\\\\\n\\ \\ \\ \\text{for }j \\text{ in } 1..W\\\\\n\\ \\ \\ \\ \\ \\ X[i][j] \\leftarrow X[i][j-1]+DP[i][j-1]\\\\\n\\ \\ \\ \\ \\ \\ Y[i][j] \\leftarrow Y[i-1][j]+DP[i-1][j]\\\\\n\\ \\ \\ \\ \\ \\ Z[i][j] \\leftarrow Z[i-1][j-1]+DP[i-1][j-1]\\\\\n\\ \\ \\ \\ \\ \\ DP[i][j]\\leftarrow X[i][j]+Y[i][j]+Z[i][j]\n\\)\nこれで時間計算量\n\\(O(HW)\\)\nで解けるようになりました。\nなお、このアルゴリズムにおいて、\n\\(DP[i][*]\\)\nなどを計算するためには、\n\\(DP[i-1][*]\\)\nなどしか必要がないことから、「今の行」「前の行」の2行分だけのデータを持って計算を行うことで、空間計算量\n\\(O(W)\\)\nで求めることができます。\n回答例(C)",
+      "codes": [],
+      "text_sha256": "a195f47b421a7310124ac00b021b9b9a35e9a0dedd0a40e3ab51fccda27be137",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc183/abc183_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

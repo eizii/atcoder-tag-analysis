@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc279_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5283",
+      "text": "今回の問題は、以下の\n\\(2\\)\nつの手順に分けて解くことができます。\nA. 各列の情報を取り扱いやすい形にする\nB.\n\\(S\\)\nの列を並べ替えて\n\\(T\\)\nと等しくできるか判定する\nA. について、\n\\(S,T\\)\nそれぞれについて行と列を転置して「各列を表現した文字列」の配列に変換すると取り扱いやすいです。\n転置とは、2次元配列\n\\(A\\)\nが与えられた時に\n\\(B[i][j]=A[j][i]\\)\nを満たす\n\\(B\\)\nを作って行と列の情報を置き換えることを指します。具体的な実装方法は実装例を参照して下さい。\n転置した後の\n\\(S,T\\)\nを\n\\(^tS,^tT\\)\nと表すと、解くべき問題 B. も言い換えられて、\n\\(^tS\\)\nの行を並べ替えて\n\\(^tT\\)\nと等しくできるか判定する (つまり、文字列の配列同士を比較して、一方を並べ替えてもう一方が作れるかを判定する) 問題となります。\nでは、この問題はどう解けば良いでしょうか?\n一般に、\n\\(P\\)\nを並び替えて\n\\(Q\\)\nと等しくできるかどうかという問題を解く最も簡単な方法は、\n\\(P\\)\nと\n\\(Q\\)\nを双方ソートしてその結果が同じになるかを調べる ( 同じになれば可能、そうでなければ不可能 ) というものです。\n今回の問題でも、\n\\(^tS\\)\nと\n\\(^tT\\)\nの各行を双方ソートしてその結果が同じになるかを調べればこの問題を解くことができます。\nこの解法の時間計算量は\n\\(O(HW \\log W)\\)\nです。 (\n\\(W\\)\n要素のソートがボトルネックであり、一度の比較には時間計算量\n\\(O(H)\\)\nがかかるため、この計算量となります。)\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int h,w;\n  cin >> h >> w;\n  vector<string> s(h),t(h);\n  for(auto &nx : s){cin >> nx;}\n  for(auto &nx : t){cin >> nx;}\n\n  // A.\n  vector<string> Ts(w),Tt(w);\n  for(int i=0;i<h;i++){\n    for(int j=0;j<w;j++){\n      Ts[j].push_back(s[i][j]);\n      Tt[j].push_back(t[i][j]);\n    }\n  }\n\n  // B.\n  sort(Ts.begin(),Ts.end());\n  sort(Tt.begin(),Tt.end());\n\n  if(Ts==Tt){cout << \"Yes\\n\";}\n  else{cout << \"No\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "c94615efc539caa411bcf31d4deb610b4d88a999e1bd81f9d9e91adcb48b2b89",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc279/abc279_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

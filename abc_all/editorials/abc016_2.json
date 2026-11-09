@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc016_2",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc016/editorial.pdf",
+      "text": "A±B Problem\n\f\n問題概要\n\n\n 入出力が与えられるので\n\n\n   ・A+Bだとわかる\n   ・A-Bだとわかる\n  ・どちらの可能性もある\n  ・どちらでもない\n\n\n を判定する\n\f\n解法\n\n\n  A+B＝CかつA-B≠C → A+Bだとわかる\n  A+B≠CかつA-B＝C → A-Bだとわかる\n  A+B＝CかつA-B＝C → どちらの可能性もある\n  A+B≠CかつA-B≠C → どちらでもない\n\n\n 場合分けを正確に漏れ無くやりましょう\n\f\n 問題C",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "c7e66d238c052918111d8a3d730f197839123d67b7e7e9e41bdea6895ce12dba"
+    }
+  ],
+  "status": "available"
+}

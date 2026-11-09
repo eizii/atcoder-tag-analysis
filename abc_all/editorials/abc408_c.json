@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc408_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc408/editorial/13165",
+      "text": "\\(C_i\\)\nを 城壁\n\\(i\\)\nを守っている砲台の数\n\\((1 \\leq i \\leq N)\\)\nとします。\nこのとき、\n\\(C\\)\nの最小値が答えとなります。\n\\(C\\)\nの最小値を\n\\(m\\)\nとしたとき、\n\\(m\\)\n個未満の砲台を破壊してもどの城壁\n\\(i\\)\nも\n\\(C_i-m+1\\)\n個以上の砲台が守っています。これは必ず正なのでどの城壁も\n\\(1\\)\n個以上の砲台に守られています。\n逆に、\n\\(C_j=m\\)\nとなる\n\\(j\\)\nについて城壁\n\\(j\\)\nを守っている\n\\(m\\)\n個の砲台を全て破壊すると、城壁\n\\(j\\)\nを守っている砲台は\n\\(0\\)\n個になり、どの砲台にも守られてない城壁が存在する状態になります。よって、\n\\(C\\)\nの最小値が答えとなります。\n入力から\n\\(C\\)\nを計算する方法について考えます。\n\\(C_i\\)\nは\n\\(L_j \\leq i \\leq R_j\\)\nを満たす\n\\(j(1 \\leq j \\leq M)\\)\nの個数と等しいです。これを言い換えると、初め\n\\(C=(0,0,\\ldots,0)\\)\nとし、各\n\\(i(1 \\leq i \\leq M)\\)\nについて\n\\(C_{L_i},C_{L_i+1},\\ldots,C_{R_i}\\)\nに\n\\(1\\)\nを加算したものが求めるべき\n\\(C\\)\nです。このまま愚直に計算すると時間計算量が\n\\(O(NM)\\)\nとなり、この問題の制約下では実行時間制限に間に合いません。\nこの処理は\nimos法\nを用いることで高速化できます。以下のような手順で\n\\(C\\)\nを計算することが可能です。また、便宜上\n\\(C\\)\nは長さ\n\\(N+1\\)\nであるとします。\n\\(C=(0,0,\\ldots,0)\\)\nと初期化する\n\\(i=1,2,\\ldots,M\\)\nの順で以下を行う\n\\(C_{L_i} \\leftarrow C_{L_i}+1\\)\n\\(C_{R_i+1} \\leftarrow C_{R_i}-1\\)\n\\(i=2,\\ldots,N+1\\)\nの順で以下を行う\n\\(C_{i} \\leftarrow C_{i}+C_{i-1}\\)\n\\(C_1,C_2,\\ldots,C_N\\)\nの最小値が答えです(\n\\(C_{N+1}\\)\nは常に\n\\(0\\)\nになります)。\nよって時間計算量\n\\(\\mathrm{O}(N+M)\\)\nでこの問題を解くことができます。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<int> imos(n + 1);\n    for (int i = 0; i < m; ++i) {\n        int l, r;\n        cin >> l >> r;\n        l--;\n        imos[l]++, imos[r]--;\n    }\n    for (int i = 1; i <= n; ++i)\n        imos[i] += imos[i - 1];\n    int ans = 1e9;\n    for (int i = 0; i < n; ++i)\n        ans = min(ans, imos[i]);\n    cout << ans << endl;\n}",
+        "n, m = map(int, input().split())\nimos = [0] * (n + 1)\nfor _ in range(m):\n    l, r = map(int, input().split())\n    l -= 1\n    imos[l] += 1\n    imos[r] -= 1\nfor i in range(1, n + 1):\n    imos[i] += imos[i - 1]\nans = 1e9\nfor i in range(n):\n    ans = min(ans, imos[i])\nprint(ans)"
+      ],
+      "text_sha256": "00a61a36e561934368899ec9a68005da2454dc61a4b8e070d743aa71995a6b77",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc408/abc408_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

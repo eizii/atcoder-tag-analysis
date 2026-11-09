@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc435_d",
+  "title": "Reachability Query 2",
+  "contests": [
+    {
+      "contest_id": "abc435",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 568,
+  "raw_difficulty": 568,
+  "contest_id": "abc435",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc435/tasks/abc435_d",
+  "statement": "配点 : 425 点 問題文 N 頂点 M 辺の有向グラフが与えられます。 頂点には 1 から N の番号がついており、 i 番目の辺は頂点 X_i から頂点 Y_i への有向辺です。 最初全ての頂点は白色です。 Q 個のクエリが与えられるので順に処理してください。クエリは以下の 2 種類のいずれかです。 1 v ：頂点 v を黒色にする 2 v ：頂点 v から辺を辿って黒色の頂点に到達可能かどうか判定する 制約 1\\leq N \\leq 3\\times 10^5 0\\leq M \\leq 3\\times 10^5 1\\leq Q \\leq 3\\times 10^5 1\\leq X_i,Y_i \\leq N 自己辺をもたない。すなわち X_i \\neq Y_i 多重辺をもたない。すなわち (X_i,Y_i) は相異なる クエリにおいて 1 \\leq v \\leq N 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M X_1 Y_1 \\vdots X_M Y_M Q \\mathrm{query}_1 \\vdots \\mathrm{query}_Q \\mathrm{query}_i は i 番目のクエリを表し、以下のいずれかの形式で与えられる。 1 v 2 v 出力 2 種類目のクエリの個数を q として q 行出力せよ。 i 行目には、 i 番目の 2 種類目のクエリにおいて到達可能なら Yes 、到達不可能なら No と出力せよ。 入力例 1 5 6\r\n1 2\r\n2 3\r\n3 1\r\n4 5\r\n1 4\r\n2 5\r\n5\r\n1 3\r\n2 1\r\n2 4\r\n1 5\r\n2 4 出力例 1 Yes\r\nNo\r\nYes 最初、与えられたグラフは下図一番左の通りです。 1 番目のクエリにより頂点 3 が黒色になり、下図中央のようになります。 2 番目のクエリにおいて、頂点 1 から黒色の頂点 3 に到達可能です。 3 番目のクエリにおいて、頂点 4 から黒色の頂点に到達することはできません。 4 番目のクエリにより頂点 5 が黒色になり、下図右のようになります。 5 番目のクエリにおいて、頂点 4 から黒色の頂点 5 に到達可能です。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 頂点 M 辺の有向グラフが与えられます。 頂点には 1 から N の番号がついており、 i 番目の辺は頂点 X_i から頂点 Y_i への有向辺です。 最初全ての頂点は白色です。 Q 個のクエリが与えられるので順に処理してください。クエリは以下の 2 種類のいずれかです。 1 v ：頂点 v を黒色にする 2 v ：頂点 v から辺を辿って黒色の頂点に到達可能かどうか判定する"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N \\leq 3\\times 10^5 0\\leq M \\leq 3\\times 10^5 1\\leq Q \\leq 3\\times 10^5 1\\leq X_i,Y_i \\leq N 自己辺をもたない。すなわち X_i \\neq Y_i 多重辺をもたない。すなわち (X_i,Y_i) は相異なる クエリにおいて 1 \\leq v \\leq N 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M X_1 Y_1 \\vdots X_M Y_M Q \\mathrm{query}_1 \\vdots \\mathrm{query}_Q \\mathrm{query}_i は i 番目のクエリを表し、以下のいずれかの形式で与えられる。 1 v 2 v"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 2 種類目のクエリの個数を q として q 行出力せよ。 i 行目には、 i 番目の 2 種類目のクエリにおいて到達可能なら Yes 、到達不可能なら No と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5 6\r\n1 2\r\n2 3\r\n3 1\r\n4 5\r\n1 4\r\n2 5\r\n5\r\n1 3\r\n2 1\r\n2 4\r\n1 5\r\n2 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\r\nNo\r\nYes 最初、与えられたグラフは下図一番左の通りです。 1 番目のクエリにより頂点 3 が黒色になり、下図中央のようになります。 2 番目のクエリにおいて、頂点 1 から黒色の頂点 3 に到達可能です。 3 番目のクエリにおいて、頂点 4 から黒色の頂点に到達することはできません。 4 番目のクエリにより頂点 5 が黒色になり、下図右のようになります。 5 番目のクエリにおいて、頂点 4 から黒色の頂点 5 に到達可能です。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc435/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:13.889241+00:00",
+  "statement_sha256": "585f621a4ce00d319e3ee349091ea59d4b74b542e733925331e2b777619b6045",
+  "editorials": []
+}

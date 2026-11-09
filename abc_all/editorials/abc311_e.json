@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc311_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/6819",
+      "text": "動的計画法でこの問題を解くことを考えます。\n\\(\\mathrm{dp}[i][j] :=\\)\n(マス\n\\((i, j)\\)\nを右下とする穴のない正方形のうち、一辺の長さ\n\\(n\\)\nの最大値。ただし、そのような正方形が存在しない場合は\n\\(0\\)\n)\nとします。(ただし\n\\((i, j)\\)\nが\n\\(1 \\leq i \\leq H, 1 \\leq j \\leq W\\)\nの範囲外である場合は\n\\(\\mathrm{dp}[i][j] = 0\\)\n)\nこのとき、この問題の答えは\n\\(\\mathrm{dp}[i][j]\\)\nを用いて次の式で表せます。\n\\[\\sum_{i=1}^H \\sum_{j=1}^W \\mathrm{dp}[i][j]\\]\n(証明) 全ての穴のない正方形は、どこかのマスをちょうど 1 個だけ右下に持ちます。また、\n\\(\\mathrm{dp}[i][j] = k\\)\nであるとき、\n\\(n=1, 2, \\dots, k\\)\n全てについて\n\\((i, j)\\)\nを右下とする縦横\n\\(n\\)\nの正方形領域は穴のない正方形です。よって、全ての穴のない正方形は上式でちょうど 1 回ずつ数えられます。(証明終わり)\nラフな説明で言い換えると、次のようなお気持ちを持つと上記の内容にたどり着くことができます。\n「全ての穴のない正方形を数える」という問題を解きたい\nこれは「右下が\n\\((i, j)\\)\nである穴のない正方形を数える」という部分問題を全てのマス\n\\((i, j)\\)\nに対して解けば求められる\n部分問題を DP で計算しよう！\nさて、\n\\(\\mathrm{dp}[i][j]\\)\nを\n\\(1 \\leq i \\leq H, 1 \\leq j \\leq W\\)\nの範囲で全て計算できればこの問題を解くことができます。\nいくらかの観察により、\n\\(\\mathrm{dp}[\\ast][\\ast]\\)\nについて次の漸化式が成り立つとわかります。\n\\[\n\\mathrm{dp}[i][j] = \n\\begin{cases}\n\\min\\lbrace \\mathrm{dp}[i-1][j], \\mathrm{dp}[i][j-1], \\mathrm{dp}[i-1][j-1] \\rbrace + 1 & S[i][j] = \\mathrm{o}\\\\\n0 & S[i][j] = \\mathrm{x}\n\\end{cases}\n\\]\n正当性については、マス\n\\((i, j)\\)\nと正整数\n\\(n\\)\nに関して、次の 1. と (2. かつ 3. かつ 4. かつ 5.) が同値であることを確認すると示せます。(図を書いてみると式の意味が理解しやすいです。)\n\\((i, j)\\)\nを右下とする一辺の長さが\n\\(n\\)\nの正方形領域に穴が無い。\n\\((i, j-1)\\)\nを右下とする 一辺の長さが\n\\(n-1\\)\nの正方形領域に穴が無い。\n\\((i-1, j)\\)\nを右下とする 一辺の長さが\n\\(n-1\\)\nの正方形領域に穴が無い。\n\\((i-1, j-1)\\)\nを右下とする 一辺の長さが\n\\(n-1\\)\nの正方形領域に穴が無い。\n\\((i, j)\\)\nは穴が無いマスである。\nよって、この DP の式に従って\n\\(\\mathrm{dp}[i][j]\\)\n\\((1 \\leq i \\leq H, 1 \\leq j \\leq W)\\)\nを\n\\(i\\)\n昇順 ->\n\\(j\\)\n昇順 の順に計算していけばよいです。\n計算量は\n\\(\\mathrm{O}(HW + N)\\)\nで十分高速です。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nconstexpr int nmax = 3030;\nint hole[nmax][nmax];\nint dp[nmax][nmax];\n\nint main() {\n  ios_base::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int H, W, N;\n  cin >> H >> W >> N;\n  for (int i = 0, a, b; i < N; i++) {\n    cin >> a >> b, hole[a][b] = 1;\n  }\n  long long ans = 0;\n  for (int i = 1; i <= H; i++) {\n    for (int j = 1; j <= W; j++) {\n      if (hole[i][j]) continue;\n      dp[i][j] = min({dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]}) + 1;\n      ans += dp[i][j];\n    }\n  }\n  cout << ans << \"\\n\";\n}"
+      ],
+      "text_sha256": "dec779b77fa619a2157776b0a5fdb64ce63cae018c4af850775c1b8917f90365",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc311/abc311_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/6829",
+      "text": "二次元累積和と二分探索を用いた、想定解とは異なる解法を説明します。\n\\(H \\times W\\)\nの2次元配列\n\\(a\\)\nを次のように定めます。\n\\(a_{i,j}=\\left\\{\n\\begin{array}{ll}\n0& グリッドのマス (i, j)に穴がない\\\\\n1 & グリッドのマス (i, j)に穴がある\n\\end{array}\n\\right.\n\\)\nこうすると、左上のマスが\n\\((i, j)\\)\n、右下のマスが\n\\((i + n - 1, j + n - 1)\\)\nである正方形に穴がないことと、\n\\(\\displaystyle \\sum_{x = i}^{i + n - 1} \\sum_{y = j}^{j + n - 1}  a_{x, y} = 0\\)\nであることが同値となります。\n\\(a\\)\nの二次元累積和を構築することで、\n\\((i, j, n)\\)\nが与えられた時の\n\\(\\displaystyle \\sum_{x = i}^{i + n - 1} \\sum_{y = j}^{j + n - 1}  a_{x, y}\\)\nの値は\n\\(O(1)\\)\nで求めることができます。\nこれから、答えを数えていきます。左上のマス\n\\((i, j)\\)\nを固定して、左上が\n\\((i, j)\\)\nとなるような穴のない正方形を探索しましょう。次の判定問題を考えます:\n左上が\n\\((i, j)\\)\nである一辺が\n\\(k\\)\nの穴のない正方形を作れるか？\nこの判定問題は\n\\(k\\)\nについて単調です。つまり、\n\\(k \\geq 2\\)\nについて、一辺が\n\\(k\\)\nの正方形を作れるなら、一辺が\n\\(k - 1\\)\nの正方形を作ることができます。\n判定問題の答えが Yes となる最大の\n\\(k\\)\nを\n\\(K\\)\nとすると、左上が\n\\((i, j)\\)\nであるような正方形は、一辺の長さが\n\\(1, 2, \\dots, K\\)\nの\n\\(K\\)\n個作ることができるため、答えに\n\\(K\\)\nを足せばよいことになります。\n\\(K\\)\nを求めるためには、二分探索が有効です。判定問題は先述の通り二次元累積和で\n\\(O(1)\\)\nで解けて、\n\\(K\\)\nの上界を\n\\(\\min(H, W)\\)\nとして取ることができるので、\n\\(K\\)\nは\n\\(O( \\log (\\min(H, W))\\)\nで求めることができます。\n後は、これをすべての\n\\((i, j)\\)\nについて求め、答えを足し合わせれば最終的な答えとなります。\n\\((i, j)\\)\nの組は\n\\(\\Theta(HW)\\)\n個なので、全体の計算量は\n\\(\\Theta(HW \\log (\\min(H, W))\\)\nです。想定解より計算量は悪化しますが、この問題の制約下で\n\\(HW \\log (\\min(H, W)) \\leq 1.4 \\times 10^8\\)\nと見積もれるので、定数倍に注意すれば十分ACできる範囲内です。",
+      "codes": [],
+      "text_sha256": "dea894424d3d29cf5fca0d1b861993cf1509d94d072b5838ecfcc98e8f980eb6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc311/abc311_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/6842",
+      "text": "https://atcoder.jp/contests/abc311/editorial/6829\nこの解説の二分探索パートで異なる解法を用いたものです。前半は同じなのでそちらの解説を参照してください。\n左上が\n\\((i,j)\\)\nである正方形のうち、作ることができる最大のものの一辺の長さを\n\\(x_{i,j}\\)\nとして、これを二分探索を用いずに求めることを考えます。\nまず、左上が\n\\((i,1)\\)\nの場合について、二次元累積和を用いて一辺の長さが\n\\(1\\)\nの場合から順に調べて、\n\\(x_{1,1}\\dots x_{H,1}\\)\nを求めます。\n次に左上が\n\\((i,j+1)\\)\nの場合を考えます。左上が\n\\((i,j+1)\\)\nで一辺の長さが\n\\(x_{i,j}-1\\)\nの正方形は、左上が\n\\((i,j)\\)\nで一辺の長さが\n\\(x_{i,j}\\)\nの正方形に含まれるので、\n\\(x_{i,j+1}\\geq x_{i,j}-1\\)\nが成り立ちます。よって一辺の長さが\n\\(x_{i,j}\\)\n以上の場合だけ作れるか調べればよいです。(\n\\(x_{i,j}\\)\nから順番に調べて作れなくなったところで打ち切ります。)\n実はこれらを二次元累積和を用いて愚直に調べることで全体で\n\\(O(HW)\\)\nで求めることができます。\n\\(\\sum_{i=1}^{H}\\sum_{j=0}^{W}  (x_{i,j+1}-x_{i,j}+2)\\)\n\\(=\\sum_{i=1}^{H} (2(W+1)+(x_{i,W+1}-x_{i,0}))\\)\n\\(=\\sum_{i=1}^{H} 2(W+1)\\)\n\\(=2H(W+1)\\)\nよって調べる必要があるのは\n\\(O(HW)\\)\n回で、一回の判定は二次元累積和を用いて\n\\(O(1)\\)\nでできるので、計算量\n\\(O(HW)\\)\nで求めることができます。",
+      "codes": [],
+      "text_sha256": "f6dc7a6338e4403e9c2eaf98a5b00253e4485d6c074d52b69036042246a44a26",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc311/abc311_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc365_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc365/editorial/10586",
+      "text": "if 文を用いて問題文中の場合分けを実装しましょう。\n\\(x\\)\nが\n\\(y\\)\nで割り切れるかの判定は、\nx % y == 0\nかを確認することで行えます。ここで、\nx % y\nは\n\\(x\\)\nを\n\\(y\\)\nで割ったあまりで、\n%\nはあまりを求める演算子です。\n\\(x\\)\nが\n\\(y\\)\nで割り切れるときに限り\n\\(x\\)\nを\n\\(y\\)\nで割ったあまりは\n\\(0\\)\nとなるので、上のコードで割り切れるかの判定ができます。\n今回の場合、if 文が複数になり、書き方によってはネストが深くなってしまいます。その場合、条件を満たす場合すぐに出力して return をすることで、深いネストを回避することができます。\n実装例 (C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int y;\n    cin >> y;\n    if(y % 4) {\n        cout << 365 << endl;\n        return 0;\n    }\n    if(y % 100) {\n        cout << 366 << endl;\n        return 0;\n    }\n    if(y % 400) {\n        cout << 365 << endl;\n        return 0;\n    }\n    cout << 366 << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "8f78b977d6753859af181c06ab11e1a22b94f9c283aecb99bc78cdbb462f740e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc365/abc365_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc365/editorial/10596",
+      "text": "いくつかの言語では，標準ライブラリを用いてある年の日数を求めることができます．大きな方針としては以下の\n\\(2\\)\nつです．\n\\(Y\\)\n年が閏年かどうかを判定する関数を用いる\n\\(Y\\)\n年\n\\(1\\)\n月\n\\(1\\)\n日から\n\\(Y+1\\)\n年\n\\(1\\)\n月\n\\(1\\)\n日（あるいは\n\\(Y\\)\n年\n\\(12\\)\n月\n\\(31\\)\n日）までの日数を数える．\nここでは C++, Python, Go, Haskell について紹介します．\nC++\nC++20 から\nchrono\nライブラリに\nchrono::year\nが追加されました．このクラスの中に閏年かどうかを判定する関数\nis_leap\nが含まれています．\nPython\ncalender\nモジュールは日付に関連する機能があります．\ncalendar.isleap\nで閏年かどうかを bool 値で返します．\ndatetime\nモジュールも日付や時刻に関連する機能があります．\ndatetime.date\nで生成した\n\\(2\\)\nつの日付の間の日数を\n.days\nを用いて求めることができます．\nHaskell\nData.Time.Calendar\nモジュールで，日付や時間を扱うことができます．\nisLeapYear\nは閏年かどうかを Bool で返します．\nfromGregorian\nで Day 型の日付を生成し，\ndiffDays\nで\n\\(2\\)\nつの Day 型の日付の間の日数を計算することもできます．\nGo\nGo 言語の\ntime\nパッケージは，日付や時間を扱うことができます．\ntime.Date\nでは年，月，日，時，分，秒，ナノ秒，およびタイムゾーンを指定することで\ntime.Time\nオブジェクトを生成します．\nYearDay\nメソッドは，\ntime.Time\nオブジェクトの日付がその年の何日目であるかを返します．よって，この問題では\n\\(Y\\)\n年\n\\(12\\)\n月\n\\(31\\)\n日目がその年の何日目かを求めればよいです．\nこの解説の執筆には MMNMM さんにご協力いただきました．",
+      "codes": [
+        "#include <iostream>\n#include <chrono>\n\nusing namespace std;\n\nint main() {\n    int Y;\n    cin >> Y;\n    chrono::year year(Y);\n    if (year.is_leap()) {\n        cout << 366 <<endl;\n    } else {\n        cout << 365 <<endl;\n    }\n    return 0;\n}",
+        "import calendar\nY = int(input())\nif calendar.isleap(Y):\n    print(366)\nelse:\n    print(365)",
+        "from datetime import date\nY = int(input())\nprint((date(Y + 1, 1, 1) - date(Y, 1, 1)).days)",
+        "import Data.Time.Calendar (isLeapYear)\n\nyear_days :: Bool -> Integer\nyear_days is_leap = if is_leap then 366 else 365\n\nmain = interact $ show . year_days . isLeapYear . (read :: String -> Integer)",
+        "import Data.Time.Calendar (fromGregorian, diffDays)\n\nyear_days :: Integer -> Integer\nyear_days y = diffDays (fromGregorian (y + 1) 1 1) (fromGregorian y 1 1)\n\nmain = interact $ show . year_days . (read :: String -> Integer)",
+        "package main\n\nimport (\n    \"fmt\"\n    \"time\"\n)\n\nfunc main() {\n    var Y int\n    fmt.Scan(&Y)\n    fmt.Println(time.Date(Y, 12, 31, 0, 0, 0, 0, time.UTC).YearDay())\n}"
+      ],
+      "text_sha256": "9a72ac813ddce5bcec6413450643e7c40d08e8374fbeafc71796668c81d20a80",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc365/abc365_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc117_b",
+  "editorials": [
+    {
+      "text": "B: Polygon\n最大のLi が他のLi の和未満であれば‘Yes‘、そうでなければ‘No‘ を出力すれば良いことが問題文の定理\nからわかります。したがって、「最大のLi」と「他のLi の和」を求められれば判定することができます。こ\nれらを求めるアプローチはいくつかあります。\n方法1\nL を昇順にソートします。すると、始めのN −1 要素の和が「他のLi の和」、最後の要素が「最大の\nLi」となります。\n方法2\nLj が最大となるj を求めます。これは、仮にj := 1 として、L2 > Lj ならばj := 2 と更新し、\nL3 > Lj ならばj := 3 と更新し、・・・と繰り返すことで求められます。すると、j̸ = k なるk につ\nいてLk を足し合わせたものが「他のLi の和」、Lj が「最大のLi」となります。\n方法3\nまず、最大値を求めます。これは、方法2 やそれと似た方法でできます。次にL1, L2, ..., LN の合計を\n求め、S とします。すると、S −Lj が「他のLi の和」、Lj が「最大のLi」となります。\nこれをC++ で実装すると、次のようになります。\n#include <bits/stdc ++.h>\nusing\nnamespace\nstd;\nint main () {\nint n; cin >> n;\nint sum = 0, maxL = 0;\nfor (int i = 0; i < n; ++i) {\nint L; cin >> L;\nsum += L;\nmaxL = max(maxL , L);\n}\nif (maxL < sum - maxL) {\ncout << \"Yes\" << endl;\n}\nelse {\ncout << \"No\" << endl;\n}\n}\n",
+      "text_sha256": "ad9b43e11c7c2eeca06447a6be78c2bc4aa76f5413674bb7dc7886e8ee1a488f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc117/abc117_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

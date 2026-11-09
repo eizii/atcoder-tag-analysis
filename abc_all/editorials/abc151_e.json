@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc151_e",
+  "editorials": [
+    {
+      "text": "E:Max-Min Sums\nA は予めソートされているとします。また、N までの階乗とその逆元を予め計算しておくことで、\n二項係数は高速に求められるとして良いです。\nmax とmin について、それぞれ別々に和をとることを考えます。すなわち∑f(S) ではなく\n(∑max S) −(∑min S) を考えます。\n簡単のために、Ai は相異なるとします。max S の値としてありえるのはA の要素のいずれかで\nす。したがって、各i についてmax S = Ai となるようなS がいくつあるかがわかれば、∑max S\nを求めることができます。max S = Ai となる必要十分条件は「S はAi を含み、かつ、Ai より小さ\nなものK −1 個を含む」であるので、このようなものは二項係数を用いて直ちに計算することができ\nます。∑min S も同様にして求めることができます。\nAi が重複するものを持つ場合、値が等しいAi たちの間には勝手な大小関係を入れても、上で述べ\nた説明は成立することが確かめられます(例えば(Ai, i) の辞書順による順序を考え、max S = (Ai, i)\nとなるものの個数を考えます)。したがって、この場合も全く同様に求められます。\n",
+      "text_sha256": "3d276a7cd7963746f9593996008e03fd82bc2fe8b371cfe372cff7676b5d1407",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc151/abc151_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

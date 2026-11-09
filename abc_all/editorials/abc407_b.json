@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc407_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc407/editorial/13103",
+      "text": "\\(2\\) つのサイコロを \\(A,B\\) とし、\\(A\\) の出目を \\(a\\) と、\\(B\\) の出目を \\(b\\) とすると、\\((a,b)\\) の組み合わせは \\((1,1),(1,2),\\ldots,(6,5),(6,6)\\) の \\(36\\) 通りあります。\nこの \\(36\\) 通りのいずれか \\(1\\) つが必ず起き、どれが起こる確率も等しく \\(\\dfrac1{36}\\) であるので、\\(36\\) 通りのうちいくつが条件を満たすか数えることでこの問題を解くことができます。\n実装例は以下のようになります。\n誤差が \\(10 ^ {-9}\\) 以下のとき正答と判定されるので、言語によっては出力する桁数を設定する必要がある場合があります。",
+      "codes": [
+        "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int X, Y;\n    cin >> X >> Y;\n\n    int count = 0; // 条件を満たす出目の組み合わせの個数\n    for (int a = 1; a <= 6; ++a) // 1 つめのサイコロの出目\n        for (int b = 1; b <= 6; ++b) // 2 つめのサイコロの出目\n            if (a + b >= X || a + Y <= b || b + Y <= a) // 条件を満たすなら\n                ++count; // カウントを増やす\n\n    // 36 で割った値が答え\n    cout << setprecision(10) << count / 36. << endl;\n    return 0;\n}",
+        "X, Y = map(int, input().split())\n\ncount = 0\nfor a in range(1, 7):\n    for b in range(1, 7):\n        if a + b >= X or a + Y <= b or b + Y <= a:\n            count += 1\n\nprint(count / 36)"
+      ],
+      "text_sha256": "7c47fc2a82f15cf857200a354d56feba93ec1efa64dfc9e9c405169fbdd0e8db",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc407/abc407_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

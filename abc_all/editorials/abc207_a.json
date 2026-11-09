@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc207_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc207/editorial/2142",
+      "text": "手に持つカードの組は\n\\(A\\)\nが書かれたカードと\n\\(B\\)\nが書かれたカード\n\\(B\\)\nが書かれたカードと\n\\(C\\)\nが書かれたカード\n\\(C\\)\nが書かれたカードと\n\\(A\\)\nが書かれたカード\nの\n\\(3\\)\n通りです。よって、\n\\(A+B\\)\n,\n\\(B+C\\)\n,\n\\(C+A\\)\nの中の最大値を出力すればよいです。\n実装例 (Python)\nなお、以下のように書くことも可能です。\n実装例 (C++)",
+      "codes": [
+        "A,B,C = map(int,input().split())\nprint(max(A+B,B+C,C+A))",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint A,B,C; cin >> A >> B >> C;\n\tcout << A+B+C-min({A,B,C}) << endl;\n}"
+      ],
+      "text_sha256": "ee0cc4f0cdd1ff8e978b5d1731b7038e491452c3579118b618b9d8db86373573",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc207/abc207_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

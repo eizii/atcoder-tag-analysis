@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc325_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc325/editorial/7478",
+      "text": "各\n\\(i\\)\nに対して、都市\n\\(1\\)\nから社用車のみを使って都市\n\\(i\\)\nまで行くときにかかる時間の最小値を\n\\(X_i\\)\n、都市\n\\(i\\)\nから電車のみを使って都市\n\\(N\\)\nまで行くときにかかる時間の最小値を\n\\(Y_i\\)\nとします。\n都市\n\\(i\\)\nで社用車から電車に乗り換えることにすると、このときかかる時間の最小値は\n\\(X_i + Y_i\\)\nであることより、本問題の答えは\n\\(\\min (X_i + Y_i)\\)\nとなります。ただし、社用車のみを使う場合は\n\\(i = N\\)\nに、電車のみを使う場合は\n\\(i = 1\\)\nに対応します。\n\\(X_i\\)\nたちは dijkstra 法を用いることで時間計算量\n\\(O(N^2)\\)\nで求めることができ、都市\n\\(i\\)\nから電車のみを使って都市\n\\(N\\)\nまで行くときにかかる時間の最小値は都市\n\\(N\\)\nから電車のみを使って都市\n\\(i\\)\nまで行くときにかかる時間の最小値と等しいことを利用すると、\n\\(Y_i\\)\nたちも同様に求めることができます。",
+      "codes": [],
+      "text_sha256": "cd2d7fa742edc6e2de12d64928c06ef75f017ad5a3db8a056f343b71edfd0d3a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc325/abc325_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

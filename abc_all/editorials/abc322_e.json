@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc322_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc322/editorial/7305",
+      "text": "全ての開発案を実行するかどうかを全通り試す\n\\(\\mathrm{O}(2^N N K)\\)\n解法は間に合いません。そこで、\n\\(P\\)\nを超えたステータスは\n\\(P\\)\nで打ち切ってもよいため途中でのステータスの種類は実質\n\\(\\mathrm{O}((P+1)^K)\\)\n通りしかないことに注目します。すると、次のような動的計画法が考えられます。\n\\(\\mathrm{dp}[i][a] = i\\)\n個目の開発案までを実行するかどうか決めて、ステータスの配列が\n\\(a=(a_1,a_2,\\dots,a_K)\\)\nになるようなコストの総和の最小値(達成不可能なときは\n\\(\\infty\\)\nとする。)\n\\(a\\)\nの要素のうち\n\\(P\\)\nを超えたものは全て\n\\(P\\)\nにすることで、状態数を\n\\(\\mathrm{O}(N(P+1)^K)\\)\n個に抑えられます。遷移は、\n\\(i+1\\)\n個目の開発案を実行するかしないかの\n\\(2\\)\n通りでそれぞれ\n\\(\\mathrm{O}(K)\\)\nで遷移できるため、この解法の計算量は\n\\(\\mathrm{O}(NK(P+1)^K)\\)\nとなります。これは十分高速です。\n実装においては、\n\\(a\\)\nを\n\\(K\\)\n桁の\n\\(P+1\\)\n進数の整数として扱うことで実装が簡単になります。もしくは、C++ などの高速な言語だと\n\\(a\\)\nを vector で管理して、dp に map を使うなどをしても良いです。",
+      "codes": [],
+      "text_sha256": "7207539ec052cdd1278111d116f022106311552bb75b4b4f5e927b4f71ca6dfe",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc322/abc322_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc322/editorial/7335",
+      "text": "公式解説\nでは各遷移を毎回\n\\(O(K)\\)\nで行っていますが、ビット演算による並列処理を使うと各遷移を\n\\(O(1)\\)\nで行うことができます。\n本問では\n\\(P\\le 5\\)\nなので\n\\(0\\)\n以上\n\\(P\\)\n以下の整数は\n\\(3\\)\nビットで表現できますが、さらに判定用に上位ビットを\n\\(1\\)\nビット追加して、\n\\(4\\)\nビットずつ使うことにします。\n「繰り上がり」を無視すれば、合計した状態は整数をそのまま合計すれば求まりそうですが、\n\\(P\\)\n以下に抑える処理をしないとオーバーフローしてしまいます。変数\nx\nを\n\\(4\\)\nビットごとに見て\n\\(P\\)\nを超えている場合に\n\\(P\\)\nに置き換えたものを表す関数を\nminP(x)\nとします。\nこの処理のため、\n\\(4\\)\nビットごとに次のようになっている変数を定義します。\nmask\n：\n0111\nの繰り返し\nmmm\n：\n1000\nの繰り返し\nppp\n：\n\\(P\\)\nの\n\\(16\\)\n進法表現の繰り返し\n結論としては\nminP(x)\nは、\nx - ((((mmm + x - ppp) & mmm) * 7 >> 3) & (mmm + x - ppp))\nで表せます。\nこれは\n(mmm + x - ppp) & mmm\nの部分を考えると、\n\\(x\\)\nを\n\\(4\\)\nビットごとに見たときに\n\\(P\\)\n以上になっている箇所のみにビットが立っていることなどから分かります。\nAC コード\n（PyPy3）",
+      "codes": [],
+      "text_sha256": "a67cc1e94a75e595718bb832531f11782ce8dee8d37bf5a4139200fc5102dd06",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc322/abc322_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

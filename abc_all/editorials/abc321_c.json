@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc321_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc321/editorial/7261",
+      "text": "重要な観察として、 321-like Number の各桁に同じ数字が\n\\(2\\)\n回以上現れることはありません。\nこのことから、 以下のような方針の探索ができそうなことが分かります。\n\\(0\\)\nをひとつ使うか使わないか\n\\(1\\)\nをひとつ使うか使わないか\n\\(\\vdots\\)\n\\(9\\)\nをひとつ使うか使わないか\nさらに、この選択を行った後は数字を降順に並べた場合しか考えなくてよいことも分かります。\n例えば、\n\\(1,3,7,8\\)\nだけを使うことにした場合、これらを降順に並べた\n\\(8731\\)\nしか考えなくてよいです。\nまた、 321-like Number は正整数なので、「何も使わない」「\n\\(0\\)\nしか使わない」は禁じられ、残りの\n\\(2^{10}-2 = 1022\\)\n通りの選び方に対しては 321-like Number が一意に存在します。\n最初にこの\n\\(1022\\)\n通りを全て試し、得ることができた 321-like Number を昇順に並べ、その\n\\(K\\)\n番目を取り出して答えとすればこの問題に正解できます。\nこの探索は bit 全探索を使うと楽に行うことができる(実装例がその方針です)他、様々な方針で行うことができます。\n但し、この問題には重大なコーナーケースが存在します。\n\\(9\\)\n桁以内の 321-like Number は\n\\(32\\)\nbit 符号付き整数型に収まりますが、\n\\(K=1022\\)\nである場合の\n\\(9876543210\\)\nだけは\n\\(32\\)\nbit 符号付き整数型に収まりません。なので、\n\\(9876543210\\)\nが収まるような整数型を使うか、場合分けによってこのケースを処理するかする必要があります。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  vector<long long> ans;\n  for(int i=2;i<(1<<10);i++){\n    long long x=0;\n    for(int j=9;j>=0;j--){\n      if(i&(1<<j)){\n        x*=10;\n        x+=j;\n      }\n    }\n    ans.push_back(x);\n  }\n  sort(ans.begin(),ans.end());\n\n  int k;\n  cin >> k;\n  cout << ans[k-1] << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "2cbc968df3f9f197cc0c5c1add81bfb31c22cd5f02188ad2e5d6c73ba8de890c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc321/abc321_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc321/editorial/7275",
+      "text": "ソートせず、直接全列挙する方針を紹介します。\nans\nは、\n321-like Number\nを昇順に並べたものが入っています。  従って、\nans[K]\nがそのまま答えになります。",
+      "codes": [
+        "import java.util.*\nfun main() {\n  Scanner(System.`in`).use { sc ->\n    val K = sc.nextInt() - 1\n    val ans = MutableList(9) { ('1' + it).toString()} // 最初は\"1\", \"2\", ..., \"9\"\n    repeat(K) {for (v in '0' until ans[it].last()) ans.add(ans[it] + v)} // 与えられた数の末尾に、条件を満たす数を結合する\n    println(ans[K]) // ansは昇順に値が入っている\n  }\n}"
+      ],
+      "text_sha256": "11db61ebea672840764eba53cfea0b97edf8edaf238be559c611e48390735c2b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc321/abc321_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc321/editorial/7296",
+      "text": "この解法はジャッジ時のPythonのコンパイルコマンドで仮のプログラム実行が60sec程度を上限に行われるという、この解説執筆時のAtCoderでの仕様を利用したものです。この仕様は公式に宣言されたものではないので、今後この解法が使えなくなる可能性もあります。ご注意ください。\nこの問題に解答するには321-likeな数を全て調べることができれば十分です。A問題で、与えられた数が321-likeかどうか判定するプログラムを作成していますので、これを用いて321-likeな数を全て探し出します。\n321-likeな数を\n\\(N\\)\nとすると\n\\(1\\leq N\\leq 98,765,432\\)\n\\(876,543,210\\leq N\\leq 987,654,321\\)\n\\(9,876,543,210 \\leq N \\leq 9,876,543,210\\)\nのいずれかを満たすので、この範囲の全ての整数について321-likeかどうかの判定を行えば十分です。これはPyPyで60sec以内にできるので、コンパイルコマンドでプログラムが実行されたときにこれを行い、.npyファイルなどのファイルに321-likeな数の一覧を保存しておくことで、実行時にはこのファイルを読み出すことで解答ができるようになります。\n実装例",
+      "codes": [],
+      "text_sha256": "9f3a76ed2534ee42b2048a4e0ce332d58a0bbb463487bfc34a95b73906cb9a60",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc321/abc321_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

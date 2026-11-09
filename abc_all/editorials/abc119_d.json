@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc119_d",
+  "editorials": [
+    {
+      "text": "D: Lazy Faith\n一つの問いxi について考えましょう。地点xi より西にある神社のうち最も東にある神社をsa、xi より東\nにある神社のうち最も西にある神社をsb とします。もとの設定のままでは神社sa, sb のいずれかが存在しな\nい可能性がありますが、道路のはるか西とはるか東、訪れる価値がないような位置(例えば、道路の西端から\n1018 メートル西と1018 メートル東) にも神社があるとすると神社sa, sb はどちらも必ず存在します。\nこのとき、道路上にsa, sb 以外の神社は存在しないとしても答えは変わりません。なぜなら、もしその他の\n神社so を訪れることがあれば、その過程ですでにsa, sb のいずれかを通過しているはずで、so をあえて訪れ\nる必要はないためです。同様に寺tc, td を定義すると、それら以外の寺は存在しないとしても答えは変わりま\nせん。よって、sa, sb, tc, td のうちどれをどの順に訪れるかの選択8 通り*1をすべて試せば答えが求まります。\nあとは、sa, sb, tc, td をどのように高速に求めるかが課題です。b が求められれば、a = b −1 でありc, d も\n同様に求められるため、以下ではb を求めることを考えます。\nb をより数学的に定義すると「sj > xi であるような最小の整数j」となります(s1, . . . , sA がはじめから昇\n順に並んでいることに注意)。このような値を高速に求めるアルゴリズムに二分探索(リンク先はWikipedia\nの同名の記事) があり、現代の多くの言語に標準で実装されています。これを用いると、⌈log2(A + 2)⌉ステッ\nプ*2の演算でb を求めることができ、10 万個の問いに対しても十分高速です。*3\n1 import bisect\n2 A, B, Q = map(int, input().split())\n3 INF = 10 ** 18\n4 s = [-INF] + [int(input()) for i in range(A)] + [INF]\n5 t = [-INF] + [int(input()) for i in range(B)] + [INF]\n6 for q in range(Q):\n7\nx = int(input())\n8\nb, d = bisect.bisect_right(s, x), bisect.bisect_right(t, x)\n9\nres = INF\n10\nfor S in [s[b - 1], s[b]]:\n11\nfor T in [t[d - 1], t[d]]:\n12\nd1, d2 = abs(S - x) + abs(T - S), abs(T - x) + abs(S - T)\n13\nres = min(res, d1, d2)\n14\nprint(res)\nますが、最適解を求める上で害はありません\n",
+      "text_sha256": "e8093ba75af31dba1f442f938ab261b2b6bc015b8cc79ff1f82812833a23c5a9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc119/abc119_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

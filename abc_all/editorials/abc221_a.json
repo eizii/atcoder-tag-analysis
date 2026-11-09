@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc221_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc221/editorial/2721",
+      "text": "マグニチュードが\n\\(1\\)\n大きくなるたびにちょうど\n\\(32\\)\n倍になるとして良いことから、答えは\n\\(32^{(A-B)}\\)\nとなります。\n制約より\n\\(A\\)\n,\n\\(B\\)\nは整数であり、\n\\(B\\leq A\\)\nでもある事からこれは for 文を用いて求めることができます。また、言語によっては累乗やpow関数などを用いることもできます。\nc++による実装例 :\nc++による実装例(pow関数) :\nPythonによる実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint a, b;\n\tint k = 1;\n\tcin >> a >> b;\n\tfor (int i = b; i < a; i++)k *= 32;\n\tcout << k << endl;\n\treturn 0;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint a, b;\n\tcin >> a >> b;\n\tcout << (int)pow(32,a-b) << endl;\n\treturn 0;\n}",
+        "a,b= map(int, input().split())\nprint(32**(a-b))"
+      ],
+      "text_sha256": "c101c83ca6f639890cd9e36d1b40c5da0c403c8192e689f924e02eb775b230c5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc221/abc221_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

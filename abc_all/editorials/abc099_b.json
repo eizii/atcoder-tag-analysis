@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc099_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc099/editorial.pdf",
+      "text": "B:  Stone Monument\n\n 高さ(1 + 2 + 3 + ... + X) メートルの塔から、西に1 メートルの地点に立っている塔の高さは\n(1 + 2 + 3 + ... + X −1) メートルなので、これら2 本の塔の高さの差はX メートルとなります。\n よって、雪の埋もれていない部分の高さがb メートルの塔の高さは、(1 + 2 + 3 + ... + b −a)\nメートルであることがわかります。\n  (1 + 2 + 3 + ... + X) = X × (X + 1) ÷ 2 であることから、雪が(b −a) × (b −a + 1) ÷ 2 −b\nメートル積もっていることがわかります。\n\n#include <cstdio >\ntypedef long long ll;\nint A,B;\nint main ()\n{\n         scanf (\"%d%d\",&A,&B);\n         printf (\"%d\\n\",(B-A)*(B-A+1)/2 -B);\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "6d36abde5a30cf4f0be69b0d2b5f6ff86ec5e0a0cba375e5d347891ad1133b68"
+    }
+  ],
+  "status": "available"
+}

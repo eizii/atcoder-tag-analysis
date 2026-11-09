@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc210_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc210/editorial/2294",
+      "text": "高橋君と青木君が行うゲームをシミュレーションします。\n\\(2\\)\n人が山札の上からカードをめくっていくのに対応して、文字列\n\\(S\\)\nを先頭の文字から順に見ていきます。\n文字列\n\\(S\\)\nの先頭から見て初めて\n1\nが現れる文字を\n\\(X\\)\n文字目とします。（ただし、先頭の文字を\n\\(0\\)\n文字目、その次の文字を\n\\(1\\)\n文字目、\n\\(\\cdots\\)\nというように数えます。）\nこのとき、山札の上から\n\\(X\\)\n枚目のカードを食べるプレイヤーが、先に悪いカードを食べることになりゲームに負けます。\n\\(2\\)\n人は高橋君が先攻で交互にカードを食べるので、\n\\(X\\)\nが偶数のときは高橋君が、\n\\(X\\)\nが奇数のときは青木君が負けるとわかります。\nよって、文字列\n\\(S\\)\nを先頭から一文字ずつ見ていき、初めて\n1\nが現れる位置を求めればこの問題を解くことができます。\nこれを実装するには、プログラミング言語の「繰り返し」の機能を用いると良いでしょう。C++言語では、例えばfor文が繰り返しの機能を実現します。\n以下に、C++言語によるこの問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n\nusing namespace std;\n\nint main(void)\n{\n  int n;\n  string s;\n\n  cin >> n >> s;\n  for(int i = 0; i < (int)s.size(); i++){\n    if(s[i] == '1'){\n      if(i % 2 == 0) cout << \"Takahashi\" << endl;\n      else cout << \"Aoki\" << endl;\n      break;\n    }\n  }\n\n  return 0;\n}"
+      ],
+      "text_sha256": "2b7ef10b01d3a7963ea7a19e708ebc1b4cb432527b29db62f86aee2e805f57b2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc210/abc210_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

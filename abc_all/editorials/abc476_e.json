@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc476_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc476/editorial/25802",
+      "text": "各操作を順番にシミュレーションすることを考えます。 各操作では、区間が与えられた時に区間内で最大・最小の要素と、その要素が存在する index を求めれば良いです。 最大に関してはデータを \\((P_i,i)\\) として持ち、演算を大小関係を先頭の要素の大小で定義した際の max とし、単位元を \\((-1,-1)\\) とした SegTree を持つことで求めることができます。最小に関しても同様です。 最大・最小それぞれ SegTree を \\(1\\) つずつ用意することで、最大・最小の要素が存在する index を求めることができるので、その \\(2\\) 箇所を swap すれば良いです。 以上を適切に実装することでこの問題に正答することができます。計算量は \\(O(N+M\\log N)\\) です。 実装例(C++)",
+      "codes": [
+        "#include <atcoder/all>\n#include <bits/stdc++.h>\nusing namespace std;\nusing S = pair<int, int>;\nS op_max(S a, S b) { return a.first > b.first ? a : b; }\nS e_max() { return {-1, -1}; }\nS op_min(S a, S b) { return a.first < b.first ? a : b; }\nS e_min() { return {INT_MAX, -1}; }\nint main() {\n\tios::sync_with_stdio(false);\n\tcin.tie(nullptr);\n\tint N, M;\n\tcin >> N >> M;\n\tvector<int> P(N);\n\tfor (int &x : P) cin >> x;\n\tvector<S> A(N);\n\tfor (int i = 0; i < N; i++) A[i] = {P[i], i};\n\tatcoder::segtree<S, op_max, e_max> seg_max(A);\n\tatcoder::segtree<S, op_min, e_min> seg_min(A);\n\twhile (M--) {\n\t\tint L, R;\n\t\tcin >> L >> R;\n\t\tL--;\n\t\tconst auto [mx, i] = seg_max.prod(L, R);\n\t\tconst auto [mn, j] = seg_min.prod(L, R);\n\t\tswap(P[i], P[j]);\n\t\tseg_max.set(i, {P[i], i});\n\t\tseg_max.set(j, {P[j], j});\n\t\tseg_min.set(i, {P[i], i});\n\t\tseg_min.set(j, {P[j], j});\n\t}\n\tfor (int i = 0; i < N; i++) {\n\t\tcout << P[i] << \" \\n\"[i + 1 == N];\n\t}\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "93defab559703a6a38915d4404cb92c8d5497793822bce77ca0cf2c14a669747"
+    }
+  ],
+  "status": "available"
+}

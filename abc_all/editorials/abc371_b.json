@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc371_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc371/editorial/10930",
+      "text": "各家について太郎が既に生まれたかを管理するためのフラグを持ちます。はじめフラグは False で初期化しておきます。\n赤子を生まれた順に見ていきます。赤子が女の子の場合、No を出力し、何も行う必要がありません。\n赤子が男の子の場合、その赤子が生まれた家のフラグを確認します。フラグが False の場合、Yes を出力し、フラグを True にします。フラグが既に  True の場合、No を出力します。\n以上の処理は for 文と if 文、配列を用いて実装できます。\n実装例(Python):",
+      "codes": [
+        "n, m = map(int, input().split())\ntaro_exist = [False for i in range(n)]\nfor i in range(m):\n    a, b = input().split()\n    a = int(a) - 1\n    if b == 'F' or taro_exist[a]:\n        print('No')\n    else:\n        taro_exist[a] = True\n        print('Yes')"
+      ],
+      "text_sha256": "154f544a76bc1326eb8cf50557f6a0ff718c230e9994e9c27353d9e39ec0c73b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc371/abc371_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

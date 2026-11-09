@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc311_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/6820",
+      "text": "実は、以下の手順で答えを見つけることができます。\n最初に、通った頂点を記録する列\n\\(S\\)\nを用意する。\n\\(S\\)\nは最初は空である。\nその後、好きな頂点\n\\(v\\)\nから始めて以下を繰り返す。\n\\(S\\)\nに\n\\(v\\)\nが含まれない場合\n\\(S\\)\nの末尾に\n\\(v\\)\nを追加し、\n\\(v \\rightarrow A_v\\)\nの辺を伝って\n\\(v\\)\nから\n\\(A_v\\)\nに移動する。\n\\(S\\)\nに\n\\(v\\)\nが含まれる場合\n\\(S = (x_1, x_2, \\dots, v, y_1, y_2,\\dots, y_k)\\)\nであったとする。\nこのとき、\n\\((v, y_1, y_2, \\dots, y_k)\\)\nが答えの一例となる。\nなぜなら、\n\\(v \\rightarrow y_1, y_i \\rightarrow y_{i+1}\\)\n(\n\\(1 \\le i \\le k-1\\)\n) に加えて\n\\(y_k \\rightarrow v\\)\nの辺が存在し、これは閉路だからである。\n問題の制約より、全ての頂点についてそこから出る辺が存在するので、この手順で必ず閉路が発見できます。\n\\(S\\)\nに\n\\(v\\)\nが含まれるかどうかの判定をバケットソートの要領で行うことで、時間計算量\n\\(O(N)\\)\nでこの問題に正解できます。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  vector<int> a(n+1);\n  for(int i=1;i<=n;i++){\n    cin >> a[i];\n  }\n\n  vector<int> fl(n+1,0),s;\n  int v=1; // any vertex is ok to start\n  while(fl[v]==0){\n    fl[v]=1;\n    s.push_back(v);\n    v=a[v];\n  }\n\n  vector<int> res;\n  for(auto &nx : s){\n    if(nx==v){v=-1;}\n    if(v==-1){res.push_back(nx);}\n  }\n  cout << res.size() << \"\\n\";\n  for(int i=0;i<res.size();i++){\n    if(i){cout << \" \";}\n    cout << res[i];\n  }cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "8308271fcccbcc1a9fe4521b62ea3ab3998e61c2577ffdf3336d853599d935af",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc311/abc311_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/6830",
+      "text": "公式解説\nにあるように、頂点を一つ任意に取り、そこから移動し続けることでサイクルに到達することができます。\nところで、予めサイクル内から始めることができれば、実装はより簡単になります。\nこれは、最初に\n\\(N\\)\n回移動しておくことで必ず達成できます。\nまた、\n\\(A\\)\nの先頭にダミーを増やして1-indexedにしておくなどの工夫により、実装はより簡潔になります。\nなお、サイクルは強連結成分であることから、\nSCC\nを用いることでもACできます。\n余談\n\\(N\\)\n頂点\n\\(N\\)\n辺の有向グラフであって、各頂点から丁度一つの辺が出ているものを\nFunctional Graph\nと呼びます。\n競技プログラミングにおいてFunctional Graphは頻出なので、予め性質を覚えておくと得する場面があるかもしれません。",
+      "codes": [
+        "import java.util.*\nfun main() {\n\tScanner(System.`in`).use { sc ->\n\t\tval N = sc.nextInt()\n\t\tval A = IntArray(N + 1){if (it == 0) 0 else sc.nextInt()}\n\t\tvar now = 1\n\t\trepeat(N) {now = A[now]}\n\t\tval B = mutableListOf<Int>()\n\t\tdo {\n\t\t\tB.add(now)\n\t\t\tnow = A[now]\n\t\t} while(B[0] != now)\n\t\tprintln(B.size)\n\t\tprintln(B.joinToString(\" \"))\n\t}\n}",
+        "N = int(input())\nA = list(map(int, (\"0 \" + input()).split()))\nnow = 1\nfor _ in range(N): now = A[now] # 予めN回移動する\nB = [now]\nwhile B[0] != A[now]:\n\tnow = A[now]\n\tB.append(now)\nprint(len(B))\nprint(*B)",
+        "#include <atcoder/scc>\n#include <iostream>\nusing namespace std;\nint main() {\n\tint n;\n\tcin >> n;\n\tatcoder::scc_graph graph(++n);\n\tvector<int> a(n);\n\tfor (int i = 1; i < n; ++i) {\n\t\tcin >> a[i];\n\t\tgraph.add_edge(i, a[i]);\n\t}\n\tauto scc = graph.scc();\n\tfor (auto &s : scc) {\n\t\tint now = s[0], len = s.size();\n\t\tif (len == 1) continue;\n\t\tcout << len << '\\n';\n\t\tfor (int i = 0; i < len; ++i) {\n\t\t\tcout << now << ' ';\n\t\t\tnow = a[now];\n\t\t}\n\t\treturn 0;\n\t}\n}"
+      ],
+      "text_sha256": "448148772a068cd47c1942400b4f603cc3127c5ca9512af50d4bb6f33cae4bf3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc311/abc311_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

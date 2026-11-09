@@ -1,0 +1,36 @@
+{
+  "problem_id": "abc205_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc205/editorial/182",
+      "text": "\\(pow(A,B)\\)\nは非常に巨大な数のため、そのままでは計算することができません。直接計算せずに比較する方法を考えます。\nまず\n\\(pow(A,C)\\)\nの符号を求めます。これは、\n\\(A\\)\nが負かつ\n\\(C\\)\nが奇数なら負で、それ以外なら非負です。\nもし\n\\(pow(A,C)\\)\nと\n\\(pow(B,C)\\)\nの符号が異なるなら、答えは明らかです。そうでない場合は、\n\\(|pow(A,C)|=pow(|A|,C)\\)\nであることと、\n\\(0\\leq x\\leq y \\Longrightarrow pow(x,z)\\leq pow(y,z)\\)\nを使うことで、\n\\(|A|,|B|\\)\nの大小関係から、答えを求めることができます。\n解答例(C++)",
+      "codes": [],
+      "text_sha256": "3e3a5c4d922b2fe287b451c04895cf1498847156b0b4b6b2e9ee35bab944734e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc205/abc205_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc205/editorial/2090",
+      "text": "\\(A^C\\)\nと\n\\(B^C\\)\nの大小比較をするわけですが、\n\\(C\\)\nが0の場合を除き\n\\(C\\)\nの偶奇のみ重要なので、小さい\n\\(C\\)\nに置き換えて求める事もできます。\n今回の制約では\n\\(C>0\\)\nなので、例えば\n\\(C\\)\nが偶数の場合は\n\\(A,B\\)\nを二乗に、違う場合はそのままの\n\\(A,B\\)\nの比較でAC出来ます。\n解答例\n他にも亜種として、以下の例では\n\\(C\\)\nを 2 か 3 に置き換えています。  このコードの場合は\n\\(C=0\\)\nの場合でも対応できます。\nこのとき、愚直に pow 関数を使ってdoubleで比較をしても十分な精度でACできます。\nまた\nc = 2-(c%2)\nなどの様にすれば、\n\\(C\\)\nを 2 か 1に置き換えできます。\n※十分小さな\n\\(C\\)\nにすれば、GCC の場合は\n__int128_t\nという128bit 整数を使ったり、Python などの言語の場合は多倍長整数を使っても大丈夫です。\n解答例",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(){\n    long long a, b, c;\n    cin >> a >> b >> c;\n    if(c % 2 == 0) {\n        a *= a;\n        b *= b;\n    }\n    cout << ( a>b ? \">\" : a<b ? \"<\" : \"=\") << endl;\n}",
+        "#include <iostream>\n#include <cmath>\n\nusing namespace std;\nint main(){\n    int a, b, c;\n    cin >> a >> b >> c;\n    if (c > 2) c = 2 + (c % 2);\n\n    double x = pow(a, c);\n    double y = pow(b, c);\n    cout << ( x>y ? \">\" : x<y ? \"<\" : \"=\") << endl;\n}"
+      ],
+      "text_sha256": "c6049b75f8126cd8dd53d7dc65cab52a39a0b1d89c90f6b7384bddf896bf4108",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc205/abc205_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc205/editorial/2083",
+      "text": "\\(f(x) := x^C\\)\nは\n\\(C\\)\nが奇数のとき奇関数、偶数のとき偶関数で、いずれにせよ\n\\(x \\geq 0\\)\nでは単調に増加するので、\n\\(f(A)\\)\nと\n\\(f(B)\\)\nの大小関係は、\n\\(C\\)\nが奇数のときは\n\\(A\\)\nと\n\\(B\\)\nの大小関係と、\n\\(C\\)\nが偶数のときは\n\\(|A|\\)\nと\n\\(|B|\\)\nの大小関係とそれぞれ一致します。",
+      "codes": [],
+      "text_sha256": "166af7ff86b6f5301ac280d8e632662b13558834a09904ddbf2007be5ebd30a0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc205/abc205_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

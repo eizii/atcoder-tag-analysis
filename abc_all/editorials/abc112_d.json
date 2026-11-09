@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc112_d",
+  "editorials": [
+    {
+      "text": "D: Partition\na1, a2, ..., aN の最大公約数をD とすると、a1, a2, ..., aN はD で割り切れるのでM = a1 + a2 + ... + aN\nもD で割り切れます。従って、D はM の約数になります。\nまた、D がM の約数のとき、a1, a2, ..., aN ≥D なのでM ≥N × D です。\n実はD がM の約数であってM ≥N ×D を満たすとき、最大公約数がD 以上となるようにa1, a2, ..., aN\nが構成できます。具体的には、a1 = a2 = ... = aN−1 = D, aN = M −(N −1) × D とします。このとき、\naN は正整数かつD の倍数なので各要素の最大公約数はD 以上*1となります。\nしたがって、M の約数かつM\nN 以下の整数のなかで最大のものが答えとなります。約数は(約数のペアの片\n方が平方根以下であることを利用して)、O(\n√\nM) で求められることが知られているため、この問題はO(\n√\nM)\nで解くことができます。\n",
+      "text_sha256": "5f71e6ac7f5582d172e0e119e03b70c8b07b0d29ba70126b076fbf33f3ae87a1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc112/abc112_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

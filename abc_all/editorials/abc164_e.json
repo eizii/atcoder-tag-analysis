@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc164_e",
+  "editorials": [
+    {
+      "text": "E: Two Currencies\nAmax = max{Ai | i = 1, 2, ..., M} とします。銀貨をAmax(N −1) 枚以上所持している場合の戦\n略を考えてみましょう。これは明らかに、最短経路に沿って目的地に向かうのが最適です(このとき\n消費する銀貨の枚数は高々Amax(N −1) 枚なので、銀貨が足りなくなることはありません)。従っ\nて、以下の制約を追加しても、問題の答えは変わりません。\n追加の制約\n移動の途中で所持している銀貨の枚数がAmax(N −1) 枚を超えた場合、Amax(N −1) 枚になる\nまで銀貨を捨てる\n上記の制約を追加した問題に対するアルゴリズムを考えましょう。(現在の頂点, 所持している銀貨の\n枚数) を状態としてdijkstra 法を適用すると、O(AmaxNMlog(AmaxN)) でこの問題を解くことがで\nきます。Amax ≤50, N ≤50, M ≤100 なので、十分高速です。\n",
+      "text_sha256": "ed90c2b7b3dee186785513f4ce2a0fca2dc66596c8a55b21f309b5d40ab094d5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc164/abc164_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc131_f",
+  "editorials": [
+    {
+      "text": "F: Must Be Rectangular!\nまず、このままでは考えにくいので問題を次のようにグラフの言葉で言い換えます。\n頂点X1, X2, ..., X105 と頂点Y1, Y2, ..., Y105 がある。点(x, y) が存在するとき、頂点Xx とYy の間に辺\nを張る。辺a −b, a −d, c −b, c −d のうちちょうど3 辺が存在するようなa, b, c, d を選び残りの1 辺を追加\nする、という操作を何回行うことができるか。\n初めに存在する点に対してグラフを構築すると、異なる連結成分を結ぶような辺は追加しようがないので、\n連結成分ごとに答えを求めて和を取ることで元の問題の答えが求まります。\nここで、1 つの連結成分については、2 部グラフの両側(X の頂点とY の頂点) の全ての組について(元か\nら存在した辺を除き) 辺が追加されることが示せます。概略ですが、両側の頂点数が2 以上の時は全域木を1\nつ取り、葉(v) に繋がっているようなある辺v −u を選び、u 側の連結成分について全ての辺を張った後それ\nらの辺を利用してv と結んでいき、どちらかの頂点数が1 ならばその時点で連結なことにより全て結ばれて\nいます。\nよってDFS などを用いて各連結成分についてX とY が何個含まれるか計算することでこの問題が解けま\nした。\n\nABC 131\nsheyasutaka, yuma000, DEGwer, gazelle, satashun\n06/22/2019\n",
+      "text_sha256": "c626e44d295770d84b0e1f3d16cfe45feed36138dff6d60d19df404457320e78",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc131/abc131_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

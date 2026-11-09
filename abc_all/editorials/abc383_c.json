@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc383_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc383/editorial/11544",
+      "text": "この問題は多始点BFSの練習問題です。\nグリッドのマスを頂点だと思い、壁でない隣接する二マスを表す頂点間に辺を貼ると、加湿器が置いてあるマスを表す頂点から\n\\(D\\)\n回以下の移動で到達できる頂点の個数を求める問題となります。\nまず、加湿器が置いてあるマスが一つの場合、普通の幅優先探索で解けます。queue に加湿器が置いてあるマスをまず入れます。\n次に、queue が非空である限り、queue の先頭の頂点を取り出し、その頂点に隣接していて未訪問のマス全てについて距離を求めて queue に入れることを繰り返せば良いです。\n始点が複数ある場合は多始点 bfs と呼ばれますがこの場合もほぼ同様です。はじめに queue に始点の頂点を全て追加しておけば、他は完全に通常の bfs と同じ処理で問題ないです。\n計算量は\n\\(\\mathrm{O}(HW)\\)\nです。",
+      "codes": [],
+      "text_sha256": "e1e410c12dbe356876c8338dfdbd9b9bd9507a011e2a252ce8b8609e00937207",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc383/abc383_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

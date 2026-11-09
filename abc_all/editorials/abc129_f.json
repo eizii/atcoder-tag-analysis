@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc129_f",
+  "editorials": [
+    {
+      "text": "F. Takahashi’s Basics in Education and Learning\n問題を次のように言い換えます．\n• 文字列X と整数s を持つ．はじめ，X = ”0”, s = A である．\n• 1 回の操作では，X の末尾にs が連結された後，s がB 増える．\n• N 回操作した後のX mod M はいくらか．\nd 桁の要素の個数をCd とすると，99 . . . 9\n| {z }\nd\n以下の要素の個数から99 . . . 9\n| {z }\nd−1\n以下の要素の個数を引くことで，Cd は容易に求ま\nります．d 桁の要素Cd 個をX の末尾に連結する操作は，(X, s) 7→(X × 10d + s, s + B) という操作をCd 回繰り返すことと\n同値です．そして，この操作は以下のように行列の積の形に落とし込めます．\n(X, s, 1)\n\n\n10d\n0\n0\n1\n1\n0\n0\nB\n1\n\n= (X × 10d + s, s + B, 1)\n(1)\nしたがって，この3 × 3 行列のCd 乗が高速に求まればよく，繰り返し二乗法によってO(log Cd) で結果が求まります．\n上の計算をd = 1, 2, . . . , 18 についてこの順に行えば，最終的なX mod M の値が高速に求まります．オーバーフローに十分\n注意してください．\n",
+      "text_sha256": "cea3ff8b71550ead9d7fd6041f37afdd8f3621820a19f9b4db6bce6e96a264e7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc129/abc129_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

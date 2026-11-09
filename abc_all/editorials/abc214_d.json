@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc214_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc214/editorial/2434",
+      "text": "以下では、辺の重みは相異なると仮定します。制約にそのような条件はありませんが、添字の大小による tie-break などを行えばよいです。\n各\n\\(i \\, (1 \\leq i \\leq N -1)\\)\nについて、\n\\(f(u, v) = w_i\\)\nとなる\n\\((u, v)\\)\nの総数を数えることを考えます。\n\\(f(u, v) = w_i\\)\nとなるための条件は、頂点\n\\(u, v\\)\nを結ぶパスに辺\n\\(i\\)\nが含まれ、かつそのパスに含まれる他の辺の重みが\n\\(w_i\\)\nより小さいことです。\n重みが\n\\(w_i\\)\nより小さい辺のみを張ったグラフを考えると、これは森（グラフ理論の用語）となっており、\n\\(u_i\\)\nと\n\\(v_i\\)\nは必ず異なる連結成分に属します。これら二つの連結成分の一方に\n\\(u\\)\n、もう一方に\n\\(v\\)\nが属することが、\n\\(f(u, v) = w_i\\)\nとなるための条件です。\nよって、辺の重みの小さい順にグラフに追加していき、Union-Find などのデータ構造を用いて連結成分の大きさを取得することにより\n、この問題を解くことができます。\n実装例 (C++)",
+      "codes": [],
+      "text_sha256": "0d6fe54d7072e7d1a0d68d7dea3694d4e3c4f03e0bc8af6a30613259fba0f492",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc214/abc214_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

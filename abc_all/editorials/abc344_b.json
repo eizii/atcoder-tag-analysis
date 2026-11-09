@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc344_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc344/editorial/9489",
+      "text": "この問題で行うべきことは以下の\n\\(2\\)\nつです。\n\\(0\\)\nが来るまで\n\\(A_i\\)\nを読み込み続ける\n\\(A_i\\)\nを逆順に出力する\n例えば、\n\\(1\\)\nつ目は While 文を、\n\\(2\\)\nつ目はループ変数を減らしていく for 文によって実現できます。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  vector<int> a;\n  while(true){\n    int ca;\n    cin >> ca;\n    a.push_back(ca);\n    if(ca==0){break;}\n  }\n  for(int i=a.size()-1;i>=0;i--){\n    cout << a[i] << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "ebdd4ad402d24df147ea174db17feb96207ea99154a4aa7ed29d60623fe97038",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc344/abc344_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc344/editorial/12725",
+      "text": "C++ の\nbool(std::cin)\nは、読み込みの失敗時に\nfalse\n、そうではない場合は\ntrue\nとして評価されます。したがって、\nstd::cin\n自体を\nwhile\n文の引数にとることで、入力の末尾に達するまで入力を受け取ることが可能です。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    int x;\n    vector<int> ans;\n    while (cin >> x) ans.push_back(x);\n    reverse(ans.begin(), ans.end());\n    for (auto x : ans) cout << x << '\\n';\n}"
+      ],
+      "text_sha256": "d533ebfa87d611692b34169babff0e6de19bd5c3af0f5889e91b123445bfe860",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc344/abc344_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc344/editorial/9492",
+      "text": "Bash から呼び出すことができる\ntac\nコマンドを用いることでもこの問題を解くことができます。\ntac\nコマンドは、入力を区切り文字（デフォルトでは行）ごとに分け、逆順に出力します。\n実装例は以下のようになります。\n実装例 (Bash)",
+      "codes": [
+        "tac"
+      ],
+      "text_sha256": "f4e96f050676d26435c0f97d0f21559e8462f0c4823dfac382a5624b47cb510e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc344/abc344_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,31 @@
+{
+  "problem_id": "abc386_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc386/editorial/11697",
+      "text": "特殊な制約\n\\(\\dbinom{N}{K}\\leq 10^6\\)\nに注目します．\n\\(A\\)\nから異なる\n\\(K\\)\n個の項を選ぶ方法が\n\\(10^6\\)\n通り以下であることが保証されているので，探索方法を工夫することでそのような選び方を全探索できます．\n全探索をする方法として，以下のようなコードを書くことができそうです．\nただし，この方法では\n\\(K\\)\nが大きいとき実行時間に間に合うことができません．なぜなら，関数 func が呼び出される回数が\n\\(\\displaystyle \\sum_{i=0}^K \\dbinom{N}{i}\\)\n回程度となり，\n\\(\\dbinom{N}{K}\\)\nの値は小さくても\n\\(\\dbinom{N}{\\lfloor N/2\\rfloor}\\)\nの値が大きくなってしまうことがあるからです．\n例えば，\n\\((N,K)=(100,98)\\)\nのとき，\n\\(\\dbinom{N}{K}=4950\\lt 10^6\\)\nで制約を満たしますが，\n\\(\\dbinom{100}{50}\\)\nは約\n\\(10^{29}\\)\nと非常に大きくなってしまいます．\nこれを回避するためには，\n\\(K\\)\nが大きいときには選ばれる\n\\(K\\)\n個を考える代わりに選ばれない\n\\(N-K\\)\n個を考えることで 実行時間に間に合わせることができます．具体的には，以下のような場合分けによって答えを計算することができます．\n\\(K\\leq N-K\\)\nのとき：上のコードのように愚直に全探索をすればよいです．\n\\(K\\gt N-K\\)\nのとき：あらかじめすべての要素の XOR を計算しておき，選ばない\n\\(N-K\\)\n個を全探索することで\n\\(K\\)\n個選んだときの総 XOR を高速に求めることができます．\n計算量は\n\\(O\\left(\\dbinom{N}{K}\\min(K,N-K)\\right )\\)\nです．\n\\(\\dbinom{N}{K}\\leq 10^6\\)\nという制約では\n\\(\\min(K,N-K)\\leq 11\\)\nが成り立つのでこれで間に合います．\nPython であれば，長さ\n\\(N\\)\nの列\n\\(A\\)\nのうち長さが\n\\(K\\)\nである部分列の列挙が\nitertools.combinations\nを用いることで容易にできます．",
+      "codes": [
+        "def func(x: list[int], i: int):\n    if len(x) == K:\n        # 長さが K であるようなインデックスの列 x がここで列挙される\n        return\n    if i == N:\n        return\n    func(x, i + 1)\n    func(x + [i], i + 1)\n\nfunc([], 0)",
+        "import sys\n\nsys.setrecursionlimit(3 * 10**5)\n\nN, K = map(int, input().split())\nA = list(map(int, input().split()))\n\nans = 0\n\n\ndef func(xor, idx, c):\n    global ans\n    if c == 0:\n        ans = max(ans, xor)\n        return\n    if idx == N:\n        return\n    func(xor ^ A[idx], idx + 1, c - 1)\n    func(xor, idx + 1, c)\n\n\nif K <= N - K:\n    func(0, 0, K)\nelse:\n    all_xor = 0\n    for i in range(N):\n        all_xor ^= A[i]\n    func(all_xor, 0, N - K)\n\nprint(ans)",
+        "import itertools\n\nN, K = map(int, input().split())\nA = list(map(int, input().split()))\n\nans = 0\n\nif K <= N - K:\n    for a in itertools.combinations(A, K):\n        xor = 0\n        for i in a:\n            xor ^= i\n        ans = max(ans, xor)\nelse:\n    all_xor = 0\n    for i in range(N):\n        all_xor ^= A[i]\n    for a in itertools.combinations(A, N - K):\n        xor = all_xor\n        for i in a:\n            xor ^= i\n        ans = max(ans, xor)\n\nprint(ans)"
+      ],
+      "text_sha256": "d1b57dba00b2e818642b6c6b0dba765eca227c957ec616ca72f64e53f3c62baa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc386/abc386_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc386/editorial/11703",
+      "text": "公式解説には以下のようなコードが載っており、なぜこれで\n\\(O(\\binom{N}{K}\\min(K, N - K))\\)\nになるのか疑問に思うかもしれません。  この計算量解析は自明ではないと考えています。\n公式解説にある工夫で\n\\(K \\le \\frac{N}{2}\\)\nとなっていることを前提にすると、実はこの関数が呼び出される回数は合計で\n\\(O\\left(K\\binom{N}{K}\\right)\\)\n回です。以下はこのことの証明となります。\nこの関数の呼び出しは\n\\(2\\)\nつに分けられます\n\\(\\mathrm{len}(x) = K\\)\nであるような呼び出し(=4行目でreturnされる呼び出し)\nそれ以外の呼び出し\n前者が合計でちょうど\n\\(\\binom{N}{K}\\)\n回なのはよいでしょう。\n後者の呼び出しのうち、引数の\ni\nが\n\\(i\\)\nであるようなものは、\n\\(0, 1, 2, \\dots, i-1\\)\nの\n\\(i\\)\n個の数から\n\\(K\\)\n個未満選ぶ方法の数だけあります(そして、\n\\(K\\)\n個未満選ぶ実際の選び方がそれぞれ引数の\nx\nに入って呼び出されます)。よって呼び出し回数の合計は\n\\(\\displaystyle \\sum_{i = 0}^{N} \\sum_{k = 0}^{\\min(i, K - 1)} \\binom{i}{k} = \\sum_{k = 0}^{K - 1} \\sum_{i = k}^N \\binom{i}{k}\\)\nとなります。\nここで、\n\\(\\displaystyle \\sum_{i = k}^N \\binom{i}{k} = \\binom{N + 1}{k + 1}\\)\nです。\n\\(N + 1\\)\n人から\n\\(k + 1\\)\n人選ぶときに、最も番号の若い\n\\(1\\)\n人で場合分けすると左辺の和が出てきます。\n結局後者の呼び出し回数は\n\\(\\displaystyle \\sum_{k = 0}^{K - 1}  \\binom{N + 1}{k + 1} = \\sum_{k = 1}^{K}  \\binom{N + 1}{k} =  \\sum_{k = 1}^{K}  \\left(\\binom{N}{k} + \\binom{N}{k - 1}\\right) \\le 2\\sum_{k = 1}^{K}  \\binom{N}{k} \\le 2K\\binom{N}{K}\\)\nとなります。(範囲外の二項係数は\n\\(0\\)\nとします)\nなお、同じようでも以下のようなコードでは同様の解析で計算量は\n\\(\\displaystyle\\sum_{k = 1}^{\\color{red}{K}+1}  \\binom{N + 1}{k}\\)\nとなりTLEします。(\n\\((N, K) = (10^6, 1)\\)\nのときなど)",
+      "codes": [
+        "def func(x: list[int], i: int):\n    if len(x) == K:\n        # 長さが K であるようなインデックスの列 x がここで列挙される\n        return\n    if i == N:\n        return\n    func(x, i + 1)\n    func(x + [i], i + 1)\n\nfunc([], 0)",
+        "def func(x: list[int], i: int):\n    if i == N:\n        if len(x) == K:\n            # 長さが K であるようなインデックスの列 x がここで列挙される\n        return\n    func(x, i + 1)\n    if len(x) < K: func(x + [i], i + 1)\n\nfunc([], 0)"
+      ],
+      "text_sha256": "8cd6ad6abaf80879305971610ca8ad258b716af7aa1afd20fe1f97f7de864280",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc386/abc386_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc272_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc272/editorial/4971",
+      "text": "\\(2\\)\n要素の和が偶数になるのは、偶数と偶数を足したときか奇数と奇数を足したときです。\nそれぞれの場合を試します。\n偶数を\n\\(2\\)\n個選び、和を最大化する問題を考えます。 まず、偶数が\n\\(1\\)\n個しか存在しない場合を場合分けで処理します。以下、偶数が\n\\(2\\)\n個以上存在する場合のみを考えます。\n\\(A\\)\nに含まれる偶数を降順に並び替えると、和が最大になるのは先頭の値と\n\\(2\\)\n番目の値を足したときです。よってソートを行うことでこの問題に\n\\(O(N\\log N)\\)\nで答えることができました。（奇数の場合も同様です。）\n実装例(c++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> odd, even;\n    for(int i = 0; i < n; i++) {\n        int a;\n        cin >> a;\n        if(a & 1)\n            odd.push_back(a);\n        else\n            even.push_back(a);\n    }\n    sort(odd.rbegin(), odd.rend());\n    sort(even.rbegin(), even.rend());\n    int mx = -1;\n    if(odd.size() >= 2) mx = max(mx, odd[0] + odd[1]);\n    if(even.size() >= 2) mx = max(mx, even[0] + even[1]);\n    cout << mx << endl;\n}"
+      ],
+      "text_sha256": "1e9abf54f17392f5035905c0d11c2d0cd9a7df34e39578c7554bba476272d39d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc272/abc272_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

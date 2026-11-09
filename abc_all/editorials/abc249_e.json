@@ -1,0 +1,31 @@
+{
+  "problem_id": "abc249_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc249/editorial/3840",
+      "text": "\\(\\mathrm{dp}[i][j] :=(|S|=i,|T|=j\\)\nとなる文字列\n\\(S\\)\nの個数\n\\()\\)\nと定義した動的計画法を考えます。\n\\(S_i  \\not = S_{i+1}\\)\nかつ\n\\(S_{i+1}=S_{i+2}=\\dots =S_{i+k}\\)\nとなる\n\\(k\\)\n文字の部分を追加することを考えると、遷移は以下のようになります。\n・\n\\(\\mathrm{dp}[i+k][j+1+k\\)\nの桁数\n\\(]+=dp[i][j] \\times 25\\ (1 \\le k \\le N)\\)\nですが、このままでは計算量が\n\\(\\mathrm{O}(N^3)\\)\nとなってしまいます。\nここで、\n\\(1 + k\\)\nの桁数は\n\\(\\lceil \\log_{10} (N+1) \\rceil\\)\n種類の値しかとらないため、\n\\(1+k\\)\nの桁数が同じ遷移をまとめ、かつ累積和を取りながら動的計画法をすることで高速化できます。\nこれにより\n\\(1\\)\n箇所の遷移を\n\\(\\mathrm{O}(\\log N)\\)\nでできるため、計算量\n\\(\\mathrm{O}(N^2\\log N)\\)\nでこの問題を解くことができます。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\nll modPow(ll a, ll n, ll mod) { if(mod==1) return 0;ll ret = 1; ll p = a % mod; while (n) { if (n & 1) ret = ret * p % mod; p = p * p % mod; n >>= 1; } return ret; }\n\nll dp[3101][3101];\nll sum[3101][3101];\nint main() {\n  ll n,p;\n  cin>>n>>p;\n  dp[0][0]=modPow(25,p-2,p)*26ll%p;\n  vector<ll> ten={1,10,100,1000,10000,100000};\n  for(int i=1;i<=n;i++) sum[0][i]=dp[0][0];\n  for(int i=1;i<=n;i++){\n    for(int j=1;j<=n;j++){\n      for(int k=1;k<=4;k++){\n        if(i-k-1<0) continue;\n        ll x=max(j-ten[k-1]+1,0ll),y=max(j-ten[k]+1,0ll);\n        dp[i][j]+=(sum[i-k-1][x]-sum[i-k-1][y]+p)*25;\n        dp[i][j]%=p;\n      }\n      sum[i][j+1]=sum[i][j]+dp[i][j];\n      sum[i][j+1]%=p;\n    }\n  }\n  ll sum=0;\n  for(int i=1;i<n;i++) sum+=dp[i][n];\n  cout<<sum%p<<endl;\n}"
+      ],
+      "text_sha256": "b70d15458c9f860eddc348637deeb9c0211e7dd6e31adfb5d54e11c5d83dde80",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc249/abc249_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc249/editorial/3844",
+      "text": "(ユーザー解説です)\n別解として、imos 法をしながら DP テーブルを更新していくアルゴリズムを紹介します。\nまずは\n\\(\\mathrm{O}(N^3)\\)\nの解法を説明します。\n\\(dp[i][j] :=\\)\n変換後の文字列の長さが\n\\(i\\)\nで、変換前の文字列の長さが\n\\(j\\)\nであるような文字列の通り数\nと DP テーブルを定義して、いわゆる「配る DP 」を行うことを考えます。すると、「同じ文字が\n\\(dj\\)\n個連なった文字列を末尾に加える」という操作は\n\\(di :=\\)\n1 + (\n\\(dj\\)\nの桁数) として\n\\[dp[i+di][j+dj]  \\gets dp[i+di][j+dj]  + dp[i][j] * (26 \\text{ if i=0 else } 25) \\]\nになります。よって\n\\(i,j,dj\\)\nの3 重ループをナイーブに実装すると\n\\(\\mathrm{O}(N^3)\\)\nで解くことができます。\n少し工夫してみましょう。\n\\(dj\\)\nを 10 進表記したときの桁数\n\\(k\\)\nごとに遷移をまとめてみると、次のような手続きで解くことができます。\nはじめ、\n\\(dp[0][0] = 1\\)\nとする。\n\\(i\\)\nを\n\\(i=0,1,\\dots,N-1\\)\nの順に for- loop を行う。\n\\(j\\)\nを\n\\(j=0,1,\\dots,N-1\\)\nの順に for-loop を行う。\n(後ろに加える文字列の長さ)の桁数が\n\\(k=1,2,\\dots\\)\nの場合を考える。\nすると、\n\\(k\\)\nを固定した時\n\\(dj\\)\nは\n\\(10^k \\leq dj \\lt \\min(10^{k+1}, N-j+1)\\)\nの範囲になる。\n上に書いた\n\\(dj\\)\nの範囲で for-loop を行う。\n\\(dp[i+k+1][j+dj]\\)\nに加算を行う。\nコードに起こすと次のようになります。(off-by-one error を回避するために配列や遷移先を少し大きめに取っています)\nここで、11 行目~ 12 行目の最も内側のループがボトルネックになっているのでこれをうまく計算量改善できないか考えましょう。\n該当の場所を取り出しました。これは\n\\([L, R)\\)\nに\n\\(\\mathrm{ways}\\)\nを加算する操作を行っています。このような区間加算は  imos 法を使うと以下のように\n\\(2\\)\n点更新に言い換えられます。\nよって、「値を imos 法で更新して、値を取得する必要がある時に累積和で値を復元する」という少し工夫したアルゴリズムを使えば計算量を落とすことができます。\n手続きは次のようになります。\nはじめ、\n\\(dp[0][0] = 1\\)\nとする。\n\\(i\\)\nを\n\\(i=0,1,\\dots,N-1\\)\nの順に for- loop を行う。\n\\(i \\neq 0\\)\nの場合、データが imos 法の状態で保存されているので累積和を取ることで正しい値に復元する。\n\\(j\\)\nを\n\\(j=0,1,\\dots,N-1\\)\nの順に for- loop を行う。\n後ろに加える文字列の長さを桁数が\n\\(k=1,2,\\dots\\)\nの場合を考える。\nすると、\n\\(k\\)\nを固定した時\n\\(dj\\)\nは\n\\(10^k \\leq dj \\lt \\min(10^{k+1}, N-j+1)\\)\nの範囲になる。\nimos 法の要領で両端の値を更新する。\nコードに起こすと次のようになります。\n計算量は\n\\(i,j\\)\nのループが\n\\(N\\)\n回、\n\\(k\\)\nが\n\\(\\mathrm{O}(\\log_{10} N)\\)\n回程度回るので全体で\n\\(\\mathrm{O}(N^2 \\log N)\\)\nとなります。",
+      "codes": [
+        "N, P = map(int, input().split())\ndp = [[0] * (N + 10) for _ in range(N + 10)]\ndp[0][0] = 1\nfor i in range(N):\n  for j in range(N):\n    ways = dp[i][j] * (26 if i == 0 else 25) % P\n    L, k = 1, 1\n    while L <= N - j:\n      R = min(L * 10, N - j + 3)\n      di = k + 1\n      for dj in range(L, R):\n        dp[i + di][j + dj] = (dp[i + di][j + dj] + ways) % P\n      L, k = L * 10, k + 1\n\nprint(sum([dp[i][N] for i in range(N)]) % P)",
+        "for dj in range(L, R):\n  dp[i + di][j + dj] = (dp[i + di][j + dj] + ways) % P",
+        "dp[i + di][j + L] = (dp[i + di][j + L] + ways) % P\ndp[i + di][j + R] = (dp[i + di][j + R] - ways) % P",
+        "N, P = map(int, input().split())\ndp = [[0] * (N + 10) for _ in range(N + 10)]\ndp[0][0] = 1\nfor i in range(N):\n  if i != 0:\n    for j in range(N + 3):\n      dp[i][j + 1] = (dp[i][j] + dp[i][j + 1]) % P\n  for j in range(N):\n    ways = dp[i][j] * (26 if i == 0 else 25) % P\n    L, k = 1, 1\n    while L <= N - j:\n      R = min(L * 10, N - j + 3)\n      di = k + 1\n      dp[i + di][j + L] = (dp[i + di][j + L] + ways) % P\n      dp[i + di][j + R] = (dp[i + di][j + R] - ways) % P\n      L, k = L * 10, k + 1\n\nprint(sum([dp[i][N] for i in range(N)]) % P)"
+      ],
+      "text_sha256": "099c3d53355e7dab8a3f0fa2d9f9cb129950dc6595488883760e03945e083f6d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc249/abc249_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

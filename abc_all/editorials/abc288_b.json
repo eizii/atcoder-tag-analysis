@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc288_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc288/editorial/5661",
+      "text": "上位\n\\(K\\)\n人の人のハンドルネームは\n\\(S_1, S_2, \\ldots, S_K\\)\nです。\nよって、配列\n\\((S_1, S_2, \\ldots, S_K)\\)\nを 辞書順に並べ替えればよいです。\nこの操作は sort 関数などの名前で多くの言語に標準で定義されている文字列からなる配列を辞書順に並べ替える関数を用いることにより実現できます。\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n\tint n, k;\n\tcin >> n >> k;\n\tvector<string> a;\n\tfor (int i = 0; i < n; i++) {\n\t\tstring s;\n\t\tcin >> s;\n\t\tif (i < k) a.push_back(s);\n\t}\n\tsort(a.begin(), a.end());\n\tfor (string s : a) cout << s << '\\n';\n}"
+      ],
+      "text_sha256": "a6cd60d46401f2157a024a2fb29a3f5eff9048d3a87929f999208c3c4fdebb79",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc288/abc288_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc165_a",
+  "editorials": [
+    {
+      "text": "A: We Love Golf\nいろいろな方法がありますが，ここではB 以下の最大のK の倍数を求め，それがA 以上かどう\nか確かめる方法を採ってみましょう．\n実装はたとえば以下のようになります．\nListing 1\nC での実装例\n1 #include <stdio.h>\n2\n3 int main(void) {\n4\nint k, a, b;\n5\n6\nscanf(\"%d\", &k);\n7\nscanf(\"%d%d\", &a, &b);\n8\n9\nint largest = (b / k) * k;\n10\nif (a <= largest) {\n11\nputs(\"OK\");\n12\n} else {\n13\nputs(\"NG\");\n14\n}\n15\n16\nreturn 0;\n17 }\n",
+      "text_sha256": "0dd443304ff3b0572c1363b9182c53946a47a8adbf5b36ca0adbff2e266ca2ca",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc165/abc165_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

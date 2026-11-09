@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc371_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc371/editorial/10921",
+      "text": "まず、同じ \\((i,j)\\) に対して \\(2\\) 回以上操作をする意味はありません。\nよって、それぞれの \\((i,j)\\) に対しては \\(0\\) 回操作するか \\(1\\) 回操作するかのどちらかです。\n\\(H\\) の各頂点が \\(G\\) のどの頂点に対応するかを固定することで、\\((i,j)\\) に対して操作すべき回数がわかります。\nよって、この対応について考えると次の問題に言い換えることができます。\n\\(P\\) が \\((1,2,\\ldots,N)\\) の並べ替えすべてをわたるとき、「\\(G\\) に辺 \\((P _ i,P _ j)\\) が含まれるか」と「\\(H\\) に辺 \\((i,j)\\) が含まれるか」が異なる \\(i,j\\) に対する \\(A _ {i,j}\\) の総和の最小値を求めよ。\nこの問題の制約で \\(N\\leq8\\) なので、ありえる \\(P\\) はたかだか \\(40320\\) 通りです。\nそれぞれに対して、ありえる辺 \\((i,j)\\ (1\\leq i\\lt j\\leq N)\\) を \\(\\dfrac{N(N-1)}2\\) 通りすべて確かめ、総和を計算しても十分高速です。\n並べ替えすべてを列挙するためには、再帰関数を使ったり、C++ などでは\nstd::next_permutation\nなどの標準で用意されている関数を使ったりすることができます。\n実装例は以下のようになります。\n以下の実装例では、グラフに辺が含まれているかを\nstd::set\nを用いて判定しているため、全体の計算量は \\(\\Theta(N!\\,N ^ 2\\log N)\\) となっています。",
+      "codes": [
+        "#include <iostream>\n#include <set>\n#include <utility>\n#include <vector>\n#include <numeric>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n    int N;\n    cin >> N;\n\n    // グラフ G, H に含まれる辺の集合\n    set<pair<int, int>> edges_G, edges_H;\n    \n    int M_G;\n    cin >> M_G;\n    for (int i = 0; i < M_G; ++i) {\n        int u, v;\n        cin >> u >> v;\n        edges_G.emplace(u - 1, v - 1);\n        edges_G.emplace(v - 1, u - 1); // 逆向きの辺も追加しておく\n    }\n    \n    int M_H;\n    cin >> M_H;\n    for (int i = 0; i < M_H; ++i) {\n        int a, b;\n        cin >> a >> b;\n        edges_H.emplace(a - 1, b - 1);\n        edges_H.emplace(b - 1, a - 1); // 逆向きの辺も追加しておく\n    }\n\n    vector A(N, vector<int>(N));\n    for (int i = 0; i < N; ++i) {\n        for (int j = i + 1; j < N; ++j) {\n            cin >> A[i][j];\n            A[j][i] = A[i][j]; // 逆向きのコストも追加しておく\n        }\n    }\n\n    // H の頂点を G の頂点に対応させる並べ替え\n    vector<int> P(N);\n    iota(begin(P), end(P), 0);\n\n    int ans{28000000}; // 答えは 8 * (8 - 1) / 2 * 10^6 以下\n    \n    // すべての並べ替えを探索\n    do {\n        int sum = 0;\n        for (int i = 0; i < N; ++i) {\n            for (int j = 0; j < i; ++j) {\n                // H に (i, j) が含まれて G に (P[i], P[j]) が含まれない か、\n                // H に (i, j) が含まれずに G に (P[i], P[j]) が含まれる 場合 A[i][j] を足す\n                sum += A[i][j] * (edges_H.contains({i, j}) != edges_G.contains({P[i], P[j]}));\n            }\n        }\n        // 最小値を更新\n        ans = min(ans, sum);\n    } while(ranges::next_permutation(P).found);\n\n    cout << ans << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "e26062e98ecc0c0e306b8a1ace9b4386ee149eca283680832a1e42ca37ce1390",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc371/abc371_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc237_g",
+  "title": "Range Sort Query",
+  "contests": [
+    {
+      "contest_id": "abc237",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2088,
+  "raw_difficulty": 2088,
+  "contest_id": "abc237",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc237/tasks/abc237_g",
+  "statement": "配点 : 600 点 問題文 1,2,\\ldots,N を並び替えた長さ N の順列 P=(P_1,P_2,\\ldots,P_N) と整数 X が与えられます。 また、 Q 個のクエリが与えられます。 i 番目のクエリは 3 つの数の組 (C_i,L_i,R_i) で表されます。各クエリでは順列 P に対して次の操作を行います。 C_i=1 のとき : P_{L_i},P_{L_i+1},\\ldots,P_{R_i} を昇順に並び替える。 C_i=2 のとき : P_{L_i},P_{L_i+1},\\ldots,P_{R_i} を降順に並び替える。 クエリを 1 番目から順に最後まで処理したとき、最終的な順列において P_i=X となる i を求めてください。 制約 1 \\leq N \\leq 2\\times 10^5 1 \\leq Q \\leq 2\\times 10^5 1 \\leq X \\leq N (P_1,P_2,\\ldots,P_N) は (1,2,\\ldots,N) の並び替えである。 1 \\leq C_i \\leq 2 1 \\leq L_i \\leq R_i \\leq N 入力は全て整数である。 入力 入力は以下の形式で標準入力から与えられる。 N Q X P_1 P_2 \\ldots P_N C_1 L_1 R_1 C_2 L_2 R_2 \\vdots C_Q L_Q R_Q 出力 答えを出力せよ。 入力例 1 5 2 1\r\n1 4 5 2 3\r\n1 3 5\r\n2 1 3 出力例 1 3 最初、順列は P=[1,4,5,2,3] です。\r\nこれはクエリによって次のように変化します。 1 つめのクエリでは 3 番目から 5 番目の要素を昇順にソートします。順列は P=[1,4,2,3,5] となります。 2 つめのクエリでは 1 番目から 3 番目の要素を降順にソートします。順列は P=[4,2,1,3,5] となります。 最終的な順列において P_3=1 であるので、 3 を出力します。 入力例 2 7 3 3\r\n7 5 3 1 2 4 6\r\n1 1 7\r\n2 3 6\r\n2 5 7 出力例 2 7 最終的な順列は P=[1,2,6,5,7,4,3] となります。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1,2,\\ldots,N を並び替えた長さ N の順列 P=(P_1,P_2,\\ldots,P_N) と整数 X が与えられます。 また、 Q 個のクエリが与えられます。 i 番目のクエリは 3 つの数の組 (C_i,L_i,R_i) で表されます。各クエリでは順列 P に対して次の操作を行います。 C_i=1 のとき : P_{L_i},P_{L_i+1},\\ldots,P_{R_i} を昇順に並び替える。 C_i=2 のとき : P_{L_i},P_{L_i+1},\\ldots,P_{R_i} を降順に並び替える。 クエリを 1 番目から順に最後まで処理したとき、最終的な順列において P_i=X となる i を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2\\times 10^5 1 \\leq Q \\leq 2\\times 10^5 1 \\leq X \\leq N (P_1,P_2,\\ldots,P_N) は (1,2,\\ldots,N) の並び替えである。 1 \\leq C_i \\leq 2 1 \\leq L_i \\leq R_i \\leq N 入力は全て整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q X P_1 P_2 \\ldots P_N C_1 L_1 R_1 C_2 L_2 R_2 \\vdots C_Q L_Q R_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5 2 1\r\n1 4 5 2 3\r\n1 3 5\r\n2 1 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3 最初、順列は P=[1,4,5,2,3] です。\r\nこれはクエリによって次のように変化します。 1 つめのクエリでは 3 番目から 5 番目の要素を昇順にソートします。順列は P=[1,4,2,3,5] となります。 2 つめのクエリでは 1 番目から 3 番目の要素を降順にソートします。順列は P=[4,2,1,3,5] となります。 最終的な順列において P_3=1 であるので、 3 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 7 3 3\r\n7 5 3 1 2 4 6\r\n1 1 7\r\n2 3 6\r\n2 5 7"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 7 最終的な順列は P=[1,2,6,5,7,4,3] となります。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc237/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:06.415798+00:00",
+  "statement_sha256": "ecbaaee452177c588fd0d64a41c12cbd85d8238b8bd26b9057c76e148cd13cd1",
+  "editorials": []
+}

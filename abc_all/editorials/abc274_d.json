@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc274_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc274/editorial/5079",
+      "text": "この問題の原案はキーエンスから提供されました。\nまず、簡単のためにこの問題が 1 次元であった場合を考えてみましょう。すなわち次の問題です。\n数直線上に 次の条件を満たすように\n\\(p_1, p_2, \\dots, p_{N+1}\\)\nを配置することはできますか？\n\\(p_1=0,p_2=A_1, p_{N+1}=x\\)\n\\(\\vert p_i - p_{i+1} \\vert = A_i\\)\n\\(1 \\leq A \\leq A_{\\max}, 2 \\leq N \\leq N_{\\max}\\)\nこれは教科書的な DP の問題で、具体的には次の手順で解くことができます。\n1.\n\\(dp\\)\nを添え字に\n\\(-A_{\\max}N\\)\nから\n\\(A_{\\max}N\\)\nまでを取れる bool 型の配列とする。はじめ\n\\(dp_{0} = \\text{true}\\)\nで、それ以外は\n\\(\\text{false}\\)\nである。\n2.\n\\(i=1, 2,\\dots,N\\)\nについて次の手順で\n\\(dp\\)\nを更新する。\na.\n\\(dp\\)\nと同じ添え字を取れる bool 型の配列\n\\(nxtdp\\)\nを用意する。\n\\(nxtdp\\)\nははじめ\n\\(\\text{false}\\)\nで初期化されている。\nb.\n\\(j = -A_{\\max}N, \\dots, A_{\\max}N\\)\nについて、\n\\(dp_{j} = \\text{true}\\)\nならば次の処理を行う。\nI.\n\\(j + A_i \\leq A_{\\max}N\\)\nならば\n\\(nxtdp_{j + A_i} \\gets \\text{true}\\)\nに更新する。\nII.\n\\(i \\geq 2\\)\nかつ\n\\(j - A_i \\geq -A_{\\max}N\\)\nならば\n\\(nxtdp_{j - A_i} \\gets \\text{true}\\)\nに更新する。(注：\n\\(i \\geq 2\\)\nの条件は\n\\(p_1 \\to p_2\\)\nが正方向になるように配置される点を反映している)\nc.\n\\(dp \\gets nxtdp\\)\nとする。\n3.\n\\(dp_x = \\text{true}\\)\nならば答えは\nYes\n、そうでない場合は\nNo\nである。\n計算量は\n\\(\\mathrm{O}(N^2 A_{\\max})\\)\nで、これは十分高速です。\nさて、元の問題に戻りましょう。\n\\(p_i\\)\nと\n\\(p_{i+1}\\)\nの関係性に注目すると次のようになります。\n\\(p_1 \\to p_2\\)\nは\n\\(x\\)\n軸正方向に\n\\(A_1\\)\n\\(p_n \\to p_{n+1}\\)\n(\n\\(n\\)\nは\n\\(3\\)\n以上の奇数) は\n\\(x\\)\n軸正方向に\n\\(A_i\\)\nまたは\n\\(-A_i\\)\n\\(p_n \\to p_{n+1}\\)\n(\n\\(n\\)\nは偶数) は\n\\(y\\)\n軸正方向に\n\\(A_i\\)\nまたは\n\\(-A_i\\)\nまた、\n\\(n\\)\nが奇数のとき、\n\\(p_n \\to p_{n+1}\\)\nの向きを\n\\(x\\)\n軸正方向/負方向の一方からもう一方へ反転させて、それ以外の向きがそのままの場合、反転前後で\n\\(p_{n+1}\\)\nの\n\\(y\\)\n座標は変わりません。(逆もしかり)\nよって、この問題は\n\\(x\\)\n軸と\n\\(y\\)\n軸で独立して問題を解いても良いことが分かります。つまり、\n数列\n\\(A_o = (A_1, A_3, A_5, A_7,\\dots)\\)\n, 目的地\n\\(x\\)\nとしたときの 1 次元の場合を解く\n数列\n\\(A_e = (A_2, A_4, A_6, A_8,\\dots)\\)\n, 目的地\n\\(y\\)\nとしたときの 1 次元の場合を解く(ただし\n\\(A_e\\)\nの 1 個目の要素は正方向負方向どちらでもよい)\nという 2 つの場合を解いてどちらも\nYes\nが答えだったならば全体の答えも\nYes\nで、そうでない場合は\nNo\nが答えになります。計算量は\n\\(\\mathrm{O}(N^2 A_{\\max})\\)\nで、この問題を十分高速に解くことができます。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nconstexpr int M = 10000;\nint N, x, y, A[1010], buf1[2 * M + 1], buf2[2 * M + 1], buf3[2 * M + 1];\n\nint main() {\n  cin >> N >> x >> y;\n  for (int i = 0; i < N; i++) cin >> A[i];\n  int *dp1 = buf1 + M, *dp2 = buf2 + M, *dp3 = buf3 + M;\n  dp1[A[0]] = dp2[0] = true;\n  for (int i = 1; i < N; i++) {\n    for (int j = -M; j <= M; j++) dp3[j] = 0;\n    int a = A[i];\n    if (i % 2 == 0) {\n      for (int j = -M; j <= M - a; j++) {\n        dp3[j + a] |= dp1[j], dp3[j] |= dp1[j + a];\n      }\n      swap(dp1, dp3);\n    } else {\n      for (int j = -M; j <= M - a; j++) {\n        dp3[j + a] |= dp2[j], dp3[j] |= dp2[j + a];\n      }\n      swap(dp2, dp3);\n    }\n  }\n  cout << (dp1[x] and dp2[y] ? \"Yes\" : \"No\") << endl;\n}"
+      ],
+      "text_sha256": "5d8380d018edab920e773d848405c55586b27654d34fba7ff1e29295d9d6baf3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc274/abc274_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

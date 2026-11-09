@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc394_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc394/editorial/12279",
+      "text": "\\(c\\)\nを英小文字、\n\\(S\\)\nを回文とすると\n\\(c, S, c\\)\nをこの順に結合して得られる文字列は回文になります。逆に、長さ\n\\(2\\)\n以上の文字列が回文である必要十分条件は最初の文字と最後の文字が等しく、最初および最後の文字を取り除いて得られる文字列が回文となることです。\n以上の性質を利用することを考えると、この問題は（有向）グラフ上の最短経路問題として定式化できます。\n\\(G\\)\nを\n\\(N^2\\)\n頂点のグラフとして、頂点集合を\n\\(\\lbrace (1,1), (1,2), \\ldots, (1, N), (2, 1), \\ldots, (N, N) \\rbrace\\)\nとします。頂点\n\\((i, j)\\)\nは問題で与えられるグラフにおける頂点\n\\(i\\)\nから頂点\n\\(j\\)\nへ向かうパスと対応させるように辺を定めることを考えます。\n便宜上\n\\(G\\)\nに始点\n\\(S\\)\nを追加して\n\\(N^2 + 1\\)\n頂点のグラフとして扱うと、以下のような辺を追加したグラフにおける\n\\(S\\)\nから\n\\((i, j)\\)\nへの最短経路の長さが整数組\n\\((i, j)\\)\nに対する本問題の答えとなります。\n各\n\\(i\\)\nについて\n\\(S\\)\nから\n\\((i, i)\\)\nへ向かう重み\n\\(0\\)\nの辺\n\\(C_{i, j} \\neq\\)\n-\nなる\n\\((i, j)\\)\nについて\n\\(S\\)\nから\n\\((i, j)\\)\nへ向かう重み\n\\(1\\)\nの辺\n\\(C_{k, i} \\neq\\)\n-\n,\n\\(C_{j, l} \\neq\\)\n-\n,\n\\(C_{k, i} = C_{j, l}\\)\nを満たす\n\\((i, j, k, l)\\)\nについて\n\\((i, j)\\)\nから\n\\((k, l)\\)\nへ向かう重み\n\\(2\\)\nの辺\n\\(1\\)\n種類目の辺は長さ\n\\(0\\)\nの回文、\n\\(2\\)\n種類目の辺は長さ\n\\(1\\)\nの回文、\n\\(3\\)\n種類目の辺は両端に同じ文字を追加することで回文の長さを\n\\(2\\)\n増やすことに対応します。\n\\(G\\)\nの頂点の数が\n\\(O(N^2)\\)\nであり、各頂点の次数は\n\\(O(N^2)\\)\nであるため\n\\(G\\)\nの辺の数は\n\\(O(N^4)\\)\nとなり、BFS により\n\\(O(N^4)\\)\n時間で答えを求めることができます。\n辺に重みが付いていますが、重み\n\\(0, 1\\)\nの辺を先に処理することにより BFS により最短経路を求められることに注意してください。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\n#define rep(i, n) for (int i = 0; i < (n); i++)\nusing namespace std;\n\nint inf = 1000000010;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<vector<char>> c(n, vector<char>(n));\n\trep(i, n) rep(j, n) cin >> c[i][j];\n\tvector<vector<int>> a(n, vector<int>(n, inf));\n\tqueue<pair<int, int>> que;\n\trep(i, n) {\n\t\tque.push({i, i});\n\t\ta[i][i] = 0;\n\t}\n\trep(i, n) rep(j, n) {\n\t\tif (i == j or c[i][j] == '-') continue;\n\t\tque.push({i, j});\n\t\ta[i][j] = 1;\n\t}\n\twhile (!que.empty()) {\n\t\tauto q = que.front(); que.pop();\n\t\tint i = q.first, j = q.second;\n\t\trep(k, n) rep(l, n) {\n\t\t\tif (c[k][i] != '-' && c[j][l] != '-' && c[k][i] == c[j][l] && a[k][l] == inf) {\n\t\t\t\ta[k][l] = a[i][j] + 2;\n\t\t\t\tque.push({k, l});\n\t\t\t}\n\t\t}\n\t}\n\trep(i, n) {\n\t\trep(j, n) {\n\t\t\tcout << (a[i][j] == inf ? -1 : a[i][j]) << \" \\n\"[j == n - 1];\n\t\t}\n\t}\n}"
+      ],
+      "text_sha256": "36dcffd8a46c27f3355880599dbaa9e2073e2501de0765d277e7f39b3a811255",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc394/abc394_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

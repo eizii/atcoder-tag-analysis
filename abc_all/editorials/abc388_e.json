@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc388_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc388/editorial/11901",
+      "text": "\\(K\\) 個 \\((0\\leq K\\leq\\dfrac N2)\\) の鏡餅を作るとき、先頭 \\(K\\) 個と末尾 \\(K\\) 個の餅を使うとしてかまいません（上に乗せられている餅が先頭 \\(K\\) 個と異なる場合、先頭 \\(K\\) 個の餅が上になるように入れ替えることができます。末尾 \\(K\\) 個も同様です）。\nまた、上に乗せる \\(K\\) 個の餅と下段として使われる \\(K\\) 個の餅を決めたとき、それらをすべて使って \\(K\\) 個の鏡餅が作れることは、それぞれ小さいほうから組にしたときに \\(K\\) 個の鏡餅が作れることと同値です（\\(\\Leftarrow\\) は明らかです。\\(\\Rightarrow\\) は、出来上がった鏡餅を上の餅の大きさでソートしたときに下の餅がソートされていないなら、下の餅をソートしても \\(K\\) 個の鏡餅を作れることから言えます）。\n以上より、\\(K\\) を定めたときに \\(K\\) 個の鏡餅が作れるかを判定することは \\(O(K)\\) 時間で可能です。\nある非負整数 \\(k\\) について鏡餅を \\(k\\) 個作れるなら、任意の非負整数 \\(l\\ (l\\leq k)\\) について鏡餅を \\(l\\) 個作れるので、二分探索を行うことでこの問題を解くことができます。\n時間計算量は \\(O(N\\log N)\\) となります。",
+      "codes": [
+        "#include <algorithm>\n#include <iostream>\n#include <vector>\n#include <ranges>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    cin >> N;\n\n    vector<unsigned> A(N);\n    for (auto&& a : A)\n        cin >> a;\n\n    // 判定関数\n    // K 個の鏡餅を作ることができるか？\n    const auto check{\n        [N, &A](unsigned K) {\n            for (unsigned i = 0; i < K; ++i)\n                // 先頭と末尾から K 個ずつ取ってきて\n                if (A[i] * 2 > A[N - K + i])\n                    // どれか 1 つでも半分より大きかったら false\n                    return false;\n            // そうでなければ true\n            return true;\n        }\n    };\n\n    // 0 から N / 2 の間で、判定関数が true になる最大の値（false になる最小の値 - 1）を二分探索で求める\n    cout << *ranges::partition_point(views::iota(0U, N / 2 + 1), check) - 1 << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "7c4af2c946750507ac1df7729b1dc8f0cdf867d0c65a6b6b1612086221b78251",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc388/abc388_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc388/editorial/11902",
+      "text": "最悪時間計算量を \\(\\Theta(N)\\) 時間とする \\(2\\) つの方針について解説します。\n餅の列を先頭 \\(\\left\\lfloor\\dfrac N2\\right\\rfloor\\) 個とそれ以外に分けます。\n後ろの列を先頭から順に見て、それぞれの餅ごとに先頭の列のうち残っている中で最小の餅（存在すれば）と組み合わせて鏡餅を作れるなら作るアルゴリズムを考えます。\nこのアルゴリズムで作られる鏡餅の個数が求める最大値です。\nこのことは、\\(K\\) 個の鏡餅を作ることができるなら先頭 \\(K\\) 個を上側として使い、後半 \\(\\left\\lceil\\dfrac N2\\right\\rceil\\) 個のうち \\(K\\) 個を下側として使う鏡餅の作り方が存在することと、そのような作り方で先頭 \\(k\\) 個に対応する鏡餅を作り終えた時点での後半の鏡餅の残り方として最良のものをこのアルゴリズムが与えることから確認できます。\n実装例は以下のようになります。\n便宜上、列の後ろに無限の大きさの餅が無限に並んでいることとします。\nここで、先頭 \\(K\\) 項を上段の餅としてすべて使って \\(K\\) 個鏡餅を作る作り方における、下段に使われる鏡餅のインデックスの最大値の最小値について考えます（つまり、\\(K\\) 個鏡餅を作るのに少なくとも何番目までの餅を使う必要があるかについて考えます）。\n\\(B _ i\\coloneqq i\\) 番目の餅を上段の餅として使うときの、下段の餅としてありえる最小のインデックス \\((1\\leq i\\leq N)\\) を求めることは \\(\\Theta(N)\\) 時間でできます（C 問題と同様の尺取り法を用いればよいです）。\nすると、\\(B _ i\\) を用いて上の値は \\(\\displaystyle K+\\max\\left\\lbrace\\max _ {1\\leq i\\leq K}\\lbrace B _ i-i\\rbrace,K\\right\\rbrace\\) と表せます。\nあとは、これが \\(N\\) 以下であるような最大の \\(K\\) を求めればよいです。\nこれは \\(B _ i\\) を求めながら \\(K\\) を小さいほうから調べていけばよいです。\n実装例は以下のようになります（ここまでの説明は 1-indexed で行われていましたが、実装例では 0-indexed になっていることに注意してください）。",
+      "codes": [
+        "#include <iostream>\n#include <deque>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    cin >> N;\n\n    // 餅列の先頭側 floor(N / 2) 個\n    deque<unsigned> A(N / 2);\n    for (auto&& a : A)\n        cin >> a;\n\n    unsigned ans{};\n\n    for (unsigned i{N / 2}; i < N; ++i) {\n        unsigned a;\n        cin >> a;\n        // もし残っているうち最小の餅と鏡餅を作れるなら作る\n        if (A.front() * 2 <= a) {\n            ++ans;\n            A.pop_front();\n        }\n    }\n\n    cout << ans << endl;\n\n    return 0;\n}",
+        "#include <iostream>\n#include <vector>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    cin >> N;\n\n    vector<unsigned> A(N);\n    for (auto&& a : A)\n        cin >> a;\n\n    for (unsigned i = 0, j = 0, d = 0; i < N; ++i) {\n        // j := i 番目の餅を乗せられる最小の餅の番号\n        while (j < N && A[i] * 2 > A[j]) ++j;\n        // d := 上下の餅の番号の差の最大値\n        d = max(d, j - i);\n        \n        // 後ろがはみ出したら\n        if (i + max(d, i + 1) >= N) {\n            // 直前の値が答え\n            cout << i << endl;\n            return 0;\n        }\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "9004db8c1544ba5a290bf8491e786f32ec9e963bc490ae75f61a7ce5c3e64e8e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc388/abc388_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

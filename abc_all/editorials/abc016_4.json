@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc016_4",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc016/editorial.pdf",
+      "text": "一刀両断\n\f\n問題概要\n\n\n 多角形を線分で切断するといくつに分かれるか\n 求めよ\n\f\n考察\n\n\n ・分割された多角形を愚直に数えるとたいへん\n ・何か良い性質はないだろうか？\n\f\n考察\n\n\n 分割された多角形の数\n  ＝ 切っている線分（青）の本数＋１\n\n\n もうちょっと考えると…\n\f\n考察\n\n\n 分割された多角形の数\n  ＝ 多角形と線分の交点（紫）の数÷２＋１\n  ＝ 線分と交差する多角形の辺の本数÷２＋１\n これなら数えられそう\n\f\n解法\n\n\n 辺と線分が交差\n →線分同士の交差判定を使う\n   片方の線分から見て\n   もう一方の線分の端点が左右にある\n\n\n                           左\n     左\n\n\n             右\n\n\n                        右\n\f\n解法\n\n\n 線分から見た左右の判定方法は？\n  →符号付き面積を使いましょう\n   公式：𝑆= (𝑥1𝑦2 −𝑥2𝑦1)/2\n\n\n          +\n             -\n\f\n解法\n\n\n まとめると、\n\n\n 分割された多角形の数\n  ＝ 切っている線分の本数＋１\n  ＝ 多角形と線分の交点の数÷２＋１\n  ＝ 線分と交差する多角形の辺の本数÷２＋１\n\n\n 線分同士の交差判定は符号付き面積を使う",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "f55f66a1e01785b80a95fa826a5b1df0769a87d0a0c53d5b6c9329bf3cafa4ab"
+    }
+  ],
+  "status": "available"
+}

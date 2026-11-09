@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc158_b",
+  "editorials": [
+    {
+      "text": "B: Count Balls\n1 回の操作をセットで考えると考えやすいです。\nN 個のうち、完全に含まれる操作の回数は⌊\nN\nA+B ⌋回です。\n中途半端に含まれる操作は高々1 回分ですが、N をA + B で割った余りとA の大小関係が重要で、\nN をA + B で割った余りをR とすると、min(R, A) だけ含まれます。\n以下はPython での実装例です。\n1 N, A, B = map(int, input().split())\n2 ans = N // (A + B) * A\n3 rem = N % (A + B)\n4 ans += min(rem, A)\n5 print(ans)\n",
+      "text_sha256": "8447c4104ea152d885789c58cef575cb5c73c9ffb9ed761dc2d1a92da3cf7bae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc158/abc158_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc157_a",
+  "editorials": [
+    {
+      "text": "A: Duplex Printng\n答えはﬂoor\n( N\n2\n)\nです(ﬂoor (x) はx より小さくない最大の整数を表す)。\n例えば、C++ ではN をint 型の変数とすると、これは(N + 1) /2 として求めることが出来ます。\n以下はC++ での実装例です。\n1 #include <bits/stdc++.h>\n2 using namespace std;\n3 int main() {\n4\nint N;\n5\ncin >> N;\n6\nint ans = (N + 1) / 2;\n7\ncout << ans << endl;\n8\nreturn 0;\n9 }\n",
+      "text_sha256": "228d266fbf2d7968b946f6d82cc4fd3905103e167c63d1ccf641b5c53fd2c19e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc157/abc157_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

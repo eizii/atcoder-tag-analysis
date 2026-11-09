@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc145_c",
+  "editorials": [
+    {
+      "text": "C: Average Length\n解法1\nN! 通りの経路を全探索し, 各経路の長さを計算し, その平均値を出力します.\nN! 通りの経路の全探索は, 例えばC++ ではnext permutation 関数を使うと容易に実装出来ます.\n時間計算量はO (N!N) です.\nC++ による解答例:https://atcoder.jp/contests/abc145/submissions/8474526\n解法2\n次の問題を考えます.\n• N 個の互いに区別出来るボールを1 列に並べる. 特定の2 つのボールが隣り合うような並べ方\nは何通りあるか.\n「特定の2 つのボール」を一纏めにして考えて, この2 つのボールの並び順も考慮すると, この問題の\n答えは2 (N −1)! 通りであることが分かります.\nこれより, 元の問題におけるN! 通りの経路において, 各町のペア間の移動が発生するような経路は,\n2 (N −1)! 個であることが分かります.\nこれにより, 各町のペア間の距離の総和の2(N−1)!\nN!\n= 2\nN 倍が答えであることが分かります.\n時間計算量はO\n(\nN 2)\nです.\nC++ による解答例:https://atcoder.jp/contests/abc145/submissions/8474573\n",
+      "text_sha256": "b0e89aae8173f1f07a8e3ce9215f0a6c87e0b62a57104fb68099705cba6c8018",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc145/abc145_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

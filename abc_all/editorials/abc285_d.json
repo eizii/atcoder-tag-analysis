@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc285_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc285/editorial/5512",
+      "text": "ヒント\nユーザ名の変更処理のうちのいくつかの間には、「あるユーザのユーザ名を変更してからでないと、別のユーザのユーザ名を変更できない」という依存関係があります。これらの依存関係をグラフにし、どの処理から行うべきかを考えてみましょう。\n解法\n文字列を頂点とし、\n\\(S_i\\)\nから\n\\(T_i\\)\nへ有向辺を張ったグラフを考えます。このグラフにサイクルがあるとき、サイクルに属する辺に対応するユーザ名の変更を行うことができません。したがって答えは\nNo\nです。逆にそうでないとき、「出次数が\n\\(0\\)\nである頂点へ向かう辺に対応するユーザ名の変更を行い、その頂点を削除する」という操作を繰り返すことにより、すべてのユーザのユーザ名を変更することができるため、答えは\nYes\nとなります。\n以上より、グラフにサイクルが存在するかを判定できればよく、DFS/BFSやUnion-Findなどにより判定できます。",
+      "codes": [],
+      "text_sha256": "55da6ef2443738bfbd64c90283c052aee010339e659d6dcac79e82333093360f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc285/abc285_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

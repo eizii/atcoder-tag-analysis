@@ -1,0 +1,421 @@
+        ARC083 / ABC074 解説
+
+                三谷庸(wo01)
+
+                    2017 年9 月16 日
+
+
+
+      For International Readers: English editorial starts on page 6.
+
+
+A 問題
+
+ N × N のマス目にはマスがN 2 個あります。そのうちA マスを白く塗る
+ので、黒く塗るマスはN 2 −A 個あります。
+ したがって、入力からN, A を読み込んでN 2 −A を出力すればよいこと
+になります。
+
+ 以下にC++ によるコード例を示します。
+
+
+#include<cstdio>
+
+
+using namespace std;
+
+
+int main(){
+    int N, A;
+    scanf("%d%d", &N, &A);
+
+    printf("%d\n", N * N - A);
+    return 0;
+}
+
+
+B 問題
+
+   i 番目のボールはi 番目のタイプA のロボット、またはi 番目のタイプB
+のロボットで回収できます。タイプA のロボットで回収するときはロボット
+の移動距離は2xi となり、タイプB のロボットで回収するときはロボットの
+移動距離は2(K −xi) となります。
+   i = 1, 2, . . . , N について順にボールの位置を見ていき、2xi と2(K −xi)
+のうち小さい方(同じであるときはその値) を足し合わせれば答えが求まり
+ます。
+
+
+                                1
+
+ 以下にC++ によるコード例を示します(このコード例ではループの各段
+階ではなく最後に答えを2 倍しています)。
+
+#include<cstdio>
+#include<algorithm>
+
+
+using namespace std;
+
+
+const int MAX_N = 100;
+
+
+int N, K;
+int X[MAX_N];
+
+
+int main(){
+    scanf("%d", &N);
+
+    scanf("%d", &K);
+    for(int i = 0; i < N; ++i){
+        scanf("%d", X + i);
+
+    }
+    int ans = 0;
+
+    for(int i = 0; i < N; ++i){
+        int tmp = min(X[i], K - X[i]);
+        ans += tmp;
+
+    }
+    printf("%d\n", ans * 2);
+
+    return 0;
+}
+
+
+C 問題
+
+ ビーカーにちょうどx [g] の水を入れられる必要十分条件は、非負整数i, j
+が存在してx = 100Ai + 100Bj となることです。同様に、ビーカーにy [g]
+の砂糖を入れられる必要十分条件は、非負整数i, j が存在してy = Ci + Dj
+となることです。
+
+  x, y としてはF 以下の値だけを考えればよいので、x, y としてありうる値
+はO(F 2) 時間かけてすべてのi, j を試すことで列挙できます。
+ 最後に、すべての(x, y) の組(O(F 2) 個しかありません) について、ビー
+カーに水をx [g] と砂糖をy [g] 入れたときに砂糖が水にすべて溶けているか
+どうか調べ、溶けているものについて濃度が最大のものをとって出力すれば
+
+よいです。
+
+
+                                2
+
+D 問題
+
+ 都市を頂点、道路を辺としてグラフ理論の言葉で説明します。
+
+ 条件を満たすグラフが存在するとき、任意の頂点u, v について、これら
+の間には辺がないか、長さAu,v の辺があるかのどちらかとなります。なぜ
+なら、
+
+   • u, v の間にAu,v よりも長い辺があった場合、この辺は取り除いても最
+   短距離に影響を与えず、
+
+   • u, v の間にAu,v よりも短い辺があった場合、u, v 間の最短距離は明
+   らかにAu,v よりも短くなる
+
+からです。
+ グラフG を任意のu, v の間に長さAu,v の辺を張ったグラフとします。上
+の考察より、G の部分グラフに関してのみ考えればよいことになります。
+ どの頂点間に辺を張る必要があるか考えます。
+ A (の対角線上以外の要素) のうちAu,v が最小値であるとき、A が最短距
+離を表す表であるようなグラフにはu とv を長さAu,v で結ぶ辺が必要です。
+なぜなら、そうでないとすると他の頂点w を経由して頂点u から頂点v ま
+で距離Au,v で移動できる必要がありますが、そのとき頂点u と頂点w の距
+離はAu,v よりも小さくなるからです。
+ 同様にG のすべての辺について短い方から見ていくことで、求めるべきグ
+ラフは以下のとおりであることがわかります(G から辺{u, b} を取り除いた
+グラフをG\{u, v} と書いています)。
+
+   • あるu, v について、G\{u, v} におけるuv 最短距離がAu,v 未満であ
+   るとき、条件を満たすグラフは存在しない。
+
+   • そうでないとき、G\{u, v} におけるuv 最短距離がAu,v より大きいよ
+   うなu, v に限り辺を張ったグラフが求めるべきグラフである。
+
+  G\{u, v} におけるuv 最短路の長さをA′u,v と書くことにします。A′u,v と
+Au,v の大小を比較するために、まずG における全点対最短距離をWarshall-
+Floyd 法を用いて求め、その値をB とします。
+  Bu,v < Au,v となるu, v が存在するとき、このu, v について、A′u,v = Bu,v
+< Au,v となります。よって条件を満たすグラフは存在しません。
+ あとは、任意のu, v についてAu,v = Bu,v であったとして、A′u,v がAu,v と
+等しいか、それより大きいかを判定できればよいことになります。A′u,v = Au,v
+であることは、以下と同値です。
+
+
+               ∃w, u ̸= w, v ̸= w, Bu,v = Bu,w + Bw,v                (1)
+
+
+
+                                3
+
+ 実際、A′u,v = Au,v のとき、w としてG\{u, v} におけるuv 最短路上の頂
+点をとれます。逆に、上のようなw が取れるとき、G におけるw を通った
+uv 最短路はG\{u, v} におけるuv 最短路にもなっています。
+ よって、条件を満たすグラフが存在するとき、答えは条件(1) を満たすu, v
+についてAu,v(= A′u,v = Bu,v) の和をとったものになります。
+ N をグラフの頂点の数とするとき、B を求めるためのWarshall-Floyd 法
+の計算量はO(N 3) です。また、条件(1) は各u, v についてO(N) で確かめ
+られるので、全体の計算量はO(N 3) です。以上から、アルゴリズム全体の
+計算量はO(N 3) となるので、十分高速です。
+
+
+E 問題
+
+ 頂点v の子孫について色と重みの割り当てができているとして、頂点v の
+色と重みを決めることを考えます。頂点v の直接の子をu1, u2, . . . , uk とし
+ます。
+ 各ui について、ui およびそのすべての子孫に割り当てた色を反転させて
+も、頂点ui およびその子孫への色と重みの割り当ては条件を満たしたまま
+です。また、これらの頂点のうち頂点v と異なる色の重みの和y はできるだ
+け小さくしたほうがv の先祖に色と重みを割り当てやすくなります。
+ よって、頂点v を根とする部分木に含まれる頂点の色と重みを決めるには、
+次の問題を解けばよいことになります。
+
+   • u1, u2, . . . , uk のうちいくつかをv と同じ色に、それら以外をv と異な
+   る色に塗り、v の子孫(v を除く) に含まれるv と同じ色の頂点の重み
+   の和をXv 以下にできるか。できる場合、それらの頂点のうちv と異
+   なる色であるものの重みの和の最小値はいくらか。
+
+ この問題は、x1, x2, . . . , xk (ただしxi = Xui) の情報の他に、ui を根とす
+る部分木に含まれる頂点であってui と異なる色のものの重みの和yi の情報
+がわかれば、動的計画法により解くことができます。
+
+ 与えられた木の頂点を根から遠い順に並べ、それぞれについて上の動的計
+
+画法を行うことで、与えられた木全体への色と重みの割り当てが可能かどう
+
+か判定できます。
+
+
+F 問題
+
+ まず、与えられた点集合から、以下のようなグラフG を構築します。
+
+   • 頂点集合は(X, 1), (X, 2), . . . , (X, N), (Y, 1), (Y, 2), . . . , (Y, N) の2N
+   個。これらにそれぞれ番号0, 1, . . . , 2N −1 を付ける。
+
+
+                                4
+
+   • 頂点(X, x) と頂点(Y, y) は、あるi が存在してxi = x かつyi = y で
+   あるときに限り辺で結ばれている。
+
+   • それら以外に辺は存在しない。
+
+ グラフG の頂点はボールを回収するロボットに、辺は回収されるボールに
+対応します。また、辺{u, v} に対応するボールは、頂点u または頂点v に
+対応するロボットによってのみ回収できます。以下、このグラフに関する問
+
+題として考えることにします。
+
+ まず、G の連結成分に頂点の数と辺の数が異なるものが存在する場合、答
+えは0 です。そうでない場合、G の連結成分ごとに順序を数えられれば十分
+であるので、以下ではG が連結であるとして説明します。
+ ロボットの起動順序を考える前に、ロボットとそれが回収するボールの対
+
+応付けの方法を考えます。
+
+ 2N 頂点2N 辺のグラフにはサイクルがちょうど1 つあります。このサイ
+クルに含まれない頂点に対応するロボットについては、それが回収すべきボー
+
+ルは一意に決まります。また、サイクルに含まれる頂点に対応するロボット
+
+については、回収すべきボールとの対応付けが(サイクル全体で) 2 とおりに
+決まります。これらを両方試すことにすると、ロボットとボールの対応付け
+
+が定まったことになります。
+
+ 次に、ロボットの起動順序について考えます。
+ グラフG において頂点v は頂点u1 < u2 < · · · , uk に隣接しているとしま
+す。また、頂点v に対応するロボットは辺{v, ui} に対応するボールを回収
+することになっているとします。このとき、頂点u1, u2, . . . , ui−1 に対応する
+ロボットは頂点v に対応するロボットよりも先に起動する必要があります。
+また、この条件がすべてのv に対して満たされていれば、決めた対応のとお
+りにロボットがボールを回収できることもわかります。
+
+ グラフG と同じ頂点集合について、各頂点v についてv から上の記法に
+おけるu1, u2, . . . , ui−1 に向けた辺を張ったグラフをG′ とします。このグラ
+フG′ は森になるので、G′ 上で動的計画法を行うことで求める順序の個数が
+得られます。
+
+ 以上で答えが求まりました。
+
+
+
+
+
+                                5
+
+       ARC083 / ABC074 Editorial
+
+
+                         wo01
+
+                    September 16, 2017
+
+
+A
+
+#include<cstdio>
+
+using namespace std;
+
+int main(){
+    int N, A;
+    scanf("%d%d", &N, &A);
+    printf("%d\n", N * N - A);
+    return 0;
+}
+
+
+
+
+
+                                  1
+
+B
+
+#include<cstdio>
+#include<algorithm>
+
+using namespace std;
+
+const int MAX_N = 100;
+
+int N, K;
+int X[MAX_N];
+
+int main(){
+    scanf("%d", &N);
+    scanf("%d", &K);
+    for(int i = 0; i < N; ++i){
+        scanf("%d", X + i);
+    }
+    int ans = 0;
+    for(int i = 0; i < N; ++i){
+        int tmp = min(X[i], K - X[i]);
+        ans += tmp;
+    }
+    printf("%d\n", ans * 2);
+    return 0;
+}
+
+
+
+
+
+                                  2
+
+C
+
+We can pour exactly x grams of water if there exist non-negative integers i, j
+such that x = 100Ai + 100Bj. Similarly, we can pour exactly y grams of sugar
+if there exist non-negative integers i, j such that y = Ci + Dj.
+   Since x, y ≤F, we can generate all possible values of x, y in O(F 2) time.
+    Finally, for each possible pair (x, y) (There are O(F 2) such pairs), consider
+the case where we put x grams of water and y grams of sugar, check whether it
+satisﬁes the conditions, and compute the maximum density.
+
+
+
+
+
+                                  3
+
+D
+
+If there exist three vertices u, v, w such that Au,v + Av,w < Au,w, the distances
+are contradictory, thus you should output −1. From now on, we assume that
+there are no such triplets.
+  We call a (unordered) pair of two distinct vertices (u, v) important if there
+exists no w such that w ̸= u, w ̸= v, Au,w + Aw,v = Au,v.
+
+   • If (u, v) is important, the shortest path between u and v must not pass
+     through other vertices. Thus, we must add an edge between u and v with
+      cost Au,v.
+
+   • If (u, v) is not important, we don’t need to add any edges between these
+      vertices. For some w, it satisﬁes Au,w + Aw,v = Au,v, and you can just
+      follow the shortest path between u and w and the shortest path between
+   w and v.
+
+   Therefore, the answer is the sum of Au,v over all important pairs (u, v).
+
+
+
+
+
+                                  4
+
+E
+
+Suppose that we’ve already decided the colors and weights of all descendants of
+v, and among those vertices, the conditions are satisﬁed. The only things that
+matter for the decision of colors and weights of other vertices (ancestors of v)
+are:
+
+   • The sum of weights of all black vertices in the subtree rooted at v.
+
+   • The sum of weights of all white vertices in the subtree rooted at v.
+
+   One of these two values must be exactly Xv. To make things better in the
+future, we want to minimize the other value. Let dp[v] be the minimum of the
+other value.
+  How can we compute dp[v]? Let u1, u2, . . . , uk be the children of v. Without
+loss of generality, we can assume that v is black.
+  We keep two values: B (the sum of weights of black vertices) and W (the
+sum of weights of white vertices). They are initialized to zeroes. Now, for each
+ui, we do one of the following:
+
+   • Make ui black: add Xui to B and dp[ui] to W.
+
+   • Make ui white: add dp[ui] to B and Xui to W.
+
+   After that, we want to minimize the value of W, under the constraint that
+B must be at most Xv. This can be done in O(kXv) by a simple DP.
+
+
+
+
+
+                                  5
+
+F
+
+First, construct a graph G as follows:
+
+   • There are 2N vertices: X1, . . . , XN, Y1, . . . , YN.  (Also, let’s number the
+      vertices 0, 1, . . . , 2N −1 in this order.)
+
+   • For each i, add an edge between two vertices Xxi and Yyi.
+
+   Each vertex in G corresponds to a robot, and each edge in G corresponds to
+a ball. An edge (ball) between two vertices u and v can be collected by either
+vertex (robot) u or vertex (robot) v.
+   For each connected component in this graph, the number of edges and ver-
+tices must be the same. Otherwise, the answer is 0. We will assume that the
+graph is connected (otherwise, solve the problem independently for each com-
+ponent and combine the results). Thus, we have a connected graph with 2N
+vertices and 2N edges.
+  How can we assign edges to vertices? The graph contains exactly one cycle,
+and for edges in the cycle, there are two ways to assign them to vertices. For
+other edges, the assignment can be uniquely determined.
+    Let’s ﬁx an assignment of edges to vertices.  In how many ways can we
+activate the vertices to satisfy this assignment?
+   Suppose that in the graph G, a vertex v is adjacent to vertices u1 < u2 <
+· · · , uk. Also, suppose that v is assigned to the edge {v, ui}. Then, the vertices
+u1, u2, . . . , ui−1 must be activated before v. These conditions are suﬃcient:  if
+this is satisﬁed for all v, the robots can collect all balls.
+   Now, construct another graph G′: for each v, add an edge from v to u1, u2, . . . , ui−1
+in G′. The answer is the number of topological orderings in this graph. Since
+G′ is a (directed) forest, it’s east to compute the answer.
+
+
+
+
+
+                                  6

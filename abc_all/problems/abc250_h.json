@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc250_h",
+  "title": "Trespassing Takahashi",
+  "contests": [
+    {
+      "contest_id": "abc250",
+      "problem_index": "Ex"
+    }
+  ],
+  "difficulty": 2773,
+  "raw_difficulty": 2773,
+  "contest_id": "abc250",
+  "problem_index": "Ex",
+  "url": "https://atcoder.jp/contests/abc250/tasks/abc250_h",
+  "statement": "配点 : 600 点 問題文 1 から N までの番号がついた N 個の地点と M 本の道があります。 i \\, (1 \\leq i \\leq M) 番目の道は地点 a_i と地点 b_i を双方向に結んでいて、通過に c_i 分かかります。すべての地点同士は道を何本か通って行き来出来ます。また、地点 1,\\ldots, K には家があります。 i=1,\\ldots,Q に対し、次の問題を解いてください。 地点 x_i の家にいる高橋君が地点 y_i の家に移動しようとしている。 高橋君は最後に睡眠を取ってから道の移動にかかった時間が t_i 分を超えると移動が出来なくなる。 睡眠を取れる場所は家がある地点のみであるが、回数に制限は無い。 高橋君が地点 x_i から地点 y_i まで移動出来るならば Yes と、出来ないならば No と出力せよ。 制約 2 \\leq K \\leq N \\leq 2 \\times 10^5 N-1 \\leq M \\leq \\min (2 \\times 10^5, \\frac{N(N-1)}{2}) 1 \\leq a_i \\lt b_i \\leq N i \\neq j ならば (a_i,b_i) \\neq (a_j,b_j) 1 \\leq c_i \\leq 10^9 すべての地点同士は道を何本か通って行き来出来る 1 \\leq Q \\leq 2 \\times 10^5 1 \\leq x_i \\lt y_i \\leq K 1 \\leq t_1 \\leq \\ldots \\leq t_Q \\leq 10^{15} 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M K a_1 b_1 c_1 \\vdots a_M b_M c_M Q x_1 y_1 t_1 \\vdots x_Q y_Q t_Q 出力 Q 行出力せよ。 i 行目には、 i 番目の問題に対する出力をせよ。 入力例 1 6 6 3\r\n1 4 1\r\n4 6 4\r\n2 5 2\r\n3 5 3\r\n5 6 5\r\n1 2 15\r\n3\r\n2 3 4\r\n2 3 5\r\n1 3 12 出力例 1 No\r\nYes\r\nYes 3 番目の問題において、地点 1 から地点 3 に直接向かうと 13 分以上かかります。しかし、 12 分かけて地点 2 に移動し、そこにある家で睡眠を取ってから地点 3 に移動することが出来ます。よって、答えは Yes となります。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1 から N までの番号がついた N 個の地点と M 本の道があります。 i \\, (1 \\leq i \\leq M) 番目の道は地点 a_i と地点 b_i を双方向に結んでいて、通過に c_i 分かかります。すべての地点同士は道を何本か通って行き来出来ます。また、地点 1,\\ldots, K には家があります。 i=1,\\ldots,Q に対し、次の問題を解いてください。 地点 x_i の家にいる高橋君が地点 y_i の家に移動しようとしている。 高橋君は最後に睡眠を取ってから道の移動にかかった時間が t_i 分を超えると移動が出来なくなる。 睡眠を取れる場所は家がある地点のみであるが、回数に制限は無い。 高橋君が地点 x_i から地点 y_i まで移動出来るならば Yes と、出来ないならば No と出力せよ。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq K \\leq N \\leq 2 \\times 10^5 N-1 \\leq M \\leq \\min (2 \\times 10^5, \\frac{N(N-1)}{2}) 1 \\leq a_i \\lt b_i \\leq N i \\neq j ならば (a_i,b_i) \\neq (a_j,b_j) 1 \\leq c_i \\leq 10^9 すべての地点同士は道を何本か通って行き来出来る 1 \\leq Q \\leq 2 \\times 10^5 1 \\leq x_i \\lt y_i \\leq K 1 \\leq t_1 \\leq \\ldots \\leq t_Q \\leq 10^{15} 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M K a_1 b_1 c_1 \\vdots a_M b_M c_M Q x_1 y_1 t_1 \\vdots x_Q y_Q t_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 i 行目には、 i 番目の問題に対する出力をせよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 6 6 3\r\n1 4 1\r\n4 6 4\r\n2 5 2\r\n3 5 3\r\n5 6 5\r\n1 2 15\r\n3\r\n2 3 4\r\n2 3 5\r\n1 3 12"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 No\r\nYes\r\nYes 3 番目の問題において、地点 1 から地点 3 に直接向かうと 13 分以上かかります。しかし、 12 分かけて地点 2 に移動し、そこにある家で睡眠を取ってから地点 3 に移動することが出来ます。よって、答えは Yes となります。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc250/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:22.748393+00:00",
+  "statement_sha256": "6ab06b8d47da4e7012fdbd66830795505101008016e6e786ad20177dd8be72f6",
+  "editorials": []
+}

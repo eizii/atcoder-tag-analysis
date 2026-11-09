@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc057_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc057/editorial.pdf",
+      "text": "B:  Checkpoints\n\n  各学生がどのチェックポイントに移動するかを調べます。まず、全てのチェックポイント間のマンハッタン距離\n\n を計算します。多くのプログラミング言語では、絶対値を求める処理はライブラリで提供されています。次に、マ\n\n ンハッタン距離が最小となるチェックポイントの番号を求めていきます。これはマンハッタン距離の最小値とその\n\n チェックポイントの番号を管理する2 つの変数を用いて、ループで求めることが可能です。以上のことから、時間\n 計算量はO(NM) となり、これは間に合います。\n\n\n  C++のコード例\n\n\n\n1 int main(void){\n\n2     int N,M;\n\n3     cin >> N >> M;\n\n\n4\n\n5     const int NMMAX=50;\n\n6     int A[NMMAX],B[NMMAX],C[NMMAX],D[NMMAX];\n\n\n7\n\n\n                                                  1\n\f\n 8     for(int i=0;i<N;++i){\n 9         cin >> A[i] >> B[i];\n\n10     }\n\n\n11\n\n12     for(int j=0;j<M;++j){\n\n13         cin >> C[j] >> D[j];\n\n14     }\n\n\n15\n\n16     for(int i=0;i<N;++i){\n\n17         int min_dist=abs(A[i]-C[0])+abs(B[i]-D[0]),checkpoint=1;\n\n\n18\n\n19         for(int j=1;j<M;++j){\n\n20             const int cur_dist=abs(A[i]-C[j])+abs(B[i]-D[j]);\n\n21             if(min_dist>cur_dist){\n\n22                 min_dist=cur_dist;\n\n23                 checkpoint=j+1;\n\n24             }\n\n25         }\n\n\n26\n\n27         cout << checkpoint << endl;\n\n28     }\n\n\n29\n\n30     return 0;\n\n31 }",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "545cd1e8b4199bc9436ebc554bb8f48975a3a832d07a9d20d86cb8cec96f90ef"
+    }
+  ],
+  "status": "available"
+}

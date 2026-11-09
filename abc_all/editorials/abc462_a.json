@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc462_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc462/editorial/21397",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n\\(S\\)\nの数字のみを取り出した文字列を求めれば良いです。\nこれは例えば以下のアルゴリズムで求めることができます：\n\\(T\\)\nを空文字列とする。\n\\(S\\)\nの先頭の文字から順番に以下を行う：\nその文字が数字ならば\n\\(T\\)\nの末尾にその文字を追加する。\n\\(T\\)\nが求める文字列である。\n以上のアルゴリズムを適切に実装することでこの問題に正答することができます。\n実装例(Python3)\n実装例(Python3)",
+      "codes": [
+        "s = input()\nt = \"\"\nfor c in s:\n    if c.isdigit():\n        t += c\nprint(t)",
+        "print(\"\".join(filter(str.isdigit,input())))"
+      ],
+      "text_sha256": "6a75688ce3d79beeb58155bd6b8c2a51c0bb15cbd03ba0d8fdaaa4cfb6028f28",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc462/abc462_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

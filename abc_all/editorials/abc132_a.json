@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc132_a",
+  "editorials": [
+    {
+      "text": "A: Fifty-Fifty\n以下のように、3 通りに場合分けして答えを求めればよいです。\n1 #include<stdio.h>\n2 #include<algorithm>\n3 using namespace std;\n4 int main()\n5 {\n6\nchar s[10];\n7\nscanf(\"%s\", s);\n8\nif(s[0] == s[1] && s[1] != s[2] && s[2] == s[3])printf(\"Yes\\n\");\n9\nelse if(s[0] == s[2] && s[2] != s[1] && s[1] == s[3])printf(\"Yes\\n\");\n10\nelse if(s[0] == s[3] && s[3] != s[1] && s[1] == s[2])printf(\"Yes\\n\");\n11\nelse printf(\"No\\n\");\n12 }\nまた、以下のように文字列を並び替えてから判定を行っても良いです。\n1 #include<stdio.h>\n2 #include<algorithm>\n3 using namespace std;\n4 int main()\n5 {\n6\nchar s[10];\n7\nscanf(\"%s\", s);\n8\nsort(s, s + 4);\n9\nprintf((s[0] == s[1] && s[1] != s[2] && s[2] == s[3]) ? \"Yes\\n\" : \"No\\n\");\n10 }\n",
+      "text_sha256": "1a573bf64f21a4fb9a0643886af8e0fe7a3b3db1cb8551f16596db54633da6af",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc132/abc132_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

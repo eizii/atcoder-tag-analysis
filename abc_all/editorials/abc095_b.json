@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc095_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc096/editorial.pdf",
+      "text": "B: Bitter Alchemy\n\n  入力例の説明でほのめかされているように、「まずすべての種類のドーナツを1 個ずつ作り、残ったお菓子\n\n の素で最も『安い』ドーナツを作れるだけ作る」という方針で問題ありません。つまり、m1, m2, ..., mN の和\n  をS、m1, m2, ..., mN のうち最小の値をM として、答えはN + ⌊(X −S)/M⌋となります。*1主な課題は、\n  m1, m2, ..., mN の値を読み込むことと、S やM の値を実際に求めることです。なお、割り算と小数部分切り\n 捨ての部分に関しては、多くのプログラミング言語では単にA / B と書くことで⌊A/B⌋が求められます。*2\n\n\n  言語によってやや事情が異なるかもしれません。C++, Java などの言語では、ループ構造を用いるのが素\n\n 直でしょう。C++ での実装例を挙げます。\n\n\n\n 1 #include <iostream>\n\n 2 using namespace std;\n\n\n 3\n\n 4 int main(){\n\n 5     int N, X, m[101];\n\n 6     cin >> N >> X;\n\n 7     int S = 0, M = 1001001001;\n\n 8     for(int i = 0; i < N; ++i){\n\n 9         cin >> m[i];\n\n10         S += m[i];\n\n11         if(m[i] < M){\n\n12             M = m[i];\n\n13         }\n\n14     }\n\n15     int ans = N + (X - S) / M;\n\n16     cout << ans << endl;\n\n17 }\n\n\n    Python, Ruby といった言語でももちろん上のようなアプローチが可能ですが、こういった言語ではsum,\n  max といった関数がはじめから用意されていることがあり、便利です。*3これを用いたPython(3) での実装例\n\n を次ページに挙げます。\n\n\n\n\n\n       *1 ⌊x⌋はx の整数部分を表します。\n       *2 A, B が正でない場合はこの限りでなく、またここに実装例を掲載したPython3 はこれに該当しません。\n       *3 このような機能のため、AtCoder Beginner Contest で出題されうる程度の問題の解法を手っ取り早く実装する上で、スクリプ\n     ト言語はとても役立ちます。ただし、この範囲を超えると、どうしても実行速度が足りない場面が急速に増えます。競技プログラ\n     ミングに本格的に取り組む場合、C++ とは言わずともJava に匹敵する実行速度を有する言語を一つ習得する必要がある、とい\n     うことをお伝えしておきます。\n\n\n                                               2\n\f\n1 N, X = map(int, input().split())\n\n2 m = []\n\n3 for i in range(N):\n\n4     m.append(int(input()))\n\n5 print(N + (X - sum(m)) // min(m))",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "f971835011a61deb826ca0958ec23f24bdb21f68ab0065258ac30ad9fe2f41a1"
+    }
+  ],
+  "status": "available"
+}

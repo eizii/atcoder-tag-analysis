@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc252_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc252/editorial/3963",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\nこの問題では、文字コードを文字に変換して出力することが求められています。使用している言語での文字列と文字の扱い方を確認してください。\nC言語では、出力フォーマットを適切に指定することで、値が文字として出力されます。\nC++でもprintfを用いる場合は同様です。iostream(cout)を用いる場合は、明示的にchar型に変換することで文字として出力されます。\nPythonでは、文字コードを文字に変換する関数 chr が存在します。",
+      "codes": [
+        "#include<stdio.h>\nint main(){\n\tint n;\n\tscanf(\"%d\",&n);\n\tprintf(\"%c\\n\",n);\n}",
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n\tint N;\n\tcin >> N;\n\tcout << (char)N << endl;\n}",
+        "N=int(input())\nprint(chr(N))"
+      ],
+      "text_sha256": "e187c26561fed098e4c7a4de8807d3c3b3eeefa02c40d33d84684ef5a2a2d841",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc252/abc252_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

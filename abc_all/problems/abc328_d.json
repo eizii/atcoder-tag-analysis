@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc328_d",
+  "title": "Take ABC",
+  "contests": [
+    {
+      "contest_id": "abc328",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 555,
+  "raw_difficulty": 555,
+  "contest_id": "abc328",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc328/tasks/abc328_d",
+  "statement": "配点 : 425 点 問題文 A , B , C の 3 種類の文字のみからなる文字列 S が与えられます。 S が連続な部分文字列として文字列 ABC を含む限り、下記の操作を繰り返します。 S に連続な部分文字列として含まれる文字列 ABC のうち、 S の中で最も左にあるものを、 S から削除する。 上記の手順を行った後の、最終的な S を出力してください。 制約 S は A , B , C のみからなる長さ 1 以上 2\\times 10^5 以下の文字列 入力 入力は以下の形式で標準入力から与えられる。 S 出力 答えを出力せよ。 入力例 1 BAABCBCCABCAC 出力例 1 BCAC 与えられた文字列 S = BAABCBCCABCAC に対して、下記の通りに操作が行われます。 1 回目の操作で、 S = BAABCBCCABCAC の 3 文字目から 5 文字目の ABC が削除され、その結果 S = BABCCABCAC となります。 2 回目の操作で、 S = BABCCABCAC の 2 文字目から 4 文字目の ABC が削除され、その結果 S = BCABCAC となります。 3 回目の操作で、 S = BCABCAC の 3 文字目から 5 文字目の ABC が削除され、その結果 S = BCAC となります。 よって、最終的な S は BCAC です。 入力例 2 ABCABC 出力例 2 この入力例では、最終的な S は空文字列です。 入力例 3 AAABCABCABCAABCABCBBBAABCBCCCAAABCBCBCC 出力例 3 AAABBBCCC",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 A , B , C の 3 種類の文字のみからなる文字列 S が与えられます。 S が連続な部分文字列として文字列 ABC を含む限り、下記の操作を繰り返します。 S に連続な部分文字列として含まれる文字列 ABC のうち、 S の中で最も左にあるものを、 S から削除する。 上記の手順を行った後の、最終的な S を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 S は A , B , C のみからなる長さ 1 以上 2\\times 10^5 以下の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 BAABCBCCABCAC"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 BCAC 与えられた文字列 S = BAABCBCCABCAC に対して、下記の通りに操作が行われます。 1 回目の操作で、 S = BAABCBCCABCAC の 3 文字目から 5 文字目の ABC が削除され、その結果 S = BABCCABCAC となります。 2 回目の操作で、 S = BABCCABCAC の 2 文字目から 4 文字目の ABC が削除され、その結果 S = BCABCAC となります。 3 回目の操作で、 S = BCABCAC の 3 文字目から 5 文字目の ABC が削除され、その結果 S = BCAC となります。 よって、最終的な S は BCAC です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 ABCABC"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 この入力例では、最終的な S は空文字列です。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 AAABCABCABCAABCABCBBBAABCBCCCAAABCBCBCC"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 AAABBBCCC"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc328/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:59.784662+00:00",
+  "statement_sha256": "e1ef8b2f72cd9150cd82bca48966fa7e7cf15c2c82daf0e365d1fd07ccd9ec6d",
+  "editorials": []
+}

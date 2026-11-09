@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc203_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc203/editorial/1951",
+      "text": "まず、高橋君がたどりつける村がみたす条件について考えます。\n太郎君が次の村に進むためには必ず\n\\(1\\)\n円払う必要があるので、村\n\\(M\\)\nにたどりつくためには、最初に持っているお金とそれまでに友人からもらったお金が\n\\(M\\)\n円以上である必要があります。\n高橋君がもらえるお金は最大\n\\((B_1+B_2+\\cdots +B_N)\\)\n円であるので、この事から 高橋君は最大でも村\n\\((K+B_1+B_2+\\cdots +B_N)\\)\nまでしか到達できない事が分かります。\n制約より、\n\\(K\\leq 10^9,\\ B_i\\leq 10^9,\\ N\\leq 2\\times 10^5\\)\nであるので\n\\(K+B_1+B_2+\\cdots +B_N\\leq (2\\times 10^5+1)\\times 10^9<10^{15}\\)\nであり、特に\n\\(10^{100}\\)\nより小さいです。\nよって\n\\(10^{100}\\)\nの上限は考えなくて良い事が分かります。\nまた、答えが\n\\(64\\)\nbit 整数におさまる事も分かります、\n以下、高橋君の所持金が\n\\(0\\)\n円となり友達もいないような最小の村の番号を求める事を考えます。\nいま、\n\\(A_1\\leq A_2\\leq \\cdots \\leq A_N\\)\nが満たされているとします。\n\\((A_i, B_i)\\)\nをペアにしてソートする事でこのような状態にすることができます。\n\\(A_i=A_j\\)\nであるようなものについては\n\\((A_i, B_i)\\)\nと\n\\((A_j, B_j)\\)\nのどちらが先に来ても構いません。\nまず,\n\\(K<A_1\\)\nのとき、高橋君は友達のいるどの村にたどり着く前に村\n\\(K\\)\nで動けなくなってしまいます。次に、\n\\(A_1\\leq K\\)\nのとき、まず高橋君は村\n\\(A_1\\)\nに到達し\n\\(B_1\\)\n円をもらう事が出来ます。この後、\n\\(K+B_1<A_2\\)\nならば他の友達がいる村にたどり着く前に村\n\\((K+B_1)\\)\nで動けなくなってしまいます。そうでないとき、さらに村\n\\(A_2\\)\nに到達しさらに\n\\(B_2\\)\n円をもらう事が出来ます。\nこれを繰り返すと、\n\\(i=1,2,\\ldots N\\)\nについて昇順に\n\\(K+B_1+\\cdots +B_{i-1} < A_i\\)\nであるかを調べ、ある\n\\(i\\)\nについてこれが成り立つならば村\n\\(K+B_1+\\cdots +B_{i-1}\\)\nで動けなくなり、どの\n\\(i\\)\nについても\n\\(K+B_1+\\cdots +B_{i-1} \\geq  A_i\\)\nならば村\n\\((K+B_1+\\cdots +B_{N} )\\)\nまで進め、そこで動けなくなる事が分かります。\n\\(i=1\\)\nにおいては\n\\(K+B_1+\\cdots +B_{i-1}=K\\)\nであり、さらに\n\\(i=2,3,\\ldots N\\)\nについて\n\\(K+B_1+\\cdots +B_i =(K+B_1+\\cdots +B_{i-1})+B_i\\)\nであることに注意すると各\n\\(i\\)\nについて左辺を\n\\(O(1)\\)\nで計算することができ、全体で\n\\(O(N)\\)\nで判定することができます。\nよって、ソートに\n\\(O(N\\log N)\\)\n、その後の処理に\n\\(O(N)\\)\nであり、この問題は\n\\(O(N\\log N)\\)\nで解け、十分高速です。\nC++による実装例:",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(void) {\n\tint n;\n\tlong long k;\n\tlong long x, y;\n\tvector<pair<long long, long long> >a;\n\n\tcin >> n >> k;\n\tfor (int i = 0; i < n; i++) {\n\t\tcin >> x >> y;\n\t\ta.push_back({ x,y }); //a[i].first=A_i, a[i].second=B_i\n\t}\n\n\tsort(a.begin(), a.end());\n\tfor (int i = 0; i < n; i++) {\n\t\tif (a[i].first > k)break;\n\t\tk += a[i].second;\n\t}\n\tcout << k << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "1de1706f5158f77d464fe78f221c993f585b1b1d6de3d44b6666baffb61d11c2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc203/abc203_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

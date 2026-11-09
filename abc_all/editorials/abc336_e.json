@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc336_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc336/editorial/9055",
+      "text": "この問題は桁に関する条件を満たす整数の個数を数え上げる問題です。こうした問題は\n桁 DP\nと呼ばれる種類の動的計画法が効果的なことが多く、実際この問題も桁 DP を利用すれば高速に解くことが出来ます。(桁 DP に関する詳細な説明は他のホームページ等に譲ります。)\nこの問題は、はじめに桁和\n\\(s\\)\nを決め打って考えるのがポイントです。つまり、\n\\(s = 1, 2, \\dots, 9 \\times 14\\)\nと固定した場合において問題を解いて、全ての\n\\(s\\)\nに対する答えを足し合わせたものが全体の答えになります。\n\\(s\\)\nを決め打った時の問題を考えると、これは DP の状態を\n\\(dp_{d, i, j, f}\\)\n\\(:=\\)\n(上から\n\\(d\\)\n桁目まで決めたとき、桁和が\n\\(i\\)\nで、\n\\(\\text{mod }s\\)\nが\n\\(j\\)\nで、\n\\(f=0\\)\nならば\n\\(N\\)\n未満、\n\\(f=1\\)\nならば\n\\(N\\)\nと一致しているような整数の個数)\nとおいて桁 DP を行うと、\n\\(d + 1\\)\n桁目を\n\\(t\\)\nとした時に\n\\[dp[d + 1][i + t][(10 j + t) \\bmod s][(大小関係に関する情報)] \\text{ += } dp[d][i][j][f]\\]\nという渡す DP 型の遷移に基づいて答えを計算できます。(実装例も参考にしてください)\n計算量は\n\\(B = 10\\)\nとして全体で\n\\(\\mathrm{O}((B \\log N)^4)\\)\nです。(ここでの\n\\(\\log N\\)\nは\n\\(N\\)\nの桁数の意味なので底は\n\\(10\\)\nで、\n\\((B \\log_{10} N)^4 \\leq (140)^4 \\simeq 3.8 \\times 10^8\\)\nとなります。通常より数値が大きいですが、実行時間制限が\n\\(10\\)\n秒と緩めに設定されているため、適切に実装できれば時間内に収まる程度に高速に動作します。)\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\n#define rep(i, n) for (int i = 0; i < int(n); i++)\n\nint main() {\n  string N;\n  cin >> N;\n  long long ans = 0;\n  for (int s = 1; s <= 9 * 14; s++) {\n    vector dp(N.size() + 1, vector(s + 1, vector(s, vector(2, 0LL))));\n    dp[0][0][0][1] = 1;\n    rep(d, N.size()) rep(i, s + 1) rep(j, s) rep(f, 2) rep(t, 10) {\n      if (i + t > s) continue;\n      if (f and N[d] - '0' < t) continue;\n      dp[d + 1][i + t][(j * 10 + t) % s][f and N[d] - '0' == t] += dp[d][i][j][f];\n    }\n    ans += dp[N.size()][s][0][0] + dp[N.size()][s][0][1];\n  }\n  cout << ans << endl;\n}"
+      ],
+      "text_sha256": "bf57ea4d7f613384db8401858828036070e7ad2dc2684f20fedcfc3fc76cb50b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc336/abc336_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc336/editorial/9094",
+      "text": "公式解説は上の桁から決めていく桁 DP で、本問の場合はおそらくそちらのほうが楽だと思います。下の桁から決めていく考え方でも解くことができるので、解説します。\n[1]  下の桁から決めていく桁 DP\n\\(f(n, s, r, m) := n\\)\n以下の非負整数のうち、桁和が\n\\(s\\)\nであり、\n\\(m\\)\nで割ったあまりが\n\\(r\\)\nであるものの個数\nと定めます。答えは\n\\(\\displaystyle \\sum_{s = 1}^{9 \\times 14} f(N, s, 0, s)\\)\nです。\n\\(f(n, s, r, m)\\)\nを（メモ化再帰を利用した）DP で求めましょう。\n一番下の桁\n\\(d\\)\nを\n\\(10\\)\n通り試します。このとき、\n\\(v = 10v' + d \\: (0 \\leq d \\leq 9)\\)\nについて、\n\\(v\\)\nが\n\\(n\\)\n以下で、桁和が\n\\(s\\)\nで、\n\\(m\\)\nで割ったあまりが\n\\(r\\)\nである\nという条件を、\n\\(v'\\)\nが\n\\(n'\\)\n以下で、桁和が\n\\(s'\\)\nで、\n\\(m'\\)\nで割ったあまりが\n\\(r'\\)\nである\nという条件に変換できれば、DP の遷移が\n\\[f(n, s, r, m) \\ \\text{+=} \\ f(n', s', r', m')\\]\nと書けます。\n[2]\n\\(n', s'\\)\nを求める\n\\[\n\\begin{aligned}\nn' &= \\begin{cases} \n\\left\\lfloor \\frac{n}{10} \\right\\rfloor & \\text{if} \\ d \\leq (n \\bmod 10) \\\\\n\\left\\lfloor \\frac{n}{10} \\right\\rfloor - 1 & \\text{if} \\ d > (n \\bmod 10)\n\\end{cases} \\\\\n\n\\displaystyle s' &= s - d\n\\end{aligned}\n\\]\nとなります。\n[3]\n\\(r', m'\\)\nを求める\n\\(r', m'\\)\nを求めることは、\n\\[10v' \\equiv r - d \\pmod m \\tag{*}\\]\nを\n\\(v'\\)\nについて解く、つまり\n\\[v' \\equiv r' \\pmod {m'}\\]\nの形で表すことです。\nこれは、extgcd（拡張ユークリッドの互除法）と呼ばれるアルゴリズムで求めることができます。下の実装例では、ACL の\ninternal::inv_gcd\nを利用しています。\ninv_gcd(a, b)\nは、\n\\(g = \\gcd(a, b)\\)\n\\(ax \\equiv g \\pmod b, 0 \\leq x < \\dfrac{b}{g}\\)\nを満たす\n\\((g, x)\\)\nのペアを返すものです。\n\\((g, x) = \\mathrm{inv\\_gcd}(10, m)\\)\nとすると、\n\\(r - d\\)\nが\n\\(g\\)\nの倍数でないとき、\n\\((*)\\)\nは解なし\n\\(r - d\\)\nが\n\\(g\\)\nの倍数であるとき、\n\\((*)\\)\nの解は\n\\(\\displaystyle v' \\equiv \\frac{r - d}{g} \\cdot x \\: \\left( \\bmod \\ \\frac{m}{g} \\right)\\)\nとなります。\n[4] 計算量\n計算途中の\n\\(n\\)\nの値としてありうるのは、\n\\(N\\)\nを\n\\(10\\)\nで割っていったものと、（\n\\(-1\\)\nされたことにより現れる）その近辺しかないので、\n\\(O(\\log N)\\)\n個程度です。よって、\n\\(s\\)\nの上限を\n\\(S \\: (= 126)\\)\nとすると、状態数は\n\\(O(S^3 \\log N)\\)\nです。\n\\(B = 10\\)\nとして\n\\(S = O(B \\log N)\\)\nで、遷移が\n\\(B\\)\n通りあるので、計算量は（メモ化や extgcd の部分を無視すれば）\n\\(O((B \\log N)^4)\\)\nです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n#include <atcoder/internal_math>\nusing namespace atcoder;\n\n// f(n, s, r, m) := n 以下で、桁和が s で、m で割って r あまるものの個数\nmap<ll, ll> mem[130][130][130];  // mem[s][r][m][n] にメモ\nll f(ll n, int s, int r, int m)\n{\n  if (n == 0)\n    return s == 0 && r == 0;\n  if (mem[s][r][m].contains(n))\n    return mem[s][r][m][n];\n  ll res = 0;\n  for (int d = 0; d < 10; d++)\n  {\n    ll nn = n / 10 - (d > n % 10);\n    int ns = s - d;\n    if (nn < 0 || ns < 0)\n      continue;\n    auto [g, x] = internal::inv_gcd(10, m);\n    if ((r - d) % g != 0)\n      continue;\n    int nm = m / g;\n    int nr = (((r - d) / g * x) % nm + nm) % nm;\n    res += f(nn, ns, nr, nm);\n  }\n  mem[s][r][m][n] = res;\n  return res;\n}\n\nint main()\n{\n  ll N;\n  cin >> N;\n  ll ans = 0;\n  for (int s = 1; s <= 126; s++)\n  {\n    ans += f(N, s, 0, s);\n  }\n  cout << ans << endl;\n}"
+      ],
+      "text_sha256": "626e06d53d72f15e3d82ac9e5546bb49c07b5a74c9ed84bdf31e643789826827",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc336/abc336_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc336/editorial/9126",
+      "text": "下から桁DPする場合の別解です。まずすべての数字にleading zero を加えることで15桁に固定して考えることにします。\n\\(N\\)\nについてもleading zeroを加え15桁にしたものとして考えます。また\n\\(N=n_{15}n_{14}n_{13}...n_2n_1\\)\nと置きます。\nつぎに\n\\(dp_{d,s, i,j,f}\\)\nを\n\\(dp_{d,s,i,j,f}:=\\)\n(下から\n\\(d\\)\n桁目まで決めたとき、予定している桁和が\n\\(s\\)\n、現在の桁和が\n\\(i\\)\n、現在の値の\n\\(\\mod s\\)\nが\n\\(j\\)\n、\n\\(f=0\\)\nなら\n\\(n_d...n_1\\)\n以下、\n\\(f=1\\)\nなら\n\\(n_d...n_1\\)\nより大きい)\nとします。このとき答えは、すべての数字をleading zeroで補ったことに注意すると\n\\[ \\sum_{s=1}^{s=9\\times 14} dp_{15,s,s,0,0}\\]\nとなります。\n遷移を考えます。\n\\(d+1\\)\n桁目を\n\\(t\\)\nとしたときの新たな大小関係を\n\\(nf\\)\nとします。また\n\\(N\\)\nの\n\\(d+1\\)\n桁目を\n\\(n_{d+1}\\)\nとします。このとき\n\\(nf\\)\nは場合分けによって決定することもできますが、式にすると\n\\[\nnf=2 \\times n_{d+1}< 2 \\times t + f\n\\]\nとなります。\nよって\n\\(dp_{d,s,i,j,f}\\)\nからの遷移は\n\\[dp[d+1][s][i+t][(10 ^ {d+1}\\times t+j) \\mod s][nf]+=dp[d][s][i][j][f]\\]\nとなります。計算量は公式解説と同じで、\n\\(B=10\\)\nとして全体で\n\\(\\Omicron((B \\log N)^4)\\)\nです。\n実際の提出",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n#define ll long long\n\nll N, dp[16][130][130][130][2];\nint main() {\n    cin >> N;\n    // 初期化\n    for (int s = 1; s <= 9 * 14; s++) dp[0][s][0][0][0] = 1;\n\n    // 遷移\n    ll pow10 = 1;\n    for (int d = 0; d < 15; d ++) {\n        int n = N % 10;\n        for (int s = 1; s <= 9 * 14; s++) {\n            for (int i = 0; i <= 9 * 14; i++) {\n                for (int j = 0; j < s; j++) {\n                    for (int f = 0; f < 2; f++) {\n                        for (int t = 0; t < 10; t++) {\n                            if (i + t > s) break;\n                            int nf = 2 * n < 2 * t + f;\n                            dp[d + 1][s][i + t][(pow10 * t + j) % s][nf] += dp[d][s][i][j][f];\n                        }\n                    }\n                }\n            }\n        }\n        N /= 10;\n        pow10 *= 10;\n    }\n\n    // 答えの計算\n    ll ans = 0;\n    for (int s = 1; s <= 9 * 14; s++) ans += dp[15][s][s][0][0];\n    cout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "667b11acf7186be48c65d61d60f1237d382db3ce1b59c4f8a853b10caca32af5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc336/abc336_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc175_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc175/editorial/51",
+      "text": "そもそも天気の組合せは、\n\\(1,2,3\\)\n日目がそれぞれ晴れ、雨かどうかで\n\\(2^3=8\\)\n通りしかないので、\n\\(8\\)\n通りの場合分けを書けば正答することができます。\n例えば\n\\(3\\)\n日より長い場合の解法など繋がるような場合分けをすると、\n\\(3\\)\n日連続しているかどうか\n\\(2\\)\n日連続しているかどうか\n\\(1\\)\n日連続しているかどうか\nそれ以外(\n\\(0\\)\n日)\nの順にチェックしていくと正しく判定することができ、場合分けも間違えにくいと思います。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n    string S;\n    cin >> S;\n    bool p = S[0] == 'R';\n    bool q = S[1] == 'R';\n    bool r = S[2] == 'R';\n    if (p and q and r) {\n        cout << 3 << endl;\n    } else if ((p and q) or (q and r)) {\n        cout << 2 << endl;\n    } else if (p or q or r) {\n        cout << 1 << endl;\n    } else {\n        cout << 0 << endl;\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "7f4bd92fb9fffbe7fa49d5a86cedc08eca818dd007ce3fd74433a83bc3f49549",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc175/abc175_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc474_c",
+  "title": "Remove and Append",
+  "contests": [
+    {
+      "contest_id": "abc474",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 243,
+  "raw_difficulty": 200,
+  "contest_id": "abc474",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc474/tasks/abc474_c",
+  "statement": "配点 : 300 点 問題文 (1,2,\\dots,N) の順列 P=(P_1,P_2,\\dots,P_N) が与えられます。 q=1,2,\\dots,Q の順に、以下の操作を行います。 P から値が a_q である要素を削除し、それを P の末尾に追加する。 Q 個の操作を行った後の P の各要素の値を求めてください。 制約 1 \\leq N \\leq 2 \\times 10^5 1 \\leq Q \\leq 2 \\times 10^5 (P_1,P_2,\\dots,P_N) は (1,2,\\dots,N) の順列 1 \\leq a_q \\leq N 入力される値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N Q P_1 P_2 \\ldots P_N a_1 a_2 \\vdots a_Q 出力 Q 個の操作を行った後の P_1,P_2,\\dots,P_N をこの順に空白区切りで 1 行で出力せよ。 入力例 1 4 2\n2 4 3 1\n3\n2 出力例 1 4 1 3 2 最初、 P=(2,4,3,1) です。 1 回目の操作を行うと、 P=(2,4,1,3) となります。 2 回目の操作を行うと、 P=(4,1,3,2) となります。 入力例 2 3 3\n1 2 3\n1\n1\n1 出力例 2 2 3 1 入力例 3 2 5\n2 1\n1\n1\n2\n2\n1 出力例 3 2 1",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 (1,2,\\dots,N) の順列 P=(P_1,P_2,\\dots,P_N) が与えられます。 q=1,2,\\dots,Q の順に、以下の操作を行います。 P から値が a_q である要素を削除し、それを P の末尾に追加する。 Q 個の操作を行った後の P の各要素の値を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2 \\times 10^5 1 \\leq Q \\leq 2 \\times 10^5 (P_1,P_2,\\dots,P_N) は (1,2,\\dots,N) の順列 1 \\leq a_q \\leq N 入力される値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q P_1 P_2 \\ldots P_N a_1 a_2 \\vdots a_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 個の操作を行った後の P_1,P_2,\\dots,P_N をこの順に空白区切りで 1 行で出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 2\n2 4 3 1\n3\n2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 1 3 2 最初、 P=(2,4,3,1) です。 1 回目の操作を行うと、 P=(2,4,1,3) となります。 2 回目の操作を行うと、 P=(4,1,3,2) となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 3\n1 2 3\n1\n1\n1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 2 3 1"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 2 5\n2 1\n1\n1\n2\n2\n1"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 2 1"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc474/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:42:02.893008+00:00",
+  "statement_sha256": "3b5bc1504dab711e7d30ddd171912f60f5d758264554886ccbaef5ff2bcdb90f",
+  "editorials": []
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc184_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc184/editorial/354",
+      "text": "この問題は、部分和問題の上位互換であるため NP 困難であることが分かります。\n\\(N \\le 40\\)\nと\n\\(N\\)\nの値が非常に小さいことに注目しましょう。\n解く問題を全探索すると、\n\\(O(2^N)\\)\n時間になって TLE してしまいます。\nそこで、半分全列挙というテクニックを使います。\n数列\n\\(A\\)\nを要素数が半分になるように 2 つに分けます。これを\n\\(B\\)\nと\n\\(C\\)\nとします。\n\\(B\\)\nからいくつか選んだときの総和としてありえる値を全て列挙し、ソートしておきます。これを\n\\(D\\)\nとします。これにかかる計算量は\n\\(O(N2^{N/2})\\)\n時間です。\n\\(C\\)\nからいくつか選ぶ選び方を全探索し、\n\\(B\\)\nと合わせて最大値を求めます。 このとき、最適な\n\\(B\\)\nの要素の選び方は\n\\(D\\)\nを二分探索することで求めることができます。これにかかる計算量は\n\\(O(N2^{N/2})\\)\n時間です。\nこれで、全体で\n\\(O(N2^{N/2})\\)\n時間でこの問題を解くことができます。\n回答例 (C++) :\nhttps://atcoder.jp/contests/abc184/submissions/18301274\n回答例 (Python) :\nhttps://atcoder.jp/contests/abc184/submissions/18300926\nそれぞれのステップを工夫すると\n\\(O(2^{N/2})\\)\n時間で解くこともできます。\n\\(B_1, B_2, \\dots, B_i\\)\nからいくつか選んだときの総和としてありえる値を全て列挙し、ソートしたものを\n\\(D_i\\)\nとします。\n\\(D_0 = [0]\\)\nです。\n\\(D_x\\)\nは\n\\(D_{x-1}\\)\nと、「\n\\(D_{x-1}\\)\nの全ての要素に\n\\(B_x\\)\nを足したもの」をマージすることで求めることができます。\n\\(|D_0| + |D_1|+|D_2|+\\dots+|D_x| ≤ 1 + 2 + 4 + \\dots + 2^x = O(2^x)\\)\nであるため、\n\\(D_{N/2}\\)\nは\n\\(O(2^{N/2})\\)\n時間で求めることができます。\n\\(B\\)\nからいくつか選んだときの総和としてありえる値を全て列挙し、\n\\(C\\)\nからもいくつか選んだときの総和としてありえる値を全て列挙し、それらをしゃくとり法で合わせることで、全体で\n\\(O(2^{N/2})\\)\n時間でこの問題を解くことができます。\n回答例 (C++) :\nhttps://atcoder.jp/contests/abc184/submissions/18301551\n回答例 (Python) :\nhttps://atcoder.jp/contests/abc184/submissions/18301408",
+      "codes": [],
+      "text_sha256": "17426fac383d7adb7bd2c6f53bae54a03e2807bf16c57d7ff25a577502fdf4bb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc184/abc184_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc428_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc428/editorial/14244",
+      "text": "実装方針\nこの問題では連想配列 (C++ の\nstd::map\nや python の dictionary など) と呼ばれるデータ構造が有用です．\n連想配列では整数に限らない好きな値を添字として使うことができ，添字の追加・削除，特定の添字に対応する値の取得・変更などといった操作が高速に(サイズに対する対数時間などで)行えます．\n本問題では，文字列を添字とする連想配列\n\\(memo\\)\nをもち，添字\n\\(t\\)\nに対応する値\n\\(memo[t]\\)\nとして\n\\(s\\)\nの出現回数を保持することを考えます．具体的なアルゴリズムは以下のように書けます．\n整数\n\\(i = 1, \\dots, N-K+1\\)\nに対して，以下の処理を行う．\n\\(S\\)\nの\n\\(i\\)\n文字目から\n\\(i+K-1\\)\n文字目までからなる部分文字列を取得し，\n\\(t\\)\nとおく．\n\\(memo[t]\\)\nの値を\n\\(1\\)\n増加させる．\n\\(memo\\)\nが完成した後で，出現回数\n\\(memo[t]\\)\nの最大値\n\\(ans\\)\nを求めることを考えます．これは，初期値\n\\(ans = 0\\)\nとして，以下の処理をすべての添字\n\\(t\\)\nに対して行うことで得られます．\n\\(memo[t]\\)\nが\n\\(ans\\)\nよりも大きい場合，\n\\(ans\\)\nの値を\n\\(memo[t]\\)\nで上書きする．\nその後，再度すべての添字\n\\(t\\)\nに対して以下の処理を行えば，出現回数が\n\\(ans\\)\nに一致する文字列を列挙することができます．\n\\(memo[t]\\)\nが\n\\(ans\\)\nと一致する場合，\n\\(t\\)\nを答えに追加する．\n実装例 (C++)\nC++ の\nstd::map\nは内部的に要素を狭義の弱順序にしたがってソートします(\nリファレンス\n)．また，C++ において文字列の比較は辞書順比較による順序がデフォルトとなっています．for 構文によってその順序に沿って要素を列挙することができ，これを利用することで実装が簡便になります．",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::min;\nusing std::max;\n#include <vector>\nusing std::vector;\n#include <string>\nusing std::string;\n#include <map>\nusing std::map;\n\n\nint main (void) {\n\t// input\n\tint n, k;\n\tstring s;\n\tcin >> n >> k;\n\tcin >> s;\n\n\t// make a dictionary: memo[t] := #appearance of t\n\tmap<string, int> memo;\n\tfor (int i = 0; i < n-k+1; i++) {\n\t\tstring t = s.substr(i, k);\n\t\tmemo[t] += 1;\n\t}\n\t// find max appearance\n\tint vmax = 0;\n\tfor (auto &[key, val] : memo) {\n\t\tvmax = max(vmax, val);\n\t}\n\t// list all t with max appearance (for-map lists all keys in lexicographical order)\n\tvector<string> vs;\n\tfor (auto &[key, val] : memo) {\n\t\tif (val == vmax) vs.push_back(key);\n\t}\n\n\t// output\n\tcout << vmax << \"\\n\";\n\tfor (int i = 0; i < vs.size(); i++) {\n\t\tif (i > 0) cout << \" \";\n\t\tcout << vs[i];\n\t}\n\tcout << \"\\n\";\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "76831616665dace40d1e13529a91f9606aa0bb2259747e5b1ea88101d1143fc3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc428/abc428_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

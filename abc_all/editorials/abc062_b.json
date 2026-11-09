@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc062_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc074/editorial.pdf",
+      "text": "B: Picture Frame\n\n 最初に，縦H + 2 行，横W + 2 列の文字配列b を用意し，# で埋めておきます．次に，各1 ≤i ≤H,\n1 ≤j ≤W ごとにai,j をbi+1,j+1 へコピーします．最後に，配列b の内容を出力すればよいです．\n\n ちなみに，迷路などが入力として与えられたとき，この問題のようにあらかじめ外壁で囲んでおくと，その\n\n後の実装が簡単になることがあります．\n\n                            C++ のコード例\n\nchar a[100][101] , b[102][102];\n\n\nint main () {\n\n         int H, W; cin >> H >> W;\n\n         for (int i = 0; i < H; i++)\n\n                 scanf (\"%s\", a[i]);\n\n\n\n                                             1\n\f\n         for (int i = 0; i < H + 2; i++)\n\n                  for (int j = 0; j < W + 2; j++)\n\n                         b[i][j] = ’#’;\n\n\n         for (int i = 0; i < H; i++)\n\n                  for (int j = 0; j < W; j++)\n\n                         b[i + 1][j + 1] = a[i][j];\n\n\n         for (int i = 0; i < H + 2; i++) {\n\n                  for (int j = 0; j < W + 2; j++)\n\n                          cout << b[i][j];\n\n                 cout << endl;\n\n          }\n\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "fe3ed8237d3f80953253df484e8afe809dd5a0c2e97045a7a2fd373d840d281f"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc444_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc444/editorial/15689",
+      "text": "原案：kyopro_friends\n\\(1\\)\nから\n\\(N\\)\nまでの数それぞれについて、実際に桁和を計算することで問題を解くことができます。桁和を計算する処理を関数として分けて実装するとわかりやすくなります。\n桁和を計算する方法は「文字列に変換して1文字ずつ確かめる」が直感的でしょう。他にも「\n\\(10\\)\nで割りながら\n\\(1\\)\nの位を調べる」という方法もあります。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint digitsum(int x){\n  string s=to_string(x);\n  int ans=0;\n  for(char c:s)ans+=c-'0';\n  return ans;\n}\n\nint main(){\n  int n,k;\n  cin >> n >> k;\n\n  int ans=0;\n  for(int i=1;i<=n;i++)if(digitsum(i)==k)ans++;\n\n  cout << ans << endl;\n}",
+        "def digitsum(x):\n  s=str(x)\n  ans=0\n  for c in s:\n    ans+=int(c)\n  return ans\n\nn,k=map(int,input().split())\nans=0\nfor i in range(1,n+1):\n  if digitsum(i)==k:\n    ans+=1\n\nprint(ans)"
+      ],
+      "text_sha256": "d10ee8170c884a76a58a4d85fa828a0e5b915c3570b2ffe4ae64dd24a57592e5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc444/abc444_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

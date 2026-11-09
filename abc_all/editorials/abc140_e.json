@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc140_e",
+  "editorials": [
+    {
+      "text": "E: Second Sum writer: beet\nP の各要素について、Pi = XL,R となるような組(L, R) の個数をCi とすると、\nN−1\n∑\nL=1\nN\n∑\nR=L+1\nXL,R =\nN\n∑\ni=1\nPi × Ci\nとなります。また、Pi = XL,R となる組(L, R) について、P が順列であることから、L ≤i ≤R を\n満たします。以降、Ci を求めます。\n集合Si = {j|j < i, Pi < Pj}, Ti = {j|j > i, Pi < Pj} を考えます。Si の中で二番目に大きい要素\nをwi、最大の要素をxi とし、Ti の中で最小の要素をyi、二番目に小さい要素をzi とします。Si, Ti\nはインデックスの集合であることに注意してください。このとき、wi < xi < i < yi < zi です。\nPi = XL,R となるのは、wi < L ≤xi < i ≤R < yi < zi のときと、wi < xi ≤L < i < yi ≤R < zi\nのときに限られることがわかります。したがって、Ci = (xi −wi) × (yi −i) + (i −xi) × (zi −yi)\nとなります。\nP の要素を大きい順番に見ていくことにすると、ある時点までに見た全ての要素は、その時点で\n見ている要素より大きい要素になっています。したがって、順序集合を扱うデータ構造(C++ にお\nけるset, multiset など) を用いてインデックスの集合を管理することで、wi, xi, yi, zi は各i に対し\nO(log N) で求めることができます。また番兵としてSi に0 を二つ、Ti にN + 1 を二ついれておく\nと、境界条件を簡潔に実装することができます。全体の計算量はO(N log N) です。\n",
+      "text_sha256": "50a95c859a88634c8fb773e177817ad98638ab376489d8fffa2f29ffe949338d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc140/abc140_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

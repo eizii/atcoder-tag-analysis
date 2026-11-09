@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc314_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc314/editorial/6936",
+      "text": "全体に対する操作を別に考え、個別の文字に対する操作を管理するときに同時に「最後に変更されたのはいつか」を管理することでこの問題を解くことができます。\n全体に対する操作も「最後の操作がいつか」と「最後の操作が何か」を持っていれば十分です。\n最終的に、個別の最終変更が全体の最終変更より後の場合はそのまま、そうでないなら全体の最後の操作を適用したものを出力すればよいです。\n計算量は \\(O(N+Q)\\) 時間です。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <string>\n#include <iostream>\n#include <vector>\n#include <utility>\n#include <optional>\n\nint main() {\n    using namespace std;\n\n    int N;\n    string S;\n    cin >> N >> S;\n\n    vector<pair<int, char>> status(N); // 個別の操作 (最終変更時間, 現在の文字)\n    for (int i = 0; i < N; ++i)\n        status[i] = {0, S[i]}; // はじめは時刻 0\n\n    int Q;\n    cin >> Q;\n\n    optional<pair<int, int>> fill = nullopt; // 全体に対する操作 (最終変更時間, 最後の変更のタイプ)\n    for (int i = 0; i < Q; ++i) { // 時刻 i の操作\n        int t, x;\n        char c;\n        cin >> t >> x >> c;\n        if (t == 1) // 個別の操作\n            status[x - 1] = {i, c};\n        else // 全体の操作\n            fill = {i, t};\n    }\n\n    for (const auto&[time, c] : status)\n        if (!fill || time >= fill->first) // 全体に対する操作がないか、最終更新時間がそれより後なら\n            cout << c; // そのまま出力\n        else if (fill->second == 2) // そうでなければ全体操作の種類に応じて\n            cout << static_cast<char>(tolower(c)); // 小文字に\n        else\n            cout << static_cast<char>(toupper(c)); // 大文字に\n\n    cout << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "de230eb8f3093779e602dc76ad4ae8de977c105fc8c58a42b4f442b4537666d1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc314/abc314_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc314/editorial/6945",
+      "text": "\\(t\\neq1\\)\nのクエリのうち、意味のあるものは最後のクエリに限ります。\nそこで、クエリを先読みして\n\\(t\\neq 1\\)\nの最後のクエリのindexを求めておき、それ以外の\n\\(t\\neq 1\\)\nのクエリは無視しながらそのままシミュレーションすると\n\\(O(N+Q)\\)\nで解けます。",
+      "codes": [
+        "input()\nS=list(input())\nQ=int(input())\nquery=[input().split() for _ in range(Q)]\nlast=-1\nfor i,(t,_,_) in enumerate(query):\n  if t=='2' or t=='3': last=i\n\nfor i,(t,x,c) in enumerate(query):\n  if t=='1':\n    S[int(x)-1]=c\n  elif t=='2':\n    if i==last:\n      S=list(\"\".join(S).lower())\n  else:\n    if i==last:\n      S=list(\"\".join(S).upper())\n\nprint(\"\".join(S))"
+      ],
+      "text_sha256": "002e54f38006c3a0e574a27b8372a3af41b85e6094e84b105f4e285b4bed1f0e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc314/abc314_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc314/editorial/6971",
+      "text": "ややジョーク気味ですが、\n遅延セグメントツリー\nを使って文字列内の各区間の大文字・小文字の個数を管理しても解くことができます。（各文字が A, B, …, Z のいずれであるかは素直に更新します。）\n実装例 (C++)",
+      "codes": [],
+      "text_sha256": "4286f06428cf10bd3b2a6839a23c24a0a88f3c6fa3a23f82d9e54ede4a15f816",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc314/abc314_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

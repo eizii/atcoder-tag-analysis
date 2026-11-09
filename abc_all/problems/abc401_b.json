@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc401_b",
+  "title": "Unauthorized",
+  "contests": [
+    {
+      "contest_id": "abc401",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 20,
+  "raw_difficulty": -807,
+  "contest_id": "abc401",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc401/tasks/abc401_b",
+  "statement": "配点 : 200 点 問題文 ある日、高橋くんはあるウェブサイトに対して N 回の操作を行いました。 i 回目 (1\\leq i\\leq N) の操作は文字列 S _ i で表され、次の 4 つのうちいずれかです。 S _ i= login である。高橋くんはログイン操作を行い、高橋くんがウェブサイトにログインした状態になる。 S _ i= logout である。高橋くんはログアウト操作を行い、高橋くんがウェブサイトにログインしていない状態になる。 S _ i= public である。高橋くんはウェブサイトの公開ページにアクセスする。 S _ i= private である。高橋くんはウェブサイトの非公開ページにアクセスする。 高橋くんがログインしていない状態で非公開ページにアクセスした時、またその時に限り、ウェブサイトは 認証エラー を返します。 ログインした状態でさらにログイン操作をしたり、ログインしていない状態でさらにログアウト操作をしてもエラーにはなりません。\r\nまた、認証エラーが返されたあとも、高橋くんは操作を続けることができます。 はじめ、高橋くんはログインしていない状態です。 N 回の操作のうち、高橋くんが認証エラーを受け取った回数を出力してください。 制約 1\\leq N\\leq100 N は整数 S _ i は login , logout , public , private のいずれか (1\\leq i\\leq N) 入力 入力は以下の形式で標準入力から与えられる。 N S _ 1 S _ 2 \\vdots S _ N 出力 高橋くんが認証エラーを受け取った回数を出力せよ。 入力例 1 6\r\nlogin\r\nprivate\r\npublic\r\nlogout\r\nprivate\r\npublic 出力例 1 1 高橋くんが行うそれぞれの操作の結果は以下のようになります。 高橋くんがウェブサイトにログインした状態になる。 高橋くんは非公開ページにアクセスする。高橋くんは現在ログインしているので、エラーは返されない。 高橋くんは公開ページにアクセスする。 高橋くんがウェブサイトにログインしていない状態になる。 高橋くんは非公開ページにアクセスする。高橋くんは現在ログインしていないので、認証エラーが返される。 高橋くんは公開ページにアクセスする。 高橋くんが認証エラーを受け取るのは 5 回目の操作のみなので、 1 を出力してください。 入力例 2 4\r\nprivate\r\nprivate\r\nprivate\r\nlogout 出力例 2 3 連続で非公開ページにアクセスしようとした場合、操作のたびに認証エラーを受け取ります。 ログインしていない状態からさらにログアウト操作をした場合には認証エラーは返されないことに注意してください。 入力例 3 20\r\nprivate\r\nlogin\r\nprivate\r\nlogout\r\npublic\r\nlogout\r\nlogout\r\nlogout\r\nlogout\r\nprivate\r\nlogin\r\nlogin\r\nprivate\r\nlogin\r\nprivate\r\nlogin\r\npublic\r\nprivate\r\nlogout\r\nprivate 出力例 3 3",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 ある日、高橋くんはあるウェブサイトに対して N 回の操作を行いました。 i 回目 (1\\leq i\\leq N) の操作は文字列 S _ i で表され、次の 4 つのうちいずれかです。 S _ i= login である。高橋くんはログイン操作を行い、高橋くんがウェブサイトにログインした状態になる。 S _ i= logout である。高橋くんはログアウト操作を行い、高橋くんがウェブサイトにログインしていない状態になる。 S _ i= public である。高橋くんはウェブサイトの公開ページにアクセスする。 S _ i= private である。高橋くんはウェブサイトの非公開ページにアクセスする。 高橋くんがログインしていない状態で非公開ページにアクセスした時、またその時に限り、ウェブサイトは 認証エラー を返します。 ログインした状態でさらにログイン操作をしたり、ログインしていない状態でさらにログアウト操作をしてもエラーにはなりません。\r\nまた、認証エラーが返されたあとも、高橋くんは操作を続けることができます。 はじめ、高橋くんはログインしていない状態です。 N 回の操作のうち、高橋くんが認証エラーを受け取った回数を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N\\leq100 N は整数 S _ i は login , logout , public , private のいずれか (1\\leq i\\leq N)"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S _ 1 S _ 2 \\vdots S _ N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 高橋くんが認証エラーを受け取った回数を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 6\r\nlogin\r\nprivate\r\npublic\r\nlogout\r\nprivate\r\npublic"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1 高橋くんが行うそれぞれの操作の結果は以下のようになります。 高橋くんがウェブサイトにログインした状態になる。 高橋くんは非公開ページにアクセスする。高橋くんは現在ログインしているので、エラーは返されない。 高橋くんは公開ページにアクセスする。 高橋くんがウェブサイトにログインしていない状態になる。 高橋くんは非公開ページにアクセスする。高橋くんは現在ログインしていないので、認証エラーが返される。 高橋くんは公開ページにアクセスする。 高橋くんが認証エラーを受け取るのは 5 回目の操作のみなので、 1 を出力してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4\r\nprivate\r\nprivate\r\nprivate\r\nlogout"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 3 連続で非公開ページにアクセスしようとした場合、操作のたびに認証エラーを受け取ります。 ログインしていない状態からさらにログアウト操作をした場合には認証エラーは返されないことに注意してください。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 20\r\nprivate\r\nlogin\r\nprivate\r\nlogout\r\npublic\r\nlogout\r\nlogout\r\nlogout\r\nlogout\r\nprivate\r\nlogin\r\nlogin\r\nprivate\r\nlogin\r\nprivate\r\nlogin\r\npublic\r\nprivate\r\nlogout\r\nprivate"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 3"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc401/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:31.240696+00:00",
+  "statement_sha256": "a875d6095a4d01a3a4fe6f9ca0601c13b3628f6aff3faec8aa86894d32b9afce",
+  "editorials": []
+}

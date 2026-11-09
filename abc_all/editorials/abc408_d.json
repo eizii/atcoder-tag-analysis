@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc408_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc408/editorial/13166",
+      "text": "\\(A_i=(S_1,S_2,\\ldots,S_i\\)\nの中の\n0\nの個数\n\\()\\)\n、\n\\(B_i=(S_1,S_2,\\ldots,S_i\\)\nの中の\n1\nの個数\n\\()\\)\nとします。(ただし、\n\\(A_0=B_0=0\\)\nとする)\nある整数の組\n\\((l,r)\\)\n\\((1 \\leq l \\leq r \\leq N+1)\\)\nについて、\n\\(1 \\leq i \\leq N\\)\nを満たす整数\n\\(i\\)\nに対し、\n\\(S_i=\\)\n1\nと\n\\(l \\leq i < r\\)\nは同値である状態にするために必要な操作回数が何回かを考えます。\nまず、\n\\(l \\leq i <r\\)\nを満たす\n\\(i\\)\n\\((1 \\leq i \\leq N)\\)\nのうち\n\\(S_i=\\)\n0\nであるものの個数分の操作回数は必要です。これは\n\\(A_{r-1}-A_{l-1}\\)\nです。さらに\n\\(i<l\\)\nもしくは\n\\(r \\leq i\\)\nを満たす\n\\(i\\)\n\\((1 \\leq i \\leq N)\\)\nのうち\n\\(S_i=\\)\n1\nであるものの個数分の操作回数も必要です。これは\n\\(B_N-(B_{r-1}-B_{l-1})\\)\nです。\n逆に、\n\\(B_N+A_{r-1}-B_{r-1}-A_{l-1}+B_{l-1}\\)\n回の操作で十分であることがわかります。\nつまり、あり得るすべての整数の組\n\\((l,r)\\)\n\\((1 \\leq l \\leq r \\leq N+1)\\)\nについて\n\\(A_{r-1}-B_{r-1}-A_{l-1}+B_{l-1}\\)\nの最小値が求まれば答えも求まります。\n\\(C_i=A_i-B_i\\)\nとすると操作回数は\n\\(C_{r-1}-C_{l-1}\\)\nになります。数列\n\\(C\\)\nに対する\n\\(C_{r-1}-C_{l-1}\\)\nの最小値は\n\\(\\displaystyle \\min_{1 \\leq l \\leq r \\leq N+1} C_{r-1}-C_{l-1}=\\min_{1 \\leq r \\leq N+1} (C_{r-1}-\\max_{1 \\leq l \\leq r}C_{l-1})\\)\nと表せることから、\n\\(r=1,2,\\ldots,N+1\\)\nの順で暫定の\n\\(C\\)\nの最大値を保持していくことで時間計算量\n\\(\\mathrm{O}(N)\\)\nで計算することができます。\nよって、この問題全体でも時間計算量\n\\(\\mathrm{O}(N)\\)\nで解くことができます。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nvoid solve() {\n    int n;\n    cin >> n;\n    string s;\n    cin >> s;\n    vector<int> c(n + 1);\n    for (int i = 0; i < n; ++i) {\n        c[i + 1] = c[i] + (s[i] == '0' ? 1 : -1);\n    }\n    int sum = count(s.begin(), s.end(), '1');\n    int ma = 0;\n    int res = 0;\n    for (int i = 0; i <= n; ++i) {\n        res = min(res, c[i] - ma);\n        ma = max(ma, c[i]);\n    }\n    cout << sum + res << endl;\n}\nint main() {\n    int t;\n    cin >> t;\n    while (t--) {\n        solve();\n    }\n}"
+      ],
+      "text_sha256": "0771ecb39d298d503c7d399cdffc3d4d38d11d6ea638a47a687b45c9204aa2c9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc408/abc408_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc408/editorial/13174",
+      "text": "目標が達成されているとき，最終的な\n\\(S\\)\nの形は，(\n0\nが\n\\(0\\)\n個以上)(\n1\nが\n\\(0\\)\n個以上)(\n0\nが\n\\(0\\)\n個以上) という，\n\\(3\\)\nつの状態からなる形で必ず書き表されます．\nしたがって，次のような DP を考えることで解けます．\n\\(\\mathrm{dp}[i][j] = \\)\n(\n\\(S\\)\nの\n\\(i\\)\n文字目までを書き換えて目標を達成する際，最後の文字が\n\\(j\\)\n番目の状態に属しているとしたとき，書き換える必要のある文字数の最小値)\n遷移を考えます．今見ている文字が属している状態の文字と同じであれば書き換える必要はなく，逆に異なれば書き換える必要があることを考えると，\n\\(\\mathrm{dp}[i][0] \\leftarrow \\mathrm{min}(\\mathrm{dp}[i][0], \\mathrm{dp}[i - 1][0] + \\mathrm{isdif}(S_i, 0))\\)\n\\(\\mathrm{dp}[i][1] \\leftarrow \\mathrm{min}(\\mathrm{dp}[i][1], \\mathrm{dp}[i - 1][0] + \\mathrm{isdif}(S_i, 1))\\)\n\\(\\mathrm{dp}[i][1] \\leftarrow \\mathrm{min}(\\mathrm{dp}[i][1], \\mathrm{dp}[i - 1][1] + \\mathrm{isdif}(S_i, 1))\\)\n\\(\\mathrm{dp}[i][2] \\leftarrow \\mathrm{min}(\\mathrm{dp}[i][2], \\mathrm{dp}[i - 1][1] + \\mathrm{isdif}(S_i, 0))\\)\n\\(\\mathrm{dp}[i][2] \\leftarrow \\mathrm{min}(\\mathrm{dp}[i][2], \\mathrm{dp}[i - 1][2] + \\mathrm{isdif}(S_i, 0))\\)\nと書けます．ただし，\n\\(\\mathrm{isdif}(c, x)\\)\nは\n\\(c\\)\nが表す数が\n\\(x\\)\nと同じであれば\n\\(0\\)\n，異なれば\n\\(1\\)\nとします．計算量は\n\\(O(N)\\)\nです．",
+      "codes": [],
+      "text_sha256": "b4cbaba878bc92befbe474839b9794d544728a43dd80900d3a9417081fef66cc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc408/abc408_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc408/editorial/13162",
+      "text": "\\(f(L,R)\\)\nを「\n\\(S\\)\nの\n\\(L\\)\n文字目から\n\\(R-1\\)\n文字目までを\n1\nに、それ以外を\n0\nにするのに必要な操作回数」とします。\n\\((L,R)\\)\n全てに対する\n\\(f(L,R)\\)\nの最小値がこの問題の答えとなります。\n\\(A_i\\)\nを\n\\(S\\)\nの\n\\(i\\)\n文字目から\n\\(N\\)\n文字目までに含まれる\n1\nの個数とします。このとき、\n\\(f(L,R)=R-L-2(A_r-A_l)+A_1\\)\nと表せます。\nこの式より、\n\\(f\\)\nは Monge 性を持つことが分かります。したがって、 monotone minima を用いることでこの問題は計算量\n\\(O(N\\log N)\\)\nで解くことができます。\n実装例(Python3)",
+      "codes": [
+        "for _ in range(int(input())):\n    n = int(input())\n    s = input()\n    a = [0] * (n + 1)\n    for i in reversed(range(n)):\n        a[i] = a[i + 1] + (s[i] == \"1\")\n    ans = n\n\n    def f(l, r):\n        global ans\n        if l > r:\n            return n\n        res = r - l - 2 * (a[l] - a[r]) + a[0]\n        ans = min(ans, res)\n        return res\n\n    def g(lx, rx, ly, ry):\n        if lx >= rx or ly >= ry:\n            return\n        tyx = (lx + rx) >> 1\n        best, idx = n + 1, -1\n        for i in range(ly, ry):\n            fval = f(tyx, i)\n            if best > fval:\n                best = fval\n                idx = i\n        g(lx, tyx, ly, idx + 1)\n        g(tyx + 1, rx, idx, ry)\n\n    g(0, n, 0, n + 1)\n    print(ans)"
+      ],
+      "text_sha256": "0670b08c52f49dd48b2faf27a3d5dfb881a9461973d0196064e5eaafb08a88d1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc408/abc408_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

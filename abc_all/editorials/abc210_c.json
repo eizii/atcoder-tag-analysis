@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc210_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc210/editorial/2297",
+      "text": "\\(i\\)\n番目、\n\\(i+1\\)\n番目、\n\\(i+2\\)\n番目、\n\\(\\ldots\\)\n、\n\\(i+K-1\\)\n番目のキャンディをまとめて、区間\n\\(\\lbrack i, i+K-1 \\rbrack\\)\nで表すことにします。\n高橋君がとる区間の候補は、\n\\(\\lbrack 1, K \\rbrack, \\lbrack 2, K+1 \\rbrack, \\lbrack 3, K+2 \\rbrack, \\ldots,  \\lbrack N-K+1, N \\rbrack\\)\nの\n\\(N+K-1\\)\n個があります。\nこれらすべてについて「区間に含まれるキャンディの色の種類数」を求め、それらの最大値を答えとして出力すれば良いです。\n\\(1\\)\nつの区間に含まれるキャンディの色の種類数を求めるには\n「区間内の\n\\(K\\)\n個のキャンディを一つずつ見て、区間内の色の種類数を数える」という方法が考えられます。\nしかしこの方法では、\n\\(1\\)\nつの区間を調べるのに「キャンディを見る」操作を\n\\(K\\)\n回行うので、\n\\(N-K+1\\)\n個の候補区間すべてにこれを行うと、\nアルゴリズム全体で「キャンディを見る」操作を\n\\(K(N-K+1)\\)\n回行うことになります。この方法では時間計算量が大きすぎるため、実行時間制限に間に合いません。\nそこで、上記の方法を高速化します。\nいま、\n\\(\\lbrack i, i+K-1 \\rbrack\\)\nを調べてその直後に\n\\(\\lbrack i+1, i+K \\rbrack\\)\nを調べたいとします。\nここで、\n\\(\\lbrack i, i+K-1 \\rbrack\\)\nから\n\\(i+K\\)\n番目のキャンディを追加して代わりに\n\\(i\\)\n番目のキャンディを削除すると、\n\\(\\lbrack i+1, i+K \\rbrack\\)\nになることに注意します。\nつまり、\n\\(\\lbrack i, i+K-1 \\rbrack\\)\nと\n\\(\\lbrack i+1, i+K \\rbrack\\)\nには「わずかな差」しかありません。\nそこで\n\\(\\lbrack i+1, i+K \\rbrack\\)\nについて調べるときは\n\\(\\lbrack i+1, i+K \\rbrack\\)\nのキャンディをすべて見るのではなく、\n直前に調べた\n\\(\\lbrack i, i+K-1 \\rbrack\\)\nとの「差分」のみに着目することで、高速化を図ることができます。\nこの考え方に基づいて、以下のアルゴリズムを考えます。\nまず\n\\(c_1, c_2, \\ldots, c_K\\)\nを見て、\n\\(\\lbrack 1, K \\rbrack\\)\n内にキャンディが\n\\(1\\)\n個以上存在する各色についてキャンディの個数を連想配列（C++言語ではstd::mapなど）で記録します。このとき、連想配列のエントリ数は\n\\(\\lbrack 1, K \\rbrack\\)\n内の色の種類数に等しいことに注意します。\n次に、連想配列内の色\n\\(c_{K+1}\\)\nの個数を\n\\(1\\)\n増やし、色\n\\(c_1\\)\nの個数を\n\\(1\\)\n減らす操作を行います（その結果、色\n\\(c_1\\)\nの個数が\n\\(0\\)\n個になったら連想配列から色\n\\(c_1\\)\nのエントリを削除します。）すると、連想配列のエントリ数は\n\\(\\lbrack 2, K+1 \\rbrack\\)\n内の色の種類数に等しくなります。\nさらに、連想配列に対して、色\n\\(c_{K+2}\\)\nの個数を\n\\(1\\)\n増やし、色\n\\(c_2\\)\nの個数を\n\\(1\\)\n減らす操作を行います。（その結果、色\n\\(c_2\\)\nの個数が\n\\(0\\)\n個になったら連想配列から色\n\\(c_2\\)\nのエントリを削除します。）すると、連想配列のエントリ数は\n\\(\\lbrack 3, K+2 \\rbrack\\)\n内の色の種類数に等しくなります。\nこれを繰り返すことで、\n\\(\\lbrack 1, K \\rbrack, \\lbrack 2, K+1 \\rbrack, \\lbrack 3, K+2 \\rbrack, \\ldots,  \\lbrack N-K+1, N \\rbrack\\)\nのそれぞれについて、区間内の色の種類数を連想配列のエントリ数として求めることができるので、それらの最大値を答えとして出力すれば良いです。\n各キャンディについて、連想配列への追加と削除はそれぞれ高々\n\\(1\\)\n回ずつしか行われないので、このアルゴリズムの時間計算量は\n\\(\\mathrm{O}(N\\log N)\\)\nであり、この問題に正解するためには十分高速です。\n以下に、C++言語によるこの問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <map>\n\nusing namespace std;\n\nint n, k;\nint c[300005];\nmap<int, int> mp;\n\nint main(void)\n{\n  cin >> n >> k;\n  for(int i = 1; i <= n; i++) cin >> c[i];\n\n  for(int i = 1; i <= k; i++) mp[c[i]]++;\n  int ans = mp.size();\n\n  for(int i = k+1; i <= n; i++){\n    mp[c[i]]++;\n    mp[c[i-k]]--;\n    if(mp[c[i-k]] == 0) mp.erase(c[i-k]);\n    ans = max(ans, (int)mp.size());\n  }\n  cout << ans << endl;\n\n  return 0;\n}"
+      ],
+      "text_sha256": "f2e66442fb1c6a9fdabe002f957a2458e64faa0679866eedcf0447e4193f12e4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc210/abc210_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

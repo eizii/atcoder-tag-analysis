@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc473_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc473/editorial/24870",
+      "text": "原案: admin 以下の \\(2\\) 点を組み合わせるとこの問題に正解できます。 配列 \\(A\\) を標準入力から受け取る 配列 \\(A\\) の後半部分の総和を取り、出力する 例えば、これらの双方に for ループを活用することができます。 実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int n,s=0;\n  cin >> n;\n  vector<int> a(n);\n  for(auto &nx : a){cin >> nx;}\n  for(int i=(n/2);i<n;i++){\n    s+=a[i];\n  }\n  cout << s << \"\\n\";\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "9ea545ac219b9bc7548c945934ca84676478b401496c9839b681ae10ce3b7525"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc194_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc194/editorial/825",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「\nWelcome to AtCoder\n」をお試しください。言語ごとに解答例が掲載されています。\n乳固形分の含有割合は\n\\(A + B\\)\nパーセントです。\n乳脂肪分の含有割合は\n\\(B\\)\nパーセントです。\nこれらを元に条件分岐で\n\\(4\\)\n種類のどれにあてはまるかを判定すればよいです。\n解答例 (C)\n解答例 (Python)",
+      "codes": [
+        "#include <stdio.h>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tint a = ri();\n\tint b = ri();\n\tint c = a + b;\n\t\n\tif (c >= 15 && b >= 8) puts(\"1\");\n\telse if (c >= 10 && b >= 3) puts(\"2\");\n\telse if (c >= 3) puts(\"3\");\n\telse puts(\"4\");\n\t\n\treturn 0;\n}",
+        "a, b = map(int, input().split())\nc = a + b\n\nif c >= 15 and b >= 8 : print(1)\nelif c >= 10 and b >= 3 : print(2)\nelif c >= 3 : print(3)\nelse : print(4)"
+      ],
+      "text_sha256": "3479edd9b1e9916bd980680fe0f3f1c4fa85e4b2db29231f94cec6535acdb01f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc194/abc194_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

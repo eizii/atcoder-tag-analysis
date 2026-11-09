@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc414_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc414/editorial/13451",
+      "text": "問題の言い換え\n\\(X\\)\nを昇順にソートして，\n\\(X_1 \\leq X_2 \\leq \\dots \\leq X_N\\)\nであるとします．\n基地局を座標\n\\(r\\)\nに配置し，電波強度を\n\\(x\\)\nとしたとき，電波が届く座標の範囲は\n\\(r-\\frac{x}{2}\\)\n以上\n\\(r + \\frac{x}{2}\\)\n以下であり，その長さは\n\\(x\\)\nです．また，このなかにある家の番号は連続した範囲になっています．\n家\n\\(l\\)\nから家\n\\(r\\)\n(\n\\(l \\leq r\\)\n) までに電波が届くような基地局の電波強度\n\\(x\\)\nの最小値は\n\\((X_r - X_l)\\)\nです．\n\\(x = (X_r - X_l)\\)\nとおくと，座標\n\\(\\frac{X_l + X_r}{2}\\)\nに配置すれば目的を達成できます．逆に，\n\\(x < (X_r - X_l)\\)\nの場合は，区間\n\\([X_l, X_r]\\)\nを長さ\n\\((X_r - X_l)\\)\n未満の区間で被覆することは不可能なので，目的は達成できません．よって，目的を達成する最小値は\n\\(x = (X_r - X_l)\\)\nです．\nよって，\n\\(1, \\dots, N\\)\nを\n\\(M\\)\n個の範囲に分割し，各範囲に対する\n\\((X_r - X_l)\\)\nの総和を最小化する問題に言い換えられます．\nさらなる言い換え\nここで，隣り合う家の間隔\n\\(D_i := X_{i+1} - X_i\\)\n(\n\\(i = 1,\\cdots,N-1\\)\n) をおきます．これは，図における紫色の数値に対応します．このとき，\n\\[(X_r - X_l) = D_l + \\dots + D_{r-1}\\]\nとなることから，\n\\(D_1, \\dots, D_{N-1}\\)\nのなかから\n\\(M-1\\)\n個を選んで消し，残りの総和を最小化する問題に言い換えられます．\nよって，\n\\(D\\)\nを昇順にソートして，冒頭の\n\\(N-M\\)\n個の総和を求めれば答えになります．\n実装例\n数値のソートは，主要なプログラミング言語の多くにおいては標準ライブラリの関数として提供されており，それらを用いて簡潔に実装できます．",
+      "codes": [
+        "#include <iostream>\n#include <cstdio>\n#include <string>\n#include <vector>\n#include <array>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\nusing std::string;\nusing std::pair;\nusing std::vector;\nusing std::min;\nusing std::max;\nusing std::array;\n#include <atcoder/all>\n\ntypedef long long int ll;\n\nll n, m;\nvector<ll> x;\n\nvoid solve () {\n\tsort(x.begin(), x.end());\n\n\tvector<ll> d;\n\tfor (ll i = 0; i < n-1; i++) {\n\t\td.push_back(x[i+1] - x[i]);\n\t}\n\tsort(d.begin(), d.end());\n\n\tll ans = 0;\n\tfor (ll i = 0; i < n-m; i++) {\n\t\tans += d[i];\n\t}\n\n\tcout << ans << \"\\n\";\n}\n\nint main (void) {\n\tstd::ios_base::sync_with_stdio(false);\n\tcin.tie(nullptr);\n\t\n\tcin >> n >> m;\n\tx.resize(n);\n\tfor (ll i = 0; i < n; i++) {\n\t\tcin >> x[i];\n\t}\n\n\tsolve();\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "bcd31163a19f2ce292c0869c1b9e641b0336dbecb1295029a0f12fa58458dea1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc414/abc414_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc414/editorial/13687",
+      "text": "注：ツイート内のE問題の解説は誤りです。\nhttps://x.com/kyopro_friends/status/1944032441515020378",
+      "codes": [],
+      "text_sha256": "7211b2042198a7f148b80079c045ae48fedda69bfec7c15dded8eb2461622f40",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc414/abc414_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

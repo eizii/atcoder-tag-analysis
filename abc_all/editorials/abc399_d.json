@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc399_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc399/editorial/12567",
+      "text": "問題文の条件を満たす\n\\((a, b)\\)\nが数列内においてどのように配置されているのかを考えましょう。すると、条件を満たすのは\n\\[\\dots, a, b, \\dots, a, b, \\dots\\]\nあるいは\n\\[\\dots, a, b, \\dots, b, a, \\dots\\]\nのような形に限られることがわかります。ここから、問題文の条件は、次の条件をすべて満たすことと等価であることがわかります。\n\\(A\\)\n内において\n\\(a\\)\n同士は隣接していない。\n\\(A\\)\n内において\n\\(b\\)\n同士は隣接していない。\n\\(A\\)\n内の\n\\(a\\)\nの位置と\n\\(b\\)\nの位置をそれぞれ\n\\(p_{a,1}, p_{a,2}\\)\nおよび\n\\(p_{b,1}, p_{b,2}\\)\nとする。\n数列\n\\((p_{a,1}, p_{a,2}, p_{b,1}, p_{b,2})\\)\nをソートしたものを\n\\(v = (v_1, v_2, v_3, v_4)\\)\nとする。\nこの時、\n\\(v_1 + 1 = v_2\\)\nかつ\n\\(v_3 + 1 = v_4\\)\nが成り立っている。\nまた、条件を満たす\n\\((a, b)\\)\nは\n\\(A\\)\n内において隣接している必要がある点もわかります。\nよって、\n\\(1 \\leq i \\leq 2N-1, A_i \\neq A_{i+1}\\)\nを満たすすべての\n\\((A_i, A_{i+1})\\)\nに対して上記の条件を満たすかどうかを確認すれば、条件を満たす\n\\((a, b)\\)\nを漏れなく数え上げることができます。 (同じ\n\\((a, b)\\)\nの組を複数回数えてはならない点に注意してください。) 条件の判定は\n\\(1\\)\n回あたり\n\\(\\mathrm{O}(1)\\)\nでできるので、この問題を\n\\(\\mathrm{O}(N)\\)\nで解くことができて、これは十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <algorithm>\n#include <iostream>\n#include <set>\n#include <utility>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int T;\n  cin >> T;\n  while (T--) {\n    int N;\n    cin >> N;\n    vector<int> A(2 * N);\n    for (auto& a : A) cin >> a;\n\n    vector<vector<int>> position(N + 1);\n    for (int i = 0; i < 2 * N; i++) position[A[i]].push_back(i);\n\n    set<pair<int, int>> answers;\n    for (int i = 0; i + 1 < 2 * N; i++) {\n      int a = A[i], b = A[i + 1];\n      if (position[a][0] + 1 == position[a][1]) continue;\n      if (position[b][0] + 1 == position[b][1]) continue;\n      vector<int> v{position[a][0], position[a][1], position[b][0],\n                    position[b][1]};\n      sort(begin(v), end(v));\n      if (v[0] + 1 == v[1] and v[2] + 1 == v[3]) {\n        answers.emplace(minmax(a, b));\n      }\n    }\n    cout << answers.size() << \"\\n\";\n  }\n}"
+      ],
+      "text_sha256": "58ff75394e114df55b5c1e7b8b1132fe95a11eaebe5807c991b9c0cedd543316",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc399/abc399_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

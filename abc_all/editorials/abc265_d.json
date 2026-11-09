@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc265_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc265/editorial/4591",
+      "text": "この問題は累積和と二分探索を用いて解くことができます。\n予め累積和\n\\(S_0=0,\\ S_i=A_0+\\ldots+A_{i-1}\\)\nを計算しておきます。これにより、\n\\(A\\)\nの任意の区間和を\n\\(S_R-S_L=A_L+A_{L+1}+\\ldots+A_{R-1}\\)\nにより\n\\(O(1)\\)\nで求めることができます。\n累積和を用いて与えられた条件は以下のように書き換えられます：\n\\(S_y-S_x=P\\)\n\\(S_z-S_y=Q\\)\n\\(S_w-S_z=R\\)\n任意の\n\\(i\\)\nで\n\\(A_i>0\\)\nであることから\n\\(S_i\\)\nは単調増加なので、\n\\(x\\)\nを固定したとき\n\\(S_y-S_x=P\\)\nを満たす\n\\(y\\)\n、すなわち\n\\(S_y=S_x+P\\)\nとなる\n\\(y\\)\nは二分探索により\n\\(O(\\log N)\\)\nで求めることができます。同様に\n\\(z,w\\)\nも二分探索により求めることができるので、\n\\(x\\)\nを固定するごとに\n\\(O(\\log N)\\)\nで条件をチェックすることができます。したがって、\n\\(x\\)\nを全探索することで、\n\\(O(N\\log N)\\)\nでこの問題を解くことができます。\nなお、実装上は\n\\(S\\)\nをsetで保持することで、明示的に二分探索を行う必要がなくなります。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "82bbe4ffbe5098becb3df382120bb32ccdfd37d35f82188e655070eddf3f649f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc265/abc265_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc265/editorial/4688",
+      "text": "尺取法を利用した解法です。\n\\(S(l, r) := A_l + A_{l+1} + \\cdots + A_{r-1}\\)\nとします。ここで、\n\\(Y(x) := (S(x, y) ≥ P を満たす最小のy, 無い場合は n) \\)\n\\(Z(x) := (S(Y(x), z) ≥ Q を満たす最小のz, 無い場合は n) \\)\n\\(W(x) := (S(Z(x), w) ≥ R を満たす最小のw, 無い場合は n) \\)\nとすると、条件を満たす可能性のある区切り方は\n\\((x, Y(x), Z(x), W(x)) (x = 0, 1, 2, \\cdots , n-1)\\)\nに限られます。\n\\(x\\)\nを増加させたとき、\n\\(Y(x), Z(x), W(x)\\)\nはいずれも (広義) 単調増加するため、尺取法を利用して区切りと区間和を管理することで、全ての区切り方\n\\((x, Y(x), Z(x), W(x))\\)\nの決定と判定が\n\\(O(N)\\)\nで可能になります。\n実装例",
+      "codes": [
+        "n, p, q, r = map(int, input().split())\nA = list(map(int, input().split()))\n\ny, z, w = 0, 0, 0\ns0, s1, s2 = 0, 0, 0\nok = 0\nfor x in range(n):\n    while y < n and s0 < p:\n        s0 += A[y]\n        s1 -= A[y]\n        y += 1\n    while z < n and s1 < q:\n        s1 += A[z]\n        s2 -= A[z]\n        z += 1\n    while w < n and s2 < r:\n        s2 += A[w]\n        w += 1\n    if s0 == p and s1 == q and s2 == r:\n        ok = 1\n        break\n    s0 -= A[x]\nprint(\"Yes\" if ok else \"No\")"
+      ],
+      "text_sha256": "cb945a7adddf6588e1c5024dad93e98508a417cc2d4bb02160876b8a00e76256",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc265/abc265_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

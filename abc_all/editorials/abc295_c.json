@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc295_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc295/editorial/6047",
+      "text": "色ごとに靴下をグループ分けして考えます。ある色の靴下が\n\\(C\\)\n枚あるとき、この色の靴下同士をペアにする操作を繰り返すことで、\n\\(\\lfloor \\frac{C}{2} \\rfloor\\)\n回の操作が可能です。よって、std::map などの連想配列を用いて「何色の靴下が何枚あるか」という情報を管理すればよいです。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    map<int, int> mp;\n    for (int i = 0; i < n; i++) {\n        int a;\n        cin >> a;\n        ++mp[a];\n    }\n    \n    int ans = 0;\n    for (auto [_, cnt]: mp) ans += cnt / 2;\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "0d62399200d71a83c2dfc96cacb4c9358c15106258fd2b574af322c8f42e9286",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc295/abc295_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc325_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc325/editorial/7448",
+      "text": "まず、以下のようなアルゴリズムを考えます。\n\\(t=1,2,3,\\dots,\\)\nの順に以下を行う。\n時刻\n\\(t\\)\nに印字機の範囲内にある商品であって、まだ印字されていないものがあるならば、そのうち印字機の範囲から出るのが最も早い商品に印字する。\nこの貪欲法は正しいです。正当性の厳密な証明は省略しますが、整数時刻以外に行動しても得しないことと、ある最適解がある\n\\(t\\)\nにおいて上記の貪欲法と異なる行動をしていた場合、その行動を貪欲法における行動で置き換えても損しない（最適解であり続ける）ことから示されます。\nしかし、\n\\(t\\)\nは最大で\n\\(10^{18}\\)\n程度になりうるため、このままでは間に合いません。そこで、以下のような高速化を導入します。\nある時刻\n\\(t\\)\nにおいて、印字できる商品（すなわち、印字機の範囲内にあってまだ印字されていない商品）が一つもなかったとする。そのような場合は、\n\\(t\\)\n以降で商品が印字機の範囲内に新たに入ってくる最初の時刻を\n\\(t'\\)\nとして、\n\\(t \\leftarrow t'\\)\nと更新する。\n\\(t\\)\nと\n\\(t'\\)\nの間では印字できる商品がずっと存在しないため、正当性は明らかです。この高速化を行うことで、実際に見る\n\\(t\\)\nの個数は\n\\(O(N)\\)\nになります。印字できる商品の中から印字機の範囲を出る時刻が最も早い商品を選ぶのは優先度付きキュー等によって\n\\(O(\\log N)\\)\nで、（印字できる商品がない場合に）\n\\(t'\\)\nを求めるのは二分探索や尺取り法によって\n\\(O(\\log N)\\)\nや\n\\(O(1)\\)\nでできるため、全体の計算量は\n\\(O(N \\log N)\\)\nになります。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<pair<ll, ll>> v;\n    for (int i = 0; i < n; i++) {\n        ll t, d;\n        cin >> t >> d;\n        v.emplace_back(t, t + d);\n    }\n    sort(v.begin(), v.end());\n    priority_queue<ll, vector<ll>, greater<>> pq;\n    int it = 0;\n    int ans = 0;\n    for (ll i = 0;; i++) {\n        if (pq.empty()) {\n            if (it == n) break;\n            i = v[it].first;\n        }\n        while (it < n and v[it].first == i) {\n            pq.push(v[it++].second);\n        }\n        while (!pq.empty() and pq.top() < i) pq.pop();\n        if (!pq.empty()) {\n            pq.pop();\n            ++ans;\n        }\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "7fae632f1ba2b8d66df5a884c8f7c2d5b07541fbbd85d23e119049322fc271bf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc325/abc325_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

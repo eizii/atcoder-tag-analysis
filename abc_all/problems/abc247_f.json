@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc247_f",
+  "title": "Cards",
+  "contests": [
+    {
+      "contest_id": "abc247",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1697,
+  "raw_difficulty": 1697,
+  "contest_id": "abc247",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc247/tasks/abc247_f",
+  "statement": "配点 : 500 点 問題文 1,\\ldots,N の番号がついた N 枚のカードがあり、カード i の表には P_i が、裏には Q_i が書かれています。 ここで、 P=(P_1,\\ldots,P_N) 及び Q=(Q_1,\\ldots,Q_N) はそれぞれ (1, 2, \\dots, N) の並び替えです。 N 枚のカードから何枚かを選ぶ方法のうち、次の条件を満たすものは何通りありますか？ 998244353 で割った余りを求めてください。 条件： 1,2,\\ldots,N のどの数も選んだカードのいずれかに書かれている 制約 1 \\leq N \\leq 2\\times 10^5 1 \\leq P_i,Q_i \\leq N P,Q はそれぞれ (1, 2, \\dots, N) の並び替えである 入力に含まれる値は全て整数である 入力 入力は以下の形式で標準入力から与えられる。 N P_1 P_2 \\ldots P_N Q_1 Q_2 \\ldots Q_N 出力 答えを出力せよ。 入力例 1 3\r\n1 2 3\r\n2 1 3 出力例 1 3 例えばカード 1,3 を選ぶと、 1 はカード 1 の表に、 2 はカード 1 の裏に、 3 はカード 3 の表に書かれているため条件を満たします。 条件を満たすカードの選び方は \\{1,3\\},\\{2,3\\},\\{1,2,3\\} の 3 通りです。 入力例 2 5\r\n2 3 5 4 1\r\n4 2 1 3 5 出力例 2 12 入力例 3 8\r\n1 2 3 4 5 6 7 8\r\n1 2 3 4 5 6 7 8 出力例 3 1",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1,\\ldots,N の番号がついた N 枚のカードがあり、カード i の表には P_i が、裏には Q_i が書かれています。 ここで、 P=(P_1,\\ldots,P_N) 及び Q=(Q_1,\\ldots,Q_N) はそれぞれ (1, 2, \\dots, N) の並び替えです。 N 枚のカードから何枚かを選ぶ方法のうち、次の条件を満たすものは何通りありますか？ 998244353 で割った余りを求めてください。 条件： 1,2,\\ldots,N のどの数も選んだカードのいずれかに書かれている"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2\\times 10^5 1 \\leq P_i,Q_i \\leq N P,Q はそれぞれ (1, 2, \\dots, N) の並び替えである 入力に含まれる値は全て整数である"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N P_1 P_2 \\ldots P_N Q_1 Q_2 \\ldots Q_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\n1 2 3\r\n2 1 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3 例えばカード 1,3 を選ぶと、 1 はカード 1 の表に、 2 はカード 1 の裏に、 3 はカード 3 の表に書かれているため条件を満たします。 条件を満たすカードの選び方は \\{1,3\\},\\{2,3\\},\\{1,2,3\\} の 3 通りです。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5\r\n2 3 5 4 1\r\n4 2 1 3 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 12"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 8\r\n1 2 3 4 5 6 7 8\r\n1 2 3 4 5 6 7 8"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 1"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc247/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:19.015262+00:00",
+  "statement_sha256": "73b6757b8ec72fffd5bcd5ffddf3255277c5cf794b51f91737fdfecae2041ffb",
+  "editorials": []
+}

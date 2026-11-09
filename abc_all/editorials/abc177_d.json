@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc177_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc177/editorial/90",
+      "text": "まず気付くべきなのは、\n友達関係を辿って辿り着ける人は友達である\nということです。\n\\(A, B, C, D, E\\)\nの5人がいたとして、\n\\((A,B) , (B,C), (C,D), (D,E)\\)\nの\n\\(4\\)\nペアが友達だったとしましょう。この時、\n\\(A\\)\n視点で考えて、\n\\(B\\)\nが友達なら\n\\(C\\)\nも友達であり、\n\\(C\\)\nが友達なら\n\\(D\\)\nも友達であり……と連鎖して、全員が友達になっていきます。当然\n\\(A\\)\n以外も同様に、全ての人と友達になることが出来ます。\nこれを整理すると、\n友達関係が繋がっている人は全員が友達同士であり、繋がっていない人は友達同士ではない\nということが言えます。これらを管理するのは、グラフではなく、集合で管理するのが良いでしょう。\n例えばサンプル\n\\(1\\)\nにおいては、\n\\((1,2),  (3,4),  (5,1)\\)\nという\n\\(3\\)\nつの友達関係がありますが、これは\n\\((1,2,5), (3,4)\\)\nの、\n\\(2\\)\nつの友達関係で結ばれている集合に分けることが出来ます。（以下、これを友達集合と呼びます）\nここで問題に戻ります。同じ友達集合に所属する人同士を、同じグループに配置してしまうと、その人達は友達同士になってしまうため、条件を満たすことが出来ません。そこで、最も人数の多い友達集合の人数を\n\\(K\\)\nとすると、最低でも\n\\(K\\)\nグループに分ける必要があることがわかります。\nこれで、\n\\(K\\)\nグループに必ず分けられることが証明出来れば、答えが\n\\(K\\)\nとなります。このグループ分けは、実は単純なアルゴリズムで実現することが出来ます。\n各友達集合について、グループ\n\\(1 \\)\nから順番に\n\\(1\\)\n人ずつ割り振っていくだけです。こうするだけで、同じ友達集合から各グループに割り振られる人はたかだか\n\\(1\\)\n人となるため、友達同士が同じグループになることを避けることが出来ます。つまり、友達集合を求め、その最大人数を計算することで、この問題が解けることがわかりました。\n友達集合を管理するには、Union-Findなどと呼ばれる素集合データ構造を使うことで、解くことが出来ます。もしUnion-Findを知らない場合も、幅優先探索などで連結成分を調べることで、同様に解くことが可能です。\n回答例(C++, Union-Findを使った回答)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nstruct UnionFind {\n\t//自身が親であれば、その集合に属する頂点数に-1を掛けたもの\n\t//そうでなければ親のid\n\tvector<int> r;\n\n\tUnionFind(int N) {\n\t\tr = vector<int>(N, -1);\n\t}\n\n\tint root(int x) {\n\t\tif (r[x] < 0) return x;\n\t\treturn r[x] = root(r[x]);\n\t}\n\n\tbool unite(int x, int y) {\n\t\tx = root(x);\n\t\ty = root(y);\n\t\tif (x == y) return false;\n\t\tif (r[x] > r[y]) swap(x, y);\n\t\tr[x] += r[y];\n\t\tr[y] = x;\n\t\treturn true;\n\t}\n\n\tint size(int x) {\n\t\treturn -r[root(x)];\n\t}\n};\n\n\nint main() {\n\tint N, M;\n\tcin >> N >> M;\n\t\n\t//友達集合を作る\n\tUnionFind UF(N);\n\tfor (int i = 0; i < M; i++)\n\t{\n\t\tint A, B;\n\t\tcin >> A >> B;\n\t\tA -= 1; B -= 1;\n\t\tUF.unite(A, B);\n\t}\n\n\t//最大の友達集合を求める\n\tint ans = 0;\n\tfor (int i = 0; i < N; i++)\n\t{\n\t\tans = max(ans, UF.size(i));\n\t}\n\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "a84bf42e0a82b608df820ea12624c73eedbe5eea33e8699219f26e0b297f8646",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc177/abc177_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

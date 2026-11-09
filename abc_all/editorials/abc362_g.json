@@ -1,0 +1,38 @@
+{
+  "problem_id": "abc362_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc362/editorial/10389",
+      "text": "~\nをどの英小文字よりも辞書順で大きい文字とします．\n各クエリで求めるものは\n\\(S[1:],S[2:],\\ldots,S[N:]\\)\nのうち，prefix が\n\\(T\\)\nと一致するものの個数です．これは，\n\\(T\\)\nの末尾に\n~\nを付加した文字列を\n\\(T'\\)\nとしたときに\n\\(T\\leq S[i:]\\leq T'\\)\nを満たす\n\\(i\\)\nの個数に等しいです．あらかじめ\n\\(S[1:],S[2:],\\ldots,S[N:]\\)\nを辞書順に並べた列（Suffix Array）を求めておき，この列上で二分探索をすることで，\n\\(T\\leq S[i:]\\leq T'\\)\nを満たす\n\\(i\\)\nの個数を高速に求めることが出来ます．計算量は Suffix Array の構築が\n\\(O(|S|)\\)\n，各クエリが\n\\(O(|T|\\log |S|)\\)\nです．\n（おまけ）言語の標準機能を上手に利用すると簡潔に書けます．",
+      "codes": [
+        "from atcoder.string import suffix_array\n\nS = input()\nSA = suffix_array(S)\n\ndef binary_search(T):\n    ng, ok = -1, len(S)\n    while ok - ng > 1:\n        mid = (ng + ok) // 2\n        l = SA[mid]\n        if T <= S[l : l + len(T)]:\n            ok = mid\n        else:\n            ng = mid\n    return ok\n\nQ = int(input())\nfor _ in range(Q):\n    T = input()\n    print(binary_search(T + \"~\") - binary_search(T))",
+        "from atcoder.string import suffix_array\nimport bisect\n\nS = input()\nSA = suffix_array(S)\n\nQ = int(input())\nfor _ in range(Q):\n    T = input()\n    l = bisect.bisect_left(SA, T, key=lambda x: S[x : x + len(T)])\n    r = bisect.bisect(SA, T, key=lambda x: S[x : x + len(T)])\n    print(r - l)"
+      ],
+      "text_sha256": "c359cb762677ce20c6a7e17e97a3d7404007b3f3de69ff03619180d802876152",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc362/abc362_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc362/editorial/10430",
+      "text": "Aho Corasick 法を利用した別解です．計算量は\n\\(O(|S|+\\sum |T_i|)\\)\n時間です．\n\\(S\\)\nの substring というのは，(\n\\(S\\)\nの prefix) の suffix です．\nそこで，\n\\(S\\)\nの長さ\n\\(1, 2, \\ldots\\)\nの prefix\n\\(P\\)\nに対して，次を行えればよいです．\n\\(T_i\\)\nが\n\\(P\\)\nの suffix であるようなすべての\n\\(i\\)\nに対して，\n\\(ANS[i]\\)\nに\n\\(1\\)\nを加算する．\nAho Corasick 法を利用して上の問題を解きます．Aho Corasick 法については、過去に私のユーザー解説で触れたことがあるのでそちらも参照してください．\nhttps://atcoder.jp/contests/abc268/editorial/4793\nTrie を構築し，Aho Corasick 法により suffix link を計算しておきます．Trie の辺を無視して suffix link だけを考えた木を\n\\(T\\)\nと書くことにします．\nTrie 上の辺と suffix link をたどることで，\n\\(S\\)\nの prefix\n\\(P\\)\nに対して，\n\\(P\\)\nの suffix に対応するような trie の頂点のうち極大なものがどこであるかが分かります．\n\\(T\\)\n上でのその頂点の先祖が，\n\\(P\\)\nの suffix かつ trie の頂点に対応するような文字列です．よって，\n\\(ANS[i]\\)\nのインクリメントは，\n\\(T\\)\nにおいてある頂点から根までのパス上の頂点の値のインクリメントという操作で言い換えられます．\n結局，根付き木に対してある頂点から根までのパス上の頂点に値を加算するという操作を\n\\(O(|S|)\\)\n回行う問題に帰着されます．そのような操作全体の結果は，葉側からの累積和をとるという感じの木dpで\n\\(O(|S|+|T|)\\)\n時間で計算できます．\n解答例：\nhttps://atcoder.jp/contests/abc362/submissions/55578725",
+      "codes": [],
+      "text_sha256": "06e4d12504bf93174539a25f7cc560f1ed143948c5ceffbe222c96f4b6ab9cf6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc362/abc362_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc362/editorial/10392",
+      "text": "\\(S\\) および \\(T _ i\\) に含まれるどの文字より辞書順で小さな文字\n`\nと、辞書順で大きな文字\n{\n,\n}\n(\n{\n\\({}\\lt{}\\)\n}\n) を加えた文字集合 \\(\\Sigma\\) の文字列を考えます（ \\(\\sigma=|\\Sigma|\\leq29\\) です）。\n文字列 \\(C\\) を \\(C=S+{}\\)\n{\n\\({}+T _ 1+{}\\)\n`\n\\({}+T _ 1+{}\\)\n}\n\\({}+T _ 2+\\cdots+{}\\)\n}\n\\({}+T _ Q+{}\\)\n`\n\\({}+T _ Q+{}\\)\n}\nとして定めます。\n\\(C\\) は長さ \\(L=\\displaystyle|S|+2\\sum _ {i=1} ^ Q|T _ i|+2Q+1\\) の文字列です。\n\\(C\\) の Suffix Array の値 \\((\\operatorname{SA} _ C[i]) _ {1\\leq i\\leq L}\\) に対して、処理すべきクエリは以下のようになります。\n\\(T _ i+{}\\)\n`\nの先頭を \\(C\\) の \\(L _ i\\) 文字目、\\(T _ i+{}\\)\n}\nの先頭を \\(C\\) の \\(U _ i\\) 文字目とする。\\(\\operatorname{SA} _ C\\) で \\(L _ i\\) と \\(U _ i\\) に挟まれた値のうち、値が \\(|S|\\) 以下のものはいくつあるか？\nこれは、事前に \\(L _ i,U _ i\\) を求めておき、\\(C\\) の Suffix Array を先頭からみることで解くことができます。\nSuffix Array は文字列長に対して線形時間で構築できるので、時間計算量は \\(O(|S|+\\sum |T _ i|+\\sigma)\\) などでこの問題を解くことができます。\n実装例は以下のようになります。\n以下の実装例では \\(L _ i,U _ i\\) から \\(i\\) を求める際にハッシュテーブルを用いているため空間計算量が \\(O(Q)\\) ワードで時間計算量が expected \\(O(|S|+\\sum |T _ i|+\\sigma)\\) となっていますが、追加で \\(O((|S|+\\sum |T _ i|)\\log Q)\\) bit 程度の空間を使うことで時間計算量を worst にすることもできます。",
+      "codes": [
+        "#include <iostream>\n#include <unordered_map>\n#include <algorithm>\n\n#include <atcoder/string>\n\nint main() {\n    using namespace std;\n    string S;\n    cin >> S;\n    unsigned N(size(S)), Q;\n    cin >> Q;\n\n    // Li, Ui から i を求める\n    unordered_map<unsigned, unsigned> concatenated_idx_to_query;\n\n    // 与えられる文字列を連結してできる列（連結する際に値を 0 以上 28 以下になおす）\n    vector<int> concat;\n\n    // S + { を追加\n    ranges::transform(S, back_inserter(concat), [](auto c){return c - '`';});\n    concat.emplace_back(27);\n\n    for(unsigned i{}; i < Q; ++i){\n        string T;\n        cin >> T;\n        // Li をメモ\n        concatenated_idx_to_query[size(concat)] = i;\n        // Ti + ` を追加\n        ranges::transform(T, back_inserter(concat), [](auto c){return c - '`';});\n        concat.emplace_back();\n\n        // Ui をメモ\n        concatenated_idx_to_query[size(concat)] = i;\n        // Ti + } を追加\n        ranges::transform(T, back_inserter(concat), [](auto c){return c - '`';});\n        concat.emplace_back(28);\n    }\n\n    vector<unsigned> ans(Q);\n    // counter := これまでに出てきた S の部分文字列に対応するインデックスの個数\n    for(unsigned counter{}; const auto idx : atcoder::suffix_array(concat, 28)){\n        if(idx < N)\n            ++counter;\n        if (concatenated_idx_to_query.contains(idx))\n            (ans[concatenated_idx_to_query[idx]] *= -1) += counter;\n    }\n\n    for(const auto a : ans)\n        cout << a << '\\n';\n    cout << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "6d818501b21d353639e5f9aa0556467c6b846f8251b024af51578dba5a4d6f93",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc362/abc362_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

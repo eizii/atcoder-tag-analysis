@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc443_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc443/editorial/15180",
+      "text": "この問題文は、問題文の指示に従いながら適切にシミュレーションを実装する問題です。\n入力の時点で\n\\(A\\)\nがソートされているので、これを利用して時間計算量\n\\(O(N)\\)\nでこの問題を解いてみましょう。\n高橋君が最後に chokutter を始めた時間\n\\({\\rm open}\\)\nを管理する。\n青木君が高橋君のデスクの後ろを通る時間\n\\(a\\)\nを時系列順に処理する。\nもし\n\\({\\rm open} < a\\)\nであれば、高橋君は時刻\n\\({\\rm open}\\)\nから時刻\n\\(a\\)\nまで chokutter を見ていたことになるので、答えに\n\\(a-{\\rm open}\\)\nを加算する。その後、次に chokutter を開く時間\n\\({\\rm open} := a+100\\)\nと更新する。\nそうでないとき、青木君はただ通りかかっただけで高橋君の挙動には影響しないので、何もしない。\n最後に、もし\n\\({\\rm open} < T\\)\nであれば、高橋君は時刻\n\\({\\rm open}\\)\nから時刻\n\\(T\\)\nまで chokutter を見ていたことになるので、答えに\n\\(T-{\\rm open}\\)\nを加算する。\n以上で適切にシミュレーションが実装され、この問題を時間計算量\n\\(O(N)\\)\nで解くことが出来ました。\n実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,t;\n  cin >> n >> t;\n  int res=0;\n  int open=0;\n  for(int i=0;i<n;i++){\n    int a;\n    cin >> a;\n    if(open<a){\n      res+=(a-open);\n      open=a+100;\n    }\n  }\n  if(open<t){ res+=(t-open); }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "43f6cf9c9315f5ca26fcd16bc363bca8b518ec6adcde1486fe94943d5e7ba63f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc443/abc443_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

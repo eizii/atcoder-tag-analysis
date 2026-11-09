@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc244_e",
+  "source_url": "https://atcoder.jp/contests/abc244/tasks/abc244_e?lang=ja",
+  "statement": "問題文\nN\n頂点\nM\n辺の単純無向グラフが与えられます。このグラフの頂点には\n1\nから\nN\nの番号が付けられており、辺には\n1\nから\nM\nの番号が付けられています。辺\ni\nは頂点\nU_i\nと頂点\nV_i\nの間を結んでいます。\n整数\nK, S, T, X\nが与えられます。以下の条件を満たす数列\nA = (A_0, A_1, \\dots, A_K)\nは何通りありますか？\nA_i\nは\n1\n以上\nN\n以下の整数\nA_0 = S\nA_K = T\n頂点\nA_i\nと頂点\nA_{i + 1}\nの間を直接結ぶ辺が存在する\n数列\nA\nの中に整数\nX\\ (X≠S,X≠T)\nは偶数回出現する (\n0\n回でも良い)\nただし、答えは非常に大きくなることがあるので、答えを\n998244353\nで割ったあまりを求めてください。\n制約\n入力は全て整数\n2≤N≤2000\n1≤M≤2000\n1≤K≤2000\n1≤S,T,X≤N\nX≠S\nX≠T\n1≤U_i<V_i≤N\ni≠j\nならば\n(U_i, V_i)≠(U_j, V_j)",
+  "html_sha256": "f0286215e686c541df98972d102b037b2034f57f5939666ca2f62f8b317d7a4c",
+  "extractor": "section_headings_v1"
+}

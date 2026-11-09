@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc198_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc198/editorial/1050",
+      "text": "文字が\n\\(11\\)\n種類以上存在するとき、明らかに\nUNSOLVABLE\nです。そうでないときを考えます。\n覆面算を真面目に解くよりも、どの文字にどの数字を割り当てるかを全探索し、各割り当て方について\n\\(N_1+N_2=N_3\\)\nを満たしているか確かめる方が実装が容易と思われます。\n数字の割り当て方は最大\n\\(10!=3628800\\)\n通りであり、割り当て方を決めたときそれが\n\\(N_1+N_2=N_3\\)\nを満たしているかを確認することは数十回程度の四則演算で求めることができるので、実行時間制限には十分間に合います。\n各文字列の先頭の文字には\n\\(0\\)\nを割り当てられないことに注意してください。",
+      "codes": [],
+      "text_sha256": "b3c0ebf0bee7a7c78b2dd986888a9f327851616e098fa7fe77fef63c3e978239",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc198/abc198_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

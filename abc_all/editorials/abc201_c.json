@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc201_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc201/editorial/1825",
+      "text": "0000\nから\n9999\nまでの\n\\(10^4\\)\n通りの暗証番号それぞれについて高橋くんの記憶に合致するかを判定し、合致するものの個数を数えることでこの問題を解くことができます。\n実装の際は、\n0000\nから\n9999\nまでの暗証番号を「\n\\(0\\)\n以上\n\\(9999\\)\n以下の整数に leading zero を付けたもの」と見做すことで簡潔なコードを書くことができます。例えば、\n\\(1\\)\nに leading zero を付けて生成される暗証番号は\n0001\n,\n\\(132\\)\nに leading zero を付けて生成される暗証番号は\n0132\nです。\n計算量は\n\\(M=10^4\\)\nとして\n\\(O(M|S|)\\)\nとなります。\n解答例 (C++)\n解答例 (Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    string S; cin >> S;\n    int ans = 0;\n    for(int i=0; i<=9999; i++){\n        vector<bool> flag(10);\n        int X = i;\n        for(int j=0; j<4; j++){\n            flag[X%10] = true;\n            X /= 10;\n        }\n        bool flag2 = true;\n        for(int j=0; j<10; j++){\n            if(S[j]=='o' && !flag[j]) flag2 = false;\n            if(S[j]=='x' && flag[j]) flag2 = false;\n        }\n        ans += flag2;\n    }\n    cout << ans << endl;\n}",
+        "S = input()\nans = 0\nfor i in range(10000):\n    flag = [False]*10\n    now = i\n    for j in range(4):\n        flag[now%10] = True\n        now //= 10\n    flag2 = True\n    for j in range(10):\n        if S[j] == 'o' and not flag[j]:\n            flag2 = False\n        if S[j] == 'x' and flag[j]:\n            flag2 = False\n    ans += flag2\nprint(ans)"
+      ],
+      "text_sha256": "90ff2e42683a35a74cece5169ec967cfca621da45638bfe14c1f98515bdca33d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc201/abc201_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc201/editorial/15008",
+      "text": "暗証番号が\n\\(1, 2, \\ldots, N\\)\nのいずれかからなる\n\\(M\\)\n文字の文字列だったときに答えを求める方法を紹介します。（\n\\(N \\leq 10^5, M \\leq 10^9\\)\n）\n与えられた文字について、\no\nの数を\n\\(T\\)\n、\n?\nの数を\n\\(U\\)\nとしましょう。\nこのとき、fpsで立式すると、答えは\n\\(\\displaystyle M! [x^M] \\Big(\\frac{x}{1!} + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\ldots \\Big)^T \\Big(\\frac{x^0}{0!} + \\frac{x}{1!} + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\ldots \\Big)^U\\)\n\\(= M![x^M] (e^x - 1)^T (e^x)^U\\)\n\\(\\displaystyle = M! [x^M] \\Big( \\sum_{k = 0}^T \\binom{T}{k} e^{kx} (-1)^{T-k} \\Big) e^{Ux}\\)\n\\(\\displaystyle = M![x^M] \\sum_{k = 0}^T \\binom{T}{k} (-1)^{T-k} e^{(k+U)x}\\)\n\\(\\displaystyle = M! \\sum_{k = 0}^T \\binom{T}{k} (-1)^{T-k} \\frac{(k+U)^M}{M!}\\)\n\\(\\displaystyle = \\sum_{k = 0}^T \\binom{T}{k} (-1)^{T-k} (k+U)^M\\)\nとなります。\nこの式に従えば、階乗・階乗逆元を\n\\(O(N)\\)\nで前計算し、\n\\((k+U)^M\\)\nを繰り返し二乗法で求めることで、答えを\n\\(O(N \\log M)\\)\nで計算することができます。\n実装例：\nhttps://atcoder.jp/contests/abc201/submissions/72248006",
+      "codes": [],
+      "text_sha256": "4554e1651b68b17c50d9827758edea77f6e0aef9939f5eb9d56f90c35371982d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc201/abc201_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

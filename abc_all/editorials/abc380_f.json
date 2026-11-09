@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc380_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc380/editorial/11351",
+      "text": "現在どちらの手番であるかと、それぞれのカードが高橋君の手札・青木君の手札・場札のどこにあるかの\n\\(2\\times 3^{N+M+L}\\)\n状態でゲームの局面を表現することができます。\n行動を行うと、高橋君と青木君の手札に書かれた数の和が減少するため、局面がループすることはありません。よって、メモ化再帰などにより、各局面が手番のプレイヤーの必勝であるかを求めることで問題に答えることができます。\nより詳細には、あるゲームの局面が手番のプレイヤーの必勝状態であるための必要十分条件は、手番のプレイヤーの取りうる行動であって、その行動後の局面が手番のプレイヤー必敗であるものが存在することです。この条件をを自然に再帰関数とすると以下のようになり、これをメモ化すればよいです。\n\\(S=N+M+L\\)\nとして状態数が\n\\(O(3^S)\\)\n、遷移が\n\\(O(S^2)\\)\n通りあることから、全体で\n\\(O(3^S S^2)\\)\n時間でこの問題を解くことができました。\nより基礎的なゲームの問題\nABC349E『Weighted Tic-Tac-Toe』\nABC354E『Remove Pairs』",
+      "codes": [
+        "function is_first_player_win(ゲームの状態, 手番のプレイヤー): // 手番のプレイヤーが必勝ならTrueを返す\n  for each 取りうる行動:\n    if is_first_player_win(行動後の状態, 相手プレイヤー) is False:\n      return True\n  return False"
+      ],
+      "text_sha256": "ff12b5bfe5c5582d62bb54342192637fe8e389183008b2bb460089642e588674",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc380/abc380_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

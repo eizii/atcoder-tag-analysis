@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc314_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc314/editorial/6949",
+      "text": "いくつかの実装方針が考えられそうですが、\n例えば、本解説の末尾に記載する正解例では、下記の手順で解いています。\nまず、入力を受け取る。\n人\n\\(i = 1, 2, \\ldots, N\\)\nを順に調べ、\n\\(X\\)\nに賭けている人だけを可変長配列\n\\(\\mathrm{vec}\\)\nに格納する。\n\\(\\mathrm{vec}\\)\nに入っている人\n\\(i\\)\nそれぞれの賭けた出目の個数\n\\(C_i\\)\nを調べ、その中の最小値\n\\(C_{\\min}\\)\nを求める。\n\\(\\mathrm{vec}\\)\nに入っている人\n\\(i\\)\nのうち、\n\\(C_i = C_{\\min}\\)\nである人たち、つまり、賭けた出目の個数が最小の人たちだけを可変長配列\n\\(\\mathrm{ans}\\)\nに格納する。\n\\(\\mathrm{ans}\\)\nのサイズ及び各要素を昇順に出力する。\n以下に、C++ 言語による正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main(void)\n{\n    int n, x, c[101];\n    vector<int> a[101];\n    \n    cin >> n;\n    for(int i = 1; i <= n; i++){\n    \tcin >> c[i];\n        a[i].resize(c[i]);\n        for(int j = 0; j < c[i]; j++) cin >> a[i][j];\n    }\n    cin >> x;\n    \n    vector<int> vec;\n    for(int i = 1; i <= n; i++){\n        for(int j = 0; j < c[i]; j++) if(a[i][j] == x) vec.push_back(i);\n    }\n    \n    int cmin = 37;\n    for(auto i : vec) cmin = min(cmin, c[i]);\n    \n    vector<int> ans;\n    for(auto i : vec) if(c[i] == cmin) ans.push_back(i);\n    \n    cout << ans.size() << endl;\n    for(auto b : ans) cout << b << \" \";\n    cout << endl;\n    \n    return 0;\n}"
+      ],
+      "text_sha256": "45d6b6b294c5f4a4224181fdf509c2374edc9bc1972bc0ff6862f7dfd00ef249",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc314/abc314_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc314/editorial/6977",
+      "text": "新ジャッジで使えるようになった, C++20 の Ranges ライブラリを使用した実装例です.\nhttps://atcoder.jp/contests/abc314/submissions/44540940",
+      "codes": [
+        "#include <algorithm>\n#include <iostream>\n#include <ranges>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    vector bet(N, vector<int>{});\n    for(auto& A : bet) {\n        int C;\n        cin >> C;\n        A.resize(C);\n        for(int& a : A) cin >> a;\n    }\n    int X;\n    cin >> X;\n    \n    auto contains_X = views::iota(0, N) | views::filter([&](int i){ return ranges::count(bet[i], X); });\n    if(ranges::empty(contains_X)) {\n        cout << \"0\\n\";\n        return 0;\n    }\n    auto min_size = ranges::min(contains_X | views::transform([&](int i){ return bet[i].size(); }));\n    auto ans = contains_X | views::filter([&](int i){ return bet[i].size() == min_size; });\n    \n    cout << ranges::distance(ans) << '\\n';\n    for(auto i : ans) cout << i + 1 << '\\n';\n}"
+      ],
+      "text_sha256": "a1b1da1668ac8e1a44d5520dbc68e5b8eca22e413de93507b000f7fd00277434",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc314/abc314_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc310_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc310/editorial/6782",
+      "text": "ありえる \\(i,j\\) をすべて試し、\\(i\\) 番目の商品と \\(j\\) 番目の商品が条件を満たすかをチェックすることでこの問題を解くことができます。\n計算量は \\(O(N^2M)\\) 時間です。\nソートされた列 \\(A,B\\) について、\\(A\\) に含まれていて \\(B\\) に含まれていない要素が存在するか判定するには、\nstd::includes\n関数を使うことができます。\nそれぞれの商品について、機能 \\(k\\ (1\\leq k\\leq M)\\) をもつかどうかを連続する \\(M\\operatorname{bit}\\) で管理することで、ワードサイズ \\(w\\) について計算量を \\(O(N^2M/w)\\) 時間とすることもできます。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <utility>\n#include <algorithm>\n\nusing namespace std;\n\n// product_j が product_i の上位互換か判定する\nbool is_strictly_superior(const pair<int, vector<int>> &product_i, const pair<int, vector<int>> &product_j) {\n    const auto&[price_i, feature_i]{product_i};\n    const auto&[price_j, feature_j]{product_j};\n\n    return price_i >= price_j &&\n           includes(feature_j.begin(), feature_j.end(), feature_i.begin(), feature_i.end()) &&\n           (price_i > price_j || !includes(feature_i.begin(), feature_i.end(), feature_j.begin(), feature_j.end()));\n}\n\n// products に上位互換の組があるか判定する\nbool has_superior_pair(const vector<pair<int, vector<int>>> &products) {\n    return any_of(products.begin(), products.end(), [&products](const auto &product_i) {\n        return any_of(products.begin(), products.end(), [&product_i](const auto &product_j) {\n            return is_strictly_superior(product_i, product_j);\n        });\n    });\n}\n\nint main() {\n    int N, M;\n    cin >> N >> M;\n    vector<pair<int, vector<int>>> products(N);\n    for (auto&&[price, feature] : products) {\n        cin >> price;\n        int K;\n        cin >> K;\n        feature = vector<int>(K);\n        for (auto &&f : feature)\n            cin >> f;\n    }\n\n    cout << (has_superior_pair(products) ? \"Yes\" : \"No\") << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "0ac654b4552c3ffc445542a6d648ffc80b80532c6d08b82f0c1baaa3efbb1d2d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc310/abc310_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc310/editorial/6810",
+      "text": "例えば以下のようにして、生配列、for文、if文(とiostreamによる入出力)だけで正しいコードを記述出来ます。計算量は公式解説と同じく\n\\(O(N^2M)\\)\nで、十分高速です。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n    int N,M;\n    cin >> N >> M;\n    int P[N];\n    bool func[N][M]={}; //func[i][j]:i番目の商品がj番目の機能を持つか(0-indexed)\n    for(int i=0;i<N;i++){\n        cin >> P[i];\n        int c;\n        cin >> c;\n        for(int j=0;j<c;j++){\n            int f;\n            cin >> f;\n            f--; //0-indexedに直す\n            func[i][f]=true;\n        }\n    }\n    bool ans=false; //条件をすべて満たす(i,j)のペアが存在するか\n    for(int i=0;i<N;i++){\n        for(int j=0;j<N;j++){\n            bool cond1=false; //P_i>=P_jかどうか\n            bool cond2=true; //j番目の製品がi番目の製品が持つ機能をすべてもつかどうか\n            bool cond3=false; //P_i>P_jである、またはj番目の製品がi番目の製品にない機能を1つ以上もつかどうか\n            if(P[i]>=P[j]) cond1=true;\n            for(int k=0;k<M;k++){\n                if(func[i][k] && !func[j][k]) cond2=false; //i番目の製品がもつ機能をj番目の製品が持っていなかったらダメ\n            }\n            if(P[i]>P[j]) cond3=true;\n            for(int k=0;k<M;k++){\n                if(func[j][k] && !func[i][k]) cond3=true; //j番目の製品がi番目の製品にない機能をもっていたらOK\n            }\n            if(cond1 && cond2 && cond3) ans=true;\n        }\n    }\n    if(ans==true) cout << \"Yes\" << endl;\n    else cout << \"No\" << endl;\n}"
+      ],
+      "text_sha256": "c98c0de323bf0dcca46b858e66b5e0eda40f4bb183937ec02041fd19ac1960d8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc310/abc310_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc310/editorial/6797",
+      "text": "公式解説\nの実装例が少々難しく見えるので、行数の少ないコードを掲載しておきます。\n(Python)",
+      "codes": [
+        "N, M = map(int, input().split())\nP, C, F = [], [], []\nfor _ in range(N):\n    l = list(map(int, input().split()))\n    P.append(l[0])\n    C.append(l[1])\n    F.append(set(l[2:]))\nans = False\nfor i in range(N):\n    for j in range(N):\n        ans |= P[i] >= P[j] and F[j].issuperset(F[i]) \\\n            and (P[i] > P[j] or len(F[j]) > len(F[i]))\nprint('Yes' if ans else 'No')"
+      ],
+      "text_sha256": "20c8dc39c06ffc806153d4766357938d343a253bf26674122c18ee3b3fe7ea0b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc310/abc310_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

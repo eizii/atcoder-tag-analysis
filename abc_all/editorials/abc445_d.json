@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc445_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc445/editorial/15896",
+      "text": "縦\n\\(H\\)\nブロック、横\n\\(W\\)\nブロックのスペースがあり、そこにピースを並べていくものとします。\n結論から述べると、縦幅か横幅が空いているスペースと一致するようなピースを空いているスペースの端に置くことを繰り返せばこの問題は解くことができます。\n実装においては残っているピースのうち縦幅が最大のピースおよび横幅が最大のピースを取得して空きスペースの幅と一致するなら置くことを繰り返せばよく、あらかじめ\n\\(O(N\\log N)\\)\n時間でピースを\n\\(h_i\\)\nの降順および\n\\(w_i\\)\nの降順で並び替えておきすでに確認したピースを飛ばすことで、並べる処理全体を\n\\(O(N)\\)\n時間で行うことができます。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main()\n{\n    int H, W, N;\n    cin >> H >> W >> N;\n    vector<int> h(N), w(N);\n    for (int i = 0; i < N; i++) cin >> h[i] >> w[i];\n\n    // ord_h, ord_w : ピースの番号の並び替え\n    // h[ord_h[i]] >= h[ord_h[i + 1]]\n    // w[ord_w[i]] >= w[ord_w[i + 1]]\n    vector<int> ord_h(N), ord_w(N);\n    iota(ord_h.begin(), ord_h.end(), 0);\n    sort(ord_h.begin(), ord_h.end(), [&](int x, int y) { return h[x] > h[y]; });\n    iota(ord_w.begin(), ord_w.end(), 0);\n    sort(ord_w.begin(), ord_w.end(), [&](int x, int y) { return w[x] > w[y]; });\n\n    vector<int> ans_x(N, -1), ans_y(N, -1);\n    vector<bool> used(N, false);\n    auto ith = ord_h.begin();\n    auto itw = ord_w.begin();\n    for (int rem = N; rem > 0; rem--) {\n        // すでに使用済みなら飛ばす\n        while (used[*ith]) ith++;\n        while (used[*itw]) itw++;\n        // ピース i が縦 H ブロック or 横 W ブロック\n        int i = h[*ith] == H ? *ith : *itw;\n        // 右下に置く\n        ans_x[i] = H - h[i] + 1;\n        ans_y[i] = W - w[i] + 1;\n        used[i] = true;\n        if (h[i] == H) {\n            W -= w[i];\n        } else {\n            H -= h[i];\n        }\n    }\n    for (int i = 0; i < N; i++) cout << ans_x[i] << \" \" << ans_y[i] << \"\\n\";\n}"
+      ],
+      "text_sha256": "e05d9709ebd00b5cf505aa4af317f307b27ddc18788b1d0565d137f85a201e10",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc445/abc445_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

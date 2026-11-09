@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc419_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc419/editorial/13669",
+      "text": "\\(A\\)\nのすべての長さ\n\\(L\\)\nの連続部分列の総和が\n\\(M\\)\nの倍数であることは、以下の条件をともに満たすことと同値です。\n\\(A_1 + A_2 + \\ldots + A_L\\)\nが\n\\(M\\)\nの倍数\n\\(1 \\leq i \\leq N - L\\)\nなる任意の\n\\(i\\)\nについて\n\\(A_i - A_{i + L}\\)\nが\n\\(M\\)\nの倍数\nこのことから、\n\\(A_1, A_2, \\ldots, A_L\\)\nへの操作回数がわかっているとき、\n\\(i = L + 1, L + 2, \\ldots, N\\)\nについて\n\\(A_i\\)\nへの操作回数は\n\\(A_{i - L}\\)\nと\n\\(A_i\\)\nを\n\\(M\\)\nで割った余りが等しくなるような最小の回数であることがわかります。\n\\(f_{i, j}\\)\nを\n\\(A_i, A_{L + i}, A_{2L + i}, \\ldots\\)\nを\n\\(M\\)\nで割った余りがすべて\n\\(j\\)\nになるために必要な操作回数の最小値とします。これは愚直に\n\\(O(NM)\\)\n時間で計算が可能です。\n\\(f_{i, j}\\)\nの値を利用して dp による計算を行います。\n\\(dp_{i,j}\\)\nを\n\\(A_1, A_2, \\ldots, A_i\\)\nまでの操作回数を確定させて、\n\\(A_1 + A_2 + \\ldots, A_i\\)\nを\n\\(M\\)\nで割った余りが\n\\(j\\)\nであるときの操作回数の最小値として定めます。ただし、ここでの操作回数の最小値とは、\n\\(A_1, A_2, \\ldots, A_i\\)\nに対するものだけではなく、添え字を\n\\(L\\)\nで割った余りが\n\\(1, 2, \\ldots, i\\)\n（を\n\\(L\\)\nで割った余り）と等しい要素全体への操作回数について考えます。上の議論から、\n\\(A_i\\)\nに対する操作回数を決めたとき、\n\\(A_{L + i}, A_{2L + i}, \\ldots\\)\nに対する操作回数も決まるので、このような計算が行えます。\n具体的な dp の遷移について解説します。\n\\(A_i\\)\nを\n\\(M\\)\nで割った余りを\n\\(k\\)\nにさせると決めたとき、\n\\(A_i, A_{L + i}, A_{2L + i}, \\ldots\\)\nに対する操作回数の最小値は（その定義から）\n\\(f_{i, k}\\)\nです。したがって、\n\\(dp_{i, ((j + k) \\bmod M)} \\leftarrow \\min(dp_{i, ((j + k) \\bmod M)}, dp_{i - 1, j} + f_{i, k})\\)\nとして dp の計算を行うことができます。最終的な答えは\n\\(dp_{L, 0}\\)\nです。\ndp の計算は全体として\n\\(O(LM^2)\\)\n時間で行え、これは適切な実装のもと十分高速です。\nBonus :\n\\(O(NM)\\)\n時間で解けます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nconst int inf = 1000000001;\ntemplate<class T, class U> inline bool chmin(T& a, const U& b) { if (a > b) { a = b; return true; } return false; }\n\nint main() {\n\tint n, m, l;\n\tcin >> n >> m >> l;\n\tvector<int> a(n);\n\tfor (int i = 0; i < n; i++) cin >> a[i];\n\tvector<int> dp(m, inf);\n\tdp[0] = 0;\n\tfor (int i = 0; i < l; i++) {\n\t\tvector<int> ep(m, inf);\n\t\tfor (int j = 0; j < m; j++) {\n\t\t\tint cost = 0;\n\t\t\tfor (int k = i; k < n; k += l) {\n\t\t\t\tif (j >= a[k]) cost += j - a[k];\n\t\t\t\telse cost += j - a[k] + m;\n\t\t\t}\n\t\t\tfor (int k = 0; k < m; k++) chmin(ep[(k + j) % m], dp[k] + cost);\n\t\t}\n\t\tdp = move(ep);\n\t}\n\tcout << dp[0] << '\\n';\n}"
+      ],
+      "text_sha256": "650f2dc8faa6e86338c4090e0c69ae90756d7ff1a7cd6800cfdf16d4d4d5adf2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc419/abc419_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc419/editorial/13677",
+      "text": "公式解説を前提にします。\n\\(A_i, A_{L+i}, A_{2L+i}, \\cdots\\)\nを\n\\(M\\)\nで割った余りをすべて\n\\(k\\)\nにするとき、操作回数の最小値\n\\(f_{i,k}\\)\nは\n\\[\nf_{i,k} = \\sum_{j} ((k - A_{Lj+i}) \\bmod M)\n\\]\nで表されます。制約から\n\\(0 \\le A_{Lj+i} \\lt M\\)\nであるので、\n\\[\n(k-A_{Lj+i}) \\bmod M =\n\\begin{cases}\nk-A_{Lj+i} & (k \\ge A_{Lj+i})\\\\\nk-A_{Lj+i}+M & (k \\lt A_{Lj+i})\n\\end{cases}\n\\]\nです。\nよって\n\\(A_i, A_{L+i}, A_{2L+i}, \\cdots\\)\nが全体で\n\\(s\\)\n個、\n\\(k \\lt A_{Lj+i}\\)\nとなるものの個数が\n\\(t\\)\n個あるとしたとき、式を整理すると\n\\[\nf_{i,k} = ks + Mt - \\sum_{j} A_{Lj+i}\n\\]\nとなります。これを観察すると、\n\\(k\\)\nが大きくなるにつれ\n\\(t\\)\nが広義単調減少していきます。しかし、\n\\(t\\)\nの変化点は高々\n\\(s\\)\n種類しかありません。それ以外の場所では、\n\\(f_{i,k+1} = f_{i,k} + s\\)\nです。\nイメージを図で表すと以下になっています。\n（ここに図があるはずですがリンク切れしていたら教えて下さい）\nDPの遷移のときには、実はすべての\n\\(k\\)\nで遷移する必要はなく、\n図の各緑点 （\n\\(A_{Lj+i}\\)\nのとりうる値）で各\n\\(j=0,1,\\cdots, M-1\\)\nに対して\n\\(dp_{i,((j+k) \\bmod M)} \\leftarrow \\min(dp_{i,((j+k)\\bmod M)}, dp_{i-1,j}+f_{i,k})\\)\nと遷移して、すべての遷移が終わった最後に\n\\(j=0,1,\\cdots, 2M-1\\)\nの順に\n\\(dp_{i,(j+1)\\bmod M} \\leftarrow \\min(dp_{i,(j+1)\\bmod M}, dp_{i,j \\bmod M} + s)\\)\nとすると同じ遷移ができます。\nこれを\n\\(i=1,2,\\cdots, L\\)\nの順に行えばよいです。\n各\n\\(k=A_{Lj+i}\\)\nに対する\n\\(f_{i,k}\\)\nの値の取得は\n\\(A_i, A_{L+i}, A_{2L+i}, \\cdots\\)\nをソートすると簡単に行えます。このときに、std::sortなどを用いると問題の時間計算量は全体で\n\\(O(NM \\log N)\\)\nとなります。\nしかし、この問題の制約から\n\\(0 \\le A_x < M\\)\nであるので、バケットソートを用いることで時間・空間計算量\n\\(O(LM+N)\\)\nですべての\n\\(i=1,2,\\cdots, L\\)\nに対して\n\\(A_i, A_{L+i}, A_{2L+i}, \\cdots\\)\nのソートを行うことができ、\n\\(O(NM)\\)\n時間が達成できます。\n実装例(C++, 4ms)",
+      "codes": [],
+      "text_sha256": "6d5299c54bb36fc6187801e48972005a357c8e80a92ef4e46dd9c819130fa4b4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc419/abc419_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

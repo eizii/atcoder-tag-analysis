@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc057_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc057/editorial.pdf",
+      "text": "C:  Digits in Multiplication\n\n   まず、F(A, B) について考えます。「A の桁数とB の桁数のうち大きい方」とは、M = max(A, B) の桁数です。\n 整数M の桁数は次のような方法で求められます。\n\n     • M を10 進表記の文字列に変換したときの文字列の長さ\n\n     • M を0 になるまで10 で繰り返し割った時の回数\n\n  次に、正の整数N にN = A × B を満たす2 つの正の整数の組(A, B) について考えます。このとき、A, B はと\n もにN の約数です。そこで、N の約数を全列挙することを考えます。考えられる方法としては1 ≤A ≤N を満\n たすA についてループを回して、N がA で割り切れるかを試します。しかし、この方法では時間計算量がO(N)\n となるため間に合いません。そこで、交換法則N = A × B = B × A が成り立つことを利用します。このことか\n                                            √\n ら、A ≤B を満たすA を列挙すれば良いことがわかります。この場合、1 ≤A ≤ N を満たし、時間計算量は\n   √\n  O( N) となるため間に合います。なお、32bit 整数型によるオーバーフローに注意してください。\n\n\n  C++のコード例\n\n\n\n 1 using ll=long long;\n\n\n 2\n\n\n                                                  2\n\f\n 3 int cnt_digits(ll N){\n 4     int digits=0;\n\n\n 5\n\n 6     while(N>0){\n\n 7         N/=10;\n\n 8         digits++;\n\n 9     }\n\n\n10\n\n11     return digits;\n\n12 }\n\n\n13\n\n14 int main(void){\n\n15     ll N;\n\n16     cin >> N;\n\n\n17\n\n18     int ans=cnt_digits(N); // 1*N=N max(cnt_digits(1),cnt_digits(N))=cnt_digits(N)\n\n\n19\n\n20     for(ll A=1LL;A*A<=N;++A){\n\n21         if(N%A!=0) continue;\n\n22         const ll B=N/A;\n\n\n23\n\n24         const int cur=max(cnt_digits(A),cnt_digits(B));\n\n\n25\n\n26         if(ans>cur){\n\n27             ans=cur;\n\n28         }\n29     }\n\n\n30\n\n31     cout << ans << endl;\n\n32     return 0;\n\n33 }",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "ebb23e802d380be8081e8c38daefbcba0e68af75b4e691738b5b4d6785b5d66e"
+    }
+  ],
+  "status": "available"
+}

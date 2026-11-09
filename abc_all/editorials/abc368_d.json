@@ -1,0 +1,46 @@
+{
+  "problem_id": "abc368_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc368/editorial/10730",
+      "text": "\\(K=1\\)\nのとき答えは明らかに\n\\(1\\)\nです。そうでないときを考えます。\n「もとのグラフからいくつかの(0 個でもよい)辺と頂点を削除してできる木のうち、頂点 V1,…,VK を全て含むようなもの」を\n条件を満たす木\nと呼ぶことにします。\n「次数が\n\\(1\\)\nであり、\n\\(V_1,\\ldots,V_K\\)\nのいずれでもない頂点」を\n悪い頂点\nと呼ぶことにします。\nもとの木から始めて、悪い頂点とそれに接続する辺を削除することを可能な限り繰り返してできる木が求める木です。\nこの操作は、各頂点について、直接辺でつながっている頂点をsetで管理することなどで高速に行うことができます。\nwriter解(Python)",
+      "codes": [
+        "N,K = map(int,input().split())\nedge = [set() for _ in range(N)]\n\nfor _ in range(N-1):\n  a,b = map(int,input().split())\n  a-=1\n  b-=1\n  edge[a].add(b)\n  edge[b].add(a)\n\nV = set(map(int,input().split()))\nV = set(x-1 for x in V)\n\ndeg = [len(s) for s in edge]\nq = [i for i,d in enumerate(deg) if d==1]\n\nans = N\nfor v in q:\n  if v in V: continue\n  vv = edge[v].pop()\n  edge[vv].discard(v)\n  ans-=1\n  if len(edge[vv])==1: q.append(vv)\n\nprint(ans)"
+      ],
+      "text_sha256": "ad87992310b0c6d3d38ef080336aa446cd063210b0bd4f039ed8be789a878a37",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc368/abc368_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc368/editorial/10795",
+      "text": "ユーザ解説\n同様、指定された頂点のうちの一つを根とする根つき木を考えます。根を\n\\(r\\)\nとおきます。\nこのとき、「各\n\\(i\\)\n(\n\\(1\\le i\\le K\\)\n) に対し、\n\\(r\\)\nと\n\\(V_i\\)\nを結ぶパスに含まれる頂点」の和集合が、答え（条件を満たすうちで頂点数が最小）となる木の頂点集合となります。\nさて、各頂点\n\\(v\\)\nに対して、\n\\(r\\)\nを根としたときの親\n\\(p_v\\)\nを求めておくと、下記の手続きによって該当の集合を構成することができます。ただし、\n\\(p_r = \\infty\\)\nとしておきます。\n\\(S \\gets \\emptyset\\)\nで初期化する。\n\\(v \\gets V_1, V_2, \\dots, V_K\\)\nに対して下記を行う。(loop A)\n\\(u \\gets v\\)\nで初期化する。\n\\(u \\lt \\infty\\)\nである間、下記を繰り返す。(loop B)\n\\(u \\in S\\)\nであれば loop B を終了 (break) する。\nそうでなければ、\n\\(S \\gets S\\cup\\{u\\}\\)\nおよび\n\\(u \\gets p_u\\)\nで更新する。\n各頂点に対して、\n\\(S\\)\nに追加されるのは高々 1 回であることから、loop B の内部が実行されるのは全体で高々\n\\(N\\)\n回であることがわかります。\nそのため、全体で\n\\(O(N)\\)\n時間で求められます。\n提出 #57058599\nおまけのポエム\nABC 367 E の線形時間解法\nを実装する際に、部分問題として上記のような手続きを実装していました（long-path decomposition をする際です）。コンテストに使う用のライブラリとしては必要がないと思われる場合でも、実装しておくとコンテスト中の発想に役立つ場合があってうれしいですね。",
+      "codes": [],
+      "text_sha256": "a3dae8e51bb05bee4a7cbc71a9a0cd8f7a7530ea23399460beac3c5691c6e606",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc368/abc368_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc368/editorial/10804",
+      "text": "競プロ典型90問この問題\nの答えに\n\\(1\\)\n足したものがこの問題の答えです。この問題の想定解のソースコードに\n\\(N=1\\)\nの場合の処理を書き加えて\n\\(Q=1\\)\nとすればACを得ることができます。\n提出",
+      "codes": [],
+      "text_sha256": "db47d80c09f5d9a1ecbd5530bbbc983d4751d4ce452ae40be75ab551274c0b81",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc368/abc368_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc368/editorial/10780",
+      "text": "木 DP を用いることでもこの問題を解くことができます。\n指定された頂点のひとつを根として選び、根付き木とします。\nこのとき、答えとなる部分グラフで頂点 \\(v\\) を使うことの必要十分条件は、\\(v\\) を親とする部分木の中に指定された頂点が存在することです。\n\\(v\\) に対するこの条件が成り立つかどうかは、\\(v\\) の子に対する答えをすべて求められれば確かめられます。\nあとは、DFS などと共に木 DP を行うことでこの問題を解くことができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n    unsigned N, K;\n    cin >> N >> K;\n    vector<vector<unsigned>> edges(N);\n    for(unsigned i{1}; i < N; ++i){\n        unsigned A, B;\n        cin >> A >> B;\n        edges[--A].emplace_back(--B);\n        edges[B].emplace_back(A);\n    }\n\n    // use[i] := 答えとなる木で頂点 i を使う\n    vector<bool> use(N);\n    // 木 DP をするための根\n    unsigned root;\n    cin >> root;\n    --root;\n    use[root] = true;\n    for(unsigned i{1}; i < K; ++i){\n        unsigned V;\n        cin >> V;\n        use[--V] = true;\n    }\n\n    // 木 DP を行う\n    // dfs(now, prev) := prev を親とした now 以下の部分木に使う頂点があるか\n    [dfs{[&edges, &use](const auto& f, unsigned now, unsigned prev) -> bool {\n        for(const auto next : edges[now])\n            if (next != prev)\n                use[now] = use[now] | f(f, next, now);\n        return use[now];\n    }}](unsigned v){\n        dfs(dfs, v, v);\n    }(root); // 使う頂点を根として木 DP\n\n    cout << ranges::count(use, true) << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "9b788a61d2158fd5f34ae8d7a7e5d3a4cb22a0b2edac826acee6e71dc60725b4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc368/abc368_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

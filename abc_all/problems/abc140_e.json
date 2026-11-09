@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc140_e",
+  "title": "Second Sum",
+  "contests": [
+    {
+      "contest_id": "abc140",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1873,
+  "raw_difficulty": 1873,
+  "contest_id": "abc140",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc140/tasks/abc140_e",
+  "statement": "配点: 500 点 問題文 \\{1, 2, \\ldots, N\\} の順列 P が与えられます。 ペア (L, R) (1 \\le L \\lt R \\le N) について、 P_L, P_{L+1}, \\ldots, P_R の中で 2 番目に大きいものを X_{L, R} とします。 \\displaystyle \\sum_{L=1}^{N-1} \\sum_{R=L+1}^{N} X_{L,R} を求めてください。 制約 2 \\le N \\le 10^5 1 \\le P_i \\le N P_i \\neq P_j (i \\neq j) 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N P_1 P_2 \\ldots P_N 出力 \\displaystyle \\sum_{L=1}^{N-1} \\sum_{R=L+1}^{N} X_{L,R} を出力せよ。 入力例 1 3\r\n2 3 1 出力例 1 5 X_{1, 2} = 2, X_{1, 3} = 2, X_{2, 3} = 1 より、総和は 2 + 2 + 1 = 5 となります。 入力例 2 5\r\n1 2 3 4 5 出力例 2 30 入力例 3 8\r\n8 2 7 3 4 5 6 1 出力例 3 136",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 \\{1, 2, \\ldots, N\\} の順列 P が与えられます。 ペア (L, R) (1 \\le L \\lt R \\le N) について、 P_L, P_{L+1}, \\ldots, P_R の中で 2 番目に大きいものを X_{L, R} とします。 \\displaystyle \\sum_{L=1}^{N-1} \\sum_{R=L+1}^{N} X_{L,R} を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\le N \\le 10^5 1 \\le P_i \\le N P_i \\neq P_j (i \\neq j) 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N P_1 P_2 \\ldots P_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 \\displaystyle \\sum_{L=1}^{N-1} \\sum_{R=L+1}^{N} X_{L,R} を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\n2 3 1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 5 X_{1, 2} = 2, X_{1, 3} = 2, X_{2, 3} = 1 より、総和は 2 + 2 + 1 = 5 となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5\r\n1 2 3 4 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 30"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 8\r\n8 2 7 3 4 5 6 1"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 136"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc140/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:35:03.799393+00:00",
+  "statement_sha256": "95f34a057f1f3c9e2bc8e82a4f61a9375f43456da1042d8de23388d9e0713448",
+  "editorials": []
+}

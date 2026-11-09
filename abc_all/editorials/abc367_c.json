@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc367_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc367/editorial/10705",
+      "text": "「\n\\(1\\)\n以上\n\\(5\\)\n以下の整数からなる長さ\n\\(8\\)\nの数列」は\n\\(5^8=390625\\)\n個です。 出力すべき数列の個数はこの数以下なので、出力が大きすぎる心配をする必要はありません。\n方針1. 再帰を使って列挙する\n最初に\n\\(1\\)\nつ目の要素を小さい順に固定する\n\\(1\\)\nつ目の要素を固定した下に再帰を呼び、\n\\(2\\)\nつ目の要素を小さい順に固定する\n\\(\\dots\\)\n要素が出そろったら、総和が\n\\(K\\)\nの倍数であるかを判定した後出力する\nというような再帰を実装するとこの問題に正解できます。\n実装例 (C++):\n方針2. 数列に対応する整数をデコードする\n「\n\\(K\\)\nの倍数 」という条件を無視すれば、数列として考えられるものは\n\\(P=R_1 \\times R_2 \\times \\dots \\times R_N\\)\n通りです。\n実は、\n\\(0\\)\nから\n\\(P-1\\)\nまでの整数から以下の通りに数列を復元すれば、その数列は辞書順に並びます。\n整数\n\\(t\\)\nから復元される数列を\n\\(S\\)\nとする。また、変数\n\\(x \\leftarrow t\\)\nを用意する。\n\\(i = N\\)\nから\n\\(1\\)\nまで、次を繰り返す。\n\\(S_i \\leftarrow (x \\% R_i)+1\\)\nとする。 (\n\\(p \\% q\\)\n…\n\\(p\\)\nを\n\\(q\\)\nで割った余り)\nその後、\n\\(x\\)\nを\n\\(\\displaystyle \\frac{x}{R_i}\\)\n(小数点以下切り捨て) に置き換える。\n直感的には、数列は特殊な N 進法表記に対応します。\n\\(R=(6,3,2,5)\\)\nとすると、後ろの要素(下の位)から順に\n\\(1\\)\nの位、\n\\(5\\)\nの位、\n\\(5 \\times 2\\)\nの位、\n\\(5 \\times 2 \\times 3\\)\nの位 と並んでいると捉えることができます。ここで、\n\\(A=(1,3,1,2)\\)\nは\n\\(0 \\times 30 + 2 \\times 10 + 0 \\times 5 + 1\\)\nに対応します (この際、\n\\(1\\)\nから\n\\(R_i\\)\nまでの各要素を\n\\(0\\)\nから\n\\(R_i-1\\)\nまでに修正する必要があることに注意してください)。\n他にも、この方針の亜種として別のデコード方法を採用し最後に全ての数列をソートするという方法もあります。 ( 例えば C++ では、\nvector<vector<int>>\nをソートすると中身の\nvector<int>\nを辞書順に並べることができます)\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint n,k;\nint r[8];\nint seq[8];\n\nvoid solve(int lv){\n  if(lv==n){\n    int s=0;\n    for(int i=0;i<n;i++){ s+=seq[i]; }\n    if(s%k==0){\n      for(int i=0;i<n;i++){\n        if(i){cout << \" \";}\n        cout << seq[i];\n      }cout << \"\\n\";\n    }\n    return;\n  }\n  for(int i=1;i<=r[lv];i++){\n    seq[lv]=i;\n    solve(lv+1);\n  }\n}\n\nint main(){\n  cin >> n >> k;\n  for(int i=0;i<n;i++){\n    cin >> r[i];\n  }\n  solve(0);\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint n,k;\nint r[8];\nint seq[8];\n\nint main(){\n  cin >> n >> k;\n  int tot=1;\n  for(int i=0;i<n;i++){\n    cin >> r[i];\n    tot*=r[i];\n  }\n  for(int t=0;t<tot;t++){\n    int x=t;\n    int s=0;\n    for(int i=n-1;i>=0;i--){\n      seq[i]=(x%r[i])+1;\n      s+=seq[i];\n      x/=r[i];\n    }\n    if(s%k==0){\n      for(int i=0;i<n;i++){\n        if(i){cout << \" \";}\n        cout << seq[i];\n      }cout << \"\\n\";\n    }\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "210cddafbb51232694cc3c6b3e3dd1cc101366abf4c0e82ab511abecf20eebca",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc367/abc367_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc367/editorial/10720",
+      "text": "Python であれば\nitertools.product\nを用いて非常に簡単に実装できます。\n提出",
+      "codes": [
+        "from itertools import product\n\nn, k = map(int, input().split())\nr = list(map(int, input().split()))\n\nfor a in product(*(range(1, x + 1) for x in r)):\n    if not sum(a) % k:\n        print(*a)"
+      ],
+      "text_sha256": "cb35bb9ef8875a9f661f79ed8b19cf77912adbab654b565ea1fcc5be382041d6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc367/abc367_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

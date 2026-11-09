@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc264_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4584",
+      "text": "重要な観察として、以下が挙げられます。 深さ \\(20\\) 以上の完全二分木が誘導されることはない。 理由: 深さが \\(20\\) 以上の完全二分木が誘導されるためには \\(2^{20}-1 = 1048575\\) 個以上の頂点が必要になりますが、制約上頂点は \\(3 \\times 10^5\\) 個しかないので、不足します。 さらに、ここから以下のことも言えます。 深さ \\(20\\) 以上にある頂点は無視してもよい。 これにより、例えば \\(N\\) 頂点全てについて、その頂点が追加された際に祖先全てに関して何らかの更新を行う (高々 \\(20\\) 回) といった解法が成立するという考察が立てられます。 では、本問題を解いていきましょう。以下の値を管理していくことを考えます。 \\(dp[\\) 頂点 \\(v\\) \\(][\\) 深さ \\(d\\) \\(]\\) … 頂点 \\(v\\) を根とした時に誘導される深さ \\(d\\) (頂点数 \\(2^{d+1}-1\\) ) の完全二分木の数 \\(csum[\\) 頂点 \\(v\\) \\(][\\) 深さ \\(d\\) \\(]\\) … \\(v\\) の子 \\(w\\) 全てに対する \\(dp[w][d]\\) の総和 ここで、便宜上頂点 \\(1\\) の親として頂点 \\(0\\) があるものとして取り扱うと後々便利です。 最初は頂点 \\(1\\) のみがある状態から始めて、頂点 \\(2\\) 以降を順次追加して答えを求めていくことを考えます。 なお、各段階での答えは \\(csum[0]\\) の総和であることに留意してください。 ある頂点 \\(v\\) を追加した際に、以下を行っていけばよいです。 \\(v\\) が深さ \\(20\\) 以上の位置にあるなら何も更新する必要がない そうでない場合、 \\(v\\) とその祖先全てに対して \\(dp,csum\\) を更新する 具体的には、 \\(v\\) を含む完全二分木の数を各深さについて数えて加算していく。 完全二分木の深さをひとつ増やす際、 \\(v\\) を含む側の完全二分木として考えられるものの数を保持しつつ、もう片方の完全二分木として考えられるものの数 ( \\(dp,csum\\) から求められます) を掛けていけばよいです。 実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#define mod 998244353\n \nusing namespace std;\n \nint main(){\n  int n;\n  cin >> n;\n  vector<int> p(n+1);\n  for(int i=2;i<=n;i++){cin >> p[i];}\n \n  vector<int> d(n+1,0);\n  vector<vector<long long>> dp(n+1,vector<long long>(20,0));\n  vector<vector<long long>> csum(n+1,vector<long long>(20,0));\n \n  p[1]=0;\n  dp[1][0]=1;\n  csum[0][0]=1;\n  cout << \"1\\n\";\n \n  for(int i=2;i<=n;i++){\n    d[i]=d[p[i]]+1;\n \n    if(d[i]<20){\n      long long val=1;\n      int v,curd;\n      v=i;curd=0;\n \n      while(1){\n        int par=p[v];\n        long long nval=val*(mod+csum[par][curd]-dp[v][curd])%mod;\n \n        csum[par][curd]+=val;csum[par][curd]%=mod;\n        dp[v][curd]+=val;dp[v][curd]%=mod;\n        if(par==0){break;}\n        v=par;\n        curd++;\n        val=nval;\n      }\n    }\n    \n    long long res=0;\n    for(int i=0;i<20;i++){\n      res+=csum[0][i];res%=mod;\n    }\n    cout << res << \"\\n\";\n  }\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "4d10da34dde9aeba72e3b677d0612f1e77c85f40a8666fd2846296e30c140500"
+    }
+  ],
+  "status": "available"
+}

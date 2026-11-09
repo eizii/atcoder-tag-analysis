@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc328_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc328/editorial/7644",
+      "text": "\\(1\\) 番目の操作を複数回行う必要はなく、\\(1\\) 番目の操作を \\(1\\) 度だけ行ったあと \\(2\\) 番目の操作を行うとしてよいです。 \\(1\\) 番目の操作が終わった直後の数列 \\((A _ {p _ 1},A _ {p _ 2},\\ldots,A _ {p _ N})\\) を先頭から決めることにすると、次のような DP が考えられます。 \\(\\operatorname{dp}[S]\\coloneqq S=\\lbrace p _ 1,p _ 2,\\ldots,p _ {|S|}\\rbrace\\) であるように先頭 \\(|S|\\) 項を決めたときの、確定している最小コスト ただし、ここで「確定している最小コスト」とは、条件を満たす先頭 \\(|S|\\) 項が寄与するコストの最小値です。\n厳密には、次の式の値です。 \\[\\min _ {\\substack{p\\text{は}(1,2,\\ldots,N)\\text{の順列}\\\\\\lbrace p _ 1,p _ 2,\\ldots,p _ {|S|}\\rbrace=S}}\\left(C\\times\\#\\lbrace i|1\\leq i\\lt|S|,p _ i+1\\neq p _ {i+1}\\rbrace+\\sum _ {i=1} ^ {|S|}\\left|A _ {p _ i}-B _ i\\right|\\right)\\] この DP を \\(1\\) 番目の操作で分割したブロックごとに更新することを考えます。 \\(S\\subset\\lbrace1,2,\\ldots,N\\rbrace\\) に対して、\\(S\\cap\\lbrack l,r\\rbrack=\\emptyset\\ (1\\leq l\\leq r\\leq N)\\) であるような全ての組 \\((l,r)\\) に関して \\(S\\rightarrow S\\cup\\lbrace l,l+1,\\ldots,r\\rbrace\\) の遷移を行うような処理を考えます。 これの遷移の回数は、ある長さ \\(k\\) の区間の遷移を行うような \\(S\\) が \\(2 ^ {N-k}\\) 個しかないことから \\(\\displaystyle\\sum _ {k=1} ^ N2 ^ {N-k}(N+1-k)=2 ^ N(N-1)+1=O(2 ^ NN)\\) となります。 （ワードサイズ \\(w\\) について \\(N\\leq w\\) が成り立つという仮定のもとで、）\\(\\lbrace1,2,\\ldots,N\\rbrace\\) の部分集合を \\(1\\) ワードの整数で管理することで、全体の計算量を \\(O(2 ^ NN)\\) 時間とすることができます。 実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <limits>\n#include <bit>\n\nint main() {\n    using namespace std;\n\n    unsigned N;\n    unsigned long C;\n    cin >> N >> C;\n    vector<unsigned long> A(N), B(N);\n    for (auto &&a : A)\n        cin >> a;\n    for (auto &&b : B)\n        cin >> b;\n\n    vector<unsigned long> dp(1U << N, numeric_limits<unsigned long>::max() / 2);\n    dp[0] = -C; // はじめの 1 ブロックは分割のコストがかからないので -C しておく\n\n    const auto chmin{[](auto &&x, const auto &y) {\n        if (x > y)x = y;\n        return x;\n    }};\n\n    for (unsigned long S{}; S < 1U << N; ++S)\n        for (unsigned long B_front(popcount(S)), l{}; l < N; ++l)\n            for (unsigned long cost{C}, r{l}, i{B_front}; r < N; ++r, ++i) {\n                if ((S >> r) & 1) // 区間が重なったら終了\n                    break;\n                cost += max(A[r], B[i]) - min(A[r], B[i]); // 区間のコストに |A[p[i]] - B[i]| を加える\n                chmin(dp[S | (1UL << r + 1) - (1UL << l)], dp[S] + cost); // コストを更新\n            }\n\n    cout << dp.back() << endl;\n    return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "41e58c6ff728942a9b42309af9e29d9670b6a8f0a660b2bb94c8c2e2244228a5"
+    }
+  ],
+  "status": "available"
+}

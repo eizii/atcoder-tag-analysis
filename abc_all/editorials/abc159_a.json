@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc159_a",
+  "editorials": [
+    {
+      "text": "A: the number of even pairs\n選んだ2 つのボールに書かれている数の和が偶数になるのは、2 つのボールに書かれている数が\n共に偶数であるか、共に奇数である場合に限ります。したがって、そのようなボールの選び方の数を\n求めればよいです。これは、\n(N\n2\n)\n+\n(M\n2\n)\n通りです。以下はC++ における実装例です。\n1 #include<iostream>\n2 using namespace std;\n3\n4 int main(){\n5\nint N,M;\n6\ncin>>N>>M;\n7\n8\ncout<<N*(N-1)/2+M*(M-1)/2<<endl;\n9\nreturn 0;\n10 }\n",
+      "text_sha256": "84aeaec61f0c79b0c7b28bf42ba7d00abfaab701fbf8f92c5041873782d78189",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc159/abc159_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

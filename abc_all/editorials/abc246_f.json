@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc246_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc246/editorial/3703",
+      "text": "この問題は、\n包除原理\nを使って解くことができます。\n例えば、\n\\(N=3\\)\nの場合なら、\n\\((\\)\n\\(1\\)\n段目、\n\\(2\\)\n段目、\n\\(3\\)\n段目の少なくとも\n\\(1\\)\n段以上で入力できる文字列の総数\n\\() = \\)\n\\(+\\)\n\\(1\\)\n段目で入力できる文字列\n\\(+\\)\n\\(2\\)\n段目で入力できる文字列\n\\(+\\)\n\\(3\\)\n段目で入力できる文字列\n\\(-\\)\n\\(1\\)\n段目、\n\\(2\\)\n段目双方で入力できる文字列\n\\(-\\)\n\\(1\\)\n段目、\n\\(3\\)\n段目双方で入力できる文字列\n\\(-\\)\n\\(2\\)\n段目、\n\\(3\\)\n段目双方で入力できる文字列\n\\(+\\)\n\\(1\\)\n段目、\n\\(2\\)\n段目、\n\\(3\\)\n段目のすべてで入力できる文字列\nとなります。(\n\\(N\\)\nが小さい場合、ベン図のイメージを持つのも理解の助けになるでしょう。)\n\\(N \\le 18\\)\nと小さいので、着目する段の集合\n\\(2^N-1\\)\n通りを全探索することを考えます。このとき、以下の問題が解ければ元の問題も解けることになります。\n\\(A_1\\)\n段目、\n\\(A_2\\)\n段目、\n\\(\\dots A_k\\)\n段目のすべてで入力できる文字列は何通りか？ (なお、\n\\(A\\)\nに含まれない段についてはその段で入力できてもできなくてもよい。)\n文字列\n\\(S\\)\nが条件を満たす必要十分条件を求めます。\n明らかに、\n\\(S\\)\nに含まれる全ての文字は、\n\\(A\\)\nに含まれる全ての段で入力可能であるべきです。逆に、\n\\(S\\)\nが\n\\(A\\)\nに含まれる全ての段で入力可能な文字しか含まないならば\n\\(S\\)\nは条件を満たします。\nよって、この問題の答えは (\n\\(A\\)\nに含まれる全ての段で入力可能な文字の種類数)\n\\(^L\\)\nとなります。\nこれを\n\\(2^N-1\\)\n通り全てについて包除原理に従って適切に足し引きしていくことで、この問題に正解できます。\n計算量は\n\\(O(2^N (N + \\log L))\\)\nです。\nなお、実装例では「\n\\(A\\)\nに含まれる全ての段で入力可能な文字の種類数」を bit 演算にて高速に求めています。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#define mod 998244353\n\nusing namespace std;\n\nlong long power(long long a,long long b){\n  long long x=1,y=a;\n  while(b>0){\n    if(b&1ll){\n      x=(x*y)%mod;\n    }\n    y=(y*y)%mod;\n    b>>=1;\n  }\n  return x%mod;\n}\n\nint main(){\n  int n,k;\n  cin >> n >> k;\n  vector<int> v(n,0);\n  for(int i=0;i<n;i++){\n    string s;\n    cin >> s;\n    for(auto &nx : s){v[i]|=(1<<(nx-'a'));}\n  }\n\n  long long res=0;\n  for(int i=1;i<(1<<n);i++){\n    int ch=(1<<26)-1;\n    for(int j=0;j<n;j++){\n      if(i&(1<<j)){ch&=v[j];}\n    }\n    int pc=__builtin_popcount((unsigned int)ch);\n    if(__builtin_popcount((unsigned int)i)%2){res+=power(pc,k);res%=mod;}\n    else{res+=(mod-power(pc,k));res%=mod;}\n  }\n\n  cout << res << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "09c00fc8ab423c6b30a530763b0d4081bd4dde1c155d9513a9755b38d4227688",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc246/abc246_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc246/editorial/3727",
+      "text": "\\(\\sigma\\)\nを文字集合のサイズとして (本問では\n\\(\\sigma = 26\\)\n)、\n\\(\\Theta(N 2 ^ \\sigma + \\sigma \\log L)\\)\ntime で解く解法の解説です。なお、\n\\(\\sigma\\)\nはワードサイズ以下であることを仮定します。\n文字集合を\n\\(\\Sigma\\)\nとします。各\n\\(A \\subseteq \\Sigma\\)\nに対して、入力可能な長さ\n\\(L\\)\nの文字列\n\\(X\\)\nであって、\n\\(X\\)\nに現れる文字の集合がちょうど\n\\(A\\)\nに一致するようなものの個数を\n\\(f(A)\\)\nとします。各\n\\(f(A)\\)\nが求まれば、答えは\n\\(\\displaystyle \\sum _ {A \\subseteq \\Sigma} f(A)\\)\nとして計算されます。\n\\(A\\subseteq \\Sigma\\)\nを固定して、\n\\(f(A)\\)\nを計算することを考えます。まず、\n\\(A\\subseteq S _ i\\)\nを満たすような\n\\(i\\)\nが存在しなければ\n\\(f(A) = 0\\)\nです。\n\\(A \\subseteq S _ i\\)\nを満たす\n\\(i\\)\nが存在する場合は、\n\\(f(A)\\)\nは包除原理を用いて以下のように計算することが出来ます。式において\n\\(B\\)\nは、\n\\(A\\)\nには含まれるが長さ\n\\(L\\)\nの文字列には\n必ず\n含まれない文字の集合を表します。\n\\[\nf(A) = \\sum _ {B \\subseteq A} (-1) ^ {|B|} |A \\backslash B| ^ L\n\\]\n\\(|B|\\)\nの値ごとにまとめて計算することで、上記の和の計算を高速化することが出来ます。具体的には、次が従います。\n\\[\n\\sum _ {B \\subseteq A} (-1) ^ {|B|} |A \\backslash B| ^ L = \\sum _ {i = 0} ^ {|A|} \\binom{|A|}{i} \\cdot (-1) ^ i \\cdot (|A| - i) ^ L\n\\]\n累乗の前計算を\n\\(\\Theta(\\sigma \\log L)\\)\ntime、二項係数の前計算を\n\\(\\Theta(\\sigma ^ 2)\\)\ntime で行っておけば、右辺の和を\n\\(\\Theta(\\sigma)\\)\ntime で計算することができます。 さらに、右辺の和は\n\\(|A|\\)\nのみに依存するため、\n\\(k = 0,\\ldots, \\sigma\\)\nに対して次で表される\n\\(g(k)\\)\nを\n\\(\\Theta(\\sigma ^ 2)\\)\ntime で前計算しておくことで、\n\\(f(A)\\)\nの計算を配列へのアクセスだけで済ませることが出来ます。\n\\[\ng(k) = \\sum _ {i = 0} ^ k \\binom{k}{i} \\cdot (-1) ^ i \\cdot (k-i) ^ L\n\\]\n以上をまとめると、\n\\(f(A)\\)\nは式\n\\((1)\\)\nで計算されます。\n\\(\\sigma\\)\nがワードサイズ以下であることを仮定しているため、各\n\\(i\\)\nに対して\n\\(A \\subseteq S _ i\\)\nかどうかの判定は bit 演算を用いて定数時間で可能です。従って、各\n\\(f(A)\\)\nは\n\\(\\Theta(N)\\)\ntime で計算できます。\n\\[\nf(A) = \\begin{cases}\ng(|A|) & \\text{if}\\; \\exists i \\;\\text{s.t.}\\; A\\subseteq S _ i \\\\\n0 & \\text{otherwise}\n\\end{cases} \\tag{1}\n\\]\n前計算にかかる時間計算量は\n\\(\\Theta(\\sigma ^ 2 + \\sigma \\log L)\\)\nであったので、本問を全体\n\\(\\Theta(N \\cdot 2 ^ \\sigma + \\sigma \\log L)\\)\ntime で解くことが出来ました。\nなお、\n\\(A\\subseteq S _ i\\)\nを満たす\n\\(i\\)\nが存在するかどうかの判定に高速ゼータ変換を用いれば\n\\(\\Theta(N + \\sigma \\cdot 2 ^ \\sigma + \\sigma \\log L)\\)\ntime で解くことも可能ですが、本問の制約下では先に紹介した解法の方が高速と思われます。\n実装\nC++ などの高速な言語でなければ本解法で AC を取ることは難しいかもしれません。\nC++, 741 ms",
+      "codes": [],
+      "text_sha256": "d211b6ac5361836fd45eca546ae209b28634881b0b31df62db0f5b7c8d87ec4e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc246/abc246_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

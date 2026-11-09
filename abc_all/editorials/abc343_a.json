@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc343_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc343/editorial/9427",
+      "text": "この問題は様々な方針で解くことができます。特に、この問題は答えが\n\\(1\\)\n通りではないため、多くの AtCoder Beginner Contest の A 問題と比べて解法の選択肢が多いと思われます。ここでは、解法の\n\\(1\\)\nつを紹介します。\n\\(A + B\\)\nの値を計算して、\n\\(A+B\\)\nの値が\n\\(0\\)\nであった場合は\n\\(1\\)\nを、\n\\(0\\)\nでなかった場合は\n\\(0\\)\nを出力すればよいです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << (a + b == 0 ? 1 : 0) << '\\n';\n}"
+      ],
+      "text_sha256": "d0f89977593cf7dd7a0773726e670bbb0a752d07d17bf483fc128cf6185069b2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc343/abc343_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

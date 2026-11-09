@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc378_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc378/editorial/11293",
+      "text": "問題文の条件を分かりやすく言い換えましょう。\n頂点\n\\(u,v\\)\nを結ぶ辺を追加すると、\n\\(u-v\\)\nパス上の頂点が閉路に含まれます。このことから、問題は、「頂点を\n\\(3\\)\n個以上含む単純パスであって、端点の次数が\n\\(2\\)\n、それ以外の頂点の次数が\n\\(3\\)\nであるものの個数を求めよ。」と言い換えられます。\n言い換え後の問題を木 DP により解きます。適当な頂点を選び、木を根付き木にします。\nここで、数えるパスの端点の LCA を考えます。すると、LCA は端点に一致するか、パス（端点除く）上の点に一致します。\nまず、端点の LCA が端点に一致する場合を考えます。LCA の頂点を\n\\(u\\)\nとすると、この場合数えたいパスの個数は\n\\(u\\)\nの部分木に含まれる次数\n\\(2\\)\nの頂点であって、\n\\(u\\)\nから次数\n\\(3\\)\nの頂点を\n\\(1\\)\n個以上取って到達できるものの個数に等しいです。これは木 DP でボトムアップに計算できます。\n次に、端点のLCA が端点に一致しない場合を考えます。LCA の頂点を\n\\(u\\)\nを考えます。\n\\(u\\)\nの部分木に含まれる次数\n\\(2\\)\nの頂点であって、\n\\(u\\)\nから次数\n\\(3\\)\nの頂点を\n\\(1\\)\n個以上取って到達できるものの集合を\n\\(S\\)\nとすると、求めるパスの個数は、\n\\(S\\)\nから二つの頂点を選ぶ方法のうち、選んだ二つの頂点の LCA が\n\\(u\\)\nに一致するものの個数と等しいです。\nこれは、\n\\(u\\)\n以下の部分木から\n\\(u\\)\nを取り除くことで何個かの部分木に分かれますが、分かれた部分木の中から二つを選び、そこから頂点を選ぶ方法と等しく、こちらも同様の DP によって計算できます。\n計算量は\n\\(\\mathrm{O}(N)\\)\nです。",
+      "codes": [],
+      "text_sha256": "63091d8a1506b00bd611bcbbeb13a31e9855831348a9ca08cbe4100566d219f8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc378/abc378_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc378/editorial/11304",
+      "text": "数えたいものは、頂点のペア\n\\((u, v)\\)\n（ただし\n\\(u < v\\)\n）であって次の条件を満たすものの個数です。\n頂点\n\\(u, v\\)\nの次数はともに\n\\(2\\)\n頂点\n\\(u, v\\)\nを結ぶ単純パス上の頂点（\n\\(u, v\\)\nを除く）の次数はすべて\n\\(3\\)\nこれは、次数\n\\(3\\)\nの頂点すべてからなる頂点集合が誘導する部分グラフの連結成分を列挙すれば求められます。各連結成分について、それと隣接する次数\n\\(2\\)\nの頂点の個数を\n\\(c\\)\nとすると、その連結成分から\n\\(c(c-1)/2\\)\n個のペアが得られます。\n実装例 (Python):",
+      "codes": [
+        "from atcoder.dsu import DSU\n\nN = int(input())\nu, v = [0] * (N - 1), [0] * (N - 1)\ndeg = [0] * N\nfor i in range(N - 1):\n    u[i], v[i] = map(int, input().split())\n    u[i], v[i] = u[i] - 1, v[i] - 1\n    deg[u[i]] += 1\n    deg[v[i]] += 1\n\nd = DSU(N)\nc2 = [0] * N\nfor i in range(N - 1):\n    if deg[u[i]] == deg[v[i]] == 3:\n        d.merge(u[i], v[i])\n    elif deg[u[i]] == 3 and deg[v[i]] == 2:\n        c2[u[i]] += 1\n    elif deg[u[i]] == 2 and deg[v[i]] == 3:\n        c2[v[i]] += 1\n\nans = 0\nfor g in d.groups():\n    c = 0\n    for v in g:\n        c += c2[v]\n    ans += c * (c - 1) // 2\nprint(ans)"
+      ],
+      "text_sha256": "88a6c06e978ab1e1a4e25f0beade1997a3a23098b23712575bd1e8b76635b021",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc378/abc378_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

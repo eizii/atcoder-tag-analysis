@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc192_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc192/editorial/705",
+      "text": "何個の素材を合成するか全探索します。\n\\(\\sum A_i \\leq X\\)\nの制約から、合成する素材の個数\n\\(C\\)\nを固定したときには、「\n\\(A_i\\)\nの中からちょうど\n\\(C\\)\n個選んだときの和であって、\n\\(\\bmod C\\)\nで\n\\(X\\)\nと等しいものの最大値は？」という問題が解ければよいです。\nこれは\n\\(dp[i][j][k]=i\\)\n番目までから\n\\(j\\)\n個選んだときの和であって、\n\\(\\bmod C\\)\nで\n\\(k\\)\nに等しいようなものの最大値\nというDPにより\n\\(O(NC^2)\\)\nで求めることができるので、全体で\n\\(O(N^4)\\)\nで求めることができます。",
+      "codes": [],
+      "text_sha256": "445c079fe06b098f563623955a8445f9bf370166168015763d3c75575efc5411",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc192/abc192_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

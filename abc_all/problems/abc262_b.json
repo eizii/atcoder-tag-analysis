@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc262_b",
+  "title": "Triangle (Easier)",
+  "contests": [
+    {
+      "contest_id": "abc262",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 220,
+  "raw_difficulty": 160,
+  "contest_id": "abc262",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc262/tasks/abc262_b",
+  "statement": "配点 : 200 点 問題文 N 頂点 M 辺の単純無向グラフが与えられます。頂点には 1, \\dots, N の番号が付けられており、 i \\, (1 \\leq i \\leq M) 番目の辺は頂点 U_i と頂点 V_i を結んでいます。 以下の条件を全て満たす整数 a, b, c の組の総数を求めてください。 1 \\leq a \\lt b \\lt c \\leq N 頂点 a と頂点 b を結ぶ辺が存在する。 頂点 b と頂点 c を結ぶ辺が存在する。 頂点 c と頂点 a を結ぶ辺が存在する。 制約 3 \\leq N \\leq 100 1 \\leq M \\leq \\frac{N(N - 1)}{2} 1 \\leq U_i \\lt V_i \\leq N \\, (1 \\leq i \\leq M) (U_i, V_i) \\neq (U_j, V_j) \\, (i \\neq j) 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M U_1 V_1 \\vdots U_M V_M 出力 答えを出力せよ。 入力例 1 5 6\n1 5\n4 5\n2 3\n1 4\n3 5\n2 5 出力例 1 2 (a, b, c) = (1, 4, 5), (2, 3, 5) が条件を満たします。 入力例 2 3 1\n1 2 出力例 2 0 入力例 3 7 10\n1 7\n5 7\n2 5\n3 6\n4 7\n1 5\n2 4\n1 3\n1 6\n2 7 出力例 3 4",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 頂点 M 辺の単純無向グラフが与えられます。頂点には 1, \\dots, N の番号が付けられており、 i \\, (1 \\leq i \\leq M) 番目の辺は頂点 U_i と頂点 V_i を結んでいます。 以下の条件を全て満たす整数 a, b, c の組の総数を求めてください。 1 \\leq a \\lt b \\lt c \\leq N 頂点 a と頂点 b を結ぶ辺が存在する。 頂点 b と頂点 c を結ぶ辺が存在する。 頂点 c と頂点 a を結ぶ辺が存在する。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 3 \\leq N \\leq 100 1 \\leq M \\leq \\frac{N(N - 1)}{2} 1 \\leq U_i \\lt V_i \\leq N \\, (1 \\leq i \\leq M) (U_i, V_i) \\neq (U_j, V_j) \\, (i \\neq j) 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M U_1 V_1 \\vdots U_M V_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5 6\n1 5\n4 5\n2 3\n1 4\n3 5\n2 5"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2 (a, b, c) = (1, 4, 5), (2, 3, 5) が条件を満たします。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 1\n1 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 7 10\n1 7\n5 7\n2 5\n3 6\n4 7\n1 5\n2 4\n1 3\n1 6\n2 7"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 4"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc262/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:37.824492+00:00",
+  "statement_sha256": "11973d92ad58a20849716273c48b2af1a0bc5462100cd7c60a61c2d6141a613d",
+  "editorials": []
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc030_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc030/editorial.pdf",
+      "text": "A問題 勝率計算\n\n  問題概要 1.\n  アルゴリズム 2.\n\n\n\n\n\n2015/10/24                            ©AtCoder Inc. All rights reserved.                                      33\n\f\nA問題 問題概要\n\n• 4つの整数 A, B, C, D が与えられる．\n• B/A と D/C を比較\n• 制約\n   – 1 ≦ A, B, C, D ≦ 1000\n\n\n\n\n\n2015/10/24                                                                                              4\n\f\nA問題 アルゴリズム\n\n• 解法1\n   – B/A , D/C の両方にA*Cを掛けると\n      B*C, A*D となるので、この2つを大小比較\n          • 整数同士の掛け算なので安全（ロバスト）です\n• 解法2\n   – B/A, D/C を小数にして比較\n          • 比較には浮動小数点誤差に影響されないように、微小な数EPSを\n     用意し、\n           – x<y → x+EPS<y\n           – x==y → abs(x-y)<EPS\n          • と計算しましょう\n\n\n\n\n\n2015/10/24                                                                                              5",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "185b07841a5b534af46ec659ca17bbe4ce1a009d786bcde929e224a8c3591bad"
+    }
+  ],
+  "status": "available"
+}

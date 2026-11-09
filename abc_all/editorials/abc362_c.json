@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc362_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc362/editorial/10394",
+      "text": "次の問題を考えてみましょう．\n長さ\n\\(N\\)\nの非負整数列\n\\(A=(A_1,A_2,\\ldots,A_N)\\)\nがある．整数\n\\(S\\)\nが与えられるので，以下を満たす長さ\n\\(N\\)\nの整数列\n\\(X=(X_1,X_2,\\ldots,X_N)\\)\nが存在するか判定し，存在するならば一つ構築せよ．\n\\(0\\leq X_i\\leq A_i\\)\n\\(\\sum X = S\\)\n存在するためには明らかに\n\\(\\sum A\\geq S\\)\nが必要です．実はこれが十分でもあります．存在する場合には，前から順番見て行って，貪欲にできるだけ\n\\(X_i\\)\nを大きくすることで構築できます．元の問題でも似たような考えで解くことができます．\n\\(\\sum L>0\\)\nの場合，\n\\(\\sum X\\geq \\sum L>0\\)\nであるため条件を満たす\n\\(X\\)\nは存在しません．同様に\n\\(\\sum R<0\\)\nのとき\n\\(\\sum X\\leq \\sum R <0\\)\nであるため条件を満たす\n\\(X\\)\nは存在しません．\nそうでないときは条件を満たす\n\\(X\\)\nが存在します．\n各\n\\(i=1,2,\\ldots,N\\)\nに対して\n\\(X_i=L_i\\)\nと初期化したうえで，\n\\(i=1,2,\\ldots,N\\)\nの順に貪欲に値を決めていくことができます．具体的には，以下の手順を取ることができます．\n\\(i=1,2,\\ldots\\)\nに対して，\n\\(X_i<R_i\\)\nかつ\n\\(\\sum X<0\\)\nを満たしている限り\n\\(X_i\\)\nの値を\n\\(+1\\)\nする．\nただし，これをそのまま行うと間に合いません，\n\\(X_i\\)\nの増分は次のようにして高速に求めることができます．\n\\(i=1,2,\\ldots\\)\nに対して，\n\\(D_i=\\min(R_i-L_i,-\\sum X)\\)\nとする．\n\\(X_i\\)\nの値を\n\\(+D_i\\)\nする．\n計算量は\n\\(O(N)\\)\nです．",
+      "codes": [
+        "N = int(input())\nL, R = [0] * N, [0] * N\nfor i in range(N):\n    L[i], R[i] = map(int, input().split())\n\nif sum(L) > 0 or sum(R) < 0:\n    print(\"No\")\n    exit()\n\nX = L.copy()\nsumX = sum(X)\nfor i in range(N):\n    d = min(R[i] - L[i], -sumX)\n    sumX += d\n    X[i] += d\n\nprint(\"Yes\")\nprint(*X)"
+      ],
+      "text_sha256": "d0b5a349f3c0cd2441def324f5bd5544cd212dbd0aa4466704353828f23b15de",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc362/abc362_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

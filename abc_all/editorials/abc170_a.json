@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc170_a",
+  "editorials": [
+    {
+      "text": "A: Five Variables\nx1, . . . , x5 を標準入力から読み込んだ後は、if 文を5 つ連ねて5 つの変数のうちどれが0 である\nかを直接確かめることも、15 −x1 −x2 −x3 −x4 −x5 が答えとなることを利用することもできます。\nそれぞれの方針におけるPython での実装例を示します。\n1 X = list(map(int, input().split()))\n2\n3 if X[0] == 0:\n4\nprint(1)\n5 elif X[1] == 0:\n6\nprint(2)\n7 elif X[2] == 0:\n8\nprint(3)\n9 elif X[3] == 0:\n10\nprint(4)\n11 else:\n12\nprint(5)\n1 print(15 - sum(list(map(int, input().split()))))\n",
+      "text_sha256": "936848daa0f789801531f214d7db36bba71a0cce3db97eb3349fd4d338257ea6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc170/abc170_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

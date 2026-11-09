@@ -1,0 +1,465 @@
+                 ABC 054 解説
+
+
+                                              writer: Hec
+
+                                   2017 年2 月11 日
+
+
+
+ A:  One Card Poker
+
+    2 つの整数を入力として受け取り、条件文を用いてプレイヤーの勝敗判定を行い、適切な出力を行えば良いで
+ す。勝敗判定の際に、厄介となる点は1 の扱いです。1 を特別扱いして条件文で場合分けする方針でも解くことは
+ 可能です。より簡単な方法として、1 を14 として扱うと勝敗判定を整数の大小判定で行う事ができます。
+
+
+  C++のコード例
+
+
+ 1 int main(void){
+
+ 2     int a,b;
+
+ 3     cin >> a >> b;
+
+
+ 4
+
+ 5     if(a==1) a+=13;
+
+ 6     if(b==1) b+=13;
+
+
+ 7
+
+ 8     if(a>b)
+
+ 9         cout << "Alice" << endl;
+
+10     else if(a<b)
+
+11         cout << "Bob" << endl;
+
+12     else
+
+13         cout << "Draw" << endl;
+
+
+14
+
+15     return 0;
+
+16 }
+
+
+
+ B:  Template Matching
+
+  実際に、テンプレート画像B を平行移動させて画像A に含まれるかを調べます。まず、画像A の中における
+ M × M の正方形領域とテンプレート画像B の同一判定は、二重ループで行うことが可能です。次に、画像A の
+ 中におけるM × M の正方形領域は何通りあるか考えます。これは(N −M + 1) × (N −M + 1) 通り考えられま
+ す。以上のことから、全探索を行ったときの時間計算量はO(N 2M 2) となり、これは間に合います。
+  より高速な解法として、ハッシュを用いた解法が存在します。(詳細は略)
+
+
+  C++のコード例
+
+
+                                                  1
+
+ 1 int main(void){
+
+ 2     int N,M;
+
+ 3     cin >> N >> M;
+
+
+ 4
+
+ 5     const int nmmax=50;
+
+ 6     char A[nmmax][nmmax],B[nmmax][nmmax];
+
+
+ 7
+
+
+ 8
+
+ 9     for(int y=0;y<N;++y){
+
+10         for(int x=0;x<N;++x){
+
+11             cin >> A[y][x];
+
+12         }
+
+13     }
+
+
+14
+
+15     for(int y=0;y<M;++y){
+
+16         for(int x=0;x<M;++x){
+
+17             cin >> B[y][x];
+
+18         }
+
+19     }
+
+
+20
+
+21     bool exist=false;
+
+
+22
+
+23     for(int ly=0;ly<N;++ly){
+
+24         for(int lx=0;lx<N;++lx){
+
+25             if(ly+M-1>=N or lx+M-1>=N) continue;
+
+
+26
+
+27             bool match=true;
+
+28             for(int y=0;y<M;++y){
+
+29                 for(int x=0;x<M;++x){
+
+30                     if(A[ly+y][lx+x]!=B[y][x]) match=false;
+
+31                 }
+
+32             }
+33             if(match) exist=true;
+
+34         }
+
+35     }
+
+
+36
+
+37     if(exist)
+
+38         cout << "Yes" << endl;
+
+39     else
+
+40         cout << "No" << endl;
+
+
+41
+
+42     return 0;
+
+43 }
+
+
+
+                                                  2
+
+ C:  One-stroke Path
+
+  簡単のために、与えられた無向グラフを隣接行列を用いて受け取ります。与えられた無向グラフに対して、頂点
+
+  1 を始点とする深さ優先探索(DFS) を用いて、候補となるパスを数え上げることを考えます。まず、頂点1 を訪
+ 問済みとします。その後に、頂点1 を引数として以下の再帰関数を呼びます。この再帰関数は、隣接頂点が全て訪
+ 問済みとなるまでグラフを辿っていくことで、パスを列挙します。
+
+     1: procedure DFS(現在の頂点v)
+     2:      if 全ての頂点を訪問済みthen
+     3:    答えを1 増やす。
+
+     4:       return
+     5:   end if
+     6:    for 頂点i: 頂点v に隣接しているかつ未訪問do
+     7:    頂点i を訪問済みとする。
+     8:       DFS(i)
+     9:    頂点i を未訪問とする。
+
+    10:   end for
+
+    11:    return
+
+    12: end procedure
+
+
+  ここで、候補となるパスの数の上限を考えます。パスの始点は頂点1 かつ全ての頂点は1 度しか訪れないため、
+  2 番目からN 番目までに訪れる頂点は{2, . . . , N} の順列で表されます。このため、パスの候補は最大で(N −1)!
+ 通りです。頂点数の上限はN ≤8 であるため、最大で7! = 5040 通りしか存在しません。この解法の時間計算量
+  は、O(N!) となるため間に合います。
+   別解としては、{2, . . . , N} の順列を列挙を行い、条件を満たしたパスを数え上げます。先ほどと同様に、この
+ 解法の時間計算量は、O(N!) となります。
+   より高速な解法として、bitDP を用いた時間計算量O(2NN 2) となる解法が存在します。(詳細は略)
+
+
+   C++のコード例(DFS 解)
+
+
+
+ 1 const int nmax=8;
+ 2 bool graph[nmax][nmax];
+
+
+ 3
+
+ 4 int dfs(int v,int N,bool visited[nmax]){
+
+
+ 5
+
+ 6     bool all_visited=true;
+
+
+ 7
+
+ 8     for(int i=0;i<N;++i){
+
+ 9         if(visited[i]==false)
+
+10             all_visited=false;
+
+11     }
+
+
+12
+
+13     if(all_visited){
+
+14         return 1;
+
+15     }
+
+
+                                                  3
+
+16
+
+17     int ret=0;
+
+
+18
+
+19     for(int i=0;i<N;++i){
+
+20         if(graph[v][i]==false) continue;
+
+21         if(visited[i]) continue;
+
+
+22
+
+23         visited[i]=true;
+
+24         ret+=dfs(i,N,visited);
+
+25         visited[i]=false;
+
+26     }
+
+
+27
+
+28     return ret;
+
+29 }
+
+
+30
+
+31 int main(void){
+
+32     int N,M;
+
+33     cin >> N >> M;
+
+
+34
+
+35     for(int i=0;i<M;++i){
+
+36         int A,B;
+
+37         cin >> A >> B;
+
+38         graph[A-1][B-1]=graph[B-1][A-1]=true;
+
+39     }
+
+
+40
+
+41     bool visited[nmax];
+42     for(int i=0;i<N;++i){
+
+43         visited[i]=false;
+
+44     }
+
+
+45
+
+46     visited[0]=true;
+
+47     cout << dfs(0,N,visited) << endl;
+
+48     return 0;
+
+49 }
+
+
+
+ D:  Mixing Experiment
+
+  まず、物質C を生成するための条件に注目します。タイプA の物質とタイプB の物質の混合比がMa : Mb と
+ 買った薬品は全て使うという条件から、購入した薬品の金額とそれら全てを混ぜた溶液に含まれる物質A と物質
+  B の重さが重要になります。
+  この考察をもとに、次のような3 次元DP を考えます。
+
+   dp[i][ca][cb] := 1–i 番目までの薬品の組み合わせで、物質A がca グラム、物質B がcb グラムとなる溶液の最小コスト
+
+
+
+
+                                                  4
+
+ まず、dp テーブル全体を∞で初期化します。(∞の具体的な値は、全ての薬品を買ったコストN max(Ci) より
+ 大きくなるように決めます。) また、i = 0 ときイルカは薬品を1 つも持たないので、dp[0][0][0] = 0 と初期化し
+ ます。次に、dp テーブルの更新を考えます。ここでは、dp[i][ca][cb] に注目して、i からi + 1 (0 ≤i ≤N −1) へ
+ の具体的な更新方法を考えます。このとき、i + 1 番目の薬品を加える・加えないの2 つの処理が考えられて、更
+ 新方法は次の通りです。(ここでは、入力のA,B,C は1-indexed ではなく、0-indexed で表されます。)
+
+     • 薬品i を加えない場合: dp[i + 1][ca][cb] = min(dp[i + 1][ca][cb], dp[i][ca][cb])
+
+     • 薬品i を加える場合: dp[i + 1][ca + A[i]][cb + B[i]] = min(dp[i + 1][ca + A[i]][cb + B[i]], dp[i][ca][cb] + C[i])
+
+ 以上の更新をi とca とcb に関する三重ループを用いて行います。結果として、全ての薬品の組み合わせはdp[N][·][·]
+ で表されます。
+   最後に、ca : cb = Ma : Mb を満たしているdp[N][ca][cb] に注目して最小コストを求めて出力します。このと
+  き、ca = 0 かつcb = 0 は条件を満たさないことに気をつけて下さい。なお、ca  : cb = Ma  : Mb の判定には
+  caMb = cbMa という比の等式を使うのが簡単です。また、求めた最小コストが∞であるならば、物質C を生成
+ できないので代わりに−1 を出力します。
+  ここからは、時間計算量について考えていきます。まず、三重ループの各変数が取りうる上限を考えていきま
+ す。薬品の個数の上限は、制約からN ≤40 です。物質A の重さの上限は、N max(Ai) ≤400 で表されます。同
+ 様に、物質B の重さの上限は、N max(Bi) ≤400 で表されます。また、dp テーブルの更新はO(1) で行うことが
+ できます。以上のことから、この解法の時間計算量は、O(N 3 max(Ai) max(Bi)) となり、間に合います。
+  なお、比の等式と半分全列挙を用いた時間計算量O(2 N2 N) となる解法が存在します。(詳細は略)
+
+
+  C++のコード例
+
+
+
+ 1 const int nmax=40,abmax=10,inf = 1000000;
+
+
+ 2
+
+ 3 int a[nmax],b[nmax],c[nmax];
+
+ 4 int dp[nmax+1][nmax*abmax+1][nmax*abmax+1];
+
+
+ 5
+
+ 6 int main(void){
+
+ 7     int n,ma,mb;
+ 8     cin >> n >> ma >> mb;
+
+
+ 9
+
+10     for(int i=0;i<n;++i){
+
+11         cin >> a[i] >> b[i] >> c[i];
+
+12     }
+
+
+13
+
+14     for(int i = 0; i <= n; ++i){
+
+15         for(int ca = 0; ca <= nmax*abmax; ++ca){
+
+16             for(int cb = 0; cb <= nmax*abmax; ++cb){
+
+17                 dp[i][ca][cb]=inf;
+
+18             }
+
+19         }
+
+20     }
+
+
+21
+
+22     dp[0][0][0]=0;
+
+
+                                                  5
+
+23
+
+24     for(int i = 0; i < n; ++i){
+
+25         for(int ca = 0; ca <= nmax*abmax; ++ca){
+
+26             for(int cb = 0; cb <= nmax*abmax; ++cb){
+
+27                 if(dp[i][ca][cb]==inf) continue;
+
+28                 dp[i+1][ca][cb]=min(dp[i+1][ca][cb],dp[i][ca][cb]);
+
+29                 dp[i+1][ca+a[i]][cb+b[i]]=min(dp[i+1][ca+a[i]][cb+b[i]],dp[i][ca][cb]+c[i]);
+
+30             }
+
+31         }
+
+32     }
+
+
+33
+
+34     int ans=inf;
+
+35     for(int ca = 1; ca <= nmax*abmax; ++ca){
+
+36         for(int cb = 1; cb <= nmax*abmax; ++cb){
+
+37             if(ca*mb==cb*ma) ans=min(ans,dp[n][ca][cb]);
+
+38         }
+
+39     }
+
+
+40
+
+41     if(ans==inf) ans=-1;
+
+42     cout << ans << endl;
+
+
+43
+
+44     return 0;
+
+45 }
+
+
+
+
+
+                                                  6

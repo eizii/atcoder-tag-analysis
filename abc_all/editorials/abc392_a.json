@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc392_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc392/editorial/12173",
+      "text": "解法1: 並べ替えを全て試す\n\\(A\\)\nの並べ替えを全て試すことで、この問題に正解できます。\n実装例 (C++):\nC++ の場合、並べ替えを全て試すために\nnext_permutation\nという機能を利用することも出来ます。\n実装例 (C++):\n解法2: 交換法則を利用する\n整数\n\\(A,B\\)\nについて\n\\(A \\times B = B \\times A\\)\nが成り立つので、例えば\na[0]*a[1]==a[2]\nと\na[1]*a[0]==a[2]\nは同じ判定をしていることになります。\nこのことで、場合分けを\n\\(3\\)\n通りに減らすことができます。\n実装例 (C++):\n解法3: 大小関係を利用する\n整数\n\\(A,B,C \\ge 1\\)\nに関して\n\\(A \\times B = C\\)\nが成り立つとき、\n\\(A \\le C\\)\nかつ\n\\(B \\le C\\)\nが成り立ちます。\nなので、答えが\nYes\nであるなら\n\\(A\\)\nを昇順に並べた列について\n\\(A_1 \\times A_2 = A_3\\)\nが成り立つことが示せます。\nよって、\n\\(A\\)\nを昇順ソートした後\n\\(1\\)\n通りだけ判定すればよいです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  vector<int> a(3);\n  cin >> a[0] >> a[1] >> a[2];\n  if(a[0]*a[1]==a[2]){cout << \"Yes\\n\"; return 0;}\n  if(a[0]*a[2]==a[1]){cout << \"Yes\\n\"; return 0;}\n  if(a[1]*a[0]==a[2]){cout << \"Yes\\n\"; return 0;}\n  if(a[1]*a[2]==a[0]){cout << \"Yes\\n\"; return 0;}\n  if(a[2]*a[0]==a[1]){cout << \"Yes\\n\"; return 0;}\n  if(a[2]*a[1]==a[0]){cout << \"Yes\\n\"; return 0;}\n  cout << \"No\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  vector<int> a(3);\n  cin >> a[0] >> a[1] >> a[2];\n  sort(a.begin(),a.end());\n  do{\n    if(a[0]*a[1]==a[2]){cout << \"Yes\\n\"; return 0;}\n  }while(next_permutation(a.begin(),a.end()));\n  cout << \"No\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  vector<int> a(3);\n  cin >> a[0] >> a[1] >> a[2];\n  if(a[0]*a[1]==a[2]){cout << \"Yes\\n\"; return 0;}\n  if(a[1]*a[2]==a[0]){cout << \"Yes\\n\"; return 0;}\n  if(a[2]*a[0]==a[1]){cout << \"Yes\\n\"; return 0;}\n  cout << \"No\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  vector<int> a(3);\n  cin >> a[0] >> a[1] >> a[2];\n  sort(a.begin(),a.end());\n  if(a[0]*a[1]==a[2]){cout << \"Yes\\n\"; return 0;}\n  cout << \"No\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "72766f48fdb059c943c942f04b2610a79c174372cdc3f10780aeb32e49bbf3ed",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc392/abc392_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

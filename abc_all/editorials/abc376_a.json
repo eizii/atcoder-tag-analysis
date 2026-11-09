@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc376_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc376/editorial/11190",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n今までにもらった飴の数、および最後に飴をもらった時刻を管理しながら、\n\\(i=1,2,\\dots,N\\)\nの順に、\n\\(i\\)\n回目にボタンを押した際に飴をもらえるかどうかを判定すればよいです。\n具体的には、以下のようなアルゴリズムを実装すればよいです。\n今までにもらった飴の数を表す変数\n\\(\\mathrm{ans}\\)\n、および最後に飴をもらった時刻を表す変数\n\\(\\mathrm{pre}\\)\nを用意し、それぞれ\n\\(1, T_1\\)\nで初期化する。\n\\(i=2,3,\\dots,N\\)\nの順に以下を行う。\n\\(T_i-\\mathrm{pre}\\geq C\\)\nならば、\n\\(\\mathrm{ans}\\)\nに\n\\(1\\)\nを足し、\n\\(\\mathrm{pre}\\)\nを\n\\(T_i\\)\nで更新する。\nこれをプログラムにするためには、\n繰り返し\n（for 文など）および\n条件分岐\n（if 文など）とよばれる処理を実装する必要があります。具体的な実装方法については、下記の実装例 (C++, Python) を参考にしてください。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, c;\n    cin >> n >> c;\n    int ans = 1, pre;\n    cin >> pre;\n    for (int i = 1; i < n; i++) {\n        int t;\n        cin >> t;\n        if (t - pre >= c) {\n            ++ans;\n            pre = t;\n        }\n    }\n    cout << ans << endl;\n}",
+        "n, c = map(int, input().split())\nt = list(map(int, input().split()))\nans = 1\npre = t[0]\nfor i in range(1, n):\n    if t[i] - pre >= c:\n        ans += 1\n        pre = t[i]\n        \nprint(ans)"
+      ],
+      "text_sha256": "9713da32930375ac022f4b68dacb8dfb708acb19345640404ded8256a5dbf559",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc376/abc376_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

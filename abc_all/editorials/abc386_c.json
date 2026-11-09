@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc386_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc386/editorial/11694",
+      "text": "以下は C 問題の制約に特化した解説です。より一般的なケースである\nF 問題の解説\nもご覧ください。\n\\(S=T\\)\nであるとき答えは明らかに\nYes\nなので、以降はこのケースを除去して、操作が丁度 1 度行われたと考えます。\n操作は「変更」「挿入」「削除」のいずれかでした。\nまず、行われた可能性のある操作が 3 種類のどれかが分かった状態でこの問題を解いてみましょう。(どの操作が行われた可能性があるかは、後ほど考えます。)\n「変更」が行われた場合\n変更が 1 度行われたならば、\n\\(S\\)\nと\n\\(T\\)\nの長さは等しく、両者は丁度 1 ヶ所だけ異なるはずです。\nこの判定はループを使って実装可能です。\n「挿入」が行われた場合\n挿入が 1 度行われたならば、\n\\(T\\)\n中の文字を 1 つ選んで消した時\n\\(S\\)\nと一致させられるはずです。\nしかし、挿入があった位置を全探索してしまうと時間計算量が\n\\(O(|S|^2)\\)\nとなり実行制限時間に間に合いません。どのように高速化すれば良いでしょうか?\nいくつか方法はありますが、そのうち 1 つを紹介します。\n\\(S\\)\nと\n\\(T\\)\nのうち、先頭が一致する最大の文字数を\n\\(p\\)\nとする。\n\\(S\\)\nと\n\\(T\\)\nのうち、末尾が一致する最大の文字数を\n\\(s\\)\nとする。\n\\(p+s \\ge |S|\\)\nであれば、\n\\(S\\)\nに 1 文字挿入して\n\\(T\\)\nを作れる。\nより直感的には、\n\\(S\\)\nを前と後ろの 2 つの部分に分け、\n\\(T\\)\nの先頭と末尾でそれらを使い切ることができれば\n\\(S\\)\nに 1 文字挿入して\n\\(T\\)\nを作ることができます。\nこの判定は時間計算量\n\\(O(|S|)\\)\nで行えます。\n「削除」が行われた場合\nこの場合は、「\n\\(T\\)\nに 1 文字挿入した結果\n\\(S\\)\nとできるか」と言い換えることができ、この言い換えによって「挿入」のケースに帰着できます。\nさて、行われた可能性のある操作の種類が分かった場合はこれで解けました。\n実は、行われた可能性のある操作の種類は容易に特定できます。どのようにすれば良いでしょうか?\n次のようにすることで、行われた可能性のある操作の種類を特定できます。\n着目すべきは、各操作を行った時の文字列の長さの変動です。\n\\(|S| = |T|\\)\nの時、行われた可能性のある操作として「変更」のみ考えれば良い。\n\\(|S|+1 = |T|\\)\nの時、行われた可能性のある操作として「挿入」のみ考えれば良い。\n\\(|S|-1 = |T|\\)\nの時、行われた可能性のある操作として「削除」のみ考えれば良い。\nどれにも当てはまらない時、\n\\(S\\)\nを 1 度の操作で\n\\(T\\)\nと一致させることはできない。\n以上を実装することで、この問題を時間計算量\n\\(O(|S|)\\)\nで正解できます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int k;\n  string s,t;\n  cin >> k >> s >> t;\n  if(s==t){\n    cout << \"Yes\\n\";\n    return 0;\n  }\n\n  int sl=s.size();\n  int tl=t.size();\n\n  if(sl==tl){\n    // modify\n    int c=0;\n    for(int i=0;i<sl;i++){\n      if(s[i]!=t[i]){c++;}\n    }\n    if(c<=1){cout << \"Yes\\n\";}\n    else{cout << \"No\\n\";}\n  }\n  else if(sl+1==tl){\n    // insert\n    int pc=0,sc=0;\n    while(pc<sl){\n      if(s[pc]==t[pc]){pc++;}\n      else{break;}\n    }\n    while(sc<sl){\n      if(s[sl-1-sc]==t[tl-1-sc]){sc++;}\n      else{break;}\n    }\n    if(pc+sc>=sl){cout << \"Yes\\n\";}\n    else{cout << \"No\\n\";}\n  }\n  else if(sl-1==tl){\n    // erase\n    swap(s,t);\n    swap(sl,tl);\n    int pc=0,sc=0;\n    while(pc<sl){\n      if(s[pc]==t[pc]){pc++;}\n      else{break;}\n    }\n    while(sc<sl){\n      if(s[sl-1-sc]==t[tl-1-sc]){sc++;}\n      else{break;}\n    }\n    if(pc+sc>=sl){cout << \"Yes\\n\";}\n    else{cout << \"No\\n\";}\n  }\n  else{\n    cout << \"No\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "da9c197a4af913feb8da876236f3f7275d5accd527dbc7a980342a9e14d6d5ed",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc386/abc386_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc386/editorial/11698",
+      "text": "以下のような方針で AC することができます．\n\\(S\\)\nと\n\\(T\\)\nがともに空でなく先頭の文字が同じである限り，両者の先頭の文字を削除する．\n\\(S\\)\nと\n\\(T\\)\nがともに空でなく末尾の文字が同じである限り，両者の末尾の文字を削除する．\n上の操作の後，\n\\(S\\)\nと\n\\(T\\)\nの長さがともに\n\\(1\\)\n以下のとき\nYes\nを，そうでないとき\nNo\nを出力する．",
+      "codes": [
+        "K = int(input())\nS = list(input())\nT = list(input())\nfor _ in range(2):\n    while len(S) and len(T) and S[-1] == T[-1]:\n        S.pop()\n        T.pop()\n    S = S[::-1]\n    T = T[::-1]\n\nif len(S) <= 1 and len(T) <= 1:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "f656b97e8d4897005273a76cdaed1675137a2ad19a60299d2902f2c3e53a3ddb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc386/abc386_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

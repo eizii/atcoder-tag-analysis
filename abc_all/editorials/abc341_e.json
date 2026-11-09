@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc341_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc341/editorial/9325",
+      "text": "長さ\n\\(N-1\\)\nの数列\n\\(A=(A_1,A_2,\\ldots,A_{N-1})\\)\nを、\n\\(S_i=S_{i+1}\\)\nならば\n\\(A_i=0\\)\n,\n\\(S_i\\neq S_{i+1}\\)\nならば\n\\(A_i=1\\)\nで定義します。\nこのとき、\n\\(1\\)\n種類目のクエリ\n1 L R\nが\n\\(A\\)\nに与える変更は、\n\\(A_{L-1}\\leftarrow (1-A_{L-1})\\)\n,\n\\(A_R\\leftarrow (1-A_R)\\)\nの\n\\(2\\)\nつです。\nただし、\n\\(L=1\\)\n,\n\\(R=N\\)\nのときはそれぞれ前者、後者の変更を行う必要がありません。\n一方で、\n\\(2\\)\n種類目のクエリ\n2 L R\nの答えは、\n\\(A_L=A_{L+1}=\\cdots=A_{R-1}=1\\)\nならば\nYes\n、そうでないならば\nNo\nです。\n特に、各\n\\(A_i\\)\nは\n\\(0\\)\nまたは\n\\(1\\)\nの値しかとらないことに注意すると、\n\\(A_L+A_{L+1}+\\cdots+A_{R-1}=R-L\\)\nならば\nYes\n, そうでないならば\nNo\nとして良いです。\nこれらの操作は、セグメント木を用いて行う事ができます。\n必要な計算量はどちらのクエリに対しても\n\\(O(\\log N)\\)\nであるため、全体で\n\\(O(Q\\log N)\\)\nでこの問題を解く事ができ、十分高速です。\nよってこの問題を解く事ができました。\n上記の方法を実装する際には、\n\\(N=1\\)\nの時に\n\\(A\\)\nの長さが\n\\(0\\)\nになるため実装方針によっては例外処理が必要になることに注意してください。例外処理、あるいは\n\\(A\\)\nを長めに取得しておく等することによって対処する事ができます。\nなお、この問題は\n\\(S_i=S_{i+1}\\)\nであるような\n\\(i\\)\nを順序付き集合などで処理することによっても同様の計算量で解く事ができます。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/segtree>\n\nusing namespace std;\nusing namespace atcoder;\n\nint op(int a, int b) { return (a+b); }\n\nint e() { return 0; }\n\nint main(void){\n\tint n,q;\n\tstring s;\n\tint x,l,r;\n\n\tcin>>n>>q;\n\tcin>>s;\n\tsegtree<int, op, e> seg(n+1);\n\tfor(int i=0;i<n-1;i++)if(s[i]!=s[i+1])seg.set(i+1,1);\n\tfor(int i=0;i<q;i++){\n\t\tcin>>x>>l>>r;\n\t\tif(x==1){\n\t\t\tseg.set(l-1,1-seg.get(l-1));\n\t\t\tseg.set(r,1-seg.get(r));\n\t\t}\n\t\telse{\n\t\t\tif(seg.prod(l,r)==(r-l))cout<<\"Yes\"<<endl;\n\t\t\telse cout<<\"No\"<<endl;\n\t\t}\n\t}\n\treturn 0;\n}"
+      ],
+      "text_sha256": "b414e22c4d194e3b6fca67763e390901652f067f99efa5294ba1f4cfa8d66fb0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc341/abc341_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc341/editorial/9338",
+      "text": "公式解説の\nなお、この問題は\n\\( S_i=S_{ i+1}\\)\nであるような\n\\(i\\)\nを順序付き集合などで処理することによっても同様の計算量で解く事ができます。\nの部分を解説します。\n\\(S\\)\nの\n\\(L\\)\n文字目～\n\\(R\\)\n文字目(端を含む)からなる文字列を\n\\(S[L,R]\\)\nと表記します。\nまた、\n\\(X\\)\nを\n\\(S_i = S_{i+1}\\)\nとなる\n\\(i (1 \\leq i \\leq N-1)\\)\nの集合とします。\n\\(S[L,R]\\)\nが良い文字列であることと、\n\\(L, L+1,...,R-1\\)\nのいずれも\n\\(X\\)\nに含まれないことが同値な条件となります。\nこれは例えば\n\\(X\\)\nの元を順序付き集合(C++におけるstd::setなど)で管理し、\n\\(L\\)\n以上の元のうち最も小さい元が\n\\(R\\)\n以上であるかどうか(これはupper_boundなどで判定可能です)を確認すれば十分です。\nまた、クエリ1が与えられた時、\n\\(S_i = S_{i+1}\\)\nかどうかの関係が変更されるのは\n\\(i=L-1,R\\)\nの2通りしかありません。よって、この2つに対して\n\\(X\\)\nに含まれなければ追加する、含まれていれば削除するという操作をすればよいです。(余談ですが、このように区間に対する操作を境界だけに対する操作に言い換えて計算量を削減するのはしばしば使われるテクニックです)\nまとめると以下のような解法でACすることができます。\n初期値の\n\\(S\\)\nに対し\n\\(S_i = S_{i+1}\\)\nとなる\n\\(i\\)\nからなる集合\n\\(X\\)\nをとる。\n各クエリに対して以下の操作を行う。\nクエリ1が与えられた時、\n\\(L-1\\)\nが\n\\(X\\)\nに含まれていなければ追加し、含まれていれば削除する。\n\\(R\\)\nに対しても同様の操作を行う。\nクエリ2が与えられた時、\n\\(L,L+1,...,R-1\\)\nのいずれも\n\\(X\\)\nに含まれていないことをチェックする。\nACコード (0-indexedになっていることに気をつけてください)\nhttps://atcoder.jp/contests/abc341/submissions/50350339",
+      "codes": [],
+      "text_sha256": "42ad72a575e6096361f10e66f2c45126674868f3fcb4c9db6475daf7c5c6c3ef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc341/abc341_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

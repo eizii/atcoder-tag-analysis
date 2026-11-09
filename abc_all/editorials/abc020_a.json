@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc020_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc020/editorial.pdf",
+      "text": "A問題　クイズ\n\n1.問題概要\n2.アルゴリズム\n\n\n\n\n\n3/19/15                        ©AtCoder Inc. All rights reserved.\n\f\nA問題　問題概要\n\n• 標準入力から整数 1 または 2 が与えられる\n\n• 1 が与えられたら “ABC”\n 2 が与えられたら “chokudai” と出力せよ\n\n• （※ クイズの答えは問題ページの「出力例」の\n 欄に書かれていました）\n\n\n\n\n\n3/19/15\n\f\nA問題　問題概要\n\n• 文章での説明より、ソースコードを\n お見せしてしまう方が簡単でしょう\n\n• 3つの実装方針を C++ のコードで紹介します\n\n• 他の言語でも、手続き型言語であれば\n 似たようなコードになるでしょう\n\n\n\n\n\n3/19/15\n\f\nA問題　問題概要\n\n• 方針 1: 条件分岐\n\n\n  int main(){\n    int Q;\n    cin >> Q;\n      if (Q == 1){\n     cout << “ABC” << endl;\n     } else { // 1 でないなら 2\n     cout << “chokudai” << endl;\n     }\n  }\n\n\n\n\n\n3/19/15\n\f\nA問題　問題概要\n\n• 方針 2: 三項演算子\n\n\n  int main(){\n    int Q;\n    cin >> Q;\n   cout << (Q == 1 ? “ABC” : “chokudai”) << endl;\n  }\n\n• (条件 ? A : B) は 条件 が真なら A, 偽なら B\n\n\n\n\n\n3/19/15\n\f\nA問題　問題概要\n\n• 方針 3: 配列\n\n\n  int main(){\n    string ans[2] = {“ABC”, “chokudai”};\n    int Q;\n    cin >> Q;\n   cout << ans[Q - 1] << endl; // 配列の添字は 0 から\n  }\n\n• 方針 1, 2, 3 のいずれかが他よりも好ましい、\n ということは特にないでしょう (“レース”をしないなら)\n\n\n\n\n\n3/19/15",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "7dfa79081c09fb811b55627416bb00f67f47263e710390830145dab38ec80e21"
+    }
+  ],
+  "status": "available"
+}

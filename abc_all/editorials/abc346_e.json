@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc346_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc346/editorial/9637",
+      "text": "すべてのマスに対して、最終的なマスの色はそのマスに対する最後の操作により決まります。このような状況では、操作を逆順から考えることにより扱いやすくなるケースが多いです。\n操作を逆順から考えることにより、問題における一連の操作は以下と等価であることがわかります。\n\\(H\\)\n行\n\\(W\\)\n列のグリッドが与えられ、はじめすべてのマスの色は未確定である。\n\\(i = M,M-1,\\ldots,1\\)\nの順で以下の操作を行う。\n\\(T_i = 1\\)\nのとき、\n\\(A_i\\)\n行目のマスであって、マスの色が未確定であるものの色を\n\\(X_i\\)\nであると確定させる。\n\\(T_i = 2\\)\nのとき、\n\\(A_i\\)\n列目のマスであって、マスの色が未確定であるものの色を\n\\(X_i\\)\nであると確定させる。\n以上の操作を終えた後に色が未確定であるマスの色が色\n\\(0\\)\nであると確定させる。\nこのように整理すると、\n\\(i = M,M-1,\\ldots, 1\\)\nの順で\n\\(1\\)\n度以上操作を行った行・列の個数、各行・列に対して操作を行ったかどうか、各色の確定したマスの個数の情報を持ちながら計算することで答えを計算できることがわかります。\n具体的には、\n\\(A_i\\)\n行目に対する操作はそれ以前に\n\\(A_i\\)\n行目に対する操作が行われていないときに限り行われると考えてよく、その操作においては操作を行われたことのない列の個数だけ色\n\\(X_i\\)\nであると確定するマスの個数が増え、\n\\(A_i\\)\n列目に対する操作でも同様です。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\n#define rep(i, n) for (ll i = 0; i < (n); i++)\nusing namespace std;\nusing ll = long long;\n\nint main() {\n    int h, w, m;\n    cin >> h >> w >> m;\n    vector<bool> f(h), g(w); // 操作が行われたことがあるか\n    ll hc = h, wc = w; // 操作が行われていない行・列の個数\n    vector<int> t(m), a(m), x(m);\n    rep(i, m) cin >> t[i] >> a[i] >> x[i];\n    rep(i, m) a[i]--;\n    int X = 200010;\n    vector<ll> cnt(X); // 各色の確定したマスの個数\n    for (int i = m - 1; i >= 0; i--) {\n        if (t[i] == 1) {\n            if (!f[a[i]]) {\n                hc--;\n                f[a[i]] = true;\n                cnt[x[i]] += wc;\n            }\n        }\n        else {\n            if (!g[a[i]]) {\n                wc--;\n                g[a[i]] = true;\n                cnt[x[i]] += hc;\n            }\n        }\n    }\n    cnt[0] += hc * wc;\n    vector<pair<ll, ll>> ans;\n    rep(i, X) if (cnt[i]) ans.push_back({ i,cnt[i] });\n    cout << ans.size() << '\\n';\n    for (auto p : ans) cout << p.first << ' ' << p.second << '\\n';\n}"
+      ],
+      "text_sha256": "2eabf851c5ce2df98b595cbae62ed44982fcfd552996dae5cfe1b45374165eca",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc346/abc346_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

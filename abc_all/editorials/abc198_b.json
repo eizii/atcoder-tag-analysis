@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc198_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc198/editorial/223",
+      "text": "\\(N\\)\nは高々\n\\(10\\)\n桁なので、\n\\(N\\)\nの前につける\n\\(0\\)\nの個数は\n\\(9\\)\n個までを考慮すれば十分です。\n\\(0\\)\n個から\n\\(9\\)\n個までそれぞれの場合について回文になるかどうかを判定すればよいです。\n回答例(Python)",
+      "codes": [
+        "S=input()\n\nfor i in range(10):\n\tT = \"0\"*i + S\n\tif T==T[::-1]:\n\t\tprint(\"Yes\")\n\t\texit()\n\nprint(\"No\")"
+      ],
+      "text_sha256": "44e9c97834272f611db59e191449b922886839ee8b4b0ce583aae02a8335035b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc198/abc198_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

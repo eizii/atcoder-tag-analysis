@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc143_f",
+  "editorials": [
+    {
+      "text": "F: Distinct Numbers writer: beet\n与えられた数列から、長さK(1 ≤K ≤N) の狭義単調増加数列を最大何個取り出すことができる\nかという問題です（要素の順番を入れ替えてもよい）。\nX(1 ≤X ≤N) 個の列を取り出すときの最大の長さを表す関数f(X) を考えます。\nこれは、Cj をAi = j なるi の個数として、\nf(X) =\n⌊∑N\nj=1 min(Cj, X)\nX\n⌋\nという式で表せます。また、Dk をCj = k なるj の個数とすると、\nf(X) =\n⌊∑N\nj=1 min(Cj, X)\nX\n⌋\n=\n⌊∑N\nk=0 min(k, X) × Dk\nX\n⌋\n=\n⌊∑X\nk=0 kDk + X ∑N\nk=X+1 Dk\nX\n⌋\nと変形できます。したがって、∑X\nk=0 kDk と∑N\nk=X+1 Dk を累積和を用いて計算することで、全て\nのf(X) の値をO(N) で求めることができます。その後、各K について、K ≤f(X) を満たすよ\nうな最大のX を求めればいいです（存在しなければ0）。\n",
+      "text_sha256": "c0d1ba617c7d4a13f8bf852726c3ce9599bacf418837a997251b95afcf4cf972",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc143/abc143_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

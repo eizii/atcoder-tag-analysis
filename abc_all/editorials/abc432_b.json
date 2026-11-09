@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc432_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc432/editorial/14571",
+      "text": "基本的には与えられた整数の桁を小さい順に並び替えればよいですが、先頭に\n\\(0\\)\nが来ないように少し手を加える必要があります。\n具体的な解法としては、与えられた整数の\n\\(0\\)\nでない桁のうち最小のものを\n\\(d\\)\nとすると、\n\\(d\\)\nを先頭に持ってきた上で、残りの桁を小さい順に並べるのが最適です。\nいくつかの実装方針が考えられますが、下記の実装例では、最も簡潔と思われる「一旦すべての桁を昇順に並べた上で、桁を先頭から順に見ていき、最初に\n\\(0\\)\nでない桁に出会ったタイミングでそれを先頭の桁と交換し、終了する」という実装方針をとっています。一見変なことをしているようにも思われるかもしれませんが、正当性を示すことは難しくないので、ぜひ考えてみてください。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    string x;\n    cin >> x;\n    sort(x.begin(), x.end());\n    for (int i = 0; i < (int) x.size(); i++) {\n        if (x[i] > '0') {\n            swap(x[0], x[i]);\n            break;\n        }\n    }\n    cout << x << endl;\n}",
+        "x = sorted(input())\nfor i in range(len(x)):\n    if x[i] > '0':\n        x[0], x[i] = x[i], x[0]\n        break\nprint(''.join(x))"
+      ],
+      "text_sha256": "b288dd53415961b67fdc488972956aca7324b53440f192def7eb89322b08f58d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc432/abc432_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

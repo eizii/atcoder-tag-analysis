@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc054_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc054/editorial.pdf",
+      "text": "B:  Template Matching\n\n  実際に、テンプレート画像B を平行移動させて画像A に含まれるかを調べます。まず、画像A の中における\n M × M の正方形領域とテンプレート画像B の同一判定は、二重ループで行うことが可能です。次に、画像A の\n 中におけるM × M の正方形領域は何通りあるか考えます。これは(N −M + 1) × (N −M + 1) 通り考えられま\n す。以上のことから、全探索を行ったときの時間計算量はO(N 2M 2) となり、これは間に合います。\n  より高速な解法として、ハッシュを用いた解法が存在します。(詳細は略)\n\n\n  C++のコード例\n\n\n                                                  1\n\f\n 1 int main(void){\n\n 2     int N,M;\n\n 3     cin >> N >> M;\n\n\n 4\n\n 5     const int nmmax=50;\n\n 6     char A[nmmax][nmmax],B[nmmax][nmmax];\n\n\n 7\n\n\n 8\n\n 9     for(int y=0;y<N;++y){\n\n10         for(int x=0;x<N;++x){\n\n11             cin >> A[y][x];\n\n12         }\n\n13     }\n\n\n14\n\n15     for(int y=0;y<M;++y){\n\n16         for(int x=0;x<M;++x){\n\n17             cin >> B[y][x];\n\n18         }\n\n19     }\n\n\n20\n\n21     bool exist=false;\n\n\n22\n\n23     for(int ly=0;ly<N;++ly){\n\n24         for(int lx=0;lx<N;++lx){\n\n25             if(ly+M-1>=N or lx+M-1>=N) continue;\n\n\n26\n\n27             bool match=true;\n\n28             for(int y=0;y<M;++y){\n\n29                 for(int x=0;x<M;++x){\n\n30                     if(A[ly+y][lx+x]!=B[y][x]) match=false;\n\n31                 }\n\n32             }\n33             if(match) exist=true;\n\n34         }\n\n35     }\n\n\n36\n\n37     if(exist)\n\n38         cout << \"Yes\" << endl;\n\n39     else\n\n40         cout << \"No\" << endl;\n\n\n41\n\n42     return 0;\n\n43 }\n\n\n\n                                                  2",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "5dc7ba5441a439fd2065e0dd2f79a7dbd5e8a6d5893c0e6d8dd73ade9d3abe44"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc092_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc092/editorial.pdf",
+      "text": "D: Two Sequences\n\n まず，この問題ではbit は0-indexed とします。つまり，2 進数で一番下の\n桁から，0-bit 目，1-bit 目, ..., と呼びます。\n 答えを各bit ごとに求めます。k-bit 目を求めたいとします。\n  xor の定義より，N 2 個のai + bj のうち，k-bit 目が1 のものが偶数個ある\nか奇数個あるか判定できれば良いです。\n ここで重要な考察として，ai + bj のk-bit 目を考えているので，ai, bj の\nk +1-bit 目以降は無視してよい，つまりai, bj は2k+1 でmod を取ってしまっ\nて良いというのがあります。\n すると，ai+bj はたかだか4T(T = 2k) 未満です。そして，k-bit 目が1 の範\n囲は，[T, 2T), [3T, 4T), [5T, 6T), ... なので，ai + bj のうち，[T, 2T), [3T, 4T)\nの範囲にあるものの個数を求めればよいことがわかります。\n これは，ai を固定してしまえば，bj のうち[T −ai, 2T −ai), [3T −ai, 4T −ai)\nの範囲にあるものの個数を求めれば良くなり，これはbj をsort しておけば\n二分探索でO(logN) で求められます。\n\n\n余談 この問題のO(N 2) 解は非常に単純なうえ，SIMD で高速化が効き，と\nてつもなく高速に動作します。\n  writer が素直なO(N 2) を書き，ブロック化を行ったら3770ms となったの\nで，SIMD が得意な人ならばもしかすると愚直解で通せてしまうのではとも\n考えています。\n\n ぜひSIMD が得意な人は挑戦してみてください。\n\n\n\n\n\n                                4",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "02f7a7174bd727811c5d8cefff241d2251fac419f7a25851579465acdeda28e3"
+    }
+  ],
+  "status": "available"
+}

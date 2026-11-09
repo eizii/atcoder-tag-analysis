@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc086_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc086/editorial.pdf",
+      "text": "D: Non-decreasing\n\n 簡単な場合から考えていきます．a が非負整数のみからなる場合を考えてみます．このとき，a の先頭からの累積和を\n取った数列は明らかに条件を満たします．よって，a2+= a1, a3+= a2, . . . , aN+= aN−1 という順番で操作をすればその\nような数列を作ることができ，N −1 回の操作で条件を満たすことができます．a が0 以下の整数のみからなる場合も\nほぼ同様の方法でN −1 回の操作で条件を満たすことができます．\n  a に負の数も正の数も含まれるとき，N 回以下の操作でa が非負整数のみからなるように，あるいは0 以下の整\n数からなるようにすることができるかどうかを考えてみます．MAX := max(a), MIN := min(a) とします．このとき，\n|MAX| ≥|MIN| ならば，すべての数にMAX を足せばa を非負整数のみからなる数列にすることが可能です．同様に，\n|MAX| < |MIN| ならば，すべての数にMIN を足せばa を0 以下の整数のみからなる数列にすることが可能です．\n 以上より2N 回以下の操作で条件を満たすことができることが分かりました．これはO(N) で実行可能です．\n\n\n\n\n\n                                                   4",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "4e41f97491d9e853e01836736e2213a7747b57783a3e4294baba67e7e53d87a8"
+    }
+  ],
+  "status": "available"
+}

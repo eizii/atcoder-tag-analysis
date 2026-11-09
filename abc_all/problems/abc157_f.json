@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc157_f",
+  "title": "Yakiniku Optimization Problem",
+  "contests": [
+    {
+      "contest_id": "abc157",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 2525,
+  "raw_difficulty": 2525,
+  "contest_id": "abc157",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc157/tasks/abc157_f",
+  "statement": "配点 : 600 点 問題文 高橋君は二次元平面である網の上で N 枚の肉を焼こうとしています。 i 枚目の肉の位置は \\left(x_i, y_i\\right) であり、火の通りにくさは c_i です。 高橋君は熱源を 1 つ持っています。熱源を位置 \\left(X, Y\\right) ( X, Y は実数)に置くと、 i 枚目の肉は、 焼けるまでに c_i \\times \\sqrt{\\left(X - x_i\\right)^2 + \\left(Y-y_i\\right)^2} 秒掛かります。 高橋君は肉を K 枚食べたいと考えています。 K 枚以上の肉が焼けるまでに掛かる時間を最小化するように高橋君が熱源を配置したとき、その所要時間を求めてください。 制約 入力は全て整数 1 \\leq N \\leq 60 1 \\leq K \\leq N -1000 \\leq x_i , y_i \\leq 1000 \\left(x_i, y_i\\right) \\neq \\left(x_j, y_j\\right) \\left(i \\neq j \\right) 1 \\leq c_i \\leq 100 入力 入力は以下の形式で標準入力から与えられる。 N K x_1 y_1 c_1 \\vdots x_N y_N c_N 出力 答えを出力せよ。 なお、想定解答との絶対誤差または相対誤差が 10^{-6} 以下であれば正解として扱われる。 入力例 1 4 3\r\n-1 0 3\r\n0 0 3\r\n1 0 2\r\n1 1 40 出力例 1 2.4 熱源を \\left(-0.2, 0\\right) に置くと、 2.4 秒後までに 1, 2, 3 枚目の肉が焼けます。これが最適な熱源の置き方です。 入力例 2 10 5\r\n-879 981 26\r\n890 -406 81\r\n512 859 97\r\n362 -955 25\r\n128 553 17\r\n-885 763 2\r\n449 310 57\r\n-656 -204 11\r\n-270 76 40\r\n184 170 16 出力例 2 7411.2252",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 高橋君は二次元平面である網の上で N 枚の肉を焼こうとしています。 i 枚目の肉の位置は \\left(x_i, y_i\\right) であり、火の通りにくさは c_i です。 高橋君は熱源を 1 つ持っています。熱源を位置 \\left(X, Y\\right) ( X, Y は実数)に置くと、 i 枚目の肉は、 焼けるまでに c_i \\times \\sqrt{\\left(X - x_i\\right)^2 + \\left(Y-y_i\\right)^2} 秒掛かります。 高橋君は肉を K 枚食べたいと考えています。 K 枚以上の肉が焼けるまでに掛かる時間を最小化するように高橋君が熱源を配置したとき、その所要時間を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 入力は全て整数 1 \\leq N \\leq 60 1 \\leq K \\leq N -1000 \\leq x_i , y_i \\leq 1000 \\left(x_i, y_i\\right) \\neq \\left(x_j, y_j\\right) \\left(i \\neq j \\right) 1 \\leq c_i \\leq 100"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K x_1 y_1 c_1 \\vdots x_N y_N c_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。 なお、想定解答との絶対誤差または相対誤差が 10^{-6} 以下であれば正解として扱われる。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 3\r\n-1 0 3\r\n0 0 3\r\n1 0 2\r\n1 1 40"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2.4 熱源を \\left(-0.2, 0\\right) に置くと、 2.4 秒後までに 1, 2, 3 枚目の肉が焼けます。これが最適な熱源の置き方です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 5\r\n-879 981 26\r\n890 -406 81\r\n512 859 97\r\n362 -955 25\r\n128 553 17\r\n-885 763 2\r\n449 310 57\r\n-656 -204 11\r\n-270 76 40\r\n184 170 16"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 7411.2252"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc157/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:35:25.283051+00:00",
+  "statement_sha256": "ded211dcc8d3819f63f5947c4151afab057ad105d1dd020daeb8b565480a79a9",
+  "editorials": []
+}

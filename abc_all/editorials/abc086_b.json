@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc086_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc089/editorial.pdf",
+      "text": "B: 1 21\n\n 整数として読み込むよりも、文字列として読み込んで連結したものを整数に直すのが簡単かもしれません。\n\nC++ には標準で文字列を整数に直すstoi 関数があります。この整数は高々100100 なので、平方数かどうか\n\nは、1 × 1, 2 × 2, ..  , 1000 × 1000 くらいまでのどれかと一致するかループを回して確かめれば良いです。\n\nint main (){\n         string s,t;\n         cin >>s>>t;\n         int x = stoi(s+t);\n        for(int i=1;i <=1000;i++){\n                 if(i*i == x){\n                          puts (\" Yes \");\n                         return 0;\n                   }\n          }\n         puts (\"No \");\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "28e0a9a83883c490c09af776f704ad36877a5aa1130c627c24cf38c5916ec4f4"
+    }
+  ],
+  "status": "available"
+}

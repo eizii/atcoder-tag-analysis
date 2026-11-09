@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc420_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc420/editorial/13739",
+      "text": "この問題で要求されていることは以下の通りです。\n全ての投票を一度保存する。\n各投票について誰が得点を得たかを判定し、各人の合計得点を求める。\n得点が最大の人を全員求める。\n一連の操作は、 for 文を用いて実装可能です。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,m;\n  cin >> n >> m;\n  vector<string> s(n);\n  for(auto &nx : s){cin >> nx;}\n  \n  vector<int> pt(n,0);\n  for(int j=0;j<m;j++){\n    int x=0,y=0;\n    for(int i=0;i<n;i++){\n      if(s[i][j]=='0'){x++;}\n      else{y++;}\n    }\n    for(int i=0;i<n;i++){\n      if(s[i][j]=='0'){\n        if(x<=y){pt[i]++;}\n      }\n      else{\n        if(x>=y){pt[i]++;}\n      }\n    }\n  }\n  \n  int high=(*max_element(pt.begin(),pt.end()));\n  bool spc=false;\n  for(int i=0;i<n;i++){\n    if(pt[i]==high){\n      if(spc){cout << \" \";}\n      cout << i+1;\n      spc=true;\n    }\n  }cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "ab6d62b167828a23c13cb882da1a5ddbc31448954a2e9340538c5e92af6a1468",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc420/abc420_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

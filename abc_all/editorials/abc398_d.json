@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc398_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc398/editorial/12500",
+      "text": "風に合わせて煙を動かすと、時刻を\n\\(t\\)\n進めるのに時間計算量\n\\(O(t)\\)\nを要し、全体で\n\\(O(N^2)\\)\nとなり実行時間制限に間に合いません。\nでは、どのようにすれば良いでしょうか？\nここで、全ての煙は風に合わせて同じ動きをすることに注目します。すると、次のことが可能になります。\n煙を出現した位置で固定して、風に合わせて焚き火と高橋君を動かすことを考える。\nつまり、「煙が風に乗って動く」を考えることと、「焚き火と高橋君が風の逆向きに動く」を考えることとは等価です。\nこれを実現するには、次の処理をすることになります。\nまず、マス\n\\((0,0)\\)\nに煙を生成する。\n焚き火の位置\n\\((0,0)\\)\n、高橋君の位置\n\\((R,C)\\)\nから始める。\n時刻\n\\(t=1,2,\\dots,N\\)\nについて次を繰り返す。\n焚き火と高橋君を次の規則に従って動かす。\n\\(S_i = \\)\nN\nなら\n\\((r,c)\\)\nから\n\\((r+1,c)\\)\nに動かす。\n\\(S_i = \\)\nW\nなら\n\\((r,c)\\)\nから\n\\((r,c+1)\\)\nに動かす。\n\\(S_i = \\)\nS\nなら\n\\((r,c)\\)\nから\n\\((r-1,c)\\)\nに動かす。\n\\(S_i = \\)\nE\nなら\n\\((r,c)\\)\nから\n\\((r,c-1)\\)\nに動かす。\n現在の焚き火の位置に煙を生成する。\nこの時点で高橋君のいる位置に煙があれば\n1\n、なければ\n0\nと解答する。\n問題文の元々の処理と上記の処理とでは、煙と焚き火と高橋君の相対的な位置は変わりません。\n動かすものの数が\n\\(2\\)\nつになっているので、時間計算量が削減できます。\n煙の発生した位置の集合を\nset\nなどのデータ構造で管理することで、\n\\(O(N \\log N)\\)\nといった時間計算量でこの問題に正解できます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing pi=pair<int,int>;\n\nint main(){\n  int n;\n  pi t;\n  string s;\n  cin >> n >> t.first >> t.second;\n  cin >> s;\n  pi f={0,0};\n  set<pi> st;\n  st.insert(f);\n\n  for(auto &nx : s){\n    if(nx=='N'){\n      t.first++;\n      f.first++;\n    }\n    else if(nx=='W'){\n      t.second++;\n      f.second++;\n    }\n    else if(nx=='S'){\n      t.first--;\n      f.first--;\n    }\n    else{\n      t.second--;\n      f.second--;\n    }\n    \n    st.insert(f);\n    if(st.find(t)==st.end()){cout << \"0\";}\n    else{cout << \"1\";}\n  }cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "511262bf30ff6f852776ae5ddf6fa2dd28582bdf43bc4507a8c46998608bbe5b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc398/abc398_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc398/editorial/12545",
+      "text": "時刻\n\\( a \\)\nに\n\\( (0, 0) \\)\nがある煙が時刻\n\\( b \\)\nに\n\\( (R, C) \\)\nに到達するというのは、\n\\( S[a:b) \\)\nを操作した時にちょうどその操作で\n\\( (R, C) \\)\n移動するということと同じことです。\nもう少し言い換えると\n\\( S[0:a) \\)\nで移動した座標\n\\( (x_a, y_a) \\)\nと\n\\( S[0:b) \\)\nで移動した座標\n\\( (x_b, y_b) \\)\nの差\n\\((x_b - x_a, y_b - y_a)\\)\nが\n\\( (R, C) \\)\nと一致するということでもあります。\n\\( (x_b - x_a, y_b - y_a)  = (R, C)\\)\nというのは\n\\((x_b - R, y_b - C)  = (x_a, y_a) \\)\nとおなじことですから、「いま移動している距離」から\n\\( (R, C) \\)\nを引いた位置をこれまでに通過したかどうかを判定すればよいです。\n実装例  (PyPy):",
+      "codes": [
+        "dir = {'N':(-1,0), 'W':(0,-1), 'S':(1,0), 'E':(0,1)}\n\nN, R, C = map(int, input().split())\nS = input()\n\nx, y = 0, 0\nst = set()\nst.add((0, 0))\nans = [0] * N\nfor i in range(N):\n    dx, dy = dir[S[i]]\n    x += dx; y += dy\n    \n    if (x-R, y-C) in st:\n        ans[i] = 1\n    st.add((x, y))\n\nprint(*ans, sep = \"\")"
+      ],
+      "text_sha256": "68070e8663d26177c442a3c15e4d9b73f30742062569a7eab846fabb18151cb8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc398/abc398_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

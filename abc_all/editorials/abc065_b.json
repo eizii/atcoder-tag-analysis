@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc065_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc076/editorial.pdf",
+      "text": "B: Trained?\n\n  どのボタンが光るかを順にシミュレートしていき、もしボタン2 が光ったなら、それまでにボタンを押した\n\n回数を出力すればよいです。\n\n  では、ボタン2 が永遠に光らない場合はどうでしょうか。コンピュータは有限回の操作しかできないため、\n\n「いつまでたってもボタン2 は光らない」ということを直接シミュレーションで確かめることはできません。\n\n  N 回ボタンを押してもボタン2 が光らなかったとします。このとき、その間にN + 1 回いずれかのボタン\n\nが光るので、そのうちのある2 つは同じボタンです。同じボタンが光っている状態から光っているボタンを\n\n押すことを繰り返しても、同じ順にボタンが光るだけなので、この場合ボタン2 は永遠に光ることはありま\n\nせん。\n\n  よって、N 回までボタンを押してみて、もし途中でボタン2 が光ればそれまでにボタンを押した回数を出\n\n 力し、そうでなければ−1 を出力すれば、この問題を解くことができます。\n\n  以下にC++ による実装例を示します。\n\n\n\n                                              1\n\f\n#include <stdio . h>\n\n#include <vector>\n\n#include <algorithm>\n\nusing namespace  std ;\n\n int main ()\n\n{\n\n          int n ;\n\n         scanf (”%d” , &n ) ;\n\n         vector<int>v ;\n\n                 f o r  ( int   i = 0;   i < n ;  i++)\n\n          {\n\n                    int  z ;\n\n                  scanf (”%d” , &z ) ;\n\n                 z−−;\n\n                  v . push back ( z ) ;\n\n          }\n\n          int now = 0 ,  c = 0;\n\n                 f o r  ( ; ; )\n\n          {\n\n                                    i f  (now == 1)\n\n                    {\n\n                          p r i n t f (”%d\\n” ,  c ) ;\n\n                          break ;\n\n                    }\n\n                                    i f  ( c >= n)\n\n                    {\n\n                          p r i n t f (”−1\\n ” ) ;\n\n                          break ;\n\n                    }\n\n                 c++;\n\n                now = v [ now ] ;\n\n          }\n\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "097b4650a891ebc38dd93b8300c864e9d74d16c1646c23cfddf62d0a870af1e4"
+    }
+  ],
+  "status": "available"
+}

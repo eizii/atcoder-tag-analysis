@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc174_f",
+  "editorials": [
+    {
+      "text": "F: Range Set Query\n区間に対するクエリに答えるというと、Range Minimum Query などに用いられるSegmentTree\nが知られていますが、集合のマージには時間がかかってしまいます。\n全体で左からk 番目かそれより左にある玉だけに注目したとき、それぞれの色で最も右にある玉を\nk についての良い玉と呼ぶことにします。すると、i 番目のクエリに対する答えは[li, ri] にあるri に\nついての良い玉の個数になります。\nクエリをri の昇順にソートし、良い玉の集合を管理しながらクエリに答えて行きます。良い玉の\n集合は以下の二つのデータ構造を用いて管理すると良いです。\n• 色i の良い玉が存在するか、存在するならその場所はどこかを管理し、集合の更新をするため\nの配列\n• 良い玉のある場所が1 、それ以外が0 であるような数列を管理し、区間和を取ることでクエリ\nに答えるためのFenwick Tree\n計算量はO(N + QlogN) です。\n解答例\nhttps://atcoder.jp/contests/abc174/submissions/15644133\n",
+      "text_sha256": "fb01ae707eaca6995170cacea6c30a9ab1e898a51e25c858eb206ea67a79647d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc174/abc174_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc353_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc353/editorial/9935",
+      "text": "待機列を先頭から見て、次のような情報を繰り返し更新することでこの問題を解くことができます。\n現在の空席の個数\nこれまでに何回アトラクションをスタートしたか\nfor 文や if 文をうまく使うことで、これらの情報を正しく更新することができます。\nグループごとに「そのまま誘導する」「アトラクションを \\(1\\) 回スタートさせたあとに誘導する」のどちらかを行うと考えることで実装の見通しが立ちやすくなるかもしれません。\n実装例は以下のようになります。",
+      "codes": [
+        "N, K = map(int, input().split())\n\nA = list(map(int, input().split()))\n\nempty_sheets = K # はじめ、空席は K 個\nstart_count = 0 # スタートした回数は 0 回\n\nfor a in A:\n    if empty_sheets < a: # 空席が足りなければ\n        start_count += 1 # スタートして\n        empty_sheets = K # 空席を K 個にする\n    empty_sheets -= a # a 人座る\n    \nstart_count += 1 # 最後に 1 回スタートする\n\nprint(start_count)",
+        "#include <iostream>\n\nusing namespace std;\n\nint main() {\n    int N, K;\n    cin >> N >> K;\n    \n    // はじめ、空席は K 個、スタートした回数は 0 回\n    int empty_sheets = K, start_count = 0;\n    \n    for (int i = 0; i < N; ++i) {\n        int a;\n        cin >> a; // 人数を入力\n        if (empty_sheets < a) { // 空席が足りなければ\n            ++start_count; // スタートして\n            empty_sheets = K; // 空席を K 個に\n        }\n        empty_sheets -= a; // a 人座る\n    }\n    ++start_count; // 最後に 1 回スタートする\n    \n    cout << start_count << endl;\n    \n    return 0;\n}"
+      ],
+      "text_sha256": "29af5c740d27f0fe3c825c41f4e32213d01fde890d0f29fb36107a6dd2fba67f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc353/abc353_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

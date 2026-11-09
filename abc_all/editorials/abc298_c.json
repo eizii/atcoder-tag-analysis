@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc298_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc298/editorial/6217",
+      "text": "以下、この解説では\n\\(i\\)\n番目の形式のクエリをクエリ\n\\(i\\)\nと表記します。\n配列\n\\(box_1, box_2, \\ldots, box_N\\)\nおよび\n\\(card_1, card_2, \\ldots, card_{200000}\\)\nを持っておきます。\n\\(box_i\\)\nでは箱\n\\(i\\)\nに入っているカードの多重集合、\n\\(card_i\\)\nでは\n\\(i\\)\nが書かれたカードが入っている箱の番号の集合を管理します。\nクエリ\n\\(1\\)\nでは\n\\(card_i\\)\nに\n\\(j\\)\nを追加し、\n\\(box_j\\)\nに\n\\(i\\)\nを追加します。これは各クエリ\n\\(\\mathrm{O} (1)\\)\nで行えます。\nクエリ\n\\(2\\)\nでは問われている対象（具体的には、\n\\(box_i\\)\n）に対し昇順に sort をし出力、クエリ\n\\(3\\)\nではそれに加えて重複要素の削除を行えばよいです。これは出力する数の個数の合計を\n\\(S\\)\nとするとすべてのクエリで合わせて\n\\(\\mathrm{O} (S\\log S)\\)\nで行うことができ、\n\\(S \\leq 200000\\)\nより十分高速です。\nクエリ\n\\(1\\)\nのたびに sort を行うと TLE になることに注意してください（例えば、\n1 1 1\nというクエリがたくさん与えられる状況などを考えてください） 。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nconst int N = 200010;\nconst int M = 200010;\nvector<vector<int>> box(N, vector<int>());\nvector<vector<int>> card(M, vector<int>());\n\nint main() {\n\tint n, q;\n\tcin >> n >> q;\n\tvector<vector<int>> ans;\n\twhile (q--) {\n\t\tint t;\n\t\tcin >> t;\n\t\tif (t == 1) {\n\t\t\tint i, j;\n\t\t\tcin >> i >> j;\n\t\t\tcard[i].push_back(j);\n\t\t\tbox[j].push_back(i);\n\t\t}\n\t\telse if (t == 2) {\n\t\t\tint i;\n\t\t\tcin >> i;\n\t\t\tsort(box[i].begin(), box[i].end());\n\t\t\tfor (int j = 0; j < box[i].size(); j++) {\n\t\t\t\tcout << box[i][j] << \"\\n \"[j + 1 != box[i].size()];\n\t\t\t}\n\t\t}\n\t\telse {\n\t\t\tint i;\n\t\t\tcin >> i;\n\t\t\tsort(card[i].begin(), card[i].end());\n\t\t\tcard[i].erase(unique(card[i].begin(), card[i].end()), card[i].end());\n\t\t\tfor (int j = 0; j < card[i].size(); j++) {\n\t\t\t\tcout << card[i][j] << \"\\n \"[j + 1 != card[i].size()];\n\t\t\t}\n\t\t}\n\t}\n}"
+      ],
+      "text_sha256": "f949b37b53ed2603b2f6d1e6af43bc75a4c6e9ace270dd9bc82b85aea3234aab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc298/abc298_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

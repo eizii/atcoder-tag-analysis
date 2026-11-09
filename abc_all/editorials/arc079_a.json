@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc079_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc079/editorial.pdf",
+      "text": "C: Cat snuke and a voyage\n\n  島i(i = 2, 3, ..., N −1) について、島1 と島i、島i と島N のどちらの間に\nも定期便が通っているようなi が存在するかどうかを調べれば良いです。\n 最初に辺をハッシュマップに入れると、島1 と島i の間に辺があるかをO(1)\nで調べることができます。\n\n 他にも、長さN のboolean 配列を2 つ用意して、島1 と島i の間に辺があ\nるか、島i と島N の間に辺があるか、を格納しても良いです。こちらのほう\nが定数倍が速いです。\n\n よって、O(N) で判定を行うことができます。\n 辺の前処理にO(M) かかるため、まとめてO(N + M) です。\n なお、ダイクストラ法というアルゴリズムを使用すると、最小でいくつの\n\n定期便を使えば島N にたどり着けるかも調べることができます。\n\n\n\n\n\n                                3",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "700ac656b218ef81c63c0f0cce6850198888f45c3d0f7b05665db422c72c8d35"
+    }
+  ],
+  "status": "available"
+}

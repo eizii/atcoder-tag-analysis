@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc482_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc482/editorial/28008",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは practice contest の問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。 また、プログラミングコンテストの問題に慣れていない方は、 AtCoder Beginners Selection の問題をいくつか解いてみることをおすすめします。 \\(S\\) に含まれる o の個数を求め、その個数を \\(2\\) で割ったあまりに応じて分岐し出力を行えばよいです。 \\(S\\) に含まれる o の個数を数えるには以下の方法が考えられます。 for 文などを利用して \\(S\\) を \\(1\\) 文字ずつ見る Python の .count() など、言語側で用意された機能を利用する 実装例 (C++) 実装例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string S;\n    cin >> S;\n    int count = 0;\n    for (int i = 0; i < (int)S.size(); i++) {\n        if (S[i] == 'o') count++;\n    }\n    if (count % 2 == 0) {\n        cout << \"even\" << endl;\n    } else {\n        cout << \"odd\" << endl;\n    }\n}\n",
+        "S = input()\ncount = S.count('o')\nif count % 2 == 0:\n    print('even')\nelse:\n    print('odd')\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "4222001dcd66b639f660b46b5a958d36d906901c1aebda2fb7cd81880a9d51da"
+    }
+  ],
+  "status": "available"
+}

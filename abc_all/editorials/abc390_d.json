@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc390_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc390/editorial/12045",
+      "text": "操作を繰り返した後の状態において、元々どの袋に入っていた石が同じ袋に入っているか考えることによって、\nこの問題の答えは次の値と同じであることがわかります。\n「袋\n\\(1\\)\n, 袋\n\\(2\\)\n,\n\\(\\ldots\\)\n, 袋\n\\(N\\)\nをいくつかのグループに分け、\nグループごとにその袋に入った石の数を合計し、\n最後にグループごとの石の合計数の排他的論理和をとった値」\nとしてあり得るものの個数\n\\(N\\)\n個のものをグループに分ける方法（グループの順番、グループ内の順番は区別しない）の個数はベル数\n\\(B(N)\\)\nとしてしられています。\nベル数は\n\\(N\\)\nとともに増加し、\n\\(N=12\\)\nにおいては\n\\( B(12)=4213597(\\sim 4\\times 10^6)\\)\n通りとなるため、今回の制約\n\\((2\\leq N\\leq 12)\\)\nの下では、全列挙することが可能です。\n全列挙する方法はいくつかありますが、例えば次のように深さ優先探索を用いて行うことができます。\n深さ\n\\(1\\)\n、グループ数が\n\\(0\\)\nの状態から始めて次の操作を行います。\nその時点における深さが\n\\(d\\)\n、グループの数が\n\\(k\\)\nであるとき、\n\\(1\\leq i\\leq k+1\\)\nについて、次の行動を順に行う。\n袋\n\\(d\\)\nをグループ\n\\(i\\)\nに所属させる。\nただし、\n\\(i=k+1\\)\nのときは新しく袋\n\\(d\\)\nのみが所属するグループを作ることに対応する。\n\\(d=N\\)\nならばその状態における「各グループに属する袋の石の（グループごとの）合計数の排他的論理和」を記録する。\n\\(d<N\\)\nならば次の深さ（すなわち深さ\n\\((d+1)\\)\n）に移動する。\n\\(i=k+1\\)\nならばグループ数が増えていることに注意する。\nすべての\n\\(i\\)\nについて探索した後、\n\\(1\\)\nつ前の深さ（すなわち深さ\n\\((d-1)\\)\n）に戻る。\n\\(d=1\\)\nならば探索を終了する。\n探索が終了した後に記録された数字の種類数が求めるものとなります。\nこれは非順序集合を管理するデータ構造 (c++ における\nstd::unordered_set\n等) などによって、平均計算量\n\\(O(1)\\)\nで行うことができます。よって、計算量は\n\\(O(NB(N))\\)\n、あるいは探索の道中で排他的論理和を更新していくことによって、\n\\(O(B(N))\\)\nで計算することができます。\nこれは十分高速であり、よってこの問題を解くことができました。\nなお、配列に記録し、後でソートをして求めるというような解法では\n\\(O(B(N)\\log B(N))\\)\nの計算量がかかってしまいますが、定数倍が軽い方法であれば、こういった方法でも時間制限をみたすこともあります。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint n;\nlong long a[12];\nlong long s[12];\nlong long val;\nunordered_set<long long>st;\n\nvoid dfs(int idx,int sz){\n\tfor(int i=0;i<=sz;i++){\n\t\tval^=s[i];\n\t\ts[i]+=a[idx];\n\t\tval^=s[i];\n\t\tif(idx==n-1)st.insert(val);\n\t\telse if(i<sz)dfs(idx+1,sz);\n\t\telse dfs(idx+1,sz+1);\n\t\tval^=s[i];\n\t\ts[i]-=a[idx];\n\t\tval^=s[i];\n\t}\n\treturn;\n}\n\n\nint main() {\n\tcin>>n;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>a[i];\n\t}\n\tfor(int i=0;i<n;i++)s[i]=0;\n\tval=0;\n\tdfs(0,0);\n\tcout<<((int)(st.size()))<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "44f1b2b91f27d0f45ae0c791f4cc11f778969381a20140806ce7930168af99d3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc390/abc390_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

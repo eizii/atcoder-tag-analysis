@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc270_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc270/editorial/4877",
+      "text": "テストの点数と正答状況の対応は以下の通りです。\n点数\n問\n\\(1\\)\n(\n\\(1\\)\n点)\n問\n\\(2\\)\n(\n\\(2\\)\n点)\n問\n\\(3\\)\n(\n\\(4\\)\n点)\n点数の\n\\(2\\)\n進数表記\n0\n×\n×\n×\n\\(000\\)\n1\n◯\n×\n×\n\\(001\\)\n2\n×\n◯\n×\n\\(010\\)\n3\n◯\n◯\n×\n\\(011\\)\n4\n×\n×\n◯\n\\(100\\)\n5\n◯\n×\n◯\n\\(101\\)\n6\n×\n◯\n◯\n\\(110\\)\n7\n◯\n◯\n◯\n\\(111\\)\nすなわち、点数を\n\\(2\\)\n進数で表した時、下から\n\\(i\\)\n(\n\\(1\\leq i\\leq 3\\)\n) 番目の桁が\n\\(1\\)\nならば\n\\(i\\)\n番目の問題を解けており、そうでない時、解けていない事が分かります。\n次に、各問題について、解けているに\n\\(1\\)\n、解けていないに\n\\(0\\)\nを対応させた時、\n高橋君および青木君の正解状況に対するすぬけ君の正解状況は次のようになります。\n高橋君\n青木君\nすぬけ君\n\\(0\\)\n\\(0\\)\n\\(0\\)\n\\(0\\)\n\\(1\\)\n\\(1\\)\n\\(1\\)\n\\(0\\)\n\\(1\\)\n\\(1\\)\n\\(1\\)\n\\(1\\)\nこれは OR 演算に他ならず、bitごと(=問題ごと)に計算して足し合わせれば良いため、全体で整数として OR を取ればよく、高橋君が\n\\(A\\)\n点、青木君が\n\\(B\\)\n点である時、\nすぬけ君の点数は\n\\( (A|B) \\)\n点 ( ただし、\n\\(x|y\\)\nは\n\\(x\\)\nと\n\\(y\\)\nのOR演算を表す ) として表されます。\nよって、これを出力すれば良いです。\nbit 演算は計算の基本となり得るので、もしうろ覚えになっている人がいれば、AND演算・XOR演算についても合わせて復習しておくと良いでしょう。\nc++による実装例 :\nPython による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint a, b;\n\tcin>>a>>b;\n\tcout<<(a|b)<<endl;\n\treturn 0;\n}",
+        "a,b = map(int, input().split())\nprint(a|b)"
+      ],
+      "text_sha256": "f4b9b572603f2ee78da1bbb6dddcd274ef087eb8259629b4b5ff3a43f241140d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc270/abc270_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

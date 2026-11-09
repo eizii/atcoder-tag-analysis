@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc359_f",
+  "title": "Tree Degree Optimization",
+  "contests": [
+    {
+      "contest_id": "abc359",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1792,
+  "raw_difficulty": 1792,
+  "contest_id": "abc359",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc359/tasks/abc359_f",
+  "statement": "配点 : 550 点 問題文 整数列 A=(A_1,\\ldots,A_N) が与えられます。 N 頂点の木 T に対して、 f(T) を以下で定めます。 T の頂点 i の次数を d_i とする。このとき、 f(T)=\\sum_{i=1}^N {d_i}^2 A_i とする。 f(T) として考えられる最小値を求めてください。 なお、制約下において答えが 2^{63} 未満となることは保証されています。 制約 2\\leq N\\leq 2\\times 10^5 1\\leq A_i \\leq 10^9 入力される数値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N 出力 答えを出力せよ。 入力例 1 4\r\n3 2 5 2 出力例 1 24 頂点 1 と頂点 2 を結ぶ辺、頂点 2 と頂点 4 を結ぶ辺、頂点 4 と頂点 3 を結ぶ辺からなるような木 T を考えます。 このとき f(T) = 1^2\\times 3 + 2^2\\times 2+1^2\\times 5 +2^2\\times 2 = 24 です。これが f(T) の最小値であることが証明できます。 入力例 2 3\r\n4 3 2 出力例 2 15 入力例 3 7\r\n10 5 10 2 10 13 15 出力例 3 128",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 整数列 A=(A_1,\\ldots,A_N) が与えられます。 N 頂点の木 T に対して、 f(T) を以下で定めます。 T の頂点 i の次数を d_i とする。このとき、 f(T)=\\sum_{i=1}^N {d_i}^2 A_i とする。 f(T) として考えられる最小値を求めてください。 なお、制約下において答えが 2^{63} 未満となることは保証されています。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2\\leq N\\leq 2\\times 10^5 1\\leq A_i \\leq 10^9 入力される数値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\r\n3 2 5 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 24 頂点 1 と頂点 2 を結ぶ辺、頂点 2 と頂点 4 を結ぶ辺、頂点 4 と頂点 3 を結ぶ辺からなるような木 T を考えます。 このとき f(T) = 1^2\\times 3 + 2^2\\times 2+1^2\\times 5 +2^2\\times 2 = 24 です。これが f(T) の最小値であることが証明できます。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\r\n4 3 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 15"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 7\r\n10 5 10 2 10 13 15"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 128"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc359/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:38.402189+00:00",
+  "statement_sha256": "1489412fb28ed393596a78fef5c58ac734d804a0683a6b7e0c888a0cc91176a6",
+  "editorials": []
+}

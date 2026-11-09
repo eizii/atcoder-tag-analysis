@@ -1,0 +1,42 @@
+{
+  "problem_id": "abc459_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc459/editorial/20977",
+      "text": "問題文の指示通り、各文字列\n\\(S_i\\)\nを読み込み、\n\\(1\\)\n文字目を基準に\n\\(C_i\\)\nを求めて連結すれば良いです。\n\\(S_i\\)\nの\n\\(1\\)\n文字目と\n\\( C_i\\)\nを対応させる方法としてはいくつか考えられますが、配列または文字列を用いるとやや実装が楽になるでしょう。\nやや実装量は多くなりますが、if 文のみを用いても実装することもできます。\nどのような方法を用いても基本的に時間計算量は問題ありません。\nc++ による実装例1:\nc++ による実装例2:\nPython  による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tstring StoC=\"22233344455566677778889999\";\n\tint n;\n\tstring s,ans;\n\n\tcin>>n;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>s;\n\t\tans+=StoC[s[0]-'a'];\n\t}\n\tcout<<ans<<endl;\n\t\n\treturn 0;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\t\n\tstring StoC=\"\";\n\tfor(int i=2;i<=9;i++){\n\t\tfor(int j=0;j<3;j++)StoC+=(char)('0'+i); //3 characters for 2 3 4 5 6   8\n\t\tif((i==7)||(i==9))StoC+=(char)('0'+i);   //4 characters for           7   9\n\t}\n\n\tint n;\n\tstring s,ans;\n\n\tcin>>n;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>s;\n\t\tans+=StoC[s[0]-'a'];\n\t}\n\tcout<<ans<<endl;\n\t\n\treturn 0;\n}",
+        "StoC=\"22233344455566677778889999\"\nans=\"\"\n\nn=int(input())\ns=list(input().split())\nfor i in range(n):\n    ans+=StoC[ord(s[i][0]) - ord('a')]\n\nprint(ans)"
+      ],
+      "text_sha256": "34401bea10d4d26d49d43eb25ce9dcc1b1f782e8bbd4187ca763fa18a0856073",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc459/abc459_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc459/editorial/20993",
+      "text": "文字と\n\\(C_i\\)\nの対応関係が、大体\n\\(3\\)\n文字ごとになっていることに着目して、以下のようなアルゴリズムが考えられます。\n\\(x\\)\nに、\n\\(S_i\\)\nの先頭の文字と\na\nの文字コードの差分を代入する。\nもし\n\\(x \\geq 18\\)\nなら(\ns\n以降の文字なら)、そのときに限り、\n\\(x \\leftarrow x-1\\)\nとする。\n\\(x \\leftarrow \\min(\\lfloor \\frac{x}3 \\rfloor + 2, 9)\\)\nとする。\nこうして得られた\n\\(x\\)\nを\n\\(C_i\\)\nとする。\n実装例(C++)\nhttps://atcoder.jp/contests/abc459/submissions/76109017\n実装例(Python)\n内包表記を用いて計算/出力部分を1行で書いた例\nhttps://atcoder.jp/contests/abc459/submissions/76109047",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    \n    for (int i = 0; i < N; i++) {\n        string Si;\n        cin >> Si;\n        \n        int x = Si[0] - 'a';\n        if ('s' - 'a' <= x) x -= 1;\n        x = min(x / 3 + 2, 9);\n        cout << x;\n    }\n    cout << endl;\n}",
+        "N = int(input())\nS = input().split()\nprint(*[min((ord(s[0]) - ord(\"a\") - (\"s\" <= s[0])) // 3 + 2, 9) for s in S], sep=\"\")"
+      ],
+      "text_sha256": "1ff5b8469cdad180eeb25e1c7442644e05c87bbc04385492638610d190dff173",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc459/abc459_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc459/editorial/20992",
+      "text": "問題文に書かれている対応表をそのままコピーすると、以下のような文字列が得られます。\nこの文字列を\n\\(T\\)\nとして、以下のようなアルゴリズムで対応づけることができます。\n\\(S_i\\)\nの先頭の文字を\n\\(s\\)\nとする。\n\\(s=\\)\ni\nの場合、\n\\(C_i=4\\)\nとする。\nそうでない場合、\n\\(s\\)\nは\n\\(T\\)\nの中で「の先頭の文字が〜のいずれかならば」の場所のみに現れるので、その index を求め、それより後に初めて現れる数字を\n\\(C_i\\)\nとする。\n提出コード",
+      "codes": [
+        "S \ni\n​\n  の先頭の文字が a, b, c のいずれかならば \nC \ni\n​\n =2\nS \ni\n​\n  の先頭の文字が d, e, f のいずれかならば \nC \ni\n​\n =3\nS \ni\n​\n  の先頭の文字が g, h, i のいずれかならば \nC \ni\n​\n =4\nS \ni\n​\n  の先頭の文字が j, k, l のいずれかならば \nC \ni\n​\n =5\nS \ni\n​\n  の先頭の文字が m, n, o のいずれかならば \nC \ni\n​\n =6\nS \ni\n​\n  の先頭の文字が p, q, r, s のいずれかならば \nC \ni\n​\n =7\nS \ni\n​\n  の先頭の文字が t, u, v のいずれかならば \nC \ni\n​\n =8\nS \ni\n​\n  の先頭の文字が w, x, y, z のいずれかならば \nC \ni\n​\n =9"
+      ],
+      "text_sha256": "f4ac096f39e143c7c8dbd5fa59ca609645f5852bf04a374fdd112d1fde499377",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc459/abc459_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

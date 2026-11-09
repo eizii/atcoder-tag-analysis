@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc208_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc208/editorial/2207",
+      "text": "この問題は\nワーシャル-フロイド法\nというアルゴリズムのアイディア部分を抽出して問題にしたものになっています。\n便宜上\n\\(f(s,t,0)\\)\nを次のように定めます。\n\\[\nf(s,t,0) = \n\\begin{cases}\n0 & s = t \\\\\n辺s\\to tの重み & 辺が存在する \\\\\n\\mathrm{inf} & 辺が存在しない\n\\end{cases}\n\\]\n\\(f(s,t,k+1)\\)\nを\n\\(f(\\ast,\\ast,k)\\)\nを用いて表すことを考えます。頂点\n\\(s,t\\)\nおよび\n\\(k+1\\)\n以下の番号の頂点を使ってよいときの\n\\(s \\to t\\)\n間の最短パスは\n\\(k+1\\)\nを使うかどうかで2つに場合分け出来ます。それぞれの場合について最短パスは以下のように計算できます。\n\\(k+1\\)\nを使わない場合\n使用してよいのは\n\\(s,t\\)\nおよび\n\\(k\\)\n以下の番号の頂点であり、この時の最短パスの長さは\n\\(f(s,t,k)\\)\nが答えです。\n\\(k+1\\)\nを使う場合\n\\(s\\)\nから\n\\(k+1\\)\nへの\n\\(k\\)\n以下の頂点を経由する最短パス、および\n\\(k+1\\)\nから\n\\(t\\)\nへの\n\\(k\\)\n以下の頂点を経由する最短パスがわかればよいです。これは\n\\(f(s,k+1,k) + f(k+1,t,k)\\)\nになります。\n以上より\n\\(f(s,t,k+1)\\)\nと\n\\(f(\\ast,\\ast,k)\\)\nの関係式は次の通りです。\n\\[f(s,t,k+1) = \\min(f(s,t,k) , f(s,k+1,k) + f(k+1,t,k))\\]\n以上の遷移式を元にDPを行うことで\n\\(\\mathrm{O}(N^3)\\)\nでこの問題を解くことが出来ました。\nなお、\n\\(f(s, t, N)\\)\nは全ての頂点を通過できるときの\n\\(s\\)\nから\n\\(t\\)\nへ向かう最短パスになっています。このように全ての\n\\((s,t)\\)\nに対して\n\\(\\mathrm{O}(N^3)\\)\nで\n\\(s\\)\nから\n\\(t\\)\nへ向かう最短パスを計算するアルゴリズムを\nワーシャル-フロイド法\nと呼びます。\n以下に Python での実装例を貼ります。( 以下のコードは  Python3 だと TLE してしまうので、 Python で AC を目指す場合はより高速な処理系である PyPy3 を言語欄から選んで提出するとよいでしょう。)",
+      "codes": [
+        "import sys\n\nN, M = map(int, sys.stdin.buffer.readline().split())\nABC = map(int, sys.stdin.buffer.read().split())\nd = [[1 << 60] * N for i in range(N)]\nfor i in range(N):\n  d[i][i] = 0\nfor a, b, c in zip(ABC, ABC, ABC):\n  d[a - 1][b - 1] = c\nanswer = 0\nfor k in range(N):\n  nxt = [[0] * N for i in range(N)]\n  for i in range(N):\n    for j in range(N):\n      nxt[i][j] = min(d[i][j], d[i][k] + d[k][j])\n      if nxt[i][j] < 1 << 59:\n        answer += nxt[i][j]\n  d = nxt\nprint(answer)"
+      ],
+      "text_sha256": "ec0e116fb22ba3e518e806a9cb18a4b70faa7db5bf421cc90490213626ca0376",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc208/abc208_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

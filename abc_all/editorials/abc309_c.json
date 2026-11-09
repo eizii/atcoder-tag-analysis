@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc309_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc309/editorial/6746",
+      "text": "\\(1\\)\n日目に飲む必要がある薬は\n\\(\\sum b_i\\)\n錠です。この状態から日数が経過するごとに飲む必要がある薬が減っていく様子をシミュレーションし、初めて飲む必要がある薬が\n\\(K\\)\n錠以下になるのが何日目かを求めます。\n薬は\n\\(a_i\\)\nが小さい方から先に飲む必要が無くなるため、初めに\n\\(a_i\\)\nの昇順にソートを行います。入力で受け取った\n\\((a_i,b_i)\\)\nの組を昇順にソートするのは、例えばC++では以下のように書けます。\nこの後、\n\\(p\\)\nを先頭から見る形で上記のシミュレーションを行えば良いです。\n実装例(C++)",
+      "codes": [
+        "vector<pair<int,int>> p(N);\n\t\nfor(int i=0;i<N;i++){\n\tcin>>p[i].first>>p[i].second;\n}\n\t\nsort(p.begin(),p.end());",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N,K;\n\tcin>>N>>K;\n\t\n\tvector<pair<int,int>> p(N);\n\t\n\tfor(int i=0;i<N;i++){\n\t\tcin>>p[i].first>>p[i].second;\n\t}\n\t\n\tsort(p.begin(),p.end());\n\t\n\tlong long sum = 0;\n\t\n\tfor(int i=0;i<N;i++){\n\t\tsum += p[i].second;\n\t}\n\t\n\tif(sum<=K)cout<<1<<endl;\n\telse{\n\t\tfor(int i=0;i<p.size();i++){\n\t\t\tif(sum<=K){\n\t\t\t\tcout<<p[i-1].first+1<<endl;\n\t\t\t\treturn 0;\n\t\t\t}\n\t\t\tsum -= p[i].second;\n\t\t}\n\t\tcout<<p.back().first+1<<endl;\n\t}\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "67c89f187ce8e581d7a85901b5e784dd89e21540fc7305e30898ad2e1651ad30",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc309/abc309_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc309/editorial/6768",
+      "text": "飲む必要のある薬の個数は、日数が経過していくにつれて広義単調減少していきます。\nよって、答えを二分探索することによりこの問題に正解することができます。\n計算量は\n\\(O(N \\log \\max a)\\)\nです。",
+      "codes": [
+        "#include <bits/stdc++.h>\n \nusing namespace std;\n \nint main(){\n    int n, k; cin >> n >> k;\n    vector<int> a(n), b(n);\n    for(int i = 0; i < n; i++){\n        cin >> a[i] >> b[i];\n    }\n    int ok = 1 << 30, ng = 0;\n    while(abs(ok - ng) > 1){\n        int mid = (ok + ng) / 2;\n        long long sum = 0;\n        for(int i = 0; i < n; i++){\n            if(mid <= a[i]){\n                sum += b[i];\n            }\n        }\n        if(sum <= k){\n            ok = mid;\n        }else{\n            ng = mid;\n        }\n    }\n    cout << ok << endl;\n}"
+      ],
+      "text_sha256": "67d7909993ad710eb5227a63d7fb5100a3c496bc99e77685a86e1d8bcce56a78",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc309/abc309_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

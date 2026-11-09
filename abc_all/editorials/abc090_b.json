@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc090_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc091/editorial.pdf",
+      "text": "B: Palindromic Numbers\n\n A 以上B 以下の全ての整数について、(5 桁であることを適宜利用して) 回文数かどうか判定していけばよ\n\nいです。\n\n#include <stdio . h>\n\n int main ()\n\n{\n\n          int  a , b ;\n\n         scanf (”%d%d” , &a , &b ) ;\n\n          int  r = 0;\n\n           fo r  ( int   i = a ;   i <= b ;  i++)\n\n          {\n\n                    int  s =  i % 10 ,  t =  i  / 10000 % 10;\n\n                    int u =  i  / 10 % 10 , v =  i  / 1000 % 10;\n\n                                    i f  ( s == t&&u == v) r++;\n\n\n\n                                             1\n\f\n          }\n\n         p r i n t f (”%d\\n” ,  r ) ;\n\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "7fdfc5330d954c4f651cd03034e5e39e6e7db91b3d7fa7d8e35428f9de062224"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc248_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc248/editorial/3790",
+      "text": "0\n,\n1\n,\n\\(\\ldots\\)\n,\n9\nそれぞれに対して文字列\n\\(S\\)\nに登場したかどうかの flag を持っておいて、最後に登場していないものを出力すれば良いです。文字列または文字から数値への変換には言語によって (あるいは同一言語の中でも) 様々な方法が存在しますが、自分が扱いやすいものを\n\\(1\\)\nつは知っておくと良いかもしれません。\nc++ による実装例 :\nPython による実装例 :\nまた、余談ですが、\n\\(0+1+\\cdots +9=45\\)\nから登場した数字をすべて引く事でも答えを求めることができます。\nc++ による実装例 :",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tstring S;\n\tbool flag[10];\n\tfor (int i = 0; i < 10; i++)flag[i] = true;\n\tcin >> S;\n\tfor (int i = 0; i < 9; i++)flag[((int)(S[i] - '0'))] = false;\n\tfor (int i = 0; i < 10; i++)if (flag[i])cout << i << endl;\n\treturn 0;\n}",
+        "S=input()\nflag=[True for i in range(10)]\nfor i in range(9):\n\tflag[int(S[i])]=False\nfor i in range(10) :\n\tif(flag[i]):\n\t\tprint(i)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tstring S;\n\tcin >> S;\n\tint ans = 45;\n\tfor (int i = 0; i < 9; i++)ans -= ((int)(S[i] - '0'));\n\tcout << ans << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "05c1fee1534d340878ccf17768607b4e009711be2ae965ff820fe7888da51679",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc248/abc248_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc127_c",
+  "title": "Prison",
+  "contests": [
+    {
+      "contest_id": "abc127",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 239,
+  "raw_difficulty": 194,
+  "contest_id": "abc127",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc127/tasks/abc127_c",
+  "statement": "配点 : 300 点 問題文 N 枚の ID カードと M 個のゲートがあります。 i 番目のゲートは L_i, L_i+1, ..., R_i 番目の ID カードのうちどれか 1 枚を持っていれば通過できます。 1 枚だけで全てのゲートを通過できる ID カードは何枚あるでしょうか。 制約 入力は全て整数である。 1 \\leq N \\leq 10^5 1 \\leq M \\leq 10^5 1 \\leq L_i \\leq R_i \\leq N 入力 入力は以下の形式で標準入力から与えられる。 N M L_1 R_1 L_2 R_2 \\vdots L_M R_M 出力 1 枚だけで全てのゲートを通過できる ID カードの枚数を出力せよ。 入力例 1 4 2\r\n1 3\r\n2 4 出力例 1 2 以下のように、 1 枚だけで全てのゲートを通過できる ID カードは 2 枚です。 1 番目の ID カードでは 2 番目のゲートを通過できません。 2 番目の ID カードでは全てのゲートを通過できます。 3 番目の ID カードでは全てのゲートを通過できます。 4 番目の ID カードでは 1 番目のゲートを通過できません。 入力例 2 10 3\r\n3 6\r\n5 7\r\n6 9 出力例 2 1 入力例 3 100000 1\r\n1 100000 出力例 3 100000",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 枚の ID カードと M 個のゲートがあります。 i 番目のゲートは L_i, L_i+1, ..., R_i 番目の ID カードのうちどれか 1 枚を持っていれば通過できます。 1 枚だけで全てのゲートを通過できる ID カードは何枚あるでしょうか。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 入力は全て整数である。 1 \\leq N \\leq 10^5 1 \\leq M \\leq 10^5 1 \\leq L_i \\leq R_i \\leq N"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M L_1 R_1 L_2 R_2 \\vdots L_M R_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 1 枚だけで全てのゲートを通過できる ID カードの枚数を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 2\r\n1 3\r\n2 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2 以下のように、 1 枚だけで全てのゲートを通過できる ID カードは 2 枚です。 1 番目の ID カードでは 2 番目のゲートを通過できません。 2 番目の ID カードでは全てのゲートを通過できます。 3 番目の ID カードでは全てのゲートを通過できます。 4 番目の ID カードでは 1 番目のゲートを通過できません。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 3\r\n3 6\r\n5 7\r\n6 9"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 100000 1\r\n1 100000"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 100000"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc127/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:34:47.300731+00:00",
+  "statement_sha256": "5203483fbc11def4695e3571d892f28fc63287bc6c4f0622fa141e66683441a1",
+  "editorials": []
+}

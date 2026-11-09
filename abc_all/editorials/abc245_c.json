@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc245_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc245/editorial/3634",
+      "text": "DP(動的計画法)で解くことができます。\ndpの定義\n\\(dp[i] :=(X_1,X_2,\\ldots,X_i)\\)\nまで考慮したとき、\n\\(X_i = A_i\\)\nとしてよいか\n\\(ep[i] :=(X_1,X_2,\\ldots,X_i)\\)\nまで考慮したとき、\n\\(X_i = B_i\\)\nとしてよいか\nと\n\\(dp,ep\\)\nを定義します。\ndpの初期値\n\\(dp[1]\\)\nは、「\n\\(X_1\\)\nまで考慮したとき、\n\\(X_1=A_1\\)\nとしてよいか」という意味であり、これは True です。\n\\(ep[1]\\)\nも同様に True です。\ndpの遷移\n\\(i\\geq 2\\)\nに対し、\n\\(dp[i]\\)\nを求めます。\n\\(dp[i-1]=True\\)\nかつ\n\\(|A_{i-1}- A_i| \\leq K\\)\nならば、\n\\(dp[i]=True\\)\n\\(ep[i-1]=True\\)\nかつ\n\\(|B_{i-1}- A_i| \\leq K\\)\nならば、\n\\(dp[i]=True\\)\nそれ以外ならば、\n\\(dp[i]=False\\)\nです。\n\\(ep[i]\\)\nも同様に求めることができます。\n問題の答え\n\\(dp[N]=True\\)\nまたは\n\\(ep[N]=True\\)\nならば、答えは\nYes\nです。それ以外ならば答えは\nNo\nです。\n以上でこの問題を解くことができました。計算量は\n\\(O(N)\\)\nです。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\n\nsigned main(){\n    ll n,k;cin>>n>>k;\n    vector<ll>a(n+1),b(n+1);\n    for(ll i=1;i<=n;i++)cin>>a[i];\n    for(ll i=1;i<=n;i++)cin>>b[i];\n    vector<ll>dp(n+1,false),ep(n+1,false);\n\n    //初期値\n    dp[1]=ep[1]=true;\n\n    //遷移\n    for(ll i=2;i<=n;i++){\n        if(dp[i-1]){\n            if(abs(a[i-1]-a[i])<=k)dp[i]=true;\n            if(abs(a[i-1]-b[i])<=k)ep[i]=true;\n        }\n        if(ep[i-1]){\n            if(abs(b[i-1]-a[i])<=k)dp[i]=true;\n            if(abs(b[i-1]-b[i])<=k)ep[i]=true;\n        }\n    }\n\n    //答え\n    if(dp[n]||ep[n])cout<<\"Yes\"<<endl;\n    else cout<<\"No\"<<endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "8f75d731ee923fe5dac295f2088ff6a3a167924b172fafc6ddcb5bfc16727f08",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc245/abc245_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

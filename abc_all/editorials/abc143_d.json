@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc143_d",
+  "editorials": [
+    {
+      "text": "D: Triangles\n全ての棒の組について三角形が作れるかをチェックすると，時間計算量がO\n(\nN 3)\nとなり，間に合\nいません.\n三角形を構成する棒のうち，1 番目と2 番目に長いものを固定します(ただし，同じ長さを持つ棒が\n複数存在する場合は，予め適当に大小関係を定めておきます).\nこのとき，3 番目に長い棒として使える棒は，「2 番目の棒より短く，一定以上の長さを持つもの」で\nす.\nこのような棒の数は，予め棒の長さをソートしておくと，二分探索で効率的に求めることが出来ます.\n以上より，1 番目に長い棒と2 番目に長い棒の選び方について探索すると，時間計算量O\n(\nN 2 log N\n)\nで答えを求めることが出来ます.\nC++ による解答例:https://atcoder.jp/contests/abc143/submissions/8034764\n",
+      "text_sha256": "3470e7f1fc9bd2df7c221345c68b0bd9618ed816155204b2342654434b6aff9d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc143/abc143_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

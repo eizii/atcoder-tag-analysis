@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc110_d",
+  "editorials": [
+    {
+      "text": "D: Factorization\np1, p2, ..., pk を異なる素数として、\nM = pb1\n1 pb2\n2 ...pbk\nk\nと表せたとします。a1a2...aN = M とすると、これらもまた、あるcij が存在して\nai = pci1\n1 pci2\n2 ...pcik\nk\nと表せるはずです。このとき、a′\ni とa′′\ni が異なることと、あるj が存在してc′\nij とc′′\nij が異なることは同値で\nす。従って、この問題の答えは、各bj をc1j, c2j, ..., cNj にc1j + c2j + ... + cNj = bj を満たすように振り分\nける場合の数と一致します。これはj に関して独立に計算でき、各j についての場合の数は、組み合わせを\ncomb で表すとすれば、comb(bj + N −1, bj) です(直感的には、bj 個のボールをN −1 個の仕切りでグルー\nプ分けするイメージで、ボールか仕切りか定まっていないbj + N −1 個の連続したオブジェクトからbj 個\nの仕切りを選ぶ場合の数です)。よって、答えは\ncomb(b1 + N −1, b1) × comb(b2 + N −1, b2) × ... × comb(bk + N −1, bk)\nとなります。時間計算量は、素因数分解にO(\n√\nM) かかり、各bi はbi = O(logM) で抑えられるので\ncomb(bj + N −1, bj) の計算はbj 回かけたり割ったりすればO(logM) で計算でき、k も高々O(logM) な\nので、全体としてはO(\n√\nM + (logM)2)、すなわちO(\n√\nM) になります(実はN によりません)。\n",
+      "text_sha256": "a861a4e1730605de89d50af427eb5fc71f7dac95f8e506d70854d0d13b258a2b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc110/abc110_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

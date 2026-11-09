@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc467_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc467/editorial/22699",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは practice contest の問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。 また、プログラミングコンテストの問題に慣れていない方は、 AtCoder Beginners Selection の問題をいくつか解いてみることをおすすめします。 原案:vwxyz \\(H[\\mathrm{cm}]\\) を メートルに変換すると \\(\\frac{H}{100}[\\mathrm{m}]\\) なので、問題文の定義に従うと、 \\(\\mathrm{BMI}[\\mathrm{kg}/\\mathrm{m}^2]=\\frac{10^4 \\times W}{H^2}[\\mathrm{kg}/\\mathrm{m}^2]\\) です。\nこれが \\(25\\) 以上かどうかを判定すればよいです。\n式変形 をすると、 \\(10^4  \\times W \\geq 25 \\times H^2\\) \\(400 \\times W \\geq H^2\\) となります。\nこれを実装すればよいです。 補足 A 問題としてはやや発展的な話になりますが、 \\(\\frac{10^4 \\times W}{H^2} \\geq 25\\) をそのまま小数型などで比較しようとすると、誤差の問題が生じます。 本問題では制約から \\(H,W\\) がそれほど大きな値にはならず、 \\(25.0\\) が浮動小数点で正確に表せるため、 \\(\\frac{10^4 \\times W}{H^2}\\) と \\(25\\) を比較であれば AC できる可能性が高いですが、整数同士の比較にした方が安全です。 \\(\\frac{W}{(\\frac{H}{100})^2}\\) と \\(25\\) を比較しようとすると WA になるテストケースが入っています。 c++の実装例 Pythonの実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int H,W;\n    cin>>H>>W;\n    string ans;\n    if(400*W>=H*H){\n        ans=\"Yes\";\n    }\n    else{\n        ans=\"No\";\n    }\n    cout<<ans<<\"\\n\";\n}\n",
+        "H,W=map(int,input().split())\nif 400*W>=H*H:\n    ans=\"Yes\"\nelse:\n    ans=\"No\"\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "0436e400f1580759b262595d29d0f7d070885c1cff95f59ac3f1bb6caa3c0afa"
+    }
+  ],
+  "status": "available"
+}

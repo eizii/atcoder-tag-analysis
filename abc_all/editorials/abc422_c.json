@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc422_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc422/editorial/13811",
+      "text": "コンテストを一つ開催するために\nA\nが \\(1\\) つ必要なので、答えは \\(n _ A\\) 以下です。\n同様に、コンテストを一つ開催するために\nC\nが \\(1\\) つ必要なので、答えは \\(n _ C\\) 以下です。\nまた、コンテストを一つ開催するために文字が \\(3\\) つ必要なので、答えは \\(\\left\\lfloor\\dfrac{n _ A+n _ B+n _ C}3\\right\\rfloor\\) 以下です。\n以上をあわせて、答えは \\(X=\\min\\!\\left\\lbrace n _ A,n _ C,\\left\\lfloor\\dfrac{n _ A+n _ B+n _ C}3\\right\\rfloor\\right\\rbrace\\) 以下です。\n答えが \\(X\\) になることを示します。\n実際に \\(X\\) 回のコンテストを開催できることを示せばよいです。\n\\(X\\le n _ A\\) より、\nA\nは \\(X\\) 個以上あります。同様に\nC\nも \\(X\\) 個以上あります。\n高橋くんが持っている文字から\nA\nを \\(X\\) 個、\nC\nを \\(X\\) 個取り除いたあと、残った文字が \\(X\\) 個以上あればそれらを使って \\(X\\) 回のコンテストを開催できます。\n\\(X\\le\\left\\lfloor\\dfrac{n _ A+n _ B+n _ C}3\\right\\rfloor\\) から \\(3X\\le n _ A+n _ B+n _ C\\) がいえるので、\\(n _ A+n _ B+n _ C-2X\\ge X\\) となり、示されました。\n以上より、\\(X=\\min\\!\\left\\lbrace n _ A,n _ C,\\left\\lfloor\\dfrac{n _ A+n _ B+n _ C}3\\right\\rfloor\\right\\rbrace\\) を出力することでこの問題を解くことができます。\n実装例は以下のようになります。\n\\(n _ A+n _ B+n _ C\\) の値が \\(2 ^ {31}\\) 以上になる場合があることに注意してください。",
+      "codes": [
+        "#include <iostream>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int T;\n    cin >> T;\n\n    for (int t = 0; t < T; ++t) {\n        unsigned n_A, n_B, n_C;\n        cin >> n_A >> n_B >> n_C;\n        cout << min({n_A, n_C, (n_A + n_B + n_C) / 3}) << endl;\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "7301409200c907310f5c1d71da0f0d33e2918e56c1584b2595293e353f73d94f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc422/abc422_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc422/editorial/13822",
+      "text": "\\(X\\)\n個のコンテストを開くことはできるか？という問題は\n\\(X\\)\nに関して単調性があるので二分探索ができます．\n\\(X\\)\n個のコンテストを開くためには\n\\(n_A\\geq X\\)\n\\(n_C\\geq X\\)\n余った\nA\n（\n\\(n_A-X\\)\n個），余った\nC\n（\n\\(n_C-X\\)\n個），\nB\nが合計で\n\\(X\\)\n個以上（\n\\((n_A-X)+n_B+(n_C-X)\\geq X\\)\n）\nを満たす必要があります．",
+      "codes": [
+        "def solve():\n    a, b, c = map(int, input().split())\n\n    def f(m):\n        if m > min(a, c):\n            return False\n        rem = (a - m) + (c - m) + b\n        return rem >= m\n\n    ng, ok = 10**10, -1\n    while ng - ok > 1:\n        mid = (ok + ng) // 2\n        if f(mid):\n            ok = mid\n        else:\n            ng = mid\n    print(ok)\n\n\nfor _ in range(int(input())):\n    solve()"
+      ],
+      "text_sha256": "c3209a76e5b40acb182f55d74cac46806d27fb7c756ec9a841e1ae327ed613d7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc422/abc422_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

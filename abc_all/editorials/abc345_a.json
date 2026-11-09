@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc345_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc345/editorial/9574",
+      "text": "長さが\n\\(N\\)\n\\((3\\leq N\\leq 100)\\)\nの双方向矢印型の文字列は\n\\(1\\)\n個の\n<\n,\n\\((N-2)\\)\n個の\n=\n,\n\\(1\\)\n個の\n>\nをこの順につなげたものしか有り得ず、逆に\n\\(3\\leq N\\leq 100\\)\nの制約下でこの文字列は双方向矢印型の文字列の条件をみたしています。\nよって、与えられた文字列がこの文字列であるかを判定すれば良いです。具体的には、\n\\(1\\)\n文字目が\n<\nであるか？\n\\(N\\)\n文字目が\n>\nであるか？\n\\(2\\leq i\\leq N-1\\)\nについて\n\\(i\\)\n文字目はすべて\n=\nであるか？\nを判定し、これらがすべて\nYes\nであれば答えは\nYes\n、そうでなければ答えは\nNo\nです。\nこれは if 文と for 文を使って実装することができます。\nc++ による実装例:\nPythonによる実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin>>s;\n\tint n=s.size();\n\tif(s[0]!='<'){\n\t\tcout<<\"No\"<<endl;\n\t\treturn 0;\n\t}\n\tif(s[n-1]!='>'){\n\t\tcout<<\"No\"<<endl;\n\t\treturn 0;\n\t}\n\tfor(int i=1;i<n-1;i++){\n\t\tif(s[i]!='='){\n\t\t\tcout<<\"No\"<<endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\tcout<<\"Yes\"<<endl;\n\treturn 0;\n}",
+        "s=input()\nflag=True\nif s[0]!='<':\n    flag=False\nif s[-1]!='>':\n    flag=False\nfor i in range(1,len(s)-1):\n    if s[i]!='=':\n        flag=False\nif flag:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "824918083ad21ad9f778784a3bf09c9fbdad8c8c502ce4b13b2dfb0e3e3d868d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc345/abc345_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

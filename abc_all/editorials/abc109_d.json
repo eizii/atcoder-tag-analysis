@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc109_d",
+  "editorials": [
+    {
+      "text": "D: Make Them Even\n次の手順で、∑aij が偶数なら全て偶数にでき、奇数なら1 マスを除いて全て偶数にできます。\nまず、一筆書きの経路を作ります。例えば、\n(1, 1), (1, 2), ..., (1, W), (2, W), (2, W −1), ..., (2, 1), (3, 1), (3, 2), ...\nです。この経路が通るi 番目のマスを(Yi, Xi) とします。次に、i = 1, 2, ..., H × W −1 の順にaYiXi が奇\n数ならマス(Yi, Xi) からマス(Yi+1, Xi+1) に箱を1 個移動させる操作をします。この操作により、aYiXi に\n−1、aYi+1Xi+1 に1 が加算され、aYiXi が偶数になります。一連の操作はvalid であり、マス(YH×W , XH×W )\nを除いた全てのマスを偶数にできます。時間計算量はO(HW) になります。\n",
+      "text_sha256": "6143443777685a40570cfc4bf173a46e547b13802f72d86dc556977d79119715",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc109/abc109_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

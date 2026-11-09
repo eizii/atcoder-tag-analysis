@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc356_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc356/editorial/10115",
+      "text": "この問題は2次元配列の操作を適切に行うことができれば解くことができます。\n栄養素ごとに合計量を求め、その全てが目標値を超えているかを判定します。添字の取り違えなどに注意してください。\n実装例(C)\n実装例(Python)",
+      "codes": [
+        "#include <stdio.h>\nint main(){\n\tint n, m;\n\tscanf(\"%d%d\", &n, &m);\n\n\tint a[100];\n\tfor(int i=0; i<m; i++){\n\t\tscanf(\"%d\", &a[i]);\n\t}\n\n\tint x[100][100];\n\tfor(int i=0; i<n; i++){\n\t\tfor(int j=0; j<m; j++){\n\t\t\tscanf(\"%d\", &x[i][j]);\n\t\t}\n\t}\n\n\tfor(int j=0; j<m; j++){\n\t\t// 栄養素 j について判定する\n\t\tint sum = 0;\n\t\tfor(int i=0; i<n; i++){\n\t\t\tsum += x[i][j];\n\t\t}\n\t\tif(sum < a[j]){\n\t\t\tputs(\"No\");\n\t\t\treturn 0;\n\t\t}\n\t}\n\n\tputs(\"Yes\");\n}",
+        "N, M = map(int,input().split())\nA = list(map(int,input().split()))\nX = [list(map(int,input().split())) for _ in range(N)]\n\nfor j in range(M):\n  s = 0\n  for i in range(N):\n    s += X[i][j]\n  if s < A[j]:\n    print(\"No\")\n    exit()\n\nprint(\"Yes\")"
+      ],
+      "text_sha256": "47b124bd03ae26d625c73e67e15e1e94f16ace3954ad7aa58661c618f545c039",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc356/abc356_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

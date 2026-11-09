@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc189_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc189/editorial/539",
+      "text": "各操作はアフィン変換です。例えば直線\n\\(x=p\\)\nで対称に移す変換は以下のように表すことができます。\n\\(\n\\begin{pmatrix}\n-1 & 0 & 2p \\\\\n0 & 1 & 0 \\\\\n0 & 0 & 1\n\\end{pmatrix}\n\\begin{pmatrix}\nx \\\\\ny \\\\\n1\n\\end{pmatrix}=\n\\begin{pmatrix}\n2p-x \\\\\ny \\\\\n1\n\\end{pmatrix}\n\\)\nしたがって、変換行列の累積積を予め計算しておくことで、各クエリに\n\\(O(1)\\)\nで答えることができます。\n累積積の前計算に\n\\(O(M)\\)\nかかるので計算量は\n\\(O(N+M+Q)\\)\nになります。\nよりナイーブには、「各操作終了時に(0,0),(1,0),(0,1)がそれぞれどこに移ったか」という情報さえわかっていれば、任意の点に対して操作終了後の座標を\n\\(O(1)\\)\nで求めることができます。実際に3点に対する操作を事前にシミュレーションしておくことで、計算量は\n\\(O(N+M+Q)\\)\nになります。",
+      "codes": [],
+      "text_sha256": "d41c50f63aa821e2c94a8a56c655834595df2b2fbf803faf6dddf4074745824f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc189/abc189_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

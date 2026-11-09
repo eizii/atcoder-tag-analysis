@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc451_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc451/editorial/18049",
+      "text": "問題の概要\nこの問題は\n「優先度付きキュー（ヒープ）」\nとよばれるデータ構造の練習問題です。例えば Python では\nheapq\nとして、 C++ では\npriority_queue\nとして、実装されています。\n注意：最大・最小ヒープについて\nPython の\nheapq\nはデフォルトで「最小値」を保持する最小ヒープ であるのに対して、 C++ の\npriority_queue\nはデフォルトで「最大値」を保持する最大ヒープとして動作します。\nそのため、（今回の問題のように） C++ で最小値を優先して取り出すには、変数の宣言時に以下のように型引数を追加する必要があります。\npriority_queue<int, vector<int>, greater<int>> que;\nヒープにできること\n実装方針によって、細かなメソッド・計算量は異なりますが、およそ以下のような操作ができます。以下、操作時のヒープの要素数を\n\\(N\\)\nとします。\n1. 最小値の取得\n（削除はせず）ヒープ内の最小値を取得します\n計算量\n\\(O(1)\\)\nPython :\nque[0]\nC++ :\nque.top()\n2. 最小値の取り出し\nヒープ内の最小値を削除します\n計算量\n\\(O(\\log N)\\)\nPython :\nheappop(que)\nC++ :\nque.pop()\n3. 要素の追加\nヒープに要素を追加します\n計算量\n\\(O(\\log N)\\)\nPython :\nheappush(que, x)\nC++ :\nque.push(x)\n実装\n今回の問題であれば\nタイプ\n\\(1\\)\nヒープに\n\\(h\\)\nを追加する。\nタイプ\n\\(2\\)\n最小値を取得し、それが\n\\(h\\)\n以下なら削除する。\n\\(h\\)\n以下でなくなるまで繰り返す。\nというようなシミュレーションを書くことで、この問題に\nAC\nできます。以下のように実装できます。\nPython での実装\nC++ での実装\n計算量\n計算量については以下のようになります。\n挿入\nタイプ\n\\(1\\)\nのクエリごとに\n\\(1\\)\n回行います。よって全体で\n\\(O(Q)\\)\n回です。\n削除\nタイプ\n\\(2\\)\nでは\n\\(1\\)\n回のクエリで、たくさんの要素を削除することもあり、計算量が大きくなると感じるかもしれません。\nしかし、一度削除した要素は二度と削除できないことをかんがえると、「削除の回数」は「挿入の回数」以下となるはずです。よって全体で\n\\(O(Q)\\)\n回です。\n最小値の取得\nほとんど削除回数と同じです。タイプ\n\\(2\\)\nのクエリで、「最小値を確認したが、削除しない要素」が存在することがあります。\nしかし、それは\n\\(1\\)\nクエリにつき高々\n\\(1\\)\nつしか存在しないため、削除回数より高々\n\\(Q\\)\n回しか大きくなりません。よって全体で\n\\(O(Q)\\)\n回です。\n以上をまとめると、計算量は\n\\(O(Q \\log Q)\\)\nとなります。",
+      "codes": [
+        "from heapq import heappop, heappush\n\nque = []\nq = int(input())\nfor i in range(q):\n    t, h = map(int, input().split())\n    if t == 1:\n        heappush(que, h)\n    else:\n        while que and que[0] <= h:\n            heappop(que)\n    print(len(que))",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int q; cin >> q;\n    priority_queue<int, vector<int>, greater<int>> que;\n    for(int i=0; i<q; i++){\n        int t, h; cin >> t >> h;\n        if (t == 1){\n            que.push(h);\n        }else{\n            while(!que.empty() and que.top() <= h){\n                que.pop();\n            }\n        }\n        cout << que.size() << endl;\n    }\n}"
+      ],
+      "text_sha256": "f86bb4d01ecb3cb5f9cc9d4d06cbe55072dfee180c391d609ac184f1478771f0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc451/abc451_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

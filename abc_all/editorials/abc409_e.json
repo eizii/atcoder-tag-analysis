@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc409_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc409/editorial/13202",
+      "text": "与えられた木を，頂点\n\\(1\\)\nを根とする根付き木とみなします．また，陽電子と電子をまとめて「粒子」と呼ぶことにします．\n辺\n\\(j\\)\nが答えにどれくらい寄与するかを考えます．一般性を失わず，頂点\n\\(u_j\\)\nが\n\\(v_j\\)\nの親であるとします．\n頂点\n\\(v_j\\)\nを根とする部分木の頂点に関する\n\\(x\\)\nの総和を\n\\(X_j\\)\nとします．この部分木の中だけでどのように操作を行っても，\n\\(|X_j|\\)\n個の粒子が残ります．残った粒子は，辺\n\\(j\\)\nを通して部分木の外に移動させるか，または辺\n\\(j\\)\nを通して部分木に入ってきた粒子と打ち消しあう必要があります．どちらにせよ，少なくとも\n\\(|X_j|\\)\n個の粒子を辺\n\\(j\\)\nに沿って移動させる必要があり，答えに少なくとも\n\\(|X_j| w_j\\)\nだけ寄与します．よって，答えは少なくとも\n\\(\\sum_{j=1}^{N-1} |X_j| w_j\\)\nです．\nそして，この下界を達成する操作が存在します．具体的には，葉に近い頂点から見ていって，その頂点に粒子が残っているならば，親に向かって移動させるということを繰り返せばよいです．\nよって最適解は\n\\(\\sum_{j=1}^{N-1} |X_j| w_j\\)\nです．\n\\(X_j\\)\nは\n深さ優先探索 (DFS)\nにより求めることができます．時間計算量は\n\\(O(N)\\)\nです．\n実装例 (Python)\n実装例 (C++)",
+      "codes": [
+        "N = int(input())\nx = list(map(int, input().split()))\nT = [[] for _ in range(N)]\nfor _ in range(N - 1):\n    u, v, w = map(int, input().split())\n    u -= 1\n    v -= 1\n    T[u].append((v, w))\n    T[v].append((u, w))\n\nans = 0\nst = [(0, -1, 0)]\nwhile st:\n    v, p, t = st.pop()\n    if t == 0:\n        st.append((v, p, 1))\n        for u, w in T[v]:\n            if u != p:\n                st.append((u, v, 0))\n    else:\n        for u, w in T[v]:\n            if u == p:\n                continue\n            ans += w * abs(x[u])\n            x[v] += x[u]\nprint(ans)",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    vector<long long> x(N);\n    for (auto& y : x) cin >> y;\n    vector<vector<pair<int, long long>>> T(N);\n    for (int i = 0; i < N - 1; ++i) {\n        int u, v;\n        long long w;\n        cin >> u >> v >> w;\n        --u, --v;\n        T[u].push_back({v, w});\n        T[v].push_back({u, w});\n    }\n\n    long long ans = 0;\n\n    auto dfs = [&](auto& dfs, int v, int p) -> void {\n        for (auto [c, w] : T[v]) {\n            if (c == p) continue;\n            dfs(dfs, c, v);\n            ans += w * abs(x[c]);\n            x[v] += x[c];\n        }\n    };\n\n    dfs(dfs, 0, -1);\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "5111d6a3d0698dcef04131bebf985c187c38ac16ac16dc448fc0debb34b90d8b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc409/abc409_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

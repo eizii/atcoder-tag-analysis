@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc322_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc322/editorial/7304",
+      "text": "それぞれの日に対して独立に答えを求める\n\\(\\mathrm{O}(N\\log N)\\)\n解法と、次の日の答えを用いて上手く今日の答えを求める\n\\(\\mathrm{O}(N)\\)\n解法を解説します。\n\\(\\mathrm{O}(N\\log N)\\)\n解法\nそれぞれの\n\\(i(1 \\le i \\le N)\\)\nに対して、\n\\((A_1,A_2,\\dots,A_M)\\)\nのうち\n\\(i\\)\n以上の最小の値を求められれば良いです。\nまず、「\n\\(B_i = i\\)\n日目までに花火が上がる回数」という配列\n\\(B\\)\nを累積和を用いて求めておくことで、\n\\(l\\)\n日目から\n\\(r\\)\n日目の間に花火が上がるか？を\n\\(B_r - B_{l-1} \\ge 1\\)\nかどうかで\n\\(\\mathrm{O}(1)\\)\nで判定できるようにしておきます。\nすると、それぞれの\n\\(i\\)\nに対して二分探索を行うことで\n\\(i\\)\n日目から\n\\(x\\)\n日目までで花火が\n\\(1\\)\n回以上上がる最小の\n\\(x\\)\nを\n\\(\\mathrm{O}(\\log N)\\)\nで求めることが出来ます。この\n\\(x\\)\nは\n\\(i\\)\n日目以降で初めて花火が上がる日となります。よって、各\n\\(i\\)\nに対してこれを行うことでこの問題を\n\\(\\mathrm{O}(N\\log N)\\)\nで解くことが出来ます。\nもしくは、C++ であれば lower_bound を用いて直接求めることも出来ます。\n\\(\\mathrm{O}(N)\\)\n解法\nさて、まず\n\\(N\\)\n日目に対しては答えは\n\\(0\\)\n日後です。(\n\\(N\\)\n日目には花火が上がることが保証されているため。)\nここで、\n\\(i+1\\)\n日目の答えを\n\\(x\\)\nとした上で\n\\(i\\)\n日目の答えを考えます。もし\n\\(i\\)\n日目に花火が上がるのであれば答えは\n\\(0\\)\n日後です。そうでないならば、答えは\n\\(x+1\\)\n日後となります。\nよって、上記を\n\\(i=N-1,N-2,\\dots,2,1\\)\n順に行うことで\n\\(\\mathrm{O}(N)\\)\nで全ての\n\\(i\\)\nに対して答えを求めることが出来ます。\n実装例(C++・\n\\(\\mathrm{O}(N\\log N)\\)\n・二分探索解)\n実装例(C++・\n\\(\\mathrm{O}(N\\log N)\\)\n・lower_bound 解)\n実装例(C++・\n\\(\\mathrm{O}(N)\\)\n解)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main(){\n  int n,m;\n  cin>>n>>m;\n  vector<int> a(m);\n  for(int i=0;i<m;i++){\n    cin>>a[i];\n    a[i]--;\n  }\n  vector<int> b(n+1);\n  for(int i=0;i<m;i++) b[a[i]+1]++;\n  for(int i=1;i<=n;i++) b[i]+=b[i-1];\n  for(int i=0;i<n;i++){\n    int ok=n,ng=i-1;\n    while(abs(ok-ng)>1){\n      int mid=(ok+ng)/2;\n      if(b[mid+1]-b[i]>=1) ok=mid;\n      else ng=mid;\n    }\n    cout<<ok-i<<endl;\n  }\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main(){\n  int n,m;\n  cin>>n>>m;\n  vector<int> a(m);\n  for(int i=0;i<m;i++){\n    cin>>a[i];\n    a[i]--;\n  }\n  for(int i=0;i<n;i++){\n    int x=*lower_bound(a.begin(),a.end(),i);\n    cout<<x-i<<endl;\n  }\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main(){\n  int n,m;\n  cin>>n>>m;\n  vector<int> a(m);\n  for(int i=0;i<m;i++){\n    cin>>a[i];\n    a[i]--;\n  }\n  vector<int> b(n);\n  for(int i=0;i<m;i++){\n    b[a[i]]=1;\n  }\n  vector<int> ans(n);\n  for(int i=n-1;i>=0;i--){\n    if(b[i]){\n      ans[i]=0;\n    }\n    else{\n      ans[i]=ans[i+1]+1;\n    }\n  }\n  for(int i=0;i<n;i++) cout<<ans[i]<<endl;\n}"
+      ],
+      "text_sha256": "108f431a87ffbcf52b07cbde0ca28c3395e9c8eccf76adf4d35c07dd60cc3023",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc322/abc322_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

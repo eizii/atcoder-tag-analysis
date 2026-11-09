@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc332_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc332/editorial/7901",
+      "text": "まず、予定のない日が入るたびに全てのTシャツを洗濯でき、着用できるTシャツの枚数がリセットされることから、\n\\(N\\)\n日間の予定のうち\n0\nで区切られている部分についてはそれぞれ独立に考えることができます。  また、問題文の条件より、追加で\n\\(a\\)\n枚ロゴ入りの T シャツを購入すれば条件をみたすように着用できるとき、\n\\(a\\)\n枚以上であれば何枚購入しても条件をみたすように着用できます。\nよって、\n\\(S\\)\nの中に\n0\nが\n\\(c_0\\)\n個含まれており、具体的には\n\\(d_1,d_2,\\ldots, d_{c_0}\\)\n文字目が\n0\nであった時、\n\\(1\\)\n日目から\n\\((d_1-1)\\)\n日目まで、\n\\((d_1+1)\\)\n日目から\n\\((d_2-1)\\)\n日目まで、\n\\(\\ldots\\)\n、\n\\((d_{c_0-1}+1)\\)\n日目から\n\\((d_{c_0}-1)\\)\n日目まで、\n\\((d_{c_0}+1)\\)\n日目から\n\\(N\\)\n日目まで\nのぞれぞれの予定において、その予定に対する条件をみたすように T シャツを着用するために購入する必要のあるロゴ入りの T シャツの最低枚数が求まれば、求めるべき答えはそれらのうちの最大値として求めることができます。\n次に、\n1\nと\n2\nのみからなる長さ\n\\(k\\)\nの文字列\n\\(T\\)\nに対応する予定について条件をみたすように T シャツを着用するために最低何枚の T シャツを購入する必要があるかについて考えます。\n\\(T\\)\nの中に\n1\nが\n\\((k-x)\\)\n個、\n2\nが\n\\(x\\)\n個含まれているとき、少なくとも次の\n\\(2\\)\nつの条件がみたされる必要があります。\nロゴ入りのT シャツを\n\\(x\\)\n枚以上所持している。\n無地の T シャツとロゴ入りのT シャツをあわせて\n\\(k\\)\n枚以上所持している。\nこれは、それぞれ、競技プログラミングのイベントがある日にはロゴ入りの T シャツを着用する必要があること、食事またはイベントがある日にはいずれかの T シャツを\n\\(1\\)\n枚着用しなければならないことから明らかです。\n逆にこれが満たされるとき、すなわち高橋君が\n\\(y=\\max(x,k-M)\\)\n枚以上ロゴ入り T シャツを購入していたとき、高橋君は次のようにして条件を満たすように T シャツを着用することができます。\n食事の予定がある時、洗濯済みの無地の T シャツが残っているならばそのうちの\n\\(1\\)\n枚を、そうでないならばロゴ入りの T シャツを着用する。\n競技プログラミングのイベントがあるとき、ロゴ入りの T シャツを着用する。\nこれらの事から、\n\\((k-x)\\)\n個の\n1\nと、\n\\(x\\)\n個の\n2\nからなるような\n\\(T\\)\nに対応する\n\\(k\\)\n日間の予定について、条件をみたすように T シャツを着用するために購入する必要のある最小枚数は\n\\(\\max(x,k-M)\\)\n枚であることが分かります。\nあとは、\n0\nで区切られた各文字列についてこの値を求め、さらにその中の最大値を求めれば良いです。\nこれを求めるには例えば、\n1\nと\n2\nの登場回数を数えながら\n\\(S\\)\nを左から見ていき、\n0\nまたは文字列の終端が来るたびに\n\\(y=\\max(x,k-M)\\)\nを求めカウントをリセットすれば良いです。\nこのとき、\n\\(S\\)\nの各文字を\n\\(2\\)\n回以上参照する必要はなく、計算量は\n\\(O(N)\\)\nとなるため、十分高速です。\nよって、この問題を解くことができました。\nなお、\n\\(S\\)\nの末尾に\n0\nを付け加えることで文末と\n0\nが来た時の処理を統一して行うことができます。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint n,m;\n\tint ans=0;\n\tint x=0,y=0;\n\tstring s;\n\n\tcin>>n>>m;\n\tcin>>s;\n\ts+=\"0\";\n\n\tfor(int i=0;i<=n;i++){\n\t\tif(s[i]=='0'){\n\t\t\tans=max(ans,max(x+y-m,y));\n\t\t\tx=0,y=0;\n\t\t}\n\t\tif(s[i]=='1')x++;\n\t\tif(s[i]=='2')y++;\n\t}\n\t\n\tcout<<ans<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "b0c93708f7d23ba564381b611910cf8ba0d5723c25ce6fe72923e2063f8fcecc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc332/abc332_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc332/editorial/7933",
+      "text": "二分探索で解くことができます。\n\\(T\\)\nシャツが多いことで損はなく、また\n\\(N\\)\n枚購入すると必ず条件を満たすように行動できるのはあきらかです。したがってはじめ\nok = N, ng = -1\nとして二分探索を行い、\nok\nの値を出力します。\nチェック関数内では、\n\\(O(N)\\)\n時間かけてシミュレートして判定します。ロゴ入りのTシャツは\n1\n2\nどちらのイベントでも着用できて、一方で無地のTシャツは\n1\nでしか着用できません。したがって、\n1\nで無地のTシャツが余っているときはそちらから使うべきです。\n以上の方針で、全体で\n\\(O(N \\log N)\\)\n時間で解くことができます。\nC++による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int N, M;\n    cin >> N >> M;\n\n    string S;\n    cin >> S;\n\n    int ng = -1;\n    int ok = N;\n\n    auto check = [&](int mid) -> bool {\n        const int muji_max = M;\n        const int logo_max = mid;\n\n        int muji = muji_max;\n        int logo = logo_max;\n\n        for (int i = 0; i < N; i++) {\n            if (S[i] == '0') {\n                muji = muji_max;\n                logo = logo_max;\n                continue;\n            }\n\n            if (S[i] == '1') {\n                if (muji > 0) {\n                    muji--;\n                    continue;\n                }\n                if (logo > 0) {\n                    logo--;\n                    continue;\n                }\n                return false;\n            }\n\n            if (S[i] == '2') {\n                if (logo > 0) {\n                    logo--;\n                    continue;\n                }\n                return false;\n            }\n        }\n\n        return true;\n    };\n\n    while (ok - ng > 1) {\n        int mid = midpoint(ng, ok);\n        (check(mid) ? ok : ng) = mid;\n    }\n\n    cout << ok << endl;\n}"
+      ],
+      "text_sha256": "44e8286397218f43f3050f9e0ea0f8ce9f1852c3c5226955b00fdc474e479ced",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc332/abc332_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc332/editorial/7938",
+      "text": "事前にTシャツを購入しておくのではなく、当日着るものがなくなっていたときにTシャツを購入するとしてよいです。\nまた、無地のTシャツは食事の予定にしか使えないため、食事の予定には無地のTシャツを優先して着用するとしてよいです。\nこれらを踏まえて、洗濯済み/着用済みの無地の/ロゴ入りのTシャツの枚数を管理しながら愚直にシミュレーションすることで\n\\(O(N)\\)\nで問題を解くことができます。\n実装例(Python)",
+      "codes": [
+        "_,M=map(int,input().split())\nS=input()\n\nmuji_ok=M  # 無地/洗濯済み\nmuji_ng=0  # 無地/着用済み\nlogo_ok=0  # ロゴ/洗濯済み\nlogo_ng=0  # ロゴ/着用済み\nfor c in S:\n  if c=='0':\n    # 洗濯をし、全てのngがokになる\n    muji_ok+=muji_ng\n    muji_ng=0\n    logo_ok+=logo_ng\n    logo_ng=0\n  elif c=='1':\n    if muji_ok:\n      # 無地のTシャツがあるなら着る\n      muji_ok-=1\n      muji_ng+=1\n    elif logo_ok:\n      # ロゴ入りのTシャツがあるなら着る\n      logo_ok-=1\n      logo_ng+=1\n    else:\n      # 着るものがないならロゴ入りのTシャツを買って着る\n      logo_ng+=1\n  elif c=='2':\n    if logo_ok:\n      # ロゴ入りのTシャツがあるなら着る\n      logo_ok-=1\n      logo_ng+=1\n    else:\n      # 着るものがないならロゴ入りのTシャツを買って着る\n      logo_ng+=1\n\nprint(logo_ok+logo_ng)"
+      ],
+      "text_sha256": "39314e1737d72ed398d5198232470b66b12fa850d59119be2dab7787eea5ebea",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc332/abc332_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

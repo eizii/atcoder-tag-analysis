@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc420_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc420/editorial/13743",
+      "text": "\\(N\\)\n個の和のうち各クエリで変わる要素は\n\\(1\\)\nつのみです。したがって、その部分の差分を計算し、順番に値を計算していけば良いです。\n実装例(Python3)",
+      "codes": [
+        "import sys\n\ninput = sys.stdin.readline\nn, q = map(int, input().split())\na = list(map(int, input().split()))\nb = list(map(int, input().split()))\nans = 0\nfor i in range(n):\n    ans += min(a[i], b[i])\nfor _ in range(q):\n    cc, xx, vv = map(str, input().split())\n    c, x, v = cc == \"A\", int(xx), int(vv)\n    x -= 1\n    ans -= min(a[x], b[x])\n    if c:\n        a[x] = v\n    else:\n        b[x] = v\n    ans += min(a[x], b[x])\n    print(ans)"
+      ],
+      "text_sha256": "874dba69b38049ebaf3c3b678dc42c60d282e99873bd6bcaed221bfae37d2881",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc420/abc420_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

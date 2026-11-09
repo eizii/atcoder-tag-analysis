@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc026_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc026/editorial.pdf",
+      "text": "A問題 掛け算の最大値\n\n\n\n\n\n2015/7/11                             ©AtCoder Inc. All rights reserved.                                      33\n\f\nA問題 問題概要\n\n• 偶数Aが与えられる。\n• X + Y = AとなるX,Yのうち、X×Yが最大になるものを\n 選び、その値を出力せよ\n\n\n• 制約\n• 2 ≦ A ≦ 100\n\n\n\n\n\n2015/7/11                                                                                               4\n\f\nA問題 アルゴリズム\n\n• 基本的なプログラムの流れ\n   – 標準入力から、必要な入力を受け取る\n          • 今回の場合は、 A という1つの整数\n   – 問題で与えられた処理を行う\n          • 今回は、X*Yの最大化\n   – 標準出力へ、答えを出力する\n\n\n\n\n\n2015/7/11                                                                                               5\n\f\nA問題 アルゴリズム\n\n• 入力\n   – 1つの文字列を、標準入力から受け取る\n          • Cであれば、scanf(“%d”, &A); など\n          • C++であれば、cin >> A;\n          • 入力の受け取り方は、下記の練習問題に記載があります。\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2015/7/11                                                                                               6\n\f\nA問題 アルゴリズム\n\n• 今回の問題は、X*Yの最大値を出力する\n• X*Yが最大となるX,Yってどう求めればいいの？\n   – よくわからない場合は全通り調べれば良い！\n   – ループを回して、全通り調べましょう。\n\n\n   – 例えばこんな感じ\n    for(int X = 0; X <= A; X++){\n        int Y = A – X:\n      ans = max(ans, X * Y);\n    }\n\n\n\n\n\n2015/7/11                                                                                               7\n\f\nA問題 アルゴリズム\n\n• 実は、相加相乗平均より、X = Y = A / 2の時、X*Yが\n 最大となることがわかる\n• それが解っていれば、その1通りだけ調べれば良い\n\n\n    int X = A / 2;\n    int ans = X * X;\n\n\n\n\n\n2015/7/11                                                                                               8\n\f\nA問題 アルゴリズム\n\n• 出力\n   – 求めた答えを、標準出力より出力する。\n   – 言語によって違います。\n          • printf(“%d¥n”, ans); (C)\n          • cout << ans << endl; (C++)\n          • System.out.println(ans); (Java)\n          • 各言語の標準出力は、下記の練習問題に記載があります。\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2015/7/11                                                                                               9",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "a0ebb4bf7adb30b4cd1ad33fb3e7c563590d030d0246e03648f235670c476574"
+    }
+  ],
+  "status": "available"
+}

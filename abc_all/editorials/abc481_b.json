@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc481_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc481/editorial/27921",
+      "text": "各 \\(i\\) について「 \\((i, A_i)\\) と \\((i+1, A_{i+1})\\) を結ぶ線分が \\(y = K\\) となるか？」を数えることにすると、端点について二重に数えてしまう事があることに注意しましょう。 いくつかの解決方法がありますが、 「端点」と「そうでない点」を分けて数える 方法があります。 「端点」は \\(x\\) 座標が整数の点ですから、これは「配列 \\(A\\) に含まれる \\(K\\) の個数」と一致します。 「そうでない点」は各 \\(i\\) について \\(A_i \\lt K \\lt A_{i+1}\\) もしくは \\(A_i \\gt K \\gt A_{i+1}\\) のときに存在します。 それぞれは重複することはありませんから、独立に数えればよいです。 実装例 (Python)",
+      "codes": [
+        "n, k = map(int, input().split())\na = list(map(int, input().split()))\n\nans = a.count(k) # 端点\nfor i in range(n - 1):\n    if a[i] < k < a[i + 1] or a[i + 1] < k < a[i]:\n        ans += 1 # そうでない点\n\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "0b05c4f55dbf837fb34fcf6d3b08adf38d12d1a60f5cd1378dd421356a86e46a"
+    }
+  ],
+  "status": "available"
+}

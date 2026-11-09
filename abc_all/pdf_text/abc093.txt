@@ -1,0 +1,459 @@
+            ARC 094/ABC 093 解説
+
+
+                            DEGwer
+
+                                  2018/04/07
+
+
+
+A: abc of ABC
+
+  3 つの文字がどの2 つも相異なるかどうかを調べればよいです。
+
+#include <stdio . h>
+
+ int main ()
+
+{
+
+         char  s [ 1 0 ] ;
+
+         scanf (”%s ” ,  s ) ;
+
+                  i f  ( s [ 0 ]  !=  s [ 1 ] && s [ 1 ]  !=  s [ 2 ] && s [ 2 ]  !=  s [ 0 ] ) p r i n t f (” Yes\n ” ) ;
+
+           e l s e  p r i n t f (”No\n ” ) ;
+
+}
+
+
+
+
+
+                                             1
+
+B: Small and Large Integers
+
+ 出力すべき範囲を適切に記述し、その範囲の整数をすべて出力すればよいです。A 以上B 以下の整数が
+
+2K 個未満の場合に注意しましょう。
+
+#include <stdio . h>
+
+#include <vector>
+
+#include <algorithm>
+
+using namespace  std ;
+
+ int main ()
+
+{
+
+          int  a , b ,  k ;
+
+         scanf (”%d%d%d” , &a , &b , &k ) ;
+
+                 f o r  ( int   i = a ;   i <= min(b ,  a + k −1 ) ;  i++)p r i n t f (”%d\n” ,   i ) ;
+
+                 f o r  ( int   i = max(b −k + 1 ,  a + k ) ;   i <= b ;  i++)p r i n t f (”%d\n” ,   i ) ;
+
+}
+
+
+C: Same Integers
+
+  3 つの整数の和の偶奇は操作によって不変です。また、整数を減少させることはできないので、3 つの整数
+
+が等しくなったならば、その時の値は3 つの整数の最大値(以下これをM とする) 以上です。よって、もし
+
+3M と最初の3 つの整数の和の偶奇が等しいなら、3 つの整数が等しくなった時の値はM 以上、そうでなけ
+
+ればM + 1 以上です。
+
+ 逆に、この下限が達成できることは簡単にわかるので、この問題を解くことができました。
+
+
+D: Wide Flip
+
+  1 回目のコンテストでA 位、2 回目のコンテストでB 位を取ることを(A, B) を取ると呼ぶことにします。
+
+ 高橋君が(A, B) を取ったとします。A ≤B として一般性を失いません。
+
+ A = B の場合、高橋君よりスコアが小さい人は1 回目のコンテストまたは2 回目のコンテストでA −1 位
+
+以内の順位を取っています。よって、そのような人の人数は2A−2 人以下です。逆に、(1, 2A−1), · · · , (A−
+
+1, A + 1), (A + 1, A −1), · · · , (2A −1, 1) を取った人が存在する場合、その上限値を達成できます。
+
+ A + 1 = B の場合、高橋君よりスコアが小さい人は1 回目のコンテストでA −1 位以内を取るか、2 回目の
+
+コンテストでA 位以内を取っています。また、2 回目のコンテストA 位を取った人のスコアが高橋君より小
+
+さくなるためには、その人は1 回目のコンテストでA −1 位以内を取る必要があります。よって、高橋君より
+
+スコアが小さい人の人数は2A−2 人以下です。逆に、(1, 2A), · · · , (A−1, A+2), (A+2, A−1), · · · , (2A, 1)
+
+を取った人が存在する場合、その上限値を達成できます。
+
+ そうでない場合、C2 < AB を満たす最大の整数C を取ります。
+
+  C(C + 1) ≥AB のとき、高橋君よりスコアが小さい人は1 回目のコンテストまたは2 回目のコンテスト
+
+
+                                             2
+
+でC 位以内の順位を取っています。1 回目のコンテストでC 位を取った人のスコアが高橋君のスコアより小
+
+さくなるためには、その人は2 回目のコンテストでC 位以内を取らなければなりません。よって、高橋君よ
+
+りスコアが小さい人の人数は2C −2 人以下です。逆に、(1, A + B −1), · · · , (A −1, B + 1), (A + 1, 2C −
+
+A −1), · · · , (C, C), · · · , (2C −1, 1) を取った人が存在する場合、その上限値を達成できます。
+  C2 < AB のとき、高橋君よりスコアが小さい人は1 回目のコンテストまたは2 回目のコンテストでC
+
+位以内の順位を取っています。よって、高橋君よりスコアが小さい人の人数は2C −1 人以下です。逆に、
+
+(1, A + B −1), · · · , (A −1, B + 1), (A + 1, 2C −A), · · · , (C, C + 1), (C + 1, C), · · · , (2C, 1) を取った人が
+
+存在する場合、その上限値を達成できます。
+
+ 以上の場合で尽くされるので、この問題を解くことができました。
+
+
+E: Tozan and Gezan
+
+ とざん君を先手、げざん君を後手と呼ぶことにしましょう。もし数列A, B が最初から等しいなら、答えは
+
+0 です。そうでない場合、答えは以下の値になることを証明します。
+
+    • 数列A の総和から、Ai > Bi を満たすBi の中で最小のものを引いた値
+
+ 一般性を失わずに、Ai > Bi を満たすi の中でBi を最小にするものが1 であるとして良いです。まず、先
+
+手が操作回数をこの値以上にできることを示します。
+
+ 先手は以下の戦略にのっとって操作を進めればよいです: A の1 番目以外の整数をすべて0 になるまで減
+
+らし、そのあとAi を減らしていく
+
+ この操作で上記の値以上の回数の操作が必要になるのは明らかです。
+
+ さて、後手が操作回数をこの値以下にできることを示しましょう。後手は以下の戦略にのっとって操作を進
+
+めればよいです: Bi > Ai なるi をひとつ選び、Bi を減らす
+ 後手がこの戦略にのっとって行動したとき、あるAi > Bi なるi が存在し、操作の終了時にもBi の値が
+変わっていないことを証明できればよいです。Ai > Bi である間、後手がBi を減少させることはないので、
+Ai > Bi であるようなi がなくなる直前に先手が操作を行ったi について、Bi の値が減らされていることは
+ありません。これが操作の終了まで変化しないBi の例となっているので、操作回数の上界と下界が一致し、
+
+この問題を解くことができました。
+
+
+F: Normalization
+
+ もしS のすべての文字が等しいなら、答えは1 です。以下、そうでない場合を考えます。
+
+ 文字A,B,C を順に整数0, 1, 2 に対応させることにすると、操作によって文字列全体の対応する値の和を3
+
+で割ったあまりは変化しません。すなわち、文字列全体の対応する値の和を3 で割ったあまりがS と等しい
+
+文字列のみ作ることができます。また、S に1 回以上の操作を行って作ることのできる文字列には、必ず同
+
+じ文字が連続する箇所があります。
+
+ さて、作ることのできる可能性のある文字列は上記の条件を満たすものとS 自身に限られました。逆に、
+
+これらの文字列をすべて作ることはできるでしょうか？
+
+ 実は、|S| ≥4 ならこれらの文字列をすべて作ることができることが証明できます。|S| = 4 の場合は全通
+
+り試せば示すことができ、|S| が5 以上の場合は先頭の文字を適切に変化させることによって|S| が1 小さい
+
+
+                                             3
+
+場合に帰着できます。
+
+ よって、この問題は以下のようにして解くことができます。
+
+    • S のすべての文字が等しいなら、1 を出力
+
+    • |S| ≤3 なら、全探索を行う
+
+    • そうでないなら、上記の条件を満たす文字列の個数を求め、S がその条件を満たさないならさらに1
+
+   を足した値を答えとする
+
+ 上記の条件を満たす文字列の個数は簡単な線形時間のDP で求めることができるので、この問題を線形時
+
+間で解くことができました。
+
+
+
+
+
+                                             4
+
+           ARC 094/ABC 093 Editorial
+
+
+                            DEGwer
+
+                                  2018/04/07
+
+
+
+A: abc of ABC
+
+  Check if the characters in s are pairwise distinct.
+
+#include <stdio . h>
+
+ int main ()
+
+{
+
+         char  s [ 1 0 ] ;
+
+         scanf (”%s ” ,  s ) ;
+
+                  i f  ( s [ 0 ]  !=  s [ 1 ] && s [ 1 ]  !=  s [ 2 ] && s [ 2 ]  !=  s [ 0 ] ) p r i n t f (” Yes\n ” ) ;
+
+           e l s e  p r i n t f (”No\n ” ) ;
+
+}
+
+
+
+
+
+                                             1
+
+B: Small and Large Integers
+
+  The integers you should print will be two intervals. Make sure to handle cases such that the number
+
+of integers between A and B is less than 2K.
+
+#include <stdio . h>
+
+#include <vector>
+
+#include <algorithm>
+
+using namespace  std ;
+
+ int main ()
+
+{
+
+          int  a , b ,  k ;
+
+         scanf (”%d%d%d” , &a , &b , &k ) ;
+
+           fo r  ( int   i = a ;   i <= min(b ,  a + k −1 ) ;  i++)p r i n t f (”%d\n” ,   i ) ;
+
+                 f o r  ( int   i = max(b −k + 1 ,  a + k ) ;   i <= b ;  i++)p r i n t f (”%d\n” ,   i ) ;
+
+}
+
+
+
+
+
+                                             2
+
+C: Same Integers
+
+  Suppose that when you ﬁnish the operations, all integers are X. Since the sum of three integers always
+
+increases by two in each operation, the total number of operations is (3X −(A + B + C))/2. Thus, we
+
+want to minimize X.
+
+  Let M be the maximum of A, B, C. Since we can never decrease integers, X ≥M must hold. Also,
+
+since we can never change the parity of sum of three integers, 3X ≡A + B + C (mod 2) must hold. (It’s
+
+easy to see that these are suﬃcient conditions).
+
+  Therefore,
+
+    • If 3M ≡A + B + C (mod 2), X = M.
+
+    • Otherwise, X = M + 1.
+
+  and we should print (3X −(A + B + C))/2.
+
+
+
+
+
+                                             3
+
+D: Worst Case
+
+  Let us denote a participant who was ranked x-th in the ﬁrst contest and y-th in the second contest as
+
+(x, y). Takahashi is (A, B). Without loss of generality, assume that A ≤B.
+
+  One possible way to solve the problem is to consider the following cases:
+
+    • If A = B, the answer is at most 2A −2 because you must get top A −1 places in at least one
+
+      contest to beat Takahashi. We can achieve this value by (1, 2A−1), · · · , (A−1, A+1), (A+1, A−
+
+       1), · · · , (2A −1, 1). Thus, the answer is 2A −2.
+
+    • If A + 1 = B, the answer is at most 2A −2 because you must get top A −1 places in at least one
+
+      contest to beat Takahashi. (Note that the A-th place in the ﬁrst contest is ﬁlled by Takahashi,
+
+     and getting the A + 1-th in the ﬁrst and A-th in the second is not enough.) We can achieve this
+
+      value by (1, 2A), · · · , (A −1, A + 2), (A + 2, A −1), · · · , (2A, 1). Thus, the answer is 2A −2.
+    • Otherwise, let C be the maximum integer such that C2 < AB.
+
+      – If C(C + 1) ≥AB, the answer is at most 2C −2 because you must get top C −1 places in the
+
+           ﬁrst contest or top C places in the second contest to beat Takahashi. (Note that one of ”the
+
+          top C −1 places in the ﬁrst contest” is Takahashi, we shouldn’t count him.) We can achieve
+
+           this value by (1, A+B −1), · · · , (A−1, B +1), (A+1, 2C −A−1), · · · , (C, C), · · · , (2C −1, 1).
+
+         Thus, the answer is 2C −2.
+
+      – If C(C +1) < AB, the answer is at most 2C −1 because you must get top C places in the ﬁrst
+
+          contest or top C places in the second contest to beat Takahashi. (Note that one of ”the top C
+
+           places in the ﬁrst contest” is Takahashi, we shouldn’t count him.) We can achieve this value
+
+         by (1, A + B −1), · · · , (A −1, B + 1), (A + 1, 2C −A), · · · , (C, C + 1), (C + 1, C), · · · , (2C, 1).
+
+         Thus, the answer is 2C −1.
+
+  Another possible solution is binary search on the answer: for a ﬁxed X, we want to know the following:
+
+    • Consider the smallest X positive integers except for A.
+
+    • Consider the smallest X positive integers except for B, and reverse the order.
+
+    • Check if for all i, the product of the i-th integer in the ﬁrst list and the i-th integer in the second
+
+        list is smaller than AB.
+
+  To do this, use the fact that the lists are ”piecewise” arithmetic sequences (and the number of pieces
+
+is constant).
+
+
+
+
+
+                                             4
+
+E: Tozan and Gezan
+
+   If A, B are the same, the answer is 0. We assume that A ̸= B.
+
+ What is a good strategy for the second player?  If Ai < Bi for some i, the second player needs to
+decrease Bi, regardless of the moves of the ﬁrst player. He can do this without giving any valuable
+
+information for the ﬁrst player. Thus, the second player should always choose one of such i (it always
+
+exists because the sums are the same), and decrease Bi by one.
+ What is a good strategy for the ﬁrst player?  Intuitively, when Ai = Bi + 1, it’s not a good idea to
+decrease Ai by one. Let’s make sure not to do this unless the ﬁrst player is forced to do so.
+
+   If both players follow the rules mentioned above, when the game ﬁnishes, for all i but one (let’s say
+
+i ̸= k), Ai = Bi = 0 holds. Bk is unchanged from the beginning.
+  The ﬁrst player wants to minimize Bk because the number of steps is (the sum of all elements) minus
+Bk. Here, Ak > Bk must hold, but among such k’s the ﬁrst player can choose anything (by properly
+choosing what to do when he is forced to perform an operation for Ai = Bi + 1).
+
+  It turns out that the answer is the following:
+
+    • X := (The sum of all elements in A) minus (The minimum Bi such that Ai > Bi)
+
+  Here is a formal proof:
+
+  Without loss of generality, assume that the minimum Bi such that Ai > Bi is B1.
+
+  First, we prove that the ﬁrst player can make sure that the number of steps become at least X. He
+
+follows the following strategy: ﬁrst, decrease A2, . . . , AN to 0, and then decrease A1. It’s clear that by
+
+this strategy, the steps will be at least X.
+
+  Then, we prove that the second player can make sure that the number of steps become at most X.
+
+The second player follows the strategy mentioned above. Consider the last moment when Ai > Bi holds
+for some i. Then, the ﬁrst player decreases this Ai, and in the next step the game ﬁnishes. For this i,
+Bi is unchanged during the entire game. Thus, the number of steps will be at most X.
+
+
+
+
+
+                                             5
+
+F: Normalization
+
+ When can we convert a string S into a string T? We can make the following observations:
+
+    • Let’s assume the letters A, B, C as integers 0, 1, 2. By performing the operations, the sum of all
+
+       integers in the string never changes in modulo 3. Thus, if the sum of all integers in S and the sum
+
+       of all integers in T are diﬀerent (in modulo 3), the answer is ”no”.
+
+    • If all letters in S are the same, we can perform any operations. The answer is ”no” unless S = T.
+
+    • If no two adjacent letters in T are the same, T can’t be a result of an operation. Thus, the answer
+
+        is ”no” unless S = T.
+
+ Do we ﬁnd all ”no” cases?  It’s very diﬃcult to answer this question on paper, so let’s write a brute
+
+force solution. What we get is the following:
+
+    • If |S| ≤3, the behavior is mysterious. From now on, assume that |S| ≥4.
+
+    • If S = T, ”yes”. From now on, assume that S ̸= T.
+
+    • If at least one of the three conditions above (the sum of S and T are diﬀerent in modulo 3, all
+
+       letters in S are the same, or no two adjacent letters in T are the same), ”no”. Otherwise, ”yes”.
+
+  (We can prove this by induction on |S|: |S| = 4 can be veriﬁed by brute force, otherwise we can change
+
+the ﬁrst letter properly and decrease |S| by one.)
+
+  Thus, we can solve the original problem as follows:
+
+    • If all letters in S are the same, print 1.
+
+    • If |S| ≤3, compute the answer by brute force.
+
+    • Otherwise, count the number of strings T such that
+
+      – |T| = |S|
+
+      – sum(S) = sum(T) (mod 3)
+
+      – There is at least one pair of adjacent same letters in T.
+
+      (This can be done by a simple DP). Make sure not to forget to add one to the answer in case no
+
+     two adjacent letters in T are the same.
+
+
+
+
+
+                                             6

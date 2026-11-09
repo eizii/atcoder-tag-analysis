@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc171_d",
+  "title": "Replacing",
+  "contests": [
+    {
+      "contest_id": "abc171",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 498,
+  "raw_difficulty": 498,
+  "contest_id": "abc171",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc171/tasks/abc171_d",
+  "statement": "配点 : 400 点 問題文 あなたは、 N 個の正整数 A_{1}, A_{2}, \\cdots, A_{N} からなる数列 A を持っています。 あなたは、これから以下の操作を Q 回、続けて行います。 i 回目の操作では、値が B_{i} である要素すべてを C_{i} に置き換えます。 すべての i (1 \\leq i \\leq Q) に対して、 i 回目の操作が行われた後の数列 A のすべての要素の和、 S_{i} を求めてください。 制約 入力は全て整数 1 \\leq N, Q, A_{i}, B_{i}, C_{i} \\leq 10^{5} B_{i} \\neq C_{i} 入力 入力は以下の形式で標準入力から与えられる。 N A_{1} A_{2} \\cdots A_{N} Q B_{1} C_{1} B_{2} C_{2} \\vdots B_{Q} C_{Q} 出力 Q 個の整数 S_{i} を以下の形式で標準出力に出力せよ。 S_{1} S_{2} \\vdots S_{Q} S_{i} は 32 ビット整数に収まらない可能性があることに注意せよ。 入力例 1 4\r\n1 2 3 4\r\n3\r\n1 2\r\n3 4\r\n2 4 出力例 1 11\r\n12\r\n16 はじめ、数列 A は 1,2,3,4 です。 各操作後、 数列 A は以下のようになります。 2, 2, 3, 4 2, 2, 4, 4 4, 4, 4, 4 入力例 2 4\r\n1 1 1 1\r\n3\r\n1 2\r\n2 1\r\n3 5 出力例 2 8\r\n4\r\n4 数列 A に 要素の値が B_{i} であるものが 1 つも含まれていない可能性もあることに注意してください。 入力例 3 2\r\n1 2\r\n3\r\n1 100\r\n2 100\r\n100 1000 出力例 3 102\r\n200\r\n2000",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 あなたは、 N 個の正整数 A_{1}, A_{2}, \\cdots, A_{N} からなる数列 A を持っています。 あなたは、これから以下の操作を Q 回、続けて行います。 i 回目の操作では、値が B_{i} である要素すべてを C_{i} に置き換えます。 すべての i (1 \\leq i \\leq Q) に対して、 i 回目の操作が行われた後の数列 A のすべての要素の和、 S_{i} を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 入力は全て整数 1 \\leq N, Q, A_{i}, B_{i}, C_{i} \\leq 10^{5} B_{i} \\neq C_{i}"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_{1} A_{2} \\cdots A_{N} Q B_{1} C_{1} B_{2} C_{2} \\vdots B_{Q} C_{Q}"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 個の整数 S_{i} を以下の形式で標準出力に出力せよ。 S_{1} S_{2} \\vdots S_{Q} S_{i} は 32 ビット整数に収まらない可能性があることに注意せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\r\n1 2 3 4\r\n3\r\n1 2\r\n3 4\r\n2 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 11\r\n12\r\n16 はじめ、数列 A は 1,2,3,4 です。 各操作後、 数列 A は以下のようになります。 2, 2, 3, 4 2, 2, 4, 4 4, 4, 4, 4"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4\r\n1 1 1 1\r\n3\r\n1 2\r\n2 1\r\n3 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 8\r\n4\r\n4 数列 A に 要素の値が B_{i} であるものが 1 つも含まれていない可能性もあることに注意してください。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 2\r\n1 2\r\n3\r\n1 100\r\n2 100\r\n100 1000"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 102\r\n200\r\n2000"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc171/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:35:43.465182+00:00",
+  "statement_sha256": "bcbe1fa63f0d621c7772b8e7e83ecb0c441d3f04766286e1709b3deb61438b08",
+  "editorials": []
+}

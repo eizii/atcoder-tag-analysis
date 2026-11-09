@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc115_b",
+  "editorials": [
+    {
+      "text": "B: Christmas Eve Eve\n「N 個の商品の定価の合計」をS 円、「N 個の商品のうち最も定価が高いものの定価」をM 円とすると答\nえはS −M/2 で、このS とM を実際に求めてみよという問題です。\nこの問題がA: Christmas Eve Eve Eve より難しいのは、商品の個数が2 個や3 個などと固定されておら\nず、N 個(2 ≤N ≤10) と可変であるためです。これに対応すべく、何らかの「ループを生む機構」を使うこ\nとになります。代表例がfor 文で、この内部で足し算や大小比較を行うことでS やM が求められます。\nS を求めるためのより具体的な手順を述べると、まずS という値を宣言して0 で初期化します。そして\ni = 1, i = 2, . . . , i = N のそれぞれに対してS にpi を足すと、最終的にS に求めたい値が入ります。M に\nついても同様で、最初にM という値を0 で初期化し*1、「M とpi を比較してpi の方が大きければM を\npi に置き換える」ことを繰り返せば求まります。これをC++ で実装したコードが以下です。\n1 #include <algorithm>\n// max\n2 #include <iostream>\n3 using namespace std;\n4 int main(){\n5\nint N;\n6\ncin >> N;\n7\nint S = 0, M = 0;\n8\nfor(int i = 0; i < N; ++i){\n// ここでは商品番号を0, 1, ..., N-1 とする\n9\nint p;\n10\ncin >> p;\n11\nS += p;\n12\nM = max(M, p);\n// M とp のうち大きい方。かなり便利! ちなみに小さい方はmin\n13\n}\n14\nint ans = S - M / 2;\n15\ncout << ans << endl;\n16 }\n言語によっては、純粋なfor 文以外の機構も便利です。以下のコード(Python3) をご覧ください。\n1 N = int(input())\n2 p = [int(input()) for i in range(N)]\n3 print(sum(p) - max(p) // 2)\n",
+      "text_sha256": "f180b7b1fdad6ce13be3874cf0cac5baa6216b5b78a6a5064799a6c2344d5547",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc115/abc115_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

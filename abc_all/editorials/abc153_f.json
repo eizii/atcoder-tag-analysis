@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc153_f",
+  "editorials": [
+    {
+      "text": "F: Silver Fox vs Monster\nモンスターたちはあらかじめ座標の昇順にソートされているとしてよいです。座標が小さい方を”\n左”、大きい方を”右”という向きで呼ぶことにします。\n最も左にいるモンスターを倒すためときには、できるだけ右で爆弾を使い、他のモンスターを多く\n巻き込むのが良いです。そのようにして左側から貪欲に倒していくことが最適になります。\n尺取り法や二分探索などを用いて、各モンスターi について「Xj −Xi ≤2D となる最大のj」を\n計算しておくことで、モンスターi を左端として攻撃するときにどこまで右側のモンスターを巻き込\nむことができるかわかります。あとは、累積和などを用いて既に減らした体力量を管理することで答\nえを求めることができます。\n最初に座標順にソートする部分がボトルネックとなり、計算量はO(N log N) です。\n",
+      "text_sha256": "f8bd660f53c20c84361b074b3b50c52c1ba715e6956430e0ff7dd80b1430b2fb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc153/abc153_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

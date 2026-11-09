@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc242_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc242/editorial/3520",
+      "text": "はじめに\nこの解説において、\n\\(S\\)\nは 1-indexd ではなく 0-indexed であるとします。すなわち\n\\(S\\)\nの長さを\n\\(N\\)\nとしたとき、\n\\(S = S_1 S_2 \\ldots S_N\\)\nではなく\n\\(S = S_0 S_1 \\ldots S_{N-1}\\)\nとなります。\n本題\n\\(f(t,k)\\)\nを、「\n\\(S^{(t)}\\)\nの\n\\(k\\)\n文字目を返す関数」と定義しましょう。\nまず、\n\\(t = 0\\)\nのとき、\n\\(f(t,k)\\)\nは\n\\(S\\)\nの\n\\(k\\)\n文字目となります。\n次に\n\\(k = 0\\)\nの場合について考えます。\n\\(S^{(0)}, S^{(1)}, S^{(2)}, S^{(3)}, S^{(4)} \\ldots\\)\nの\n\\(0\\)\n文字目は、じっくりと観察をすると\nA\n,\nB\n,\nC\n,\nA\n,\nB\n,\n\\(\\ldots\\)\nB\n,\nC\n,\nA\n,\nB\n,\nC\n,\n\\(\\ldots\\)\nC\n,\nA\n,\nB\n,\nC\n,\nA\n,\n\\(\\ldots\\)\nのいずれかになることが分かり、そしてその並びは周期的です。\nA\nから\n\\(1\\)\n進んだ文字が\nB\n、\nB\nから\n\\(1\\)\n進んだ文字が\nC\n、\nC\nから\n\\(1\\)\n進んだ文字が\nA\nであるとすると、\n\\(S^{(t)}\\)\nの\n\\(0\\)\n文字目は\n\\(S^{(0)}\\)\nの\n\\(0\\)\n文字目から\n\\(t\\)\n進んだ文字に等しくなるとも言うことができます。\nそのため\n\\(k = 0\\)\nのとき、\n\\(f(t,k)\\)\nは\n\\(S_0\\)\nから\n\\(t\\)\n進んだ文字となります。\nそれでは最後に、\n\\(0 \\lt t,k\\)\nのとき、\n\\(f(t,k)\\)\nが何を返すかを考えましょう。\nこちらもじっくりと観察をすると、\n\\(k\\)\nが偶数のとき、\n\\(f(t,k)\\)\nは\n\\(f(t-1,\\frac{k}{2})\\)\nから\n\\(1\\)\n進んだ文字\n\\(k\\)\nが奇数のとき、\n\\(f(t,k)\\)\nは\n\\(f(t-1,\\frac{k-1}{2})\\)\nから\n\\(2\\)\n進んだ文字\nになることが分かります。よって、\n\\(0 \\lt t,k\\)\nのとき\n\\(f(t,k)\\)\nは\n\\(f(t-1,\\lfloor \\frac{k}{2} \\rfloor)\\)\nの値を用いて再帰的に求めることが可能です。ここで、\n\\(\\lfloor \\frac{k}{2} \\rfloor\\)\nは\n\\(\\frac{k}{2}\\)\nの小数点以下を切り捨てた値です。\nよってまとめると、\n\\(t = 0\\)\nのとき\n\\(f(t,k)\\)\nは\n\\(S\\)\nの\n\\(k\\)\n文字目\n\\(k = 0\\)\nのとき\n\\(f(t,k)\\)\nは\n\\(S_0\\)\nから\n\\(t\\)\n進んだ文字\n\\(0 \\lt t,k\\)\nのとき\n\\(f(t,k)\\)\nは\n\\(f(t-1,\\lfloor \\frac{k}{2} \\rfloor)\\)\nから\n\\(k\\)\nを\n\\(2\\)\nで割ったあまり\n\\(+\\ 1\\)\nだけ進んだ文字\nとなります。\nこれをコードに起こすと以下のようになります。\n実装例 (C++)\n計算量は、一つのクエリあたり関数\n\\(f\\)\nが高々\n\\(O(\\log k)\\)\n回しか呼び出さいことを考えると、\n\\(O(N + Q \\log (\\max(k)))\\)\nとなります。\nこれは非常に高速であり、一般に再帰関数が遅いとされる PyPy3 においても高速に動作します：\n実装例 (PyPy3)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nusing ll = long long;\n\nint main(){\n\t\n\tstring S; cin >> S;\n\tint Q; cin >> Q;\n\n\tauto g = [&](char s, ll add){\n\t\treturn char('A'+(s-'A'+add)%3);\n\t};\n\n\tstd::function<char(ll,ll)> f = [&](ll t, ll k){\n\t\tif(t == 0) return S[k];\n\t\tif(k == 0) return g(S[0],t);\n\t\treturn g(f(t-1,k/2),k%2+1);\n\t};\n\n\twhile(Q--){\n\t\tll t,k; cin >> t >> k;\n\t\tcout << f(t,k-1) << endl;\n\t}\n\n}"
+      ],
+      "text_sha256": "59a81e8fea6f44119d523c2f0677b1825a7d7a68f3d6926818072f019226966f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc242/abc242_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

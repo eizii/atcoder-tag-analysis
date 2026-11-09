@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc363_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc363/editorial/10480",
+      "text": "現在から\n\\((T-1)\\)\n日後には\n\\(N\\)\n人の髪の長さはすべて\n\\(T\\)\n以上であり、\n\\(P\\leq N\\)\nとあわせて、かならず条件をみたしています。\nよって、\n\\(i=0,1,,\\ldots,(T-1)\\)\nについて現在から\n\\(i\\)\n日後に条件をみたしているか順に確認していくことで、答え、すなわち初めて条件をみたす日を求めることができます。\n条件をみたしているかの確認は for 文および if 文を用いることで実装できます。計算量は\n\\(O(NT)\\)\nであり、今回の制約下で十分高速です。\nよって、この問題を解くことができました。\nまた、この問題はそれぞれの人が何日後に髪の長さが\n\\(T\\)\n以上になるか記録し、ソートを用いて小さい方から\n\\(P\\)\n番目の値を求めることで、\n\\(O(N\\log N)\\)\nの計算量で解くことができます。\nc++ による実装例:\nPython による実装例:\nc++ による実装例（別解）:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint n,t,p;\t\n\tint l[100];\n\tint cnt;\n\n\tcin >> n >> t >> p;\n\tfor(int i = 0; i < n; i++)cin >> l[i];\n\n\tfor(int i = 0; i < t; i++){\n\t\tcnt=0;\n\t\tfor(int j = 0; j < n; j++){\n\t\t\tif(l[j]+i >= t)cnt++;\n\t\t}\n\t\tif(cnt>=p){\n\t\t\tcout<< i <<endl;\n\t\t\treturn 0;\n\t\t}\n\t}\n\treturn 0;\n}",
+        "n,t,p=map(int, input().split())\nl=list(map(int, input().split()))\n\nfor i in range(t):\n    cnt=0\n    for j in range(n):\n        if l[j]+i>=t:\n            cnt+=1\n    if cnt>=p:\n        print(i)\n        break",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint n,t,p,x;\t\n\tint l[100];\n\n\tcin >> n >> t >> p;\n\n\tfor(int i = 0; i < n; i++){\n\t\tcin >> x;\n\t\tl[i]=max(0,t-x);\n\t}\n\tsort(l,l+n);\n\n\tcout << l[p-1] << endl;\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "366fdc7f8c95f666c6b8a919bed5db1695cfaecba49f6b6496a5b91dffa0aeae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc363/abc363_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

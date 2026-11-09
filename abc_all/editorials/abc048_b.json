@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc048_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc064/editorial.pdf",
+      "text": "B : Between a and b ...\n\n  a 以上b 以下の整数のうち条件を満たすものの個数を求める問題です．このような問題では，\n\n                     f(n) := 0 以上n 以下の整数のうち条件を満たすものの個数\n\nと定義しておくと，答えはf(b) −f(a −1) で求まるので楽です．ただし，a = 0 のときにf(−1) が呼ばれる\n\nことに注意してください．このことに注意すると，f は次のように書けます．\n                        {\n                                     n/x + 1  (n ≥0)\n                                 f(n) =\n                                         0        (n = −1)\n\nただし，/ は切り捨ての除算です．",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "4961426277df16434fbb9f5ee5d2de2a87ba883978e33dbe7acfae8b284ae9f3"
+    }
+  ],
+  "status": "available"
+}

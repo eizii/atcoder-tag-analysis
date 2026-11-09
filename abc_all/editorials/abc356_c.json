@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc356_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc356/editorial/10125",
+      "text": "制約より\n\\(N \\le 15\\)\nと鍵の本数が少ないです。さらに、\n\\(M \\le 100\\)\nとテストの回数もそう多くありません。\nまた、問題文に記載のある通り、本物かダミーかの組み合わせとして考えるべきものの数は\n\\(2^N\\)\n通りです。\nこの\n\\(2^N\\)\n通り全てに対して\n\\(M\\)\n回のテストを行い、矛盾しなかった組み合わせの数を数えれば良いです。\nこのとき必要なテストの総回数は\n\\(2^N \\times M \\le 3.3 \\times 10^6\\)\nであり、全てのテストに一回当たり\n\\(N\\)\n回の演算をかけても演算回数は\n\\(5 \\times 10^7\\)\n回以下と見積もられ、これはこの問題に正解するのに十分高速です。\n\\(2^N\\)\n通りの組み合わせを簡単に全探索するには、\nbit全探索\nが便利です。\n例えば\n\\(i=0,1,\\dots,2^N-1\\)\nについて for ループを回し、\n\\(i\\)\nの\n\\(2^k\\)\nの位が\n\\(0\\)\nなら\n\\(k+1\\)\n個目の鍵はダミーで、\n\\(1\\)\nなら\n\\(k+1\\)\n個目の鍵は本物と対応付けることで全探索が可能です。\nbit 全探索について、詳しくは以下の記事を参考にしてください。\nbit全探索について簡単にまとめる\nこわくないbit全探索1 入門編: bit全探索ってなに？【競プロ解説】\nbit 全探索\n競技プログラミング講習/bit全探索\n3.05.ビット演算\n注意として、一回のテストに\n\\(N^2\\)\n回程度の演算をかけてしまうと実行時間制限に間に合わない可能性があります。\nバケットソートの要領で\n\\(k\\)\n番目の鍵を使ったかどうかを管理するなどして一回のテストの演算回数を\n\\(N\\)\n回以内に抑えてください。\n実装例 (C++):\nbit演算を駆使した実装は次の通りです。\n上記の実装例より高速に動作します。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,m,k;\n  cin >> n >> m >> k;\n  vector<vector<int>> key(m,vector<int>(n,0));\n  vector<string> r(m);\n  for(int i=0;i<m;i++){\n    int c;\n    cin >> c;\n    for(int j=0;j<c;j++){\n      int a;\n      cin >> a;\n      key[i][a-1]=1;\n    }\n    cin >> r[i];\n  }\n\n  int res=0;\n  for(int i=0;i<(1<<n);i++){\n    vector<int> tf(n);\n    for(int j=0;j<n;j++){\n      if(i&(1<<j)){tf[j]=1;}\n      else{tf[j]=0;}\n    }\n    bool jud=true;\n    for(int j=0;j<m;j++){\n      int ck=0;\n      for(int p=0;p<n;p++){\n        if(key[j][p]==1 && tf[p]==1){ck++;}\n      }\n      if(ck>=k && r[j]==\"x\"){jud=false;}\n      if(ck<k && r[j]==\"o\"){jud=false;}\n    }\n    if(jud){res++;}\n  }\n  cout << res << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,m,k;\n  cin >> n >> m >> k;\n  vector<int> ks(m,0);\n  vector<int> r(m,0);\n  for(int i=0;i<m;i++){\n    int c;\n    cin >> c;\n    for(int j=0;j<c;j++){\n      int a;\n      cin >> a;\n      a--;\n      ks[i]|=(1<<a);\n    }\n    string s;\n    cin >> s;\n    if(s==\"o\"){r[i]=1;}\n    else{r[i]=0;}\n  }\n\n  int res=0;\n  for(int i=0;i<(1<<n);i++){\n    bool jud=true;\n    for(int j=0;j<m;j++){\n      int ok=__builtin_popcount(i&ks[j]);\n      if(ok>=k && r[j]==0){jud=false; break;}\n      if(ok<k && r[j]==1){jud=false; break;}\n    }\n    if(jud){res++;}\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "0d11a1fe9189c6e5807bc130dec3a68c0be0e840191a503079b84db188fe03f8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc356/abc356_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

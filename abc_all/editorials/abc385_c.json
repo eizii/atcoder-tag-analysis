@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc385_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc385/editorial/11655",
+      "text": "まずは次の問題を考えてみます\n(問題X)  以下の条件をともに満たすように、最大でいくつのビルを選べますか\n選んだビルたちは高さが等しい\n選んだビルたちは\n連続している\nこの問題はビルを先頭から順に見ていくことで\n\\(O(N)\\)\nで解くことができます。\n擬似コード\n続いて次の問題を考えます\n(問題Y) 正整数\n\\(K\\)\nが与えられます。以下の条件をともに満たすように、最大でいくつのビルを選べますか\n選んだビルたちは高さが等しい\n選んだビルたちは\n\\(K\\)\n個おきに並んでいる\n同時に選ぶことができるビルは\n\\(1,\\ K+1,\\ 2K+1,\\ 3K+1\\ldots\\)\n\\(2,\\ K+2,\\ 2K+2,\\ 3K+2\\ldots\\)\n\\(3,\\ K+3,\\ 2K+3,\\ 3K+3\\ldots\\)\n\\(\\dots\\)\nという独立な\n\\(K\\)\n個のグループに分かれます。よってこれらの\n\\(K\\)\n個のグループそれぞれについて、(問題X)を解けば良いです。\n1つのグループについて答えを求めるのに\n\\(O(N/K)\\)\n時間かかり、それを\n\\(K\\)\nグループ分行うので、全体の計算量は\n\\(O(N)\\)\nになります。\n最後にもとの問題を考えます。\n\\(K=1,2,\\ldots,\\)\nの全てについて(問題Y)を解くことで\n\\(O(N^2)\\)\n時間で答えを求めることができます。",
+      "codes": [
+        "ans=0\nheight=0\ncrrent=0\nfor i in 1..N:\n  if height!=H[i]:\n    crrent=0\n    height=H[i]\n  crrent+=1\n  ans=max(ans,crrent)\nprint(ans)"
+      ],
+      "text_sha256": "aee6d7d838b306818e8b9e2ac9e3d42a46ff6b1797a58e73a955e78966c93ed7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc385/abc385_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc385/editorial/11671",
+      "text": "動的計画法を用いてこの問題を解くことができます。\n\\(dp_{i, j} = \\)\n（数列の先頭が\n\\(i\\)\n番目で、間隔が\n\\(j\\)\nであるときの最長の数列の長さ）とします。このように定義すると\n\\[\ndp _{i+j, j} = \n\\begin{cases}\ndp_{i, j} + 1 \\quad (\\mathrm{if} \\ H_{i+j} = H_i)\\\\\n1 \\quad (\\mathrm{otherwise})\n\\end{cases}\n\\]\nのように遷移できます。状態数が\n\\(O(N^2)\\)\n、遷移が\n\\(O(1)\\)\nなので全体で時間計算量は\n\\(O(N^2)\\)\nとなります。\n実装例（C++）",
+      "codes": [],
+      "text_sha256": "a50de00e7aea6d69da8333a5f86b93d93a062ab2246d7e793815aa1d9b41900e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc385/abc385_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc385/editorial/11672",
+      "text": "「最初に選ぶビルの位置と何個飛ばしでビルを選ぶかを全探索し、列を伸ばせるだけ伸ばす」とすると\n\\(O(N^2\\log N)\\)\nとなりACすることができます。\n3重ループであるため一見すると\n\\(\\Theta(N^3)\\)\nに見えますが、while文の中身が実行される回数が\n\\(O(N/w)\\)\nであることから、内側のfor文全体でのステップ数が調和級数の和になり\n\\(O(N\\log N)\\)\nとなるためです。",
+      "codes": [
+        "N=int(input())\nH=list(map(int,input().split()))\n\nans=1\n\nfor i in range(N):\n  for w in range(1,N-i):\n    cnt=1\n    while i+cnt*w<N and H[i]==H[i+cnt*w]:\n      cnt+=1\n    ans=max(ans,cnt)\n\nprint(ans)"
+      ],
+      "text_sha256": "ed864fb4316233e620f6f27c26ebec71586a616faa6598840114c80a5162afa6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc385/abc385_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

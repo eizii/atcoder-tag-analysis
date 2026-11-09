@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc237_d",
+  "title": "LR insertion",
+  "contests": [
+    {
+      "contest_id": "abc237",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 544,
+  "raw_difficulty": 544,
+  "contest_id": "abc237",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc237/tasks/abc237_d",
+  "statement": "配点 : 400 点 問題文 1 個の 0 のみからなる数列 A=(0) があります。 また、 L と R のみからなる長さ N の文字列 S=s_1s_2\\ldots s_N が与えられます。 i=1,2,\\ldots ,N の順番で、次の操作を行います。 s_i が L のとき、 A 内にある i-1 のすぐ左に i を挿入する s_i が R のとき、 A 内にある i-1 のすぐ右に i を挿入する 最終的な A を求めてください。 制約 1\\leq N \\leq 5\\times 10^5 N は整数である |S| = N s_i は L か R のいずれかである 入力 入力は以下の形式で標準入力から与えられる。 N S 出力 最終的な A を空白区切りで出力せよ。 入力例 1 5\r\nLRRLR 出力例 1 1 2 4 5 3 0 はじめ、 A=(0) です。 s_1 が L なので、 A=(1,0) となります。 s_2 が R なので、 A=(1,2,0) となります。 s_3 が R なので、 A=(1,2,3,0) となります。 s_4 が L なので、 A=(1,2,4,3,0) となります。 s_5 が R なので、 A=(1,2,4,5,3,0) となります。 入力例 2 7\r\nLLLLLLL 出力例 2 7 6 5 4 3 2 1 0",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1 個の 0 のみからなる数列 A=(0) があります。 また、 L と R のみからなる長さ N の文字列 S=s_1s_2\\ldots s_N が与えられます。 i=1,2,\\ldots ,N の順番で、次の操作を行います。 s_i が L のとき、 A 内にある i-1 のすぐ左に i を挿入する s_i が R のとき、 A 内にある i-1 のすぐ右に i を挿入する 最終的な A を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N \\leq 5\\times 10^5 N は整数である |S| = N s_i は L か R のいずれかである"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 最終的な A を空白区切りで出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\nLRRLR"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1 2 4 5 3 0 はじめ、 A=(0) です。 s_1 が L なので、 A=(1,0) となります。 s_2 が R なので、 A=(1,2,0) となります。 s_3 が R なので、 A=(1,2,3,0) となります。 s_4 が L なので、 A=(1,2,4,3,0) となります。 s_5 が R なので、 A=(1,2,4,5,3,0) となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 7\r\nLLLLLLL"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 7 6 5 4 3 2 1 0"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc237/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:06.406756+00:00",
+  "statement_sha256": "b3f918c5e0c252ecb957dcc1943fe24dfe1306818aac01ffd78eeb10befaeb2f",
+  "editorials": []
+}

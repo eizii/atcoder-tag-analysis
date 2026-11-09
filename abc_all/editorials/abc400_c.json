@@ -1,0 +1,63 @@
+{
+  "problem_id": "abc400_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc400/editorial/12629",
+      "text": "\\(N\\)\n以下の良い整数の集合を\n\\(S\\)\nとします。\nまた、「\n\\(N\\)\n以下であって、正の整数\n\\(b\\)\nを用いて\n\\(X=2\\times b^2\\)\nと書ける整数\n\\(X\\)\nの集合」を\n\\(T\\)\nとし、「\n\\(N\\)\n以下であって、正の整数\n\\(b\\)\nを用いて\n\\(Y=2^2\\times b^2\\)\nと書ける整数\n\\(Y\\)\nの集合」を\n\\(U\\)\nとします。\nこのとき、\n\\(T\\cup U=S\\)\nかつ\n\\(T\\cap U=\\phi\\)\n(\n\\(\\phi\\)\nは空集合を表す) となることを示します。\nまず、前者について明らかに\n\\(T\\subset S\\)\n,\n\\(U\\subset S\\)\nであることから、\n\\((T\\cup U)\\subset S\\)\nです。一方で、\n\\(X\\in S\\)\nならば\n\\(X=2^a\\times b^2\\)\nと書けますが、\n\\(a\\)\nが奇数、すなわち非負整数\n\\(a'\\)\nを用いて\n\\(a=2a'+1\\)\nと書けるならば\n\\(X=2^{2a'+1}\\times b^2=2\\times (2^{a'}\\times b)^2\\)\nと書けるため\n\\(X\\in T\\)\nであり、\n\\(a\\)\nが偶数、すなわち非負整数\n\\(a'\\)\nを用いて\n\\(a=2a'+2\\)\nと書けるならば\n\\(X=2^{2a'+2}\\times b^2=2^2\\times (2^{a'}\\times b)^2\\)\nと書けるため\n\\(X\\in U\\)\nとなります。よって、\n\\(S\\subset (T\\cup U)\\)\nであり、先の\n\\((T\\cup U)\\subset S\\)\nとあわせて\n\\(T\\cup U=S\\)\nが成り立ちます。\n後者については、\n\\(T\\)\nに属する整数は\n\\(2\\)\nを素因数に奇数個持ち、\n\\(U\\)\nに属する整数は\n\\(2\\)\nを素因数に偶数個持つことから両方に属する整数は存在せず、\n\\(T\\cap U=\\phi\\)\nとなります。\nここで、正の整数\n\\(X\\)\nが\n\\(2\\)\nを素因数として\n\\(k\\)\n個持つとは、奇数\n\\(B\\)\nを用いて、\n\\(X=2^k\\times B\\)\nと書けることを指し、各整数に対して、その整数が\n\\(2\\)\nを素因数として持つ個数は一意に定まります。（\n\\(X\\)\nを\n\\(2\\)\nで繰り返し割ったときに、割り切れる最大の回数とも言い換えられます。）\nよって、\n\\(T\\cup U=S\\)\nかつ\n\\(T\\cap U=\\phi\\)\nであり、これより\n\\(\\lvert S\\rvert=\\lvert T\\rvert + \\lvert U\\rvert\\)\nが成り立ちます。ここで、\n\\(\\lvert S\\rvert, \\lvert T\\rvert, \\lvert U\\rvert\\)\nはそれぞれ\n\\(S,T,U\\)\nの要素数を表します。\n正の整数\n\\(b\\)\nを用いて\n\\(X=2\\times b^2\\)\nと書ける整数 は小さい方から\n\\(2=(2\\times 1^2)\\)\n,\n\\(8=(2\\times 2^2)\\)\n,\n\\(18=(2\\times 3^2)\\)\n,\n\\(\\ldots\\)\nとなるため、\n\\(\\lvert T\\rvert \\)\nは\n\\(2\\times b^2\\leq N\\)\nであるような最大の非負整数\n\\(b\\)\nの値となります。\n同様に、\n\\(\\lvert U\\rvert \\)\nは\n\\(2^2\\times c^2\\leq N\\)\nであるような最大の非負整数\n\\(c\\)\nの値となります。\n\\(2\\times b^2\\leq N\\)\nであるような最大の非負整数\n\\(b\\)\nについて、\n\\(2\\times b^2\\)\nは\n\\(b\\)\nに対して非負整数の範囲で狭義単調増加となることから、例えば二分探索によって求めることができます。\n\\(b\\)\nは少なくとも高々\n\\(\\sqrt{N}\\)\nであることから、\n\\(O(\\log N)\\)\nの計算量で求めることが可能です。「\n\\(2^2\\times c^2\\leq N\\)\nであるような最大の非負整数\n\\(c\\)\n」についても同様に二分探索などで求めることが可能です。\nよって、\n\\(\\lvert T\\rvert, \\lvert U\\rvert\\)\nの値が求まったため、これらの和をとることによって答えを求めることができます。時間計算量は\n\\(O(\\log N)\\)\nであり、十分高速です。\nよって、この問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n\nint main(void){\n\tlong long n;\n\tlong long l,r,m,ans=0;\n\tconst long long inf = (long long)1e9;\n\tcin >> n;\n\n\tl=0;r=inf;\n\twhile((l+1)<r){\n\t\tm=(l+r)/2;\n\t\tif((m*m*2)<=n)l=m;\n\t\telse r=m;\n\t}\n\tans+=l;\n\n\tl=0;r=inf;\n\twhile((l+1)<r){\n\t\tm=(l+r)/2;\n\t\tif((m*m*4)<=n)l=m;\n\t\telse r=m;\n\t}\n\tans+=l;\n\n\tcout << ans << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "c383de7986cf2d4ac8e8e9c56a3bc53b65d9aec8c149594c516f080d39fd6ef0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc400/abc400_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc400/editorial/12642",
+      "text": "\\(\\sqrt{n}\\)\nの計算に、浮動小数点型の\nsqrt\nを用いた際の誤差について記します。\n\\(\\gdef\\roundcirc#1{\\operatorname{\\circ}{(#1)}}\\)\n\\(\\gdef\\floor#1{\\lfloor#1\\rfloor}\\)\n\\(\\gdef\\ceil#1{\\lceil#1\\rceil}\\)\nIEEE 754 で定義される binary64 にあたる浮動小数点型で、丸めモード tiesToEven（表せる数のうち最も近いものに丸める。タイのときは仮数部が偶数になる方を選ぶ）で実数\n\\(x\\)\nを丸めたときの値を\n\\(\\roundcirc{x}\\)\nと書くことにします。\nnote\n:\ndouble\n(C++),\nfloat\n(Python),\nf64\n(Rust) のデフォルトの挙動に相当します。\nなお、C++ において\nsqrt(n)\nと書いたとき、\nn\nが\nlong long\nだったとしても暗黙に\nn\nが\ndouble\nに変換されます。\n例\n下記の 2 数について考えます。\n\\[\n\\begin{aligned}\nn_1 &= (2^{26}+1)^2-1 \\\\\n&= 67108865^2-1 \\\\\n&= 4503599761588224, \\\\\nn_2 &= \\ceil{2^{26.5}}^2-1 \\\\\n&= 94906266^2-1 \\\\\n&= 9007199326062755.\n\\end{aligned}\n\\]\n\\(2^{52} \\lt n_1 \\lt 2^{53} \\lt n_2\\le 10^{18}\\)\nが成り立ちます。\n該当の型は仮数部のビット数が 53 なので、\n\\(\\roundcirc{n_1} = n_1\\)\nが成り立ちます。また、\n\\(\\roundcirc{n_2} = n_2+1\\)\nが成り立ちます。\n\\[\n\\sqrt{n_1} = 67108864.999999992549419{\\dots}\n\\]\nであり、\n\\(\\roundcirc{\\sqrt{n_1}} = \\floor{\\sqrt{n_1}}+1\\)\nとなります。\nまた、\n\\[\n\\sqrt{n_2+1} = 94906266\n\\]\nが成り立ちます。こうして、\n\\(\\roundcirc{\\sqrt{\\roundcirc{n_1}}} = \\floor{\\sqrt{n_1}}+1\\)\nおよび\n\\(\\roundcirc{\\sqrt{\\roundcirc{n_2}}} = \\floor{\\sqrt{n_2}}+1\\)\nがわかりました。\n\\(n'=\\roundcirc{n}\\)\nの計算と、\n\\(\\roundcirc{\\sqrt{n'}}\\)\nの計算の 2 箇所で誤差が生じうるため、両方を気にする必要があります。\n\\(n_1\\)\nは後者、\n\\(n_2\\)\nは前者のみの誤差が生じる例です。\n対策\n誤差のことを気にしなくてよくなる簡単な方法としては、整数型で二分探索する方法が挙げられます。\nまた、\nsqrt(n)\nの返り値\nm\nを前後 10 個くらいの\ni\nを調べ、\ni * i <= n && (i + 1) * (i + 1) > n\nとなるものを探すという方法を使っている人もしばしばいます。実は、\nm\nと\nm - 1\nについてのみ調べれば十分であることは示せます（\n解説ブログ\n）。\nまた、Python では\nmath.isqrt\nが用意されているので、それを使うのがよいでしょう。",
+      "codes": [
+        "uint64_t uint64_floor_sqrt(uint64_t n) {\n    if (n == 0) return 0; \n    uint64_t tmp_m1 = std::sqrt(n) - 1;\n    return tmp_m1 * (tmp_m1 + 2) < n ? tmp_m1 + 1 : tmp_m1;\n}",
+        "fn u64_floor_sqrt(n: u64) -> u64 {\n    let tmp = (n as f64).sqrt() as u64;\n    let tmp_m1 = tmp.saturating_sub(1);\n    if tmp_m1 * (tmp_m1 + 2) < n { tmp } else { tmp_m1 }\n}"
+      ],
+      "text_sha256": "aa1d70b6e2024dfe6bf66a886afd2c3d5464e13fa788dba12ea58808b6744dfa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc400/abc400_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc400/editorial/12633",
+      "text": "正の整数\n\\((a,b)\\)\nを用いて\n\\(2^a\\times b^2\\)\nと表せる整数は、\n\\(a\\)\nが偶数なら平方数を\n\\(4\\)\n倍した数、\n\\(a\\)\nが奇数なら平方数を\n\\(2\\)\n倍した数になります。\nよって、\n\\(N\\)\n以下の良い整数の個数は\n\\(\\left\\lfloor\\sqrt{\\frac{N}2} \\right\\rfloor+\\left\\lfloor\\sqrt{\\frac{N}4} \\right\\rfloor\\)\n個になります。\n実装の際に sqrt 関数をそのまま使うと小数点誤差により正しい値が得られない場合があるので注意してください。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tlong long n;\n\tcin >> n;\n\tcout << (long long)sqrtl(n / 2) + (long long)sqrtl(n / 4) << endl;\n}",
+        "from math import isqrt\n\nn = int(input())\nprint(isqrt(n // 2) + isqrt(n // 4))"
+      ],
+      "text_sha256": "1cf1dfbb5d58720aeb20c1b6dfbe6dc0b20f9967cf2a56284b524044167148e3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc400/abc400_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc400/editorial/12634",
+      "text": "この問題の難しいところは，\n\\(n = 2^a b^2\\)\nを満たす\n\\((a, b)\\)\nが複数存在するような\n\\(n\\)\nがあるため，重複して数えるのを避ける工夫が必要であるという点です．公式解説では\n\\(a=1,2\\)\nに限定することで重複を避けて数えています．\nこれとは別に，「\n\\(b\\)\nは\n奇数\n」という条件を加えることでも重複を避けることが可能です．\n良い整数は正整数\n\\(a\\)\nおよび正の奇数\n\\(b\\)\nを用いてただ一通りに\n\\(2^a b^2\\)\nとあらわすことが可能なことが証明できます．よって，\n\\(2^ab^2\\leq N\\)\nを満たす正整数\n\\(a\\)\nおよび正の奇数\n\\(b\\)\nの組の個数を数えられれば良いです．\n\\(a\\)\nを固定すると\n\\(b\\leq \\sqrt{N/2^a}\\)\nとなるため，これを満たす正の奇数\n\\(b\\)\nの個数は\n\\(\\left\\lfloor\\dfrac{\\sqrt{N/2^a}+1}{2}\\right\\rfloor\\left(=\\left\\lfloor\\dfrac{\\lfloor\\sqrt{N/2^a}\\rfloor+1}{2}\\right\\rfloor\\right)\\)\nです．この値を\n\\(a=1,2,\\ldots,\\lfloor\\log_2 N\\rfloor\\)\nに対して求め，それらを足し合わせることで答えを求めることができます．",
+      "codes": [
+        "from math import isqrt\nN = int(input())\nans = 0\nfor a in range(1, 61):\n    ans += (isqrt(N // (2**a)) + 1) // 2\nprint(ans)"
+      ],
+      "text_sha256": "845d9e48494b23c8601d796854bb07a8feda87b467a3ad24b31b94ec5c4afce5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc400/abc400_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc400/editorial/12636",
+      "text": "\\(2^a \\times b^2\\)\nの形において、\n\\(b\\)\nが奇数である場合のみを数えることで漏れなくダブりなく数え上げられるという点は他の解説と同じです。\n\\(b\\)\nを固定した際、条件を満たす整数\n\\(a\\)\nは\n\\(1,2,\\dots,r\\)\nとなり (ある上限\n\\(r\\)\nが存在して\n\\(1\\)\n以上\n\\(r\\)\n以下の全ての整数で成り立つ) 、この\n\\(r\\)\nは\n\\(b\\)\nが増加していくごとに(広義)単調減少します。\nよって、尺取り法の要領で\n\\(b\\)\nを増やしながら各\n\\(b\\)\nに対する\n\\(r\\)\nを求めていくことで時間計算量\n\\(O(\\sqrt{N})\\)\nでこの問題に正解できます。\n\\(N\\)\nに\n\\(10^{18}\\)\nを代入すると額面で\n\\(10^9\\)\nという時間計算量が得られますが、 2025 年現在の CPU は高速なのでかろうじて実行時間制限内に間に合います。 (\n\\(N=10^{18}\\)\nをワーストケースとして容易に試すことができるので、提出前にこの実行時間をコードテストで確かめると良いでしょう。 )\n実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  long long n;\n  cin >> n;\n  long long a=60,res=0;\n  for(long long b=1;a>0;b+=2){\n    while(a>0 && (1ll<<a)*b*b > n){a--;}\n    res+=a;\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "2a0881e7e83f535862bf1258ed8cdb7d86fdffd9d12abc4df8377819d2c9f8b5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc400/abc400_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

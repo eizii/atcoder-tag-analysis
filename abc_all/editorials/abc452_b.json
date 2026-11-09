@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc452_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc452/editorial/18359",
+      "text": "マス \\((i,j)\\) が端にある必要十分条件は、次のいずれかが成り立つことです。\n\\(i=1\\)\n\\(i=H\\)\n\\(j=1\\)\n\\(j=W\\)\nあとは、これを使って \\(H\\times W\\) 個の文字を決め、出力すればよいです。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n    int H, W;\n    cin >> H >> W;\n\n    for (int i = 0; i < H; ++i) {\n        for (int j = 0; j < W; ++j) {\n            if (i == 0 || i == H - 1 || j == 0|| j == W - 1) { // 端のマスなら\n                cout << '#'; // # を\n            } else { // そうでなければ\n                cout << '.'; // . を出力\n            }\n        }\n        cout << endl; // 改行する\n    }\n\n    return 0;\n}",
+        "H, W = map(int, input().split())\n\nfor i in range(H):\n    for j in range(W):\n        if i == 0 or i == H - 1 or j == 0 or j == W - 1: # 端のマスなら\n            print('#', end='') # # を\n        else: # そうでなければ\n            print('.', end='') # . を出力\n        print('')"
+      ],
+      "text_sha256": "d96f79d7b5e409486cad655176d7d6c14ac8293b14b208701f12a72db91417b8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc452/abc452_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc311_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/6821",
+      "text": "この問題は単純な幅優先探索 (BFS) 等で時間計算量\n\\(O(NM(N+M))\\)\nで正解できますが、今回はそれよりも高速な解法を示します。\n今いるマス\n\\(x\\)\nとプレイヤーの直前の移動方向 ( 上・下・左・右・停止 ) とをペアにした\n\\(5NM\\)\n個の頂点を考えます。\n直前の移動方向「停止」はそのマスの上で停まれている状態を、その他の移動方向はそのマスの上をその向きに通過しようとしていることを表現しています。\nこの上で、以下の要領で移動を BFS します。\n最初は ( マス\n\\((2,2)\\)\n, 停止 ) から始めます。\n直前の移動方向が「停止」である場合\n\\(x\\)\nの上隣のマスが 氷 である場合、 (\n\\(x\\)\nの上隣のマス,  上 ) の頂点に移動可能である。\n\\(x\\)\nの下隣のマスが 氷 である場合、 (\n\\(x\\)\nの下隣のマス,  下 ) の頂点に移動可能である。\n\\(x\\)\nの左隣のマスが 氷 である場合、 (\n\\(x\\)\nの左隣のマス,  左 ) の頂点に移動可能である。\n\\(x\\)\nの右隣のマスが 氷 である場合、 (\n\\(x\\)\nの右隣のマス,  右 ) の頂点に移動可能である。\n直前の移動方向が「停止」でない場合\nその方向に移動を続けることを試みる。\nもし、その方向に隣接するマス\n\\(y\\)\nが 氷 なら、移動方向を保持することしかできず、 (\n\\(y\\)\n, 移動方向 ) の頂点に移動可能である。\nもし、その方向に隣接するマス\n\\(y\\)\nが 岩 なら、今いるマスで停止することができる。よって、 (\n\\(x\\)\n, 停止 ) の頂点に移動可能である。\nこの BFS により、通過または停止する 氷 のマスを全て列挙できます。\nよって、時間計算量\n\\(O(NM)\\)\nでこの問題に正解できます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint dx4[4]={1,-1,0,0};\nint dy4[4]={0,0,1,-1};\n\nint main(){\n  int n,m;\n  cin >> n >> m;\n  vector<string> s(n);\n  for(auto &nx : s){cin >> nx;}\n\n  vector<int> fl(5*n*m,0);\n  queue<int> q;\n  fl[5*(m+1)+4]=1;\n  q.push(5*(m+1)+4);\n  while(!q.empty()){\n    int od=q.front();q.pop();\n    int x=(od/5)/m;\n    int y=(od/5)%m;\n    int d=od%5;\n\n    if(d==4){\n      // stop\n      for(int i=0;i<4;i++){\n        int nx=x+dx4[i];\n        int ny=y+dy4[i];\n        int nd=i;\n        if(s[nx][ny]=='.'){\n          int nid=5*(nx*m+ny)+nd;\n          if(fl[nid]==0){\n            fl[nid]=1;\n            q.push(nid);\n          }\n        }\n      }\n    }\n    else{\n      // keep the direction\n      int nx=x+dx4[d];\n      int ny=y+dy4[d];\n      int nd=d;\n      if(s[nx][ny]=='.'){\n        int nid=5*(nx*m+ny)+nd;\n        if(fl[nid]==0){\n          fl[nid]=1;\n          q.push(nid);\n        }\n      }\n      else{\n        // hit a rock\n        int nid=5*(x*m+y)+4;\n        if(fl[nid]==0){\n          fl[nid]=1;\n          q.push(nid);\n        }\n      }\n    }\n  }\n\n  int res=0;\n  for(int i=0;i<n*m;i++){\n    res+=max({fl[5*i],fl[5*i+1],fl[5*i+2],fl[5*i+3],fl[5*i+4]});\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "241ad8824fd899b30dc5fd96069fcab0965420c488e5a22aff2cad4db9ba79cd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc311/abc311_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc311/editorial/6834",
+      "text": "公式で省略されている3乗解法を簡単に説明します。\n「どのマスに止まっているか」を状態とし、上下左右どの方向に移動するかをDFS/BFSで探索します。その過程で通ったマスを記録します。\n実装例(Python)",
+      "codes": [
+        "import sys\nsys.setrecursionlimit(10**8)\n\nN,M=map(int,input().split())\nS=[input() for i in range(N)]\n\ntomatta=[[False]*M for _ in range(N)]\ntootta=[[False]*M for _ in range(N)]\n\n\ndef dfs(i,j):\n  tomatta[i][j]=True\n  # マス(i,j)に停止している状態から、上下左右への移動を調べる\n  for di,dj in [(0,1),(1,0),(0,-1),(-1,0)]:\n    ii,jj=i,j\n    while S[ii+di][jj+dj]!='#':\n      ii+=di\n      jj+=dj\n      tootta[ii][jj]=True\n    if not tomatta[ii][jj]:\n      dfs(ii,jj)\n\ntootta[1][1]=True\ndfs(1,1)\nprint(sum(sum(a) for a in tootta))"
+      ],
+      "text_sha256": "cb61cb764608cda94996f9cba94878ab538468a15e4a6e5cdcc44ce5a4979a0f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc311/abc311_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

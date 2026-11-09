@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc445_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc445/editorial/15907",
+      "text": "頂点 \\(i\\) からちょうど \\(k\\) 回移動して頂点 \\(j\\) に行くためのコストの総和を \\(c ^ k _ {i,j}\\) と書くことにします。\n\\((i,j)\\) で添字づけられた列 \\(c ^ k=(c ^ k _ {i,j}) _ {1\\le i\\le N,1\\le j\\le N}\\) を考えます。\n\\(c ^ 1=(C _ {i,j}) _ {1\\le i\\le N,1\\le j\\le N}\\) です。\n\\(c ^ a\\) と \\(c ^ b\\) が求められているとき、次のようなアルゴリズムによって \\(c ^ {a+b}\\) を求めることができます。\nはじめ、\\(x _ {i,j}\\leftarrow\\infty\\) で初期化する。\nすべての \\((i,j,k)\\in\\lbrace1,2,\\ldots,N\\rbrace ^ 3\\) に対して以下を繰り返す。\n\\(x _ {i,k}\\leftarrow\\min\\lbrace x _ {i,k},c ^ a _ {i,j}+c ^ b _ {j,k}\\rbrace\\) で更新する。\n\\(x\\) が求める \\(c ^ {a+b}\\) である。\nこれは min-plus 半環での行列積と考えることもできます。\nこのアルゴリズムを使うことで、繰り返し二乗法によって答えを \\(O(N ^ 3\\log K)\\) 時間で求めることができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <ranges>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n    unsigned N, K;\n    cin >> N >> K;\n    vector C(N, vector<unsigned long>(N));\n\n    for (auto&& row : C)\n        for (auto&& c : row)\n            cin >> c;\n\n    // a 回移動した結果と b 回移動した結果から a + b 回移動した結果を求める\n    const auto prod{[N, inf{ranges::max(C | views::join) * K}](const auto& lhs, const auto& rhs) {\n        // 十分大きな値で初期化しておく\n        vector ret(N, vector(N, inf));\n        for (const auto i : views::iota(0U, N))\n            for (const auto j : views::iota(0U, N))\n                for (const auto k : views::iota(0U, N))\n                    ret[i][k] = min(ret[i][k], lhs[i][j] + rhs[j][k]);\n        return ret;\n    }};\n\n    auto ans(C);\n    --K;\n\n    // 繰り返し二乗法\n    while (K) {\n        if (K & 1)\n            ans = prod(ans, C);\n        C = prod(C, C);\n        K /= 2;\n    }\n\n    for (const auto i : views::iota(0U, N))\n        cout << ans[i][i] << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "48e288145a76d8b48e500dd83c625e08c117c15ab641917296b9347047d2161a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc445/abc445_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

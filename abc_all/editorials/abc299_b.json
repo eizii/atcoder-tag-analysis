@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc299_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc299/editorial/6244",
+      "text": "実際に全カードを走査することで、\n色が \\(T\\) のカード（および、プレイヤー \\(1\\) が出したカードと同じ色のカード）が場に出ているか、また、それらの中で値が最大のカードはどれか・誰によって出されたかを調べ、問題文中の決定方法にしたがって勝者を決定すれば良いです。 全カードを走査するには、プログラミング言語の標準的な機能である繰り返しの機能（ for 文など）を用いることができます。 以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <utility>\nusing namespace std;\n\nint n, t;\nint c[200001], r[200001];\n\nint main(void)\n{\n  cin >> n >> t;\n  for(int i = 1; i <= n; i++) cin >> c[i];\n  for(int i = 1; i <= n; i++) cin >> r[i];\n  \n  pair<int, int> tmax = {-1, -1}, lmax = {-1, -1};\n  for(int i = 1; i <= n; i++){\n    if(c[i] == t) tmax = max(tmax, {r[i], i});\n    if(c[i] == c[1]) lmax = max(lmax, {r[i], i});\n  }\n  if(tmax.first != -1) cout << tmax.second << endl;\n  else cout << lmax.second << endl;\n  \n  return 0;\n}  \n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "7ff1d91951e404594b71c61cd16e33b3c51518cc19646d5c297d389d20f2a9b7"
+    }
+  ],
+  "status": "available"
+}

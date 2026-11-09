@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc180_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc180/editorial/219",
+      "text": "2種類の特訓方法のうち、強さの上昇量が少ない方を貪欲に選ぶのが良さそうです。実際、これは正しいです。しかし、実際にシミュレーションをしているとTLEになります。もう少し考察してみましょう。\nカコモンジムに何度か通い、その後AtCoderジムに何度か通うのが最適解になります。\nなぜなら、もしAtCoderジムに通ったあとにカコモンジムに通った場合、強さは\n\\(Z\\to Z+B \\to AZ+AB\\)\nと変化しますが、これは「カコモンジムに通ったあと、AtCoderジムに\n\\(A\\)\n回通った」ときの強さに等しく、後者の方がより多くの経験値を得ることができるためです。\nカコモンジムに通える回数は高々\n\\(\\log_A Y \\leq 64\\)\n回なので、カコモンジムに通う間をシミュレーションし、残りのAtCoderジムに通う回数を\n\\(O(1)\\)\nで求めることで、\n\\(O(\\log_A Y)\\)\nで求めることができました。\n実装上はオーバーフローに注意してください。\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "x,y,a,b=map(int,input().split())\n\nans=0\nwhile a*x<=x+b and a*x<y:\n  x*=a\n  ans+=1\n\nprint(ans+(y-1-x)//b)",
+        "#include<iostream>\nusing namespace std;\n\nint main(){\n\tlong long x,y,a,b;\n\tcin >> x >> y >> a >> b;\n\tlong long ans=0;\n\twhile((double)a*x<=2e18 && a*x<=x+b && a*x<y){\n\t\tx*=a;\n\t\tans++;\n\t}\n\tcout << ans+(y-1-x)/b << endl;\n}"
+      ],
+      "text_sha256": "03db35bba9f39f84c2daedca8057199c4b768cc8d7befd375b37d737482fb69d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc180/abc180_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc180/editorial/1172",
+      "text": "C++ を使い、公式解説の方針で解く場合にオーバフローを回避する別の方法を紹介します。\nカコモンジムとAtcoderジムのどちらに行くとよいかの判定部分で、整数 $Z$ に対し、\n$Z \\times A \\leq Z+B$ であるか？\nを判定しなければならず、 $Z \\times A$ は最大で $10^{27}$ 近くになるので、このまま実装すると long long ではオーバーフローしてしまいます。\nそこで\n$Z \\leq \\frac{Z+B}{A}$ であるか？\nと上の条件を言い換えるのが一般的にオーバフローを回避する方法ですが、多倍長整数を使うという方法もあります。\n多倍長整数として、 boost/multiprecision/cpp_int.hpp をincludeすることで使用できる cpp_int を使います。\nこれは通常の int や long long 型などと同様に扱うことのできる、(メモリが許す限り)上限値がない多倍長整数です。\n演算が $O(1)$ ではないですが、この問題では気にすることなくACすることができます。\n参考記事\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\n#include<boost/multiprecision/cpp_int.hpp>\nusing namespace boost::multiprecision;\n\nint main(){\n  cpp_int x,y,a,b;\n  cin>>x>>y>>a>>b;\n  cpp_int ans=0;\n\n  while(true){\n    if(x*a>x+b||x*a>=y){\n      break;\n    }\n    x*=a;\n    ans++;\n  }\n\n  ans+=(y-1-x)/b;\n  cout<<ans<<endl;\n}"
+      ],
+      "text_sha256": "4941169e86b702af6f330eb5c563570339839fe14454b9b36023798faa4a3969",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc180/abc180_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

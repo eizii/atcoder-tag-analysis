@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc336_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc336/editorial/9064",
+      "text": "問題文の指示通り、\n\\(1\\)\n個の\nL\n,\n\\(N\\)\n個の\no\n,\n\\(1\\)\n個の\nn\n,\n\\(1\\)\n個の\ng\nをこの順に出力すれば良いです。\nこれは標準出力および for 文を用いて行う事ができます。\nこれらの文字を直接出力するか、先に文字列を構成してその文字列を出力するかで大きく分けて\n\\(2\\)\n通りの方針が考えられますが、どちらの場合でも実装量などは大差ありませんので、今回はどちらでも良いでしょう。\n出力時に余計な改行などが含まれる事がないように注意しましょう。\nc++ による実装例\npython による実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin>>n;\n\tstring s=\"L\";\n\tfor(int i=0;i<n;i++)s+=\"o\";\n\ts+=\"ng\";\n\tcout<<s<<endl;\n\treturn 0;\n}",
+        "n=int(input())\nprint(\"L\",end='')\nfor i in range(n):\n    print(\"o\",end='')\nprint(\"ng\")"
+      ],
+      "text_sha256": "f8d196e854f4b8c5cbde3c0d75bf84b70dd7f41d86f8654cae76efc9c153e787",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc336/abc336_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

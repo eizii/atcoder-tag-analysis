@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc370_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc370/editorial/10857",
+      "text": "まず、この問題は問題文の指示に従ってクエリを処理すれば正答を返すことが出来る問題です。しかし、残っている壁の管理に配列のみを用いると時間計算量が\n\\(\\mathrm{O}(H^2 W^2)\\)\nあるいは\n\\(\\mathrm{O}(HW (H+W))\\)\nかかってしまうため実行時間制限に間に合いません。そのため、アルゴリズムの実装に適切なデータ構造を用いることが要求されています。\n残っている壁を順序付き集合 (C++ の\nstd::set\n) を用いて管理することを考えます。具体的には以下の\n\\(g_1, g_2\\)\nを管理することにします。\n\\(g_1\\)\n:\n\\(i\\)\n番目の要素に「\n\\(i\\)\n行目に残っている壁の位置を列番号で持った順序付き集合」を持った配列\n\\(g_2\\)\n:\n\\(j\\)\n番目の要素に「\n\\(j\\)\n列目に残っている壁の位置を行番号で持った順序付き集合」を持った配列\nこのようにデータ構造を構成して、順序付き集合上の二分探索(C++ の\nset::lower_bound\n関数) を適宜利用することで、クエリを\n\\(\\mathrm{O}(\\log H + \\log W)\\)\nで処理することが出来るようになります。(詳細は実装例を参考にしてください)\nよってこの問題を時間計算量\n\\(\\mathrm{O}((HW + Q) (\\log H + \\log W))\\)\nで解くことが出来て、これは実行時間制限に十分間に合います。\nC++ による実装例は次の通りです。また、tatyam 氏の\nSortedSet\nを使用した Python の実装例は\nこちら\nです。",
+      "codes": [
+        "#include <cassert>\n#include <iostream>\n#include <set>\n#include <vector>\nusing namespace std;\n\nint main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\n  int H, W, Q;\n  cin >> H >> W >> Q;\n\n  vector<set<int>> g1(H), g2(W);\n  for (int i = 0; i < H; i++) {\n    for (int j = 0; j < W; j++) {\n      g1[i].insert(j);\n      g2[j].insert(i);\n    }\n  }\n\n  auto erase = [&](int i, int j) { g1[i].erase(j), g2[j].erase(i); };\n\n  while (Q--) {\n    int R, C;\n    cin >> R >> C;\n    --R, --C;\n\n    if (g1[R].count(C)) {\n      erase(R, C);\n      continue;\n    }\n\n    // 上\n    {\n      auto it = g2[C].lower_bound(R);\n      if (it != begin(g2[C])) erase(*prev(it), C);\n    }\n    // 下\n    {\n      auto it = g2[C].lower_bound(R);\n      if (it != end(g2[C])) erase(*it, C);\n    }\n    // 左\n    {\n      auto it = g1[R].lower_bound(C);\n      if (it != begin(g1[R])) erase(R, *prev(it));\n    }\n    // 右\n    {\n      auto it = g1[R].lower_bound(C);\n      if (it != end(g1[R])) erase(R, *it);\n    }\n  }\n\n  int ans = 0;\n  for (int i = 0; i < H; i++) ans += g1[i].size();\n  cout << ans << \"\\n\";\n}"
+      ],
+      "text_sha256": "bfc71ae31272806164f6bf62c1a2eb35dfeb7202a35a3c5891e8ef30ee5724a0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc370/abc370_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc370/editorial/10905",
+      "text": "各\n\\(1 \\le i \\le H\\)\nに対して、マス\n\\((i, j)\\)\nが壁でない\n\\(1 \\le j \\le W\\)\nの集合を\n\\(Rs_i\\)\n、各\n\\(1 \\le j \\le W\\)\nに対して、マス\n\\((i, j)\\)\nが壁でない\n\\(1 \\le i \\le H\\)\nの集合を\n\\(Cs_j\\)\nとします。はじめは全ての集合は空です。各クエリでの操作は以下のようになります。\n\\((R, C)\\)\nが壁であるときは、\n\\(Rs_R\\)\nに\n\\(C\\)\nを追加して\n\\(Cs_C\\)\nに\n\\(R\\)\nを追加する。\nそうでないときは、その上下左右で壁がある端のマスを探します。その先がグリッドの外でなければそのマスを\n\\((i,j)\\)\nとしたとき\n\\(Rs_i\\)\nに\n\\(j\\)\nを、\n\\(Cs_j\\)\nに\n\\(i\\)\nを追加します。端のマスは、\n\\(Rs_R\\)\nや\n\\(Cs_C\\)\nを二分探索することで探すことができます。\nこの解法の計算量は\n\\(O(H+W+Q \\log^2(max(H,W)))\\)\nです。\n実装例(PyPy):\nhttps://atcoder.jp/contests/abc370/submissions/57532668",
+      "codes": [],
+      "text_sha256": "789cc8447acb933871e4c001dc897f2596af76691f7e20e08630449c6dba3749",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc370/abc370_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc370/editorial/10883",
+      "text": "UnionFind を用いて解けます．各列・行ごとに，連続した破壊区間を UnionFind で管理します．このとき，連続した破壊区間の左端と右端（あるいは上端・下端）を持つことにすると，上下左右に見て最初に現れる壁の位置を高速に取得することができます．計算量は\n\\(O(HW\\alpha (H+W))\\)\nです．",
+      "codes": [
+        "class UnionFind:\n    def __init__(self, n):\n        self.n = n\n        self.parents = [-1] * n\n        self.L = list(range(n))\n        self.R = list(range(n))\n\n    def find(self, x):\n        if self.parents[x] < 0:\n            return x\n        else:\n            self.parents[x] = self.find(self.parents[x])\n            return self.parents[x]\n\n    def merge(self, x, y):\n        x = self.find(x)\n        y = self.find(y)\n\n        if x == y:\n            return\n\n        if self.parents[x] > self.parents[y]:\n            x, y = y, x\n\n        self.parents[x] += self.parents[y]\n        self.L[x] = min(self.L[x], self.L[y])\n        self.R[x] = max(self.R[x], self.R[y])\n        self.parents[y] = x\n\n    def get_LR(self, x):\n        x = self.find(x)\n        return (self.L[x], self.R[x])\n\n\nH, W, Q = map(int, input().split())\nuf_row = [UnionFind(W + 2) for i in range(H + 2)]\nuf_col = [UnionFind(H + 2) for i in range(W + 2)]\nerased = [[0] * (W + 2) for i in range(H + 2)]\n\nans = H * W\n\n\ndef erase(x, y):\n    global ans\n    if 1 <= x <= H and 1 <= y <= W:\n        ans -= 1\n        erased[x][y] = 1\n        if erased[x][y - 1]:\n            uf_row[x].merge(y - 1, y)\n        if erased[x][y + 1]:\n            uf_row[x].merge(y, y + 1)\n        if erased[x - 1][y]:\n            uf_col[y].merge(x - 1, x)\n        if erased[x + 1][y]:\n            uf_col[y].merge(x, x + 1)\n\n\nans = H * W\nfor _ in range(Q):\n    x, y = map(int, input().split())\n    if erased[x][y] == 0:\n        erase(x, y)\n        continue\n    Lx, Rx = uf_col[y].get_LR(x)\n    Ly, Ry = uf_row[x].get_LR(y)\n    erase(Lx - 1, y)\n    erase(Rx + 1, y)\n    erase(x, Ly - 1)\n    erase(x, Ry + 1)\n\nprint(ans)"
+      ],
+      "text_sha256": "b4e89e598bf6b9b308ff5a64291e5eb921ca20999a9ba2aa00c84c9d19f9a6ba",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc370/abc370_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc370/editorial/10907",
+      "text": "計算量が\n\\(H\\)\nや\n\\(W\\)\nに依存しない解法です．ベースとなる考え方は\nordered set を使わない解法\nと一緒です．リンク先の解説ではあらかじめ\n\\(H,W\\)\n個の UnionFind を作っていますが，必要な場所だけ UnionFind で管理する方針を取ります．破壊したマスと整数を map を使うなどして 1 対 1 対応させながら，破壊区間のマージを同様の方法で行えばよいです．破壊されるマスは高々\n\\(4Q\\)\n個なので，サイズが\n\\(4Q\\)\nの UnionFind を用意しておけば十分です．計算量は map がボトルネックとなり\n\\(O(Q \\log Q)\\)\nです．\n”`",
+      "codes": [
+        "class UnionFind:\n    def __init__(self, n):\n        self.n = n\n        self.parents = [-1] * n\n        self.L = [-1] * n\n        self.R = [-1] * n\n\n    def find(self, x):\n        if self.parents[x] < 0:\n            return x\n        else:\n            self.parents[x] = self.find(self.parents[x])\n            return self.parents[x]\n\n    def merge(self, x, y):\n        x = self.find(x)\n        y = self.find(y)\n\n        if x == y:\n            return\n\n        if self.parents[x] > self.parents[y]:\n            x, y = y, x\n\n        self.parents[x] += self.parents[y]\n        self.L[x] = min(self.L[x], self.L[y])\n        self.R[x] = max(self.R[x], self.R[y])\n        self.parents[y] = x\n\n    def get_LR(self, x):\n        x = self.find(x)\n        return (self.L[x], self.R[x])\n\n\nH, W, Q = map(int, input().split())\nuf_row = UnionFind(4 * Q)\nuf_col = UnionFind(4 * Q)\n\nidx = 0\nd = {}\n\n\ndef erase(x, y):\n    global idx\n    if 1 <= x <= H and 1 <= y <= W:\n        d[(x, y)] = idx\n        uf_row.L[idx] = y\n        uf_row.R[idx] = y\n        uf_col.L[idx] = x\n        uf_col.R[idx] = x\n        if (x, y - 1) in d:\n            uf_row.merge(idx, d[(x, y - 1)])\n        if (x, y + 1) in d:\n            uf_row.merge(idx, d[(x, y + 1)])\n        if (x - 1, y) in d:\n            uf_col.merge(idx, d[(x - 1, y)])\n        if (x + 1, y) in d:\n            uf_col.merge(idx, d[(x + 1, y)])\n        idx += 1\n\n\nfor _ in range(Q):\n    x, y = map(int, input().split())\n    if (x, y) not in d:\n        erase(x, y)\n        continue\n    i = d[(x, y)]\n    Lx, Rx = uf_col.get_LR(i)\n    Ly, Ry = uf_row.get_LR(i)\n    erase(Lx - 1, y)\n    erase(Rx + 1, y)\n    erase(x, Ly - 1)\n    erase(x, Ry + 1)\n\nprint(H * W - idx)"
+      ],
+      "text_sha256": "dc5c8367b1839929fe80bf632402a81708d8d7f8d6de51f8eb00e8b4b2c9bb72",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc370/abc370_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

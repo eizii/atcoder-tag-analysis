@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc023_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc023/editorial.pdf",
+      "text": "問題B – 手芸王\n\f\n問題概要\n\n• 文字列𝑆について、b→abc→cabca→bcabcab→…と変化させる手順\n の何番目(最初のb は0 番目とおく) に出てくるか(あるいは出てこ\n ないか) を計算せよ。\n\n\n• 1 ≦𝑁(= |𝑆|) ≦100\n\f\n解法\n\n• アクセサリーの名前となりうる文字列はabcabcabc… とa,b,c が順繰\n りに出てくる文字列でなければなりません。\n• さらに、長さは奇数長で、中央の文字がb とならなければなりません。\n\n• これらの条件を満たした場合、(𝑁-1)/2 番目の手順の直後に文字列\n 𝑆が名前としてでてきます。\n\f\n注意事項\n\n• 入力には𝑁= 1, 𝑆= “b” というケースが存在します。このケースの\n 答えは0 となります。\n\n\n• 実行時間には余裕があるので、実際に問題文の手順にしたがって\n アクセサリーの名前を探索するプログラムを作成する方針でも正解\n することができます(こちらの方が勘違いによるミスが少なくなるか\n も?)。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "074b9663e69fb514b661370974d412d21ac4b9fde85ce2c985839e7a239f6dfe"
+    }
+  ],
+  "status": "available"
+}

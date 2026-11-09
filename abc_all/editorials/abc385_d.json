@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc385_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc385/editorial/11654",
+      "text": "サンタクロースは軸に平行な直線上を移動するので、そのような直線上の家をまとめて管理することができればよさそうです。\n\\(\\mathrm{Ypos}_x\\)\nを、\n\\(x\\)\n座標が\n\\(x\\)\nである家の\n\\(y\\)\n座標全体のordered set\n\\(\\mathrm{Xpos}_y\\)\nを、\n\\(y\\)\n座標が\n\\(y\\)\nである家の\n\\(x\\)\n座標全体のordered set\nとします。例えば入力例1に対しては\n\\(\\mathrm{Ypos}_2=\\{1,2\\},\\mathrm{Ypos}_3=\\{3\\}\\)\n\\(\\mathrm{Xpos}_1=\\{2\\},\\mathrm{Xpos}_2=\\{2\\},\\mathrm{Xpos}_3=\\{3\\}\\)\nとなります。\nサンタクロースが\n\\((X,Y)\\)\nから\n\\((X,Y+C)\\)\n\\((C>0)\\)\nに移動したときに通過する家は、\n\\(\\mathrm{Ypos_X}\\)\nに含まれる\n\\(Y\\)\n以上\n\\(Y+C\\)\n以下の要素になります。これは\n\\(O(そのような要素の個数*\\log N)\\)\nで列挙できます。他の方向への移動も同様であり、通過した家は破壊する(集合から取り除く)ことにすると、これらは全体で\n\\(O(N\\log N)\\)\n時間で処理できます。\nwriter解(C++)\nwriter解(Python)",
+      "codes": [],
+      "text_sha256": "b954d7a83359ac5005b8ab6653f557ac0bc59dfbb0b652f74cb0295aa86357a2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc385/abc385_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

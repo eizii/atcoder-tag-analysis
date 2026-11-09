@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc119_c",
+  "editorials": [
+    {
+      "text": "C: Synthetic Kadomatsu\n竹の数は8 本までと少ないですが、それでも三種類の魔法による行動パターンの総数は極めて多いです。\nしかし、足し算の結果は順序を入れ替えても変わらないため、例えば「竹X に延長魔法→竹Y に延長魔法\n→竹X, Y に合成魔法を使用して竹XY とする→竹XY に延長魔法」という一連の行動は、「竹X, Y に合\n成魔法を使用して竹XY とする→竹XY に延長魔法を3 回」という一連の行動と同等です。\nこのように、「以後合成魔法を使用しないような竹に対してのみ延長・縮小魔法を使用する」ような行動パ\nターンのみを考えると、可能な行動パターンを本質的にすべて列挙することが可能になります。\n具体的には、竹1, 2, . . . , N のそれぞれに対し、その竹の扱いは本質的には次の4 通りに限られます:「長さ\nA の竹の“材料” とする」「長さB の竹の材料とする」「長さC の竹の材料とする」「使わない」。この合計\n4N 通りの竹の扱い方をすべて試行します(最大で48 = 65536 通りで、この数は十分現実的です)。\nただし、“無” に対して延長魔法を使って竹を得ることはできないことに注意します。すなわち、「長さA\nの竹の材料」「長さB の竹の材料」「長さC の竹の材料」がそれぞれ一本以上必要で、これを満たさない竹の\n扱い方は棄却します。\n上記の条件を満たす竹の扱い方に対しては、その場合の「長さA の竹の材料」をすべて合成して竹を得て、\n延長魔法と縮小魔法のうち適切な方を適切な回数だけ使って長さA の竹を得るためのコストを計算します。\n長さB, C の竹についても同様に得るためのコストを計算して合計すれば、その竹の扱い方で達成できる最小\nのコストを計算できます。以上を4N 通りすべての竹の扱い方に対して行って得られた最小値が答えです。\n1 N, A, B, C = map(int, input().split())\n2 l = [int(input()) for i in range(N)]\n3 INF = 10 ** 9\n4\n5 def dfs(cur, a, b, c):\n6\nif cur == N:\n7\nreturn abs(a - A) + abs(b - B) + abs(c - C) - 30 if min(a, b, c) > 0 else INF\n8\nret0 = dfs(cur + 1, a, b, c)\n9\nret1 = dfs(cur + 1, a + l[cur], b, c) + 10\n10\nret2 = dfs(cur + 1, a, b + l[cur], c) + 10\n11\nret3 = dfs(cur + 1, a, b, c + l[cur]) + 10\n12\nreturn min(ret0, ret1, ret2, ret3)\n13\n14 print(dfs(0, 0, 0, 0))\n",
+      "text_sha256": "982d90d8ffbf9889c0e1b81ded89a6baa0723003ef143366bd07057b918ca8d5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc119/abc119_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

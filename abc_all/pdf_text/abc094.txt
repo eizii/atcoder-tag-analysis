@@ -1,0 +1,358 @@
+  AtCoder Beginner Contest 094 / AtCoder Regular Contest 095 解説
+
+
+                                         writer: semiexp, nuip
+
+                                   2018 年4 月14 日
+
+
+
+                        For International Readers: English editorial starts on page ?.
+
+
+A: Cats and Dogs
+
+ 猫の数は，B 匹すべてが犬のときに最小(A 匹) になります．一方，B 匹すべてが猫のときに最大(A + B 匹) になり
+ます．
+
+ よって，X がA 以上A + B 以下かどうか判定すればよいです．
+
+   • C++ による解答例: https://abc094.contest.atcoder.jp/submissions/2343785
+
+   • Python による解答例: https://abc094.contest.atcoder.jp/submissions/2344330
+
+
+
+
+
+                                                   1
+
+B: Toll gates
+
+ ゴールするまでに，元いたマスへ引き返すことをする必要はありません．すなわち，マスX からマスX −1, X −2, . . . , 0
+と進むか，X + 1, X + 2, . . . , N と進むかのいずれかです．この2 パターンそれぞれについて，通る料金所の個数を数え，
+最小値を求めればよいです．
+
+   • C++ による解答例: https://abc094.contest.atcoder.jp/submissions/2343740
+
+   • Python による解答例: https://abc094.contest.atcoder.jp/submissions/2344333
+
+
+
+
+
+                                                   2
+
+C: Many Medians
+
+ 入力をソートしたものをY1 ≤Y2 ≤· · · ≤YN とします．このときBi を考えます．ソートした後にAi がli 番目に現
+れるとします（すなわちYli = Ai が成り立ちます）．Bi はY1, . . . , Yli−1, Yli+1, . . . , YN の中央値であることに注意しま
+す．すると，Y1 ≤· · · ≤Yli−1 ≤Yli+1 ≤· · · ≤YN より，このN −1 個の値のうちN2 番目の値を求めればよいことが
+わかります．これは，li ≤N2 であればYN/2+1，li ≥N2 + 1 であればYN/2 になることが確かめられます．
+
+
+
+
+
+                                                   3
+
+D : Binomial Coeﬃcients
+
+  comb(n, r) を並べた表はパスカルの三角形(https://ja.wikipedia.org/wiki/と呼ばれています。これを観察すると下に
+行くほど（n が大きくなると）値が大きくなることが分かります。また、同じ段なら真ん中よりのほうが値が大きくなる
+ことが分かります。このことから、a1, a2, . . . , an のうち最大のものをn として使い、n 以外でn/2 に最も近いものをr
+として使うと最大になることが予想できます。
+
+ この予想が正しいことを示します。次の事実を使います。
+
+                                          n(n −1)(n −2) . . . (n −r + 1)
+                               comb(n, r) =
+                                                       r(r −1)(r −2) . . . 1
+
+ まず、最初の予想が正しいことを確かめるために次を示します。
+
+主張. r > 0 のとき、comb(n + 1, r) > comb(n, r)
+
+証明. r = 1 のときは明らか。r > 1 とする。
+
+                      comb(n + 1, r) −comb(n, r)
+                  =(n + 1)n(n −1) . . . (n −r + 2) −n(n −1)(n −2) . . . (n −r + 1)
+                                 r(r −1)(r −2) . . . 1              r(r −1)(r −2) . . . 1
+                  =n(n −1) . . . (n −r + 2) ((n + 1) −(n −r + 1))
+                             r(r −1)(r −2) . . . 1
+                  =n(n −1) . . . (n −r + 2) r > 0
+                             r(r −1)(r −2) . . . 1
+
+
+
+ 次に、二番目の予想が正しいことを示すのには、n 個からr 個選ぶのとn 個から選ばないn −r 個を決めるのが同じ
+であることを踏まえると、次を確かめれば十分です。
+
+                                 r + 1 ≤n/2 のとき、comb(n, r + 1) > comb(n, r)
+
+  これはcomb(n,r+1) を計算すれば分かります。
+            comb(n,r)
+
+
+
+
+
+                                                   4
+
+E: Symmetric Grid
+
+ 行の入れ替えの操作と，列の入れ替えの操作は，交換可能であることに注意します．よって，最初に何回か行の入れ
+
+替えの操作のみを行った後，何回か列の入れ替えの操作のみを行うとしてもかまいません．
+
+ まず，行の入れ替えの方法を固定して，その後列の入れ替え操作のみでマス目を点対称的にできるかどうか判定する
+
+ことを考えます．j = 1, 2, . . . , W に対して，点対称的なマス目のj 列目は，W + 1 −j 列目を上下反転したものになっ
+ていることに注意します．特に，W が奇数のとき，(W + 1)/2 列目は上下対称になります．逆に，この条件が成り立て
+ば，マス目は点対称的になります．
+
+ よって，これは次の方法で判定することができます．(実際の実装では，具体的に点対称的にする方法を構成する必要
+はありません）
+
+   • はじめ，すべての列を未使用としておく．盤面も，すべての列を取り出して，空にしておく．
+
+   • 未使用の列がある場合，それを上下反転したような未使用の他の列が存在するか判定する．
+
+      – もし存在すれば，その2 つの列を使用済みにし，まだ埋まっていない最も左，最も右の列にそれぞれ配置する．
+
+      – 存在しない場合，もしW が偶数ならば，点対称的にすることは不可能である．W が奇数ならば，その列が
+     上下対称か判定し，対称ならばその列を(W + 1)/2 列目に置く．すでに(W + 1)/2 列目が埋まっているか，
+     対称でないならば，点対称的にすることは不可能である．
+
+このアルゴリズムはO(HW 2) で動作します．（列をソートするなどの方法で，O(HW log W) にすることもできます）
+ 次に，行の入れ替えの方法を考えます．単純に考えると，行の入れ替えの方法はH! 通りあり，大きすぎます．ここで，
+1, H 行目，2, H −1 行目，. . . のように行同士をペアにして考えると(H が奇数の場合，ペアにならない行が1 行だけ存在
+します），ペア関係が同一な入れ替え方法では，点対称的にできるかどうかは全く同じになることがわかります．なので，行
+
+同士をペアにする異なる方法をすべて試し，それぞれの方法に対しては適当に行の入れ替えをしてから，先の列の入れ替え
+
+による判定を行うことで，この問題を解くことができます．ペアにする方法は，最大で11!! = 11×9×7×5×3×1 = 10395
+通りしかないので，十分この問題を解くことができます．
+
+
+
+
+
+                                                   5
+
+F : Permutation Tree
+
+ 高橋くんの能力は言い換えると次のようになります。
+  max を−1 として、pi の小さい順に次の処理をする。
+
+   • pi ̸= 1 のとき、max とi を辺でつなぐ
+
+   • i > max であれば、max をi で書き換える
+
+ つまり、今までに出てきた添字のうちの最大のところに辺を貼っていく操作になります。添字の最大が更新された頂点だ
+けに注目すると、これらの頂点はpi の小さい順に頂点を並べたパスをなしていることが分かります。一方で、最大が更新
+されていない頂点は、このパスに含まれる頂点と直接つながることが分かります。このようなグラフはcaterpillar(https:
+//en.wikipedia.org/wiki/Caterpillar_tree) と呼ばれています。先程言及したパスのことを今後胴体と呼び、胴体
+に含まれていない頂点のことを脚と呼ぶことにします。
+
+ 以上で、高橋くんの能力で作れるグラフは必ずcaterpillar であることが分かりました。実はcaterpillar であれば必ず
+その木を作れるような順列が存在します。
+
+
+caterpillar 判定
+
+ 与えられた木がcaterpillar であるかどうかを判定する方法は次のとおりです。まず、木の直径を求めます(http://
+www.prefield.com/algorithm/graph/tree_diameter.html)。与えられた木がcaterpillar である場合、この木の直径
+を胴体とみなすことができます。これは脚の長さが1 であることから明らかです。胴体が求まったので、あとは残りの
+頂点が直接胴体に繋がれているか判定するだけです。
+
+
+順列の生成
+
+ 次に、与えられたcaterpillar を作る順列の作り方を考えます。胴体が左右に並んでいて、左から右に添字も値も増加
+しているとします。胴体の頂点の添字を左からb1, . . . , bl とします。
+
+
+
+
+
+ 胴体のうちのある頂点bi に注目します。この頂点から脚がki 本生えているとき、そのki 個の頂点は頂点bi よりも値
+が大きくて、添字が小さい必要があります。この条件の元で辞書順で小さくなるよう気をつけると、次のようにしてで
+
+きる順列が答えの候補になります。
+
+                                              (1, 2, . . . , n) という順列から始める。
+                                     こ分右にずらす。           各i = 1, 2, . . . , l について、左から∑i−1j=0(ki + 1) 番目の数をki
+
+
+caterpillar のとり方と答え
+
+  与えられた木をcaterpillar とみなす時、胴体にあたるパスの取り方は複数通りありえます。上記のcaterpillar の構築
+方法をふまえると、胴体はできるだけ長くなるように取った方がいいことが分かります。胴体の向きが2 通りあります
+が、これは両方試して辞書順で小さい順列が得られたほうを答えとすれば良いです。
+
+
+                                                   6
+
+AtCoder Beginner Contest 094 / AtCoder Regular Contest 095 Editorial
+
+
+                                         writer: semiexp, nuip
+
+                                         April 14th, 2018
+
+
+
+A: Cats and Dogs
+
+   • C++ example: https://abc094.contest.atcoder.jp/submissions/2343785
+
+   • Python example: https://abc094.contest.atcoder.jp/submissions/2344330
+
+
+B: Toll gates
+
+   • C++ example: https://abc094.contest.atcoder.jp/submissions/2343740
+
+   • Python example: https://abc094.contest.atcoder.jp/submissions/2344333
+
+
+C: Many Medians
+
+  Let Y1 ≤Y2 ≤· · · ≤YN be the sorted list of X. Suppose that Yli = Ai. Bi is the median of Y1, . . . , Yli−1, Yli+1, . . . , YN.
+Thus, Bi is the N2 -th value of Y1, . . . , Yli−1, Yli+1, . . . , YN. This is YN/2+1 if li ≤N2 , and YN/2 if li ≥N2 + 1.
+
+
+D : Binomial Coeﬃcients
+
+ We shuold choose the maximum of a1, a2, . . . , an as n because for a ﬁxed r, the function comb(n, r) is monotonously
+increasing. This follows from the following fact:
+
+                                                     If r > 0, comb(n + 1, r) > comb(n, r)
+
+  (because comb(n + 1, r) = comb(n, r) + comb(n, r −1))
+
+  Once we choose n, we should choose r that is closest to n/2. This follows from the following fact:
+
+                                                If r + 1 ≤n/2, comb(n, r + 1) > comb(n, r)
+
+  Compute comb(n,r+1)comb(n,r)  to prove this.
+
+
+
+
+
+                                                   1
+
+E: Symmetric Grid
+
+  Notice that an operation about rows and an operation about columns are commutative. Thus, assume that we ﬁrst
+
+perform operations about rows, and then operations about columns.
+
+  Suppose that we ﬁnished operations about rows. How can we check if we can achieve a goal by operations about
+columns? Notice that, for each j = 1, 2, . . . , W, the j-th column must be the reverse of the W + 1 −j-th column. In
+
+particular, when W is odd, (W + 1)/2 is a palindrome.
+
+  Therefore, we can use the following method do check if we can achieve a goal by operations about columns:
+
+   • Initially, all rows are ”unused”.
+
+   • Choose a particular unused row. Reverse it, and check if it matches with another unused row.
+
+      –  If it matches with another row, mark the two rows as ”used”.
+
+      –  Otherwise, if W  is even, the answer is ”NO”.  If W  is odd and the current row is not a palindrome, the
+
+         answer is ”NO”.  If W  is odd and the current row is a palindrome, we should put it in the (W + 1)/2-th
+
+          row. If this row is already ﬁlled, the answer is ”NO”.
+
+It works in O(HW 2) time (or by binary search you can do it in O(HW log W)）
+
+   If we consider all H! possible orders of rows, it will be too slow. Instead, notice that only the set of pairs ((1, H)-th
+rows, (2, H −1)-th rows, . . . ) matters. (In case H is odd, one row is left unpaired.)
+  Thus, we only need to try all pairings of rows. Since there are at most 11!! = 11 × 9 × 7 × 5 × 3 × 1 = 10395 ways
+
+of pairings, it’s fast enough.
+
+
+
+
+
+                                                   2
+
+F : Permutation Tree
+
+ We can restate the generation of a tree as follows:
+  Let max = −1. Initially, all vertices are painted black. Perform the following operation in the increasing order of pi
+(that is, ﬁrst we choose an i such that pi = 1 and perform the operation, and so on):
+
+   • If pi ̸= 1, add an edge between vertex max and vertex i.
+
+   • If i > max, replace max with i, and color vertex i red.
+
+   It’s clear that when you add an edge, it is always between vertex i (the current vertex) and the most recently painted
+
+red vertex. Also, when we paint a vertex, it is always the current vertex.
+
+  Thus,
+
+   • The red vertices will form a path.
+
+   • A black vertex is a leaf, and it’s incident to a red vertex.
+
+  Such graphs are called caterpillar(https://en.wikipedia.org/wiki/Caterpillar_tree). From now on, we call
+red vertices ”body”, and black vertices ”feet”. Also, we call one end of the body ”head”, and the other end ”tail”.
+The head corresponds to the vertex with pi = 1.
+  Therefore, if the given tree is not a caterpillar, we should print ”-1”. Otherwise, it turns out that the solution always
+
+exists, as we describe later.
+
+
+Check if the given tree is a caterpillar
+
+  Find the diameter of the tree. The tree is a caterpillar if and only if it forms the body (i.e., all vertices are either
+
+in the diameter or adjacent to one vertex in the diameter).
+
+
+Find the lexicographically smallest permutation that generates a given caterpillar
+
+  Let’s ﬁx a caterpillar. How can we ﬁnd a permutation that generates this caterpillar? Let b1, . . . , bl be the vertices
+in the body in the order from head to tail. Let ki be the number of feet that grow from bi.
+
+
+
+
+
+  For example, in the picture above, {ki} = {0, 0, 2, 0}.
+  For each foot, the index of its parent must be greater than its index. The value of its parent must be less than its
+
+value. The lexicographically smallest permutation that satisﬁes these conditions is the following permutation:
+
+       Consider a permutation (1, 2, . . . , n). For each i = 1, 2, . . . , l in this order, do the following: move the
+               ∑i−1
+                       j=0(ki + 1)-th (from left, 1-indexed) element to the right by ki positions.
+
+  For example, we get 1, 2, 4, 5, 3, 6 for the example above.
+
+   It’s easy to see that this permutation generates a desired caterpillar.
+
+
+                                                   3
+
+How to choose a head and a tail of a caterpillar
+
+  There are multiple ways to choose a head and a tail of a caterpillar. From the construction above, it’s clear that
+
+we shuold maximize the length of the body, so we should choose a diameter and the head and the tail should be two
+
+ends of the diameter. There are two ways to orient the body: we should try both ways.
+
+
+
+
+
+                                                   4

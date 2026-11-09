@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc283_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc283/editorial/5441",
+      "text": "次のようなアルゴリズムを考えます。\n整数\n\\(c\\)\nを\n\\(c = 0\\)\n、集合\n\\(X_0,X_1,X_2, \\ldots X_{|S|}\\)\nを空集合で初期化する。\n\\(i = 1,2, \\ldots |S|\\)\nについてこの順に以下の操作を行う。\n\\(S_i = \\)\n(\nのとき、\n\\(c\\)\nの値を\n\\(1\\)\n増やす。\n\\(S_i = \\)\n)\nのとき、\n\\(X_c\\)\nを空にして\n\\(c\\)\nの値を\n\\(1\\)\n減らす。\n\\(S_i\\)\nが英小文字のとき、\n\\(X_c \\gets X_c \\cup \\{S_i\\}\\)\nとする。ただし、\n\\(S_i \\in \\displaystyle \\bigcup_{t} X_t\\)\nならば高橋君は気を失うと判定する。\n以下、このアルゴリズムの正当性を示します。\n\\(S_i =\\)\n)\nで、\n\\(j\\)\nが\n\\(S\\)\nの\n\\(j\\)\n番目から\n\\(i\\)\n番目までの文字からなる文字列が良い文字列となる最大の整数とします。\nこのとき\n\\(i\\)\nに関する操作は 「\n\\(c\\)\nを\n\\(i\\)\nに関する操作を行う直前の値とし、（これは\n\\(j\\)\nに関する操作を行った直後の\n\\(c\\)\nの値に等しい）\n\\(d \\geq c\\)\nを満たすすべての\n\\(d\\)\nについて\n\\(X_d\\)\nを空にする」ことにあたりますが、実際には\n\\(d > c\\)\nのときは\n\\(X_d\\)\nは空集合です。\n\\(\\displaystyle \\bigcup_{t} X_t\\)\nは高々\n\\(26\\)\n元集合なので、上のアルゴリズムは十分高速に動作し、以上よりこの問題を解くことができました。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tint n = s.size();\n\tvector<vector<char>> v(n);\n\tvector<bool> used(256);\n\tint now = 0;\n\tfor (int i = 0; i < n; i++) {\n\t\tif (s[i] == '(') now++;\n\t\telse if (s[i] == ')') {\n\t\t\tfor (char c : v[now]) used[c] = false;\n\t\t\tv[now].clear();\n\t\t\tnow--;\n\t\t}\n\t\telse {\n\t\t\tif (used[s[i]]) {\n\t\t\t\tcout << \"No\\n\";\n\t\t\t\treturn 0;\n\t\t\t}\n\t\t\tv[now].push_back(s[i]);\n\t\t\tused[s[i]] = true;\n\t\t}\n\t}\n\tcout << \"Yes\\n\";\n}"
+      ],
+      "text_sha256": "d09467cdf8af606dd74858867a5ea316ce225e0336db2b4312a34efe45db99be",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc283/abc283_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc283/editorial/5454",
+      "text": "この解法は公式解説と同一ですが、もう少し直感的に分かる解法を目指したものです。\n今回の問題を、愚直にシミュレーションして解くことを考えます。\nまず、問題文中に出てくる箱は高々一つのボールを入れるものなので、これは箱に入っているボールの集合\n\\(X\\)\nを管理することで求められます。\nシミュレーションを行うと、以下のように操作を行うことになります。\n\\(S_i\\)\nが\n(\nのとき、何もしない。\n\\(S_i\\)\nが英小文字の時、\n\\(X\\)\nに既に\n\\(S_i\\)\nが含まれているならば\nNo\nを出力し、そうでないならば\n\\(X\\)\nに\n\\(S_i\\)\nを追加する。\n\\(S_i\\)\nが\n)\nの時、\n(\nを発見するまで文字を遡り、出てきた文字\n\\(S_j\\)\nを全て\n\\(X\\)\nから削除する。\nその後、対応する\n(…)\nを削除する。\nこのアルゴリズムの計算量は、どの文字についても最初に参照された時と削除される時の2回しか参照されないため\n\\(O(|S|)\\)\nとなります。\nただ、削除処理を書くのは少し面倒に感じます。\nそこで、削除を実質的に行ったように振舞う構造を考えます。\nまず、集合のスタック\n\\(Y\\)\nを用意します。また、\n\\(Y_{\\mathrm top}\\)\nをスタックの一番上に入っている集合とします。\nそして、以下の様に処理を行います。\n\\(S_i\\)\nが\n(\nのとき、\n\\(Y\\)\nに空集合を追加する。\n\\(S_i\\)\nが英小文字の時、\n\\(X\\)\nに既に\n\\(S_i\\)\nが含まれているならば\nNo\nを出力し、そうでないならば\n\\(X\\)\nと\n\\(Y_{\\mathrm top}\\)\nに\n\\(S_i\\)\nを追加する。\n\\(S_i\\)\nが\n)\nの時、\n\\(X\\)\nから\n\\(Y_{\\mathrm top}\\)\nに含まれる文字を取り除く。その後、\n\\(Y\\)\nの先頭を除去する。\nこれは括弧列をスタックを用いて処理を行う(括弧列を根付き木とみなした時、DFSを用いて解くことに相当します)典型で、やっていることは前者のアルゴリズムと同じになります。\nなお、この手法では\n\\(26\\)\n元集合である性質を一切使っていないため、もし英小文字より多くの文字を扱うことになっても計算量はほぼ変わりません。",
+      "codes": [],
+      "text_sha256": "764fc637e095c462e6cc194f8b87c5d6246a7a74b08695df4599da879a0597b8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc283/abc283_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

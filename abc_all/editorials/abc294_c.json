@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc294_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc294/editorial/5989",
+      "text": "\\(C=(C _ 1,C _ 2,\\ldots,C _ {N+M})\\) は、列を連結してソートすることで \\(O((N+M)\\log(N+M))\\) 時間で求めることができます。\nこれで十分高速ですが、より高速に \\(C\\) を求めるアルゴリズムもあります。\n次のアルゴリズムを用いると \\(C\\) を \\(O(N+M)\\) 時間で求めることができます。\nはじめ \\(i=j=k=1\\) として、\\(i\\leq N+M\\) である限り次を繰り返す。\n\\(k>M\\) であるか、\\(j\\leq N\\) かつ \\(A _ j\\leq B _ k\\) のとき、\n\\(C _ i=A _ j\\) とし、\\(i,j\\) を \\(1\\) 増やす。\nそうでないとき、\n\\(C _ i=B _ k\\) とし、\\(i,k\\) を \\(1\\) 増やす。\nC++ では、\nstd::merge\n関数でこれを行うことができます。\n\\(C\\) が具体的に得られたら、（必要ならば適切な前計算ののち）\\(C _ i\\) の値から \\(i\\) を計算することが \\(O(\\log(N+M))\\) 時間や expected \\(O(1)\\) 時間で可能です。\n前者は \\(C\\) に対する二分探索や（平衡二分探索木などによる）連想配列、後者は（ハッシュマップによる）連想配列で実現できます。\nよって、この問題を \\(O((N+M)\\log(N+M))\\) 時間や expected \\(O(N+M)\\) 時間で解くことができました。\nソート列のマージの際に答えを計算したり、適切な情報と組にしてマージすることで worst \\(O(N+M)\\) 時間で解くこともできます。\n実装例は以下のようになります。\npython による解法\nC++ による \\(O((N+M)\\log(N+M))\\) 時間の解法\nC++ による worst \\(O(N+M)\\) 時間の解法",
+      "codes": [
+        "N, M = map(int, input().split())\nA = list(map(int, input().split()))\nB = list(map(int, input().split()))\n\nC = sorted(A + B)\n\nget_index = {c: i + 1 for i, c in enumerate(C)}\n\nfor a in A:\n    print(get_index[a])\n\nfor b in B:\n    print(get_index[b])",
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n\n    unsigned N, M;\n    cin >> N >> M;\n\n    vector<unsigned> A(N), B(M);\n    for (auto &&a : A) cin >> a;\n    for (auto &&b : B) cin >> b;\n\n    vector<unsigned> C(N + M);\n    merge(begin(A), end(A), begin(B), end(B), begin(C));\n\n    for (const auto a : A)\n        cout << lower_bound(begin(C), end(C), a) - begin(C) + 1 << \" \";\n    cout << endl;\n\n    for (const auto b : B)\n        cout << lower_bound(begin(C), end(C), b) - begin(C) + 1 << \" \";\n    cout << endl;\n\n    return 0;\n}",
+        "#include <iostream>\n#include <vector>\n#include <utility>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n\n    unsigned N, M;\n    cin >> N >> M;\n\n    vector<pair<unsigned, unsigned>> A(N), B(M);\n    for (auto&&[a, _] : A) cin >> a;\n    for (auto&&[b, _] : B) cin >> b;\n    for (unsigned i{}; i < N; ++i) A[i].second = i;\n    for (unsigned i{}; i < M; ++i) B[i].second = i + N;\n\n    vector<pair<unsigned, unsigned>> C(N + M);\n    merge(begin(A), end(A), begin(B), end(B), begin(C));\n\n    vector<unsigned> ans(N + M);\n    for (unsigned i{}; i < N + M; ++i) ans[C[i].second] = i;\n\n    for (unsigned i{}; i < N + M; ++i) cout << ans[i] + 1 << \" \";\n\n    return 0;\n}"
+      ],
+      "text_sha256": "da0049a750335c8e01d04289e163d45fb0140d6f86c330ede34bd3ac920267ad",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc294/abc294_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

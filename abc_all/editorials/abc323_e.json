@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc323_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc323/editorial/7357",
+      "text": "実数\n\\(t\\)\nについて、時刻\n\\(0\\)\nから\n\\(t\\)\n秒後の時刻を時刻\n\\(t\\)\nとします。\n各非負整数.\n\\(t=0,1,\\ldots, X\\)\nについて、時刻\n\\(t\\)\nに曲が切り替わる(新しく曲が選ばれ再生され始める)確率を\n\\(p[t]\\)\nとします。\n時刻\n\\((X+0.5)\\)\nにプレイリストの\n\\(1\\)\n番目の曲が再生されている事象のうち、その曲が再生され始めた時刻が時刻\n\\(X, (X-1),\\ldots, (X-T_1+1)\\)\nである事象は互いに排反であり、また、各事象はこれらのうちどれか\n\\(1\\)\nつをみたします。よって、各\n\\(t=X, (X-1),\\ldots, (X-T_1+1)\\)\nについて、「時刻\n\\(t\\)\nに\n\\(1\\)\n番目の曲が再生され始めた確率」を足し合わせれば良いことがわかります。(該当時刻に\n\\(1\\)\n番目の曲が再生され始めた場合、必ず時刻\n\\((X+0.5)\\)\nにその曲が流れている事に注意してください。)全ての曲が等確率で選ばれることから、時刻\n\\(t\\)\nに\n\\(1\\)\n番目の曲が再生され始めた確率は、(時刻\n\\(t\\)\nに\n\\(1\\)\n番目の曲が再生され始めた確率)\n\\(\\times\\frac{1}{N}\\)\nとなります。\nよって、答えは、\n\\(T_1\\leq X+1\\)\nならば、\n\\[\n\\frac{1}{N}(p[X-T_1+1]+p[X-T_1+2]+\\cdots+p[X]), \n\\]\n\\(X\\leq T_1\\)\nならば\n\\[\n\\frac{1}{N}(p[0]+p[X-T_1+2]+\\cdots+p[X])\n\\]\nとなります。\nよって、各\n\\(p[i]\\)\nを求めれば良いです。\nこれは動的計画法によって求めることができます。\nまず、\n\\(p[0]=1\\)\nです。\n\\(t\\geq 1\\)\nについて、時刻\n\\(t\\)\nの直前まで再生され始めていた曲によって分類することで、\n\\(p[t]\\)\nは、\n\\(k=1,2,\\ldots,N\\)\nについて、「ちょうど時刻\n\\(t-T_k\\)\nに\n\\(k\\)\n番目の曲が再生され始めた確率」の和として求めることができることがわかります。先と同じ議論からこの確率は\n\\(t-T_k<0\\)\nならば\n\\(0\\)\n,\n\\(t-T_k\\geq 0\\)\nならば\n\\(\\frac{1}{N}p[t-T_k]\\)\nとなります。よって、便宜上\n\\(t<0\\)\nに対して\n\\(p[t]=0\\)\nとすれば、\n\\(p[t]=\\frac{1}{N}(p[t-T_1]+p[t-T_2]+\\cdots+p[t-T_N])\\)\nとして求めることができます。\n各\n\\(t\\)\nに対する\n\\(p[t]\\)\nの計算に\n\\(O(N)\\)\nなので\n\\(t=1,2,\\ldots,X\\)\nに対して全体で\n\\(O(NX)\\)\n, そこから答えの計算に\n\\(O(\\min(T_1,X))\\)\nなので、全体で\n\\(O(NX)\\)\nであり、十分高速にこの問題を解くことができました。modint 等を用いる場合は、法とする整数を\n\\(P\\)\n(今回は\n\\(P=998244353\\)\n) として\n\\(\\frac{1}{N}\\)\nをかける操作に\n\\(O(\\log P)\\)\nかかるので更新のたびに毎回行うと定数倍が重くなる事に注意してください。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\nusing namespace std;\nusing namespace atcoder;\n\nusing mint = modint998244353;\n\nint main(void) {\n\tint n,x;\n\tmint r,ans;\n\t\n\tcin>>n>>x;\n\tvector<int>t(n);\n\tfor(int i=0;i<n;i++)cin>>t[i];\n\n\tvector<mint>p(x+1);\n\tr=((mint)1)/((mint)n);\n\tp[0]=1;\n\tif(t[0]>x)ans+=p[0]/((mint)n);\n\tfor(int i=1;i<=x;i++){\n\t\tfor(int j=0;j<n;j++)if(t[j]<=i)p[i]+=p[i-t[j]];\n\t\tp[i]*=r;\n\t\tif(i+t[0]>x)ans+=p[i]*r;\n\t}\n\n\tcout<<ans.val()<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "deeac5b12134fad823edc0c2aa6d5d5eac433cbdda18380cc489ddf409601985",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc323/abc323_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc323/editorial/7384",
+      "text": "（形式的べき級数の変数\n\\(x\\)\nと入力の\n\\(X\\)\nが紛らわしいので、入力の\n\\(X\\)\nを\n\\(M\\)\nで表します。）\n考え方は\n公式解説\nと同様ですが、形式的べき級数を用いて表すと見通しが良くなり、計算量も改善できます。\n時刻\n\\(t\\)\n秒に曲が切り替わる確率\n\\(p_t\\)\nを\n\\(x^t\\)\nの係数とするべき級数は、\n\\(1\\)\n回の再生による変動\n\\(f=\\displaystyle\\frac{1}{N}\\sum_{i=1}^{N}\\ x^{T_i}\\)\nを用いて、\n\\(\\displaystyle\\sum_{k=0}^{\\infty}f^k\\)\nと表せます。\n\\(1\\)\n番目の曲が\n\\(T_1\\)\n秒継続することも考慮すると、求める確率は\n\\[\n[x^M] \\displaystyle\\frac{1}{N}(1+x+\\cdots+x^{T_1-1})\\sum_{k=0}^{\\infty}f^k\n=[x^M] \\displaystyle\\frac{1-x^{T_1}}{N(1-x)}\\frac{1}{1-f}\n\\]\nと表せます。これは\n\\(M\\)\n次までの形式的べき級数の乗除ができればよく、入力と合わせて\n\\(O(N+M\\log M)\\)\nで計算できます。\nAC コード例\n（PyPy 3）",
+      "codes": [],
+      "text_sha256": "6a526bdcd74c9fc40f8789d01546a62e93dee72c03f27b9f79ac057be0768d57",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc323/abc323_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

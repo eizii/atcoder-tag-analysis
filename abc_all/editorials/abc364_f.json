@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc364_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc364/editorial/10546",
+      "text": "この問題ではグラフの辺の数が最大で\n\\(NQ\\)\n本となるため、一般の最小全域木を求めるアルゴリズムをそのまま適用することができません。\nグラフの形状が特殊であることを利用して、Kruskal 法をベースに高速化を行うことを考えます。\nまず辺のコストでソートを行い、適切に頂点の番号を付け替えることで\n\\(C_1 \\leq C_2 \\leq \\ldots \\leq C_Q\\)\nの場合に帰着します（実装上では頂点の番号の付け替えは不要になることが多いかもしれません）。\nKruskal 法のアルゴリズムを考えると、最小全域木は以下のような手順で求められることがわかります。\n\\(N + Q\\)\n頂点の辺がないグラフを用意する。\n\\(i = 1, 2, \\ldots ,Q\\)\nの順に以下のような操作を行う。\n\\(j = L_i, L_i + 1, \\ldots, R_i\\)\nの順に頂点\n\\(N + i\\)\nと頂点\n\\(j\\)\nが連結でないとき、またそのときに限り頂点\n\\(N + i\\)\nと頂点\n\\(j\\)\nの間にコスト\n\\(C_i\\)\nの辺を追加する。\nこのままではまだ条件を扱いにくいですが、\n\\(j =L_i\\)\nのときは必ず頂点\n\\(N + i\\)\nと頂点\n\\(j\\)\nは連結でなく、\n\\(j > L_i\\)\nのときは頂点\n\\(N + i\\)\nと頂点\n\\(j - 1\\)\nは連結であるため頂点\n\\(N + i\\)\nと頂点\n\\(j\\)\nの連結性は頂点\n\\(j - 1\\)\nと頂点\n\\(j\\)\nの連結性と同値であることから、連結判定は番号が隣り合った頂点\n\\(j -1, j\\)\nにのみ行うことができればよいことがわかります。また、グラフが非連結であることと頂点\n\\(j - 1\\)\nと頂点\n\\(j\\)\nが非連結であるような\n\\(1\\)\n以上\n\\(N\\)\n未満の整数\n\\(j\\)\nが存在することが同値です。\nこれを愚直に実装すると時間計算量は\n\\(\\Theta(NQ + Q\\log Q)\\)\nのままですが、上記のような単純な設定に帰着したことで様々な高速化の方法があります。\n以下高速化の方法の例を 3 つ紹介します。\n(1) set (やそれに類するデータ構造)を用いる\nC++ における\nstd::set\nやそれに類するデータ構造で\n\\(1 \\leq j < N\\)\nであって頂点\n\\(j\\)\nと\n\\(j + 1\\)\nが連結でないものの集合を保持しておき、\n\\(L_i, L_i + 1, \\ldots, R_i - 1\\)\nのうち set に入っているものを順に削除すればよいです。各要素が set に入っているかを愚直に判定するとやはり TLE となりますが、\nstd::set\nにおける\nlower_bound\nのような\n\\(x\\)\n以上の最小の要素を高速に取得できる関数を用いれば全体として要素の削除は高々\n\\(N - 1\\)\n回しか起きないことから時間計算量は\n\\(O((N + Q) \\log N)\\)\nで評価でき、十分高速です。\n(2) lazy segment tree を用いる\n区間和取得 / 区間を\n\\(0\\)\nで更新する lazy segment tree を用いるという方法もあります。lazy segment tree の\n\\(j\\)\n番目の要素を頂点\n\\(j\\)\nと頂点\n\\(j + 1\\)\nが連結のとき\n\\(0\\)\n、そうでないとき\n\\(1\\)\nとなるようにします。長さ\n\\(N - 1\\)\nの lazy segment tree を各要素\n\\(1\\)\nで初期化し、\n\\([L_i, R_i)\\)\nの区間和を取得することが頂点\n\\(N + i\\)\nと頂点\n\\(L_i + 1, L_i + 2, \\ldots, R_i\\)\nを結ぶ辺の数に対応します。そして、辺を張ることが\n\\([L_i, R_i)\\)\nを\n\\(0\\)\nに更新することに対応します。\n(3) bit 演算を用いる\n配列を用いて順に確認していく方法は TLE してしまいますが、bit 演算を用いればほぼ同じ考えにより高速化ができます。\nstd::bitset\nなどを用いて\n\\(j, j + 1\\)\nの連結性を管理し、(1) のときと同様の考えで\n_Find_next\nのような\n\\(x\\)\nの次の\n\\(1\\)\nの位置を返すような関数を用いることで十分高速に答えを求めることができます。",
+      "codes": [],
+      "text_sha256": "55453b4a09a3611642d647f2f19e52b802fa2a4040f8ec7da87630f86980fa2b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc364/abc364_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc364/editorial/10564",
+      "text": "イベントソートで解くことができます。\nまず、問題文を読みかえて「頂点が\n\\(N\\)\n個で、\n\\((l_i, l_{i}+1),\\dots ,(r_{i}-1, r_i)\\)\nにコスト\n\\(c_i\\)\nの辺が張られる」と考えても良いです (答えが\n\\(\\sum c_i\\)\nだけずれることに注意)。\nクラスカル法を考えます。\n頂点\n\\(N+i\\)\nに関する辺を一気に処理することを考えましょう。\n各処理の終了時、頂点\n\\(1,\\dots,N\\)\n上の連結成分は区間を成します (区間を一気に連結にする処理なので、それはそう)。\n一回の処理によって、頂点\n\\(N+i\\)\nからコスト\n\\(c_i\\)\nの辺が「\n\\(l_i\\)\nから\n\\(r_i\\)\nに含まれる連結成分の個数」本貼られます。そしてその結果\n\\({l_i},\\dots , {r_i}\\)\n(と\n\\(N+i\\)\n) が連結になります。ところでこれは 「\n\\({l_i},\\dots ,{r_i}\\)\nの隣り合う頂点で連結でないもの同士の間にコスト\n\\(c_i\\)\nの辺を貼って、ついでに適当なところと\n\\(N+i\\)\nをコスト\n\\(c_i\\)\nの辺で繋げる」と置き換えても、コストも連結性も変わりません。よって、隣り合う頂点同士にコスト\n\\(c_i\\)\nの辺が張られていると考えて良いです。頂点\n\\(N+i\\)\nを繋げるのに必要なコストは\n\\(c_i\\)\nなので、頂点\n\\(N+i\\)\nを削除して答えに最初から\n\\(c_i\\)\nを加えても問題ありません。\nこの問題は「\n\\((j, j+1)\\)\nの間に張られている辺のコストの多重集合」を multiset や map などで管理して、\n\\(j\\)\nを\n\\(1\\)\nから\n\\(n-1\\)\nまで増やしながら「\n\\(l_i\\)\nで\n\\(c_i\\)\nを追加する」と「\n\\(r_i\\)\nで\n\\(c_i\\)\nを削除する」というイベントを行い、最小値を見ていけば答えが出せます。\n愚直に実装すると計算量は\n\\(O((N+Q)\\log Q)\\)\nです。さらにイベントが起こらない区間を一気に処理すれば\n\\(O(Q\\log Q)\\)\nになって\n\\(N<10^9\\)\nとかでも間に合います。\n実装例(C++)：",
+      "codes": [
+        "#include \"bits/stdc++.h\"\nusing namespace std;\n\nint main() {\n    int n, q;\n    cin >> n >> q;\n    vector<vector<int>> events;\n    long long ans = 0;\n\n    for (int i = 0;i < q;i++) {\n        int l, r, c;\n        cin >> l >> r >> c;\n        l--, r--;\n        events.push_back({ l, c, 1 });\n        events.push_back({ r, c, 2 });\n        ans += c;\n    }\n    sort(events.begin(), events.end());\n\n    int idx = 0;\n    multiset<int> st;\n    for (int i = 0;i < n - 1;i++) {\n        while (idx < events.size() && events[idx][0] == i) {\n            if (events[idx][2] == 1) st.insert(events[idx][1]);\n            else st.erase(st.find(events[idx][1]));\n            idx++;\n        }\n        if (st.empty()) {\n            cout << -1 << endl;\n            return 0;\n        }\n        ans += *st.begin();\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "5783835217f50db4f3713405ba8477be4fed7d8f13e8e48afab697fbacc71c50",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc364/abc364_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc364/editorial/10551",
+      "text": "Union-Find アルゴリズムによる解法です。\n\\(C_1 \\leq C_2 \\leq \\dots \\leq C_Q\\)\nを（入力をソートすることで）仮定します。クラスカル法をもとに考えると、以下の手順で答えが求まります。\n集合のリスト\n\\(\\{1\\}, \\{2\\}, \\dots, \\{N\\}\\)\nを用意し、\n\\(\\text{ans} := 0\\)\nと初期化する。\n\\(i = 1, 2, \\dots, Q\\)\nの順に以下を行う。\n\\(L_i\\)\n以上\n\\(R_i\\)\n以下の要素をひとつ以上持つ集合をすべて列挙し、そのような集合の個数の\n\\(C_i\\)\n倍を\n\\(\\text{ans}\\)\nに加える。そして、それらの集合をひとつに併合する。\nすべての集合がひとつに併合されていれば\n\\(\\text{ans}\\)\n、されていなければ\n\\(-1\\)\nを出力する。\nこれは、Union-Find アルゴリズムを用いた上で、各連結成分の最大の頂点番号を保持すると効率的に行えます。時間計算量はソートを含め\n\\(O(Q(\\log Q + \\alpha(N)))\\)\nです。\n実装例（Python）",
+      "codes": [
+        "from atcoder.dsu import DSU\n\nN, Q = map(int, input().split())\nCLR = []\nfor i in range(Q):\n    L, R, C = map(int, input().split())\n    CLR.append((C, L - 1, R - 1))\n\nd = DSU(N)\nr = [i for i in range(N)]\nans = 0\nfor C, L, R in sorted(CLR):\n    p = L\n    while p <= R:\n        p = r[d.leader(p)]\n        ans += C\n        if p + 1 <= R:\n            nr = r[d.leader(p + 1)]\n            d.merge(p, p + 1)\n            r[d.leader(p)] = nr\n        p += 1\nprint(ans if d.size(0) == N else -1)"
+      ],
+      "text_sha256": "60178d3d1844ff352a717ea29bfaa25506b6da380b6f3f48654479e2ba796e70",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc364/abc364_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

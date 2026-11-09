@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc463_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc463/editorial/21942",
+      "text": "まず、答えが \\(-1\\) かどうかを判定することを考えます。\nこれは、いわゆる\n区間スケジューリング\nの問題になり、次のようなアルゴリズムで解けることが知られています。\nはじめ、選んだ布の列を空列 \\(()\\) とする。\nすべての布を \\(R _ i\\) の昇順に並べ、順に以下を行う。\n最後に選んだ布 \\(\\lbrack L _ j, R _ j\\rbrack\\) に対して \\(R _ j\\lt L _ i\\) が成り立つならば、布 \\(\\lbrack L _ i,R _ i\\rbrack\\) を選ぶ。\n選ばれた列の長さが \\(K\\) 未満なら、答えは \\(-1\\) 。\nスコアが \\(x\\) 以上であるように布を選べるとき、選んだ布の右端から数直線の正の方向に \\(x\\) 進むまでに他の選んだ布はありません。\nよって、スコアが \\(x\\) 以上であるように布を選べることは以下と同値です。\n任意の正の実数 \\(\\varepsilon\\) に対して、それぞれの布が覆う区間を \\(\\lbrack L _ i,R _ i+x-\\varepsilon\\rbrack\\) とした問題の答えが \\(-1\\) でない。\nこれを利用して二分探索でこの問題を解くことができます。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <ranges>\n\nint main() {\n    using namespace std;\n    unsigned N, K;\n    cin >> N >> K;\n\n    vector<pair<unsigned, unsigned>> cloth(N);\n    for (auto&& [L, R] : cloth)\n        cin >> L >> R;\n    \n    // 右端でソート\n    ranges::sort(cloth, {}, [](const auto& p){return p.second;});\n\n    // 二分探索で布を伸ばせる限界を見つける\n    unsigned ans{*ranges::partition_point(views::iota(0U, 1000000000U), [K, &cloth](const unsigned x){\n        unsigned chosen{}, last{};\n        // 区間スケジューリングで布をなるべく多く選ぶ\n        for (const auto& [L, R] : cloth) {\n            if (last <= L) {\n                ++chosen;\n                last = R + x + 1; // 右に x だけ伸ばしておく\n            }\n        }\n        // K 枚以上選べたら OK\n        return chosen >= K;\n    })};\n    \n    // 1 以上伸ばせるなら\n    if (ans) {\n        cout << ans << endl; // それが答え\n    } else { // 伸ばせないなら\n        cout << -1 << endl; // -1\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "d69b0c0b79bc289250ab2719dfa7c00cdc0aa120cb7d33e55bd7977348c87484",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc463/abc463_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

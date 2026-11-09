@@ -1,0 +1,72 @@
+{
+  "problem_id": "abc284_f",
+  "title": "ABCBAC",
+  "contests": [
+    {
+      "contest_id": "abc284",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1575,
+  "raw_difficulty": 1575,
+  "contest_id": "abc284",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc284/tasks/abc284_f",
+  "statement": "配点 : 500 点 問題文 長さ N の文字列 S および整数 i\\ (0\\leq i\\leq N) に対して、 f_i(S) を、 S の先頭 i 文字 S を反転した文字列 S の末尾 N-i 文字 をこの順に連結した文字列と定義します。\n例えば、 S= abc 、 i=2 のとき、 f_i(S)= abcbac です。 長さ 2N の文字列 T が与えられます。 f_i(S)=T を満たす長さ N の文字列 S と整数 i\\ (0\\leq i\\leq N) の組を 1 つ見つけてください。\nそのような S,i の組が存在しない場合は、それを報告してください。 制約 1\\leq N \\leq 10^6 N は整数 T は英小文字からなる長さ 2N の文字列 入力 入力は以下の形式で標準入力から与えられる。 N T 出力 条件を満たす S,i の組が存在しないならば、 -1 と出力せよ。\n存在するならば、 S,i を改行区切りで出力せよ。\n条件を満たす S,i の組が複数存在する場合は、そのどれを出力しても良い。 入力例 1 3\nabcbac 出力例 1 abc\n2 問題文中に書いた通り、 S= abc 、 i=2 とすると f_i(S)= abcbac となって T に一致するため、 abc と 2 を出力します。 入力例 2 4\nabababab 出力例 2 abab\n1 S= abab 、 i=3 としても条件を満たします。 入力例 3 3\nagccga 出力例 3 cga\n0 S= agc 、 i=3 としても条件を満たします。 入力例 4 4\natcodeer 出力例 4 -1 条件を満たす S,i の組が存在しない場合は -1 を出力してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の文字列 S および整数 i\\ (0\\leq i\\leq N) に対して、 f_i(S) を、 S の先頭 i 文字 S を反転した文字列 S の末尾 N-i 文字 をこの順に連結した文字列と定義します。\n例えば、 S= abc 、 i=2 のとき、 f_i(S)= abcbac です。 長さ 2N の文字列 T が与えられます。 f_i(S)=T を満たす長さ N の文字列 S と整数 i\\ (0\\leq i\\leq N) の組を 1 つ見つけてください。\nそのような S,i の組が存在しない場合は、それを報告してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N \\leq 10^6 N は整数 T は英小文字からなる長さ 2N の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N T"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 条件を満たす S,i の組が存在しないならば、 -1 と出力せよ。\n存在するならば、 S,i を改行区切りで出力せよ。\n条件を満たす S,i の組が複数存在する場合は、そのどれを出力しても良い。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\nabcbac"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 abc\n2 問題文中に書いた通り、 S= abc 、 i=2 とすると f_i(S)= abcbac となって T に一致するため、 abc と 2 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4\nabababab"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 abab\n1 S= abab 、 i=3 としても条件を満たします。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 3\nagccga"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 cga\n0 S= agc 、 i=3 としても条件を満たします。"
+    },
+    {
+      "heading": "入力例 4",
+      "text": "入力例 4 4\natcodeer"
+    },
+    {
+      "heading": "出力例 4",
+      "text": "出力例 4 -1 条件を満たす S,i の組が存在しない場合は -1 を出力してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc284/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:05.547978+00:00",
+  "statement_sha256": "1b62d9c9611f1f9908c53e080c090637315153fb33c46d816dbf73d58091ac0b",
+  "editorials": []
+}

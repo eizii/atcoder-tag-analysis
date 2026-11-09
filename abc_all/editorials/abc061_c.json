@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc061_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc061/editorial.pdf",
+      "text": "C:  Big Array\n\n  ·ͣɺ͜ͷ໰୊ͰٻΊ͍ͨ౴͑͸ɺೖྗʹΑͬͯੜ੒͞ΕΔ഑ྻͷখ͍͞ํ͔Β K ൪໨ͷ஋Ͱ͢ɻѹॖ͞Εͨ\n ೖྗΛల։ͯ͠ݩͷ഑ྻΛٻ ΊΔͱɺͦͷཁૉ਺͸࠷େͰ 1010 ͱͳΔͨΊ MLE ͱͳΓ·͢ɻ\n  ͦ͜ͰɺೖྗΛల։ͤͣʹ K ൪໨ͷ஋ΛٻΊΔํ๏Λߟ͑·͢ɻ͜͜Ͱ͸ɺόέπιʔτΛ༻͍ͨղ๏ʹ͍ͭͯ\n આ໌͠·͢ɻ͜ͷղ๏Ͱ͸ɺ഑ྻͷ஋Ͱ͋Δ ai ͷൣғ͸ 1 ͔Β 105 ·Ͱͱখ͍͜͞ͱʹ஫໨͠·͢ɻ·ͣɺ௕͞ 105\n ͷ഑ྻnum Λ༻ҙ͠ɺશͯͷཁૉΛ 0 ʹॳظԽ͠·͢ɻ࣍ʹɺϧʔϓΛ࢖ͬͯ num[ai] ʹ biΛՃࢉ͠·͢ɻ࠷ޙʹ\n ɺϧʔϓΛ༻͍ͯ 1 ͔Β 105 ·Ͱௐ΂͍͖ͯɺK ൪໨ͷ஋ΛٻΊ·͢ɻ͜ͷղ๏ͷ࣌ؒܭࢉྔ͸ O(N + max Ai)\n ͱͳΔͨΊ ؒ ʹ߹͍·͢ɻ\n  ·ͨɺ഑ྻͷ୅ΘΓʹ pair Λ༻͍ͨιʔτͰ΋ಉ͡Α͏ʹͰղ͘͜ͱ͕Ͱ͖·͢ɻͦͷ৔ ߹ ͷ ࣌ؒܭࢉ ྔ͸\n  O(N log N) ͱͳΔͨΊؒʹ߹͍·͢ɻͳ͓ɺల։ޙͷ഑ྻͷ࠷େཁૉ਺͸ 1010 Ͱ͋ΔͨΊɺ32bit ੔਺ܕʹΑΔ\n Φʔόʔϑϩʔʹ஫ҙ͍ͯͩ͘͠͞ɻ\n\n\n  C++ͷίʔυྫ(όέπιʔτ)\n\n\n\n\n\n                                                  2\n\f\n 1 using ll = long long;\n 2 const int AMAX = 100000;\n\n 3 ll cnt[AMAX + 1];\n\n\n 4\n\n 5 int main(void) {\n\n 6     int N;\n\n 7     ll K;\n\n 8     cin >> N >> K;\n\n\n 9\n\n10     for (int i = 0; i < N; ++i) {\n\n11         int A, B;\n\n12         cin >> A >> B;\n\n13         cnt[A] += B;\n\n14     }\n\n\n15\n\n16     for (int ans = 1; ans <= AMAX; ++ans){\n\n17         if (K <= cnt[ans]) {\n\n18             cout << ans << endl;\n\n19             break;\n\n20         }\n\n21         K -= cnt[ans];\n\n22     }\n\n\n23\n\n24     return 0;\n\n25 }",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "aa98d6b27142ae2e3ea57bdf5a81f1807f9207f6d4e7a78f29bcab202a2579ae"
+    }
+  ],
+  "status": "available"
+}

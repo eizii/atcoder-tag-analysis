@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc301_g",
+  "title": "Worst Picture",
+  "contests": [
+    {
+      "contest_id": "abc301",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 3262,
+  "raw_difficulty": 3262,
+  "contest_id": "abc301",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc301/tasks/abc301_g",
+  "statement": "配点 : 600 点 問題文 3 次元空間に N 人の人がいます。 i 番目の人は座標 (X_i,Y_i,Z_i) にいます。 人のいる座標は相異なり、全ての i で X_i>0 です。 あなたは x<0 であるような点 p=(x,y,z) を選び、そこから x 軸正の方向を向いて写真を撮ります。 点 p と人のいる場所 A,B が、 p,A,B の順に一直線に並ぶとき、 B にいる人は写真に写りません。 これ以外に人が写真に写らなくなることはありません。 p を適切に選んだ時の、写真に写る人数の最小値を求めてください。 制約 1 \\leq N \\leq 50 0 < X_i \\leq 1000 -1000 \\leq Y_i,Z_i \\leq 1000 (X_i,Y_i,Z_i) は相異なる 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N X_1 Y_1 Z_1 \\vdots X_N Y_N Z_N 出力 答えを出力せよ。 入力例 1 3\r\n1 1 1\r\n2 2 2\r\n100 99 98 出力例 1 2 例えば、点 (-0.5,-0.5,-0.5) から写真を撮ると、 2 番目の人は写真に写りません。 入力例 2 8\r\n1 1 1\r\n1 1 -1\r\n1 -1 1\r\n1 -1 -1\r\n3 2 2\r\n3 2 -2\r\n3 -2 2\r\n3 -2 -2 出力例 2 4 点 (-1,0,0) から写真を撮ると、写る人数は 4 人になります。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 3 次元空間に N 人の人がいます。 i 番目の人は座標 (X_i,Y_i,Z_i) にいます。 人のいる座標は相異なり、全ての i で X_i>0 です。 あなたは x<0 であるような点 p=(x,y,z) を選び、そこから x 軸正の方向を向いて写真を撮ります。 点 p と人のいる場所 A,B が、 p,A,B の順に一直線に並ぶとき、 B にいる人は写真に写りません。 これ以外に人が写真に写らなくなることはありません。 p を適切に選んだ時の、写真に写る人数の最小値を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 50 0 < X_i \\leq 1000 -1000 \\leq Y_i,Z_i \\leq 1000 (X_i,Y_i,Z_i) は相異なる 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N X_1 Y_1 Z_1 \\vdots X_N Y_N Z_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\n1 1 1\r\n2 2 2\r\n100 99 98"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2 例えば、点 (-0.5,-0.5,-0.5) から写真を撮ると、 2 番目の人は写真に写りません。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 8\r\n1 1 1\r\n1 1 -1\r\n1 -1 1\r\n1 -1 -1\r\n3 2 2\r\n3 2 -2\r\n3 -2 2\r\n3 -2 -2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 4 点 (-1,0,0) から写真を撮ると、写る人数は 4 人になります。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc301/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:26.992352+00:00",
+  "statement_sha256": "c1beba7e2c9d4529d94af4c33bf80538efc74d78f88e321cc4858d51981c8fbb",
+  "editorials": []
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc314_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc314/editorial/6956",
+      "text": "まず、高橋くんの最適な戦略の中に、ある数列 \\((A _ i) _ {i\\in\\mathbb N}\\) によって「これまでの合計獲得ポイントが \\(i\\) のとき、次にプレイするルーレットは \\(A _ i\\) 番目のルーレットである」ようなものが存在することを示します。\n以下、上の条件を満たす最適な戦略について考えます。\n\\(e _ i\\coloneqq\\) これまでの合計獲得ポイントが \\(i\\) のとき、\\(M\\) ポイントに到達するまでに支払う金額の期待値 を計算することを考えます（ただし、\\(i\\geq M\\) については \\(e _ i=0\\) とします）。\n\\(i\\) 番目のルーレットが出しうる目 \\(P _ i\\) 個のうち \\(Z _ i\\) 個が \\(0\\) であるとき、このルーレットの代わりに \\(C _ i\\dfrac{P _ i}{P _ i-Z _ i}\\) 円払ってもとのルーレットから \\(0\\) の目を取り除いたようなルーレットを用いることにしても結果は変わりません。\nよって、適切な前処理を行うことですべての \\(S _ {i,j}\\) が正であるとしてよいです。\nすると、\\(i=M-1,M-2,\\ldots,1,0\\) の順に \\(e _ i\\) を求めることができます。\n具体的には、次のように \\(e _ i\\) を求めることができます。\n\\[e _ i=\\min _ {j=1,2,\\ldots,N}C _ j+\\dfrac 1{P _ j}\\sum _ {k=1} ^ {P _ j}e _ {i+S _ {j,k}}\\]\nこれの計算は \\(1\\) つの \\(i\\) あたり \\(O(\\sum _ jP _ j)\\) 時間でできるため、全体で \\(O(M\\sum _ jP _ j)\\) 時間で答えである \\(e _ 0\\) を求めることができます。\n実装例は以下のようになります。\nまず、各 \\(C _ i\\) に誤差がない場合の計算について評価します。\n\\(e _ j\\ (i\\leq j\\lt M)\\) の計算結果に含まれる相対誤差のうち最大の値を \\(\\varepsilon _ i\\) とします（便宜上 \\(\\varepsilon _ M=0\\) とします）。\nexpected\nは \\(e _ j\\) をたかだか \\(P\\) 個足した結果です。\n真の値を \\(E\\) として、これに含まれる絶対誤差は \\(E(\\varepsilon _ {i+1}+2 ^ {-52}(P-1))\\) 以下です（\ndouble\nを用いて答えが \\(k\\ (k\\geq1)\\) になる四則演算を行うとき、たかだか \\(2 ^ {-52}\\) の相対誤差が生じます）。\nこれを \\(P\\) で割って \\(C\\) に加えているため、\\(e _ i\\) の計算結果に含まれる相対誤差は \\(\\varepsilon _ {i+1}(1+2 ^ {-52})+2 ^ {-52}(P+2)\\) 以下です。\n\\(\\varepsilon _ {i+1}\\leq\\varepsilon _ {i+1}(1+2 ^ {-52})+2 ^ {-52}(P+2)\\) は明らかなので、\n\\(\\varepsilon _ i\\leq\\varepsilon _ {i+1}(1+2 ^ {-52})+2 ^ {-52}(P+2)\\) がいえます。\nここから、\\(\\varepsilon _ 0\\leq((1+2 ^ {-52})^M-1)(P+2)\\leq2.25\\times10^{-12}\\) となります。\nルーレットから \\(0\\) が出る場合の調整として \\(C _ i\\) にたかだか \\(2 ^ {-52}\\) の誤差が生じているため、実装例のプログラムによって計算された\ne[0]\nの値と真の値との誤差はたかだか \\(2.5\\times10^{-12}\\) です。\n出力の際に生じるたかだか \\(5\\times10^{-6}\\) の相対誤差とあわせて、このプログラムで AC を得られることが示されました。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <tuple>\n#include <ranges>\n\nint main() {\n    using namespace std;\n\n    unsigned N, M;\n    cin >> N >> M;\n\n    vector<tuple<double, unsigned, vector<unsigned>>> roulette(N);\n    for (auto&&[C, P, S] : roulette) {\n        cin >> C >> P;\n        S = vector<unsigned>(P);\n        for (auto &&s : S)cin >> s;\n    }\n\n    // 0 ポイントが出ないように調整\n    for (auto&&[C, P, S] : roulette) {\n        C *= P;\n        erase(S, 0);\n        P = size(S);\n        C /= P;\n    }\n\n    vector<double> e(M, 10000 * M); // e[i] := 現在 i ポイントの状態からかかる金額の期待値\n    for (const auto i : ranges::views::iota(0U, M) | ranges::views::reverse) // i の降順に計算\n        for (const auto&[C, P, S] : roulette) {\n            double expected = 0;\n            for (const auto s : S | ranges::views::filter([i, M](auto s) { return i + s < M; }))\n                expected += e[i + s]; // ルーレットをプレイしたあとにかかる金額の期待値\n\n            e[i] = min(e[i], C + expected / P); // C + 1 / P ∑ e[i + s] の最小値が求める e[i]\n        }\n\n    cout << e[0] << endl; // e[0] が答え\n    return 0;\n}"
+      ],
+      "text_sha256": "c0cf08632641193fec9d76312786f2e35bcb40d12a5df06b4c5fc392054c3eb7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc314/abc314_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

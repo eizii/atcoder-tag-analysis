@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc131_d",
+  "editorials": [
+    {
+      "text": "D: Megalomania\n直感的には，〆切の差し迫っている仕事から片付けるのがよさそうです．実際にこの直感は正しく，仕事を\nBi の小さい順に順番に行うのが最適です．つまり，以下のことが言えます．\n仕事N 件の並べ替えであって，この順に行えば全ての仕事が〆切に間に合うようなものを「いい順序付け」\nと呼ぶことにすると，\n答えがYes となる条件\nBi の小さい順に仕事を行えば，それが「いい順序付け」となる．\n証明\n　十分性は明らかなので，必要性を示します．つまり，\n「いい順序付け」(A1, B1), (A2, B2), . . . , (AN, BN)\nがあるとき，Bi の昇順に並べ替えてもまた「いい順序付け」となることを示します．\n　k 番目の仕事が〆切に間に合う条件は，それまでの仕事にかかる時間の合計が〆切の時刻を上回ら\nないことです(つまりA1 + A2 + · · · , Ak ≤Bk)．Bk > Bk+1 のとき，(Ak, Bk), (Ak+1, Bk+1) の順\n序を入れ替えても「いい順序付け」のままです．したがって，バブルソートの要領でBi の昇順にソー\nトしてもまた「いい順序付け」となります．\nC++ やPython3 などの多くのプログラミング言語では，標準で用意されている関数などを用いることで\nソートをできます．実装例を以下に示します．\nListing 4\nC++ での実装例\n1 // include, using 略\n2\n3 int n;\n4 vector<pair<int, int> > tasks;\n5\n6 int main(void){\n7\ncin >> n;\n8\nfor (int i = 0; i < n; i++) {\n9\nint a, b;\n10\ncin >> a >> b;\n11\ntasks.emplace_back(b, a); // 〆切(, 所要時間)\n12\n}\n13\n14\nsort(tasks.begin(), tasks.end());\n15\nint sum = 0;\n16\nbool isyes = true;\n17\nfor (auto v : tasks) {\n18\nsum += v.second;\n19\n20\nif (sum > v.first) {\n21\nisyes = false;\n22\nbreak;\n23\n}\n24\n}\n25\n\n26\ncout << (isyes ? \"Yes\" : \"No\") << endl;\n27\n28\nreturn 0;\n29 }\n",
+      "text_sha256": "cd4ee9f03064f3758b04270e5461689c614ccfe3f6582bd5013aa52f58ade64c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc131/abc131_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

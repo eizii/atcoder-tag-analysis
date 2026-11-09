@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc451_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc451/editorial/18050",
+      "text": "問題文の通り，部門ごとに今期所属する人数および来期所属する人数をそれぞれ計算してそれらの差を出力すればよいです．\n実装例 (Python)\nあるいは上の実装例の配列\n\\(X,Y\\)\nを一つの配列にまとめて計算することもできます．\n実装例 (Python)",
+      "codes": [
+        "N, M = map(int, input().split())\nX = [0] * M # 今期所属する人数\nY = [0] * M # 来期所属する人数\nfor _ in range(N):\n    A, B = map(int, input().split())\n    X[A - 1] += 1\n    Y[B - 1] += 1\nfor j in range(M):\n    print(Y[j] - X[j])",
+        "N, M = map(int, input().split())\nans = [0] * M\nfor _ in range(N):\n    A, B = map(int, input().split())\n    ans[A - 1] -= 1\n    ans[B - 1] += 1\nfor v in ans:\n    print(v)"
+      ],
+      "text_sha256": "aaf015b06e5d773f7de82b4c62b484ef47bb1e2ded655d773603d9d179c0d699",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc451/abc451_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc190_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc190/editorial/631",
+      "text": "転倒数は\nFenwick Tree\nを用いる方法などで\n\\(O(N \\log N)\\)\nで求めることができます。\nしかし、これを全ての\n\\(B\\)\nについて行うと\n\\(O(N^2 \\log N)\\)\nになって TLE してしまいます。\nそこで、\n\\(k = i\\)\nから\n\\(k = i + 1\\)\nに動かしたときに\n\\(B\\)\nがあまり変化していないことに注目して、転倒数の変化を見てみましょう。\n\\(k = i\\)\nから\n\\(k = i + 1\\)\nに動かすことは、\n\\(B\\)\nの先頭の\n\\(a_i\\)\nを削除する\n\\(B\\)\nの末尾に\n\\(a_i\\)\nを追加する\nと言い換えることができます。\n\\(B\\)\nの先頭の\n\\(a_i\\)\nを削除すると転倒数は\n\\(a_i\\)\n減り、\n\\(B\\)\nの末尾に\n\\(a_i\\)\nを追加すると転倒数は\n\\(N - 1 - a_i\\)\n増えるので、\n\\(k = i\\)\nから\n\\(k = i + 1\\)\nに動かすと、転倒数は\n\\(N - 1 - 2 \\times a_i\\)\n変化することになります。\n転倒数の差分が\n\\(O(1)\\)\nで求められるので、\n\\(A\\)\nの転倒数を求める部分がボトルネックになって、\n\\(O(N \\log N)\\)\nでこの問題を解くことができます。\n回答例 (C++) :\nhttps://atcoder.jp/contests/abc190/submissions/19761416\n回答例 (Python) :\nhttps://atcoder.jp/contests/abc190/submissions/19761422",
+      "codes": [],
+      "text_sha256": "17115b5e078be01fc6bfcffc1185a666a1c555b10b1bb29781a29e6a3da5944a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc190/abc190_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

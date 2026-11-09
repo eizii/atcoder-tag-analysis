@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc198_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc198/editorial/1043",
+      "text": "原点から\n\\((X,Y)\\)\nまでのユークリッド距離を\n\\(d\\)\nとします。答えは次の通りです。\n\\(d=R\\)\nのとき\n\\(1\\)\n\\(d\\neq R\\)\nかつ\n\\(d\\leq 2R\\)\nのとき\n\\(2\\)\nそれ以外のとき\n\\(\\lceil \\frac{d}{R}\\rceil\\)\n1つ目のケースは明らかです。\n3つ目のケースは、2つ目のケースの成立を仮定すると、「距離が\n\\(2R\\)\n以下になるまで目的地に真っ直ぐ移動し、残りを(ケース2に基づいて)\n\\(2\\)\n歩で移動する」とすることで、\n\\(\\lceil \\frac{d}{R}\\rceil\\)\n歩で到達可能であることがわかります。\n\\(1\\)\n歩の移動では、目的地までの距離は高々\n\\(R\\)\nしか減らないのでこれが最小値であることがわかります。\n2つ目のケースについて考えます。\n厳密な証明は以下の通りです。\nより直感的なイメージに基づく説明は以下の通りです。\n例えば\n\\(R=2\\)\nのときを考えます。高橋君は\n\\(1\\)\n歩目で下図の赤い円上の点に移動することができます。\nもし\n\\(1\\)\n歩目で\n\\((2,0)\\)\nに移動した場合、\n\\(2\\)\n歩目で移動することができるのは、\n\\((2,0)\\)\nを中心とした青い円上の点です。\nもし\n\\(1\\)\n歩目で\n\\((\\sqrt{2},\\sqrt{2})\\)\nに移動した場合、\n\\(2\\)\n歩目で移動することができるのは、\n\\((\\sqrt{2},\\sqrt{2})\\)\nを中心とした青い円上の点です。\nこのように、赤い円の上の各点を中心とした半径\n\\(R\\)\nの円を書くことで、原点を中心とした半径\n\\(2R\\)\nの範囲を尽くせることがわかります。\n回答例(Python)",
+      "codes": [
+        "import math\n\nR,X,Y=map(int,input().split())\nD=math.sqrt(X*X+Y*Y)\n\nif D==R:\n  print(1)\nelif D<=R+R:\n  print(2)\nelse:\n  print(math.ceil(D/R))"
+      ],
+      "text_sha256": "e1e2478c4e737a7f3d93288c8d966b7643c32c2c7682f429447db414984b24db",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc198/abc198_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc082_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc082/editorial.pdf",
+      "text": "C: Together\n\n X を先に選んでから数に対する操作をすることにします。X を決めると、この個数を最大にするには、\n\n    • すべてのX −1 に+1 する\n\n    • すべてのX をそのままにする\n\n    • すべてのX + 1 に−1 する\n\nをすると他は関係ないので、(X −1 の個数)+(X の個数)+(X + 1 の個数) となります。従って先に各数の個\n\n数を数えておき、このX を考えうる範囲で全て試すことで答えが求まります。\n\n\n\n                                             1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "0e428e908b6eae04e2a0696884dd2255395c96518a46c22562e704605ec5210a"
+    }
+  ],
+  "status": "available"
+}

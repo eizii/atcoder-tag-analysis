@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc417_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc417/editorial/13571",
+      "text": "まず、次のことが成り立ちます。\n単純無向グラフ\n\\(G\\)\nにおいて、頂点\n\\(u,v\\)\nと頂点集合\n\\(S\\)\nが与えられた時、\n\\(u\\)\nから\n\\(v\\)\nまで\n\\(S\\)\nに属する頂点を通らずに到達可能な（=\n\\(S\\)\nに属する頂点を含まない、\n\\(u\\)\nから\n\\(v\\)\nへの（単純とは限らない）パスが存在する）ことと、\n\\(S\\)\nに属する頂点を含まない、\n\\(u\\)\nから\n\\(v\\)\nへの単純パスが存在することは同値である。\n「\n\\(S\\)\nに属する頂点を含まない、\n\\(u\\)\nから\n\\(v\\)\nへの単純パスが存在する」ならば「\n\\(u\\)\nから\n\\(v\\)\nまで\n\\(S\\)\nに属する頂点を通らずに到達可能である」ことは明らかです。逆を証明します。\nこれは、\n\\(S\\)\nに属する頂点を含まない、\n\\(u\\)\nから\n\\(v\\)\nへの（単純とは限らない）パス\n\\(P=(P_1,P_2,\\ldots, P_{\\lvert P\\rvert})\\)\nに対して、\n\\(k=1,2,\\ldots,N\\)\nについて次の手順を繰り返すことで単純パスを得ることができることから従います。\n\\(P\\)\nに頂点\n\\(k\\)\nが高々\n\\(1\\)\n回しか登場しないとき、何もしない。\n\\(P\\)\nに頂点\n\\(k\\)\nが複数回登場するとき、\n\\(u\\)\nから初めて頂点\n\\(k\\)\nが登場するまでのパスと、最後に頂点\n\\(k\\)\nが登場してから\n\\(v\\)\nまでのパスを繋げ、これを新たな\n\\(P\\)\nとする。\nこのとき、手順によって、パスにおける各頂点の登場回数が増えることはなく、頂点\n\\(k\\)\nの登場回数はその頂点についての手順のあと高々\n\\(1\\)\n回になることから、最終的に得られる\n\\(P\\)\nは\n\\(u\\)\nと\n\\(v\\)\nを結ぶ単純パスとなります。\n次に、\n\\(U\\)\nから\n\\(V\\)\nへ辞書順最小の単純パスで向かうためにどのように移動する（次の頂点を選ぶ）かについて考えます。\n最初の頂点は\n\\(U\\)\nです。\n\\(U\\)\nと直接辺で結ばれている頂点\n\\(x\\)\nについて、\n\\(P_1=U\\)\n,\n\\(P_2=x\\)\nであるような\n\\(V\\)\nへの単純パス\n\\(P\\)\nが存在する必要十分条件は、\n\\(U\\)\nを含まない、\n\\(x\\)\nから\n\\(V\\)\nへの単純パスが存在することであり、これは上の命題から\n\\(x\\)\nから\n\\(V\\)\nまで\n\\(U\\)\nを通らずに到達可能であることと同値です。また、\n\\(G\\)\nは無向グラフであることから、これは\n\\(V\\)\nから\n\\(x\\)\nまで\n\\(U\\)\nを通らずに到達可能であることと同値です。よって、答えとなるパスにおいて\n\\(U\\)\nから移動する頂点は、\n\\(U\\)\nと直接辺で結ばれており、さらに\n\\(V\\)\nから\n\\(x\\)\nまで\n\\(U\\)\nを通らずに到達可能であるような頂点\n\\(x\\)\nである必要があります。逆に、答えとなるパスにおいて\n\\(U\\)\nから移動する頂点はその条件をみたす頂点のうち最も番号が小さいものです。なぜなら、\n\\(P_1=U\\)\n,\n\\(P_2=x\\)\nであるような\n\\(V\\)\nへの単純パス\n\\(P\\)\nが存在すとき、他の任意の\n\\(P'_1=U\\)\n,\n\\(P'_2=x'\\)\n\\((x<x')\\)\nであるような\n\\(V\\)\nへの単純パス\n\\(P'\\)\nについて\n\\(P\\)\nは\n\\(P'\\)\nより辞書順で小さくなるからです。\n以下、\n\\(V\\)\nに到達する（ある\n\\(k\\)\nにおいて\n\\(P_k=V\\)\nとなる）まで貪欲に単純パスを決定することができます。すなわち、\n\\(P_1,P_2,\\ldots,P_k\\)\nが決まっている時、\n\\(P_{k+1}\\)\nは\n\\(P_k\\)\nと直接辺で結ばれており、さらに\n\\(V\\)\nから\n\\(x\\)\nまで\n\\(P_1,P_2,\\ldots,P_k\\)\nを通らずに到達可能であるような頂点\n\\(x\\)\nのうち最も番号が小さいものです。\n同じ頂点は選ばれないことからこの操作は有限回で終了し、また次の頂点の選び方から、操作の途中で\n\\(P_{k+1}\\)\nとしての条件をみたす頂点が存在しなくなることもありません。\nこのようにして答えを求めることができます。\n各テストケースの時間計算量は各\n\\(k\\)\nにおいて、\n\\(V\\)\nから\n\\(P_1,P_2,\\ldots,P_k\\)\nを通らずに到達可能であるような頂点の列挙に深さ優先探索 (DFS) などで\n\\(O(N+M)\\)\n,\n\\(k\\)\nが高々\n\\(1\\)\n以上\n\\(N-1\\)\n以下の整数の範囲しか動かないため、全体での計算量は\n\\(O(N(N+M))\\)\nとなります。入力全体においても、\n\\(\\Sigma_iN_i(N_i+M_i)\\leq (\\Sigma_iN_i)((\\Sigma_iN_i)+(\\Sigma_iM_i))\\)\nが成り立つため、本問題の制約下で十分高速です。\nよって、この問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define rep(i, n) for(int i = 0; i < n; ++i)\n#define N 1000\n\nint n,m,x,y;\nvector<int>e[N];\nvector<int>ans;\nbool used[N];\nbool cand[N];\n\nvoid dfs(int k){\n\tcand[k]=true;\n\tint sz=e[k].size();\n\trep(i,sz){\n\t\tif((!cand[e[k][i]])&&(!used[e[k][i]]))dfs(e[k][i]);\n\t}\n\treturn;\n}\n\nvoid solve(void){\n\tans.clear();\n\tint cur = x;\n\twhile(cur!=y){\n\t\tans.push_back(cur);\n\t\tused[cur]=true;\n\t\trep(i,n)cand[i]=false;\n\t\tdfs(y);\n\t\tint sz=e[cur].size();\n\t\tint nxt=n;\n\t\trep(i,sz)if(cand[e[cur][i]])nxt=min(nxt,e[cur][i]);\n\t\tcur=nxt;\t\n\t}\n\tans.push_back(y);\n\treturn;\n}\n\n\nint main(void){\n\tint t;\n\tcin >> t;\n\trep(_,t){\n\t\tcin >> n >> m >> x >> y;\n\t\tx--,y--;\n\t\trep(i,n)used[i]=false;\n\t\tint u,v;\n\t\trep(i,m){\n\t\t\tcin >> u >> v;\n\t\t\te[u-1].push_back(v-1);\n\t\t\te[v-1].push_back(u-1);\n\t\t}\n\t\tsolve();\n\t\tint sz = ans.size();\n\t\trep(i,sz-1)cout << (ans[i]+1) << \" \";\n\t\tcout << (ans[sz-1]+1) << endl;\n\t\trep(i,n)e[i].clear();\n\t}\n\treturn 0;\n}"
+      ],
+      "text_sha256": "a825ac128dfbb79e473d96ee68ae3dc74603c0eebf9e651cf319d0020e2bae27",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc417/abc417_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc417/editorial/13589",
+      "text": "まずは「XからYへの単純パスを1つ求めてください」という問題を考えます。これは例えば次のようなDFSにより求めることができます。\n（※元の問題はマルチテストケースなので、exit()するのではなく適切にdfsメソッド内から脱出する必要があります）\n一般に辞書順最小のものを得るには、先頭から順に選べる最小のものを貪欲に選ぶのが最適です。よって、隣の頂点へ移動するときの頂点順を番号の小さい順にするように、上のコードに1行変更を加えることで辞書順最小の解を得ることができます。",
+      "codes": [
+        "# 訪問済み頂点のset\nvisited_vertex_set = set()\n# Xから今の頂点に至るまでのpath\npath_list = list()\n\ndef dfs(current_vertex):\n    path_list.append(current_vertex)\n    visited_vertex_set.add(next_vertex)\n    # Yにたどり着いたら終了\n    if current_vertex == Y:\n        output(path_list)\n        exit()\n    # まだ行ったことのない隣の頂点へ移動\n    for next_vertex in neighborhood(current_vertex):\n        if next_vertex not in visited_vertex_set:\n            dfs(next_vertex)\n    # どうやってもYにたどり着かなかったら前の頂点へ戻る\n    path_list.pop()\n\ndfs(X)",
+        "# 訪問済み頂点のset\nvisited_vertex_set = set()\n# Xから今の頂点に至るまでのpath\npath_list = list()\n\ndef dfs(current_vertex):\n    path_list.append(current_vertex)\n    visited_vertex_set.add(next_vertex)\n    # Yにたどり着いたら終了\n    if current_vertex == Y:\n        output(path_list)\n        exit()\n    # まだ行ったことのない隣の頂点へ移動\n    for next_vertex in sorted(neighborhood(current_vertex)):  # <---- ここだけ変更\n        if next_vertex not in visited_vertex_set:\n            dfs(next_vertex)\n    # どうやってもYにたどり着かなかったら前の頂点へ戻る\n    path_list.pop()\n\ndfs(X)"
+      ],
+      "text_sha256": "e8b789e93b8ad7393bdfba7c5d12e43c404abe5d94d38973275124e51fd913d6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc417/abc417_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

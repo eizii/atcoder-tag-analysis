@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc292_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5887",
+      "text": "まず、計算する対象を整理しましょう。ある時点でのコンテスト \\(i\\) のパフォーマンスの予想値を \\(p_i\\) とします。今、 \\[\\frac{1}{n} \\left(\\sum_{i=1}^n p_i\\right) \\geq B\\] を満たすような \\(n\\) のうち最小のものを \\(s\\) とします。(そのような \\(n\\) が存在しない場合は \\(s = N\\) とします。) このとき、レーティングが変動するのはコンテスト \\(s\\) が最後になります。  よって、元の問題は上に定義した \\(s\\) および \\(\\sum_{i=1}^s p_i\\) を求める問題に言い換えられます。 ここで、上式を変形すると \\[\n\\begin{aligned}\n&\\frac{1}{n} \\left(\\sum_{i=1}^n p_i\\right) \\geq B \\\\\n&\\iff \\sum_{i=1}^n p_i \\geq nB \\\\\n&\\iff \\sum_{i=1}^n (p_i - B) \\geq 0\n\\end{aligned}\n\\] になります。よって \\(q_i = p_i - B\\) と定義すると、 \\(s\\) は 数列 \\((q_1, q_2, q_3, \\dots, q_N)\\) の \\(n\\) 要素の prefix sum がはじめて \\(0\\) 以上になるような \\(n\\) (そのような \\(n\\) が存在しない場合は \\(s = N\\) ) と言い換えられます。 よって、この問題は次の 3 つのクエリに高速に対応できるデータ構造を利用すれば解くことができます。 \\(q_c\\) の値を \\(x\\) に更新する。 上に定義した \\(s\\) を計算する。 \\(\\sum_{i=1}^n q_n\\) を計算する。 これらのクエリを処理する方法はいくつかありますが、ここでは区間の総和と prefix sum の最大値を segment tree に載せる方法を説明します。 詳しく説明します。数列 \\(B = (b_1, b_2, \\dots, b_n)\\) に対して関数 \\(f(B), g(B)\\) を次のように定義します。 \\[\n\\begin{aligned}\nf(B) &= b_1 + b_2 + \\dots + b_n \\\\\ng(B) &= \\max\\lbrace b_1, b_1 + b_2, \\dots, b_1 + b_2 + \\dots + b_n \\rbrace\n\\end{aligned}\n\\] このとき、2 つの空でない数列 \\(S, T\\) および 2 つを結合した数列 \\(S+T\\) について次の関係式が成り立ちます。 \\[\n\\begin{aligned}\nf(S + T) &= f(S) + f(T)  \\\\\ng(S + T) &= \\max\\lbrace g(S), f(S) + g(T) \\rbrace\n\\end{aligned}\n\\] よって列 \\(B\\) に対応する区間に tuple \\((f(B), g(B))\\) を載せた segment tree は(単位元を適切に定義すれば)正常に動作します。また、2 番目のクエリは segment tree 上の二分探索をすれば処理できることが確認できます。 よってこの問題を \\(\\mathrm{O}(N + Q \\log N)\\) で解くことができて、これは十分高速です。 実装例(C++)",
+      "codes": [
+        "#include <iomanip>\n#include <iostream>\n#include <utility>\n#include <vector>\nusing namespace std;\n#include \"atcoder/segtree.hpp\"\n\nusing T = pair<long long, long long>;\nT f(T a, T b) { return {a.first + b.first, max(a.second, a.first + b.second)}; }\nT ti() { return {0, -1e18}; }\nusing Seg = atcoder::segtree<T, f, ti>;\n\nint main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << fixed << setprecision(20);\n\n  long long N, B, Q;\n  cin >> N >> B >> Q;\n  vector<long long> a(N);\n  for (auto& x : a) cin >> x;\n\n  vector<T> init(N);\n  for (int i = 0; i < N; i++) init[i] = {a[i] - B, a[i] - B};\n  Seg seg{init};\n\n  while (Q--) {\n    long long c, x;\n    cin >> c >> x;\n    --c;\n    a[c] = x;\n    seg.set(c, {x - B, x - B});\n    auto i = seg.max_right(0, [](T v) { return v.second < 0; });\n    if (i != N) i++;\n    auto s = seg.prod(0, i).first;\n    cout << 1.0 * (s + B * i) / i << \"\\n\";\n  }\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "953515481fc528b4e45d3ecbb3d710c26369d07e0e82e187f5047c1c8e1a4210"
+    }
+  ],
+  "status": "available"
+}

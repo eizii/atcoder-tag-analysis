@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc216_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc216/editorial/2467",
+      "text": "問題文の通りに計算していきましょう。\nまず、文字列型(C++でいう\nstring\nなど)で入力を受け取り、これを\n\\(S\\)\nとします。\n\\(S\\)\nの末尾の文字は\n\\(Y\\)\nなので、\n\\(Y\\)\nを保存しておきます。\n\\(S\\)\nの末尾\n\\(2\\)\n文字は出力に不要なので、削除します。\nさらに、\n\\(0 \\leq Y \\leq 2\\)\nならば、\n\\(S\\)\nの末尾に\n-\nを\n\\(7 \\leq Y \\leq 9\\)\nならば、\n\\(S\\)\nの末尾に\n+\nを\n加えます。\n最後に\n\\(S\\)\nを出力すれば良いです。\nC++での実装例：",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nsigned main(){\n    string s;\n    cin>>s;\n\n    int n=s.size();//sの長さをnとする\n    int y=s[n-1]-'0';\n\n    s=s.substr(0,n-2);\n    //sの0文字目から、(n-2)文字連続で取得する。つまり、末尾2文字を削除する。\n\n    if(y<=2){\n        s+='-';\n    }else if(y>=7){\n        s+='+';\n    }\n\n    cout<<s<<endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "268231d8a757d50374d86ceed6d9dd7dc5eda722d5d787fcecf7a982ee64ed46",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc216/abc216_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

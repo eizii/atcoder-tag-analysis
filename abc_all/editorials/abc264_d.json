@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc264_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc264/editorial/4582",
+      "text": "解法1. 探索する\n\\(S\\)\nから始めて\natcoder\nにするまでに操作が最小で何度必要かどうかを、現在の文字列を頂点とみなして幅優先探索の要領で探索することができます。\n実装の過程で、 queue(キュー) や map(連想配列) などを利用すると便利です。\n計算量は文字列の長さを\n\\(|S|\\)\nとして\n\\(O(|S|!)\\)\nです (が、今回は\n\\(|S|=7\\)\nで固定であるため計算量は定数時間となります。)\n実装例(C++):\n解法2. 「転倒数」を利用する\natcoder\nは\n\\(7\\)\n文字全てが異なることに注意すると、\natcoder\nの\n\\(i\\)\n文字目を整数\n\\(i\\)\nに置き換える操作を考えることができます。\n例えば、\ncatredo\nという入力を\n\\((3,1,2,7,6,5,4)\\)\nという数列に置き換えることができます。\nこの数列を\n\\((1,2,3,4,5,6,7)\\)\nに並べ替えるために必要な隣接要素の交換の最小回数は、「転倒数」という名前の付いた有名問題です。\n具体的な解法はここでは省略しますが、例えば\nChokudai Speedrun 001-J\nがこの「転倒数」を求める問題そのものです。\n計算量は\n\\(O(|S| \\log |S|)\\)\nです (が、先ほど同様\n\\(|S|=7\\)\nで固定なのでこちらも定数時間です。)\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  \n  map<string,int> mp;\n  queue<string> q;\n  \n  mp[s]=0;\n  q.push(s);\n  \n  while(!q.empty()){\n    string current=q.front();q.pop();\n    if(current==\"atcoder\"){\n      cout << mp[current] << \"\\n\";\n      return 0;\n    }\n    \n    for(int i=1;i<7;i++){\n      string next=current;\n      swap(next[i-1],next[i]);\n      if(mp.find(next)==mp.end()){\n        q.push(next);\n        mp[next]=mp[current]+1;\n      }\n    }\n  }\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nvector<int> bit;\nint sum(int i){\n    int s=0;\n    while(i>0){\n        s+=bit[i];\n        i-=i&(-i);\n    }\n    return s;\n}\n\nvoid add(int i,int x){\n    while(i<bit.size()){\n        bit[i]+=x;\n        i+=i&(-i);\n    }\n}\n\nint main(){\n  bit.resize(10);\n  for(int i=0;i<10;i++){bit[i]=0;}\n  \n  string s;\n  cin >> s;\n  map<char,int> mp;\n  string atc=\"*atcoder\";\n  for(int i=1;i<=7;i++){\n    mp[atc[i]]=i;\n  }\n  vector<int> a={-1};\n  for(int i=0;i<7;i++){\n    a.push_back(mp[s[i]]);\n  }\n  \n  int res=0;\n  for(int i=1;i<=7;i++){\n    res+=(i-1-sum(a[i]));\n    add(a[i],1);\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "c463d324f8560335f621fa972ef23af250300f42b71b9eb7519bdb6dcffa7d07",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc264/abc264_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

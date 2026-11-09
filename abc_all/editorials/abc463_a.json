@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc463_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc463/editorial/21926",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n\\(X:Y=16:9\\)\nは\n\\(\\dfrac{X}{16}=\\dfrac{Y}{9}\\)\nと同値です。\n分母を払って\n\\(9X=16Y\\)\nとすると整数の範囲内で判定することができます。",
+      "codes": [
+        "X, Y = map(int, input().split())\nif X * 9 == Y * 16:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "b31ffb4aba939ebd89e0e9ca050c083864cfad91f1b3e0cd790ec7f394c45b95",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc463/abc463_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

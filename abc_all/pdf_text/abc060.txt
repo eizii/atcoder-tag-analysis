@@ -1,0 +1,353 @@
+   AtCoder Regular Contest 073 Editorial
+
+
+                  Kohei Morita(yosupo)
+
+            平成29 年4 月29 日
+
+
+
+A: Shiritori
+
+ 文字列の入力とif 文を書くことが必要になります。
+ 以下にpython3 でのコード例を示します。
+
+
+
+a, b, c = input().split()
+
+if a[len(a)-1] == b[0] and b[len(b)-1] == c[0]:
+
+    print(’YES’)
+
+else:
+
+    print(’NO’)
+
+
+
+
+
+                                1
+
+B: Choice Integers
+
+ A の倍数はいくつ足してもA の倍数です。よって、実は選ぶ数は1 個だけ
+で良いです(いくつか選んで足さなくても、最終的な総和を直接選べます)。
+ 次に、A%B, 2A%B, 3A%B, ... という数列を考えます。なおA%B はA を
+B で割ったあまりを表します。
+ ここで、(k + B)A%B = (kA + BA)%B = kA%B に注目すると、この数
+列は周期的で、最初のB 個の要素を繰り返す数列になっていることがわかり
+ます。
+
+ よって、この問題はA からBA まで、愚直にB で割った余りを求めて調
+べれば良いです。
+
+
+
+
+
+                                2
+
+C: Sentou
+
+   i 人目がスイッチを押した後、i + 1 人目が
+
+   • T 秒以内に来るならば、ずっとお湯は出続ける
+
+   • T 秒よりも経ってからくるならば、お湯はT 秒間出て止まる
+
+ ということがわかります。
+
+ よってこの問題の答えは、それぞれの人について、次の人が何秒後に来る
+
+かを求め、min(T, 次の人が来るまでの時間) の総和を求めれば良いです。
+
+
+
+
+
+                                3
+
+D: Simple Knapsack
+
+ この問題はナップザック問題として知られていて、効率良く解くアルゴリ
+
+ズムは存在しないと信じられています。ただし、特殊な制約がある場合はそ
+の限りではありません。例えばN やW やvi のうちどれかが小さい場合は
+ABC032 D 問題で出題されています。
+ 今回は、すべてのi = 2, 3, …, N について、w1 ≤wi ≤w1 + 3 という特殊
+な制約を利用するのだろうと考えられます。
+
+ この性質に注目すると、物の重さは高々4 種類であることがわかります。
+ よって、各重さについてその重さの物を何個選ぶか決めてしまいます。す
+
+ると、各重さごとに価値の高い順に使うことにすれば良くなります。
+ そして選び方は、最大でも(N/4)4 = 254 = 390625 通りありますが、この
+程度ならば全探索が可能です。
+
+ 使う個数を決めた後は、各重さごとに価値の高いものから使っていくこと
+
+になります。この、価値の総和はO(選んだ個数) で計算できます。
+ C++やJava やD 言語など、高速な言語ならばこれで間に合うと思います
+が、Python やRuby などの場合、累積和などを使いO(1) で計算できるよう
+にしないと厳しいかもしれません。
+
+
+
+
+
+                                4
+
+E: Ball Coloring
+
+ ボールは400, 000 個もありますが、答えに影響するパラメーターはRmax, Rmin, Bmax, Bmin
+の高々4 個だけであることに注目します。
+ 更に、
+
+          MIN = min(x1, x2, ..., xn, y1, y2, ..., yn)
+
+        MAX = max(x1, x2, ..., xn, y1, y2, ..., yn)
+
+ とすると、Rmin = MIN, Bmin = MIN のどちらかは満たし、Rmax =
+MAX, Bmax = MAX のどちらかは満たすことがわかります。
+ もっというと、Rmin = MIN&Bmax = MAX とRmin = MIN&Bmax =
+MAX のどちらかを仮定して良いです。
+ よってこれで場合分けをします。
+
+
+Rmin = MIN&Bmax = MAX の場合
+
+ この場合、Rmin やBmax がこれ以上小さくなったり大きくなったりするこ
+とはありません。よって、各袋について、小さい方を赤色、大きい方を青色
+
+にすれば良いです。
+
+
+Rmin = MIN&Rmax = MAX の場合
+
+ 最小のボールと最大のボールが同じ色の場合です。
+
+ この場合、赤色の方には何も考えず好きなボールを押し付けられます。
+
+ よって青色に塗るボールのみ着目すればよいです。
+
+ つまり、各袋からボールを1 個選び最大-最小を最小化する、という問題を
+考えれば良いです。
+
+ これは、最初全ての袋について小さい方のボールを選んだと仮定し、
+
+ それをそのなかで小さい順に並べ、順番に、そのボールを袋のもう一つの
+
+ボールと交換する、ということを行えば良いです。
+
+
+
+
+
+                                5
+
+F: Many Move
+
+ この問題は愚直なDP を考え、それを高速化していく方針を取ります。
+ まず、O(N 3) のDP として以下の様なものが考えられます。
+   dp[i][a][b] := i 個のクエリを処理しており、コマはa とb にある。今まで
+かかった時間の最小
+
+ ここで、どちらかのコマは必ず直前のクエリの位置にいることを考えると、
+O(N 2) に高速化が出来ます。
+   dp[i][a] := i 個のクエリを処理しており、コマはa とxi にある。今までか
+かった時間の最小
+  x0 = B とすると、
+  dp[0][A] = 0, dp[0][x] = ∞(x ̸= A)
+ を初期値として、
+
+  min(dp[Q][1], dp[Q][2], ..., dp[Q][N])
+ を答えとすれば良いことがわかります。
+
+ このDP の漸化式は、
+   dp[i][a] = dp[i −1][a] + |xi−1 + xi|(a ̸= xi)
+  dp[i][xi−1] = min(dp[i −1][xi−1] + |xi−1 + xi|, minj=1,2,...,n(dp[i −1][j] +
+|j −xi|))
+ となります。
+
+ ここで、DP テーブルdp[i −1][1], dp[i −1][2], ..., dp[i −1][n] を配列として
+持っているとします。そしてここから一気にdp[i][1], dp[i][2], ..., dp[i][n] を計
+算することを考えます。
+
+ 上の漸化式から考えると、
+
+   1. 配列全体に|xi−1 + xi| を足し
+
+   2. minj=1,2,...,n(dp[i −1][j] + |j −xi|) を求め、dp[i][xi−1] より小さければ
+   代入
+
+
+ という操作ができれば良いことがわかります。
+  難しい操作はminj=1,2,...,n(dp[i −1][j] + |j −xi|) ですが、これはj とxi の
+大小で場合分けをすると
+
+  minj=1,2,...,xi(dp[i −1][j] −j + xi)
+  minj=xi+1,2,...,n(dp[i −1][j] + j −xi)
+ が求められれば良くなります。
+
+  これは、dp[i−1][j]−j とdp[i−1][j]+j を持った配列に対する区間のmin
+を求める操作になります
+
+ 整理すると、実は持つべきはdp[i −1][j] の配列ではなく、dp[i −1][j] −j
+とdp[i −1][j] + j の配列です。
+
+
+
+
+                                6
+
+  dp[i −1][j] −j とdp[i −1][j] + j の配列を持っておくと、全体にadd と区
+間min ができれば良くなります。これは、Segment Tree で解くことが出来
+ます。
+
+
+
+
+
+                                7
+
+   AtCoder Regular Contest 073 Editorial
+
+
+                  Kohei Morita(yosupo)
+
+            平成29 年4 月29 日
+
+
+
+A: Shiritori
+
+  python3 example:
+
+a , b ,  c = input ( ) . s p l i t ()
+ i f  a [ len ( a) −1] == b [ 0 ] and b [ len (b)−1] == c [ 0 ] :
+
+     print ( ’YES’ )
+e l s e :
+
+     print ( ’NO’ )
+
+
+
+
+
+                                1
+
+B: Choice Integers
+
+  The sum of multiples of A is always a multiple of A. Thus, we can assume
+that we choose only one integer.
+  Consider the sequence A%B, 2A%B, 3A%B, ....  Since (k + B)A%B =
+
+(kA + BA)%B = kA%B, this sequence has a period of B.
+  Therefore, we can check the ﬁrst B elements of this sequence by brute
+
+force.
+
+
+
+
+
+                                2
+
+C: Sentou
+
+  After the i-th person pushes the switch, the i + 1-th person
+
+   •  If the i+1-th person comes within T seconds, the water keeps emitting.
+
+   • If the i + 1-th person comes after at least T seconds, the water emits
+      for T seconds and stops.
+
+  Therefore, the answer is the sum of min(T, ti+1 −ti).
+
+
+
+
+
+                                3
+
+D: Simple Knapsack
+
+  This problem is known as the knapsack problem, and it’s hard to solve
+in general case.
+  This time we use the constraint w1 ≤wi ≤w1 + 3. Because of this, there
+are at most 4 possible weights for a single item.
+  For each weight w, let’s ﬁx kw, the number of items of weight w we choose.
+Obviously, we should choose kw items greedily (in the descending order of
+values).
+  Let A, B, C, D be the number of items of weights w1, w1+1, w1+2, w1+3,
+respectively. This algorithm works in O(ABCD). In the worst case, this is
+(N/4)4 = 254 = 390625.
+
+
+
+
+
+                                4
+
+E: Ball Coloring
+
+  Let
+          MIN = min(x1, x2, ..., xn, y1, y2, ..., yn)
+
+        MAX = max(x1, x2, ..., xn, y1, y2, ..., yn)
+
+.
+  One of Rmin = MIN, Bmin = MIN will be satisﬁed, and one of Rmax =
+MAX, Bmax = MAX will be satisﬁed. Without loss of generality, we can
+consider the following two cases:
+
+
+Rmin = MIN&Bmax = MAX
+
+  In this case we want to minimize Rmax and maximize Bmin. For each
+bag, we should color the ball with the larger integer blue, and color the
+other ball blue.
+
+
+Rmin = MIN&Rmax = MAX
+
+  In this case we are only interested in blue balls (the value of Bmax−Bmin.
+First, for each bag, we color the ball with the smaller integer blue, and sort
+the blue balls in ascending order. Call them z1, . . . , zn (in ascending order).
+Then, for each i = 1, . . . , n, color zi red and color the opponent of zi blue.
+
+
+
+
+
+                                5
+
+F: Many Move
+
+  Let dp[i][a][b] be the minimum cost required to process the ﬁrst i queries
+such that the tokens are at a and b after the queries. This DP works in
+O(N 3). We’ll improve this.
+
+  Let dp[i][a] be the minimum cost required to process the ﬁrst i queries
+such that the tokens are at a and xi after the queries. This DP works in
+O(N 2).
+  Suppose that we have an array dp[i−1][1], dp[i−1][2], ..., dp[i−1][n], and
+we want to convert it to the array dp[i][1], dp[i][2], ..., dp[i][n].
+
+  The following operations are required:
+
+   1. Add |xi−1 + xi| to the whole array.
+
+   2. Compute minj=1,2,...,n(dp[i −1][j] + |j −xi|).
+
+  This can be done by two RMQs: one of them holds the values of dp[i −
+1][j] −j and the other one holds the values of dp[i −1][j] + j.
+
+
+
+
+
+                                6

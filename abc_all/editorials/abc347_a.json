@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc347_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc347/editorial/9692",
+      "text": "この問題で求められているのは、\n\\(K\\)\nの倍数であるかの判定と配列の適切な利用です。\n\\(A_i\\)\nが\n\\(K\\)\nの倍数であるかは、\n\\(A_i\\)\nを\n\\(K\\)\nで割ったあまりが\n\\(0\\)\nであるかを調べることで判定できます。\n多くのプログラミング言語では、\n%\nといった演算子であまりを求めることが出来ます。実装例も参照してください。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n, k;\n    cin >> n >> k ;\n    vector<int> a(n);\n    for(int i = 0; i < n; i++) cin >> a[i];\n    vector<int> b;\n    for(int i = 0; i < n; i++){\n        if(a[i] % k == 0) b.push_back(a[i] / k);\n    }\n    for(int i = 0; i < b.size(); i++) cout<<b[i] << \" \";\n    cout << endl;\n}"
+      ],
+      "text_sha256": "87770a514ac45d88cdc753fa8970f19087a7963e6e25f0892b639fa9abfd6f03",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc347/abc347_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

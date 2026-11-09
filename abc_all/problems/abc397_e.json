@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc397_e",
+  "title": "Path Decomposition of a Tree",
+  "contests": [
+    {
+      "contest_id": "abc397",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1484,
+  "raw_difficulty": 1484,
+  "contest_id": "abc397",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc397/tasks/abc397_e",
+  "statement": "配点 : 475 点 問題文 NK 頂点の木が与えられます。頂点には 1,2,\\dots,NK の番号がついており、 i 番目 ( i=1,2,\\dots,NK-1 ) の辺は頂点 u_i,v_i を双方向に結んでいます。 この木を N 本の長さ K のパスに分解できるか判定してください。より詳細には、以下を満たす N \\times K 行列 P が存在するかどうか判定してください。 P_{1,1},\\dots,P_{1,K},P_{2,1},\\dots,P_{N,K} は 1,2,\\dots,NK の並べ替えである。 各 i=1,2,\\dots,N,\\;j=1,2,\\dots,K-1 について、頂点 P_{i,j} と頂点 P_{i,j+1} を結ぶ辺が存在する。 制約 1 \\leq N 1 \\leq K NK \\leq 2 \\times 10^5 1 \\leq u_i < v_i \\leq NK 与えられるグラフは木である 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N K u_1 v_1 u_2 v_2 \\vdots u_{NK-1} v_{NK-1} 出力 N 本の長さ K のパスに分解できるなら Yes を、そうでないなら No を出力せよ。 入力例 1 3 2\r\n1 2\r\n2 3\r\n3 4\r\n2 5\r\n5 6 出力例 1 Yes 頂点 1,2 からなるパス、頂点 3,4 からなるパス、頂点 5,6 からなるパスに分解することができます。 入力例 2 3 2\r\n1 2\r\n2 3\r\n3 4\r\n2 5\r\n3 6 出力例 2 No",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 NK 頂点の木が与えられます。頂点には 1,2,\\dots,NK の番号がついており、 i 番目 ( i=1,2,\\dots,NK-1 ) の辺は頂点 u_i,v_i を双方向に結んでいます。 この木を N 本の長さ K のパスに分解できるか判定してください。より詳細には、以下を満たす N \\times K 行列 P が存在するかどうか判定してください。 P_{1,1},\\dots,P_{1,K},P_{2,1},\\dots,P_{N,K} は 1,2,\\dots,NK の並べ替えである。 各 i=1,2,\\dots,N,\\;j=1,2,\\dots,K-1 について、頂点 P_{i,j} と頂点 P_{i,j+1} を結ぶ辺が存在する。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N 1 \\leq K NK \\leq 2 \\times 10^5 1 \\leq u_i < v_i \\leq NK 与えられるグラフは木である 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K u_1 v_1 u_2 v_2 \\vdots u_{NK-1} v_{NK-1}"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N 本の長さ K のパスに分解できるなら Yes を、そうでないなら No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 2\r\n1 2\r\n2 3\r\n3 4\r\n2 5\r\n5 6"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes 頂点 1,2 からなるパス、頂点 3,4 からなるパス、頂点 5,6 からなるパスに分解することができます。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 2\r\n1 2\r\n2 3\r\n3 4\r\n2 5\r\n3 6"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc397/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:26.239512+00:00",
+  "statement_sha256": "229c69ed5e6ade3903f465e376cd3c9cb0a36f9c297e82586cb6f567495be486",
+  "editorials": []
+}

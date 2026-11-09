@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc205_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc205/editorial/2040",
+      "text": "\\(A\\)\nの要素として\n\\(1, 2, 3, \\dots, N\\)\nが全て現れるかどうか調べることで、\n\\(O(N)\\)\nで解くことができます。\n実装例 (C++)\nあるいは、\n\\(A\\)\nの要素を昇順に並べたときに\n\\(1, 2, \\dots, N\\)\nがこの順に並んでいるかどうか調べることで、\n\\(O (N \\log N)\\)\nで解くことができます。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [],
+      "text_sha256": "a254140d5bf076241f4c9457250ef51f17a7ac269bbfad61f52ccb9e64875632",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc205/abc205_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc205/editorial/2088",
+      "text": "\\(1 \\leq A_i \\leq N\\)\nより答えは重複する要素を削除したときの配列のサイズが\n\\(N\\)\nであるかと一致します。\nC#ならばLINQで書くこともできます。\nhttps://atcoder.jp/contests/abc205/submissions/23396646",
+      "codes": [
+        "int N;\ncin >> N;\nauto A = unordered_set<int>();\nrep(i, N) {\n\tint x;\n\tcin >> x;\n\tA.emplace(x);\n}",
+        "A.Distinct().Count() == N"
+      ],
+      "text_sha256": "3df6570ae0e1a18443ebf5cbc23f266999efef1b9e2a5b43b050f23cf91dc4ce",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc205/abc205_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

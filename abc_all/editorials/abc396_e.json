@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc396_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc396/editorial/12390",
+      "text": "まず、整数列\n\\(X,Y,Z\\)\nから以下のようなグラフを作ります。\n\\(N\\)\n頂点\n\\(M\\)\n辺の無向グラフであって、\n\\(i=1,2,\\ldots,M\\)\nに対して頂点\n\\(X_i\\)\nと頂点\n\\(Y_i\\)\nを結ぶラベル\n\\(Z_i\\)\nがついた辺が存在する。\nこのグラフをもとに考えていきます。\nまず、グラフの連結成分毎に問題は独立に解いて良いです。よって、以下ではグラフが連結である場合について考えます。\n\\(A_1\\)\nの値を\n\\(x\\)\nに固定して考えてみます。すると、辺で繋がっている頂点は片方の値が決まるともう片方の値も決まるので、\n\\(A_1\\)\nの値を決めることで全ての\n\\(A\\)\nの値が決まります。この段階で矛盾が生じれば答えは\n\\(-1\\)\nです。\nここで、\n\\(A\\)\nの各ビット毎に条件は独立なことに注目します。\n全ての\n\\(k\\)\nに対し\n\\(A_1\\)\nの\n\\(k\\)\nビット目は\n\\(0\\)\nか\n\\(1\\)\nで、どちらかに固定することで他の\n\\(k\\)\nビット目も全て決まります。求める\n\\(A\\)\nは要素の総和が最小な良い整数列なので、\n\\(0\\)\nと\n\\(1\\)\nをそれぞれ試し、\n\\(k\\)\nビット目が\n\\(1\\)\nとなる個数が少ない方（同じである場合はどちらでも良い）にすれば良いです。\nこれは BFS や DFS などで実装することができます。\n以上を適切に実装することでこの問題を解くことができます。計算量は\n\\(O((N+M)\\log \\max A)\\)\n時間です。\n実装例 (Python3)\n実装例 (Python3)",
+      "codes": [
+        "from collections import deque\n\nn, m = map(int, input().split())\ng = [[] for _ in range(n)]\nfor _ in range(m):\n    x, y, z = map(int, input().split())\n    x, y = x - 1, y - 1\n    g[x].append((y, z))\n    g[y].append((x, z))\n\nvisited = [False] * n\nval = [-1] * n\n\ndef bfs(start):\n    dq = deque([start])\n    visited[start] = True\n    comp = [start]\n    while dq:\n        v = dq.popleft()\n        for u, w in g[v]:\n            if not visited[u]:\n                visited[u] = True\n                val[u] = val[v] ^ w\n                comp.append(u)\n                dq.append(u)\n            else:\n                if val[u] != val[v] ^ w:\n                    print(\"-1\")\n                    exit()\n    return comp\n\nans = [0] * n\nfor st in range(n):\n    if visited[st]:\n        continue\n    val[st] = 0\n    comp = bfs(st)\n    for i in range(30):\n        cnt = 0\n        for j in comp:\n            if val[j] & (1 << i):\n                cnt += 1\n        if cnt < len(comp) - cnt:\n            for j in comp:\n                if val[j] & (1 << i):\n                    ans[j] |= 1 << i\n        else:\n            for j in comp:\n                if not (val[j] & (1 << i)):\n                    ans[j] |= 1 << i\nprint(*ans)",
+        "import pypyjit\npypyjit.set_param('max_unroll_recursion=-1')\nimport sys\n\nsys.setrecursionlimit(10**7)\nn, m = map(int, input().split())\ng = [[] for i in range(n)]\nfor i in range(m):\n    x, y, z = map(int, input().split())\n    x, y = x - 1, y - 1\n    g[x].append((y, z))\n    g[y].append((x, z))\nvisited = [False] * n\nval = [-1] * n\n\n\nq = []\n\n\ndef dfs(v):\n    visited[v] = True\n    for u, w in g[v]:\n        if not visited[u]:\n            val[u] = val[v] ^ w\n            q.append(u)\n            dfs(u)\n        else:\n            if val[u] != val[v] ^ w:\n                print(\"-1\")\n                exit()\n\n\nans = [0] * n\nfor st in range(n):\n    if visited[st]:\n        continue\n    val[st] = 0\n    q = [st]\n    dfs(st)\n    for i in range(30):\n        cnt = 0\n        for j in q:\n            if val[j] & (1 << i):\n                cnt += 1\n        if cnt < len(q) - cnt:\n            for j in q:\n                if val[j] & (1 << i):\n                    ans[j] |= 1 << i\n        else:\n            for j in q:\n                if not val[j] & (1 << i):\n                    ans[j] |= 1 << i\nprint(*ans)"
+      ],
+      "text_sha256": "251bd524e29ad63603ea91cce9e859700a9d3a6ebf3b3582359418d93ab73b36",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc396/abc396_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc141_f",
+  "editorials": [
+    {
+      "text": "F: Xor Sum 3\n(A1 ⊕A2 ⊕· · · ⊕AN) ≤(A1) + (A2 ⊕· · · ⊕AN) から，全て同じ色で塗ることを許しても答えに\n影響しないことがわかります．\n赤く塗った数のXOR，青く塗った数のXOR をそれぞれXあおくない, Xあおいとおきます．明らか\nにXあおくない⊕Xあおい= A1 ⊕· · · ⊕AN であり，この値は定数です．この値を2 進法表記したとき，\n0 となる桁を「興味深いビット」と呼ぶことにします．\nXあおくない, Xあおいのi ビット目は，\n• i ビット目が興味深くないとき，(0, 1) か(1, 0)，つまり和は一定\n• i ビット目が興味深いとき，(0, 0) か(1, 1)\nです．2i > 2i−1 + 2i−2 + · · · + 20 より，興味深いビットを上位から貪欲に(1, 1) としていくのが\n最適とわかり，次のように問題を言い換えられます．\nbabababababababababababababababababab\nAi の各要素の，興味深くないビットを無視した数列A′\ni を考え，この数列に対する\nX′\nあおくない+ X′\nあおいを最大化する．興味深くないビットを全て立てた整数をこれに加えれ\nば，元の問題の答えとなる．\n上の問題でX′\nあおくない= X′\nあおいなので，結局X′\nあおいを最大化すればよいです．つまり，以下の問\n題が解けたらよいです．\nA′\n1, A′\n2, · · · , A′\nN の中のいくつかを青く塗り，そのXOR を最大化する．\nこれは以下のようにして解けます:\n1. 数列A′\ni をN × 60 行列とみなし，その行標準形を求める．ここで，列の数60 はA′\ni のビット\n数を表す．\n2. 上の行から貪欲にX′\nあおい←X′\nあおい⊕(i 行目) とする．\n以上よりこの問題は解かれ，ビット演算を利用して簡単に実装できます(C での実装例)．\n\nABC 141 Editorial\nbeet, drafear, kort0n, sheyasutaka\nSeptember 15, 2019\n",
+      "text_sha256": "fa5d6c32fc309fa6d8554bbf3c10331787fc0ccd7e8167a97a811be2181a0aa6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc141/abc141_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

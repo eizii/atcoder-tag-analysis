@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc361_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc361/editorial/10354",
+      "text": "\\(S\\)\nと\n\\(T\\)\nに含まれる\nW\n,\nB\nの個数が一致しない場合答えは\nNo\nです。以下では一致する場合を考えます。\nW\nの個数を\n\\(W\\)\n、\nB\nの個数を\n\\(B\\)\nとします。\n空きマスは必ず連続した位置にあることに注意すると、マスの状態としてあり得るものは\n\\(\\frac{(N+1)!}{B!W!}=O(\\sqrt{N}2^N)\\)\n通りです。（計算量解析はやや難しいため証明略）\nこれは\n\\(N=14,B=W=7\\)\nのときに最大の\n\\(51480\\)\nとなります。また、各状態に対し、次の一手としてありえるものは\n\\(N-1\\)\n通りです。\n状態数、次の一手の数がともに十分小さいため、この問題はBFSにより解くことができます。\n計算量は全体で(hashmapを用いることでexpected)\n\\(O(N^{1.5}2^N)\\)\nとなります。\n類題：\n8 puzzle (AOJ)",
+      "codes": [],
+      "text_sha256": "ca6cef9f7ef78a7b69291341afea41d34cb3093c0ae4799efcd7c6170dc2d978",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc361/abc361_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

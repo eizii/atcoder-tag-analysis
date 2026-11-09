@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc190_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc190/editorial/628",
+      "text": "数列\n\\([A, A + 1, \\dots, B - 1, B]\\)\nの総和は、各要素に\n\\([B, B-1, \\dots, A + 1, A]\\)\nを足すことを考えると、\n\\(\\dfrac{(A + B)(B - A + 1)}{2}\\)\nです。\nよって、この問題は\n\\[\n(A + B)(B - A + 1) = 2N \\quad (A ≤ B)\n\\]\nの整数解の個数を求める問題に言い換えることができます。\nこのとき、\n\\(A + B, B - A + 1\\)\nはどちらも正の整数であるため、どちらも\n\\(2N\\)\nの約数になります。\nそこで、\n\\(2N=x \\times y\\)\nと正の整数\n\\(2\\)\nつに分解する方法を列挙し、\n\\[\n\\begin{cases}\nA + B = x\\\\\nB - A + 1 = y\\\\\n\\end{cases}\n\\]\nを解いて整数解の個数を数えます。\nこの解は\n\\(x\\)\nと\n\\(y\\)\nの偶奇が異なるとき、\n\\(A = (x - y + 1)/2,\\ B = (x + y - 1)/2\\)\nで、\n\\(x\\)\nと\n\\(y\\)\nの偶奇が同じとき整数解は存在しません。\nこれより、\n\\(2N\\)\nを偶奇の異なる正の整数\n\\(2\\)\nつに分解する方法の数がこの問題の答えになります。\n\\(2N\\)\nの\n約数列挙\nは計算量\n\\(O(\\sqrt N)\\)\nでできるため、\n\\(O(\\sqrt N)\\)\nでこの問題を解くことができます。\nまた、\n\\(2N\\)\nは\n\\(2\\)\nを素因数に\n\\(1\\)\nつ以上含むため、\n\\(x,y\\)\nのどちらか片方しか\n\\(2\\)\nを素因数に持たないことを考えると、\n\\(M=\\)\n(\n\\(N\\)\nを\n\\(2\\)\nで割り切れなくなるまで割った数 ) として、 (\n\\(M\\)\nの約数の個数 )\n\\({}\\times 2\\)\nがこの問題の答えになります。\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <iostream>\n#include <cmath>\nusing namespace std;\nusing ll = int64_t;\n\nint main(){\n    ll N;\n    cin >> N;\n    while(N % 2 == 0) N /= 2;\n    ll sq = sqrt(N), ans = 0;\n    for(ll i = 1; i <= sq; i++) if(N % i == 0) ans += 2;\n    if(sq * sq == N) ans--;\n    cout << ans * 2 << endl;\n}",
+        "N = int(input())\nwhile N % 2 == 0:\n    N //= 2\nsq = int(N ** 0.5)\nans = sum(N % i == 0 for i in range(1, sq + 1)) * 2 - (sq * sq == N)\nprint(ans * 2)"
+      ],
+      "text_sha256": "3941026ac0e0acd8318a5f4d7c14ba4fadce7999d0a1b8a10429e54fb9b71fb7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc190/abc190_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc190/editorial/643",
+      "text": "以下の条件を満たす\n\\((a,n)\\)\nの組を求めればよいです。\n条件：初項が\n\\(a\\)\n,項数が\n\\(n\\)\nであるような等差数列の総和が\n\\(N\\)\nとなる\n等差数列の和は\nこのサイト\nを参照すると、\n\\(\\frac{1}{2}n(2a+n-1)\\)\nとなります。すなわち、\n\\[2N=n(2a+n-1)\\]\nであるような\n\\((a,n)\\)\nの個数を求めれば良いことになります。\nまず、\n\\(n\\)\nは\n\\(2N\\)\nの正の約数となります。\nここで、\n\\(n\\)\nを一つ決め打ちした場合に条件を満たす\n\\(a\\)\nが存在するかどうかを判定すればよいです。\n\\(m=2N/n\\)\nとしたとき、\n\\(m-n=2a-1\\)\nとなるため、\n\\(m-n\\)\nが奇数であることが必要です。逆に、\n\\(m-n\\)\nが奇数ならばそれに対応する\n\\(a\\)\nを一意に定めることができます。\nよって、以下の問題と等価であることがわかります。\n等価な問題：\n\\(2N\\)\nの正の約数\n\\(d\\)\nであって、\n\\(d\\)\nと\n\\(2N/d\\)\nの偶奇が異なるようなももの個数を求めよ。\nこれについては、\n\\(2N\\)\nの約数を全列挙したあとそれぞれについて確認すれば解けます。\n約数全探索については\n\\(O(\\sqrt{N})\\)\nで解けるアルゴリズムが知られています。\n\\(N\\leq 10^{12}\\)\nであるため、\n\\(\\sqrt{N}\\leq 10^6\\)\nとなります。よって、この解法で十分間に合うことがわかります。\n実装例(Python)：\nhttps://atcoder.jp/contests/abc190/submissions/19787117",
+      "codes": [],
+      "text_sha256": "35205c8580a95873bfa1dc6b73ef1a131f10782c823e00a4bae272809b3f008a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc190/abc190_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

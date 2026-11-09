@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc084_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc084/editorial.pdf",
+      "text": "B:  Postal Code\n\n  S のA+1 文字目がハイフンであり、それ以外の全ての文字が0 以上9 以下である場合に‘Yes‘、\nそうでない場合に‘No‘ を出力するとよいです。\n\n#include <cstdio >\nint A,B;\nchar s[12];\nint main ()\n{\n         scanf (\"%d%d\",&A,&B);\n         scanf (\"%s\",&s);\n        for(int i=0;i<A;i++)if(!(’0’<=s[i]&&s[i]<=’9’))\n          {\n                 puts (\"No\"); return 0;\n          }\n        if(s[A]!=’-’)\n          {\n                 puts (\"No\"); return 0;\n          }\n        for(int i=A+1;i<=A+B;i++)if(!(’0’<=s[i]&&s[i]<=’9’))\n          {\n                 puts (\"No\"); return 0;\n          }\n         puts (\"Yes \");\n}\n\n\n\n                                         1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "35540106107e253d97916d7c11f195cd4c1297cc60df59ff519d831cbb1dfaf1"
+    }
+  ],
+  "status": "available"
+}

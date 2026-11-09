@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc318_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc318/editorial/7074",
+      "text": "まず、\n\\(1\\)\n日周遊パスのセットを購入する数を\n\\(k\\)\nセット（\n\\(kD\\)\n枚）で固定した時に\n\\(N\\)\n日間の旅行の代金を最小化することを考えます。\n\\(kD\\geq N\\)\nのときは、\n\\(N\\)\n日間全てを\n\\(1\\)\n日周遊パスで補うことができ、わざわざ通常料金を払う意味はないため、旅行の代金は\n\\(kP\\)\n円となります。\nなお、この場合において、\n\\(N\\)\n日間をカバーするための最小セット数, すなわち\n\\(k=\\left\\lceil \\frac{N}{D}\\right\\rceil\\)\nセット（ただし、\n\\(\\lceil x\\rceil\\)\nで\n\\(x\\)\n以上の最小の整数を表す）を超えて購入する必要はないため、\n\\(k=\\left\\lceil \\frac{N}{D}\\right\\rceil\\)\nの時のみを考えれば良いです。\nそうでないとき、すなわち\n\\(0\\leq k\\leq \\left\\lceil \\frac{N}{D}\\right\\rceil-1\\)\nのとき、\n周遊パスの購入に使った\n\\(kP\\)\n円に加えて\n\\((N-kD)\\)\n日分の運賃の通常料金を払う必要があるため、\n運賃の通常料金が高い日から順に優先して\n\\(1\\)\n日周遊パスを使うのが最善となります。すなわち、\n\\(N\\)\n日間の運賃\n\\((F_1,F_2,\\ldots, F_N)\\)\nを昇順にソートしたものを\n\\((F'_1,F'_2,\\ldots, F'_N)\\)\n\\((F'_1\\leq F'_2\\leq \\cdots\\leq F'_N)\\)\nとすると、\n\\(N\\)\n日間の旅行にかかる代金の最小値は\n\\(kP+\\displaystyle\\sum_{i=1}^{N-kD} F'_i\\)\n円となります。\nよって、\n\\(k=0,1,\\ldots\\left\\lceil \\frac{N}{D}\\right\\rceil-1\\)\n.のときの\n\\(kP+\\displaystyle\\sum_{i=1}^{N-kD} F'_i\\)\n\\(\\left\\lceil \\frac{N}{D}\\right\\rceil P\\)\nのうちの最小値が答えとなります。\n後者の値は\n\\(O(1)\\)\nで計算できます。\n前者の値は愚直に計算すると、\n\\(D=1\\)\nの時に最悪で\n\\(O(N^2)\\)\nかかってしまい、\n\\(2\\)\n秒の実行時間制限以内に計算を終えることが困難になります。しかし、これはいくつかの方法で\n\\(O(N)\\)\nなどで計算することができます。\n1. 累積和を用いる方法\n先に\n\\(S_j=\\displaystyle\\sum_{i=1}^{j} F'_i\\)\nを計算することを考えます。これは、\n\\(S_1=F'_1\\)\n,\n\\(S_{i+1}=S_i+F'_{i+1}\\)\n\\((i=1,2,\\ldots N-1)\\)\nで計算でき、求めたい値は\n\\(kP+\\displaystyle\\sum_{i=1}^{N-kD} F'_i=kP+S_{N-kD}\\)\nとして計算できます。\n計算量は、\n\\(S_1,S_2,\\ldots,S_N\\)\nを求めるのも、\nそれを用いて、\n\\(kP+\\displaystyle\\sum_{i=1}^{N-kD} F'_i\\)\nを求めるのもそれぞれ\n\\(O(1)\\)\nでできるため、全体で\n\\(O(N)\\)\nとなります。\n2.\n\\(kP+\\displaystyle\\sum_{i=1}^{N-kD} F'_i\\)\nの値を順次求める方法\n\\(C_k=kP+\\displaystyle\\sum_{i=1}^{N-kD} F'_i\\)\nとすると、\n\\(C_{k+1}=C_k+P-\\displaystyle\\sum_{i=N-(k+1)D+1}^{N-kD} F'_i\\)\nと書けます。\n計算量は、\n\\(C_0\\)\nを求めるのに\n\\(O(N)\\)\n,\n\\(C_i\\)\nから\n\\(C_{i+1}\\)\nを求めるのに\n\\(O(k)\\)\nかかるため、合計で\n\\(O(N)\\)\nとなります。\nそれぞれの最小値の候補となる値を計算することができれば、後はそのうちの最小のものを出力すれば良いです。\n\\((F_1,F_2,\\ldots,F_N)\\)\nのソートに\n\\(O(N\\log N)\\)\n、候補の列挙に\n\\(O(N)\\)\nかかるため、全体の計算量は\n\\(O(N\\log N)\\)\nであり、よって十分高速にこの問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int n,d,k;\n  long long p;\n  cin>>n>>d>>p;\n\n  vector<long long>f(n),s(n);\n  for(int i=0;i<n;i++)cin>>f[i];\n  \n  sort(f.begin(),f.end());\n  s[0]=f[0];\n  for(int i=0;i<n-1;i++)s[i+1]=s[i]+f[i+1];\n\n  k=(n+d-1)/d;\n  long long ans=p*k;\n  for(int i=0;i<k;i++){\n    ans=min(ans,s[n-1-(i*d)]+(p*i));\n  }\n\n  cout<<ans<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "c406f8d0375c0e80986abebfb1335a7cf1031467ca4bdd8f7fb783c93e8379de",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc318/abc318_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

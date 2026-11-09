@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc348_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc348/editorial/9706",
+      "text": "注: グラフがパスグラフで\n\\(C_1 = C_2 = \\cdots = C_N = 10^9\\)\nである場合、\n\\(f(x)\\)\nの最大値は\n\\(\\displaystyle \\frac{10^5 \\times (10^5 - 1) \\times 10^9}{2} \\fallingdotseq 5 \\times 10^{18}\\)\nとなります。これは符号付き 64 bit 整数型に収まりますが\n\\(2\\)\n倍すると収まらないので、特に解法 2 では一部の実装はオーバーフローする可能性があります。\n解法 1\n木の重心\nという概念が存在します。\nABC291-Ex の解説\nに性質や存在性の証明、発見アルゴリズムなどが書いてあります。\n\\(C_1 = C_2 = \\cdots = C_N = 1\\)\nの場合、木の重心の一つを\n\\(v\\)\nとして\n\\(f(v)\\)\nが答えです。\n\\(C_1 = C_2 = \\cdots =C_N=1\\)\nという条件を取り払ってもほとんど同じです。頂点に重みをつけた重心のイメージで、以下の条件を満たすような頂点\n\\(v\\)\nを考えます。\n頂点\n\\(v\\)\nを根としたとき、\n\\(v\\)\nの子のどの部分木の\n\\(C_i\\)\nの和も\n\\(\\displaystyle \\frac{1}{2} \\sum_{i=1}^{N} C_i\\)\n以下である。\nこのとき\n\\(f(v)\\)\nが答えです。答えであることの証明は先ほどと同じような議論をすれば良いです。このような\n\\(v\\)\nが存在することの証明は、重心が存在する証明と同様にできます。\n実装例 (C++)\n解法 2\n全方位木 DP\nと呼ばれるアルゴリズムで、\n\\(f(1), f(2), \\cdots ,f(N)\\)\nを合わせて\n\\(O(N)\\)\nで求めることができます。全方位木 DP 自体については、\nABC222-F の解説\nに詳しいです。\nこの問題では、部分木の\n\\(C_i\\)\nの和と、重み\n\\(C_i\\)\nのついた距離の和を保持すればよいです。擬似コードとしては以下のようになります。今回の場合、一般の全方位木 DP で一番手間がかかる左右からのマージの実装を適切にサボることができます。\n実装例 (C++)",
+      "codes": [
+        "# 配列 sum_c[i]: 頂点 i の部分木の頂点 x について C[x] の総和\n# 配列 sum_d[i]: 頂点 i の部分木の頂点 x について C[x] x d(i, x) の総和\n# v: 今の頂点\nproc dfs(v: int): void =\n    sum_c[v] = C[v]\n    sum_d[v] = 0\n    for t in (children of v):\n        dfs(t)\n        sum_c[v] += sum_c[t]\n        sum_d[v] += sum_c[t] + sum_d[t]\ndfs(0)\n\n# 配列 f[i]: f(i)\n# v: 今の頂点\n# p_sum_c: v の部分木以外の頂点 x について C[x] の総和\n# p_sum_d: v の部分木以外の頂点 x について C[x] x d(v, x) の総和\nproc rerooting(v, p_sum_c, p_sum_d: int): void =\n    f[v] = sum_d[v] + p_sum_d\n    for t in (children of v):\n        nx_sum_c = p_sum_c + sum_c[v] - sum_c[t]\n        nx_sum_d = p_sum_d + sum_d[v] - (sum_d[t] + sum_c[t]) + nx_sum_c\n        rerooting(t, nx_sum_c, nx_sum_d)\nrerooting(0, 0, 0)"
+      ],
+      "text_sha256": "d4b0ec1ba3cb54e77cf16d573a0e9b38ca266cb93ce73183ae52159c0db714e3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc348/abc348_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc348/editorial/9755",
+      "text": "頂点\n\\(1\\)\nを根とする根付き木だとして、全ての\n\\(f(x)\\)\nを直接求める方針で解きます。\n各辺について、その辺を切った時に分離される二つの頂点集合をそれぞれ\n\\(U, V\\)\nとし、\n\\(U\\)\nに頂点\n\\(1\\)\nが属するものとします。\nその時、\n\\(U\\)\n側の頂点には\n\\(V\\)\n側の頂点それぞれからこの辺を通って重みが加算されることから、\n\\(\\sum_{v \\in V} C_v\\)\nが\n\\(u \\in U\\)\nを満たす全ての\n\\(f(u)\\)\nに寄与します。同様に\n\\(\\sum_{u \\in U} C_u\\)\nが\n\\(v \\in V\\)\nを満たす全ての\n\\(f(v)\\)\nに寄与します。\n従って、各辺について\n\\(\\sum_{u \\in V} C_v\\)\nなどを高速に求め、それを\n\\(U\\)\nに含まれる全ての頂点に加算できれば良いです。\nここで、頂点番号が仮にdfs順に割り振られていたとすると、\n\\(V\\)\nは区間を成し、\n\\(U\\)\nも高々二つの区間で表すことができます。\n従って、あらかじめ頂点番号をdfs順に振りなおすことで、\n\\(\\sum_{v \\in V} C_v\\)\nは累積和、\n\\(f(u)\\)\nへの寄与はimosをすることで辺ごとに定数時間で計算することができ、全体\n\\(O(N)\\)\nで解くことができます。",
+      "codes": [],
+      "text_sha256": "bc724c1e831d5e4e47df5e9d1c1eeb54fa24f8685f8ae0472eeea6a15e4ac537",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc348/abc348_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc123_a",
+  "editorials": [
+    {
+      "text": "問題 A：Five Antennas\nこの問題は、問題文の通りに、次の 10 個の条件をすべて満たしているか判定し、すべて満たしてい\nるならば “Yay!”、そうでないならば “:(” と出力すると解くことができます。\n1. −𝑘≤𝑎−𝑏≤𝑘\n2. −𝑘≤𝑎−𝑐≤𝑘\n3. −𝑘≤𝑎−𝑑≤𝑘\n4. −𝑘≤𝑎−𝑒≤𝑘\n5. −𝑘≤𝑏−𝑐≤𝑘\n6. −𝑘≤𝑏−𝑑≤𝑘\n7. −𝑘≤𝑏−𝑒≤𝑘\n8. −𝑘≤𝑐−𝑑≤𝑘\n9. −𝑘≤𝑐−𝑒≤𝑘\n10. −𝑘≤𝑑−𝑒≤𝑘\n\nしかし、これをすべて判定していると実装をするのにかなり手間がかかります。\n\nそこで、「𝑎< 𝑏< 𝑐< 𝑑< 𝑒」 という制約に注目します。そこで、最も遠いアンテナは 𝐴 と 𝐸 なので、\n結果的に 𝐴 と 𝐸 の座標しか気にしなくてもよいのです！よって、次のたった 1 つの条件を満たしている\nか判定すればよいです。\n1. 𝑒−𝑎≤𝑘\n\nよって、簡単にこの問題を正解することができます。入力・出力は、C++ では cin/cout を使う、\nPython では input、print を使うなどをすると実装することができます。また、条件分岐は、多くのプロ\nグラミング言語では if/else を使うと実装することができます。\n分からない人は、AC している他の人のソースコードを見ると勉強になるかもしれません。\n\nソースコード (C++)：https://atcoder.jp/contests/abc123/submissions/4840685\n",
+      "text_sha256": "23a4b271b799d0ba6ed25f18d8bbce7341dde94124dadf862c13423e9fb5e74b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc123/abc123_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

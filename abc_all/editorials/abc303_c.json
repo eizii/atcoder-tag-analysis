@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc303_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc303/editorial/6440",
+      "text": "基本的に問題文に言われた通りのシミュレーションを行えばよいですが、計算量の問題があります。アイテムの位置を二次元配列で管理すると、計算量が\n\\(\\mathrm{max}(|x_i|,|y_i|)=X\\)\nとして\n\\(\\mathrm{O}(X^2)\\)\nになってしまいます。\nこれを改善するには、アイテムの座標を std::set などを用いて管理すればよいです。この工夫により、\n\\(\\mathrm{O}((N + M)\\log M)\\)\nで解くことが可能です。実装例もご確認ください。\n実装例(C++)：",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m, h, k;\n    cin >> n >> m >> h >> k;\n    string s;\n    cin >> s;\n    set<pair<int, int>> st;\n    for(int i = 0; i < m; i++) {\n        int x, y;\n        cin >> x >> y;\n        st.insert({x, y});\n    }\n    int nx = 0, ny = 0;\n    for(int i = 0; i < n; i++) {\n        int dx = 0, dy = 0;\n        if(s[i] == 'R') dx = 1;\n        if(s[i] == 'L') dx = -1;\n        if(s[i] == 'U') dy = 1;\n        if(s[i] == 'D') dy = -1;\n        nx += dx, ny += dy;\n        if(--h < 0) {\n            cout << \"No\\n\";\n            return 0;\n        }\n        if(h < k and st.count({nx, ny})) {\n            h = k;\n            st.erase({nx, ny});\n        }\n    }\n    cout << \"Yes\\n\";\n}"
+      ],
+      "text_sha256": "d525e11393c23e255bf8a5db3e9b446db1905ed6676e732e6e9cc04de7fbff9c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc303/abc303_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

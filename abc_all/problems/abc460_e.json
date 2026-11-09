@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc460_e",
+  "title": "x + y ≡ x + y",
+  "contests": [
+    {
+      "contest_id": "abc460",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1362,
+  "raw_difficulty": 1362,
+  "contest_id": "abc460",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc460/tasks/abc460_e",
+  "statement": "配点 : 450 点 問題文 正整数 a,b に対して、 a と b を繋げて書いた時に出来る整数を \\mathrm{concat}(a, b) と呼びます。厳密に述べると、 \\mathrm{concat}(a, b) を次のように定義します。 a, b を 10 進表記して出来る文字列を A, B とする。 A, B をこの順に結合して出来る文字列を C とする。 C を 10 進表記された整数とみなした時の値を \\mathrm{concat}(a, b) とする。 例えば a = 123, b = 45 の時 \\mathrm{concat}(a, b)=12345 です。 正整数 N, M が与えられます。 N 以下の正整数の組 (x,y) であって \\mathrm{concat}(x, y) \\equiv x + y \\pmod{M} であるものの個数を 998244353 で割った余りを求めてください。 T 個のテストケースが与えられるので、それぞれについて答えを求めてください。 制約 1 \\leq T \\leq 10^4 1 \\leq N \\leq 10^{18} 2 \\leq M \\leq 10^9 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。ここで \\mathrm{case}_i は i 番目のテストケースを意味する。 T \\mathrm{case}_1 \\mathrm{case}_2 \\vdots \\mathrm{case}_T 各テストケースは以下の形式で与えられる。 N M 出力 T 行出力せよ。 i 行目には i 番目のテストケースの答えを出力せよ。 各テストケースでは、条件を満たす (x,y) の個数を 998244353 で割った余りを出力せよ。 入力例 1 4\r\n3 2\r\n123 456\r\n20260530 460\r\n123456789123456789 998244353 出力例 1 3\r\n0\r\n922576091\r\n422081792 1 番目のテストケースについて、条件を満たす (x,y) は (2,1),(2,2),(2,3) の 3 個です。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 正整数 a,b に対して、 a と b を繋げて書いた時に出来る整数を \\mathrm{concat}(a, b) と呼びます。厳密に述べると、 \\mathrm{concat}(a, b) を次のように定義します。 a, b を 10 進表記して出来る文字列を A, B とする。 A, B をこの順に結合して出来る文字列を C とする。 C を 10 進表記された整数とみなした時の値を \\mathrm{concat}(a, b) とする。 例えば a = 123, b = 45 の時 \\mathrm{concat}(a, b)=12345 です。 正整数 N, M が与えられます。 N 以下の正整数の組 (x,y) であって \\mathrm{concat}(x, y) \\equiv x + y \\pmod{M} であるものの個数を 998244353 で割った余りを求めてください。 T 個のテストケースが与えられるので、それぞれについて答えを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq T \\leq 10^4 1 \\leq N \\leq 10^{18} 2 \\leq M \\leq 10^9 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。ここで \\mathrm{case}_i は i 番目のテストケースを意味する。 T \\mathrm{case}_1 \\mathrm{case}_2 \\vdots \\mathrm{case}_T 各テストケースは以下の形式で与えられる。 N M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 T 行出力せよ。 i 行目には i 番目のテストケースの答えを出力せよ。 各テストケースでは、条件を満たす (x,y) の個数を 998244353 で割った余りを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\r\n3 2\r\n123 456\r\n20260530 460\r\n123456789123456789 998244353"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3\r\n0\r\n922576091\r\n422081792 1 番目のテストケースについて、条件を満たす (x,y) は (2,1),(2,2),(2,3) の 3 個です。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc460/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:45.322569+00:00",
+  "statement_sha256": "171c7d23c18e2d8fa9ea761a9179728c3f7962172e889857c87b7a19f0347117",
+  "editorials": []
+}

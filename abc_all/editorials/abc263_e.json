@@ -1,0 +1,42 @@
+{
+  "problem_id": "abc263_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4546",
+      "text": "\\(\\mathrm{DP}[i]=\\)\nマス\n\\(i\\)\nからマス\n\\(N\\)\nにたどり着くまでにサイコロを振る回数の期待値とした動的計画法を行います。\nまず、\n\\(\\mathrm{DP}[N]=0\\)\nです。\n\\(i=N-1,N-2,\\dots,1\\)\nの順に\n\\(\\mathrm{DP}[i]\\)\nを求めます。\nもしサイコロが\n\\(1\\)\n以上\n\\(A_i\\)\n以下の値のみを等確率で出す場合は\n\\(\\mathrm{DP}[i]=\\frac{\\sum_{j=1}^{A_i} \\mathrm{DP}[i+j]}{A_i} + 1\\)\nとなります。\n上記を元に考えると、マス\n\\(i\\)\nにいるときにサイコロで\n\\(0\\)\nを出す回数の期待値を\n\\(X\\)\nとすると\n\\(\\mathrm{DP}[i]=\\frac{\\sum_{j=1}^{A_i} \\mathrm{DP}[i+j]}{A_i} + X + 1\\)\nとなります。\n\\(X\\)\nを求めることを考えます。\n\\(X=\\sum_{j=0}^{\\infty} j \\times \\frac{A_i}{(A_i+1)^{j+1}}\\)\nが成り立ちます。\n\\(\\sum_{i=0}^{\\infty} \\frac{i}{x^i}=\\frac{x}{(1-x)^2}\\)\nであるため\n\\(\\sum_{j=0}^{\\infty} \\frac{j}{(A_i+1)^j} = \\frac{A_i+1}{A_i^2}\\)\nです。\n\\(X=\\left(\\sum_{j=0}^{\\infty} \\frac{j}{(A_i+1)^j}\\right) \\times \\frac{A_i}{A_i+1}\\)\nより\n\\(X=\\frac{A_i+1}{A_i^2} \\times \\frac{A_i}{A_i+1} = \\frac{1}{A_i}\\)\nと求まります。\nより、累積和や segmenttree を用いることによりこの問題を\n\\(\\mathrm{O}(N\\log \\bmod)\\)\nなどで解くことができます。",
+      "codes": [],
+      "text_sha256": "e115bae0d95fc45731351147e32972a3781388dce65ca0c8a031f13a632a8917",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4552",
+      "text": "公式解説\nではテクニカルな方法で 漸化式を求めていますが、ここでは別の方法を説明します。\n\\(dp_i := (\\)\nマス\n\\(i\\)\nからマス\n\\(N\\)\nにたどり着くまでにサイコロを振る回数の期待値) とします。\n\\(i\\)\nからサイコロを\n\\(1\\)\n回振ると\n\\(i, i+1, \\dots, i+A_i\\)\nのいずれかのマスに等確率で進みます。これをそのまま\n\\(dp_{\\ast}\\)\nの式にすると次のようになります。\n\\[dp_i = \\frac{1}{A_i + 1} \\left(\\sum_{j=0}^{A_i} dp_{i+j} \\right) + 1 \\]\nこのままでは左辺および右辺のシグマの中に\n\\(dp_i\\)\nが含まれているので\n\\(dp_i\\)\nを求められません。\nそこで右辺のシグマから\n\\(dp_i\\)\nを取り出して左辺に移項しましょう。\n\\[dp_i = \\frac{1}{A_i + 1} dp_i + \\frac{1}{A_i + 1} \\left(\\sum_{j=1}^{A_i} dp_{i+j} \\right) + 1 \\]\n\\[dp_i -  \\frac{1}{A_i + 1} dp_i = \\frac{1}{A_i + 1} \\left(\\sum_{j=1}^{A_i} dp_{i+j} \\right) + 1 \\]\nあとは左辺が\n\\(dp_i\\)\nになるように式変形して定数倍をかければ完成です。\n\\[ \\frac{A_i}{A_i + 1} dp_i = \\frac{1}{A_i + 1} \\left(\\sum_{j=1}^{A_i} dp_{i+j} \\right) + 1 \\]\n\\[dp_i = \\frac{1}{A_i} \\left(\\sum_{j=1}^{A_i} dp_{i+j} \\right) + \\frac{A_i + 1}{A_i}\\]\nこの式は公式解説の式と一致します。",
+      "codes": [],
+      "text_sha256": "46cc0edf2096a55ae17f40897e78a1ccaadb8653ed844342ef521f6979f81131",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4566",
+      "text": "\\(P_i\\)\n=マス\n\\(i\\)\nに到達する確率 とすると求める答えは\n\\(\\sum_{i=1}^{n-1} \\frac{A_i+1}{A_i}P_i\\)\nです。\n\\(P_i\\)\nはimos法を用いた配るdpで前から求めることができます。\n実装例\nを参考にしてください。",
+      "codes": [],
+      "text_sha256": "313a6e50f620827edd648924827295c856fc8dfd4571154969f4d678d59f9f68",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4569",
+      "text": "成功確率\n\\(P\\)\nの試行を成功するまで繰り返す際の試行回数の期待値が\n\\(1/P\\)\nであることから、\n\\[\n\\begin{aligned}\n\\mathrm{dp} _ i:\n=&「マス\\ i\\ からマス\\ N\\ までの回数の期待値」\\\\\n=&「\\ 0\\ 以外の目が出るまでの回数の期待値」+「\\ \\mathrm{dp} _ {i+1}, \\ldots, \\mathrm{dp} _ {i+A_i}\\ の平均値」\\\\\n=&\\ \\left( 1 \\middle/ \\frac{A_i}{A_i+1} \\right) + \\frac{S}{A_i} \\quad \\left(S := \\sum _ {j=1}^{A_i}\\mathrm{dp} _ {i+j}\\right) \\\\\n=&\\ \\frac{A_i+1+S}{A_i}\n\\end{aligned}\n\\]\nとなるので、これを\n\\(i\\)\nの大きい方から順に累積和などを用いて計算すればよい。",
+      "codes": [],
+      "text_sha256": "9d888f74ae9d5067ecc95f40b61eb2accbb923c0af3412506e72f4ea24405229",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

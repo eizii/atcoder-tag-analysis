@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc191_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc191/editorial/585",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nボールが消えているのは、ボールが高橋君から\n\\(VT \\, \\mathrm{m}\\)\n以上\n\\(VS \\, \\mathrm{m}\\)\n以下離れている間なので、青木君はボールを打てるのは\n\\(D \\lt VT\\)\nまたは\n\\(D \\gt VS\\)\nの場合です。\n解答例 (C++)\n解答例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tint v = ri();\n\tint t = ri();\n\tint s = ri();\n\tint d = ri();\n\tputs(d < v * t || d > v * s ? \"Yes\" : \"No\");\n\t\n\treturn 0;\n}",
+        "v, t, s, d = map(int, input().split())\n\nprint('Yes' if (d < v * t or d > v * s) else 'No')"
+      ],
+      "text_sha256": "6f07cc31ec73d06132b40eaaa589c69021e50646b15bc27820dc4e8a9ad52cef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc191/abc191_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

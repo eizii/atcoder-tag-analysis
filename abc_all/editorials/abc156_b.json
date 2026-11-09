@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc156_b",
+  "editorials": [
+    {
+      "text": "B: Digits\n(原案・準備・解説: gazelle)\n整数N をK 進数で表したときの桁数がD であるとします。\nこのとき位取り記数法の定義より、ある整数列a0, a1, ..., aD−1 (0 ≤ai < K, aD−1̸ = 0) が存在\nして、\nN = aD−1KD−1 + aD−2KD−2 + ... + a0K0\nと書くことができます。ここで、\nN = (aD−1KD−2 + aD−2KD−3 + ... + a1K0) × K + a0\nと変形できることから、0 ≤a0 < K を考えるとN をK で割ったときの商が、\naD−1KD−2 + aD−2KD−3 + ... + a1K0\nになることが分かります。aD−1̸ = 0 なので、これはK 進数で表したときの桁数がD −1 になる数\nです。\nこの議論を繰り返し適用することで、N をK 進数で表したときの桁数を求めることができます。\nつまり、N をK で割ったときの商で置き換える、という操作をN が0 になるまで行ったとき、操\n作を行った回数がN をK 進数で表したときの桁数になります(厳密には数学的帰納法を使って示し\nます)。\nこの計算は愚直に実行すると、桁数に比例する時間がかかります。桁数が非常に大きい場合に実行\n時間制限を超えてしまいそうに見えますが、実はこの問題の入力制約下ではN の桁数は多くても数\n十程度になります。例えばN = 109、K = 2 のとき、230 = 1073741824 > 109 であることから、N\nを2 進数で表したときの桁数は高々30 です。N が小さかったりK が大きい場合には桁数はこれよ\nり少なくなります。一般に整数N をK 進数で表したときの桁数は、N の対数に比例します。これ\nはN と比べて非常に小さい値です。\nC++ による解法の実装例をListing 3 に示します。\nListing 3\nC++ による実装例\n1 #include<bits/stdc++.h>\n2 using namespace std;\n3\n4 int main() {\n5\nint N, K;\n6\ncin >> N >> K;\n7\nint ans = 0;\n8\nwhile(N > 0) {\n9\nN /= K; // N をK で割った商に置き換える\n10\nans++;\n\n11\n}\n12\ncout << ans << endl;\n13\nreturn 0;\n14 }\n",
+      "text_sha256": "1bf3ebb7ae7a6c0fad16ad0400745588a66b09499ee9fbc9ba21b3b2925e739f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc156/abc156_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

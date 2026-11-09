@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc409_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc409/editorial/13200",
+      "text": "本解説では，操作後の文字列を\n\\(S'\\)\nと表記して，もとの\n\\(S\\)\nと区別します．\n\\(\\ell=r\\)\nとして操作をすれば\n\\(S'=S\\)\nとできるため，答えが\n\\(S\\)\nよりも辞書順で後に現れることはないです．以降，\n\\(\\ell + 1 \\leq r\\)\nの場合を考えます．\nまず，最適な\n\\(\\ell\\)\nを決めます．\n\\(S_{\\ell} > S_{\\ell+1}\\)\nならば，操作によって\n\\(S\\)\nよりも辞書順で小さい文字列を得ることができます．逆に，すべての\n\\(1 \\leq i \\leq N-1\\)\nで\n\\(S_{i} \\leq S_{i+ 1}\\)\nならば，どのように操作を行っても\n\\(S\\)\nより辞書順で小さい文字列を作ることができません．辞書順で小さくできる場合，できるだけ先頭に近い文字の辞書順を小さくしたほうが文字列全体の辞書順も小さくなるため，\n\\(\\ell\\)\nとしては\n\\(S_i > S_{i+1}\\)\nが成り立つ\n\\(1 \\leq i \\leq N-1\\)\nのうちもっとも小さいものを選ぶのが最適です．そのような\n\\(i\\)\nが存在しなければ，\n\\(\\ell=r\\)\nとして操作をするのが最適で，答えは\n\\(S\\)\nです．\n次に，最適な\n\\(r\\)\nを決めます．\n\\(S_\\ell\\)\n以下の文字が\n\\(S\\)\nの\n\\(\\ell+1\\)\n文字目以降に続く限り，\n\\(S_\\ell\\)\nを後ろに追いやるほうが辞書順で良いので，\n\\(r\\)\nは，\n\\(S_{\\ell} < S_{j+1}\\)\nが成り立つ\n\\(\\ell+1 \\leq j \\leq N-1\\)\nのうち最小のものが最適です．そのような\n\\(j\\)\nが存在しなければ，\n\\(r=N\\)\nが最適です．\n時間計算量は\n\\(O(N)\\)\nです．\n実装例 (Python)",
+      "codes": [
+        "def solve():\n    N = int(input())\n    S = input()\n    l = -1\n    for i in range(N - 1):\n        if S[i] > S[i + 1]:\n            l = i\n            break\n    if l == -1:\n        print(S)\n        return\n    r = N\n    for j in range(l + 1, N):\n        if S[l] < S[j]:\n            r = j\n            break\n    print(S[:l] + S[l + 1 : r] + S[l] + S[r:])\n\n\nT = int(input())\nfor _ in range(T):\n    solve()"
+      ],
+      "text_sha256": "e58fb89b24b4a4f1d82d13194877f8009707b1414b037b282da7ca9a2100c48a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc409/abc409_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

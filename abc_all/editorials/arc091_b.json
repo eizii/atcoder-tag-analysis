@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc091_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc091/editorial.pdf",
+      "text": "D: Remainder Reminder\n\n  b を固定して考えましょう。b = 1, 2, · · · N に対し、a をb で割った余りがK 以上であるような1 ≤a ≤N\n\nの個数が高速に求められれば良いです。簡単のため、a = 0 も許すことにして、あとでa = 0 の場合(これは\n\n簡単に求められます) を引くことにしましょう。\n\n さて、整数p, q を用いてN = pb + r(0 ≤r < b) という形でN を一意的に表したとき、a を0 からN ま\n\nで順に動かせば、a をb で割った余りを順に並べたものは、0, 1, 2, · · · b −1 という列がp 回繰り返され、最\n\n後に0, 1, 2, · · · r という列が付け加わったものになります。\n\n  0, 1, 2, · · · b −1 という列がp 回繰り返される部分には条件を満たすa の個数はp × max(0, b −K) 個、最\n\n後の部分にはmax(0, r −K + 1) 個あるので、条件を満たすa の個数がO(1) 時間で求められ、O(N) 時間\n\nでこの問題を解くことができました。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "543a7ec4c9abb74da3e7ffe2502673cf5b3a703343a4d8b8bd8e54dc3a73cc6a"
+    }
+  ],
+  "status": "available"
+}

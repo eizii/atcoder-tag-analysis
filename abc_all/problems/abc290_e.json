@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc290_e",
+  "title": "Make it Palindrome",
+  "contests": [
+    {
+      "contest_id": "abc290",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1485,
+  "raw_difficulty": 1485,
+  "contest_id": "abc290",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc290/tasks/abc290_e",
+  "statement": "配点 : 500 点 問題文 数列 X に対し、 f(X) = ( X を回文にするために変更する必要のある要素の個数の最小値 ) とします。 与えられた長さ N の数列 A の全ての 連続 部分列 X に対する f(X) の総和を求めてください。 但し、長さ m の数列 X が回文であるとは、全ての 1 \\le i \\le m を満たす整数 i について、 X の i 項目と m+1-i 項目が等しいことを指します。 制約 入力は全て整数 1 \\le N \\le 2 \\times 10^5 1 \\le A_i \\le N 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N 出力 答えを整数として出力せよ。 入力例 1 5\r\n5 2 1 2 2 出力例 1 9 f(5) = 0 f(2) = 0 f(1) = 0 f(2) = 0 f(2) = 0 f(5,2) = 1 f(2,1) = 1 f(1,2) = 1 f(2,2) = 0 f(5,2,1) = 1 f(2,1,2) = 0 f(1,2,2) = 1 f(5,2,1,2) = 2 f(2,1,2,2) = 1 f(5,2,1,2,2) = 1 以上より、求める答えは 9 です。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 数列 X に対し、 f(X) = ( X を回文にするために変更する必要のある要素の個数の最小値 ) とします。 与えられた長さ N の数列 A の全ての 連続 部分列 X に対する f(X) の総和を求めてください。 但し、長さ m の数列 X が回文であるとは、全ての 1 \\le i \\le m を満たす整数 i について、 X の i 項目と m+1-i 項目が等しいことを指します。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 入力は全て整数 1 \\le N \\le 2 \\times 10^5 1 \\le A_i \\le N"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを整数として出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\n5 2 1 2 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 9 f(5) = 0 f(2) = 0 f(1) = 0 f(2) = 0 f(2) = 0 f(5,2) = 1 f(2,1) = 1 f(1,2) = 1 f(2,2) = 0 f(5,2,1) = 1 f(2,1,2) = 0 f(1,2,2) = 1 f(5,2,1,2) = 2 f(2,1,2,2) = 1 f(5,2,1,2,2) = 1 以上より、求める答えは 9 です。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc290/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:13.163426+00:00",
+  "statement_sha256": "12a2efb106c223c2eee5b5cfc23f3d8d45ceb99ab688f043db5d75fa058691a7",
+  "editorials": []
+}

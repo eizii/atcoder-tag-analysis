@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc234_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc234/editorial/3227",
+      "text": "\\(\\text{dp}_i\\) を、 \\(A\\) の先頭 \\(i\\) 項からなる数列 \\(A'=(A_1,A_2,\\ldots,A_i)\\) について問題を解いた場合の答えと定義します。すると、以下のような漸化式が成立します（ここで \\(\\text{dp}_0=1\\) とする）。 \\(\\text{dp}_i=\\sum_{j=0}^{i-1} \\text{dp}_j \\times (\\max(\\{A_{j+1},A_{j+2},\\ldots,A_i\\})-\\min(\\{A_{j+1},A_{j+2},\\ldots,A_i\\}))\\) このような動的計画法の計算量は愚直に行うと \\(O(N^2)\\) となりますが、工夫により \\(O(N)\\) まで落とすことが可能です。 まず、上記の漸化式を \\(\\max\\) と \\(\\min\\) それぞれについてで分離します。 \\(\\text{dp}_i=\\sum_{j=0}^{i-1} \\text{dp}_j \\times \\max(\\{A_{j+1},A_{j+2},\\ldots,A_i\\}) - \\sum_{j=0}^{i-1} \\text{dp}_j \\times \\min(\\{A_{j+1},A_{j+2},\\ldots,A_i\\})\\) こうして得られる遷移の形、具体的には「 \\(\\sum_{j=0}^{i-1} \\text{dp}_j \\times \\max(\\{A_{j+1},A_{j+2},\\ldots,A_i\\})\\) 」といった形は非常に高速化との相性が良いです。stack 等を用いて \\(\\max(\\{A_{j+1},A_{j+2},\\ldots,A_i\\})\\) の値を更新しつつ累積和を計算していくことで、線形時間で \\(\\text{dp}\\) を行うことができます。 具体的には、stack に以下の \\(2\\) つをセットにして積んでいき、適切に差分を更新していけばよいです。 \\(\\max(\\{A_{j+1},A_{j+2},\\ldots,A_i\\})\\) の値 \\(\\max(\\{A_{k+1},A_{k+2},\\ldots,A_i\\})\\) の値が上に等しくなるようなすべての \\(k\\) についての \\(\\text{dp}_k\\) の総和 \\(\\min\\) パートについてもほぼ同様です。 実装例 (C++) なお、この他にも Cartesian Tree の構造に注目した \\(\\text{dp}\\) 高速化手法も存在します（参考： https://atcoder.jp/contests/arc115/tasks/arc115_e ）",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing std::cin;\nusing std::cout;\nusing std::endl;\nusing std::vector;\nusing ll = long long;\n\nconst ll MOD = 998244353;\n\nint main(){\n\tint N; cin >> N;\n\tvector<ll> A(N);\n\tfor(int i=0; i<N; i++) cin >> A[i];\n\tvector<ll> dp(N+1);\n\tdp[0] = 1;\n\tstd::stack<ll> max, min, max_v, min_v;\n\tll max_sum = 0, min_sum = 0;\n\tfor(int i=0; i<N; i++){\n\t\t// max\n\t\t{\n\t\t\tll sum_v = dp[i];\n\t\t\twhile(!max.empty() && max.top() < A[i]){\n\t\t\t\tmax_sum -= max_v.top()*max.top();\n\t\t\t\tsum_v += max_v.top();\n\t\t\t\tmax_sum %= MOD;\n\t\t\t\tsum_v %= MOD;\n\t\t\t\tmax.pop();\n\t\t\t\tmax_v.pop();\n\t\t\t}\n\t\t\tmax_sum += sum_v*A[i];\n\t\t\tmax_sum %= MOD;\n\t\t\tmax.push(A[i]);\n\t\t\tmax_v.push(sum_v);\n\t\t}\n\t\t// min\n\t\t{\n\t\t\tll sum_v = dp[i];\n\t\t\twhile(!min.empty() && min.top() > A[i]){\n\t\t\t\tmin_sum -= min_v.top()*min.top();\n\t\t\t\tsum_v += min_v.top();\n\t\t\t\tmin_sum %= MOD;\n\t\t\t\tsum_v %= MOD;\n\t\t\t\tmin.pop();\n\t\t\t\tmin_v.pop();\n\t\t\t}\n\t\t\tmin_sum += sum_v*A[i];\n\t\t\tmin_sum %= MOD;\n\t\t\tmin.push(A[i]);\n\t\t\tmin_v.push(sum_v);\n\t\t}\n\t\tdp[i+1] = max_sum-min_sum;\n\t\tdp[i+1] %= MOD;\n\t}\n\tll ans = dp[N];\n\tif(ans < 0) ans += MOD;\n\tcout << ans << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "8e739116df61dd2b5433d1e5bc077ab666403675e22ca1376ac7faac62365294"
+    }
+  ],
+  "status": "available"
+}

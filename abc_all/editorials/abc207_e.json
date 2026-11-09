@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc207_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc207/editorial/2154",
+      "text": "\\(\\text{dp}[i][j]:=(A\\)\nの部分列\n\\(A'=(A_1,A_2,\\ldots,A_i)\\)\nを\n\\(j\\)\n個の空でない連続した部分列に切り分ける通り数\n\\()\\)\nと定義した動的計画法を考えます。\n遷移は以下の通りです。\n\\(\\text{dp}[i][j]:=(k \\lt i\\)\nを満たしてかつ\n\\(\\sum_{l=k+1}^{i}A_l\\)\nが\n\\(j\\)\nで割り切れるような全ての\n\\(k\\)\nにおける\n\\(\\text{dp}[k][j-1]\\)\nの総和\n\\()\\)\n上記の遷移は\n\\(\\text{sum}[0]=0,\\text{sum}[i]=\\text{sum}[i-1]+A_i\\)\nを満たす配列\n\\(\\text{sum}\\)\nを用いて表すことも可能で、その場合以下のようになります。\n\\(\\text{dp}[i][j]:=(k \\lt i\\)\nを満たしてかつ\n\\(\\text{sum}[i]-\\text{sum}[k]\\)\nが\n\\(j\\)\nで割り切れるような全ての\n\\(k\\)\nにおける\n\\(\\text{dp}[k][j-1]\\)\nの総和\n\\()\\)\nこのような dp は愚直に行うと遷移に\n\\(O(N)\\)\nかかることから合計での計算量が\n\\(O(N^3)\\)\nとなり、実行時間制限に間に合いません。\nそこで、「\n\\(\\text{sum}[i]-\\text{sum}[k]\\)\nが\n\\(j\\)\nで割り切れること」と「\n\\(\\text{sum}[i]\\)\nを\n\\(j\\)\nで割ったあまりと\n\\(\\text{sum}[k]\\)\nを\n\\(j\\)\nで割ったあまりが等しいこと」が同値であることを利用して、各\n\\(i,j\\ (0 \\leq j \\lt i \\leq N)\\)\nについて「\n\\(\\text{sum}[k]\\)\nを\n\\(i\\)\nで割ったあまりが\n\\(j\\)\nとなるような全ての\n\\(k\\)\nにおける、\n\\(\\text{dp}[k][i-1]\\)\nの総和」をメモしながら遷移してみましょう。\nこれにより遷移にかかる計算量が\n\\(O(1)\\)\nに落ち、合計での計算量が\n\\(O(N^2)\\)\nとなるため実行時間制限に間に合わせることができます。\n実装例 (Python)\n以下のように、dp 配列を使い回すような実装をすることも可能です。\n実装例 (C++)",
+      "codes": [
+        "N = int(input())\nA = list(map(int,input().split()))\nsum_ = [0]*(N+1)\nfor i in range(N):\n    sum_[i+1] = sum_[i]+A[i]\nmem = [[0]*(N+1) for i in range(N+1)]\ndp = [[0]*(N+1) for i in range(N+1)]\nmem[1][0] = dp[0][0] = 1\nmod = int(1e9+7)\nfor i in range(N):\n    for j in range(1,N+1):\n        dp[i+1][j] = mem[j][sum_[i+1]%j]\n    for j in range(2,N+1):\n        mem[j][sum_[i+1]%j] += dp[i+1][j-1]\n        mem[j][sum_[i+1]%j] %= mod\nans = sum(dp[N])%mod\nprint(ans)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nusing ll = long long;\nconst int mod = 1e9+7;\n\nint main(){\n    int N; cin >> N;\n    vector<ll> A(N), sum(N+1);\n    for(int i=0; i<N; i++){\n        cin >> A[i];\n        sum[i+1] = sum[i]+A[i];\n    }\n    vector<vector<int>> dp(N+2,vector<int>(N+2));\n    dp[1][0]++;\n    int ans = 0;\n    for(int i=0; i<N; i++){\n        for(int j=N; 1<=j; j--){\n            dp[j+1][sum[i+1]%(j+1)] += dp[j][sum[i+1]%j];\n            dp[j+1][sum[i+1]%(j+1)] %= mod;\n            if(i == N-1){\n                ans += dp[j][sum[i+1]%j];\n                ans %= mod;\n            }\n        }   \n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "c80838af10c41a0655d5fca884f246dc9a11da24e30ec6b80def751913d94909",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc207/abc207_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc292_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5873",
+      "text": "無向グラフの連結性を簡潔に管理する方法として、UnionFind(DSU)というデータ構造があります。本解説ではAtCoder Libraryのdsuを用いた解法を示します。\n本問を解く上で、与えられたグラフにおいて各頂点・各辺がどの連結成分に含まれているかを把握する必要があります。AtCoder Libraryのdsuでは、以下のようにして頂点\n\\(x\\)\nが含まれる連結成分を代表する頂点の番号を得られます。\nこれを用いて任意の連結成分において頂点数と辺数が等しいかどうかを判定すれば良いです。\n実装例(C++)",
+      "codes": [
+        "//atcoder::dsu Dを使い、lにxが含まれる連結成分を代表する頂点の番号を代入する\nl = D.leader(x);",
+        "#include <bits/stdc++.h>\n#include <atcoder/dsu>\nusing namespace std;\nusing namespace atcoder;\n\nint main() {\n    \n\tint N,M;\n\tcin>>N>>M;\n\tvector<int> u(M),v(M);\n\tfor(int i=0;i<M;i++){\n\t\tcin>>u[i]>>v[i];\n\t\tu[i]--,v[i]--;\n\t}\n\t\n\tdsu D(N);\n\tfor(int i=0;i<M;i++){\n\t\tD.merge(u[i],v[i]);\n\t}\n\t\n\tvector<int> vs(N),es(N);\n\tfor(int i=0;i<N;i++){\n\t\tvs[D.leader(i)]++;\n\t}\n\t\n\tfor(int i=0;i<M;i++){\n\t\tes[D.leader(u[i])]++;\n\t}\n\t\n\tif(vs==es)cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "23e44ea211c29bb11d8e0a88ceecd50751ff8f2bd4923ce76d87646bbab70142",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc292/abc292_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5942",
+      "text": "答えは、\n\\(N = M\\)\nかつすべての連結成分がサイクルを持つことです。\n超頂点\n\\(\\star\\)\nを一つ追加して union-find をし、普通に辺を追加した後で、それで（超頂点なしのほうのグラフで）サイクルができた場合には\n\\(\\star\\)\nともつなぐことにして、最後に全体が連結になっているかどうかを見ればよいです。\n超頂点なしのほうのグラフでサイクルができたかどうかの判定は、実は超頂点ありの方で判定した結果と同じになりますから、簡単に判定ができます。（証明は難しくありませんが、自明ではありません。）\nRust 32 ms",
+      "codes": [
+        "use petgraph::unionfind::UnionFind;\nuse proconio::{input, marker::Usize1};\n\nfn main() {\n    input! {\n        n: usize,\n        m: usize,\n        edges: [(Usize1, Usize1); m],\n    }\n    let mut uf = UnionFind::new(n + 1);\n    for &(i, j) in &edges {\n        if !uf.union(i, j) {\n            uf.union(i, n);\n        }\n    }\n    let ans = n == m && (0..n).all(|i| uf.equiv(i, n));\n    println!(\"{}\", [\"No\", \"Yes\"][ans as usize]);\n}"
+      ],
+      "text_sha256": "2aa3c0c1ce10ed9b8373bf479a3e1562930d56580a910a939eab0e5c8db64c1c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc292/abc292_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

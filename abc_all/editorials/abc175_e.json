@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc175_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc175/editorial/54",
+      "text": "まず、同じ行で\n\\(3\\)\nつまでしか拾えないという条件を無視すれば、シンプルな動的計画法 (\n\\(f_{i,j} :=(1, 1)\\)\nから\n\\((i, j)\\)\nまでの経路についての最大値　とすればよい) で答えを求められます。\n\\(3\\)\nつしかないという条件から各行では拾う場所の組を全部試す方針が考えられるかもしれませんが、少なくとも左端と右端の情報は必要になると思われ、計算量が\n\\(3\\)\n乗になってしまいます。\nしかし、初めの\n\\(f\\)\nの情報に、今いる行 (\n\\(i\\)\n行目)で既に何回拾ったかという情報を組み込み、\n\\(f_{i,j,k}\\)\nを計算していくと、各\n\\(i,j,k\\)\nについて遷移が\n\\(\\mathrm{O}(1)\\)\n通りしかなく (\n\\(i+1\\)\nに行く場合は\n\\(k=0\\)\nとしてリセットし、\n\\(i\\)\nのままであれば\n\\(k\\)\nをそのまま考慮する)、全体でも\n\\(\\mathrm{O}(RC)\\)\nで計算可能です。\nこのように、区間から定数個選ぶ設定では区間の状態を状態として追加で持つことで高速化できる場合がよくあります。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "37942ea1e60ec7fdc49cff5a450ff3623de219eafafb112fa50b0159cce9622f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc175/abc175_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

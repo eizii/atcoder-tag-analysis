@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc247_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc247/editorial/3718",
+      "text": "筒の中のボールの状態をランレングス符号化を行って保持します。\nつまり、例えば\nというクエリの後の筒の状態を、「\n\\(2\\)\nが\n\\(3\\)\n個、\n\\(3\\)\nが\n\\(4\\)\n個、\n\\(10\\)\nが\n\\(10\\)\n個」という形で保持します。クエリ\n\\(1\\)\n回につき、このリストの長さは高々\n\\(1\\)\nしか増えないため、クエリ処理全体を通して長さが\n\\(Q\\)\nを超えることはありません。\nこの形式の情報を deque で持つことにすれば、挿入クエリは\n\\(O(1)\\)\n、取り出しクエリは\n\\(O(1+(\\text{dequeから削除した要素の個数}))\\)\nとなります。したがって、全体の計算量は\n\\(O(Q)\\)\nで問題を解くことができました。\nなお、この問題では、厳密にランレングス符号化を行わなくとも AC を得ることができます。例えば\nというクエリの後の筒の状態をランレングス符号化すると「\n\\(10\\)\nが\n\\(13\\)\n個」となりますが、単に「\n\\(10\\)\nが\n\\(10\\)\n個、\n\\(10\\)\nが\n\\(3\\)\n個」としても全体の計算量は\n\\(O(Q)\\)\nとなります。",
+      "codes": [
+        "1 2 3\n1 3 4\n1 10 10",
+        "1 10 3\n1 10 10"
+      ],
+      "text_sha256": "059f9b4c5f9d8ec7a2846d9bf7551ab203dfac7b7f7928d52be77c422ac61c3f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc247/abc247_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc247/editorial/3781",
+      "text": "ボールを筒の右側から入れるクエリをクエリ\n\\(1\\)\n、筒の左側からボールを取り出すクエリをクエリ\n\\(2\\)\nと呼ぶことにします。\nクエリ\n\\(2\\)\nが与えられたとき、筒の中には\n\\(c\\)\n個以上のボールがあることが保証されているため、クエリ\n\\(1\\)\nは最初から全て処理されていることにしても良いです。\nよって、クエリ\n\\(1\\)\nを順番に全て処理してから、クエリ\n\\(2\\)\nを順番に全て処理することでもAC出来ます。  (実装は少々面倒になるかもしれません)\n解答例",
+      "codes": [],
+      "text_sha256": "f09423b2bdaa7f8edbab7c31af8c1cd3e1b7c70c0a560b28b3336e8b01ee9778",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc247/abc247_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

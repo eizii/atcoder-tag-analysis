@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc396_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc396/editorial/12389",
+      "text": "この問題は\nスタック\nと呼ばれるデータ構造に関する問題です。\nスタックは、データを順番に積み重ねて管理する「後入れ先出し（LIFO: Last In, First Out）」の特性を持つデータ構造です。以下の2つの基本操作によって、データの追加と削除を行います。\nプッシュ（push）\nスタックの一番上（トップ）に新しいデータを追加する操作です。新しい要素は、現在のトップの上に積み重なる形で追加されます。\nポップ（pop）\nスタックの一番上（トップ）にあるデータを取り出し、削除する操作です。最も最後に追加されたデータが最初に取り出されるため、「後入れ先出し（LIFO）」の動作を実現します。\n今回の問題では、タイプ\n\\(1\\)\nのクエリがプッシュに、タイプ\n\\(2\\)\nのクエリがポップに対応する操作となります。\nこのスタックと呼ばれるデータ構造は多くのプログラミング言語に組み込みの機能として用意されており、一から実装する必要はありません。\nこれらの知識をふまえてこの問題を解くことを考えます。\nまず、はじめに整数\n\\(0\\)\nの書かれたカードが\n\\(100\\)\n枚積み重なったカードの山があります。この状態は、最初に空のスタックを用意し、その中に\n\\(0\\)\nを\n\\(100\\)\n回入れることで実現することができます。\nその後は順番にクエリを受け取り、タイプ\n\\(1\\)\nならプッシュ操作を、タイプ\n\\(2\\)\nならポップ操作を順に行っていけば良いです。\nPython と C++ による実装例を以下に示します。\n実装例 (Python)\n実装例(C++)",
+      "codes": [
+        "stack = []\nfor _ in range(100):\n    stack.append(0)\nQ = int(input())\nfor _ in range(Q):\n    query = list(map(int, input().split()))\n    if query[0] == 1:\n        x = query[1]\n        stack.append(x)\n    else:\n        print(stack.pop())",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tstack<int> st;\n\tfor (int i = 0; i < 100; i++) {\n\t\tst.push(0);\n\t}\n\tint Q;\n\tcin >> Q;\n\tfor (int i = 0; i < Q; i++) {\n\t\tint c;\n\t\tcin >> c;\n\t\tif (c == 1) {\n\t\t\tint x;\n\t\t\tcin >> x;\n\t\t\tst.push(x);\n\t\t} else {\n\t\t\tcout << st.top() << endl;\n\t\t\tst.pop();\n\t\t}\n\t}\n\treturn 0;\n}"
+      ],
+      "text_sha256": "44537f620ece20fe58002ea7b04ca71c38ea3e1afc147b7cc9365df0b8b79f66",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc396/abc396_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc391_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc391/editorial/12087",
+      "text": "\\(T,S\\) の最長共通部分列 (LCS) の長さを求める方法を軽く振り返っておきます． \\((|T|+1)\\times (|S|+1)\\) の配列 dp を用意し， \\(dp[i][j]\\) を \\(T[:i]\\) と \\(S[:j]\\) の LCS の長さとする．dp の遷移は以下の \\(3\\) つである． \\(dp[i][j] \\leftarrow dp[i-1][j]\\) \\(dp[i][j] \\leftarrow dp[i][j-1]\\) もし \\(T[i]=S[j]\\) なら \\(dp[i][j] \\leftarrow dp[i-1][j-1]+1\\) この遷移を観察すると，dp 配列には以下の性質が成り立つことが分かります． \\(dp[i][0]=0\\) \\(0\\leq dp[i][j+1]-dp[i][j]\\leq 1\\) すなわち， \\(dp[i]\\) は広義単調増加列であり，隣接する項の差は高々 \\(1\\) です．よって， \\(dp[i]\\) としてあり得る状態は高々 \\(2^{|S|}\\) 通りしかないことが分かります． この性質を利用して元の問題を解きます． \\(DP[i][dp\\_array]\\) を「長さ \\(i\\) の文字列 \\(T\\) であって， \\(T\\) と \\(S\\) の LCS を求めるときの dp 配列における \\(dp[i]\\) が \\(dp\\_array\\) であるようなものの個数」とします． \\(i\\) を増やしたときの \\(dp\\_array\\) の遷移先については，上で述べた LCS の dp の遷移にしたがって求めればよいです． \\(DP[i]\\) の状態数が \\(O(2^N)\\) であり， \\(dp\\_array\\) の遷移の計算に \\(O(\\sigma N)\\) かかるため，計算量は \\(O(NM\\sigma 2^N)\\) になります．（ \\(\\sigma\\) は文字の種類数です．）また，あらかじめ遷移を前計算しておくことで計算量を \\(O(NM2^N)\\) に減らすことも可能です．",
+      "codes": [
+        "from collections import defaultdict\n\nmod = 998244353\n\nN, M = map(int, input().split())\nA = [ord(i) - ord(\"a\") for i in input()]\nK = 26\ndp = defaultdict(int)\ndp[tuple([0] * (N + 1))] = 1\nfor _ in range(M):\n    ndp = defaultdict(int)\n    for arr, c in dp.items():\n        for i in range(K):\n            narr = [0] * (N + 1)\n            for j in range(N):\n                narr[j + 1] = max(narr[j], arr[j + 1])\n                if A[j] == i:\n                    narr[j + 1] = max(narr[j + 1], arr[j] + 1)\n            ndp[tuple(narr)] = (ndp[tuple(narr)] + c) % mod\n    dp = ndp\nans = [0] * (N + 1)\nfor arr, c in dp.items():\n    ans[arr[N]] += c\nprint(*[i % mod for i in ans])\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "30cfbd4b6d81b181fa516afbbb5e79a7af5bb8627068f0aabdb05bc242882702"
+    }
+  ],
+  "status": "available"
+}

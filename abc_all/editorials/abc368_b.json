@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc368_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc368/editorial/10716",
+      "text": "シミュレーションをすることで、この問題を解くことができます。\n\\(A\\)\nを降順に並び替える動作は、多くのプログラミング言語で\nsort\n関数として存在します。その他の詳細は以下のコードで確認してください。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    // input\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (auto &e : a) {\n        cin >> e;\n    }\n\n    int answer = 0;\n    while (true) {\n        // sort\n        sort(a.begin(), a.end(), greater());\n        \n        // check condition\n        if (a[0] == 0 or a[1] == 0) {\n            break;\n        }\n        \n        // apply\n        a[0] -= 1;\n        a[1] -= 1;\n        ++answer;\n    }\n    \n    // output\n    cout << answer << endl;\n}"
+      ],
+      "text_sha256": "9070d4d19c8e4234387a5f571b086aa687d42311271e8b5da5c7251921c1524e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc368/abc368_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc368/editorial/10754",
+      "text": "考察を進めることで、より大きな制約でも高速に解ける解法を導くことができます。\nまず、\\(\\displaystyle\\sum _ {i=1} ^ NA _ i\\) が操作のたびに \\(2\\) だけ減少するので、答えは \\(\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor\\) 以下です。\n次に、\\(\\displaystyle\\max _ {1\\leq i\\leq N}A _ i\\) が操作のたびにたかだか \\(1\\) だけ減少するので、\\(\\displaystyle\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\) は \\(1\\) 回の操作で \\(1\\) もしくは \\(2\\) 減少し、答えは \\(\\displaystyle\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\) 以下です。\n以上より、答えは \\(\\displaystyle\\min\\Biggl\\lbrace\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor,\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\Biggr\\rbrace\\) 以下です。\n実は、この上界が達成されることを示せます。\n\\(\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor\\) と \\(\\displaystyle\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\) の大小関係について場合分けを行います。\n\\(\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor\\gt\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\) のとき\nこのとき、\\(A _ i\\) が最大になる \\(i\\) がただひとつ存在します。これが \\(1\\) として一般性を失いません。このような \\(A\\) からはじめたとき、操作は常に \\(A _ 1\\) と \\(A _ i\\ (i\\neq1)\\) に対して行われ、操作回数は \\(\\displaystyle\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\) 回です。\n\\(\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor\\leq\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\) のとき\nまず、\\(\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor\\leq\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\) が成り立っている状態から（操作ができるなら）操作を行っても \\(\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor\\leq\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\) が成り立つことを示します。\n\\(\\displaystyle A _ 1=\\max _ {1\\leq i\\leq N}A _ i\\) として一般性を失わないため、そうします。\n\\(A _ 1=A _ i\\) なる \\(1\\lt i\\leq N\\) がたかだか \\(1\\) つのとき、操作の前後で \\(\\displaystyle\\max _ {1\\leq i\\leq N}A _ i\\) は \\(1\\) 減少しています。よって、\\(\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor,\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\) のどちらも \\(1\\) だけ減少しているため、大小関係は変化しません。\n\\(A _ 1=A _ i\\) なる \\(1\\lt i\\leq N\\) が \\(2\\) つ以上存在するとき、\\(\\displaystyle\\sum _ {i=1} ^ NA _ i\\geq3A _ 1\\) なので、\\(\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor\\lt\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\) が成り立ちます。操作の前後で \\(\\displaystyle\\max _ {1\\leq i\\leq N}A _ i\\) は変化しないため、\\(\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor\\) は \\(1\\) 、\\(\\displaystyle\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\) は \\(2\\) だけ減少し、\\(\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor\\leq\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\) が成り立ちます。\nよって、操作のたびに \\(\\min\\Biggl\\lbrace\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor,\\sum _ {i=1} ^ NA _ i-\\max _ {1\\leq i\\leq N}A _ i\\Biggr\\rbrace=\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor\\) は \\(1\\) ずつ減少し、操作回数は \\(\\displaystyle\\Biggl\\lfloor\\dfrac12\\sum _ {i=1} ^ NA _ i\\Biggr\\rfloor\\) 回です。\nあとは、これを実装することで \\(N\\leq10 ^ 6,A _ i\\leq10 ^ {18}\\) のような制約でも十分高速に問題を解くことができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    int sum_A = 0, max_A = 0;\n    for (int i = 0; i < N; ++i) {\n        int A;\n        cin >> A;\n        // A の合計と A の最大値を更新\n        sum_A += A;\n        max_A = max(A, max_A);\n    }\n    // 答えは min(合計 / 2, 合計 - 最大値)\n    cout << min(sum_A / 2, sum_A - max_A) << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "a6f121362fa2fb1bc0df4724a0e27d490da406680fb9bf5d6c8b140ad6d78939",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc368/abc368_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

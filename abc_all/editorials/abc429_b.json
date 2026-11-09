@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc429_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc429/editorial/14255",
+      "text": "除く\n\\(1\\)\n個の要素を\n\\(A_k\\)\nとすると、\n\\(N-1\\)\n個の要素の総和は\n\\(\\displaystyle \\sum_{i=1}^N A_i-A_k\\)\nと表すことができます。この値が\n\\(M\\)\nになる\n\\(k\\)\nが存在するか判定できれば良いですが、この式を式変形すると\n\\(\\displaystyle A_k=\\sum_{i=1}^N A_i-M\\)\nとなるため、この式を満たす\n\\(k\\)\nが存在するか調べれば良いです。\n実装例(Python3)",
+      "codes": [
+        "n, m = map(int, input().split())\na = list(map(int, input().split()))\nif sum(a) - m in a:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "9ed728028c3e9420fced24592d87b0e20e7707a35f01e92c32b534c88cc0e49b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc429/abc429_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

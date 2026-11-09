@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc135_b",
+  "editorials": [
+    {
+      "text": "B: 0 or 1 Swap\npi̸ = i であるような要素pi の数をk とします。結論から言うとk ≤2 であるときに限り1 回以下のス\nワップでp を昇順にすることが可能です。k = 0 のとき、最初からp が昇順であることを意味します。k = 1\nになることはありません。k = 2 のとき、pi̸ = i である2 つの要素を1 回スワップすることでp を昇順にで\nきます。1 回のスワップでk の値はたかだか2 しか減らすことができないため、k ≥3 のとき1 回以下のス\nワップでp を昇順にすることはできません。\n与えられた順列のk の値は線形時間で求めることができます。よってこの問題をO(N) で解くことができ\nました。ちなみに問題をより一般化した「M (M ≤N) 回以下のスワップでp を昇順にできるか？」という\n問題もO(N) で解くことができます。\nListing 2\nC++ による実装例\n1 #include<bits/stdc++.h>\n2 using namespace std;\n3 #define rep(i, n) for(int i = 0; i < (int)n; i++)\n4\n5 int main() {\n6\nint n;\n7\ncin >> n;\n8\nvector<int> p(n);\n9\nrep(i, n) cin >> p[i];\n10\nint k = 0;\n11\nrep(i, n) if(p[i] != i + 1) k++;\n12\nif(k <= 2) cout << \"YES\" << endl;\n13\nelse cout << \"NO\" << endl;\n14\nreturn 0;\n15 }\n",
+      "text_sha256": "4cdfaccc622c56e7a8de38c8c6871848159f6df0b666094b9c7c9acdb6c54633",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc135/abc135_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

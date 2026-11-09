@@ -1,0 +1,408 @@
+               ARC 102 解説
+
+
+                            DEGwer
+
+                                  2018/09/01
+
+
+
+                   For International Readers: English editorial starts on page 6.
+
+
+A: Pair
+
+ K 以下の偶数は⌊K/2⌋個、奇数は⌈K/2⌉個あるので、これらを足し合わせればよいです。
+
+#include <stdio . h>
+
+ int main ()
+
+{
+
+          int k ;
+
+         scanf (”%d” , &k ) ;
+
+         p r i n t f (”%d\n” ,  (k / 2)∗(( k + 1)  /  2 ) ) ;
+
+}
+
+
+B: Ruined Square
+
+ 以下のコードのような式で、残りの点の座標を求めることができます。
+
+#include <stdio . h>
+
+using namespace  std ;
+
+ int main ()
+
+{
+
+          int  a , b ,  c , d ;
+
+         scanf (”%d%d%d%d” , &a , &b , &c , &d ) ;
+
+          int x = c −a ,  y = d −b ;
+
+         p r i n t f (”%d %d %d %d\n” ,  c −y , d + x ,  a −y , b + x ) ;
+
+}
+
+
+
+
+
+                                             1
+
+C: Triangular Relationship
+
+ K が奇数の時、a, b, c をK で割ったあまりはすべて0 である必要があります。K が偶数の時、a, b, c を
+
+K で割ったあまりはすべて0 であるか、あるいはすべてK/2 である必要があります。このような組の個数
+
+は、N 以下でK で割って0 あまるものの個数とK/2 あまるものの個数から求めることができるので、この
+
+問題を解くことができました。
+
+
+D: All Your Paths are Diﬀerent Lengths
+
+  2r ≤L なる最大のr を取ります(r ≤19 に注意)。まず、以下のようにすれば、長さ0 以上2r −1 以下の
+
+パスをすべて1 本ずつ作ることができます。
+
+    • r + 1 個の頂点1, ..., r + 1 を用意し、N = r + 1 とする
+    • 頂点i から頂点i + 1 へ、長さ0 の辺と長さ2i の辺を1 本ずつ張る
+
+ さて、こうして作ったグラフの頂点t から頂点N に長さX の辺を張れば、長さX, X +1, ..., X +2t−1 −1
+のパスを1 本ずつ作ることができます。よって、t = N −1, ..., 1 の順に見て、L −2t−1 ≥2r なら頂点t か
+ら頂点N に長さL −2t−1 の辺を張り、L を2t−1 だけ減らし、そうでなければ何もしないことを繰り返せば
+
+よいです。
+
+
+E: Stop. Otherwise...
+
+ どの2 つのサイコロの出目の和もt にならないような出目の組の個数を高速に数えることができれば、こ
+
+の問題を解くことができます。
+
+   t が奇数の時、条件はa + b = t となるような各1 ≤a, b ≤K に対し、a, b のどちらか片方は現れないこ
+
+とです。このような(a, b) の組の個数をp とすれば、p 個の組のうちいくつか(q 個とする) については組の
+
+目の両方とも出目として現れず、残りについては片方のみ現れることになります。ここで、q を全通り試せば
+
+この場合の数は簡単な二項係数(と2 べき) で表せる形になるので、この場合はO(K) 時間で解くことができ
+
+ます。
+
+   t が偶数の時、条件は上記のものにK/2 が1 個以下しか現れないという条件を加えたものです。よって、
+
+K/2 がいくつ(0 個または1 個) 現れるかで場合分けをし、上と同様に解けばよいです。
+ 時間計算量はO(K2 + N) です。
+
+
+F: Revenge of BBuBBBlesort!
+
+ 列{ai} = (1, 2, ..., N) からai−1 < ai < ai+1 なる連続3 項を反転する(以下「i で操作する」) ことを繰り
+返して列p を作れるか判定すればよいです。このようにして作れる列p の性質を見ていくことにしましょう。
+
+ まず、隣接2 要素の両方で操作することはないことがわかります。これは以下のように証明されます。
+
+ 証明: i で操作する前に、i−1 やi+1 で操作したことがあるとする。最後にi−1 で操作したならpi−1 > pi
+に、最後にi + 1 で操作したならpi > pi+1 になっているので、i では操作できない。
+
+
+
+                                             2
+
+ 特に、i で操作したなら、i の位置にある数はそれ以降変化することはありません。
+
+ 以下、l + 1, l + 3, ..., r −1 のすべてで操作しており、l −1, r + 1 では操作していないような区間[l, r] に列
+
+を分解して考えます。これらの区間に対して操作は独立に行われるので、以下ひとつの区間についてのみ考え
+
+ます。
+
+   l + 1, l + 3, ..., r −1 の位置にある数は(l, l + 2, ..., r では操作しないので)(l + 1, l + 3, ..., r −1 のまま) 変
+
+化することはありません(これらをピボットと呼ぶことにしましょう)。ピボットでない数が操作によって移
+
+動したとします。もしこの数が左に移動したなら、この数のすぐ右にあるピボットの値はこの数より小さく、
+
+よってそれ以降この数は現在の位置より右に移動することはないことが分かります。右に移動した場合も同様
+
+に、それ以降この数が現在の位置より左に移動することはありません。この議論はすべての操作について成り
+
+立つので、ピボットでない数は左に移動し続けるか右に移動し続けるかのどちらかになります(区間の取り方
+
+より、移動しないことはありません)。
+
+ さて、左に移動し続ける数同士の順番が変化するなら、それらが入れ替わるときに片方は右に移動している
+
+ことになって矛盾します。よって、初期状態より左に移動した数は、常にその相対的な順序を保つことになり
+
+ます。同様に、初期状態より右に移動した数も、常にその相対的な順序を保つことになります。
+
+ 逆に、これらの条件が満たされるとき、すなわち各区間(区間への分解は上記の議論より列p から定まる)
+
+においてその偶数番目の数は移動せず、奇数番目の数はすべて移動し、左に移動する数たちと右に移動する数
+
+たちはそれぞれその相対的な順序を保つ場合、数が(まだ右に移動する数ピボットまだ左に移動する数) と
+
+いう順に並んでいる場所を一個取って操作を行うことを繰り返すことでp を作ることができることが分かり
+
+ます。
+
+ よって、以上の条件を満たすかどうかを判定すればよく、これは線形時間で可能なので、この問題を解くこ
+
+とができます。
+
+
+
+
+
+                                             3
+
+              ARC 102 Editorial
+
+
+                            DEGwer
+
+                                  2018/09/01
+
+
+
+A: Pair
+
+  There are ⌊K/2⌋even numbers and ⌈K/2⌉odd numbers among positive integers up to K. The answer
+
+is the product of these values.
+
+#include <stdio . h>
+
+ int main ()
+
+{
+
+          int k ;
+
+         scanf (”%d” , &k ) ;
+
+         p r i n t f (”%d\n” ,  (k / 2)∗(( k + 1)  /  2 ) ) ;
+
+}
+
+
+B: Ruined Square
+
+  You can compute the coordinates of the reaming points as in the code below:
+
+#include <stdio . h>
+
+using namespace  std ;
+
+ int main ()
+
+{
+
+          int  a , b ,  c , d ;
+
+         scanf (”%d%d%d%d” , &a , &b , &c , &d ) ;
+
+          int x = c −a ,  y = d −b ;
+
+         p r i n t f (”%d %d %d %d\n” ,  c −y , d + x ,  a −y , b + x ) ;
+
+}
+
+
+
+
+
+                                             1
+
+C: Triangular Relationship
+
+ When K is odd, a triplet (a, b, c) satisﬁes the conditions when all of them are divisible by K. It’s easy
+
+to count such triplets.
+
+ When K is even, a triplet (a, b, c) satisﬁes the conditions when all of them are divisible by K, or when
+
+all of them are equivalent to K/2 modulo K. We can count such triplets by counting the number of
+
+integers up to N that are equivalent to 0 or K/2, modulo K.
+
+
+D: All Your Paths are Diﬀerent Lengths
+
+Solution 1.
+
+  Let’s take the maximum integer r such that 2r ≤L.
+
+  First, consider the following graph:
+
+    • There are N = r + 1 vertices numbered 1, . . . , N.
+
+    • For each i, add two edges from vertex i to vertex i + 1. One of them has length 0, and the other
+      has length 2i−1.
+
+  In this graph, there are 2r paths from vertex 1 to vertex N, and their lengths are 0, . . . , 2r −1.
+
+ What happens  if we add an edge of length X from vertex t to vertex N?  This way we can add
+X, X + 1, . . . , X + 2t−1 −1 to the set of lengths.
+
+ By adding edges of this type properly (by writing L as a sum of powers of two using binary represen-
+
+tation), we can get a desired graph.
+
+
+Solution 2.
+
+  Suppose that we have a graph G that satisﬁes the condition for L = X. We’ll show how to construct
+
+solutions for L = X + 1 and L = 2X using this graph. By repeating these operations properly, we can
+
+get a desired graph.
+
+    • L = X + 1 is easy: just add an edge of length X from source to sink to G.
+
+    • L = 2X can be constructed as follows. First, double the lengths of all edges in G. Now the set
+
+       of lengths is 0, 2, . . . , 2X −2. Then, add a new vertex to G (it will be the new sink), and add
+
+     two edges from the old sink to the new sink, with lengths 0 and 1. Now the set of lengths is
+
+       0, 1, 2, . . . , 2X −1, and this is what we want.
+
+
+
+
+
+                                             2
+
+E: Stop. Otherwise...
+
+  Let’s handle each query independently.  For a ﬁxed value of  t, we want to count the number of
+
+combinations of dice such that the sum of no two dice is t.
+
+  For simplicity, we say ”x exists” when at least one die shows x. Suppose that t is odd. In this case,
+
+the condition can be restated as follows: for each pair (a, b) such that a + b = t, at least one of a or b
+
+should not exist. Let’s divide integers 1, . . . , K into pairs, such that the sum of two numbers in each pair
+
+is t (and some numbers will be left unpaired).
+
+  Let p be the number of pairs formed this way. Then, the combination of dice must be of the following
+
+form for some integer q:
+
+    • For q pairs, exactly one of the two numbers in the pair exists.
+
+    • For the remaining p −q pairs, both numbers don’t exist.
+
+    • K −2p numbers are left unpaired: we don’t care if these numbers exist.
+             (p)
+  There are  q 2q ways to choose the set of existing numbers (among paired numbers). After that, the
+number of ways to distribute the number of occurrences of those numbers among N dice are equal to
+
+the number of solutions to the following equation:
+
+    • x1 + · · · + xq + y1 + . . . + yK−2p = N
+    • x1, · · · , xq are positive integers
+    • y1, · · · , yK−2p are non-negative integers
+
+  Here, x1, · · · , xq corresponds to the number of occurrences of each existing paired numbers, and
+y1, · · · , yK−2p corresponds to the number of occurrences of each unpaired numbers.
+
+  This is a well-known task and the answer can be represented by a binomial coeﬃcient. By trying
+
+all possible values of q, we can count the desired number in O(K) time (assuming that we do some
+
+pre-computation and we can get binomial coeﬃcients and powers in O(1)).
+
+ When t is even, there is an additional constraint that the number of occrrences of t/2 must be either
+
+0 or 1. Try both possibilities, and the remaining part is the same as above.
+  This solution works in O(K2 + N) time.
+
+
+
+
+
+                                             3
+
+F: Revenge of BBuBBBlesort!
+
+  Let’s see the operations in the reverse order: we start with a sequence {ai} = (1, 2, ..., N), and we
+repeat performing operations of the following type: Choose i such that ai−1 < ai < ai+1, and reverse
+
+their orders (we call it ”an operation on i”). We want to check if we can get p this way.
+
+  First, we’ll prove that we can never make operations in two adjacent positions. Suppose that before
+
+performing an operation on i, we have performed operations on i −1 or i + 1.  If the last operation on
+
+i −1 or i + 1 was on i −1, after the opeartion, ai−1 > ai holds. We can never change this inequality: an
+operation on i −2 only makes ai−1 greater, by the assumption above we don’t make operations on i + 1,
+
+and operations on other positions obviously don’t aﬀest this inequality. Similarly, if the last operation
+
+was on i + 1, ai > ai+1 holds, and we can never change this inequality. Thus, we can’t make an opeation
+
+on i, and we get a contradiction.
+
+  Let’s split the sequence into intervals as follows: al, . . . , ar forms an interval if we perform operations
+on all of l + 1, l + 3, ..., r −1, but not on l −1, r + 1. All elements move within these intervals, thus we
+
+can consider these intervals independently. From now on, we only considers the interval al, . . . , ar.
+ We start with al, . . . , ar = l, . . . , r. How can we change these numbers by performing operations only
+at l + 1, l + 3, ..., r −1?
+
+  Elements at positions l + 1, l + 3, ..., r −1 will never move. Let’s call these elements ”pivots”.
+
+  Consider a non-pivot element x in this interval. From the deﬁnition of intervals, this element must
+
+move (unless l = r). Suppose that it moves to the left in the ﬁrst operation that involves this element.
+
+Then, after that, this element is always greater than the pivot to the right of it; and it can never move
+
+to the right in the future. We can do the same observaion when it moves to the right ﬁrst. Thus, each
+
+non-pivot element keeps moving in the same direction.
+
+  Consider two non-pivot elements that moves to the left. The relative order of these elements will not
+
+change: to change their relative order, we must swap them, but this is impossible because they must
+
+keep moving left. We can say the same thing for elements moving right.
+
+ On the other hand, these conditions are suﬃcient; we can achieve the goal by repeating operations on
+
+consecutive three elements such that ((An element that wants to go right), (pivot), (An element that
+
+wants to go left)).
+
+  To summarize, the conditions are:
+
+    • al+1, al+3, . . . , ar−1 must not change, and other elements must change.
+    • If we only consider all elements that moves to the left, they are increasing from left to right.
+
+    • If we only consider all elements that moves to the right, they are increasing from left to right.
+
+  From the ﬁrst condition, we can uniquly determine the way to split the sequence into intervals; after
+
+that, the remaining two conditions can be checked in linear time.
+
+
+
+
+
+                                             4

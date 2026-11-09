@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc267_f",
+  "title": "Exactly K Steps",
+  "contests": [
+    {
+      "contest_id": "abc267",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1939,
+  "raw_difficulty": 1939,
+  "contest_id": "abc267",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc267/tasks/abc267_f",
+  "statement": "配点 : 500 点 問題文 N 頂点の木が与えられます。頂点には 1, \\dots, N の番号が付けられており、 i \\, (1 \\leq i \\leq N - 1) 番目の辺は頂点 A_i, B_i を結びます。 この木における頂点 u, v の 距離 を、頂点 u から頂点 v までの最短パス上にある辺の本数と定義します。 Q 個のクエリが与えられます。 i \\, (1 \\leq i \\leq Q) 番目のクエリでは、整数 U_i, K_i が与えられるので、頂点 U_i からの距離がちょうど K_i であるような頂点の番号を任意に一つ出力してください。そのような頂点が存在しない場合は、 -1 を出力してください。 制約 2 \\leq N \\leq 2 \\times 10^5 1 \\leq A_i \\lt B_i \\leq N \\, (1 \\leq i \\leq N - 1) 与えられるグラフは木 1 \\leq Q \\leq 2 \\times 10^5 1 \\leq U_i, K_i \\leq N \\, (1 \\leq i \\leq Q) 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 B_1 \\vdots A_{N-1} B_{N-1} Q U_1 K_1 \\vdots U_Q K_Q 出力 Q 行出力せよ。 i \\, (1 \\leq i \\leq Q) 行目には、頂点 U_i からの距離がちょうど K_i である頂点が存在するならその一例を、存在しないなら -1 を出力せよ。そのような頂点が複数存在する場合、どれを出力しても正解となる。 入力例 1 5\n1 2\n2 3\n3 4\n3 5\n3\n2 2\n5 3\n3 3 出力例 1 4\n1\n-1 頂点 2 からの距離がちょうど 2 であるのは頂点 4, 5 の二つです。 頂点 5 からの距離がちょうど 3 であるのは頂点 1 のみです。 頂点 3 からの距離がちょうど 3 である頂点は存在しません。 入力例 2 10\n1 2\n2 3\n3 5\n2 8\n3 4\n4 6\n4 9\n5 7\n9 10\n5\n1 1\n2 2\n3 3\n4 4\n5 5 出力例 2 2\n4\n10\n-1\n-1",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 頂点の木が与えられます。頂点には 1, \\dots, N の番号が付けられており、 i \\, (1 \\leq i \\leq N - 1) 番目の辺は頂点 A_i, B_i を結びます。 この木における頂点 u, v の 距離 を、頂点 u から頂点 v までの最短パス上にある辺の本数と定義します。 Q 個のクエリが与えられます。 i \\, (1 \\leq i \\leq Q) 番目のクエリでは、整数 U_i, K_i が与えられるので、頂点 U_i からの距離がちょうど K_i であるような頂点の番号を任意に一つ出力してください。そのような頂点が存在しない場合は、 -1 を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 2 \\times 10^5 1 \\leq A_i \\lt B_i \\leq N \\, (1 \\leq i \\leq N - 1) 与えられるグラフは木 1 \\leq Q \\leq 2 \\times 10^5 1 \\leq U_i, K_i \\leq N \\, (1 \\leq i \\leq Q) 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 B_1 \\vdots A_{N-1} B_{N-1} Q U_1 K_1 \\vdots U_Q K_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 i \\, (1 \\leq i \\leq Q) 行目には、頂点 U_i からの距離がちょうど K_i である頂点が存在するならその一例を、存在しないなら -1 を出力せよ。そのような頂点が複数存在する場合、どれを出力しても正解となる。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\n1 2\n2 3\n3 4\n3 5\n3\n2 2\n5 3\n3 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4\n1\n-1 頂点 2 からの距離がちょうど 2 であるのは頂点 4, 5 の二つです。 頂点 5 からの距離がちょうど 3 であるのは頂点 1 のみです。 頂点 3 からの距離がちょうど 3 である頂点は存在しません。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10\n1 2\n2 3\n3 5\n2 8\n3 4\n4 6\n4 9\n5 7\n9 10\n5\n1 1\n2 2\n3 3\n4 4\n5 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 2\n4\n10\n-1\n-1"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc267/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:44.130609+00:00",
+  "statement_sha256": "c3f90cdd6abd643324cca10aa8d1fc342f9508bcb60d40b565c220c46ece453c",
+  "editorials": []
+}

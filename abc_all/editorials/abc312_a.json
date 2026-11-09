@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc312_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6851",
+      "text": "与えられた条件にしたがって、\n\\(S\\)\nが\nACE\n、\nBDF\n、\nCEG\n、\nDFA\n、\nEGB\n、\nFAC\n、\nGBD\nのいずれかと等しいか判定すればよいです。\nまた、実は長さ\n\\(3\\)\nの文字列\n\\(S\\)\nについて、\n\\(S\\)\nが\nACE\n、\nBDF\n、\nCEG\n、\nDFA\n、\nEGB\n、\nFAC\n、\nGBD\nのいずれかと等しいことは\n\\(S\\)\nが\nACEGBDFAC\nの部分文字列であることと同値なのでこの性質を使って判定することもできます。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tif (s == \"ACE\" or s == \"BDF\" or s == \"CEG\" or s == \"DFA\" or s == \"EGB\" or s == \"FAC\" or s == \"GBD\") cout << \"Yes\\n\";\n\telse cout << \"No\\n\";\n}",
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tstring t = \"ACEGBDFAC\";\n\tcout << (t.find(s) == string::npos ? \"No\" : \"Yes\") << '\\n';\n}"
+      ],
+      "text_sha256": "9bfeef36ef458c60f7331f33fd2063718bc4cac560270559ee84b6a2222905a9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6873",
+      "text": "以下のような実装でもACすることができます。",
+      "codes": [
+        "S = input()\ncond = S in \"が ACE、BDF、CEG、DFA、EGB、FAC、GBD のいずれかと等しいとき\"\nprint(\"Yes\" if cond else \"No\")"
+      ],
+      "text_sha256": "13ae1d786b86cb13dac465d6f1816c1bd0e442d4adbd049374c5fe64fe4079a5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

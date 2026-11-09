@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc365_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc365/editorial/10598",
+      "text": "\\(\\operatorname{dp} _ i[H]\\ (H\\in\\lbrace\\)\nR\n,\nP\n,\nS\n\\(\\rbrace)\\) を、\n\\(\\operatorname{dp} _ i[H]\\coloneqq i\\) 回目に出した手が \\(H\\) であるような \\(i\\) 回目までの手の出し方で高橋くんが出す手の条件を満たすものに対する、青木くんに勝った回数の最大値\nとして定義します（ここで、便宜上 \\(\\operatorname{dp} _ 0[H]=0\\) とします）。\n高橋くんが \\(i\\) 回目に出すことができた手は、青木くんが \\(i\\) 回目に出した手と高橋くんが \\(i-1\\) 回目に出した手のみから決まります。\nよって、\\(\\operatorname{dp} _ i[H]\\ (H\\in\\lbrace\\)\nR\n,\nP\n,\nS\n\\(\\rbrace)\\) は \\(\\operatorname{dp} _ {i-1}\\ (H\\in\\lbrace\\)\nR\n,\nP\n,\nS\n\\(\\rbrace)\\)（および \\(S _ i\\) の値）から求めることができます。\n具体的には、\\(\\operatorname{janken}(a,b)\\) を \\(a\\) が \\(b\\) に勝つなら \\(1\\) 、あいこなら \\(0\\) 、負けるなら \\(-1\\) となる関数として、\n\\[\\operatorname{dp} _ i[H]=\\begin{cases}\\displaystyle\\max _ {H^\\prime\\neq H}\\operatorname{dp} _ {i-1}[H^\\prime]&\\ &(\\operatorname{janken}(H,S _ i)=0)\\\\1+\\displaystyle\\max _ {H^\\prime\\neq H}\\operatorname{dp} _ {i-1}[H^\\prime]&&(\\operatorname{janken}(H,S _ i)=1)\\\\0&&(\\operatorname{janken}(H,S _ i)=-1)\\end{cases}\\]\nとするとよいです（負けるときの DP テーブルの値を \\(-\\infty\\) にしてもよいですが、\\(0\\) としても正しい値が得られることが証明できます）。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <array>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    cin >> N;\n    string S;\n    cin >> S;\n\n    array<unsigned, 3> dp{};\n    auto&& [rock, scissors, paper]{dp};\n\n    for(const auto c : S){\n        // 直前に出していなかった手を出すことができる\n        dp = {max(scissors, paper), max(rock, paper), max(rock, scissors)};\n        // 負ける手を出すことはできない = 勝ち数の最大値を 0 にする\n        // 勝つ手を出したら最大値 +1\n        if (c == 'R') {\n            scissors = 0;\n            ++paper;\n        } else if (c == 'S') {\n            paper = 0;\n            ++rock;\n        } else if (c == 'P') {\n            rock = 0;\n            ++scissors;\n        }\n    }\n\n    cout << ranges::max(dp) << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "f2d4dd2ba883ee8e96730ce0a8854bfa985b354066ca046f8938d70f81b8c7da",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc365/abc365_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc365/editorial/10600",
+      "text": "「勝てる手を出せるときには常に出す」という戦略が考えられますが、これは次のケースで最大得点を逃します。",
+      "codes": [
+        "3\nRRS"
+      ],
+      "text_sha256": "78d946dc3fdb92deff118f6b45df5df597817d0001c0cc2f568d57f34bca244a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc365/abc365_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc161_b",
+  "title": "Popular Vote",
+  "contests": [
+    {
+      "contest_id": "abc161",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 102,
+  "raw_difficulty": -148,
+  "contest_id": "abc161",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc161/tasks/abc161_b",
+  "statement": "配点 : 200 点 問題文 N 種類の商品に対して人気投票を行いました。商品 i は A_i 票を得ています。 この中から人気商品 M 個を選びます。ただし、得票数が総投票数の \\dfrac{1}{4M} 未満であるような商品は選べません。 人気商品 M 個を選べるなら Yes 、選べないなら No を出力してください。 制約 1 \\leq M \\leq N \\leq 100 1 \\leq A_i \\leq 1000 A_i は相異なる 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M A_1 ... A_N 出力 人気商品 M 個を選べるなら Yes 、選べないなら No を出力せよ。 入力例 1 4 1\r\n5 4 2 1 出力例 1 Yes 総投票数は 12 です。 1 位の得票数は 5 なので、これを選ぶことができます。 入力例 2 3 2\r\n380 19 1 出力例 2 No 総投票数は 400 です。 2,3 位の得票数は総得票数の \\dfrac{1}{4\\times 2} 未満なので、これらを選ぶことはできず、人気商品 2 個を選べません。 入力例 3 12 3\r\n4 56 78 901 2 345 67 890 123 45 6 789 出力例 3 Yes",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 種類の商品に対して人気投票を行いました。商品 i は A_i 票を得ています。 この中から人気商品 M 個を選びます。ただし、得票数が総投票数の \\dfrac{1}{4M} 未満であるような商品は選べません。 人気商品 M 個を選べるなら Yes 、選べないなら No を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq M \\leq N \\leq 100 1 \\leq A_i \\leq 1000 A_i は相異なる 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M A_1 ... A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 人気商品 M 個を選べるなら Yes 、選べないなら No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 1\r\n5 4 2 1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes 総投票数は 12 です。 1 位の得票数は 5 なので、これを選ぶことができます。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 2\r\n380 19 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No 総投票数は 400 です。 2,3 位の得票数は総得票数の \\dfrac{1}{4\\times 2} 未満なので、これらを選ぶことはできず、人気商品 2 個を選べません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 12 3\r\n4 56 78 901 2 345 67 890 123 45 6 789"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc161/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:35:30.241030+00:00",
+  "statement_sha256": "bbffbcefc5beed86096f925e8d3ec0185d669b71aff7dd7ca39fec1d2a4bf393",
+  "editorials": []
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc291_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc291/editorial/5839",
+      "text": "\\(1,\\ldots,N\\)\nを頂点とし、\n\\(X_i\\)\nから\n\\(Y_i\\)\nへ有向辺をもつグラフ\n\\(G\\)\nを考えます。\n\\(G\\)\nの任意の\nトポロジカル順序\n\\(P\\)\nについて、\n\\(A_{P_i}=i\\)\nと定めた数列\n\\(A\\)\nはトポロジカル順序の定義より条件を満たします。逆も成り立ちます。したがって、\n\\(G\\)\nのトポロジカル順序が一意であることが、\n\\(A\\)\nが一意であることの必要十分条件です。\nトポロジカル順序が一意であることは、実際にトポロジカルソートを行うアルゴリズムにおいて、どのタイミングにおいても次に選ぶ頂点(入次数が\n\\(0\\)\nの頂点)が一意であることが必要十分です。この条件は容易に確かめられます。\nWriter解(C++)\nこの他、トポロジカル順序が一意であることは、\n\\(G\\)\nの最長パスの長さが\n\\(N-1\\)\nであることとも同値であるため、これにより判定することもできます。\nWriter解(C++)",
+      "codes": [],
+      "text_sha256": "1c10e5831565f5f50f259018adffdc4413af6c57cccc4a3740e33e478ffd8de6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc291/abc291_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc233_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc233/editorial/3162",
+      "text": "DFS (深さ優先探索) で解くことができます。\nDFS は初めのうちは実装が難しいかもしれないので、下に示した実装例も参考にしてください。\nまた、計算途中のオーバーフローに気をつけましょう。\nC++ による解答例",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nll ans = 0;\nll n,x;\nvector<vector<ll>>a;\nvoid dfs(ll pos,ll seki){\n    if(pos==n){\n        if(seki == x)ans++;\n        return;\n    }\n    for(ll c:a[pos]){\n        if(seki>x/c)continue;\n        dfs(pos+1,seki*c);\n    }\n}\n\nsigned main(){\n    cin>>n>>x;\n    a.resize(n);\n    for(ll i=0;i<=n-1;i++){\n        ll L;cin>>L;\n        a[i].resize(L);\n        for(ll j=0;j<=L-1;j++)cin>>a[i][j];\n    }\n    dfs(0,1);\n    cout<<ans<<endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "bbc5fe72df6a0a27b8d871f2f056d3f670d4e23511a46c84d9e78fee10c7a23c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc233/abc233_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc266_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc266/editorial/4661",
+      "text": "この問題は次のようなDPにより解くことができます。\n\\(DP[x][t] = \\)\n高橋君が時刻\n\\(t\\)\nに座標\n\\(x\\)\nにいるときの、それまでに捕まえたすぬけ君の大きさの合計の最大値\n遷移は次の通りです。\n\\(DP[x][t]=\\max(DP[x-1][t-1],DP[x][t-1],DP[x+1][t-1]) + \\text{時刻 } t \\text{ に座標 } x \\text{ にいることで捕まえることができるすぬけ君の大きさ}\\)\n実装例(C)\n実装例(Python)",
+      "codes": [],
+      "text_sha256": "7b77fb4ecea0ac5ca29beb6df1059c9c73a4743244c6405756f3782156e70c67",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc266/abc266_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

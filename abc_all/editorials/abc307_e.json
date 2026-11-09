@@ -1,0 +1,36 @@
+{
+  "problem_id": "abc307_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc307/editorial/6643",
+      "text": "DP\nこの問題は\nABC256G\nの弱体化版と\nABC232E\nを組み合わせて解くことができます。\n円環上のDP\n人が円環状ではなく一列に並んでいた場合を考えます。このとき、端から順に数を割り当てることを考えると、隣り合う\n\\(2\\)\n人に同じ数を割り当てないためには、直前の人に割り当てた数さえわかっていれば十分です。すなわち\n\\(\\mathrm{DP}[i][x]=\\)\n\\(i\\)\n人目まで数を割り当てる方法のうち、\n\\(i\\)\n人目に割り当てた数が\n\\(x\\)\nであり、\n\\(i\\)\n人目まで同じ数の人が隣り合っていないものの個数\nとするDPで(計算量が莫大であることを除けば)正しい答えを求めることができます。\n円環状に並んでいるときは、最初の\n\\(1\\)\n人の数を決め打って\n\\(\\mathrm{DP}_k[i][x]=\\)\n\\(i\\)\n人目まで数を割り当てる方法のうち、\n\\(1\\)\n人目に割り当てた数が\n\\(k\\)\n、\n\\(i\\)\n人目に割り当てた数が\n\\(x\\)\nであり、\n\\(i\\)\n人目まで同じ数の人が隣り合っていないものの個数\nとすれば、(計算量が莫大であることを除けば)\n\\(\\sum_k \\sum_{x\\neq k}\\mathrm{DP}_k[N][x]\\)\nとして答えを求めることができます。\nこのように、状態がループしている問題をDPで解く場合、1箇所を決め打ってDPを進め、\n\\(1\\)\n周した最後に、末尾と先頭の条件が整合的であるもののみを考慮して解くことができます。\n類題：\nABC229F\nABC285E\nABC256G\n状態の削減\n上で述べたDPでは計算量が莫大であることから実行時間制限に間に合わせることはできません。しかしよく考えると、直前の人に何の数を割り当てた数を全て区別する必要はなく、「\n\\(1\\)\n人目に割り当てた数と同じであるか」の情報さえあれば答えを求められることがわかります。すなわち\n\\(\\mathrm{DP}[i][f]=\\)\n\\(i\\)\n人目まで数を割り当てる方法のうち、\n\\(i\\)\n人目に割り当てた数が\n\\(1\\)\n人目に割り当てた数と同じで (\n\\(f\\)\n? ある:ない) ものの個数\nとすることで、状態数\n\\(O(N)\\)\n、遷移\n\\(O(1)\\)\nとなり、全体で\n\\(O(N)\\)\n時間で答えを求めることができます。求める答えは\n\\(\\mathrm{DP}[N][\\mathrm{false}]\\)\nです。\n類題：\nABC232E\nwriter解(C)\n包除原理\n「人\n\\(i\\)\nと人\n\\(i+1\\)\nが渡された数が異なる」という\n\\(N\\)\n個の条件について包除原理を考えることでもこの問題を解くことができます。\n\\(N\\)\n個の条件をうち、固定した\n\\(k\\)\n個の条件を満たさず、残りの\n\\(N-k\\)\n個の条件については不問であるような割り当ての個数は\n\\(M^{\\max\\{1,N-k\\}}\\)\nであることから、求める答えは\n\\(\\sum _ {k=0} ^{N} (-1)^k \\binom{N}{k} M ^ {\\max\\{1,N-k\\}}\\)\nとなります。これは\n\\(O(N)\\)\nや\n\\(O(N+\\log\\mathrm{MOD})\\)\n時間で求めることができます。\nwriter解(Python)",
+      "codes": [],
+      "text_sha256": "eb33fe4f132af0c2efdbf3f112980db6c7a0a73a2353789cd44135088ee6bc2f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc307/abc307_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc307/editorial/6674",
+      "text": "円環状の $i$ 人の場合の答えを $f \\left( i \\right)$ とします。\n直線状の $i+1$ 人の場合の答えを考えると、これは $M \\times \\left( M-1 \\right)^{i}$ です。このような渡し方のうち、円環の場合に条件を満たさないものは人 $i+1,1$ の条件のみ違反しています。ですので、この $2$ 人を同一視するとこれは $f \\left( i \\right)$ 通りです。\nよって\n\\(f \\left( i+1 \\right) = M \\times \\left( M-1 \\right)^{i} - f \\left( i \\right)\\)\nとなり、この問題を解くことができました。",
+      "codes": [],
+      "text_sha256": "c77d7b394938c1600f61bfd0a6809e96304efb4cbf3b8c22d1fae6f7496e6ef3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc307/abc307_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc307/editorial/6656",
+      "text": "答えは \\((-1) ^ N(M-1)+(M-1) ^ N\\) です。\nこれを計算することで \\(\\Theta(N)\\) 時間や \\(\\Theta(\\log N)\\) 時間でこの問題を解くことができます。\nいくつかの方法でこれを導出することができます。\n1. 包除原理\n公式解説の包除原理を使うことで、求める場合の数は\n\\[\\sum _ {k=0} ^ N(-1)^k {} _ N\\mathrm{C} _ kM ^ {\\max\\{1,N-k\\}}\\]\nとわかります。\nこれを整理すると、\n\\[\\begin{aligned}\n\\sum _ {k=0} ^ N(-1)^k {} _ N\\mathrm{C} _ kM ^ {\\max\\{1,N-k\\}}&=(-1) ^ N(M-1)+\\sum _ {k=0} ^ N(-1)^k {} _ N\\mathrm{C} _ kM ^ {N-k}\\\\\n&=(-1) ^ N(M-1)+(M-1) ^ N\n\\end{aligned}\\]\nとなります。\n2. DP の高速化\n公式解説の DP は、遷移が \\(i\\) によらないため、答えを次のような行列累乗の形で書くことができます。\n\\[a _ N=\\begin{pmatrix}1&0\\end{pmatrix}\\begin{pmatrix}M-2&M-1\\\\1&0\\end{pmatrix} ^ {N-1}\\begin{pmatrix}0\\\\M\\end{pmatrix}\\]\nこれを整理すると、\\(a _ N\\) についての \\(2\\) 項間漸化式\n\\[\\begin{aligned}\na _ 2&=M(M-1)\\\\\na _ 3&=M(M-1)(M-2)\\\\\na _ n&=(M-2)a _ {n-1}+(M-1)a _ {n-2}\\ (n\\geq4)\n\\end{aligned}\\]\nが得られます。これを解くことで \\(a _ n=(-1) ^ n(M-1)+(M-1) ^ n\\) となります（遷移行列を対角化してもよいでしょう）。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <bits/extc++.h>\n#include <atcoder/modint>\n\nint main() {\n    using namespace std;\n    int N, M;\n    cin >> N >> M;\n    atcoder::static_modint<998244353> m = M - 1;\n    cout << (m.pow(N) + (N & 1 ? -m : m)).val() << endl;\n    return 0;\n}",
+        "N, M = map(int, input().split())\np = 998244353\n\nprint((pow(M - 1, N, p) + pow(-1, N, p) * (M - 1)) % p)"
+      ],
+      "text_sha256": "a408f73b16a7a4f9448061df19beeff992d0ff9753fe0aa2e038a9f53f012171",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc307/abc307_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,72 @@
+{
+  "problem_id": "abc399_e",
+  "title": "Replace",
+  "contests": [
+    {
+      "contest_id": "abc399",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 2045,
+  "raw_difficulty": 2045,
+  "contest_id": "abc399",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc399/tasks/abc399_e",
+  "statement": "配点 : 500 点 問題文 正整数 N および、英小文字からなる長さ N の文字列 S,T が与えられます。 以下の操作を繰り返し（ 0 回でも良い）行うことで、 S を T と一致させることが可能かどうか判定してください。\r\n可能な場合は、そのために必要な操作回数の最小値も求めてください。 英小文字 x,y を選び、 S に含まれる 全て の x をそれぞれ y で置き換える。 制約 1\\leq N \\leq 2\\times 10^5 N は整数 S,T はそれぞれ英小文字からなる長さ N の文字列 入力 入力は以下の形式で標準入力から与えられる。 N S T 出力 S を T と一致させることが可能ならばそのために必要な操作回数の最小値を、不可能ならば -1 を出力せよ。 入力例 1 6\r\nafbfda\r\nbkckbb 出力例 1 4 以下のように操作を 4 回行うことで、 S を T と一致させることができます。 x= b , y= c として操作を行う。 S= afcfda となる。 x= a , y= b として操作を行う。 S= bfcfdb となる。 x= f , y= k として操作を行う。 S= bkckdb となる。 x= d , y= b として操作を行う。 S= bkckbb となり、 T と一致する。 3 回以下の操作で S を T と一致させることはできないため、必要な操作回数の最小値は 4 です。 入力例 2 4\r\nabac\r\nabac 出力例 2 0 S と T が既に一致しているため、操作を行う必要はありません。 入力例 3 4\r\nabac\r\nabrc 出力例 3 -1 どのように操作を繰り返し行っても、 S を T と一致させることはできません。 入力例 4 4\r\nabac\r\nbcba 出力例 4 4",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 正整数 N および、英小文字からなる長さ N の文字列 S,T が与えられます。 以下の操作を繰り返し（ 0 回でも良い）行うことで、 S を T と一致させることが可能かどうか判定してください。\r\n可能な場合は、そのために必要な操作回数の最小値も求めてください。 英小文字 x,y を選び、 S に含まれる 全て の x をそれぞれ y で置き換える。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N \\leq 2\\times 10^5 N は整数 S,T はそれぞれ英小文字からなる長さ N の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S T"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 S を T と一致させることが可能ならばそのために必要な操作回数の最小値を、不可能ならば -1 を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 6\r\nafbfda\r\nbkckbb"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 以下のように操作を 4 回行うことで、 S を T と一致させることができます。 x= b , y= c として操作を行う。 S= afcfda となる。 x= a , y= b として操作を行う。 S= bfcfdb となる。 x= f , y= k として操作を行う。 S= bkckdb となる。 x= d , y= b として操作を行う。 S= bkckbb となり、 T と一致する。 3 回以下の操作で S を T と一致させることはできないため、必要な操作回数の最小値は 4 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4\r\nabac\r\nabac"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0 S と T が既に一致しているため、操作を行う必要はありません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 4\r\nabac\r\nabrc"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 -1 どのように操作を繰り返し行っても、 S を T と一致させることはできません。"
+    },
+    {
+      "heading": "入力例 4",
+      "text": "入力例 4 4\r\nabac\r\nbcba"
+    },
+    {
+      "heading": "出力例 4",
+      "text": "出力例 4 4"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc399/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:28.746684+00:00",
+  "statement_sha256": "138caa415ef157de49d639b6b10c4b8efddb3de3e5243f9078ec876ec7a8d368",
+  "editorials": []
+}

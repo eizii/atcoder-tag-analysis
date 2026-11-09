@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc095_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc095/editorial.pdf",
+      "text": "D : Binomial Coeﬃcients\n\n  comb(n, r) を並べた表はパスカルの三角形(https://ja.wikipedia.org/wiki/と呼ばれています。これを観察すると下に\n行くほど（n が大きくなると）値が大きくなることが分かります。また、同じ段なら真ん中よりのほうが値が大きくなる\nことが分かります。このことから、a1, a2, . . . , an のうち最大のものをn として使い、n 以外でn/2 に最も近いものをr\nとして使うと最大になることが予想できます。\n\n この予想が正しいことを示します。次の事実を使います。\n\n                                          n(n −1)(n −2) . . . (n −r + 1)\n                               comb(n, r) =\n                                                       r(r −1)(r −2) . . . 1\n\n まず、最初の予想が正しいことを確かめるために次を示します。\n\n主張. r > 0 のとき、comb(n + 1, r) > comb(n, r)\n\n証明. r = 1 のときは明らか。r > 1 とする。\n\n                      comb(n + 1, r) −comb(n, r)\n                  =(n + 1)n(n −1) . . . (n −r + 2) −n(n −1)(n −2) . . . (n −r + 1)\n                                 r(r −1)(r −2) . . . 1              r(r −1)(r −2) . . . 1\n                  =n(n −1) . . . (n −r + 2) ((n + 1) −(n −r + 1))\n                             r(r −1)(r −2) . . . 1\n                  =n(n −1) . . . (n −r + 2) r > 0\n                             r(r −1)(r −2) . . . 1\n\n\n\n 次に、二番目の予想が正しいことを示すのには、n 個からr 個選ぶのとn 個から選ばないn −r 個を決めるのが同じ\nであることを踏まえると、次を確かめれば十分です。\n\n                                 r + 1 ≤n/2 のとき、comb(n, r + 1) > comb(n, r)\n\n  これはcomb(n,r+1) を計算すれば分かります。\n            comb(n,r)\n\n\n\n\n\n                                                   4",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "629e9da20bd8470baff1fe3848f2fc995b9c19a9e323540c0e37f84fab345d11"
+    }
+  ],
+  "status": "available"
+}

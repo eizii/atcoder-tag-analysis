@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc187_c",
+  "title": "1-SAT",
+  "contests": [
+    {
+      "contest_id": "abc187",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 207,
+  "raw_difficulty": 137,
+  "contest_id": "abc187",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc187/tasks/abc187_c",
+  "statement": "配点 : 300 点 問題文 N 個の文字列 S_1, S_2, \\dots, S_N が与えられます。\r\n各文字列は、英小文字からなる空でない文字列の先頭に ! を 0 文字か 1 文字付加したものです。 文字列 T は、 T の先頭に ! を 0 文字付加しても 1 文字付加しても S_1, S_2, \\dots, S_N のいずれかに一致するとき、不満な文字列であるといいます。 不満な文字列があるかどうか判定し、あれば 1 つ示してください。 制約 1 \\le N \\le 2 \\times 10^5 1 \\le |S_i| \\le 10 S_i は英小文字からなる空でない文字列の先頭に ! を 0 文字か 1 文字付加したものである。 入力 入力は以下の形式で標準入力から与えられる。 N S_1 \\vdots S_N 出力 不満な文字列が存在する場合、不満な文字列を 1 つ出力せよ。 不満な文字列が存在しない場合、 satisfiable と出力せよ。 入力例 1 6\r\na\r\n!a\r\nb\r\n!c\r\nd\r\n!d 出力例 1 a 文字列 a は、先頭に ! を 0 文字付加する場合は S_1 と、 1 文字付加する場合は S_2 と一致するため不満な文字列です。 a の他に、 d を出力しても正解になります。 入力例 2 10\r\nred\r\nred\r\nred\r\n!orange\r\nyellow\r\n!blue\r\ncyan\r\n!green\r\nbrown\r\n!gray 出力例 2 satisfiable",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 個の文字列 S_1, S_2, \\dots, S_N が与えられます。\r\n各文字列は、英小文字からなる空でない文字列の先頭に ! を 0 文字か 1 文字付加したものです。 文字列 T は、 T の先頭に ! を 0 文字付加しても 1 文字付加しても S_1, S_2, \\dots, S_N のいずれかに一致するとき、不満な文字列であるといいます。 不満な文字列があるかどうか判定し、あれば 1 つ示してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\le N \\le 2 \\times 10^5 1 \\le |S_i| \\le 10 S_i は英小文字からなる空でない文字列の先頭に ! を 0 文字か 1 文字付加したものである。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S_1 \\vdots S_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 不満な文字列が存在する場合、不満な文字列を 1 つ出力せよ。 不満な文字列が存在しない場合、 satisfiable と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 6\r\na\r\n!a\r\nb\r\n!c\r\nd\r\n!d"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 a 文字列 a は、先頭に ! を 0 文字付加する場合は S_1 と、 1 文字付加する場合は S_2 と一致するため不満な文字列です。 a の他に、 d を出力しても正解になります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10\r\nred\r\nred\r\nred\r\n!orange\r\nyellow\r\n!blue\r\ncyan\r\n!green\r\nbrown\r\n!gray"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 satisfiable"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc187/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:03.276663+00:00",
+  "statement_sha256": "1b280a5841d1922f77b2d498faabe56e3bf7935d5d46127c8b6bef2500c2fcbc",
+  "editorials": []
+}

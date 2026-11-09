@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc328_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc328/editorial/7645",
+      "text": "頂点数 \\(8\\) の完全グラフの全域木は \\(262144\\) 通りしかありません。\nよって、与えられたグラフの全域木（を含むあまり大きくない集合の要素）を効率よく列挙できればこの問題を解くことができます。\n例えば、\\(N-1\\) 辺の部分グラフ全体は、最大でも \\({} _ {28}\\mathrm{C} _ 7=1184040\\) 通りしかないため、これらをすべて列挙し、全域木になっているか判定してコストの最小値を求めればよいです。\n実装例は以下のようになります。\n時間計算量は \\(O({} _ M\\mathrm{C} _ {N-1}\\times M\\alpha(N))\\) です。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <utility>\n#include <algorithm>\n#include <ranges>\n#include <numeric>\n\nint main() {\n    using namespace std;\n\n    unsigned N, M;\n    unsigned long K;\n    cin >> N >> M >> K;\n    vector<tuple<unsigned, unsigned, unsigned long>> edges(M);\n    for (auto&&[u, v, cost] : edges){\n        cin >> u >> v >> cost;\n        --u;\n        --v;\n    }\n\n    basic_string<bool> use_edges(M, false); // M 本の辺のうち\n    ranges::fill(use_edges | views::take(N - 1), true); // N - 1 本を使う\n    ranges::reverse(use_edges);\n\n    // 全域木になっているか判定するために Union-Find を使う\n    vector<unsigned> uf(N), sz(N, 1);\n    const auto find{[&uf](auto i) {\n        while (i != uf[i])i = uf[i] = uf[uf[i]];\n        return i;\n    }};\n    const auto unite{[&uf, &sz, find](auto i, auto j) -> bool {\n        i = find(i);\n        j = find(j);\n        if (i == j)return false;\n        if (sz[i] < sz[j])swap(i, j);\n        sz[i] += sz[j];\n        uf[j] = i;\n        return true;\n    }};\n\n    unsigned long ans{K};\n    const auto chmin{[](auto &&x, const auto &y) {\n        if (x > y)x = y;\n        return x;\n    }};\n\n    do\n        chmin(ans, [&] {\n            // Union-Find の初期化\n            iota(begin(uf), end(uf), 0U);\n            ranges::fill(sz, 1U);\n\n            unsigned long cost_sum{};\n            for (const auto i : views::iota(0U, M))\n                if (use_edges[i]) {\n                    const auto&[u, v, cost]{edges[i]};\n                    if (!unite(u, v)) // 閉路ができたら\n                        return K; // 十分大きい値を返す\n                    cost_sum += cost;\n                }\n            // 全域木なら\n            return cost_sum % K; // コストを返す\n        }());\n    while (ranges::next_permutation(use_edges).found);\n\n    cout << ans << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "87fc2a40444d8ad48ec537910625c23a513d17b1bf6cc252b0933db06ffb96e3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc328/abc328_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc328/editorial/7671",
+      "text": "bitDPによる解法を説明します。\nプリム法のような感じで、ひとつの頂点が入った木を用意し、そこに辺と頂点を加えていきます。\nDPの変数は\n\\(\\text{dp}[\\text{木に含まれる頂点の集合}] = \\{\\text{コストの集合}\\}\\)\nとなります。\nDP の遷移では、木に含まれている頂点と木に含まれていない頂点を結ぶ辺を見つけ、これを木に加えます。\nここで注意するべきは、\n元のコストが小さいほど良いとは限らないため、あり得るすべてのコストを保持する必要があるという点と、\n辺を加えるときに辺のコストが小さいほど良いとは限らないため、あり得るすべての辺の追加を考える必要があるという点です。\n計算量\nbitDP に\n\\(O(2^N N^2)\\)\nかかります。\n頂点集合を全探索するため\n\\(O(2^N)\\)\nかかります。\n木に含まれている頂点を選ぶのに\n\\(O(N)\\)\nかかります。\n木に含まれていない頂点を選ぶのに\n\\(O(N)\\)\nかかります。\nコストの種類数として、\n\\(O((M / N)^{N - 1})\\)\nかかります。\n全域木の辺は最大でも\n\\(N - 1\\)\n本であるため、頂点の次数を\n\\(d\\)\nとしたとき\n\\(O(d^{N - 1})\\)\nかかり得ます。\n上の式が最悪となるのは\n\\(d \\in O(M / N)\\)\nとなるときです。\n以上により、\n\\(O(2^N N^2 (M/N)^{N - 1})\\)\nとなるため、速い言語であれば時間制限内に間に合います。\nコード\n以下に C++ のコードを示します。\nhttps://atcoder.jp/contests/abc328/submissions/47509050",
+      "codes": [],
+      "text_sha256": "c6096f415e471964d6e235553fb40b17a68e5eaa09ad9e9671f020deaaebe976",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc328/abc328_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc328/editorial/7676",
+      "text": "next_permutation の要領で\nshuffle\nを列挙することで\n\\(O((M - N)\\binom{M}{N - 1})\\)\n時間で解くことができます。\n解法\n長さ\n\\(N\\)\nの数列\n\\(A\\)\nの置換であって、前\n\\(K\\)\n項、後ろ\n\\(N - K\\)\n項がそれぞれソートされているものを\n\\((K, N - K)\\)\n-\nshuffle\nと呼びます。これを列挙しましょう。\nそのために、いま\n\\(A\\)\nが\n\\((K, N - K)\\)\n-shuffle であるとして、\n\\(A\\)\nより大きな最小の\n\\(A\\)\nの\n\\((K, N - K)\\)\n-shuffle を計算する方法を考えましょう。記述の簡単のため\n\\(A\\)\nの要素は相異なると仮定しますが、そうでない場合も全く同様です。\n前\n\\(K\\)\n項を\n\\(L\\)\n、後ろ\n\\(N - K\\)\n項を\n\\(R\\)\nと置きます。\nすると\n\\(L\\)\nのうち更新される最小のものは、\n\\(R\\)\nの要素の最大値よりも小さいもののうち最大のものです。これを\n\\(L_i\\)\nと置きます。（存在しない場合は、next shuffle が存在しません。）\nさらに\n\\(L _ i\\)\nは\n\\(R\\)\nの要素のうち\n\\(L_i\\)\nより大きな最小のものと交換されます。これを\n\\(R_j\\)\nと置きます。\nあとは\n\\(L _ {i+1}, \\dots, L _ {K - 1}\\)\nと\n\\(R _ {j + 1}, \\dots, R _ {N - K - 1}\\)\nを繋げて一つの配列と思い、これを\n\\(R _ {j + 1}\\)\nが先頭に来るように回転すれば答えになります。（これ説明難しいです。）\n以上の操作は償却\n\\(O ( N - K )\\)\n時間で実行できます。\nステップ 3 は、要素のコピーができるのでしたら、キューなどを用いて実装してもよいです。\nコピーをしたくない、もしくは O(1) extra memory で行いたいということでしたら、標準ライブラリの\nswap_slice\nと\nrotate_{left,right}\nを用いるとよいです。\n参考記事:\nnext_permutation と同様に列挙できるもの一覧\n提出\nRust (102 ms):\nhttps://atcoder.jp/contests/abc328/submissions/47515019",
+      "codes": [
+        "fn next_shuffle<T: Ord>(a: &mut [T], k: usize) -> bool {\n    let n = a.len();\n    if n == k {\n        return false;\n    }\n    let (left, right) = a.split_at_mut(k);\n    let Some(mut i) = left.iter().rposition(|x| x < right.last().unwrap()) else {\n        return false;\n    };\n    let mut j = right.iter().position(|x| &left[i] < x).unwrap();\n    std::mem::swap(&mut left[i], &mut right[j]);\n    i += 1;\n    j += 1;\n    let swap_len = (k - i).min(n - k - j);\n    left[k - swap_len..].swap_with_slice(&mut right[j..j + swap_len]);\n    left[i..].rotate_left(k.saturating_sub(i + swap_len));\n    right[j..].rotate_right((n - k).saturating_sub(j + swap_len));\n    true\n}"
+      ],
+      "text_sha256": "f38b3886e9a4a900f62a775d907122d810e350da1c2e9c4c6a8e003160223c4d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc328/abc328_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

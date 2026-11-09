@@ -1,0 +1,21 @@
+{
+  "problem_id": "abc271_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc271/editorial/4916",
+      "text": "この問題は、二次元配列を扱えるようになるための練習問題です。\nAtCoder の問題を解く上で何度も必要となる知識ですので、是非この機会に習得してください。\nC++ での解法\nまず、二次元の\nstd::vector\nを宣言しましょう。\nこれは、「\nn\n個の空の\nstd::vector<int>\nからなる二次元の\nstd::vector\nを宣言する」ことを表します。\na\nの各要素は一次元の\nstd::vector\nを表します。\n次に入力を受け取ります。\nはじめ、\na[i]\nは空の数列であり、\n\\(L_i\\)\n個の整数を格納するためには、格納するためのスペースを確保する必要があります。\n\\(4\\)\n行目で\nstd::vector::resize\nを呼び出すことにより、\nl\n個の整数を格納できるようにしています。\nなお、\n\\(4\\)\n行目は次のように書くこともできます。\nこれは「サイズ\nl\nの\nstd::vector<int>\nを\na[i]\nに代入する」ことを表します。\n添字は 0-indexed であるので、\na[i - 1][j - 1]\nで\n\\(i\\)\n番目の数列の第\n\\(j\\)\n項を指します。これを用いると与えられるクエリに答えることができます。\n実装例\nPython での解法\nPython にはリストというデータ構造が存在します。二次元のリストを用いて数列を管理しましょう。\nこれは「空のリスト\nn\n個からなるリストを宣言する」ことを表します。\n次に入力を受け取ります。\nこれは「一行に与えられた入力を全て受け取り、一つのリストにする」ことを表します。そのため、\na[i]\nの要素は\n\\((L_i, a_{i, 1}, \\dots, a_{i, L_i})\\)\nの合計\n\\(L_i + 1\\)\n個です。\nよって、\na[i - 1][j]\nで\n\\(i\\)\n番目の数列の第\n\\(j\\)\n項を指します。これを用いると与えられるクエリに答えることができます。\n実装例",
+      "codes": [
+        "vector<vector<int>> a(n);",
+        "for (int i = 0; i < n; ++i) {\n  int l;\n  cin >> l;\n  a[i].resize(l);\n  for (int j = 0; j < l; ++j) {\n    cin >> a[i][j];\n  }\n}",
+        "a[i] = vector<int>(l);",
+        "a = [[] for _ in range(n)]",
+        "for i in range(n):\n  a[i] = list(map(int, input().split()))"
+      ],
+      "text_sha256": "897b222ad3a55b5745f09ce525cdaa64351b9c96a9a69e96bb48587ad27d727a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc271/abc271_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

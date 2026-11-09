@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc284_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5494",
+      "text": "この問題は「パスの本数」という慣れない数え上げを要求する問題で、上手く解けずに困ってしまった方が多いかもしれません。ところが実は、C 問題でも出てきた深さ優先探索 (DFS) を応用すれば、素朴なアルゴリズムでこの問題を実装することができます。\n具体的には、以下の Python 風の疑似コードで表せる DFS を実装します。(訪問したかどうかを管理する変数\nvis\nのフラグの立て方が通常の\ndfs\nと少し異なるのがポイントです。)\nこのDFS は、 1 つの状態に 1 つのパスが対応しています。具体的には DFS 内部の\npath\nに格納されている頂点の列として表せるパスが DFS の状態と対応しています。\nここでの「状態」というのは、DFS の遷移の過程を根付き木として表したときの各頂点のことを指します。また、状態とパスが 1 対 1 で対応しているのは帰納法により証明できます。\nよって DFS で訪問する状態の個数が答えとなり、これは実際に DFS を動作させれば調べられます。ただし、パスの本数が\n\\(10^6\\)\n以上になった場合はその時点で DFS を打ち切り、答えは\n\\(10^6\\)\nとなります。\n計算量を考えます。疑似コードの関数\ndfs\nは高々\n\\(10^6\\)\n回しか呼び出されず、\ndfs\n内部での計算量は頂点\n\\(c\\)\nの次数\n\\(\\mathrm{deg}(c)\\)\nで抑えられます。各頂点の次数は高々\n\\(10\\)\nなので、ステップ数は\n\\(10^6 \\times 10 = 10^7\\)\nオーダーで抑えられるため、このアルゴリズムは ACするのに十分高速に動作します。\n実装例 (C++)",
+      "codes": [
+        "# g : グラフの隣接リスト。ただし頂点の番号はすべて真の番号から 1 を引いている\n\nvis = [False] * N\npath = []\nanswer = 0\nlimit = 1000000\npath = []\n\ndef dfs(c):\n  if answer == limit:\n    return\n\n  vis[c] = True\n  path.append(c)\n  answer += 1\n  \n  for d in g[c]:\n    if vis[d] == False:\n      dfs(d)\n\n  vis[c] = False\n  path.pop()\n\ndfs(0)",
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint calc(int N, vector<vector<int>> g) {\n  int ans = 0, limit = 1000000;\n  vector<int> vis(N);\n  auto dfs = [&](auto rc, int c) -> void {\n    if (ans == limit) return;\n    ans++;\n    vis[c] = true;\n    for (auto& d : g[c]) {\n      if (vis[d]) continue;\n      rc(rc, d);\n    }\n    vis[c] = false;\n  };\n  dfs(dfs, 0);\n  return ans;\n}\n\nint main() {\n  int N, M;\n  cin >> N >> M;\n  vector<vector<int>> g(N);\n  for (int i = 0; i < M; i++) {\n    int u, v;\n    cin >> u >> v;\n    --u, --v;\n    g[u].push_back(v);\n    g[v].push_back(u);\n  }\n  cout << calc(N, g) << \"\\n\";\n}"
+      ],
+      "text_sha256": "2dfeafa2e382e7b5177d11e3d2dff0a82857bdb37e65642ee349894716c0a763",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc284/editorial/5513",
+      "text": "https://twitter.com/kyopro_friends/status/1611950973215465472\n（ツイート中に「ABC285」とありますが、ABC284の誤りです）",
+      "codes": [],
+      "text_sha256": "d6a193d4f5c4d762057ec3c18a8d494ec0fccd9272b0454820b0506934e6e038",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc284/abc284_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

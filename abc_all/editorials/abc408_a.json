@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc408_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc408/editorial/13164",
+      "text": "この問題は与えられた数列\n\\(T\\)\nが長老が寝てしまう条件を満たしているか判定して\nYes\nか\nNo\nか答える問題です。\nこの問題では現在ちょうど肩を叩いた瞬間のため、\n\\(T_0=0\\)\nであるとします。\nでは、まず長老が寝てしまう条件を考えましょう。\n\\(T_i\\)\n秒後に肩を叩かれるときまでは長老が起きているとします。この後、\n\\(T_{i+1}-T_i \\leq S\\)\nのときは長老は\n\\(T_i\\)\n秒後に肩を叩かれてから\n\\(T_{i+1}\\)\n秒後に肩を叩かれるまで寝ません。しかし、\n\\(T_{i+1}-T_i > S\\)\nのとき、長老は\n\\(T_i+S+0.5\\)\n秒後\n\\((<T_{i+1})\\)\nに寝てしまいます。\nつまり、\n\\(T_{i+1}-T_i >S\\)\nを満たす\n\\(i(0 \\leq i \\leq N-1)\\)\nが存在するとき、長老が寝てしまいます。\n数列\n\\(T\\)\nをfor文を用いて入力し、その後それぞれの\n\\(i\\)\nについてfor文とif文を用いることで判定することでこの問題が解くことができます。実装の際は寝る条件をある\n\\(i\\)\nで満たしたときにすぐ\nNo\nと出力しプログラムを終了させる方法や、条件を満たす\n\\(i\\)\nが存在するかのフラグを持つ真偽値を管理する方法があります。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    int n, s;\n    cin >> n >> s;\n    vector<int> t(n + 1, 0);\n    for (int i = 1; i <= n; ++i)\n        cin >> t[i];\n    for (int i = 1; i <= n; ++i) {\n        if (t[i] - t[i - 1] > s) { // 寝るか判定\n            cout << \"No\" << endl;\n            return 0; // プログラムを終了\n        }\n    }\n    cout << \"Yes\" << endl;\n}",
+        "n, s = map(int, input().split())\nt = list(map(int, input().split()))\nif t[0] > s:\n    print(\"No\")\n    exit()\nfor i in range(1, n):\n    if t[i] - t[i - 1] > s: #寝るか判定\n        print(\"No\")\n        exit() #プログラムを終了\nprint(\"Yes\")"
+      ],
+      "text_sha256": "136e9d770c1ba493231a54566b146e6629202fe6da4aef5ecc625c8f85cc8083",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc408/abc408_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc395_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc395/editorial/12342",
+      "text": "\\(\\operatorname{p2b}[i]\\coloneqq{}\\)鳩 \\(i\\) が入っている箱の番号\nとして素直に処理を行うと、種類 \\(2\\) の操作で多くの鳩について更新を行う必要があるため、実行時間制限に間に合わせるのは難しいです。\nここで、仮想的な「ラベル鳩」を考え、次のように問題を読み替えます。\n\\(N\\) 個の巣があり、はじめ \\(i\\) 番目の巣には鳩 \\(i\\) とラベル鳩 \\(i\\) が入っている。\n次の操作を処理せよ。\n鳩 \\(i\\) を、ラベル鳩 \\(j\\) が入っている巣に移動させる。\nラベル鳩 \\(i\\) とラベル鳩 \\(j\\) を交換する。\n鳩 \\(i\\) と同じ巣に入っているラベル鳩の番号を出力する。\nすると、各操作でたかだか \\(2\\) 羽の鳩についての情報を更新すればよいことになります。\n種類 \\(3\\) の操作に正しく答えるために「 \\(i\\) 番目の巣に入っているラベル鳩の番号」を加えて管理する必要が生じますが、それを加えてもすべての操作を \\(O(1)\\) 時間で行うことができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <numeric>\n\nint main() {\n    using namespace std;\n    \n    unsigned N;\n    cin >> N;\n\n    // box_to_label : i 番目の巣に入っているラベル鳩の番号\n    // label_to_box : i 番目のラベル鳩が入っている巣の番号\n    // pigeon_to_box : i 番目の鳩が入っている巣の番号\n    vector<unsigned> box_to_label(N), label_to_box(N), pigeon_to_box(N);\n    iota(begin(box_to_label), end(box_to_label), 0U);\n    iota(begin(label_to_box), end(label_to_box), 0U);\n    iota(begin(pigeon_to_box), end(pigeon_to_box), 0U);\n\n    unsigned Q;\n    cin >> Q;\n    for (unsigned q{}; q < Q; ++q) {\n        unsigned type;\n        cin >> type;\n        if (type == 1) {\n            unsigned pigeon, to;\n            cin >> pigeon >> to;\n            // 鳩 → 巣の情報を更新\n            pigeon_to_box[pigeon - 1] = label_to_box[to - 1];\n        } else if (type == 2) {\n            unsigned label0, label1;\n            cin >> label0 >> label1;\n            // ラベル鳩 → 巣の情報を更新\n            swap(label_to_box[label0 - 1], label_to_box[label1 - 1]);\n            // 巣 → ラベル鳩の情報を更新\n            swap(box_to_label[label_to_box[label0 - 1]], box_to_label[label_to_box[label1 - 1]]);\n        } else {\n            unsigned pigeon;\n            cin >> pigeon;\n            cout << box_to_label[pigeon_to_box[pigeon - 1]] + 1 << '\\n';\n        }\n    }\n    cout << flush;\n    return 0;\n}"
+      ],
+      "text_sha256": "d9f0558bde554ebff7a1759c79b0c321cd0609c81a3c3f8f29cc66c909d5c719",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc395/abc395_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

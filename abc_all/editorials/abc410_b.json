@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc410_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc410/editorial/13299",
+      "text": "\\(X_i \\ge 1\\)\nである場合、箱\n\\(X_i\\)\nにそのボールを入れます。\n\\(X_i = 0\\)\nである場合、 for 文を用いることでどの箱にボールを入れるべきかを判定できます。\nどの箱にボールを入れべきかが分かれば、後は\n\\(X_i \\ge 1\\)\nである場合と同様の処理で箱にボールを入れればよいです。\n\\(X_i \\ge 1\\)\nであれば定数回の処理、\n\\(X_i = 0\\)\nであれば\n\\(O(N)\\)\n回程度の処理であるため、全体の時間計算量は\n\\(O(NQ)\\)\nとなります。\n実装例 (C++):\nBonus! この問題を時間計算量\n\\(O(N+Q)\\)\nで解いてみましょう。",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int N,Q;\n  cin >> N >> Q;\n  vector<int> bk(N+1,0);\n  for(int i=0;i<Q;i++){\n    if(i){cout << \" \";}\n\n    int X;\n    cin >> X;\n    if(X>=1){\n      bk[X]++;\n      cout << X;\n    }\n    else{\n      int y=1;\n      for(int j=2;j<=N;j++){\n        if(bk[y]>bk[j]){ y=j; }\n      }\n      bk[y]++;\n      cout << y;\n    }\n  }\n  cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "a5352bc08f742b6b9acbdd1a00e4c0ee98dec49efa2bbe9e66ccad8de7b9b53e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc410/abc410_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc410/editorial/13302",
+      "text": "\\(X_i = 0\\)\nである場合への対処を工夫します。\n箱\n\\(1\\)\nの\n\\(1\\)\n個目\n箱\n\\(2\\)\nの\n\\(1\\)\n個目\n\\(\\vdots\\)\n箱\n\\(N\\)\nの\n\\(1\\)\n個目\n箱\n\\(1\\)\nの\n\\(2\\)\n個目\n箱\n\\(2\\)\nの\n\\(2\\)\n個目\n\\(\\vdots\\)\n箱\n\\(N\\)\nの\n\\(2\\)\n個目\n箱\n\\(1\\)\nの\n\\(3\\)\n個目\n\\(\\vdots\\)\nというように着目した場合、\n\\(X_i=0\\)\nの際のボールの処遇は上記の列のうち先頭\n\\(Q\\)\n項目までしか発生しません。\nなぜなら、これらのうちより前にある項をそっちのけにして\n\\(X_i=0\\)\nのボールを入れた時、その行為はボールの入れ方のルールに違反していることが分かるからです。\n逆に、先ほどの列を上から順に調べることで、\n\\(X_i=0\\)\nなるボールの処遇を調べることができます。\nこれを利用した下記の実装は時間計算量\n\\(O(N+Q)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int N,Q;\n  cin >> N >> Q;\n  vector<int> bk(N+1,0);\n  int p=1,q=1;\n  for(int i=0;i<Q;i++){\n    if(i){cout << \" \";}\n\n    int X;\n    cin >> X;\n    if(X>=1){\n      bk[X]++;\n      cout << X;\n    }\n    else{\n      while(bk[p]>=q){\n        p++;\n        if(p==N+1){\n          p=1; q++;\n        }\n      }\n      bk[p]++;\n      cout << p;\n    }\n  }\n  cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "c7ffb80a41ec14c765b6d38710dc178a5ca55754e689e883ef6b7ed31aacf7c8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc410/abc410_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

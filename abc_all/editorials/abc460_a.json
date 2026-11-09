@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc460_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc460/editorial/21025",
+      "text": "\\(M\\)\nが\n\\(0\\)\nでない間、実際に操作を繰り返せばよいです。操作は while 文などを用いると実現できます。\nなお、\n\\(N\\)\nを\n\\(M\\)\nで割った余りは\n\\(M\\)\nより小さくなるため、\n\\(1\\)\n回の操作により必ず\n\\(M\\)\nの値は減少し、高々\n\\(M\\)\n回の操作により\n\\(M = 0\\)\nとなります。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tint ans = 0;\n\twhile (m > 0) {\n\t\tm = n % m;\n\t\tans++;\n\t}\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "9164043b59dca24f0622e00812787a547e5d772da2b4a03b9c0e0e381b9126e7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc460/abc460_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

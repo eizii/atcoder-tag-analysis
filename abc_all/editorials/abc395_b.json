@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc395_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc395/editorial/12289",
+      "text": "解法1：問題文通り実装する\nはじめに二次元配列を作成してから問題文の通りに色を塗る方針です。たいていの言語では添字が0から始まるため、\n\\(i,j\\)\nの定義を適切に変更する必要があることに注意してください。詳しくは実装例も参考にしてください。\n実装例 (Python3)\n解法2：直接マスに塗られる色を求める\nマス\n\\((i,j)\\)\nに塗られる色は、以下のようになります。\n\\(\\min(i,j,N+1-i.N+1-j)\\)\nが奇数ならば黒、偶数ならば白\nマス\n\\((i,j)\\)\nが最後に塗られるのが\n\\(\\min(i,j,N+1-i.N+1-j)\\)\n番目の操作であることから従います。\nこれも、解法1と同様に添字に注意して実装すればよいです。\n実装例 (Python3)\n余談\nより高速といえるのはどちらの解法ですか？\nある解法の速度を考えるとき、計算量という概念を知っていると便利です。計算量を勉強するにはたとえばAPG4bの項目のひとつである\nW - 2.06.計算量\nを読むと良いでしょう。\nAtCoder Beginner Contestでは、B問題までは（\nABC334-B\nなど例外はありますが）基本的に計算量を意識する必要はありません。しかし、C問題以降で計算量を考えずに実装すると\nTLE\nとなることがあります。より上位を目指すなら計算量を意識して解法を考えることを強くおすすめします。",
+      "codes": [
+        "N = int(input())\n\ntarget = [[\"?\"] * N for _ in range(N)]\n\nfor i in range(N):\n    j = N - i - 1\n    if i <= j:\n        for x in range(i, j + 1):\n            for y in range(i, j + 1):\n                if i % 2 == 0:\n                    target[x][y] = \"#\"\n                else:\n                    target[x][y] = \".\"\n\nfor row in target:\n    print(\"\".join(row))",
+        "N = int(input())\n\ntarget = [[\"?\"] * N for _ in range(N)]\n\nfor i in range(N):\n    for j in range(N):\n        if min(i, j, N - i - 1, N - j - 1) % 2 == 0:\n            target[i][j] = \"#\"\n        else:\n            target[i][j] = \".\"\n\nfor row in target:\n    print(\"\".join(row))"
+      ],
+      "text_sha256": "ada2889e9e3d15c33a9e83207dfdf5bfaf452f3fdef9d2803df00427cf410bbc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc395/abc395_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

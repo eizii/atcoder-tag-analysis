@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc157_b",
+  "editorials": [
+    {
+      "text": "B: Bingo\n問題文の指示通りに各マスにマークが付いているか否かを管理し、ビンゴが成立している列が存在\nするかを確かめます。\nビンゴカードの管理には二次元配列が便利です。\n以下はC++ での実装例です。\n1 #include <bits/stdc++.h>\n2 using namespace std;\n3 int N, A[3][3], b[10];\n4 bool appear[3][3];\n5 int main() {\n6\nfor(int i = 0; i < 3; i++) {\n7\nfor(int j = 0; j < 3; j++) cin >> A[i][j];\n8\n}\n9\ncin >> N;\n10\nfor(int i = 0; i < N; i++) cin >> b[i];\n11\nfor(int i = 0; i < N; i++) {\n12\nfor(int j = 0; j < N; j++) {\n13\nappear[i][j] = false;\n14\nfor(int k = 0; k < N; k++) {\n15\nif(A[i][j] == b[k]) appear[i][j] = true;\n16\n}\n17\n}\n18\n}\n19\nstring ANS = \"No\";\n20\nfor(int i = 0; i < 3; i++) {\n21\nif(appear[i][0] and appear[i][1] and appear[i][2]) ANS = \"Yes\";\n22\n}\n23\nfor(int i = 0; i < 3; i++) {\n24\nif(appear[0][i] and appear[1][i] and appear[2][i]) ANS = \"Yes\";\n25\n}\n26\nif(appear[0][0] and appear[1][1] and appear[2][2]) ANS = \"Yes\";\n27\nif(appear[0][2] and appear[1][1] and appear[2][0]) ANS = \"Yes\";\n28\ncout << ANS << endl;\n29\nreturn 0;\n30 }\n",
+      "text_sha256": "4c3ee0c32cb20e5196398186194f37a585986d1be09080c2540e37624ea980f9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc157/abc157_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

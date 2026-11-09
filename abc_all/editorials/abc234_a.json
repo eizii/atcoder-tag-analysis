@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc234_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc234/editorial/3219",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\nこの問題での「関数」を、プログラムでの「関数」として実装してみましょう。\nこの問題での関数\n\\(f(x)=x^2+2x+3\\)\nは、\n\\(x\\)\nを与えると\n\\(x^2+2x+3\\)\nを返すというものです。なので、\n\\(x\\)\nを与えられると返り値として\n\\(x^2+2x+3\\)\nを返すような関数を実装すればよいです。\n答えの計算は、サンプルの説明文のように複数個の手順に分けて行うこともできますが、実装例のように一度に計算して出力まで行ってしまうのが簡潔です。\n実装例(C++):\nまた、この問題では、入力される\n\\(t\\)\nとして考えられるものが\n\\(11\\)\n通りしかないため、それらに対して答えを予め計算した上で、それらをコードに直接埋め込んで解くこともできます。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint f(int x){return x*x+2*x+3;}\n\nint main(){\n  int t;\n  cin >> t;\n  cout << f(f(f(t)+t)+f(f(t))) << '\\n';\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nvector<int> res={1371,13926,119027,722502,3286971,11985446,36881331,99400902,241025627,536292966,1111355571};\n\nint main(){\n  int t;\n  cin >> t;\n  cout << res[t] << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "7f806ff0bf408bfc1f1e7c6b8efd15c8dc8beec29b11830e405d8e1ed83b2ad8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc234/abc234_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

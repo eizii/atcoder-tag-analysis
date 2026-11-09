@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc277_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc277/editorial/5207",
+      "text": "条件の言い換え \\(L \\leq X_{A_i} + X_{B_i} \\) は \\(\\forall t \\in \\mathbb{Z}, \\lbrack t \\leq X_{A_i}  \\lor  L-t+1 \\leq X_{B_i} \\rbrack \\) と同値です。 (証明) \\(L \\leq X_{A_i} + X_{B_i} \\) のとき、 \\(\\exist t \\in \\mathbb{Z}, \\lbrack t > X_{A_i}  \\land  L-t+1 > X_{B_i} \\rbrack \\) とすると \\(\\exist t \\in \\mathbb{Z}, \\lbrack t \\geq X_{A_i} + 1  \\land  L-t+1 \\geq X_{B_i} +1\\rbrack \\) を得るので \\(2\\) つの式を足し合わせて \\(L-1 \\geq  X_{A_i} + X_{B_i}\\) を得て矛盾。 \\(L > X_{A_i} + X_{B_i} \\) のとき、 \\(t = X_{A_i} + 1\\) ととることにより \\(L-t+1 > X_{B_i}\\) となるので \\(\\exist t \\in \\mathbb{Z}, \\lbrack t > X_{A_i}  \\land  L-t+1 > X_{B_i} \\rbrack \\) が成立。 \\(\\square\\) 上の証明と同様にして、 \\(X_{A_i} + X_{B_i} \\leq R\\) と \\(\\forall t \\in \\mathbb{Z}, \\lbrack t > X_{A_i}  \\lor  R-t+1 > X_{B_i} \\rbrack \\) が同値であることもわかります。 2-SAT 上記の言い換えができれば、2-SAT への帰着が行えます。 具体的には、各 \\(1 \\leq i \\leq N\\) と \\(0 \\leq j \\leq M+1\\) に対し、 \\(j \\leq X_i\\) という条件に対する真偽値の割り当てを考えればよいです。 上記の条件に加え、 \\(0 \\leq X_i\\) は必ず True であること、 \\(M+1 \\leq X_i\\) は必ず False であること、 \\(A \\leq X_i \\Rightarrow A-1 \\leq X_i\\) であることに注意してください。 これらに矛盾しない真偽値の割り当てが存在する場合は 各 \\(i\\) に対して \\(j \\leq X_i\\) なる最大の \\(j\\) をとって \\(X_i = j\\) とすればよく、存在しない場合は元の問題においてもすべての条件を満たす数列は存在しません。 2-SAT の際に考えるグラフにおいて、頂点の数は \\(O(NM)\\) 、辺の数は \\(O((N+Q)M)\\) であるため、この問題を \\(O((N+Q)M)\\) の計算量で解くことができました。",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "f40b63f44268bc652a99a86f44a1de9e081cb3cd508fa4f38e7bac5aa1671b0c"
+    }
+  ],
+  "status": "available"
+}

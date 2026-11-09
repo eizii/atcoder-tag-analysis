@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc384_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc384/editorial/11602",
+      "text": "\\(A\\) の連続する部分列 \\((A _ L,A _ {L+1},\\dotsc,A _ R)\\) の和として \\(S\\) が存在することと、\\(\\displaystyle\\sum _ {i=1} ^ NA _ i=X\\) について \\(A\\) の連続する部分列 \\((A _ l,A _ {l+1},\\dotsc,A _ r)\\) の和として \\(S\\) を \\(X\\) で割った余り \\(s\\) が存在することが同値であることを示します。\n\\([\\Rightarrow]\\) \\(S\\geq X\\) ならば \\(S-X\\) が存在することを言えばよいです。\\(S\\geq X\\) ならば \\(R-L+1\\geq N\\) です（そうでなければ、\\(A _ i\\) が正であることに反します）。すると、\\((A _ L,A _ {L+1},\\dotsc,A _ {R-N})\\) の総和は \\(S-X\\) と等しいです。\\(\\square\\)\n\\([\\Leftarrow]\\) \\((A _ l,A _ {l+1},\\dotsc,A _ {r+\\lfloor S/X\\rfloor N})\\) の総和が \\(S\\) と等しいです。\\(\\square\\)\nよって、\\(0\\leq S\\lt X\\) なる問題へ帰着することができました。\n特に、条件を満たす連続部分列が存在すればその長さが \\(N\\) 未満であることがわかります。\nよって、次のような問題を解けばよいです。\n列 \\((A _ 1,A _ 2,\\dotsc,A _ {2N})\\) の連続する部分列であって、その総和が \\(S\\) と等しいものは存在するか？\n累積和 \\(\\displaystyle S _ i=\\sum _ {1\\leq j\\leq i}A _ j\\quad(0\\leq i\\leq 2N)\\) を考えることで、さらに次のような問題に帰着されます。\n列 \\((S _ 0,S _ 1,\\dotsc,S _ {2N})\\) の元 \\(S _ i,S _ j\\) であって、\\(S _ j-S _ i=S\\) を満たすものは存在するか？\nこれは、列 \\((S _ 0,S _ 1,\\dotsc,S _ {2N})\\) に出現するすべての整数を平衡二分探索木やハッシュテーブルで管理したり、尺取り法を用いたりすることで \\(O(N\\log N)\\) や \\(O(N)\\) 時間で解くことができます。\n実装例は以下のようになります。\nこの実装例では\nstd::set\nを用いて問題を解いているため、時間計算量は \\(O(N\\log N)\\) となっています。",
+      "codes": [
+        "#include <iostream>\n#include <numeric>\n#include <set>\n#include <vector>\n\nint main() {\n    using namespace std;\n    unsigned N;\n    unsigned long S;\n    cin >> N >> S;\n\n    vector<unsigned long> A(N);\n    for (auto& a : A)\n        cin >> a;\n\n    // 0 <= S < X に帰着\n    const auto sum{reduce(begin(A), end(A))};\n    S %= sum;\n\n    // A の長さを倍にする\n    A.reserve(2 * N);\n    for (unsigned i{}; i < N; ++i)\n        A.emplace_back(A[i]);\n\n    // 累積和を計算\n    set<unsigned long> prefix_sum{};\n    prefix_sum.emplace();\n    for (unsigned long p{}; const auto a : A) {\n        p += a;\n        prefix_sum.insert(p);\n    }\n\n    // 累積和の要素 p について p + S が含まれているか判定\n    for (const auto p : prefix_sum)\n        if (prefix_sum.contains(p + S)) {\n            cout << \"Yes\" << endl;\n            return 0;\n        }\n\n    cout << \"No\" << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "9e5cd7b0d6e21cd9ce0bc7c20247fff873e1a10579c4135ecb73ff5e862e4963",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc384/abc384_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

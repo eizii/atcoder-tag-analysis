@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc349_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc349/editorial/9779",
+      "text": "\\(S\\)\nの\n\\(i\\)\n文字目を\n\\(S_i\\)\nと表します．同様に，\n\\(T\\)\nの\n\\(j\\)\n文字目を\n\\(T_j\\)\nと表します．\nあらかじめ，\n\\(S\\)\nの文字をすべて英大文字に変換しておきます．\n\\(T\\)\nの最後の文字が\nX\nでない場合，\n\\(T\\)\nが\n\\(S\\)\nの部分列であるかどうか判定すればよいです．\n\\(T\\)\nの最後の文字が\nX\nである場合，\n\\(T\\)\nの最初の2文字が\n\\(S\\)\nの部分列であるかどうか判定すればよいです．\n最後に，文字列\n\\(T\\)\nが文字列\n\\(S\\)\nの部分列であるかの判定方法を述べます．\nこれは，\n\\(T\\)\nの各文字を\n\\(S\\)\nのできるだけ左の方から対応させていって， すべて対応させられるか判定すればよいです．\nより形式的には，次のような貪欲法により判定できます．\n\\(k\\leftarrow 1\\)\nと初期化する\n\\(j=1,2,\\dots,|T|\\)\nの順に，以下を行う：\n\\(S_i=T_j\\)\nかつ\n\\(k \\leq i \\leq |S|\\)\nを満たす\n\\(i\\)\nが存在しなければ，\nNo\nを返して終了する．\n条件を満たす\n\\(i\\)\nが存在すれば，そのうち最小のものを\n\\(i'\\)\nとする．\n\\(k \\leftarrow i' + 1\\)\nと更新する．\nYes\nを返して終了する．\n実装例 (Python)",
+      "codes": [
+        "def check(S, T):\n    i = 0\n    for t in T:\n        while i < len(S) and S[i] != t:\n            i += 1\n        if i == len(S):\n            return False\n        i += 1\n    return True\n\nS = input().upper()\nT = input()\nprint(\"Yes\" if check(S, T if T[-1] != \"X\" else T[:-1]) else \"No\")"
+      ],
+      "text_sha256": "2dc5295959c4aa352a276b1e4831be60b36eb902ff92a90b44ce40ad616e9084",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc349/abc349_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc349/editorial/9786",
+      "text": "2024-04-20 追記：\nPython での実装例を掲載していましたが、Python の正規表現ライブラリには計算量上の弱点があるようなので削除しました。\n正規表現ライブラリが使える言語では、文字列\n\\(T\\)\nが文字列\n\\(S\\)\nの部分列であるかの判定を楽に実装できます。例えば、\nNRT\nが文字列\n\\(S\\)\nの部分列であることは、\nN.*R.*T\nというパターンが\n\\(S\\)\nに現れることと同値です。\nなお、与えられた\n\\(S\\)\nの末尾に\nX\nを付ければ、問題文中の二つの方法のうち二つ目を無視できます。\n実装例（Python）",
+      "codes": [],
+      "text_sha256": "7e9fbd5f436110bd6e4d966785834de46f04cbecab90544788db374f5f618b83",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc349/abc349_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc283_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc283/editorial/5428",
+      "text": "\\(S\\) をレジに入力するために必要なボタン入力の回数を \\(f(S)\\) と書くことにします。\nすると、最後に入力するボタンについて考えることで、\\(f(S)\\) は次のように再帰的に求めることができます。\n\\(f(S)=0\\phantom{f(\\lfloor S/100\\rfloor)+}\\quad(S=0)\\)\n\\(f(S)=f(S/100)+1\\phantom{\\lfloor\\rfloor}\\quad(S\\equiv0\\pmod{100})\\)\n\\(f(S)=f(\\left\\lfloor S/10\\right\\rfloor)+1\\phantom{0}\\quad(\\)それ以外\\()\\)\nこれが正しいことは、\n0\nと\n00\nを連続して入力する場合にこれらを入れ替えてもよいことを使って示すことができます。\nあとは、この式に従って計算を行えばよいです。\nこのような形の再帰関数は while 文などを用いたシンプルな繰り返しで計算することができます（もちろん再帰関数として計算することもできます）。\nこの問題では \\(S\\) が非常に大きく、\\(S\\) を \\(10,100\\) で割ることを繰り返すため、\\(S\\) を十進法で表した文字列で管理すると効率がよいです。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n\nint main() {\n    using namespace std;\n\n    string S;\n    cin >> S;\n\n    int ans = 0;\n    while (!empty(S)) {\n        const auto back{S.back()};\n        S.pop_back();\n        if (back == '0' && S.back() == '0')\n            // S が 100 の倍数なら、さらに 1 文字消す\n            S.pop_back();\n        ++ans;\n    }\n    cout << ans << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "cbcec6c6f71db989811bc02ac107bb660424cd8387913033aa8dc33b357850d1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc283/abc283_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

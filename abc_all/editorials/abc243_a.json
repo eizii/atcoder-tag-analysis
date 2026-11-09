@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc243_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc243/editorial/3533",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\n解法1\n実際にシミュレーションをしてみましょう。シャンプーが不足するまで無限ループする、以下のような実装が容易です。\n実装例(Python)\nこのアルゴリズムの計算量は\n\\(O(V)\\)\nです。\n解法2\nまず\n\\(V<A+B+C\\)\nの場合を考えてみましょう。\nこのときは、以下のような単純な場合分けで答えを求める事ができます\n\\(V\\geq A+B+C\\)\nである間、シャンプーは\n\\(1\\)\n日あたり\n\\(A+B+C\\)\nずつ消費されます。したがって、ある日の朝の時点でシャンプーの残りが\n\\(A+B+C\\)\n未満になったとき、その量は\n\\(V\\%(A+B+C)\\)\nです。（\n\\(x\\%y\\)\nで\n\\(x\\)\nを\n\\(y\\)\nで割った余りを表します）\nよって、全体としては次のような方法により解くことができます。\n実装例(Python)\nこのアルゴリズムの計算量は適当な仮定の下で\n\\(O(1)\\)\nです。",
+      "codes": [
+        "V,A,B,C=map(int,input().split())\nwhile True:\n  if V<A:\n    print(\"F\")\n    exit()\n  V-=A\n  if V<B:\n    print(\"M\")\n    exit()\n  V-=B\n  if V<C:\n    print(\"T\")\n    exit()\n  V-=C",
+        "if V<A:\n  print(\"F\")\nelif V<A+B:\n  print(\"M\")\nelse:\n  print(\"T\")",
+        "V,A,B,C=map(int,input().split())\nV%=A+B+C\nif V<A:\n  print(\"F\")\nelif V<A+B:\n  print(\"M\")\nelse:\n  print(\"T\")"
+      ],
+      "text_sha256": "ca9d889bb72c55fa426086b503d173e47d8a5278b9b732f8b25325c04dafcb5b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc243/abc243_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

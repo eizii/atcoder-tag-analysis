@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc417_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc417/editorial/13551",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nC++入門 AtCoder Programming Guide for beginners (APG4b)\nは、競技プログラミングのための C++ 入門用コンテンツです。\nPython入門 AtCoder Programming Guide for beginners (APG4bPython)\nは、競技プログラミングのための Python 入門用コンテンツです。\n大きく分けて \\(2\\) つの方針があります。\n消されずに残る文字を順に出力する\n出力するべき文字列を作ってから出力する\nそれぞれの方針について説明します。\n1. 消されずに残る文字を順に出力する方針\n\\(S\\) から取り除かれる文字は、\\(S\\) の \\(1\\) 文字目 \\(,2\\) 文字目 \\(,\\ldots,A\\) 文字目と、\\(N-B+1\\) 文字目 \\(,N-B+2\\) 文字目 \\(,\\ldots,N\\) 文字目です。\nつまり、取り除かれずに残る文字は \\(A+1\\) 文字目から \\(N-B\\) 文字目までの文字です。\nこれらの文字を順番に出力することで、この問題を解くことができます。\n出力の最後にスペースや改行などがデフォルトでつく言語では、文字列を \\(1\\) 文字ずつ出力する際には余分な区切り文字が出力されないように注意してください。\n実装例は以下のようになります。\n2. 出力するべき文字列を作って出力する方針\nいくつかの言語では、文字列の連続する部分を取り出して新しい文字列を作る方法が用意されていることがあります。\n例えば、C++ では string 型の変数のメンバ関数 substr を呼び出すことで、Python では str 型の変数にスライスでアクセスすることで、連続する部分を取り出した文字列を作ることができます。\n実装例は以下のようになります。\nC++ の substr 関数は、「先頭が何文字目か」と「合計何文字取り出すか」の値を与えることで連続する部分を取り出した文字列を作ることができます。\nPython でスライスを用いて末尾から \\(B\\) 文字取り除いた文字列を作る際、\n[:-B]\nのような操作をすると \\(B=0\\) のときに意図しない挙動となってしまうため、一工夫必要になります。\n\\(B\\) が \\(1\\) 以上になるように \\(S\\) の末尾に \\(1\\) 文字追加したり、\\(-B\\) ではなく \\(N-B\\) でアクセスすることで意図した動作にすることができます。",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    int N, A, B;\n    cin >> N >> A >> B;\n    string S;\n    cin >> S;\n\n    // 先頭から A 文字、末尾から B 文字だけ取り除く\n    // → 0-indexed で A 文字目以降、N-B 文字目より前が残る\n    int start = A;\n    int end = N - B;\n\n    // 取り除かれない文字を順番に出力する\n    for (int i = start; i < end; ++i) {\n        cout << S[i];\n    }\n    cout << endl;\n    return 0;\n}",
+        "N, A, B = map(int, input().split())\n\nS = input()\n\n# 先頭から A 文字、末尾から B 文字だけ取り除く\n# → 0-indexed で A 文字目以降、N-B 文字目より前が残る\nstart = A\nend = N - B\n\n# 取り除かれない文字を順番に出力する\nfor i in range(start, end):\n    print(S[i], end='')",
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    int N, A, B;\n    cin >> N >> A >> B;\n    string S;\n    cin >> S;\n\n    // (0-indexed で) A 文字目から、合計 N - A - B 文字取り出す\n    cout << S.substr(A, N - A - B) << endl;\n    return 0;\n}",
+        "N, A, B = map(int, input().split())\n\nS = input()\nS += 'a' # [:-B] でアクセスしたいので、1 文字末尾に追加しておく\nB += 1 # B も増やす\n\nprint(S[A:-B])"
+      ],
+      "text_sha256": "9827dc825577c759a508df9e97067205fb080181f0d41eb0d5bbabf08c4ff892",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc417/abc417_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

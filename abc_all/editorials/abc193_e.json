@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc193_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc193/editorial/812",
+      "text": "電車と高橋くんの状態が変化するのが整数時刻のみなので、それぞれの整数時刻に高橋くんが街\n\\(B\\)\nで降りられるかどうか判定すれば十分です。\nすると、以下の問題を解けば良いです。\n\\(X ≤ t \\bmod (2X+2Y) < X + Y\\)\n\\(P ≤ t \\bmod (P + Q) < P + Q\\)\nとなる最小の非負整数\n\\(t\\)\nはいくつか？\nここで、\n\\(Y, Q ≤ 500\\)\nと、電車が街\n\\(B\\)\nで停車している時間と高橋くんが起きている時間が短いことに注目し、\n\\(t \\bmod (2X+2Y)\\)\nと\n\\(t \\bmod (P + Q)\\)\nの値を全探索します。\nすると、以下の問題を解けば良いです。\n整数\n\\(t_1(X ≤ t_1 < X + Y),\\ t_2(P ≤ t_2 < P + Q)\\)\nが与えられる。\n\\(t = t_1 \\pmod{2X+2Y}\\)\n\\(t = t_2 \\pmod{P + Q}\\)\nとなる最小の非負整数\n\\(t\\)\nはいくつか？\nこれは、拡張ユークリッドの互除法により\n\\(O(\\log(X+Y+P+Q))\\)\nで求めることができるので、全体で\n\\(O(YQ\\log(X+Y+P+Q))\\)\nの計算量でこの問題を解くことができます。\n実装には\nAC Library\nの\ncrt\nを利用できます。\n回答例 (C++)\n回答例 (Python)\nBONUS :\n\\(O(Y+Q+\\log(X+Y+P+Q))\\)\nで解いてみましょう！",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/math>\nusing namespace std;\nusing ll = int64_t;\nconst ll INF = numeric_limits<ll>::max() / 4;\n\nvoid solve(){\n    ll X, Y, P, Q;\n    cin >> X >> Y >> P >> Q;\n    ll ans = INF;\n    for(ll t1 = X; t1 < X + Y; t1++) for(ll t2 = P; t2 < P + Q; t2++){\n        auto [t, lcm] = atcoder::crt({t1, t2}, {(X + Y) * 2, P + Q});\n        if(lcm == 0) continue;\n        if(ans > t) ans = t;\n    }\n    if(ans == INF) puts(\"infinity\");\n    else cout << ans << endl;\n}\nint main(){\n    ll T;\n    cin >> T;\n    while(T--) solve();\n}"
+      ],
+      "text_sha256": "e061630a92557a8e0a1bb873787d55e18f410e3dcec35ac7724325f27f18617d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc193/abc193_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc193/editorial/848",
+      "text": "区間の左端のみに注目すればよいので、\n「\n\\( L \\le (ax+b)\\%M  \\le R\\)\nをみたす非負整数\n\\(x\\)\nの最小値を計算せよ」という問題が解ければよいです。\nこの問題は以下の通り対数時間で解けます。\n集合\n\\(S\\)\n, 関数\n\\(g\\)\nを以下で定めます。求める値は\n\\( g(L-b,R-b,a,M)\\)\nです。\n\\( S = S(L,R,a,M) = \\{(x,y) \\in \\mathbb{Z}^2 \\mid L \\le ax-My \\le R )\\} \\)\n\\( g(L,R,a,M)\\)\nを、\n\\( (x,y) \\in S,\\, x \\ge 0\\)\nをみたす\n\\(x\\)\nの最小値とする\n\\(g\\)\nは次の手順で再帰的に計算できます。\n\\(L\\)\nと\n\\(R\\)\nの間に\n\\(M\\)\nの倍数が存在するとき\n\\( g(L,R,a,M) = 0\\)\nそうでないとき\n\\( g(L,R,a,M) = g(L\\%M,R\\%M,a,M)\\)\nなので右辺を計算する\n（以下\n\\(0 \\le L \\le R < M\\)\n）\n\\(S\\)\nにおける\n\\(y \\ge 0\\)\nの最小値を\n\\( y_0\\)\nとおくと\n\\( g(L,R,a,M) = \\lceil (L+My_0)/a \\rceil\\)\nとなる\n\\( 0 \\le L \\le R < M, \\,0 < a < M\\)\nのとき、\n\\(y\\)\nの非負最小値をとる\n\\(S\\)\nの元は\n\\(x\\)\nの非負最小値もとる（これは非自明です）ことからしたがう\n\\(y_0\\)\nの定義により\n\\( y_0 = g(L,R,-M,-a)\\)\nであり、これは\n\\( g(L,R,(-M)\\%a,a)\\)\nと等しいので、再帰的に\n\\(y_0\\)\nが計算できる\nただしこの再帰では再帰回数が多いです。そこで\n\\(2a > M\\)\nなら\n\\(g(L,R,a,M) = g(-R,-L,M-a,M)\\)\nを呼び出すことにすると、再帰\n\\(2\\)\n回ごとに\n\\(M\\)\nが半分になるので対数時間で処理できます。\nhttps://atcoder.jp/contests/abc193/submissions/20627132",
+      "codes": [],
+      "text_sha256": "d66e5e7e61dad8e6cd0f39e66a0ab3cc47314106f9043e41ef9df24444734e8f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc193/abc193_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

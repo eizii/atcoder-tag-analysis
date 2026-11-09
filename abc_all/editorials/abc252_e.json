@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc252_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc252/editorial/3980",
+      "text": "全ての道路を使えるときの、都市\n\\(1\\)\nから都市\n\\(i\\)\nまでの最短距離を\n\\(D_i\\)\nとします。廃道にする道路をどのように選んでも、明らかに\n\\(d_i\\geq D_i\\)\nが成り立つため、もし全ての\n\\(i\\)\nで\n\\(d_i=D_i\\)\nを満たすような道路の選び方が存在すれば、それが最適解となります。実はそのような選び方が必ず存在します。\n各\n\\(i=2,3,\\ldots,N\\)\nについて「都市\n\\(1\\)\nから都市\n\\(i\\)\nの最短経路において、都市\n\\(i\\)\nに到達する直前に使った道路」をそれぞれ残せば十分です。\n\\(d_i=D_i\\)\nが達成されることの証明は、経由する道路の本数に関する帰納法によります。\nダイクストラ法を用いて、各都市に到達する直前の道路を記録することで求めることができます。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "83e8b29e5d7553d7c789b7b08e1ff4e96e675edc677f6978a571ae54873508d5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc252/abc252_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

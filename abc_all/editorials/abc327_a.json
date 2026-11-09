@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc327_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc327/editorial/7566",
+      "text": "この問題では次の条件を満たす整数\n\\(i\\)\nが存在するかどうかを聞かれていることが分かります。\n\\(1 \\leq i \\leq N - 1\\)\n\\(S\\)\nの\n\\(i\\)\n文字目と\n\\(i+1\\)\n文字目はそれぞれ\na\n,\nb\nまたは\nb\n,\na\nよって、\n\\(S\\)\nを入力から受け取った後、for 文などの繰り返し文で\n\\(i\\)\nを\n\\(1, 2, \\dots, N-1\\)\nまで走査して、条件を満たす\n\\(i\\)\nが存在するかを調べていけばよいです。\nC++ による実装例は次の通りです。(実装例を読む際、文字列型の先頭の文字が\nS[0]\nで始まる影響で\n\\(i\\)\nの値が\n\\(1\\)\nずれているのに注意してください。)",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n  int N;\n  string S;\n  cin >> N >> S;\n  bool yes = false;\n  for (int i = 0; i < N - 1; i++) {\n    if (S[i] == 'a' and S[i + 1] == 'b') yes = true;\n    if (S[i] == 'b' and S[i + 1] == 'a') yes = true;\n  }\n  cout << (yes ? \"Yes\" : \"No\") << endl;\n}"
+      ],
+      "text_sha256": "bc37a3b1f4cd5c99da606342e7b4e6cc82e5b4450d4f0210c581b82a0b88682d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc327/abc327_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc401_c",
+  "title": "K-bonacci",
+  "contests": [
+    {
+      "contest_id": "abc401",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 248,
+  "raw_difficulty": 209,
+  "contest_id": "abc401",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc401/tasks/abc401_c",
+  "statement": "配点 : 300 点 問題文 正整数 N,K が与えられます。長さ N+1 の数列 A=(A_0,A_1,\\ldots,A_N) の各要素の値を、以下の方法で定義します。 0\\leq i<K のとき、 A_i=1 K\\leq i のとき、 A_i=A_{i-K}+A_{i-K+1}+\\ldots+A_{i-1} A_N を 10^9 で割ったあまりを求めてください。 制約 1\\leq N, K\\leq  10^{6} 入力される数値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N K 出力 答えを出力せよ。 入力例 1 4 2 出力例 1 5 A_0=A_1=1 であり、 A_2=A_0+A_1=2,A_3=A_1+A_2=3,A_4=A_2+A_3=5 となります。 入力例 2 10 20 出力例 2 1 入力例 3 1000000 500000 出力例 3 420890625 A_N を 10^9 で割ったあまりを出力することに注意してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 正整数 N,K が与えられます。長さ N+1 の数列 A=(A_0,A_1,\\ldots,A_N) の各要素の値を、以下の方法で定義します。 0\\leq i<K のとき、 A_i=1 K\\leq i のとき、 A_i=A_{i-K}+A_{i-K+1}+\\ldots+A_{i-1} A_N を 10^9 で割ったあまりを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N, K\\leq  10^{6} 入力される数値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 5 A_0=A_1=1 であり、 A_2=A_0+A_1=2,A_3=A_1+A_2=3,A_4=A_2+A_3=5 となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 20"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1000000 500000"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 420890625 A_N を 10^9 で割ったあまりを出力することに注意してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc401/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:31.241715+00:00",
+  "statement_sha256": "de69b46b7f61d1d75a1d28a77f319e2a108f23e4018f83b0d444e081703c48be",
+  "editorials": []
+}

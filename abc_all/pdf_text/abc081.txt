@@ -1,0 +1,395 @@
+  AtCoder Beginner Contest 081 / AtCoder Regular Contest 086 解説
+
+                                  writer: semiexp 並びにanonymous
+
+                                   2017 年12 月9 日
+
+
+
+                        For International Readers: English editorial starts on page 7.
+
+
+A: Placing Marbles
+
+ それぞれの文字が1 か0 かを判定して1 の数を数えればよいです．マスの数は高々3 つなので，for 文を使わなくて
+も簡単に実装できます．
+
+#include <iostream>
+
+#include <string>
+
+using namespace std;
+
+int ans;
+
+string s;
+
+int main(){
+
+    cin >> s;
+
+    if(s[0]=='1') ans++;
+    if(s[1]=='1') ans++;
+
+    if(s[2]=='1') ans++;
+
+    cout << ans << endl;
+
+}
+
+
+
+
+
+                                                   1
+
+B: Shift only
+
+ 黒板に書いてある整数を管理しておいて，「書かれている整数がすべて偶数である限り」「書かれている整数すべてを2
+で割る」をシミュレートすればよいです．
+
+ あるいは，ほとんど同じことですが，最初書かれている整数それぞれに対して「最大で何回2 で割れるか」を求め，そ
+の最小値をとってもよいです．
+
+   • C++ による解答例: https://abc081.contest.atcoder.jp/submissions/1842477
+
+   • Python による解答例: https://abc081.contest.atcoder.jp/submissions/1842030
+
+
+
+
+
+                                                   2
+
+C: Not so diverse
+
+ 「できるだけ少ない数のボールの整数を書き換える」というのは，「できるだけ多くのボールの整数を，変更しないま
+
+まにしておく」というのと同じです．ここで，変更を行わないボールたちに書かれている整数はK 種類以下でなければ
+なりません．逆に，これがK 種類以下なら，他のボールに書かれている整数も，変更しないでおくボールに書かれてい
+る整数から選んで書き換えることで，全体として書かれている整数をK 種類以下にすることができます．
+ よって，問題は「整数をK 個選んで，それらのうちのどれかが書かれているボールの数を最大化する」と言い換えら
+れます．選ぶ整数としては，できるだけそれが書かれているボールの数が多いようなものから順に選んでいくのが最適
+
+です．
+
+ 最初書かれている整数として考えられるものは1 以上N 以下なので，各整数に対して「その整数が書かれているボー
+ルは何個あるか」を容易に求めることができます．この個数分布をソートして，大きいほうからK 個の和をとることで，
+書き換えないボールの個数の最大値がわかります．あとはN からこの値を引くと，求める値を計算することができます．
+
+
+
+
+
+                                                   3
+
+D: Non-decreasing
+
+ 簡単な場合から考えていきます．a が非負整数のみからなる場合を考えてみます．このとき，a の先頭からの累積和を
+取った数列は明らかに条件を満たします．よって，a2+= a1, a3+= a2, . . . , aN+= aN−1 という順番で操作をすればその
+ような数列を作ることができ，N −1 回の操作で条件を満たすことができます．a が0 以下の整数のみからなる場合も
+ほぼ同様の方法でN −1 回の操作で条件を満たすことができます．
+  a に負の数も正の数も含まれるとき，N 回以下の操作でa が非負整数のみからなるように，あるいは0 以下の整
+数からなるようにすることができるかどうかを考えてみます．MAX := max(a), MIN := min(a) とします．このとき，
+|MAX| ≥|MIN| ならば，すべての数にMAX を足せばa を非負整数のみからなる数列にすることが可能です．同様に，
+|MAX| < |MIN| ならば，すべての数にMIN を足せばa を0 以下の整数のみからなる数列にすることが可能です．
+ 以上より2N 回以下の操作で条件を満たすことができることが分かりました．これはO(N) で実行可能です．
+
+
+
+
+
+                                                   4
+
+E: Smuggling Marbles
+
+ 同じ頂点の上に複数のビー玉が乗ったとき，木の上から取り除かれるという手順について考えます．ある2 つの頂点
+に置かれたビー玉が同じ頂点の上に乗るためには，これらの頂点の根からの距離が等しい必要があります．よって，根
+
+からの深さd の頂点にのみビー玉を置くとき，最終的に箱にビー玉が移動するようなビー玉の初期配置がいくつあるか
+を考えていくことにします．
+
+   dp[i][j] = 頂点i を根とする部分木に着目したとき，頂点i にj(0 ≤j ≤1) 個のビー玉が置かれるような頂点0 からの
+距離がd の頂点へのビー玉の配置の数，としてDP をすることでO(N) で数え上げることができます．なお，DP の計算
+途中では頂点にビー玉が置かれる個数が2 個以上になりえますが，最終的に取り除かれるため2 個として扱っても問題あ
+りません．こうして得られた結果は，深さd 以外の頂点の配置を考慮していないので，dp[0][1] × 2N−深さd にある頂点の個数
+が求めるべき答えです．これを各深さごとに行えばO(N 2) で数え上げることができ部分点を獲得できます．
+ ここで，このDP には無駄な遷移が多く含まれていることに着目します．例えば，ある頂点に複数個のビー玉が置か
+れるためにはその頂点の直接の子が2 つ以上ある必要がありますが，先程のDP では子が1 つしかないような場合でも
+毎回計算を行っていました．これらをうまく無視して計算する方法を考えます．
+
+   dp[i][d][j] = 頂点i にj 個のビー玉が置かれるような，頂点i から深さd の頂点へのビー玉の初期配置の数，としま
+す．このDP のd についてデックを用いて動的に管理をします．d = 0 については，頂点i のみ考えればよいため，最
+後にデックの先頭に付け加えることにします．それ以外の深さの更新については以下の図1 のように子頂点どうしの2
+つのデックのうち長さの短い方を長い方へとマージするような要領で更新をしていきます．このようにすることで全体
+
+としてO(N) で数え上げることができ，満点を獲得できます．
+
+
+
+
+
+                       図1: 頂点r を根とするDP の更新の模式図
+
+ 最後にこれがO(N log N) ではなくO(N) になることの概略を述べておきます．全ての頂点には0 が書かれていると
+します．根から距離d にad 個の頂点があるとします．まずこれらad 個の頂点たちを行きがけ順に並べます．その後，
+隣り合う頂点のペア(u, v) について，それぞれu とv のLCA(最小共通先祖) であるような頂点に1 を加算します．こ
+のとき，各頂点に書かれた整数の数が，その頂点において，根から深さd の頂点たちに対するDP の更新を行う必要が
+ある(あるいはデックのマージを行う) 回数になります．これらの和は明らかにad −1 回となります．よって，更新の回
+                  となります．数はO(∑Nd=0 max(0, ad −1)) = O(N)
+
+
+
+
+
+                                                   5
+
+F: Shift and Decrement
+
+ 操作B を行う回数をk とします．入力で与えられる整数は1018 < 260 以下なので，0 ≤k ≤60 として問題ありませ
+ん(60 回B を行うとすべての整数が0 になるため，61 回目を行う意味はありません)．i = 0, 1, . . . , k に対して，i 回目
+の操作B とi + 1 回目の操作B の間で行う操作A の回数をpi で表すことにします(ただし，p0 は「最初の操作B を
+行う前に行う操作A の回数」，pk は「最後の操作B を行った後に行う操作A の回数」とします)．
+  pi を2d 減らしてpi+1 をd 増やしても，黒板上の整数の書かれ方は変わらないことに注意します．このことから，
+i = 0, 1, . . . , k −1 に対して，pi = 0 またはpi = 1 としてよいということがわかります．(なぜならば，pi ≥2 であれ
+ば，pi を2 減らしてpi+1 を1 増やすことで，最終的な黒板上の整数の書かれ方を保ちつつ，操作回数を減らすことが
+できるからです．) また，pi を1 減らしてp0 を2i 増やしても，黒板上の整数の書かれ方は変わらないことも従います．
+                                       ∑k−1
+よって，{pi} に対応する一連の操作は，「操作A をP =   i=0 2ipi 回行い，操作B をk 回行い，最後に操作A をpk
+回行う」一連の操作と等価です．pi = 0, 1 としたので，0 ≤P ≤2k −1 が成り立ちます．
+  Ai を2k で割った商をBi，余りをCi (0 ≤Ci ≤2k −1) とします．また，Ci (i = 1, . . . , N) から重複を除去し，ソー
+トしたものをC′1 ≤C′2 ≤· · · ≤C′M とします．0 ≤P ≤2k −1 であることから，一連の操作によってAi は次の値にな
+ることがわかります．
+
+   • P ≤Ci ならば，Bi −pk
+
+   • Ci ≤P ならば，Bi −pk −1
+
+よって，すべてのi に対して「P ≤Ci かどうか？」が同じであれば，異なるP に対しても同じ整数の書かれ方が得ら
+れることがわかります．ゆえに，考えるべきP は次のように区分されます．
+
+   • 0 以上C′1 以下
+
+   • C′1 + 1 以上C′2 以下
+
+   •  . . .
+
+   • C′M−1 + 1 以上C′M 以下
+
+ここで，P ごとに実際に行われる操作A の回数は，2 進表記したときに現れる1 の個数と等しいです．この操作回数を
+できるだけ少なくすることを考えると，P としては「区分の範囲内で，最も2 進表記における1 の個数が少なくなるも
+の」を用いるべきであることがわかります(具体的方法は後述します)．なお，C′M + 1 以上については，P = 0 として
+pk に1 を加えるのと同じであることから，考える必要がありません．
+ よって，各k に対して考えるべきP の候補がM ≤N 通りにまで絞られました．それぞれの候補に対して，最後の
+操作B を行うまでの操作回数を計算することができるので，pk の範囲を求めることができます．(ここで，負の整数が
+現れてはいけないことに注意します．) 黒板に書かれているすべての整数に同じ整数を加減することで移り変わるような
+整数の書かれ方同士を同じグループとみなすことにすると，pk を変更しても所属するグループは変わりません．なので，
+考えるべきグループは全体で(k, P のとり方に対応して) 61 × N 個以下です．それぞれのグループごとに，「A1 は最終
+的に何に書き換えられるか」としてありうる範囲の集合を求めることができます．このような範囲も合計で61 × N 個
+以下です．あとは，各グループごとに，範囲の重複を除いて可能なパターン数を求めればよいです．
+ このアルゴリズムの計算量は，グループおよび範囲が全部でO(log Amax ·N) 個あり，グループのインデックスはN −1
+要素の配列で管理できることから，O(log Amax · N 2 log(log Amax · N)) になります．
+ 最後に，X より大きくY 以下の整数で(X < Y )，最も2 進表記における1 の個数が少なくなるものを求める方法を
+述べておきます．2 進表記においてX, Y で異なる値になる桁が存在するので，そのうち最も上位のものをl ビット目と
+します．すると，l ビット目より上位のビットについては，X, Y と同じにするほかありません．一方，l ビット目および
+それより下位のビットをすべて0 にすることはできない(X 以下になるため) ので，少なくともこの範囲で一つは1 が
+必要です．ところで，l ビット目のみを1 にし，より下位のビットはすべて0 にすると，X より大きくY 以下となりま
+す．よって，このようにして得られた整数が，最も2 進表記における1 の個数が少なくなるものになります．
+
+
+                                                   6
+
+ AtCoder Beginner Contest 081 / AtCoder Regular Contest 086 Editorial
+
+
+                                    writer: semiexp and anonymous
+
+                                December 10th, 2017
+
+
+
+A: Placing Marbles
+
+
+#include <iostream>
+
+#include <string >
+
+using namespace  std ;
+
+ int  ans ;
+
+ s t r i n g  s ;
+ int main (){
+
+     cin >>  s ;
+
+          i f ( s [0]== ’1 ’) ans++;
+
+          i f ( s [1]== ’1 ’) ans++;
+
+          i f ( s [2]== ’1 ’) ans++;
+
+     cout << ans << endl ;
+}
+
+B: Shift only
+
+   • C++ implementation: https://abc081.contest.atcoder.jp/submissions/1842477
+
+   • Python implementation: https://abc081.contest.atcoder.jp/submissions/1842030
+
+
+C: Not so diverse
+
+  For each integer x between 1 and N, count the number of occurrences of x in the input, and sort it. The answer is
+
+N minus the sum of K greatest integers in the frequency list.
+
+
+
+
+
+                                                   1
+
+D: Non-decreasing
+
+  In case all numbers in a are non-negative, the sequence of preﬁx sums (i.e., a1, a1 + a2, a1 + a2 + a3, · · · ) is non-
+decreasing. Thus, the sequence of operations ”a2+= a1, a3+= a2, . . . , aN+= aN−1” satisﬁes the condition. Similarly,
+in case all numbers are non-positive, ”aN−1+= aN, aN−2+= aN−1, . . . , a1+= a2” satisﬁes the condition.
+  In general, there are two cases. Let MAX := max(a), MIN := min(a). If |MAX| ≥|MIN|, we ﬁrst add MAX to all
+
+elements of a, and a will be a sequence of non-negative numbers. Then, we can make it non-decreasing as we described
+above. Similarly, if |MAX| < |MIN|, we ﬁrst add MIN to all elements of a, and a will be a sequence of non-positive
+
+numbers.
+  In both cases, we need 2N −1 operations. This solution works in O(N).
+
+
+
+
+
+                                                   2
+
+E: Smuggling Marbles
+
+ When multiple marbles are on the same vertex, they will be removed. This happens only when the marbles come
+
+from vertices of the same depth. Thus, we can handle each depth independently. For each d, consider all subsets of
+
+vertices of depth d, and count the number of subsets that will end up with a single marble at the root.
+
+ How can we solve this problem for a ﬁxed d? For simplicity, from now on, we use probabilities - each vertex initially
+contains a marble with probability 1/2. Let dp[i][j] be the probability that vertex i contains j(0 ≤j ≤1) marble at
+
+the end, when we only consider the subtree rooted at i (and initially we put marbles only on vertices of depth d). The
+answer is sum of dp[0][1] × 2N over all depths. This solution works in O(N) per depth, and O(N 2) in total. You can
+
+get partial score.
+
+  To make it faster, we compute these values for all depths at once. Let dp[i][d][j] be the following value: Consider a
+
+subtree rooted at vertex i. We put marbles to some vertices of depth d (i.e., the distance to i is d), with probability
+
+1/2 for each such vertex. What is the probability that vertex i contains j marbles at the end?
+
+  Let’s call a tuple of three doubles dp[i][d] = (dp[i][d][0], dp[i][d][1], dp[i][d][2]) ”state”. Here, j = 2 means that a vertex
+
+contains two or more marbles (it happens during the computation, as described below). Then, dp[i] is a sequence of
+
+states (dp[i][0], dp[i][1], ...) and its length is (the depth of subtree rooted at i) plus one. We represent it as a deque of
+
+states.
+
+  The ﬁgure below shows how to compute dp[r] when it has three children a, b, c. While r has two or more chil-
+dren, we ”merge” the shortest deque into the second shortest deque.  For example,  if dp[a][i] contains x marbles
+and dp[b][i] contains y marbles, the new deque dp[ab][i] will contain min(x + y, 2) marbles.   It can be done in
+
+O(min(len(dp[a]), len(dp[b]))). Make sure that you don’t create a new deque - if len(dp[a]) > len(dp[b]), reuse dp[a],
+
+and rewrite its ﬁrst len(dp[b]) elements.
+
+  Then, if r has only one children, you just need to push a state (1/2, 1/2, 0) to the front. Don’t forget to convert
+
+j = 2 to j = 0 at the end.
+
+
+
+
+
+ Why is it O(N) (and not O(NlogN))? Suppose that initially all vertices contain 0. Let ad be the number of vertices
+of depth d. First, we sort these vertices in dfs pre-order. For each consecutive pair of two vertices (u, v) (of depth d),
+
+add 1 to the integer written on LCA of u and v. Then, the integers written on each vertex represents the number of
+merges that comes from vertices of depth d. The sum of those integers is ad −1. Thus, the total number of merges is
+O(∑Nd=0 max(0, ad −1)) = O(N).
+
+
+
+
+
+                                                   3
+
+F: Shift and Decrement
+
+  Suppose that we perform operation A k times. Since 1018 < 260, we can assume that 0 ≤k ≤60 (after 60 operations
+all numbers will be zero)．For each i = 0, 1, . . . , k, let pi be the number of operation Bs we perform between i-th A
+and i + 1-th A. (p0 and pk are deﬁned naturally).
+ An operation A maps an integer x to floor(x/2), and an operation B maps an integer x to x −1. Notice that we
+
+don’t need to take ﬂoor after each opertaion A - instead, we compute numbers as doubles, and only at the end of all
+
+operations we apply the ﬂoor function. Thus, the sequence of operations is equivalent to the following:
+
+                      ∑k−1
+   • Perform operation B P =   i=0 2ipi times.
+
+   • Perform operation A k times.
+
+   • Perform opertaion B pk times.
+
+  Also, we can assume that 0 ≤P ≤2k −1 (otherwise, we can decrease P by 2k and increment pk by one, and decrease
+the total number of operations).
+  Let Ai = 2k × Bi + Ci (0 ≤Ci ≤2k −1). Let C′1 ≤C′2 ≤· · · ≤C′M be a sorted list of integers that appear in C
+(after removing duplicates).
+  After all operations, the value of Ai will be following:
+
+   • If P ≤Ci, Bi −pk
+
+   • If Ci ≤P, Bi −pk −1
+
+  Thus, the only important thing for P is ”Is P ≤Ci?” for each Ci. P will be in one of the following intervals:
+
+   • [0, C1]
+
+   • [C1 + 1, C2]
+
+   •  . . .
+
+   • [CM−1 + 1, CM]
+
+  The number of opertaion Bs in the ﬁrst phase is popcount(P) (the number of 1s in the binary representation of P).
+
+Thus, in each interval, we should choose P that minimizes this value (see below for the way to compute P).
+  Now, for each k, we have only M ≤N candidates for P. For each candidate, we can compute the valid range for pk
+(to make the total number of opertaions at most K, make sure that it won’t be negative).
+
+ We consider two sequences of integers to be in the same group  if we can convert one of them to the other by
+performing operation Bs. Since the value of pk doesn’t aﬀect its group, we need to consider at most 61 × N groups
+(at most one group per each (k, P) pair). For each group, compute the possible range for A1 (the total number of
+those ranges is also at most 61 × N). Then, for each group, we compute the number of possible values for A1 (after
+remoging duplicates).
+  There are O(log Amax ·N) groups and ranges, and since each group can be represented as a sequence of length N −1,
+this solution works in O(log Amax · N 2 log(log Amax · N)) time.
+  Now, we describe how to compute an integer between X + 1 and Y (X < Y ) that minimizes its popcount. Let l be
+
+the largest integer such that the l-th digits in X and Y diﬀer. Since the integer we choose must be between X + 1
+
+and Y , all digits above l-th must be the same as X, Y .  If we make the l-th digit one and the remaining digits zero,
+
+the number will be between X + 1 and Y . This is optimal because it only adds one to popcount (and we can’t make
+
+all digits up to l-th zeroes because the number must be at most X + 1).
+
+
+                                                   4

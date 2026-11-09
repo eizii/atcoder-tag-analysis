@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc473_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc473/editorial/24887",
+      "text": "辞書順で全列挙を行う際には、深さ優先探索が便利です。 条件を満たす列のうち先頭 \\(i\\) 項が \\(A _ 1,A _ 2,\\ldots,A _ i\\) であるものを辞書順にすべて列挙する関数として、次のような再帰関数を考えることができます。 \\(i=N\\) のとき（つまり、先頭 \\(N\\) 項が決まっている場合） \\(\\displaystyle\\sum _ {j=1} ^ Nj\\times A _ j=K\\) なら、\\(A\\) を出力する。 そうでなければ、何も出力しない。 そうでない場合、\\(i+1\\) 項目として \\(0\\) から \\(\\Biggl\\lfloor\\dfrac{K-\\sum _ {j=1} ^ ij\\times A _ j}{i+1}\\Biggr\\rfloor\\) までの整数を順に試して再帰を行う。 Python では以下のような関数になります。 この関数を dfs(0, [0] * N) などで呼び出すことで正しい結果は得られますが、このまま実行時間制限に間に合わせるのは難しいです。 \\(i=N\\) であるような呼び出しは、非負整数からなる長さ \\(N\\) の列 \\(A\\) のうち \\(\\displaystyle\\sum _ {j=1} ^ Nj\\times A _ j\\le K\\) であるものごとに行われます。\n非負整数からなる長さ \\(N\\) の列 \\(A\\) のうち \\(\\displaystyle\\sum _ {j=1} ^ Nj\\times A _ j=K\\) であるものの個数を \\(f(N,K)\\) とすると、これは \\(\\displaystyle\\sum _ {k=0} ^ Kf(N,k)\\) であり、今回の制約のもとで \\(10000100000\\) まで大きくなってしまいます（\\(N=2,K=2\\times10 ^ 5\\) のとき）。 ここで、再帰関数を以下のように変更してみます。 \\(i=N-1\\) のとき（つまり、先頭 \\(N-1\\) 項が決まっている場合） \\(A _ N\\) をうまく決めることで \\(\\displaystyle\\sum _ {j=1} ^ Nj\\times A _ j=K\\) とできるなら、\\(A\\) を出力する。 そうでなければ、何も出力しない。 そうでない場合、\\(i+1\\) 項目として \\(0\\) から \\(\\Biggl\\lfloor\\dfrac{K-\\sum _ {j=1} ^ ij\\times A _ j}{i+1}\\Biggr\\rfloor\\) までの整数を順に試して再帰を行う。 Python では以下のような関数になります。 すると、今度は \\(i=N-1\\) での呼び出し回数は \\(O(Nf(N,K))\\) 回となることが示せます。\nよって、全体の呼び出し回数は \\(O(N ^ 2f(N,K))\\) 回となり、 s の計算に毎回 \\(O(N)\\) 時間かけているため全体で \\(O(N ^ 3f(N,K))\\) 時間となります。\n言語によってはこのままでも実行時間制限に間に合わせることができます。 s を再帰関数の引数に加えることで全体で \\(O(N ^ 2f(N,K))\\) 時間とでき、これで十分高速です。 実装例は以下のようになります。",
+      "codes": [
+        "def dfs(i, A):\n    s = sum((j + 1) * a for j, a in enumerate(A[:i]))\n    if i == N:\n        if s == K:\n            print(*A)\n        return\n    for x in range(0, (K - s) // (i + 1) + 1):\n        A[i] = x\n        dfs(i + 1, A)\n",
+        "def dfs(i, A):\n    s = sum((j + 1) * a for j, a in enumerate(A[:i]))\n    if i == N - 1:\n        if (K - s) % N == 0:\n            A[i] = (K - s) // N\n            print(*A)\n        return\n    for x in range(0, (K - s) // (i + 1) + 1):\n        A[i] = x\n        dfs(i + 1, A)\n",
+        "#include <iostream>\n#include <vector>\n\nint main() {\n    using namespace std;\n    int N, K;\n    cin >> N >> K;\n\n    vector<int> path(N);\n    [N, K](this auto self, int index, int sum, vector<int>& path) -> void {\n        if (index + 1 == N) { // 最後の 1 項になったら\n            if ((K - sum) % N == 0) { // 合計を K にできるときのみ\n                path.back() = (K - sum) / N;\n                for (int p : path) // 出力\n                    cout << p << ' ';\n                cout << '\\n';\n            }\n            return;\n        } \n\n        // i 項目を決めて再帰\n        for (int i = 0; sum + i * (index + 1) <= K; ++i) {\n            path[index] = i;\n            self(index + 1, sum + i * (index + 1), path);\n        }\n    }(0, 0, path);\n    \n    return 0;\n}\n",
+        "N, K = map(int, input().split())\n\ndef dfs(i, s, A):\n    if i == N - 1: # 最後の 1 項になったら\n        if (K - s) % N == 0: # 合計を K にできるときのみ\n            A[i] = (K - s) // N\n            print(' '.join(str(a) for a in A)) # 出力\n        return\n\n    # i 項目を決めて再帰\n    for x in range(0, (K - s) // (i + 1) + 1):\n        A[i] = x\n        dfs(i + 1, s + x * (i + 1), A)\n\ndfs(0, 0, [0] * N)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "a3671738ffaa8aac6f476e088c1672365c7664f25a5c4cbbf1bb0ada1c516029"
+    }
+  ],
+  "status": "available"
+}

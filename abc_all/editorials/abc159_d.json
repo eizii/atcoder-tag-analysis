@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc159_d",
+  "editorials": [
+    {
+      "text": "D: Banned K\ni = 1, 2, ..., N に対して、ci := #{1 ≤j ≤N|Aj = i} と定義します。\nk(1 ≤k ≤N) を1 つ固定して考えます。k に対する問題の答えは、\n• N 個のボールから、書かれている整数が等しいような異なる2 つのボールを選び出す方法の数\n• k 番目のボールを除いたN −1 個のボールから、k 番目のボールと同じ整数が書かれたボー\nルを選び出す方法の数\nをそれぞれ求めて、前者から後者を引けば求まります。\n前者は、∑N\ni=1\n(ci\n2\n)\n, 後者はcAk −1 となります。　前者の値はk によらないので、事前にO(N)\nで計算しておけばよいです。後者は、各k に対してO(1) で求められます。\n以上より、この問題をO(N) で解くことができました。\n",
+      "text_sha256": "66358cc98bec2629c94f68323dbe7f1ab9f0e7a187bc4e74fe3604c07d52f675",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc159/abc159_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

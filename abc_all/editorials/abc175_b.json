@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc175_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc175/editorial/50",
+      "text": "\\(N \\leq 100\\)\nなので、全ての\n\\((i, j, k)\\)\nの組が実際に条件を満たすかどうかを試すことができます。\n三角形の成立条件は、\n\\(3\\)\n辺の長さが\n\\(a, b, c\\)\nであるとき\n\\(a + b > c\\)\n\\(b + c > a\\)\n\\(c + a > b\\)\nを満たすことであるので、\n\\(L_i, L_j, L_k\\)\nが\n- 全て異なること\n- 上述の条件を満たすこと\nの\n\\(2\\)\nつをチェックすれば、時間計算量は\n\\(\\mathrm{O}(N^3)\\)\nでこの問題を解くことができます。\n余談ですが、\n\\(L\\)\nを初めにソートして\n\\(L_1 \\leq L_2, \\cdots, \\leq L_N\\)\nを満たすと仮定することで、三角形の条件は\n\\(L_i + L_j > L_k\\)\nのみをチェックすれば良いことになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    vector<int> vec(N);\n    for (int i = 0; i < N; ++i) cin >> vec[i];\n    sort(vec.begin(), vec.end());\n\n    int ans = 0;\n\n    for (int i = 0; i < N; ++i) {\n        for (int j = 0; j < i; ++j) {\n            for (int k = 0; k < j; ++k) {\n                if (vec[k] != vec[j] and vec[i] != vec[j] and\n                    vec[k] + vec[j] > vec[i]) {\n                    ans++;\n                }\n            }\n        }\n    }\n\n    cout << ans << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "f1d7336a586e151a8aa802abd818cd8b7c4c568dd69589e9f82e3fb729bf6353",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc175/abc175_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

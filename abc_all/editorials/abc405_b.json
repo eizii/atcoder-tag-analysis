@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc405_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc405/editorial/13007",
+      "text": "\\(1\\)\n以上\n\\(M\\)\n以下の整数であって\n\\(A\\)\nの中に含まれないようなものが存在するようになるまで、\n\\(A\\)\nの末尾の要素を削除し続ければよいです。これをより具体的なアルゴリズムとして記述すると以下のようになります。\n整数\n\\(N,M\\)\n、配列\n\\(A\\)\nを入力として受け取る。\n変数\n\\(\\texttt{ans}\\)\nを用意し、\n\\(0\\)\nで初期化する。\n長さ\n\\(M\\)\nの真偽値型の配列\n\\(\\texttt{exist}\\)\nを用意し、すべての要素を\n\\(\\texttt{false}\\)\nで初期化する。\n\\(i=1,2,\\dots,|A|\\)\nそれぞれについて（\n\\(|A|\\)\nは現時点での\n\\(A\\)\nの長さ）、\n\\(\\texttt{exist}[A[i]]\\)\nに\n\\(\\texttt{true}\\)\nを代入する。\n配列\n\\(\\texttt{exist}\\)\nの要素の中に\n\\(\\texttt{false}\\)\nが\n\\(1\\)\nつでも存在するならば、\n\\(\\texttt{ans}\\)\nの値を出力してプログラムを終了する。そうでないならば、\n\\(A\\)\nの末尾の要素を削除し、\n\\(\\texttt{ans}\\)\nに\n\\(1\\)\nを加算して、3. に戻る。\n具体的な実装方法については下記の実装例 (C++, Python) を参考にしてください。配列の添字が\n\\(0\\)\nから始まる言語 (C++, Python を含む主要な言語はほぼ全てが該当) においては、\n\\(A\\)\nを入力として受け取った段階ですべての要素から\n\\(1\\)\nを引いておくと、添字に関係する実装ミスを回避しやすくなります。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<int> a(n);\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        --a[i];\n    }\n\n    int ans = 0;\n    while (true) {\n        vector<bool> exist(m);\n        for (int i: a) exist[i] = true;\n        bool ok = false;\n        for (bool b: exist) {\n            if (!b) ok = true;\n        }\n        if (ok) break;\n        ++ans;\n        a.pop_back();\n    }\n\n    cout << ans << endl;\n}",
+        "n, m = map(int, input().split())\na = list(map(int, input().split()))\nfor i in range(n):\n  a[i] -= 1\n\nans = 0\nwhile True:\n    exist = [False] * m\n    for i in a:\n        exist[i] = True\n    ok = False\n    for b in exist:\n      if not b:\n        ok = True\n    if ok:\n        break\n    ans += 1\n    a.pop()\n\nprint(ans)"
+      ],
+      "text_sha256": "2a316bf75f7dec483b0cca0f68e4f2f4ff3a6af7cb921466d1d02dfe46a7ac25",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc405/abc405_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

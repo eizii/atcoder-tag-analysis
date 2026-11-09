@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc428_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc428/editorial/14243",
+      "text": "実装方針\n走る速度は毎秒\n\\(S\\)\nメートルで一定なので，走る秒数を求めてから\n\\(S\\)\n倍すれば答えになります．\nシミュレーション解法\n開始時点の状態を「\n\\(0\\)\n秒続けて走っている」，走った累計秒数を\n\\(0\\)\nで初期化し，\n\\(1\\)\n秒ごとに状態を更新するシミュレーションを行うことで，走る累計秒数を数えることができます．\n各更新では，以下のような処理を行います．\n今の状態が「走っている」なら，走った累計秒数を\n\\(1\\)\n増やす．\n続けて走っている秒数を\n\\(1\\)\n増やす．その後，以下の変更を行う．\n状態が「\n\\(A\\)\n秒続けて走っている」なら「\n\\(0\\)\n秒続けて止まっている」に変える．\n状態が「\n\\(B\\)\n秒続けて止まっている」なら「\n\\(0\\)\n秒続けて走っている」に変える．\nより簡潔な解法\n\\(A+B\\)\n秒ごとに同じ動作を繰り返すので，\n\\(X\\)\n秒間は\n\\(\\lfloor \\frac{X}{A+B} \\rfloor\\)\n回の反復と\n\\(X \\bmod (A+B)\\)\n秒のあまりに分割できます(\n\\(\\lfloor \\frac{X}{A+B} \\rfloor\\)\nと\n\\(X \\bmod (A+B)\\)\nはそれぞれ，\n\\(X\\)\nを\n\\((A+B)\\)\nで割った商とあまりを表す)．\n各反復は\n\\(A\\)\n秒の走りと\n\\(B\\)\n秒の静止からなるので，反復する部分では合計で\n\\(A \\times \\lfloor \\frac{X}{A+B} \\rfloor\\)\n秒走ります．\nあまりの部分を\n\\(m\\)\n秒とおくと，このあいだにおける走る秒数は，以下のように場合分けして求めることができます．\n\\(m \\leq A\\)\nのとき，走る秒数は\n\\(m\\)\n秒．\n\\(m > A\\)\nのとき，走る秒数は\n\\(A\\)\n秒．\n以上の\n\\(2\\)\nつを足し合わせることで，\n\\(X\\)\n秒全体における走る秒数が求まります．\n実装例 (C++)\n\\(1\\)\n秒ごとにシミュレートする解法は以下のように書けます．\n算数的に解く解法は以下のように書けます．",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::min;\n\n\nint main (void) {\n\tint s, a, b, x;\n\tcin >> s >> a >> b >> x;\n\n\tint len = 0;\n\tint mode = 0, cnt = 0; // mode 0: run, mode 1: stop\n\tfor (int i = 0; i < x; i++) {\n\t\tif (mode == 0) len++;\n\t\t\n\t\tcnt++;\n\t\tif (mode == 0 && cnt == a) {\n\t\t\tmode = 1;\n\t\t\tcnt = 0;\n\t\t} else if (mode == 1 && cnt == b) {\n\t\t\tmode = 0;\n\t\t\tcnt = 0;\n\t\t}\n\t}\n\n\tint ans = len * s;\n\tcout << ans << \"\\n\";\n\n\treturn 0;\n}",
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::min;\n\n\nint main (void) {\n\tint s, a, b, x;\n\tcin >> s >> a >> b >> x;\n\n\tint len = 0;\n\tlen += (x / (a+b)) * a; // repeats (a+b) seconds\n\tlen += min(x % (a+b), a); // remainder\n\n\tint ans = len * s;\n\tcout << ans << \"\\n\";\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "f5bfdc13ba16363e61f387d95d6c0a754a4b675dd13ec0a71287b577720eef24",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc428/abc428_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

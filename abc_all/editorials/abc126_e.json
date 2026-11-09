@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc126_e",
+  "editorials": [
+    {
+      "text": "E: 1 or 2\n各条件は\n• Zi ≡0\n(mod 2) のとき\nAXi = AYi\n• Zi ≡1\n(mod 2) のとき\nAXi̸ = AYi (AXi = 3 −AYi)\nです。すなわち、AXi またはAYi の一方が分かればもう一方を知ることができます。\nしたがって、(X1, Y1), ..., (XM, YM) 間にのみ辺が存在するN 頂点のグラフG を考えると、i 番目のカー\nドをめくるとG 上で頂点i と同じ連結成分の頂点に対応するカードの数字が分かります。よって、G の連結\n成分数が答えになります。\nこれは、塗りつぶしの要領で深さ優先探索を行うことや、Union-Find を用いることでO(N + M) または\nO((N + M)α(M)) の計算時間で求めることができます。ここで、α はアッカーマン関数の逆関数ですが、非\n常に小さいため、ほとんど定数と同じと考えて構いません。\nおまけ(Hard バージョン)\n問題\n入力に矛盾がある場合は-1 を出力せよ。\n解説\n各条件は\nAXi + AYi ≡Zi\n(mod 2)\nと表すことができます。\nさらに、i = 1, 2, ..., N, j = 1, 2 に対して、pi,j ∈{true, false} を\npi,j = true ⇔i 番目のカードにj が書かれている\nと定義します。すると、各条件は\n•\nZi ≡0\n(mod 2) のとき\npXi,0 = pYi,0\npXi,1 = pYi,1\n•\nZi ≡1\n(mod 2) のとき\npXi,0 = pYi,1\npXi,1 = pYi,0\n\nです。このとき、i = 1, 2, ..., N について\npi,0̸ = pi,1\nであることを確認すれば良いです。各pi,j に対応する頂点を作ったUnion-Find を考えます。各\npi1,j1 = pi2,j2 に対してこれらに対応する頂点同士をunite します。最後に、pi,0̸ = pi,1 に対して、こ\nれらに対応する頂点同士がunite されていない(同じグループに属していない) かを調べることで矛盾\nがあるか確認することができます。\n",
+      "text_sha256": "dd94f4c52603f1d69503826d7a2e718836d0752f2400b8280ee0b63dc77d6c04",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc126/abc126_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

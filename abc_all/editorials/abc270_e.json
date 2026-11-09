@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc270_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc270/editorial/4848",
+      "text": "この問題は二分探索を用いて\n\\(O(N\\log K)\\)\nで解くことができます。\n高橋君がちょうど\n\\(mN\\)\n回の行動を起こすことを「\n\\(m\\)\n周する」と呼ぶことにします。\n\\(m\\)\nを決めたとき、\n\\(m\\)\n周した直後の時点で、高橋君が何個りんごを食べており、各かごの中に何個りんごが残っているかは、\n\\(O(N)\\)\n時間で容易に求めることができます。\nしたがって、「\n\\(m\\)\n周したときに食べるりんごの個数は\n\\(K\\)\n個以下か？」という条件で\n\\(m\\)\nについて二分探索することで、\n\\(K\\)\n個のりんごを食べるまで高橋君が何周するかを\n\\(O(N\\log K)\\)\nで求めることができます。端数は愚直シミュレーションで\n\\(O(N)\\)\n時間となるので、全体で\n\\(O(N\\log K)\\)\n時間でこの問題を解くことができます。\n実装例(C)\nbonus:\n\\(O(N\\log N)\\)\nで解いてみましょう",
+      "codes": [],
+      "text_sha256": "638aa6f5e5a04ffc2c734309b11e063c148592edb72dab9838b5fbdac152756a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc270/abc270_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc270/editorial/4895",
+      "text": "\\(O(N \\log N)\\)\nで解きます。\n高橋君の行動を高速にシミュレーションします。\nまず、高橋くんがかご\n\\(1\\)\nに戻ってくる回数を考えます。\nりんごが\n\\(1\\)\n個以上のかごの個数を\n\\(C\\)\nとし、りんごが\n\\(0\\)\n個のかごをいったん除外します。\nすると、高橋君は\n\\(\\min(A)\\)\n回の間は\n\\(C\\)\n個のかごからそれぞれ\n\\(1\\)\n個ずつりんごを食べてかご\n\\(1\\)\nに戻ることを繰り返します。\n従って、\n\\(C \\min(A) \\leq K\\)\nの場合、まずりんごが入っているかご全てから\n\\(C\\)\n個ずつりんごを食べることでかごが一つ減ります。\n逆に、\n\\(C\\min(A) > K\\)\nの場合、まずりんごが入っているかご全てから\n\\(\\lfloor \\frac{K}{C} \\rfloor\\)\n個ずつりんごを食べることで\n\\(K\\)\nが\n\\(N\\)\n未満になります。\n\\(K\\)\nが\n\\(N\\)\n未満になった場合、後は愚直にシミュレーションしても\n\\(O(N)\\)\nです。\nそうでない場合、要は周回をしたということなので周回回数だけ管理すれば後で\n\\(O(N)\\)\nで計算できます。\n後は\n\\(\\min(A)\\)\nを適切に更新する部分ですが、最小のものから順に取り除くので優先度付きキューがあれば求まります。",
+      "codes": [
+        "#include<iostream>\n#include<queue>\n#include<vector>\nusing namespace std;\nusing ll = long long int;\nint main() {\n  int N;\n  ll K;\n  cin >> N >> K;\n  vector<ll> A(N);\n  priority_queue<ll, vector<ll>, greater<ll>> pq;\n  for (int i = 0;i < N;++ i) {\n    cin >> A[i];\n    pq.push(A[i]);\n  }\n  ll loop = 0; // この回数だけ周回する\n  for (int i = N;;-- i) { // i: まだりんごが入っているかごの数\n    ll nextLoop = pq.top() - loop; // 周回回数\n    pq.pop();\n    if (nextLoop * i > K) nextLoop = K / i;\n    K -= nextLoop * i;\n    loop += nextLoop;\n    if (K < i) break; // 後は微調整で行ける\n  }\n  for (long a : A) {\n    ll ans = max(0LL, a - loop); // まず周回分を除外\n    if (a > loop && K --> 0LL) -- ans; // まだK個食べていないなら追加で食べる\n    cout << ans << endl;\n  }\n  return 0;\n}",
+        "import java.util.PriorityQueue;\nimport java.util.Scanner;\nimport java.util.stream.Collectors;\nimport java.util.stream.IntStream;\nimport static java.lang.System.out;\npublic class Main {\n  public static void main(String[] args) {\n    try (Scanner sc = new Scanner(System.in)) {\n      int N = sc.nextInt();\n      long K = sc.nextLong();\n      long[] A = IntStream.range(0, N).mapToLong(i -> sc.nextLong()).toArray();\n      PriorityQueue<Long> pq = new PriorityQueue<>(IntStream.range(0, N).mapToObj(i -> A[i]).collect(Collectors.toList()));\n      long loop = 0; // この回数だけ周回する\n      for (int i = N;;-- i) { // i: まだりんごが入っているかごの数\n        long nextLoop = pq.poll() - loop; // 周回回数\n        if (nextLoop * i > K) nextLoop = K / i;\n        K -= nextLoop * i;\n        loop += nextLoop;\n        if (K < i) break; // 後は微調整で行ける\n      }\n      for (long a : A) {\n        long ans = Math.max(0L, a - loop); // まず周回分を除外\n        if (a > loop && K --> 0L) -- ans; // まだK個食べていないなら追加で食べる\n        out.println(ans);\n      }\n    }\n  }\n}",
+        "import java.util.PriorityQueue\nimport java.util.Scanner\nimport kotlin.math.max\nfun main() {\n  Scanner(System.`in`).use { sc -> \n    val N = sc.nextInt()\n    var K = sc.nextLong()\n    val A = LongArray(N) {sc.nextLong()}\n    val pq = PriorityQueue(A.toList())\n    var loop = 0L // この回数だけ周回する\n    for (i in N downTo 0) { // i: まだりんごが入っているかごの数\n      var nextLoop = pq.poll() - loop // 周回回数\n      if (nextLoop * i > K) nextLoop = K / i\n      K -= nextLoop * i\n      loop += nextLoop\n      if (K < i) break // 後は微調整で行ける\n    }\n    for (a in A) {\n      var ans = max(0L, a - loop) // まず周回分を除外\n      if (a > loop && K --> 0L) -- ans // まだK個食べていないなら追加で食べる\n      println(ans)\n    }\n  }\n}",
+        "import copy\nimport heapq\nN, K = map(int, input().split())\nA = list(map(int, input().split()))\npq = copy.copy(A)\nheapq.heapify(pq)\nloop = 0 # この回数だけ周回する\nfor i in reversed(range(1, N + 1)): # i: まだりんごが入っているかごの数\n  nextLoop = heapq.heappop(pq) - loop # 周回回数\n  if nextLoop * i > K: nextLoop = K // i\n  K -= nextLoop * i\n  loop += nextLoop\n  if K < i: break # 後は微調整で行ける\nfor a in A:\n  ans = max(0, a - loop) # まず周回分を除外\n  if a > loop and K > 0: # まだK個食べていないなら追加で食べる\n    ans = ans - 1\n    K = K - 1\n  print(ans)"
+      ],
+      "text_sha256": "adce0797e49148646bbe02ad70dd41add2b2eabed9acbe0dacea50ec45698c33",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc270/abc270_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

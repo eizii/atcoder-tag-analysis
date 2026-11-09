@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc436_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc436/editorial/14831",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n基本的には問題文で指示されていることをそのまま実装すればよいですが、その実装の方針としては以下の二通りが考えられます。\nFor 文等のループを用いて、\no\nを\n\\(N-|S|\\)\n回出力したのち、\n\\(S\\)\nを出力する。\no\nを\n\\(N-|S|\\)\n個繋げてできる文字列\n\\(T\\)\nを作り、\n\\(T\\)\nと\n\\(S\\)\nをこの順に出力する。\n2 の方針は少々回りくどく感じるかもしれませんが、C++, Python などの言語では「ある文字を特定の回数繰り返してできる文字列」を作るための構文が用意されているため、より簡潔に書けることがあります。詳細は下記の実装例 (C++, Python) を参照してください。\n方針 1 の実装例 (C++)  :\n方針 1 の実装例 (Python)  :\n方針 2 の実装例 (C++) :\n方針 2 の実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    string s;\n    cin >> n >> s;\n    for (int i = 0; i < n - s.size(); i++) {\n        cout << 'o';\n    }\n    cout << s << endl;\n}",
+        "n = int(input())\ns = input()\nfor i in range(n - len(s)):\n    print('o', end='')\nprint(s)",
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    string s;\n    cin >> n >> s;\n    string t(n - s.size(), 'o');\n    cout << t << s << endl;\n}",
+        "n = int(input())\ns = input()\nt = 'o' * (n - len(s))\nprint(t + s)"
+      ],
+      "text_sha256": "fbfb8b98ee9d34bf28b7a70c3ebdf19986d359ee938dc3267af916b7878d6b42",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc436/abc436_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

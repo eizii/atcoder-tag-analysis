@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc478_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc478/editorial/26498",
+      "text": "解法1 問題文に書かれている操作をそのままシミュレーションすればよいです。 実装例(Python) 解法2 人 \\(i\\) が最終的にもらうぶどうの粒数を直接計算することができます。 例えば \\(M\\) を \\(N\\) で割った商を \\(q\\) 、あまりを \\(r\\) としたとき、人 \\(i\\) が最終的にもらうぶどうの粒数は \\(1\\leq i\\leq r\\) のとき \\(q+1\\) 粒、 \\(r\\lt i \\leq N\\) のとき \\(q\\) 粒となります。\n従って \\(q+1\\) を \\(r\\) 行、 \\(q\\) を \\(N-r\\) 行出力すれば正解になります。 実装例(Python)",
+      "codes": [
+        "N, M = map(int, input().split())\nans = [0] * N\nx = 0\nfor _ in range(M):\n  ans[x] += 1\n  x += 1\n  if x == N:\n    x = 0\nfor a in ans:\n  print(a)\n",
+        "N, M = map(int, input().split())\nq, r = M // N, M % N\nfor _ in range(r):\n  print(q + 1)\nfor _ in range(N - r):\n  print(q)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "f97aee40e21059ef75f32044fee948c96f828db57a8c579e573832bb8fb7190f"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc295_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc295/editorial/6048",
+      "text": "一般に、 \\(1\\) 以上 \\(M\\) 以下の整数値を取る確率変数 \\(X\\) について、 \\[(X\\ \\text{の期待値})=\\sum_{i=1}^{M}(i\\times (X = i\\ \\text{となる確率}))=\\sum_{i=1}^{M}(X \\geq i\\ \\text{となる確率})\\] が成り立ちます。 本問題に対してこの式変形を適用すると、各 \\(i=1,2,\\dots ,M\\) に対して「操作 1, 2 を行ったあと \\(A_K \\geq i\\) となる確率」を求めればよいことになります。これは「操作 1 を行ったあと、 \\(A_j \\geq i\\) を満たす \\(j\\) が \\(N+1-K\\) 個以上ある確率」と言い換えられるので、 \\(A\\) に含まれる \\(0\\) のうち操作 1 で \\(i\\) 以上に置き換えられるものの数を全探索すれば、反復試行の確率を求める問題に帰着されます。計算量は実装方針によって \\(O(NM)\\) や \\(O(NM\\log N)\\) 等になります。 実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/modint>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing mint = modint998244353;\n\nmint binom[5010][5010];\n\nint main() {\n    for (int i = 0; i < 5010; i++) {\n        binom[i][0] = 1;\n        for (int j = 1; j <= i; j++) {\n            binom[i][j] = binom[i - 1][j - 1] + binom[i - 1][j];\n        }\n    }\n    \n    int n, m, k;\n    cin >> n >> m >> k;\n    vector<int> a(n);\n    for (int &i: a) cin >> i;\n    \n    mint ans = 0;\n    for (int i = 1; i <= m; i++) {\n        int rem = n + 1 - k;\n        int zero = 0;\n        for (int j: a) {\n            if (j >= i) --rem;\n            if (j == 0) ++zero;\n        }\n        if (rem < 0 or rem > zero) {\n            ans += (rem < 0 ? 1 : 0);\n            continue;\n        }\n        mint p = mint(m + 1 - i) / m;\n        vector<mint> p_pow(zero + 1, 1);\n        vector<mint> q_pow(zero + 1, 1);\n        for (int j = 0; j < zero; j++) {\n            p_pow[j + 1] = p_pow[j] * p;\n            q_pow[j + 1] = q_pow[j] * (1 - p);\n        }\n        for (int j = rem; j <= zero; j++) {\n            ans += binom[zero][j] * p_pow[j] * q_pow[zero - j];\n        }\n    }\n    cout << ans.val() << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "ecdb18aad2f90446ee1c2a9fc3848d9cb82c3d3ff743a41601f801ccd84f09f9"
+    }
+  ],
+  "status": "available"
+}

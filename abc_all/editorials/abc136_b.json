@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc136_b",
+  "editorials": [
+    {
+      "text": "B: Uneven Numbers\n(原案: DEGwer, 準備・解説: evima)\nN は10 万以下とあまり大きくなく、1, 2, . . . , N というN 個の数の桁数を直接数えるのが楽です。\nそして、それぞれの数の桁数を数える最も素直な方法は、数を文字列に変換してその長さを数えるというも\nのでしょう。最も効率的な方法ではありませんが、今回はこれで十分です。\n以下にPython による実装例を二つ掲載します。他の言語でもこれらと似たような実装が可能でしょう。\n1 N = int(input())\n2 ans = 0\n3 for i in range(1, N + 1):\n4\nif len(str(i)) % 2 == 1:\n5\nans += 1\n6 print(ans)\n1 N = int(input())\n2 print(len(list(filter(lambda x: len(str(x)) % 2 == 1, range(1, N + 1)))))\n",
+      "text_sha256": "eda75260a17c1f47ed4b408873701484a5b920383634573da9f0cfcee94f43ae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc136/abc136_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

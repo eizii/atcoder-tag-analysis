@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc161_b",
+  "editorials": [
+    {
+      "text": "B: Popular Vote\nM 位の商品が総得票数の\n1\n4M 以上の票を獲得していればYES、そうでなければNO です。これ\nは得票数順にソートすることで判定できます。\n1 N, M = map(int,input().split())\n2 A = list(map(int,input().split()))\n3 A.sort(reverse=True)\n4 S = sum(A)\n5 if A[M-1] >= S / (4*M):\n6\nprint(\"Yes\")\n7 else:\n8\nprint(\"No\")\nその他、「総得票数の\n1\n4M 以上の票を獲得している商品がM 個以上あればYES、そうでなければ\nNO」として解くこともできます。この場合ソートは不要です。\n1 N, M = map(int,input().split())\n2 A = list(map(int,input().split()))\n3 S = sum(A)\n4 cnt = 0\n5 for a in A:\n6\nif a >= S / (4*M):\n7\ncnt += 1\n8 if cnt >= M:\n9\nprint(\"Yes\")\n10 else:\n11\nprint(\"No\")\nなお、C++,Java などの言語を利用している場合、除算の挙動に注意してください(整数型変数同\n士の除算では、結果は整数に切り捨てられます)。\n",
+      "text_sha256": "57b80c6ff6c29e93a0d4d2b2c933c8dfbfc4fc1b4f2b5cc7656183b9b6990537",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc161/abc161_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

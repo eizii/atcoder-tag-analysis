@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc285_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc285/editorial/5529",
+      "text": "まず、\n\\(k\\)\n文字の ID は\n\\(26^k\\)\n通りあることがわかります。\nまた、\n\\(k\\)\n文字以下の ID は全部で\n\\(26^1+26^2+\\dots+26^k\\)\n通りであることもわかります。\nでは、\n\\(l\\)\n文字の ID である\n\\(S\\)\nが何問目かを実際に求めていきましょう。\n実は、以下のように計算することが可能です。\n最初、答えを\n\\(26^1 + 26^2 + \\dots + 26^{l-1}\\)\nで初期化する。\n\\(i = 1,2,\\dots,l\\)\nについて以下を繰り返す。\n\\(S\\)\nの\n\\(i\\)\n文字目がアルファベット大文字辞書順で\n\\(x\\)\n番目であった場合、答えに\n\\((x-1) \\times 26^{l-i}\\)\nを加算する。\n最後に答えに\n\\(1\\)\nを加算して出力する。 (この加算によって\n\\(0\\)\n始まりの番号付け(0-indexed) から\n\\(1\\)\n始まりの番号付け(1-indexed) に切り替えられます。)\nこの解法にはいくつかの解釈があります。\n例えば ID が\nQWERTY\nであるとき、答えを以下のように数えていくことができます。\n順を追って数え上げる\n\\(5\\)\n文字以下の ID は全部で\n\\(26^1 + 26^2 + \\dots + 26^5\\)\n通り\n\\(6\\)\n文字で\nA\nから始まる ID\nA?????\nは\n\\(26^5\\)\n通り\n\\(6\\)\n文字で\nB\nから始まる ID\nB?????\nは\n\\(26^5\\)\n通り\n\\(\\vdots\\)\n\\(6\\)\n文字で\nP\nから始まる ID\nP?????\nは\n\\(26^5\\)\n通り\n\\(6\\)\n文字で\nQA\nから始まる ID\nQA????\nは\n\\(26^4\\)\n通り\n\\(6\\)\n文字で\nQB\nから始まる ID\nQB????\nは\n\\(26^4\\)\n通り\n\\(\\vdots\\)\n\\(6\\)\n文字で\nQWA\nから始まる ID\nQWA???\nは\n\\(26^3\\)\n通り\n\\(\\vdots\\)\n\\(6\\)\n文字で\nQWEA\nから始まる ID\nQWEA??\nは\n\\(26^2\\)\n通り\n\\(\\vdots\\)\n\\(6\\)\n文字で\nQWERA\nから始まる ID\nQWERA?\nは\n\\(26^1\\)\n通り\n\\(\\vdots\\)\n\\(6\\)\n文字で\nQWERTA\nから始まる ID\nQWERTA\nは\n\\(26^0\\)\n通り\n\\(\\vdots\\)\n\\(26\\)\n進数として解釈する\n\\(5\\)\n文字以下の ID は全部で\n\\(26^1 + 26^2 + \\dots + 26^5\\)\n通り\nというところは同じですが、\nQWERTY\nを\n\\(26\\)\n進数として解釈します。\nAAAAAA\nが\n\\(0\\)\n番目、\nAAAAAB\nが\n\\(1\\)\n番目、\n\\(\\dots\\)\n、\nAAAAAZ\nが\n\\(25\\)\n番目、\nAAAABA\nが\n\\(26\\)\n番目、\n\\(\\dots\\)\nというように番号を付けた際、各英大文字を\n\\(0,1,\\dots,25\\)\nと対応付けることによって、文字列を\n\\(26\\)\n進数と同様に取り扱うことができます。なので、入力を\n\\(26\\)\n進数と解釈し\n\\(10\\)\n進数に直して出力するようなことを行えばよいです。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  int l=s.size();\n  long long res=0,add=26;\n  for(int i=1;i<=l-1;i++){res+=add;add*=26;}\n  long long num=0;\n  for(int i=0;i<l;i++){\n    num*=26;\n    num+=(s[i]-'A');\n  }\n  cout << res+num+1 << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "60809ceb568108a02af630c382647e8f8eaae61718556fd16b5f50e76f4026f0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc285/abc285_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc285/editorial/5570",
+      "text": "簡単のため、A から Z の代わりに、一旦 1 から 9 のみを同様の規則で並べた ID を一旦考えます。左側がその ID で、右側がその ID が小さい方から何番目かを表します。\nこれを見ると、「各桁が 1, 2, …, 9 であるような 9 進法」かのように解釈して、「各桁が 0, 1, …, 9 の（通常の）10 進法」に直す操作に対応することがわかります。\nたとえば、“92” → 83 への変換は\n\\(9\\cdot 9^1 + 2\\cdot 9^0 = 83\\)\nで、“111” → 91 への変換は\n\\(1\\cdot 9^2 + 1\\cdot 9^1 + 1\\cdot 9^0 = 91\\)\nのような感じです。\nこれを踏まえると、元々の問題は「各桁が 1 (=A), 2 (=B), …, 26 (=Z) であるような 26 進法」を通常の 10 進法に直す操作となり、以下のような実装で済むとわかります。\n提出 #38160122\n（C++ での文字コードは処理系定義ですが、ASCII においては）\n'@' == 'A' - 1\nなので、よくある\nc - 'A' + 1\nの代わりに\nc - '@'\nと書くこともできます。",
+      "codes": [
+        "1  ->  1\n  2  ->  2\n  3  ->  3\n...\n  9  ->  9\n 11  -> 10\n 12  -> 11\n...\n 19  -> 18\n 21  -> 19\n 22  -> 20\n...\n 91  -> 82\n 92  -> 83\n...\n 99  -> 90\n111  -> 91\n...",
+        "#include <iostream>\n#include <string>\n\nint main() {\n  std::string s;\n  std::cin >> s;\n  \n  long res = 0;\n  for (auto c: s) {\n    res *= 26;\n    res += c - '@';\n  }\n  std::cout << res << '\\n';\n}"
+      ],
+      "text_sha256": "91650b0b88bbdd27cbcbc2de6124d24d751a57c818e7cf01133d46673b416ec8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc285/abc285_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

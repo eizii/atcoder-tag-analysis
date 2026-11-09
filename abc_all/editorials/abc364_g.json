@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc364_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc364/editorial/10547",
+      "text": "本問題は 最小シュタイナー木問題 と呼ばれる有名問題の派生問題です。本解説は 岩田陽一さんによる解説スライド を参考に執筆されています。 以下、都市、道路、コストのことをそれぞれ単に頂点、辺、重みと呼びます。 まず、最適解において拡張される辺の集合およびそれに隣接する頂点の集合からなるグラフは明らかに木をなします。 頂点集合 \\(\\{1,2,\\dots,K-1\\}\\) の任意の非空な部分集合 \\(S\\) および任意の頂点 \\(v\\) に対して、 \\(f(S,v)\\) を「 \\(S\\) に含まれる各頂点と頂点 \\(v\\) を共に含むような木の辺の重みの総和の最小値」と定義します。最終的に求めたいのは各 \\(K\\leq v\\leq N\\) に対する \\(f(\\{1,2,\\dots,K-1\\}, v)\\) の値です。 結論としては、各 \\(f(S,v)\\) の値は動的計画法によって求めることができます。初期値は \\(f(\\{i\\}, i)=0\\ (1 \\leq i \\leq K-1)\\) であり、遷移は以下の二通りです : \\(f(S,v) \\leftarrow \\min(f(S,v),f(S,u) + w)\\) （頂点 \\(u,v\\) を結ぶ重み \\(w\\) の辺が存在） \\(f(S,v) \\leftarrow \\min(f(S,v),f(T,v)+f(S\\setminus T,v))\\ (T\\subsetneq S, T\\neq \\emptyset)\\) 各遷移は以下のように解釈（厳密な証明ではない）できます : \\(1\\) つめの遷移 : \\(v\\) が \\(S\\) に含まれず、 \\(v\\) が木の葉であるようなとき、木から \\(v\\) とそれに接続する唯一の辺を削除する \\(2\\) つめの遷移 : そうでないとき、 \\(S\\) を以下の条件を満たす \\(2\\) つのひくうな集合 \\(T,S\\setminus T\\) に分割する（最適解においては必ず可能である） 木において 「 \\(T\\) に含まれる各頂点と \\(v\\) を結ぶパスに含まれる辺の集合」と「 \\(S\\setminus T\\) に含まれる各頂点と \\(v\\) を結ぶパスに含まれる辺の集合」の共通集合が空である 残る問題はこれらの遷移をどのように処理するかです。 \\(2\\) つめの遷移は DP テーブルの値を \\(S\\) の要素数の昇順などで埋めていけば問題ありません。問題は同じ \\(S\\) 内で \\(1\\) つめの遷移の依存関係が循環してしまっていることですが、これについては Dijkstra 法のように各 \\(f(S,v)\\ (1\\leq v\\leq N)\\) の値を値の小さい順に確定させていくことで対処できます。 全体の計算量は \\(O(3^KN+2^KM\\log M)\\) です。 実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nbool chmin(ll &a, ll b) {\n    if (a > b) {\n        a = b;\n        return true;\n    }\n    return false;\n}\n\nint main() {\n    int n, m, k;\n    cin >> n >> m >> k;\n    --k;\n    vector<vector<pair<int, int>>> G(n);\n    for (int i = 0; i < m; i++) {\n        int a, b, c;\n        cin >> a >> b >> c;\n        --a, --b;\n        G[a].emplace_back(b, c);\n        G[b].emplace_back(a, c);\n    }\n    vector dp(1 << k, vector<ll>(n, 1e18));\n    for (int i = 0; i < k; i++) dp[1 << i][i] = 0;\n    for (int bit = 1; bit < (1 << k); bit++) {\n        for (int sub = bit; sub > 0; sub = (sub - 1) & bit) {\n            for (int i = 0; i < n; i++) {\n                chmin(dp[bit][i], dp[sub][i] + dp[bit - sub][i]);\n            }\n        }\n        priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<>> pq;\n        for (int i = 0; i < n; i++) pq.emplace(dp[bit][i], i);\n        while (!pq.empty()) {\n            auto [d, u] = pq.top();\n            pq.pop();\n            if (d > dp[bit][u]) continue;\n            for (auto [v, l]: G[u]) {\n                if (chmin(dp[bit][v], d + l)) {\n                    pq.emplace(d + l, v);\n                }\n            }\n        }\n    }\n    for (int i = k; i < n; i++) {\n        cout << dp.back()[i] << '\\n';\n    }\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "7ec29c17f3e34dc66a992283405dd92e095ac2d5a12c0cab1cbc9aff0a5956af"
+    }
+  ],
+  "status": "available"
+}

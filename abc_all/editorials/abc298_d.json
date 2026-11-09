@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc298_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc298/editorial/6208",
+      "text": "本問のように\n\\(998244353\\)\nで割った余りを扱う問題では、modintと呼ばれる構造体を用いて余りを取る操作を自動的に行うのが便利です。AtCoder Libraryにもそのような構造体があるため、(\n公式ドキュメント\nに従って)下のようにエイリアス宣言をした上でこれを用いるものとします。\n数字のみからなる文字列\n\\(S\\)\nに対し、これを十進数表記の値とみなした値を\n\\(998244353\\)\nで割った余りを求めるには以下のようにすれば良いです。\n値を表す変数\n\\(ans\\)\nを\n\\(0\\)\nで初期化する\n\\(i=1,2,\\ldots,|S|\\)\nの順に、「\n\\(ans\\)\nを\n\\(10 \\times ans + S_i\\)\nに置き換える」という操作をする(\n\\(S_i\\)\nは\n\\(S\\)\nの上から\n\\(i\\)\n桁目)\nただし、これには\n\\(|S|\\)\nステップかかるため、\n\\(3\\)\n種類目のクエリのたびに実行すると\n\\(\\mathrm{O}(Q^2)\\)\nとなり、実行時間制限に間に合わなくなってしまいます。\nそこで、\n\\(ans\\)\nを常に保持し、\n\\(1,2\\)\n種類目のクエリが来たら差分を考えて更新することにします。\n\\(1\\)\n種類目のクエリに対しては\n\\(ans\\)\nを\n\\(10 \\times ans + x\\)\nに置き換えれば良いです。\n\\(2\\)\n番目のクエリに対しては (先頭の数字)\n\\(\\times 10^{|S|-1}\\)\nを\n\\(ans\\)\nから引いた上で先頭の数字を削除すれば良いです。ただし、以下の\n\\(2\\)\n点に注意してください。\nstringやvectorで先頭を削除する操作のステップ数は要素数に比例します。そのため、代わりにdequeなどを用いる必要があります。\n\\(10^{|S|-1}\\)\nを毎回愚直に求めると\n\\(1\\)\n種類目のクエリが\n\\(3 \\times 10^5\\)\n個来た後で\n\\(3\\)\n種類目のクエリが\n\\(3 \\times 10^5\\)\n個来る場合等に\n\\(\\mathrm{O}(Q^2)\\)\nとなります。\n\\(i=0,1,2,\\ldots\\)\nに対する\n\\(10^i\\)\nの値を前計算するか、繰り返し二乗法を用いましょう(ACLのmodintのpowでは繰り返し二乗法によって累乗を求める仕様なので、実装例ではそれを用いています)。\n実装例(C++)",
+      "codes": [
+        "using mint = modint998244353;",
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\nusing namespace atcoder;\nusing mint = modint998244353;\nusing namespace std;\n\nint main() {\n\t\n\tint Q;\n\tcin>>Q;\n    \n\tdeque<int> S(1,1);\n\tmint ans = 1;\n\t\n\tfor(int i=0;i<Q;i++){\n\t\tint t;\n\t\tcin>>t;\n\t\tif(t==1){\n\t\t\tint x;\n\t\t\tcin>>x;\n\t\t\tS.push_back(x);\n\t\t\tans = ans*10 + x;\n\t\t}\n\t\tif(t==2){\n\t\t\tans -= mint(10).pow(S.size()-1) * S.front();\n\t\t\tS.pop_front();\n\t\t}\n\t\tif(t==3){\n\t\t\tcout<<ans.val()<<endl;\n\t\t}\n\t}\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "edea4a3bb73a8d718b200e9d8ffea223962067a073dd1d8b6470c36d6855b3d6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc298/abc298_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc298/editorial/6236",
+      "text": "\\(d_l\\)\n桁の（10 進法での）数字列\n\\(s_l\\)\nと\n\\(d_r\\)\n桁の数字列\n\\(s_r\\)\nをこの順に連結させて得られるのは、\n\\(d_l+d_r\\)\n桁の数字列\n\\(s_l \\cdot 10^{d_r} + s_r\\)\nとなります。\nそこで、\n\\(\\N^2\\)\n上の二項演算を\n\\((s_l, b_l) \\circ (s_r, b_r) = (s_l\\cdot b_r + s_r, b_l\\cdot b_r)\\)\nで定義します（上記の\n\\(10^d\\)\nを\n\\(b\\)\nと置き直しています）。単位元は\n\\((0, 10^0)\\)\nです。\nまた、数字一つのみからなる列\n\\(x\\)\nは\n\\((x, 10^1)\\)\nに相当します。\n加えて、ここでは\n\\(998244353\\)\nで割ったあまりとして計算します。\nよって、クエリを先読みして追加される数字列を順に並べ、セグ木を用いて（追加・削除に応じて区間を伸縮させて）区間\n\\(\\circ\\)\n-fold を求めることで\n\\(O(Q\\log(Q))\\)\n時間で求めることができます。\nなお、queue の演算（push・pop）と queue に入っている要素全体のモノイド積をならし定数時間で行うデータ構造も存在し、（先読みなしで）\n\\(O(Q)\\)\n時間で解くこともできます。\ntwo-stack queue と呼ばれるデータ構造の応用によって実現されます。（two-stack deque を用いることで deque 演算にも対応できます。）競プロ界隈では SWAG (Sliding Window Aggregation) などと呼ばれることが多そうですが、学術界隈における言い回しとは若干範囲が異なるかもしれません。\n参考記事として、\nhttps://qiita.com/Shirotsume/items/4a2837b5895ef9a7aeb1\nなどがありそうです。\nまた、上記の演算\n\\(\\circ\\colon \\N^2\\to\\N^2\\)\nは、（適当な\n\\(b\\)\nや適切な法を用いるものとして）rolling hash の演算と見なすこともでき、いろいろと応用が考えられそうです。\n例題：\nhttps://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0355\nhttps://atcoder.jp/contests/abl/tasks/abl_e",
+      "codes": [],
+      "text_sha256": "a8a567d2d835fa3ba57201384da969468255097acf137dd9b34b4d602dc5318a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc298/abc298_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

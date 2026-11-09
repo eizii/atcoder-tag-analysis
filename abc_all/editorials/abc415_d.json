@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc415_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc415/editorial/13489",
+      "text": "\\(D_i = A_i - B_i\\)\nと定義します。実は、\n\\(D_i\\)\nの小さい順に使えるだけ使う貪欲法が最適です。具体的には以下のアルゴリズムは正当です。\n\\(\\mathrm{ans}=0\\)\nとする。\n\\(N\\geq A_i\\)\nであるような\n\\(i\\)\nが存在する限り、以下を繰り返し行う。\n\\(N\\geq A_i\\)\nであるような\n\\(i\\)\nのうち\n\\(D_i\\)\nが最小であるもの（複数あるならばそのうちの一つ）を選ぶ。\n\\(N\\leftarrow N-A_i+B_i\\)\nと更新し（あるいは\n\\(N\\)\nから\n\\(D_i\\)\nを引き）、\n\\(\\mathrm{ans}\\)\nに\n\\(1\\)\nを足す。\nしかし本問題では\n\\(N\\)\nは最大で\n\\(10^{18}\\)\nと大きいため、このアルゴリズムをそのまま用いることはできません。そこで以下のようにアルゴリズムを修正します：\n\\(\\mathrm{ans}=0\\)\nとする。\n\\(D_1 \\leq D_2\\leq \\dots \\leq D_M\\)\nとなるように\n\\(A,B\\)\nを並び替える。\n\\(i=1,2,\\dots,M\\)\nの順に以下を行う。\nこの\n\\(i\\)\nに対して連続して操作を行える回数の最大値を\n\\(x\\)\nとする。具体的には、\n\\(x=\\max\\left\\{0, \\left\\lfloor\\frac{N-A_i}{D_i}\\right\\rfloor+1\\right\\}\\)\nとする。\n\\(N\\)\nから\n\\(D_i\\times x\\)\nを引き、\n\\(\\mathrm{ans}\\)\nに\n\\(x\\)\nを足す。\n計算量は最初のソートがボトルネックとなり\n\\(O(M\\log M)\\)\nです。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint main() {\n    ll n;\n    int m;\n    cin >> n >> m;\n    vector<tuple<ll, ll, ll>> ls;\n    for (int i = 0; i < m; i++) {\n        ll a, b;\n        cin >> a >> b;\n        ll d = a - b;\n        ls.emplace_back(d, a, b);\n    }\n    sort(ls.begin(), ls.end());\n    ll ans = 0;\n    for (auto [d, a, b]: ls) {\n        if (a > n) continue;\n        ll x = (n - a) / d + 1;\n        ans += x;\n        n -= x * d;\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "15a69a2835c2d10728d2fec937b931d1e47bc6ee1bb1698fd3d2bf50c5c731fe",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc415/abc415_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

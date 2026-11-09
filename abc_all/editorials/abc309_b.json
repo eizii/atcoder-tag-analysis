@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc309_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc309/editorial/6744",
+      "text": "外側のマスがどのように動くかを考えると、以下の\n\\(4\\)\n通りに場合分け出来ます。\n\\(1 \\le i \\le N-1\\)\nを満たす整数\n\\(i\\)\nに対して、マス\n\\((1,i)\\)\nに書かれている整数はマス\n\\((1,i+1)\\)\nに移動する。\n\\(1 \\le i \\le N-1\\)\nを満たす整数\n\\(i\\)\nに対して、マス\n\\((i,N)\\)\nに書かれている整数はマス\n\\((i+1,N)\\)\nに移動する。\n\\(2 \\le i \\le N\\)\nを満たす整数\n\\(i\\)\nに対して、マス\n\\((N,i)\\)\nに書かれている整数はマス\n\\((N,i-1)\\)\nに移動する。\n\\(2 \\le i \\le N\\)\nを満たす整数\n\\(i\\)\nに対して、マス\n\\((i,1)\\)\nに書かれている整数はマス\n\\((i-1,1)\\)\nに移動する。\nよって、それぞれのマスが外側のマスかどうか判定し、外側のマスならば上記に従って動かし、そうでないならば動かさないことで操作後のマス目を求めることが出来ます。計算量は\n\\(\\mathrm{O}(N^2)\\)\nです。\nまた、入力を受け取る際に int などの整数型で受け取ってしまうと\n1011\nのような\n\\(1\\)\n列の入力を整数\n\\(1011\\)\nとして受け取ってしまうため、文字列型で受け取ってから\n\\(1\\)\n文字ずつ分解するなどの工夫が必要です。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main(){\n  int n;\n  cin>>n;\n  vector<vector<int>> a(n,vector<int>(n));\n  for(int i=0;i<n;i++){\n    string s;\n    cin>>s;\n    for(int j=0;j<n;j++){\n      if(s[j]=='0') a[i][j]=0;\n      else a[i][j]=1;\n    }\n  }\n  vector<vector<int>> ans(n,vector<int>(n));\n  for(int i=0;i<n;i++){\n    for(int j=0;j<n;j++){\n      if(i==0||j==0||i==n-1||j==n-1){\n        if(i==0&&j<n-1) ans[i][j+1]=a[i][j];\n        if(i<n-1&&j==n-1) ans[i+1][j]=a[i][j];\n        if(i==n-1&&j>0) ans[i][j-1]=a[i][j];\n        if(i>0&&j==0) ans[i-1][j]=a[i][j];\n      }\n      else{\n        ans[i][j]=a[i][j];\n      }\n    }\n  }\n  for(int i=0;i<n;i++){\n    for(int j=0;j<n;j++) cout<<ans[i][j];\n    cout<<endl;\n  }\n}"
+      ],
+      "text_sha256": "29c8d160b7ea9b868767c154a16b0dbab0c14350a63521167408a669df09973a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc309/abc309_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

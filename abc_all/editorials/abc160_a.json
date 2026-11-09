@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc160_a",
+  "editorials": [
+    {
+      "text": "A: Coﬀee\n長さ6 の英小文字からなる文字列に対して、3 文字目と4 文字目が等しく、5 文字目と6 文字目も\n等しいか判定する問題です。\n以下はC++ における実装例です。\n1 #include <iostream>\n2 using namespace std;\n3 int main(){\n4\nstring s;\n5\ncin>>s;\n6\nif(s[2]==s[3]&&s[4]==s[5]){\n7\ncout<<\"Yes\"<<endl;\n8\n}\n9\nelse{\n10\ncout<<\"No\"<<endl;\n11\n}\n12 }\n",
+      "text_sha256": "aac49ddbfa5631314651c3f50ac7fc2050f44728039a74d1573d39d374a87597",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc160/abc160_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

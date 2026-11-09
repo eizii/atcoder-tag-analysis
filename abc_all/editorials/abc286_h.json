@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc286_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5568",
+      "text": "線分 \\(S-T\\) が \\(C\\) と交点を持たないとき、明らかに答えは \\(S-T\\) の距離と一致します。以下そうでないときを考えます。 そのような場合、 移動は以下の方法しか考えなくてよいです。 \\(S\\) から \\(C\\) 上のある頂点 \\(x\\) に直線で移動 \\(\\to\\) \\(C\\) 上のある頂点 \\(x\\) から \\(C\\) 上の別のある頂点 \\(y\\) まで \\(C\\) の周上を通って移動 \\(\\to\\) \\(C\\) 上の別のある頂点 \\(y\\) から \\(T\\) に直線で移動 正当性は、それ以外の経路を考えたときに上記の方法に変化させることで距離が短くなることから従います。 さらに、このような頂点 \\(x,y\\) の候補としてはできる限りぎりぎりのところ（すなわち、 \\(S\\) から \\(x\\) に直線で移動する際には \\(C\\) の内部を通らないが、 \\(S\\) から \\(x\\) に \\(C\\) で隣接する頂点の一方 \\(x'\\) に直線で移動する際には \\(C\\) の内部を通ってしまう、 \\(y\\) についても同様）のみを考えて損をしません。この正当性は明らかです。 このようなぎりぎりの頂点 \\(x,y\\) の見つけ方は様々な方法が考えられますが、実装が容易なのは \\(C,S,T\\) の凸包を求めることでしょう。 結局、移動方法としては \\(C,S,T\\) の凸包をとり、その周上を移動するもののみ考えればよいです。 時計回りと反時計回りを試し、小さいほうが答えとなります。このアルゴリズムは \\(O(N)\\) で動作します。 実装例(c++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nusing ll = long long;\nusing point = pair<ll, ll>;\n\nlong double dist(point a, point b) {\n    return hypot<long double>(a.first - b.first, a.second - b.second);\n}\n\nll cross(point o, point a, point b) {\n    return (a.first - o.first) * (b.second - o.second) - (a.second - o.second) * (b.first - o.first);\n}\n\nvector<point> convex_hull(vector<point> ps) {\n    int n = ps.size();\n    sort(ps.begin(), ps.end());\n    vector<point> ret;\n    for(auto p : ps) {\n        while((int)ret.size() >= 2 and cross(ret.end()[-1], ret.end()[-2], p) >= 0)\n            ret.pop_back();\n        ret.push_back(p);\n    }\n    int t = ret.size();\n    for(int i = n - 2; i >= 0; --i) {\n        auto p = ps[i];\n        while((int)ret.size() > t and cross(ret.end()[-1], ret.end()[-2], p) >= 0)\n            ret.pop_back();\n        ret.push_back(p);\n    }\n    return ret;\n}\n\nlong double ans, d1, d2;\nint main() {\n    int n;\n    cin >> n;\n    vector<point> c(n + 2);\n    for(int i = 0; i < n + 2; i++) cin >> c[i].first >> c[i].second;\n    point s = c.end()[-2], t = c.end()[-1];\n    auto ch = convex_hull(c);\n    int k = ch.size();\n    int sid = -1, tid = -1;\n    for(int i = 0; i < k; i++) {\n        if(ch[i] == s) sid = i;\n        if(ch[i] == t) tid = i;\n    }\n    if(min(sid, tid) == -1)\n        ans = dist(s, t);\n    else {\n        for(int i = sid; i != tid; i = (i + 1) % k)\n            d1 += dist(ch[i], ch[(i + 1) % k]);\n        for(int i = tid; i != sid; i = (i + 1) % k)\n            d2 += dist(ch[i], ch[(i + 1) % k]);\n        ans = min(d1, d2);\n    }\n    cout << setprecision(15) << ans << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "1afb45ddcaa056ce0c464813fb00bc8afb31c987b9cbe62458767e9d757fcf34"
+    }
+  ],
+  "status": "available"
+}

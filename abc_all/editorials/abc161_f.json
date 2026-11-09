@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc161_f",
+  "editorials": [
+    {
+      "text": "F:Division or Substraction\n割り算の操作を1 度もしない場合、操作によってN mod K は変化しません。したがって、最終的\nに1 になるためにはN mod K = 1 であることが必要十分です。そのようなK はN −1 の約数の\nうち、1 でないもの全てであり、その個数はO(\n√\nN) で求めることができます。\n割り算の操作を1 度以上する場合、そのようなK はN の約数です。実際にK で割り切れなくな\nるまで操作をしたあと、N mod K = 1 になっているかを確かめることにより、各約数毎にO(log N)\nで判定することができます。\nよって以上により問題が解けました。N およびN −1 の約数を求める部分がボトルネックとなり、\n計算量はO(\n√\nN) となります。\n",
+      "text_sha256": "00cb8bb85d152da63d96cfcbc95d9dd344951745b935c637550c57e750c5cf2a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc161/abc161_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

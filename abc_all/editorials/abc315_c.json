@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc315_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc315/editorial/6992",
+      "text": "以下の場合分けを施します。\n同じ味のアイスを\n\\(2\\)\nつ選んで食べる\n味を固定し、その味のアイスのうち最も美味しさが大きい\n\\(2\\)\nつを食べる場合のみ考えればよいです。\n異なる味のアイスを\n\\(2\\)\nつ選んで食べる\nまず、どの味のアイスについても、最も美味しさが大きいもの以外は食べないとしてよいです。その上で、残りのアイスのうち最も美味しさが大きい\n\\(2\\)\nつを食べる場合のみ考えればよいです。",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  vector<vector<int>> bk(n+1);\n  for(int i=0;i<n;i++){\n    int f,s;\n    cin >> f >> s;\n    bk[f].push_back(s);\n  }\n\n  int res=0;\n  vector<int> best;\n  for(int i=1;i<=n;i++){\n    sort(bk[i].begin(),bk[i].end());\n    reverse(bk[i].begin(),bk[i].end());\n    if(bk[i].size()>=2){\n      res=max(res,bk[i][0]+bk[i][1]/2);\n    }\n    if(bk[i].size()>=1){\n      best.push_back(bk[i][0]);\n    }\n  }\n  sort(best.begin(),best.end());\n  reverse(best.begin(),best.end());\n  if(best.size()>=2){res=max(res,best[0]+best[1]);}\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "4a74a8b36bbc7fd900c78f47b9829aa37b71d62c40d2e7714ba774b8a1592935",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc315/abc315_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc315/editorial/6995",
+      "text": "美味しさが最大のカップを一つ選び、\n\\(X\\)\nとします。\n\\(X\\)\nを食べることにして損はありません。（\n\\(X\\)\n以外の\n\\(2\\)\nカップを食べようとしているなら、満足度を下げることなく片方を\n\\(X\\)\nと交換することができます。具体的には、\n\\(2\\)\nカップのうち片方だけが\n\\(X\\)\nと同じ味のカップならそれと\n\\(X\\)\nを交換すればよく、そうでなければどちらと交換しても構いません。）よって、食べるもう一つのカップとして残りの\n\\(N - 1\\)\nカップをすべて試すことで線形時間で問題を解けます。\n実装例 (Python)",
+      "codes": [
+        "N = int(input())\nF, S = [], []\nmaxS, choice = 0, -1\nfor i in range(N):\n    f, s = map(int, input().split())\n    if s > maxS:\n        maxS = s\n        choice = i\n    F.append(f)\n    S.append(s)\n\nans = 0\nfor i in range(N):\n    if i != choice:\n        t = maxS + S[i] // (2 if F[i] == F[choice] else 1)\n        ans = max(ans, t)\nprint(ans)"
+      ],
+      "text_sha256": "42a319a2016f317a359a028ba0115ae610f921d36ca64a59fdbab3c163d4efb6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc315/abc315_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

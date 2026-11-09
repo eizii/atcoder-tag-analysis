@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc430_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc430/editorial/14329",
+      "text": "問題原案：admin\n様々な解法がありますが、ここではオンライン (\n\\(i+1\\)\n個目の入力を受け取らずして\n\\(i\\)\n個目の解を求める ) での解法を示します。\nまず、人が到着すると何が起こるかを検討しましょう。\n左から\n\\(k\\)\n番目に人が到着したとしましょう。\nこの時、「最も近い別の人までの距離」が変動する可能性があるのは、(たった今到着した人を含めて) 左から\n\\(k-1\\)\n番目、\n\\(k\\)\n番目、\n\\(k+1\\)\n番目だけです (以降、この\n\\(3\\)\n人を\n\\(x,y,z\\)\nと呼ぶことにします) 。\nなので、人が到着しようと全員に対して再計算する必要はなく、この\n\\(3\\)\n人に対してのみ更新を行えばよいです。\nこのように、影響のある点だけを再計算するテクニックは\n差分更新\nと呼ばれ、 Algorithm のみならず Heuristic でも効果的なものです。\n以降、\n\\(2\\)\nつの方針を示します。\n方針1. 当該の\n\\(3\\)\n人について、素直に差分更新する\n以下の手順を使って差分更新できます。\n\\(x,z\\)\nについて、 (\n\\(y\\)\nの挿入前での ) 最も近い別の人までの距離を減算する。\n\\(y\\)\nを挿入する。\n\\(x,y,z\\)\nについて、最も近い別の人までの距離を加算する。\n方針2. 問題の特性を利用して、簡単に差分更新する\nこの問題の性質上、「最も近い別の人までの距離」は\n\\(y\\)\nの挿入によって増加することがありません。なので、以下の手順で差分更新できます。\n\\(x,z\\)\nについては、「最も近い別の人までの距離」を\n\\(y\\)\nとの距離と比較して、小さい方に更新する。\n\\(y\\)\nについては、\n\\(x,z\\)\n近い方との距離に設定する。\n方針1 は差分に特に良い性質がない時に、方針2は差分に良い性質があり計算量や実装量が削減できる時に有効なので、どちらも意識しておくと吉です。\n以下の実装例について、どちらも時間計算量\n\\(O(N \\log N)\\)\nです。\n方針1 実装例 (C++):\n方針2 実装例 (C++):\nBonus!\n上記の例では答えを管理する変数が\nint\n型 ( 上限約\n\\(2.1 \\times 10^9\\)\n) となっていますが、問題ありません。何故でしょうか？",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint nearest(int x,set<int> &st){\n  auto it=st.find(x);\n  int res=2e9;\n  if(it!=st.begin()){\n    auto jt=it; jt--;\n    res=min(res,x-(*jt));\n  }\n  it++;\n  if(it!=st.end()){\n    res=min(res,(*it)-x);\n  }\n  return res;\n}\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n\n  int n;\n  cin >> n;\n  int res=0;\n  set<int> st;\n  {\n    int x;\n    cin >> x;\n    st.insert(0);\n    st.insert(x);\n    res+=2*x;\n    cout << res << \"\\n\";\n  }\n  for(int i=1;i<n;i++){\n    int x;\n    cin >> x;\n    vector<int> hit;\n    auto it=st.lower_bound(x);\n    if(it!=st.end()){hit.push_back(*it);}\n    if(it!=st.begin()){\n      it--;\n      hit.push_back(*it);\n    }\n    for(auto &nx : hit){\n      res-=nearest(nx,st);\n    }\n    st.insert(x);\n    hit.push_back(x);\n    for(auto &nx : hit){\n      res+=nearest(nx,st);\n    }\n    cout << res << \"\\n\";\n  }\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n\n  int n;\n  cin >> n;\n  int res=0;\n  set<int> st;\n  map<int,int> mp;\n  {\n    int x;\n    cin >> x;\n    st.insert(0);\n    st.insert(x);\n    mp[0]=x;\n    mp[x]=x;\n    res+=2*x;\n    cout << res << \"\\n\";\n  }\n  for(int i=1;i<n;i++){\n    int x;\n    cin >> x;\n    vector<int> hit;\n    auto it=st.lower_bound(x);\n    if(it!=st.end()){hit.push_back(*it);}\n    if(it!=st.begin()){\n      it--;\n      hit.push_back(*it);\n    }\n    st.insert(x);\n    mp[x]=2e9;\n    for(auto &nx : hit){\n      res-=mp[nx];\n      mp[nx]=min(mp[nx],abs(nx-x));\n      res+=mp[nx];\n      mp[x]=min(mp[x],abs(nx-x));\n    }\n    res+=mp[x];\n    cout << res << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "df691f00e59e9431e09e094c5b7081ca3387c934dd4fce8b5171ef1f0b16847a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc430/abc430_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc285_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc285/editorial/5511",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n埋め込み\n線で直接結ばれている点の組は\n\\(14\\)\n組しかありません。したがって、入力がその\n\\(14\\)\n組のいずれかであるかを調べればよいです。\n実装例1 (Python)\n実装例2 (Python)\nよりシンプルな解法\n上で述べたような解法では、列挙漏れやタイプミスなどによって思わぬバグが混入することがあるため、可能であればよりシンプルな解法を探すべきです。\n実は、今回の問題において答えが\nYes\nとなることは、\n\\(a=\\left\\lfloor\\frac{b}{2}\\right\\rfloor\\)\nであることと同値になります（\n\\(\\lfloor \\cdot \\rfloor\\)\nは切り捨てを表す）。したがって、次のようなシンプルな if 文で判定することができます。\nおまけ\nこの問題のように、点同士の繋がり方に注目した構造を\nグラフ\nといいます。グラフのうち、点同士が今回のように繋がったものは\n完全二分木\nと呼ばれます。完全二分木の点に今回のように番号付けをしたものは競技プログラミングにおいて頻繁に登場します。より難しい問題に挑戦するためには、今回登場した性質のことを覚えておくと良いでしょう。",
+      "codes": [
+        "a,b=map(int,input().split())\nif (a,b)==(1,2) or (a,b)==(1,3) or\\\n    (a,b)==(2,4) or (a,b)==(2,5) or\\\n    (a,b)==(3,6) or (a,b)==(3,7) or\\\n    (a,b)==(4,8) or (a,b)==(4,9) or\\\n    (a,b)==(5,10) or (a,b)==(5,11) or\\\n    (a,b)==(6,12) or (a,b)==(6,13) or\\\n    (a,b)==(7,14) or (a,b)==(7,15):\n  print(\"Yes\")\nelse:\n  print(\"No\")",
+        "a,b=map(int,input().split())\nif (a,b) in [(1,2),(1,3),(2,4),(2,5),(3,6),(3,7),\\\n            (4,8),(4,9),(5,10),(5,11),(6,12),(6,13),(7,14),(7,15)]:\n  print(\"Yes\")\nelse:\n  print(\"No\")",
+        "a,b=map(int,input().split())\nif a==b//2:\n  print(\"Yes\")\nelse:\n  print(\"No\")"
+      ],
+      "text_sha256": "6cd34ca01e2b92e8d84678c4f681e99204d37bba3355712c7c66af6767be147c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc285/abc285_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc272_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc272/editorial/4980",
+      "text": "この問題の解説のために、suffix array を解説します。suffix array とは文字列に対する以下のような数列です。 文字列 $S$ に対し、$i$ 文字目から $j$ 文字目までの文字からなる連続部分文字列を $S[i:j]$ とおきます。\n\n$S$ の suffix array とは、$(1,2,\\dots,N)$ の順列 $P$ であって、$1 \\le i \\le N-1$ に対し $S[P_i:N] < S[P_{i+1}:N]$ を満たす唯一のものを指します。 suffix array は、SA-IS 法により文字の種類数を定数とし \\(\\mathrm{O}(|S|)\\) で求めることができます。 文字列 \\(X\\) として、以下のものを順番のまま連結したものを考えます。 $S$ を $2$ 回連続した文字列 a を $N$ 回連続した文字列 $T$ を $2$ 回連続した文字列 z を $N$ 回連続した文字列 \\(X\\) の suffix array を SA-IS 法によって \\(\\mathrm{O}(N)\\) で求めます。 \\(1\\) 個目の \\(S\\) の \\(i\\) 文字目からなる \\(X\\) の接尾辞を \\(g(S,i)\\) とし、 \\(1\\) 個目の \\(T\\) の \\(j\\) 文字目からなる \\(X\\) の接尾辞を \\(g(T,j)\\) とします。 すると、 \\(f(S,i) \\le f(T,j) \\Leftrightarrow g(S,i) \\le g(T,j)\\) となります。 証明は、 \\(f(S,i) \\neq f(T,j)\\) であるときは \\(X\\) 中の \\(f(S,i)\\) と \\(f(T,j)\\) の途中で異なる文字が出てくるため成り立ちます。そうでないとき、 \\(i,j\\) の大小に注目することによって a , z が \\(N\\) 回並ぶ場所で比較が行われるため、 \\(g(S,i) \\le g(T,j)\\) となります。 \\(X\\) の suffix array を利用することにより \\(f(S,i) \\le f(T,j)\\) を満たす \\((i,j)\\) の個数を \\(\\mathrm{O}(N)\\) で求めることができます。",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "206e5cc19281b08c7d4ff622e68c35b4836f95b45f9f00c5e84e30a4cd958b7d"
+    }
+  ],
+  "status": "available"
+}

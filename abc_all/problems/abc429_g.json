@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc429_g",
+  "title": "Sum of Pow of Mod of Linear",
+  "contests": [
+    {
+      "contest_id": "abc429",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 3295,
+  "raw_difficulty": 3295,
+  "contest_id": "abc429",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc429/tasks/abc429_g",
+  "statement": "配点 : 625 点 問題文 整数 N,M,A,B,X,R が与えられます。 \\displaystyle \\sum_{k=0}^{N-1} X^{(Ak+B) \\bmod M} を R で割ったあまりを求めてください。 T 個のテストケースが与えられるので、それぞれについて答えを求めてください。 制約 1\\le T\\le 100 1\\le N,M,R\\le 10^9 0\\le A,B < M 1\\le X < R 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 T \\text{case}_1 \\text{case}_2 \\vdots \\text{case}_T 各テストケース \\text{case}_i は以下の形式で与えられる。 N M A B X R 出力 T 行出力せよ。 i 行目には i 番目のテストケースについて、 \\displaystyle \\sum_{k=0}^{N-1} X^{(Ak+B) \\bmod M} を R で割ったあまりを出力せよ。 入力例 1 3\r\n4 5 2 1 2 1000000000\r\n777 429 33 58 1 1000000000\r\n20251025 429429 777 1025 575757 998244353 出力例 1 15\r\n777\r\n445271630 1 つ目のテストケースについて考えます。 k=0 のとき： \\displaystyle X^{(Ak+B) \\bmod M}=2^{(2\\times 0+1) \\bmod 5}=2^1=2 です。 k=1 のとき： \\displaystyle X^{(Ak+B) \\bmod M}=2^{(2\\times 1+1) \\bmod 5}=2^3=8 です。 k=2 のとき： \\displaystyle X^{(Ak+B) \\bmod M}=2^{(2\\times 2+1) \\bmod 5}=2^0=1 です。 k=3 のとき： \\displaystyle X^{(Ak+B) \\bmod M}=2^{(2\\times 3+1) \\bmod 5}=2^2=4 です。 以上より、求める値は 2+8+1+4 を 1000000000 で割ったあまりである 15 です。したがって、 1 行目には 15 を出力してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 整数 N,M,A,B,X,R が与えられます。 \\displaystyle \\sum_{k=0}^{N-1} X^{(Ak+B) \\bmod M} を R で割ったあまりを求めてください。 T 個のテストケースが与えられるので、それぞれについて答えを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\le T\\le 100 1\\le N,M,R\\le 10^9 0\\le A,B < M 1\\le X < R 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 T \\text{case}_1 \\text{case}_2 \\vdots \\text{case}_T 各テストケース \\text{case}_i は以下の形式で与えられる。 N M A B X R"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 T 行出力せよ。 i 行目には i 番目のテストケースについて、 \\displaystyle \\sum_{k=0}^{N-1} X^{(Ak+B) \\bmod M} を R で割ったあまりを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\n4 5 2 1 2 1000000000\r\n777 429 33 58 1 1000000000\r\n20251025 429429 777 1025 575757 998244353"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 15\r\n777\r\n445271630 1 つ目のテストケースについて考えます。 k=0 のとき： \\displaystyle X^{(Ak+B) \\bmod M}=2^{(2\\times 0+1) \\bmod 5}=2^1=2 です。 k=1 のとき： \\displaystyle X^{(Ak+B) \\bmod M}=2^{(2\\times 1+1) \\bmod 5}=2^3=8 です。 k=2 のとき： \\displaystyle X^{(Ak+B) \\bmod M}=2^{(2\\times 2+1) \\bmod 5}=2^0=1 です。 k=3 のとき： \\displaystyle X^{(Ak+B) \\bmod M}=2^{(2\\times 3+1) \\bmod 5}=2^2=4 です。 以上より、求める値は 2+8+1+4 を 1000000000 で割ったあまりである 15 です。したがって、 1 行目には 15 を出力してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc429/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:06.347986+00:00",
+  "statement_sha256": "cfa0ed412c7427a3ee48f3cc10a34a09ccf638eab837dc6b474a15021168f148",
+  "editorials": []
+}

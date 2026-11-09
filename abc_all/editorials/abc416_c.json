@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc416_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc416/editorial/13535",
+      "text": "実際に\n\\(N^K\\)\n個の文字列を全て求め、それらをソートすることでこの問題を解くことができます。\n\\(N^K\\)\n個の文字列の列挙は DFS により行うのが容易です。\nwriter解(Python)",
+      "codes": [
+        "N,K,X=map(int,input().split())\nS=[input() for _ in range(N)]\n\nans=[]\n\ndef dfs(crr, count):\n  # count 個の文字列を結合して crr になった状態\n  if count==K:\n    ans.append(crr)\n    return\n  for s in S:\n    dfs(crr+s, count+1)\n\ndfs(\"\", 0)\nans.sort()\nprint(ans[X-1])"
+      ],
+      "text_sha256": "ecf412a35fb5c3ddd9cc9b544f5b0943b11bdb9d2101cf5202222997c3897733",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc416/abc416_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

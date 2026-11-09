@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc477_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc477/editorial/26406",
+      "text": "すべての入力は閉区間ですが、以下では半開区間で与えられているとします。 直接求めるのは少し難しいため、クエリのかたちが \\([0, X) \\times [L, R)\\) であるとして、この答えを \\(S(X, L, R)\\) とします。 これが分かれば、元問題は \\(S(B, C, D) - S(A, C, D)\\) です。 （もちろん、 二次元累積和を考えれば \\(L\\) を消す事もできますが、今回は後のためにこのかたちで書きます。考察段階ではそのような変形も考えてみるべきだと思います。） しかし、これを求めるのも簡単ではありません。 そこで、平面走査と呼ばれるテクニックを用います。 （平面走査にはいくつかの定義があるかもしれませんが）ここでは、まずクエリをすべて先読みし、それらを \\(X\\) の昇順に並べて処理する方法を指すことにします。 この方法は、「ある \\(X\\) に対する答えを直接求めるのは難しいが、 \\(X \\to X+1\\) の変化だけなら高速に処理できる」ような問題で有効です。 今回 \\(X\\to X+1\\) とすると、新しく行 \\(X\\) が長方形に加わります。 「行 \\(X\\) まで考えた時、 \\(j\\) 列目には黒マスが何個あるか」を管理することにします。これが管理できれば、元のクエリは区間和となります。 行 \\(X\\) では、区間 \\([L_X,R_X)\\) のマスが黒く塗られていますからこの各列に \\(1\\) を加えることができればよいです。 よって、これは区間加算・区間和取得ができればよく、これは遅延セグメント木によって求められることが知られています。具体的には (値、列の長さ) とした pair を管理すればよいです。（詳しくは実装例を参照してください） 実装例 (PyPy)",
+      "codes": [
+        "import sys\nfrom atcoder.lazysegtree import LazySegTree\n\ninput = sys.stdin.buffer.readline\n\ndef op(a, b):\n    return (a[0] + b[0], a[1] + b[1])\n\ndef mapping(f, x):\n    return (x[0] + f * x[1], x[1])\n\ndef composition(f, g):\n    return f + g\n\nn, m, q = map(int, input().split())\nlr = [tuple(map(int, input().split())) for _ in range(n)]\n\nqs = [[] for _ in range(n + 1)]\nfor i in range(q):\n    u, d, l, r = map(int, input().split())\n    qs[d].append((l - 1, r, i, 1))\n    qs[u - 1].append((l - 1, r, i, -1))\n\nseg = LazySegTree(op, (0, 0), mapping, composition, 0, [(0, 1)] * m)\n\nans = [0] * q\nfor x in range(n + 1):\n    if x:\n        l, r = lr[x-1]\n        seg.apply(l - 1, r, 1)\n\n    for l, r, i, sgn in qs[x]:\n        ans[i] += sgn * seg.prod(l, r)[0]\n\nprint(*ans, sep=\"\\n\")\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "b1669ff4cbf36cfb6e90a93b1c033df41148f2d854364d8a370688c575fda7d2"
+    }
+  ],
+  "status": "available"
+}

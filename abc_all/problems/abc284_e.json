@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc284_e",
+  "title": "Count Simple Paths",
+  "contests": [
+    {
+      "contest_id": "abc284",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1043,
+  "raw_difficulty": 1043,
+  "contest_id": "abc284",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc284/tasks/abc284_e",
+  "statement": "配点 : 500 点 問題文 頂点に 1 から N の番号が、辺に 1 から M の番号がついた N 頂点 M 辺の単純無向グラフが与えられます。辺 i は頂点 u_i と頂点 v_i を結んでいます。また、各頂点の次数は 10 以下です。 頂点 1 を始点とする単純パス(同じ頂点を複数回通らないパス)の個数を K とします。 \\min(K, 10^6) を出力してください。 制約 1 \\leq N \\leq 2 \\times 10^5 0 \\leq M \\leq \\min \\left(2 \\times 10^5, \\frac{N(N-1)}{2}\\right) 1 \\leq u_i, v_i \\leq N 入力で与えられるグラフは単純グラフ 入力で与えられるグラフの頂点の次数はすべて 10 以下 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M u_1 v_1 u_2 v_2 \\vdots u_M v_M 出力 答えを出力せよ。 入力例 1 4 2\r\n1 2\r\n2 3 出力例 1 3 条件を満たすパスは次の 3 個です。(長さが 0 のパスも数えるのに注意してください。) 頂点 1 頂点 1 , 頂点 2 頂点 1 , 頂点 2 , 頂点 3 入力例 2 4 6\r\n1 2\r\n1 3\r\n1 4\r\n2 3\r\n2 4\r\n3 4 出力例 2 16 入力例 3 8 21\r\n2 6\r\n1 3\r\n5 6\r\n3 8\r\n3 6\r\n4 7\r\n4 6\r\n3 4\r\n1 5\r\n2 4\r\n1 2\r\n2 7\r\n1 4\r\n3 5\r\n2 5\r\n2 3\r\n4 5\r\n3 7\r\n6 7\r\n5 7\r\n2 8 出力例 3 2023",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 頂点に 1 から N の番号が、辺に 1 から M の番号がついた N 頂点 M 辺の単純無向グラフが与えられます。辺 i は頂点 u_i と頂点 v_i を結んでいます。また、各頂点の次数は 10 以下です。 頂点 1 を始点とする単純パス(同じ頂点を複数回通らないパス)の個数を K とします。 \\min(K, 10^6) を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2 \\times 10^5 0 \\leq M \\leq \\min \\left(2 \\times 10^5, \\frac{N(N-1)}{2}\\right) 1 \\leq u_i, v_i \\leq N 入力で与えられるグラフは単純グラフ 入力で与えられるグラフの頂点の次数はすべて 10 以下 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M u_1 v_1 u_2 v_2 \\vdots u_M v_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 2\r\n1 2\r\n2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3 条件を満たすパスは次の 3 個です。(長さが 0 のパスも数えるのに注意してください。) 頂点 1 頂点 1 , 頂点 2 頂点 1 , 頂点 2 , 頂点 3"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4 6\r\n1 2\r\n1 3\r\n1 4\r\n2 3\r\n2 4\r\n3 4"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 16"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 8 21\r\n2 6\r\n1 3\r\n5 6\r\n3 8\r\n3 6\r\n4 7\r\n4 6\r\n3 4\r\n1 5\r\n2 4\r\n1 2\r\n2 7\r\n1 4\r\n3 5\r\n2 5\r\n2 3\r\n4 5\r\n3 7\r\n6 7\r\n5 7\r\n2 8"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 2023"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc284/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:05.535324+00:00",
+  "statement_sha256": "4fb2bf36a3c134526c25d85898f12ddaf5192d32090295b34ae786bf5a34934f",
+  "editorials": []
+}

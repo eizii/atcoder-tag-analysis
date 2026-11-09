@@ -1,0 +1,41 @@
+{
+  "problem_id": "abc282_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc282/editorial/5401",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\nこの問題では、\nA\nから\n\\(i\\)\n個進んだ文字を求める必要があります。これは様々な書き方がありますが、例えば c++ では\nchar('A' + i)\n、python では\nchr(ord('A') + i)\nと書けばよいです。\nなお、プログラミング言語では 0-indexed が採用されている言語が多く、c++ でも python でも\nA\nを 0 文字目、\nB\nを\n\\(1\\)\n文字目、と数えることに注意してください。\nここまでわかれば、あとは\nA\nから\n\\(0\\)\n個進んだ文字から\n\\(K-1\\)\n個進んだ文字までを出力すればよいです。このような繰り返しには for 文が有用です。以下に実装例を示しますが、もしわからない場合は ABC272 以降の A 問題で for 文が必要な問題が数多く出ているので、そちらの解説も参照してください。\n実装例(c++):\n実装例(python):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int k;\n    cin >> k;\n    for(int i = 0; i < k; i++) {\n        cout << char('A' + i);\n    }\n}",
+        "k = int(input())\nfor i in range(k):\n    print(chr(ord('A') + i), end = '')"
+      ],
+      "text_sha256": "949d745ccef605ac5ae303a61b24b164bc532f686a0e288ecf2ff0dfc6c036ce",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc282/abc282_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc282/editorial/5402",
+      "text": "Python の標準ライブラリには、\nA\nから\nZ\nまでの文字を昇順に繋げた文字列が\nstring.ascii_uppercase\nとして入っています。これを用いると非常に簡潔な実装が得られます。\n実装例(Python, string ライブラリ使用):",
+      "codes": [
+        "import string\n\nprint(string.ascii_uppercase[:int(input())])"
+      ],
+      "text_sha256": "3228971114b2418f0301b85c4859be034b6f1534455d93c81247fb685a7319e2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc282/abc282_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc282/editorial/5407",
+      "text": "この問題は、「文字列\nABCDEFGHIJKLMNOPQRSTUVWXYZ\nの先頭 \\(K\\) 文字を出力する」と言い換えることができます。\nこちらの解説\nのように標準で便利な文字列がある場合はそれを利用してもよいですし、テストケースごとに変わるわけではない \\(26\\) 文字程度の文字列は手ですべて入力してしまってもよいでしょう。\n「文字列の先頭 \\(K\\) 文字」をとるような関数が標準で用意されている言語は多いため、それを利用してこの問題を解くことができます。\nC++ では、string 型の変数に対して\n.substr(a, b)\nとすることで「\\(a\\) 文字目から \\(b\\) 文字ぶん」の文字列を得ることができます。\nC++ での実装例は以下のようになります。\npython では、文字列やリストなどに対して\n[a:b]\nとすることで「\\(a\\) 番目から \\(b\\) 番目まで」を得ることができます。\n\\(a=0\\) のときは \\(a\\) を省略することができます。\npython での実装例は以下のようになります。",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    string s = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\";\n\n    int K;\n    cin >> K;\n\n    cout << s.substr(0, K) << endl;\n    \n    return 0;\n}",
+        "s = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\"\n\nK = int(input())\n\nprint(s[:K])"
+      ],
+      "text_sha256": "801c3c6dabfd5bea50de68b23e6aedbd9a70e3e9ffc9275092435254ac0eb936",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc282/abc282_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

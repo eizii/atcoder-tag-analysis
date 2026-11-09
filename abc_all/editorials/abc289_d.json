@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc289_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc289/editorial/5715",
+      "text": "この問題には、次のような性質があります。\nいま、ロボットが \\(k\\) 段目にいるとする。「ここから \\(l\\) 段目に到達できるかどうか」は、「これまでどのような動き方をしてきたか」と関係ない。\n（例えば、「\\(0\\) 以上の整数が書かれたカードの束を持っていて、カードを捨てるとそこに書かれた段数だけ階段を登ることができる。モチの置いてある段には登れない。」というような問題設定では、上の性質は成り立ちません。これまでに捨てたカードがこれからの行動に影響してしまうためです。）\n上の性質を使うと、「いまいる段数」を状態として持つ DP を考えることができます。\n次のような DP 配列を定義します。\n\\(\\operatorname{dp}[i]\\coloneqq i\\) 段目に登ることができるなら \\(1\\) 、できないなら \\(0\\)\nすると、\\(\\operatorname{dp}[i]\\) はモチの位置 \\(B _ i\\) とより低い段に登れるか \\(\\operatorname{dp}[0],\\operatorname{dp}[1],\\ldots,\\operatorname{dp}[i-1]\\) の情報を用いて計算できます。\n具体的には、次のようにして求められます。\n\\[\n\\operatorname{dp}[i]=\\left\\lbrace\\begin{matrix}0&\\quad&({}^\\exists j.\\ B _ j=i)\\\\\\displaystyle\\bigvee_j \\operatorname{dp}[i-A_j]&&(\\textrm{otherwise.})\\end{matrix}\\right.\n\\]\n言葉にすると、「モチが設置されていない段は、\\(A _ i\\) 段前のどれかの段に登れるなら、登れる」です。\nはじめは \\(0\\) 段目にいるので \\(\\operatorname{dp}[0]=1\\) 、\\(\\operatorname{dp}[-n]=0\\ (n\\gt0)\\) であることに注意して、上の式に従って \\(\\operatorname{dp}\\) を \\(i\\) の昇順に求めていくことができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n\nint main() {\n    using namespace std;\n\n    unsigned long N;\n    cin >> N;\n    vector<unsigned long> A(N);\n    for (auto &&a : A)\n        cin >> a;\n\n    unsigned long M;\n    cin >> M;\n    vector<unsigned long> B(M);\n    for (auto &&b : B)\n        cin >> b;\n\n    unsigned long X;\n    cin >> X;\n    // dp[i] := i 段目に登れるか\n    // available[i] := i 段目にモチがあるか\n    vector<unsigned long> dp(X + 1), available(X + 1, 1);\n    for (const auto b : B)\n        available[b] = 0;\n\n    // 0 段目には登れる\n    dp[0] = 1;\n    for (unsigned long i{1}; i <= X; ++i)\n        if (!available[i])\n            // モチがあると、登れない\n            dp[i] = 0;\n        else\n            // モチがないとき、dp[i - a] の or が答え\n            for (const auto a : A)\n                if (i >= a)\n                    dp[i] |= dp[i - a];\n\n    cout << (dp[X] ? \"Yes\" : \"No\") << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "2b76b391fc10435d4263f19ff8c5be1813677105a3bb1bcc5006adc31e47d7ae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc289/abc289_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

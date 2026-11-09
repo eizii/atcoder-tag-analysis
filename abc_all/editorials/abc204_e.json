@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc204_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc204/editorial/224",
+      "text": "時間を任意に潰すことができるので、各都市へ最も早く到達するような方法のみについて考えれば十分です。\nまずは道路が\n\\(1\\)\n本の次のような問題を考えます\n問題：道路\n\\(i\\)\nを使って都市\n\\(A_i\\)\nから都市\n\\(B_i\\)\nに移動する。時刻\n\\(T\\)\nに都市\n\\(A_i\\)\nにいるとき、都市\n\\(B_i\\)\nには最短でいつ着けるか？\n都市\n\\(A_i\\)\nを時刻\n\\(t\\)\nに出発したときに都市\n\\(B_i\\)\nに着く時刻は\n\\(f(t):=t+C_i+\\left\\lfloor \\frac{D_i}{t+1}\\right\\rfloor\\)\nとなります。この\n\\(f(t)\\)\nに対して、次の主張が成り立ちます。\n主張：\n\\(f(t)=t+C+\\left\\lfloor \\frac{D}{t+1}\\right\\rfloor\\)\nは非負整数から非負整数の関数として\n\\(t=\\lfloor \\sqrt{D}\\  \\rceil -1\\)\nのとき最小値をとり、\n\\(0\\leq t  \\leq \\lfloor \\sqrt{D}\\  \\rceil -1\\)\nで広義単調減少、\n\\(\\lfloor \\sqrt{D}\\  \\rceil -1 \\leq t\\)\nで広義単調増加する。（\n\\(\\lfloor x \\rceil\\)\nは\n\\(x\\)\nに最も近い整数を表す）\nこの主張から、\n\\(T\\leq \\lfloor \\sqrt{D_i} \\rceil -1\\)\nなら時刻\n\\(\\lfloor \\sqrt{D_i} \\rceil -1\\)\nまで待ってから移動を行い、そうでないなら即座に移動を行うことで、都市\n\\(B_i\\)\nに最速で着くことができます。\n以上を踏まえて、変則的なダイクストラ法を用いることでこの問題を\n\\(O(N+M\\log N)\\)\nで解くことができます。\n\\( \\lfloor \\sqrt{D_i} \\rceil -1\\)\nが最適になることは\n\\(D_i\\)\nが小さなケースを実験することなどによっても気付くことができます。また、\n\\(\\sqrt{D}\\)\n付近が最適になることが確認できれば、\n\\(\\sqrt{D}-2\\)\nから\n\\(\\sqrt{D}+2\\)\nまでの範囲を全探索するなどして解くことも出来ます。\nなお、最適解を求める際にそのまま三分探索を用いる方法はうまくいきません。理由を考えてみましょう。",
+      "codes": [],
+      "text_sha256": "e4c08f8245863e072825acbcebc93360abf93c401af4642109b7ca26039cacad",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc204/abc204_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc204/editorial/2023",
+      "text": "公式解説\nhttps://atcoder.jp/contests/abc204/editorial/224\nで記されている\n\\(f(t):=t+C_i+\\left\\lfloor \\frac{D_i}{t+1}\\right\\rfloor\\)\nの最小値を求めるパートについて解説します。その他については、公式解説と同様です。\n\\(f(t)\\)\nは広義単調減少/増加なので三分探索などでは求められません。\n三分探索するには狭義単調減少/増加である必要があるためです。\n床関数を取り除いた\n\\(h(t):=t+C_i+\\frac{D_i}{t+1}\\)\nを考えます。\n\\(t\\)\nが整数の範囲では\n\\(t+C_i = \\left\\lfloor t+C_i\\right\\rfloor\\)\nなので、\n\\(f(t)=\\left\\lfloor t+C_i+\\frac{D_i}{t+1}\\right\\rfloor=\\left\\lfloor h(t)\\right\\rfloor\\)\nとなります。\n\\(a<b\\)\nのとき\n\\(\\left\\lfloor a\\right\\rfloor≦\\left\\lfloor b\\right\\rfloor\\)\nとなるので、\n\\(h(x)\\)\nが最小となる\n\\(x\\)\nでは\n\\(f(x)\\)\nも最小となります。\n一旦、\n\\(t\\)\nが実数の範囲で考えます。\n\\(h(t)\\)\nが最小になるとき\n\\(t=x\\)\nとします。\n\\(t≦x\\)\nの範囲では\n\\(h(t)\\)\nは狭義単調減少、\n\\(x≦t\\)\nの範囲では\n\\(h(t)\\)\nは狭義単調増加になるので三分探索などで\n\\(x\\)\nの値を求められます。\n求めたいのは\n\\(t\\)\nが整数の範囲なので、\n\\(f(\\left\\lfloor x\\right\\rfloor)\\)\nか\n\\(f(\\left\\lceil x\\right\\rceil)\\)\nで最小値になります。",
+      "codes": [],
+      "text_sha256": "e7fc1c3ba6191befa8e781fa4434820d2e270a7347b71d1b09ef2587e2ff9d84",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc204/abc204_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc204/editorial/6986",
+      "text": "\\(\\gdef\\floor#1{\\lfloor#1\\rfloor}\\)\n\\(\\gdef\\rounded#1{\\lfloor#1\\rceil}\\)\n公式解説\nで\n\\(\\lfloor \\sqrt D\\rceil -1\\)\nとしている部分は、\n\\(\\floor{\\sqrt D}\\)\nとしてもよいです。\nすなわち、\n\\(f(\\rounded{\\sqrt D}-1) = f(\\floor{\\sqrt D})\\)\nが成り立つことが示せます。\n→\n証明",
+      "codes": [],
+      "text_sha256": "a0009635af16a21ed8c1603b586962efeccc6003f21c7dfe6abe399aacde71ed",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc204/abc204_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

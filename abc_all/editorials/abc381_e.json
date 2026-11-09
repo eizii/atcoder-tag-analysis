@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc381_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc381/editorial/11415",
+      "text": "この問題はクエリ問題です。よって、クエリを高速に処理するためにどのようなデータを持ってどのようにクエリを処理するかを考えていく必要があります。\nまずはクエリを処理する方針を考えてみましょう。ある\n\\((L, R)\\)\nに対する答えが\n\\(n\\)\nだったとします。この時、\n長さ\n\\(n\\)\n以下の\n\\(11/22\\)\n文字列は\n\\(S\\)\nの\n\\(L\\)\n文字目から\n\\(R\\)\n文字目からなる部分文字列に部分列として含まれて、\n長さ\n\\(n\\)\nより大きい\n\\(11/22\\)\n文字列は部分列として含まれない\nことが確認できます。このような単調性を利用すれば、次のような二分探索を用いる発想が浮かびます。\nはじめ\n\\(l=-1, r=N+1\\)\nとする。\n\\(r - l \\geq 1\\)\nである間次の操作を行う。\n\\(m = \\lfloor (l+r) / 2 \\rfloor\\)\nとする。\n長さ\n\\(2m+1\\)\nの\n\\(11/22\\)\n文字列が部分列として区間内に存在するかを判定する。\n存在すれば\n\\(l = m\\)\nとして、存在しなければ\n\\(r = m\\)\nとする。\n操作後の\n\\(l\\)\nが\n\\(-1\\)\nである場合、\n\\(11/22\\)\n文字列は部分列として区間内に存在しない。そうでない場合、長さ\n\\(2l+1\\)\nの\n\\(11/22\\)\n文字列が部分列として存在して、これが最長である。\nこのアルゴリズムは正しく動作しますが、\n長さ\n\\(2m+1\\)\nの\n\\(11/22\\)\n文字列が部分列として区間内に存在するかを判定する。\nという部分問題の解法がまだわかっていません。この部分問題が高速に解ければこの問題を\n\\(\\mathrm{O}(Q \\log N \\times (部分問題の計算量))\\)\nで解くことが出来るので、部分問題を解くことを考えます。\nこの部分問題は適切な情報を前計算で計算しておけばそれを適宜参照することで解くことが出来ます。例えば\n\\(v_1\\)\nを\n\\(S[i] =\\)\n1\nであるような\n\\(i\\)\nからなる広義単調増加な列\n\\(v_2\\)\nを\n\\(S[i] =\\)\n2\nであるような\n\\(i\\)\nからなる広義単調増加な列\n\\(v_3\\)\nを\n\\(S[i] =\\)\n/\nであるような\n\\(i\\)\nからなる広義単調増加な列\nを持っておくと、部分問題は適切な二分探索により\n\\(\\mathrm{O}(\\log N)\\)\nで解くことが出来ます。(詳細は実装例を参照してください) また、持つ情報を工夫することで部分問題を\n\\(\\mathrm{O}(1)\\)\nで解くこともできます。\n以上よりこの問題を\n\\(\\mathrm{O}(N + Q \\log^2 N)\\)\nあるいは\n\\(\\mathrm{O}(N + Q \\log N)\\)\nで解くことが出来て、これは十分高速です。\n実装例(C++,\n\\(\\mathrm{O}(N + Q \\log^2 N)\\)\n)",
+      "codes": [
+        "#include <algorithm>\n#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint lb(const vector<int>& v, int x) {\n  return lower_bound(begin(v), end(v), x) - begin(v);\n}\nint sz(const vector<int>& v) { return v.size(); }\n\nint main() {\n  int N, Q;\n  string S;\n  cin >> N >> Q >> S;\n\n  vector<int> idx1, idx2, idxs;\n  for (int i = 0; i < N; i++) {\n    (S[i] == '1' ? idx1 : S[i] == '2' ? idx2 : idxs).push_back(i);\n  }\n  while (Q--) {\n    int l, r;\n    cin >> l >> r;\n    --l;\n    \n    // 1, 2 の長さが len である 11/22 文字列が存在するか？\n    auto f = [&](int len) -> bool {\n      if (len == 0) {\n        // / を発見\n        int j = lb(idxs, l);\n        if (j >= sz(idxs)) return false;\n        return idxs[j] < r;\n      }\n      // 1 を発見\n      int i = lb(idx1, l);\n      if (i + len - 1 >= sz(idx1)) return false;\n      // / を発見\n      int j = lb(idxs, idx1[i + len - 1]);\n      if (j >= sz(idxs)) return false;\n      // 2 を発見\n      int k = lb(idx2, idxs[j]);\n      if (k + len - 1 >= sz(idx2)) return false;\n      return idx2[k + len - 1] < r;\n    };\n\n    int ok = -1, ng = N + 1;\n    while (ok + 1 < ng) {\n      int m = (ok + ng) / 2;\n      (f(m) ? ok : ng) = m;\n    }\n    cout << (ok == -1 ? 0 : ok * 2 + 1) << \"\\n\";\n  }\n}"
+      ],
+      "text_sha256": "440a22ffc7b9145105b34c74a67c99333e9c4d0d8b14a0452129347df6ded1f0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc381/abc381_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc381/editorial/11424",
+      "text": "以下、\n\\(Q=1,L=1,R=|S|\\)\nとして説明します。クエリでもやることは同じです。\nまず、\n/\nの位置を全てリストアップします。\nその上で、\n/\nのリストに対して以下の二分探索が成立します。\nある\n/\nの左側にある\n\\(1\\)\nの数を\n\\(C_1\\)\n、右側にある\n\\(2\\)\nの数を\n\\(C_2\\)\nとする。\nもし\n\\(C_1 > C_2\\)\nであれば、より左にある\n/\nを探索すべきである。\nそうでないなら、より右にある\n/\nを探索すべきである。\nなぜなら、\n\\(C_1,C_2\\)\nのうち大きくない方がボトルネックになっており、それを増やさない限り解は改善しないからです。\nこれらの操作は累積和や二分探索で実装することができ、全体で時間計算量\n\\(O(N + Q \\log N)\\)\nでこの問題に正解できます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint lb(int x,vector<int> &a){\n  int l=0,r=((int)a.size())-1;\n  while(l<=r){\n    int te=(l+r)/2;\n    if(a[te]<x){l=te+1;}\n    else{r=te-1;}\n  }\n  return l;\n}\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n\n  int n,q;\n  cin >> n >> q;\n  string s;\n  cin >> s;\n  vector<int> c1(n+1,0);\n  vector<int> c2(n+1,0);\n  vector<int> sl;\n  for(int i=0;i<n;i++){\n    c1[i+1]=c1[i];\n    c2[i+1]=c2[i];\n    if(s[i]=='1'){\n      c1[i+1]++;\n    }\n    else if(s[i]=='2'){\n      c2[i+1]++;\n    }\n    else{\n      sl.push_back(i+1);\n    }\n  }\n  // for(auto &nx : c1){\n  //   cout << nx << \" \";\n  // }cout << \"\\n\";\n  // for(auto &nx : c2){\n  //   cout << nx << \" \";\n  // }cout << \"\\n\";\n  // for(auto &nx : sl){\n  //   cout << nx << \" \";\n  // }cout << \"\\n\";\n\n  while(q>0){\n    q--;\n    int l,r;\n    cin >> l >> r;\n    int lef=lb(l,sl);\n    int rig=lb(r+1,sl);\n    if(lef==rig){\n      cout << \"0\\n\";\n      continue;\n    }\n    rig--;\n\n    int res=0;\n    while(lef<=rig){\n      int te=(lef+rig)/2;\n      int pt=sl[te];\n\n      int l1=(c1[pt]-c1[l-1]);\n      int r2=(c2[r]-c2[pt]);\n\n      res=max(res,2*min(l1,r2)+1);\n\n      if(l1>r2){rig=te-1;}\n      else{lef=te+1;}\n    }\n    cout << res << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "bed240378aa4300b49cb47543b15c78f9eb4c075cee4824c79dc77cc536cecca",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc381/abc381_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

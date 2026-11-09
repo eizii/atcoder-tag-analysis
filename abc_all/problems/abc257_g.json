@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc257_g",
+  "title": "Prefix Concatenation",
+  "contests": [
+    {
+      "contest_id": "abc257",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2078,
+  "raw_difficulty": 2078,
+  "contest_id": "abc257",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc257/tasks/abc257_g",
+  "statement": "配点 : 600 点 問題文 英小文字のみからなる 2 つの文字列 S,T が与えられます。 (相異なっても良い) S の接頭辞を k 個連結することで T と一致させられるような最小の正整数 k を求めてください。 すなわち、 S の 1 文字目から i 文字目までを取り出した文字列を S_i としたときに、 k 個の 1 以上 |S| 以下の整数の組 (a_1,a_2,\\ldots, a_k) によって、 T=S_{a_1}+S_{a_2}+\\cdots +S_{a_k} （ここで + は文字列としての連結を表す）と書くことができるような\r\n最小の正整数 k を求めてください。 T と一致させる事が不可能な場合は -1 を出力してください。 制約 1 \\leq |S| \\leq 5\\times 10^5 1 \\leq |T| \\leq 5\\times 10^5 S,T は英小文字のみからなる文字列 入力 入力は以下の形式で標準入力から与えられる。 S T 出力 S の接頭辞を k 個連結することで T と一致させられるような最小の正整数 k を出力せよ。 T と一致させる事が不可能な場合は -1 を出力せよ。 入力例 1 aba\r\nababaab 出力例 1 3 T= ababaab は ab + aba + ab と書け、 ab , aba はそれぞれ S= aba の接頭辞となっています。 ababaab を 2 個以下の aba の接頭辞の連結によって表す方法はないため、 3 を出力します。 入力例 2 atcoder\r\nac 出力例 2 -1 T を S の接頭辞の連結によって表す方法はないため、 -1 を出力します。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英小文字のみからなる 2 つの文字列 S,T が与えられます。 (相異なっても良い) S の接頭辞を k 個連結することで T と一致させられるような最小の正整数 k を求めてください。 すなわち、 S の 1 文字目から i 文字目までを取り出した文字列を S_i としたときに、 k 個の 1 以上 |S| 以下の整数の組 (a_1,a_2,\\ldots, a_k) によって、 T=S_{a_1}+S_{a_2}+\\cdots +S_{a_k} （ここで + は文字列としての連結を表す）と書くことができるような\r\n最小の正整数 k を求めてください。 T と一致させる事が不可能な場合は -1 を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq |S| \\leq 5\\times 10^5 1 \\leq |T| \\leq 5\\times 10^5 S,T は英小文字のみからなる文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S T"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 S の接頭辞を k 個連結することで T と一致させられるような最小の正整数 k を出力せよ。 T と一致させる事が不可能な場合は -1 を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 aba\r\nababaab"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3 T= ababaab は ab + aba + ab と書け、 ab , aba はそれぞれ S= aba の接頭辞となっています。 ababaab を 2 個以下の aba の接頭辞の連結によって表す方法はないため、 3 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 atcoder\r\nac"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 -1 T を S の接頭辞の連結によって表す方法はないため、 -1 を出力します。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc257/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:31.618209+00:00",
+  "statement_sha256": "0a84f9c6b9300a781934b3397fdd5ca2cacd0ded493da567b2430fa88c70e78c",
+  "editorials": []
+}

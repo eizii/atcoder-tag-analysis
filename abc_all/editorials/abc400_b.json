@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc400_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc400/editorial/12623",
+      "text": "実際に\n\\(X\\)\nの値を計算し、\n\\(X \\leq 10^9\\)\nかどうか判定すればよいです。\nただし、\n\\(X\\)\nの値は C++ における\nlong long\nのような 64bit 整数の範囲では表現できないことに注意してください。\nこれを回避するためには、多倍長整数を用いるか、\n\\(N^0, N^1, \\ldots, N^M\\)\nを順番に足す操作を\n\\(10^9\\)\nを超えた時点で打ち切るとよいです。\n実装例 (Python)\n実装例 (C++)",
+      "codes": [
+        "N, M = map(int, input().split())\nX = sum(N ** i for i in range(M + 1))\nprint(X if X <= 10 ** 9 else \"inf\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n\tll n, m;\n\tcin >> n >> m;\n\tll cur = 1, sum = 0;\n\tfor (int i = 0; i <= m; i++) {\n\t\tsum += cur;\n\t\tif (sum > 1'000'000'000) {\n\t\t\tcout << \"inf\\n\";\n\t\t\treturn 0;\n\t\t}\n\t\tcur *= n;\n\t}\n\tcout << sum << '\\n';\n}"
+      ],
+      "text_sha256": "ad66671a84d296317020ec7c71cfd8c356805cae122bd5315120ad080df3e0cc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc400/abc400_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

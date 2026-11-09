@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc295_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc295/editorial/6034",
+      "text": "ある文字列\n\\(s\\)\nが嬉しい列となる条件を考えましょう。\n当たり前ですが、並べ替えた後の文字列が同じ列を\n\\(2\\)\n度繰り返した列になるためには、\n\\(s\\)\nに全ての文字が偶数回含まれている必要があります。\n逆に、これを満たしていれば必ず並べ替えて同じ列を\n\\(2\\)\n度繰り返すようにできます。(全ての文字を前半と後半に半分ずつ分けて、それぞれを昇順に並べると同じ文字列を\n\\(2\\)\n度繰り返すことになります)\nでは、そのような連続部分文字列がいくつあるか数えていきましょう。\n先頭から\n\\(i\\)\n文字 (\n\\(0 \\le i \\le |S|\\)\n) に\n\\(x\\)\nが出現した回数を\n\\(2\\)\nで割った余りを\n\\(R_{i,x}\\)\nとします。\n\\(S=\\)\n20230322\nのとき\nこのとき、\n\\(R_i = R_j\\)\n(\n\\(i<j\\)\n) であれば\n\\(S\\)\nの\n\\(i+1\\)\n文字目から\n\\(j\\)\n文字目までを抜き出した列が嬉しい列\n\\(R_i \\neq R_j\\)\n(\n\\(i<j\\)\n) であれば\n\\(S\\)\nの\n\\(i+1\\)\n文字目から\n\\(j\\)\n文字目までを抜き出した列が嬉しい列でない\nことが示せます。証明は以下の通りです。\n(1つ目) … 全ての文字について、\n\\(i\\)\n文字目時点と\n\\(j\\)\n文字目時点で偶奇が変わっていないことから、全ての文字が偶数回含まれることが示せます。\n(2つ目) … ある文字について、\n\\(i\\)\n文字目時点と\n\\(j\\)\n文字目時点で偶奇が変わっていることから、その文字が奇数回含まれることが示せます。\nよって、\n\\(R_i\\)\nが等しい\n\\(i\\)\nのうちから相異なる\n\\(2\\)\nつを選べば、その組に嬉しい列である区間が対応することになります。\nこの選び方を\n\\(R_i\\)\nがとりうる\n\\(2^{10}\\)\n通り足し上げてもよいです(実装例1)し、組の後ろ側の要素を見る際に前側の要素として取りうるものが何個あるかを足し上げてもよいです(実装例2)。\n実装例1 (C++):\n実装例2 (C++):",
+      "codes": [
+        "R_{i,x} ( x=0,1,...,9 )\ni = 0  0000000000\ni = 1  0010000000\ni = 2  1010000000\ni = 3  1000000000\ni = 4  1001000000\ni = 5  0001000000\ni = 6  0000000000\ni = 7  0010000000\ni = 8  0000000000",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  map<vector<int>,long long> mp;\n  vector<int> cnt(10,0);\n  mp[cnt]++;\n  for(auto &nx : s){\n    cnt[nx-'0']++;\n    cnt[nx-'0']%=2;\n    mp[cnt]++;\n  }\n  long long res=0;\n  for(auto &nx : mp){\n    long long x=nx.second;\n    res+=(x*(x-1))/2;\n  }\n  cout << res << \"\\n\";\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string s;\n  cin >> s;\n  int flag=0;\n  vector<long long> bk(1024,0);\n  bk[0]++;\n  long long res=0;\n  for(auto &nx : s){\n    flag^=(1<<(nx-'0'));\n    res+=bk[flag];\n    bk[flag]++;\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "889a37151844f63831daee34a3b3d5d2b909af5452ddc44ad4914d6f7b45d542",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc295/abc295_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc295/editorial/6059",
+      "text": "Zobrist Hashを用いた解法を説明します。\nZobrist Hashとは、各数に適当な値を割り当てることで、集合の一致判定をする手法です。\n各値\n\\(x\\)\nについて、ハッシュ値\n\\(h_x\\)\nを割り当てます。\nこの時、区間\n\\([l, r)\\)\nのハッシュ値は\n\\(\\bigoplus_{i=l}^{r-1} h_{S_i}\\)\nとして定義されます（ここで\n\\(\\bigoplus\\)\nはxorです）。\nこの時、このハッシュについて以下の性質が分かります。\n同じ値が偶数回出現した時、そのハッシュ値は0である\n\\(h_i\\)\nが大きな値の範囲から無作為に選ばれている時、奇数回出現する値が存在するならば高い確率で非0である\n従って、\n\\(h_i\\)\nをランダムに生成した時、高い確率で区間のハッシュ値が0であるようなものを数え上げる問題になっていることが分かります。\nこの問題は区間のxor累積和を取ると、xorが同じ場所の個数を数え上げる問題になっているので\n\\(O(N)\\)\nで解くことができます。\nなお、今回の制約下では\n\\(h_i = 2^i\\)\nと定めることで決定的に解くこともできます。\n余談\n偶数回ではなく\n\\(k\\)\nの倍数回出現するかを判定することもできます。\n\\(h_{i, j}\\)\nを左から見て値\n\\(i\\)\nが\n\\(j \\pmod k\\)\n回目に出現した時のハッシュ値とし、\n\\(h_{i, 0} = \\bigoplus_{j=1}^{k-1} h_{i, j}\\)\nと定義します。\nこの時、同じ値を連続で\n\\(k\\)\n個含むとハッシュ値が0になっていることが確認できます。",
+      "codes": [],
+      "text_sha256": "31fb849bb636ae4a6c8ac506ce0cfd93e07a7201dfb938ef3f444381567040ca",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc295/abc295_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

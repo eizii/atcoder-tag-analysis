@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc192_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc192/editorial/688",
+      "text": "問題文に指示された通りの\n\\(3\\)\nつの関数を作成し、数列を順に計算していけばよいです。\n\\(g_1\\)\n及び\n\\(g_2\\)\nの計算は多くの言語では「数値を文字列に変換してからソートし、数値に戻す」とすると容易です。\n実装例(Python)\n実装例(C)",
+      "codes": [
+        "def g1(n):\n    return int(''.join(sorted(str(n))[::-1]))\n\ndef g2(n):\n    return int(''.join(sorted(str(n))))\n\ndef f(n):\n    return g1(n)-g2(n)\n\nN,K = map(int,input().split())\nfor _ in range(K):\n    N = f(N)\nprint(N)",
+        "#include<stdio.h>\nint f(int n){\n\tint c[20]={};\n\twhile(n){\n\t\tc[n%10]++;\n\t\tn/=10;\n\t}\n\tint g1=0,g2=0;\n\tfor(int i=9;i>=0;i--)for(int j=0;j<c[i];j++)g1=g1*10+i;\n\tfor(int i=0;i<=9;i++)for(int j=0;j<c[i];j++)g2=g2*10+i;\n\treturn g1-g2;\n}\n\nint main(){\n\tint n,k;\n\tscanf(\"%d%d\",&n,&k);\n\tfor(int i=0;i<k;i++)n=f(n);\n\tprintf(\"%d\\n\",n);\n}"
+      ],
+      "text_sha256": "f09a6d5fb4b3f3ee06212603e6531f4bbfce4edeb5ebd2ffc5147b50a720aa6a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc192/abc192_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

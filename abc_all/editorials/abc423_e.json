@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc423_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc423/editorial/13865",
+      "text": "各\n\\(A_j\\)\nに対し、式\n\\(\\displaystyle\\sum_{l = L_i}^{R_i}\\sum_{r = l}^{R_i}\\sum_{j = l}^{r} A_j\\)\nで\n\\(A_j\\)\nが足される回数を考えます。\n\\(j < L_i\\)\nまたは\n\\(R_i < j\\)\nのときは\n\\(A_j\\)\nは足されないので、\n\\(L_i \\leq j \\leq R_i\\)\nなる\n\\(j\\)\nについてのみ考えます。\n\\(A_j\\)\nは\n\\(l \\leq j \\leq r\\)\nのとき\n\\(1\\)\n度ずつ足されるので、\n\\(A_j\\)\nが足される回数の合計は\n\\(L_i \\leq l \\leq j \\leq r \\leq R_i\\)\nを満たす整数組\n\\((l, r)\\)\nの数に等しいです。\n\\(L_i \\leq l \\leq j\\)\nなる整数\n\\(l\\)\nは\n\\(j - L_i + 1\\)\n個、\n\\(j \\leq r \\leq R_i\\)\nなる整数\n\\(r\\)\nは\n\\(R_i - j + 1\\)\n個であることから、上の条件を満たす整数組\n\\((l, r)\\)\nの個数は\n\\((j - L_i + 1)(R_i - j + 1)\\)\nです。\nしたがって、求める式の値は\n\\(\\displaystyle\\sum_{j = L_i}^{R_i} (j - L_i + 1)(R_i - j + 1)A_j\\)\nであり、展開すると\n\\(\\displaystyle\\sum_{j = L_i}^{R_i} -j^2A_j + (L_i + R_i)jA_j + (-L_i + 1)(R_i + 1)A_j\\)\nとなります。\nこれにより、クエリが\n\\(1\\)\nつの場合は上式を用いて\n\\(O(N)\\)\n時間で計算できます。\n\\(Q\\)\n個のクエリに対応するためには、\n\\(j^2A_j, jA_j, A_j\\)\nの累積和を持っておき、区間和を取ったのちに係数を掛け合わせて和を取ればよいです。",
+      "codes": [],
+      "text_sha256": "85734a07e46622c89b70f70e89d8a9d34ba57a52c70bea6e17f493ca8941a8fa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc423/abc423_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc423/editorial/13869",
+      "text": "過剰な\n\\(\\log\\)\nが付きますが、 segment tree で解くこともできます。\n区間和\n\\(\\sum_{k=l}^{r} A_k\\)\nを累積和を使って\n\\(B_{r+1} - B_{l}\\)\nという形に変形すると、\n\\(B\\)\nの連続する区間を segment tree に乗せやすくなります。\nsegtree のモノイドとして、以下のものを持っています。以下の情報があれば求解するのに十分です。\n区間内の\n\\(B_k\\)\nの総和\n\\(val\\)\n区間の長さ\n\\(len\\)\n区間内での答え\n\\(res\\)\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/all>\n\nusing namespace std;\nusing namespace atcoder;\nusing ll=long long;\n\ntypedef struct{\n  ll val;\n  ll len;\n  ll res;\n}S;\n\nS e(){ return {0,0,0}; }\nS op(S l,S r){\n  S res;\n  res.val=l.val+r.val;\n  res.len=l.len+r.len;\n  res.res=l.res+r.res;\n  res.res+=l.len*r.val;\n  res.res-=l.val*r.len;\n  return res;\n}\n\nint main(){\n  ll n,q;\n  cin >> n >> q;\n  vector<ll> a(n);\n  for(auto &nx : a){cin >> nx;}\n  vector<S> ini(n+1);\n  S cur={0,1,0};\n  ini[0]=cur;\n  for(ll i=1;i<=n;i++){\n    cur.val+=a[i-1];\n    ini[i]=cur;\n  }\n  segtree<S,op,e> seg(ini);\n  vector<ll> res;\n  while(q>0){\n    q--;\n    ll l,r;\n    cin >> l >> r;\n    l--;\n    cout << seg.prod(l,r+1).res << \"\\n\";\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "09cbad88105d75ba4dfaac1eee93831ffab3e847d8f712e03c4e19a710878e1a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc423/abc423_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

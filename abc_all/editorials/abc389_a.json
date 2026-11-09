@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc389_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc389/editorial/11964",
+      "text": "数字や文字の入出力と整数の四則演算が問われている問題です。\nこの問題では数字や文字が両方ともある入力を受け取る必要があることに注意してください。例えば、以下のステップを実装すればよいです。\n入力の\n\\(3\\)\n文字を\n\\(1\\)\nつの文字列として受け取る\n\\(1\\)\n文字目を数字としてみたときの値を求め、\n\\(A\\)\nとする\n\\(3\\)\n文字目を数字としてみたときの値を求め、\n\\(B\\)\nとする\n\\(A\\times B\\)\nを出力する\nC++, Pythonでの 具体的な実装方法は下記の実装例を参考にしてください。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;  // 入力を受け取る\n    int a = (s[0] - '0'); // 1文字目の値\n    int b = (s[2] - '0'); // 3文字目の値\n    cout << a * b << endl;\n}",
+        "s = input() # 入力を受け取る\na = int(s[0]) # 1文字目の値\nb = int(s[2]) # 3文字目の値\nprint(a * b)"
+      ],
+      "text_sha256": "1ad0626fd24e7dc384a208729c77a0d0d5c0a5bfb7ee82b1f71d73ad5ecc3be1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc389/abc389_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

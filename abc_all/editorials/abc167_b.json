@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc167_b",
+  "editorials": [
+    {
+      "text": "B: Easy Linear Programming\n大きい数が書かれたカードから貪欲に選んでいくのが最適です。\nナイーブにシミュレートすると時間がかかってしまうので、以下のコードのように場合分けをする\nとよいです。\nListing 1\nC++ による実装例\n1 #include<bits/stdc++.h>\n2 using namespace std;\n3 using ll = long long;\n4 using P = pair<ll, ll>;\n5 #define rep(i, n) for(ll i = 0; i < (ll)n; i++)\n6\n7 int main() {\n8\nint a, b, c, k;\n9\ncin >> a >> b >> c >> k;\n10\nif(k <= a) cout << k << endl;\n11\nelse if(k <= a + b) cout << a << endl;\n12\nelse cout << a - (k - a - b) << endl;\n13\nreturn 0;\n14 }\n",
+      "text_sha256": "d018ab3f9778aec64b56c8a3221f42d0b114e42a1c78a4458fd4c4f62ea19268",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc167/abc167_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

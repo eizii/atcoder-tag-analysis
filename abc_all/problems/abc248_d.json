@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc248_d",
+  "title": "Range Count Query",
+  "contests": [
+    {
+      "contest_id": "abc248",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 793,
+  "raw_difficulty": 793,
+  "contest_id": "abc248",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc248/tasks/abc248_d",
+  "statement": "配点 : 400 点 問題文 長さ N の数列 A=(A_1,\\ldots,A_N) が与えられます。 以下の形式で与えられる Q 個のクエリに答えてください。 整数 L,R,X が与えられる。 A_L, \\ldots,A_R のうち、値が X に等しいものの個数を求めよ。 制約 1 \\leq N \\leq 2\\times 10^5 1 \\leq A_i \\leq N 1 \\leq Q \\leq 2\\times 10^5 各クエリについて、 1\\le L \\leq R \\leq N, 1 \\leq X \\leq N 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N Q \\mathrm{Query}_1 \\mathrm{Query}_2 \\vdots \\mathrm{Query}_Q ただし、 \\mathrm{Query}_i は i 個目のクエリを表す。 各クエリは以下の形式で与えられる。 L R X 出力 Q 行出力せよ。 i 行目には、 i 個目のクエリに対する答えを出力せよ。 入力例 1 5\n3 1 4 1 5\n4\n1 5 1\n2 4 3\n1 5 2\n1 3 3 出力例 1 2\n0\n0\n1 1 個目のクエリでは、 (A_1,A_2,A_3,A_4,A_5) =(3,1,4,1,5) のうち値が 1 に等しいものの個数は 2 です。 2 個目のクエリでは、 (A_2,A_3,A_4) =(1,4,1) のうち値が 3 に等しいものの個数は 0 です。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の数列 A=(A_1,\\ldots,A_N) が与えられます。 以下の形式で与えられる Q 個のクエリに答えてください。 整数 L,R,X が与えられる。 A_L, \\ldots,A_R のうち、値が X に等しいものの個数を求めよ。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2\\times 10^5 1 \\leq A_i \\leq N 1 \\leq Q \\leq 2\\times 10^5 各クエリについて、 1\\le L \\leq R \\leq N, 1 \\leq X \\leq N 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N Q \\mathrm{Query}_1 \\mathrm{Query}_2 \\vdots \\mathrm{Query}_Q ただし、 \\mathrm{Query}_i は i 個目のクエリを表す。 各クエリは以下の形式で与えられる。 L R X"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 i 行目には、 i 個目のクエリに対する答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\n3 1 4 1 5\n4\n1 5 1\n2 4 3\n1 5 2\n1 3 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2\n0\n0\n1 1 個目のクエリでは、 (A_1,A_2,A_3,A_4,A_5) =(3,1,4,1,5) のうち値が 1 に等しいものの個数は 2 です。 2 個目のクエリでは、 (A_2,A_3,A_4) =(1,4,1) のうち値が 3 に等しいものの個数は 0 です。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc248/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:20.229721+00:00",
+  "statement_sha256": "9eecbfc70ccaae8d1af1898e7c49184c1d10d74b6baecc4d3dd5302dbddd3b5c",
+  "editorials": []
+}

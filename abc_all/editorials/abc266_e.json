@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc266_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc266/editorial/4662",
+      "text": "ゲームを続行するとき、それまでの出目はスコアに影響しないので、スコアの期待値の最大値は残りのターン数にのみ依存することがわかります。\n残り\n\\(N\\)\nターンのときのスコアの期待値の最大値を\n\\(f(N)\\)\nとします。次のターンでのダイスの出目が\n\\(D\\)\nであるとき、ゲームを終了すればスコアは\n\\(D\\)\n、続行すればスコアは\n\\(f(N-1)\\)\nであり、その大きい方を選べるので、\n\\(f(N)=\\frac{1}{6}\\max(1,f(N-1))+\\frac{1}{6}\\max(2,f(N-1))+\\frac{1}{6}\\max(3,f(N-1))+\\frac{1}{6}\\max(4,f(N-1))+\\frac{1}{6}\\max(5,f(N-1))+\\frac{1}{6}\\max(6,f(N-1))\\)\nとなります。したがって、\n\\(N\\)\nが小さい方から順に計算することができます。\n実装例(C)",
+      "codes": [],
+      "text_sha256": "b4ea651836cdd08366f0f1c593c8ff74c04766dca76c07c2a586ea29af681dd8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc266/abc266_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

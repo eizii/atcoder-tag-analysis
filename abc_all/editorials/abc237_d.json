@@ -1,0 +1,40 @@
+{
+  "problem_id": "abc237_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc237/editorial/3319",
+      "text": "操作を逆から考えると、以下のようになります。\nはじめ\n\\(A=(N)\\)\nである。\n\\(i=N,N-1,\\ldots,1\\)\nの順に次の操作を行う。\n\\(s_i\\)\nが\nL\nならば、\n\\(A\\)\nの末尾に\n\\(i-1\\)\nを挿入する。\n\\(s_i\\)\nが\nR\nならば、\n\\(A\\)\nの先頭に\n\\(i-1\\)\nを挿入する。\nこれは両端キューなどを用いて実装できます。\n計算量は\n\\(O(N)\\)\nです。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nsigned main(){\n    ll n;string s;\n    cin>>n>>s;\n    deque<ll>a={n};\n    for(ll i=n-1;i>=0;i--){\n        if(s[i]=='L')a.push_back(i);\n        else a.push_front(i);\n    }\n    for(ll i=0;i<=n;i++){\n        if(i<n)cout<<a[i]<<\" \";\n        else cout<<a[i]<<endl;\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "7a910ec6cae9db1f707371ff4c1233ed37373eb0c8111e239ebe95822fd6bb0d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc237/abc237_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc237/editorial/3345",
+      "text": "この問題は、双方向リストを用いることで直接解くことができます。\n双方向リストは、任意の位置の挿入と削除が\n\\(O(1)\\)\n、検索が\n\\(O(\\rm{distance})\\)\nかかるデータ構造です。\n双方向リストのイテレータを用意し、初めは末尾の位置にいるものとします。\nまた、イテレータに対して挿入操作を行った場合、見ている位置の直前に値が挿入されるものとします。\n与えられる操作を次のように実行することで、正しい答えを得ることができます。\n\\(s_i\\)\nが\nL\nならば、イテレータを一つ戻し、値を挿入する。\n\\(s_i\\)\nが\nR\nならば、値を挿入する。\nこのアルゴリズムの計算量は\n\\(O(N)\\)\nになります。\nC++による実装例\nJavaによる実装例",
+      "codes": [
+        "#include<iostream>\n#include<list>\n#include<string>\nint main() {\n  int N;\n  std::string S;\n  std::cin >> N >> S;\n  std::list<int> A{0};\n  std::list<int>::iterator iter = A.end();\n  for (int i = 0;i < N;++ i) {\n    if (S[i] == 'L') -- iter;\n    A.insert(iter, i + 1);\n  }\n  for (int i : A) std::cout << i << ' ';\n  return 0;\n}",
+        "import java.util.*;\npublic class Main {\n  public static void main(String[] args) {\n    try (Scanner sc = new Scanner(System.in)) {\n      int N = sc.nextInt();\n      char[] S = sc.next().toCharArray();\n      LinkedList<Integer> list = new LinkedList<>();\n      list.add(0);\n      ListIterator<Integer> iter = list.listIterator();\n      iter.next();\n      for (int i = 0;i < N;++ i) {\n        if (S[i] == 'L') iter.previous();\n        iter.add(i + 1);\n      }\n      for (int i : list) System.out.print(i + \" \");\n    }\n  }\n}"
+      ],
+      "text_sha256": "8cf01b0f08a0c98508aeb54ca54d977684ac02bdab6e1dad4ce12fbc76975a7e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc237/abc237_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc237/editorial/3323",
+      "text": "公式解説では後ろから解いていますが、前から解くこともできます。\n\\(i\\)\n番目の操作が終わった時点で\n\\(i\\)\nより左側の要素からなる数列を\n\\(L\\)\n、右側の要素からなる数列を\n\\(R\\)\nとします。\n例えばサンプル\n\\(1\\)\nであれば\n初期状態では、\n\\(A=(0)\\)\nであり、\n\\(L=(),R=()\\)\n\\(i=1\\)\nのとき、\n\\(s_1=\\)\nL\nなので\n\\(A=(1,0)\\)\nであり、\n\\(L=(),R=(0)\\)\n\\(i=2\\)\nのとき、\n\\(s_2=\\)\nR\nなので\n\\(A=(1,2,0)\\)\nであり、\n\\(L=(1),R=(0)\\)\n\\(i=3\\)\nのとき、\n\\(s_3=\\)\nR\nなので\n\\(A=(1,2,3,0)\\)\nであり、\n\\(L=(1,2),R=(0)\\)\n\\(i=4\\)\nのとき、\n\\(s_4=\\)\nL\nなので\n\\(A=(1,2,4,3,0)\\)\nであり、\n\\(L=(1,2),R=(3,0)\\)\n\\(i=5\\)\nのとき、\n\\(s_5=\\)\nR\nなので\n\\(A=(1,2,4,5,3,0)\\)\nであり、\n\\(L=(1,2,4),R=(3,0)\\)\nというようになります。一連の操作をよく観察すると、\n\\(s_i=\\)\nL\nのとき\n\\(R\\)\nの先頭に\n\\(i-1\\)\nを挿入し、\n\\(s_i=\\)\nR\nのとき\n\\(L\\)\nの末尾に\n\\(i-1\\)\nを挿入していることがわかります。\nしたがって、「両端 queue を使う」「\n\\(R\\)\nを reverse した状態で持つ」などにより、操作は\n\\(O(1)\\)\nで行えます。\n実装例(Python)\n公式解説では「真ん中」を持っていたのに対し、こちらの解法では「両端」を持っていたとみなすことができます。",
+      "codes": [
+        "L=[]\nR=[]\nN=int(input())\nS=input()\nfor i,c in enumerate(S):\n\tif c=='L': R.append(i)\n\telse: L.append(i)\nprint(*(L+[N]+R[::-1]))"
+      ],
+      "text_sha256": "629129c26ad95db07bf0d738b0791f1e37dd7814b61cabb0367f0aadbb8aeb07",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc237/abc237_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

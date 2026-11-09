@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc481_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc481/editorial/27928",
+      "text": "名前が既出かどうかの判定を毎回愚直に行おうとすると，全体で最悪 \\(\\Theta(Q^2)\\) 時間かかることになり，これを通すのは現実的ではありません．なので，より効率の良い方法を考えることになります． この問題は，連想配列と呼ばれるデータ構造を使うことで解けます．連想配列についての説明は本解説では省略します． 空の連想配列 \\(\\mathrm{accounts} := \\emptyset\\) と，既存の ID の最大値 \\(\\mathrm{idmax} := 0\\) を用意します．連想配列 \\(\\mathrm{accounts}\\) の内容として，名前をキーに，対応する ID を値にして格納することを考えます． 各クエリでは，以下の処理を行えばよいです． 連想配列 \\(\\mathrm{accounts}\\) に， \\(s\\) がキーとして含まれるかを判定する． 含まれるならば，対応する値を出力する． 含まれないならば， \\(\\mathrm{idmax}\\) を \\(1\\) 増やし， \\((s, \\mathrm{idmax})\\) をキー・値ペアとして \\(\\mathrm{accounts}\\) に格納する．その後， \\(\\mathrm{idmax}\\) を出力する． 一般的な連想配列の実装では，参照・追加ともに \\(O(\\log n)\\) 時間で行えます( \\(n\\) は連想配列のサイズ)．よってこの問題は \\(O(Q \\log Q)\\) 時間で解くことができ，十分高速です． 実装例 (C++) 多くのプログラミング言語においては連想配列が標準機能として提供されています．たとえば C++ では std::map を，Python では dict を使用できます．",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\n#include <string>\nusing std::string;\n#include <map>\nusing std::map;\n\nint main (void) {\n\tint q;\n\tcin >> q;\n\n\tmap<string, int> accounts;\n\tint idmax = 0;\n\tfor (int qi = 0; qi < q; qi++) {\n\t\tstring s;\n\t\tcin >> s;\n\n\t\tint ans;\n\t\tif (accounts.contains(s)) {\n\t\t\tans = accounts[s];\n\t\t} else {\n\t\t\tans = accounts[s] = ++idmax;\n\t\t}\n\n\t\tcout << ans << \"\\n\";\n\t}\n\t\n\treturn 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "c01fcc6a1c1f66818e7fd3f0b703a555de2df96502231e2fe0dd529631e16045"
+    }
+  ],
+  "status": "available"
+}

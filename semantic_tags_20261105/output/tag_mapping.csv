@@ -1,0 +1,116 @@
+﻿source_tag_id,source_tag,old_cluster_id,old_cluster_label,disposition,unit_id,unit_label,rationale
+T001,Binary Indexed Tree / Fenwick Tree,C001,C001: Binary Indexed Tree / Fenwick Tree,learning_unit,L001,点更新・区間集約,Fenwick木とSegment Treeを区間集約の学習単位にまとめる。区間更新と静的クエリは分ける。
+T002,Lazy Segment Tree,C002,C002: Lazy Segment Tree,learning_unit,L002,区間更新・区間集約,遅延伝播の設計が必要なため、点更新の単位から分ける。
+T003,Segment Tree,C003,C003: Segment Tree,learning_unit,L001,点更新・区間集約,Fenwick木とSegment Treeを区間集約の学習単位にまとめる。区間更新と静的クエリは分ける。
+T004,Sparse Table,C004,C004: Sparse Table,learning_unit,L003,静的な区間集約,Sparse Tableの派生形を同じ操作条件でまとめる。RMQという課題名だけから静的とは推定しない。
+T005,Union-Find,C005,C005: Union-Find,learning_unit,L004,集合の併合・連結性管理,Union-Findを一つの学習単位として保持する。
+T006,Wavelet Matrix,C006,C006: Wavelet Matrix,learning_unit,L005,区間の順位・頻度クエリ,Wavelet Matrixの操作を学習単位にする。一般の区間和とは必要な操作が異なる。
+T007,Deque,C007,C007: Deque,learning_unit,L006,キュー・両端キュー,QueueとDequeは列の両端操作の系統としてまとめ、優先度付きキューは分ける。
+T008,Map / 連想配列,C008,C008: Map / 連想配列,learning_unit,L007,集合・辞書の基本操作,SetとMapを基本的な所属・対応の管理としてまとめる。順序が必要と分かる場合は別の単位を優先する。
+T009,Multiset,C009,C009: Multiset,learning_unit,L008,順序付き集合・多重集合,Multisetと平衡探索木を順序付きの動的管理としてまとめる。一般の集合・辞書とは区別する。
+T010,Priority Queue / Heap,C010,C010: Priority Queue / Heap,learning_unit,L009,優先度付きキュー,HeapとPriority Queueの表記差を吸収する。最短路の解法とは別の技能として保持する。
+T011,Queue,C011,C011: Queue,learning_unit,L006,キュー・両端キュー,QueueとDequeは列の両端操作の系統としてまとめ、優先度付きキューは分ける。
+T012,Set,C012,C012: Set,learning_unit,L007,集合・辞書の基本操作,SetとMapを基本的な所属・対応の管理としてまとめる。順序が必要と分かる場合は別の単位を優先する。
+T013,Stack,C013,C013: Stack,learning_unit,L010,スタック,LIFOの操作を独立した学習単位として保持する。
+T014,平衡二分探索木,C014,C014: 平衡二分探索木,learning_unit,L008,順序付き集合・多重集合,Multisetと平衡探索木を順序付きの動的管理としてまとめる。一般の集合・辞書とは区別する。
+T015,永続データ構造,C015,C015: 永続データ構造,learning_unit,L011,永続データ構造,特定のデータ構造の種類ではなく、版の保存という設計技法として定義する。
+T016,Convex Hull Trick / Li Chao Tree,C016,C016: Convex Hull Trick / Li Chao Tree,learning_unit,L012,直線集合の最適値クエリ,Convex Hull TrickとLi Chao Treeを共通の計算課題としてまとめる。
+T017,bit DP,C017,C017: bit DP,learning_unit,L013,部分集合を状態にするDP,ビット列挙や単なるビット演算とは別に、DPの状態設計として保持する。
+T018,きたまさ法,C018,C018: きたまさ法,learning_unit,L014,線形漸化式の高速計算,きたまさ法と行列累乗を反復する線形遷移の計算としてまとめる。Fibonacciという題材名だけでは付けない。
+T019,インラインDP,C019,C019: インラインDP,learning_unit,L015,一般の状態遷移DP,実装順序や更新方式のタグを基本となるDPへ戻す。既知の専門的な状態型がある問題では、その型を優先する残余分類。
+T020,全方位木DP,C020,C020: 全方位木DP,learning_unit,L016,木上のDP,木DPと全方位木DPを同じ構造上のDPとしてまとめ、派生手法名は詳細に残す。
+T021,区間DP,C021,C021: 区間DP,learning_unit,L017,区間を状態にするDP,区間DPを独立した状態設計として保持する。
+T022,基礎DP / 動的計画法入門,C022,C022: 基礎DP / 動的計画法入門,learning_unit,L015,一般の状態遷移DP,実装順序や更新方式のタグを基本となるDPへ戻す。既知の専門的な状態型がある問題では、その型を優先する残余分類。
+T023,戻すDP,C023,C023: 戻すDP,learning_unit,L015,一般の状態遷移DP,実装順序や更新方式のタグを基本となるDPへ戻す。既知の専門的な状態型がある問題では、その型を優先する残余分類。
+T024,挿入DP,C024,C024: 挿入DP,learning_unit,L015,一般の状態遷移DP,実装順序や更新方式のタグを基本となるDPへ戻す。既知の専門的な状態型がある問題では、その型を優先する残余分類。
+T025,文字列DP,C025,C025: 文字列DP,learning_unit,L018,文字列上のDP,括弧列などの題材名と分け、実際のDPの単位を表示する。
+T026,期待値DP,C026,C026: 期待値DP,learning_unit,L019,確率・期待値のDP,確率DPと期待値DPを確率過程の状態遷移としてまとめる。期待値の問題すべてをDPとは見なさない。
+T027,木DP,C027,C027: 木DP,learning_unit,L016,木上のDP,木DPと全方位木DPを同じ構造上のDPとしてまとめ、派生手法名は詳細に残す。
+T028,桁DP,C028,C028: 桁DP,learning_unit,L020,桁を状態にするDP,桁DPを独立した状態設計として保持する。
+T029,確率DP,C029,C029: 確率DP,learning_unit,L019,確率・期待値のDP,確率DPと期待値DPを確率過程の状態遷移としてまとめる。期待値の問題すべてをDPとは見なさない。
+T030,行列累乗,C030,C030: 行列累乗,learning_unit,L014,線形漸化式の高速計算,きたまさ法と行列累乗を反復する線形遷移の計算としてまとめる。Fibonacciという題材名だけでは付けない。
+T031,二部マッチング,C031,C031: 二部マッチング,learning_unit,L021,二部マッチング,最大流に帰着できても計算課題は別なので、共起による統合を解消する。
+T032,最大流,C031,C031: 二部マッチング,learning_unit,L022,最大流,二部マッチングと同じ問題に現れても、独立した学習単位として残す。
+T036,Grundy数 / Sprague-Grundy,C032,C032: Grundy数 / Sprague-Grundy,learning_unit,L023,Nim・Grundy数,NimとGrundy数を共通のゲーム解析の系統としてまとめる。
+T037,Nim,C032,C032: Grundy数 / Sprague-Grundy,learning_unit,L023,Nim・Grundy数,NimとGrundy数を共通のゲーム解析の系統としてまとめる。
+T038,ミニマックス法,C033,C033: ミニマックス法,learning_unit,L024,ゲームの状態探索・逆算,ミニマックス法と後退解析を状態の勝敗評価としてまとめる。Grundy数による分解とは区別する。
+T039,後退解析,C033,C033: ミニマックス法,learning_unit,L024,ゲームの状態探索・逆算,ミニマックス法と後退解析を状態の勝敗評価としてまとめる。Grundy数による分解とは区別する。
+T043,偏角ソート,C034,C034: 偏角ソート,learning_unit,L025,偏角による並べ替え,単なるソートの利用より具体的な幾何の手法として保持する。
+T044,凸包,C035,C035: 凸包,learning_unit,L026,凸包の構築,交差判定や面積計算との偶然の共起による統合を解消する。
+T045,HLD,C036,C036: HLD,learning_unit,L027,木のパス分解,Heavy-Light Decompositionを独立した学習単位として保持する。
+T046,DFS木,C037,C037: DFS木,learning_unit,L028,深さ優先探索,DFS木をDFSから派生する詳細情報としてまとめる。
+T047,オイラーツアー,C038,C038: オイラーツアー,learning_unit,L029,木の走査順による区間化,オイラーツアーを操作として定義し、参考情報だけの付与は採用しない。
+T049,トポロジカルソート,C039,C039: トポロジカルソート,learning_unit,L030,トポロジカルソート,閉路検出という別の計算課題との共起統合を解消する。
+T052,強連結成分分解,C040,C040: 強連結成分分解,learning_unit,L031,強連結成分分解,SCCを独立した学習単位として保持する。
+T053,最小全域木,C041,C041: 最小全域木,learning_unit,L032,最小全域木,Kruskal法とPrim法は同じ計算課題の実現方法として詳細に残す。
+T054,LCA,C042,C042: LCA,learning_unit,L033,最近共通祖先の取得,LCAとBinary Lifting LCAを同じ計算課題としてまとめる。
+T058,重心分解,C043,C043: 畳み込み,learning_unit,L034,木の重心分解,畳み込み・FFTとの共起による統合を解消する。
+T059,XOR,C044,C044: XOR,learning_unit,L035,ビット演算の利用,XORをビット演算の一種としてまとめる。部分集合の列挙やDPは別の単位にする。
+T061,bit全探索,C045,C045: bit全探索,learning_unit,L036,ビットマスクによる列挙,bit全探索と部分マスク列挙を列挙手法の派生形としてまとめる。
+T063,三分探索,C046,C046: 三分探索,learning_unit,L037,単峰性を使った探索,三分探索を単調な真偽判定に基づく二分探索とは区別する。
+T064,二分探索,C047,C047: 二分探索,learning_unit,L038,単調性を使った二分探索,二分探索を独立した学習単位として保持する。
+T065,全探索,C048,C048: 全探索,learning_unit,L039,候補の直接列挙,全探索という上位語を、ビット列挙や半分全列挙が既知の問題では重ねて表示しない。
+T066,幅優先探索,C049,C049: 幅優先探索,learning_unit,L040,幅優先探索,BFSが常に最短路目的とは推定しない。0-1 BFSが既知の問題ではそちらを優先する。
+T067,深さ優先探索,C050,C050: 深さ優先探索,learning_unit,L028,深さ優先探索,DFS木をDFSから派生する詳細情報としてまとめる。
+T068,Manacher 法,C051,C051: Manacher 法,learning_unit,L041,回文半径の計算,Manacher法を文字列全般ではなく具体的な計算として定義する。
+T069,Suffix Array,C052,C052: Z-Algorithm,learning_unit,L042,接尾辞配列,Zアルゴリズムやローリングハッシュと同義ではないため、共起統合を解消する。
+T070,Trie,C053,C053: Trie,learning_unit,L043,トライ木,Binary Trieを入力表現の異なるトライ木の派生形としてまとめる。
+T071,Z-Algorithm,C052,C052: Z-Algorithm,learning_unit,L044,Zアルゴリズム,接尾辞配列やハッシュと別の具体的な手法として保持する。
+T072,Rolling Hash,C052,C052: Z-Algorithm,learning_unit,L045,ローリングハッシュ,確率的な一致判定を伴う手法として、決定的な照合手法とは分ける。
+T075,imos 法,C054,C054: imos 法,learning_unit,L046,差分による区間加算,imos法を累積和そのものとは別の更新手法として保持する。
+T076,シミュレーション,C055,C055: シミュレーション,learning_unit,L047,逐次シミュレーション,表記揺れを一本化し、単に実装するすべての問題には拡張しない。
+T077,ソート,C056,C056: ソート,learning_unit,L048,並べ替えの利用,既知の偏角ソートがある問題では、そちらを優先する。
+T078,ダブリング,C057,C057: ダブリング,learning_unit,L049,反復遷移の高速化,ダブリングを独立した学習単位として保持する。
+T079,乱択アルゴリズム,C058,C058: 乱択アルゴリズム,learning_unit,L050,乱択・ランダム化,Color Codingをランダム化の派生手法として詳細に残す。
+T080,再帰関数,C059,C059: 再帰関数,learning_unit,L051,再帰的な構成,関数という言語機能名から、現在の対象問題で使う再帰的構成の学習単位にする。
+T081,分割統治,C060,C060: 分割統治,learning_unit,L052,分割統治,再帰呼出しを使うすべての問題を分割統治とは扱わない。
+T082,半分全列挙,C061,C061: 半分全列挙,learning_unit,L053,半分全列挙,直接列挙と異なる計算量改善の学習単位として保持する。
+T083,尺取り法,C062,C062: 尺取り法,learning_unit,L054,尺取り・二つのポインタ,名称だけでなく境界の更新という操作として定義する。
+T084,Sqrt Decomposition / 平方分割,C063,C063: Sqrt Decomposition / 平方分割,learning_unit,L055,平方分割,平方分割を独立した設計技法として保持する。
+T085,座標圧縮,C064,C064: 座標圧縮,learning_unit,L056,座標圧縮,補助技法であっても、独立して練習できる操作として保持する。
+T086,累積和,C065,C065: 累積和,learning_unit,L057,累積和・区間和,根拠不足と記録された既存付与は保留する。
+T089,Binary Trie,C066,C066: Binary Trie,learning_unit,L043,トライ木,Binary Trieを入力表現の異なるトライ木の派生形としてまとめる。
+T092,Color Coding,C058,C058: 乱択アルゴリズム,learning_unit,L050,乱択・ランダム化,Color Codingをランダム化の派生手法として詳細に残す。
+T094,Dilworth の定理,C067,C067: Dilworth の定理,learning_unit,L058,鎖分割・反鎖への帰着,定理名だけのタグを、対象問題で実際に行う帰着の単位に置き換える。
+T095,Disjoint Sparse Table,C068,C068: Disjoint Sparse Table,learning_unit,L003,静的な区間集約,Sparse Tableの派生形を同じ操作条件でまとめる。RMQという課題名だけから静的とは推定しない。
+T097,Euclid の互除法,C069,C069: Euclid の互除法,learning_unit,L059,最大公約数・拡張互除法,互除法と拡張互除法を同じ計算の系統としてまとめる。
+T099,Fermat の小定理,C070,C070: Fermat の小定理,learning_unit,L060,法における逆元の計算,現在のFermat小定理タグは逆元計算の根拠なので、逆元の単位へまとめる。
+T117,ビット演算,C071,C071: ビット演算,learning_unit,L035,ビット演算の利用,XORをビット演算の一種としてまとめる。部分集合の列挙やDPは別の単位にする。
+T122,中国剰余定理,C072,C072: 中国剰余定理,learning_unit,L061,中国剰余定理,単一の一次合同式とは異なる計算課題として保持する。
+T128,括弧列,C073,C073: 括弧列,metadata,,,入力・対象の性質であり、文字列DPなどの解法と同じ階層に表示しない。
+T132,畳み込み,C043,C043: 畳み込み,learning_unit,L074,畳み込みの高速計算,FFTを畳み込みの実現手法としてまとめ、重心分解との共起統合を解消する。
+T134,素因数分解,C074,C074: 素因数分解,learning_unit,L062,素因数・約数の計算,素因数分解とその指数を利用する計算を同じ学習系統としてまとめる。
+T136,線形代数,C075,C075: 線形代数,metadata,,,数学分野名は詳細情報に残し、対象問題で確認したアフィン変換の合成を表示する。
+T144,0-1 BFS,C076,C076: 0-1 BFS,learning_unit,L063,0-1重みの最短路,0-1 BFSを通常のBFSと分け、重み条件を表示名に含める。
+T150,ナップサック問題,C077,C077: ナップサック問題,learning_unit,L064,ナップサック・部分和DP,ナップサックと部分和を対応するDPの状態設計としてまとめる。
+T154,MEX,C078,C078: MEX,metadata,,,最小未出現値という対象だけでは一定の解法を表さないため、題材として保持する。
+T155,マンハッタン距離,C079,C079: マンハッタン距離,metadata,,,距離の定義は題材とし、確認できた式変形・座標変換を解法として表示する。
+T160,約数の個数 / 約数和,C080,C080: 約数の個数 / 約数和,learning_unit,L062,素因数・約数の計算,素因数分解とその指数を利用する計算を同じ学習系統としてまとめる。
+T165,Stars and Bars,C018,C018: きたまさ法,learning_unit,L069,二項係数・組合せ計算,Stars and Barsを組合せ計算の派生的な数え方としてまとめる。
+T169,2-SAT,C081,C081: 2-SAT,learning_unit,L065,2-SAT,二部グラフ判定との共起による統合を解消する。
+T170,Aho-Corasick,C082,C082: Aho-Corasick,learning_unit,L066,複数パターンの文字列照合,Aho-Corasickを独立した照合の学習単位として保持する。
+T175,Bellman-Ford 法,C083,C083: Bellman-Ford 法,learning_unit,L067,負辺を扱う最短路,Bellman-Ford法を重み条件の異なる最短路として保持する。
+T176,二分累乗法,C084,C084: 二分累乗法,learning_unit,L068,累乗の高速計算,二分累乗法を反復遷移や線形漸化式の計算とは区別する。
+T177,二項係数,C085,C085: 二項係数,learning_unit,L069,二項係数・組合せ計算,Stars and Barsを組合せ計算の派生的な数え方としてまとめる。
+T178,二部グラフ判定,C081,C081: 2-SAT,learning_unit,L070,二部グラフ判定,2-SATへの帰着関係があっても同じ学習単位とは扱わない。
+T181,線分交差判定,C035,C035: 凸包,learning_unit,L071,外積による幾何判定,基本的な幾何の計算をまとめ、凸包の構築とは分ける。
+T182,閉路検出,C039,C039: トポロジカルソート,learning_unit,L072,グラフの閉路検出,トポロジカルソートと同じ問題に現れても、別の計算課題として保持する。
+T187,Dijkstra 法,C086,C086: Dijkstra 法,learning_unit,L073,非負重みの最短路,Dijkstra法を通常のBFSや負辺を扱う手法とは分ける。
+T193,部分マスク列挙,C087,C087: 部分マスク列挙,learning_unit,L036,ビットマスクによる列挙,bit全探索と部分マスク列挙を列挙手法の派生形としてまとめる。
+T194,拡張 Euclid の互除法,C088,C088: 拡張 Euclid の互除法,learning_unit,L059,最大公約数・拡張互除法,互除法と拡張互除法を同じ計算の系統としてまとめる。
+T196,FFT,C043,C043: 畳み込み,learning_unit,L074,畳み込みの高速計算,FFTを畳み込みの実現手法としてまとめ、重心分解との共起統合を解消する。
+T197,Fibonacci 数,C089,C089: Fibonacci 数,metadata,,,数列名だけから漸化式の高速計算の利用を推定しない。
+T202,階乗の素因数指数,C090,C090: 階乗の素因数指数,learning_unit,L062,素因数・約数の計算,素因数分解とその指数を利用する計算を同じ学習系統としてまとめる。
+T208,Floyd-Warshall 法,C091,C091: Floyd-Warshall 法,learning_unit,L075,全頂点対の最短路,Floyd-Warshall法を単一始点の最短路から区別する。
+T221,線形合同方程式,C088,C088: 拡張 Euclid の互除法,learning_unit,L076,一次合同式の解法,拡張互除法は利用する計算手段として別に残し、合同式という計算課題を表示する。
+T224,LIS,C092,C092: LIS,learning_unit,L077,最長増加部分列,LISを独立したDPの計算課題として保持する。
+T225,Binary Lifting LCA,C093,C093: Binary Lifting LCA,learning_unit,L033,最近共通祖先の取得,LCAとBinary Lifting LCAを同じ計算課題としてまとめる。
+T233,Kruskal 法,C094,C094: Kruskal 法,learning_unit,L032,最小全域木,Kruskal法とPrim法は同じ計算課題の実現方法として詳細に残す。
+T234,Prim 法,C095,C095: Prim 法,learning_unit,L032,最小全域木,Kruskal法とPrim法は同じ計算課題の実現方法として詳細に残す。
+T236,モジュラ逆元,C096,C096: モジュラ逆元,learning_unit,L060,法における逆元の計算,現在のFermat小定理タグは逆元計算の根拠なので、逆元の単位へまとめる。
+T240,三角形の符号付き面積,C035,C035: 凸包,learning_unit,L071,外積による幾何判定,基本的な幾何の計算をまとめ、凸包の構築とは分ける。
+T245,RMQ,C097,C097: RMQ,metadata,,,課題名だけでは静的か更新付きかが分からないため、実際のデータ構造と分ける。
+T253,エラトステネスの篩,C098,C098: エラトステネスの篩,learning_unit,L078,素数の列挙,エラトステネスの篩を素因数分解という別の計算から区別する。
+T257,包除原理,C099,C099: 包除原理,learning_unit,L079,包除原理による数え上げ,二項係数の利用とは別の数え上げの技法として保持する。
+T262,部分和問題,C100,C100: 部分和問題,learning_unit,L064,ナップサック・部分和DP,ナップサックと部分和を対応するDPの状態設計としてまとめる。
+T266,平面走査,C101,C101: 平面走査,learning_unit,L080,平面走査,平面走査を独立した設計技法として保持する。

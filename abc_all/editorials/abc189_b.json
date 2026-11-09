@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc189_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc189/editorial/532",
+      "text": "\\(i\\)\n番目のお酒に含まれているアルコールの量は\n\\(V_i*P_i/100\\)\nです。前から順にこれらの和を計算していき、初めて\n\\(X\\)\nを超えるところを出力すれば良いです。\nしかし、浮動小数点数の演算は一般に誤差を含みます。例えば、以下の入力の正しい答えは\n-1\nですが、実装と環境によっては\n3\nを出力する場合があります。\nこのような問題を避ける最も簡単な方法は、整数のみで計算できるように適切な式変形を行うことです。\n今回の場合、\n\\(V_1*P_1/100+\\ldots >X\\)\nかどうかを判定したいので、両辺に\n\\(100\\)\nを掛け\n\\(V_1*P_1+\\ldots > X*100\\)\nとすることで、整数のみで計算できます。\n実装例(C)\n実装例(Python)",
+      "codes": [
+        "3 13\n30 13\n35 13\n35 13",
+        "#include<stdio.h>\n\nint main(){\n\tint n,x;\n\tscanf(\"%d%d\",&n,&x);\n\tint sum=0;\n\tfor(int i=0;i<n;i++){\n\t\tint v,p;\n\t\tscanf(\"%d%d\",&v,&p);\n\t\tsum+=v*p;\n\t\tif(sum>x*100){\n\t\t\tprintf(\"%d\\n\",i+1);\n\t\t\treturn 0;\n\t\t}\n\t}\n\tputs(\"-1\");\n}",
+        "N,X = map(int,input().split())\ns = 0\n\nfor i in range(N):\n  v,p = map(int,input().split())\n  s += v*p\n  if s > X*100:\n    print(i+1)\n    exit()\n\nprint(-1)"
+      ],
+      "text_sha256": "e747a51aa809ba3d40e351d9f67b95b7c3692bb4c211b83e3fe51ff82e473bfe",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc189/abc189_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

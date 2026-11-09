@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc372_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc372/editorial/10972",
+      "text": "まず制約を無視すれば以下のような解法が考えられます：\n各クエリで\n\\(S\\)\nの\n\\(X_i\\)\n文字目を\n\\(C_i\\)\nに変更する。\n\\(S\\)\nの長さ\n\\(3\\)\nの部分文字列の個数は\n\\(N-2\\)\n個なので、それぞれに対して\nABC\nと一致するかを判定し、一致する部分文字列の個数を出力する。\nしかし、\n\\(N,Q\\)\nは最大で\n\\(2\\times 10^5\\)\nになるのでこの解法では\nTLE\nとなってしまいます。\nここで、\n\\(S\\)\nの一文字を変えても\n\\(S\\)\nの長さ\n\\(3\\)\nの部分文字列は高々\n\\(3\\)\n個しか変わらないことに着目します。\n例えば\n\\(S=\\)\nABCDEFGHI\nが\n\\(S=\\)\nABCZEFGI\nに変わったとします。すると、変更前の\n\\(S\\)\nの長さ\n\\(3\\)\nの部分文字列は\nABC\n,\nBCD\n,\nCDE\n,\nDEF\n,\nEFG\n,\nFGH\n,\nGHI\nの\n\\(7\\)\n個ですが、変更後の\n\\(S\\)\nの長さ\n\\(3\\)\nの部分文字列は\nABC\n,\nBCZ\n,\nCZE\n,\nZEF\n,\nEFG\n,\nFGH\n,\nGHI\nの\n\\(7\\)\n個です。この例では変更前後で長さ\n\\(3\\)\nの部分文字列は\n\\(3\\)\n個しか変わっていません。一般の場合でも長さ\n\\(3\\)\nの部分文字列は\n\\(3\\)\n個以下しか変わりません。\nよって、変わる\n\\(3\\)\n個以下の部分文字列に対してのみ「変更前にいくつ\nABC\nだったか」と「変更後にいくつ\nABC\nか」を計算し、その差分と変更前の答えを元に変更後の答えを計算すれば良いです。計算量は\n\\(O(N+Q)\\)\nとなります。\n実装例(Python3)",
+      "codes": [
+        "N, Q = map(int, input().split())\nS = list(input())\nans = 0\nfor i in range(N - 2):\n    if S[i] == \"A\" and S[i + 1] == \"B\" and S[i + 2] == \"C\":\n        ans += 1\nfor _ in range(Q):\n    x, c = input().split()\n    x = int(x) - 1\n    for k in range(3):\n        idx = x - k\n        if 0 <= idx and idx + 2 < N:\n            if S[idx] == \"A\" and S[idx + 1] == \"B\" and S[idx + 2] == \"C\":\n                ans -= 1\n    S[x] = c\n    for k in range(3):\n        idx = x - k\n        if 0 <= idx and idx + 2 < N:\n            if S[idx] == \"A\" and S[idx + 1] == \"B\" and S[idx + 2] == \"C\":\n                ans += 1\n    print(ans)"
+      ],
+      "text_sha256": "2c1edf707f705baf4a0ec0467c684bd8d224dded7dadbd43be97069750836d7b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc372/abc372_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

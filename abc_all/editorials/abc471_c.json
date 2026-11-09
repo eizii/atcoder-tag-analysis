@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc471_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc471/editorial/23911",
+      "text": "各行動のタイミングにおいて、高橋君の現在の座標 \\(X\\) から最も近いクッキーとして考えられるのは「座標が \\(X\\) 未満のうち最大のもの」「座標が \\(X\\) より大きいうち最小のもの」のどちらかです。よってこの2つを高速に求めることができればこの問題に答えることができます。 解法1 ordered set C++ などには set というデータ構造があり、以下の操作を全て \\(O(\\log N)\\) で行うことができます set に要素を1つ追加する setから要素を1つ削除する setに含まれる要素のうち X 未満も最大値を求める setに含まれる要素のうちXより大きな最小値を求める よって、クッキーのある座標をsetで管理しながら高橋君の行動をシミュレーションすることで \\(O(N\\log N)\\) でこの問題を解くことができます。 writer解(C++) 解法2 2-pointers クッキーのある座標をソートしておき、「座標が負のものを、原点に近い順に取り出せるキュー」「座標が正のものを、原点に近い順に取り出せるキュー」を用意します。 どのタイミングでも、高橋君が次に拾うクッキーは、2つのキューの先頭のどちらかになります。よって、クッキーのある座標を2つのキューで管理しながら高橋君の行動をシミュレーションすることでソートの後は \\(O(N)\\) でこの問題を解くことができます。 以下の実装例では明示的にキューを用意せず、座標をソートしたリストと、次に取り出す要素のindexを表す変数を用いて同じ仕組みを実現しています。 writer解(Python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n;\n\tcin >> n;\n\tset<int>s;\n\tfor(int i=0;i<n;i++){\n\t\tint ai;\n\t\tcin >> ai;\n\t\ts.insert(ai);\n\t}\n\t\n\tlong long ans=0;\n\tint pos=0;\n\tfor(int i=0;i<n;i++){\n\t\tauto it=s.lower_bound(pos);\n\t\tint nxt;\n\t\tif(it==s.begin()){\n\t\t\tnxt=*it;\n\t\t}else if(it==s.end()){\n\t\t\tnxt=*--it;\n\t\t}else{\n\t\t\tint cand1=*it;\n\t\t\tint cand2=*--it;\n\t\t\tif(abs(cand1-pos)<abs(cand2-pos)){\n\t\t\t\tnxt=cand1;\n\t\t\t}else{\n\t\t\t\tnxt=cand2;\n\t\t\t}\n\t\t}\n\t\tans+=abs(nxt-pos);\n\t\ts.erase(nxt);\n\t\tpos=nxt;\n\t}\n\tcout << ans << endl;\n}\n",
+        "N=int(input())\nA=list(map(int,input().split()))\n\nN+=1\nA.append(0)\nA.sort()\nP=A.index(0)\nL=P-1\nR=P+1\nans=0\n\npos=0\nfor _ in range(N-1):\n  if L==-1:\n    ans+=A[R]-pos\n    pos=A[R]\n    R+=1\n  elif R==N:\n    ans+=pos-A[L]\n    pos=A[L]\n    L-=1\n  else:\n    if pos-A[L]<=A[R]-pos:\n      ans+=pos-A[L]\n      pos=A[L]\n      L-=1\n    else:\n      ans+=A[R]-pos\n      pos=A[R]\n      R+=1\n\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "2bc7960497e34a95757dda9bb2a5aa1f0f32a55a8e9be5747fb7d9299df4815b"
+    }
+  ],
+  "status": "available"
+}

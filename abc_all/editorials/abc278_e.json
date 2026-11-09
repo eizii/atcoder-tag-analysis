@@ -1,0 +1,63 @@
+{
+  "problem_id": "abc278_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5234",
+      "text": "この問題は、 \\(0\\leq k\\leq H,0\\leq l\\leq W,0\\leq x\\lt N\\) について\n\\(\\operatorname{count}[k][l][x]:=\\) \\(k\\lt i\\leq H,l\\lt j\\leq W\\) を満たすマス \\((i,j)\\) のうち、\\(x\\) が書かれているマスの個数\nが計算できていれば \\(O(HWN)\\) 時間で解くことができます。\n実際、\\((k+1,l+1)\\) から \\((k+h,l+w)\\) までを塗りつぶしたとき、塗りつぶされていないマスのうち \\(x\\) が書かれているマスの個数は\n\\[\\operatorname{count}[0][0][x]-\\operatorname{count}[k][l][x]+\\operatorname{count}[k][l+w][x]-\\operatorname{count}[k+h][l+w][x]+\\operatorname{count}[k+h][l][x]\\]\n個であるため、\\((k,l)\\) に対する答えを \\(O(N)\\) 時間で求めることができます。\n\\(\\operatorname{count}[k][l][x]\\) を求めるには、二次元累積和を使えばよいです。\n具体的な方法を以下に述べます。\n\\(\\operatorname{count}[k][l][x]=\\) \\((k+1,j+1)\\) に \\(x\\) が書かれているとき \\(1\\) 、そうでないとき \\(0\\)\nとすることは \\(O(HWN)\\) 時間で可能です。\n\\((k,j,x)\\) を適切な順序でわたって \\(\\operatorname{count}[k][l][x]\\leftarrow\\operatorname{count}[k][l][x]+\\operatorname{count}[k][l+1][x]\\) と更新することで、\n\\(\\operatorname{count}[k][l][x]=\\) \\(k\\lt l\\leq W\\) を満たすマス \\((k+1,l)\\) のうち、\\(x\\) が書かれているマスの個数\nが成り立っているようにできます。\n同様に \\(\\operatorname{count}[k][l][x]\\leftarrow\\operatorname{count}[k][l][x]+\\operatorname{count}[k+1][l][x]\\) と更新することで、欲しい \\(\\operatorname{count}\\) の値が得られます。\n以上より、全体で \\(O(HWN)\\) 時間でこの問題を解くことができました。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <numeric>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n\n    unsigned H, W, N, h, w;\n    cin >> H >> W >> N >> h >> w;\n\n    // count[i][j][x] = マス (i + 1, j + 1) に x が書き込まれているとき 1, そうでないとき 0\n    vector count(H, vector(W, vector<unsigned>(N)));\n\n    for (auto &&row : count) {\n        for (auto &&grid : row) {\n            unsigned long A;\n            cin >> A;\n            ++grid[A - 1];\n        }\n        // 番兵\n        row.emplace_back(N);\n    }\n    // 番兵\n    count.emplace_back(W + 1, vector<unsigned>(N));\n\n    // 二次元累積和\n    std::inclusive_scan(rbegin(count), rend(count), rbegin(count), [](auto &&i, auto &&j) {\n        const auto vector_plus{[](auto &&i, auto &&j) {\n            vector<unsigned> ret;\n            transform(begin(i), end(i), begin(j), back_inserter(ret), plus<>{});\n            return ret;\n        }};\n        std::inclusive_scan(rbegin(j), rend(j), rbegin(j), vector_plus);\n        vector<vector<unsigned>> ret;\n        transform(begin(i), end(i), begin(j), back_inserter(ret), vector_plus);\n        return ret;\n    });\n\n    // board[i][j][x] = マス (i, j) より右下のマスに x が書き込まれている個数\n\n    for (unsigned i{}; i + h <= H; ++i) {\n        for (unsigned j{}; j + w <= W; ++j) {\n            unsigned ans{};\n            // 塗りつぶされていないマスに x と書いてある個数が 1 以上のとき、答えを 1 増やす\n            for (unsigned x{}; x < N; ++x)\n                ans += count[0][0][x] + count[i + h][j][x] + count[i][j + w][x] !=\n                       count[i][j][x] + count[i + h][j + w][x];\n            cout << ans << \" \";\n        }\n        cout << endl;\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "67013173a0c0e122736c3d54587042a35bd06c0955145817e017f6f8d81c6860",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5236",
+      "text": "ある整数\n\\(a \\, (1 \\leq a \\leq N)\\)\nについて、\n\\(a\\)\nが書かれたマスを\n\\((i_1, j_1), \\dots, (i_n, j_n)\\)\nとおきます。\n\\(a\\)\nが塗りつぶされていないマスに\n現れない\n、すなわち\n\\(a\\)\nが書かれたマスが全て塗りつぶされるための条件は、\n全ての\n\\(m = 1, \\dots, n\\)\nに対し、\n\\(k \\lt i_m \\leq k+h\\)\nかつ\n\\(l \\lt j_m \\leq l+w\\)\nが成り立つことです。\n\\(i_m\\)\nの最小値・最大値を\n\\(\\mathrm{min}_{X}, \\mathrm{max}_{X}\\)\nとおき、\n\\(j_m\\)\nの最小値・最大値を\n\\(\\mathrm{min}_{Y}, \\mathrm{max}_{Y}\\)\nとおくと、\n\\(k \\lt \\mathrm{min}_{X}\\)\nかつ\n\\(\\mathrm{max}_{X} \\leq k+h\\)\nかつ\n\\(l \\lt \\mathrm{min}_{Y}\\)\nかつ\n\\(\\mathrm{max}_{Y} \\leq l+w\\)\nと言い換えられます。\nよって、全ての\n\\(a = 1, \\dots, N\\)\nについて\n\\(\\mathrm{min}_{X}, \\mathrm{max}_{X}, \\mathrm{min}_{Y}, \\mathrm{max}_{Y}\\)\nを前計算しておくことで、各\n\\((k, l)\\)\nに対し計算量\n\\(O(N)\\)\nで答えを求めることができます。\n実装例 (C++)\n発展問題 :\n\\(1 \\leq H, W \\leq 2000, 1 \\leq N \\leq HW\\)",
+      "codes": [],
+      "text_sha256": "098c4375f2351ff01b5ca077d2682ba85d97729c59cd3e51b1e19928e4b29d5f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5269",
+      "text": "各\n\\((k, l)\\)\nについて、領域\n\\((k, k + h]\\times(l, l + w]\\)\nの内側に\nのみ\n存在する整数の種類数を求めることを考えます。(最終的な答えはここで求める種類数を全種類数から引いたものになります。)\nマス\n\\((i, j)\\)\nを塗りつぶすような\n\\((k, l)\\)\nの領域は\n\\([i - h, i)\\times[j - w, j)\\)\nなので、\nある整数\n\\(a\\)\nについて、\n\\(a\\)\nが書かれているマスを全て塗りつぶすような\n\\((k, l)\\)\nの領域は\n\\(\\bigcap_{A_{i, j} = a}[i - h, i)\\times[j - w, j)\\)\nです。\n各整数\n\\(a\\)\nについて上記の領域を求めると、これは\n\\([0, H - h]\\times[0, W - w]\\)\n上の長方形領域となります。各整数について2次元imos法を使ってこの長方形領域に対する加算をおこなう解法は\n\\(O(HW + N)\\)\nとなりますが、実際にはマス上に存在する整数についてのみ考えれば良いので計算量は\n\\(O(HW)\\)\nとなります。\n実装例",
+      "codes": [],
+      "text_sha256": "236b346b2a79324da7762543034f4e85abb577443a742df24fb3fdaf92c1aa65",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5249",
+      "text": "黒塗りの矩形をずらしていくのをシミュレーションしていきます。\n黒塗りの部分を\n#\n、そうでない部分を\n.\nで表すと、\nのように、「右端まで 1 マスずつずらす」「下に 1 マスずらす」「左端まで 1 マスずつずらす」「下に 1 マスずらす」「右端まで〜」というのを繰り返します。\n左右にずらしたときは、差分が\n\\(2h\\)\nマス（黒塗りだったのを黒塗りでなくする\n\\(h\\)\nマスと、黒塗りにする\n\\(h\\)\nマス）あり、下にずらしたときは差分が\n\\(2w\\)\nマスあります。\n左右のずらしは\n\\((W-w)\\times(H-h+1)\\)\n回、下へのずらしは\n\\((H-h)\\)\n回発生するため、差分の更新は全部で\n\\(O(H^2W)\\)\n回です。\n差分の管理に際しては、\ncount[x]\n:= (黒塗りでない\nx\nの個数) を管理すればよいです。\ncount[x] == 0\nの真偽によって答えを更新することで、一つあたり\n\\(O(1)\\)\n時間で処理できます。\n計算量は\n\\(O(H^2W+N)\\)\n時間です。\n提出 #36622723\n「\n\\((k, l) = (i, 0)\\)\nとしてから、右端まで 1 マスずつずらす」というのを各\n\\(i\\)\nについて行う方針でも、\n\\(O(HW(H+W)+N)\\)\n時間で解けそうです。",
+      "codes": [
+        "###..\n###..\n.....\n.....",
+        ".###.\n.###.\n.....\n.....",
+        "..###\n..###\n.....\n.....",
+        ".....\n..###\n..###\n.....",
+        ".....\n.###.\n.###.\n.....",
+        ".....\n###..\n###..\n.....",
+        ".....\n.....\n###..\n###..",
+        ".....\n.....\n.###.\n.###.",
+        ".....\n.....\n..###\n..###"
+      ],
+      "text_sha256": "f6935a4af3ada906d43afee6867c6c244db8181cfd35056cae5c6fbfc35c8f91",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5277",
+      "text": "各\n\\(i\\)\nについて、\n上から\n\\(i\\)\n行目\nまで\nに現れる数の集合\n下から\n\\(i\\)\n行目\nまで\nに現れる数の集合\n左から\n\\(i\\)\n列目\nまで\nに現れる数の集合\n右から\n\\(i\\)\n列目\nまで\nに現れる数の集合\nが分かっていると、各クエリはこれらのうち適切な4つを組み合わせて和集合を取れば良いです。\n前計算は\n\\(O(HWN)\\)\n、クエリは各\n\\(O(N)\\)\nで合計で\n\\(O(HWN)\\)\nです。さらに bitset を使うことで高速化することもできます。",
+      "codes": [],
+      "text_sha256": "15e506b7e74262a370516533000c894e5a94b098bb1a3eede7f004f64afcf0de",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

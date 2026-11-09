@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc176_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc176/editorial/66",
+      "text": "爆弾を\n\\((A, B)\\)\nに設置すると、\n\\(A\\)\n行目のマスまたは\n\\(B\\)\n列目のマス全てに存在する爆破対象が破壊することが出来ます。\nつまり、\n\\(A\\)\n行目にある爆弾の個数を\n\\(R_A\\)\n,\n\\(B\\)\n列目にある爆弾の個数を\n\\(C_B\\)\nとすると、およそ\n\\(R_A + C_B\\)\nで、爆発する爆弾の個数を求めることが出来ます。\n\\(A\\)\nは\n\\(R_A\\)\nにしか影響を与えず、\n\\(B\\)\nは\n\\(C_B\\)\nにしか影響を与えないため、\n\\(A, B\\)\nそれぞれを求めれば良いように思えますが、実は、爆発する個数がちょうど\n\\(R_A + C_B\\)\nとは限らない事が問題です。\n座標\n\\((A,B)\\)\nに爆発対象が存在した場合、\n\\(R_A\\)\nにも\n\\(C_B\\)\nにも値が\n\\(1\\)\n足されていますが、実際の爆発対象は\n\\(1\\)\nつしかないため、実際に爆発する爆発対象の個数は\n\\(R_A + C_B - 1\\)\nとなってしまいます。そこで、\n\\(A, B\\)\nについて独立に最大値を求めた後、\n\\(R_A\\)\nが最大かつ\n\\(C_B\\)\nが最大で、\n\\((A,B)\\)\nに爆発対象が存在しない\n\\((A, B)\\)\nの組み合わせが存在するかどうかを調べる必要があります。\n条件を満たす\n\\((A, B)\\)\nは非常に多くなりえますが、爆発対象が存在するマスは高々\n\\(M\\)\n個しか存在しないため、調べる回数は\n\\(M\\)\n回以下に抑えることができ、全探索することが可能です。\nこれが存在するのであれば、答えは\n\\(\\max(R) + \\max(C)\\)\n、存在しないのであれば\n\\(\\max(R) + \\max(C) - 1\\)\nです。\n回答例(C++, kort0n氏より引用)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\ntypedef pair<int, int> i_i;\ntemplate<class T>\ninline bool chmax(T &a, T b) {\n    if(a < b) {\n        a = b;\n        return true;\n    }\n    return false;\n}\n \nint H, W, M;\nset<i_i> st;\n \nvoid input() {\n    cin >> H >> W >> M;\n    for(int i = 0; i < M; i++) {\n        int a, b;\n        cin >> a >> b;\n        st.insert({a, b});\n    }\n}\n \nvoid solve() {\n    map<int, int> mph, mpw;\n    int hmaxval = 0;\n    int wmaxval = 0;\n    vector<int> hmax, wmax;\n    for(auto tmp : st) {\n        chmax(hmaxval, ++mph[tmp.first]);\n        chmax(wmaxval, ++mpw[tmp.second]);\n    }\n    for(auto tmp : mph) {\n        if(hmaxval == tmp.second) hmax.push_back(tmp.first);\n    }\n    for(auto tmp : mpw) {\n        if(wmaxval == tmp.second) wmax.push_back(tmp.first);\n    }\n    int ANS = hmaxval + wmaxval - 1;\n    for(auto h : hmax) {\n        for(auto w : wmax) {\n            if(st.find({h, w}) == st.end()) {\n                ANS++;\n                cout << ANS << endl;\n                return;\n            }\n        }\n    }\n    cout << ANS << endl;\n}\n \nint main() {\n    input();\n    solve();\n    return 0;\n}"
+      ],
+      "text_sha256": "713f7c29edf33af8ce6cbfaafea8331f4144e8d37e197d94d158505172b6115d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc176/abc176_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc236_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc236/editorial/3285",
+      "text": "\\(2N\\)\n人の参加者が\n\\(N\\)\n個のペアに分かれる方法（以下、単に「分け方」と呼ぶ）をすべて全探索し、その中での舞踏会全体の楽しさの最大値を出力すれば良いです。\n以下では、分け方の個数が最大となる\n\\(N = 8\\)\nの場合を例に説明します。\n分け方を\n\\(1\\)\nつ選ぶ自然な方法として、次のような手順を考えます。\n\\(1\\)\n個目のペアの\n\\(1\\)\n人目を誰にするかを、\n\\(16\\)\n人の中から選ぶ。\n\\(1\\)\n個目のペアの\n\\(2\\)\n人目を誰にするかを、残りの\n\\(15\\)\n人の中から選ぶ。\n\\(2\\)\n個目のペアの\n\\(1\\)\n人目を誰にするかを、残りの\n\\(14\\)\n人の中から選ぶ。\n\\(2\\)\n個目のペアの\n\\(2\\)\n人目を誰にするかを、残りの\n\\(13\\)\n人の中から選ぶ。\n\\(3\\)\n個目のペアの\n\\(1\\)\n人目を誰にするかを、残りの\n\\(12\\)\n人の中から選ぶ。\n\\(3\\)\n個目のペアの\n\\(2\\)\n人目を誰にするかを、残りの\n\\(11\\)\n人の中から選ぶ。\n\\(\\cdots\\)\n\\(8\\)\n個目のペアの\n\\(1\\)\n人目を誰にするかを、残りの\n\\(2\\)\n人の中から選ぶ。\n\\(8\\)\n個目のペアの\n\\(2\\)\n人目を誰にするかを、残りの\n\\(1\\)\n人の中から選ぶ。\nこの方法ですべての分け方を全探索すると、\n\\(16 \\times 15 \\times 14 \\times \\cdots \\times 2 \\times 1 > 2 \\times 10^{13}\\)\n通りの選び方を探索することになり、実行制限時間に間に合わせることはできません。\n上記の探索方法では、同じ分け方を複数回探索することになり、冗長です。\n例えば、\n\\(i\\)\n個目のペアの\n\\(1 \\)\n人目を\n\\(x_{i, 1}\\)\n、\n\\(2\\)\n人目を\n\\(x_{i, 2}\\)\nで表すと、上記の探索方法では次の\n\\(3\\)\nつの選び方はそれぞれ異なる選び方として調べられますが、これらは実際には本質的に同じ分け方です。\n\\(\\big((x_{1, 1}, x_{1, 2}), (x_{2, 1}, x_{2, 2}), \\ldots, (x_{8, 1}, x_{8, 2})\\big) = \\big((1, 2), (3, 4), \\ldots, (15, 16)\\big)\\)\n\\(\\big((x_{1, 1}, x_{1, 2}), (x_{2, 1}, x_{2, 2}), \\ldots, (x_{8, 1}, x_{8, 2})\\big) = \\big((2, 1), (4, 3), \\ldots, (16, 15)\\big)\\)\n\\(\\big((x_{1, 1}, x_{1, 2}), (x_{2, 1}, x_{2, 2}), \\ldots, (x_{8, 1}, x_{8, 2})\\big) = \\big((15, 16), (13,  14), \\ldots, (1, 2)\\big)\\)\nこれへの対処として、上記の探索法を「各ペアの\n\\(1\\)\n人目はその時点で残っている人の中で番号が最小の参加者とする」ように改良します。\nすなわち、次のような方法を考えます。\n\\(1\\)\n個目のペアの\n\\(1\\)\n人目を、\n\\(16\\)\n人の中で番号が最小の参加者（つまり人\n\\(1\\)\n）とする。\n\\(1\\)\n個目のペアの\n\\(2\\)\n人目を誰にするかを、残りの\n\\(15\\)\n人の中から選ぶ。\n\\(2\\)\n個目のペアの\n\\(1\\)\n人目を、残りの\n\\(14\\)\n人の中で番号が最小の参加者とする。\n\\(2\\)\n個目のペアの\n\\(2\\)\n人目を誰にするかを、残りの\n\\(13\\)\n人の中から選ぶ。\n\\(3\\)\n個目のペアの\n\\(1\\)\n人目を、残りの\n\\(12\\)\n人の中で番号が最小の参加者とする。\n\\(3\\)\n個目のペアの\n\\(2\\)\n人目を誰にするかを、残りの\n\\(11\\)\n人の中から選ぶ。\n\\(\\cdots\\)\n\\(8\\)\n個目のペアの\n\\(1\\)\n人目を、残りの\n\\(2\\)\n人の中で番号が最小の参加者とする。\n\\(8\\)\n個目のペアの\n\\(2\\)\n人目を誰にするかを、残りの\n\\(1\\)\n人の中から選ぶ。\nこの方法ですべての分け方を全探索すると、各ペアの\n\\(1\\)\n人目は随時\n\\(1\\)\n通りに定まるため、\n\\(15 \\times 13 \\times 11 \\times 9 \\times 7 \\times 5 \\times 3 \\times 1 =2027025\\)\n通りの選び方を探索すればよく、実行制限時間に間に合わせることができます。\nC++言語による正解例を以下に記載します。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <utility>\nusing namespace std;\n\nint n;\nint a[20][20];\n\nvector<pair<int, int>> vec;\nbool used[20];\n\nint calc()\n{\n  if(vec.size() == n){\n    int ret = 0;\n    for(auto p : vec) ret ^= (a[p.first][p.second]);\n    return ret;\n  }\n  \n  int l;\n  for(int i = 1; i <= 2*n; i++){\n    if(!used[i]){\n      l = i;\n      break;\n    }\n  }\n  used[l] = true;\n\n  int ret = 0;\n  for(int i = 1; i <= 2*n; i++){\n    if(!used[i]){\n      vec.push_back({l, i}), used[i] = true;\n      ret = max(ret, calc());\n      vec.pop_back(), used[i] = false;\n    }\n  }\n    \n  used[l] = false;\n  return ret;\n}\n\nint main(void)\n{\n  cin >> n;\n  for(int i = 1; i <= 2*n-1; i++){\n    for(int j = i+1; j <= 2*n; j++){\n      cin >> a[i][j];\n    }\n  }\n  cout << calc() << endl;\n\n  return 0;\n}"
+      ],
+      "text_sha256": "6383de29d2fc076a38a5f5240501783769552197c19e68524da36346e2e6fbd1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc236/abc236_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc236/editorial/3316",
+      "text": "next_permutation の要領で ascending\n\\((2, 2, ..., 2)\\)\n-shuffle を列挙することで、\n\\(O((2N - 1)!!)\\)\n時間で解くことができます。また列挙と同時に xor を計算することで\n\\(O((2N - 1)!!)\\)\n時間に短縮できますが、私が実装してみたところ、速くはなりませんでした。\n解法\n\\(1, \\dots, 2N\\)\nの置換\n\\(A\\)\nが\n\\((2, 2, ..., 2)\\)\n-shuffle であるとは\n\\(A _ { 2 i - 1 } \\le A _ { 2 i } \\ ( 1 \\le i \\le N )\\)\nを満たすことを言います。このようなもののうち ascending、すなわち\n\\(A _ 1 \\le A_3 \\le A_5 \\le \\dots \\le A_{2N - 1}\\)\nであるものを列挙しましょう。\n\\(A\\)\nが ascending\n\\((2, 2, ..., 2)\\)\n-shuffle として、辞書順で\n\\(A\\)\nより大きな最も小さな  ascending\n\\((2, 2, ..., 2)\\)\n-shuffle を計算しましょう。これは後ろから順に見て、増やせる所があれば\n\\(1\\)\n増やし、残りを昇順に埋めていけばよいです。\n参考記事:\nnext_permutation\nと同様に列挙できるもの一覧\n提出\nRust (26 ms):\nhttps://atcoder.jp/contests/abc236/submissions/47514980",
+      "codes": [
+        "fn next_pairing(p: &mut [usize]) -> bool {\n    let n = p.len();\n    let mut used = 0_u32;\n    for i in (0..n).rev() {\n        used |= 1 << p[i];\n        if i % 2 == 1 && p[i] + 1 < used.ilog2() as usize {\n            p[i] = (used >> (p[i] + 1)).trailing_zeros() as usize + p[i] + 1;\n            used ^= 1 << p[i];\n            for i in i + 1..n {\n                p[i] = used.trailing_zeros() as usize;\n                used ^= 1 << p[i];\n            }\n            return true;\n        }\n    }\n    false\n}"
+      ],
+      "text_sha256": "4bbe290ba5b6a58b770ef87ad0aa6609612bf85ee5782b1e8e6b5fbe8241c771",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc236/abc236_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

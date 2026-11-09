@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc155_b",
+  "editorials": [
+    {
+      "text": "B: Papers, Please\n「偶数であるにもかかわらず，3 でも5 でも割り切れない」ような整数が書類上にあればDENIED，\nさもなくばAPPROVED とすればよいです．\nC 言語での実装例は次のとおりです．\n1 #include <stdio.h>\n2\n3 int main (void) {\n4\nint i;\n5\n6\nint a[100];\n7\nfor (i = 0; i < n; i++) {\n8\nscanf(\"%d\", &a[i]);\n9\n}\n10\n11\nfor (i = 0; i < n; i++) {\n12\nif (a[i] % 2 == 0 && a[i] % 3 != 0 && a[i] % 5 != 0) {\n13\nputs(\"DENIED\");\n14\nreturn 0;\n15\n}\n16\n}\n17\nputs(\"APPROVED\");\n18\n19\nreturn 0;\n20 }\n",
+      "text_sha256": "14a79e2096160bb61ee02db77ada72ba72b028185ce8edc0dd164dc2bd788d29",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc155/abc155_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

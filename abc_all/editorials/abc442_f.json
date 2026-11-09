@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc442_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc442/editorial/15142",
+      "text": "まずは条件を整理します。直感的には白マスが「階段状」に並ぶことですが、形式的に整理すると問題文中の条件は以下のように言い換えられます。\nある整数列\n\\((A_1, A_2, \\ldots, A_N)\\)\nが存在して、以下の条件をともに満たす（ただし、\n\\(0 \\leq A_i \\leq N\\)\nとする）。\n\\(i\\)\n行目の左から\n\\(A_i\\)\nマスが白く塗られており、その他のマスは黒く塗られている。\n\\(A_1 \\geq A_2 \\geq \\ldots \\geq A_N\\)\nである。\n\\(1\\)\nつ目の条件は問題文中の条件と同じですが、\n\\(2\\)\nつ目の条件は列に関する条件を\n\\(A_i\\)\nの大小関係に言い換えています。\nこのように整理すると、\n\\(1\\)\n行ごとにマスの色を決める動的計画法により計算が行えます。\n\\(dp_{i, j}\\)\nを\n\\(i\\)\n行目までの色を確定させ、\n\\(A_i = j\\)\nであるときの操作回数の最小値とします。\n\\(dp_{i - 1, *} \\)\nの値から\n\\(dp_{i, *}\\)\nの値を求める計算順で答えを求めます。\n\\(i\\)\n行目の左から\n\\(j\\)\nマスを白く、残りのマスを黒く塗るために必要な操作回数を\n\\(D_{i, j}\\)\nとすると、\n\\(dp_{i, j} = D_{i, j} + \\displaystyle\\min_{j \\leq k \\leq N} dp_{i - 1, k}\\)\nです。\n上の式に従って愚直に dp の計算を行うと\n\\(\\Theta(N^3)\\)\n時間になってしまいますが、累積和を取るか\n\\(D_{i, j}\\)\nから\n\\(D_{i, j + 1}\\)\n（あるいは\n\\(D_{i, j - 1}\\)\n） が\n\\(O(1)\\)\n時間で求められることを利用することで\n\\(D_{i, j}\\)\nの列挙は高速にでき、後ろから累積 min を取ることで\n\\(\\displaystyle\\min_{j \\leq k \\leq N} dp_{i - 1, k}\\)\nは高速に列挙できます。したがって、全体で\n\\(O(N^2)\\)\n時間での計算が可能です。",
+      "codes": [],
+      "text_sha256": "75e5079e0c07e4968bcb1ba51abe92c1959cc6670092b96a5a50564b1f69c248",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc442/abc442_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc442/editorial/15150",
+      "text": "グリッドを左右反転することで「グリッドの右上側が白、グリッドの左下側が黒となるように塗り替える」という問題を考えます。\nそのような塗り方は白と黒の境界を考えることで「グリッドの左上の頂点から右下の頂点に至る経路」と1対1に対応します。\nよって問題は「グリッドの左上の頂点から右下の頂点まで右または下へ移動して至る経路について、以下で定まるコストの最小値を求めよ。『下方向の移動それぞれについて、その行で左側にある白マスの個数と右側にある黒マスの個数の和の合計』」となります。\nこれは各行について黒マスの個数の累積和を予め求めておくことで、\n\\(DP[i][j]=(i,j)\\)\nに至るまでのコスト、とするDPにより\n\\(O(N^2)\\)\nで求めることができます。\nサンプル2の例",
+      "codes": [],
+      "text_sha256": "ba31e5be0516220dfad634645df87b9b0b269b51a1e075167fcbd10cff9b7fab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc442/abc442_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

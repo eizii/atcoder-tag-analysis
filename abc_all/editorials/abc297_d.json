@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc297_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc297/editorial/6160",
+      "text": "問題文の操作をそのまま実装すると、\n\\(A=10^{18},B=1\\)\nなどのときに実行制限時間をオーバーしてしまいます。よって、何かしらの工夫が必要です。\nここで、以下のようにすることを考えます。ただし、始めに\n\\(A > B\\)\nになるように swap を行います。\n\\(B=0\\)\nになるまで以下を繰り返す。\n答えに\n\\(\\lfloor \\frac{A}{B} \\rfloor\\)\nを足し、\n\\(A\\)\nを\n\\(A \\bmod B\\)\nで置き換える。\n\\(A,B\\)\nを swap する。\n最後に答えから\n\\(1\\)\nを引く。\n元の操作での\n\\(A,B\\)\nの大小関係が同じ操作を一度にまとめて行っているということなので、上記で答えは正しく求まります。最後に\n\\(1\\)\nを引くのは、\n\\(A=B\\)\nとなったとき更に\n\\(1\\)\n回多く操作をしてしまうからです。\n上記のアルゴリズムの計算量を考えます。\n\\(A\\)\nを\n\\(A \\bmod B\\)\nで置き換えると、\n\\(A\\)\nが元の半分未満になることが分かります。\nよって、上記のアルゴリズムの計算量は\n\\(\\mathrm{O}(\\log A + \\log B)\\)\nです。これは十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main() {\n  long long a,b;\n  cin>>a>>b;\n  long long ans=0;\n  if(a<b) swap(a,b);\n  while(b>0){\n    ans+=a/b;\n    a%=b;\n    swap(a,b);\n  }\n  cout<<ans-1<<endl;\n}"
+      ],
+      "text_sha256": "180556e609962cab8802e5d68189fc5d3deafc78bd339200155a05c901472784",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc297/abc297_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

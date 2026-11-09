@@ -1,0 +1,57 @@
+{
+  "problem_id": "abc351_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc351/editorial/9877",
+      "text": "この問題は平面走査と呼ばれるアルゴリズムの基本問題です。この問題を解けなかった人は平面走査について学習するとよいでしょう。\n求めたい二重和は\n\\[\\sum_{i=1}^N \\sum_{i < j} \\max(A_j - A_i, 0)\\]\nです。ここで、\n\\(i\\)\nを固定したときの二重和への寄与は\n\\[\n\\begin{aligned}\n&\\sum_{i < j}\\max(A_j - A_i, 0) \\\\\n&= \\sum_{i < j, A_i \\leq A_j} A_j - A_i \\\\\n&= (i < j かつ A_i \\leq A_j である A_j の総和)  \\\\\n&- (i < j かつ A_i \\leq A_j である A_j の個数) \\times A_i \n\\end{aligned}\n\\]\nと言い換えることが出来ます。  この事実を利用すると、次の手順で平面走査をすることでこの問題を解くことが出来ます。\n次の 2 種類の値を管理するデータ構造を用意する。\n「要素の追加」「\n\\(x\\)\n以上の要素の個数」の 2 種類のクエリを処理できる多重集合\n\\(S_0\\)\n「要素の追加」「\n\\(x\\)\n以上の要素の総和」の 2 種類のクエリを処理できる多重集合\n\\(S_1\\)\nまた、答えを格納する変数\n\\(\\mathrm{ans}\\)\nを用意する。はじめ\n\\(\\mathrm{ans} = 0\\)\nとする。\n\\(i = N, N-1, \\dots, 2, 1\\)\nの順に次の処理を行う。\n\\(c\\)\nを\n\\(S_0\\)\nに\n\\(x = A_i\\)\nでクエリを投げたときの返り値とする。\n\\(s\\)\nを\n\\(S_1\\)\nに\n\\(x = A_i\\)\nでクエリを投げたときの返り値とする。\n\\(\\mathrm{ans}\\)\nに\n\\(s - c \\times A_i\\)\nを加算する。\n\\(S_0, S_1\\)\nに\n\\(A_i\\)\nを追加する。\n最終的な\n\\(\\mathrm{ans}\\)\nの値を出力する。\n\\(S_0, S_1\\)\nについては、座標圧縮した Fenwick Tree を持てば 1 回の処理あたり\n\\(\\mathrm{O}(\\log N)\\)\nの計算量で処理出来ます。\n以上よりこの問題を\n\\(\\mathrm{O}(N \\log N)\\)\nで解くことが出来て、これは十分高速です。\n実装例 (Python)",
+      "codes": [
+        "from atcoder.fenwicktree import FenwickTree\nimport bisect\n\nN = int(input())\nA = list(map(int, input().split()))\nB = sorted([x for x in set(A)])\nM = len(B)\nsum0 = FenwickTree(M)\nsum1 = FenwickTree(M)\nans = 0\nfor i in reversed(range(N)):\n    k = bisect.bisect_left(B, A[i])\n    c = sum0.sum(k, M)\n    s = sum1.sum(k, M)\n    ans += s - c * A[i]\n    sum0.add(k, 1)\n    sum1.add(k, A[i])\nprint(ans)"
+      ],
+      "text_sha256": "fd918f510b0c9264b0c7b1d4a2d5b6c49e5307d78e209f104d7a8dce969c4b64",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc351/abc351_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc351/editorial/9895",
+      "text": "この問題を分割統治法を適用して解きます。\n\\(\\sum_{1 \\le i < j \\le N} \\max(A_j-A_i,0)= \\sum_{1 \\le i < j \\le M} \\max(A_j-A_i,0) +  \\sum_{M+1 \\le i < j \\le N} \\max(A_j-A_i,0) + \\sum_{1 \\le i \\le M < j \\le N} \\max(A_j-A_i,0)\\)\nと分解して、始めの\n\\(2\\)\n項を再帰で処理します。最後の\n\\(1\\)\n項は\n\\(i,j\\)\nが独立に動かせるのでソートと尺取り法を用いることで\n\\(\\mathrm{O}(N \\log N)\\)\nで処理可能です。\n\\(M = \\frac{N}{2}\\)\nとすることを繰り返すことで、全体で\n\\(\\mathrm{O}(N \\log^2 N)\\)\nでこの問題を解くことが出来ます。\n実装例",
+      "codes": [],
+      "text_sha256": "4e87e58bb37edb4b02697fea55aebc3e4e42c58e17a9c20af76e4a07f2c8dc48",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc351/abc351_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc351/editorial/9903",
+      "text": "転倒数はマージソートしつつ数え上げる分割統治法で求めることができますが、その方法をこの問題に適用することを考えます。\n以下ざっくりとした説明です。増加列\n\\(L\\)\nと増加列\n\\(R\\)\nをマージしつつ、\n\\(\\sum_{y \\in L, x \\in R} \\max(y-x, 0)\\)\nを求めることを考えます。尺取り法をしながら\n\\(L\\)\nと\n\\(R\\)\nをマージするわけですが、ここでは「\n\\(R\\)\nの要素を指すポインタ\n\\(j\\)\nを1増やすごとに、\n\\(L\\)\nの要素を指すポインタ\n\\(i\\)\nを\n\\(L[i]<R[j]\\)\nが成り立つぎりぎりまで増やす」ことを繰り返すような実装で考えます。\nここで、\n\\(y=R[j]\\)\nで固定して考えると、\n\\[\\sum_{x \\in L} \\max(R[j]-x, 0) = \\sum_{0 \\leq t \\leq i} R[j]-L[t] = (i+1) \\times R[j] -  \\sum_{0 \\leq t \\leq i} L[t]\\]\nとなります。\n\\(L\\)\nの\n\\(i\\)\nまでの累積和を保持しつつ尺取り法を行えば、上記の和は\n\\(O(1)\\)\nで計算できます。\n全体の計算量は\n\\(O(N \\log N)\\)\nです。\npythonでの提出例 (350ms)",
+      "codes": [],
+      "text_sha256": "65f50bac305a217db4484ed98b198c631f802fd3b1b3e3d97696885b5982ce5a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc351/abc351_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc351/editorial/9897",
+      "text": "簡単のため、0-indexedで考えます。\nまず、目的の式を\n\\[\\displaystyle \\sum_{0\\le i < j< N}\\max(A_j-A_i,0) = \\sum_{0\\le i < j< N}\\left\\{ \\max\\left(A_j,A_i \\right)-A_i\\right\\} = \\sum_{0\\le i < j< N}\\max\\left(A_j,A_i \\right)-\\sum_{0\\le i < j< N}A_i\\]\nと式変形します。\nここで、一項目（maxの方）は全ての大きさ\n\\(2\\)\nのインデックスの集合\n\\(\\{i,j\\}\\)\nに対する\n\\(\\displaystyle \\max\\left(A_i,A_j\\right)\\)\nの総和と捉えられるので、この総和は\n\\(A\\)\nの順番によらないことがわかります。これにより、\n\\(A\\)\nを昇順にソートしたものを\n\\(B\\)\nとおくと、\n\\[\n\\begin{aligned}\n &\\phantom{=} \\sum_{0\\le i < j< N} \\max\\left(A_j,A_i \\right)\\\\\n&= \\sum_{0\\le i < j< N} \\max\\left(B_j,B_i \\right)\\\\\n&=\\sum_{0\\le i < j< N} B_j\\\\\n&=\\sum_{j=0}^{N-1} jB_j\n\\end{aligned}\n\\]\nとして求めることができます。\n一方、二項目（\n\\(A_i\\)\nの方）も同様に式変形をすると、\n\\[\n\\sum_{0\\le i < j< N} A_i=\\sum_{i=0}^{N-1} (N-1-i)A_i\n\\]\nとなるので、最終的に求める値は\n\\[\\sum_{i=0}^{N-1} iB_i -\\sum_{i=0}^{N-1} (N-1-i)A_i\\]\nと表すことができます。この値は配列のソートを用いることで簡単に求めることができます。\n以上でこの問題が解けました。計算量はソートがボトルネックとなり\n\\(O(N\\log N)\\)\nとなります。\n実装例(Python3)",
+      "codes": [
+        "N = int(input())\nA = list(map(int, input().split()))\nB = sorted(A)\nans = 0\nfor i in range(N):\n  ans += i * B[i]\n  ans -= (N - 1 - i) * A[i]\nprint(ans)"
+      ],
+      "text_sha256": "e57806d5fd44c584f817368608f15cefd7f88daa6ec56a671a798f9b711c9f0a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc351/abc351_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc351/editorial/9887",
+      "text": "公式解説\nは数列を右から左に走査していますが、小さい値から順に処理すると座標圧縮が不要になります。やはり二つの Fenwick Tree を用いますが、こちらでは単に\n\\(A\\)\nに対応させ、\n\\([0, 0, 0, \\dots, 0, 0]\\)\n（\n\\(0\\)\nが\n\\(N\\)\n個）から始めて処理済みの値を追加していきます。\n実装例（Python）",
+      "codes": [
+        "from atcoder.fenwicktree import FenwickTree\n\nN = int(input())\nA = list(map(int, input().split()))\n\nt0 = FenwickTree(N)\nt1 = FenwickTree(N)\n\nans = 0\nfor i, a in sorted(enumerate(A), key=lambda x: x[1]):\n    cnt = t0.sum(0, i)\n    tot = t1.sum(0, i)\n    ans += cnt * a - tot\n    t0.add(i, 1)\n    t1.add(i, a)\nprint(ans)"
+      ],
+      "text_sha256": "eea4cc313752b717b75408bab0ebc2c991515099ec09bc21bf02f12707bae479",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc351/abc351_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc130_b",
+  "editorials": [
+    {
+      "text": "B: Bounding\n実際にD1, D2, ..., DN+1 を漸化式に従って生成し、それぞれの要素がX 以下かどうか判定すればよいで\nす。時間計算量と空間計算量はO(N) です。\n実装例をソースコード2 に示します。\nListing 2\nBounding 実装例\n1 #include <bits/stdc++.h>\n2 using namespace std;\n3\n4 int main() {\n5\nint N, X; cin >> N >> X;\n6\nvector<int> D(N + 1);\n7\nD[0] = 0;\n8\nfor (int i = 0; i < N; ++i) {\n9\nint x; cin >> x;\n10\nD[i + 1] = D[i] + x;\n11\n}\n12\nint ans = 0;\n13\nfor (int i = 0; i <= N; ++i) {\n14\nif (D[i] <= X) {\n15\nans++;\n16\n}\n17\n}\n18\ncout << ans << endl;\n19\nreturn 0;\n20 }\n",
+      "text_sha256": "40fa1ae6659801e0c17eb71c23816a1e3a7aa7873e467599c24a0a85867bd7a3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc130/abc130_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

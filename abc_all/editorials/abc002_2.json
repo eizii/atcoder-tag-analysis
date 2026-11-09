@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc002_2",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc002/editorial.pdf",
+      "text": "B問題問題概要\n\n• 30文字以下の文字列が与えられる\n• 母音だけを除いて出力しなさい\n\f\n     B問題解説\n\n• まず文字列を標準入力で読み込む\n• 空の文字列をあらかじめ用意しておく\n  – String ret = “”; など\n• それぞれの文字に対し、子音のみを別の文\n 字列に付け加える\n  – If(子音かどうかの判定) ret += input[i]; など\n• 最後に、作成した文字列を出力する\n\f\n   B問題その他の解き方\n\n• 言語に組み込まれたreplace機能などを使っ\n て、a,i,u,e,oだけ取り除いてしまう\n• 判定後に別の文字列に格納するのではなく、\n １文字ずつ出力してしまい、最後に改行を出\n 力する",
+      "codes": [],
+      "source": "official_pdf_letter_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "745961ce8a5819d7557587a5d357193d0cc34bc4c8e1ba903cb90a9a175b7994"
+    }
+  ],
+  "status": "available"
+}

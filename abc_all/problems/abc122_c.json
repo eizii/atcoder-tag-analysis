@@ -1,0 +1,52 @@
+{
+  "problem_id": "abc122_c",
+  "title": "GeT AC",
+  "contests": [
+    {
+      "contest_id": "abc122",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 700,
+  "raw_difficulty": 700,
+  "contest_id": "abc122",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc122/tasks/abc122_c",
+  "statement": "配点 : 300 点 問題文 A , C , G , T からなる長さ N の文字列 S が与えられます。以下の Q 個の問いに答えてください。 問 i ( 1 \\leq i \\leq Q ): 整数 l_i, r_i ( 1 \\leq l_i < r_i \\leq N ) が与えられる。 S の先頭から l_i 文字目から r_i 文字目までの (両端含む) 部分文字列を考える。この文字列に AC は部分文字列として何回現れるか。 注記 文字列 T の部分文字列とは、 T の先頭と末尾から 0 文字以上を取り去って得られる文字列です。 例えば、 ATCODER の部分文字列には TCO , AT , CODER , ATCODER , (空文字列) が含まれ、 AC は含まれません。 制約 2 \\leq N \\leq 10^5 1 \\leq Q \\leq 10^5 S は長さ N の文字列である。 S の各文字は A , C , G , T のいずれかである。 1 \\leq l_i < r_i \\leq N 入力 入力は以下の形式で標準入力から与えられる。 N Q S l_1 r_1 : l_Q r_Q 出力 Q 行出力せよ。 i 行目に問 i への答えを出力すること。 入力例 1 8 3\r\nACACTACG\r\n3 7\r\n2 3\r\n1 8 出力例 1 2\r\n0\r\n3 問 1 : S の先頭から 3 文字目から 7 文字目までの部分文字列は ACTAC です。この文字列に AC は部分文字列として 2 回現れます。 問 2 : S の先頭から 2 文字目から 3 文字目までの部分文字列は CA です。この文字列に AC は部分文字列として 0 回現れます。 問 3 : S の先頭から 1 文字目から 8 文字目までの部分文字列は ACACTACG です。この文字列に AC は部分文字列として 3 回現れます。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 A , C , G , T からなる長さ N の文字列 S が与えられます。以下の Q 個の問いに答えてください。 問 i ( 1 \\leq i \\leq Q ): 整数 l_i, r_i ( 1 \\leq l_i < r_i \\leq N ) が与えられる。 S の先頭から l_i 文字目から r_i 文字目までの (両端含む) 部分文字列を考える。この文字列に AC は部分文字列として何回現れるか。"
+    },
+    {
+      "heading": "注記",
+      "text": "注記 文字列 T の部分文字列とは、 T の先頭と末尾から 0 文字以上を取り去って得られる文字列です。 例えば、 ATCODER の部分文字列には TCO , AT , CODER , ATCODER , (空文字列) が含まれ、 AC は含まれません。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 10^5 1 \\leq Q \\leq 10^5 S は長さ N の文字列である。 S の各文字は A , C , G , T のいずれかである。 1 \\leq l_i < r_i \\leq N"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q S l_1 r_1 : l_Q r_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 i 行目に問 i への答えを出力すること。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 8 3\r\nACACTACG\r\n3 7\r\n2 3\r\n1 8"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2\r\n0\r\n3 問 1 : S の先頭から 3 文字目から 7 文字目までの部分文字列は ACTAC です。この文字列に AC は部分文字列として 2 回現れます。 問 2 : S の先頭から 2 文字目から 3 文字目までの部分文字列は CA です。この文字列に AC は部分文字列として 0 回現れます。 問 3 : S の先頭から 1 文字目から 8 文字目までの部分文字列は ACACTACG です。この文字列に AC は部分文字列として 3 回現れます。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc122/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:34:40.986029+00:00",
+  "statement_sha256": "4a7df2cba3332d8dc9ffe52cc670414837c6b600e6b550509534c89efc151eb0",
+  "editorials": []
+}

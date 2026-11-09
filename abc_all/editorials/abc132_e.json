@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc132_e",
+  "editorials": [
+    {
+      "text": "E: Hopscotch Addict\n言い換えると、この問題で求めたい値は「有向グラフG = (V, E) 上の、S からT への（単純パスとは限ら\nない）路であって、路長が3 の倍数であるようなものの内、最短の長さ（を3 で割ったもの）」です。\nこれを計算するためには、以下のようにして構成したグラフG′ 上での最短経路問題を解けば良いです:\n1. G′ は頂点集合としてV ′ = {vt | v ∈V, t = 0, 1, 2} を持つ。すなわち、元のグラフG の状態数を“3 倍\n化” する。\n2. グラフG がu からv への辺を持つ時、G′ 上に3 辺u0 →v1, u1 →v2, u2 →v0 を張る。\nこうして構成されたG′ 上でのS0 からT0 への最短経路（すなわち単純パスで良い）の長さは上記の求めたい\n値に一致します。したがって、結局これは重みなし有向グラフ上の最短経路問題に帰着され、G′ の頂点数や\n辺数はG の高々定数倍であるため、BFS やDFS によってO(N + M) で解くことが可能です。\n",
+      "text_sha256": "fde17e0dc81b0e00507f7309731f4292cc3ed84c7d8d49b25bca647638bd958d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc132/abc132_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

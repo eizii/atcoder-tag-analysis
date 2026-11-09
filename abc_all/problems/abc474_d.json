@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc474_d",
+  "title": "Outweigh",
+  "contests": [
+    {
+      "contest_id": "abc474",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 389,
+  "raw_difficulty": 389,
+  "contest_id": "abc474",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc474/tasks/abc474_d",
+  "statement": "配点 : 400 点 問題文 N 種類の石 1,2,\\dots,N があり、同じ種類の石の重みはすべて同じです。 高橋君と青木君は石 i をそれぞれ A_i,B_i 個ずつ持っています。 以下の条件を満たすような正整数列 W=(W_1,W_2,\\dots,W_N) が存在するかどうかを判定し、存在するならば一つ構成してください。 1 \\leq W_i \\leq 10^{18} 石 i の重みが W_i のとき、高橋君が持っている石の重みの総和が青木君が持っている石の重みの総和よりも真に大きい。 制約 1 \\leq N \\leq 10^5 1 \\leq A_i \\leq 10^9 1 \\leq B_i \\leq 10^9 入力される値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N B_1 B_2 \\ldots B_N 出力 条件を満たすような W=(W_1,W_2,\\dots,W_N) が存在するならば以下の形式で出力せよ。 Yes W_1 W_2 \\ldots W_N 条件を満たすような W=(W_1,W_2,\\dots,W_N) が存在しないならば No を 1 行で出力せよ。 入力例 1 3\n4 7 4\n5 5 5 出力例 1 Yes\n4 7 4 W=(4,7,4) のとき、 高橋君が持っている石の重みの総和は 4 \\times 4 + 7 \\times 7 + 4 \\times 4=81 です。 青木君が持っている石の重みの総和は 4 \\times 5 + 7 \\times 5 + 4 \\times 5=75 です。 入力例 2 3\n3 3 3\n4 7 4 出力例 2 No 入力例 3 1\n2\n2 出力例 3 No",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 種類の石 1,2,\\dots,N があり、同じ種類の石の重みはすべて同じです。 高橋君と青木君は石 i をそれぞれ A_i,B_i 個ずつ持っています。 以下の条件を満たすような正整数列 W=(W_1,W_2,\\dots,W_N) が存在するかどうかを判定し、存在するならば一つ構成してください。 1 \\leq W_i \\leq 10^{18} 石 i の重みが W_i のとき、高橋君が持っている石の重みの総和が青木君が持っている石の重みの総和よりも真に大きい。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 10^5 1 \\leq A_i \\leq 10^9 1 \\leq B_i \\leq 10^9 入力される値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N B_1 B_2 \\ldots B_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 条件を満たすような W=(W_1,W_2,\\dots,W_N) が存在するならば以下の形式で出力せよ。 Yes W_1 W_2 \\ldots W_N 条件を満たすような W=(W_1,W_2,\\dots,W_N) が存在しないならば No を 1 行で出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\n4 7 4\n5 5 5"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\n4 7 4 W=(4,7,4) のとき、 高橋君が持っている石の重みの総和は 4 \\times 4 + 7 \\times 7 + 4 \\times 4=81 です。 青木君が持っている石の重みの総和は 4 \\times 5 + 7 \\times 5 + 4 \\times 5=75 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\n3 3 3\n4 7 4"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1\n2\n2"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 No"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc474/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:42:02.894006+00:00",
+  "statement_sha256": "70cf1da74503542617e8b849cb8cf342c109c425981eb131fe89f280bc5d0697",
+  "editorials": []
+}

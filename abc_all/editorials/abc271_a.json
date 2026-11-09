@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc271_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc271/editorial/4929",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\n本問は以下のようにして解くことが出来ます。\n\\(N\\)\nをちょうど\n\\(2\\)\n桁の\n\\(16\\)\n進表記に変換した場合において各桁の数字が\n\\(0,1,2,\\ldots,15\\)\nのどれになるかを求める。\n求めた数字を\n\\(16\\)\n進表記のもの(\n0123456789ABCDEF\n)に直して出力する。\n各桁の数字を求める\n「\n\\(N\\)\nをちょうど\n\\(2\\)\n桁の\n\\(16\\)\n進表記に変換した場合において各桁の数字が何になるかを求める」ということは、次のことに等しいです。\n\\(0\\)\n以上\n\\(16\\)\n未満の整数\n\\(a,b\\)\nであって、\n\\(N=16a+b\\)\nを満たすものを求める。\nそして、これは\n\\(a=\\lfloor \\frac{N}{16} \\rfloor, b=N \\bmod 16\\)\nとして求められます。C++では以下のように記述すれば良いです。\n数字を\n\\(16\\)\n進表記のものに直して出力\n\\(a,b\\)\nが\n\\(9\\)\n以下の場合はそのまま出力すれば良いです。\n\\(10\\)\n以上の場合は、\n\\(10\\)\nならば\nA\n、\n\\(11\\)\nならば\nB\n、\n\\(\\ldots\\)\nとしないといけませんが、C++では以下のように記述することで\n\\(a\\)\nに対応する英大文字を求められます。\n以上に基づき、\n\\(a,b\\)\nそれぞれについて場合分けをしながら出力を行えば所望の出力が得られます。\n実装例(C++)",
+      "codes": [
+        "a = N/16, b = N%16;",
+        "(char)('A' + (a-10))",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N;\n\tcin>>N;\n\t\n\tint a,b;\n\ta = N/16, b = N%16;\n\t\n\tif(a<=9)cout<<a;\n\telse cout<<(char)('A'+a-10);\n\t\n\tif(b<=9)cout<<b;\n\telse cout<<(char)('A'+b-10);\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "1c1e865aed869e574a1a49a536fd5fd69d1b7d38eba628d40af1bcef550ce2e3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc271/abc271_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc271/editorial/4946",
+      "text": "16進数での出力をサポートしている言語は多いため、そちらを利用すれば実装が簡便になります。\n書式指定は\n02X\nです。",
+      "codes": [
+        "#include<cstdio>\nusing namespace std;\nint main() {\n  int N;\n  scanf(\"%d\", &N);\n  printf(\"%02X\", N);\n}",
+        "import java.util.Scanner;\nimport static java.lang.System.out;\npublic class Main {\n  public static void main(String[] args) {\n    try (Scanner sc = new Scanner(System.in)) {\n      out.printf(\"%02X\", sc.nextInt());\n    }\n  }\n}",
+        "import java.util.Scanner\nfun main() {\n  Scanner(System.`in`).use { sc -> \n    println(\"%02X\".format(sc.nextInt()))\n  }\n}",
+        "print(\"{:02X}\".format(int(input())))"
+      ],
+      "text_sha256": "3da6db95c85d13664a2e3dff77de2969c5242a41f7bf760574588bb1d863a72f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc271/abc271_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc104_a",
+  "editorials": [
+    {
+      "text": "A: Rated for Me\nこの問題を解くには、以下の手順を踏む必要があります。\n0.（言語によっては不要）整数変数R を宣言する。\n1. 標準入力からR を受け取る。\n2. R から何らかの方法で答えとなる文字列を得る。\n3. 求めた文字列を標準出力に出力する。\n手順0, 1, 3 については、practice contest の問題A の言語別サンプルコードが参考になる（ほぼそのまま\n使える）でしょう。手順2 については、if, else などの構文を用いることになります。C++ による実装例を\n示します。\n1 #include <iostream>\n2 using namespace std;\n3 int main(){\n4\nint R;\n5\ncin >> R;\n6\nstring ans;\n7\nif(R < 1200){\n8\nans = \"ABC\";\n9\n}else if(R < 2800){\n10\nans = \"ARC\";\n11\n}else{\n12\nans = \"AGC\";\n13\n}\n14\ncout << ans << endl;\n15 }\n",
+      "text_sha256": "58056bb3aecc4cdbc7b760b0b8f70bc65c0004aa791de8c8e0e5a243c4c853f0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc104/abc104_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

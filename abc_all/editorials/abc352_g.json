@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc352_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc352/editorial/9921",
+      "text": "以下、 \\(S=A_1+A_2+\\dots+A_N\\) とおきます。まず、タンスから靴下を取り出す回数は鳩の巣原理より \\(N+1\\) 回以下です。 \\(i=1,\\dots,N+1\\) について、タンスから靴下を取り出す回数が \\(i\\) 回 以上 である確率を \\(P_i\\) とおきます。求める期待値は \\(P_1+P_2+\\dots+P_{N+1}\\) です。 簡単な証明 タンスから靴下を取り出す回数が \\(i\\) 回 ちょうど である確率を \\(Q_i\\) とおくと、求める期待値は \\(1\\cdot Q_1 + 2\\cdot Q_2 + \\dots + (N+1)\\cdot Q_{N+1}\\) です。 \\(Q_i=P_i-P_{i+1}\\) を用いてこの式を変形すると、 \\(P_1+P_2+\\dots+P_{N+1}\\) が得られます。 \\(P_{i+1}\\) は「タンスから靴下を \\(i\\) 枚取り出した段階でまだ同じ色の靴下の組が存在しない確率」と言い換えることができます。したがって、 \\(S\\) 枚の中から色が相異なる \\(i\\) 枚の靴下を選ぶ方法の数を \\(f_i\\) とおくと、 \\(P_{i+1}=\\frac{f_i}{\\binom{S}{i}}\\) です。 \\(\\binom{S}{0},\\binom{S}{1},\\dots,\\binom{S}{N}\\) を求めることは容易なため、あとは各 \\(i=0,1,\\dots,N\\) について \\(f_i\\) の値が求まれば良いことになります。 多項式 \\(F\\) を \\(\\displaystyle F=\\sum_{i=0}^{S} f_i x^i\\) と定義します。ここで、 \\[\\displaystyle f_i=\\sum_{1\\leq k_1 < k_2 < \\dots < k_i\\leq N} \\prod_{l=1}^{i} A_{k_l}\\] ですから、 \\(F_i=(1+A_ix)\\) と定義すると、 \\(F\\) は \\(F_1,F_2,\\dots,F_N\\) の総積になります。よって、本問題は以下の問題に帰着されます。 \\(1\\) 次多項式が \\(N\\) 個与えられるので、その総積を求めよ。 これは有名な問題であり、シンプルな分割統治法によって \\(O(N\\log^2 N)\\) で解くことができます。具体的には、 \\(f(l,r)\\) を \\(F_l,F_{l+1},\\dots,F_{r-1}\\) の総積と定義した上で、 \\(f(l,r) = f(l,m)\\times f(m,r)\\ (m=\\lfloor\\frac{l+r}{2}\\rfloor)\\) を用いて再帰的に解いていけばよいです。 \\(f(l,m)\\times f(m,r)\\) の計算に NTT を用いれば全体の計算量が \\(O(N\\log^2 N)\\) になります。 実装例 (C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\n#include <atcoder/convolution>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing mint = modint998244353;\n\n// \\prod_{i=l}^{r-1} (1+a[i]x)\nvector<mint> prod(const vector<int> &a, int l, int r) {\n    if (r - l == 1) return {1, a[l]};\n    int m = (l + r) / 2;\n    return convolution(prod(a, l, m), prod(a, m, r));\n}\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    int s = 0;\n    for (int &i: a) {\n        cin >> i;\n        s += i;\n    }\n    vector<mint> f = prod(a, 0, n);\n    mint ans = 0;\n    mint sCi = 1;\n    for (int i = 0; i <= n; i++) {\n        ans += f[i] / sCi;\n        sCi *= s - i;\n        sCi /= i + 1;\n    }\n    cout << ans.val() << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "13fb7a5c8b55871fc72ae46e362b00c28f66850b6f167fbc087de3c7d1cc4491"
+    }
+  ],
+  "status": "available"
+}

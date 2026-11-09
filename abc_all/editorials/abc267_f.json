@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc267_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc267/editorial/4714",
+      "text": "木の直径の両端の頂点を\n\\(L, R\\)\nとおきます。このとき、任意の頂点\n\\(u\\)\nに対し、\n\\(L,R\\)\nのいずれかは\n\\(u\\)\nから最も遠い点です。このことを背理法で示します。\n頂点\n\\(u, v\\)\nの距離を\n\\(d(u, v)\\)\nで表すことにする。ある頂点\n\\(A, B\\)\nが存在して、\n\\(d(A, B) \\gt \\max (d(A, L), d(A, R))\\)\nであると仮定する。\n\\(A\\)\nを根とした根付き木における、\n\\(L, R\\)\nの LCA を\n\\(a\\)\nとおく。同様に\n\\(B\\)\nに対して\n\\(b\\)\nを定める。直径において\n\\(L, a, b, R\\)\nはこの順に並んでいるとしてよい。このとき、\n\\(d(A, a) + d(a, b) + d(b, B) \\geq d(A, B) \\gt d(A, R) = d(A, a) + d(a, R)\\)\nから\n\\(d(a, b) + d(b, B) \\gt d(a, R)\\)\nとなり、\n\\(d(L, B) = d(L, a) + d(a, b) + d(b, B) \\gt d(L, a) + d(a, R) = d(L, R)\\)\nとなるので矛盾。\nよって、各クエリについて、\n\\(U_i\\)\nから\n\\(L\\)\nまでの最短パス上か、\n\\(U_i\\)\nから\n\\(R\\)\nまでの最短パス上の頂点のみを答えの候補として考えればよいです。\n「\n\\(U_i\\)\nから\n\\(X\\)\nに向かって距離\n\\(K_i\\)\nだけ進んだ頂点を求める」という問題は、頂点\n\\(X\\)\nを根とした根付き木における Level Ancestor Problem に帰着することができます。Level Ancestor Problem とは、\n\\(u, d\\)\nが与えられたとき、\n\\(u\\)\nの祖先であって深さが\n\\(d\\)\nであるものを求める問題です。\nクエリを先読みしておくことで、次のように解くことができます。\n根から DFS を行い、根から現在いる頂点までのパス上の頂点を管理する。これは DFS で頂点に入るときに配列の末尾に追加し、頂点から出るときに配列の末尾の頂点を取り除けばよい。\n\\(u\\)\nの祖先であって深さが\n\\(d\\)\nであるものは、\n\\(u\\)\nに入った時点で管理している頂点列の\n\\(d\\)\n番目の要素である。\n\\(L, R\\)\nを求めるには BFS や DFS を二回行えばよく、その後は\n\\(L, R\\)\nを根として Level Ancestor Problem を二回解けばよいので、元の問題を\n\\(O(N + Q)\\)\nで解くことができました。\n実装例 (C++)",
+      "codes": [],
+      "text_sha256": "cf811e176ecc9a4bc9e13a6d2cac44aa97c79304b4761ee77ebaa5a4c737b56f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc267/abc267_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc267/editorial/11227",
+      "text": "クエリ先読みをしなくとも解けます．直径の考察までは公式解説と同じです．するとクエリは以下の問題に帰着することができます．\n木における頂点 $U_i$ から頂点 $A$ までの距離が $K_i$ 以上か判定せよ．もし $K_i$ 以上ならば $U_i$ から $A$ に向かって $K_i$ 進んだ先の頂点の番号を求めよ．\n今回においては $A$ として考える候補は直径の端点の $2$ つのみで十分ですので，これをある程度高速に解ければ良いです．\nこのような問題は\nJump on Tree (Library Checker)\nと呼ばれています．\nクエリあたり $O(1)$ で解くこともできますが，一般的な LCA の構造を用いたクエリあたり $O (\\log N)$ 解法を紹介します．適当に根を取り， $O (N \\log N)$ などの前準備により $dp (i, j) := $ 頂点 $i$ から上に $2^j$ 進んだ先の頂点や各頂点の深さが分かっているとします．\n$U_i$ と $A$ の LCA を $l$ とします． $U_i$ から $l$ の距離を $d_1$ とし $l$ から $A$ の距離を $d_2$ とします． $d_1 + d_2 \\geq K_i$ とします．\n$K_i \\leq d_1$ のときは答えは $U_i$ から上に $K_i$ 進んだ先の頂点です．そうでないときは $A$ から上に $d_1 + d_2 - K_i$ 進んだ先の頂点です．\n$l, d_1, d_2$ の計算やある頂点から上に $d$ 進んだ頂点の計算などは $dp$ や各頂点の深さなどを用いて $O( \\log N)$ で計算できます．よって全体で $O ( \\log N)$ で計算できます．\n以上より，この問題は全体で $O ( (N + Q) \\log N)$ で解けます．\n実装例",
+      "codes": [],
+      "text_sha256": "f8ffa11f1b3775983cf09f6d58ffc1ce31ce7c8ccc27e038cd5b0cfa436ef166",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc267/abc267_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

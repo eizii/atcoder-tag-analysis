@@ -1,0 +1,55 @@
+{
+  "problem_id": "abc361_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc361/editorial/10358",
+      "text": "\\(x=1\\)\nとしたとき、\n\\(a=1\\)\nとすると任意の\n\\(2\\)\n以上の整数\n\\(b\\)\nについて\n\\(x=a^b\\)\nが成り立つため、\n\\(1\\)\nは問題文中の条件を満たします。\nこの特殊な事例は取り扱いづらいので、以降は\n\\(2\\)\n以上の整数であって条件を満たすものがいくつあるかを考えます。\nまず、もし整数\n\\(x\\)\nが\n\\(a^b\\)\nと表現されるなら、それがどのように表現されうるかを明らかにしましょう。\n例として、整数\n\\(x=64=2^6\\)\nを考えます。\n\\(x\\)\nは\n\\(a=2^3\\)\nとすることで、\n\\(a^2\\)\nの形で表現できます。\n\\(x\\)\nは\n\\(a=2^2\\)\nとすることで、\n\\(a^3\\)\nの形で表現できます。\n\\(x\\)\nは\n\\(a=2^1\\)\nとすることで、\n\\(a^6\\)\nの形で表現できます。\nもうひとつ、整数\n\\(x=2985984 = 2^{12} \\times 3^6\\)\nを考えます。\n\\(x\\)\nは\n\\(a=(2^6 \\times 3^3)\\)\nとすることで、\n\\(a^2\\)\nの形で表現できる。\n\\(x\\)\nは\n\\(a=(2^4 \\times 3^2)\\)\nとすることで、\n\\(a^3\\)\nの形で表現できる。\n\\(x\\)\nは\n\\(a=(2^2 \\times 3^1)\\)\nとすることで、\n\\(a^6\\)\nの形で表現できる。\nより一般に、\n\\(x\\)\nの素因数分解を\n\\(x=p^lq^mr^n \\dots\\)\nとしましょう。\n\\(l,m,n,\\dots\\)\nに共通する約数\n\\(k\\)\nをひとつ取ったとき、\n\\(a=p^{(l/k)}q^{(m/k)}r^{(n/k)} \\dots\\)\nとすることで、\n\\(a^k\\)\nの形で表現できる。\nこのことから、\n\\(g = \\gcd(l,m,n,\\dots)\\)\nとしたとき、\n\\(b\\)\nを\n\\(g\\)\nの\n\\(2\\)\n以上の約数としたとき、またその時に限って題意を満たす\n\\(x=a^b\\)\nの形での表現の方法が存在することが分かります。\n次に、\n\\(b\\)\nを決め打った時に\n\\(a\\)\nとしてありうる整数がいくつあるかを求めます。\n具体的には\n\\(a^b \\le N\\)\nを満たす最大の\n\\(a\\)\nを、全ての\n\\(b\\)\nについて求めればよいです。\n\\(2^{60} > 10^{18}\\)\nなので、この問題の制約下で\n\\(2 \\le b < 60\\)\nの範囲を考えれば十分です。\nこのもとで、各\n\\(b\\)\nについて\n\\(a\\)\nを二分探索すればよいです。\n注意として、\n\\(a^b\\)\nを求める際にオーバーフローしてしまう可能性があります。\nこの問題を回避するには、例えば\n\\(b\\)\nが小さいことを利用して\n\\(a^b\\)\nを求める際に愚直に\n\\(b\\)\n回ループを回して\n\\(b\\)\n乗を試みながら、一度\n\\(a\\)\nを掛けるごとに先に double 型等で値の大きさを見積もって十分大きくなったら打ち切るというような実装をすればよいです。\n\\(a^b\\)\nの形で表現できる整数の個数が\n\\(b=2,3,\\dots,59\\)\nの全てで出揃ったところで、これらを漏れなく重複なく足し合わせましょう。\n約数系包除原理\nを使って足し合わせます。\nある整数\n\\(x\\)\nの素因数分解を\n\\(x=p^lq^mr^n \\dots\\)\nとすると、\n\\(b\\)\nを\n\\(g=\\gcd(l,m,n,\\dots)\\)\nの\n\\(2\\)\n以上の約数としたとき、またその時に限って題意を満たす\n\\(x=a^b\\)\nの形での表現の方法が存在することは先ほど示しました。\nここで、\n\\(g\\)\nの素因数分解を\n\\(P^LQ^MR^N \\dots \\)\nとします。以下のようにすると、\n\\(x\\)\nをちょうど一度だけ数えることができます。\n\\(b=P, Q, R, \\dots\\)\n(\n\\(b\\)\nが\n\\(g\\)\nの素因数\n\\(1\\)\nつの積である ) の場合を足す。\n\\(b=PQ, PR, \\dots, QR, \\dots\\)\n(\n\\(b\\)\nが\n\\(g\\)\nの素因数\n\\(2\\)\nつの積である ) の場合を引く。\n\\(b=PQR, \\dots\\)\n(\n\\(b\\)\nが\n\\(g\\)\nの素因数\n\\(3\\)\nつの積である ) の場合を足す。\n\\(\\vdots\\)\nこのことの証明は通常の包除原理と同様に行うことができます。\nよって、結局以下のようにすると条件を満たす整数の数を漏れなく重複なく求めることができます。\n\\(b\\)\nに平方因子が含まれる (\n\\(b\\)\nが同じ素因数を複数含む ) 場合、無視する。\nそうでなく\n\\(b\\)\nに素因数が奇数個含まれる場合、足す。\nそうでなく\n\\(b\\)\nに素因数が偶数個含まれる場合、引く。\n以上を実装することで、この問題に\n\\(O(\\log^3 N)\\)\nといった時間計算量で正解できます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nvector<long long> pfact(long long x){\n  vector<long long> res;\n  for(long long i=2;i*i<=x;i++){\n    while(x%i==0){\n      res.push_back(i);\n      x/=i;\n    }\n  }\n  if(x>1){res.push_back(x);}\n  return res;\n}\n\nlong long safe_pow(long long a,long long b){\n  long long res=1;\n  for(long long i=0;i<b;i++){\n    double dres=res;\n    dres*=a;\n    if(dres>2e18){return 2e18;}\n    res*=a;\n  }\n  return res;\n}\n\nint main(){\n  long long n;\n  cin >> n;\n  long long res=0;\n  for(long long b=2;b<60;b++){\n    long long l=2,r=2e9;\n    while(l<=r){\n      long long t=(l+r)/2;\n      if(safe_pow(t,b)>n){r=t-1;}\n      else{l=t+1;}\n    }\n    // a = [2,r] satisfy a^b <= n\n    vector<long long> pf=pfact(b);\n    bool same=false;\n    for(long long i=1;i<pf.size();i++){\n      if(pf[i-1]==pf[i]){same=true; break;}\n    }\n    if(same){continue;}\n    if(pf.size()%2){res+=(r-1);}\n    else{res-=(r-1);}\n  }\n  res++; // count 1\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "b028b70ba925bfd614df09d0dd49b527a7b7d7a76bed734bb0cd2f732f82caab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc361/abc361_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc361/editorial/10359",
+      "text": "少し力づくな解法をしてみましょう。\nサンプル2 から読み取れる通り、条件を満たす整数として考えるべきは 1001003332 個です。\nまた、\n\\((10^9)^2 = 10^{18}\\)\nなので、このうち\n\\(10^9\\)\n個は\n\\(a^2\\)\nの形で表現できます。\nよって、\n\\(a^2\\)\nの形で表現できない条件を満たす整数は\n\\(10^6\\)\n個程度しかありません。なので、これらを予め全列挙した上で\n\\(a^2\\)\nの形で表現できる整数の個数を足すことでこの問題に正解できます。\nこの全列挙は\n\\(b=3,4,\\dots,59\\)\nに対して行ったうえで\n\\(a^b > N\\)\nとなった時点で打ち切ればよく、ある整数\n\\(x\\)\nが\n\\(a^2\\)\nの形で表現できるかの判定は\n\\(( \\lfloor \\sqrt{x} \\rfloor )^2=x\\)\nかどうかで判定すればよいです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nlong long safe_pow(long long a,long long b){\n  long long res=1;\n  for(long long i=0;i<b;i++){\n    double dres=res;\n    dres*=a;\n    if(dres>2e18){return 2e18;}\n    res*=a;\n  }\n  return res;\n}\n\nlong long sqrt_floor(long long x){\n  long long l=0,r=2e9;\n  while(l<=r){\n    long long t=(l+r)/2;\n    if(t*t>x){r=t-1;}\n    else{l=t+1;}\n  }\n  return r;\n}\n\nint main(){\n  long long n;\n  cin >> n;\n  set<long long> st;\n  for(long long b=3;b<60;b++){\n    for(long long a=2;;a++){\n      long long x=safe_pow(a,b);\n      if(x>n){break;}\n      long long s=sqrt_floor(x);\n      if(s*s!=x){st.insert(x);}\n    }\n  }\n  long long res=st.size();\n  res+=sqrt_floor(n);\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "0ea1dbedf263856e44ccd34022db789d5ad561a7b89e04e2ae946f1f2278bb7f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc361/abc361_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc361/editorial/10369",
+      "text": "\\(1\\)\nは条件を満たします。それ以外で条件を満たす数が何個あるかを考えます。\n\\(2\\)\n以上の正整数\n\\(c, d\\)\nを用いて、\n\\(a = c ^ {d}\\)\nと\n表せない\n\\(2\\)\n以上\n\\(N\\)\n以下の整数\n\\(a\\)\nを\n悪い整数\nとします。\n悪い整数\n全てにおいて、\n\\(\\lfloor\\log_{a}(N)\\rfloor - 1\\)\nの総和が求まれば良いです。\n\\(N < a^{2}\\)\nのときは、\n\\(\\lfloor\\log_{a}(N)\\rfloor - 1 = 0\\)\nです。\n\\(a ^{2} \\leq N < a^{3}\\)\nのときは、\n\\(\\lfloor\\log_{a}(N)\\rfloor - 1 = 1\\)\nです。\nよって、\n\\(a ^{3}\\leq N\\)\nを満たす全ての\n悪い整数\nにおいて、\n\\(\\lfloor\\log_{a}(N)\\rfloor - 1\\)\nの総和を求めた後、\n\\(a ^{2} \\leq N < a^{3}\\)\nを満たす\n悪い整数\nの総数を求めることができれば良いです。\nこれは、\n\\(a ^{2} \\leq N < a^{3}\\)\nを満たす整数が\n\\(a = c ^ {d}\\)\nと表せるとき、\n\\(c < a ^ {1.5} < a^{2}\\)\nを満たすことから、\n\\(2 < c ^{3}\\leq N\\)\nを満たす整数\n\\(c\\)\nを全探索すれば良いです。\nより正確な記述は実装例をご覧ください。\nstd::vector good\nという配列で、\n\\(\\sqrt[3]{N}\\)\n以下の整数が\n悪い整数\nか否かを管理しています。\n計算量は\n\\(O(N ^{\\frac{1}{3}})\\)\nに近いとは思いますが、正しくはわかりません。\n実装例 c++ 11ms",
+      "codes": [],
+      "text_sha256": "ff511b9907c2e4eeb21e3283d2c76096f2f11d73eca8d8cc834193090f4f4496",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc361/abc361_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc361/editorial/10370",
+      "text": "問題は次のように言い換えられます：\n\\(1\\)\n以上\n\\(N\\)\n以下の整数\n\\(x\\)\nで，\n\\(x^{1/b}\\)\nが整数となるような正整数\n\\(b\\)\nの最大値が\n\\(2\\)\n以上のものはいくつありますか？\nただし\n\\(x=1\\)\nも数え入れるものとします．\n次のように記号を定めます：\n\\(2\\)\n以上の整数\n\\(x\\)\nに対し，\n\\(x^{1/b}\\)\nが整数となるような正整数\n\\(b\\)\nの最大値を\n\\(g(x)\\)\nとする．\n正整数\n\\(n\\)\nおよび\n\\(2\\)\n以上の整数\n\\(k\\)\nに対し，整数\n\\(x\\ (\\red{2}\\leq x\\leq n)\\)\nのうち\n\\(g(x)=k\\)\nを満たすものの個数を\n\\(f_k(n)\\)\nとする．\n\\(F(n)\\coloneqq\\sum_{k\\geq 2}f_k(n)\\)\n．\nこのとき元の問題の答えは\n\\(1+F(N)\\)\nです．\n整数\n\\(x\\ (2\\leq x\\leq n)\\)\nのうち\n\\(x^{1/k}\\)\nが整数となるものは\n\\[2^k,3^k,\\dots,\\lfloor n^{1/k}\\rfloor^k\\]\nの\n\\(\\lfloor n^{1/k}\\rfloor-1\\)\n個です．\nこのような\n\\(x\\)\nに対して素因数分解を考えれば\n\\(g(x)>k\\iff g(x^{1/k})>1\\)\nであるので，\n\\(g(x)>k\\)\nである\n\\(x\\)\nの総数は\n\\[2,3,\\dots,\\lfloor n^{1/k}\\rfloor\\]\nのうち\n\\(g(\\cdot)>1\\)\nであるものの総数，すなわち\n\\(\\sum_{l\\geq 2}f_l(\\lfloor n^{1/k}\\rfloor)=F(\\lfloor n^{1/k}\\rfloor)\\)\nと一致します．\n従って次の等式が得られます：\n\\[f_k(n)=\\lfloor n^{1/k}\\rfloor-1-F(\\lfloor n^{1/k}\\rfloor)\\]\nこれを\n\\(k\\geq 2\\)\nに対して足し合わせれば次を得ます．\n\\[F(n)=\\sum_{k\\geq 2}\\left(\\lfloor n^{1/k}\\rfloor-1-F(\\lfloor n^{1/k}\\rfloor)\\right)\\]\n\\(k>\\log_2n\\)\nならば\n\\(\\lfloor n^{1/k}\\rfloor=1\\)\nであることと\n\\(F(1)=0\\)\nに注意すれば，上の式からメモ化再帰などで実装できます．\n計算量については\n\\(F(N)\\)\nを計算するために必要な値は\n\\(F(\\lfloor N^{1/k}\\rfloor)\\)\nの形のもののみなので\n\\(O((\\log N)^2)\\)\nなどになります．",
+      "codes": [],
+      "text_sha256": "81179574945fec35160fe0f7f82a96ccd4a1196f0b5f6e3ec760cdc3d2f9dc82",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc361/abc361_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc361/editorial/10377",
+      "text": "包除原理を使わず直接的に係数を求める方法を紹介します。\n\\(1\\)\nは必ず条件を満たすので、\n\\(2\\)\n以上で条件を満たすものを数えます。「\n\\(k\\)\n乗数」を、ある整数\n\\(a\\)\nに対して\n\\(a^k\\)\nの形で表せる整数とします。「ちょうど\n\\(k\\)\n乗数」を「\n\\(k\\)\n乗数であり、かつ\n\\(2 \\le l<k\\)\nに対して\n\\(l\\)\n乗数ではない数」とします。\n\\(2\\)\n以上\n\\(N\\)\n以下の\n\\(k\\)\n乗数の個数を\n\\(f(k)\\)\n（\n\\(= \\lfloor\\sqrt[k]{N}\\rfloor-1\\)\n）、\n\\(2\\)\n以上\n\\(N\\)\n以下のちょうど\n\\(k\\)\n乗数の個数を\n\\(g(k)\\)\nとすると、求めるものは\n\\(\\displaystyle\\sum_{k=2}^{\\infty} g(k)\\)\nです（制約から、\n\\(k\\)\nは\n\\(60\\)\n程度まで見れば十分です）。\nまた\n\\(f(k)=g(k) + g(2k) + g(3k) + \\cdots\\)\nです。\n\\(f(k)\\)\nたちに適当な係数をかけて足し合わせることで、\n\\(g(k)\\)\nたちの係数がすべて\n\\(1\\)\nになるようにしたいですが、これは\n\\(k\\)\nの昇順に決めていけば自然に決まります。\nAC コード（Python3）",
+      "codes": [],
+      "text_sha256": "fa42fce2c74f3612d8f4588349d5556154bd38706cf343bdaaec26d81acad7a5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc361/abc361_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

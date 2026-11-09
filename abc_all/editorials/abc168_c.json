@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc168_c",
+  "editorials": [
+    {
+      "text": "C: : (Colon)\n2 端点の座標を求めてからその距離を計算するのは面倒です．これを使ってみましょう:\n余弦定理\n三角形ABC について，a2 = b2+c2−2bc cos ∠A が成り立つ．ここで，a, b, c は|BC|, |CA|, |AB|\nのことを指す．\nB\nA\nC\nc\nb\na\n∠A\n時針・分針の長さをb, c, 時針・分針の間の角度を∠A として上の式に代入すれば，求める長さ(の\n2 乗) が求まります．角度については，「時針がH + M\n60 時間で動いた角度」から「分針がM 分で動\nいた角度」を引けばよいです(C++ 標準のcos 関数の場合，mod をとる必要はありません)．\nListing 4\nC での実装例\n1 #include <stdio.h>\n2 #include <math.h>\n3\n4 #define PI 3.14159265358979323846264338327950L\n5\n6 int main(void) {\n7\nint a, b, h, m;\n8\nscanf(\"%d%d%d%d\", &a, &b, &h, &m);\n9\n10\nlong double rad = PI * 2 * (\n11\n(long double)h / 12.0 + ((long double)m / 60.0) / 12.0 - (long\ndouble)m / 60.0);\n12\n13\nlong double rsq = (long double)(a * a + b * b) - (long double)(2 * a *\nb) * cosl(rad);\n14\n15\nprintf(\"%20.20Lf\\n\", sqrtl(rsq));\n16\n17\nreturn 0;\n18 }\n",
+      "text_sha256": "696e8a894d3d45f920b9bf5fd19284692697d8f6c95f61e883790baa56742218",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc168/abc168_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc209_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc209/editorial/2226",
+      "text": "以下のような場合分けをしてみましょう。\n\\(A>B\\)\nのとき\n答えは明らかに\n\\(0\\)\nです。\n\\(A \\leq B\\)\nのとき\n\\(A\\)\n以上\n\\(B\\)\n以下の整数は\n\\(A,A+1, \\ldots ,B\\)\nの計\n\\((B-A+1)\\)\n個です。\nよって以下のようなプログラムを書くと AC が得られます。\n実装例 (Python)\nなお、場合分けをせずに以下のように書くことも可能です。\n実装例 (C++)",
+      "codes": [
+        "A,B = map(int,input().split())\nif A>B:\n    print(0)\nelse:\n    print(B-A+1)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint A,B; cin >> A >> B;\n\tcout << max(0,B-A+1) << endl;\n}"
+      ],
+      "text_sha256": "23be7f6b2d9cf9c00f7fe140361f807374b17f1159d8f3ee29aa27643b526c6b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc209/abc209_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

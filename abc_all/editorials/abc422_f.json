@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc422_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc422/editorial/13819",
+      "text": "各頂点の寄与を考えることで、次のような問題に言い換えることができます。 高橋くんは「移動できる券」をいくつか持って移動を開始する。 頂点 \\(v\\) に訪れたとき、持っている「移動できる券」の枚数を \\(n\\) として \\(nW _ v\\) の燃料を消費する。 辺を移動するとき、「移動できる券」を \\(1\\) 枚手放す。 はじめに持っている「移動できる券」の枚数および移動の仕方を適切に決めることで、頂点 \\(1\\) に訪れてから頂点 \\(i\\) まで移動するのに消費する燃料の量を最小化せよ。 最適な移動において高橋くんが同じ頂点に \\(2\\) 度訪れないことから（\\(2\\) 度以上訪れる頂点 \\(v\\) に対して、初めて \\(v\\) を訪れる直前から最後に \\(v\\) を訪れて以降まで移動を飛ばすことで消費を少なくすることができます）、移動できる券はたかだか \\(N-1\\) 枚持っていればよいです。 頂点 \\(v\\) と残っている移動できる券の枚数 \\(n\\) の組 \\((v,n)\\) を頂点として、次のような重み付き有向辺を張った新たなグラフを考えます。 もとのグラフの辺 \\((u,v)\\) および \\(1\\le n\\le N-1\\) に対して、\\((u,n)\\) から \\((v,n-1)\\) へ伸びる重み \\(nW _ u\\) の辺 このようなグラフにおける \\((1,n)\\ (0\\le n\\le N-1)\\)  から \\((i,0)\\) への最短距離を求められればよいです。 このグラフは DAG になっているので、適切な順序で計算を行うことで時間計算量 \\(O(NM)\\) 、空間計算量 \\(O(N)\\) などの DP で所望の値をすべて求めることができます。\nDijkstra 法を用いると時間計算量が \\(O((NM+N ^ 2)\\log N)\\) や \\(O(NM+N ^ 2\\log N)\\) などになりますが、高速な言語で適切に実装することで実行時間制限に間に合うかもしれません。 実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <limits>\n#include <ranges>\n\nint main() {\n    using namespace std;\n    unsigned N, M;\n    cin >> N >> M;\n    vector<unsigned> W(N);\n    for (auto&& w : W)\n        cin >> w;\n\n    vector<pair<unsigned, unsigned>> edges(M);\n    for (auto&& [u, v] : edges) {\n        cin >> u >> v;\n        --u;\n        --v;\n    }\n\n    constexpr auto inf{numeric_limits<unsigned long>::max() / 2};\n    // DP テーブルを十分大きな値で初期化しておく\n    vector<unsigned long> dp(N, inf), prev(N, inf);\n    dp[0] = 0;\n\n    // 持っている券の枚数の降順に計算を行う\n    for (const auto i : views::iota(1U, N) | views::reverse) {\n        swap(dp, prev);\n        dp[0] = 0;\n        for (const auto& [u, v] : edges) {\n            dp[u] = min(dp[u], prev[v] + static_cast<unsigned long>(W[v]) * i);\n            dp[v] = min(dp[v], prev[u] + static_cast<unsigned long>(W[u]) * i);\n        }\n    }\n\n    for (const auto v : dp)\n        cout << v << endl;\n\n    return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "bc46dd0245ff08f24738bf0e658040a6e5c16f620e93b5d6b3e8cc46f4112fbc"
+    }
+  ],
+  "status": "available"
+}

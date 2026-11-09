@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc292_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5900",
+      "text": "この問題はいくつかの方針が考えられる問題です。制約が十分小さいため、基本的には問題文のルールを理解した上で実装すればどのような解法でも AC することができると思います。\n例えば、シンプルなアルゴリズムとして次の手順が考えられます。\n過去のイベントを保存するリスト\n\\(v\\)\nを用意する。\n\\(v\\)\nははじめ空である。\n\\(i = 1, 2, \\dots, N\\)\nの順に次の操作を行う。\n\\(i\\)\n番目のイベント\n\\((c_i, x_i)\\)\nを受け取る。\n\\(c_i\\)\nの値によって場合分けを行う。\n\\(c_i=1,2\\)\nの場合何もしない。\n\\(c_i = 3\\)\nの場合、\n\\(i-1\\)\n番目までのイベントを\n\\(v\\)\nを走査して全て調べて、人\n\\(x_i\\)\nに出されたイエローカード・レッドカードの枚数をカウントする。そして、カードの枚数が退場処分を受ける条件を満たしていれば\nYes\nを、そうでなければ\nNo\nを出力する。\nその後、\n\\((c_i, x_i)\\)\nを\n\\(v\\)\nに追加する。\nこのアルゴリズムは、\n\\(i\\)\n回目のクエリの時に\n\\(i-1\\)\n個のイベントを走査するため、走査の部分のステップ数は最大で\n\\(\\sum_{i=1}^Q (i-1) = \\frac{Q^2-Q}{2}\\)\nステップになります。よって計算量は\n\\(\\mathrm{O}(Q^2)\\)\nです。\n上記のアルゴリズムでも AC するのに十分高速ですが、もう少し工夫すると計算量を\n\\(\\mathrm{O}(N + Q)\\)\nに改善することができます。\n計算量を改善する方法として、それぞれの人について「イエローカードを何枚持っているか？」「退場処分を受けたか？」をメモする配列を用意して、イベントが起こるたびに配列を更新する方針が考えられます。これによって質問のたびに過去のイベントをすべて調べる必要が無くなり高速化することができます。\n具体的には、次の手順を実装すればよいです。\n「人\n\\(x\\)\nはイエローカードを何枚もらったか？」を意味する長さ\n\\(N\\)\nの配列\n\\(y\\)\nと「人\n\\(x\\)\nは退場処分を受けたか？」を意味する長さ\n\\(N\\)\nの配列\n\\(r\\)\nをあらかじめ用意する。\n\\(y\\)\nは\n\\(0\\)\nで、\n\\(r\\)\nは false で初期化されている。\n\\(i = 1, 2, \\dots, N\\)\nの順に次の操作を行う。\n\\(i\\)\n番目のイベント\n\\((c_i, x_i)\\)\nを受け取る。\n\\(c_i\\)\nの値によって場合分けを行う。\n\\(c_i = 1\\)\nの場合、\n\\(y[x]\\)\nに\n\\(1\\)\nを加算する。そして加算したあとの\n\\(y[x]\\)\nが\n\\(2\\)\nだった場合、人\n\\(x\\)\nは退場処分の条件を満たすので\n\\(r[x]\\)\nを true にする。\n\\(c_i = 2\\)\nの場合、人\n\\(x\\)\nは退場処分の条件を満たすので\n\\(r[x]\\)\nを true にする。\n\\(c_i = 3\\)\nの場合、\n\\(r[x]\\)\nの値が true ならば\nYes\n, falseならば\nNo\nを出力する。\n計算量は\n\\(\\mathrm{O}(N + Q)\\)\nです。この方針だと\n\\(N, Q \\leq 10^5\\)\nでも高速に動くプログラムを作ることができます。\n実装例(C++)\nBonus (C 問題相当) :\n\\(N = 10^{18}, Q = 10^5\\)\nの場合も高速に動作する方針を考えてみましょう。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\nint main() {\n  int N, Q;\n  cin >> N >> Q;\n  vector<int> r(N + 1), y(N + 1);\n  while (Q--) {\n    int cmd, x;\n    cin >> cmd >> x;\n    if (cmd == 1) {\n      y[x]++;\n      if (y[x] == 2) r[x] = 1;\n    } else if (cmd == 2) {\n      r[x] = 1;\n    } else {\n      cout << (r[x] ? \"Yes\" : \"No\") << endl;\n    }\n  }\n}"
+      ],
+      "text_sha256": "aa6d8e25d6757399b693c258299db25b77ce9c0cc3db3115a7ea6ba2daaaa59d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc292/abc292_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc292/editorial/5928",
+      "text": "Bonus の解説を書きます。\n公式解説では vector で持っていた各選手の状態を map で持てば良いです。もしくは「座圧」と呼ばれるテクニックを使って問題に関連する高々\n\\(Q\\)\n人の選手に新しく\n\\(1,2, \\cdots\\)\nと番号を割り振れば良いです。\nどちらの解法でも計算量は\n\\(O \\left( Q \\log Q \\right)\\)\nです。\nなお、「退場処分を受けた」ことは「イエローカードを\n\\(2\\)\n枚もらった」ことと同値なので選手の状態を管理する vector ないし map を\n\\(1\\)\nつにすることができます。",
+      "codes": [],
+      "text_sha256": "f1bfc9e1d482489f0cae824fd2bd63bcd0c7d1580bf785f1319a5907d9af26ac",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc292/abc292_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

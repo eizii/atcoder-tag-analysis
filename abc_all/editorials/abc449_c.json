@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc449_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc449/editorial/17256",
+      "text": "\\(j\\)\nを固定して答えを数え上げることを考えます。\n\\(j - R \\leq i \\leq j - L\\)\nかつ\n\\(S_i = S_j\\)\nを満たす\n\\(i\\)\nの個数が求まればよいです。これは、各英小文字について出現頻度の回数の累積和を前計算しておくと求めることができます。具体的には、\n\\(A_{c, k}\\)\nを\n\\(1,2,\\ldots, k\\)\n文字目の英小文字\n\\(c\\)\nの出現回数とすると、求めるべき\n\\(i\\)\nの個数は\n\\(A_{S_j, \\max(j - L,0)} - A_{S_j, \\max(j - R - 1,0)}\\)\nとなります。\n上の解法は文字種を\n\\(\\sigma\\)\nとして\n\\(O(\\sigma N)\\)\n時間になりますが、\n\\(O(\\sigma + N)\\)\n時間で解くこともできます。常に\n\\(j - R \\leq i \\leq j - L\\)\nの範囲での\n\\(S_i\\)\nの頻度配列を管理しておき、\n\\(j = 1, 2, ..., N\\)\nの順に差分更新しながら計算します。\n\\(j\\)\nが\n\\(1\\)\n増えたとき、集計するべき範囲の変化は\n\\(O(1)\\)\nです。したがって、頻度配列全体を持ちながら更新していくことで計算していくことができます。下の実装例も参考にしてください。\n実装例（差分更新）",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n\tint n, l, r;\n\tcin >> n >> l >> r;\n\tr++;\n\tstring s;\n\tcin >> s;\n\tll ans = 0;\n\tvector<int> cnt(26);\n\tfor (int i = 0; i < n; i++) {\n\t\tif (i >= l) cnt[s[i - l] - 'a']++;\n\t\tif (i >= r) cnt[s[i - r] - 'a']--;\n\t\tans += cnt[s[i] - 'a'];\n\t}\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "ed64f505b44c20e9b5cf84fe8f095f417aa57dea5913262ce01888987a7eacfa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc449/abc449_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

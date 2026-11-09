@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc230_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc230/editorial/3008",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\nまず、問題文を正確に読解すると、出力するべき数は\n\\(N \\lt 42\\)\nのとき：\n\\(N\\)\n\\(42 \\leq N\\)\nのとき :\n\\(N + 1\\)\nとなります。これは if 文を使用するか、\n\\(N \\geq 42\\)\nのときに\n\\(N\\)\nをインクリメントすることで場合分けに対応することができます。\nあとは\n\\(3\\)\n桁になるようにゼロ埋め (zero-padding) を行うことができれば問題の指示通りの文字列を出力することができます。  これは、たとえば C++ 言語では iomanip ライブラリにある\nstd::setfill 関数(日本語)\nや\nstd::setw 関数(日本語)\nを用いて\nのように記述すれば簡潔にゼロ埋めを記述することができます。また、別解として\nのように条件分岐を用いて実装しても問題ないです。\n以上の説明通りに実装することでこの問題を解くことができます。\nC++ での実装例は以下の通りです。",
+      "codes": [
+        "cout << setfill('0') << setw(3) << N;",
+        "if(N < 100) cout << \"0\";\nif(N < 10) cout << \"0\";\ncout << N;",
+        "#include <iomanip>\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n  int N;\n  cin >> N;\n  if (N >= 42) N++;\n  cout << \"AGC\";\n  cout << setfill('0') << setw(3) << N;\n  cout << endl;\n}"
+      ],
+      "text_sha256": "7d53417a35e44fcf2926bf133c5e6135fc114371427f42959ff66a09b380c8a6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc230/abc230_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

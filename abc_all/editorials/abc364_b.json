@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc364_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc364/editorial/10544",
+      "text": "現在高橋君がいるマスを管理しながら、ルールに従って行動をシミュレートすればよいです。\n上下左右のマスが存在するかの判定のためには、現時点で上下左右の端にいるかの判定を行うか、下記の実装例のように移動先がグリッドの範囲内にあるかの判定を行うなどの方法があります。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint h, w;\n\tcin >> h >> w;\n\tint si, sj;\n\tcin >> si >> sj;\n\tsi--; sj--;\n\tvector<vector<char>> c(h, vector<char>(w));\n\tfor (int i = 0; i < h; i++) for (int j = 0; j < w; j++) cin >> c[i][j];\n\tstring x;\n\tcin >> x;\n\tfor (char o : x) {\n\t\tint ni = si, nj = sj;\n\t\tif (o == 'L') nj--;\n\t\telse if (o == 'R') nj++;\n\t\telse if (o == 'U') ni--;\n\t\telse ni++;\n\t\tif (0 <= ni && ni < h && 0 <= nj && nj < w && c[ni][nj] == '.') {\n\t\t\tsi = ni, sj = nj;\n\t\t}\n\t}\n\tcout << si + 1 << ' ' << sj + 1 << '\\n';\n}"
+      ],
+      "text_sha256": "e1a73c56ab1b0b917fe00283081398e1615965a3ad7974ce169bce374a8d4991",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc364/abc364_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

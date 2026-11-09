@@ -1,0 +1,40 @@
+{
+  "problem_id": "abc263_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4541",
+      "text": "\\(S_{N,M}\\)\nを長さ\n\\(N\\)\nかつ全ての要素が\n\\(1\\)\n以上\n\\(M\\)\n以下の狭義単調増加である整数列の集合とします。\nまず、\n\\(N=1\\)\nであるとき\n\\(S_{N,M}=(\\{1\\},\\{2\\},\\dots,\\{M\\})\\)\nです。\n以降、\n\\(N \\ge 2\\)\nとします。\n\\(S_{N,M}\\)\nに含まれる整数列の最後の項を全探索します。\nもし最後の項が\n\\(K\\)\nであるならば始めの\n\\(N-1\\)\n項としてあり得るものの集合は\n\\(S_{N-1,K-1}\\)\nに等しいです。ここで、\n\\(N-1 \\le K-1\\)\nでなければならないことに注意してください。\nより、\n\\(K\\)\nを全探索し\n\\(S_{N-1,K-1}\\)\nの要素に\n\\(K\\)\nを付け加えたものを\n\\(S_{N,M}\\)\nに加えることで\n\\(S_{N,M}\\)\nを求めることができます。\nより、この問題を解くことができます。\nまた、別解法として C++ であれば\n\\(0\\)\nが\n\\(N\\)\n個、\n\\(1\\)\nが\n\\(M-N\\)\n個この順で並べられた vector を用意し、next_permutation で毎回\n\\(0\\)\nである要素の index を出力することによっても解くことができます。こちらの解法の方が実装は短く済みます。\n実装例(C++)\n実装例(next_permutation,C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nvector<vector<int>> dp[10][10];\nvoid solve(int n,int m){\n  if(dp[n][m].size()) return;\n  if(n==1){\n    for(int i=1;i<=m;i++){\n      dp[n][m].push_back({i});\n    }\n  }\n  else{\n    for(int k=1;k<=m;k++){\n      if(n-1<=k-1){\n        solve(n-1,k-1);\n        for(int i=0;i<dp[n-1][k-1].size();i++){\n          vector<int> a=dp[n-1][k-1][i];\n          a.push_back(k);\n          dp[n][m].push_back(a);\n        }\n      }\n    }\n  }\n}\nint main() {\n  int n,m;\n  cin>>n>>m;\n  solve(n,m);\n  sort(dp[n][m].begin(),dp[n][m].end());\n  for(int i=0;i<dp[n][m].size();i++){\n    for(int j=0;j<n;j++) cout<<dp[n][m][i][j]<<\" \";\n    cout<<endl;\n  }\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int n,m;\n  cin>>n>>m;\n  vector<int> a;\n  for(int i=0;i<n;i++) a.push_back(0);\n  for(int i=0;i<m-n;i++) a.push_back(1);\n  do{\n    for(int i=0;i<m;i++){\n      if(a[i]==0) cout<<i+1<<\" \";\n    }\n    cout<<endl;\n  }while(next_permutation(a.begin(),a.end()));\n}"
+      ],
+      "text_sha256": "d055c687d4b5eddf9894f66f283da19b5ebfd16c51f81e1ce97e1d240a153c75",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4564",
+      "text": "Pythonの標準ライブラリには、\ncombinations\nというM個の要素のからN個を取り出す方を全て辞書順に出力する関数があります。",
+      "codes": [
+        "from itertools import combinations\n\nn, m = list(map(int, input().split()))\nfor l in combinations(range(1, m + 1), n):\n    print(*l, sep=' ')"
+      ],
+      "text_sha256": "1fbb245ab66b141f8653f3f75d7446ed39590214cbade11d0a766d2defc37303",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4542",
+      "text": "空の数列から始めて、数列の次の項の値としてありえる最小のものから順に、数列に追加した場合を深さ優先で探索することで問題を解くことができます。\n実装例(Python)\n深さ優先探索では、まず「1項目が1である場合」を全て探索しきってから「1項目が2である場合」、「1項目が3である場合」……が探索されます。このため、解を見つけた順に出力することで辞書順になっています。\n一般に、探索順序が望む順序にならない場合も、見つけた答えを全て記録しておきソートしてから出力する、などのアプローチをとることができます。\n計算量は\n\\(O(M 2^M)\\)\nです。（導出は難しいので詳細は割愛）",
+      "codes": [
+        "def dfs(A):\n  if len(A)==N:\n    print(*A)\n    return\n  if len(A)==0: start=1\n  else: start=A[-1]+1\n  for i in range(start,M+1):\n    dfs(A+[i])\n \nN,M=map(int,input().split())\ndfs([])"
+      ],
+      "text_sha256": "9fffa85f6a69307f15893bb136eafa920768f9b9b96bf39798913418ac611c4f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

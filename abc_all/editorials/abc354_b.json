@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc354_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc354/editorial/10001",
+      "text": "解法\n主要なプログラミング言語の多くにおいては、文字列の辞書順による比較は標準ライブラリに含まれる関数や言語機能として提供されています。それらを用いて簡潔に実装することができます。例えば C++ では、\nstd::string\n変数同士の\n<\nによる比較は辞書順比較です。\n各ユーザーのレートの総和\n\\(T\\)\nは、\nfor\n文などによるループで求めることができます。それから\n\\(T \\bmod N\\)\nを計算することで、勝者の番号を求めることができます。\nさらに、各ユーザーにどの番号が割り当てられているかを求める必要があります。これは、各ユーザーの名前を辞書順に並び替えることで求められます。多くの言語にはソートを行う関数があるので、それを用いると簡潔です。例えば C++ では以下のように実装することができます。\n文字列をソートする計算量について\n\\(\\displaystyle M = \\sum_{i=1}^{N} |S_i| \\)\nとおきます。\nマージソートを用いれば、計算量は\n\\(O(M \\log N)\\)\nです。これは\n\\(2\\)\nつの文字列\n\\(a, b\\)\nの辞書順比較は計算量\n\\(O(\\min(|a|, |b|))\\)\nでできることによります。\nC++ の\nstd::stable_sort\nは、仕様上は保証されませんがほぼ確実にマージソートで実装されています。これを用いることができます。\nGCC libstdc++ の\nstd::sort\nは文字列比較でも高速に動くことが多いです。実装されているアルゴリズムが実際に最悪ケースでも\n\\(O(M \\log N)\\)\nであるかどうかはわからない 、というのがコミュニティの共通認識だと思います。少なくとも\n\\(\\displaystyle O((\\max_{1 \\leq i \\leq N} |S_i|) N \\log N)\\)\nではあるので、この問題では十分高速です。\n\\(O(M)\\)\nで解くこともできます。SA-IS を使う方法などがあります。",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    // 入力\n    int n;\n    cin >> n;\n    vector<string> s(n);\n    vector<int> c(n);\n    for (int i = 0; i < n; ++i) {\n        cin >> s[i] >> c[i];\n    }\n\n    // 文字列の辞書順ソート\n    sort(s.begin(), s.end());\n\n    // 勝者の番号を求める\n    int sum_rating = 0;\n    for (const int e : c) {\n        sum_rating += e;\n    }\n    const int winner = sum_rating % n;\n\n    // 出力\n    cout << s[winner] << endl;\n}"
+      ],
+      "text_sha256": "bb648f99352a4b882f06af211e4357ea255678de9b3c5cc6cce1257f34abdbb7",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc354/abc354_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

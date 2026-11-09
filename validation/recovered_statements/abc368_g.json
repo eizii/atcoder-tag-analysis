@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc368_g",
+  "source_url": "https://atcoder.jp/contests/abc368/tasks/abc368_g?lang=ja",
+  "statement": "問題文\n長さ\nN\nの正整数列\nA, B\nが与えられます。以下の形式で与えられる\nQ\n個のクエリを、与えられた順番に処理してください。クエリは次の\n3\n種類のいずれかです。\nタイプ\n1\n:\n1 i x\nの形式で与えられる。\nA_i\nを\nx\nに置き換える。\nタイプ\n2\n:\n2 i x\nの形式で与えられる。\nB_i\nを\nx\nに置き換える。\nタイプ\n3\n:\n3 l r\nの形式で与えられる。以下の問題を解き、答えを出力する。\nはじめ\nv = 0\nとする。\ni = l, l + 1, \\dots ,r\nの順に、\nv\nを\nv + A_i\nもしくは\nv \\times B_i\nで置き換える操作を行う。最終的な\nv\nとして実現できる最大値を求めよ。\nただし、\n入力で与えられるタイプ\n3\nのクエリの答えは\n10^{18}\n以下であることが保証されています。\n制約\n1 \\leq N \\leq 10^5\n1 \\leq A_i \\leq 10^9\n1 \\leq B_i \\leq 10^9\n1 \\leq Q \\leq 10^5\nタイプ\n1\n,\n2\nのクエリにおいて、\n1 \\leq i \\leq N\nタイプ\n1\n,\n2\nのクエリにおいて、\n1 \\leq x \\leq 10^9\nタイプ\n3\nのクエリにおいて、\n1 \\leq l \\leq r \\leq N\nタイプ\n3\nのクエリにおいて、出力すべき値は\n10^{18}\n以下である",
+  "html_sha256": "45efeb45dd1047bc8a1bc3f2be0d1069d9f9af0f5423c81a7effa741b49f1aaa",
+  "extractor": "section_headings_v1"
+}

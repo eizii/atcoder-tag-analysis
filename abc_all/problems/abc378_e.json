@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc378_e",
+  "title": "Mod Sigma Problem",
+  "contests": [
+    {
+      "contest_id": "abc378",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1406,
+  "raw_difficulty": 1406,
+  "contest_id": "abc378",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc378/tasks/abc378_e",
+  "statement": "配点 : 475 点 問題文 長さ N の非負整数列 A=(A_1,A_2,\\dots,A_N) と、正整数 M が与えられます。 次の値を求めてください。 \\[\r\n\\sum_{1 \\leq l \\leq r \\leq N} \\left( \\left(\\sum_{l \\leq i \\leq r} A_i\\right) \\mathbin{\\mathrm{mod}} M \\right)\r\n\\] ここで、 X \\mathbin{\\mathrm{mod}} M で、非負整数 X を M で割ったあまりを表します。 制約 1 \\leq N \\leq 2 \\times 10^5 1 \\leq M \\leq 2 \\times 10^5 0 \\leq A_i \\leq 10^9 入力 入力は以下の形式で標準入力から与えられる。 N M A_1 A_2 \\dots A_N 出力 答えを出力せよ。 入力例 1 3 4\r\n2 5 0 出力例 1 10 A_1 \\mathbin{\\mathrm{mod}} M = 2 (A_1+A_2) \\mathbin{\\mathrm{mod}} M = 3 (A_1+A_2+A_3) \\mathbin{\\mathrm{mod}} M = 3 A_2 \\mathbin{\\mathrm{mod}} M = 1 (A_2+A_3) \\mathbin{\\mathrm{mod}} M = 1 A_3 \\mathbin{\\mathrm{mod}} M = 0 これらの総和の 10 が答えです。外側の総和のあまりは取らないことに注意してください。 入力例 2 10 100\r\n320 578 244 604 145 839 156 857 556 400 出力例 2 2736",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の非負整数列 A=(A_1,A_2,\\dots,A_N) と、正整数 M が与えられます。 次の値を求めてください。 \\[\r\n\\sum_{1 \\leq l \\leq r \\leq N} \\left( \\left(\\sum_{l \\leq i \\leq r} A_i\\right) \\mathbin{\\mathrm{mod}} M \\right)\r\n\\] ここで、 X \\mathbin{\\mathrm{mod}} M で、非負整数 X を M で割ったあまりを表します。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2 \\times 10^5 1 \\leq M \\leq 2 \\times 10^5 0 \\leq A_i \\leq 10^9"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M A_1 A_2 \\dots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 4\r\n2 5 0"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 10 A_1 \\mathbin{\\mathrm{mod}} M = 2 (A_1+A_2) \\mathbin{\\mathrm{mod}} M = 3 (A_1+A_2+A_3) \\mathbin{\\mathrm{mod}} M = 3 A_2 \\mathbin{\\mathrm{mod}} M = 1 (A_2+A_3) \\mathbin{\\mathrm{mod}} M = 1 A_3 \\mathbin{\\mathrm{mod}} M = 0 これらの総和の 10 が答えです。外側の総和のあまりは取らないことに注意してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 100\r\n320 578 244 604 145 839 156 857 556 400"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 2736"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc378/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:02.324598+00:00",
+  "statement_sha256": "c6ba21545f16242a49d43454e44bc3fc42851c3fb77350f55b28a3b07c1e9059",
+  "editorials": []
+}

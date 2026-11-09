@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc153_b",
+  "editorials": [
+    {
+      "text": "B: Common raccoon vs Monster\n全ての必殺技を1 度ずつ使ってモンスターの体力を0 以下にできれば良いです。つまり、H −\n(A1 + A2 + . . . + AN) が0 以下のときYes、そうでないときNo となります。\nC 言語での実装例は次のとおりです。\n1 int main(){\n2\nint H,N;\n3\nscanf(\"%d%d\",&H,&N);\n4\nfor(int i=0;i<N;i++){\n5\nint A;\n6\nscanf(\"%d\",&A);\n7\nH-=A;\n8\n}\n9\nif(H<=0)puts(\"Yes\");\n10\nelse puts(\"No\");\n11 }\n",
+      "text_sha256": "5f3de2ad956bb2c712b8334e88483c9f2abf46e2355bc82cc6392985a699cd02",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc153/abc153_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

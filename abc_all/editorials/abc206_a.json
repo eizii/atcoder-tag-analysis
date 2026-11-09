@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc206_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc206/editorial/2094",
+      "text": "この問題の本質は、整数に\n\\(1.08\\)\nを掛けて切り捨てるという操作です。\nしかし、この処理を実数型の変数で行うのは、競技プログラミングにおいて計算誤差の原因となり危険です。\nそこで、今回の問題では処理を整数型の変数のみで完結させることを考えます。\n結論から言うと、\n\\(N\\)\nに\n\\(108\\)\nを掛けてから、\n\\(100\\)\nで割って小数点以下を切り捨てるという操作を行えばよいです。\nこの操作には、たいていのプログラミング言語の整数型で成り立つ以下の性質が利用できます。たとえば、 C++ の int 型における演算子\n/\nでこの性質が成り立ちます。\n整数型同士の割り算の商をとる演算について、結果の整数部分が結果となり、小数点以下(余り)は切り捨てられる。\nこの方針で実装すると、次のようになります。\nRubyによる実装例:\nまた、(誤差に注意しながら)実数型で演算を行って、切り捨てに相当する部分を条件分岐で処理することもできます。この解法が正当な理由は実装例の後に述べます。\nVisual Basicによる実装例:\n実は、以下の事項が成り立ちます。\n\\(190 \\times 1.08= 205.2\\)\n\\(191 \\times 1.08 = 206.28\\)\n\\(192 \\times 1.08 = 207.36\\)\nこれらは、出力の境界値である整数から十分離れています。なので、今回の場合は誤差に注意しながら実数型で実装してもうまくいきます。   では、もっと簡単な方法はないでしょうか?\n実は、この境界条件付近の\n\\(3\\)\n式から、\n\\(N\\le 190\\)\nのとき\nYay!\n、\n\\(N=191\\)\nのとき\nso-so\n、\n\\(N \\ge 192\\)\nのとき\n:(\nと出力すればいいことが分かります。\nサンプル\n\\(3\\)\nがこの方針へのヒントになっていました。\nNimによる実装例:",
+      "codes": [
+        "input = gets.to_i\n\ninput = (input * 108) / 100\n\nif input < 206 then\n  puts \"Yay!\\n\"\nelsif input == 206 then\n  puts \"so-so\\n\"\nelse\n  puts \":(\\n\"\nend",
+        "Module ABC206A\n  \n  Sub Main()\n    Dim N As Double\n    N = Console.ReadLine()\n    N *= 1.08\n    If N < 206.0 Then\n      Console.WriteLine(\"Yay!\")\n    ElseIf 206.0 <= N And N < 207.0\n      Console.WriteLine(\"so-so\")\n    Else\n      Console.WriteLine(\":(\")\n    End If\n  End Sub\n  \nEnd Module",
+        "import strutils\n\nlet n = stdin.readLine.parseInt\n\nif n <= 190:\n  echo \"Yay!\\n\"\nelif n == 191:\n  echo \"so-so\\n\"\nelse:\n  echo \":(\\n\""
+      ],
+      "text_sha256": "ae3747e8ee1bc6dbd5295eee5bb31776ca4ff478f2566a32d7a46358751cced2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc206/abc206_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

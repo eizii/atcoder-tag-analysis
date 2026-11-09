@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc133_c",
+  "editorials": [
+    {
+      "text": "C: Remainder Minimization 2019\nR−L が非常に大きい時、全ての候補(i, j) を調べてしまうと、O((R−L)2) の計算量がかかってしまい、間に\n合いません。よく考えてみると、2019 で割った余りが同じであるような2 数a, b について、(a×c) mod 2019\nと(b × c) mod 2019 は必ず同じ値になります。よって、(i, j) として調べるべき候補は高々20192 = 4076361\n通り程度しか存在せず、全て調べても十分間に合います。\nまた、「O((R −L)2) の全探索の途中で、解が0 になった時点で探索を打ち切る」という方法でも解くこと\nが出来ます。これは、R-L が2019 以上の時、必ず割った余りが0 となるような値が区間中に存在するため、\n20192 個以上の値を見ることはないからです。\n",
+      "text_sha256": "5d99156a9a3f3bd5e4cc815307a27a54f340b899fa355b3d75b63218acaec394",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc133/abc133_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

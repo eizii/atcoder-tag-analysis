@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc243_b",
+  "title": "Hit and Blow",
+  "contests": [
+    {
+      "contest_id": "abc243",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 26,
+  "raw_difficulty": -692,
+  "contest_id": "abc243",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc243/tasks/abc243_b",
+  "statement": "配点 : 200 点 問題文 長さ N の整数列 A = (A_1, A_2, \\dots, A_N), B = (B_1, B_2, \\dots, B_N) が与えられます。 A の要素はすべて異なります。 B の要素もすべて異なります。 次の 2 つを出力してください。 A にも B にも含まれ、その位置も一致している整数の個数。言い換えると、 A_i = B_i を満たす整数 i の個数。 A にも B にも含まれるが、その位置は異なる整数の個数。言い換えると、 A_i = B_j, i \\neq j を満たす整数の組 (i, j) の個数。 制約 1 \\leq N \\leq 1000 1 \\leq A_i \\leq 10^9 1 \\leq B_i \\leq 10^9 A_1, A_2, \\dots, A_N はすべて異なる。 B_1, B_2, \\dots, B_N はすべて異なる。 入力はすべて整数である。 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N B_1 B_2 \\dots B_N 出力 答えを 2 行出力せよ。 1 行目には 1. の個数、 2 行目には 2. の個数を出力せよ。 入力例 1 4\r\n1 3 5 2\r\n2 3 1 4 出力例 1 1\r\n2 A にも B にも含まれ、その位置も一致している整数は A_2 = B_2 = 3 の 1 個です。 A にも B にも含まれるが、その位置は異なる整数は A_1 = B_3 = 1 と A_4 = B_1 = 2 の 2 個です。 入力例 2 3\r\n1 2 3\r\n4 5 6 出力例 2 0\r\n0 1. , 2. ともに条件を満たす整数は存在しません。 入力例 3 7\r\n4 8 1 7 9 5 6\r\n3 5 1 7 8 2 6 出力例 3 3\r\n2",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の整数列 A = (A_1, A_2, \\dots, A_N), B = (B_1, B_2, \\dots, B_N) が与えられます。 A の要素はすべて異なります。 B の要素もすべて異なります。 次の 2 つを出力してください。 A にも B にも含まれ、その位置も一致している整数の個数。言い換えると、 A_i = B_i を満たす整数 i の個数。 A にも B にも含まれるが、その位置は異なる整数の個数。言い換えると、 A_i = B_j, i \\neq j を満たす整数の組 (i, j) の個数。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 1000 1 \\leq A_i \\leq 10^9 1 \\leq B_i \\leq 10^9 A_1, A_2, \\dots, A_N はすべて異なる。 B_1, B_2, \\dots, B_N はすべて異なる。 入力はすべて整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\dots A_N B_1 B_2 \\dots B_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを 2 行出力せよ。 1 行目には 1. の個数、 2 行目には 2. の個数を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\r\n1 3 5 2\r\n2 3 1 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1\r\n2 A にも B にも含まれ、その位置も一致している整数は A_2 = B_2 = 3 の 1 個です。 A にも B にも含まれるが、その位置は異なる整数は A_1 = B_3 = 1 と A_4 = B_1 = 2 の 2 個です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\r\n1 2 3\r\n4 5 6"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0\r\n0 1. , 2. ともに条件を満たす整数は存在しません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 7\r\n4 8 1 7 9 5 6\r\n3 5 1 7 8 2 6"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 3\r\n2"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc243/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:13.916033+00:00",
+  "statement_sha256": "8eed66aea81aef0f1398a4577d51752ff1d099cd95317ef4b2f2f29a5d64be99",
+  "editorials": []
+}

@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc128_b",
+  "title": "Guidebook",
+  "contests": [
+    {
+      "contest_id": "abc128",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 350,
+  "raw_difficulty": 347,
+  "contest_id": "abc128",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc128/tasks/abc128_b",
+  "statement": "配点 : 200 点 問題文 あなたは美味しいレストランを紹介する本を書くことにしました。\r\nあなたは N 個のレストラン、レストラン 1 、レストラン 2 、 … 、レストラン N を紹介しようとしています。レストラン i は S_i 市にあり、あなたは 100 点満点中 P_i 点と評価しています。\r\n異なる 2 個のレストランに同じ点数がついていることはありません。 この本では、次のような順でレストランを紹介しようとしています。 市名が辞書順で早いものから紹介していく。 同じ市に複数レストランがある場合は、点数が高いものから紹介していく。 この本で紹介される順にレストランの番号を出力してください。 制約 1 ≤ N ≤ 100 S は英小文字のみからなる長さ 1 以上 10 以下の文字列 0 ≤ P_i ≤ 100 P_i は整数 P_i ≠ P_j (1 ≤ i < j ≤ N) 入力 入力は以下の形式で標準入力から与えられる。 N S_1 P_1 : S_N P_N 出力 N 行出力せよ。 i 行目 ( 1 ≤ i ≤ N ) には、 i 番目に紹介されるレストランの番号を出力せよ。 入力例 1 6\r\nkhabarovsk 20\r\nmoscow 10\r\nkazan 50\r\nkazan 35\r\nmoscow 60\r\nkhabarovsk 40 出力例 1 3\r\n4\r\n6\r\n1\r\n5\r\n2 3 種類の市名は辞書順で kazan < khabarovsk < moscow です。\r\nそれぞれの市について、点数が高いレストランから順に紹介されていきます。よって、レストランは 3,4,6,1,5,2 の順に紹介されていきます。 入力例 2 10\r\nyakutsk 10\r\nyakutsk 20\r\nyakutsk 30\r\nyakutsk 40\r\nyakutsk 50\r\nyakutsk 60\r\nyakutsk 70\r\nyakutsk 80\r\nyakutsk 90\r\nyakutsk 100 出力例 2 10\r\n9\r\n8\r\n7\r\n6\r\n5\r\n4\r\n3\r\n2\r\n1",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 あなたは美味しいレストランを紹介する本を書くことにしました。\r\nあなたは N 個のレストラン、レストラン 1 、レストラン 2 、 … 、レストラン N を紹介しようとしています。レストラン i は S_i 市にあり、あなたは 100 点満点中 P_i 点と評価しています。\r\n異なる 2 個のレストランに同じ点数がついていることはありません。 この本では、次のような順でレストランを紹介しようとしています。 市名が辞書順で早いものから紹介していく。 同じ市に複数レストランがある場合は、点数が高いものから紹介していく。 この本で紹介される順にレストランの番号を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 ≤ N ≤ 100 S は英小文字のみからなる長さ 1 以上 10 以下の文字列 0 ≤ P_i ≤ 100 P_i は整数 P_i ≠ P_j (1 ≤ i < j ≤ N)"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S_1 P_1 : S_N P_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N 行出力せよ。 i 行目 ( 1 ≤ i ≤ N ) には、 i 番目に紹介されるレストランの番号を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 6\r\nkhabarovsk 20\r\nmoscow 10\r\nkazan 50\r\nkazan 35\r\nmoscow 60\r\nkhabarovsk 40"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3\r\n4\r\n6\r\n1\r\n5\r\n2 3 種類の市名は辞書順で kazan < khabarovsk < moscow です。\r\nそれぞれの市について、点数が高いレストランから順に紹介されていきます。よって、レストランは 3,4,6,1,5,2 の順に紹介されていきます。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10\r\nyakutsk 10\r\nyakutsk 20\r\nyakutsk 30\r\nyakutsk 40\r\nyakutsk 50\r\nyakutsk 60\r\nyakutsk 70\r\nyakutsk 80\r\nyakutsk 90\r\nyakutsk 100"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 10\r\n9\r\n8\r\n7\r\n6\r\n5\r\n4\r\n3\r\n2\r\n1"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc128/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:34:48.559018+00:00",
+  "statement_sha256": "ae11313780810dc304c54f8acea92b01353d60f98b573b08b856146b9fd86131",
+  "editorials": []
+}

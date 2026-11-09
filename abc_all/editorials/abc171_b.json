@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc171_b",
+  "editorials": [
+    {
+      "text": "B: Mix Juice\n(解説: evima)\nまず、入力されるデータの量が文字1 個で固定であった問題A と異なり、今回は価格が入力さ\nれる果物の数N が1 以上1000 以下と一定ではありません。これに対応するための一般的なキー\nワードは「for 文」「配列」であり、検索エンジンで「[言語名] for」などと検索することで言語ごと\nの情報が得られるはずです。ただし、言語によってはこれらのキーワードからややかけ離れた構文\nや要素も有用であることがあります。\nさて、この問題でN 種類の果物から購入するK 種類を選ぶ際は、もちろん価格が低い方からK\n種類を選ぶべきです。すなわち、N 個の整数p1, . . . , pN のうち最も小さいもの、2 番目に小さいも\nの、. . .、K 番目に小さいものの和がこの問題の答えで、これをプログラムにどのように求めさせる\nかが課題となります。結論としては、多くの言語に「ソート」、すなわち複数の値を小さい順に並べ\n替える機能があらかじめ実装されており、これを用いてN 個の整数を小さい順に並べ替えてから\n先頭のK 個を選択するのが最も簡単です。やはり「[言語名] ソート」などで情報が手に入ります。\nC++ での実装例:\n1 #include <algorithm>\n// sort\n2 #include <iostream>\n3 using namespace std;\n4\n5 int N, K, p[1010];\n6\n7 int main(){\n8\ncin >> N >> K;\n9\nfor(int i = 0; i < N; ++i) cin >> p[i];\n10\nsort(p, p + N);\n11\nint ans = 0;\n12\nfor(int i = 0; i < K; ++i) ans += p[i];\n13\ncout << ans << endl;\n14 }\n\nPython での実装例(「for 文」からややかけ離れた要素が有用であるような言語の例として):\n1 N, K = map(int, input().split())\n2 p = list(map(int, input().split()))\n3 print(sum(sorted(p)[:K]))\n",
+      "text_sha256": "e4b587dbfa6e9bcd35c8b76d46e097811d4d2ccb167db351baf234684aa244c1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc171/abc171_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

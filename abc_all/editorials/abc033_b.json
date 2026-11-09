@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc033_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc033/editorial.pdf",
+      "text": "B問題 町の合併\n\n\n\n\n\n                                     ©AtCoder Inc. All rights reserved.                                      5\n\f\nB問題問題概要\n\n• N個の町が合併し、1つの市になる。\n• N個の町の合計人口の過半数以上の人口を持つ町\n が存在すれば、新しい市の名前はその町の名前に\n する\n• 存在しなければ、atcoderという名前にする。\n• どのような市の名前になるだろうか？\n• 2 ≦N ≦1,000, 1 ≦町の人口≦100,000\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                      6\n\f\nB問題アルゴリズム\n\n• 問題文にあるとおりに実際にループを回してシミュ\n レートする\n• 合計を計算する\n• それぞれの町の人口がその合計の過半数以上ある\n かをifで判定し、あればそれを出力\n• なければatcoderと出力\n• 計算量はO(N)\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                      7\n\f\nB問題アルゴリズム\n\n• ちなみに、過半数以上の人口がある町が2つ以上存\n 在することはない\n• (2番目に多い町の人口が過半数あるとすると、1番\n 目と2番目の合計が全人口を超えてしまい矛盾す\n  る)\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                      8",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "c00bbf4a0a342d514b01c309eb8d988a1e3da4080709cda5684a9144ce59c768"
+    }
+  ],
+  "status": "available"
+}

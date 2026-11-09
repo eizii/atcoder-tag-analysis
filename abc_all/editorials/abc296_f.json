@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc296_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc296/editorial/6117",
+      "text": "高橋君が行うことができる操作は並べ替えの一種であるため、\n\\(A\\)\nと\n\\(B\\)\nの要素を多重集合として見たときに一致してない場合は操作の繰り返しによって一致させることはできません。\n以下、多重集合として見たときに一致している場合について考えます。\n1.\n\\(A\\)\nの要素がすべて異なる場合 (すなわち、\n\\((1,2,\\ldots,N)\\)\nの順列となっている場合)\n\\(A,B\\)\nの反転数の和の偶奇が操作でどう変化するかについて考えます。ここで、\n\\(A\\)\nの反転数とは、\n\\(1\\leq i<j\\leq N\\)\nかつ\n\\(A_i>A_j\\)\nをみたす整数の組\n\\((i,j)\\)\nの個数の事です。反転数の偶奇は互換操作(特定の\n\\(2\\)\nつの要素を選んで入れ替える操作) によって必ず反転します。高橋君の行う操作では、\n\\(1\\)\n回の操作で\n\\(A,B\\)\nに対してちょうど一度ずつ互換操作を行なっているため、\n\\(A,B\\)\nの反転数の総和の偶奇は高橋君の操作によって変化しません。\n\\(A,B\\)\nが一致している時、反転数も等しいですから、その和は偶数となります。よって、最初の時点で反転数の総和が奇数である場合は一致させる事ができません。\n逆に、そうで無い場合は必ず一致させる事ができます。\nまず、次の操作を\n\\(x=1,2,\\ldots,N-2\\)\nに対して順に行う事で、\n\\(x=x_0\\)\nについての操作までで、\n\\(1\\leq i\\leq x_0\\)\nに対して\n\\(A_i=B_i\\)\nとなるようにする事ができます。\n\\(A_x=B_x\\)\nならば何もしない\nそうでない時、\n\\((A_x,A_{x+1},\\ldots,A_N))\\)\nは\n\\((B_x,B_{x+1},\\ldots,B_N))\\)\nの並び替えであるから、\n\\(x+1\\leq y\\leq N\\)\nであって、\n\\(A_x=B_y\\)\nであるようなものが取れる。\nさらに、\n\\(x+1\\leq z\\leq N\\)\nであって、\n\\(z\\neq y\\)\nであるようなものが取れる。\n\\((i,j,k)=(y,z,x)\\)\nとして操作を行う。この操作で、\n\\(1\\leq i\\leq x-1\\)\nの範囲の\n\\(A_i,B_i\\)\nが変化する事はなく、操作の後で新しく\n\\(A_x=B_x\\)\nとなる。\nこの操作の後で、\n\\(A,B\\)\nの関係としては、\n\\(A\\)\nと\n\\(B\\)\nが一致している場合と、\n\\(B\\)\nは\n\\(A\\)\nの\n\\(N-1\\)\n番目の要素と\n\\(N\\)\n番目の要素を互換したものになっている場合の\n\\(2\\)\n通りが考えられます。しかし、前者では反転数の和は偶数、後者では奇数となっていることから、反転数の和が偶数である場合は必ず一致している事がわかります。\nよって、反転数の和が偶数ならば必ず一致させられることが分かりました。\n2.\n\\(A\\)\nの中に\n\\(2\\)\n回以上登場する要素が存在する場合\n\\(A\\)\nに対して、同一の要素に対しても適当に大小関係をつけることで、\n\\((1,2,\\ldots,N)\\)\nの順列\n\\(A'\\)\nであって、\n\\(1\\leq i,j\\leq N\\)\nに対して\n\\(A'_i<A'_j\\)\nならば\n\\(A_i\\leq A_j\\)\nとなるようなものをとることができます。\n\\(B\\)\nに対しても同様にして\n\\(B'\\)\nをとります。\nさらに、\n\\(1\\leq i<j\\leq N\\)\nであって\n\\(A_i=A_j\\)\nであるようなものが存在します。そのような\n\\((i,j)\\)\nを\n\\(1\\)\nつとり、\n\\(A'\\)\nから\n\\(A'_i\\)\nと\n\\(A'_j\\)\nを入れ替えたものを\n\\(\\tilde{A}'=(\\tilde{A}'_1,\\ldots,\\tilde{A}'_i,\\ldots,\\tilde{A}'_j,\\ldots,\\tilde{A}'_N)=(A'_1,\\ldots,A'_j,\\ldots,A'_i,\\ldots,A'_N)\\)\nとします。この場合についても任意の\n\\(1\\leq i,j\\leq N\\)\nに対して\n\\(\\tilde{A}'_i<\\tilde{A}'_j\\)\nならば\n\\(A_i\\leq A_j\\)\nが成り立っている事に注意します。\nさて、\n\\(\\tilde{A}'\\)\nは\n\\(A'\\)\nに対してちょうど\n\\(1\\)\n回互換を行なったものであるから、反転数の偶奇は異なり、\n\\(A'\\)\nの反転数と\n\\(B'\\)\nの反転数の和と、\n\\(\\tilde{A}'\\)\nの反転数と\n\\(B'\\)\nの反転数の和のうちどちらかちょうど一方が偶数となり、操作を繰り返す事で、\n\\(A'\\)\nと\n\\(B'\\)\nまたは\n\\(\\tilde{A}'\\)\nと\n\\(B'\\)\nを一致させることができます。\n同様の操作を\n\\(A,B\\)\nに行うと、\n\\(A_i\\)\nは\n\\(A\\)\nを昇順にソートした時に\n\\(A'_i\\)\n( または\n\\(\\tilde{A}'_i\\)\n) 番目に来る要素となる (\n\\(B\\)\nについても同様) ため、\n\\(A'_i=B'_i\\)\n( または\n\\(\\tilde{A}'_i=B'_i\\)\n) ならば\n\\(A_i=B_i\\)\nとなります。\nよって、この場合は (多重集合として一致していれば) つねに一致させることができます。\n以上より、\n\\(A,B\\)\nが多重集合として一致しているかと それぞれの反転数を求めればよく、これらは\n\\(O(N\\log N)\\)\nで確認することができるため、十分高速にこの問題を解くことができました。\nなお、\n\\(1\\leq A_i,B_i\\leq N\\)\nである事を利用して工夫する事によって、この問題は\n\\(O(N)\\)\nで解く事もできます。\nc++ による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/all>\n\nusing namespace std;\nusing namespace atcoder;\n\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nint main(void) {\n\tint n;\n\tcin>>n;\n\tvector<int>a(n),b(n);\n\tfenwick_tree<long long> c(n),d(n);\n\tlong long z=0;\n\trep(i,n){\n\t\tcin>>a[i];\n\t\tz+=c.sum(a[i],n);\n\t\tc.add(a[i]-1,1);\n\t}\n\trep(i,n){\n\t\tcin>>b[i];\n\t\tz+=d.sum(b[i],n);\n\t\td.add(b[i]-1,1);\n\t}\n\tsort(a.begin(),a.end());\n\tsort(b.begin(),b.end());\n\trep(i,n)if(a[i]!=b[i]){\n\t\tcout<<\"No\"<<endl;\n\t\treturn 0;\n\t\t}\n\trep(i,n-1)if(a[i]==a[i+1]){\n\t\tcout<<\"Yes\"<<endl;\n\t\treturn 0;\n\t\t}\n\tif(z%2)cout<<\"No\"<<endl;\n\telse cout<<\"Yes\"<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "ff2cbab60b6ba304d8f1e79e9f864c8e0c82769e26e0e43425eeb0769954857e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc296/abc296_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc296/editorial/6132",
+      "text": "2 つの配列を扱う問題では、片方を固定して考えると考えやすくなることがあります。\nまず\n\\(A\\)\nと\n\\(B\\)\nが多重集合として異なる場合は不可能なので、多重集合が一致するとして考えます。\n\\(A\\)\nの要素が相異なる場合は、\n\\(A\\)\n側が昇順になるようにソートして考えます。例えば\n\\[A: 1, 2, 3,  \\cdots\n\\\\\nB: 4, 5, 6,  \\cdots\\]\nの状態で\n\\(i=1,\\ j=2,\\ k=3\\)\nとして操作すると\n\\[A: 2, 1, 3,  \\cdots\n\\\\\nB: 6, 5, 4,  \\cdots\\]\nとなりますが、\n\\(A\\)\n側を固定すると結局\n\\[A: 1, 2, 3,  \\cdots\n\\\\\nB: 5, 6, 4,  \\cdots\\]\nとなります。結局\n\\(B\\)\n側において長さ 3 の巡回置換が行われたことになります。この要領で任意の長さ 3 の巡回置換ができることが分かります。\nまた一般に、長さ 3 の巡回置換の積で書ける置換は偶置換全体の集合と一致することが知られています。\nよって転倒数の偶奇を調べれば判定できます。\n\\(A\\)\nが同じ要素を複数含む場合は、あえてそれらを区別して考えると、\n\\(B\\)\n側で偶奇の入れ替えの自由度ができるので必ず可能であることが分かります。",
+      "codes": [],
+      "text_sha256": "9f1cc9487d5b58051ca0ed20a48cfdaa1ba3f4e867a8cc4b84721c16f93fed16",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc296/abc296_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc296/editorial/6112",
+      "text": "この問題は、全体で線形時間で解くこともできます。\n長さ \\(N\\) の配列を持ち、それぞれの列に \\(i\\) が何回出現したかを管理することで、「それぞれの列に出現する値が多重集合として等しいか」や「同じ値が重複して出現するか」を \\(\\Theta(N)\\) 時間で判定できます。\n同じ値が重複しないとき、与えられた列は \\(\\{1,\\ldots,N\\}\\) の置換です。\n置換 \\(i\\mapsto P _ i\\) が偶置換であるかは、\\(P ^ {-1} _ {P _ i}=i\\) なる逆置換 \\(P ^ {-1}\\) を持ちながらソートを行うことで \\(\\Theta(N)\\) 時間で判定できます。\n（置換を disjoint な巡回に分解することでも、線形時間で置換の偶奇を判定することができます。）\nよって、この問題を \\(\\Theta(N)\\) 時間で解くことができました。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n\n    unsigned N;\n    cin >> N;\n    vector<unsigned> A(N), B(N);\n    for (auto &&a : A)\n        cin >> a;\n    for (auto &&b : B)\n        cin >> b;\n\n    // count_A[i] = (i が A に出現した回数)\n    // count_B[i] = (i が B に出現した回数)\n    vector<unsigned> count_A(N), count_B(N);\n    for (auto &&a : A)\n        ++count_A[--a];\n    for (auto &&b : B)\n        ++count_B[--b];\n\n    // 多重集合として一致していないなら No\n    if (count_A != count_B) {\n        cout << \"No\" << endl;\n        return 0;\n    }\n    // そうでなく、同じ要素が複数回出現していたら Yes\n    if (*max_element(begin(count_A), end(count_A)) >= 2) {\n        cout << \"Yes\" << endl;\n        return 0;\n    }\n\n    // P[i] = B[A[i]] が偶置換 <=> A[i] と B[i] の置換の偶奇は等しい\n    vector<unsigned> P(N), inv_P(N);\n    transform(begin(A), end(A), begin(P), [&B](auto i) { return B[i]; });\n    for (unsigned i{}; i < N; ++i)\n        inv_P[P[i]] = i;\n\n    bool ans{true};\n    for (unsigned i{}; i < N; ++i)\n        if (i != P[i]) {\n            // P[i] と i を swap\n            swap(inv_P[i], inv_P[P[i]]);\n            swap(P[i], P[inv_P[P[i]]]);\n            ans ^= true;\n        }\n    cout << (ans ? \"Yes\" : \"No\") << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "99adece26a5d73c3f92e72fba38f28682453482423cd95617e6bf3e2cf824bce",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc296/abc296_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

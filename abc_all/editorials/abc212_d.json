@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc212_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc212/editorial/2356",
+      "text": "数列\n\\((A_1,\\ldots ,A_N)\\)\nを\n\\(i\\)\n回目の操作が操作\n\\(2\\)\nならば\n\\(A_i=X_i\\)\nそうでないならば\n\\(0\\)\nで定めます。このとき\n\\(K+1\\)\n回目の操作の直前において袋に入っているそれぞれボールに書かれた数は\n\\(X_i+A_{i+1}+\\cdots A_K\\)\nと書けます。また、累積和の考え方を使うと、\n\\(S_i\\)\nを\n\\(S_i=A_1+\\cdots A_i\\)\nで定めて、これを\n\\(X_i+(S_K-S_i)=(X_i-S_i)+S_K\\)\nと書く事が出来ます。ここで\n\\((A_i)\\)\nおよび\n\\((S_i)\\)\nは順に見ていく事で簡単に計算ができます。\nさて、最小の番号のボールを取り出そうとしたとき 、\n\\(S_K\\)\nの部分についてはボールによらないので、残っているボールの中で\n\\(X_i-S_i\\)\nが最も小さいものを取り出せば良い事が分かります。\nよって、操作\n\\(1\\)\nの度に\n\\(X_i\\)\nではなく\n\\(X_i-S_i\\)\nの書かれたボールを入れていることにすれば、操作\n\\(1\\)\nと操作\n\\(3\\)\nのみの場合に帰着する事が出来ます。（ただし、出力する際には\n\\(S_K\\)\nを足すことを忘れないようにしてください。）\nこれは優先度付きキューなどのデータ構造を用いることによって高速に、具体的には\n\\(O(Q\\log Q)\\)\nで解くことができます。よってこの問題を解く事が出来ました。\nC++による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\n#define ll long long\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nint main(void) {\n\tpriority_queue<ll, vector<ll>, greater<ll> >pq;\n\tint q, p;\n\tll x;\n\tll sum = 0;\n\tcin >> q;\n\trep(qq, q) {\n\t\tcin >> p;\n\t\tif (p == 1) {\n\t\t\tcin >> x;\n\t\t\tpq.push(x - sum);\n\t\t}\n\t\telse if (p == 2) {\n\t\t\tcin >> x;\n\t\t\tsum += x;\n\t\t}\n\t\telse if (p == 3) {\n\t\t\tx = pq.top();\n\t\t\tcout << x + sum << endl;\n\t\t\tpq.pop();\n\t\t}\n\t}\n\treturn 0;\n}"
+      ],
+      "text_sha256": "a8abe1ecdf342ed36e0c73edb9b1b64d4aecde38e5b6883e1695fc7608bdb03f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc212/abc212_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

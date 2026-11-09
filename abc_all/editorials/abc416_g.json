@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc416_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc416/editorial/13508",
+      "text": "記号の定義 文字列 \\(T\\) に対してその長さを \\(|T|\\) と表します。 文字列 \\(T\\) と非負整数または無限大 \\(N\\) に対し、 \\(T\\) を \\(N\\) 回繰り返した文字列を \\(T\\times N\\) と表します。 文字列 \\(T\\) の \\(x\\) 文字目以降からなる文字列を \\(T[x:]\\) と表します。 文字列に対し、辞書順での大小比較を \\(\\lt, \\leq\\) により表します。 文字列に対し、 \\(\\preceq\\) を「 \\((X+Y<Y+X)\\) または \\((X+Y=Y+X\\) かつ \\(X\\leq Y)\\) のとき、かつ、そのときに限り \\(X \\preceq Y\\) 」と定めます。 \\(X\\prec Y\\) を「 \\(X\\preceq Y\\) かつ \\(X\\neq Y\\) 」と定めます。 この \\(\\preceq\\) は全順序を定めます。すなわち、2つの文字列 \\(X,Y\\) に対して \\(X\\prec Y\\) , \\(Y \\prec X\\) , \\(X=Y\\) のいずれかちょうど \\(1\\) つが成り立ち、さらに推移律を満たします。 問題の答えを \\(T_K\\) とします。 \\(S\\) の元のうち、 \\(\\preceq\\) の順序で最小となる文字列を \\(S_{\\min}\\) とします。これは \\(\\preceq\\) の順序で実際に比較することで、 \\(O(N\\max|S_i|)\\) 時間で具体的に求めることができます。 \\(K=\\infty\\) のとき \\(T_{\\infty}=S_{\\min}\\times \\infty\\) となります。 (証明) \\(T_{\\infty}\\) の先頭の文字列が \\(S_i\\) であるとする。このとき \\(T_{\\infty}=S_i+T_{\\infty}\\) なので、 \\(T_{\\infty}=S_i\\times \\infty\\) である。 \\(i\\) を任意にとる。 \\(A=S_{\\min}\\times|S_i|\\) 、 \\(B=S_i\\times|S_{\\min}|\\) とする。 \\(S_{\\min} \\preceq S_i\\) より \\(A+B\\leq B+A\\) であり、 \\(|A|=|B|\\) なので \\(A\\leq B\\) である。よって \\(S_{\\min}\\times\\infty=A\\times\\infty\\leq B\\times\\infty = S_i\\times\\infty\\) となる。 \\(K <\\infty\\) のとき \\(T_K\\) は \\(T_{\\infty}\\) のprefix となります。 (証明) \\(T_K>T_\\infty\\) と仮定すると、 \\(T_K>T_\\infty>S_{\\min}\\times K\\) となり矛盾。 \\(T_K<T_\\infty\\) かつ \\(T_K\\) が \\(T_\\infty\\) の prefix でないと仮定すると、 \\(T_K\\times\\infty<T_{\\infty}\\) となり矛盾。 元の問題 以上より問題は「 \\(S\\) の元を \\(K\\) 個連結してできる \\(T_\\infty\\) の prefixで最も短いものは？」と読み替えられます。\nこれは \\(\\mathrm{dp}[n][p]\\) を「 \\(S\\) の元を \\(n\\) 個連結してできる \\(T_\\infty[p:]\\) の prefix で最も短いものの長さ」とすることで、適当な前計算の下 \\(O(|S_{\\min}|^2K)\\) で解くことができます。",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "09ac241ea63588d7f17a8f2fe4bb759e43845fefde936b4817d868c3314d82a6"
+    }
+  ],
+  "status": "available"
+}

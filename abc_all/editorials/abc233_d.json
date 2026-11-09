@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc233_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc233/editorial/3163",
+      "text": "区間和に関する問題では、累積和を取ることが典型テクニックです。\n\\(0\\leq i \\leq N\\)\nに対して\n\\(S_i = \\sum_{j=1}^{i}A_j\\)\nと累積和をとると、問題は以下のようになります\n以下の条件を満たす整数の組\n\\((l,r)\\)\nはいくつあるか？\n\\(1\\leq l\\leq r\\leq N\\)\n\\(S_r - S_{l-1}=K\\)\nこれに基づいて一旦\n\\(O(N^2)\\)\n解を考えると、次のようになります\n擬似コード\n\\(3\\)\n行目から\n\\(5\\)\n行目の\n\\(l\\)\nのループを削除して計算量を減らすことを考えます。\nそのためには、\n\\(1\\leq l\\leq r\\)\nかつ\n\\(S[l-1] = S[r]-K\\)\nを満たす\n\\(l\\)\nの数が高速に求められれば良いです。\nこれは、C++での\nstd::map\nのような連想配列を用いるなどして求めることができます。\n以上でこの問題を\n\\(O(N \\log N)\\)\nで解くことができました。\nC++ による実装例",
+      "codes": [
+        "ans = 0\nfor r in 1 .. n\n    for l in 1 .. r\n        if S[l-1] == S[r] - K\n            ans += 1\n出力(ans)",
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n#define rep(i,l,r) for(ll i=l;i<=r;i++)\n\nsigned main(){\n    ll n,k;cin>>n>>k;\n    vector<ll>a(n);rep(i,0,n-1)cin>>a[i];\n    vector<ll>s(n+1);rep(i,0,n-1)s[i+1]=s[i]+a[i];\n    map<ll,ll>mp;\n    ll ans=0;\n    rep(r,1,n){\n        mp[s[r-1]]++;\n        ans += mp[s[r]-k];\n    }\n    cout<<ans<<endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "63ae9f20da869d9089f0b2d7c0d73047fc8c669871e5d70f5cebcc1fecbdf1ac",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc233/abc233_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

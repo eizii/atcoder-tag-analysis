@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc279_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5289",
+      "text": "「\n\\(B\\)\nに対して\n\\(k=1,2,\\dots,i−1,i+1,\\dots,M\\)\nの順に問題文の操作を行うことで得られる数列」を\n\\(C_i\\ (1 \\leq i \\leq M)\\)\nとおきます。また、「\n\\(B\\)\nに対して\n\\(k=1,2,\\dots,M\\)\nの順に問題文の操作を行うことで得られる数列」を\n\\(C_0\\)\nとおきます。すべての\n\\(C_i\\)\nを愚直に求めるのは実行時間制限に間に合わないため、\n\\(C_i\\)\nと\n\\(C_0\\)\nの操作列がほとんど同じ (\n\\(k=i\\)\nについて操作をするかしないかの違いしかない) ことを利用して、高速に\n\\(C_i\\)\nを求められないか考えます。\n実際、\n\\(C_i\\)\nと\n\\(C_0\\)\nは、下記のように非常にシンプルな関係にあります。\n「\n\\(B\\)\nに対して\n\\(k=1,2,\\dots,i−1\\)\nの順に問題文の操作を行うことで得られる数列」を\n\\(C'\\)\nとする (＊)。また、\n\\(x = C'_{A_i},y = C'_{A_i+1}\\)\nとする。このとき、すべての\n\\(j\\ (1 \\leq j \\leq N)\\)\nについて以下が成り立つ。\n\\((C_0)_j \\neq x\\)\nかつ\n\\((C_0)_j \\neq y\\)\nならば、\n\\((C_i)_j = (C_0)_j\\)\n\\((C_0)_j = x\\)\nならば、\n\\((C_i)_j = y\\)\n\\((C_0)_j = y\\)\nならば、\n\\((C_i)_j = x\\)\n例えば、\n\\(C_0 = (1,3,x,2,y)\\)\nのとき、\n\\(C_i = (1,3,y,2,x)\\)\nです。これらの関係は、「\n\\(C_i\\)\nにおいては、\n\\(k=i\\)\nの操作を飛ばしたことでそれ以降での\n\\(x\\)\nと\n\\(y\\)\nの位置が\n\\(C_0\\)\nの時と逆転するが、\n\\(x\\)\nと\n\\(y\\)\n以外には影響を及ぼさない」というように考えることで理解されます。\nよって、\n\\((C_0)_j = k\\)\nを満たす\n\\(j\\)\nの値を\n\\(pos_k\\)\nとした時、\n\\((C_i)_j = 1\\)\nを満たす\n\\(j\\)\nの値は次のように求まります。\n前述 (＊) と同じように\n\\(C'\\)\nを定義する。このとき、\n\\(C'_{A_i} \\neq 1\\)\nかつ\n\\(C'_{A_i+1} \\neq 1\\)\nならば、\n\\(j = pos_1\\)\n\\(C'_{A_i} = 1\\)\nならば、\n\\(j = pos_{C'_{A_i+1}}\\)\n\\(C'_{A_i+1} = 1\\)\nならば、\n\\(j = pos_{C'_{A_i}}\\)\n\\(i=1,2,\\dots,M\\)\nの順に\n\\(C'\\)\nを求め、上の規則を適用することによってこの問題を解くことができます。計算量は\n\\(O(N+M)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<int> a(m);\n    for (int &i: a) {\n        cin >> i;\n    }\n    \n    // k = 1,2,...,M について操作を行った場合に、1,2,...,N がそれぞれどこに行くかを求める\n    vector<int> b(n + 1);\n    iota(b.begin(), b.end(), 0);\n    for (int i: a) {\n        swap(b[i], b[i + 1]);\n    }\n    vector<int> pos(n + 1);\n    for (int i = 1; i <= n; i++) {\n        pos[b[i]] = i;\n    }\n    \n    // 答えを求める\n    iota(b.begin(), b.end(), 0);\n    for (int i: a) {\n        if (b[i] == 1) {\n            cout << pos[b[i + 1]] << '\\n';\n        } else if (b[i + 1] == 1) {\n            cout << pos[b[i]] << '\\n';\n        } else {\n            cout << pos[1] << '\\n';\n        }\n        swap(b[i], b[i + 1]);\n    }\n}"
+      ],
+      "text_sha256": "a37cc27d7d54d5fadccda9f6fb0c04befef2e611c131d49570a6f6c657a4ec53",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc279/abc279_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5296",
+      "text": "\\(B\\)\nに対して\n\\(k=1,2,...,M\\)\nの順に操作を行いながら、以下の情報を管理することを考えます。\n各\n\\(i(1 \\leq i \\leq M)\\)\nについて、\n\\(k=i\\)\nの操作を飛ばした場合に現在\n\\(B_j=1\\)\nを満たす\n\\(j\\)\nの値を\n\\(D_i\\)\nとする。\n各\n\\(j(1 \\leq j \\leq N)\\)\nについて、\n\\(D_i = j\\)\nを満たす\n\\(i\\)\nの集合を\n\\(S_j\\)\nとする。この\n\\(S_j\\)\nを管理する。\n各操作における\n\\(S_j (1 \\leq j \\leq N)\\)\nの更新は、集合の管理に\nstd::set\n等の平衡二分探索木を用いた場合\n\\(O(log N)\\)\nで実行可能なため、\n\\(O(N + M log N)\\)\nでこの問題を解くことができます。\n更新の仕方等の詳細については下記の実装例を参照してください。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<int> a(m);\n    for (int &i: a) {\n        cin >> i;\n    }\n    \n    // st[j] に i が含まれる\n    //   <=> a[i] を無視して操作したとき、b[j] = 1\n    vector <set<int>> st(n + 1);\n    for (int i = 0; i < m; i++) {\n        st[1].insert(i);\n    }\n    \n    for (int i = 0; i < m; i++) {\n        swap(st[a[i]], st[a[i] + 1]);\n        if (st[a[i]].count(i)) {\n            st[a[i]].erase(i);\n            st[a[i] + 1].insert(i);\n        } else if (st[a[i] + 1].count(i)) {\n            st[a[i] + 1].erase(i);\n            st[a[i]].insert(i);\n        }\n    }\n    \n    vector<int> ans(m);\n    for (int i = 1; i <= n; i++) {\n        for (int j: st[i]) ans[j] = i;\n    }\n    for (int i: ans) cout << i << '\\n';\n}"
+      ],
+      "text_sha256": "e07d181a888289c5ca2a8d6bc4421d9b49f3048b626b0fdfbdf5d7893c4a2f88",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc279/abc279_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5311",
+      "text": "この問題のように「1つだけ操作を飛ばしたときの結果を求める」という類の問題に対しては、一般に、前後からの”累積和”を求めるアプローチが有効なことが多くあります。（高度ですが、逆元を要求しない全方位木DPが典型的な例です）\n各\n\\(k\\)\nについて「k番目までの操作をしたときの結果」と「k番目以降の操作をしたときの結果」を求めておき、結果を合体させます。詳細は下図を参考にしてください。",
+      "codes": [],
+      "text_sha256": "260c709735d63deac6bb888324334ccfcb66bac2c45313336fd13d4f88e04893",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc279/abc279_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

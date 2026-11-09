@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc085_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc085/editorial.pdf",
+      "text": "C: HSI\n\n  1 回の実行にかかる時間をx ms，全てのケースに正解する確率をp，この\n問題の答えをy ms とします。x = 1900M + 100(N −M), p = 1/2M です。\n まず，一回目の提出で必ずx ms はかかります。その後は，確率p で終了し\nます，そして確率1 −p でその提出には失敗し，更に提出を繰り返します。確\n率1 −p で失敗した場合の，その時点からかかる時間の期待値はy ms です。\n よって，y = x + (1 −p) × y が成立し，これを解くとy = x/p が得られ\nます。\n よって答えはx/p = (1900M + 100(N −M)) × 2M です。\n\n\n\n\n\n                                3",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "dda3758f8c7cab83c213d9208336424a7474105db607e047b7577f7e32609627"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc142_c",
+  "editorials": [
+    {
+      "text": "C: Go to School writer: beet\n与えられた順列に対し、各要素のソート後のインデックスを求める問題です。\nrev[Ai] = i となるような配列rev を求めればいいです。\n以下はC++ における実装例です。\n1 #include <iostream>\n2 #include <vector>\n3 using namespace std;\n4 int main(){\n5\nint N;\n6\ncin>>N;\n7\nvector<int> A(N);\n8\nfor(int i=0;i<N;i++) cin>>A[i];\n9\n10\nvector<int> rev(N);\n11\nfor(int i=0;i<N;i++) rev[A[i]-1]=i+1;\n12\nfor(int i=0;i<N;i++) cout<<rev[i]<<endl;\n13\nreturn 0;\n14 }\n",
+      "text_sha256": "8b5cb6999224e7841f5b75b2eb1244635248c686bf29a57ae9736baf872331ba",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc142/abc142_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

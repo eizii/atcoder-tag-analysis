@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc401_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc401/editorial/12693",
+      "text": "1. 判定問題を解く\nまず、ある \\(k\\) に対して条件を満たすことができるか判定する方法を考えます。\nもし、頂点 \\(1\\) から頂点 \\(i\\ (1\\lt i\\leq k)\\) へ向かうのに番号が \\(k\\) より大きい頂点を使う必要があるなら、条件を達成することはできません。\nこの条件は、「番号が \\(k\\) より大きい頂点をすべて削除したときに頂点 \\(1\\) と頂点 \\(i\\) が異なる連結成分にあるか」と同値です。\n逆に、番号が \\(k\\) より大きい頂点をすべて削除したとき、残る連結成分がただ \\(1\\) つであれば、条件を達成することができます。\nこの条件は、union-find などを利用して判定することができます。\nこれをすべての \\(k\\) について判定する方法を考えます。\nunion-find に追加する辺の順番を「辺が結ぶ \\(2\\) つの頂点の番号のうち大きいほう」の昇順とし、それぞれの \\(k\\) について適切なタイミングで判定を行うことができます。\n2. 最小化問題を解く\n次に、条件を満たすことができるときの消すべき頂点の個数を求めることを考えます。\n\\(k\\) 以下の頂点と隣接している頂点はすべて削除しなければなりません。\n逆に、そうでない頂点は残しても構いません。\nこれは、「辺が結ぶ \\(2\\) つの頂点の番号のうち小さいほう」の昇順で辺を処理し、結ばれている番号がより大きい頂点にフラグを立てることで管理をすることができます。\n適切に実装を行うことで、全体の時間計算量を \\(O(M\\alpha(M))\\) などにすることができます。\n実装例は以下のようになります。\n上で述べたふたつの辺の並びをナイーブに実装するのではなく、ある頂点を結んでいるすべての辺に対して、より大きい頂点と結ぶものかより小さい頂点と結ぶものかを判定することで実装をシンプルにしています。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <atcoder/dsu>\n\nint main() {\n    using namespace std;\n\n    unsigned N, M;\n    cin >> N >> M;\n\n    vector<vector<unsigned>> edge(N);\n    for (unsigned i = 0; i < M; i++) {\n        unsigned a, b;\n        cin >> a >> b;\n        edge[--a].push_back(--b);\n        edge[b].push_back(a);\n    }\n\n    // 現在の連結成分数\n    unsigned connected_components = 0;\n    // これまで見た頂点のいずれかと隣接しているか\n    vector<bool> already_connected(N);\n    // 消すべき頂点の個数 = これまでに見た頂点と隣接している、まだ見ていない頂点の個数\n    unsigned to_be_erased = 0;\n\n    // 連結成分を管理する\n    atcoder::dsu union_find(N);\n\n    for (unsigned i = 0; i < N; i++) {\n        // 頂点 i からなる連結成分を追加\n        ++connected_components;\n        // ここまでに見た頂点と隣接しているなら、\n        if (already_connected[i]) {\n            // 消すべき頂点が 1 つ減る\n            --to_be_erased;\n        }\n\n        for (const auto j : edge[i])\n            if (j < i) { // これまでに見た頂点側への辺なら、それを結ぶ\n                // 異なる連結成分を結ぶ辺があれば、連結成分数が 1 つ減る\n                if (!union_find.same(i, j)) {\n                    union_find.merge(i, j);\n                    --connected_components;\n                }\n            } else { // まだ見ていない頂点側への辺なら、フラグを立てる\n                // これまで隣接したことがなかった頂点なら、消すべき頂点の個数が増える\n                if (!already_connected[j])\n                    ++to_be_erased;\n                already_connected[j] = true;\n            }\n\n        // 番号が i より大きい頂点を全部消したときに連結なら、消すべき頂点を全部消すことで目標を達成できる\n        if (connected_components == 1)\n            cout << to_be_erased << '\\n';\n            // そうでないなら、不可能\n        else\n            cout << -1 << '\\n';\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "39070b6274c51420f6efa41b1715c043f4fe90885785592ff0270fda92274f18",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc401/abc401_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc401/editorial/12705",
+      "text": "Union Find を活用すれば，公式解説よりさらに簡潔に実装できます．\n公式解説での判定問題・最小化問題は以下のように解けます．\n判定問題\n：\n\\(\\max(u,v)\\leq k\\)\nである辺\n\\((u,v)\\)\nのみからなる部分グラフ上で頂点\n\\(1\\)\nを含む連結成分の大きさが\n\\(k\\)\nであるか．\n最小化問題\n： 求める値は\n\\((\\min(u,v)\\leq k\\)\nである辺\n\\((u,v)\\)\nのみからなる部分グラフ上で頂点\n\\(1\\)\nを含む連結成分の大きさ\n\\()-k\\)\n．\nある頂点を含む連結成分の大きさは ACL の\ndsu\nでは\nsize\nによって取得できます．（参考：\nACL Document - DSU\n）\n提出(C++)\n，\n提出(PyPy)\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#include <atcoder/dsu>\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\t\n\tvector<vector<int>> edges(n);\n\twhile (m--) {\n\t\tint u, v;\n\t\tcin >> u >> v;\n\t\tu--, v--;\n\t\tedges[u].push_back(v);\n\t\tedges[v].push_back(u);\n\t}\n\t\n\tatcoder::dsu uf_small(n), uf_large(n);\n\t\n\tfor (int i = 0; i < n; i++) {\n\t\tfor (auto j : edges[i]) (j < i ? uf_small : uf_large).merge(i, j);\n\t\tcout << (uf_small.size(i) == i + 1 ? uf_large.size(i) - (i + 1) : -1) << \"\\n\";\n\t}\n}"
+      ],
+      "text_sha256": "a1979dfa20654dc5c6d1ac185260adef53260a993a9b372dc3d421da5377f046",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc401/abc401_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc401/editorial/12706",
+      "text": "\\(O(N+M)\\)\n時間で解くことができます。\n\\(O((N+M) \\log (N+M))\\)\n解法\nまず、この問題は\n\\(k\\)\nについて次のように解くことができます。\n頂点\n\\(1\\)\nから頂点番号\n\\(k\\)\n以下の頂点のみを辿って訪れることができる頂点の集合を\n\\(S(k)\\)\nとする。\n\\(S(k) \\ne \\{1,2,\\cdots, k\\}\\)\nなら、答えは\n-1\nである。そうでないなら、\n\\(S(k)\\)\nに隣接する頂点番号\n\\(k+1\\)\n以上の頂点の個数が答えになる。\nこれを\n\\(k=1,2,\\cdots,N\\)\nの順に優先度付きキューなどを用いて都度求めることで\n\\(O((N+M)\\log(N+M))\\)\n時間で解けます。この解法を工夫して\n\\(O(N+M)\\)\n時間で解くことができます。\n\\(O(N+M)\\)\n時間\n上のアルゴリズムの性質を考えると、\n\\(k+1\\)\nの計算で\n頂点\n\\(k+1\\)\nが\n\\(S(k)\\)\nに隣接しないなら\n\\(S(k+1)=S(k)\\)\nである。\n頂点\n\\(k+1\\)\nが\n\\(S(k)\\)\nに隣接するとき、\n\\(k+1 \\in S(k+1)\\)\nである。このとき、\n\\(S(k+1) \\backslash S(k)\\)\n、すなわち新しく訪問することができる頂点は、頂点\n\\(k+1\\)\nから頂点\n\\(k+1\\)\n以下の頂点のみを用いて訪れることができる頂点の集合である。\nここで、\n\\(S(k)\\)\nに隣接する頂点の最小値を取得する必要はない（頂点\n\\(k+1\\)\nが含まれているかどうかだけを判定すればよい）ため、優先度付きキューで管理する必要はありません。\n\\(S(k)\\)\nに隣接する頂点を\nbool\n型配列で管理することで、\n\\(O(N+M)\\)\n時間で解くことができます。\n実装(C++)\n実装(Python)",
+      "codes": [],
+      "text_sha256": "61063ce6a21fca133a07070851b177c17c398946b59104d4006ea697f0245aa8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc401/abc401_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

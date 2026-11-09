@@ -1,0 +1,346 @@
+         ABC #107 / ARC #101 Editorial
+
+
+                                      writer: sugim48
+
+                               2018 年8 月25 日
+
+
+
+A: Train
+
+ 答えはN + 1 −i です．
+
+    • C++ のコード例: https://beta.atcoder.jp/contests/abc107/submissions/3070852
+    • Java のコード例: https://beta.atcoder.jp/contests/abc107/submissions/3070854
+    • Python 3 のコード例: https://beta.atcoder.jp/contests/abc107/submissions/3070856
+
+
+B: Grid Compression
+
+ まず，黒いマスが含まれる行および列をマークします．その後，マークされた行とマークされた列が交差す
+
+る位置のai,j のみを出力すればよいです．
+
+    • C++ のコード例: https://beta.atcoder.jp/contests/abc107/submissions/3070967
+    • Java のコード例: https://beta.atcoder.jp/contests/abc107/submissions/3070968
+    • Python 3 のコード例: https://beta.atcoder.jp/contests/abc107/submissions/3070969
+
+
+C: Candles
+
+ 連続するK 本のろうそくに火を付けるのが最適です．N 本のうち連続するK 本のろうそくを選ぶ方法は
+
+N −K + 1 通りしかないので，全探索することにします．連続するK 本のろうそくのうち，最も左のもの
+
+をl とし，最も右のものをr とします．l とr を訪れれば，自然と残りのろうそくを訪れることになります．
+
+よって，「座標0 を出発し，座標xl と座標xr をともに訪れるための最短時間」が求めるべき値です．これは
+次の2 通りの値の最小値です:
+
+    •  l →r の順に訪れる場合: |xl| + |xr −xl|
+    • r →l の順に訪れる場合: |xr| + |xr −xl|
+
+連続するK 本のろうそくを選ぶ方法を全探索し，この値の最小値を求めれば，それが答えです．時間計算量
+
+はO(N) です．
+
+
+
+
+                                             1
+
+D: Median of Medians
+
+ まず，中央値の性質を調べてみましょう．長さM の整数列b の中央値をx とします．このとき，x は次
+
+の性質を満たします:
+                  ⌈M ⌉
+    • b 中にx 以上の要素が   2 個以上含まれる．
+    • x は，上の性質を満たす整数の中で最大である．
+
+よって，中央値を求める際には二分探索が有効であると分かります．すなわち，前者の性質を満たすような最
+
+大の整数を二分探索で求めればよいです．
+
+ 以上の方針をこの問題に適用すると，次の問題を解ければよいことになります:
+
+
+    ml,r (1 ≤l ≤r ≤N) のうちx 以上の要素は何個か？
+
+
+ 上述の中央値の性質を用い，問題をさらに言い換えます:
+
+                                                            ⌈r−l+1 ⌉
+    a の連続部分列a[l, r] (1 ≤l ≤r ≤N) のうち，x 以上の要素を     2  個以上含むものは何通りか？
+
+
+ この言い換えにより，a の各要素はx 以上か否かという情報のみが必要であることが分かります．そこで，
+
+a の各要素を，x 未満ならばA へ，x 以上ならばB へ置き換えてしまいます．すると，問題は次のように言
+
+い換えられます:
+
+
+    a の連続部分列a[l, r] (1 ≤l ≤r ≤N) のうち，(A の個数) ≤(B の個数) を満たすものは何通りか？
+
+
+ 見通しをより良くするために，さらにA を−1 へ，B を+1 へ置き換えると，問題は次のように言い換えら
+
+れます:
+
+
+    a の連続部分列a[l, r] (1 ≤l ≤r ≤N) のうち，要素の総和が0 以上のものは何通りか？
+
+
+ 連続部分列の要素の総和は，累積和を用いると簡単に扱えます．(±1 へ変換後の) a の累積和の列をS とし
+                             ∑i
+ます．すなわち，各0 ≤i ≤N についてSi =   j=1 ai とします．すると，a[l, r] の要素の総和はSr −Sl−1
+と計算できます．よって，最終的な問題は次のようになります:
+
+
+   組(l, r) (0 ≤l < r ≤N) のうち，Sl ≤Sr を満たすものは何通りか？
+
+
+ これは，数列S の転倒数を求める問題とほぼ同じです．非常に典型的なので，「転倒数アルゴリズム」など
+
+で検索すると多くの解説が見つかります．この問題はO(N log N) 時間で解くことができます．よって，二分
+
+
+
+                                             2
+
+探索のステップ数を掛け合わせると，元の問題はO(N log N log A) 時間で解くことができます．ここで，A
+
+はa の要素の最大値です．
+
+
+E: Ribbons on Tree
+
+ 「辺に少なくとも1 本のリボンが張られている」という条件よりも，「辺にリボンが張られていない」という
+
+条件の方が扱いやすいので，包除原理を用いることにします．包除原理を用いると，答えは次のように計算で
+
+きます:    ∑
+                 (−1)|F |(F のどの辺にもリボンが張られないようなペアの分け方の通り数)
+
+            F ⊆E
+
+ここで，E は与えられた木の辺集合とし，F はE の部分集合全体を動きます．
+
+ まず，F をひとつ固定したとき，「F のどの辺にもリボンが張られないようなペアの分け方の通り数」を求
+
+めてみましょう．木からF の各辺を取り除き，木を|F| + 1 個の連結成分へ分割します．すると，各ペアは同
+一の連結成分内の頂点からなる必要があります．よって，各連結成分の頂点数をそれぞれn1, n2, . . . , n|F |+1
+とすると，通り数はg(n1) · g(n2) · · · · · g(n|F |+1) となります．ここで，g(·) は次のように定義されます:
+                    {
+                                  (n −1) · (n −3) · · · · · 3 · 1  (n : 偶数)
+                          g(n) :=
+                                 0                        (n : 奇数)
+
+ 当然F を全探索することはできないので，代わりに根付き木上でDP をします．DP の状態は，「今の部分
+
+木」「今の連結成分の頂点数」に加え，「これまでに取り除いた辺の本数の偶奇」が必要です．よって，dp(·, ·, ·)
+
+を次のように定義します:
+           (                                             )
+           頂点v を根とした部分木において，v を含む連結成分の頂点数がx で，
+      dp(v, x, p) :=
+           部分木内で取り除いた辺の本数の遇奇がp の場合の，ペアの分け方の通り数
+
+このdp を葉から根へ向かって順に更新し，最後に根r におけるdp を参照することで，答えが求まります．
+ 部分木どうしのdp をマージするとき，常にx を0 からN まで回してしまうと，各マージごとにO(N 2)
+時間が掛かります．マージは全体でN −1 回行われるので，合計でO(N 3) 時間が掛かり，TLE してしまい
+
+ます．ここで，頂点数X の部分木のdp においては，x はX まで考慮すればよいことを利用します．する
+
+と，頂点数X の部分木と頂点数Y の部分木のdp をマージするのに掛かる時間はO(X · Y ) に抑えられます．
+これは定数倍改善でしかないように思えますが，実は計算量を本質的に改善し，全体でO(N 2) 時間となりま
+
+す．これは十分に高速です．計算量解析は省きますが，「木DP 二乗」などで検索すると解説が見つかります．
+
+
+F: Robots and Exits
+
+ まず，最も左の出口より左に置かれているロボットたちと，最も右の出口より右に置かれているロボットた
+
+ちは無視してもよいです．
+
+ ある時点におけるロボットの変位の履歴を考えます．この履歴の最小値をx とし，最大値をy とします．
+
+最初，(x, y) = (0, 0) です．すぬけ君は，(x, y) から(x + 1, y) または(x, y + 1) のいずれかを自由に選び，
+
+変化させることができます．これは，すぬけ君が二次元平面上の原点から，右または上へ距離1 ずつ移動して
+
+いくことと等価です．
+
+ この言い換えのもとで，各ロボットがいずれの出口を通るかを考えます．ロボットi について，すぐ左の出
+
+口までの距離をai とし，すぐ右の出口までの距離をbi とします．すると，x がai に達するタイミングと
+
+
+                                             3
+
+y がbi に達するタイミングを比較し，前者が早ければロボットi はすぐ左の出口を通り，後者が早ければロ
+ボットi はすぐ右の出口を通ります．すなわち，二次元平面上に点(ai, bi) をプロットしたとき，すぬけ君が
+この点の下側を通るか，左側を通るかによって，ロボットi の通る出口が変わります．
+
+
+
+
+
+                                             4
+
+         ABC #107 / ARC #101 Editorial
+
+
+                                      writer: sugim48
+
+                               2018 年8 月25 日
+
+
+
+A: Train
+
+  The answer is N + 1 −i.
+
+    • C++ Code Example: https://beta.atcoder.jp/contests/abc107/submissions/3070852
+
+    • Java Code Example: https://beta.atcoder.jp/contests/abc107/submissions/3070854
+
+    • Python 3 Code Example: https://beta.atcoder.jp/contests/abc107/submissions/3070856
+
+
+B: Grid Compression
+
+  Mark all rows/columns that contain at least one black cell, and print intersections of marked rows and
+
+marked columns.
+
+    • C++ Code Example: https://beta.atcoder.jp/contests/abc107/submissions/3070967
+
+    • Java Code Example: https://beta.atcoder.jp/contests/abc107/submissions/3070968
+
+    • Python 3 Code Example: https://beta.atcoder.jp/contests/abc107/submissions/3070969
+
+
+C: Candles
+
+  Clearly, we should light K consecutive candles. Let l, r be the leftmost/rightmost indices of candles
+
+we light. Since there are only N −K + 1 pairs of (l, r), let’s try them all.
+
+  For a ﬁxed (l, r), we should compute the minimum time required to visit both xl and xr (then all other
+
+candles between them will be visited too). There are two cases:
+
+    • Visit in the order l →r: |xl| + |xr −xl|
+    • Visit in the order r →l: |xr| + |xr −xl|
+
+  The answer is the minimum of these values. This solution works in O(N) time.
+
+
+
+
+
+                                             1
+
+D: Median of Medians
+
+  Let b be a sequence of length M. If the median of b is x,
+                ⌈M ⌉
+    • b contains at least   2  elements that are greater than or equal to x.
+    • x is the largest possible value that satisﬁes the condition above.
+
+  Let’s ﬁx a parameter x. We want to solve the following problem:
+
+
+   Count the number of pairs (l, r) (1 ≤l ≤r ≤N) such that ml,r ≥x.
+
+
+
+   If we can solve this, by doing a binary search on x (using the property of median mentioned above),
+
+we can solve the original problem.
+
+  For simplicity, we call an element ”large” if the element is x or greater, and call it ”small” otherwise.
+
+Notice that ml,r ≥x holds if and only if (the number of large elements in it) is greater than or equal to
+
+(the number of small elements in it). Thus, we replace each large element with 1 and each small element
+
+with −1. Now ml,r ≥x holds if and only if al + . . . + ar ≥0.
+
+  To count such pairs, we use preﬁx sums. We want to count the number of pairs (l, r) such that
+                ∑i
+Sl−1 ≤Sr, where Si :=   j=1 ai. Now the problem is reduced to a standard inversion-number problem.
+  This solution works in O(N log N log max a) time in total.
+
+
+
+
+
+                                             2
+
+E: Ribbons on Tree
+
+ By inclusion-exclusion principle, we want to compute the following value:
+             ∑
+                                             (−1)|F |f(F)
+
+                                      F ⊆E
+
+Here, E is the edge set of the given tree, and f(F) is the number of ways to split vertices in pairs such
+
+that no edge in F is decorated with ribbons.
+
+  For a ﬁxed F, we can compute f(F) as follows. Suppose that the number of vertices of the |F| + 1
+
+connected components we get by removing edges in F from the tree are n1, n2, . . . , n|F |+1. Then, f(F) =
+g(n1) · g(n2) · · · · · g(n|F |+1), where g(n) is deﬁned as follows (this is the number of ways to split n things
+into pairs):                   {
+                                 (n −1) · (n −3) · · · · · 3 · 1  (n : even)
+                          g(n) :=
+                                 0                        (n : odd)
+
+  To compute the sum of f(F) quickly, let’s use DP.
+
+  Suppose that the tree is rooted in some way. We decide pairings from leaves, and we keep ”current
+
+subtree”, ”the number of vertices in current component”, and ”the parity of removed edges”.
+
+  Deﬁne dp(v, x, p) as follows:
+
+
+    Consider the subtree rooted at v. We remove some edges from the subtree and get some connected
+
+  components. Then, within each component, we split vertices into pairs.  Here, the parity of the
+
+  number of removed edges must be p, and the number of vertices in the component with v (the root
+
+  of the subtree) must be x. How many ways are there to do this?
+
+
+
+  Strictly speaking, we need a slight technical modiﬁcation to this. We split vertices into pairs within
+
+each component, but as an exception, we don’t make pairs for the vertices in the component with v (in
+
+other words, we don’t multiply g(x)). (Otherwise you will have trouble updating this DP table).
+  This solution works in O(N 2) time.
+
+
+
+
+
+                                             3
+
+F: Robots and Exits
+
+  We’ll update it later!
+
+
+
+
+
+                                             4

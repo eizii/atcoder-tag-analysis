@@ -1,0 +1,31 @@
+{
+  "problem_id": "abc426_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc426/editorial/14140",
+      "text": "この問題にはいくつかの方針があります。\n方針1.  場合分けを活用する\n\\(9\\)\n通り場合分けをするとこの問題に正解できます。\n答えが\nNo\nとなるのは\n\\(3\\)\n通りであることを利用すると、場合分けの数が減ります。実装例はその方針です。\n実装例 (C++):\n方針2.  バージョンに数を割り当てる\nバージョンに古い順で数字を与えることで、本問題を大小比較に帰着できます。\n実装例 (C++):\n方針3. 方針2 の応用\nLynx\nだけ先頭の文字を書き換えることにすれば、先頭の文字の辞書順比較に帰着させることもできます。この方針ではコード量を少なくできます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string x,y;\n  cin >> x >> y;\n  if(x==\"Ocelot\" && y==\"Serval\"){cout << \"No\\n\";}\n  else if(x==\"Ocelot\" && y==\"Lynx\"){cout << \"No\\n\";}\n  else if(x==\"Serval\" && y==\"Lynx\"){cout << \"No\\n\";}\n  else{cout << \"Yes\\n\";}\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  map<string,int> mp;\n  mp[\"Ocelot\"]=1;\n  mp[\"Serval\"]=2;\n  mp[\"Lynx\"]=3;\n\n  string x,y;\n  cin >> x >> y;\n  if(mp[x]>=mp[y]){cout << \"Yes\\n\";}\n  else{cout << \"No\\n\";}\n  return 0;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  string x,y;\n  cin >> x >> y;\n  if(x[0]=='L'){x[0]='Z';}\n  if(y[0]=='L'){y[0]='Z';}\n  if(x[0]>=y[0]){cout << \"Yes\\n\";}\n  else{cout << \"No\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "65a7598c7316e82aa669ee15ecb810b2bc478273666bd3007435fd71d7272914",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc426/abc426_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc426/editorial/14157",
+      "text": "バージョンが新しいほど、バージョン名の\n\\(2\\)\n文字目が辞書順で大きいことがわかります (\n\\(4\\)\n文字目についても同様です)。\nよって、これらを比較することで答えを求められます。\n実装例 (Python)",
+      "codes": [
+        "X, Y = input().split()\nprint('Yes' if X[1] >= Y[1] else 'No')",
+        "X, Y = input().split()\nprint('Yes' if X[3] >= Y[3] else 'No')"
+      ],
+      "text_sha256": "a8d63e770626167384147bffa515272786428f201ee91196600ff8c330c69221",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc426/abc426_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

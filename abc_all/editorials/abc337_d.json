@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc337_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc337/editorial/9139",
+      "text": "以下では、\n\\(1\\)\n行\n\\(W\\)\n列のグリッドが与えられたときに、グリッド内で横方向に\no\nを\n\\(K\\)\n個並べることは可能か？可能ならその最小手数は？という問題を\n\\(O(W)\\)\n時間で解くことを考えます。（元の問題を解くには、それを各行および各列について行えばよく、グリッド全体で\n\\(O(HW)\\)\n時間で可能です。）\nこのグリッド内から連続した\n\\(K\\)\nマス\n\\((1, i), (1, i+1), \\ldots, (1, i+K-1)\\)\n（以下、単に区間\n\\([i, i+K-1]\\)\nなどと呼ぶ）を選んだとき、これら\n\\(K\\)\nマスをすべて\no\nにすることができるのは、区間\n\\([i, i+K-1]\\)\n内に\nx\nが無いときかつそのときに限ります。\nまた、その場合に区間内\n\\([i, i+K-1]\\)\nを全て\no\nにするための最小手数は、区間内の\n.\nの個数と等しいです。\nしたがって、答えを求めるには\n\\((W-K+1)\\)\n個の区間\n\\([1, K], [2, K+1], \\ldots, [W-K+1, W]\\)\n全てについて、その区間内の\nx\nの個数と\n.\nの個数が分かれば良いです。\nこれは、\nx\nと\n.\nの個数それぞれの累積和によって高速に求められます。\n具体的には、各\n\\(i = 0, 1, 2, \\ldots, W\\)\nについて区間\n\\([1, i]\\)\n内の、\nx\nの個数を\n\\(X_i\\)\n、\n.\nの個数を\n\\(D_i\\)\nとする配列\n\\(X, D\\)\nを前計算しておくことで、各区間\n\\([i, i+K-1]\\)\n内の\nx\nの個数\n.\nの個数はそれぞれ\n\\(X_{i+K-1} - X_{i-1}\\)\nと\n\\(D_{i+K-1} - D_{i-1}\\)\nとして\n\\(O(1)\\)\n時間で求められ、\n\\((W-K+1)\\)\n個の区間\n\\([1, K], [2, K+1], \\ldots, [W-K+1, W]\\)\n全部で計算しても全体\n\\(O(W)\\)\n時間で済みます。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint H, W, K;\nstring S[200001];\nint X[200001], D[200001];\n\nint main(void){\n  cin >> H >> W >> K;\n  for(int i = 1; i <= H; i++) cin >> S[i];\n  for(int i = 1; i <= H; i++) S[i] = \"#\" + S[i]; //添字を解説本文と揃えるためだけの便宜上の処理です\n\n  int ans = 1e9;\n  for(int y = 1; y <= H; y++){\n    for(int i = 1; i <= W; i++){\n      X[i] = X[i-1], D[i] = D[i-1];\n      if(S[y][i] == 'x') X[i]++;\n      if(S[y][i] == '.') D[i]++;\n    }\n    for(int i = 1; i <= W-K+1; i++){\n      if(X[i+K-1]-X[i-1] == 0) ans = min(ans, D[i+K-1]-D[i-1]);\n    }\n  }\n  for(int x = 1; x <= W; x++){\n    for(int i = 1; i <= H; i++){\n      X[i] = X[i-1], D[i] = D[i-1];\n      if(S[i][x] == 'x') X[i]++;\n      if(S[i][x] == '.') D[i]++;\n    }\n    for(int i = 1; i <= H-K+1; i++){\n      if(X[i+K-1]-X[i-1] == 0) ans = min(ans, D[i+K-1]-D[i-1]);\n    }\n  }\n  \n  if(ans > K) ans = -1;\n  cout << ans << endl;\n  return 0;\n}"
+      ],
+      "text_sha256": "5b2b32874c97d5a539fe798b7454767aebac8828c77678d59f5e376b43af1a23",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc337/abc337_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

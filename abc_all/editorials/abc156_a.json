@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc156_a",
+  "editorials": [
+    {
+      "text": "A: Beginner\n(原案: kort0n, 準備・解説: gazelle)\nコンテストの参加回数によって、内部レーティングと表示レーティングの間に成り立つ関係式が異\nなっています。よって、高橋君のコンテスト参加回数N が10 以上かどうかで場合分けをして考え\nることにします。\nN が10 以上の場合\nこのとき、内部レーティングと表示レーティングは等しくなるので、入力として受け取った高\n橋君の表示レーティングの値を、そのまま高橋君の内部レーティングの値として出力すればい\nいです。\nN が10 未満の場合\nこのとき、\n表示レーティング= 内部レーティング−100 × (10 −N)\nの関係が成り立っています。よって高橋君の内部レーティングの値は、表示レーティングの値\nに100 × (10 −N) を足したものに等しいことが分かります。\n以上のロジックのC++ での実装例をListing 1 に示します。\nなおListing 2 のコードのように、min 関数を用いてif 文を使わないコードにすることも可能です。\nListing 1\nC++ による実装例\n1 #include<bits/stdc++.h>\n2 using namespace std;\n3\n4 int main() {\n5\nint N, R;\n6\ncin >> N >> R;\n7\nif(N >= 10) cout << R << endl;\n\n8\nelse cout << R + 100 * (10 - N) << endl;\n9\nreturn 0;\n10 }\nListing 2\nC++ による実装例2\n1 #include<bits/stdc++.h>\n2 using namespace std;\n3\n4 int main() {\n5\nint N, R;\n6\ncin >> N >> R;\n7\ncout << R + 100 * (10 - min(10, N)) << endl;\n8\nreturn 0;\n9 }\n",
+      "text_sha256": "25d921c3ac5619eb6d83001aa20415ead4d54922bb9818d2aca11fe84e9b02ac",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc156/abc156_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

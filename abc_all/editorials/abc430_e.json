@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc430_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc430/editorial/14330",
+      "text": "問題原案：admin\n操作は文字列の左シフトであるため、\n\\(|A|\\)\n回操作をすると文字列が元に戻るので、\n\\(|A|\\)\n回以上の操作を行う必要はありません。\n\\(A\\)\nに操作を\n\\(k\\)\n回行った時、\n\\(A=B\\)\nとなる条件は次の通りです。\n操作前の\n\\(A\\)\nの\n\\(k+1\\)\n文字目から末尾まで、操作前の\n\\(A\\)\nの\n\\(1\\)\n文字目から\n\\(k\\)\n文字目までをこの順に連結した文字列が、\n\\(B\\)\nと等しい\n各文字を\n\\(A=\\)\nABCDE\n、\n\\(B=\\)\npqrst\nと置いた例で考えてみましょう。\nABCDE\nと\npqrst\nが等しいなら、答えは\n\\(0\\)\nである。\nBCDEA\nと\npqrst\nが等しいなら、答えは\n\\(1\\)\nである。\nCDEAB\nと\npqrst\nが等しいなら、答えは\n\\(2\\)\nである。\nDEABC\nと\npqrst\nが等しいなら、答えは\n\\(3\\)\nである。\nEABCD\nと\npqrst\nが等しいなら、答えは\n\\(4\\)\nである。\nこれを全部まとめて\n\\(O(N)\\)\nなどの計算量で解ければこの問題に正解できます。\nこの判定を行うには\nABCDEABCD\nのうち\npqrst\nが最初にどこに部分文字列として出現するか判定すればよいです。\nこのような文字列中の特定のパターンを検出する問題はよく知られています。\nローリングハッシュや Suffix Array などによる解法もありますが、ここでは\nACL にも実装されている Z-algorithm\nによる解法を紹介します。\nまず、\n\\(B,A,A\\)\nをこの順に連結した文字列\n\\(S\\)\nを Z-algorithm にかけ、解答である Z-array\n\\(z\\)\nを取得する。\n例では、\n\\(S=\\)\npqrstABCDEABCDE\nとなる。\n\\(k=0,1,\\dots,|A|-1\\)\nについて以下を繰り返す。\n\\(z[|A|+k] \\ge |A|\\)\nか判定する。\nもし\n\\(z[|A|+k] \\ge |A|\\)\nであれば答えは\n\\(k\\)\nとして終了する。\n\\(z[|A|+k]\\)\nは\n\\(S\\)\nの接頭辞と\n\\(S\\)\nの\n\\(|A|+k\\)\n文字目以降を切り抜いた部分文字列とが何文字目まで一致するかを表します。\n\\(z[|A|+k] \\ge |A|\\)\nであるということは、\n\\(A\\)\nを\n\\(k\\)\n回左シフトした文字列と\n\\(B\\)\nが一致することを表します。\nZ-algorithm は与える文字列を\n\\(S\\)\nとして時間計算量\n\\(O(|S|)\\)\nで動作するため、この問題に正解することができます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/all>\n\nusing namespace std;\nusing namespace atcoder;\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int t;\n  cin >> t;\n  while(t>0){\n    t--;\n    string a,b;\n    cin >> a >> b;\n    int l=a.size();\n    string s=b+a+a;\n    auto z=z_algorithm(s);\n    bool ok=false;\n    for(int k=0;k<l;k++){\n      if(z[l+k]>=l){\n        ok=true;\n        cout << k << \"\\n\";\n        break;\n      }\n    }\n    if(!ok){cout << \"-1\\n\";}\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "624013cf653ac3cea6d319ab58845d97318da059d1edba265c7804e8e4a3315b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc430/abc430_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

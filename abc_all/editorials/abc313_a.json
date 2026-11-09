@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc313_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc313/editorial/6900",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nまず、\n\\(P_2,P_3,\\dots,P_N\\)\nの最大値を求めます。これを\n\\(M\\)\nとおきます。このとき、人\n\\(1\\)\nが最強になる条件は、\n\\(P_1\\)\nが\n\\(M\\)\nより大きくなることです。よって、答えは\n\\(M + 1 - P_1\\)\nと\n\\(0\\)\nのうち大きい方になります。単に\n\\(M + 1 - P_1\\)\nを出力するだけだと、入力の時点で既に人\n\\(1\\)\nが最強のとき負の値を 出力してしまうので注意してください。\n詳しい実装方法は下記の実装例を参考にしてください。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> p(n);\n    for (int i = 0; i < n; i++) {\n        cin >> p[i];\n    }\n    int m = 0;\n    for (int i = 1; i < n; i++) {\n        m = max(m, p[i]);\n    }\n    cout << max(0, m + 1 - p[0]) << endl;\n}",
+        "n = int(input())\np = list(map(int, input().split()))\nm = 0\nfor i in range(1, n):\n    m = max(m, p[i])\nprint(max(0, m + 1 - p[0]))"
+      ],
+      "text_sha256": "09342e876e47945def4cf1f07f8dbaa89ebcfc334ad08a4940a7ab6622f9e397",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc313/abc313_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc024_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc024/editorial.pdf",
+      "text": "B:自動ドア\n\f\n      B-問題概要\n\n●前を人が通りかかるとT秒開き続ける自動ドア\n がある\n●開いている途中に新たに人が通りかかったら開\n く時間がそこからT秒後まで延長される\n●N人がドアの前を通りかかった時刻が与えられ\n る\n●ドアが開いていた合計秒数を求めよ\n\f\n      B-部分点解法\n\n●N ≦ 10^5\n●T ≦ 100\n●時刻 ≦ 10^6\n\f\n      B-部分点解法\n\n●N ≦ 10^5\n●T ≦ 100\n●時刻 ≦ 10^6\n\n\n●各時刻についてその時刻にドアが開いていたか\n 閉まっていたか覚えておく\n\f\n      B-部分点解法\n\n●N ≦ 10^5\n●T ≦ 100\n●時刻 ≦ 10^6\n\n\n●各時刻についてその時刻にドアが開いていたか\n 閉まっていたか覚えておく\n●人が通りかかると、その時刻からT秒間のドア\n は開き続ける\n\f\n      B-部分点実装\n\n●open[i] = 時刻iにドアが開いているかどうか\n\f\n      B-部分点実装\n\n●open[i] = 時刻iにドアが開いているかどうか\n\n\n●時刻aに人が通りかかった\n\n   –    open[a], open[a+1], … , open[a + t – 1]をTrueに\n  する\n\f\n      B-部分点実装\n\n●open[i] = 時刻iにドアが開いているかどうか\n\n\n●時刻aに人が通りかかった\n\n   –    open[a], open[a+1], … , open[a + t – 1]をTrueに\n  する\n\n\n●最後にopen[i] = Trueであるiを数える\n\f\n      B-部分点実装\n\n●open[i] = 時刻iにドアが開いているかどうか\n\n\n●時刻aに人が通りかかった\n\n   –    open[a], open[a+1], … , open[a + t – 1]をTrueに\n  する\n\n\n●最後にopen[i] = Trueであるiを数える\n●O(NT) 50点獲得\n\f\n      B-満点解法\n\n●close[i] = 時刻iの時点でドアが何秒後に閉まる\n 予定か？\n\f\n      B-満点解法\n\n●close[i] = 時刻iの時点でドアが何秒後に閉まる\n 予定か？\n\n\n●時刻aに人が通りかかった\n\n   –     close[a] = T\n\f\n      B-満点解法\n\n●close[i] = 時刻iの時点でドアが何秒後に閉まる\n 予定か？\n\n\n●時刻aに人が通りかかった\n\n   –     close[a] = T\n●時刻aに人が通らなかった\n\n   –     close[a] = max(close[a-1] – 1, 0)\n\f\n      B-満点解法\n\n●close[i] = 時刻iの時点でドアが何秒後に閉まる\n 予定か？\n\n\n●時刻aに人が通りかかった\n\n   –     close[a] = T\n●時刻aに人が通らなかった\n\n   –     close[a] = max(close[a-1] – 1, 0)\n\n\n●最後にclose[i] > 0であるiを数える\n\f\n      B-満点解法\n\n●close[i] = 時刻iの時点でドアが何秒後に閉まる\n 予定か？\n\n\n●時刻aに人が通りかかった\n\n   –     close[a] = T\n●時刻aに人が通らなかった\n\n   –     close[a] = max(close[a-1] – 1, 0)\n\n\n●最後にclose[i] > 0であるiを数える\n●O(時刻)\n\f\n  ABC024解説",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "bf32505602f40194efdd01d6b5df48fb916ef6a8fad17151d68f65704d38306d"
+    }
+  ],
+  "status": "available"
+}

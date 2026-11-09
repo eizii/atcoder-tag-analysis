@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc459_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc459/editorial/20973",
+      "text": "まず、ある文字が\n\\(S\\)\nの過半数を占めている場合はどのように並べてもその文字が隣り合ってしまうため答えは\nNo\nです。\n実は、これ以外の場合は答えは\nYes\nで条件を満たすように\n\\(S\\)\nを並び替えることができます。\n並び替える方法はいくつかありますが、例えば以下のようなアルゴリズムで構成することができます：\n\\(d[c]\\)\nを文字\n\\(c\\)\nの出現回数とする。\n\\(T\\)\nを空文字列とする。\n\\(i=1,2,\\ldots,|S|\\)\nに対し、以下を順に行う：\n\\(T\\)\nの末尾ではない文字の中で\n\\(d[c]\\)\nが最大となる\n\\(c\\)\nを選び、\n\\(T\\)\nに連結する。\n\\(d[c]\\)\nを\n\\(1\\)\n減らす。\n\\(T\\)\nが求める答えである。\n以上を適切に実装することでこの問題に正答することができます。計算量は\n\\(\\sigma=26\\)\nとして\n\\(O(\\sigma |S|)\\)\nです。\n実装例(Python3)",
+      "codes": [
+        "import sys\n\ninput = sys.stdin.readline\n\n\ndef solve():\n    s = input()[:-1]\n    n = len(s)\n    cnt = [0] * 26\n    for c in s:\n        cnt[ord(c) - ord(\"a\")] += 1\n    for v in cnt:\n        if v > (n + 1) // 2:\n            print(\"No\")\n            return\n    ans = []\n    prev = -1\n    while True:\n        idx = -1\n        val = 0\n        for i in range(26):\n            if i == prev:\n                continue\n            if val < cnt[i]:\n                val = cnt[i]\n                idx = i\n        if idx == -1:\n            break\n        ans.append(chr(ord(\"a\") + idx))\n        cnt[idx] -= 1\n        prev = idx\n    print(\"Yes\")\n    print(\"\".join(ans))\n\n\nfor _ in range(int(input())):\n    solve()"
+      ],
+      "text_sha256": "23313ff88dd847123f5c650cb720876cfed1313a387fa4a2a155248c9a96f060",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc459/abc459_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc459/editorial/20991",
+      "text": "以下の方針で解くこともできます。ただし、\n\\(N_1\\)\nは\n\\(N\\)\n以下の最大の奇数、\n\\(N_2\\)\nは\n\\(N\\)\n以下の最大の偶数とします。\n\\(1,3,5,\\ldots,N_1,2,4,\\ldots,N_2\\)\n文字目の順に出現回数の多いアルファベットを\n\\(S'\\)\nに順に入れていく。\n例えば\n\\(S=\\)\naabbbcc\nの場合、以下のように\n\\(S'\\)\nが構成されていきます：\nはじめ\n\\(S'=\\)\n*******\nである。\n\\(S\\)\nの中のアルファベットを出現回数順に並べると、\nb\nが\n\\(3\\)\n回、\na\nが\n\\(2\\)\n回、\nc\nが\n\\(2\\)\n回である。\nb\nを\n\\(S'\\)\nにセットする。\n\\(S'=\\)\nb*b*b**\nとなる。\na\nを\n\\(S'\\)\nにセットする。\n\\(S'=\\)\nbab*b*a\nとなる。\nc\nを\n\\(S'\\)\nにセットする。\n\\(S'=\\)\nbabcbca\nとなる。",
+      "codes": [],
+      "text_sha256": "a955f8fcdcb173053461139adc61aa876d2197dd159abe72c3881c64d82ea9bc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc459/abc459_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

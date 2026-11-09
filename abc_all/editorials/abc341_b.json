@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc341_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc341/editorial/9317",
+      "text": "\\(i = 1, 2, \\ldots, N-1\\)\nの順に「国\n\\(i\\)\nの通貨を可能な限り国\n\\(i+1\\)\nの通貨に交換する」ことを行えば良いです。\n行う交換の回数は非常に多くなりうるので、\n\\(1\\)\n回ずつ交換を行うと実行制限時間に間に合いません。\nですが、国\n\\(i\\)\nの通貨を\n\\(A_i\\)\n単位持っているとき、国\n\\(i\\)\nの通貨から国\n\\(i+1\\)\nの通貨への交換ができる回数は\n\\(\\lfloor A_i / S_i \\rfloor\\)\n回とわかるので、\n\\(\\lfloor A_i / S_i \\rfloor\\)\n回の交換をまとめて行って国\n\\(i+1\\)\nの通貨が\n\\(\\lfloor A_i / S_i \\rfloor \\times T_i\\)\n単位得られるとして良いです。\nしたがって、入力で受け取った\n\\(A = (A_1, A_2, \\ldots, A_N)\\)\nに対して、\n\\(i = 1, 2, \\ldots, N-1\\)\nの順に「\n\\(A_{i+1}\\)\nに\n\\(\\lfloor A_i / S_i \\rfloor \\times T_i\\)\nを加算する」ことを行い、最後に\n\\(A_N\\)\nの値を出力すれば、本問題に正解できます。\n「\n\\(i = 1, 2, \\ldots, N-1\\)\nの順に」処理を行うには、プログラミング言語の標準的な機能である繰り返しの機能（ for 文など）を用いることができます。\nまた、割り算\n\\(A_i/S_i\\)\nの結果の小数点以下を切り捨てた値を得るには、使用する言語の割り算等の仕様を把握しておくと良いでしょう。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\ntypedef long long ll;\n\nll n;\nll a[200001], s[200001], t[200001];\n\nint main(void)\n{\n  cin >> n;\n  for(int i = 1; i <= n; i++) cin >> a[i];\n  for(int i = 1; i <= n-1; i++) cin >> s[i] >> t[i];\n  \n  for(int i = 1; i <= n-1; i++) a[i+1] += a[i]/s[i] * t[i];\n  cout << a[n] << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "d7d68b7467e610e7e7591c8cd77e8c0eda5c7227165f2c3b6f1d8d2ab0dfc621",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc341/abc341_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

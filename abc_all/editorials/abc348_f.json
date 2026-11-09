@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc348_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc348/editorial/9731",
+      "text": "この問題の愚直な解法として、すべての\n\\((i,j)\\)\nの組を探索してそれぞれの組に対し\n\\(A_{i,k}=A_{j,k}\\)\nを満たす\n\\(k (1 \\leq k \\leq M)\\)\nの個数を求めてそれが奇数である場合は答えに加算するというのがあります。しかし、これは計算量が\n\\(O(N^2M)\\)\nとなり、実装方法によってはこの問題では実行時間制限に間に合いません。\nこの問題では、bitset高速化というテクニックを利用することで定数倍に\n\\(\\frac{1}{64}\\)\nがつき、\n\\(\\frac{2000^{3}}{64} = 125000000 \\simeq 10^{8}\\)\nであるため十分高速になります。\n具体的には、\n\\(B_{i,j}\\)\nを\n\\(A_{i,k}=A_{j,k}\\)\nとなる\n\\(k\\)\nの個数の偶奇と定義すると、\n\\(B_1,B_2,\\ldots,B_N\\)\nをそれぞれbitsetにすることができます。実際に計算する際は\n\\(k\\)\nを\n\\(1\\)\nから\n\\(M\\)\nまで、それぞれの\n\\(k\\)\nについて\n\\(A_{i,k}\\)\nの値ごとにまとめて、bitsetのxorなどを適切に用いることで実装出来ます。\n詳しくは実装例を参考にしてください。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nstatic constexpr size_t maxN=2000;\nint main(){\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n,m;cin>>n>>m;\n    vector<vector<int>>a(n,vector<int>(m));\n    for(int i=0;i<n;++i){\n        for(int j=0;j<m;++j){\n            cin>>a[i][j];\n        }\n    }\n    \n    vector<bitset<maxN>>bt(n);\n    vector<bitset<maxN>>bs(1000);\n    for(int i=0;i<m;++i){\n        for(int j=0;j<n;++j){\n            bs[a[j][i]].set(j);\n        }\n        for(int j=0;j<n;++j){\n            bt[j]^=bs[a[j][i]];\n        }\n        for(int j=0;j<n;++j){\n            bs[a[j][i]].reset(j);\n        }\n    }\n\n    int ans=0;\n    for(int i=0;i<n;++i)ans+=bt[i].count();\n    if(m&1)ans-=n;\n    cout<<ans/2<<endl;\n}"
+      ],
+      "text_sha256": "beb5a2e5a64a8bf6ce3dc240005ab60e531dc2ec324bebde6163b51e1b9de11e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc348/abc348_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc348/editorial/9752",
+      "text": "\\(1 \\leq N,M \\leq 2000\\)\nであり、一見\n\\(O(N^2M)\\)\n解法を間に合わせることは難しそうですが、値が一致するかどうかのチェックなどの軽い処理しかないことに注目すると、例えば以下のようにC++などの高速な言語を用いた上でif文の回避や配列へのアクセスの順番を変えるなどの工夫をすることで\n\\(O(N^2M)\\)\n解法が十分高速に動作します(409ms)。\n提出結果へのリンク",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n#define rep(i,n) for(int (i)=0;(i)<(n);(i)++)\n\nint main(void){\n    cin.tie(0);ios::sync_with_stdio(false);\n    int N,M;\n    cin >> N >> M;\n    short A[M][N];\n    rep(i,N) rep(j,M) cin >> A[j][i];\n    bool cnt[N][N];\n    rep(i,N) rep(j,N) cnt[i][j]=false;\n    rep(i,M){\n        rep(j,N) for(int k=j+1;k<N;k++) cnt[j][k]^=(A[i][j]==A[i][k]);\n    }\n    int ans=0;\n    rep(i,N) for(int j=i+1;j<N;j++) ans+=cnt[i][j];\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "737d41a77e5bf4764871d84d198944e7865223661df7e7fce22b91b51b4f0c2c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc348/abc348_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc348/editorial/9758",
+      "text": "(注)　他の解法の方が高速で実装も楽だと思います\nまずは以下の2つのTLE解法をご覧ください。\nTLE解法 1\nサイズ\n\\(NM\\)\nの bitset を用意します。\n\\(j = 1, 2, ..., M\\)\nについて以下を行います。\n\\(x = 1, 2, ..., 999\\)\nについて\n\\(A[i][j] = x\\)\nとなるような\n\\(i\\)\nのかたまりを作ります。それぞれの\n\\(i\\)\nについて、そのかたまりと一対一の対応が取れている数値の場所の bit を立てます。\n最後に、それぞれの数列のペアについて、bitset の\n\\(\\text{AND}\\)\nを取ると、共通するかたまりが抽出できます。最後に、立っているビットの個数が奇数であれば、その\n\\(2\\)\nつの数列は似ていることになります。ビットサイズは\n\\(NM\\)\n必要で、それぞれの数列のペアについて演算するため、\n\\(W=64\\)\nとして、計算量は\n\\(O(\\frac{N^3 M}{W})\\)\nとなります。\nTLE解法 2\n\\(N \\times N\\)\nの配列を用意し、数列のペアにおける、問題文中の個数の偶奇を保管することにします。\n上述のかたまり内のそれぞれのペアについて偶奇を反転させます。\n最悪ケースは例えば\n\\(A_{i, j}\\)\nがすべて等しいようなケースで、 計算量は\n\\(O(N^2 M)\\)\nとなります。\nAC 解法\n以上 2 つのTLE解法を組み合わせることでこの問題を解くことができます。\nTLE解法 1 は、かたまりの大きさが\n\\(2\\)\n以上のもののみ考慮することで必要なビットサイズを半分にできる、ということが考えられます。これを応用して、あるしきい値\n\\(B\\)\n以上のときのみ考慮してみましょう。かたまりは高々\n\\(NM/B\\)\n個となり、必要なビットサイズは\n\\(1/B\\)\n倍となります。計算量は\n\\(O(\\frac{N^3 M}{WB})\\)\nです。\nしかし、これでは\n\\(B\\)\n未満のときにどうするかが課題です。そこで、\n\\(B\\)\n未満のときはTLE解法 2 の処理をしてみましょう。そして、最終的にそれぞれのTLE解法で偶奇が異なれば、その2つの数列は似ている、とできます。大きさ最大\n\\(B\\)\nのものが\n\\(NM/B\\)\n個あるときが最悪ケースとなり、計算量は\n\\(B^2 \\times NM/B \\)\nで\n\\(O(NMB)\\)\nとなります。\n以上より、計算量は\n\\(O(\\frac{N^3 M}{WB} + NMB)\\)\nとなり、これを最小化させるためには\n\\(B=N/\\sqrt{W}\\)\nとすればよく、全体で\n\\(O(\\frac{N^2 M}{\\sqrt{W}})\\)\nとなります。\n\\(\\frac{N^2 M}{\\sqrt{W}}\\)\nはそのまま計算すると\n\\(10^9\\)\nとなり、本問題はbayashikoさんのユーザ解説にあるように処理が軽いため、間に合います。\n実装例 (C++, 857 ms)\n実装例 (C++, pragmaによる高速化後, 590 ms)",
+      "codes": [],
+      "text_sha256": "b712ec6206bbae7fc261fbc955ae32f2aae4e838b0bb389ef06ede50e6e9a278",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc348/abc348_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc469_e",
+  "title": "Pro Exam Eligibility",
+  "contests": [
+    {
+      "contest_id": "abc469",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1566,
+  "raw_difficulty": 1566,
+  "contest_id": "abc469",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc469/tasks/abc469_e",
+  "statement": "配点 : 475 点 問題文 o と x からなる長さ N の文字列 S が与えられます。 ただし、 S には o が K 個以上含まれることが保証されます。 高橋君はあるゲームを N 回行いました。 i 回目のゲームでは、 S の i 文字目が o ならば高橋君は勝利し、 x ならば高橋君は敗北しました。 高橋君は以下の条件を満たすような 2 整数 l,r を一つ選びます。 1 \\leq l \\leq r \\leq N l 回目から r 回目までのゲームで K 勝以上している このとき、 l 回目から r 回目までのゲームでの勝率としてあり得る値の最大値を求めてください。 制約 1 \\leq K \\leq N \\leq 10^6 N と K は整数 S は o と x からなる長さ N の文字列 S は o を K 個以上含む 入力 入力は以下の形式で標準入力から与えられる。 N K S 出力 答えを 1 行で出力せよ。\r\n真の答えとの絶対誤差または相対誤差が 10^{-6} 以下であれば正解として扱われる。 入力例 1 10 4\r\noxooxoxxox 出力例 1 0.6666666666 (l,r) として (1,6) を選ぶと勝率は \\frac{2}{3} です。 条件を満たす範囲で勝率をこれより大きくすることはできません。 入力例 2 5 1\r\nxxoxx 出力例 2 1 入力例 3 16 10\r\nxxxoxooooxoxoooo 出力例 3 0.769230769230769",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 o と x からなる長さ N の文字列 S が与えられます。 ただし、 S には o が K 個以上含まれることが保証されます。 高橋君はあるゲームを N 回行いました。 i 回目のゲームでは、 S の i 文字目が o ならば高橋君は勝利し、 x ならば高橋君は敗北しました。 高橋君は以下の条件を満たすような 2 整数 l,r を一つ選びます。 1 \\leq l \\leq r \\leq N l 回目から r 回目までのゲームで K 勝以上している このとき、 l 回目から r 回目までのゲームでの勝率としてあり得る値の最大値を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq K \\leq N \\leq 10^6 N と K は整数 S は o と x からなる長さ N の文字列 S は o を K 個以上含む"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K S"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを 1 行で出力せよ。\r\n真の答えとの絶対誤差または相対誤差が 10^{-6} 以下であれば正解として扱われる。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 10 4\r\noxooxoxxox"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 0.6666666666 (l,r) として (1,6) を選ぶと勝率は \\frac{2}{3} です。 条件を満たす範囲で勝率をこれより大きくすることはできません。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5 1\r\nxxoxx"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 16 10\r\nxxxoxooooxoxoooo"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 0.769230769230769"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc469/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:56.616626+00:00",
+  "statement_sha256": "52002e07c5c78f596b510fe61d6bb4ad8855a0cb7aa5f83bcd072f225b9d8402",
+  "editorials": []
+}

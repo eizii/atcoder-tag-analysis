@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc328_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc328/editorial/7662",
+      "text": "この問題は、次の \\(2\\) つの方針で解くことができます。\n\\(1\\) 年に存在する日付すべてについて、ゾロ目になっているかチェックする\nゾロ目の日付としてありえるものすべてについて、存在する日付かチェックする\nそれぞれの方針について解説します。\n1. それぞれの日付がゾロ目かチェックする\nAtCoder 国の \\(1\\) 年には \\(1\\) 月 \\(1\\) 日から \\(N\\) 月 \\(D _ N\\) 日までの \\(\\displaystyle\\sum _ {i=1} ^ ND _ i=D _ 1+D _ 2+\\cdots+D _ N\\) 日の日付があります。\nこの日付のすべてについて、ゾロ目になっているか判定して、ゾロ目になる日付がいくつあるか計算することでこの問題を解くことができます。\n日付がゾロ目になっているかは、例えば月と日の値を文字列に変換して連結し、\\(1\\) 種類の文字だけからなるか判定することで判定できます。\n実装例は以下のようになります。\n2. ゾロ目の日付が存在するかチェックする\nこの問題の制約のもとで、ゾロ目の日付としてありえるものは \\(1\\) 月 \\(1\\) 日、\\(1\\) 月 \\(11\\) 日、\\(2\\) 月 \\(2\\) 日、\\(2\\) 月 \\(22\\) 日、⋯、\\(88\\) 月 \\(8\\) 日、\\(88\\) 月 \\(88\\) 日、\\(99\\) 月 \\(9\\) 日、\\(99\\) 月 \\(99\\) 日の \\(36\\) 通りです。\nそれぞれの日付が AtCoder 国の暦の中に存在するか判定することでこの問題を解くことができます。\n\\(i\\) 月 \\(j\\) 日が暦の中に存在しているかは、\\(i\\) 月が存在し、\\(i\\) 月が \\(j\\) 日まであるか判定すればよいです。\n存在しない月は \\(0\\) 日だけあることにしてもよいです。\n実装例は以下のようになります。",
+      "codes": [
+        "N = int(input())\nD = [*map(int, input().split())]\n\nans = 0\nfor i, d in enumerate(D):\n    month_str = str(i + 1)\n    for x in range(d):\n        day_str = str(x + 1)\n        if len(set(month_str + day_str)) == 1:\n            ans += 1\n            \nprint(ans)",
+        "#include <iostream>\n#include <vector>\n#include <set>\n\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    vector<int> D(N);\n    for (auto &&d : D)\n        cin >> d;\n\n    int ans = 0;\n    for (int m = 1; m <= N; ++m) {\n        string month = to_string(m);\n        for (int d = 1; d <= D[m - 1]; ++d) {\n            string date = month + to_string(d);\n            if (size(set<char>(date.begin(), date.end())) == 1)\n                ++ans;\n        }\n    }\n    cout << ans << endl;\n\n    return 0;\n}",
+        "N = int(input())\nD = [*map(int, input().split())]\n\nans = 0\nfor i in range(1, 10):\n    # i 月 i 日\n    if i <= N and i <= D[i - 1]:\n        ans += 1\n    # i 月 11i 日\n    if i <= N and 11 * i <= D[i - 1]:\n        ans += 1\n    # 11i 月 i 日\n    if 11 * i <= N and i <= D[11 * i - 1]:\n        ans += 1\n    # 11i 月 11i 日\n    if 11 * i <= N and 11 * i <= D[11 * i - 1]:\n        ans += 1\n            \nprint(ans)",
+        "#include <iostream>\n#include <vector>\n#include <utility>\n\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    vector<int> D(N);\n    for(auto&& d : D)cin >> d;\n\n    vector<pair<int, int>> zorome; // ありえるゾロ目の日付\n    for(int i = 1; i <= 9; ++i){\n        zorome.emplace_back(i, i);\n        zorome.emplace_back(i, i * 11);\n        zorome.emplace_back(i * 11, i);\n        zorome.emplace_back(i * 11, i * 11);\n    }\n\n    int ans{};\n    for(const auto& [month, day] : zorome)\n        if(month <= N && day <= D[month - 1])\n            ++ans;\n\n    cout << ans << endl;\n    \n    return 0;\n}"
+      ],
+      "text_sha256": "0a71ec736fbaae220f9b7814353eef8cbd3dce3aa85162818c148ccc1501d38f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc328/abc328_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

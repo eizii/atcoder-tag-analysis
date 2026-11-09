@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc220_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc220/editorial/2693",
+      "text": "\\(\\sum_{j=1}^{N}dis(i,j)\\)\nを\n\\(ans(i)\\)\nと略記します。\nまず各頂点\n\\(i\\)\nについて\n\\(dis(1,i)\\)\nを求めます。これは深さ優先探索などによって合計\n\\(O(N)\\)\nで計算できるので、\n\\(ans(1)\\)\nを求めることができます。\n次に、頂点\n\\(1\\)\nに隣接する頂点の\n\\(1\\)\nつを\n\\(s\\)\nとして、\n\\(ans(1)\\)\nと\n\\(ans(s)\\)\nの差分を考えます。ある頂点\n\\(j\\)\nが頂点\n\\(s\\)\nの部分木に含まれる場合\n\\(dis(s,j)=dis(1,j)-1\\)\n、含まれない場合\n\\(dis(s,j)=dis(1,j)+1\\)\nなので、以下が成り立ちます。\n\\(ans(s) = ans(1) + N - 2 \\times sub(s)\\)\n（ただし\n\\(sub(s)\\)\nは頂点\n\\(s\\)\nの部分木のサイズ）\nよってあらかじめ各頂点について部分木のサイズを計算した後、頂点\n\\(1\\)\nに近い方から\n\\(ans(i)\\)\nを求めることで、全体で\n\\(O(N)\\)\nで解けました。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n; cin >> n;\n    vector<vector<int>> g(n);\n    for(int i = 0; i < n - 1; i++) {\n        int a, b; cin >> a >> b;\n        g[a-1].push_back(b-1);\n        g[b-1].push_back(a-1);\n    }\n    vector<long long> sub(n,1), ans(n);\n    function<void(int, int, int)> dfs=[&](int i, int p, int d){\n        ans[0] += d;\n        for(int x : g[i]) if(x != p) {\n            dfs(x, i, d+1);\n            sub[i] += sub[x];\n        }\n    }; dfs(0, -1, 0);\n    function<void(int, int)> dfs2=[&](int i, int p){\n        for(int x : g[i]) if(x != p) {\n            ans[x] = ans[i] - 2 * sub[x] + n;\n            dfs2(x, i);\n        }\n    }; dfs2(0, -1);\n    for(long long x : ans) cout << x << endl;\n}"
+      ],
+      "text_sha256": "75b7594a283f59024d81939cb3a5c77defdca17fde88bc9dc8228cc80cc625bc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc220/abc220_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

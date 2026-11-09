@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc406_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc406/editorial/13045",
+      "text": "頂点\n\\(1\\)\nを根とした根付き木として考えます。\nここで、頂点\n\\(1\\)\nから始めて、深さ優先探索の行きがけ順に頂点にあらたに番号\n\\(f(v)\\)\nを割り当てることを考えます。このとき任意の頂点\n\\(v\\)\nについて次が成り立ちます。\n頂点\n\\(v\\)\nを根とした部分木の各頂点に割り当てられた番号は連続している。すなわち、\n\\(1\\leq l\\leq r\\leq N\\)\nをみたす整数の組\n\\((l,r)\\)\nが存在し、「頂点に割り当てられた番号が\n\\(l\\)\n以上\n\\(r\\)\n以下である」事と「頂点が部分木に属する」ことが同値となる。\nこれは、\n\\(v=1\\)\nのときは部分木が\n\\(T\\)\n自身になるため明らかです。そうでない場合、深さ優先探索で頂点を訪ねる順番を考えると、頂点\n\\(1\\)\nから始めた探索は、あるタイミングで頂点\n\\(v\\)\nの親から頂点\n\\(v\\)\nへ移動し、頂点\n\\(v\\)\nおよびその子孫をすべて訪ねた後に頂点\n\\(v\\)\nの親へ戻り、二度と頂点\n\\(v\\)\nを（すなわちその子孫も）訪ねることはないことから従います。\n各頂点の重みをその頂点に割り当てられた番号を添字とした配列\n\\(A=(A_1,A_2,\\ldots,A_N)\\)\n上で管理することを考えるとクエリは次のように言い換えられます。\n1 x w\n:\n\\(A_{f(x)}\\)\nを\n\\(x\\)\n増加させる。\n2 y\n: 辺\n\\(y\\)\nで結ばれている\n\\(2\\)\n頂点のうち子の方の頂点を\n\\(v\\)\nとして、\n\\(v\\)\nを根とした部分木に対応する添字の区間\n\\([l.r]\\)\nについて\n\\(\\left\\lvert\\left(\\displaystyle\\sum_{i=1}^{l-1}A_i+\\displaystyle\\sum_{i=r+1}^{N}A_i\\right)-\\displaystyle\\sum_{i=l}^{r}A_i\\right\\rvert\n=\\left\\lvert\\displaystyle\\sum_{i=1}^{N}A_i-2\\displaystyle\\sum_{i=l}^{r}A_i\\right\\rvert\\)\nを求める。\nよって、すべての頂点の重みの総和\n\\(\\displaystyle\\sum_{i=1}^{N}A_i\\)\nはクエリごとに更新すれば良いことを考えると、一点加算および区間和の取得が高速に行えれば良いことがわかります。これは Fenwick tree などのデータ構造を用いてそれぞれ\n\\(O(\\log N)\\)\nで行うことができます。\nなお、各頂点を根とした部分木に対応する区間は、その頂点に割り当てられた番号が\n\\(l\\)\nであり、その頂点から親へ戻る時に次につける予定の番号から\n\\(1\\)\nを引いたものが\n\\(r\\)\nとなるため、一度の深さ優先探索ですべての頂点について求めることができます。\nよって、最初の深さ優先探索に\n\\(O(N)\\)\n, その後のクエリにそれぞれ\n\\(O(\\log N)\\)\nかかるため、全体で\n\\(O(N+Q\\log N)\\)\nとなり十分高速です。\nよって、この問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/fenwicktree>\n\nusing namespace std;\nusing namespace atcoder;\n\n#define N 300010\n\nint cur=0;\nint l_idx[N];\nint r_idx[N];\nvector<int>e[N];\n\nvoid dfs(int k){\n\tl_idx[k]=cur;\n\tcur++;\n\tint sz=e[k].size();\n\tfor(int i=0;i<sz;i++)if(l_idx[e[k][i]]==-1)dfs(e[k][i]);\n\tr_idx[k]=cur;\n\treturn;\n}\n\nint main() {\n\tint n;\n\tint u[N];\n\tint v[N];\n\n\tcin>>n;\n\tfor(int i=0;i<n-1;i++){\n\t\tcin>>u[i]>>v[i];\n\t\tu[i]--,v[i]--;\n\t\te[u[i]].push_back(v[i]);\n\t\te[v[i]].push_back(u[i]);\n\t}\n\n\tfor(int i=0;i<n;i++)l_idx[i]=-1,r_idx[i]=-1;\n\tdfs(0);\n\n\tint q;\n\tint t,x,w,y,z;\n\n\tfenwick_tree<int> fw(n);\n\tfor(int i=0;i<n;i++)fw.add(i,1);\n\tint s=n;\n\n\tcin>>q;\n\tfor(int i=0;i<q;i++){\n\t\tcin>>t>>x;\n\t\tx--;\n\t\tif(t==1){\n\t\t\tcin>>w;\n\t\t\tfw.add(l_idx[x],w);\n\t\t\ts+=w;\n\t\t}\n\t\telse{\n\t\t\tif(l_idx[u[x]]<l_idx[v[x]])y=v[x];\n\t\t\telse y=u[x];\n\t\t\tcout << abs(fw.sum(l_idx[y],r_idx[y])*2-s) <<endl;\n\t\t}\n\t}\n\treturn 0;\n}"
+      ],
+      "text_sha256": "4b0cedd00cd1aeaf94128949723310ec8d15aa8c20e37412d56caf4e7005a228",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc406/abc406_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

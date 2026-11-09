@@ -1,0 +1,59 @@
+{
+  "problem_id": "abc353_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc353/editorial/9969",
+      "text": "この問題は Trie 木と呼ばれるデータ構造を用いて解くことが出来ます。\n\\(S_i\\)\nと\n\\(S_j\\)\nの最長共通接頭辞の長さは、\n\\(S_i\\)\nと\n\\(S_j\\)\nの共通する接頭辞の個数と等しいです。例えば、\nabc\nと\nabde\nの最長共通接頭辞の長さは\n\\(2\\)\nで、共通する接頭辞は\na\nと\nab\nの\n\\(2\\)\nつです。\nつまり、各\n\\(j=2,\\ldots,N\\)\nで全ての\n\\(S_j\\)\nの接頭辞\n\\(T\\)\nを調べ、\n\\(T\\)\nを接頭辞とする\n\\(S_i\\ (1\\leq i < j)\\)\nの個数が求まればよいです。\nこれは\n\\(i=1,2,\\ldots,N\\)\nの順に\n\\(S_i\\)\nを Trie 木に追加し、各ノードではそのノードが表す文字列を接頭辞として含む文字列の個数を情報として管理すればよいです。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nstruct trie {\n  using ar = array<int, 26>;\n  vector<ar> pos;\n  ar def;\n  int now_sz;\n  long long ans;\n  vector<int> cnt;\n  trie() = default;\n  trie(int len) {\n    pos.reserve(len + 1);\n    cnt.reserve(len + 1);\n    def.fill(-1);\n    now_sz = ans = 0;\n    make_node();\n  }\n  int make_node() {\n    pos.push_back(def);\n    cnt.push_back(0);\n    return now_sz++;\n  }\n  void add(string &s) {\n    int now = 0;\n    for(int i = 0; i < (int)s.size(); i++) {\n      int d = s[i] - 'a';\n      int &nx = pos[now][d];\n      if(nx == -1)\n        nx = make_node();\n      now = nx;\n      ans += cnt[now]++;\n    }\n  }\n};\n\nint main() {\n  int n;\n  cin >> n;\n  trie tr(300000);\n  for(int i = 0; i < n; i++) {\n    string s;\n    cin >> s;\n    tr.add(s);\n  }\n  cout << tr.ans << endl;\n}"
+      ],
+      "text_sha256": "e23edc48a1800a1016488f25dd1398e432286b4dd1e3a8305137a612539fe96b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc353/abc353_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc353/editorial/9986",
+      "text": "\\(S\\)\nはソート済みであるとします。集合\n\\(T = \\{{ (i, j) : 1 \\le i \\le N, 1 \\le j \\le |S_i|  \\}}\\)\n上の同値関係\n\\(～\\)\nを\n\\[\n(i, j) ～ (i + 1, j) \\Leftarrow S_{i,1} S_{i,2} \\dots  S_{i,j} = S_{i + 1,1} S_{i + 1,2} \\dots  S_{i + 1,j}\n\\]\nを満たす最小のものであるとすると、これにより\n\\(T\\)\nは次の図のように分割されます。このとき答えは\n\\[\n\\sum _ {C \\in T / ～} \\frac { |C| (|C| - 1) } {2}\n\\]\nになります。\nそこで\n\\(S\\)\nを添字の昇順に見ていって、同値類の終端を見つけるたびに答えに足していきましょう。そのためには同値類の始端を見つけるたびに、文字種と開始インデックスのペアをスタックに入れておけばよいです。\n提出（21 ms）：\nhttps://atcoder.jp/contests/abc353/submissions/53393003",
+      "codes": [
+        "use proconio::input;\n\nfn main() {\n    input! {\n        n: usize,\n        mut s: [String; n],\n    }\n    s.sort_unstable();\n    s.push(String::new());\n    let mut stack = Vec::new();\n    let mut ans = 0;\n    for (i, s) in s.iter().enumerate() {\n        let lcp = stack\n            .iter()\n            .zip(s.chars())\n            .take_while(|&(&(c, _), d)| c == d)\n            .count();\n        while stack.len() > lcp {\n            let (_, start) = stack.pop().unwrap();\n            ans += (i - start) * (i - start - 1) / 2;\n        }\n        for c in s[lcp..].chars() {\n            stack.push((c, i));\n        }\n    }\n    println!(\"{}\", ans);\n}"
+      ],
+      "text_sha256": "472d0a14d076a55ec5e4ffe7c00130344cb34d580ca3e1a3bbacb511628f1005",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc353/abc353_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc353/editorial/9987",
+      "text": "kyopro_friendsさんの解説\nにもあるように、求める値は\n\\(A_i=f(S_i,S_{i+1})\\)\nとしたときの\n\\(\\displaystyle \\sum_{l=1}^{N-1}\\sum_{r=l+1}^{N}{\\min(A_l,A_{l+1},\\dots,A_{r-1})}\\)\nと表せます。\n\\((A_i,i)\\)\nの値の降順に\n\\(A_i\\)\nの答えへの寄与を求めます。このとき、\n\\(\\min(A_{i+1},A_{i+2},A_{r-1})>A_i\\)\nであり、かつ\n\\(\\min(A_l,A_{l+1},\\dots,A_{r-1})=A_i\\)\nとなる\n\\((l,r)\\)\nは\n\\(L_i=(全ての k(x\\leq k<i) についてすでに A_k の寄与を求めているような x としてありうる最小値)\\)\n\\(R_i=(全ての k(i< k<x) についてすでに A_k の寄与を求めているような x としてありうる最大値)\\)\nとしたとき\n\\((A_i,i)\\)\nの降順で走査をしていることから\n\\(\\min(A_{L_i},A_{L_i+1},\\dots,A_{i-1})>A_i\\)\n、\n\\(\\min(A_{L_i-1},A_{L_i+1},\\dots,A_{i-1})\\leq A_i\\)\n\\(\\min(A_{i+1},A_{i+2},\\dots,A_{R_i-1})\\geq A_i\\)\n、\n\\(\\min(A_{i+1},A_{i+2},\\dots,A_{R_i})< A_i\\)\nが成り立ち、\n\\(L_i\\leq l\\leq i<r\\leq R_i\\)\nは条件の必要十分条件より、\n\\((i-L_i+1)\\cdot(R_i-i)\\)\n個あることがわかります。\nまた\n\\(N\\)\n頂点のグラフにおいて\n\\((A_i,i)\\)\nの寄与を計算した後に 頂点\n\\(i,i+1\\)\n間 を連結にする操作を考えると\n\\(L_i=i-(頂点iの連結成分)+1,R_i=i+(頂点i+1の連結成分)\\)\nであり、\n\\((i-L_i+1)\\cdot(R_i-i)=(頂点 iの連結成分)\\cdot(頂点 i+1 の連結成分)\\)\nが成り立ち、これは UnionFindなどを用いることで\n\\(O(N\\alpha(N))\\)\nで処理することができます。\n全体の計算量は\n\\(\\sum |S_i|=M\\)\nとして\n\\(O(M\\log(M)+N(\\log(N)+\\alpha(N)))\\)\nです。\n提出 : (80 ms)\nhttps://atcoder.jp/contests/abc353/submissions/53394362",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n#include<atcoder/all>\nint main(){\n    int n;cin>>n;\n    vector<string> s(n);for(auto&e:s)cin>>e;\n    sort(s.begin(),s.end());\n    vector<pair<int,int>> a;\n    for(int i=0;i<n-1;i++){\n        int idx=0;\n        while(idx<min(s[i].size(),s[i+1].size())&&s[i][idx]==s[i+1][idx])idx++;\n        a.push_back({idx,i});\n    }\n    sort(a.begin(),a.end());reverse(a.begin(),a.end());\n    atcoder::dsu d(n);\n    long ans=0;\n    for(auto[idx,i]:a){\n        ans+=long(d.size(i))*d.size(i+1)*idx;\n        d.merge(i,i+1);\n    }\n    cout<<ans<<endl;\n}"
+      ],
+      "text_sha256": "1f2863fbb1721aa126aeaf193cb6b8a7148c3b323ded5d8e965f575e4da91e9d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc353/abc353_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc353/editorial/9956",
+      "text": "文字列長の合計を\n\\(L\\)\nとします。\n求めるものは、すべての文字列のペアについてのLCPの長さの総和なので、文字列を並び替えても答えは変わりません。そこで、文字列たちをソートします。Suffix Arrayを適切に用いることで\n\\(O(L)\\)\n時間で行えます。（ソート関数などを用いて普通にソートしても\n\\(O(L\\log L)\\)\nくらいになるような気がします）。indexを振り直すことで、\n\\(S_i\\)\nはソートされているとします。\n\\(A_i=f(S_i,S_{i+1})\\)\nとし、すべての\n\\(A_i\\)\nを求めます。愚直に LCP を求めることで、全体で\n\\(O(L)\\)\n時間で行えます。\n\\(f(S_i,S_j)=\\min(f(S_i,S_{i+1}),f(S_{i+1},S_{i+2}),\\ldots,f(S_{j-1},S_j))\\)\nであることに注意すると、もとの問題は「\n\\((A_1,\\ldots,A_{N-1})\\)\nの全ての非空連続部分列についてminを求め、その和を求めよ」という問題になります。\n\\(\\sum_{i=1}^j\\min(A_i,\\ldots,A_j)\\)\nを\n\\(j=1,2,\\ldots\\)\nの順に考えます（＝数列の右端に\n\\(1\\)\nつずつ要素を追加して答えの増分を考えます）。\nこれは、ヒストグラムの最大長方形問題と同様に、スタックを用いて増加列を管理することで高速に計算できます。毎回スタックの中身をすべて確認することにしても、各時点のスタックサイズは\n\\(A_j\\)\n以下であることから、全体で\n\\(O(\\sum A_i)\\subset O(L)\\)\nで処理ができます。\n以上により全体で\n\\(O(L)\\)\n時間でこの問題を解くことができました。",
+      "codes": [],
+      "text_sha256": "21e92a651bcee61b2e3dc24cd78e22eb92636996a0f5383ca043ba087739c7fa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc353/abc353_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc353/editorial/9980",
+      "text": "文字列を hash 化することでも解けます．\n実装例 (Python)",
+      "codes": [
+        "from collections import defaultdict\n\nn = int(input())\ns = list(input().split())\n\ncnt = defaultdict(int)\nB = 200\nmod = 10**16 + 61\nans = 0\nfor si in s:\n    hash = 0\n    for j in si:\n        hash = (hash * B + ord(j)) % mod\n        ans += cnt[hash]\n        cnt[hash] += 1\n\nprint(ans)"
+      ],
+      "text_sha256": "dc8c6b4183859e86468a4e958207e7de379b043a3ca174ec27b29d2a22538095",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc353/abc353_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

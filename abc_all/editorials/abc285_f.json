@@ -1,0 +1,44 @@
+{
+  "problem_id": "abc285_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc285/editorial/5514",
+      "text": "\\(S\\)\nの\n\\(L\\)\n文字目から\n\\(R\\)\n文字目までからなる部分文字列を\n\\(S[L:R]\\)\nと表すことにします。\n文字列\n\\(S[L:R]\\)\nが、\n\\(S\\)\nを昇順に並び替えた文字列\n\\(T\\)\nの部分文字列であるための必要十分条件は、次の\n\\(2\\)\n条件をともに満たすことです。\n\\(S[L:R]\\)\nは文字の昇順に並んでいる\n\\(S[L:R]\\)\nに含まれる最小の文字を\n\\(c\\)\n、最大の文字を\n\\(d\\)\nとしたとき、\n\\(c\\)\nより大きく\n\\(d\\)\nより小さいすべての文字が、\n\\(S[L:R]\\)\nと\n\\(S\\)\nに同じ個数含まれている\nこれは、\n\\(S\\)\nの区間が各文字を含む個数がわかれば確かめることができます。したがって、文字ごとに、ある区間にその文字が何個登場するかを表すセグメントツリーを用いることで、文字の種類数を\n\\(\\sigma\\)\nとして\n\\(O(\\sigma(N+Q\\log N))\\)\nで問題を解くことができます。\nWriter解(C++)\n追記：\n\\(S[L:R]\\)\nが文字の昇順に並んでいるかは、次のようにして\n\\(O(\\sigma \\log N)\\)\nで求めることができます。\n\\(S[L:R]\\)\nに各文字が何度登場するか求め、\n\\(C_a,C_b,\\ldots\\)\nとする。\n\\(S[L:L+C_a]\\)\nに\na\nが\n\\(C_a\\)\n個あることを確かめる\n\\(S[L+C_a:L+C_a+C_b]\\)\nに\nb\nが\n\\(C_b\\)\n個あることを確かめる\n\\(\\ldots\\)",
+      "codes": [],
+      "text_sha256": "cb23b75b897e41f49a71625a0a49efadcd81ab3c688a596df1c373668e678a6b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc285/abc285_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc285/editorial/5544",
+      "text": "文字列\n\\(S[L:R]\\)\nで、\n\\(S_LS_{L+1}\\ldots S_R\\)\nを表します。\n\\(S[L:R]\\)\nは文字の昇順に並んでいる （\n公式解説\nより）\n隣接する\n\\(2\\)\n文字ごとに確認すれば十分です。隣接する\n\\(2\\)\n文字に関する判定結果をセグメント木で管理することで、どちらのクエリの場合も\n\\(O(\\log N)\\)\n時間で処理できます。\n\\(S[L:R]\\)\nに含まれる最小の文字を\n\\(c\\)\n、最大の文字を\n\\(d\\)\nとしたとき、\n\\(c\\)\nより大きく\n\\(d\\)\nより小さいすべての文字が、\n\\(S[L:R]\\)\nと\n\\(S\\)\nに同じ個数含まれている（\n公式解説\nより）\nつまり、\n\\(c\\)\nより大きく\n\\(d\\)\nより小さいすべての文字は\n\\(S[L:R]\\)\nに収まっている必要があります。よって、各文字種\n\\(t\\)\nごとに、\n\\(t\\)\nが存在する位置の最小値と最大値をセグメント木で管理すれば、出力クエリに対して\n\\(O(\\log \\sigma)\\)\n時間で対応できます。更新クエリに対しては、次のようなシミュレーションをする必要があります。\n位置\n\\(x\\)\nの文字が変化する。\nもともとあった文字種は位置\n\\(x\\)\nに存在しなくなり、変化後の文字種は位置\n\\(x\\)\nに存在するようになる。\n高々\n\\(2\\)\n個の文字種について、その文字が存在する位置の集合が変わるので、従ってその最小値と最大値が変わる。\nこのシミュレーションは、各文字種\n\\(t\\)\nについて\n\\(t\\)\nが存在する位置の集合を順序付き辞書（ ex. C++ の\nstd::set\n）で管理することで、\n\\(O(\\log\\sigma + \\log N)\\)\n時間で実現できます。\nこれで判定に必要な情報がすべて得られました。全体の計算量は、例えば\n\\(O((N+\\sigma +Q)(\\log N +\\log\\sigma ))\\)\nです。\n実装例 :\nhttps://atcoder.jp/contests/abc285/submissions/38078821",
+      "codes": [],
+      "text_sha256": "e02bd360515ac031bf57c0042c969c8beb70559d4437c996ce88276b4919d300",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc285/abc285_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc285/editorial/5546",
+      "text": "公式解説の必要条件を再掲します。\n\\(S[L:R]\\)\nは文字の昇順に並んでいる\n\\(S[L:R]\\)\nに含まれる最小の文字を\n\\(c\\)\n、最大の文字を\n\\(d\\)\nとしたとき、\n\\(c\\)\nより大きく\n\\(d\\)\nより小さいすべての文字が、\n\\(S[L:R]\\)\nと\n\\(S\\)\nに同じ個数含まれている\nまず、\n\\(S[L:R]\\)\nが文字の昇順に並んでいるかを確認しましょう。\n\\(S[L:R]\\)\nが昇順であることを言い換えると、以下のようになります。\n\\(S_L \\leq S_{L+1} \\leq \\cdots \\leq S_{R}\\)\nつまり、\n\\(S[L:R]\\)\nが昇順であるか否かは、隣接二項の関係が\n\\(\\leq\\)\nである個数が\n\\(R-L\\)\n個あるかを確認すれば分かります。\nこれはセグメントツリーを使えば\n\\(O(\\log N)\\)\nで求めることができ、更新も隣接2項間だけ見れば良いことから\n\\(O(\\log N)\\)\nです。\n続いて、\n\\(c\\)\nより大きく\n\\(d\\)\nより小さいすべての文字が、\n\\(S[L:R]\\)\nと\n\\(S\\)\nに同じ個数含まれているかを判定します。\nこれは、\n\\(S[0:L-1] \\cup S[R+1:N]\\)\nに\n\\(c\\)\nより大きく\n\\(d\\)\nより小さいすべての文字が含まれていないことと同値です。\nこれは、文字集合の和集合を取ることができれば良いことが分かります。\nそこで、BitSetを用いて和集合をセグメントツリーで計算すれば、更新及び判定が共に\n\\(O(\\frac{\\sigma}{\\mathrm{wordsize}} \\log N)\\)\nで求められます。\n\\(\\sigma = 26\\)\nなので、BitSetの代わりにintを用いれば非常に高速になります。",
+      "codes": [],
+      "text_sha256": "cc8f52e0d1b6ef5506f0e4c637b2c22a621394b8abc642d7e91d998bb4c687d3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc285/abc285_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc285/editorial/5550",
+      "text": "管理する情報\n文字列\n\\(S\\)\nに加えて次の情報を、順序集合データ構造（C++ 標準の\nstd::set\n、Rust 標準の\nstd::collections::BTreeSet\nなど）で管理します。\n\\(S\\)\nにおいて\n\\(i\\)\n文字目が\n\\(i + 1\\)\n文字目よりも大きいような\n\\(0 \\le i \\le N\\)\n全体の集合\n\\(D\\)\n（ただし\n\\(S\\)\nの\n\\(0\\)\n文字目は\na\n、\n\\(N + 1\\)\n文字目は\nz\nであると解釈します。）\n各アルファベット\n\\(c\\)\nについて、その\n\\(S\\)\nにおける出現位置\n\\(1 \\le i \\le N\\)\n全体の集合\n\\(P _ c\\)\nこれは\n\\(O(\\sigma + N \\sigma \\log N)\\)\n時間で前計算することができます。\nクエリの捌き方\n問題の 2 種類のクエリには次のように対応します。\n\\(S\\)\nの\n\\(i\\)\n文字目を文字\n\\(c\\)\nで置き換えるクエリ （\n\\(O ( \\log N )\\)\n時間）:\n\\(i - 1, i\\)\nを適宜\n\\(D\\)\nに挿入または削除します。\n\\(i\\)\nを\n\\(P _ { S _ i }, P _ c\\)\nに挿入または削除します。\n\\(S\\)\nを更新します。\n\\(S\\)\nの\n\\(l\\)\n文字目から\n\\(r\\)\n文字目までからなる文字列が\n\\(T\\)\nの部分文字列であるかどうかを判定するクエリ （\n\\(O ( \\sigma \\lg N)\\)\n時間） :\nソート済みであるかどうかは\n\\(D\\)\nを見れば\n\\(O ( \\log N )\\)\n時間でわかります。\n特定の文字\n\\(c\\)\nが\n\\(l\\)\n文字目から\n\\(r\\)\n文字目登場するかどうかやその区間にすべて登場しているかどうかは、\n\\(P _ c\\)\nを見れば\n\\(O ( \\lg N )\\)\n時間でわかります。\n実装例 (Rust, 334 ms)\n提出へのリンク\n実装の簡単のため、前後に番兵を入れています。",
+      "codes": [
+        "use proconio::input;\nuse std::{iter::once, mem::replace, collections::BTreeSet};\n\nfn main() {\n  input! { n: usize, s: String, q: usize }\n  let mut s = once(0).chain(s.chars().map(|c| c as usize - b'a' as usize)).chain(once(25)).collect::<Vec<_>>();\n  let mut positions = vec![BTreeSet::new(); 26];\n  let mut descents = BTreeSet::new();\n  for i in 1..=n {\n    positions[s[i]].insert(i);\n    if s[i] > s[i + 1] {\n      descents.insert(i);\n    }\n  }\n  for _ in 0..q {\n    input! { query_type: u8 }\n    match query_type {\n      1 => {\n        input! { i: usize, c1: char }\n        let c1 = c1 as usize - b'a' as usize;\n        let c0 = replace(&mut s[i], c1);\n        if c0 != c1 {\n          positions[c0].remove(&i);\n          positions[c1].insert(i);\n          for &i in &[i - 1, i] {\n            if s[i] > s[i + 1] {\n              descents.insert(i);\n            } else {\n              descents.remove(&i);\n            }\n          }\n        }\n      }\n      2 => {\n        input! { start: usize, end: usize }\n        let end = end + 1;\n        let ans = descents.range(start..end - 1).next().is_none() && {\n          let min_char = positions.iter().position(|set| set.range(start..end).next().is_some()).unwrap();\n          let max_char = positions.iter().rposition(|set| set.range(start..end).next().is_some()).unwrap();\n          min_char == max_char || positions[min_char + 1..max_char].iter().all(|set| set.range(..start).next().is_none() && set.range(end..).next().is_none())\n        };\n        println!(\"{}\", [\"No\", \"Yes\"][ans as usize]);\n      }\n      _ => unreachable!(),\n    }\n  }\n}"
+      ],
+      "text_sha256": "db7a98744990941a50124741469c10fdcdc355ba13db6712065695d02c345894",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc285/abc285_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc402_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc402/editorial/12756",
+      "text": "この問題はキュー(待ち行列)というデータ構造の練習問題です。\nキューは先入れ先出しのリスト構造を持っています。わかりやすく言うと、キューからデータを取り出すときは先にキューに入れられたデータから順に取り出すという意味です。\nキューを用いてレストランの待ち列を並んだ順番に処理するこの問題と同じことを実現できます。末尾に人が並ぶ操作はキューにデータを入れる操作、先頭の人のデータを取り出す操作はキューからデータを取り出す操作にそれぞれ対応させることができます。\n多くのプログラミング言語は標準ライブラリにキューが実装されているため標準ライブラリを使って容易に実装できます(C++では\nstd::queue\n、Pythonでは\ncollections\nライブラリの\ndeque\nなど)。また、なかったとしても、連結リストなどを用いることで再現できます。\n具体的な実装方法は実装例を参照してください。\nC++など多くのプログラミング言語の標準ライブラリにある配列を用いて先頭を削除する、末尾に追加すると言う操作を実現することができ、今回の問題の制約ではACを得られます。しかし、プログラミング言語によっては配列の先頭削除の計算量がキューと比較して悪かったりするため注意が必要です。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    int q;\n    cin >> q;\n    queue<int> que;\n    for (int i = 0; i < q; ++i) {\n        int t;\n        cin >> t;\n        if (t == 1) {\n            int x;\n            cin >> x;\n            que.push(x);\n        } else {\n            cout << que.front() << endl;\n            que.pop();\n        }\n    }\n}",
+        "from collections import deque\n\nq = int(input())\nque = deque()\n\nfor _ in range(q):\n    t, *x = map(int,input().split())\n    if t == 1:\n        que.append(x[0])\n    else:\n        print(que[0])\n        que.popleft()"
+      ],
+      "text_sha256": "d42edc76d9e8ae102600c33d3473588ffb650ddec4dd67fb6a4cf44daf48e7f1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc402/abc402_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc237_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc237/editorial/3337",
+      "text": "問題文の指示通り、入力を整数で受け取って、\n\\(-2^{31}\\)\n以上\n\\(2^{31}\\)\n未満であるかを判定すればよいです。\n\\(32\\)\nbit の符号付き整数型では\n\\(2^{31}\\)\nより大きい数はもちろん、\n\\(2^{31}\\)\n自身もオーバーフローしてしまう事に注意してください。\nc++による実装例:\npythonによる実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tlong long n;\n\tlong long m = (long long)1 << 31;\n\t//long long m = 1 << 31; では右辺が (int)1<<31 として計算されるためオーバーフローし(=-(2 の31 乗)になります)、その値が long long 型に直され m に代入されてしまいます。\n\t//long long m = 2147483648; は問題ありません\n\tcin >> n;\n\tif ((-m <= n) && (n < m))cout << \"Yes\" << endl;\n\telse cout << \"No\" << endl;\n\treturn 0;\n}",
+        "n=int(input())\nif -2**31<=n and n<2**31:\n    print(\"Yes\")\nelse: \n    print(\"No\")"
+      ],
+      "text_sha256": "5700c10097a9355e7dc537e842fb0d3dc62ceaa49096f0d58962cb6fe3df26e0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc237/abc237_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc150_b",
+  "editorials": [
+    {
+      "text": "B: Count ABC\n任意のi (0 ≤i ≤n −3) について、Si 以下3 文字がABC であるかを確認すればいいです。C++\nによる実装例を以下に示します。\nListing 2\nC++ による実装例\n1 #include<bits/stdc++.h>\n2 using namespace std;\n3\n4 int main() {\n5\nint n;\n6\nstring s;\n7\ncin >> n >> s;\n8\nint ans = 0;\n9\nfor(int i = 0; i <= n - 3; i++) {\n10\nif(s[i] == 'A' && s[i + 1] == 'B' && s[i + 2] == 'C') ans++;\n11\n}\n12\ncout << ans << endl;\n13\nreturn 0;\n14 }\n",
+      "text_sha256": "174b008ebd40b78c714619c68510ad2e64e4949855825502d3a8ef5f70f42c80",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc150/abc150_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

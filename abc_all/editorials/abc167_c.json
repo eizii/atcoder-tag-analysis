@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc167_c",
+  "editorials": [
+    {
+      "text": "C: Skill Up\nどの参考書を購入するかを決めると、それらを読むことによってすべての理解度をX 以上にでき\nるかどうかの判定は難しくありません。\nそこで、購入する参考書の組み合わせ全てについて上記の判定をし、条件を満たすもののなかでの合\n計金額の最小値を求めることにしましょう。\n購入する参考書の組み合わせは、各参考書について買うor 買わないを選ぶ場合の数なので全部で\n2N 通りです。1 回あたりの判定はO(NM) でできるので計算量は全体でO(2NNM) であり、今回\nの制約においては十分高速です。\n購入する参考書の組を全探索する部分の実装は、「深さ優先探索」あるいは集合を整数にエンコード\nする(いわゆる「bit 全探索」) などを用いるとよいでしょう。\n以下はC++ におけるbit 全探索での実装例です。https://atcoder.jp/contests/abc167/submissions/13086283\n",
+      "text_sha256": "cb06fe7d13b456477c71dfe956a4ec52b93980b70430e5eb650db6a32fab16d1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc167/abc167_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

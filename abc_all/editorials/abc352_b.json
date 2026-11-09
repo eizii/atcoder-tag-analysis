@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc352_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc352/editorial/9923",
+      "text": "\\(S\\)\nにおける何文字目までが入力されたかを表す変数を持ちながら文字列\n\\(T\\)\nの文字を前から調べていけばよいです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string s, t;\n    cin >> s >> t;\n    int n = s.size();\n    int m = t.size();\n    vector<int> a(n);\n    int j = 0;\n    for (int i = 0; i < m; i++) {\n        if (s[j] == t[i]) {\n            a[j] = i + 1;\n            j++;\n        }\n    }\n    for (int i = 0; i < n; i++) cout << a[i] << \" \\n\"[i == n - 1];\n}"
+      ],
+      "text_sha256": "75fe50f2238e85aab6b62ace7974a4bc2423e2e78ac21854172d63057dbee045",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc352/abc352_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc253_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc253/editorial/4017",
+      "text": "包除原理を用いると、答えは\n\\(N\\)\n以下で\n\\(A\\)\nの倍数でも\n\\(B\\)\nの倍数でもないものの総和\n\\(=\\)\n\\(N\\)\n以下の総和\n\\(-\\)\n\\(N\\)\n以下の\n\\(A\\)\nの倍数の総和\n\\(-\\)\n\\(N\\)\n以下の\n\\(B\\)\nの倍数の総和\n\\(+\\)\n\\(N\\)\n以下の\n\\(A\\)\nの倍数かつ\n\\(B\\)\nの倍数であるものの総和\nと変形できます。さらに、\n\\(A\\)\nの倍数かつ\n\\(B\\)\nの倍数であるものは、\n\\(A\\)\nと\n\\(B\\)\nの最小公倍数の倍数と言い換えられます。\nここで、\n\\(N\\)\n以下の\n\\(A\\)\nの倍数の総和は、\n\\(A(1+2+\\ldots+\\lfloor N / A \\rfloor)\\)\nと書けるので、\n\\(f(n) := 1 + 2 + \\ldots + n = n(n+1)/2\\)\n、\n\\(L := \\mathrm{LCM}(A,B)\\)\nとおけば、答えは\n\\(f(N) - Af(\\lfloor N / A \\rfloor) - Bf(\\lfloor N / B \\rfloor) + Lf(\\lfloor N / L \\rfloor)\\)\nとなります。\n以上より、最小公倍数を求めるのがボトルネックとなり、この問題は\n\\(\\mathrm{Ο}(\\log \\mathrm{min}(A,B))\\)\nで解けます。",
+      "codes": [],
+      "text_sha256": "6fcc8ff495583b5ee77f8329ba05cabcd299a989841d1d16ff8dd38cef6db7b3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc253/abc253_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

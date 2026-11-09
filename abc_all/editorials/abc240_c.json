@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc240_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc240/editorial/3421",
+      "text": "それぞれのジャンプについてどのように飛ぶかが\n\\(2\\)\n通りあるので、ジャンプの仕方は合計\n\\(2^N\\)\n通り考えられます。これら全てについて調べていては実行時間制限に間に合いません。\nここで、以下の\n\\(2\\)\nつの事実に着目しましょう。\n複数のジャンプの仕方で同じ座標に到着する場合、それらは同一視してよい\n途中で座標が\n\\(X\\)\nより大きくなるようなジャンプの仕方は無視してよい\nこのことを用いて、次のような動的計画法を考えます。\n\\(\\mathrm{dp}[i][j] : \\)\n\\(i\\)\n回ジャンプを行った時点で座標\n\\(j\\)\nの位置にいることが可能なら\n\\(1\\)\n、不可能なら\n\\(0\\)\n\\(i\\)\nとしては\n\\(0\\)\n以上\n\\(N\\)\n以下、\n\\(j\\)\nとしては\n\\(0\\)\n以上\n\\(X\\)\n以下を考えればよいので、状態数は\n\\(O(NX)\\)\nです。\n\\(i\\)\nの昇順に計算していきましょう。まず、\n\\(\\mathrm{dp}[0][0] = 1\\)\nで、\n\\(\\mathrm{dp}[0][x]  = 0 \\, (x \\gt 0)\\)\nです。\n\\(i = k\\)\nまで計算し終えたとき、\n\\(i = k + 1\\)\nの場合は次のように計算します。\n全ての\n\\(j\\)\nについて\n\\(\\mathrm{dp}[k + 1][j] := 0\\)\nと初期化する。\n\\(\\mathrm{dp}[k][j] = 1\\)\nとなるすべての\n\\(j\\)\nについて以下の処理を行う。なお、\n\\(a_k, b_k\\)\nは\n\\(0\\)\n-indexed であるとする。\n\\(j + a_k \\leq X\\)\nならば\n\\(\\mathrm{dp}[k + 1][j + a_k] := 1\\)\nとする。\n\\(j + b_k \\leq X\\)\nならば\n\\(\\mathrm{dp}[k + 1][j + b_k] := 1\\)\nとする。\n\\(dp[N][X]\\)\nが\n\\(1\\)\nかどうかによって答えを求めることができます。\n計算量は\n\\(O(NX)\\)\nです。\n入力例\n\\(1\\)\nに対応する図は次のようになります。\n実装例 (C++)\n余談\n上記の解法は\n\\(\\sigma\\)\nを\n\\(\\mathrm{wordsize}\\)\nとして\n\\(\\displaystyle O\\left(N + \\frac{NX}{\\sigma} \\right)\\)\nの計算量で実装することができます。C++ なら\nstd::bitset\n（\n日本語リファレンス\n）、Python なら多倍長整数をそのまま用いて実装することができます。\n実装例 (Python)",
+      "codes": [],
+      "text_sha256": "ac5b0d3e2f112f6d07225dd9ad06af89bcabe35c8a97337b1fd96c2fdc4425d0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc240/abc240_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

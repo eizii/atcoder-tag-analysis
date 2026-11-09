@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc396_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc396/editorial/12375",
+      "text": "操作する列の集合を固定すると，各行に書かれている数の総和の最小化を独立に考えることができます．ある行に注目したとき，その行に含まれる \\(0\\) の個数を \\(c_0\\) ， \\(1\\) の個数を \\(c_1\\) とすると， \\(c_0\\geq c_1\\) のときはその行に対して何も行わず， \\(c_0\\lt c_1\\) のときはその行に対して操作を行うのが良いです．このとき，その行に書かれている \\(1\\) の個数は \\(\\min(c_0,c_1)=\\min(c_1,W-c_1)\\) です． 各行の 01 列を \\(2\\) 進数に置き換えて考えます． \\(B_i\\) を \\(\\sum_{j=0}^{W-1}A_{i,j}2^j\\) とします．固定した操作する列の集合も同様に \\(2\\) 進法表記して \\(X\\) と置くと，上の議論より \\(\\min \\sum A_{x,y}\\) は \\(\\sum_{i=0}^{H-1}\\min(\\mathrm{popcount}(B_i\\oplus X),W-\\mathrm{popcount}(B_i\\oplus X))\\) になります（ \\(\\mathrm{popcount}\\) は \\(2\\) 進法表記における \\(1\\) の個数， \\(\\oplus\\) は bitwise xor）． \\(X\\) は \\(0\\) から \\(2^W-1\\) まで動くので，求める答えは \\(\\displaystyle\\min_{0\\leq X\\lt 2^W}\\sum_{i=0}^{H-1}\\min(\\mathrm{popcount}(B_i\\oplus X),W-\\mathrm{popcount}(B_i \\oplus X))\\) です． 各 \\(X=0,1,\\ldots,2^W-1\\) に対して \\(\\sum_{i=0}^{H-1}\\min(\\mathrm{popcount}(B_i\\oplus X),W-\\mathrm{popcount}(B_i \\oplus X))\\) を求めることを考えます．これは，各 \\(j=0,1,\\ldots,W\\) に対して \\(\\mathrm{popcount}(B_i\\oplus X)=j\\) となる \\(i\\) の個数が分かればよいです．これを bit DP で求めます． \\(dp[X][j][c] (0\\leq X\\lt 2^W,0\\leq j,c\\leq W)\\) を以下で定義します： \\(B_i\\) が \\(X\\oplus 0,X\\oplus 1,\\ldots,X\\oplus (2^j-1)\\) のいずれかであるようなものであって， \\(X\\) と \\(B_i\\) がちょうど \\(c\\) bit だけ異なっているような \\(i\\) の個数． 遷移は以下の \\(2\\) 種類になります． \\(dp[X][j+1][c]+= dp[X][j][c]\\) \\(dp[X][j+1][c+1]+= dp[X\\oplus 2^j][j][c]\\) このとき \\(\\sum_{i=0}^{H-1}\\min(\\mathrm{popcount}(B_i\\oplus X),W-\\mathrm{popcount}(B_i \\oplus X))=\\sum_{c=0}^W dp[X][W][c]\\times \\min(c,W-c)\\) です． 時間計算量は \\(O(HW+2^WW^2)\\) ，空間計算量は \\(O(W^22^W)\\) や \\(O(W2^W)\\) です．",
+      "codes": [
+        "H, W = map(int, input().split())\ndp = [[0] * (1 << W) for i in range(W + 1)]\nfor i in range(H):\n    dp[0][int(input(), 2)] += 1\nfor i in range(W):\n    for j in range(i, -1, -1):\n        for bit in range(1 << W):\n            dp[j + 1][bit ^ (1 << i)] += dp[j][bit]\nans = 1 << 60\nfor bit in range(1 << W):\n    res = 0\n    for i in range(W + 1):\n        res += min(i, W - i) * dp[i][bit]\n    ans = min(ans, res)\nprint(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "8fa8473643ba2a9a3dd023c747a1170069f0b9b993c54d84b40b201d3771032e"
+    }
+  ],
+  "status": "available"
+}

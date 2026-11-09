@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc338_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc338/editorial/9160",
+      "text": "題意を再掲します。\n文字列\n\\(S\\)\nに最も多く出現する文字のうちアルファベット順で最も早いものを出力せよ。\n方針 1. for ループ\n以下の処理を実装しましょう。\na\nから\nz\nまでの各文字の個数を保持する何らかのデータ構造\n\\(a\\)\nを宣言し、すべての文字の個数を\n\\(0\\)\nとする。\n\\(S\\)\nの各文字\n\\(c\\)\nについて以下を行う：\n\\(a_c\\)\nに\n\\(1\\)\nを足す。\n変数\n\\(\\mathrm{ans}\\)\nを宣言し、\na\nを代入する。\nb\nから\nz\nまでの各文字\n\\(c\\)\nについて（\nb\n,\n\\(\\dots\\)\n,\nz\nの順に）以下を行う：\n\\(a_c\\)\nが\n\\(a_\\mathrm{ans}\\)\nより大きければ、\n\\(\\mathrm{ans}\\)\nに\n\\(c\\)\nを代入する。\n\\(\\mathrm{ans}\\)\nの値を出力する。\n「何らかのデータ構造」として使えるものには以下があります。\n連想配列（C++ の map や unordered_map、Python の dict など）\n通常の配列（\na\n,\n\\(\\dots\\)\n,\nz\nを ASCII 値\n\\(97, \\dots, 122\\)\nとして扱う）\n以下に C++ での実装例を示します。（文字コードが ASCII であることを仮定します。これは競技プログラミングでは安全な仮定です。）\n方針 2. ライブラリ\n言語によっては、文字列中の文字の出現回数を数えるライブラリ関数があり、方針 1 のひとつ目の for ループの部分の代わりになります。以下に Python の関数 count を使った実装例を示します。\n（\n\\(S\\)\nを何周もしていますが、短いので問題ありません。）\n方針 1 のふたつ目の for ループにもライブラリ関数を代用することができます。ただし、タイブレークがアルファベットの昇順である点に注意を要します（例えば Python の Counter.most_common のタイブレークは初出順であり、残念ながらこれだけでは不十分です）。以下に Python のクラス Counter と関数 max を使った実装例を示します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n    string S;\n    cin >> S;\n    int a[128] = {};\n    for (char c: S) {\n        ++a[c];\n    }\n    char ans = 'a';\n    for (char c = 'b'; c <= 'z'; ++c) {\n        if (a[c] > a[ans]) {\n            ans = c;\n        }\n    }\n    cout << ans << endl;\n}",
+        "S = input()\nans = 'a'\nfor i in range(ord('b'), ord('z') + 1):\n    c = chr(i)\n    if S.count(c) > S.count(ans):\n        ans = c\nprint(ans)",
+        "from collections import Counter\n\nS = input()\nprint(max(Counter(S).items(), key=lambda x: (x[1], -ord(x[0])))[0])"
+      ],
+      "text_sha256": "ae3e8f1dedee0ba5812f5134e504f44c3fe1e05590d7edac749e1f0a8228ecf9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc338/abc338_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

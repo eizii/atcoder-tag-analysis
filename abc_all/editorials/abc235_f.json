@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc235_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc235/editorial/3247",
+      "text": "桁DPと呼ばれる手法により解くことができます。 \\(DP[i][S]=\\) 上から \\(i\\) 桁目まで見て、登場した数字の集合が \\(S\\) であり、 \\(N\\) より小さいことが確定している数の個数と総和 として解くことができます。個数と総和を両方管理する必要があることに注意してください。\n計算量は基数を \\(B=10\\) として、 \\(O(2^B B \\log_B N)\\) です。 実装例(Python) 桁DPのより基本的な例題： EDPC S『Digit Sum』",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "27d00f6abaa7961cc789bd5d707c3e1e0a8ed20433064053cebc7703c49ac755"
+    }
+  ],
+  "status": "available"
+}

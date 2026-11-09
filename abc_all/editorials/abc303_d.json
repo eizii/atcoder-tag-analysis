@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc303_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc303/editorial/6442",
+      "text": "\\(\\mathrm{dp}_{i,j}\\)\nを「\n\\(i\\)\n文字目まで入力した時点で CapsLock キーのランプが\n\\(j=0\\)\nならばOFF、\n\\(j=1\\)\nならばONである状態にするために必要な時間の最小値」として動的計画法を行います。\n遷移として以下の\n\\(4\\)\n種類を考えれば良いです(次に入力するべき文字と合致しないものは弾いてください)。\n\\(X\\)\n秒かけて a キーのみを押す\n\\(Y\\)\n秒かけて Shift キーと a キーを同時に押す\n\\(Z+X\\)\n秒かけて CapsLock キーを押した上で a キーのみを押す\n\\(Z+Y\\)\n秒かけて CapsLock キーを押した上で  Shift キーと a キーを同時に押す\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nconstexpr long long INF = 1000000000000000000;\n\nint main() {\n    \n\tlong long X,Y,Z;\n\tcin>>X>>Y>>Z;\n\t\n\tstring S;\n\tcin>>S;\n\t\n\tvector dp(S.size()+1,vector<long long>(2,INF));\n\tdp[0][0] = 0;\n\t\n\tfor(int i=0;i<S.size();i++){\n\t\tint cur;\n\t\tif(S[i]=='a')cur = 0;\n\t\telse cur = 1;\n\t\tfor(int j=0;j<2;j++){\n\t\t\tfor(int k=0;k<2;k++){\n\t\t\t\tlong long v = dp[i][j];\n\t\t\t\tif(j!=k)v += Z;\n\t\t\t\tif(cur==k)v += X;\n\t\t\t\telse v += Y;\n\t\t\t\tdp[i+1][k] = min(dp[i+1][k],v);\n\t\t\t}\n\t\t}\t\t\n\t}\n\t\n\tcout<<min(dp[S.size()][0],dp[S.size()][1])<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "504b78ae68a384b8370dea3b3c4be0a9facd7f42743340cae1f0f5dc71b37066",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc303/abc303_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc453_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc453/editorial/18525",
+      "text": "座標が正なら負の方向に、負なら正の方向に移動するという貪欲法は失敗します。\n例えば\n\\(L=(40,50,90,1,1,1)\\)\nの時、貪欲法に従うと座標\n\\(0\\)\nを\n\\(3\\)\n回通過することになりますが、最初に負・負・正の方向を選択することで座標\n\\(0\\)\nを\n\\(5\\)\n回通過することができます。\n\\(N\\)\nが小さいことを利用しましょう。\n「正か負か」という\n\\(2\\)\n択を\n\\(N\\)\n回行う、全部で\n\\(2^N\\)\n通りの選択を全探索する場合、\nbit全探索\n(\n解説記事\n) が便利です。\n\\(i=0,1,\\dots,2^N-1\\)\nについて、以下を繰り返す。\n\\(j=0,1,\\dots,N-1\\)\nについて、\n\\(i\\)\nを\n\\(2\\)\n進表記した時に\n\\(2^j\\)\nの位が\n\\(0\\)\nなら負の方向に、\n\\(1\\)\nなら正の方向に移動することにする。\nシミュレートの際、\n\\(0.5\\)\nという数を扱うのは不便なので、座標・移動距離ともに\n\\(2\\)\n倍して考えると全てを整数で取り扱うことができて実装が楽です。\nつまり、最初に座標\n\\(1\\)\n、全ての移動を距離\n\\(2L_i\\)\nだけ行うことにすればよいです。\nまた、\n\\(0\\)\nを跨いだがどうか判定するには、移動前の座標を\n\\(x\\)\n、移動後の座標を\n\\(y\\)\nとして\n\\(xy<0\\)\nかどうかで判定できます。そのまま判定するとオーバーフローのおそれがあるため、符号を保ったまま値を\n\\(-1,0,1\\)\nのいずれかに圧縮してから判定するとよいです。\n時間計算量は\n\\(O(2^N N)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing ll=long long;\n\nll sgn(ll x){\n  if(x>0){return 1;}\n  else if(x<0){return -1;}\n  return 0;\n}\n\nint main(){\n  ll n;\n  cin >> n;\n  vector<ll> l(n);\n  for(auto &nx : l){\n    cin >> nx;\n    nx*=2;\n  }\n  ll best=0;\n  for(ll i=0;i<(1ll<<n);i++){\n    ll pos=1,cur=0;\n    for(ll j=0;j<n;j++){\n      ll npos=pos;\n      if(i&(1ll<<j)){npos+=l[j];}\n      else{npos-=l[j];}\n      if(sgn(pos)*sgn(npos)<0){cur++;}\n      pos=npos;\n    }\n    best=max(best,cur);\n  }\n  cout << best << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "b9a49bcbb82ceb601dcadd00d38e71815dc2538ffbc3571535d87d328d0fd697",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc453/abc453_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

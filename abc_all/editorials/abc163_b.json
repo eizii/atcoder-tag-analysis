@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc163_b",
+  "editorials": [
+    {
+      "text": "B:homework\n全ての宿題をするためにかかる日数はA1+. . .+AM です。したがって、最大でN−(A1+. . .+AM)\n日間遊ぶことができます。\n宿題を終わらせることが不可能な場合に注意してください。\n1 int a[10010];\n2 int main(){\n3\nint n,m;\n4\nscanf(\"%d%d\",&n,&m);\n5\nfor(int i=0;i<m;i++)scanf(\"%d\",&a[i]);\n6\nint s=0;\n7\nfor(int i=0;i<m;i++)s+=a[i];\n8\nif(s>n){\n9\nprintf(\"-1\\n\");\n10\n}else{\n11\nprintf(\"%d\\n\",n-s);\n12\n}\n13 }\n",
+      "text_sha256": "499ed2f9c3b79503716b33d839f6c3a2f7a581e82170abd133ca7b09d01be0db",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc163/abc163_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

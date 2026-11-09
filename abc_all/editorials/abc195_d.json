@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc195_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc195/editorial/846",
+      "text": "クエリごとに独立に問題を解きます（前処理などは必要ありません）\nどのような基準で箱に入れる荷物を決めるのがよいか考えます。以下の2種類の方法で最大値を得ることができます。\n価値の大きな荷物から順に、その荷物を入れることができる大きさ最小の箱に入れる\n大きさの小さな箱から順に、その箱に入れることができる価値最大の荷物を入れる\n2 種類のどちらの方法でもクエリあたり\n\\(O(NM)\\)\nで答えを求めることができます。\nなお、セグメントツリーなどを適切に用いることで、クエリあたり\n\\(O(N\\log M)\\)\nや\n\\(O(M\\log N)\\)\nで解くこともできます。",
+      "codes": [],
+      "text_sha256": "0ac41164bac997069aa45f7e2f68414f7f508604ae70fd2deb2d2c43c6448917",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc195/abc195_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

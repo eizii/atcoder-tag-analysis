@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc186_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc186/editorial/404",
+      "text": "グリッド全体の最小値に揃えるのが最善です。\n最初に最小値を求め、各要素から最小値を引いたものの和を計算すればよいです。\n実装例(C)\n実装例(Python)\nなお、この問題は空間計算量\n\\(O(1)\\)\nで解くこともできます。",
+      "codes": [
+        "#include<stdio.h>\n\nint a[110][110];\nint main(){\n\tint h,w;\n\tscanf(\"%d%d\",&h,&w);\n\tfor(int i=0;i<h;i++)for(int j=0;j<w;j++)scanf(\"%d\",&a[i][j]);\n\tint m=1e9;\n\tfor(int i=0;i<h;i++)for(int j=0;j<w;j++)if(m>a[i][j])m=a[i][j];\n\tint ans=0;\n\tfor(int i=0;i<h;i++)for(int j=0;j<w;j++)ans+=a[i][j]-m;\n\tprintf(\"%d\\n\",ans);\n}",
+        "import numpy as np\nH,W = map(int,input().split())\nA = [list(map(int,input().split())) for _ in range(H)]\nA = np.array(A)\nprint(np.sum(A-np.min(A)))"
+      ],
+      "text_sha256": "30184473fba8c66a393b2070b3bbf0fbf957b532f0acfebd93af033f86acebb9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc186/abc186_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

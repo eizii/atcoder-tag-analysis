@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc190_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc190/editorial/630",
+      "text": "魔法石を頂点、隣り合わせにできる組を辺として、無向グラフとして扱うことにします。\n\\(K ≤ 17\\)\nと、\n\\(K\\)\nの制約が非常に小さいことに注目しましょう。\n頂点\n\\(C_1, C_2, \\dots, C_K\\)\nのみを見ると、この問題は最短ハミルトン路問題と同じ形をしています。\nそこで動的計画法によって効率的に解くことを考えます。\n集合\n\\(C\\)\nを\n\\(C = \\{C_1, C_2, \\dots, C_K\\}\\)\n、\n\\(S\\)\nを\n\\(C\\)\nの部分集合、\n\\(i\\)\nを\n\\(S\\)\nの要素として、\n\\(dp[S][i] = {}\\)\n(\n\\(S\\)\nの各頂点を含み頂点\n\\(i\\)\nで終わるパスの長さの最小値 )\nとすると、問題の答えは\n\\(\\displaystyle \\min_{i}\\{dp[C][i]\\} + 1\\)\nです。\nこの DP は、\n\\(\\text{dist}(i, j)\\)\nを頂点\n\\(i, j\\)\n間の距離として、\n\\(\\displaystyle dp[\\{i\\}][i] = 0\\)\n\\(\\displaystyle dp[S][i] = \\min_{j}\\{dp[S \\setminus \\{i\\}][j] + \\text{dist}(i, j)\\}\\)\nの漸化式で (\n\\(\\text{dist}(i, j)\\)\nが分かれば) 下位集合から順に求めることができます。\n\\(\\text{dist}(i, j)\\)\nについては、\n\\(i, j \\in C\\)\nであるので、\n\\(C_1, C_2, \\dots, C_K\\)\nを始点とした\n\\(K\\)\n回の BFS で前計算することができます。\nよって、計算量\n\\(O(2^KK^2+K(N+M))\\)\nでこの問題を解くことができます。\n回答例 (C++) :\nhttps://atcoder.jp/contests/abc190/submissions/19761405\n回答例 (Python) :\nhttps://atcoder.jp/contests/abc190/submissions/19825273",
+      "codes": [],
+      "text_sha256": "103335eb12a628e816012147758b3e66efb64f40170035fe6f721be4c3272adb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc190/abc190_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

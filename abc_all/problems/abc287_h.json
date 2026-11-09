@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc287_h",
+  "title": "Directed Graph and Query",
+  "contests": [
+    {
+      "contest_id": "abc287",
+      "problem_index": "Ex"
+    }
+  ],
+  "difficulty": 2639,
+  "raw_difficulty": 2639,
+  "contest_id": "abc287",
+  "problem_index": "Ex",
+  "url": "https://atcoder.jp/contests/abc287/tasks/abc287_h",
+  "statement": "配点 : 600 点 問題文 N 頂点 M 辺の有向グラフがあります。頂点には 1 から N までの番号が付いており、 i 番目の有向辺は頂点 a_i から頂点 b_i へと結ばれています。 また、このグラフ上の経路について、コストを次のように定めます。 経路上の頂点(始点・終点を含む)の番号の最大値 x=1,2,\\ldots,Q に対して次の問題を解いてください。 頂点 s_x から頂点 t_x への経路のコストの最小値を求めよ。ただし、そのような経路が一つも存在しない場合は代わりに -1 と出力せよ。 なお、入力の量が多くなる場合があるので、高速な方法で入出力を行うことを推奨します。 制約 2 \\leq N \\leq 2000 0 \\leq M \\leq N(N-1) 1 \\leq a_i,b_i \\leq N a_i \\neq b_i i \\neq j ならば (a_i,b_i) \\neq (a_j,b_j) 1 \\leq Q \\leq 10^4 1 \\leq s_i,t_i \\leq N s_i \\neq t_i 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N M a_1 b_1 \\vdots a_M b_M Q s_1 t_1 \\vdots s_Q t_Q 出力 Q 行出力せよ。 i 行目には x=i に対する出力をせよ。 入力例 1 4 4\r\n1 2\r\n2 3\r\n3 1\r\n4 3\r\n3\r\n1 2\r\n2 1\r\n1 4 出力例 1 2\r\n3\r\n-1 x=1 に対しては、 1 番目の辺を通って頂点 1 から頂点 2 へ行く経路のコストが 2 であり、これが最小です。 x=2 に対しては、 2 番目の辺を通って頂点 2 から頂点 3 へ、そして 3 番目の辺を通って頂点 3 から頂点 1 へ行く経路のコストが 3 であり、これが最小です。 x=3 に対しては、頂点 1 から頂点 4 への経路が存在しないため -1 と出力します。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 頂点 M 辺の有向グラフがあります。頂点には 1 から N までの番号が付いており、 i 番目の有向辺は頂点 a_i から頂点 b_i へと結ばれています。 また、このグラフ上の経路について、コストを次のように定めます。 経路上の頂点(始点・終点を含む)の番号の最大値 x=1,2,\\ldots,Q に対して次の問題を解いてください。 頂点 s_x から頂点 t_x への経路のコストの最小値を求めよ。ただし、そのような経路が一つも存在しない場合は代わりに -1 と出力せよ。 なお、入力の量が多くなる場合があるので、高速な方法で入出力を行うことを推奨します。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 2000 0 \\leq M \\leq N(N-1) 1 \\leq a_i,b_i \\leq N a_i \\neq b_i i \\neq j ならば (a_i,b_i) \\neq (a_j,b_j) 1 \\leq Q \\leq 10^4 1 \\leq s_i,t_i \\leq N s_i \\neq t_i 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M a_1 b_1 \\vdots a_M b_M Q s_1 t_1 \\vdots s_Q t_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 i 行目には x=i に対する出力をせよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 4\r\n1 2\r\n2 3\r\n3 1\r\n4 3\r\n3\r\n1 2\r\n2 1\r\n1 4"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2\r\n3\r\n-1 x=1 に対しては、 1 番目の辺を通って頂点 1 から頂点 2 へ行く経路のコストが 2 であり、これが最小です。 x=2 に対しては、 2 番目の辺を通って頂点 2 から頂点 3 へ、そして 3 番目の辺を通って頂点 3 から頂点 1 へ行く経路のコストが 3 であり、これが最小です。 x=3 に対しては、頂点 1 から頂点 4 への経路が存在しないため -1 と出力します。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc287/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:09.314715+00:00",
+  "statement_sha256": "c8e23009ecf5171611da5ec0a66428e260adff28cc48fc3f5e12230f8892d81d",
+  "editorials": []
+}

@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc386_f",
+  "title": "Operate K",
+  "contests": [
+    {
+      "contest_id": "abc386",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1875,
+  "raw_difficulty": 1875,
+  "contest_id": "abc386",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc386/tasks/abc386_f",
+  "statement": "配点 : 525 点 問題文 この問題は C 問題 (Operate 1) を完全に含んでおり、 K \\le 20 です。 この問題に正解するコードを C 問題に提出することで、 C 問題に正解できます。 文字列 S に対して以下の操作を 0 回以上 K 回以下行って、文字列 T と一致させられるか判定してください。 次の 3 種類の操作のうちひとつを選択し、実行する。 S 中の (先頭や末尾を含む) 任意の位置に、任意の文字を 1 つ挿入する。 S 中の文字を 1 つ選び、削除する。 S 中の文字を 1 つ選び、別の 1 つの文字に変更する。 制約 S,T は英小文字からなる長さ 1 以上 500000 以下の文字列 K は \\color{red}{1 \\le K \\le 20} を満たす整数 入力 入力は以下の形式で標準入力から与えられる。 K S T 出力 K 回以下の操作で S を T に一致させられる時 Yes 、そうでない時 No と出力せよ。 入力例 1 3\r\nabc\r\nawtf 出力例 1 Yes 例えば、次のように操作することで、 3 回の操作で abc を awtf に変換できます。 2 文字目の b を w に変更する。操作後の文字列は awc となる。 3 文字目の c を f に変更する。操作後の文字列は awf となる。 2 文字目と 3 文字目の間に t を挿入する。操作後の文字列は awtf となる。 入力例 2 2\r\nabc\r\nawtf 出力例 2 No 2 回以下の操作では abc を awtf に変換できません。 入力例 3 17\r\ntwothousandtwentyfour\r\nhappynewyear 出力例 3 Yes",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 この問題は C 問題 (Operate 1) を完全に含んでおり、 K \\le 20 です。 この問題に正解するコードを C 問題に提出することで、 C 問題に正解できます。 文字列 S に対して以下の操作を 0 回以上 K 回以下行って、文字列 T と一致させられるか判定してください。 次の 3 種類の操作のうちひとつを選択し、実行する。 S 中の (先頭や末尾を含む) 任意の位置に、任意の文字を 1 つ挿入する。 S 中の文字を 1 つ選び、削除する。 S 中の文字を 1 つ選び、別の 1 つの文字に変更する。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 S,T は英小文字からなる長さ 1 以上 500000 以下の文字列 K は \\color{red}{1 \\le K \\le 20} を満たす整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 K S T"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 K 回以下の操作で S を T に一致させられる時 Yes 、そうでない時 No と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\r\nabc\r\nawtf"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes 例えば、次のように操作することで、 3 回の操作で abc を awtf に変換できます。 2 文字目の b を w に変更する。操作後の文字列は awc となる。 3 文字目の c を f に変更する。操作後の文字列は awf となる。 2 文字目と 3 文字目の間に t を挿入する。操作後の文字列は awtf となる。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2\r\nabc\r\nawtf"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No 2 回以下の操作では abc を awtf に変換できません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 17\r\ntwothousandtwentyfour\r\nhappynewyear"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc386/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:12.358062+00:00",
+  "statement_sha256": "f3a539ec7743680bf64b3f44f61b2a557c2950367a8f68a3392ba232bbbfa993",
+  "editorials": []
+}

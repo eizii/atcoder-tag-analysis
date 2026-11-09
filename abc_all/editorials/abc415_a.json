@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc415_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc415/editorial/13481",
+      "text": "\\(A\\)\n中に\n\\(X\\)\nが含まれるかどうか判定するには、\n\\(A\\)\nの各要素を for 文を用いて調べながらその要素が\n\\(X\\)\nと等しいかどうかを if 文で判定すれば良いです。\nなお、本問題では\n\\(A_i\\)\nが全て与えられた後に\n\\(X\\)\nが与えられるため、\n\\(A\\)\nを一時的にリストや配列に保存しておく必要があります。\n実装例 (C++):\n小ネタ … この問題で要求される実装内容は\nABC410-A\nとほぼ同じです。実際、入力例 1 はこの問題と全く同じです。",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int N;\n  cin >> N;\n  vector<int> A(N);\n  for(auto &nx : A){cin >> nx;}\n  int X;\n  cin >> X;\n  bool ok=false;\n  for(auto &nx : A){\n    if(nx==X){ok=true; break;}\n  }\n  if(ok){cout << \"Yes\\n\";}\n  else{cout << \"No\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "62644af6d0b1a661099ec6cdf80f386dfca984b77e863e13a4048f5844b6f1b9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc415/abc415_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

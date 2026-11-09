@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc441_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc441/editorial/15099",
+      "text": "頂点\n\\(1\\)\nからスタートしてちょうど\n\\(L\\)\n回辺を通るような経路は、深さ優先探索 (DFS) などによって列挙することが可能です。\n頂点\n\\(v\\)\n\\((1\\leq v\\leq N)\\)\nが問題の条件をみたすかどうかは、\nこれらの経路のうち、通った辺のコストの総和が\n\\(S\\)\n以上\n\\(T\\)\n以下であるようなものであって、\n\\(L\\)\n回目の移動の後にいる頂点が\n\\(v\\)\nであるようなものが存在することと同値です。\nよって、頂点\n\\(1\\)\nでまだ何の辺も通ってない状態から始めて、（現在いる頂点, それまでに通った辺の本数, それまでに通った辺のコストの総和）の情報を持って、次の手順を再帰的に行うことによって解くことができます。\nそれまでに通った辺の本数が\n\\(L-1\\)\n以下ならば、現在いる頂点から伸びている辺すべてについて、「その辺を通って移動する。このとき、（現在いる頂点, それまでに通った辺の本数, それまでに通った辺のコストの総和）を通った辺の情報によって更新する。その後、再度この手順を行う。」という行動を行う。\nそれまでに通った辺の本数が\n\\(L\\)\nのとき、それまでに通った辺のコストの総和が\n\\(S\\)\n以上\n\\(T\\)\n以下ならば、現在いる頂点を（問題文の）条件をみたす頂点として記録する。\nこの手順のあとで、条件をみたす頂点として記録された頂点を（重複しないように）昇順に列挙したものが答えとなります。\nここで、考える必要があるのが列挙するのにかかる時間計算量ですが、重要となるのは以下の事実です。\nこの問題で与えられるグラフにおいて、頂点\n\\(1\\)\nからスタートしてちょうど\n\\(L\\)\n回辺を通るような経路は、高々\n\\(4^L\\)\n通りしか存在しない。\nなお、ここで\n\\(2\\)\nつの経路が異なるとは、ある\n\\(1\\leq i\\leq N\\)\nが存在して\n\\(i\\)\n回目に通った辺が異なることを指す。\nよって、上記の方法では高々\n\\(O(L\\cdot 4^L)\\)\nですべての経路を列挙することができます。なお実際には、\n\\(i\\)\n本の辺を通った後の状態が高々\n\\(4^i\\)\n通りしか存在しないことから、上記の深さ優先探索の手順の計算量は\n\\(O(4^L)\\)\nとなっています。\nこれは、本問題の制約（特に\n\\(L\\leq 10\\)\n）下で、十分に高速です。よって、この問題を解くことができました。\nC++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define N (int)200000\n\nint l,s,t;\nvector<pair<int,int> >e[N];\nbool flag[N];\n\n\nvoid dfs(int k,int d,int tot){\n\tif(d==l){\n\t  if((s<=tot)&&(tot<=t))flag[k]=true;\n\t  return;\n\t}\n\tif(d<l){ //just in case\n\t\tint sz=e[k].size();\n\t\tfor(int i=0;i<sz;i++){\n\t\t\tdfs(e[k][i].first,d+1,tot+e[k][i].second);\n\t\t}\n\t}\n\treturn;\n}\n\n\nint main() {\n\tint n,m;\n\tint u,v,c;\n\tcin >> n >> m >> l >> s >> t;\n\tfor(int i=0;i<m;i++){\n\t\tcin >> u >> v >> c;\n\t\te[u-1].push_back({v-1,c});\n\t}\n\tfor(int i=0;i<n;i++)flag[i]=false;\n\tdfs(0,0,0);\n\n\tvector<int>ans;\n\tfor(int i=0;i<n;i++){if(flag[i])ans.push_back(i+1);}\n\tint sz=ans.size();\n\tfor(int i=0;i<sz;i++){\n\t\tcout << ans[i];\n\t\tif(i<(sz-1))cout << \" \";\n\t}\n\tcout << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "716f7659eb7c76b57609c673e1b0a5661d1afb005a027a5015f5f3e9bdef031a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc441/abc441_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

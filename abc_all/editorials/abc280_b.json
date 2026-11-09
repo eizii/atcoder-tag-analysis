@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc280_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc280/editorial/5304",
+      "text": "先頭から順に\n\\(A_i\\)\nの要素を求めていくことができます。\n解法1\n\\(A_1=S_1\\)\nです。\n\\(S_2=A_1+A_2\\)\nなので、\n\\(A_2=S_2-A_1\\)\nです。\n\\(S_3=A_1+A_2+A_3\\)\nなので、\n\\(A_3=S_3-A_1-A_2\\)\nです。\n\\(\\vdots\\)\nこのように、\n\\(A_k=S_k-A_1-\\ldots-A_{k-1}\\)\nであり、\n\\(A_k\\)\nを求めようとする時点では\n\\(A_1,\\ldots,A_{k-1}\\)\nは既に求めているので、この式を使って\n\\(A_k\\)\nを求めることができます。\n実装例(C)\n解法2\n\\(S_i=(A_1+\\ldots+A_{i-1})+A_i=S_{i-1}+A_i\\)\nであることから、\n\\(S_i-S_{i-1}=A_i\\)\nとなります。この式を使って、\n\\(A_i\\)\nを求めることができます。なお、\n\\(S_0=0\\)\nと定めると、\n\\(i=1\\)\nの場合にもこの式は成り立ちます。添字\n\\(i-1\\)\nが配列外参照を起こさないように注意して実装しましょう。\n実装例(C)\n余談\n解法1の計算量は\n\\(O(N^2)\\)\nであるため、もし\n\\(N=200000\\)\nの場合には、実行時間が長くかかります。一方、解法2の計算量は\n\\(O(N)\\)\nであるため、\n\\(N=200000\\)\nの場合にも十分高速に答えを求めることができます。C 問題以降に挑む際には、このように、計算量の違いを意識できるようになっておくと良いでしょう。",
+      "codes": [
+        "#include<stdio.h>\n\nint main(){\n\tint n;\n\tscanf(\"%d\",&n);\n\tint s[10];\n\tfor(int i=0;i<n;i++)scanf(\"%d\",s+i);\n\n\tint a[10];\n\tfor(int i=0;i<n;i++){\n\t\t//a[i]を求める\n\t\tint temp=s[i];\n\t\tfor(int j=0;j<i;j++)temp-=a[j];\n\t\ta[i]=temp;\n\t}\n\n\tfor(int i=0;i<n;i++)printf(\"%d%c\",a[i],i==n-1?'\\n':' ');\n}",
+        "#include<stdio.h>\n\nint main(){\n\tint n;\n\tscanf(\"%d\",&n);\n\tint s[11];\n\ts[0]=0;\n\tfor(int i=1;i<=n;i++)scanf(\"%d\",s+i);\n\n\tint a[10];\n\tfor(int i=0;i<n;i++)a[i]=s[i+1]-s[i];\n\t\n\tfor(int i=0;i<n;i++)printf(\"%d%c\",a[i],i==n-1?'\\n':' ');\n}"
+      ],
+      "text_sha256": "6a503c7cf810827e219614673958a1629d40bae344bc760dcbe0c08b7fb9a7f6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc280/abc280_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc280/editorial/5327",
+      "text": "C++ では、標準の\n<numeric>\nヘッダにまさにそのものの操作を行う\nstd::adjacent_difference\nという関数があります。\n元となる配列 \\(X\\) と結果を格納する配列 \\(Y\\) を用意し、第一・第二引数に \\(X\\) の先頭と末尾を（\nstd::sort\nに渡すときなどと同様に）与え、第三引数に \\(Y\\) の先頭を与えるようにして使います。\n実装例は以下のようになります。\n少し発展的ですが、\nstd::istream_iterator\nや\nstd::ostream_iterator\nを用いるとより簡単に書くことができます。\n具体的には、このように実装できます。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <numeric>\n\nint main() {\n    using namespace std;\n\n    unsigned N;\n    cin >> N;\n    vector<int> S(N);\n    for(auto&& s : S)cin >> s;\n\n    vector<int> A(N);\n    adjacent_difference(begin(S), end(S), begin(A));\n\n    for(const auto a : A)cout << a << \" \";\n    cout << endl;\n\n    return 0;\n}",
+        "#include <numeric>\n#include <iterator>\n#include <iostream>\n\nint main() {\n    using namespace std;\n    adjacent_difference(next(istream_iterator<int>{cin}), // N を読み飛ばす\n                        istream_iterator<int>{},\n                        ostream_iterator<int>{cout, \" \"});\n    return 0;\n}"
+      ],
+      "text_sha256": "6e80d361996807fbfc95f96d17a2058f7cf9ed2eaec908615814befa2a889335",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc280/abc280_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

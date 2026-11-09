@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc346_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc346/editorial/9639",
+      "text": "問題の性質を利用して前後から文字列を扱う方法について解説しています。\ndp により前からのみ文字列を扱う方法は\nこちら\nで紹介しています。\n\\(T\\)\nの\n\\(i\\)\n文字目と\n\\(i + 1\\)\n文字目が一致するような\n\\(i\\)\nを固定します。すると、\n\\(1\\)\n文字目から\n\\(i\\)\n文字目および\n\\(i + 1\\)\n文字目から\n\\(N\\)\n文字目は\n...0101010101...\nのように\n0\nと\n1\nが交互に並ぶ文字列となります。\nしたがって、各\n\\(i\\)\nに対して以下の値が計算できればよいです。\n\\(S\\)\nの\n\\(1\\)\n文字目から\n\\(i\\)\n文字目を\n01010101...\nのような\n0\nから始まり\n0\nと\n1\nが交互に並ぶ文字列にするために必要なコストの総和の最小値\n\\(S\\)\nの\n\\(1\\)\n文字目から\n\\(i\\)\n文字目を\n10101010...\nのような\n1\nから始まり\n0\nと\n1\nが交互に並ぶ文字列にするために必要なコストの総和の最小値\n\\(S\\)\nの\n\\(i + 1\\)\n文字目から\n\\(N\\)\n文字目を\n...10101010\nのような\n0\nで終わり\n0\nと\n1\nが交互に並ぶ文字列にするために必要なコストの総和の最小値\n\\(S\\)\nの\n\\(i + 1\\)\n文字目から\n\\(N\\)\n文字目を\n...01010101\nのような\n1\nで終わり\n0\nと\n1\nが交互に並ぶ文字列にするために必要なコストの総和の最小値\n上\n\\(2\\)\nつは\n\\(i\\)\nでの計算結果から\n\\(i + 1\\)\nでの計算結果が簡単にわかるため\n\\(i\\)\nの昇順、下\n\\(2\\)\nつは\n\\(i\\)\nでの計算結果から\n\\(i - 1\\)\nでの計算結果が簡単にわかるため\n\\(i\\)\nの降順に計算することで答えを求めることができます。\n具体的に\n\\(1\\)\n番上に書いたものの計算を例にして説明します。\n\\(i + 1\\)\n文字目は\n\\(i + 1\\)\nが奇数のとき\n0\nに、偶数のとき\n1\nにするべきですが、これが元の\n\\(S_{i + 1}\\)\nと一致している場合には\n\\(i\\)\nでの計算結果と\n\\(i + 1\\)\nでの計算結果は一致します。そうでない場合は、\n\\(i\\)\nでの計算結果に\n\\(C_{i + 1}\\)\nを足すことにより\n\\(i + 1\\)\nでの計算結果が得られます。\n実装の際には、\n0\nで終わる /\n1\nで終わるというような扱いではなく、(\n\\(N\\)\n文字全体のうちの) 偶数文字目が\n0\nで奇数文字目が\n1\nの文字列 / 偶数文字目が\n1\nで奇数文字目が\n0\nの文字列というような扱いをすると考えるべきことが減ると考えられます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n    int n;\n    cin >> n;\n    string s;\n    cin >> s;\n    vector<ll> c(n);\n    for (int i = 0; i < n; i++) cin >> c[i];\n    vector<ll> f0(n + 1), f1(n + 1), g0(n + 1), g1(n + 1);\n    for (int i = 0; i < n; i++) {\n        f0[i + 1] = f0[i];\n        f1[i + 1] = f1[i];\n        if (i % 2 == 0) {\n            if (s[i] == '0') f1[i + 1] += c[i];\n            else f0[i + 1] += c[i];\n        }\n        else {\n            if (s[i] == '0') f0[i + 1] += c[i];\n            else f1[i + 1] += c[i];\n        }\n    }\n    for (int i = n - 1; i >= 0; i--) {\n        g0[i] = g0[i + 1];\n        g1[i] = g1[i + 1];\n        if (i % 2 == 0) {\n            if (s[i] == '0') g0[i] += c[i];\n            else g1[i] += c[i];\n        }\n        else {\n            if (s[i] == '0') g1[i] += c[i];\n            else g0[i] += c[i];\n        }\n    }\n    ll ans = 1'000'000'000'000'000'000;\n    for (int i = 1; i < n; i++) ans = min(ans, f0[i] + g0[i]);\n    for (int i = 1; i < n; i++) ans = min(ans, f1[i] + g1[i]);\n    cout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "f02b07c84d0c1050d535179f1e14f67ebb965f51f8fde3f04dbdca5fac0ccde6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc346/abc346_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc346/editorial/9640",
+      "text": "dp により前からのみ文字列を扱う方法を解説します。\n問題の性質を利用して前後から文字列を扱う方法は\nこちら\nで紹介しています。\n\\(dp_{i,j,k}\\)\nを\n\\(S\\)\nの\n\\(1\\)\n文字目から\n\\(i\\)\n文字目までを (\n\\(i\\)\n文字目まででの) 隣接する文字が同じであるものが\n\\(j\\)\n箇所であり、\n\\(i\\)\n文字目が\n\\(k\\)\nであるような文字列に置き換えるために必要なコストの最小値として定義します（\n\\(k\\)\nの値では\n0\nや\n1\nを単に整数の\n\\(0\\)\nや\n\\(1\\)\nと同様に扱っていることに注意してください）。\n答えは\n\\(\\min(dp_{N,1,0}, dp_{N,1,1})\\)\nです。\n\\(dp_{i,j,k}\\)\nの具体的な計算について説明します。\n説明の簡略化のため、\n\\(k = 0\\)\nとします。\n\\(k = 1\\)\nでも同様に計算できます。\n\\(i - 1\\)\n文字目の文字に注目して場合分けを行います。\n\\(i - 1\\)\n文字目の文字が\n0\nであるときは\n\\(i -1\\)\n文字目と\n\\(i\\)\n文字目が一致しており、\n\\(i - 1\\)\n文字目の文字が\n1\nであるときは\n\\(i-1\\)\n文字目と\n\\(i\\)\n文字目が一致していません。\nしたがって、\n\\(S_i =\\)\n0\nのとき\n\\(dp_{i,j,0} = \\min(dp_{i-1,j-1,0}, dp_{i-1,j,1})\\)\n、\n\\(S_i =\\)\n1\nのとき\n\\(dp_{i,j,0} = \\min(dp_{i-1,j-1,0}, dp_{i-1,j,1} )+ C_i\\)\nです（\n\\(j = 0\\)\nのときは\n\\(j - 1\\)\nは負になるので、その際は min を取る対象から外してください）。\n\\(j \\leq 1\\)\nであるもののみ管理すればよいため dp の状態数は\n\\(O(N)\\)\n個でよく、遷移は\n\\(O(1)\\)\n通りであるため答えは時間計算量\n\\(O(N)\\)\nで計算できます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\nll INF = 1'000'000'000'000'000'000;\n\nint main() {\n    int n;\n    cin >> n;\n    string s;\n    cin >> s;\n    vector<ll> c(n);\n    for (int i = 0; i < n; i++) cin >> c[i];\n    vector dp(n, vector(2, vector(2, INF)));\n    dp[0][0][s[0] - '0'] = 0;\n    dp[0][0][(s[0] - '0') ^ 1] = c[0];\n    for (int i = 1; i < n; i++) {\n        int r = s[i] - '0';\n        for (int k = 0; k < 2; k++) {\n            dp[i][0][k] = dp[i - 1][0][k ^ 1] + (r == k ? 0 : c[i]);\n            dp[i][1][k] = min(dp[i - 1][0][k], dp[i - 1][1][k ^ 1]) + (r == k ? 0 : c[i]);\n        }\n    }\n    ll ans = min(dp[n - 1][1][0], dp[n - 1][1][1]);\n    cout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "4253a2efc713b11d8eefd85f6e9fe1a6aa8ab22c0a80651090d796607a6f5833",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc346/abc346_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

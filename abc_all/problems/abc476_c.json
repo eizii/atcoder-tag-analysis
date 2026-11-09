@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc476_c",
+  "title": "Third Largest Number",
+  "contests": [
+    {
+      "contest_id": "abc476",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 165,
+  "raw_difficulty": 47,
+  "contest_id": "abc476",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc476/tasks/abc476_c",
+  "statement": "配点 : 300 点 問題文 3 以上の整数 N と長さ N の正整数列 A=(A_1,A_2,\\ldots,A_N) が与えられます。 k=3,4,\\ldots,N それぞれに対し以下の問題を解いてください： A_1,A_2,\\ldots,A_k を降順に並べたとき、前から 3 番目にくる値を求めてください。 制約 3\\le N\\le 5\\times 10^5 1\\le A_i\\le 10^9 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N 出力 N-2 行出力せよ。 i 行目 (1\\le i\\le N-2) には k=i+2 とした時の答えを出力せよ。 入力例 1 5\r\n1 2 1 2 3 出力例 1 1\r\n1\r\n2 k=3 のとき： A_1,A_2,A_3 を降順に並べると 2,1,1 となります。前から 3 番目に来る値は 1 なので、 1 行目には 1 を出力してください。 k=4 のとき： A_1,A_2,A_3,A_4 を降順に並べると 2,2,1,1 となります。前から 3 番目に来る値は 1 なので、 2 行目には 1 を出力してください。 k=5 のとき： A_1,A_2,A_3,A_4,A_5 を降順に並べると 3,2,2,1,1 となります。前から 3 番目に来る値は 2 なので、 3 行目には 2 を出力してください。 入力例 2 10\r\n1 1 1 3 2 5 4 3 6 5 出力例 2 1\r\n1\r\n1\r\n2\r\n3\r\n3\r\n4\r\n5 入力例 3 10\r\n11 9 1 3 17 19 10 19 17 3 出力例 3 1\r\n3\r\n9\r\n11\r\n11\r\n17\r\n17\r\n17",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 3 以上の整数 N と長さ N の正整数列 A=(A_1,A_2,\\ldots,A_N) が与えられます。 k=3,4,\\ldots,N それぞれに対し以下の問題を解いてください： A_1,A_2,\\ldots,A_k を降順に並べたとき、前から 3 番目にくる値を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 3\\le N\\le 5\\times 10^5 1\\le A_i\\le 10^9 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N-2 行出力せよ。 i 行目 (1\\le i\\le N-2) には k=i+2 とした時の答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\n1 2 1 2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1\r\n1\r\n2 k=3 のとき： A_1,A_2,A_3 を降順に並べると 2,1,1 となります。前から 3 番目に来る値は 1 なので、 1 行目には 1 を出力してください。 k=4 のとき： A_1,A_2,A_3,A_4 を降順に並べると 2,2,1,1 となります。前から 3 番目に来る値は 1 なので、 2 行目には 1 を出力してください。 k=5 のとき： A_1,A_2,A_3,A_4,A_5 を降順に並べると 3,2,2,1,1 となります。前から 3 番目に来る値は 2 なので、 3 行目には 2 を出力してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10\r\n1 1 1 3 2 5 4 3 6 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1\r\n1\r\n1\r\n2\r\n3\r\n3\r\n4\r\n5"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10\r\n11 9 1 3 17 19 10 19 17 3"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 1\r\n3\r\n9\r\n11\r\n11\r\n17\r\n17\r\n17"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc476/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:42:05.423463+00:00",
+  "statement_sha256": "b3cbe0a6e79ad2dc7cb94f6b9e25bf18ac715f8a359a7a30aac4dfead5a341a2",
+  "editorials": []
+}

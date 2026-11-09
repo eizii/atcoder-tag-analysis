@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc478_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc478/editorial/26540",
+      "text": "木 \\(T\\) を、頂点 \\(1\\) を根とする根つき木とします。\n頂点 \\(v\\ (2\\le v\\le N)\\) の親を \\(p _ v\\) と書くことにします。\nすると、文中の操作のうち「頂点 \\(x\\) に隣接する頂点のうちまだ \\(P\\) に含まれていない番号を \\(S\\) に追加する」という操作は、頂点 \\(x\\) の子を \\(S\\) に追加すると言い換えられます。 \\(2\\) つの頂点 \\(u,v\\) について、\\(u\\gt v\\) かつ、\\(u\\) より先に \\(p _ v\\) が列 \\(P\\) に追加されているときについて考えます。\nすると、\\(S\\) から \\(u\\) が最小値として取り出されるためには先に \\(v\\) が取り出される必要があるため、列 \\(P\\) には \\(u\\) より先に \\(v\\) が追加されなければなりません。 これを変形すると、\\(u\\gt v\\) かつ、列 \\(P\\) において \\(v\\) より前に \\(u\\) が出現しているなら、\\(p _ v\\) と同時もしくはより前に \\(u\\) が出現していなければなりません。 \\(2\\le i\\le N\\) に対して、\\(Q _ j\\gt Q _ i\\) かつ \\(j\\lt i\\) なる最大の \\(j\\) （存在しないとき、\\(0\\) とする）を \\(m _ i\\) とします。\n先ほどの議論から、\\(p _ {Q _ i}\\) は \\(Q _ {m _ i},Q _ {m _ i+1},\\ldots,Q _ {i-1}\\) のいずれかでなければなりません。 逆に、すべての \\(i\\ (2\\le i\\le N)\\) について \\(p _ {Q _ i}\\) が上記のいずれかなら、\\(f(T)=P\\) となります（どの要素についても \\(P\\) における位置より前に出現することがないことを示せばよく、これは簡単に示すことができます）。 \\(m _ i\\) は他の \\(p _ j\\) の選び方によらないため、それぞれの \\(i\\) について自由に \\(p _ {Q _ i}\\) を決めることができます。\nよって、答えは \\(\\displaystyle\\prod _ {i=2} ^ N(i-m _ i)\\) となります。 \\(m _ i\\) を素朴に求めていては最悪時間計算量が \\(\\Theta(N ^ 2)\\) となってしまい、実行時間制限に間に合わせるのは難しいかもしれません。\nここで、\\(m _ i\\) の定義から \\(m _ i\\lt j\\lt i\\) なる \\(j\\) について \\(Q _ j\\lt Q _ i\\) であることを利用すると、次のようなアルゴリズムを考えることができます。 はじめ、\\(x\\leftarrow i-1\\) とする。 \\(0\\le x\\) かつ \\(Q _ x\\lt Q _ i\\) である限り、\\(x\\leftarrow m _ x\\) とする。 最終的な \\(x\\) が求める \\(m _ i\\) である。 ここで、\\(m _ 1\\) は便宜上 \\(0\\) としておきます。 各 \\(t\\ (1\\le t\\le N)\\) に対して \\(t\\leftarrow m _ t\\) となる遷移が行われる回数がたかだか \\(1\\) 回なので、時間計算量は全体で \\(O(N)\\) となります。 実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <atcoder/modint>\n\nint main() {\n    using namespace std;\n    using modint = atcoder::static_modint<998244353>;\n    unsigned N;\n    cin >> N;\n    vector<unsigned> Q(N);\n    for (auto&& q : Q) {\n        cin >> q;\n        --q;\n    }\n    modint ans{1};\n    vector<unsigned> prev_greater(N);\n    for (unsigned i{1}; i < N; ++i) {\n        unsigned p{i - 1};\n        while (p && Q[p] < Q[i]) p = prev_greater[p];\n        prev_greater[i] = p;\n        ans *= i - p;\n    }\n    cout << ans.val() << endl;\n    return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "1fee21cdd6f3b75e06daf5f481e47b1b3801ab10d812c6628b23f051e5a48321"
+    }
+  ],
+  "status": "available"
+}

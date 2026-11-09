@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc005_1",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc005/editorial.pdf",
+      "text": "A問題 おいしいたこ焼きの作り方\n\n  問題概要 1.\n  アルゴリズム 2.\n\n\n\n\n\n2014/3/22                             ©AtCoder Inc. All rights reserved.                                      33\n\f\nA問題 問題概要\n\n• Ｘグラムの小麦粉がある。\n• Ｙグラムの小麦粉につき、１個たこ焼きを作ることが\n 可能である\n• 最大いくつのたこ焼きを作ることが出来るか？\n\n\n\n\n\n2014/3/22                                                                                               4\n\f\nA問題 アルゴリズム\n\n• 基本的なプログラムの流れ\n   – 標準入力から、必要な入力を受け取る\n          • 今回の場合は、x, yの2つの整数\n   – 問題で与えられた処理を行う\n          • 今回は、xグラムの小麦粉でたこ焼きが何個作れるか算出する\n   – 標準出力へ、答えを出力する\n\n\n\n\n\n2014/3/22                                                                                               5\n\f\nA問題 アルゴリズム\n\n• 入力\n   – 2つの数字を、標準入力から受け取る\n          • Cであれば、scanf(“%d %d”, &x, &y); など\n          • C++であれば、cin >> x >> y;\n          • 入力の受け取り方は、下記の練習問題に記載があります。\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2014/3/22                                                                                               6\n\f\nA問題 アルゴリズム\n\n• Xグラムの小麦粉から、Yグラムで作れるたこ焼きを、\n いくつ作れるか考える。\n   – これは、単純な算数の問題\n• X ÷ Yで求めることが出来る。\n   – 整数同士の演算なので、殆どの言語で勝手に小数点以\n   下は切り捨てられる。\n   – 小数で計算して、整数で出力、などをしてしまうと、四捨五\n   入された結果などが出力されてしまうことがあるのに注意\n\n\n\n\n\n2014/3/22                                                                                               7\n\f\nA問題 アルゴリズム\n\n• 具体的な記述\n   – int ret = X / Y; のような感じ\n   – 答えを格納する変数に、計算結果を入れておく\n\n\n\n\n\n2014/3/22                                                                                               8\n\f\nA問題 アルゴリズム\n\n• 出力\n   – 求めた答えを、標準出力より出力する。\n   – 言語によって違います。\n          • printf(%d¥n, ret); (C)\n          • cout << ret << endl; (C++)\n          • System.out.println(ret); (Java)\n          • 各言語の標準出力は、下記の練習問題に記載があります。\n           – http://practice.contest.atcoder.jp/tasks/practice_1\n\n\n\n\n\n2014/3/22                                                                                               9",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "319328953bde35c2e27bd7ba3f32506d682aeddbdd89b19b66bdae2cb0aff693"
+    }
+  ],
+  "status": "available"
+}

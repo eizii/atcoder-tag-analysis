@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc350_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc350/editorial/9813",
+      "text": "この問題は、文字列と数値の変換を適切に行うことで解くことができます。\n必要な処理は次の通りです。\n入力で与えられる文字列の後ろ\n\\(3\\)\n文字を取り出し\n\\(T\\)\nとする\n\\(T\\)\nを数値に変換する\n\\(T\\)\nが\n\\(1\\)\n以上\n\\(349\\)\n以下であり、かつ、\n\\(316\\)\nでないならば\nYes\nを出力する。\nそうでないならば\nNo\nを出力する\nABC000\nという入力に対する答えは\nNo\nであることに注意してください。\n実装例(Python)\n実装例C++)",
+      "codes": [
+        "S = input()\nT = S[3:]\nT = int(T)\nif 1 <= T <= 349 and T != 316:\n  print(\"Yes\")\nelse:\n  print(\"No\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tstring S;\n\tcin >> S;\n\tstring  TT = S.substr(3);\n\tint T=stoi(TT);\n\tif(1 <= T && T <= 349 && T != 316){\n\t\tcout << \"Yes\" << endl;\n\t} else {\n\t\tcout << \"No\" << endl;\n\t}\n}"
+      ],
+      "text_sha256": "07ccdbf584f51ba604500e81ea03c163903e6b3c5d7579fb264817e9b738e7ee",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc350/abc350_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

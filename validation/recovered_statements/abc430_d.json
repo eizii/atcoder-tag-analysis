@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc430_d",
+  "source_url": "https://atcoder.jp/contests/abc430/tasks/abc430_d?lang=ja",
+  "statement": "問題文\n数直線があり、最初は座標\n0\nに人\n0\nがひとりで立っています。\nこれから、人\n1,2,\\dots,N\nがこの順に到着し、数直線上に立ちます。\n人\ni\nは座標\nX_i\nに立ちます。なお、\nX_i \\ge 1\nであり、全ての人について\nX_i\nは相異なります。\n人が到着するたびに、以下の問いに答えてください。\n現在数直線に人\n0,1,\\dots,r\nの\nr+1\n人が立っているとする。\nこのとき、\nd_i\nを「人\ni\nに最も近い別の人までの距離」と定義する。\nより厳密には、\n\\displaystyle d_i = \\min_{0 \\le j \\le r, j \\neq i} \\vert X_i - X_j \\vert\nとする。\nこの\nd\nの総和、すなわち\n\\displaystyle \\sum_{i=0}^r d_i\nを求めよ。\n制約\n入力は全て整数\n1 \\le N \\le 5 \\times 10^5\n1 \\le X_i \\le 10^9\ni \\neq j\nならば\nX_i \\neq X_j",
+  "html_sha256": "0195c50e607f2e19b832b1421563aee7b57a421980b439be2d5c235234e0aff7",
+  "extractor": "section_headings_v1"
+}

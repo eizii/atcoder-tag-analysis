@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc297_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc297/editorial/6170",
+      "text": "B\n,\nK\n,\nR\nそれぞれについて、\n\\(S\\)\nの左から何番目がその文字かを求めれば与えられた条件を判定できます。\nこれは、文字ごとに配列を持って出現位置を管理すると簡単に調べられます。実装例も参考にしてください。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    const int n = 8;\n    string s;\n    cin >> s;\n    map<char, vector<int>> mp;\n    for(int i = 0; i < n; i++) {\n        mp[s[i]].push_back(i);\n    }\n    bool ok = 1;\n    ok &= mp['B'][0] % 2 != mp['B'][1] % 2;\n    ok &= mp['R'][0] < mp['K'][0] and mp['K'][0] < mp['R'][1];\n    cout << (ok ? \"Yes\\n\" : \"No\\n\");\n}"
+      ],
+      "text_sha256": "94652388ef81b78cb9eb6a71578d6a0732b4445bb8e0b7fa9bed82bb3cf3a413",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc297/abc297_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc297/editorial/6182",
+      "text": "正規表現による実装を紹介します。\n二つの\nB\nの位置の偶奇が異なるとは、間に挟まっている文字が偶数個であるということです。\nこれは、2文字の0個以上の繰り返しが\nB\nの間に挟まっているということで、\nB(..)*B\nで表現できます。\nK\nが二つの\nR\nの間にあるとは、\nR\n、任意の文字列、\nK\n、任意の文字列、\nR\nがこの順に並んでいるということです。任意の文字列は\n.*\nなので、これは\nR.*K.*R\nで表現できます。",
+      "codes": [
+        "fun main() {\n  val S = readLine()!!\n  val check1 = S.matches(Regex(\".*B(..)*B.*\")) // Bの位置の偶奇が異なる\n  val check2 = S.matches(Regex(\".*R.*K.*R.*\")) // KがRに挟まれている\n  println(if (check1 and check2) \"Yes\" else \"No\")\n}"
+      ],
+      "text_sha256": "fbee521d41aeea156b71c4f8e5b20588e5e1c80e4409312c7324ae92d81601cd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc297/abc297_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc297/editorial/6178",
+      "text": "文字列中に別の文字列が出現する位置を検索する標準ライブラリ（C++ の find, rfind など）を使えば、各文字の位置を手軽に求められます。\n実装例（Python）",
+      "codes": [
+        "S = input()\nc1 = (S.rfind('B') - S.find('B')) % 2 == 1\nc2 = S.find('R') < S.find('K') < S.rfind('R')\nprint('Yes' if c1 and c2 else 'No')"
+      ],
+      "text_sha256": "b6c1350bee793f33b9dbd83ea2cc2150b58535cde973b126a5adea39221025be",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc297/abc297_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

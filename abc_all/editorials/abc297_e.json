@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc297_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc297/editorial/6167",
+      "text": "以下、何も買わない\n\\(0\\)\n円の方法を認めるものとします。始めに\n\\(K\\)\nを\n\\(1\\)\n増やせばよいです。\n\\(K\\)\n番目に安い金額として、あるたこ焼きを\n\\(K+1\\)\n個以上買うことはないためそれぞれの買う個数を\n\\(0\\)\n個から\n\\(K\\)\n個で全探索すると\n\\(\\mathrm{O}(K^N)\\)\nでこの問題を解くことが出来ますが制限実行時間に間に合いません。探索方法を工夫します。\n\\(1\\)\n番目から\n\\(i\\)\n番目までの安い金額が分かっているとします。\n\\(i+1\\)\n番目の金額は、これら\n\\(i\\)\n個の方法のいずれかに\n\\(1\\)\n個いずれかのたこ焼きを加えたものとなります。そうでないならば、追加したものを\n\\(1\\)\n個だけ残しそれ以外を消すことでより安い買い方を作れるためです。\nよって、以下の探索方法によってこの問題を解くことが出来ます。\n始め、\n\\(0\\)\nだけが入っている集合を管理するデータ構造\n\\(Q\\)\nと答えを格納する長さ\n\\(K\\)\nの配列\n\\(\\mathrm{ans}\\)\nを持つ。\n\\(i=2,3,\\dots,K\\)\nの順に以下を行う。\n\\(Q\\)\nに入っている一番小さい値\n\\(v\\)\nを取り出し、\n\\(\\mathrm{ans}[i]=v\\)\nとする。ただし、\n\\(\\mathrm{ans}[i-1]=v\\)\nの場合は次の要素を見る。\n\\(j=1,2,\\dots,N\\)\nに対して、\n\\(Q\\)\nに\n\\(v+A_j\\)\nを加える。\n\\(\\mathrm{ans}[i-1]=v\\)\nの時に次の要素を見るのは、答えとして重複している金額は\n\\(1\\)\n回しかカウントしないからです。\n計算量は、\n\\(K \\times N\\)\n回\n\\(Q\\)\nにアクセスするため、\n\\(\\mathrm{O}(K N \\log (NK))\\)\nです。これは十分高速です。\n\\(Q\\)\nのサイズが\n\\(K\\)\nを超えている間\n\\(Q\\)\nの最大値を削除することで、\n\\(\\mathrm{O}(K N \\log K)\\)\nでこの問題を解くこともできます。\nまた、上記の探索方法はダイクストラ法に酷似しており、頂点をたこ焼きの買い方、辺をたこ焼きを\n\\(1\\)\n個追加する操作かつ重みはたこ焼きの金額としたグラフ上で何も買わない頂点からダイクストラ法をしているとも見ることが出来ます。ただし、同じ金額となる買い方は同じものとみることに注意してください。",
+      "codes": [],
+      "text_sha256": "0b24610ed6c35738f033ad138db535dfb7355281afa649fab2026ecf7a667273",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc297/abc297_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc297/editorial/6181",
+      "text": "ある非負整数\n\\(x\\)\nが与えられて、「\n\\(x\\)\nが、安い方から\n\\(K\\)\n番目の金額以上であるか」という判定問題が時間計算量\n\\(\\mathcal{O}(NK)\\)\nくらいで解けたとしたら、この判定問題を使った二分探索で\n\\(K\\)\n番目の金額がわかりそうです。\n判定問題は次のような方法で解くことができます。\n「頂点\n\\(0, 1, 2, ... x\\)\nの\n\\(x+1\\)\n個の頂点を持つグラフを考える。任意の頂点\n\\(v\\)\nは\n\\(v + A_i \\leq x\\)\nならば頂点\n\\(v + A_i \\)\n\\((1\\leq i\\leq N)\\)\nに向かう辺を持つ。頂点\n\\(0\\)\nから到達可能な頂点が\n\\(K\\)\n個を上回るかを実際に DFS して調べる。」\n到達頂点数が\n\\(K\\)\nを上回ったら探索を打ち切るようにすれば、この DFS の計算量は\n\\(\\mathcal{O}(NK)\\)\n程度となりそうです。\n二分探索は\n\\(K\\max{A_i}\\)\nを解の上界に見積もってよさそうですから、全体として計算量は\n\\(\\mathcal{O}(NK\\log{K\\max{A_i}})\\)\n程度となり、定数倍に気をつけると通ります。\nPyPy3 (2638 ms):\nhttps://atcoder.jp/contests/abc297/submissions/40486705",
+      "codes": [],
+      "text_sha256": "83f4eca20a1085721106aa712bdf72737ce5a59c584d4a36d212a6f6f0325564",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc297/abc297_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc297/editorial/7101",
+      "text": "公式解説と同様に、答えを格納する配列\n\\(\\mathrm{ans}\\)\nを持ちます。ただし、\n\\(\\mathrm{ans}[0]=0\\)\nとします。\n\\(\\mathrm{ans}[0],\\mathrm{ans}[1],\\ldots,\\mathrm{ans}[i-1]\\)\nが既にわかっているとき、\n\\(\\mathrm{ans}[i]\\)\nを高速に求める方法について考えます。\n\\(\\mathrm{ans}[i]\\)\nは、\n\\(\\mathrm{ans}[0],\\mathrm{ans}[1],\\ldots,\\mathrm{ans}[i-1]\\)\nと\n\\(A_1,A_2,\\ldots,A_N\\)\nからそれぞれ要素をひとつずつえらんで足したもののうち、\n\\(\\mathrm{ans}[i-1]\\)\nより大きいものの中での最小の値です。\nここで、足す\n\\(A_j\\)\nを固定すると、\n\\(\\mathrm{ans}[0],\\mathrm{ans}[1],\\ldots,\\mathrm{ans}[i-1]\\)\nの中で\n\\(A_j\\)\nを足して\n\\(\\mathrm{ans}[i-1]\\)\nより大きくなるような最小の値は、（\n\\(\\mathrm{ans}\\)\nは昇順に並んでいるので）二分探索により求めることができます。\nよって、各\n\\(j\\)\nについて\n\\(\\mathrm{ans}[k]+A_j>\\mathrm{ans}[i-1]\\)\nを満たす最小の\n\\(\\mathrm{ans}[k]\\)\nを求め、各\n\\(\\mathrm{ans}[k]+A_j\\)\nのうちの最小値をとれば、\n\\(\\mathrm{ans}[i]\\)\nを\n\\(\\Omicron(N\\log K)\\)\nで求めることができます。\nしたがって、\n\\(i=1,2,\\ldots,K\\)\nについて上記の操作により\n\\(\\mathrm{ans}[i]\\)\nを順に求めれば、全体で\n\\(\\Omicron(NK\\log K)\\)\nでこの問題を解くことができます。",
+      "codes": [],
+      "text_sha256": "9edf420b256475c39a764e0b11e92b87947b29f385dc6956fe1c89a4985b212d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc297/abc297_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc440_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc440/editorial/15006",
+      "text": "原案：admin\nもし求めるものが番号ではなくタイムなら\n\\(T_i\\)\nをソートすればよいです。今回のように番号を求める場合も同様に、組\n\\((T_i,i)\\)\nをソートすることで求めるものを得ることができます。\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "N=int(input())\nT=list(map(int,input().split()))\n\nTI=[]\nfor i in range(N):\n  TI.append((T[i],i+1))\n\nTI.sort()\nprint(TI[0][1], TI[1][1], TI[2][1])",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint n;\n\tcin >> n;\n\n\tvector<pair<int,int>>ti;\n\tfor(int i=0;i<n;i++){\n\t\tint t;\n\t\tcin >> t;\n\t\tti.push_back({t,i+1});\n\t}\n\n\tsort(ti.begin(),ti.end());\n\tcout << ti[0].second << ' ' << ti[1].second << ' ' << ti[2].second << endl;\n}"
+      ],
+      "text_sha256": "60e6a53dc9f7a79ce04481e34cec5e681c6c1caacd9d715910736c13d9c9bfa3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc440/abc440_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

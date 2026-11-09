@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc338_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc338/editorial/9159",
+      "text": "初めての方へ：この問題は人生最初のプログラミングとしてはやや大変でしょう。難しく感じる場合は他の回の問題 A（例：\nABC336A\n）を先に解くことを勧めます。いずれにせよ、標準入力・標準出力の扱い方は\npractice contest の問題 A\nを参照してください。\n題意を再掲します。\n以下が成り立つか判定せよ：文字列\n\\(S\\)\nの先頭の文字は英大文字であり、それ以外の文字はすべて英小文字である。\n方針 1. for ループ\n以下の処理を実装しましょう。なお、\n\\(S\\)\nの先頭の文字を\n\\(0\\)\n文字目とします。\n変数\n\\(\\mathrm{ans}\\)\nを宣言し、\n\\(S\\)\nの\n\\(0\\)\n文字目が大文字なら true、小文字なら false を代入する。\n\\(i = 1, 2, \\dots, |S| - 1\\)\nのそれぞれについて以下を行う：\n\\(S\\)\nの\n\\(i\\)\n文字目が大文字なら、\n\\(\\mathrm{ans}\\)\nに false を代入する。\n\\(\\mathrm{ans}\\)\nの値が true なら\nYes\n、false なら\nNo\nを出力する。\n文字が大文字か小文字か判定するには、言語の標準ライブラリが使えます。C++ には isupper や islower という関数があり、他の言語にも似た名前の関数があるはずです。\n以下に C++ での実装例を示します。\nC++ での注意：isupper や islower が返す値は true や false ではありません。\n\\(c\\)\nが大文字のとき islower(\n\\(c\\)\n) は\n\\(0\\)\n以外の何らかの整数を返し、isupper も同様です。この値を bool として扱う場合は、明示的に変換しないと思わぬ失敗が生じることがあります（上記コードの\n\\(10\\)\n行目の変換を省略すると、\n&=\nでのビット演算が失敗します）。\n方針 2. ライブラリ\n言語によっては、正規表現ライブラリを使う手があります。以下は Python での実装例です。\nまた、文字列中の文字すべてが小文字であるか判定するライブラリ関数があるかもしれません。\n\\(S\\)\nから先頭の文字を除いたものにその関数を適用すれば、方針 1 の for ループの部分の代わりになります。\nPython での注意：isupper や islower は空文字列に対して False を返します。競技プログラミングでは余計なお世話です。今回は、\n\\(S\\)\nの長さが\n\\(1\\)\nの場合を特別扱いしなければなりません。\nさらに、今回の問題を一発で解くライブラリ関数があるかもしれません。",
+      "codes": [
+        "#include <cctype>\n#include <iostream>\nusing namespace std;\n\nint main() {\n    string S;\n    cin >> S;\n    bool ans = isupper(S[0]);\n    for (int i = 1; i < S.size(); ++i) {\n        ans &= bool(islower(S[i]));\n    }\n    cout << (ans ? \"Yes\" : \"No\") << endl;\n}",
+        "import re\n\nS = input()\nprint(\"Yes\" if re.fullmatch(\"[A-Z][a-z]*\", S) else \"No\")",
+        "S = input()\nprint(\"Yes\" if S[0].isupper() and (len(S) == 1 or S[1:].islower()) else \"No\")",
+        "S = input()\nprint(\"Yes\" if S.istitle() else \"No\")"
+      ],
+      "text_sha256": "9f36bb5c14f8b2262d472249c4df2abcdbedf18c8ceb5207b87051c85ac3a5bc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc338/abc338_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

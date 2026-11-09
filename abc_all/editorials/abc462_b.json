@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc462_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc462/editorial/21457",
+      "text": "人\n\\(i\\)\nが人\n\\(A_{i,j}\\)\nにギフトを送ったということは、人\n\\(A_{i,j}\\)\nが人\n\\(i\\)\nからギフトを受けとったということです。したがって、誰が誰からギフトを受け取ったかを二次元配列などを用いて適切に管理し、データを出力すれば良いです。\n実装例(Python3)",
+      "codes": [
+        "n = int(input())\nans = [[] for _ in range(n)]\nfor i in range(n):\n    a = list(map(int, input().split()))[1:]\n    for c in a:\n        ans[c - 1].append(i + 1)\nfor i in range(n):\n    a = [len(ans[i])] + ans[i]\n    print(*a)"
+      ],
+      "text_sha256": "4bd2be6b72a7f774a5e38c3e57720db17f8e1bda36d0129fd3746ffc66ac6e18",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc462/abc462_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

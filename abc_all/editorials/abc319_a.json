@@ -1,0 +1,57 @@
+{
+  "problem_id": "abc319_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc319/editorial/7102",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nC++入門 AtCoder Programming Guide for beginners (APG4b)\nは、競技プログラミングのための C++ 入門用コンテンツです。\nこの問題は、入力がそれぞれのユーザーネームのどれに等しいかを判定し、対応するレーティングを出力することで解くことができます（実は、それぞれのユーザーネームは先頭の文字を見るだけで区別することもできます）。\n例えば、次のような実装方針で解くことができます。\n条件分岐を用いる方法\n実装例：C++, Haskell\n連想配列を用いる方法\n実装例：Python\n文字列置換を用いる方法\n実装例：sed\n1. 条件分岐を用いる方法\nユーザーネームを\n\\(1\\)\nつずつ確認し、一致していたら対応するレーティングを出力することでこの問題を解くことができます。\n実装例は以下のようになります。\nC++\nHaskell\n2. 連想配列を用いる方法\n言語によっては、文字列などから対応する値を高速に取得する方法があります。C++ では\nstd::map\nを、Python では\ndict\nを用いることができます。\nこれを用いて、ユーザーネームとレーティングを対応させることでこの問題を解くことができます。\n実装例は以下のようになります。\nまた、与えられた文字列を分割し、辞書内包表記などを用いて連想配列を作ることでも解くことができます。\n3. 文字列置換を用いる方法\n入力に対して、ユーザーネームを対応するレーティングに置換することでこの問題を解くことができます。\n実装例は以下のようになります。\nsed",
+      "codes": [
+        "#include <iostream>\n#include <string>\n\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    \n    if (s == \"tourist\")\n        cout << 3858 << endl;\n    if (s == \"ksun48\")\n        cout << 3679 << endl;\n    if (s == \"Benq\")\n        cout << 3658 << endl;\n    if (s == \"Um_nik\")\n        cout << 3648 << endl;\n    if (s == \"apiad\")\n        cout << 3638 << endl;\n    if (s == \"Stonefeang\")\n        cout << 3630 << endl;\n    if (s == \"ecnerwala\")\n        cout << 3613 << endl;\n    if (s == \"mnbvmar\")\n        cout << 3555 << endl;\n    if (s == \"newbiedmy\")\n        cout << 3516 << endl;\n    if (s == \"semiexp\")\n        cout << 3481 << endl;\n    \n    return 0;\n}",
+        "main = interact (\\s -> case s of\n    \"tourist\" -> \"3858\"\n    \"ksun48\" -> \"3679\"\n    \"Benq\" -> \"3658\"\n    \"Um_nik\" -> \"3648\"\n    \"apiad\" -> \"3638\"\n    \"Stonefeang\" -> \"3630\"\n    \"ecnerwala\" -> \"3613\"\n    \"mnbvmar\" -> \"3555\"\n    \"newbiedmy\" -> \"3516\"\n    \"semiexp\" -> \"3481\")",
+        "username_to_rating = {\n    \"tourist\": \"3858\", \n    \"ksun48\": \"3679\", \n    \"Benq\": \"3658\", \n    \"Um_nik\": \"3648\", \n    \"apiad\": \"3638\", \n    \"Stonefeang\": \"3630\", \n    \"ecnerwala\": \"3613\", \n    \"mnbvmar\": \"3555\", \n    \"newbiedmy\": \"3516\", \n    \"semiexp\": \"3481\"\n}\n\nprint(username_to_rating[input()])",
+        "data = \"\"\"tourist 3858\nksun48 3679\nBenq 3658\nUm_nik 3648\napiad 3638\nStonefeang 3630\necnerwala 3613\nmnbvmar 3555\nnewbiedmy 3516\nsemiexp 3481\"\"\"\n\nusername_to_rating = {name: rating for name, rating in map(lambda s: s.split(), data.splitlines())}\n\nprint(username_to_rating[input()])",
+        "s/tourist/3858/\ns/ksun48/3679/\ns/Benq/3658/\ns/Um_nik/3648/\ns/apiad/3638/\ns/Stonefeang/3630/\ns/ecnerwala/3613/\ns/mnbvmar/3555/\ns/newbiedmy/3516/\ns/semiexp/3481/"
+      ],
+      "text_sha256": "73fb1ab239099d4ec2baacb894331504ac86c544c747160901eeadf237cb593f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc319/abc319_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc319/editorial/9900",
+      "text": "この問題で与えられているデータのフォーマットは各行全て\n『（ハンドルネーム）（空白1つ）（4桁の数字）』\nであるため、ハンドルネームから右に2~5文字進んだ位置に対応する文字列が求めるレートとなります。\nよって、開始位置を1文字ずつ前から愚直に探索して、ハンドルネームと一致するタイミングを見つければ、埋め込んだデータの整形などをせずとも問題に答えることが出来ます。\nC++による解答例：\n（ここで、複数行からなる文字列を一つの文字列とみなすために、C++の「生文字列リテラル」と呼ばれる言語仕様を用いております。\n参考 :\nhttps://cpprefjp.github.io/lang/cpp11/raw_string_literals.html\n）",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string T = R\"(tourist 3858\nksun48 3679\nBenq 3658\nUm_nik 3648\napiad 3638\nStonefeang 3630\necnerwala 3613\nmnbvmar 3555\nnewbiedmy 3516\nsemiexp 3481)\";\n\n    string S; cin >> S;\n    for(int i=0; i<T.size(); i++) {\n        if(T.substr(i, S.size()) == S) {\n            cout << T.substr(i + S.size() + 1, 4) << endl;\n            return 0;\n        }\n    }\n\n}"
+      ],
+      "text_sha256": "25598902fc265b1f3226edb7af57d0f959300f8f5aa9521a7cbb03d40e43f2c4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc319/abc319_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc319/editorial/7559",
+      "text": "hourenさんのユーザー解説\nに近いですが、Pythonの場合は体感さらに簡単な埋め込みが可能です。\nせっかくコピーできるテキストがあるので、使用しない理由はありません。これを標準入力に与えて、連想配列を出力するようなプログラムを考えます。\nそのようなプログラムはたとえば以下のようになります。\n変数名は適宜省略してかまいません。また、今回は必要ないですが\nrating\nを\nint\n型に直しても問題ありません。\nこれを実行すると、以下のような出力を得ます。\nこれをコピペすることで、正しい連想配列を埋め込むことが可能です。よって、ここから所定のキーを検索すればよいです。\n実装例",
+      "codes": [
+        "players={}\nfor i in range(10):\n    username,rating=input().split()\n    players[username]=rating\nprint(players)",
+        "{'tourist': '3858', 'ksun48': '3679', 'Benq': '3658', 'Um_nik': '3648', 'apiad': '3638', 'Stonefeang': '3630', 'ecnerwala': '3613', 'mnbvmar': '3555', 'newbiedmy': '3516', 'semiexp': '3481'}",
+        "print({'tourist': '3858', 'ksun48': '3679', 'Benq': '3658', 'Um_nik': '3648', 'apiad': '3638', 'Stonefeang': '3630', 'ecnerwala': '3613', 'mnbvmar': '3555', 'newbiedmy': '3516', 'semiexp': '3481'}[input()])"
+      ],
+      "text_sha256": "4affb38b758b0f9e7b172b7d453c7e3c432b99928cd3cedb39d8d060101fc112",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc319/abc319_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc319/editorial/7119",
+      "text": "ハンドルネームとレートを一つずつ書いていくのはやや面倒です。この問題では、コピーしたテキストを入力に渡せばコード(の一部)を返すコードを書くと良いでしょう。\nC++による実装例:\n出力\n文字列の中に\n\"\nを入れたい場合は、例えば実装例のように\n\\\"\nとすると良いです。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    for(int i=0;i<10;i++){\n        string s, x;\n        cin >> s >> x;\n        cout << \"    if(s==\\\"\" << s << \"\\\") cout << \" << x << \" << endl;\\n\";\n    }\n    return 0;\n}",
+        "if(s==\"tourist\") cout << 3858 << endl;\n    if(s==\"ksun48\") cout << 3679 << endl;\n    if(s==\"Benq\") cout << 3658 << endl;\n    if(s==\"Um_nik\") cout << 3648 << endl;\n    if(s==\"apiad\") cout << 3638 << endl;\n    if(s==\"Stonefeang\") cout << 3630 << endl;\n    if(s==\"ecnerwala\") cout << 3613 << endl;\n    if(s==\"mnbvmar\") cout << 3555 << endl;\n    if(s==\"newbiedmy\") cout << 3516 << endl;\n    if(s==\"semiexp\") cout << 3481 << endl;"
+      ],
+      "text_sha256": "a472813ddc350c6cad5ee364d22920b5e9f84379392a54dee0ac7a15d93d55d9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc319/abc319_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

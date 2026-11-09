@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc355_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc355/editorial/10075",
+      "text": "\\(A=B\\)\nのときは，人\n\\(A\\)\n以外の残りの二人のうちどちらが犯人かを特定できないため答えは\n-1\nになります．\n\\(A\\neq B\\)\nのときは，\n\\(1,2,3\\)\nのうち\n\\(A,B\\)\n以外のものを出力すればよいです．\n\\(A\\neq B\\)\nである入力は\n\\(3\\times 2=6\\)\n通りあるため，\n\\(6\\)\n通りの場合分けをすることでこの問題を解くことができます．\nまた，犯人を\n\\(C\\)\nとしたとき，\n\\(A,B,C\\)\nには以下の性質を満たすことを利用すると場合分けを減らすことができます．\n\\(C=6-A-B\\)\n\\(C=A\\oplus B\\)\n（\n\\(\\oplus\\)\nは排他的論理和）\nほかにも，言語の機能をうまく利用することで場合分けを減らすことができます．",
+      "codes": [
+        "A, B = map(int, input().split())\nif A == B:\n    print(-1)\nif A == 1 and B == 2:\n    print(3)\nif A == 1 and B == 3:\n    print(2)\nif A == 2 and B == 1:\n    print(3)\nif A == 2 and B == 3:\n    print(1)\nif A == 3 and B == 1:\n    print(2)\nif A == 3 and B == 2:\n    print(1)",
+        "A, B = map(int, input().split())\nif A == B:\n    print(-1)\nelse:\n    print(6 - A - B)",
+        "A, B = map(int, input().split())\nif A == B:\n    print(-1)\nelse:\n    print(A ^ B)",
+        "A, B = map(int, input().split())\nS = set([1, 2, 3])\nS.discard(A) # S に A が含まれていたら A を削除する，含まれなければ何もしない\nS.discard(B) # S に B が含まれていたら B を削除する，含まれなければ何もしない\n\nif len(S) == 1:\n    print(S.pop())\nelse:\n    print(-1)"
+      ],
+      "text_sha256": "322a214131cd5b61f8f8138fd55d7e352e9996ba4499b1b6ffd9952261c24693",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc355/abc355_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

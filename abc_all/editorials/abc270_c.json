@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc270_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc270/editorial/4878",
+      "text": "木のパスを調べる方法はいくつかありますが、ここでは深さ優先探索とstack(deque) を用いる方法を紹介します。\nグラフにおける深さ優先探索とは、ある頂点\n\\(S\\)\nから始めて、次の操作を繰り返すことで頂点\n\\(S\\)\nから辺に沿って移動できる全ての頂点を列挙する手法です。また、各頂点\n\\(v\\)\nに対してその頂点に到達した事があるかを示す\n\\(flag[v]\\)\nも持っておきます。最初、全ての頂点について\n\\(flag[v]=False\\)\nです。\n現在いる頂点\n\\(v\\)\nについて、\n\\(flag[v]=True\\)\nに変更する。\n\\(v\\)\nから移動できる頂点\n\\(w\\)\nであってまだ訪ねていないもの、すなわち\n\\(flag[w]=False\\)\nであるようなものを選び、頂点\n\\(w\\)\nに移動した後、\n\\(1.\\)\nから再度行う。\n\\(2.\\)\nにおいてそのような頂点が存在しない場合、現在いる頂点がスタートした頂点\n\\(S\\)\nであるならば探索を終了する。\nそうでない時、この頂点を初めて訪れる直前のマスに戻り、\n\\(2.\\)\nの作業を再開する。\nさて、dequeを用いてパスの頂点列を得るには頂点\n\\(X\\)\nから始めて、上の作業にいくつかの項目を付け加えた次のもの繰り返せば良いです。\n最初、dequeの中身は空です。\nduque の末尾に\n\\(v\\)\nを追加する。\n現在いる頂点\n\\(v\\)\nについて、\n\\(flag[v]=True\\)\nに変更する。\n\\(v\\)\nから移動できる頂点\n\\(w\\)\nであってまだ訪ねていないもの、すなわち\n\\(flag[w]=False\\)\nであるようなものを選び、頂点\n\\(w\\)\nに移動した後、\n\\(1.\\)\nから再度行う。\nduque の末尾から要素を\n\\(1\\)\nつ削除する。（ここで、削除される要素は\n\\(v\\)\n自身となる）\n\\(3.\\)\nにおいてそのような頂点が存在しない場合、現在いる頂点がスタートした頂点\n\\(X\\)\nであるならば探索を終了する。\nそうでない時、この頂点を始めて訪れる直前のマスに戻り、\n\\(2.\\)\nの作業を再開する。\n答えは頂点\n\\(Y\\)\nをdequeの末尾に付け加えた直後のdeque の中身を\n手前から順に出力したものになります。\nまず、これは頂点\n\\(X\\)\nから頂点\n\\(Y\\)\nへのパスとなっています。\nさらに深さ優先探索において同じ頂点について\n\\(1.\\)\nが\n\\(2\\)\n回以上行われることはないため、これはさらに単純パスになっています。\n今、木において単純パスはただ\n\\(1\\)\nつとわかっているため、これが答えとなります。\n他にも、さまざまな方法があります。\n例えば、木を、\n\\(Y\\)\nを根とした根付き木として考えて、頂点\n\\(X\\)\nから親の頂点に戻ることを\n\\(Y\\)\nに到達するまで繰り返すと、それは単純パスになります。\nc++ による実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nvector<int>e[200010];\nbool flag[200010];\ndeque<int> deq;\nbool stop;\n \nvoid dfs(int k,int to){\n\tif(!stop)deq.push_back(k);\n\tif(k==to)stop=true;\n    flag[k]=true;\n\tint sz=e[k].size();\n    for(int i=0;i<sz;i++){\n        if(!flag[e[k][i]])dfs(e[k][i],to);\n    }\n\tif(!stop)deq.pop_back();\n\treturn;\n}\n\nint main(void) {\n    int n,x,y;\n    int u,v;\n\n\tcin>>n>>x>>y;\n    for(int i=0;i<n-1;i++){\n\t\tcin>>u>>v;\n\t\te[u].push_back(v);\n\t\te[v].push_back(u);\n    }\n\n    for(int i=1;i<=n;i++)flag[i]=false;\n    stop = false;\n　dfs(x,y);\n\n    while(!deq.empty()){\n\t\tcout<<deq.front();\n\t\tdeq.pop_front();\n\t\tif(deq.empty())cout<<endl;\n\t\telse cout<<\" \";\n\t}\n\treturn 0;\n}"
+      ],
+      "text_sha256": "127610eff456395732b341ad9c28bb0b8eec523d33aeee87e6847665dcd41eaa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc270/abc270_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc226_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc226/editorial/2876",
+      "text": "問題文の指示通りに配列の個数を数えればよいですが、重複する列を取り除く部分のどのように実装するのかがこの問題のポイントです。\nまずいのは「配列を入力するたびに、以前の配列をすべて走査して同じ配列が無いのか確認する」というやり方で、これでは配列 を\n\\(1\\)\n個入力するたびに要素数を\n\\(n\\)\nとして\n\\(\\mathrm{O}(n)\\)\nの計算量が掛かってしまうため、全体で\n\\(\\mathrm{O}(N^2)\\)\nの計算量となり TLE してしまいます。\nこれを回避するためには集合を管理するデータ構造を使うのが簡明です。たとえば C++ では\nstd::set\nを利用すれば、要素の重複無しでの追加を\nO(log n)\n要素数を\n\\(n\\)\nとして\n\\(\\mathrm{O}(\\log n)\\)\n回の配列の比較で行うことができるので、全体で\nO(N log N)\n\\(\\mathrm{O}( (N+ \\sum_i L_i)  \\log N)\\)\nに改善できて AC することができます。\nC++ による実装例は以下の通りです。",
+      "codes": [
+        "#include <iostream>\n#include <set>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int N;\n  cin >> N;\n  set<vector<int>> st;\n  for(int i = 0; i < N; i++) {\n    int L;\n    cin >> L;\n    vector<int> v(L);\n    for (auto& x : v) cin >> x;\n    st.insert(v);\n  }\n  cout << st.size() << \"\\n\";\n}"
+      ],
+      "text_sha256": "2c6066e6df49e94ce2c1e41eee672ecf4c85eb1eb18f15878ab779dde3566de9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc226/abc226_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc226/editorial/2899",
+      "text": "数列\n\\(i\\)\nと数列\n\\(j\\)\nが一致する時、入力の\n\\(i+1\\)\n行目と\n\\(j+1\\)\n行目の文字列が一致します。\nしたがって、数列の代わりに文字列をsetで管理しても解けます。\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "N=int(input())\nprint(len(set(input()for i in range(N))))",
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  int N;cin >> N;\n  cin.ignore();//改行まで読み込む\n  set<string> st;\n  for(int i=0;i<N;i++){\n    string s;\n    getline(cin,s);\n    st.insert(s);\n  }\n  cout << st.size() << endl;\n}"
+      ],
+      "text_sha256": "4cc6733e1f6f71e6b949356967557fe848be4affeb2a21c3ce5524df8dc013de",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc226/abc226_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

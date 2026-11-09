@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc324_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc324/editorial/7411",
+      "text": "\\(S_i\\)\nが\n\\(T\\)\nと等しい可能性があるか、つまり、\n\\(T \\coloneqq S_i\\)\nとおいたとき、問題文中の\n\\(4\\)\nつの条件のいずれかを満たすか判定することを考えます。本問題を解くには各\n\\(i\\)\nについてこれを行えば良いです。\n\\(T \\coloneqq S_i\\)\nとおきます。\n\\(T\\)\nと\n\\(T'\\)\nが先頭から見て何文字目まで一致するかを調べ、一致する最大の長さを\n\\(A\\)\nとおきます。\n同様に、\n\\(T\\)\nと\n\\(T'\\)\nが末尾から見たときに一致する最大の長さを\n\\(B\\)\nとおきます。\n例えば、\nabcd\nと\nabcdacd\nは、先頭から見ると\nabc\nの\n\\(3\\)\n文字までが一致し、末尾から見ると\ncd\nの\n\\(2\\)\n文字までが一致します。\nこのとき、問題文中の\n\\(4\\)\nつの条件はそれぞれ、\n\\(A, B\\)\nおよび、\n\\(T\\)\nと\n\\(T'\\)\nの長さ\n\\(|T|, |T'|\\)\nによって下記の通りに言い換えられます。\n\\(T'\\)\nは\n\\(T\\)\nと等しい：\n\\(A = B = |T| = |T'|\\)\n\\(T'\\)\nは\n\\(T\\)\nのいずれか\n\\(1\\)\nつの位置（先頭と末尾も含む）に英小文字を\n\\(1\\)\nつ挿入して得られる文字列である：\n\\(A+B \\geq |T| = |T'|-1\\)\n\\(T'\\)\nは\n\\(T\\)\nからある\n\\(1\\)\n文字を削除して得られる文字列である：\n\\(A+ B \\geq |T|-1 = |T'|\\)\n\\(T'\\)\nは\n\\(T\\)\nからある\n\\(1\\)\n文字を別の英小文字に変更して得られる文字列である：\n\\(A +B = |T| -1 = |T'| - 1\\)\nよって、\n\\(A, B, |T|, |T'|\\)\nが上記の\n\\(4\\)\nつのいずれかの条件を満たすかを実際に判定すれば良いです。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <algorithm>\n#include <vector>\nusing namespace std;\ntypedef long long ll;\n\nll n;\nstring s[500001], t2;\nll a[500001], b[500001];\n\nll calc(const string &s, const string &t)\n{\n  for(int i = 0; i < (int)t.size(); i++){\n    if(i >= s.size()) return s.size();\n    if(s[i] != t[i]) return i;\n  }\n  return t.size();\n}\n\nint main(void){\n  cin >> n >> t2;\n  for(int i = 1; i <= n; i++) cin >> s[i];\n\n  for(int i = 1; i <= n; i++) a[i] = calc(s[i], t2);\n  reverse(t2.begin(), t2.end());\n  for(int i = 1; i <= n; i++){\n    reverse(s[i].begin(), s[i].end());\n    b[i] = calc(s[i], t2);\n  }\n  \n  vector<ll> ans;\n  for(int i = 1; i <= n; i++){\n    const string &t = s[i];\n    bool flag = false;\n    if(a[i] == t.size() && t.size() == t2.size()) flag = true;\n    if(a[i]+b[i] >= t.size() && t.size()+1 == t2.size()) flag = true;\n    if(a[i]+b[i] >= t.size()-1 && t.size()-1 == t2.size()) flag = true;\n    if(a[i]+b[i] == t.size()-1 && t.size() == t2.size()) flag = true;\n    if(flag) ans.push_back(i);\n  }\n  \n  cout << ans.size() << endl;\n  for(auto x : ans) cout << x << \" \";\n  cout << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "b3227683a2b7d8cb3c9f46a145a05f88af098c8d7c21899c1f1015a7cb77934e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc324/abc324_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc324/editorial/7421",
+      "text": "公式解説\nのように文字列を両側から走査することは必須ではありません。以下のように、ミスマッチを一度だけ許容して二つの文字列を先頭から比較することもできます。（文字列長に差があれば挿入か削除があったことを、差がなければそれらがなかったことを前提とします。）\n実装例（Python）",
+      "codes": [
+        "def check(s, t):\n    if len(s) > len(t):\n        return check(t, s)\n    if len(s) < len(t) - 1:\n        return False\n    i, j, miss = 0, 0, 0\n    while i < len(s):\n        if s[i] == t[j]:\n            i += 1\n            j += 1\n        else:\n            miss += 1\n            if miss > 1:\n                return False\n            if len(s) == len(t):\n                i += 1\n            j += 1\n    return True\n\n\nN, T = input().split()\nN = int(N)\nans = []\nfor i in range(N):\n    S = input()\n    if check(S, T):\n        ans.append(i + 1)\nprint(len(ans))\nprint(\" \".join(map(str, ans)))"
+      ],
+      "text_sha256": "ffd4cab2f5846e07de32cbfb58593c6e23b8eed17092ebb54e7f5fdce325173e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc324/abc324_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc114_b",
+  "editorials": [
+    {
+      "text": "B: 754\n全体的な方針としては、ルンルンの行動の選択肢はそれほど多くないので、すべての選択肢を実際に試して\n最も753 に近かった結果を採用すればよいです。以下、この方針を実装することについて書きます。\n文字列S の長さをN とし、S の最初の文字を0 文字目、最後の文字をN −1 文字目と呼ぶことにします。\n例えばN = 6 のとき、ルンルンの行動の選択肢は「S の0, 1, 2 文字目を取り出す」「1, 2, 3 文字目を取り出\nす」「2, 3, 4 文字目」「3, 4, 5 文字目」の4 通りです。一般的には、整数i = 0, 1, 2, ..., N −3 のそれぞれに対\nして「S のi, i + 1, i + 2 文字目を取り出す」という抜き出し方が存在します。\nあとは、「S のi, i + 1, i + 2 文字目を取り出し」て得られる3 桁の整数をプログラム上でどのように求め\nるかが主な問題です。言語によって事情が異なり、Python などでは気軽に文字列から整数への変換を行えま\nすが、C++ などではやや手間です。ASCII コード上で数字‘0’, ‘1‘, ..., ‘9’ が順番に並んでいるという性質を\n使って「自前」で変換する手も検討に値します。\nそのほかに絶対値や「二つ（以上）の数のうち小さい方」などの部品も必要になりますが、言語の標準ライ\nブラリを使うとスムーズです。以下のC++, Python3 による実装例を参考にしてください。\n1 #include <algorithm>\n// min\n2 #include <cmath>\n// abs\n3 #include <iostream>\n4 using namespace std;\n5 int main(){\n6\nstring S;\n7\ncin >> S;\n8\nint N = S.size();\n9\nint ans = 999;\n10\nfor(int i = 0; i <= N - 3; ++i){\n11\nint num = (c[i] - '0') * 100 + (c[i+1] - '0') * 10 + c[i+2] - '0';\n12\nans = min(ans, abs(num - 753));\n13\n}\n14\ncout << ans << endl;\n15 }\n1 S = input()\n2 print(min(abs(int(S[i:i+3]) - 753) for i in range(len(S) - 2)))\n",
+      "text_sha256": "55aa34ca2faa6600d533118cfa58ba593cd0af0ae59be319f253b6969e277bf3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc114/abc114_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

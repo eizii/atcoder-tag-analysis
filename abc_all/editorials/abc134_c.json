@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc134_c",
+  "editorials": [
+    {
+      "text": "C: Exception Handling\nN が数千以下(言語によっては数万以下) なら、各問でAi 以外のN −1 個の要素すべてに対してループ\nを回して最大値を直接求めても実行制限時間の2 秒に間に合います。しかし実際にはN は最大で20 万であ\nり、この方針ではC++ でも間に合う望みはありません。計算時間を削減する方針を以下に二つ示します。\n方針1: 場合分け\nほとんどの場合、問いの答えはN 個すべての要素のうちの最大の値Amax です。唯一の例外は問いで取り\n除かれる値Ai がAmax と等しい場合で、この場合の答えはすべての要素のうち2 番目に大きい値Asecond\n(数列中にAmax が複数回現れる場合はAsecond = Amax とします) です。問いの処理を始める前にAmax と\nAsecond をあらかじめ求めておけば、各問を直ちに処理できます。なお、Asecond を最も簡単な実装で求める\n方法は、与えられた数列をコピーして言語の標準ライブラリでソートすることでしょう(やや「余計」な計算\nをすることになりますが十分高速です)。\n方針2: 両端から攻める\nj = 0, 1, . . . , N −1 に対し、A1, A2, . . . , Aj のうちの最大の値をleftj とします(ただしleft0 = 0 としま\nす)。j ≥1 のときleftj = max(leftj−1, Aj) *1 であることに注意すると、これらの値は一周のループですべ\nて求められます。また、j = 2, . . . , N + 1 に対し、Aj, Aj+1, . . . , AN のうちの最大の値をrightj とします\n(ただしrightN+1 = 0 とします)。j ≤N のときrightj = max(rightj+1, Aj) であることに注意すると、こ\nれらの値も一周のループですべて求められます。問いの処理を始める前にこれらの値をあらかじめ求めておけ\nば、各問i の答えをmax(lefti−1, righti+1) として直ちに求められます。\n",
+      "text_sha256": "ce3c69ee2eaa59021461c639bdcfb9a71c815cd5b4f855a0ef4a62ad8ee327eb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc134/abc134_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

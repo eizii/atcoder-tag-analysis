@@ -1,0 +1,431 @@
+            ABC 090/ARC 091 解説
+
+
+                            DEGwer
+
+                                  2018/03/11
+
+
+
+                   For International Readers: English editorial starts on page 6.
+
+
+A: Diagonal String
+
+   c11, c22, c33 を順に出力すればよいです。
+
+#include <stdio . h>
+
+ int main ()
+
+{
+
+         char  a [ 1 0 ] [ 1 0 ] ;
+
+         scanf (”%s%s%s ” ,  a [ 0 ] ,  a [ 1 ] ,  a [ 2 ] ) ;
+
+         p r i n t f (”%c%c%c\n” ,  a [ 0 ] [ 0 ] ,  a [ 1 ] [ 1 ] ,  a [ 2 ] [ 2 ] ) ;
+
+}
+
+
+B: Palindromic Numbers
+
+ A 以上B 以下の全ての整数について、(5 桁であることを適宜利用して) 回文数かどうか判定していけばよ
+
+いです。
+
+#include <stdio . h>
+
+ int main ()
+
+{
+
+          int  a , b ;
+
+         scanf (”%d%d” , &a , &b ) ;
+
+          int  r = 0;
+
+           fo r  ( int   i = a ;   i <= b ;  i++)
+
+          {
+
+                    int  s =  i % 10 ,  t =  i  / 10000 % 10;
+
+                    int u =  i  / 10 % 10 , v =  i  / 1000 % 10;
+
+                                    i f  ( s == t&&u == v) r++;
+
+
+
+                                             1
+
+          }
+
+         p r i n t f (”%d\n” ,  r ) ;
+
+}
+
+
+C: Flip,Flip, and Flip......
+
+ N ≤M として一般性を失いません。偶数回裏返されるカードは全操作の終了後には表を、奇数回裏返され
+
+るカードは裏を向くことになるので、各マスのカードが何回裏返されるかを考えることにしましょう。
+
+ N = 1 かつM = 1 のとき、1 枚だけあるカードは1 回裏返されるので、答えは1 です。
+
+ N = 1 かつM ̸= 1 のとき、M 枚のカードのうち両端のカードは2 回、それ以外のカードは3 回裏返され
+
+るので、答えはM −2 です。
+
+ N ≥2 のとき、N ≤M よりM ≥2 で、このとき、
+
+    • 四隅のカードは4 回
+
+    • それ以外の周上のカードは6 回
+
+    • それ以外のカードは9 回
+
+ 裏返されるので、答えは(N −2)(M −2) です。
+
+ 以上で答えがすべて求まりました。
+
+
+D: Remainder Reminder
+
+  b を固定して考えましょう。b = 1, 2, · · · N に対し、a をb で割った余りがK 以上であるような1 ≤a ≤N
+
+の個数が高速に求められれば良いです。簡単のため、a = 0 も許すことにして、あとでa = 0 の場合(これは
+
+簡単に求められます) を引くことにしましょう。
+
+ さて、整数p, q を用いてN = pb + r(0 ≤r < b) という形でN を一意的に表したとき、a を0 からN ま
+
+で順に動かせば、a をb で割った余りを順に並べたものは、0, 1, 2, · · · b −1 という列がp 回繰り返され、最
+
+後に0, 1, 2, · · · r という列が付け加わったものになります。
+
+  0, 1, 2, · · · b −1 という列がp 回繰り返される部分には条件を満たすa の個数はp × max(0, b −K) 個、最
+
+後の部分にはmax(0, r −K + 1) 個あるので、条件を満たすa の個数がO(1) 時間で求められ、O(N) 時間
+
+でこの問題を解くことができました。
+
+
+E: LISDL
+
+ まず、条件を満たす列が存在する条件を考えてみましょう。増加部分列と減少部分列は2 つ以上の要素を
+
+共有できないため、A + B −1 ≤N が必要です。また、長さN の列P と1 ≤i ≤N について、f(i) でP
+
+のi 番目の要素を最後の要素とするようなP の増加部分列の最大長を表すことにすることにすれば、f(i) の
+
+値が等しいようなi についてi 番目の要素を取ってきて全て順に並べた列は減少列となるので、f(i) が等し
+
+いようなP の要素の個数は最大でB 個以下であり、よって(f(i) ≤A より) AB ≥N が必要です。
+
+ 逆に、これらの条件が満たされれば、条件を満たす列を構成することができます。以下、これを示します。
+
+ AB = N の場合に、ある最長増加部分列とある最長減少部分列が1 つの要素を共有するようなものが構成
+
+
+                                             2
+
+できれば、あとはそこから(その最長増加部分列または最長減少部分列に含まれるA + B −1 個の要素を残す
+
+ように) 要素を必要なだけ取り除き、座標圧縮を行うことで条件を満たす列を構成することができます(もち
+
+ろん、計算量が大きくならないような適切な実装をする必要がありますが、それについては簡単なので割愛し
+
+ます)。よって、以下ではそのような構成のみ考えます。
+
+ N 個の要素をA 個ずつの要素を含むB 個のブロックに分け、i 個目のブロックのj 個目の要素をPij と呼ぶ
+ことにしましょう。すなわち、作る列では、要素がP11, · · · , P1A, P21, · · · , P2A, · · · , PB1, · · · , PBA の順に並ぶ
+ようにするとしましょう。このとき、要素を小さい方から順にPB1, · · · , P11, PB2, · · · , P12, · · · , PBA, · · · , P1A
+と並ぶようにすれば、条件をすべて満たすことを証明できます。実際、長さA の増加部分列と長さB の減少
+
+部分列が存在することは容易にわかり、また、
+
+    • 増加部分列について、ブロック内でその要素が何番目かを表す値(P の2 番目の添え字) は狭義単調
+
+   増加
+
+    • 減少部分列について、その要素が属するブロックの番号(P の1 番目の添え字) は狭義単調増加
+
+ することから、その長さを超える増加部分列や減少部分列が存在しないことも分かります。よって構成がで
+
+き、この問題が解けました。
+
+
+F: Strange Nim
+
+ 各山については独立したゲームとなっているため、各山についてそのGrundy 数が求められれば良いです。
+
+石N 個からなり、整数K の定まった山を山(N, K) と呼ぶことにします。
+
+ このとき、以下が主張できます。
+
+    • N がK の倍数のとき、山(N, K) のGrundy 数はN/K
+
+    • そうでないとき、山(N, K) のGrundy 数は山(N −⌊N/K⌋−1, K) のGrundy 数に等しい
+
+ これを帰納法で証明しましょう。帰納法の仮定に「山(N, K), (N −1, K), · · · , (N −⌊N/K⌋, K) のGrundy
+
+数はすべて異なる0 以上⌊N/K⌋以下の整数である」という条件を追加し、帰納法を回します。
+
+ N = 0 のときは明らかです。N = t −1 で正しいとし、N = t で主張を証明しましょう。
+
+ 山(N, K) のGrundy 数は(N −1, K), (N −2, K), · · · , (N −⌊N/K⌋, K) のGrundy 数のどれとも異な
+
+る最小の値です。N がK の倍数のとき、帰納法の仮定よりこれらはすべて異なる0 以上⌊N/K⌋−1 以
+
+下の整数であり、よって0 以上⌊N/K⌋−1 以下の全ての整数値をとり、よって山(N, K) のGrundy 数
+
+はN/K です。そうでない場合、これらはすべて異なる0 以上⌊N/K⌋以下の整数であり、よって0 以上
+
+⌊N/K⌋以下の整数のうちちょうど1 つだけここに現れないものがあります。山(N −1, K) のGrundy 数
+
+を求めたときにはそのGrundy 数への遷移が考慮されていたことから、結局山(N, K) のGrundy 数は山
+
+(N −⌊N/K⌋−1, K) のGrundy 数に等しいことが分かります。また、追加した条件が満たされることは
+
+Grundy 数の定義から容易に導かれます。
+
+ よって帰納法が回り、上記が示されました。しかし、この通りに計算してもまだ計算量は大きいままです。
+
+以下、計算量を落とすことを考えましょう。
+
+ この計算量は、遷移をある程度「一気に行う」ことで削減可能です。N < K2 のとき、上記を愚直に実装す
+
+ればN の値はN/K ほどしか減少しません。しかし、もし遷移先でも⌊N/K⌋の値が変化しないのならば、
+
+N の減少分も変化しません。よって、⌊N/K⌋の値が変化しないギリギリまでN の値を減らす操作をまとめ
+
+
+                                             3
+
+て行うことで、遷移の回数を減らすことができます。
+
+ 計算量を見積もりましょう。N < K2 の領域では、遷移をまとめて行えば⌊N/K⌋の値は定数回の操作で
+
+1 減少するため、O(min(N/K, K)) 時間ですべての遷移を行うことができます。そうでない領域では、N の
+値は1 回の操作で必ずK−1K 倍以下になり、よってK 回の操作でおよそ1e 倍以下になります。よって必要                                      √
+な遷移の回数はO(K log(N/K2)) 回であり、この値はK を動かせばK =  Ne−1 で最大値O(K) を取り
+                                                √
+ます。N ≥K2 よりこれはO(min(N/K, K)) で、よって各山についてO(min(N/K, K)) ≤O( N) 時間で
+
+Grundy 数を求めることができるので、この問題を解くことができました。
+
+
+
+
+
+                                             4
+
+           ABC 090/ARC 091 Editorial
+
+
+                            DEGwer
+
+                                  2018/03/11
+
+
+
+A: Diagonal String
+
+  Print c11, c22, c33 in this order.
+
+#include <stdio . h>
+
+ int main ()
+
+{
+
+         char  a [ 1 0 ] [ 1 0 ] ;
+
+         scanf (”%s%s%s ” ,  a [ 0 ] ,  a [ 1 ] ,  a [ 2 ] ) ;
+
+         p r i n t f (”%c%c%c\n” ,  a [ 0 ] [ 0 ] ,  a [ 1 ] [ 1 ] ,  a [ 2 ] [ 2 ] ) ;
+
+}
+
+
+B: Palindromic Numbers
+
+  For each integer between A and B, check if it is a palindrome (possibly by using the fact that it’s a
+
+5-digit number).
+
+#include <stdio . h>
+
+ int main ()
+
+{
+
+          int  a , b ;
+
+         scanf (”%d%d” , &a , &b ) ;
+
+          int  r = 0;
+
+           fo r  ( int   i = a ;   i <= b ;  i++)
+
+          {
+
+                    int  s =  i % 10 ,  t =  i  / 10000 % 10;
+
+                    int u =  i  / 10 % 10 , v =  i  / 1000 % 10;
+
+                                    i f  ( s == t&&u == v) r++;
+
+          }
+
+         p r i n t f (”%d\n” ,  r ) ;
+
+
+                                             1
+
+}
+
+
+C: Flip,Flip, and Flip......
+
+  Without loss of generality, we can assume that N ≤M. For each card, let’s count the number of times
+
+it is ﬂipped: it will be faced down if this number is odd.
+
+  In case N = 1 and M = 1, the only card will be ﬂipped once. The answer is 1.
+
+  In case N = 1 and M ̸= 1, the two cards at the end will be ﬂipped twice, and other cards will be
+
+ﬂipped three times. The answer is M −2.
+
+  In case N ≥2, since N ≤M, we have M ≥2, and in this case
+
+    • Four cards at the corners will be ﬂipped 4 times.
+
+    • Other cards at the edge will be ﬂipped 6 times.
+
+    • The cards that are completely surrounded by other cards will be ﬂipped 9 times.
+
+  Thus, the answer is (N −2)(M −2).
+
+
+D: Remainder Reminder
+
+  Let’s ﬁx b. For each b = 1, 2, · · · N, we want to count the number of a that satisﬁes both 1 ≤a ≤N
+
+and a%b ≥K. For simplicity, we allow a = 0 and assume that 0 ≤a ≤N (and subtract the cases with
+
+a = 0 later).
+
+  For a ﬁxed b, we want to count the number of terms that are greater than or equal to K, in the
+
+sequence 0%b, 1%b, · · · , N%b. If N = pb + r(0 ≤r < b) (we can represent N in this form uniquely using
+
+two integers p, r), the sequence starts with p repetitions of 0, 1, 2, · · · b −1, followed by 0, 1, 2, · · · r.
+
+  In the former part, there are p×max(0, b−K) terms that are greater than or equal to K. In the latter
+
+part, there are max(0, r −K + 1) terms that are greater than or equal to K. Thus, for a ﬁxed b, we can
+
+compute the number of such as in O(1) time.
+
+  This solution works in O(N) time in total.
+
+
+
+
+
+                                             2
+
+E: LISDL
+
+ When does a solution exist? First, since a LIS and a LDS can share at most one element in common,
+
+A + B −1 ≤N  is necessary. Also, we can prove that AB ≥N as follows. Let f(i) be the length of
+
+the longest increasing sequence that ends with the i-th element. For a ﬁxed c (1 ≤c ≤A), consider a
+
+subsequence that contains the i-th element if and only if f(i) = c. This sequence must be decreasing,
+
+and the length must be at most B. Thus, we get AB ≥N.
+
+ On the other hand, when A + B −1 ≤N ≤AB holds, we can construct a sequence as follows.
+
+  First, suppose that N = AB. In this case, the sequence (B −1)A + 1, (B −1)A + 2, · · · , BA, (B −
+
+2)A + 1, (B −2)A + 2, · · · , (B −1)A, · · · , 1, 2, · · · , A satisﬁes the conditions. (It consists of B blocks of
+
+length A, each block is an increasing consecutive sequence).
+
+   It’s clear that this sequence contains an increasing sequence of length A and a decreasing sequence of
+
+length B. Also, these are the longest because
+
+    • All elements in an increasing sequence must be in the same block.
+
+    • No two elements in a decreasing sequence must be in the same block.
+
+ When N < AB, we ﬁrst construct a sequence above, keep A + B −1 elements that contain both LIS
+
+and LDS, and remove arbitrary AB −N elements from others. Then, the length of LIS and LDS won’t
+
+change. We compress the sequence while keeping the relative order of elements, and we get a desired
+
+sequence. (Of course, make sure not to spend O(AB) to implement this.)
+
+
+
+
+
+                                             3
+
+F: Strange Nim
+
+  Since the piles are independent, it is suﬃcient to compute grundy numbers of all piles. Let g(N, K)
+
+be the grundy number of a pile with N stones and a parameter K.
+
+   If we perform an experiment for a ﬁxed K, we notice that g(N, K) = N/K when N  is divisible by
+
+K.  Also, we notice that even if we remove the K-th, 2K-th, 3K-th,  · · · elements from the sequence
+
+g(1, K), g(2, K), · · · , the sequence doesn’t change. Thus, we get
+
+    • If N is a multiple of K, g(N, K) = N/K
+
+    • Otherwise, g(N, K) = g(N −⌊N/K⌋−1, K)
+
+  Once we get the pattern it’s straightforward to prove this: just make sure that from each state with
+
+grundy number g, it’s possible to reach states with grundy numbers 0, 1, . . . , g −1, but not g.
+
+ How can we compute grundy numbers using the fact above? We start with an integer N, and while
+
+N is not divisible by K, we keep replacing N with N −⌊N/K⌋−1. We are interested in the ﬁnal value
+
+of N. However, a straightforward implementation of this will get TL.
+
+  To make it faster, notice that if the value of ⌊N/K⌋doesn’t change after an operation, we can perform
+
+multiple steps at once. More explicitly, if currently ⌊N/K⌋= d, we keep decreasing N by d + 1 while
+
+N ≥dK. Thus, instead of performing steps one by one, we can make multiple steps at once until we
+
+ﬁrst get N < dK.
+
+  What’s the time complexity after this improvement?
+
+    • Since the value of ⌊N/K⌋decreases in each step, it’s O(N/K).
+    • Since the value of N is multiplied by a factor of at most K−1K  in each step, in every K steps this
+        is multiplied by a factor of approximately 1e. Thus, this is O(K log N).
+ We should take the better of the two analysis above: it’s O(min(N/K, K log N) = O(√N log N).
+
+
+
+
+
+                                             4

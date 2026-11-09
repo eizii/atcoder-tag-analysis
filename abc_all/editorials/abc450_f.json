@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc450_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc450/editorial/17271",
+      "text": "原案：toam\n強連結性を保ったまま辺を削除する問題ではなく、\n\\(N\\)\n頂点\n\\(N-1\\)\n辺のグラフに辺を追加して強連結にする問題と考えます。\n辺を\n\\(X\\)\nの昇順にソートします。\n\\(\\mathrm{dp}[i][r]\\)\nを 「\n\\(i\\)\n番目の辺までで、頂点1から到達できる頂点の番号の最大値が\n\\(r\\)\nになる方法」とします。この DP の更新は、辺\n\\((X_i,Y_i)\\)\nを使ったときどう変化するか考えると以下のようになります。\n\\(\\mathrm{dp}[i][r]=\\begin{cases}\n2\\mathrm{dp}[i-1][r] & \\text{if } r < X_i \\\\\n\\mathrm{dp}[i-1][r] & \\text{if } X_i \\leq r < Y_i \\\\\n\\mathrm{dp}[i-1][Y_i]+\\sum_{r'=X_i}^{Y_i}\\mathrm{dp}[i-1][r'] & \\text{if } r=Y_i\\\\\n2\\mathrm{dp}[i-1][r] & \\text{if } r>Y_i\n\\end{cases}\\)\nこの dp を in-place に行うことを考えると、区間和取得・1点更新・区間乗算ができればよく、遅延セグメント木を用いることで\n\\((N+M\\log N)\\)\nでこの問題を解くことができます。\n実際には\n\\(r< X_i\\)\nの範囲は\n\\(\\mathrm{dp}[M][N]\\)\nを求めることには影響しないので更新を省略することができます。",
+      "codes": [],
+      "text_sha256": "01a97dee670431d11297b496d47e222e6a2f83695b1d58b2c77c08dc52e25ac5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc450/abc450_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc330_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc330/editorial/7749",
+      "text": "適切な範囲で全探索を行うことで答えを求めましょう。\nまず、\n\\(x\\)\nとして考える必要がある値を全て試します。ここで、\n\\(x\\)\nとしては\n\\(0\\)\nから\n\\(\\lceil \\sqrt{D}\\rceil\\)\nまでの値のみを考えればよいことが示せます。\n証明：\n\\(x\\)\nが\n\\(\\lceil \\sqrt{D}\\rceil\\)\nより大きいとき、\n\\(y=0\\)\nとするのが最適ですが、このときの\n\\(|x^2+y^2-D|\\)\nの値は明らかに\n\\(x=\\lceil \\sqrt{D}\\rceil,y=0\\)\nのときより大きくなってしまいます。\n\\(x\\)\nを固定すると、\n\\(C=x^2-D\\)\nと置くことで\n\\(|y^2 + C|\\)\nを最小化する問題になります。\n\\(C\\)\nが非負の場合は\n\\(y=0\\)\nが明らかに最適です。\n\\(C\\)\nが負の場合、最適な\n\\(x\\)\nは\n\\(y=\\lfloor \\sqrt{-C}\\rfloor, y=\\lceil\\sqrt{-C}\\rceil\\)\nのいずれかなので、この二つを試せばよいです。\n結局、\n\\(x\\)\nを固定したときの答えが\n\\(\\mathrm{O}(1)\\)\nで求まり、\n\\(x\\)\nとして考える値の種類数は\n\\(\\mathrm{O}(\\sqrt{D})\\)\nなので、この問題を\n\\(\\mathrm{O}(\\sqrt{D})\\)\nで解くことができます。",
+      "codes": [],
+      "text_sha256": "2bd72f92f5f8a23f08f1faef46751f0a00b95fb5cb8392e1cbecd9e648393e6b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc330/abc330_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc330/editorial/7778",
+      "text": "double\nを用いて（\n公式解説\nで言うところの）\n\\(\\lfloor\\sqrt{-C}\\rfloor\\)\nや\n\\(\\lceil\\sqrt{-C}\\rceil\\)\nなどを求める際の誤差評価です。\nhttps://rsk0315.hatenablog.com/entry/2023/11/07/221428",
+      "codes": [],
+      "text_sha256": "a2d4c536c417950aca0fd99dbc444fb779a3eda88a7596d48a137f787e88aad0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc330/abc330_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc330/editorial/7779",
+      "text": "解法に関して\n公式解説\nに付け足すべきことはありませんが、計算されているものを大ざっぱに図示します。\n（\n\\(x^2 + y^2\\)\nは\n\\(xy\\)\n平面上での原点\n\\((0,0)\\)\nから\n\\((x,y)\\)\nまでのユークリッド距離の二乗と捉えられ、\n\\(x^2 + y^2 = D\\)\nを満たす点の集合は原点を中心とする半径\n\\(\\sqrt D\\)\nの円となります。問題は、大ざっぱにいえば、この円周に「最も近い」格子点を探せというものです。）",
+      "codes": [],
+      "text_sha256": "1dc7fefe3352847836395468d8754e12582dec1e9ec453258122df6469b9277a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc330/abc330_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

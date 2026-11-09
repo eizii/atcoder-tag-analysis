@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc467_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc467/editorial/22700",
+      "text": "原案:vwxyz 最終的な \\(A\\) を \\((A'_1,A'_2,\\dots,A'_N)\\) とします。 \\(A'_1 \\pmod{M}\\) を決めると \\(A'_i \\pmod{M}\\) がすべて決まります。 \\(A_i\\) を \\(A'_i\\) にするために必要な操作回数の最小値は \\((A'_i-A_i) \\pmod M\\) なので、操作回数の合計の最小値も求めることができます。 \\(M=2\\) なので、 \\(A'_1\\) としてあり得る値は \\(0,1\\) の \\(2\\) 通りです。 これらをすべて調べてその中の最小値を求めても十分高速です。 全体の計算量は \\(O(NM)\\) です。",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "f3838352a554bf35f03056c8c5cb8a280734c0b114878942980c05a8c3691ed8"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc413_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13407",
+      "text": "連想配列（平衡二分探索木やハッシュマップ）などを利用することで、重複した文字列を取り除くことができます。\nfor 文などを使って \\((i,j)\\) を列挙して、文字列 \\(S _ i\\) と \\(S _ j\\) を連結したものを連想配列に加えていくことでこの問題を解くことができます。\n実装例は以下のようになります。\nC++ での実装例\nPython での実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <set>\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n    vector<string> S(N);\n    for (auto&& s : S)\n        cin >> s;\n\n    // 連結した文字列の重複を取り除くために std::set を使う\n    set<string> ans;\n    for (const auto& s : S)\n        for (const auto& t : S)\n            if (s != t) // 異なる 2 つの文字列を\n                ans.emplace(s + t); // 連結して追加\n\n    // set の大きさが答え\n    cout << size(ans) << endl;\n    return 0;\n}",
+        "N = int(input())\n\nS = [input() for i in range(N)]\n\n# 連結した文字列の重複を取り除くために set を使う\nans = set()\nfor s in S:\n    for t in S:\n        if s != t: # 異なる 2 つの文字列を\n            ans.add(s + t) # 連結して追加\n\n# set の大きさが答え\nprint(len(ans))"
+      ],
+      "text_sha256": "c5ab87d71607de7ed76e127334f3b8b9d9f039c3d106478e06f26a01637e33f2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

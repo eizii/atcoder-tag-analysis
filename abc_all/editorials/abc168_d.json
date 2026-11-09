@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc168_d",
+  "editorials": [
+    {
+      "text": "D: .. (Double Dots)\nある部屋から部屋1 に移動するために廊下を通る最小の回数のことを，その部屋の「深さ」と呼ぶ\nことにします．特に，部屋1 の深さだけが0 です．\nすると，以下の重要な事実が成り立ちます．\n＜！＞＜！＞＜！＞＜！＞＜！＞＜！＞\n深さd + 1 の部屋には，深さd の部屋が少なくとも1 つ繋がっている．\n証明は簡単です(そうでない部屋があると，直感的に嫌な気分になります)．このことから，深さ\nd + 1 の部屋の道しるべが深さd の部屋を指すようにすれば，常に目標を達成できることがわかり\nます．\n実装の際には，幅優先探索で各部屋の深さを求めてから，辺を1 つずつ見ていって随時更新すれば\n楽です．\n",
+      "text_sha256": "7127f02400166ba4dbe95c754074bae1b9f083c2f4d322aed292b6037d24fdae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc168/abc168_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

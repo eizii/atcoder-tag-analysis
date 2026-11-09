@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc457_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc457/editorial/19921",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか試すことをおすすめします。\n整数\n\\(N\\)\n、配列\n\\(A\\)\n、整数\n\\(X\\)\nを順に受け取ります。その後に\n\\(A_X\\)\nを出力すればよいです。\n配列の受け取り方はプログラミング言語によって異なります。実装例を参考にしてみたり、検索してみたりしてください。\nまた、多くのプログラミング言語において、配列の index は\n\\(0\\)\nから始まります。（\n\\(1\\)\nから始まる言語も存在します）\nそのような言語においては\n\\(1\\)\n番目の値は\nA[0]\n\\(2\\)\n番目の値は\nA[1]\n\\(\\vdots\\)\n\\(N\\)\n番目の値は\nA[N-1]\nとなります。そのため\n\\(X\\)\n番目は\nA[x-1]\nと書く必要があることに注意してください。\nPython の実装例\nC++ の実装例",
+      "codes": [
+        "n = int(input())\na = list(map(int, input().split())) # a = [int(_) for _ in input().split()] のようにも書けます\nx = int(input())\n\nprint(a[x-1])",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n; cin >> n;\n    vector<int> a(n);\n    for (int i=0; i<n; i++) cin >> a[i];\n    int x; cin >> x;\n    cout << a[x-1] << endl;\n}"
+      ],
+      "text_sha256": "0e8d4e444bbfcd62b35c61c5b378a8cc2860741acfd4f0d49fcd314ddc237b63",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc457/abc457_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc225_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc225/editorial/2832",
+      "text": "それぞれの電車について、\n自分の前部に連結している電車の番号\n自分の後部に連結している電車の番号\nの\n\\(2\\)\nつの値を管理すれば良いです。\n\\(c_i = 1,2\\)\nのクエリについて、上記の値の更新は\n\\(O(1)\\)\nで行えます。\n\\(c_i = 3\\)\nのクエリについて、「出力する電車の番号の個数の合計は\n\\(10^6\\)\n以下」という条件から、愚直に実装して間に合います。\n以上でこの問題を解くことができました。\nC++の実装例を示します。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nsigned main(){\n    ll n,q;cin>>n>>q;\n    ll nil=-1;\n    vector<ll>front(n+1,nil); // front[i] := 電車iの前部に連結している電車。ないならnil。\n    vector<ll>back(n+1,nil);  // back[i]  := 電車iの後部に連結している電車。ないならnil。\n    while(q--){\n        ll c;cin>>c;\n        if(c==1){\n            ll x,y;cin>>x>>y;\n            back[x] = y;\n            front[y] = x;\n        }else if(c==2){\n            ll x,y;cin>>x>>y;\n            back[x] = nil;\n            front[y] = nil;\n        }else{\n            ll x;cin>>x;\n            while(front[x] != nil){\n                x = front[x]; // xの連結成分の、先頭に移動\n            }\n            vector<ll>ans;\n            while(x != nil){\n                ans.push_back(x);\n                x = back[x];\n            }\n            cout<<ans.size()<<\" \";\n            for(ll i=0;i<=(int)ans.size()-1;i++){\n                cout<<ans[i];\n                if(i!=(int)ans.size()-1)cout<<\" \";\n                else cout<<endl;\n            }\n        }\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "ec30b81f108bbeb59fef5dd31295a0a45ae9d9a5a1b4103616afba6c5ad72d34",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc225/abc225_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

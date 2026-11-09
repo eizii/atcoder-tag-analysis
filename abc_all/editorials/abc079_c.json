@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc079_c",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc079/editorial.pdf",
+      "text": "C:  Train Ticket\n\n  op1,op2,op3 の決め方は高々8 通りであるため、これらを全て試して当てはまるものがあれば1\nつ出力するとよいです。\n\n#include <cstdio >\nchar s[5];\nint main ()\n{\n         scanf (\"%s\",&s);\n         int a=s[0]-’0’,b=s[1]-’0’,c=s[2]-’0’,d=s[3]-’0’;\n        if(a-b-c-d==7) printf (\"%d-%d-%d-%d=7\\n\",a,b,c,d);\n         else if(a-b-c+d==7) printf (\"%d-%d-%d+%d=7\\n \",a,b,c,d);\n         else if(a-b+c-d==7) printf (\"%d-%d+%d-%d=7\\n\",a,b,c,d);\n         else if(a-b+c+d==7) printf (\"%d-%d+%d+%d=7\\n\",a,b,c,d);\n         else if(a+b-c-d==7) printf (\"%d+%d-%d-%d=7\\n\",a,b,c,d);\n         else if(a+b-c+d==7) printf (\"%d+%d-%d+%d=7\\n\",a,b,c,d);\n         else if(a+b+c-d==7) printf (\"%d+%d+%d-%d=7\\n\",a,b,c,d);\n         else if(a+b+c+d==7) printf (\"%d+%d+%d+%d=7\\n\",a,b,c,d);\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "0f42b5d7cf590848ca0aa34bbdb92db95ca20fc6f5fc350af26386ca025badac"
+    }
+  ],
+  "status": "available"
+}

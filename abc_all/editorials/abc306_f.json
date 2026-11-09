@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc306_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc306/editorial/6601",
+      "text": "まず、\n\\(f(A,B)\\)\nの定義は以下のように言い換えられます。\n\\(\\displaystyle f(A,B) = \\sum_{i \\in A} (A \\cup B \\text{ の中に含まれる } i\\text{ 以下の数の個数})\\)\nこれを用いると、求める答えは、\n\\[\n\\begin{aligned}\n\\sum_{1 \\leq i < j \\leq N} f(S_i,S_j) \n&= \\sum_{1 \\leq i < j \\leq N} \\sum_{k=1}^{M}  (S_i \\cup S_j \\text{ の中に含まれる } A_{i,k}\\text{ 以下の数の個数})\\\\\n&= \\sum_{1 \\leq i < j \\leq N} \\left(\n \\sum_{k=1}^{M}  (S_i \\text{ の中に含まれる } A_{i,k}\\text{ 以下の数の個数}) +  \\sum_{k=1}^{M}  (S_j \\text{ の中に含まれる } A_{i,k}\\text{ 以下の数の個数}) \\right)\\\\ \n&= \\sum_{1 \\leq i < j \\leq N} \\left(\n\\frac{M(M+1)}{2} +  \\sum_{k=1}^{M}  (S_j \\text{ の中に含まれる } A_{i,k}\\text{ 以下の数の個数}) \\right)\\\\ \n&= \\frac{M(M+1)}{2} \\cdot \\frac{N(N-1)}{2} + \\sum_{1 \\leq i < j \\leq N}\\sum_{k=1}^{M}  (S_j \\text{ の中に含まれる } A_{i,k}\\text{ 以下の数の個数})\\\\ \n&= \\frac{M(M+1)}{2} \\cdot \\frac{N(N-1)}{2} + \\sum_{i=1}^{N}\\sum_{k=1}^{M}  (S_{i+1}\\cup \\dots \\cup S_N \\text{ の中に含まれる } A_{i,k}\\text{ 以下の数の個数})\\\\ \n\\end{aligned}\n\\]\nというように変形できます。後半の\n\\(2\\)\n重シグマの部分については、\n\\(i\\)\nの降順に\n\\(A_{i,j}\\)\nを走査しつつ fenwick tree 等を用いることによって\n\\(O(NM \\log NM)\\)\nで求めることができます。なお、最初に\n\\(A\\)\nを座標圧縮する必要があることに注意してください。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/fenwicktree>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing ll = long long;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector a(n, vector<int>(m));\n    vector<int> v;\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j < m; j++) {\n            cin >> a[i][j];\n            v.push_back(a[i][j]);\n        }\n    }\n    sort(v.begin(), v.end());\n    \n    ll ans = (ll) m * (m + 1) / 2 * n * (n - 1) / 2;\n    fenwick_tree<int> fw(n * m);\n    for (int i = n - 1; i >= 0; i--) {\n        for (int j = 0; j < m; j++) {\n            a[i][j] = lower_bound(v.begin(), v.end(), a[i][j]) - v.begin();\n            ans += fw.sum(0, a[i][j]);\n        }\n        for (int j = 0; j < m; j++) {\n            fw.add(a[i][j], 1);\n        }\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "3eb0791600f68bc7c6607499d14a2d21e96e8085a350f5f7336b028ebe18a66d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc306/abc306_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc306/editorial/6622",
+      "text": "解説の後半部分における二重シグマの値は，ソートされた\n\\(A_i\\)\nを順番に結合したものを\n\\(B\\)\nとしたとき，\n\\(B\\)\nの転倒数の値と等しいです．",
+      "codes": [
+        "def inversion(a):\n    # 配列 a の転倒数を返す関数\n    return \n\n\nn, m = map(int, input().split())\na = []\nfor i in range(n):\n    a += sorted(list(map(int, input().split())))\nans = n * (n - 1) // 2 * m * (m + 1) // 2\nprint(ans + inversion(a))"
+      ],
+      "text_sha256": "168eeea8bcaa2bafea60dda2dc3bb0d8f759399907f97d5430af6d20b346d91a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc306/abc306_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

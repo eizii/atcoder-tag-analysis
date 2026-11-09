@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc098_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc098/editorial.pdf",
+      "text": "B :　Cut and Count\n\n 文字列を分割する位置を全探索します。英小文字26 種類すべてについて、分割されたあとの2\nつの文字列の両方に含まれるかの判定を行えば、「X とY の両方に含まれる文字の種類数」が求ま\n\nります。あとはその中で最大値を求めれば良いです。\n  26 種類の文字全てに対して、if(s[i] == ‘a‘), if(s[i] == ‘b‘)  · · · と言ったふうに判定関数を書\nくのは骨の折れる作業ですが、ASCII コードで、‘a‘ ‘b‘  · · · ‘z‘ が並んでいるという性質を利用する\n\nとコードが簡単になります。\n C++による解答コード\n\n\n\n\n\n                                         2",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "ba6e6f21b4f26a23c014c1457a1d17f56734e808307de5bf21334dac046320b5"
+    }
+  ],
+  "status": "available"
+}

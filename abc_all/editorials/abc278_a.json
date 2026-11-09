@@ -1,0 +1,32 @@
+{
+  "problem_id": "abc278_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5233",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nこの問題は for-loop を上手く使えるかをテーマとした問題です。\nまず、数列\n\\(A = (A_1, A_2, \\dots, A_N)\\)\nに対して操作を行う方法を考えてみましょう。これは色々な方法がありますが、次の一連の手順で\n\\(A\\)\nを更新するのが一番素朴な方法だと思います。\n「\n\\(A_i\\)\nの値を\n\\(A_{i + 1}\\)\nに更新する」という操作を\n\\(i = 1, 2, \\dots, N-1\\)\nの順番に行う。（この部分は\n\\(i\\)\nを変数とする for-loop で実装できる。)\n\\(A_N\\)\nの値を\n\\(0\\)\nに更新する。\nこのような操作を\n\\(K\\)\n回行うプログラムを書けばよく、この「\n\\(K\\)\n回行う」という部分も for-loop を利用して同じ操作を\n\\(K\\)\n回実行するようにすればよいです。\nC++ による実装例は次の通りです。\nまた、Python での実装例は次の通りです。Python では列のスライスという機能を利用すれば、操作の部分のコードを少しだけ簡潔に書くことができます。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint N, K, A[101];\n\nint main() {\n  cin >> N >> K;\n  for (int i = 1; i <= N; i++) {\n    cin >> A[i];\n  }\n  for (int loop = 1; loop <= K; loop++) {\n    for (int i = 1; i <= N - 1; i++) {\n      A[i] = A[i + 1];\n    }\n    A[N] = 0;\n  }\n  for (int i = 1; i <= N; i++) {\n    cout << A[i] << (i == N ? \"\\n\" : \" \");\n  }\n}",
+        "N, K = map(int, input().split())\nA = list(map(int, input().split()))\nfor i in range(K):\n  A = A[1:] + [0]\nprint(*A)"
+      ],
+      "text_sha256": "a4dd84987b60e7332ad5e51c8b2ccf3698238fed42a93f339b4c7b51bc7ee520",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5255",
+      "text": "解法\n問題文の指示に従って実際に操作を行います。各言語で「\n\\(A\\)\nの先頭(または指定した位置)の要素を削除する」「\n\\(A\\)\nの末尾に\n\\(0\\)\nを挿入する」を行う方法を調べて実装しましょう。\n(※例えばC言語にはそのような操作を直接行う方法はありません。諦めましょう)\n実装例(C++)\n実装例(Python)\n注意点\nこの問題はこれで解くことができましたが、注意点が1つあります。一般に、配列に対して「指定した位置の要素を削除する」という処理には、配列の長さに比例した時間がかかります。今回は操作対象の配列の長さが\n\\(N\\)\nであることから、削除\n\\(1\\)\n回につき\n\\(O(N)\\)\nの時間がかかり、プログラム全体で\n\\(O(NK)\\)\nの時間がかかります。\nC問題以降の多くの問題では、処理にかかる時間を考慮する必要があります。上で書いたコードの計算量を\n\\(O(K)\\)\nと誤解しないように、必要に応じて組み込み関数の計算量を確認しておきましょう。\n高速な解法\nサンプル2, 3から予想できるように、\n\\(K\\geq N\\)\nなら\n\\(N\\)\n個の\n\\(0\\)\nを出力\n\\(K< N\\)\nなら\n\\(A\\)\nの末尾\n\\(N-K\\)\n項と\n\\(K\\)\n個の\n\\(0\\)\nを出力\nとして\n\\(O(N)\\)\nで解くことができます。\n実装例(C++)\n実装例(Python)\nこの解法は冒頭で述べた解法に比べ効率が良いですが、どのような場合分けが必要であるかや何を出力すべきかを自分でしっかり考える必要がある点が難しいです。競技プログラミングにおいては「計算量が悪いが考察や実装が簡単」と「計算量が良いが考察や実装が難しい」の対立が起こることが多くあります。特に高難易度の問題においては、不必要な高速化のために悩んでしまうことがないよう、計算量を適切に見積もり、高速化の必要がある箇所を見極めることが大切です。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\t// 入力を受け取る\n\tint n,k;\n\tcin >> n >> k;\n\tvector<int>a;\n\tfor(int i=0;i<n;i++)cin >> a[i];\n\n\tfor(int i=0;i<k;i++){\n\t\ta.erase(a.begin());\t//aの先頭の要素を削除\n\t\ta.push_back(0);\t\t//aの末尾に0を追加\n\t}\n\n\t//出力する\n\tfor(int i=0;i<n;i++)cout << a[i] << ' ';\n}",
+        "# 入力を受け取る\nN,K=map(int,input().split())\nA=list(map(int,input().split()))\n\nfor _ in range(K):\n  A.pop(0)     # Aの先頭(0番目)の要素を削除\n  A.append(0)  # Aの末尾に0を追加\n\n# 出力する\nprint(*A)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\t// 入力を受け取る\n\tint n,k;\n\tcin >> n >> k;\n\tvector<int>a(n);\n\tfor(int i=0;i<n;i++)cin >> a[i];\n\n\t//出力\n\tif(k>=n){\n\t\tfor(int i=0;i<n;i++)cout << 0 << ' ';\n\t}else{\n\t\tfor(int i=0;i<n-k;i++)cout << a[k+i] << ' ';\n\t\tfor(int i=0;i<k;i++)cout << 0 << ' ';\n\t}\n\n}",
+        "# 入力を受け取る\nN,K=map(int,input().split())\nA=list(map(int,input().split()))\n\n# 出力する\nif K>=N:\n  print(*[0]*N)\nelse:\n  print(*(A[K:]+[0]*K))"
+      ],
+      "text_sha256": "dfdb1190ce9236d5d5a9762cf8ebab16168930d8b8e698cb82c3d9ddddf1c5f0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

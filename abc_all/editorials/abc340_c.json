@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc340_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc340/editorial/9246",
+      "text": "関数\n\\(f(N)\\)\nを「黒板に書かれた\n\\(N\\)\nを全て\n\\(1\\)\nにするのにかかる費用」と定義します。すると\n\\(f(N)\\)\nは\n\\[\nf(N) = \n\\begin{cases}\n0 & (N = 1) \\\\\nf \\left( \\left\\lfloor \\frac{N}{2} \\right\\rfloor \\right) + f\\left( \\left\\lceil \\frac{N}{2} \\right\\rceil \\right) + N & (N \\neq 1)\n\\end{cases}\n\\]\nという漸化式で表せて、求めたい答えは\n\\(f(N)\\)\nです。よって、\n\\(N\\)\nが十分小さい場合はこの問題は下の実装例のように再帰関数を利用すれば解くことが出来ます。しかし、この実装では\n\\(N\\)\nが大きい時に実行時間が極めて遅くなり TLE してしまいます。\n素朴な実装例 (ただし TLE してしまう)\nそこで、関数の特徴を利用して何らかの高速化が出来ないか考えてみましょう。\n試しに関数の呼び出される経路を図で書いてみます。つまり、例えば\n\\(f(43)\\)\nの内部では\n\\(f(22)\\)\nと\n\\(f(21)\\)\nが呼び出されるので\n\\(43\\)\nから\n\\(22\\)\nと\n\\(21\\)\nに矢印を引いてみます。\nすると下の図のようになります。(\n\\(N = 43\\)\nの場合)\n図を見ると分かる通り、訪問する状態は非常に少ないということがわかります。具体的には、次の 2 種類の状態のみを訪問していることが分かります。\n\\(43/2^n\\)\nを小数点以下切り捨てた値\n\\((21, 10, 5, 2, 1)\\)\n\\(43/2^n\\)\nを小数点以下切り上げた値\n\\((22, 11, 6, 3, 2, 1)\\)\nこの事実は一般化することが出来て、上の実装例において関数\nf(N)\nを呼び出したときに呼び出される状態は\n正整数\n\\(n\\)\nを用いて\n\\(\\left\\lfloor \\dfrac{N}{2^n} \\right\\rfloor\\)\nと表せる整数　と　正整数\n\\(n\\)\nを用いて\n\\(\\left\\lceil \\dfrac{N}{2^n} \\right\\rceil\\)\nと表せる整数\nの 2 種類に限られます。(証明は帰納法を利用すると可能ですが煩雑なので省略します。)\nよって、再帰関数を高速化するテクニックである\nメモ化再帰\nを利用することで上の実装例を高速化することが出来ます。\nメモ化再帰について説明します。関数\n\\(f(N)\\)\nについて、\n\\(N\\)\nをキー、\n\\(f(N)\\)\nの返り値を値とした辞書(連想配列)を作って、\n\\(f(N)\\)\nを初めて計算するたびに返り値を保存していくことを考えましょう。そして、2 回目以降の呼び出しでは、関数にある処理を行わずに辞書に載っている値を返すようにします。このような処理を挟むことで高速化する手法をメモ化再帰と呼びます。(\nABC247C の解説\nの説明を援用しました。)\nメモ化再帰を行うことで引数が同じ値の関数を無駄に何回も呼び出すことが無くなるため、計算量が大幅に改善されます。実際、メモ化再帰を行わない場合の計算量は\n\\(\\mathrm{O}(N)\\)\nなのに対して、メモ化再帰を行うと\n\\(\\mathrm{O}(\\log N)\\)\nや\n\\(\\mathrm{O}(\\log^2 N)\\)\n程度に高速化することが出来ます。\nよって、メモ化再帰を利用してこの問題を高速に解くことが出来ます。実装例は次の通りです。\n実装例(C++)\nC++ では\nstd::map\nのような辞書型を利用することで再帰関数をメモ化することが出来ます。\n実装例(Python)\nPython では、実装例のように\n@cache\nというデコレータを付けることで自動的に再帰関数がメモ化されます。(Python 3.9 以降で登場した機能で、それ以前に使われていた\n@lru_cache\nよりも使い勝手が良いです。)",
+      "codes": [
+        "#include <iostream>\nlong long f(long long N) {\n  return N == 1 ? 0 : f(N / 2) + f((N + 1) / 2) + N;\n}\nint main() {\n  long long N;\n  cin >> N;\n  cout << f(N) << endl;\n}",
+        "#include <iostream>\n#include <map>\nusing namespace std;\nmap<long long, long long> m;\nlong long f(long long N) {\n  if (N == 1) return 0;\n  if (m.count(N)) return m[N];\n  return m[N] = f(N / 2) + f((N + 1) / 2) + N;\n}\nint main() {\n  long long N;\n  cin >> N;\n  cout << f(N) << endl;\n}",
+        "from functools import cache\n\n@cache\ndef f(N):\n    return 0 if N == 1 else f(N // 2) + f((N + 1) // 2) + N\n\nprint(f(int(input())))"
+      ],
+      "text_sha256": "409e6a899bf812cf876655b3edfe16a16891ae2c0875aea6bb14e3ad38643baa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc340/abc340_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc340/editorial/9308",
+      "text": "まず、いくつかの補題を示しておきます。\n\\(\\gdef\\floor#1{\\lfloor#1\\rfloor}\\)\n\\(\\gdef\\ceil#1{\\lceil#1\\rceil}\\)\n\\(\\gdef\\qed{\\square}\\)\nLemma 1\n: 実数\n\\(x\\)\nと正整数\n\\(n\\)\nに対して、\n\\(\\floor{\\floor{x}/n} = \\floor{x/n}\\)\nおよび\n\\(\\ceil{\\ceil{x}/n} = \\ceil{x/n}\\)\nが成り立つ。\nCorollary 2\n: 実数\n\\(a\\)\nと、整数\n\\(m\\)\n,\n\\(n\\)\n(\n\\(m\\ne 0\\)\n,\n\\(n\\gt 0\\)\n) に対して\n\\(\\floor{\\floor{a/m}/n} = \\floor{a/mn}\\)\nが成り立つ。\nLemma 3\n: 実数\n\\(x\\)\nに対して、\n\\(\\ceil{x}-\\floor{x} \\in \\{0, 1\\}\\)\nが成り立つ。\nLemma 4\n: 実数\n\\(x\\)\nと整数\n\\(n\\)\nに対して\n\\(\\floor{x}\\le n\\le\\ceil{x}\\)\nのとき、\n\\(n\\in\\{\\floor{x}, \\ceil{x}\\}\\)\nが成り立つ。\n上記を用いて、所望の命題を示すことができます。\nClaim 5\n: 正整数\n\\(N\\)\nに対して、\n\\(N \\gets \\floor{N/2}\\)\nか\n\\(N \\gets \\ceil{N/2}\\)\nのいずれかを任意の順で\n\\(k\\)\n回 (\n\\(k\\ge 0\\)\n) 行うことで得られる整数は、\n\\(\\floor{N/2^k}\\)\nまたは\n\\(\\ceil{N/2^k}\\)\nである。\n\\(N\\)\nや\n\\(\\floor{N/2^k}\\)\nや\n\\(\\ceil{N/2^k}\\)\nについて、2 進法での表示を観察してみると、何らかのよいイメージを得られるかもしれません。\nまた、corollary 2 はしばしば AtCoder でも出題されるので、覚えておくとよいでしょう。(e.g.\nABC 141 D\n,\nABC 132 F\n)",
+      "codes": [],
+      "text_sha256": "6b666e99788d5d53288180790f3c15d9525d77a4add13bbbd1910e5032c7e753",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc340/abc340_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc340/editorial/9247",
+      "text": "\\(f(N)=\\lceil\\log _ 2N\\rceil\\) とします。\n答えは \\(N(f(N)+1)-2 ^ {f(N)}\\) です。\n帰納法で証明します。\n\\(N=1\\) のとき、\\(f(N)=0\\) なので、\\(N(f(N)+1)-2 ^ {f(N)}=1\\times1-1=0\\) となり、正しいです。\n\\(1\\leq N\\lt n\\) で成り立っていると仮定し、\\(N=n\\) で成り立っていることを示します。\n\\(1\\lt n\\) なので、まずコスト \\(n\\) をかけて \\(l=\\left\\lfloor\\dfrac n2\\right\\rfloor,r=\\left\\lceil\\dfrac n2\\right\\rceil\\) を黒板に書きます。\nそれぞれがすべて \\(1\\) になるまで操作を行うので、全体でかかるコストは、帰納法の仮定より \\(n+l(f(l)+1)+r(f( r)+1)-2 ^ {f(l)}-2 ^ {f( r)}\\) です。\n\\(f(l)=\\begin{cases}f(n)-2&(n=2 ^ {f(n)-1}+1)\\\\f(n)-1&(\\text{otherwise})\\end{cases}\\) および \\(f( r)=f(n)-1\\) が成り立ちます。\n\\(f(n)\\) の定義より、\\(2 ^ {f(n)-1}\\lt n\\leq2 ^ {f(n)}\\) です。\n両辺 \\(2\\) で割ると \\(2 ^ {f(n)-2}\\lt n/2\\leq2 ^ {f(n)-1}\\) です。\n\\(2 ^ {f(n)-1}\\) は整数なので \\(2 ^ {f(n)-2}\\lt n/2\\leq\\lceil n/2\\rceil\\leq2 ^ {f(n)-1}\\) が成り立ち、\\(f( r)=f(n)-1\\) です。\n\\(2 ^ {f(n)-1}+2\\leq n\\) なら、\\(2 ^ {f(n)-2}+1\\leq\\lfloor n/2\\rfloor\\leq n/2\\leq2 ^ {f(n)-1}\\) が成り立つので \\(f(l)=f(n)-1\\) です。\n\\(2 ^ {f(n)-1}+1=n\\) なら、\\(l=2 ^ {f(n)-2}\\) なので \\(f(l)=f(n)-2\\) です。\n\\(n=2 ^ {f(n)-1}+1\\) かどうかによって場合分けを行います。\n\\(n=2 ^ {f(n)-1}+1\\) のとき、\\(l=2 ^ {f(n)-2}=2 ^ {f(l)}\\) です。\nよって、\n\\[\n\\begin{aligned}\n&\\phantom{=}n+l(f(l)+1)+r(f( r)+1)-2 ^ {f(l)}-2 ^ {f( r)}\\\\\n&=n+l(f(n)-1)+rf(n)-2 ^ {f(l)}-2 ^ {f( r)}\\\\\n&=n+(l+r)f(n)-2 ^ {f(n)-2}-2 ^ {f(n)-2}-2 ^ {f(n)-1}\\\\\n&=n+nf(n)-2 ^ {f(n)}(2 ^ {-2}+2 ^ {-2}+2 ^ {-1})\\\\\n&=n(f(n)+1)-2 ^ {f(n)}\n\\end{aligned}\\]\nとなります。\n\\(n\\neq2 ^ {f(n)-1}+1\\) のとき、\n\\[\n\\begin{aligned}\n&\\phantom{=}n+l(f(l)+1)+r(f( r)+1)-2 ^ {f(l)}-2 ^ {f( r)}\\\\\n&=n+lf(n)+rf(n)-2 ^ {f(l)}-2 ^ {f( r)}\\\\\n&=n+(l+r)f(n)-2 ^ {f(n)-1}-2 ^ {f(n)-1}\\\\\n&=n+nf(n)-2 ^ {f(n)}(2 ^ {-1}+2 ^ {-1})\\\\\n&=n(f(n)+1)-2 ^ {f(n)}\n\\end{aligned}\\]\nとなります。\n以上より、\\(N=n\\) でも成立することが示されました。\nワードサイズを \\(w\\ (1\\leq N\\lt 2 ^ w)\\) として \\(f(N)\\) を求めるのは \\(O(\\log w)\\) 時間などで可能です（たとえば、\\(N-1\\) の最上位ビットから下の部分を \\(1\\) で埋め、popcount を計算することなどで求められます）。\nこれを実装することで、高速にこの問題を解くことができます。",
+      "codes": [
+        "#include <iostream>\n\nint main() {\n    using namespace std;\n    unsigned long N;\n    cin >> N;\n\n    unsigned long fN = N - 1;\n    fN |= fN >> 1;\n    fN |= fN >> 2;\n    fN |= fN >> 4;\n    fN |= fN >> 8;\n    fN |= fN >> 16;\n    fN |= fN >> 32;\n    fN = (fN & 0x5555555555555555) + (fN & 0xAAAAAAAAAAAAAAAA) / 2;\n    fN = (fN & 0x3333333333333333) + (fN & 0xCCCCCCCCCCCCCCCC) / 4;\n    fN = (fN & 0x0F0F0F0F0F0F0F0F) + (fN & 0xF0F0F0F0F0F0F0F0) / 16;\n    fN = (fN & 0x00FF00FF00FF00FF) + (fN & 0xFF00FF00FF00FF00) / 256;\n    fN = (fN & 0x0000FFFF0000FFFF) + (fN & 0xFFFF0000FFFF0000) / 65536;\n    fN = (fN & 0x00000000FFFFFFFF) + (fN & 0xFFFFFFFF00000000) / 4294967296;\n\n    cout << N * (fN + 1) - (1UL << fN) << endl;\n    \n    return 0;\n}"
+      ],
+      "text_sha256": "960e47c34fea0498fe844691624f4d226d979b742a5162e05fe7d35410f74373",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc340/abc340_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

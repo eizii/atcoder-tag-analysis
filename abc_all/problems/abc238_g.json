@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc238_g",
+  "title": "Cubic?",
+  "contests": [
+    {
+      "contest_id": "abc238",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2254,
+  "raw_difficulty": 2254,
+  "contest_id": "abc238",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc238/tasks/abc238_g",
+  "statement": "配点 : 600 点 問題文 長さ N の数列 A が与えられるので、以下の Q 個の質問に答えてください。 i 個目の質問では整数 L_i,R_i が与えられます。 A_{L_i} \\times A_{L_i+1} \\times \\dots \\times A_{R_i} は立方数ですか? ただし、ある正整数 x が立方数であるとは、 x=y^3 を満たすある正整数 y が存在することを言います。 制約 入力は全て整数 1 \\le N,Q \\le 2 \\times 10^5 1 \\le A_i \\le 10^6 1 \\le L_i \\le R_i \\le N 入力 入力は以下の形式で標準入力から与えられる。 N Q A_1 A_2 \\dots A_N L_1 R_1 L_2 R_2 \\vdots L_Q R_Q 出力 Q 行出力せよ。 i 行目には、 i 個目の質問について A_{L_i} \\times A_{L_i+1} \\times \\dots \\times A_{R_i} が立方数なら Yes 、そうでないなら No と出力せよ。 なお、正誤判定器は英大文字と英小文字を区別せず、どちらも受理する。 入力例 1 8 5\r\n7 49 30 1 15 8 6 10\r\n1 2\r\n2 3\r\n4 4\r\n5 8\r\n3 8 出力例 1 Yes\r\nNo\r\nYes\r\nNo\r\nYes 1 個目の質問について、 7 \\times 49 = 343 は立方数です。 2 個目の質問について、 49 \\times 30 = 1470 は立方数ではありません。 3 個目の質問について、 1 は立方数です。 4 個目の質問について、 15 \\times 8 \\times 6 \\times 10 = 7200 は立方数ではありません。 5 個目の質問について、 30 \\times 1 \\times 15 \\times 8 \\times 6 \\times 10 = 216000 は立方数です。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の数列 A が与えられるので、以下の Q 個の質問に答えてください。 i 個目の質問では整数 L_i,R_i が与えられます。 A_{L_i} \\times A_{L_i+1} \\times \\dots \\times A_{R_i} は立方数ですか? ただし、ある正整数 x が立方数であるとは、 x=y^3 を満たすある正整数 y が存在することを言います。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 入力は全て整数 1 \\le N,Q \\le 2 \\times 10^5 1 \\le A_i \\le 10^6 1 \\le L_i \\le R_i \\le N"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q A_1 A_2 \\dots A_N L_1 R_1 L_2 R_2 \\vdots L_Q R_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 i 行目には、 i 個目の質問について A_{L_i} \\times A_{L_i+1} \\times \\dots \\times A_{R_i} が立方数なら Yes 、そうでないなら No と出力せよ。 なお、正誤判定器は英大文字と英小文字を区別せず、どちらも受理する。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 8 5\r\n7 49 30 1 15 8 6 10\r\n1 2\r\n2 3\r\n4 4\r\n5 8\r\n3 8"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\r\nNo\r\nYes\r\nNo\r\nYes 1 個目の質問について、 7 \\times 49 = 343 は立方数です。 2 個目の質問について、 49 \\times 30 = 1470 は立方数ではありません。 3 個目の質問について、 1 は立方数です。 4 個目の質問について、 15 \\times 8 \\times 6 \\times 10 = 7200 は立方数ではありません。 5 個目の質問について、 30 \\times 1 \\times 15 \\times 8 \\times 6 \\times 10 = 216000 は立方数です。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc238/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:07.674477+00:00",
+  "statement_sha256": "de6467a03e34c6a7fa3ed332f38db43d46fbd8d58c5c2d4f87bc8f50acc5395e",
+  "editorials": []
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc341_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc341/editorial/9318",
+      "text": "高橋君が現在いるマスが決まると、その場合の不時着したマスも（存在すれば）一意に定まるので、現在いるマスの代わりに不時着したマスとしてあり得るものを数えることにします。\nそのためには、グリッド上のマスそれぞれについて「そのマスが不時着したマスとしてあり得るか」、つまり、「そのマスに不時着したとするとそこから海に入らずに文字列\n\\(T\\)\nに従う移動ができるか」を実際にシミュレーションによって確かめ、条件を満たすマスの個数をカウントすればよく、本問題はそれをプログラムとして正しく実装できるかを問うています。\n\\(HW\\)\n個あるマスそれぞれについて長さ\n\\(N\\)\nの文字列\n\\(T\\)\nに従ったシミュレーションを行うので、時間計算量は\n\\(O(HWN)\\)\nです。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint h, w, n;\nstring t, s[505];\n\nint main(void)\n{\n  cin >> h >> w >> n;\n  cin >> t;\n  for(int i = 1; i <= h; i++) cin >> s[i];\n  \n  int ans = 0;\n  for(int i = 1; i <= h; i++){\n    for(int j = 0; j < w; j++){\n      if(s[i][j] == '#') continue;\n      int I = i, J = j; bool ok = true;\n      for(auto c : t){\n        if(c == 'L') J--;\n        if(c == 'R') J++;\n        if(c == 'U') I--;\n        if(c == 'D') I++;\n        if(s[I][J] == '#'){\n          ok = false;\n          break;\n        }\n      }\n      if(ok) ans++;\n    }\n  }\n  cout << ans << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "fb064887535c1878cbfadeb1deb4d5079a91bbaee1333c541a3d15977bec35be",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc341/abc341_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc341/editorial/9332",
+      "text": "0-indexed とします。\n\\(\\mathrm{dp}[i][x * W + y] := i\\)\n回移動したときに\n\\((x, y)\\)\nにいることがあり得るか\nという bool 値を持った DP を考えると、外周のマスが海であることより、\n\\(\\mathrm{dp}[i][x * W + y]\\)\nが true のとき、\n\\(T[i] =\\)\nL\nならば\n\\(\\mathrm{dp}[i+1][x*W+y-1]\\)\n\\(T[i] =\\)\nR\nならば\n\\(\\mathrm{dp}[i+1][x*W+y+1]\\)\n\\(T[i] =\\)\nU\nならば\n\\(\\mathrm{dp}[i+1][x*W+y-W]\\)\n\\(T[i] =\\)\nD\nならば\n\\(\\mathrm{dp}[i+1][x*W+y+W]\\)\nを true にし、その後海のマスに対応する値を false にする遷移で答えを求められます。\nこれは bitset を用いればシフトと AND で表現できるため、結局\n\\(O(HWN/\\mathrm{wordsize})\\)\nで解くことができました。\n実装例",
+      "codes": [],
+      "text_sha256": "303b5ed7b46e71612756e70d9e795097009bd3f4f8a3edaefa290be97c232390",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc341/abc341_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc095_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc096/editorial.pdf",
+      "text": "A: Something on It\n\n  この問題を解くには、以下の手順を踏む必要があります。\n\n   0.（言語によっては不要）文字列変数S を宣言する。\n\n       1. 標準入力からS を文字列として受け取る。\n\n       2. S から何らかの方法で答えとなる整数を得る。\n\n       3. 求めた値を標準出力に出力する。\n\n   手順0, 1, 3 については、practice contest の問題A の問題別サンプルコードが参考になる（少し書き換え\n\n れば使える）でしょう。手順2 については、S の3 つの文字それぞれをif 文でチェックするか、もしくは\n\n 言語の機能を用いてS に含まれるo の個数を数えることになります。前者のC++ による実装例と後者の\n\n  Python(3) による実装例を示します。\n\n\n\n 1 #include <iostream>\n\n 2 using namespace std;\n\n 3 int main(){\n\n 4     string S;\n\n 5     cin >> S;\n\n 6     int ans = 700;\n\n 7     if(S[0] == 'o') ans += 100;\n\n 8     if(S[1] == 'o') ans += 100;\n\n 9     if(S[2] == 'o') ans += 100;\n\n10     cout << ans << endl;\n\n11 }\n\n\n\n\n 1 print(700 + 100 * input().count('o'))\n\n\n\n\n                                               1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "d54ed6091a9d356dbd2d3b175705fa54b5df7b2f9872eafcab851c7c69d738f2"
+    }
+  ],
+  "status": "available"
+}

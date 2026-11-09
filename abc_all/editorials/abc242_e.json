@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc242_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc242/editorial/3516",
+      "text": "次の事項は、当たり前のことですがこの問題を解くにあたっては非常に重要です。\n長さ\n\\(N\\)\nの回文は、先頭\n\\(\\lceil \\frac{N}{2} \\rceil\\)\n文字が分かれば一意に定まる。\nでは、具体例で解法を説明します。\nまず、\n\\(S=\\)\nABCDE\nの場合です。\n明らかに、先頭\n\\(3\\)\n文字が辞書順で\nABB\n以下であればそこから定まる\n\\(5\\)\n文字の回文は辞書順で\n\\(S\\)\n以下です。逆に、先頭\n\\(3\\)\n文字が辞書順で\nABD\n以上であればそこから定まる\n\\(5\\)\n文字の回文は辞書順で\n\\(S\\)\nより大きいです。\n「争点」は先頭\n\\(3\\)\n文字が\nABC\nである回文、\nABCBA\nです。この文字列については先頭\n\\(3\\)\n文字の比較では辞書順で\n\\(S\\)\n以下かどうか分からないため、実際にこの文字列と\n\\(S\\)\nとで比較を行います。今回は、この文字列は辞書順で\n\\(S\\)\n以下なので条件を満たします。\n数えるべきは、先頭\n\\(3\\)\n文字が\nAAA\n,\nAAB\n, …,\nABB\n,\nABC\nである回文の個数であり、これは\n\\(26\\)\n進数を求める要領 (\nA\n\\(=0,\\)\nB\n\\(=1,\\dots,\\)\nZ\n\\(=25\\)\nと捉えれば\n\\(26\\)\n進数そのものです)で数えることができます。\n次に、\n\\(S=\\)\nDCBA\nの場合です。\nこの場合も先ほど同様の議論ができ、「争点」は先頭\n\\(2\\)\n文字が\nDC\nである回文(\nDCCD\n) です。この場合は、この文字列は辞書順で\n\\(S\\)\nより大きいので条件を満たしません。\n結局、以下の\n\\(2\\)\nつができればこの問題を解くことができます。\n「争点(すなわち、\n\\(S\\)\nと先頭\n\\(\\lceil \\frac{N}{2} \\rceil\\)\n文字が一致する回文)」より辞書順で前の回文がいくつあるか\n「争点」が条件を満たすか\nなお、実装の方針によっては\n辞書順で「争点」以下の回文がいくつあるか\n「争点」が条件を満たさなければ、\n\\(1\\)\nを引く\nという方針を取った方が楽である場合もあります。実装例はこの方針です。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#define mod 998244353\n \nusing namespace std;\n \nint main(){\n  int tc;\n  cin >> tc;\n  while(tc>0){\n    tc--;\n    int n;\n    string s;\n    cin >> n >> s;\n    long long cres=0;\n    string target=s;\n    int p=0,q=n-1;\n    while(p<q){\n      target[q]=target[p];\n      p++;q--;\n    }\n    int last=(n-1)/2;\n    for(int i=0;i<=last;i++){\n      cres*=26;cres%=mod;\n      cres+=(s[i]-'A');cres%=mod;\n    }\n    cres++;cres%=mod;\n    if(s<target){cres+=(mod-1);cres%=mod;}\n    cout << cres << '\\n';\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "12da6c033968933b05e73ae379df68217f9d4e6f78b4bc7dbc2dcf8e176e15bd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc242/abc242_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

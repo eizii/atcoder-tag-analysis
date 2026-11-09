@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc216_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc216/editorial/2474",
+      "text": "数列\n\\(B=(B_0,B_1,\\dots,B_N)\\)\nを定義します。\n\\(B_i\\)\nは、\n\\(A_1,A_2,\\dots,A_i\\)\nに含まれる\n0\nの数です。\n条件は以下のように言い換えられます。\n\\(A_{L_i},A_{L_i+1},\\dots,A_{R_i}\\)\nに\n1\nが\n\\(X_i\\)\n個以上含まれる\n\\(\\Leftrightarrow A_{L_i},A_{L_i+1},\\dots,A_{R_i}\\)\nに\n0\nが\n\\(R_i-L_i+1-X_i\\)\n個以下含まれる\n\\(\\Leftrightarrow B_{R_i}-B_{L_i-1} \\leq R_i-L_i+1-X_i \\cdots (1)\\)\nまた、\n\\(B_i \\leq B_{i+1}\\cdots (2)\\)\n\\(B_{i+1} \\leq B_i +1 \\cdots (3)\\)\n\\(B_0=0 \\cdots (4)\\)\nも成り立ちます。\n\\((1),(2),(3),(4)\\)\n全てを満たす\n\\(B\\)\nから\n\\(A\\)\nの復元は容易で、かつ\n\\(A\\)\nは、(\n1\nの数を最小化するという条件以外の)条件を全て満たします。\nよって、\n\\((1),(2),(3),(4)\\)\nを全て満たし、\n\\(B_N\\)\nが最大となるような\n\\(B\\)\nを考える問題に帰着されました。\nこれはいわゆる「牛ゲー」です。\n\\(d_j-d_i \\leq w_{ij}\\)\nという制約がいくつか与えられている\n\\(d_T-d_S\\)\nの最大値を求めたい\nという問題は最短経路問題に帰着することができ、このテクニックは「牛ゲー」と呼ばれています。\n(「牛ゲー」の解説はネットにたくさんあるのでここでは解説しません。)\n具体的には、頂点\n\\(0\\)\n、頂点\n\\(1\\)\n、\n\\(\\dots\\)\n、頂点\n\\(N\\)\nからなる\n\\(N+1\\)\n頂点のグラフを用意し、\n\\((1)\\)\n：頂点\n\\(L_i-1\\)\nから頂点\n\\(R_i\\)\nへ、コスト\n\\(R_i-L_i+1-X_i \\)\nの辺\n\\((2)\\)\n：頂点\n\\(i+1\\)\nから頂点\n\\(i\\)\nへ、コスト\n\\(0\\)\nの辺\n\\((3)\\)\n：頂点\n\\(i\\)\nから頂点\n\\(i+1\\)\nへ、コスト\n\\(1\\)\nの辺\nを張り、頂点\n\\(0\\)\nからの最短距離を求めると、\n\\(B\\)\nが得られます。\n辺のコストは全て非負なので、ダイクストラ法が使えて十分高速です。",
+      "codes": [],
+      "text_sha256": "3625d4de37b4fa6c201ea7837154bdc370d2d845a9a227555a8e6d447e9a005d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc216/abc216_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc216/editorial/2569",
+      "text": "\\(A_i\\)\nを\n\\(0\\)\nで初期化し、\n\\(R_i\\)\nの小さな順に条件を満たしていきます。\n\\(i\\)\n番目の条件を処理する時点で、\n\\(L_i\\)\nから\n\\(R_i\\)\nの区間に含まれる\n\\(0\\)\nの個数\n\\(n\\)\nが\n\\(X_i\\)\n個未満ならば、\n\\(X_i-n\\)\n個の\n\\(0\\)\nを\n\\(1\\)\nに変える必要があります。このとき、\n\\(R_i\\)\n以下で最大の位置を書き換えるのが最善です。\n\\(L_i\\)\nから\n\\(R_i\\)\nの区間に含まれる\n\\(0\\)\nの個数は、Fenwick Treeによって\n\\(O(\\log n)\\)\nで数えることができます。書き換える場所については、\n\\(R_i\\)\n以下の位置をスタックに入れていけば良いです。\n実行時間は遅くなりますが、Segtreeを使うと考えることが減って楽かもしれません。\nC++での実装例（Fenwick Treeとキュー）:\nC++での実装例（Segtree）:",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <atcoder/fenwicktree.hpp>\nusing namespace std;\n\nint main()\n{\n    int N, M;\n    cin>>N>>M;\n    vector<int> L(M), R(M), X(M);\n    for (int i=0; i<M; i++)\n    {\n        cin>>L[i]>>R[i]>>X[i];\n        L[i]--;\n    }\n\n    vector<int> I(M);\n    for (int i=0; i<M; i++)\n        I.push_back(i);\n    sort(I.begin(), I.end(), [&](int x, int y){return R[x]<R[y];});\n\n    vector<int> A(N);\n    atcoder::fenwick_tree<int> FT(N);\n    //  1を書き込める位置\n    vector<int> Q;\n    //  Qに未追加の最小の位置\n    int q = 0;\n    for (int i: I)\n    {\n        for (; q<R[i]; q++)\n            Q.push_back(q);\n\n        //  書き込まなければならない1の個数\n        int n = X[i]-FT.sum(L[i], R[i]);\n        for (int j=0; j<n; j++)\n        {\n            int p = Q.back();\n            Q.pop_back();\n\n            A[p] = 1;\n            FT.add(p, 1);\n        }\n    }\n\n    for (int i=0; i<N; i++)\n        cout<<(i==0 ? \"\" : \" \")<<A[i];\n    cout<<endl;\n}",
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <atcoder/segtree.hpp>\nusing namespace std;\n\nint op_add(int a, int b) {return a+b;}\nint op_max(int a, int b) {return max(a, b);}\nint e_0() {return 0;}\nint e_m1() {return -1;}\n\nint main()\n{\n    int N, M;\n    cin>>N>>M;\n    vector<int> L(M), R(M), X(M);\n    for (int i=0; i<M; i++)\n    {\n        cin>>L[i]>>R[i]>>X[i];\n        L[i]--;\n    }\n\n    vector<int> I(M);\n    for (int i=0; i<M; i++)\n        I.push_back(i);\n    sort(I.begin(), I.end(), [&](int x, int y){return R[x]<R[y];});\n\n    vector<int> A(N);\n    atcoder::segtree<int, op_add, e_0> ST_sum(N);\n    atcoder::segtree<int, op_max, e_m1> ST_pos(N);\n    for (int i=0; i<N; i++)\n        ST_pos.set(i, i);\n    for (int i: I)\n    {\n        //  書き込まなければならない1の個数\n        int n = X[i]-ST_sum.prod(L[i], R[i]);\n        for (int j=0; j<n; j++)\n        {\n            int p = ST_pos.prod(L[i], R[i]);\n            A[p] = 1;\n            ST_sum.set(p, 1);\n            ST_pos.set(p, -1);\n        }\n    }\n\n    for (int i=0; i<N; i++)\n        cout<<(i==0 ? \"\" : \" \")<<A[i];\n    cout<<endl;\n}"
+      ],
+      "text_sha256": "5a500b662aa7cfe014f269e45e61cc1adaeed2a5e3486705c7d3f3f76c8d9b27",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc216/abc216_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

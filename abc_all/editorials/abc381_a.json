@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc381_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc381/editorial/11407",
+      "text": "この問題は文字列を上手く扱えるかを問うている問題です。\n入力された長さ\n\\(N\\)\nの文字列\n\\(S\\)\nが\n\\(11/22\\)\n文字列であるかを判定するには次の条件がすべて成り立つかを確認すればよいです。\n\\(N\\)\nが奇数\n\\(1\\)\n文字目から\n\\(\\frac{N+1}{2}-1\\)\n文字目までが\n1\n\\(\\frac{N+1}{2}\\)\n文字目が\n/\n\\(\\frac{N+1}{2} + 1\\)\n文字目から\n\\(N\\)\n文字目までが\n2\nこれらの条件が成り立つかを判定するには、文字列\n\\(S\\)\nの何文字目が何であるかを 1 個 1 個調べて行けばよく、これを行うことで AC することができます。\nなお、C++ では\nstd::string\n型を利用すれば文字列の操作を容易に行うことが出来るため、\nstd::string\n型を使用することをお勧めします。\n実装例 (C++) : 実装例では関数を用いた書き方をしています。関数を利用することで似た処理を複数回実装するのでなく 1 回の実装で済ませることが出来ます。",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid No() {\n  cout << \"No\" << \"\\n\";\n  exit(0);\n}\n\nint main() {\n  int N;\n  string S;\n  cin >> N >> S;\n  if (N % 2 == 0) No();\n  for (int i = 0; i < (N + 1) / 2 - 1; i++) {\n    if (S[i] != '1') No();\n  }\n  if (S[(N + 1) / 2 - 1] != '/') No();\n  for (int i = (N + 1) / 2; i < N; i++) {\n    if (S[i] != '2') No();\n  }\n  cout << \"Yes\" << \"\\n\";\n}"
+      ],
+      "text_sha256": "e5dd0a69f32ad7fe65b8c3f994b8bf3b2ad73924ef5634e71d50687500bdb154",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc381/abc381_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc348_e",
+  "title": "Minimize Sum of Distances",
+  "contests": [
+    {
+      "contest_id": "abc348",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1347,
+  "raw_difficulty": 1347,
+  "contest_id": "abc348",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc348/tasks/abc348_e",
+  "statement": "配点 : 475 点 問題文 N 頂点からなる木が与えられます。頂点は 1 から N までの番号がついており、 i 番目の辺は頂点 A_i, B_i を結んでいます。 長さ N の正整数列 C = (C_1, C_2, \\ldots ,C_N) が与えられます。 d(a, b) を頂点 a, b の間にある辺の数とし、 x = 1, 2, \\ldots ,N に対して \\displaystyle f(x) = \\sum_{i=1}^{N} (C_i \\times d(x, i)) とします。 \\displaystyle \\min_{1 \\leq v \\leq N} f(v) を求めてください。 制約 1 \\leq N \\leq 10^5 1 \\leq A_i, B_i \\leq N 与えられるグラフは木である。 1 \\leq C_i \\leq 10^9 入力 入力は以下の形式で標準入力から与えられる。 N A_1 B_1 A_2 B_2 \\vdots A_{N - 1} B_{N - 1} C_1 C_2 \\cdots C_N 出力 答えを一行に出力せよ。 入力例 1 4\n1 2\n1 3\n2 4\n1 1 1 2 出力例 1 5 例として、 f(1) を求めることを考えます。 d(1, 1) = 0, d(1, 2) = 1, d(1, 3) = 1, d(1, 4) = 2 です。 よって、 f(1) = 0 \\times 1 + 1 \\times 1 + 1 \\times 1 + 2 \\times 2 = 6 となります。 同様に、 f(2) = 5, f(3) = 9, f(4) = 6 です。 f(2) が最小なので 5 を出力します。 入力例 2 2\n2 1\n1 1000000000 出力例 2 1 f(2) = 1 で、これが最小です。 入力例 3 7\n7 3\n2 5\n2 4\n3 1\n3 6\n2 1\n2 7 6 9 3 4 6 出力例 3 56",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 頂点からなる木が与えられます。頂点は 1 から N までの番号がついており、 i 番目の辺は頂点 A_i, B_i を結んでいます。 長さ N の正整数列 C = (C_1, C_2, \\ldots ,C_N) が与えられます。 d(a, b) を頂点 a, b の間にある辺の数とし、 x = 1, 2, \\ldots ,N に対して \\displaystyle f(x) = \\sum_{i=1}^{N} (C_i \\times d(x, i)) とします。 \\displaystyle \\min_{1 \\leq v \\leq N} f(v) を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 10^5 1 \\leq A_i, B_i \\leq N 与えられるグラフは木である。 1 \\leq C_i \\leq 10^9"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 B_1 A_2 B_2 \\vdots A_{N - 1} B_{N - 1} C_1 C_2 \\cdots C_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを一行に出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\n1 2\n1 3\n2 4\n1 1 1 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 5 例として、 f(1) を求めることを考えます。 d(1, 1) = 0, d(1, 2) = 1, d(1, 3) = 1, d(1, 4) = 2 です。 よって、 f(1) = 0 \\times 1 + 1 \\times 1 + 1 \\times 1 + 2 \\times 2 = 6 となります。 同様に、 f(2) = 5, f(3) = 9, f(4) = 6 です。 f(2) が最小なので 5 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2\n2 1\n1 1000000000"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1 f(2) = 1 で、これが最小です。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 7\n7 3\n2 5\n2 4\n3 1\n3 6\n2 1\n2 7 6 9 3 4 6"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 56"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc348/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:24.641912+00:00",
+  "statement_sha256": "37e08ed363b3a02be4d5f8fa81b5043ed261c326bf09ff0ebc165cb213f102ca",
+  "editorials": []
+}

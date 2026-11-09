@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc326_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc326/editorial/7538",
+      "text": "実は、求める期待値は以下の式で求めることができます。\n\\(\\displaystyle \\sum^{N}_{i=1} A_i \\times \\)\n( 手順中で\n\\(A_i\\)\nが支払われる確率 )\nでは、手順中で\n\\(A_i\\)\nが支払われる確率\n\\(p_i\\)\nを求めていきましょう。\n便宜上、\n\\(p_0=1\\)\nとします。\nこのとき、\n\\(\\displaystyle p_i = \\frac{1}{N} \\sum_{j=0}^{i-1} p_j\\)\nと求められます。\n説明 :\n\\(\\frac{1}{N} p_j\\)\nで、\n\\(x=j\\)\nの状態から直接出目\n\\(i\\)\nを出して\n\\(A_i\\)\n円を受け取る確率を表現しています。\nこれは、累積和を利用することで時間計算量\n\\(O(N)\\)\nで求められます。\nなお、\n\\({}\\bmod{998244353}\\)\n上で\n\\(N\\)\nで割るという操作は\n\\(N\\)\nのモジュラ逆数を掛けることで実現されます。\n参考\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\n#define mod 998244353\n#define FACSIZE 1048576\n\nlong long power(long long a,long long b){\n  long long x=1,y=a;\n  while(b>0){\n    if(b&1ll){\n      x=(x*y)%mod;\n    }\n    y=(y*y)%mod;\n    b>>=1;\n  }\n  return x%mod;\n}\n\nlong long modular_inverse(long long n){\n  return power(n,mod-2);\n}\n\nint main(){\n  long long n;\n  cin >> n;\n  long long invn=modular_inverse(n);\n  long long p=invn,res=0;\n  for(long long i=0;i<n;i++){\n    long long a;\n    cin >> a;\n    res+=p*a;res%=mod;\n    p+=p*invn;p%=mod;\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "5616a047979fc7e8684ece813abe890d87fbaff3f7b897f5b3e05b1472e3f983",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc326/abc326_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc326/editorial/7551",
+      "text": "期待値の線形性を用いると、\n\\(A_i\\)\n円支給される確率が各\n\\(i\\)\nについて求まればよいです。\n更新された\n\\(x\\)\nを順に並べた列\n\\(v\\)\nを考えます。求めたい確率は、\n\\(v\\)\nの中に\n\\(i\\)\nが含まれるような列全てに対する、その列が現れる確率の総和です。ここで、\n\\(v\\)\nの\n\\(i\\)\nより大きい要素は関係ないことに注意すると、手順中に\n\\(v\\)\nの末尾が\n\\(i\\)\nになる確率の総和が求まればよいです。\n\\(v\\)\nの長さを全探索することを考えると、求める確率として以下の式を得ます。\n\\[\\sum _{k=1}^{k=i} \\binom{i-1}{k-1}\\frac{1}{N^k} =\\frac{1}{N}\\Big(1+\\frac{1}{N}\\Big)^{i-1}\\]\n\\((1+\\frac{1}{n})^{j}\\)\nを\n\\(j=0,1,\\ldots,N-1\\)\nについて列挙するのは\n\\(\\mathrm{O}(N)\\)\nで出来るので、この問題を\n\\(\\mathrm{O}(N)\\)\nで解くことができました。\nなお、求める確率は式変形なしでより簡単に導出することもできます。\n\\(j=1,2,\\ldots,i-1\\)\nについて\n\\(v\\)\nに追加するかしないかを決めることを考えると、追加する場合は\n\\(\\frac{1}{N}\\)\n倍が付き 、追加しない場合は何も起こらないので結局同じ式が導かれます。\n実装例(Python):",
+      "codes": [
+        "mod, n = 998244353, int(input())\na = list(map(int, input().split()))\np, q, res = pow(n, mod - 2, mod), 1 + pow(n, mod - 2, mod), 0\nfor v in a:\n    res = (res + p * v) % mod\n    p = (p * q) % mod\nprint(res)"
+      ],
+      "text_sha256": "627935870612aee463921e8eec46462146b9254632dfca2b29a2e510f7bf056b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc326/abc326_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc326/editorial/7552",
+      "text": "\\(f(i)\\)\nを、直近に出たサイコロの目が\n\\(i\\)\nであるときこれ以降に得られる給料の期待値とします。\nまず、\n\\(i\\)\nが出たので\n\\(A_i\\)\n円を貰うことができます。これに次以降のサイコロによる収入を合わせると\n\\(f(i)\\)\nの値を求めることができます。次に出るサイコロの目\n\\(x\\)\nで場合分けすることで解けます：\n\\(i \\geq x\\)\nのとき：操作はこれで終了します。よって、\n\\(0\\)\nです。\n\\(i \\lt x\\)\nのとき：これ以降もらえる給料の期待値は\n\\(f(x)\\)\nに等しいです。\nサイコロの目は等確率で出るので、結局\n\\(\\displaystyle f(i) = A_i + \\frac{1}{N} (f(i + 1) + f(i + 2) + \\dots + f(N) )\\)\nとして求めることができます。\n\\(f(i)\\)\nを計算するのに必要なのは\n\\(i + 1\\)\n以降についての\n\\(f\\)\nの値の総和なので、この値を 変数として管理しておくことで\n\\(i\\)\nの大きい方から順に\n\\(f(i)\\)\nを求めることができます。この時の計算量は\n\\(O(N)\\)\nです。\nあとは、操作の最初に出た目を考えると、\n\\(\\frac{1}{N} (f(1) + f(2) + \\dots + f(N) )\\)\nが答えとなるので、これを計算すればよいです。全体での計算量も\n\\(O(N)\\)\nとなります。\n\\(A_0 = 0\\)\nを仮定すると、上記の\n\\(f(i)\\)\nの計算式で求めた\n\\(f(0)\\)\nが答えとなるので、実装が楽になります。",
+      "codes": [],
+      "text_sha256": "1d35ab6817f0165c3c0db2c95d4df7e1e7d5cc72dd6dd7827ce1fb05bf3ac75f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc326/abc326_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc199_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc199/editorial/1164",
+      "text": "以下のような動的計画法を考えます。\n\\(\\mathrm{DP}_S (S\\)\nは\n\\(\\{1, 2, 3, \\dots, N\\}\\)\nの部分集合\n\\(): a\\)\nの先頭\n\\(|S|\\)\n要素まで決めていて、その\n\\(|S|\\)\n要素で使った数の集合がちょうど\n\\(S\\)\nに一致し、\n\\(X_i \\le |S|\\)\nであるような条件は全て満たしているような場合の数\nある\n\\(\\mathrm{DP}_S\\)\nから、\n\\(a\\)\nの\n\\(|S| + 1\\)\n番目の要素を\n\\(x\\)\nに決めて\n\\(\\mathrm{DP}_{S \\cup \\{x\\}}\\)\nに遷移することを考えます。この際遷移できる条件は以下の通りです。\n\\(x \\notin S\\)\n\\(X_i = |S \\cup \\{x\\}|\\)\nであるような\n\\(i\\)\nについて\n\\(S \\cup \\{x\\}\\)\nに含まれる\n\\(Y_i\\)\n以下の数は\n\\(Z_i\\)\n個以下\n\\(\\mathrm{DP}_{\\{1, 2, 3, \\dots, N\\}}\\)\nが問題の答えとなります。\nよって 状態数が\n\\(2^N\\)\n、遷移が\n\\(1\\)\nつの状態あたり\n\\(O(N)\\)\nで、全体として\n\\(O(2^N N)\\)\nで解けます。\n実装の際、\n\\(S\\)\nを整数\n\\(\\displaystyle \\sum_{i \\in S} 2^{(i - 1)}\\)\nに対応させると配列の添字として使うことができます。ほとんどのプログラミング言語において bit 演算子を使うことで\n\\(S\\)\nに対応する整数から\n\\(S \\cup \\{x\\}\\)\nに対応する整数を簡単に計算することができるため、実装が簡潔になります。\nこのような実装方法が一般的なことから、上記のような集合を添字に持つ動的計画法は一般に bitDP と呼ばれています。",
+      "codes": [],
+      "text_sha256": "5243a16ea8d1b8a27494de46e5fa917fc952fde4a180fe2e8eee548ae4539dcf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc199/abc199_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

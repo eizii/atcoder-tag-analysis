@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc245_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc245/editorial/3651",
+      "text": "問題文を言い換えると、\n\\(\\frac{C(x)}{A(x)}\\)\nを求めればよく、\n多項式の除算に乗っ取って、\n\\(B(x)\\)\nについて次数の大きいものから順に決定していけばよいです。\nより形式的には次のように解くことができます。\n以下、より一般に\n\\(B(x)\\)\nの\n\\(k\\)\n次の係数を\n\\(B_k\\)\nとおきます。\n\\(k>M\\)\nに対して,\n\\(B_k=0\\)\nです。\nこのとき、\n\\(A(x)\\)\nが\n\\(N\\)\n次式であることに注意すると、\n\\(C(x)=A(x)B(x)\\)\nの両辺の係数を比較することで次の関係が成り立ちます。\n\\(C_{N+M}=A_NB_M+A_{N-1}B_{M+1}+\\cdots +A_1B_{N+M-1}+A_0B_{N+M}\\)\n\\(C_{N+M-1}=A_NB_{M-1}+A_{N-1}B_{M}+\\cdots +A_1B_{N+M-2}+A_0B_{N+M-1}\\)\n\\(\\vdots\\)\n\\(C_{N+1}=A_NB_1+A_{N-1}B_2+\\cdots +A_1B_N+A_0B_{N+1}\\)\n\\(C_{N}=A_NB_0+A_{N-1}B_1+\\cdots +A_1B_{N-1}+A_0B_N\\)\nよって、\n\\(i=0,1,\\ldots, M\\)\nについて、\n\\(k> M-i\\)\nにおいて\n\\(B_k\\)\nの値が定まっていた時、\n\\[\nB_{M-i}=\\frac{C_{N+M-i}-A_{N-1}B_{M-i+1}-A_{N-2}B_{M-i+2}\\cdots -A_0B_{N+M-i}}{A_N}\n\\]\nとして\n\\(B_{M-i}\\)\nの値を求めることができます。\n\\(i=0\\)\nのとき\n\\(k> M\\)\nで\n\\(B_k=0\\)\nであり、\n\\(i=i_0\\)\n\\((i_0>0)\\)\nのときについて、\n\\(i<i_0\\)\nのときの結果を用いて帰納的に\n\\(B_{M-{i_0}}\\)\nの値を求めることができます。\nこのとき計算量は\n\\(O(NM)\\)\nで十分高速であり、また\n\\(32\\)\nビット整数型で管理してオーバーフローすることもありません。よってこの問題を解くことができました。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void) {\n\tint n, m;\n\tcin >> n >> m;\n\tvector<int>a(n + 1), b(m + 1), c(n + m + 1);\n\tfor (int i = 0; i <= n; i++)cin >> a[i];\n\tfor (int i = 0; i <= n + m; i++)cin >> c[i];\n\tfor (int i = m; i >= 0; i--) {\n\t\tb[i] = c[i + n] / a[n];\n\t\tfor (int j = 0; j <= n; j++)c[i + j] -= b[i] * a[j];\n\t}\n\tfor (int i = 0; i < m; i++)cout << b[i] << \" \";\n\tcout << b[m] << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "803998ab2ac23dad231d917934cac1962a1e774a7f6009d034411563f019821e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc245/abc245_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc245/editorial/3888",
+      "text": "十分大きな整数 \\(X\\) に対して \\(A(X)\\) および \\(C(X)\\) を求めることで \\(B(X)\\) を求めることができます。\nここで、\\(B(X) \\bmod X\\) は \\(b_0 \\bmod X\\) と等しいです。\\(X>200\\) とすることで、\n\\[b_0 = \\begin{cases}b_0 \\bmod X\\qquad\\quad(b_0\\bmod X\\leq100)\\\\ b_0\\bmod X-X\\qquad\\quad(\\text{otherwise.})\\end{cases}\\]\nのように \\(b_0\\) を確定させることができます。\n\\(\\dfrac{B(X)-b_0}{X}\\) に対して同様の計算を行うことで \\(b_1\\) を求めることができ、これを繰り返すことですべての \\(b_i\\) を求めることができました。\n\\(X>200\\) より、\\(A(X),B(X),C(X)\\) は大きいと \\(\\displaystyle 100\\times\\sum_{i=0}^{200}201^i>10^{462}\\) 程度になることがあることに気をつけてください。\npython で実装すると以下のようになります。\\(X=256\\) としています。(\n実際の提出\n)",
+      "codes": [
+        "N, M = map(int, input().split())\n\nX = 256\n\nA = 0\nXⁿ = 1\nfor a in map(int, input().split()):\n    A += a * Xⁿ\n    Xⁿ *= X\n\nC = 0\nXⁿ = 1\nfor c in map(int, input().split()):\n    C += c * Xⁿ\n    Xⁿ *= X\n\nB = C // A\nb = []\nwhile B != 0:\n    x = B % X\n    if x > 100:\n        x -= X\n    b.append(x)\n    B = (B - x) // X\n\nprint(*b)"
+      ],
+      "text_sha256": "5d3e8b8a69fa291176f3404ed9f6f0ebbf9fd209efcec9279055e35552ded389",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc245/abc245_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc245/editorial/3668",
+      "text": "Pythonではnumpyライブラリのpoly1dクラスを使って解答することができます。\nリストを引数としてインスタンスを生成しますが、その順番がこの問題の入力とは逆になることに注意してください。\n実装例",
+      "codes": [],
+      "text_sha256": "2f96276070b21e05698b32e7c33f37ebd960f6bc1b63fd10b44af0d8eabdc96e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc245/abc245_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc199_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc199/editorial/1160",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nこの問題は、問題文の条件が成り立っている場合と成り立っていない場合で条件分岐をすることで解くことができます。\n解答例 (C++)\n解答例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tint a = ri();\n\tint b = ri();\n\tint c = ri();\n\tif (a * a + b * b < c * c) puts(\"Yes\");\n\telse puts(\"No\");\n\treturn 0;\n}",
+        "a, b, c = map(int, input().split())\n\nif a * a + b * b < c * c : print('Yes')\nelse : print('No')"
+      ],
+      "text_sha256": "f53042457488d752ff1844d2eff1a2bf310b4ed532b5df2f429fcb8e8516ecf0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc199/abc199_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

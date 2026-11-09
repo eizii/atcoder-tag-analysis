@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc320_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc320/editorial/7123",
+      "text": "どの数字で揃えるかと、リールを止める順序を固定した場合、狙っているリールに狙っている数字が来た最初のタイミングでリールを止めていくのが最適です。このときの最短時間は実際にシミュレーションすることで\n\\(O(M)\\)\nで求めることができます。\nよって、どの数字で揃えるかの10通りとリールを止める順序6通りの組み合わせ計60通りについてそれぞれ最短時間を求め、最も短いものが答えになります。\nWriter解(Python)",
+      "codes": [],
+      "text_sha256": "c19ea352780d567e06f02ed3a3869a50385a100e21e6f760252405e039cb6ec9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc320/abc320_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc320/editorial/7129",
+      "text": "リールが\n\\(3\\)\n周するまでに数字を揃えられないなら永遠に揃えられません。よって、各ボタンを時刻\n\\(0, 1, \\dots, 3M - 1\\)\nのうちいつ押すかをすべて試せば十分です。\n実装例（Python）",
+      "codes": [
+        "M = int(input())\nN = 3\nS = [input() for _ in range(N)]\nINF = 1e9\nans = INF\nfor i in range(N * M):\n    for j in range(N * M):\n        for k in range(N * M):\n            if i != j and i != k and j != k and S[0][i % M] == S[1][j % M] == S[2][k % M]:\n                ans = min(ans, max(i, j, k))\nprint(ans if ans < INF else -1)"
+      ],
+      "text_sha256": "d621ad05e28606d19a4fe2cd6b652ff5fa35d80a4415a40201eae764ab463be0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc320/abc320_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc154_e",
+  "editorials": [
+    {
+      "text": "E: Almost everywhere zero\n必要なら上の桁を0 で埋めることで、N と同じ桁数の数だけを考えれば良いです。\n桁DP と呼ばれる考え方を用いて解くことができます。\ndp0[i][j] = 上からi 桁目まで決めて、0 でない桁がj 個あり、\nN より小さいことが確定している\ndp1[i][j] = 上からi 桁目まで決めて、0 でない桁がj 個あり、\nN より小さいことが確定していない\nとして、i が小さい方から順に計算していきます。求める答えはN の桁数をL として、dp0[L][K]+\ndp1[L][K] です。計算量はO(LK) です(実装によっては基数10 が定数倍としてつきます)。\n",
+      "text_sha256": "cc37f021ab706a541ac5c3f49695a6b4ba8cc7111a596f77af72aa5c8ae0e682",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc154/abc154_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

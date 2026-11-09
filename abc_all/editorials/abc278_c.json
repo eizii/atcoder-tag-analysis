@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc278_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc278/editorial/5230",
+      "text": "フォロー関係を集合 \\(S\\) に保持することを考えます。\n与えられるクエリは、次のように言い換えられます。\nはじめ、\\(S=\\emptyset\\) です。\n集合 \\(S\\) に順序対 \\((A,B)\\) を追加する。つまり、\\(S\\leftarrow S\\cup\\{(A,B)\\}\\) とする。\n集合 \\(S\\) から順序対 \\((A,B)\\) を取り除く。つまり、\\(S\\leftarrow S\\setminus\\{(A,B)\\}\\) とする。\n順序対 \\((A,B),(B,A)\\) がいずれも \\(S\\) に含まれているかを判定する。\n入力として与えられる可能性のある順序対は \\(N(N-1)\\) 通りありますが、集合 \\(S\\) のサイズは全体を通してたかだか \\(Q\\) であるため、\\(S\\) を連想配列などで管理すればこの問題が解けます。\n順序対をキーにできない連想配列のライブラリを使っている場合も、順序対 \\((A,B)\\) と整数 \\(AN+B\\) を対応させることで整数をキーにした連想配列を使ってこの問題を解くことができます。\n時間計算量は、連想配列に平衡二分探索木などを用いると \\(O(Q\\log Q)\\) 時間、ハッシュテーブルなどを用いると期待 \\(O(Q)\\) 時間です。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <set>\n#include <utility>\n\nint main() {\n    using namespace std;\n\n    unsigned N, Q;\n    cin >> N >> Q;\n\n    // フォロー関係を保持する集合\n    set<pair<unsigned, unsigned>> follows;\n\n    for (unsigned _{}; _ < Q; ++_) {\n        unsigned type, A, B;\n        cin >> type >> A >> B;\n        if (type == 1)\n            // 順序対 (A, B) を追加\n            follows.emplace(A, B);\n        else if (type == 2)\n            // 順序対 (A, B) を削除\n            follows.erase({A, B});\n        else\n            // 順序対 (A, B), (B, A) がどちらも含まれるか判定\n            cout << (follows.count({A, B}) && follows.count({B, A}) ? \"Yes\" : \"No\") << endl;\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "0272dd9bb3d50092dcacb7d3a69790ea1567098f8745bccb55cb386b4796e891",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc278/abc278_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

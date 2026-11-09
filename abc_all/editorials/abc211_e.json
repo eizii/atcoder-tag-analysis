@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc211_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc211/editorial/2288",
+      "text": "\\(N^2\\)\n個のマスから\n\\(K\\)\n個選ぶ方法は\n\\(_{N^2}C_{K}\\)\n通りあり、\n\\(_{64}C_{8} =4426165368 \\gt 4 \\times 10^9\\)\nなので、愚直な全探索は間に合いません。\nしかし、赤マス同士が連結という条件から、条件を満たす選び方はそれより相当に少ないことが予想できます。これは、何らかの方法で上から評価してもよいですが、今回は入出力例\n\\(3\\)\nから見積もることができます。\nしたがって、赤マス同士が連結という条件を満たすパターンのみ列挙するdfsをすればよいです。\ndfsは書き慣れていないと実装が難しいと思うので、下の例も参考にしてください。\nなお、上記の実装例は読みやすさを重視していて少し遅いです。\nhttps://atcoder.jp/contests/abc211/submissions/24453774\n(541ms)\n盤面の情報を\nvector<string>\nではなく64bit整数(\nunsigned long long\nなど)で管理すると高速化できます。\nhttps://atcoder.jp/contests/abc211/submissions/24453782\n(85ms)\n少し難しいですが、同じ盤面では\n\\(1\\)\n度しかdfsに入らないようにする実装もあります。\nhttps://atcoder.jp/contests/abc211/submissions/24453788\n(25ms)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\ntypedef pair<ll,ll>l_l;\n\nset<vector<string>>used;//調査済みの盤面\nvector<string>s;//現在の盤面\nll answer=0;\nll n;\nvector<ll> dx={1,0,-1,0};\nvector<ll> dy={0,1,0,-1};\n\nbool valid(ll x,ll y){\n    return 0<=x && x<=n-1 && 0<=y && y<=n-1;//(x,y)が盤面内に含まれているかどうか\n}\n\nvoid dfs(ll num){\n    //num：あと何個赤マスを置くか\n\n    if(used.find(s)!=used.end()){\n        return;//既に調査済みなので、探索しない\n    }\n    used.insert(s);//調査済みの盤面に、現在の盤面を加える\n\n    if(num==0){\n        answer++;//現在の盤面は条件を満たす塗り方なので、answerに1加える\n        return; //これ以上赤マスを置かないので、探索しない\n    }\n\n    vector<l_l>next;//次に赤マスを塗る場所の候補\n\n    for(int i=0;i<=n-1;i++){\n        for(int j=0;j<=n-1;j++){\n            //(i,j)を次の赤マスにできる条件は、\n            //s[i][j]が白マス('.')であり、かつ、s[i][j]の隣に赤マス('@')があること\n\n            if(s[i][j]=='.'){\n                bool flag=false;\n                for(int z=0;z<=3;z++){\n                    ll nxt_i=i+dx[z];\n                    ll nxt_j=j+dy[z];\n                    if(valid(nxt_i,nxt_j) && s[nxt_i][nxt_j]=='@'){\n                        flag=true;//(i,j)の隣に赤マスがあれば、flagをtrueにする\n                    }\n                }\n                if(flag){\n                    next.push_back({i,j});//次に赤マスを塗る場所の候補に、(i,j)を追加する\n                }\n            }\n        }\n    }\n    for(l_l pos:next){\n        s[pos.first][pos.second]='@';//赤く塗る\n        dfs(num-1);                  //dfsを進める\n        s[pos.first][pos.second]='.';//元に戻す\n    }\n}\n\nsigned main(){\n    ll k;cin>>n>>k;\n    s.resize(n);\n    for(int i=0;i<=n-1;i++)cin>>s[i];\n\n    for(int i=0;i<=n-1;i++){\n        for(int j=0;j<=n-1;j++){\n            //最初に赤く塗るマスを(i,j)とする\n            if(s[i][j]=='.'){\n                s[i][j]='@';//赤く塗る\n                dfs(k-1);   //dfsを始める\n                s[i][j]='.';//元に戻す\n            }\n        }\n    }\n    cout<<answer<<endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "a738584ffe1e7893ce0804fb1c9af3808faebb7f1f823e6433659abbc274f309",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc211/abc211_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc211/editorial/7892",
+      "text": "回転や反転を考えず\n\\(K\\)\nマスのポリオミノの形を全探索し、それぞれについて適合する場所を全探索する方法も考えられます。\n愚直に実装すると、Python言語の場合8秒くらいかかるのでそのままでは厳しいですが、手元で回したものを埋め込めばよいです。\nhttps://atcoder.jp/contests/abc211/submissions/48247146",
+      "codes": [],
+      "text_sha256": "47858bae279afff698bde5d63917fa194e8ed6eb24f403373a49501fbb6fa8e9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc211/abc211_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

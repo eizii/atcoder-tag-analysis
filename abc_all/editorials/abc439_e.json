@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc439_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc439/editorial/14994",
+      "text": "まず、人\n\\(i\\)\nと人\n\\(j\\)\n\\((i \\neq j)\\)\nが同時に凧を揚げられる条件を言い換えて整理すると次のようになります。\n次の\n\\(2\\)\nつの条件のどちらか一方が成り立つ。\n\\(\\cdots (\\ast)\\)\n\\(A_i \\lt A_j\\)\nかつ\n\\(B_i \\lt B_j\\)\n\\(A_j \\lt A_i\\)\nかつ\n\\(B_j \\lt B_i\\)\nよって、\n\\(\\lbrace 1,2,\\dots, N \\rbrace\\)\nの部分集合\n\\(S\\)\nであって\n\\(S\\)\nの相異なる元\n\\(i,j\\)\nが\n\\((\\ast)\\)\nを満たすもののうち最大の\n\\(S\\)\nのサイズを求める問題を解けばよいことが確認できました。\nこの問題は\nLIS(Longest Increasing Subsequence, 最長増加部分列)\nを計算する問題に帰着することができます。\nLIS とは、単調増加である数列の部分列のうち最長である列のことをいいます。つまり、数列\n\\(C=(c_1,c_2,\\dots,c_N)\\)\nの LIS は\n\\(\\lbrace 1,2,\\dots, N \\rbrace\\)\nの部分集合\n\\(S\\)\nであって\n\\(S\\)\nの相異なる元\n\\(i,j\\)\nが以下の条件を満たすもののうちサイズ最大のものです。\n次の\n\\(2\\)\nつの条件のうちどちらか一方が成り立つ。\n\\(i \\lt j\\)\nかつ\n\\(c_i \\lt c_j\\)\n\\(j \\lt i\\)\nかつ\n\\(c_j \\lt c_i\\)\nこの条件は\n\\((\\ast)\\)\nに類似しているので、\n\\(A_i\\)\nを\n\\(i\\)\nに、\n\\(B_i\\)\nを\n\\(c_i\\)\nに対応させれば直感的には等価な問題になっていそうです。つまり、元の問題は\n\\((A_i, B_i)\\)\nの列を\n\\(A_i\\)\n昇順に並べ替えた後に\n\\(B\\)\nを取り出してできる列の LIS が答えになりそうであると直感的に考えられます。\nただしこのままでは\n\\(A_i\\)\nのタイブレークに注意する必要があります。例えば\n\\((A_1, B_1)=(1,2), (A_2,B_2)=(1,3)\\)\nである時に\n\\(S =\\lbrace 1,2 \\rbrace\\)\nは選べませんが、上記の LIS への言い換えでは選べることになってしまいます。  解決策は簡単で、以下の方法を用いればよいです：\n\\((A_i, B_i)\\)\nの列を\n\\(A_i\\)\n昇順\nに並べ替える。ただし\n\\(A\\)\nの値が一致する時は\n\\(B_i\\)\n降順\nで並べ替える。\nこの方法でタイブレークに関する問題が解決していることが確認できます。よって元の問題を LIS に正しく帰着することができました。\nLIS の計算方法については「最長増加部分列」などの単語で検索すればいくつかの解説記事が出て来るのでここでは説明を省略しますが、動的計画法により\n\\(\\mathrm{O}(N \\log N)\\)\nで LIS の長さを計算することができて、これは十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <algorithm>\n#include <iostream>\n#include <utility>\n#include <vector>\nusing namespace std;\n\nint main() {\n  cin.tie(0)->sync_with_stdio(0);\n  int N;\n  cin >> N;\n  vector<pair<int, int>> AB(N);\n  for (auto& [a, b] : AB) cin >> a >> b;\n  sort(begin(AB), end(AB), [&](auto& l, auto& r) {\n    if (l.first == r.first) return l.second > r.second;\n    return l.first < r.first;\n  });\n  vector<int> dp;\n  for (auto& [_, b] : AB) {\n    int i = lower_bound(begin(dp), end(dp), b) - begin(dp);\n    if (i == (int)dp.size()) {\n      dp.push_back(b);\n    } else {\n      dp[i] = b;\n    }\n  }\n  cout << dp.size() << \"\\n\";\n}"
+      ],
+      "text_sha256": "81b9f7c444a7546c625e6e8d53ecbec68e19f5db309c542cf0c530d535b0cecd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc439/abc439_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

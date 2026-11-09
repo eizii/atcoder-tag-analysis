@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc248_h",
+  "title": "Beautiful Subsequences",
+  "contests": [
+    {
+      "contest_id": "abc248",
+      "problem_index": "Ex"
+    }
+  ],
+  "difficulty": 2960,
+  "raw_difficulty": 2960,
+  "contest_id": "abc248",
+  "problem_index": "Ex",
+  "url": "https://atcoder.jp/contests/abc248/tasks/abc248_h",
+  "statement": "配点 : 600 点 問題文 (1,\\ldots,N) を並び替えて得られる長さ N の順列 P=(P_1,\\ldots,P_N) 、及び整数 K が与えられます。 以下の条件を全て満たす整数組 (L,R) の個数を求めてください。 1 \\leq L \\leq R \\leq N \\mathrm{max}(P_L,\\ldots,P_R) - \\mathrm{min}(P_L,\\ldots,P_R) \\leq R - L + K 制約 1 \\leq N \\leq 1.4\\times 10^5 P は (1,\\ldots,N) を並び替えて得られる順列 0 \\leq K \\leq 3 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N K P_1 P_2 \\ldots P_N 出力 答えを出力せよ。 入力例 1 4 1\r\n1 4 2 3 出力例 1 9 条件を満たす組 (L,R) は以下の 9 個です。 (1,1) (1,3) (1,4) (2,2) (2,3) (2,4) (3,3) (3,4) (4,4) (L,R) = (1,2) は \\mathrm{max}(A_1,A_2) -\\mathrm{min}(A_1,A_2) = 4-1 = 3 、 R-L+K=2-1+1 = 2 となるので、条件を満たしません。 入力例 2 2 0\r\n2 1 出力例 2 3 入力例 3 10 3\r\n3 7 10 1 9 5 4 8 6 2 出力例 3 37",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 (1,\\ldots,N) を並び替えて得られる長さ N の順列 P=(P_1,\\ldots,P_N) 、及び整数 K が与えられます。 以下の条件を全て満たす整数組 (L,R) の個数を求めてください。 1 \\leq L \\leq R \\leq N \\mathrm{max}(P_L,\\ldots,P_R) - \\mathrm{min}(P_L,\\ldots,P_R) \\leq R - L + K"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 1.4\\times 10^5 P は (1,\\ldots,N) を並び替えて得られる順列 0 \\leq K \\leq 3 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K P_1 P_2 \\ldots P_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 1\r\n1 4 2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 9 条件を満たす組 (L,R) は以下の 9 個です。 (1,1) (1,3) (1,4) (2,2) (2,3) (2,4) (3,3) (3,4) (4,4) (L,R) = (1,2) は \\mathrm{max}(A_1,A_2) -\\mathrm{min}(A_1,A_2) = 4-1 = 3 、 R-L+K=2-1+1 = 2 となるので、条件を満たしません。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2 0\r\n2 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 3"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10 3\r\n3 7 10 1 9 5 4 8 6 2"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 37"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc248/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:20.238556+00:00",
+  "statement_sha256": "6cd7d2647697c1c2e8facf81ffc4837c9248f18cec3d7deba967fc736c31e94a",
+  "editorials": []
+}

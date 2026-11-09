@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc221_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc221/editorial/2722",
+      "text": "あるプレイヤーがログインし始めた日あるいはログインしなくなった日, すなわちある\n\\(i\\)\nが存在して\n\\(X=A_i\\)\nまたは\n\\(X=A_i+B_i\\)\nをみたす\n\\(X\\)\nを昇順に\n\\(X_1\\)\n,\n\\(X_2\\)\n,\n\\(\\ldots\\)\n,\n\\(X_K\\)\nとします。\nこのとき、\n\\(X_i\\leq Y \\leq X_{i+1}-1\\)\nをみたす\n\\(Y\\)\nについて、\n\\(Y\\)\n日目にログインした人数は一定となります。\nまた、\n\\(Y<X_1\\)\nまたは\n\\(X_K\\leq Y\\)\nをみたす\n\\(Y\\)\nについては\n\\(Y\\)\n日目にログインした人数は\n\\(0\\)\n人なので考える必要はないです。よって、カウンターと、答えとなる配列を用意し、最初カウンターと配列を\n\\(0\\)\nに初期化した上で、\n\\(i=1,2,\\ldots,K-1\\)\nについて次のようにすれば良い事が分かります。\n\\(X_i\\)\n日目にログインし始めた人の数だけカウンターを増やし、ログインしなくなった人の数だけカウンターを減らす。\nこの時点でのカウンターの数字を\n\\(C\\)\nとし、\n\\(C\\)\n人だけログインした日数を\n\\(X_{i+1}-X_i\\)\nだけ増加させる。\n計算量は最初の\n\\(\\{ X_i\\} \\)\nのソートに\n\\(O(N\\log N)\\)\nかかり, その後の操作は\n\\(O(N)\\)\nで出来るため, 全体で\n\\(O(N\\log N)\\)\nである事が分かります。よって、この問題を十分高速に解く事が出来ました。\nc++による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define N 200010\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nint main(void) {\n\tint n;\n\tint a, b;\n\tvector<pair<int, int> >x;\n\tint cnt;\n\tint ans[N];\n\trep(i, N)ans[i] = 0;\n\n\tcin >> n;\n\trep(i, n) {\n\t\tcin >> a >> b;\n\t\tx.push_back({ a,1 });\n\t\tx.push_back({ a + b,-1 });\n\t}\n\n\tsort(x.begin(), x.end());\n\n\tcnt = 0;\n\trep(i, (x.size())-1) {\n\t\tcnt += x[i].second;\n\t\tans[cnt] += ((x[i + 1].first) - (x[i].first));\n\t}\n\n\trep(i, n - 1)cout << ans[i + 1] << \" \";\n\tcout << ans[n] << endl;\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "0d70b1a0f239328bb254a2b428a159193bd2065da10f50efcfa0cc7f1f647626",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc221/abc221_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

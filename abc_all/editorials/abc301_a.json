@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc301_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc301/editorial/6341",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nまず for 文を用いて高橋くんと青木くんが勝った試合の数をそれぞれ数えます（片方だけ数えて、それを\n\\(N\\)\nから引くことでもう一方を求めても良いです）。勝った試合の数が異なる場合は、答えが分かるのでそれを出力します。勝った試合の数が同じである場合は、「先にその勝ち数に達した者」を判定する必要がありますが、これは for 文を用いて実装できる他、「\n\\(N\\)\n試合目の勝者がどちらであるか」を見ることによっても判定できます。\n具体的な実装方法は以下の実装例 (C++, Python) をご参照ください。\n多くのプログラミング言語では配列の添字が\n\\(0\\)\nから始まることに注意してください。\nC++\n注：最後の\nの部分は\ns.back()\nが\n’T’\nなら\n‘A’\nを、\n‘A’\nなら\n’T’\nの値を取ります。\nPython",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n;\n    string s;\n    cin >> n >> s;\n    \n    int t = 0, a = 0;\n    for (int i = 0; i < n; i++) {\n        if (s[i] == 'T') ++t;\n        else ++a;\n    }\n    \n    if (t > a) cout << 'T' << endl;\n    else if (t < a) cout << 'A' << endl;\n    else cout << char('T' + 'A' - s.back()) << endl;\n}",
+        "char('T' + 'A' - s.back())",
+        "n = int(input())\ns = input()\n\nt = 0\na = 0\nfor i in range(0, n):\n    if s[i] == 'T':\n        t += 1\n    else:\n        a += 1\n        \nif t > a:\n    print('T')\nelif t < a:\n    print('A')\nelif s[-1] == 'A':\n    print('T')\nelse:\n    print('A')"
+      ],
+      "text_sha256": "cbb537c9ba355537d48d42e3184689574c4ab64fccfc513cbdfa76cd675c38f4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc301/abc301_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc301/editorial/6354",
+      "text": "このゲームの総合勝者は，先に\n\\(\\lceil N/2 \\rceil \\)\n回試合に勝利した方に等しいです．\nしたがって，どちらかが\n\\(\\lceil N/2 \\rceil \\)\n回試合に勝利した時点で，総合勝者をその人に確定させる解法で正答が得られます．\n実装例（C++）",
+      "codes": [],
+      "text_sha256": "830ff695d82a75f5909c311af97662f4c7b56cf4afca6d45684c0efa23ed5a02",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc301/abc301_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

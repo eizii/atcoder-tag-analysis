@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc230_h",
+  "title": "Bullion",
+  "contests": [
+    {
+      "contest_id": "abc230",
+      "problem_index": "H"
+    }
+  ],
+  "difficulty": 3528,
+  "raw_difficulty": 3528,
+  "contest_id": "abc230",
+  "problem_index": "H",
+  "url": "https://atcoder.jp/contests/abc230/tasks/abc230_h",
+  "statement": "配点 : 600 点 問題文 クレーンゲームの大会で優勝した高橋君は金塊詰め放題の権利を得ました。 会場には w_1 \\lbrack\\mathrm{kg}\\rbrack, w_2 \\lbrack\\mathrm{kg}\\rbrack, \\dots, w_K \\lbrack\\mathrm{kg}\\rbrack の重さの金塊、および金塊を詰める 1 \\lbrack\\mathrm{kg}\\rbrack の袋が無尽蔵にあります。 高橋君は 1 個の空でない袋を持ち帰ることができます。 袋には 0 個以上の空でない袋と 0 個以上の金塊を入れることができます。 耐荷重量 W \\lbrack\\mathrm{kg}\\rbrack のトラックを手配した高橋君は、 w = 2, 3, \\dots, W について持ち帰る袋の総重量が w \\lbrack\\mathrm{kg}\\rbrack である詰め方としてあり得る状態の数が気になりました。 w = 2, 3, \\dots, W について状態数を 998244353 で割ったあまりを求めてください。ただし、 2 つの金塊が同じであるとは、金塊の重さが同じであることをいいます。 2 つの袋が同じ状態であるとは、袋に入っている袋および金塊からなる多重集合が一致することをいいます。 制約 2 \\leq W \\leq 2.5 \\times 10^5 1 \\leq K \\leq W 1 \\leq w_i \\leq W (1 \\leq i \\leq K) i \\neq j \\to w_i \\neq w_j (1 \\leq i,j \\leq K) 入力はすべて整数である。 入力 入力は以下の形式で標準入力から与えられる。 W K w_1 w_2 \\dots w_K 出力 答えを W - 1 行出力せよ。 i 行目には w = i + 1 のときの答えを出力せよ。 入力例 1 4 1\r\n1 出力例 1 1\r\n2\r\n4 w = 2, 3, 4 において袋の状態としてあり得るものを列挙したのが下の図になります。 (丸い線が袋を表しています。) 入力例 2 10 10\r\n1 2 3 4 5 6 7 8 9 10 出力例 2 1\r\n3\r\n7\r\n18\r\n45\r\n121\r\n325\r\n904\r\n2546",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 クレーンゲームの大会で優勝した高橋君は金塊詰め放題の権利を得ました。 会場には w_1 \\lbrack\\mathrm{kg}\\rbrack, w_2 \\lbrack\\mathrm{kg}\\rbrack, \\dots, w_K \\lbrack\\mathrm{kg}\\rbrack の重さの金塊、および金塊を詰める 1 \\lbrack\\mathrm{kg}\\rbrack の袋が無尽蔵にあります。 高橋君は 1 個の空でない袋を持ち帰ることができます。 袋には 0 個以上の空でない袋と 0 個以上の金塊を入れることができます。 耐荷重量 W \\lbrack\\mathrm{kg}\\rbrack のトラックを手配した高橋君は、 w = 2, 3, \\dots, W について持ち帰る袋の総重量が w \\lbrack\\mathrm{kg}\\rbrack である詰め方としてあり得る状態の数が気になりました。 w = 2, 3, \\dots, W について状態数を 998244353 で割ったあまりを求めてください。ただし、 2 つの金塊が同じであるとは、金塊の重さが同じであることをいいます。 2 つの袋が同じ状態であるとは、袋に入っている袋および金塊からなる多重集合が一致することをいいます。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq W \\leq 2.5 \\times 10^5 1 \\leq K \\leq W 1 \\leq w_i \\leq W (1 \\leq i \\leq K) i \\neq j \\to w_i \\neq w_j (1 \\leq i,j \\leq K) 入力はすべて整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 W K w_1 w_2 \\dots w_K"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを W - 1 行出力せよ。 i 行目には w = i + 1 のときの答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 1\r\n1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1\r\n2\r\n4 w = 2, 3, 4 において袋の状態としてあり得るものを列挙したのが下の図になります。 (丸い線が袋を表しています。)"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 10\r\n1 2 3 4 5 6 7 8 9 10"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1\r\n3\r\n7\r\n18\r\n45\r\n121\r\n325\r\n904\r\n2546"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc230/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:57.637194+00:00",
+  "statement_sha256": "6c9677817bd6f7c982b498339e2f9f406a5ffaf2ec6cbec396d0bcbadbb3d94e",
+  "editorials": []
+}

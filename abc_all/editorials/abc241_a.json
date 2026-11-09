@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc241_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc241/editorial/3454",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\n画面に表示されている数を\n\\(num\\)\nとします。\nはじめ、\n\\(num = 0\\)\nです。\n\\(1\\)\n回ボタンを押すと、\n\\(num\\)\nは\n\\(a_{num}\\)\nに変化するので、これを\n\\(3\\)\n回繰り返せば良いです。\nC++での実装例を以下に示します。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nsigned main(){\n    vector<ll>a(10);\n    for(int i=0;i<=9;i++){\n        cin>>a[i];\n    }\n\n    ll num = 0; //はじめ、画面には 0 が表示されている\n\n    num = a[num]; //ボタンを 1 回押した\n    num = a[num]; //ボタンを 2 回押した\n    num = a[num]; //ボタンを 3 回押した\n\n    cout<<num<<endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "0b1822657b1d1726e7769869da954eac3a94f76af3fd30ff488195d3ecfc5542",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc241/abc241_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

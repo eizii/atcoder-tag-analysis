@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc232_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc232/editorial/3148",
+      "text": "\\(k\\)\n回の操作後にルークが\n\\((i, j)\\)\nに置かれているようにする方法の総数を\n\\(f_{k, i, j}\\)\nとおきます。\n\\(f_{K, x_2, y_2}\\)\nが答えとなります。\n\\(i = x_1\\)\nかつ\n\\(j = y_1\\)\nのとき\n\\(f_{0, i, j} = 1, \\)\nそうでないときは\n\\(f_{0, i, j} = 0\\)\nです。\n\\(k > 0\\)\nについては、以下の関係が成り立ちます。\n\\(f_{k, i, j} = \\sum_{x \\neq i} f_{k - 1, x, j} + \\sum_{y \\neq j} f_{k - 1, i, y}\\)\nこの値の計算を愚直に行うと、\n\\(\\Theta (N^3 K)\\)\nの時間計算量を要するため、\n\\(f\\)\nの特徴を利用して計算を高速化する必要があります。\n実際に\n\\(f_{k, i, j}\\)\nを計算してみると、多くの値が等しくなっており、各\n\\(k\\)\nごとに\n\\(f_{k, i, j}\\)\nの値の種類は高々\n\\(4\\)\n通りであることに気づくでしょう。状態数を圧縮して計算するため、グリッド上のマスの集合を以下の\n\\(4\\)\nつに分けます。\n\\(S_{0, 0} = \\{ (x_2, y_2) \\}\\)\n\\(S_{0, 1} = \\{ (x_2, y) \\, \\vert  \\, y \\neq y_2 \\}\\)\n\\(S_{1, 0} = \\{ (x, y_2)  \\, \\vert  \\, x \\neq x_2 \\}\\)\n\\(S_{1, 1} = \\{ (x, y)  \\, \\vert  \\, x \\neq x_2 \\land y \\neq y_2 \\}\\)\n\\(g_{k, a, b} = \\sum_{(i, j) \\in S_{a, b}} f(k, i, j)\\)\nと定義します。すると、\n\\(k > 0\\)\nに対し以下の関係が成り立ちます。\n\\(g_{k, 0, 0} = g_{k - 1, 0, 1} + g_{k - 1, 1, 0}\\)\n\\(g_{k, 0, 1} = (Y - 1) g_{k - 1, 0, 0} + (Y - 2) g_{k - 1, 0, 1} + g_{k - 1, 1, 1}\\)\n\\(g_{k, 1, 0} = (X - 1) g_{k - 1, 0, 0} + (X - 2) g_{k - 1, 1, 0} + g_{k - 1, 1, 1}\\)\n\\(g_{k, 1, 1} = (X - 1)g_{k - 1, 0, 1} + (Y - 1)g_{k - 1, 1, 0} + (X - 2 + Y - 2) g_{k - 1, 1, 1}\\)\n\\(g_{K, 0, 0}\\)\nが答えとなります。計算量は\n\\(O(K)\\)\nです。\n実装例 (C++) :\n余談 : 行列累乗などを用いて\n\\(O(\\log K)\\)\nで解くこともできます。",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\nusing namespace std;\nusing namespace atcoder;\n\nusing Fp = modint998244353;\n\nint main() {\n    int h, w, k;\n    cin >> h >> w >> k;\n    array<array<Fp, 2>, 2> dp = {};\n    int x1, y1, x2, y2;\n    cin >> x1 >> y1 >> x2 >> y2;\n    dp[x1 != x2][y1 != y2] = 1;\n    array<Fp, 2> row = {1, h - 1}, col = {1, w - 1};\n    while (k--) {\n        array<array<Fp, 2>, 2> next = {};\n        for (int i = 0; i < 2; ++i) {\n            for (int j = 0; j < 2; ++j) {\n                for (int a = 0; a < 2; ++a) {\n                    next[i][a] += dp[i][j] * (col[a] - (j == a));\n                    next[a][j] += dp[i][j] * (row[a] - (i == a));\n                }\n            }\n        }\n        dp = move(next);\n    }\n    cout << dp[0][0].val() << '\\n';\n    return 0;\n}"
+      ],
+      "text_sha256": "9cf09f9a86758a9e2023dc14f14403c31d4685703cb11e9a1bbc57790b16007c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc232/abc232_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc232/editorial/3160",
+      "text": "初めに、縦方向の移動と横方向の移動は独立です。\n縦方向の移動を $i$ 回と決め打った時の $\\left( x_2,y_2 \\right)$ への移動方法を求めることを考えます。各移動がどちらの方向の移動かは ${}_K C_{i}$ 通りです。 $i$ 回の縦方向での移動、 $K-i$ 回の横方向の移動がそれぞれ何通りかを求められればよいです。\nこれは以下の小問題のように考えることができます。\n変数 $A$ があり、現在 $A=S$ が成立している。以下の操作をちょうど $i$ 回繰り返して $A$ を $T$ にする方法は何通りか。\n$1 \\leq A' \\leq N$ かつ $A \\neq A'$ であるような整数 $A'$ を選択し、 $A$ を $A'$ に変更する。\nただし、 $N \\geq 2$ が成り立っている。\nここで小問題の答えは $N,i$ が同じならば $S,T$ が同じか否かのみに依存することを考えると、以下のようなDPを定義できます。以下、小問題での $N$ は一定とします。\n$dp[i'][0]$ $:=$ $i=i',S=1,T=1$ の時の小問題の答え\n$dp[i'][1]$ $:=$ $i=i',S=1,T=2$ の時の小問題の答え\n$i' = 0$ の時のDPは簡単に構築できます。 $i' \\geq 1$ として、最初の操作でどう $A$ を変化させるかを考えると、 $i'$ が $1$ 少ない場合に帰着できます。遷移は以下のようになります。\n$dp[i'][0] = dp[i'-1][1] \\times (N-1)$\n$dp[i'][1] = dp[i'-1][0] + dp[i'-1][1] \\times (N-2)$\nよって、前準備としてDPテーブルを $i' \\leq K$ まで $O(K)$ で完成させておくことで小問題は $O(1)$ で解くことができます。ここで、小問題として解く場合の $N$ は $H,W$ の $2$ 通りのみ考慮すればよいのでDPテーブルを $2$ 回作成し、二項係数の前準備を $O(K)$ で行えば、縦方向の移動を $i$ 回と決め打った時の移動方法は $O(1)$ で求められます。\n以上より、この問題は $O(K)$ で解くことができました。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "9ced0db4f4836c9ed5089318076394ad7eafea46fdf78fad9f568e5d8c7c2f2e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc232/abc232_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

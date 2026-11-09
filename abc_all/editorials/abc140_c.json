@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc140_c",
+  "editorials": [
+    {
+      "text": "C: Maximal Value\n長さN の数列C を、\nC1 = B1\nCi = min (Bi−1, Bi) (i = 2, 3, · · · , N −1)\nCN= BN\nで定めます。\nこのとき、任意のi についてAi ≤Ci が成立しなければなりません。実際、i = 2, 3, · · · , N −1 に\nついてAi > Ci であったと仮定すると、Ai > Bi−1 またはAi > Bi が成立しますが、Ai > Bi−1\nであればBi−1 ≥max (Ai−1, Ai) に矛盾し、Ai > Bi であればBi ≥max (Ai, Ai+1) に矛盾します。\ni = 1, N のときも、矛盾することが分かります。\n一方、A = C とすると、これは問の条件を満たすことが分かります。以上より、問の条件を満たす\n数列のうち要素の総和が最大となる数列は、C です。\n実装上は、B0 = BN = ∞(十分に大きな値) とすると、場合分けが不要で楽です。\n",
+      "text_sha256": "be95ba11a99c983e83ab90e1de176129af56ec0588a206833c6b613896fc1ac1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc140/abc140_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

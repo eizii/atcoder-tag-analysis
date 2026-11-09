@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc457_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc457/editorial/20140",
+      "text": "naive な DP 順列の後ろから順に要素を追加することを考えましょう。 \\((P_{i+1}, \\dots, P_{N})\\) の先頭に新しく \\(P_i\\) を追加する事を考えます。ただし、このとき「相対的な大小」のみを考えます。（いわゆる挿入 DP とおなじ考え方です） いまの max, second-max の index を \\(\\{a, b\\}\\) のように表すことにします。 このとき、 \\((P_i, P_{i+1}, \\dots, P_N)\\) における \\(P_i\\) の大きさに応じて、以下のように遷移します。 \\(P_i\\) が \\(1\\) 番目に大きいときは \\(\\{i, a\\}\\) \\(P_i\\) が \\(2\\) 番目に大きいときは \\(\\{a, i\\}\\) それ以外のときは \\(\\{a,b\\}\\) これを DP のキーに持ち、遷移ごとに \\(D_i\\) の条件を満たすか確認することで、多項式時間の解法ができます。 key の削減 実は \\(b\\) を管理しなくても DP ができます。 まず \\(P_i\\) が \\(1\\) 番目か \\(2\\) 番目になるとき、 \\(b\\) は関係ないです また、それ以外の遷移であっても \\(\\{a, b\\}\\) のままですから \\(b\\) に着目せずとも、 \\(D_i = D_{i+1}\\) である時に限り条件を自動的に満たすことがわかります。 ということで、実は \\(b\\) を管理しなくてもよいです。その上で、条件を整理して DP を書き直しましょう。 DP \\(dp[i][a] =\\) 最大値が \\(P_a\\) であるような \\((P_i, \\dots, P_N)\\) の（相対的な大小の）通り数 とします。初期化は \\(dp[n-1][n-1] = dp[n-1][n] = 1\\) とします。 \\(i\\) の降順に遷移は以下のとおりにすればよいです。 \\(P_i\\) が \\(1\\) 番目になるとき 直前の最大値の位置 \\(a\\) は \\(|a - i| = D_i, a > i\\) ですから \\(a = i + D_i\\) です。 よって \\(dp[i][i] += dp[i+1][i + D_i]\\) と遷移できます。 \\(P_i\\) が \\(2\\) 番目になるとき 直前の最大値の位置は同様に \\(a = i + D_i\\) です。 よって \\(dp[i][i+D_i] += dp[i+1][i+D_i]\\) と遷移できます。 それ以外のとき まず、それ以外の個数は \\(N-1-i\\) 通りあります。 そして、先ほど述べた通り \\(D_i = D_{i+1}\\) なのであれば、すべての \\(j\\) に対して \\(dp[i][j] += dp[i+1][j]\\) と遷移すればよいです。 高速化 このままでは、 \\(i\\) ごとに遷移が \\(O(N)\\) です。 しかし、一番下の遷移は全体に定数をかけるのみです。これを除けば遷移は \\(i\\) ごとに \\(O(1)\\) となります。 よって DP を in-place に行い、「今かけられている定数」を DP 配列の外側で管理することで \\(O(N)\\) で実装できます。（くわしくは実装例を参照してください） また、双対セグ木や遅延セグ木などを用いて \\(O(N \\log N)\\) でも簡単でしょう。 実装例 簡単のため辞書型を用い、逆元の計算を \\(O(\\log MOD)\\) で行っています。 以下は遅延セグ木を用いた解法です。 加算が \\(1\\) 点しかないことを利用していることに注意してください。",
+      "codes": [
+        "from collections import defaultdict\n\nmod = 998244353\n\nn = int(input())\nd = list(map(int, input().split()))\n\ndp = defaultdict(int)\ndp[n-1] = 1\ndp[n-2] = 1\ncoef = 1  # かけられた定数を管理する\n\nfor i in reversed(range(0, n - 2)):\n    j = i + d[i] # 直前の最大値の位置\n    v = dp[j]\n    if d[i] == d[i + 1]:\n        coef = coef * (n - i - 2) % mod # 3 番目の遷移\n        add = v * pow(n - i - 2, -1, mod) % mod # かけられた定数の分補正をする\n        dp[j] = (dp[j] + add) % mod # 2 番目の遷移\n        dp[i] = (dp[i] + add) % mod # 1 番目の遷移\n    else:\n        dp.clear() # 3 番目の遷移 in-place なので削除をする\n        dp[j] = v # 2 番目の遷移\n        dp[i] = v # 1 番目の遷移\n\nans = sum(dp.values()) % mod\nprint(ans * coef % mod)\n",
+        "from atcoder.lazysegtree import LazySegTree\n\nmod = 998244353\n\nn = int(input())\nd = list(map(int, input().split()))\n\ndef add(x, y): return (x + y) % mod\ndef mul(x, y): return x * y % mod\n\ndp = LazySegTree(add, 0, mul, mul, 1, [0] * (n - 2) + [1] * 2)\n\nfor i in reversed(range(0, n - 2)):\n    j = i + d[i]\n    v = dp.get(j)\n    if d[i] == d[i+1]:\n        dp.apply(0, n, n - i - 2)\n    else:\n        dp.apply(0, n, 0)\n    dp.set(j, (dp.get(j) + v) % mod)\n    dp.set(i, (dp.get(i) + v) % mod)\n\nprint(dp.all_prod())\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "88924db7473ecb9ea8830be80d00387bac2115a2e317b798f4ee1cf3e1bc1b3d"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc254_f",
+  "title": "Rectangle GCD",
+  "contests": [
+    {
+      "contest_id": "abc254",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1764,
+  "raw_difficulty": 1764,
+  "contest_id": "abc254",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc254/tasks/abc254_f",
+  "statement": "配点 : 500 点 問題文 正整数 N と長さ N の正整数列 A=(A_1,A_2,\\dots,A_N) と B=(B_1,B_2,\\dots,B_N) が与えられます。 N \\times N のマス目があります。上から i 行目、左から j 列目のマスをマス (i,j) と呼びます。 1 \\le i,j \\le N を満たす整数の組 (i,j) に対し、マス (i,j) に A_i + B_j が書かれています。以下のクエリを Q 個処理してください。 1 \\le h_1 \\le h_2 \\le N,1 \\le w_1 \\le w_2 \\le N を満たす整数の組 h_1,h_2,w_1,w_2 が与えられる。左上隅が (h_1,w_1) 、右下隅が (h_2,w_2) である矩形領域に含まれる整数の最大公約数を求めよ。 制約 1 \\le N,Q \\le 2 \\times 10^5 1 \\le A_i,B_i \\le 10^9 1 \\le h_1 \\le h_2 \\le N 1 \\le w_1 \\le w_2 \\le N 入力はすべて整数である。 入力 入力は以下の形式で標準入力から与えられる。 N Q A_1 A_2 \\dots A_N B_1 B_2 \\dots B_N \\mathrm{query}_1 \\mathrm{query}_2 \\vdots \\mathrm{query}_Q 各クエリは以下の形式で与えられる。 h_1 h_2 w_1 w_2 出力 Q 行出力せよ。 i 行目には \\mathrm{query}_i の答えを出力せよ。 入力例 1 3 5\n3 5 2\n8 1 3\n1 2 2 3\n1 3 1 3\n1 1 1 1\n2 2 2 2\n3 3 1 1 出力例 1 2\n1\n11\n6\n10 マス (i,j) に書かれている整数を C_{i,j} とします。 1 個目のクエリについて、 C_{1,2}=4,C_{1,3}=6,C_{2,2}=6,C_{2,3}=8 なのでこれらの最大公約数の 2 が答えとなります。 入力例 2 1 1\n9\n100\n1 1 1 1 出力例 2 109",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 正整数 N と長さ N の正整数列 A=(A_1,A_2,\\dots,A_N) と B=(B_1,B_2,\\dots,B_N) が与えられます。 N \\times N のマス目があります。上から i 行目、左から j 列目のマスをマス (i,j) と呼びます。 1 \\le i,j \\le N を満たす整数の組 (i,j) に対し、マス (i,j) に A_i + B_j が書かれています。以下のクエリを Q 個処理してください。 1 \\le h_1 \\le h_2 \\le N,1 \\le w_1 \\le w_2 \\le N を満たす整数の組 h_1,h_2,w_1,w_2 が与えられる。左上隅が (h_1,w_1) 、右下隅が (h_2,w_2) である矩形領域に含まれる整数の最大公約数を求めよ。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\le N,Q \\le 2 \\times 10^5 1 \\le A_i,B_i \\le 10^9 1 \\le h_1 \\le h_2 \\le N 1 \\le w_1 \\le w_2 \\le N 入力はすべて整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q A_1 A_2 \\dots A_N B_1 B_2 \\dots B_N \\mathrm{query}_1 \\mathrm{query}_2 \\vdots \\mathrm{query}_Q 各クエリは以下の形式で与えられる。 h_1 h_2 w_1 w_2"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 i 行目には \\mathrm{query}_i の答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 5\n3 5 2\n8 1 3\n1 2 2 3\n1 3 1 3\n1 1 1 1\n2 2 2 2\n3 3 1 1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2\n1\n11\n6\n10 マス (i,j) に書かれている整数を C_{i,j} とします。 1 個目のクエリについて、 C_{1,2}=4,C_{1,3}=6,C_{2,2}=6,C_{2,3}=8 なのでこれらの最大公約数の 2 が答えとなります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 1 1\n9\n100\n1 1 1 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 109"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc254/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:27.780866+00:00",
+  "statement_sha256": "8dab6f6c145907932aa4eaf9ab712e839566364f973a6d4d5a88ba8f0d7c63e4",
+  "editorials": []
+}

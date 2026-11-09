@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc224_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc224/editorial/2810",
+      "text": "まず、この問題の制約に着目しましょう。\n\\(N \\le 300\\)\nとあるので、この問題は時間計算量\n\\(O(N^3)\\)\nの解法をとると十分高速に正解できることが予想されます。\nつまり、\n\\(3\\)\n点の選び方を全探索して、選んだ\n\\(3\\)\n点を結んで正の面積をもつ三角形になるかどうかを\n\\(O(1)\\)\nで判定することができれば、十分高速にこの問題に正解できるということになります。\nでは、\n\\(3\\)\n点が三角形になるかをどのように判定すればよいでしょうか。実は、以下の公式を利用することが出来ます。\n\\(3\\)\n点\n\\((x_1,y_1),(x_2,y_2),(x_3,y_3)\\)\nを結んで出来る三角形の面積は、以下の式で表される。\n\\(\\frac{1}{2}\\ |(x_2-x_1)(y_3-y_1)-(x_3-x_1)(y_2-y_1)|\\)\n(但し、 この値が\n\\(0\\)\nになる場合は\n\\(3\\)\n点が一直線上にある。)\nなお、今回重要なのは三角形をなすかどうかなので、\n\\((x_2-x_1)(y_3-y_1)-(x_3-x_1)(y_2-y_1)\\)\nが\n\\(0\\)\nかどうかだけを判断すればよいです。\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n  vector<pair<long long,long long>> p(n);\n  for(auto &nx : p){cin >> nx.first >> nx.second;}\n  int res=0;\n  for(int i=0;i<n;i++){\n    for(int j=i+1;j<n;j++){\n      for(int k=j+1;k<n;k++){\n        if((p[j].first-p[i].first)*(p[k].second-p[i].second)-(p[k].first-p[i].first)*(p[j].second-p[i].second)!=0){res++;}\n      }\n    }\n  }\n  cout << res << '\\n';\n}"
+      ],
+      "text_sha256": "787a35e8f9995446c9c9d3855d3eb6ee3a81ea252fd036b0a7a156150b17c000",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc224/abc224_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc224/editorial/2826",
+      "text": "$O(N^2 \\log N)$ での解法を紹介します。 $3$ 点を選ぶ方法で、選んだ $3$ 点を線分で結んだ図形が三角形にならない必要十分条件は「選んだ $3$ 点が一直線上にあること」です。\n選んだ $3$ 点が一直線上にあるような選び方を求める方法を考えましょう。選んだ $2$ 点を結んでできる直線は $O(N^2)$ 通りあります。よって、考慮するべき直線は $O(N^2)$ 通りとなります。この全てについてその直線上の点の数を求めればよいです。\n初めに、選んだ $2$ 点を結んでできる直線を求めることを考えましょう。これは $2$ 点を $\\left(x_1,y_1 \\right),\\left(x_2,y_2 \\right)$ として $\\left(y_2-y_1\\right)x+\\left(x_1-x_2\\right)y+\\left(x_2-x_1\\right)y_1-\\left(y_2-y_1\\right)x_1 =0$ として表すことができるので、 $O(1)$ で求まります。直線は $x,y$ の係数と定数からなるtupleなどを用いて管理するとします。直線 $ax+by=c$ を $\\left( a,b,c \\right)$ として管理する際、 $\\gcd (a,b,c)=1$ かつ $a \\geq 0$ を満たすように $a,b,c$ に同じ数をかけたり割る操作をするとよいです。\n次にmapを用いて点 $i$ と点 $j$ を結んでできる直線の登場回数を管理します。 $i < j$ として $O(N^2)$ で調べた時、mapのtupleに対応する値はその直線上の点の数を $v$ として ${}_v C_2$ です。\n直線上の点の数を $v$ としたとき、 $3$ 点がその直線上にあるような選び方は ${}_v C_3$ 通りです。よって、 ${}_v C_2$ から $v$ を求める逆配列をmapなどで作ればよいです。\n最後に、 $N$ 個の中から $3$ 点を選ぶのは ${}_N C_3$ 通りなので、求めた値を ${}_N C_3$ から引けば答えが求まります。\nmapを使用する関係上 $\\log$ がつき計算量は$O(N^2 \\log N)$ となります。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "c79fa657a2b80e69f049381cf0e893f9f0ba34be4aac4093c753cf794013bf46",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc224/abc224_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

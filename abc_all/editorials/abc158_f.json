@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc158_f",
+  "editorials": [
+    {
+      "text": "F: Removing Robots\nまず、高橋君が操作を行う順番は重要ではありません。\nfi := ロボットi が一連の操作の中で起動されたかどうかのbool 値、gi := ロボットi が高橋君に\nよって直接起動されたかどうかのbool 値と置きます。このとき、fi := gi OR fj(j̸ = i, Xj < Xi <\nXj + Dj) と表せることがわかります。\n全てのロボットが残っている場合に、ロボットi を起動した場合に連動して起動することになる最\n大のj をRi で表します。(他のロボットに関与しない場合は、Ri = i とします) このとき、\nRi = max(i, Rj(i < j, Xi + Di > Xj))\nが成り立つので、segment tree などを用いてRi をX の大きい方から求めていけます。一部のロ\nボットが取り除かれている場合も、起動した場合に同じ範囲のロボットが取り除かれた状態になるこ\nとがわかります。\ndpi := ロボットi 以降のみを考慮した場合の組み合わせの個数と置きます。このとき、ロボットi\nを起動しない場合... dpi+1、ロボットi を起動する場合... dpRi+1 となり、X の大きい方から求ま\nります。\n以上の計算量はO(NlogN) です。\n",
+      "text_sha256": "aafea8a8352566ae37dfee473308ebda5d96225cce3c181bffbc55b908d4033a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc158/abc158_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

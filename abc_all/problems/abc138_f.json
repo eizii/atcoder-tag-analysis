@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc138_f",
+  "title": "Coincidence",
+  "contests": [
+    {
+      "contest_id": "abc138",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 2431,
+  "raw_difficulty": 2431,
+  "contest_id": "abc138",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc138/tasks/abc138_f",
+  "statement": "配点 : 600 点 問題文 整数 L, R が与えられます。整数の組 (x, y) (L \\leq x \\leq y \\leq R) であって、 y を x で割った余りが y \\text{ XOR } x に等しいものの個数を 10^9 + 7 で割ったあまりを求めてください。 \\text{ XOR } とは 整数 A, B のビットごとの排他的論理和 a \\text{ XOR } b は、以下のように定義されます。 a \\text{ XOR } b を二進数表記した際の 2^k ( k \\geq 0 ) の位の数は、 A, B を二進数表記した際の 2^k の位の数のうち一方のみが 1 であれば 1 、そうでなければ 0 である。 例えば、 3 \\text{ XOR } 5 = 6 となります (二進数表記すると: 011 \\text{ XOR } 101 = 110 )。 制約 1 \\leq L \\leq R \\leq 10^{18} 入力 入力は以下の形式で標準入力から与えられる。 L R 出力 条件を満たす整数の組 (x, y) (L \\leq x \\leq y \\leq R) の個数を 10^9 + 7 で割ったあまりを出力せよ。 入力例 1 2 3 出力例 1 3 条件を満たす組は (2, 2), (2, 3), (3, 3) の 3 通りです。 入力例 2 10 100 出力例 2 604 入力例 3 1 1000000000000000000 出力例 3 68038601 個数を 10^9 + 7 で割ったあまりを計算することを忘れないでください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 整数 L, R が与えられます。整数の組 (x, y) (L \\leq x \\leq y \\leq R) であって、 y を x で割った余りが y \\text{ XOR } x に等しいものの個数を 10^9 + 7 で割ったあまりを求めてください。 \\text{ XOR } とは 整数 A, B のビットごとの排他的論理和 a \\text{ XOR } b は、以下のように定義されます。 a \\text{ XOR } b を二進数表記した際の 2^k ( k \\geq 0 ) の位の数は、 A, B を二進数表記した際の 2^k の位の数のうち一方のみが 1 であれば 1 、そうでなければ 0 である。 例えば、 3 \\text{ XOR } 5 = 6 となります (二進数表記すると: 011 \\text{ XOR } 101 = 110 )。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq L \\leq R \\leq 10^{18}"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 L R"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 条件を満たす整数の組 (x, y) (L \\leq x \\leq y \\leq R) の個数を 10^9 + 7 で割ったあまりを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3 条件を満たす組は (2, 2), (2, 3), (3, 3) の 3 通りです。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 100"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 604"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1 1000000000000000000"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 68038601 個数を 10^9 + 7 で割ったあまりを計算することを忘れないでください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc138/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:35:01.228022+00:00",
+  "statement_sha256": "c7c8d566d54c23582972a8eec35fd688b0e1e9e9c71e756c942c509195ecfe58",
+  "editorials": []
+}

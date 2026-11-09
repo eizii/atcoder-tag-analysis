@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc208_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc208/editorial/2187",
+      "text": "この問題は支払い方の最小枚数を求める問題でした。どのような方法で払うのが最適か迷ってしまった方も多いかもしれません。\nこの問題は動的計画法などの高度なアルゴリズムを用いて解くこともできますが、適切な考察を行うことでこの問題を高速に解くことが出来ます。\n解法1. 価値の低い貨幣から決める\n実はこの問題は価値の低い硬貨から枚数を決めることが出来ます。\n初めに\n\\(1!\\)\n円硬貨を何枚払うか考えます。\n\\(2!,3!,\\dots,10!\\)\nが全て\n\\(2! = 2\\)\nで割り切れることに注目すると、\n\\(1!\\)\n円硬貨を使う枚数は\n\\(P\\)\nを\n\\(2!\\)\nで割った余りを\n\\(r\\)\nとして\n\\(2 n + r\\)\n枚になる必要があるとわかります。(もしそうでない場合、\n\\(P\\)\nと支払った金額の合計の\n\\(2\\)\nで割った余りが一致しません。)\nさらに、もし\n\\(1!\\)\n円硬貨を\n\\(2\\)\n枚以上支払った場合、\n\\(1!\\)\n円硬貨\n\\(2\\)\n枚の代わりに\n\\(2!\\)\n円硬貨を使った方がより少ない枚数での支払いが可能になるので、最小枚数の支払い方になりません。よって、\n\\(1!\\)\n円硬貨は\n\\(r\\)\n枚使用するとわかります。\n同様の議論が\n\\(2!\\)\n円硬貨から\n\\(10!\\)\n円硬貨に対しても成り立つので、価値の低い硬貨から枚数を決めて行ってよいことが示されました。よって、上に説明したアルゴリズムを実装すればこの問題を解くことが出来ます。実装は以下の通りです。\nC++\nPython\n解法2. 価値の高い貨幣から決める\n別解として、貪欲法を用いて価値の高い貨幣を優先して使用していけば最小枚数を達成できます。\n理由としてまず先に直感的な説明を行います。日常生活で 50 円玉、 100 円玉と 500 円玉をたくさん持っている状況を考えてみましょう。もしも 850 円のものをちょうどを払って買う場合、自分はまずは 500 円玉を出して、次に 100 円玉を 3 枚出して、最後に 50 円玉を出します。これは、「出来るだけ大きい貨幣を使った方が良さそう」という直感に基づくアルゴリズムに従った結果です。\nこの上から貪欲に決めるアルゴリズムは実はこの問題でも成り立ちます。正当性を示すために厳密な証明を行います。次の条件を満たす支払い方を「適切な支払い方」として定義します。\n\\(1 \\leq n \\leq 10\\)\nに対して、\n\\(n!\\)\n円硬貨は最大でも\n\\(n\\)\n枚しか使用しない。\n(証明) 背理法で示します。もしも条件を満たさない場合、ある\n\\(m\\)\nが存在して\n\\(m!\\)\n円硬貨を\n\\(m+1\\)\n枚以上支払うことになります。しかし、\n\\(m!\\)\n円硬貨を\n\\(m+1\\)\n枚支払う代わりに\n\\((m+1)!\\)\n円硬貨を支払う方がより少ない枚数で条件を満たすことになり、矛盾します。\nこの時、次の事実が導かれます。\n支払う金額が\n\\(n!\\)\n円以上であり、最適な支払い方をしているならば、\n\\(n!\\)\n円硬貨以上の価値の硬貨を使用している。\n(証明) 対偶を背理法で示します。\n\\((n-1)!\\)\n円硬貨のみを使用している場合、支払える金額の最大は\n\\(1! \\times 1 + 2! \\times 2 + \\dots + (n-1)! \\times (n-1)  = n! - 1\\)\n円になり、矛盾します。\nこの事実から、\n\\(n=10\\)\nから\n\\(n=1\\)\nの順番で「\n\\(n!\\)\nが支払う必要のある金額以上であるときは\n\\(n!\\)\n円硬貨を使用する」とするアルゴリズムの正当性が示されます。\n実装は\nfor\n文を利用して\n\\(10!\\)\n円硬貨から\n\\(1!\\)\n円硬貨の順に降順に調べて行けばよいです。 C++ と Python による実装例は以下の通りです。\nC++\nPython",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint factorial(int i) { return i ? factorial(i - 1) * i : 1; }\n\nint main() {\n  int P;\n  cin >> P;\n\n  int answer = 0;\n  for (int i = 1; i <= 10; i++) {\n    int divisor = factorial(i + 1);\n    int residue = P % divisor;\n    answer += residue / factorial(i);\n    P -= residue;\n  }\n\n  cout << answer << \"\\n\";\n}",
+        "from math import factorial\n\nP = int(input())\nanswer = 0\n\nfor i in range(1, 11):\n  divisor = factorial(i + 1)\n  residue = P % divisor\n  answer += residue // factorial(i)\n  P -= residue\n\nprint(answer)",
+        "#include <iostream>\nusing namespace std;\n\nint fac[20];\n\nint main() {\n  fac[0] = 1;\n  for (int i = 1; i <= 10; i++) {\n    fac[i] = fac[i - 1] * i;\n  }\n\n  int P, answer = 0;\n  cin >> P;\n\n  for (int i = 10; i >= 1; i--) {\n    while (P >= fac[i]) {\n      answer++;\n      P -= fac[i];\n    }\n  }\n\n  cout << answer << endl;\n}",
+        "from math import factorial\n\nP = int(input())\nanswer = 0\nfor i in range(10, 0, -1):\n  while factorial(i) <= P:\n    answer += 1\n    P -= factorial(i)\nprint(answer)"
+      ],
+      "text_sha256": "1aa8f389fe44c1a81fc778cc1b0002bfcfa2ab7e45cb2b071124163119c07679",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc208/abc208_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

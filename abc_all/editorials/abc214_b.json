@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc214_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc214/editorial/2437",
+      "text": "\\(a+b+c \\leq S\\)\nを満たす\n\\((a,b,c)\\)\nの組を全探索し、それぞれ\n\\(a \\times b \\times c \\leq T\\)\nを満たすかどうか判定することを考えます。\nこれは、for文などを用いて以下のように実装することができます。\n実装例 (C++)\n実装例 (Python)\nbonus:\n\\(0 \\leq S,T \\leq 10^{18}\\)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int S, T; cin >> S >> T;\n    int cnt = 0;\n    for(int a = 0; a <= S; a++){\n        for(int b = 0; a+b <= S; b++){\n            for(int c = 0; a+b+c <= S; c++){\n                if(a*b*c <= T) cnt++;\n            }\n        }\n    }\n    cout << cnt << endl;\n}",
+        "S, T = map(int, input().split())\nres = 0\nfor a in range(S+1):\n    for b in range(S+1-a):\n        for c in range(S+1-a-b):\n            if a*b*c <= T:\n                res+=1\nprint(res)"
+      ],
+      "text_sha256": "3070ec188f73dc8df97d248ee3862e5990ec21b7b41d129aed9e0b3fe84531ed",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc214/abc214_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

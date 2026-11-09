@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc277_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc277/editorial/5203",
+      "text": "以下、「整数\n\\(v\\)\nが書かれたカード」のことを簡単に整数\n\\(v\\)\nと呼びます。\nまず、初期手札に各整数が何枚ずつあるかという情報を求めます。\n具体的には「整数\n\\(v_i\\)\nを\n\\(f_i\\)\n枚持っている」という情報を表す列\n\\(((v_0, f_0), (v_1, f_1), (v_2, f_2), \\ldots, (v_{k-1}, f_{k-1}))\\)\nを求めます。\nここで、一般性を失わず\n\\(f_0, f_1, \\ldots, f_{k-1}\\)\nはすべて正、かつ、\n\\(v_0 \\lt v_1 \\lt \\cdots \\lt v_{k-1}\\)\nとします。\nこの列は、連想配列等を用いて\n\\(O(N \\log N)\\)\n時間で求められます。\n最終的に手札に残る整数の総和を最小化する上では、\n\\(2\\)\n枚目以降に出す整数については、最後に出した整数と同じ整数が手札に残っているならそれを出すとして良いです。\nよって、\n\\(2\\)\n枚目以降に出す整数は随時一通りに決定することができるため、高橋君に実質的に残される選択の余地は「\n\\(1\\)\n枚目に出す整数を何にするか」だけです。\n初期手札に\n\\(0\\)\n以上\n\\(M-1\\)\n以下の整数がそれぞれ\n\\(1\\)\n枚以上ある場合、すなわち\n\\(k = M\\)\nの場合は、\n\\(1\\)\n枚目に出す整数を何にするかによらず、最終的に手札を\n\\(0\\)\n枚にすることができます。つまり、この時の出力すべき答えは\n\\(0\\)\nです。\n以下、\n\\(k \\leq M-1\\)\nとします。\n「\n\\(1\\)\n枚目に出す整数を\n\\(v_i\\)\nにしたときに最終的な手札に残る整数の総和」を\n\\(s_i\\)\nで表し、この\n\\(s_0, s_1, \\ldots, s_{k-1}\\)\nを求めることを考えます。\n\\(1\\)\n枚目に出す整数を\n\\(v_i\\)\nにしたとき、\n\\(v_{(i+1) \\bmod k} \\neq (v_i + 1) \\bmod M\\)\nならば、初期手札（総和\n\\(\\sum_{j = 0}^k v_jf_j\\)\n）から整数\n\\(v_i\\)\nを\n\\(f_i\\)\n枚出したあと、それ以上カードを出せないので\n\\(s_i =  (\\sum_{j = 0}^k v_jf_j) - v_if_i\\)\nです。\n\\(v_{(i+1) \\bmod k} = (v_i + 1) \\bmod M\\)\nならば、初期手札から整数\n\\(v_i\\)\nを\n\\(f_i\\)\n枚出したあと、さらに「\n\\(1\\)\n枚目に出す整数を\n\\((v_i + 1) \\bmod M\\)\nにしたとき」の操作を続けられるので、\n\\(s_i = s_{(i+1) \\bmod k} - v_if_i\\)\nです。\nよって、\n\\(v_{(p+1) \\bmod k} \\neq (v_p + 1) \\bmod M\\)\nを満たすある\n\\(p\\)\nからはじめ、\n\\(i = p, p-1, p-2, \\ldots, 1, 0, k-1, k-2, \\ldots, p+1\\)\nの順に、各\n\\(s_i\\)\nを計算することが全体で\n\\(O(N)\\)\n時間でできます。\n\\(\\min \\lbrace s_0, s_1, \\ldots, s_{k-1} \\rbrace\\)\nが出力すべき答えです。\n以上より、本問題を\n\\(O(N \\log N)\\)\n時間で求められます。\n以下に、C++言語による正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <map>\n#include <utility>\n#include <vector>\nusing namespace std;\ntypedef long long ll;\n\nll s[200005];\n\nint main(void)\n{\n  ll n, m, a, sum = 0; \n  map<ll, ll> mp;\n  \n  cin >> n >> m;\n  for(int i = 1; i <= n; i++){\n    cin >> a;\n    mp[a]++;\n    sum += a;\n  }  \n  vector<pair<ll, ll>> vec;\n  for(auto p : mp) vec.push_back(p);\n  int k = vec.size();\n  \n  if(k == m){\n    cout << 0 << endl;\n    return 0;\n  }\n  \n  int p;\n  for(int i = 0; i < k; i++){\n    if(vec[(i+1)%k].first != (vec[i].first+1)%m){\n      p = i;\n      break;\n    }\n  }\n  \n  for(int i = 0; i < k; i++){\n    int j = (p-i+k)%k;\n    s[j] = sum;\n    if(vec[(j+1)%k].first == (vec[j].first+1)%m) s[j] = s[(j+1)%k];\n    s[j] -= vec[j].first * vec[j].second;\n  }\n  \n  ll ans = sum;\n  for(int i = 0; i < k; i++) ans = min(ans, s[i]);\n  cout << ans << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "092ff348f864e246aabc512bab16c40e3cc98399421aa7fb12c63c7e9f4e12f5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc277/abc277_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

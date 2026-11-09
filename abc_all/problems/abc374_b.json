@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc374_b",
+  "title": "Unvarnished Report",
+  "contests": [
+    {
+      "contest_id": "abc374",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 28,
+  "raw_difficulty": -660,
+  "contest_id": "abc374",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc374/tasks/abc374_b",
+  "statement": "配点 : 200 点 問題文 キーエンスでは良いことも悪いこともありのままに報告するという文化があります。 そこで、報告内容が元の文章のありのままであるかを確認したいです。 英小文字のみからなる文字列 S , T が与えられます。 S と T が等しいならば 0 を、そうでないならば異なっている文字のうち先頭のものが何文字目かを出力してください。 ただし、 S,T の一方にのみ i 文字目が存在するときも、 i 文字目は異なっているとみなすものとします。 より厳密には、 S と T が等しくないならば次の条件のうちいずれかをみたす最小の整数 i を出力してください。 1\\leq i\\leq |S| かつ 1\\leq i\\leq |T| かつ S_i\\neq T_i |S|< i\\leq |T| |T|< i\\leq |S| ただし、 |S|,|T| でそれぞれ S,T の長さを、 S_i,T_i でそれぞれ S,T の i 文字目を表します。 制約 S,T は英小文字のみからなる長さ 1 以上 100 以下の文字列 入力 入力は以下の形式で標準入力から与えられる。 S T 出力 S と T が等しいならば 0 を、そうでないならば異なっている文字のうち先頭のものが何文字目かを出力せよ。 入力例 1 abcde\nabedc 出力例 1 3 S= abcde , T= abedc です。 S と T は 1,2 文字目は等しく、 3 文字目が異なるため、 3 を出力します。 入力例 2 abcde\nabcdefg 出力例 2 6 S= abcde , T= abcdefg です。 S と T は 5 文字目まで等しく、 T にのみ 6 文字目が存在するため、 6 を出力します。 入力例 3 keyence\nkeyence 出力例 3 0 S と T は等しいため、 0 を出力します。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 キーエンスでは良いことも悪いこともありのままに報告するという文化があります。 そこで、報告内容が元の文章のありのままであるかを確認したいです。 英小文字のみからなる文字列 S , T が与えられます。 S と T が等しいならば 0 を、そうでないならば異なっている文字のうち先頭のものが何文字目かを出力してください。 ただし、 S,T の一方にのみ i 文字目が存在するときも、 i 文字目は異なっているとみなすものとします。 より厳密には、 S と T が等しくないならば次の条件のうちいずれかをみたす最小の整数 i を出力してください。 1\\leq i\\leq |S| かつ 1\\leq i\\leq |T| かつ S_i\\neq T_i |S|< i\\leq |T| |T|< i\\leq |S| ただし、 |S|,|T| でそれぞれ S,T の長さを、 S_i,T_i でそれぞれ S,T の i 文字目を表します。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 S,T は英小文字のみからなる長さ 1 以上 100 以下の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S T"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 S と T が等しいならば 0 を、そうでないならば異なっている文字のうち先頭のものが何文字目かを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 abcde\nabedc"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3 S= abcde , T= abedc です。 S と T は 1,2 文字目は等しく、 3 文字目が異なるため、 3 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 abcde\nabcdefg"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 6 S= abcde , T= abcdefg です。 S と T は 5 文字目まで等しく、 T にのみ 6 文字目が存在するため、 6 を出力します。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 keyence\nkeyence"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 0 S と T は等しいため、 0 を出力します。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc374/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:57.363066+00:00",
+  "statement_sha256": "18067ef1695d94881efcd472a2ba322dc53742efab25252339450bec2d50e5dd",
+  "editorials": []
+}

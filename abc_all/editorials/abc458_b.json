@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc458_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc458/editorial/20464",
+      "text": "解法 1\nマス\n\\((i, j)\\)\nに辺で隣接するマスの座標は，以下の\n\\(4\\)\n通りです．\nマス\n\\((i-1,\\ j)\\)\nマス\n\\((i+1,\\ j)\\)\nマス\n\\((i,\\ j-1)\\)\nマス\n\\((i,\\ j+1)\\)\n上の座標にマスが存在するかを判定し，存在するマスの個数を求めればよいです．\n解法 2\nグリッドのサイズが\n\\(1 \\times 1\\)\nの場合，マス\n\\((1,1)\\)\nの答えは\n\\(0\\)\nです．\nグリッドのサイズが\n\\(1 \\times W\\)\n(\n\\(W > 1\\)\n) の場合，マス\n\\((1,1), (1,W)\\)\nの答えは\n\\(1\\)\n，それ以外のマスの答えは\n\\(2\\)\nです．\nグリッドのサイズが\n\\(H \\times 1\\)\n(\n\\(H > 1\\)\n) の場合，マス\n\\((1,1), (H,1)\\)\nの答えは\n\\(1\\)\n，それ以外のマスの答えは\n\\(2\\)\nです．\nグリッドのサイズが\n\\(H \\times W\\)\n(\n\\(H,W > 1\\)\n) の場合，以下の通りです．\nマス\n\\((1,1), (1,W), (H,1), (H,W)\\)\nの答えは\n\\(2\\)\n上に当てはまらないマスのうち，\n\\(1\\)\n行目，\n\\(H\\)\n行目，\n\\(1\\)\n列目，\n\\(W\\)\n列目のいずれかに属するマスの答えは\n\\(3\\)\n上のどちらでもないマスの答えは\n\\(4\\)\n以上の場合分けをミス無く実装できれば正解です．\n実装例 (C++, 解法 1)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n\nint main (void) {\n\tint h, w;\n\tcin >> h >> w;\n\n\tint ans[h][w];\n\tfor (int i = 0; i < h; i++) {\n\t\tfor (int j = 0; j < w; j++) {\n\t\t\tans[i][j] = 0;\n\n\t\t\tif (i-1 >= 0) ans[i][j]++;\n\t\t\tif (i+1 <  h) ans[i][j]++;\n\t\t\tif (j-1 >= 0) ans[i][j]++;\n\t\t\tif (j+1 <  w) ans[i][j]++;\n\t\t}\n\t}\n\n\tfor (int i = 0; i < h; i++) {\n\t\tfor (int j = 0; j < w; j++) {\n\t\t\tif (j > 0) { cout << \" \"; }\n\t\t\tcout << ans[i][j];\n\t\t}\n\t\tcout << \"\\n\";\n\t}\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "e7caaabe0334444e28b9f63f69119bf72ce8a95a85e62f1008f3c72d149988f6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc458/abc458_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc233_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc233/editorial/3171",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\nこの問題を解くためには、以下の\n\\(2\\)\nつの工程が必要です。\n\\(X\\)\n円が\n\\(Y\\)\n円と比べていくら不足しているか求める。これは\n\\(Y-X\\)\nとすることで求められます。\nただし、\n\\(X \\ge Y\\)\nである場合はこの時点で答えが\n\\(0\\)\nと確定するので、\n\\(0\\)\nを出力して終了します。\n(少なくとも)\n\\(Y-X\\)\n円を支払うために、\n\\(10\\)\n円切手が何枚必要かを求める。これを求めるには、\n\\(Y-X\\)\nを\n\\(10\\)\nで割って小数点以下を切り上げる必要があります。\n切り上げの計算は言語によりさまざまな方法がありますが、以下で示す方法が競技プログラミングにおいて最も汎用的です。\n正整数\n\\(a\\)\nを正整数\n\\(b\\)\nで割って小数点以下を切り上げた値は、\n\\((a+b-1)\\)\nを\n\\(b\\)\nで割って小数点以下を切り捨てた値に等しい。\nこの方法の利点: 多くのプログラミング言語において、整数を整数で割って整数にする演算は切り捨てで実装されています。この方針をとることで、実装が手軽になります。\n注意:  この計算方法は、\n\\(a,b\\)\nが実数になると成立しません。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint ceil(int a,int b){return (a+b-1)/b;}\n\nint main(){\n  int x,y;\n  cin >> x >> y;\n  if(x>=y){cout << \"0\\n\";return 0;}\n  cout << ceil(y-x,10) << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "73ce2f256bd21220dcc8058b3225a6a0d9c6a8768b1d72f98da238d4577be0b8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc233/abc233_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc282_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc282/editorial/5400",
+      "text": "2 重ループを用いてすべてのペアを試します。\nあるペアについて条件を満たしているか確認する際には、\nABC277-B 解説\nで述べられているようにこれまでの条件をすべて満たしているかという変数を最初に持っておくと実装が簡潔になります。実装例もご覧ください。\n実装例(Python):",
+      "codes": [
+        "n, m = map(int, input().split())\ns = [input() for i in range(n)]\nres = 0\nfor i in range(n):\n    for j in range(i + 1, n):\n        ok = True\n        for k in range(m):\n            if s[i][k] == 'x' and s[j][k] == 'x':\n                ok = False\n        if ok:\n            res += 1\nprint(res)"
+      ],
+      "text_sha256": "89644f2efaf9f844a0361fb37a3e136b466c51f60484995274de503f9e48fd89",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc282/abc282_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc282/editorial/5408",
+      "text": "\\(Boolean型のN \\times N\\)\n行列\n\\(NG\\)\nを\n\\(NG[i][j] = (参加者iが問題jを解けないならTrue、解けるならFalse)\\)\nとします。\nこのとき\n\\(NG[i][k]\\;and\\;NG[j][k] = (参加者iとjの組が問題kを解けないならTrue、解けるならFalse)\\)\nとなるので、\n\\(NG\\)\nと\n\\(^t\\!NG\\)\nの行列積(\n\\(N×N\\)\n行列)の(\n\\(i, j\\)\n)成分は、参加者iとjの組に解けない問題があるかどうかを表していることになります。\n求める答えは\n\\(NG\\)\nと\n\\(^t\\!NG\\)\nの行列積のうち、\n\\(False\\)\nとなるような(\n\\(i, j\\)\n)成分(\n\\(i \\lt j\\)\n)の個数となるので、これを求めることでこの問題を解くことができます。\n(実装例では上記の行列の各成分を反転したものについて、\n\\(True\\)\nとなるような要素数を数えています。)\n提出",
+      "codes": [
+        "import sys\nimport numpy as np\n\n\n# 入力\nS = np.array([list(line.rstrip()) for line in sys.stdin.readlines()[1:]])\n\n# NG[i][j] = (参加者iが問題jを解くことができないかどうか) N×M行列\nNG = S == 'x'\n# OK[i][j] = (参加者iと参加者jの組で全ての問題を解けるかどうか) N×N行列\nOK = ~(NG @ NG.T)\n# 答え = (OKのi < jとなる(i, j)成分のうち、Trueのものの個数)\nanswer = np.triu(OK, 1).sum()\n\nprint(answer)"
+      ],
+      "text_sha256": "572f0b49ac0fee77c508ba3ec1fc9f2331159f8665f617cf38434c61eb22b3fd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc282/abc282_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc243_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc243/editorial/3508",
+      "text": "くじを \\(K\\) 回 引き、各アイテム \\(i\\) が \\(c_i\\) 個手に入るような確率は \\(\\displaystyle \\frac{K!}{\\prod_{i=1}^{N}c_i!}\\prod_{i=1}^{N}p_i^{c_i}\\) となります。これは \\(c_i\\) を決めるごとに \\(i\\) の寄与だけを計算することができるため、次のようなDPで元の問題を解くことができます。 \\(dp[x][y][z]\\) を、非負整数列 \\(c=(c_1,\\ldots,c_x)\\) であって、 \\(|\\{i\\mid c_i\\neq 0\\}|=y\\) 、 \\(\\sum_{i=1}^{x} c_i=z\\) を満たすようなもの全てについての \\(\\displaystyle \\frac{1}{\\prod_{i=1}^{x}c_i!}\\prod_{i=1}^{x}p_i^{c_i}\\) の和とします。求める値は \\(dp[N][M][K]\\times K!\\) です。 \\(c_{x+1}\\) の値を全て調べることにより、 \\(dp[x][y][z]\\) から \\(dp[x+1][*][*]\\) への遷移を行うことができます。詳細な遷移は実装例を参考にしてください。 状態数が \\(O(NMK)\\) 、各状態からの遷移先が \\(O(K)\\) あるため、計算量は \\(O(NMK^2)\\) となります。 実装例(C++)",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "dad8d424f332f6cbdb19d529ecc9cbe72bd6f02f59b00d230754688e88a7fdd0"
+    }
+  ],
+  "status": "available"
+}

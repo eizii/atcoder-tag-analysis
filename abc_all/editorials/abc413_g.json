@@ -1,0 +1,38 @@
+{
+  "problem_id": "abc413_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13403",
+      "text": "\\(HW\\) 個の頂点 \\((i,j)\\ (1\\le i\\le H,1\\le j\\le W)\\) について、\\((i,j)\\) と \\((i+1,j)\\) 、\\((i,j)\\) と \\((i,j+1)\\) の間に辺を張り、容量を\nどちらかのマスに障害物が置かれているなら \\(0\\)\nそうでなければ \\(1\\)\nとしたグラフを考えます。\n元の問題の答えが Yes であることは、\\((1,1)\\) から \\((H,W)\\) への最大流の流量が \\(1\\) 以上であることと同値です。\nこれは、最大流最小カット定理から、重み \\(0\\) のカットが存在しないことと同値になります。\n上のグラフは平面グラフなので、適切に平面へ埋め込んだのち双対グラフをとることで（頂点 \\((i,j)\\) を座標 \\((i,j)\\) に配置すればよいです）、双対グラフの最短経路問題に帰着することができます。\n特に、最短経路の重みが \\(0\\) であるかが判定できればよく、辺の重みは非負なので、これは重みが \\(0\\) の辺のみで連結であるかが判定できればよいです。\nこれは、（孤立点を適切に削除した上で、）幅優先探索や深さ優先探索、Union Find などを用いることで解くことができます。\n実装例は以下のようになります。\n以下の実装例では Union Find を利用しています。",
+      "codes": [
+        "#include <iostream>\n#include <unordered_map>\n\nint main() {\n    using namespace std;\n    unsigned H, W, K;\n    cin >> H >> W >> K;\n\n    // union-find を hash map で実装\n    unordered_map<unsigned long, unsigned long> parent;\n    unordered_map<unsigned long, unsigned> size;\n\n    const auto find{[&parent, &size](unsigned long i) {\n        if (!parent.contains(i)) {\n            parent[i] = i;\n            size[i] = 1;\n        }\n        while (i != parent[i])\n            i = parent[i] = parent[parent[i]];\n        return i;\n    }};\n    const auto unite{[&parent, &size, &find](unsigned long i, unsigned long j) {\n        i = find(i);\n        j = find(j);\n        if (i == j) return;\n        if (size[i] < size[j]) swap(i, j);\n        size[i] += size[j];\n        parent[j] = i;\n    }};\n\n    // 双対グラフの頂点から番号に変換する\n    const auto coordinate_to_index{[H, W](unsigned long x, unsigned long y) -> unsigned long {\n        if (x == 0 || y == W)\n            return 0;\n        if (y == 0 || x == H)\n            return 1;\n        return x * W + y;\n    }};\n\n    for (unsigned i{}, x, y; i < K; ++i) {\n        cin >> x >> y;\n        // 関係する辺の重みを 0 に → 双対グラフにその辺を貼る\n        if (x > 1)\n            unite(coordinate_to_index(x - 1, y), coordinate_to_index(x - 1, y - 1));\n        if (y > 1)\n            unite(coordinate_to_index(x, y - 1), coordinate_to_index(x - 1, y - 1));\n        if (x < H)\n            unite(coordinate_to_index(x, y - 1), coordinate_to_index(x, y));\n        if (y < W)\n            unite(coordinate_to_index(x - 1, y), coordinate_to_index(x, y));\n    }\n\n    // 双対グラフで連結なら、最小カット = 最大フローの重みは 0\n    cout << (find(0) == find(1) ? \"No\" : \"Yes\") << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "cce0c308978892da7f518feebfb0f3f188c32e0f26e2702c716375bd2dae1e39",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13414",
+      "text": "公式解説の補足をします。\n本質は同じなので、コードは公式解説と同様です。\n{左の壁 または 下の壁} から {右の壁 または 上の壁} へと障害物マスを八近傍で辿っていけるのと、\n\\((1, 1)\\)\nから\n\\((H, W)\\)\nへと行く経路は存在するのは同値です。\n以下の例を参考にしてください。\n障害物を\n#\n、空きマスを\n.\nで表しています。\n\\((3, 1) \\rightarrow (2, 2) \\rightarrow (2, 3)\\)\nという経路が存在するので、\n\\((1, 1)\\)\nから\n\\((H, W)\\)\nへと行く経路は存在しません。\n{左の壁 /下の壁} から {右の壁 / 上の壁} へと障害物マスを八近傍で辿っていく経路は存在しないので、\n\\((1, 1)\\)\nから\n\\((H, W)\\)\nへと行く経路は存在します。\n\\(K+2\\)\n頂点のグラフを用意して、それぞれの頂点に 障害物、{左の壁 / 下の壁} 、{右の壁 / 上の壁} を対応させ、八近傍で隣接している場合にのみ頂点間に辺を張ることにします。\nどのような頂点間に辺があるかは障害物の座標を管理する連想配列を用いて\n\\(O(K \\log K)\\)\n程度で求めらるので、そのグラフにおいて {左の壁 / 下の壁} と対応する頂点と {右の壁 / 上の壁} と対応する頂点とが連結かを（BFS/DFS/Union-Findなどで）適切に判定すれば答えを求めることができます。\n実装例：\nhttps://atcoder.jp/contests/abc413/submissions/67363469",
+      "codes": [
+        "...\n.##\n#..",
+        "...#\n...#\n##.."
+      ],
+      "text_sha256": "cd7183d52a5a0fe3a215c61084eadfd98f6aae3ca898a0d109d61d3b5e8cf325",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_g.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13411",
+      "text": "障害物がないマスを、\n\\(\\mathrm{O}(H+K)\\)\n個の矩形領域に分解します。各列に対して連続している障害物がないマスの区間を極大に取るとよいです。\n矩形領域同士で隣り合っているペアの個数が\n\\(\\mathrm{O}(H+K)\\)\n個であることが証明できます。(横方向に連続していることはなく、縦方向に連続しているペアの個数は\n\\(i,i+1\\)\n行目に矩形領域が\n\\(k_i,k_{i+1}\\)\n個あったとき高々\n\\(k_i + k_{i+1}\\)\nペアしかないことから従います。または、このグラフの平面性から示してもよいでしょう。)\nよって、後はグラフを実際に構築して\n\\((1,1)\\)\nを含む矩形領域から\n\\((H,W)\\)\nを含む矩形領域に到達可能かを見ればよいです。計算量は\n\\(\\mathrm{O}(H+W+K)\\)\nです。",
+      "codes": [],
+      "text_sha256": "7da80a5ef1c6a01e4eb2b2ffeddc92aabd7ff8178d98d5c6581f1a6d2ab844d8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_g.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

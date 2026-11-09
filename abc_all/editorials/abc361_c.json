@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc361_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc361/editorial/10357",
+      "text": "\\(A\\)\nの要素のうち\n\\(K\\)\n個消すという操作は、\n\\(A\\)\nの要素のうち\n\\(N-K\\)\n個残して\n\\(B\\)\nとすると言い換えられます。\nこのもとで、 (\n\\(B\\)\nの最小値 ) となる要素をひとつ決め打つことを考えてみましょう。これを\n\\(A_x\\)\nとします。\n(\n\\(B\\)\nの最大値 )\n\\(-\\)\n(\n\\(B\\)\nの最小値 ) をなるべく小さくするには、\n\\(A\\)\nの要素であって\n\\(A_x\\)\n以上のものを小さい方から\n\\(N-K\\)\n個残すのが最善です。\nこのことは、\n\\(A\\)\nを昇順にソートして連続する\n\\(N-K\\)\n個を残すのが最善であると言い換えることができます。\nこのもとで、以下の解法が成立します。\nまず、\n\\(A_1 \\le A_2 \\le \\dots \\le A_N\\)\nを満たすように\n\\(A\\)\nをソートする。\nこのとき、\n\\(A_{l+(N-K)-1}-A_l\\)\nのうち\n\\(1 \\le l \\le K+1\\)\nでの最小値が答えである。\n\\(A_l\\)\nを (\n\\(B\\)\nの最小値 ) と決め打って、連続する\n\\(N-K\\)\n個の要素を残す場合に対応します。\nこれは、ソートと for ループを用いることで実装できます。全体で時間計算量\n\\(O(N \\log N)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,k;\n  cin >> n >> k;\n  vector<int> a(n);\n  for(auto &nx : a){cin >> nx;}\n\n  sort(a.begin(),a.end());\n  int res=2e9;\n  for(int i=0;i<=k;i++){\n    res=min(res,a[i+(n-k)-1]-a[i]);\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "a5be99558a4c2d9c9d57beb0b421e34a72b2630c9d160e28be9b36d7302b6b32",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc361/abc361_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

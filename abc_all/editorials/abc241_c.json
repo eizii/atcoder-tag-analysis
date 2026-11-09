@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc241_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc241/editorial/3471",
+      "text": "まず、黒く塗られたマスが縦、横、ななめのいずれかの向きに\n\\(6\\)\nつ以上連続しているとは、縦、横、ななめのいずれかの向きに連続した\n\\(6\\)\nマスであって、その\n\\(6\\)\nマスがすべて黒く塗られているものが存在するという事です。\nでは、あと高々\n\\(2\\)\nマス黒く塗ることで黒く塗られたマスが縦、横、ななめのいずれかの向きに\n\\(6\\)\nつ以上連続するようにできるとは、どのような状況でしょうか？これは、縦、横、ななめのいずれかの向きに連続した\n\\(6\\)\nマスであって、その\n\\(6\\)\nマスのうち\n\\(4\\)\nマス以上がすべて黒く塗られているものが存在するという事です。もしこのようなものが存在すればその\n\\(6\\)\nマスの黒く塗られていない残りの高々\n\\(2\\)\nマスを塗れば条件をみたすようにできます。逆に存在しないならば、どのように\n\\(2\\)\nマスを塗っても達成できません。これは条件をみたすマス目から高々\n\\(2\\)\n個の黒く塗られたマスを白く塗ることを考えれば明らかです。\nここで、それぞれの方向に\n\\(6\\)\nつ連続したマス目はいくつあるでしょうか？ 縦方向は各列\n\\((N-5)\\)\n個でマス目の中に全部で\n\\(N(N-5)\\)\n個、横方向も行と列を入れ替えて全部で\n\\(N(N-5)\\)\n個です。ななめ方向は\n\\(6\\)\n行\n\\(6\\)\n列の正方形の取り方で\n\\((N-5)^2\\)\n通り, 対角線の取り方で\n\\(2\\)\n通りです。よって、調べなければならないマスの数は全部合わせてのべ高々\n\\(6\\times\\bigl\\{ 2N(N-5)+2(N-5)^2  \\bigr\\}<24N^2\\)\n個程度です。\n\\(N\\leq 1000\\)\nですからこれを全探索しても十分高速です。よって、この問題を解く事が出来ました。\n実装時の注意としては、調べる範囲やマスの指定、また、マス目の外側を塗らないと\n\\(6\\)\n連続にできないパターン（下図のようなもの）に注意してください。\nc++による実装例 :\nちなみに、\n\\(6\\)\n（黒マスを連続させたい数）がより一般に\n\\(K\\)\nであった場合この解法では\n\\( O(KN^2)\\)\nがかかってしまいますが、それぞれの方向について\n#\nの数を累積和のような形で数えてあげることで\n\\(K\\)\nの値に依らず\n\\(O(N^2)\\)\nで解くことができます。",
+      "codes": [
+        "....#.\n...#..\n..#...\n.#....\n#.....\n......",
+        "#include <bits/stdc++.h>\nusing namespace std;\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\n\nint main(void) {\n\tint n, cnt;\n\tbool ans = false;\n\tvector<string>a;\n\tstring str;\n\n\tcin >> n;\n\tfor (int i = 0; i < n; i++){\n\t\tcin >> str;\n\t\ta.push_back(str);\n\t}\n\n\tfor (int i = 0; i < n; i++) {\n\t\tfor (int j = 0; j < n; j++) {\n\t\t\tif ((i + 5) < n) {\n\t\t\t\tcnt = 0;\n\t\t\t\tfor (int k = 0; k < 6; k++)if (a[i + k][j] == '#')cnt++;\n\t\t\t\tif (cnt >= 4)ans = true;\n\t\t\t}\n\t\t\tif ((j + 5) < n) {\n\t\t\t\tcnt = 0;\n\t\t\t\tfor (int k = 0; k < 6; k++)if (a[i][j + k] == '#')cnt++;\n\t\t\t\tif (cnt >= 4)ans = true;\n\t\t\t}\n\t\t\tif (((i + 5) < n) && ((j + 5) < n)) {\n\t\t\t\tcnt = 0;\n\t\t\t\tfor (int k = 0; k < 6; k++)if (a[i + k][j + k] == '#')cnt++;\n\t\t\t\tif (cnt >= 4)ans = true;\n\t\t\t}\n\t\t\tif ((0 <= (i - 5)) && ((j + 5) < n)) {\n\t\t\t\tcnt = 0;\n\t\t\t\tfor (int k = 0; k < 6; k++)if (a[i - k][j + k] == '#')cnt++;\n\t\t\t\tif (cnt >= 4)ans = true;\n\t\t\t}\n\t\t}\n\t}\n\n\tif (ans)cout << \"Yes\" << endl;\n\telse cout << \"No\" << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "ab4cf41a116beabb3c5b597416a5600b2d504e4e1a9884bc8e2827157cb3ee63",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc241/abc241_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc241/editorial/3490",
+      "text": "(これはユーザー解説です)\nこの問題は面倒な処理を上手に実装できるかがテーマとなっている問題です。\n問題文に実直に実装すると\n\\(4\\)\n方向 あるいは\n\\(8\\)\n方向への探索を実装することになり、少し面倒なことになってしまいます。\n実際、コンテスト中は実装が 100 行を超えてしまいデバッグに苦労した、という方も少なくなかったようです。\n実装の量を減らす方法として、\n同じ処理を共通する関数で処理する\nという方針があるので簡単に紹介します。\nまず、\n\\((x,y), (x+dx,y+dy), \\dots, (x + 5 \\times dx, y + 5 \\times dy)\\)\nを調べて、問題の条件を満たす時に True を返す関数を書いてみましょう。\nそして、これを\nfor\n文で回しましょう。\nなんとこれだけで完成です。\n提出\nこのように処理を共通化することで、似たような処理を何度も何度も書く必要が無くなり、デバッグも楽になります。\n実装が苦手な方やデバッグで詰まった方は、こうした方針をスムーズに選べるようになると実装の苦労が減ると思います。ぜひお試しください。",
+      "codes": [
+        "# (x,y) を始点として (dx,dy) 方向を調べる\n# 問題の条件を満たす列が見つかれば True\ndef calc(x, y, dx, dy):\n  count = 0\n  for i in range(6):\n    if not (0 <= min(x, y) and max(x, y) < N):\n      # マス目からはみ出したら失敗\n      return False\n    if S[x][y] == '#':\n      count += 1\n    x += dx\n    y += dy\n  # 4 個以上黒で塗られていれば True\n  return count >= 4",
+        "N = int(input())\nS = [input()for _ in range(N)]\n\nDx = [1, 0, 1, 1]\nDy = [0, 1, 1, -1]\nfor x in range(N):\n  for y in range(N):\n    for dx, dy in zip(Dx, Dy):\n      if calc(x, y, dx, dy):\n        print(\"Yes\")\n        exit()\nprint(\"No\")"
+      ],
+      "text_sha256": "610e13d88427f542939caf09e38979d2007bfb48047879272786dc6ef8009f68",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc241/abc241_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

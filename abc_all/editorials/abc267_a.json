@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc267_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc267/editorial/4702",
+      "text": "この問題は if 文や文字列の比較の練習問題となっています。\nC++ および Python での実装例を以下に示したので、参考にしてください。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    if (s == \"Monday\") {\n        cout << 5 << '\\n';\n    } else if (s == \"Tuesday\") {\n        cout << 4 << '\\n';\n    } else if (s == \"Wednesday\") {\n        cout << 3 << '\\n';\n    } else if (s == \"Thursday\") {\n        cout << 2 << '\\n';\n    } else {\n        cout << 1 << '\\n';\n    }\n    return 0;\n}",
+        "s = input()\nif s == \"Monday\":\n  print(5)\nelif s == \"Tuesday\":\n  print(4)\nelif s == \"Wednesday\":\n  print(3)\nelif s == \"Thursday\":\n  print(2)\nelse:\n  print(1)"
+      ],
+      "text_sha256": "e13c306ee589108b46ed1c25eaf874c72b47d32ea2c616bef5bb8973295abe3e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc267/abc267_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

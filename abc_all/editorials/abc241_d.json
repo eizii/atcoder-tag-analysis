@@ -1,0 +1,60 @@
+{
+  "problem_id": "abc241_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc241/editorial/3453",
+      "text": "クエリを先読みしない方法について\nmultiset\nを用いて、クエリを順番に処理していきます。\nmultiset を\n\\(S\\)\nとします。\n\\(c_i = 1\\)\nのとき\n\\(S\\)\nに\n\\(x\\)\nを挿入( insert )すればよいです。\n\\(c_i = 2\\)\nのとき\nS.upper_bound(x)\nによって\n\\(x\\)\nより大きい最初のイテレータを取得し、イテレータを\n\\(k\\)\n回デクリメントすればよいです。\n\\(c_i = 3\\)\nのとき\nS.lower_bound(x)\nによって\n\\(x\\)\nより小さくない最初のイテレータを取得し、イテレータを\n\\(k-1\\)\n回インクリメントすればよいです。\n\\(c_i = 2,3\\)\nにおいて、イテレータが\nS.begin()\nや\nS.end()\nを超えないように注意して実装しましょう。\n全体の計算量は\n\\(O(N \\log N)\\)\nです。\nクエリを先読みする方法について\nクエリを先読みして、\n\\(x\\)\nの値について座標圧縮しておきます。\n以下、座標圧縮後の値を\n\\(x'\\)\nで表します。\nFenwick Tree\nまたは\nSegtree\nを用います。(以下解説ではFenwick Treeを用いたとします。)\n\\(c_i = 1\\)\nのとき\n\\(x'\\)\nに\n\\(1\\)\n加算すればよいです。\n\\(c_i = 2\\)\nのとき\nFenwick Tree において\n\\([m,x']\\)\nの和が\n\\(k\\)\n以上か？\nという問題において、\n\\(m\\)\nについて二分探索すればよいです。\nなお、記号\n\\([a,b]\\)\nは閉区間を意味しています。\n\\(c_i = 3\\)\nのとき\nFenwick Tree において\n\\([x',m]\\)\nの和が\n\\(k\\)\n以上か？\nという問題において、\n\\(m\\)\nについて二分探索すればよいです。\n上記を素直に実装すると、全体の計算量は\n\\(O(N \\log^2 N)\\)\nになります。\nACL の Segtree の\nmax_right\nや\nmin_left\n関数を用いて\n\\(O(N \\log N)\\)\nにすることもできます。",
+      "codes": [],
+      "text_sha256": "3ae9b8be271aeb1a69a9e1cc8d8133e56d1fa103247f12598df484b61dd5275a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc241/abc241_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc241/editorial/3499",
+      "text": "クエリ平方分割でも解けます．\nまず，クエリで出てくる値を先読みしてソートしておきます．このとき，同じ値であれば，クエリ\n\\(3\\)\n,\n\\(1\\)\n,\n\\(2\\)\nの順に並ぶようにしておきます．（\n\\(3\\)\nからは右に，\n\\(2\\)\nからは左に向かって探索し，同じ値の出現を探索に含めるためです．具体的には，ソートするときのキー値をすべて\n\\(3\\)\n倍しておき，クエリ\n\\(3\\)\nであれば\n\\(-1\\)\n，クエリ\n\\(2\\)\nであれば\n\\(+1\\)\nするなどすればよいです．）\nソート済みの各位置から見て直近にあるクエリ\n\\(1\\)\n済みの位置（左右）を覚えておけば，クエリ\n\\(3\\)\n,\n\\(2\\)\nに対しては高々\n\\(5\\)\n回左右に移動することでクエリに正しく回答できます．\n毎回この情報を更新して管理するのは大変なので，クエリ\n\\(1\\)\nを\n\\(\\sqrt{Q}\\)\n回程度処理するごとに全体を最新状態に更新することにします．全体の更新は配列全体を\n\\(1\\)\n往復する程度で可能であり，更新自体が全体を通して高々\n\\(Q / \\sqrt{Q} = \\sqrt{Q}\\)\n回程度しか起こらないため，この操作にかかる計算量は全体を通して\n\\(\\mathrm{O}(Q\\sqrt{Q})\\)\nとなります．\n未反映のクエリは常に高々\n\\(\\sqrt{Q}\\)\n個程度なので，これらはクエリ\n\\(2\\)\n,\n\\(3\\)\nを処理するときに適宜処理することにします．具体的には，まず未反映のクエリを無視して解の候補（高々\n\\(5\\)\n個）を求め，それらと未反映のクエリによって追加される値を適宜比較することで，解の候補を更新します．クエリ\n\\(1\\)\n回あたりの比較の回数が\n\\(\\mathrm{O}(\\sqrt{Q})\\)\n回なので，こちらの操作にかかる計算量も全体を通して\n\\(\\mathrm{O}(Q \\sqrt{Q})\\)\nとなります．\nよって全体\n\\(\\mathrm{O}(Q \\sqrt{Q})\\)\n時間でこの問題が解け，隠れている定数倍を考慮して閾値を適切に設定することで実行時間制限に余裕を持って間に合わせることが可能です．\n実装例\n(C, 200 ms)",
+      "codes": [],
+      "text_sha256": "95f41bcdfd31644419af69e595be6e66c65e3b082581490982a672f2449e7c0b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc241/abc241_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc241/editorial/3486",
+      "text": "wavelet matrix で解けます。\nwavelet matrix は、整数列\n\\(a = (a_0, a_1, \\dots, a_{n-1})\\)\nに関して\n区間\n\\([l, r)\\)\nのうちで\n\\(x\\)\n以下のものの個数は？\n区間\n\\([l, r)\\)\nのうちで\n\\(x\\)\n未満のものの個数は？\n区間\n\\([l, r)\\)\nのうちで\n\\(x\\)\n以上のものの個数は？\n区間\n\\([l, r)\\)\nのうちで小さい方から\n\\(k\\)\n番目の値は？\nというクエリを\n\\(O(\\log(\\max_i a_i))\\)\n時間で処理できます。\n値の更新クエリは難しい（できなくはないが）ので、クエリを先読みし、追加クエリを全部処理したときの\n\\(A\\)\nを用意しておきます。\nその上で、\n\\([l, r) \\gets [0, 0)\\)\nで初期化しておきます。\n便宜上、現在の\n\\([l, r)\\)\nにおいて\n\\(x\\)\n以下のものの個数を\n\\(c_{\\le x}\\)\nと書きます。未満・以上についても同様に\n\\(c_{\\lt x}\\)\n,\n\\(c_{\\ge x}\\)\nと書きます。\n各クエリに対して以下のことをします。\nクエリ 2, 3 の\n\\(k\\)\nは 0-indexed に変換しておきます(i.e.\n\\(k\\gets k-1\\)\n) 。\nクエリ 1\n\\(r \\gets r+1\\)\nで更新。\nクエリ 2\n\\(c_{\\le x} \\le k\\)\nであれば\n-1\nを出力。\nそうでなければ、小さい方から\n\\((c_{\\le x}-k-1)\\)\n番目の値を出力。\nクエリ 3\n\\(c_{\\ge x} \\le k\\)\nであれば\n-1\nを出力。\nそうでなければ、小さい方から\n\\((c_{\\lt x} + k)\\)\n番目の値を出力。\n座標圧縮したりしなかったりすることで、\n\\(O(Q\\log(x))\\)\n時間や\n\\(O(Q\\log(Q))\\)\n時間で解けます。",
+      "codes": [],
+      "text_sha256": "0437c542abd31972fd41ebf1547a0e251fce639cf59427c923ce03f492081ec4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc241/abc241_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc241/editorial/5967",
+      "text": "g++ 拡張でも解けます。\n次の要件を満たすデータ構造があればこの問題を解くことができます。\n(多重)集合 $S$ に $X$ を追加する。\n$S$ のうち $X$ 以上となるのが何番目かを求める。\n$S$ のうち $X$ 番目の値を求める。\nこれらのクエリは、g++拡張によって使える\ntree\nというデータ構造を使うことで効率的に処理することができます。\nこのデータ構造はC++のsetの上位互換のような感覚で、(多重でない)集合において $k$ 番目の値を返すことや $k$ 未満の数が何個あるかを知ることができます。\n参考記事\n参考記事\nただし、今回の問題では追加する整数\n\\(x\\)\nが同じ値を含む可能性があるのでそのままではうまくいきません。そこで、追加する整数と追加するタイミングからなるpairを\n\\(S\\)\nに追加することで\n\\(S\\)\nが多重集合になることはなく、treeを使ってこの問題を解くことができます。\n実装例",
+      "codes": [],
+      "text_sha256": "cbec33873e05cea81d6d19fa4ddb14266e6c6110e01d0f0df7f2b58bc4e64bb3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc241/abc241_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc241/editorial/7444",
+      "text": "まずクエリを先読みして逆から処理することで、クエリ 1 を削除クエリに読み替えることができます。\nさらに数列\n\\(A\\)\nの代わりに座標圧縮をしたヒストグラム\n\\(C: [0, N[ \\rightarrow \\mathbb{N}\\)\nを管理しておくと、クエリ 1 は\n\\(C(x)\\)\nを\n\\(1\\)\n減少させるクエリになり、クエリ 2 はクエリの\n\\(x\\)\nからスタートして、\n\\(k\\)\nを超えないように\n\\(C(x)\\)\nを集計しつつ\n\\(x\\)\nを減少させていくクエリになります、クエリ 3 もクエリ 2 と同様です。\nクエリ 2, 3 では、\n\\(C\\)\nの非零点のみからなる dancing links と、零点最寄りの 非零点に誘導するための union find を使うと、\n\\(x\\)\nの変化回数が\n\\(k\\)\nで押さえられます。以上により\n\\(O(Q(\\log Q + k))\\)\nで解くことができました。\n提出:\nhttps://atcoder.jp/contests/abc241/submissions/46723997",
+      "codes": [],
+      "text_sha256": "aff917a87f003e7e0e0f7baaf5938c207bc74077cdae14571a550ed4c9881a5a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc241/abc241_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc241/editorial/3488",
+      "text": "Binary Trieでも解けます。\nBinary Trieは値に追加する数の最大値を\n\\(A\\)\nとして例えば以下のことが\n\\(O(\\rm{log}(A))\\)\nでできるデータ構造です\n値の追加\n値の削除\n\\(x\\)\n未満の値の個数の取得\n\\(k\\)\n番目に小さい値の取得\n今回の問題では、「\n\\(x\\)\n未満の値の個数の取得」で、求める値が全体で何番目に小さい値かが分かるので、「\n\\(k\\)\n番目に小さい値の取得」で求める値を得ることで、\n\\(k>5\\)\nの場合でも\n\\(O(Q\\rm{log}(x_{max}))\\)\nで答えを求めることができます。\n実装例(pypy)",
+      "codes": [],
+      "text_sha256": "7f9dc7439553788a59ca1ae914054d177c27effebdbe4bf0f0e636b8eaa59c65",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc241/abc241_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

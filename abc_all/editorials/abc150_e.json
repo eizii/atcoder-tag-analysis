@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc150_e",
+  "editorials": [
+    {
+      "text": "E: Change a Little Bit\nまず、S, T の組を1 つ固定して、f(S, T) がどうなるかを考えてみましょう。\n明らかにS, T で等しい要素を変更する必要はありません。ここで、p1, p2, · · · , pk がS, T で異\nなるところの添字であり、この順番に変更するとします。このときのコストはk ∗Cp1 + (k −1) ∗\nCp2 + · · · + 1 ∗Cpk であるので、C の小さい方から変更するのが最適です。これは、あるi があって\nCpi > Cpi+1 となるとき、この順番をswap してもコストが悪化しないことからわかります。\n以上の考察と対称性より、C は広義単調減少であると仮定します。全てのS̸ = T の組について、\nSi1̸ = Ti1, Si2̸ = Ti2 · · · Sik̸ = Tik(1 ≤i1 < i2 < · · · < ik ≤N) のとき∑k\nt=1 Cit ∗t 　を求めたい\nです。\n総和の寄与を分解して、各Ci が何回足されるかを考えます。これはj ≤i でSj̸ = Tj となるj の\n個数に依存します。これがk 箇所であるとすると、\n(i−1\nk−1\n)\n∗2k ∗2i−1−k ∗4N−i ∗Ci ∗k 寄与します。\n(各要素が異なる場合も等しい場合も、2 通りずつであることに注意してください)\nこれをk について足し合わせるとCi ∗4N−i ∗2i−1 ∗∑i\nk=1\n(i−1\nk−1\n)\n∗k ですが、総和の中身も各要素\nが何回カウントされるかと読み替えることで2i−1 ∗(i + 1) であることがわかります。\n以上より結局のところ答えは4N−1 ∗∑N\ni=1 Ci ∗(i + 1) と表せます。\nソート部分がボトルネックとなり、O(NlogN) でこの問題が解けました。\n",
+      "text_sha256": "f48a954f0d6bb065c89c5c2f0fca1fb1f6c234e20f8dc3c709480d56ab5606a2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc150/abc150_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

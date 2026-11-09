@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc318_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc318/editorial/7064",
+      "text": "この問題は while 文、 for 文のような繰り返し文をうまく使えるかを聞いています。while 文、for 文に関する情報を知りたい人は\nAPG4b の記事\nなどを参考にしてみてください。\nこの問題では、\n\\(M\\)\n日目、\n\\(M+P\\)\n日目、\n\\(\\ldots\\)\nの順にその日が\n\\(N\\)\n日目までかを確認し、\n\\(N\\)\n日目までであれば答えに\n\\(1\\)\nを加算する、そうでなければ処理を打ち切ることで答えを求められます。これは while 文によって実装できます。以下に C++ と Python での実装例を示します。\n実装例(C++)\n実装例(Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m, p;\n    cin >> n >> m >> p;\n    int res = 0;\n    while(m <= n) {\n        res++;\n        m += p;\n    }\n    cout << res << endl;\n}",
+        "n, m, p = map(int, input().split())\nres = 0\nwhile m <= n:\n    res += 1\n    m += p\nprint(res)"
+      ],
+      "text_sha256": "bb66e139636535e48159ed9f8e9eb6659a89f7dd6cdfb76472277789a2108c09",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc318/abc318_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc318/editorial/7065",
+      "text": "この問題は、\n\\(\\mathrm{O}(1)\\)\nで解くこともできます。この解説は、ABC-B 程度の難易度の内容となっているので、ステップアップされたい方は是非お読みください。\nなお、AtCoder の解説は数式を用いて書かれたものが多く、そのような解説を読むための練習として、この解説は数式による議論が多めとなっています。\n問題を数式で定式化してみましょう。答えは以下の条件をともに満たす整数\n\\(i\\)\nの個数です。\n\\(i \\geq 0\\)\n\\(M+i P \\leq N\\)\nこの条件を式変形すると、以下になります。\n\\(0 \\leq i  \\leq \\frac{N-M}{P}\\)\n\\(i\\)\nが整数であることから、\n\\( i  \\leq \\frac{N-M}{P}\\)\nという条件は\n\\( i  \\leq \\lfloor\\frac{N-M}{P}\\rfloor\\)\nと変形できます。ここで、実数\n\\(x\\)\nに対して\n\\(\\lfloor x \\rfloor\\)\nは、\n\\(x\\)\n以下の最大の整数と定義されます。\n以上より、\n\\(0\\)\n以上\n\\(\\lfloor\\frac{N-M}{P}\\rfloor\\)\n以下の整数の個数を求めればよいです。これは、\n\\(\\mathrm{max}(0, \\lfloor\\frac{N-M}{P}\\rfloor + 1)\\)\nと一致します。C++ で実装する場合には、負数の割り算に注意してください。\n実装例(Python)",
+      "codes": [
+        "n, m, p = map(int, input().split())\nprint(max(0, (n - m) // p + 1))"
+      ],
+      "text_sha256": "8dbc9f15d187dbf77f7c39f27bc5dfd8ca6dc61a4d0a11115bdc6ffc9312a34a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc318/abc318_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

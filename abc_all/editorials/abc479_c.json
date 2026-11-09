@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc479_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc479/editorial/27139",
+      "text": "体積の総和についての制約を考えないとき、各おかずについて弁当箱に詰める・詰めないの \\(2\\) 通りの選択肢があるため、全体として \\(2^N\\) 通りの選択肢があります。 この \\(2^N\\) 通りそれぞれについて、おいしさの総和および体積の総和を愚直に計算し、体積の総和が \\(W\\) 以下であるものについておいしさの総和の最大値を求めればよいです。 時間計算量は \\(O(N2^N)\\) となり、適切な実装のもと十分高速です。 実装方針としては、以下の実装例などのように bit 演算を使用する方法が主流な実装方法の一つであり、bit 全探索などと呼ばれることがあります。 実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n\tll n, w;\n\tcin >> n >> w;\n\tvector<ll> a(n), b(n);\n\tfor (int i = 0; i < n; i++) cin >> a[i] >> b[i];\n\tll ans = 0;\n\tfor (int i = 0; i < 1 << n; i++) {\n\t\tll value = 0, cost = 0;\n\t\tfor (int j = 0; j < n; j++) if (i >> j & 1) value += a[j], cost += b[j];\n\t\tif (cost <= w && ans < value) ans = value;\n\t}\n\tcout << ans << '\\n';\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "1a63b6b42d99c958be21ab2c0a001d596c3056c7b12ca92f69655ffd50853c18"
+    }
+  ],
+  "status": "available"
+}

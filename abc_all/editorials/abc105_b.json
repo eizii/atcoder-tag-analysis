@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc105_b",
+  "editorials": [
+    {
+      "text": "B: Cakes and Donuts\n解法1：全パターン探す\nケーキとドーナツ合計でN 円ということは, ケーキの個数は0 個以上N/4 個以下、ドーナツの個数は0\n個以上N/7 個以下ということが分かります。\nこの個数の範囲で、ケーキの個数A ドーナツの個数B を全探索すればよいです。4A + 7B = N となるよ\nうな(A, B) の組があれば”Yes”, なければ”No” を出力すればよいです。\n解法2：数学的に解く\n実は、答えが”No” となるのはN = 1, 2, 3, 5, 6, 9, 10, 13, 17 の場合のみですので、if 文を用いて場合分け\nして解くことができます。\n証明：まずN が21 以上の場合に、答えが必ず”Yes” であることを証明します。まず、N −0, N −7, N −\n14, N −21 (それぞれドーナツを0, 1, 2, 3 個買う場合) のうち4 の倍数であるものは必ず1 つあります。こ\nれを選べば、残りをすべてケーキにすることで適切に買うことができます。N が20 以下の場合は、「解法1」\nの方法で証明することもできますが、実際には表などを使って手計算でやる方が簡単です。\nサンプルコード(C++)\n\n解法1 : https://beta.atcoder.jp/contests/abc105/submissions/2990812\n解法2 : https://beta.atcoder.jp/contests/abc105/submissions/2991021\n",
+      "text_sha256": "0ddfe590504d6dd07f47b71ffa69f655863565b50dd902bf58da33c822e6a2ce",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc105/abc105_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

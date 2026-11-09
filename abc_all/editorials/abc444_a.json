@@ -1,0 +1,22 @@
+{
+  "problem_id": "abc444_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc444/editorial/15599",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n原案:admin\n\\(N\\)\nを文字列として受け取り、\n\\(1,2,3\\)\n文字目が同じかどうかを判定すればよいです。同じかどうかする方法は、if文を使って判定しても良いですし、ソートして最初と最後が同じか判定するといった法もあります。\n答えが\nYes\nとなる\n\\(N\\)\nの条件は\n\\(111\\)\nで割り切れることであり、これを判定して解くこともできます。\nc++の実装例1\nc++の実装例2\nPythonの実装例1\nPythonの実装例2\nPythonの実装例3\nPythonの実装例4",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    string N;cin>>N;\n    if(N[0]==N[1]&N[1]==N[2]){\n        cout<<\"Yes\"<<\"\\n\";\n    }\n    else{\n        cout<<\"No\"<<\"\\n\";\n    }\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N;cin>>N;\n    if(N%111==0){\n        cout<<\"Yes\"<<\"\\n\";\n    }\n    else{\n        cout<<\"No\"<<\"\\n\";\n    }\n}",
+        "N=input()\nif N[0]==N[1]==N[2]:\n    print(\"Yes\")\nelse:\n    print(\"No\")",
+        "N=sorted(input())\nif N[0]==N[2]:\n    print(\"Yes\")\nelse:\n    print(\"No\")",
+        "N=input()\nif min(N)==max(N):\n    print(\"Yes\")\nelse:\n    print(\"No\")",
+        "N=int(input())\nif N%111==0:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "30c2d76994d660e5393374e732cd9d2aae06d131bfbadef44b65d9ae11d04817",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc444/abc444_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

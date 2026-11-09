@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc335_e",
+  "source_url": "https://atcoder.jp/contests/abc335/tasks/abc335_e?lang=ja",
+  "statement": "問題文\nN\n頂点\nM\n辺の連結な無向グラフがあり、\ni\n番目の辺は頂点\nU_i\nと頂点\nV_i\nを双方向に結びます。\nまた、全ての頂点に整数が書いてあり、頂点\nv\nには整数\nA_v\nが書かれています。\n頂点\n1\nから頂点\nN\nへの単純なパス ( 同じ頂点を複数回通らないパス ) に対して、以下のように得点を定めます。\nパス上の頂点に書かれた整数を通った順に並べた数列 を\nS\nとする。\nS\nが広義単調増加になっていない場合、そのパスの得点は\n0\nである。\nそうでない場合、\nS\nに含まれる整数の種類数が得点となる。\n頂点\n1\nから頂点\nN\nへの全ての単純なパスのうち、最も得点が高いものを求めてその得点を出力してください。\nS\nが広義単調増加であるとは?\n長さ\nl\nの数列\nS=(S_1,S_2,\\dots,S_l)\nが広義単調増加であるとは、 全ての整数\n1 \\le i < l\nについて\nS_i \\le S_{i+1}\nを満たすことを言います。\n制約\n入力は全て整数\n2 \\le N \\le 2 \\times 10^5\nN-1 \\le M \\le 2 \\times 10^5\n1 \\le A_i \\le 2 \\times 10^5\nグラフは連結である\n1 \\le U_i < V_i \\le N\ni \\neq j\nなら\n(U_i,V_i) \\neq (U_j,V_j)",
+  "html_sha256": "0bda8cc3d77bc0d09519edc32ebf7ea03b87cf64d4c46910a6c75cac63bdec4d",
+  "extractor": "section_headings_v1"
+}

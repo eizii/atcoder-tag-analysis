@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc237_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc237/editorial/3318",
+      "text": "\\(B_{i,j} = A_{j,i}\\)\nが成り立つので、これを用いて行列\n\\(B\\)\nを求めることができます。\nfor文の\n\\(2\\)\n重ループが最初は難しく感じるかもしれないので、以下の実装例も参考にしてください。\nまた、転置行列を求めるライブラリが備わっているプログラミング言語もあるので、興味がある人は調べてみてください。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nsigned main(){\n    ll h,w;cin>>h>>w;\n    ll a[h][w];\n    for(ll i=0;i<=h-1;i++){\n        for(ll j=0;j<=w-1;j++){\n            cin>>a[i][j];\n        }\n    }\n\n    ll b[w][h];\n    for(ll i=0;i<=w-1;i++){\n        for(ll j=0;j<=h-1;j++){\n            b[i][j]=a[j][i];\n        }\n    }\n\n    for(ll i=0;i<=w-1;i++){\n        for(ll j=0;j<=h-1;j++){\n            cout<<b[i][j];\n            if(j<h-1)cout<<\" \";\n            else cout<<endl;\n        }\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "38c74b4714cb575e79ac31270e3cece3779db254f112391f2b1f59f16a081ba9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc237/abc237_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc237/editorial/3343",
+      "text": "numpyの行列入出力（\nloadtxt, savetxt\n）と行列転置（\nA.T\n）機能を用いるPythonコードです",
+      "codes": [
+        "import numpy as np\nimport sys\n\nA = np.loadtxt(sys.stdin, dtype=int, skiprows=1, ndmin=2)\nnp.savetxt(sys.stdout, A.T, fmt='%d')"
+      ],
+      "text_sha256": "c87e6cc607fdd4a12dbc9550d0b7c96c2322e9c00078a0425d6f93595a8be252",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc237/abc237_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

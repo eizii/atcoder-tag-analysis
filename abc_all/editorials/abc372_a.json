@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc372_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc372/editorial/10970",
+      "text": "以下の順に操作を行うと、\n\\(T\\)\nが求める文字列となります。\n\\(T\\)\nを空文字列とする。\n\\(S\\)\nの文字を順番に見ていき、\n.\nでないなら\n\\(T\\)\nの末尾に連結する、という操作を繰り返す。\n例えば\n\\(S=\\)\na.c.\nなら以下のように\n\\(T\\)\nが生成されます：\n\\(T\\)\nを空文字列とする。\n\\(S\\)\nの\n\\(1\\)\n文字目は\na\nなので、\n\\(T\\)\nの末尾に連結する。\n\\(T=\\)\na\nになる。\n\\(S\\)\nの\n\\(2\\)\n文字目は\n.\nなので、何もしない。\n\\(T=\\)\na\nのままである。\n\\(S\\)\nの\n\\(3\\)\n文字目は\nc\nなので、\n\\(T\\)\nの末尾に連結する。\n\\(T=\\)\nac\nになる。\n\\(S\\)\nの\n\\(4\\)\n文字目は\n.\nなので、何もしない。\n\\(T=\\)\nac\nのままである。\n最終的に\n\\(T=\\)\nac\nとなり、これが答えとなる。\nこの手順をプログラムで実装した例は、以下に記載しています。\n実装例(Python3)\n実装例(C++)\nまた、プログラミング言語によっては for 文を使わずにより簡潔に書くことができます。\n実装例(Python3)\n実装例(C++)",
+      "codes": [
+        "S = input()\nT = \"\"\nfor c in S:\n  if c != '.':\n    T += c\nprint(T)",
+        "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string s;\n    cin >> s;\n    string t;\n    for (char c : s) {\n        if (c != '.') {\n            t += c;\n        }\n    }\n    cout << t << endl;\n    return 0;\n}",
+        "print(input().replace('.', ''))",
+        "#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\nint main() {\n    string s;\n    cin >> s;\n    s.erase(remove(s.begin(), s.end(), '.'), s.end());\n    cout << s << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "0bea62aa8c77efb693ed913ddecb59385910b121ac805378986f15fc1bd2bc8f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc372/abc372_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

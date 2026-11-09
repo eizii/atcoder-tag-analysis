@@ -1,0 +1,22 @@
+{
+  "problem_id": "abc240_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc240/editorial/3419",
+      "text": "解法 1\n\\(a\\)\nに現れる整数を順番に見ていき、「それが初めて登場した整数なら答えに\n\\(1\\)\nを足す」ことを繰り返せばよいです。\n\\(a_i\\)\nが初めて登場する整数であるための条件は、全ての\n\\(j < i\\)\nに対し\n\\(a_j \\neq a_i\\)\nであることです。これを for 文などを用いて実装することで正解することができます。\n最悪計算量は\n\\(\\Theta (N^2)\\)\nです。\n実装例 (C++) :\n実装例 (Python) :\n解法 2\n（重複のない）集合を管理するデータ構造を用いて解くことができます。C++ では\nstd::set\n、Python では\nset\nなどを用いることができます。詳しい使い方は公式リファレンス（\nC++\n、\nPython\n）を参照してください。\n最悪計算量は\n\\(\\Theta (N \\log N)\\)\nです。\n実装例  (C++) :\n実装例 (Python) :\n解法 3\n\\(a\\)\nを昇順に並べ替えると、等しい要素は隣り合わせになります。\n並べ替えた後の数列において、\n\\(a_i \\neq a_{i + 1}\\)\nとなる\n\\(i\\)\nの個数に\n\\(1\\)\nを足した値が答えとなります。\n最悪計算量は\n\\(\\Theta (N \\log N)\\)\nです。\n実装例  (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int n;\n  cin >> n;\n  vector<int> a(n);\n  for (int& x : a) {\n    cin >> x;\n  }\n  int ans = 0;\n  for (int i = 0; i < n; ++i) {\n    bool appeared = false;\n    for (int j = 0; j < i; ++j) {\n      if (a[i] == a[j]) {\n        appeared = true;\n      }\n    }\n    if (!appeared) {\n      ans += 1;\n    }\n  }\n  cout << ans << '\\n';\n}",
+        "n = int(input())\na = list(map(int, input().split()))\nans = 0\nfor i in range(n):\n  appeared = False;\n  for j in range(i):\n    if a[i] == a[j]:\n      appeared = True\n  if not appeared:\n    ans += 1\nprint(ans)",
+        "#include <iostream>\n#include <set>\nusing namespace std;\n\nint main() {\n  int n;\n  cin >> n;\n  set<int> a;\n  for (int i = 0; i < n; ++i) {\n    int x;\n    cin >> x;\n    a.insert(x);\n  }\n  cout << a.size() << '\\n';\n}",
+        "n = int(input())\nprint(len(set(map(int, input().split()))))",
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <iterator>\nusing namespace std;\n\nint main() {\n  int n;\n  cin >> n;\n  vector<int> a(n);\n  for (int& x : a) {\n    cin >> x;\n  }\n  sort(begin(a), end(a));\n  int ans = 1;\n  for (int i = 0; i < n - 1; ++i) {\n    if (a[i] != a[i + 1]) {\n      ans += 1;\n    }\n  }\n  cout << ans << '\\n';\n}",
+        "n = int(input())\na = list(map(int, input().split()))\na.sort()\nans = 1\nfor i in range(n - 1):\n  if a[i] != a[i + 1]:\n    ans += 1\nprint(ans)"
+      ],
+      "text_sha256": "caf111e480cb118d4a1ddac72d5d43712f3fa689e4279862d0b005a8431c3df9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc240/abc240_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

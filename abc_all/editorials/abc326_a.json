@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc326_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc326/editorial/7499",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n高橋君が\n\\(X\\)\n階にいるとき、階段で移動するのは移動先が\n\\(X-3\\)\n階から\n\\(X+2\\)\n階までのときです。よって、\n\\(Y\\)\nがこの範囲にあるかどうかを if 文を用いて判定すればよいです。\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "X,Y = map(int,input().split())\nif X-3<=Y<=X+2:\n  print(\"Yes\")\nelse:\n  print(\"No\")",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int x,y;\n  cin >> x >> y;\n  if(x-3<=y && y<=x+2){\n    cout << \"Yes\" << endl;\n  }else{\n    cout << \"No\" << endl;\n  }\n}"
+      ],
+      "text_sha256": "1093c0ed2a4a8576066c7b74de6ec00ff2410c00d7bea3709843489e4dc464e8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc326/abc326_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

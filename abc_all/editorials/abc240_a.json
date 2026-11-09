@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc240_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc240/editorial/3420",
+      "text": "\\(a\\)\n番の点と\n\\(b\\)\n番の点が線で直接結ばれていることは、\n\\(b-a = 1\\)\nまたは\n\\(b-a = 9\\)\nが成り立つことと同値です。\nよって、以下を行うプログラムを作成すればこの問題に正解できます。\nまず、標準入力から\n\\(a\\)\nと\n\\(b\\)\nを読み取る。\n次に、\n\\(b-a = 1\\)\nまたは\n\\(b-a=9\\)\nが成り立つかを判定し、\n成り立つならば\nYes\nを 標準出力に出力する。\n成り立たないならば\nNo\nを標準出力に出力する。\nプログラム上で入出力を実現する方法は使用するプログラミング言語に依存するため、使用する言語の仕様を把握しておきましょう。\n「\n\\(b-a = 1\\)\nまたは\n\\(b-a=9\\)\nが成り立つかを判定」するには、プログラミング言語の標準的な機能である条件分岐（if文など）を用いることができます。\n以下に、C++言語による正解例を記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(void)\n{\n  int a, b;\n  cin >> a >> b;\n  \n  if(b-a == 1 || b-a == 9) cout << \"Yes\" << endl;\n  else cout << \"No\" << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "3f28b29b879bcefc83eb8210776d4c08a5abd227fc1a5d1e005d2d960a8f966f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc240/abc240_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

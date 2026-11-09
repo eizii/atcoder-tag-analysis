@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc470_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc470/editorial/23856",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは practice contest の問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。 また、プログラミングコンテストの問題に慣れていない方は、 AtCoder Beginners Selection の問題をいくつか解いてみることをおすすめします。 for 文を用いて \\(N\\) 行出力すれば良いです。 問題文の通りに、 \\(k=1,2,\\ldots,N\\) の順に \\(k\\) が \\(3\\) の倍数ならば Fizz を、 \\(3\\) の倍数でないならば \\(k\\) を出力すれば良いです。 実装例(Python3)",
+      "codes": [
+        "n = int(input())\nfor k in range(1, n + 1):\n    if k % 3 == 0:\n        print(\"Fizz\")\n    else:\n        print(k)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "22c5d03babda594ff32ddb37c9e6247cc83019eb00e428bbb19268b9e2174cad"
+    }
+  ],
+  "status": "available"
+}

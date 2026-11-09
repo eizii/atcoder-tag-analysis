@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc390_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc390/editorial/11968",
+      "text": "黒板にいくつかの整数が書かれている場合に、操作回数を最小とするために\n\\(l,r\\)\nは\n\\(r-l\\)\nが極大になるように選べば良いです。つまり、\n\\(l-1\\)\nは黒板に書かれていない。\n\\(l\\)\n以上\n\\(r\\)\n以下の整数はどれも黒板に書かれている。\n\\(r+1\\)\nは黒板に書かれていない。\nこれらの\n\\(3\\)\nつの条件を満たす\n\\((l,r)\\)\nを選び、順番に黒板から消していけば良いです。\nこの事実を踏まえて問題を解いていきます。\n整数\n\\(1\\le c\\le N\\)\nを固定し、\n\\(f(L,R)\\)\nの計算過程で\n\\(l=c\\)\nとする操作が現れるような整数の組\n\\((L,R)\\)\nの個数を\n\\(g(c)\\)\nとします。すると、求める答えは\n\\(\\displaystyle \\sum_{c=1}^Ng(c)\\)\nと一致することが分かります。以降は各\n\\(c\\)\nに対し\n\\(g(c)\\)\nを求めることを考えます。\n\\(l=c\\)\nとする操作をする条件は、上の考察により\n\\(S=\\{A_L,A_{L+1},\\ldots,A_R\\}\\)\nに対し以下の\n\\(2\\)\nつを共に満たすことであることが分かります。\n\\(c-1\\notin S\\)\n\\(c\\in S\\)\nよって、\n\\(g(c)\\)\nは\n\\(c-1\\notin S\\)\nを満たす\n\\((L,R)\\)\nの組の個数から\n\\(c-1\\notin S\\)\nかつ\n\\(c\\notin S\\)\nを満たす\n\\((L,R)\\)\nの組の個数を引いた値と一致します。\nここで、\n\\(G_c\\)\nを\n\\(A_i=c\\)\nを満たす\n\\(i\\)\nの集合とすると、\n\\(c\\notin S\\)\nは\n\\(L\\)\n以上\n\\(R\\)\n以下の整数が全て\n\\(G_c\\)\nに属さないことと同値です。この条件を満たす\n\\((L,R)\\)\nの組は\n\\(G_c=\\{X_1,X_2,\\ldots,X_{|G_c|}\\}\\)\n\\((X_1<X_2<\\ldots<X_{|G_c|}),\\)\n\\(X_0=0,\\)\n\\(X_{|G_c|+1}=N+1\\)\nとして\n\\(\\displaystyle \\sum_{k=0}^{|G_c|}\\frac{(X_{k+1}-X_k)(X_{k+1}-X_k-1)}2\\)\n通りです。\n\\(c-1\\notin S\\)\nかつ\n\\(c\\notin S\\)\nを満たす\n\\((L,R)\\)\nの組の個数も同様にして求めることができます。\nこれらの計算をすることで各\n\\(c\\)\nに対する\n\\(g(c)\\)\nの値が求まるので、それらの総和を計算することで答えを求めることができます。計算量は\n\\(O(N)\\)\nです。\nなお、以下では可視性を上げるために\n\\(O(N\\log N)\\)\n時間の実装を載せています。\n実装例(Python3)",
+      "codes": [
+        "n = int(input())\na = list(map(int, input().split()))\ng = [[] for i in range(n + 1)]\nfor i in range(n):\n    g[a[i] - 1].append(i)\n\ndef f(x):\n    res = 0\n    for i in range(1, len(x)):\n        c = x[i] - x[i - 1]\n        res += c * (c - 1) // 2\n    return res\n\nans = 0\nfor i in range(1, n + 1):\n    ans += f([-1] + g[i] + [n])\n    ans -= f([-1] + sorted(g[i - 1] + g[i]) + [n])\nprint(ans)"
+      ],
+      "text_sha256": "400d43919fce945a46aa6ee07d490dad71d84531a32b69dfae9e9210dae35b51",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc390/abc390_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc390/editorial/12056",
+      "text": "\\(L<R\\)\nを満たす\n\\((L,R)\\)\nについて、\n\\(f(L,R)\\)\nを\n\\(f(L,R-1)\\)\nとの差分で表すことを考えます。すると、\n\\(\\begin{aligned}f(L,R)=\\begin{cases}f(L,R-1)-1&(A_{L},\\ldots,A_{R-1}にA_R-1とA_R+1がともに含まれ、かつA_Rは含まれない)\\\\f(L,R-1)+1&(A_L,\\ldots,A_{R-1}にA_R-1,A_R,A_R+1がどれも含まれない)\\\\f(L,R-1)&(それ以外)\\end{cases}\\end{aligned}\\)\nとなります。\n「\n\\(A_{L},\\ldots,A_{R-1}\\)\nに\n\\(A_R-1\\)\nと\n\\(A_R+1\\)\nがともに含まれ、かつ\n\\(A_R\\)\nは含まれない」ような\n\\(L(1\\leq L<R)\\)\nの個数を\n\\(g_1(R)\\)\n、「\n\\(A_L,\\ldots,A_{R-1}\\)\nに\n\\(A_R-1,A_R,A_R+1\\)\nがどれも含まれない」ような\n\\(L(1\\leq L<R)\\)\nの個数を\n\\(g_2(R)\\)\nとし、また\n\\(h(R):=\\sum_{L=1}^{R}f(L,R)\\)\nとします。すると、先の式より、\n\\(h(R)=\\begin{aligned}\\sum_{L=1}^{R-1}f(L,R)+f(R,R)=h(R-1)-g_1(R)+g_2(R)+1\\end{aligned}\\)\nが成り立ちます。\n求める答えは\n\\(\\sum_{R=1}^N h(R)\\)\nなので、各\n\\(R\\)\nに対して\n\\(g_1(R),g_2(R)\\)\nの値が求められればよいです。\nここで、\n\\(P_R(a)\\)\nを、「\n\\(L<R\\)\nかつ\n\\(A_L=a\\)\nを満たす最大の\n\\(L\\)\n（存在しない場合は\n\\(0\\)\nとする）」として定めます。すると、\n\\(\\begin{aligned}g_1(R)=\\max\\{\\min\\{P_R(A_R-1),P_R(A_R+1)\\}-P_R(A_R),0\\}\\end{aligned}\\\\g_2(R)=R-1-\\max\\{P_R(A_R-1),P_R(A_R),P_R(A_R+1)\\}\\)\nが成り立ちます。\n\\(P_R\\)\nはin-placeに更新できるため、\n\\(R=1,2,\\ldots,N\\)\nの順に\n\\(g_1(R),g_2(R),h(R)\\)\nを求めていけば、時間計算量\n\\(O(N)\\)\nでこの問題を解くことができます。\n実装例（Python）",
+      "codes": [],
+      "text_sha256": "19f80067c4398ac5037cf87ed3ca72193dd850c196e4d1287c192c3dbb736490",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc390/abc390_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc297_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc297/editorial/6159",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\n入力を vector と for 文で受け取り、全ての\n\\(i(1 \\le i \\le N-1)\\)\nに対して、\n\\(T_{i+1} - T_i \\le D\\)\nを満たすかどうか見て、そのような\n\\(i\\)\nがあれば最小のものを出力すればよいです。\nそのような\n\\(i\\)\nが\n\\(1\\)\n個もなかった場合に\n-1\nを出力する必要があることに注意してください。\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main() {\n  int n,d;\n  cin>>n>>d;\n  vector<int> t(n);\n  for(int i=0;i<n;i++) cin>>t[i];\n  for(int i=0;i+1<n;i++){\n    if(t[i+1]-t[i]<=d){\n      cout<<t[i+1]<<endl;\n      return 0;\n    }\n  }\n  cout<<-1<<endl;\n}"
+      ],
+      "text_sha256": "1971930b328ad95c353741933b8d2e757a1eef18691775cfc60a197c7762c226",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc297/abc297_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

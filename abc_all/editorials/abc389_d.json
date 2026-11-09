@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc389_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc389/editorial/11932",
+      "text": "正方形の中心が格子点となるように座標を取り、円の中心を\n\\((0,0)\\)\nとします。\n条件を満たす\n\\((i,j)\\)\nのうち、\n\\(i=0\\)\nまたは\n\\(j=0\\)\nを満たすものの個数は簡単に分かり、原点かそうでないかで場合分けをすると\n\\(4(R-1)+1\\)\n個です。\n次に\n\\(i\\neq 0\\)\nかつ\n\\(j\\neq 0\\)\nを満たすものの個数を求めましょう。対称性より\n\\(i>0\\)\nかつ\n\\(j>0\\)\nを満たすものの個数を求め最後に\n\\(4\\)\n倍すればよいです。\n\\(i\\)\nを\n\\(1,2,\\ldots,R-1\\)\nの順に全探索しましょう。このとき、\n\\((i+0.5)^2+(j+0.5)^2\\leq R^2\\)\nを満たす整数\n\\(j\\)\nの最大値は単調に減少します。\nこのことから、\n\\(j\\)\nの最大値を尺取り法で管理することで、時間計算量\n\\(\\mathrm{O}(R)\\)\nの解法が得られます。尺取り法の実装の詳細については実装例も参考にしてください。\nまた、本問題では小数を用いて計算しても問題ありませんが、一般には誤差の影響がありうるため、整数のみで計算できる場合はそのように変形した方が良い場合も多いです。\n例えば本問題では、\n\\((i+0.5)^2+(j+0.5)^2\\leq R^2\\)\nの両辺を\n\\(4\\)\n倍して\n\\((2i+1)^2+(2j+1)^2\\leq 4R^2\\)\nと同値変形することで、全ての計算を整数で行うことができます。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n    ll r;\n    cin >> r;\n    auto in = [&](ll a, ll b) {\n        return (2 * a + 1) * (2 * a + 1) + (2 * b + 1) * (2 * b + 1) <= 4 * r * r;\n    };\n    ll cnt = 0;\n    ll up = r - 1;\n    ll res = (r - 1) * 4 + 1;\n    for(ll x = 1; in(x, 1); x++) {\n        while(!in(x, up)) --up;\n        cnt += up;\n    }\n    res += cnt * 4;\n    cout << res << endl;\n}"
+      ],
+      "text_sha256": "f0b5de6b85d9bebca0c9755761f25002de278a0eb0820d467ddba82e198cf88c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc389/abc389_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,50 @@
+{
+  "problem_id": "abc441_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc441/editorial/15100",
+      "text": "ある単語 \\(w\\) が高橋語の単語である可能性があるということは、次の条件が成り立つということです。\n\\(w\\) に含まれるすべての文字について、その文字は \\(S\\) に含まれている。\nまずはこの条件を判定するプログラムを書くことを考えます。\nある文字 \\(c\\) が \\(S\\) に含まれているかは、例えば for 文などを使って \\(S\\) の文字を一文字ずつ確認することで判定することができます。\nいくつかのプログラミング言語には、文字列などにある文字が含まれているかを少ない記述量で判定できる機能があります。\nranges::contains\n関数を使うには、\n<algorithm>\nヘッダをインクルードする必要があります。\nこのような判定を \\(w\\) に含まれる各文字に対して行い、すべての文字が \\(S\\) に含まれるかを判定すればよいです。\nこの処理は、例えば for 文などを使って判定することができます。\nいくつかのプログラミング言語には、すべての要素が条件を満たしているかを少ない記述量で判定できる機能があります。\nranges::all_of\n関数を使うには、\n<algorithm>\nヘッダをインクルードする必要があります。\n青木語の単語である可能性があるかも同様のプログラムで確認することができます。\nこれらの判定プログラムを書くことができれば、入力で与えられるすべての単語に対して上記の判定を行い、それぞれの結果に応じて適切な出力ができればよいです。\n例えば、次のような場合分けを行うことで正しい出力が得られます。\n高橋語の単語である可能性がなければ、青木語の単語\n青木語の単語である可能性がなければ、高橋語の単語\nどちらの可能性もあれば、確定しない\n判定部分の実装が長くなる場合は、その部分を関数として切り分けると見通しがよくなる場合があります。\n実装例は以下のようになります。\n判定の実装をネストされた for 文で行い関数に切り分けたものと、言語機能を使って判定を少ない記述量で行ったものの両方の実装例があります。",
+      "codes": [
+        "bool included = false; // false にしておく\nfor (int i = 0; i < N; ++i) {\n    if (S[i] == c) { // S の中に c があったら\n        included = true; // 答えを true にする\n    }\n}",
+        "included = False # False にしておく\nfor s in S:\n    if c == s: # S の中に c があったら\n        included = True # 答えを True にする",
+        "ranges::contains(S, c); // S の中に c があったら true, なければ false",
+        "c in S # S の中に c があったら True, なければ False",
+        "bool all_in_S = true; // true にしておく\nint L = w.size();\nfor (int i = 0; i < L; ++i) {\n    if (!ranges::contains(S, w[i])) { // S に w[i] が含まれていなければ\n        all_in_S = false; // 答えを false にする\n    }\n}",
+        "all_in_S = True # True にしておく\nfor c in w:\n    if not c in S: # S に c が含まれていなければ\n        all_in_S = False # 答えを False にする",
+        "ranges::all_of(w, [&S](char c) {\n    return ranges::contains(S, c); // S の中に c があったら true, なければ false\n}); // w の文字がすべて S に含まれていれば true, そうでなければ false",
+        "all(c in S for c in w) # w の文字がすべて S に含まれていれば True, そうでなければ False",
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint N;\nstring S;\nbool is_takahashi_go_word(string w) { // 高橋語の単語である可能性があるか判定する関数\n    bool is_takahashi_go = true;\n    int L = w.size();\n    for (int i = 0; i < L; ++i) { // w のそれぞれの文字について、\n        // S に含まれているか判定する\n        bool included = false;\n        for (int j = 0; j < N; ++j) { // S のそれぞれの文字を見て、\n            if (S[j] == w[i]) { // 文字が等しければ\n                included = true; // 含まれている\n            }\n        }\n\n        if (!included) { // 今見ている w の文字が S に含まれていなければ\n            is_takahashi_go = false; // 高橋語の単語ではない\n        }\n    }\n    return is_takahashi_go;\n}\n\n// 青木語についても同様\nint M;\nstring T;\nbool is_aoki_go_word(string w) {\n    bool is_aoki_go = true;\n    int L = w.size();\n    for (int i = 0; i < L; ++i) {\n        bool included = false;\n        for (int j = 0; j < M; ++j) {\n            if (T[j] == w[i]) {\n                included = true;\n            }\n        }\n\n        if (!included) {\n            is_aoki_go = false;\n        }\n    }\n    return is_aoki_go;\n}\n\nint main() {\n    cin >> N >> M >> S >> T;\n\n    int Q;\n    cin >> Q;\n    for (int i = 0; i < Q; ++i) {\n        string w;\n        cin >> w;\n\n        bool is_takahashi_go = is_takahashi_go_word(w);\n        bool is_aoki_go = is_aoki_go_word(w);\n\n        if (!is_takahashi_go) { // 高橋語の単語である可能性がないなら\n            cout << \"Aoki\" << endl; // 青木語の単語\n        } else if (!is_aoki_go) { // 青木語の単語である可能性がないなら\n            cout << \"Takahashi\" << endl; // 高橋語の単語\n        } else { //どちらの可能性もあるなら\n            cout << \"Unknown\" << endl; // 確定しない\n        }\n    }\n\n    return 0;\n}",
+        "N, M = map(int, input().split())\nS = input()\nT = input()\n\ndef is_takahashi_go_word(w): # 高橋語の単語である可能性があるか判定する関数\n    is_takahashi_go = True\n    for c in w: # w のそれぞれの文字について、\n        # S に含まれているか判定する\n        included = False\n        for s in S: # S のそれぞれの文字を見て、\n            if c == s: # 文字が等しければ\n                included = True # 含まれている\n\n        if not included: #今見ている w の文字が S に含まれていなければ\n            is_takahashi_go = False # 高橋語の単語ではない\n    return is_takahashi_go\n\n# 青木語についても同様\ndef is_aoki_go_word(w):\n    is_aoki_go = True\n    for c in w:\n        included = False\n        for t in T:\n            if c == t:\n                included = True\n\n        if not included:\n            is_aoki_go = False\n    return is_aoki_go\n\nQ = int(input())\n\nfor i in range(Q):\n    w = input()\n    \n    is_takahashi_go = is_takahashi_go_word(w)\n    is_aoki_go = is_aoki_go_word(w)\n\n    if not is_takahashi_go: # 高橋語の単語である可能性がないなら\n        print('Aoki') # 青木語の単語\n    elif not is_aoki_go: # 青木語の単語である可能性がないなら\n        print('Takahashi') # 高橋語の単語\n    else: # どちらの可能性もあるなら\n        print('Unknown') # 確定しない",
+        "#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    int N, M;\n    string S, T;\n    cin >> N >> M >> S >> T;\n\n    int Q;\n    cin >> Q;\n    for (int i = 0; i < Q; ++i) {\n        string w;\n        cin >> w;\n\n        if (!ranges::all_of(w, [&S](char c) { return ranges::contains(S, c); })) { // 高橋語の単語である可能性がないなら\n            cout << \"Aoki\" << endl; // 青木語の単語\n        } else if (!ranges::all_of(w, [&T](char c) { return ranges::contains(T, c); })) { // 青木語の単語である可能性がないなら\n            cout << \"Takahashi\" << endl; // 高橋語の単語\n        } else { //どちらの可能性もあるなら\n            cout << \"Unknown\" << endl; // 確定しない\n        }\n    }\n\n    return 0;\n}",
+        "N, M = map(int, input().split())\nS = input()\nT = input()\n\nQ = int(input())\n\nfor i in range(Q):\n    w = input()\n\n    if not all(c in S for c in w): # 高橋語の単語である可能性がないなら\n        print('Aoki') # 青木語の単語\n    elif not all(c in T for c in w): # 青木語の単語である可能性がないなら\n        print('Takahashi') # 高橋語の単語\n    else: # どちらの可能性もあるなら\n        print('Unknown') # 確定しない"
+      ],
+      "text_sha256": "16918f54a39773c91704a408342e3a5830baf4897097264d516b983eaabbe18f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc441/abc441_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc441/editorial/15113",
+      "text": "この問題は正規表現を用いて解くことができます。\n\\(S\\)\nの\n\\(i\\)\n文字目を\n\\(S_i\\)\nと表します。\n「単語\n\\(w\\)\nが高橋語の単語である」という条件は、「辞書順にソートされた\n\\(w\\)\nが、正規表現 “\n\\(S_1\\)\n*\n\\(\\ldots S_N\\)\n*\n” とマッチする」と言い換えることができます。\n青木語と\n\\(T\\)\nに対しても同様です。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main(){\n    int q;\n    string s, x[2];\n    cin >> q >> q;\n    for(int i=0;i<2;++i){\n        cin >> s;\n        for(char c:s){\n            x[i] += c;\n            x[i] += \"*\";\n        }\n    }\n    regex r[2] = {regex(x[0]), regex(x[1])};\n    cin >> q;\n    while(q--){\n        cin >> s;\n        sort(s.begin(), s.end());\n        if(regex_match(s, r[0])){\n            if(regex_match(s, r[1])) cout << \"Unknown\\n\";\n            else cout << \"Takahashi\\n\";\n        }else cout << \"Aoki\\n\";\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "2a38fec5ef2dab4598756cf70aeee10fbf709a7f7ca476dce8007f7b0e29b62d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc441/abc441_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc441/editorial/15105",
+      "text": "公式解説では、アルファベットサイズ \\(\\sigma\\) に対して時間計算量 \\(\\displaystyle O\\!\\left(\\sigma\\sum _ {i=1} ^ Q|w _ i|\\right)\\) のアルゴリズムを解説しました。\nこの解説では、アルファベットサイズ \\(\\sigma\\) がワードサイズの定数倍以下であることを仮定して時間計算量 \\(\\displaystyle O\\!\\left(\\sigma+\\sum _ {i=1} ^ Q|w _ i|\\right)\\) となるアルゴリズムについて話します。\n高橋語で使われるが青木語では使われない文字の集合を \\(C _ {\\mathrm{takahashi}}\\) 、青木語で使われるが高橋語では使われない文字の集合を \\(C _ {\\mathrm{aoki}}\\) とします。\nこの \\(2\\) つの集合には共通部分がないことに注意してください。\n\\(C _ {\\mathrm{takahashi}}\\) に含まれている文字が \\(w _ i\\) に含まれているとき、かつそのときに限り \\(w _ i\\) は高橋語の単語であることが確定します。青木語についても同様です。\n文字に \\(0,1,\\ldots,\\sigma-1\\) の番号 \\(\\operatorname{ord}\\) をつけ、文字の集合 \\(C\\) を \\(\\sigma\\) bit の整数 \\(\\displaystyle\\mathrm{mask} _ C=\\sum _ {c\\in C}2 ^ {\\operatorname{ord}( c)}\\) で管理することを考えます。\nすると、\\(2\\) つの文字の集合 \\(C _ 1,C _ 2\\) に共通部分があるかどうかは \\(\\mathrm{mask} _ {C _ 1}\\) と \\(\\mathrm{mask} _ {C _ 2}\\) のビットごとの論理積が \\(0\\) でないかで判定することができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <numeric>\n\nint main() {\n    using namespace std;\n    unsigned N, M;\n    string S, T;\n    cin >> N >> M >> S >> T;\n\n    // 高橋語で使われる文字の集合\n    const unsigned S_mask = transform_reduce(begin(S), end(S), 0U, bit_or{}, [](const char c){return 1U << (c - 'a');});\n    // 青木語で使われる文字の集合\n    const unsigned T_mask = transform_reduce(begin(T), end(T), 0U, bit_or{}, [](const char c){return 1U << (c - 'a');});\n\n    // 高橋語でしか使われない文字の集合\n    const unsigned only_takahashi = S_mask & ~T_mask;\n    // 青木語でしか使われない文字の集合\n    const unsigned only_aoki = ~S_mask & T_mask;\n\n    unsigned Q;\n    cin >> Q;\n    for (unsigned i{}; i < Q; ++i) {\n        string w;\n        cin >> w;\n        const unsigned w_mask = transform_reduce(begin(w), end(w), 0U, bit_or{}, [](const char c){return 1U << (c - 'a');});\n\n        if (w_mask & only_takahashi) // 高橋語でしか使われない文字があれば\n            cout << \"Takahashi\" << endl; // 高橋語\n        else if (w_mask & only_aoki) // 青木語でしか使われない文字があれば\n            cout << \"Aoki\" << endl; // 青木語\n        else // どちらでもなければ\n            cout << \"Unknown\" << endl; // 確定しない\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "3646be483ab348d653a8147c3c8fdb77a8a5ff4605f40a955b25b2f49e1667c8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc441/abc441_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

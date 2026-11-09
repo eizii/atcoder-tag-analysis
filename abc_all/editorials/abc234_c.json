@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc234_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc234/editorial/3224",
+      "text": "条件を満たす整数を、小さい方からいくつか列挙してみましょう。\n実は、条件を満たす整数の中で\n\\(K\\)\n番目に小さいものは、\n\\(K\\)\nを\n\\(2\\)\n進数表現した後に、そこに現れる\n\\(1\\)\nを\n\\(2\\)\nに置き換えたものです。例えば、\n\\(5=101_{(2)}\\)\nですが、この\n\\(1\\)\nを\n\\(2\\)\nに置き換えると\n\\(202\\)\nとなり、これは確かに条件を満たす整数の中で\n\\(5\\)\n番目に小さいものです。\nこの理由は、直感的には以下のように説明できます。\n\\(2\\)\n進数では各桁として考えられる数字が\n\\(0\\)\nまたは\n\\(1\\)\nの\n\\(2\\)\n種類だが、同じく条件を満たす整数の各桁として考えられる数字も、\n\\(0\\)\nまたは\n\\(2\\)\nの\n\\(2\\)\n種類しかない。\n\\(2\\)\n進数ではより上の位に\n\\(1\\)\nがある方が大きい値を示すが、同じく条件を満たす整数についてもより上の位に\n\\(2\\)\nがある方が大きい値を示す。\nでは、どのように答えを出力すれば良いでしょうか? いくつかの方針がありますが、実装例では\n\\(10\\)\n進法から\n\\(2\\)\n進法への変換結果を文字列として保持した上で、出力する際に\n1\nを\n2\nに変換しています。\n実装例(C++):",
+      "codes": [
+        "2\n   20\n   22\n  200\n  202\n  220\n  222\n 2000\n 2002\n 2020\n 2022\n  ...",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nstring convert(long long x){\n  string res;\n  while(x>0){\n    res.push_back('0'+(x%2));\n    x/=2;\n  }\n  reverse(res.begin(),res.end());\n  return res;\n}\n\nvoid output(string s){\n  for(auto &nx : s){\n    if(nx=='1'){cout << '2';}\n    else{cout << '0';}\n  }\n  cout << '\\n';\n}\n\nint main(){\n  long long k;\n  cin >> k;\n  output(convert(k));\n  return 0;\n}"
+      ],
+      "text_sha256": "1295f48ba043572020285e152b81f1901331340e851bbdd86e0a3903af856776",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc234/abc234_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

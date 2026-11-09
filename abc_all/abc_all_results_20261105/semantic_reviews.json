@@ -1,0 +1,327 @@
+{
+  "abc001_1": {
+    "tag_ids": [],
+    "disposition": "no_matching_tag",
+    "reason": "2整数の差を計算する問題。四則演算に対応する独立タグが266語彙にないため、別のアルゴリズム名へ置換しない。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc001/editorial.pdf"
+  },
+  "abc001_2": {
+    "tag_ids": [],
+    "disposition": "no_matching_tag",
+    "reason": "与えられた数値範囲に応じた場合分けと単位換算。条件分岐の独立タグがないため、探索やシミュレーションを強制付与しない。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc001/editorial.pdf"
+  },
+  "abc002_1": {
+    "tag_ids": [],
+    "disposition": "no_matching_tag",
+    "reason": "2整数の大小比較のみ。比較演算に対応する独立タグがない。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc002/editorial.pdf"
+  },
+  "abc002_2": {
+    "tag_ids": [
+      "T073"
+    ],
+    "roles": {
+      "T073": "primary"
+    },
+    "reason": "各文字が母音か判定し、母音を除いた文字列を構築する。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc002/editorial.pdf"
+  },
+  "abc002_3": {
+    "tag_ids": [
+      "T240"
+    ],
+    "roles": {
+      "T240": "primary"
+    },
+    "reason": "3点の座標を平行移動し、外積ad-bcの絶対値の半分で三角形の面積を計算する。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc002/editorial.pdf"
+  },
+  "abc003_1": {
+    "tag_ids": [],
+    "disposition": "no_matching_tag",
+    "reason": "一様なサイコロの期待値を等差数列の平均で計算する。期待値DPは用いず、単独の期待値タグが語彙にない。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc003/editorial.pdf"
+  },
+  "abc003_2": {
+    "tag_ids": [
+      "T073"
+    ],
+    "roles": {
+      "T073": "primary"
+    },
+    "reason": "対応する文字を比較し、@の場合にatcoderの文字へ置換できるか判定する。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc003/editorial.pdf"
+  },
+  "abc007_1": {
+    "tag_ids": [],
+    "disposition": "no_matching_tag",
+    "reason": "一直線上にn本の木があるとき隣接間隔はn-1。閉形式の基本算術であり、木データ構造の問題ではない。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc007/editorial.pdf"
+  },
+  "abc007_2": {
+    "tag_ids": [
+      "T073",
+      "T065"
+    ],
+    "roles": {
+      "T073": "primary",
+      "T065": "alternative"
+    },
+    "reason": "最小の英小文字列aとの比較で構成できる。解説にある別解では長さ1の場合の英小文字候補の全探索も可能。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc007/editorial.pdf"
+  },
+  "abc008_1": {
+    "tag_ids": [],
+    "disposition": "no_matching_tag",
+    "reason": "連続整数区間の要素数をT-S+1で求める基本算術。特定の列挙アルゴリズムを必要としない。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc008/editorial.pdf"
+  },
+  "abc008_2": {
+    "tag_ids": [
+      "T008"
+    ],
+    "roles": {
+      "T008": "alternative"
+    },
+    "reason": "文字列をキーとする連想配列で得票数を集計し、最大の得票数を持つ名前を選ぶ解法が制約内で実行可能。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc008/editorial.pdf"
+  },
+  "abc009_1": {
+    "tag_ids": [],
+    "disposition": "no_matching_tag",
+    "reason": "必要往復数は(N+1)//2。整数の切り上げ計算であり、語彙にない基本算術として記録する。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc009/editorial.pdf"
+  },
+  "abc009_2": {
+    "tag_ids": [
+      "T077"
+    ],
+    "roles": {
+      "T077": "primary"
+    },
+    "reason": "価格をソートし、最大値と異なる次の価格を取得する。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc009/editorial.pdf"
+  },
+  "abc014_1": {
+    "tag_ids": [
+      "T264"
+    ],
+    "roles": {
+      "T264": "primary"
+    },
+    "reason": "aをbで割った余りから、全員に同数配るため追加する個数を(b-a%b)%bで計算する。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://atcoder.jp/contests/abc014/tasks/abc014_1"
+  },
+  "abc014_2": {
+    "tag_ids": [
+      "T117"
+    ],
+    "roles": {
+      "T117": "primary"
+    },
+    "reason": "与えられた単一のビットマスクXの各ビットを調べ、対応商品の価格を合計する。部分集合全体の列挙ではない。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://atcoder.jp/contests/abc014/tasks/abc014_2"
+  },
+  "abc015_1": {
+    "tag_ids": [
+      "T073"
+    ],
+    "roles": {
+      "T073": "primary"
+    },
+    "reason": "2つの文字列の長さを比較して長い方を出力する基本文字列処理。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc015/editorial.pdf"
+  },
+  "abc015_4": {
+    "tag_ids": [
+      "T150"
+    ],
+    "roles": {
+      "T150": "primary"
+    },
+    "reason": "幅・使用枚数・見た商品数を状態として価値を最大化する個数制限付きナップサックDP。単純な全選択肢の深さ優先探索は制約内で間に合わないため付与しない。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://img.atcoder.jp/abc015/editorial.pdf"
+  },
+  "abc175_f": {
+    "tag_ids": [
+      "T187"
+    ],
+    "roles": {
+      "T187": "primary"
+    },
+    "reason": "未照合の残余文字列をprefix/suffixの有限状態にし、文字列追加の費用を辺重みとする非負最短路をDijkstra法で求める。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://atcoder.jp/contests/abc175/editorial/55"
+  },
+  "abc176_f": {
+    "tag_ids": [
+      "T022"
+    ],
+    "roles": {
+      "T022": "primary"
+    },
+    "reason": "処理回数と左に残る2枚の値を状態とする動的計画法。カードの並び替えという問題操作をソートアルゴリズムとは扱わない。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://atcoder.jp/contests/abc176/editorial/67"
+  },
+  "abc220_h": {
+    "tag_ids": [
+      "T082",
+      "T117",
+      "T080"
+    ],
+    "roles": {
+      "T082": "primary",
+      "T117": "supporting",
+      "T080": "supporting"
+    },
+    "reason": "頂点集合を半分に分けて配置を全列挙し、ビット集合の偶奇と再帰的な集計で結合する。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://atcoder.jp/contests/abc220/editorial/2685"
+  },
+  "abc232_h": {
+    "tag_ids": [
+      "T080"
+    ],
+    "roles": {
+      "T080": "primary"
+    },
+    "reason": "盤面の1列などを除いて反転し、より小さい盤面の同じ構成問題へ再帰的に帰着する。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://atcoder.jp/contests/abc232/editorial/3140"
+  },
+  "abc265_h": {
+    "tag_ids": [
+      "T036",
+      "T107",
+      "T108",
+      "T132",
+      "T196"
+    ],
+    "roles": {
+      "T036": "analysis_concept",
+      "T107": "supporting",
+      "T108": "primary",
+      "T132": "primary",
+      "T196": "supporting"
+    },
+    "reason": "各行の評価値の和とGrundy数のXORで勝敗を表し、通常畳み込みとXOR畳み込みを軸とする多次元畳み込みで高速化する。OR/AND畳み込みは他問題の例示であり付与しない。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://atcoder.jp/contests/abc265/editorial/4577"
+  },
+  "abc280_g": {
+    "tag_ids": [
+      "T060",
+      "T136"
+    ],
+    "roles": {
+      "T060": "primary",
+      "T136": "supporting"
+    },
+    "reason": "(X,Y)を(X,Y,X-Y)へ線形変換し、各座標の最小値を固定して条件を満たす点集合を数え上げる。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://atcoder.jp/contests/abc280/editorial/5307"
+  },
+  "abc285_g": {
+    "tag_ids": [
+      "T031",
+      "T032",
+      "T209",
+      "T229"
+    ],
+    "roles": {
+      "T031": "primary",
+      "T032": "supporting",
+      "T209": "primary",
+      "T229": "supporting"
+    },
+    "reason": "グリッドのタイル配置を二部グラフのマッチングへ帰着し、必須マスの条件を最小流量制限つきフローで表してDinic法で解く。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://atcoder.jp/contests/abc285/editorial/5500"
+  },
+  "abc318_g": {
+    "tag_ids": [
+      "T032"
+    ],
+    "roles": {
+      "T032": "primary"
+    },
+    "reason": "頂点を入出に分割して容量1を与え、BからAとCへ頂点を共有しない2本の経路が取れるかを最大流2の存在で判定する。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://atcoder.jp/contests/abc318/editorial/7085"
+  },
+  "abc400_g": {
+    "tag_ids": [
+      "T022",
+      "T064"
+    ],
+    "roles": {
+      "T022": "primary",
+      "T064": "primary"
+    },
+    "reason": "Alien DPで選択数へのペナルティを導入し、各カテゴリーの偶奇を状態とするDPを評価してペナルティを二分探索する。Alien DP自体は266語彙にないため別欄に残す。",
+    "out_of_vocabulary": [
+      "Alien DP"
+    ],
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://atcoder.jp/contests/abc400/editorial/12631"
+  },
+  "abc450_g": {
+    "tag_ids": [
+      "T026",
+      "T236"
+    ],
+    "roles": {
+      "T026": "primary",
+      "T236": "supporting"
+    },
+    "reason": "符号積の期待値C_NをC_N=-1+(N-3)/(N-1)*C_(N-1)で順に計算し、期待値の有理数を法998244353上の逆元で処理する。",
+    "replace": true,
+    "independent_human_review": false,
+    "evidence_url": "https://atcoder.jp/contests/abc450/editorial/17336"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc028_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc028/editorial.pdf",
+      "text": "B問題: 文字数カウント\n\f\n  プログラムの流れ\n\n\n  •  入力\n\n\n  •  文字の種類ごとに出る回数を数え上げる\n\n\n  •  出力\n\n\n\n入力, 出力\n\n   練習ページ: (http://practice.contest.atcoder.jp/tasks/practice_1 )を参考に\n\f\n  プログラムの流れ\n\n\n\n数え上げ部分\n\n\n\n だいたいの言語には文字列中の文字をカウントする関数があります。\n\n\n  たとえばC++ならばcount(s.begin(), s.end(), ‘A’)で’A’の個数を数\n             え上げられます\n\f\n コード例(C++)\n\n\n#include <iostream>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n\n    string AF = \"ABCDEF\";\n\n    int c[6];\n    for (int i = 0; i < 6; i++) {\n        c[i] = count(s.begin(), s.end(), AF[i]);\n    }\n    // c[i] には i 文字目の個数が入っている\n    string result = to_string(c[0]);\n    for (int i = 1; i < 6; i++) {\n        result += \" \" + to_string(c[i]);\n    }\n    cout << result << endl;\n    return 0;\n}",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "d69f788032e6cd35bcb60b8ccae3806a1bf2e5b361b8e49565f075c7764e6247"
+    }
+  ],
+  "status": "available"
+}

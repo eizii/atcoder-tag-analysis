@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc110_b",
+  "editorials": [
+    {
+      "text": "B: 1 Dimensional World’s Tale\nX とxi, Y とyi は同一視できるので、xN+1 = X, yM+1 = Y とします。すると、Z が満たすべき条件は\n次のようになります。\n• x1, x2, ..., xN+1 < Z\n• y1, y2, ..., yM+1 ≥Z\nこのようなZ は存在するならx1 (または−100) より大きく、y1 (または100) 以下のはずなので、Z =\n−100, −99, ..., 100 と順に条件を満たすものがあるか調べて解くことができます。これをC++ で実装する\nと、例えば次のようになります。\n#include <iostream >\n#include <vector >\nusing\nnamespace\nstd;\nbool\nis_war(const vector <int >& x, const vector <int >& y) {\nfor (int Z =\n-100; Z <= 100; ++Z) {\nbool\nis_ok = true;\nfor (int i = 0; i < x.size (); ++i) {\nif (x[i] >= Z) is_ok = false;\n}\nfor (int i = 0; i < y.size (); ++i) {\nif (y[i] < Z) is_ok = false;\n}\nif (is_ok) return\nfalse;\n}\nreturn\ntrue;\n}\nint main () {\nint N, M; cin >> N >> M;\nvector <int > x(N+1), y(M+1);\ncin >> x[0] >> y[0];\nfor (int i = 0; i < N; ++i) {\ncin >> x[i+1];\n}\nfor (int i = 0; i < M; ++i) {\ncin >> y[i+1];\n\n}\nif (is_war(x, y)) {\ncout << \"War\" << endl;\n}\nelse {\ncout << \"No War\" << endl;\n}\n}\n他の考え方もあります。xi ≥yj なるi, j が存在すれば、条件を満たすZ は存在しません(存在し\nたとするとxi < Z ≤yj となって矛盾します)。逆に、全てのi, j についてxi < yj が成立すれば、\nZ = min{y1, y2, ..., yM+1} とすることで条件を満たします。\nすなわち、全てのi, j についてxi < yj であるかを調べる方法や、Z = min{y1, y2, ..., yM+1} とし\nて条件を満たすかどうかを調べる方法があります。前者については、代わりにmax{x1, x2, ..., xN+1} <\nmin{y1, y2, ..., yM+1} であるかどうか調べてもよく、上の実装例のis war 関数をこの方法で実装すると次の\nようになります。\n#include <algorithm >\nbool\nis_war(const vector <int >& x, const vector <int >& y) {\nreturn *max_element(x.begin(), x.end ())\n>= *min_element(y.begin(), y.end ());\n}\n",
+      "text_sha256": "4d6d85e320f26dbe261e1ff930b8d8c1a7075c56b9ab634210f5288e4780dc0a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc110/abc110_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc315_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc315/editorial/6990",
+      "text": "基本的には問題文の通りに操作をすればよいですが、同じ行や列にあるクッキーがすべて同じ色か判定する際に時間計算量\n\\(\\Theta(H)\\)\nや\n\\(\\Theta(W)\\)\nかかるような方法を選択してしまうと、1 回の手続き 1. や 2. に要する時間計算量は\n\\(\\Theta(HW)\\)\nとなることから、最悪ケースにおいて全体の計算量が\n\\(\\Theta(HW(H+W))\\)\nかかって TLE してしまいます。\n与えられる色の種類が少ないことを利用して、高速化を考えましょう。与えられる可能性のある色の種類が\n\\(\\sigma\\)\n種類であるとします。本問題において、\n\\(\\sigma = 26\\)\nです。各行に対し\na\n,\nb\n,\n\\(\\ldots\\)\n,\nz\nの色のクッキーの枚数を管理しながら操作をすることで、同じ行や列にあるクッキーがすべて同じ色か\n\\(O(\\sigma)\\)\nで判定することができます。よって同じ色か判定する部分に関しては 時間計算量\n\\(O(\\sigma (H+W)^2)\\)\nでできることがわかりました。クッキーに印をつけることと取り除くことは、各クッキーに対して 1 度しか操作が行われないことから時間計算量\n\\(O(HW)\\)\nででき、全体として時間計算量\n\\(O(\\sigma (H+W)^2)\\)\nでこの問題を解くことができました。\n実装例\n実際に印をつけず、印をつける行と列の番号とクッキーの色を管理した実装をしていることに注意してください。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#define rep(i, n) for (int i = 0; i < (n); i++)\nusing namespace std;\n\nint main() {\n\tint h, w;\n\tcin >> h >> w;\n\tvector<vector<char>> c(h, vector<char>(w));\n\trep(i, h) rep(j, w) cin >> c[i][j];\n\tvector<vector<int>> x(h, vector<int>(26));\n\tvector<vector<int>> y(w, vector<int>(26));\n\trep(i, h) rep(j, w) {\n\t\tx[i][c[i][j] - 'a']++;\n\t\ty[j][c[i][j] - 'a']++;\n\t}\n\tint hc = h, wc = w;\n\tvector<bool> fx(h), fy(w);\n\trep(_, h + w) {\n\t\tvector<pair<int, int>> ux, uy;\n\t\trep(i, h) {\n\t\t\tif (fx[i]) continue;\n\t\t\trep(j, 26) {\n\t\t\t\tif (x[i][j] == wc && wc >= 2) {\n\t\t\t\t\tux.push_back({ i, j });\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\trep(i, w) {\n\t\t\tif (fy[i]) continue;\n\t\t\trep(j, 26) {\n\t\t\t\tif (y[i][j] == hc && hc >= 2) {\n\t\t\t\t\tuy.push_back({ i, j });\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\tfor (pair<int, int> p : ux) {\n\t\t\tfx[p.first] = true;\n\t\t\trep(i, w) y[i][p.second]--;\n\t\t\thc--;\n\t\t}\n\t\tfor (pair<int, int> p : uy) {\n\t\t\tfy[p.first] = true;\n\t\t\trep(i, h) x[i][p.second]--;\n\t\t\twc--;\n\t\t}\n\t}\n\tcout << hc * wc << '\\n';\n}"
+      ],
+      "text_sha256": "e1b4267be3d83631a1a2cde5dbb40df17779458453628bd87c02b74cf7203c59",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc315/abc315_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc315/editorial/7010",
+      "text": "実数\n\\(a_1, \\ldots, a_n\\)\nがすべて同じである必要十分条件は\n\\[\nn\\sum_{i=1}^n a_i^2=\\left( \\sum_{i=1}^n a_i\\right)^2.\n\\]\nこれは\nコーシー＝シュワルツの不等式\nで証明できます。\nこの事実を用いると、各英小文字をそれぞれのASCIIコードに置き換え、各行・各列の要素の和と二乗和を管理すれば、\nevimaの解法\nと同じ\n\\(O((H+W)^2)\\)\nの時間で解けます。\nC++コード (44ms, 3840KB)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n#define ll long long\nll square(ll x){\n    return x*x;\n}\n \nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(0);\n    //以上為輸入輸出流速度優化\n    int H, W;\n    cin >> H >> W;\n    vector<pair<ll, ll>> row_sum(H, {0, 0});\n    vector<pair<ll, ll>> column_sum(W, {0, 0});\n    for(int i=0;i<H;i++){\n        string s;\n        cin >> s;\n        for(int j=0;j<W;j++){\n            int ind=s[j]-'a';\n            row_sum[i].first+=ind;\n            row_sum[i].second+=ind*ind;\n            column_sum[j].first+=ind;\n            column_sum[j].second+=ind*ind;\n        }\n    }\n    pair<ll, ll> row_sum_delta={0, 0};\n    pair<ll, ll> column_sum_delta={0, 0};\n    while(true){\n        vector<int> index_rowToDelete;\n        vector<int> index_columnToDelete;\n        ll column_sum_delta1=0;\n        ll column_sum_delta2=0;\n        if(W>1){\n            for(int i=0;i<H;i++){\n                if((row_sum[i].second-row_sum_delta.second)*W==square(row_sum[i].first-row_sum_delta.first)){\n                    index_rowToDelete.push_back(i);\n                    int ind=(row_sum[i].first-row_sum_delta.first)/W;\n                    column_sum_delta1+=ind;\n                    column_sum_delta2+=square(ind);\n                }\n            }\n        }\n        if(H>1){\n            for(int i=0;i<W;i++){\n                if((column_sum[i].second-column_sum_delta.second)*H==square(column_sum[i].first-column_sum_delta.first)){\n                    index_columnToDelete.push_back(i);\n                    int ind=(column_sum[i].first-column_sum_delta.first)/H;\n                    row_sum_delta.first+=ind;\n                    row_sum_delta.second+=square(ind);\n                }\n            }\n        }\n        if(index_rowToDelete.empty() && index_columnToDelete.empty()){\n            cout << H*W;\n            return 0;\n        }\n        //改H, W, row_sum, column_sum\n        column_sum_delta.first+=column_sum_delta1;\n        column_sum_delta.second+=column_sum_delta2;\n        vector<pair<ll, ll>> new_row_sum;\n        vector<pair<ll, ll>> new_column_sum;\n        for(int i=0, ind=0;i<H; i++){\n            if(ind<index_rowToDelete.size() && i==index_rowToDelete[ind]){\n                ind++;\n            }\n            else{\n                new_row_sum.push_back(row_sum[i]);\n            }\n        }\n        for(int j=0, ind=0;j<W;j++){\n            if(ind<index_columnToDelete.size() && j==index_columnToDelete[ind]){\n                ind++;\n            }\n            else{\n                new_column_sum.push_back(column_sum[j]);\n            }\n        }\n        row_sum=new_row_sum;\n        column_sum=new_column_sum;\n        H=row_sum.size();\n        W=column_sum.size();\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "51fea416e1d6b330c0c80df098678122fb82f618ea122cabd5e031b2ed3250b0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc315/abc315_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc315/editorial/7004",
+      "text": "公式解説\nの解法で、各行・各列について毎回\n\\(26\\)\n要素を走査する代わりに残りの色数も管理すれば、各行・各列のクッキーがすべて同じ色であるかの判定を一巡あたり\n\\(O(H + W)\\)\n時間で行え、全体で\n\\(O((H + W)^2)\\)\n時間となります。\n実装例 (Python)\nP.S. A, B, C, D, E, F の原案でした。",
+      "codes": [
+        "H, W = map(int, input().split())\nc = [list(input()) for _ in range(H)]\nA = 26\n\nrow = [[0] * A for _ in range(H)]\nrow_c = [0] * H\ncol = [[0] * A for _ in range(W)]\ncol_c = [0] * W\nnum_row, num_col = H, W\n\nfor i in range(H):\n    for j in range(W):\n        v = ord(c[i][j]) - ord('a')\n        row[i][v] += 1\n        if row[i][v] == 1:\n            row_c[i] += 1\n        col[j][v] += 1\n        if col[j][v] == 1:\n            col_c[j] += 1\n\nwhile True:\n    del_row, del_col = [], []\n    for i in range(H):\n        if row_c[i] == 1 and num_col >= 2:\n            del_row.append(i)\n    for j in range(W):\n        if col_c[j] == 1 and num_row >= 2:\n            del_col.append(j)\n    if del_row == [] and del_col == []:\n        break\n\n    def remove(i, j):\n        if c[i][j] != ' ':\n            v = ord(c[i][j]) - ord('a')\n            row[i][v] -= 1\n            if row[i][v] == 0:\n                row_c[i] -= 1\n            col[j][v] -= 1\n            if col[j][v] == 0:\n                col_c[j] -= 1\n            c[i][j] = ' '\n\n    for i in del_row:\n        for j in range(W):\n            remove(i, j)\n        num_row -= 1\n    for j in del_col:\n        for i in range(H):\n            remove(i, j)\n        num_col -= 1\n\nprint(num_row * num_col)"
+      ],
+      "text_sha256": "8c073a498ea0d616576ab4edd54a012a4856ec843401dd721f57c996cbd6f79f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc315/abc315_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc327_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc327/editorial/7578",
+      "text": "グラフ理論の言葉に置き換えて考えます。\n\\(N\\)\n頂点\n\\(M\\)\n辺のグラフがあって、\n\\(i\\)\n番目の辺は頂点\n\\(A_i\\)\nと頂点\n\\(B_i\\)\nを結んでいるとします。\nこのとき、問題文の条件を満たすような数列\n\\(X\\)\nが存在することは、次の条件と同値です。\n以下の条件を満たすように各頂点に\n\\(0\\)\nか\n\\(1\\)\nを書きこむことができる。\n辺で結ばれた頂点同士には異なる数字が書きこまれている。\nこのような条件によって定義されるグラフのことを\n二部グラフ\nと呼びます。よって、この問題はグラフが二部グラフかを判定するアルゴリズムを実装すれば正解できます。\nグラフが二部グラフであるかどうかの判定は深さ優先探索(DFS) などのグラフ探索アルゴリズムを利用して実装できます。具体的には、以下の手順で頂点に数字を書きこんでいけばよいです。\n各頂点についての情報を配列\n\\(X\\)\nに格納する。\n\\(X[v] = -1\\)\nである場合は頂点は未訪問であることを、\n\\(X[v] = 0\\)\nである場合は頂点に\n\\(0\\)\nが書きこまれていることを、\n\\(X[v] = 1\\)\nである場合は頂点に\n\\(1\\)\nが書きこまれていることを意味する。\nまた、答えを管理するフラグ\nbipartite\nを用意して、はじめ true で初期化する。\n\\(v=1, 2, \\dots, N\\)\nについて次の操作を行う。\n\\(X[v] \\neq -1\\)\nである場合は頂点\n\\(v\\)\nは訪問済みなので何もしない。\n\\(X[v] = -1\\)\nである場合は以下の操作を行う。\n頂点\n\\(v\\)\nに書きこむ数字を\n\\(0\\)\nと決め打つ。(つまり\n\\(X[v] = 0\\)\nとする)\nその後、深さ優先探索を利用して、\n\\(v\\)\nを含む連結成分に含まれる頂点に、隣り合う頂点が異なる数字となるように数字を書きこんでいく。\n書きこんでいく途中で、辺で結ばれた頂点同士に同じ数字が書きこまれた状態になった場合は、グラフは二部グラフではないので\nbipartite\n= false とする。\n全ての頂点を訪問し終えた段階での\nbipartite\nの真偽が答えとなる。\n計算量は\n\\(\\mathrm{O}(N + M)\\)\nで十分高速です。C++ による実装例は次の通りです。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nconstexpr int nmax = 200200;\nint N, M;\nint A[nmax], B[nmax];\nvector<int> g[nmax];\nint X[nmax];\nint bipartite = true;\n\nvoid dfs(int c, int x) {\n  X[c] = x;\n  for (auto& d : g[c]) {\n    if (X[d] == -1) {\n      dfs(d, 1 - x);\n    } else if (X[d] == X[c]) {\n      bipartite = false;\n    }\n  }\n}\n\nint main() {\n  cin >> N >> M;\n  for (int i = 0; i < M; i++) cin >> A[i], A[i]--;\n  for (int i = 0; i < M; i++) cin >> B[i], B[i]--;\n  for (int i = 0; i < M; i++) {\n    g[A[i]].push_back(B[i]);\n    g[B[i]].push_back(A[i]);\n  }\n\n  for (int i = 0; i < N; i++) X[i] = -1;\n  for (int i = 0; i < N; i++) {\n    if (X[i] == -1) dfs(i, 0);\n  }\n  cout << (bipartite ? \"Yes\" : \"No\") << endl;\n}"
+      ],
+      "text_sha256": "13958c65837cc3890eee97a7d9ec6a0aee6ae22c94b315755ea1d5c3b62b8d11",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc327/abc327_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc327/editorial/7595",
+      "text": "2-SAT でも解けます。\n\\(N\\)\n個の bool 変数に対して\n\\(A_i\\)\n番目と\n\\(B_i\\)\n番目は異なるという条件が\n\\(M\\)\n個与えられることになります。\nこれは 2-SAT 上で\n\\((x_{A_i}​ = 0)∨(x_{B_i} = 0), (x_{A_i}​ = 1)∨(x_{B_i} = 1)\\)\nというクローズを足せば良いです。\n計算量は\n\\(O \\left( N+M \\right)\\)\nです。実装は以下のリンクのように ACL を使うと簡単です。\n実装例",
+      "codes": [],
+      "text_sha256": "905c7b9cf77a7fdc46a8fa83933bf39d99d3f189fcd2ef12f584829b81228ca9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc327/abc327_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc327/editorial/7617",
+      "text": "Python の外部ライブラリには\nNetworkX\nというグラフ・ネットワークを扱えるものがあり、このコンテスト開催時点の AtCoder の環境では Python に分類される4種類全てで使えるようです。ただし、非常に遅いため使う場合は TLE を覚悟してください。\nこのライブラリの中に二部グラフであるかどうかを判定する関数\nis_bipartite\nがあり、D問題はこの関数を使うことで簡潔に実装することができます。\n実装例",
+      "codes": [
+        "import networkx as nx\nn,m = map(int,input().split())\na = list(map(int,input().split()))\nb = list(map(int,input().split()))\ng = nx.Graph()\nfor u,v in zip(a,b): g.add_edge(u,v)\nprint(\"Yes\" if nx.is_bipartite(g) else \"No\")"
+      ],
+      "text_sha256": "cfae9ddd57e4c215dccfc6a16f801b3f66fedd23d7726e900c0c09ebc7bde701",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc327/abc327_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

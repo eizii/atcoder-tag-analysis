@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc256_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc256/editorial/4131",
+      "text": "まず、 \\(D_x\\) に対して各 \\(A_i (i\\leq x)\\) が何度寄与するか考えます。 各 \\(x\\) で \\(B_x\\) に対して \\(A_i\\) は \\(1\\) 度寄与します。 各 \\(x\\) で \\(C_x\\) に対して \\(A_i\\) は \\(x-i+1\\) 度寄与します。 各 \\(x\\) で \\(D_x\\) に対して \\(A_i\\) は \\((x-i+1)(x-i+2)/2\\) 度寄与します。 よって \\(\\displaystyle D_x=\\sum_{i=1}^{x}\\frac{(x-i+1)(x-i+2)}{2}A_i\\) となります。式を整理することで、 \\(\\displaystyle D_x=\\frac{1}{2}\\sum_{i=1}^{x}i^2A_i - \\frac{2x+3}{2}\\sum_{i=1}^{x}iA_i+\\frac{(x+1)(x+2)}{2}\\sum_{i=1}^{x}A_i\\) を得ます。 \\(i^2A_i,iA_i,A_i\\) の1点更新とprefix sumを取得できるような fenwick treeやセグメント木を用いることで、各クエリを \\(O(\\log N)\\) で処理することができます。 実装例(C++)",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "4fd6ee787339e03aa5748c2167a37ff2322dc4cc9350b786a1b9675146406536"
+    }
+  ],
+  "status": "available"
+}

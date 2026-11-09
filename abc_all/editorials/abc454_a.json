@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc454_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc454/editorial/18567",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n\\(L\\)\n以上\n\\(R\\)\n以下の整数の個数は\n\\(R-L+1\\)\nと表すことができます。\nしたがって、\n\\(L,R\\)\nを入力で受け取り、\n\\(R-L+1\\)\nを出力すれば良いです。\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "L, R = map(int, input().split())\nprint(R - L + 1)",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint L, R;\n\tcin >> L >> R;\n\tcout << R - L + 1 << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "80cfa1a86abd493f94b343f118e7b1a8edc8a1e7e4086798a525cfe60027ae28",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc454/abc454_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

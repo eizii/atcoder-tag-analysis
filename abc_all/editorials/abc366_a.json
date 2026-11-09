@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc366_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc366/editorial/10638",
+      "text": "まず、高橋氏または青木氏の勝利が確定しているかの条件について考えます。どちらかの候補者の票数がすでに\n\\(\\lceil \\frac{N}{2} \\rceil\\)\n以上のとき、もう一方の候補者が未開票の票をすべて獲得しても勝者は変わりません。逆に、どちらの候補者も\n\\(\\lceil \\frac{N}{2} \\rceil\\)\n票未満であるとき、どちらも勝つことができるので勝者は確定していません。\nこの条件をif文を用いて場合分けを実装します。\n\\(T \\geq \\lceil \\frac{N}{2} \\rceil\\)\nまたは\n\\(A \\geq \\lceil \\frac{N}{2} \\rceil \\)\nを満たすかを判定します。 一般的なプログラミング言語では\nN / 2\nは切り捨て除算となります。実際に\n\\( \\lceil \\frac{N}{2} \\rceil \\)\nを求める際は\n(N + 1) / 2\nと計算するとよいです。\n実装例(C++):\n実装例(Python):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, t, a;\n    cin >> n >> t >> a;\n    if (a >= (n + 1) / 2 || t >= (n + 1) / 2) {\n        cout << \"Yes\" << endl;\n    } else {\n        cout << \"No\" << endl;\n    }\n}",
+        "n, t, a = map(int, input().split())\nif a >= (n+1)//2 or t >= (n+1)//2:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "5644b7565f4dc673dce33e42dccedf4a60be98b5f2afaa03fe34f7101df20760",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc366/abc366_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

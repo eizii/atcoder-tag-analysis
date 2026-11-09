@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc427_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc427/editorial/14192",
+      "text": "\\(x\\)\nに対して\n\\(f(x)\\)\nを返す関数\n\\(f\\)\nを実装できれば、あとは愚直に問題文で与えられた式に従って\n\\(A_0, A_1, \\ldots, A_N\\)\nと順番に値を計算することで答えを求めることができます。\n\\(f\\)\nの実装のためには、\n\\(x\\)\nを\n\\(10\\)\nで割った余りを足し合わせて\n\\(10\\)\nで割ることを繰り返す方法や\n\\(x\\)\nを文字列に変換したものを用いるなどの方法があります。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\n\tauto f = [&](int x) -> int {\n\t\tint res = 0;\n\t\twhile (x) {\n\t\t\tres += x % 10;\n\t\t\tx /= 10;\n\t\t}\n\t\treturn res;\n\t};\n\n\tvector<int> a(n + 1);\n\ta[0] = 1;\n\tfor (int i = 1; i <= n; i++) {\n\t\tfor (int j = 0; j < i; j++) a[i] += f(a[j]);\n\t}\n\tcout << a[n] << '\\n';\n}"
+      ],
+      "text_sha256": "946f45abb89d5f6ae930151d04ad0c280784591dafdad21c71b0bce6d6a6ac7d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc427/abc427_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc427/editorial/14236",
+      "text": "この解説は水色以上を対象読者としています。B問題の解説を求めている方は公式解説を参照してください。\nこの問題は対数多項式時間で答えを求めることができます。\nmaspyさんによるyukicoder 262の解説",
+      "codes": [],
+      "text_sha256": "75a183bb7b93f2acee7f5e5511b0825a255fff0c1b5a466db0fc704e99f428c4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc427/abc427_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

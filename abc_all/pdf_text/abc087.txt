@@ -1,0 +1,425 @@
+              ARC090 / ABC087 解説
+
+
+                                 wo01
+
+                               2018 年1 月28 日
+
+
+
+A 問題
+
+ 答えはX −A をB で割った余りとなります。
+
+ 整数を整数で割った余りを求める演算子は多くの言語で用意されています。
+
+ 以下にC++ による実装例を示します。
+
+#include<cstdio>
+
+
+using namespace std;
+
+
+int main(){
+
+    int X, A, B;
+
+    scanf("%d%d%d", &X, &A, &B);
+
+    printf("%d\n", (X - A) % B);
+
+    return 0;
+
+}
+
+
+B 問題
+
+ ループを用いて500 円玉、100 円玉、50 円玉を選ぶ枚数の組(i, j, k) をすべて試すことで答えが求められ
+
+ます。
+
+ 以下にC++ による実装例を示します。
+
+#include<cstdio>
+
+
+using namespace std;
+
+
+int A, B, C;
+
+int X;
+
+
+
+
+                                             1
+
+int solve(){
+
+    int ans = 0;
+
+    for(int i = 0; i <= A; ++i){
+
+        for(int j = 0; j <= B; ++j){
+
+            for(int k = 0; k <= C; ++k){
+
+                int tmp = i * 500 + j * 100 + k * 50;
+
+                if(tmp == X) ans++;
+
+            }
+
+        }
+
+    }
+
+    return ans;
+
+}
+
+
+int main(){
+
+    scanf("%d%d%d%d", &A, &B, &C, &X);
+
+    int ans = solve();
+
+    printf("%d\n", ans);
+
+    return 0;
+
+}
+
+
+C 問題
+
+ 移動方法は「あるi (0 ≤i ≤N) を選び、以下のように移動する」というものになります。
+
+    1. 右にi 回移動する
+
+    2. 下に1 回移動する
+
+    3. 右にN −i 回移動する
+
+最初に右に移動する回数i の候補はO(N) とおりしかなく、その値を決めたとき回収できるアメの個数は
+O(N) 時間で計算できるので、求める最大値はO(N 2) 時間で計算できます。
+
+
+D 問題
+
+ 各i について0 ≤xi ≤109 であるという条件は考慮しなくて良いことがすぐにわかります。よって、xi と
+してM 個の情報と矛盾しない限り任意の整数をとることができるものとして考えることにします。
+
+ 以下のような重み付き有向グラフG を考えます。
+
+    • 頂点はN 個あり、1, 2, . . . , N の番号が付けられている
+
+    • 各i (1 ≤i ≤M) に対して、頂点Li から頂点Ri に向かう重みDi の辺と、頂点Ri から頂点Li に
+   向かう重み−Di の辺が存在する
+    • それ以外に辺は存在しない
+
+
+                                             2
+
+ 問題の条件を満たす(x1, x2, . . . , xN) が存在することは、グラフG の各頂点v に整数xv を割り当てて、
+G に頂点u から頂点v へ向かう重みd の辺があるならばxv −xu = d が成り立つようにできることと同値
+
+です。
+
+ このような割り当てを行うことができるかどうかの判定は、グラフG に深さ優先探索や幅優先探索を行い、
+
+実際に各頂点に値x を割り当てて矛盾が生じないか確かめることで行えます。
+
+ 実装の際は、グラフG が非連結な場合があることに注意してください。
+
+
+E 問題
+
+ 各頂点v について、頂点S から頂点v への最短距離をdv と表すことにします。頂点の組(u, v) について、
+頂点u から頂点v への最短路を逆向きにすると頂点v から頂点u への最短路が得られることに注意します。
+
+ 頂点u と頂点v を結ぶ長さc の辺(このような辺を辺({u, v}, c) と書くことにします) が、頂点S から頂
+
+点v への最短路に使われうる条件はdu + c = dv が成り立つことです。このことを用いると、各頂点v につ
+いて、頂点S から頂点v への最短路の個数dp1[v] をdv が小さい順に動的計画法を行うことで求めることが
+できます。同様に、頂点v から頂点T への最短路の個数dp2[v] をdv が大きい順に動的計画法を行うことで
+求められます。
+
+  dp1 およびdp2 の値から、以下のことがわかります。
+
+    • 2 人が途中で出会うようなものも含めた、2 人の最短路の選び方の組はdp1[T]2 通りある
+    • 2 人が頂点上で出会うような最短路の選び方の組は、2dv = dT となる各頂点v について、dp1[v]2dp2[v]2
+   通りある
+
+    • 2 人が辺上で出会うような最短路の選び方の組は、2du < dT かつ2dv > dT かつdu + c = dv を満た
+    各辺({u, v}, c) について、dp1[u]2dp2[v]2 通りある
+
+ 求めるべき最短路の組の個数は、2 人が途中で出会うようなものも含めた最短路の選び方の組の個数から、
+
+2 人が途中で出会うような最短路の選び方の組を引くことで求められます。
+
+
+F 問題
+
+  d 桁の正の整数の個数10d −10d−1 をNd と書くことにします。
+  f(r) −f(l) ≤2 のとき、∑l≤i≤r f(i) > (f(l) + 1)Nf(l)+1 となります。f(r) −1 ≥8 のとき、(f(l) +
+1)Nf(l)+1 ≥8N8 > 108 となるので、問題の条件S ≤109 のもと、f(r) −f(l) ≥2 ならばf(r) −1 < 8 で
+あることがわかります。
+
+ このことに注意して、以下のように場合分けを行います。
+
+    1. f(l) = f(r) の場合
+
+    2. f(r) < 9 かつf(r) ≥f(l) + 1 の場合
+
+    3. f(r) ≥10 かつf(r) = f(l) + 1 の場合
+
+ 上記のそれぞれの場合について(l, r) の個数を求め、足し合わせれば良いことになります。
+
+ それぞれの場合における(l, r) の個数の求め方について見ていきます。
+
+
+
+
+                                             3
+
+    1. f(l) = f(r) の場合
+
+   値d = f(l) として考えられるものはS の約数だけです。また、値d = f(l) を決めると、組(l, r) の
+
+    個数はmax(0, Nd −S/d + 1) と求められます。よって、d の値をすべて試すことで組(l, r) の個数が
+
+   求められます。
+
+    2. f(r) < 9 かつf(r) ≥f(l) + 1 の場合
+
+      2 つの組(l1, r1) と(l2, r2) がともに条件を満たし、l1 < l2 が成り立つときr1 < r2 も成り立つことに
+   注意して、l としてあり得る値をすべて試すことにより組(l, r) の個数が求められます。
+
+    3. f(r) ≥10 かつf(r) = f(l) + 1 の場合
+
+   整数t を10t < S かつt はS の約数でないようなものとします。このとき、r −l + 1 = t であるよう
+
+     な(l, r) はちょうど1 つ存在することがわかります。すなわち、l は⌊S/t⌋桁の整数のうち大きい方か
+
+   らt −(S mod t) 番目、r は⌈S/t⌉桁の整数のうち小さい方からS mod t 番目となります。
+
+    このことから(l, r) の個数はS/10 未満の整数のうちS の約数でないものの個数と一致し、この値は
+
+   簡単に求められます。
+
+ すべての場合について(l, r) の個数を求めることができたので、これらを足し合わせることで答えが求まり
+
+ます。
+
+
+
+
+
+                                             4
+
+             ARC090 / ABC087 Editorial
+
+
+                                 wo01
+
+                              January 28th, 2018
+
+
+
+Problem A
+
+ C++ Example:
+
+#include<cstdio>
+
+
+using namespace std;
+
+
+int main(){
+
+    int X, A, B;
+
+    scanf("%d%d%d", &X, &A, &B);
+
+    printf("%d\n", (X - A) % B);
+
+    return 0;
+
+}
+
+
+
+
+
+                                             1
+
+Problem B
+
+ C++ Example:
+
+#include<cstdio>
+
+
+using namespace std;
+
+
+int A, B, C;
+
+int X;
+
+
+int solve(){
+
+    int ans = 0;
+
+    for(int i = 0; i <= A; ++i){
+
+        for(int j = 0; j <= B; ++j){
+
+            for(int k = 0; k <= C; ++k){
+
+                int tmp = i * 500 + j * 100 + k * 50;
+
+                if(tmp == X) ans++;
+
+            }
+
+        }
+
+    }
+
+    return ans;
+
+}
+
+
+int main(){
+
+    scanf("%d%d%d%d", &A, &B, &C, &X);
+
+    int ans = solve();
+
+    printf("%d\n", ans);
+
+    return 0;
+
+}
+
+
+
+
+
+                                             2
+
+Problem C
+
+  The sequence of movements must be in the following form for some integer i (0 ≤i ≤N):
+
+    1. Move to the right i times.
+
+    2. Move downward.
+
+    3. Move to the right N −i times.
+
+There are O(N) possibilites for i. For a ﬁxed i, we can compute the total number of candies in O(N).
+Thus, brute force works in O(N 2) time.
+
+
+Problem D
+
+  Consider the following directed graph G:
+
+    • There are N vertices numbered 1, 2, . . . , N.
+
+    • For each i, there are an edge from vertex Li to vertex Ri with weight Di, and an edge from vertex
+     Ri to vertex Li with weight −Di.
+
+  The problem asks whether we can assign an integer xv to each vertex v in G, such that for each edge
+from u to v with cost d, xv −xu = d holds. (Clearly, we can ignore the condition 0 ≤xi ≤109.)
+
+ We handle each connected component in G independently. For each connected component, we choose
+
+an arbitary vertex v and assume that xv = 0. By running a dfs from v, we can uniquly determine the
+values of xi in this component. After that, we should check if the conditions are actually satisﬁed.
+
+
+
+
+
+                                             3
+
+Problem E
+
+  For each vertex v, let d1v be the length of the shortest path from S to v. Let dp1[v] be the number of
+shortest paths from S to v.
+
+ An edge between u and v with cost c can be a part of a shortest path from S to v (in the direction
+
+from u to v) if and only if d1u + c = d1v. By using this, we can compute the values of dp1[v] from the
+verteices with smaller values of d1.
+  Similarly, deﬁne d2v as the length of the shortest path from T to v, and dp2[v] as the number of
+shortest paths from T to v.
+
+  From dp1 and dp2, we can get the following values:
+
+    • The total number of pairs of shortest paths is dp1[T]2.
+    • Let D = d1T . For each vertex v such that d1v = d2v = D/2, there are dp1[v]2dp2[v]2 pairs of
+      paths such that the two people meet on v.
+
+    • Consider an edge between vertices u and v with cost c. If d1u < D/2, d2v < D/2, and d1u +d2v +
+      c = D, there are dp1[u]2dp2[v]2 pairs of paths such that the two people meet on this edge (except
+       for endpoints).
+
+  The answer is (the ﬁrst value) - (the second value) - (the third value) mentioned above.
+
+
+
+
+
+                                             4
+
+Problem F
+
+  Let Nd = 10d −10d−1 be the number of d-digit integers.
+   If f(r) −f(l) ≥2, it means that all integers with l + 1 digits are in the chosen range. Since the total
+number of digits of 8-digit integers is 8N8 = 720000000 > 108, l + 1 must be less than 8 in this case.
+
+Now, consider the following two cases:
+
+
+The case with f(l) ≤7
+
+  In this case, l < 10000000, and under the constraints of the problem, it turns out that r < 23000000.
+
+Thus, we can generate the ﬁrst 23000000 terms of the sequence f(1), f(2), · · · , and we can get the answer
+
+by two-pointers method.
+
+
+The case with f(l) ≥8
+
+  Let t be an integer between 1 and floor(S/8).  It turns out that, except for special cases, there is
+
+exactly one pair (l, r) such that f(l) ≥8, f(l) + · · · + f(r) = S, and r −l + 1 = t (i.e., there are exactly t
+
+terms in the chosen range). This is because there is exactly one interval that starts with t −(S mod t)
+
+occurrences of ⌊S/t⌋-digit integers followed by S mod t occurrences of ⌈S/t⌉-digit integers. Thus, we
+
+should add floor(S/8) to the answer.
+
+  The only exception happens when t is a divisor of S. In this case, there are Nt −S/t+1 such intervals.
+To handle this, we should add Nt −S/t to the answer for each divisor t between 1 and floor(S/8).
+  Exercise: can you compute the answer if S ≤1012?
+
+
+
+
+
+                                             5

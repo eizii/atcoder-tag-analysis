@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc415_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc415/editorial/13485",
+      "text": "この問題はセグメント木 (Segment Tree) を用いて解くことが出来ますが、載せるもの (セグメント木の各要素) が複雑となるものの代表例です。\nACL のセグメント木\nで定義する必要があるのは以下の\n\\(3\\)\nつです。\n型\nS\n… セグメント木の各要素の構造です。\n二項演算\nS op(S a, S b)\n… セグメント木上で横に並ぶ\n\\(2\\)\nつの区間\n\\([l,m), [m,r)\\)\nを連結して\n\\([l,r)\\)\nに関する情報を得るための演算です。\n\\(a\\)\nは区間\n\\([l,m)\\)\nに、\n\\(b\\)\nは区間\n\\([m,r)\\)\nに対応します。\n単位元\nS e()\n… 「演算\nop\nに関わっても何もしない」要素です。厳密には、全ての\n\\(a \\in S\\)\nについて\nop(a,e())=op(e(),a)=a\nが成り立つ必要があります。\n区間\n\\([l,r)\\)\nに対応する情報をひとつの型\nS\nで持つことになります。このとき、例えば以下の情報を持つとうまくいきます。\n\\([l,r)\\)\nのうち最も左で連続している文字種\n\\(lefc\\)\nとその長さ\n\\(lefn\\)\n\\([l,r)\\)\nのうち最も右で連続している文字種\n\\(rigc\\)\nとその長さ\n\\(rign\\)\n区間全体が同じ文字かどうかのフラグ\n\\(con\\)\n\\(con\\)\nが真である場合、例えば\naaaaa\nのような文字列に対応して全体がひとつの連続を成しているため、特別な取り扱いをする必要があります。\n区間\n\\([l,r)\\)\nだけを抜き出した際の同じ文字の連続の最大長\n\\(ans\\)\n例を挙げましょう。\nyyzzzbba\nに対応する情報は\n\\(lefc=\\)\ny\n\\(,lefn=2,rigc=\\)\na\n\\(,rign=1,con=\\)\nfalse\n\\(,ans=3\\)\nです。\nまた、長さ\n\\(1\\)\nの文字列に対応する\nS\nの要素も求めておく必要があります。(これは通常は簡単に求められるはずです。) これは実装例では\ncvrt\nという関数名で実装されています。\n実装の詳細は以下の実装例を参照してください。\n時間計算量は\n\\(O(N+Q \\log N)\\)\nです。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n#include<atcoder/segtree>\n\nusing namespace std;\nusing namespace atcoder;\n\ntypedef struct{\n  char lefc;\n  int lefn;\n  char rigc;\n  int rign;\n  bool con;\n  int ans;\n}S;\n\nS e(){\n  return {'*',0,'*',0,true,0};\n}\n\nS op(S l,S r){\n  if(l.lefc=='*'){return r;}\n  if(r.lefc=='*'){return l;}\n\n  S res;\n  res.ans=max(l.ans,r.ans);\n\n  if(l.con && r.con){\n    if(l.lefc==r.lefc){\n      res.lefc=l.lefc;\n      res.lefn=(l.lefn+r.lefn);\n      res.con=true;\n    }\n    else{\n      res.lefc=l.lefc;\n      res.lefn=l.lefn;\n      res.rigc=r.lefc;\n      res.rign=r.lefn;\n      res.con=false;\n    }\n  }\n  else if(l.con){\n    res.con=false;\n    if(l.lefc==r.lefc){\n      res.lefc=l.lefc;\n      res.lefn=l.lefn+r.lefn;\n    }\n    else{\n      res.lefc=l.lefc;\n      res.lefn=l.lefn;\n    }\n    res.rigc=r.rigc;\n    res.rign=r.rign;\n  }\n  else if(r.con){\n    res.con=false;\n    res.lefc=l.lefc;\n    res.lefn=l.lefn;\n    if(l.rigc==r.lefc){\n      res.rigc=r.lefc;\n      res.rign=l.rign+r.lefn;\n    }\n    else{\n      res.rigc=r.lefc;\n      res.rign=r.lefn;\n    }\n  }\n  else{\n    res.con=false;\n    res.lefc=l.lefc;\n    res.lefn=l.lefn;\n    res.rigc=r.rigc;\n    res.rign=r.rign;\n    if(l.rigc==r.lefc){\n      res.ans=max(res.ans,l.rign+r.lefn);\n    }\n  }\n\n  res.ans=max(res.ans,max(res.lefn,res.rign));\n\n  return res;\n}\n\nS cvrt(char c){\n  return {c,1,'*',0,true,1};\n}\n\nint main(){\n  int n,q;\n  cin >> n >> q;\n  string s;\n  cin >> s;\n  vector<S> ini(n);\n  for(int i=0;i<n;i++){\n    ini[i]=cvrt(s[i]);\n  }\n  segtree<S,op,e> seg(ini);\n  while(q>0){\n    q--;\n    int typ;\n    cin >> typ;\n    if(typ==1){\n      int i;\n      char x;\n      cin >> i >> x;\n      seg.set(i-1,cvrt(x));\n    }\n    else{\n      int l,r;\n      cin >> l >> r;\n      cout << seg.prod(l-1,r).ans << \"\\n\";\n    }\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "4c1d0b427d1102ff0a85a4dbf8d5eeccb77bfcc0148733f89fe1d9b9ac805706",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc415/abc415_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc415/editorial/13496",
+      "text": "次のクエリを高速に処理できることは有名です。\nはじめ、\n\\(a = (a_0, a_1, \\dots, a_{n-1})\\)\nが与えられているとします。\n\\(\\texttt{1}\\; i\\; x\\)\n\\(a_i \\gets x\\)\nで更新する\n\\(\\texttt{2}\\; l\\; r\\)\n\\(\\max_{l\\le i_l\\lt i_r\\le r} \\sum_{j=i_l}^{i_r-1} a_j\\)\nを出力する\n2 番目のクエリは、直感的に言えば、\n\\([l\\,.\\,.\\,r)\\)\nの範囲における区間和の最大値を求めるものです。\nABC 175 D (bonus) ユーザ解説\nと似たモノイドを考え、セグ木を用いることで可能です。\nさて、今回の問題は次のようにして上記のクエリ問題に帰着できます。0-indexed として適切に変換して考えるものとします。\n長さ\n\\(2N-1\\)\nの列\n\\(a = (a_0, a_1, \\dots, a_{2(N-1)})\\)\nを次のように定義します。\nまず、\n\\(i\\)\n文字目 (\n\\(0\\le i\\lt N\\)\n) には\n\\(a_{2i}\\)\nが対応するものとし、常に\n\\(a_{2i} = 1\\)\nとします。\n次に、\n\\(i\\)\n文字目と\n\\(i+1\\)\n文字目の境界 (\n\\(0\\le i\\lt N-1\\)\n) には\n\\(a_{2i+1}\\)\nが対応するものとし、\n\\(S_i = S_{i+1}\\)\nのときは\n\\(a_{2i+1} = 0\\)\n、そうでないときは\n\\(a_{2i+1} = -\\infty\\)\nとします。\nたとえば、\n\\(S = \\texttt{bbaaabb}\\)\nのとき、\n\\[\na = (1, 0, 1, -\\infty, 1, 0, 1, 0, 1, -\\infty, 1, 0, 1)\n\\]\nとなります。\n更新の際は両側の境界を適切に更新し、\n\\(f(t)\\)\nを求める際は\n\\([2l\\,.\\,.\\,2r]\\)\nの範囲について区間和の最大値を求めればよいです。\nnote\n: 異なる文字が存在するときの\n\\(1\\)\nの最大連続数などを考えると、\n\\(-\\infty\\)\nの代わりに\n\\(-N\\)\nなどを使っても問題ないことがわかります。",
+      "codes": [],
+      "text_sha256": "556eff350b963c240a0a867bd5400e163be8a94d803bbc7c9e70eaa31251aa5e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc415/abc415_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

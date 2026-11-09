@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc374_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc374/editorial/11090",
+      "text": "\\(N \\le 6\\)\nという非常に小さな制約に着目しましょう。\nこの制約であれば、ありうるレーザ照射の方法を全探索できそうです。\n全探索をするのであれば、それに伴って調べ尽くす必要のあるパラメータを全て見つけて固定してしまいましょう。\n線分を描く順序\n\\(N!\\)\n通り\n線分を描く向き(どちらの点からどちらの点へと描くか)\n\\(2^N\\)\n通り\n\\(N = 6\\)\nに対して、全体で\n\\(6! \\times 2^6 = 46080\\)\n通りしかなく、これはコンピュータを用いれば容易に全探索できる数です。\n線分を描く順序は、長さ\n\\(N\\)\nの順列を全列挙することで尽くせます。\n再帰関数を用いて順列を全列挙したり、 C++ においては\nnext_permutation\nを利用すると便利です。\n線分を描く向きは、\n\\(0\\)\nから\n\\(2^N-1\\)\nまでの整数について下から\n\\(i\\)\nbit目が\n\\(0\\)\nの時は\n\\((A_i,B_i) \\rightarrow (C_i,D_i)\\)\n、\n\\(1\\)\nの時はこの逆と取り決めることで尽くせます。\n線分を描く順序と、線分を描く向きとを固定すれば、それを最短の時間で実現する方法は定まります(始点または線分の終わりから次の線分の始まりまでを一直線に移動するのが最善です)。\nよって、この2つを二重ループの構造でループさせると、\n\\(N! \\times 2^N\\)\n通りの全探索が実現します。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing pi=pair<int,int>;\n\nlong double dist(pi l,pi r){\n  long long v=0;\n  v+=(l.first-r.first)*(l.first-r.first);\n  v+=(l.second-r.second)*(l.second-r.second);\n  return sqrtl(((long double)v));\n}\n\nint main(){\n  int n,s,t;\n  cin >> n >> s >> t;\n  vector<pi> x(n),y(n);\n  for(int i=0;i<n;i++){\n    cin >> x[i].first >> x[i].second >> y[i].first >> y[i].second;\n  }\n\n  long double res=8e18;\n  vector<int> p;\n  for(int i=0;i<n;i++){\n    p.push_back(i);\n  }\n\n  do{\n    for(int i=0;i<(1<<n);i++){\n      long double cres=0.0;\n      pi cur=make_pair(0,0);\n      for(int j=0;j<n;j++){\n        int el=p[j];\n        if(i&(1<<j)){\n          cres+=( dist(cur,x[el])/((long double)s) );\n          cres+=( dist(x[el],y[el])/((long double)t) );\n          cur=y[el];\n        }\n        else{\n          cres+=( dist(cur,y[el])/((long double)s) );\n          cres+=( dist(y[el],x[el])/((long double)t) );\n          cur=x[el];\n        }\n      }\n      res=min(res,cres);\n    }\n  }while(next_permutation(p.begin(),p.end()));\n\n  cout << fixed << setprecision(12) << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "eb9c3e2b9f6aee17c846a2fdaa028b879b682bae41bf7a84a14db1686298cc74",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc374/abc374_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc374/editorial/11105",
+      "text": "この問題は\n\\(O(N^22^N)\\)\nで答えを求めることができます。\nまず、この問題に出てくる座標\n\\((A_{i}, B_{i}), (C_{i}, D_{i}), (0, 0)\\)\nに適当なラベリングをし、それぞれ、頂点\n\\(0, 1, \\dots, 2N\\)\nとします。\n\\(dp[S][j]\\)\nをもう引いた線分の集合を\n\\(S\\)\nであり、今いる頂点が\n\\(j\\)\nであるような引き方のうちの最短時間とします。\nここまでくると、 TSP と同じ bitDP で解くことができます。\nc++ による実装例 1ms",
+      "codes": [],
+      "text_sha256": "8a6dc75b23f96e4e0e2707e54df23b604ec07083caa4b5f772e59f82fa472572",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc374/abc374_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

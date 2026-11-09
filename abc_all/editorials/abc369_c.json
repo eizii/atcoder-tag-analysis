@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc369_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc369/editorial/10834",
+      "text": "\\(l=r\\)\nのときは常に条件を満たすので、最初に答えに\n\\(n\\)\nを加算しておくことにして、以降は\n\\(l < r\\)\nなる組\n\\((l,r)\\)\nについてのみ考えます。\n\\(A\\)\nの差分配列を\n\\(B=(B_1,B_2,\\dots,B_{N-1})\\)\nとします。つまり、\n\\(B_i =A_{i+1}-A_i\\)\nです。このとき、\n\\((l,r)\\)\nが条件を満たすこと、すなわち\n\\(A_l, A_{l+1},\\dots,A_r\\)\nが等差数列であることは、\n\\(B_l = B_{l+1} = \\dots = B_{r-1}\\)\nであることと同値です。よって、本問題は以下のような問題に帰着されます。\n数列\n\\(B=(B_1,B_2,\\dots,B_{N-1})\\)\nが与えられる。\n\\(B_l = B_{l+1} = \\dots = B_r\\)\nであるような組\n\\((l, r)\\ (1\\leq l\\leq r\\leq N-1)\\)\nの数を求めよ。\nこの問題を解くために、まずは\n\\(B\\)\nをランレングス圧縮します。すなわち、以下の条件を全て満たすような整数の組の列\n\\((C_1, D_1), (C_2,D_2),\\dots,(C_k, D_k)\\)\nを求めます。この操作は\n\\(O(N)\\)\nで行えます。\n\\(C_i\\)\nを\n\\(D_i\\)\n個繋げた列を\n\\(f(i)\\)\nとおく。\n\\(B\\)\nは、\n\\(f(1), f(2), \\dots, f(k)\\)\nをこの順にすべて繋げた列である。\n全ての\n\\(1\\leq i < k\\)\nについて、\n\\(C_i \\neq C_{i+1}\\)\nここで、任意の\n\\(1\\leq i < k \\)\nについて、\n\\(f(i)\\)\nと\n\\(f(i+1)\\)\nの境目をある区間\n\\([l, r]\\)\nがまたぐ場合（すなわち、\n\\(l \\leq \\sum_{j=1}^{i} f(j) < r\\)\nである場合）、その組\n\\((l, r)\\)\nは条件を満たしません。よって、条件を満たす区間\n\\([l, r]\\)\nはいずれかの\n\\(f(i)\\)\nの中に完全に含まれています。逆に、ある\n\\(f(i)\\)\nの中に区間\n\\([l, r]\\)\nが完全に含まれている場合、その組\n\\((l, r)\\)\nは条件を満たします。\n\\(f(i)\\)\nの中に完全に含まれる区間の数は\n\\(\\frac{D_i(D_i+1)}{2}\\)\nですから、本問題に対する答えは\n\\(\\displaystyle \\sum_{i=1}^{k} \\frac{D_i(D_i+1)}{2}\\)\nです。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nll f(ll n) { return n * (n + 1) / 2; }\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for (int &i: a) cin >> i;\n    ll ans = n;\n    int pre = 0;\n    for (int i = 1; i < n - 1; i++) {\n        if (a[i] - a[i - 1] != a[i + 1] - a[i]) {\n            ans += f(i - pre);\n            pre = i;\n        }\n    }\n    ans += f(n - 1 - pre);\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "625a76d29808d21067b42a73244d9b34235d20528c6ea08ebb892fc0876bc27a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc369/abc369_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

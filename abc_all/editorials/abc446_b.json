@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc446_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc446/editorial/16369",
+      "text": "実装方針\n「選ばれた番号のあつまり」を空の集合で初期化し，客\n\\(1, \\dots, N\\)\nの希望リストを順に見ることを考えます，\n客\n\\(i\\)\nの希望リストを見るとき，以下のように処理します．\n先頭の要素から順にループを回し，各要素\n\\(X_{i,j}\\)\nに対して以下の操作を行う．\n\\(X_{i,j}\\)\nが「選ばれた番号のあつまり」に含まれる場合は何もしない．\nそうでない場合，客\n\\(i\\)\nは\n\\(X_{i,j}\\)\nを選んだと確定し，「選ばれた番号のあつまり」に\n\\(X_{i,j}\\)\nを追加してからループを終了する．\n上のループで客\n\\(i\\)\nの選ぶ番号が確定されなかった場合，客\n\\(i\\)\nは水を選んだと確定する．\n「選ばれた番号のあつまり」を実装する方法はいくつかあります．\n\\(k\\)\n番目の要素が「\n\\(k\\)\nが選ばれたなら\n\\(1\\)\n, 選ばれていないなら\n\\(0\\)\n」を表すような配列．\n\\(x\\)\nが含まれるかどうかの判定は，\n\\(x\\)\n番目の要素が\n\\(1\\)\nかどうかの判定として実装する．\n\\(x\\)\nを追加する操作は，\n\\(x\\)\n番目の要素を\n\\(1\\)\nにする操作として実装する．\n連想配列．\n多くの言語では，要素追加・存在判定を基本的な機能としてもつ連想配列が標準で実装されている．\nいずれによっても必要な機能を使用できます．\n実装例 (Python3, C++)\nPython3 での実装例を以下に示します．連想配列\nused\nが「選ばれた番号のあつまり」に対応します．\nC++ での実装例を以下に示します．配列\nisused\nが「選ばれた番号のあつまり」に対応します．",
+      "codes": [
+        "n, m = map(int, input().split())\n\nused = set()\nfor i in range(n):\n\tlen = int(input())\n\tx = 0\n\tdraftlist = list(map(int, input().split()))\n\tfor v in draftlist:\n\t\tif not (v in used):\n\t\t\tx = v\n\t\t\tused.add(x)\n\t\t\tbreak\n\tprint(x)",
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n#include <vector>\nusing std::vector;\n\nint main (void) {\n\tstd::cin.tie(nullptr);\n\tstd::ios_base::sync_with_stdio(false);\n\n\tint n, m;\n\tcin >> n >> m;\n\t\n\tvector<int> isused(m+1, 0);\n\tfor (int i = 0; i < n; i++) {\n\t\tint len;\n\t\tcin >> len;\n\n\t\tvector<int> x(len);\n\t\tfor (int j = 0; j < len; j++) {\n\t\t\tcin >> x[j];\n\t\t}\n\n\t\tint ans = 0;\n\t\tfor (int j = 0; j < len; j++) {\n\t\t\tif (isused[x[j]] == 0) {\n\t\t\t\tisused[x[j]] = 1;\n\t\t\t\tans = x[j];\n\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\n\t\tcout << ans << \"\\n\";\n\t}\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "4048e02b03ddeb1904c298aafa57fde433844aa7ec52c387a3a0eef21f327482",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc446/abc446_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

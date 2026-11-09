@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc219_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc219/editorial/2657",
+      "text": "二種類の方針を紹介します。\n方針 1.  比較関数を実装する\n文字列の辞書順が変わってしまっているため、\n\\(S_1, S_2, \\dots, S_N\\)\nをソートするにあたって、標準のソート関数を用いることはできません。そこで、文字列を比較する関数を定義し、それをソート関数に渡すことで問題文の指示通りに並べ替えることができます。\n与えられた\n\\(X\\)\nを用いて、各英小文字に対し、それが何番目に小さいか表す配列を用意することで、比較を\n\\(O(\\max |S_i|)\\)\nで行うことができます。\n実装例 (C++)\n方針 2.  別の数列に置き換えてからソートを行う\n多くの言語において、文字列や配列が格納された配列をソートするとき、辞書順に基づく比較を行います。そのため、全ての文字をその文字が\n\\(X\\)\nにおいて何番目に登場するか表す数値に変換したのち、標準の関数を用いてソートを行い、\n\\(X\\)\nを用いて数値を文字に戻すという処理を行うことでこの問題を解くことができます。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    string X;\n    cin >> X;\n    vector<int> pos(26);\n    for (int i = 0; i < 26; ++i) {\n        pos[X[i] - 'a'] = i;\n    }\n    int N;\n    cin >> N;\n    vector<string> S(N);\n    for (string& s : S) {\n        cin >> s;\n    }\n    sort(begin(S), end(S), [&](const string& s, const string& t) {\n        // 文字列の比較\n        int len = min(size(s), size(t));\n        for (int i = 0; i < len; ++i) {\n            if (s[i] != t[i]) {\n                return pos[s[i] - 'a'] < pos[t[i] - 'a'];  \n            }\n        }\n        return size(s) < size(t);\n    });\n    for (const string& s : S) {\n        cout << s << '\\n';\n    }\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n \nint main() {\n    string X;\n    cin >> X;\n    vector<int> pos(26);\n    for (int i = 0; i < 26; ++i) {\n        pos[X[i] - 'a'] = i;\n    }\n    int N;\n    cin >> N;\n    vector<vector<int>> S(N);\n    for (vector<int>& v : S) {\n        string s;\n        cin >> s;\n        for (const char c : s) {\n            v.push_back(pos[c - 'a']);\n        }\n    }\n    sort(begin(S), end(S));\n    for (const vector<int>& s : S) {\n        for (const int x : s) {\n            cout << X[x];\n        }\n        cout << '\\n';\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "478735810cc7e58f5421eccb73577ad8e0f56e14ee0ab3550a0c70e267a19ddd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc219/abc219_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

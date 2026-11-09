@@ -1,0 +1,33 @@
+{
+  "problem_id": "abc368_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc368/editorial/10761",
+      "text": "本解説では、 Grundy 数についての理解を前提とします。知らない方は、\nABC255-G の解説\nやインターネット検索をご利用ください。\n各\n\\(i\\)\nについての Grundy 数を求めるために、操作を観察します。\n\\(A_i\\)\nを\n\\(A_i\\)\n自身でない正の約数で置き換えるという操作は、言い換えると\n\\(A_i\\)\nの重複を含めた素因数を\n\\(1\\)\nつ以上減らす操作です。\n\\(A_i\\)\nの重複を含めた素因数の個数を\n\\(x_i\\)\nとします。このゲームは結局、\n\\(i\\)\n番目の山には\n\\(x_i\\)\n個の石があり、\n\\(1\\)\nつ以上の石を取り除いて取り除けなくなった方が負けのゲームと考えてよいです。これは Nim そのもので、\n\\(A_i\\)\nの Grundy 数は\n\\(x_i\\)\nです。\n\\(A\\)\nの最大値を\n\\(T\\)\nとすると、エラトステネスの篩を用いることで時間計算量が\n\\(O(N + T \\log \\log T)\\)\nのアルゴリズムを得られます。愚直に素因数分解を行う\n\\(O(N \\sqrt T)\\)\nのアルゴリズムでも十分高速です。",
+      "codes": [],
+      "text_sha256": "ac03342ec16bc1e6fe36ca5337dec6be1aa2bd8603b5d204b50c041902c98388",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc368/abc368_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc368/editorial/10781",
+      "text": "操作を観察しなくとも、 grundy 数の定義に従ってメモ化再帰で mex を求めても高速です。\nこれは $1$ から $X$ までの約数の個数の総和が $O(X\\log X)$ であることより分かります。\nボトルネックとなるのは\n\\(1\\)\nから\n\\(X\\)\nまでの約数を求めることですが、これはエラトステネスの篩で前準備すると早いです。そうでなくとも、全て愚直に計算しても高速です。",
+      "codes": [],
+      "text_sha256": "423a2d13d69f35694bc05dcf5f4582f8734588435325d5bcdfacdae26311fbbe",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc368/abc368_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc368/editorial/10791",
+      "text": "線形篩を使います。\n各\n\\(i\\)\n(\n\\(1\\le i\\le M\\)\n) に対して、\n\\(i\\)\nの最小素因数を（全体で）\n\\(O(M)\\)\n時間で求めることができるデータ構造です。（\n\\(1\\)\nの最小素因数については、文脈に応じて\n\\(1\\)\nとしたり\n\\(\\infty\\)\nとしたりします。）\n\\(i\\)\nの（重複を含めた）素因数の個数を\n\\(f(i)\\)\n、\n\\(i\\)\nの最小素因数を\n\\(\\operatorname{lpf}(i)\\)\nと書くと、\n\\[\nf(i) = \\begin{cases}\n0, & \\text{if } i = 1; \\\\\nf(i/{\\operatorname{lpf}(i)}) + 1, & \\text{if }i \\gt 1\n\\end{cases}\n\\]\nが成り立つので、DP によって各\n\\(f(i)\\)\nを\n\\(O(M)\\)\n時間で求めることができます。\nよって、（\n公式解説\nの考察を踏まえて）全体で\n\\(O(N+\\max_i A_i)\\)\n時間で解くことができます。\nおまけ：線形篩を使って\n\\(\\operatorname{lpf}(i)\\)\nのテーブルを作っておくことで、各\n\\(1\\le i\\le M\\)\nの約数の個数なども\n\\(O(M)\\)\n時間で求めることができます。\n→\n記事を書きました",
+      "codes": [],
+      "text_sha256": "14d11c922bf324f3de28e26fb50ddcd1c8832eadc7b29362961bc420c272b019",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc368/abc368_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

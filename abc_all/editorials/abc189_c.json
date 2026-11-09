@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc189_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc189/editorial/533",
+      "text": "\\(l,r\\)\nの組を全探索することを考えます。\n\\(l,r\\)\nを固定したとき、\n\\(x\\)\nは大きな値にする方が良いので、\n\\(x=\\min(A_l,\\ldots,A_r)\\)\nとするのが最適です。したがって、区間最小値が計算できればよいです。\nセグメントツリーなどを用いて\n\\(O(N^2 \\log N)\\)\nで求めることも出来ますがTLEになります。\n「まず\n\\(l\\)\nを固定し、\n\\(r\\)\nを順に大きくしながら\n\\(x\\)\nを更新する」という方法により\n\\(O(N^2)\\)\nで求めることができます。\n実装例(C++)\nまた、セグメントツリーではなく、sparse table などのデータ構造を用いて区間\n\\(\\min\\)\nを\n\\(O(1)\\)\nで求めることでも、\n\\(O(N^2)\\)\nでこの問題を解くことが出来ます。\nなおこの問題は\n\\(O(N)\\)\nで解く事も出来ます。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint a[10010];\nint main(){\n\tint n;\n\tcin >> n;\n\tfor(int i=0;i<n;i++)cin >> a[i];\n\n\tint ans=0;\n\tfor(int l=0;l<n;l++){\n\t\tint x=a[l];\n\t\tfor(int r=l;r<n;r++){\n\t\t\tx=min(x,a[r]);\n\t\t\tans=max(ans,x*(r-l+1));\n\t\t}\n\t}\n\tcout << ans;\n}"
+      ],
+      "text_sha256": "9eca769d33b22ee096b5afd5bcbddc54c4083f19106570c06921440c0d4a302d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc189/abc189_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

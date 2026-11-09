@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc416_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc416/editorial/13486",
+      "text": "問題の条件を整理すると、条件は直感的には以下のように捉えることができます。\n\\(S\\)\nのいくつかの\n.\nを\no\nに置き換える。\nただし、\n\\(2\\)\nつの\no\nの間には\n#\nがある必要がある。\nこの条件下の中で\no\nの文字数を最大にしたい。\nここで、「\n\\(2\\)\nつの\no\nの間には\n#\nがある必要がある」という条件から「いくつかの連続する\n.\nの中で\no\nに置き換えられる文字は\n\\(1\\)\nつまで」ということが分かります。たとえば\n\\(S=\\)\n...#..\nであったとき、左側の連続する\n...\n、右側の連続する\n..\nの中で\no\nに置き換えられる文字はそれぞれ\n\\(1\\)\n文字ずつまで、ということです。\nこの条件を満たすように\n\\(T\\)\nを構成する方法はいくつかありますが、ここでは追加で「\no\nに置き換える文字はできるだけ左側の文字にする」という条件を考えてみます。たとえば\n\\(S=\\)\n...#..\nの場合は\n\\(T=\\)\no..#o.\nのように、できるだけ左の文字を置き換えるということです。\nすると、\n\\(T\\)\nの\n\\(1\\)\n文字目以外は\n#.\nとなる場所を\n#o\nに置き換えれば良いことが分かります。\n\\(T\\)\nの\n\\(1\\)\n文字目も\n\\(S\\)\nの\n\\(0\\)\n文字目に仮想的な\n#\nが存在すると考えることで場合分けを減らすことができます。\n実装例(Python3)\n実装例(C++)",
+      "codes": [
+        "print((\"#\"+input()).replace(\"#.\",\"#o\")[1:])",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tstring s;\n\tcin >> s;\n\tint n = s.size();\n\tvector<char> t(n);\n\tfor (int i = 0; i < n; i++) {\n\t\tif (s[i] == '#') {\n\t\t\tcout << '#';\n\t\t} else if (i == 0 || s[i - 1] == '#') {\n\t\t\tcout << 'o';\n\t\t} else {\n\t\t\tcout << '.';\n\t\t}\n\t}\n\tcout << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "cdecb60f97f736e30d3527d1c73c320343981e49c5ef4d439cb83299ad319638",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc416/abc416_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

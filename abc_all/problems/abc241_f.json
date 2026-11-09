@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc241_f",
+  "title": "Skate",
+  "contests": [
+    {
+      "contest_id": "abc241",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1888,
+  "raw_difficulty": 1888,
+  "contest_id": "abc241",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc241/tasks/abc241_f",
+  "statement": "配点 : 500 点 問題文 H 行 W 列のグリッド型のスケート場があります。上から i 行目、左から j 行目のマスを (i,j) で表します。 スケート場には N 個の障害物があり、 i 個目の障害物は (X_i,Y_i) に置かれています。 高橋君は 1 回の移動において、上下左右いずれかの方向を選んで、障害物に当たるまで進み続けます。 障害物に当たるとその 1 つ手前のマスで停止します。\r\nなお、スケート場の周りは崖になっており、障害物に当たらないような移動は禁止とします。 高橋君ははじめ (s_x,s_y) にいて、何回か移動することで (g_x,g_y) で停止したいと考えています。 (g_x,g_y) へ辿り着くには最小で何回の移動が必要ですか？辿り着けないときはその旨を伝えてください。 制約 1\\leq H \\leq 10^9 1\\leq W \\leq 10^9 1\\leq N \\leq 10^5 1\\leq s_x,g_x\\leq H 1\\leq s_y,g_y\\leq W 1\\leq X_i \\leq H 1\\leq Y_i \\leq W (s_x,s_y)\\neq (g_x,g_y) (s_x,s_y)\\neq (X_i,Y_i) (g_x,g_y)\\neq (X_i,Y_i) i\\neq j ならば、 (X_i,Y_i)\\neq (X_j,Y_j) 入力は全て整数である 入力 入力は以下の形式で標準入力から与えられる。 H W N s_x s_y g_x g_y X_1 Y_1 X_2 Y_2 \\vdots X_N Y_N 出力 (g_x,g_y) へ辿り着くには最小で何回の移動が必要か出力せよ。 ただし、辿り着けないならば -1 と出力せよ。 入力例 1 7 8 7\r\n3 4\r\n5 6\r\n1 4\r\n2 1\r\n2 8\r\n4 5\r\n5 7\r\n6 2\r\n6 6 出力例 1 4 図は、 (s_x,s_y) を S で、 (g_x,g_y) を G で表しています。 (3,4)\\rightarrow(2,4) \\rightarrow(2,2) \\rightarrow(5,2) \\rightarrow(5,6) と移動すると、 4 回の移動で (g_x,g_y) に辿り着くことができます。 入力例 2 4 6 2\r\n3 2\r\n3 5\r\n4 5\r\n2 5 出力例 2 -1 (g_x,g_y) で停止する必要があります。 通過しただけでは (g_x,g_y) へ辿り着いたとみなされないことに注意してください。 入力例 3 1 10 1\r\n1 5\r\n1 1\r\n1 7 出力例 3 -1 左を選んで進むと、高橋君は (g_x,g_y) を通過したのちに崖に落ちてしまいます。 スケート場の周りは崖になっており、障害物に当たらないような移動は禁止されていることに注意してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 H 行 W 列のグリッド型のスケート場があります。上から i 行目、左から j 行目のマスを (i,j) で表します。 スケート場には N 個の障害物があり、 i 個目の障害物は (X_i,Y_i) に置かれています。 高橋君は 1 回の移動において、上下左右いずれかの方向を選んで、障害物に当たるまで進み続けます。 障害物に当たるとその 1 つ手前のマスで停止します。\r\nなお、スケート場の周りは崖になっており、障害物に当たらないような移動は禁止とします。 高橋君ははじめ (s_x,s_y) にいて、何回か移動することで (g_x,g_y) で停止したいと考えています。 (g_x,g_y) へ辿り着くには最小で何回の移動が必要ですか？辿り着けないときはその旨を伝えてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq H \\leq 10^9 1\\leq W \\leq 10^9 1\\leq N \\leq 10^5 1\\leq s_x,g_x\\leq H 1\\leq s_y,g_y\\leq W 1\\leq X_i \\leq H 1\\leq Y_i \\leq W (s_x,s_y)\\neq (g_x,g_y) (s_x,s_y)\\neq (X_i,Y_i) (g_x,g_y)\\neq (X_i,Y_i) i\\neq j ならば、 (X_i,Y_i)\\neq (X_j,Y_j) 入力は全て整数である"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 H W N s_x s_y g_x g_y X_1 Y_1 X_2 Y_2 \\vdots X_N Y_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 (g_x,g_y) へ辿り着くには最小で何回の移動が必要か出力せよ。 ただし、辿り着けないならば -1 と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 7 8 7\r\n3 4\r\n5 6\r\n1 4\r\n2 1\r\n2 8\r\n4 5\r\n5 7\r\n6 2\r\n6 6"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 図は、 (s_x,s_y) を S で、 (g_x,g_y) を G で表しています。 (3,4)\\rightarrow(2,4) \\rightarrow(2,2) \\rightarrow(5,2) \\rightarrow(5,6) と移動すると、 4 回の移動で (g_x,g_y) に辿り着くことができます。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4 6 2\r\n3 2\r\n3 5\r\n4 5\r\n2 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 -1 (g_x,g_y) で停止する必要があります。 通過しただけでは (g_x,g_y) へ辿り着いたとみなされないことに注意してください。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1 10 1\r\n1 5\r\n1 1\r\n1 7"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 -1 左を選んで進むと、高橋君は (g_x,g_y) を通過したのちに崖に落ちてしまいます。 スケート場の周りは崖になっており、障害物に当たらないような移動は禁止されていることに注意してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc241/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:11.467198+00:00",
+  "statement_sha256": "7c885fdfbd12a20b6e8bb0ffd2f0c6825e6bae5d0cb52f5a115bd80b2d9d5363",
+  "editorials": []
+}

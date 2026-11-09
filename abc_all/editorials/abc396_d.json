@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc396_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc396/editorial/12388",
+      "text": "まずは頂点\n\\(1\\)\nから始まる単純パスがどれくらいあるかを考えます．グラフが完全グラフ（\n\\(M=N(N-1)/2\\)\nのとき）だった場合，単純パスに含まれる頂点列\n\\((v_1,v_2,\\ldots,v_k)\\)\nとしてあり得るものは\n\\(v_1=1\\)\nかつ\n\\(v_i\\neq v_j(i\\neq j)\\)\nを満たすものであり，これを満たすものは\n\\({}_{N-1}P_0+{}_{N-1}P_1+\\ldots+{}_{N-1}P_{N-1}\\)\n通りです（\n\\({}_nP_r\\)\nは異なる\n\\(n\\)\n個のものから\n\\(k\\)\n個選んで並べる方法の総数）．この値は\n\\(\\Theta((N-1)!)\\)\nであり，\n\\(N=10\\)\nのとき約\n\\(10^6\\)\nとなります．したがって，あり得る単純パスを全て調べることができます．\n単純パスを全部列挙するには DFS が有効です．（最後に訪れた頂点，訪問したかどうかを確認する配列，すでに通った辺に書かれたラベルの総 XOR）を持ちながら DFS をすることで答えを求めることができます．実装例も参考にしてください．",
+      "codes": [
+        "N, M = map(int, input().split())\nG = [[] * N for i in range(N)]  # 隣接頂点リスト．（頂点, 辺のラベル）をペアで持つ．\nfor i in range(M):\n    u, v, w = map(int, input().split())\n    u -= 1\n    v -= 1\n    G[u].append((v, w))\n    G[v].append((u, w))\n\nans = 1 << 60\nvisited = [False] * N  # 訪問済みかどうかを持つリスト\n\n\ndef dfs(v, xor):\n    global ans\n    visited[v] = True  # 頂点 v を訪問済みにする\n\n    # もし今いる頂点が N - 1 なら答えを更新する\n    if v == N - 1:\n        ans = min(ans, xor)\n\n    for u, w in G[v]:\n        # もし頂点 u に訪れていないなら，頂点 u に進む\n        if not visited[u]:\n            dfs(u, xor ^ w)\n    visited[v] = False  # 訪問済みを解除する\n\n\ndfs(0, 0)\nprint(ans)"
+      ],
+      "text_sha256": "dd3c110a31988e333f10043f094f0a4d8beeb94b86977689c9bad11c140ad036",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc396/abc396_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

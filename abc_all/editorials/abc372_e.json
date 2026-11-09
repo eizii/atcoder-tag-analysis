@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc372_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc372/editorial/10967",
+      "text": "UnionFind を用いて解くことができます．\n\\(K=10\\)\nとして，各連結成分ごとに，その連結成分に含まれる頂点のうち頂点番号が大きい上位\n\\(K\\)\n個を持たせておきます．クエリ\n\\(1\\)\nの処理では，\n\\(2\\)\nつの連結成分の頂点番号上位\n\\(K\\)\n個のマージを\n\\(O(K \\log K)\\)\nで行うことができます．クエリ\n\\(2\\)\nに対しては\n\\(O(1)\\)\nで\n\\(k\\)\n番目に大きい頂点番号を取得することができます．\n実装方法はいくつか考えられますが，UnionFind の構造体の中を直接いじるのが楽かつ汎用的だと筆者は思っています．(個人差がありますので，他の上級者の実装例も参考にしてみてください．)\n筆者の実装方法では、具体的にいじる場所は主に\n\\(2\\)\n箇所です．\nUnionFind の初期化において，必要な情報を追加する\nUnionFind の merge で，一方（子になる方）の情報をもう一方（親になる方）に情報をマージさせる\n詳しくは以下の実装例を参考にしてください．",
+      "codes": [
+        "class UnionFind:\n    def __init__(self, n):\n        self.n = n\n        self.parents = [-1] * n\n        # 各連結成分に含まれる頂点の上位 10 個を管理する\n        # 最初の時点では，各連結成分の頂点は 1 つずつ\n        self.member = [[i] for i in range(n)]\n\n    def find(self, x):\n        if self.parents[x] < 0:\n            return x\n        else:\n            self.parents[x] = self.find(self.parents[x])\n            return self.parents[x]\n\n    def merge(self, x, y):\n        x = self.find(x)\n        y = self.find(y)\n\n        if x == y:\n            return\n\n        if self.parents[x] > self.parents[y]:\n            x, y = y, x\n\n        self.parents[x] += self.parents[y]\n        self.parents[y] = x\n\n        # 親 x に子 y の情報をマージする\n        self.member[x] += self.member[y]\n        self.member[x] = sorted(self.member[x], reverse=True)[:10]\n\n\nN, Q = map(int, input().split())\nuf = UnionFind(N + 1)\nfor _ in range(Q):\n    query = list(map(int, input().split()))\n    if query[0] == 1:\n        u, v = query[1:]\n        uf.merge(u, v)\n    else:\n        v, k = query[1:]\n        v = uf.find(v)\n        if len(uf.member[v]) < k:\n            print(-1)\n        else:\n            print(uf.member[v][k - 1])"
+      ],
+      "text_sha256": "25d5cff4f47b68e8565b2f8fac7266ddb045d6e29b8432ddf77fc6b8d8bb7b91",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc372/abc372_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc372/editorial/10968",
+      "text": "\\(k\\leq 10\\)\nという制約を除いても解けます．軽く紹介しておきます．\n\\(O(N\\log^2 N+Q\\log N)\\)\n解法\n方針は元の解説と同じです．各連結成分に含まれる頂点を，集合の中で\n\\(k\\)\n番目に大きい要素を高速に（例えば\n\\(O(\\log N)\\)\nで）取得することができる set で管理することで，マージテクと合わせて\n\\(O(N\\log^2 N+Q\\log N)\\)\nで解くことができます．\n\\(O((N+Q)\\log N)\\)\n解法\nUnionFind のマージ過程を表す木を作ると，クエリ\n\\(2\\)\nは「頂点\n\\(u\\)\nの部分木にある頂点のうち\n\\(k\\)\n番目に大きいものは？」というクエリに言い換えることができます．これは\nSubtree K-th Max\nそのものであり，この問題のユーザー解説にあるようにオイラーツアーをして部分木を区間に対応させ，Wavelet Matrix を用いることで\n\\(O((N+Q)\\log N)\\)\nで解くことができます．",
+      "codes": [],
+      "text_sha256": "1a55c7b0b5b91850433b6d2786b7dc3b764e1634f2bb1a41d5f22d32b7b50655",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc372/abc372_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

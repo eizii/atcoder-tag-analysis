@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc417_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc417/editorial/13563",
+      "text": "プレゼントを後ろから見ることでこの問題を解くことができます。\n\\(\\operatorname{dp}\\lbrack i\\rbrack\\lbrack j\\rbrack\\coloneqq i\\) 番目のプレゼントを受け取った直後（\\(i=0\\) のとき、はじめのプレゼントを受け取る前）のテンションの値が \\(j\\) のときの、最終的なテンションの値 のような DP テーブルを考えます。\nすると、\\[\\operatorname{dp}\\lbrack i\\rbrack\\lbrack j\\rbrack=\\begin{cases}\\operatorname{dp}\\lbrack i+1\\rbrack\\lbrack j+A _ i\\rbrack&\\quad(j\\le P _ i)\\\\\\operatorname{dp}\\lbrack i+1\\rbrack\\lbrack\\max\\lbrace0,j-B _ i\\rbrace\\rbrack&\\quad(\\text{otherwise.})\\end{cases}\\] と計算できます。\nしかし、\\(0\\le j\\le10 ^ 9\\) の範囲のすべての \\(j\\) に対して DP テーブルを計算していては実行時間制限に間に合わせるのは難しいです。\nここで、高橋くんのテンションの値 \\(j\\) がありうるプレゼントの価値 \\(P _ i\\) の範囲と比較して非常に大きくなっている場合、以降しばらくの高橋くんのテンションの変化が明らかに定まることを利用すると、DP テーブルの大きさを小さくすることができます。\n適切な範囲で計算を行っておけば、DP テーブルで計算した範囲の外のクエリが与えられた場合、範囲内に入るまでテンションが下がり続けることから、範囲内に入るまでにプレゼントを受け取る個数を計算することで答えを求めることができます。\nDP テーブルの大きさは、大きく \\(2\\) つの方針に分けられます。\n\\(\\displaystyle0\\le j\\le\\max _ iP _ i\\) の範囲で計算する方針\nメモリ使用量は小さくなりますが、前計算中に DP テーブルの外の値が必要になり、遷移が複雑になります。\n\\(\\displaystyle0\\le j\\le\\max _ i\\lbrace A _ i+P _ i\\rbrace\\) の範囲で計算する方針\n前計算の段階で DP テーブルの外側の値が必要にならず、遷移はシンプルになりますが、メモリ使用量は大きくなります。\n実装例は以下のようになります。\nこの実装例では、後者の方針で DP テーブルの計算を行っています。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <array>\n#include <algorithm>\n#include <numeric>\n#include <ranges>\n\nint main() {\n    using namespace std;\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\n    unsigned N;\n    cin >> N;\n    vector<array<unsigned, 3>> P(N);\n    for (auto&& [p, a, b] : P)\n        cin >> p >> a >> b;\n\n    // テンションは max (P + A) 以下の値を管理する\n    const auto M{ranges::max(P | views::transform([](const auto& p) { return p[0] + p[1]; }))};\n\n    // dp[i][j] := i 番目までのプレゼントを受け取ったときのテンションが j のときの、最終的なテンションの値\n    vector dp(N + 1, vector<unsigned>(M + 1));\n\n    // すべて受け取り終わったときのテンションが j なら、最終的なテンションは j\n    iota(begin(dp.back()), end(dp.back()), 0);\n\n    for (unsigned i = N; i--; ) {\n        const auto& [p, a, b] = P[i];\n        for (unsigned j = 0; j <= M; ++j)\n            // 現在のテンションの値がプレゼントの価値以下なら +A, そうでなければ -B\n            dp[i][j] = j <= p ? dp[i + 1][j + a] : dp[i + 1][j - min(j, b)];\n    }\n\n    // 大きめのテンションが来たときにいつ範囲内に入るかを判定するため、B の累積和を計算しておく\n    vector<unsigned> sum_B(N);\n    ranges::copy(P | views::elements<2>, begin(sum_B));\n    inclusive_scan(begin(sum_B), end(sum_B), begin(sum_B), plus{});\n\n    // はじめのテンションが x のときの最終的なテンションの値（オフセット込み）\n    const auto access{[&dp, &sum_B, N, M](unsigned x) -> unsigned {\n        // 最初から範囲内なら、dp の値を返せばよい\n        if (x <= M)\n            return dp[0][x];\n\n        // 高いなら、しばらく下がり続ける\n        const auto need_down{ranges::lower_bound(sum_B, x - M)};\n        // N 回下がっても足りないなら、N 回下がるだけ\n        if (need_down == end(sum_B))\n            return x - sum_B.back();\n        // 範囲に入ったら dp の値を返す\n        return dp[need_down - begin(sum_B) + 1][x - min(x, *need_down)];\n    }};\n\n    unsigned Q;\n    cin >> Q;\n    for (unsigned i = 0; i < Q; ++i) {\n        unsigned x;\n        cin >> x;\n        cout << access(x) << '\\n';\n    }\n    cout << flush;\n    return 0;\n}"
+      ],
+      "text_sha256": "667b6866049f8ae33fb6bc8cb225f85d591ff22e330d76fe837cae1b840f0991",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc417/abc417_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc417/editorial/13593",
+      "text": "テンションの変化を以下の連続した操作として言い換えることができます。\n現在のテンションが\n\\(P\\)\n以下のとき、テンションを\n\\(A+B\\)\nだけ増加させる。\nさらに、テンションを\n\\(B\\)\nだけ減少させる。\nテンションをキー、そのテンションに対応するクエリ番号の集合を値とする順序付き連想配列を使用し、前からすべての質問を同時にシミュレートします。\n操作 2 は実際に操作せず、連想配列のキーと実際のテンションの差分を別に管理します。\n操作 1 は\n\\(P\\)\nが小さいことから愚直に追加削除を行うことができます。クエリ番号の集合のマージが必要になりますが、データ構造をマージする一般的なテクを使えば十分高速です。\n全体の時間計算量は\n\\(O((N\\max(P)+Q)\\log Q)\\)\nです。\n解答例 (Rust)",
+      "codes": [
+        "use proconio::{fastout, input};\nuse std::{collections::BTreeMap, mem::swap};\n\n#[fastout]\npub fn main() {\n    input!(n: usize, pab: [(usize, usize, usize); n], q: usize, x: [usize; q]);\n    let mut map = BTreeMap::<usize, Vec<usize>>::new();\n    for i in 0..q {\n        map.entry(x[i]).or_default().push(i);\n    }\n    let mut acc = 0;\n    let mut stack = vec![];\n    for (p, a, b) in pab {\n        while let Some((&key, _)) = map.range(..=p + acc).next() {\n            let value = map.remove(&key).unwrap();\n            stack.push((key.saturating_sub(acc) + acc + a + b, value));\n        }\n        while let Some((key, mut value)) = stack.pop() {\n            map.entry(key)\n                .and_modify(|e| {\n                    if e.len() < value.len() {\n                        swap(e, &mut value);\n                    }\n                    e.extend(&value);\n                })\n                .or_insert_with(|| value);\n        }\n        acc += b;\n    }\n    let mut ans = vec![0; q];\n    for (key, value) in map {\n        for i in value {\n            ans[i] = key.saturating_sub(acc);\n        }\n    }\n    for ans in ans {\n        println!(\"{ans}\");\n    }\n}"
+      ],
+      "text_sha256": "579bf8f6b2d5393851a17338faa4bfa78d48fa68b867e1e444b7d64407293f11",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc417/abc417_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

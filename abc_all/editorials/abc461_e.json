@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc461_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc461/editorial/21023",
+      "text": "各クエリで黒マスが何個増える（減る）か分かれば十分です。以下、タイプ 1 のクエリで黒マスが何個増えるか考えます。\n行\n\\(R\\)\nが初めて操作対象になったとき、行\n\\(R\\)\nのマスはすべて白であり、黒マスが\n\\(N\\)\n個増えます。\n行\n\\(R\\)\nが操作対象になったのが初めてでないとき、行\n\\(R\\)\nのマスは行\n\\(R\\)\nが前回操作対象になったときに黒になっており、その後タイプ 2 のクエリで白く塗られたマスを黒に戻すことになります。\n従って、行\n\\(R\\)\nが前回操作対象になってからタイプ 2 のクエリの対象になった列が何個あるか（あるいは何種類のタイプ 2 のクエリが行われたか）求まれば、それが黒マスの増加数です。\nこれは\nAWC0015E\nの特殊な場合です。ここでそちらの解説に移っても構いませんが、ここでは\nFenwick Tree / Binary Indexed Tree\n（数列の要素の変更と区間和の計算をともに高速に行うデータ構造）を使って今回の特殊な場合を解く方法を述べます。（一般の場合もクエリをソートすれば同様に解けます。）\n長さ\n\\(Q\\)\nの数列\n\\(f\\)\nを Fenwick Tree で管理しながらクエリを順に処理します。\n\\(f_i\\)\nの値は、\n\\(i\\)\n回目のクエリが実行済みのタイプ 2 のクエリであってその列に対する（その時点で）最後のクエリであるなら\n\\(1\\)\n、そうでないなら\n\\(0\\)\nとします（要するに、各列について最後の\n\\(1\\)\n回のクエリのみ数えることで同じ列の重複を省きます）。すると、\n\\(i\\)\n回目のクエリがタイプ 1 であるとき、そこでの黒マスの増加数は、行\n\\(R\\)\nが前回操作対象になったクエリが\n\\(\\text{last}_R\\)\n回目であるとして\n\\(\\sum_{j = \\text{last}_R}^{i - 1} f_j\\)\nと計算できます。\n\\(\\text{last}_R\\)\nを通常の配列で管理すると、全体の時間計算量は\n\\(O(Q \\log Q + N)\\)\nです。\nタイプ 2 のクエリで黒マスが何個減るかも同様に求められますが、列\n\\(C\\)\nが初めて操作対象になったときはそれまでにタイプ 1 のクエリの対象になった行を数えます。\nPython（+\nAtCoder Library の Python ポート\n）での実装例",
+      "codes": [
+        "from atcoder.fenwicktree import FenwickTree\n\nN, Q = map(int, input().split())\nf = [FenwickTree(Q + 1) for _ in range(2)]\nb = 0\nlast = [[-1] * (N + 1), [0] * (N + 1)]\n\nfor i in range(1, Q + 1):\n    t, x = map(int, input().split())\n    t -= 1\n    if last[t][x] == -1:\n        b += N\n    else:\n        kind = f[1 - t].sum(last[t][x], i)\n        b += kind if t == 0 else -kind\n        f[t].add(last[t][x], -1)\n    f[t].add(i, 1)\n    last[t][x] = i\n    print(b)"
+      ],
+      "text_sha256": "4dbfbfef32cf271843e1d47979930bd7874121baf7c3450622985e9c30815142",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc461/abc461_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

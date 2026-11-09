@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc277_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc277/editorial/5209",
+      "text": "グラフへの言い換え\nこの問題は\n\\(1\\)\nから\n\\(10^9\\)\nの番号がついた頂点があり、頂点\n\\(A_i\\)\nと頂点\n\\(B_i\\)\nの間に無向辺があるようなグラフについて考察することにより解くことができます。\n上記のようにグラフを作ったとき、答えは\n\\(1\\)\nと連結な頂点であって、頂点の番号が最大なものです。\nグラフ上での探索\n問題をグラフへと言い換えられたので、グラフ上での探索アルゴリズムを用いればよいですが、どのようにするのが適切でしょうか。\nまず、頂点数が\n\\(10^9\\)\nと多いため、愚直な探索では\nTLE\nしてしまう恐れがあるでしょう。ここで、次数が\n\\(1\\)\n以上の頂点は高々\n\\(2N\\)\n個であり、（\n\\(1\\)\n以外の）次数\n\\(0\\)\nの頂点は存在しないとしても問題がないため、頂点数を\n\\(O(N)\\)\n個まで削減できます。\nグラフをどのような形で持つかは課題となりますが、隣接リストの要領で頂点を key 、その頂点との辺が存在する頂点集合を value とする連想配列を持つ、あるいは座標圧縮をするなどの方法で処理をすることができます。\nさて、グラフ上での探索アルゴリズムといえば BFS や DFS などがありますが、この問題においてはどちらも適切な選択肢です。なぜならば、BFS と DFS の違いは探索の順序であり、「連結かどうか」という条件は探索の順序によって変わらないからです。\nこれらの方法によりこの問題は\n\\(O(N\\log N)\\)\nで解くことができます。\nまた、若干計算量は悪化しますが問題となっているのは連結性のみであるため、UnionFind を用いることによりこの問題を解くこともできます。\n実装例（C++）\n実装例（Python）\n余談：DFS と BFS の使い分けについて\n上に記載した通り、DFS とBFS の最大の相違点は探索の順序です。このため、探索の順序によらないものを扱う場合はどちらを用いても変わりません。例えば、木上での最短距離を求めたい場合、同じ頂点を複数回通らないパスは一意に定まるためどちらを用いても問題がありません。一方、一般のグラフにおいては同じ頂点を複数回通らないパスは一意に定まるとは限らないので、適切な探索方法を考えて選択する必要があり、実際この場合は BFS のみが適切です。頂点の探索方法は DFS と BFS に限らず、例えば Dijkstra はこれの少し非自明なバージョンと考えることもできます。 また、BFS における queue の代わりに 優先度付き queue を用いた頂点番号の小さい順（あるいは大きい順）の探索を行うことも可能であり、実際本問題においてそのような探索をしても正しい答えを返します。",
+      "codes": [
+        "#include <iostream>\n#include <queue>\n#include <map>\n#include <set>\nusing namespace std;\n\nint main() {\n\tint n;\n\tcin >> n;\n\tmap<int, vector<int>> graph;\n\tfor (int i = 0; i < n; i++) {\n\t\tint a, b;\n\t\tcin >> a >> b;\n\t\tgraph[a].push_back(b);\n\t\tgraph[b].push_back(a);\n\t}\n\tqueue<int> que;\n\tque.push(1);\n\tset<int> S;\n\tS.insert(1);\n\twhile (!que.empty()) {\n\t\tint v = que.front(); que.pop();\n\t\tfor (int i : graph[v]) {\n\t\t\tif (!S.count(i)) {\n\t\t\t\tque.push(i);\n\t\t\t\tS.insert(i);\n\t\t\t}\n\t\t}\n\t}\n\tcout << *S.rbegin() << '\\n';\n}",
+        "from collections import defaultdict, deque\n\nn = int(input())\ngraph = defaultdict(list)\nfor _ in range(n) :\n\ta, b = map(int, input().split())\n\tgraph[a].append(b)\n\tgraph[b].append(a)\nque = deque()\nque.append(1)\nS = {1}\nwhile que:\n\tv = que.popleft()\n\tfor i in graph[v]:\n\t\tif not i in S:\n\t\t\tque.append(i)\n\t\t\tS.add(i)\nprint(max(S))"
+      ],
+      "text_sha256": "52aab5eede903f3b7e9e0800e739a9d769cf4726a15e76e66640282c8df7dd48",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc277/abc277_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

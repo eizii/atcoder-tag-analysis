@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc283_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc283/editorial/5427",
+      "text": "この問題のようなクエリ形式の問題は、「クエリを受け取りながら、クエリの操作を効率よくシミュレーションする」ことや、「クエリをまとめて受け取ることで、操作を全部行うことなく答えを効率よく求める」ことで解くことが多いです。\nこの問題は、配列を用いることで、（クエリの操作をその場でシミュレーションしながら）解くことができます。\n具体的には、C++ では生配列や\nstd::vector\nなどを用いることで、python ではリストを用いることで、この問題を解くことができます。\n実装例は以下のようになります。\n実装に際しては、クエリの形式ごとに入力すべき値の個数が異なることなどに注意してください。\nC++ （生配列）\nC++ （\nstd::vector\n）\npython",
+      "codes": [
+        "#include <iostream>\n\nusing namespace std;\n\nint A[100000];\n\nint main() {\n    int N;\n    cin >> N;\n\n    // A の入力\n    for (int i = 0; i < N; ++i) {\n        cin >> A[i];\n    }\n\n    int Q;\n    cin >> Q;\n\n    // クエリの入力\n    for (int i = 0; i < Q; ++i) {\n        int type;\n        cin >> type;\n        if (type == 1) {\n            // 1 番目の形式なら、A を更新\n            int k, x;\n            cin >> k >> x;\n            A[k - 1] = x;\n        } else {\n            // 2 番目の形式なら、A を出力\n            int k;\n            cin >> k;\n            cout << A[k - 1] << endl;\n        }\n    }\n\n    return 0;\n}",
+        "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\nint main() {\n    int N;\n    cin >> N;\n\n    vector<int> A(N);\n    // A の入力\n    for (int i = 0; i < N; ++i) {\n        cin >> A[i];\n    }\n\n    int Q;\n    cin >> Q;\n\n    // クエリの入力\n    for (int i = 0; i < Q; ++i) {\n        int type;\n        cin >> type;\n        if (type == 1) {\n            // 1 番目の形式なら、A を更新\n            int k, x;\n            cin >> k >> x;\n            A[k - 1] = x;\n        } else {\n            // 2 番目の形式なら、A を出力\n            int k;\n            cin >> k;\n            cout << A[k - 1] << endl;\n        }\n    }\n\n    return 0;\n}",
+        "N = int(input())\n\n# A の入力\nA = list(map(int, input().split()))\n\nQ = int(input())\n\n# クエリの入力\nfor i in range(Q):\n    query = list(map(int, input().split()))\n    if query[0] == 1:\n        # 1 番目の形式なら、A を更新\n        type, k, x = query\n        A[k - 1] = x\n    else:\n        # 2 番目の形式なら、A を出力\n        type, k = query\n        print(A[k - 1])"
+      ],
+      "text_sha256": "09ea908b6d3a3c23eba2ba4098f1b4820dbd074eb48650708394a68b10b43b50",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc283/abc283_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

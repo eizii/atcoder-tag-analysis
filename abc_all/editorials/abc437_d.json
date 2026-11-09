@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc437_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc437/editorial/14901",
+      "text": "考察\n\\(A\\)\nの要素を昇順に並べ替えて\n\\(A_1 \\leq A_2 \\leq \\dots \\leq A_N\\)\nとしても答えは変化しません。以下では\n\\(A\\)\nは昇順であるとします。\n\\(|x - y|\\)\nの値は、\n\\(x \\geq y\\)\nのときは\n\\(x-y\\)\nであり、\n\\(x < y\\)\nのときは\n\\(y-x\\)\nです。この場合分けから、\n\\(A_i \\geq B_j\\)\nの場合と\n\\(A_i < B_j\\)\nの場合のそれぞれについて分けて考える方針が立ちます。\nある\n\\(B_j\\)\nを固定して\n\\(y\\)\nとおきます。\n\\(\\sum_{i = 1}^{N} |A_i - y|\\)\nの値は、以下の\n\\(2\\)\nつの値の和として表せます。\n\\(A_i \\geq y\\)\nとなる\n\\(A_i\\)\nに対する\n\\((A_i - y)\\)\nの和。\n\\(A_i < y\\)\nとなる\n\\(A_i\\)\nに対する\n\\((y - A_i)\\)\nの和。\n前者の値の求め方\nここで、\n\\(A_i \\geq y\\)\nとなる最小の\n\\(i\\)\n(存在しなければ\n\\(N+1\\)\n) を\n\\(i_y\\)\nとおくと、\n\\(A_i \\geq y\\)\nとなる\n\\(A_i\\)\nの個数は\n\\(N+1-i_y\\)\nとなることから、前者の値は以下のように式変形できます。\n\\[\\sum_{A_i \\geq y} (A_i - y) = \\sum_{A_i \\geq y} A_i - \\sum_{A_i \\geq y} y = (A_{i_y+1} + \\dots + A_N) - (N + 1 - i_y)y\\]\nしたがって、\n\\(y\\)\nに対する\n\\(i_y\\)\nの値と、\n\\((A_{i_y+1} + \\dots + A_N)\\)\nの値をそれぞれ高速に求めれば、上の値を高速に計算できます。\n\\(A_i \\geq y\\)\nとなる最小の\n\\(i\\)\nは、\n\\(A\\)\nが昇順に並んでいるので二分探索で求めることができます。\n\\((A_{i_y + 1} + \\dots + A_N)\\)\nの値は、それぞれの\n\\(i_y \\in \\{1, \\dots, N+1\\}\\)\nについて降順に求めておく前計算を事前にすることで、\n\\(y\\)\nごとに毎回独立に計算する必要がなくなります。\n以上の高速化によって、求める値を高速に計算できます。\n後者の値の求め方\n\\(A_i \\geq y\\)\nとなる最小の\n\\(i\\)\n(存在しなければ\n\\(N+1\\)\n) を\n\\(i_y\\)\nとおくと、\n\\(A_i < y\\)\nとなる\n\\(A_i\\)\nの個数は\n\\(i_y-1\\)\nとなることから、後者の値は以下のように式変形できます。\n\\[\\sum_{A_i < y} (y - A_i) = \\sum_{A_i < y} y - \\sum_{A_i < y} A_i = (i_y - 1)y - (A_1 + \\dots + A_{i_y - 1})\\]\nこれは前者の値でおこなったやり方と同様にして高速に求まります。\n全体の実装方針\nここまでの考察から、以下の実装を行えば問題を解くことができます。\n\\(A\\)\nを昇順に並べ替える。\n\\(i \\in \\{0, 1, \\dots, N+1\\}\\)\nに対して、\n\\((A_1 + \\dots + A_i)\\)\nを累積和によって計算する。\n\\(i \\in \\{0, 1, \\dots, N+1\\}\\)\nに対して、\n\\((A_i + \\dots + A_N)\\)\nを累積和によって計算する。\n変数\n\\(ans\\)\nを\n\\(0\\)\nで初期化する。\n\\(j = 1, \\dots, M\\)\nに対して、\n\\(y = B_j\\)\nとして以下の計算を行う。\n\\(A_i \\geq y\\)\nとなる最小の\n\\(i\\)\n(存在しなければ\n\\(N+1\\)\n) を二分探索によって求める(その値を\n\\(i_y\\)\nとする)。\n\\((A_{i_y+1} + \\dots + A_N) - (N + 1 - i_y)y\\)\nを\n\\(ans\\)\nに加える。\n\\((i_y - 1)y - (A_1 + \\dots + A_{i_y - 1})y\\)\nを\n\\(ans\\)\nに加える。\n\\(ans \\bmod 998244353\\)\nの値を出力する。\n時間計算量は、ソートおよび二分探索がボトルネックになって\n\\(O((N+M) \\log (N+M))\\)\nとなり、十分高速です。\n適宜 mod をとる必要があることに注意して下さい。特に 32 bit 整数や 64 bit 整数などの固定ビット長変数を使う場合は、オーバーフローを避けるため、最後の出力直前以外でも適切に mod をとる必要があることに注意してください。\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n#include <vector>\nusing std::vector;\n#include <algorithm>\nusing std::sort;\n\ntypedef long long int ll;\n\nconst ll MOD = 998244353;\n\nll n, m;\nvector<ll> a, b;\n\n\nvoid solve () {\n\tsort(a.begin(), a.end());\n\tsort(b.begin(), b.end());\n\n\t// sum[0, i), sum[i, n)\n\tvector<ll> apre(n+1, 0LL), asuf(n+1, 0LL);\n\tapre[0] = 0;\n\tfor (ll i = 0; i < n; i++) {\n\t\tapre[i+1] = (apre[i] + a[i]);\n\t}\n\tasuf[n] = 0;\n\tfor (ll i = n-1; i >= 0; i--) {\n\t\tasuf[i] = (asuf[i+1] + a[i]);\n\t}\n\n\tll ans = 0;\n\tfor (ll i = 0; i < m; i++) {\n\t\t// a[<x] < b[i], a[>=x] >= b[i]\n\t\tll ok = n, ng = -1;\n\t\twhile (ng + 1 < ok) {\n\t\t\tll med = (ok + ng) / 2;\n\t\t\tif (a[med] >= b[i]) {\n\t\t\t\tok = med;\n\t\t\t} else {\n\t\t\t\tng = med;\n\t\t\t}\n\t\t}\n\t\tconst ll x = ok;\n\n\t\t// prefix sum\n\t\tans += ((b[i] * x) - apre[x]) % MOD;\n\t\t// suffix sum\n\t\tans += (asuf[x] - (b[i] * (n-x))) % MOD;\n\t}\n\tans %= MOD;\n\n\tcout << ans << \"\\n\";\n\treturn;\t\n}\n\nint main (void) {\n\tcin >> n >> m;\n\ta.resize(n);\n\tb.resize(m);\n\tfor (ll i = 0; i < n; i++) {\n\t\tcin >> a[i];\n\t}\n\tfor (ll i = 0; i < m; i++) {\n\t\tcin >> b[i];\n\t}\n\n\tsolve();\n\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "1b937369809606f04aa4685eb84789c1df2e7b510352a633d88bcb76821f26a0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc437/abc437_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc437/editorial/14925",
+      "text": "解法\n数列\n\\(A, B\\)\nをまとめた\n\\(1\\)\nつの数列をソートする解法です。\n昇順に走査しながら、次の情報を管理します。\nこれまでに出現した\n\\(A\\)\nの要素の個数\n\\(C_A\\)\nと総和\n\\(S_A\\)\n\\(B\\)\nの要素の個数\n\\(C_B\\)\nと総和\n\\(S_B\\)\n各要素が出現したときに、対応する寄与を答えに加算\n対応する寄与は、 出現した要素が\n\\(A_i\\)\nのとき\n\\(A_i C_B - S_B\\)\n、 出現した要素が\n\\(B_j\\)\nのとき\n\\(B_j C_A - S_A\\)\nです。\n計算量はソートがボトルネックとなり、\n\\(O((N+M) \\log(N+M))\\)\nです\n補足\n\\(A\\)\nと\n\\(B\\)\nの要素の各ペア\n\\((A_i, B_j)\\)\nについて、\n\\(A_i\\)\nが先にくる場合\n\\((A_i \\leq B_j)\\)\nの場合と\n\\(B_j\\)\nが先にくる場合\n\\((B_j \\leq A_i)\\)\nの場合を考えます。(イコールは寄与が\n\\(0\\)\nなので適当に処理してよいです)\n\\(A_i\\)\nが先にくる場合、寄与は\n\\(B_j - A_i\\)\nです。同じ\n\\(B_j\\)\nについてまとめることで、\n\\( \\sum_k (B_j - A_{i_k}) =B_j C_A - S_A\\)\nが得られます。\n\\(B_j\\)\nが先にくる場合、同様にして、\n\\(A_i C_B - S_B\\)\nが得られます。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "9e8825dd8a02799e8e121c7293442a5ef6924b4a0847e7dd95453388b8adab47",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc437/abc437_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

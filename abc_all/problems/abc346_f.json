@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc346_f",
+  "title": "SSttrriinngg in StringString",
+  "contests": [
+    {
+      "contest_id": "abc346",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1840,
+  "raw_difficulty": 1840,
+  "contest_id": "abc346",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc346/tasks/abc346_f",
+  "statement": "配点 : 525 点 問題文 長さ n の文字列 X に対して、 X を k 回繰り返して得られる文字列を f(X,k) と表記し、 X の 1 文字目、 2 文字目、 \\dots 、 n 文字目を k 回ずつこの順に繰り返して得られる文字列を g(X,k) と表記します。\n例えば、 X= abc のとき、 f(X,2)= abcabc 、 g(X,3)= aaabbbccc です。\nまた、任意の文字列 X に対して、 f(X,0) と g(X,0) は共に空文字列です。 正整数 N および文字列 S,T が与えられます。 g(T,k) が f(S,N) の（連続とは限らない）部分列であるような最大の非負整数 k を求めてください。\nなお、定義より、 g(T,0) は常に f(S,N) の部分列であることに注意してください。 部分列とは 文字列 X の（連続とは限らない）部分列とは、 X から 0 個以上の文字を取り除いた後、残りの文字を元の順序で連結して得られる文字列のことをいいます。  \n例えば、 ac 、 atcoder 、 （空文字列）などはどれも atcoder の部分列ですが、 ta は atcoder の部分列ではありません。 制約 N は整数 1\\leq N\\leq 10^{12} S, T は英小文字からなる長さ 1 以上 10^5 以下の文字列 入力 入力は以下の形式で標準入力から与えられる。 N S T 出力 g(T,k) が f(S,N) の（連続とは限らない）部分列であるような最大の非負整数 k を出力せよ。 入力例 1 3\nabc\nab 出力例 1 2 f(S,3)= abcabcabc です。 g(T,2)= aabb は f(S,3) の部分列ですが、 g(T,3)= aaabbb は f(S,3) の部分列ではないので、 2 を出力します。 入力例 2 3\nabc\narc 出力例 2 0 入力例 3 1000000000000\nkzazkakxkk\nazakxk 出力例 3 344827586207",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ n の文字列 X に対して、 X を k 回繰り返して得られる文字列を f(X,k) と表記し、 X の 1 文字目、 2 文字目、 \\dots 、 n 文字目を k 回ずつこの順に繰り返して得られる文字列を g(X,k) と表記します。\n例えば、 X= abc のとき、 f(X,2)= abcabc 、 g(X,3)= aaabbbccc です。\nまた、任意の文字列 X に対して、 f(X,0) と g(X,0) は共に空文字列です。 正整数 N および文字列 S,T が与えられます。 g(T,k) が f(S,N) の（連続とは限らない）部分列であるような最大の非負整数 k を求めてください。\nなお、定義より、 g(T,0) は常に f(S,N) の部分列であることに注意してください。 部分列とは 文字列 X の（連続とは限らない）部分列とは、 X から 0 個以上の文字を取り除いた後、残りの文字を元の順序で連結して得られる文字列のことをいいます。  \n例えば、 ac 、 atcoder 、 （空文字列）などはどれも atcoder の部分列ですが、 ta は atcoder の部分列ではありません。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 N は整数 1\\leq N\\leq 10^{12} S, T は英小文字からなる長さ 1 以上 10^5 以下の文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S T"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 g(T,k) が f(S,N) の（連続とは限らない）部分列であるような最大の非負整数 k を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\nabc\nab"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 2 f(S,3)= abcabcabc です。 g(T,2)= aabb は f(S,3) の部分列ですが、 g(T,3)= aaabbb は f(S,3) の部分列ではないので、 2 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\nabc\narc"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 1000000000000\nkzazkakxkk\nazakxk"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 344827586207"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc346/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:22.049309+00:00",
+  "statement_sha256": "93d233e7550d546f0b1341ab5eba9a0ca1b57c22fc3140ba7feb0ad48554aece",
+  "editorials": []
+}

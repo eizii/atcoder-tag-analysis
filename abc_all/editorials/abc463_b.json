@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc463_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc463/editorial/21927",
+      "text": "それぞれの列車に対して席\n\\(X\\)\nが空いているか確認すればよいです。\n席\n\\(X\\)\nが文字列の何文字目に対応するかを計算する際は、\n\\(X\\)\nの文字コードから\nA\nの文字コードを引くと簡潔に書くことができます。\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "N, X = input().split()\nN = int(N)\nX = ord(X) - ord('A')\nS = [input() for _ in range(N)]\nans = False\nfor s in S:\n    ans |= s[X] == \"o\"\nif ans:\n    print(\"Yes\")\nelse:\n    print(\"No\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int N;\n    char X;\n    cin >> N >> X;\n    vector<string> S(N);\n    for (int i = 0; i < N; i++) cin >> S[i];\n    \n    bool ans = false;\n    for (int i = 0; i < N; i++) ans |= S[i][X - 'A'] == 'o';\n    if (ans) {\n        cout << \"Yes\" << endl;\n    } else {\n        cout << \"No\" << endl;\n    }\n}"
+      ],
+      "text_sha256": "f99d6b0896c0ca9b7293df28b192257ffb89d881519ba754663b66c83ea52d99",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc463/abc463_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc225_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc225/editorial/2831",
+      "text": "グラフ理論の用語が急に出てきて戸惑った方もいたかと思うのですが、このレベルの単語はABCの中盤以降には注記無しで出てくると思うので、よければこの機会に覚えてみてください。\n全ての頂点の次数(頂点から出ている辺の数のこと)を数えます。\n次数が\n\\(N-1\\)\nの頂点があるなら答えは\nYes\n、ないなら答えは\nNo\nです。\nC++ の実装例を示します。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\n\nsigned main(){\n    ll n;cin>>n;\n    vector<ll>count(n+1);//各頂点の次数を数える\n    for(ll i=1;i<=n-1;i++){\n        ll a,b;cin>>a>>b;\n        count[a]++;\n        count[b]++;\n    }\n    for(ll i=1;i<=n;i++){\n        if(count[i] == n-1){\n            cout<<\"Yes\"<<endl;\n            return 0;//プログラムを終了する\n        }\n    }\n    cout<<\"No\"<<endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "db2c906365be89c88b252088433ff1844130a1e9fc6bedda9321681eb5dba6ba",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc225/abc225_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

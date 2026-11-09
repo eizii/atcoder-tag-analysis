@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc225_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc225/editorial/2853",
+      "text": "まず前提として、あるフの字の削除の仕方に対し、それにおいて原点から全体が見えないようなフの字をすべて削除しても原点から全体が見えるものの個数は変わりません。\nよって、この問題は以下のように言い換えられます。\n\\(N\\)\n個のフの字からいくつかを削除し、残ったフの字がすべて原点から見えるようにしたい。このとき、残るフの字の個数の最大値を求めよ。\nさらに、各フの字を両端の\n\\(2\\)\n点の偏角に対応した開区間と見做すことで、次のように言い換えることも可能です。\n\\(N\\)\n個の開区間があり、\n\\(i\\)\n個目の区間の左端は\n\\(f(x_i,y_i-1)\\)\n、右端は\n\\(f(x_i-1,y_i)\\)\nである。ここで、\n\\(2\\)\n実数\n\\((i,j)\\)\nに対し\n\\(f(i,j)\\)\nは座標\n\\((i,j)\\)\nの偏角を表す。\nこれらの区間からどの\n\\(2\\)\n組も共通部分を持たないようにいくつかを選ぶとき、選ぶ区間の個数の最大値を求めよ。\nこれは、区間スケジューリング問題と呼ばれる有名問題に等しいです。区間スケジューリング問題を以下のような貪欲法によって解くことができるのは非常に有名であり、この問題についても同様に解くことが可能です。\n以下の操作を無限に繰り返す。\nすでに選んだ区間たちのうち、最も右端の座標が大きいものの（右端の）座標を\n\\(R_{\\max}\\)\nとする。まだ選んでいない座標のうちその左端の座標が\n\\(R_{\\max}\\)\n以上であるものが存在するなら、そのようなもののうち区間の右端の座標が最も小さいものを新たに選ぶ。\nそうでなく、まだ選んでいない区間の中にその左端の座標が\n\\(R_{\\max}\\)\n以上であるものが存在しないならばこれ以降の操作を打ち切る。\n実装の際は事前に\n\\(N\\)\n個の区間を右端の座標の昇順に並び替えておくとよいです。計算量は\n\\(O(N \\log N)\\)\nとなります。\n実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nusing ll = long long;\n\n// p/q\nstruct fraction{\n    ll p,q;\n    fraction(ll P = 0, ll Q = 1): p(P), q(Q){}\n    bool operator<(const fraction &other)const{\n        return p*other.q < other.p*q;\n    }\n    bool operator<=(const fraction &other)const{\n        return p*other.q <= other.p*q;\n    }\n};\n\nint main(){\n    int N; cin >> N;\n    vector<ll> x(N),y(N);\n    for(int i=0; i<N; i++) cin >> x[i] >> y[i];\n    vector<pair<fraction,fraction>> data(N);\n    for(int i=0; i<N; i++) data[i] = make_pair(fraction(y[i],x[i]-1),fraction(y[i]-1,x[i]));\n    sort(data.begin(),data.end());\n    int ans = 0;\n    fraction now;\n    for(auto p: data){\n        if(now <= p.second){\n            ans++;\n            now = p.first;\n        }\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "df0b029021798cf03731b633386466cd6be6cabba2991b92ceba503eaade0a7b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc225/abc225_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

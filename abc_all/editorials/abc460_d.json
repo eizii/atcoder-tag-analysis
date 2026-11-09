@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc460_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc460/editorial/21027",
+      "text": "隣接する白く塗られたマスと黒く塗られたマスについて考えると、操作を行ったとき白く塗られたマスは黒に、黒く塗られたマスは白に塗り替わります。特に、ある時点で黒く塗られ、隣接する白く塗られたマスが存在するようなマスはその後操作をするたびに黒く塗られた状態と白く塗られた状態を交互に繰り返します。\nここで、\n\\(1\\)\n回以上の操作を行って得られるマス目について、黒く塗られたマスは、隣接する白く塗られたマスを持ちます。これは、操作を行う前の状況を考えると操作後に黒く塗られたマスは操作前に黒く塗られた隣接するマスを持つはずであり、これは操作後には白く塗られた隣接するマスになっているためです。\nしたがって、まずは\n\\(1\\)\n回操作を行い、その後に初めてマスが黒く塗られるタイミング（の偶奇）が各マスについてわかればこの問題を解くことができます。\n初めてマスが黒く塗られるまでには最も近い黒マスからの距離と同じだけの操作回数がかかり、これは（多始点）BFS により求めることができます。時間計算量は\n\\(O(HW)\\)\nです。\nなお、\n\\(1\\)\n回操作後に黒マスが存在しない場合に注意してください。下の実装例では\ninf\nを偶数に取ることで場合分けをせずに実装しています。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n#define rep(i, n) for (int i = 0; i < (n); i++)\nconst int inf = 1000000010;\nvector<int> dx = { 1,0,-1,0,1,-1,-1,1 }, dy = { 0,1,0,-1,1,1,-1,-1 };\n\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tvector<string> a(n);\n\trep(i, n) cin >> a[i];\n\n\tauto in = [&](int x, int y) {return 0 <= x && x < n && 0 <= y && y < m; };\n\n\tvector<string> b(n, string(m, '.'));\n\trep(i, n) rep(j, m) {\n\t\tif (a[i][j] == '#') {\n\t\t\trep(d, 8) {\n\t\t\t\tint x = i + dx[d], y = j + dy[d];\n\t\t\t\tif (in(x, y) && a[x][y] == '.') b[x][y] = '#';\n\t\t\t}\n\t\t}\n\t}\n\ta = move(b);\n\n\tvector D(n, vector<int>(m, inf));\n\tqueue<pair<int, int>> Q;\n\trep(i, n) rep(j, m) if (a[i][j] == '#') { D[i][j] = 0; Q.push({ i, j }); }\n\twhile (!Q.empty()) {\n\t\tauto [i, j] = Q.front(); Q.pop();\n\t\trep(d, 8) {\n\t\t\tint x = i + dx[d], y = j + dy[d];\n\t\t\tif (in(x, y) && D[x][y] == inf) {\n\t\t\t\tD[x][y] = D[i][j] + 1;\n\t\t\t\tQ.push({ x, y });\n\t\t\t}\n\t\t}\n\t}\n\trep(i, n) {\n\t\trep(j, m) a[i][j] = (D[i][j] % 2 == 0 ? '.' : '#');\n\t\tcout << a[i] << '\\n';\n\t}\n}"
+      ],
+      "text_sha256": "887c6fc6ba8b850a4f64250bc957df67ad45c6bdcb412736a0f6ef7d75d90b21",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc460/abc460_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

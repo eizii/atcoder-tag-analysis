@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc382_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc382/editorial/11473",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nこの問題は以下の二つのパートに分けられます。\n\\(S\\)\nの中に含まれる\n@\nの数を数える（この数を\n\\(A\\)\nとおく）\n\\(N-S+D\\)\nを計算し、出力する\n1 は\n繰り返し\n（for 文など）および\n条件分岐\n（if 文など）と呼ばれる処理によって、2 は簡単な四則演算によって実現することができます。\n具体的な実装方法は下記の実装例 (C++, Python) を参考にしてください。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    int n, d;\n    string s;\n    cin >> n >> d >> s;\n    int a = 0;\n    for (char c: s) {\n        if (c == '@') ++a;\n    }\n    cout << n - a + d << endl;\n}",
+        "n, d = map(int, input().split())\ns = input()\na = 0\nfor c in s:\n    if c == '@':\n        a += 1\nprint(n - a + d)"
+      ],
+      "text_sha256": "4119793314e55f29832ad5c69f5a22d3ad1cdeba9794f3de3697106ec88a934e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc382/abc382_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

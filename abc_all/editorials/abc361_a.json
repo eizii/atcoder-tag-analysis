@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc361_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc361/editorial/10356",
+      "text": "方針1. 実際に数列\n\\(B\\)\nを構成する\n\\(N,K,X\\)\nと数列\n\\(A\\)\nを受け取った後、\n\\(A\\)\nの\n\\(K\\)\n要素目の直後に\n\\(X\\)\nを付加すればよいです。\n例えば、 Python のリストを用いる場合は\ninsert\nメソッドが活用できます。\nその他の言語については、各言語での配列の操作方法に関する記事やその言語のリファレンス等を参照してください。\n実装例 (Python):\n実装例の\nprint(*a)\nの部分について、リスト名の前に\n*\nを付けることで不要な括弧を出力しないようにすることができます。\n方針2. 数列\n\\(B\\)\nを実際には構成せず、見た目だけ整えて出力する\n実は、この問題では出力の見た目さえ整えてしまえば実際に数列\n\\(B\\)\nをプログラム内で構成する必要も数列\n\\(A\\)\nをプログラム内で保持する必要もありません。\n具体的には、数列\n\\(A\\)\nの各要素を受け取りながら受け取ったものをそのまま出力し、\n\\(K\\)\n要素目を出力した直後に\n\\(X\\)\nを追加で出力し、その後数列\n\\(A\\)\nの残りの部分の受け取りと出力を続ければよいです。\n実装例 (C++):",
+      "codes": [
+        "n,k,x = map(int,input().split())\na = list(map(int,input().split()))\na.insert(k,x)\nprint(*a)",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,k,x;\n  cin >> n >> k >> x;\n  for(int i=0;i<n;i++){\n    int a;\n    cin >> a;\n    if(i!=0){cout << \" \";}\n    cout << a;\n    if(i==(k-1)){\n      cout << \" \" << x;\n    }\n  }cout << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "93ab8ceba45bb8267633c6b29e76c9d71f9fa76e734646a660b7f56718a8283f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc361/abc361_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc193_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc193/editorial/810",
+      "text": "まだ見えていない\n\\(9K-8\\)\n枚をそれぞれ区別して考えます。\n(高橋くんの勝つ確率) = (高橋くんの勝つ配り方の数) / (全ての配り方の数)\nです。\n全ての配り方の数は\n\\((9K - 8)(9K - 9)\\)\nなので、高橋くんの勝つ配り方の数が求まれば良いです。\n高橋くんに\n\\(x\\)\n、青木くんに\n\\(y\\)\nを配る方法の数は、\n\\(C_i\\)\nをまだ見えていない\n\\(i\\)\nの枚数として、\n\\[\n\\begin{cases}\nC_xC_y & (x ≠ y)\\\\\nC_x(C_x - 1) & (x = y)\\\\\n\\end{cases}\n\\]\nなので、高橋くんの勝つ配り方の数は、高橋くんの勝つような\n\\((x, y)\\)\nの組についてこの総和を取れば求められます。\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <numeric>\n#include <ranges>\nusing namespace std;\nusing ll = int64_t;\n\nll score(string S){\n    vector<ll> cnt(10);\n    iota(cnt.begin(), cnt.end(), 0);\n    for(char c : S) cnt[c - '0'] *= 10;\n    return accumulate(cnt.begin(), cnt.end(), 0);\n}\nint main(){\n    ll K;\n    string S, T;\n    cin >> K >> S >> T;\n    vector<ll> cnt(10, K);\n    for(char c : S | views::take(4)) cnt[c - '0']--;\n    for(char c : T | views::take(4)) cnt[c - '0']--;\n    ll win = 0;\n    for(ll x = 1; x <= 9; x++) for(ll y = 1; y <= 9; y++){\n        S.back() = '0' + x;\n        T.back() = '0' + y;\n        if(score(S) <= score(T)) continue;\n        win += cnt[x] * (cnt[y] - (x == y));\n    }\n    const ll rem = 9 * K - 8;\n    cout << double(win) / rem / (rem - 1) << endl;\n}",
+        "K = int(input())\nS = input()[:4]\nT = input()[:4]\ncnt = [K] * 10\nfor c in S:\n    cnt[int(c)] -= 1\nfor c in T:\n    cnt[int(c)] -= 1\n\ndef score(S):\n    cnt = [0] * 10\n    for c in S:\n        cnt[int(c)] += 1\n    ans = 0\n    for i in range(1, 10):\n        ans += i * 10 ** cnt[i]\n    return ans\n\nans = 0\n\nfor i in range(1, 10):\n    if cnt[i] == 0:\n        continue\n    for j in range(1, 10):\n        if i == j or cnt[j] == 0:\n            continue\n        if score(S + str(i)) > score(T + str(j)):\n            ans += cnt[i] * cnt[j]\n\nfor i in range(1, 10):\n    if cnt[i] < 2:\n        continue\n    if score(S + str(i)) > score(T + str(i)):\n        ans += cnt[i] * (cnt[i] - 1)\n\nN = 9 * K - 8\nprint(ans / N / (N - 1))"
+      ],
+      "text_sha256": "7795de715eb595e3dfeedd61c8ac92c3cd8fb0811037d03c1dcc10c8db231bbd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc193/abc193_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

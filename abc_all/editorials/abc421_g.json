@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc421_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc421/editorial/13788",
+      "text": "以下で定義される数列 \\(d=(d_0,d_1,\\dots,d_{N})\\) を考えます。 \\(d_0=A_1\\) \\(d_i=A_{i+1}-A_i\\ (1\\leq i \\leq N-1)\\) \\(d_N=-A_N\\) この差分列 \\(d\\) に着目すると、本問題は以下のように言い換えることができます。 数列 \\(d\\) が与えられる。 \\(1\\) 以上 \\(M\\) 以下の \\(i\\) を選んで、 \\(d_{L_i-1}\\) に \\(1\\) を足し、 \\(d_{R_i}\\) から \\(1\\) を引くという操作を好きな回数行える。 \\(1\\) 以上 \\(N-1\\) 以下の全ての \\(i\\) について \\(d_i \\geq 0\\) とすることが可能か判定し、可能ならば必要な操作の最小回数を求めよ。（ここで、 \\(d_N\\) は負となってもよいことに注意。） より直観的な説明としては、 ボールの入った \\(N+1\\) 個の箱 \\(0,1,\\dots,N\\) がある。 \\(d_i > 0\\) なる \\(i\\ (0 \\leq i \\leq N-1)\\) について、箱 \\(i\\) にはボールが \\(d_i\\) 個余っている。 \\(d_i < 0\\) なる \\(i\\ (0 \\leq i \\leq N-1)\\) について、箱 \\(i\\) にはボールが \\(-d_i\\) 個不足している。 箱 \\(N\\) にはボールが無限個余っている。 \\(1\\) 回の操作では、好きな \\(i\\) を選んで、箱 \\(R_i\\) から箱 \\(L_i-1\\) へボールを \\(1\\) つ動かすことができる。 ボールが余っている箱から不足している箱へうまくボールを移動させることで、最小の操作回数で全ての不足分を補いたい。 これは最小費用流を用いると解ける形になっています。具体的には、以下のようなグラフ \\(G\\) を構築します。 \\(G\\) には \\(N+1\\) 個の頂点 \\(0,1,\\dots,N\\) および超頂点 \\(S,T\\) がある。 \\(G\\) には以下の辺がある。 \\(d_i > 0\\) なる各 \\(i\\ (0 \\leq i \\leq N-1)\\) について、 \\(S\\) から \\(i\\) に向かって伸びる容量 \\(d_i\\) 、コスト \\(0\\) の辺。 \\(d_i < 0\\) なる各 \\(i\\ (0 \\leq i \\leq N-1)\\) について、 \\(i\\) から \\(T\\) に向かって伸びる容量 \\(-d_i\\) 、コスト \\(0\\) の辺。 \\(S\\) から \\(N\\) に向かって伸びる容量 \\(\\infty\\) 、コスト \\(0\\) の辺。 各 \\(i\\ (1\\leq i\\leq M)\\) について、 \\(R_i\\) から \\(L_i-1\\) に向かって伸びる容量 \\(\\infty\\) 、コスト \\(1\\) の辺。 \\(K=\\displaystyle \\sum_{i=0}^{N-1} \\max(-d_i, 0)\\) とおきます。（これは \\(G\\) 上で \\(T\\) に向かって伸びる辺の容量の総和に等しいです。）グラフ \\(G\\) における \\(S\\) から \\(T\\) への最大流の容量が \\(K\\) に満たないのであれば答えは \\(-1\\) 、そうでないならば \\(S\\) から \\(T\\) への最小費用最大流のコストが答えになります。 計算量は \\(O(N(\\max A_i)(N+M)\\log(N+M))\\) です。 実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/mincostflow>\n\nusing namespace std;\nusing namespace atcoder;\n\nconst int inf = 1 << 30;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<int> a(n);\n    mcf_graph<int, int> mcf(n + 3);\n    int s = n + 1, t = s + 1;\n    int req = 0;\n    for (int i = 0; i < n; i++) {\n        cin >> a[i];\n        int dif = a[i] - (i ? a[i - 1] : 0);\n        if (dif >= 0) {\n            mcf.add_edge(s, i, dif, 0);\n        } else {\n            mcf.add_edge(i, t, -dif, 0);\n            req += -dif;\n        }\n    }\n    mcf.add_edge(s, n, inf, 0);\n    for (int i = 0; i < m; i++) {\n        int l, r;\n        cin >> l >> r;\n        --l;\n        mcf.add_edge(r, l, inf, 1);\n    }\n    auto [flow, cost] = mcf.flow(s, t);\n    if (flow < req) cout << -1 << endl;\n    else cout << cost << endl;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "c356749b0d52c614a7288fe7555d0ce300721361be77c7110b35cfa72549cc24"
+    }
+  ],
+  "status": "available"
+}

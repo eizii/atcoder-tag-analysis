@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc471_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc471/editorial/23910",
+      "text": "\\(N=1\\) のとき答えは明らかです。以下では \\(N>1\\) とします。 元の問題の代わりに次の問題を考えます。 問題： \\(N\\) 個のボールからランダムに \\(K\\) 個を選ぶとき、スコアの期待値を求めよ。 元の問題の答えはこの問題の答えの \\(\\binom{N}{K}\\) 倍です。よってこの問題を解くことができれば元の問題に答えることができます。 確率変数 \\(X_i\\) を、ボール \\(i\\) が選ばれたとき \\(A_i\\) 、選ばれなかったとき \\(0\\) とします。 求める期待値は \\(\\begin{aligned}\nE\\left[\\left(\\sum_i X_i\\right)^2\\right]\n=\\sum_i E[X_i^2] + \\sum_{i\\neq j}E[X_iX_j]\n\\end{aligned}\\) となります。 ここで確率変数の意味を考えることで \\(X_i^2\\) は「ボール \\(i\\) が選ばれたとき \\(A_i^2\\) 、選ばれなかったとき \\(0\\) 」なので \\(E[X_i^2]=A_i^2\\frac{K}{N}\\) であり、 \\(X_iX_j\\) は「ボール \\(i,j\\) が共に選ばれたとき \\(A_iA_j\\) 、そうでないとき \\(0\\) 」なので \\(E[X_iX_j]=A_iA_j\\frac{K(K-1)}{N(N-1)}\\) であることがわかります。 よって \\(\\begin{aligned}\nE\\left[\\left(\\sum_i X_i\\right)^2\\right]\n&=\\sum_i E[X_i^2] + \\sum_{i\\neq j}E[X_iX_j]\\\\\n&=\\frac{K}{N}\\sum_i A_i^2 + \\frac{K(K-1)}{N(N-1)}\\sum_{i\\neq j}A_iA_j\n\\end{aligned}\\) となります。 \\(\\sum_{i\\neq j}A_i A_j = (\\sum_i A_i)^2 - \\sum_i A_i^2\\) であることからこれらは \\(O(N)\\) 回の四則演算で計算することができます。 以上により元の問題を \\(O(N+\\log \\mathrm{MOD})\\) などで解くことができました。",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "5b3adab96410897ce6b3e74110140e050206a988d4daf877b4629591b1c1654c"
+    }
+  ],
+  "status": "available"
+}

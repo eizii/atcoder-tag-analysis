@@ -1,0 +1,339 @@
+              ARC070 / ABC056 解説
+
+
+                                  sigma425
+
+
+
+  For International Readers: English editorial starts on page 5.
+
+
+A: HonestOrDishonest
+
+  a =′ H′, b =′ H′ の場合は′H′ を、a =′ H′, b =′ D′ の場合は′D′ を、a =′ D′, b =′ H′ の場合は′D′ を、
+a =′ D′, b =′ D′ の場合は′H′ を出力すればよいです。コードにすると次のようになります。
+
+int main (){
+         char a,b;
+         cin >> a >> b;
+        if(a==’H’ && b==’H’) cout << ’H’;
+        if(a==’H’ && b==’D’) cout << ’D’;
+        if(a==’D’ && b==’H’) cout << ’D’;
+        if(a==’D’ && b==’D’) cout << ’H’;
+         return 0;
+}
+
+
+B: NarrowRectanglesEasy
+
+ もし既に連結なら答えは0 です。これは|a −b| ≤W かどうかで判定できます。そうでない場合は、答えは
+
+|a −b| −W になります。
+
+
+C: Go Home
+
+ もし1 + 2 + ... + t < X なら時刻t には座標X にはたどり着けません。逆に、1 + 2 + ... + t ≥X なら
+
+時刻t に座標X にたどり着けることが示せます。実際、{1, 2, .., t} の部分集合で和がX になるものが取れ
+
+て、そうすると部分集合に選んだ長さのときだけ右にジャンプし、それ以外のときはジャンプしないという戦
+
+略によって座標X にたどり着けます。よってあとはこのような最小のt を求めれば良いです。これはおおよ
+そ−1+√8X+1        2   になるので、この関数によって計算するとO(1) で求まります。そこまでしなくても、答えが √                                                 √
+O( X) になることから、t を前から順番に試してt(t+1)2 ≥X か毎回判定するだけでも, 時間計算量O( X)
+で答えを求めることが出来ます。
+
+
+D: No Need
+
+ まず、「カードi が必要」という条件は次のように言い換えられます: 「カードi を使わずに、総和がK −ai
+以上K 未満な集合が取れる」.
+
+
+                                             1
+
+ 左⇒右・・・必要ならその証拠となるi を含むよい集合があって、これからi を除いたものが言い換え後
+
+の条件を満たす証拠になっています。
+
+ 右⇒左・・・上とは逆に、この条件を満たす集合にi を加えたものが元の条件を満たす証拠となってい
+
+ます。
+
+ よって、各カードi ごとに、そのカードを除いた後つぎのようなDP をします。
+
+ 「dp[x][y] = x 枚目まで使ったときに総和をy にできるか?」
+
+  y としてはK 未満しか考えなくて良いため、このDP の計算量はO(NK) になります。これをN 枚のカー
+ドに対してやるので、全体の計算量はO(N 2K) となり、部分点を取ることが出来ます。
+
+ 満点解法を取るにはいくつか方法があります。ひとつは、カードi が不必要な時、ai ≥aj を満たすカード
+j も不必要である(つまり、単調性が成り立つ) ことを利用する方法で、どのカードまで不必要かを二分探索す
+
+ることで、上述のdp の回数をO(logN) 回に減らせるので、全体でO(NKlogN) になります。
+
+ 他の方法として、dp を, カード1,2,..,N の順に使う方とN,N −1,...,1 の順に使う方の両方を途中経過を残
+
+して計算しておいて、その結果を利用することで各i についてO(K) で判定する方法があります。実際、カー
+
+ドi について判定するには、1,2,...,i −1 を使って出来る値の集合と、N,N −1,..,i + 1 を使ってできる値の集
+
+合がわかっていれば良いです。これがわかっているので、あとは累積和を使ったりするとO(K) で判定でき
+
+て、全体の計算量はO(NK) になります。
+
+  また、bitset 等を使うことでDP を高速化すると計算量は変わらなくても少し遅い解法でも通るかもしれま
+
+せん。
+
+
+E: NarrowRectangles
+
+ まず部分点を解くには、次のようなdp をすればよいです。
+
+  dp[i][x] = 上からi 個までの長方形を動かしていて、i 個めの長方形の横座標をx に動かした時点でのそこ
+
+までのコストの最小値
+
+ 上から順番に動かし方を決めていくと、そこまでが連結なら、そこから下を連結に出来るかどうかは直前の
+
+長方形の一にしか関係がないためこのようなdp が出来ます。
+
+ 計算すると.
+                          dp[i][x] = |x −li| + x−(Ri−1−Li−1)≤x′≤x+(Ri−Li)dp[imin               −1][x′]                    (1)
+
+となる(min についている条件はi −1 とi が連結になる条件です) ので、これを愚直に計算すると、座標幅を
+X とおくと、O(NX2) になり、部分点を取ることが出来ます。
+
+ 満点を取るには、dp[i][] がどのような形になっているか考える必要があります。dp[i −1] からdp[i] を計算
+
+するには、
+
+    1. x 軸方向に平行移動する
+
+    2. ある一定長さの区間のmin をとる
+
+    3. |x −li| を足す
+
+が出来る必要があります。この操作をしていくとどうなるか考えると、dp[i] では、「十分に左では傾きが−i
+
+で、そこから単調に傾き(常に整数) が大きくなっていき、十分に右では傾きがi になる」という形になってい
+
+ることがわかります。従って、dp[i][x] をすべて持つ代わりに、「傾きが変わる点」のx 座標をすべて持つこと
+
+にします。
+
+
+                                             2
+
+ 重要な事実として、このような形に対して「ある一定長さの区間のmin をとる」をすると、「傾き0 の部分
+
+(つまり底の部分) がその一定長さ延びる」という結果になることがわかります。なのでこれは底の部分の左右
+
+にわけて両者を平行移動するとみなせます。従って、傾き0 の区間より左で傾きが変わる点, 右で傾きが変わ
+
+る点をそれぞれset で持って、平行移動はset 全体に対して足された値として管理すると操作1 と2 に関して
+
+は処理できます.
+
+ これを持てば操作3 も簡単に処理できて、「ある点で傾きが2 回変わることになる」という捉え方をすると、
+
+その点が傾き0 の区間の中にあるか、左にあるか、右にあるかで場合分けして、set に点を追加して、必要に
+
+応じて片方のset の中身をひとつもう片方のset に移し替えることで実現できます。
+
+ 最終的な答えは、傾き0 の部分の高さを常に保持することで求めることが出来ます。計算量はO(NlogN)
+
+です。
+
+
+F: HonestOrUnkind
+
+ まず、A ≤B のときはImpossible です。これは、不親切な人が次の戦略を取ると何度質問をしても絶対
+
+に特定できないことからわかります:「不親切な人B 人のうちA 人をあらかじめ選んでおいて、不親切な人は
+
+そのA 人が正直者であるかのように質問に答える」
+
+ それ以外の場合は常に可能なことを構成的に示します。
+
+ まず頂点が0 からN −1 のN 個あるグラフを持ち、質問の結果に応じて次のように辺を張っていきます。
+a がb のことを正直者だと言ったときにはa からb に’Y’ のラベルの付いた辺を張ります。(a Y→b とかく) 同
+様に不親切な人だと言ったときには’N’ のラベルの付いた辺を張ります。(a N→b とかく)
+ まずN 回使って正直者を一人特定します。aB Y→aB−1 Y→... Y→a0 という部分グラフがあるとします(ai
+はそれぞれ異なるとする)。この時、a0 は正直者です。(∵あるai が正直者だったとすると、推移的にa0 も
+正直者になります。a0 からaB まで全員不親切な人だとすると、不親切な人がB + 1 人いることになり矛盾
+します。)
+ よって基本的には Y→でつながったpath を伸ばしていくことを目指します。
+  a N→b となった場合は、この二人を一旦N 人から取り除きます。a とb の少なくとも一方は不親切な人で
+
+あることがわかるので、こうしたとしてもA > B という条件は成り立ったままです。
+
+ このことから次のようなアルゴリズムが考えられます。
+
+bool ask(int a,int b){
+         cout <<"? "<<a<<" "<<b<<endl;
+         char c;
+         cin >>c;
+         return c==’Y’;
+}
+
+
+int need = B+1;
+vector <int > path;
+for(int i=0; i<N; i++){
+        if(path.empty ()){
+                path.push_back(i);
+                if(path.size ()>= need) break;
+                 continue;
+          }
+         bool b = ask(i,path.back ());
+        if(b){
+
+
+                                             3
+
+                path.push_back(i);
+                if(path.size ()>= need) break;
+          }
+         else{
+                path.pop_back ();
+                  need --;
+          }
+}
+int honest = path.front ();
+
+ このアルゴリズムはN 回の質問で正直者を一人特定できます。あとはその人に他の人が正直者かを聞くこ
+
+とで全体で2N 回で全ての正直者を特定できます。
+
+
+
+
+
+                                             4
+
+             ARC070 / ABC056 Editorial
+
+
+                                  sigma425
+
+
+
+A: HonestOrDishonest
+
+
+int main (){
+         char a,b;
+         cin >> a >> b;
+        if(a==’H’ && b==’H’) cout << ’H’;
+        if(a==’H’ && b==’D’) cout << ’D’;
+        if(a==’D’ && b==’H’) cout << ’D’;
+        if(a==’D’ && b==’D’) cout << ’H’;
+         return 0;
+}
+
+
+B: NarrowRectanglesEasy
+
+   If |a −b| ≤W, the answer is 0. Otherwise the answer is |a −b| −W.
+
+
+C: Go Home
+
+  The answer is the minimum t such that 1 + 2 + ... + t ≥X.
+
+
+
+
+
+                                             1
+
+D: No need
+
+  The card ai is unnecessary if there is a subset of the other N −1 cards whose sum is in the interval
+[K −ai, K). Thus, the straightforward DP is O(N 3).
+
+  There are two ways to improve it:
+
+    • O(N 2logN): It turns out that if ap < aq and aq is unnecessary, ap is also unnecessary. Do binary
+
+      search using this fact.
+    • O(N 2): Do DP twice: for preﬁxes and for suﬃxes.
+
+  Also, it can be 64 times faster if you use bitset.
+
+
+
+
+
+                                             2
+
+E: NarrowRectangles
+
+  Deﬁne dp[i][x]: the minimum cost to move the ﬁrst i rectangles such that the last (the i-th) rectangle’s
+
+leftmost coordinate is x. This will lead to a solution for partial score.
+
+  Now, see dp[i] as a function: it returns dp[i][x] for given x. It turns out that this function is a polyline
+
+consisting of 2i + 3 sections, and the slopes of the sections are −i −1, −i, . . . , i, i + 1 from left to right.
+
+Thus, this polyline can be represented using 2i + 3 integers l0, l1, . . . , li, r0, r1, . . . , ri, and c.
+
+    • In the interval (−∞, li], the slope of the polyline is −i −1.
+    • In the interval [li, li−1], the slope of the polyline is −i.
+    •  · · ·
+
+    • In the interval [l1, l0], the slope of the polyline is −1.
+    • In the interval [l0, r0], the polyline is constant, and the value is c.
+    • In the interval [r0, r1], the slope of the polyline is 1.
+    •  · · ·
+
+    • In the interval [ri−1, ri], the slope of the polyline is i.
+    • In the interval [ri, ∞), the slope of the polyline is i + 1.
+
+ Now we compute the polylines in the order dp[0], dp[1], . . . , dp[N]. We should keep two sets (or priority
+
+queues) representing {l0, . . . , li} and {r0, . . . , ri} meanwhile, and the solution works in O(NlogN).
+
+
+
+
+
+                                             3
+
+F: NarrowRectangles
+
+ When A ≤B, the solution is ”impossible” because A of unkind people can behave like honest people
+
+(call each other ”honest” and call everyone else ”unkind”). Otherwise, we can determine honest people
+
+in the following way:
+
+  First, notice that when a person p says ”q is unkind”, p and q can’t be honest at the same time. Thus,
+
+even if we ignore both p and q, more than half of the remaining people is honest. Whenever we get the
+
+response ”unkind”, we ignore the two people.
+
+  Create an empty stack and try to push N people to this stack one by one. When we push a person
+
+p in to the stack, we do the following. Let q be the person that is currently at the top of the stack.
+
+Ask q about person p, and if we get the answer ”unkind”, we pop q from the stack and ignore p and q.
+
+Otherwise, push p into the stack.
+
+  After we try to push N people, what happens in the stack? Let a0, . . . , ak−1 be the people in the stack
+from bottom to top. From the construction of the stack, for each i, ai says ”ai+1 is honest”. Also, at
+least one of a0, . . . , ak−1 is honest. Thus, we are sure that ak−1 is honest.
+
+ Now we can ask additional N queries to this honest person and get the answer.
+
+
+
+
+
+                                             4

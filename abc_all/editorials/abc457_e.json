@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc457_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc457/editorial/20075",
+      "text": "\\(S_q,T_q\\)\nを単に\n\\(S,T\\)\nと表記します。\n\\([S,T]\\)\nの区間のみをちょうど覆う必要があるので、左端を\n\\(S\\)\nに持つ布、右端を\n\\(T\\)\nに持つ布がそれぞれ必要です。\n[1]\n\\([S,T]\\)\nをちょうど覆う布が存在する場合\n答えが\nYes\nとなる場合は以下の\n\\(3\\)\nパターンで網羅できます。\n\\([S,T]\\)\nをちょうど覆う布が\n\\(2\\)\n枚以上ある\n\\([S+1,T]\\)\nの範囲内に収まる布が存在する\n\\([S,T-1]\\)\nの範囲内に収まる布が存在する\n\\(1\\)\nパターン目は set などで布を管理することで求めることができます。\n\\(2\\)\nパターン目は「布の左端が\n\\(i\\)\n以上であるような布の右端の最小値」を管理した配列を事前に計算することで高速に判定することができます。\n\\(3\\)\nパターン目を同様です。\n[2]\n\\([S,T]\\)\nをちょうど覆う布が存在しない場合\n\\(1\\)\n枚目の布で左端を\n\\(S\\)\nに持つ布を、\n\\(2\\)\n枚目の布で右端を\n\\(T\\)\nに持つ布を選ぶ必要があります。\nまた、\n\\(1\\)\n枚目の布は左端を\n\\(S\\)\nに持つ布の中で右端が\n\\(T\\)\n以下で最大の布を選ぶとして良いです。\n\\(2\\)\n枚目の布も同様に右端を\n\\(T\\)\nに持つ布の中で左端が\n\\(S\\)\n以上で最小の布を選ぶとして良いです。\nこれらは事前に各マスを右端・左端とする布に対するもう一端を配列として持っておき、そこに対する二分探索を行うことで高速に求めることができます。\nそのようにして選んだ\n\\(2\\)\n枚の布が条件を満たすか判定すれば良いです。\n以上を適切に実装することでこの問題に正答することができます。計算量は\n\\(O(N+(M+Q)\\log M)\\)\nです。\n実装例(Python3)",
+      "codes": [
+        "import sys\nfrom bisect import bisect_right, bisect_left\nfrom collections import defaultdict\n\ninput = sys.stdin.readline\n\nN, M = map(int, input().split())\n\nby_l = [[] for _ in range(N + 1)]\nby_r = [[] for _ in range(N + 1)]\ncnt = defaultdict(int)\nINF = 10**9\nmin_r_at_l = [INF] * (N + 2)\nfor _ in range(M):\n    L, R = map(int, input().split())\n    by_l[L].append(R)\n    by_r[R].append(L)\n    cnt[(L, R)] += 1\n    if R < min_r_at_l[L]:\n        min_r_at_l[L] = R\n\nfor i in range(1, N + 1):\n    by_l[i].sort()\n    by_r[i].sort()\n\nsuf_min_r = [INF] * (N + 3)\nfor i in range(N, 0, -1):\n    suf_min_r[i] = min(suf_min_r[i + 1], min_r_at_l[i])\n\nQ = int(input())\nans = []\n\nfor _ in range(Q):\n    S, T = map(int, input().split())\n\n    if cnt[(S, T)] > 0:\n        ok = False\n        ok |= cnt[(S, T)] >= 2\n        ok |= suf_min_r[S + 1] <= T\n        ok |= suf_min_r[S] <= T - 1\n        print(\"Yes\" if ok else \"No\")\n        continue\n\n    ok = False\n\n    rs = by_l[S]\n    pos_r = bisect_right(rs, T) - 1\n\n    ls = by_r[T]\n    pos_l = bisect_left(ls, S)\n\n    if pos_r >= 0 and pos_l < len(ls):\n        r1 = rs[pos_r]\n        l2 = ls[pos_l]\n        ok |= l2 <= r1 + 1\n    print(\"Yes\" if ok else \"No\")"
+      ],
+      "text_sha256": "8f156fec5c1066c1ecd5957708a40faa9ff0f790983a30186cd0173c99a65137",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc457/abc457_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

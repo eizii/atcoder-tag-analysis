@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc287_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc287/editorial/5605",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題 A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n\\(S_i = \\)\nFor\nであるものの個数を\n\\(f\\)\nとして、\n\\(f \\gt \\frac{N}{2}\\)\nなら\nYes\n、そうでないなら\nNo\nとなります。よって、\n\\(f\\)\nを求めることができればよいです。\n変数\ncount\nを\n0\nで初期化し、「文字列を受け取り、それと\nFor\nが等しいならば\ncount\nの値を\n1\n増やす」という処理を行うと、処理が終わった後の\ncount\nの値が求めたい\n\\(f\\)\nの値になっています。「\n\\(N\\)\n回繰り返す」という処理は for 文を用いて実装することができます。\n詳しくは以下の実装例を参考にしてください。なお、これらの実装例では\n\\(f\\)\nと\n\\(\\frac{N}{2}\\)\nの小数点以下を切り捨てた値を比較していることに注意してください。\n実装例 (C++)\n実装例 (Python)",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    int count = 0;\n    for (int i = 0; i < n; ++i) {\n        string s;\n        cin >> s;\n        if (s == \"For\") {\n            count += 1;\n        }\n    }\n    if (count > n / 2) {\n        cout << \"Yes\\n\";\n    } else {\n        cout << \"No\\n\";\n    }\n    return 0;\n}",
+        "n = int(input())\ncount = 0\nfor _ in range(n):\n    if input() == \"For\":\n        count += 1\nprint(\"Yes\" if count > n // 2 else \"No\")"
+      ],
+      "text_sha256": "0eb4fb131280986f64cb00986fe5cc15a14bddeb324c8a8e1ae86fe15089d086",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc287/abc287_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

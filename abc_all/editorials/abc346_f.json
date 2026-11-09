@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc346_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc346/editorial/9644",
+      "text": "まずは\n\\(k\\)\nに関して二分探索をします。以降、ある\n\\(k\\)\nに対して、\n\\(g(T,k)\\)\nが\n\\(f(S,N)\\)\nの部分文字列であるかどうか判定する方法について考えます。\n以下、\n\\(S\\)\nの長さを\n\\(s\\)\n、\n\\(T\\)\nの長さを\n\\(t\\)\nとし、文字列\n\\(X\\)\nの先頭\n\\(i\\)\n文字のことを\n\\(X[:i]\\)\nと表記します。また、\n\\(T\\)\nに含まれる各文字が\n\\(S\\)\nにもまた含まれていることを仮定します（そうでない場合答えは明らかに\n\\(0\\)\nです）。\n\\(i=1,2,\\dots,t\\)\nの順に以下の値を求めることを考えます。\n\\(\\mathrm{iter}_i\\)\n：\n\\(g(T[:i],k)\\)\nが\n\\(f(S,N)[:j]\\)\nの部分文字列であるような最小の\n\\(j\\)\n最終的には\n\\(\\mathrm{iter}_t\\)\nと\n\\(N\\times s\\)\nの大小を比較することで答えが求まります。\n\\(\\mathrm{iter}_i\\)\nから\n\\(\\mathrm{iter}_{i+1}\\)\nを求めるのは\n\\(f(S,N)\\)\nの\n\\(\\mathrm{iter}_i+1\\)\n文字目以降で\n\\(T\\)\nの\n\\(i+1\\)\n文字目が\n\\(k\\)\n回目に現れる場所を求めることと一致するので、本問題は、以下の形式のクエリを\n\\(N\\)\n回処理する問題に帰着されます。\n\\(\\mathrm{query}(a,b,c)\\)\n：正整数\n\\(a,b\\)\n、文字\n\\(c\\)\nが与えられる。\n\\(f(S,N)\\)\nの\n\\(a\\)\n文字目以降で\n\\(c\\)\nが\n\\(b\\)\n回目に現れるのは何文字目か。\n\\(S\\)\nの中に\n\\(c\\)\nが現れる回数を\n\\(\\mathrm{cnt}_c\\)\nとおきます。\n\\(a\\)\nが\n\\(s\\)\nより大きい場合、\n\\(\\mathrm{query}(a,b,c)=\\mathrm{query}(a-s,b,c)+s\\)\nを用いて\n\\(a\\leq s\\)\nの場合に帰着できます。また、\n\\(b\\)\nが\n\\(\\mathrm{cnt}_c\\)\nより大きい場合、\n\\(\\mathrm{query}(a,b,c)=\\mathrm{query}(a+s,b-\\mathrm{cnt}_c,c)\\)\nを利用して\n\\(b\\leq \\mathrm{cnt}_c\\)\nの場合に帰着できます。\nよって、\n\\(a\\leq s,\\ b\\leq \\mathrm{cnt}_c\\)\nの条件のもとでクエリを処理できればよいことがわかりました。これらの条件が満たされるとき\n\\(\\mathrm{query}(a,b,c)\\)\nの答えは\n\\(2s\\)\n以下になるので、各英小文字に対してその文字が\n\\(f(S,2)\\)\n内で現れる位置のリストを前計算で求めておけば、二分探索などを用いて各クエリを高速に処理することができます。\nよって、最初の\n\\(k\\)\nに関する二分探索を含め、全体で\n\\(O(s\\sigma+t\\log Ns)\\)\nや\n\\(O(s+\\sigma+t\\log s\\log Ns)\\)\n（\n\\(\\sigma\\)\nは文字の種類数）などの計算量で本問題を解くことができます。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nconst ll inf = 1LL << 60;\n\nint main() {\n    ll n;\n    string s, t;\n    cin >> n >> s >> t;\n    int sl = s.size(), tl = t.size();\n    vector<vector<int>> pos(26);\n    for (int i = 0; i < sl * 2; i++) {\n        pos[s[i % sl] - 'a'].push_back(i);\n    }\n    vector pre(sl + 1, vector<int>(26)); // S の最初の i 文字に j が何回現れるか\n    for (int i = 0; i < sl; i++) {\n        pre[i + 1] = pre[i];\n        ++pre[i + 1][s[i] - 'a'];\n    }\n    vector<int> cnt(26);\n    for (int i = 0; i < 26; i++) cnt[i] = pos[i].size() / 2;\n    ll ok = 0, ng = inf;\n    auto f = [&](ll x) -> bool {\n        ll iter = 0;\n        for (int i = 0; i < tl; i++) {\n            int c = t[i] - 'a';\n            if (!cnt[c]) return false;\n            ll r = (x - 1) % cnt[c] + 1;\n            ll q = (x - r) / cnt[c];\n            if (q > inf / sl) return false;\n            iter += sl * q;\n            int nx = pos[c][pre[iter % sl][c] + r - 1]; // iter % sl 以降で r 番目に c が現れる場所\n            iter += nx + 1 - iter % sl;\n            if (iter > n * sl) return false;\n        }\n        return true;\n    };\n    while (ng - ok > 1) {\n        ll mid = (ok + ng) / 2;\n        if (f(mid)) ok = mid;\n        else ng = mid;\n    }\n    cout << ok << endl;\n}"
+      ],
+      "text_sha256": "8b59dde4a81a4d2dec9931b34bf1834e10ccc9664b1c53f2b0b33c3ef4cd15a1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc346/abc346_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

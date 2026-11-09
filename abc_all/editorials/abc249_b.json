@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc249_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc249/editorial/3838",
+      "text": "for 文のようなループ処理を用いてすべての条件を満たすかどうかを調べます。\n全ての文字を見て、大文字があるかどうかを\n\\(\\mathrm{O}(|S|)\\)\nで判定します。\n同様に、全ての文字を見て、小文字があるかどうかを\n\\(\\mathrm{O}(|S|)\\)\nで判定します。\n\\(1 \\le i < j \\le |S|\\)\nを満たす整数の組\n\\(i,j\\)\nに対して、\n\\(S_i \\neq S_j\\)\nであるかどうかを\n\\(\\mathrm{O}(|S|^2)\\)\nで判定します。\nC++ であれば、大文字であるかどうかは\n‘A’ <= s[i] && s[i] <= ‘Z’\nや isupper 関数などを使えば判定できます。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n  string s;\n  cin >> s;\n  bool big = false,small = false;\n  for(int i = 0; i < s.size(); i++){\n    if(isupper(s[i])) big = true;\n    else small = true;\n  }\n  bool diff = true;\n  for(int i = 0; i < s.size(); i++){\n    for(int j = i + 1; j < s.size(); j++){\n      if(s[i] == s[j]) diff = false;\n    }\n  }\n  if(big && small && diff) cout << \"Yes\" << endl;\n  else cout << \"No\" << endl;\n}"
+      ],
+      "text_sha256": "86fd3fe07dd0cde31e71506104538362ab849e1b20cfb2fe7d3e388bccff3a9e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc249/abc249_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

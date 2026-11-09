@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc327_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc327/editorial/7579",
+      "text": "高橋君が正整数\n\\(S,L\\)\nを選んでカゴを設置したとき、時刻\n\\(T_i\\)\nに座標\n\\(X_i\\)\nに落ちたリンゴを得るための必要十分条件は、\n\\(\\max(T_i-D+1,1)\\leq  S \\leq T_i\\)\nかつ\n\\(\\max(X_i-W+1,1)\\leq L\\leq X_i\\)\nをみたすことです。これより、問題は次のように言い換えることができます。\n無限に広がる\n\\(tx\\)\n座標平面があり、\n\\(t>0\\)\nかつ\n\\(x>0\\)\nをみたす格子点\n\\((t,x)\\)\nには最初\n\\(0\\)\nが書き込まれています。\n（格子点とは\n\\(t,x\\)\n座標がともに整数であるような点のことです。）\n\\(N\\)\n回の操作を行います。\n\\(i\\)\n回目の操作では\n\\(\\max(T_i-D+1,1)\\leq  t \\leq T_i\\)\nかつ\n\\(\\max(X_i-W+1,1)\\leq x\\leq X_i\\)\nをみたす格子点\n\\((t,x)\\)\nに書かれている数を\n\\(1\\)\n増加させます。\n\\(N\\)\n回の操作の後で、\n\\(t>0\\)\nかつ\n\\(x>0\\)\nの範囲の格子点に書き込まれている数のうち最大のものを求めてください。\nこの問題においては、\n\\(N\\)\n回の操作の後で各格子点に書き込まれている数が、元の問題において高橋君が\n\\(S,L\\)\nを選んだ時に得られるリンゴの数に対応しています。\n愚直にこの問題を解こうとすると、\n\\(O(NDW)\\)\n程度の時間がかかり、制限時間内に実行することは困難です。\nこの問題は遅延セグメント木を用いて、高速に解くことができます。\nここで、制約から\n\\(1\\leq t\\leq \\max(T_i),1\\leq x\\leq \\max(X_i)\\)\nをみたす格子点\n\\((t,x)\\)\nについてのみ考えれば十分である事に注意してください。\nまず、\n\\((1,x)\\)\n\\((1\\leq x\\leq \\max(X_i))\\)\nに書き込まれている数のうち最大のものを求める方法について考えます。\nこれは次のようにすれば良いです。\n最初、全ての値が\n\\(0\\)\nであるような配列\n\\(A=(A_1,A_2,\\ldots,A_{\\max(X_i)})\\)\nを用意します。\n次に、\n\\(\\max(T_i-D+1,1)\\leq  1 \\leq T_i\\)\n, すなわち\n\\(T_i\\leq D\\)\nであるような操作について、\n\\(A_x\\)\n\\((\\max(X_i-W+1,1)\\leq x\\leq X_i)\\)\nに\n\\(1\\)\nを加えます。\n最後に\n\\(A\\)\nの要素の最大値を求めれば良いです。\n次に\n\\(t_0\\geq 2\\)\nについて、\n\\((t_0,x)\\)\n\\((1\\leq x\\leq 2\\times 10^5)\\)\nに書き込まれている数のうち最大のものを求める方法について考えます。\nこれは、\n\\(t=t_0-1\\)\nのときの配列を元に変更分を更新することによって求めることができます。更新する必要があるのは次の\n\\(2\\)\nつです。\n\\(t-1<\\max(T_i-D+1,1)\\leq  t\\)\n, すなわち\n\\(T_i=t+D-1\\)\nであるような操作について\n\\(A_x\\)\n\\((\\max(X_i-W+1,1)\\leq x\\leq X_i)\\)\nを\n\\(1\\)\n増加させる。\n\\(t-1\\leq T_i< t\\)\n, すなわち\n\\(T_i=t-1\\)\nであるような操作について\n\\(A_x\\)\n\\((\\max(X_i-W+1,1)\\leq x\\leq X_i)\\)\nを\n\\(1\\)\n減少させる。\nこれらの操作の後、\n\\(A\\)\nの要素の最大値を求めることによって、\n\\((t_0,x)\\)\n\\((1\\leq x)\\)\nに書き込まれている数のうち最大の値を得ることができます。\n答えは、\n\\(t_0=1,2,\\ldots,2\\times 10^5\\)\nに対する、「\n\\((t_0,x)\\)\n\\((1\\leq x)\\)\nに書き込まれている数のうち最大のもの」のうち最大のものとして得ることができます。\nさて、配列\n\\(A\\)\nに対して行われているのは次の\n\\(2\\)\nつです。\n配列の指定した範囲に特定の値を加える。(区間加算)\n配列の指定した範囲(今回は配列全体のみ)における最大値を求める。(区間内最大値の取得)\nこれらの操作は遅延セグメント木によってどちらも\n\\(O(\\log |A|)\\)\n(\n\\(|A|\\)\nは\n\\(A\\)\nの長さ\n\\((=\\max(X_i))\\)\n) で行うことができます。配列に対する区間加算の回数は、各操作について高々\n\\(2\\)\n回であるため全体で高々\n\\(2N\\)\n回であり、最大値の取得は\n\\(\\max(T_i)\\)\n回  しか行われません。\nよって、全体でかかる計算量は\n\\(O((N+\\max(T_i))\\log(\\max(X_i)))\\)\nであり、十分高速です、\nよって、この問題を解くことができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/lazysegtree>\nusing namespace std;\nusing namespace atcoder;\n\nconst int Tmax=(int)2e+5;\nconst int Xmax=(int)2e+5;\n\nstruct S {\n    int x;\n};\n\nstruct F {\n    int x;\n};\n\nS op(S l, S r) { return S{max(l.x,r.x)}; }\n\nS e() { return S{0}; }\n\nS mapping(F l, S r) { return S{l.x+r.x}; }\n\nF composition(F l, F r) { return F{l.x+r.x}; }\n\nF id() { return F{0}; }\n\nint main(void) {\n\tint n,d,w,t,x,ans=0;\n\tvector<pair<int,int> >q[Tmax+1];\n\tcin>>n>>d>>w;\n\tfor(int i=0;i<n;i++){\n\t\tcin>>t>>x;\n\t\tq[max(t-d,0)].push_back({x,1});\n\t\tq[t].push_back({x,-1});\n\t}\n    lazy_segtree<S, op, e, F, mapping, composition, id> seg(Xmax);\n    for(int i=0;i<Tmax;i++){\n        int sz=q[i].size();\n        for(int j=0;j<sz;j++){\n            seg.apply(max(0,q[i][j].first-w),q[i][j].first,F{q[i][j].second});\n        }\n        ans=max(ans,seg.prod(0,Xmax).x);\n    }\n\tcout<<ans<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "ac0d35a0e885b14edda273291309aa7a368b615636385cc0a4b2b7d7a611d816",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc327/abc327_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc327/editorial/7588",
+      "text": "セグメントツリー を使って解くことができます。\n公式解説では区間加算、区間 max の遅延セグメントツリーを用いて解いてますが、これは一点加算、累積和 max のセグメントツリーで同じことができるからです。\nhttps://atcoder.jp/contests/abc327/submissions/47283704",
+      "codes": [],
+      "text_sha256": "be20140b3f44866e4ccdc8bf77922334896e7e22df5c3ea7c7bffcb2790d570f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc327/abc327_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

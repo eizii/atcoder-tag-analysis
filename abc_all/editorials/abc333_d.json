@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc333_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc333/editorial/7944",
+      "text": "頂点 \\(1\\) を削除した直後に残っている頂点から \\(1\\) つ選び（存在しなければ頂点 \\(1\\) を選び）、もとの木においてその頂点を根とした根つき木を考えます。\nすると、頂点 \\(1\\) を削除する直前には、頂点 \\(1\\) の子孫がすべて削除されている必要があります。\n逆に、頂点 \\(1\\) の子孫を深い方から削除していくと頂点 \\(1\\) およびその子孫以外の頂点を消すことなく目標を達成できるので、この条件のもとで必要な操作の回数は \\(1\\) を根とする部分木の大きさと等しいです。\nよって、この問題は、もとの木において根にする頂点を動かしたときの「頂点 \\(1\\) を根とする部分木の大きさ」の最小値を求める問題に言い換えられます（同様に深い方から操作することで、好きな頂点を選んでその頂点を残すことができることがわかります）。\nもとの木から頂点 \\(1\\) と頂点 \\(1\\) に接続する辺を取り除くと、森ができます。\nそして（頂点 \\(1\\) でない）ある頂点を根としたときの、頂点 \\(1\\) を根とする部分木の大きさは、\\(n\\) から \\(\\left(\\right.\\)根として選んだ頂点が属する連結成分の大きさ\\(\\left.\\right)\\) を引いたものになります。\nよって、求める最小値は \\(n\\) から森の連結成分の大きさのうち最大のものを引いたものになります。\nこれを実装することで、この問題を解くことができます。\n実装には、頂点 \\(1\\) を根として木 DP を行ったり、Union Find などを用いたりすることができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <ranges>\n#include <atcoder/dsu>\n\nint main() {\n    using namespace std;\n\n    unsigned N;\n    cin >> N;\n\n    // 頂点 1 を取り除いた森について、\n    // union find で連結成分を管理\n    atcoder::dsu forest(N);\n\n    for (unsigned i = 1; i < N; ++i) {\n        unsigned u, v;\n        cin >> u >> v;\n        if (u != 1) // 頂点 1 に接続する辺でなければ\n            forest.merge(u - 1, v - 1); // 辺を追加\n    }\n\n    // N から最大の連結成分のサイズを引いたものが答え\n    cout << N - ranges::max(forest.groups() | views::transform([](auto &&g) { return size(g); })) << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "aa773de3bfeec8d5e60e05ac8251a4be21ebf9aa8e72ceacc2ffd14a05c4ab95",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc333/abc333_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

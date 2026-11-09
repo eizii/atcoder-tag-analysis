@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc085_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc085/editorial.pdf",
+      "text": "A: Already 2018\n\n  この問題を解くには、以下の手順を踏む必要があります。\n\n   0.（言語によっては不要）文字列変数S を宣言する。\n\n       1. 標準入力からS を文字列として受け取る。\n\n       2. S の4 文字目を’8’ に置き換える（直接的または間接的に）。\n\n       3. 得た文字列を標準出力に出力する。\n\n ステップ2. に関しては、言語によって事情が異なります。C++ のような言語では単にS[3] = ’8’; など\n\n  とすれば済みますが、Python のような言語では文字列中の文字を直接書き換えることが許されないこともあ\n\n ります。このような場合、文字列を一旦別のデータ構造（リスト）に変換する手もありますが、S の末尾の2\n\n  文字を\"2018/01/\" と連結するなど、別の方針も考えられます。\n\n   C++, Python での実装例:\n\n\n\n 1 #include <iostream>\n\n 2 #include <string>\n\n 3 using namespace std;\n\n\n 4\n\n 5 int main(){\n\n 6     string S;\n\n 7     cin >> S;\n\n 8     S[3] = '8';\n\n 9     cout << S << endl;\n\n10 }\n\n\n\n\n 1 print(\"2018/01/\" + input()[-2:])\n\n\n\n\n                                               1",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "0057f720f3e2ffe1f1582598a9db018a8ef6cdb1a57f09dd17814125cfeec6d7"
+    }
+  ],
+  "status": "available"
+}

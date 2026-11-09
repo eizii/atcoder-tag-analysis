@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc413_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13404",
+      "text": "絶対値が \\(1\\) より大きい公比をもつ等比数列は、全体を反転することで公比の絶対値が \\(1\\) 未満である等比数列とすることができます。\nよって、並べ替えることで公比の絶対値が \\(1\\) 以下の等比数列にできるかを判定すればよいです。\nまず、公比の絶対値が \\(1\\) であるかを判定します。\n\\(r=1\\) のとき、列はすべて同じ値です。\n\\(r=-1\\) のとき、ある整数 \\(x\\) が存在して、列は \\(\\lceil N/2\\rceil\\) 個の \\(x\\) と \\(\\lfloor N/2\\rfloor\\) 個の \\(-x\\) からなります。\nこれらを満たすかどうかは \\(O(N)\\) 時間で判定できます。\n公比の絶対値が \\(1\\) 未満である等比数列は、値の絶対値が単調減少するため、\\(A\\) について絶対値の降順でソートした列が等比数列であるかを判定すればよいです。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    using namespace std;\n    unsigned T;\n    cin >> T;\n    for (unsigned t{}; t < T; ++t) cout << ([]{\n        unsigned N;\n        cin >> N;\n        vector<long> A(N);\n        for (auto&& a : A)\n            cin >> a;\n\n        // すべて同じ値なら、Yes\n        if (ranges::count(A, A[0]) == N)\n            return true;\n\n        // 先頭とその -1 倍しかなく、それぞれ ceil(N/2) 個と floor(N/2) 個なら、Yes\n        if (const auto p_cnt{ranges::count(A, A[0])}, n_cnt{ranges::count(A, -A[0])}; p_cnt + n_cnt == N && min(p_cnt, n_cnt) == N / 2)\n            return true;\n\n        // 絶対値の降順にソートしておく\n        ranges::sort(A, greater{}, [](const auto a){ return abs(a); });\n\n        // 公比の絶対値が 1 でないなら、絶対値でソートしたときに等比数列である必要がある\n        for (unsigned i{}; i + 2 < N; ++i)\n            if (A[i] * A[i + 2] != A[i + 1] * A[i + 1])\n                return false;\n        return true;\n    }() ? \"Yes\" : \"No\") << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "7fdd5a3849bb41d574eb33c295967ecfbb4cc0e87c8ec525f0a4e4ef6339b5cd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13413",
+      "text": "ABC 390 B の解説\nで同様の解説を記載したので、参考にしてください。\nlong double による解法の正当性\nも書きました。",
+      "codes": [],
+      "text_sha256": "1034c145e9cb888731992a09129f71e04c5857a8cc5d00dca34a3ff9d59b4f59",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc413/editorial/13417",
+      "text": "\\(A\\)\nを並び替えて等比数列\n\\(B\\)\nが作れる条件を特定しましょう。\n\\(A\\)\nの各要素の絶対値を取り、ソートしたものを\n\\(B'\\)\nと置きます。\nまず、\n\\(B'\\)\nが等比数列でなければ「不可能」なので、これは等比数列だとしましょう。\nこのとき\n\\(B\\)\nの候補として、次の 4 つを試せば十分です（ただし\n\\(\\circ\\)\nは各点積）:\n\\(B = B'\\)\n\\(B = -B'\\)\n\\(B = B' \\circ (1, -1, 1, -1, \\dots)\\)\n\\(B = -B' \\circ (1, -1, 1, -1, \\dots)\\)\n従って、実際にこれらを構築して、元の\n\\(A\\)\nの順列になっているかをチェックすればよいです。\nコード\nRust 37 ms",
+      "codes": [
+        "use itertools::iproduct;\nuse itertools::Itertools;\nuse proconio::input;\n\nfn main() {\n    input! {\n        q: usize,\n    }\n    for _ in 0..q {\n        input! {\n            n: usize,\n            mut a: [i64; n],\n        }\n        a.sort_unstable();\n        let mut b = a.iter().map(|&x| x.abs()).collect::<Vec<_>>();\n        b.sort_unstable();\n        let ans = b.iter().tuple_windows().all(|(x, y, z)| x * z == y * y)\n            && iproduct!([1, -1], [1, -1]).any(|(s, t)| {\n                let mut b = b\n                    .iter()\n                    .zip(std::iter::successors(Some(1), |&x| Some(t * x)))\n                    .map(|(x, t)| s * t * x)\n                    .collect::<Vec<_>>();\n                b.sort_unstable();\n                a == b\n            });\n        println!(\"{}\", if ans { \"Yes\" } else { \"No\" });\n    }\n}"
+      ],
+      "text_sha256": "e02431f406e9092ea2e2648c4aec4be05ed5a56788e88080febe09bcc091c07c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc413/abc413_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

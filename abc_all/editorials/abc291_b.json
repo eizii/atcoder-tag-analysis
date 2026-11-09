@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc291_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc291/editorial/5820",
+      "text": "解法としてはいくつかありますが一番シンプルな方法としては、\n\\(5N\\)\n人による評点をソートした後に上から\n\\((N+1)\\)\n番目の人から\n\\(4N\\)\n番目までの平均を求めるというものがあります。\nソートは用意された関数を用いるのが基本的には十分高速かつ簡単な方法ですが、\n\\(N\\)\nが\n\\(100\\)\n程度であるため、バブルソートなどを自分で実装しても十分間に合います。平均を取る際、整数型ではなく(浮動 or 固定)小数点数型に直してから平均を取る必要があることに注意しましょう。\nc++ による実装例 :\nPythonによる実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n;\n\tdouble sum=0.0;\n\tcin>>n;\n\n\tvector<double> a(5*n);\n\tfor(int i=0;i<5*n;i++)cin>>a[i];\n\n\tsort(a.begin(),a.end());\n\tfor(int i=n;i<4*n;i++)sum+=a[i];\n\tcout<<sum/((double)(3*n))<<endl;\n\n\treturn 0;\n}",
+        "import numpy as np\n\nn=int(input())\na=list(map(float,input().split()))\na.sort()\nprint(np.mean(a[n:4*n]))"
+      ],
+      "text_sha256": "6225e5b37e75babd99bc5df90961436c44daad5fbcad7231a0a74fad19ae12b4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc291/abc291_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc291/editorial/5830",
+      "text": "quick select と呼ばれるアルゴリズムを用いて \\(O(N)\\) 時間で解く解法について解説します。\nquick select について\nquick select は、長さ \\(N\\) の配列 \\((A[i]) _ {1\\leq i\\leq N}\\) と整数 \\(k\\ (1\\leq k\\leq N)\\) を入力として、\\(A[i]\\) を並べ替えた列 \\(A^\\prime[i]\\) であって次の条件を満たすものを \\(O(N)\\) 時間で得るアルゴリズムです。\n\\(i\\leq k\\iff A^\\prime[i]\\leq A^\\prime[k]\\quad(1\\leq i\\leq N)\\)\n\\(i\\geq k\\iff A^\\prime[i]\\geq A^\\prime[k]\\quad(1\\leq i\\leq N)\\)\n単に\n\\(A^\\prime[k]=A[i]\\ (1\\leq i\\leq N)\\) の中で \\(k\\) 番目に大きいもの\nを得るアルゴリズムだと考えることが多いですが、一般的な実装では結果的にこのような配列が得られます。\n（また、単に \\(A^\\prime[k]\\) の値だけが得られる場合でも、クイックソートのピボットで列を分割する要領で上のような配列 \\(A^\\prime\\) が追加の \\(O(N)\\) 時間をかけることで得られます。）\nquick select は、クイックソートを行う際に \\(k\\) 番目の要素が含まれない側のソートを行わないことで実現できます。\n時間計算量は、ピボットの選択に乱択を用いると期待 \\(O(N)\\) 時間、median of medians アルゴリズムなどを用いると最悪 \\(O(N)\\) 時間となります。\nC++ には、これを行う（厳密には、少し異なるアルゴリズムの introselect を行う）\nstd::nth_element\nという関数があり、平均 \\(O(N)\\) 時間であることが保証されています。事前に \\(O(N)\\) 時間で配列をシャッフルしておくことで期待 \\(O(N)\\) 時間とすることもできます。\nこの問題を解く\n長さ \\(5N\\) の列 \\((X[i]) _ {1\\leq i\\leq 5N}\\) と \\(N\\) に対して quick select を行うと、大きいほうから \\(4N\\) 人ぶん（順不同）の列 \\((Y[i]) _ {1\\leq i\\leq 4N}\\) が得られます。\nこの列と \\(3N\\) に対して quick select を行うと、この中で大きくないほうから \\(3N\\) 人ぶん（順不同）の列 \\((Z[i]) _ {1\\leq i\\leq 3N}\\) が得られます。\n出力すべき値は \\(\\displaystyle\\dfrac1{3N}\\sum _ {i=1} ^ {3N}Z[i]\\) です。\n時間計算量は \\(O(N)\\) 時間です。\n実装例は以下のようになります。\nなお、誤差については浮動小数点で正確に表せる値どうしの除算なので、誤差は \\(0.5\\operatorname{ulp}\\) 以下となり十分小さいです（例えば計算に\nfloat\n型を用いた場合、相対誤差は \\(1.2\\times10^{-7}\\) 以下と示せます）。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\nint main() {\n    using namespace std;\n\n    unsigned N;\n    cin >> N;\n    vector<unsigned> A(5 * N);\n    for(auto&& a : A)cin >> a;\n\n    nth_element(begin(A), begin(A) + N, end(A)); // 小さいほうから N 個を除く\n    nth_element(begin(A) + N, end(A) - N, end(A)); // 大きいほうから N 個を除く\n\n    cout << reduce(begin(A) + N, end(A) - N) / static_cast<long double>(3 * N) << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "f1127a39e280df895ea1c7e1799e5bac5274c7e162d5ca5298c0fd341bae4658",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc291/abc291_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

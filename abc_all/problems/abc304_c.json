@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc304_c",
+  "title": "Virus",
+  "contests": [
+    {
+      "contest_id": "abc304",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 366,
+  "raw_difficulty": 365,
+  "contest_id": "abc304",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc304/tasks/abc304_c",
+  "statement": "配点 : 300 点 問題文 1, 2, \\ldots, N の番号がついた N 人の人が二次元平面上におり、人 i は座標 (X_i,Y_i) で表される地点にいます。 人 1 がウイルスに感染しました。ウイルスに感染した人から距離が D 以内にいる人にウイルスはうつります。 ただし、距離はユークリッド距離、すなわち 2 点 (a_1, a_2) と (b_1, b_2) に対し、この 2 点間の距離が \\sqrt {(a_1-b_1)^2 + (a_2-b_2)^2} であるものとして定められています。 十分に時間が経過した、すなわち人 i がウイルスに感染しているならば 人 i との距離が D 以内にいるすべての人がウイルスに感染している状態になったときに、各 i について人 i がウイルスに感染しているか判定してください。 制約 1 \\leq N, D \\leq 2000 -1000 \\leq X_i, Y_i \\leq 1000 i \\neq j のとき (X_i, Y_i) \\neq (X_j, Y_j) 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N D X_1 Y_1 X_2 Y_2 \\vdots X_N Y_N 出力 N 行出力せよ。 i 行目には、人 i がウイルスに感染しているならば Yes を、そうでないならば No を出力せよ。 入力例 1 4 5\r\n2 -1\r\n3 1\r\n8 8\r\n0 5 出力例 1 Yes\r\nYes\r\nNo\r\nYes 人 1 と人 2 の距離は \\sqrt 5 であるため、人 2 はウイルスに感染します。 また、人 2 と人 4 の距離は 5 であるため、人 4 はウイルスに感染します。 人 3 は距離 5 以内に人がいないので、ウイルスに感染することはありません。 入力例 2 3 1\r\n0 0\r\n-1000 -1000\r\n1000 1000 出力例 2 Yes\r\nNo\r\nNo 入力例 3 9 4\r\n3 2\r\n6 -1\r\n1 6\r\n6 5\r\n-2 -3\r\n5 3\r\n2 -3\r\n2 1\r\n2 6 出力例 3 Yes\r\nNo\r\nNo\r\nYes\r\nYes\r\nYes\r\nYes\r\nYes\r\nNo",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1, 2, \\ldots, N の番号がついた N 人の人が二次元平面上におり、人 i は座標 (X_i,Y_i) で表される地点にいます。 人 1 がウイルスに感染しました。ウイルスに感染した人から距離が D 以内にいる人にウイルスはうつります。 ただし、距離はユークリッド距離、すなわち 2 点 (a_1, a_2) と (b_1, b_2) に対し、この 2 点間の距離が \\sqrt {(a_1-b_1)^2 + (a_2-b_2)^2} であるものとして定められています。 十分に時間が経過した、すなわち人 i がウイルスに感染しているならば 人 i との距離が D 以内にいるすべての人がウイルスに感染している状態になったときに、各 i について人 i がウイルスに感染しているか判定してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N, D \\leq 2000 -1000 \\leq X_i, Y_i \\leq 1000 i \\neq j のとき (X_i, Y_i) \\neq (X_j, Y_j) 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N D X_1 Y_1 X_2 Y_2 \\vdots X_N Y_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N 行出力せよ。 i 行目には、人 i がウイルスに感染しているならば Yes を、そうでないならば No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 5\r\n2 -1\r\n3 1\r\n8 8\r\n0 5"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\r\nYes\r\nNo\r\nYes 人 1 と人 2 の距離は \\sqrt 5 であるため、人 2 はウイルスに感染します。 また、人 2 と人 4 の距離は 5 であるため、人 4 はウイルスに感染します。 人 3 は距離 5 以内に人がいないので、ウイルスに感染することはありません。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 1\r\n0 0\r\n-1000 -1000\r\n1000 1000"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 Yes\r\nNo\r\nNo"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 9 4\r\n3 2\r\n6 -1\r\n1 6\r\n6 5\r\n-2 -3\r\n5 3\r\n2 -3\r\n2 1\r\n2 6"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes\r\nNo\r\nNo\r\nYes\r\nYes\r\nYes\r\nYes\r\nYes\r\nNo"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc304/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:30.667873+00:00",
+  "statement_sha256": "db19f444ad5dd994eb904765f5f9bc05a9d2149f7a8840f632926f52b2a6c4f6",
+  "editorials": []
+}

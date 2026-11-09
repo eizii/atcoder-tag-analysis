@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc412_b",
+  "title": "Precondition",
+  "contests": [
+    {
+      "contest_id": "abc412",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 41,
+  "raw_difficulty": -508,
+  "contest_id": "abc412",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc412/tasks/abc412_b",
+  "statement": "配点 : 200 点 問題文 英小文字および英大文字のみからなる文字列 S, T が与えられます。 文字列 S が以下の条件を満たしているか判定してください。 S の先頭でない英大文字の直前の文字はすべて T に含まれる。より形式的には、 2 \\leq i \\leq |S| なる整数 i について S の i 番目の文字が英大文字ならば、 S の i-1 番目の文字は T に含まれる。 制約 S, T は長さ 1 以上 100 以下の英小文字および英大文字のみからなる文字列 入力 入力は以下の形式で標準入力から与えられる。 S T 出力 S が問題文中の条件を満たしているとき Yes と出力せよ。そうでないとき、 No と出力せよ。 入力例 1 AtCoder\nTotal 出力例 1 Yes S の先頭でない英大文字は 3 番目の文字の C のみです。この直前の文字である t は T に含まれているため、 Yes と出力すればよいです。 入力例 2 aBCdE\nabcdcba 出力例 2 No S の 3 番目の文字は英大文字 C であり、その直前の文字は B ですが、 B は T に含まれていません。 入力例 3 abcde\nXYZ 出力例 3 Yes",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 英小文字および英大文字のみからなる文字列 S, T が与えられます。 文字列 S が以下の条件を満たしているか判定してください。 S の先頭でない英大文字の直前の文字はすべて T に含まれる。より形式的には、 2 \\leq i \\leq |S| なる整数 i について S の i 番目の文字が英大文字ならば、 S の i-1 番目の文字は T に含まれる。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 S, T は長さ 1 以上 100 以下の英小文字および英大文字のみからなる文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 S T"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 S が問題文中の条件を満たしているとき Yes と出力せよ。そうでないとき、 No と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 AtCoder\nTotal"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes S の先頭でない英大文字は 3 番目の文字の C のみです。この直前の文字である t は T に含まれているため、 Yes と出力すればよいです。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 aBCdE\nabcdcba"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No S の 3 番目の文字は英大文字 C であり、その直前の文字は B ですが、 B は T に含まれていません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 abcde\nXYZ"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc412/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:40:45.084571+00:00",
+  "statement_sha256": "0ba1812043026c5d16b0867cc3fde0edc277e128c0d92e36aba42669c87d4c23",
+  "editorials": []
+}

@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc295_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc295/editorial/6033",
+      "text": "今回の問題では、\n\\(N\\)\n個の単語に対して\n\\(5\\)\nつの単語のどれかと合致するか判定することを繰り返す問題です。\nfor 文の中に if 文を\n\\(5\\)\nつ並べてもよいですが、もう少し簡単な方法として、「 if 文の中で変化するものだけを配列に入れて for 文を回す」というものがあります。\n具体的には、\nword = {\"and\", \"not\", \"that\", \"the\", \"you\"}\nという配列を作った上で、\nif(W_i == word[i]){result = true;}\nと判定する if 文を\n\\(i=0,1,2,3,4\\)\nの範囲でループする for 文の中に入れるというものです。\n実装例も参照してください。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nvector<string> word={\"and\", \"not\", \"that\", \"the\", \"you\"};\n\nint main(){\n  int n;\n  cin >> n;\n  bool res=false;\n  for(int i=0;i<n;i++){\n    string s;\n    cin >> s;\n    for(auto &nx : word){\n      if(s==nx){res=true;}\n    }\n  }\n  if(res){cout << \"Yes\\n\";}else{cout << \"No\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "80b70c5e237c8d2d48fbf5a3bc6646ce14d801dcd80d49d43a114eb9e9959814",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc295/abc295_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc295/editorial/6063",
+      "text": "ループを使わずに解答することもできます。\n「入力文字列のリスト」と「問題文の5単語」に共通して存在する単語の集合を、set 型での集合演算を用いて求めます。\nその集合が空でないならば答えは\nYes\n、空であるならば\nNo\nです。\n実装例 (Python)",
+      "codes": [
+        "N = int(input())\nW = list(input().split())  # 入力文字列のリスト\n\ncommon = set(W) & set([\"and\", \"not\", \"that\", \"the\", \"you\"])  # 「W」と「問題文の5単語」に共通して存在する単語の集合\n# print(common)\n\nif len(common) > 0:\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "ec54e86125c0e57f2f93bbdcc1e407b9ef54d7f2b37eb67a98c732e0e7ed276e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc295/abc295_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

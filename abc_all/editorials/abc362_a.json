@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc362_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc362/editorial/10396",
+      "text": "\\(C\\)\nが\nRed\nのときは\n\\(\\min(G,B)\\)\n，\nGreen\nのときは\n\\(\\min(B,R)\\)\n，\nBlue\nのときは\n\\(\\min(R,G)\\)\nが答えになります．\nこのような条件分岐の問題は，if 文を用いて実装することができます．",
+      "codes": [
+        "R, G, B = map(int, input().split())\nC = input()\nif C == \"Red\":\n    print(min(G, B))\nif C == \"Green\":\n    print(min(B, R))\nif C == \"Blue\":\n    print(min(R, G))"
+      ],
+      "text_sha256": "4c114d414449de89dca803c6ab899f975149f0afc29a8b7b14dec37ccf171102",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc362/abc362_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc362/editorial/10457",
+      "text": "\\(C\\)\nとして与えられる文字列\nRed\n,\nBlue\n,\nGreen\nの長さが相異なることに注目します。\nまず、配列を\n\\(A = (\\infty, \\infty, \\infty, R, B, G)\\)\nで初期化し、\n\\(A_{|C|} \\gets \\infty\\)\nで更新します。その後\n\\(\\min A\\)\nを出力すればよいです。\n提出 #55580354\n他にも、\n\\(C\\)\nの 1 文字目の\nR\n,\nG\n,\nB\nの ASCII での値に着目する方法もあります。\nこの値は 82, 71, 66 であり、3 で割ったあまりはそれぞれ 1, 2, 0 で相異なります。\nあとは上記の解法と同じです。\n提出 #55646769\nあるいは\n\\(C\\)\nの 3 文字目の\nd\n,\nu\n,\ne\nを使うこともできます。",
+      "codes": [],
+      "text_sha256": "fb617b7fd01d4dc6daedd94fcdea59c24b245b6b213dd0427c755a2239581802",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc362/abc362_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

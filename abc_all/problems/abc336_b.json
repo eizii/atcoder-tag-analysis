@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc336_b",
+  "title": "CTZ",
+  "contests": [
+    {
+      "contest_id": "abc336",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 27,
+  "raw_difficulty": -683,
+  "contest_id": "abc336",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc336/tasks/abc336_b",
+  "statement": "配点 : 200 点 問題文 正の整数 X に対して、 X を 2 進表記したときに 末尾 に連続する 0 の個数（の最大値）を \\text{ctz}(X) で表します。 ただし、 X を 2 進表記したとき末尾が 1 ならば \\text{ctz}(X)=0 です。 正の整数 N が与えられるので、 \\text{ctz}(N) を出力してください。 制約 1\\leq N\\leq 10^9 N は整数 入力 入力は以下の形式で標準入力から与えられる。 N 出力 \\text{ctz}(N) を出力せよ。 入力例 1 2024 出力例 1 3 2024 を 2 進表記すると 11111101000 であり、末尾から 0 が 3 個連続しているため、 \\text{ctz}(2024)=3 です。 よって、 3 を出力します。 入力例 2 18 出力例 2 1 18 を 2 進表記すると 10010 であるため、 \\text{ctz}(18)=1 です。 0 は末尾から連続する必要があることに注意してください。 入力例 3 5 出力例 3 0",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 正の整数 X に対して、 X を 2 進表記したときに 末尾 に連続する 0 の個数（の最大値）を \\text{ctz}(X) で表します。 ただし、 X を 2 進表記したとき末尾が 1 ならば \\text{ctz}(X)=0 です。 正の整数 N が与えられるので、 \\text{ctz}(N) を出力してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N\\leq 10^9 N は整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 \\text{ctz}(N) を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 2024"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3 2024 を 2 進表記すると 11111101000 であり、末尾から 0 が 3 個連続しているため、 \\text{ctz}(2024)=3 です。 よって、 3 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 18"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 1 18 を 2 進表記すると 10010 であるため、 \\text{ctz}(18)=1 です。 0 は末尾から連続する必要があることに注意してください。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 5"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 0"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc336/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:09.516475+00:00",
+  "statement_sha256": "110005da40cada9abd37f7d9e2de9f550e2efff3c885d4201440c471fe6e2b75",
+  "editorials": []
+}

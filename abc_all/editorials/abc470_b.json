@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc470_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc470/editorial/23857",
+      "text": "現状ある \\(N\\) 個のボールの中で最も多い色に全てのボールを合わせるのが最適です。 \\(\\text{cnt}[v]\\) を \\(N\\) 個のボールのうち色 \\(v\\) であるようなボールの個数としたときに、答えは \\(\\displaystyle N-\\max _v\\text{cnt}[v]\\) と表すことができます。 実装例(Python3)",
+      "codes": [
+        "n = int(input())\nc = list(map(int, input().split()))\ncnt = [0] * n\nfor v in c:\n    cnt[v - 1] += 1\nprint(n - max(cnt))\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "cef390d5b23820db9575bf7519ad6f595b1da0fe022a97ec81c0f49766cc38aa"
+    }
+  ],
+  "status": "available"
+}

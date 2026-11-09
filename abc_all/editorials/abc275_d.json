@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc275_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc275/editorial/5110",
+      "text": "この問題は\nメモ化再帰\nと呼ばれるテクニックの練習問題です。\nまず、愚直に再帰をする解法の計算量を考えてみましょう。\n\\(f(0)\\)\nが呼ばれる回数を考えると、これは\n\\(2\\)\nで割ることと\n\\(3\\)\nで割ることを繰り返して\n\\(0\\)\nに到達する方法の総数と一致します。小さく見積もっても、\n\\(\\binom{2\\log_3 N}{\\log_3 N}\\)\n程度はあり、\n\\(N=10^{18}\\)\nのとき明らかに間に合いません。\n次に、メモ化再帰を行う場合の計算量を考えてみましょう。\n\\(f\\)\nの引数として取りうる値の種類数を考えます。引数として取りうる値は、非負整数\n\\(x,y\\)\nを用いて、\n\\(\\displaystyle\\Big \\lfloor \\frac{N}{2^x3^y}\\Big\\rfloor\\)\nという形で表されるものに限ることがわかります。\n雑に見積もっても、\n\\(x+y\\)\nは\n\\(\\log_2{N}\\)\n以下の値しか取らないので、引数の種類数は\n\\(\\mathrm{O}(\\log^ 2N)\\)\nです。以上より、メモ化再帰を用いることでこの問題を\n\\(\\mathrm{O}(\\log ^2N)\\)\nで解くことができました。\n実装例(python):",
+      "codes": [
+        "from functools import lru_cache\n\n\n@lru_cache\ndef f(n):\n    if n == 0:\n        return 1\n    return f(n // 2) + f(n // 3)\n\n\nprint(f(int(input())))"
+      ],
+      "text_sha256": "6825dbdf873bb0864ab5ed2d7cdd7b8472aba82dc66b32c56bac967cdc363b7c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc275/abc275_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

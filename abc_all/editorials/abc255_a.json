@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc255_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc255/editorial/4097",
+      "text": "この問題を for 文を使わずに if 文を利用した条件分岐のみで解くこともできますが、今回はあえて for 文を用いた実装を示しましょう。\n競技プログラミングにおいて、2次元配列はパラメータとして標準入力から与えられることが多いですが、今回の問題の場合は例えば標準入力から以下の実装例のように受け取ればよいです。\nそして、受け取った行列\n\\(A\\)\nのうち\n\\(A_{R,C}\\)\nを出力してください。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int r,c;\n  cin >> r >> c;\n  int a[4][4];\n  for(int i=1;i<=2;i++){\n    for(int j=1;j<=2;j++){\n      cin >> a[i][j];\n    }\n  }\n  cout << a[r][c] << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "8465fc4d2e6bfa17e0691f65168899d4c116e43ddc6af16c4d9524e65bcf8707",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc255/abc255_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

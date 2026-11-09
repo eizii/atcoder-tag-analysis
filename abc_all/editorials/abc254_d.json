@@ -1,0 +1,77 @@
+{
+  "problem_id": "abc254_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc254/editorial/4065",
+      "text": "整数\n\\(N\\)\nの約数のうち、最大の平方数を\n\\(f(N)\\)\nと置きます。\nここで、整数\n\\(i,j\\)\nに対して\n\\(i \\times j\\)\nが平方数となることは\n\\(\\frac{i \\times j}{f(i) \\times f(j)}\\)\nが平方数となることと同値です。\n\\(\\frac{i}{f(i)}\\)\nがある素数\n\\(p\\)\nで\n\\(2\\)\n回以上割り切れることはないため、\n\\(\\frac{i \\times j}{f(i) \\times f(j)}\\)\nが平方数となることは\n\\(\\frac{i}{f(i)}=\\frac{j}{f(j)}\\)\nと同値です。\nよって、各整数\n\\(i(1\\le i \\le N)\\)\nに対して\n\\(f(i)\\)\nを求め、\n\\(\\frac{i}{f(i)}\\)\nを全て求めればよいです。\n\\(f(i)\\)\nはあらかじめ\n\\(1\\)\n以上\n\\(N\\)\n以下の整数に対して平方数かどうか判定すれば\n\\(i\\)\nの約数を全探索することによって求められます。\n計算量は\n\\(\\mathrm{O}(N\\log N)\\)\nです。",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main(){\n  int n;\n  cin>>n;\n  vector<bool> sq(n+1,false);\n  for(int i=1;i*i<=n;i++) sq[i*i]=true;\n  vector<vector<int>> d(n+1);\n  for(int i=1;i<=n;i++){\n    for(int j=i;j<=n;j+=i) d[j].push_back(i);\n  }\n  vector<int> cnt(n+1);\n  for(int i=1;i<=n;i++){\n    int f=0;\n    for(int j=0;j<d[i].size();j++) if(sq[d[i][j]]) f=d[i][j];\n    cnt[i/f]++;\n  }\n  int ans=0;\n  for(int i=1;i<=n;i++) ans+=cnt[i]*cnt[i];\n  cout<<ans<<endl;\n}"
+      ],
+      "text_sha256": "f098d2a6939e7b32cd4820cbf7aafa9c09941ddf883bb3cf5972523b739bc49a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc254/abc254_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc254/editorial/4080",
+      "text": "正整数\n\\(x\\)\nに対し\n\\(f(x)\\)\nを\n\\(x\\)\nの約数のうち最大の平方数とします。\n\\(i\\times j\\)\nが平方数になることは\n\\(\\displaystyle \\frac i{f(i)}\\times j\\)\nが平方数となることと同値です。\n\\(\\displaystyle d[i]=\\frac i{f(i)}\\)\nとなるような配列\n\\(d\\)\nを作成します。これはエラトステネスのふるいと同じ要領で平方数で割っていくことで実現できます。\n\\(i\\)\nを固定して考えると、\n\\(i\\times j\\)\nが平方数となる\n\\(j\\)\n、つまり\n\\(d[i]\\times j\\)\nが平方数となる\n\\(1\\)\n以上\n\\(N\\)\n以下の整数\n\\(j\\)\nの個数は\n\\(j\\)\nが平方数となる\n\\(1\\)\n以上\n\\(\\displaystyle \\frac N{d[i]}\\)\n以下の整数\n\\(j\\)\nの個数と一致します。これは\n\\(h[i]\\)\nを\n\\(i\\)\n以下の平方数の個数とした配列\n\\(h\\)\nを作成することで求めることができます。\n以上でこの問題が解けました。計算量は\n\\(O(N)\\)\nです。\n実装例(Java)",
+      "codes": [
+        "import java.util.*;\n\nclass Main {\n    public static void main(String args[]) {\n        var sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        var d = new int[n + 1];\n        Arrays.setAll(d, i -> i);\n        for (int i = 2; i * i <= n; i++) {\n            if (d[i] != i)\n                continue;\n            int ii = i * i;\n            for (int j = ii; j <= n; j += ii)\n                while (d[j] % ii == 0)\n                    d[j] /= ii;\n        }\n        var h = new int[n + 1];\n        for (int i = 1; i * i <= n; i++)\n            h[i * i]++;\n        Arrays.parallelPrefix(h, Integer::sum);\n        long ans = 0L;\n        for (int i = 1; i <= n; i++)\n            ans += h[n / d[i]];\n        System.out.println(ans);\n        sc.close();\n    }\n}"
+      ],
+      "text_sha256": "91d813d069d46dff14126fd19fd0ef427065232fcc30ed109bf7e9003d12e502",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc254/abc254_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc254/editorial/4089",
+      "text": "\\(1 \\leq i,j \\leq N\\)\nより、\n\\(i×j\\)\nは\n\\(N^2\\)\n以下です。\nよって、\n\\(1^2,2^2, \\ldots , N^2\\)\nの約数の集合\n\\(d_1,d_2, \\ldots ,d_N\\)\nをそれぞれ高速に求めることが出来れば、\n\\(d_k\\)\nの各要素\n\\(d_{k,1},d_{k,2},\\ldots,d_{k,size(d_k)}\\)\nについて\n\\(d_{k,l}\\)\nと\n\\(\\frac{k^2}{d_{k,l}}\\)\nが共に\n\\(N\\)\n以下かどうか見ることによってこの問題を解くことが出来ます。\n\\( k^2 \\)\nを素因数分解することを考えます。\n\\(k\\)\nを素因数分解した結果が\n\\(k=p^a×q^b×r^c× \\ldots\\)\nだとすると、\n\\(k^2\\)\nの素因数分解の結果は\n\\(k^2=p^{2a}×q^{2b}×r^{2c}× \\ldots\\)\nとなります。よって、\n\\(k^2\\)\nの素因数分解は\n\\(k\\)\nを素因数分解することによって\n\\(O(\\sqrt{k})\\)\n, もしくは適切な前計算のもと\n\\(O(log \\ k)\\)\nで行うことが出来ます。\nあとは、DFSなどを行えば\n\\(k^2\\)\nの素因数分解の結果から\n\\(k^2\\)\nの約数を全て列挙することが出来ます。( 各素因数の指数の値の組み合わせを\n\\((2a+1)(2b+1)(2c+1)\\ldots\\)\n通り全て試します )\nよって、\n\\(1^2,2^2, \\ldots ,N^2\\)\nの約数の個数の総和を\n\\(S(N)\\)\nとして、\n\\(O(N\\sqrt{N}+S(N))\\)\nもしくは\n\\(O(Nlog N+S(N))\\)\nでこの問題を解くことが出来ます。\n\\(S(N)\\)\nの大きさですが、\n\\(N=200000\\)\nで\n\\(11859410\\)\nなので十分間に合います。",
+      "codes": [],
+      "text_sha256": "cb00247358184e117358fe21378517e603470f8f66555b74699de94b1efb76c0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc254/abc254_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc254/editorial/4090",
+      "text": "この問題を \\(\\Theta(\\sqrt{N})\\) 時間で解く方法について解説します。\n答えは \\(\\displaystyle2\\sum_{d=2}^{\\lfloor\\sqrt{N}\\rfloor}\\left\\lfloor\\dfrac N{d^2}\\right\\rfloor\\varphi(d)+N\\) です。ただし、\\(\\varphi(n)\\) は \\(n\\) と互いに素な \\(n\\) 以下の正の整数の個数です。\n\\(\\varphi(2),\\varphi(3),\\ldots,\\varphi(\\lfloor\\sqrt{N}\\rfloor)\\) は線形篩を用いて \\(\\Theta(\\sqrt{N})\\) 時間で求められるため、全体でも \\(\\Theta(\\sqrt{N})\\) 時間でこの問題が解けました。以下でこの式の導出と具体的な求め方を説明します。\n導出\n数える対象である正整数の組 \\((i,j)\\) に対して、\\(g\\coloneqq\\gcd(i,j),i^\\prime\\coloneqq\\dfrac{i}{g},j^\\prime\\coloneqq\\dfrac{j}{g}\\) と定めます。\nこのとき \\(i^\\prime,j^\\prime\\) はいずれも平方数で、互いに素です。\n逆に、\\(1\\leq ga^2\\leq N, 1\\leq gb^2\\leq N, \\gcd(a,b)=1\\) を満たす正整数の \\(3\\) つ組 \\((g,a,b)\\)  を任意に取ったとき \\(i=ga^2,j=gb^2\\) は所望の条件を満たします。\nよって、この問題は \\(1\\leq ga^2\\leq N, 1\\leq gb^2\\leq N, \\gcd(a,b)=1\\) を満たす正整数の \\(3\\) つ組 \\((g,a,b)\\) の個数を求めることに帰着されました。\n\\(a=b=1\\) である \\(N\\) 個は別に考え、\\(a\\lt b\\) の場合の数を倍することを考えます。\n\\(b\\) を固定すると、\n\\(a\\) は \\(b\\) と互いに素な \\(b\\) 以下の正の整数であるため、これは \\(\\varphi(b)\\) 個あります。\n\\(g\\) は \\(\\dfrac{N}{b^2}\\) 以下の正の整数を自由に動けるため、これは \\(\\left\\lfloor\\dfrac{N}{b^2}\\right\\rfloor\\) 個あります。\n\\(a,g\\) は（それぞれが条件を満たせば）自由に選べるため、\\(b\\) を固定したとき条件を満たす \\(3\\) つ組の個数は \\(\\left\\lfloor\\dfrac{N}{b^2}\\right\\rfloor\\varphi(b)\\) 個です。\n（\\(a\\lt b\\) も含めた）条件を満たす \\(3\\) つ組において、 \\(b\\) は \\(2\\leq b\\leq\\sqrt{N}\\) を満たします。\nなので、（\\(a\\lt b\\) も含めた）条件を満たす \\(3\\) つ組の個数は \\(\\displaystyle\\sum_{d=2}^{\\lfloor\\sqrt{N}\\rfloor}\\left\\lfloor\\dfrac N{d^2}\\right\\rfloor\\varphi(d)\\) 個です。\n対称性より、\\(a\\gt b\\) を満たす \\(3\\) つ組は \\(a\\lt b\\) を満たす \\(3\\) つ組と同じだけあります。\n\\(a=b\\) を満たす \\(3\\) つ組は \\(N\\) 個あったので、\\(\\displaystyle2\\sum_{d=2}^{\\lfloor\\sqrt{N}\\rfloor}\\left\\lfloor\\dfrac N{d^2}\\right\\rfloor\\varphi(d)+N\\) が答えであることがわかりました。\nこちらの解説\nにおける \\(\\displaystyle\\sum_d|S_d|d^2=\\sum_d|T_d|(2d-1)\\) を求める問題だと考えたのち、除原理の操作の逆を \\(2d-1\\) に対して行って変形していくことでも同じ式を導出することができます。\n求め方\n線形篩の詳細は\nこちらの解説\nにあるリンクを参考にしてください。\n線形篩は、\\(\\dfrac{n}{\\operatorname{lpf}_n}\\rightarrow n\\) なる遷移のみを考えることで \\(i=2,3,\\ldots,X\\) についての \\(\\operatorname{lpf}_i\\coloneqq i\\) の最小素因数 を時間計算量 \\(\\Theta(X)\\) で全て求めるアルゴリズムです。\nいま、線形篩を用いて \\(\\operatorname{lpf}_2,\\operatorname{lpf}_3,\\ldots,\\operatorname{lpf}_{\\lfloor\\sqrt{N}\\rfloor}\\) が求められているとします。\nこのとき、次の漸化式にしたがって計算した \\(\\operatorname{dp}[i]\\) が \\(\\varphi(i)\\) を与えます。\n\\[\\begin{aligned}\n\\operatorname{dp}[1]&=1\n\\\\\n\\operatorname{dp}[i]&=\\left\\{\\begin{array}{ll}i-1&(\\operatorname{lpf}_i=i)\\\\\\operatorname{dp}\\left[\\dfrac{i}{\\operatorname{lpf}_i}\\right]\\times\\operatorname{lpf}_i&(\\operatorname{lpf}_i=\\operatorname{lpf}_{i/\\operatorname{lpf}_i})\\\\\\\\\\operatorname{dp}\\left[\\dfrac{i}{\\operatorname{lpf}_i}\\right]\\times(\\operatorname{lpf}_i-1)&(\\text{otherwise.})\\end{array}\\right.\n\\end{aligned}\\]\nあとは、この \\(\\operatorname{dp}[i]\\) を用いて \\(\\displaystyle2\\sum_{d=2}^{\\lfloor\\sqrt{N}\\rfloor}\\left\\lfloor\\dfrac N{d^2}\\right\\rfloor\\varphi(d)+N\\) を計算すればよいです。\n実装は以下のようになります。(\n実際の提出\n)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N;\n    cin >> N;\n    int sqrt_N = sqrt(N);\n\n    // 線形篩で前計算 Θ(√N)時間\n    vector<int> primes, least_prime_factor(sqrt_N + 1);\n    for(int i = 2; i <= sqrt_N; ++i){\n        if(!least_prime_factor[i]){\n            primes.emplace_back(i);\n            least_prime_factor[i] = i;\n        }\n        for(const auto p : primes){\n            if(p * i > sqrt_N || p > least_prime_factor[i])break;\n            least_prime_factor[p * i] = p;\n        }\n    }\n\n    // φ(2), φ(3), ..., φ(Floor(√N)) を線形篩を用いて計算 Θ(√N)時間\n    vector<int> totient(sqrt_N + 1);\n    for(int i = 2; i <= sqrt_N; ++i){\n        const auto p = least_prime_factor[i];\n        totient[i] = i == p ? i - 1\n                   : least_prime_factor[i / p] == p ? p * totient[i / p]\n                   : (p - 1) * totient[i / p];\n    }\n\n    // 答えは 2 * ∑ Floor(N/i²) φ(i) + N\n    int ans = 0;\n    for(int i = 2; i <= sqrt_N; ++i)ans += N / i / i * totient[i];\n    cout << 2 * ans + N << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "3edbf73cd4482b1f6c48976981d6c5607679885e508f5ad3e66ef33cd67bc30d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc254/abc254_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc254/editorial/4079",
+      "text": "線形篩\nを使うことで\n\\(O(N)\\)\nで解けます。\n\\(\\gdef\\lpf#1{\\mathrm{lpf}(#1)}\\gdef\\dp{\\mathrm{dp}}\\)\n線形篩を用いることで、前処理\n\\(O(N)\\)\n時間で、各\n\\(i\\)\n(\n\\(2\\le i\\le N\\)\n) の最小素因数\n\\(\\lpf{i}\\)\nが\n\\(O(1)\\)\n時間で求められます。\n\\(\\dp[i]\\)\nを「\n\\(i\\)\nの素因数のうち、指数部が奇数であるもの（の 1 乗）の積」とすると、\n\\[\n\\begin{aligned}\n\\dp[1] &= 1; \\\\\n\\dp[i] &= \\begin{cases}\n\\dp[i/\\lpf{i}] \\div \\lpf{i}, & \\text{if }\\dp[i/\\lpf{i}]\\bmod\\lpf{i} = 0; \\\\\n\\dp[i/\\lpf{i}] \\times \\lpf{i}, & \\text{otherwise}.\n\\end{cases}\n\\end{aligned}\n\\]\nとして求めることができます。\nあとは、\n\\(\\dp[i]\\)\nが共通であるものの個数を（\n\\(\\dp[i]\\le N\\)\nなので、配列を用いて\n\\(O(N)\\)\n時間で）数え、その 2 乗和を答えればよいです。",
+      "codes": [],
+      "text_sha256": "b6a448fdb7f775892349f24d1c34a59c5f874eb4c87249a4ab7f545e703a47be",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc254/abc254_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc254/editorial/4069",
+      "text": "\\(i\\)\nを固定したとき、\n\\(j\\)\nの候補がいくつあるか求めることを考えます。\n\\(i\\times k\\)\nが平方数となるような最小の\n\\(k\\)\nは、\n\\(i\\)\nを平方数で割れるだけ割って残った数になります。\n\\(i\\times j\\)\nが平方数となるような\n\\(j\\)\nは\n\\(k\\)\nに平方数を掛けたものに限り、また全てその形で表せます。(証明略)\nそれぞれのパートは愚直に計算することで\n\\(i\\)\nごとに\n\\(O(\\sqrt{N})\\)\nで\n\\(j\\)\nを全て求めることができ、全体で\n\\(O(N^{1.5})\\)\nでこの問題が解けます。\n実装例(C)",
+      "codes": [
+        "#define ll long long\nint main(){\n\tint n;\n\tscanf(\"%d\",&n);\n\tll ans=0;\n\tfor(ll i=1;i<=n;i++){\n\t\tll k=i;\n\t\tfor(ll d=2;d*d<=k;d++){\n\t\t\twhile(k%(d*d)==0)k/=d*d;\n\t\t}\n\t\tfor(ll d=1;k*d*d<=n;d++)ans++;\n\t}\n\tprintf(\"%lld\",ans);\n}"
+      ],
+      "text_sha256": "93e1eeec29a3653cfa8b821f3a6cbdf33503dec2b1f4fb7f033b6f5b86d99125",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc254/abc254_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc254/editorial/4088",
+      "text": "この問題を\n\\(O(\\sqrt{N}\\log N)\\)\nで解く方法を解説します。Ex問題相当の高度な内容と思われます。\n\\(ij\\)\nが平方数となる正整数の組\n\\((i,j)\\)\nは、平方因子を持たない正整数\n\\(k\\)\nと正整数\n\\(x,y\\)\nにより\n\\((kx^2,ky^2)\\)\nと一意に表すことができます。\n\\(k\\)\nを決めたとき、\n\\(x,y\\)\nは独立にそれぞれ\n\\(\\left\\lfloor\\sqrt{\\frac{N}{k}}\\right\\rfloor\\)\n通りから選ぶことができるので 、次の問題が解ければ十分です。\n問題：\n\\(1\\)\n以上\n\\(N\\)\n以下の整数であって、平方因子を持たない数の集合を\n\\(S\\)\nとする。\n\\(\\sum_{k\\in S}\\left\\lfloor\\sqrt{\\frac{N}{k}}\\right\\rfloor^2\\)\nを求めよ。\nこの問題に対して\nABC239 Ex Dice Product 2\nなどと同様のアプローチをしてみましょう。\nまず\n\\(\\left\\lfloor\\sqrt{\\frac{N}{k}}\\right\\rfloor\\)\nが同じ値になる\n\\(k\\)\nの状態をまとめます。すなわち、\n\\(S_d\\)\nを「\n\\(\\left\\lfloor\\sqrt{\\frac{N}{k}}\\right\\rfloor=d\\)\n、かつ、\n\\(k\\)\nは平方因子を持たない」という条件を満たす数\n\\(k\\)\nの集合として、\n\\(\\displaystyle \\begin{matrix}\n\\sum_{k\\in S}\\left\\lfloor\\sqrt{\\frac{N}{k}}\\right\\rfloor^2&=&\\sum_{d}\\sum_{k\\in S_d}\\left\\lfloor\\sqrt{\\frac{N}{k}}\\right\\rfloor^2\\\\\n&=&\\sum_{d}|S_d|d^2\n\\end{matrix}\\)\nと変形します。これにより、\n\\(1\\leq d \\leq \\sqrt{N}\\)\nに対して\n\\(|S_d|\\)\nを高速に求める問題に帰着されました。\n\\(|S_d|\\)\nを高速に求めます。\n\\(d\\)\nが異なる\n\\(S_d\\)\n同士は明らかに disjointであることに注意すると、\n\\(T_d=\\cup_{d'\\geq  d}S_{d'}\\)\nとして、代わりに\n\\(|T_d|\\)\nを求めれば十分です。\n\\(T_d\\)\nは「\n\\(1\\)\n以上\n\\(\\frac{N}{d^2}\\)\n以下の整数であって、平方因子を持たない数の集合」となります。そのような集合は、\n\\(1\\)\n以上\n\\(\\frac{N}{d^2}\\)\n以下の整数から、平方因子がちょうど\n\\(2^2,3^2,4^2,5^2,\\ldots\\)\nであるものを除いたものなので、”除原理”により\n\\(d\\)\nの大きい方から順に計算することができます。\n\\(d\\)\nは\n\\(1\\)\n以上\n\\(\\sqrt{N}\\)\n以下を動きますが、\n\\(\\frac{N}{d^2}\\)\nは\n\\(O(N^{1/3})\\)\n種類の値しかとりません。前述のABC239Ex同様に丁寧に計算量解析を行うと、このアルゴリズム全体は\n\\(O(\\sqrt{N}\\log{N})\\)\nで動作することが確かめられます。\n実装例(C++)\n追記\n「\n\\(1\\)\n以上\n\\(X\\)\n以下の整数であって、平方因子を持たない数の個数」は式\n\\(\\displaystyle \\sum_{d=1}^{\\sqrt{X}}\\left\\lfloor\\frac{X}{d^2}\\right\\rfloor \\mu(d)\\)\nを用いて\n\\(O(\\sqrt{X})\\)\nで求めることができるので、除原理によるDPを行うことなく、直接\n\\(|T_d|\\)\nを求めることでも、全体として\n\\(O(\\sqrt{N}\\log{N})\\)\nが達成できます。(実装略)\nさらに、平方因子を持たない\n\\(X\\)\n以下の数の個数は\n\\(\\tilde{O}(X^{2/5})\\)\nで求めることもできるため、全体で\n\\(\\tilde{O}(N^{5/11})\\)\nで解くこともできます。(詳細略)",
+      "codes": [],
+      "text_sha256": "4da9a1b9e440017962ef6f56e8ecd111c36a1b7e3ebc1d4881c2af93abdb7a31",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc254/abc254_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

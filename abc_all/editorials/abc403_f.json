@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc403_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc403/editorial/12771",
+      "text": "値がそれぞれ\n\\(a,b\\)\nであるような\n\\(2\\)\nつの数式\n\\(s,t\\)\nに対して，次のような文字列も数式として有効です．（+ は文字列の結合を表します．）\n(\n+\n\\(s\\)\n+\n)\n（値は\n\\(a\\)\n）\n\\(s\\)\n+\n+\n+\n\\(t\\)\n（値は\n\\(a+b\\)\n）\n\\(s\\)\n+\n*\n+\n\\(t\\)\n（値は\n\\(a\\times b\\)\n，ただし\n\\(s,t\\)\nはともに\n<term>\nである必要がある）\nこれらの構成ルールをもとに，値が\n\\(N\\)\nになるような最短の数式を dp で求めます．ここで\n\\(dp1[i]\\)\nを値が\n\\(i\\)\nとなる数式のうち，長さが最小のもの\n\\(dp2[i]\\)\nを値が\n\\(i\\)\nでとなる\n<term>\nを満たす数式のうち，長さが最小のもの\nと定義します．\nまず，\n1\nのみで表現できる値については，次のように初期化できます：\n\\(dp1[i]=dp2[i]=\\)\n11...1\n遷移は以下の通りです（\n\\(\\leftarrow\\)\nは，矢印の左辺の数式を，右辺の数式で更新できる場合を表します．すなわち，右辺の方が文字列として短い場合に更新します）：\n\\(dp1[i] \\leftarrow dp1[j]\\)\n+\n+\n+\n\\(dp1[k]\\;(j+k=i)\\)\n\\(dp1[i] \\leftarrow dp2[j]\\)\n+\n*\n+\n\\(dp2[k]\\;(j\\times k=i,j\\neq 1,k\\neq 1)\\)\n\\(dp2[i] \\leftarrow\\)\n(\n+\n\\(dp1[j]\\)\n+\n+\n+\n\\(dp1[k]\\)\n+\n)\n\\(\\;(j+k=i)\\)\n\\(dp2[i] \\leftarrow dp2[j]\\)\n+\n*\n+\n\\(dp2[k]\\;(j\\times k=i,j\\neq 1,k\\neq 1))\\)\n各数式の長さは\n\\(O(\\log N)\\)\nであることが証明できるので，この dp は\n\\(O(N^2 \\log N)\\)\nで動作します．また，dp で文字列そのものではなく長さの最小値を持つと計算量は\n\\(O(N^2)\\)\nになります．",
+      "codes": [],
+      "text_sha256": "19d910c33623ebdd9a1614717ce78112b3f5522c88fe812dad76920321493b46",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc403/abc403_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc403/editorial/12841",
+      "text": "\\({}\n\\mathrm{expr}[n],\n\\mathrm{term}[n],\n\\mathrm{factor}[n],\n\\mathrm{number}[n]\n\\)\nを「評価した値が\n\\(n\\)\nになる文字列で，対応する BNF を満たすもののうち最短のもの」とします（存在しない場合は適宜処理する）．\n\\(\\mathrm{number}[n]\\)\nは簡単に前計算できます．\n\\(n=1,2,\\dots,N\\)\nについて順に\n\\(\\mathrm{expr}[n],\\mathrm{term}[n],\\mathrm{factor}[n]\\)\nを計算します．\n以下の形の遷移については，すでに計算済みの値しか用いる必要がないため素直に書けばよいです．\n<expr>\n\\(\\leftarrow\\)\n<expr> \"+\" <term>\n<term>\n\\(\\leftarrow\\)\n<term> \"*\" <factor>\n<factor>\n\\(\\leftarrow\\)\n<number>\n少し考えなければならないのが以下の形の遷移です．\n<expr>\n\\(\\leftarrow\\)\n<term>\n<term>\n\\(\\leftarrow\\)\n<factor>\n<factor>\n\\(\\leftarrow\\)\n\"(\" <expr> \")\"\nこれらは循環する形になっており，困りそうです．\nしかし実はこの遷移をそのまま書いたものを2回反復すればよいです（更新されるとしたらどのような形の文字列になるかを考えればよい）．\n実装例(Python)",
+      "codes": [
+        "N = int(input())\n\nexpr = [None] * (N + 1)\nterm = [None] * (N + 1)\nfactor = [None] * (N + 1)\nnumber = [None] * (N + 1)\n\ni = 1\nwhile i <= N:\n  number[i] = str(i)\n  i = i * 10 + 1\n\nfor n in range(1, N + 1):\n  for x in range(1, n):\n    new = f'{expr[x]}+{term[n-x]}'\n    if expr[n] is None or len(expr[n]) > len(new):\n      expr[n] = new\n\n  for x in range(2, n):\n    if n % x == 0:\n      new = f'{term[x]}*{factor[n//x]}'\n      if term[n] is None or len(term[n]) > len(new):\n        term[n] = new\n  \n  if number[n] is not None:\n    factor[n] = number[n]\n  \n  for _ in range(2):\n    if term[n] is None or (factor[n] is not None and len(term[n]) > len(factor[n])):\n      term[n] = factor[n]\n    if expr[n] is None or (term[n] is not None and len(expr[n]) > len(term[n])):\n      expr[n] = term[n]\n    if factor[n] is None or (expr[n] is not None and len(factor[n]) > len(expr[n]) + 2):\n      factor[n] = f'({expr[n]})'\n\nprint(expr[N])"
+      ],
+      "text_sha256": "a0616e915764c1fef1bb19988b6d99c69205135ee09de416241e2c16460e5425",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc403/abc403_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc403/editorial/12835",
+      "text": "\\(N\\)\nを表す数式の長さの最小値を\n\\(f(N)\\)\nとします。\n\\(f(1)=1\\)\nです\n(n)*(1+1)\nで\n\\(2n\\)\nを作ることができるため、\n\\(f(2n)\\leq f(n)+8\\)\nです\n(n)*(1+1)+1\nで\n\\(2n+1\\)\nを作ることができるため、\n\\(f(2n+1)\\leq f(n)+10\\)\nです\nよって以上より、\n\\(f(N) \\\\\n\\leq f(\\lfloor\\frac{N}{2}\\rfloor)+10 \\\\\n\\leq f(\\lfloor\\frac{N}{4}\\rfloor)+20 \\\\\n\\leq \\dots \\\\\n\\leq 1+10\\lceil\\log_{2}N\\rceil=O(\\log N)\\)",
+      "codes": [],
+      "text_sha256": "b1c02903f0cf4851b7428f8fe549f2b140ba639a76ae2ee399d3065e3da5c358",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc403/abc403_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

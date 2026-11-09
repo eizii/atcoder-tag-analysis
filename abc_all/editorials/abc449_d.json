@@ -1,0 +1,57 @@
+{
+  "problem_id": "abc449_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc449/editorial/17257",
+      "text": "\\(\\max(|x|, |y|)\\)\nという式を簡潔に扱うために、\n\\(|x| > |y|\\)\nであるものと\n\\(|x| \\leq |y|\\)\nであるものに場合分けして数え上げ、最後に足し合わせることで答えを求めます。\n以下、\n\\(|x| > |y|\\)\nであるものの数え上げ方の一例を紹介します。\n\\(|x| \\leq |y|\\)\nであるものの個数も同様に計算できます。\n\\(|x| > |y|\\)\nであるとき、\n\\(\\max(|x|, |y|) = |x|\\)\nです。したがって、\n\\(x\\)\nを\n\\(L \\leq x \\leq R\\)\nかつ\n\\(x\\)\nが偶数である範囲で全探索し、\n\\(|x| > |y|\\)\nかつ\n\\(D \\leq y \\leq U\\)\nである\n\\(y\\)\nの個数を各\n\\(x\\)\nについて求めればよいです。\n\\(|x| > |y|\\)\nは\n\\(-|x| < y < |x|\\)\nと同値であるため、\n\\(x\\)\nが固定されているとき集計対象となっている\n\\(y\\)\nの範囲は\n\\(\\max(-|x| + 1, D) \\leq y \\leq \\min(|x| - 1, U)\\)\nです。この範囲にある整数\n\\(y\\)\nの個数は\n\\(\\max(0, \\min(|x| - 1, U) - \\max(-|x| + 1, D) + 1)\\)\n個であり、各\n\\(x\\)\nに対して\n\\(O(1)\\)\n時間で計算できます。したがって、\n\\(|x| > |y|\\)\nであるものの個数は\n\\(X = R - L\\)\nとして\n\\(O(X)\\)\n時間で計算できます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\n\nint main() {\n\tint l, r, d, u;\n\tcin >> l >> r >> d >> u;\n\tll ans = 0;\n\n\t// |x| > |y|\n\tfor (int x = l; x <= r; x++) {\n\t\tif (x % 2 == 0) {\n\t\t\tint D = max(d, -abs(x) + 1);\n\t\t\tint U = min(u, abs(x) - 1);\n\t\t\tint C = U - D + 1;\n\t\t\tans += max(C, 0);\n\t\t}\n\t}\n\n\t// |x| <= |y|\n\tfor (int y = d; y <= u; y++) {\n\t\tif (y % 2 == 0) {\n\t\t\tint L = max(l, -abs(y));\n\t\t\tint R = min(r, abs(y));\n\t\t\tint C = R - L + 1;\n\t\t\tans += max(C, 0);\n\t\t}\n\t}\n\n\tcout << ans << '\\n';\n}"
+      ],
+      "text_sha256": "bf96c031d3c99cc4d3544b0b87091c0f57b051af8a976106d9604a4292df5b36",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc449/abc449_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc449/editorial/17263",
+      "text": "下の図のように解釈します。（写真の貼り方がわからないので下のリンク先の図を見てください。）\nhttps://drive.google.com/file/d/1qaLJEpZLUB37B32WNTFxtPzNV-C5bcnS/view?usp=sharing\nすると、幅\n\\(1\\)\nの長方形\n\\(4\\times 10^6\\)\n個(\n\\(L,R,D,U\\)\nの絶対値が\n\\(10^6\\)\n以下であることを用いてます。) と長方形\n\\([L,R]\\times [D,U]\\)\nとの共通部分を取ればよいです。\n幅が\n\\(1\\)\nであることを利用すると結局区間の共通部分を求める問題に帰着し、整数\n\\(l_1,r_1,l_2,r_2\\)\nについて2つの半開区間\n\\([l_1,r_1),[l_2,r_2)\\)\nの共通部分に存在する整数が\n\\(\\mathrm{clamp}(r_1,l_2,r_2)-\\mathrm{clamp}(l_1,l_2,r_2)\\)\n\\((\\mathrm{clamp}(x,l,r)=\\max(l,\\min(x,r)))\\)\n個である事実を用いると簡潔に実装を書くことができます。\n実装例 C++ (2 ms)",
+      "codes": [],
+      "text_sha256": "ffe3747a7b6d7690a9159b34c6433613b07882295901eebb71755e4eba8ec25d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc449/abc449_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc449/editorial/17265",
+      "text": "\\(L=D=0\\)\n（かつ\n\\(R, U\\geq0\\)\n）を満たす部分問題について考えます。求めたいのは\n\\(0\\leq x\\leq R\\)\nかつ\n\\(0\\leq y\\leq U\\)\nを満たす黒の格子点\n\\((x, y)\\)\nの個数です。\n対称性により、\n\\(R\\gt U\\)\nの場合も同様に扱えるため、一般性を失わずに\n\\(R\\leq U\\)\nと仮定します。さらに、\n\\(0\\leq y\\leq R\\)\nの場合と\n\\(R\\lt y\\leq U\\)\nの場合に分けて考えます。\n\\(0\\leq y\\leq R\\)\nの場合、格子点\n\\((x, y)\\)\nは\n\\(\\max(x,y)\\)\nが偶数であるとき黒で塗られています。\n\\(0\\)\n以上\n\\(R\\)\n以下の偶数\n\\(k\\)\nに対し、\n\\(\\max(x, y)=k\\)\nとなる格子点は\n\\(x=k\\)\nまたは\n\\(y=k\\)\nを満たします。\n\\(x=k\\)\nの場合、\n\\(y\\)\nは\n\\(0\\)\n以上\n\\(k\\)\n以下の値を取ることができるため、格子点の個数は\n\\(k+1\\)\nである。\n同様に、\n\\(y=k\\)\nの場合でも格子点の個数は\n\\(k+1\\)\nである。\n\\((k, k)\\)\nが二重に数えられているので、重複を除くと合計で\n\\(2k+1\\)\n個となります。\n\\(R\\)\n以下の最大の偶数を\n\\(p\\)\nとすると、黒の格子点の総数は、\n\\(k\\in\\{0, 2, \\dots, p\\}\\)\nに対する格子点の合計になります。\n区間\n\\([0, R]\\)\nに含まれる偶数\n\\(k\\)\nは\n\\(\\frac{p}2+1\\)\n個あるので、等差数列の和の公式を用いると、黒の格子点の総数は\n\\[\n\\begin{aligned}\n&\\quad(2\\cdot0+1)+(2\\cdot2+1)+\\dots+(2\\cdot p+1) \\\\\n&=\\frac{(\\frac{p}2+1)(2p+2)}2 \\\\\n&=\\left(\\frac{p}2+1\\right)(p+1)\n\\end{aligned}\n\\]\nとなります。\n\\(R\\lt y\\leq U\\)\nの場合、\n\\(0\\leq x\\leq R\\lt y\\)\nにより\n\\(y=\\max(x,y)\\)\nとなるため、格子点の色は\n\\(y\\)\nの偶奇のみに依存します。\n各\n\\(y\\)\nに対して\n\\(R+1\\)\n個の格子点があるので、区間\n\\((R, U]\\)\nに含まれる偶数の個数を\n\\(q\\)\nとして、黒の格子点の個数は\n\\(q(R+1)\\)\nで表せます。\n以上より、\n\\(L=D=0\\)\nを満たす部分問題における黒の格子点の個数が求められます。\n元の問題は、対称性と包除原理を組み合わせて、上記の部分問題に帰着できます。時間計算量は\n\\(O(1)\\)\nです。\n実装例 (Python)",
+      "codes": [],
+      "text_sha256": "16e3fc72baeb981c9c33a5de247b826d479c6f228d56a7ed31c3aeb01cf56050",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc449/abc449_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc449/editorial/17272",
+      "text": "\\(L, R, U, D\\)\nのうち絶対値が最大であるものに注目しましょう。\n\\(|L|\\)\nが最大の場合、\n\\(x = L\\)\n上の格子点の色は全て\n\\(L\\)\nの偶奇によってのみ決まります。\n\\(|R|\\)\nが最大の場合、\n\\(x = R\\)\n上の格子点の色は全て\n\\(R\\)\nの偶奇によってのみ決まります。\n\\(|U|\\)\nが最大の場合、\n\\(y = U\\)\n上の格子点の色は全て\n\\(U\\)\nの偶奇によってのみ決まります。\n\\(|D|\\)\nが最大の場合、\n\\(y = D\\)\n上の格子点の色は全て\n\\(D\\)\nの偶奇によってのみ決まります。\nこの事実を利用すると、行の数、または列の数が\n\\(1\\)\n小さい問題に帰着することができます。\nこれを行数または列数が\n\\(0\\)\nになるまで繰り返すことで、この問題を\n\\(O(R-L + D - U)\\)\nで解くことができます。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int l, r, u, d;\n    cin >> l >> r >> u >> d;\n    long long ans = 0;\n    while(l <= r && u <= d) {\n        int ma = max({abs(l), abs(r), abs(u), abs(d)});\n        if(abs(l) == ma) {\n            if(l % 2 == 0) {\n                ans += d - u + 1;\n            }\n            l += 1;\n        } else if(abs(r) == ma) {\n            if(r % 2 == 0) {\n                ans += d - u + 1;\n            }\n            r -= 1;\n        } else if(abs(u) == ma) {\n            if(u % 2 == 0) {\n                ans += r - l + 1;\n            }\n            u += 1;\n        } else {\n            if(d % 2 == 0) {\n                ans += r - l + 1;\n            }\n            d -= 1;\n        }\n    }\n    cout << ans << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "692175825124ab525b1a3a12b31d905ad5c6776632d0c5b1ba39432e706efef1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc449/abc449_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc449/editorial/17259",
+      "text": "\\(f(k)\\)\nを以下を満たす\n\\((x,y)\\)\nの個数とします．\n\\(\\max(|x|,|y|)\\leq k\\)\nかつ\n\\(L\\leq x\\leq R\\)\nかつ\n\\(D\\leq y\\leq U\\)\n．\n\\(L,R,D,U\\)\nの絶対値は\n\\(10^6\\)\n以下であることに注意すると，元の問題の答えは\n\\(\\displaystyle\\sum_{k=0}^{10^6}(-1)^kf(k)\\)\nです．\n\\(f(0)+(f(2)-f(1))+(f(4)-f(3))+\\cdots+(f(10^6)-f(10^6-1))\\)\nと変形すればよいです．\nここで\n\\(\\max(|x|,|y|)\\leq k\\)\nは\n\\(-k\\leq x\\leq k\\)\nかつ\n\\(-k\\leq y\\leq k\\)\nと同値であることに注意すれば各\n\\(k\\)\nに対し\n\\(f(k)\\)\nは\n\\(O(1)\\)\n時間で求められます．\n実装例(Python)",
+      "codes": [
+        "L, R, D, U = map(int, input().split())\n\nans = 0\nfor k in range(1000001):\n    dx = max(0, min(R, k) - max(L, -k) + 1)\n    dy = max(0, min(U, k) - max(D, -k) + 1)\n    v = dx * dy\n    if k % 2 == 0:\n        ans += v\n    else:\n        ans -= v\nprint(ans)"
+      ],
+      "text_sha256": "c3831225a073282df6a4ab0cbddf9dcee4df35b2515e886ae487a8cd3d95ee4f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc449/abc449_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

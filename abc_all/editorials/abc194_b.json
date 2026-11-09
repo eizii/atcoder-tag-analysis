@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc194_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc194/editorial/824",
+      "text": "仕事 A に割り当てる従業員の番号と、仕事 B に割り当てる従業員の番号を全探索すればよいです。\nこの解法の時間計算量は\n\\(\\Theta(N^2)\\)\nですが、\n\\(O(N)\\)\nで解くこともできます。\n解答例 (C++)\n解答例 (Python)",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tint n = ri();\n\tstd::vector<int> a(n);\n\tstd::vector<int> b(n);\n\tfor (int i = 0; i < n; i++) a[i] = ri(), b[i] = ri();\n\t\n\tint res = 1000000000;\n\tfor (int i = 0; i < n; i++) for (int j = 0; j < n; j++)\n\t\tres = std::min(res, i == j ? a[i] + b[j] : std::max(a[i], b[j]));\n\tprintf(\"%d\\n\", res);\n\t\n\treturn 0;\n}",
+        "n = int(input())\na = [0 for i in range(n)]\nb = [0 for i in range(n)]\nfor i in range(n) :\n\ta[i], b[i] = map(int, input().split())\n\nres = 1000000000\nfor i in range(n) :\n\tfor j in range(n) :\n\t\tres = min(res, a[i] + b[j] if i == j else max(a[i], b[j]))\n\nprint(res)"
+      ],
+      "text_sha256": "26755ac3f2ff126b9f64b6d6e18aa5294968a098685b2719879008dba0644095",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc194/abc194_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc194/editorial/870",
+      "text": "一応、時間計算量\n\\(O(N)\\)\nでの解法を書いておきます。\nhttps://atcoder.jp/contests/abc194/submissions/20734963\n仕事 A に、\n\\(A_i\\)\nが最小の人\n\\(i\\)\nを使い、仕事 B に、\n\\(B_j\\)\nが最小の人\n\\(j\\)\nを使うことを考えます。\nこれが可能ならば、最適性は明らかで、答は\n\\(\\max(A_i, B_j)\\)\nです。\n以下、そうでないとします。つまり\n\\(i = j\\)\nです。\n最適解において、この人をどちらかの仕事には使うとしてよいです（そうでない割り当て\n\\((A_k, B_l)\\)\nが最適解だったとすると、\n\\((A_k,B_i)\\)\nも最適解です）。この人\n\\(i\\)\nの様子で場合分けして、以下の\n\\(3\\)\n種の値の最小値が答となります。\n両方に人\n\\(i\\)\nを使う場合のスコア：\n\\(A_i + B_i\\)\n仕事\n\\(A\\)\nのみ人\n\\(i\\)\nを使う場合のスコア：\n\\(\\max(A_i,  \\min\\{B_j\\mid i\\neq j\\})\\)\n仕事\n\\(B\\)\nのみ人\n\\(i\\)\nを使う場合のスコア：\n\\(\\max(B_i, \\min\\{A_j\\mid i\\neq j\\})\\)\nこれをそのまま実装すると、時間計算量\n\\(O(N)\\)\nにできると思います。",
+      "codes": [],
+      "text_sha256": "b4683d34855029037c84dcbc4e9866f9d48f66c67426dc29e1dd5fb1a52c897d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc194/abc194_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

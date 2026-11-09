@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc453_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc453/editorial/18528",
+      "text": "\\(i=1,2,\\ldots, N-1\\)\nぞれぞれについて、\nチーム\n\\(A\\)\nが\n\\(i\\)\n人、チーム\n\\(B\\)\nが\n\\((N-i)\\)\n人となるようなチーム分けのうち条件をみたすものがいくつあるかについて考えます。最終的に求める値はそれらの和となります。\n選手\n\\(j=1,2,\\ldots, N\\)\nは以下の\n\\(4\\)\nつのいずれかに分類できます。\nグループ\n\\(1\\)\n:\n\\(L_j\\leq i\\leq R_j\\)\nかつ\n\\(L_j\\leq (N-i)\\leq R_j\\)\nであるとき、選手\n\\(j\\)\nはチーム\n\\(A,B\\)\nのいずれにも所属できる。\nグループ\n\\(2\\)\n:\n\\(L_j\\leq i\\leq R_j\\)\nであるが、\n\\(L_j\\leq (N-i)\\leq R_j\\)\nでないとき、選手\n\\(j\\)\nはチーム\n\\(A\\)\nにのみ所属できる。\nグループ\n\\(3\\)\n:\n\\(L_j\\leq i\\leq R_j\\)\nでないが、\n\\(L_j\\leq (N-i)\\leq R_j\\)\nであるとき、選手\n\\(j\\)\nはチーム\n\\(B\\)\nにのみ所属できる。\nグループ\n\\(4\\)\n:\n\\(L_j\\leq i\\leq R_j\\)\nでも\n\\(L_j\\leq (N-i)\\leq R_j\\)\nでもないとき、選手\n\\(j\\)\nはチーム\n\\(A,B\\)\nのいずれにも所属できない。\nこのとき、以下の条件のうち一つでもみたされる場合、この\n\\(i\\)\nについて条件をみたす分け方は存在しません。\nグループ\n\\(2\\)\nに属する選手が\n\\((i+1)\\)\n人以上存在する。\nグループ\n\\(3\\)\nに属する選手が\n\\((N-i+1)\\)\n人以上存在する。\nグループ\n\\(4\\)\nに属する選手が\n\\(1\\)\n人でも存在する。\nこれは、各選手がいずれかのチームに属さなければならないこと、およびチーム\n\\(A,B\\)\nがそれぞれちょうど\n\\(i,(N-i)\\)\n人からなる必要があることから従います。\nそうで無い場合、グループ\n\\(1,2,3\\)\nに属する人数を\n\\(X_{i,1},X_{i,2},X_{i,3}\\)\n（仮定よりグループ\n\\(4\\)\nに属する選手はいないため\n\\(X_{i,1}+X_{i,2}+X_{i,3}=N\\)\n）とすると、条件をみたすように分けるためには、チーム\n\\(A\\)\nにグループ\n\\(2\\)\nに属する全員に加えて、グループ\n\\(1\\)\nに属する\n\\(X_{i,1}\\)\n人のうち\n\\((i-X_{i,2})\\)\n人が属し、チーム\n\\(B\\)\nにはグループ\n\\(3\\)\nに属する全員とグループ\n\\(1\\)\nのうち残りの\n\\(X_{i,1}-(i-X_{i,2})=(N-i-X_{i,3})\\)\n人が属するようにするようにすることが必要十分です。よって、このとき、条件をみたす分け方は\n\\[\n\\binom{X_{i,1}}{i-X_{i,2}}=\\frac{X_{i,1}!}{(i-X_{i,2})!~(N-i-X_{i,3})!}\n\\]\n通りあります。ここで\n\\(\\binom{n}{k}\\)\nは二項係数を表します。\n答えは、先に述べたようにこれを\n\\(i=1,2,\\ldots,N-1\\)\nについて足し合わせあまりを取ることによって求められます。\n\\(X_{i,1}\\)\nは高々\n\\(N\\)\nであるため、\n\\(k=0,1,\\ldots,N\\)\nについて\n\\(k!\\)\nおよびその逆数の\n\\(\\pmod{998244353}\\)\nでの値を前計算しておくことで、それぞれの\n\\(i\\)\nに対して\n\\(O(1)\\)\nで計算できます。\nまた、\n\\(X_{i,1}, X_{i,2}, X_{i,3}\\)\nは各\n\\(i\\)\nについて愚直に計算すると、全体で\n\\(O(N^2)\\)\nの時間がかかってしまいますが、\n\\(i\\)\nについて昇順に求めることを考えると、選手\n\\(j\\)\nの属するグループが変わるタイミングは\n\\(i=L_j-1\\to L_j\\)\n,\n\\(R_j\\to R_j+1\\)\n,\n\\((N-R_j-1)\\to(N-R_j)\\)\n,\n\\((N-L_j)\\to (N-L_j+1)\\)\nの高々\n\\(4\\)\n回しかありません。よって、それぞれの\n\\(i\\)\nについて、\n\\(i-1\\to i\\)\nで属するグループが変わる選手についてのみ、その選手がどのグループからどのグループへ移動したか求めることで全体で\n\\(O(N)\\)\nで計算できます。\n前計算にかかる時間が\n\\(O(N\\log P)\\)\n（今回は\n\\(P=998244353\\)\n）、\n\\(X_{i,1}, X_{i,2}, X_{i,3}\\)\nの計算および分け方の計算について\n\\(O(N)\\)\nの時間がかかるため、全体で\n\\(O(N\\log P)\\)\nでこの問題を解くことができます。\nよって、この問題を解くことができました。\nC++による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/modint>\nusing namespace std;\nusing namespace atcoder;\n\nusing mint = modint998244353;\n\n#define N (int)3e+5\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nmint frac[N+1];\n\nvoid pre_calc(void){\n\tfrac[0]=mint(1);\n\tfor(int i=1;i<=N;i++){\n\t\tfrac[i]=frac[i-1]*mint(i);\n\t}\n\treturn;\n}\n\nmint binom(int x,int y){\n\tif(x<0)return mint(0);\n\tif(y<0)return mint(0);\n\tif(y>x)return mint(0);\n\treturn frac[x]*(frac[y].inv())*(frac[x-y].inv());\n}\n\nint main(void){\n\tint n;\n\tint l[N],r[N];\n\tint aok[N]={},bok[N]={};\n\tint m[2][2]={};\n\tvector<int>cand[N];\n\tmint ans=mint(0);\n\tcin>>n;\n\trep(i,n){\n\t\tcin>>l[i]>>r[i];\n\t\tcand[l[i]].push_back(i);\n\t\tcand[r[i]+1].push_back(i);\n\t\tcand[n-l[i]+1].push_back(i);\n\t\tcand[n-r[i]].push_back(i);\n\t}\n\tm[0][0]=n;\n\n\tpre_calc();\n\tfor(int i=1;i<=n-1;i++){\n\t\tint sz=cand[i].size();\n\t\trep(j,sz){\n\t\t\tint z=cand[i][j];\n\t\t\tm[aok[z]][bok[z]]--;\n\t\t\tif((l[z]<=i)&&(i<=r[z]))aok[z]=1;\n\t\t\telse aok[z]=0;\n\t\t\tif((l[z]<=(n-i))&&((n-i)<=r[z]))bok[z]=1;\n\t\t\telse bok[z]=0;\n\t\t\tm[aok[z]][bok[z]]++;\n\t\t}\n\t\tif((m[0][0]==0)&&(m[1][0]<=i)&&(m[0][1]<=(n-i))){\n\t\t\tans+=binom(m[1][1],i-m[1][0]);\n\t\t}\n\t}\n\tcout<<ans.val()<<endl;\n}"
+      ],
+      "text_sha256": "4a73856a9c53976b04ce6139030305e06cafef7294ff81bec1a215627e6decf9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc453/abc453_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc453/editorial/18563",
+      "text": "チームAに所属する人数が\n\\(i\\)\nであるようなチーム分けの個数を\n\\(C_i\\)\nとすると、答えは\n\\(\\sum_i C_i\\)\nです。\nここで、対称性より\n\\(C_i=C_{N-i}\\)\nであるため、\n\\(C_1,\\dots,C_{\\lfloor\\frac{N}{2}\\rfloor}\\)\nが求まれば答えは求まります。\n今、xy平面上に点\n\\(i\\)\nを座標\n\\((L_i,R_i)\\)\nにとると、領域\n\\(x \\leq i \\land y \\geq i\\)\nにある点の個数を\n\\(X_i\\)\n、領域\n\\(x \\leq i \\land y \\geq N-i\\)\nにある点の個数を\n\\(Y_i\\)\nとして、領域\n\\(x \\leq N-i \\land y \\geq N-i\\)\nまたは領域\n\\(x \\leq i \\land y \\geq i\\)\nに\n\\(N\\)\n点全てが含まれるとき\n\\(C_i=\\binom{Y_i}{i-(X_i-Y_i)}\\)\nとなります。(そうでないとき\n\\(C_i=0\\)\nです)\nよって、x座標の昇順に平面走査を行えば、各\n\\(i\\)\nについて\n\\(X_i,Y_i\\)\nがBITで点の個数を保持することでもとまるため、\n\\(O(N \\log N)\\)\nで解くことができます",
+      "codes": [],
+      "text_sha256": "9980ce98c5c5c76e53ffb2fb0a67b01ff9988a6122233c712b75ef24809c4d2b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc453/abc453_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

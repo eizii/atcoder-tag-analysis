@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc420_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc420/editorial/13744",
+      "text": "?\nのマスを\n\\(2\\)\n回踏むと状態は元に戻ります。したがって、\n\\(d[x][r][c]\\)\nを「\n?\nのマスを踏んだ回数が\n\\(\\bmod 2\\)\nで\n\\(x\\)\n回である状態でマス\n\\((r,c)\\)\nに到達するまでの操作回数の最小値」とした幅優先探索を行うことで、計算量\n\\(O(HW)\\)\nで計算することができます。\n実装例(Python3)",
+      "codes": [
+        "from collections import deque\n\nh, w = map(int, input().split())\na = [input() for _ in range(h)]\nsx, sy, gx, gy = -1, -1, -1, -1\nfor i in range(h):\n    for j in range(w):\n        if a[i][j] == \"S\":\n            sx, sy = i, j\n        if a[i][j] == \"G\":\n            gx, gy = i, j\nINF = 10**9\ndx = [-1, 1, 0, 0]\ndy = [0, 0, -1, 1]\nd = [[[INF] * w for _ in range(h)] for _ in range(2)]\nq = deque()\nq.append((0, sx, sy))\nd[0][sx][sy] = 0\nwhile q:\n    c, x, y = q.popleft()\n    for k in range(4):\n        xx, yy = x + dx[k], y + dy[k]\n        if (\n            not (0 <= xx < h and 0 <= yy < w)\n            or a[xx][yy] == \"#\"\n            or (c == 0 and a[xx][yy] == \"x\")\n            or (c == 1 and a[xx][yy] == \"o\")\n        ):\n            continue\n        cc = c ^ (a[xx][yy] == \"?\")\n        if d[cc][xx][yy] != INF:\n            continue\n        q.append((cc, xx, yy))\n        d[cc][xx][yy] = d[c][x][y] + 1\nans = min(d[0][gx][gy], d[1][gx][gy])\nprint(-1 if ans == INF else ans)"
+      ],
+      "text_sha256": "37e6ce73951475b7fcc1541e3b90ae14abfe256bbe9f2ea53b910ec3f82f03fc",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc420/abc420_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

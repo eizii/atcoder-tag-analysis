@@ -1,0 +1,102 @@
+﻿problem_id,tag_id,status,role,reason,evidence_urls,apply,selection,reviewer,independent_human_review,tag,current_related
+abc396_b,T013,supported_existing,primary,カードの追加・取り出しはLIFOのpush/popに対応する。,https://atcoder.jp/contests/abc396/editorial/12389,False,stratified_sample,assistant,False,Stack,1
+abc435_c,T083,needs_review,ambiguous,解説は到達可能な右端を更新する単方向走査。典型的な区間伸縮としての尺取り法との対応は定義次第。,https://atcoder.jp/contests/abc435/editorial/14707,False,stratified_sample,assistant,False,尺取り法,1
+abc435_c,T076,add_supported,primary,倒れる範囲の右端を管理し左から順に処理するO(N)のシミュレーション。,https://atcoder.jp/contests/abc435/editorial/14707,True,stratified_sample,assistant,False,シミュレーション,0
+abc411_c,T003,supported_existing,alternative,区間の両端色と黒区間数を合成するモノイドをSegment Treeに載せる別解がある。,https://atcoder.jp/contests/abc411/editorial/13379,False,stratified_sample,assistant,False,Segment Tree,1
+abc295_c,T008,supported_existing,primary,色ごとの個数を連想配列で数え、各個数の半分を足す。,https://atcoder.jp/contests/abc295/editorial/6047,False,stratified_sample,assistant,False,Map / 連想配列,1
+abc220_c,T086,supported_existing,primary,全体和で周期分を除いた後、先頭からの累積和で残りの到達位置を求める。,https://atcoder.jp/contests/abc220/editorial/2683,False,stratified_sample,assistant,False,累積和,1
+abc408_c,T075,supported_existing,primary,各砲台の区間に加算する差分更新で全城壁の被覆数を求める。,https://atcoder.jp/contests/abc408/editorial/13165,False,stratified_sample,assistant,False,imos 法,1
+abc408_c,T086,supported_existing,supporting,差分配列の累積和で各城壁の被覆数を復元する。,https://atcoder.jp/contests/abc408/editorial/13165,False,stratified_sample,assistant,False,累積和,1
+abc343_d,T008,supported_existing,primary,得点をキー、人数を値とする連想配列で種類数を管理する。,https://atcoder.jp/contests/abc343/editorial/9434,False,stratified_sample,assistant,False,Map / 連想配列,1
+abc343_d,T009,supported_existing,concept,得点の多重集合というモデルは解説にある。実装でstd::multisetを使用することまでは示していない。,https://atcoder.jp/contests/abc343/editorial/9434,False,stratified_sample,assistant,False,Multiset,1
+abc437_d,T064,supported_existing,supporting,ソート済み列で各値の境界をlower_boundで求める。,https://atcoder.jp/contests/abc437/editorial/14901,False,stratified_sample,assistant,False,二分探索,1
+abc437_d,T077,supported_existing,primary,絶対値和を左右の区間に分けるために値をソートする。,https://atcoder.jp/contests/abc437/editorial/14901,False,stratified_sample,assistant,False,ソート,1
+abc437_d,T086,supported_existing,supporting,境界の前後の要素和を前後の累積和から求める。,https://atcoder.jp/contests/abc437/editorial/14901,False,stratified_sample,assistant,False,累積和,1
+abc182_d,T086,supported_existing,primary,各段階の累積変位と累積変位の最大値をO(N)で管理する。,https://atcoder.jp/contests/abc182/editorial/291,False,stratified_sample,assistant,False,累積和,1
+abc264_d,T001,supported_existing,alternative,転倒数をFenwick Treeで数える別解。固定7文字の制約で実行可能。,https://atcoder.jp/contests/abc264/editorial/4582,False,stratified_sample,assistant,False,Binary Indexed Tree / Fenwick Tree,1
+abc264_d,T008,supported_existing,supporting,BFSで文字列状態の訪問・距離を連想配列で管理する。,https://atcoder.jp/contests/abc264/editorial/4582,False,stratified_sample,assistant,False,Map / 連想配列,1
+abc264_d,T011,supported_existing,supporting,等コストの交換状態のBFSの待ち行列を管理する。,https://atcoder.jp/contests/abc264/editorial/4582,False,stratified_sample,assistant,False,Queue,1
+abc264_d,T066,supported_existing,primary,並べ替え文字列を頂点、隣接交換を辺とする最短手数をBFSで求める。,https://atcoder.jp/contests/abc264/editorial/4582,False,stratified_sample,assistant,False,幅優先探索,1
+abc383_c,T066,supported_existing,primary,全加湿器を始点とする多始点BFSで距離D以内のマスを数える。,https://atcoder.jp/contests/abc383/editorial/11544,False,stratified_sample,assistant,False,幅優先探索,1
+abc448_d,T012,supported_existing,supporting,根からの現在のパスに現れた値をSetに入れ、DFSから戻るときに削除する。,https://atcoder.jp/contests/abc448/editorial/16747,False,stratified_sample,assistant,False,Set,1
+abc448_d,T047,needs_review,reference,解説ではEuler Tourを発展的話題として紹介している。説明された解法はDFSの進入・退出時の状態管理であり、独立タグとしての付与基準を要確認。,https://atcoder.jp/contests/abc448/editorial/16747,False,stratified_sample,assistant,False,オイラーツアー,1
+abc448_d,T067,supported_existing,primary,根からDFSし、進入時にパスの値を追加、退出時に戻して全頂点の答えを求める。,https://atcoder.jp/contests/abc448/editorial/16747,False,stratified_sample,assistant,False,深さ優先探索,1
+abc404_d,T067,supported_existing,primary,訪問回数0/1/2の選択木をDFSで列挙し動物の訪問回数を管理する解説がある。,https://atcoder.jp/contests/abc404/editorial/12873 | https://atcoder.jp/contests/abc404/editorial/12874,False,stratified_sample,assistant,False,深さ優先探索,1
+abc404_d,T065,add_supported,primary,各動物園の訪問回数0/1/2を3^N通り列挙する全探索が主解。,https://atcoder.jp/contests/abc404/editorial/12860,True,stratified_sample,assistant,False,全探索,0
+abc219_d,T150,supported_existing,primary,各弁当の採用/不採用と2種類の個数を状態にする0/1ナップサック型DP。,https://atcoder.jp/contests/abc219/editorial/2651,False,stratified_sample,assistant,False,ナップサック問題,1
+abc334_e,T005,supported_existing,alternative,緑の連結成分をUnion-Findで管理して赤マスを追加する効果を数える。,https://atcoder.jp/contests/abc334/editorial/8987,False,stratified_sample,assistant,False,Union-Find,1
+abc334_e,T066,supported_existing,alternative,緑の連結成分のラベル付けにBFSを使う解法が明記される。,https://atcoder.jp/contests/abc334/editorial/8987,False,stratified_sample,assistant,False,幅優先探索,1
+abc334_e,T067,supported_existing,alternative,緑の連結成分のラベル付けにDFSを使う解法が明記される。,https://atcoder.jp/contests/abc334/editorial/8987,False,stratified_sample,assistant,False,深さ優先探索,1
+abc334_e,T236,supported_existing,supporting,赤マス数で割った期待値を素数法で出力するため逆元を用いる。,https://atcoder.jp/contests/abc334/editorial/8987,False,stratified_sample,assistant,False,モジュラ逆元,1
+abc311_d,T011,supported_existing,supporting,マスと移動方向の状態をBFSのキューで管理する。,https://atcoder.jp/contests/abc311/editorial/6821 | https://atcoder.jp/contests/abc311/editorial/6834,False,stratified_sample,assistant,False,Queue,1
+abc311_d,T066,supported_existing,primary,マスと直前の方向の状態グラフをBFSで探索する。,https://atcoder.jp/contests/abc311/editorial/6821 | https://atcoder.jp/contests/abc311/editorial/6834,False,stratified_sample,assistant,False,幅優先探索,1
+abc311_d,T067,supported_existing,alternative,停止位置を状態にしたDFSによる探索の別解が説明される。,https://atcoder.jp/contests/abc311/editorial/6821 | https://atcoder.jp/contests/abc311/editorial/6834,False,stratified_sample,assistant,False,深さ優先探索,1
+abc261_d,T022,supported_existing,primary,投げた回数と現在の連続表の回数を状態にし、獲得額の最大値をDPで更新する。,https://atcoder.jp/contests/abc261/editorial/4483,False,stratified_sample,assistant,False,基礎DP / 動的計画法入門,1
+abc379_c,T077,supported_existing,primary,石のあるマスを位置順にソートして到達可能性を確認する。,https://atcoder.jp/contests/abc379/editorial/11323,False,stratified_sample,assistant,False,ソート,1
+abc379_c,T086,supported_existing,supporting,位置ごとの石の累積個数を使い、各接頭区間に必要な石があるか判定する。,https://atcoder.jp/contests/abc379/editorial/11323,False,stratified_sample,assistant,False,累積和,1
+abc443_e,T022,supported_existing,primary,行と列の到達可能性を状態にして下から上へDPする。,https://atcoder.jp/contests/abc443/editorial/15178,False,stratified_sample,assistant,False,基礎DP / 動的計画法入門,1
+abc443_e,T086,needs_review,unsubstantiated,解説は列ごとの最下段の壁を前計算する。累積和を用いる具体的な別実装の根拠は今回のレビューでは確認できていない。,https://atcoder.jp/contests/abc443/editorial/15178,False,stratified_sample,assistant,False,累積和,1
+abc285_e,T022,supported_existing,primary,休日を一つ固定し、現在までの曜日と連続平日数の状態で生産量をDPする。,https://atcoder.jp/contests/abc285/editorial/5530,False,stratified_sample,assistant,False,基礎DP / 動的計画法入門,1
+abc359_d,T025,supported_existing,primary,直前K-1文字を状態とした文字列DPで回文を作らない置換数を数える。,https://atcoder.jp/contests/abc359/editorial/10265,False,stratified_sample,assistant,False,文字列DP,1
+abc270_d,T022,supported_existing,primary,残り石数に対し先手が取れる最大数をDPする。,https://atcoder.jp/contests/abc270/editorial/4850,False,stratified_sample,assistant,False,基礎DP / 動的計画法入門,1
+abc270_d,T038,supported_existing,primary,相手の最適応手を考慮しn-DP[n-A_i]を最大化する零和ゲームのミニマックスに対応する。,https://atcoder.jp/contests/abc270/editorial/4850,False,stratified_sample,assistant,False,ミニマックス法,1
+abc411_e,T026,needs_review,ambiguous,解説は最大値の累積確率を独立確率の積で計算する。期待値を状態としたDPは示されず、期待値計算と期待値DPの区別が必要。,https://atcoder.jp/contests/abc411/editorial/13361,False,stratified_sample,assistant,False,期待値DP,1
+abc411_e,T064,supported_existing,supporting,実装のlower_boundで各面の値をソート済みの座標に対応付ける。,https://atcoder.jp/contests/abc411/editorial/13361,False,stratified_sample,assistant,False,二分探索,1
+abc411_e,T077,supported_existing,primary,全ての面の値をソートし、最大値の累積確率を小さい値から更新する。,https://atcoder.jp/contests/abc411/editorial/13361,False,stratified_sample,assistant,False,ソート,1
+abc411_e,T085,supported_existing,supporting,重複を除いた面の値のリストとlower_boundによる座標圧縮を行う。,https://atcoder.jp/contests/abc411/editorial/13361,False,stratified_sample,assistant,False,座標圧縮,1
+abc411_e,T236,supported_existing,supporting,確率の積の更新と6^Nによる除算に法上の逆元を用いる。,https://atcoder.jp/contests/abc411/editorial/13361,False,stratified_sample,assistant,False,モジュラ逆元,1
+abc356_e,T086,supported_existing,primary,値の出現回数の累積和により商が一定になる区間の要素数を求める。,https://atcoder.jp/contests/abc356/editorial/10116,False,stratified_sample,assistant,False,累積和,1
+abc271_f,T008,supported_existing,alternative,推定補足: 片側のXOR頻度をハッシュ連想配列で集計する解法が解説にある。,https://atcoder.jp/contests/abc271/editorial/4925 | https://atcoder.jp/contests/abc271/editorial/4948,False,stratified_sample,assistant,False,Map / 連想配列,1
+abc271_f,T059,supported_existing,concept,経路上のXORを左右で合成してゼロになる組を数える。,https://atcoder.jp/contests/abc271/editorial/4925 | https://atcoder.jp/contests/abc271/editorial/4948,False,stratified_sample,assistant,False,XOR,1
+abc271_f,T064,supported_existing,supporting,左右のXOR値をソートし二分探索で一致する頻度を得る主解がある。,https://atcoder.jp/contests/abc271/editorial/4925 | https://atcoder.jp/contests/abc271/editorial/4948,False,stratified_sample,assistant,False,二分探索,1
+abc271_f,T067,supported_existing,supporting,対角線までの経路をDFSで列挙する別解がある。,https://atcoder.jp/contests/abc271/editorial/4925 | https://atcoder.jp/contests/abc271/editorial/4948,False,stratified_sample,assistant,False,深さ優先探索,1
+abc271_f,T082,supported_existing,primary,左上側と右下側から対角線までをそれぞれ列挙して突き合わせる半分全列挙。,https://atcoder.jp/contests/abc271/editorial/4925 | https://atcoder.jp/contests/abc271/editorial/4948,False,stratified_sample,assistant,False,半分全列挙,1
+abc186_f,T001,supported_existing,primary,各列で障害物が登場したかをFenwick Treeで管理し重複到達分を数える。,https://atcoder.jp/contests/abc186/editorial/400,False,stratified_sample,assistant,False,Binary Indexed Tree / Fenwick Tree,1
+abc186_f,T003,supported_existing,alternative,同じ更新・区間個数計算をSegment Treeで管理する方法が明記される。,https://atcoder.jp/contests/abc186/editorial/400,False,stratified_sample,assistant,False,Segment Tree,1
+abc186_f,T086,needs_review,unsubstantiated,区間集計はFenwick Tree/Segment Treeで説明される。独立した累積和タグを付ける実装根拠は今回未確認。,https://atcoder.jp/contests/abc186/editorial/400,False,stratified_sample,assistant,False,累積和,1
+abc387_f,T005,supported_existing,supporting,実装でUnion-Findを用い閉路の同値頂点を縮約する。,https://atcoder.jp/contests/abc387/editorial/11834,False,stratified_sample,assistant,False,Union-Find,1
+abc387_f,T027,supported_existing,primary,閉路を縮約した根付き木で頂点値と子の値を状態とする木DP。,https://atcoder.jp/contests/abc387/editorial/11834,False,stratified_sample,assistant,False,木DP,1
+abc387_f,T067,supported_existing,supporting,子のDP値をDFSで先に計算する実装。,https://atcoder.jp/contests/abc387/editorial/11834,False,stratified_sample,assistant,False,深さ優先探索,1
+abc387_f,T086,supported_existing,supporting,子のDP値の累積和で各値以下の総数を高速化する。,https://atcoder.jp/contests/abc387/editorial/11834,False,stratified_sample,assistant,False,累積和,1
+abc427_f,T008,supported_existing,alternative,推定別解: 左右の列挙結果を剰余の頻度Mapで突き合わせられる。解説の掲載コードはソートと二分探索。,https://atcoder.jp/contests/abc427/editorial/14195,False,stratified_sample,assistant,False,Map / 連想配列,1
+abc427_f,T064,supported_existing,supporting,upper_bound/lower_boundで剰余の一致数を求める。,https://atcoder.jp/contests/abc427/editorial/14195,False,stratified_sample,assistant,False,二分探索,1
+abc427_f,T077,supported_existing,supporting,半分ずつ列挙した剰余列をソートする。,https://atcoder.jp/contests/abc427/editorial/14195,False,stratified_sample,assistant,False,ソート,1
+abc427_f,T082,supported_existing,primary,長さ60を半分に分け、隣接制約を満たす部分列を列挙して合成する。,https://atcoder.jp/contests/abc427/editorial/14195,False,stratified_sample,assistant,False,半分全列挙,1
+abc427_f,T197,supported_existing,analysis_concept,フィボナッチ数は隣接禁止の部分列数と列挙計算量の評価に使われる。主な解法は半分全列挙。,https://atcoder.jp/contests/abc427/editorial/14195,False,stratified_sample,assistant,False,Fibonacci 数,1
+abc334_f,T003,supported_existing,supporting,直前K個のDP値の最小値をSegment Treeで求める。,https://atcoder.jp/contests/abc334/editorial/8982,False,stratified_sample,assistant,False,Segment Tree,1
+abc334_f,T022,supported_existing,primary,補充位置を選択するDPを行う。,https://atcoder.jp/contests/abc334/editorial/8982,False,stratified_sample,assistant,False,基礎DP / 動的計画法入門,1
+abc334_f,T083,needs_review,ambiguous,解説はスライド最小値によるDP高速化。一般の尺取り法と同じタグとして扱う定義は要確認。,https://atcoder.jp/contests/abc334/editorial/8982,False,stratified_sample,assistant,False,尺取り法,1
+abc311_f,T022,supported_existing,primary,境界位置の単調性を状態とするDPで塗り方を数える。,https://atcoder.jp/contests/abc311/editorial/6822,False,stratified_sample,assistant,False,基礎DP / 動的計画法入門,1
+abc311_f,T086,supported_existing,supporting,前のDP行の接尾累積和で遷移の総和をO(M)で求める。,https://atcoder.jp/contests/abc311/editorial/6822,False,stratified_sample,assistant,False,累積和,1
+abc353_g,T016,add_supported,alternative,各時刻の利得関数を区間直線として追加するLi Chao Tree別解が記述されている。,https://atcoder.jp/contests/abc353/editorial/9984,True,targeted_review,assistant,False,Convex Hull Trick / Li Chao Tree,0
+abc312_g,T058,add_supported,alternative,距離分布を求める重心分解の別解。,https://atcoder.jp/contests/abc312/editorial/6872,True,targeted_review,assistant,False,重心分解,0
+abc312_g,T196,add_supported,alternative,重心分解で得た距離頻度をFFTで畳み込む別解。,https://atcoder.jp/contests/abc312/editorial/6872,True,targeted_review,assistant,False,FFT,0
+abc312_g,T132,add_supported,supporting,距離頻度の多項式の畳み込みを用いる。,https://atcoder.jp/contests/abc312/editorial/6872,True,targeted_review,assistant,False,畳み込み,0
+abc429_e,T092,add_supported,alternative,安全頂点の色分けと複数回のBFSによるColor Coding別解。,https://atcoder.jp/contests/abc429/editorial/14261,True,targeted_review,assistant,False,Color Coding,0
+abc327_d,T178,add_supported,primary,辺の両端が異なる色になる二部グラフ判定に帰着する。,https://atcoder.jp/contests/abc327/editorial/7578,True,targeted_review,assistant,False,二部グラフ判定,0
+abc327_d,T169,add_supported,alternative,辺の両端が異なる真偽値になる条件を2-SATの節で表す別解。,https://atcoder.jp/contests/abc327/editorial/7595,True,targeted_review,assistant,False,2-SAT,0
+abc282_d,T178,add_supported,primary,連結成分を二色に塗り、二部グラフか判定して追加可能な辺を数える。,https://atcoder.jp/contests/abc282/editorial/5397,True,targeted_review,assistant,False,二部グラフ判定,0
+abc401_f,T196,add_supported,alternative,二つの木の離心度の頻度列をFFTで畳み込む別解。,https://atcoder.jp/contests/abc401/editorial/12704,True,targeted_review,assistant,False,FFT,0
+abc401_f,T132,add_supported,supporting,離心度の和の頻度計算に畳み込みを用いる。,https://atcoder.jp/contests/abc401/editorial/12704,True,targeted_review,assistant,False,畳み込み,0
+abc199_d,T178,add_supported,alternative,一色の頂点集合を固定し、残りの誘導部分グラフの二部性を判定する別解。,https://atcoder.jp/contests/abc199/editorial/1173,True,targeted_review,assistant,False,二部グラフ判定,0
+abc213_e,T144,add_supported,primary,通常移動を重み0、パンチを重み1とした0-1 BFS。,https://atcoder.jp/contests/abc213/editorial/2397,True,targeted_review,assistant,False,0-1 BFS,0
+abc400_d,T144,add_supported,primary,移動を重み0、キックを重み1とした0-1 BFS。,https://atcoder.jp/contests/abc400/editorial/12630,True,targeted_review,assistant,False,0-1 BFS,0
+abc400_d,T007,add_supported,supporting,0-1 BFSの実装にdequeを使うことが明記されている。,https://atcoder.jp/contests/abc400/editorial/12630,True,targeted_review,assistant,False,Deque,0
+abc400_d,T187,add_supported,alternative,非負重みの最短路としてDijkstraを使う別解も記述されている。,https://atcoder.jp/contests/abc400/editorial/12630,True,targeted_review,assistant,False,Dijkstra 法,0
+abc434_e,T031,add_supported,alternative,ウサギと座標の対応を二部マッチング・最大流で求める別解。,https://atcoder.jp/contests/abc434/editorial/14684,True,targeted_review,assistant,False,二部マッチング,0
+abc178_d,T165,add_supported,alternative,各項を3以上とする和の分割をStars and Barsで二項係数に変換する別解。,https://atcoder.jp/contests/abc178/editorial/2430,True,targeted_review,assistant,False,Stars and Bars,0
+abc266_c,T240,add_supported,supporting,連続する辺の外積の符号、すなわち三角形の符号付き面積で向きを判定する。,https://atcoder.jp/contests/abc266/editorial/4659,True,targeted_review,assistant,False,三角形の符号付き面積,0
+abc266_c,T181,add_supported,alternative,二本の対角線が内部で交差することを判定する別解。,https://atcoder.jp/contests/abc266/editorial/4723,True,targeted_review,assistant,False,線分交差判定,0
+abc282_f,T004,add_supported,primary,長さが2の冪の区間を前処理し、重なりを許す二区間で答える通常のSparse Table構成。,https://atcoder.jp/contests/abc282/editorial/5403,True,targeted_review,assistant,False,Sparse Table,0
+abc213_e,T066,refine_existing,parent,通常のBFSから、実際に用いる0-1 BFSへ分類の粒度を揃える。BFSとの親子関係は残る。,https://atcoder.jp/contests/abc213/editorial/2397,True,targeted_review,assistant,False,幅優先探索,1
+abc400_d,T066,refine_existing,parent,通常のBFSから、実際に用いる0-1 BFSへ分類の粒度を揃える。BFSとの親子関係は残る。,https://atcoder.jp/contests/abc400/editorial/12630,True,targeted_review,assistant,False,幅優先探索,1
+abc413_g,T033,concept_related,concept,最小カットは平面双対への帰着の説明であり、実行する手続きは連結性の探索。,https://atcoder.jp/contests/abc413/editorial/13403,False,targeted_review,assistant,False,最小カット,0
+abc434_e,T118,concept_related,parent,具体的な二部マッチングを付与し、一般のマッチングは親概念として扱う。,https://atcoder.jp/contests/abc434/editorial/14684,False,targeted_review,assistant,False,マッチング,0
+abc367_e,T226,rejected_candidate,reference,引用されているのはlevel ancestorの手法であり、このLCAタグと同一ではない。,https://atcoder.jp/contests/abc367/editorial/10719,False,targeted_review,assistant,False,Farach-Colton and Bender LCA,0
+abc237_e,T230,rejected_candidate,reference,ベルマンフォード中の文字列一致。Ford-Fulkersonによる最大流の解法ではない。,https://atcoder.jp/contests/abc237/editorial/3339,False,targeted_review,assistant,False,Ford-Fulkerson / Edmonds-Karp,0
+abc237_e,T175,rejected_candidate,reference,Bellman-Fordは計算量が大きい比較対象として言及されている。,https://atcoder.jp/contests/abc237/editorial/3339,False,targeted_review,assistant,False,Bellman-Ford 法,0
+abc386_f,T263,rejected_candidate,reference,LCSは参考資料での言及。置換も許す編集距離をLCSと同一視できない。,https://atcoder.jp/contests/abc386/editorial/11701,False,targeted_review,assistant,False,LCS,0
+abc246_f,T112,needs_review,alternative,ゼータ変換の別解の記述はあるが、26文字の2^26状態と実行資源の確認が必要。,https://atcoder.jp/contests/abc246/editorial/3727,False,targeted_review,assistant,False,ゼータ変換,0
+abc199_d,T103,needs_review,alternative,多項式OR畳み込みの別解はある。計算量・タグ定義を独立レビューしてから採用する。,https://atcoder.jp/contests/abc199/editorial/1184,False,targeted_review,assistant,False,OR 畳み込み,0
+abc199_d,T112,needs_review,supporting,OR畳み込み別解のゼータ変換。別解全体の独立確認待ち。,https://atcoder.jp/contests/abc199/editorial/1184,False,targeted_review,assistant,False,ゼータ変換,0
+abc199_d,T119,needs_review,supporting,OR畳み込み別解のメビウス変換。別解全体の独立確認待ち。,https://atcoder.jp/contests/abc199/editorial/1184,False,targeted_review,assistant,False,メビウス変換,0

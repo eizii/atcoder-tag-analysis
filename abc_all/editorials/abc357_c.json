@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc357_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc357/editorial/10182",
+      "text": "解法\n\\(1\\)\n: 定義に従って順にカーペットを構成する\n\\(k=0,1,\\ldots,N\\)\nについて、レベル\n\\(i\\)\nのカーペットに対応する文字列を順に構成していくことを考えます。\nまた、以下では、レベル\n\\(k\\)\nのカーペットに対応する\n\\(S_i\\)\nの\n\\(j\\)\n文字目を\n\\(S^k_{i,j}\\)\n\\((1\\leq i,j\\leq 3^k)\\)\nで表します。\nレベル\n\\(0\\)\nのカーペットは\n\\(S^0_{0,0}=\\)\n#\nとすればよいです。\n\\(k\\geq 0\\)\nについてレベル\n\\((k+1)\\)\nのカーペットを構成するためには定義より\n\\(0\\)\n以上\n\\(2\\)\n以下の整数の組\n\\((x,y)\\)\nそれぞれについて次のようにすれば良いです。\n\\((x,y)\\neq (1,1)\\)\nのとき、\n\\(1\\leq i,j\\leq 3^k\\)\nに対して、\n\\(S^{k+1}_{x\\cdot 3^k+i,y\\cdot 3^k+j}=S^k_{i,j}\\)\nとする。\n\\((x,y)=(1,1)\\)\nのとき、\n\\(1\\leq i,j\\leq 3^k\\)\nに対して、\n\\(S^{k+1}_{x\\cdot 3^k+i,y\\cdot 3^k+j}=\\)\n.\nとする。\nこのようにして、レベル\n\\(k\\)\nのカーペットを構成することができます。計算量は\n\\(O(3^{2N})\\)\nであり、十分高速です。\nよって、この問題を解くことができました。\n解法\n\\(2\\)\n: カーペットのマスの色が白となる条件を整理する。\n問題の条件を整理すると、レベル\n\\(N\\)\nのカーペットについて、上から\n\\(i\\)\n行目かつ左から\n\\(j\\)\n列目のマスが白色となる必要十分条件は、\n\\(1\\leq k\\leq N\\)\nをみたすいずれかの整数\n\\(k\\)\nについて、\n\\((i-1)\\)\nを\n\\(3\\)\n進法で表した時の\n\\(k\\)\n桁目と\n\\((j-1)\\)\nを\n\\(3\\)\n進法で表した時の\n\\(k\\)\n桁目がともに\n\\(1\\)\nになることであるとわかります。\nそのため、各\n\\(1\\leq i,j\\leq 3^N\\)\nについてその判定を行えば良いです。\n計算量は\n\\(O(N\\cdot 3^{2N})\\)\nであり、十分高速です。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n\tint n,l=1;\n    char a[729][730];\n    for(int i=0;i<729;i++)for(int j=0;j<730;j++)a[i][j]=0;\n\n    cin>>n;\n    a[0][0]='#';\n    for(int k=0;k<n;k++){\n        for(int x=0;x<3;x++){\n            for(int y=0;y<3;y++){\n                if((x==0)&&(y==0))continue;\n                if((x==1)&&(y==1)){\n                    for(int i=0;i<l;i++)for(int j=0;j<l;j++)a[x*l+i][y*l+j]='.';\n                }\n                else{\n                    for(int i=0;i<l;i++){\n                        for(int j=0;j<l;j++){\n                            a[x*l+i][y*l+j]=a[i][j];\n                        }\n                    }\n                }\n            }\n        }\n        l*=3;\n    }\n\n    for(int i=0;i<l;i++)cout<<a[i]<<endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "1d49ae56da6d8fdfd965e1759726903a1b60e99e47c70f33665119a24f8ee37a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc357/abc357_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

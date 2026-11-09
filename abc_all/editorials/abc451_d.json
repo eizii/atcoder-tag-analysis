@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc451_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc451/editorial/18051",
+      "text": "入出力例 3 によると\n\\(1099898\\)\n番目に小さい良い整数は\n\\(819264512\\approx 0.8 \\times 10^9\\)\nであるため，\n\\(10^9\\)\n以下の良い整数はそこまで多くないことが推測できます．従ってそれらをすべて列挙できれば，ソートして\n\\(N\\)\n番目のものを取得するという方針で解くことができます．\n\\(10^9\\)\nは良い整数ではないため\n\\(9\\)\n桁以下の良い整数を全て列挙できればよいです．\nちょうど\n\\(k\\)\n桁の良い整数全体の集合を\n\\(X_k\\)\n，ちょうど\n\\(k\\)\n桁の\n\\(2\\)\nの冪全体の集合を\n\\(P_k\\)\nとします．\n便宜上\n\\(X_0=\\{0\\}\\)\nとすると\n\\(k\\geq 1\\)\nに対して以下が成り立ちます．\n\\[X_k=\\bigcup_{i=1}^{k}\\left\\{x\\cdot 10^i+p\\mid x\\in X_{k-i}, p\\in P_i\\right\\}\\]\nこの式を適切に実装することで列挙することができます．\n実際に列挙してみると\n\\(10^9\\)\n以下の良い整数は\n\\(1257874\\)\n個であり，十分高速に計算できることがわかります．\n実装例(Python)\n個数の評価\n良い整数の個数を見積もる方法を説明します．\n\\(k\\)\n桁以下の良い整数の個数\n\\(S_k=|X_1|+\\cdots+|X_k|\\)\nを評価します．\n\\(|P_i|\\leq \\lceil\\log_2 10\\rceil=4\\)\nであるため，\n\\(k\\geq 1\\)\nに対して以下が成り立ちます．\n\\[\\begin{aligned}\nS_k-S_{k-1}\n&=|X_k|\\\\\n&=\\left|\\bigcup_{i=1}^{k}\\left\\{x\\cdot 10^i+p\\mid x\\in X_{k-i}, p\\in P_i\\right\\}\\right|\\\\\n&\\leq\\sum_{i=1}^{k}\\left|\\left\\{x\\cdot 10^i+p\\mid x\\in X_{k-i}, p\\in P_i\\right\\}\\right|\\\\\n&=\\sum_{i=1}^{k}|X_{k-i}|\\cdot |P_i|\\\\\n&\\leq 4(|X_{k-1}|+\\cdots+|X_1|+|X_0|)=4(S_{k-1}+1)\n\\end{aligned}\\]\nこれを利用すると\n\\[S_k+1\\leq 5(S_{k-1}+1)\\leq \\cdots \\leq 5^k(S_0+1)=5^k\\]\nより\n\\(k\\)\n桁以下の良い整数は高々\n\\(5^k-1\\)\n個であることがわかりました．\n\\(5^9-1=1953124\\)\nであり，これは粗い評価であることも考慮すると今回の制約下では全て列挙しても TL に間に合うと推定できます．",
+      "codes": [
+        "P = [[] for _ in range(10)]\nfor k in range(1, 10):\n    l = (10 ** (k - 1) - 1).bit_length()\n    r = (10 ** k - 1).bit_length()\n    P[k] = [1 << i for i in range(l, r)]\n\nX = [set() for _ in range(10)]\nX[0] = {0}\nA = []\nfor k in range(1, 10):\n    for i in range(1, k + 1):\n        X[k] |= {x * (10 ** i) + p for x in X[k - i] for p in P[i]}\n    A += list(X[k])\nA.sort()\n\nN = int(input())\nprint(A[N - 1])"
+      ],
+      "text_sha256": "2e3ef65da638da754d839741339c96f844cf8193a05f42061a6d07c75b74c5b9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc451/abc451_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

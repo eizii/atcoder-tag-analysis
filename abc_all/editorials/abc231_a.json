@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc231_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc231/editorial/3072",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「\nWelcome to AtCoder\n」をお試しください。言語ごとに解答例が掲載されています。\n入力を受け取り、その\n\\(0.01\\)\n倍の値を出力します。\n注意点として、答えは小数となる場合があるので、小数型で計算する必要があります。\n実装例 (C++)\n実装例２ (C++)\n誤答例\n(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    double a; cin >> a;\n    cout << a / 100 << endl;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    double a; cin >> a;\n    cout << a * 0.01 << endl;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int a; cin >> a;\n    cout << a / 100 << endl; // 例えば、a = 350 のときに 3 が出力されてしまう\n}"
+      ],
+      "text_sha256": "68c0f698570186f0079d87b2780346d8c3f0efb2404b4c29be79866b057a7157",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc231/abc231_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

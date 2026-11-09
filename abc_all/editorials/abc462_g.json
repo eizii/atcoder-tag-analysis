@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc462_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc462/editorial/21456",
+      "text": "\\(S_i\\) を \\((1,2,\\ldots,N)\\) の順列 \\(P\\) であって \\(C_{P_i}=G_i\\) を満たすものの集合とすると、求める値は \\(\\displaystyle \\frac1{N!}\\left|\\bigcap_{i=1}^N \\bar{S_i} \\right|\\) です。そして、この値は包除原理より \\(\\displaystyle \\frac1{N!}\\sum_{A \\subset \\lbrace 1,2,\\ldots,N\\rbrace} (-1)^{|A|}\\left|\\bigcap_{i \\in A}S_i \\right|\\) となります。したがって、添字集合を固定し、それらが \\(C_{P_i}=G_i\\) を満たすとした場合残りの添字の決め方に \\((-1)^{|A|}\\) を掛けたものの総和が求められれば良いです。 \\(C_i,G_i=k\\) を満たす \\(i\\) の個数をそれぞれ \\(X_k,Y_k\\) とします。 各 \\(i\\) に対し \\(k \\in A,\\ G_i=k\\) を満たす \\(k\\) の個数を \\(D_k\\) と固定します。そのような \\(A\\) の個数は \\(\\displaystyle \\prod_{k=1}^N \\binom{X_k}{D_k}\\binom{Y_k}{D_k}D_k!\\) 通りあります。また、そのような \\(A\\) に対して \\(\\displaystyle \\left|\\bigcap_{i \\in A}S_i \\right|=(N-|A|)!\\) であるため、求める値は \\(\\displaystyle \\frac1{N!}\\sum_{0\\le D_k\\le C_k\\ (1\\le k\\le N)} (-1)^{\\sum_k D_k} \\prod_{k=1}^N \\binom{X_k}{D_k}\\binom{Y_k}{D_k}D_k!\\left(N-\\sum_{k} D_k\\right)!\\) となります。 そして、これは \\(\\displaystyle f_k(x)=\\sum_{j\\geq 0} (-1)^j\\binom{X_k}{j}\\binom{Y_k}{j}c!x^j,\\ f(x)=\\prod_{k=1}^N f_k(x)=\\sum_{i\\geq 0}c_ix^i\\) としたときの \\(\\displaystyle \\frac1{N!}\\sum_{i\\geq 0}c_i(N-i)!\\) と表すことができます。 この \\(f(x)\\) は次数の総和が \\(N\\) となるいくつかの多項式の積が求められればよく、次数の小さい \\(2\\) つを順番にマージしていくなどして \\(O(N\\log^2N)\\) 時間で求めることができます。 以上を適切に実装することでこの問題に正答することができます。",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "e01df771691b6a33063c3f4df5a2e2c382d7441dc69aee8b4f28c8ae545b6c83"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc190_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc190/editorial/609",
+      "text": "詠唱に\n\\(S\\)\n秒以上かかる呪文や、威力が\n\\(D\\)\n以下の呪文ではダメージを与えられないとあるので、\n詠唱が\n\\(S\\)\n秒未満で、かつ威力が\n\\(D\\)\nより大きい呪文が存在するかどうか判定すれば良いです。\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(){\n    int N, S, D;\n    cin >> N >> S >> D;\n    for(int i = 0; i < N; i++){\n        int X, Y;\n        cin >> X >> Y;\n        if(X < S && Y > D){\n            puts(\"Yes\");\n            return 0;\n        }\n    }\n    puts(\"No\");\n}",
+        "N, S, D = map(int, input().split())\ndef check():\n    X, Y = map(int, input().split())\n    return X < S and Y > D\n\nif any(check() for i in range(N)):\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "96a4817df8e240cd2557c356818c6c952484a71a56abfd79ae71a679a8429914",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc190/abc190_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

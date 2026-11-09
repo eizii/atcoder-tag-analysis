@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc309_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc309/editorial/6747",
+      "text": "\\((u,v)\\)\nに対して操作をした後のグラフにおける頂点\n\\(1\\)\nから頂点\n\\(N_1+N_2\\)\nへの最短経路は以下のようなものになります。\n頂点\n\\(1\\)\nから頂点\n\\(u\\)\nへ最短経路を通って行く\n頂点\n\\(u, v\\)\nを結ぶ辺(追加した辺)を通る\n頂点\n\\(v\\)\nから頂点\n\\(N_1+N_2\\)\nへ最短経路を通って行く\nよって、\n\\(d\\)\nの最大値は頂点\n\\(1\\)\nから頂点\n\\(u\\)\nへの最短距離の最大値と頂点\n\\(v\\)\nから頂点\n\\(N_1+N_2\\)\nへの最短距離の最大値の和に\n\\(1\\)\nを加えたものになります。特に後者は頂点\n\\(N_1 +N_2\\)\nから頂点\n\\(v\\)\nへの距離の最大値に一致するため、頂点\n\\(1,N_1+N_2\\)\nから(その頂点から連結な)各頂点までの最短距離を求められれば良いです。\n頂点\n\\(s\\)\nから各頂点までの最短距離は幅優先探索によって高速に求められます。以下、簡単にその内容を示します(より詳細な説明に関しては検索してください)。\n頂点\n\\(s\\)\nからの最短距離を表す長さ\n\\(N_1+N_2\\)\nの配列\n\\(\\mathrm{dist}\\)\nを用意し、すべて\n\\(-1\\)\nで初期化する。また、空のキューを用意する。\n\\(\\mathrm{dist}_s=0\\)\nとし、キューに\n\\(s\\)\nを追加する。\nキューが空でない間、次の操作をする。\nキューの先頭を取り出し、\n\\(x\\)\nとする。キューから\n\\(x\\)\nを削除する。\n\\(x\\)\nに隣接する頂点\n\\(y\\)\nそれぞれについて、\n\\(\\mathrm{dist}_y = -1\\)\nならば\n\\(\\mathrm{dist}_y = \\mathrm{dist}_x + 1\\)\nとし、キューに\n\\(y\\)\nを追加する。\n以上が終了した時、\n\\(\\mathrm{dist}_x\\)\nが頂点\n\\(s\\)\nから頂点\n\\(x\\)\nまでの最短距離(\n\\(s,x\\)\nが非連結ならば\n\\(-1\\)\n)です。\n上記処理を\n\\(s=1,N_1+N_2\\)\nで行って距離の最大値を求めることで本問に正解出来ます。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint get(vector<vector<int>> E,int s){\n\tint n = E.size();\n\tvector<int> dist(n,-1);\n\t\n\tdist[s] = 0;\n\tqueue<int> Q;\n\tQ.push(s);\n\t\n\twhile(Q.size()>0){\n\t\tint x = Q.front();\n\t\tQ.pop();\n\t\tfor(int i=0;i<E[x].size();i++){\n\t\t\tint y = E[x][i];\n\t\t\tif(dist[y]==-1){\n\t\t\t\tdist[y] = dist[x]+1;\n\t\t\t\tQ.push(y);\n\t\t\t}\n\t\t}\n\t}\n\t\n\treturn *max_element(dist.begin(),dist.end());\n}\n\nint main() {\n    \n\tint N1,N2,M;\n\tcin>>N1>>N2>>M;\n\t\n\tvector<vector<int>> E(N1+N2);\n\t\n\tfor(int i=0;i<M;i++){\n\t\tint a,b;\n\t\tcin>>a>>b;\n\t\ta--,b--;\n\t\tE[a].push_back(b);\n\t\tE[b].push_back(a);\n\t}\n\t\n\tcout<<get(E,0)+get(E,N1+N2-1)+1<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "ac572d3cb5cc0e74cbc6d9926a0c16fd04d6e162e9be067099d2241f61af626a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc309/abc309_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

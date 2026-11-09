@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc222_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc222/editorial/2747",
+      "text": "まずはナイーブな DP を考えてみましょう。 DP テーブル\n\\(dp_{i,j}\\)\nを\n\\(dp_{i,j} := \\)\n\\(i\\)\n番目まで要素が確定していて、\n\\(c_i = j\\)\nである場合の数\nとおきます。\n\\(i\\)\n番目の要素に注目すると、\n\\(a_i \\leq j \\leq b_i\\)\nの場合： 1 つ前の要素以上であれば  OK\nそうでない場合： NG\nとなることから、DP の遷移は次のようになります。\n(便宜上「C の 0 番目の要素に 0 がある」とみなして\n\\(dp_{0,0} = 1\\)\nと置くことで場合分けの量を減らしています。)\n\\[dp_{i, j} = \n\\begin{cases}\n1 & i = 0 \\wedge j = 0 \\\\\n\\sum_{0 \\leq k \\leq j} dp_{i-1,k}  & i \\geq 1 \\wedge a_i \\leq j \\leq b_i \\\\\n0 & \\mathrm{otherwise} \\\\\n\\end{cases}\n\\]\nこの式は\n\\(i\\)\nを昇順に見ていくことで順番に計算することができます。  また、求める答えは\n\\(N\\)\n番目まで要素を確定させたときの場合の数、すなわち\n\\(M := \\max( \\max(A),\\max(B))\\)\nとして\n\\[dp_{N,0} + dp_{N,1} + \\dots + dp_{N, M}\\]\nになります。\nよって、まずは多項式時間で答えを求めるアルゴリズムを得ることができました。上記の遷移からなる DP の計算量を考えると、\n更新する必要がある要素の個数：\n\\(\\mathrm{O}(NM)\\)\n要素を\n\\(1\\)\n個計算にかかる計算量：\n\\(\\mathrm{O}(M)\\)\nになるので計算量は\n\\(\\mathrm{O}(NM^2)\\)\nとわかります。しかしこれでは TLE してしまうので、どうにかして DP の計算量を落としたいです。\nそこで、遷移が\n\\(\\sum_{0 \\leq k \\leq j} dp_{i-1,k}\\)\nという形をしているのに注目して\n累積和\nを DP で管理するという方法を取ってみましょう。 DP の累積和テーブル\n\\(R_{i,j}\\)\nを\n\\(R_{i, j} := \\sum_{0 \\leq k \\leq j} dp_{i,k}\\)\nとおきます。すると前述の DP は\n\\[R_{i, j} = \n\\begin{cases}\n1 & i = 0 \\wedge j = 0 \\\\\nR_{i, j - 1} + R_{i-1,j}  & i \\geq 1 \\wedge a_i \\leq j \\leq b_i \\\\\nR_{i,j-1} & \\mathrm{otherwise} \\\\\n\\end{cases}\n\\]\nという形で表せるので、要素 1 個あたりの計算量を\n\\(\\mathrm{O}(1)\\)\nに減らすことができます。この式を利用して DP  することで、この問題を\n\\(\\mathrm{O}(NM)\\)\nで解くことができました。\n別解として、Fenwick Tree や Segment Tree を利用すれば累積和を\n\\(\\mathrm{O} (\\log M)\\)\nで取得できることを利用して、元の\n\\(\\mathrm{O}(NM^2)\\)\nの DP の計算量を遷移を変えないまま\n\\(\\mathrm{O}(NM \\log M)\\)\nに改善する解法もあります。\nデータ構造を使いこなすのが得意な方はこちらの解法の方が分かりやすいかもしれません。(ただし、想定解より計算量が悪くなるため定数倍に注意する必要があります。)\nC++, Python による想定解は次の通りです。\nC++\nPython (処理系に PyPy3 を選ぶ必要があります)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n\n#include \"atcoder/modint.hpp\"\nusing namespace std;\nusing mint = atcoder::modint998244353;\n#define rep(i, n) for (int i = 0; i < (n); i++)\n\nint main() {\n  int N;\n  cin >> N;\n  vector<int> A(N), B(N);\n  for (auto& x : A) cin >> x;\n  for (auto& x : B) cin >> x;\n  int MAX = 3000;\n  vector dp(vector(N + 1, vector(MAX + 1, mint{0})));\n  dp[0][0] = 1;\n  rep(i, N + 1) {\n    rep(j, MAX) dp[i][j + 1] += dp[i][j];\n    if (i != N) {\n      for (int j = A[i]; j <= B[i]; j++) dp[i + 1][j] += dp[i][j];\n    }\n  }\n  cout << dp[N][MAX].val() << \"\\n\";\n}",
+        "mod = 998244353\nN = int(input())\nA = list(map(int, input().split()))\nB = list(map(int, input().split()))\nM = 3000\ndp = [1] * (M + 1)\nfor i in range(N):\n  nx = [0] * (M + 1)\n  for j in range(A[i], B[i] + 1):\n    nx[j] = dp[j]\n  dp = nx\n  for i in range(M):\n    dp[i + 1] += dp[i]\n    dp[i + 1] %= mod\nprint(dp[M])"
+      ],
+      "text_sha256": "544689e728702d266cb9bca105eb5cf1a6baee2e32950208343a67a6fa12f983",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc222/abc222_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

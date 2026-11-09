@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc407_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc407/editorial/13108",
+      "text": "\\(A\\)\nの各要素を\n\\((A_i, i)\\)\nの辞書順で順序付けるとしてよいです．これにより，大小関係の順序が一意に定まります．\n\\(A_i\\)\nが最大値になるような連続部分列について，\n\\(A_i\\)\nより左の要素数を\n\\(l\\)\n，右の要素数を\n\\(r\\)\nとして，\n\\((l, r)\\)\nが満たすべき条件について考えます．\n\\(A_i\\)\nよりも小さい要素が\n\\(A_i\\)\nのすぐ左にいくつ連続するかを\n\\(L_i\\)\nとします．右についても同様に\n\\(R_i\\)\nとします(これらの値の求め方は後述します)．\nこのとき，\n\\(0 \\leq l \\leq L_i,\\ 0 \\leq r \\leq R_i\\)\nを満たすとき，またその時に限り，\n\\((l, r)\\)\nに対応する連続部分列は\n\\(A_i\\)\nを最大値として持ちます．\nここで，\n\\(x_{min} := \\min(l, r),\\ x_{max} := \\max(l, r)\\)\nとおくと，\n\\(A_i\\)\nの\n\\(ans\\)\nへの寄与は以下のように表せます．\n\\(0 < k \\leq 1 + x_{min}\\)\nについて，\n\\(ans[k]\\)\nに\n\\(k \\times A_i\\)\nを加える\n\\(1 + x_{min} < k \\leq 1+x_{max}\\)\nについて，\n\\(ans[k]\\)\nに\n\\((1 + x_{min}) \\times A_i\\)\nを加える\n\\(1+x_{max} < k \\leq 1 + x_{min} + x_{max}\\)\nについて，\n\\(ans[k]\\)\nに\n\\((2 + x_{min} + x_{max} - k) \\times A_i\\)\nを加える\nこれらはすべて傾きが一定の一次関数です．\nある範囲に定数を加えることを再現するには imos 法と呼ばれるテクニックが適用できました．\nこれを以下のように応用することで，上述の範囲加算を再現することが可能です．\nまずは範囲加算を以下のように置き換えます．\n\\(ans^{(2)}[1]\\)\nに\n\\(+A_i\\)\nを加える\n\\(ans^{(2)}[2 + x_{min}]\\)\nに\n\\(-A_i\\)\nを\n\\(ans^{(2)}[2 + x_{max}]\\)\nに\n\\(-A_i\\)\nを加える\n\\(ans^{(2)}[3 + x_{min} + x_{max}]\\)\nに\n\\(+A_i\\)\nを加える\nそして，すべての範囲加算を終えた後，以下のようにして累積和を\n\\(2\\)\n回繰り返します．\n\\(ans^{(1)}[0] = ans^{(2)}[0]\\)\n，\n\\(ans^{(1)}[i+1] := ans^{(1)}[i] + ans^{(2)}[i+1]\\)\nとする\n\\(ans[0] = ans^{(1)}[0]\\)\n，\n\\(ans[i+1] := ans[i] + ans^{(1)}[i+1]\\)\nとする\nこれによって，\n\\(ans\\)\nを求めることができます．\n\\(L_i, R_i\\)\nの値の求め方\n既に見た添え字の集合\n\\(S\\)\nを\n\\(\\{0, N+1\\}\\)\nで初期化します．\n\\(A_i\\)\nを大きい順に見ていって，以下のように操作します．\n\\(S\\)\nの要素のうち\n\\(i\\)\nより小さい最大値を\n\\(L'\\)\n，大きい最小値を\n\\(R'\\)\nとする．\n\\(L_i = i - L' - 1\\)\n,\n\\(R_i = R' - i - 1\\)\nとする．\n\\(S\\)\nに\n\\(i\\)\nを追加する．\n操作のうち 1. にあたる部分は，C++ であれば標準ライブラリにある std::set を利用し，set.lower_bound 関数を駆使することで実現可能です．\nC++ での実装例を以下に示します。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <vector>\n#include <set>\n#include <array>\nusing std::cin;\nusing std::cout;\nusing std::cerr;\nusing std::endl;\nusing std::string;\nusing std::pair;\nusing std::vector;\nusing std::set;\nusing std::min;\nusing std::max;\nusing std::array;\n#include <atcoder/all>\n\n\ntypedef long long ll;\ntypedef pair<ll, ll> P;\n\nvector<ll> solve (const ll n, const vector<ll> &a) {\n\tvector<ll> ans(n+1, 0);\n\n\tvector<P> asort(n);\n\tfor (ll i = 0; i < n; i++) {\n\t\tasort[i] = {a[i], i};\n\t}\n\tsort(asort.begin(), asort.end());\n\n\tarray<vector<ll>, 3> integral;\n\n\tintegral[0].resize(n+3);\n\tfor (ll i = 0; i <= n+2; i++) {\n\t\tintegral[0][i] = 0;\n\t}\n\tset<ll> used = {-1, n};\n\tfor (ll i = n-1; i >= 0; i--) {\n\t\tll val = asort[i].first;\n\t\tll idx = asort[i].second;\n\n\t\tauto itgeq = used.lower_bound(idx);\n\t\tauto itle = itgeq; --itle;\n\n\t\t// how many elements (on left/right) can a[idx] absorb as a maximum\n\t\tll r = *itgeq - idx - 1;\n\t\tll l = idx - *itle - 1;\n\n\t\tll xmin = min(l, r), xmax = max(l, r);\n\n\t\t// ans[0 < i <= 1+min] <- i\n\t\t// ans[1+min < i <= 1+max] <- 1+min\n\t\t// ans[1+max < i <= 1+min+max] <- 1+min - (i - (1+max))\n\t\t// ans[1+min+max < i] <- 0\n\n\t\t// ans'[0 < i <= 1+min] <- +1\n\t\t// ans'[1+min < i <= 1+max] <- 0\n\t\t// ans'[1+max < i <= 1+min+max] <- -1\n\t\t// ans'[1+min+max < i] <- 0\n\n\t\t// ans''[1] <- +1\n\t\t// ans''[1+min+1] <- -1\n\t\t// ans''[1+max+1] <- -1\n\t\t// ans''[1+min+max+1] <- +1\n\t\tintegral[0][1            ] += val * (+1);\n\t\tintegral[0][1+xmin+1     ] += val * (-1);\n\t\tintegral[0][1+xmax+1     ] += val * (-1);\n\t\tintegral[0][1+xmin+xmax+2] += val * (+1);\n\n\t\tused.insert(idx);\n\t}\n\tfor (ll order = 1; order <= 2; order++) {\n\t\tintegral[order].resize(n+3);\n\t\tintegral[order][0] = 0;\n\t\tfor (ll i = 1; i <= n+2; i++) {\n\t\t\tintegral[order][i] = integral[order][i-1] + integral[order-1][i];\n\t\t}\n\t}\n\n\tfor (ll i = 1; i <= n; i++) {\n\t\tans[i] = integral[2][i];\n\t}\n\n\n\treturn ans;\n}\n\n\nint main (void) {\n\tll n;\n\tcin >> n;\n\tvector<ll> a(n);\n\tfor (ll i = 0; i < n; i++) {\n\t\tcin >> a[i];\n\t}\n\tvector<ll> anslist = solve(n, a);\n\tfor (ll i = 1; i <= n; i++) {\n\t\tcout << anslist[i] << \"\\n\";\n\t}\n\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "07716012e50d99215783b6045bba444d2cc09e0803ab76b0a57ead198282839e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc407/abc407_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc407/editorial/13111",
+      "text": "公式解説と同様に\n\\(A_i\\)\nより小さい要素が\n\\(A_i\\)\nのすぐ左にいくつ隣接するかを\n\\(L_i\\)\n、右についても同様に\n\\(R_i\\)\nとします。\nこのとき\n\\(A\\)\nの連続部分列のうち長さが\n\\(k\\)\nのものについて答えが\n\\(A_i\\)\nになるようなものの個数は\n\\(\\displaystyle [x^k]x(1+x+x^2+\\dots+x^{L_i})(1+x+x^2+\\dots+x^{R_i})=[x^{k-1}]\\frac{(1-x^{L_i+1}) (1-x^{R_i+1})}{(1-x)^2}\\)\n個あります。\nしたがって、長さ\n\\(N+2\\)\nの配列\n\\(s=(s_0,s_1,\\dots,s_{N+1})\\)\nを用意し、\n\\(i=1,2,\\dots,N\\)\nについて\n\\(s_0\\gets s_0+A_i\\)\n\\(s_{L_i+1}\\gets s_{L_i+1}-A_i\\)\n\\(s_{R_i+1}\\gets s_{R_i+1}-A_i\\)\n\\(s_{L_i+R_i+2}\\gets s_{L_i+R_i+2}+A_i\\)\nとした後、\n\\(s\\)\nの累積和を取る処理を\n\\(2\\)\n回行うと\n\\(A\\)\nの連続部分列のうち長さが\n\\(k\\)\nのものについての答えは\n\\(s_{k-1}\\)\nとなります。\n計算量は\n\\(L_i,R_i\\)\nを求めるのは公式解説と同様に\n\\(O(N\\log N)\\)\n、配列\n\\(s\\)\nを計算するのは\n\\(O(N)\\)\nより、\n\\(O(N\\log N)\\)\nとなります。\n実装例 ( C++ , 321 ms )",
+      "codes": [],
+      "text_sha256": "e2fbc064c4a73142f6c9677aa8d0e379431b38c9d499fb22b0d8b0a7e9568b06",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc407/abc407_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc407/editorial/13118",
+      "text": "公式解説\nより、この問題は「区間等差数列加算」ができれば解けることがわかります。これは遅延セグ木を用いて行えます。\nACLに則った実装は以下の通りです\nセグ木に載せる各ノードを\n\\((A_i,i,1)\\)\nで初期化し、区間\n\\([L,R)\\)\nに対する\n\\(A_i \\leftarrow A_i+ai+b\\)\nという操作は\napply(L,R,F{a,b})\nとなります。",
+      "codes": [
+        "struct S{\n\tint val_sum, index_sum, len;\n};\n\nstruct F{\n\tint a,b;\n};\n\nS e(){return S{0,0,0};}\nS op(S x,S y){\n\treturn S{x.val_sum + y.val_sum,\n\t\t x.index_sum + y.index_sum,\n\t\t x.len + y.len};\n}\n\nF id(){return F{0,0};}\nF composition(F f,F g){return F{f.a+g.a, f.b+g.b};}\n\nS mapping(F f,S x){\n\treturn S{x.val_sum + f.a*x.index_sum + f.b*x.len,\n\t\t x.index_sum,\n\t\t x.len};\n}"
+      ],
+      "text_sha256": "02302255709cf18f3b92af73a105da68415f9ca8d8a74c8430fc59e375a0f73d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc407/abc407_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

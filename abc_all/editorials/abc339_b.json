@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc339_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc339/editorial/9212",
+      "text": "問題文に書かれている通りに丁寧に場合分けと必要な処理を行えばよいです。\n実装方針によっては以下の実装例の\ndx\n,\ndy\nのように、移動する距離を管理した配列を持っておくことで実装が楽になる場合があります。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint dx[] = { -1,0,1,0 }; int dy[] = { 0,1,0,-1 };\n\nint main() {\n    int h, w, n;\n    cin >> h >> w >> n;\n    vector<vector<char>> ans(h, vector<char>(w, '.'));\n    int x = 0, y = 0, m = 0;\n    for (int _ = 0; _ < n; _++) {\n        if (ans[x][y] == '.') {\n            ans[x][y] = '#';\n            m++;\n        }\n        else {\n            ans[x][y] = '.';\n            m += 3;\n        }\n        m %= 4;\n        x += dx[m]; y += dy[m];\n        if (x < 0) x += h; if (x >= h) x -= h;\n        if (y < 0) y += w; if (y >= w) y -= w;\n    }\n    for (int i = 0; i < h; i++) {\n        for (int j = 0; j < w; j++) {\n            cout << ans[i][j];\n        }\n        cout << '\\n';\n    }\n}"
+      ],
+      "text_sha256": "f659f7270fc04bef222fb1df8e6666f1c141455506fd0f74a53abf3bdaaf447f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc339/abc339_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc339/editorial/9225",
+      "text": "現時点で向いている方向を表すベクトルを\n\\(\\dbinom{x}{y}\\)\nとします。\nベクトル\n\\(\\dbinom{x}{y}\\)\nを反時計回りに90度回転して得られるベクトル\n\\(\\dbinom{a}{b}\\)\nを計算します。複素数の回転を考えると、\n\\(a+ib=e^{i\\pi/2}(x+iy)=i(x+iy)=-y+ix\\)\nより\n\\((a,b)=(-y,x)\\)\nと計算できます。ここで\n\\(i\\)\nは虚数単位です。\n同様に、ベクトル\n\\(\\dbinom{x}{y}\\)\nを時計回りに90度回転して得られるベクトル\n\\(\\dbinom{c}{d}\\)\nについては\n\\(c+id=e^{-i\\pi/2}(x+iy)=-i(x+iy)=y-ix\\)\nより\n\\((c,d)=(y,-x)\\)\nと計算できます。\n実装例 (C++ 20 (gcc 12.2))",
+      "codes": [],
+      "text_sha256": "4d087c675a79edc49b6fe86428a232223d06ec983771ebcdb48d6240db36e4a3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc339/abc339_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

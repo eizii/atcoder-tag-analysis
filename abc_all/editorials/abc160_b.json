@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc160_b",
+  "editorials": [
+    {
+      "text": "B:Golden Coins\n500 円以上持っているのであれば、500 円硬貨1 枚を手に入れた方が、5 円硬貨100 枚を手に入れ\nるより嬉しさは大きくなります。よって、できる限り500 円硬貨を手に入れた後、端数で5 円硬貨を\n手に入れるのが最善です。\nC 言語での実装例は次のとおりです。\n1 #include<stdio.h>\n2 int main(){\n3\nint x;\n4\nscanf(\"%d\",&x);\n5\nint c500 = x/500; // 500 円硬貨の数\n6\nint r500 = x%500; // 端数\n7\nint c5 = r500/5; // 5 円硬貨の数\n8\nprintf(\"%d\\n\",c500*1000+c5*5);\n9 }\n",
+      "text_sha256": "6b9462509d0daa7803ace91597c3a7b2e88225025b96dc4b40758fb49c0f6040",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc160/abc160_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

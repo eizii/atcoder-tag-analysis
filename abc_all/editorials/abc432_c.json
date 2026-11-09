@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc432_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc432/editorial/14575",
+      "text": "考察\n\\(A\\)\nを昇順に並べ替えて\n\\(A_1 \\leq A_2 \\leq \\cdots A_N\\)\nとしても答えは変わらないので，以下ではこれが満たされるものとします．\n子供\n\\(i\\)\nに配る大きな飴の個数を\n\\(x_i\\)\n個とおきます．このとき，\n\\(0 \\leq x_i \\leq A_i\\)\nです．\n子供\n\\(1,k\\)\nについて飴の総重量が等しいという条件は\n\\[(A_1 - x_1) X + x_1 Y = (A_k - x_k) X + x_k Y\\]\nと書けて，これを変形すると\n\\[x_k = x_1 - \\frac{(A_k - A_1)X}{Y-X}\\]\nとなります．これは，\n\\(x_1 - x_k\\)\nが決まった値\n\\(\\displaystyle \\frac{(A_k - A_1)X}{Y-X}\\)\nになることを表しています．以下ではこれを\n\\(D_k\\)\nとおきます．\n\\(A_1 \\leq A_k\\)\nより\n\\(D_k \\geq 0\\)\nです．\n各\n\\(k\\)\nについて，以下の必要条件が導けます．\n\\(x_1, x_2, \\dots, x_N\\)\nは整数なので，その差である\n\\(D_k\\)\nも整数である必要があります．\n\\(x_k \\geq 0\\)\nおよび\n\\(x_1 \\leq A_1\\)\nより，\n\\(D_k\\)\nは\n\\(A_1\\)\n以下である必要があります．\n逆に，これらの条件が満たされるならば，\n\\(x_k = A_1 - D_k\\)\nとすることで問題文中の条件を満たすことができます．\n\\(x_k = x_1 - D_k\\)\nおよび\n\\(x_1 \\leq A_1\\)\nから，これは\n\\(x_k\\)\nのとり得る最大値でもあるので，これらの和が答えとなります．\n実装例 (C++)\n\\(\\displaystyle x_k = A_1 - \\frac{(A_k - A_1)X}{Y-X}\\)\nは\n\\(\\displaystyle x_k = A_k - \\frac{(A_k - A_1)Y}{Y-X}\\)\nと表すこともでき，以下の実装例ではこちらの式で計算しています．",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::min;\nusing std::max;\n#include <vector>\nusing std::vector;\n\ntypedef long long int ll;\n\nll n, x, y;\nvector<ll> a;\n\nll solve () {\n\tll mina = a[0];\n\tfor (ll i = 0; i < n; i++) {\n\t\tmina = min(mina, a[i]);\n\t}\n\n\tll sum = 0;\n\tll w = mina * y;\n\tfor (ll i = 0; i < n; i++) {\n\t\tll vs = (a[i] - mina) * y;\n\t\tll vt = (y - x);\n\t\tif (vs % vt != 0) {\n\t\t\treturn -1;\n\t\t}\n\t\tll minor = vs / vt;\n\t\tif (minor > a[i]) {\n\t\t\treturn -1;\n\t\t}\n\t\tsum += (a[i] - minor);\n\t}\n\n\treturn sum;\n}\n\nint main (void) {\n\t// input\n\tcin >> n >> x >> y;\n\ta.resize(n);\n\tfor (ll i = 0; i < n; i++) {\n\t\tcin >> a[i];\n\t}\n\n\tll ans = solve();\n\tcout << ans << \"\\n\";\n\t\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "d68424d9bda02a609058bbe58a75d9a8db39a774276798b97e71a0b92e8d6f55",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc432/abc432_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

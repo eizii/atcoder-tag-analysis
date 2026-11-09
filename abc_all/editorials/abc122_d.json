@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc122_d",
+  "editorials": [
+    {
+      "text": "D: We Like AGC\nN が小さければ、4N 通りのACGT 文字列すべてを候補として列挙した中から数えられますが、N が最大\nで100 では絶望的です。しかし、結論から述べると、これと同等のことを短時間で行うことができます。\n第三の条件「隣接する2 文字の入れ替えを1 回行うことで第二の条件(部分文字列としてAGC を含まない)\nに違反させることはできない」を言い換えると、「部分文字列としてGAC, ACG, A?GC, AG?C のいずれも含まな\nい(? は何らかの1 文字)」となります。\nよって、条件を満たす文字列を1 文字目から順に作るとき、「i 文字目を何にするか」の選択は、「i −4 文字\n目以前が何であったか」を気にすることなく、i−3, i−2, i−1 文字目のみを考慮して行うことができます。こ\nれを元に、メモ化再帰または動的計画法によりN の線形時間で解を求められます(“定数倍” は大きいです)。\n1 N, MOD = int(input()), 10 ** 9 + 7\n2 memo = [{} for i in range(N+1)]\n3\n4 def ok(last4):\n5\nfor i in range(4):\n6\nt = list(last4)\n7\nif i >= 1:\n8\nt[i-1], t[i] = t[i], t[i-1]\n9\nif ''.join(t).count('AGC') >= 1:\n10\nreturn False\n11\nreturn True\n12\n13 def dfs(cur, last3):\n14\nif last3 in memo[cur]:\n15\nreturn memo[cur][last3]\n16\nif cur == N:\n17\nreturn 1\n18\nret = 0\n19\nfor c in 'ACGT':\n20\nif ok(last3 + c):\n21\nret = (ret + dfs(cur + 1, last3[1:] + c)) % MOD\n22\nmemo[cur][last3] = ret\n23\nreturn ret\n24\n25 print(dfs(0, 'TTT'))\n",
+      "text_sha256": "1a15801d44b3259b50a8d8352ecbee787ca08b358c12f64fbe78d27f00b15b7f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc122/abc122_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

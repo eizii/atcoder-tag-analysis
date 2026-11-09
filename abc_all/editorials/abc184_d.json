@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc184_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc184/editorial/152",
+      "text": "この問題は確率DPと呼ばれるジャンルの問題です。\n金貨が\n\\(X\\)\n枚、銀貨が\n\\(Y\\)\n枚、銅貨が\n\\(Z\\)\n枚のときの答えを\n\\(f(X,Y,Z)\\)\nとします。\n\\(X,Y,Z\\)\nのいずれかが100のとき\n\\(f(X,Y,Z)=0\\)\nです。そうでないとき、どの硬貨を引いたか3通りの場合を考えることで、\n\\[\nf(X,Y,Z)=\n\\frac{X}{X+Y+Z}(f(X+1,Y,Z)+1)\n+\\frac{Y}{X+Y+Z}(f(X,Y+1,Z)+1)\n+\\frac{Z}{X+Y+Z}(f(X,Y,Z+1)+1)\n\\]\nとなります。（金貨を引く確率×金貨を引いた時の操作回数の期待値＋銀貨を……）\nこの式に従ってDPを行うと答えを求めることができます。実装はメモ化再帰により行うと容易です。\n回答例(C)",
+      "codes": [],
+      "text_sha256": "168600c1f77b63a70fc73ca9717ce8f6bf5971519fd99c643fc06ce688976aef",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc184/abc184_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

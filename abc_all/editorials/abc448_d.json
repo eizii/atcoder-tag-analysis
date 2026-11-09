@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc448_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc448/editorial/16747",
+      "text": "頂点\n\\(1\\)\nから頂点\n\\(k\\)\nまでのパスを毎回求めなおしているようでは時間計算量が\n\\(O(N^2)\\)\nとなり実行時間制限に間に合いません。\n全てのパスに対する答えを何らかの方法でまとめて高速に挙げる必要があります。どのようにすればよいでしょうか？\n以下のような\n深さ優先探索(DFS)\nを考えます。\n頂点\n\\(1\\)\nへの侵入から始める。\n頂点\n\\(v\\)\nへ侵入するタイミングで、頂点\n\\(v\\)\nに関する情報を追加する。\n頂点\n\\(v\\)\nから退出するタイミングで、頂点\n\\(v\\)\nに関する情報を削除する。\nこのようにすることで、頂点\n\\(v\\)\nに侵入し頂点\n\\(v\\)\nに関する情報を追加した時点で、頂点\n\\(1\\)\nから頂点\n\\(v\\)\nへのパスを構成する頂点集合に関する情報が得られています。\nこれを用いて、この問題の答えが求められるようにします。\n最初は空である集合\n\\(S\\)\n、最初\n\\(0\\)\nである変数\n\\(cnt\\)\nを持っておく。\n頂点\n\\(v\\)\nへの侵入\n\\(S\\)\n内に既に\n\\(A_v\\)\nがあれば、\n\\(cnt\\)\nに\n\\(1\\)\n加算する。\n(頂点\n\\(1\\)\nを根と解釈した場合に)\n\\(v\\)\nの祖先に既に\n\\(A_v\\)\nが含まれるので、そのことを記憶します。\nそうでないなら\n\\(S\\)\nに\n\\(A_v\\)\nを追加する。\n\\(v\\)\nの祖先に\n\\(A_v\\)\nが含まれないので、子孫を考える時に\n\\(A_v\\)\nの存在を検知できるようにします。\nその後、\n\\(cnt>0\\)\nなら\nYes\n、\n\\(cnt=0\\)\nなら\nNo\nと判断する。\n頂点\n\\(v\\)\nからの退出\nもし進入時\n\\(S\\)\nに\n\\(A_v\\)\nを追加していた場合、\n\\(A_v\\)\nを削除する。\nこのケースでは\n\\(v\\)\nの祖先に\n\\(A_v\\)\nは存在しません。\nそうでないなら、\n\\(cnt\\)\nから\n\\(1\\)\n減算する。\nこのケースではまだ\n\\(v\\)\nの祖先に\n\\(A_v\\)\nは存在しますが、頂点\n\\(v\\)\nでの重複の検知を解除する必要があります。\n例えば C++ の\nset\nを利用して実装すると、時間計算量が\n\\(O(N \\log N)\\)\nとなります。\nこの問題に関する発展的話題として、\nEuler Tour\nがあります。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint n;\nvector<int> a;\nvector<vector<int>> g;\n\nint cnt=0;\nset<int> s;\nvector<int> ans;\n\nvoid dfs(int v,int pv){\n  int del=0;\n  if(s.find(a[v])!=s.end()){del=1;}\n  else{s.insert(a[v]);}\n  cnt+=del;\n  if(cnt>0){ans[v]=1;}\n  else{ans[v]=0;}\n  for(auto &nx : g[v]){\n    if(nx==pv){continue;}\n    dfs(nx,v);\n  }\n  cnt-=del;\n  if(del==0){\n    s.erase(a[v]);\n  }\n}\n\nint main(){\n  cin >> n;\n  a.resize(n);\n  for(auto &nx : a){cin >> nx;}\n  g.resize(n);\n  for(int i=1;i<n;i++){\n    int u,v;\n    cin >> u >> v;\n    u--; v--;\n    g[u].push_back(v);\n    g[v].push_back(u);\n  }\n  ans.resize(n);\n  dfs(0,-1);\n  for(auto &nx : ans){\n    if(nx){cout << \"Yes\\n\";}\n    else{cout << \"No\\n\";}\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "fb3d734e86bfa1e3eb7a54d97616ee3fe37530c607fb77343fd939828ee034f8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc448/abc448_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

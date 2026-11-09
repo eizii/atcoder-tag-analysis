@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc133_b",
+  "editorials": [
+    {
+      "text": "B: Good Distance\n各i, j (i < j) についてYij = |Xi1 −Xj1|2 + ... + |XiD −XjD|2 を計算します。すると、k2 = Yij を満\nたす整数k が存在するかを調べれば\n√\nYij が整数であることを判定できます。k ≤Yij なので、これは、各\nk = 0, 1, 2, ..., Yij についてk2 = Yij であるか調べれば十分です*1。C++ 言語での実装例を以下に示します。\n1 #include <bits/stdc++.h>\n2\n3 using namespace std;\n4\n5 int main() {\n6 int N, D; cin >> N >> D;\n7 vector<vector<int>> X(N, vector<int>(D));\n8 for (int i = 0; i < N; ++i) {\n9 for (int j = 0; j < D; ++j) {\n10\ncin >> X[i][j];\n11 }\n12 }\n13 int ans = 0;\n14 for (int i = 0; i < N; ++i) {\n15 for (int j = i+1; j < N; ++j) {\n16\nint norm = 0;\n17\nfor (int k = 0; k < D; ++k) {\n18\nint diff = abs(X[i][k] - X[j][k]);\n19\nnorm += diff * diff;\n20\n}\n21\n// check whether norm = k for some k\n22\nbool flag = false;\n23\nfor (int k = 0; k <= norm; ++k) {\n24\nif (k * k == norm) {\n25\nflag = true;\n26\n}\n27\n}\n28\nif (flag) ++ans;\n29 }\n30 }\n31 cout << ans << endl;\n32 }\n",
+      "text_sha256": "361c12ab4dd708cc52b934f6f750c5c38d70538e434b93476b81009b529b6ac9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc133/abc133_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

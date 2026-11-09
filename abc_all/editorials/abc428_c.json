@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc428_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc428/editorial/14238",
+      "text": "この問題は良い括弧列(バランスの取れた括弧列)が持つ性質を上手く利用する問題です。\n良い括弧列は次の性質を持ちます。\n文字列\n\\(S\\)\nが\n(\nおよび\n)\nからなる文字列であるとする。\nこの時、長さ\n\\(|S|+1\\)\nの数列\n\\(A=(A_0, A_1, \\dots, A_{|S|})\\)\nを次のように定義する。ここで\n\\((1 \\text{ if } S_i =\\)\n(\n\\(\\text{ else } -1)\\)\nは 「\n\\(S_i\\)\nが\n(\nである時\n\\(1\\)\n、そうでない時\n\\(-1\\)\n」という意味で用いている。\n\\(A_0 = 0\\)\n\\(A_1 = A_0 + (1 \\text{ if } S_1 =\\)\n(\n\\(\\text{ else } -1)\\)\n\\(\\vdots\\)\n\\(A_i = A_{i-1} + (1 \\text{ if } S_i =\\)\n(\n\\(\\text{ else } -1)\\)\n\\(\\vdots\\)\n\\(A_{|S|} = A_{|S|-1} + (1 \\text{ if } S_{|S|} =\\)\n(\n\\(\\text{ else } -1)\\)\nこの時、\n\\(S\\)\nが良い括弧列である必要十分条件は次の通りである。\n\\(A_{|S|} = 0\\)\nかつ\n\\(\\min\\lbrace A_0, A_1, \\dots, A_{|S|} \\rbrace = 0\\)\n上記の性質がぱっとわからない方は、いくつかの括弧列\n\\(S\\)\nに対して\n\\(A\\)\nを計算してみることで理解の助けになるのではないかと思います。(なお、証明は割愛します)\nこの上記の性質の\n\\(A\\)\nを stack 状のデータ構造で管理することで今回の問題を解くことが出来ます。\n具体的には、今の文字列を\n\\(S\\)\nとして、\n\\(B_i = \\min \\lbrace A_0, A_1, \\dots, A_i \\rbrace\\)\nと置いた時、stack に\n\\(A\\)\nの値\n\\(A_0, A_1, \\dots, A_{|S|}\\)\nと\n\\(B\\)\nの値\n\\(B_0, B_1, \\dots, B_{|S|}\\)\nを管理することにします。\nまず、初期状態では\n\\(S\\)\nは空文字列なので\n\\(A_0 = 0\\)\nと\n\\(B_0 = 0\\)\nだけが入っています。\n1 番目のクエリで\n(\nを追加するときは、新しい文字列の長さを\n\\(n\\)\nとした時\n\\(A_n = A_{n - 1} + 1\\)\n\\(B_n = \\min \\lbrace A_0, A_1, \\dots, A_n \\rbrace = \\min \\lbrace B_{n-1}, A_n \\rbrace\\)\nが成り立つので、直前の情報から新たな\n\\(A_n, B_n\\)\nを計算できます。\n(\nを追加する場合もほぼ同様です。\n2 番目のクエリで\n\\(S\\)\nの末尾の文字を削除する場合は\n\\(A, B\\)\nの末尾の要素を削除すればよいです。\nそして、今の文字列が良い括弧列かどうかの判定は\n\\(A_{|S|} = 0\\)\nかつ\n\\(B_{|S|} = 0\\)\nが成り立つかどうかで判定できます。\n以上に説明するデータ構造を構成することで今回の問題を解くことが出来ます。計算量は\n\\(\\mathrm{O}(Q)\\)\nで十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n  cin.tie(0)->sync_with_stdio(0);\n  int Q;\n  cin >> Q;\n  vector<int> A{0}, B{0};\n  for (int q = 1; q <= Q; q++) {\n    int cmd;\n    cin >> cmd;\n    if (cmd == 1) {\n      char c;\n      cin >> c;\n      A.push_back(A.back() + (c == '(' ? 1 : -1));\n      B.push_back(min(B.back(), A.back()));\n    } else {\n      A.pop_back();\n      B.pop_back();\n    }\n    cout << (A.back() == 0 and B.back() == 0 ? \"Yes\" : \"No\") << \"\\n\";\n  }\n}"
+      ],
+      "text_sha256": "d0be5d73e03bb7db7fc299fadd9acdd4b102a61a6085064de750d9151cfb86a9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc428/abc428_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

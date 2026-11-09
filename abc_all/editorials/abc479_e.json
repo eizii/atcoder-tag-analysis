@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc479_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc479/editorial/27131",
+      "text": "木を頂点 \\(1\\) を根とした根付き木であるとします。 \\(seq\\) を頂点 \\(1\\) を始点として BFS した際の頂点順とします。 最初の BFS の際に、その頂点の親および親に向かう辺の番号を求めておくことができます。 全ての辺について、その辺を取り除いた場合の \\(2\\) つの連結成分の大きさは、 \\(seq\\) を後ろから前に調べることで、各頂点の部分木の大きさとして葉から順に求められます。 ここから、実際に本問題で要求されている加算を行います。ここで、加算の順序を入れ替えてもよい(辺を任意の順序で処理してよい)ことに注意してください。 頂点 \\(v\\) から根に向かって辺 \\(i\\) が伸びているとします。 もし \\(v\\) 以下の部分木の大きさが \\(n/2\\) 以上である場合、 \\(v\\) 以下の部分木全体に \\(i\\) を加算すればよいです。 \\(v\\) 以下の部分木の大きさが \\(n/2\\) 以下である場合も、「部分木全体への加算」として扱うことができます。その方法とは、全ての頂点に \\(i\\) を加算すると取り決めたうえで、 \\(v\\) 以下の部分木全体に \\(-i\\) を加算するということです。 部分木全体への加算は、その頂点に値を加算したうえで \\(seq\\) を前から調べることで葉に向かって加算を伝搬させれば実現可能です。 一連の解法は時間計算量 \\(O(N)\\) で動作します。 実装例 (C++): 原案: admin",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing ll=long long;\nusing pi=pair<int,int>;\nusing Graph=vector<vector<pi>>;\n\nint main(){\n  ios::sync_with_stdio(false);\n  cin.tie(nullptr);\n  int n;\n  cin >> n;\n  Graph g(n);\n  for(int i=1;i<n;i++){\n    int a,b;\n    cin >> a >> b;\n    a--; b--;\n    g[a].push_back({b,i});\n    g[b].push_back({a,i});\n  }\n  vector<int> seq;\n  vector<int> par(n,-1);\n  vector<int> peg(n);\n  {\n    queue<int> q;\n    par[0]=-2;\n    peg[0]=0;\n    q.push(0);\n    while(!q.empty()){\n      auto od=q.front(); q.pop();\n      seq.push_back(od);\n      for(auto &nx : g[od]){\n        if(par[nx.first]==-1){\n          par[nx.first]=od;\n          peg[nx.first]=nx.second;\n          q.push(nx.first);\n        }\n      }\n    }\n  }\n\n  reverse(seq.begin(),seq.end());\n  vector<int> sz(n,1);\n  vector<ll> x(n,0);\n  ll glob=0;\n  for(auto &nx : seq){\n    for(auto &ny : g[nx]){\n      if(ny.first==par[nx]){continue;}\n      sz[nx]+=sz[ny.first];\n    }\n    if(2*sz[nx]<n){\n      glob+=peg[nx];\n      x[nx]-=peg[nx];\n    }\n    else{\n      x[nx]+=peg[nx];\n    }\n  }\n\n  reverse(seq.begin(),seq.end());\n  for(auto &nx : seq){\n    for(auto &ny : g[nx]){\n      if(ny.first==par[nx]){continue;}\n      x[ny.first]+=x[nx];\n    }\n  }\n\n  for(int i=0;i<n;i++){\n    if(i){cout << \" \";}\n    cout << glob+x[i];\n  }cout << \"\\n\";\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "027d71550f2dba9cec2d4f480ace72ebcab33cd8d6fc31b1649835c441a70c64"
+    }
+  ],
+  "status": "available"
+}

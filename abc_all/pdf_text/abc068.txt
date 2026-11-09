@@ -1,0 +1,414 @@
+   AtCoder Regular Contest 079 Editorial
+
+
+                  Kohei Morita(yosupo)
+
+            平成29 年7 月29 日
+
+
+
+A: ABCxxx
+
+ まず、標準入力からn を入力します。
+ 次に、ABC という文字列を出力します。
+ 最後に、最初に入力したn を出力し、改行文字を出力します。
+ C++のコード例は以下です。
+
+
+
+#include <iostream>
+
+
+using namespace std;
+
+
+int main() {
+
+    int n;
+    cin >> n; // n を入力
+    cout << "ABC"; // ABC を出力
+    cout << n; // n を出力
+    cout << endl; // 改行文字
+
+    return 0;
+
+}
+
+
+
+
+
+                                1
+
+B: Break Number
+
+ たとえば、2 で3 回割れる数のうち最も小さいものはなんでしょうか？
+ これは、2 を3 回かけた数、つまり8 です。
+ 同様に、2 でk 回割れる数のうち最も小さいものは2 をk 回かけた数です。
+  2 をk 回かけた数、という形になっているのは、100 以下だと1, 2, 4, 8, 16, 32, 64
+の7 種類しかありません。
+ よって、この7 種類のうち、N 以下で最も大きいものを出力すれば良い
+です。
+
+
+
+
+
+                                2
+
+C: Cat snuke and a voyage
+
+  島i(i = 2, 3, ..., N −1) について、島1 と島i、島i と島N のどちらの間に
+も定期便が通っているようなi が存在するかどうかを調べれば良いです。
+ 最初に辺をハッシュマップに入れると、島1 と島i の間に辺があるかをO(1)
+で調べることができます。
+
+ 他にも、長さN のboolean 配列を2 つ用意して、島1 と島i の間に辺があ
+るか、島i と島N の間に辺があるか、を格納しても良いです。こちらのほう
+が定数倍が速いです。
+
+ よって、O(N) で判定を行うことができます。
+ 辺の前処理にO(M) かかるため、まとめてO(N + M) です。
+ なお、ダイクストラ法というアルゴリズムを使用すると、最小でいくつの
+
+定期便を使えば島N にたどり着けるかも調べることができます。
+
+
+
+
+
+                                3
+
+D: Decrease (Contestant ver)
+
+ 操作を逆から考えます。
+
+ すると、1 つ要素を選び、値をN 増やす。そしてそれ以外を1 減らす。と
+なります。更に条件として、
+
+   1. 逆操作後に、選んだ要素の値が最大になっている
+
+   2. 逆操作後に、選ばれなかった要素の値が−1 以下になっていない
+
+ を満たしている必要があります。
+
+ すべての要素が0 以上N −1 の数列から、以上の条件を満たしながらK 回
+逆操作を行うことが出来れば、その数列が答えとなることが示せます。
+
+ 結論から言うと、0, 1, 2, ..., N−1という数列を考え、1, 2, ..., N, 1, 2, ..., N, 1, 2, ...
+番目の順で逆操作を行えばよいです。
+
+ これを発想するのは難しいですが、これが以上の条件を満たすことを示す
+
+のはあまり難しくありません。
+
+  1, 2, ..., N 番目に1 回ずつ逆操作を行うと、全体が+1 されることに注目す
+ると、最後のたかだかN −1 回の操作のみ真面目にシミュレーションすれば
+よいので、十分高速です。
+
+
+
+
+
+                                4
+
+E: Decrease (Judge ver)
+
+
+ 数列のうち最も大きい要素を求める、複数ある場合はどれか1 つ選ぶ。
+ この要素の値をN 減らす。これ以外の要素の値を1 増やす。
+
+
+ という操作を
+
+ 数列のうちN 以上の要素を好きに1 つ選ぶ。この要素の値をN 減らす。
+ これ以外の要素の値を1 増やす。
+
+
+ としても、操作回数に変わりはないという性質が重要です。
+
+ これは、直感的にはあまりおかしくは感じないと思うのですが、証明する
+
+のはやや大変です。
+
+ ある手順で操作をするとA 回で全部の要素がN −1 以下になったとしま
+す。このとき、どのような手順で操作してもA 回操作できたならば、その時
+点での数列は一意になります。
+
+ なぜならば、この操作というのはmod(N + 1) で考えるとすべての要素に
++1 という操作になります。よってどのような手順で操作してもmod(N + 1)
+は不変です。また、どのような手順で操作をしても∑ai は不変で、操作回数
+のみに依存します。
+
+ 更に、すべての要素が0 以上N −1 以下になる手順が存在することより、
+操作後の数列が一意になることがわかります。
+
+ 以上より、どのような手順で操作をしても操作回数が一意になることが示
+
+せました。
+
+ この性質により、
+
+    ∑N
+  S =  i=1⌊ai/N⌋とする。各i についてai を⌊ai/N⌋N 減らし、S −
+ ⌊ai/N⌋増やす。
+
+
+ という行動を考えることができます。
+
+ これは、S 回の操作をまとめて考えているだけです。内訳は、i 番目の要素
+には⌊ai/N⌋回操作をしています。
+ この行動を、すべての要素がN −1 以下になるまで繰り返せば答えが求ま
+ります。
+
+ そして、実はこれは十分高速であることが示せます。
+ 行動前の数列をai、行動後の数列をbi とします。
+  S = ∑⌊ai/N⌋≥∑(ai −(N −1))/N ゆえ、
+ ∑bi ≤∑ai −∑(ai −(N −1))/N
+ よって
+  ∑(bi −(N −1)) ≤∑(ai −(N −1))(1−1/N) = (1−1/N) ∑(ai −(N −1))
+
+
+
+                                5
+
+ 以上より、∑(ai −(N −1)) は指数的に減っていくことがわかり、この指
+数の底は(1 −1/N) ≤49/50 であることがわかります。
+  x を行動回数として、
+  50×(1016+1000)/(49/50)x < 1、つまり
+  (49/50)x > 50 × (1016 + 1000) となるくらい行動すると、
+  ∑(ai −(N −1)) が0 以下となります。なお、このx を計算すると2000 弱
+となります。
+
+ そしてこのとき、
+ ∑ai ≤N(N −1) ≤2450 となり、
+  1 回の行動で∑ai が1 は減ることを考えると、
+ ここからの行動回数はかならず2450 回以下です。
+ よって、多くとも4450 回ほど行動を行えば操作は終了し、1 回の行動は
+O(N) でシミュレーションできるため、十分間に合います。
+
+
+
+
+
+                                6
+
+F: Namori Grundy
+
+ まず、定義より、グラフはどのような形をしているかを考えます。
+
+ これは、サイクルが1 つあり、サイクルの各頂点から木が生えているグラ
+フになっています。
+ また、ai は、頂点i から辺が伸びている頂点に書かれていない値のうち最
+小です。(これはGrundy Numbers と呼ばれる数の定義に酷似しており、今
+回の問題タイトルの由来となっています)
+ まず、サイクルに含まれない頂点たちについては、葉からどんどん削って
+いく幅優先探索などを使い、簡単にai を定めることができます。
+ サイクルに含まれる頂点の値を考えます。まず、サイクルの頂点のうち1
+つを適当に選びます。そして、この頂点から辺が伸びている頂点で、サイク
+
+ルに含まれないものに書かれていない値のうち、最小と2 番目に小さいもの
+を求めます。
+
+ すると、この頂点の値はこの2 つのうちどちらかになることがわかります。
+これは、この頂点から辺が伸びている、サイクルに含まれる頂点の値で場合
+
+分けをするとわかります。
+
+ そしてこの頂点の値を定めると、他のサイクルの頂点の値もすべて決まる
+
+ため、すべて決めた後に整合性を保っているか判定すれば良いです。
+
+ 計算量はO(N) となります。
+
+
+
+
+
+                                7
+
+    AtCoder Regular Contest 079 Editorial
+
+                   Kohei Morita(yosupo)
+
+                         July 29, 2017
+
+
+A: ABCxxx
+
+
+#include <iostream>
+
+using namespace  std ;
+
+ int main ()  {
+     int n ;
+     cin >> n ;
+     cout << ”ABC”;
+     cout << n ;
+     cout << endl ;
+     return  0;
+}
+
+
+
+
+
+                                  1
+
+B: Break Number
+
+
+#include <iostream>
+
+using namespace  std ;
+
+ int main ()  {
+     int n ;
+     cin >> n ;
+      fo r  ( int   i = 0;   i < 20;  i++) {
+                  i f  (n < (1<<( i +1))) {
+              cout << (1<< i ) << endl ;
+             break ;
+          }
+     }
+     return  0;
+}
+
+
+
+
+
+                                  2
+
+C: Cat snuke and a voyage
+
+
+#include <iostream>
+#include <vector>
+
+using namespace  std ;
+
+ int main ()  {
+     int n , m;
+     cin >> n >> m;
+
+    vector<bool> vis (n+1,   f a l s e ) ;
+     bool ans =  f a l s e ;
+         f o r  ( int   i = 0;   i < m;  i++) {
+          int  a , b ;
+          cin >> a >> b ;
+          a s s e r t (1 <= a && a < b && b <= n ) ;
+                  i f  ( a == 1)  {
+                           i f  ( vis [ b ] )  {
+                  ans = true ;
+               }
+               vis [ b ] = true ;
+          }  e l s e    i f  (b == n)  {
+                           i f  ( vis [ a ] )  {
+                  ans = true ;
+               }
+               vis [ a ] = true ;
+          }
+     }
+
+          i f   ( ! ans ) cout << ”IM”;
+     cout << ”POSSIBLE” << endl ;
+     return  0;
+}
+
+
+
+
+
+                                  3
+
+D: Decrease (Contestant ver)
+
+Consider the inverse of an operation.
+   In each inverse-operation, you choose an element and increase it by N, and
+decrease each of the other elements by 1. Furthermore, the following conditions
+must be satisﬁed:
+
+   1. After the inverse-operation, the chosen element must become the largest.
+
+   2. After the inverse-operation, all elements must be non-negative.
+
+    Let’s start from a sequence whose elements are betwen 0 and N −1, inclusive.
+If you can perform inverse-operations K times on this sequence, that is a valid
+answer for this problem.
+   For example,  if you start from the sequence {0, 1, 2, ..., N −1}, you can
+perform the inverse-operations inﬁnite number of times, by choosing elements
+1, 2, ..., N, 1, 2, ..., N, 1, 2, ... in this order. (You should use N = 50 to ﬁt within
+the constraints of output.)
+   Notice that if you perform the inverse-operations once for each of the ele-
+ments 1, 2, ..., N, each element will be incremented by one. Using this, you can
+easily simulate floor(K/N) ∗K steps.  Also, you can simulate the remaining
+K%N steps by brute force.
+
+
+
+
+
+                                  4
+
+E: Decrease (Judge ver)
+
+In each operation, the sum of all elements in the sequence decreases by exactly
+one. Let S be the sum of all elements in the initial sequence. Until the maximum
+becomes at most N −1, we must perform at least S −N 2 operations.
+    Let’s perform X operations, for a given large X. Instead of performing the
+operations as they are described in the statement,
+
+   • We ﬁrst increase each element by X.
+
+   • Then, repeat the following X times: choose the maximum element, and
+      decrease it by D = N + 1.
+
+  How can we perform the second step quickly? By binary search, we can ﬁnd
+the smallest integer Y such that
+
+
+T = floor(max{(a1 −Y )/D, 0}) + . . . + floor(max{(aN −Y )/D, 0}) . . . X  (1)
+
+   Once we ﬁnd this Y , we can perform T steps at once, by replacing each ai
+by ai −floor(max{(ai −Y )/D, 0}).  Since X −T ≤N, we can simulate the
+remaining X −T steps by brute force.
+   After the simulation of S −N 2 steps, the sum of elements will be at most
+N 2, so there will be at most N 2 remaining steps/ Therefore, we can handle the
+remaining part by straightforward simulations.
+
+
+
+
+
+                                  5
+
+F: Namori Grundy
+
+It is well-known that in this type of graph, there is exactly one cycle in the
+graph, and from each vertex on the cycle a tree may ”grow”.
+  We want to assign integers ai to each vertex, such that ai is the smallest
+non-negative integer that doesn’t appear in av1, . . . , avk, where v1, . . . , vk are the
+destinations of edges from the vertex i. (This is known as Grundy Numbers).
+    Let’s call a vertex in the cycle ”cycle vertex”, and call the others ”forest
+vertex”.
+    First, for each forest vertex, we can uniquely determine their Grundy Num-
+bers in the order from leaves to roots.
+  How can we determine the Grundy Number of a cycle vertex v? Let c1, . . . , ck
+be forest vertices that are direct children of v, and let w be the cycle vertex that
+follows v.  Then, av must be the smallest non-negative integer that doesn’t
+appear in the set ac1, . . . , ack, aw. We know the values of ac1, . . . , ack, but we
+don’t know the value of aw. However, regardless of the value of aw, there are
+only two candidates for av: one of the two smallest integers that don’t appear
+in ac1, . . . , ack.
+   Now, choose an arbitrary cycle vertex x. There are two candidates for ax,
+so we try both. Once we ﬁx ax, we can determine all Grundy Numbers along
+the cycle, and we can verify if the Grundy Numbers we get are valid.
+   This solution works in O(N).
+
+
+
+
+
+                                  6

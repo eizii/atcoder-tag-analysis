@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc340_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc340/editorial/9250",
+      "text": "まず、重要な事実として、\n\\((0, 0), (X, Y), (A, B)\\)\nを頂点とする三角形の面積は\n\\(\\frac{\\vert AY - BX  \\vert}{2}\\)\nです。よってこの問題は、\n\\(X, Y\\)\nが与えられたときに\n\\[\\vert AY - BX \\vert = 2\\]\nを満たす整数の組\n\\((A, B)\\)\nを発見する問題であると言い換えられます。\nこの問題の解き方を説明します。以下では\n\\(g = \\gcd(X, Y)\\)\nとします。 (注 :\n\\(\\gcd(a, b)\\)\nは\n\\(\\vert a \\vert\\)\nと\n\\(\\vert b \\vert\\)\nの最大公約数として定義しています。)\nまず、\n\\(g\\)\nが\n\\(3\\)\n以上の場合は\n\\(AY - BX\\)\nも\n\\(g\\)\nの倍数となるため答えは存在しません。\n\\(g = 1, 2\\)\nの場合は拡張ユークリッドの互除法と呼ばれるアルゴリズムを利用することで常に解を得ることが出来ます。\n拡張ユークリッドの互除法とは、整数の組\n\\((a, b)\\)\nを入力として与えたときに以下の手順によって\n\\(ax + by = \\pm \\mathrm{gcd}(a, b)\\)\nとなる整数の組\n\\((x, y)\\)\nを\n\\(\\mathrm{O}(\\log \\min(|a|, |b|))\\)\nで計算するアルゴリズムです。(ここで整数の組\n\\(x, y\\)\nは\n\\(\\max(|x|, |y|) \\leq \\max(|a|, |b|)\\)\nを満たす整数であることが保証されています。)\n拡張ユークリッドの互除法に\n\\((Y, -X)\\)\nを入力することで、返り値を\n\\((c, d)\\)\nとして\n\\[cY - dX = \\pm g\\]\nかつ\n\\(\\vert c \\vert, \\vert d \\vert \\leq 10^{17}\\)\nを満たす\n\\((c, d)\\)\nの組を得ることが出来ます。求めたいものは\n\\(AY - BX =\\pm 2\\)\nを満たす\n\\((A, B)\\)\nの組で、これは\n\\((c, d)\\)\nを\n\\(\\frac{2}{g}\\)\n倍することで得ることが出来ます。この\n\\((A, B)\\)\nは\n\\(\\vert A \\vert, \\vert B \\vert \\leq 10^{18}\\)\nという制約を満たしており問題ないです。\n以上よりこの問題を解くことが出来ました。計算量は\n\\(\\mathrm{O}(\\log \\min (X, Y))\\)\n程度で十分高速です。",
+      "codes": [
+        "// 拡張ユークリッドの互除法の実装例\npair<long long, long long> extgcd(long long a, long long b) {\n  if (b == 0) return make_pair(1, 0);\n  long long x, y;\n  tie(y, x) = extgcd(b, a % b);\n  y -= a / b * x;\n  return make_pair(x, y);\n}"
+      ],
+      "text_sha256": "46df56d1be1a1bbf10b2b21e5d708cec5bc73733fae01bd7deb71d820a4b8cdd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc340/abc340_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

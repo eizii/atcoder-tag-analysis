@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc239_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc239/editorial/3388",
+      "text": "街を頂点、高速道路を辺としたグラフを考えます。問題は、「指定された辺を全て含み、各頂点の次数が指定された値になるような木を構築せよ」となります。\n\\(\\sum D_i\\neq 2N-2\\)\nであるとき条件を満たすことは明らかに不可能です。\n\\(\\sum D_i= 2N-2\\)\nである場合を考えます。\nまずは条件を満たすことが可能かどうか考えてみましょう。\n最終的なグラフは木になるので、既存の辺により同じ連結成分に属している頂点の間に新たに辺が張られることはありません。したがって、次数の不足は連結成分ごとにまとめて考えてよいことがわかります。各連結成分について、その連結成分に属する頂点たちの次数の不足の合計が\n\\(n\\)\nであることを「次数が\n\\(n\\)\n足りない」などと表現することにします。\n実は、条件を満たすことが可能ならば、次のようなアルゴリズムで構築可能です。\nまず、以下の操作を可能な限り繰り返す：次数が\n\\(1\\)\n足りない連結成分\n\\(X\\)\nと、次数が\n\\(2\\)\n以上足りない連結成分\n\\(Y\\)\nを任意に選び、これらの間に辺を張る\n上の操作が不可能になった時点で、連結成分がちょうど\n\\(2\\)\nつ残っており、そのどちらも次数が\n\\(1\\)\n足りないとき、それらの間に辺を張る。そうでないとき、条件を満たすことは不可能\n構築パートは上記アルゴリズムに基づいて、各連結成分で次数が不足している頂点たちの配列をもっておき、連結成分の次数の不足が\n\\(1\\)\nか\n\\(2\\)\n以上かで分けておくことで処理できます。\n実装例(C++)",
+      "codes": [],
+      "text_sha256": "93357f8e5c632b37b45f6a3709b9db5999ad44934a47dc22dd836a443a52a036",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc239/abc239_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc239/editorial/3406",
+      "text": "(ユーザー解説です)\n簡単のため\n\\(M = 0\\)\nの場合で説明します。(\n\\(M \\neq 0\\)\nの場合は、公式解説と同様の処理を適宜行ってください。)\n列\n\\(p_i\\)\nを、\n\\(p_i :=\\)\n(連結成分のうち辺を貼るべき頂点を重複度込みで並べた列) として定義します。\nわかりづらいので具体例で説明すると、たとえば\n\\(N = 5, D = \\lbrace3,2,1,1,1\\rbrace\\)\nの場合、はじめの時点では\n\\[p[1] = \\lbrace1, 1, 1\\rbrace, p[2] = \\lbrace2, 2\\rbrace\\]\n\\[p[3] = \\lbrace3\\rbrace, p[4] = \\lbrace4\\rbrace, p[5] = \\lbrace5\\rbrace\\]\nとなります。\n次に、列同士をマージしていきながら辺を貼っていきます。\nこれは、残っている列が\n\\(2\\)\n本以上ある間、以下の操作を繰り返し行えばよいです。\n列を長さの大きい方から 2 つ選ぶ。\nそれぞれの末尾の要素を 1 個ずつ pop して、pop した頂点間に辺を貼る。\n短い方を長い方に連結させる。\nたとえば上の例からマージを一回行うと、\n\\(p[1]\\)\nと\n\\(p[2]\\)\nをマージして\n\\[p[1] = \\lbrace1, 1, 2\\rbrace\\]\n\\[p[3] = \\lbrace3\\rbrace, p[4] = \\lbrace4\\rbrace, p[5] = \\lbrace5\\rbrace\\]\n\\[(答え) = \\lbrace(1, 2)\\rbrace\\]\nになり、もう\n\\(1\\)\n回マージを行うと\n\\(p[1]\\)\nと\n\\(p[3]\\)\nをマージして\n\\[p[1] = \\lbrace1, 1\\rbrace\\]\n\\[ p[4] = \\lbrace4\\rbrace, p[5] = \\lbrace5\\rbrace\\]\n\\[(答え) = \\lbrace(1, 2), (2, 3)\\rbrace\\]\nになります。\nすべての列をマージする操作は、\nstd::priority_queue\nとマージテクを利用すれば全体で\n\\(O(N \\log N)\\)\nで行うことができます。\n問題文の条件を満たすように辺を貼ることが可能かどうかは、最終的に追加する辺が\n\\(N-M-1\\)\n本になっているかどうかで判定すればよいです。\n実装例 (C++)",
+      "codes": [
+        "#include <algorithm>\n#include <iostream>\n#include <numeric>\n#include <queue>\n#include <utility>\n#include <vector>\nusing namespace std;\n#include \"atcoder/dsu.hpp\"\n\nvoid No() {\n  cout << \"-1\\n\";\n  exit(0);\n}\n\n#define rep(i, n) for (int i = 0; i < (n); i++)\n\nint main() {\n  int N, M;\n  cin >> N >> M;\n  vector<long long> D(N);\n  for (auto& x : D) cin >> x;\n  if (accumulate(begin(D), end(D), 0LL) != 2 * N - 2) No();\n  atcoder::dsu dsu(N);\n  for (int i = 0, a, b; i < M; i++) {\n    cin >> a >> b;\n    --a, --b;\n    D[a]--, D[b]--;\n    if (dsu.same(a, b)) No();\n    dsu.merge(a, b);\n  }\n  vector<vector<int>> ps(N);\n  rep(i, N) {\n    if (D[i] < 0) No();\n    rep(_, D[i]) ps[dsu.leader(i)].push_back(i);\n  }\n\n  priority_queue<pair<int, int>> Q;\n  rep(i, N) if (ps[i].size()) Q.emplace(ps[i].size(), i);\n  vector<pair<int, int>> ans;\n  while ((int)Q.size() >= 2) {\n    auto [si, i] = Q.top();\n    Q.pop();\n    auto [sj, j] = Q.top();\n    Q.pop();\n    ans.emplace_back(ps[i].back(), ps[j].back());\n    ps[i].pop_back(), ps[j].pop_back();\n    if (si < sj) swap(ps[i], ps[j]);\n    copy(begin(ps[j]), end(ps[j]), back_inserter(ps[i]));\n    if (si + sj - 2 > 0) Q.emplace(si + sj - 2, i);\n  }\n\n  if ((int)ans.size() != N - M - 1) No();\n  for (auto& [u, v] : ans) cout << u + 1 << \" \" << v + 1 << \"\\n\";\n}"
+      ],
+      "text_sha256": "31047eb449ef4eba6a8f1a6fef1fe6f3482265b25a76b14c04b3c6bc66f9bebf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc239/abc239_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

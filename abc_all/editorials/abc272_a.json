@@ -1,0 +1,23 @@
+{
+  "problem_id": "abc272_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc272/editorial/4977",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\nC++ での解法\nまず入力の\n\\(N\\)\nを受け取ります。\n次に、\n\\(N\\)\n個の値からなる配列を作成します。\nそして、以下のように入力を受け取ります。\n最後に、\n\\(N\\)\n個の整数の合計を求め、出力します。\n実装例\nPython での解法\nまず入力の\n\\(N\\)\nを受け取ります。\n次に、\n\\(N\\)\n個の値からなる配列を作成し、入力を受け取ります。\n最後に、\n\\(N\\)\n個の整数の合計を求め、出力します。\n実装例\n補足: これまで ABC の A 問題ではループを使わず解けるような問題を出題してきましたが、毎週出題し続けるには扱える問題の幅が狭すぎ、ループを避けるためにかえってアクロバティックなことを要求する状態になっていることから、簡単な場合でループを出題してみることにしました。",
+      "codes": [
+        "int N;\ncin >> N;",
+        "vector<int> A(N);",
+        "for(int i = 0; i < N; i++){\n  cin >> A[i];\n}",
+        "int sum = 0;\nfor(int i = 0; i < N; i++){\n  sum += A[i];\n}\ncout << sum << endl;",
+        "N = int(input())",
+        "A = list(map(int, input().split()))",
+        "Sum = 0\nfor i in range(N):\n  Sum += A[i]\nprint(Sum)"
+      ],
+      "text_sha256": "cdfbe4996d78d695689d01b4b28c1b890f561c2424883d785b6cd7d95ec5e42c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc272/abc272_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

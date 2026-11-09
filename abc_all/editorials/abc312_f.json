@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc312_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6853",
+      "text": "缶切りが不要な缶を選ぶ個数を固定すると、明らかに満足度が大きいものから選ぶのが最適です。\n同様に、缶切りが必要な缶についても選ぶ個数を固定すると満足度が大きいものから選ぶのが最適で、缶切りについても使用できる缶の個数が多いものから選ぶのが最適です。\n降順にソートして和を取ることで、各\n\\(t\\)\nについて缶切りが不要な缶を\n\\(t\\)\n個選ぶときに得られる満足度の最大値がわかります。\nしたがって、各\n\\(s\\)\nについて缶切りが必要な缶と缶切りを合計\n\\(s\\)\n個選ぶときに得られる満足度の最大値がわかればよいです。\nここで、最適解において缶切りが必要な缶であって、缶切りが使用されないものと、缶切りであって、どの缶に対しても使用しないものが存在しないとしてよいことから、以下のような貪欲により最適解が得られることがわかります。\nまだ使用できる缶切りがあるならば、缶切りが必要な缶であって、満足度が最大のものを選ぶ。\nそうでないならば、缶切りであって、使用できる缶の個数が最大のものを選ぶ。\nあらかじめ缶切りが必要な缶の満足度と缶切りの使用できる回数をソートしておくことで、上で示した貪欲は\n\\(O(N)\\)\nで行え、この問題が解けました。\n実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\ntypedef long long ll;\ntemplate<class T, class U> inline bool chmax(T &a, const U &b) { if (a < b) { a = b; return true; } return false; }\n\nint main() {\n\tll n, m;\n\tcin >> n >> m;\n\tvector<ll> a, b, c;\n\tfor (int i = 0; i < n; i++) {\n\t\tint t; ll x;\n\t\tcin >> t >> x;\n\t\tif (t == 0) a.push_back(x);\n\t\telse if (t == 1) b.push_back(x);\n\t\telse c.push_back(x);\n\t}\n\tsort(a.begin(), a.end(), greater<>());\n\tsort(b.begin(), b.end());\n\tsort(c.begin(), c.end());\n\tvector<ll> x(n + 1), y(n + 1);\n\tfor (int i = 0; i < n; i++) {\n\t\tif (i < a.size()) x[i + 1] = x[i] + a[i];\n\t\telse x[i + 1] = x[i];\n\t}\n\tint r = 0;\n\tfor (int i = 0; i < n; i++) {\n\t\tif (b.empty()) y[i + 1] = y[i];\n\t\telse if (r == 0) {\n\t\t\tif (!c.empty()) {\n\t\t\t\tr += c.back();\n\t\t\t\tc.pop_back();\n\t\t\t}\n\t\t\ty[i + 1] = y[i];\n\t\t}\n\t\telse {\n\t\t\tr--;\n\t\t\ty[i + 1] = y[i] + b.back();\n\t\t\tb.pop_back();\n\t\t}\n\t}\n\tll ans = 0;\n\tfor (int i = 0; i <= m; i++) chmax(ans, x[i] + y[m - i]);\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "74a0acfcb78f71fe2070383539a546cbed487e2d2b0ff2c5615d8826a885e3e1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc312/editorial/6875",
+      "text": "缶切りを使う回数を固定して考えます。\n使う缶切りおよび缶切りを適用する缶は貪欲に選ぶのが最適です。より具体的には、缶切りは適用回数が大きいものから順に使い、適用先は満足度が高いものから順に選ぶのが最適です。\n缶切りを使う回数を増やすほど入手可能な缶（缶切りが不要な缶および缶切りが必要な缶のうち既に缶切りを使用したもの）が増えていきます。最初、缶切りを使っていない状態から、缶切りをひとつずつ使うことをシミュレーションすれば良いです。\nこのシミュレーションは、入手可能な缶を平衡二分木等で管理すれば実現可能です。\nAC コード\n（PyPy3）",
+      "codes": [],
+      "text_sha256": "ad73c18851e674e9cec5bf9853dbee08959031aa59d038660dfadb474b4af520",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc312/abc312_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

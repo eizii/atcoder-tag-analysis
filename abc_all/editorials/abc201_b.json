@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc201_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc201/editorial/1824",
+      "text": "\\(N\\)\n個の山を (高さ→名前) の順に優先度を付けて降順にソートした後、先頭から\n\\(2\\)\n番目の山の名前を出力すればいいです。\n計算量は\n\\(M\\)\nを\n\\((S_i\\)\nの長さの総和\n\\()\\)\nとして\n\\(O(M \\log N)\\)\nです。\n解答例 (C++)\n解答例 (Python)\nなお、\n\\(1\\)\n番高い山の情報と\n\\(2\\)\n番目に高い山の情報を持ち、都度更新していくことで\n\\(O(M)\\)\nで解くことも可能です。\n解答例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N; cin >> N;\n    vector<pair<int,string>> data(N);\n    for(int i=0; i<N; i++) cin >> data[i].second >> data[i].first;\n    sort(data.begin(),data.end(),std::greater{});\n    cout << data[1].second << endl;\n}",
+        "N = int(input())\ndata = []\nfor i in range(N):\n    S,T = map(str,input().split())\n    T = int(T)\n    data.append([T,S])\ndata.sort(reverse=True)\nprint(data[1][1])",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int N; cin >> N;\n    vector<string> S(N);\n    vector<int> T(N);\n    pair<int,string> top,sec;\n    top = sec = {0,\"\"};\n    for(int i=0; i<N; i++){\n        cin >> S[i] >> T[i];\n        auto p = make_pair(T[i],S[i]);\n        if(top < p){\n            sec = top;\n            top = p;\n        }\n        else if(sec < p){\n            sec = p;\n        }\n    }\n    cout << sec.second << endl;\n}"
+      ],
+      "text_sha256": "dbe29fbb2e72f45ad4cebecc6c593e4232bd8d8147011ff4de4de3e92122df64",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc201/abc201_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

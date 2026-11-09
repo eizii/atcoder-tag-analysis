@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc275_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc275/editorial/5137",
+      "text": "この問題は様々な解法が考えられますが、適当に実装すると同じ正方形を二回数えてしまうといった問題が起こることがあります。\nここでは実装方針の一例を紹介します。\nまず、正方形を列挙する必要があります。これは、正方形の頂点のうち\n\\(1\\)\n個を決めうち、次にその頂点を端点とする辺のうち片方を決め打つことで可能です。（なお、実装例では辺を反時計周りに向き付けし、決め打った頂点から次の頂点に向かう辺を探索しています。）\n次に、正方形を重複して数えない方法を説明します。これには例えば\nstd::set\nを用いて、正方形を集合として管理すれば良いです。\nまた、\nstd::set\nが不要な方法もあります。先ほどの解法で何回同じ正方形を重複して数えているかを考えて、重複している回数で割ることによって答えを求めることができます。実装によって何回重複しているかは変化するので、気をつけてください。（実装例では、辺の向きを固定してるので同じ正方形をどの頂点を最初に選択したかで\n\\(4\\)\n回カウントしています。）\n実装例(c++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    vector<string> s(9);\n    for(auto &v : s) cin >> v;\n    auto valid = [&](int x, int y) {\n        return clamp(x, 0, 8) == x and clamp(y, 0, 8) == y and s[x][y] == '#';\n    };\n    set<set<pair<int, int>>> st;\n    for(int i = 0; i < 9; i++) {\n        for(int j = 0; j < 9; j++) {\n            for(int dx = -8; dx < 9; dx++) {\n                for(int dy = -8; dy < 9; dy++) {\n                    if(!dx and !dy) continue;\n                    int i2 = i + dx, j2 = j + dy;\n                    int i3 = i2 - dy, j3 = j2 + dx;\n                    int i4 = i3 - dx, j4 = j3 - dy;\n                    if(valid(i, j) and valid(i2, j2) and valid(i3, j3) and valid(i4, j4)) {\n                        set<pair<int, int>> sq;\n                        sq.insert({i, j});\n                        sq.insert({i2, j2});\n                        sq.insert({i3, j3});\n                        sq.insert({i4, j4});\n                        st.insert(sq);\n                    }\n                }\n            }\n        }\n    }\n    cout << st.size() << endl;\n}"
+      ],
+      "text_sha256": "4e94ff7a795ce7cb2512ad44436a69511ff5c25073799fc626ba8c13fa015274",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc275/abc275_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc275/editorial/5149",
+      "text": "公式解説より計算量は悪くなりますが，あまり難しいことを考えずに実装できる解法を紹介します．\nまず，問題の制約より，ポーンが置かれているのは\n\\(x\\)\n座標，\n\\(y\\)\n座標が\n\\(1\\)\n以上\n\\(9\\)\n以下の整数であるような座標に限られます．このような座標のうちの\n\\(4\\)\n点を決め打つと正方形が一意に決まるので，\n\\(4\\)\n点の組み合わせを全探索し，その\n\\(4\\)\n点からなる正方形があるかどうかを判定すれば良いです．\n\\(4\\)\n点の座標が与えられたときにその\n\\(4\\)\n点からなる正方形があるかどうかの判定方法には様々ありますが，比較的簡単に判定できる方法の一つは，\n\\(2\\)\n点間の距離を用いた次のような判定方法です．\n\\(4\\)\n点のうちの\n\\(2\\)\n点間を結ぶ\n\\(6\\)\n本の線分について，その長さを小さい順に並べたものを，\n\\(d_1, d_2, d_3, d_4, d_5, d_6\\)\nとする．このとき，次が全て成り立っていれば，その\n\\(4\\)\n点からなる正方形があるといえる．\n\\(d_1 = d_2 = d_3 = d_4\\)\n\\(d_5 = d_6\\)\n\\(d_5 = \\sqrt{2}d_1\\)\nこれは辺の長さを実際に全て求めることによって定数時間で判定可能です．なお，上の3つ目の条件を実際に判定する場合は，整数の範囲内で判定できるよう，上記の条件式の代わりに，両辺を二乗した\n\\(d_5^2=2d_1^2\\)\nを判定するとよいです．\n計算量についてですが，頂点の候補数を\n\\(N\\)\nとすると，\n\\(O(N^4)\\)\nとなります．\n\\(N=81\\)\nであるので，本問題の制約下において十分高速に動作します．",
+      "codes": [],
+      "text_sha256": "3a8393c311e3ff272f675074951d998cd51a4b1826742a10f85692eda3f5ef4e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc275/abc275_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc275/editorial/5141",
+      "text": "2点を決めたとき、「頂点を右回りに見たときその2点が連続するような正方形」は一意に決まります。そこで2点を全探索することを考えます。\nしかしそのままだと、例えば上図の\n\\(A,B\\)\nの2点を選んだときと、\n\\(B,C\\)\nの2点を選んだときで同じ正方形を数えてしまいます。そこで、正方形の「右斜下向きの辺」に注目します。これは、真横を含まず真下を含むことにすればどのような正方形にもちょうど\n\\(1\\)\nつ存在します。\nしたがって、2点を選ぶとき、2点目を「最初に選んだ点から見て右下の位置にある点」だけから選ぶことで、過不足なく正方形を数えることができます。\n2点を決めたとき、残りの2点の座標は下図を参考にうまく求める必要があります。\n実装例(Python)",
+      "codes": [
+        "import itertools\nS=[input() for _ in range(9)]\nans=0\n\nfor i1,j1,i2,j2 in itertools.product(range(9),repeat=4):\n  # (i1,j1)から→↓の向きに(i2,j2)がある\n  if i2>i1 and j2>=j1 and S[i1][j1]==\"#\" and S[i2][j2]==\"#\":\n    di=i2-i1\n    dj=j2-j1\n    i3=i2+dj\n    j3=j2-di\n    i4=i3-di\n    j4=j3-dj\n    if 0<=i3<9 and 0<=j3<9 and 0<=i4<9 and 0<=j4<9 and S[i3][j3]==\"#\" and S[i4][j4]==\"#\":\n      ans+=1\nprint(ans)"
+      ],
+      "text_sha256": "b879daa04d835a26a1add131cbbed76c88bde87e079e67e74f1d1c69c579b400",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc275/abc275_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

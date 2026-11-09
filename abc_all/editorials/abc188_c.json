@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc188_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc188/editorial/481",
+      "text": "解法 1\nトーナメントをそのままシミュレートします。\n問題文のトーナメントの正確な定義に従って処理をします。\n解答例 (C++)\n解法 2\n準優勝するのは、優勝する( = 一番レートが高い) 選手とは逆側のブロックにいる選手のうち一番レートが高い人です。\nこちらは解法 1より実装がかなり楽です。\n解答例 (C++)",
+      "codes": [
+        "#include <stdio.h>\n#include <utility>\n#include <vector>\n#include <numeric>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tint n = ri();\n\tstd::vector<int> a(1 << n);\n\tfor (auto &i : a) i = ri();\n\t\n\tstd::vector<int> remaining(1 << n);\n\tstd::iota(remaining.begin(), remaining.end(), 0);\n\t\n\tfor (int i = 1; i <= n; i++) {\n\t\tstd::vector<int> next_remaining;\n\t\tfor (int j = 0; j < 1 << (n - i); j++) {\n\t\t\tif (a[remaining[j * 2]] > a[remaining[j * 2 + 1]]) next_remaining.push_back(remaining[j * 2]);\n\t\t\telse next_remaining.push_back(remaining[j * 2 + 1]);\n\t\t}\n\t\tif (i == n) {\n\t\t\tprintf(\"%d\\n\", 1 + (remaining[0] == next_remaining[0] ? remaining[1] : remaining[0]));\n\t\t\treturn 0;\n\t\t}\n\t\tremaining = next_remaining;\n\t}\n\t\n\treturn 0;\n}",
+        "#include <stdio.h>\n#include <utility>\n#include <algorithm>\n#include <vector>\n\nint ri() {\n\tint n;\n\tscanf(\"%d\", &n);\n\treturn n;\n}\n\nint main() {\n\tint n = ri();\n\tstd::vector<int> a(1 << n);\n\tfor (auto &i : a) i = ri();\n\tint half = 1 << (n - 1);\n\tint max = std::max_element(a.begin(), a.end()) - a.begin();\n\tauto start = max < half ? a.begin() + half : a.begin();\n\tprintf(\"%d\\n\", (int) (std::max_element(start, start + half) - a.begin() + 1));\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "33eeb154d69a9ba2825f603eca8a2f2885fd9c7001aa5290d8377a566b29c33d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc188/abc188_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,31 @@
+{
+  "problem_id": "abc309_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc309/editorial/6743",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nこの問題では、入力を受け取ること、そして\n\\(A\\)\nが書かれたマスと\n\\(B\\)\nが書かれたマスが左右に隣り合っているかを判定してその結果を出力することが求められます。\n入力を受け取るのは、各言語に用意されている整数型を用いて受け取ればよいです。例えば、C++ ならば以下のように書きます。\nさて、\n\\(A\\)\nが書かれたマスと\n\\(B\\)\nが書かれたマスが左右に隣り合っているかを判定します。ここで、左右に隣り合っているような\n\\(A,B\\)\nの組の個数は\n\\(A<B\\)\nであることに注意すると\n\\(6\\)\n個しかないため、以下のように書くことが出来ます。\n\\(A\\)\nが書かれたマスと\n\\(B\\)\nが書かれたマスが左右に隣り合っているかが分かったので、あとはその結果を出力しましょう。隣り合っているならば\nYes\n、隣り合っていないならば\nNo\nを出力します。\n上記のプログラムを全てつなげることでこの問題を解くことが出来ます。\nまた、少し考えると\n\\(A\\)\nが書かれたマスと\n\\(B\\)\nが書かれたマスが左右に隣り合っているかは\n\\(A<B\\)\nであることに注意すると、\n\\(A\\)\nが\n\\(3\\)\nで割りきれず、かつ\n\\(A+1=B\\)\nが成り立つときとなるので以下のように簡潔に書くことも可能です。",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  int a,b;\n  cin>>a>>b;",
+        "bool answer=false;\n  if(a==1&&b==2) answer=true;\n  if(a==2&&b==3) answer=true;\n  if(a==4&&b==5) answer=true;\n  if(a==5&&b==6) answer=true;\n  if(a==7&&b==8) answer=true;\n  if(a==8&&b==9) answer=true;",
+        "if(answer) cout<<\"Yes\"<<endl;\n  else cout<<\"No\"<<endl;\n}",
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  int a,b;\n  cin>>a>>b;\n  if(a%3!=0&&a+1==b) cout<<\"Yes\"<<endl;\n  else cout<<\"No\"<<endl;\n}"
+      ],
+      "text_sha256": "69aa133d1e8bee5c7e4a6236cf28f838ebe60a066d6f18425f38a715a97935a3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc309/abc309_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc309/editorial/6761",
+      "text": "\\(A, B\\)\nが書かれたマスがそれぞれ上から何行目・左から何列目にあるか求める堅実な解法もあります。\n\\(A - 1\\)\nを\n\\(3\\)\nで割った際の商と余りが、\n\\(A\\)\nが書かれた行と列にそれぞれ対応します（ただし、最上行は\n\\(0\\)\n行目、最左列は\n\\(0\\)\n列目となります）。\n実装例 (Python)",
+      "codes": [
+        "A, B = map(int, input().split())\nra, ca = (A - 1) // 3, (A - 1) % 3\nrb, cb = (B - 1) // 3, (B - 1) % 3\nprint('Yes' if ra == rb and ca + 1 == cb else 'No')"
+      ],
+      "text_sha256": "efef93d4434a959f71004269a79ee29eef6bbbd4d277da30deb9c2e1a916f0ee",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc309/abc309_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

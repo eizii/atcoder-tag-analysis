@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc371_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc371/editorial/10929",
+      "text": "この問題には様々な解法が考えられます。\n一つ目の解法は、入力のパターンが高々 8 パターン（矛盾がない入力は実際には 6 パターン）しかないので、全てのパターンについて場合分けを行うことです。これは if 文を用いて行えますが、やや面倒です。\nより賢い解法として、以下の場合分けが考えられます。\n\\(S_\\mathrm{AB}\\neq S_\\mathrm{AC}\\)\nのとき：A が次男である。\n上を満たさず\n\\(S_\\mathrm{AB}= S_\\mathrm{BC}\\)\nのとき：B が次男である。\n上の二つを満たさないとき：C が次男である。\nこの場合分けのほうが簡明です。\n他にも、大小関係 6 パターンを全て試し、入力の条件を満たすかを確認するといった方針も考えられます。\n以下の実装例は、簡単な場合分けによるものです。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    char a, b, c;\n    cin >> a >> b >> c;\n    if(a != b)\n        cout << \"A\" << endl;\n    else if(a == c)\n        cout << \"B\" << endl;\n    else\n        cout << \"C\" << endl;\n}"
+      ],
+      "text_sha256": "0216b8954c9196169cfc563bda2da17f0db4efe9639af47a1fb66ae231059c6a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc371/abc371_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

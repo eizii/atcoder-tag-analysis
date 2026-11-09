@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc306_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc306/editorial/6605",
+      "text": "出力すべき文字列を変数として作った上でそれを出力しても構いませんが、競技プログラミングにおいては出力が正しければよいので、以下手順で少しサボった実装でもこの問題に正解できます。 \\(S\\) の文字をひとつずつ for ループで着目し、その文字を \\(2\\) 度出力する。 但し、出力の際過剰な空白や改行等が入らないように注意する必要があります。 実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  string s;\n  cin >> n >> s;\n  for(int i=0;i<n;i++){\n    cout << s[i] << s[i];\n  }cout << \"\\n\";\n  return 0;\n}\n",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n;\n  string s;\n  cin >> n >> s;\n  for(auto &letter : s){\n    cout << letter << letter;\n  }cout << \"\\n\";\n  return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "3499f9a44f9414efc782122c439d899cb1403ccb7811f32bb2d28d78cc5e13a8"
+    }
+  ],
+  "status": "available"
+}

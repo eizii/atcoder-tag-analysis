@@ -1,0 +1,48 @@
+{
+  "problem_id": "abc467_d",
+  "title": "Concentric Circles",
+  "contests": [
+    {
+      "contest_id": "abc467",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 928,
+  "raw_difficulty": 928,
+  "contest_id": "abc467",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc467/tasks/abc467_d",
+  "statement": "配点 : 425 点 問題文 xy 平面上に以下の条件を全て満たす 2 個の円 C_1, C_2 は存在しますか？　ただし C_1, C_2 は同一である可能性があります。 異なる 2 点 (P_x, P_y), (Q_x, Q_y) は C_1 の円周上にある。 異なる 2 点 (R_x, R_y), (S_x, S_y) は C_2 の円周上にある。 C_1 と C_2 は中心が一致する。 T 個のテストケースが与えられるので、それぞれについて答えを求めてください。 制約 1 \\leq T \\leq 5 \\times 10^4 -10^9 \\leq P_x,P_y,Q_x,Q_y,R_x,R_y,S_x,S_y \\leq 10^9 (P_x, P_y) \\neq (Q_x, Q_y) (R_x, R_y) \\neq (S_x, S_y) 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 T \\mathrm{case}_1 \\mathrm{case}_2 \\vdots \\mathrm{case}_T 各テストケース \\mathrm{case}_t は以下の形式で与えられる。 P_x P_y Q_x Q_y R_x R_y S_x S_y 出力 T 行出力せよ。 t 行目には t 番目のテストケースの答えを出力せよ。 各テストケースでは、条件を全て満たす 2 個の円 C_1, C_2 が存在する場合は Yes を、存在しない場合は No を出力せよ。 入力例 1 3\n2 0 1 1 -1 0 1 2\n1 0 -1 0 0 1 0 -1\n4 0 3 1 2 0 1 1 出力例 1 Yes\nYes\nNo 1 番目のテストケースを考えます。以下の図に示す通り、中心が (1,0) で半径が 1 の円を C_1 、中心が (1,0) で半径が 2 の円を C_2 とすると条件を満たします。 2 番目のテストケースでは、 C_1 と C_2 をともに中心が (0,0) で半径が 1 の円とすると条件を満たします。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 xy 平面上に以下の条件を全て満たす 2 個の円 C_1, C_2 は存在しますか？　ただし C_1, C_2 は同一である可能性があります。 異なる 2 点 (P_x, P_y), (Q_x, Q_y) は C_1 の円周上にある。 異なる 2 点 (R_x, R_y), (S_x, S_y) は C_2 の円周上にある。 C_1 と C_2 は中心が一致する。 T 個のテストケースが与えられるので、それぞれについて答えを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq T \\leq 5 \\times 10^4 -10^9 \\leq P_x,P_y,Q_x,Q_y,R_x,R_y,S_x,S_y \\leq 10^9 (P_x, P_y) \\neq (Q_x, Q_y) (R_x, R_y) \\neq (S_x, S_y) 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 T \\mathrm{case}_1 \\mathrm{case}_2 \\vdots \\mathrm{case}_T 各テストケース \\mathrm{case}_t は以下の形式で与えられる。 P_x P_y Q_x Q_y R_x R_y S_x S_y"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 T 行出力せよ。 t 行目には t 番目のテストケースの答えを出力せよ。 各テストケースでは、条件を全て満たす 2 個の円 C_1, C_2 が存在する場合は Yes を、存在しない場合は No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\n2 0 1 1 -1 0 1 2\n1 0 -1 0 0 1 0 -1\n4 0 3 1 2 0 1 1"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\nYes\nNo 1 番目のテストケースを考えます。以下の図に示す通り、中心が (1,0) で半径が 1 の円を C_1 、中心が (1,0) で半径が 2 の円を C_2 とすると条件を満たします。 2 番目のテストケースでは、 C_1 と C_2 をともに中心が (0,0) で半径が 1 の円とすると条件を満たします。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc467/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:54.107000+00:00",
+  "statement_sha256": "d06430fc8e7915706b09982247eefc424ebc63b2092889586ed0254643d6b9fa",
+  "editorials": []
+}

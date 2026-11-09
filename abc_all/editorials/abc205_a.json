@@ -1,0 +1,31 @@
+{
+  "problem_id": "abc205_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc205/editorial/2039",
+      "text": "\\(1\\)\nmL あたり\n\\(A/100\\)\nkcal であるので、答えは\n\\(AB / 100\\)\nとなります。\n以下のようなコードで正解することができます (C++) :\nここで、「100 で割る」という操作を\nA * B / 100\nと書いてしまうと、これは整数同士の演算であるので、切り捨ての除算となります。例えば\n25 * 25 / 100\nは\n6.25\nではなく\n6\nとなってしまいます。\n100.0\nは double 型であると解釈されるので、実数の演算となります。\n明示的に double 型にキャストすることも可能です :\nなお、この問題の制約では上記のコードで正解を得られますが、\n\\(A = 12345, B = 98765\\)\nを入力として与えると、\n1.21925e+07\nと出力されてしまいます。\nstd::fixed\nや\nstd::setprecision\nを用いることで正確な表記になります。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n  int A, B;\n  cin >> A >> B;\n  cout << A * B / 100.0 << '\\n';\n  return 0;\n}",
+        "#include <iostream>\nusing namespace std;\n\nint main() {\n  int A, B;\n  cin >> A >> B;\n  cout << ((double) (A * B)) / 100 << '\\n';\n  return 0;\n}",
+        "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n  int A, B;\n  cin >> A >> B;\n  // std::fixed -> 固定小数点で出力することを指定\n  // std::setprecision(int n) -> 小数点以下 n 桁で出力することを指定\n  cout << fixed << setprecision(2);\n  cout << A * B / 100.0 << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "15230465f244be5b843890f7911991f2d7289bf79db22982b7ae0c1de1fa84b4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc205/abc205_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc205/editorial/2093",
+      "text": "答えは\n\\(AB/100\\)\nです。\n次のコードでACすることができます（\n実際の提出\n）。\n以下では、少し発展的な話題として、上のコードが出力するものの誤差を評価することについて考えます。\nここから下の内容はC++や浮動小数点数に関する文章をあまり引っかかることなく読み進められるような中級者以上のユーザーを主な対象として書いています。\nまず、\n\\(A\\)\nと\n\\(B\\)\nは\nint\nの範囲に収まる値を入力として受け取ります。\n5行目、およびそれ以前に誤差はありません。\n6行目では、\n((A * B) / 100.0)\nの計算が行われます。\nここでは、次の順番で処理が行われます。\nA\nと\nB\nの積を計算する\n1.の結果を\nint\nから\ndouble\nへキャストする\n2.の結果を\n100.0\nで割る\nそれぞれのパートで生まれうる誤差について考えます。\nA\nと\nB\nの積は、結果が\n\\(0\\)\n以上\n\\(1000000\\)\n以下の整数になります。これは\nint\n型に収まるため、誤差はありません。\n1.の結果を\nint\nから\ndouble\nへキャストするとき、C++17 の規格の [7.10.2] に「The result is exact if possible.」とある通り、今回は\ndouble\nで正確に表現できる値のため誤差はありません。\n100.0\nも\ndouble\nで正確に表現できる値なので、ここで行われるのは正確に値が\n\\(AB\\)\nと\n\\(100\\)\nである\ndouble\n型の変数どうしの割り算です。ここで\nstd::numeric_limits<double>::is_iec559\nが\ntrue\nなので、型\ndouble\nは IEEE 754 に従っています。よって、その結果は\n\\(AB/100\\)\nを\ndouble\nに表現可能な値に（ここでは、偶数への丸めによって）丸めたものになります。\nstd::numeric_limits<double>::epsilon()\nが返す値を\n\\(\\varepsilon\\)\nとすると、その相対誤差もしくは絶対誤差は\n\\(\\dfrac{\\varepsilon}{2}\\)\n以下です。特に、\n\\(AB/100\\)\nは\n\\(0\\)\nか\n\\(1/100\\)\n以上なので、その相対誤差は\n\\(AB/100=0\\)\nのとき\n\\(0\\)\n、そうでないとき\n\\(50\\varepsilon\\)\n以下です。\n今の環境では\n\\(50\\varepsilon\\)\nは\n\\(2\\times10^{-14}\\)\nで上からおさえられることに気をつけます。\nstd::cout\nに上で計算した値を渡し、出力します。\nstd::cout\nはデフォルトでは整数部小数部合わせて\n\\(6\\)\n桁出力します。\n今、浮動小数点数の丸め方は偶数への丸めになっています。\n今回の制約のもとで、ある高々\n\\(6\\)\n桁の数\n\\(X\\)\nと整数\n\\(k\\)\nが存在して\n\\(AB/100=X/10^k\\)\nが成り立ちます。\n\\(X=0\\)\nのとき、計算結果は\n\\(0\\)\nであり、出力も\n\\(0\\)\nなので誤差はありません。\n\\(X\\neq0\\)\nのとき、絶対誤差は高々\n\\(2X\\times10^{-14-k}\\)\nであるので、\nstd::cout\nの丸めと合わせて出力される値は\n\\(AB/100\\)\nと等しいことが言えます。\n以上から、上のコードは真の値と完全に等しい出力を行います\n（ただし、この問題では想定解答からの誤差によって正答が保証されるため、上のコードが出力するものと真の値との間に誤差がないことは上のコードがACすることを必ずしも意味しないことに注意してください）。\n余談ですが、入力例 1\n45 200\nに対して\n9.00000e+01\nを出力する以下のコードもACを得られます（\n実際の提出\n）。",
+      "codes": [
+        "#include <iostream>\n\nint main(){\n  int A, B;\n  std::cin >> A >> B;\n  std::cout << A * B / 100.0 << std::endl;\n  return 0;\n}",
+        "#include <iostream>\n#include <iomanip>\n\nint main(){\n  int A, B;\n  std::cin >> A >> B;\n  std::cout << std::scientific << std::setprecision(5);\n  std::cout << A * B / 100.0 << std::endl;\n  return 0;\n}"
+      ],
+      "text_sha256": "cc6e2c5247f9646bf7474ac889f34051843567925aba705ad3ef37d0c69530f6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc205/abc205_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

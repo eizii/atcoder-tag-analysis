@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc184_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc184/editorial/337",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practicecontest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nこの問題では、\n\\(a,b,c,d\\)\nを入力し、\n\\(a \\times d - b \\times c\\)\nを出力すれば良いです。\n回答例 (C++)\n回答例 (Python)",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(){\n    int a, b, c, d;\n    cin >> a >> b >> c >> d;\n    cout << a * d - b * c << endl;\n}",
+        "a, b = map(int, input().split())\nc, d = map(int, input().split())\nprint(a * d - b * c)"
+      ],
+      "text_sha256": "18274df5dc7ef5504d854d8e0e3f4e1de522e658010b5ae2235d98db1638cd9b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc184/abc184_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

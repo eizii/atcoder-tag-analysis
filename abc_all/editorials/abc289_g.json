@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc289_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc289/editorial/5700",
+      "text": "値段を決めたとき、売上は何人が買うかによってのみ決まるので \\((B _ i) _ i\\) を好きに並べ替えて構いません。\nいま、\\(B _ 1\\geq B _ 2\\geq\\cdots\\geq B _ N\\) とします。 明らかに、買う人数が変わらない範囲ではなるべく値段をつり上げるのが最適です。\nより精密には、ありえる値段は \\(B _ i+C _ j\\) のいずれかであるとして構いません（そうでない場合、現在の値段より大きな \\(B _ i+C _ j\\) のうち最小のものまで値段を上げても買う人数は変わりません）。 すると、\\(i\\) 人が商品を購入するときの売上は \\(i(B _ i+C _ j)\\) となります。\n\\(i=1,2,\\ldots,N\\) に対する値の最大値が \\(j\\) に対する答えなので、この問題は次の関数 \\(f(x)\\) の \\(x=C _ j\\ (1\\leq j\\leq M)\\) における値をそれぞれ求める問題に言い換えられました。\n\\[f(x)=\\max _ {1\\leq i\\leq N}\\left\\{i(x+B _ i)\\right\\}\\]\nこのような式形の問題は「\\(xy\\) 平面上の直線群 \\(l _ i\\colon y=i(x+B _ i)\\) に対して、\\(x=C _ j\\) との交点の \\(y\\) 座標の最大値を求める」と解釈することができます。 例えば、入出力例 1 に対して \\(f(x)\\) や \\(l _ i\\) の図を描くと次のようになります。\n\\(B _ 1\\geq B _ 2\\geq\\cdots\\geq B _ 5\\) となるよう並べ替えてあることに注意してください。 直線群 \\(l _ i:y=a _ ix+b _ i\\) に対して、直線 \\(x=\\alpha\\) との交点の \\(y\\) 座標の最大値を求める問題は、Convex Hull Trick と呼ばれる方法で解くことができます。 Convex Hull Trick では、\\(xy\\) 平面の凸領域 \\(S\\coloneqq\\{(x,y)\\mid {}^\\forall i.\\ y\\geq a _ ix+b _ i\\}\\) を管理することで直線群を管理します。 今回の問題では、直線群が静的でクエリ点 \\(C _ 1,\\ldots,C _ M\\) の先読みも可能なので、（Convex Hull Trick にはいくつかの異なる実装方針がありますが、基本的にどの方針でも）この問題に正解することができます。 実装例は以下のようになります。\n以下の実装例では、直線 \\(l _ i:y=a _ ix+b _ i\\) を「その直線が最大となるような区間の左端」と \\(a _ i,b _ i\\) の \\(3\\) つ組で管理しています。\n追加する直線の傾きに単調性があるので、 vector<tuple> で直線群を管理しています。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <tuple>\n\nint main() {\n    using namespace std;\n\n    unsigned N, M;\n    cin >> N >> M;\n    vector<unsigned long> B(N);\n    for (auto &&b : B) cin >> b;\n    sort(begin(B), end(B), greater<>{});\n\n    vector<tuple<unsigned long, unsigned long, unsigned long>> B_convex{{0, 1, B[0]}};\n    for (unsigned i{1}; i < N; ++i) {\n        unsigned long x, a{i + 1}, b{a * B[i]};\n        do {\n            const auto&[x_prev, a_prev, b_prev]{B_convex.back()};\n            x = (b_prev + a - min(b_prev + a, b + a_prev)) / (a - a_prev); // 前の直線以上になる区間の左端を求める\n            if (x_prev < x) break; // 前の直線が残るなら終了\n            B_convex.pop_back(); // 前の直線の上位互換なら前の直線を消す\n        } while (!empty(B_convex));\n        B_convex.emplace_back(x, a, b);\n    }\n\n    for (unsigned i{}, c; i < M; ++i) {\n        cin >> c;\n        const auto&[_, a, b]{*prev(upper_bound(begin(B_convex), end(B_convex), make_tuple(c + 1, 0UL, 0UL)))};\n        cout << a * c + b << \" \";\n    }\n    cout << endl;\n\n    return 0;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "690f97cf5c4a79e70f3d10f978605cf548574d40ad54a2acdfa5490d939c7936"
+    }
+  ],
+  "status": "available"
+}

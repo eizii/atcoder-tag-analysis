@@ -1,0 +1,432 @@
+          ABC 067 / ARC 078 解説
+
+
+                              writer : camypaper
+
+                           2017 年7 月15 日
+
+
+
+             For international readers: English editorial starts from page 7.
+
+
+A : Sharing Cookies
+
+  A, B, A + B のいずれかが3 で割り切れるかどうかを調べればよい．なお，答えがImpossible
+
+となるのはA ≡B ≡1 mod 3 あるいはA ≡B ≡2 mod 3 の場合のみである．
+
+#include <iostream>
+
+using namespace std;
+
+int main(){
+
+    int a,b;
+
+    cin>>a>>b;
+
+    if(a%3 == 0 || b%3 == 0 || (a+b)%3==0)
+
+        cout<< "Possible" <<endl;
+
+    else cout<< "Impossible" <<endl;
+
+}
+
+
+
+
+
+                                        1
+
+B : Snake Toy
+
+ N 個の棒が長さの昇順に並んでいる場合には，末尾からK 個の棒の長さの和が答えとなる．
+
+よって，初めに棒たちを長さの昇順に並び替えたのち，上述したような貪欲法を適用すればよい．
+
+ C++ などの多くのプログラミング言語では，ソート用の関数が予め用意されていることが多い
+
+ため，ソート関数を実装する必要はないだろう．
+
+#include <algorithm>
+
+#include <iostream>
+
+#include <vector>
+
+using namespace std;
+
+int main(){
+
+    int n,k;
+
+    cin>>n>>k;
+
+    vector<int> l(n);
+
+    for(int i=0;i<n;i++){
+
+        cin>>l[i];
+
+    }
+
+    sort(l.begin(),l.end());
+
+    int ans=0;
+
+    for(int i=0;i<k;i++){
+
+        ans+=l[n-1-i];
+
+    }
+
+    cout<<ans<<endl;
+
+}
+
+
+
+
+
+                                        2
+
+C : Splitting Pile
+
+ N 枚のカードに書かれた数の総和をX とする．カードの山の先頭i 枚のカードに書かれた数の
+
+総和がxi であったとすると，残ったカードたちに書かれた数の和yi はX −xi であり，|yi −xi|
+は|X −2xi| となる．
+  1 からN −1 までの全てのi について|X −2xi| を試せばよい．これはO(N) で実行可能であ
+
+り，十分高速である．
+
+#include <algorithm>
+
+#include <iostream>
+
+#include <vector>
+
+using namespace std;
+
+int main(){
+
+    int n;
+
+    long long X=0,x=0,ans=1000000000000000000LL;
+
+    cin>>n;
+
+    vector<long long> a(n);
+
+    for(int i=0;i<n;i++){
+
+        cin>>a[i];
+
+        X+=a[i];
+
+    }
+
+    for(int i=0;i<n;i++){
+
+        x+=a[i];
+
+        if(i+1<n)ans=min(ans,abs(X-2*x));
+
+    }
+
+    cout<<ans<<endl;
+
+}
+
+
+
+
+
+                                        3
+
+D : Fennec VS. Snuke
+
+ 「マスに色を塗った回数の多いプレイヤーの勝ち，同数の場合は後手の勝ち」というルールのゲー
+
+ムを考えることにする．元のゲームでどちらかのプレイヤーが敗北したあとも色を塗ることが可能
+
+である，と考えると新しいゲームの勝敗と元のゲームの勝敗が一致することが分かる．このとき，
+
+2 人の目的は，自分が色を塗る回数を最大化し，相手が色を塗る回数を最小化することである．
+
+ 与えられるグラフが木であることから，2 人の最善戦略は「マス1 からマスN へのパス上に色
+
+が塗られていないマスが存在するならば色を塗る」であることが示される．マス1 からマスN へ
+
+のパス上に色が塗られていないマスが存在するにも関わらず，それ以外のマスに色を塗った場合，
+
+自分が不利になり相手が有利になることは直感的にも明らかであろう．例えば図?? に示されるよ
+
+うな配置からゲームを開始したとき，上記の戦略に従ったときのみ先手は勝利可能である．従わな
+
+かった場合，後手が最適に行動すると7 個以上のマスを白く塗ることが可能となり，先手が勝つこ
+
+とは不可能である．
+
+ 上記の戦略に従うと，マスi とj の距離をd(i, j) として，マスi の色はd(1, i) ≤d(N, i) なら
+
+ば黒，そうでなければ白となる．結論としてマス1 とマスN の2 点から幅優先探索や深さ優先探
+
+索などを行うことでO(N) でこの問題を解くことが可能である．
+
+
+
+
+
+                 図1 ゲームの初期状態と最終状態の例
+
+
+
+
+
+                                        4
+
+E: Awkward Response
+
+ 解の一例を説明する．
+
+  q(n) をn についての質問の答えがYes ならば1 を，そうでなければ0 を返す関数とする．N
+
+がL 桁の整数であったと仮定する．このとき，L 桁の整数n とN の大小は，str(n) とstr(N) の
+
+大小と一致する．ここで，L + 1 桁の整数10n とN の大小を考えたとき，10n > N が必ず成立
+
+し，str(10n) とstr(N) の大小は以下のように表される．
+
+    • n < N のとき：str(10n) < str(N)
+
+    • n ≥N のとき：str(10n) > str(N)
+
+ 以上より，q(10n) が1 を返す最小の整数n がN と一致することが分かる．さらに，q(10n) に
+
+は単調性が存在するのでn について二分法を行うことでlg N 回程度の質問でN を求めることが
+
+可能である．
+
+ 次に，N の桁数L を求める方法を1 つ説明する．
+  q(10k−1) が式(??) で表されることから，N ̸= 10L−1 の場合は，q(10k−1) = 1 を満たす最大の
+
+k を求めることでL を求められる．
+
+                  
+                  1  (k < L)                                                                                         1  (k = L)
+                        q(10k−1) =                                                       (1)
+                                    0  (k > L かつN ̸= 10L−1)                                    
+                                   1  (k > L かつN = 10L−1)
+
+ N = 10L−1 の場合は，q(2 × 10k−1) が式(??) のように表されることから，q(2 × 10k−1) = 1
+
+を満たす最小のk を求めることで，L を求められる．
+
+                       
+                                              0  (k < L)
+                               q(2 × 10k−1) =  1  (k = L)                              (2)
+                                              
+                                           1  (k > L)
+
+ 解法をまとめると，以下のように表される．
+
+    1. N = 10L−1 の場合に注意して，N の桁数L を求める．
+
+    2. 二分法を用いてq(10n) = 1 なる最小のn を求める．
+
+ どのような場合でも質問回数はmax(2L, L + lg N) 回以下となり，64 回という制限に対しては
+
+十分余裕がある．
+
+
+
+
+
+                                        5
+
+F : Mole and Abandoned Mine
+
+ はじめに，問題設定を以下のように言い換えておく．言い換えた問題設定での答えをx として，
+∑M
+  i=1 ci −x が元の問題の答えである．
+
+ N 頂点の辺のないグラフが与えられる．いくつか辺を追加して，頂点1 から頂点N への点
+
+ 素パスがただ1 つ存在するようにしたい．
+
+ 辺を追加する方法はM 個あり，頂点ai, bi 間に辺を追加するとci 利得を得る．得られる利
+
+ 得の総和を最大化せよ．
+
+
+ 頂点1 から頂点N への点素パスがただ1 つ存在するための条件は，「頂点1 から頂点N への
+
+パス上にある辺がいずれも橋である」ことである．頂点1 から頂点N へのパスがただ1 つ存在
+
+し，そのパス上に，橋でない辺が存在したとする．このとき，そのような辺を取り除いてもグラフ
+
+は連結であるから，頂点1 から頂点N へのパスは他にも存在するはずである．これは点素パスが
+
+ただ1 つ存在することに矛盾する．
+
+ ここで，頂点1 から頂点N への点素パスがただ1 つ存在するグラフにおいて，頂点1 からN
+
+へのパス上(両端を含む) にある頂点をターミナルと呼ぶことにする．最適解においては，ターミ
+
+ナル同士をつなぐ辺を取り除いたとき，各連結成分内においては可能な限り辺が追加されているは
+
+ずである．そのため，O(2N × M) かけて事前に計算をしておけば，各連結成分内での利得の総和
+
+は容易に計算可能である．
+
+ さて，パスを1 つ固定して，その他の頂点たちがどのターミナルに属するかを全探索すること
+
+を考えよう．このままでは，実行時間制限には間に合わない．そこで，頂点1 からN までのター
+
+ミナルを順番に決めていきながら，現在着目しているターミナルに属する頂点たちを全て試して
+
+いくことを考える．S を{1, 2, 3, . . . , N} の部分集合として，dp(S, t) を「S に含まれる頂点たち
+
+を使用しており，t が現在着目しているターミナルであるときの，得られる利得の総和の最大値」
+
+とする．遷移としては，次のターミナルに接続するか，現在のターミナルに属する頂点集合を試す
+
+か，の2 つの遷移を試せばよい．適切に実装を行うことで，全体としてO(3N × N) で実行可能で
+
+ある．
+
+
+
+
+
+                                        6
+
+        ABC 067 / ARC 078 Editorial
+
+
+                              writer : camypaper
+
+                              July 15th, 2017
+
+
+
+A, B, C
+
+  See the sample codes of Japanese editorial above.
+
+
+
+
+
+                                        1
+
+D : Fennec VS. Snuke
+
+  Let v1 = 1, v2, . . . , vk−1, vk = N be the only path from cell 1 to cell N.
+
+  Let d(i, j) be the distance between cell i and cell j.
+
+  In the optimal strategy, Black should color the vertices in the order v2, v3, . . . (while this is
+
+possible), and after that Black can choose arbitrary valid moves. This way, Black can make
+
+sure that she can get all vertices v such that d(1, v) ≤d(N, v), no matter how White plays.
+
+ On the other hand, White should color the vertices in the order vk1, vk−2, . . . (while this is
+possible), and after that White can choose arbitrary valid moves. This way, White can make
+
+sure that he can get all vertices v such that d(1, v) > d(N, v), no matter how Black plays.
+
+  To summarize, we can solve this task in O(N) by computing distances from two cells 1 and
+
+N.
+
+
+
+
+
+                   図1 An example of a game
+
+
+
+
+
+                                        2
+
+E: Awkward Response
+
+  First, we should query with 109. We get ’Y’ iﬀN = 1, 10, . . . , 109.
+
+  Next, we want to compute the number of digits in N. Let’s call it L.
+
+  Let q(n) denote the result of the query: 1 means Yes, 0 means No.
+  In case N = 10L−1, we use the following fact:
+
+                       
+                                              0  (k < L)
+                               q(2 × 10k−1) =  1  (k = L)                              (1)
+                                              
+                                           1  (k > L)
+
+  Thus, L is the minimum k that satisﬁes q(2 × 10k−1) = 1.
+  In case N ̸= 10L−1, we use the following fact:
+
+                   
+                   1  (k < L)                                                                                            1  (k = L)
+                         q(10k−1) =                                                      (2)
+                                      0  (k > LandN ̸= 10L−1)                                      
+                                   1  (k > LandN = 10L−1)
+
+  Thus, L is the maximum k that satisﬁes q(10k−1) = 1.
+
+  Next, for a given L-digit number n, we can check if N < n by querying 10n.
+
+    • If n < N, q(10n) = 0.
+
+    • If n ≥N, q(10n) = 1.
+
+  Thus, we can compute N in lg N queries by binary search.
+
+  The number of queries is about max(2L, L + lg N).
+
+
+
+
+
+                                        3
+
+F : Mole and Abandoned Mine
+
+  Suppose that we have a graph that has exactly one path from vertex 1 to vertex N. In this
+
+graph, all edges on the unique path from 1 to N must be bridges. (Otherwise, we can ﬁnd a
+
+path from 1 to N even if we remove one of those edges, and this is a contradiction).
+
+  Let S be a subset of vertices, and t be a vertex in S. Deﬁne dp(S, t) as the minimum cost
+
+required to achieve the condition ”There is a unique path from 1 to t that only uses vertices
+
+in S”. We have two transitions:
+
+  (Here, cost(S, T) denotes the sum of costs of all edges between two sets S and T.)
+
+    • Let u /∈S be a vertex. If there is an edge between t and u, we can reach dp(S ∪{u}, u)
+
+      with cost dp(S, t) + cost(S \ {t}, {u}).
+
+    • Let T be a set of vertices that is disjoint with S. We can reach dp(S ∪T, t) with cost
+
+      (dp(S, t) + cost(S \ {t}, T).
+
+  With proper pre-computation, we can compute cost(S, T) in O(1) and this solution works
+in O(3N × N).
+
+
+
+
+
+                                        4

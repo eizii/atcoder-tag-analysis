@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc314_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc314/editorial/6953",
+      "text": "試合によって\n\\(2\\)\nつのチームが併合されていく過程を表す下図のような根付き木\n\\(T\\)\nを考えます。\n上の図は入力例１に対応する根付き木です。\n各ノードは大会中のある時点でのあるチームに対応し、特に、葉は各プレイヤー（そのプレイヤー\n\\(1\\)\n人のみからなるチーム）に対応します。\nチーム\n\\(A\\)\nに対応するノードを以下では単にノード\n\\(A\\)\nと呼びます。\nより具体的には、\n\\(T\\)\nは下記の手順でつくられます。\nまず、大会開始時の状態の再現として、\n\\(N\\)\n個のノード\n\\(\\lbrace 1 \\rbrace, \\lbrace 2 \\rbrace, \\ldots, \\lbrace N \\rbrace\\)\nのみからなる辺を持たないグラフ\n\\(T\\)\nからはじめます。\nその後、各試合\n\\(i = 1, 2, \\ldots, N-1\\)\nの進行に対応して、\n\\(i\\)\nの昇順に下記の通りに\n\\(T\\)\nを更新します。\n試合\n\\(i\\)\nで対戦するチームを\n\\(A\\)\nと\n\\(B\\)\nとする。ノード\n\\((A \\cup B)\\)\nを新たに追加し、ノード\n\\(A\\)\nとノード\n\\(B\\)\nをノード\n\\((A \\cup B)\\)\nの子とする。\nノード\n\\((A \\cup B)\\)\nとノード\n\\(A\\)\nを 結ぶ辺の重みを、試合\n\\(i\\)\nにおけるチーム\n\\(A\\)\nの勝率\n\\(|A|/(|A|+|B|)\\)\nとし、同様に、ノード\n\\((A \\cup B)\\)\nとノード\n\\(B\\)\nを結ぶ辺の重みを、試合\n\\(i\\)\nにおけるチーム\n\\(B\\)\nの勝率\n\\(|B|/(|A|+|B|)\\)\nと する。\nUnionFind を用いて上記の手順をシミュレーションすることで、根付き木\n\\(T\\)\nが構築できます。\nプレイヤー\n\\(i\\)\nが所属するチームが勝つ回数の期待値\n\\(E_i\\)\nは、期待値の線形性から、プレイヤー\n\\(i\\)\nが参加する試合全てにわたる「プレイヤー\n\\(i\\)\nが所属するチームの勝率」の総和です。\nプレイヤー\n\\(i\\)\nが参加する各試合は、\n\\(T\\)\n上では葉\n\\(\\lbrace i \\rbrace\\)\nの各（真の）祖先に対応するので、\n\\(E_i\\)\nは\n\\(T\\)\nの根から葉\n\\(\\lbrace i \\rbrace\\)\nまでのパス上の辺の重みの総和です。\nしたがって、\n\\(T\\)\n上で根から深さ優先探索等を行うことで、\n\\(E_1, E_2, \\ldots, E_N\\)\nをまとめて\n\\(O(N)\\)\n時間で求めることができます。",
+      "codes": [],
+      "text_sha256": "296e3104aa7e6084aa458c762323a595c14dc15ad07697bb212cf3e2fa212a3a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc314/abc314_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc314/editorial/6978",
+      "text": "以降では、「人数の多いチームの末尾に人数の少ないチームのプレイヤーを (順序を維持したまま) 全員追加し、人数の少ないチームを削除する」という操作を各対戦について順番に行うことを、\nマージテク操作\nと呼びます。\nまず、マージテク操作を行い、最終的にできた\n\\(1\\)\nチームを表す数列を\n\\(A\\)\nとします。\n\\(i = 0, 1, ..., n-1\\)\nについて、プレイヤー\n\\(A_i\\)\nの番号を\n\\(i\\)\nに変更します。\nもう一度 (振り直した番号のもと) 同様のマージテク操作を行うことを考えます。\nこのとき、途中登場するすべてのチームは連続な整数の列で表すことができます。\nそのため、マージテク操作を行いながら imos 法で勝率を区間加算することで、最終的に期待値の数列を構築できます。\n累積和をとり、振り直す前の番号を考慮した解答を作成します。\n時間計算量は\n\\(O(N \\log N)\\)\nです。\n実装例 (Python)",
+      "codes": [],
+      "text_sha256": "576cffa30e3bee5ecdcf82c243e07c4b820d6078f1e4768f08e2d64e74feeed2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc314/abc314_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc314/editorial/13781",
+      "text": "基本的な発想は公式解説と同様です。マージ過程を表す木は、２分木になることが知られています。\nこの木をトポロジカルソート順にみればよいです。簡単には「マージを逆順」に見れば、トポロジカルソート順となることがわかるはずです。\nよって、適切にマージ過程を管理しておくことで、（グラフを陽に構築せずとも）求めることができます。\n実装例では適切にans配列をつかいまわすことで、実装をより簡潔にしています。\n実装例（PyPy3）",
+      "codes": [
+        "from atcoder.dsu import DSU\n\nmod = 998244353\n\nn = int(input())\nuf = DSU(n)\nst = []\nfor i in range(n - 1):\n    p, q = map(int, input().split())\n    p = uf.leader(p - 1)\n    q = uf.leader(q - 1)\n    st.append((p, uf.size(p), q, uf.size(q), uf.merge(p, q)))\n\nans = [0] * n\nfor i in range(n - 1):\n    p, sp, q, sq, l = st.pop()\n    tmp = ans[l]\n    s = pow(sp+sq, -1, mod)\n    ans[p] = (tmp + sp * s) % mod\n    ans[q] = (tmp + sq * s) % mod \n\nprint(*ans)"
+      ],
+      "text_sha256": "c398041361c840a017ef59df8cdd9dc434458094639fdb67b9c63fb8e84067a3",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc314/abc314_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

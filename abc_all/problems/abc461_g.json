@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc461_g",
+  "title": "Graph Problem 2026",
+  "contests": [
+    {
+      "contest_id": "abc461",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 2391,
+  "raw_difficulty": 2391,
+  "contest_id": "abc461",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc461/tasks/abc461_g",
+  "statement": "配点 : 625 点 問題文 N 頂点 M 辺の単純無向グラフがあります。 各頂点には 1 から N の番号が、各辺には 1 から M の番号が付いており、辺 i は頂点 u_i と v_i を結んでいます。 以下の条件を満たすように、各頂点 j に 2026 以下の非負整数の重み W_j を割り当てます。 各辺 i について、 W_{u_i}+W_{v_i} \\leq 2026 すべての頂点の重みの合計（すなわち \\sum_{j=1}^{N}{W_j} ）としてあり得る値の最大値を求めてください。 制約 1 \\leq N \\leq 5 \\times 10^4 0 \\leq M \\leq 5 \\times 10^4 1 \\leq u_i \\lt v_i \\leq N (u_1,v_1),(u_2,v_2),\\dots,(u_M,v_M) は相異なる 入力される値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N M u_1 v_1 u_2 v_2 \\vdots u_M v_M 出力 答えを 1 行で出力せよ。 入力例 1 3 2\r\n1 2\r\n2 3 出力例 1 4052 頂点 1,2,3 にそれぞれ 2026,0,2026 の重みを割り当てることで、すべての頂点の重みの合計は 4052 となり、またこれより大きくすることはできないため、答えは 4052 となります。 入力例 2 4 6\r\n1 2\r\n2 3\r\n1 4\r\n2 4\r\n1 3\r\n3 4 出力例 2 4052 入力例 3 2 1\r\n1 2 出力例 3 2026",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 頂点 M 辺の単純無向グラフがあります。 各頂点には 1 から N の番号が、各辺には 1 から M の番号が付いており、辺 i は頂点 u_i と v_i を結んでいます。 以下の条件を満たすように、各頂点 j に 2026 以下の非負整数の重み W_j を割り当てます。 各辺 i について、 W_{u_i}+W_{v_i} \\leq 2026 すべての頂点の重みの合計（すなわち \\sum_{j=1}^{N}{W_j} ）としてあり得る値の最大値を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 5 \\times 10^4 0 \\leq M \\leq 5 \\times 10^4 1 \\leq u_i \\lt v_i \\leq N (u_1,v_1),(u_2,v_2),\\dots,(u_M,v_M) は相異なる 入力される値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M u_1 v_1 u_2 v_2 \\vdots u_M v_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを 1 行で出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 2\r\n1 2\r\n2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4052 頂点 1,2,3 にそれぞれ 2026,0,2026 の重みを割り当てることで、すべての頂点の重みの合計は 4052 となり、またこれより大きくすることはできないため、答えは 4052 となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4 6\r\n1 2\r\n2 3\r\n1 4\r\n2 4\r\n1 3\r\n3 4"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 4052"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 2 1\r\n1 2"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 2026"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc461/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:46.553903+00:00",
+  "statement_sha256": "dd3a0a37bc5ff6f3c359588e3e0bd6eba28b4277f3e0cb43cd35e37fbc802d46",
+  "editorials": []
+}

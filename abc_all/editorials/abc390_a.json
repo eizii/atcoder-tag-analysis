@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc390_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc390/editorial/11967",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nまず、操作は以下の\n\\(4\\)\n通りに限られます。\n\\(A_1\\)\nと\n\\(A_2\\)\nを入れ替える。\n\\(A_2\\)\nと\n\\(A_3\\)\nを入れ替える。\n\\(A_3\\)\nと\n\\(A_4\\)\nを入れ替える。\n\\(A_4\\)\nと\n\\(A_5\\)\nを入れ替える。\nよって、この\n\\(4\\)\nつの操作をそれぞれ実際に試してみて、どれか\n\\(1\\)\nつで\n\\(A\\)\nが昇順になれば答えは\nYes\n、そうでなければ答えは\nNo\nとなります。\n実装例 (Python3)\nこのプログラムは for 文を用いることでより簡潔に書くことができます。\n実装例(Python3)\n実装例(C++)",
+      "codes": [
+        "a = list(map(int, input().split()))\n\nb = a.copy()\nb[0], b[1] = b[1], b[0]\nif b == [1, 2, 3, 4, 5]:\n    print(\"Yes\")\n    exit()\n\nb = a.copy()\nb[1], b[2] = b[2], b[1]\nif b == [1, 2, 3, 4, 5]:\n    print(\"Yes\")\n    exit()\n\nb = a.copy()\nb[2], b[3] = b[3], b[2]\nif b == [1, 2, 3, 4, 5]:\n    print(\"Yes\")\n    exit()\n\nb = a.copy()\nb[3], b[4] = b[4], b[3]\nif b == [1, 2, 3, 4, 5]:\n    print(\"Yes\")\n    exit()\n\nprint(\"No\")",
+        "a = list(map(int, input().split()))\nfor i in range(4):\n    b = a.copy()\n    b[i], b[i + 1] = b[i + 1], b[i]\n    if b == [1, 2, 3, 4, 5]:\n        print(\"Yes\")\n        exit()\nprint(\"No\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main()\n{\n    vector<int> a(5);\n    for (int &i : a)\n        cin >> i;\n    vector<int> ans = {1, 2, 3, 4, 5};\n    for (int i = 0; i < 4; i++)\n    {\n        vector<int> b = a;\n        swap(b[i], b[i + 1]);\n        if (b == ans)\n        {\n            cout << \"Yes\" << endl;\n            return 0;\n        }\n    }\n    cout << \"No\" << endl;\n    return 0;\n}"
+      ],
+      "text_sha256": "c643d33366e9d965a46e7dc063daf38cba8a94f3e5801861049d6667cd359a4e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc390/abc390_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc390/editorial/12042",
+      "text": "答えがYesになる\n\\(A\\)\nは\n\\((2,1,3,4,5),(1,3,2,4,5),(1,2,4,3,5),(1,2,3,5,4)\\)\nの 4 種類のみであることが手計算によりわかります。よって、入力で与えられた数列がこれらのいずれかと一致しているかどうかを判定することでこの問題を解くことができます。\n実装例(Python)\nただし、このように答えを手で列挙してif文で場合分けする解法は、列挙ミスやタイプミスなどの些細な原因でWAとなる可能性が高いため、可能であれば避ける方がよいです。",
+      "codes": [
+        "A=list(map(int,input().split()))\n\nif A==[2,1,3,4,5] or A==[1,3,2,4,5] or A==[1,2,4,3,5] or A==[1,2,3,5,4]:\n  print(\"Yes\")\nelse:\n  print(\"No\")"
+      ],
+      "text_sha256": "63b42b9d3114bd1f949bffdf5dc2716c4a3d7e281e405282331b6d1f05ab5dae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc390/abc390_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

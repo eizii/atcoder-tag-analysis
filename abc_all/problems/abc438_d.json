@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc438_d",
+  "title": "Tail of Snake ",
+  "contests": [
+    {
+      "contest_id": "abc438",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 652,
+  "raw_difficulty": 652,
+  "contest_id": "abc438",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc438/tasks/abc438_d",
+  "statement": "配点 : 400 点 問題文 すぬけ君は蛇を観察しており、どこからどこまでが頭・胴・尾なのかが気になっています。\r\nすぬけ君は蛇を N 個のブロックに区切り、それぞれのブロックについて頭らしさ・胴らしさ・尾らしさを評価しました。\r\nそして、 らしさ の合計が最大になる分け方を考えることにしました。 長さ N の整数列 A = (A_1, A_2, \\ldots, A_N) , B = (B_1, B_2, \\ldots, B_N) , C = (C_1, C_2, \\ldots, C_N) が与えられます。 整数の組 (x, y) が 1 \\leq x < y < N を満たすとき、 \\displaystyle\\sum_{i = 1}^{x} A_i + \\sum_{i = x + 1}^{y} B_i + \\sum_{i = y + 1}^{N} C_i の値として取り得る最大値を求めてください。 制約 3 \\leq N \\leq 3 \\times 10^5 1 \\leq A_i, B_i, C_i \\leq 10^6 入力される値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N B_1 B_2 \\ldots B_N C_1 C_2 \\ldots C_N 出力 答えを出力せよ。 入力例 1 5\r\n1 4 2 4 3\r\n2 3 4 2 2\r\n3 2 4 4 3 出力例 1 16 (x, y) = (2, 3) とすると \\displaystyle\\sum_{i = 1}^{x} A_i + \\sum_{i = x + 1}^{y} B_i + \\sum_{i = y + 1}^{N} C_i = 1 + 4 + 4 + 4 + 3 = 16 となります。 入力例 2 3\r\n1 1 1\r\n1 1 1\r\n1 1 1 出力例 2 3 入力例 3 6\r\n2 10 7 7 7 11\r\n5 7 9 10 9 12\r\n6 6 7 10 12 7 出力例 3 50",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 すぬけ君は蛇を観察しており、どこからどこまでが頭・胴・尾なのかが気になっています。\r\nすぬけ君は蛇を N 個のブロックに区切り、それぞれのブロックについて頭らしさ・胴らしさ・尾らしさを評価しました。\r\nそして、 らしさ の合計が最大になる分け方を考えることにしました。 長さ N の整数列 A = (A_1, A_2, \\ldots, A_N) , B = (B_1, B_2, \\ldots, B_N) , C = (C_1, C_2, \\ldots, C_N) が与えられます。 整数の組 (x, y) が 1 \\leq x < y < N を満たすとき、 \\displaystyle\\sum_{i = 1}^{x} A_i + \\sum_{i = x + 1}^{y} B_i + \\sum_{i = y + 1}^{N} C_i の値として取り得る最大値を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 3 \\leq N \\leq 3 \\times 10^5 1 \\leq A_i, B_i, C_i \\leq 10^6 入力される値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\ldots A_N B_1 B_2 \\ldots B_N C_1 C_2 \\ldots C_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\n1 4 2 4 3\r\n2 3 4 2 2\r\n3 2 4 4 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 16 (x, y) = (2, 3) とすると \\displaystyle\\sum_{i = 1}^{x} A_i + \\sum_{i = x + 1}^{y} B_i + \\sum_{i = y + 1}^{N} C_i = 1 + 4 + 4 + 4 + 3 = 16 となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\r\n1 1 1\r\n1 1 1\r\n1 1 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 3"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 6\r\n2 10 7 7 7 11\r\n5 7 9 10 9 12\r\n6 6 7 10 12 7"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 50"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc438/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:17.782917+00:00",
+  "statement_sha256": "03aa6d876134230e9be86ca4c1093694b3c0bf0a23955bd904ea9b220cd0c1de",
+  "editorials": []
+}

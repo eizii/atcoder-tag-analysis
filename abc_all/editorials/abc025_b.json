@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc025_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc025/editorial.pdf",
+      "text": "問題B – 双子とスイカ割り\n\f\n問題概要\n\n• 𝑁 個の移動についての情報(東に 3 メートルとか西に 7 メートルとか)\n が与えられます。\n• 𝑁 個の移動後にどこにいるのかを計算してください。\n• ただし、移動距離の指定が 𝐴 メートルより少ないなら 𝐴 メートルの移\n 動に、𝐵 メートルより多いなら 𝐵 メートルの移動に変更されます。\n\n• 1 ≦𝑁≦100\n• 1 ≦𝐴≦𝐵≦100\n• 1 ≦(指定距離) ≦100\n\f\n解法\n\n• 上から順にシミュレートします。\n• 西方向へ 𝑋 メートル移動する処理を、東方向へ −𝑋 メートル移動す\n るとして、現在位置も初期位置から東に 𝑌 メートル(初期位置よりも\n 西側なら 𝑌 は負の値になる)としておくことで、移動の処理が簡単に\n なります。",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "5d34ba4392d3f0414b2f9375c28bf8c6b09f1902b8f46b97578876658d5d8ff9"
+    }
+  ],
+  "status": "available"
+}

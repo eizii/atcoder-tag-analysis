@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc222_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc222/editorial/2751",
+      "text": "まず、駒の移動により各辺を何度通過するかをDFSなどを用いて求めます。辺\n\\(i\\)\nを\n\\(C_i\\)\n回通過するとき、問題は「\n\\(C_1,\\ldots,C_{N-1}\\)\nを\n\\(2\\)\n組に分け、一方の合計を\n\\(R\\)\n、他方の合計を\n\\(B\\)\nとするとき、\n\\(R-B=K\\)\nとする方法は何通りか？」となります。\nさらに、\n\\(S=C_1+\\ldots+C_{N-1}\\)\nとおくと、「\n\\(C_1,\\ldots,C_{N-1}\\)\nからいくつか選んで、和を\n\\(\\frac{K+S}{2}\\)\nにする方法は何通りか？」と読み替えることができます。\nしたがってこれは\n\\(DP[i][j]=\\)\n\\(C_1,\\ldots,C_i\\)\nからいくつか選んで和を\n\\(j\\)\nにする方法の数\nというDPにより求めることができます。\n\\(\\frac{K+S}{2}\\)\nが整数にならないケースや\n\\(0\\)\n未満になるケースに注意してください。\n\\(C_i\\)\nを求めるために DFS をする部分が\n\\(O(NM)\\)\n、DP部分が\n\\(O(N(NM+|K|))\\)\nかかり、計算量は全体で\n\\(O(N^2M+N|K|)\\)\nとなります。\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nconst int mod=998244353;\n\nvector<vector<pair<int,int>>>G;\nvector<int>C;\n\nint dfs(int v,int pre,int goal){\n\tif(v==goal)return 1;\n\tfor(auto [vv,i]:G[v])if(vv!=pre){\n\t\tif(dfs(vv,v,goal)){\n\t\t\tC[i]++;\n\t\t\treturn 1;\n\t\t}\n\t}\n\treturn 0;\n}\n\nint main(){\n\tint N, M, K;\n\tcin >> N >> M >> K;\n\tvector<int>A(M);\n\t\n\tfor(int i=0;i<M;i++){\n\t\tcin >> A[i];\n\t\tA[i]--;\n\t}\n\tG.resize(N);\n\tfor(int i=0;i<N-1;i++){\n\t\tint x,y;\n\t\tcin >> x >> y;\n\t\tx--,y--;\n\t\tG[x].push_back({y,i});\n\t\tG[y].push_back({x,i});\n\t}\n\t\n\tC.resize(N-1);\n\tfor(int i=0;i<M-1;i++)dfs(A[i],-1,A[i+1]);\n\t\n\tint S=0;\n\tfor(int i=0;i<N-1;i++)S+=C[i];\n\tif((S+K)%2 || S+K<0){\n\t\tcout << 0;\n\t\treturn 0;\n\t}\n\n\tvector<int>dp(100001);\n\tdp[0]=1;\n\tfor(int i=0;i<N-1;i++)for(int x=100000;x>=C[i];x--)(dp[x]+=dp[x-C[i]])%=mod;\n\tcout << dp[(S+K)/2];\n}"
+      ],
+      "text_sha256": "afd1359832c26f17d3ac2cb6c60c12727d42147b5c52bc436734eaeff1b9918d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc222/abc222_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,30 @@
+{
+  "problem_id": "abc344_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc344/editorial/9487",
+      "text": "数列\n\\(A\\)\nに対し問題文中の指示通りに操作を行うと、\n\\(1\\)\n回の操作に\n\\(\\Theta(|A|)\\)\n時間かかるケースが存在するため、全体で\n\\(\\Omega(Q^2)\\)\n時間かかるケースが存在し TLEとなります。（\n\\(|A|\\)\nは数列\n\\(A\\)\nの長さを表す）\nこの問題は双方向リストというデータ構造を用いて解くことができます。双方向リストとは直感的には、各要素が「自分の前の要素」と「自分の後の要素」の情報のみを持つデータ構造のことです。\n要素の追加・削除を行うごとに、前後の要素の「自分の前の要素」「自分の後の要素」の情報を更新していきます。双方向リストの先頭から必要な値を探すと線形時間かかりますが、連想配列などを用いて値からリストのノードを高速に求められるようにしておくことで、全ての処理を高速に行うことができます。\n例として、以下の入力に対しての処理を図示します。図ではわかりやすさのために 値を\n\\(A\\)\n内での順に並べていますが、そうする必要はないことも確認してください。\n以上を実装することでこの問題を解くことができます。\n実装の際には先頭や末尾の要素が削除されるケースなどに注意してください。番兵を用意してもよいでしょう。\n実装例(Python)",
+      "codes": [
+        "3\n3 1 4\n2\n1 1 2\n2 3"
+      ],
+      "text_sha256": "c2dc04ca7a2a3d46d4589cbd35f4d87eb4e3e3ba752850ce871a6b9568ba664d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc344/abc344_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc344/editorial/9633",
+      "text": "公式解説\nの内容は前提とします。また、C++ での実装を主に扱います。\nC++ の標準ライブラリには双方向リストの機能を持つ\nstd::list\nがあります。std::list のメソッドのうち特によく使うのは次の\n\\(2\\)\nつです。\ninsert\n: リスト上の位置をイテレータによって指定し、その位置に要素を挿入する\nerase\n: リスト上の位置をイテレータによって指定し、その位置の要素を削除する\n本問では、挿入・削除を行う位置が要素の値によって指定されます。そこで、値からイテレータを得ることのできる連想配列（std::map や std::unordered_map 等）を別途用意しておけばよいです。\nイテレータについては、次の記事が参考になります。\nC++のイテレータを視覚的に理解する（競プロ向け） - ARMERIA\n以上の内容を踏まえた C++ での実装例を下記に示します。（\nusing namespace std;\nをしている場合は\nstd::\nは不要です。）",
+      "codes": [
+        "ls.insert(イテレータ, 要素)",
+        "ls.erase(イテレータ)",
+        "#include <iostream>\n#include <list>\n#include <map>\n\nint main()\n{\n  // 初期状態を入力から生成\n  int N;\n  std::cin >> N;\n  std::list<int> ls;  // 双方向リスト\n  std::map<int, std::list<int>::iterator> mp;  // 値からリストのイテレータを得るための map\n  for (int i = 0; i < N; i++)\n  {\n    int a;\n    std::cin >> a;\n    ls.insert(ls.end(), a);       // リストの末尾に挿入 (push_back と同じこと)\n    mp[a] = std::prev(ls.end());  // a を指すイテレータを記録\n  }\n\n  // クエリに答える\n  int Q;\n  std::cin >> Q;\n  while (Q--)\n  {\n    int t;\n    std::cin >> t;\n    if (t == 1)\n    {\n      int x, y;\n      std::cin >> x >> y;\n      auto it = mp[x];              // x を指すイテレータ\n      ls.insert(std::next(it), y);  // x の直後に y を挿入\n      mp[y] = std::next(it);        // y を指すイテレータを記録\n    }\n    else\n    {\n      int x;\n      std::cin >> x;\n      auto it = mp[x];  // x を指すイテレータ\n      mp.erase(x);      // x のイテレータの記録を削除\n      ls.erase(it);     // リストから x を削除\n    }\n  }\n  \n  // 答えを出力\n  for (int val : ls)\n    std::cout << val << \" \";\n  std::cout << std::endl;\n}"
+      ],
+      "text_sha256": "0caa85bdd2e62d1ec7ed4f4cb15b49c6aa591d8ea2226e18588d9716937ca3cd",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc344/abc344_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

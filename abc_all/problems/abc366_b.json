@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc366_b",
+  "title": "Vertical Writing",
+  "contests": [
+    {
+      "contest_id": "abc366",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 180,
+  "raw_difficulty": 80,
+  "contest_id": "abc366",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc366/tasks/abc366_b",
+  "statement": "配点 : 200 点 問題文 横書きの文章が与えられます。縦書きに直してください。空白を * で埋めてください。 N 個の、英小文字からなる文字列 S_1,S_2,\\dots,S_N が与えられます。これらの文字列の長さの最大値を M とします。 以下の条件を満たす M 個の文字列 T_1,T_2,\\dots,T_M を出力してください。 各 T_i は英小文字および * からなる 各 T_i の末尾は * でない 各 1 \\leq i \\leq N について、次が成り立つ 各 1 \\leq j \\leq |S_i| について、 T_j の N-i+1 文字目が存在し、 T_1,T_2,\\dots,T_{|S_i|} それぞれの N-i+1 文字目をこの順に連結したものは S_i と一致する 各 |S_i| + 1 \\leq j \\leq M について、 T_j の N-i+1 文字目は存在しないか、 * である ただし、 |S_i| で文字列 S_i の長さを表します。 制約 N は 1 以上 100 以下の整数 S_i は長さ 1 以上 100 以下の英小文字からなる文字列 入力 入力は以下の形式で標準入力から与えられる。 N S_1 S_2 \\vdots S_N 出力 答えを以下の形式で出力せよ。 T_1 T_2 \\vdots T_M 入力例 1 3\nabc\nde\nfghi 出力例 1 fda\ngeb\nh*c\ni T_3 の 2 文字目を * とすることで、 c が正しい位置に来ます。 T_4 の 2,3 文字目を * とした場合、 T_4 の末尾が * となり、条件を満たしません。 入力例 2 3\natcoder\nbeginner\ncontest 出力例 2 cba\noet\nngc\ntio\nend\nsne\nter\n*r",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 横書きの文章が与えられます。縦書きに直してください。空白を * で埋めてください。 N 個の、英小文字からなる文字列 S_1,S_2,\\dots,S_N が与えられます。これらの文字列の長さの最大値を M とします。 以下の条件を満たす M 個の文字列 T_1,T_2,\\dots,T_M を出力してください。 各 T_i は英小文字および * からなる 各 T_i の末尾は * でない 各 1 \\leq i \\leq N について、次が成り立つ 各 1 \\leq j \\leq |S_i| について、 T_j の N-i+1 文字目が存在し、 T_1,T_2,\\dots,T_{|S_i|} それぞれの N-i+1 文字目をこの順に連結したものは S_i と一致する 各 |S_i| + 1 \\leq j \\leq M について、 T_j の N-i+1 文字目は存在しないか、 * である ただし、 |S_i| で文字列 S_i の長さを表します。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 N は 1 以上 100 以下の整数 S_i は長さ 1 以上 100 以下の英小文字からなる文字列"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N S_1 S_2 \\vdots S_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを以下の形式で出力せよ。 T_1 T_2 \\vdots T_M"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3\nabc\nde\nfghi"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 fda\ngeb\nh*c\ni T_3 の 2 文字目を * とすることで、 c が正しい位置に来ます。 T_4 の 2,3 文字目を * とした場合、 T_4 の末尾が * となり、条件を満たしません。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3\natcoder\nbeginner\ncontest"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 cba\noet\nngc\ntio\nend\nsne\nter\n*r"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc366/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:47.254209+00:00",
+  "statement_sha256": "5f968cb0c90a361c4f317671606c11c7fbb20d109955ac7a65e47c9f9211ca18",
+  "editorials": []
+}

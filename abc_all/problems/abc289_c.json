@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc289_c",
+  "title": "Coverage",
+  "contests": [
+    {
+      "contest_id": "abc289",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 396,
+  "raw_difficulty": 396,
+  "contest_id": "abc289",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc289/tasks/abc289_c",
+  "statement": "配点 : 300 点 問題文 1 以上 N 以下の整数からなる集合が M 個あり、順に S_1, S_2, \\dots, S_M と呼びます。 S_i は C_i 個の整数 a_{i, 1}, a_{i, 2}, \\dots, a_{i, C_i} からなります。 M 個の集合から 1 個以上の集合を選ぶ方法は 2^M-1 通りあります。 このうち、次の条件を満たす選び方は何通りありますか？ 1 \\leq x \\leq N を満たす全ての整数 x に対して、選んだ集合の中に x を含む集合が少なくとも 1 個存在する。 制約 1 \\leq N \\leq 10 1 \\leq M \\leq 10 1 \\leq C_i \\leq N 1 \\leq a_{i,1} \\lt a_{i,2} \\lt \\dots \\lt a_{i,C_i} \\leq N 入力される値は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M C_1 a_{1,1} a_{1,2} \\dots a_{1,C_1} C_2 a_{2,1} a_{2,2} \\dots a_{2,C_2} \\vdots C_M a_{M,1} a_{M,2} \\dots a_{M,C_M} 出力 問題文の条件を満たす集合の選び方の数を出力せよ。 入力例 1 3 3\n2\n1 2\n2\n1 3\n1\n2 出力例 1 3 入力で与えられている集合はそれぞれ S_1 = \\lbrace 1, 2 \\rbrace, S_2 = \\lbrace 1, 3 \\rbrace, S_3 = \\lbrace 2 \\rbrace です。 問題文の条件を満たす集合の選び方は次の 3 通りです。 S_1, S_2 を選ぶ。 S_1, S_2, S_3 を選ぶ。 S_2, S_3 を選ぶ。 入力例 2 4 2\n2\n1 2\n2\n1 3 出力例 2 0 問題文の条件を満たす選び方が存在しない場合もあります。 入力例 3 6 6\n3\n2 3 6\n3\n2 4 6\n2\n3 6\n3\n1 5 6\n3\n1 3 6\n2\n1 4 出力例 3 18",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1 以上 N 以下の整数からなる集合が M 個あり、順に S_1, S_2, \\dots, S_M と呼びます。 S_i は C_i 個の整数 a_{i, 1}, a_{i, 2}, \\dots, a_{i, C_i} からなります。 M 個の集合から 1 個以上の集合を選ぶ方法は 2^M-1 通りあります。 このうち、次の条件を満たす選び方は何通りありますか？ 1 \\leq x \\leq N を満たす全ての整数 x に対して、選んだ集合の中に x を含む集合が少なくとも 1 個存在する。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 10 1 \\leq M \\leq 10 1 \\leq C_i \\leq N 1 \\leq a_{i,1} \\lt a_{i,2} \\lt \\dots \\lt a_{i,C_i} \\leq N 入力される値は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M C_1 a_{1,1} a_{1,2} \\dots a_{1,C_1} C_2 a_{2,1} a_{2,2} \\dots a_{2,C_2} \\vdots C_M a_{M,1} a_{M,2} \\dots a_{M,C_M}"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 問題文の条件を満たす集合の選び方の数を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 3\n2\n1 2\n2\n1 3\n1\n2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 3 入力で与えられている集合はそれぞれ S_1 = \\lbrace 1, 2 \\rbrace, S_2 = \\lbrace 1, 3 \\rbrace, S_3 = \\lbrace 2 \\rbrace です。 問題文の条件を満たす集合の選び方は次の 3 通りです。 S_1, S_2 を選ぶ。 S_1, S_2, S_3 を選ぶ。 S_2, S_3 を選ぶ。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4 2\n2\n1 2\n2\n1 3"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0 問題文の条件を満たす選び方が存在しない場合もあります。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 6 6\n3\n2 3 6\n3\n2 4 6\n2\n3 6\n3\n1 5 6\n3\n1 3 6\n2\n1 4"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 18"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc289/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:11.946978+00:00",
+  "statement_sha256": "38ccfa1826bc612a62df77f5700feaaf8b0f6fe330badb70f7a89d19998b4875",
+  "editorials": []
+}

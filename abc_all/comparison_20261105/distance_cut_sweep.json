@@ -1,0 +1,74 @@
+{
+  "distance": "jaccard",
+  "linkage": "average",
+  "cut_rule": "merge distance <= distance_cut",
+  "count_definition": "flat clusters including single-tag and single-problem clusters; no minimum problem-count filter",
+  "input_tag_counts": {
+    "all_difficulties": 157,
+    "under_2000": 139
+  },
+  "results": [
+    {
+      "distance_cut": "0.1",
+      "all_difficulties": 157,
+      "under_2000": 138
+    },
+    {
+      "distance_cut": "0.2",
+      "all_difficulties": 157,
+      "under_2000": 138
+    },
+    {
+      "distance_cut": "0.3",
+      "all_difficulties": 157,
+      "under_2000": 138
+    },
+    {
+      "distance_cut": "0.4",
+      "all_difficulties": 157,
+      "under_2000": 137
+    },
+    {
+      "distance_cut": "0.5",
+      "all_difficulties": 155,
+      "under_2000": 134
+    },
+    {
+      "distance_cut": "0.6",
+      "all_difficulties": 152,
+      "under_2000": 131
+    },
+    {
+      "distance_cut": "0.7",
+      "all_difficulties": 148,
+      "under_2000": 127
+    },
+    {
+      "distance_cut": "0.8",
+      "all_difficulties": 135,
+      "under_2000": 113
+    },
+    {
+      "distance_cut": "0.9",
+      "all_difficulties": 102,
+      "under_2000": 89
+    },
+    {
+      "distance_cut": "1.0",
+      "all_difficulties": 1,
+      "under_2000": 1
+    }
+  ],
+  "source_linkage_sha256": {
+    "all_difficulties": "358c29ad91fad7a22784ccf9e1ac28718ec6a0b80b5bffdb06c0bc52fa6e0de6",
+    "under_2000": "7bd0692b6653cee058ca1e571e757a1854c9a30e012177f64daa18b97a5cc254"
+  },
+  "checks": [
+    "valid_linkage",
+    "leaf_counts_match_original_results",
+    "merge_count_reconciliation",
+    "cut_0.7_matches_existing_summary",
+    "monotonic_counts",
+    "cut_1.0_single_cluster"
+  ]
+}

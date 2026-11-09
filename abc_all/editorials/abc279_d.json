@@ -1,0 +1,38 @@
+{
+  "problem_id": "abc279_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5288",
+      "text": "操作を行う回数を\n\\(n\\ (n \\geq 0)\\)\nとおくと、高橋くんが地面に到達する時刻は\n\\(f(n) = Bn+\\frac{A}{\\sqrt{n+1}}\\)\nという式で表されます。よってこの問題は、\n\\(n\\)\nが\n\\(0\\)\n以上の整数値を取る時の\n\\(f(n)\\)\nの最小値を求める問題になります。\n以下、\n\\(f\\)\nを\n\\(0\\)\n以上の実数に対して定義された関数として扱います。\nまず、答えの範囲を見積もってみましょう。\n\\(n >= A/B\\)\nのとき、\n\\(f(n) > Bn \\geq A = f(0)\\)\nより\n\\(f(n) > f(0)\\)\nであるため、\n\\(0 \\leq n < A/B\\)\nの範囲だけ考えれば良いことがわかります。しかし、この問題における\n\\(A,B\\)\nは大きいため、候補となるすべての\n\\(n\\)\nについて\n\\(f(n)\\)\nを計算することはできません。\nこの問題を解くためには、\n\\(f\\)\nが凸関数であることに気づく必要があります。下の画像は入力例1における\n\\(y=f(x)\\)\nのグラフ (横軸が\n\\(x\\)\n) です。このように下にふくらんだ関数のことを凸関数といいます (正確な定義は\nhttps://ja.wikipedia.org/wiki/凸関数\nをご参照ください)。\n\\(f(x)\\)\nが凸関数であることは、「凸関数の和は凸関数である」という定理を用いるか、微分を用いることで示せます。\n以下、この問題の2つの解法を示します。\n解法1　三分探索\n凸関数の最小値を求める問題は、\n三分探索\nというアルゴリズムを使うことで解くことができます。これは、「\n\\(f(n)\\)\nが最小値をとる\n\\(n\\)\nは\n\\(l\\leq n\\leq r\\)\nの範囲に存在する」(＊) ことが保証される\n\\(l,r\\)\nを設定し、条件 (＊) を満たしながら\n\\(l\\)\nと\n\\(r\\)\nを少しずつ近づけていくことで、答えの\n\\(n\\)\nを見つけるアルゴリズムです。具体的なアルゴリズムは以下の通りです。\n条件 (＊) を満たすように\n\\(l,r\\)\nの初期値を設定する。\n\\(m_1 := (2l+r)/3, m_2 := (l+2r)/3\\)\nとする。\n\\(f(m_1) < f(m_2)\\)\nならば\n\\(r \\leftarrow m_2\\)\nとし、 そうでないならば\n\\(l \\leftarrow m_1\\)\nとする。\n答えが含まれることが保証される範囲\n\\([l,r]\\)\nが十分に小さいならば、終了する。さらに範囲を小さくしたい場合は 2. を繰り返す。\n今回は\n\\(n\\)\nが整数の範囲での最小値を求めたいため、\n\\(l,r,m_1,m_2\\)\n等の変数は整数にします (実数にすれば、実数の範囲での最小値を求めることもできます)。\n三分探索では、操作2を行うごとに答えの含まれる範囲\n\\([l,r]\\)\nが約\n\\(\\frac{2}{3}\\)\nになるため、\n\\(f(n)\\)\nが最小値をとる\n\\(n\\)\nを非常に高速に求めることができます。実際、本問題においては\n\\(l=0,r=A/B\\)\nとして初期値を設定することで、操作2を最大 100 回ほど行えば答えを求めることができ、十分に高速です。\n実装例 (C++):\n解法2　微分\n以下、高校数学の微分の知識を前提とします。\n\\(f'(x) = B-\\frac{A}{2(x+1)\\sqrt{x+1}}\\)\nより\n\\(f'(x)=0 \\Leftrightarrow x = (\\frac{A}{2B})^{\\frac{2}{3}}-1\\)\nであるため、\n\\(f(x)\\)\nは（\n\\(x\\)\nが実数の範囲において）\n\\(x = (\\frac{A}{2B})^{\\frac{2}{3}}-1\\)\nで最小値を取ります。本問題においては、\n\\(x\\)\nが整数の範囲での最小値を求める必要がありますが、\n\\(f\\)\nの凸性より\n\\(\\lfloor  (\\frac{A}{2B})^{\\frac{2}{3}} \\rfloor\\)\nと\n\\(\\lceil  (\\frac{A}{2B})^{\\frac{2}{3}} \\rceil\\)\nのみを調べれば良いことがわかります。なお、数値誤差等の問題もあるため、余裕を持って前後\n\\(\\pm 5\\)\n程度の範囲を調べるとよいでしょう。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing ll = long long;\n\nint main() {\n    ll a, b;\n    cin >> a >> b;\n    auto f = [&](ll n) -> double {\n        return (double) a / sqrt(n + 1) + (double) b * n;\n    };\n    ll l = 0, r = a / b;\n    while (r - l > 2) {\n        ll m1 = (l * 2 + r) / 3;\n        ll m2 = (l + r * 2) / 3;\n        if (f(m1) > f(m2)) l = m1;\n        else r = m2;\n    }\n    double ans = a;\n    for (ll i = l; i <= r; i++) {\n        ans = min(ans, f(i));\n    }\n    cout << fixed << setprecision(10) << ans << endl;\n}",
+        "#include<bits/stdc++.h>\n\nusing namespace std;\nusing ll = long long;\n\nint main() {\n    ll a, b;\n    cin >> a >> b;\n    auto f = [&](ll n) -> double {\n        return (double) a / sqrt(n + 1) + (double) b * n;\n    };\n    ll argmin = pow((double) a / (b * 2), 2. / 3.) - 1;\n    ll l = max(argmin - 5, 0LL), r = min(argmin + 5, a / b);\n    double ans = a;\n    for (ll i = l; i <= r; i++) {\n        ans = min(ans, f(i));\n    }\n    cout << fixed << setprecision(10) << ans << endl;\n}"
+      ],
+      "text_sha256": "28e6bbc79c03602f3f031862d41a64e13aaf382f39a1d38b343a131c518f4c46",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc279/abc279_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5300",
+      "text": "整数\n\\(g\\)\nについて、\n\\(f(g) = Bg + \\frac{A}{\\sqrt{g}}\\)\nの最小値が求まればよいです。\n相加相乗平均の不等式より、\n\\(\nf(g) = Bg + \\frac{A}{2\\sqrt{g}} + \\frac{A}{2\\sqrt{g}} \\geq 3(\\frac{A^2B}{4})^{1/3}\n\\)\n、またこの等号が成立するのは\n\\(g = (\\frac{A}{2B})^{2/3}\\)\nのときです。\n\\(f\\)\nの凸性より、\n\\((\\frac{A}{2B})^{2/3}\\)\nの切り上げと切り捨てのみを調べればよいです。",
+      "codes": [],
+      "text_sha256": "f4ff526e00d4d13b0b5fff9a8696875a3918ff7199c1f9900f0c9227d2891285",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc279/abc279_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc279/editorial/5295",
+      "text": "この問題は、単峰性のある関数 \\(f(x)\\) の最小値を求める問題です。\n単峰性のある関数は、差分 \\(f(x+\\varepsilon)-f(x)\\) や微分可能ならその微分 \\(f^\\prime(x)\\) の符号が単調という性質があります。\n微分や差分の符号を計算することが容易なら、それを用いて二分探索を用いることで探索回数を減らすことができます。\n今回は、最小化すべき関数 \\(f(x)=Bx+\\dfrac{A}{\\sqrt{x+1}}\\) が自然数 \\(\\mathbb{Z}_{\\geq0}\\) から実数 \\(\\mathbb{R}\\) への写像なので、差分 \\(f(x)-f(x-1)\\) が負であるような最大の \\(x\\ (\\gt0)\\) （存在しなければ \\(0\\)）が \\(f\\) を最小にする \\(x\\) です。\n\\[\\begin{aligned}\n  f(x)-f(x-1)&=\\left(Bx+\\dfrac{A}{\\sqrt{x+1}}\\right)-\\left(B(x-1)+\\dfrac{A}{\\sqrt x}\\right)\\\\\n  &=B+A\\left(\\dfrac1{\\sqrt{x+1}}-\\dfrac1{\\sqrt x}\\right)\\\\\n  &=B-A\\dfrac1{\\sqrt{x(x+1)}\\left(\\sqrt x+\\sqrt{x+1}\\right)}\n\\end{aligned}\\]\nと計算できるので、\n\\[\\begin{aligned}\nf(x)-f(x-1)\\lt0&\\iff B-A\\dfrac1{\\sqrt{x(x+1)}\\left(\\sqrt x+\\sqrt{x+1}\\right)}\\lt0\\\\\n&\\iff A\\gt B\\sqrt{x(x+1)}\\left(\\sqrt x+\\sqrt{x+1}\\right)\\\\\n&\\iff A^2\\gt B^2x(x+1)\\left(2x+1+2\\sqrt{x(x+1)}\\right)\\\\\n&\\iff A^2-B^2x(x+1)(2x+1)\\gt2B^2x(x+1)\\sqrt{x(x+1)}\\\\\n&\\iff A^2\\gt B^2x(x+1)(2x+1)\\wedge A^4 +B^4x^2(x+1)^2\\gt 2A^2B^2x(x+1)(2x+1)\n\\end{aligned}\\]\nとなります。これは整数どうしの演算で判定できるので、二分探索でこの問題が解けました。\n二分探索を行うとき、はじめの区間は \\(\\left\\lbrack 0,\\left\\lceil\\dfrac AB\\right\\rceil\\right\\rparen\\) とするとよく、反復回数は \\(\\max\\left\\{\\lceil\\log_2A-\\log_2B\\rceil,0\\right\\}\\) 回で十分高速です。\n答えの計算をする際に浮動小数点数で計算を行うことになりますが、平方根の計算や四則演算は正確な結果を丸めたものが得られるため、たとえば倍精度浮動小数点数などを用いて計算すると相対誤差はたかだか \\(6.7\\times10^{-16}\\) 程度と評価でき、十分正確です。\n実装例は以下のようになります。\n判定には最大で \\(10^{54}\\) 程度の大きさの整数の演算が必要になる場合があることに注意してください。",
+      "codes": [
+        "from math import sqrt\n\n\nA, B = map(int, input().split())\n\nL, R = 0, (A + B - 1) // B\n\nwhile L + 1 < R:\n    M = (L + R) // 2\n    condition_0 = A * A > B * B * M * (M + 1) * (2 * M + 1)\n    condition_1 = A ** 4 + B ** 4 * M * M * (M + 1) * (M + 1) > 2 * A * A * B * B * M * (M + 1) * (2 * M + 1)\n    if condition_0 and condition_1:\n        L = M\n    else:\n        R = M\n\nprint(A / sqrt(L + 1) + B * L)"
+      ],
+      "text_sha256": "26ef47552a78a9fc54293bef095a9de09d656f6911c97081596739c82140d13c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc279/abc279_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

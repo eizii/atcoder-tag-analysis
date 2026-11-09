@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc449_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc449/editorial/17254",
+      "text": "クエリを前から順に処理します。\n現在チョコレートが\n\\(h\\)\n行\n\\(w\\)\n列の長方形状であるとします。\nタイプ\n\\(1\\)\nのクエリでは、下\n\\(R\\)\n行のチョコレートのブロックの個数は\n\\(Rw\\)\n個であり、チョコレートは\n\\(h - R\\)\n行\n\\(w\\)\n列へと変化します。\nタイプ\n\\(2\\)\nのクエリでは、右\n\\(C\\)\n列のチョコレートのブロックの個数は\n\\(hC\\)\n個であり、チョコレートは\n\\(h\\)\n行\n\\(w - C\\)\n列へと変化します。\nしたがって、チョコレートの行・列の数を管理しながらシミュレーションを行うことで各クエリの答えを求めることができます。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint h, w, q;\n\tcin >> h >> w >> q;\n\twhile (q--) {\n\t\tint t;\n\t\tcin >> t;\n\t\tif (t == 1) {\n\t\t\tint r;\n\t\t\tcin >> r;\n\t\t\tcout << r * w << '\\n';\n\t\t\th -= r;\n\t\t}\n\t\telse {\n\t\t\tint c;\n\t\t\tcin >> c;\n\t\t\tcout << h * c << '\\n';\n\t\t\tw -= c;\n\t\t}\n\t}\n}"
+      ],
+      "text_sha256": "a6a8da3dae5c569df2c69792ce37b0dca33553774e6ec79b01b75bf4eabd8e17",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc449/abc449_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc192_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc192/editorial/686",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「\nWelcome to AtCoder\n」をお試しください。言語ごとに解答例が掲載されています。\nこの問題は、\n\\(1\\)\n枚ずつコインを増やしていき、コインの枚数が初めて\n\\(100\\)\nの倍数になるまでをシミュレーションすることで解くことができます。\n\\(X\\)\nが\n\\(100\\)\nの倍数であるケースに注意してください。\n実装例(C)\n別の解法もあります。「\n\\(X\\)\nより大きく\n\\(X\\)\nに最も近い\n\\(100\\)\nの倍数」を求めることができれば、求める答えはその値と\n\\(X\\)\nとの差です。これは四則計算などを適切に組み合わせることで求めることができます。\n実装例(Python)",
+      "codes": [
+        "#include <stdio.h>\n#include <stdbool.h>\nint main(){\n    int x;\n    scanf(\"%d\",&x);\n    int ans=0;\n    while(true){\n        x++;\n        ans++;\n        if(x%100==0){\n            printf(\"%d\\n\",ans);\n            return 0;\n        }\n    }\n}",
+        "X = int(input())\ngoal = X//100*100 + 100\nprint(goal - X)"
+      ],
+      "text_sha256": "45258715764f75c3b1f117bfa7a2033ba0bf9299be2a9435698f9166bcdc0463",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc192/abc192_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

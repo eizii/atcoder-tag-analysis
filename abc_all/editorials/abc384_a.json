@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc384_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc384/editorial/11545",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n以下の順に操作を行うと、\n\\(T\\)\nが求める文字列となります。\n\\(T\\)\nを空文字列とする。\n\\(S\\)\nの各文字を順番に見ていく。\n今見ている文字が\n\\(x\\)\nなら\n\\(T\\)\nの末尾に\n\\(x\\)\nを連結する。\n\\(x\\)\nでないなら\n\\(T\\)\nの末尾に\n\\(y\\)\nを連結する。\nこの手順をプログラムで実装した例は、以下に記載しています。\n実装例 (Python3)\n実装例(C++)",
+      "codes": [
+        "n, x, y = map(str, input().split())\nn = int(n)\ns = input()\nt = \"\"\nfor i in range(n):\n    if s[i] == x:\n        t += x\n    else:\n        t += y\nprint(t)",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main()\n{\n    int n;\n    char x, y;\n    string s;\n    cin >> n >> x >> y >> s;\n    string t = \"\";\n    for (char c : s)\n    {\n        t += c == x ? x : y;\n    }\n    cout << t << endl;\n}"
+      ],
+      "text_sha256": "b0e24a6c002ad3dc981f55904aa2d58dfee75cc9fd95b182f898bcdeed9ab444",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc384/abc384_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

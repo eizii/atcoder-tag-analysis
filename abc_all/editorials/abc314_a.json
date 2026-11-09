@@ -1,0 +1,20 @@
+{
+  "problem_id": "abc314_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc314/editorial/6935",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nC++入門 AtCoder Programming Guide for beginners (APG4b)\nは、競技プログラミングのための C++ 入門用コンテンツです。\n文字列\n\"3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679\"\nの先頭\n\\(N+2\\)\n文字を出力すればよいです。\nこれは、\n\\(N+2\\)\n回だけループを回すことで実現できます。\n「文字列\n\\(S\\)\nの先頭\n\\(k\\)\n文字を取った文字列」を作る方法が存在する言語ではその関数を使うことでもこの問題を解くことができます（C++ では\nstd::string::substr\n関数を、Python ではスライスを使うとよいです）。\n実装例は以下のようになります。\nC++ と Python でループを使う実装例とループを使わない実装例を載せます。\n出力にループを使う実装\nC++\nPython\n出力にループを使わない実装\nC++\nPython",
+      "codes": [
+        "#include <string>\n#include <iostream>\n\nusing namespace std;\n\nint main() {\n    string pi = \"3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679\";\n\n    int N;\n    cin >> N;\n\n    for (int i = 0; i < N + 2; ++i) // 先頭 N + 2 文字を出力する\n        cout << pi[i];\n\n    cout << endl;\n\n    return 0;\n}",
+        "pi = '3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679'\nN = int(input())\n\nfor i in range(N + 2):\n    print(pi[i], end='')",
+        "#include <string>\n#include <iostream>\n\nusing namespace std;\n\nint main() {\n    string pi = \"3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679\";\n\n    int N;\n    cin >> N;\n\n    cout << pi.substr(0, N + 2) << endl;\n\n    return 0;\n}",
+        "pi = '3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679'\nN = int(input())\n\nprint(pi[:N + 2])"
+      ],
+      "text_sha256": "519c170833da34ec0a64908f452cc9d976cfea9d9768d7f3a87893cffdb4fad4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc314/abc314_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

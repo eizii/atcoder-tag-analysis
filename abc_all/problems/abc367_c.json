@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc367_c",
+  "title": "Enumerate Sequences",
+  "contests": [
+    {
+      "contest_id": "abc367",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 234,
+  "raw_difficulty": 186,
+  "contest_id": "abc367",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc367/tasks/abc367_c",
+  "statement": "配点 : 300 点 問題文 以下の条件を満たす長さ N の整数列を辞書順で小さい方から順に全て出力して下さい。 i 番目の要素は 1 以上 R_i 以下 総和が K の倍数 数列の辞書順とは？ 数列 A = (A_1, \\ldots, A_{|A|}) が B = (B_1, \\ldots, B_{|B|}) より 辞書順で真に小さい とは、下記の 1. と 2. のどちらかが成り立つことを言います。 |A|<|B| かつ (A_{1},\\ldots,A_{|A|}) = (B_1,\\ldots,B_{|A|}) である。 ある整数 1\\leq i\\leq \\min\\{|A|,|B|\\} が存在して、下記の 2 つがともに成り立つ。 (A_{1},\\ldots,A_{i-1}) = (B_1,\\ldots,B_{i-1}) A_i < B_i 制約 入力は全て整数 1 \\le N \\le 8 2 \\le K \\le 10 1 \\le R_i \\le 5 入力 入力は以下の形式で標準入力から与えられる。 N K R_1 R_2 \\dots R_N 出力 出力すべき数列が X 個あり、そのうち i 個目が A_i=(A_{i,1},A_{i,2},\\dots,A_{i,N}) であったとき、答えを以下の形式で出力せよ。 A_{1,1} A_{1,2} \\dots A_{1,N} A_{2,1} A_{2,2} \\dots A_{2,N} \\vdots A_{X,1} A_{X,2} \\dots A_{X,N} 入力例 1 3 2\r\n2 1 3 出力例 1 1 1 2\r\n2 1 1\r\n2 1 3 出力すべき数列は 3 個で、辞書順で (1,1,2),(2,1,1),(2,1,3) です。 入力例 2 1 2\r\n1 出力例 2 出力すべき数列が無い場合もあります。 この場合、出力は空で構いません。 入力例 3 5 5\r\n2 3 2 3 2 出力例 3 1 1 1 1 1\r\n1 2 2 3 2\r\n1 3 1 3 2\r\n1 3 2 2 2\r\n1 3 2 3 1\r\n2 1 2 3 2\r\n2 2 1 3 2\r\n2 2 2 2 2\r\n2 2 2 3 1\r\n2 3 1 2 2\r\n2 3 1 3 1\r\n2 3 2 1 2\r\n2 3 2 2 1",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 以下の条件を満たす長さ N の整数列を辞書順で小さい方から順に全て出力して下さい。 i 番目の要素は 1 以上 R_i 以下 総和が K の倍数 数列の辞書順とは？ 数列 A = (A_1, \\ldots, A_{|A|}) が B = (B_1, \\ldots, B_{|B|}) より 辞書順で真に小さい とは、下記の 1. と 2. のどちらかが成り立つことを言います。 |A|<|B| かつ (A_{1},\\ldots,A_{|A|}) = (B_1,\\ldots,B_{|A|}) である。 ある整数 1\\leq i\\leq \\min\\{|A|,|B|\\} が存在して、下記の 2 つがともに成り立つ。 (A_{1},\\ldots,A_{i-1}) = (B_1,\\ldots,B_{i-1}) A_i < B_i"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 入力は全て整数 1 \\le N \\le 8 2 \\le K \\le 10 1 \\le R_i \\le 5"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K R_1 R_2 \\dots R_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 出力すべき数列が X 個あり、そのうち i 個目が A_i=(A_{i,1},A_{i,2},\\dots,A_{i,N}) であったとき、答えを以下の形式で出力せよ。 A_{1,1} A_{1,2} \\dots A_{1,N} A_{2,1} A_{2,2} \\dots A_{2,N} \\vdots A_{X,1} A_{X,2} \\dots A_{X,N}"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 2\r\n2 1 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 1 1 2\r\n2 1 1\r\n2 1 3 出力すべき数列は 3 個で、辞書順で (1,1,2),(2,1,1),(2,1,3) です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 1 2\r\n1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 出力すべき数列が無い場合もあります。 この場合、出力は空で構いません。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 5 5\r\n2 3 2 3 2"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 1 1 1 1 1\r\n1 2 2 3 2\r\n1 3 1 3 2\r\n1 3 2 2 2\r\n1 3 2 3 1\r\n2 1 2 3 2\r\n2 2 1 3 2\r\n2 2 2 2 2\r\n2 2 2 3 1\r\n2 3 1 2 2\r\n2 3 1 3 1\r\n2 3 2 1 2\r\n2 3 2 2 1"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc367/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:48.517363+00:00",
+  "statement_sha256": "34592469d686c914e8f82ffd440a005220b9ea08d56311cd22bc1eb8dfb8cfcb",
+  "editorials": []
+}

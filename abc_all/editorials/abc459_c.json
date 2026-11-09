@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc459_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc459/editorial/20978",
+      "text": "シミュレーションを用いてクエリを処理することを考えます。このとき、管理する必要のある情報は\nマス\n\\(i\\)\n\\((1\\leq i\\leq N)\\)\nに積まれているブロックの数\n\\(A_i\\)\n\\(j\\)\n個\n\\((1\\leq j\\leq Q)\\)\n個以上のブロックが積まれているマスの数\n\\(B_j\\)\nです。しかし、これらを管理しようとすると、すべてのマスから\n\\(1\\)\n個ずつブロックを削除するたびに\n\\(B_j\\)\nをすべて更新する必要があり、最大で\n\\(\\Theta(Q^2)\\)\n回更新する必要があり、時間制限が厳しいです。\nその点に向けた工夫はいくつか考えられますが、一例としてはそもそも「すべてのマスから\n\\(1\\)\n個ずつブロックを削除する」操作を行わない、ということが考えられます。このとき、元の問題における\n\\(2\\)\n種類目のクエリにおいて出力すべき値は、削除しない場合における以下の値と等しいです。\n各マスに積まれているブロックの個数の最小値\n\\(\\displaystyle\\min_{1\\leq i\\leq N} A_i\\)\nを\n\\(k\\)\nとしたとき、\n\\((y+k)\\)\n個以上のブロックが積まれているマスの個数\n\\(B_{y+k}\\)\nここで、クエリごとに\n\\(\\displaystyle\\min_{1\\leq i\\leq N} A_i\\)\nを求めると最悪の場合、全体で\n\\(O(NQ)\\)\nの時間計算量がかかってしまいますが、この値は\n\\(B_j=N\\)\nである最大の\n\\(j\\)\nと言い換えることもできます。\nこの値は\n\\(1\\)\n種類目のクエリのたびに高々\n\\(1\\)\n増加するかどうかであるため、この値をシミュレーションを通じて管理し続け、クエリのたびに更新されたかを確認することで全体で\n\\(O(Q)\\)\nの計算量で処理することができます。\n以上を踏まえると、\n\\((A_1,\\ldots,A_N)\\)\n,\n\\((B_1,\\ldots,B_Q)\\)\n,\n\\(k\\)\nを保持して以下のようにクエリを処理することができます。\n最初の状態\n\\(A_i=0\\)\n\\(B_j=0\\)\n\\(k=0\\)\n\\(1\\)\n種類目のクエリ\n\\(A_x\\)\nを\n\\(1\\)\n増やす。\n\\(B_{A_x}\\)\nを\n\\(1\\)\n増やす。\n\\(B_{A_x}=N\\)\nならば\n\\(k=N\\)\nに変更する。\n\\(2\\)\n種類目のクエリ\n\\(k+y>Q\\)\nならば\n\\(0\\)\n,\n\\(k+y\\leq Q\\)\nならば\n\\(B_{k+y}\\)\nを出力する。\n必要な計算量は\n\\(O(N+Q)\\)\nとなり、十分高速です。よって、この問題を解くことができました。\nC++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define N (int)3e+5\n\nint main(void){\n\tint a[N+1]={};\n\tint c[N+1]={};\n\tint n,q,t,x,mn=0;\n\n\tcin>>n>>q;\n\tfor(int i=0;i<q;i++){\n\t\tcin>>t>>x;\n\t\tif(t==1){\n\t\t\ta[x]++;\n\t\t\tc[a[x]]++;\n\t\t\tif(c[a[x]]==n)mn=a[x];\n\t\t}\n\t\tif(t==2){\n\t\t\tif(x+mn>q)cout<<0<<endl;\n\t\t\telse cout<<c[x+mn]<<endl;\n\t\t}\n\t}\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "5921a239518c9919056c98ee56cc37e5a4486391e9353322a6e0b2f048218aab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc459/abc459_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

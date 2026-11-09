@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc129_c",
+  "editorials": [
+    {
+      "text": "C. Typical Stairs(writer : yuma000)\nまず、壊れた床がない場合(M = 0) について考察します。x 段目にたどり着くまでの移動方法の数をfx\nとおきます。\nx ≥2 の時、x 段目にたどり着く方法としては、\n• x −2 段目から一歩で二段上る。\n• x −1 段目から一歩で一段上る。\nの二通りがあります。つまり、fx = fx−1 + fx−2 が成り立ちます。これはフィボナッチ数の求め方の式と\n同等です。動的計画法(DP) を使うことで、O(N) で解くことができます。\nここまで考察できれば、壊れた床がある場合もこれを応用することで解くことができます。具体的には、fai\nには遷移しないようにDP の遷移式を改造すれば良いです。\n1 #include<bits/stdc++.h>\n2 using namespace std;\n3 const long long mod=1e9+7;\n4\n5 int main(){\n6\nint N,M;\n7\ncin>>N>>M;\n8\n9\nvector<int>oks(N+1,true);\n10\nfor(int i=0;i<M;++i){\n11\nint a;cin>>a;\n12\noks[a]=false;\n13\n}\n14\n15\nvector<long long int>dp(N+1);\n16\ndp[0]=1;\n17\nfor(int now=0;now<N;++now){\n18\nfor(int next=now+1;next<=min(N,now+2);++next){\n19\nif(oks[next]){\n20\ndp[next]+=dp[now];\n21\ndp[next]%=mod;\n22\n}\n23\n}\n24\n}\n25\n26\ncout<<dp[N]<<endl;\n27\nreturn 0;\n28 }\n",
+      "text_sha256": "9c4722d0f403e511cb02fba6ff6943190aa05755f1c145cd8a58f8ec63628797",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc129/abc129_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc263_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc263/editorial/4548",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n「競プロ典型 90 問」(\nhttps://atcoder.jp/contests/typical90\n) では、プログラミングコンテストで扱われる典型的な 90  問の問題に挑戦可能です。\n「C++入門 AtCoder Programming Guide for beginners (APG4b)」(\nhttps://atcoder.jp/contests/APG4b\n) は、競技プログラマー向けのC++入門用コンテンツです。\nこの問題は、\nABC260-A\nをより難しくしたバージョンとなっています。まだ ABC260-A を解いてない方は、はじめにそちらを解かれることを推奨します。\nABC260-A と同様に各数字の出現回数を調べ、\n\\(3\\)\n回出現しているものと\n\\(2\\)\n回出現しているものが存在すれば答えは\nYes\nです。\nここでは折角なので別の解法を紹介しましょう。\n入力を長さ\n\\(5\\)\nの列として見て、昇順にソートします。（この列を\n\\(A\\)\nとします。）\nこのとき、\n\\(3\\)\n回出現しているものと\n\\(2\\)\n回出現しているものの大小関係で場合分けを行うと、フルハウスであることと以下のどちらか一方が成立することが同値です。\n\\(A[0]=A[2]\\)\nかつ\n\\(A[3]=A[4]\\)\n\\(A[0]=A[1]\\)\nかつ\n\\(A[2]=A[4]\\)\n(補足)\nこの同値変形について、以下加筆します。\n\\(3\\)\n回出現している値 <\n\\(2\\)\n回出現している値のとき、\n\\(A[0]=A[1]=A[2] < A[3]=A[4]\\)\nです。数列\n\\(A\\)\nが昇順であることから、\n\\(A[0]=A[1]=A[2]\\)\nであることと、\n\\(A[0]=A[2]\\)\nであることが同値です。さらに、入力の\n\\(5\\)\nつの数全てが同じことはないので、\n\\(A[0]=A[2]\\)\nかつ\n\\(A[3]=A[4]\\)\nのとき\n\\(A[2]<A[3]\\)\nは自動的に従います。\nよって\n\\(A[0]=A[2]\\)\nかつ\n\\(A[3]=A[4]\\)\nが導かれます。\n\\(3\\)\n回出現している値 >\n\\(2\\)\n回出現している値のときも同様です。\nこれを配列、ソート、条件分岐を用いて実装すればよいです。実装が分からない方は実装例を参考にしてください。\n実装例(c++)\n実装例(python)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    vector<int> a(5);\n    for(int i = 0; i < 5; i++) cin >> a[i];\n    sort(a.begin(), a.end());\n    if((a[0] == a[2] and a[3] == a[4]) or (a[0] == a[1] and a[2] == a[4])) cout << \"Yes\" << endl;\n    else cout << \"No\" << endl;\n}",
+        "a = list(map(int, input().split()))\na.sort()\nif (a[0] == a[2] and a[3] == a[4]) or (a[0] == a[1] and a[2] == a[4]):\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "text_sha256": "1c41709f56d28b02e51f4e032dfa6f82b4480a0691a083202216f82ce5f78a4f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc263/abc263_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

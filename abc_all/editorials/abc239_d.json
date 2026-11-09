@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc239_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc239/editorial/3384",
+      "text": "あらかじめエラトステネスの篩などを用いて\n\\(200\\)\n以下の素数を求めておくことで、ある数が素数であるかどうかの判定は\n\\(O(1)\\)\nでできるとしてよいです。\n高橋君が勝つための必要十分条件は「ある数\n\\(X\\)\nが存在して、高橋君が\n\\(X\\)\nを選ぶと、青木君がどんな数を選んでも合成数しか作れない」です。そのような\n\\(X\\)\nが存在するか判定しましょう。\n実装例(Python)\n実装例(C)\nBonus:\n\\(A,B,C,D\\)\nの上限が\n\\(10^5\\)\nであるような問題が\n\\(10^5\\)\nケース与えられるので解いてください (500点相当？)",
+      "codes": [
+        "prime=[True]*201\nprime[0]=False\nprime[1]=False\nfor p in range(15):\n  if prime[p]:\n    for i in range(p*p,201,p):\n      prime[i]=False\n\nA,B,C,D=map(int,input().split())\nfor x in range(A,B+1):\n  if all(not prime[x+y] for y in range(C,D+1)):\n    print(\"Takahashi\")\n    exit()\nprint(\"Aoki\")",
+        "#include<stdio.h>\n\nint prime[210];\nint main(){\n\tfor(int i=2;i<=200;i++)prime[i]=1;\n\tfor(int p=2;p*p<=200;p++)if(prime[p])for(int i=p*p;i<=200;i+=p)prime[i]=0;\n\t\n\tint a,b,c,d;\n\tscanf(\"%d%d%d%d\",&a,&b,&c,&d);\n\tfor(int x=a;x<=b;x++){\n\t\tint flag=1;\n\t\tfor(int y=c;y<=d;y++)flag&=!prime[x+y];\n\t\tif(flag){\n\t\t\tputs(\"Takahashi\");\n\t\t\treturn 0;\n\t\t}\n\t}\n\tputs(\"Aoki\");\n}"
+      ],
+      "text_sha256": "985fa0572a957882f5b302857dbba123c51b3c7d83ca1032457b720fbbce048d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc239/abc239_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc239/editorial/3437",
+      "text": "Bonus の解説を書きます。( おそらく合っていると思いますが、間違っていたらすいません。 ) 入力における $B+D$ の最大値より大きい最小の素数を $N$ とし、テストケースの数を $T$ とします。\nまず $f(i)$ を以下のように定めます。\n$i$ が素数のとき : $- \\infty$\n$i$ が素数でないとき : $i$ より大きい最小の素数を $p$ として、 $f(i)=p-i$\n$O(N \\log \\log N)$ でエラトステネスの篩を用いて $N$ 以下の素数を全て求めた後、 $i$ が大きい順に $f(i)$ を求めていけば $f(1)$ から $f(N)$ は $O(N)$ で求まります。\nこの処理を前準備として行います。\nさて、入力 $A,B,C,D$ について $A,B$ に $C$ を足し、 $C,D$ から $C$ を引いた としても答えは変わりません。以下この変形を行ったものとして考えます。\n高橋君が整数 $i$ を選んで勝てるとき、その $i$ について$f(i) > D$ が成立します。よって、 $A \\leq i \\leq B$ の中で$f(i) > D$ となるような $i$ があるか判定すればよく、 $\\max \\left( f(A),f(A+1), \\cdots , f(B) \\right) > D$ であるかに帰着できます。\nよって、\n\\(f(i)\\)\nを\n\\(O(N \\log N)\\)\nでSparse Tableに乗せることで各テストケースを\n\\(O(1)\\)\nで処理できます。\n以上より\n\\(O(N \\log N +T)\\)\nでこの問題を解くことができました。\n\\(B+D \\leq 2 \\times 10^5\\)\nより\n\\(N \\leq 2 \\times 10^5 +3\\)\nなので十分高速だと思います。\n\\(f(i)\\)\nをsegment treeに乗せて各テストケースを\n\\(O( \\log N)\\)\nで処理した場合の\n\\(O(N \\log \\log N + T \\log N)\\)\nでも余裕だと思います。",
+      "codes": [],
+      "text_sha256": "32a2ebc7b647ebec85423d7ca87c437409b57766b194ebdcb1e86d096312a7b2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc239/abc239_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

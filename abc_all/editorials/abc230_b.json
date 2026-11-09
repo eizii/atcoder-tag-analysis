@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc230_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc230/editorial/3001",
+      "text": "この問題はいくつか解法が考えられます。順にみていきましょう。\nまず、問題文通りの解法として「\n\\(T\\)\nを実際に構築して\n\\(T\\)\nの部分文字列に\n\\(S\\)\nが含まれるかを調べる」という方法があります。\nたとえば Python では str 型のオブジェクト\nS\n,\nT\nに対して\nS in T\nで\nT\nの部分文字列に\nS\nを含むかを判定することができます。\nPython による実装例は次の通りです。\nPython は計算量を仕様として規定していないので上の実装例は厳密には計算量不明ですが、 例えば AtCoder で言語に Python 3.8.2 を選んで提出した時に選択される処理系 (CPython) では Boyer-Moore 法などにより\n\\(\\mathrm{O}(|S| + |T|)\\)\nで計算するアルゴリズムが実装されているので\n\\(\\mathrm{O}(|S| + |T|)\\)\nと考えてよさそうです。\n次に、考察により計算量を落とした解法を紹介します。\n条件を満たす文字列は次の\n\\(3\\)\n個の条件のいずれかを満たします。\n\\(i\\)\nを\n\\(3\\)\nで割った余りが\n\\(0\\)\nのときは\nS[i] = 'o'\nで、それ以外は\nS[i] = 'x'\nである。\n\\(i\\)\nを\n\\(3\\)\nで割った余りが\n\\(1\\)\nのときは\nS[i] = 'o'\nで、それ以外は\nS[i] = 'x'\nである。\n\\(i\\)\nを\n\\(3\\)\nで割った余りが\n\\(2\\)\nのときは\nS[i] = 'o'\nで、それ以外は\nS[i] = 'x'\nである。\nよって、\n\\(S\\)\nがこの条件を満たすかを for ループなどを用いて判定すれば、この問題を\n\\(\\mathrm{O}(|S|)\\)\nで解くことができます。\nC++ による実装例は次の通りです。",
+      "codes": [
+        "S = input()\nT = \"oxx\" * 10 ** 5\nprint(\"Yes\" if S in T else \"No\")",
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n  string S;\n  cin >> S;\n  for (string T : {\"oxx\", \"xox\", \"xxo\"}) {\n    bool ok = true;\n    for (int i = 0; i < (int)S.size(); i++) {\n      if (T[i % 3] != S[i]) ok = false;\n    }\n    if (ok) {\n      cout << \"Yes\" << endl;\n      exit(0);\n    }\n  }\n  cout << \"No\" << endl;\n}"
+      ],
+      "text_sha256": "d697d84eb242185c6d578975ff14fdd47a9ce6d17d593756fa8807d84fd1a7c6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc230/abc230_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

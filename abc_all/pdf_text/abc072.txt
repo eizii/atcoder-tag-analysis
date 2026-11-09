@@ -1,0 +1,244 @@
+              ABC072 / ARC082 解説
+
+
+                                  sigma425
+
+
+
+  For International Readers: English editorial starts on page 3.
+
+
+A: Sandglass2
+
+ X > t ならX −t[g] 残っていて、X ≤t なら0[g] になっています。これはmax(X −t, 0) と書くことも出
+
+来ます。コードにすると次のようになります。
+
+int main (){
+         int X,t;
+         cin >>X>>t;
+        if(X>t) cout <<X-t<<endl;
+         else cout <<0<<endl;
+         return 0;
+}
+
+
+B: OddString
+
+  for 文をまわすなどして答えの文字列を求めると良いです。
+
+int main (){
+         string s;
+         cin >>s;
+         int N = s.size ();
+         string ans;
+        for(int i=0;i<N;i+=2) ans += s[i];
+         cout <<ans <<endl;
+}
+
+
+C: Together
+
+ X を先に選んでから数に対する操作をすることにします。X を決めると、この個数を最大にするには、
+
+    • すべてのX −1 に+1 する
+
+    • すべてのX をそのままにする
+
+    • すべてのX + 1 に−1 する
+
+をすると他は関係ないので、(X −1 の個数)+(X の個数)+(X + 1 の個数) となります。従って先に各数の個
+
+数を数えておき、このX を考えうる範囲で全て試すことで答えが求まります。
+
+
+
+                                             1
+
+D: Derangement
+
+  pi  ̸=  i となっている部分にo を, そうでない部分にx をつけることにします。N 箇所全てo にな
+ればok です。ox とならんでいる部分は、swap することでoo となります(xo も同様)。(∵もともと
+
+pi = x(x ̸= i),pi+1 = i + 1 だったとすると、x ̸= i + 1 でもあるから、pi = i + 1 もpi+1 = x もo になる)
+  xx とならんでいる部分も、swap することでoo となります。(∵もともとpi = i(x ̸= i),pi+1 = i + 1 だっ
+たとすると、pi = i + 1 もpi+1 = i もo になる)
+ 従って、先頭から順番に見ていき、箇所i にx があったらi とi + 1(i = N ならi −1 とi) をswap する、
+
+とするのが最善になります。(i にあるx を消すのにi −1, i のswap とi, i + 1 のswap どちらかは必要で、前
+
+から見るとi −1 はもうo なのでi + 1 を巻き込んだほうが得)
+
+
+E: ConvexScore
+
+  n −|S| というのは,「S の凸包(境界含む) に含まれる与えられた点のうちS の点を除いた集合」(TS とお
+く) の要素数と等しいです。なので、2n−|S| はTS の部分集合の個数と等しくなります。
+ ここで、凸包の面積が正の部分集合X を任意に取ってきます。そしてX の凸包の頂点集合をSX としま
+す。すると、S を決めた時、{X|S = SX} と{S ∪t|t ∈TS} は集合として等しいです。
+ このことから、凸包の面積が正の部分集合X はちょうど一回S = SX の時に一回分カウントされる、とみ
+
+なすことが出来ます。
+
+ 従って、答えは凸包の面積が正の部分集合の個数になります。これは2N−(共線な(一直線上に載せること
+
+の出来る) 頂点集合の数) となるので共線な頂点集合の数を計算すれば良いです。0 点集合は1 個,1 点集合は
+
+N 個で固定なので、2 点以上で共線なものの個数を数えます。
+ これは、2 点以上乗りうる直線（高々NC2 本) をすべて試し、この上にk 点乗っていれば2k −k −1 を足
+すことで求まります。計算量はO(N 3) です。
+ 直線を正規化しset で管理するなどによってO(N 2logN) で解くことも出来ます。
+
+
+F: Sandglass
+
+   t 秒後にパーツA に入っている砂の量を、はじめパーツA に入っている砂の量x の関数とみてft(x) とお
+
+きます。
+
+ すると、ft(x) は常に次のような形の関数になります。
+                      
+                      a + c  (0 ≤x ≤a)
+                                     ft(x) =  x + c  (a < x < b)
+                      
+                                                b + c   (b ≤x ≤X)
+
+(ただしa =  b となり定数関数に潰れている場合もあります) これは、d を定数として、f(x) +
+
+t,max(f(x), 0),min(f(x), X) が上述の形で閉じていることからわかります。(時間の経過やパーツに入るの
+
+が0 以上X 以下であることから起こるft(x) の変化は全て上の3 つのどれかの合成として書けるので、この
+3 つだけ考えれば良い)
+
+ よって、上の関数に含まれるa, b, c を保持して更新しながらその都度クエリに答えていけば良いです。
+
+
+                                             2
+
+             ABC072 / ARC082 Editorial
+
+
+                                  sigma425
+
+
+
+A: Sandglass2
+
+
+int main (){
+         int X,t;
+         cin >>X>>t;
+        if(X>t) cout <<X-t<<endl;
+         else cout <<0<<endl;
+         return 0;
+}
+
+
+B: OddString
+
+
+int main (){
+         string s;
+         cin >>s;
+         int N = s.size ();
+         string ans;
+        for(int i=0;i<N;i+=2) ans += s[i];
+         cout <<ans <<endl;
+}
+
+
+C: Together
+
+  Let’s choose X ﬁrst. For a ﬁxed X, the optimal choices are:
+
+    • Add 1 to all X −1.
+
+    • Do nothing for all X.
+
+    • Subtract 1 from all X + 1.
+
+  The number of X after these operations is (the number of X −1 in the initial sequence) + (the number
+
+of X in the initial sequence) + (the number of X + 1 in the initial sequence). We can compute the
+
+optimal value by trying all possible values for X.
+
+
+
+
+
+                                             1
+
+D: Derangement
+
+  Deﬁne a sequence of ’o’ and ’x’ of length N as follows:  if pi ̸= i, the i-th symbol is ’o’, otherwise the
+
+i-th symbol is ’x’. Our objective is to change this sequence to ’ooo...ooo’.
+
+    • If there is a part ”ox” (or ”xo”) in the sequence, we can change it to ”oo” by swapping these
+
+     two elements. (∵If pi = x(x ̸= i) and pi+1 = i + 1 in the initial sequence, after the swap, both
+       pi = i + 1 and pi+1 = x will be ’o’.)
+    • If there is a part ”xx” in the sequence, we can change it to ”oo” by swapping these two elements.
+
+     (∵If pi = i(x ̸= i) and pi+1 = i + 1 in the initial sequence, after the swap, both pi = i + 1 and
+      pi+1 = i will be ’o’.)
+
+  Thus, we should check the sequence from left to right, and if we ﬁnd an ’x’ at the i-th position, we
+
+should swap i and i + 1 (unless i = N, in this case we should swap i and i −1).
+
+
+E: ConvexScore
+
+  For a set S that forms a convex polygon (from now on, we call it ”convex set”), let TS be the set
+of points in the convex hull of S, except for the vertices (points in S).  Since |TS| = n −|S|, 2n−|S|
+corresponds to the number of subsets of TS.
+  In the problem, for each convex set S, we are asked to count it 2(n −S) times. Instead, for each pair
+
+of sets (S, U) such that S is a convex set and U is a subset of TS, let’s count S ∪U once.
+
+    • When we know S ∪U, we can recover S: it must be the convex hull of S ∪U. Thus, this way each
+
+       set is counted at most once.
+
+    • A set of points X is counted if and only if the convex hull of X has positive area: let S be the
+
+      convex hull of X and U be X \ S.
+
+  Therefore, the answer is equal to the number of subsets of all N points whose convex hull has a positive
+
+area.
+
+  This can be computed by subtracting the number of colinear sets (sets whose points are on the same
+line) from 2N. This can be done in O(N 3) or O(N 2logN).
+
+
+F: Sandglass
+
+  Let the amount of sand in bulb A at time t be a function ft(x), where x is the initial amount of sand
+
+in bulb A. We can prove that this function is always of the following form (for some constants a, b, c):
+
+                      
+                      a + c  (0 ≤x ≤a)
+                                     ft(x) =  x + c  (a < x < b)
+                      
+                                                b + c   (b ≤x ≤X)
+
+ When bulb A contains y grams of sand at some time, one second later, the amount of sand in bulb A
+
+
+                                             2
+
+is either g1(y) = max(y −1, 0) (in case A is above B) or g2(y) = max(y + 1, X) (in case B is above A).
+Since the set of functions of the form above is closed under functions g1 and g2, ft is always of this form.
+  Therefore, we can simulate the process while keeping the function ft (i.e., parameters a, b, c) and answer
+
+queries.
+
+
+
+
+
+                                             3

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc364_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc364/editorial/10550",
+      "text": "すぬけ君が食べる料理の集合からすぬけ君が最後に食べる料理を除いた集合について、そこに含まれる料理の甘さの合計・しょっぱさの合計はそれぞれ\n\\(X\\)\n以下・\n\\(Y\\)\n以下である（＊）ことに着目します。\n甘さの合計が\n\\(X\\)\nを超えず、かつしょっぱさの合計が\n\\(Y\\)\nを超えないようにいくつかの料理の集合\n\\(S\\)\nを選ぶとき、\n\\(S\\)\nに含まれる料理の個数の最大値を\n\\(x\\)\nとします。このとき、元の問題の答えは\n\\(\\min(x+1, N)\\)\nと表せます。（証明：\n\\(x=N\\)\nのとき明らか。\n\\(x<N\\)\nのとき、\n\\(S\\)\nに含まれる料理を先に並べることで最低\n\\(x+1\\)\n個は食べられ、逆に\n\\(x+2\\)\n個食べられたとすると（＊）より要素数\n\\(x+1\\)\nの\n\\(S\\)\nが取れることとなって矛盾。よって食べられる料理の個数の最大値は\n\\(x+1\\)\n。）\nでは、甘さの合計が\n\\(X\\)\nを超えず、かつしょっぱさの合計が\n\\(Y\\)\nを超えないという条件のもとで選べる料理の個数の最大値を計算することを考えましょう。一番簡単なアプローチは以下のような DP を用いることですが、計算量が\n\\(O(NXY)\\)\nとなって間に合いません：\n\\(dp_{i,j,k}=(\\)\n料理\n\\(1,2,\\dots,i\\)\nの中から甘さの合計が\n\\(j\\)\n、しょっぱさの合計が\n\\(k\\)\nとなるようにいくつか料理を選ぶとき、選ぶ料理の個数の最大値）\nそこで、本問題においては\n\\(N\\)\nの値が\n\\(X,Y\\)\nより小さいことに着目して、\nDP のキーと値を入れ替える\nという典型的なアプローチを用います。具体的には、選ぶ料理の個数をキーに、しょっぱさの合計を値に持ってきて、\n\\(dp'_{i,j,k}=(\\)\n料理\n\\(1,2,\\dots,i\\)\nの中から甘さの合計が\n\\(j\\)\nとなるように\n\\(k\\)\n個の料理を選ぶとき、しょっぱさの合計の最小値）\nとすれば、\n\\(O(N^2X)\\)\nの計算量で DP テーブルを埋めることができます。あとは、\n\\(dp'_{N,j,k} \\leq Y\\)\nを満たす\n\\(j\\)\nが存在するような\n\\(k\\)\nの最大値を求めれば良いです。\n実装例 (C++) （\n注\n: 解説本文と本実装例では DP の\n\\(2,3\\)\n番目のキーが表すものが入れ替わっています）:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nvoid chmin(int &a, int b) { a = min(a, b); }\n\nint main() {\n    int n, x, y;\n    cin >> n >> x >> y;\n    vector<int> a(n), b(n);\n    for (int i = 0; i < n; i++) {\n        cin >> a[i] >> b[i];\n    }\n    vector dp(n + 1, vector(n + 1, vector<int>(x + 1, 1e9)));\n    dp[0][0][0] = 0;\n    for (int i = 0; i < n; i++) {\n        for (int j = 0; j <= i; j++) {\n            for (int k = 0; k <= x; k++) {\n                chmin(dp[i + 1][j][k], dp[i][j][k]);\n                if (k + a[i] <= x) {\n                    chmin(dp[i + 1][j + 1][k + a[i]], dp[i][j][k] + b[i]);\n                }\n            }\n        }\n    }\n    for (int i = n; i >= 0; i--) {\n        for (int j = 0; j <= x; j++) {\n            if (dp[n][i][j] <= y) {\n                cout << min(i + 1, n) << endl;\n                return 0;\n            }\n        }\n    }\n}"
+      ],
+      "text_sha256": "fe559ba0518caedbbc179e5f04d280d8923cc0aab5dbfe3f7d4171429c7c7faf",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc364/abc364_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

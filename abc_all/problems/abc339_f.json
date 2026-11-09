@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc339_f",
+  "title": "Product Equality",
+  "contests": [
+    {
+      "contest_id": "abc339",
+      "problem_index": "F"
+    }
+  ],
+  "difficulty": 1716,
+  "raw_difficulty": 1716,
+  "contest_id": "abc339",
+  "problem_index": "F",
+  "url": "https://atcoder.jp/contests/abc339/tasks/abc339_f",
+  "statement": "配点 : 550 点 問題文 N 個の整数 A_1,A_2,\\dots,A_N が与えられます。 以下の条件を満たす整数の組 (i,j,k) の個数を求めてください。 1 \\le i,j,k \\le N A_i \\times A_j = A_k 制約 1 \\le N \\le 1000 \\color{red}{1 \\le A_i < 10^{1000}} 入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\vdots A_N 出力 答えを整数として出力せよ。 入力例 1 5\r\n2\r\n3\r\n6\r\n12\r\n24 出力例 1 6 問題文中の条件を満たす (i,j,k) の組は以下の 6 通りです。 (1,2,3) (1,3,4) (1,4,5) (2,1,3) (3,1,4) (4,1,5) 入力例 2 11\r\n1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n123456789123456789\r\n123456789123456789\r\n987654321987654321\r\n987654321987654321\r\n121932631356500531347203169112635269 出力例 2 40 各整数 A_i の値が非常に大きくなりうることに注意してください。 入力例 3 9\r\n4\r\n4\r\n4\r\n2\r\n2\r\n2\r\n1\r\n1\r\n1 出力例 3 162 A_i の値に重複がありうることに注意してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 個の整数 A_1,A_2,\\dots,A_N が与えられます。 以下の条件を満たす整数の組 (i,j,k) の個数を求めてください。 1 \\le i,j,k \\le N A_i \\times A_j = A_k"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\le N \\le 1000 \\color{red}{1 \\le A_i < 10^{1000}}"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N A_1 A_2 \\vdots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを整数として出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5\r\n2\r\n3\r\n6\r\n12\r\n24"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 6 問題文中の条件を満たす (i,j,k) の組は以下の 6 通りです。 (1,2,3) (1,3,4) (1,4,5) (2,1,3) (3,1,4) (4,1,5)"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 11\r\n1\r\n2\r\n3\r\n4\r\n5\r\n6\r\n123456789123456789\r\n123456789123456789\r\n987654321987654321\r\n987654321987654321\r\n121932631356500531347203169112635269"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 40 各整数 A_i の値が非常に大きくなりうることに注意してください。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 9\r\n4\r\n4\r\n4\r\n2\r\n2\r\n2\r\n1\r\n1\r\n1"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 162 A_i の値に重複がありうることに注意してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc339/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:39:13.295221+00:00",
+  "statement_sha256": "674f8109bc3839da9d197ba61836b4fcd1c087592c14a198313d13a8244ccc93",
+  "editorials": []
+}

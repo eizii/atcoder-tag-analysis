@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc320_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc320/editorial/7125",
+      "text": "一連の流れを高速にシミュレーションすることを考えましょう。\n誰が列に並んでいるかと、列に並んでいない人がいつ列に戻ってくるかがわかっていると良さそうです。\n「そうめんが流される」「人が列に戻ってくる」という2つの事柄を時刻順に取り出せるプライオリティキュー\n\\(Q\\)\nと、誰が列に並んでいるかを管理するordered set\n\\(S\\)\nを用意し、次のように出来事を処理していきます。\n\\(Q\\)\nから事柄を取り出す。\n取り出した事柄が「人が列に戻ってくる」であれば、\n\\(S\\)\nにその人を追加する。\n取り出した事柄が「そうめんが流される」であれば、\n\\(S\\)\nから番号が最小の人を取り出し、その人が得たそうめんの量を更新し、事柄「人が列に戻ってくる」を\n\\(Q\\)\nに追加する。\n\\(Q\\)\nから取り出される事柄は全体で高々\n\\(2M\\)\n個（「そうめんが流される」が\n\\(M\\)\n個と、それぞれに対応する「人が列に戻ってくる」が高々\n\\(M\\)\n個）であり、事柄\n\\(1\\)\nつあたりは\n\\(O(\\log N+\\log M)\\)\n時間で処理できるため、全体で\n\\(O(N+M\\log N+M\\log M)\\)\n時間でシミュレーションが行なえます。\nWriter解(C++)",
+      "codes": [],
+      "text_sha256": "54d035209efc26594a7fecc9e785a024bd02f47336429b98a28153294bb73093",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc320/abc320_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc320/editorial/7172",
+      "text": "セグメント木を用いる解法を紹介します。\n\\(\\text{seg}[k]\\)\nを人\n\\(k\\)\nが戻ってくる時刻 (ただしこの値が現在時刻以下であれば既に列に並んでいるとする) とします。ただし、はじめ全ての人が列に並んでいるので初期値は\n\\(\\text{seg}[k]=0\\)\nとします。この\n\\(\\text{seg}[k]\\)\nを元に各出来事を処理していくことを考えます。\n各出来事でそうめんを得る人の番号は\n\\(\\text{seg}[k] \\le T_i\\)\nを満たす最小の\n\\(k\\)\nです。これはセグメント木上の二分探索を行うことで\n\\(O(\\log N)\\)\nで求めることができます。\n人\n\\(k\\)\nが一旦列から離れることは\n\\(\\text{seg}[k]\\)\nを\n\\(T_i+S_i\\)\nに更新することで表現できます。この操作も\n\\(O(\\log N)\\)\nで行うことができます。\n以上でこの問題を解くことができます。計算量は\n\\(O(N+M\\log N)\\)\nです。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/all>\nusing namespace std;\nint op(int a, int  b) { return min(a, b); }\nint inf() { return 1 << 30; }\nint jud;\nbool f(int x) { return x > jud; }\nint main() {\n\tint n, m;\n\tcin >> n >> m;\n\tvector<int> a(n);\n\tatcoder::segtree<int, op, inf> seg(a);\n\tvector<long long> ans(n);\n\tfor(int i = 0; i < m; i++) {\n\t\tint t, w, s;\n\t\tcin >> t >> w >> s;\n\t\tjud = t;\n\t\tint idx = seg.max_right(0, f);\n\t\tif (idx == n) continue;\n\t\tans[idx] += w;\n\t\tseg.set(idx, t + s);\n\t}\n\tfor (long long i : ans) cout << i << '\\n';\n\treturn 0;\n}"
+      ],
+      "text_sha256": "5be598f89206c9794de7dbe302ab80fa0e844850c0ec38c30f5247dd6e1f71ae",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc320/abc320_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

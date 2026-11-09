@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc020_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc020/editorial.pdf",
+      "text": "B問題　足し算\n\n1.問題概要\n2.アルゴリズム\n\n\n\n\n\n3/19/15                        ©AtCoder Inc. All rights reserved.\n\f\nB問題　問題概要\n\n• 整数 A, B が与えられる\n\n• A と B の十進表記をこの順に連結して\n 得られる整数を 2 倍したものを出力せよ\n\n• 1 ≦ A, B ≦ 999\n\n\n\n\n\n3/19/15\n\f\nB問題　アルゴリズム\n\n• まずは A と B の十進表記を連結する\n\n• 整数が与えられているとはいえ、\n 文字列として受け取ることが可能\n\n• 多くの現代プログラミング言語では、\n 文字列を '+' 演算子で連結できる\n\n\n  int main(){\n    string A, B;\n    cin >> A >> B;\n    string AB = A + B;\n       ...\n\n3/19/15\n\f\nB問題　アルゴリズム\n\n• 次に、得られた文字列を整数に変換する\n\n• 方法は言語によって異なるでしょう。\n「<言語名> 文字列 整数 変換」などで検索\n\n• 整数にしてしまえば 2 倍するのは簡単\n\n\n       ...\n    cout << atoi(AB.c_str()) * 2 << endl;\n  }\n\n• 文字列に変換せず、掛け算や割り算で解くことも可能です\n\n\n\n3/19/15",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "4350941dbd6753b0b7ba88b54a4afbef84c2158909db136ac0a80ff7b017e89a"
+    }
+  ],
+  "status": "available"
+}

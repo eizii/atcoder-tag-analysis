@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc302_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc302/editorial/6404",
+      "text": "s\n,\nn\n,\nu\n,\nk\n,\ne\nが\nこの順に(縦・横・ななめのいずれかの方向に) 連続して並んでいる\n場所の条件のうち最初の\n\\(1\\)\nつを除いた条件、すなわち\n\\(1\\leq i\\leq 4\\)\nについて、\n\\(C_i\\)\nと\n\\(C_{i+1}\\)\nは頂点または辺を共有している。\n\\(C_1,C_2,C_3,C_4,C_5\\)\nの中心はこの順に一直線上に等間隔で並んでいる。\nをみたす\n\\(5\\)\nつのマスの組\n\\((C_1,C_2,C_3,C_4,C_5)\\)\nを\n良い組\nとよぶことにします。\n\\(C_1\\)\nと\n\\(C_2\\)\nを定めた時、\n\\((C_1,C_2,C_3,C_4,C_5)\\)\nが良い組となるような、\n\\(C_3,C_4,C_5\\)\nの候補は存在すれば一意に定まります。\n具体的には、上から\n\\(i\\)\n行目かつ左から\n\\(j\\)\n列目のマスを\n\\((i,j)\\)\nで表し、\n\\(C_1=(x_1,y_1)\\)\n,\n\\(C_2=(x_2,y_2)\\)\nとすると、\n\\((C_1,C_2,C_3,C_4,C_5)\\)\nが良い組となるようにするためには、\n\\(i=3,4,5\\)\nに対して\n\\(C_i=(x_1+(i-1)(x_2-x_1),y_1+(i-1)(y_2-y_1))\\)\nとする他ありません。このようなマスがとれない可能性もあり、その場合は\n\\(C_1\\)\nと\n\\(C_2\\)\nに対応する良い組がないという事になります。\nさて、\n\\(C_1,C_2\\)\nは少なくとも頂点を共有している必要があるため、\n\\(C_1\\)\nを定めた時、\n\\(C_2\\)\nとしてあり得るのは高々\n\\(8\\)\nつとなります。よって、マス目の中に存在する良い組は高々\n\\(8HW\\)\n個しかなく、\ns\n,\nn\n,\nu\n,\nk\n,\ne\nが\nこの順に(縦・横・ななめのいずれかの方向に) 連続して並んでいる\n場所はこのうちのいずれかであるため、良い組全てについて問題文の\n\\(1\\)\nつめの条件 (\n\\(C_1,C_2,C_3,C_4,C_5\\)\nに書き込まれた英小文字はそれぞれ\ns\n,\nn\n,\nu\n,\nk\n,\ne\nである事) をみたすかチェックすれば良いです。見なければならないマスはのべ高々\n\\(40HW(\\leq 4\\times10^5)\\)\n個となるため、時間的にも十分間に合います。\nよって、この問題を解く事ができました。\nc++ による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n,m,x,y;\n\tint dx[8]={-1,-1,-1,0,0,1,1,1};\n\tint dy[8]={-1,0,1,-1,1,-1,0,1};\n\tstring str;\n\n\tcin>>n>>m;\n\tvector<string> s(n);\n\tfor(int i=0;i<n;i++)cin>>s[i];\n\tfor(int i=0;i<n;i++){\n\t\tfor(int j=0;j<m;j++){\n\t\t\tfor(int k=0;k<8;k++){\n\t\t\t\tstr=\"\";\n\t\t\t\tfor(int t=0;t<5;t++){\n\t\t\t\t\tx=i+t*dx[k],y=j+t*dy[k];\n\t\t\t\t\tif((x<0)||(x>=n)||(y<0)||(y>=m))break;\n\t\t\t\t\tstr+=s[x][y];\n\t\t\t\t}\n              \tif(str==\"snuke\"){\n\t\t\t\t\tfor(int t=0;t<5;t++){\n\t\t\t\t\t\tx=i+t*dx[k]+1,y=j+t*dy[k]+1;\n\t\t\t\t\t\tcout<<x<<\" \"<<y<<endl;\n\t\t\t\t\t}\n\t\t\t\t\treturn 0;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "6c533ab2412568d799b3dc8b4c0a1de6d1b4e38cd445291b50d05095aeda3055",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc302/abc302_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

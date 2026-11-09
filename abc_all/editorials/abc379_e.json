@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc379_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc379/editorial/11311",
+      "text": "まずは\n\\(N\\)\nが小さいときに答えがどのように表されるかを考えてみましょう．\n\\(N=3\\)\nのときは答えは次のようになります：\n\\[\n\\begin{aligned}\n&f(1,1)+f(1,2)+f(1,3)+f(2,2)+f(2,3)+f(3,3) \\\\\n=& (S_1)+(10S_1+S_2)+(100S_1+10S_2+S_3)+(S_2)+(10S_2+S_3)+(S_3)\\\\\n=& 10^2(S_1)+10^1(S_1+2S_2)+10^0(S_1+2S_2+3S_3)\n\\end{aligned}\n\\]\nより一般に，\n\\(A_i=\\displaystyle \\sum_{j=1}^i j\\times S_j\\)\nとして答えは\n\\(\\displaystyle \\sum_{i=1}^N 10^{N-i}A_i\\)\nになります．\nこの値は筆算の要領で下の桁から計算することができます．\n\\(c=0,i=0\\)\nとして初期化する．\n\\(i\\lt N\\)\nのとき\n\\(c\\)\nに\n\\(A_{N-i}\\)\nを加算する．\n答えの\n\\(10^i\\)\nの位を\n\\(c\\)\nを\n\\(10\\)\nで割った余りとして確定させる．\n\\(c\\)\nを\n\\(10\\)\nで割り小数点以下を切り捨てる．ここが繰り上がりに対応する．その後，\n\\(i\\)\nを\n\\(1\\)\n増やす．\n\\(i\\lt N\\)\nまたは\n\\(c\\gt 0\\)\nである限り 2. から 4. の流れを繰り返す．\n類題：\nABC233E (Σ[k=0..10^100]floor(X／10^k))",
+      "codes": [
+        "n = int(input())\ns = input()\na = [(i + 1) * int(s[i]) for i in range(n)]\nfor i in range(1, n):\n    a[i] += a[i - 1]\ni = 0\nc = 0\nans = []\nwhile i < n or c > 0:\n    if i < n:\n        c += a[n - 1 - i]\n    ans.append(c % 10)\n    c //= 10\n    i += 1\nprint(*ans[::-1], sep=\"\")"
+      ],
+      "text_sha256": "98a5cd372946cb2cda45272132df7475451939d317bd8005cb90cfa9e7ebf627",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc379/abc379_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc379/editorial/11338",
+      "text": "求める値は\n\\(S_i\\)\nに着目すれば次のようになります．ただし添字は 0-indexed で，\n\\(R_i\\)\nは\n\\(1\\)\nを\n\\(i\\)\n個並べた整数です：\n\\[ \\sum_{i=0}^{N-1}(i+1)\\times S_i\\times R_{N-i} \\]\n多倍長整数を用いて計算したいところですが，素直に一つずつ計算していくと良く見積もっても\n\\(\\Omega(N^2)\\)\nなので高速化を頑張らない限りは間に合わないかと思います．\nここで分割統治することを考えます．\n\\(S[l,m)\\)\nに対する結果と\n\\(S[m,r)\\)\nに対する結果をマージして\n\\(S[l,r)\\)\nに対する結果を得ることを考えると，次の値を求めればよいです．\n\\(S[l,r)\\)\nでの答え\n\\(\\sum_{i=l}^{r-1}(i+1)S_i\\)\n\\(10^{r-l}\\)\n\\(R_{r-l}\\)\n全体の計算量は，乗算が Karatsuba 法（\n\\(n\\)\n桁の乗算が\n\\(O(n^{\\log_2 3})\\)\n）の場合\n\\(O(N^{\\log_2 3})\\)\nになります．\n実装例(PyPy, 195ms)：\nhttps://atcoder.jp/contests/abc379/submissions/59631812",
+      "codes": [],
+      "text_sha256": "e9037b151389d99be97e2d0533d46b8e58d2ed8b2e0c345ec539eb4e86444e54",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc379/abc379_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

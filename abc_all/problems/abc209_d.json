@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc209_d",
+  "title": "Collision",
+  "contests": [
+    {
+      "contest_id": "abc209",
+      "problem_index": "D"
+    }
+  ],
+  "difficulty": 686,
+  "raw_difficulty": 686,
+  "contest_id": "abc209",
+  "problem_index": "D",
+  "url": "https://atcoder.jp/contests/abc209/tasks/abc209_d",
+  "statement": "配点 : 400 点 問題文 高橋王国は N 個の街と N-1 本の道路からなり、街には 1 から N の番号がついています。また、 i\\, (1 \\leq i \\leq N-1) 本目の道路は街 a_i と街 b_i を双方向に結んでおり、どの街からどの街へもいくつかの道路を通ることで移動できます。 道路は全て同じ長さです。 Q 個のクエリが与えられます。 i\\, (1 \\leq i \\leq Q) 番目のクエリでは整数 c_i,d_i が与えられるので、以下の問題を解いてください。 現在高橋君は街 c_i に、青木君は街 d_i にいる。二人が同時に街を出発し、それぞれ街 d_i , c_i を目指して同じ速さで移動するとき、二人が街で出会うか道路上（両端の街を除く）で出会うかを判定せよ。ただし、二人とも最短経路で移動し、街の中を移動する時間は無視できるものとする。 制約 2 \\leq N \\leq 10^5 1 \\leq Q \\leq 10^5 1 \\leq a_i < b_i \\leq N\\, (1 \\leq i \\leq N-1) 1 \\leq c_i < d_i \\leq N\\, (1 \\leq i \\leq Q) 入力は全て整数 どの街からどの街へもいくつかの道路を通ることで移動できる 入力 入力は以下の形式で標準入力から与えられる。 N Q a_1 b_1 a_2 b_2 \\hspace{0.6cm}\\vdots a_{N-1} b_{N-1} c_1 d_1 c_2 d_2 \\hspace{0.6cm}\\vdots c_Q d_Q 出力 Q 行出力せよ。 i\\, (1 \\leq i \\leq Q) 行目には、 i 番目のクエリにおいて二人が街で出会うなら Town 、道路上で出会うなら Road と出力せよ。 入力例 1 4 1\r\n1 2\r\n2 3\r\n2 4\r\n1 2 出力例 1 Road 1 番目のクエリでは、高橋君は街 1 、青木君は街 2 を同時に出発し、 1 本目の道路上で出会います。よって Road と出力してください。 入力例 2 5 2\r\n1 2\r\n2 3\r\n3 4\r\n4 5\r\n1 3\r\n1 5 出力例 2 Town\r\nTown 1 番目のクエリでは、高橋君は街 1 、青木君は街 3 を同時に出発し、街 2 で出会います。よって Town と出力してください。 2 番目のクエリでは、高橋君は街 1 、青木君は街 5 を同時に出発し、街 3 で出会います。よって Town と出力してください。 入力例 3 9 9\r\n2 3\r\n5 6\r\n4 8\r\n8 9\r\n4 5\r\n3 4\r\n1 9\r\n3 7\r\n7 9\r\n2 5\r\n2 6\r\n4 6\r\n2 4\r\n5 8\r\n7 8\r\n3 6\r\n5 6 出力例 3 Town\r\nRoad\r\nTown\r\nTown\r\nTown\r\nTown\r\nRoad\r\nRoad\r\nRoad",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 高橋王国は N 個の街と N-1 本の道路からなり、街には 1 から N の番号がついています。また、 i\\, (1 \\leq i \\leq N-1) 本目の道路は街 a_i と街 b_i を双方向に結んでおり、どの街からどの街へもいくつかの道路を通ることで移動できます。 道路は全て同じ長さです。 Q 個のクエリが与えられます。 i\\, (1 \\leq i \\leq Q) 番目のクエリでは整数 c_i,d_i が与えられるので、以下の問題を解いてください。 現在高橋君は街 c_i に、青木君は街 d_i にいる。二人が同時に街を出発し、それぞれ街 d_i , c_i を目指して同じ速さで移動するとき、二人が街で出会うか道路上（両端の街を除く）で出会うかを判定せよ。ただし、二人とも最短経路で移動し、街の中を移動する時間は無視できるものとする。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 10^5 1 \\leq Q \\leq 10^5 1 \\leq a_i < b_i \\leq N\\, (1 \\leq i \\leq N-1) 1 \\leq c_i < d_i \\leq N\\, (1 \\leq i \\leq Q) 入力は全て整数 どの街からどの街へもいくつかの道路を通ることで移動できる"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q a_1 b_1 a_2 b_2 \\hspace{0.6cm}\\vdots a_{N-1} b_{N-1} c_1 d_1 c_2 d_2 \\hspace{0.6cm}\\vdots c_Q d_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 Q 行出力せよ。 i\\, (1 \\leq i \\leq Q) 行目には、 i 番目のクエリにおいて二人が街で出会うなら Town 、道路上で出会うなら Road と出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 1\r\n1 2\r\n2 3\r\n2 4\r\n1 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Road 1 番目のクエリでは、高橋君は街 1 、青木君は街 2 を同時に出発し、 1 本目の道路上で出会います。よって Road と出力してください。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5 2\r\n1 2\r\n2 3\r\n3 4\r\n4 5\r\n1 3\r\n1 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 Town\r\nTown 1 番目のクエリでは、高橋君は街 1 、青木君は街 3 を同時に出発し、街 2 で出会います。よって Town と出力してください。 2 番目のクエリでは、高橋君は街 1 、青木君は街 5 を同時に出発し、街 3 で出会います。よって Town と出力してください。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 9 9\r\n2 3\r\n5 6\r\n4 8\r\n8 9\r\n4 5\r\n3 4\r\n1 9\r\n3 7\r\n7 9\r\n2 5\r\n2 6\r\n4 6\r\n2 4\r\n5 8\r\n7 8\r\n3 6\r\n5 6"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Town\r\nRoad\r\nTown\r\nTown\r\nTown\r\nTown\r\nRoad\r\nRoad\r\nRoad"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc209/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:31.139871+00:00",
+  "statement_sha256": "6d67908c1754a381aad03b4765d8018fa4eafee062bb0167e183dba5806b109d",
+  "editorials": []
+}

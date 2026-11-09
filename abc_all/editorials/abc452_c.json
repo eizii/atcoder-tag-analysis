@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc452_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc452/editorial/18410",
+      "text": "実装方針\n各\n\\(S_j\\)\nの\n\\(i\\)\n文字目について，以下を高速に判定することを考えます．\n長さ\n\\(A_i\\)\n文字で，\n\\(B_i\\)\n文字目が\n\\(S_j[i]\\)\nと一致するような文字列が\n\\(S_1, \\cdots, S_M\\)\nのなかに存在するか？\nこれを愚直な実装から高速化することは困難に見えます．そこで，前もって必要な値を求めておくことを考えます．\n\\(\\mathrm{memo}[len][place][c]\\)\nを，「長さ\n\\(len\\)\n文字で，\n\\(place\\)\n文字目が\n\\(c\\)\nと一致するような文字列が\n\\(S_1, \\cdots, S_M\\)\nのなかに存在する」かどうかを表すべき値とします．これらを False で初期化し，以下の前処理を行います．\n各\n\\(S_j\\)\nの\n\\(i\\)\n文字目について，その文字が\n\\(c\\)\nのとき，\n\\(\\mathrm{memo}[|S_j|][i][c]\\)\nを True にする．\nこの前処理は\n\\(O(N^2_{max} \\sigma + N_{max}M)\\)\n時間で動きます(\n\\(N_{max} := \\max(|S_1|, \\cdots, |S_M|)\\)\n．また，\n\\(\\sigma\\)\nは文字の種類数)．\nこの前処理が終わった時点で，\n\\(\\mathrm{memo}\\)\nの各値は正しい値をもちます．\n判定は各位置について\n\\(O(1)\\)\n時間で行えるようになったので，全体で\n\\(O(N^2_{max} \\sigma + N_{max}M)\\)\n時間で動き，十分高速です．\n実装例 (C++)\nC++ での実装例を以下に示します．\nなお，この実装例は英小文字 (\na\n-\nz\n) の文字コードが連続であることを前提にしています．\nそのため，AtCoder のジャッジサーバをはじめとする主流の環境では意図通りに動作しますが，必ずしも手元の環境で意図通りに動くとは限りません．",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n#include <vector>\nusing std::vector;\nusing std::pair;\nusing std::make_pair;\nusing std::min;\nusing std::max;\n#include <string>\nusing std::string;\n\ntypedef long long int ll;\n\nconst int MAX_N = 10;\nconst int SIGMA = 26;\n\nint n, m;\nvector<int> a, b;\nvector<string> s;\n\nvoid solve () {\n\t// has[i][j][k] == 1 iff there exists s such that |s| == i, s[j] == ('a' + k)\n\tint has[MAX_N + 1][MAX_N][SIGMA];\n\t// init with 0\n\tfor (int i = 0; i <= MAX_N; i++) {\n\t\tfor (int j = 0; j < MAX_N; j++) {\n\t\t\tfor (int k = 0; k < SIGMA; k++) {\n\t\t\t\thas[i][j][k] = 0;\n\t\t\t}\n\t\t}\n\t}\n\t// set 1\n\tfor (int i = 0; i < m; i++) {\n\t\tint sz = s[i].size();\n\t\tfor (int j = 0; j < sz; j++) {\n\t\t\thas[sz][j][s[i][j] - 'a'] = 1;\n\t\t}\n\t}\n\n\tvector<int> isyes(m, 0);\n\t// answer for each s\n\tfor (int i = 0; i < m; i++) {\n\t\tint sz = s[i].size();\n\t\tif (sz != n) continue;\n\n\t\tbool isok = true;\n\t\tfor (int j = 0; j < n; j++) {\n\t\t\tif (has[a[j]][b[j] - 1][s[i][j] - 'a'] == 0) isok = false;\n\t\t}\n\t\tif (isok) {\n\t\t\tisyes[i] = 1;\n\t\t}\n\t}\n\n\t// output\n\tfor (int i = 0; i < m; i++) {\n\t\tcout << (isyes[i] ? \"Yes\" : \"No\") << \"\\n\";\n\t}\n}\n\nint main (void) {\n\tstd::cin.tie(nullptr);\n\tstd::ios_base::sync_with_stdio(false);\n\n\tcin >> n;\n\ta.resize(n);\n\tb.resize(n);\n\tfor (ll i = 0; i < n; i++) {\n\t\tcin >> a[i] >> b[i];\n\t}\n\n\tcin >> m;\n\ts.resize(m);\n\tfor (ll i = 0; i < m; i++) {\n\t\tcin >> s[i];\n\t}\n\n\n\tsolve();\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "75015e2e8f884b70acd8a3b5fb865e40eb3fc1938e3ff6f0c3a2dd0edf96183c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc452/abc452_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc238_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc238/editorial/3360",
+      "text": "累積和配列\n\\(b=(b_0,b_1,\\ldots,b_N)\\)\nを考えます。すなわち各\n\\(i\\ (0 \\leq i \\leq N)\\)\nについて、\n\\(b_i\\)\nは\n\\(a\\)\nの先頭\n\\(i\\)\n項の和を表すこととなります。\nすると、高橋くんが与えてくれる情報は以下のように言い換えることが可能です。\n\\(i\\ (1 \\leq i \\leq Q)\\)\n個目の情報:\n\\(a_{l_i}+a_{l_i+1}+\\cdots+a_{r_i}=b_{r_i}-b_{l_i-1}\\)\nの値\nはじめ、\n\\(b\\)\nの各要素について分かることは\n\\(b_0\\)\nの値が\n\\(0\\)\nであることのみです。よって\n\\(a\\)\nに含まれる全要素の総和\n\\(a_1+a_2+\\cdots+a_N=b_N\\)\nを特定することができるということは、以下と同値です。\n\\(b_0\\)\nからいくつかの情報を辿って\n\\(b_N\\)\nに辿り着くことができる。\nより厳密な言い方をすると、以下のようになります。\n頂点に\n\\(0\\)\nから\n\\(N\\)\nまでの番号が振られた\n\\(N+1\\)\n頂点\n\\(0\\)\n辺のグラフを用意する。その後、各\n\\(i\\ (1 \\leq i \\leq Q)\\)\nについて頂点\n\\(l_i-1\\)\nと頂点\n\\(r_i\\)\nの間に無向辺を貼る。このとき、頂点\n\\(0\\)\nと頂点\n\\(N\\)\nが連結である。\nこれを判定することは、幅優先探索や Union-Find 木などを用いると\n\\(O(N+Q)\\)\nないし\n\\(O(N+Qα(N))\\)\n等の計算量で実行可能です。ここで、関数\n\\(α\\)\nはアッカーマン関数の逆関数を表します。\n実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\n//union_find_tree\nstruct union_find{\n    int N;\n    vector<int> par, siz;\n    union_find(int n) : N(n){\n        par.resize(N);\n        siz.resize(N, 1);\n        for(int i=0; i<N; i++) par[i] = i;\n    }\n    int root(int X){\n        if(par[X] == X) return X;\n        return par[X] = root(par[X]);\n    }\n    bool same(int X, int Y){\n        return root(X) == root(Y);\n    }\n    void unite(int X, int Y){\n        X = root(X);\n        Y = root(Y);\n        if(X == Y) return;\n        if(siz[Y] < siz[X]) std::swap(X, Y);\n        par[X] = Y;\n        siz[Y] += siz[X];\n        siz[X] = 0;\n    }\n};\n\nint main(){\n\tint N,Q; cin >> N >> Q;\n\tunion_find tree(N+1);\n\twhile(Q--){\n\t\tint l,r; cin >> l >> r;\n\t\ttree.unite(l-1,r);\n\t}\n\tstring ans = \"No\";\n\tif(tree.same(0,N)) ans = \"Yes\";\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "457ff3e44ffc1bc3d3186217bdac4ec53b160c0085a3e8864de6a484636165c0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc238/abc238_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

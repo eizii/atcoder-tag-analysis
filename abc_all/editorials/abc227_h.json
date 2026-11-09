@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc227_h",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc227/editorial/2915",
+      "text": "すぬけ君は \\(9\\) 頂点 \\(12\\) 辺の二部グラフ上を散歩すると考えることができます。 各辺について、通る回数を決めます。この時、以下の条件が満たされている必要があります。 各頂点について、それと繋がっている辺を通る回数の和は \\(2\\times A_{i,j}\\) に等しい 一度も通らない辺を全て取り除いたグラフは連結である 実は、これらの条件を全て満たしている時、必ず解が存在します。 １．前述の条件を満たすように各辺を通る回数を決める 連結性を保証するために、 \\(9\\) 頂点の木を \\(1\\) つ選び、それに含まれる辺は必ず \\(1\\) 回以上通ることにします。 その後は最大フローを用いて次数の条件を満たすものを求めます。 最初に選ぶ木は \\(2^{12}\\) 種類以下なので、全て試すことができます。 ２．実際に解を構築する オイラー路を構築するのと同じ要領で行います。 具体的には、各辺を通った回数を管理しながら DFS をし、帰りがけ順で行動を記録します。 参考として、以下はオイラー路を構築するコードです。 解答例（C++)： https://atcoder.jp/contests/abc227/submissions/27198758",
+      "codes": [
+        "vector<int> euler_circuit(vector<vector<pair<int, int>>> G, int n, int m) {\n    vector<int> path;\n    vector<bool> used(m, false);\n    function<void(int)> dfs=[&](int i) {\n        for(pair<int, int> x : G[i]) { // x = (行先の頂点番号、辺の番号)\n            if(!used[x.second]) {\n                used[x.second] = true;\n                dfs(x.first);\n            }\n        }\n        path.push_back(i);\n    };\n    dfs(0);\n    reverse(path.begin(), path.end());\n    return path;\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "f3b35c9dd1e3a74f4b26a138fc7dae138f02dfcdb27dfc8b957a3eef3704b385"
+    }
+  ],
+  "status": "available"
+}

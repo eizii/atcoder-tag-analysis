@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc433_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc433/editorial/14637",
+      "text": "\\(i\\)\nと\n\\(A_j\\)\nの桁数\n\\(k\\)\nを固定した時に条件を全て満たす\n\\(j\\)\nの個数を数えることを考えます。\n\\(A_j\\)\nの桁数は\n\\(k\\)\nなので、\n\\(f(A_i,A_j)=10^{k}A_i+A_j\\)\nと表すことができます。したがって、\n\\(f(A_i,A_j)\\)\nが\n\\(M\\)\nの倍数になることは\n\\(A_j \\equiv -10^{k}A_i \\bmod M\\)\nが成り立つことと同値です。\nこの条件を満たす\n\\(j\\)\nの個数は各\n\\(k\\)\nに対し\n\\(A_j\\)\nの桁数が\n\\(k\\)\nとなる\n\\(j\\)\nに対する\n\\(A_j \\bmod M\\)\nの map を持つことで簡単に値を得ることができます。また、 map を用いずに\n\\(A_j \\bmod M\\)\nを昇順に並べたリスト上で二分探索をすると（計算量は同じですが）より高速に計算することができます。\n\\(i\\)\nは\n\\(O(N)\\)\n通り、\n\\(k\\)\nは\n\\(O(\\log \\max_i A_i)\\)\n通り存在し、\n\\(i,k\\)\nを固定した後に条件を満たす\n\\(j\\)\nの個数を求めるのに\n\\(O(\\log N)\\)\n時間かかるので全体の計算量は\n\\(O(N \\log \\max_i A_i \\log N)\\)\nとなります。\n以上を適切に実装することでこの問題に正答することができます。\n実装例(Python3)\n実装例(C++)",
+      "codes": [
+        "import bisect\nimport sys\ninput = sys.stdin.readline\n\nn, m = map(int, input().split())\na = list(map(int, input().split()))\ng = [[] for _ in range(11)]\nfor v in a:\n    g[len(str(v))].append(v % m)\nfor gg in g:\n    gg.sort()\nans = 0\nfor ai in a:\n    for k in range(1, 11):\n        ai = (ai * 10) % m\n        key = (m - ai) % m\n        ans += bisect.bisect_left(g[k], key + 1) - bisect.bisect_left(g[k], key)\nprint(ans)",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tcin.tie(nullptr);\n\tios::sync_with_stdio(false);\n\tint n;\n\tlong long m;\n\tcin >> n >> m;\n\tvector<int> a(n);\n\tfor (int &v : a)\n\t\tcin >> v;\n\tvector<vector<int>> g(11);\n\tfor (int v : a)\n\t\tg[to_string(v).size()].push_back(v % m);\n\tfor (auto &gg : g)\n\t\tsort(gg.begin(), gg.end());\n\tlong long ans = 0;\n\tfor (long long ai : a) {\n\t\tfor (int k = 1; k < 11; k++) {\n\t\t\tai *= 10, ai %= m;\n\t\t\tconst int key = (m - ai) % m;\n\t\t\tans += lower_bound(g[k].begin(), g[k].end(), key + 1) - lower_bound(g[k].begin(), g[k].end(), key);\n\t\t}\n\t}\n\tcout << ans << endl;\n}"
+      ],
+      "text_sha256": "2fc67e0b6a1f964e4c3dcf293892f0413fb2faf6ab17751e263c4f961df0f056",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc433/abc433_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

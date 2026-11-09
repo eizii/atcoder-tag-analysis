@@ -1,0 +1,14 @@
+{
+  "problem_id": "abc463_g",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc463/editorial/21928",
+      "text": "以下では確率を \\(P(\\cdot)\\) 、期待値を \\(E[\\cdot]\\) で表します。 \\(i=0,1,\\dots,N\\) について \\(P(x'=2i-N)=\\frac{1}{2^N}\\binom{N}{i}\\) であり、問題の答えは \\(E[|x'-X|]\\) です。 \\(P(|x'|\\leq N)=1\\) 、また移動の対称性から \\(E[x']=0\\) であるため、 \\(X \\geq N\\) のとき以下が成り立ちます。 \\[E[|x'-X|]=E[X-x']=E[X]-E[x']=X\\] 同様にして \\(X \\leq -N\\) のときは \\(E[|x'-X|]=-X\\) です。 \\(-N \\lt X \\lt N\\) のとき、 \\(\\mathbf{1}\\) を指示関数、 \\(M=\\lceil\\frac{N+X}{2}\\rceil\\) とすると \\[\\begin{aligned}\nE[|X-x'|]\n&=E[x'-X]+2E\\left[(X-x')\\mathbf{1}_{\\{x' \\lt X\\}}\\right]\\\\\n&=-X+2E\\left[(X-x')\\mathbf{1}_{\\{x' \\lt X\\}}\\right]\\\\\n&=-X+2\\sum_{i=0}^{M-1}(N+X-2i)P(x'=2i-N)\\\\\n&=-X+\\frac{1}{2^{N-1}}\\sum_{i=0}^{M-1}(N+X-2i)\\binom{N}{i}\n\\end{aligned}\\] となります。したがって以下の値を求められればよいです。 \\[\nf(N,M)=\\sum_{i=0}^{M-1}\\binom{N}{i},\\quad\ng(N,M)=\\sum_{i=0}^{M-1}i\\binom{N}{i}\n\\] \\(f\\) について \\(f(N,M+1)-f(N,M)=\\binom{N}{M}\\) および \\[\\begin{aligned}\nf(N+1,M)\n=\\sum_{i=0}^{M-1}\\binom{N+1}{i}\n=\\sum_{i=0}^{M-1}\\left(\\binom{N}{i-1}+\\binom{N}{i}\\right)\n=2f(N,M)-\\binom{N}{M-1}\n\\end{aligned}\\] が成り立つため、階乗を前計算して二項係数を \\(O(1)\\) 時間で計算できるようにすれば、 \\((N,M)\\) について Mo’s algorithm を用いることで各問題の答えの計算に必要なすべての \\(f(N,M)\\) を \\(O(\\max (N+|X|)\\cdot\\sqrt{T})\\) 時間で列挙することができます。 \\(g\\) についても類似の式として \\(g(N,M+1)-g(N,M)=M\\binom{N}{M}\\) および \\(g(N+1,M)=2g(N,M)+f(N,M)-M\\binom{N}{M-1}\\) が成り立つため、同様にして計算できます。 実装例(C++) / 実装例(Python)",
+      "codes": [],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "cc157bd03218c057d9c205a305cb24f209ad384bb66ba389305e47aa1894b343"
+    }
+  ],
+  "status": "available"
+}

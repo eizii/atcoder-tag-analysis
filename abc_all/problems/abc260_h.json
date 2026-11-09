@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc260_h",
+  "title": "Colorfulness",
+  "contests": [
+    {
+      "contest_id": "abc260",
+      "problem_index": "Ex"
+    }
+  ],
+  "difficulty": 3339,
+  "raw_difficulty": 3339,
+  "contest_id": "abc260",
+  "problem_index": "Ex",
+  "url": "https://atcoder.jp/contests/abc260/tasks/abc260_h",
+  "statement": "配点 : 600 点 問題文 1 から N までの番号がついた N 個のボールがあります。ボール i には色 a_i がついています。 (1, 2, \\dots, N) を並べ替えた列 P = (P_1, P_2, \\dots, P_N) に対して C(P) を次のように定めます。 ボールを P_1, P_2, \\dots, P_N という順番に一列に並べたときの、異なる色のボールが隣り合っている場所の数。 (1, 2, \\dots, N) を並べ替えた列全体の集合を S_N と置きます。また、 F(k) を次のように置きます。 \\displaystyle F(k) = \\left(\\sum_{P \\in S_N}C(P)^k \\right) \\bmod 998244353 F(1), F(2), \\dots, F(M) を列挙してください。 制約 2 \\leq N \\leq 2.5 \\times 10^5 1 \\leq M \\leq 2.5 \\times 10^5 1 \\leq a_i \\leq N 入力される値はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N M a_1 a_2 \\dots a_N 出力 答えを以下の形式で出力せよ。 F(1) F(2) \\dots F(M) 入力例 1 3 4\r\n1 1 2 出力例 1 8 12 20 36 (P, C(P)) の組としてあり得るものを列挙すると次のようになります。 P=(1,2,3) のとき C(P) = 1 P=(1,3,2) のとき C(P) = 2 P=(2,1,3) のとき C(P) = 1 P=(2,3,1) のとき C(P) = 2 P=(3,1,2) のとき C(P) = 1 P=(3,2,1) のとき C(P) = 1 これらの値を F(k) に代入すれば答えを計算することができます。例えば F(1) = 1^1 + 2^1 + 1^1 + 2^1 + 1^1 + 1^1 = 8 です。 入力例 2 2 1\r\n1 1 出力例 2 0 入力例 3 10 5\r\n3 1 4 1 5 9 2 6 5 3 出力例 3 30481920 257886720 199419134 838462446 196874334",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1 から N までの番号がついた N 個のボールがあります。ボール i には色 a_i がついています。 (1, 2, \\dots, N) を並べ替えた列 P = (P_1, P_2, \\dots, P_N) に対して C(P) を次のように定めます。 ボールを P_1, P_2, \\dots, P_N という順番に一列に並べたときの、異なる色のボールが隣り合っている場所の数。 (1, 2, \\dots, N) を並べ替えた列全体の集合を S_N と置きます。また、 F(k) を次のように置きます。 \\displaystyle F(k) = \\left(\\sum_{P \\in S_N}C(P)^k \\right) \\bmod 998244353 F(1), F(2), \\dots, F(M) を列挙してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 2.5 \\times 10^5 1 \\leq M \\leq 2.5 \\times 10^5 1 \\leq a_i \\leq N 入力される値はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M a_1 a_2 \\dots a_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを以下の形式で出力せよ。 F(1) F(2) \\dots F(M)"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 4\r\n1 1 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 8 12 20 36 (P, C(P)) の組としてあり得るものを列挙すると次のようになります。 P=(1,2,3) のとき C(P) = 1 P=(1,3,2) のとき C(P) = 2 P=(2,1,3) のとき C(P) = 1 P=(2,3,1) のとき C(P) = 2 P=(3,1,2) のとき C(P) = 1 P=(3,2,1) のとき C(P) = 1 これらの値を F(k) に代入すれば答えを計算することができます。例えば F(1) = 1^1 + 2^1 + 1^1 + 2^1 + 1^1 + 1^1 = 8 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2 1\r\n1 1"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 0"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 10 5\r\n3 1 4 1 5 9 2 6 5 3"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 30481920 257886720 199419134 838462446 196874334"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc260/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:35.396309+00:00",
+  "statement_sha256": "7f570d646ea42f72a4567eb3fe0826ecf2527a583b12e12595fbf57d387b55c4",
+  "editorials": []
+}

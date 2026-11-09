@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc324_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc324/editorial/7359",
+      "text": "平方数 \\(X\\) が長さ \\(N\\) の文字列 \\(S\\) を並べ替えたものならば、\\(X\\) は \\(10 ^ N\\) 未満の平方数である必要があります。\n\\(10 ^ N\\) 未満の平方数はたかだか \\(\\left\\lfloor\\sqrt{10 ^ N}\\right\\rfloor\\) 個です。\nこれらの平方数すべてについて、\\(S\\) を並べ替えてその数にできるかを判定すればよいです。\n次の問題を考えます。\n\\(2\\) つの文字列 \\(S,T\\) がある。一方を並べ替えてもう一方と等しくできるか判定してください。\nどの文字 \\(c\\) についても、 \\(S\\) に \\(c\\) が含まれる個数 \\(=T\\) に \\(c\\) が含まれる個数 が成り立つことが必要十分条件です。\n実際に\n0\n,\n1\n, …,\n9\nについて個数を数えることや、\\(S,T\\) をソートした結果が等しいか判定することでこの条件をチェックすることができます。\n実装例は以下のようになります。\n時間計算量は \\(O(N10 ^ {N/2})\\) や \\(O(N10 ^ {N/2}\\log N)\\) などになります。",
+      "codes": [
+        "#include <iostream>\n#include <string>\n#include <algorithm>\n#include <cmath>\n\nint main() {\n    using namespace std;\n\n    int N;\n    string S;\n    cin >> N >> S;\n\n    ranges::sort(S); // S をソートしておく\n\n    long max_value = pow(10, N);\n\n    int ans = 0;\n    for (long i = 0; i * i < max_value; ++i) {\n        string T = to_string(i * i);\n        T.resize(N, '0'); // 桁数を揃える\n        ranges::sort(T); // ソートして\n        if (S == T)\n            ++ans; // 一致するか判定\n    }\n    cout << ans << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "eaf0856ea40c0545811dfb4e0ebd4c0d8901f305d3d3863bfc28a43bb44bb6c8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc324/abc324_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

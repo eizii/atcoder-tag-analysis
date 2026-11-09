@@ -1,0 +1,19 @@
+{
+  "problem_id": "abc234_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc234/editorial/3220",
+      "text": "この問題においては\n\\(N\\)\nの制約が\n\\(100\\)\n以下と小さいため、すべての\n\\((i,j)\\ (1 \\leq i \\lt j \\leq N)\\)\nについて（このような組は\n\\(\\frac{N(N-1)}{2}\\)\n個ある）\n\\(i\\)\n個目の点と\n\\(j\\)\n個目の点を結ぶ線分の長さを求めた上でその最大値を取っても実行時間制限に余裕を持って間に合います。\n\\(2\\)\n点を結ぶ線分の長さはそれらのユークリッド距離に等しく、その値は\n\\(\\sqrt{(x_i-x_j)^2+(y_i-y_j)^2}\\)\nとなります。\nこれらを踏まえてコードを書くと、以下のようになります。計算量は\n\\(O(N^2)\\)\nです。\n実装例 (Python)\nなお、C++ 等一部の言語においてはデフォルトでの小数出力の桁数がこの問題において許容される誤差の範囲を超えている（例えば小数点以下\n\\(5\\)\n桁までしか表示されないなど）ため、以下のようなコードは不正解となります。\n実装例 (C++)\nこのような場合には、std::fixed と std::setprecision を用いるなどして小数出力の桁数を指定すればよいです。\n実装例 (C++)",
+      "codes": [
+        "from math import sqrt\nN = int(input())\nx = [0]*N\ny = [0]*N\nfor i in range(N):\n    x[i],y[i] = map(int,input().split())\nans = 0\nfor i in range(N):\n    for j in range(i+1,N):\n        X = x[i]-x[j]\n        Y = y[i]-y[j]\n        ans = max(ans,sqrt(X*X+Y*Y))\nprint(ans)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint N; cin >> N;\n\tvector<int> x(N),y(N);\n\tfor(int i=0; i<N; i++) cin >> x[i] >> y[i];\n\tdouble ans = 0;\n\tfor(int i=0; i<N; i++){\n\t\tfor(int j=i+1; j<N; j++){\n\t\t\tint X = x[i]-x[j], Y = y[i]-y[j];\n\t\t\tans = max(ans,sqrt(X*X+Y*Y));\n\t\t}\n\t}\n\tcout << ans << endl;\n}",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\tint N; cin >> N;\n\tvector<int> x(N),y(N);\n\tfor(int i=0; i<N; i++) cin >> x[i] >> y[i];\n\tdouble ans = 0;\n\tfor(int i=0; i<N; i++){\n\t\tfor(int j=i+1; j<N; j++){\n\t\t\tint X = x[i]-x[j], Y = y[i]-y[j];\n\t\t\tans = max(ans,sqrt(X*X+Y*Y));\n\t\t}\n\t}\n\tcout << fixed << setprecision(10) << ans << endl;\n}"
+      ],
+      "text_sha256": "c9b044d09c7640dfd97afb7ad11b2f7899fe4db5b72fb0f9902ddcc5fac903a4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc234/abc234_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

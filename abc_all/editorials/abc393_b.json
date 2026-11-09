@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc393_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc393/editorial/12250",
+      "text": "三重の for 文等を用いて\n\\((i,j,k)\\ (1\\leq i<j<k\\leq|S|)\\)\nの組を全探索し、それぞれの組について条件を満たすかどうか判定して、条件を満たすものの数を数えればよいです。\n具体的な実装方法については、下記の実装例 (C++, Python) を参考にしてください。\nBonus\n(ABC-C 相当):\n\\(O(|S|^2)\\)\nで解いてください。\nBonus+\n(ABC-F 相当):\n\\(O(|S|\\log^2 |S|)\\)\nで解いてください。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main() {\n    string s;\n    cin >> s;\n    int n = s.size();\n    int ans = 0;\n    for (int i = 0; i < n; i++) {\n        for (int j = i + 1; j < n; j++) {\n            for (int k = j + 1; k < n; k++) {\n                if (j - i == k - j and s[i] == 'A' and s[j] == 'B' and s[k] == 'C') ++ans;\n            }\n        }\n    }\n    cout << ans << endl;\n}",
+        "s = input()\nn = len(s)\nans = 0\n\nfor i in range(n):\n  for j in range(i + 1, n):\n    for k in range(j + 1, n):\n      if j - i == k - j and s[i] == 'A' and s[j] == 'B' and s[k] == 'C':\n        ans += 1\n        \nprint(ans)"
+      ],
+      "text_sha256": "15814a607f6ab87553d5918819402c3aee06bea03b3c1910d04d22d41811d5d8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc393/abc393_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc393/editorial/12262",
+      "text": "重要：この記事は青コーダー以上を想定読者としています。B問題の解説を求めている方は他の解説を参照してください。\n\\(N:=|S|\\)\nとします。\n公式解説\nで存在のみが言及されている\n\\(O(N(\\log N)^2)\\)\n解法を解説します。\nこの記事では、列の添字のindexは0から始まるものとします。\n前座\n定理：\n長さ\n\\(N\\)\nの数列\n\\(A,B\\)\nが与えられたとき、\n\\(C_k=\\sum_{i+j=k,\\ i<j}A_iB_j\\)\nにより定まる数列\n\\(C\\)\nは\n\\(O(N(\\log N)^2)\\)\nで求めることができる。\n証明：\n数列に対する二項演算\n\\(*\\)\nを\n\\((A*B)_k=\\sum_{i+j=k}A_iB_j\\)\nと定める。\n数列に対する二項演算\n\\(*'\\)\nを\n\\((A*'B)_k=\\sum_{i+j=k,\\ i<j}A_iB_j\\)\nと定める。\n数列に対する二項演算\n\\(+\\)\nを\n\\((A+B)_k=A_k+B_k\\)\nと定める。\n長さ\n\\(N\\)\nの数列\n\\(A\\)\nに対し、後半を\n\\(0\\)\nクリアした数列を\n\\(A^L=(A_0,A_1,\\ldots,A_{\\lfloor N/2\\rfloor -1},0,0,\\ldots,0)\\)\n、前半を 0 クリアした数列を\n\\(A^R:=(0,0,\\ldots,0,A_{\\lfloor N/2\\rfloor },A_{\\lfloor N/2\\rfloor +1},\\ldots,A_{N-1})\\)\nと定める。\nこのとき、\n\\(A*'B=A^L*'B^L+A^L*B^R+A^R*'B^R\\)\nとなる。第\n\\(2\\)\n項は FFT により求まり、第\n\\(1\\)\n項と第\n\\(3\\)\n項は(0である部分を適切に取り除いて)再帰的に計算することで、長さ\n\\(N\\)\nの数列\n\\(A,B\\)\nに対して\n\\(A*'B\\)\nは\n\\(O(N(\\log N)^2)\\)\nで求められることがわかる。\n本題\n\\(A_i=\\begin{cases}\n1 && \\text{if } S_i=\\text{A}\\\\\n0 && \\text{if } S_i\\neq\\text{A}\n\\end{cases}\\)\n\\(C_i=\\begin{cases}\n1 && \\text{if } S_i=\\text{C}\\\\\n0 && \\text{if } S_i\\neq\\text{C}\n\\end{cases}\\)\nと数列\n\\(A,C\\)\nを定める。\n\\(j\\)\nを固定したとき、問題の条件を満たす\n\\(i,k\\)\nの組の個数は\n\\(\\sum_{x>0}A_{j-x}C_{j+x}\\)\nとなるが、\n\\(\\sum_{x>0}A_{j-x}C_{j+x}=\\sum_{i+k=2j,\\ i<k}A_iC_k=(A*'C)_{2j}\\)\nなので、\n\\(A*'C\\)\nを求めることで全ての\n\\(j\\)\nについて求めることができる。よって\n\\(O(N(\\log N)^2)\\)\nでこの問題を解くことができた。",
+      "codes": [],
+      "text_sha256": "d3e841234a743fd926cdf1194325ff2ca1c89e141c27490ffa2320a679420415",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc393/abc393_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

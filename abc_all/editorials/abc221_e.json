@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc221_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc221/editorial/2718",
+      "text": "\\(A\\)\nの要素が互いに異なると仮定したとき、任意の整数\n\\(i,j\\ (1 \\leq i \\lt j \\leq N)\\)\nについて以下が成り立ちます。\n\\(A'_1=A_i\\)\nかつ\n\\(A'_k=A_j\\)\nが成り立つような\n\\(A\\)\nの連続するとは限らない部分列\n\\(A'=(A'_1,A'_2,\\ldots,A'_k)\\)\nは、\n\\(2^{j-i-1}\\)\n個存在する。\n故に、\n\\(A\\)\nの要素が互いに異なると仮定した場合答えは以下の通りになります。\n\\(1 \\leq i \\lt j \\leq N\\)\nかつ\n\\(A_i \\leq A_j\\)\nを満たすすべての整数対\n\\((i,j)\\)\nに対する、\n\\(2^{j-i-1}\\)\nの総和\n\\(2^{j-i-1}=\\frac{2^{j-1}}{2^i}\\)\nより、以下のことが分かります。\n\\(j=1,2,\\ldots,N\\)\nについて、\n\\(B_j=(1 \\leq i \\lt j\\)\nかつ\n\\(A_i \\leq A_j\\)\nを満たすようなすべての整数\n\\(i\\)\nに対する、\n\\(\\frac{1}{2^i}\\)\nの総和\n\\()\\)\nと定義する。このとき、答えは\n\\(\\sum_{j=1}^{N} B_j \\times 2^{j-1}\\)\nである。\nよって\n\\(j=1,2,\\ldots,N\\)\nについて\n\\(B_j\\)\nが求められてさえいれば、答えを求めることは容易です。\n\\(B_j\\)\nを求めること自体はそこまで難しくはなく、\n\\(A\\)\nの要素を座標圧縮した上で Binary Indexed Tree 等を用いて添字の昇順に走査していくことで\n\\(O(N \\log N)\\)\nで求値可能です。ここで\n\\(\\frac{1}{2^i}\\)\nを小数等で管理するのは困難であるため、\n\\(\\text{mod}\\ 998244353\\)\n上での逆元を用いて管理することが推奨されます。\n\\(A\\)\nの要素が互いに異ならない場合においても、似たような手法により答えを求めることが可能です。よってこの問題を解くことができました。\n計算量は実装により\n\\(O(N \\log N)\\)\nや\n\\(O(N \\log \\text{mod})\\)\nとなります（後者は逆元の計算を毎回行った場合の計算量）。\n実装例 (C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nusing ll = long long;\n\nconst ll mod = 998244353;\n\nstruct binary_indexed_tree{\n    int N;\n    vector<ll> bit;\n    binary_indexed_tree(int n):N(n){\n        bit.resize(N+1,0);\n    }\n    ll addition(ll x, ll y){\n        return (x+y)%mod;\n    }\n    void add(int x,ll a){\n        x++;\n        for(x; x<=N; x+=(x&-x)) bit[x] = addition(bit[x],a);\n    }\n    ll sum(int x){\n        x++;\n        ll ret=0;\n        for(x; x>0; x-=(x&-x)) ret = addition(ret,bit[x]);\n        return ret;\n    }\n};\n\nll modpow(ll x, ll y){\n    ll ret = 1;\n    while(0 < y){\n        if(y & 1){\n            ret *= x;\n            ret %= mod;\n        }\n        x *= x;\n        x %= mod;\n        y >>= 1;\n    }\n    return ret;\n}\n\nint comp(vector<int> &A){\n    std::map<int,int> mem;\n    for(auto p: A) mem[p] = 0;\n    int sz = 0;\n    for(auto &p: mem) p.second = sz++;\n    for(auto &p: A) p = mem[p];\n    return sz;\n}\n\nint main(){\n    const ll div = modpow(2,mod-2);\n    int N; cin >> N;\n    vector<int> A(N);\n    for(int i=0; i<N; i++) cin >> A[i];\n    int n = comp(A);\n    binary_indexed_tree bit(n);\n    ll ans = 0;\n    for(int i=0; i<N; i++){\n        ans += bit.sum(A[i])*modpow(2,i);\n        ans %= mod;\n        bit.add(A[i],modpow(div,i+1));\n    }\n    cout << ans << endl;\n}"
+      ],
+      "text_sha256": "8894b403411b7bdfdf05050e8914d3bad27c1f20b809fb80ed6b601257437d6d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc221/abc221_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

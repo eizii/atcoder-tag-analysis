@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc357_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc357/editorial/10186",
+      "text": "この問題を遅延セグメント木で解くことを考えます。\n遅延セグメント木の詳細については、他の解説記事やAtCoder Library の説明などを参照してください。\n具体的には、\n\\(a,k\\geq 0\\)\n,\n\\(2^k(a+1)\\leq N\\)\nをみたす整数\n\\(a,n\\)\nを用いて\n\\(a\\cdot2^k+1\\leq i\\leq (a+1)2^k\\)\nと書ける区間に対して、区間内の\n\\(A_i\\times B_i\\)\nの総和を管理し、その区間全体への\n\\(A_i,  B_i\\)\nへの加算操作を行ったときのを変化を高速に（基本的には\n\\(O(1)\\)\nの計算量で）計算したいです。\n操作の集合としては、非負整数\n\\(x,y\\)\nについて、「(その区間全体の)\n\\(A\\)\nの要素に\n\\(x\\)\nを加え、\n\\(B\\)\nの要素に\n\\(y\\)\nを加える。」といった操作全体を考えます。これは、クエリで与えられる操作を含んでおり、さらに合成について閉じています。また、\n\\(x=y=0\\)\nとすれば操作の集合を写像の集合とみなしたときの単位元となります。\nさて、上で述べた各区間\n\\(a\\cdot2^k+1\\leq i\\leq (a+1)2^k\\)\n（以下では、\n\\(L=a\\cdot2^k+1\\)\n,\n\\(R=(a+1)2^k\\)\nとします）の\n\\(A_i\\times B_i\\)\nの総和\n\\(\\displaystyle\\sum_{i=L}^R (A_i\\times B_i)\\)\nを操作によって更新するにあたって、各区間について\n\\(\\displaystyle\\sum_{i=L}^R (A_i\\times B_i)\\)\nの値のみを保持するだけでは不十分です。\nなぜなら、\n\\[\n\\displaystyle\\sum_{i=L}^R ((A_i+x)\\times (B_i+y))\n=\\displaystyle\\sum_{i=L}^R (A_i\\times B_i)\n+y\\displaystyle\\sum_{i=L}^R A_i\n+x\\displaystyle\\sum_{i=L}^R B_i\n+(R-L+1)xy\n\\]\nとなるため、区間に対して管理している情報\n\\(\\displaystyle\\sum_{i=L}^R (A_i\\times B_i)\\)\nおよび操作の情報\n\\(x,y\\)\nが与えられたとしても更新先の値は一意に定まらないからです。\nそこで、各区間について 区間の長さ\n\\((R-L+1)\\)\nおよび\n\\(\\displaystyle\\sum_{i=L}^R A_i\\)\n,\n\\(\\displaystyle\\sum_{i=L}^R B_i\\)\n,\n\\(\\displaystyle\\sum_{i=L}^R (A_i\\times B_i)\\)\nの\n\\(3\\)\n種類の総和を管理することを考えます。このとき、上の式から操作による\n\\(\\displaystyle\\sum_{i=L}^R (A_i\\times B_i)\\)\nの値の更新を\n\\(O(1)\\)\nで行うことができます。また、\n\\[\n\\displaystyle\\sum_{i=L}^R (A_i+x)\n=\\displaystyle\\sum_{i=L}^R A_i+(R-L+1)x \\\\\n\\displaystyle\\sum_{i=L}^R (B_i+y)\n=\\displaystyle\\sum_{i=L}^R B_i+(R-L+1)y\n\\]\nより、これらの値も操作に対する更新を\n\\(O(1)\\)\nで行うことができます。区間の長さは操作によって変わることはありません。また、区間の連結と更新操作が可換となるような、区間の連結に伴う（区間ごとに管理されている）情報の和の定め方については、それぞれの長さおよび総和の和を取れば良いです。また長さ\n\\(0\\)\n, すべての総和が\n\\(0\\)\nであるようなものを考えれば それが和についての単位元となります。\nよって、遅延セグメント木によって、答えを求めることができます。このとき計算量は\n\\(O(Q\\log N)\\)\nであり、十分高速です。\nよって、この問題を解くことができました。\n\\(998244353\\)\nで割った余りを出力することに注意してください。",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/lazysegtree>\n#include <atcoder/modint>\n\nusing namespace std;\nusing namespace atcoder;\n\nusing mint = modint998244353;\n\n\nstruct S {\n    mint len,Asum,Bsum,ABsum;\n};\nstruct F {\n    mint Aadd,Badd;\n};\n\nS op(S l, S r) {\n    return S{\n        l.len + r.len,\n        l.Asum + r.Asum,\n        l.Bsum + r.Bsum,\n\t\tl.ABsum + r.ABsum,\n    };\n}\nS e() { return S{mint(0),mint(0),mint(0),mint(0)}; }\nS mapping(F op, S tgt) {\n    return S{\n\t\ttgt.len,\n\t\ttgt.Asum+(op.Aadd*tgt.len),\n\t\ttgt.Bsum+(op.Badd*tgt.len),\n\t\ttgt.ABsum+(op.Aadd*tgt.Bsum)+(op.Badd*tgt.Asum)+(op.Aadd*op.Badd*tgt.len)\n\t};\n}\nF composition(F l, F r) { return F{l.Aadd+r.Aadd,l.Badd+r.Badd}; }\nF id() { return F{mint(0),mint(0)}; }\n\nint main() {\n\tint n,q;\n\tint t,l,r,x;\n\n\tcin>>n>>q;\n\tvector<int>a(n),b(n);\n\tvector<S>tmp(n);\n\n\tfor(int i=0;i<n;i++)cin>>a[i];\n\tfor(int i=0;i<n;i++)cin>>b[i];\n\tfor(int i=0;i<n;i++)tmp[i]=S{mint(1),mint(a[i]),mint(b[i]),mint(a[i])*mint(b[i])};\n\tlazy_segtree<S, op, e, F, mapping, composition, id> seg(tmp);\n\n\tfor(int i=0;i<q;i++){\n\t\tcin>>t>>l>>r;\n\t\tif(t<3)cin>>x;\n\t\tif(t==1)seg.apply(l-1,r,F{mint(x),mint(0)});\n\t\tif(t==2)seg.apply(l-1,r,F{mint(0),mint(x)});\n\t\tif(t==3)cout<<(seg.prod(l-1,r).ABsum.val())<<endl;\n\t}\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "f6a1d6a664f7999fef1f67a4fb7f3a9d225390f9a5f2ee81d457a7126d4609f8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc357/abc357_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc357/editorial/10191",
+      "text": "本解説は公式解説と本質的に等価なアルゴリズムを少し異なる視点から着想するものです。\n\\(x, y\\)\nを形式的な不定元として、\n\\(\\sum A _ i B _ i\\)\nの代わりに\n\\(\\sum (x + A _ i) (y + B _ i)\\)\nを計算することを考えます。\nこれは\n\\(x, y\\)\nについての\n\\(1\\)\n次式なので\n\\(c _ 0 + c _ 1 x + c _ 2 y + c _ 3 x y\\)\nの形で表され、\n\\(c _ 0\\)\nが本来のクエリの答えとなります。\n一見すると問題を複雑にしただけですが、「\n\\(A _ i\\)\nに一様に\n\\(s\\)\nを加算する」という操作を「\n\\(x\\)\nに\n\\(x + s\\)\nを代入する」と言い換えることができます。同様に、\n\\(B _ i\\)\nへの加算も\n\\(y\\)\nへの代入とい換えられ、それらの合成も\n\\(x\\)\nと\n\\(y\\)\nへの代入としてまとめられることが分かります。\n以上の考察により、これは遅延セグメント木のフレームワークに乗り、\n\\(\\mathrm O (N + Q \\log N)\\)\nの時間計算量で問題を解くことができます。",
+      "codes": [],
+      "text_sha256": "bf02d16fe618953db7d1dedfde86623a55ee7fb8ee83f729d3def4ba0c731270",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc357/abc357_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

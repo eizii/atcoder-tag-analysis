@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc355_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc355/editorial/10079",
+      "text": "質問できる区間がセグメント木のような区間になっている点で ABC349-D Divide Interval と似ています．本問題との違いは引き算が行えることです．例えば \\(N=3,L=1,R=7\\) のとき，質問する区間を ABC349-D の方法で区間を分割すると \\(A_1,A_2+A_3,A_4+A_5+A_6+A_7\\) の \\(3\\) 回の質問が必要になります．一方で，本問題では一回目に \\(A_0+A_1+A_2+A_3+A_4+A_5+A_6+A_7\\) を，二回目に \\(A_0\\) を質問し，一回目の値から二回目の値を引くことで答えを求めることができます． 以下では，合同式の法を \\(100\\) とします． 整数 \\(x,y(0\\leq x,y\\leq 2^N)\\) に対して， \\(S(x,y)\\) を次で定めます． \\[ S(x,y)\\equiv \\begin{cases}\n  0\\ (x=y) \\\\\n  \\displaystyle\\left( \\sum_{i=x}^{y-1} A_i\\right)\\ (x<y)\\\\\n  -S(y,x)\\ (x>y)\n\\end{cases}\\] 求めるものは \\(S(L,R+1)\\) ，質問できるものは \\(S\\left(2^ij,2^i(j+1)\\right)\\) です．また， \\(S\\left(2^i(j+1),2^ij\\right)\\equiv-S\\left(2^ij,2^i(j+1)\\right)\\) であるため， \\(S\\left(2^i(j+1),2^ij\\right)\\) も質問できるものとみなします． \\(S(x,y)\\) と \\(S(y,z)\\) が分かってるとき， \\(S(x,z)\\) は \\(S(x,y)+S(y,z)\\) として求めることができます． ここで，頂点が \\(0,1,\\dots,2^N\\) の \\(2^N+1\\) 頂点であり， \\(S(x,y)\\) が質問できるような \\(x,y\\) に対して頂点 \\(x\\) と \\(y\\) の間に辺を貼ってあるようなグラフ \\(G\\) を考えます． \\(G\\) 上での距離が \\(2\\) であるような頂点 \\(x,y\\) に対して， \\(G\\) における \\(x\\) から \\(y\\) までの最短経路上の頂点を \\(v_0(=x),v_1,v_2(=y)\\) として \\(S(v_0,v_1)\\) および \\(S(v_1,v_2)\\) を質問することで \\(S(x,y)\\) を \\(2\\) 回の質問で特定することができます． 同様に． \\(G\\) 上での距離が \\(3\\) であるような頂点 \\(x,y\\) に対して， \\(G\\) における \\(x\\) から \\(y\\) までの最短経路上の頂点を \\(v_0(=x),v_1,v_2,v_3(=y)\\) として \\(S(v_0,v_1),S(v_1,v_2)\\) および \\(S(v_2,v_3)\\) を質問することで \\(S(x,y)\\) を \\(3\\) 回の質問で特定することができます． より一般に． \\(G\\) 上での距離が \\(d\\) であるような頂点 \\(x,y\\) に対して， \\(S(x,y)\\) を \\(d\\) 回の質問で求めることができます． よって，グラフ \\(G\\) 上で \\(L\\) から \\(R\\) の最短経路が（復元付きで）求められれば良いです．グラフ \\(G\\) の頂点数は \\(2^N+1\\) ，辺数は \\(2^{N+1}-1\\) であるため，BFS を用いることで計算量 \\(O(2^N)\\) で最短経路を求めることができます．",
+      "codes": [
+        "from collections import deque\n\nN, L, R = map(int, input().split())\nn = 1 << N\nedge = [[] for i in range(n + 1)]\nfor i in range(N + 1):\n    for l in range(0, n, 1 << i):\n        r = l + (1 << i)\n        edge[l].append(r)\n        edge[r].append(l)\n\nparent = [None] * (n + 1)\nparent[R + 1] = -1\ndq = deque([R + 1])\nwhile dq:\n    v = dq.popleft()\n    for u in edge[v]:\n        if parent[u] == None:\n            parent[u] = v\n            dq.append(u)\n\nans = 0\nnow = L\nwhile parent[now] != -1:\n    p = parent[now]\n    sgn = 1\n    l, r = now, p\n    if l > r:\n        sgn = -1\n        l, r = r, l\n    i = (r - l).bit_length() - 1\n    j = l >> i\n    print(\"?\", i, j, flush=True)\n    T = int(input())\n    ans += sgn * T\n    now = p\n\nprint(\"!\", ans % 100)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "ac92bafa58e4b612a07141bffa2fd76607725c3c2ac72be6193ea77435f968c0"
+    }
+  ],
+  "status": "available"
+}

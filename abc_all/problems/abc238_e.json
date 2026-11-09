@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc238_e",
+  "title": "Range Sums",
+  "contests": [
+    {
+      "contest_id": "abc238",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1577,
+  "raw_difficulty": 1577,
+  "contest_id": "abc238",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc238/tasks/abc238_e",
+  "statement": "配点 : 500 点 問題文 高橋くんは秘密の整数列 a を持っており、現時点で、 a の長さが N であることは分かっています。 a の中身を当てたいあなたに対し、高橋くんは以下の Q 個の情報を追加で与えてくれることを約束しました。 i\\ (1 \\leq i \\leq Q) 個目の情報: a_{l_i}+a_{l_i+1}+\\cdots+a_{r_i} の値 高橋くんが約束を守り、 Q 個の情報すべてが与えられた場合、 a に含まれる全要素の総和 a_1+a_2+\\cdots+a_N を特定することは可能ですか？ 制約 1 \\leq N \\leq 2 \\times 10^5 1 \\leq Q \\leq \\min(2 \\times 10^5,\\frac{N(N+1)}{2}) 1 \\leq l_i \\leq r_i \\leq N (l_i,r_i) \\neq (l_j,r_j)\\ (i \\neq j) 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N Q l_1 r_1 l_2 r_2 \\hspace{0.4cm}\\vdots l_Q r_Q 出力 a に含まれる全要素の総和を特定することが可能なら Yes を、そうでないなら No を出力せよ。 入力例 1 3 3\r\n1 2\r\n2 3\r\n2 2 出力例 1 Yes 1 個目の情報と 2 個目の情報から、 a_1+a_2+a_2+a_3 の値が分かります。そこから 3 個目の情報によって得られる a_2 の値を引くと、 a_1+a_2+a_3 の値を特定可能です。 入力例 2 4 3\r\n1 3\r\n1 2\r\n2 3 出力例 2 No a の先頭 3 項の総和を特定することは可能ですが、全要素の総和を特定することは不可能です。 入力例 3 4 4\r\n1 1\r\n2 2\r\n3 3\r\n1 4 出力例 3 Yes 4 個目の情報によって全要素の総和が直接与えられています。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 高橋くんは秘密の整数列 a を持っており、現時点で、 a の長さが N であることは分かっています。 a の中身を当てたいあなたに対し、高橋くんは以下の Q 個の情報を追加で与えてくれることを約束しました。 i\\ (1 \\leq i \\leq Q) 個目の情報: a_{l_i}+a_{l_i+1}+\\cdots+a_{r_i} の値 高橋くんが約束を守り、 Q 個の情報すべてが与えられた場合、 a に含まれる全要素の総和 a_1+a_2+\\cdots+a_N を特定することは可能ですか？"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1 \\leq N \\leq 2 \\times 10^5 1 \\leq Q \\leq \\min(2 \\times 10^5,\\frac{N(N+1)}{2}) 1 \\leq l_i \\leq r_i \\leq N (l_i,r_i) \\neq (l_j,r_j)\\ (i \\neq j) 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q l_1 r_1 l_2 r_2 \\hspace{0.4cm}\\vdots l_Q r_Q"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 a に含まれる全要素の総和を特定することが可能なら Yes を、そうでないなら No を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 3\r\n1 2\r\n2 3\r\n2 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes 1 個目の情報と 2 個目の情報から、 a_1+a_2+a_2+a_3 の値が分かります。そこから 3 個目の情報によって得られる a_2 の値を引くと、 a_1+a_2+a_3 の値を特定可能です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 4 3\r\n1 3\r\n1 2\r\n2 3"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No a の先頭 3 項の総和を特定することは可能ですが、全要素の総和を特定することは不可能です。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 4 4\r\n1 1\r\n2 2\r\n3 3\r\n1 4"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes 4 個目の情報によって全要素の総和が直接与えられています。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc238/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:07.669410+00:00",
+  "statement_sha256": "f83aba0e6f515c4a6ea01525b221c4e06e5b78309eef8b0f9ab57f7ca3785a6b",
+  "editorials": []
+}

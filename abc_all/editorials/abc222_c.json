@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc222_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc222/editorial/2740",
+      "text": "問題文に書かれている通りにシミュレーションしましょう。\n人ごとに、これまでの勝数がわかっていれば試合の組み合わせがシミュレーションできるので、「\n\\(i\\)\n位の人の勝数と番号」を保持するような配列を持てばよいです。\nじゃんけんの結果を求める部分は関数として他に分けておくのが良いでしょう。\n実装例(Python)",
+      "codes": [
+        "N,M = map(int,input().split())\nS = [input() for i in range(2*N)]\nrank = [[0,i] for i in range(2*N)]\n# rank[i] = [x,y]  -> i位なのは -x勝で人y\n\ndef judge(a,b):\n  # 引き分けなら-1,前者勝ちなら0,後者勝ちなら1\n  if a==b: return -1\n  if a=='G' and b=='P': return 1\n  if a=='C' and b=='G': return 1\n  if a=='P' and b=='C': return 1\n  return 0\n\nfor j in range(M):\n  for i in range(N):\n    player1 = rank[2*i][1]\n    player2 = rank[2*i+1][1]\n    result = judge(S[player1][j], S[player2][j])\n    if result !=-1: rank[2*i+result][0] -= 1\n  rank.sort()\n\nfor _,i in rank: print(i+1)"
+      ],
+      "text_sha256": "761e1a4df2d53131234ac5c8b07d03eaf9a8f5cc57e77b719364100e453b626c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc222/abc222_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

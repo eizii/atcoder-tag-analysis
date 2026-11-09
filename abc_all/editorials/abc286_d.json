@@ -1,0 +1,40 @@
+{
+  "problem_id": "abc286_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5567",
+      "text": "この問題は動的計画法によって解く事ができます。\nbool型の\n\\(2\\)\n次元配列\n\\(dp[i][j]\\)\n\\((0\\leq i\\leq N, 0\\leq j\\leq X)\\)\nを、「\n\\(A_1\\)\n円硬貨を\n\\(B_1\\)\n枚,\n\\(A_2\\)\n円硬貨を\n\\(B_2\\)\n枚,\n\\(\\ldots\\)\n,\n\\(A_i\\)\n円硬貨を\n\\(B_i\\)\n枚を用いてちょうど\n\\(j\\)\n円を払えるならば\nTrue\n, 払えないならば\nFalse\n」として定め、これを\n\\(i=0,1,\\ldots,N\\)\nの順で求める事を考えます。\n問題に対する答えは、\n\\(dp[N][X]\\)\nが\nTrue\nならば\nYes\n、\nFalse\nならば\nNo\nとなります。\nまず、\n\\(i=0\\)\nの場合について、高橋君は\n\\(1\\)\n枚も硬貨を持っていないため、\n\\(dp[0][0]=\\)\nTrue\n,\n\\(j>0\\)\nのとき\n\\(dp[0][j]=\\)\nFalse\nです。\nさて、\n\\(dp[i-1][j]\\)\n\\((0\\leq j\\leq X)\\)\nが求まっているとき、\n\\(dp[i][j]\\)\nを求める事を考えます。\n\\(A_i\\)\n円硬貨は\n\\(0\\)\n枚以上\n\\(B_i\\)\n枚以下の範囲で自由に使えるので、\n\\(0\\leq k\\leq B_i\\)\nをみたす整数\n\\(k\\)\nであって、\n\\(j-kA_i\\geq 0\\)\nかつ\n\\(dp[i-1][j-kA_i]=\\)\nTrue\nであるようなものが\n\\(1\\)\nつでも存在すれば\n\\(dp[i][j]\\)\nは\nTrue\nとなり、そうでないならば\nFalse\nとなります。\nすなわち、\n\\[\ndp[i][j]=dp[i-1][j]\\lor dp[i-1][j-A_i]\\lor dp[i-1][j-2A_i]\\lor \\cdots\\lor dp[i-1][j-B_iA_i]\\quad  (ただし、j'<0 ならば dp[i-1][j']=\\text{False})\n\\]\nとなります。\nこれをナイーブに実装すると, 計算量は 各\n\\(i\\)\nについて\n\\(O(B_iX)\\)\nとなるため全体で\n\\(O((\\displaystyle\\sum_{i=1}^N B_i)X)\\)\nであり、今回の制約下で十分高速に動きます。よって、この問題を解く事ができました。\n\\(O(NX)\\)\n解法について\nなお、この問題には\n\\(O(NX)\\)\n解法が存在します。\n基本的な方針は上記の方針と同じですが、\n\\(dp[i][j]\\)\nを求める前に各\n\\(j\\)\nについて、\n\\(dp'[i-1][j]=\\)\n(\n\\(j'=j,j-A_i,j-2A_i,\\ldots\\)\nのうち\n\\(dp[i-1][j']=\\)\nTrue\nであるような最大の\n\\(j'\\)\n)(存在しなければ\n\\(-\\infty\\)\n)\nを計算します。\n\\(dp'[i-1][j]\\)\nは\n\\(dp[i-1][j]=\\)\nTrue\nならば\n\\(dp'[i-1][j]=j\\)\n, そうでなければ\n\\(dp'[i-1][j]=dp'[i-1][j-A_i]\\)\nとして\n\\(j\\)\nが小さい方から順に\n\\(O(1)\\)\nで計算する事ができます。\nさらに、本解法で求めた漸化式から,\n\\(dp[i][j]\\)\nは\n\\(dp'[i-1][j]\\geq j-A_iB_i\\)\nならば\nTrue\n, そうでないならば\nFalse\nとしてこれも\n\\(O(1)\\)\nで計算する事ができます。\nよって、各\n\\(i\\)\nについて\n\\(O(X)\\)\n, 全体で\n\\(O(NX)\\)\nで解く事ができました。\nc++ による実装例 (本解法):\nc++ による実装例(\n\\(O(NX)\\)\n解法) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint n,x;\n\tint a[50];\n\tint b[50];\n\tbool dp[51][10001];\n\n\tcin>>n>>x;\n\tfor(int i=0;i<n;i++)cin>>a[i]>>b[i];\n\n\tfor(int i=0;i<=n;i++)for(int j=0;j<=x;j++)dp[i][j]=false;\n\tdp[0][0]=true;\n\tfor(int i=0;i<n;i++){\n\t\tfor(int j=0;j<=x;j++){\n\t\t\tfor(int k=0;k<=b[i];k++){\n\t\t\t\tif(j>=a[i]*k){\n\t\t\t\t\tif(dp[i][j-a[i]*k])dp[i+1][j]=true;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\tif(dp[n][x])cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n\treturn 0;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(void){\n\tint n,x;\n\tint a[50];\n\tint b[50];\n\tbool dp[10001]; //配列は使い回し\n\tint mx[100];\n\n\tcin>>n>>x;\n\tfor(int i=0;i<n;i++)cin>>a[i]>>b[i];\n\n\tfor(int i=0;i<=x;i++)dp[i]=false;\n\tdp[0]=true;\n\tfor(int i=0;i<n;i++){\n\t\tfor(int j=0;j<a[i];j++)mx[j]=-10000; //-a[i]*b[i]未満なら良い\n\t\tfor(int j=0;j<=x;j++){\n\t\t\tif(dp[j])mx[j%a[i]]=j;\n\t\t\tif(mx[j%a[i]]>=j-(a[i]*b[i]))dp[j]=true;\n\t\t\telse dp[j]=false;\n\t\t}\n\t}\n\n\tif(dp[x])cout<<\"Yes\"<<endl;\n\telse cout<<\"No\"<<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "99aed7dd296b7a5c2979d803303836941eefcd3e2ab0ec8f29e1796637364172",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc286/abc286_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5611",
+      "text": "こちらの\nユーザー解説\nを更に高速化します。\n今、\n\\(A_i\\)\n円硬貨が\n\\(B_i\\)\n枚あるとします。\nこの時、これを幾つかの集合に分けて、この組み合わせで\n\\(0\\)\n枚から\n\\(B_i\\)\n枚を表すことを考えます。\n\\(2^n \\leq B_i < 2^{n+1}\\)\nとなる\n\\(n\\)\nを取ってきたとき、\n\\(1, 2,\n\\ldots, 2^{n-2}, 2^{n-1}, B_i - 2^n+1\\)\n枚の集合を作ると、\n\\(0\\)\n枚から\n\\(B_i\\)\n枚まで全てを表すことができます。\n\\(1, \\ldots, 2^{n-1}\\)\n枚の集合は2進数なので、作りたい枚数の対応する桁と同じ部分を持ってくることで\n\\(0\\)\n枚から\n\\(2^n-1\\)\n枚までを作ることができます。\n\\(2^n \\leq x \\leq B_i\\)\nの範囲で\n\\(x\\)\n枚を作りたい時は、まず\n\\(B_i - 2^n+1\\)\n枚を選べばよく、\n\\(B_i - 2^n+1 \\leq 2^n\\)\nよりこの範囲の全ての枚数を表すことができます。\n上の方法を用いることで、結局\n\\(A_i, 2A_i, \\ldots, 2^{n-1}A_i, (B_i - 2^n+1)A_i\\)\n円が書かれた硬貨を\n\\(1\\)\n枚ずつ持っている問題に帰着され、これは部分和問題として解くことができます。\n計算量は\n\\(O(\\frac{X \\sum_{i=1}^{N} \\log B_i}{\\rm wordsize})=O(\\frac{NX \\log \\frac{X}{N}}{\\rm wordsize})\\)\nです。\n\\(\\log \\frac{X}{N} = o({\\rm wordsize})\\)\nより、これは\n\\(o(NX)\\)\nとなります。",
+      "codes": [
+        "N, X = map(int, input().split())\ns = 1 << X\nfor _ in range(N):\n  a, b = map(int, input().split())\n  use_set = 1 # 一度に纏めて硬貨aをuse_set枚使う\n  while b != 0:\n    use_set = min(use_set, b) # 1, 2, 4, ..., 2^{n-1}, 足すとbになる残りの枚数、と遷移\n    s |= s >> a * use_set\n    b -= use_set\n    use_set <<= 1\nprint(\"Yes\" if s & 1 else \"No\")"
+      ],
+      "text_sha256": "d49cb18fe950aaf9d64d0a5f175a8aa1db72c1434116f9809298866beb314b71",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc286/abc286_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc286/editorial/5595",
+      "text": "考え方は\n公式解説\nと同じです。\n実装の際、 Python などの多倍長整数の bit 演算を使うとより簡潔に書くことができます。つまり、\n\\(x\\)\n番目のビットが\n\\(1\\)\nであれば支払える、そうでなければ支払えない、というように情報を持たせます。\nより詳しい説明は\nこの記事\nの「bit 演算を用いる方法」に書いているので参考にしてください。本問においても「左右反転」を使うと無駄な部分を省略することができます。\n実装例\n提出コード",
+      "codes": [
+        "N, X = map(int, input().split())\ns = 1 << X\nfor _ in range(N):\n    a, b = map(int, input().split())\n    for _ in range(b):\n        s |= s >> a\nprint(“Yes” if s & 1 else “No”)"
+      ],
+      "text_sha256": "d1d902de273c95373cac5e7a35b758af79e882a222bfd77176fc94d1e7c63781",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc286/abc286_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc322_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc322/editorial/7301",
+      "text": "この問題は\n接頭辞(prefix)\nと\n接尾辞(suffix)\nがテーマになっている問題です。接頭辞・接尾辞という概念は他の問題でも多く登場するので、知らなかった人は覚えておくとよいでしょう。\n問題文にある通り、接頭辞と接尾辞とは次に説明する文字列のことをいいます。\n文字列\n\\(S, T\\)\nがある。\n\\(S\\)\nの長さを\n\\(N\\)\nとする。このとき、\n\\(S\\)\nが\n\\(T\\)\nの\n接頭辞\nであるとは、\n\\(T\\)\nのはじめ\n\\(N\\)\n文字からなる文字列が\n\\(S\\)\nと一致することをいう。\n\\(S\\)\nが\n\\(T\\)\nの\n接尾辞\nであるとは、\n\\(T\\)\nの後ろ\n\\(N\\)\n文字からなる文字列が\n\\(S\\)\nと一致することをいう。\nこの問題は 「\n\\(S\\)\nが\n\\(T\\)\nの接頭辞であるか？/接尾辞であるか？」を判定できれば、それに対応する番号を出力することで正解することができます。\nこの判定の部分は for 文を利用すれば上手く判定できます。たとえば接頭辞の方は、\n\\(S\\)\nの\n\\(1\\)\n文字目と\n\\(T\\)\nの\n\\(1\\)\n文字目が一致するか？\n\\(S\\)\nの\n\\(2\\)\n文字目と\n\\(T\\)\nの\n\\(2\\)\n文字目が一致するか？\n\\(\\vdots\\)\n\\(S\\)\nの\n\\(N\\)\n文字目と\n\\(T\\)\nの\n\\(N\\)\n文字目が一致するか？\nを全て調べて、すべての条件が正しければ\n\\(S\\)\nは\n\\(T\\)\nの接頭辞で、そうでなければ接頭辞ではないとわかります。(接尾辞についても同様に判定できます。)\nC++ による実装例は次の通りです。",
+      "codes": [
+        "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n  int N, M;\n  string S, T;\n  cin >> N >> M >> S >> T;\n\n  int is_prefix = true;\n  for (int i = 0; i < N; i++) {\n    if (S[i] != T[i]) is_prefix = false;\n  }\n  int is_suffix = true;\n  for (int i = 0; i < N; i++) {\n    if (S[i] != T[M - N + i]) is_suffix = false;\n  }\n\n  if (is_prefix) {\n    cout << (is_suffix ? 0 : 1) << endl;\n  } else {\n    cout << (is_suffix ? 2 : 3) << endl;\n  }\n}"
+      ],
+      "text_sha256": "1fbecf608974b1466fa47ca934fe825fff8c131902879453664bc972edfb3028",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc322/abc322_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc322/editorial/7312",
+      "text": "この問題では，「\n\\(S\\)\nが\n\\(T\\)\nの接頭辞か」「\n\\(S\\)\nが\n\\(T\\)\nの接尾辞か」のそれぞれの組合せに対して異なる出力結果を返す必要があり，地道に場合分けすると少しだけ面倒です．\n出力する値をよく観察しましょう．すると，次のことがわかります．\n出力する値は，「\n\\(S\\)\nが\n\\(T\\)\nの接頭辞か」を上位ビット，「\n\\(S\\)\nが\n\\(T\\)\nの接尾辞か」を下位ビットとする，\n\\(2\\)\nビットの値として表されている．\n上位ビットが立っていることは，\n\\(S\\)\nが\n\\(T\\)\nの接頭辞\nではない\nことを表している．\n下位ビットが立っていることは，\n\\(S\\)\nが\n\\(T\\)\nの接尾辞\nではない\nことを表している．\nビットが立っていることが，接頭辞/接尾辞\nではない\nことに対応することに注意してください．\nこれにより，\n\\(b_1=\\)\n（\n\\(S\\)\nが\n\\(T\\)\nの接頭辞であるとき\n\\(0\\)\n，ないとき\n\\(1\\)\n），\n\\(b_2=\\)\n（\n\\(S\\)\nが\n\\(T\\)\nの接尾辞であるとき\n\\(0\\)\n，ないとき\n\\(1\\)\n）とおくと，答えは\n\\(2b_1 + b_2\\)\nと，一つの式だけで表すことができます．",
+      "codes": [],
+      "text_sha256": "b1654629653ab6404a158456de03ced4301b309dc91549421fcf67236d745e6a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc322/abc322_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

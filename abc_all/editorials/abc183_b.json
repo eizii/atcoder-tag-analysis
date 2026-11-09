@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc183_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc183/editorial/287",
+      "text": "球が\n\\(x\\)\n軸で跳ね返ると考える代わりに、目標地点が\n\\(x\\)\n軸で跳ね返ると考えることで、「現在地点と目標地点を結ぶ直線と\n\\(x\\)\n軸の交点を求めよ」という問題になります。\nこの直線の式を求めるなどしても良いですが、\n\\(y\\)\n座標の変化量を考えることで、現在地点から目標地点までを\n\\(S_y:G_y\\)\nに内分する点で\n\\(x\\)\n軸と交わることがわかるので、\n\\(S_x\\)\nから\n\\(G_x\\)\nへの変化を\n\\(S_y:G_y\\)\nに内分する座標として\n\\(\\displaystyle{\\frac{S_x G_y+G_x  S_y}{S_y+G_y}}\\)\nと求めることができます。\n回答例(C)\n回答例(Python)",
+      "codes": [],
+      "text_sha256": "1ccf74ec5a36a49ee4a7c5c4c80600bb2c47ecb85472585f70d64eeb79c2a8db",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc183/abc183_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc302_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc302/editorial/6408",
+      "text": "この問題では、あり得る全ての並び替え\n\\(N!\\)\n通りに対して条件を満たすかどうかを愚直に\n\\(\\mathrm{O}(NM)\\)\nかけて判定し、条件を満たす並び替えがあれば\nYes\nを、そうでないならば\nNo\nを出力すればよいです。\nさて、問題はどのように実装するかです。これは、C++ だと next_permutation 関数のような機能があります。vector をソートした状態で渡すと、その列を並び替えて作ることが出来る列を全て列挙してくれます。\nそれぞれの言語でこのような関数が用意されていることが多いため、それを用いて実装をすればよいです。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n  int n,m;\n  cin>>n>>m;\n  vector<string> s(n);\n  for(int i=0;i<n;i++) cin>>s[i];\n  sort(s.begin(),s.end());\n  do{\n    bool ok=true;\n    for(int i=0;i<n-1;i++){\n      int cnt=0;\n      for(int j=0;j<m;j++) if(s[i][j]!=s[i+1][j]) cnt++;\n      if(cnt!=1) ok=false;\n    }\n    if(ok){\n      cout<<\"Yes\"<<endl;\n      return 0;\n    }\n  }while(next_permutation(s.begin(),s.end()));\n  cout<<\"No\"<<endl;\n}"
+      ],
+      "text_sha256": "0daea9aa608b91771b1d5ab6c227cb711a0f7a46425802e70351bca5e79dd57d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc302/abc302_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc302/editorial/6419",
+      "text": "頂点数が\n\\(N\\)\nで，任意の\n\\(i, j \\)\nに対し\n「頂点\n\\(i\\)\nと頂点\n\\(j\\)\nの間に辺がある」\n\\(\\iff\\)\n「\n\\(S_i\\)\nと\n\\(S_j\\)\nがちょうど1文字だけ異なる」となるように辺を張った単純無向グラフ\n\\(G\\)\nを考えると，本問題はこのグラフ上でのハミルトン路の存在判定に帰着されます．\n本稿における記号について\n\\(S\\)\nの添字は 0-indexed で扱います．\n真と\n\\(1\\)\n，偽と\n\\(0\\)\nをそれぞれ同一視します．\n非負整数\n\\(a\\)\nの\n\\(2^i\\)\nの位を\n\\([a]_i\\)\nで表します．\nbitwise 論理積演算を\n\\(\\mathbin{\\&}\\)\nで表します．\nグラフ\n\\(G\\)\nの構築\nまず\n\\(G\\)\nは，文字列の比較により\n\\(\\Theta(N^2 M)\\)\n時間 で隣接行列として求めることができます．\nまたこれを\n\\[\n[g_j]_i \\coloneqq  G \\text{で頂点} i, j \\text{間に辺がある}\n\\]\nとなる数列\n\\((g_i)_{0 \\le i \\lt N}\\)\nとして持っておきます．\nハミルトン路の存在判定\n次にハミルトン路の存在判定です．\n巡回セールスマン問題を解く際と同様に\n\\[\n[\\mathrm{dp}_S]_v \n\\coloneqq \\text{これまでに通った頂点集合が } S \\text{ で，} v \\text{で終わる単純パスは存在するか} \n\\]\nというDPテーブルを埋めます．\n「配るDP」による更新式は\n\\[\n[\\mathrm{dp}_{S \\cup \\{v'\\}}]_{v'} \\leftarrow [\\mathrm{dp}_{S \\cup \\{v'\\}}]_{v'} \\lor \n\\left( [\\mathrm{dp}_{S}]_v \\land [g_{v'}]_v\n\\right) \n\\qquad(v' \\notin S)\n\\]\nのように表せ，\n\\(\\Theta(2^N N^2)\\)\n時間 で埋めることができますが，本問題では存在判定のみすればよいことを利用して\n\\(\\Theta(2^N N)\\)\n時間で埋める方法を紹介します．\n\\[\n\\begin{aligned}\n(\\mathrm{dp}_S \\mathbin{\\&} g_{v'}) \\ne 0\n& \\iff {}^{\\exists}v \\;( [\\mathrm{dp}_{S}]_v \\land [g_{v'}]_v)\n\\\\\n& \\iff \\mathrm{dp}_S \\text{から} [\\mathrm{dp}_{S \\cup \\{v'\\}}]_{v'} \\leftarrow 1 \\text{と「配る」遷移ができる}\n\\end{aligned}\n\\]\nであるので，各\n\\(v\\)\nに対する\n\\([\\mathrm{dp}_S]_v\\)\nから\n\\([\\mathrm{dp}_{S \\cup \\{v'\\}}]_{v'}\\)\nへの\n\\(N\\)\n個の遷移を，ビット演算を用いることでまとめて\n\\(\\Theta(1)\\)\n時間で行うことができます．\n以上から本問題を全体\n\\(\\Theta(N^2M + 2^N N)\\)\n時間で解くことができます．\n実装例(Python):\nhttps://atcoder.jp/contests/abc302/submissions/46214188",
+      "codes": [],
+      "text_sha256": "db4bd73d4826a33dba8ef0be25053c159b83b9b55d32ad0ab38a3194273feb80",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc302/abc302_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

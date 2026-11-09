@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc125_b",
+  "editorials": [
+    {
+      "text": "B: Resale\ni 番目の宝石を選ぶことによってX −Y はVi −Ci だけ変化します。したがって、コストよりも価値が高\nいような宝石のみを手に入れるのが最適です。\n実装では、はじめに全ての入力を受け取ってから処理する方法をとるのが良いでしょう。なぜなら、V1 を\n知ったとしてもC1 を知る前にV2, V3, ..., VN を読み込む必要があるためです。V1, V2, ..., VN は配列に保存し\nておくと後から値を知ることができます。C++ での実装例を挙げます。\n#include <bits/stdc ++.h>\nusing\nnamespace\nstd;\nint main () {\n// input\nint N; cin >> N;\nvector <int > V(N);\nfor (int i = 0; i < N; ++i) {\ncin >> V[i];\n}\nvector <int > C(N);\nfor (int i = 0; i < N; ++i) {\ncin >> C[i];\n}\n// compute\nint ans = 0;\nfor (int i = 0; i < N; ++i) {\nif (V[i] > C[i]) {\nans += V[i] - C[i];\n}\n}\n// output\ncout << ans << endl;\n}\n",
+      "text_sha256": "1cb1c323840ca6af43ffd695ab8eeb0f22ec77ebaee78a926f9bd836e91dcf07",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc125/abc125_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

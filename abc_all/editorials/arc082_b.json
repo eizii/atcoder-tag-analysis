@@ -1,0 +1,15 @@
+{
+  "problem_id": "arc082_b",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/arc082/editorial.pdf",
+      "text": "D: Derangement\n\n  pi  ̸=  i となっている部分にo を, そうでない部分にx をつけることにします。N 箇所全てo にな\nればok です。ox とならんでいる部分は、swap することでoo となります(xo も同様)。(∵もともと\n\npi = x(x ̸= i),pi+1 = i + 1 だったとすると、x ̸= i + 1 でもあるから、pi = i + 1 もpi+1 = x もo になる)\n  xx とならんでいる部分も、swap することでoo となります。(∵もともとpi = i(x ̸= i),pi+1 = i + 1 だっ\nたとすると、pi = i + 1 もpi+1 = i もo になる)\n 従って、先頭から順番に見ていき、箇所i にx があったらi とi + 1(i = N ならi −1 とi) をswap する、\n\nとするのが最善になります。(i にあるx を消すのにi −1, i のswap とi, i + 1 のswap どちらかは必要で、前\n\nから見るとi −1 はもうo なのでi + 1 を巻き込んだほうが得)",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "23f3d5344d36184fc4d6e66167515571be949a64bbc02af537aa0d6b00ee5be8"
+    }
+  ],
+  "status": "available"
+}

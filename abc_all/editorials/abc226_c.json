@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc226_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc226/editorial/2887",
+      "text": "頂点が番号付けられている\n\\(N\\)\n頂点からなるグラフであって、頂点\n\\(i\\)\n\\((1\\leq i\\leq N)\\)\nから頂点\n\\(A_{i,j}\\)\n\\((1\\leq j\\leq K_i)\\)\nに有向辺をはったグラフを考えます。このとき, 辺で直接結ばれている\n\\(2\\)\n頂点のうち,  つねに大きい番号の頂点から小さい番号の頂点の方へ辺が結ばれていることに注意します。\nこのグラフにおいて、頂点\n\\(N\\)\nから頂点\n\\(V\\)\n\\((1\\leq V\\leq N-1)\\)\nへいくつかの辺を辿って到達可能であるとき、技\n\\(N\\)\nを習得するためには必ず技\n\\(V\\)\nを習得している必要があります。なぜなら、グラフ上で\n\\(N\\)\nから\n\\(V\\)\nへの経路を\n\\(1\\)\nつとり, 経路上の頂点 (端点を含む) を、順に\n\\(u_1(=N), u_2, \\ldots, u_m(=V)\\)\nとすると、\n\\(1\\leq i\\leq m-1\\)\nについて、技\n\\(u_i\\)\nを習得する修練を開始する時点で技\n\\(u_{i+1}\\)\nをすでに習得していなければならないからです。\nよって、頂点\n\\(U\\)\nから到達可能な頂点(\n\\(U\\)\n自身を含む)の集合を\n\\(S\\)\n,\n\\(S\\)\nの元を番号が小さい方から順に\n\\(V_1,V_2, \\ldots, V_{\\lvert S\\rvert}\\)\nとすると、技\n\\(N\\)\nを習得するのに、少なくとも時間\n\\(\\displaystyle\\sum_{i=1}^{\\lvert S\\rvert}T_{V_i}\\)\nはかかることがわかります。\n逆に、このとき\n\\(i=1,2,\\ldots, \\lvert S\\rvert\\)\nの順で技\n\\(V_i\\)\nに対する修練を行うことが出来ることを示します。任意の\n\\(1\\leq i\\leq  \\lvert S\\rvert\\)\nおよび\n\\(1\\leq j\\leq K_{V_i}\\)\nについて, 上で考えたグラフにおいて、頂点\n\\(N\\)\nから頂点\n\\(A_{V_i,j}\\)\nへは 頂点\n\\(V_i\\)\nを経由して到達可能です。よって、\n\\(A_{V_i,j}\\in S\\)\nであり、\n\\(A_{V_i,j}<V_i\\)\nよりある\n\\(i'<i\\)\nを用いて\n\\(V_{i'}\\)\nと書けます。よって、技\n\\(V_i\\)\nに対する修練を始める時点ですでに技\n\\(A_{V_i,j}\\)\nは習得済みであり、上の順で修練を行う事が出来ることが分かりました。\n以上より、答えは上のように\n\\(S\\)\nおよび\n\\(V_1,V_2, \\ldots, V_{\\lvert S\\rvert}\\)\nを定めたときの\n\\(\\displaystyle\\sum_{i=1}^{\\lvert S\\rvert}T_{V_i}\\)\nとなります。\n頂点\n\\(N\\)\nから到達可能な頂点集合については、上のグラフにおける辺の本数が\n\\(M=\\displaystyle\\sum_{i=1}^{N} K_i\\)\nであることに注意すると、BFS(幅優先探索)やDFS(深さ優先探索)などによって、\n\\(O\\left( N+\\displaystyle\\sum_{i=1}^{N} K_i \\right) \\)\nで求めることができます。よって、この問題を解くことが出来ました。\nc++による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n \n#define N 200100\n#define MOD 998244353\n#define ll long long\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nll t[N];\nint k[N];\nvector<int>e[N];\n\nbool used[N];\n\nint main(void) {\n\tint n, x;\n\tll ans = 0;\n\trep(i, N)used[i] = false;\n\n\tcin >> n;\n\trep(i, n) {\n\t\tcin >> t[i];\n\t\tcin >> k[i];\n\t\trep(j, k[i]) {\n\t\t\tcin >> x;\n\t\t\te[i].push_back(x - 1);\n\t\t}\n\t}\n\n\tused[n - 1] = true;\n\tfor (int i = n - 1; i >= 0; i--) {\n\t\tif (used[i]) {\n\t\t\tans += t[i];\n\t\t\trep(j, k[i]) {\n\t\t\t\tused[e[i][j]] = true;\n\t\t\t}\n\t\t}\n\t}\n\n\tcout << ans << endl;\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "818e3a5b372f6348f99215bdab1ac5e248208396f6691ad9849a9b398b166723",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc226/abc226_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

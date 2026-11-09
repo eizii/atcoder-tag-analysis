@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc366_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc366/editorial/10642",
+      "text": "各操作 (具体的には\n\\(1\\)\n種類目および\n\\(2\\)\n種類目のクエリ) の特徴について考えてみましょう。\n両操作ともに操作前と操作後では袋の中に入っている数の種類数は高々\n\\(1\\)\nつ増えるまたは減ります。ボールを追加する操作については「種類数は\n\\(1\\)\nつ増えるか、種類数が変わらないか」、ボールを取り出す操作については「種類数は\n\\(1\\)\nつ減るか、種類数が変わらないか」であるということです。\nこの特徴を用いて高速に各操作を行う方法を考えます。各操作において種類数が変わるか変わらないか判定するにはその操作時点である数が書かれたボールが袋の中に何個入っているかわかればよいです。ボールを追加する操作では、すでに袋の中にその数が書かれたボールがある場合は種類数は増えず、そうでない場合は種類数は\n\\(1\\)\nつ増えます。同様にしてボールを取り出す操作についてもある数が書かれたボールの個数がわかれば種類数が減るかを判定できます。\nこのように、すべてのクエリを処理するのに必要なものは現在の種類数およびある数が書かれたボールが袋の中に何個入っているかの情報です。前者は\n\\(1\\)\nつの整数、後者は 長さ\n\\(10^6\\)\nの整数からなる配列を管理することで実現できます。\n詳細は実装例を参照してください。\n実装例(C++):\n実装例(Python):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int q;\n    cin >> q;\n    vector<int> cnt(1000000); // cnt[i]=(現時点で (i + 1) が書かれたボールが袋の中に何個あるか//\n    int ans = 0; // 現時点での袋の中のボールに書いてある数の種類数\n    for (int i = 0; i < q; ++i) {\n        int t;\n        cin >> t;\n        if (t == 1) {\n            int x;\n            cin >> x;\n            x--;\n            cnt[x]++;\n            if (cnt[x] == 1) ans++; // このときx が書かれたボールが追加された1個のみである\n        } else if (t == 2) {\n            int x;\n            cin >> x;\n            x--;\n            cnt[x]--;\n            if (cnt[x] == 0) ans--; // このとき x が書かれたボールが袋の中にはもうない\n        } else {\n            cout << ans << \"\\n\";\n        }\n    }\n}",
+        "q = int(input())\ncnt = [0] * 1000000\nans = 0\n\nfor _ in range(q):\n    t,*x = map(int,input().split())\n    if t == 1:\n        x[0] -= 1\n        cnt[x[0]] += 1\n        if cnt[x[0]] == 1:\n            ans += 1\n    elif t == 2:\n        x[0] -= 1\n        cnt[x[0]] -= 1\n        if cnt[x[0]] == 0:\n            ans -= 1\n    else:\n        print(ans)"
+      ],
+      "text_sha256": "c09e242c069bfd6ab8a30dcda3fa5f5c55e1cb4922ee9aa5eb804cd16f3805bb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc366/abc366_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

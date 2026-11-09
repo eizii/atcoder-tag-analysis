@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc229_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc229/editorial/2961",
+      "text": "基本的に、チーズ\n\\(1\\)\n[g] あたりの美味しさが大きいものから使っていくことが最適です。\nまず、チーズを美味しさが大きい方からソートします。そのうえで、順番にチーズを使えるだけ使えばよいです。\n具体的には、チーズの美味しさが大きいものから順に以下を行うとよいです。\nチーズを残り\n\\(w\\)\n[g] 使え、現在着目しているチーズが\n\\(B_k\\)\n[g] 残っているとき、そのチーズを\n\\(\\min(w,B_k)\\)\n[g] 使うことにする。\n実装例(C++)",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  long long n,w;\n  cin >> n >> w;\n  vector<pair<long long,long long>> v(n);\n  for(auto &nx : v){\n    cin >> nx.first >> nx.second;\n  }\n  sort(v.begin(),v.end());\n  reverse(v.begin(),v.end());\n  long long res=0;\n  for(auto &nx : v){\n    res+=nx.first*min(w,nx.second);\n    w-=min(w,nx.second);\n  }\n  cout << res << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "1784787b5bfbbdef60c1d3453c7344a3fc223dddaeb8bf6f4578021ed797ef6e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc229/abc229_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

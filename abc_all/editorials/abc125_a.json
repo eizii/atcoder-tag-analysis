@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc125_a",
+  "editorials": [
+    {
+      "text": "A: Biscuit Generator\nT + 0.5 秒後までに生産される回数は、T をA で割った商⌊T\nA⌋(T をA で割った切り捨て) です。これは、\n例えば次のようなA = 3 のときの表を書いてみると分かりやすいかもしれません。\nT\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n· · ·\n答え\n0\n0\n0\nB\nB\nB\n2B\n2B\n2B\n3B\n· · ·\n1 回ごとにB 個生産されるので、答えは⌊T\nA⌋× B になります。C++ での実装例を示します。\n#include <bits/stdc ++.h>\nusing\nnamespace\nstd;\nint main () {\nint A, B, T; cin >> A >> B >> T;\nint\ngenerated_times = T / A;\nint ans = generated_times * B;\ncout << ans << endl;\n}\n",
+      "text_sha256": "533c45c3c19db3ae56b86b9da5aef4431c9c556ff4c71d47747b728022ba8eab",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc125/abc125_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

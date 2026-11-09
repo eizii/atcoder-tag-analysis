@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc135_f",
+  "editorials": [
+    {
+      "text": "F: Strings of Eternity\n問題文の注記では文字列の先頭の文字を1 文字目としていますが、ここでは0 文字目とします。問題の内\n容を直感的に述べると、s を無限個連結して得られる文字列s′ にt は最大で何連続で現れるか、となります。\nここで、0 以上|s| −1 以下のすべての整数i に対して、s′ のi 文字目からi + |t| −1 文字目までの部分文\n字列がt と一致するか否か(この真偽値をmatchi とします) が判明しているとします。すると、s′ の周期性\nを利用してシミュレーションを行うことでO(|s|) 時間で答えを求めることができます。グラフの言葉で表現\nすると、次のような有向グラフの最長パスの長さが答えとなります。\n• 0, 1, . . . , |s| −1 の番号がついた|s| 個の頂点を持つ。\n• matchi = true のとき有向辺i →(i + |t|) mod |s| が存在する。その他に辺はない。\n残るはmatch0, . . . , match|s|−1 を時間内にすべて求めることです。もちろん、ナイーブにs′ とt を比較す\nると最悪の場合にO((|s| + |t|) × |t|) 時間かかってしまい間に合いません。*1 しかしこれは古典的な問題であ\nり、この問題を高速に解くためのアルゴリズムが多く考案されています。線形時間でmatch0, . . . , match|s|−1\nをすべて求めるアルゴリズムを二つ挙げます。\n• KMP 法(Wikipedia の記事へのリンク)\n• Z algorithm (GeeksforGeeks の記事へのリンク)\nこの他に文字列を非十進表記の数値とみなすローリングハッシュを用いる方法もありますが、剰余の計算を\n省くために数値を264 で割った余りを用いると衝突するような入力を用意してありますのでご注意ください。\ns = aaa...aa, t = aaa...ab のような繰り返しの多い文字列ではなかなかマッチに失敗しません\n\nABC 136 Editorial\ndrafear, evima, gazelle, sheyasutaka, sigma425\nJuly 27, 2019\n",
+      "text_sha256": "53972c5c23f0ef0c6c99e9959e480b2bb053446719c51a9189903a3e9e936b88",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc135/abc135_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

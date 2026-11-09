@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc241_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc241/editorial/3470",
+      "text": "高橋君は\n\\(i\\)\n日目に食べられる麺が複数残っている場合、どの麺を選んでも良いです。\nこれは高橋君が\n\\(i-1\\)\n日目まで食事計画が実行できたとして、\n\\(i\\)\n日目に食事計画を実行できる（長さ\n\\(B_i\\)\nの麺を食べられる）ためには残っている麺の長さの多重集合に\n\\(B_i\\)\nが含まれている事が必要十分条件であり、その多重集合はそれぞれの日に同じ長さの麺のうちのどれを食べても変わらない事から示せます。\nこの事実から、愚直にシミュレーションを行う事が出来ます。それぞれの日について麺を前から見ていき、その麺がまだ残っており、条件をみたす（長さが\n\\(B_i\\)\nに等しい）ならその日はその麺を食べたことにし、それで\n\\(N\\)\n日目まで食べる麺が存在したならば\nYes\n, ある日についてその日食べる麺が存在しなかったならば\nNo\nとなります。計算量は\n\\(O(NM)\\)\nであり、十分高速で間に合います。\n実装の際には、間違って同じ麺を複数の日で食べたことにしたり、逆に複数の麺を同じ日に食べたことにしてしまったりしないように注意してください。また、分岐におけるミス等によって、\nNo\nを複数回出力したり、\nNo\nの後に\nYes\nを出力してしまったりすると、誤答となってしまうので注意してください。\nc++ による実装例（シミュレーション）:\nまた、これは std::map などのデータ構造を用いてそれぞれの長さの重複度を管理する事で\n\\(O((N+M)\\log N)\\)\nで解くことができます。ABC の\n\\(200\\)\n点問題を解く上でこの知識が必要とされるという事はおそらくないですが、もちろんこの方針でも解くことができます。\nc++ による実装例（std::map を用いた解法）:",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, m;\n\tint a[1000];\n\tint b;\n\tbool used[1000];\n\tbool found,success;\n\n\tcin >> n >> m;\n\tfor (int i = 0; i < n; i++) {\n\t\tcin >> a[i];\n\t\tused[i] = false;\n\t}\n\n\tsuccess = true;\n\tfor (int i = 0; i < m; i++) {\n\t\tcin >> b;\n\t\tfound = false;\n\n\t\tfor (int j = 0; j < n; j++) {\n\t\t\tif ((a[j] == b)&&(!used[j])) {\n\t\t\t\tused[j] = true;\n\t\t\t\tfound = true;\n\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\n\t\tif (!found)success = false;\n\t}\n\tif (success)cout << \"Yes\" << endl;\n\telse cout << \"No\" << endl;\n\treturn 0;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, m;\n\tmap<int, int>mp;\n\tint x;\n\n\tcin >> n >> m;\n\tfor (int i = 0; i < n; i++) {\n\t\tcin >> x;\n\t\tmp[x]++;\n\t}\n\tfor (int i = 0; i < m; i++) {\n\t\tcin >> x;\n\t\tif (mp[x] == 0) {\n\t\t\tcout << \"No\" << endl;\n\t\t\treturn 0;\n\t\t}\n\t\tmp[x]--;\n\t}\n\tcout << \"Yes\" << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "7790cd07150709a970d50e503ad9fcb85e43f883fe08ab607611156cce947f81",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc241/abc241_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc241/editorial/3487",
+      "text": "Python の\nCounter\nを使うと簡単に実装することができます。\n\\(B - A\\)\nが多重集合としての差集合を計算する\nbool(B - A)\nは\nlen(B - A) != 0\nと等価\nであることがポイントです。",
+      "codes": [
+        "from collections import Counter\ninput()\nA = Counter(input().split())\nB = Counter(input().split())\nprint(\"No\" if B - A else \"Yes\")"
+      ],
+      "text_sha256": "4c0ebc89b4c04d6a5e8e059fba1c5cb1094a1669b7e802df8ee0c17fb3bb25d9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc241/abc241_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

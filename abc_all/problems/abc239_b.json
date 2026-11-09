@@ -1,0 +1,84 @@
+{
+  "problem_id": "abc239_b",
+  "title": "Integer Division",
+  "contests": [
+    {
+      "contest_id": "abc239",
+      "problem_index": "B"
+    }
+  ],
+  "difficulty": 57,
+  "raw_difficulty": -378,
+  "contest_id": "abc239",
+  "problem_index": "B",
+  "url": "https://atcoder.jp/contests/abc239/tasks/abc239_b",
+  "statement": "配点 : 200 点 問題文 -10^{18} 以上 10^{18} 以下の整数 X が与えられるので、 \\left\\lfloor \\dfrac{X}{10} \\right\\rfloor を出力してください。 注記 実数 x に対して、「 x 以下の整数の中で最大の整数」を \\left\\lfloor x \\right\\rfloor と表します。たとえば \\left\\lfloor 4.7 \\right\\rfloor = 4, \\left\\lfloor -2.4 \\right\\rfloor = -3, \\left\\lfloor 5 \\right\\rfloor = 5 のようになります。(詳しくは入出力例にある説明を参考にしてください。) 制約 -10^{18} \\leq X \\leq 10^{18} 入力はすべて整数である。 入力 入力は以下の形式で標準入力から与えられる。 X 出力 \\left\\lfloor \\frac{X}{10} \\right\\rfloor を出力せよ。整数として出力する必要があることに注意せよ。 入力例 1 47 出力例 1 4 \\frac{47}{10} = 4.7 以下の整数は、すべての負の整数および 0, 1, 2, 3, 4 です。この中で一番大きい整数は 4 なので、 \\left\\lfloor \\frac{47}{10} \\right\\rfloor = 4 となります。 入力例 2 -24 出力例 2 -3 \\frac{-24}{10} = -2.4 以下の整数の中で一番大きい整数は -3 なので、 \\left\\lfloor \\frac{-24}{10} \\right\\rfloor = -3 となります。 -2 は -2.4 よりも大きいので、条件を満たさないことに注意してください。 入力例 3 50 出力例 3 5 \\frac{50}{10} = 5 以下の整数の中で一番大きい整数は 5 自身です。よって \\left\\lfloor \\frac{50}{10} \\right\\rfloor = 5 となります。 入力例 4 -30 出力例 4 -3 上の例と同様に \\left\\lfloor \\frac{-30}{10} \\right\\rfloor = -3 となります。 入力例 5 987654321987654321 出力例 5 98765432198765432 答えは 98765432198765432 となります。すべての桁が正しく合っているか確認しましょう。 なお、もしも自分で書いたプログラムが想定通りの挙動をしない場合は、使用しているプログラミング言語の仕様を調べてみることを推奨します。 また、自分の書いたコードがどのように動作するかを確認したい場合は問題文上部の「コードテスト」をご利用ください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 -10^{18} 以上 10^{18} 以下の整数 X が与えられるので、 \\left\\lfloor \\dfrac{X}{10} \\right\\rfloor を出力してください。"
+    },
+    {
+      "heading": "注記",
+      "text": "注記 実数 x に対して、「 x 以下の整数の中で最大の整数」を \\left\\lfloor x \\right\\rfloor と表します。たとえば \\left\\lfloor 4.7 \\right\\rfloor = 4, \\left\\lfloor -2.4 \\right\\rfloor = -3, \\left\\lfloor 5 \\right\\rfloor = 5 のようになります。(詳しくは入出力例にある説明を参考にしてください。)"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 -10^{18} \\leq X \\leq 10^{18} 入力はすべて整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 X"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 \\left\\lfloor \\frac{X}{10} \\right\\rfloor を出力せよ。整数として出力する必要があることに注意せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 47"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 \\frac{47}{10} = 4.7 以下の整数は、すべての負の整数および 0, 1, 2, 3, 4 です。この中で一番大きい整数は 4 なので、 \\left\\lfloor \\frac{47}{10} \\right\\rfloor = 4 となります。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 -24"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 -3 \\frac{-24}{10} = -2.4 以下の整数の中で一番大きい整数は -3 なので、 \\left\\lfloor \\frac{-24}{10} \\right\\rfloor = -3 となります。 -2 は -2.4 よりも大きいので、条件を満たさないことに注意してください。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 50"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 5 \\frac{50}{10} = 5 以下の整数の中で一番大きい整数は 5 自身です。よって \\left\\lfloor \\frac{50}{10} \\right\\rfloor = 5 となります。"
+    },
+    {
+      "heading": "入力例 4",
+      "text": "入力例 4 -30"
+    },
+    {
+      "heading": "出力例 4",
+      "text": "出力例 4 -3 上の例と同様に \\left\\lfloor \\frac{-30}{10} \\right\\rfloor = -3 となります。"
+    },
+    {
+      "heading": "入力例 5",
+      "text": "入力例 5 987654321987654321"
+    },
+    {
+      "heading": "出力例 5",
+      "text": "出力例 5 98765432198765432 答えは 98765432198765432 となります。すべての桁が正しく合っているか確認しましょう。 なお、もしも自分で書いたプログラムが想定通りの挙動をしない場合は、使用しているプログラミング言語の仕様を調べてみることを推奨します。 また、自分の書いたコードがどのように動作するかを確認したい場合は問題文上部の「コードテスト」をご利用ください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc239/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:37:08.889997+00:00",
+  "statement_sha256": "57585c42b6cd3b561c48a91cd7c484aac0cba998c45414db443841a18d302b2c",
+  "editorials": []
+}

@@ -1,0 +1,29 @@
+{
+  "problem_id": "abc303_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc303/editorial/6439",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\nこの問題では、まず二つの文字が似た文字かの判定を行うことが必要です。これは、 if 文を用いて実装できます。\n次に、文字列に含まれる各文字について似た文字かを比較する必要があります。これは、for 文を用いて実装できます。\n具体的な実装方法は実装例をご確認ください。\n実装例（C++）：\n実装例（Python）：",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nbool sim(char c, char d) {\n    return c == d or (c == '0' and d == 'o') or (c == 'o' and d == '0') or (c == 'l' and d == '1') or (c == '1' and d == 'l');\n}\n\nint main() {\n    int n;\n    string s, t;\n    cin >> n >> s >> t;\n    bool string_sim = 1;\n    for(int i = 0; i < n; i++) string_sim &= sim(s[i], t[i]);\n    cout << (string_sim ? \"Yes\\n\" : \"No\\n\");\n}",
+        "def is_sim_char(c, d):\n    return (\n        c == d\n        or (c == \"0\" and d == \"o\")\n        or (c == \"o\" and d == \"0\")\n        or (c == \"l\" and d == \"1\")\n        or (c == \"1\" and d == \"l\")\n    )\n\n\ndef is_sim_string(s, t):\n    for i in range(len(s)):\n        if not is_sim_char(s[i], t[i]):\n            return False\n    return True\n\n\nn = int(input())\ns = input()\nt = input()\nprint(\"Yes\" if is_sim_string(s, t) else \"No\")"
+      ],
+      "text_sha256": "37f99f1b5983d50436c1f6210941559941ad39d2bb5ad25166b348a54281d9d8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc303/abc303_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc303/editorial/6466",
+      "text": "0\nを\no\nに、\n1\nを\nl\nに置き換えると、\n\\(S\\)\nと\n\\(T\\)\nが同じ文字列か判定する問題になります。",
+      "codes": [
+        "fun main() {\n  val N = readLine()!!\n  val S = readLine()!!.replace(\"0\", \"o\").replace(\"1\", \"l\")\n  val T = readLine()!!.replace(\"0\", \"o\").replace(\"1\", \"l\")\n  println(if (S == T) \"Yes\" else \"No\")\n}"
+      ],
+      "text_sha256": "c3aa18a157cea19bfc6a1fe4a4fa93ed0ad55abfc08655879ed860cd83f9c078",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc303/abc303_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

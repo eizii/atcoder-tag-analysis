@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc383_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc383/editorial/11539",
+      "text": "この問題は時系列順に水がいくら残っているかをシミュレーションすることが求められています。\n水の追加の時に、その時点での水の量はそれ以前に最後に水を追加した時からの経過時間とその水の追加後の水の量から計算できます。具体的には、水の残量は\n\\(0\\)\nリットル未満にならないことに注意して、\n\\(V\\)\nリットルある時から\n\\(T\\)\n単位時間経過した時点で水は\n\\(\\max(0,V-T)\\)\nリットルです。\nこの処理を時系列順に計算することで水の量をシミュレーションすることができます。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    int volume = 0;\n    int now = 0; //直前の水の追加の時刻 (最初は0とする)\n    for (int i = 0; i < n; ++i) {\n        int t, v;\n        cin >> t >> v;\n        volume -= (t - now); //前の水の追加からの経過時間\n        volume = max(volume, 0);\n        volume += v; //水の追加\n        now = t;\n    }\n    cout << volume << endl;\n}"
+      ],
+      "text_sha256": "328ac1569e1d8038a9fcf7f059b865479725d502b81d02b30705a6c20c25651c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc383/abc383_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

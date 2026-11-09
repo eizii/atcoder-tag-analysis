@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc234_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc234/editorial/3225",
+      "text": "この問題で最も重要な事実は、「\n\\(10^{18}\\)\n未満の等差数はそう多くない」ということです。まずはこのことを見積もりましょう。\n等差数のもとになる等差数列 (例えば\n\\((2,4,6,8) \\rightarrow 2468\\)\n) の候補を考えます。 等差数列が満たすべき必要条件は以下です。\n初項が\n\\(1\\)\n以上\n\\(9\\)\n以下である。\n公差が\n\\(-9\\)\n以上\n\\(8\\)\n以下である。\n数列の長さは\n\\(1\\)\n以上\n\\(18\\)\n以下である。\n(長さ\n\\(1\\)\nの数列を重複して数えたとしても、) この条件を満たす数列は\n\\(9 \\times 18 \\times 18 = 2916\\)\n個以下であることがわかります。\nただし、この条件を満たしていても、\n\\((7,1,-5)\\)\nのような数列は等差数のもととはなりません。追加で以下の条件が必要です。\n第\n\\(2\\)\n項以降が全て\n\\(0\\)\n以上\n\\(9\\)\n以下である。\n上に挙げた\n\\(4\\)\nつの条件全てを満たせば十分です。あとは、これをもとに等差数を全列挙し、\n\\(X\\)\n以上であるものの中で最小のものを出力すればよいです。なお、\n\\(X=10^{17}\\)\nである場合、答えは\n\\(111111111111111111\\)\n(\n\\(1\\)\nが\n\\(18\\)\n個並んだ数) なので、\n\\(10^{18}\\)\n以上の等差数は考慮に入れる必要がありません。\nこの解法は、等差数の列挙が定数時間であるため、定数時間で動作します。\n実装例(C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nset<long long> gen_tosasu(){\n  set<long long> res;\n  for(int fir=1;fir<=9;fir++){\n    for(int d=-9;d<=8;d++){\n      string s;\n      int dg=fir;\n      for(int i=0;i<18;i++){\n        s.push_back(dg+'0');\n        res.insert(stoll(s));\n        dg+=d;\n        if(!(0<=dg && dg<=9)){break;}\n      }\n    }\n  }\n  return res;\n}\n\nint main(){\n  long long x;\n  cin >> x;\n  set<long long> st=gen_tosasu();\n  cout << (*st.lower_bound(x)) << '\\n';\n  return 0;\n}"
+      ],
+      "text_sha256": "225a75bbb12eb8291accc549d3419299f467867a472ccd31ded0f290207a5c61",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc234/abc234_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

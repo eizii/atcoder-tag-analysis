@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc230_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc230/editorial/3015",
+      "text": "任意の\n\\(1\\leq i\\leq N\\)\nに対して、\n\\(1\\leq \\left[  \\frac{N}{i} \\right] \\leq N\\)\nが成り立つことに注意します。\n\\(k_0= [\\sqrt{N}]\\)\nとし、\n\\(k=1,2,\\ldots,k_0\\)\nに対して、\n\\(  \\left[  \\frac{N}{i} \\right]=k\\)\nをみたす\n\\(i\\)\nの個数を数えることを考えます。\n\\(\\left[  \\frac{N}{i} \\right]=k\\)\nすなわち\n\\(k\\leq \\frac{N}{i}<k+1\\)\nは\n\\(\\frac{N}{k+1}<i\\leq \\frac{N}{k}\\)\nと書き換えられ、これをみたす整数\n\\(i\\)\nは\n\\(\\left(  \\left[  \\frac{N}{k} \\right]-\\left[  \\frac{N}{k+1} \\right]\\right) \\)\n個存在します。\n次に、そうでない、すなわち\n\\(\\left[  \\frac{N}{i} \\right]\\geq k_0+1\\)\nとなるようなものを考えます。\nこのとき、\n\\(\\frac{N}{i}\\geq k_0+1\\)\nより、\n\\(i\\leq \\frac{N}{k_0+1}<\\sqrt{N}\\)\nであり、そのような正整数\n\\(i\\)\nは高々\n\\(\\sqrt{N}\\)\n個しか存在せず、\n\\(1\\)\nつずつ足し上げて行くことができます。\nよって答えは、\n\\[\n\\sum_{k=1}^{k_0} \\left(  \\left(  \\left[  \\frac{N}{k} \\right]-\\left[  \\frac{N}{k+1} \\right]\\right) \\times k\\right)+\n\\sum_{i=1}^{\\left[  \\frac{N}{k_0+1} \\right]} \\left[  \\frac{N}{i} \\right] \n\\]\nと求められ、どちらの項も\n\\(O(\\sqrt{N})\\)\nで求められるため、よってこの問題を解く事が出来ました。\nc++による実装例:",
+      "codes": [
+        "#include <bits/stdc++.h>\n\nusing namespace std;\n\n\nint main(void) {\n\tlong long n, ans, k;\n\tcin >> n;\n\n\tfor (long long i = 1; i <= n; i++) {\n\t\tif (i*i <= n)k = i;\n\t\telse break;\n\t}\n\n\tans = 0;\n\tfor (long long i = 1; i <= k; i++)ans += ((n / i) - (n / (i + 1)))*i;\n\tfor (long long i = 1; i <= n / (k + 1); i++)ans += (n / i);\n\t\n\tcout << ans << endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "ad1177d8c256ea90b8bf3f19dca5844be46727f1b991050a9c109e1b1c6fd6da",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc230/abc230_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

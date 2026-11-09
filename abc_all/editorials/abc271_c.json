@@ -1,0 +1,42 @@
+{
+  "problem_id": "abc271_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc271/editorial/4930",
+      "text": "操作の方法の考察\n問題文中では操作として\n\\(2\\)\n冊売って代わりに\n\\(1\\)\n冊買っていますが、売った時にどれを買うのかを保留できるものとしても問題ありません。\nまず、\n\\(2\\)\n冊以上持っている単行本は\n\\(1\\)\n冊を残して売って良いです。次に、高橋君が持っている冊数は初めが\n\\(N\\)\nで、操作をすると減っていきます。そのため、\n\\(N\\)\nより大きな巻を読むことが出来ず、そのような巻も売って良いです。\n本を買う時は、現在持っていない巻のうち最小のものを買うとして良いです。また、最終的に読むことになる巻を一度売って買い戻すのは好ましくありません。\n以上を踏まえると、以下のようにするのが最適です。\n\\(2\\)\n冊以上持っている巻や\n\\(N\\)\nより大きな巻を売る\n単行本を買える場合は、現在持っていない巻のうち最小のものを買う。\n単行本を買えない場合は、最終的に読むことにならない巻を売る。これは現在持っているうち最大の巻が第一候補である。ただし、その時点で操作をやめて読み始めた場合に最大の巻を読むことになるならば操作をやめる。\nシミュレーション・計算量改善\n\\(vol_i\\)\nを現在\n\\(i\\)\n巻を持っているかどうかを表す配列とします。読める巻数の最大値は\n\\(N\\)\nなので、配列の長さは\n\\(N\\)\n前後で十分です(あるいは、平衡二分木を用いることで\n\\(N\\)\nを超える巻まで同様に扱っても構いません)。\nこれによって現在持っていない巻のうち最小のものや現在持っている巻のうち最大のものが分かるため、これまで売ってきた(かつ代わりに買うのに使っていない)単行本の冊数を管理しながら上述の戦略をシミュレーションすれば答えは求められますが、現在持っていない巻のうち最小のもの等を求めるのに毎回\n\\(\\mathrm{O}(N)\\)\nかけた場合、全体で\n\\(\\mathrm{O}(N^2)\\)\nとなります。これでは本問の実行時間制限に間に合いません。\n現在持っていない巻のうち最小のものを\n\\(L\\)\n、現在持っている巻のうち最大のものを\n\\(R\\)\nとします。本を売ると\n\\(R\\)\nは減り、買うと\n\\(L\\)\nは増えます。操作によって変化したかもしれない、現在持っていない巻のうち最小のものを\n\\(1,2,\\ldots\\)\nと調べる代わりに\n\\(L, L+1,L+2,\\ldots\\)\nと調べると、全体で調べるのにかかるステップ数は操作回数と\n\\(L\\)\nが増えた回数の和となります。同様のことが\n\\(R\\)\nについても言えて、計算量が\n\\(\\mathrm{O}(N)\\)\nとなり、十分高速になります。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    \n\tint N;\n\tcin>>N;\n\t\n\tvector<bool> vol(N+2,false);\n\tvector<int> a(N);\n\t\n\tint sold = 0;\n\tfor(int i=0;i<N;i++){\n\t\tcin>>a[i];\n\t\tif(a[i]>=vol.size())sold++;\n\t\telse if(vol[a[i]])sold++;\n\t\telse vol[a[i]] = true;\n\t}\n\t\n\tint L = 1;\n\tint R = N+1;\n\twhile(true){\n\t\twhile(vol[L])L++;\n\t\twhile(R!=0&&!vol[R])R--;\n\t\tif(sold>=2){\n\t\t\tsold-=2;\n\t\t\tvol[L] = true;\n\t\t}\n\t\telse{\n\t\t\tif(L>=R)break;\n\t\t\tvol[R] = false;\n\t\t\tsold++;\n\t\t}\n\t}\n\t\n\tcout<<L-1<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "c25b799ab54b0994ed023f00ccc5b9ee51016db33b7aed87169cba0275c9d79d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc271/abc271_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc271/editorial/4947",
+      "text": "問題を読み替えます。\n\\(i=1, 2, \\ldots\\)\nに対して、\n\\(i\\)\n巻目を持っている場合は\n\\(1\\)\n冊、持っていない場合は\n\\(2\\)\n冊を消費することで\n\\(i\\)\n巻目を読める。\nこの時、最大で何巻まで読むことができるか？\nこれは、\n\\(i=1, 2, \\ldots\\)\nに対して上のシミュレーションを行い、必要な冊数が\n\\(N\\)\nを超えない最大の\n\\(i\\)\nを出力すれば良いです。\n\\(i\\)\n巻目を持っているか判定するために\nTreeSet\nなどの平衡二分木を用いるなら\n\\(O(N \\log N)\\)\n、\nHashSet\nなどのハッシュテーブルを用いるならば\n\\(\\mathrm{expected} \\ O(N)\\)\n、\nvan Emde Boas Tree\nなどを用いるならば\n\\(O(N \\log \\log \\max a)\\)\nです。\nまた、そもそも\n\\(a_i \\leq N\\)\nを仮定して良い(\n\\(N\\)\nより大きい巻を持っていても読まない)ので、この範囲の配列を作ることで\n\\(O(N)\\)\nを達成できます。",
+      "codes": [
+        "#include<iostream>\n#include<vector>\nusing namespace std;\nint main() {\n  int N;\n  cin >> N;\n  vector<bool> set(N + 2);\n  for (int i = 0;i < N;++ i) {\n    int a;\n    cin >> a;\n    set[min(N + 1, a)] = true;\n  }\n  for (int read = 1;N >= 0;++ read) {\n    N -= set[read] ? 1 : 2; // その巻を読むために使う本の冊数\n    if (N < 0) cout << read - 1 << endl; // 本が無くなったら、無くなる直前の冊数を出力\n  }\n}",
+        "import java.util.Scanner;\nimport static java.lang.System.out;\npublic class Main {\n  public static void main(String[] args) {\n    try (Scanner sc = new Scanner(System.in)) {\n      int N = sc.nextInt();\n      boolean[] a = new boolean[N + 2];\n      for (int i = 0;i < N;++ i) a[Math.min(N + 1, sc.nextInt())] = true;\n      for (int read = 1;N >= 0;++ read) {\n        N -= a[read] ? 1 : 2; // その巻を読むために使う本の冊数\n        if (N < 0) out.println(read - 1); // 本が無くなったら、無くなる直前の冊数を出力\n      }\n    }\n  }\n}",
+        "import java.util.Scanner\nfun main() {\n  Scanner(System.`in`).use { sc -> \n    var N = sc.nextInt()\n    val a = BooleanArray(N + 2)\n    repeat(N) {a[Math.min(N + 1, sc.nextInt())] = true}\n    var read = 0\n    while(N >= 0) N -= if (a[++ read]) 1 else 2 // その巻を読むために使う本の冊数\n    println(read - 1) // 本が無くなったら、無くなる直前の冊数を出力\n  }\n}",
+        "N = int(input())\na = [False] * (N + 2)\nfor i in map(int, input().split()): a[min(N + 1, i)] = True\nread = 0\nwhile N >= 0:\n  read += 1\n  N -= 1 if a[read] else 2 # その巻を読むために使う本の冊数\nprint(read - 1) # 本が無くなったら、無くなる直前の冊数を出力"
+      ],
+      "text_sha256": "e62cd693577f160e9c27f71bc11eb6f88f00610b66bc6508eae4c6488c187a60",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc271/abc271_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc271/editorial/4937",
+      "text": "この問題は答えを二分探索することで解くことができます。\n判定問題「少なくとも\n\\(X\\)\n巻までを全て読むことができるか？」を考えます。このとき、\n\\(X\\)\n巻までの本は\n\\(1\\)\n冊残し、それ以外の本は全て売るとして良いです。残った本＋(売った本/2)が\n\\(X\\)\n以上なら答えはYesになります。\n残す本の冊数を求めるには、setの積集合を使うと簡単です。\n実装例(Python)\nこの実装例のアルゴリズムの計算量は O(N(log N)^2) であり、十分高速に動作します。\n2022/10/03 追記：\nCPythonでは\nset\nは hash table により実装されているため、 9行目の実行時間は expected\n\\(O(m)\\)\n、 worst\n\\(O(mN)\\)\nとなり、このアルゴリズム全体の計算量は expected\n\\(O(N\\log N)\\)\n、worst\n\\(O(N^2)\\)\nとなります。\nhttps://wiki.python.org/moin/TimeComplexity\nPythonの公式ドキュメントでは計算量に関する規定は見つけられませんでした。ご存知の方は教えてください。\nhttps://docs.python.org/ja/3/library/stdtypes.html#set\nまた、C++で同様の実装を行う場合、\nset(range(1,m+1))\nに相当するものは\n\\(O(m)\\)\n時間ででき 、積集合を求めることは\n今回のケースでは\n\\(O(m)\\)\nでできるため、アルゴリズム全体の計算量は\n\\(O(N\\log N)\\)\nとなります。",
+      "codes": [
+        "N=int(input())\nA=set(map(int,input().split()))\n\nl=0\nr=N+1\nwhile r-l>1:\n  m=(l+r)//2\n  # m巻まで読めるか?\n  c=len(set(range(1,m+1))&A)\n  if c+(N-c)//2>=m: l=m\n  else: r=m\n\nprint(l)"
+      ],
+      "text_sha256": "294c62dbaf0a6f3de35d289c15f05c01e0a8efb9c0c12d34ef2d6c08af5be92f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc271/abc271_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

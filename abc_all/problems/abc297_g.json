@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc297_g",
+  "title": "Constrained Nim 2",
+  "contests": [
+    {
+      "contest_id": "abc297",
+      "problem_index": "G"
+    }
+  ],
+  "difficulty": 1834,
+  "raw_difficulty": 1834,
+  "contest_id": "abc297",
+  "problem_index": "G",
+  "url": "https://atcoder.jp/contests/abc297/tasks/abc297_g",
+  "statement": "配点 : 600 点 問題文 N 個の石の山があり、はじめ i 番目の山には石が A_i 個あります。これらの山を使って先手太郎君と後手次郎君でゲームをします。 先手太郎君と後手次郎君は、先手太郎君が先手で交互に以下の操作を行います。 石の山を一つ選び、そこから L 個以上 R 個以下の石を取り除く。 操作が行えなくなった方が負けで、負けなかった方が勝ちです。両者が勝ちを目指して最適な行動を取るとき、どちらが勝つか判定してください。 制約 1\\leq N \\leq 2\\times 10^5 1\\leq L \\leq R \\leq 10^9 1\\leq A_i \\leq 10^9 入力はすべて整数である。 入力 入力は以下の形式で標準入力から与えられる。 N L R A_1 A_2 \\ldots A_N 出力 先手太郎君が勝つ場合 First を、後手次郎君が勝つ場合 Second を出力せよ。 入力例 1 3 1 2\n2 3 3 出力例 1 First 先手太郎君が最初に 1 番目の山の石を 2 個取り除くことで、必ず勝つことができます。 入力例 2 5 1 1\n3 1 4 1 5 出力例 2 Second 入力例 3 7 3 14\n10 20 30 40 50 60 70 出力例 3 First",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 N 個の石の山があり、はじめ i 番目の山には石が A_i 個あります。これらの山を使って先手太郎君と後手次郎君でゲームをします。 先手太郎君と後手次郎君は、先手太郎君が先手で交互に以下の操作を行います。 石の山を一つ選び、そこから L 個以上 R 個以下の石を取り除く。 操作が行えなくなった方が負けで、負けなかった方が勝ちです。両者が勝ちを目指して最適な行動を取るとき、どちらが勝つか判定してください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N \\leq 2\\times 10^5 1\\leq L \\leq R \\leq 10^9 1\\leq A_i \\leq 10^9 入力はすべて整数である。"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N L R A_1 A_2 \\ldots A_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 先手太郎君が勝つ場合 First を、後手次郎君が勝つ場合 Second を出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 1 2\n2 3 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 First 先手太郎君が最初に 1 番目の山の石を 2 個取り除くことで、必ず勝つことができます。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 5 1 1\n3 1 4 1 5"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 Second"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 7 3 14\n10 20 30 40 50 60 70"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 First"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc297/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:22.094007+00:00",
+  "statement_sha256": "1fadb6ee96fe4da69135730e57740fabf354ecc67df671af3d8d2ac958a0fa9c",
+  "editorials": []
+}

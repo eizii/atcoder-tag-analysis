@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc373_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc373/editorial/11044",
+      "text": "この問題は二分探索の練習問題となっています。\nまず、\n\\(N=M\\)\nの場合は全候補者が当選します。以降\n\\(M<N\\)\nであるとします。また、候補者\n\\(i\\)\nは\n\\(i\\)\n番目の候補者を指します。\n以下の判定問題を解くことができれば二分探索を用いてこの問題の答えを求めることができます。\nすべての開票が終わった時点で候補者\n\\(i\\)\nが合計で\n\\(X\\)\n票獲得したとした時に自分以外の上位\n\\(M\\)\n人の候補者がそれぞれ合計\n\\(X+1\\)\n票以上獲得していることは可能か。\n以上の判定問題において可能である場合は、\n\\(i\\)\n番目の候補者は合計\n\\(X\\)\n票の時に、当選しない可能性があるため当選を確定させることができません。逆に、可能でない場合は\n\\(i\\)\n番目の候補者は合計\n\\(X\\)\n票獲得することができれば確実に当選します。\n実際にこの判定問題を高速に解くことを考えます。\nまず、簡単のため\n\\(A\\)\nが昇順であるとします。\nすべての開票が終わった時点で、候補者\n\\(i\\)\n以外の上位\n\\(M\\)\n人がそれぞれ\n\\(X+1\\)\n票以上獲得するのに合計で追加票が最小で何票必要かを求めたいです。 この値を\n\\(C\\)\nとしたとき、\n\\(C>K-\\sum_{i=0}^N A_i\\)\nを満たす場合は判定問題は不可能となり、そうでない場合は可能になります。\nこの上位\n\\(M\\)\n人を現在すでに開票されている時点での候補者\n\\(I\\)\n以外の上位\n\\(M\\)\n人と固定した時にこの最小値は達成されます。\n\\(1 \\leq i \\leq N-M\\)\nの場合は現時点での上位\n\\(M\\)\n人は 候補者\n\\(N-M+1,\\ldots ,N\\)\nです、\n\\(N-M+1 \\leq i \\leq N\\)\nの場合は候補者\n\\(N-M,N-M+1,\\ldots,i-1,i+1,\\ldots,N\\)\nが上位\n\\(M\\)\n人になります。\nこれらの候補者全員が\n\\(X+1\\)\n票以上獲得するにはあと何票必要かを求めます。\nこれらの候補者のうちすでに\n\\(X+1\\)\n票以上獲得している場合は追加の票は必要ありませんが、\n\\(j( \\leq X)\\)\n票であった場合は\n\\(X+1-j\\)\n票追加で必要です。この値を各候補者について愚直に加算していくという方法で求められます。この時判定問題を解く時間計算量は\n\\(O(M)\\)\nとなります。しかし、このままでは十分に高速ではありません。\n高速化するには、上位\n\\(M\\)\n人が基本的に連続する番号の人たちであること、\n\\(X+1\\)\n票以上すでに獲得しているかは\n\\(j\\)\nについて単調であることから累積和と二分探索を組み合わせることで判定問題を解くのに求めるべき値を求めることができます。\n具体的には、二分探索により\n\\(X+1\\)\n票未満しか獲得できてない候補者の番号の最大値を求めて、その番号以下の上位\n\\(M\\)\n人の候補者の人数を求めて 人数\n\\(\\times (X+1)\\)\nを加算します。そこから、先ほど考慮した人全員の現在獲得している票の総和を引きます。\n最後に、候補者\n\\(i\\)\nが\n\\(X\\)\n票獲得するのに必要な追加票を加算し、出た値が必要な追加票の最小値です。\n考慮する上位\n\\(M\\)\n人の番号が連続でない場合があるため、実装の際は注意が必要です。詳細は実装例を参照してください。\nよって、各候補者に対して、この二分探索を\n\\(O(\\log K)\\)\n回行い、判定問題は\n\\(O(\\log N)\\)\nで解くことができるため、全体で時間計算量\n\\(O(N \\log K \\log N)\\)\nで解くことができます。\n実装例(C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\nusing ll = long long;\nint main() {\n    int n, m;\n    ll k;\n    cin >> n >> m >> k;\n    vector<ll> a(n);\n    for (auto& e : a) cin >> e;\n    const ll rem = k - accumulate(a.begin(), a.end(), 0LL);\n\n    if (n == m) {\n        for (int i = 0; i < n; ++i) cout << 0 << \" \\n\"[i == n - 1];\n        return 0;\n    }\n\n    vector<int> ord(n);\n    iota(ord.begin(), ord.end(), 0);\n    sort(ord.begin(), ord.end(), [&](int i, int j) { return a[i] < a[j]; });\n    auto b = a;\n    sort(b.begin(), b.end());\n    vector<ll> sumb(n + 1);  // 昇順にしたAの累積和\n    for (int i = 0; i < n; ++i) sumb[i + 1] = sumb[i] + b[i];\n\n    vector<ll> ans(n, -1);\n    for (int i = 0; i < n; ++i) {\n        ll l = -1, r = rem + 1;\n        while (r - l > 1) {\n            ll mid = (l + r) / 2;\n            ll rid = lower_bound(b.begin(), b.end(), b[i] + mid + 1) - b.begin();  // b[rid - 1]<b[i]+mid+1 となる最大のridを求めている\n            ll lid = n - m - (i >= n - m ? 1 : 0);  // i<n-mの時は 候補者n-m,...,nが上位 m 人でi >=n-m の時は候補者n-m-1,...,i-1,i+1,..,.n が上位 m 人になる\n            ll cnt = 0;\n            if (rid > lid) cnt += (rid - lid) * (b[i] + mid + 1) - (sumb[rid] - sumb[lid]);\n            if (lid <= i && i < rid)\n                cnt--;  // この時、すでに候補者iが b[i]+mid+1 票獲得していることにしているので 1を引く\n            else\n                cnt += mid;  // 候補者 i の必要な票を加算する\n            if (cnt > rem)\n                r = mid;\n            else\n                l = mid;\n        }\n        if (l == rem)\n            ans[ord[i]] = -1;\n        else\n            ans[ord[i]] = r;\n    }\n\n    for (int i = 0; i < n; ++i) cout << ans[i] << \" \\n\"[i == n - 1];\n}"
+      ],
+      "text_sha256": "dc389d0cd5ca357b40ba0c6fadc9af3b462cd3e749918fbea17a65d06cac6dad",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc373/abc373_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc373/editorial/11067",
+      "text": "この問題は\n\\(A\\)\nが降順ソートされていれば、\n\\(O(N)\\)\nで解くことができます。\n\\(N=M\\)\nのケースは簡単なのでこれ以降考えないこととします。\nまず、\n\\(R:=K - \\sum A\\)\nと定義します。これは、残りの票数です。\n\\(i = M+1, \\dots ,N\\)\n人目の候補者について、それらの人が必ず当選するのに必要な票数は以下の式のいずれかを満たす最大の整数\n\\(X\\)\nと同じです。\n\\(X=A_{M}\\)\n\\(\\sum_{k=1}^{M} (\\max(X, A_{k}) -A_{k}) + X- A_{i} -1\\leq R\\)\n\\(X\\)\nが\n\\(i\\)\nに対して単調減少であることと、\n\\(\\max(X, A_{k}) =A_{k}\\)\nを満たす\n\\(1\\leq k \\leq M\\)\nの個数が変わらない限り、\n\\(2\\)\n番目の式の左辺は\n\\(X\\)\nの\n\\(1\\)\n次関数で表されることを用いて、\n\\(i = N,\\cdots , M+1\\)\nの順に時間計算量\n\\(O(N)\\)\nで\n\\(X\\)\nを求めることができます。\n\\(1,2,\\dots ,M\\)\n人目の候補者が必要な票数は、\n\\(M+1\\)\n人目の候補者が必要な票数と同じです。\nよって、全ての候補者について必要な票数が、ソートを除いて線形で求めることができました。\n実装例\nhttps://atcoder.jp/contests/abc373/submissions/58285054",
+      "codes": [],
+      "text_sha256": "78a94fb0ea9acd430e2a6224683788a63ee3786c4a5ae6017a47b7f21cbe2725",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc373/abc373_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

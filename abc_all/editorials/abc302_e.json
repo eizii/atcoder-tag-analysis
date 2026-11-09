@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc302_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc302/editorial/6410",
+      "text": "解法1: 辺の情報を順序付き集合で管理する解法（\n\\(O(Q\\log N)\\)\n解法 ）\n各頂点についてその頂点と辺で繋がっている頂点集合を管理する事を考えます。頂点\n\\(v\\)\nと辺で繋がっている頂点の集合を\n\\(S_u\\)\nとする時、\n\\(1\\)\n番目のタイプのクエリでは、\n\\(S_u\\)\nに\n\\(v\\)\nを追加し、\n\\(S_v\\)\nに\n\\(u\\)\nを追加する。\n\\(2\\)\n番目のタイプのクエリでは、\n各\n\\(u\\in S_v\\)\nについて、\n\\(S_u\\)\nから\n\\(v\\)\nを取り除く。\n\\(S_v\\)\nを空にする。\nという操作を行う必要があります。ここで、\n\\(2\\)\n番目のタイプのクエリにおいて\n\\(\\lvert S_v\\rvert\\)\n回 削除操作を行なっていますが、削除される辺は\n\\(1\\)\n番目のタイプのクエリによって追加されたものしかあり得ないため、全てのクエリを通じて高々\n\\(Q\\)\n回しか行われない事に注意します。\nもし、vectorを用いて愚直に管理したとすると、要素の追加は\n\\(O(1)\\)\nで行えるため問題ありませんが、vectorから特定の要素を削除するには、最悪\n\\(\\Theta(\\mathrm{長さ})\\)\nの計算量がかかるため、vectorの長さが最大で\n\\(N\\)\nとなる事に注意すると、\n\\(\\Theta(NQ))\\)\nの計算回数が必要になる可能性があり、間に合いません。\nそこで、setを用いて管理する事によって、要素の追加も削除も\n\\(O(\\log N)\\)\nで行う事ができ、全体で\n\\(O(Q\\log N)\\)\nの計算量で管理する事ができます。\nあとは、辺を追加・削除するタイミングで「どの他の頂点とも繋がっていない頂点」の数、すなわち\n\\(\\lvert S_v\\rvert=0\\)\nであるような頂点\n\\(v\\)\nの数が変化したかをシミュレーションしていけば答えは求まります。よって、この問題を解く事ができました。\n2. 辺が削除済みであるかどうかを別に管理する方法 （\n\\(O(Q)\\)\n解法）\n各頂点について、その頂点と辺で繋がっている頂点集合を管理する代わりに、各頂点\n\\(v\\)\nについて、最後に\n\\(v\\)\nに対して\n\\(2\\)\n番目のタイプのクエリが行われてから\n\\(v\\)\nと結ばれた頂点の、頂点番号と何個目のクエリで繋げられたかを記録し、それとは別にそれぞれのタイプ\n\\(1\\)\nのクエリで繋げられた辺が削除されたかを管理するという方法もあります。この場合、\n\\(v\\)\nと繋がっている頂点は、「最後に\n\\(v\\)\nに対して\n\\(2\\)\n番目のタイプのクエリが行われてから\n\\(v\\)\nと結ばれた頂点」のうち\n\\(v\\)\nとその頂点を結んだ辺がまだ削除されていないものとなります。また、この場合、\n\\(v\\)\nと繋がっている頂点の数は集合のサイズなどでは表されないため、別途管理する必要があります。削除されたかを記録しておく事で、両端の頂点から二重に削除されてしまう事を防いでいます。\nこのとき辺の追加・削除を\n\\(O(1)\\)\nで行う事ができ、計算量は全体で\n\\(O(Q)\\)\nとなります。\nc++による実装例(解法1):\nc++による実装例(解法2):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\nint main(void) {\n\tint n,q,t,x,y,ans;\n\tcin>>n>>q;\n\tvector<set<int>>e(n);\n\tset<int>::iterator itr;\n\tans=n;\n\trep(i,q){\n\t\tcin>>t;\n\t\tif(t==1){\n\t\t\tcin>>x>>y;\n\t\t\tx--,y--;\n\t\t\tif(e[x].size()==0)ans--;\n\t\t\tif(e[y].size()==0)ans--;\n\t\t\te[x].insert(y);\n\t\t\te[y].insert(x);\n\t\t}\n\t\telse{\n\t\t\tcin>>x;\n\t\t\tx--;\n\t\t\titr=e[x].begin();\n\t\t\twhile(itr!=e[x].end()){\n\t\t\t\ty=*itr;\n\t\t\t\te[y].erase(x);\n\t\t\t\tif(e[y].size()==0)ans++;\n\t\t\t\titr++;\n\t\t\t}\n\t\t\tif(e[x].size()>0)ans++;\n\t\t\te[x].clear();\n\t\t}\n\t\tcout<<ans<<endl;\n\t}\n\treturn 0;\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define rep(i, n) for(int i = 0; i < n; ++i)\n\n\nint main(void) {\n\tint n,q,t,x,y,sz,ans;\n\tcin>>n>>q;\n\tvector<int>c(n);\n\tvector<bool>ex(q,true);\n\tvector<vector<pair<int,int> > >e(n);\n\tans=n;\n\trep(i,q){\n\t\tcin>>t;\n\t\tif(t==1){\n\t\t\tcin>>x>>y;\n\t\t\tx--,y--;\n\t\t\tif(c[x]==0)ans--;\n\t\t\tif(c[y]==0)ans--;\n\t\t\tc[x]++;\n\t\t\tc[y]++;\n\t\t\te[x].push_back({y,i});\n\t\t\te[y].push_back({x,i});\n\t\t}\n\t\telse{\n\t\t\tcin>>x;\n\t\t\tx--;\n\t\t\tsz=e[x].size();\n\t\t\trep(j,sz){\n\t\t\t\tif(ex[e[x][j].second]){\n\t\t\t\t\tex[e[x][j].second]=false;\n\t\t\t\t\tc[e[x][j].first]--;\n\t\t\t\t\tif(c[e[x][j].first]==0)ans++;\n\t\t\t\t}\n\t\t\t}\n\t\t\te[x].clear();\n\t\t\tif(c[x]>0)ans++;\n\t\t\tc[x]=0;\n\t\t}\n\t\tcout<<ans<<endl;\n\t}\n\treturn 0;\n}"
+      ],
+      "text_sha256": "de5acd53d90bd9ec7e6b4863b0bf377a0fe23b88fcf80b2360f74d2003d6ff23",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc302/abc302_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

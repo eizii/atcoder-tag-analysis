@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc440_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc440/editorial/15030",
+      "text": "考察\n\\(A\\)\nの順番は答えに影響しないので，\n\\(A\\)\nを昇順にソートして\n\\(A_1 < A_2 < \\dots < A_N\\)\nが成り立つことを以降では仮定します．また，便宜上番兵として\n\\(A_0 = -\\infty, A_{N+1} = +\\infty\\)\nとおきます．\n\\(A\\)\nにある値のうち\n\\(X\\)\n以上であるような最小のものが何かは，二分探索によって求めることができます．この値を\n\\(A_s\\)\nとおきます．\nある整数が\n\\(X\\)\n以上かつ\n\\(A\\)\nに含まれないことを，以下では単にその整数が\n条件を満たす\nと呼ぶことにします．\n\\(s \\leq t \\leq N+1\\)\nにおいて，\n\\(X\\)\n以上\n\\(A_t\\)\n以下の整数は\n\\(A_t - x + 1\\)\n個あり，そのうち\n\\(A\\)\nに含まれるものは\n\\(t - s + 1\\)\n個あります．したがって，\n\\(X\\)\n以上\n\\(A_t\\)\n以下の整数で\n\\(A\\)\nに含まれないものは\n\\((A_t - x + 1) - (t - s + 1)\\)\n個です．この値は\n\\(t\\)\nに対して広義単調増加するので，以下の\n\\(2\\)\n条件を満たす\n\\(t_{r}\\)\nを二分探索で求めることが可能です．\n\\((A_{t_r - 1} - x + 1) - ((t_r - 1) - s + 1) < Y\\)\n\\((A_{t_r - 0} - x + 1) - ((t_r - 0) - s + 1) \\geq Y\\)\nこれを満たす\n\\(t_r\\)\nにおいて，\n\\(A_{t_{r} - 1}\\)\n以下で条件を満たす整数が\n\\(Y\\)\n個未満，\n\\(A_{t_r - 0}\\)\n以下で条件を満たす整数が\n\\(Y\\)\n個以上あるので，答えは\n\\(A_{t_{r} - 1}\\)\nより大きく\n\\(A_{t_r - 0}\\)\nより小さいです．このとき答えを\n\\(x_{ans}\\)\nとおくと，\n\\(X\\)\n以上\n\\(x_{ans}\\)\n以下の整数のうち\n\\(A\\)\nに含まれるものは\n\\(t_r - s\\)\n個なので，答えの値は\n\\(x_{ans} = X + (Y-1) + (t_r - s)\\)\nとわかります．\n実装例 (C++)",
+      "codes": [
+        "#include <iostream>\nusing std::cin;\nusing std::cout;\n#include <vector>\nusing std::vector;\n#include <algorithm>\nusing std::sort;\nusing std::lower_bound;\n\ntypedef long long int ll;\n\nll n, q;\nvector<ll> a;\n\nvoid solve () {\n\tsort(a.begin(), a.end());\n\tfor (ll qi = 0; qi < q; qi++) {\n\t\tll x, y;\n\t\tcin >> x >> y;\n\n\t\t// a[0, si) < x && a[si, n) >= x\n\t\tll si = lower_bound(a.begin(), a.end(), x) - a.begin();\n\n\t\t// youngest ti where |{x, x+1, ..., a[ti]} - {a[si], a[si+1], ..., a[ti]}| >= y\n\t\tll ti;\n\t\t{\n\t\t\tll ok = n, ng = si-1;\n\t\t\twhile (ng + 1 < ok) {\n\t\t\t\tll med = (ok + ng) / 2;\n\t\t\t\tif ((a[med] - x + 1) - (med - si + 1) >= y) {\n\t\t\t\t\tok = med;\n\t\t\t\t} else {\n\t\t\t\t\tng = med;\n\t\t\t\t}\n\t\t\t}\n\t\t\tti = ok;\n\t\t}\n\n\t\tll ans = x + (y-1) + (ti - si + 0);\n\n\t\tcout << ans << \"\\n\";\n\t}\n}\n\nint main (void) {\n\tstd::cin.tie(nullptr);\n\tstd::ios_base::sync_with_stdio(false);\n\t\n\tcin >> n >> q;\n\ta.resize(n);\n\tfor (ll i = 0; i < n; i++) {\n\t\tcin >> a[i];\n\t}\n\n\tsolve();\n\n\treturn 0;\n}"
+      ],
+      "text_sha256": "fe19fac0d6cbfcd46205882d7ea94bad733ccd910443d933966445c1d45c4113",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc440/abc440_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

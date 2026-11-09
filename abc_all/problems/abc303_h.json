@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc303_h",
+  "title": "Constrained Tree Degree",
+  "contests": [
+    {
+      "contest_id": "abc303",
+      "problem_index": "Ex"
+    }
+  ],
+  "difficulty": 2501,
+  "raw_difficulty": 2501,
+  "contest_id": "abc303",
+  "problem_index": "Ex",
+  "url": "https://atcoder.jp/contests/abc303/tasks/abc303_h",
+  "statement": "配点 : 600 点 問題文 整数 N 及び 1 以上 N-1 以下の整数からなる集合 S=\\lbrace S_1,S_2,\\ldots,S_K\\rbrace が与えられます。 頂点に 1 から N の番号がついた N 頂点の木 T のうち、以下の条件を満たすものの個数を 998244353 で割った余りを答えてください。 任意の i\\ (1\\leq i \\leq N) について、 T の頂点 i の次数を d_i としたとき、 d_i\\in S 制約 2\\leq N \\leq 2\\times 10^5 1\\leq K \\leq N-1 1\\leq S_1 < S_2 < \\ldots < S_K \\leq N-1 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N K S_1 \\ldots S_K 出力 条件を満たす木 T の個数を 998244353 で割った余りを出力せよ。 入力例 1 4 2\n1 3 出力例 1 4 ある 1 つの頂点の次数が 3 であり、ほかの頂点の次数が 1 であるような木が条件を満たします。よって答えは 4 個です。 入力例 2 10 5\n1 2 3 5 6 出力例 2 68521950 入力例 3 100 5\n1 2 3 14 15 出力例 3 888770956 個数を 998244353 で割った余りを出力してください。",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 整数 N 及び 1 以上 N-1 以下の整数からなる集合 S=\\lbrace S_1,S_2,\\ldots,S_K\\rbrace が与えられます。 頂点に 1 から N の番号がついた N 頂点の木 T のうち、以下の条件を満たすものの個数を 998244353 で割った余りを答えてください。 任意の i\\ (1\\leq i \\leq N) について、 T の頂点 i の次数を d_i としたとき、 d_i\\in S"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2\\leq N \\leq 2\\times 10^5 1\\leq K \\leq N-1 1\\leq S_1 < S_2 < \\ldots < S_K \\leq N-1 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N K S_1 \\ldots S_K"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 条件を満たす木 T の個数を 998244353 で割った余りを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4 2\n1 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4 ある 1 つの頂点の次数が 3 であり、ほかの頂点の次数が 1 であるような木が条件を満たします。よって答えは 4 個です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 10 5\n1 2 3 5 6"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 68521950"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 100 5\n1 2 3 14 15"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 888770956 個数を 998244353 で割った余りを出力してください。"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc303/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:29.757297+00:00",
+  "statement_sha256": "645a6a7fcd94cb6c0d35f88804f07a16999ea042ea09da6a429b417a4dce41d9",
+  "editorials": []
+}

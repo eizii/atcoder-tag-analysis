@@ -1,0 +1,37 @@
+{
+  "problem_id": "abc202_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc202/editorial/1864",
+      "text": "根から深さ優先探索 (DFS) を行い、各頂点に入った時刻\n\\(\\mathrm{in}_u\\)\nと出た時刻\n\\(\\mathrm{out}_u\\)\nを記録します。入力例については以下のようになります。\nここで、次が成り立つことが重要です。\n\\(x\\)\nが\n\\(y\\)\nの子孫である\n\\(\\Leftrightarrow \\mathrm{in}_y \\leq \\mathrm{in}_x < \\mathrm{out}_y\\)\nただし、\n\\(x\\)\nが\n\\(y\\)\nの 子孫であるとは、\n\\(x\\)\nから根への最短パス上に\n\\(y\\)\nが存在することとします。\n「\n\\(x\\)\nが\n\\(y\\)\nの 子孫である\n\\(\\Rightarrow \\mathrm{in}_y  \\leq \\mathrm{in}_x < \\mathrm{out}_y\\)\n」は、DFS がどのように進行するかを考えれば明らかです。\n\\(x\\)\nが\n\\(y\\)\nの 子孫であるならば、\n\\(x\\)\nには\n\\(y\\)\nよりも後に入り、\n\\(x\\)\nを出た後に\n\\(y\\)\nを抜けます。よって、「\n\\(\\mathrm{in}_y  \\leq  \\mathrm{in}_x < \\mathrm{out}_y\\)\n\\(\\Rightarrow\\)\n\\(x\\)\nが\n\\(y\\)\nの 子孫である」を示せばよいです。\n対偶を示します。\n\\(x\\)\nが\n\\(y\\)\nの 子孫\nでない\nと仮定します。\n\\(y\\)\nが\n\\(x\\)\nの子孫であったとすると、\n\\(\\mathrm{in}_x  \\leq  \\mathrm{in}_y < \\mathrm{out}_x\\)\nとなり、\n\\(x \\neq y\\)\nより\n\\(\\mathrm{in}_x  \\neq \\mathrm{in}_y\\)\nであるので 「\n\\(\\mathrm{in}_y \\leq \\mathrm{in}_x < \\mathrm{out}_y\\)\nでない\n」ことがわかります。以下では、\n\\(y\\)\nが\n\\(x\\)\nの子孫でないことも仮定します。\n\\(x, y\\)\nの最小共通祖先 (LCA) を\n\\(z\\)\nとおきます。仮定より\n\\(x \\neq z\\)\nかつ\n\\(y \\neq z\\)\nです。\n\\(z\\)\nの子であって、それを根とする部分木に\n\\(x\\)\nが含まれるものを\n\\(c_x\\)\nとおきます。\n\\(y\\)\nについても同様に\n\\(c_y\\)\nを定めます。ここで、\n\\(c_x \\neq c_y\\)\nです。仮に\n\\(c_x = c_y\\)\nであったとすると、\n\\(z\\)\nが LCA であることに矛盾します。\nDFS がどのように進行するか考えてみると、以下のいずれかが成り立つことが分かります。\n\\(\\mathrm{in}_{c_x} < \\mathrm{out}_{c_x}  < \\mathrm{in}_{c_y} < \\mathrm{out}_{c_y}\\)\n\\(\\mathrm{in}_{c_y} < \\mathrm{out}_{c_y}  < \\mathrm{in}_{c_x} < \\mathrm{out}_{c_x}\\)\nいずれの場合も、\n\\(x\\)\nが\n\\(c_x\\)\nの子孫であり、\n\\(y\\)\nが\n\\(c_y\\)\nの子孫であることを踏まえると、二つの区間\n\\([\\mathrm{in}_x, \\mathrm{out}_x], [\\mathrm{in}_y, \\mathrm{out}_y]\\)\nは共通部分を持たないことがわかります。したがって、\n\\(\\mathrm{in}_y \\leq \\mathrm{in}_x < \\mathrm{out}_y\\)\nでない\nことが示せました。\nなお、以上の証明は、根付き木を括弧列に対応させて考えると直感的に理解することができます。\n示した性質を用いると、容易にこの問題を解くことができます。\n深さごとに、その深さの頂点の\n\\(\\mathrm{in}\\)\nの値を昇順に保持しておきます。クエリ\n\\((U, D)\\)\nに対しては、深さ\n\\(D\\)\nに関して格納された値のうち、\n\\( \\mathrm{in}_U\\)\n以上\n\\(\\mathrm{out}_U\\)\n未満の値の個数を答えればよいです。これは二分探索によって実現できます。C++ であれば、\nstd::lower_bound\nなどの関数を用いることができます。\n実装例 (C++) :",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nstd::vector<std::vector<int>> children, list;\nstd::vector<int> in, out, depth;\nint timer;\n\nvoid dfs(const int u) {\n    in[u] = timer++;\n    list[depth[u]].push_back(in[u]);\n    for (const int v : children[u]) {\n        depth[v] = depth[u] + 1;\n        dfs(v);\n    }\n    out[u] = timer++;\n}\n\nint main() {\n    int N;\n    std::cin >> N;\n    children = list = std::vector<std::vector<int>>(N);\n    in = out = depth = std::vector<int>(N);\n    for (int i = 1; i < N; ++i) {\n        int p;\n        std::cin >> p;\n        children[p - 1].push_back(i);\n    }\n    dfs(0);\n    int Q;\n    std::cin >> Q;\n    while (Q--) {\n        int u, d;\n        std::cin >> u >> d;\n        u -= 1;\n        const auto& v = list[d];\n        std::cout << std::lower_bound(v.cbegin(), v.cend(), out[u]) - std::lower_bound(v.cbegin(), v.cend(), in[u]) << '\\n';\n    }\n    return 0;\n}"
+      ],
+      "text_sha256": "f32c500e7b181b389089c93de55093033ad6eb8f44439439f52535718849f9a4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc202/abc202_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc202/editorial/1906",
+      "text": "DFS と Wavelet Matrix を組み合わせた解法\n問題は、ある頂点\n\\(U_i\\)\nかその子孫の中（部分木）で、深さが\n\\(D_i\\)\nの頂点の個数を求める問題と言い換えることが出来ます。\nこれを解くためにまず、与えられた木をDFSの行きがけ順に頂点番号を記録して、1次元配列にすることを考えます。\n入力例1の木はDFSを行うとき、1, 2, 4, 6, … の順番に探索されるので、以下のように表現できます。\n\\( ​A = \\{1, 2, 4, 6, 5, 7, 3\\}\\)\n更にこれに対応して、それぞれの頂点の深さを記録した配列を考えます。以下のようになります。\n\\(D= \\{0, 1, 2, 3, 2, 2, 1\\}\\)\n頂点1の深さは0、頂点6の深さは3、の様に対応しています。\nさて、例えば頂点2の子孫は\n\\(\\{2, 4, 6, 5, 7\\}\\)\nですが、これは配列\n\\(A\\)\nの連続部分列です。\nこの範囲に対応する\n\\(D\\)\nの連続部分列は\n\\(\\{1, 2, 3, 2, 2\\}\\)\nです。この連続部分列に含まれるある値の個数が高速に計算できれば良さそうです。\nつまり、ある頂点の\n\\(A\\)\nでの位置と、それ以下のノード数が分かれば、1次元の範囲クエリに置き換える事ができます。\nある頂点の\n\\(A\\)\nでの位置とそれ以下のノード数は DFS をしている時に構築することが出来ます。これはオイラーツアーというテクニックとして知られています。\nさて、配列\n\\(A\\)\nの連続範囲\n\\([L, R)\\)\nに含まれる値\n\\(V\\)\nの個数を高速に求められれば良いことが分かりましたが、これは Wavelet Matrix の\nrange freq\nクエリを用いることで\n\\(O(\\log N)\\)\nで求めることが出来ます。\nWavelet Matrix/Tree の説明\nrange_freq(A, L, R, x, y)\nクエリとは、配列\n\\(A\\)\nの範囲\n\\([L,R)\\)\nに含まれる\n\\([x,y)\\)\nを満たす値の出現数を求められるクエリです。\nこれで\n\\([D_i, D_i+1)\\)\nの値の出現数を求めることができます。\n実際のコード例は\nこちら\nの通りです。\nWavelet Matrix のライブラリパートを除いて、約30行程度で求められることが分かります。",
+      "codes": [],
+      "text_sha256": "843adba1ea9a86061b414f4a6757a64527f82ad6bea11edceac219e4caa5cfa1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc202/abc202_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc202/editorial/1926",
+      "text": "クエリ先読み + DFS による O(N+Q) 解法\n問題は、ある頂点\n\\(U_i\\)\nかその子孫の中（部分木）で、深さが\n\\(D_i\\)\nの頂点の個数を求める問題と言い換えることが出来ます。\nまず、クエリを全て先読みして、各頂点に求めたい子のDepthを記録します(コードの\nQd\nに対応)。\nこのとき、クエリが何番目のクエリだったかも同時に記録しておくと、復元にソートやmapなどが必要なくなり、\n\\(O(Q)\\)\nで復元可能になります(コードの\nQi\nに対応)。\nさて、根から順にDFSを行うわけですが、今までに通ったそれぞれの depth の個数を記録します(コードの\ndepth_count\nに対応)。\ndfsである頂点に注目したとき、子のdfsをする前にそれぞれのクエリに対し、元々のdepthが何個だったかを記録し(コードの\nDin\n)、子のdfsをしたあとに、それぞれのdepthが何個増えたかの差分を取ることで、高速にカウントが可能です。\nコード\n(提出)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\n#define rep(i,a) for(int i=0;i<(a);i++)\n\n\nint res[200005];\nvector<int> child[200005];\nvector<int> Qd[200005];\nvector<int> Qi[200005];\nvector<int> Din[200005];\nint depth_count[200005] = {};\n\nvoid dfs(int p, int depth) {\n    int Qn = Qd[p].size();\n    Din[p].resize(Qn);\n    rep(i, Qn) {\n        Din[p][i] = depth_count[Qd[p][i]];\n    }\n    depth_count[depth]++;\n    for(auto c : child[p]) {\n        dfs(c, depth + 1);\n    }\n    rep(i, Qn) {\n        int r = depth_count[Qd[p][i]] - Din[p][i];\n        res[Qi[p][i]] = r;\n    }\n}\n\nint main(){\n    int n;\n    scanf(\"%d\", &n);\n    rep(i, n-1) {\n        int p;\n        scanf(\"%d\", &p);\n        child[p-1].push_back(i+1);\n    }\n    int q;\n    scanf(\"%d\", &q);\n    rep(i, q) {\n        int u, d;\n        scanf(\"%d%d\", &u, &d);\n        Qd[u-1].push_back(d);\n        Qi[u-1].push_back(i);\n    }\n    dfs(0, 0);\n    rep(i, q) {\n        printf(\"%d\\n\", res[i]);\n    }\n\n    return 0;\n}"
+      ],
+      "text_sha256": "fc7e47507f74c70e1ba7318d8928b4f39a12402a87c7840aa07842577260170d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc202/abc202_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

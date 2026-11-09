@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc143_b",
+  "editorials": [
+    {
+      "text": "B: TAKOYAKI FESTIVAL 2019\nN が大きくないので、素直な全探索解で正答できます。\nつまり、食べるたこ焼き2 個の選び方を全探索して、それぞれの体力回復量の和をとればいいです。\nこの問題のように「順番を考慮しない2 要素の選び方」を全探索する際のポイントとして、下記\nコードにあるように、内側のループ変数の始点を外側のループ変数+1 から始めるといいです。こう\nすることで、内側のループで選ぶインデックスが必ず外側のループで選ぶインデックスより大きくな\nり、同じ選び方を2 回見てしまうことを回避できます。\n以上の全探索解の計算量はO(N 2) ですが、この問題は工夫するとO(N) で解くこともできます。\n考えてみてください。\nListing 1\nC++ による実装例\n1 #include <bits/stdc++.h>\n2 using namespace std;\n3\n4 int main() {\n5\nint n;\n6\ncin >> n;\n7\nvector<int> d(n);\n8\nfor(int i = 0; i < n; i++) cin >> d[i];\n9\nint ans = 0;\n10\nfor(int i = 0; i < n; i++) {\n11\nfor(int j = i + 1; j < n; j++) {\n12\nans += d[i] * d[j];\n13\n}\n14\n}\n15\ncout << ans << endl;\n16\nreturn 0;\n17 }\n",
+      "text_sha256": "efb8b136b92cd2210380d8cfa9da812d9da4cac39701bbe45897ded0c733018f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc143/abc143_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

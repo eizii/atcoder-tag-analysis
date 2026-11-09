@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc289_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc289/editorial/5731",
+      "text": "この問題は、問題文に書かれている操作を適切に実装すると解くことができる問題です。\nポイントは最小の整数\n\\(x\\)\nを含む連結成分を求める部分です。これは Union Find や BFS などのアルゴリズムを利用しても求められますが、ここでは「レ」の性質を利用します。すなわち、問題文のグラフ\n\\(G\\)\nは 1-2-3-4, 5, 6, 7-8-9-10 というように連続する整数が繋がった形をしているので、小さい方から「最小の整数と連結である間、区間を伸ばす」という方法で調べていけば連結成分を検出できます。\nよって、次のような手順で計算できます。\n答えを管理する配列を\n\\(\\mathrm{ans}\\)\nとする。はじめ\n\\(\\mathrm{ans}\\)\nは空である。\nまた、\n\\(L = 1\\)\nとする。\n\\(L\\)\nは調べていない整数のうち最小の整数を意味する。\n\\(L \\leq N\\)\nである間、次の操作を繰り返す。\n\\(R = L\\)\nとする。そして、\n\\(R\\)\nと\n\\(R+1\\)\nの間に「レ」が存在する間、\n\\(R\\)\nに\n\\(1\\)\nを加える。\n\\(L, L+1, \\dots, R\\)\nは連結成分なので、\n\\(L\\)\n以上\n\\(R\\)\n以下の整数を大きい方から順に\n\\(\\mathrm{ans}\\)\nに追加する。\n\\(R\\)\nまでは調べ終わったので、\n\\(L \\gets R + 1\\)\nに更新する。\n上の loop を終えた時点での\n\\(\\mathrm{ans}\\)\nの列が答えとなる。\nこの手順は適切に実装すれば\n\\(\\mathrm{O}(N^2)\\)\nや\n\\(\\mathrm{O}(N)\\)\nで動作して、十分高速です。\n実装例(C++)",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n  int N, M;\n  cin >> N >> M;\n  vector<int> a(M);\n  for (auto& x : a) cin >> x;\n  vector<int> re(N + 1);\n  for (auto& x : a) re[x] = 1;\n  vector<int> ans;\n  for (int i = 1, j = 1; i <= N; i = ++j) {\n    while (re[j]) j++;\n    for (int k = j; k >= i; k--) ans.push_back(k);\n  }\n  for (int i = 0; i < N; i++) cout << ans[i] << \" \\n\"[i + 1 == N];\n}"
+      ],
+      "text_sha256": "ac9099a232a72d00b16e4b655312f190eb1b0c9abafdfd8c8763210995868c02",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc289/abc289_b.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc289/editorial/17234",
+      "text": "\\(i\\)\nと\n\\(i+1\\)\nの間にレ点があるなら\n\\(i\\to i+1\\)\nと辺を張ったグラフ上でDFS等をして答えを求めることができます．計算量は\n\\(O(N)\\)\nです．",
+      "codes": [
+        "#include<bits/stdc++.h>\nusing namespace std;\nvoid dfs(int&u,vector<vector<int>>&x,vector<bool>&ok){\n  ok[u]=true;\n  for(auto v:x[u]){\n    dfs(v,x,ok);\n  }\n  cout<<u+1<<\" \";\n}\nint main(){\n  int n,m;\n  cin>>n>>m;\n  vector<int>a(m);\n  for(int i=0;i<m;i++)cin>>a[i];\n  for(int i=0;i<m;i++)a[i]--;\n  vector<vector<int>>x(n);\n  for(auto i:a){\n    x[i].push_back(i+1);\n  }\n  vector<bool>ok(n,false);\n  for(int i=0;i<n;i++)if(!ok[i])dfs(i,x,ok);\n}"
+      ],
+      "text_sha256": "dfa57442b18b7dc967b71d96d345a4f1c37a1b4f2952b4895a6e0e716545c474",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc289/abc289_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

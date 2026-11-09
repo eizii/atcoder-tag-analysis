@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc402_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc402/editorial/12715",
+      "text": "\\(T\\subset \\lbrace 1,2,\\ldots,N\\rbrace\\)\nと\n\\(0\\le x\\le X\\)\nに対し\n\\(d[T][x]\\)\nを「現在すでに\n\\(T\\)\nに含まれる問題を正解しており、所持金が残り\n\\(x\\)\n円である場合の得点の期待値の最大値」とする動的計画法を考えます。\n\\(d[T][x]\\)\nの満たす漸化式について考えます。\nまず、問題\n\\(i\\)\nに提出した場合（\n\\(i \\notin T,\\ x\\geq C_i\\)\n）\n\\(P_i\\)\n% の確率で正解し\n\\(100-P_i\\)\n%の確率で不正解となるので、この場合の得点の期待値の最大値は\n\\(\\displaystyle \\frac{P_i}{100}\\left(S_i+d[T\\cup\\lbrace i\\rbrace][x - C_i] \\right) + \\frac{100-P_i}{100}d[T][x - C_i] \\)\nです。したがって、まだ正解していない問題全てに対してこの期待値を計算し、その最大値を\n\\(d[T][x]\\)\nとすれば良いです。\nこの動的計画法を行なった際の\n\\(\\displaystyle d[\\varnothing][X]\\)\nが答えとなります。計算量は\n\\(O(NX2^N)\\)\n時間です。\n実装例(Python3)",
+      "codes": [
+        "N, X = map(int, input().split())\nS = [0] * N\nC = [0] * N\nP = [0] * N\nfor i in range(N):\n    S[i], C[i], P[i] = map(int, input().split())\n    P[i] /= 100\nd = [[0.0 for _ in range(X + 1)] for _ in range(1 << N)]\nfor x in range(X + 1):\n    for s in range(1 << N):\n        for i in range(N):\n            xx = x - C[i]\n            ss = s | (1 << i)\n            if xx < 0 or s == ss:\n                continue\n            val = P[i] * (d[ss][xx] + S[i]) + (1 - P[i]) * d[s][xx]\n            d[s][x] = max(d[s][x], val)\nprint(d[0][X])"
+      ],
+      "text_sha256": "6d37bb862c8dcdfb302b9ca8b496ee368c420012a644e232bc431cc4c388be4b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc402/abc402_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

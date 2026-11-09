@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc448_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc448/editorial/16745",
+      "text": "問題文の要求に従うためには、以下を行う必要があります。\n\\(i=1,2,\\dots,N\\)\nの順に処理を行う。\n\\(A_i < X\\)\nかどうか比較する。\n1つ目はforループを活用することで、2つ目はif文を活用することで実現できます。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,x;\n  cin >> n >> x;\n  for(int i=1;i<=n;i++){\n    int a;\n    cin >> a;\n    if(a<x){\n      x=a;\n      cout << \"1\\n\";\n    }\n    else{\n      cout << \"0\\n\";\n    }\n  }\n  return 0;\n}"
+      ],
+      "text_sha256": "496b76a7dadbdc8782166997766ab6fbe9965dc085d9d7ab4e927ff2ec7ade69",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc448/abc448_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc298_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc298/editorial/6215",
+      "text": "行列に対して \\(4\\) 回操作を行うと元の状態に戻ります。 したがって、 \\(A\\) を回転して得られる行列としてあり得るものは高々 \\(4\\) 種類です。具体的には、 \\(A\\) に対し \\(0\\) 回以上 \\(3\\) 回以下の操作を行ったもののみ考えればよいことがわかります。 よって \\(A\\) を回転して得られる行列としてあり得るものすべてに対し、 \\(A_{i,j} = 1\\) のとき \\(B_{i,j} = 1\\) が成り立っているかを調べればよいです。 行列の添え字を \\(0\\) から始めている場合、問題文中に書いてある操作とプログラム上の添え字が一致しないことに注意してください。 実装例",
+      "codes": [
+        "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvector<vector<int>> rotate(vector<vector<int>> a) {\n\tint n = a.size();\n\tvector<vector<int>> res(n, vector<int>(n));\n\tfor (int i = 0; i < n; i++) for (int j = 0; j < n; j++) res[j][n - 1 - i] = a[i][j];\n\treturn res;\n}\n\nint main() {\n\tint n;\n\tcin >> n;\n\tvector<vector<int>> a(n, vector<int>(n));\n\tfor (int i = 0; i < n; i++) for (int j = 0; j < n; j++) cin >> a[i][j];\n\tvector<vector<int>> b(n, vector<int>(n));\n\tfor (int i = 0; i < n; i++) for (int j = 0; j < n; j++) cin >> b[i][j];\n\tfor (int _ = 0; _ < 4; _++) {\n\t\tbool ok = true;\n\t\tfor (int i = 0; i < n; i++) for (int j = 0; j < n; j++) if (a[i][j] == 1 && b[i][j] == 0) ok = false;\n\t\tif (ok) {\n\t\t\tcout << \"Yes\\n\";\n\t\t\treturn 0;\n\t\t}\n\t\ta = rotate(a);\n\t}\n\tcout << \"No\\n\";\n}\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "a398d384586be3e254bf138afeb286689647a291f693dc3699c2efc5ce546863"
+    }
+  ],
+  "status": "available"
+}

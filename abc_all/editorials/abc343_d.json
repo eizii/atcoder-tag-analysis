@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc343_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc343/editorial/9434",
+      "text": "\\(N\\)\n人の選手たちの得点を多重集合として管理しながら、\n\\(1,2,\\dots,T\\)\n秒後に起きる得点の変動を順に処理していけばよいです。\n多重集合を管理できるデータ構造はいくつか存在しますが、この問題では\n連想配列\n（C++ の\nstd::map\n,\nstd::unordered_map\nや python の dictionary など）と呼ばれるデータ構造が有用です。連想配列は通常の配列を拡張したようなもので、通常の配列では添字として\n\\(0,1,2,\\dots\\)\nと連続する整数を用いるのに対し、連想配列では添字に好きな値を用いることができます。初期状態では添字が一つも存在せず、添字の追加・削除、特定の添字に対応する値の変更、サイズ（添字の種類数）の取得などの操作が高速に（定数時間やサイズの対数時間などで）行えます。\n本問題では、現在の選手たちの得点に現れる各値を添字として用い、添字\n\\(x\\)\nに対応する値として得点が\n\\(x\\)\nである選手の人数を保持すればよいです。具体的なアルゴリズムは以下の通りです。\n連想配列\n\\(M\\)\nを用意する。\n\\(M\\)\nに添字\n\\(0\\)\nを追加し、\n\\(M[0]=N\\)\nとする。\n各選手の現在の得点を保持する配列\n\\(C=(C_1,C_2,\\dots,C_N)\\)\nを用意し、全ての要素を\n\\(0\\)\nで初期化する。\n\\(i=1,2,\\dots, T\\)\nの順に以下を行う。\n\\(M[C_{A_i}]\\)\nを\n\\(1\\)\n減らす。\n\\(M[C_{A_i}]\\)\nが\n\\(0\\)\nになったならば、\n\\(M\\)\nから添字\n\\(C_{A_i}\\)\nを削除する。\n\\(C_{A_i}\\)\nに\n\\(B_i\\)\nを足す。\n\\(M\\)\nに添字\n\\(C_{A_i}\\)\nが存在しないならば追加し、\n\\(M[C_{A_i}]=0\\)\nとする。\n\\(M[C_{A_i}]\\)\nを\n\\(1\\)\n増やす。\n現在の\n\\(M\\)\nのサイズ（添字の種類数）を出力する。\n計算量は、下記の実装例のように C++ の\nstd::map\nを用いた場合\n\\(O(N+T\\log N)\\)\nになります。\n実装例 (C++) :",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    int n, t;\n    cin >> n >> t;\n    vector<ll> score(n);\n    map<ll, int> mp;\n    mp[0] = n;\n    for (int i = 0; i < t; i++) {\n        int a, b;\n        cin >> a >> b;\n        --a;\n        if (--mp[score[a]] == 0) mp.erase(score[a]);\n        score[a] += b;\n        ++mp[score[a]];\n        cout << mp.size() << '\\n';\n    }\n}"
+      ],
+      "text_sha256": "0659fb0909b054721395f350e2148bdc3095d7248d57f4eef8950d8136c15636",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc343/abc343_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

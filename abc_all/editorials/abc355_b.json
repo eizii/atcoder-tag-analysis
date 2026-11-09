@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc355_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc355/editorial/10076",
+      "text": "この問題では，数列の要素を順番に並べ替えることが問われています．これは，\nソート\nと呼ばれる操作で，多くの言語で標準機能として提供されています．たとえば， Python, C++ ではともに\nsort\nという関数が提供されています．\nこの問題を解くには，\n\\(A\\)\nと\n\\(B\\)\nを結合した数列\n\\(C\\)\nを用意し，\n\\(C\\)\nをソートしたあと，\n\\(C\\)\nの要素を順番に見ていって隣り合う要素がともに\n\\(A\\)\nに含まれているかを調べればよいです．\nある値が数列に含まれているかどうかの判定には，たとえば Python では\nin\n演算子を，C++ では\nset\nを用いるのが便利です．\n実装例 (Python)\n実装例 (C++)",
+      "codes": [
+        "N, M = map(int, input().split())\nA = list(map(int, input().split()))\nB = list(map(int, input().split()))\nC = A + B\nC.sort()\nfor i in range(N + M - 1):\n    if C[i] in A and C[i + 1] in A:\n        print(\"Yes\")\n        exit()\nprint(\"No\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int N, M;\n    cin >> N >> M;\n    vector<int> A(N), B(M);\n    for (auto& x : A) cin >> x;\n    for (auto& x : B) cin >> x;\n\n    auto C = A;\n    for (auto x : B) C.push_back(x);\n    sort(C.begin(), C.end());\n\n    set<int> st(A.begin(), A.end());\n\n    for (int i = 0; i < N + M - 1; ++i) {\n        if (st.contains(C[i]) && st.contains(C[i + 1])) {\n            cout << \"Yes\" << endl;\n            return 0;\n        }\n    }\n    cout << \"No\" << endl;\n}"
+      ],
+      "text_sha256": "91c79c927b5819440b8dca9e61060f17ab645d5c15571b83678a2620d6c4c948",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc355/abc355_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

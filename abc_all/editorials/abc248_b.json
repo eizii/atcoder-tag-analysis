@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc248_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc248/editorial/3744",
+      "text": "この問題のように、「条件を満たすまで〇〇し続ける」といった処理を行うには while 文が有用です。\n答えの上界は\n\\(\\log_2 10^9  < 30\\)\nなので、シミュレーションを行うことで十分高速に答えを求められます。オーバーフローには十分気を付けてください。（\n\\(A\\)\nと\n\\(K\\)\nを掛けた際に、 32bit 整数に収まらない場合があります。）\n実装例 (C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    long long a, b, k;\n    cin >> a >> b >> k;\n\n    int res = 0;\n    while (a < b) {\n        a *= k;\n        res++;\n    }\n\n    cout << res << endl;\n}"
+      ],
+      "text_sha256": "631a917384ee1acc8f947b0d06e408433d30174cb22c76e6a0141e4e01727ba9",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc248/abc248_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

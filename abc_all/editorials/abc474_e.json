@@ -1,0 +1,16 @@
+{
+  "problem_id": "abc474_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc474/editorial/25442",
+      "text": "まず、 \\(2\\) 回以上買う商品はクーポンを貰うために買うものとして良いため、 \\(2\\) 回以上買う商品は \\(A_i\\) が最小の商品のみとして良いです。 クーポンを使って購入する商品の個数を \\(k\\) とします。 \\(N-k < k\\) である場合 \\(2k-N\\) 枚クーポンが不足するため、新たに \\(2k-N\\) 枚クーポンを購入する必要があります。 クーポンを使って購入する \\(k\\) 個の商品は \\(A_i-B_i\\) が大きい \\(k\\) 個として良いです。 これを各 \\(k\\) に対して計算し、それらの最小値を計算すると良いです。 以上を適切に実装することでこの問題に正答することができます。 実装例(Python3)",
+      "codes": [
+        "import sys\n\ninput = sys.stdin.readline\nfor _ in range(int(input())):\n    N = int(input())\n    base = 0\n    minA = 10**9\n    diff = []\n    for _ in range(N):\n        A, B = map(int, input().split())\n        base += A\n        minA = min(minA, A)\n        diff.append(B - A)\n    diff.sort()\n    ans = base\n    cur = base\n    for k in range(1, N + 1):\n        cur += diff[k - 1]\n        ans = min(ans, cur + max(0, 2 * k - N) * minA)\n    print(ans)\n"
+      ],
+      "source": "official_web",
+      "official_status": "official",
+      "text_sha256": "47ab46f26fc44051112ef5b1d39293a746d3682158b4f861ed2d9cd08fc05568"
+    }
+  ],
+  "status": "available"
+}

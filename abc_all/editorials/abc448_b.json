@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc448_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc448/editorial/16746",
+      "text": "コショウの種類ごとに整理します。\n「料理にかけられる種類\n\\(k\\)\nのコショウの上限」の合計を\n\\(s_k\\)\nとします。\n\\(s_k \\le C_k\\)\nであれば、種類\n\\(k\\)\nのコショウは最大で\n\\(s_k\\)\ng しかかけられない。\n\\(s_k > C_k\\)\nであれば、種類\n\\(k\\)\nのコショウは最大で\n\\(C_k\\)\ng しかかけられない。\nなお、この上限を達成するコショウのかけ方は明らかに存在します (例えば、料理番号の若い方からコショウをかけられるだけかければよいです)。\nすると、この問題でやるべきことは以下のようになります。\n\\(s_k\\)\nをコショウの種類ごとに求める。\nコショウの種類ごとに上で示した上限値を足し合わせる。\n\\(s_k\\)\nはバケットソートの要領で求めることができ、コショウの種類ごとに上限を足し合わせる行為はforループによって実現可能です。\n実装例 (C++):",
+      "codes": [
+        "#include<bits/stdc++.h>\n\nusing namespace std;\n\nint main(){\n  int n,m;\n  cin >> n >> m;\n  vector<int> c(m+1);\n  vector<int> s(m+1,0);\n  for(int i=1;i<=m;i++){\n    cin >> c[i];\n  }\n  for(int i=0;i<n;i++){\n    int a,b;\n    cin >> a >> b;\n    s[a]+=b;\n  }\n  int res=0;\n  for(int i=1;i<=m;i++){\n    res+=min(c[i],s[i]);\n  }\n  cout << res << \"\\n\";\n  return 0;\n}"
+      ],
+      "text_sha256": "581be256ac87a554d982dd9839ac8260716c93eedbfa8ae8444d96f38e90c07f",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc448/abc448_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

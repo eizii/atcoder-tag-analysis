@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc367_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc367/editorial/10692",
+      "text": "\\(\\{A_l,A_{l+1},\\ldots,A_r\\}\\)\nと\n\\(\\{B_L,B_{L+1},\\ldots,B_R\\}\\)\nが多重集合として一致しているか？というクエリを処理する問題です．\n\\(2\\)\nつの集合が一致しているかどうかを高速に確率的に判定する方法として Zobrist Hash が有名です．多重集合の一致判定も同様にハッシュを用いることで高速に解くことができます．\nハッシュ関数\n\\(H\\)\nとして，以下の要件が満たされていると良いです．\n多重集合\n\\(S\\)\nのハッシュ値\n\\(H(S)\\)\nが高速に計算できる\n二つの多重集合\n\\(S,T\\)\nが一致しているならば\n\\(H(S)=H(T)\\)\n二つの多重集合\n\\(S,T\\)\nが一致していないならば，高確率で\n\\(H(S)\\neq H(T)\\)\n例えば，\n\\(1\\)\n以上\n\\(N\\)\n以下の各整数に適当なハッシュ値を割り当てて，\n\\(S\\)\nのハッシュ関数を「\n\\(S\\)\nに含まれる各要素のハッシュ値の総和\n\\(\\mathrm{mod}\\ P\\)\n(\n\\(P\\)\nは適当な大きい素数)」とすることで上を満たすことができます．\n\\(1\\)\nつ目の要件について，\n\\(\\{A_l,A_{l+1},\\ldots,A_r\\}\\)\nおよび\n\\(\\{B_L,B_{L+1},\\ldots,B_R\\}\\)\nのハッシュ値は，あらかじめハッシュ値の累積和を計算しておくことで\n\\(O(1)\\)\nで求めることができます．\n\\(2\\)\nつ目の要件について，二つの多重集合\n\\(S,T\\)\nが一致しているならば\n\\(H(S)=H(T)\\)\nとなるのは容易にわかります．\n\\(3\\)\nつ目の要件を示すのは難しいですが，二つの多重集合\n\\(S,T\\)\nが一致していないならば，高確率で\n\\(H(S)\\neq H(T)\\)\nとなっています（Schwartz–Zippel lemma を用いて証明ができるようです．\n参考 (noshi さんの記事)\n）．\n以上で述べたように，\n\\(1\\)\n以上\n\\(N\\)\n以下の各整数にハッシュ値をランダムに設定し，累積和を前計算することで，各クエリに対して\n\\(O(1)\\)\nで高確率で正しい答えを求めることができます．全体の計算量は\n\\(O(N+Q)\\)\nです．",
+      "codes": [
+        "import random\nmod = (1 << 61) - 1\n\nN, Q = map(int, input().split())\nA = list(map(lambda x: int(x) - 1, input().split()))\nB = list(map(lambda x: int(x) - 1, input().split()))\n\nhash = [random.randint(1, mod - 1) for i in range(N)]\ncumA = [0] * (N + 1)\ncumB = [0] * (N + 1)\nfor i in range(N):\n    cumA[i + 1] = (cumA[i] + hash[A[i]]) % mod\n    cumB[i + 1] = (cumB[i] + hash[B[i]]) % mod\n\nfor i in range(Q):\n    l, r, L, R = map(int, input().split())\n    if (cumA[r] - cumA[l - 1]) % mod == (cumB[R] - cumB[L - 1]) % mod:\n        print(\"Yes\")\n    else:\n        print(\"No\")"
+      ],
+      "text_sha256": "da0a77d8374cd7ed4f1c7e5a6d1ab6397825ed61394197c175643ebe43815784",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc367/abc367_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc367/editorial/10713",
+      "text": "公式解説にあるようなシンプルなハッシュ関数は、Schwartz-Zippel lemma を用いずとも衝突確率を抑えることができます。\n多重集合\n\\(S, T\\)\nが\n\\(S \\neq T\\)\nを満たす場合、\n\\(S\\)\nに含まれる個数と\n\\(T\\)\nに含まれる個数が異なるような要素\n\\(e\\)\nが存在します。\n\\(e\\)\n以外の要素に割り当てられたハッシュ値を固定すると、\n\\(H(S) - H(T)\\)\nは\n\\(e\\)\nに割り当てられたハッシュ値\n\\(x\\)\nの関数として\n\\(h + cx\\)\nと表されます。\nここで\n\\(h\\)\nは何らかの定数で、\n\\(c\\)\nは\n\\(e\\)\nが\n\\(S\\)\nに含まれる個数と\n\\(T\\)\nに含まれる個数の差です。\n\\(N < P\\)\nより\n\\(c \\neq 0 \\pmod P\\)\nですから\n\\(h + cx = 0 \\pmod P \\Leftrightarrow x = -h / c \\pmod P\\)\nと変形されて、\n\\(x\\)\nは\n\\(0 , 1 , \\dots , P-1\\)\nから一様ランダムに選ぶので衝突確率は\n\\(1 / P\\)\nです。\n法を巨大な素数ではなく\n\\(2^{64}\\)\nにした場合も十分に安全です。\n先ほどと同様に議論すると、\n\\(c\\)\nが偶数の場合に\n\\({} \\bmod 2^{64}\\)\n上で逆元を持たないため、\n\\(h + cx = 0 \\pmod {2^{64}}\\)\nを\n\\(x = -h/c \\pmod {2^{64}}\\)\nに変形できないことが問題となります。\nそこで、\n\\(c\\)\nが\n\\(2\\)\nで割り切れる回数を\n\\(k\\)\nとします。\n\\(h\\)\nが\n\\(2\\)\nで\n\\(k\\)\n回以上割り切れない場合、\n\\(h + cx = 0\\)\nとなる\n\\(x\\)\nは存在しないため衝突の恐れはありません。\n\\(k\\)\n回以上割り切れる場合、\n\\(x = -h/c \\pmod {2^{64-k}}\\)\nと変形されます。\nこの式を満たす\n\\(x\\)\nを引く確率は\n\\(1/2^{64-k}\\)\nですが、\n\\(k \\leq \\log_2 N\\)\nであるため\n\\(2^{64-k}\\)\nは十分に大きいです。\n同様の議論により、\n\\(2^{32}\\)\nを法にした場合に\n\\(1/30000\\)\n程度の確率で衝突してしまうことも分かります。",
+      "codes": [],
+      "text_sha256": "3336a5fd7326032754c68fe2edc250096b136d720a228b4180f8aa05ad83af6a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc367/abc367_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

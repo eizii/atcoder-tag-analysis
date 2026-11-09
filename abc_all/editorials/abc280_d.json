@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc280_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc280/editorial/5330",
+      "text": "正整数\n\\(K\\)\nが、異なる素数\n\\(p_1, p_2, \\ldots, p_m\\)\nおよび 正整数\n\\(a_1,a_2,\\ldots, a_m\\)\nを用いて\n\\(K=p_1^{a_1}p_2^{a_2}\\cdots p_m^{a_m}\\)\nと素因数分解できる時、正整数\n\\(X\\)\nが\n\\(K\\)\nの倍数であることは、「任意の\n\\(1\\leq i\\leq m\\)\nについて、\n\\(X\\)\nが\n\\(p_i^{a_i}\\)\nの倍数である 」ことと同値です。\nまた、\n\\(N<N'\\)\nのとき、\n\\(N'!\\)\nは\n\\(N!\\)\nの倍数となっています。\nよって、次の\n\\(3\\)\nステップによって、答えを求める事ができます。\n\\(K\\)\nを素因数分解する。\n\\(K\\)\nの素因数分解を\n\\(K=p_1^{a_1}p_2^{a_2}\\cdots p_m^{a_m}\\)\nとして,\n各\n\\(1\\leq i\\leq m\\)\nについて、\n\\(N_i!\\)\nが\n\\(p_i^{a_i}\\)\nの倍数となるような最小の\n\\(N_i\\)\nを求める。\n\\(N=\\max(N_1,N_2, \\ldots, N_m)\\)\nとして最終的な答えが求まる.\n1.\n\\(K\\)\nを素因数分解する\nナイーブな実装方針としては、\n\\(K\\)\n以下の各素数について、何度割り切れるかを確認するものが挙げられます。\nしかし、\n\\(K\\)\nは制約より最大で\n\\(10^{12}\\)\nであり,\n\\(10^{12}\\)\n以下の素数は\n\\(10^{10}\\)\n個以上あるため、これは間に合いません。そこで次のような方法を考えます。\n\\(K\\)\nは\n\\(\\sqrt{K}\\)\nより大きい素因数を高々\n\\(1\\)\nつしか持ちません。なぜなら、\n\\(K\\)\nが\n\\(p,q>\\sqrt{K}, p\\neq q\\)\nであるような素数\n\\(p,q\\)\nを約数に持つとすると,\n\\(K\\geq pq>K\\)\nとなり、矛盾するからです。よって、\n\\(K\\)\nを\n\\(\\sqrt{K}\\)\n以下の\n異なる素数\n\\(p_1, p_2, \\ldots, p_m'\\)\n、正整数\n\\(a_1,a_2,\\ldots, a_{m'}\\)\nおよび 正整数\n\\(M\\)\nを用いて、\n\\(K=p_1^{a_1}p_2^{a_2}\\cdots p_{m'}^{a_{m'}}\\times M\\)\nと表せるとすると、\n\\(M\\)\nは\n\\(1\\)\nまたは素数となります。このようにして、\n\\(K\\)\nの素因数分解を得る事ができます。\nまた、「何回割り切れるか」という部分については、\n\\(K=p_1^{a_1}p_2^{a_2}\\cdots p_m^{a_m}\\geq 2^{a_1+a_2+\\cdots+a_m}\\)\nより、各素数で何度割り切れるか, すなわち\n\\(a_i\\)\nの総和は高々\n\\(\\log_2 K\\)\nであることから、計算量は\n\\(O(\\sqrt{K}+\\log K)=O(\\sqrt{K})\\)\nとなります。\n2.\n\\(N_i!\\)\nが\n\\(p_i^{a_i}\\)\nの倍数となるような最小の\n\\(N_i\\)\nを求める\n素数\n\\(p\\)\nと正整数\n\\(X\\)\nについて、\n\\(X\\)\nが\n\\(p^a\\)\nの倍数かつ\n\\(p^{a+1}\\)\nの倍数ではないような非負整数\n\\(a\\)\nを\n\\(f_p(X)\\)\nとして定義します。求めたいものは\n\\(f_{p_i}((N_i-1)!)<a_i\\leq f_{p_i}(N_i!)\\)\nとなるような\n\\(N_i\\)\nです。\n\\(f_p(N'!)=f_p((N'-1)!)+f_p(N')\\)\nであることから\n\\(f_{p_i}(N_i)>0\\)\n、すなわち\n\\(N_i\\)\nは\n\\(p_i\\)\nの倍数である必要があり、また、明らかに\n\\(N_i\\leq a_ip_i\\)\nです。\nよって、\n\\(N'=p_i,2p_i, \\ldots\\)\nについて順に\n\\(f_{p_i}(p_i!)=1\\)\n,\n\\(f_{p_i}(N'!)=f_{p_i}((N'-p_i)!)+f_{p_i}(N')\\)\nと計算したとすると、今、\n\\(a_i\\)\nの合計が 高々\n\\(O(\\log K)\\)\nであったことから,\n\\(N_1,N_2,\\ldots,N_m\\)\nは全体で\n\\(O(\\log K)\\)\nで求める事ができます。\nこれらから\n\\(N=\\max(N_1,N_2, \\ldots, N_m)\\)\nを求めることは明らかに\n\\(O(m)=O(\\log K)\\)\nでできます。\nよって、1. の素因数分解が計算量のボトルネックであり、全体で\n\\(O(\\sqrt{K})\\)\nでこの問題を解く事ができました。\nc++ による実装例 :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tlong long k,p,a,n,x,ans=1;\n\tcin >> k;\n\tfor(p=2;(p*p)<=k;p++){\n\t\ta=0;\n\t\twhile(k%p==0)k /= p, a++;\n\t\tn=0;\n\t\twhile(a>0){\n\t\t\tn+=p;\n\t\t\tx=n;\n\t\t\twhile(x%p==0)x /= p,a--;\n\t\t}\n\t\tans=max(ans,n);\n\t}\n\tans=max(ans,k);\n\tcout << ans <<endl;\n\treturn 0;\n}"
+      ],
+      "text_sha256": "99a295fbeac3ed949a1d0e0263439ce17569f833cfcb3c73a836e5f6a0fea436",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc280/abc280_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc280/editorial/5348",
+      "text": "次の判定問題を考えます。\n整数\n\\(N, K\\)\nが与えられる。\n\\(N!\\)\nは\n\\(K\\)\nの倍数か？\nこれが解ければ、\n\\(N\\)\nの値を二分探索することで答えを求めることができます。以下、この判定問題の解法を考えます。\nここで、\nルジャンドルの定理\nとよばれる次の定理が使えます。\n\\(n!\\)\nが素数\n\\(p\\)\nで割り切れる回数は、\n\\(\\displaystyle \\sum_{i = 1}^{\\infty} \\left\\lfloor \\frac{n}{p^i} \\right\\rfloor = \\left\\lfloor \\frac{n}{p} \\right\\rfloor + \\left\\lfloor \\frac{n}{p^2} \\right\\rfloor + \\left\\lfloor \\frac{n}{p^3} \\right\\rfloor + \\cdots\\)\nである。\nこの定理を用いれば、判定問題は\n\\(K\\)\nを素因数分解する。\n\\(K\\)\nのすべての素因数\n\\(p\\)\nについて、\n\\((N! \\ を \\ p \\ で割り切れる回数) \\geq (K \\ を \\ p \\ で割り切れる回数)\\)\nが成り立っているか調べる。\nというアルゴリズムで解けます。このアルゴリズムの計算量は、素因数分解がボトルネックで\n\\(O(\\sqrt{K})\\)\nです。素因数分解は\n\\(1\\)\n回前計算すればよいので、全体でも\n\\(O(\\sqrt{K})\\)\nで解くことができました。\nPython による実装例：",
+      "codes": [
+        "k = int(input())\n\n# 素因数分解\npes = list()  # 素因数 p と 指数 e の組を格納\nk2 = k\np = 2\nwhile p * p <= k:\n  e = 0\n  while k2 % p == 0:\n    k2 //= p\n    e += 1\n  if e > 0:\n    pes.append((p, e))\n  p += 1\nif k2 > 1:\n  pes.append((k2, 1))\n\n# n! は p で何回割り切れるか（ルジャンドルの定理）\ndef legendre(n, p):\n  res = 0\n  p2 = p\n  while True:\n    tmp = n // p2\n    if tmp == 0:\n      break\n    res += tmp\n    p2 *= p\n  return res\n\n# 判定問題\ndef isok(n):\n  for p, e in pes:\n    if legendre(n, p) < e:\n      return False\n  return True\n\n# 二分探索\nng, ok = 1, k  # k ≥ 2 なので 1! は k の倍数にならない、また k! は必ず k の倍数\nwhile abs(ok - ng) > 1:\n  mid = (ok + ng) // 2\n  if isok(mid):\n    ok = mid\n  else:\n    ng = mid\nprint(ok)"
+      ],
+      "text_sha256": "279009214a86ff7ae02cea29881955dae3343d581405b44ea762300283dfb5bb",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc280/abc280_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc280/editorial/5333",
+      "text": "\\(K\\)\nが\n\\(10^6\\)\n以上の素因数を持つとき\nその素因数を\n\\(p\\)\nとおくと、 明らかに答えは\n\\(p\\)\n以上で、\n\\(K \\leq 10^{12}\\)\nより\n\\(K/p < p\\)\nなので、\n\\(K/p  \\in  \\{ 1,2, \\ldots, p-1 \\}\\)\nであるから答えは\n\\(p\\)\nとなる。\n\\(K\\)\nが\n\\(10^6\\)\n以上の素因数を持たないとき\n\\(K \\leq 10^{12}\\)\nより\n\\(K\\)\nは\n\\(10^4\\)\n以下の素因数を高々\n\\(200\\)\n個、\n\\(10^4\\)\nより大きく\n\\(10^6\\)\n以下の素因数を高々\n\\(2\\)\n個しか持たないので\n\\((2 \\times 10^6)!\\)\nが\n\\(K\\)\nの倍数となる。よって答えは高々\n\\(2 \\times 10^6\\)\nなので、以下の実装例のように昇順に調べていけばよい。\n実装\n実装上では\n\\(10^6\\)\n以上の素因数の有無を直接判定しなくとも、答えが\n\\(2 \\times 10^6\\)\nより大きければその時点でまだ登場していない\n\\(K\\)\nの素因数を出力すると正答を得ることができる。",
+      "codes": [
+        "#include <iostream>\n#include <numeric>\nusing namespace std;\ntypedef long long ll;\n \nint main() {\n\tll k;\n\tcin >> k;\n\tfor (ll i = 1; i <= 2000000; i++) {\n\t\tk /= gcd(k, i);\n\t\tif (k == 1) {\n\t\t\tcout << i << '\\n';\n\t\t\treturn 0;\n\t\t}\n\t}\n\tcout << k << '\\n';\n}"
+      ],
+      "text_sha256": "02fbd7e731dfc399b4270aa87817726b5263f43c1fe81e5dcc56c692d88cf59b",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc280/abc280_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

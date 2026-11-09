@@ -1,0 +1,471 @@
+          ABC066 / ARC077 解説
+
+                               writer: nuip
+
+                        2017 年7 月1 日
+
+
+
+       For International Readers: English editorial starts from page 8.
+
+ A : ringring
+
+   a + b とb + c とa + c の中で一番小さいものを出力する問題です。以下の実
+  装例では、かわりにa, b, c の中で最も大きいものを求めて、a + b + c から引
+  いています。
+
+ 1  #include <stdio.h>
+ 2
+ 3  int main (){
+ 4    int a, b, c;
+ 5    scanf("%d␣%d␣%d", &a, &b, &c);
+ 6    int max=a;
+ 7    if(b>max) max=b;
+ 8    if(c>max) max=c;
+ 9    printf("%d\n", a+b+c-max);
+10    return 0;
+11  }
+
+
+  B : ss
+
+  偶文字列かどうかを調べるためには、文字列の前半と後半が全く同じかどう
+  かを調べれば良いです。
+   偶文字列の長さは必ず偶数長なので、偶数の文字列についてのみ調べれば
+  十分です。最長のものを探しているので、長さ|S| −2 の文字列、長さ|S| −4
+
+
+                                    1
+
+  の文字列、…という順に調べて、条件に合うものが見つかった時にその長さ
+  を出力すると答えが求まります。
+
+ 1  #include <stdio.h>
+ 2  #include <string.h>
+ 3
+ 4  int main (){
+ 5    char str [222];
+ 6    scanf("%s", str);
+ 7    int n=strlen(str);
+ 8    for(int i=n-2; i; i -=2){
+ 9      if(strncmp(str , str+i/2, i/2) ==0){
+10        printf("%d\n" ,i);
+11        return 0;
+12       }
+13    }
+14    return 0;
+15  }
+
+
+  C : pushpush
+
+  毎回逆向きの並び替えをしていると時間がかかりすぎてしまうので(O(n2))、
+  これを避ける方法を考えます。入力例を参考に考えると、数列の最初と最後
+  に交互にai を追加していくと答えが求まることが分かります。また、最後に
+  追加した項は最初に来るはずなので、
+
+        1. i とn の偶奇が一致していれば、数列の前にai を追加する。
+
+        2. i とn の偶奇が一致していなければ、数列の後ろにai を追加する。
+
+  という操作をすれば良いことが分かります。
+    この操作を効率よくするためにはどうすれば良いでしょうか？C++を使っ
+   ている場合は、stl::deque という標準ライブラリの機能を使うと簡単に出来
+  ます。そうでない場合は、大きめの配列を確保して、真ん中あたりから順番
+  に使っていくと実装できます。この方針で実装したC 言語の実装例は以下の
+  とおりです。
+
+ 1  #include <stdio.h>
+ 2
+ 3  int array [512345];
+
+
+                                    2
+
+ 4  int a[212345];
+ 5
+ 6  int main (){
+ 7    int n;
+ 8    scanf("%d", &n);
+ 9    for(int i=0; i<n; ++i) scanf("%d", &a[i]);
+10    int left =212345 , right=left +1;
+11    for(int i=0; i<n; ++i){
+12      if(i%2 == (n-1) %2){
+13        array[left --]=a[i];
+14      }else{
+15        array[right ++]=a[i];
+16       }
+17    }
+18    for(int i=left +1; i<right; ++i){
+19      printf("%d␣",array[i]);
+20    }
+21    return 0;
+22  }
+
+
+ D : 11
+
+  数の種類がn 種で、項がn + 1 項あるので、必ず同じ数の項が複数存在しま
+  す1。また、すべての数が1 度以上現れるという制約から、同じ数である項は
+  ちょうど1 組であることが分かります。
+   同じ数があるので、単純にn + 1 個からk 個を選ぶ組合せn+1Ck を計算す
+  るだけでは答えが求められません。そこで、重複を除く方法を考えてみます。
+   同じ数が出てくるのはちょうど1 組だけなので、n+1Ck から重複してる
+  ものの数を引けば答えが求まります。重複している数列はどのような数列で
+  しょうか？
+   取り出した部分列を見てどこから取り出した部分列であるかを考えたと
+  き、1 通りに定まらない場合、その数列は2 回数えられていることになりま
+  す。次のような例を考えてみます。
+
+                                23145167
+
+
+
+     1参考: 鳩ノ巣原理
+
+
+                                    3
+
+重複している数である1 は太字で書いてあります。もし部分列で1 を一度も
+選んでいなければ、簡単に復元できます。
+
+                          256 →23145167
+
+部分列で1 を2 つとも選んでいる場合も、やはり簡単に復元できます。
+
+                          211 →23145167
+
+また、1 を選んでいても、2 つの1 と1 の間の数4, 5 を選んでいれば、これら
+の数と1 との位置関係から、使われている1 がどちらの1 であるか特定でき
+ます。
+                          51 →23145167
+
+よって、以上のような場合は重複して数えられない数列です。1 を1 つだけ
+選んでいて、2 つの1 と1 の間の数4, 5 を選んでいない場合はどちらの1 を
+選んでいるかわかりません。これが重複する場合です。
+
+                         31 →23145167 ?
+                       →23145167 ?
+
+  よって、重複している項をal, ar(l < r) とすると、このような部分列の数
+は、「al かar の片方を選んでal とar で囲われていない項から残りのk −1 個
+を選ぶ場合の数」になります。al とar で囲われていない項はal の左にl −1
+項と、ar の右にn −r 項あるので、求める場合の数はl−1+n−rCk−1 であるこ
+とが分かります。
+  よって、k 行目には、n+1Ck −l−1+n−rCk−1 を出力すれば良いです。
+   nCk の求め方は、ABC042/ARC058 のD 問題の解説を参照して下さい。
+   http://arc058.contest.atcoder.jp/data/arc/058/editorial.pdf
+
+E : guruguru
+
+まず、お気に入りボタンは必ず明るさを切り替える一番最初に押した方が効
+率的です。なぜなら、それ以前に他のボタンを押していたとしても、お気に
+入りボタンを押した後の明るさは変わらないためです。
+  順送りボタンのみを使って明るさA からB に切り替えるためボタンを押
+す回数は、A ≤B ならB −A 回で、A > B ならB + N −A 回です。これは、
+まとめて(B + N −A)%N と書けます。ただし、x%y でx をy で割ったあま
+りを表します。
+
+
+                                 4
+
+  よって、お気に入りボタンを最初に押した場合のボタンを押す回数は1 +
+(B + N −X)%N 回で、そうでない場合は(B + N −A)%N 回です。
+  また、お気に入りボタンを使うのは、ai とai+1 間（ai+1 を含む）の状態
+にお気に入りの明るさx が存在しているときのみです。
+  以上を元に、お気に入りがx であるときとx + 1 である時でボタンを押す
+回数がどのように変わるか考えてみます。
+
+   • ai+1 = x であるi
+   お気に入りボタンを1 回押すだけで済んでいたのが、順送りボタンを
+      (ai+1 + N −ai)%N 回押さないといけなくなります。
+
+   • ai とai+1 間（両端を含まない）にx があるようなi
+   順送りボタンを押す回数が1 回減ります。
+
+   • それ以外
+   変化無しです。
+
+まとめると、ボタンを押す回数は、ai+1 = x であるすべてのi について(ai+1+
+N −ai)%N −1 回分増えて、ai とai+1 間にx があるようなi の数だけ減り
+ます。
+    ai とai+1 間にx があるようなi の数は、累積和を取る操作を使うとO(n+
+m) で求めることができます。imos 法という名前で呼ばれることもあります。
+    ai+1 = x であるi については、当然全部でn 個しか無いので、いちいち計
+算して足しても問題ありません。
+  以上から、x = 0 である場合の答えを求めた後、x = i の場合を使って
+x = i + 1 の場合を順番に求めていくことで、すべてのx についてボタンを押
+す回数が求まるため、最小値も求まります。
+
+F : SS
+
+まずf がどのような関数か考えてみましょう。
+   A,B,C をそれぞれアルファベット1 文字として、
+
+                    ABCABC
+
+という偶文字列を考えます。これに文字を付け加える偶文字列を作るために
+は、付け加える文字の数は偶数でないといけません（偶文字列の長さは偶数
+文字なので）。まずは2 文字付け加えることを考えてみます。
+
+                     ABCABC??
+
+
+                                 5
+
+これが偶文字列であるなら、赤い文字列と青い文字列は同じである必要があ
+ります。よって、“AB” と“BC” は同じ文字である必要があります。
+  同じように、2k 文字付け加えることを考えてみます。
+
+             S1S2 . . . SnS1S2 . . . Sk Sk+1 . . . SnX1X2 . . . X2k
+
+この場合、S の最初のn −k 文字と、S のk + 1 文字目以降とが一致している
+必要があることが分かります。これは、S が周期k の文字列であるというこ
+とを意味します。X1X2 . . . X2k は自由に決められるので、S が周期k の文字
+列である場合、必ず2k 文字付け加えて偶文字列が作れます2。
+  以上から、f(S) を求めるには、S の最小周期k を求めればいいことがわ
+かりました。
+  ここで、同じ文字列S をn 回繰り返してできる文字列をS × n と書くこ
+とにします。例えば、“abc”×3 は”abcabcabc” となります。
+  ここからは、問題を偶文字列S × 2 のままでなく、「半分」にした文字列
+S の状態で考えることにします（そうした方が扱いやすいからです）。半分
+にした状態の文字列を扱うために、関数g を導入します。関数g を
+
+                         g(S) × 2 = f(S × 2)
+
+で定めます。右辺は必ず偶文字列であるため、このようなg(S) は必ず存在し
+ます。g(S) はf(S) の接頭辞になるため、f 10100(S) のかわりにg10100(S) を考
+えても同じ結果が得られます。
+   g がどのような関数であるかを考えます。S の最小周期をx として、S の
+長さx の接頭辞をT とします。このとき、正の整数n とS はT の接頭辞で
+ある文字列T ′ を使って
+                     S = T × n + T ′
+
+と書けます。
+  もしx が|S| の約数である場合は単純で、S = T × n と書けるので、
+
+                f(S × 2) = f(T × 2n) = T × (2n + 2)
+
+となります。よって、g(T × n) = T × (n + 1) です。
+  そうでない場合、先程の結果を使うと、g(S) の長さは|S| + x であるはず
+なので、
+                        g(S) = T × n + T ′ + T
+
+
+  2(X1X2 . . . Xn) = (Sn−k+1Sn−k+2 . . . SnS1S2 . . . Sk) とすれば良いです。
+
+                                 6
+
+と分かります。x の最小性から、この文字列T ×n+T ′+T の周期は|T ×n+T ′|
+です。よって、もう一度g でこの文字列を写すと、
+
+      g2(S) = g(T × n + T ′ + T) = (T × n + T ′ + T) + (T × n + T ′)
+                   = g(S) + S
+
+となります。これはどの偶文字列S に対しても成り立つため、gn+2(S) =
+gn+1(S) + gn(S) であることが分かります。
+  あとは、この式をもとに、各文字c について、gn(S) に現れる回数を計算
+し、i 番目までにc が現れる回数を再帰的に数えれば良いです。
+
+
+
+
+
+                                 7
+
+        ABC066 / ARC077 Editorial
+
+                               writer: nuip
+
+                          July 1st, 2017
+
+
+ A : ringring
+
+
+ 1  #include <stdio.h>
+ 2
+ 3  int main (){
+ 4    int a, b, c;
+ 5    scanf("%d␣%d␣%d", &a, &b, &c);
+ 6    int max=a;
+ 7    if(b>max) max=b;
+ 8    if(c>max) max=c;
+ 9    printf("%d\n", a+b+c-max);
+10    return 0;
+11  }
+
+
+
+
+
+                                    1
+
+  B : ss
+
+
+ 1  #include <stdio.h>
+ 2  #include <string.h>
+ 3
+ 4  int main (){
+ 5    char str [222];
+ 6    scanf("%s", str);
+ 7    int n=strlen(str);
+ 8    for(int i=n-2; i; i -=2){
+ 9      if(strncmp(str , str+i/2, i/2) ==0){
+10        printf("%d\n" ,i);
+11        return 0;
+12       }
+13    }
+14    return 0;
+15  }
+
+
+
+
+
+                                    2
+
+C : pushpush
+
+You can observe that ai are appended to the beginning or the end, alternately.
+The last element (an) will be appended to the beginning.
+   Therefore, we start from an empty sequence, and in the order a1, . . . , an,
+
+   1.  If i and n have the same parity, append ai to the beginning of the
+      sequence.
+
+   2.  If i and n have diﬀerent parities, append ai to the end of the sequence.
+
+   This can be implemented in O(n) with a deque.
+
+
+
+
+
+                                 3
+
+D : 11
+          (n+1 )
+There are      ways to choose k elements from the sequence, but this way               k
+we may count the same subsequence multiple times.
+   For example, consider the following case:
+
+                             23145167
+
+   Fix a subsequence s of this sequence. How many times will s be counted?
+We can observe that:
+
+   •  If s contains two 1s, the positions can be uniquely determined and it
+      will be counted only once.
+
+   •  If s contains no 1, the positions can be uniquely determined and it will
+     be counted only once.
+
+   •  If s contains 4 or 5, the positions can be uniquely determined and it
+      will be counted only once.
+
+   • Otherwise, we can’t determine which 1 we chose; it will be counted
+      twice.
+
+   So, we must subtract the number of ways to choose k −1 elements from
+2, 3, 6, 7.
+   In general, if the distance between two elements of the same value is d,
+             (n+1 )   (n−d )
+the answer is    −         .                   k      k−1
+
+
+
+
+
+                                 4
+
+E : guruguru
+
+Let f(s, t, x) be the number of buttons we must push to change the brightness
+from s to t, when the favorite brightness is set to x.
+    First consider the following slow solution. We have an array c of length
+m. Initially all values are zeroes. Then, for each i and x, we add f(ai, ai+1, x)
+to c[x]. The answer is the minimum value in the sequence c.
+  How can we improve this solution? We want to do this eﬃciently for a
+ﬁxed i. Let’s ﬁx i, and let s = ai, t = ai+1. Assume that s < t (the other
+case can be handled similarly).
+
+   •  If x ≤s, f(s, t, x) = t −s.
+
+   •  If s < x ≤t, f(s, t, x) = t −x + 1.
+
+   •  If t < x, f(s, t, x) = t −s.
+
+   Notice that in all three cases, the value of f is a linear function of x.
+   Thus, we can solve this problem by adding O(N) linear functions to given
+ranges of c. This can be done by two preﬁx sums: one for linear part and
+one for constant part.
+
+
+
+
+
+                                 5
+
+F : SS
+
+Suppose that initially we have a string of length 2n.
+
+                        S1S2 . . . SnS1S2 . . . Sn
+
+   Can we make it an even string by appending 2k characters?
+
+             S1S2 . . . SnS1S2 . . . Sk Sk+1 . . . SnX1X2 . . . X2k
+
+   From this, you see that the ﬁrst n−k characters of S1S2 . . . Sn and the last
+n −k characters of S1S2 . . . Sn must be the same. It means that S1S2 . . . Sn
+has a period of k.
+   In general, f(SS) = STST, where T is the ﬁrst k characters of S, where
+k is the shortest period of S.
+    Let’s deﬁne g(S) = ST, where T  is deﬁned in the same way. We can
+prove the following:
+
+   •  If g(S) = ST and |T| is a divisor of |S|, g(ST) = STT.
+
+   •  If g(S) = ST and |T| is not a divisor of |S|, g(ST) = STS.
+
+  By repeating this, we get:
+
+   •  If g(S) = ST and |T| is a divisor of |S|, g∞(S) = STTTTT....
+
+   •  If g(S) = ST and |T| is not a divisor of |S|, gi+2(S) = gi+1(S) + gi(S)
+      for each i.
+
+   The remaining part is not very hard. Note that in the actual implemen-
+tation you don’t need to consider the ﬁrst case: you get the same value for
+g∞(ST) from the second case anyway.
+  ===
+   Sketch of the proof for the second case (the ﬁrst case is easy).
+   Suppose that
+                     S = T × n + T ′
+   where n is a positive integer, |T| is the shortest period of S, and T ′ is a
+non-trivial preﬁx of T.
+  We want to prove that the shortest period of
+
+                        g(S) = T × n + T ′ + T
+
+    is |T × n + T ′|.
+   Assume that there exists a shorter period x < |t × n + T ′|.
+
+
+                                 6
+
+•  If x ̸= |T ′| (mod |T|) and x < |t × n + T ′|, we can prove that T has a
+  period of gcd(|T|, x−|T ′|). Thus, S also has a period of gcd(|T|, x−|T ′|),
+  and it contradicts the fact that the shortest period of S is |T|.
+
+• Otherwise, x ̸= 0 (mod |T|) and x ≤|t × (n −1) + T ′|. In this case
+  we can prove that S has a period of gcd(|T|, x), and again we get a
+  contradiction.
+
+
+
+
+
+                              7

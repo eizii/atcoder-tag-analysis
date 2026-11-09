@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc382_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc382/editorial/11476",
+      "text": "以下、\n\\(R_1 \\geq R_2\\geq \\dots \\geq R_N\\)\nを仮定します。\nまず、バー\n\\(i\\)\nの最終位置を求める上で、バー\n\\(j\\ (j > i)\\)\nについて考える必要はありません（初期状態でバー\n\\(i\\)\nより上にあるバーが途中でバー\n\\(i\\)\nの下に来ることはないため）。よって、\n\\(i=1,2,\\dots,N\\)\nの順に最終的なバー\n\\(i\\)\nの位置を求めていくことを考えられます。\nある\n\\(a\\ (1\\leq a\\leq N)\\)\nに対し、バー\n\\(i\\ (i < a)\\)\nの最終位置がすべて求まっているときにバー\n\\(a\\)\nの最終位置を求める方法について考えます。\n各\n\\(1\\leq j\\leq W\\)\nに対し、\n\\(m_j\\)\nを「バー\n\\(1,2,\\dots,a-1\\)\nのみが存在している状態で十分な時間が経過したとき、何らかのバーに占められているような\n\\(j\\)\n列目のマスのうち最も上にあるものの行番号（\n\\(j\\)\n列目のどのマスも占められていなければ\n\\(H+1\\)\n）」と定義します。\nこのとき、十分な時間が経過した際にバー\n\\(a\\)\nが位置する行\n\\(R'_a\\)\nは、\n\\(\\min\\{m_j: C_a \\leq j < C_a+L_a\\}-1\\)\nと一致することが示せます。\nバー\n\\(a\\)\nの最終位置を求めたあとは、次にバー\n\\(a+1,a+2,\\dots\\)\nの最終位置を求めるため、\n\\(m_j\\)\nの値を適切に更新する必要があります。具体的には、各\n\\(j\\ (C_a \\leq j < C_a+L_a)\\)\nに対し、\n\\(m_j\\)\nの値を\n\\(R'_a\\)\nで更新する必要があります。\nまとめると、以下のような操作を高速に処理できれば良いです。\n\\(m_1=m_2=\\dots=m_W=H+1\\)\nと初期化する。\n\\(i=1,2,\\dots,N\\)\nの順に以下を行う：\n\\(R'_i\\leftarrow \\min\\{m_j: C_i \\leq j < C_i+L_i\\}-1\\)\nとする\n各\n\\(j\\ (C_i \\leq j < C_i+L_i)\\)\nに対し、\n\\(m_j\\leftarrow R'_i\\)\nとする\nこれは、区間 min・区間 update （あるいは区間 min・区間 chmin）の遅延セグメント木を用いることで、全体で\n\\(O(W+N\\log W)\\)\nで処理することができます。よって本問題を解くことができました。\n実装例 (C++) :",
+      "codes": [
+        "#include <bits/stdc++.h>\n#include <atcoder/lazysegtree>\n\nusing namespace std;\nusing namespace atcoder;\n\nconst int inf = 1e9;\n\nusing S = int;\nusing F = int;\n\nS op(S l, S r) { return min(l, r); }\n\nS e() { return inf; }\n\nS mapping(F l, S r) { return min(l, r); }\n\nF composition(F l, F r) { return min(l, r); }\n\nF id() { return inf; }\n\nint main() {\n    int h, w, n;\n    cin >> h >> w >> n;\n    vector<int> r(n), c(n), l(n);\n    for (int i = 0; i < n; i++) {\n        cin >> r[i] >> c[i] >> l[i];\n        --c[i];\n    }\n    vector<int> ord(n);\n    iota(ord.begin(), ord.end(), 0);\n    sort(ord.begin(), ord.end(), [&](int i, int j) { return r[i] > r[j]; });\n\n    vector<int> ans(n);\n    lazy_segtree<S, op, e, F, mapping, composition, id> seg(vector<int>(w, h + 1));\n    for (int i: ord) {\n        ans[i] = seg.prod(c[i], c[i] + l[i]) - 1;\n        seg.apply(c[i], c[i] + l[i], ans[i]);\n    }\n    for (int i = 0; i < n; i++) {\n        cout << ans[i] << '\\n';\n    }\n}"
+      ],
+      "text_sha256": "8d95d3012f70cdc4c424b314fffcdd7d6b6727b57ef76b5da49928a09c9b60a6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc382/abc382_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

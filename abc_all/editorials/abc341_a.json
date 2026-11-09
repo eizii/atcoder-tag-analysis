@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc341_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc341/editorial/9316",
+      "text": "例えば、\n1\nを\n\\(1\\)\n回出力した後に続けて\n01\nを\n\\(N\\)\n回出力することで、本問題に正解できます。\nそのためにはまず、標準入力から整数\n\\(N\\)\nを受け取ることや、所望の文字列を標準出力に出力する処理が必要になります。\n使用するプログラミング言語における入出力処理の実現方法を把握しておきましょう。\nまた、\n01\nの出力をちょうど\n\\(N\\)\n回行うには、プログラミング言語の標準的な機能である\n繰り返し\nの機能（ for 文など）を用いることができます。\n以下に、C++ 言語による正解例を記載します。",
+      "codes": [
+        "#include <iostream>\nusing namespace std;\n\nint main(void)\n{\n  int n;\n  cin >> n;\n  \n  cout << \"1\";\n  for(int i = 1; i <= n; i++) cout << \"01\";\n  cout << endl;\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "c61e52795a1df3bad11956e55d61bb7eb87ec56f5044ce5fc8ae5aa512b36a7c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc341/abc341_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc341/editorial/9411",
+      "text": "出力するべき値は、初項\n\\(1\\)\n、公比\n\\(100\\)\n、項数\n\\(N+1\\)\nの等比数列の和なので、公式に従って\n\\(\\tfrac1{99}\\cdot(100^{N+1}-1)\\)\nを出力すればよいです（切り捨て除算を用いて\n\\(\\lfloor\\tfrac1{99}\\cdot 100^{N+1}\\rfloor\\)\nを出力してもよさそうです）。Python のように多倍長整数を使える言語だと楽にできるでしょう。\n提出 #50646008\n,\n提出 #50646070\nなお、初項\n\\(1\\)\n、公比\n\\(4\\)\n(\n\\({}= 100_{(2)}\\)\n)、項数\n\\(N+1\\)\nの等比数列の和を 2 進法で出力してもよいです。\n\\(341_{(10)} = 101010101_{(2)}\\)\nであることに気づくと、問題名にも納得がいきます。\n提出 #50394616",
+      "codes": [],
+      "text_sha256": "7fe403520a391b58190e3bc5af24df0dc55dff37c08db9276cc80ec19fbc8ab0",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc341/abc341_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc398_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc398/editorial/12481",
+      "text": "\\(N\\)\nが偶数のとき\n答えとなる文字列は\n----==----\nのように\n=\nを中央に\n\\(2\\)\n個、\n-\nをその左右に合わせて\n\\(N-2\\)\n個含みます。\n-\nを\n=\nの左右に均等に分け、\n-\nを\n\\(\\frac{N-2}{2}\\)\n個\n=\nを\n\\(2\\)\n個\n-\nを\n\\(\\frac{N-2}{2}\\)\n個\nをこの順につなげた文字列が答えとなります。\n\\(N\\)\nが奇数のとき\n答えとなる文字列は\n----=----\nのように\n=\nを中央に\n\\(1\\)\n個、\n-\nをその左右に合わせて\n\\(N-1\\)\n個含みます。\n-\nを\n=\nの左右に均等に分け、\n-\nを\n\\(\\frac{N-1}{2}\\)\n個\n=\nを\n\\(1\\)\n個\n-\nを\n\\(\\frac{N-1}{2}\\)\n個\nをこの順につなげた文字列が答えとなります。\n実装\n実装例(Python)\n実装例(C++)",
+      "codes": [
+        "N=int(input())\n\nif N%2==0:\n  c = (N-2)//2\n  print('-'*c + '='*2 + '-'*c)\nelse:\n  c = (N-1)//2\n  print('-'*c + '=' + '-'*c)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n  int n;\n  cin >> n;\n\n  if(n%2 == 0){\n    int c = (n-2)/2;\n    cout << string(c,'-') + \"==\" + string(c,'-') << endl;\n  }else{\n    int c = (n-1)/2;\n    cout << string(c,'-') + \"=\" + string(c,'-') << endl;\n  }\n}"
+      ],
+      "text_sha256": "8e2cad0aefcb07583841094ee3c1d4091646461a6ad945829070ac4ba058b0d4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc398/abc398_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

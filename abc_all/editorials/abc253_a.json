@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc253_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc253/editorial/4000",
+      "text": "\\(a, b, c\\)\nを小さい順に並べた時に\n\\(b\\)\nが\n\\(2\\)\n番目に来るかどうか調べればよいです。\n\\(a \\leq b \\leq c\\)\nまたは\n\\(a \\geq b \\geq c\\)\nならば\nYes\n、そうでないならば\nNo\nが答えです。\n実装例 (C++) :\n実装例 (Python) :",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    cin >> a >> b >> c;\n    if ((a <= b and b <= c) or (a >= b and b >= c)) {\n        cout << \"Yes\\n\";\n    } else {\n        cout << \"No\\n\";\n    }\n    return 0;\n}",
+        "a, b, c = map(int, input().split())\nprint(\"Yes\" if a <= b <= c or a >= b >= c else \"No\")"
+      ],
+      "text_sha256": "5d19434db853caa9ec148117654b25d8f2540b245919116c865eb90002f15188",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc253/abc253_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc137_b",
+  "editorials": [
+    {
+      "text": "B: One Clue\n(原案: DEGwer, 準備・解説: evima)\n黒い石のうち最も左にある(座標が最も小さい) ものの座標をL とすると、K 個の黒い石の座標は\nL, L + 1, . . . , L + K −1 と書けます。\n座標X の石が黒であることから、L はX −K + 1, X −K + 2, . . . , X のいずれかです。よって、黒い石\nが置かれている可能性のある座標はX −K + 1, X −K + 2, . . . , X + K −1 の2K −1 個です。\nあとは純粋なプログラミングの課題で、Python での実装例を二つ掲載することをもって解説に代えさせて\nいただきます。*1 他の言語でもほぼ同等な実装が可能なはずです。\n1 K, X = map(int, input().split())\n2 for i in range(X - K + 1, X + K):\n3\nif i < X + K - 1:\n4\nprint(i, end=' ')\n5\nelse:\n6\nprint(i)\n1 K, X = map(int, input().split())\n2 print(' '.join(map(str, range(X - K + 1, X + K))))\nAtCoder に限らず、競技プログラミングのジャッジは「空白系の文字」の扱いに関して寛容なことが多いです。ただし、ターミナ\nルに出力が表示される際の見やすさを考えてもできるだけ出力の末尾では改行されることを勧めます\n",
+      "text_sha256": "b437715ee0df26657facacc7c275ef87e34cf12b556ae6019e0673e59f650b50",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc137/abc137_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

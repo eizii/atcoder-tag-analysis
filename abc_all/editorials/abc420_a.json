@@ -1,0 +1,43 @@
+{
+  "problem_id": "abc420_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc420/editorial/13725",
+      "text": "AtCoder をはじめたばかりで何をしたらよいか分からない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」を解いてみてください。基本的な入出力の方法が載っています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか解いてみることをおすすめします。\n入力例\n\\(2\\)\nの\n\\(X=1,Y=1\\)\nの場合のように\n\\(X\\)\nと\n\\(Y\\)\nの両方が小さい場合の答えは\n\\(X+Y\\)\nとなります。しかし、入力例\n\\(1\\)\nのように\n\\(X+Y\\)\nが\n\\(12\\)\nより大きい場合は\n\\(X+Y\\)\nから\n\\(12\\)\nを引いた\n\\(X+Y-12\\)\nが答えとなります。\n以上を適切に実装することでこの問題に正答することができます。\n実装例(Python3)\n実装例(C++)\n実装例(C)\n実装例(Java)",
+      "codes": [
+        "x, y = map(int, input().split())\nif x + y <= 12:\n    print(x + y)\nelse:\n    print(x + y - 12)",
+        "#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n\tint x, y;\n\tcin >> x >> y;\n\tif (x + y <= 12) {\n\t\tcout << x + y << endl;\n\t} else {\n\t\tcout << x + y - 12 << endl;\n\t}\n\treturn 0;\n}",
+        "#include <stdio.h>\nint main() {\n\tint x, y;\n\tscanf(\"%d %d\", &x, &y);\n\tif (x + y <= 12) {\n\t\tprintf(\"%d\\n\", x + y);\n\t} else {\n\t\tprintf(\"%d\\n\", x + y - 12);\n\t}\n\treturn 0;\n}",
+        "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int x = sc.nextInt();\n        int y = sc.nextInt();\n        if (x + y <= 12) {\n            System.out.println(x + y);\n        } else {\n            System.out.println(x + y - 12);\n        }\n        sc.close();\n    }\n}"
+      ],
+      "text_sha256": "4c4b35d71c4541c91ff56badf3b2ba8e024a4f8ccafcdf9dca420f615b539dd4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc420/abc420_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc420/editorial/13754",
+      "text": "一般に、整数\n\\(N\\)\nを整数\n\\(M\\)\nで割った余りを\n\\(1\\)\n以上\n\\(M\\)\n以下に収めた値は、\n\\((N-1)\\%M+1\\)\nと表すことができます。\n今回は\n\\(N=X+Y,M=12\\)\nです。\n実装例 (Python)",
+      "codes": [
+        "x, y = map(int, input().split())\nprint((x+y-1)%12+1)"
+      ],
+      "text_sha256": "122710ea46f09d845a1387309c468685c26b186e776d90130e385e3c169432e1",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc420/abc420_a.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc420/editorial/13762",
+      "text": "\\(X\\)\n月の\n\\(1\\)\nヶ月後は、\n\\(1 \\le X \\le 11\\)\nのとき\n\\(X+1\\)\n月\n\\(X=12\\)\nのとき\n\\(1\\)\n月\nとして求められます。\n\\(X\\)\n月の\n\\(Y\\)\nヶ月後を求めるには、「\n\\(X\\)\n月の\n\\(1\\)\nヶ月後を求めて、それを新たな\n\\(X\\)\nとする」ことを\n\\(Y\\)\n回繰り返せばよいです。\n計算量\n計算量で表すと、この方針では\n\\(O(Y)\\)\n時間で、 Tamiji さんの方針では\n\\(O(1)\\)\n時間であるので、 Tamiji さんの方針の方が計算量的に優れていることになります。\n仮にこの問題の制約が\n\\(1 \\le Y \\le 10^{18}\\)\nであった場合はこの方針では実行時間オーバー（TLE）し、 Tamiji さんの方針では間に合います。\nしかし、今回は問題の制約が\n\\(1 \\le Y \\le 12\\)\nであるので、どちらの方針でもほとんど時間をかけずに正解することができます。非効率なアルゴリズムでも間に合いそうな場合は、計算量が良い方針を思いついたとしても、実装がより簡単な方針で進めることは一つの手です。\n実装例\nPython\nC++",
+      "codes": [
+        "x, y = map(int,input().split())\nfor _ in range(y):\n\tif 1 <= x <= 11:\n\t\tx = x + 1\n\telse:\n\t\tx = 1\nprint(x)",
+        "#include<bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint x, y; cin >> x >> y;\n\tfor (int i=0; i<y; i++) {\n\t\tif (1 <= x && x <= 11) {\n\t\t\tx = x + 1;\n\t\t}else{\n\t\t\tx = 1;\n\t\t}\n\t}\n\tcout << x << '\\n';\n}"
+      ],
+      "text_sha256": "b8fa1d8a0abe45aae4fbf3d293ee4a6f9ec37a65ab73af8dfcbed8715fdcf597",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc420/abc420_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

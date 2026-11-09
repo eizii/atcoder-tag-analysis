@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc008_2",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc008/editorial.pdf",
+      "text": "B問題\n\n\n投票\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                      8\n\f\nB問題 問題概要\n\n\n  • 整数 N と、N 個の名前が与えられます。\n  • 最も多く重複して現れる名前を出力してください。\n  • 条件を満たす名前が複数ある場合は、そのうちど\n  れでも構いません。\n\n\n  •  1 ≦ N ≦ 50\n  •  1 ≦ (それぞれの名前の長さ) ≦ 50\n\n\n\n\n\n                                        ©AtCoder Inc. All rights reserved.                                      9\n\f\nB問題 ステップ\n\n\n  • この問題には 2 つの重要な点があります。\n\n\n  1. ループ処理について\n\n\n  2. 文字列の処理について\n\n\n\n\n\n                                        ©AtCoder Inc. All rights reserved.                                    10\n\f\nB問題 ステップ 1\n\n\n  1. ループ処理について\n  • この問題では入力によって読み込む回数が変わる\n  ので、ループ関数などを用いて読み込みを行うこと\n\n  になります。\n  • 後述する文字列についても、ループ関数が密接に\n  関わってきます。\n\n ※言語によっては実装の方針などが変わる場合があ\n\n ります。その場合はその言語に対応したプログラムを\n\n 用いてください。\n\n\n                                        ©AtCoder Inc. All rights reserved.                                    11\n\f\nB問題 ステップ 2\n\n\n  2. 文字列の処理について\n  • 文字列の処理は、言語によって様々な仕様があり\n  ます。\n  • 予め文字列の問題を幾つか解いておいて、文字列\n  をどのように扱えばいいのかを学んでおきましょう。\n  • ライブラリ関数 (C だと strcmp とか) を使用すると\n  実装が用意になることがあります。\n  • 原理を知っておくのが望ましいです。\n\n\n\n\n\n                                        ©AtCoder Inc. All rights reserved.                                    12\n\f\nB問題 解法\n\n\n  • 各文字列ごとに、その文字列と完全に一致する他\n  の文字列の個数を計算し、配列等に格納しておき\n\n  ます。\n  • 最大の要素が格納された場所を調べ、その場所に\n  対応する文字列を出力します。\n  • 文字の長さの最大値を S とおいたとき、O(SN^2) で\n  計算することができます。\n\n\n\n\n\n                                        ©AtCoder Inc. All rights reserved.                                    13\n\f\nB問題 補足\n\n\n  • 言語によっては、文字列を比較したつもりでも、実\n  際は文字列のポインタ同士の比較になってしまう場\n\n  合などがあります。注意しましょう。\n  • 別解として、文字列同士の比較の代わりにハッシュ\n  関数同士の比較を用いた解法もあります。ただしこ\n\n  の場合はハッシュの衝突に注意する必要がありま\n\n  す。\n\n\n\n\n\n                                        ©AtCoder Inc. All rights reserved.                                    14",
+      "codes": [],
+      "source": "official_pdf_letter_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "c234dba368605408a908cc10ba4fe621bba0ed89692376ccce9a3b6158d690cc"
+    }
+  ],
+  "status": "available"
+}

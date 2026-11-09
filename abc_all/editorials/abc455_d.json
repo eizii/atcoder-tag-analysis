@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc455_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc455/editorial/19455",
+      "text": "各カードがどの山にあるか、あるいは各山のカードの集合を常に管理しながら計算することを目指すと、\n\\(1\\)\n回の操作で変更するべき量が多くなるため実行時間に間に合わせることは難しくなります。\n常に山にあるカードの枚数を高速に取得できる必要はなく、すべての操作を終えた後のみに各山のカードの枚数を取得できればよいことに注意して、各操作において変更するべき量が少ないようなデータを管理しましょう。\n状況を簡潔にするために山\n\\(i\\)\nの一番下に仮想的に動かないカード\n\\(N + i\\)\nがあると見なすことにします（このような工夫をせずとも管理するデータの形を少し変えれば計算はできますが、簡潔な方法の一つになっていると考えられます）。\nすると、例えば以下のようなデータを管理することにより高速な計算が行えます。\n\\(up_i\\)\n: カード\n\\(i\\)\nのすぐ上にあるカード（なければ\n\\(-1\\)\n）\n\\(down_i\\)\n: カード\n\\(i\\)\nのすぐ下にあるカード（なければ\n\\(-1\\)\n）\n\\(i\\)\n回目の操作の際には\n\\(D_i = down_{C_i}\\)\nとおくと、以下のように管理するデータを更新すれば十分です。\n\\(down_{C_i}\\)\nを\n\\(P_i\\)\nに置き換える\n\\(up_{P_i}\\)\nを\n\\(C_i\\)\nに置き換える\n\\(up_{D_i}\\)\nを\n\\(-1\\)\nに置き換える\n答えを取得する際には、各\n\\(i\\)\nについてカード\n\\(N + i\\)\nから\n\\(up\\)\nを辿っていけばよいです。\n実装例",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\tint n, q;\n\tcin >> n >> q;\n\tvector<int> up(2 * n, -1), down(2 * n, -1);\n\tfor (int i = 0; i < n; i++) up[n + i] = i, down[i] = n + i;\n\twhile (q--) {\n\t\tint c, p;\n\t\tcin >> c >> p;\n\t\tc--; p--;\n\t\tint d = down[c];\n\t\tdown[c] = p;\n\t\tup[p] = c;\n\t\tup[d] = -1;\n\t}\n\tfor (int i = 0; i < n; i++) {\n\t\tint x = n + i, ans = 0;\n\t\twhile (up[x] != -1) {\n\t\t\tx = up[x];\n\t\t\tans++;\n\t\t}\n\t\tcout << ans << \" \\n\"[i == n - 1];\n\t}\n}"
+      ],
+      "text_sha256": "455e499fc5a76cb77e0af9f6cbad6f219bdc0ae30f4e3ec136caaef700107e44",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc455/abc455_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc455/editorial/19456",
+      "text": "いわゆる「操作を逆順に見る」方針でも解くことができます。\nカード\n\\(c\\)\nをカード\n\\(p\\)\nに載せる操作\n\\((c, p)\\)\nに対し、後に\n\\(C_i = c\\)\nである操作を行う場合、操作\n\\((c, p)\\)\nを無視しても答えは変わりません。よって、各カード\n\\(x\\)\nについて、\n\\(C_i = x\\)\nなる操作は最後の 1 回だけ行うとしてよいです。\n考慮すべき操作\n\\((C_i, P_i)\\)\nについて有向辺\n\\(C_i \\to P_i\\)\nを張ったグラフを考えると、問題の制約からこのグラフは有向パスグラフの集まりとなります。頂点\n\\(x\\)\nから辺を通れるだけ通って頂点\n\\(y\\)\nにたどり着くとき、カード\n\\(x\\)\nは山\n\\(y\\)\nに最終的に積まれることが分かります。\n以上より、このグラフを適切に探索することで\n\\(O(N+Q)\\)\nで解くことができます。\n各連結成分の頂点数が分かればよいので、UnionFind を用いて簡潔に実装することができます。時間計算量は\n\\(O((N + Q) \\cdot  \\alpha(N))\\)\nです。\n実装例 (Rust):\nhttps://atcoder.jp/contests/abc455/submissions/75276680",
+      "codes": [
+        "use {proconio::{input, marker::Usize1}, ac_library::Dsu};\n\nfn main() {\n    input! { N: usize, Q: usize, CP: [(Usize1, Usize1); Q] }\n    \n    let mut dsu = Dsu::new(N);\n    let mut seen = vec![false; N];\n    \n    // 操作を逆順に見る\n    // それまでに C_i = c として操作していなければ辺を張る\n    for (C, P) in CP.into_iter().rev() {\n        if !seen[C] { seen[C] = true; dsu.merge(C, P); }\n    }\n    \n    for i in 0..N {\n        print!(\"{} \", if seen[i] {0} else {dsu.size(i)});\n    }\n}"
+      ],
+      "text_sha256": "3c14b8d836a78abbfc474546e4de17715315cdc52ec36870c55ad0928a73b327",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc455/abc455_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

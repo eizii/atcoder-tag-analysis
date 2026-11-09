@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc365_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc365/editorial/10587",
+      "text": "\\(2\\)\n番目に大きい値は、例えば\n\\(A\\)\nをソートした列\n\\(A'\\)\nを見ることで求められます。\n\\(A\\)\nを昇順にソートした場合、末尾から\n\\(2\\)\n番目の数、つまり\n\\(A'_{N-1}\\)\nが二番目に大きい値です。\n次に、そのような値の\n\\(A\\)\n上での位置を for 文と if 文を用いて確認すればよいです。\n実装例 (C++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for(auto &v : a) cin >> v;\n    auto b = a;\n    sort(b.begin(), b.end());\n    int tar = b[n - 2];\n    for(int i = 0; i < n; i++) {\n        if(a[i] == tar) {\n            cout << i + 1 << endl;\n        }\n    }\n}"
+      ],
+      "text_sha256": "be3ade013963fd459812281226129c909cedaa20d26e308145a3818987de0730",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc365/abc365_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

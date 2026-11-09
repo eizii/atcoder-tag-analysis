@@ -1,0 +1,56 @@
+{
+  "problem_id": "abc432_e",
+  "title": "Clamp",
+  "contests": [
+    {
+      "contest_id": "abc432",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1133,
+  "raw_difficulty": 1133,
+  "contest_id": "abc432",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc432/tasks/abc432_e",
+  "statement": "配点 : 450 点 問題文 長さ N の整数列 A=(A_1, A_2, \\dots, A_N) が与えられます。 Q 個のクエリが与えられるので、順に処理してください。\r\n各クエリは以下のいずれかの形式です。 1 x y : A_x の値を y に変更する。 2 l r : \\displaystyle \\sum_{1\\leq i\\leq N} \\max(l, \\min(r, A_i)) の値を求める。 制約 1\\leq N \\leq 5\\times 10^5 1\\leq Q \\leq 2\\times 10^5 0\\leq A_i \\leq 5\\times 10^5 1 種類目のクエリについて、 1\\leq x\\leq N 0\\leq y \\leq 5\\times 10^5 2 種類目のクエリについて、 0\\leq l,r \\leq 5\\times 10^5 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N Q A_1 A_2 \\dots A_N \\text{query}_1 \\text{query}_2 \\vdots \\text{query}_Q ここで、 \\text{query}_i\\ (1\\leq i\\leq Q) は i 番目のクエリを表し、以下のいずれかの形式で与えられる。 1 x y 2 l r 出力 2 種類目のクエリの個数を K として、 K 行出力せよ。 i 行目 ( 1\\leq i \\leq K ) には、 2 種類目のクエリのうち i 個目のものに対する答えを出力せよ。 入力例 1 3 4\r\n4 3 2\r\n1 1 7\r\n2 3 5\r\n1 2 0\r\n2 4 2 出力例 1 11\r\n12 はじめ、 A=(4,3,2) です。 1 番目のクエリ： A_1 の値を 7 に変更します。 A=(7,3,2) となります。 2 番目のクエリ： \\max(3, \\min(5, 7))+\\max(3, \\min(5, 3))+\\max(3, \\min(5, 2))=5+3+3=11 を出力します。 3 番目のクエリ： A_2 の値を 0 に変更します。 A=(7,0,2) となります。 4 番目のクエリ： \\max(4, \\min(2, 7))+\\max(4, \\min(2, 0))+\\max(4, \\min(2, 2))=4+4+4=12 を出力します。 入力例 2 8 10\r\n320 578 244 604 145 839 156 857\r\n2 400 556\r\n1 5 168\r\n2 254 62\r\n2 145 301\r\n1 1 23\r\n1 3 0\r\n2 413 758\r\n2 297 613\r\n1 8 451\r\n2 598 692 出力例 2 3824\r\n2032\r\n2073\r\n4350\r\n3596\r\n4884",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 長さ N の整数列 A=(A_1, A_2, \\dots, A_N) が与えられます。 Q 個のクエリが与えられるので、順に処理してください。\r\n各クエリは以下のいずれかの形式です。 1 x y : A_x の値を y に変更する。 2 l r : \\displaystyle \\sum_{1\\leq i\\leq N} \\max(l, \\min(r, A_i)) の値を求める。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 1\\leq N \\leq 5\\times 10^5 1\\leq Q \\leq 2\\times 10^5 0\\leq A_i \\leq 5\\times 10^5 1 種類目のクエリについて、 1\\leq x\\leq N 0\\leq y \\leq 5\\times 10^5 2 種類目のクエリについて、 0\\leq l,r \\leq 5\\times 10^5 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N Q A_1 A_2 \\dots A_N \\text{query}_1 \\text{query}_2 \\vdots \\text{query}_Q ここで、 \\text{query}_i\\ (1\\leq i\\leq Q) は i 番目のクエリを表し、以下のいずれかの形式で与えられる。 1 x y 2 l r"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 2 種類目のクエリの個数を K として、 K 行出力せよ。 i 行目 ( 1\\leq i \\leq K ) には、 2 種類目のクエリのうち i 個目のものに対する答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 4\r\n4 3 2\r\n1 1 7\r\n2 3 5\r\n1 2 0\r\n2 4 2"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 11\r\n12 はじめ、 A=(4,3,2) です。 1 番目のクエリ： A_1 の値を 7 に変更します。 A=(7,3,2) となります。 2 番目のクエリ： \\max(3, \\min(5, 7))+\\max(3, \\min(5, 3))+\\max(3, \\min(5, 2))=5+3+3=11 を出力します。 3 番目のクエリ： A_2 の値を 0 に変更します。 A=(7,0,2) となります。 4 番目のクエリ： \\max(4, \\min(2, 7))+\\max(4, \\min(2, 0))+\\max(4, \\min(2, 2))=4+4+4=12 を出力します。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 8 10\r\n320 578 244 604 145 839 156 857\r\n2 400 556\r\n1 5 168\r\n2 254 62\r\n2 145 301\r\n1 1 23\r\n1 3 0\r\n2 413 758\r\n2 297 613\r\n1 8 451\r\n2 598 692"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 3824\r\n2032\r\n2073\r\n4350\r\n3596\r\n4884"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc432/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:41:10.169762+00:00",
+  "statement_sha256": "b67a2d448eedd493cc3237fbfe20da7b35e7a6f370530fbf7bce66873c39e416",
+  "editorials": []
+}

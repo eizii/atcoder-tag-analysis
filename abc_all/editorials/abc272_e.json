@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc272_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc272/editorial/4982",
+      "text": "まず、長さ\n\\(N\\)\nの数列\n\\(A\\)\nが与えられるので\n\\(A\\)\nに含まれない最小の非負整数を求めるという、より単純な問題について考えます。\nこのとき、 答えは明らかに\n\\(0\\)\n以上\n\\(N\\)\n以下であることから、\n\\(A\\)\nに含まれる要素のうち負の要素及び\n\\(N\\)\n以上の要素は答えに影響がないので無視して構わないことがわかります。\nこの観察を用いると、もともとの問題についても解くことができます。無視してはいけない値を\n大事な値\nと呼ぶことにします。大事な値が合計で何個あるかを分析します。\nすると、\n\\(i=1\\)\nが大事な値となる個数は最大で\n\\(N\\)\n個、\n\\(i=2\\)\nでは最大で\n\\(\\lceil\\frac{N}{2}\\rceil\\)\n個、… となることから、調和級数より大事な値は\n\\(\\mathrm{O}(N\\log N)\\)\n個しか存在しないことがわかります。\nよって出力する答えの合計も\n\\(\\mathrm{O}(N\\log N)\\)\n程度であることがわかります。このことから、各出力について答えの線形のオーダーで答えを求めても十分高速です。\n具体的には、各操作について、\n\\(0\\)\nが存在するか、\n\\(1\\)\nが存在するか、…を判定することを繰り返せば良いです。データの持ち方については、実装例を参考にしてください。\n実装例(c++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<int> a(n);\n    for(auto &v : a) cin >> v;\n    vector<vector<int>> vals(m + 1);\n    for(int i = 0; i < n; i++) {\n        if(a[i] >= n) continue;\n        int l = (a[i] >= 0 ? 1 : (-a[i] + i) / (i + 1));\n        int r = min(m + 1, (n - a[i] + i) / (i + 1));\n        for(int j = l; j < r; j++) {\n            vals[j].push_back(a[i] + (i + 1) * j);\n        }\n    }\n    for(int i = 1; i <= m; i++) {\n        int sz = vals[i].size();\n        vector<bool> exi(sz + 1);\n        for(auto v : vals[i]) {\n            if(v < sz) exi[v] = true;\n        }\n        int res = 0;\n        while(exi[res]) res++;\n        cout << res << endl;\n    }\n}"
+      ],
+      "text_sha256": "0e4ad7c35a5a0ce4f60e751a8877f3bdcbdfbe67d1130b82af4c42087cfff3f4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc272/abc272_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

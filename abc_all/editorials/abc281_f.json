@@ -1,0 +1,28 @@
+{
+  "problem_id": "abc281_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc281/editorial/5367",
+      "text": "二進表記をした時に\n\\(2^{29}\\)\nの位が\n\\(1\\)\nである非負整数は、(\n\\(2^{28},2^{27},\\ldots\\)\nの位に関わらず)\n\\(2^{29}\\)\nの位が\n\\(0\\)\nであるような非負整数より大きいです。そのため、\n\\(i=29,28,\\ldots,0\\)\nの順に次の問題を考え、なるべく上位の桁が\n\\(0\\)\nになるよう貪欲に決める、という方法が考えられます。\n\\(M\\)\nを二進表記した時の\n\\(2^i\\)\nの位を\n\\(0\\)\nにすることは出来るか。\nもし\n\\(a_1,\\ldots,a_N\\)\nの\n\\(2^i\\)\nの位がすべて\n\\(0\\)\nならば、\n\\(x\\)\nの\n\\(2^i\\)\nの位を\n\\(0\\)\nとすることで\n\\(M\\)\nの\n\\(2^i\\)\nの位を\n\\(0\\)\nにすることが出来ます。\n\\(a_1,\\ldots,a_N\\)\nの\n\\(2^i\\)\nの位がすべて\n\\(1\\)\nの場合も同様です。一方、\n\\(a_1,\\ldots,a_N\\)\nの\n\\(2^i\\)\nの位に\n\\(0\\)\nと\n\\(1\\)\nが両方現れる場合、\n\\(M\\)\nの\n\\(2^i\\)\nの位を\n\\(0\\)\nにすることは出来ません(つまり、\n\\(M\\)\nの\n\\(2^i\\)\nの位は\n\\(1\\)\nになります)。\nここで、\n\\(a_1,\\ldots,a_N\\)\nの\n\\(2^i\\)\nの位に\n\\(0\\)\nと\n\\(1\\)\nが両方現れる場合において、\n\\(2^i\\)\nの位が\n\\(0\\)\nであるものの集合を\n\\(S\\)\n、\n\\(1\\)\nであるものの集合を\n\\(T\\)\nとします。仮に\n\\(x\\)\nの\n\\(2^i\\)\nの位を\n\\(0\\)\nにした場合、\n\\(a_i \\in S\\)\nに対する\n\\(a_i \\oplus x\\)\nの\n\\(2^i\\)\nの位は\n\\(0\\)\nになるため、この時点で\n\\(a_i \\oplus x\\)\nが操作後の\n\\(A\\)\nにおける最大値 になる可能性が無くなると言え、以降は\n\\(T\\)\nに含まれる非負整数のみを考慮すればよくなります。\n\\(x\\)\nの\n\\(2^i\\)\nの位を\n\\(1\\)\nにした場合も同様に\n\\(S\\)\nに含まれる非負整数のみを考慮すればよくなります。問題は、\n\\(2^i\\)\nに関する処理をしている時点では\n\\(S\\)\nを残すべきか\n\\(T\\)\nを残すべきか分からないことです。\n実は、\n\\(S\\)\nを残す場合と\n\\(T\\)\nを残す場合を両方試して問題ありません。なぜなら、\n\\(i=29,\\ldots,0\\)\nの各段階に対し、\n\\(a_1,\\ldots,a_N\\)\nそれぞれが残るような以前の操作はちょうど\n\\(1\\)\n通りしかないためです。\n実装は下の例のように再帰的に行うのが(恐らく)一般的です。\n実装例(C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint dfs(int cur,vector<int> a){\n\t\n\tif(cur==-1)return 0;\n\tvector<int> S,T;\n\t\n\tfor(int i=0;i<a.size();i++){\n\t\tif(((a[i]>>cur)&1)==0)S.push_back(a[i]);\n\t\telse T.push_back(a[i]);\n\t}\n\t\n\tif(S.size()==0)return dfs(cur-1,T);\n\tif(T.size()==0)return dfs(cur-1,S);\n\treturn min(dfs(cur-1,S),dfs(cur-1,T)) | (1<<cur);\n\t\n}\n\nint main() {\n    \n\tint N;\n\tcin>>N;\n\t\n\tvector<int> a(N);\n\tfor(int i=0;i<N;i++)cin>>a[i];\n\t\n\tcout<<dfs(29,a)<<endl;\n\t\n\treturn 0;\n}"
+      ],
+      "text_sha256": "cd0d199ba359e9381f68673ae3fd51cda41d83a83c58b7d68e59e356e9d3c7c6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc281/abc281_f.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc281/editorial/5383",
+      "text": "この問題の原案者です。少しだけ補足をします。\nはじめに入力の\n\\(A\\)\nをソートしておくと、公式解説で再帰的に作られる配列は\n\\(A\\)\nの中の区間であることが分かります。\nこのことを用いると、毎回配列を構築する必要がなくなり定数倍を良くすることができます。\n実装例(c++):",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> a(n);\n    for(auto &v : a) cin >> v;\n    sort(a.begin(), a.end());\n    auto f = [&](auto f, int l, int r, int d = 30) -> int {\n        if(d == -1) return 0;\n        if((a[l] ^ a[r - 1]) >> d & 1) {\n            int m = distance(a.begin(), lower_bound(a.begin() + l, a.begin() + r, a[r - 1] >> d << d));\n            return min(f(f, l, m, d - 1), f(f, m, r, d - 1)) + (1 << d);\n        } else\n            return f(f, l, r, d - 1);\n    };\n    cout << f(f, 0, n) << endl;\n}"
+      ],
+      "text_sha256": "6a1bd37b1651c1a349afeb56b85f3613cd8aa0eea9c2c4e2c8676402335593fa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc281/abc281_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,15 @@
+{
+  "problem_id": "abc033_a",
+  "editorials": [
+    {
+      "url": "https://img.atcoder.jp/abc033/editorial.pdf",
+      "text": "A問題 暗証番号\n\n\n\n\n\n                                     ©AtCoder Inc. All rights reserved.                                      2\n\f\nA問題問題概要\n\n• 4桁の数が与えられる\n• 各桁が全て同じ数字であるか判定せよ\n\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                      3\n\f\nA問題アルゴリズム\n\n• 実際に4文字読み込み、if文などで判定すれば\n よい\n\n• 例: if(in[0]==in[1]&&in[1]==in[2]&&in[2]==in[3])\n\n  – 4桁とも同じ数字には法則性もある\n\n  – 0000, 1111, 2222, …, 9999は全て\n   1111の倍数。\n\n• 1111で割り切れるかどうかを判定してもよい\n\n• 例: if(N%1111==0)\n\n\n\n\n                                      ©AtCoder Inc. All rights reserved.                                      4",
+      "codes": [],
+      "source": "official_pdf_title_anchored",
+      "official_status": "official",
+      "extraction_needs_review": true,
+      "text_sha256": "bcb8df2a60bdfe71e6098fa1a0fdcec93476f2ff925fa0a0df4090e34cc73146"
+    }
+  ],
+  "status": "available"
+}

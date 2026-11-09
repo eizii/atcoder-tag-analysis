@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc425_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc425/editorial/14077",
+      "text": "ある\n\\(2\\)\nつ目の形式のクエリに対する答えを求めることを考えます。このクエリの答えは\n\\(\\displaystyle \\sum_{i=l}^r A_i\\)\nです。\nここで、長さ\n\\(2N\\)\nの整数列\n\\(B\\)\nを\n\\(B=(A_1,A_2,\\ldots,A_N,A_1,\\ldots,A_N)\\)\nとして定義します。つまり、\n\\(1\\)\nつ目の形式のクエリにより変更される前の\n\\(A\\)\nを\n\\(2\\)\nつ連結した整数列を\n\\(B\\)\nとします。\nすると、\n\\(\\displaystyle \\sum_{i=l}^r A_i\\)\nの値は「そのクエリまでの間に\n\\(1\\)\nつ目の形式のクエリで与えられた\n\\(c\\)\nの総和を\n\\(N\\)\nで割ったあまり」を\n\\(C\\)\nとして\n\\(\\displaystyle \\sum_{i=l+C}^{r +C} B_i\\)\nと表すことができます。\n\\(B\\)\nの要素はクエリによって不変なので、この値は累積和を用いることで計算することができます。\n以上を適切に実装することでこの問題に正答することができます。計算量は\n\\(O(N+Q)\\)\nです。\n実装例(Python3)",
+      "codes": [
+        "import sys\ninput = sys.stdin.readline\n\nn, q = map(int, input().split())\na = list(map(int, input().split()))\nb = a + a\nfor i in range(2 * n - 1, 0, -1):\n    b[i - 1] += b[i]\nrui_c = 0\nfor _ in range(q):\n    query = list(map(int, input().split()))\n    if query[0] == 1:\n        c = query[1]\n        rui_c += c\n        rui_c %= n\n    else:\n        l, r = query[1] - 1, query[2]\n        print(b[l + rui_c] - b[r + rui_c])"
+      ],
+      "text_sha256": "a297e71775954016dd230d6c342c3508971978172b851a9d1998a13fc3fef04a",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc425/abc425_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

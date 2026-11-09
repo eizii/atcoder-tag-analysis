@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc451_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc451/editorial/17753",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、\nAtCoder Beginners Selection\nの問題をいくつか試すことをおすすめします。\n長さが\n\\(5\\)\nの倍数である文字列かどうかを判定すればよいです。例えば以下のように実装できます。\nPython の実装例\nC++ の実装例",
+      "codes": [
+        "s = input()\nprint(\"Yes\" if len(s) % 5 == 0 else \"No\")",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    string s; cin >> s;\n    cout << (s.size() % 5 == 0 ? \"Yes\" : \"No\") << endl;\n}"
+      ],
+      "text_sha256": "821a8552ad4474a8e4f568cd98ffebf7a0da2e9ce5779250d51275bb9877f43c",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc451/abc451_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

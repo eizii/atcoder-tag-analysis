@@ -1,0 +1,27 @@
+{
+  "problem_id": "abc231_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc231/editorial/3074",
+      "text": "各クエリについて愚直に答えを計算すると、計算量\n\\(O(QN)\\)\nで実行時間超過（TLE）してしまいます。\n各クエリについて高速に答えを計算する方法を考えます。\n前計算として、\n\\(N\\)\n人を身長の昇順にソートしておきます。\n昇順にソートされた長さ\n\\(N\\)\nの数列\n\\(A\\)\nと整数\n\\(x\\)\nが与えられた時、二分探索を用いると計算量\n\\(O(\\log N)\\)\nで\n\\(x \\leq A_i\\)\nを満たす最小の\n\\(i\\)\nを求めることができます。以下は二分探索の概要です。\n求めたい\n\\(i\\)\nが区間\n\\([l,r]\\)\nにあることが分かっているとする（初期状態では\n\\(l = 0, r = N\\)\nなど）。\n\\(md =\\left\\lfloor  \\dfrac{l + r}{2}\\right\\rfloor\\)\nとして、\n\\(x \\leq A_{md}\\)\nのとき求めたい\n\\(i\\)\nは区間\n\\([l,md]\\)\nにあり、そうでない場合区間\n\\([md+1,r]\\)\nにあることが分かる。\n\\(1\\)\n回のステップで区間の長さが半分以下になるから、全体で\n\\(O(\\log N)\\)\nのステップ数で区間の長さが\n\\(1\\)\nとなり、求めたい\n\\(i\\)\nが求められる。\nなお、多くの言語では二分探索の標準ライブラリが提供されているので、それを用いると簡潔に実装することができます。\n実装例1 (C++)\n実装例2 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n, q; cin >> n >> q;\n    vector<int> v(n);\n    for(int i = 0; i < n; i++) cin >> v[i];\n    sort(v.begin(),v.end());\n    for(int i = 0; i < q; i++){\n        int x; cin >> x;\n        int ok = n, ng = -1; // v[ok] >= x, v[ng] < x であることが分かっている\n        while(ok - ng > 1){\n            int md = (ok + ng) / 2;\n            if(v[md] >= x) ok = md;\n            else ng = md;\n        }\n        cout << n - ok << endl;\n    }\n}",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n, q; cin >> n >> q;\n    vector<int> v(n);\n    for(int i = 0; i < n; i++) cin >> v[i];\n    sort(v.begin(),v.end());\n    for(int i = 0; i < q; i++){\n        int x; cin >> x;\n        cout << v.end() - lower_bound(v.begin(), v.end(), x) << endl;\n    }\n}"
+      ],
+      "text_sha256": "9cb783b2f7998f9c915a9b794a1f7d7e8b473382eefba4625f703d0f70af87f6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc231/abc231_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc231/editorial/3075",
+      "text": "公式解説とは異なる方針の解法を解説します。計算量は\n\\(O(N\\log N+Q\\log Q)\\)\nです。\n身長だけでなく、クエリもソートすることで、クエリで問われる値は徐々に小さくなるとして良いです。このとき、尺取法の要領で、クエリ全体に\n\\(O(N)\\)\nで答えることができます。\n実装例(Python)\n※\n\\(A\\)\nと\n\\(X\\)\nをまとめてソートしているため、計算量は\n\\(O((N+Q)\\log(N+Q))\\)\nこのように、全てのクエリを先に受け取り都合の良い順序に並び替えてから答える手法は、高難易度の問題を解く際にしばしば使われます。",
+      "codes": [],
+      "text_sha256": "1c5c9c3506d1db7327e80442223e1b7ab06474f638257dceecfb580e673d1efa",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc231/abc231_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

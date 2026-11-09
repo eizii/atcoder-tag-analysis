@@ -1,0 +1,64 @@
+{
+  "problem_id": "arc095_a",
+  "title": "Many Medians",
+  "contests": [
+    {
+      "contest_id": "abc094",
+      "problem_index": "C"
+    }
+  ],
+  "difficulty": 566,
+  "raw_difficulty": 566,
+  "contest_id": "abc094",
+  "problem_index": "C",
+  "url": "https://atcoder.jp/contests/abc094/tasks/arc095_a",
+  "statement": "配点 : 300 点 問題文 l が奇数のとき， l 個の数 a_1, a_2, ..., a_l の中央値とは， a_1, a_2, ..., a_l の中で \\frac{l+1}{2} 番目に大きい値のことを言います． N 個の数 X_1, X_2, ..., X_N が与えられます．ここで， N は偶数です． i = 1, 2, ..., N に対して， X_1, X_2, ..., X_N から X_i のみを除いたもの，すなわち X_1, X_2, ..., X_{i-1}, X_{i+1}, ..., X_N の中央値を B_i とします． i = 1, 2, ..., N に対して， B_i を求めてください． 制約 2 \\leq N \\leq 200000 N は偶数 1 \\leq X_i \\leq 10^9 入力はすべて整数 入力 入力は以下の形式で標準入力から与えられる。 N X_1 X_2 ... X_N 出力 N 行出力せよ． i 行目には B_i を出力せよ． 入力例 1 4\r\n2 4 4 3 出力例 1 4\r\n3\r\n3\r\n4 X_2, X_3, X_4 の中央値は 4 なので， B_1 = 4 です． X_1, X_3, X_4 の中央値は 3 なので， B_2 = 3 です． X_1, X_2, X_4 の中央値は 3 なので， B_3 = 3 です． X_1, X_2, X_3 の中央値は 4 なので， B_4 = 4 です． 入力例 2 2\r\n1 2 出力例 2 2\r\n1 入力例 3 6\r\n5 5 4 4 3 3 出力例 3 4\r\n4\r\n4\r\n4\r\n4\r\n4",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 l が奇数のとき， l 個の数 a_1, a_2, ..., a_l の中央値とは， a_1, a_2, ..., a_l の中で \\frac{l+1}{2} 番目に大きい値のことを言います． N 個の数 X_1, X_2, ..., X_N が与えられます．ここで， N は偶数です． i = 1, 2, ..., N に対して， X_1, X_2, ..., X_N から X_i のみを除いたもの，すなわち X_1, X_2, ..., X_{i-1}, X_{i+1}, ..., X_N の中央値を B_i とします． i = 1, 2, ..., N に対して， B_i を求めてください．"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 200000 N は偶数 1 \\leq X_i \\leq 10^9 入力はすべて整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N X_1 X_2 ... X_N"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 N 行出力せよ． i 行目には B_i を出力せよ．"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 4\r\n2 4 4 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 4\r\n3\r\n3\r\n4 X_2, X_3, X_4 の中央値は 4 なので， B_1 = 4 です． X_1, X_3, X_4 の中央値は 3 なので， B_2 = 3 です． X_1, X_2, X_4 の中央値は 3 なので， B_3 = 3 です． X_1, X_2, X_3 の中央値は 4 なので， B_4 = 4 です．"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 2\r\n1 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 2\r\n1"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 6\r\n5 5 4 4 3 3"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 4\r\n4\r\n4\r\n4\r\n4\r\n4"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc094/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:34:05.713975+00:00",
+  "statement_sha256": "1efe450ec4520cc76bf59b8c48fe5d5f4c99f179426354b0440c135a7f7b67af",
+  "editorials": []
+}

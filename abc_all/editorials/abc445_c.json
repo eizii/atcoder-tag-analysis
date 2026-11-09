@@ -1,0 +1,39 @@
+{
+  "problem_id": "abc445_c",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc445/editorial/15908",
+      "text": "一度 \\(A _ i=i\\) であるようなマス \\(i\\) に到達したらそこから移動することはありません。\nそのようなマスに到達するまでは駒を毎回 \\(1\\) マス以上進めることになりますが、マス \\(i\\) からはじめて駒を毎回進めることはたかだか \\(N-i\\) 回しかできません。\n\\(N\\leq10 ^ {100}\\) なので、「\\(10 ^ {100}\\) 回操作を行う」ということは、「駒が進めなくなるまで操作を行う」と言い換えてよいです。\nよって、次のようなアルゴリズムは正しい答えを出力します。\n\\(i=1,2,\\ldots,N\\) の順に、以下の手順を行う。\n\\(\\operatorname{ans}\\leftarrow i\\) と初期化する。\n\\(\\operatorname{ans}\\neq A _ {\\operatorname{ans}}\\) である限り、\\(\\operatorname{ans}\\leftarrow A _ {\\operatorname{ans}}\\) と更新する。\n\\(\\operatorname{ans}\\) を出力する。\nこのアルゴリズムの 2. の繰り返しは、それぞれの \\(i\\) で最悪 \\(N-i\\) 回行われます。\nよって、このアルゴリズムの最悪時間計算量は \\(\\Theta(N ^ 2)\\) となっており、このアルゴリズムを実装して提出しても実行時間制限を超過してしまいます。\nここで、答えの列 \\((\\operatorname{ans} _ 1,\\operatorname{ans} _ 2,\\ldots,\\operatorname{ans} _ N)\\) を後ろから求めることにすると、後ろの計算結果を利用できるようになります。\n\\(i=N,N-1,\\ldots,2,1\\) の順に、以下の手順を行う。\n\\(\\operatorname{ans} _ i\\leftarrow i\\) と初期化する。\n\\(\\operatorname{ans} _ i\\neq A _ {\\operatorname{ans} _ i}\\) なら、\\(\\operatorname{ans} _ i\\leftarrow\\operatorname{ans} _ {A _ i}\\) とする。\n\\(i=1,2,\\ldots,N\\) の順に、\\(\\operatorname{ans} _ i\\) を出力する。\nこれで最悪時間計算量は \\(\\Theta(N)\\) となり、十分高速に答えを求めることができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <ranges>\n\nint main() {\n    using namespace std;\n    int N;\n    cin >> N;\n\n    vector<int> A(N);\n    for (auto&& a : A) {\n        cin >> a;\n        --a; // 0-indexed にしておく\n    }\n\n    vector<int> ans(N);\n    for (int i : views::iota(0, N) | views::reverse) { // 降順に、最後に到着するマスを求める\n        if (i == A[i]) { // はじめから動かないなら\n            ans[i] = i; // そのマスが答え\n        } else { // 動くなら\n            ans[i] = ans[A[i]]; // 動いた先のマスから始めたときの結果が答え\n        }\n    }\n\n    for (int a : ans) {\n        // 1-indexed に直して出力\n        cout << a + 1 << \" \";\n    }\n    cout << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "b62dbc23f41c318df417850ff034d54d62078fefaa5220274ec682d57422289d",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc445/abc445_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc445/editorial/15909",
+      "text": "公式解説では、移動の性質に注目することで「\\(10 ^ {100}\\) 回操作」を「止まるまで操作」に言い換えましたが、性質に関する考察をすることなく \\(10 ^ {100}\\) 回移動した結果を求めることができます。\n\\(i=1,2,\\ldots,N\\) に対して同時に \\(A _ i\\leftarrow{A _ {A _ {A _ {A _ {A _ {A _ {A _ {A _ {A _ {A _ i}}}}}}}}}}\\) と更新を行うことで、各 \\(i\\) から \\(10\\) 回操作を行ったあとにいるマスを求めることができます。\nこの更新を \\(100\\) 回行うことで、各 \\(i\\) から \\(10 ^ {100}\\) 回操作を行ったあとにいるマスを十分高速に求めることができます。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <ranges>\n\nint main() {\n    using namespace std;\n    int N;\n    cin >> N;\n\n    vector<int> A(N);\n    for (auto&& a : A) {\n        cin >> a;\n        --a; // 0-indexed にしておく\n    }\n\n    // 10 倍するのを 100 回繰り返す\n    for (int i = 0; i < 100; ++i) {\n        vector<int> tmp(N);\n        for (int j : views::iota(0, N)) {\n            tmp[j] = A[A[A[A[A[A[A[A[A[A[j]]]]]]]]]];\n        }\n        A = tmp;\n    }\n\n    // 1-indexed に直して出力\n    for (const auto a : A) {\n        cout << a + 1 << \" \";\n    }\n    cout << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "8b2bf9ee3a3b53c7524fdf19e8144c2241677cdf289e461aa83da1d92fad55da",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc445/abc445_c.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc445/editorial/15910",
+      "text": "公式解説で、以下のアルゴリズムが実行時間制限を超過することを説明しました。\n\\(i=1,2,\\ldots,N\\) の順に、以下の手順を行う。\n\\(\\operatorname{ans}\\leftarrow i\\) と初期化する。\n\\(\\operatorname{ans}\\neq A _ {\\operatorname{ans}}\\) である限り、\\(\\operatorname{ans}\\leftarrow A _ {\\operatorname{ans}}\\) と更新する。\n\\(\\operatorname{ans}\\) を出力する。\nここで、2. の繰り返しを少し工夫することで最悪時間計算量を \\(O(N\\log N)\\) に削減することができ、十分高速に動作します。\n\\(i=1,2,\\ldots,N\\) の順に、以下の手順を行う。\n\\(\\operatorname{ans}\\leftarrow i\\) と初期化する。\n\\(\\operatorname{ans}\\neq A _ {\\operatorname{ans}}\\) である限り、\\(\\mathbf{A _ {ans}\\leftarrow A _ {A _ {ans}}}\\)\nと更新し、\n\\(\\operatorname{ans}\\leftarrow A _ {\\operatorname{ans}}\\) と更新する。\n\\(\\operatorname{ans}\\) を出力する。\nこれは、union-find （素集合データ構造）で使われる path-halving と呼ばれる経路圧縮のテクニックです。\n実装例は以下のようになります。",
+      "codes": [
+        "#include <iostream>\n#include <vector>\n#include <ranges>\n\nint main() {\n    using namespace std;\n    int N;\n    cin >> N;\n\n    vector<int> A(N);\n    for (auto&& a : A) {\n        cin >> a;\n        --a; // 0-indexed にしておく\n    }\n\n    // 答えを順番に求める\n    for (int ans : views::iota(0, N)) {\n        while (ans != A[ans])\n            ans = A[ans] = A[A[ans]]; // 経路圧縮をしながら探索\n        cout << ans + 1 << \" \"; // 1-indexed に直して出力\n    }\n    cout << endl;\n\n    return 0;\n}"
+      ],
+      "text_sha256": "249ae6923074aa71b2f212e6224447bdbb149d8c4ab16407659e3f4edd3307c2",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc445/abc445_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

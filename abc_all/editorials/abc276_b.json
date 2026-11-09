@@ -1,0 +1,22 @@
+{
+  "problem_id": "abc276_b",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc276/editorial/5159",
+      "text": "この問題の背景\n競技プログラミングでは、\nグラフ\nに関する問題が非常に多く出題されます。グラフの情報を管理するための代表的な手法に\n隣接行列\nと\n隣接リスト\nがあります。\n単純無向グラフにおける隣接行列とは、各成分が\n\\(0\\)\nまたは\n\\(1\\)\nである\n\\(N \\times N\\)\nの行列であり、頂点\n\\(u, v\\)\nを結ぶ辺が存在するならば\n\\(A_{u, v}\\)\nと\n\\(A_{v, u}\\)\nは\n\\(1\\)\nであり、存在しないならば\n\\(0\\)\nです。また、隣接リストとは、各頂点\n\\(u\\)\nについて、\n\\(u\\)\nと辺で結ばれている頂点のリスト\n\\(a_u = (a_{u, 1}, \\dots, a_{u, d_u})\\)\nを管理するというものです。なお、\n\\(u\\)\nと辺で結ばれた頂点の個数、すなわち\n\\(d_u\\)\nを頂点\n\\(u\\)\nの次数と呼びます。\nここまでお読みの方はお気づきかもしれませんが、この問題で出力することが要求されているのは、隣接リストそのものです。グラフに関する問題を解くための第一歩として、実装の基本を身につけるというのがこの問題の目的です。\n解法\nここでは、グラフ理論の用語を用いて、都市を「頂点」と、道路を「辺」と呼ぶことにします。\nC++ / Python それぞれについて説明します。\nC++\nC++ でリストを表現するためには\nstd::vector\nというデータ構造を用います。ある型\nT\nに対し、\nstd::vector<T>\nを用いると型が\nT\nであるようなデータの列を格納することができます。この問題では、各頂点に対し、その頂点と辺で結ばれた頂点の番号の列を管理するので、\nstd::vector<int>\nの列、すなわち\nstd::vector<std::vector<int>>\nを用いればよいことがわかります。\n空の\nstd::vector<int>\nが\n\\(n\\)\n個並んでいるような\nstd::vector<std::vector<int>>\nを用意するためには、次のようにします。\n\\(0 \\leq i \\lt n\\)\nに対し、\na[i]\nは\n\\(i\\)\n番目の\nstd::vector<int>\nを表します。要素を追加するためには、メンバ関数である\nstd::vector::push_back\nを用います。\n\\(i\\)\n番目のリストに整数\n\\(x\\)\nを追加するためには、\nのようにします。\nまた、\nstd::sort\n関数を用いると、要素を昇順に並べ替えることができます。\n実装例は次のようになります。\nPython\nPython でリストを表現するためには\nlist\nというデータ構造を用います。C++ とは異なり、Python のリストには型が異なる要素を格納することができます。例えば、同じリストに整数型のデータと文字列型のデータを格納することができます。\nn\n個の空のリストが並んだリストを宣言するには、次のようにします。\nPython の\nlist\nへの要素の追加は、\nappend\nメソッドを用います。\n\\(i\\)\n番目のリストに整数\n\\(x\\)\nを追加するためには、\nのようにします。\nまた、\nsort\nメソッドを用いて要素を昇順に並べ替えることができます。\n実装例は次のようになります。",
+      "codes": [
+        "vector<vector<int>> a(n);",
+        "a[i].push_back(x);",
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<vector<int>> a(n + 1);\n    for (int i = 0; i < m; ++i) {\n        int u, v;\n        cin >> u >> v;\n        a[u - 1].push_back(v);\n        a[v - 1].push_back(u);\n    }\n    for (int i = 0; i < n; ++i) {\n        sort(begin(a[i]), end(a[i]));\n        cout << size(a[i]);\n        for (int a : a[i]) {\n            cout << ' ' << a;\n        }\n        cout << '\\n';\n    }\n    return 0;\n}",
+        "a = [[] for _ in range(n)]",
+        "a[i].append(x)",
+        "n, m = map(int, input().split())\na = [[] for _ in range(n)]\n\nfor _ in range(m):\n  u, v = map(int, input().split())\n  a[u - 1].append(v);\n  a[v - 1].append(u);\n\nfor (i, v) in enumerate(a):\n  v.sort()\n  print(len(v), *v)"
+      ],
+      "text_sha256": "57713cd230b211f191f389abe75248d758351816166f011af3aa37b67e3495b8",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc276/abc276_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

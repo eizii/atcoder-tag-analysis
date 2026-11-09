@@ -1,0 +1,17 @@
+{
+  "problem_id": "abc218_f",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc218/editorial/2606",
+      "text": "元のグラフで頂点\n\\(1\\)\nから頂点\n\\(N\\)\nにたどり着ける場合を考えます。\nまず、元のグラフでの頂点\n\\(1\\)\nから頂点\n\\(N\\)\nまでの最短経路を\n\\(1\\)\nつ求めます。\nこの最短経路に含まれない辺については、通行止めになったとしても影響がありません。\nまた、最短経路に含まれる辺は高々\n\\(N-1\\)\n本です。よって、最短経路に含まれる辺が通行止めになった場合には、愚直に\n\\(O(N+M)\\)\nで最短距離を求めても全体としては\n\\(O(N(N+M))\\)\nで十分間に合います。\n元のグラフで頂点\n\\(1\\)\nから頂点\n\\(N\\)\nにたどり着けない場合の例外処理に注意してください。\n実装例 (C++)",
+      "codes": [
+        "#include <bits/stdc++.h>\nusing namespace std;\n\nint main(){\n    int n, m; cin >> n >> m;\n    vector<vector<int>> G(n, vector<int>(n, -1));\n    vector<pair<int,int>> edge(m);\n    for(int i = 0; i < m; i++){\n        int a, b; cin >> a >> b; a--; b--;\n        G[a][b] = i;\n        edge[i] = make_pair(a,b);\n    }\n    vector<int> dis(n,-1); dis[0] = 0;\n    vector<pair<int,int>> memo(n);\n    queue<int> que; que.push(0);\n    while(!que.empty()){\n        int i = que.front(); que.pop();\n        for(int j = 0; j < n; j++) if(dis[j] == -1 && G[i][j] != -1){\n            dis[j] = dis[i] + 1;\n            memo[j] = make_pair(i,G[i][j]);\n            que.push(j);\n        }\n    }\n    if(dis[n-1] == -1){\n        for(int i = 0; i < m; i++) cout << -1 << endl;\n        return 0;\n    }\n    vector<int> shortest_path;\n    int cur = n-1;\n    while(cur != 0){\n        shortest_path.push_back(memo[cur].second);\n        cur = memo[cur].first;\n    }\n    vector<int> ans(m, dis[n-1]);\n    for(int e : shortest_path){\n        G[edge[e].first][edge[e].second] = -1;\n        queue<int> que; que.push(0);\n        vector<int> dis(n, -1); dis[0] = 0;\n        while(!que.empty()){\n            int i = que.front(); que.pop();\n            for(int j = 0; j < n; j++) if(dis[j] == -1 && G[i][j] != -1){\n                dis[j] = dis[i] + 1;\n                que.push(j);\n            }\n        }\n        ans[e] = dis[n-1];\n        G[edge[e].first][edge[e].second] = e;\n    }\n    for(int x:ans)cout << x << endl;\n}"
+      ],
+      "text_sha256": "c52c658792e92e5aeff94655cf6dc99e8ae7883cdd8039074a231f661aacc566",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc218/abc218_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

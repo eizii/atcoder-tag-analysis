@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc225_h",
+  "title": "Social Distance 2",
+  "contests": [
+    {
+      "contest_id": "abc225",
+      "problem_index": "H"
+    }
+  ],
+  "difficulty": 3061,
+  "raw_difficulty": 3061,
+  "contest_id": "abc225",
+  "problem_index": "H",
+  "url": "https://atcoder.jp/contests/abc225/tasks/abc225_h",
+  "statement": "配点 : 600 点 問題文 1 列に椅子が N 個並んでおり、椅子 1 、椅子 2 、 \\ldots 、椅子 N と名前がついています。 1 つの椅子に 2 人以上が座ることはできません。 M 人が椅子に座りますが、座り方によって以下の式で与えられるスコアが定められます。 人が座っている椅子の番号を昇順にソートした数列を B=(B_1,B_2,\\ldots,B_M) として、 \\displaystyle \\prod_{i=1}^{M-1} (B_{i+1} - B_i) 人 i (1 \\leq i \\leq K) は既に椅子 A_i に座っています。 残りの M-K 人の座り方は {} _ {N-K} \\mathrm{P} _ {M-K} 通りありますが、座り方全てについてスコアの和を取るといくつになりますか？ 答えは非常に大きくなる可能性があるので、 998244353 で割った余りを求めてください。 制約 2 \\leq N \\leq 2 \\times 10^5 2 \\leq M \\leq N 0 \\leq K \\leq M 1 \\leq A_1 \\lt A_2 \\lt \\ldots \\lt A_K \\leq N 入力は全て整数 入力 入力は以下の形式で標準入力から与えられる。 N M K A_1 A_2 \\ldots A_K 出力 答えを出力せよ。 入力例 1 5 3 2\r\n1 3 出力例 1 7 人 3 が椅子 2 に座った時のスコアは、 (2-1) \\times (3-2)=1 \\times 1 = 1 です。 人 3 が椅子 4 に座った時のスコアは、 (3-1) \\times (4-3)=2 \\times 1 = 2 です。 人 3 が椅子 5 に座った時のスコアは、 (3-1) \\times (5-3)=2 \\times 2 = 4 です。 答えは 1+2+4=7 です。 入力例 2 6 6 1\r\n4 出力例 2 120 全ての座り方でスコアは 1 です。 座り方は {} _ {5} \\mathrm{P} _ {5} = 120 通りあるので、答えは 120 です。 入力例 3 99 10 3\r\n10 50 90 出力例 3 761621047",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1 列に椅子が N 個並んでおり、椅子 1 、椅子 2 、 \\ldots 、椅子 N と名前がついています。 1 つの椅子に 2 人以上が座ることはできません。 M 人が椅子に座りますが、座り方によって以下の式で与えられるスコアが定められます。 人が座っている椅子の番号を昇順にソートした数列を B=(B_1,B_2,\\ldots,B_M) として、 \\displaystyle \\prod_{i=1}^{M-1} (B_{i+1} - B_i) 人 i (1 \\leq i \\leq K) は既に椅子 A_i に座っています。 残りの M-K 人の座り方は {} _ {N-K} \\mathrm{P} _ {M-K} 通りありますが、座り方全てについてスコアの和を取るといくつになりますか？ 答えは非常に大きくなる可能性があるので、 998244353 で割った余りを求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 2 \\times 10^5 2 \\leq M \\leq N 0 \\leq K \\leq M 1 \\leq A_1 \\lt A_2 \\lt \\ldots \\lt A_K \\leq N 入力は全て整数"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M K A_1 A_2 \\ldots A_K"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 答えを出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 5 3 2\r\n1 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 7 人 3 が椅子 2 に座った時のスコアは、 (2-1) \\times (3-2)=1 \\times 1 = 1 です。 人 3 が椅子 4 に座った時のスコアは、 (3-1) \\times (4-3)=2 \\times 1 = 2 です。 人 3 が椅子 5 に座った時のスコアは、 (3-1) \\times (5-3)=2 \\times 2 = 4 です。 答えは 1+2+4=7 です。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 6 6 1\r\n4"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 120 全ての座り方でスコアは 1 です。 座り方は {} _ {5} \\mathrm{P} _ {5} = 120 通りあるので、答えは 120 です。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 99 10 3\r\n10 50 90"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 761621047"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc225/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:36:51.299631+00:00",
+  "statement_sha256": "de1b26ad4e9383a7d47e4a64f96b8192bc9334679efc22299e4931789a98fcaf",
+  "editorials": []
+}

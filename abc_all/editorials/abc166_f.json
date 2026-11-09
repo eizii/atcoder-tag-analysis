@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc166_f",
+  "editorials": [
+    {
+      "text": "F:Three Variables Game\n• A + B + C = 0 のとき\nN は1 以上なので、答えはNo です。\n• A + B + C = 1 のとき\nいつどの二つの変数を見ても少なくとも一方は零なので、それぞれのターンでの行動が一意に\n定まります。\n• A + B + C >= 2 のとき\n一回目のターンで足し引きする変数が両方零であれば答えはNo、そうでなければ答えはYes\nです。後者の場合、以下のような戦略をそれぞれのターンで取ることで足し引きする変数のい\nずれかが正である状態を保つことができます。\n– 足し引きする変数の片方が零でもう一方が正のとき、零である方に1 を足し、もう一方か\nら1 を引く。\n– A + B + C = 2 であり、足し引きする変数が両方1 であり、最後のターンでなく、次の\nターンの文字列と現在のターンの文字列が異なるとき、次のターンで足し引きする予定が\nある方の変数に1 を足し、もう一方から1 を引く。\n– それ以外のとき、適当に選択する\n",
+      "text_sha256": "393e602a58b4cedf18de3e0016636fb027851b284e91cd1b9d31d9928bc632a6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc166/abc166_f.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

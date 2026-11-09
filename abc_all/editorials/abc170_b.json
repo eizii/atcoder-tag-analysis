@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc170_b",
+  "editorials": [
+    {
+      "text": "B: Crain and Turtle\n(原案: yuma000, 準備・解説: evima)\n方針1\n発言の前半「庭の動物の総数はX 匹」が正しいと仮定すると、考えられる鶴と亀の数の組合せは\n「鶴0 匹、亀X 匹」「鶴1 匹、亀X −1 匹」. . .「鶴X 匹、亀0 匹」のX + 1 通りです。これらのそれ\nぞれにおける足の総数を計算し、その結果が一度でもY 本となれば答えはYes、一度もY 本とな\nらなければ答えはNo です。素直に実装するなら、以下のPython のコードのようにfor 文を使うこ\nとになるでしょう。\n1 X, Y = map(int, input().split())\n2 ans = 'No'\n3 for a in range(X + 1):\n4\nb = X - a\n5\nif 2 * a + 4 * b == Y:\n6\nans = 'Yes'\n7 print(ans)\n方針2\n答えがYes であることの必要十分条件は、Y が2X 以上4X 以下の偶数であることです。\n必要性の証明: a 匹の鶴とb 匹の亀について発言が正しいとすると、Y = 2a + 4b = 2(a + 2b) で\nあり、a, b が整数であることからY は偶数でなければなりません。また、a + b = X, 2a + 4b = Y か\nらa = (4X −Y)/2, b = (Y −2X)/2 が得られ、a, b が非負であることからY は2X 以上4X 以下でな\nければなりません。よって示されました。\n十分性の証明: Y が2X 以上4X 以下の偶数であれば、(4X −Y)/2, (Y −2X)/2 はともに非負整数\nとなり、発言が正しいような鶴と亀の数の組合せとして「鶴(4X −Y)/2 匹、亀(Y −2X)/2 匹」が\n存在します。よって示されました。\n",
+      "text_sha256": "903e835b0dea49e9715b3b8fbaf363fe1767695b0f4a7005c8b2fcdb535ca47e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc170/abc170_b.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

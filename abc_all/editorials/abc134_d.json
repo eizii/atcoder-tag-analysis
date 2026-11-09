@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc134_d",
+  "editorials": [
+    {
+      "text": "D: Preparing Boxes\n大きい数が書かれた箱からボールを入れるかを決めていくことにします。こうすると、整数i が書かれ\nた箱にボールを入れるか決めるとき、i 以外のi の倍数が書かれた箱については、すでにボールを入れるか\nが決まっています。それらの箱に入ったボールの総和の偶奇がai と異なる場合は箱にボールを入れて、そ\nうでないときはボールを入れないことにします。このようにしてボールを入れるかを決めていくと、与え\nられた条件をすべて満たすようにボールを入れることができます。このアルゴリズムを愚直に実装すると\nO( N\n1\n+\nN\n2\n+ ... + N\nN ) 程度の計算量がかかります。これは一見O(N 2) に見えますが、丁寧に解析すると\nO(NlogN) で抑えることができます。よって十分高速です。\n",
+      "text_sha256": "a0738e5e8ff2e59e0c8fd819377fe44ad2a01154ac63a7168209cba13e547b3e",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc134/abc134_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

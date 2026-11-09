@@ -1,0 +1,24 @@
+{
+  "problem_id": "abc239_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc239/editorial/3385",
+      "text": "クエリにおける\n\\(K_i\\)\nの最大値を\n\\(K\\)\nと表します。\n「\n\\(i\\)\nの部分木に含まれる頂点に書かれた整数のうち、大きい方から順に\n\\(K\\)\n個が入った配列」を\n\\(P_i\\)\nとします。\n予め全ての\n\\(i\\)\nに対して\n\\(P_i\\)\nを求めておくことができればクエリには\n\\(O(1)\\)\nで答えることができます。\n\\(P\\)\nを葉から順に求めることを考えます。ある頂点\n\\(i\\)\nの子たち\n\\(j_1,\\ldots,j_{m_i}\\)\nのすべてについて\n\\(P\\)\nが求まっていると仮定します。このとき、\n\\(P_{j_1},\\ldots,P_{j_{m_i}}\\)\nをまとめてソートし、大きい方\n\\(K\\)\n個の値からなる配列が\n\\(P_i\\)\nになります。したがって、\n\\(\\sum_i O(m_i K\\log (m_i K))=O(NK\\log(NK))\\)\n時間で全ての頂点に対して\n\\(P\\)\nを求めることができました。",
+      "codes": [],
+      "text_sha256": "17ea037060cc7f6f8ce152220341dd4517c43cfdffbe802c399bef54400e65e4",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc239/abc239_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc239/editorial/3438",
+      "text": "典型データ構造で解きます。\n根付き木の各部分木を\n\\(1\\)\nつの区間に対応させる方法を知っていますか？　オイラーツアーです。この問題は、長さ\n\\(N\\)\nの数列\n\\(X\\)\nに対して次のクエリを処理する問題に変形できます。\n\\(l\\)\n,\n\\(r\\)\n,\n\\(k\\)\nが与えられます。\n\\((X _ l , X _ {l+1} , \\ldots , X _ {r-1} )\\)\nのうち\n\\(k\\)\n番目に大きい値を出力してください。\nこれは Library Checker の “Range Kth Smallest” (\nhttps://judge.yosupo.jp/problem/range_kth_smallest\n) そのものです。座標圧縮と Wavelet Matrix のクエリ\n\\(\\text{quantile}\\)\nを用いて計算量\n\\(O( (Q+N) \\log N)\\)\nを達成できます。\n解答例 (C++ (GCC 9.2.1) , 122 ms)\n（ main 関数はかなり下にあります）",
+      "codes": [],
+      "text_sha256": "69bc19a3f05f4999a09eb5e877baa2ed5483017c805d678c8871165193c44144",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc239/abc239_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

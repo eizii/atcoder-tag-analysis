@@ -1,0 +1,64 @@
+{
+  "problem_id": "abc291_e",
+  "title": "Find Permutation",
+  "contests": [
+    {
+      "contest_id": "abc291",
+      "problem_index": "E"
+    }
+  ],
+  "difficulty": 1069,
+  "raw_difficulty": 1069,
+  "contest_id": "abc291",
+  "problem_index": "E",
+  "url": "https://atcoder.jp/contests/abc291/tasks/abc291_e",
+  "statement": "配点 : 500 点 問題文 1,\\ldots,N の並び替えである長さ N の数列 A=(A_1,\\ldots,A_N) があります。 あなたは A を知りませんが、 M 個の整数の組 (X_i,Y_i) について、 A_{X_i}<A_{Y_i} が成り立つことを知っています。 A を一意に特定できるかどうか判定し、できるなら A を求めてください。 制約 2 \\leq N \\leq 2\\times 10^5 1 \\leq M \\leq 2\\times 10^5 1\\leq X_i,Y_i \\leq N 入力は全て整数である 入力に矛盾しない A が存在する 入力 入力は以下の形式で標準入力から与えられる。 N M X_1 Y_1 \\vdots X_M Y_M 出力 A を一意に特定できるとき、1行目に Yes と出力し、2行目に A_1,\\ldots,A_N をこの順に空白区切りで出力せよ。 A を一意に特定できないとき、 No とのみ出力せよ。 入力例 1 3 2\n3 1\n2 3 出力例 1 Yes\n3 1 2 A=(3,1,2) であると一意に特定できます。 入力例 2 3 2\n3 1\n3 2 出力例 2 No A として (2,3,1),(3,2,1) の 2 通りが考えられます。 入力例 3 4 6\n1 2\n1 2\n2 3\n2 3\n3 4\n3 4 出力例 3 Yes\n1 2 3 4",
+  "sections": [
+    {
+      "heading": "問題文",
+      "text": "問題文 1,\\ldots,N の並び替えである長さ N の数列 A=(A_1,\\ldots,A_N) があります。 あなたは A を知りませんが、 M 個の整数の組 (X_i,Y_i) について、 A_{X_i}<A_{Y_i} が成り立つことを知っています。 A を一意に特定できるかどうか判定し、できるなら A を求めてください。"
+    },
+    {
+      "heading": "制約",
+      "text": "制約 2 \\leq N \\leq 2\\times 10^5 1 \\leq M \\leq 2\\times 10^5 1\\leq X_i,Y_i \\leq N 入力は全て整数である 入力に矛盾しない A が存在する"
+    },
+    {
+      "heading": "入力",
+      "text": "入力 入力は以下の形式で標準入力から与えられる。 N M X_1 Y_1 \\vdots X_M Y_M"
+    },
+    {
+      "heading": "出力",
+      "text": "出力 A を一意に特定できるとき、1行目に Yes と出力し、2行目に A_1,\\ldots,A_N をこの順に空白区切りで出力せよ。 A を一意に特定できないとき、 No とのみ出力せよ。"
+    },
+    {
+      "heading": "入力例 1",
+      "text": "入力例 1 3 2\n3 1\n2 3"
+    },
+    {
+      "heading": "出力例 1",
+      "text": "出力例 1 Yes\n3 1 2 A=(3,1,2) であると一意に特定できます。"
+    },
+    {
+      "heading": "入力例 2",
+      "text": "入力例 2 3 2\n3 1\n3 2"
+    },
+    {
+      "heading": "出力例 2",
+      "text": "出力例 2 No A として (2,3,1),(3,2,1) の 2 通りが考えられます。"
+    },
+    {
+      "heading": "入力例 3",
+      "text": "入力例 3 4 6\n1 2\n1 2\n2 3\n2 3\n3 4\n3 4"
+    },
+    {
+      "heading": "出力例 3",
+      "text": "出力例 3 Yes\n1 2 3 4"
+    }
+  ],
+  "language": "ja",
+  "statement_source": "official_tasks_print",
+  "source_url": "https://atcoder.jp/contests/abc291/tasks_print?lang=ja",
+  "retrieved_at": "2026-11-05T10:38:14.340218+00:00",
+  "statement_sha256": "9970ba2448cf45773be7ac5025b0002e3c6d6998f21fc0d903ade0d38ec661f1",
+  "editorials": []
+}

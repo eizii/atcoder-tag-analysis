@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc380_g",
+  "source_url": "https://atcoder.jp/contests/abc380/tasks/abc380_g?lang=ja",
+  "statement": "問題文\n(1,2,\\dots,N)\nの順列\nP\nと整数\nK\nが与えられます。\n順列\nP\nに以下の操作を行った後の転倒数の期待値を\n\\text{mod} \\ 998244353\nで求めてください。\nまず、整数\ni\nを\n1\n以上\nN-K+1\n以下の整数の中から一様ランダムに選択する。\nその後、\nP_i,P_{i+1},\\dots,P_{i+K-1}\nを一様ランダムにシャッフルする。\n転倒数とは?\n数列\n(A_1,A_2,\\dots,A_N)\nの転倒数とは、\n1 \\le i < j \\le N\nかつ\nA_i > A_j\nを満たす整数組\n(i,j)\nの個数を指します。\n期待値\n\\text{mod} \\ 998244353\nとは?\n求める期待値は必ず有理数になることが証明できます。 また、この問題の制約のもとでは、その値を既約分数\n\\frac{P}{Q}\nで表した時、\nQ \\not \\equiv 0 \\pmod{998244353}\nとなることも証明できます。 よって、\nR \\times Q \\equiv P \\pmod{998244353}, 0 \\leq R < 998244353\nを満たす整数\nR\nが一意に定まります。 この\nR\nを答えてください。\n制約\n入力は全て整数\n1 \\le K \\le N \\le 2 \\times 10^5\nP\nは\n(1,2,\\dots,N)\nの順列",
+  "html_sha256": "51b53768423dd60bd8c830cf35c8ae14f3493304e461b6bbb83ae963b15d3c37",
+  "extractor": "section_headings_v1"
+}

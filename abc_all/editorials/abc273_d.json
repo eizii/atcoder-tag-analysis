@@ -1,0 +1,26 @@
+{
+  "problem_id": "abc273_d",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc273/editorial/5022",
+      "text": "まず、\n各\n\\(i = 1, 2, \\ldots, H\\)\nについて「\n\\(i\\)\n行目にあるすべての壁の位置を列の昇順に並べた配列\n\\(A_i\\)\n」\n各\n\\(j = 1, 2, \\ldots, W\\)\nについて「\n\\(j\\)\n列目にあるすべての壁の位置を行の昇順に並べた配列\n\\(B_j\\)\n」\nを作ります。\nただし、\n\\(H, W\\)\nは非常に大きくなりうるため、すべての行\n\\(i\\)\nと列\n\\(j\\)\nについて配列\n\\(A_i\\)\nと配列\n\\(B_j\\)\nを陽に作ると計算量が大きくなってしまいます。\nそこで、連想配列を用いるなどの方法によって、壁を\n\\(1\\)\n個以上含む行\n\\(i\\)\nや列\n\\(j\\)\nについてのみ、配列\n\\(A_i\\)\nや配列\n\\(B_j\\)\nを陽に構築します。\n各指示では、高橋君は\n\\(l_i\\)\nマス進み終わるか、壁・グリッドの端にぶつかるまで移動を続けます。\nよって、指示を実行した後の最終的な高橋君の位置を求めるには、\n\\(d_i\\)\nの方向にある最も近い壁・グリッドの端の位置が分かれば良いです。\nこれは、適切な\n\\(A_i\\)\nや\n\\(B_j\\)\n上で二分探索をすることで\n\\(\\mathrm{O}(\\log N)\\)\n時間で求めることができます。\n例えば、高橋君の現在位置がマス\n\\((R, C)\\)\nのときに左向きに移動する指示を実行することを考えます。\nこのときの進行方向にある最も近い壁の位置（列番号）は\n\\(A_R\\)\n上で\n\\(C\\)\n以下の最大の要素です。ただし、\n\\(C\\)\n以下の要素が存在しないときは、進行方向においてグリッドの端までの間に壁はないとわかります。\n\\(A_R\\)\nは事前に昇順にソートしてあるので、\n\\(C\\)\n以下の最大の要素（あるいはそれが存在しないこと）は二分探索で求めることができます。\n以上より、各指示を\n\\(\\mathrm{O}(\\log N)\\)\n時間で実行できるので、指示全体で\n\\(\\mathrm{O}(Q \\log N)\\)\n時間で実行できます。\n\\(A_i\\)\nや\n\\(B_j\\)\nを作る時間（各要素を行・列の昇順にソートする時間など）を加味しても、本問題を\n\\(\\mathrm{O}((N+Q)\\log N)\\)\n時間で解くことができます。\n以下に、C++ 言語による本問題の正解例を記載します。",
+      "codes": [
+        "#include <iostream>\n#include <map>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint h, w, n, r, c, Q;\nmap<int, vector<int>> amp, bmp;\n\nint main(void)\n{\n  cin >> h >> w >> r >> c >> n;\n  for(int i = 1; i <= n; i++){\n    int rr, cc;\n    cin >> rr >> cc;\n    amp[rr].push_back(cc), bmp[cc].push_back(rr);\n  }\n  for(auto &p : amp) sort(p.second.begin(), p.second.end());\n  for(auto &p : bmp) sort(p.second.begin(), p.second.end());\n  \n  cin >> Q;\n  char d; int l;\n  for(int i = 1; i <= Q; i++){\n    cin >> d >> l;\n    if(d == 'L'){\n      auto it = amp.find(r); int lb = 0;\n      if(it != amp.end()){\n        vector<int> &vec = it->second;\n        auto it2 = lower_bound(vec.begin(), vec.end(), c);\n        if(it2 != vec.begin()) it2--, lb = *it2;\n      }\n      c = max(c-l, lb+1);\n    }\n    if(d == 'U'){\n      auto it = bmp.find(c); int lb = 0;\n      if(it != bmp.end()){\n        vector<int> &vec = it->second;\n        auto it2 = lower_bound(vec.begin(), vec.end(), r);\n        if(it2 != vec.begin()) it2--, lb = *it2;\n      }\n      r = max(r-l, lb+1);\n    }\n    if(d == 'R'){\n      auto it = amp.find(r); int ub = w+1;\n      if(it != amp.end()){\n        vector<int> &vec = it->second;\n        auto it2 = upper_bound(vec.begin(), vec.end(), c);\n        if(it2 != vec.end()) ub = *it2;\n      }\n      c = min(c+l, ub-1);\n    }\n    if(d == 'D'){\n      auto it = bmp.find(c); int ub = h+1;\n      if(it != bmp.end()){\n        vector<int> &vec = it->second;\n        auto it2 = upper_bound(vec.begin(), vec.end(), r);\n        if(it2 != vec.end()) ub = *it2;\n      }\n      r = min(r+l, ub-1);\n    }\n    cout << r << \" \" << c << \"\\n\";\n  }\n  \n  return 0;\n}"
+      ],
+      "text_sha256": "a5ffb5c51d9784199f56824f6b9917feaec349d9ed43b090a22a8551011419f6",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc273/abc273_d.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc273/editorial/5061",
+      "text": "以下，文字定義などは\n公式解説\nに従うものとします．\n本問題は，実装量が多くなりがちで大変です．ここでは，実装の際に手間を少し減らせる方法を紹介します．\n公式解説\nにもあるように，壁にぶつかる座標を求める際には，\\(A_i\\) や \\(B_j\\) に対して二分探索を用います．二分探索をするライブラリとしては，例えばC++だと\nlower_bound\nなどがありますが，そのようなライブラリを用いて今回の問題のような実装を行うと，範囲の端の要素にアクセスした場合などに範囲外参照を起こす可能性があります．それを除外するためには， グリッドの端に到着した場合は別途場合分けを行う必要があるのですが，実装がやや面倒であり，混乱しやすいです．\nそこで，\\(A_i\\) や \\(B_j\\) に次のような小細工を入れることにしましょう．\n陽に持っている配列 \\(A_i\\) すべてに対して，列番号として \\(0\\) と \\(W+1\\) を追加する．\n陽に持っている配列 \\(B_j\\) すべてに対して，行番号として \\(0\\) と \\(H+1\\) を追加する．\nこの処理を行うことによって，グリッドの端の処理を壁の処理と全く同じように行うことができ，実装の場合分けを減らすことができるため，楽に書けることもあります．\nなお，このように，配列の端に値を追加することで実装を楽にする手法は，しばしば\n番兵\nと呼ばれます．\nこの方法で，最悪計算量のオーダーは変わりませんが，配列に追加した要素の数が多くなったぶん，定数倍が悪くなっていることには注意してください．\n実装例（C++）",
+      "codes": [],
+      "text_sha256": "899592fa338260aa2ed2d5381081e4782587812b59a40b97945970a1ff0d3e34",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc273/abc273_d.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

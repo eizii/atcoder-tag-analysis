@@ -1,0 +1,13 @@
+{
+  "problem_id": "abc103_c",
+  "editorials": [
+    {
+      "text": "C: Modulo Summation\nm = a1 × a2 × · · · × aN とすると、各i についてm mod ai = 0 なので、(m −1) mod ai = ai −1 です。\nしたがってf(m −1) = (a1 −1) + (a2 −1) + · · · + (an −1) となり、各項が最大値を取っているのでこれが\nf の最大値です。実装では、m は非常に大きいため、m を計算せずにf(m −1) を直接計算すればよいです。\nよって、O(n) でこの問題が解けました。\n",
+      "text_sha256": "8838857a0f5a2bf3fb70a48d0297455f60a78d18311415f0d91a61524b266381",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc103/abc103_c.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,35 @@
+{
+  "problem_id": "abc425_e",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc425/editorial/13919",
+      "text": "答えは多項係数\n\\(\\dfrac{(C_1+C_2+\\ldots+C_N)!}{C_1!C_2!\\dots C_N!}\\)\nです．多項係数は二項係数の積としてあらわせます：\n\\[\\dfrac{(C_1+C_2+\\ldots+C_N)!}{C_1!C_2!\\dots C_N!}=\\binom{C_1}{C_1}\\binom{C_1+C_2}{C_2}\\dots \\binom{C_1+C_2+\\dots +C_N}{C_N}\\]\n二項係数を（素数とは限らない）\n\\(M\\)\nで割った余りの求め方はいくつかありますが，今回は\n\\(\\sum C\\leq 5000\\)\nという制約があるため，二項係数に関する以下の関係式を用いて\n\\(\\binom{n}{k}\\ (0\\leq k\\leq n\\leq 5000)\\)\nを簡単に前計算することができます．\n\\[\\binom{n}{k}=\\binom{n-1}{k-1}+\\binom{n-1}{k}\\]\nこれにより，各テストケースを\n\\(O(N)\\)\nで解くことができます．",
+      "codes": [
+        "T, mod = map(int, input().split())\n\nK = 5010\n\nbinom = [[0] * K for i in range(K)]\nbinom[0][0] = 1\n\nfor n in range(1, K):\n    binom[n][0] = 1\n    for k in range(1, n + 1):\n        binom[n][k] = (binom[n - 1][k - 1] + binom[n - 1][k]) % mod\n\nfor _ in range(T):\n    N = int(input())\n    C = list(map(int, input().split()))\n    ans = 1\n    s = 0\n    for i in C:\n        s += i\n        ans *= binom[s][i]\n        ans %= mod\n    print(ans % mod)"
+      ],
+      "text_sha256": "0a460a6cbfba5af436c4f90b3d54b347494c236840af7ad40151dd677c00a6f5",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc425/abc425_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc425/editorial/14089",
+      "text": "前計算\n\\(O(\\sqrt{M} + \\max (\\sum_i C_i) \\log M)\\)\n、テストケースあたり\n\\(O(N \\log M+\\log^2 M)\\)\nの解法があります。\nstep.1 問題の整理\n公式解説のように、\n\\[\\frac{(C_1+C_2+\\cdots+C_N)!}{C_1! C_2! \\cdots C_N!}\\]\nを計算します。問題になっているのは、\n\\(C_i!\\)\nと\n\\(M\\)\nが互いに素でないときに、\n\\(C_i!\\)\nの\n\\(M\\)\nを法とした逆元が存在しないことにより、 mod\n\\(M\\)\nでの割り算ができないことです。\n\\(M=998244353\\)\nなどでは簡単に解ける問題が、mod が任意であることで難しくなっています。\nstep.2 中国剰余定理の適用\n\\(M\\)\nを素因数分解し\n\\(M = p_1^{\\alpha_1} \\times p_2^{\\alpha_2} \\times \\cdots \\times p_k^{\\alpha_k}\\)\n（\n\\(p_i\\)\nは素数、\n\\(\\alpha_i \\ge 1\\)\nは整数）とします。\n\\(M_i = p_i^{\\alpha_i}\\)\n\\((1 \\le i \\le k)\\)\nとします。答えを各\n\\(M_i\\)\nで割った余りがすべて分かれば、 Garner のアルゴリズムを用いて\n\\(M\\)\nで割った余りを復元することができます。\nよって、\n\\(M=p^\\alpha\\)\nの問題が解ければ、この問題を解くことができます。\nstep.3\n\\(M = p^{\\alpha}\\)\n\\(p\\)\nを素数、\n\\(\\alpha \\ge 1\\)\nを整数として\n\\(M=p^\\alpha\\)\nとします。\n\\[G = \\frac{(C_1+C_2+\\cdots+C_N)!}{C_1! C_2! \\cdots C_N!}\\]\nを計算します。\n\\(K\\)\nを正整数として、\n\\(K!\\)\nを\n\\(p\\)\nの累乗とその他に分けることを考えます。すなわち、非負整数\n\\(r(K)\\)\nと正整数\n\\(f(K)\\)\nを用いて\n\\[K! = p^{r(K)} \\times f(K)\\]\nとします。ここで、\n\\(f(K)\\)\nは\n\\(p\\)\nで割り切れないとします。そうすると、\n\\(f(K)\\)\nと\n\\(M=p^{\\alpha}\\)\nとの最大公約数が\n\\(1\\)\nであるので、\n\\(f(K)\\)\nの逆元が mod\n\\(M\\)\nで存在します。これを利用します。\n\\(G=\\frac{(C_1+C_2+\\cdots+C_N)!}{C_1! C_2! \\cdots C_N!}\\)\nとおくと、\n\\[G = p^{r(C_1+C_2+\\cdots+C_N)-r(C_1)-r(C_2)-\\cdots-r(C_N)}\\\\\n\\times f(C_1+C_2+\\cdots+C_N)\\\\\n\\times f(C_1)^{-1} \\times f(C_2)^{-1} \\times \\cdots \\times f(C_N)^{-1}\\]\nと表されます。よって、\n\\(r(k)\\)\nと\n\\(f(k), f(k)^{-1} \\bmod M\\)\nをそれぞれ前計算することにより、\n\\(G\\)\nを\n\\(O(N)\\)\n時間で計算することができます。\nここで、\n\\(G\\)\nは正整数であるので、\n\\(r(C_1+C_2+\\cdots+C_N)-r(C_1)-r(C_2)-\\cdots-r(C_N) \\ge 0\\)\nであることは保証されます。\nstep.4 計算量評価\n\\(M\\)\nの素因数の種類数\n\\(k\\)\nが\n\\(O(\\log M)\\)\n個で抑えられます。これを利用します。\nまず、\n\\(M\\)\nを素因数分解するのでそれを行うだけの時間計算量がかかります。\n各\n\\(M_i = p_i^{\\alpha_i}\\)\nにおける計算量は、\n前計算：mod 998244353 での階乗前計算のように行うと、合計\n\\(O(\\max (\\sum_i C_i))\\)\n時間\nクエリあたり：\n\\(G\\)\nの計算に合計\n\\(O(N)\\)\nとなり、\n\\(\\log M\\)\nを掛けて前計算\n\\(O(\\max (\\sum_i C_i) \\log M)\\)\n時間、 クエリあたり\n\\(O(N \\log M)\\)\n時間になります。\n最後に、クエリの最後に Garner のアルゴリズムで答えを復元することが必要であり、これは\n\\(O(\\log^2 M)\\)\n時間かかります。よってクエリごとに合計\n\\(O(N \\log M + \\log^2 M)\\)\n時間かかります。\n実装例\nC++ (161 ms)",
+      "codes": [],
+      "text_sha256": "1f4c75a64222ddd871fadc90dfd0e34b05255c17275bc1bde755cc1a22dc49db",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc425/abc425_e.json",
+      "official_status": "not_recorded"
+    },
+    {
+      "url": "https://atcoder.jp/contests/abc425/editorial/14090",
+      "text": "答えである\n\\(\\displaystyle \\frac{(C_1 + C_2 + \\cdots + C_N)!}{C_1!C_2!\\cdots C_N!}\\)\nの計算方法について考えます．\nAtCoder でよくある問題の形式では，\n\\(M\\)\nは非常に大きな素数であるため，\n\\(1, 2, 3, \\dots, (C_1 + C_2 + \\cdots + C_N)\\)\nがいずれも\n\\(M\\)\nと互いに素となり，階乗前計算によって\n\\(O(N)\\)\n時間で解くことができます．\nこの問題では互いに素となるとは限りませんが，\n\\(M\\)\nと互いに素である部分とそうでない部分の計算に分けることで，同様に解くことができます．\nまず，\n\\(M\\)\nの素因数分解を計算し，\n\\(M = p_1^{c_1}  \\cdots p_k^{c_k}\\)\nとします．\n続いて，答えのうち，\n\\(M\\)\nと互いに素でない部分を計算します．すなわち，各\n\\(p_i\\)\nについて，\n「\n\\(\\displaystyle \\frac{(C_1 + C_2 + \\cdots + C_N)!}{C_1!C_2!\\cdots C_N!}\\)\nの素因数分解に含まれる\n\\(p_i\\)\nの個数」を求めます．\nこれは，「各階乗に含まれる\n\\(p_i\\)\nの個数」を前計算しておくことにより，各\n\\(p_i\\)\nについて\n\\(O(N)\\)\n時間で求めることができます．\nその後，答えのうち，\n\\(M\\)\nと互いに素な部分を計算します．すなわち，「\n\\(\\displaystyle \\frac{(C_1 + C_2 + \\cdots + C_N)!}{C_1!C_2!\\cdots C_N!}\\)\nを各\n\\(p_i\\)\nで割れるだけ割った後の値」\n\\(\\text{mod }M\\)\nを計算します．\nこれは，「各階乗を各\n\\(p_i\\)\nで割れるだけ割った後の値」\n\\(\\text{mod }M\\)\nを前計算しておくことにより，\n\\(O(N)\\)\n時間で求めることができます．\n全体で\n\\(O(k \\cdot (\\sum N + \\max(\\sum C)) + \\sqrt{M})\\)\n時間となります．\n(この問題の制約下で，\n\\(k ≤ 9\\)\nが成り立ちます．)\n実装例 (C++)",
+      "codes": [],
+      "text_sha256": "f03ba98a6901dba0d4cae1714ce7088ccd7e7616aad74a2a34e50cdae0e77885",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc425/abc425_e.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

@@ -1,0 +1,7 @@
+{
+  "problem_id": "abc339_g",
+  "source_url": "https://atcoder.jp/contests/abc339/tasks/abc339_g?lang=ja",
+  "statement": "問題文\n長さ\nN\nの数列\nA=(A_1,A_2,\\dots,A_N)\nが与えられます。\n以下の\nQ\n個のクエリに答えてください。このうち\ni\n個目のクエリは以下の通りです。\nA_{L_i},A_{L_i+1},\\dots,A_{R_i}\nのうち\nX_i\n以下であるものの総和を求めよ。\n但し、あなたはこのクエリにオンラインで答える必要があります。\n「オンラインでクエリに答える」とは、あるクエリへの回答を行った後で次のクエリが判明することを指します。\nこのため、\ni\n個目のクエリの代わりに、このクエリを暗号化した入力\n\\alpha_i, \\beta_i, \\gamma_i\nが与えられます。\r\n以下の手順で本来の\ni\n個目のクエリを復元して回答してください。\nB_0=0\n、\nB_i =\n(\ni\n個目のクエリの答え ) とする。\nこのとき、クエリの復号は以下のようにして行うことができる。\nL_i = \\alpha_i \\oplus B_{i-1}\nR_i = \\beta_i \\oplus B_{i-1}\nX_i = \\gamma_i \\oplus B_{i-1}\n但し、\nx \\oplus y\nは\nx\nと\ny\nとのビット単位 XOR を表します。\nビット単位 XOR とは\n非負整数\nA, B\nのビット単位 XOR 、\nA \\oplus B\nは、以下のように定義されます。\nA \\oplus B\nを二進表記した際の\n2^k\n(\nk \\geq 0\n) の位の数は、\nA, B\nを二進表記した際の\n2^k\nの位の数のうち一方のみが\n1\nであれば\n1\n、そうでなければ\n0\nである。\n例えば、\n3 \\oplus 5 = 6\nとなります (二進表記すると:\n011 \\oplus 101 = 110\n)。\n制約\n入力は全て整数\n1 \\le N \\le 2 \\times 10^5\n0 \\le A_i \\le 10^9\n1 \\le Q \\le 2 \\times 10^5\n暗号化されたクエリに対して、以下が成立する。\n0 \\le \\alpha_i, \\beta_i, \\gamma_i \\le 10^{18}\n復号した後のクエリに対して、以下が成立する。\n1 \\le L_i \\le R_i \\le N\n0 \\le X_i \\le 10^9",
+  "html_sha256": "7016634301a639802f1ebf0a978d7389da393c150569aea6295f58a5d968aec0",
+  "extractor": "section_headings_v1"
+}

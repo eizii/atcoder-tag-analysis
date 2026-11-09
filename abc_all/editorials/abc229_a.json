@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc229_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc229/editorial/2948",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは「practice contest」(\nhttps://atcoder.jp/contests/practice/\n) の問題A「Welcome to AtCoder」をお試しください。言語ごとに解答例が掲載されています。\nまた、プログラミングコンテストの問題に慣れていない方は、「AtCoder Beginners Selection」(\nhttps://atcoder.jp/contests/abs\n) の問題をいくつか試すことをおすすめします。\n実は、答えが\nNo\nとなるパターンは以下の\n\\(2\\)\n通りしかありません。\nよって、文字列を\n\\(2\\)\nつ受け取って、文字列の比較判定を用いて if 文などで条件分岐を実装すれば、この問題に正解することができます。\n実装例(C++)",
+      "codes": [
+        ".#  #.\n#.  .#",
+        "#include<bits/stdc++.h>\nusing namespace std;\nint main(){\n  string s1,s2;\n  cin >> s1 >> s2;\n  if(s1==\"#.\" && s2==\".#\"){cout << \"No\\n\";}\n  else if(s1==\".#\" && s2==\"#.\"){cout << \"No\\n\";}\n  else{cout << \"Yes\\n\";}\n  return 0;\n}"
+      ],
+      "text_sha256": "a773ce555a8b2a53ef78c7bc07a346075c373d7ba4d20e40dbfa2bdd332dda80",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc229/abc229_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}

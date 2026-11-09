@@ -1,0 +1,18 @@
+{
+  "problem_id": "abc218_a",
+  "editorials": [
+    {
+      "url": "https://atcoder.jp/contests/abc218/editorial/2579",
+      "text": "プログラミングの学習を始めたばかりで何から手をつけるべきかわからない方は、まずは\npractice contest\nの問題A「\nWelcome to AtCoder\n」をお試しください。言語ごとに解答例が掲載されています。\nこの問題は\n\\(S\\)\nの\n\\(N\\)\n文字目に対応する文字列を出力すればよいです。\n多くのプログラミング言語では文字列や配列の添え字は\n\\(0\\)\nから始まるため、前から\n\\(N\\)\n番目の値を得るためには添え字として\n\\(N-1\\)\nを使わなければならないことに注意してください。\n実装例(C)\n実装例(Python)",
+      "codes": [
+        "#include<stdio.h>\nint main(){\n\tint n;\n\tchar s[8];\n\tscanf(\"%d %s\",&n,s);\n\tif(s[n-1]=='o')puts(\"Yes\");\n\telse puts(\"No\");\n}",
+        "N = int(input())\nS = input()\nif S[N-1]==\"o\":\n\tprint(\"Yes\")\nelse:\n\tprint(\"No\")"
+      ],
+      "text_sha256": "a9cfbd58e0293e7c75d737925e6afa52c1baa3f6279a5b497443d5cce2a42d02",
+      "source": "existing_team_cache",
+      "source_path": "repository_update/ac_analyze_test/data/abc218/abc218_a.json",
+      "official_status": "not_recorded"
+    }
+  ],
+  "status": "available"
+}
