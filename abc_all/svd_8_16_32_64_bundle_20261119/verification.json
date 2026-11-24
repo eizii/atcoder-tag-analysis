@@ -1,0 +1,455 @@
+{
+  "passed": true,
+  "source_files_unchanged": true,
+  "source_sha256": {
+    "svd_experiment_20261112\\comparison.png": "82193ee2ef65bcf64ad0841cd433591437d896b859ce0a94bbd2fcb46296f74b",
+    "svd_experiment_20261112\\comparison.svg": "22762fae81621ae5dd8b2431478b2da74d43bb6fb529f74a5358f965ca2a263b",
+    "svd_experiment_20261112\\dimension_sensitivity.csv": "c1bcdc270b6376296dbc6d5212423f2cf37b2f05acf2e64cd6a384b1e65bb861",
+    "svd_experiment_20261112\\example_pairs.csv": "080eb95053c2a93d1989bc0bdc5122e197025ce1d35a364ae0f3ea5932262972",
+    "svd_experiment_20261112\\layout_verification.json": "eda1baeb213438af8d0a233a5bd2eeb28762f712fbe701f54cabedde43cbec60",
+    "svd_experiment_20261112\\parameter_sweep.csv": "57091f638d7631eec093d2bf5f2e24a742b47bea5c913dd7d2f247db83e4bb0f",
+    "svd_experiment_20261112\\README.md": "1019917b39bbbf98da9d2679bdcfa5efecaf5b5fe69949323e55b926f673e29a",
+    "svd_experiment_20261112\\review_pairs.csv": "676838bf23b19bd177b10efe5217034c8535e9948b66aae575c820dfb1c60c40",
+    "svd_experiment_20261112\\subsample_stability.csv": "e6936569c6459d0707f3fca378f7c986de934e5ad8bb0e0e310310e6fc7dfd37",
+    "svd_experiment_20261112\\summary.json": "8d15eb476198634c49662624623415c42062c3d77ecb7192ef1da152a70222a3",
+    "svd_experiment_20261112\\svd_results_20261112.zip": "f76698b6d6a4a35a1b7d2d54f4e5bcac654281bfd93d25bbdb3b43910d080bba",
+    "svd_experiment_20261112\\verification.json": "c802d343bde23110a57b6796715be4698b4e6e0f7bdd3a81b2aad027eebf5425",
+    "svd_experiment_20261112\\all_difficulties\\excluded_tags.csv": "01d789643a14884f59517f3e48abc267fbbe5de3a0b02b29aae2f72b97b4f717",
+    "svd_experiment_20261112\\all_difficulties\\matched_cluster_counts.csv": "c39cf89080bd835e000be45c5ebecf6f666eac326a22029c57878522dec6c7b1",
+    "svd_experiment_20261112\\all_difficulties\\nearest_neighbors.csv": "0b60b4d240c31422db4930e745e652dae25b8a0a44325e1ec94b48fb291352d6",
+    "svd_experiment_20261112\\all_difficulties\\newly_close_without_overlap.csv": "36f8a156b4ce66016f7fa741155c96e2587cf9899f3a7b9bf82d1a142aa52477",
+    "svd_experiment_20261112\\all_difficulties\\pair_distances.csv": "74ff8ffb98f3dc9d209ad719a3857000cb332fab3889b7edf1891500798e30b9",
+    "svd_experiment_20261112\\all_difficulties\\singular_values.csv": "0fc8c25cc50e93f9820a39adc83a30b79aac9aeaf58ba855992afc5ae2cd19e8",
+    "svd_experiment_20261112\\all_difficulties\\jaccard\\cut_sweep.csv": "50e1795990bfc9bfc8b10fb74d1476de05df96fa34a230ce9a2b65a2ae357137",
+    "svd_experiment_20261112\\all_difficulties\\jaccard\\linkage.csv": "05586189493a5a77776e5bccd1e3141650ac7ca344a6a3dbe577cee099ae20ea",
+    "svd_experiment_20261112\\all_difficulties\\raw_cosine\\cut_sweep.csv": "fe7c42b92cfd191df168a3b97f64adacbbdabf9d0c0ed9339afd73929a02b864",
+    "svd_experiment_20261112\\all_difficulties\\raw_cosine\\linkage.csv": "5f1ef31daf9363fc45c78756ad9589ef7de6fdf0c53cd062305a01ff2844e6f7",
+    "svd_experiment_20261112\\all_difficulties\\svd_16\\cut_sweep.csv": "53a3826ebae1946b283cb347d390f2351549cedaa5087ac740e8909eeb80b1bb",
+    "svd_experiment_20261112\\all_difficulties\\svd_16\\linkage.csv": "9501998b95817aad993b8fe7366679ef0fab0926f549f2a0d1df4b49fbf3a7f6",
+    "svd_experiment_20261112\\all_difficulties\\svd_16\\tag_vectors.csv": "fde8781e93f6a372d953489584d3744ea16ea9f67b3774d1bfcb093210c6a2d3",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\clusters_cut_0.7.json": "64b42120fbbb6a42de1fc6aee5b4abe921abc05ba750bb6cfe4821e02404cf91",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\clusters_cut_0.7.md": "c75bdf824b048b0babb4ecb5e8c08a10e587e6aa329c762b74fa4058371cdfe3",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\clusters_cut_0.8.json": "7ab1307c2f7532748f4af46c4170d64eedbc0956db41c6977ed04fd2b4a7a20b",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\clusters_cut_0.8.md": "2e29a80970daa3bda6036da03ea3385749f93037f0a1ab043bad3bde8b621761",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\clusters_cut_0.9.json": "0f2009c2bcca6950ac76e3157ed3a4355f8e01d0c87faaefa7072c7e479edad1",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\clusters_cut_0.9.md": "969fa388284d3435f51512b00e30ee3f1cba2c8e1b36786bf07ba124ada0a8d3",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\cluster_members_cut_0.7.csv": "b0320df4e9085ae66dab49a341ead6dda61c737d15abbc2f5ef76ca6beaa4397",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\cluster_members_cut_0.8.csv": "3f1d265e1ef62955b5c914976be710712de69cbf1c8b232f38fc9fb12595cfd4",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\cluster_members_cut_0.9.csv": "a230363f24c7dea74595d5e1dad167429ea5f4e27a25ff71b6ff4ab6568b4bb1",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\cut_sweep.csv": "22112d61064e21ba8ff398877bcb40d7377283450354a1d7e8ae60b64fa6b17a",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\dendrogram_cut_0.7.png": "63a391585d2ff33ef674d02853a5d0075fa33eb288297049623532daaea2af6d",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\dendrogram_cut_0.7.svg": "0092e202aaaee68573a9de621b30550bc41d38a9a8d07f74ff18e323be4bb19a",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\dendrogram_cut_0.8.png": "904f019688994332c9e7fd70ad9078adafe0602b54112ce008e04db5c3a88507",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\dendrogram_cut_0.8.svg": "6be32a4deb4d6eeaeb3f88d1f536816228d3b1a780880ab5f888ec28370056f3",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\dendrogram_cut_0.9.png": "e3551bb0c7a0d57aad50ff9c73ebe2c1d72b5695d64eb60ea850c0a4c8eaa108",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\dendrogram_cut_0.9.svg": "af4e934f00fdd76af9038fbb924d595541f9205388c222a343389d40c7863e18",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\linkage.csv": "4f584ff4dd4946f213be359c30955e1de5ee939e0d7ae5af7a056a64a841db56",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\tag_vectors.csv": "08bc2c318d835670e1a4c22faa9227451703f15d45c922f3e81abc5c20c5df0e",
+    "svd_experiment_20261112\\all_difficulties\\svd_64\\cut_sweep.csv": "86d01e0cbe9e33700d5e20c29c7a145efa6da0981f2ad5401441f540bc6172b9",
+    "svd_experiment_20261112\\all_difficulties\\svd_64\\linkage.csv": "3006ef3ac964c377b3bdb4414e06df54580941048a3529f4ee4105da28e10660",
+    "svd_experiment_20261112\\all_difficulties\\svd_64\\tag_vectors.csv": "bd784c3631ef1cbc5ab20165077701aae93b1cdf1c9eb1e02229d08c733e603c",
+    "svd_experiment_20261112\\all_difficulties\\svd_8\\cut_sweep.csv": "9cb9dd0b9ba2f2a729fb7efd7d051345fc1c642e578254b467d3d62360547bfd",
+    "svd_experiment_20261112\\all_difficulties\\svd_8\\linkage.csv": "a3aa0cdfd328543d534678dc68fbf7fc6a034e112b02b93ad0684d240d0c3d2b",
+    "svd_experiment_20261112\\all_difficulties\\svd_8\\tag_vectors.csv": "edfd0609f18e3276489ec57da1dc786936c966dd325d41b9769afb3ff316c510",
+    "svd_experiment_20261112\\under_2000\\excluded_tags.csv": "e16c2dc0341d8af4f4c34f750057d197ec46ce289c2f919d92c497966f2e8e12",
+    "svd_experiment_20261112\\under_2000\\matched_cluster_counts.csv": "1d299e785be8fc031a653e9617d23a9453701058c991098a236406d9d4bcfa97",
+    "svd_experiment_20261112\\under_2000\\nearest_neighbors.csv": "81e5b20c3bf00305c65d83b1ef4352324775a3635c9e941363854e1720256697",
+    "svd_experiment_20261112\\under_2000\\newly_close_without_overlap.csv": "7d4992d3d03e71a25df9824542ccae3ca84e186393f0d6fff48bdadcb0377db4",
+    "svd_experiment_20261112\\under_2000\\pair_distances.csv": "1abb9a688d8985c4143d4764bc972a5e0117d34b43a71a724843d04ac3e529a3",
+    "svd_experiment_20261112\\under_2000\\singular_values.csv": "c6750ebcc8213bd83d1c46f6c5465881cab360ff1ab098d30ef30d7801c02421",
+    "svd_experiment_20261112\\under_2000\\jaccard\\cut_sweep.csv": "642a9ebb3e59ecd5f2865238929751d901ab3d320ad462412f09867d62a7c2cc",
+    "svd_experiment_20261112\\under_2000\\jaccard\\linkage.csv": "b996f8e851947acfb1b9e348f0c9345fd4a0b2f082c877c27a681c7a71fa0af7",
+    "svd_experiment_20261112\\under_2000\\raw_cosine\\cut_sweep.csv": "abd7098910f3e4a9baf0066cc7955bc8bb5705de830fe370761114e8698654e1",
+    "svd_experiment_20261112\\under_2000\\raw_cosine\\linkage.csv": "e9279edd119d5f531d8f7a17803ba3f28649ed96f995d38b8be988617ff1b2cc",
+    "svd_experiment_20261112\\under_2000\\svd_16\\cut_sweep.csv": "48b1faec906e95c927b6fed312764913524186d6dd9b3eb5fe679cbb397d9bd7",
+    "svd_experiment_20261112\\under_2000\\svd_16\\linkage.csv": "6436c28a24fcdbb57e010a9d0c461842c70a2f84c187892ecb3b862f35de7e4a",
+    "svd_experiment_20261112\\under_2000\\svd_16\\tag_vectors.csv": "523ed1a3271142141468bd0d927dbf39534c6906b8ef764b7922f18e77aad588",
+    "svd_experiment_20261112\\under_2000\\svd_32\\clusters_cut_0.7.json": "2306eee321254c653cf949e7693383079a435370d8eac28c0f23326e95ea392b",
+    "svd_experiment_20261112\\under_2000\\svd_32\\clusters_cut_0.7.md": "c348f4510d6229b374ccbde8ce7a9b5357de4580e8d39a62494bf0f283592b6c",
+    "svd_experiment_20261112\\under_2000\\svd_32\\clusters_cut_0.8.json": "5d7a260adaaeddc14a1052ec3d0119e99276310cdb6385d85ec7e81678d4ea71",
+    "svd_experiment_20261112\\under_2000\\svd_32\\clusters_cut_0.8.md": "43fd9535b4c149951f848fe1ab4942f6cccc990e1e03b8eb2bff1a7486af2359",
+    "svd_experiment_20261112\\under_2000\\svd_32\\clusters_cut_0.9.json": "37bf0fbb1ee4b6762d3233fdf2d959e8148c139408f92d3d6bf8261e94a6d571",
+    "svd_experiment_20261112\\under_2000\\svd_32\\clusters_cut_0.9.md": "24318086f6fe61c0aba55ed870f6f04c49d710493e62f974821952cc39389ff0",
+    "svd_experiment_20261112\\under_2000\\svd_32\\cluster_members_cut_0.7.csv": "c2ff94ccebbaa6afa8aefe7cbb304905047a70c8466ec5cc77440d699b75f83b",
+    "svd_experiment_20261112\\under_2000\\svd_32\\cluster_members_cut_0.8.csv": "1f90de47396f35889ae0a666333c13d3fe552d62d795b96e804e0d1efda84ce0",
+    "svd_experiment_20261112\\under_2000\\svd_32\\cluster_members_cut_0.9.csv": "e7e32030d3567e699ff2c6006db759331e9368dd1fe6c9aa82efbc895bf7bf44",
+    "svd_experiment_20261112\\under_2000\\svd_32\\cut_sweep.csv": "026084b90877b711d270a195bc65ab77631b41d9f79ca78edc3c213f006c556e",
+    "svd_experiment_20261112\\under_2000\\svd_32\\dendrogram_cut_0.7.png": "a3ae6283ee3983d07adc9cb45bc967534af0e6b35815121fa9d7679339249bbf",
+    "svd_experiment_20261112\\under_2000\\svd_32\\dendrogram_cut_0.7.svg": "2e258999045ade58eb072b51eb2424cb921eff651020eceaa8e89eb221f01f33",
+    "svd_experiment_20261112\\under_2000\\svd_32\\dendrogram_cut_0.8.png": "68d8dee5feb61628acb9180e9ff5c82aa36bb9b3e882f2ad2a8acae6bb8cffde",
+    "svd_experiment_20261112\\under_2000\\svd_32\\dendrogram_cut_0.8.svg": "c1e39ca5bfaa12ab28a10551b8a058cf896bfd9112d4be44b4db72ae641bb6f6",
+    "svd_experiment_20261112\\under_2000\\svd_32\\dendrogram_cut_0.9.png": "2b02d6ceced716c8b15357846a85bb7943940b37f3550ec38ad06360a51cbf46",
+    "svd_experiment_20261112\\under_2000\\svd_32\\dendrogram_cut_0.9.svg": "f3a25b2c1c3e2e43f93c4a0825ebe7daa5604b0f3f4dcf96840378f9621b5da1",
+    "svd_experiment_20261112\\under_2000\\svd_32\\linkage.csv": "9e3eaf86b642a79fa17a9b3a4647e47af0b1563f0ea618fa741c8c25e0842a20",
+    "svd_experiment_20261112\\under_2000\\svd_32\\tag_vectors.csv": "8d65a7d9850218d7b4745cd9693ffc7ac60b6761d39f10eed52e07763f4244d0",
+    "svd_experiment_20261112\\under_2000\\svd_64\\cut_sweep.csv": "b8e3b29d22771324f977495a991d0ff9e8c7dfd5daa090ca9358ad6f9f833601",
+    "svd_experiment_20261112\\under_2000\\svd_64\\linkage.csv": "a041b4100f34be140c8543167da0b914ed1c0328d32b8875adbd95fcf85057f0",
+    "svd_experiment_20261112\\under_2000\\svd_64\\tag_vectors.csv": "d8fb3815c1e08c587e6fc8e0acdd62da9c70c844b18f1846b8a90602817b91b4",
+    "svd_experiment_20261112\\under_2000\\svd_8\\cut_sweep.csv": "24c4a0c4479b80ef83dbc0337b13b69a63a747315ca8892535755f666635d65d",
+    "svd_experiment_20261112\\under_2000\\svd_8\\linkage.csv": "c2c649a85345c9d304b0dd3709dad39a279f61dc32953dd235709cdea1568a2c",
+    "svd_experiment_20261112\\under_2000\\svd_8\\tag_vectors.csv": "91da665cec92252a859d3c983db2754b1f00126ad1d05db6926dd853072efedc",
+    "svd_dimension_dendrograms_20261119\\figure_index.csv": "14c61f5f0dc18b81b7e153f6ffeed4454edc447d0d0202a0561d9d0b60eb0fe2",
+    "svd_dimension_dendrograms_20261119\\README.md": "96c874b93c493da5e168a9519a11c714934b59df2a53ffa75ae6a59550da4931",
+    "svd_dimension_dendrograms_20261119\\svd_8_16_64_dendrograms.zip": "4612c463cfba9cc1e805672eecb3948dd995e999c195f0818182ccac1ef4a86c",
+    "svd_dimension_dendrograms_20261119\\verification.json": "b23725031172a90e857f83cac6e818ddb5254ecabc7bea7e2243169b99d9030f",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_16\\dendrogram_cut_0.7.png": "d09ca9376e27ad827efc7c9538a05263799e7e353f75eadb5d0c9c9e5c452046",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_16\\dendrogram_cut_0.7.svg": "ea9f231a935a0499ee03ba1873c6bc049da7307f7c2eb6e7e225481613416b40",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_16\\dendrogram_cut_0.8.png": "ce6c3833f51aef4ea7dd61d79ea909d5a95ac9612ab977a35159e00765f5fc04",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_16\\dendrogram_cut_0.8.svg": "5907a0a3226c424cafb08a1247bb1f2b6a045bb36e061fe97624fc96fa7a5ae9",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_16\\dendrogram_cut_0.9.png": "5b5adadfe2a56360b02cd31a62b46fdb3e15e81810589182c470a7e45a4c4ff7",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_16\\dendrogram_cut_0.9.svg": "8fcae1b247182b93c3bacb5b4c50e8c29c695f2636ed8d5f712787849683c57f",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_64\\dendrogram_cut_0.7.png": "f56420b63e3cf14240397b62e1e27b467bdef450bd769d8cddb879f96337baad",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_64\\dendrogram_cut_0.7.svg": "8143bd789596b191e899082a8012715d5e3a065d1d9e7fe3fdb255914db78209",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_64\\dendrogram_cut_0.8.png": "e8ef33e92d390e04eb31a248c782e161e3ab60282dbd737fb02d0061b30f8da8",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_64\\dendrogram_cut_0.8.svg": "59e9b82fb6228edf84cd6f7e1d9ba2a882076907ecdb62a1303ee716b5feccea",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_64\\dendrogram_cut_0.9.png": "8bebd0959930257511436b5c51ce3662bd76f91893737d57a955b5fa4ec91ef7",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_64\\dendrogram_cut_0.9.svg": "cf33b15dc168a74a0144aaa153c58f085ad869516d532bb25c9e3a783893b7e2",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_8\\dendrogram_cut_0.7.png": "3464e70b19edbdad2e960491d62b9116f7d16776390ade7c2cc49444ba062af4",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_8\\dendrogram_cut_0.7.svg": "125fceb95d4bf90cef3e21b9636ce10c1b573a97d447be69ae9c58ceddd45b6b",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_8\\dendrogram_cut_0.8.png": "15d193d8c6ec304d9636597220717f36dba8dbcc65ca48a16a9c704cb65d9a0f",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_8\\dendrogram_cut_0.8.svg": "f8e467ca63843a9cab643c9a51cd6f96613eced58569c3e773ddedd86bb66312",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_8\\dendrogram_cut_0.9.png": "d15b2984c88dc34f9bab4a54a4900a4004a14cdb954ed3bfa4862baca18fed8f",
+    "svd_dimension_dendrograms_20261119\\all_difficulties\\svd_8\\dendrogram_cut_0.9.svg": "ea37fa9fd99ea1baba56ce0ff3ebbecdd6fb067886c905b6e0dea44502fe4a44",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_16\\dendrogram_cut_0.7.png": "55a4942cc3eb0451387ba22940caed5a811c3f049c4bf88a50b969e39a13ca57",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_16\\dendrogram_cut_0.7.svg": "d0b4f7cb41492a23fc289f50d0141b920477076194c06043be0c8458717febb0",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_16\\dendrogram_cut_0.8.png": "10d8ef1a0a957cb137aca2bad5b6e35ea09137164bcc0c1252fc1fdd886f6083",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_16\\dendrogram_cut_0.8.svg": "28fcb5a92b9b878bcf6893ef2236b0f0ae719a1ec5f4aa3f75ecbde6e0fb264a",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_16\\dendrogram_cut_0.9.png": "e994a6801267360a8d5bbebd16197852329a6c97c654e6d02e9f306a7e26b487",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_16\\dendrogram_cut_0.9.svg": "cac3ad6307ad4bbec478ee35775bedef601ea58e49d80cc940887b8405e7d923",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_64\\dendrogram_cut_0.7.png": "6cf846acaee9192ecc92f1b5342f0cb0ee22f6f00624e1c918e399f1950461a0",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_64\\dendrogram_cut_0.7.svg": "1df6cfcf69785b176d362490c13157e03d214d7a538385f9d9bbeaa3585caa03",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_64\\dendrogram_cut_0.8.png": "bd87e23653a4ff567047a6dd0c8c9f01d7b12cf5fec6cff18bfaa83316e7ae1d",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_64\\dendrogram_cut_0.8.svg": "8c579c0837067dfe94fe28750d61cc203d767f07f22d36aca6172c9da2d13d15",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_64\\dendrogram_cut_0.9.png": "ba4bf4b62b430da634b41e6bbf70519596e1361dbdad81d859b7b6f3452e34ed",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_64\\dendrogram_cut_0.9.svg": "187282a8328f2e1f609718af20d38455407631e1169fd0d06218ede6d32fe128",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_8\\dendrogram_cut_0.7.png": "6ae471be0ab4a28f779eaccc83c0ac1a6329f5ec97f0bcbabcf9659428ff9dbe",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_8\\dendrogram_cut_0.7.svg": "47dc499c02d1a11029d18f54cdba285fe6e5953cd56b51389d76a03e15884228",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_8\\dendrogram_cut_0.8.png": "8c72cb8614b0c4e02397cfcca609dcdd3d9edca5ffb3829859d337f8370297ef",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_8\\dendrogram_cut_0.8.svg": "eea1def01b656957bd98806e0ae02d483d3604c49af146a709ea863ff7898cca",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_8\\dendrogram_cut_0.9.png": "b72ad47ccdd18c31ad705132c9b1667853819f791e2feb2fba4acf47c53e48a7",
+    "svd_dimension_dendrograms_20261119\\under_2000\\svd_8\\dendrogram_cut_0.9.svg": "2de278b2fceead25d93be79d62e03955e2dd0da371bcb3728a08593995a320b5"
+  },
+  "individual_images_copied": [
+    {
+      "path": "all_difficulties/svd_8/dendrogram_cut_0.7.png",
+      "sha256": "3464e70b19edbdad2e960491d62b9116f7d16776390ade7c2cc49444ba062af4"
+    },
+    {
+      "path": "all_difficulties/svd_8/dendrogram_cut_0.7.svg",
+      "sha256": "125fceb95d4bf90cef3e21b9636ce10c1b573a97d447be69ae9c58ceddd45b6b"
+    },
+    {
+      "path": "all_difficulties/svd_8/dendrogram_cut_0.8.png",
+      "sha256": "15d193d8c6ec304d9636597220717f36dba8dbcc65ca48a16a9c704cb65d9a0f"
+    },
+    {
+      "path": "all_difficulties/svd_8/dendrogram_cut_0.8.svg",
+      "sha256": "f8e467ca63843a9cab643c9a51cd6f96613eced58569c3e773ddedd86bb66312"
+    },
+    {
+      "path": "all_difficulties/svd_8/dendrogram_cut_0.9.png",
+      "sha256": "d15b2984c88dc34f9bab4a54a4900a4004a14cdb954ed3bfa4862baca18fed8f"
+    },
+    {
+      "path": "all_difficulties/svd_8/dendrogram_cut_0.9.svg",
+      "sha256": "ea37fa9fd99ea1baba56ce0ff3ebbecdd6fb067886c905b6e0dea44502fe4a44"
+    },
+    {
+      "path": "all_difficulties/svd_16/dendrogram_cut_0.7.png",
+      "sha256": "d09ca9376e27ad827efc7c9538a05263799e7e353f75eadb5d0c9c9e5c452046"
+    },
+    {
+      "path": "all_difficulties/svd_16/dendrogram_cut_0.7.svg",
+      "sha256": "ea9f231a935a0499ee03ba1873c6bc049da7307f7c2eb6e7e225481613416b40"
+    },
+    {
+      "path": "all_difficulties/svd_16/dendrogram_cut_0.8.png",
+      "sha256": "ce6c3833f51aef4ea7dd61d79ea909d5a95ac9612ab977a35159e00765f5fc04"
+    },
+    {
+      "path": "all_difficulties/svd_16/dendrogram_cut_0.8.svg",
+      "sha256": "5907a0a3226c424cafb08a1247bb1f2b6a045bb36e061fe97624fc96fa7a5ae9"
+    },
+    {
+      "path": "all_difficulties/svd_16/dendrogram_cut_0.9.png",
+      "sha256": "5b5adadfe2a56360b02cd31a62b46fdb3e15e81810589182c470a7e45a4c4ff7"
+    },
+    {
+      "path": "all_difficulties/svd_16/dendrogram_cut_0.9.svg",
+      "sha256": "8fcae1b247182b93c3bacb5b4c50e8c29c695f2636ed8d5f712787849683c57f"
+    },
+    {
+      "path": "all_difficulties/svd_32/dendrogram_cut_0.7.png",
+      "sha256": "63a391585d2ff33ef674d02853a5d0075fa33eb288297049623532daaea2af6d"
+    },
+    {
+      "path": "all_difficulties/svd_32/dendrogram_cut_0.7.svg",
+      "sha256": "0092e202aaaee68573a9de621b30550bc41d38a9a8d07f74ff18e323be4bb19a"
+    },
+    {
+      "path": "all_difficulties/svd_32/dendrogram_cut_0.8.png",
+      "sha256": "904f019688994332c9e7fd70ad9078adafe0602b54112ce008e04db5c3a88507"
+    },
+    {
+      "path": "all_difficulties/svd_32/dendrogram_cut_0.8.svg",
+      "sha256": "6be32a4deb4d6eeaeb3f88d1f536816228d3b1a780880ab5f888ec28370056f3"
+    },
+    {
+      "path": "all_difficulties/svd_32/dendrogram_cut_0.9.png",
+      "sha256": "e3551bb0c7a0d57aad50ff9c73ebe2c1d72b5695d64eb60ea850c0a4c8eaa108"
+    },
+    {
+      "path": "all_difficulties/svd_32/dendrogram_cut_0.9.svg",
+      "sha256": "af4e934f00fdd76af9038fbb924d595541f9205388c222a343389d40c7863e18"
+    },
+    {
+      "path": "all_difficulties/svd_64/dendrogram_cut_0.7.png",
+      "sha256": "f56420b63e3cf14240397b62e1e27b467bdef450bd769d8cddb879f96337baad"
+    },
+    {
+      "path": "all_difficulties/svd_64/dendrogram_cut_0.7.svg",
+      "sha256": "8143bd789596b191e899082a8012715d5e3a065d1d9e7fe3fdb255914db78209"
+    },
+    {
+      "path": "all_difficulties/svd_64/dendrogram_cut_0.8.png",
+      "sha256": "e8ef33e92d390e04eb31a248c782e161e3ab60282dbd737fb02d0061b30f8da8"
+    },
+    {
+      "path": "all_difficulties/svd_64/dendrogram_cut_0.8.svg",
+      "sha256": "59e9b82fb6228edf84cd6f7e1d9ba2a882076907ecdb62a1303ee716b5feccea"
+    },
+    {
+      "path": "all_difficulties/svd_64/dendrogram_cut_0.9.png",
+      "sha256": "8bebd0959930257511436b5c51ce3662bd76f91893737d57a955b5fa4ec91ef7"
+    },
+    {
+      "path": "all_difficulties/svd_64/dendrogram_cut_0.9.svg",
+      "sha256": "cf33b15dc168a74a0144aaa153c58f085ad869516d532bb25c9e3a783893b7e2"
+    },
+    {
+      "path": "under_2000/svd_8/dendrogram_cut_0.7.png",
+      "sha256": "6ae471be0ab4a28f779eaccc83c0ac1a6329f5ec97f0bcbabcf9659428ff9dbe"
+    },
+    {
+      "path": "under_2000/svd_8/dendrogram_cut_0.7.svg",
+      "sha256": "47dc499c02d1a11029d18f54cdba285fe6e5953cd56b51389d76a03e15884228"
+    },
+    {
+      "path": "under_2000/svd_8/dendrogram_cut_0.8.png",
+      "sha256": "8c72cb8614b0c4e02397cfcca609dcdd3d9edca5ffb3829859d337f8370297ef"
+    },
+    {
+      "path": "under_2000/svd_8/dendrogram_cut_0.8.svg",
+      "sha256": "eea1def01b656957bd98806e0ae02d483d3604c49af146a709ea863ff7898cca"
+    },
+    {
+      "path": "under_2000/svd_8/dendrogram_cut_0.9.png",
+      "sha256": "b72ad47ccdd18c31ad705132c9b1667853819f791e2feb2fba4acf47c53e48a7"
+    },
+    {
+      "path": "under_2000/svd_8/dendrogram_cut_0.9.svg",
+      "sha256": "2de278b2fceead25d93be79d62e03955e2dd0da371bcb3728a08593995a320b5"
+    },
+    {
+      "path": "under_2000/svd_16/dendrogram_cut_0.7.png",
+      "sha256": "55a4942cc3eb0451387ba22940caed5a811c3f049c4bf88a50b969e39a13ca57"
+    },
+    {
+      "path": "under_2000/svd_16/dendrogram_cut_0.7.svg",
+      "sha256": "d0b4f7cb41492a23fc289f50d0141b920477076194c06043be0c8458717febb0"
+    },
+    {
+      "path": "under_2000/svd_16/dendrogram_cut_0.8.png",
+      "sha256": "10d8ef1a0a957cb137aca2bad5b6e35ea09137164bcc0c1252fc1fdd886f6083"
+    },
+    {
+      "path": "under_2000/svd_16/dendrogram_cut_0.8.svg",
+      "sha256": "28fcb5a92b9b878bcf6893ef2236b0f0ae719a1ec5f4aa3f75ecbde6e0fb264a"
+    },
+    {
+      "path": "under_2000/svd_16/dendrogram_cut_0.9.png",
+      "sha256": "e994a6801267360a8d5bbebd16197852329a6c97c654e6d02e9f306a7e26b487"
+    },
+    {
+      "path": "under_2000/svd_16/dendrogram_cut_0.9.svg",
+      "sha256": "cac3ad6307ad4bbec478ee35775bedef601ea58e49d80cc940887b8405e7d923"
+    },
+    {
+      "path": "under_2000/svd_32/dendrogram_cut_0.7.png",
+      "sha256": "a3ae6283ee3983d07adc9cb45bc967534af0e6b35815121fa9d7679339249bbf"
+    },
+    {
+      "path": "under_2000/svd_32/dendrogram_cut_0.7.svg",
+      "sha256": "2e258999045ade58eb072b51eb2424cb921eff651020eceaa8e89eb221f01f33"
+    },
+    {
+      "path": "under_2000/svd_32/dendrogram_cut_0.8.png",
+      "sha256": "68d8dee5feb61628acb9180e9ff5c82aa36bb9b3e882f2ad2a8acae6bb8cffde"
+    },
+    {
+      "path": "under_2000/svd_32/dendrogram_cut_0.8.svg",
+      "sha256": "c1e39ca5bfaa12ab28a10551b8a058cf896bfd9112d4be44b4db72ae641bb6f6"
+    },
+    {
+      "path": "under_2000/svd_32/dendrogram_cut_0.9.png",
+      "sha256": "2b02d6ceced716c8b15357846a85bb7943940b37f3550ec38ad06360a51cbf46"
+    },
+    {
+      "path": "under_2000/svd_32/dendrogram_cut_0.9.svg",
+      "sha256": "f3a25b2c1c3e2e43f93c4a0825ebe7daa5604b0f3f4dcf96840378f9621b5da1"
+    },
+    {
+      "path": "under_2000/svd_64/dendrogram_cut_0.7.png",
+      "sha256": "6cf846acaee9192ecc92f1b5342f0cb0ee22f6f00624e1c918e399f1950461a0"
+    },
+    {
+      "path": "under_2000/svd_64/dendrogram_cut_0.7.svg",
+      "sha256": "1df6cfcf69785b176d362490c13157e03d214d7a538385f9d9bbeaa3585caa03"
+    },
+    {
+      "path": "under_2000/svd_64/dendrogram_cut_0.8.png",
+      "sha256": "bd87e23653a4ff567047a6dd0c8c9f01d7b12cf5fec6cff18bfaa83316e7ae1d"
+    },
+    {
+      "path": "under_2000/svd_64/dendrogram_cut_0.8.svg",
+      "sha256": "8c579c0837067dfe94fe28750d61cc203d767f07f22d36aca6172c9da2d13d15"
+    },
+    {
+      "path": "under_2000/svd_64/dendrogram_cut_0.9.png",
+      "sha256": "ba4bf4b62b430da634b41e6bbf70519596e1361dbdad81d859b7b6f3452e34ed"
+    },
+    {
+      "path": "under_2000/svd_64/dendrogram_cut_0.9.svg",
+      "sha256": "187282a8328f2e1f609718af20d38455407631e1169fd0d06218ede6d32fe128"
+    }
+  ],
+  "combined_figures": [
+    {
+      "dataset": "all_difficulties",
+      "cut": 0.7,
+      "dimensions": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "labels": "left_on_every_panel",
+      "common_distance_axis": true,
+      "leaf_orders_unchanged": true,
+      "png_width": 10640,
+      "png_height": 4368,
+      "clusters": [
+        "8次元=9群",
+        "16次元=15群",
+        "32次元=33群",
+        "64次元=60群"
+      ]
+    },
+    {
+      "dataset": "all_difficulties",
+      "cut": 0.8,
+      "dimensions": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "labels": "left_on_every_panel",
+      "common_distance_axis": true,
+      "leaf_orders_unchanged": true,
+      "png_width": 10640,
+      "png_height": 4368,
+      "clusters": [
+        "8次元=5群",
+        "16次元=14群",
+        "32次元=30群",
+        "64次元=53群"
+      ]
+    },
+    {
+      "dataset": "all_difficulties",
+      "cut": 0.9,
+      "dimensions": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "labels": "left_on_every_panel",
+      "common_distance_axis": true,
+      "leaf_orders_unchanged": true,
+      "png_width": 10640,
+      "png_height": 4368,
+      "clusters": [
+        "8次元=3群",
+        "16次元=8群",
+        "32次元=23群",
+        "64次元=37群"
+      ]
+    },
+    {
+      "dataset": "under_2000",
+      "cut": 0.7,
+      "dimensions": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "labels": "left_on_every_panel",
+      "common_distance_axis": true,
+      "leaf_orders_unchanged": true,
+      "png_width": 10640,
+      "png_height": 3864,
+      "clusters": [
+        "8次元=7群",
+        "16次元=15群",
+        "32次元=30群",
+        "64次元=64群"
+      ]
+    },
+    {
+      "dataset": "under_2000",
+      "cut": 0.8,
+      "dimensions": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "labels": "left_on_every_panel",
+      "common_distance_axis": true,
+      "leaf_orders_unchanged": true,
+      "png_width": 10640,
+      "png_height": 3864,
+      "clusters": [
+        "8次元=6群",
+        "16次元=13群",
+        "32次元=28群",
+        "64次元=54群"
+      ]
+    },
+    {
+      "dataset": "under_2000",
+      "cut": 0.9,
+      "dimensions": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "labels": "left_on_every_panel",
+      "common_distance_axis": true,
+      "leaf_orders_unchanged": true,
+      "png_width": 10640,
+      "png_height": 3864,
+      "clusters": [
+        "8次元=3群",
+        "16次元=8群",
+        "32次元=20群",
+        "64次元=41群"
+      ]
+    }
+  ],
+  "markdown_links_valid": true
+}

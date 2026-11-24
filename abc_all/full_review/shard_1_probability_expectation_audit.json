@@ -1,0 +1,100 @@
+{
+  "assigned": [
+    750,
+    1499
+  ],
+  "reviewed": 750,
+  "adopted": [
+    {
+      "problem_id": "abc184_d",
+      "tag_id": "T026",
+      "role": "primary",
+      "reason": "公式のf(a,b,c)はどれか100に達するまでの期待残り回数で、f=1+(a f(a+1)+b f(b+1)+c f(c+1))/(a+b+c)、終端0。全状態O(100³)。別解は開始状態から到達確率を配り、終端時刻で重み付けする確率DP。"
+    },
+    {
+      "problem_id": "abc184_d",
+      "tag_id": "T029",
+      "role": "alternative",
+      "reason": "公式のf(a,b,c)はどれか100に達するまでの期待残り回数で、f=1+(a f(a+1)+b f(b+1)+c f(c+1))/(a+b+c)、終端0。全状態O(100³)。別解は開始状態から到達確率を配り、終端時刻で重み付けする確率DP。"
+    },
+    {
+      "problem_id": "abc189_f",
+      "tag_id": "T026",
+      "role": "primary",
+      "reason": "f(i)=1+平均f(i+1..i+M)を後ろから累積和で計算し、振出しマスでは未知f(0)を参照する。各値をa*f(0)+bとして伝播し最後に線形方程式で解くO(N)解法、f(0)を仮定して二分探索するO(NT)別解。連続M個の振出しがあれば不可能。"
+    },
+    {
+      "problem_id": "abc199_f",
+      "tag_id": "T026",
+      "role": "supporting",
+      "reason": "各頂点の期待値ベクトルは一操作ごとに、隣接頂点へ1/(2M)ずつ、自己へ1-deg/(2M)の線形遷移をする。行列m^Kを二分累乗して初期ベクトルに掛けるO(N³log K)。遷移するのは期待値であり確率分布ではない。"
+    },
+    {
+      "problem_id": "abc224_f",
+      "tag_id": "T026",
+      "role": "alternative",
+      "reason": "各桁の位への寄与を等比和/累積和で集計してO(|S|)。別解は完了項和sと末尾項xを持ち、+の有無を1/2で平均してE[s′]=E[s]+E[x]/2,E[x′]=5E[x]+dを更新、最後2^(N-1)倍。線形変換行列でもO(|S|)。"
+    },
+    {
+      "problem_id": "abc226_h",
+      "tag_id": "T029",
+      "role": "primary",
+      "reason": "各整数区間[A,A+1]を固定し、変数を順に処理して区間より上の個数j・区間内個数kの確率をDP。そこからK番目値の区間内期待値を求め合計する。差分更新でO(N³)に高速化可能、密度から直接積分公式を得る方法で分割統治ではない。"
+    },
+    {
+      "problem_id": "abc238_h",
+      "tag_id": "T026",
+      "role": "supporting",
+      "reason": "削除順を逆転して区間[l,r]の挿入手順数numとコスト一次モーメントcostを同時DP。最初の挿入iで左右に分割し、numL*numR*即時コストとcostL*numR+numL*costRを向き数・二項係数で重み付け。最終総和をN!の逆元で割り期待値を得る。O(N³)。"
+    },
+    {
+      "problem_id": "abc239_h",
+      "tag_id": "T026",
+      "role": "primary",
+      "reason": "残り倍率xの期待回数f(x)を状態とし自己遷移出目1を移項。f(x)=(N+Σ_{d=2..N}f(floor(x/d)))/(N-1)。等しい商を区間長でまとめ、floor(M/d)のみメモ化しO(M^(3/4))時間O(sqrt M)空間。末尾Dirichlet畳み込み/prefixの一般論は主解の演算ではない。"
+    },
+    {
+      "problem_id": "abc243_f",
+      "tag_id": "T029",
+      "role": "primary",
+      "reason": "p_i=w_i/Σwとし、種類xまで・使用種類y・抽選総数zのDPにΠp_i^c_i/c_i!を蓄積。新種類の回数cを列挙し、最後にK!を掛ける。多項分布確率を係数正規化したDPでO(NMK²)、逆元も利用。"
+    },
+    {
+      "problem_id": "abc249_h",
+      "tag_id": "T026",
+      "role": "supporting",
+      "reason": "期待終了時間f(A)を色頻度別potentialΣg(B_i)-g(N)へ分離。色個数は一度に高々1増えるのでg(0)=0からg(i+1)を期待値方程式の前行で逐次解く。遷移確率は二項係数の和を分離してO(N²)、畳み込み利用ならO(N²log N)。g自体は残り期待時間ではなく補助DP。"
+    },
+    {
+      "problem_id": "abc263_e",
+      "tag_id": "T026",
+      "role": "primary",
+      "reason": "E[N]=0、自己遷移を移項しE[i]=(A_i+1+Σ_{j=1..A_i}E[i+j])/A_iを後ろからprefix/SegTree区間和で求める。逆元前計算ならO(N)、冪逆元ならO(Nlog MOD)。確認済み別解は出目0を除く退出確率1/A_iで各到達確率P_iを前向きimos DPしΣP_i*(A_i+1)/A_iを合計する。"
+    },
+    {
+      "problem_id": "abc263_e",
+      "tag_id": "T029",
+      "role": "alternative",
+      "reason": "E[N]=0、自己遷移を移項しE[i]=(A_i+1+Σ_{j=1..A_i}E[i+j])/A_iを後ろからprefix/SegTree区間和で求める。逆元前計算ならO(N)、冪逆元ならO(Nlog MOD)。確認済み別解は出目0を除く退出確率1/A_iで各到達確率P_iを前向きimos DPしΣP_i*(A_i+1)/A_iを合計する。"
+    },
+    {
+      "problem_id": "abc266_e",
+      "tag_id": "T026",
+      "role": "primary",
+      "reason": "残りn回の最適期待得点E[n]を計算。E[1]=3.5、E[n]=(Σ_{d=1..6}max(d,E[n-1]))/6。観測後に採用/振直しを選ぶためO(6N)。"
+    },
+    {
+      "problem_id": "abc270_h",
+      "tag_id": "T026",
+      "role": "primary",
+      "reason": "不足最大kの期待残手数x_kを状態とし、r個の小目標ならk-1、他は目標A_iへ移る。y_k=x_Amax-x_kへ変換して降順計算。同じr区間の一次漸化式を(N/r)^(A[r+1]-A[r])で飛ばし、y_Aiのsuffix和を更新。O(N(log Amax+log MOD))。入力整列済みなのでソート不要。"
+    },
+    {
+      "problem_id": "abc271_g",
+      "tag_id": "T029",
+      "role": "primary",
+      "reason": "時刻別アクセス確率から24時間無アクセスqを求め、次回アクセス時刻への遷移を有限1周寄与/(1-q)で正規化。アクセス回数・最終時刻24状態の確率行列をN乗し、青木担当時刻の確率を合計。O(24³log N)。全探索の語は法でq!=1の制約検証で本問solverではない。"
+    }
+  ],
+  "removed_from_v3_2": []
+}

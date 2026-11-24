@@ -1,0 +1,3 @@
+﻿from pathlib import Path
+p=Path('abc_all/full_review_validate_2.py');s=p.read_text(encoding='utf8');s=s.replace("'Index1500..1699 were individually read using main editorial excerpts, with full sources for hard cases; existing alternatives were checked where relevant.'", "f'Indices 1500..{1499+len(rows)} were individually read using main editorial excerpts, with full sources for hard cases; existing alternatives were checked where relevant.'").replace("'No decisions for indices1700..2249 have been made; do not silently fill or mark reviewed from keyword rules.'", "f'No decisions for indices {1500+len(rows)}..2249 have been made in this ledger; do not fill from keyword rules.'")
+p.write_bytes(b'\xef\xbb\xbf'+s.encode('utf8'))

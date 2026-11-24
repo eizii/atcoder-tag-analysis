@@ -1,0 +1,143 @@
+﻿problem_id	scope	accepted	rejected	out_of_vocabulary	source_indices	evidence_quote	reason
+abc001_3	full	T264:alternative		条件分岐,丸め処理	0	((Dis * 10 + 1125) / 2250) % 16	風向の16区分を整数演算と剰余で循環させる解法。風速は丸めと区間判定であり、探索やDPを強制しない。
+abc010_2	full	T264:primary,T076:alternative			0	あまりを利用する	花びら枚数の2と3による剰余条件を満たすまで減らす。解説の占い手順の直接シミュレーションも制約内の別解。
+abc010_3	full	T065:primary		ユークリッド距離	0	寄り道出来る場所の候補が与えられます。	各候補の家について始点からの距離と終点までの距離の和を計算し、T*V以下かを全候補について調べる。経路の最適化アルゴリズムは使わない。
+abc015_4	full	T150:primary,T022:supporting	T059,T067		0	非常に有名な「ナップサック問題」の亜種です	処理した枚数・使用枚数・幅を状態にする個数制約つきナップサックDP。DFSによる2^N列挙は満点制約に不適、XORは他問題との比較のための言及。
+abc031_d	full	T065:primary,T073:supporting			0	文字列の長さが固定された場合どうなるでしょうか?	各数字に対応する長さ1〜3を3^K通り列挙する。固定した長さで文字列を切り分け、同じ数字への割当の一致と連結の整合を検証する。
+abc036_c	full	T085:primary,T077:supporting			statement	大小関係を保存したまま座圧のデータを圧縮	相異なる値を昇順に並べ、各値を0始まりの順位に写す座標圧縮。N=10^5に対しソートでO(N log N)で構成できる。
+abc036_d	full	T027:primary,T060:primary,T260:concept			statement	両端の島が黒で塗られているような橋があってはいけません。	N頂点N-1辺の連結グラフは木。各頂点を白・黒にした部分木の塗り方を状態にし、白は子の白黒の和、黒は子の白のみを掛け合わせるO(N)木DP。
+abc037_c	full	T086:primary,T060:concept			statement	長さ K の連続する部分列	累積和で各長さK区間の和をO(1)で求め、N-K+1区間を合計するO(N)解法。全区間の各要素を毎回足すO(NK)解法は採用しない。
+abc037_d	full	T022:primary,T060:primary,T077:supporting			statement	今いるマスより大きな整数が書かれたマスに移動	値の大小で辺を向けるとDAGになる。値の降順にdp[v]=1+sum(dp[u])を計算して全始点の経路数を足す。降順ソートはこの実装の補助。
+abc038_c	full	T083:primary,T060:primary			statement	単調増加となるような (l,r) の数	右端を伸ばし、増加しなくなったら左端を現在位置へ移す。右端ごとの有効な左端数を加算するO(N)の二ポインタ法。単にLISを求める問題ではない。
+abc040_c	full	T022:primary			statement	現在の柱から 1 個もしくは 2 個右にある柱	dp[i]=min(dp[i-1]+abs(a[i]-a[i-1]),dp[i-2]+abs(a[i]-a[i-2]))。各柱までの最小費用をO(N)で計算する。
+abc041_d	full	T017:primary,T060:primary		トポロジカル順序の数え上げ	statement	2≦N≦16	既に並べた頂点集合をビットマスクにし、すべての先行頂点が集合にある未配置頂点だけを末尾へ加えるO(N*2^N)集合DP。通常のトポロジカルソート一回とは区別。
+arc074_b	full	T010:primary,T065:supporting	T011,T022,T032,T033,T060,T077,T230		0	優先度付きキュー	分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。
+arc080_b	full	T076:primary	T003,T010,T011,T031,T118	構築	0	マスを順序付けした上で	蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。
+abc023_c	full	T060:primary		度数分布	0	飴がX 個ある行(列)がY 個ある	行ごと・列ごとの飴数の度数分布から、和がKになる組の個数を計算する。飴のあるNマスだけ二重計数の補正を行えばO(R+C+N)。全R*Cマスの探索はしない。
+abc024_c	full	T076:primary		貪欲法	0	民族は近づく方向にのみ進めば良い	民族ごとに各日を走査し、現在地を含む移動区間内で目的地へ可能な限り近づける。区間内なら目的地へ到着し、そうでなければ端点へ動かすO(KD)シミュレーション。
+abc028_c	full			基本算術,大小比較	0	max(A+D+E, B+C+E)	昇順で与えられる5数について第3位は二候補の大きい方と直接導ける。主解ではソートや全探索を行わず、閉形式を語彙外として記録。
+abc029_d	full	T028:primary,T060:primary			statement	1 以上 N 以下のすべての整数を十進表記	上位桁からN未満か・一致かと1の出現数を状態に桁DPし、最後に出現数で重み付けして合計できる。全整数列挙の部分点解法と分ける。これは問題文から構成した実行可能解法。
+abc031_c	full	T065:primary,T076:supporting			0	青木君が自分の得点が最大となるように	高橋の選択iを全列挙し、青木の選択jを左から全列挙して青木の得点が最大の最左jを採る。そのときの高橋の得点を最大化するO(N^3)。解説末尾の最小値という表記には従わず問題文の最大化に従う。
+abc033_c	full	T073:primary			0	+で区切られた部分それぞれに最低1つの0	文字列を+で分割し、0のない積の項を数える。一般の式評価や指数全探索を必要とせず、文字列の線形走査で解く。
+abc034_d	full	T064:primary,T077:supporting		パラメトリック探索	statement	濃度として考えられる最大値	目標濃度xに対しw_i*(p_i-x)を降順にソートし、上位K個の和が非負なら達成可能。単調性に基づく実数二分探索で最大濃度を求める。
+abc039_c	full	T073:primary,T065:supporting			statement	"音階は ""ド ド# レ レ# ミ ファ ファ# ソ ソ# ラ ラ# シ"" を繰り返しています"	白鍵の7候補を開始位置とする周期文字列と入力を比較する。周期表を用いる基本文字列処理と定数個の候補列挙。
+abc039_d	full	T076:primary		構築,画像の収縮と膨張	statement	その画素と周り 8 方向の画素	出力の白画素の周囲を元画像の白として確定し、残りを黒にした候補に問題の変換を実際に適用して一致を確認するO(HW)。文字列アルゴリズムとして扱わない。
+abc040_d	full	T005:primary,T077:supporting		オフラインクエリ	statement	造られた年が w_j 年以前	道路年と問い合わせ閾値を降順に処理する。閾値より新しい道路だけUnion-Findで併合し、問い合わせ頂点の連結成分サイズを答える。各問い合わせでの全探索は不要。
+abc041_c	full	T077:primary			statement	出席番号を背の高い方から順に出力	身長と元の出席番号のペアを身長降順にソートし番号を出力する。O(N log N)。
+abc125_c	full	T097:primary		累積GCD	0	gcd は結合則が成り立ちます	左右の累積GCDを作り、iを除くGCDをgcd(L[i],R[i+1])で計算する。各GCDはユークリッド互除法で実装可能。累積和タグは和の計算を行わないので付けない。
+abc148_c	full	T065:primary,T264:supporting,T097:alternative		最小公倍数	0	高々B 回確認すれば十分	Aの倍数を順に列挙しBで割り切れる最初の数を求める解説主解はO(B)で実行可能。別解はユークリッド互除法でgcdを計算しA/gcd(A,B)*Bを求める。
+abc150_d	full	T097:supporting,T264:supporting,T060:primary		最小公倍数	0	最小公倍数	a_iを割り切れる2の回数が全て同じことを確認し、a_i/2のLCMをユークリッド互除法で計算する。上限M以下のその奇数倍を数える。一般の素因数分解は不要。
+abc172_c	full	T083:primary,T086:supporting			0	j = best0 から始めることができます	両列の累積和を作り、Aから読む冊数iを増やすにつれてBの冊数jを減らす。jは全体でM回しか減らずO(N+M)。全(i,j)の二重全探索を除外。
+abc178_e	full	T155:primary		45度回転	statement	異なる二点間のマンハッタン距離	座標をx+yとx-yへ変換し、それぞれの最大値と最小値の差の大きい方を取るO(N)解法。一般の最近点対や全点対列挙は不要。
+abc181_c	full	T065:primary,T240:supporting			statement	相異なる 3 点であって、同一直線上	3点の組を全列挙し、2ベクトルの外積が0かを整数演算で判定する。O(N^3)でN<=100に対応。三角形の符号付き面積は共線判定の補助として記録。
+abc187_f	full	T017:primary,T193:supporting		クリーク被覆	0	下位集合から順に	各頂点集合が完全グラフかを前計算し、集合を部分集合へ分割するbitDPで最小被覆数を求める。部分マスク列挙で全体O(3^N)。単なる2^N回の全探索とは区別。
+abc194_e	full	T154:primary		出現位置間隔	0	計算量は	値iの出現位置に番兵0とN+1を加える。連続出現間隔がMより大きいiの最小値が、長さMの区間で欠けうる最小値。O(N)でMEXの最小化を解く。
+abc199_f	full	T030:primary,T176:supporting,T236:supporting		期待値の線形性	0	全体で	一操作後の期待値を表す遷移行列を構築し、そのK乗を二分累乗する。1/(2M)は法上の逆元で扱う。各ランダム経路の列挙や単なる確率DPではない。
+abc201_d	full	T022:primary,T038:primary,T039:supporting			statement	両者とも自分の勝敗が最適になるように行動	終端から各マスの得点差を逆順に計算し、高橋の手番では最大、青木では最小を取るミニマックスDP。純粋戦略の有限ゲーム探索でありミニマックス定理の名前だけとは異なる。
+abc225_d	full	T076:primary		双方向連結リスト	0	自分の前部に連結している電車の番号	前後の車両番号を配列で管理して連結・分離をO(1)で更新し、出力時だけ先頭から辿る。出力総量が制限されるため実行可能。Union-Findは分離に対応しない。
+abc266_e	full	T026:primary		最適停止	0	スコアの期待値の最大値は残りのターン数にのみ依存	残り回数tの最適期待値をE[t]=sum(max(d,E[t-1]),d=1..6)/6で更新する期待値DP。各出目に対する終了・続行の最適選択を含む。
+abc099_c	full	T065:primary,T264:supporting,T022:alternative			0	いくら引き出すかを全通り試す	6の冪で引き出す額iを0〜Nで全列挙し、iの6進桁和とN-iの9進桁和を最小化する主解。金額dp[n]を硬貨1,6^k,9^kから更新するO(N log N)コインDPも実行可能な別解。
+abc122_c	full	T086:primary,T073:supporting			0	問いの処理を始める前に構築	ACの開始位置を1とした配列の累積和を作り、各区間を累積和の差で答える。各クエリで全文字を走査するシミュレーションは制限内に終わらない。
+abc152_d	full	T060:primary		度数分布	0	ci,j × cj,i	先頭桁i・末尾桁jの数の個数c[i][j]を集計し、c[i][j]*c[j][i]を足す。全整数ペアの二重全探索は不要。
+abc159_d	full	T060:primary,T177:supporting			0	この問題をO(N) で解く	全体の同値ペア数sum(C(c_i,2))から、除いたボールの寄与c[A_k]-1を引く。二項係数は次数2の直接式で計算し、逆元や階乗テーブルは不要。
+abc162_e	full	T060:primary,T119:primary,T176:supporting			0	2X, 3X, ... の個数を引いて	floor(K/d)^Nから真の倍数の個数を降順に引く約数上のメビウス反転。累乗は二分累乗で計算する。各数列に対するユークリッド互除法は行わない。
+abc166_d	full	T065:primary			0	候補が実際に式を満たすかどうか判定	解説で証明された有限範囲のA,Bを全列挙し5乗差がXになる組を探す。Factorizationというタイトルだけで素因数分解を付けない。
+abc171_d	full	T076:primary,T008:alternative		度数分布	0	数列A そのものを操作する代わりに	値ごとの出現数と総和を維持して、置換ごとに総和へ(C-B)*count[B]を足し出現数を移す集約シミュレーション。配列で足りるが連想配列による実装も制約内。
+abc179_f	full	T076:primary		償却解析	0	すべてのクエリについての合計で	行列方向の境界と初めて枠の外に出るときの停止位置を配列で記録する。各要素は一度だけ更新され全体O(N+Q)。この確認した主解ではセグメント木は不要。
+abc182_d	full	T086:primary		累積最大値	0	座標の最大値	各区間の最終変位は累積和p_i、区間中の最大変位は累積和の累積最大q_i。現在座標+q_iの最大を取り、現在座標へp_iを加えるO(N)解法。O(N^2)の直接シミュレーションを避ける。
+abc189_d	full	T022:primary,T060:primary			statement	S_i が AND なら	先頭i個までの論理式がTrue/Falseになる代入数を状態として各AND/ORを反映する2状態DP。2^(N+1)の代入全探索は不要。ビット集合の演算問題ではない。
+abc193_d	full	T065:primary,T060:supporting		確率の直接計算	statement	高橋くんの勝つ確率を求めてください。	裏向き2枚の数字を9*9通り列挙して勝敗を計算し、残存枚数に基づく重みを足す。多段の確率遷移を持たないため確率DPは付けない。
+abc194_c	full			式変形,総和の直接計算	0	最後の式	二乗差の総和をN*sum(A_i^2)-sum(A_i)^2へ変形して一回ずつ総和を計算するO(N)解法。累積和配列を用いた区間計算は必要なく、語彙にない閉形式として残す。
+abc202_c	full	T060:primary		度数分布	0	前もって計算しておく	B[C[j]]の値ごとの頻度を配列に集計し、各A[i]に対応する頻度を合計するO(N)の数え上げ。全(i,j)列挙や連想配列は必要ない。
+abc209_d	full	T066:primary,T067:alternative,T130:concept		木の二部グラフ性	statement	N 個の街と N-1 本の道路	木を根からBFSまたはDFSで2色に塗り、問い合わせ両端の深さの偶奇が同じかで判定する。距離そのものやLCAを求める必要はない。保存解説が欠落していたため問題文からも確認。
+abc232_d	full	T022:primary			0	大きい順	各空きマスから右下へ進める最大歩数をdp[i][j]=1+max(dp[i+1][j],dp[i][j+1])で逆順に計算するO(HW)のDAG上DP。
+abc242_e	full	T073:primary,T060:primary		26進数	0	回文は、	前半が一致する回文は一意に決まる。前半を26進数の順位として数え、等しい前半から構成した回文がS以下かだけ追加判定する。一般の桁DPは不要。
+abc245_d	full	T127:primary,T171:alternative		多項式の筆算	0,1	多項式の除算	最高次から係数を確定し引き算するO(NM)の多項式除算。別解はX=256などで多項式を評価して多倍長整数を割り、その桁から係数を復元する。FFTを必要としない。
+abc272_e	full	T154:primary		調和級数による計算量評価	0	調和級数より大事な値	MEXは高々Nなので、A_i+t*iが0以上N未満となる時刻tだけをバケットに追加する。総追加数O(N log N)から各時刻のMEXを求める。全M回で全要素を更新しない。
+abc299_d	full	T064:primary		対話型問題	0	探索範囲の中央の位置	両端の値が0と1という不変条件を保ち、中央の値に応じて片側半区間へ絞る。文字列全体の単調性を仮定しない二分探索で隣接する0,1を発見する。
+abc301_d	full	T117:primary		貪欲法	1	上から順に次を行えば答えが得られます	?を0とした最小値を作り、上位ビットから1にしてもN以下なら立てる。ビット操作による貪欲解であり、すべての?の割当を列挙しない。
+abc307_d	full	T013:primary,T073:supporting,T128:concept			0	末尾に追加する	文字を末尾へ積み、対応する開き括弧の位置もスタックで管理する。閉じ括弧でその開き括弧以降をpopする。各文字は高々一回追加・削除されO(N)。
+abc133_e	selected_tags	T260:concept,T067:supporting			match	DFS 的に色を塗っていく	親と祖父で使った色を除く選択肢を、根からDFSで子へ伝えながら掛け合わせる木の塗り分け問題。塗り方の概念とDFSの利用を確認。
+abc139_e	selected_tags	T182:supporting,T067:primary			match	閉路検出と最大パス長の算出	各試合を頂点、実施順の依存を辺とする有向グラフに帰着し、DFSで閉路の有無と最長パス長を調べる。閉路検出は実際の実行可能解法の一部。
+abc184_d	selected_tags	T029:primary,T026:alternative			match	確率DP	(a,b,c)の状態を確率DPで進める解法に加え、終端の期待残り回数を0として各遷移の期待回数を逆向きに求める期待値DPもO(100^3)で実行可能。単なる確率の一回計算と分ける。
+abc184_f	selected_tags	T262:concept,T082:primary			match	部分和問題	選ぶ問題の所要時間和を上限T以下で最大化する部分和型問題。N個を二分して和を列挙し組み合わせる半分全列挙が満点解法。
+abc188_c	selected_tags	T114:concept,T076:primary			match	トーナメントをそのままシミュレート	隣接組の勝者だけを残して決勝まで進める実行可能なトーナメントの直接シミュレーション。
+abc199_d	selected_tags	T178:supporting			match	二部グラフ判定	一色に塗る頂点集合を固定し、残りのグラフを二色で塗れるか二部グラフ判定する別解が示されている。一般論としての名前だけではない。
+abc204_d	selected_tags	T262:primary,T022:supporting			match	部分和問題	料理を二つのオーブンへ分割し、片方に割り当てる時間和の到達可能性をDPで求める部分和問題。
+abc205_f	selected_tags	T230:alternative,T229:alternative			match	Ford-Fulkerson	行・トークン・列を介する容量1のフローネットワークを構築する。最大流をFord-FulkersonまたはDinicで求める実行可能な代替実装として確認。
+abc212_h	selected_tags	T107:primary,T108:primary,T037:concept			match	アダマール変換を使う事で高速に計算	山の石数のXORが0かでNimの勝敗を判定し、山の個数ごとのXOR畳み込みをWalsh-Hadamard変換で高速化する。通常のFFTとは分ける。
+abc222_g	selected_tags	T189:alternative			match	Baby-step Giant-step	2を並べた数の剰余条件を累乗の等式に直し、最小の指数をBSGSで求める離散対数への帰着が明示されている。
+abc227_h	selected_tags	T048:primary			match	オイラー路を構築するのと同じ要領	訪問回数条件を満たす辺の使用回数を決めた後、オイラー路を構成する手順で実際の巡回順を復元する。
+abc239_h	selected_tags	T026:primary	T098	商の値による状態圧縮	match	Sum of Totient Function	トーシェント関数は末尾の関連問題・Library Checkerの問題名に現れ、本問の解法では計算しない。実際には商を状態にした期待値のメモ化DPを用いる。
+abc251_f	selected_tags	T046:primary			match	DFS 木とは	要求される二本の全域木の一方を、DFSの探索辺からなるDFS木として構成する。探索木自体が出力の構成要素。
+abc264_g	selected_tags	T175:primary			match	Bellman-Ford 法によって	直近文字を状態とする重み付きグラフへ帰着し、Bellman-Fordで負閉路と最短距離を扱う。単なる最短路手法の例示ではない。
+abc270_g	selected_tags	T189:primary			match	元の問題は離散対数問題に帰着	一次漸化式を変換して累乗の一致問題としBSGSで離散対数を解く。A=0やA=1等の例外は別処理する。
+abc277_h	selected_tags	T169:primary			match	2-SAT への帰着が行えます	制約を高々二リテラルの節に直し充足可能性を判定する帰着が示されている。
+abc282_d	selected_tags	T178:primary			match	二部グラフかどうかを判定	まず各連結成分を二色に塗れるか確認し、色ごとの頂点数から追加可能な辺を数える。本問で必要な判定処理。
+abc282_f	selected_tags		T095		match	Disjoint Sparse Table と呼ばれるものもあるので	本問の構成は冪等な区間和集合に対応するSparse Table。Disjoint Sparse Tableの文は関連する改良データ構造の紹介で、提出する区間の構成手順としては示されていないため保留する。
+abc284_h	selected_tags	T179:primary			match	この問題に適用した式	ラベルを除いたグラフの軌道の個数をBurnside/Polyaの式で直接計算する解法である。
+abc286_d	selected_tags	T262:primary,T150:concept			match	部分和問題として解くことができます	枚数制限のある硬貨を二進分割して0/1部分和へ帰着する有界ナップサック型解法。単なる最小枚数問題ではない。
+abc286_f	selected_tags	T122:primary			match	中国剰余定理	互いに素な長さの置換サイクルで指数の剰余を読み出し、中国剰余定理で未知の指数を復元する対話型解法。
+abc286_g	selected_tags	T048:primary			match	オイラー路となっています	必須辺以外を縮約したグラフ上で、必須辺をちょうど一度ずつ通れるかをオイラー路の存在条件で判定する。
+abc288_d	selected_tags		T104		match	後者の主張の一般化として	Schwartz-Zippelはハッシュの衝突評価の一般化として言及されている。ここで用いる直接の衝突確率評価と区別し、同補題を解法の使用タグとして確定しない。
+abc301_c	selected_tags	T031:alternative,T073:primary			0,1	同じ文字の頂点をまとめることで高速に解く	文字頻度を比較する主解と、文字種ごとに頂点をまとめた容量付き二部マッチングへの帰着を確認。文字ごとに全頂点を展開する二乗辺数の方法は満点解法に数えない。
+abc303_h	selected_tags	T244:primary,T127:primary,T196:supporting			match	得られる数列に出現する	Prüferコードにおける出現回数が次数-1である性質で、次数制約つきラベル木を数列の数え上げに変換。指数型母関数の冪をNTTで求める。
+abc317_g	selected_tags	T139:primary			match	辺彩色問題だと思うことができます	必要なマッチング分割を二部グラフの辺彩色として解く高速化が本問への適用として提示されている。
+abc323_g	selected_tags	T057:primary			match	行列木定理、及び	辺重みを一次式とした行列木定理と行列式の計算で、全域木に関する条件を数え上げる。
+abc328_e	selected_tags	T065:primary,T213:supporting	T234		0,1	プリム法のような感じ	N-1本の辺を組合せ列挙して木か確認する主解。別解の集合DPがPrimに似た頂点追加を行っても最小辺を貪欲に選ばず全コストを保持するため、Prim法そのものではない。
+abc334_g	selected_tags	T046:supporting			match	グラフの DFS 木を取り	DFS木の訪問順ordとlowを用いて頂点削除後の連結成分数を評価する。DFS木は関節点の構造解析に実際に用いられる。
+abc335_g	selected_tags	T124:analysis_concept			match	原始根	累乗で到達可能である条件を位数の整除関係へ変換する証明に原始根を使っている。原始根の探索を実装するという主張ではなく、証明の概念として記録する。
+abc349_g	selected_tags	T068:primary			match	Manacher のアルゴリズムを応用	回文半径の重複を利用するManacherの考え方で必要な辺をO(N)本に削減する。本問の高速化への具体的な応用。
+abc353_g	selected_tags	T019:supporting			match	インラインdp	位置ごとの最大報酬DPを同じ配列へ更新し、セグメント木で移動費を含む最大値を管理する。in-place更新が実際の実装手順である。
+abc448_g	selected_tags		T038	ミニマックス定理	match	ミニマックス定理	この語は混合戦略零和ゲームの値の一意性を説明する定理名として現れる。純粋戦略ゲーム木を探索するミニマックス法とは区別し、同名部分の一致による付与を除く。
+abc359_f	selected_tags	T131:primary,T244:analysis_concept			match	木の次数列	木の実現可能な次数列が正で和2N-2である性質を使って最適化する。Prüferコードはこの次数列条件の証明として使い、列を構築・列挙する実装とは区別する。
+abc362_g	selected_tags	T170:alternative			match	Aho Corasick 法を利用した別解	全パターンをAho-Corasickのオートマトンへ入れ、Sを走査してfailure link上の出現数を集計する線形時間の別解が示されている。
+abc367_f	selected_tags		T104		match	Schwartz-Zippel lemma を用いずとも	多重集合のランダム加算ハッシュについて、独立乱数の直接評価で十分な衝突保証を得られる。補題名の注記・証明可能性を、その補題を使うアルゴリズムとして扱わない。
+abc367_g	selected_tags	T108:primary,T107:supporting			match	xor 畳み込みおよび hadamard 変換	XORごとの部分列個数をXOR畳み込みとHadamard変換で高速に計算する。畳み込みの種類を通常FFTと混同しない。
+abc373_g	selected_tags	T173:alternative,T034:alternative			match	ハンガリアン法や最小費用流を用いて	点同士を結ぶ総距離が最小の完全マッチングは交差を除ける性質を利用する。最小重み割当をHungarianまたは最小費用流で求める二つの実装を確認。
+abc385_g	selected_tags	T024:primary			match	挿入 DP による数え上げ	値の降順に要素を挿入し、両端・内部への挿入位置に応じた状態変化を数える挿入DPが本問の式の導出に用いられる。
+abc386_f	selected_tags		T263	編集距離	match	参考: 入力長に対して線形時間	LCSは関連するブログ記事の表題に現れる。本問は挿入・削除・置換を許す編集距離の判定であり、最長共通部分列をそのまま計算するものではないためタグを除く。
+abc389_f	selected_tags	T019:supporting			match	インラインDP	遷移のDP配列をin-place化して同じ状態を更新する手順が実際の別解として説明されている。
+abc391_g	selected_tags	T263:primary,T022:supporting			match	最長共通部分列 (LCS)	Sに対するLCSのDP行を状態として、文字を追加したときの行の変化を追う数え上げ。LCSは参考問題名だけでなく中心となる状態定義。
+abc393_g	selected_tags	T258:primary			match	Stern-Brocot 木上の二分探索	有理数パラメータλの探索をStern-Brocot木上で行い、分母の大きさの制約を利用して候補を絞る。木の名前だけの背景言及ではない。
+abc398_f	selected_tags	T068:primary			match	Manacherのアルゴリズム	末尾に達する回文部分文字列をManacherの半径から見つけ、足りない接頭辞を反転して追加する。
+abc404_g	selected_tags	T175:primary			match	Bellman-Ford 法で最短経路問題	累積和に対する差分制約を辺に変換し、Bellman-Fordで整合する最短距離を求める満点解法。
+abc425_e	selected_tags	T122:primary,T134:supporting			match	中国剰余定理の適用	法Mを素因数分解して素数冪ごとに答えを求め、中国剰余定理で再結合する。任意法で二項係数を扱うための実処理。
+abc428_g	selected_tags	T179:primary,T098:supporting			match	トーシェント関数などを適切に前計算	回転で同一視したネックレスをPolya/Burnsideで数え上げ、周期ごとの係数にトーシェントを用いる。
+abc429_e	selected_tags	T092:alternative,T079:supporting			match	color coding と呼ばれる手法を用いてこの問題を解く	色をランダムに割り当てたグラフで探索を繰り返すcolor codingの実行可能な別解として提示されている。
+abc433_g	selected_tags	T255:primary			match	Suffix Automaton というデータ構造を用いて解く	部分文字列の同値類をSuffix Automatonでまとめ、状態ごとのゲームの勝敗を逆向きに計算する解法。
+abc447_f	selected_tags	T131:concept			match	次数列	ムカデグラフが含まれる条件を、内部頂点と両端頂点の必要次数を満たすパスの存在へ言い換える。次数条件は構造の判定に使う概念。
+abc448_f	selected_tags	T115:concept			match	ハミルトンサイクル	すべての地点を一度ずつ通って戻る閉路を出力する問題であり、Hamiltonian cycleは目的とする構造そのもの。
+abc451_f	selected_tags	T178:primary,T005:supporting			match	頂点倍化を用いて二部グラフ判定	各頂点を白・黒の二つに複製しUnion-Findで制約を併合する二部グラフ判定。各連結成分の色数最小化も同じ構造に基づく。
+abc455_b	selected_tags	T068:alternative			match	これに対して Manacher のアルゴリズムを使います	横区間を文字列IDに分類し、縦方向の反転対応をManacherの対称性で数えるO(HW^2)の別解。B問題でも解説が示す高速な実行可能解法として残す。
+abc476_g	selected_tags	T101:analysis_concept			match	LYM 不等式より	許容される集合族の大きさの上界をLYM不等式で証明している。証明に用いる概念として確認し、参考記事名のSpernerと区別する。
+abc178_d	selected_tags	T022:primary,T177:alternative,T165:analysis_concept	T077		match	仕切り	DPで構成数を求める主解と、長さを固定して玉と仕切りによる二項係数を合計する別解。並び替え方の総数を数える説明はソートの実行を意味しない。
+abc010_4	selected_tags	T032:primary,T033:primary,T229:alternative,T230:alternative	T062,T065,T264		match	最小カット最大フロー定理	満点制約では最小カットを最大流で求める。DinicとEdmonds-Karpは実行可能な最大流の実装選択肢。全探索と剰余は部分点の列挙説明だけ、ヒューリスティックはアルゴリズム紹介表の速度の説明で解法として使わない。
+abc448_g	selected_tags	T015:supporting,T016:alternative,T063:supporting	T086		match	累積和の要領で	Li Chao Treeを永続化して直線集合を管理し、包絡線の凸性から三分探索する別解。累積和の要領という説明は永続木の版を順に作る比喩で、区間和配列は計算しない。
+abc293_g	full	T084:supporting,T077:supporting,T060:primary		Moのアルゴリズム	0	Mo のアルゴリズムによって本問題を解く	左端を平方根程度のブロックに分け、そのブロック内では右端順にクエリをソートするMo法。区間内の頻度cに対するC(c,3)を差分更新する。平方分割はクエリ順序の補助、Mo法自体は語彙外に記録。
+abc318_e	full	T060:primary,T177:supporting		位置の総和の維持	1	要素数	右端kごとに同じ値の過去位置の個数cと総和sを管理する。(k-1)*c-s-C(c,2)を足して全体O(N)。全三つ組の列挙はしない。
+abc324_c	full	T073:primary		編集距離1の判定	statement	英小文字	長さの差が高々1の場合に二本のポインタで文字列を比較し、一度だけ挿入・削除・置換によるミスマッチを許す。一般のLCSや二次元編集距離DPは不要。
+abc324_e	full	T073:supporting,T060:primary,T086:supporting		部分列マッチング	0	個数	各Sが含むTの最長接頭辞長Aと接尾辞長Bを二ポインタで求める。A_i+B_j>=|T|を満たす組はBの頻度の累積和から数えられ、全体O(総文字数+N+|T|)。
+abc329_d	full	T076:primary		度数分布	0	投票先となった候補者に限られる	得票数を配列で管理し、現在の当選者と新しい投票先だけを票数と番号で比較するO(N+M)のシミュレーション。ヒープは必要としない。
+abc337_e	full	T117:primary		情報量,対話型問題	0	二進数	各ジュースの0始まり番号のビットiが1のときだけ友人iに飲ませる。症状のビット列から番号を復元する。全ての部分集合を探索する問題ではない。
+abc342_c	full	T073:primary,T076:supporting		文字写像の合成	0	はじめ	元の26文字が現在どの文字へ写るかだけを更新し、最後にSを一回変換するO(26Q+N)の文字列処理。各クエリで全文字列を置換する方法を避ける。
+abc346_e	full	T076:primary,T060:supporting		逆順処理	0	操作を逆順から考える	後ろから操作を走査し、既に処理した行列を記録する。初めて処理する行なら未処理の列数だけ色の個数へ加算し、列も同様に集約して数える。
+abc357_c	full	T080:primary,T081:supporting		フラクタルの構築	statement	他の 8 個のブロック	中央を白くし、残る8領域に小さい同じ図形を再帰的に描く。出力サイズに比例する分割統治による構築。図形を文字列で出力することだけで文字列アルゴリズムは付けない。
+abc366_c	full	T076:primary,T008:alternative		度数分布	0	現在の種類数および	値ごとの個数と非ゼロの種類数を維持し、0から1または1から0へ変わったときだけ種類数を更新する。配列で足りるが連想配列による頻度管理も制約内の別実装。
+abc372_c	full	T073:primary		差分更新	0	一文字を変えても	更新位置を含む長さ3の部分文字列は高々3個なので、その箇所のABC一致数を更新前後で引き足しする。各クエリO(1)の文字列処理。
+abc389_c	full	T086:primary,T011:concept		配列と先頭オフセット	0	追加される順番とヘビが列を抜ける順番は同じ	追加された長さの累積和と削除済み個数のオフセットを管理する。前からk番目の頭の位置を二つの累積和の差で求める。FIFOという構造的性質を概念として記録。
+abc395_d	full	T076:primary		間接参照	0	仮想的な「ラベル鳩」	鳩→内部の箱、箱→巣ラベル、巣ラベル→箱の3配列を持つ。巣全体の交換ではラベル対応だけ交換し、各問い合わせをO(1)で処理する集約シミュレーション。
+abc397_c	full	T060:primary,T012:alternative		前後の種類数	0	に含まれる整数の種類数	前からと後ろから出現済み値を管理し、各分割位置の左右の種類数を合計して最大を求める。Setを使って種類数を維持する実装もO(N log N)で実行可能。
+abc142_f	full	T182:primary,T067:supporting,T066:alternative		誘導閉路	0	閉路をひとつ探し	DFSで閉路を見つけ、弦があればより短い閉路へ縮める主解。別解として各始点からBFSして最短有向閉路を求めると、弦があればより短い閉路を作れて矛盾するため条件を満たす。O(N(N+M))で実行可能。
+abc164_f	full	T117:primary		ビットごとの構築	0	各ビットの値は独立に決められる	64個のビットを独立に処理し、行列のAND/OR条件から確定するマスを埋め、残る行列の少なくとも一つの0/1条件を満たすよう構築する。全行列を列挙しない。
+abc181_f	full	T005:primary,T077:supporting		ボトルネック連結性,幾何	0	距離の短い方から頂点対の間に辺を張っていく	上下境界と釘を頂点にし、距離の昇順でUnion-Findで併合する。上下境界が初めて連結する距離の半分が求める限界半径。O(N^2 log N)の解説手順を確認。
+abc191_d	full	T065:primary,T064:supporting		整数平方根,固定小数点	0	すべての計算が整数で行える	入力を10^4倍して整数にし、円を横切る各整数xのみ列挙する。各列の有効yの上下限を整数平方根から求める。平方根を整数二分探索すれば境界誤差を避けられる。
+abc196_e	full	T076:primary		関数合成,clamp	0	合成関数	合成結果をmin(c,max(b,x+a))の3パラメータで持ち、各加算・min・max操作で更新する。最後に各問い合わせへ一回適用するO(N+Q)の集約シミュレーション。
+abc251_g	full	T180:primary,T240:supporting		平行移動後の半平面制約	0	有向線分の左側	凸多角形の各辺について全平行移動の半平面制約を最も厳しい一本へ集約し、問い合わせ点が全N本を満たすか外積で判定する。交差多角形の境界自体を構築する一般の半平面交差アルゴリズムとは分ける。
+abc001_1	full			基本算術	statement	H_1 - H_2	求める値は二つの入力の差だけである。算術の独立タグがないため、探索やシミュレーションに置き換えない。
+abc001_2	full			条件分岐,単位換算	0	距離によって場合分け	指定された距離の区間に従ってVVへ直接変換する。固定個数の条件分岐は独立タグがなく、数式処理以外の名前付き手法を必要としない。
+abc002_1	full			大小比較	statement	大きい方の値を出力	二つの整数の比較だけであり、ソートや全探索のタグを付けない。
+abc003_1	full			期待値の直接計算	statement	平均いくら程度給料	一様分布の平均は(N+1)/2なので10000を掛ける。状態遷移を持つ期待値DPや確率DPは使わない。
+abc007_1	full			基本算術	statement	隣り合う木の間の数	木がn本一直線に並んでいると間隔はn-1個。木データ構造の問題ではない。
+abc008_1	full		T060	基本算術	statement	通し番号が S 以上 T 以下	閉じた整数区間の要素数T-S+1を計算するだけで、組合せ的な数え上げのアルゴリズムを必要としない。
+abc009_1	full			切り上げ計算	statement	合計で 2 個のダンボール	一往復で2個運べるので必要回数は(N+1)//2。各往復をシミュレートせず直接計算する。

@@ -1,0 +1,9 @@
+﻿from record_resolution_0 import *
+put('abc433_e','T007:supporting,T011:supporting,T013:alternative','値vをNMから降順に埋める。行列最大両方なら交点、一方のみならその行/列で相手最大>vの空き、どちらでもなければ自由候補へ置く。各セルをmin(Xi,Yj)のbucketへ一度登録し、その値処理後に自由候補queueへ移すためO(NM)。自由候補の取り方は任意なのでstackでも可。','最大値からの貪欲行列構成',anchor='リストで管理')
+put('abc433_g','T255:primary,T039:supporting,T022:supporting,T069:alternative,T070:concept','Suffix Automatonの文字遷移DAGで状態win=負け状態への遷移が存在するかを後退計算。全substringが遷移道に対応し状態O(N)、辺O(N)なのでO(N)。Suffix Array+LCPからsuffix圧縮trieを構成する別解も可。分岐間の一文字移動chainは長さの偶奇で勝敗を伝え、分岐点だけDPすればO(N*26 log N)以内。','LCP Array',anchor='後退解析')
+put('abc434_d','T075:primary,T086:supporting,T059:alternative,T079:supporting,T008:supporting','2次元imosで被覆数と被覆雲ID和を得る。被覆0の総数baseと被覆1の唯一IDの個数only[k]を集計しbase+only[k]。O(2000^2+N)。source1は雲へ乱数hashを付け矩形xor imosを取り、0/各雲hashをmap照合するZobrist別解。同一集合hash衝突を避ける確率保証が必要で128bit化でも同計算量。',anchor='二次元 imos 法')
+put('abc434_e','T067:primary,T005:alternative,T201:concept,T182:supporting,T008:supporting,T012:supporting,T085:supporting,T031:alternative,T032:supporting,T118:concept,T229:supporting','座標X-RとX+Rを辺で結ぶ多重グラフの成分ごとにmin(頂点数,辺数)を足す。木なら根以外、閉路ありなら全点を塗れる。map DFSまたは座標圧縮DSUでO(N log N)。別解はウサギと候補座標の二部最大matchingを容量1網のDinic最大流で求めO(N sqrt N)。元本文のDP不可は不採用方針の説明。',anchor='解法 1')
+put('abc434_f','T077:primary,T071:supporting,T073:supporting','XY<YXで文字列をソートし最小連結を得る。比較は長いXのZ配列で中間自己比較をO(1)、前後を短いY長だけ走査しO(min長)、全sort O(総文字長 log N)。交換しても同じ隣接対があれば最小連結が2番目にも現れる。無ければ最後2個交換とその一つ前の隣接交換の2候補だけ比較。',anchor='比較を')
+put('abc434_g','T003:primary,T064:supporting,T080:supporting,T236:supporting,T073:concept,T120:analysis_concept','各節点に正規化後の先行B数b、残数字長l、値xを持つ。左節点と右の合成で左の末尾桁が必要なら左部分木を降り、残数字数に従い末尾n桁をO(log N)復元。10冪/逆冪で消された桁分を除いて結合し、点更新・区間取得O(log^2 N)、初期化O(N)。通常の定数時間モノイドmergeではない。',anchor='左側のデータがセグメント木',uncertainty='平方分割はN=8e6で元解説も困難と指摘。永続平衡木を節点に載せる別解は存在だけ言及され具体手順未検証なので採用しない。')
+rows['abc434_d']['source_indices']='0,1'
+save()

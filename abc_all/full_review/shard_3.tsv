@@ -1,0 +1,763 @@
+﻿problem_id	scope	accepted	rejected	out_of_vocabulary	source_indices	evidence_quote	reason	review_status	uncertainty
+abc374_b	full	T073:primary			0	実装する方法はいくつか考えられますが、例えば次のようなアルゴリズムで答えを求めることができます。	二文字列を先頭から照合し最初の不一致、長さの差を含む位置を返す。O(min(len(S),len(T)))。文字列処理以外の探索構造は不要。	reviewed	
+abc374_c	full	T061:primary,T065:supporting			0	個の部署をそれぞれグループ	各部署の2群への割当をN<=20でbit全列挙し両群和の最大値を最小化する。O(N2^N)。再帰は実装選択で独立必須手法ではない。	reviewed	
+abc374_d	full	T065:primary,T061:supporting,T080:alternative,T017:alternative,T022:supporting			0	という非常に小さな制約に着目しましょう。	N<=6の描画順N!と向き2^Nを列挙し移動距離を加算する。O(N N!2^N)。訪問集合・最後の線分・向きの巡回型DPもO(2^N N^2)で実行可能。再帰列挙は別実装。	reviewed	
+abc374_e	full	T064:primary,T065:supporting			0	の「最小値を最大化」する問題です。	生産数wの達成費用が予算以内か二分探索。各工程で一方の機械台数を交換則によりAiまたはBi以下だけ列挙し他方を切り上げで決める。O(N max(A,B) log W)。	reviewed	
+abc374_f	selected_tags	T022:primary,T077:supporting,T085:supporting			0	\(T_N \le 10^{12}\) である (暦に存在する日数が非常に大きい) ので、「今何日か?」を愚直に管理する解法ではこの問題に正解することができなさそうです。	出荷候補日Ti+kXを列挙してソート・一意化し、イベント日と出荷済み個数の最小不満度DP。何もしないか次のX日以降へまとめて出荷し、候補O(N^2)でO(N^4)以内。	needs_resolution	解説後半・別解の追加点検が必要
+abc374_g	selected_tags	T052:primary,T031:primary,T032:supporting,T118:supporting,T201:analysis_concept			0	まず、次のような有向グラフ \(G\) を考えます。	商品名の接続を有向グラフとしSCC縮約したDAGの歩道被覆を二部最大マッチングに帰着する。到達辺と被覆の条件は後半を追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc375_a	full	T073:primary			0	for 文などを用いて、各	文字列の連続3文字が#.#となる位置を走査し数える。O(N)。	reviewed	
+abc375_b	full	T076:primary		ユークリッド距離	0	問題文の指示通りに実装しましょう。	指定座標を順に訪れ最後に原点へ戻るユークリッド距離を加算する直接シミュレーション。O(N)。	reviewed	
+abc375_c	full	T264:primary,T076:supporting			0	すべての操作を愚直に行うと、置き換えの回数は合計で	各マスの境界までの層数c=min(x,y,N+1-x,N+1-y)を求め、90度回転をc mod 4回だけ適用して対応先へ配置。O(N^2)。素朴な全層更新O(N^3)は採らない。	reviewed	
+abc375_d	full	T060:primary,T086:supporting,T073:supporting			0	\(N \coloneqq |S|\)	中央jの左右にある各文字の頻度積を足してSi=Skの三つ組を数える。左右頻度の差分または累積和を使いO(26N)、差分でO(N)。	reviewed	
+abc375_e	full	T022:primary,T150:supporting			0	\(S \coloneqq \displaystyle\sum_{i = 1}^{N} B_i\)	人iまで処理してチーム1・2の強さx,yにした変更人数の最小値をDP。3番目は累計強さから復元し、各人を3群へ割当。O(N(S/3)^2)。	reviewed	
+abc375_f	full	T208:primary,T055:supporting,T123:supporting		オフライン逆順処理	0	都市を頂点、道路を辺としたグラフの問題として考えます。	クエリを逆順にし辺削除を辺追加に変える。初期全対距離をFloydで求め、追加辺を通る両方向の候補で全対距離をO(N^2)更新。O(N^3+TN^2+Q)。	reviewed	
+abc375_g	selected_tags	T187:primary,T055:supporting,T077:supporting,T086:supporting			0	都市を頂点、道路を辺としたグラフ \(G=(V,E)\) の問題として考えます。	始点と終点からDijkstraし最短経路に載る辺だけ残す。距離順の切れ目を跨ぐ辺が一本か区間集計で判定。代替の橋判定を含め後半確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc376_a	full	T076:primary			0	の問題A「Welcome to AtCoder」を解いてみてください。	最後に飴を得た時刻preを管理し、各押下時刻Ti-pre>=Cなら個数を増やしてpre更新。操作を順番に模擬するO(N)。	reviewed	
+abc376_b	full	T076:primary,T264:supporting			0	個の指示を順番に見ていきながら、現在の左手・右手の位置、および今までに行なった操作回数の最小値を管理することを考えます。	左右の手の位置を管理し、指示された手をもう一方を通らず円環上で移動する。時計回り距離と逆回り距離のうち障害を含まない方を選ぶO(Q)、Nで巡回距離を計算。	reviewed	
+abc376_c	full	T077:primary,T064:alternative		貪欲法	0	まずは、新しく購入する箱の大きさ	箱と玩具を大きさ順に並べ、小さい箱に入らない最大玩具一つを追加箱へ割当てる貪欲O(N log N)。別解は購入サイズxを二分探索して整列後の全不等式を検査。	reviewed	
+abc376_d	full	T066:primary,T055:supporting,T011:supporting			0	を通る辺数が最小の閉路」がどのような性質を持つのか考えてみましょう。	頂点1からBFSで全距離を求め、1へ有向辺を持つ到達頂点vのdist[v]+1を最小化する。O(N+M)。FIFOをdequeで実装してもDeque技法とは分ける。	reviewed	
+abc376_e	full	T077:primary,T010:supporting,T009:alternative			0	\((1 \leq i \leq N-1)\)	A順にソートし最大Aの添字rを固定。過去Bの小さいK-1個の和を最大ヒープで維持してAr*(Br+sum)を評価。O(N log N)。順序付き多重集合でも同じ更新が可能。	reviewed	
+abc376_f	full	T022:primary			0	動的計画法を用いて解くことを考えます。	指示iで指定された手の位置は確定、他方の位置jを状態に最小操作数を保持。時計回り/逆回りに単独移動または相手を最低限押し出す遷移だけを比較。O(NQ)。	reviewed	
+abc376_g	selected_tags	T005:primary,T010:supporting,T077:alternative		01 on Tree,貪欲法	0	この問題は俗に 01 on Tree と呼ばれるテクニックを利用すると解ける問題です。	期待値を訪問順位の重み付き和に変形し、01 on Treeの比率順ブロック併合で最小化する。確率DPではない。DSUとヒープの具体更新を追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc377_a	full	T073:primary,T077:alternative,T065:alternative			0	の問題A「Welcome to AtCoder」を解いてみてください。	A,B,Cの各文字が一度ずつあるか確認するO(1)。3文字をソートしてABCと比較、または6順列の全列挙も実行可能な別解。	reviewed	
+abc377_b	full	T065:primary,T076:alternative			0	この問題は、次の \(2\) つの方針で解くことができます。	64マスを列挙し同じ行/列に駒がないことを確認する。行列の攻撃フラグを塗るシミュレーションも可能。文字列の見た目だけでT073を付けない。O(8^3)以内。	reviewed	
+abc377_c	full	T012:primary			0	置くことができるマス全体は最大で \(10 ^ {18}-3\) 個などと非常に大きくなる可能性がありますが、置くことができないマスはたかだか \(9M\) 個なので、これをすべて管理することができます。	各駒の位置とナイトの8攻撃先を集合に挿入して禁止マスの重複を除きN^2から引く。O(M log M)またはハッシュの期待O(M)。	reviewed	
+abc377_d	full	T060:primary,T086:supporting			0	まず、重要な事実として整数の組	右端rに対する左端下限dr=max(d[r-1],max(Li+1:Ri=r))を前から更新しr-dr+1を足す。区間制約の累積最大と数え上げでO(N+M)、任意の漸化式をDPとは呼ばない。	reviewed	
+abc377_e	full	T176:primary,T264:supporting,T182:supporting			0	頂点 \(1,\) 頂点 \(2,\ldots,\) 頂点 \(N\) からなり、\(i\to P _ i\ (1\leq i\leq N)\) の \(N\) 辺がある有向グラフを考えます。	置換の各サイクルを走査し、2^K mod サイクル長を二分累乗で求めその位置数だけずらす。O(N+サイクル数 log K)。閉路分解を使い巨大回数の逐次シミュレーションをしない。	reviewed	
+abc377_f	selected_tags	T012:primary,T060:supporting,T205:supporting			0	置くことができるマスも置くことができないマスも非常に大きくなる場合があるため、それらを直接管理することは難しいです。	攻撃される行・列・両対角線を集合で一意化し、新しい直線のマス数から既存線との盤面内交点を重複除去して足す。交点O(M^2)でO(M^2 log M)。直線方程式の具体使用は後半確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc377_g	selected_tags	T070:primary,T022:supporting,T072:alternative			0	以下のような動的計画法を考えます。	過去文字列で接頭辞Tを持つ最短長をTrie頂点に保持。新文字列の各接頭辞まで走査して編集費用を最小化し状態を更新。合計文字数に線形。ハッシュ別解の正当化と計算量は追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc378_a	full			頻度集計,基本算術	0	この問題には様々な方針が考えられますが、ここでは比較的面倒でないものを紹介します。	色ごとの個数cを数えfloor(c/2)を4色について足すO(1)。基本頻度集計と算術でありソート・集合・DPは必要ない。	reviewed	
+abc378_b	full	T264:primary			0	あまる日」は，日付がある非負整数	曜日型の条件x=aq+rを用い、d/qの商と余りにより次の収集日を直接求める。各問い合わせO(1)。	reviewed	
+abc378_c	full	T008:primary			0	を前から順番に見ていって，ある値	値xの最後の出現添字を連想配列で管理し、出力後に現在添字へ更新。O(N log N)またはハッシュ期待O(N)。10^9の添字全配列は使わない。	reviewed	
+abc378_d	full	T067:primary,T080:supporting,T065:supporting,T060:supporting			0	まず，条件を満たす経路の個数を見積もってみましょう．	各開始マスから訪問済み集合・現在位置・長さを管理して深さKまで単純経路をDFS全列挙。訪問を戻して他分岐を探索する。O(HW 4*3^{K-1})。	reviewed	
+abc378_e	selected_tags	T086:primary,T001:supporting,T077:alternative,T081:alternative,T083:alternative			0	によって表現するのが典型です．数列	剰余累積和Sで区間和をSr-Slの符号補正へ変形し、過去のSがSrより大きい個数をFenwick木で数える。O(N log M)。他の全列挙でない別解は追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc378_f	selected_tags	T027:primary,T022:supporting,T005:alternative,T054:analysis_concept			0	問題文の条件を分かりやすく言い換えましょう。	次数条件を満たすパス端点数を木DPで子部分木から集計し組合せを足す。LCAは二端点の分岐点の説明であり前計算LCAを使うとは限らない。DSU別解と具体次数条件は追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc378_g	selected_tags	T022:primary,T224:analysis_concept			0	この問題は、ロビンソン・シェンステッド対応の練習問題です。	LIS/LDSの長さ条件をYoung図形状の表の条件に変え、1..AB-1を順に置く配置数DPを行う。LISを実際に二分探索で求める解法ではない。状態圧縮・計算量は後半確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc379_a	full	T073:primary,T264:alternative			0	の入力の仕方によって実装が異なります。	3桁を文字列として受け取りbca,cabを組み立てるO(1)。商と剰余による桁分解も実行可能な別解。	reviewed	
+abc379_b	full	T073:primary,T076:supporting		貪欲法	0	文字目までがすべて丈夫であるときに左から	丈夫な歯Oの連続数を前から数えK本ごとにイチゴを食べてカウンタを0に戻す。最左からK本ずつ使う貪欲な直接操作でO(N)。	reviewed	
+abc379_c	full	T077:primary,T086:supporting		寄与の総和,貪欲法	0	この問題は、すべてのマスに	石のある位置順にソートし、各接頭辞で必要な個数が足りるか累計個数から判定。全個数Nなら最終位置総和から初期位置の重み付き和を引く。O(M log M)。	reviewed	
+abc379_d	full	T011:primary,T086:supporting			0	簡単な解法として、愚直に植物とその高さを管理する方法が考えられます。	成長の累計値を一つ持ち、植えた時の累計値をFIFOに記録する。収穫時は古い順に現在累計-植付値>=Hなら取り出す。各鉢一度だけ削除し全体O(Q)。	reviewed	
+abc379_e	full	T086:primary,T171:supporting,T264:supporting			0	が小さいときに答えがどのように表されるかを考えてみましょう．	Ai=sum_{j<=i}j*Sjの累積和を前計算し、下位桁から繰り上がりを管理してsum 10^{N-i}Aiを十進多倍長表現で出す。O(N)、巨大整数の全計算に依存しない。	reviewed	
+abc379_f	selected_tags	T013:primary,T001:alternative,T064:alternative,T054:alternative			0	\(l,r\ (l<r)\)	右から単調スタックで各lから見えるビル集合を保持し、クエリのrより先の個数を二分探索またはBITで取得する。O((N+Q) log N)。LCA別解の実際の構築は追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc379_g	full	T191:primary,T022:supporting,T060:supporting			0	行と列を反転しても答えは変わらないため， \(W\leq H\) を仮定します． 左上のマスから右下のマスにかけて， \((1,1)\to(1,2)\to\dots\to(1,W)\to(2,1)\to(2,2)\to\	幅をmin(H,W)<=14へ揃え、直近幅Wマスの塗り方を境界状態に持つフロンティアDP。縦横に同色が隣接しない状態だけを遷移しO(HW 2^W W)以内。確率ではなく塗り方個数。	reviewed	
+abc380_a	full	T073:primary,T077:alternative,T264:alternative			0	解法1: 各桁に何が何文字含まれるか数える	各桁の頻度が1は1個、2は2個、3は3個か検査するO(桁数)。ソートして122333と比較する別解、商余りで桁を取り出す別実装もある。	reviewed	
+abc380_b	full	T073:primary			0	解法1: 文字列を辿って解析する	文字列を左から走査し、縦棒に挟まれたハイフン数を出力する。split等の文字列解析も同じO(len(S))。構文木を作るパーサではない。	reviewed	
+abc380_c	full	T073:primary		ランレングス圧縮	0	の塊」を入れ替えたものが答えとなります。	0/1の連長区間へ分け、K番目の1区間と直前の0区間の順を交換して連結する。O(N)。	reviewed	
+abc380_d	full	T117:primary,T073:supporting,T059:alternative,T080:alternative			0	\(2 \times |S|\)	問い合わせKのブロック番号floor((K-1)/len(S))のpopcount偶奇で元文字の大小反転を決める。O(Q log K)。再帰的に最高位bitを除いて反転状態を戻す解法も可能。巨大文字列の逐次生成は不可能。	reviewed	
+abc380_e	full	T012:primary,T008:supporting,T005:alternative			0	隣接している同じ色のマスを連結とみなす連結成分をうまく管理することでこの問題を解くことができます。	同色連結区間の左端をordered set、色をmap、色別総個数を配列で管理して塗替えと左右併合をO(log N)で処理。DSUで端点と色を保持する別解もO((N+Q)alpha(N))で実行可能。	reviewed	
+abc380_f	full	T022:primary,T080:supporting,T038:supporting,T039:supporting			0	現在どちらの手番であるかと、それぞれのカードが高橋君の手札・青木君の手札・場札のどこにあるかの	手番と各カードの3置場で局面を符号化し、合法手後に相手必敗の局面があるかメモ化再帰する。手札値総和が減るためDAG。O(3^S S^2)。三進状態をbitDPと誤分類しない。	reviewed	
+abc380_g	selected_tags	T003:primary,T001:alternative,T012:supporting			0	\(P_L,P_{L+1},\dots,P_R\)	窓内部の転倒数を範囲頻度木で挿入削除し、シャッフル後の窓内期待転倒数K(K-1)/4との差を元全体転倒数へ反映して平均する。O(N log N)。集合は境界管理の実装根拠を追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc381_a	full	T073:primary			0	この問題は文字列を上手く扱えるかを問うている問題です。	N奇数、中央/、前半は1で後半は2の全条件を一度の走査で検査するO(N)。	reviewed	
+abc381_b	full	T073:primary,T012:alternative,T008:alternative			0	与えられた文字列が 1122 文字列の	偶数長・隣接ペア一致・各文字がちょうど2回を頻度配列で検査するO(len(S)+26)。異なるペア文字を集合またはmapで管理する別実装も同制約で可能。	reviewed	
+abc381_c	full	T073:primary		ランレングス集計	0	文字列を調べる方法を発見できるかが鍵となります。	各/を中央として左の1連長と右の2連長の小さい方を伸ばす。全連長を前計算すれば各中央O(1)、全体O(N)。	reviewed	
+abc381_d	full	T083:primary,T008:supporting			0	の奇数項目から始まるものと偶数項目から始まるものについて分けて考える解法	開始添字の偶奇を分け、隣り合う等値ペアの窓で同じ値が重複しない最大区間を尺取りする。最後の位置の配列またはmapで左端を進めO(N)。	reviewed	
+abc381_e	selected_tags	T064:primary,T086:supporting,T073:supporting			0	この問題はクエリ問題です。	区間内に1をk個、/、2をk個取れるか累積個数と各文字の位置配列で判定し長さを二分探索。スラッシュ位置を単調に探索してO(Q log N)等で処理可能。	needs_resolution	解説後半・別解の追加点検が必要
+abc381_f	full	T017:primary,T022:supporting			0	以下では連続とは限らない部分列を単に部分列とよびます。	使った値の集合Sを状態に、その値集合で作る1122部分列の最短終端dp[S]を持つ。次の同値2個の出現位置を前計算して未使用値を追加。O(NM+M2^M)、M=20。	reviewed	
+abc381_g	selected_tags	T127:primary,T197:supporting,T129:supporting,T078:supporting			0	下準備： \(\sqrt{5}\) の添加 既知の事実として、 \(a_n\) の一般項はある定数 \(c_1, c_2\) を用いて次式で表すことができます。	Fibonacciの一般項をsqrt(5)添加体で表し積を高速計算する。主解の多項式変換とダブリングの使いどころを全文確認する。	needs_resolution	解説後半・別解の追加点検が必要
+abc382_a	selected_tags	T073:primary			0	の問題A「Welcome to AtCoder」を解いてみてください。	@の数を数えて残った空きとDを足すO(N)の文字列頻度集計。計算式の誤植と思われる記述は問題文の残量定義で確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc382_b	full	T073:primary,T076:supporting			0	の中で最も右の位置にある	文字列を右から走査し@をD個まで.へ置き換える。逐次操作の直接実装でO(N)にまとめられ、文字列全体をD回探す必要はない。	reviewed	
+abc382_c	full	T064:alternative,T086:supporting			0	\(K=\max B_i\)	美味しさxを最初に食べる人を、過去の最小許容値を下げた区間へ一度ずつ割当てるO(N+max A+M)。許容値の接頭辞最小を二分探索する別解もO((N+M) log N)。	reviewed	
+abc382_d	full	T080:primary,T065:supporting,T077:alternative,T177:analysis_concept			0	数列を辞書順に並び替えることは最後にソートすることにより達成できるので、条件を満たす数列を単に列挙することを考えます。	隣り合う差10以上を満たす次要素だけを再帰生成し、残りを置ける上限M-10*残数で枝刈り。辞書順生成ならソート不要、列挙後ソートも出力量が小さく実行可能。二項係数は出力数上界の証明。	reviewed	
+abc382_e	full	T026:primary,T029:supporting,T022:supporting			0	枚以上のレアカードを手に入れるまでに開封するパックの個数の期待値、	1パックのレア枚数分布g[j]をBernoulli和の確率DPでO(N^2)計算。残りi枚の期待パック数f[i]は自己ループg0を除きf[i]=(1+sum_{j>=1}g[j]f[max(0,i-j)])/(1-g0)、O(NX)。	reviewed	
+abc382_f	full	T002:primary,T077:supporting			0	\(R_1 \geq R_2\geq \dots \geq R_N\)	初期高さの下のバーから処理し、被覆列範囲の最上面minを取り全列を新しい高さへ区間代入する。遅延セグ木で区間minと代入をO(log W)、全体O(N log N+N log W)。通常セグ木だけで同じ処理ができるとはしない。	reviewed	
+abc382_g	selected_tags	T144:alternative		幾何的場合分け	0	適切に回転・平行移動・裏返しを行うことで、 \(0 \leq S_x < K, 0 \leq S_y < K, 0 \leq T_x, 0 \leq T_y\) である場合に帰着できます。	座標の平行移動と対称性で場合分けする主解、0-1 BFS別解の有限グラフ構築を全文確認する。	needs_resolution	解説後半・別解の追加点検が必要
+abc383_a	full	T076:primary			0	この問題は時系列順に水がいくら残っているかをシミュレーションすることが求められています。	時刻差の分だけ水量をmax(0,water-dt)で減らし、次に指定量を追加する時系列シミュレーション。O(N)。	reviewed	
+abc383_b	full	T065:primary			0	\((i_1,j_1),(i_2,j_2)\)	加湿器2台を置く床マス対を全探索し、全床のマンハッタン距離がどちらかの半径内か調べる。O((HW)^3)で小さい制約に適合。	reviewed	
+abc383_c	full	T066:primary,T011:supporting,T055:supporting			0	この問題は多始点BFSの練習問題です。	全加湿器を距離0で同じFIFOへ入れる多始点BFS。壁を除き未訪問マスへ距離を伝播しD以内の床を数えるO(HW)。	reviewed	
+abc383_d	full	T253:primary,T160:supporting,T134:analysis_concept,T083:supporting,T065:supporting			0	\(p_1,\ldots,p_k\)	約数9個の整数はp^8またはp^2 q^2(p<q)のみ。sqrt(N)まで素数を篩で求め、p^8を列挙しpq<=sqrt(N)の素数対を尺取りで数える。O(sqrt(N) log log N)。入力Nの素因数分解そのものは不要。	reviewed	
+abc383_e	full	T005:primary,T077:supporting,T118:concept,T233:analysis_concept		貪欲法	0	の性質について考えます。	辺を重み順に加えてDSU成分を併合し、各成分にあるA側/B側の未対応個数を貪欲に相殺する。O(M log M+(N+M)alpha(N))。Kruskalと同じ閾値併合の説明は証明概念、一般マッチングを実行しない。	reviewed	
+abc383_f	full	T150:primary,T022:supporting,T077:supporting			0	個目の商品を指すとします。	色ごとにまとめた0/1ナップサック。色cと予算pの満足度を保持し、その色最初の商品だけボーナスKを加える遷移。O(NX+N log N)。	reviewed	
+abc383_g	selected_tags	T081:primary,T022:supporting,T077:supporting			0	\(B_i =\sum_{j=i}^{j+K-1}A_i\) と置くと、問題を以下のように言い換えることが出来ます。	間隔K以上で要素i個を選ぶ最大重みを区間端の禁止数x,y付きで保持。左右DP列の凹性を用いてマージしO(NK^2 log N)。凹性の高速化具体法は後半確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc384_a	full	T073:primary			0	の問題A「Welcome to AtCoder」を解いてみてください。	各文字を走査しxならx、そうでなければ指定文字yに置き換え連結する。O(N)の文字列変換。	reviewed	
+abc384_b	full	T076:primary			0	この問題は、for 文や if 文を適切に使うことで解くことができます。	各コンテスト前のレートが部門区間内なら増減Aを適用し、区間外なら保つ。現在レート一つを順に更新するO(N)の模擬。	reviewed	
+abc384_c	full	T061:primary,T077:supporting,T073:supporting			0	この問題は、次の \(2\) つのパートに分けることができます。	5種の非空部分集合31通りをbit列挙して合計点と名前を作り、点降順・名前辞書順で整列する。O(2^5*5+31 log31)。	reviewed	
+abc384_d	full	T083:primary,T086:supporting,T264:supporting,T012:alternative,T014:alternative			0	\(A\) の連続する部分列 \((A _ L,A _ {L+1},\dotsc,A _ R)\) の和として \(S\) が存在することと、\(\displaystyle\sum _ {i=1} ^ NA _ i=X\	周期全体和Xで目標SをS mod Xへ還元し、Aを2周した正整数列で目標和の連続区間を尺取りするO(N)。累積和差を集合や平衡木で照合する別解O(N log N)。	reviewed	
+abc384_e	full	T010:primary,T014:alternative		貪欲法	0	一度接したスライムは吸収しない限り接し続けることと、高橋くんの強さが減少することはないことから、吸収できるスライムはすべて吸収してしまって損しません。	隣接した吸収候補を最小ヒープに入れ、最小強さが吸収条件を満たせば吸収して隣接候補を追加する。O(HW log(HW))。平衡木でも可能。条件比較は整数の割り算でオーバーフロー回避でき、多倍長は必須でない。	reviewed	
+abc384_f	selected_tags	T008:primary,T264:supporting,T081:alternative,T089:alternative,T080:supporting			0	\(1\le i\le j\le N\)	2^kで割れるAi+Ajの総和dkを、剰余ごとの個数と和のmapで集計しsum(dk-dk+1)/2^kを得る。O(N log max A)期待。二分再帰/Binary Trieの別解は追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc384_g	full	T084:primary,T001:supporting,T085:supporting,T077:supporting		Mo法	0	\(\displaystyle f(X,Y)=\sum_{i=1}^X \sum_{j=1}^Y |A_i-B_j|\) とします。	接頭辞対(X,Y)の問い合わせをMo法で並べ、片側の要素を増減する差分を他側の件数と総和のFenwick木で求める。圧縮とソート後O(N sqrt K log N)。Mapは補助の圧縮実装に過ぎず必須でない。	reviewed	
+abc385_a	full			条件分岐,基本算術	0	の問題A「Welcome to AtCoder」を解いてみてください。	3数が等しいか、いずれか一つが他2数の和か検査する固定個の算術条件。O(1)。	reviewed	
+abc385_b	full	T076:primary			0	まずは、サンタクロースの移動をシミュレーションする問題を考えます。	各移動文字について壁なら留まり、通行可能なら座標更新。家へ初訪問時だけ数え、印を消すことで重複を防ぐ。O(HW+len(T))。	reviewed	
+abc385_c	full	T065:primary,T022:alternative			0	まずは次の問題を考えてみます	間隔Kを列挙し、Kごとに剰余位置の列で同じ高さの最大連長を走査する。K全体O(N^2)。dp[i][K]=同高さならdp[i-K][K]+1という同じ状態更新でも実装可能。	reviewed	
+abc385_d	full	T012:primary,T008:supporting,T076:supporting			0	サンタクロースは軸に平行な直線上を移動するので、そのような直線上の家をまとめて管理することができればよさそうです。	各行・列にある家をordered setへ入れ、移動線分範囲の家だけ取り出し両方の集合から削除する。各家一度だけ処理しO((N+M) log N)。	reviewed	
+abc385_e	full	T077:primary,T065:supporting		貪欲法	0	ユ木を構成する際に，手順2で用意される頂点を	雪結晶の中心uを全列挙し隣接頂点の次数を降順に並べる。1層目x個の最小次数からyを決め1+x+xyを最大化する。全隣接リストの整列でO(N log N)。	reviewed	
+abc385_f	selected_tags			解析幾何	0	に遮られないような高さ」の最大値が答えになります。	視線の遮蔽条件を隣接ビル対の直線切片の最大へ帰着しO(N)で走査する。素因数分解・Fibonacciは公式後半のテスト構築概念か混入であり解法に不要。	needs_resolution	解説後半・別解の追加点検が必要
+abc385_g	selected_tags	T024:primary,T127:primary,T081:supporting,T022:supporting,T060:supporting,T132:supporting			0	挿入 DP による数え上げ 順列に関する数え上げの問題では，しばしば 挿入DP という考え方が有効です．挿入DP では，順列を要素の昇順または降順に見ていって，要素を列のどの位置に挿入するかによって求めたい値がどのように	小さい要素を順列の端/内部へ挿入するDPからLaurent多項式の積を導き、必要係数を分割統治畳み込みで求める。素朴なO(N^2)DPは制約外、FPS高速化の満点計算量を後半確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc386_a	full	T077:primary,T065:alternative			0	\(1,2,\dots,13\)	4枚をソートし二種類で頻度3+1または2+2なら追加一枚でfull house。13通りの追加カードを全列挙して頻度を判定してもO(1)。	reviewed	
+abc386_b	full	T073:primary,T076:supporting		貪欲法	0	を表示させるにあたって、 原則	左から00なら2文字を一度で入力し、他は1文字ずつ進める。0の各連長zへceil(z/2)回という貪欲を模擬しO(len(S))。	reviewed	
+abc386_c	full	T073:primary			0	以下は C 問題の制約に特化した解説です。	長さ差から変更・挿入・削除を分け、二ポインタで最初の不一致一つだけ飛ばして残りの一致を調べる。O(len(S)+len(T))、全編集位置の二重列挙をしない。	reviewed	
+abc386_d	full	T077:primary,T086:supporting			0	条件を言い換えましょう．マス	点をx順にソートして黒の最大/白の最小yの支配関係を走査し、左上に白・右下に黒となる矛盾を検査する。接頭辞/接尾辞の極値でO(M log M)。	reviewed	
+abc386_e	full	T065:primary,T059:supporting,T080:supporting			0	\(\dbinom{N}{K}\leq 10^6\)	KとN-Kの小さい側の組合せをDFS全列挙しXOR最大を求める。補集合側なら全体XORで戻す。C(N,K)<=10^6よりO(N+C(N,K)*min(K,N-K))。	reviewed	
+abc386_f	selected_tags	T025:primary,T022:supporting,T069:alternative,T245:alternative,T055:alternative,T187:alternative			0	に変換するのに必要な最小の操作回数	編集距離DPのabs(i-j)<=K帯だけ更新しO(len(S)K)。Suffix Array+LCP/RMQや最短経路の別解は既存fullレビューとソースを再確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc386_g	selected_tags	T060:primary,T053:concept,T022:supporting,T186:supporting,T177:supporting,T176:supporting			0	辺の重みを \(0\) 以上 \(M\) 未満として考え，最後に \((N-1)\times M^{N(N-1)/2}\) を加えることにします． 辺の重みが \(0\) 以上 \(M\) 未満の整数であるような連結グラ	全グラフのMST重みを各閾値での連結成分数の総和へ展開し、固定成分のグラフ数を二項係数と連結グラフ数DPで数える。具体状態と全制約計算量を後半確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc387_a	full			基本算術	0	の問題A「Welcome to AtCoder」を解いてみてください。	入力A,Bの和を二乗して出す固定算術。O(1)。	reviewed	
+abc387_b	full	T065:primary			0	この問題は for 文の練習問題です。	九九表の81積を全列挙しXでない値を足す。O(81)。	reviewed	
+abc387_c	full	T028:primary,T022:supporting,T060:supporting,T080:alternative			0	以上の整数についてのみヘビ数が定義されていますが、簡単のため、本解説では	上限Rまでで先頭桁以下の各桁が先頭より小さい整数を桁DPで数え、f(R)-f(L-1)。先頭d・未満確定・位置を状態にO(桁数*100)。Nimは名称の参照で解法と無関係。	reviewed	
+abc387_d	full	T066:primary,T055:supporting,T011:supporting			0	この問題は、「縦移動と横移動を	縦横交互移動を座標と次の移動方向の状態、またはチェス盤色で表しBFS。初手縦/横の2通りの最短距離を比較しO(HW)。	reviewed	
+abc387_e	selected_tags	T264:primary,T065:alternative		構築	0	まず、この問題のような「条件を満たすものを構築して出力せよ」という問題は、構築 (または構成, 英語では constructive problem) というジャンル名で呼ばれています。	桁和の整除条件を満たす連続整数を構築する。ヒューリスティックやランダム探索ではなく決定的構築の有効性と区間制約を全文確認する。	needs_resolution	解説後半・別解の追加点検が必要
+abc387_f	selected_tags	T027:primary,T022:supporting,T086:supporting,T182:supporting,T060:supporting			0	\(1,2,\dots,N\)	Functional graphのサイクルを一成分へ縮約すると根付き木になる。各値xを根へ置いた子の許容値累積を積で併合する木DP、全体O(NM)。原文N^2表記とのパラメータ対応は後半確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc387_g	selected_tags	T127:primary,T132:supporting,T138:supporting,T197:analysis_concept,T237:supporting			0	今回は競技プログラミング界において 2024 年最大の発見である Kinoshita-Li 合成 をテーマとした出題です。	FPS合成・power projectionのKinoshita-Li法を使う問題。一般論で登場する線形代数/FFTと実際の解法への適用を全文確認する。	needs_resolution	解説後半・別解の追加点検が必要
+abc388_a	full	T073:primary			0	文字列を受け取り、その文字列の	入力文字列の先頭文字とUPCを連結して出す。O(1)出力、名前付き探索手法は不要。	reviewed	
+abc388_b	full	T065:primary			0	伸びたときのヘビの重さは	日k=1..Dごとに全蛇iのTi(Li+k)を評価して最大を出す。O(ND)。	reviewed	
+abc388_c	full	T083:primary,T064:alternative,T060:supporting			0	鏡餅を構成する \(2\) つの餅のうち大きいほうを固定して、つまり「ある餅をひとつ取ってきて、その餅が下になる鏡餅についてのみ」考えます。	整列済み餅列で2Ai<=Ajとなる組数を二ポインタで数えるO(N)。各Ajについて上限二分探索する別解はO(N log N)。入力が整列済みなのでソートの実行は不要。	reviewed	
+abc388_d	full	T075:primary,T086:supporting			0	石を受け取る操作ではなく渡す操作に注目することで、以下のように言い換えても問題の答えは変わらないことがわかります。	成人iが渡す石の区間[i+1,min(N,i+Ai+受取数)]に+1する差分配列を更新し、累積で現在受取数を得る。各iをO(1)で処理し全体O(N)。	reviewed	
+abc388_e	full	T064:primary,T083:alternative			0	\(K\) 個 \((0\leq K\leq\dfrac N2)\) の鏡餅を作るとき、先頭 \(K\) 個と末尾 \(K\) 個の餅を使うとしてかまいません（上に乗せられている餅が先頭 \(K\) 個と異なる場合、先頭	K組を作るなら先頭K個と末尾K個を順に組ませる。2倍条件が全組で成立するかO(K)判定してKを二分探索、O(N log N)。尺取り貪欲別解も、後半の先頭/後半二群マッチングでO(N)。dequeは実装容器に過ぎない。	reviewed	
+abc388_f	selected_tags	T022:primary,T012:alternative,T008:alternative			0	\(A = B\) のとき 明らかに \(1 \equiv N \pmod A\) が必要です。	悪い区間の境界Bマスだけを状態に残して到達可能性をDPし、遠い障害物のない区間はコイン交換可能距離の前計算を使う。O(MB^2+B^3)等で巨大Nの全マスDPを避ける。状態と閾値証明を追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc388_g	full	T003:primary,T064:supporting,T245:supporting			0	E 問題の この解説 の第二方針を使います。	Bi=Aiの2倍以上を初めて持つ餅の添字を前計算し、区間のBi-iの最大でK組可否を判定する。範囲最大とセグ木上の二分探索を用いO(N+Q log N)。	reviewed	
+abc389_a	full	T073:primary			0	数字や文字の入出力と整数の四則演算が問われている問題です。	3文字の数式から先頭と末尾の数字を抽出して積を出す。O(1)。構文解析一般のタグまで広げない。	reviewed	
+abc389_b	full	T065:primary			0	\(2 \leq X \leq 3 \times 10^{18}\)	1から20までの階乗を前の値にiを掛けて列挙し、Xと一致した添字を返す。20!以下の制約よりO(20)、一般DPではない。	reviewed	
+abc389_c	full	T011:primary,T086:supporting			0	番目に列に並んだヘビをヘビ	蛇の長さを追加順にFIFO管理し、除去された長さ総和をずれとして保持。k番目の頭座標は追加累積長の差からO(1)で得る。全体O(Q)。	reviewed	
+abc389_d	full	T083:primary,T065:supporting,T060:supporting			0	正方形の中心が格子点となるように座標を取り、円の中心を	対称性で第1象限の中心整数座標へ還元し、(i+.5)^2+(j+.5)^2<=R^2を満たす最大jをi増加時に単調減少させる。O(R)で個数を合計。	reviewed	
+abc389_e	full	T064:primary		貪欲法	0	円かかるというのを以下のように言い換えることができます。	k個目の限界価格(2k-1)Piが閾値x以下になる個数を直接求め、全価格sum Pi*k^2<=Mの最大xを二分探索し同価格分を調整。O(N log M)。全商品列挙ソートは不可能でT077は証明だけの概念。	reviewed	
+abc389_f	selected_tags	T002:primary,T064:supporting,T001:alternative,T075:alternative			0	愚直な解法として、各クエリで与えられた最初のレート	全初期レートXの現在レートが単調になることを利用し、コンテスト毎に範囲[L,R]に属す初期X区間へ+1。遅延セグ木の境界探索でO((N+Q)log X+X)。他別解とインラインDP語の妥当性は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc389_g	selected_tags	T022:primary,T060:supporting,T177:supporting			0	各頂点の距離が決まっている場合を考えます。	根からの距離層ごとの頂点配置数と辺数・偶奇条件をDPで数える。状態に処理済み頂点/辺/次層の大きさ等を持ちO(N^8)の軽い遷移。正確な状態と制約を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc390_a	full	T065:primary,T076:supporting			0	の問題A「Welcome to AtCoder」を解いてみてください。	隣接交換位置4通りを試し、その一回で1..5の昇順になるか直接判定するO(1)。ソートアルゴリズムを走らせる必要はない。	reviewed	
+abc390_b	full			等比数列,整数比較	0	が等比数列であることの定義は、、	各iでAi*Ai+2==Ai+1^2を整数で検査し等比か判定するO(N)。浮動小数の比比較不要、名前付き特殊技法はない。	reviewed	
+abc390_c	full	T065:primary			0	黒く塗られているマスの個数を	黒マスの最小/最大行列を求め、その包囲長方形に白マスがあれば不可能、なければ全て黒へ塗れる。2度走査するO(HW)の全マス確認。	reviewed	
+abc390_d	selected_tags	T067:primary,T065:supporting,T059:supporting,T012:supporting,T077:alternative,T143:analysis_concept			0	操作を繰り返した後の状態において、元々どの袋に入っていた石が同じ袋に入っているか考えることによって、	各袋を既存グループまたは新グループへ入れる標準形DFSで集合分割を列挙し、グループ和のXORを集合へ入れる。ベル数B(N)通り、O(B(N)N)以内。整列による重複除去も実行可能。順序集合はコードのset名の説明か確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc390_e	selected_tags	T150:primary,T022:supporting,T064:alternative,T083:alternative			0	\((1\leq i\leq 3)\)	各ビタミン独立にカロリー予算jの最大摂取量を0/1ナップサックでO(NX)前計算する。最小の摂取量を最大化する予算配分は二分探索または三予算の単調走査でO(X)等。後半で配分計算量確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc390_f	selected_tags	T060:primary,T086:supporting			0	黒板にいくつかの整数が書かれている場合に、操作回数を最小とするために	区間内に現れる値集合の連続成分数を各整数cが成分の左端となる寄与へ分解し、cの有無とc-1の不在で区間数を数える。O(N)の具体集計を後半確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc390_g	selected_tags	T127:primary,T132:supporting,T177:supporting,T236:supporting			0	\(N\) の桁数を \(B\) とします。	各桁数の整数mの寄与を、それより後ろに置く各桁数群の選択数の母関数の積で計算し係数に前後の階乗を重み付けする。分割統治畳み込みと逆元で全体を高速化。実際の全桁数処理の計算量を追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc391_a	full	T073:primary			0	の問題A「Welcome to AtCoder」を解いてみてください。	N/SとE/Wの各文字を逆方向文字へ一対一置換するO(文字数)。辞書または固定条件で十分。	reviewed	
+abc391_b	full	T065:primary,T073:supporting			0	重の for ループによる全探索によって解くことができます．	部分正方形の左上a,bを全列挙しM*M文字が一致するか検査するO((N-M+1)^2 M^2)。ローリングハッシュ等の大規模文字列技法は不要。	reviewed	
+abc391_c	full	T076:primary			0	それぞれの鳩がどの巣にいるか	鳩ごとの巣、巣ごとの個数、複数鳩の巣数を保持し、移動前後に個数が1と2を跨ぐ時だけ集計を更新する。全クエリO(1)、全体O(N+Q)。	reviewed	
+abc391_d	full	T077:primary			0	が存在するかどうか判定することを考えます．ブロック	列ごとにブロックを高さ順にソートし、各順位cの消滅時刻を全列のc番目の高さと直前消滅時刻から求める。各問は順位に対応する時刻との比較O(1)、前処理O(N log N)。	reviewed	
+abc391_e	full	T027:primary,T022:supporting,T080:supporting			0	により解くことができます．	3分木の各多数決値とそれを反転する最小葉変更数を子から併合する。親の元多数値と等しい子の反転費用のうち必要個数だけ小さいものを選ぶ。葉数L=3^Nに対しO(L)。	reviewed	
+abc391_f	selected_tags	T010:primary,T077:supporting,T012:supporting,T064:alternative			0	をそれぞれ降順ソートしておきます．	3配列を降順整列し、(i,j,k)の値を最大ヒープから取り出して各座標+1の隣接候補を追加、既出は集合で除く。O(N log N+K log K)。線形篩のT223は不要。二分探索別解の全制約実行可能性は別出典確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc391_g	full	T017:primary,T025:supporting,T022:supporting,T263:supporting,T060:supporting			0	\(T,S\) の最長共通部分列 (LCS) の長さを求める方法を軽く振り返っておきます． \((|T|+1)\times (|S|+1)\) の配列 dp を用意し， \(dp[i][j]\) を \(T[:i]\)	LCS DPの一行の隣接差0/1をbitmaskに圧縮し、次の文字26通りでmaskを遷移する数え上げDP。O(M*26*2^len(S)*len(S))程度、通常のLCS計算を状態遷移に使う。	reviewed	
+abc392_a	full	T077:primary,T065:alternative			0	解法1: 並べ替えを全て試す	3値を昇順整列して先頭2つの積が末尾と等しいか検査するO(1)。3値の6順列を全列挙する実行可能別解。	reviewed	
+abc392_b	full	T065:primary,T077:alternative			0	解法1: バケットソートの要領で実装する	1..Nの存在フラグをAの値で更新し未出現値を小さい順に出すO(N+M)。ソート済みAと突き合わせる別解もO(N log N)。存在確認の範囲列挙で、バケットソートの比喩を主手法としない。	reviewed	
+abc392_c	full			配列の添字対応	0	\(S_{Q_i}=Q_{P_i}\)	鳩iが見る相手PiのゼッケンQiと、自身Qiを対応づけans[Qi]=Q[Pi]で一度走査するO(N)。基本配列の添字変換でありDSU等は不要。	reviewed	
+abc392_d	full	T008:primary,T065:supporting			0	\(S=\sum_i K_i\)	各サイコロの値ごとの頻度を連想配列で数え、対(i,j)について一致値の頻度積をKiKjで割り一致確率を求める。全対列挙でO(NS log S)、確率DPは使わない。	reviewed	
+abc392_e	full	T005:primary,T067:alternative,T066:alternative			0	サーバーを頂点、ケーブルを辺とみなしたグラフを考えます。	余剰辺をDSUで検出し、各成分の余剰辺の片端を他成分へ繋ぎ替えて成分数を一つずつ減らす。余剰辺の多い成分から使えば構成可能。DFS/BFSで成分と余剰辺を集める別解もO(N+M)。	reviewed	
+abc392_f	full	T001:primary,T003:alternative,T064:supporting,T086:supporting,T014:alternative			0	概略：操作を逆順に考えるとうまくいきます。	操作を逆順にし全空き位置に1を置く。i番目をPi番目の空き位置へ入れ、その位置を0へ更新。BIT累積和の境界探索またはセグ木k番目探索でO(N log N)。平衡木の順序統計版なら同様に可能だが通常setの線形iterator移動は不可。	reviewed	
+abc392_g	full	T132:primary,T127:supporting,T060:supporting			0	\(B-A = C-B\)	値集合の指示多項式fを二乗し、各Bの係数[x^(2B)]f^2から(B,B)を除き2で割る。O(M log M)、法が係数上界より大きいのでNTTの剰余から整数係数を復元できる。	reviewed	
+abc393_a	full			条件分岐	0	の問題A「Welcome to AtCoder」を解いてみてください。	二人の腹痛のyes/no4ケースで集合{1,2}と{1,3}への所属を照合し該当の牡蠣番号を返す。O(1)。	reviewed	
+abc393_b	selected_tags	T065:primary,T060:supporting,T073:supporting,T196:alternative			0	三重の for 文等を用いて	等間隔i<j<kの文字がABCか、三重列挙またはi,jからk=2j-iを決めて数えるO(N^2)。FFTによる文字位置畳み込み別解が実際にあるか追加確認。再帰は不要。	needs_resolution	解説後半・別解の追加点検が必要
+abc393_c	full	T008:primary,T012:alternative			0	グラフが単純にする、すなわち自己ループと多重辺が存在しない状態にするために削除するべき辺を考えると、次の 2 通りが考えられます。	自己ループはすべて除き、他の辺は(u,v)をmin/maxに正規化して頻度mapで重複分k-1を数える。setへ既出検査でも可。O(M log M)。	reviewed	
+abc393_d	full	T086:supporting		中央値,寄与の集計	0	いくつかの解法が考えられますが、ここでは実装が最も簡単である（と思われる）ものを解説します。	1の出現位置piを列挙しpi-iの中央値へ合わせる絶対距離和を求めるO(N)。または各0を跨ぐ1の個数から寄与を足す。ソートは元の出現順で既に単調、基本の中央値・主客転倒が語彙外。	reviewed	
+abc393_e	selected_tags	T112:primary,T022:supporting,T160:supporting			0	にするためには以下の条件を満たす必要があります。	値頻度snから倍数の個数td=sum_{d divides n}snを約数ゼータ変換で求める。td>=Kとなる最大の約数dを各Aiへ伝播するO(M log M+N)。配列名DPだけで一般DPとはしないためT022の状態意味を追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc393_f	full	T224:primary,T064:supporting,T022:supporting			0	LIS（最長単調増加部分列）の長さを求める際に典型的に用いられる以下の動的計画法を考えます。	Aiを前から処理して長さjの増加部分列の最小末尾をlower_boundで更新。終端Riの問い合わせをまとめ、その時点で末尾<=Xiの最大jを二分探索して答える。O((N+Q)log N)。	reviewed	
+abc393_g	selected_tags	T034:primary,T055:supporting,T175:supporting,T187:alternative,T064:supporting,T063:alternative,T258:alternative			0	この問題は LP 双対 、特に 費用流双対 と呼ばれるテーマを扱った問題です。	双対LPから最小費用流による判定へ帰着して最適値探索を行う。通常の最小費用流の背景説明と実装した解法を分離するため全文追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc394_a	full	T073:primary			0	の個数を数え、その個数の分だけ	Sの文字2だけを順序を保って取り出す。2の個数を数えて同じ個数出力してもよい。O(len(S))。	reviewed	
+abc394_b	full	T077:primary,T073:supporting			0	文字列の列を文字の長さの昇順にソートできればよいです。	長さが相異なる文字列を長さ昇順にソートし、その順に連結する。O(N log N+総文字数)。	reviewed	
+abc394_c	full	T073:primary,T076:supporting			0	\(\lvert S\rvert\)	WAをACへ変換するとき一文字左から探索再開する。進んだ回数と後退回数が線形でO(N)。右からAを左へ伝播する同値処理も可能。	reviewed	
+abc394_d	full	T013:primary,T128:supporting,T073:supporting			0	\(\lvert S\rvert\)	開き括弧をスタックへ積み、閉じ括弧は頂上の対応種類と一致する時だけpopする。途中不一致または最後に残りがあれば不適合。O(N)。	reviewed	
+abc394_e	full	T066:primary,T055:supporting,T011:supporting			0	をこの順に結合して得られる文字列は回文になります。	頂点対(u,v)を状態に同じ文字の左右辺を追加して回文を両端へ延ばす。長さ0の同一点と長さ1の辺からBFSし全対の最短回文長を求めるO(N^4)。	reviewed	
+abc394_f	full	T027:primary,T022:supporting,T077:supporting			0	適当に根を取り根付き木として、木 dp により計算を行います。	根付き木の部分木で根の次数を1または4にできる最大アルカンサイズを子から集める。内部用は最大の子3本、全体候補は4本等を選び、各頂点の次数分の線形選択でO(N)。ソートもO(N log N)で実行可能な別実装。	reviewed	
+abc394_g	selected_tags	T005:primary,T064:supporting,T077:supporting,T053:alternative,T054:alternative			0	各質問への答えの求め方 まず、 \(i\) \((1\leq i\leq Q)\) を \(1\) つ固定し、 \(i\) 番目の質問の答えの求め方について考えます。	高さ閾値Xで二地点が連結かをDSUで判定し、全問い合わせを並列二分探索する。高さ順の辺/マス追加と組み合わせO((HW+Q)alpha(HW) log F+HW log HW)。最大全域木/LCA別解の実行可能性はソース追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc395_a	full			線形走査,比較	0	問題文に書かれている通り、すべての	全隣接項についてAi<Ai+1を検査するO(N)。順序判定であってソートを実行しない。	reviewed	
+abc395_b	full	T076:primary			0	解法1：問題文通り実装する	外周から白黒を交互に塗る直接模擬、またはmin(i,j,N-1-i,N-1-j)の偶奇から各マス色を直接決めるO(N^2)。	reviewed	
+abc395_c	full	T008:primary,T083:alternative,T077:alternative			0	まず、「同じ値を複数個含む」を「	各値の最後の出現位置をmapで保持し現在位置との差+1を最小化するO(N log N)。各値の位置リストの隣接差でもよく、尺取りで重複窓を管理する別解もO(N)期待。位置は走査順に整列済みでsort必須ではない。	reviewed	
+abc395_d	full	T076:primary			0	\(\operatorname{p2b}[i]\coloneqq{}\)鳩 \(i\) が入っている箱の番号	実際の鳩ごとの移動は巣の物理ラベルを参照し、巣交換時は物理ラベルと論理巣の対応2配列をswapする。各鳩は物理ラベルを一つ持ち、全問O(1)。DSUは不要。	reviewed	
+abc395_e	full	T187:primary,T010:supporting,T055:supporting			0	この問題は、与えられたグラフをもとに別のグラフを構成し、そのグラフ上での最短距離を求めることで解くことができます（このような問題は俗に「拡張ダイクストラ」と呼ばれることがあります）。	頂点と辺反転回数の偶奇で2層グラフを作り、通常移動コスト1と層変更コストXのDijkstra。O((N+M)log N)、終点の両層の小さい距離を答える。	reviewed	
+abc395_f	selected_tags	T064:primary,T055:alternative			0	最終的な上下の歯の高さの和 \(H\) を固定したとき、支払う金額は \(\displaystyle\sum _ {i=1} ^ N(U _ i+D _ i)-NH\) であり、具体的な削り方によりません（\(1\) 円	総高さHを二分探索し、隣接上歯差の上限と各歯の上下許容区間に解があるか判定する。区間伝播O(N)または差分制約最短路の別解を追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc395_g	selected_tags	T017:primary,T022:supporting,T187:supporting,T055:supporting			0	以下のようなDPをします。	固定必須頂点の部分集合maskと合流点yのSteiner DP。maskを2つに分けたコスト和で併合し、その後多始点Dijkstraで合流点を移動する。O(3^K N+2^K N^2)等、各問の追加端点の扱いは後半確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc396_a	full			条件判定,線形走査	0	の問題A「Welcome to AtCoder」を解いてみてください。	隣接する3要素の同値があるか一度走査して判定するO(N)。数値4の検出や全探索の特殊技法は不要。	reviewed	
+abc396_b	full	T013:primary,T076:supporting			0	と呼ばれるデータ構造に関する問題です。	最初に0を100個積んだLIFOスタックへ、タイプ1でpush、タイプ2で頂上を出力してpopする。O(Q)。	reviewed	
+abc396_c	full	T077:primary,T086:supporting			0	をそれぞれ降順ソートしておきます．すると，価値の最大値は，数列	白黒の価値を各々降順に並べ累積和S,Tを作る。白i個なら黒は高々i個で、Tの接頭辞最大を使い最良和をO(N+M)評価。全体O(N log N+M log M)。	reviewed	
+abc396_d	full	T067:primary,T059:supporting,T065:supporting,T080:supporting			0	から始まる単純パスがどれくらいあるかを考えます．グラフが完全グラフ（	N<=10で頂点1からの単純パスを訪問済み状態付きDFSで列挙し、終点Nで辺重みXORを最小化する。O(N!N)以内。最短距離DijkstraではXORを最適化できない。	reviewed	
+abc396_e	full	T067:primary,T066:alternative,T059:supporting			0	から以下のようなグラフを作ります。	各辺のXOR関係から各成分の一頂点を0として他頂点へ値を伝播し矛盾検査。各bitで0/1の多い方が0になるよう成分全体のXOR基準を選び総和を最小化。O((N+M)log max Y)。	reviewed	
+abc396_f	selected_tags	T001:primary,T075:supporting,T060:supporting			0	の転倒数は以下のように表されます。	初期転倒数をBITで計算し、各値の巻き戻り時に跨ぐペアの増減を位置和/件数から差分更新してM個の答えを出す。O(N log M+M)。imos別解の実際の更新区間は後半確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc396_g	selected_tags	T017:primary,T022:supporting,T059:supporting,T117:supporting			0	操作する列の集合を固定すると，各行に書かれている数の総和の最小化を独立に考えることができます．ある行に注目したとき，その行に含まれる \(0\) の個数を \(c_0\) ， \(1\) の個数を \(c_1\) とする	列反転maskを固定すると行ごとの最小1数はmin(popcount(Bi xor mask),W-popcount)。全maskへの距離集計をbit状態DPで高速化する。O(2^W W^2+HW)等の正確なDP遷移を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc397_a	full			条件分岐	0	この問題は小数の入力、if文を用いることが求められている問題です。	温度xが指定閾値以上かを比較して1,2,3のカテゴリを返すO(1)。小数入力または文字列からの整数部抽出はいずれも基本入力処理。	reviewed	
+abc397_b	full	T073:primary,T076:supporting		貪欲法	0	を前から見て行って，今見ている場所までの文字列が条件を満たすような最小の操作回数を考えます．	次に必要なi/oを保持してSを左から読み、不一致なら必要文字を一つ挿入して進める。最後がiならoを補う。O(N)の貪欲文字列処理。	reviewed	
+abc397_c	full	T012:primary,T086:supporting,T060:supporting			0	\(L_i=(A_1,A_2,\ldots,A_i)\)	各接頭辞の異なる値数Lと接尾辞Rを集合または頻度配列で求め、全切れ目のLi+Ri+1の最大を取るO(N)期待。要素の重複除去が中心で、組合せDPは不要。	reviewed	
+abc397_d	full	T065:primary,T064:supporting			0	\(\mathrm{O}(\sqrt{N})\)	x^3-y^3=Nをd=x-yで因数分解し、d<=cuberoot(N)を列挙して二次式または単調二分探索でyを求める。O(cuberoot(N)log N)。O(sqrt N)の部分点列挙は除く。	reviewed	
+abc397_e	full	T027:primary,T022:supporting			0	がパスに分解できるためには，	葉から未除去の部分木サイズsvと子の残り数を集め、sv=Kならそのパスを取り除き0へ戻す。sv>Kや分岐数過多なら不適合。木DPでO(NK)頂点数に線形。	reviewed	
+abc397_f	full	T002:primary,T022:supporting,T012:supporting			0	\(X_i=(A_1,A_2,\ldots,A_i)\)	3分割の最後の切れ目を走査し、前2分割の種類数和を全左切れ目について保持。新値の前出現位置から区間加算と範囲最大を遅延セグ木で行うO(N log N)。	reviewed	
+abc397_g	selected_tags	T064:primary,T033:supporting,T032:supporting,T035:supporting,T229:supporting			0	答えで二分探索して，「頂点 \(1\) から頂点 \(N\) への最短距離を \(d\) 以上にできるか？」という判定問題を考えます．最短距離を \(d\) 以上にするために変更する必要がある最小の辺の本数が求められれば	目標最短距離dの達成に必要な最小の変更辺数を、層化したラベル割当のs-tカットへ帰着して二分探索する。一般dのグラフ規模と全制約流量計算を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc398_a	full	T073:primary			0	\(\frac{N-2}{2}\)	Nの偶奇で中央の=を1個または2個にし、残りの-を左右均等に配置して出力するO(N)。	reviewed	
+abc398_b	full	T065:primary,T061:alternative,T077:alternative			0	枚選び出して全探索します。	7枚から5枚を選ぶ全列挙し、その5枚の頻度が3+2か判定するO(21*5)。7個の頻度から異なる値で3以上と2以上があるか直接検査でもO(7)。bit全探索や整列は実行可能別実装。	reviewed	
+abc398_c	full	T008:primary,T077:alternative			0	それぞれの人に対し、自分以外に同じ数を持っている人がいるかを調べる以下のような実装では計算量が	値別頻度をmapで数え、頻度1の値のうち最大の値を持つ人の添字を返す。O(N log N)またはhash期待O(N)。値と添字の対をソートして隣接重複を調べる別解も可能。	reviewed	
+abc398_d	full	T012:primary,T076:supporting			0	風に合わせて煙を動かすと、時刻を	煙の全点を動かす代わりに風の累積変位を管理し、新しい煙の初期位置を相対座標setへ記録する。観測位置から変位を引いた点の存在を各時刻に調べO(N log N)。	reviewed	
+abc398_e	full	T178:primary,T067:supporting,T066:alternative,T012:supporting,T040:supporting			0	奇閉路を持たないグラフのことを二部グラフといいます。	木を二部彩色し、異なる部の頂点対でまだ辺がないものを列挙する。追加可能辺総数の偶奇で先後を選び合法手を集合から取り出す。O(N^2)以内。一般のゲーム木探索は不要。	reviewed	
+abc398_f	selected_tags	T068:primary,T073:supporting,T072:alternative			0	を反転させた文字列をこの順に連結した文字列は明らかに回文なので、正解となる文字列の長さが	Sの最長回文接尾辞をManacherで求め、その前の部分を逆順に末尾へ付け足すO(N)。Rolling Hashで接尾辞を判定する別解が全制約で実行可能か追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc398_g	selected_tags	T178:primary,T067:supporting,T040:supporting			0	与えられたグラフは奇閉路を持たないため、連結成分はそれぞれ二部グラフとなります。	二部連結成分を両側サイズ偶奇で分類し、連結性を保つ追加辺数の偶奇と成分併合の勝敗不変量で判定する。4種成分の具体勝敗式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc399_a	full	T073:primary			0	の問題A「Welcome to AtCoder」を解いてみてください。	同じ位置のSiとTiが異なる個数を一度走査するO(N)。Hamming距離は文字列比較であり編集距離DPではない。	reviewed	
+abc399_b	full	T076:primary,T077:alternative			0	種類の解法を説明します。	最大得点の未確定者へ同順位を与える処理を直接模擬するO(N^2)。得点降順ソートして同点を同じ開始順位にするO(N log N)も実行可能。	reviewed	
+abc399_c	full	T005:primary,T067:alternative,T066:alternative			0	最適に辺を削除した時に、削除せずに残すことが可能な辺の本数に注目しましょう。	連結成分数KをDSUまたはDFS/BFSで数え、森に残せる最大辺数N-Kを用いてM-(N-K)を返す。O((N+M)alpha(N))またはO(N+M)。	reviewed	
+abc399_d	full	T012:primary,T060:supporting,T077:supporting			0	が数列内においてどのように配置されているのかを考えましょう。	各値の2出現位置を持ち、元々隣接していないa,bについて4位置を並べた両ペアが隣接か検査する。隣接位置に現れる候補値対だけ列挙して集合で重複除去しO(N log N)。	reviewed	
+abc399_e	selected_tags	T073:primary,T182:supporting			0	丁寧な場合分けの考察を要求される問題です。	各文字の変換先が一意か検査し、26文字の写像のパス/サイクルと未使用の一時文字から最小置換回数を求める。文字置換ルール・閉路の余分な1回の条件を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc399_f	selected_tags	T022:primary,T086:supporting,T127:alternative,T084:alternative			0	以下のように問題を言い換えます。	区間の和のK乗を、仕切り2本とK枚のシールの配置へ読み替えて左から状態DPをするO(NK^2)。FPSや平方分割の別解の全制約成立は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc399_g	selected_tags	T079:primary,T136:supporting,T248:supporting,T031:analysis_concept,T118:analysis_concept,T083:alternative		マトロイド	0	今回は マトロイド交差 を扱います。	色付き全域木の存在条件をgraphic/partition matroid交差として表し、線形表現行列のrankを乱択評価する。二部マッチングは説明例、尺取りは実際の外側探索か全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc400_a	full	T264:primary			0	\(AB = 400\)	400 mod A==0ならB=400/A、そうでなければ-1を出す定数時間の約数・整除判定。	reviewed	
+abc400_b	full	T065:primary,T171:alternative			0	\(X \leq 10^9\)	N^iを順に掛けて等比和へ足し、10^9を超えたら打ち切るO(M)。多倍長整数で全和を計算しても可能な別解だが、超過検査には必須でない。	reviewed	
+abc400_c	selected_tags	T060:primary,T064:supporting			0	\(X=2\times b^2\)	2の指数偶奇で2b^2と4c^2の重複しない2種へ分け、それぞれ上限を整数平方根/二分探索で数えるO(log N)。尺取りの具体別解は別出典確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc400_d	full	T144:primary,T007:supporting,T055:supporting,T187:alternative,T010:supporting			0	高橋君の住む町に対して、次のような重み付き有向グラフ	隣接の既存道へ0、1または2マス先への蹴り移動へ1の辺を張り0-1 BFS。dequeの先頭/末尾を使いO(HW)。DijkstraでもO(HW log(HW))の実行可能別解。	reviewed	
+abc400_e	full	T253:primary,T064:supporting,T077:supporting			0	400 number であるための	10^6以下の整数の異なる素因数数を篩の倍数走査で求め、ちょうど2種の値の平方を列挙・ソートする。各A以下の最大を二分探索。O(M log log M+Q log M)。	reviewed	
+abc400_f	selected_tags	T021:primary,T022:supporting			0	操作を逆順に考えると、問題は以下のように言い換えられます。	円環を複製し、最後に同色で塗る/消す区間を分割する区間DPで最小費用を求める。区間端色一致を利用する遷移でO(N^3)。正確な2状態の式は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc400_g	selected_tags	T064:primary,T022:supporting,T009:alternative		Aliens DP	0	この問題は Alien DP を用いて解くことができます。	選択ペア一つごとに罰金cを課すAlien DPで最適値とペア個数を同時に求め、個数がKを跨ぐcを二分探索する。1回判定O(N)となる状態を追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc401_a	full			条件分岐	0	の問題A「Welcome to AtCoder」を解いてみてください。	HTTPステータスが200..299の範囲なら成功を出し、それ以外を失敗とする固定比較O(1)。	reviewed	
+abc401_b	full	T076:primary			0	この問題は、「高橋くんが現在ログインしている状態にあるか」のフラグを持ちながら操作を処理していくことで解くことができます。	ログイン中かの1bit状態を持ち、login/logout操作で更新、ログインしていないprivateアクセスでエラー数を増やすO(N)。	reviewed	
+abc401_c	full	T022:primary,T086:supporting,T083:supporting			0	\(\mathrm{O}(NK)\)	K個前までの和で定まるK-bonacci列を、直近K項和を一つ維持して新項追加・古項削除で更新する。O(N)。	reviewed	
+abc401_d	selected_tags	T073:primary,T022:alternative			0	丁寧な場合分けが要求される問題です。	確定oの隣の?を.へ変え、残る?連長ごとの最大o数と必要残数から各位置の確定/不定を判定する。DP別解の状態と主解の全場合分けは全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc401_e	selected_tags	T005:primary,T010:alternative			0	まず、ある \(k\) に対して条件を満たすことができるか判定する方法を考えます。	頂点番号を小さい順に有効化して誘導部分グラフをDSUで併合し、1..kが連結か検査する。外部に残る隣接頂点数を増減して必要削除数を出す。O((N+M)alpha(N))。ヒープ別解は全出典確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc401_f	selected_tags	T067:primary,T066:alternative,T077:supporting,T083:supporting,T064:alternative,T027:alternative,T020:alternative,T132:alternative,T196:supporting			0	を結ぶ辺を一本追加したとき、直径は	各木の直径端点への距離から各頂点の偏心度A,Bを得て、結合後直径max(d1,d2,Ai+Bj+1)を総和。整列と尺取り/二分探索でO(N log N)。木DP/畳み込み別解は出典確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc401_g	full	T031:primary,T064:supporting,T032:supporting,T229:supporting			0	高橋くんたちがそれぞれ最終的に向かうボタンを決めたとき、それぞれの高橋くんの最適な動きは「スタートしたらまっすぐ目的のボタンへ向かい、着いたらそこにとどまる」ことです。	距離閾値t以下の人-ボタン辺で完全二部マッチングがあるかを判定し、距離候補を二分探索する。Dinic等の単位容量流でO(N^2.5 log N)。整列は候補距離の順序付けに利用。	reviewed	
+abc402_a	full	T073:primary			0	この問題は文字列の扱い、その中でも特に英大文字と英小文字の区別が問われている問題です。	英大文字かを各文字で判定して該当文字だけ順に出すO(N)。文字コードまたはisupperの固定機能を用いる。	reviewed	
+abc402_b	full	T011:primary,T076:supporting			0	この問題はキュー(待ち行列)というデータ構造の練習問題です。	来店客の番号をFIFOにenqueueし、先頭客を出力してdequeueする。全体O(Q)。Python dequeはFIFO実装であり両端キュー技法を主解としない。	reviewed	
+abc402_c	full	T076:primary		逆参照リスト	0	\(i=1,2,\ldots,N\)	食材ごとに含む料理の逆リストを作り、食べられるようになる日ごとに該当料理の未克服食材数を減らす。0になった料理数を累積しO(N+M+sum Ki)。	reviewed	
+abc402_d	full	T060:primary,T008:supporting,T264:supporting			0	\(\frac{M(M-1)}{2}\)	円周の弦の向きは端点番号和mod Nで同一傾きへ分類できる。全M(M-1)/2対から向きごとの平行対を引くO(N+M)またはmapでO(M log M)。	reviewed	
+abc402_e	full	T026:primary,T017:supporting,T022:supporting			0	\(T\subset \lbrace 1,2,\ldots,N\rbrace\)	解けた問題集合Tと残予算xを状態に将来得点の最大期待値を保持。未解決問題iへ提出し成功/失敗の次状態を確率平均して最大選択する。予算が減るため順次DP、O(2^N X N)。	reviewed	
+abc402_f	full	T082:primary,T065:supporting,T064:supporting,T077:supporting,T264:supporting			0	\(A_{i,j}10^{2N-i-j}\)	経路を反対角線で二分し各側の数値寄与の剰余を列挙する。片側xを固定してM-x未満の最大yを整列二分探索で取得し、全対角線を合わせO(N2^N)。	reviewed	
+abc402_g	selected_tags	T097:primary,T080:supporting,T264:supporting		一般化floor_sum	0	前提知識として一般化 floor sum が必要です。	剰余積を床関数の二乗・一次の和へ展開し一般化floor_sumへ帰着する。Euclid型再帰の具体的なモーメント更新を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc403_a	full			基本集計	0	文を用いて解くことができます．	配列の奇数番目の値だけ一度走査して加算するO(N)。奇偶は添字の基本選択であり独立した剰余アルゴリズムとはしない。	reviewed	
+abc403_b	full	T065:primary,T073:supporting			0	の文字を当てはめて得られる	Uの開始位置を全列挙し、対応するTの文字が?または一致するかを照合するO(len(T)len(U))。?4個を26^4全列挙する別解も小さい制約内。	reviewed	
+abc403_c	full	T012:primary,T076:supporting			0	が閲覧できるコンテストページの集合を	ユーザごとの閲覧許可集合と全閲覧フラグを保持する。個別追加、全許可、閲覧判定をO(log Q)または期待O(1)で処理。T162素数判定は問題番号403や補足例の誤付与。	reviewed	
+abc403_d	full	T022:primary			0	\(|A_i-A_j|=0 \Leftrightarrow A_i=A_j\)	値xの頻度を重みに、差Dの辺で同じ剰余のパスへ分離する。隣接する値を両方残さない最大重み独立集合を各パスの選ぶ/選ばないDPでO(max A+N)。D=0は重複だけ削除。	reviewed	
+abc403_e	selected_tags	T070:primary,T008:supporting,T012:alternative,T072:alternative,T077:alternative,T064:alternative,T003:alternative,T001:alternative,T069:alternative			0	前提：トライ木 (Trie)	禁止prefixのTrieに追加し、新しいYが既存prefixに覆われるか調べる。Yの部分木個数を保持して新prefixが覆う分だけ答えから除く。合計文字数線形。多数の別解は本文/ユーザ解説を追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc403_f	full	T022:primary,T074:supporting			0	に対して，次のような文字列も数式として有効です．（+ は文字列の結合を表します．）	値iごとに最短の式と最短termを別状態に保持し、加算分割・乗算因数対・括弧付けの構文規則から遷移する。O(N^2)以内で値と構文制約を同時に満たす。	reviewed	
+abc403_g	full	T003:primary,T089:alternative,T120:supporting			0	\(M=\max x_i\) とします． もし \(M\) が \(10^5\) 程度である場合や，あらかじめすべての \(x_i\) が分かっている場合は座標圧縮することで，この問題をセグメント木で解くことができます．	値域を動的セグ木で管理し、各区間の個数・整列時奇数位和・偶数位和を保持する。左の個数奇偶で右の奇偶和をswapして併合しO(Q log M)。将来値に依存するオンライン復号なら静的座圧を採らない。	reviewed	
+abc404_a	full	T073:primary,T065:supporting,T077:alternative			0	解法1. 文字を固定し、その文字が	a..zを順に走査し、Sに未出現の最小文字を返す。26種存在フラグでO(len(S)+26)。文字列をソートして欠番を探す別解も制約内。	reviewed	
+abc404_b	full	T065:primary,T076:supporting			0	回転操作を行わない場合、	90度回転を0..3回試し、その回数とTとの差分マス数の和を最小化する。O(N^2)。	reviewed	
+abc404_c	full	T005:primary,T067:alternative,T066:alternative,T182:concept			0	与えられたグラフがサイクルグラフであることの必要十分条件は次の2つをともに満たすことです	全頂点次数2とグラフ連結の必要十分条件をDSU/DFS/BFSで検査する。O((N+M)alpha(N))またはO(N+M)。一般の閉路検出だけでは十分でない。	reviewed	
+abc404_d	selected_tags	T065:primary,T080:alternative,T017:alternative,T022:alternative			0	度以上行く必要はありません。	各動物園を0,1,2回訪れる3^N通りを列挙し全動物の観測2回以上を確認するO(3^N sum Ki)。三進列挙をbit全探索や多倍長と自動分類しない。DP別解は追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc404_e	selected_tags	T076:primary,T003:alternative,T022:alternative		貪欲法	0	まず、豆の移動は「現在最も後ろにある豆を動かす」を繰り返すものとして構いません。	豆を最前の豆のある器へ集めつつ到達可能最左位置を広げる貪欲をO(N^2)で模擬する。セグ木の範囲minでO(N log N)へ高速化も可能。DP別解の状態は追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc404_f	full	T029:primary,T022:supporting			0	以下、手順 1,2,3 を 1 回行う一連の流れを 1 ターンと表現します。	tターン後に正解をk回押した状態からの最適勝率を逆向きDPし、次ターンのNボタンへのM押下配分を小DPで最大化して確率平均する。O(T K M^3)。	reviewed	
+abc404_g	full	T175:primary,T055:supporting,T086:supporting			0	\(\sum_{j=l}^{r} A_j = S_i\)	累積和Bに対する区間和等式と各Ai>=1を差分制約の辺へ変換し、Bellman-Fordで負閉路有無と最適目的値を求める。O((N+M)N)。一般LPの背景と実装手法を区別する。	reviewed	
+abc405_a	full			条件分岐	0	の問題A「Welcome to AtCoder」を解いてみてください。	Xの部門ごとにレートRが対応区間に含まれるか固定比較しYes/Noを返す。O(1)。	reviewed	
+abc405_b	full			頻度集計	0	の中に含まれないようなものが存在するようになるまで、	末尾削除前に1..Mが全部含まれるか頻度で調べ、末尾から頻度を減らし欠けた時点で削除数を返す。O(N+M)。基本頻度集計の語彙がないため無理な探索タグは付けない。	reviewed	
+abc405_c	full	T086:primary,T060:supporting			0	の値を計算していると、計算量が	sum_{i<j}AiAjを各jについてAj*接頭辞和へ分解して一度走査するO(N)。二乗公式による定数式の導出も可能だが状態DPではない。	reviewed	
+abc405_d	full	T066:primary,T055:supporting,T011:supporting			0	多始点 BFS(幅優先探索)	全出口を距離0として多始点BFSを実行し、各新訪問マスには距離が一つ小さい親方向を矢印として保存する。O(HW)で全通路を出口へ導く。	reviewed	
+abc405_e	full	T177:primary,T060:supporting,T236:supporting			0	一番左にあるブドウに注目します。	最左ブドウより前のバナナ数iを固定しC(A+B+i,B)*C(D-1+C-i,D-1)を足す。階乗と逆元前計算でO(A+B+C+D)。剰余を取るだけのT264は独立技法として不要。	reviewed	
+abc405_f	selected_tags	T054:primary,T013:supporting,T128:analysis_concept,T006:alternative,T002:alternative,T003:alternative,T245:alternative,T055:analysis_concept			0	点を結ぶ線分同士の交差に関する問題では、以下の事実がよく用いられます。	交差しない弦の区間包含をスタックで木にし、各端点の最小包含区間からLCA距離で交差弦数を求める。前処理O(M log M)、各問O(log M)。他の多数別解は追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc405_g	selected_tags	T084:primary,T123:supporting,T001:analysis_concept,T003:analysis_concept,T120:analysis_concept		Mo法	0	この問題は (列の)平方分割 と呼ばれるテーマを扱った問題です。	区間シャッフル問い合わせをMoの順に並べ、範囲伸縮ごとの頻度を平方分割バケットへO(1)更新し答えを取得する。導入の一般区間和例のBIT/セグ木を実際の解法と分け、状態と計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc406_a	full			基本算術,条件分岐	0	締切前に提出しているかの判定は次のように行うことができます。	時刻を60*時+分へ変換し提出が締切より厳密に前かを整数比較する。O(1)。	reviewed	
+abc406_b	full	T076:primary,T171:alternative			0	をかけた後表示される数は次のようになります。	現在値xへAiを掛け、10^K以上なら1へリセットする。乗算前にx>=(10^K+Ai-1)/Ai等で超過を判定すれば固定整数でO(N)、多倍長を使う別実装も可能。	reviewed	
+abc406_c	selected_tags	T073:primary,T060:supporting,T065:supporting,T022:alternative		ランレングス圧縮	0	の隣接要素の大小関係を表す長さ	隣接大小を<>文字列に変え連長圧縮し、<の連長a、>、<の連長bの3連続ブロックごとにa*bを足すO(N)。DP別解の実際の状態は追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc406_d	full	T076:primary		償却解析,逆参照リスト	0	回目以降のクエリの答えは常に	各行列のゴミ番号リストとゴミの削除済みフラグを持ち、同じ行/列の再削除は0とする。一つのゴミを行列各一度まで調べるためO(H+W+N+Q)。	reviewed	
+abc406_e	full	T028:primary,T022:supporting,T177:alternative,T080:supporting			0	以下の非負整数」と言い換えても答えは変わらないため、その条件下で答えを求めます。	上限Nのbitを走査して同じpopcountの個数と整数和を桁DPで保持し、1を置く時に該当bit重みを足す。O(log^2 N)前計算または各問O(log N)。二項係数で区切った区間を直接集計する別解も可能。	reviewed	
+abc406_f	full	T047:primary,T067:supporting,T001:supporting,T086:supporting			0	を根とした根付き木として考えます。	DFS順で部分木を連続区間へ変換し、各辺の片側部分木重み和をBITから取得する。点更新と部分木和、全体和との差で比較しO(N+Q log N)。	reviewed	
+abc406_g	selected_tags	T022:primary,T001:supporting,T064:supporting		Slope Trick	0	操作列は \(i = 1, 2, \ldots, N\) に対して以下を順に繰り返すものとしてよいです。	座標jの最小費用DPに絶対値費用を追加する。凸関数の傾き変化だけ保持して品物ごとに更新し、重み付き中央値をBITと二分探索で管理する。一般O(N*座標数)DPは制約外、具体高速化を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc407_a	full			丸め処理	0	の問題A「Welcome to AtCoder」を解いてみてください。	A/Bの最も近い整数を2AとBの商または余りで四捨五入するO(1)。基本の丸め処理を独立剰余技法として無理に付与しない。	reviewed	
+abc407_b	full	T065:primary,T060:supporting			0	\(2\) つのサイコロを \(A,B\) とし、\(A\) の出目を \(a\) と、\(B\) の出目を \(b\) とすると、\((a,b)\) の組み合わせは \((1,1),(1,2),\ldots,(6,5)	2個のサイコロの全36出目を列挙し、和>=Xまたは差>=Yの和事象を一度ずつ数えて36で割るO(1)。確率DPではない。	reviewed	
+abc407_c	selected_tags	T264:primary,T076:supporting		貪欲法	0	の文字数は、ボタン A を押すと	右から必要な加算B回数を管理し、各桁が目標になる最小の追加回数をmod10で選ぶ。Aボタンは桁数N回、合計を一度走査してO(N)。詳細なb_jの差分は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc407_d	full	T067:primary,T065:supporting,T059:supporting,T080:supporting			0	合計 \(n\) マスの（長方形とは限らない）マス目に対するありうるドミノの置き方の総数の最大値を \(f(n)\) と書くことにし、\(f(n)\) の増加の度合いについて考えます。	最初の未処理マスを空きのままにするか、右/下へドミノを置くかDFSで全配置を列挙する。覆わないマスのXORを更新して最大化、HW<=20等の小制約でO(HW 2^{HW})以内。	reviewed	
+abc407_e	selected_tags	T010:primary,T128:supporting,T077:alternative,T002:alternative,T003:alternative,T001:alternative,T009:alternative,T022:alternative,T132:alternative		貪欲法	0	正しい括弧列の定義にはさまざまな同値な言いかえが存在します。	括弧列の各接頭辞の開き数条件を満たすよう高価な要素の選択をヒープで貪欲に更新する。多数のユーザ別解と発展節を分けるため、公式本体の手順と計算量を追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc407_f	selected_tags	T013:primary,T075:supporting,T086:supporting,T003:alternative			0	\((A_i, i)\)	各Aiが唯一の最大となる左右の小要素連続範囲を単調スタックで求める。窓長kごとの寄与個数は台形状なので差分imosで全kへ加算しO(N)。セグ木別解の具体範囲を追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc407_g	full	T034:primary,T031:supporting,T118:supporting			0	マスを頂点として、隣り合っている \(2\) マスを辺で結ぶこととします。	マスをチェス盤二部グラフへし隣接2マスの和を辺重みにしたマッチングへ帰着。費用に共通定数を足して非負化しmin_cost_slopeで各ドミノ枚数の最小費用を得る。O(F(V+E)log(V+E))。	reviewed	
+abc408_a	full			線形走査,条件判定	0	この問題は与えられた数列	前回の活動時刻からの差がSより大きい箇所があれば寝ると判定し、全隣接時刻を走査するO(N)。	reviewed	
+abc408_b	full	T012:primary,T077:supporting			0	と呼ばれるデータ構造を使うことで解くことができます。	配列の値を集合で重複除去し、昇順に並べて個数と列を出力するO(N log N)。値の順位へ置換しないため座標圧縮とは別。	reviewed	
+abc408_c	full	T075:primary,T086:supporting			0	\((1 \leq i \leq N)\)	各砲台の守備区間へ差分+1を加え、累積で各城壁の被覆個数を求める。その最小値だけ砲台を壊せば一壁を無被覆にできる。O(N+M)。	reviewed	
+abc408_d	full	T022:primary,T086:alternative			0	\(A_i=(S_1,S_2,\ldots,S_i\)	0*1*0*の3段階で各文字を処理する最小反転DPをO(N)で計算する。累積の0/1個数差と接頭辞最小から同じ最小区間を求める別解もO(N)。	reviewed	
+abc408_e	full	T005:primary,T117:supporting,T067:alternative,T066:alternative		bit貪欲法	0	\( w\ \mathrm{OR}\ x=x\)	上位bitから答えbitを0にできるか、禁止bitを含む辺を除いたグラフの1-N連結性をDSU/DFSで検査する。O(30(N+M)alpha(N))。通常の数値二分探索ではOR条件の単調性は成立しない。	reviewed	
+abc408_f	selected_tags	T022:primary,T003:supporting,T077:supporting,T012:alternative			0	移動によって足場の高さは常に狭義単調減少します。	足場を高さ順に処理し、移動可能な範囲のdp最大をセグ木から取り現在足場のdpへ+1する。点更新・範囲最大でO(N log N)。setを使う別解は出典確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc408_g	selected_tags	T145:primary,T080:supporting,T258:alternative			0	まず、条件を満たす最小の \(q\) を取った時に、 \(q\neq 1\) なら対応する \(p\) は一つに定まります。	二分数の共通整数部を除き逆数で区間を反転するEuclid型再帰で最小分母の内分有理数を得る。各問O(log max(A,B,C,D))。Stern-Brocotの同値別解は反復飛ばしの実行可能性を追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc409_a	full	T073:primary			0	番目の商品を欲しがっているということは，	2文字列で同じ添字が両方oとなる位置があるか一度走査するO(N)。	reviewed	
+abc409_b	selected_tags	T077:primary,T065:alternative			0	\(x=0,1,\dots,N\)	値を降順整列してAi>=iを満たす最大iを探すO(N log N)。小さい制約で全x=0..Nを列挙しx以上の要素数を数えるO(N^2)も可。解説のxそのものの頻度という表現は問題文で検証。	needs_resolution	解説後半・別解の追加点検が必要
+abc409_c	full	T086:primary,T264:supporting,T060:supporting			0	\(i=1,2,\ldots,N\)	円周累積位置xiをLで正規化し頻度を集計する。Lが3の倍数なら各x<L/3の頻度積cnt[x]cnt[x+L/3]cnt[x+2L/3]を足す。O(N+L)。	reviewed	
+abc409_d	full	T073:primary		貪欲法	0	本解説では，操作後の文字列を	最初の下降Si>Si+1の位置lを選び、Slより小さい文字が続く最遠rまでSlを右へ回す。辞書順比較の最初の差を最小化する貪欲O(N)。	reviewed	
+abc409_e	full	T027:primary,T067:supporting			0	を根とする根付き木とみなします．また，陽電子と電子をまとめて「粒子」と呼ぶことにします．	各辺を渡る必要粒子数は子部分木の符号付き総和の絶対値。DFSで部分木和を子から併合しsum abs(Xj)*wjを得るO(N)。これは加法の木DPであり一般の最短経路計算は不要。	reviewed	
+abc409_f	full	T005:primary,T010:supporting			0	この問題は，非連結であるような頂点のペアの集合を直接管理するのではなく，「非連結である可能性がある頂点のペアの集合」を考えることで解きやすくなります．	全点対の距離を最小ヒープに入れ、新点追加時は既存点との対を追加。取り出した対が既に同成分なら捨て、非連結最短距離の対をDSUで併合する。O((N+Q)^2 log(N+Q))程度で各候補一回処理。	reviewed	
+abc409_g	full	T132:primary,T026:supporting,T177:supporting,T236:supporting			0	すべての操作後の \(k\) の個数の期待値を \(E_k\) とします． \(k \geq 2\) を固定し，「 \(k\) が \(i\) 回目の操作で最初に現れる」という事象を考えます．このとき， \(i-1\)	値kが初めて現れる時刻を二項確率で分類し、その後の個数期待値f(n+1)=f(n)*(n+1-p)/nを前計算する。各kへの合計を畳み込みでまとめO(N log N)。確率状態そのものをDP伝播する方法とは区別。	reviewed	
+abc410_a	full			条件判定,基本集計	0	歳の馬が出場できるかどうかは、	レースの年齢条件Ai<=Kを各iについて検査して数えるO(N)。比較・集計以外の名前付き技法は不要。	reviewed	
+abc410_b	full	T076:primary,T065:supporting			0	\(X_i \ge 1\)	各到着で指定箱ならその箱へ、指定0なら最少個数・最小番号の箱を全走査して追加するO(NQ)。	reviewed	
+abc410_c	full	T264:primary,T076:supporting			0	のクエリは愚直に行っても時間計算量	先頭の循環ずれoffsetを保持し、参照更新位置pを(p+offset)mod Nへ写す。回転時はoffsetだけ更新して各問O(1)、全体O(N+Q)。	reviewed	
+abc410_d	full	T066:primary,T067:alternative,T059:supporting			0	この問題は俗に頂点倍化と呼ばれるテクニックを用いて解くことができます。	頂点vと累積XOR0..1023を状態に拡張し、辺wで(v,x)->(u,x xor w)へ遷移。BFS/DFSで到達する終点状態の最小XORを選ぶO(1024(N+M))。	reviewed	
+abc410_e	full	T022:primary			0	この問題はDPにより解くことができます。	i体撃破・残魔力mごとの最大残体力を保持し、物理で体力Ai減、魔法で魔力Bi減の2択を遷移する。O(NM)で片資源を最大値へ圧縮。二次元資源bitset別解もあり。	reviewed	
+abc410_f	selected_tags	T086:primary,T008:alternative,T077:alternative			0	\(H \times W \le 300000\)	白黒を+1/-1に変換し、短い軸の上下行を全列挙して列累積和が等しい対を頻度集計する。O(min(H,W)^2 max(H,W))。配列頻度でO(1)更新、map/ソートも制約次第の別解を確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc410_g	selected_tags	T022:primary,T003:supporting,T077:supporting,T012:alternative			0	最初に弦を削除するステップにおいて、他と交わる弦だけでなく、最終的に答えに寄与しない弦も削除することにします。	弦を円周端点順に見て包含された鎖の最長長をDPし、回転の制約と範囲最大をセグ木で管理する。具体状態/重複弦処理を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc411_a	full	T073:primary			0	以上であるかを判定すれば良いです。	文字列Pの長さがL以上か標準文字列長を使って比較する。長さ取得O(1)またはO(len(P))の入力処理、特殊探索は不要。	reviewed	
+abc411_b	full	T086:primary,T065:supporting			0	\(1\leq i<j\leq N\)	駅間距離の累積和Siを作り全駅対i<jへSj-Siを出力するO(N^2)。制約が小さいため区間を直接足すO(N^3)別解も可。	reviewed	
+abc411_c	selected_tags	T076:primary,T003:alternative,T120:supporting			0	以下では、左右一列に並んだ	反転マスと左右の境界だけが変化することから白黒隣接不一致数を更新し、その半分を黒区間数とするO(Q)。同じ境界情報をモノイドにしたセグ木別解はソース確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc411_d	full	T073:primary,T015:alternative			0	の時間がかかってしまうため、各クエリで指示される操作をそのまま愚直にシミュレーションすることはできません。	操作を逆順に読み、最終サーバ文字列に寄与するPC番号を一つだけ追跡する。対応する追加文字列だけ逆順に集めて反転連結するO(Q+総文字数)。永続参照木でコピー共有する別解も同制約内で可能。	reviewed	
+abc411_e	selected_tags	T077:primary,T064:alternative,T236:supporting			0	個のサイコロのいずれかの面に書かれている数を小さい順に全て並べた列を	全サイコロ面を値順に走査し、各サイコロの出目が閾値以下となる個数積から最大値CDFを求める。隣接差に値を掛けて期待値を足すO(N log N)、分布DPではない。二分探索別解の役割は追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc411_f	selected_tags	T012:primary,T005:supporting		small-to-large	0	クエリの指示に従って、各時点におけるグラフ	各成分の隣接集合を小さい方から大きい方へ併合し、縮約時の自己ループ/重複辺を除く。駒は成分代表で対応しO(M log^2 N)等のsmall-to-large。各更新の完全性と償却計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc411_g	full	T017:primary,T022:supporting,T060:supporting,T177:supporting			0	任意の \(i, j\ (i\neq j)\) に対し、 頂点 \(i\) と頂点 \(j\) の間に張られた辺の数を \(C_{i,j}\) と表記します。	最大頂点sを固定し、訪問集合Sと末尾iの重み付き単純パス数をbitDPで数え、sへ戻る辺で閉路化し向き2で割る。2頂点閉路は平行辺の2本選択を別計算。O(2^N N^2)。	reviewed	
+abc412_a	full			比較,基本集計	0	\(A_i < B_i\)	Ai<Biの位置数を一度走査して返すO(N)。	reviewed	
+abc412_b	full	T073:primary,T012:supporting			0	\(2 \leq i \leq |S|\)	2文字目以降の大文字の直前文字がTに含まれるかを毎位置確認するO(len(S)*len(T))、Tを集合にしてO(len(S)+len(T))も可。	reviewed	
+abc412_c	selected_tags	T077:primary,T064:alternative		貪欲法	0	ドミノを左から順に置いていくことを考えましょう。	現在のサイズの2倍以内に置ける最大の中間ドミノを貪欲に選び、最後Nを倒せるまで繰り返す。整列と二分探索または単調走査でO(N log N)。実際の制約と停止条件を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc412_d	selected_tags	T065:primary,T061:alternative,T017:alternative			0	単純無向グラフのすべての頂点の次数が	N<=8なので頂点順列で一つのサイクル、または頂点を二群に分け各々3以上のサイクルを全列挙する。完成辺集合との対称差本数が編集費用。状態DP別解は別ソース確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc412_e	selected_tags	T253:primary,T134:supporting,T065:supporting		区間篩	0	は単調に増加する数列です。	LCM(1..n)が変化するnは素数冪のみ。sqrt(R)までの素数で[L+1,R]を区間篩し、追加の素数冪も列挙して異なるLCM数を数える。区間長が小さい制約に適合する計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc412_f	full	T026:primary,T022:supporting,T077:supporting			0	\(A_C\) に \(1\) を加えておき、 \(A_i\) が（高橋君がはじめに持っているものも含めた）色 \(i\) の靴下の枚数となるようにしておきます。	手元に色iの靴下を持つ状態の終了まで期待手数を、同色を引く確率と他色の保留選択で計算。枚数順に整列し自己ループを移項、累積項を更新してO(N log N)。	reviewed	
+abc412_g	selected_tags	T079:primary,T211:supporting,T136:supporting,T118:concept,T104:analysis_concept,T196:alternative,T212:alternative			0	この問題は解法が簡潔かつ面白いので、まず先に解法を説明して、その後に必要な知識の説明をしようと思います。	次数調和条件をTutte型の重み付き歪対称行列の行列式係数へ帰着し乱択代入で非ゼロ判定する。素数判定は法の選択の背景で主解ではない。具体行列・多項式係数算法を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc413_a	full			基本集計	0	の問題A「Welcome to AtCoder」を解いてみてください。	総容量sum AiがM以上かを加算して判定するO(N)。	reviewed	
+abc413_b	full	T012:primary,T008:alternative,T073:supporting			0	連想配列（平衡二分探索木やハッシュマップ）などを利用することで、重複した文字列を取り除くことができます。	i!=jの全有向対でSi+Sjを作り集合へ入れ異なる文字列数を出す。O(N^2 L log N)。mapで頻度を持つ同等別実装も可。	reviewed	
+abc413_c	full	T011:primary		ランレングス管理	0	\(2 \times 10^{14}\)	追加ごとに(個数c,値x)をFIFOへ保存し、先頭から削除k個の各ブロック寄与min(c,k)*xを足す。ブロックは一度削除されるため全体O(Q)。	reviewed	
+abc413_d	full	T077:primary			0	絶対値が \(1\) より大きい公比をもつ等比数列は、全体を反転することで公比の絶対値が \(1\) 未満である等比数列とすることができます。	絶対値順にソートし隣接3項の交差積で共通比を検査する。絶対値一定の比±1は値数・正負数で別処理する。O(N log N)、浮動小数を使わない。	reviewed	
+abc413_e	full	T081:primary,T080:supporting			0	に対して操作を何回か行って順列	長さ2^Nの配列を左右半分ずつ辞書順最小へ再帰変換し、小さい先頭値の側を先に連結する。各要素がN段の併合を通りO(N2^N)。	reviewed	
+abc413_f	full	T039:primary,T066:supporting,T011:supporting			0	にある状態から始めたときにゴールに到達するまでの移動回数の最小値を	各マスの値は隣接値の小さい方から2番目+1。ゴール距離0から後退BFSし、各マスが2回隣接確定を受けた時に確定させるO(HW)。毎マス4要素の比較は一般ソート技法として主張しない。	reviewed	
+abc413_g	full	T005:primary,T008:supporting,T067:alternative,T066:alternative,T032:analysis_concept,T033:analysis_concept,T055:analysis_concept			0	\(HW\) 個の頂点 \((i,j)\ (1\le i\le H,1\le j\le W)\) について、\((i,j)\) と \((i+1,j)\) 、\((i,j)\) と \((i,j+1)\) の間に辺を張り	巨大グリッドの通行障害を8近傍の壁連結と境界接続へ変換し、壁座標だけをmapで管理してDSU/DFSする。最大流・最小カット・双対最短路は帰着の証明で、巨大グラフへ実行しない。全体O(N log N)等。	reviewed	
+abc414_a	full			区間包含判定	0	が高橋君の配信を最初から最後まで見るためには，以下の二つを同時に満たす必要があります．	各視聴区間[Xi,Yi]が配信[L,R]を含むかXi<=LかつR<=Yiを一度走査するO(N)。	reviewed	
+abc414_b	full	T073:primary		ランレングス展開	0	はじめに入力をすべて受け取り，	展開長sum liを100で飽和させながら計算し、超過ならToo Long、以下なら各文字をli回出力する。O(N+100)、巨大長を実際に展開しない。	reviewed	
+abc414_c	full	T065:primary,T073:supporting,T264:supporting			0	以下の方針で解くことができます．	十進回文の上半分を列挙して下半分を反転生成し、N以下の候補をA進数へ変換して回文か検査する。O(sqrt(N)log_A N)程度で全整数列挙を避ける。	reviewed	
+abc414_d	full	T077:primary		貪欲法	0	\(X_1 \leq X_2 \leq \dots \leq X_N\)	家位置を整列し隣接距離を求め、大きいN分割点のギャップを除くことで各群の最大-最小の総和を最小化する。O(N log N)。	reviewed	
+abc414_e	selected_tags	T060:primary,T264:supporting,T171:alternative		商列挙	0	\(a \bmod b = c\)	1<=b<a<=Nでaがbの倍数でない組を数える。全三角数から各bの倍数個数を引き、床商が一定の区間でまとめてO(sqrt N)。多倍長は整数幅により別実装、実際のNと計算量は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc414_f	selected_tags	T066:primary,T022:supporting,T007:supporting			0	一回の移動を \(K\) 歩とみなすことにします．次のような dp を考えます． \(\mathrm{dp}[(u,v)][k]\) ：頂点 \(u\) から \(v\) へ，一回の移動の中の \(k\) 歩目で移る場合	有向辺(u,v)と1移動内の歩数kを状態にBFSし、移動境界以外で直前辺へ戻ることを禁止する。各頂点の確定済み前駆を使って隣接全展開の二乗を避ける。O(NK)等の具体高速化を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc414_g	selected_tags	T003:primary,T187:supporting,T055:supporting			0	この問題はいわゆる 区間に辺を張るテク を用いて解くことができます．このテクニックを用いる典型的な問題として以下の問題があります． \(N\) 頂点 \(0\) 辺のグラフがある． \(i=1,2,\ldots,M\)	区間から区間への辺をセグ木の上下有向コピーへ圧縮して張り、補助頂点を含むグラフでDijkstraする。O((N+M log N)log N)等。駅の入出場コストの具体重み付けを全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc415_a	full	T065:primary			0	が含まれるかどうか判定するには、	配列全要素を走査してXと一致するものが存在するか判定するO(N)の線形探索。	reviewed	
+abc415_b	full	T073:primary			0	荷物は区画番号の小さい方から	Sを左から走査し荷物記号の位置を列挙して、隣接する2位置を一組として順に出力するO(N)。位置は走査順で整列済みでソート不要。	reviewed	
+abc415_c	full	T017:primary,T022:supporting,T117:supporting			0	この問題では、ビット列で表現された集合について扱います。	薬品集合maskへの到達可否を持ち、未使用薬品一つを足した安全なmaskだけへ遷移する。初期0、全体O(N2^N)の部分集合DP。	reviewed	
+abc415_d	full	T077:primary		貪欲法	0	\(D_i = A_i - B_i\)	交換の純消費Ai-Biが小さい順に整列し、所持N>=Aiなら可能回数を除算でまとめて適用する。O(M log M)、所持数10^18の逐次交換はしない。	reviewed	
+abc415_e	full	T022:primary			0	でコインを回収しご飯を買うのは、移動経路によらず常に	マスごとの収支Bi,j=Ai,j-Pi+j-1へ置き換え、終点から右/下の必要初期残高最小を逆向きDPする。need[i][j]=max(0,min(need[next])-Bi,j)。O(HW)。	reviewed	
+abc415_f	selected_tags	T003:primary,T120:supporting,T012:alternative			0	この問題はセグメント木 (Segment Tree) を用いて解くことが出来ますが、載せるもの (セグメント木の各要素) が複雑となるものの代表例です。	区間長・左右端文字・端からの同文字連長・最長同文字区間を持つモノイドでセグ木を構築する。隣区間の境界文字が等しければ連長を併合しO(log N)で更新/照会。set別解は追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc415_g	selected_tags	T150:primary,T022:supporting			0	\(D_i=A_i-B_i\) 、 \(K=\max_i A_i\) と定義します。	最良交換比Bi/(Ai-Bi)の操作を大量部分へ適用し、境界K=max Ai付近だけ完全ナップサックDPで最適化する。O(M+K^3)。最良比補正範囲の証明を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc416_a	full	T073:primary			0	文字目までを順に調べましょう。	指定区間L..Rの各文字がすべてoかを一度走査するO(N)。	reviewed	
+abc416_b	full	T073:primary		貪欲法	0	問題の条件を整理すると、条件は直感的には以下のように捉えることができます。	#で区切られた各.連長の最左1文字だけをoに置き換える。連続.区間に置けるoは最大一つなのでO(N)の貪欲構築が最適。	reviewed	
+abc416_c	full	T065:primary,T080:supporting,T077:supporting,T073:supporting			0	個の文字列を全て求め、それらをソートすることでこの問題を解くことができます。	N種から重複可でK個選ぶN^K通りを再帰生成し、連結文字列を全てソートしてX番目を返す。O(N^K*K*最大長 log(N^K))。	reviewed	
+abc416_d	full	T077:primary,T083:supporting,T264:supporting,T118:analysis_concept		貪欲法	0	\(A_i+B_i \geq M\)	Ai+Bj>=Mとなるペア数を最大化すれば総剰余和が最小。A降順とB昇順で、足せる最小Bを二ポインタで貪欲対応させる。整列込みO(N log N)。一般マッチングを実行しない。	reviewed	
+abc416_e	full	T208:primary,T055:supporting			0	街を頂点、道路などを辺とみなすことで、この問題はグラフの最短経路問題とみなせます。	空港を仮想頂点へ接続して飛行辺を圧縮し、全対最短距離をFloydで持つ。道路/空港追加時にその辺を通る候補でO(N^2)更新、問い合わせ総和も距離表から得る。O(N^3+QN^2)。	reviewed	
+abc416_f	selected_tags	T027:primary,T022:supporting			0	与えられる木 \(T\) を頂点 \(1\) を根とする根付き木とします。	子部分木から選ぶ点素パス数kと根の使用状態を持つ木DP。子の2パスを根で繋ぐ/独立に残す等の併合をO(K^2)で行いO(NK^2)。根状態の完全な分類は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc416_g	selected_tags	T025:primary,T022:supporting,T077:supporting			0	記号の定義 文字列 \(T\) に対してその長さを \(|T|\) と表します。	連結順序比較ab<=baで最小の周期文字列Smin^inftyを定め、そのprefixとなる最短のK文字列連結を個数n・周期位置pでDPする。O(len(Smin)^2 K)。文字比較規則と前計算は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc417_a	full	T073:primary			0	の問題A「Welcome to AtCoder」を解いてみてください。	SのA文字を先頭から、B文字を末尾から除き、区間[A,N-B)を出力するO(N)。	reviewed	
+abc417_b	full	T076:primary,T008:alternative			0	回の操作を順にシミュレーションすることを考えます。	各BiについてAで最初の同値要素だけを消す操作を直接模擬するO(NM)。同値数の頻度で必要削除数を先に求め、走査中に割り当てるmap別解もO((N+M)log M)。	reviewed	
+abc417_c	full	T008:primary,T060:supporting			0	ありえるすべての \((i,j)\) の組（\(\dfrac{N(N-1)}2\) 通りあります）に関して判定を行うと、実行時間制限に間に合わせるのは難しいです。	j-i=Ai+Ajをi+Ai=j-Ajへ変形し、jを前から走査して過去のi+Aiの頻度をmapで取得して加算するO(N log N)または期待O(N)。	reviewed	
+abc417_d	selected_tags	T022:primary,T086:supporting,T064:supporting,T076:analysis_concept			0	プレゼントを後ろから見ることでこの問題を解くことができます。	期待という題名でも確率DPではない。低テンションjだけ最終値DPを後ろから前計算し、高い初期値の問い合わせは減少量の累積和を二分探索して低範囲へ落ちる最初の位置を決める。O(NC+Q log N)。Map別解は追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc417_e	selected_tags	T067:primary,T077:supporting,T012:alternative			0	まず、次のことが成り立ちます。	隣接頂点を昇順にしてDFSし、終点Vへ初めて到達した単純経路を返す。訪問済みを適切に保持する辞書順探索O(N+M log M)等。途中頂点の永久訪問処理が辞書順を保つ証明を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc417_f	full	T002:primary,T026:supporting,T019:supporting			0	\(\lbrack L,R\rbrack\) で \(L\) 以上 \(R\) 以下の整数全体を表すこととします。	各皿の期待石数を遅延セグ木に持ち、区間和を取り区間長で割った平均を同区間の全皿へ代入する。確率的操作の一次期待値をオンラインに伝播しO((N+M)log N)。通常セグ木・setは主解に不要。	reviewed	
+abc417_g	selected_tags	T078:primary,T073:supporting,T080:alternative			0	まず、問題文における、「 \(S_{L_i}\) と \(S_{R_i}\) をこの順に連結した文字列を \(S_{i+1}\) とする。	文字列連結をDAGとして長さを10^18で飽和保持し、問い合わせ位置が左/右のどちらかを辿る。片側への長い祖先連鎖をダブリングしO((N+Q)log N)。具体ジャンプ条件を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc418_a	full	T073:primary			0	の長さが 3 未満である場合、答えは	N>=3を先に確認し、末尾3文字がteaか比較するO(1)。入力長を含めO(N)。	reviewed	
+abc418_b	full	T065:primary,T073:supporting,T086:alternative			0	の部分文字列を列挙し，各部分文字列	全部分文字列を列挙し、長さ3以上で両端tなら内部t個数/(長さ-2)の最大を取るO(N^3)。tの累積和ならO(N^2)。二分探索は長さについて単調でなく主解では不要。	reviewed	
+abc418_c	full	T077:primary,T086:supporting,T064:supporting			0	手順 2. でディーラーが選ぶティーバッグのうち，フレーバー	b個同味を避ける最大抽出数sum min(Ai,b-1)を超える1個目が勝利保証数。Aiを整列し累積和と二分探索で各bをO(log N)計算する。上限個数不足なら-1。	reviewed	
+abc418_d	full	T060:primary,T086:supporting,T022:alternative			0	が美しい文字列である条件を発見しましょう。	XNOR変換で0の偶奇が不変となるので美しい部分文字列は0数偶数。接頭辞0数の偶奇が等しい対を数えるO(N)。末尾/偶奇の個数を逐次更新する同等DP別解も実行可能。	reviewed	
+abc418_e	full	T008:primary,T060:supporting,T097:supporting,T205:supporting			0	まず，平行な辺の組が何通りあるかを数えることを考える．これは，	全点対の方向をgcdで正規化し同方向の2辺対を数える。平行四辺形は対角線中点の一致対として数えて一度引く。O(N^2 log N)、傾きの浮動小数比較を避ける。	reviewed	
+abc418_f	selected_tags	T177:primary,T003:alternative,T014:alternative			0	下位問題の考察 \(a_1 = \dots = a_{N-1} = -1\) , \(a_N = r \neq -1\) である場合を考える．つまり， (問題 NOADJ) 一列に並んだ \(N\) 個のティーポットのう	非隣接r個選択の二項係数C(N-r+1,r)から始め、既知prefix個数条件で区間を分割して数を積む。セグ木/平衡木の更新に必要な状態と計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc418_g	selected_tags	T025:primary,T022:supporting,T017:supporting,T066:supporting,T070:alternative,T080:supporting		オートマトン,正規言語	0	はじめに この問題はいくつかの方針が考えられる問題です。	16種の二項演算の逆縮約で正規言語オートマトンを構成し、含まれる部分文字列数を状態DPで数える。BFS/Trie等はオートマトン構築の実行根拠を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc419_a	full	T073:primary			0	であるかをそれぞれ判定すればよいです。	入力red/blue/green等の固定文字列に応じて対応コードを返すO(1)の文字列条件分岐。	reviewed	
+abc419_b	full	T010:primary,T009:alternative,T065:alternative			0	この問題は、多重集合に対して	追加値を最小ヒープへpushし、削除問で最小値をpopして出すO(Q log Q)。制約が小さく頻度配列全走査やリスト最小抽出も実行可能。	reviewed	
+abc419_c	full			Chebyshev距離,最小最大	0	まず、最終的に全員が集まるマスを固定したときの問題を考えます。	全員の行/列の最大最小を取り、Chebyshev距離の最小集合時刻ceil(max(行幅,列幅)/2)を返すO(N)。一般の最短経路探索は不要。	reviewed	
+abc419_d	full	T075:primary,T086:supporting,T073:supporting			0	この問題は累積和の練習問題です．	区間swapの回数を差分配列へ+1/-1し累積偶奇を求め、奇数回だけSiとTiを交換して出力するO(N+M)。	reviewed	
+abc419_e	selected_tags	T022:primary,T264:supporting,T077:alternative			0	の倍数であることは、以下の条件をともに満たすことと同値です。	添字のL剰余ごとに同じ値mod Mへ揃える費用fi,jを計算し、L群から選ぶ剰余和0の最小費用をナップサックDPで得る。O(NM+LM^2)等、費用更新のソート別解は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc419_f	selected_tags	T170:primary,T017:supporting,T025:supporting,T022:supporting,T257:alternative			0	\(\mathrm{dp}[i][s][last]\)	必要文字列の一致済みmaskとAho-Corasick状態を持つ文字列数DP。次の26文字を足し一致maskを更新して全包含を数える。O(L2^N*総prefix数*26)。包除による別解の計算量は追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc419_g	selected_tags	T067:primary,T059:supporting,T136:supporting,T065:supporting		サイクル基底	0	この問題を考えるうえで サイクル基底 (Cycle Bases) という概念が重要となります．まずはサイクル基底について説明します．この解説でグラフといった場合，単純連結無向グラフを指します． サイクル基底について グラ	DFS木の非木辺からサイクル基底を作り、次数偶数部分グラフをXOR線形空間として列挙して単純パス条件を数える。巡回次元が小さい制約と逆元の使用箇所を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc420_a	full	T264:primary			0	の問題A「Welcome to AtCoder」を解いてみてください。	月を0始まりにして(X-1+Y)mod12+1を返すO(1)の巡回剰余計算。	reviewed	
+abc420_b	full	T073:primary			0	この問題で要求されていることは以下の通りです。	全投票文字列を保存し、設問ごとに0/1の少数側を数えて該当者へ加点、最後に最大点者を列挙するO(NM)。	reviewed	
+abc420_c	full	T076:primary			0	個の和のうち各クエリで変わる要素は	sum min(Ai,Bi)を保持し、一要素の更新前後のminの差だけ加えて出力する。初期O(N)、各問O(1)。	reviewed	
+abc420_d	full	T066:primary,T011:supporting,T055:supporting			0	回踏むと状態は元に戻ります。	?を踏んだ回数の偶奇とグリッド位置を状態にBFSし、偶奇に応じた通行可否を判定する。2HW状態でO(HW)。dequeはFIFO実装のため独立両端キュー技法としない。	reviewed	
+abc420_e	full	T005:primary			0	例えば、以下のクエリなら UnionFind を用いることで解くことが出来ます。	DSU成分ごとの黒頂点数を持ち、辺追加で合計を併合、色反転で所属成分数を±1、照会は黒数>0かを答える。O((N+Q)alpha(N))。	reviewed	
+abc420_f	selected_tags	T013:primary,T060:supporting,T086:supporting,T027:alternative			0	数える部分長方形のうち、下の辺を固定することを考えます。	各行を底とする上方向の.連長ヒストグラムを作り、各最小高さの左右支配区間を単調スタック/Cartesian木から得て長方形数を足すO(HW)。FIFOキューより単調スタックが実手法、Cartesian木DP別解は追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc420_g	full	T065:primary,T077:supporting,T012:alternative			0	\(m = \sqrt{n^2+n+X}\)	4X-1の正負約数dを列挙し、対因子からm,nを復元して整数性・m>=0を判定する。O(sqrt X)で解nを集合重複除去/整列して返す。	reviewed	
+abc421_a	full	T073:primary			0	であるかどうかを問うています。	部屋番号Xに対応する登録名と入力名を文字列比較するO(文字数)。配列参照と比較のみ。	reviewed	
+abc421_b	full	T076:primary,T073:supporting,T197:concept			0	基本的には問題文に書かれた通りの方法で	a1,a2からak=reverse_digits(ak-1+ak-2)を10項まで直接求める。固定回数・O(桁数)、Fibonacciは問題の対象で行列累乗は不要。	reviewed	
+abc421_c	full	T073:primary		隣接交換,寄与和	0	からなり同じ文字が隣り合う箇所がない文字列は	Aの出現位置Xkと交互配置AB.../BA...の必要位置Ykの絶対差和を両方求めて最小化するO(N)。整列は既に出現順なので不要。	reviewed	
+abc421_d	full	T076:primary,T060:supporting		ランレングス圧縮,二ポインタ	0	この問題は工夫したシミュレーションにより解くことができます。	二人の方向連長を二ポインタで同じ継続時間だけ区切り、相対速度一定の一次方程式からその区間の一致回数をO(1)計算する。O(M+L)。queueは入力連長の容器で、Manhattan距離最短化を実行しない。	reviewed	
+abc421_e	full	T026:primary,T022:supporting,T080:supporting,T065:supporting,T009:concept			0	この問題はDP(メモ化再帰)により解くことができます。	残振り直し回数kとキープ済み出目多重集合Sの最適期待得点をメモ化する。未確定出目を全列挙し各出目でキープ部分集合を最大選択、総状態遷移は10^6程度以内。	reviewed	
+abc421_f	selected_tags	T002:alternative,T003:alternative,T013:alternative		連結リスト	0	連結リストに似たアルゴリズムを用います。	数列を連結リストで表しx->next[x]とy->next[y]の両側を辿って先に相手へ着いた方の区間を削除する。各要素の削除償却で高速化する主解とセグ木別解を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc421_g	full	T034:primary,T032:supporting			0	以下で定義される数列 \(d=(d_0,d_1,\dots,d_{N})\) を考えます。	差分列の不足分を区間操作の始終点間のボール移送と見て、有向辺ごと費用1の最小費用流へ帰着する。O(N max A (N+M)log(N+M))。一般最大流は可否の補助。	reviewed	
+abc422_a	full	T073:primary			0	基本的な入出力の方法が載っています。	world-stageを読み、stage<8ならstage+1、stage=8ならworld+1のstage1へ進めて固定形式出力する。O(1)。	reviewed	
+abc422_b	full	T065:primary			0	この問題を解くには、すべてのマスについて次の \(2\) つの条件のうち少なくとも \(1\) つを満たすか確認すればよいです。	全マスを走査し黒マスの4近傍黒数が2か4であるかを判定するO(HW)。盤面を文字列で読むだけでT073を主張しない。	reviewed	
+abc422_c	full	T064:alternative		貪欲法,基本算術	0	コンテストを一つ開催するために	コンテスト数はmin(nA,nC,floor((nA+nB+nC)/3))で上限を達成できる。O(1)の資源配分公式。二分探索別解は不足A/CのB転用で可否判定できO(log総数)も可。	reviewed	
+abc422_d	selected_tags	T081:primary,T080:supporting		構築	0	答えは次の C++ のコード片で表されるアルゴリズムにより計算できます。	Kを左右にできるだけ均等に分ける再帰で長さ2^Nの各葉へ割当て、どの二分区間でも差が最小になる列を構築する。O(2^N)。具体的辞書順条件を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc422_e	selected_tags	T079:primary,T065:supporting,T081:alternative			0	を使用することで高速かつ十分高確率で問題を解くことが出来ます。	2点を乱択してその直線上点を全走査で数え、過半数なら返す。解がある時の成功確率>=1/4でT回の誤り確率<=(3/4)^T。O(TN)。決定的分割統治別解は追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc422_f	selected_tags	T022:primary,T187:alternative			0	各頂点の寄与を考えることで、次のような問題に言い換えることができます。	燃料と移動券の交換を、最初の購入券枚数の最適化を含むDAG状態へ帰着し適切な順序でDPするO(NM)。Dijkstra版は実装依存の時間内実行なので別解の制約可否を確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc422_g	selected_tags	T127:primary,T132:supporting,T177:supporting,T236:supporting,T060:supporting			0	この問題は 母関数 あるいは 形式的冪級数(FPS) と呼ばれるテクニックへ入門するための問題です。	各箱へ入る個数条件を指数型母関数に変換し、箱の生成関数積の必要係数へ階乗を掛けて数える。Fibonacci等は母関数導入例で主解か追加確認。高速化の具体式は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc423_a	full			基本算術	0	円とおくと，満たすべき条件は	引出額1000mと手数料Cmの和がX以下よりm=floor(X/(1000+C))を計算し1000倍するO(1)。	reviewed	
+abc423_b	full			線形走査,区間集計	0	\(0, 1, \ldots, N\)	閉じたドアの最左Xと最右Yを求め、その間で両端の人が到達不能となる部屋数を直接計算するO(N)。閉扉がない場合0。	reviewed	
+abc423_c	full			貪欲法,区間集計	0	開閉操作について、開いている鍵を閉める操作を	最初に開いている全ドアの最左/最右から開始位置Rまでの間を開けて連結区間にし、最後に開いた全ドアを閉める。元開扉数と追加開扉数の2倍を合算するO(N)。	reviewed	
+abc423_d	full	T010:primary,T076:supporting			0	が入店するまでを処理したものとし，その時刻を	団体を到着順に処理し、現在在店客数と退店時刻min-heapを持つ。入店可能人数まで古い退店を処理して時刻を進める。各団体一度出入りしO(N log N)。	reviewed	
+abc423_e	selected_tags	T086:primary,T003:alternative,T120:supporting			0	\(\displaystyle\sum_{l = L_i}^{R_i}\sum_{r = l}^{R_i}\sum_{j = l}^{r} A_j\)	Ajが区間内全部分列和へ現れる回数(j-L+1)(R-j+1)を二次式へ展開し、Aj,jAj,j^2Ajの3累積和で各問O(1)。点更新を伴う拡張ならセグ木だが実際のクエリを全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc423_f	full	T112:primary,T119:supporting,T257:supporting,T060:supporting,T097:supporting			0	の倍数であるという条件を「条件	各部分集合Tの条件全部を満たす数はfloor(Y/lcm(Ai:i∈T))。全maskでこれを求め、集合Möbius変換でちょうど一致maskの個数へ戻しpopcount=Mを合計。O(N2^N log A)以内。	reviewed	
+abc423_g	selected_tags	T098:primary,T236:supporting,T264:supporting			0	考察 以下では，文字列連結の演算子を \(\dot{+}\) と表記します． \(K\) は \(d\) 桁であるとします．このとき，桁数が \(d\) だけ増える valid な解が存在します( \(S \dot{+}	Sを含むKの倍数の最短/最小文字列を、追加上位/下位桁の配分ごとに剰余の逆元とfloor計算で候補生成する。Kと10が非互いに素の処理・Totientの必要性を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc424_a	full			条件分岐	0	三角形 ABC が二等辺三角形であることの必要十分条件は、「	a=bまたはb=cまたはc=aなら二等辺三角形としてYes。与えられた辺に対する固定比較O(1)。	reviewed	
+abc424_b	full	T076:primary			0	誰がどの問題を解いたかの情報を管理することを考えます。	人と問題ごとの解答済みフラグ・人別正解数・完了記録済みフラグを持ち、各イベント後に全問達成した人を一度だけ順に追加するO(NM+K)。	reviewed	
+abc424_c	full	T066:primary,T067:alternative			0	スキルを頂点とし、未習得な各スキル	前提スキルAi/Biからiへの逆辺を作り、初期習得または仮想0から到達する頂点をBFS/DFSで印付けするO(N)。二条件のどちらか一方で習得できる設定に対応。	reviewed	
+abc424_d	full	T191:primary,T017:supporting,T022:supporting,T065:alternative			0	この問題にはいくつかの解法が考えられます。	直近W+1マスの黒白状態をbitmaskに持つフロンティアDPで、全黒2*2が完成しないよう白へ変更する最小数を計算。O(HW2^{W+1})。答え<=9を使う枝刈り探索別解もある。	reviewed	
+abc424_e	selected_tags	T064:primary,T010:alternative,T077:alternative			0	この問題は答えを二分探索することで解くことができます。	最終最大長D以下にする各棒の必要分割数2^k-1を足してK以下か二分探索する。大きい棒をヒープで分割する別解のK巨大時処理を追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc424_f	selected_tags	T002:primary,T003:alternative,T059:alternative,T079:alternative			0	\(I\setminus J, J\setminus I\)	既存の包含区間のうち新弦の一端を含む最小区間が他端も含むかをセグ木で検査する。XOR乱択ハッシュで被覆集合一致を見る別解は確率衝突の境界も含め全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc424_g	selected_tags	T022:primary,T077:supporting,T100:analysis_concept			0	まず、任意の曲の選び方について、選んだ曲が 踊る必要のある人数が多い順に 曲 \(j_1,j_2,\ldots,j_k\) \((B_{j_1}\geq B_{j_2}\geq \cdots \geq B_{j_k} )	曲を必要人数B降順へ並べ、各prefixの需要がsum min(Ai,k)以内という実現条件を使う選択DP。Havel-Hakimi型十分性は証明概念。状態と容量の正確な計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc425_a	full			基本集計	0	の問題A「Welcome to AtCoder」を解いてみてください。	i=1..Nのi^3を指定符号で加減して答えるO(N)。和の閉形式でも固定算術でありDP不要。	reviewed	
+abc425_b	full	T065:primary,T077:supporting			0	を用いることで解くことができます。	1..Nの全N!順列を辞書順生成し、既知位置と一致するか検査して最初の解を返す。小さいN制約でO(N*N!)。固定値の重複検査から空き値を埋める構築別解も可能。	reviewed	
+abc425_c	full	T086:primary,T264:supporting			0	つ目の形式のクエリに対する答えを求めることを考えます。	Aを2回並べた列の累積和を前計算し、回転ずれをmod Nで管理する。各区間和はずれ補正後の累積差でO(1)、全体O(N+Q)。	reviewed	
+abc425_d	selected_tags	T066:primary,T076:supporting			0	とします．このとき，以下が成り立ちます．	新たに着色したマスの4近傍だけ次世代候補にし、同一世代の候補集合で近傍条件を一斉評価する。各マスは一度変化するためO(HW)等。盤面の正確な大きさとデータ構造を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc425_e	selected_tags	T177:primary,T022:supporting,T122:alternative,T134:alternative,T236:alternative			0	\(\dfrac{(C_1+C_2+\ldots+C_N)!}{C_1!C_2!\dots C_N!}\)	答えは多項係数を連続する二項係数の積に変換し、総和<=5000のPascal DPで任意合成数Mの剰余をO(S^2)前計算する。素数法の逆元は一般Mには不可。CRT/素因数別解は全制約対応を追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc425_f	selected_tags	T017:primary,T021:alternative,T022:supporting,T060:supporting			0	から一文字ずつ削除していくことで 空文字列にする方法を数えることにします．	元文字列から位置を削除する逆操作を集合maskでDPし、同じ残文字列を生む隣接同文字の削除順を一意化して数える。区間DP別解と状態数を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc425_g	full	T089:primary,T080:supporting,T070:supporting,T059:supporting			0	Trie 木を陽に持たずに再帰的に問題を解くことを考えます。	整数集合を上位bitで0/1群へ再帰分割し、x側の区間[0,M)を分けてmin(x xor Ai)の総和を得る。暗黙Binary Trieを辿りO(N log max A)。	reviewed	
+abc426_a	full	T073:primary			0	この問題にはいくつかの方針があります。	3種類のOS名を既定の順位へ写して、指定2つの順序関係を固定条件で判定するO(1)。	reviewed	
+abc426_b	full	T073:primary,T008:alternative,T077:alternative			0	この問題にはいくつかの方針があります。	各文字頻度を数えて一度だけ現れる文字を出力する。ソート後の先頭2文字比較でも得られ、いずれも小さい3文字制約でO(1)。	reviewed	
+abc426_c	selected_tags	T076:primary,T002:alternative,T012:alternative,T009:alternative			0	この解説では、時間計算量	各バージョンPC個数を管理し、古いPCが現れる最小バージョンOからXまでをまとめYへ移す。各バージョンを一度通るO(N+Q)主解と順序付き集合/遅延木別解は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc426_d	selected_tags	T073:primary		ランレングス集計	0	にするための操作回数の最小値について考えます（全ての文字を	最終目標0/1ごとに、操作しない同値連長の最長を選んで他要素の反転回数を数える。0/1の全個数と最長連長から直接O(N)で最小操作を計算。式を全文で確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc426_e	full	T063:primary,T240:analysis_concept		点と線分の距離	0	高橋君のスタート地点、ゴール地点、停止する時刻、青木君のスタート地点、ゴール地点、停止する時刻をそれぞれ	どちらかが停止する時刻で2フェーズに分け、相対位置が線分上を等速移動するときの原点との最短距離を求める。距離二乗は凸なので三分探索、内積射影ならO(1)。三角形面積は外積公式の概念で面積集計ではない。	reviewed	
+abc426_f	selected_tags	T002:primary,T064:supporting,T012:alternative			0	商品が売れていく過程を追跡すると、次の通りになります。	在庫を区間一括減算する遅延セグ木で管理し、区間最小が不足した商品だけ0在庫イベントとして確定する。各商品一度イベント処理し全体O(N+Q log N)等。個別在庫ゼロの扱いを全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc426_g	full	T081:primary,T150:supporting,T022:supporting,T080:supporting			0	列に対する分割統治を用います。	クエリ区間を分割統治し、中点を跨ぐクエリは中点から左右へ伸ばしたナップサックDPを合成して答える。左右片側だけのクエリは再帰へ送りO(K(Q+N log N))。	reviewed	
+abc427_a	full	T073:primary			0	の中央の文字を探し、その文字を削除する操作を実際に行えばよいです。	奇数長文字列の中央文字だけを除いて連結し出力するO(N)。	reviewed	
+abc427_b	selected_tags	T076:primary,T264:supporting			0	を実装できれば、あとは愚直に問題文で与えられた式に従って	次項を前項までの総和や桁和の指定漸化式通りに計算する。桁和は10の商余りで順に取り、文字列変換も可能。数列の正確な状態式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc427_c	full	T061:primary,T065:supporting,T178:concept			0	まず、\(N\) 個の頂点をそれぞれ白か黒で塗る方法を固定して、次の条件を満たすために削除する必要がある辺の本数を求める問題を考えます。	頂点2色の2^N割当を列挙し、同色端点を持つ辺数を数えて最小化する。残した辺は必ず二部グラフでありO(M2^N)。二部性判定BFSを別途全割当で行う必要はない。	reviewed	
+abc427_d	full	T022:primary,T039:supporting,T038:supporting			0	このようなゲームの問題では、後ろから勝敗の状態を解析するのが有効なことが多いです。	残手数または手数iと頂点jを状態に必勝可否を後ろから計算する。Alice手番は子のOR、Bob手番は子のANDを取る。O(K(N+M))。	reviewed	
+abc427_e	selected_tags	T066:primary,T055:supporting,T086:supporting			0	この問題は最短経路問題の一種です。	風で残る元ゴミは長方形範囲と平行移動(dx,dy)で表せる。切抜範囲・ずれの状態をBFSし、2次元累積和でゴミ有無を判定する。状態数と対称性削減を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc427_f	full	T082:primary,T065:supporting,T077:supporting,T064:supporting,T264:supporting,T197:analysis_concept			0	この問題は半分全列挙を用いて解くことができます。	隣接選択を禁止した部分列を前後半で列挙し、境界を両方使わない組の剰余和最大を整列二分探索する。N<=60でも列挙数は半分のFibonacci程度。O(F(N/2) log F(N/2))。	reviewed	
+abc427_g	selected_tags	T077:primary		貪欲法	0	\(i\) 番目に受け取るプレゼントの価値が \(P _ i\) であるようなプレゼントの列を整数列 \((P _ 1,P _ 2,\ldots,P _ M)\) で表します。	プレゼントを並べ替えた良い列の閾値挙動で最終テンションを最適化する。名前のExpectationは確率値ではない。貪欲整列順と状態変換を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc428_a	full	T076:primary,T264:alternative			0	メートルで一定なので，走る秒数を求めてから	走るA秒・止まるB秒の周期についてfloor(X/(A+B))*A+min(A,X mod(A+B))秒走り速度Sを掛けるO(1)。小制約なら1秒ごとの直接模擬も可。	reviewed	
+abc428_b	full	T008:primary,T077:supporting,T073:supporting			0	この問題では連想配列 (C++ の	長さKの全部分文字列をmapで頻度集計し、最大頻度を持つ文字列を辞書順整列して出力する。O(NK log N)等。	reviewed	
+abc428_c	full	T013:primary,T128:supporting,T086:supporting			0	この問題は良い括弧列(バランスの取れた括弧列)が持つ性質を上手く利用する問題です。	括弧の末尾追加/削除に対し、接頭辞和とその接頭辞最小をスタックで持つ。総和0かつ最小>=0なら正しい括弧列。各問O(1)。	reviewed	
+abc428_d	full	T064:primary,T065:supporting,T264:supporting			0	であるときを考えます．このとき，	C+xの桁数dを全列挙してxの範囲を区切り、連結値C*10^d+C+xの数値区間にある平方数の個数を整数平方根/二分探索で数える。O(桁数 log値)。	reviewed	
+abc428_e	full	T067:primary,T066:alternative,T020:alternative,T027:supporting,T022:supporting,T080:supporting			0	この問題はいくつかの解き方がありますが、ここでは木の	木の直径端点u,vへの距離を全頂点で求め、各頂点の最遠端点をタイブレーク条件に従い選ぶO(N)。全方位木DPで最大距離と頂点番号を併合する別解もO(N)。スタック/queueは探索実装の補助のみ。	reviewed	
+abc428_f	selected_tags	T064:primary,T013:alternative		区間群管理	0	実装方針 素朴に実装すると最悪ケースで \(\Omega(N^2)\) 時間かかり，実行時間超過となります． 連続して左端が揃っている範囲や，連続して右端が揃っている範囲をまとめて管理することで高速化することを考えます．	左端/右端が揃った区間群を(l,r,g,x)として保持し、更新で境界を二分探索して影響する連続群をまとめる。各群の償却増減とデータ構造を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc428_g	selected_tags	T179:primary,T098:supporting,T127:alternative,T132:alternative,T022:supporting,T060:supporting,T236:supporting			0	次の 2 通りの解法を解説します。	回転同値な首飾りをPolyaで約数ごとの固定列数へ展開してTotient重みで和を取る。別解のDirichlet母関数による高速化とDP/FPSの実体を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc429_a	full			条件分岐	0	\(i=1,2,\ldots, N\)	1..Nを順に出力し、i<=MならOK、それ以降Too Many RequestsとするO(N)。	reviewed	
+abc429_b	full	T065:primary			0	\(\displaystyle \sum_{i=1}^N A_i-A_k\)	全体和Sを求め、除外したい値S-Mが配列内にあるか一度線形探索するO(N)。	reviewed	
+abc429_c	full	T060:primary,T177:supporting			0	\(1\leq j\leq N\)	同値xの頻度cxからC(cx,2)*(N-cx)を全xについて足す。一つの三つ組で重複値が二つになるのは一意なので重複カウントしない。O(N)。	reviewed	
+abc429_d	selected_tags	T077:primary,T083:supporting,T086:supporting			0	人以上の人が立っている場所の数を	円周地点を人数付きで整列し2周列を作り、人数和C以上となる最短右端Riを尺取りする。各始点区間長と集められる人数を重み付けし期待人数等の和をO(N)で評価。O(N log N)。問題の出力式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc429_e	selected_tags	T066:primary,T011:supporting,T079:alternative,T092:alternative			0	に対して、安全な頂点のうちその頂点から近い（必要な移動時間が短い）方から順に	安全頂点を全て始点にし、各頂点に異なる始点2種類までの距離を多始点BFSで保持するO(N+M)。Color Codingの乱択別解は必要回数・失敗確率を含め追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc429_f	selected_tags	T003:primary,T055:supporting,T120:supporting,T022:supporting			0	へ “逆戻り” するようなタイミングが存在しません。	高さ3の列ごとの3*3境界最短距離行列をmin-plus積モノイドにし、列更新をセグ木で伝播する。幅一定なので各併合O(1)、全体O(N+Q log N)。setは代替境界管理の実行根拠を追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc429_g	full	T084:primary,T097:supporting,T176:supporting,T264:supporting		floor_sumの平方分割	0	\(g=\gcd(A,M)\) とし、 \(B=B_1g+B_2\) \((0 \le B_2 < g)\) とすると \(\displaystyle X^{(Ak+B) \bmod M} = X^{B_2}{X}^{g	gcdと周期長Mで範囲を簡約し、剰余等差列をO(sqrt M)個の通常等差列へ分けて各指数の等比和を二分累乗で計算する。O(sqrt M log M)。Heuristicは記事名であり近似解ではない。	reviewed	
+abc430_a	full			条件分岐	0	法律に違反するのは「飴を	飴>=Aかつクッキー<Bの論理積を検査するO(1)。法令の説明文をタグ概念へ広げない。	reviewed	
+abc430_b	full	T012:primary,T065:supporting			0	この問題のようにあるものが何種類あるかを求めるには、数える対象のものを全てsetに入れてそのサイズを求めるのが簡単です。	M*M部分盤面の全左上位置を列挙し、各盤面を文字列等へ直列化して集合へ挿入、異なる個数を得るO((N-M+1)^2 M^2 log N)。	reviewed	
+abc430_c	full	T086:primary,T064:alternative,T083:alternative			0	は何個含まれるか」というクエリがたくさん与えられるので答えよ。	a個数が閾値以上、b個数が閾値未満となる各左端の右端範囲を累積個数の二分探索で求めて数えるO(N log N)。右端が単調なので尺取りでO(N)も実行可能。	reviewed	
+abc430_d	full	T012:primary,T064:supporting			0	様々な解法がありますが、ここではオンライン (	既存座標をordered setで持ち、新点の左右隣接だけから新最寄り距離と両隣の距離変化を計算し総和を差分更新するO(N log N)。ヒューリスティックは不要。	reviewed	
+abc430_e	full	T071:primary,T073:supporting,T072:alternative,T069:alternative			0	操作は文字列の左シフトであるため、	A+A中でBが先頭から一致する位置をZ-algorithmで求め最小回転数を返すO(N)。Rolling hashまたはsuffix array検索も可能な別解。ハッシュ衝突は別解の確率性として明記する。	reviewed	
+abc430_f	selected_tags	T086:primary,T073:supporting			0	まず、以下の定理1を仮定して解法を立てます。	左右へ伸ばす配置制約を満たす数字の存在可能区間を定理で求め、適切な左右端条件の累積和で数えるO(N)。区間構成・定理前提を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc430_g	selected_tags	T003:primary,T002:supporting,T080:supporting		Segment Tree Beats	0	問題原案：kyopro_friends この問題は Segment Tree Beats と呼ばれる、セグメントツリーを応用したデータ構造を用いることで解くことができます。	集合の区間写像をそのまま遅延合成できない場合に、ノードが一括処理可能な条件だけ適用し、それ以外を子へ降ろすSegment Tree Beats。保持情報とポテンシャルによる償却上界を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc431_a	full			基本算術,条件分岐	0	の問題A「Welcome to AtCoder」を解いてみてください。	左右の重量を基本不等式で比較して指定出力を返すO(1)。	reviewed	
+abc431_b	full	T076:primary			0	それぞれの種類の部品について、「現在ロボットについているか」を管理することができれば、クエリではその情報を更新しつつ、情報をもとに重さを計算することでこの問題を解くことができます。	各部品の装着済みboolと現在重量を持ち、操作で反転するとき部品重さを±加算するO(N+Q)。	reviewed	
+abc431_c	full	T077:primary		貪欲法	0	\(K\) 体の倒れないロボットを作ることができるなら、次のようにして \(K\) 体の倒れないロボットを作ることができることが証明できます。	軽い頭K個と重い体K個を選びそれぞれ昇順に組にして全て頭<=体か判定する。交換則で他の選択より有利なためO((N+M)log(N+M))。	reviewed	
+abc431_d	full	T150:primary,T022:supporting			0	すべてのパーツの重さの合計を \(S\) とします。	全パーツを体へ置いた状態から、半分以下の重量の頭パーツを選ぶ0/1ナップサックへ帰着する。頭へ移す価値差を最大化しO(NS)。	reviewed	
+abc431_e	full	T144:primary,T007:supporting,T055:supporting			0	この問題をグラフの問題に言い換えます．	マスと入射方向を頂点にし、元の鏡反射へ0、別の鏡反射へ1の辺を張る。0-1 BFSで鏡変更数最小を求めるO(HW)。通常グリッドDPやFIFO BFSとは区別。	reviewed	
+abc431_f	selected_tags	T024:primary,T022:supporting,T177:supporting,T236:supporting,T060:supporting			0	\(\mathrm{cnt}[v]\)	値vを小さい順に挿入し、v-D..v-1の個数+1の許容隙間へ同値要素を分配する二項係数を掛ける。頻度累積で隙間数を求めO(max A+N)等。実際に配列DPを作る必要があるか全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc431_g	selected_tags	T001:primary,T003:alternative,T077:supporting,T009:alternative,T012:alternative			0	以下が成り立ちます． \(A_l\gt A_r\) ならば \(f(l,r)\lt A\) \(A_l= A_r\) ならば \(f(l,r)= A\) \(A_l\lt A_r\) ならば \(f(l,r)\gt A\	一回swap後の列の辞書順を最初に変わる位置と相手値で分類し、転倒/非転倒数とk番目候補をFenwick木の順序統計で求める。多重集合/セグ木別解の詳細と全候補の境界式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc432_a	full	T077:primary			0	の問題A「Welcome to AtCoder」を解いてみてください。	3数を降順ソートして並べた3桁数を出力する。固定3値の条件比較だけでも可能だがソート別解が明示されO(1)。	reviewed	
+abc432_b	full	T077:primary,T073:supporting		貪欲法	0	基本的には与えられた整数の桁を小さい順に並び替えればよいですが、先頭に	数字を昇順へ整列し、最小の非0数字だけ先頭へ移して残りを昇順に配置する。O(桁数 log桁数)。	reviewed	
+abc432_c	full	T077:primary,T264:supporting			0	\(A_1 \leq A_2 \leq \cdots A_N\)	飴個数を小さい順に揃え、全重量一致からxk=x1-(Ak-A1)X/(Y-X)を導く。差が整数かと0<=xk<=Akを検査し最大のx1を選ぶO(N log N)。最小Aだけ使えばソートを省くことも可能。	reviewed	
+abc432_d	selected_tags	T076:primary,T005:supporting,T067:alternative,T022:analysis_concept			0	黒マスからなる領域を長方形の集合として管理することを考えます．ある長方形がもつマスの	嵐ごとに黒長方形を高々2分割して移動し、最後の長方形の辺接触グラフを作りDSU/DFSで成分を得る。高々2^N領域の小さいN制約、DPは実行手法でなく数え方の見積りか全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc432_e	selected_tags	T003:primary,T086:alternative,T064:supporting			0	であるようなクエリについては、どんな整数	値頻度と値重み和をセグ木に持ち、l未満個数*l+[l,r]の総和+r超個数*rでclamp総和を求める。更新ありなら各問O(log K)、静的なら累積和で可。実クエリの更新有無を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc432_f	selected_tags	T017:primary,T022:supporting			0	考察 \(A_1 + \dots + A_N\) が \(N\) の倍数でなければ不可能であり， \(N\) の倍数であれば可能です． \(X := \displaystyle \frac{A_1 + \dots + A	平均Xへ揃える操作の連結成分ごとの和がX*頂点数となる必要条件を使い、和0部分集合への最大分割数をbitDPして操作数N-成分数を最小化。具体DPとN制約を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc432_g	full	T132:primary,T127:supporting,T177:supporting,T236:supporting,T081:supporting			0	\displaystyle	値頻度Ca,Cbへ階乗重みを付け、sum_j Cb(j)/(j!(i-j)!)を畳み込みで全i計算してCa(i)i!を掛ける。O(K log K+N+M)。FFT/NTTは高速畳み込みの実装として別記。	reviewed	
+abc433_a	full	T264:primary,T065:alternative			0	の問題A「Welcome to AtCoder」を解いてみてください。	k=(X-YZ)/(Z-1)が非負整数かで判定するO(1)。固定小年齢範囲の年数全列挙も実行可能だが直接式を主解とする。	reviewed	
+abc433_b	full	T013:primary,T065:alternative			0	より身長が高い人がいるか、またいる場合はその中で人	左から単調減少の高さstackを維持し、現在以下をpopして頂上を最近のより高い人として返すO(N)。小さい制約なら各人から左へ全走査するO(N^2)別解も可。	reviewed	
+abc433_c	full	T073:primary,T065:supporting,T060:supporting		ランレングス圧縮	0	つの文字の境目となる場所を全探索することを考えます。	隣接する連長ブロックの数字がx,x+1なら両連長のminを足す。全境目を列挙してO(N)。	reviewed	
+abc433_d	full	T008:primary,T264:supporting,T060:supporting,T077:alternative,T064:alternative			0	を固定した時に条件を全て満たす	右整数の桁数kごとにAi*10^k+Aj≡0 mod MとなるAjの頻度を剰余mapから得る。整列剰余リストの二分探索でもよくO(N log max A log N)。	reviewed	
+abc433_e	selected_tags	T076:primary,T007:alternative		構築,貪欲法	0	つ以上含まれる場合の答えは	行/列最大値X,Yの重複を検査し、値NMから降順にセルへ配置する貪欲。行/列が初めて利用可能になる時の空きセル管理をdeque等で行う主解の具体を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc433_f	full	T086:primary,T177:supporting,T060:supporting,T236:supporting,T132:analysis_concept			0	\(\displaystyle \frac{|T|}2\)	1122列の1/2の境目をSの各位置へ固定し、左右の該当文字数p,qからC(p+q,p+1)を求めて加算する。累積頻度と階乗前計算でO(N)。畳み込みは二項恒等式の証明で実行不要。	reviewed	
+abc433_g	selected_tags	T025:primary,T022:supporting,T039:supporting,T069:alternative,T255:alternative			0	この問題は Suffix Automaton というデータ構造を用いて解くことができます。	部分文字列のゲームをsuffix構造で圧縮し、共通prefixの分岐ごとに必勝/必敗を後退計算する。Suffix Array区間DPとSuffix Automaton別解の対応・計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc434_a	full			基本算術	0	\(1000W < nB\)	必要回数nは1000W<nBを満たす最小整数なのでfloor(1000W/B)+1を返すO(1)。	reviewed	
+abc434_b	full			基本頻度集計,平均	0	for ループを活用することで、バケットソートの要領で次のものを管理すればこの問題に正解できます。	鳥の種類iごと個数Ciと大きさ総和Siを一度集計してSi/Ciを出すO(N+種類数)。バケットソートは頻度表の比喩で並べ替えを行わない。	reviewed	
+abc434_c	full	T076:primary			0	まず、高橋君の移動としてあり得るものは様々ですから、高橋君の行動を 1 点読みして計算していくのは大変そうです。	時刻tごとの到達高度区間[L,U]を時間差分だけ上下に広げ、最低高度1と次の目標高度区間で交差を取る。空なら不可能、全N目標をO(N)で処理。	reviewed	
+abc434_d	selected_tags	T075:primary,T086:supporting,T059:alternative			0	のみを取り除いた場合の答えは次の	2次元imosで各マス被覆数を得て0被覆と1被覆の雲別個数を集計する。雲IDの和またはXORの2次元imosで唯一の雲を特定できO(HW+N)。乱択hash別解は衝突条件も含め追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc434_e	selected_tags	T005:primary,T008:supporting,T031:alternative,T032:supporting,T118:supporting			0	この問題は色々なアプローチが考えられそうです。	座標を頂点、ウサギの配布先候補を両端とする辺へ変え、各成分で割り当て可能な最大の異なる頂点数を頂点/辺数から求める。二部マッチング別解も可能、一般DPは否定されている。具体成分式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc434_f	selected_tags	T077:primary,T071:supporting,T073:supporting			0	問題原案: physics0523 この解説では、文字列 \(s,t\) をこの順に連結した文字列を \(st\) と書くことにします。	ab<baの連結比較で最小連結列へ整列し、辞書順2番目を生む一回の候補swapをZ値等で比較する。O(総文字数 log N)となる候補削減を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc434_g	selected_tags	T003:primary,T120:supporting,T014:alternative,T015:supporting			0	この問題は色々な解法が考えられます。	キーボード操作区間の要約を併合できるセグ木で保持しO(N+Q log^2 N)。永続平衡木を載せる別解も可能だが、平方分割はN<=8*10^6の満点で困難として除外。要約構造を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc435_a	full			基本算術	0	までの総和を求めることができます。	1..Nの和N(N+1)/2を計算するO(1)。小Nなら直接加算でも十分。	reviewed	
+abc435_b	full	T065:primary,T086:supporting,T264:supporting			0	\((1\leq l\leq r\leq N)\)	全区間(l,r)を列挙し区間和を累積差で取得して、その区間のどのAiでも割り切れないか走査する。O(N^3)で小制約に適合。	reviewed	
+abc435_c	full	T076:primary			0	ynymxiaolongbao	倒れると確定した最右位置を持ち、左から到達範囲を各ドミノの長さで延長する。到達範囲外で打切り、O(N)。	reviewed	
+abc435_d	full	T066:primary,T067:alternative			0	の辺を全て逆向きにしたグラフを	逆グラフ上で黒/有効になった頂点から未到達頂点だけ探索する。真になった到達フラグは戻らず各辺一度調べるため全クエリO(N+M+Q)。	reviewed	
+abc435_e	selected_tags	T012:primary,T064:supporting,T002:alternative,T003:alternative,T085:alternative			0	白く塗られたマスからなる区間を順序付き集合で管理することを考えます。	未被覆区間集合をordered setで持ち、クエリに交わる区間だけ削除し左右残部を再挿入して総未被覆長を更新するO(Q log Q)償却。遅延セグ木+座圧別解は区間長重みを含め追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc435_f	full	T027:primary,T013:supporting,T022:supporting			0	段落に記載されています。	タワー高さのCartesian treeを単調スタックで構築し、部分木の左右到達範囲と移動距離最大を木DPで併合する。O(N)。単純O(N^3)区間DPは制約外。	reviewed	
+abc435_g	selected_tags	T022:primary,T002:alternative,T003:alternative			0	原案： ynymxiaolongbao マス \(i-1,i\) をともに塗ることができる色の集合を \(C_i\) とします。	最右色付き位置iと色cの数え上げDPから総和Skと色別補助Tkを導き、色許容区間の共通/差分へ一括写像で更新する。O(N log色数)等の実際のデータ構造を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc436_a	full	T073:primary			0	の問題A「Welcome to AtCoder」を解いてみてください。	文字列Sの前にoをN-len(S)個補って出力するO(N)。標準文字列の繰り返し・連結であり状態シミュレーションを主張しない。	reviewed	
+abc436_b	full	T076:primary,T264:supporting			0	繰り返しおよび条件分岐を用いて、問題文に書かれていることをそのまま丁寧に実装すればよいです。	問題のSiam式魔方陣の手順を空マス検査・行列の巡回剰余を用いてN^2個順に埋めるO(N^2)。	reviewed	
+abc436_c	full	T012:primary			0	と大きいため、マス目の状態を単純に二次元配列として管理することはできません。	新ブロック左上(r,c)の3*3近傍9候補について既存左上位置setへの所属を検査し、なければ挿入する。O(M log M)、巨大N*N配列は作らない。	reviewed	
+abc436_d	selected_tags	T066:primary,T011:supporting,T144:alternative			0	迷路の大きさが小さい場合は単純な BFS (幅優先探索) によって解くことができます。	同じ文字のワープ先リストはその文字へ最初に到達した時だけ全展開するBFS。各文字種につき高々HW辺でO(σHW)。0-1 BFS別解の辺コスト設計は追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc436_e	selected_tags	T182:primary,T005:alternative,T067:alternative		巡回分解	0	まず、\(P\) を \((1,2,\ldots,N)\) と一致させるために必要な操作の回数 \(K\) について考察します。	置換を巡回分解し、長さsサイクルはs-1回のswapで恒等へ戻せるので最少回数N-巡回数。その最小操作列の構成・辞書順条件を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc436_f	full	T001:primary,T003:alternative,T077:supporting,T060:supporting			0	ありえる集合のうち、写っている星の集合の中で最も暗い星が \(i\) 番目の星であるような集合は \(\bigl(j\lt i\) かつ \(B _ j\lt B _ i\) なる \(j\) の個数\({}+1\big	各iの左右にあるBiより小/大の個数を、B順のオフライン処理とBITで計算する。得た件数を点の貢献度へ変換しO(N log N)。	reviewed	
+abc436_g	selected_tags	T127:primary,T132:supporting,T060:supporting,T009:analysis_concept			0	正整数列 \(A=(A _ 1,A _ 2,\ldots,A _ N)\) と正整数 \(M\) に対して、この問題の答えを \(f(A,M)\) と書くことにします。	線形不等式を満たす非負整数列の個数を母関数と係数抽出へ帰着し、倍率分解を使って畳み込み計算する。多重集合は数列の表現概念か実実装か、状態と計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc437_a	full			基本算術	0	の値を入力から受け取り、	12A+Bを計算し出力する固定算術O(1)。	reviewed	
+abc437_b	full	T065:primary,T012:alternative			0	求めるものをかみ砕くと、以下のようにして実装できます。	各ビンゴ盤の行で呼ばれたB値を何個含むか線形照合して最大を返すO(HWN)。Bを集合にすればO(HW+N)期待。	reviewed	
+abc437_c	full	T077:primary		貪欲法	0	ソリに乗るトナカイの集合を	ソリへ乗る集合Sの条件をsum_{i∈S}(Wi+Pi)<=全Piへ変形し、Wi+Piが小さい順に取れるだけ選ぶO(N log N)。	reviewed	
+abc437_d	full	T077:primary,T086:supporting,T064:supporting			0	の要素を昇順に並べ替えて	Aを整列し累積和を取り、各Bj以上/未満の境界を二分探索して絶対差総和を左右の個数・和で計算するO((N+M)log N)。	reviewed	
+abc437_e	full	T070:primary,T008:supporting,T067:supporting,T077:supporting			0	\(A_1, A_2, \ldots,A_N\)	数列の親参照に沿って同じprefixを共有するTrieをmapで作り、子の値を昇順にDFSして辞書順の数列IDを出す。O(N log N)等、巨大数列を展開しない。	reviewed	
+abc437_f	full	T003:primary,T155:supporting,T245:supporting			0	\((X_i,Y_i)\)	45度変換U=X+Y,V=X-YでManhattan距離をChebyshev最大へ変え、指定index範囲のU,V各min/maxをセグ木から取得する。O(N+Q log N)。setは不要。	reviewed	
+abc437_g	selected_tags	T032:primary,T178:supporting,T229:supporting			0	RGB をそれぞれ 色 \(1,2,3\) として扱います．頂点集合を二部グラフの彩色になるように \(2\) つの頂点集合に分け，一方を左側頂点，他方を右側頂点と呼ぶことにします． 頂点 \(v\) の色が \(k\)	二部頂点の色別の必要削除回数Av,kを容量にし、各辺の色選択の割当を流す最大流へ帰着する。十分性となる操作順とグラフ規模・容量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc438_a	full	T264:primary			0	ある年の最初のコンテストが	曜日の周期7で次年の初日の予定曜日を(F-D-1)mod7+1へ写すO(1)。合同式は同じ巡回剰余の数学表現で別の解法ではない。	reviewed	
+abc438_b	full	T065:primary,T264:supporting,T073:supporting			0	の部分文字列全てに対して、その位置と	Sの長さMの全窓を列挙し、各桁をTの目標桁へ進める回数をmod10で計算して合計最小を求める。O(NM)。	reviewed	
+abc438_c	selected_tags	T013:primary,T076:supporting			0	の値は操作の順番によって変わりません。	前から値をスタックへ積み、隣接する等値の消去/併合条件を頂上だけで処理する。各要素は高々一度積まれ一度取り除かれるのでO(N)。条件の具体連長を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc438_d	full	T022:primary,T086:alternative			0	\(D_{i, j}\)	先頭からA群、B群、C群の3段階を状態に最大和DPし、各iで現段階に留まる/前段階から移るを比較するO(N)。累積和と切れ目列挙の同等別解もO(N)に差分化できる。	reviewed	
+abc438_e	full	T078:primary,T076:supporting			0	\(0 \leq d < 30\)	2^d回後のバケツ所有者Pd,iと追加水量Qd,iを合成して前計算し、問い合わせTの各bit分だけ状態と水量を進める。O((N+Q)log T)。	reviewed	
+abc438_f	full	T054:primary,T154:supporting,T060:supporting			0	\(f(i,j) \geq k\)	mex>=kとなるパス数ckを、0..k-1を含む最小パス両端x,yで管理する。新頂点が同一直線パスに載るかLCA距離で判定し、端点外側部分木サイズ積を更新、sum ckを得る。O(N log N)。	reviewed	
+abc438_g	selected_tags	T097:primary,T001:supporting,T077:supporting,T086:supporting			0	\(g=\gcd(N,M) > 1\) の場合、 \((i \bmod M) \bmod g=(i \bmod N) \bmod g\) より \(\gcd(N,M)=1\) となる \(g\) 個の問題に分割することが	N,Mのgcd別に剰余周期を分離し、一方の配列の連続区間とmin(x,Bj)総和のオフラインクエリへ帰着する。x順ソートと件数/和BITでO(Q(log Q+log M))。クエリ総数と展開量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc439_a	selected_tags	T176:alternative,T117:alternative		基本算術	0	\(2 \times N\)	小さいNで2をN回掛けて2^N-2Nを計算する。組込み累乗・左シフトでも実行可能だが、基本算術として追加演算を特殊技法へ水増ししない。採用する別解タグの粒度を統合時確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc439_b	full	T012:primary,T076:supporting,T264:supporting			0	が何に変化するかを求める関数	各桁の二乗和へ反復し、1に到達したらYes、過去値集合へ再到達したらNoとする。状態が有限小範囲へ落ちるため停止する。multisetの重複管理は不要。	reviewed	
+abc439_c	full	T065:primary,T060:supporting			0	まず、いったん計算量を無視した解法を考えてみましょう。	x<yでx^2+y^2<=Nの全対を列挙し、該当和の表現回数を頻度配列へ加算する。x,y<=sqrt NなのでO(N)の候補数。	reviewed	
+abc439_d	selected_tags	T008:primary,T060:supporting,T012:alternative,T077:alternative			0	いったん次の条件だけを取り出して処理しましょう。	Aj=5tに対応する7tと3tの左右頻度を走査で取得し、順序条件を満たす三つ組数を数えるO(N log N)。値のソートや集合別解の具体必要性を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc439_e	full	T224:primary,T077:supporting,T064:supporting,T022:supporting			0	\((i \neq j)\)	人をA昇順、A同値ならB降順に整列し、Bの厳密LIS長を二分探索で求めるO(N log N)。同時に凧を揚げられる集合の2次元増加鎖と一致する。	reviewed	
+abc439_f	selected_tags	T060:primary,T086:supporting,T014:alternative			0	原案: blackyuki	大小関係だけの<>列で門松的な区間条件を導き、連続符号と区切りの位置から区間数を集計する。平衡木を使う別解と数式の前提を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc439_g	full	T127:primary,T132:supporting,T029:supporting,T236:supporting			0	この問題は power projection と呼ばれるアルゴリズムをテーマにした問題です。	一人の位置分布D(x)^tの未到達確率ftをpower projectionでO(N log^2 N)一括取得し、多人数の勝率をFPS分数和で全員分計算する。O(N log^2 N+L log L)。前回の確率遷移高速化として補助T029を維持。	reviewed	
+abc440_a	full			基本算術	0	この問題にはさまざまな実装方針が考えられます．	Xを2倍する操作をY<=3回行うかX*2^Yを固定算術で出すO(1)。小さい回数の標準累乗を二分累乗技法と水増ししない。	reviewed	
+abc440_b	full	T077:primary			0	もし求めるものが番号ではなくタイムなら	タイムと元番号の対(Ti,i)を昇順ソートし先頭3番号を順に出力するO(N log N)。	reviewed	
+abc440_c	full	T083:primary,T086:supporting,T264:supporting			0	塗るマスの決め方は要するに「『	各iを2Wの剰余クラスへ集約し、円環上W連続の費用和最小を固定幅窓で差分更新するO(N+W)。	reviewed	
+abc440_d	full	T077:primary,T064:supporting			0	の順番は答えに影響しないので，	禁止値を整列し、X以上の欠番個数がK以上になる最小値を二分探索する。境界内の禁止数もlower_boundで得るので各問O(log N log値)、Ai-iの圧縮境界ならO(log N)。	reviewed	
+abc440_e	selected_tags	T010:primary,T077:supporting,T076:supporting			0	原案：kyopro_friends	価値降順へ整列し、上位選び方から一段階だけ妥協した候補を最大ヒープへ入れてK個列挙する。FIFOではなく優先キューT010。重複生成と候補数の証明を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc440_f	selected_tags	T003:primary,T064:supporting			0	考察 \(x\) 番目に水浴びをする馬のことを， 位置 \(x\) にいると呼ぶことにします．また，位置 \(x-1\) の馬の丁寧さ ( \(x = 1\) の場合は \(1\) ) を，位置 \(x\) の馬の 係数	丁寧さ1の馬の位置によって係数の1/2を分け、局所交換時の変化をセグ木要約で管理する。二分探索する境界と主解の状態を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc440_g	selected_tags	T022:primary,T052:alternative,T201:supporting,T055:supporting			0	考察 各階の連結成分をそれぞれ \(1\) 個の頂点として，隣り合う階のあいだで触れている頂点のあいだに辺を張ったグラフを考えます． 以下を階番号が高いほうから求めます． \(dp_0[f][v]\) : \(f\) 階	各階の通路連結成分を頂点へ縮約し、梯子使用済み/未使用と階境界の接続点ごとに最大コイン数を上層からDPする。一般SCCでなく階ごとの無向成分。状態数・計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc441_a	full			座標の範囲判定	0	\(P\leq X<P+100\)	点(X,Y)が[P,P+100)*[Q,Q+100)内か固定不等式で判定するO(1)。	reviewed	
+abc441_b	full	T073:primary,T012:supporting			0	ある単語 \(w\) が高橋語の単語である可能性があるということは、次の条件が成り立つということです。	問い合わせ単語の全文字がS/Tの各文字集合に含まれるか判定し可能な言語を出すO(総文字数)。ソートは同値な文字存在判定の別実装以外に不要。	reviewed	
+abc441_c	full	T077:primary			0	以下では、それぞれのカップについて、入っている無色透明な液体の量を、便宜上「カップの	容量降順で選び、最悪時に大きいN-K杯が水と仮定して残り容量を加算する。Xを保証できる最少杯数を走査しO(N log N)。	reviewed	
+abc441_d	full	T067:primary,T080:supporting,T065:supporting			0	からスタートしてちょうど	現在頂点・使った辺数l・費用和を持って深さLまで全walkをDFS列挙し、L時点で和が[S,T]なら終点を印付けする。小さい最大出次数とLで全列挙数が制約内。	reviewed	
+abc441_e	selected_tags	T001:primary,T086:supporting,T060:supporting			0	\(i=0,1,2,\ldots,N\) に対して、\(S\) の先頭 \(i\) 文字の中にある	A数とB数の接頭辞差Djを取り、Di-1<Djの添字対をBITの順序集計で数える。差は[-N,N]なのでずらして添字化しO(N log N)。全文で文字定義と厳密不等号を確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc441_f	full	T150:primary,T022:supporting			0	円以下となるように選んだ時の価値の合計の最大値を求めます。	前から/後ろからの0/1ナップサックDPを作り、各商品iを除いた最適値を予算分割で合成して全体最適値より小さいか調べる。必ず買う商品の判定をO(NM)で全商品処理する。	reviewed	
+abc441_g	selected_tags	T002:primary,T120:supporting			0	ある一つの区間に対してたこ焼きの追加クエリと皿の反転クエリがそれぞれ \(0\) 個以上任意の順番で行われたとき、どのような操作が行われたことになるかを考えます。	区間操作を反転回数aと最後の反転以降の追加bへ合成し、値のmax取得に必要な表裏の残数等をセグ木要約へ持つ。写像合成と負/正領域の更新を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc442_a	full	T073:primary			0	の個数を足し合わせればよいです。	文字列中の.の個数を走査またはcount関数で返すO(N)。T060数え上げは基本文字頻度に一律付けるより粒度を分ける。	reviewed	
+abc442_b	full	T076:primary			0	現在の音量を表す変数と曲が再生中であるかを表す変数の	再生位置xと再生フラグyを操作列に沿って更新し、最後にx>=3かつy=1かで答えるO(N)。	reviewed	
+abc442_c	selected_tags	T177:primary,T060:supporting			0	と利害関係にない研究者の人数を	研究者iと関係条件を満たす候補数Ciを数え、そこから3人選ぶC(Ci,3)を整数算術で返す。O(N+M)等のCi計算を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc442_d	selected_tags	T001:primary,T003:alternative,T086:supporting			0	\(S=(S_0,S_1,\dots,S_N)\)	配列の隣接swapまたは点swapをBITの点差分2回へ変換し、区間和を接頭辞差で取得するO((N+Q)log N)。隣接swapなら累積和表の一点だけが変わるO(N+Q)主解も考えられるためクエリ位置を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc442_e	full	T043:primary,T064:supporting,T240:analysis_concept			0	本解説は前半・後半に分かれています。	点を半平面と外積の符号で偏角ソートし、同じ方向の角度区間境界を求める。a->bの円周区間内個数は整列位置差で答えO((N+Q)log N)。外積は面積を計算する主手法でなく角度比較の根拠。	reviewed	
+abc442_f	selected_tags	T022:primary,T086:supporting			0	まずは条件を整理します。	白領域の階段を各行の白長さの単調列として表し、行と境界位置の塗り数DPを累積和で遷移高速化するO(N^2)。正確な問題が最適化/数え上げかと遷移重みを全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc442_g	full	T077:primary,T065:supporting,T150:concept			0	重みが同じアイテムの中では価値の大きい順に選ぶのが最適であるため、重み \(1,2,3\) のアイテムをそれぞれ何個選ぶかだけが重要です。	重み1,2,3ごと価値降順に並べ、選ぶ個数を6/iで割った余りの有限通りへ固定。残りは重み6の束の価値列を貪欲マージして容量以内最大を取る。O(N log N)。	reviewed	
+abc443_a	full	T073:primary			0	の問題 A「Welcome to AtCoder」を解いてみてください。	与えられた文字列の末尾へsを一文字追加し出力するO(N)。	reviewed	
+abc443_b	full	T076:primary,T064:alternative			0	for ループを用いて、	年ごとのN+i個の豆を加算し目標Mへ達するまで直接模擬する。制約内の少回数で可。等差和の単調性を使って年数を二分探索する別解もO(log M)。	reviewed	
+abc443_c	full	T076:primary			0	この問題文は、問題文の指示に従いながら適切にシミュレーションを実装する問題です。	既に時刻順の入力Aiを順に処理し、閲覧開始openと中断の変化だけで閲覧時間を差分加算するO(N)。整列済み入力に実ソートを要求しない。	reviewed	
+abc443_d	selected_tags	T022:primary,T187:alternative,T055:supporting,T010:supporting			0	まず、操作を行う前に、ある特定の駒に注目してみましょう。	各列のポーンから生じる到達/高さ制約を左から右と右から左へ2回伝播してO(N)で最小位置を得る。Dijkstra別解とシミュレーション表現を追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc443_e	selected_tags	T022:primary			0	この問題を解くために、動的計画法 (DP) を利用します。	侵入可能マスのboolを持ち、移動の方向に沿って到達状態を伝播するグリッドDP。初期の全(i,C)を真としてO(N^2)で処理。銀の利きと有向性による処理順を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc443_f	full	T066:primary,T028:supporting,T022:supporting,T264:supporting,T011:supporting			0	\(\text{d}[x][c]\)	Nの剰余xと次に許す末尾桁cの10N状態にし、桁追加(10x+c')mod NへBFSして最小桁数を求める。辞書順の親を保存して最小の良い倍数を復元。O(N*10^2)、差分でO(10N)。	reviewed	
+abc443_g	full	T097:primary,T080:supporting,T264:supporting		floor_sum	0	\(k < (Ak+B) \bmod M\) という条件を同値変形します。	k<(Ak+B)mod Mの指示関数を2つの床関数の差へ直し、floor_sumを2回呼んで個数を得る。Euclid型再帰で各問O(log M)。	reviewed	
+abc444_a	full	T073:primary,T264:alternative,T077:alternative			0	の問題A「Welcome to AtCoder」を解いてみてください。	3桁を比較して全同値か判定するO(1)。111で割り切れるか、整列して先頭=末尾かも実行可能別解だが基本桁処理の範囲。	reviewed	
+abc444_b	full	T065:primary,T264:supporting,T073:alternative			0	原案：kyopro_friends	1..Nの整数を全列挙し、商余りまたは文字列化で桁和を計算して条件を満たす個数を返すO(N log N)。	reviewed	
+abc444_c	full	T077:primary			0	原案:ynymxiaolongbao	棒を整列し、全て2本に割れた場合は最小+最大の共通長を検査、一部未分割なら最大長を共通長として残りの両端和を検査するO(N log N)。	reviewed	
+abc444_d	full	T075:primary,T086:supporting,T171:supporting,T264:supporting			0	個作り、それらを足すという方針には、	長さAiのrepunitの桁別寄与を区間[0,Ai)への+1として差分集計し、下桁から繰上げを処理して十進文字列を出すO(N+max Ai)。stackは出力桁を逆順保持するだけで中心技法ではない。	reviewed	
+abc444_e	full	T083:primary,T012:supporting,T064:supporting			0	この問題は尺取法により解くことができます。	値差D未満の2要素がない最大窓を尺取りし、ordered setの挿入位置の直前/直後だけで新要素の可否を検査するO(N log N)。平衡木内探索を独立数値二分探索と誤分類しない。	reviewed	
+abc444_f	selected_tags	T064:primary,T076:supporting,T077:supporting			0	原案:admin 二分探索で解きます。	中央値X以上の棒を(N+M+1)/2本作れるかを判定しXを二分探索する。各棒の分割後長さは高々O(log Ai)種類だけなので個数をまとめて模擬するO(N log^2 max A)。整列が必要か全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc444_g	selected_tags	T134:primary,T065:supporting,T097:supporting		ガウス整数	0	原案：rng_58 この問題はガウス整数というものを考えることで見通しよく解くことができます。	格子円周の点をガウス整数の素因数分解へ帰着し、4k+1型素数の平方和表現と因子組合せから点配置を列挙する。O(P^1.5)の前計算と約数列挙の全制約計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc445_a	full	T073:primary			0	の先頭の文字と末尾の文字を比較すればよいです。	文字列の先頭と末尾が同じかを比較するO(1)。入力読み込みを含めO(N)。	reviewed	
+abc445_b	full	T073:primary			0	\(k=\dfrac{m-|S_i|}{2}\)	最大長mを求め、各Siの左右へ(m-len(Si))/2個の.を付けて中央揃えする。O(総出力長)。	reviewed	
+abc445_c	selected_tags	T022:primary,T005:alternative			0	一度 \(A _ i=i\) であるようなマス \(i\) に到達したらそこから移動することはありません。	後ろから行先Aiが自分ならそのi、先へ進むなら既知の答えans[Ai]を参照するO(N)の順序DP。DSUで停止位置を併合して求める別解の実行可能性を追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc445_d	full	T077:primary,T010:alternative		貪欲法	0	ブロックのスペースがあり、そこにピースを並べていくものとします。	ピースを高さ降順・幅降順に用意し、残ったチョコ空間の幅と一致する高さ/幅最大のピースを端から貪欲に置く。各列は使用済みを一度飛ばすだけでO(N log N)。heapでも同じ最大取得が可能。	reviewed	
+abc445_e	selected_tags	T253:primary,T134:supporting,T008:supporting,T236:supporting		最小公倍数	0	で割り切れる回数に等しい）を	各Aiを最小素因数で分解し素数指数の最大・次点・最大達成人数を保持する。一要素除外LCMが変化する唯一最大指数だけ補正し法で積を出す。O(M log log M+N log M)等。合成法で逆元を使えないケースを含め正確な出力を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc445_f	full	T030:primary,T176:supporting,T055:supporting,T238:supporting			0	頂点 \(i\) からちょうど \(k\) 回移動して頂点 \(j\) に行くためのコストの総和を \(c ^ k _ {i,j}\) と書くことにします。	min-plus半環の行列を二分累乗し、ちょうどK辺使う全対最小コストを求めるO(N^3 log K)。通常の足し算掛け算の行列累乗ではないが同じ二進分解。	reviewed	
+abc445_g	full	T031:primary,T032:supporting,T033:supporting,T178:supporting,T097:supporting			0	同時にコマを置くことができない \(2\) マスの間に辺を張ったグラフを考えると、このグラフの最大独立集合が求めるコマの配置です。	攻撃関係を二部グラフへ彩色し、最大独立集合数=V-最大二部matchingで配置する。gcdで移動量A,Bの因子を処理して彩色を構成。最小頂点被覆を通じた流れ/カットが実手法。	reviewed	
+abc446_a	full	T073:primary			0	「頭文字を英小文字に直す」と「先頭に	先頭文字を小文字へ変え、接頭辞Ofを連結して出力するO(N)。	reviewed	
+abc446_b	full	T012:primary,T008:alternative,T076:supporting			0	「選ばれた番号のあつまり」を空の集合で初期化し，客	各客の希望順に未選択番号を最初に見つけて集合へ入れ、その番号を出す。なければ水。全希望長Lに対してO(L log L)、頻度配列ならO(L+M)。	reviewed	
+abc446_c	full	T011:primary,T076:supporting			0	レストランに存在する卵の「仕入れた日」を、キューで管理することを考えます。	仕入日と個数をFIFOに記録し、古い期限切れ卵を捨てつつ需要分を先入れから使う。各ブロックを一度消す償却O(N)等。1個ずつpushするO(N max Ai)も制約内の別実装。	reviewed	
+abc446_d	full	T022:primary,T008:supporting			0	までの連続部分列のみを考えた時に、末尾の要素が	値vで終わる連続整数増加部分列の最大長d[v]を持ち、Aiに対してd[Ai]=max(d[Ai],d[Ai-1]+1)を更新する。mapで非ゼロだけ保持しO(N log N)。二分探索はmap内部以外に不要。	reviewed	
+abc446_e	selected_tags	T022:primary,T027:alternative,T067:supporting,T066:alternative,T078:alternative			0	\(s_n = As_{n-1} + Bs_{n-2}\)	隣接2項(x,y)の剰余をM^2状態のfunctional graphにし、0を含む状態へ至る初期対を木/サイクル構造から求める。ダブリングが実際に必要かと数え上げの全状態処理を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc446_f	selected_tags	T067:primary,T066:alternative,T010:alternative,T086:alternative			0	頂点・辺ともに無いグラフ	頂点を番号順に有効化して誘導有向グラフで1からの到達集合を差分拡張し、外部へ漏れる境界を管理する。priority queueや累積和の具体使用を全解説確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc446_g	selected_tags	T022:primary,T003:supporting,T015:alternative,T086:supporting			0	\(B = (A_{t_1}, \dots, A_{t_k})\)	221部分列を一意な貪欲添字列へ写して状態DPし、同値連続の遷移範囲をセグ木/永続構造で集計する。具体状態と重複除去の帰納性を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc447_a	full			基本算術	0	の問題A「Welcome to AtCoder」をお試しください。	隣り合わない最大着席数ceil(N/2)と人数Mを比較するO(1)。パスの独立集合だが一般グラフ手法やDPは不要。	reviewed	
+abc447_b	full	T073:primary			0	問題文の通りに実装をすればよいです。	文字頻度最大fを求め、f未満の文字だけ元の順序を保って出すO(N+26)。直接文字列フィルタであり操作の逐次模擬は不要。	reviewed	
+abc447_c	full	T073:primary			0	を追加/削除するものであることから、	A以外を抜いた骨格文字列がS,Tで違えば不可能。同じなら骨格の隙間ごとのA個数の絶対差和が最小挿入削除数。O(len(S)+len(T))。	reviewed	
+abc447_d	full	T073:primary		貪欲法	0	問題を言い換えると「（連続するとは限らない）部分列で	左からA数、AB数、ABC数を貪欲更新し、B/Cは前段階を超えないようminを取る。重ならないABC部分列を最大数選びO(N)。確率・個数DPではなく貪欲の進捗カウンタ。	reviewed	
+abc447_e	selected_tags	T005:primary		重みのbit貪欲法	0	の連結成分の個数がちょうど	辺コスト2^iが下位全和より大きいので、重い辺から連結を完成させない限り採用する貪欲をDSUで行う。連結成分を2つ残す判定と最終mod処理を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc447_f	full	T027:primary,T022:supporting,T020:alternative,T131:analysis_concept			0	パスグラフは（問題文同様）長さを	ムカデの芯となるパスの各頂点次数条件を用い、根から部分木内へ伸びる最大芯長を木DPで併合する。次数3/4条件で構成された森の直径を求めてもO(N)。次数列は判定条件で一般次数列実現算法ではない。	reviewed	
+abc447_g	selected_tags	T003:primary,T065:supporting,T012:supporting			0	以下、ある問題案の集合 \(S\) における「ジャンルの相異なる面白さ上位 \(X\) 個」といった表現は、厳密には以下の手順によって得られる集合 \(T\) を意味するものとします。	prefix/suffixごとにジャンルの異なる上位4件を要約し、分割候補で両側要約の少数組合せだけ全探索して最適を求める。セグ木へこの要約を載せて更新に対応する主解のクエリと計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc448_a	full			累積最小,基本集計	0	問題文の要求に従うためには、以下を行う必要があります。	現在最小値を更新しながら、それを初めて下回る位置を指定形式で出力するO(N)の接頭辞最小走査。	reviewed	
+abc448_b	full			種類別集計	0	コショウの種類ごとに整理します。	種類kの合計skを頻度配列へ加算しsum min(sk,Ck)を返すO(N+M)。バケットソートの比喩であり実ソート不要。	reviewed	
+abc448_c	full	T077:primary,T065:supporting			0	\((K \leq 5)\)	値の小さい6ボールだけを前計算し、各問で高々5個の除外番号に属さない最初の値を返す。O(N log N+Q)または固定6個保持でO(N+Q)。数値二分探索は不要。	reviewed	
+abc448_d	full	T067:primary,T008:supporting,T012:alternative,T047:supporting			0	までのパスを毎回求めなおしているようでは時間計算量が	根からDFSし、現在パスの値頻度を入場時+1・退場時-1して重複の有無を各頂点へ記録する。map/setでO(N log N)、圧縮配列ならO(N)。Euler順だけの一括区間クエリではない。	reviewed	
+abc448_e	full	T078:primary,T176:supporting,T264:supporting,T080:alternative			0	\(\lfloor N/M \rfloor\)	求めるrepunitの商の剰余を、repunit mod(M*10007)を計算した後にMで割ることで得る。2^d桁のrepunit/10冪を倍々に合成してO(log N)。9の逆元を使えない法もあるため無条件T236は除く。	reviewed	
+abc448_f	selected_tags	T077:primary,T084:supporting,T115:concept,T155:supporting,T053:alternative,T067:alternative		構築	0	この問題は様々な解法があります。	平面を帯へ分け、帯ごとに逆順に並べる蛇行ソートでManhattan巡回長を制約上限内に収める構成O(N log N)。近似最適TSPやヒューリスティックでなく保証付き構築。MST別解は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc448_g	selected_tags	T044:primary,T063:supporting,T015:alternative,T016:supporting,T064:alternative,T148:alternative		零和ゲーム,線形計画	0	今回の問題は ゲーム理論 をテーマとした問題です。	2段階の零和ゲームを利得行列と凸な上包絡線の最小化へ帰着する。Li Chao Tree永続化+三分探索、または幾何凸包処理が可能。ミニマックス定理は探索法でなく、累積和/通常セグ木は比喩。前回full根拠の全タグ再照合が必要。	needs_resolution	解説後半・別解の追加点検が必要
+abc449_a	full	T073:primary			0	の問題 A「Welcome to AtCoder」を解いてみてください。	円周率の既知文字列から指定n桁を切り出して出力するO(n)。数値計算や多倍長演算を要求しない。	reviewed	
+abc449_b	full	T076:primary			0	クエリを前から順に処理します。	現在チョコの縦横長を持ち、指定方向にn列/行を切り取った面積を出して残りの対応辺長を減らす。各クエリO(1)。	reviewed	
+abc449_c	full	T086:primary,T060:supporting,T073:supporting			0	を固定して答えを数え上げることを考えます。	右端jを固定し、同文字の位置のうち距離L..Rに入るものを文字頻度累積差で数えるO(26N)。滑る距離窓の頻度差分ならO(N+26)。	reviewed	
+abc449_d	selected_tags	T065:primary,T060:supporting,T257:alternative			0	\(\max(|x|, |y|)\)	max(abs(x),abs(y))の偶奇条件をabs(x)>abs(y)とその逆へ分け、片座標を列挙し他座標の許容整数範囲の長さを足す。O(幅+高さ)。包除閉形式別解の実行計算は追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc449_e	selected_tags	T001:primary,T077:supporting,T064:supporting,T010:alternative			0	各操作を出現回数が同じ要素をまとめて追加することを考えると、操作は以下のようにまとめることができます。	値頻度が少ない層ごとに追加列をまとめ、同頻度層の値を整列した繰返しとして扱う。問い合わせ添字から層を二分探索し、その層内のk番目をBITで得る。O((N+M+Q)log M)等の状態定義を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc449_f	selected_tags	T266:primary,T002:supporting,T085:supporting,T064:supporting,T077:supporting,T012:alternative,T009:alternative			0	\((r_0,c_0)\)	黒マスを含む切抜左上位置は各黒点由来の長方形和集合。座標圧縮して平面走査し、被覆数と被覆長を遅延セグ木で持ち和集合面積を計算、全配置数から引く。O(N log N)、set類別解は追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc449_g	selected_tags	T127:primary,T132:supporting,T196:supporting,T176:alternative,T060:supporting,T086:supporting			0	問題の言い換え 以下が成立します。	repunit和を10冪の最少個数問題へ変換し、条件を満たす整数の個数をFPSの冪の必要係数で求める。微分方程式の線形係数再帰、FPS log/exp、畳み込み二分累乗の実行可能な別解を区別する。帰着条件と全計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc450_a	full			基本出力	0	問題文の指示通り、数を降順に出力しながら間にカンマを入れればよいです。	Nから1までの整数を降順にカンマ区切りで出力し末尾GOを付けるO(N)。	reviewed	
+abc450_b	full	T065:primary			0	について愚直に調べればよいです。	全a,b,cの分割条件を三重ループで検査し一つでも条件を満たせばYesを出す。小NでO(N^3)。	reviewed	
+abc450_c	full	T066:primary,T067:alternative,T005:alternative			0	この問題は BFS により解くことができます。	白マスの連結領域をBFS/DFSして、外周へ触れない成分だけを水溜まりとして数えるO(HW)。DSUでも外部の仮想頂点と外周白を繋ぎ同じ判定ができる。	reviewed	
+abc450_d	selected_tags	T077:primary,T264:supporting,T083:alternative,T007:alternative			0	で割った余りは不変です。	各値に±Kしてもrange不変となる相対操作へ変形し、剰余mod Kの円環で最大ギャップを除いた最短被覆長を求めるO(N log N)。deque/尺取り別解の実行箇所を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc450_e	full	T080:primary,T197:supporting,T086:supporting			0	この問題は再帰関数を用いて解くことができます。	文字列長と文字頻度をFibonacci合成で前計算し、prefix頻度f(k,n)を左右連結の長さで再帰分岐する。kは最大問い合わせ長を超えるO(log R)で打切り、区間はprefix差で答える。	reviewed	
+abc450_f	selected_tags	T022:primary,T002:supporting,T077:supporting			0	強連結性を保ったまま辺を削除する問題ではなく、	辺をX順に整列し、処理辺iと1から到達する最右端rの数え上げDPを作る。辺採用による区間加算/和を遅延セグ木で高速化する。O(M log N)等の式と強連結十分性を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc450_g	full	T026:primary,T022:supporting,T009:concept			0	原案:nok0 \(N=1\) のとき、答えは \(A_1^2\) です。	最終差の二乗期待値を各Ai^2と対積の係数へ分解し、符号積の期待値CN=-1+(N-3)C(N-1)/(N-1)をO(N)で前計算して用いる。multisetは確率過程の対象で探索容器ではない。	reviewed	
+abc451_a	full	T073:primary,T264:supporting			0	の問題A「Welcome to AtCoder」をお試しください。	Sの長さが5の倍数かlen(S)mod5を検査するO(N)入力・O(1)判定。	reviewed	
+abc451_b	full			種類別集計	0	問題文の通り，部門ごとに今期所属する人数および来期所属する人数をそれぞれ計算してそれらの差を出力すればよいです．	今期Xi人、来期Yi人を部門別に集計し差を出すO(N+M)。部門間移動を一人ずつ模擬する必要はない。	reviewed	
+abc451_c	selected_tags	T010:primary,T076:supporting			0	「優先度付きキュー（ヒープ）」	優先度付きキューで次に処理する最小値/時刻を取り出し指定の変化を反映する。解説前半はheap一般論だけなので本問題の操作と総要素数を後半確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc451_d	selected_tags	T065:primary,T012:supporting,T077:supporting,T022:alternative			0	\(819264512\approx 0.8 \times 10^9\)	2の冪の十進表記を連結する良い数を桁数順に構成し、同じ整数は集合で重複除去して9桁まで列挙後整列する。個数が約110万の上界と桁DPとしての再帰を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc451_e	selected_tags	T067:primary,T053:alternative,T077:alternative			0	\(A_{i,j} = A_{j,i}\)	部分的な木距離から根距離順等で唯一の重み付き木を構築し整合性をDFS距離で確認する。主解はO(N^2)。MSTを実際に計算する別解の成立条件を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc451_f	full	T005:primary,T178:supporting,T012:supporting,T066:analysis_concept			0	が与えられたときの、出力するべき値は以下のようになります。	成分ごとの2色集合を保持し、辺追加で色制約を検査して必要なら小成分を反転して併合する。奇閉路なら-1、各成分min(白数,黒数)の総和を更新。small-to-largeでO((N+Q)log N)等。	reviewed	
+abc451_g	selected_tags	T067:primary,T059:supporting,T136:supporting,T089:alternative		XOR基底	0	辺 \(e\) の重みを \(W_e\) で表します．また \(L=30\) とします． 全域木 \(T\) を固定して， \(T\) 上で頂点 \(1\) と \(v\) を結ぶ単純パスの重みを \(A_v\) とおき	全域木の根からのXOR距離Avで辺重みを基準変換し、非木辺のサイクルXOR基底でwalk集合を線形空間化する。Binary Trieで最小XORを取る対象と縮約後重みの処理を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc452_a	full	T065:primary			0	つをリストとして管理し，その各要素について	五節句の日付5個と入力(M,D)をすべて照合して一致有無を返す定数時間の候補全列挙。	reviewed	
+abc452_b	full	T073:primary			0	マス \((i,j)\) が端にある必要十分条件は、次のいずれかが成り立つことです。	H*Wの各マスで端行/端列なら#、内部なら.等の指定文字を出すO(HW)。文字列構築で一般の図形算法は不要。	reviewed	
+abc452_c	full	T073:primary			0	文字目について，以下を高速に判定することを考えます．	文字列長len、位置place、文字cの出現可否を前計算する3次元bool表へ記録し、各問い合わせ文字の必要な組をO(1)で照合する。O(総文字数)と表サイズの前処理。	reviewed	
+abc452_d	selected_tags	T025:primary,T022:supporting,T064:alternative			0	\(S\) の \(i\) 文字目 \((1\le i\le |S|)\) や \(T\) の \(i\) 文字目 \(1\le i\le |T|\) を \(S _ i,T _ i\) と書くこととします。	Sの終点iまででTの何文字prefixまでを部分列として含むかを状態に部分文字列数DPを更新する。全非空区間数からT全体を含む数を引く。O(len(S)len(T))、二分探索別解を追加精査。	needs_resolution	解説後半・別解の追加点検が必要
+abc452_e	full	T086:primary,T264:supporting			0	\(\lfloor i/j \rfloor\)	jと床商kを固定しi∈[jk,j(k+1))でi mod j=i-jkとする。AiとiAiの累積和で各範囲をO(1)集計し、倍数区間の総数O(N log N)で全和を求める。	reviewed	
+abc452_f	full	T083:primary,T001:supporting			0	\(f(k)\) を \((P _ l,P _ {l+1},\ldots,P _ r)\) の転倒数が \(k\) 以下であるような \((l,r)\) の個数と定めます。	転倒数が閾値以内という窓の単調性を利用し、要素追加/削除時の転倒数増減をBITで求めながら尺取りするO(N log N)。	reviewed	
+abc452_g	selected_tags	T069:primary,T073:supporting,T060:supporting		ランレングス圧縮	0	シンプルな形への帰着 \(S\) の連長圧縮を \((v_1, m_1), \cdots, (v_n, m_n)\) とおきます(ここで \((v_i, m_i)\) は \(v_i\) が \(m_i\) 個並ぶ列を表	連長(v,m)をv>mなら0、v=mならv、v<mならv,0,vへ変換した列へ帰着し、異なる221部分文字列をSuffix Array/LCPで重複除去して数える。境界の残長補正を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc453_a	full	T073:primary			0	解法はいろいろあるので、ひとつの方針を示します。	先頭/末尾のoを取り除き、o以外の最初の文字から最後までを出力する、または両端フラグで同じ範囲を走査するO(N)。	reviewed	
+abc453_b	full	T076:primary			0	問題文に従って実装すればよいです。	最後に記録した値を保持し、新測定値との差の絶対値がx以上なら記録値を更新して時刻を出す。O(N)。	reviewed	
+abc453_c	full	T061:primary,T065:supporting,T076:supporting			0	座標が正なら負の方向に、負なら正の方向に移動するという貪欲法は失敗します。	各移動の正負2^Nパターンをbit全列挙し、座標と距離を2倍して0/半整数の位置通過を整数で模擬するO(N2^N)。	reviewed	
+abc453_d	selected_tags	T066:primary,T055:supporting,T011:supporting,T067:alternative			0	\(S_{i,j}=\)	位置と直前進行方向の状態で次の合法方向を判定してBFS/DFSする。到達可能性ならDFS、最短距離ならBFS。マス記号に対応する進行制約を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc453_e	selected_tags	T177:primary,T266:supporting,T060:supporting			0	\(i=1,2,\ldots, N-1\)	チームA人数iを走査し、各人をAのみ/Bのみ/両方/不可にイベント分類する。不可がなければ両方群からi-A必須人数を二項係数で選び加算する。分類境界のsweepでO(N log N)等を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc453_f	selected_tags	T067:primary,T010:supporting		構築	0	\(N=2\) 、すなわち木が \(2\) 頂点からなる場合は、 \(C_i\geq 2\) であるような色 \(i\) が存在する場合はその色で \(2\) 頂点の両方を塗れば良く、そうで無い場合、条件をみたすように頂	木の葉を同色複数個のある色へ割り当て、辺で分離しても共通色がある条件を満たす構築を行う。葉数の必要十分条件とheap配色順の証明を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc453_g	selected_tags	T047:primary,T067:supporting,T001:alternative,T003:alternative,T086:supporting,T012:alternative			0	永続 segment tree	コピー参照を木に表し、DFS/Euler順で子孫への寄与を区間更新・点/区間照会へ変換する。具体クエリ型と動的コピーの扱い、別解データ構造を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc454_a	full			条件分岐	0	の問題 A「Welcome to AtCoder」を解いてみてください。	入力値が指定閉区間[L,R]へ含まれるか両端を含む不等式で判定するO(1)。	reviewed	
+abc454_b	full	T012:primary			0	まずは質問を整理しましょう。	着用番号の集合サイズを求め、全員異なるかはサイズN、全服が着られたかはサイズMで判定するO(N log N)。	reviewed	
+abc454_c	full	T066:primary,T011:supporting,T067:alternative			0	に有向辺が張られたようなグラフを考えます。	依存関係を有向辺へ変換し頂点1から到達可能な頂点数をBFS/DFSで数える。各辺一度のO(N+M)、dequeはFIFO実装。	reviewed	
+abc454_d	selected_tags	T013:primary,T073:supporting			0	標準形（canonical form）	文字を左から積み、頂上に指定(xx)の還元可能形が出来たら消去/標準形へ置き換える。各文字一度push/popされO(N)。置換の正確な規則は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc454_e	selected_tags	T080:primary,T178:analysis_concept,T076:supporting		構築	0	まず、各マスを市松模様に白か黒で塗ることを考えます。	チェス盤の色と始終点のパリティで不可能条件を証明し、可能な偶数N盤で再帰的にHamilton経路のLRUDを構築するO(N^2)。構成時の残す3マス条件を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc454_f	selected_tags	T077:primary,T264:supporting,T075:supporting			0	まず、 \(A\) の真ん中をまたぐ操作は禁止して良いです。	左右対称差mod Mの列Bを差分Cへ変換し、区間±1操作を隣接差分の一対移送として最小化する。Cの符号/周期を整列貪欲で合わせる式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc454_g	selected_tags	T067:primary,T047:supporting,T008:alternative,T045:analysis_concept,T005:analysis_concept		DSU on Tree	0	今回の問題は一見すると unordered_map (ハッシュマップ) を利用したマージテクで時間計算量 \(\mathrm{O}(N \log N)\) で解けそうです。	DSU on Treeで重い子の頻度表を使い回し、軽い子のEuler区間を出し入れして各部分木の最頻値を求めるO(N log N)。Union-FindのDSUとは別手法、HLDは重い子選択の説明概念。マージhash別解の定数を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc455_a	selected_tags			条件分岐	0	\(A \neq B\)	入力3値に指定の等値/相違の組合せ条件が成り立つか固定比較するO(1)。条件の具体番号は問題文照合が必要。	needs_resolution	解説後半・別解の追加点検が必要
+abc455_b	selected_tags	T065:primary,T068:alternative,T069:alternative,T245:alternative,T022:alternative,T008:alternative,T077:alternative			0	の制約が十分小さいので、すべての長方形領域に対して点対称であるかをそれぞれ判定すればよいです。	全長方形の端点を列挙して、反対位置の全マス同色かを検査するO(H^3 W^3)で小制約に適合。多数の高度な別解が部分点や一般化の言及でないか全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc455_c	full	T008:primary,T077:supporting			0	を数列から取り除くことにしても本問題の答えは変わりません。	値xごとの個数cxをmapで集計し、個数の大きい値からK種類取り除いて残要素数を求める。O(N log N)。値列を整列して連長頻度へ変える別解も可能。	reviewed	
+abc455_d	selected_tags	T076:primary,T005:alternative		連結リスト	0	各カードがどの山にあるか、あるいは各山のカードの集合を常に管理しながら計算することを目指すと、	各カードの上下参照と各山底の仮想カードを持つ二方向連結リストで、切出し・付替え時に境界の参照だけ変更する。最後に底から辿り山枚数を求めO(N+Q)。DSUは分離操作へ直接は適用不可。別解の根拠を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc455_e	full	T257:primary,T008:supporting,T086:supporting,T060:supporting			0	を満たすような部分文字列の個数を	A=B等の3等頻度条件を包除し、A-B/A-Cの接頭辞差が同じ添字対をmapで数える。全区間数-3組等値数+2*全等値数でO(N log N)。	reviewed	
+abc455_f	selected_tags	T002:primary,T022:alternative,T027:analysis_concept			0	まず、スライムを合成する問題について考えます。	合併群の費用は(sum B)^2-sum(B^2)の半分で順序不変。これを利用した区間合併・分割の最適値更新を遅延セグ木で扱う。木DPの二乗計算量解析は余談で主解ではない。正確なクエリ式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc455_g	full	T083:primary,T008:supporting,T086:supporting,T264:supporting,T079:supporting,T072:supporting			0	原案:vwxyz まず、 \(1\) つ目の値（各数字が \(B_k\) 回ずつ登場するもの）について考えます。	値ごとの登場回数上限を尺取りで守りつつ、回数mod Bに対応する乱数hashの接頭辞一致対をmapで数える。hashの総和0制約で各値の周期を一致させO(N log N)等。衝突確率を明記。	reviewed	
+abc456_a	full			基本算術,条件分岐	0	if 文を使って条件分岐をして出力しましょう。	3個の通常サイコロの和は3..18を全て達成するので、その閉区間にXが入るか比較するO(1)。	reviewed	
+abc456_b	full	T065:primary,T060:supporting,T077:alternative,T012:alternative			0	つのサイコロの各面を区別することにすると、出目の出方は	3個サイコロの216出目を全列挙し、値の組合せが4,5,6かを整列/集合/6通り照合で判定して確率を求めるO(1)。	reviewed	
+abc456_c	full	T073:primary,T060:supporting		ランレングス集計	0	\(S_i\neq S_{i+1}\)	同じ文字が隣接する境目でSを分割し、各交互文字の最大区間長lについてl(l+1)/2を足す。O(N)の連長集計。	reviewed	
+abc456_d	selected_tags	T025:primary,T022:supporting,T008:supporting			0	この問題は DP により解くことができます。	末尾文字cごとの隣接同字なし部分列数をDPし、新文字Siに対してSi以外の末尾状態和から追加する。総和を持てば変更は一状態だけでO(N+σ)。重複同一列の扱いを全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc456_e	full	T182:primary,T049:supporting,T067:alternative			0	\(N\times W\)	都市xと曜日wのNW状態グラフで休暇を保てる遷移を張り、有向閉路があれば無限移動可能。DFS色または入次数削除のトポソートでO((N+M)W)。	reviewed	
+abc456_f	selected_tags	T003:primary,T022:supporting,T120:supporting,T083:alternative			0	問題は以下のように言い換えられます。	休暇の窓ごとの2状態最小費用DPを2次min-plus写像合成へ変換し、スライド区間の積をセグ木で取得するO(N log N)。二つstackのSWAGならO(N)も可能。既存尺取りの役割を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc456_g	full	T127:primary,T257:supporting,T060:supporting,T086:supporting			0	最長の連休が \(k\) 日以下の勤務予定の総数（ \(F(S,k)\) とする）を列挙できれば、差分を取ることで元の問題に答えられます。	最長連休<=kの勤務数F(S,k)をxで切った独立な.区間の積へ分離し、全kを約数和型の集計で求めるO(N log N)。区間一つのF(n,k)を包除式またはFPS逆元で求める別解。	reviewed	
+abc457_a	selected_tags	T065:primary		基本配列	0	の問題A「Welcome to AtCoder」をお試しください。	N要素の配列でXに対応する指定添字/値を一度線形探索して返すO(N)。問題文の出力条件を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc457_b	full			可変長配列	0	「可変長配列」の練習問題です。	可変長配列の列を入力形式どおり読み、指定の配列要素を参照して出す。メモリO(総入力長)、各照会O(1)。	reviewed	
+abc457_c	full	T264:primary,T086:alternative,T064:alternative			0	手順通りに愚直に配列を連結していくと実行時間制限やメモリ制限に引っかかるので、別の方法を考えます。	各Ai列の反復ブロック長LiCiを順に引いてKが属すブロックを特定し、(K-1)mod Liで元要素を返すO(N)。複数問ならブロック累積長と二分探索でも可能だが本問は単一K。	reviewed	
+abc457_d	selected_tags	T064:primary			0	\(A = (1, 2, 3)\)	全要素>=Xにする操作数sum max(0,ceil((X-Ai)/i))がK以下かで答えXを二分探索する。判定O(N)、全体O(N log値)。解説の判定高速化が必須な制約か全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc457_e	full	T077:primary,T064:supporting,T086:supporting			0	の区間のみをちょうど覆う必要があるので、左端を	布端点を整列し、左Sと右Tを覆う候補を二分探索とsuffix最小の前計算で判定する。ちょうど[S,T]の布有無で場合分けし3枚等の候補条件を照合、O(N+(M+Q)log M)。	reviewed	
+abc457_f	selected_tags	T024:primary,T022:supporting,T002:supporting,T236:supporting,T012:alternative			0	naive な DP 順列の後ろから順に要素を追加することを考えましょう。	順列を後ろから挿入し最大/2番目の添字対を状態に数えるDPを、片側添字集計と定数倍率の遅延更新へ圧縮する。範囲sum/区間乗算の遅延木で高速化。正確な状態と計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc457_g	selected_tags	T094:primary,T143:analysis_concept,T077:supporting,T064:supporting,T003:alternative			0	\(\lbrace i\rbrace\)	時空点をu=T+X,v=T-Xへ変換し到達関係を2次元半順序へ写す。Dilworthで最少鎖分割=最大反鎖となり、ソート後のLIS/LDS等で求めるO(N log N)。セグ木別解・タイブレークを全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc458_a	full	T073:primary			0	C++, Python を含む多くの主流な言語では，ある文字列の部分文字列をとる関数が標準で用意されています．その仕様にしたがって実装するのが簡潔です．	指定両端の文字を取り除いた部分文字列をスライスして出力するO(N)。	reviewed	
+abc458_b	full	T065:primary			0	に辺で隣接するマスの座標は，以下の	全マスの上下左右4候補が盤面内か数えて出力するO(HW)。端/隅の条件分岐でも可能、グラフ探索は不要。	reviewed	
+abc458_c	full	T073:primary,T060:supporting			0	抜き出す部分文字列の真ん中にある	各Cの位置iを固定し、左右へ同じ長さだけ伸ばせる数min(i,N-1-i)+1を足すO(N)。	reviewed	
+abc458_d	selected_tags	T009:primary,T010:alternative,T001:alternative,T085:supporting,T064:supporting,T077:supporting			0	黒板に書かれた整数の多重集合を	大きい半分と小さい半分の2多重集合を持ち要素数差を0/1へ保つと大きい側最小が中央値。O(Q log Q)。座圧BITのk番目探索や2ヒープも実行可能別解だが削除操作を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc458_e	selected_tags	T132:primary,T177:supporting,T236:supporting,T196:supporting			0	\(\mathrm{binom}(n, k)\)	1と3が隣接しない条件を1/3連長の分割数へ変換し、先頭末尾4種ごとに二項係数積を畳み込んで全個数を求める。O(N log N)等の変数上界を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc458_f	selected_tags	T025:primary,T030:supporting,T022:supporting,T170:alternative,T008:supporting			0	まず最初に思いつくのは、	禁止語prefixのsuffixだけを状態に文字列DPを圧縮し、文字追加遷移行列を二分累乗してN<=10^9へ対応。遷移前計算O(26L^3)、累乗O(L^3 log N)。Aho-Corasick相当の構築を明示源文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc458_g	selected_tags	T064:primary,T022:supporting			0	DP への落とし込み \(B_i > 0\) に注意すると， \(m\) 人での脱出が可能ならば，その手順をなぞることで \(m'\) 人 ( \(m' < m\) ) での脱出も可能であることが分かります．よって単調性	m人脱出可能ならそれ以下も可能なのでmを二分探索する。日iと残会場人数xの最大総メダル数DPでそのm人の脱出可否を判定。全状態/遷移のO(...)を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc459_a	full	T073:primary			0	の問題 A「Welcome to AtCoder」を解いてみてください。	HelloWorldの指定X文字目を除いて残りを連結出力するO(10)。	reviewed	
+abc459_b	full	T073:primary			0	問題文の指示通り、各文字列	各入力文字列の先頭文字を対応表で1文字へ変換し連結出力するO(N)。	reviewed	
+abc459_c	selected_tags	T076:primary,T086:supporting			0	シミュレーションを用いてクエリを処理することを考えます。	全列一括削除数offsetを持ち、追加ブロック高さはoffsetを含む絶対高さで保持する。削除クエリは新offsetとの差から必要出力を得るO(N+Q)。正確な残高式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc459_d	full	T073:primary,T010:alternative,T077:alternative		貪欲法	0	の過半数を占めている場合はどのように並べてもその文字が隣り合ってしまうため答えは	最多文字が過半数なら不可能、そうでなければ直前と異なる文字のうち残数最大を毎回選んで連結する。26種を全走査すればO(26N)、heapでもO(N log26)。ソートが本体かは別実装と区別。	reviewed	
+abc459_e	full	T027:primary,T067:supporting,T177:supporting,T236:supporting			0	リスがアメを選ぶ順番について、どのような順番にしても答えは変わらないため、今回は木	子孫から先にアメを選ぶ順へして部分木のC総和SiとD総和Tiを木DPで得る。各iの候補数Si-Ti+DiからDi個選ぶ二項係数を掛ける。O(N+階乗上限)。最終modだけのT264は不要。	reviewed	
+abc459_f	selected_tags	T007:primary,T076:supporting		ブロック併合	0	解説では 0-indexed とします。	Ai-iの広義単調化へ帰着し、隣接違反を貪欲に処理するブロックをdequeに持ち区間和から平均的に再配分して併合する。O(N)の償却上界と操作規則を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc459_g	selected_tags	T097:primary,T194:supporting,T065:supporting			0	まず、 \(g=\gcd(A,B)>1\) である場合明らかに \(X,Y\) 共に \(g\) の倍数である必要があります。	gcd(A,B)で目標座標の可否を判定して約分し、操作1/2の回数偶奇の4通りを固定。拡張Euclidで整数解を求めて移動回数最小の区間を最適化するO(log(A+B))。詳細目的式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc460_a	selected_tags	T076:primary,T264:supporting			0	でない間、実際に操作を繰り返せばよいです。	M>0の間、指定されたN/Mの剰余による更新をそのまま繰り返す。Mが毎回小さくなるため高々初期M回で停止。Euclid互除法と同形かは正確な更新式を確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc460_b	full	T183:concept,T065:alternative		2円の位置関係	0	\[|R_1 - R_2| \leq D \leq R_1 + R_2\]	中心距離二乗D2と(R1-R2)^2,(R1+R2)^2を整数比較し円の共有点有無を判定するO(1)。交点座標を構成しないためT183は対象の概念に留め、主手法は距離二乗比較。	reviewed	
+abc460_c	full	T077:primary,T083:supporting			0	ネタはより軽いものに交換しても損しないため、軽いものから順に使っていくことにして構いません。	ネタとシャリを重量順に整列し、軽いネタから条件を満たす最軽量のシャリを貪欲に組合せる。2ポインタでO(N+M)、整列込みO(N log N+M log M)。	reviewed	
+abc460_d	full	T066:primary,T011:supporting,T264:supporting,T076:supporting			0	隣接する白く塗られたマスと黒く塗られたマスについて考えると、操作を行ったとき白く塗られたマスは黒に、黒く塗られたマスは白に塗り替わります。	初めて黒になる時刻を初期黒群から多始点BFSで求め、以後反転を繰り返す対象では経過時刻の偶奇で最終色を決める。初回後に黒が消える例外を処理しO(HW)。	reviewed	
+abc460_e	full	T097:primary,T264:supporting,T060:supporting			0	\[\mathrm{concat}(x,y) = x \cdot 10^d + y\]	yの桁数dを固定し、(10^d-1)x≡0 mod MよりxはM/gcd(10^d-1,M)の倍数とする。その個数と該当d桁yの個数を掛けO(桁数 log M)。	reviewed	
+abc460_f	selected_tags	T054:primary,T004:supporting,T047:supporting,T078:supporting			0	黒く塗られている頂点どうしの距離の最大値が考察対象となっている問題です。	各頂点集合の直径端点2つを要約とし、2集合の併合は端点4個の距離比較で行う。LCA距離前計算と区間集合sparse table等で最遠対クエリへ答える。実クエリ集合の作り方を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc460_g	selected_tags	T027:primary,T022:supporting,T020:alternative,T045:alternative,T003:alternative		Static Top Tree	0	この問題は様々な解法があるようです。	木の色反転と全体値をstatic top treeの平衡階層に沿ったDP要約で更新するO(N+Q log N)。HLD/全方位DP等の代替と通常セグ木との関係を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc461_a	selected_tags			基本算術,条件分岐	0	「何もわからない」という場合、まずは	入力の能力/装備の合計と指定閾値を比較してYes/Noを返す固定算術。問題文の正確な条件を照合する。	needs_resolution	解説後半・別解の追加点検が必要
+abc461_b	full				0	を持っていたと主張しています。	各斧iの所有者Biが主張する斧ABiがiに等しいか全iで検査するO(N)。互いの逆置換の一致であり巡回分解は不要。	reviewed	
+abc461_c	full	T077:primary,T008:supporting		貪欲法	0	宝石を色ごとに分類し、各色について価値が最高の宝石（複数ある場合はそのうち一つ）をその色の代表とします。	色ごとの最大価値を代表にし、その価値上位M色の代表を必ず取る。残りK-M個を未選択宝石の価値順に取ってO(N log N)。	reviewed	
+abc461_d	selected_tags	T086:primary,T083:supporting,T008:alternative			0	抜き出す長方領域の上辺と下辺を固定した問題を時間計算量	上下行を固定して各列和の一次元列へ変え、正/非負値の単調性を使う尺取りまたは接頭辞差の頻度で和K区間を数える。O(H^2 W)。負値有無と0区間の重複を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc461_e	selected_tags	T001:primary,T077:supporting,T075:alternative			0	各クエリで黒マスが何個増える（減る）か分かれば十分です。	行列塗りの時刻順から各行/列が初めて対象になる時の新黒数をBITで集計する。一般問題のqueryソートは参考で、本問で必要な整列と更新/照会式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc461_f	selected_tags	T022:primary,T160:supporting,T134:supporting,T067:alternative			0	\(d_1,d_2,\dots,d_K\)	Nの約数を列挙し、約数候補a・選んだ個数b・積cの方法数dp0とスコア和dp1を同時更新する。最終sum dp1[K][b][N]*b!。Nの約数数による状態削減とDFS別解を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc461_g	selected_tags	T031:primary,T032:supporting,T033:supporting,T178:supporting			0	原案:admin この問題は \(2\) 通りの考察方法があります。	問題を二部グラフの最大独立集合へ帰着し、V-最大matchingで得る。単位容量最大流をO(M sqrt N)で計算し1013倍する。色数/重みの帰着証明と整数定数の条件を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc462_a	full	T073:primary			0	の問題 A「Welcome to AtCoder」を解いてみてください。	文字列を左から走査し数字文字だけを抽出して元順に出力するO(N)。	reviewed	
+abc462_b	full			逆参照リスト	0	にギフトを送ったということは、人	贈り元リストを受取人ごとの逆参照リストへ追加し、そのリストを指定順に出力するO(N+総ギフト数)。	reviewed	
+abc462_c	full	T077:primary,T086:supporting			0	\(X_j < X_i\)	X昇順に点を並べ、同じXをまとめて過去Y最小と比較し、より左の点のYが全て大きい点だけ数える。X同値の扱いと境界不等号に注意してO(N log N)。	reviewed	
+abc462_d	selected_tags	T076:primary,T075:supporting,T060:supporting			0	事件解決の鍵は犯行開始時刻です。	人の出入時刻をイベント差分へ記録し、時刻tに中にいる人数ctを前から模擬して各犯行開始シナリオ数ptを計算・合計するO(N+最大時刻)。正確なpt式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc462_e	selected_tags			幾何的場合分け	0	に置き換えても答えは変わりません。	座標の絶対値と偶奇へ対称化し、縦横の移動コストA/Bが交互になる最短費用を定数個のケースの式で計算するO(1)。寄り道有利なケースと偶奇の式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc462_f	selected_tags	T025:primary,T022:supporting,T064:alternative			0	\((1\leq i\leq \lvert S\rvert)\)	SのprefixiとABC増加個数jを状態に最少置換文字数を持つ。次のABC配置で重ならないパターンを扱いdp[N][K]を得る。二分探索別解とDPの全計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc462_g	full	T257:primary,T127:supporting,T132:supporting,T060:supporting,T177:supporting,T236:supporting			0	\(S_i\) を \((1,2,\ldots,N)\) の順列 \(P\) であって \(C_{P_i}=G_i\) を満たすものの集合とすると、求める値は \(\displaystyle \frac1{N!}\lef	一致を禁じる順列を条件集合の包除で数え、値kごとの一致選択多項式を総次数Nの積へまとめてO(N log^2 N)で求める。係数は符号付き数え上げであり確率分布DPではない。	reviewed	
+abc463_a	selected_tags			基本算術	0	の問題 A「Welcome to AtCoder」を解いてみてください。	横縦比16:9の対応長を整数比で計算して出力するO(1)。端数/整除条件は問題文で確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc463_b	full	T073:primary			0	それぞれの列車に対して席	各列車の予約文字列で席Xの対応位置を調べて空いている列車番号を返すO(N)。文字コード差で添字化し、ソートや探索木は不要。	reviewed	
+abc463_c	selected_tags	T013:primary,T064:supporting,T266:alternative			0	この問題はいくつかの方法で解くことができますが、この解説では「最も身長の高い高橋くんになる可能性がある高橋くん」の情報のみを保持することで高速に解く方法について解説します。	現在以後まで居る中で身長と退出時刻で他に支配される人を単調スタックから除く。残った候補の退出時刻を二分探索して照会するO(N+Q log N)。一般multiset/sweep別解は追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc463_d	full	T064:primary,T077:supporting			0	まず、答えが \(-1\) かどうかを判定することを考えます。	全布を右端順に整列した区間選択貪欲でK枚可能か判定する。間隔xを仮固定し右端をxだけ延長する等価判定により最大ギャップを二分探索、O(N log N+N log値)。	reviewed	
+abc463_e	full	T187:primary,T010:supporting,T055:supporting			0	超頂点 \(W _ S,W _ T\) を作り、頂点 \(i\) から \(W _ S\) へ \(X _ i\) 分で、\(W _ S\) から \(W _ T\) へ \(Y\) 分で、\(W _ T\) から頂点	ゲート利用の全対コストXi+Y+Xjを超頂点WS,WTの2段へ圧縮し、通常道路と併せDijkstraする。V=N+2,E=M+2N+1でO((N+M)log N)。	reviewed	
+abc463_f	full	T177:primary,T236:supporting,T060:supporting			0	最後の \(N\) 試合が行われる直前の最多勝利数を \(W\) とします。	最大勝利WまたはW+1の候補数を試合タイプ別二項分布の直接式で計算し、候補人数で割った優勝確率を総和する。階乗/逆元前計算後O(N)。DP表は使わない。	reviewed	
+abc463_g	full	T177:primary,T084:supporting,T236:supporting		Mo法	0	以下では確率を \(P(\cdot)\) 、期待値を \(E[\cdot]\) で表します。	確率分布を二項係数で直接表し、打切り二項和f(N,M),g(N,M)をMo順の可逆な±1更新で各クエリに必要な値だけ取得する。O(max(N+abs(X))*sqrt T)。確率DP表は計算しない。	reviewed	
+abc464_a	full	T073:primary			0	の問題 A「Welcome to AtCoder」を解いてみてください。	Sを走査しEを+1、Wを-1として合計符号から多数側を返すO(N)。	reviewed	
+abc464_b	full	T076:primary,T065:supporting			0	問題文にかかれている操作を愚直に実装しても良いでしょう。	黒ピクセルの行/列最小最大を全走査して包囲長方形だけを出力するO(HW)。外側空行を削る操作の直接模擬も同制約内。	reviewed	
+abc464_c	selected_tags	T076:primary			0	鳥の情報を以下の通りに分解して読み取ります。	各色の個数ckと現在種類数を保持し、増減時に0との境界だけで種類数を更新するO(N+M)。初期ソート不要。操作の色変換が一括の場合のmappingを全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc464_d	full	T022:primary			0	でこの問題を解くことができます。	日iと直前の晴雨2状態だけを保持し、晴→晴/雨・雨→晴/雨の許容/費用を遷移するO(N)。全2^N晴雨列挙は満点不可として除く。	reviewed	
+abc464_e	full	T075:primary,T086:supporting			0	で上書きすると考えてみましょう。	更新クエリの時刻/値を対応位置へ記録し、右下領域最大を右下から2次元累積maxで伝播するO(HW+Q)。加算型imosではなく最大値の同じ方向性を使う。	reviewed	
+abc464_f	full	T082:primary,T065:supporting,T077:supporting,T064:supporting,T086:supporting,T177:supporting			0	このような 条件を満たさなくなるまで、	金庫をランダム順列のprefixとして盗むと読み替え、到達集合Sの確率1/C(N,abs(S))と次の期待金額を重み付けする。半分全列挙を人数別に整列し、重み・金額累積和で閾値X未満を集計。確率状態をDPでは伝播しない。	reviewed	
+abc464_g	selected_tags	T010:primary,T118:analysis_concept		連結リスト	0	文字列を S \(S\) R であるとみなします。	文字列の隣接等不等を01辺列へ変え、必要最小操作で1の個数を増やすパスmatchingの最適化へ帰着。priority queueと連結リストで最小交換を併合しO(N log N)。matchingを一般算法で解くのではなく専用貪欲。式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc465_a	full			基本算術	0	\(\displaystyle B \times \frac{2}{3}\)	3A>2Bを整数比較して2/3超の多数か判定するO(1)。浮動小数の丸め不要。	reviewed	
+abc465_b	full	T076:primary			0	時ちょうどまで) の料金は以下で求まります．	利用時間h=A..B-1を全走査し、特定時間帯[L,R)ならX、他はYを料金へ加算するO(B-A)。区間長の交差公式ならO(1)でも可能。	reviewed	
+abc465_c	selected_tags	T007:primary,T076:supporting,T264:supporting			0	まず、操作を以下のように言い換えます。	反転回数の偶奇を保持し、要素追加を論理末尾に対応するdeque前/後へ行う。最後に偶奇に従い一度取り出すO(N)。小Nなら反転模擬でも可能。実N制約を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc465_d	full	T054:primary,T080:supporting,T264:supporting			0	ある整数からある整数に置き換えることが可能な場合に辺を結んだグラフを考えると、以下のように木になることが分かります（以下の画像は	整数xの親をfloor(x/K)とする根付き木で、大きい側を親へ一段戻すLCA操作をX=Yまで繰り返す。O(log_K max(X,Y))。一般binary lifting前計算不要。	reviewed	
+abc465_e	full	T028:primary,T017:supporting,T022:supporting,T264:supporting			0	と呼ばれる手法によって解くことができます．	上限と桁数を揃え、使用数字mask、mod3、未満確定、先頭0扱いで桁DPする。次数字を10通り遷移しO(桁数*2^10*3*10)。	reviewed	
+abc465_f	full	T086:primary,T257:supporting			0	この下位問題において，求める	6桁各数字を6次元座標として10^6通りの多次元累積和を前計算し、各桁区間の直方体和を64項包除で取得する。O(6*10^6+64Q)。	reviewed	
+abc465_g	selected_tags	T085:primary,T086:supporting		剰余列集計	0	\(c_x\) を \(Ck+x\equiv 0\bmod M\) を満たす \(0\) 以上 \(K\) 未満の整数 \(k\) の個数とします。	剰余集合の連続被覆長dxと重みcxを座圧して累積和に持ち、一要素変更による差分を定数個のcx区間和で更新する。cのfloor_sum由来定義と全クエリ計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc466_a	full			最大値集計,条件判定	0	\(1\) つずつ要素を確認し、 \(X_i \geq 0\) である \(i\) が存在するかを判定すればよいです。	全Xiが負か、またはmax Xi<0かを一度走査するO(N)。	reviewed	
+abc466_b	full			種類別最大	0	各色について大きさの最大値を管理する変数を用意しておきます。	色別最大サイズを-1初期化の配列で保持し、各球の色の最大値を更新して最後に全色を出すO(N+M)。	reviewed	
+abc466_c	full	T083:primary			0	尺取り法を用いてこの問題を解くことができます。	距離判定のinteractive oracleを使い、各左点iから距離1以内の最右点Miを尺取りで求めsum(Mi-i)を出す。右端は戻らないため質問<=2N、計算O(N)。	reviewed	
+abc466_d	full	T076:primary,T012:alternative			0	以下では、2つの解法を紹介します。	操作を逆順に見て未使用の行/列へ置いた駒だけ残ると判定し、使用済み行列フラグを更新するO(N+M)。順方向の行列駒参照更新でも同制約内で可能。	reviewed	
+abc466_e	selected_tags	T022:primary			0	カード \(l, l + 1, \ldots, r - 1\) のことを単に区間 \([l, r)\) と呼びます。	反転区間は最小長の最適解では交わらないため、左から区間外/区間内等の少数状態で利益-操作費を最大化するDPへ帰着する。正確なコスト・遷移を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc466_f	full	T010:primary,T076:supporting,T264:supporting,T009:concept			0	\(0,1,\ldots,X-1\) の各整数を \(M\) で割ったあまりに置き換えることを考えます。	剰余操作で区間[0,x)を[0,M)と[0,x mod M)へ分け、同じ終端はまとめてheapに保持する。残端は半分未満へ縮むためO(N log N log X)。多重集合は区間の重複度を表す対象。	reviewed	
+abc466_g	selected_tags	T028:primary,T022:supporting,T086:supporting,T008:supporting,T264:supporting			0	最初に、 \(A\) を非負整数列として問題を解くため、各条件の \(S_i\) を \(S_i-(R_i-L_i+1)\) と変更します。	正整数列を各要素-1して非負へ移し、区間和条件を累積和Bの差分等式として整合性判定する。残自由変数の個数を桁DP等で数える具体状態と法条件を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc467_a	full			基本算術,整数比較	0	基本的な入出力の方法が載っています。	BMI=10^4*W/H^2と閾値を、分母H^2を払った整数比較で判定するO(1)。	reviewed	
+abc467_b	full			基本集計	0	それぞれの店で「お釣りを受け取った場合に比べて何円損したか」を計算してみましょう。	各店でkeepなら支払額Bi-代金Aiのお釣りを失うため、その差だけ加算して返すO(N)。	reviewed	
+abc467_c	full	T065:primary,T264:supporting			0	原案:vwxyz 最終的な \(A\) を \((A'_1,A'_2,\dots,A'_N)\) とします。	最初の変更後値s=A1' mod Mを0..M-1で列挙すると隣接和条件で全Ai'が決まる。各増分(Ai'-Ai)mod Mを足して最小化するO(NM)。	reviewed	
+abc467_d	selected_tags	T205:primary,T216:supporting			0	この問題は円そのものではなく 円の中心 が存在できる場所に注目することがポイントです。	2円それぞれの円周点2点の垂直二等分線の交わりを調べ、平行で異なるなら不可能、交点があれば円心候補としてYes。重なる直線の場合の円半径条件を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc467_e	full	T077:primary,T264:supporting,T075:supporting			0	原案:admin 最終的な \(A\) を \((A'_1,A'_2,\dots,A'_N)\) とします。	Ai'≡Ci+(-1)^(i+1)s mod Mへ変え、目的増分和はsに関して線形で剰余の折返し時だけ例外。折返しsを整列して差分更新しO(N log N)。	reviewed	
+abc467_f	full	T003:primary,T077:supporting,T085:supporting,T120:supporting			0	原案:vwxyz \(B\) が大きい方から書いていく（ \(B\) が同じ値ならばどの順に書いても変わらない）のが最適です。	返信待ちBi降順が最適なので、更新前後のBiを座圧し、要素の送信時間和と完了時刻maxを合成するセグ木で全体時間を更新する。O((N+Q)log(N+Q))。	reviewed	
+abc467_g	selected_tags	T006:primary,T001:alternative,T064:supporting,T077:supporting,T086:supporting		Merge Sort Tree	0	この問題は merge-sort tree あるいは wavelet matrix と呼ばれるデータ構造を工夫して用いると解くことが出来る問題です。	区間の値順統計と和をmerge-sort treeまたはwavelet matrixで取得し、更新/問い合わせをオフライン差分で処理する。TLE想定O(Q log^3 N)部分点と満点高速化を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc468_a	full			線形比較	0	基本的な入出力の方法が載っています。	各3連続の中央が両隣より厳密に大きい位置を全走査して数えるO(N)。	reviewed	
+abc468_b	selected_tags			区間被覆	0	あるマスが監視されていない条件は「そのマスと距離が \(D\) 以下のマスにガードマンがいない」です。	各ガード周囲D以内の監視区間を塗るか、最寄りガード距離を前後2走査して未監視マスを数える。具体N,D制約と出力を問題文で照合する。	needs_resolution	解説後半・別解の追加点検が必要
+abc468_c	full	T065:primary,T077:supporting			0	\((1,2,\ldots,N)\) を並び替えてできる整数列は \(N!\) 通りあります。	N<=10のN!順列をnext_permutation等で全列挙し、P,Qとの指定辞書順条件を検査するO(N*N!)。剰余は解法に不要。	reviewed	
+abc468_d	full	T065:primary,T073:supporting			0	まず奇数長の良い文字列の個数を求めます。	回文中心を全列挙し左右へ伸ばし、不一致対が高々1個の半径だけ数えるO(N^2)。高度な回文照合前計算は不要。	reviewed	
+abc468_e	full	T086:primary,T236:supporting			0	整数 \(n\) に対し \(\displaystyle H_n = \sum_{k=1}^n\frac1k\) とします。	平均和を累積和Brと調和数Hr=sum(1/k)でsum Hr*Br - sum H(N-l+1)*B(l-1)へ変形する。mod逆元と累積でO(N+log MOD)。	reviewed	
+abc468_f	selected_tags	T022:primary,T003:supporting,T064:supporting,T012:alternative,T224:alternative			0	まず、 \(d[i][p][q]\) を「 \(k=i\) 番目の操作まで終わった時点で \(x=p,y=q\) となっている時の \(c\) の値の最大値」と定義した DP を考えます。	3次元naiveDPからmax(x,y)の冗長性を除き、min(x,y)=pの最大cだけ保持。範囲最大/更新をセグ木へ載せO(N log N)。LISやset別解は源文追加確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc468_g	selected_tags	T024:primary,T022:supporting,T060:supporting,T077:analysis_concept			0	まず、順列 \(P\) は必ず \((1)\) と \((1,2,\ldots,N)\) の並び替えを連続部分列として含むので \(S_1=\) x または \(S_N=\) x の場合答えは \(0\) です。	許可prefix長oの位置で独立因子へ分け、1から挿入する順列DPで区間因子dnを前計算し積を取るO(N^2)。実ソートは不要、順列/位置の順序の表現。漸化式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc469_a	selected_tags			基本算術	0	基本的な入出力の方法が載っています。	車両の前後番号と指定位置の差を基本算術で求めて返すO(1)。具体質問の方向を問題文照合する。	needs_resolution	解説後半・別解の追加点検が必要
+abc469_b	full	T073:primary			0	原案:vwxyz 各椅子について条件を満たすかどうかを判定すればよいです。	各椅子が空かつ左右も空かを走査するO(N)。両端に空席番兵を付ければ同じ3条件だけで判定可能。	reviewed	
+abc469_c	full	T073:primary			0	原案:vwxyz 高橋君が持っている袋の個数は常に \(k\) 個です。	はずれ記号xの位置を走査し、k番目のはずれで行動終了するならそのprefix長、xがk個未満なら全長を返すO(N)。	reviewed	
+abc469_d	full	T012:primary,T065:supporting			0	原案:vwxyz \(A_1,B_1\) の少なくとも一方は \(x,y\) のいずれかと等しいです。	一つ目の対(A1,B1)のどちらかが選ぶx/yに含まれるので2通りを試し、残りで候補を含まない対の2要素の積集合から相方を求める。有限候補を重複除去してO(N)。	reviewed	
+abc469_e	selected_tags	T064:primary,T083:supporting,T086:supporting			0	原案:vwxyz 答えで二分探索します。	目標資格値を二分探索し、変換した接頭辞和Sで指定の長さ/時間条件を満たす区間にS_l<=S_rがあるかを尺取りと接頭辞minでO(N)判定する。O(N log値)。正確な変換式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc469_f	full	T233:primary,T005:supporting,T053:supporting,T160:supporting			0	原案:vwxyz クラスカル法ですべての辺を列挙しようとすると実行時間に間に合わないので、工夫する必要があります。	g=max Aから降順にgの倍数を持つ頂点群をDSU併合し、gcd重みgを足す暗黙Kruskal最大木。倍数列挙総数M log MでO((N+M log M)alpha(N))。	reviewed	
+abc469_g	selected_tags	T030:primary,T022:supporting,T264:supporting,T073:supporting			0	\(T\) の長さを \(M\) とおきます。	各操作の文字列効果をTの回転量aと反転bit bの二元組へ圧縮する。K-bonacciで合成したbの周期性とaの線形遷移から行列累乗等で巨大Nの作用を求める。周期と最終状態の式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc470_a	full	T076:primary,T264:supporting			0	基本的な入出力の方法が載っています。	1..Nを順に見て3の倍数ならFizz、それ以外は数値を出すO(N)。	reviewed	
+abc470_b	full			頻度集計,貪欲法	0	現状ある \(N\) 個のボールの中で最も多い色に全てのボールを合わせるのが最適です。	色頻度の最大cを求め、他のN-c個だけ最多色へ塗り替えるのが最適。O(N+色数)の基本頻度集計。	reviewed	
+abc470_c	selected_tags	T059:primary,T076:supporting			0	\(A\) の総 \(\mathrm{XOR}\) を \(f(A)\) と表します。	全体XORを保持し一要素+1では旧値と新値をxorして差分更新する。全体-1等の一括操作は各値のイベントが有限回となる管理で償却O(N+Q)。2種目の正確な操作を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc470_d	full	T076:primary			0	実装 順列 \(P\) を置換 \(\begin{pmatrix} 1 & 2 & \dots & N \\ P_1 & P_2 & \dots & P_N \end{pmatrix}\) と同一視するとき，種類 \(2	Pと逆置換Pinvの両配列を持ち、swapでは両方の対応2点だけ変更、inverse操作では参照を交換する。全体O(N+Q)、各問O(1)。	reviewed	
+abc470_e	selected_tags	T026:primary,T022:supporting,T080:supporting			0	繰り返しの1回(2枚のカードを表にし、スコアを得るかライフが減る)を ターン と呼ぶことにします。	残ライフと未知/既知の単独カード数等へ最適方策の状態を圧縮し、次に未知を引く場合の期待獲得ペア数をメモ化計算する。前回の確率的状態式を維持、正確な圧縮後計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc470_f	selected_tags	T005:primary,T060:supporting,T177:supporting,T136:analysis_concept		置換群,偶置換	0	必要十分条件の考察 (置換) 文字の位置を頂点番号とし，各操作を辺 \((A_i, B_i)\) とした \(N\) 頂点 \(M\) 辺の無向グラフ \(G\) をおきます．	許されたswap辺の連結成分ごとに文字並べ方を数え、操作回数の偶奇に合う置換だけが到達可能という条件を処理する。重複文字で偶奇制約が消える場合とGoogol回への余分な2操作を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc470_g	selected_tags	T002:primary,T154:supporting,T064:supporting,T014:alternative			0	言い換え \(0\) 以上 \(k\) 以下の整数をすべて \(1\) 個以上含む区間の集合を \(S_k\) とおきます．明らかに \(k \geq N\) のとき \(S_{k} = \emptyset\) です．	mexの和を、0..kを全て含む区間数sum_k abs(Sk)へ主客転倒する。値追加時の左右端条件を遅延セグ木/平衡木で差分更新し集計する。各ノード値と全制約計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc471_a	selected_tags			条件分岐	0	いずれかの条件を満たしているかを管理する Boolean 変数 \(\mathrm{hasnine}\) を，初期値を偽として持っておきます． \(4\) つの条件ごとに，満たしていれば \(\mathrm{hasnin	9について問題で指定された4条件を個別に検査し論理和で判定するO(1)。具体4条件を問題文で照合する。	needs_resolution	解説後半・別解の追加点検が必要
+abc471_b	full	T008:primary,T073:supporting			0	\(2\) つの回答を同じとみなすことは、 \(2\) つの回答をともに全て小文字に変換したとき文字列として一致することと同値です。	全回答を小文字へ正規化し文字列キーのmapで頻度集計するO(総文字数 log N)。小制約で回答対を直接比較しても可。	reviewed	
+abc471_c	selected_tags	T012:primary,T076:supporting,T064:supporting,T077:alternative,T011:alternative			0	各行動のタイミングにおいて、高橋君の現在の座標 \(X\) から最も近いクッキーとして考えられるのは「座標が \(X\) 未満のうち最大のもの」「座標が \(X\) より大きいうち最小のもの」のどちらかです。	現在位置の左右で最も近い未回収クッキーをordered setから取って比較し、選んだ点を削除して移動するO(N log N)。整列2方向列の二分管理/FIFO別解は全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc471_d	full	T010:primary,T076:supporting			0	時刻 \(t_0\) に残量 \(w_0\) で挿入したバッテリーについて，時刻 \(t\) における残量は \(w = \min(w_0 + (t - t_0),\ V)\) です．これは， \(u_0 := w_0	バッテリー挿入時のu=w-tを最大ヒープに持つ。時刻tの残量min(t+u,V)はuに単調なので最大uを取り出すだけでよい。各問O(log Q)。	reviewed	
+abc471_e	full	T177:primary,T060:supporting,T236:supporting			0	\(N=1\) のとき答えは明らかです。	K球部分集合の和の二乗を各Ai^2とAiAjへ展開し、包含確率K/N、K(K-1)/(N(N-1))を掛けてC(N,K)を戻すO(N+log MOD)。期待値は直接式でDPを使わない。	reviewed	
+abc471_f	selected_tags	T077:primary,T025:alternative,T022:supporting			0	\(L=\max_i |S_i|\) とします。	選んだ文字列をab>baの連結比較で最適順へ並べ、K個を選ぶ最大連結数のDP/貪欲を行う。元の桁数不変条件から選択順を導く具体状態と全計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc471_g	selected_tags	T132:primary,T196:supporting,T127:supporting			0	本稿では，多項式 \(P\) における \(x^i\) の係数を \([x^i] P\) と表記し，この表記を多変数多項式にも拡張します． 言い換え 母音の集合を \(\mathbf{V}\) と表記します． 記号列 \	音節数を隣接2記号の母音/非母音条件へ直し、シフトkによる記号対の位置を周期畳み込みで全k一括集計する。O(K log K+N)等の2変数から一次元への対応を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc472_a	selected_tags	T073:primary		基本入力出力	0	基本的な入出力の方法が載っています。	入力文字列または整数を指定のA文字列へ写す固定操作。問題文の具体出力条件を確認する。	needs_resolution	解説後半・別解の追加点検が必要
+abc472_b	full	T086:primary,T065:supporting			0	端から \(i\) 番目の切れ込みで棒を折ったとき、できる \(2\) 本の棒の長さは \(L_1+L_2+\cdots+L_i\) と \(L_{i+1}+L_{i+2}+\cdots+L_N\) です。	各切れ込みで左右の棒長を接頭辞和と全長との差として求め、両長差の絶対値最小を出すO(N)。愚直加算O(N^2)も小制約で可能。	reviewed	
+abc472_c	full	T076:primary,T086:supporting,T083:supporting			0	実際にシミュレーションします。	直近M日の摂取カロリー和を固定幅窓で持ち、次日を食べる/我慢する条件を模擬する。追加日とM日前の差分で全体O(N)。	reviewed	
+abc472_d	full	T066:primary,T011:supporting,T055:supporting			0	まず、各行と各列に爆弾があるかを管理することで、全ての 安全な空マス を \(O(HW)\) で列挙できます。	爆弾のある行/列を除いた安全空マス全てを距離0に多始点BFSし、各空マスの最寄り安全距離がK以内か判定するO(HW)。dequeはFIFO用で両端優先探索ではない。	reviewed	
+abc472_e	full	T178:primary,T067:supporting,T182:supporting,T054:alternative			0	結論から言えば、以下のアルゴリズムが正当です。	全域木をDFSし2色を付け、非木辺で同色端点(u,v)を見つけたら木上u-vパスへその辺を足した奇閉路を出すO(N+M)。一回だけのパス復元なのでLCA前処理は必須でない。	reviewed	
+abc472_f	full	T086:primary,T240:supporting,T172:supporting,T003:alternative			0	多角形 \(P\) の符号付き面積を \(\operatorname{area}(P)\) 、幾何中心を \(g(P)\) 、 \(3\) 点 \(A,B,C\) を頂点とする三角形を \(\triangle ABC\)	各辺と原点の符号付き三角面積・一次モーメントを累積し、切取多角形の閉辺補正を足して重心=m/areaを求めるO(N+Q)。同じ要約をセグ木で併合してO(N+Q log N)も実行可能。期待値DPではない。	reviewed	
+abc472_g	full	T033:primary,T032:supporting,T035:supporting,T229:supporting			0	簡単のため + - をまとめて空マス . として扱います。	残ったマスの左右同一状態と縦の含意制約を有向INF辺で表し、消す/残す利益をs-tカットへ載せる。Dinicで最大流を求め最小費用の実現盤面を復元する。O((HW)^3)が小制約で許容。	reviewed	
+abc473_a	full			基本集計	0	原案: admin 以下の \(2\) 点を組み合わせるとこの問題に正解できます。	配列の後半要素だけを一度走査して加算するO(N)。	reviewed	
+abc473_b	full	T008:alternative,T076:alternative		頻度集計	0	この問題は、残っているカードを順に確認して、 同じ整数が書かれているカードがないとき、そのカードは最後まで残ることが確定する。	同じ番号のカードを対で消すと最終的に各値の初期頻度の偶奇だけ残るため、頻度を数え奇数回の値を出すO(N)。小制約の直接ペア削除も可能。	reviewed	
+abc473_c	full			頻度集計,最大値	0	高橋くんが転入する前における、クラスの人数の最大値を \(M\) とします。	各クラス人数を集計し全体最大Mを取り、M-1人以上のクラスへ転入すると最大同率以上となるのでそのクラス数を数えるO(N+M)。	reviewed	
+abc473_d	full	T067:primary,T080:supporting,T065:supporting			0	辞書順で全列挙を行う際には、深さ優先探索が便利です。	prefixの加重和sを持ち、次Ai+1を0..floor((K-s)/(i+1))で昇順にDFSする。長さNで和Kなら出力。出力候補数f(N,K)に対しO(N^2 f(N,K))等で列挙順を保証。	reviewed	
+abc473_e	selected_tags	T086:primary,T008:supporting,T022:supporting			0	\(A\) の\({}\bmod K\) における累積和 \(\displaystyle S\ (S _ i=\sum _ {j=1} ^ iA _ i\pmod K)\) によって条件を言い換えると、次のような問題にな	mod Kの累積和Siへ変え、Siが等しい2点を繋ぐと得点+1の部分列DPとして最長の一致連鎖を求める。各剰余の最左/最良状態だけ保持してO(N log N)等。正確な最適区間選択式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc473_f	full	T002:primary,T086:supporting,T245:supporting,T128:analysis_concept			0	原案: physics0523 A を \(+1\) 、 B を \(-1\) に置き換えて考えます。	Aを+1、Bを-1とする累積和が全prefixで非負ならA/AB挿入で生成可能。文字変更のsuffix加算と全体最小を遅延セグ木で保持しO(N+Q log N)。括弧列は同じ非負条件の証明概念。	reviewed	
+abc473_g	full	T132:primary,T029:supporting,T011:supporting,T127:supporting			0	原案: physics0523 同じカードを \(3\) 度以上表に向ける意味はありません(書かれた整数を知るための最初、食べるための最後以外に表を向けても、ただ操作回数が増大します)。	未知k枚のとき余計な操作が発生する確率(k-1)/kなので分布母関数prod(1/k+(k-1)x/k)の係数を取る。積をqueueで二分木状に畳み込みO(N log^2 N)。前回の全隠れ配置列挙とも一致。	reviewed	
+abc474_a	full			条件分岐	0	基本的な入出力の方法が載っています。	入力文字がX以外かを検査して指定の固定値を返すO(1)。	reviewed	
+abc474_b	full			商によるグループ分類	0	原案:vwxyz 座席番号 \(P_i\) の客は \(\lfloor\frac{P_i+9}{10}\rfloor\) 番目のグループに属します。	各退場順位iと席Piの10人グループceil(i/10),ceil(Pi/10)を比較し全て一致するか検査するO(N)。	reviewed	
+abc474_c	full	T076:primary,T012:alternative			0	原案:vwxyz 一度も削除されない値はすべて最終的な \(P\) の先頭にそのままの順番で残ります。	一度も操作対象にならなかった値は元順に先頭へ残す。対象値は操作を逆順に読み初出だけ集めて反転し後ろへ付ける。O(N+Q)で逐次eraseの二乗を避ける。	reviewed	
+abc474_d	full			構築	0	原案:vwxyz すべての \(i\) で \(A_i \leq B_i\) であるならば、どのように \(W_i\) を定めても高橋君が持っている石の重みの総和が青木君が持っている石の重みの総和よりも真に大きくなること	Ai>Biとなるiが一つでもあればそのWiだけ十分巨大、他を1として重み付き総和を逆転できる。なければ不可能。O(N)の構築。	reviewed	
+abc474_e	selected_tags	T077:primary,T086:supporting		貪欲法	0	まず、 \(2\) 回以上買う商品はクーポンを貰うために買うものとして良いため、 \(2\) 回以上買う商品は \(A_i\) が最小の商品のみとして良いです。	最安Ai商品だけをクーポン購入用の反復購入候補にし、1回購入商品数kごとの不足クーポン2k-Nを補う費用を評価する。整列と累積和でO(N log N)。クーポン使用回数の境界を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc474_f	full	T112:primary,T119:supporting,T022:supporting			0	原案:vwxyz \(A\) の要素をすべて \(x\) にできるとします。	i=Nから下へ、約数更新回数Ciを目標xの一次式として求める。自分以外の倍数回数C2i,C3i...の和を差し引く約数Möbius型反転でO(N log N)。全Ci>=0となるx区間を交差して可能性を判定する。	reviewed	
+abc474_g	selected_tags	T080:primary,T117:supporting,T118:analysis_concept		構築	0	L , R , U , D の方向に動く回数をそれぞれ \(L,R,U,D\) とします。	必要条件N奇数、K偶数、N-1<=K<=(N^2-1)/2を導き、満たす場合は盤面経路を再帰的に構築する。matchingは構築の証明概念か確認し一般matchingタグを主解へはしない。構成式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc475_a	full	T073:primary			0	基本的な入出力の方法が載っています。	Sの各文字の後ろへoを一つ挿入するよう交互連結し出力するO(N)。	reviewed	
+abc475_b	full	T076:primary,T264:supporting			0	お釣りをいくら受け取るかを順にシミュレーションします。	各買物価格Aへ最小の1000円札枚数を切上げで求め、お釣り(1000-A mod1000)mod1000を受け取る操作を順に模擬するO(N)。	reviewed	
+abc475_c	full	T083:primary,T086:supporting			0	訪れる街の集合は \(S\) を含む区間になります。	訪問区間[l,r]を固定し左右端までの距離X,Yから最少移動min(2X+Y,X+2Y)を評価する。右端の単調性で尺取りしO(N)、累積距離から各判定O(1)。	reviewed	
+abc475_d	full	T253:primary,T162:supporting,T065:supporting,T073:supporting			0	条件を満たす素数が存在すれば、それは \(10^{|S|}\) 未満です。	10^len(S)未満の素数を篩で列挙し、各素数の桁と文字の対応がalphameticの同値/相違条件を満たすか検査する。O(10^L log L)程度で小さいL制約内。	reviewed	
+abc475_e	full	T070:primary,T009:concept			0	各参加者 \(i\) に対し、長さ \(K\) の数列 \(X_i\) を、 \(X_{i,j}=\begin{cases}	回答を0/1反転した後の辞書順順位を、個数付き二分Trieへ削除・追加・以下個数照会して求める。各問O(K)、全体O((N+Q)K)。FIFOは使わず多重集合は順位対象の概念。	reviewed	
+abc475_f	selected_tags	T086:primary,T060:supporting			0	数えるべきものは得られる可能性のあるマス目の状態数ですが、「 \(HW\) マスの状態」を直接取り扱うのは困難です。	同じ盤面を生む塗る矩形を最小包囲矩形へ一意化し、4辺全てに白マスがある矩形数を求める。列境界固定後の行条件を累積和で集計しO(...)を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc475_g	full	T065:primary,T067:supporting,T080:supporting,T160:supporting,T134:analysis_concept			0	正整数 \(n\) 、素数 \(p\) に対し、 \(n\) が \(p^k\) の倍数となるような最大の整数 \(k\) を \(v_p(n)\) とします。	最小の最適整数は小さい素数から指数非増加で使うので、10^18以下のその形281944候補をDFS全列挙する。約数数prod(ei+1)を更新して最大を得る。	reviewed	
+abc476_a	full	T073:primary			0	文字列の末尾の文字が e と一致するかどうかで条件分岐をし， \(S\) に適切な文字列を結合して出力すればよいです． 実装例 (Python) Python では， s[-1] によって \(s\) の末尾の文字を得る	末尾文字eの有無で付け足す語尾を決めて連結出力するO(N)。	reviewed	
+abc476_b	full	T073:primary			0	原案:vwxyz \(S\) が \(T\) にマッチするならば、 \(i=1,2,\dots,N\) について \(T_i\) は \(S_i\) か * のいずれかです。	全iでTiがSiと同じまたはワイルドカード*かを照合するO(N)。一般正規表現エンジン/automatonは不要。	reviewed	
+abc476_c	full	T077:primary,T010:alternative			0	\(k\) の昇順に答えを求めることを考えます。	prefixの上位3値だけを保持し、新Aiを含む4値から上位3つへ更新するO(N)。毎回4値ソートでO(1)、サイズ3ヒープでも可。	reviewed	
+abc476_d	selected_tags	T077:primary,T086:supporting,T083:alternative,T064:alternative,T065:supporting			0	達成可能な組合せ 商品の組合せ \(A_{i_1}, \dots, A_{i_n}, B_{j_1}, \dots, B_{j_m}\) は，以下を満たすとき，またその時に限り購入可能です． 合計金額 \(\displa	Bからm個なら安いm個を選び、総金額と必要K札枚数の2条件から買えるA数を累積和で求める。m全列挙と二分探索/尺取りでO((N+M)log(N+M))。条件の単調方向を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc476_e	full	T003:primary,T076:supporting,T245:supporting			0	各操作を順番にシミュレーションすることを考えます。	各区間の最小/最大の(値,index)をセグ木で取得して2点swap更新する。O(N+M log N)。全体値域のsetは本体に不要。	reviewed	
+abc476_f	selected_tags	T075:primary,T086:supporting			0	\(N^2\) 個あるマスそれぞれの \(f(i,j)\) の値を求めることを考えます．マス \((i,j)\) に住む参加者の人数を \(C_{i,j}\) と書くことにします． マス \((i,j)\) から \(f	各点からChebyshev距離min(max(abs(x),abs(y)),N)の寄与の2次元差分を導き、斜線上の差分更新をまとめた後2次元累積で全マス費用を得る。O(N^2)等の寄与生成を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc476_g	selected_tags	T094:primary,T117:supporting,T022:supporting,T101:analysis_concept,T077:analysis_concept			0	まず、頂点 \(L\) から頂点 \(R\) までの \(R-L+1\) 頂点あるグラフを考えます。	popcount増加鎖の最小被覆をDilworthで最大反鎖へ直し、数値増加かつpopcount非増加の最大列をbitDP等で求める。LYMは上界の証明で主計算ではない。具体状態・全制約計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc477_a	full			条件分岐	0	基本的な入出力の方法が載っています。	信号文字/番号を3ケースに分けて指定の次の色を返すO(1)。	reviewed	
+abc477_b	full	T065:primary			0	各人 \(i\) について「一線を画す」かどうかを判定することを考えましょう。	各人iについて全j!=iとの距離abs(Xi-Xj)>=Dかを二重ループで検査するO(N^2)。	reviewed	
+abc477_c	full	T086:primary,T073:supporting			0	この問題のポイントは、 \(T\) の出現位置を前計算することでクエリを高速で処理することができるようになる点にあります。	Sの各位置にTが一致するかを直接照合し指示配列Aを作る。Aの累積和からクエリ[L,R-M+1]の出現数を取る。O(NM+Q)で小M等の制約内。	reviewed	
+abc477_d	selected_tags	T012:primary,T076:supporting			0	クエリ \(1\) は「タイルが置かれているかどうか」の bool 列を切り替えることで \(O(1)\) で処理できそうです。	最終のタイル被覆を前から求めた後、塗替え対象の未処理マス集合をクエリで消費する。各マス一度しか集合から取り除かれずO(N+Q)期待等。逆順の処理内容と残色復元を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc477_e	full	T187:primary,T086:supporting,T055:supporting			0	頂点 \(N+1\) のことを中心と呼びます。	車輪中心への最短距離DvをDijkstraで求め、円周距離は累積和から時計回り/逆回りを直接計算する。各問は円周2候補と中心経由の最小をO(1)比較する。O(N log N+Q)。	reviewed	
+abc477_f	selected_tags	T266:primary,T002:supporting,T003:alternative,T086:supporting,T085:supporting			0	すべての入力は閉区間ですが、以下では半開区間で与えられているとします。	窓矩形の黒数をprefix型S(X,L,R)差へ変え、X昇順の平面走査中にY区間被覆数/長さをセグ木で保持して答える。O((N+Q)log(N+Q))等の動的更新を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc477_g	full	T084:primary,T047:supporting,T054:supporting,T008:supporting		木上Mo法	0	この問題は 木上の Mo’s algorithm と呼ばれるテクニックで解くことが出来る問題です。	Euler入退場列で木上パスを区間とLCA補正へ写し、Mo順に頂点採否をtoggleして値頻度の照会を処理する。O((N+Q)sqrt N)程度、LCA前処理O(N log N)。	reviewed	
+abc478_a	selected_tags	T076:primary			0	解法1 問題文に書かれている操作をそのままシミュレーションすればよいです。	ぶどうの指定操作を回数分そのまま模擬し個数を更新する。小さい制約でO(操作回数)。具体減少/停止条件を問題文で照合。	needs_resolution	解説後半・別解の追加点検が必要
+abc478_b	full	T065:primary			0	相異なる \(3\) 種類のトッピングを選ぶ方法を全て試せばよいです。	N種から異なる3種の添字i<j<kを全列挙し条件を満たす組を数えるO(N^3)。	reviewed	
+abc478_c	full	T077:primary			0	\(A _ 1,A _ 2,\ldots,A _ N\) を昇順に並べた列を \(X=(X _ 1,X _ 2,\ldots,X _ N)\) とします。	全体整列列XとAiが異なる最左/最右を求め、両端の差<Kなら長さK窓の一回sortで整列可能と判定。O(N log N)。既に整列ならYes、線形別解も可能。	reviewed	
+abc478_d	full	T077:primary,T266:supporting,T008:supporting			0	\(N\) 個の集合 \(S _ 1,S _ 2,\ldots,S _ N\) を時系列だと思うことで、問題は以下のように読み替えられます。	値Xiを区間へ追加する開始/終了イベントを位置順に整列し、現在の値別多重度が0を跨ぐ時だけ異なる値数を更新する。O(M log M+N)等。	reviewed	
+abc478_e	full	T052:primary,T049:analysis_concept			0	条件を緩め、すべての条件が \(t _ i=0\) であるときを考えます。	すべて<=条件のグラフをSCC分解し、厳密<辺の両端が同SCCなら不可能、そうでなければ縮約DAG順で値を割当てられる。O(N+Q)。実topological順の構築を求めないなら証明概念へ。	reviewed	
+abc478_f	selected_tags	T013:primary,T022:supporting,T067:supporting,T010:analysis_concept		木の構築条件	0	木 \(T\) を、頂点 \(1\) を根とする根つき木とします。	最小頂点優先探索の出力Pから各頂点の許容親集合を、直前のより大きい順位位置miで制限して数える。単調スタックでmiを求める等の主解を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc478_g	selected_tags	T044:primary,T081:supporting,T077:supporting		Minkowski和	0	0-indexed で考えます。	点集合P[l,r)と内分点集合Q[l,r)の凸包を左右へ分割し、線形変換した左右凸包のMinkowski型和と和集合凸包をマージする。頂点数O(r-l)を用いる全体O(N log N)等の実式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc479_a	full			基本集計	0	基本的な入出力の方法が載っています。	奇数番目の配列要素だけ走査して加算するO(N)。添字0始まりでは偶数indexを選ぶ。	reviewed	
+abc479_b	full	T073:primary			0	for ループなどで文字列を先頭から順に調べます。	Sを左から走査し連続R数curを更新、非Rで0に戻し全体最大を得るO(N)。	reviewed	
+abc479_c	selected_tags	T061:primary,T065:supporting,T150:alternative			0	体積の総和についての制約を考えないとき、各おかずについて弁当箱に詰める・詰めないの \(2\) 通りの選択肢があるため、全体として \(2^N\) 通りの選択肢があります。	Nが小さいので全2^N弁当部分集合の体積と美味しさを評価しW以内の最大を取るO(N2^N)。容量上限次第のナップサック別解を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc479_d	full	T086:primary,T055:analysis_concept			0	対称性から、 \(s < t\) であるクエリについて考えればよいです。	s<tならmin(Rs,Ls+prefixMinR[s-1])、s>tなら対称式で最短費用を直接求める。L,Rの前後累積minをO(N)前計算して各問O(1)。Dijkstra等は不要。	reviewed	
+abc479_e	full	T027:primary,T067:supporting,T066:alternative,T075:supporting			0	木を頂点 \(1\) を根とした根付き木であるとします。	木を根付きにし各辺切断後成分サイズを子部分木和で求め、大きい側の対象頂点への寄与を部分木差分へ加算する。最後に親から子へ累積してO(N)。BFS/DFSは木順生成の補助。	reviewed	
+abc479_f	selected_tags	T001:primary,T086:supporting,T060:supporting			0	人の番号を適切に付け替えることで、 \(S_1 < S_2 < \ldots < S_N\) が成り立つとしてよいです。	0を空席とする二列の最少隣接swapを、非0の対応順序の転倒数と0跨ぎ寄与へ分解する。疎な要素だけBITで転倒数を数え巨大長を累積空席数で補正する。O(N log N)等の全パラメータを全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc479_g	selected_tags	T077:primary		幾何最適化	0	\((A_i+c_i)(B_j+d_j) = (A_j+c_j)(B_i+d_i)\) とはどういうことでしょうか？ 上記の等式が成り立つことは、 \((A_i+c_i) : (B_i+d_i) = (A_j+c_j)	全点を原点を通る同一直線へ動かす比率最適化へ変形し、各点の傾き順に整列して水平/垂直移動の費用和を最小化する。片側移動だけで最適となる交換則と評価式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc480_a	full	T065:primary		座標判定	0	基本的な入出力の方法が載っています。	2*2盤の隣接4組を確認して指定A,Dが辺を共有するか判定するO(1)。	reviewed	
+abc480_b	full	T073:primary,T065:supporting			0	原案:vwxyz 各投票用紙がどの候補者の有効票になるか（もしくは無効票になるか）を判定します。	投票紙と候補名を直接照合し、完全一致を優先。なければ同長でHamming距離1の候補が一人だけか検査して票を加える。O(NML)。	reviewed	
+abc480_c	selected_tags	T077:primary,T075:alternative,T085:alternative			0	原案:vwxyz 時刻 \(0\) から時刻 \(T\) までの間で青木君がボタンを押すだけでは連続してお湯が出ないような区間があるとします。	自動給湯区間をA時刻順にマージして、覆われない長さdごとceil(d/K)回を補うO(N log N)。差分imos+座圧別解の必要性と端点0,T処理を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc480_d	full	T086:primary,T064:supporting			0	\(B\) の累積和を \(T\) とします。	prefixを順に連結した巨大列Bのprefix和を、三角数長の完全ブロックと最後のA-prefixへ分解する。ブロック境界を二分探索し、Aの累積和の累積和からO(log N)で答える。	reviewed	
+abc480_e	selected_tags	T065:primary,T064:supporting			0	初項と数列の長さを全探索します。	初項と長さをNの積上限から制限して全列挙し、公差dに関する総積の単調性で二分探索する。公差0/長さ1等の除外と候補総数を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc480_f	selected_tags	T017:primary,T022:supporting,T264:supporting			0	原案: vwxyz \(T=\frac{S}{M}\) とします。	ケーキ集合maskごとに取り切った和Tの倍数グループ数最大を保持し、次ケーキ追加の残余和はmask和から復元する。O(N2^N)。入力整列は不要な別記か全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc480_g	full	T022:primary,T002:supporting,T013:supporting,T245:supporting			0	原案:vwxyz \(A\) の \(i\) 番目から \(j\) 番目を \(A[i:j+1]\) と表すことにします。	区間のmax-minを費用とするprefix分割DPを、左右それぞれの単調stackで変化区間だけ更新する。dp[j]+max-minを遅延セグ木の区間加算/最小で保持しO(N log N)。	reviewed	
+abc481_a	full			基本算術	0	解法 1 \(A+B\) の値を求めて文字列に直し，その長さを得ればよいです． 解法 2 \(1 \leq A, B \leq 9\) という制約下において， \(A+B \geq 10\) ならば答えは \(2\) ，	A+Bを計算し10以上なら2桁、未満なら1桁と出すO(1)。文字列化して長さを取る実装も可能。	reviewed	
+abc481_b	full	T065:primary			0	各 \(i\) について「 \((i, A_i)\) と \((i+1, A_{i+1})\) を結ぶ線分が \(y = K\) となるか？」を数えることにすると、端点について二重に数えてしまう事があることに注意しましょ	各頂点Ai=Kの交点を一度数え、各開線分でKを跨ぐ交点を別に数えるO(N)。K上の水平線分なら交点無限の例外を判定する。端点重複を避ける。	reviewed	
+abc481_c	full	T008:primary			0	名前が既出かどうかの判定を毎回愚直に行おうとすると，全体で最悪 \(\Theta(Q^2)\) 時間かかることになり，これを通すのは現実的ではありません．なので，より効率の良い方法を考えることになります． この問題は，連	名前->IDのmapを保持し、既出なら対応ID、新規なら最大ID+1を割り当て挿入して出す。O(Q log Q)またはhash期待O(Q)。	reviewed	
+abc481_d	full	T144:primary,T007:supporting,T055:supporting,T187:alternative,T010:supporting,T077:supporting			0	「惑星」を頂点，「航路」を辺とした有向グラフを考えます． 各頂点について，そこから直接辺で結ばれた頂点のリストを作り，空でないならばそのうち番号最小の頂点につながる辺を重み \(0\) ，他の頂点につながる辺を重み \(	各頂点の最小番号行先へ0、他へ1の重みを付け、0-1 BFSでS-T最短を求めるO(N+M)。Dijkstraでも可。最小行先取得を整列する保存実装はO(M log M)だが線形minでもよい。	reviewed	
+abc481_e	full	T043:primary,T083:supporting,T240:analysis_concept			0	求めたいものは「星を原点の周りに反時計回りに並べた時、角度の幅が \(180^\circ\) 未満となる連続した星の個数の最大値」です。	原点周りの偏角ソート後、角幅180度未満の最大連続点数を2周列の尺取りで求めるO(N log N)。外積は角比較の補助で面積集計ではない。	reviewed	
+abc481_f	selected_tags	T187:primary,T010:supporting,T264:supporting			0	はじめに naive な dijkstra を提案し、それを高速化しましょう。	頂点ごとの最小スコアだけを確定順に取り出すDijkstraが、辺遷移の単調性と最小スコア支配性から成立する。順位圧縮で巨大スコアを扱う主解とmod処理を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc481_g	full	T127:primary,T081:supporting,T132:supporting,T196:supporting,T077:supporting,T029:supporting			0	定式化 \(A_1, \dots, A_N, B_1, \dots, B_N\) は相異なるとしても一般性を失いません(適当なタイブレークで順序を付ければ一般の場合でも成立する)． \(A_1, \dots, A_N,	各パンケーキの順位分布の母関数を定義し、その重み付き和を区間(prodL,prodR,sumLMR)で分割統治併合するO(N log^2 N)。本文Mの1/2欠落に対し保存実装cmの正規化を採り、全選択列挙と一致を前回確認済み。	reviewed	
+abc482_a	selected_tags	T073:primary,T264:alternative		頻度集計	0	基本的な入出力の方法が載っています。	Sのo個数を数え、寿司の指定グループ単位で答えを整数計算するO(N)。T264を付けるほど剰余が中心か、問題文の計算式を確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc482_b	full	T065:primary			0	マス目において一列に並んだ \(5\) マスの集合としてあり得るものすべてについて「その \(5\) マスのうち印が書き込まれていないマスの数（ \(S\) の対応する文字が . であるマスの数）」の最小値が答えになりま	5*5の行・列・2対角線の計12ラインごとに未印マス数を数え、最小を出すO(25)。文字列入出力だけで独立文字列処理技法とはしない。	reviewed	
+abc482_c	full	T077:primary,T064:supporting			0	この問題では行と列を別々に考えることがポイントです。	駒の行番号列と列番号列を別々に整列し、クエリの帯[L,R]内個数をlower_bound/upper_boundの差で求めるO(N log N+Q log N)。	reviewed	
+abc482_d	selected_tags			運動の同一視,幾何の場合分け	0	以下では数直線の負方向、正方向をそれぞれ左、右で表すことにします。	人のすれ違いを運動交換として除去する等価性でゾンビ到達時刻を端点距離式へ帰着する。中間kの最適方向・時間の式を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc482_e	selected_tags	T067:primary,T066:alternative,T027:supporting,T060:supporting			0	\(2\) 頂点 \(u,v\) について、 \(u,v\) を結ぶ単純パスの長さを \(u,v\) 間の距離とし、 \(\operatorname{dist}(u,v)\) と書くことにします。	木の直径と中心を求め、直径偶奇で中心一つ/二つに分けて最遠層の色組合せを数える。中心別部分木の到達色を木DPで併合する具体式と計算量を全文確認。	needs_resolution	解説後半・別解の追加点検が必要
+abc482_f	full	T144:primary,T007:supporting,T134:supporting,T264:supporting,T022:supporting			0	まず、 \(N^t\) の約数であることは \(t\) 個の \(N\) の約数の積で表せることと同値であることに注目します。	Nを重複付き素因数列pへ分解し、現在剰余r・次素因数index jを状態に、掛ける/飛ばすを0/1費用で遷移する。約数全列挙のBFSは制約外、0-1 BFS/DPでO(sqrt N+M log N)。	reviewed	
+abc482_g	selected_tags	T079:primary,T136:supporting,T248:supporting,T118:concept,T104:analysis_concept		線形マトロイドパリティ	0	この問題は 線形マトロイドパリティ の練習問題です。	次数調和を線形matroid parityへ変形し、行列へ乱数を代入したrankで最大実現可能部分を求める。O((sum Ai)^3)で十分、一般matchingの代替ではなく線形表現が必要。具体行列を全文確認。	needs_resolution	解説後半・別解の追加点検が必要

@@ -1,0 +1,52 @@
+{
+  "checks_passed": true,
+  "problem_id": "abc319_c",
+  "meaning": "dp[mask] counts unrejected revelation orders; divide each transition by 9-popcount(mask) for probability DP.",
+  "cases": [
+    {
+      "board": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "valid_orders": 362880,
+      "permutations": 362880
+    },
+    {
+      "board": [
+        1,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "valid_orders": 241920,
+      "permutations": 362880
+    },
+    {
+      "board": [
+        1,
+        2,
+        1,
+        2,
+        3,
+        3,
+        4,
+        5,
+        6
+      ],
+      "valid_orders": 161280,
+      "permutations": 362880
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+﻿from record_resolution_0 import *
+put('abc422_g','T127:primary,T132:supporting,T177:supporting,T236:supporting,T060:supporting','問題1はA/B/Cの倍数次数だけ係数1の3多項式、問題2は倍数次数iだけ係数1/i!の3多項式を作る。NTT対応畳込みを二度行いN次係数を取り、問題2のみN!を掛ける。逆階乗前計算込みO(N log N)。Fibonacciと再帰の記述は母関数導入例で本問の手法ではない。',anchor='今回の問題の答え')
+put('abc423_e','T086:primary,T003:alternative,T120:supporting','Ajの寄与係数(j-L+1)(R-j+1)を-j^2+(L+R)j+(1-L)(R+1)に展開。Aj,jAj,j^2Ajのprefix和3本からO(N+Q)。source1はprefix列Bに(sum,len,区間答え)を持つ非可換モノイドsegtreeを載せ交差寄与len左*sum右-sum左*len右を合成してO((N+Q)log N)。',anchor='累積和を持っておき')
+put('abc423_g','T065:primary,T236:supporting,T098:supporting,T134:supporting,T097:supporting,T176:supporting,T264:supporting,T073:supporting','追加桁は高々9（K<=1e9）。上桁数+下桁数=9を分配し短い側を全列挙。上側未知ならh=10^(|S|+下桁数) mod K,g=gcd(h,K)で合同式をgで割り、mod K/gの逆元を使い最小上側を得る。K/gの素因数からphi(K/g)を求め逆元を累乗。候補文字列を(長さ,辞書順)で比較。O(|S|d+sqrt K+d*10^(d/2)log K)。',anchor='最大公約数を',uncertainty='本文のEuler逆元指数phi(a)-1はphi(k)-1、gで除した後の剰余もK/gが正しい。元コードはphi(K/g)とmod(K/g)を使っていることを確認。')
+put('abc424_e','T064:primary,T010:alternative,T077:supporting','長さをD以下にする分割数は各棒で最小k:Ai/2^k<=Dに対する2^k-1。K回の境界Dを二分探索し、境界長だけ残余回数分割して高々N+1種の(長さ,本数)からX番目を選ぶ。2^30倍整数版はO(N log値域 log K)。source2はheapで同長由来の本数をまとめ分割しO(N log N log K)。',anchor='問題4')
+save()

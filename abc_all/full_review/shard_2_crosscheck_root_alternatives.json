@@ -1,0 +1,12 @@
+{
+  "status": "all_passed",
+  "comparisons": {
+    "abc378_e_mod_divide_conquer": 21840,
+    "abc386_f_band_01bfs_and_wavefront": 15376,
+    "abc407_f_rmq_binary_and_second_difference": 5460
+  },
+  "notes": [
+    "Sources were read independently; tests compare each reference-derived alternative against direct brute force on bounded exhaustive instances.",
+    "RMQ test uses direct maxima as a black-box static query; O(log N) segment-tree queries give the stated O(N log^2 N) boundary method."
+  ]
+}

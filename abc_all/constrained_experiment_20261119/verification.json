@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "synthetic_and_data_checks": [
+    "unconstrained exact coheights match SciPy average linkage on 4 continuous-distance examples",
+    "cannot-link propagates through intermediary tag and remains valid at cut above every distance",
+    "must-link transitive closure forced at zero; average distances weighted by original tag counts",
+    "contradictory transitive must-link/cannot-link rejected",
+    "one-tag and two-tag inputs supported",
+    "12 forests independently replayed: each non-forced merge is globally closest admissible original pairwise mean",
+    "CL holds in every merged node, all cuts 0..1, and artificial cuts 2 and 100",
+    "forest roots are an exact partition and no admissible root pair remains",
+    "all 132 cut metrics independently recomputed",
+    "all 36 exported cluster memberships match cuts",
+    "all frozen annotations, SVD and NMF artifacts unchanged"
+  ],
+  "forests_verified": 12,
+  "metrics_verified": 132,
+  "independent_human_validation": false,
+  "verifier_sha256": "05d61c7a7ad163402b4f99994cb9b0371dda927ead2bb42f48afb0c56f197e06",
+  "current_script_sha256": "0f092ee288d77ee992f5d02295250cacfb42970b7f704b604b572acc953c389e"
+}

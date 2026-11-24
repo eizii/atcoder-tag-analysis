@@ -1,0 +1,244 @@
+﻿problem_id,tag_id,decision,role,reason,evidence_quote,evidence_urls,scope
+abc001_3,T264,include,alternative,風向の16区分を整数演算と剰余で循環させる解法。風速は丸めと区間判定であり、探索やDPを強制しない。,((Dis * 10 + 1125) / 2250) % 16,https://img.atcoder.jp/abc001/editorial.pdf,full
+abc010_2,T264,include,primary,花びら枚数の2と3による剰余条件を満たすまで減らす。解説の占い手順の直接シミュレーションも制約内の別解。,あまりを利用する,https://img.atcoder.jp/abc010/editorial.pdf,full
+abc010_2,T076,include,alternative,花びら枚数の2と3による剰余条件を満たすまで減らす。解説の占い手順の直接シミュレーションも制約内の別解。,あまりを利用する,https://img.atcoder.jp/abc010/editorial.pdf,full
+abc010_3,T065,include,primary,各候補の家について始点からの距離と終点までの距離の和を計算し、T*V以下かを全候補について調べる。経路の最適化アルゴリズムは使わない。,寄り道出来る場所の候補が与えられます。,https://img.atcoder.jp/abc010/editorial.pdf,full
+abc015_4,T059,exclude_from_selected_solution_tags,,処理した枚数・使用枚数・幅を状態にする個数制約つきナップサックDP。DFSによる2^N列挙は満点制約に不適、XORは他問題との比較のための言及。,非常に有名な「ナップサック問題」の亜種です,https://img.atcoder.jp/abc015/editorial.pdf,full
+abc015_4,T067,exclude_from_selected_solution_tags,,処理した枚数・使用枚数・幅を状態にする個数制約つきナップサックDP。DFSによる2^N列挙は満点制約に不適、XORは他問題との比較のための言及。,非常に有名な「ナップサック問題」の亜種です,https://img.atcoder.jp/abc015/editorial.pdf,full
+abc015_4,T150,include,primary,処理した枚数・使用枚数・幅を状態にする個数制約つきナップサックDP。DFSによる2^N列挙は満点制約に不適、XORは他問題との比較のための言及。,非常に有名な「ナップサック問題」の亜種です,https://img.atcoder.jp/abc015/editorial.pdf,full
+abc015_4,T022,include,supporting,処理した枚数・使用枚数・幅を状態にする個数制約つきナップサックDP。DFSによる2^N列挙は満点制約に不適、XORは他問題との比較のための言及。,非常に有名な「ナップサック問題」の亜種です,https://img.atcoder.jp/abc015/editorial.pdf,full
+abc031_d,T065,include,primary,各数字に対応する長さ1〜3を3^K通り列挙する。固定した長さで文字列を切り分け、同じ数字への割当の一致と連結の整合を検証する。,文字列の長さが固定された場合どうなるでしょうか?,https://img.atcoder.jp/abc031/editorial.pdf,full
+abc031_d,T073,include,supporting,各数字に対応する長さ1〜3を3^K通り列挙する。固定した長さで文字列を切り分け、同じ数字への割当の一致と連結の整合を検証する。,文字列の長さが固定された場合どうなるでしょうか?,https://img.atcoder.jp/abc031/editorial.pdf,full
+abc036_c,T085,include,primary,相異なる値を昇順に並べ、各値を0始まりの順位に写す座標圧縮。N=10^5に対しソートでO(N log N)で構成できる。,大小関係を保存したまま座圧のデータを圧縮,https://atcoder.jp/contests/abc036/tasks/abc036_c,full
+abc036_c,T077,include,supporting,相異なる値を昇順に並べ、各値を0始まりの順位に写す座標圧縮。N=10^5に対しソートでO(N log N)で構成できる。,大小関係を保存したまま座圧のデータを圧縮,https://atcoder.jp/contests/abc036/tasks/abc036_c,full
+abc036_d,T027,include,primary,N頂点N-1辺の連結グラフは木。各頂点を白・黒にした部分木の塗り方を状態にし、白は子の白黒の和、黒は子の白のみを掛け合わせるO(N)木DP。,両端の島が黒で塗られているような橋があってはいけません。,https://atcoder.jp/contests/abc036/tasks/abc036_d,full
+abc036_d,T060,include,primary,N頂点N-1辺の連結グラフは木。各頂点を白・黒にした部分木の塗り方を状態にし、白は子の白黒の和、黒は子の白のみを掛け合わせるO(N)木DP。,両端の島が黒で塗られているような橋があってはいけません。,https://atcoder.jp/contests/abc036/tasks/abc036_d,full
+abc036_d,T260,include,concept,N頂点N-1辺の連結グラフは木。各頂点を白・黒にした部分木の塗り方を状態にし、白は子の白黒の和、黒は子の白のみを掛け合わせるO(N)木DP。,両端の島が黒で塗られているような橋があってはいけません。,https://atcoder.jp/contests/abc036/tasks/abc036_d,full
+abc037_c,T086,include,primary,累積和で各長さK区間の和をO(1)で求め、N-K+1区間を合計するO(N)解法。全区間の各要素を毎回足すO(NK)解法は採用しない。,長さ K の連続する部分列,https://atcoder.jp/contests/abc037/tasks/abc037_c,full
+abc037_c,T060,include,concept,累積和で各長さK区間の和をO(1)で求め、N-K+1区間を合計するO(N)解法。全区間の各要素を毎回足すO(NK)解法は採用しない。,長さ K の連続する部分列,https://atcoder.jp/contests/abc037/tasks/abc037_c,full
+abc037_d,T022,include,primary,値の大小で辺を向けるとDAGになる。値の降順にdp[v]=1+sum(dp[u])を計算して全始点の経路数を足す。降順ソートはこの実装の補助。,今いるマスより大きな整数が書かれたマスに移動,https://atcoder.jp/contests/abc037/tasks/abc037_d,full
+abc037_d,T060,include,primary,値の大小で辺を向けるとDAGになる。値の降順にdp[v]=1+sum(dp[u])を計算して全始点の経路数を足す。降順ソートはこの実装の補助。,今いるマスより大きな整数が書かれたマスに移動,https://atcoder.jp/contests/abc037/tasks/abc037_d,full
+abc037_d,T077,include,supporting,値の大小で辺を向けるとDAGになる。値の降順にdp[v]=1+sum(dp[u])を計算して全始点の経路数を足す。降順ソートはこの実装の補助。,今いるマスより大きな整数が書かれたマスに移動,https://atcoder.jp/contests/abc037/tasks/abc037_d,full
+abc038_c,T083,include,primary,右端を伸ばし、増加しなくなったら左端を現在位置へ移す。右端ごとの有効な左端数を加算するO(N)の二ポインタ法。単にLISを求める問題ではない。,"単調増加となるような (l,r) の数",https://atcoder.jp/contests/abc038/tasks/abc038_c,full
+abc038_c,T060,include,primary,右端を伸ばし、増加しなくなったら左端を現在位置へ移す。右端ごとの有効な左端数を加算するO(N)の二ポインタ法。単にLISを求める問題ではない。,"単調増加となるような (l,r) の数",https://atcoder.jp/contests/abc038/tasks/abc038_c,full
+abc040_c,T022,include,primary,"dp[i]=min(dp[i-1]+abs(a[i]-a[i-1]),dp[i-2]+abs(a[i]-a[i-2]))。各柱までの最小費用をO(N)で計算する。",現在の柱から 1 個もしくは 2 個右にある柱,https://atcoder.jp/contests/abc040/tasks/abc040_c,full
+abc041_d,T017,include,primary,既に並べた頂点集合をビットマスクにし、すべての先行頂点が集合にある未配置頂点だけを末尾へ加えるO(N*2^N)集合DP。通常のトポロジカルソート一回とは区別。,2≦N≦16,https://atcoder.jp/contests/abc041/tasks/abc041_d,full
+abc041_d,T060,include,primary,既に並べた頂点集合をビットマスクにし、すべての先行頂点が集合にある未配置頂点だけを末尾へ加えるO(N*2^N)集合DP。通常のトポロジカルソート一回とは区別。,2≦N≦16,https://atcoder.jp/contests/abc041/tasks/abc041_d,full
+arc074_b,T011,exclude_from_selected_solution_tags,,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。,優先度付きキュー,https://img.atcoder.jp/arc074/editorial.pdf,full
+arc074_b,T022,exclude_from_selected_solution_tags,,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。,優先度付きキュー,https://img.atcoder.jp/arc074/editorial.pdf,full
+arc074_b,T032,exclude_from_selected_solution_tags,,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。,優先度付きキュー,https://img.atcoder.jp/arc074/editorial.pdf,full
+arc074_b,T033,exclude_from_selected_solution_tags,,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。,優先度付きキュー,https://img.atcoder.jp/arc074/editorial.pdf,full
+arc074_b,T060,exclude_from_selected_solution_tags,,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。,優先度付きキュー,https://img.atcoder.jp/arc074/editorial.pdf,full
+arc074_b,T077,exclude_from_selected_solution_tags,,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。,優先度付きキュー,https://img.atcoder.jp/arc074/editorial.pdf,full
+arc074_b,T230,exclude_from_selected_solution_tags,,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。,優先度付きキュー,https://img.atcoder.jp/arc074/editorial.pdf,full
+arc074_b,T010,include,primary,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。,優先度付きキュー,https://img.atcoder.jp/arc074/editorial.pdf,full
+arc074_b,T065,include,supporting,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。,優先度付きキュー,https://img.atcoder.jp/arc074/editorial.pdf,full
+arc080_b,T003,exclude_from_selected_solution_tags,,蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。,マスを順序付けした上で,https://img.atcoder.jp/arc080/editorial.pdf,full
+arc080_b,T010,exclude_from_selected_solution_tags,,蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。,マスを順序付けした上で,https://img.atcoder.jp/arc080/editorial.pdf,full
+arc080_b,T011,exclude_from_selected_solution_tags,,蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。,マスを順序付けした上で,https://img.atcoder.jp/arc080/editorial.pdf,full
+arc080_b,T031,exclude_from_selected_solution_tags,,蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。,マスを順序付けした上で,https://img.atcoder.jp/arc080/editorial.pdf,full
+arc080_b,T118,exclude_from_selected_solution_tags,,蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。,マスを順序付けした上で,https://img.atcoder.jp/arc080/editorial.pdf,full
+arc080_b,T076,include,primary,蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。,マスを順序付けした上で,https://img.atcoder.jp/arc080/editorial.pdf,full
+abc023_c,T060,include,primary,行ごと・列ごとの飴数の度数分布から、和がKになる組の個数を計算する。飴のあるNマスだけ二重計数の補正を行えばO(R+C+N)。全R*Cマスの探索はしない。,飴がX 個ある行(列)がY 個ある,https://img.atcoder.jp/abc023/editorial.pdf,full
+abc024_c,T076,include,primary,民族ごとに各日を走査し、現在地を含む移動区間内で目的地へ可能な限り近づける。区間内なら目的地へ到着し、そうでなければ端点へ動かすO(KD)シミュレーション。,民族は近づく方向にのみ進めば良い,https://img.atcoder.jp/abc024/editorial.pdf,full
+abc029_d,T028,include,primary,上位桁からN未満か・一致かと1の出現数を状態に桁DPし、最後に出現数で重み付けして合計できる。全整数列挙の部分点解法と分ける。これは問題文から構成した実行可能解法。,1 以上 N 以下のすべての整数を十進表記,https://atcoder.jp/contests/abc029/tasks/abc029_d,full
+abc029_d,T060,include,primary,上位桁からN未満か・一致かと1の出現数を状態に桁DPし、最後に出現数で重み付けして合計できる。全整数列挙の部分点解法と分ける。これは問題文から構成した実行可能解法。,1 以上 N 以下のすべての整数を十進表記,https://atcoder.jp/contests/abc029/tasks/abc029_d,full
+abc031_c,T065,include,primary,高橋の選択iを全列挙し、青木の選択jを左から全列挙して青木の得点が最大の最左jを採る。そのときの高橋の得点を最大化するO(N^3)。解説末尾の最小値という表記には従わず問題文の最大化に従う。,青木君が自分の得点が最大となるように,https://img.atcoder.jp/abc031/editorial.pdf,full
+abc031_c,T076,include,supporting,高橋の選択iを全列挙し、青木の選択jを左から全列挙して青木の得点が最大の最左jを採る。そのときの高橋の得点を最大化するO(N^3)。解説末尾の最小値という表記には従わず問題文の最大化に従う。,青木君が自分の得点が最大となるように,https://img.atcoder.jp/abc031/editorial.pdf,full
+abc033_c,T073,include,primary,文字列を+で分割し、0のない積の項を数える。一般の式評価や指数全探索を必要とせず、文字列の線形走査で解く。,+で区切られた部分それぞれに最低1つの0,https://img.atcoder.jp/abc033/editorial.pdf,full
+abc034_d,T064,include,primary,目標濃度xに対しw_i*(p_i-x)を降順にソートし、上位K個の和が非負なら達成可能。単調性に基づく実数二分探索で最大濃度を求める。,濃度として考えられる最大値,https://atcoder.jp/contests/abc034/tasks/abc034_d,full
+abc034_d,T077,include,supporting,目標濃度xに対しw_i*(p_i-x)を降順にソートし、上位K個の和が非負なら達成可能。単調性に基づく実数二分探索で最大濃度を求める。,濃度として考えられる最大値,https://atcoder.jp/contests/abc034/tasks/abc034_d,full
+abc039_c,T073,include,primary,白鍵の7候補を開始位置とする周期文字列と入力を比較する。周期表を用いる基本文字列処理と定数個の候補列挙。,"音階は ""ド ド# レ レ# ミ ファ ファ# ソ ソ# ラ ラ# シ"" を繰り返しています",https://atcoder.jp/contests/abc039/tasks/abc039_c,full
+abc039_c,T065,include,supporting,白鍵の7候補を開始位置とする周期文字列と入力を比較する。周期表を用いる基本文字列処理と定数個の候補列挙。,"音階は ""ド ド# レ レ# ミ ファ ファ# ソ ソ# ラ ラ# シ"" を繰り返しています",https://atcoder.jp/contests/abc039/tasks/abc039_c,full
+abc039_d,T076,include,primary,出力の白画素の周囲を元画像の白として確定し、残りを黒にした候補に問題の変換を実際に適用して一致を確認するO(HW)。文字列アルゴリズムとして扱わない。,その画素と周り 8 方向の画素,https://atcoder.jp/contests/abc039/tasks/abc039_d,full
+abc040_d,T005,include,primary,道路年と問い合わせ閾値を降順に処理する。閾値より新しい道路だけUnion-Findで併合し、問い合わせ頂点の連結成分サイズを答える。各問い合わせでの全探索は不要。,造られた年が w_j 年以前,https://atcoder.jp/contests/abc040/tasks/abc040_d,full
+abc040_d,T077,include,supporting,道路年と問い合わせ閾値を降順に処理する。閾値より新しい道路だけUnion-Findで併合し、問い合わせ頂点の連結成分サイズを答える。各問い合わせでの全探索は不要。,造られた年が w_j 年以前,https://atcoder.jp/contests/abc040/tasks/abc040_d,full
+abc041_c,T077,include,primary,身長と元の出席番号のペアを身長降順にソートし番号を出力する。O(N log N)。,出席番号を背の高い方から順に出力,https://atcoder.jp/contests/abc041/tasks/abc041_c,full
+abc125_c,T097,include,primary,"左右の累積GCDを作り、iを除くGCDをgcd(L[i],R[i+1])で計算する。各GCDはユークリッド互除法で実装可能。累積和タグは和の計算を行わないので付けない。",gcd は結合則が成り立ちます,https://atcoder.jp/contests/abc125/tasks/abc125_c,full
+abc148_c,T065,include,primary,"Aの倍数を順に列挙しBで割り切れる最初の数を求める解説主解はO(B)で実行可能。別解はユークリッド互除法でgcdを計算しA/gcd(A,B)*Bを求める。",高々B 回確認すれば十分,https://atcoder.jp/contests/abc148/tasks/abc148_c,full
+abc148_c,T264,include,supporting,"Aの倍数を順に列挙しBで割り切れる最初の数を求める解説主解はO(B)で実行可能。別解はユークリッド互除法でgcdを計算しA/gcd(A,B)*Bを求める。",高々B 回確認すれば十分,https://atcoder.jp/contests/abc148/tasks/abc148_c,full
+abc148_c,T097,include,alternative,"Aの倍数を順に列挙しBで割り切れる最初の数を求める解説主解はO(B)で実行可能。別解はユークリッド互除法でgcdを計算しA/gcd(A,B)*Bを求める。",高々B 回確認すれば十分,https://atcoder.jp/contests/abc148/tasks/abc148_c,full
+abc150_d,T097,include,supporting,a_iを割り切れる2の回数が全て同じことを確認し、a_i/2のLCMをユークリッド互除法で計算する。上限M以下のその奇数倍を数える。一般の素因数分解は不要。,最小公倍数,https://atcoder.jp/contests/abc150/tasks/abc150_d,full
+abc150_d,T264,include,supporting,a_iを割り切れる2の回数が全て同じことを確認し、a_i/2のLCMをユークリッド互除法で計算する。上限M以下のその奇数倍を数える。一般の素因数分解は不要。,最小公倍数,https://atcoder.jp/contests/abc150/tasks/abc150_d,full
+abc150_d,T060,include,primary,a_iを割り切れる2の回数が全て同じことを確認し、a_i/2のLCMをユークリッド互除法で計算する。上限M以下のその奇数倍を数える。一般の素因数分解は不要。,最小公倍数,https://atcoder.jp/contests/abc150/tasks/abc150_d,full
+abc172_c,T083,include,primary,"両列の累積和を作り、Aから読む冊数iを増やすにつれてBの冊数jを減らす。jは全体でM回しか減らずO(N+M)。全(i,j)の二重全探索を除外。",j = best0 から始めることができます,https://atcoder.jp/contests/abc172/tasks/abc172_c,full
+abc172_c,T086,include,supporting,"両列の累積和を作り、Aから読む冊数iを増やすにつれてBの冊数jを減らす。jは全体でM回しか減らずO(N+M)。全(i,j)の二重全探索を除外。",j = best0 から始めることができます,https://atcoder.jp/contests/abc172/tasks/abc172_c,full
+abc178_e,T155,include,primary,座標をx+yとx-yへ変換し、それぞれの最大値と最小値の差の大きい方を取るO(N)解法。一般の最近点対や全点対列挙は不要。,異なる二点間のマンハッタン距離,https://atcoder.jp/contests/abc178/tasks/abc178_e,full
+abc181_c,T065,include,primary,3点の組を全列挙し、2ベクトルの外積が0かを整数演算で判定する。O(N^3)でN<=100に対応。三角形の符号付き面積は共線判定の補助として記録。,相異なる 3 点であって、同一直線上,https://atcoder.jp/contests/abc181/tasks/abc181_c,full
+abc181_c,T240,include,supporting,3点の組を全列挙し、2ベクトルの外積が0かを整数演算で判定する。O(N^3)でN<=100に対応。三角形の符号付き面積は共線判定の補助として記録。,相異なる 3 点であって、同一直線上,https://atcoder.jp/contests/abc181/tasks/abc181_c,full
+abc187_f,T017,include,primary,各頂点集合が完全グラフかを前計算し、集合を部分集合へ分割するbitDPで最小被覆数を求める。部分マスク列挙で全体O(3^N)。単なる2^N回の全探索とは区別。,下位集合から順に,https://atcoder.jp/contests/abc187/editorial/488,full
+abc187_f,T193,include,supporting,各頂点集合が完全グラフかを前計算し、集合を部分集合へ分割するbitDPで最小被覆数を求める。部分マスク列挙で全体O(3^N)。単なる2^N回の全探索とは区別。,下位集合から順に,https://atcoder.jp/contests/abc187/editorial/488,full
+abc194_e,T154,include,primary,値iの出現位置に番兵0とN+1を加える。連続出現間隔がMより大きいiの最小値が、長さMの区間で欠けうる最小値。O(N)でMEXの最小化を解く。,計算量は,https://atcoder.jp/contests/abc194/editorial/827,full
+abc199_f,T030,include,primary,一操作後の期待値を表す遷移行列を構築し、そのK乗を二分累乗する。1/(2M)は法上の逆元で扱う。各ランダム経路の列挙や単なる確率DPではない。,全体で,https://atcoder.jp/contests/abc199/editorial/1167,full
+abc199_f,T176,include,supporting,一操作後の期待値を表す遷移行列を構築し、そのK乗を二分累乗する。1/(2M)は法上の逆元で扱う。各ランダム経路の列挙や単なる確率DPではない。,全体で,https://atcoder.jp/contests/abc199/editorial/1167,full
+abc199_f,T236,include,supporting,一操作後の期待値を表す遷移行列を構築し、そのK乗を二分累乗する。1/(2M)は法上の逆元で扱う。各ランダム経路の列挙や単なる確率DPではない。,全体で,https://atcoder.jp/contests/abc199/editorial/1167,full
+abc201_d,T022,include,primary,終端から各マスの得点差を逆順に計算し、高橋の手番では最大、青木では最小を取るミニマックスDP。純粋戦略の有限ゲーム探索でありミニマックス定理の名前だけとは異なる。,両者とも自分の勝敗が最適になるように行動,https://atcoder.jp/contests/abc201/tasks/abc201_d,full
+abc201_d,T038,include,primary,終端から各マスの得点差を逆順に計算し、高橋の手番では最大、青木では最小を取るミニマックスDP。純粋戦略の有限ゲーム探索でありミニマックス定理の名前だけとは異なる。,両者とも自分の勝敗が最適になるように行動,https://atcoder.jp/contests/abc201/tasks/abc201_d,full
+abc201_d,T039,include,supporting,終端から各マスの得点差を逆順に計算し、高橋の手番では最大、青木では最小を取るミニマックスDP。純粋戦略の有限ゲーム探索でありミニマックス定理の名前だけとは異なる。,両者とも自分の勝敗が最適になるように行動,https://atcoder.jp/contests/abc201/tasks/abc201_d,full
+abc225_d,T076,include,primary,前後の車両番号を配列で管理して連結・分離をO(1)で更新し、出力時だけ先頭から辿る。出力総量が制限されるため実行可能。Union-Findは分離に対応しない。,自分の前部に連結している電車の番号,https://atcoder.jp/contests/abc225/editorial/2832,full
+abc266_e,T026,include,primary,"残り回数tの最適期待値をE[t]=sum(max(d,E[t-1]),d=1..6)/6で更新する期待値DP。各出目に対する終了・続行の最適選択を含む。",スコアの期待値の最大値は残りのターン数にのみ依存,https://atcoder.jp/contests/abc266/editorial/4662,full
+abc099_c,T065,include,primary,"6の冪で引き出す額iを0〜Nで全列挙し、iの6進桁和とN-iの9進桁和を最小化する主解。金額dp[n]を硬貨1,6^k,9^kから更新するO(N log N)コインDPも実行可能な別解。",いくら引き出すかを全通り試す,https://img.atcoder.jp/abc099/editorial.pdf,full
+abc099_c,T264,include,supporting,"6の冪で引き出す額iを0〜Nで全列挙し、iの6進桁和とN-iの9進桁和を最小化する主解。金額dp[n]を硬貨1,6^k,9^kから更新するO(N log N)コインDPも実行可能な別解。",いくら引き出すかを全通り試す,https://img.atcoder.jp/abc099/editorial.pdf,full
+abc099_c,T022,include,alternative,"6の冪で引き出す額iを0〜Nで全列挙し、iの6進桁和とN-iの9進桁和を最小化する主解。金額dp[n]を硬貨1,6^k,9^kから更新するO(N log N)コインDPも実行可能な別解。",いくら引き出すかを全通り試す,https://img.atcoder.jp/abc099/editorial.pdf,full
+abc122_c,T086,include,primary,ACの開始位置を1とした配列の累積和を作り、各区間を累積和の差で答える。各クエリで全文字を走査するシミュレーションは制限内に終わらない。,問いの処理を始める前に構築,https://atcoder.jp/contests/abc122/tasks/abc122_c,full
+abc122_c,T073,include,supporting,ACの開始位置を1とした配列の累積和を作り、各区間を累積和の差で答える。各クエリで全文字を走査するシミュレーションは制限内に終わらない。,問いの処理を始める前に構築,https://atcoder.jp/contests/abc122/tasks/abc122_c,full
+abc152_d,T060,include,primary,先頭桁i・末尾桁jの数の個数c[i][j]を集計し、c[i][j]*c[j][i]を足す。全整数ペアの二重全探索は不要。,"ci,j × cj,i",https://atcoder.jp/contests/abc152/tasks/abc152_d,full
+abc159_d,T060,include,primary,"全体の同値ペア数sum(C(c_i,2))から、除いたボールの寄与c[A_k]-1を引く。二項係数は次数2の直接式で計算し、逆元や階乗テーブルは不要。",この問題をO(N) で解く,https://atcoder.jp/contests/abc159/tasks/abc159_d,full
+abc159_d,T177,include,supporting,"全体の同値ペア数sum(C(c_i,2))から、除いたボールの寄与c[A_k]-1を引く。二項係数は次数2の直接式で計算し、逆元や階乗テーブルは不要。",この問題をO(N) で解く,https://atcoder.jp/contests/abc159/tasks/abc159_d,full
+abc162_e,T060,include,primary,floor(K/d)^Nから真の倍数の個数を降順に引く約数上のメビウス反転。累乗は二分累乗で計算する。各数列に対するユークリッド互除法は行わない。,"2X, 3X, ... の個数を引いて",https://atcoder.jp/contests/abc162/tasks/abc162_e,full
+abc162_e,T119,include,primary,floor(K/d)^Nから真の倍数の個数を降順に引く約数上のメビウス反転。累乗は二分累乗で計算する。各数列に対するユークリッド互除法は行わない。,"2X, 3X, ... の個数を引いて",https://atcoder.jp/contests/abc162/tasks/abc162_e,full
+abc162_e,T176,include,supporting,floor(K/d)^Nから真の倍数の個数を降順に引く約数上のメビウス反転。累乗は二分累乗で計算する。各数列に対するユークリッド互除法は行わない。,"2X, 3X, ... の個数を引いて",https://atcoder.jp/contests/abc162/tasks/abc162_e,full
+abc166_d,T065,include,primary,"解説で証明された有限範囲のA,Bを全列挙し5乗差がXになる組を探す。Factorizationというタイトルだけで素因数分解を付けない。",候補が実際に式を満たすかどうか判定,https://atcoder.jp/contests/abc166/tasks/abc166_d,full
+abc171_d,T076,include,primary,値ごとの出現数と総和を維持して、置換ごとに総和へ(C-B)*count[B]を足し出現数を移す集約シミュレーション。配列で足りるが連想配列による実装も制約内。,数列A そのものを操作する代わりに,https://atcoder.jp/contests/abc171/tasks/abc171_d,full
+abc171_d,T008,include,alternative,値ごとの出現数と総和を維持して、置換ごとに総和へ(C-B)*count[B]を足し出現数を移す集約シミュレーション。配列で足りるが連想配列による実装も制約内。,数列A そのものを操作する代わりに,https://atcoder.jp/contests/abc171/tasks/abc171_d,full
+abc179_f,T076,include,primary,行列方向の境界と初めて枠の外に出るときの停止位置を配列で記録する。各要素は一度だけ更新され全体O(N+Q)。この確認した主解ではセグメント木は不要。,すべてのクエリについての合計で,https://atcoder.jp/contests/abc179/editorial/122,full
+abc182_d,T086,include,primary,各区間の最終変位は累積和p_i、区間中の最大変位は累積和の累積最大q_i。現在座標+q_iの最大を取り、現在座標へp_iを加えるO(N)解法。O(N^2)の直接シミュレーションを避ける。,座標の最大値,https://atcoder.jp/contests/abc182/editorial/291,full
+abc189_d,T022,include,primary,先頭i個までの論理式がTrue/Falseになる代入数を状態として各AND/ORを反映する2状態DP。2^(N+1)の代入全探索は不要。ビット集合の演算問題ではない。,S_i が AND なら,https://atcoder.jp/contests/abc189/tasks/abc189_d,full
+abc189_d,T060,include,primary,先頭i個までの論理式がTrue/Falseになる代入数を状態として各AND/ORを反映する2状態DP。2^(N+1)の代入全探索は不要。ビット集合の演算問題ではない。,S_i が AND なら,https://atcoder.jp/contests/abc189/tasks/abc189_d,full
+abc193_d,T065,include,primary,裏向き2枚の数字を9*9通り列挙して勝敗を計算し、残存枚数に基づく重みを足す。多段の確率遷移を持たないため確率DPは付けない。,高橋くんの勝つ確率を求めてください。,https://atcoder.jp/contests/abc193/tasks/abc193_d,full
+abc193_d,T060,include,supporting,裏向き2枚の数字を9*9通り列挙して勝敗を計算し、残存枚数に基づく重みを足す。多段の確率遷移を持たないため確率DPは付けない。,高橋くんの勝つ確率を求めてください。,https://atcoder.jp/contests/abc193/tasks/abc193_d,full
+abc202_c,T060,include,primary,"B[C[j]]の値ごとの頻度を配列に集計し、各A[i]に対応する頻度を合計するO(N)の数え上げ。全(i,j)列挙や連想配列は必要ない。",前もって計算しておく,https://atcoder.jp/contests/abc202/editorial/1859,full
+abc209_d,T066,include,primary,木を根からBFSまたはDFSで2色に塗り、問い合わせ両端の深さの偶奇が同じかで判定する。距離そのものやLCAを求める必要はない。保存解説が欠落していたため問題文からも確認。,N 個の街と N-1 本の道路,https://atcoder.jp/contests/abc209/tasks/abc209_d,full
+abc209_d,T067,include,alternative,木を根からBFSまたはDFSで2色に塗り、問い合わせ両端の深さの偶奇が同じかで判定する。距離そのものやLCAを求める必要はない。保存解説が欠落していたため問題文からも確認。,N 個の街と N-1 本の道路,https://atcoder.jp/contests/abc209/tasks/abc209_d,full
+abc209_d,T130,include,concept,木を根からBFSまたはDFSで2色に塗り、問い合わせ両端の深さの偶奇が同じかで判定する。距離そのものやLCAを求める必要はない。保存解説が欠落していたため問題文からも確認。,N 個の街と N-1 本の道路,https://atcoder.jp/contests/abc209/tasks/abc209_d,full
+abc232_d,T022,include,primary,"各空きマスから右下へ進める最大歩数をdp[i][j]=1+max(dp[i+1][j],dp[i][j+1])で逆順に計算するO(HW)のDAG上DP。",大きい順,https://atcoder.jp/contests/abc232/editorial/3146,full
+abc242_e,T073,include,primary,前半が一致する回文は一意に決まる。前半を26進数の順位として数え、等しい前半から構成した回文がS以下かだけ追加判定する。一般の桁DPは不要。,回文は、,https://atcoder.jp/contests/abc242/editorial/3516,full
+abc242_e,T060,include,primary,前半が一致する回文は一意に決まる。前半を26進数の順位として数え、等しい前半から構成した回文がS以下かだけ追加判定する。一般の桁DPは不要。,回文は、,https://atcoder.jp/contests/abc242/editorial/3516,full
+abc245_d,T127,include,primary,最高次から係数を確定し引き算するO(NM)の多項式除算。別解はX=256などで多項式を評価して多倍長整数を割り、その桁から係数を復元する。FFTを必要としない。,多項式の除算,https://atcoder.jp/contests/abc245/editorial/3651 | https://atcoder.jp/contests/abc245/editorial/3888,full
+abc245_d,T171,include,alternative,最高次から係数を確定し引き算するO(NM)の多項式除算。別解はX=256などで多項式を評価して多倍長整数を割り、その桁から係数を復元する。FFTを必要としない。,多項式の除算,https://atcoder.jp/contests/abc245/editorial/3651 | https://atcoder.jp/contests/abc245/editorial/3888,full
+abc272_e,T154,include,primary,MEXは高々Nなので、A_i+t*iが0以上N未満となる時刻tだけをバケットに追加する。総追加数O(N log N)から各時刻のMEXを求める。全M回で全要素を更新しない。,調和級数より大事な値,https://atcoder.jp/contests/abc272/editorial/4982,full
+abc299_d,T064,include,primary,"両端の値が0と1という不変条件を保ち、中央の値に応じて片側半区間へ絞る。文字列全体の単調性を仮定しない二分探索で隣接する0,1を発見する。",探索範囲の中央の位置,https://atcoder.jp/contests/abc299/editorial/6245,full
+abc301_d,T117,include,primary,?を0とした最小値を作り、上位ビットから1にしてもN以下なら立てる。ビット操作による貪欲解であり、すべての?の割当を列挙しない。,上から順に次を行えば答えが得られます,https://atcoder.jp/contests/abc301/editorial/6347,full
+abc307_d,T013,include,primary,文字を末尾へ積み、対応する開き括弧の位置もスタックで管理する。閉じ括弧でその開き括弧以降をpopする。各文字は高々一回追加・削除されO(N)。,末尾に追加する,https://atcoder.jp/contests/abc307/editorial/6647,full
+abc307_d,T073,include,supporting,文字を末尾へ積み、対応する開き括弧の位置もスタックで管理する。閉じ括弧でその開き括弧以降をpopする。各文字は高々一回追加・削除されO(N)。,末尾に追加する,https://atcoder.jp/contests/abc307/editorial/6647,full
+abc307_d,T128,include,concept,文字を末尾へ積み、対応する開き括弧の位置もスタックで管理する。閉じ括弧でその開き括弧以降をpopする。各文字は高々一回追加・削除されO(N)。,末尾に追加する,https://atcoder.jp/contests/abc307/editorial/6647,full
+abc133_e,T260,include,concept,親と祖父で使った色を除く選択肢を、根からDFSで子へ伝えながら掛け合わせる木の塗り分け問題。塗り方の概念とDFSの利用を確認。,DFS 的に色を塗っていく,https://atcoder.jp/contests/abc133/tasks/abc133_e,selected_tags
+abc133_e,T067,include,supporting,親と祖父で使った色を除く選択肢を、根からDFSで子へ伝えながら掛け合わせる木の塗り分け問題。塗り方の概念とDFSの利用を確認。,DFS 的に色を塗っていく,https://atcoder.jp/contests/abc133/tasks/abc133_e,selected_tags
+abc139_e,T182,include,supporting,各試合を頂点、実施順の依存を辺とする有向グラフに帰着し、DFSで閉路の有無と最長パス長を調べる。閉路検出は実際の実行可能解法の一部。,閉路検出と最大パス長の算出,https://atcoder.jp/contests/abc139/tasks/abc139_e,selected_tags
+abc139_e,T067,include,primary,各試合を頂点、実施順の依存を辺とする有向グラフに帰着し、DFSで閉路の有無と最長パス長を調べる。閉路検出は実際の実行可能解法の一部。,閉路検出と最大パス長の算出,https://atcoder.jp/contests/abc139/tasks/abc139_e,selected_tags
+abc184_d,T029,include,primary,"(a,b,c)の状態を確率DPで進める解法に加え、終端の期待残り回数を0として各遷移の期待回数を逆向きに求める期待値DPもO(100^3)で実行可能。単なる確率の一回計算と分ける。",確率DP,https://atcoder.jp/contests/abc184/editorial/152,selected_tags
+abc184_d,T026,include,alternative,"(a,b,c)の状態を確率DPで進める解法に加え、終端の期待残り回数を0として各遷移の期待回数を逆向きに求める期待値DPもO(100^3)で実行可能。単なる確率の一回計算と分ける。",確率DP,https://atcoder.jp/contests/abc184/editorial/152,selected_tags
+abc184_f,T262,include,concept,選ぶ問題の所要時間和を上限T以下で最大化する部分和型問題。N個を二分して和を列挙し組み合わせる半分全列挙が満点解法。,部分和問題,https://atcoder.jp/contests/abc184/editorial/354,selected_tags
+abc184_f,T082,include,primary,選ぶ問題の所要時間和を上限T以下で最大化する部分和型問題。N個を二分して和を列挙し組み合わせる半分全列挙が満点解法。,部分和問題,https://atcoder.jp/contests/abc184/editorial/354,selected_tags
+abc188_c,T114,include,concept,隣接組の勝者だけを残して決勝まで進める実行可能なトーナメントの直接シミュレーション。,トーナメントをそのままシミュレート,https://atcoder.jp/contests/abc188/editorial/481,selected_tags
+abc188_c,T076,include,primary,隣接組の勝者だけを残して決勝まで進める実行可能なトーナメントの直接シミュレーション。,トーナメントをそのままシミュレート,https://atcoder.jp/contests/abc188/editorial/481,selected_tags
+abc199_d,T178,include,supporting,一色に塗る頂点集合を固定し、残りのグラフを二色で塗れるか二部グラフ判定する別解が示されている。一般論としての名前だけではない。,二部グラフ判定,https://atcoder.jp/contests/abc199/editorial/1173 | https://atcoder.jp/contests/abc199/editorial/1184,selected_tags
+abc204_d,T262,include,primary,料理を二つのオーブンへ分割し、片方に割り当てる時間和の到達可能性をDPで求める部分和問題。,部分和問題,https://atcoder.jp/contests/abc204/editorial/2013,selected_tags
+abc204_d,T022,include,supporting,料理を二つのオーブンへ分割し、片方に割り当てる時間和の到達可能性をDPで求める部分和問題。,部分和問題,https://atcoder.jp/contests/abc204/editorial/2013,selected_tags
+abc205_f,T230,include,alternative,行・トークン・列を介する容量1のフローネットワークを構築する。最大流をFord-FulkersonまたはDinicで求める実行可能な代替実装として確認。,Ford-Fulkerson,https://atcoder.jp/contests/abc205/editorial/2057,selected_tags
+abc205_f,T229,include,alternative,行・トークン・列を介する容量1のフローネットワークを構築する。最大流をFord-FulkersonまたはDinicで求める実行可能な代替実装として確認。,Ford-Fulkerson,https://atcoder.jp/contests/abc205/editorial/2057,selected_tags
+abc212_h,T107,include,primary,山の石数のXORが0かでNimの勝敗を判定し、山の個数ごとのXOR畳み込みをWalsh-Hadamard変換で高速化する。通常のFFTとは分ける。,アダマール変換を使う事で高速に計算,https://atcoder.jp/contests/abc212/editorial/2359,selected_tags
+abc212_h,T108,include,primary,山の石数のXORが0かでNimの勝敗を判定し、山の個数ごとのXOR畳み込みをWalsh-Hadamard変換で高速化する。通常のFFTとは分ける。,アダマール変換を使う事で高速に計算,https://atcoder.jp/contests/abc212/editorial/2359,selected_tags
+abc212_h,T037,include,concept,山の石数のXORが0かでNimの勝敗を判定し、山の個数ごとのXOR畳み込みをWalsh-Hadamard変換で高速化する。通常のFFTとは分ける。,アダマール変換を使う事で高速に計算,https://atcoder.jp/contests/abc212/editorial/2359,selected_tags
+abc222_g,T189,include,alternative,2を並べた数の剰余条件を累乗の等式に直し、最小の指数をBSGSで求める離散対数への帰着が明示されている。,Baby-step Giant-step,https://atcoder.jp/contests/abc222/editorial/2750,selected_tags
+abc227_h,T048,include,primary,訪問回数条件を満たす辺の使用回数を決めた後、オイラー路を構成する手順で実際の巡回順を復元する。,オイラー路を構築するのと同じ要領,https://atcoder.jp/contests/abc227/editorial/2915,selected_tags
+abc239_h,T098,exclude_from_selected_solution_tags,,トーシェント関数は末尾の関連問題・Library Checkerの問題名に現れ、本問の解法では計算しない。実際には商を状態にした期待値のメモ化DPを用いる。,Sum of Totient Function,https://atcoder.jp/contests/abc239/editorial/3357,selected_tags
+abc239_h,T026,include,primary,トーシェント関数は末尾の関連問題・Library Checkerの問題名に現れ、本問の解法では計算しない。実際には商を状態にした期待値のメモ化DPを用いる。,Sum of Totient Function,https://atcoder.jp/contests/abc239/editorial/3357,selected_tags
+abc251_f,T046,include,primary,要求される二本の全域木の一方を、DFSの探索辺からなるDFS木として構成する。探索木自体が出力の構成要素。,DFS 木とは,https://atcoder.jp/contests/abc251/editorial/3967,selected_tags
+abc264_g,T175,include,primary,直近文字を状態とする重み付きグラフへ帰着し、Bellman-Fordで負閉路と最短距離を扱う。単なる最短路手法の例示ではない。,Bellman-Ford 法によって,https://atcoder.jp/contests/abc264/editorial/4580,selected_tags
+abc270_g,T189,include,primary,一次漸化式を変換して累乗の一致問題としBSGSで離散対数を解く。A=0やA=1等の例外は別処理する。,元の問題は離散対数問題に帰着,https://atcoder.jp/contests/abc270/editorial/4847,selected_tags
+abc277_h,T169,include,primary,制約を高々二リテラルの節に直し充足可能性を判定する帰着が示されている。,2-SAT への帰着が行えます,https://atcoder.jp/contests/abc277/editorial/5207,selected_tags
+abc282_d,T178,include,primary,まず各連結成分を二色に塗れるか確認し、色ごとの頂点数から追加可能な辺を数える。本問で必要な判定処理。,二部グラフかどうかを判定,https://atcoder.jp/contests/abc282/editorial/5397,selected_tags
+abc282_f,T095,exclude_from_selected_solution_tags,,本問の構成は冪等な区間和集合に対応するSparse Table。Disjoint Sparse Tableの文は関連する改良データ構造の紹介で、提出する区間の構成手順としては示されていないため保留する。,Disjoint Sparse Table と呼ばれるものもあるので,https://atcoder.jp/contests/abc282/editorial/5403,selected_tags
+abc284_h,T179,include,primary,ラベルを除いたグラフの軌道の個数をBurnside/Polyaの式で直接計算する解法である。,この問題に適用した式,https://atcoder.jp/contests/abc284/editorial/5481,selected_tags
+abc286_d,T262,include,primary,枚数制限のある硬貨を二進分割して0/1部分和へ帰着する有界ナップサック型解法。単なる最小枚数問題ではない。,部分和問題として解くことができます,https://atcoder.jp/contests/abc286/editorial/5611,selected_tags
+abc286_d,T150,include,concept,枚数制限のある硬貨を二進分割して0/1部分和へ帰着する有界ナップサック型解法。単なる最小枚数問題ではない。,部分和問題として解くことができます,https://atcoder.jp/contests/abc286/editorial/5611,selected_tags
+abc286_f,T122,include,primary,互いに素な長さの置換サイクルで指数の剰余を読み出し、中国剰余定理で未知の指数を復元する対話型解法。,中国剰余定理,https://atcoder.jp/contests/abc286/editorial/5588,selected_tags
+abc286_g,T048,include,primary,必須辺以外を縮約したグラフ上で、必須辺をちょうど一度ずつ通れるかをオイラー路の存在条件で判定する。,オイラー路となっています,https://atcoder.jp/contests/abc286/editorial/5573,selected_tags
+abc288_d,T104,exclude_from_selected_solution_tags,,Schwartz-Zippelはハッシュの衝突評価の一般化として言及されている。ここで用いる直接の衝突確率評価と区別し、同補題を解法の使用タグとして確定しない。,後者の主張の一般化として,https://atcoder.jp/contests/abc288/editorial/5682,selected_tags
+abc301_c,T031,include,alternative,文字頻度を比較する主解と、文字種ごとに頂点をまとめた容量付き二部マッチングへの帰着を確認。文字ごとに全頂点を展開する二乗辺数の方法は満点解法に数えない。,同じ文字の頂点をまとめることで高速に解く,https://atcoder.jp/contests/abc301/editorial/6339 | https://atcoder.jp/contests/abc301/editorial/6352,selected_tags
+abc301_c,T073,include,primary,文字頻度を比較する主解と、文字種ごとに頂点をまとめた容量付き二部マッチングへの帰着を確認。文字ごとに全頂点を展開する二乗辺数の方法は満点解法に数えない。,同じ文字の頂点をまとめることで高速に解く,https://atcoder.jp/contests/abc301/editorial/6339 | https://atcoder.jp/contests/abc301/editorial/6352,selected_tags
+abc303_h,T244,include,primary,Prüferコードにおける出現回数が次数-1である性質で、次数制約つきラベル木を数列の数え上げに変換。指数型母関数の冪をNTTで求める。,得られる数列に出現する,https://atcoder.jp/contests/abc303/editorial/6425,selected_tags
+abc303_h,T127,include,primary,Prüferコードにおける出現回数が次数-1である性質で、次数制約つきラベル木を数列の数え上げに変換。指数型母関数の冪をNTTで求める。,得られる数列に出現する,https://atcoder.jp/contests/abc303/editorial/6425,selected_tags
+abc303_h,T196,include,supporting,Prüferコードにおける出現回数が次数-1である性質で、次数制約つきラベル木を数列の数え上げに変換。指数型母関数の冪をNTTで求める。,得られる数列に出現する,https://atcoder.jp/contests/abc303/editorial/6425,selected_tags
+abc317_g,T139,include,primary,必要なマッチング分割を二部グラフの辺彩色として解く高速化が本問への適用として提示されている。,辺彩色問題だと思うことができます,https://atcoder.jp/contests/abc317/editorial/7023,selected_tags
+abc323_g,T057,include,primary,辺重みを一次式とした行列木定理と行列式の計算で、全域木に関する条件を数え上げる。,行列木定理、及び,https://atcoder.jp/contests/abc323/editorial/7356,selected_tags
+abc328_e,T234,exclude_from_selected_solution_tags,,N-1本の辺を組合せ列挙して木か確認する主解。別解の集合DPがPrimに似た頂点追加を行っても最小辺を貪欲に選ばず全コストを保持するため、Prim法そのものではない。,プリム法のような感じ,https://atcoder.jp/contests/abc328/editorial/7645 | https://atcoder.jp/contests/abc328/editorial/7671,selected_tags
+abc328_e,T065,include,primary,N-1本の辺を組合せ列挙して木か確認する主解。別解の集合DPがPrimに似た頂点追加を行っても最小辺を貪欲に選ばず全コストを保持するため、Prim法そのものではない。,プリム法のような感じ,https://atcoder.jp/contests/abc328/editorial/7645 | https://atcoder.jp/contests/abc328/editorial/7671,selected_tags
+abc328_e,T213,include,supporting,N-1本の辺を組合せ列挙して木か確認する主解。別解の集合DPがPrimに似た頂点追加を行っても最小辺を貪欲に選ばず全コストを保持するため、Prim法そのものではない。,プリム法のような感じ,https://atcoder.jp/contests/abc328/editorial/7645 | https://atcoder.jp/contests/abc328/editorial/7671,selected_tags
+abc334_g,T046,include,supporting,DFS木の訪問順ordとlowを用いて頂点削除後の連結成分数を評価する。DFS木は関節点の構造解析に実際に用いられる。,グラフの DFS 木を取り,https://atcoder.jp/contests/abc334/editorial/8980,selected_tags
+abc335_g,T124,include,analysis_concept,累乗で到達可能である条件を位数の整除関係へ変換する証明に原始根を使っている。原始根の探索を実装するという主張ではなく、証明の概念として記録する。,原始根,https://atcoder.jp/contests/abc335/editorial/9017,selected_tags
+abc349_g,T068,include,primary,回文半径の重複を利用するManacherの考え方で必要な辺をO(N)本に削減する。本問の高速化への具体的な応用。,Manacher のアルゴリズムを応用,https://atcoder.jp/contests/abc349/editorial/9782,selected_tags
+abc353_g,T019,include,supporting,位置ごとの最大報酬DPを同じ配列へ更新し、セグメント木で移動費を含む最大値を管理する。in-place更新が実際の実装手順である。,インラインdp,https://atcoder.jp/contests/abc353/editorial/10003,selected_tags
+abc448_g,T038,exclude_from_selected_solution_tags,,この語は混合戦略零和ゲームの値の一意性を説明する定理名として現れる。純粋戦略ゲーム木を探索するミニマックス法とは区別し、同名部分の一致による付与を除く。,ミニマックス定理,https://atcoder.jp/contests/abc448/editorial/16719,selected_tags
+abc448_g,T086,exclude_from_selected_solution_tags,,Li Chao Treeを永続化して直線集合を管理し、包絡線の凸性から三分探索する別解。累積和の要領という説明は永続木の版を順に作る比喩で、区間和配列は計算しない。,累積和の要領で,https://atcoder.jp/contests/abc448/editorial/16719,selected_tags
+abc448_g,T015,include,supporting,Li Chao Treeを永続化して直線集合を管理し、包絡線の凸性から三分探索する別解。累積和の要領という説明は永続木の版を順に作る比喩で、区間和配列は計算しない。,累積和の要領で,https://atcoder.jp/contests/abc448/editorial/16719,selected_tags
+abc448_g,T016,include,alternative,Li Chao Treeを永続化して直線集合を管理し、包絡線の凸性から三分探索する別解。累積和の要領という説明は永続木の版を順に作る比喩で、区間和配列は計算しない。,累積和の要領で,https://atcoder.jp/contests/abc448/editorial/16719,selected_tags
+abc448_g,T063,include,supporting,Li Chao Treeを永続化して直線集合を管理し、包絡線の凸性から三分探索する別解。累積和の要領という説明は永続木の版を順に作る比喩で、区間和配列は計算しない。,累積和の要領で,https://atcoder.jp/contests/abc448/editorial/16719,selected_tags
+abc359_f,T131,include,primary,木の実現可能な次数列が正で和2N-2である性質を使って最適化する。Prüferコードはこの次数列条件の証明として使い、列を構築・列挙する実装とは区別する。,木の次数列,https://atcoder.jp/contests/abc359/editorial/10260,selected_tags
+abc359_f,T244,include,analysis_concept,木の実現可能な次数列が正で和2N-2である性質を使って最適化する。Prüferコードはこの次数列条件の証明として使い、列を構築・列挙する実装とは区別する。,木の次数列,https://atcoder.jp/contests/abc359/editorial/10260,selected_tags
+abc362_g,T170,include,alternative,全パターンをAho-Corasickのオートマトンへ入れ、Sを走査してfailure link上の出現数を集計する線形時間の別解が示されている。,Aho Corasick 法を利用した別解,https://atcoder.jp/contests/abc362/editorial/10430,selected_tags
+abc367_f,T104,exclude_from_selected_solution_tags,,多重集合のランダム加算ハッシュについて、独立乱数の直接評価で十分な衝突保証を得られる。補題名の注記・証明可能性を、その補題を使うアルゴリズムとして扱わない。,Schwartz-Zippel lemma を用いずとも,https://atcoder.jp/contests/abc367/editorial/10713,selected_tags
+abc367_g,T108,include,primary,XORごとの部分列個数をXOR畳み込みとHadamard変換で高速に計算する。畳み込みの種類を通常FFTと混同しない。,xor 畳み込みおよび hadamard 変換,https://atcoder.jp/contests/abc367/editorial/10690,selected_tags
+abc367_g,T107,include,supporting,XORごとの部分列個数をXOR畳み込みとHadamard変換で高速に計算する。畳み込みの種類を通常FFTと混同しない。,xor 畳み込みおよび hadamard 変換,https://atcoder.jp/contests/abc367/editorial/10690,selected_tags
+abc373_g,T173,include,alternative,点同士を結ぶ総距離が最小の完全マッチングは交差を除ける性質を利用する。最小重み割当をHungarianまたは最小費用流で求める二つの実装を確認。,ハンガリアン法や最小費用流を用いて,https://atcoder.jp/contests/abc373/editorial/11045,selected_tags
+abc373_g,T034,include,alternative,点同士を結ぶ総距離が最小の完全マッチングは交差を除ける性質を利用する。最小重み割当をHungarianまたは最小費用流で求める二つの実装を確認。,ハンガリアン法や最小費用流を用いて,https://atcoder.jp/contests/abc373/editorial/11045,selected_tags
+abc385_g,T024,include,primary,値の降順に要素を挿入し、両端・内部への挿入位置に応じた状態変化を数える挿入DPが本問の式の導出に用いられる。,挿入 DP による数え上げ,https://atcoder.jp/contests/abc385/editorial/11656,selected_tags
+abc386_f,T263,exclude_from_selected_solution_tags,,LCSは関連するブログ記事の表題に現れる。本問は挿入・削除・置換を許す編集距離の判定であり、最長共通部分列をそのまま計算するものではないためタグを除く。,参考: 入力長に対して線形時間,https://atcoder.jp/contests/abc386/editorial/11701,selected_tags
+abc389_f,T019,include,supporting,遷移のDP配列をin-place化して同じ状態を更新する手順が実際の別解として説明されている。,インラインDP,https://atcoder.jp/contests/abc389/editorial/11966,selected_tags
+abc391_g,T263,include,primary,Sに対するLCSのDP行を状態として、文字を追加したときの行の変化を追う数え上げ。LCSは参考問題名だけでなく中心となる状態定義。,最長共通部分列 (LCS),https://atcoder.jp/contests/abc391/editorial/12087,selected_tags
+abc391_g,T022,include,supporting,Sに対するLCSのDP行を状態として、文字を追加したときの行の変化を追う数え上げ。LCSは参考問題名だけでなく中心となる状態定義。,最長共通部分列 (LCS),https://atcoder.jp/contests/abc391/editorial/12087,selected_tags
+abc393_g,T258,include,primary,有理数パラメータλの探索をStern-Brocot木上で行い、分母の大きさの制約を利用して候補を絞る。木の名前だけの背景言及ではない。,Stern-Brocot 木上の二分探索,https://atcoder.jp/contests/abc393/editorial/12192,selected_tags
+abc398_f,T068,include,primary,末尾に達する回文部分文字列をManacherの半径から見つけ、足りない接頭辞を反転して追加する。,Manacherのアルゴリズム,https://atcoder.jp/contests/abc398/editorial/12501,selected_tags
+abc404_g,T175,include,primary,累積和に対する差分制約を辺に変換し、Bellman-Fordで整合する最短距離を求める満点解法。,Bellman-Ford 法で最短経路問題,https://atcoder.jp/contests/abc404/editorial/12867,selected_tags
+abc425_e,T122,include,primary,法Mを素因数分解して素数冪ごとに答えを求め、中国剰余定理で再結合する。任意法で二項係数を扱うための実処理。,中国剰余定理の適用,https://atcoder.jp/contests/abc425/editorial/14089,selected_tags
+abc425_e,T134,include,supporting,法Mを素因数分解して素数冪ごとに答えを求め、中国剰余定理で再結合する。任意法で二項係数を扱うための実処理。,中国剰余定理の適用,https://atcoder.jp/contests/abc425/editorial/14089,selected_tags
+abc428_g,T179,include,primary,回転で同一視したネックレスをPolya/Burnsideで数え上げ、周期ごとの係数にトーシェントを用いる。,トーシェント関数などを適切に前計算,https://atcoder.jp/contests/abc428/editorial/14241,selected_tags
+abc428_g,T098,include,supporting,回転で同一視したネックレスをPolya/Burnsideで数え上げ、周期ごとの係数にトーシェントを用いる。,トーシェント関数などを適切に前計算,https://atcoder.jp/contests/abc428/editorial/14241,selected_tags
+abc429_e,T092,include,alternative,色をランダムに割り当てたグラフで探索を繰り返すcolor codingの実行可能な別解として提示されている。,color coding と呼ばれる手法を用いてこの問題を解く,https://atcoder.jp/contests/abc429/editorial/14261,selected_tags
+abc429_e,T079,include,supporting,色をランダムに割り当てたグラフで探索を繰り返すcolor codingの実行可能な別解として提示されている。,color coding と呼ばれる手法を用いてこの問題を解く,https://atcoder.jp/contests/abc429/editorial/14261,selected_tags
+abc433_g,T255,include,primary,部分文字列の同値類をSuffix Automatonでまとめ、状態ごとのゲームの勝敗を逆向きに計算する解法。,Suffix Automaton というデータ構造を用いて解く,https://atcoder.jp/contests/abc433/editorial/14604,selected_tags
+abc447_f,T131,include,concept,ムカデグラフが含まれる条件を、内部頂点と両端頂点の必要次数を満たすパスの存在へ言い換える。次数条件は構造の判定に使う概念。,次数列,https://atcoder.jp/contests/abc447/editorial/16458,selected_tags
+abc448_f,T115,include,concept,すべての地点を一度ずつ通って戻る閉路を出力する問題であり、Hamiltonian cycleは目的とする構造そのもの。,ハミルトンサイクル,https://atcoder.jp/contests/abc448/editorial/16776,selected_tags
+abc451_f,T178,include,primary,各頂点を白・黒の二つに複製しUnion-Findで制約を併合する二部グラフ判定。各連結成分の色数最小化も同じ構造に基づく。,頂点倍化を用いて二部グラフ判定,https://atcoder.jp/contests/abc451/editorial/18130,selected_tags
+abc451_f,T005,include,supporting,各頂点を白・黒の二つに複製しUnion-Findで制約を併合する二部グラフ判定。各連結成分の色数最小化も同じ構造に基づく。,頂点倍化を用いて二部グラフ判定,https://atcoder.jp/contests/abc451/editorial/18130,selected_tags
+abc455_b,T068,include,alternative,横区間を文字列IDに分類し、縦方向の反転対応をManacherの対称性で数えるO(HW^2)の別解。B問題でも解説が示す高速な実行可能解法として残す。,これに対して Manacher のアルゴリズムを使います,https://atcoder.jp/contests/abc455/editorial/19457,selected_tags
+abc476_g,T101,include,analysis_concept,許容される集合族の大きさの上界をLYM不等式で証明している。証明に用いる概念として確認し、参考記事名のSpernerと区別する。,LYM 不等式より,https://atcoder.jp/contests/abc476/editorial/25751,selected_tags
+abc178_d,T077,exclude_from_selected_solution_tags,,DPで構成数を求める主解と、長さを固定して玉と仕切りによる二項係数を合計する別解。並び替え方の総数を数える説明はソートの実行を意味しない。,仕切り,https://atcoder.jp/contests/abc178/editorial/2430,selected_tags
+abc178_d,T022,include,primary,DPで構成数を求める主解と、長さを固定して玉と仕切りによる二項係数を合計する別解。並び替え方の総数を数える説明はソートの実行を意味しない。,仕切り,https://atcoder.jp/contests/abc178/editorial/2430,selected_tags
+abc178_d,T177,include,alternative,DPで構成数を求める主解と、長さを固定して玉と仕切りによる二項係数を合計する別解。並び替え方の総数を数える説明はソートの実行を意味しない。,仕切り,https://atcoder.jp/contests/abc178/editorial/2430,selected_tags
+abc178_d,T165,include,analysis_concept,DPで構成数を求める主解と、長さを固定して玉と仕切りによる二項係数を合計する別解。並び替え方の総数を数える説明はソートの実行を意味しない。,仕切り,https://atcoder.jp/contests/abc178/editorial/2430,selected_tags
+abc010_4,T062,exclude_from_selected_solution_tags,,満点制約では最小カットを最大流で求める。DinicとEdmonds-Karpは実行可能な最大流の実装選択肢。全探索と剰余は部分点の列挙説明だけ、ヒューリスティックはアルゴリズム紹介表の速度の説明で解法として使わない。,最小カット最大フロー定理,https://img.atcoder.jp/abc010/editorial.pdf,selected_tags
+abc010_4,T065,exclude_from_selected_solution_tags,,満点制約では最小カットを最大流で求める。DinicとEdmonds-Karpは実行可能な最大流の実装選択肢。全探索と剰余は部分点の列挙説明だけ、ヒューリスティックはアルゴリズム紹介表の速度の説明で解法として使わない。,最小カット最大フロー定理,https://img.atcoder.jp/abc010/editorial.pdf,selected_tags
+abc010_4,T264,exclude_from_selected_solution_tags,,満点制約では最小カットを最大流で求める。DinicとEdmonds-Karpは実行可能な最大流の実装選択肢。全探索と剰余は部分点の列挙説明だけ、ヒューリスティックはアルゴリズム紹介表の速度の説明で解法として使わない。,最小カット最大フロー定理,https://img.atcoder.jp/abc010/editorial.pdf,selected_tags
+abc010_4,T032,include,primary,満点制約では最小カットを最大流で求める。DinicとEdmonds-Karpは実行可能な最大流の実装選択肢。全探索と剰余は部分点の列挙説明だけ、ヒューリスティックはアルゴリズム紹介表の速度の説明で解法として使わない。,最小カット最大フロー定理,https://img.atcoder.jp/abc010/editorial.pdf,selected_tags
+abc010_4,T033,include,primary,満点制約では最小カットを最大流で求める。DinicとEdmonds-Karpは実行可能な最大流の実装選択肢。全探索と剰余は部分点の列挙説明だけ、ヒューリスティックはアルゴリズム紹介表の速度の説明で解法として使わない。,最小カット最大フロー定理,https://img.atcoder.jp/abc010/editorial.pdf,selected_tags
+abc010_4,T229,include,alternative,満点制約では最小カットを最大流で求める。DinicとEdmonds-Karpは実行可能な最大流の実装選択肢。全探索と剰余は部分点の列挙説明だけ、ヒューリスティックはアルゴリズム紹介表の速度の説明で解法として使わない。,最小カット最大フロー定理,https://img.atcoder.jp/abc010/editorial.pdf,selected_tags
+abc010_4,T230,include,alternative,満点制約では最小カットを最大流で求める。DinicとEdmonds-Karpは実行可能な最大流の実装選択肢。全探索と剰余は部分点の列挙説明だけ、ヒューリスティックはアルゴリズム紹介表の速度の説明で解法として使わない。,最小カット最大フロー定理,https://img.atcoder.jp/abc010/editorial.pdf,selected_tags
+abc293_g,T084,include,supporting,"左端を平方根程度のブロックに分け、そのブロック内では右端順にクエリをソートするMo法。区間内の頻度cに対するC(c,3)を差分更新する。平方分割はクエリ順序の補助、Mo法自体は語彙外に記録。",Mo のアルゴリズムによって本問題を解く,https://atcoder.jp/contests/abc293/editorial/5947,full
+abc293_g,T077,include,supporting,"左端を平方根程度のブロックに分け、そのブロック内では右端順にクエリをソートするMo法。区間内の頻度cに対するC(c,3)を差分更新する。平方分割はクエリ順序の補助、Mo法自体は語彙外に記録。",Mo のアルゴリズムによって本問題を解く,https://atcoder.jp/contests/abc293/editorial/5947,full
+abc293_g,T060,include,primary,"左端を平方根程度のブロックに分け、そのブロック内では右端順にクエリをソートするMo法。区間内の頻度cに対するC(c,3)を差分更新する。平方分割はクエリ順序の補助、Mo法自体は語彙外に記録。",Mo のアルゴリズムによって本問題を解く,https://atcoder.jp/contests/abc293/editorial/5947,full
+abc318_e,T060,include,primary,"右端kごとに同じ値の過去位置の個数cと総和sを管理する。(k-1)*c-s-C(c,2)を足して全体O(N)。全三つ組の列挙はしない。",要素数,https://atcoder.jp/contests/abc318/editorial/7094,full
+abc318_e,T177,include,supporting,"右端kごとに同じ値の過去位置の個数cと総和sを管理する。(k-1)*c-s-C(c,2)を足して全体O(N)。全三つ組の列挙はしない。",要素数,https://atcoder.jp/contests/abc318/editorial/7094,full
+abc324_c,T073,include,primary,長さの差が高々1の場合に二本のポインタで文字列を比較し、一度だけ挿入・削除・置換によるミスマッチを許す。一般のLCSや二次元編集距離DPは不要。,英小文字,https://atcoder.jp/contests/abc324/tasks/abc324_c,full
+abc324_e,T073,include,supporting,各Sが含むTの最長接頭辞長Aと接尾辞長Bを二ポインタで求める。A_i+B_j>=|T|を満たす組はBの頻度の累積和から数えられ、全体O(総文字数+N+|T|)。,個数,https://atcoder.jp/contests/abc324/editorial/7407,full
+abc324_e,T060,include,primary,各Sが含むTの最長接頭辞長Aと接尾辞長Bを二ポインタで求める。A_i+B_j>=|T|を満たす組はBの頻度の累積和から数えられ、全体O(総文字数+N+|T|)。,個数,https://atcoder.jp/contests/abc324/editorial/7407,full
+abc324_e,T086,include,supporting,各Sが含むTの最長接頭辞長Aと接尾辞長Bを二ポインタで求める。A_i+B_j>=|T|を満たす組はBの頻度の累積和から数えられ、全体O(総文字数+N+|T|)。,個数,https://atcoder.jp/contests/abc324/editorial/7407,full
+abc329_d,T076,include,primary,得票数を配列で管理し、現在の当選者と新しい投票先だけを票数と番号で比較するO(N+M)のシミュレーション。ヒープは必要としない。,投票先となった候補者に限られる,https://atcoder.jp/contests/abc329/editorial/7728,full
+abc337_e,T117,include,primary,各ジュースの0始まり番号のビットiが1のときだけ友人iに飲ませる。症状のビット列から番号を復元する。全ての部分集合を探索する問題ではない。,二進数,https://atcoder.jp/contests/abc337/editorial/9140,full
+abc342_c,T073,include,primary,元の26文字が現在どの文字へ写るかだけを更新し、最後にSを一回変換するO(26Q+N)の文字列処理。各クエリで全文字列を置換する方法を避ける。,はじめ,https://atcoder.jp/contests/abc342/editorial/9356,full
+abc342_c,T076,include,supporting,元の26文字が現在どの文字へ写るかだけを更新し、最後にSを一回変換するO(26Q+N)の文字列処理。各クエリで全文字列を置換する方法を避ける。,はじめ,https://atcoder.jp/contests/abc342/editorial/9356,full
+abc346_e,T076,include,primary,後ろから操作を走査し、既に処理した行列を記録する。初めて処理する行なら未処理の列数だけ色の個数へ加算し、列も同様に集約して数える。,操作を逆順から考える,https://atcoder.jp/contests/abc346/editorial/9637,full
+abc346_e,T060,include,supporting,後ろから操作を走査し、既に処理した行列を記録する。初めて処理する行なら未処理の列数だけ色の個数へ加算し、列も同様に集約して数える。,操作を逆順から考える,https://atcoder.jp/contests/abc346/editorial/9637,full
+abc357_c,T080,include,primary,中央を白くし、残る8領域に小さい同じ図形を再帰的に描く。出力サイズに比例する分割統治による構築。図形を文字列で出力することだけで文字列アルゴリズムは付けない。,他の 8 個のブロック,https://atcoder.jp/contests/abc357/tasks/abc357_c,full
+abc357_c,T081,include,supporting,中央を白くし、残る8領域に小さい同じ図形を再帰的に描く。出力サイズに比例する分割統治による構築。図形を文字列で出力することだけで文字列アルゴリズムは付けない。,他の 8 個のブロック,https://atcoder.jp/contests/abc357/tasks/abc357_c,full
+abc366_c,T076,include,primary,値ごとの個数と非ゼロの種類数を維持し、0から1または1から0へ変わったときだけ種類数を更新する。配列で足りるが連想配列による頻度管理も制約内の別実装。,現在の種類数および,https://atcoder.jp/contests/abc366/editorial/10642,full
+abc366_c,T008,include,alternative,値ごとの個数と非ゼロの種類数を維持し、0から1または1から0へ変わったときだけ種類数を更新する。配列で足りるが連想配列による頻度管理も制約内の別実装。,現在の種類数および,https://atcoder.jp/contests/abc366/editorial/10642,full
+abc372_c,T073,include,primary,更新位置を含む長さ3の部分文字列は高々3個なので、その箇所のABC一致数を更新前後で引き足しする。各クエリO(1)の文字列処理。,一文字を変えても,https://atcoder.jp/contests/abc372/editorial/10972,full
+abc389_c,T086,include,primary,追加された長さの累積和と削除済み個数のオフセットを管理する。前からk番目の頭の位置を二つの累積和の差で求める。FIFOという構造的性質を概念として記録。,追加される順番とヘビが列を抜ける順番は同じ,https://atcoder.jp/contests/abc389/editorial/11975,full
+abc389_c,T011,include,concept,追加された長さの累積和と削除済み個数のオフセットを管理する。前からk番目の頭の位置を二つの累積和の差で求める。FIFOという構造的性質を概念として記録。,追加される順番とヘビが列を抜ける順番は同じ,https://atcoder.jp/contests/abc389/editorial/11975,full
+abc395_d,T076,include,primary,鳩→内部の箱、箱→巣ラベル、巣ラベル→箱の3配列を持つ。巣全体の交換ではラベル対応だけ交換し、各問い合わせをO(1)で処理する集約シミュレーション。,仮想的な「ラベル鳩」,https://atcoder.jp/contests/abc395/editorial/12342,full
+abc397_c,T060,include,primary,前からと後ろから出現済み値を管理し、各分割位置の左右の種類数を合計して最大を求める。Setを使って種類数を維持する実装もO(N log N)で実行可能。,に含まれる整数の種類数,https://atcoder.jp/contests/abc397/editorial/12456,full
+abc397_c,T012,include,alternative,前からと後ろから出現済み値を管理し、各分割位置の左右の種類数を合計して最大を求める。Setを使って種類数を維持する実装もO(N log N)で実行可能。,に含まれる整数の種類数,https://atcoder.jp/contests/abc397/editorial/12456,full
+abc142_f,T182,include,primary,DFSで閉路を見つけ、弦があればより短い閉路へ縮める主解。別解として各始点からBFSして最短有向閉路を求めると、弦があればより短い閉路を作れて矛盾するため条件を満たす。O(N(N+M))で実行可能。,閉路をひとつ探し,https://atcoder.jp/contests/abc142/tasks/abc142_f,full
+abc142_f,T067,include,supporting,DFSで閉路を見つけ、弦があればより短い閉路へ縮める主解。別解として各始点からBFSして最短有向閉路を求めると、弦があればより短い閉路を作れて矛盾するため条件を満たす。O(N(N+M))で実行可能。,閉路をひとつ探し,https://atcoder.jp/contests/abc142/tasks/abc142_f,full
+abc142_f,T066,include,alternative,DFSで閉路を見つけ、弦があればより短い閉路へ縮める主解。別解として各始点からBFSして最短有向閉路を求めると、弦があればより短い閉路を作れて矛盾するため条件を満たす。O(N(N+M))で実行可能。,閉路をひとつ探し,https://atcoder.jp/contests/abc142/tasks/abc142_f,full
+abc164_f,T117,include,primary,64個のビットを独立に処理し、行列のAND/OR条件から確定するマスを埋め、残る行列の少なくとも一つの0/1条件を満たすよう構築する。全行列を列挙しない。,各ビットの値は独立に決められる,https://atcoder.jp/contests/abc164/tasks/abc164_f,full
+abc181_f,T005,include,primary,上下境界と釘を頂点にし、距離の昇順でUnion-Findで併合する。上下境界が初めて連結する距離の半分が求める限界半径。O(N^2 log N)の解説手順を確認。,距離の短い方から頂点対の間に辺を張っていく,https://atcoder.jp/contests/abc181/editorial/267,full
+abc181_f,T077,include,supporting,上下境界と釘を頂点にし、距離の昇順でUnion-Findで併合する。上下境界が初めて連結する距離の半分が求める限界半径。O(N^2 log N)の解説手順を確認。,距離の短い方から頂点対の間に辺を張っていく,https://atcoder.jp/contests/abc181/editorial/267,full
+abc191_d,T065,include,primary,入力を10^4倍して整数にし、円を横切る各整数xのみ列挙する。各列の有効yの上下限を整数平方根から求める。平方根を整数二分探索すれば境界誤差を避けられる。,すべての計算が整数で行える,https://atcoder.jp/contests/abc191/editorial/611,full
+abc191_d,T064,include,supporting,入力を10^4倍して整数にし、円を横切る各整数xのみ列挙する。各列の有効yの上下限を整数平方根から求める。平方根を整数二分探索すれば境界誤差を避けられる。,すべての計算が整数で行える,https://atcoder.jp/contests/abc191/editorial/611,full
+abc196_e,T076,include,primary,"合成結果をmin(c,max(b,x+a))の3パラメータで持ち、各加算・min・max操作で更新する。最後に各問い合わせへ一回適用するO(N+Q)の集約シミュレーション。",合成関数,https://atcoder.jp/contests/abc196/editorial/948,full
+abc251_g,T180,include,primary,凸多角形の各辺について全平行移動の半平面制約を最も厳しい一本へ集約し、問い合わせ点が全N本を満たすか外積で判定する。交差多角形の境界自体を構築する一般の半平面交差アルゴリズムとは分ける。,有向線分の左側,https://atcoder.jp/contests/abc251/editorial/3961,full
+abc251_g,T240,include,supporting,凸多角形の各辺について全平行移動の半平面制約を最も厳しい一本へ集約し、問い合わせ点が全N本を満たすか外積で判定する。交差多角形の境界自体を構築する一般の半平面交差アルゴリズムとは分ける。,有向線分の左側,https://atcoder.jp/contests/abc251/editorial/3961,full
+abc008_1,T060,exclude_from_selected_solution_tags,,閉じた整数区間の要素数T-S+1を計算するだけで、組合せ的な数え上げのアルゴリズムを必要としない。,通し番号が S 以上 T 以下,https://atcoder.jp/contests/abc008/tasks/abc008_1,full

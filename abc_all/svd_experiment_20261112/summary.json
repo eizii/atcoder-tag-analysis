@@ -1,0 +1,741 @@
+{
+  "created": "2026-11-12",
+  "source_snapshot": "2026-11-05",
+  "main_dimension": 32,
+  "dimensions": [
+    8,
+    16,
+    32,
+    64
+  ],
+  "preprocessing": "transpose to tag x problem; row L2 normalize; no centering; no text features",
+  "solver": "scipy.linalg.svd exact thin SVD, LAPACK gesdd, one BLAS thread",
+  "representation": "Y = U_k @ diag(s_k), cosine distance between rows",
+  "linkage": "average",
+  "paid_api_calls": 0,
+  "independent_human_validation": false,
+  "source_sha256": {
+    "taxonomy.json": "b3ef7280852ba3b9ba8b33e1c5e3e45af2ee9dfae6534787f9307825f6bcfaa0",
+    "comparison_20261105\\comparison_summary.json": "f4730849aa449a4d20502d8966c92e98f1394dfb5c2b51778d688f8938938b04",
+    "comparison_20261105\\all_difficulties\\problem_tag_matrix.csv": "9ad2057a8f1c5a2f4e2c2f9427f534dd71f437adc6187dc4018ce128ba7fa850",
+    "comparison_20261105\\all_difficulties\\problems.csv": "da297fb458c72767ce73ce48de02283ca06abea8c044bd8c8fac64602aea1e78",
+    "comparison_20261105\\all_difficulties\\clusters.json": "7702724f00d5e07e313153966b0ec3f1423dc9e6a2f422199861828287d2ebfa",
+    "comparison_20261105\\all_difficulties\\linkage.csv": "358c29ad91fad7a22784ccf9e1ac28718ec6a0b80b5bffdb06c0bc52fa6e0de6",
+    "comparison_20261105\\under_2000\\problem_tag_matrix.csv": "36792fae192c18a973e8bbdf34eec1677c70db1cb1123637bcb6911b8e17ece5",
+    "comparison_20261105\\under_2000\\problems.csv": "8e6ef56c3c0ae62304f47f8316e5ea24e3dfae159a881c655a670819c862f14b",
+    "comparison_20261105\\under_2000\\clusters.json": "1d4b7c91a8e3fbc1e5898c154947ac721a08134a036bc4db38ce9771b0168d1a",
+    "comparison_20261105\\under_2000\\linkage.csv": "7bd0692b6653cee058ca1e571e757a1854c9a30e012177f64daa18b97a5cc254"
+  },
+  "versions": {
+    "python": "3.9.13",
+    "numpy": "2.0.2",
+    "scipy": "1.13.1",
+    "sklearn": "1.6.1"
+  },
+  "datasets": {
+    "all_difficulties": {
+      "problems": 3012,
+      "original_active_tags": 157,
+      "compared_tags": 156,
+      "isolated_active_tags": [
+        {
+          "tag_id": "T073",
+          "tag": "文字列処理",
+          "problem_count": 167
+        }
+      ],
+      "unused_tags": 109,
+      "original_jaccard_reference": {
+        "problem_count": 3012,
+        "tagged_problem_count": 2189,
+        "untagged_problem_count": 823,
+        "assigned_pairs": 5089,
+        "active_tags": 157,
+        "unused_tags": 109,
+        "tags_support_1": 16,
+        "tags_support_2": 14,
+        "tags_support_1_or_2": 30,
+        "tags_support_at_least_3": 127,
+        "clusters": 148,
+        "visible_clusters": 132,
+        "singleton_tag_clusters": 140,
+        "multi_tag_clusters": 8,
+        "cophenetic_correlation": 0.8631090160939229,
+        "silhouette": 0.03511034418632956
+      },
+      "models": {
+        "jaccard": {
+          "squared_singular_energy_retained": null,
+          "cophenetic_correlation_in_own_distance_space": 0.8630099820069114,
+          "distance_distribution": {
+            "minimum": 0.4166666666666667,
+            "q10": 0.9879007820136853,
+            "median": 1.0,
+            "q90": 1.0,
+            "maximum": 1.0,
+            "distance_exactly_1_fraction": 0.8420181968569065,
+            "distance_above_1_fraction": 0.0
+          },
+          "cut_0.7": {
+            "dataset": "all_difficulties",
+            "method": "jaccard",
+            "dimensions": "",
+            "compared_tags": 156,
+            "cut": 0.7,
+            "clusters": 147,
+            "singleton_clusters": 139,
+            "multi_tag_clusters": 8,
+            "singleton_tag_fraction": 0.8910256410256411,
+            "silhouette": 0.03533541049521628,
+            "silhouette_non_singleton": 0.32425435513257295
+          },
+          "cut_0.8": {
+            "dataset": "all_difficulties",
+            "method": "jaccard",
+            "dimensions": "",
+            "compared_tags": 156,
+            "cut": 0.8,
+            "clusters": 134,
+            "singleton_clusters": 113,
+            "multi_tag_clusters": 21,
+            "singleton_tag_fraction": 0.7243589743589743,
+            "silhouette": 0.05850398970001922,
+            "silhouette_non_singleton": 0.2122470324000697
+          },
+          "cut_0.9": {
+            "dataset": "all_difficulties",
+            "method": "jaccard",
+            "dimensions": "",
+            "compared_tags": 156,
+            "cut": 0.9,
+            "clusters": 101,
+            "singleton_clusters": 62,
+            "multi_tag_clusters": 39,
+            "singleton_tag_fraction": 0.3974358974358974,
+            "silhouette": 0.0764564748023523,
+            "silhouette_non_singleton": 0.1268852135017762
+          }
+        },
+        "raw_cosine": {
+          "squared_singular_energy_retained": 1.0,
+          "cophenetic_correlation_in_own_distance_space": 0.7838980361076833,
+          "distance_distribution": {
+            "minimum": 0.2362373841740265,
+            "q10": 0.959832540265842,
+            "median": 1.0,
+            "q90": 1.0,
+            "maximum": 1.0,
+            "distance_exactly_1_fraction": 0.8420181968569065,
+            "distance_above_1_fraction": 0.0
+          },
+          "cut_0.7": {
+            "dataset": "all_difficulties",
+            "method": "raw_cosine",
+            "dimensions": "",
+            "compared_tags": 156,
+            "cut": 0.7,
+            "clusters": 123,
+            "singleton_clusters": 95,
+            "multi_tag_clusters": 28,
+            "singleton_tag_fraction": 0.6089743589743589,
+            "silhouette": 0.10650988219397384,
+            "silhouette_non_singleton": 0.2723859282337691
+          },
+          "cut_0.8": {
+            "dataset": "all_difficulties",
+            "method": "raw_cosine",
+            "dimensions": "",
+            "compared_tags": 156,
+            "cut": 0.8,
+            "clusters": 96,
+            "singleton_clusters": 53,
+            "multi_tag_clusters": 43,
+            "singleton_tag_fraction": 0.33974358974358976,
+            "silhouette": 0.14128633038563812,
+            "silhouette_non_singleton": 0.2139870634966947
+          },
+          "cut_0.9": {
+            "dataset": "all_difficulties",
+            "method": "raw_cosine",
+            "dimensions": "",
+            "compared_tags": 156,
+            "cut": 0.9,
+            "clusters": 66,
+            "singleton_clusters": 23,
+            "multi_tag_clusters": 43,
+            "singleton_tag_fraction": 0.14743589743589744,
+            "silhouette": 0.14370167882505194,
+            "silhouette_non_singleton": 0.16855234508803085
+          }
+        },
+        "svd_8": {
+          "squared_singular_energy_retained": 0.13115429780078056,
+          "cophenetic_correlation_in_own_distance_space": 0.7109654053783334,
+          "distance_distribution": {
+            "minimum": 0.0,
+            "q10": 0.2748781070425547,
+            "median": 0.8607011827817923,
+            "q90": 1.1363547256058084,
+            "maximum": 1.6336996350862991,
+            "distance_exactly_1_fraction": 0.0,
+            "distance_above_1_fraction": 0.29528535980148884
+          },
+          "cut_0.7": {
+            "dataset": "all_difficulties",
+            "method": "svd_8",
+            "dimensions": 8,
+            "compared_tags": 156,
+            "cut": 0.7,
+            "clusters": 9,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 9,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.5684276492141623,
+            "silhouette_non_singleton": 0.5684276492141623
+          },
+          "cut_0.8": {
+            "dataset": "all_difficulties",
+            "method": "svd_8",
+            "dimensions": 8,
+            "compared_tags": 156,
+            "cut": 0.8,
+            "clusters": 5,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 5,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.37719608319466963,
+            "silhouette_non_singleton": 0.37719608319466963
+          },
+          "cut_0.9": {
+            "dataset": "all_difficulties",
+            "method": "svd_8",
+            "dimensions": 8,
+            "compared_tags": 156,
+            "cut": 0.9,
+            "clusters": 3,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 3,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.2580425894034775,
+            "silhouette_non_singleton": 0.2580425894034775
+          }
+        },
+        "svd_16": {
+          "squared_singular_energy_retained": 0.22441551736553536,
+          "cophenetic_correlation_in_own_distance_space": 0.6878342225877804,
+          "distance_distribution": {
+            "minimum": 0.0,
+            "q10": 0.5476924038835207,
+            "median": 0.9732841499318196,
+            "q90": 1.1374811697436287,
+            "maximum": 1.502904057193829,
+            "distance_exactly_1_fraction": 0.0,
+            "distance_above_1_fraction": 0.4116625310173697
+          },
+          "cut_0.7": {
+            "dataset": "all_difficulties",
+            "method": "svd_16",
+            "dimensions": 16,
+            "compared_tags": 156,
+            "cut": 0.7,
+            "clusters": 15,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 15,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.49849670651757094,
+            "silhouette_non_singleton": 0.49849670651757094
+          },
+          "cut_0.8": {
+            "dataset": "all_difficulties",
+            "method": "svd_16",
+            "dimensions": 16,
+            "compared_tags": 156,
+            "cut": 0.8,
+            "clusters": 14,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 14,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.47588951099320753,
+            "silhouette_non_singleton": 0.47588951099320753
+          },
+          "cut_0.9": {
+            "dataset": "all_difficulties",
+            "method": "svd_16",
+            "dimensions": 16,
+            "compared_tags": 156,
+            "cut": 0.9,
+            "clusters": 8,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 8,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.30147833000794244,
+            "silhouette_non_singleton": 0.30147833000794244
+          }
+        },
+        "svd_32": {
+          "squared_singular_energy_retained": 0.37871846558865424,
+          "cophenetic_correlation_in_own_distance_space": 0.696634858990635,
+          "distance_distribution": {
+            "minimum": 0.0,
+            "q10": 0.7771080244566307,
+            "median": 0.9948229719752477,
+            "q90": 1.0829592109327086,
+            "maximum": 1.4716087443285408,
+            "distance_exactly_1_fraction": 0.0,
+            "distance_above_1_fraction": 0.45806451612903226
+          },
+          "cut_0.7": {
+            "dataset": "all_difficulties",
+            "method": "svd_32",
+            "dimensions": 32,
+            "compared_tags": 156,
+            "cut": 0.7,
+            "clusters": 33,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 33,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.5291363407182084,
+            "silhouette_non_singleton": 0.5291363407182084
+          },
+          "cut_0.8": {
+            "dataset": "all_difficulties",
+            "method": "svd_32",
+            "dimensions": 32,
+            "compared_tags": 156,
+            "cut": 0.8,
+            "clusters": 30,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 30,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.49362760500998076,
+            "silhouette_non_singleton": 0.49362760500998076
+          },
+          "cut_0.9": {
+            "dataset": "all_difficulties",
+            "method": "svd_32",
+            "dimensions": 32,
+            "compared_tags": 156,
+            "cut": 0.9,
+            "clusters": 23,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 23,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.39472481492892203,
+            "silhouette_non_singleton": 0.39472481492892203
+          }
+        },
+        "svd_64": {
+          "squared_singular_energy_retained": 0.6120597877649326,
+          "cophenetic_correlation_in_own_distance_space": 0.7126997250495588,
+          "distance_distribution": {
+            "minimum": 0.0,
+            "q10": 0.9099211413080353,
+            "median": 0.9991952436008145,
+            "q90": 1.0384178651943015,
+            "maximum": 1.5154532474856934,
+            "distance_exactly_1_fraction": 0.0,
+            "distance_above_1_fraction": 0.4815550041356493
+          },
+          "cut_0.7": {
+            "dataset": "all_difficulties",
+            "method": "svd_64",
+            "dimensions": 64,
+            "compared_tags": 156,
+            "cut": 0.7,
+            "clusters": 60,
+            "singleton_clusters": 6,
+            "multi_tag_clusters": 54,
+            "singleton_tag_fraction": 0.038461538461538464,
+            "silhouette": 0.44944214041325764,
+            "silhouette_non_singleton": 0.46741982602978793
+          },
+          "cut_0.8": {
+            "dataset": "all_difficulties",
+            "method": "svd_64",
+            "dimensions": 64,
+            "compared_tags": 156,
+            "cut": 0.8,
+            "clusters": 53,
+            "singleton_clusters": 3,
+            "multi_tag_clusters": 50,
+            "singleton_tag_fraction": 0.019230769230769232,
+            "silhouette": 0.42283572679368137,
+            "silhouette_non_singleton": 0.43112662339747904
+          },
+          "cut_0.9": {
+            "dataset": "all_difficulties",
+            "method": "svd_64",
+            "dimensions": 64,
+            "compared_tags": 156,
+            "cut": 0.9,
+            "clusters": 37,
+            "singleton_clusters": 3,
+            "multi_tag_clusters": 34,
+            "singleton_tag_fraction": 0.019230769230769232,
+            "silhouette": 0.3187840501978935,
+            "silhouette_non_singleton": 0.3250347178488326
+          }
+        }
+      },
+      "matched_comparison_target_clusters": 101,
+      "full_rank_cosine_reconstruction_max_error": 2.886579864025407e-15
+    },
+    "under_2000": {
+      "problems": 2473,
+      "original_active_tags": 139,
+      "compared_tags": 138,
+      "isolated_active_tags": [
+        {
+          "tag_id": "T073",
+          "tag": "文字列処理",
+          "problem_count": 162
+        }
+      ],
+      "unused_tags": 127,
+      "original_jaccard_reference": {
+        "problem_count": 2473,
+        "tagged_problem_count": 1693,
+        "untagged_problem_count": 780,
+        "assigned_pairs": 3670,
+        "active_tags": 139,
+        "unused_tags": 127,
+        "tags_support_1": 26,
+        "tags_support_2": 14,
+        "tags_support_1_or_2": 40,
+        "tags_support_at_least_3": 99,
+        "clusters": 127,
+        "visible_clusters": 106,
+        "singleton_tag_clusters": 116,
+        "multi_tag_clusters": 11,
+        "cophenetic_correlation": 0.890352236782579,
+        "silhouette": 0.06333558228933174
+      },
+      "models": {
+        "jaccard": {
+          "squared_singular_energy_retained": null,
+          "cophenetic_correlation_in_own_distance_space": 0.8902818057117174,
+          "distance_distribution": {
+            "minimum": 0.0,
+            "q10": 0.9878196600147819,
+            "median": 1.0,
+            "q90": 1.0,
+            "maximum": 1.0,
+            "distance_exactly_1_fraction": 0.8484079128319052,
+            "distance_above_1_fraction": 0.0
+          },
+          "cut_0.7": {
+            "dataset": "under_2000",
+            "method": "jaccard",
+            "dimensions": "",
+            "compared_tags": 138,
+            "cut": 0.7,
+            "clusters": 126,
+            "singleton_clusters": 115,
+            "multi_tag_clusters": 11,
+            "singleton_tag_fraction": 0.8333333333333334,
+            "silhouette": 0.06379453578418197,
+            "silhouette_non_singleton": 0.38276721470509184
+          },
+          "cut_0.8": {
+            "dataset": "under_2000",
+            "method": "jaccard",
+            "dimensions": "",
+            "compared_tags": 138,
+            "cut": 0.8,
+            "clusters": 112,
+            "singleton_clusters": 88,
+            "multi_tag_clusters": 24,
+            "singleton_tag_fraction": 0.6376811594202898,
+            "silhouette": 0.09333852130083814,
+            "silhouette_non_singleton": 0.25761431879031327
+          },
+          "cut_0.9": {
+            "dataset": "under_2000",
+            "method": "jaccard",
+            "dimensions": "",
+            "compared_tags": 138,
+            "cut": 0.9,
+            "clusters": 88,
+            "singleton_clusters": 54,
+            "multi_tag_clusters": 34,
+            "singleton_tag_fraction": 0.391304347826087,
+            "silhouette": 0.10649644856461861,
+            "silhouette_non_singleton": 0.17495845121330197
+          }
+        },
+        "raw_cosine": {
+          "squared_singular_energy_retained": 1.0,
+          "cophenetic_correlation_in_own_distance_space": 0.7958724878358999,
+          "distance_distribution": {
+            "minimum": 0.0,
+            "q10": 0.9544509555604654,
+            "median": 1.0,
+            "q90": 1.0,
+            "maximum": 1.0,
+            "distance_exactly_1_fraction": 0.8484079128319052,
+            "distance_above_1_fraction": 0.0
+          },
+          "cut_0.7": {
+            "dataset": "under_2000",
+            "method": "raw_cosine",
+            "dimensions": "",
+            "compared_tags": 138,
+            "cut": 0.7,
+            "clusters": 105,
+            "singleton_clusters": 78,
+            "multi_tag_clusters": 27,
+            "singleton_tag_fraction": 0.5652173913043478,
+            "silhouette": 0.15374291357544204,
+            "silhouette_non_singleton": 0.3536087012235167
+          },
+          "cut_0.8": {
+            "dataset": "under_2000",
+            "method": "raw_cosine",
+            "dimensions": "",
+            "compared_tags": 138,
+            "cut": 0.8,
+            "clusters": 81,
+            "singleton_clusters": 38,
+            "multi_tag_clusters": 43,
+            "singleton_tag_fraction": 0.2753623188405797,
+            "silhouette": 0.18528204509231766,
+            "silhouette_non_singleton": 0.25568922222739837
+          },
+          "cut_0.9": {
+            "dataset": "under_2000",
+            "method": "raw_cosine",
+            "dimensions": "",
+            "compared_tags": 138,
+            "cut": 0.9,
+            "clusters": 60,
+            "singleton_clusters": 24,
+            "multi_tag_clusters": 36,
+            "singleton_tag_fraction": 0.17391304347826086,
+            "silhouette": 0.16674012634873228,
+            "silhouette_non_singleton": 0.20184331084320228
+          }
+        },
+        "svd_8": {
+          "squared_singular_energy_retained": 0.15152721877284295,
+          "cophenetic_correlation_in_own_distance_space": 0.7225255785504927,
+          "distance_distribution": {
+            "minimum": 0.0,
+            "q10": 0.24178289860244337,
+            "median": 0.8668356223947586,
+            "q90": 1.1313304396622479,
+            "maximum": 1.6561787673465282,
+            "distance_exactly_1_fraction": 0.0,
+            "distance_above_1_fraction": 0.3076272082936634
+          },
+          "cut_0.7": {
+            "dataset": "under_2000",
+            "method": "svd_8",
+            "dimensions": 8,
+            "compared_tags": 138,
+            "cut": 0.7,
+            "clusters": 7,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 7,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.5214879406816108,
+            "silhouette_non_singleton": 0.5214879406816108
+          },
+          "cut_0.8": {
+            "dataset": "under_2000",
+            "method": "svd_8",
+            "dimensions": 8,
+            "compared_tags": 138,
+            "cut": 0.8,
+            "clusters": 6,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 6,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.4885099414352011,
+            "silhouette_non_singleton": 0.4885099414352011
+          },
+          "cut_0.9": {
+            "dataset": "under_2000",
+            "method": "svd_8",
+            "dimensions": 8,
+            "compared_tags": 138,
+            "cut": 0.9,
+            "clusters": 3,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 3,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.30739873984624677,
+            "silhouette_non_singleton": 0.30739873984624677
+          }
+        },
+        "svd_16": {
+          "squared_singular_energy_retained": 0.25979313330877973,
+          "cophenetic_correlation_in_own_distance_space": 0.6966995516686153,
+          "distance_distribution": {
+            "minimum": 0.0,
+            "q10": 0.5579793763706008,
+            "median": 0.972751462006818,
+            "q90": 1.125112513934118,
+            "maximum": 1.5317696645784624,
+            "distance_exactly_1_fraction": 0.0,
+            "distance_above_1_fraction": 0.39944991008145564
+          },
+          "cut_0.7": {
+            "dataset": "under_2000",
+            "method": "svd_16",
+            "dimensions": 16,
+            "compared_tags": 138,
+            "cut": 0.7,
+            "clusters": 15,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 15,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.4732308457582022,
+            "silhouette_non_singleton": 0.4732308457582022
+          },
+          "cut_0.8": {
+            "dataset": "under_2000",
+            "method": "svd_16",
+            "dimensions": 16,
+            "compared_tags": 138,
+            "cut": 0.8,
+            "clusters": 13,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 13,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.47445651236822484,
+            "silhouette_non_singleton": 0.47445651236822484
+          },
+          "cut_0.9": {
+            "dataset": "under_2000",
+            "method": "svd_16",
+            "dimensions": 16,
+            "compared_tags": 138,
+            "cut": 0.9,
+            "clusters": 8,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 8,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.341944393951513,
+            "silhouette_non_singleton": 0.341944393951513
+          }
+        },
+        "svd_32": {
+          "squared_singular_energy_retained": 0.43306533042288625,
+          "cophenetic_correlation_in_own_distance_space": 0.6940808532480219,
+          "distance_distribution": {
+            "minimum": 0.0,
+            "q10": 0.7816545177349417,
+            "median": 0.9955026022893729,
+            "q90": 1.0816531409744814,
+            "maximum": 1.5152797842478458,
+            "distance_exactly_1_fraction": 0.0,
+            "distance_above_1_fraction": 0.4589019358933672
+          },
+          "cut_0.7": {
+            "dataset": "under_2000",
+            "method": "svd_32",
+            "dimensions": 32,
+            "compared_tags": 138,
+            "cut": 0.7,
+            "clusters": 30,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 30,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.4854592635066272,
+            "silhouette_non_singleton": 0.4854592635066272
+          },
+          "cut_0.8": {
+            "dataset": "under_2000",
+            "method": "svd_32",
+            "dimensions": 32,
+            "compared_tags": 138,
+            "cut": 0.8,
+            "clusters": 28,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 28,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.47838918240783135,
+            "silhouette_non_singleton": 0.47838918240783135
+          },
+          "cut_0.9": {
+            "dataset": "under_2000",
+            "method": "svd_32",
+            "dimensions": 32,
+            "compared_tags": 138,
+            "cut": 0.9,
+            "clusters": 20,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 20,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.3768614283984664,
+            "silhouette_non_singleton": 0.3768614283984664
+          }
+        },
+        "svd_64": {
+          "squared_singular_energy_retained": 0.6864790775799102,
+          "cophenetic_correlation_in_own_distance_space": 0.7368620121838186,
+          "distance_distribution": {
+            "minimum": 1.1102230246251565e-16,
+            "q10": 0.9055775482530869,
+            "median": 0.9995058898264331,
+            "q90": 1.0338340429067812,
+            "maximum": 1.2445466475079388,
+            "distance_exactly_1_fraction": 0.0,
+            "distance_above_1_fraction": 0.48630064529778905
+          },
+          "cut_0.7": {
+            "dataset": "under_2000",
+            "method": "svd_64",
+            "dimensions": 64,
+            "compared_tags": 138,
+            "cut": 0.7,
+            "clusters": 64,
+            "singleton_clusters": 16,
+            "multi_tag_clusters": 48,
+            "singleton_tag_fraction": 0.11594202898550725,
+            "silhouette": 0.46292035392975245,
+            "silhouette_non_singleton": 0.5236312200189003
+          },
+          "cut_0.8": {
+            "dataset": "under_2000",
+            "method": "svd_64",
+            "dimensions": 64,
+            "compared_tags": 138,
+            "cut": 0.8,
+            "clusters": 54,
+            "singleton_clusters": 14,
+            "multi_tag_clusters": 40,
+            "singleton_tag_fraction": 0.10144927536231885,
+            "silhouette": 0.4015162746090305,
+            "silhouette_non_singleton": 0.446848757226179
+          },
+          "cut_0.9": {
+            "dataset": "under_2000",
+            "method": "svd_64",
+            "dimensions": 64,
+            "compared_tags": 138,
+            "cut": 0.9,
+            "clusters": 41,
+            "singleton_clusters": 10,
+            "multi_tag_clusters": 31,
+            "singleton_tag_fraction": 0.07246376811594203,
+            "silhouette": 0.30942547785813124,
+            "silhouette_non_singleton": 0.33359934331579777
+          }
+        }
+      },
+      "matched_comparison_target_clusters": 88,
+      "full_rank_cosine_reconstruction_max_error": 3.3306690738754696e-15
+    }
+  },
+  "checks": [
+    "source_hashes_unchanged",
+    "binary_matrix_and_unique_problem_ids",
+    "exact_svd_reconstruction",
+    "full_rank_cosine_equals_raw_cosine",
+    "no_zero_norm_cosine",
+    "valid_monotonic_linkage",
+    "cut_2_single_cluster",
+    "isolated_tags_listed_separately"
+  ]
+}

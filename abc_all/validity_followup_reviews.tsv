@@ -1,0 +1,10 @@
+﻿problem_id	scope	accepted	rejected	out_of_vocabulary	source_indices	evidence_quote	reason
+abc238_h	selected_tags	T026:supporting,T021:primary,T022:supporting			match	合計コストの総和と定義	区間[l,r]の手順数numとコスト一次モーメントcostを同時に計算する。最初に挿入するiで分割し、costL*numR+numL*costR+numL*numR*即時コストを向き数・順序併合数で重み付けする。各状態の共通階乗を戻せば確率重み付き一次モーメントで、最終的にN!で割って期待値を得る。期待値の補助DPと区間DPとして採用する。
+abc249_h	selected_tags	T026:supporting,T132:supporting			match	行目の制約を利用することで	期待終了時間f(A)を色個数別ポテンシャルの和sum g(B_i)-g(N)へ分解する。g(0)=0とし、色個数が一度に2以上増えない遷移から、g(i+1)=((1-P_ii)g(i)-1/N-sum_{j<i}P_ij g(j))/P_i,i+1を順に計算する。これは期待値方程式を三角化した補助DPで、g(i)自体を残り期待時間とは呼ばない。
+abc345_g	selected_tags	T029:supporting,T127:primary			match	ゴールしていない確率	位置分布p_t(s)はp_{t+1}(s)=sum_{a=1}^K p_t(s-a)/K、母関数F^tで表せる。素朴なO(N^2)表は使わず、必要な未到達確率a_tを分割統治畳み込み・反転公式で高速に抽出する。同じ確率遷移の高速化としてT029を補助タグにする。
+abc439_g	selected_tags	T029:supporting			match	power projection がそのまま適用	一人の位置分布p_t(s)の確率遷移をD(x)^tで表し、未到達確率f_tをpower projectionでまとめて求める。f_tから多人数の勝率をFPSの分数和で計算する。確率遷移の高速化として補助タグT029を採用する。
+abc473_g	selected_tags	T029:supporting,T132:primary,T011:supporting			match	畳み込みを二分木状	未知カードk枚から外れる確率(k-1)/kに対し、余分な操作回数jの分布d_k(j)=d_{k-1}(j)/k+(k-1)d_{k-1}(j-1)/k。公式満点解法はこの分布の母関数を二分木状の畳み込みで併合してO(N log^2 N)に高速化する。T029は補助、T132は主解とする。
+abc481_g	selected_tags	T029:supporting,T127:primary,T132:supporting,T077:supporting,T081:primary,T196:supporting			match	情報を復元することが可能	各パンケーキが選ばれたときの順位分布を独立な1/2選択の確率母関数で表す。確率分布の積と、その値で重み付けした和を、区間ごとの(prodL,prodR,sumLMR)で併合する。sumLMR=left.sumLMR*right.prodR+left.prodL*right.sumLMR。分布併合をFFTで高速化するためT029を補助とする。
+abc301_f	selected_tags	T029:primary,T025:primary			match	29状態のDP	各?を52種から一様に選ぶと読み替え、接頭辞の大文字種類数1..26・同一大文字反復後・その後の小文字等29状態の確率を遷移する。最後に52^qを掛けて個数へ戻す。公式解説が個数または確率を明示し、O(29|S|)で全制約に対応する。
+abc224_f	selected_tags	T026:alternative			match	一番右にある項	式の接頭辞で完了項和s・未完了の末尾項xを持つ公式別解を、各+の有無を確率1/2として平均化する。E[s_next]=E[s]+E[x]/2、E[x_next]=5E[x]+d、初期(0,d1)。最後に(E[s]+E[x])*2^{N-1}。これは公式の線形遷移から導いた実行可能な期待値DP別解で、全列挙と照合する。
+abc313_f	selected_tags	T177:analysis_concept,T017:primary,T022:supporting,T065:alternative			match	二項係数に関する有名等式	二項係数は確率1/2の証明に用いる代替の等式であり、実装する主手法ではない。T177をanalysis_conceptへ修正する。実行可能な主手法は小さい側の集合bitDPと、もう一方の側の全探索を使い分けるO(M+N 2^{N/2})の最適化。

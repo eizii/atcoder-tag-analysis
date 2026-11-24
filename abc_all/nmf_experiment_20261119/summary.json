@@ -1,0 +1,751 @@
+{
+  "created": "2026-11-19",
+  "source_snapshot": "2026-11-05",
+  "main_components": 32,
+  "components": [
+    8,
+    16,
+    32,
+    64
+  ],
+  "preprocessing": "exact same tags as SVD; tag x problem binary matrix; row L2 normalization; no centering or text input",
+  "objective": "minimize squared Frobenius norm of A-WH, W>=0,H>=0; no regularization",
+  "factor_scaling": "Normalize each nonzero H row to L2=1 and multiply corresponding W column by the original H row norm, preserving WH",
+  "tag_distance": "cosine distance of scale-canonical W rows; nonnegative coordinates imply range 0..1",
+  "main_initialization": "nndsvda",
+  "main_seed": 42,
+  "solver": "coordinate descent",
+  "tolerance": 1e-05,
+  "max_iter": 5000,
+  "linkage": "average",
+  "paid_api_calls": 0,
+  "independent_human_validation": false,
+  "versions": {
+    "python": "3.9.13",
+    "numpy": "2.0.2",
+    "scipy": "1.13.1",
+    "sklearn": "1.6.1"
+  },
+  "source_sha256": {
+    "taxonomy.json": "b3ef7280852ba3b9ba8b33e1c5e3e45af2ee9dfae6534787f9307825f6bcfaa0",
+    "svd_experiment.py": "214e38f5ef78c9daa9e2602fe84e27af2c4cdbb48efa5b6011d1caf83bd4574b",
+    "svd_experiment_20261112\\comparison.png": "82193ee2ef65bcf64ad0841cd433591437d896b859ce0a94bbd2fcb46296f74b",
+    "svd_experiment_20261112\\comparison.svg": "22762fae81621ae5dd8b2431478b2da74d43bb6fb529f74a5358f965ca2a263b",
+    "svd_experiment_20261112\\dimension_sensitivity.csv": "c1bcdc270b6376296dbc6d5212423f2cf37b2f05acf2e64cd6a384b1e65bb861",
+    "svd_experiment_20261112\\example_pairs.csv": "080eb95053c2a93d1989bc0bdc5122e197025ce1d35a364ae0f3ea5932262972",
+    "svd_experiment_20261112\\layout_verification.json": "eda1baeb213438af8d0a233a5bd2eeb28762f712fbe701f54cabedde43cbec60",
+    "svd_experiment_20261112\\parameter_sweep.csv": "57091f638d7631eec093d2bf5f2e24a742b47bea5c913dd7d2f247db83e4bb0f",
+    "svd_experiment_20261112\\README.md": "1019917b39bbbf98da9d2679bdcfa5efecaf5b5fe69949323e55b926f673e29a",
+    "svd_experiment_20261112\\review_pairs.csv": "676838bf23b19bd177b10efe5217034c8535e9948b66aae575c820dfb1c60c40",
+    "svd_experiment_20261112\\subsample_stability.csv": "e6936569c6459d0707f3fca378f7c986de934e5ad8bb0e0e310310e6fc7dfd37",
+    "svd_experiment_20261112\\summary.json": "8d15eb476198634c49662624623415c42062c3d77ecb7192ef1da152a70222a3",
+    "svd_experiment_20261112\\svd_results_20261112.zip": "f76698b6d6a4a35a1b7d2d54f4e5bcac654281bfd93d25bbdb3b43910d080bba",
+    "svd_experiment_20261112\\verification.json": "c802d343bde23110a57b6796715be4698b4e6e0f7bdd3a81b2aad027eebf5425",
+    "svd_experiment_20261112\\all_difficulties\\excluded_tags.csv": "01d789643a14884f59517f3e48abc267fbbe5de3a0b02b29aae2f72b97b4f717",
+    "svd_experiment_20261112\\all_difficulties\\matched_cluster_counts.csv": "c39cf89080bd835e000be45c5ebecf6f666eac326a22029c57878522dec6c7b1",
+    "svd_experiment_20261112\\all_difficulties\\nearest_neighbors.csv": "0b60b4d240c31422db4930e745e652dae25b8a0a44325e1ec94b48fb291352d6",
+    "svd_experiment_20261112\\all_difficulties\\newly_close_without_overlap.csv": "36f8a156b4ce66016f7fa741155c96e2587cf9899f3a7b9bf82d1a142aa52477",
+    "svd_experiment_20261112\\all_difficulties\\pair_distances.csv": "74ff8ffb98f3dc9d209ad719a3857000cb332fab3889b7edf1891500798e30b9",
+    "svd_experiment_20261112\\all_difficulties\\singular_values.csv": "0fc8c25cc50e93f9820a39adc83a30b79aac9aeaf58ba855992afc5ae2cd19e8",
+    "svd_experiment_20261112\\all_difficulties\\jaccard\\cut_sweep.csv": "50e1795990bfc9bfc8b10fb74d1476de05df96fa34a230ce9a2b65a2ae357137",
+    "svd_experiment_20261112\\all_difficulties\\jaccard\\linkage.csv": "05586189493a5a77776e5bccd1e3141650ac7ca344a6a3dbe577cee099ae20ea",
+    "svd_experiment_20261112\\all_difficulties\\raw_cosine\\cut_sweep.csv": "fe7c42b92cfd191df168a3b97f64adacbbdabf9d0c0ed9339afd73929a02b864",
+    "svd_experiment_20261112\\all_difficulties\\raw_cosine\\linkage.csv": "5f1ef31daf9363fc45c78756ad9589ef7de6fdf0c53cd062305a01ff2844e6f7",
+    "svd_experiment_20261112\\all_difficulties\\svd_16\\cut_sweep.csv": "53a3826ebae1946b283cb347d390f2351549cedaa5087ac740e8909eeb80b1bb",
+    "svd_experiment_20261112\\all_difficulties\\svd_16\\linkage.csv": "9501998b95817aad993b8fe7366679ef0fab0926f549f2a0d1df4b49fbf3a7f6",
+    "svd_experiment_20261112\\all_difficulties\\svd_16\\tag_vectors.csv": "fde8781e93f6a372d953489584d3744ea16ea9f67b3774d1bfcb093210c6a2d3",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\clusters_cut_0.7.json": "64b42120fbbb6a42de1fc6aee5b4abe921abc05ba750bb6cfe4821e02404cf91",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\clusters_cut_0.7.md": "c75bdf824b048b0babb4ecb5e8c08a10e587e6aa329c762b74fa4058371cdfe3",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\clusters_cut_0.8.json": "7ab1307c2f7532748f4af46c4170d64eedbc0956db41c6977ed04fd2b4a7a20b",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\clusters_cut_0.8.md": "2e29a80970daa3bda6036da03ea3385749f93037f0a1ab043bad3bde8b621761",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\clusters_cut_0.9.json": "0f2009c2bcca6950ac76e3157ed3a4355f8e01d0c87faaefa7072c7e479edad1",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\clusters_cut_0.9.md": "969fa388284d3435f51512b00e30ee3f1cba2c8e1b36786bf07ba124ada0a8d3",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\cluster_members_cut_0.7.csv": "b0320df4e9085ae66dab49a341ead6dda61c737d15abbc2f5ef76ca6beaa4397",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\cluster_members_cut_0.8.csv": "3f1d265e1ef62955b5c914976be710712de69cbf1c8b232f38fc9fb12595cfd4",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\cluster_members_cut_0.9.csv": "a230363f24c7dea74595d5e1dad167429ea5f4e27a25ff71b6ff4ab6568b4bb1",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\cut_sweep.csv": "22112d61064e21ba8ff398877bcb40d7377283450354a1d7e8ae60b64fa6b17a",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\dendrogram_cut_0.7.png": "63a391585d2ff33ef674d02853a5d0075fa33eb288297049623532daaea2af6d",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\dendrogram_cut_0.7.svg": "0092e202aaaee68573a9de621b30550bc41d38a9a8d07f74ff18e323be4bb19a",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\dendrogram_cut_0.8.png": "904f019688994332c9e7fd70ad9078adafe0602b54112ce008e04db5c3a88507",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\dendrogram_cut_0.8.svg": "6be32a4deb4d6eeaeb3f88d1f536816228d3b1a780880ab5f888ec28370056f3",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\dendrogram_cut_0.9.png": "e3551bb0c7a0d57aad50ff9c73ebe2c1d72b5695d64eb60ea850c0a4c8eaa108",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\dendrogram_cut_0.9.svg": "af4e934f00fdd76af9038fbb924d595541f9205388c222a343389d40c7863e18",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\linkage.csv": "4f584ff4dd4946f213be359c30955e1de5ee939e0d7ae5af7a056a64a841db56",
+    "svd_experiment_20261112\\all_difficulties\\svd_32\\tag_vectors.csv": "08bc2c318d835670e1a4c22faa9227451703f15d45c922f3e81abc5c20c5df0e",
+    "svd_experiment_20261112\\all_difficulties\\svd_64\\cut_sweep.csv": "86d01e0cbe9e33700d5e20c29c7a145efa6da0981f2ad5401441f540bc6172b9",
+    "svd_experiment_20261112\\all_difficulties\\svd_64\\linkage.csv": "3006ef3ac964c377b3bdb4414e06df54580941048a3529f4ee4105da28e10660",
+    "svd_experiment_20261112\\all_difficulties\\svd_64\\tag_vectors.csv": "bd784c3631ef1cbc5ab20165077701aae93b1cdf1c9eb1e02229d08c733e603c",
+    "svd_experiment_20261112\\all_difficulties\\svd_8\\cut_sweep.csv": "9cb9dd0b9ba2f2a729fb7efd7d051345fc1c642e578254b467d3d62360547bfd",
+    "svd_experiment_20261112\\all_difficulties\\svd_8\\linkage.csv": "a3aa0cdfd328543d534678dc68fbf7fc6a034e112b02b93ad0684d240d0c3d2b",
+    "svd_experiment_20261112\\all_difficulties\\svd_8\\tag_vectors.csv": "edfd0609f18e3276489ec57da1dc786936c966dd325d41b9769afb3ff316c510",
+    "svd_experiment_20261112\\under_2000\\excluded_tags.csv": "e16c2dc0341d8af4f4c34f750057d197ec46ce289c2f919d92c497966f2e8e12",
+    "svd_experiment_20261112\\under_2000\\matched_cluster_counts.csv": "1d299e785be8fc031a653e9617d23a9453701058c991098a236406d9d4bcfa97",
+    "svd_experiment_20261112\\under_2000\\nearest_neighbors.csv": "81e5b20c3bf00305c65d83b1ef4352324775a3635c9e941363854e1720256697",
+    "svd_experiment_20261112\\under_2000\\newly_close_without_overlap.csv": "7d4992d3d03e71a25df9824542ccae3ca84e186393f0d6fff48bdadcb0377db4",
+    "svd_experiment_20261112\\under_2000\\pair_distances.csv": "1abb9a688d8985c4143d4764bc972a5e0117d34b43a71a724843d04ac3e529a3",
+    "svd_experiment_20261112\\under_2000\\singular_values.csv": "c6750ebcc8213bd83d1c46f6c5465881cab360ff1ab098d30ef30d7801c02421",
+    "svd_experiment_20261112\\under_2000\\jaccard\\cut_sweep.csv": "642a9ebb3e59ecd5f2865238929751d901ab3d320ad462412f09867d62a7c2cc",
+    "svd_experiment_20261112\\under_2000\\jaccard\\linkage.csv": "b996f8e851947acfb1b9e348f0c9345fd4a0b2f082c877c27a681c7a71fa0af7",
+    "svd_experiment_20261112\\under_2000\\raw_cosine\\cut_sweep.csv": "abd7098910f3e4a9baf0066cc7955bc8bb5705de830fe370761114e8698654e1",
+    "svd_experiment_20261112\\under_2000\\raw_cosine\\linkage.csv": "e9279edd119d5f531d8f7a17803ba3f28649ed96f995d38b8be988617ff1b2cc",
+    "svd_experiment_20261112\\under_2000\\svd_16\\cut_sweep.csv": "48b1faec906e95c927b6fed312764913524186d6dd9b3eb5fe679cbb397d9bd7",
+    "svd_experiment_20261112\\under_2000\\svd_16\\linkage.csv": "6436c28a24fcdbb57e010a9d0c461842c70a2f84c187892ecb3b862f35de7e4a",
+    "svd_experiment_20261112\\under_2000\\svd_16\\tag_vectors.csv": "523ed1a3271142141468bd0d927dbf39534c6906b8ef764b7922f18e77aad588",
+    "svd_experiment_20261112\\under_2000\\svd_32\\clusters_cut_0.7.json": "2306eee321254c653cf949e7693383079a435370d8eac28c0f23326e95ea392b",
+    "svd_experiment_20261112\\under_2000\\svd_32\\clusters_cut_0.7.md": "c348f4510d6229b374ccbde8ce7a9b5357de4580e8d39a62494bf0f283592b6c",
+    "svd_experiment_20261112\\under_2000\\svd_32\\clusters_cut_0.8.json": "5d7a260adaaeddc14a1052ec3d0119e99276310cdb6385d85ec7e81678d4ea71",
+    "svd_experiment_20261112\\under_2000\\svd_32\\clusters_cut_0.8.md": "43fd9535b4c149951f848fe1ab4942f6cccc990e1e03b8eb2bff1a7486af2359",
+    "svd_experiment_20261112\\under_2000\\svd_32\\clusters_cut_0.9.json": "37bf0fbb1ee4b6762d3233fdf2d959e8148c139408f92d3d6bf8261e94a6d571",
+    "svd_experiment_20261112\\under_2000\\svd_32\\clusters_cut_0.9.md": "24318086f6fe61c0aba55ed870f6f04c49d710493e62f974821952cc39389ff0",
+    "svd_experiment_20261112\\under_2000\\svd_32\\cluster_members_cut_0.7.csv": "c2ff94ccebbaa6afa8aefe7cbb304905047a70c8466ec5cc77440d699b75f83b",
+    "svd_experiment_20261112\\under_2000\\svd_32\\cluster_members_cut_0.8.csv": "1f90de47396f35889ae0a666333c13d3fe552d62d795b96e804e0d1efda84ce0",
+    "svd_experiment_20261112\\under_2000\\svd_32\\cluster_members_cut_0.9.csv": "e7e32030d3567e699ff2c6006db759331e9368dd1fe6c9aa82efbc895bf7bf44",
+    "svd_experiment_20261112\\under_2000\\svd_32\\cut_sweep.csv": "026084b90877b711d270a195bc65ab77631b41d9f79ca78edc3c213f006c556e",
+    "svd_experiment_20261112\\under_2000\\svd_32\\dendrogram_cut_0.7.png": "a3ae6283ee3983d07adc9cb45bc967534af0e6b35815121fa9d7679339249bbf",
+    "svd_experiment_20261112\\under_2000\\svd_32\\dendrogram_cut_0.7.svg": "2e258999045ade58eb072b51eb2424cb921eff651020eceaa8e89eb221f01f33",
+    "svd_experiment_20261112\\under_2000\\svd_32\\dendrogram_cut_0.8.png": "68d8dee5feb61628acb9180e9ff5c82aa36bb9b3e882f2ad2a8acae6bb8cffde",
+    "svd_experiment_20261112\\under_2000\\svd_32\\dendrogram_cut_0.8.svg": "c1e39ca5bfaa12ab28a10551b8a058cf896bfd9112d4be44b4db72ae641bb6f6",
+    "svd_experiment_20261112\\under_2000\\svd_32\\dendrogram_cut_0.9.png": "2b02d6ceced716c8b15357846a85bb7943940b37f3550ec38ad06360a51cbf46",
+    "svd_experiment_20261112\\under_2000\\svd_32\\dendrogram_cut_0.9.svg": "f3a25b2c1c3e2e43f93c4a0825ebe7daa5604b0f3f4dcf96840378f9621b5da1",
+    "svd_experiment_20261112\\under_2000\\svd_32\\linkage.csv": "9e3eaf86b642a79fa17a9b3a4647e47af0b1563f0ea618fa741c8c25e0842a20",
+    "svd_experiment_20261112\\under_2000\\svd_32\\tag_vectors.csv": "8d65a7d9850218d7b4745cd9693ffc7ac60b6761d39f10eed52e07763f4244d0",
+    "svd_experiment_20261112\\under_2000\\svd_64\\cut_sweep.csv": "b8e3b29d22771324f977495a991d0ff9e8c7dfd5daa090ca9358ad6f9f833601",
+    "svd_experiment_20261112\\under_2000\\svd_64\\linkage.csv": "a041b4100f34be140c8543167da0b914ed1c0328d32b8875adbd95fcf85057f0",
+    "svd_experiment_20261112\\under_2000\\svd_64\\tag_vectors.csv": "d8fb3815c1e08c587e6fc8e0acdd62da9c70c844b18f1846b8a90602817b91b4",
+    "svd_experiment_20261112\\under_2000\\svd_8\\cut_sweep.csv": "24c4a0c4479b80ef83dbc0337b13b69a63a747315ca8892535755f666635d65d",
+    "svd_experiment_20261112\\under_2000\\svd_8\\linkage.csv": "c2c649a85345c9d304b0dd3709dad39a279f61dc32953dd235709cdea1568a2c",
+    "svd_experiment_20261112\\under_2000\\svd_8\\tag_vectors.csv": "91da665cec92252a859d3c983db2754b1f00126ad1d05db6926dd853072efedc",
+    "comparison_20261105\\all_difficulties\\problem_tag_matrix.csv": "9ad2057a8f1c5a2f4e2c2f9427f534dd71f437adc6187dc4018ce128ba7fa850",
+    "comparison_20261105\\all_difficulties\\problems.csv": "da297fb458c72767ce73ce48de02283ca06abea8c044bd8c8fac64602aea1e78",
+    "comparison_20261105\\all_difficulties\\clusters.json": "7702724f00d5e07e313153966b0ec3f1423dc9e6a2f422199861828287d2ebfa",
+    "comparison_20261105\\all_difficulties\\linkage.csv": "358c29ad91fad7a22784ccf9e1ac28718ec6a0b80b5bffdb06c0bc52fa6e0de6",
+    "comparison_20261105\\under_2000\\problem_tag_matrix.csv": "36792fae192c18a973e8bbdf34eec1677c70db1cb1123637bcb6911b8e17ece5",
+    "comparison_20261105\\under_2000\\problems.csv": "8e6ef56c3c0ae62304f47f8316e5ea24e3dfae159a881c655a670819c862f14b",
+    "comparison_20261105\\under_2000\\clusters.json": "1d4b7c91a8e3fbc1e5898c154947ac721a08134a036bc4db38ce9771b0168d1a",
+    "comparison_20261105\\under_2000\\linkage.csv": "7bd0692b6653cee058ca1e571e757a1854c9a30e012177f64daa18b97a5cc254"
+  },
+  "datasets": {
+    "all_difficulties": {
+      "problems": 3012,
+      "original_active_tags": 157,
+      "compared_tags": 156,
+      "isolated_active_tags": [
+        {
+          "tag_id": "T073",
+          "tag": "文字列処理",
+          "problem_count": 167
+        }
+      ],
+      "unused_tags": 109,
+      "models": {
+        "jaccard": {
+          "cophenetic_correlation_in_own_space": 0.8630099820069114,
+          "distance_median": 1.0,
+          "distance_exactly_1_fraction": 0.8420181968569065,
+          "fit": null,
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 147,
+            "singleton_clusters": 139,
+            "multi_tag_clusters": 8,
+            "singleton_tag_fraction": 0.8910256410256411,
+            "silhouette": 0.03533541049521628,
+            "silhouette_non_singleton": 0.32425435513257295
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 134,
+            "singleton_clusters": 113,
+            "multi_tag_clusters": 21,
+            "singleton_tag_fraction": 0.7243589743589743,
+            "silhouette": 0.05850398970001922,
+            "silhouette_non_singleton": 0.2122470324000697
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 101,
+            "singleton_clusters": 62,
+            "multi_tag_clusters": 39,
+            "singleton_tag_fraction": 0.3974358974358974,
+            "silhouette": 0.0764564748023523,
+            "silhouette_non_singleton": 0.1268852135017762
+          }
+        },
+        "raw_cosine": {
+          "cophenetic_correlation_in_own_space": 0.7838980361076833,
+          "distance_median": 1.0,
+          "distance_exactly_1_fraction": 0.8420181968569065,
+          "fit": null,
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 123,
+            "singleton_clusters": 95,
+            "multi_tag_clusters": 28,
+            "singleton_tag_fraction": 0.6089743589743589,
+            "silhouette": 0.10650988219397384,
+            "silhouette_non_singleton": 0.2723859282337691
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 96,
+            "singleton_clusters": 53,
+            "multi_tag_clusters": 43,
+            "singleton_tag_fraction": 0.33974358974358976,
+            "silhouette": 0.14128633038563812,
+            "silhouette_non_singleton": 0.2139870634966947
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 66,
+            "singleton_clusters": 23,
+            "multi_tag_clusters": 43,
+            "singleton_tag_fraction": 0.14743589743589744,
+            "silhouette": 0.14370167882505194,
+            "silhouette_non_singleton": 0.16855234508803085
+          }
+        },
+        "svd_32": {
+          "cophenetic_correlation_in_own_space": 0.696634858990635,
+          "distance_median": 0.9948229719752477,
+          "distance_exactly_1_fraction": 0.0,
+          "fit": null,
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 33,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 33,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.5291363407182084,
+            "silhouette_non_singleton": 0.5291363407182084
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 30,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 30,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.49362760500998076,
+            "silhouette_non_singleton": 0.49362760500998076
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 23,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 23,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.39472481492892203,
+            "silhouette_non_singleton": 0.39472481492892203
+          }
+        },
+        "nmf_8": {
+          "cophenetic_correlation_in_own_space": 0.8649218737778062,
+          "distance_median": 0.922798153775349,
+          "distance_exactly_1_fraction": 0.3041356492969396,
+          "fit": {
+            "components": 8,
+            "initialization": "nndsvda",
+            "seed": 42,
+            "iterations": 90,
+            "max_iter": 5000,
+            "tolerance": 1e-05,
+            "converged": true,
+            "warnings": [],
+            "seconds": 0.12561350000000004,
+            "frobenius_reconstruction_error": 11.66101958026481,
+            "relative_squared_reconstruction_error": 0.8716626772520468,
+            "active_components": 8,
+            "minimum_tag_vector_norm": 0.006141382921401015
+          },
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 8,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 8,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.743642562029207,
+            "silhouette_non_singleton": 0.743642562029207
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 6,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 6,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.6309091880668433,
+            "silhouette_non_singleton": 0.6309091880668433
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 2,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 2,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.27223748922821434,
+            "silhouette_non_singleton": 0.27223748922821434
+          }
+        },
+        "nmf_16": {
+          "cophenetic_correlation_in_own_space": 0.8831912833932721,
+          "distance_median": 0.9965758602026107,
+          "distance_exactly_1_fraction": 0.40827129859387923,
+          "fit": {
+            "components": 16,
+            "initialization": "nndsvda",
+            "seed": 42,
+            "iterations": 286,
+            "max_iter": 5000,
+            "tolerance": 1e-05,
+            "converged": true,
+            "warnings": [],
+            "seconds": 0.35007690000000125,
+            "frobenius_reconstruction_error": 11.061465883499197,
+            "relative_squared_reconstruction_error": 0.7843335095629276,
+            "active_components": 16,
+            "minimum_tag_vector_norm": 0.015575057152455121
+          },
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 16,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 16,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.7977979140784066,
+            "silhouette_non_singleton": 0.7977979140784066
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 16,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 16,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.7977979140784066,
+            "silhouette_non_singleton": 0.7977979140784066
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 8,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 8,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.43504453307874186,
+            "silhouette_non_singleton": 0.43504453307874186
+          }
+        },
+        "nmf_32": {
+          "cophenetic_correlation_in_own_space": 0.8600306376127752,
+          "distance_median": 0.9999972164008017,
+          "distance_exactly_1_fraction": 0.49371381306865175,
+          "fit": {
+            "components": 32,
+            "initialization": "nndsvda",
+            "seed": 42,
+            "iterations": 164,
+            "max_iter": 5000,
+            "tolerance": 1e-05,
+            "converged": true,
+            "warnings": [],
+            "seconds": 0.5683296999999996,
+            "frobenius_reconstruction_error": 9.998979872245348,
+            "relative_squared_reconstruction_error": 0.640894862086972,
+            "active_components": 32,
+            "minimum_tag_vector_norm": 0.01943639424911855
+          },
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 32,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 32,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.7926536677100037,
+            "silhouette_non_singleton": 0.7926536677100037
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 31,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 31,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.7590440855940864,
+            "silhouette_non_singleton": 0.7590440855940864
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 21,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 21,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.48385673616141744,
+            "silhouette_non_singleton": 0.48385673616141744
+          }
+        },
+        "nmf_64": {
+          "cophenetic_correlation_in_own_space": 0.8722759426784955,
+          "distance_median": 1.0,
+          "distance_exactly_1_fraction": 0.5354011579818031,
+          "fit": {
+            "components": 64,
+            "initialization": "nndsvda",
+            "seed": 42,
+            "iterations": 129,
+            "max_iter": 5000,
+            "tolerance": 1e-05,
+            "converged": true,
+            "warnings": [],
+            "seconds": 2.9512700999999986,
+            "frobenius_reconstruction_error": 8.103762918555084,
+            "relative_squared_reconstruction_error": 0.4209677784624899,
+            "active_components": 64,
+            "minimum_tag_vector_norm": 0.11558640714347806
+          },
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 61,
+            "singleton_clusters": 14,
+            "multi_tag_clusters": 47,
+            "singleton_tag_fraction": 0.08974358974358974,
+            "silhouette": 0.6773367173871065,
+            "silhouette_non_singleton": 0.7441163937492157
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 56,
+            "singleton_clusters": 12,
+            "multi_tag_clusters": 44,
+            "singleton_tag_fraction": 0.07692307692307693,
+            "silhouette": 0.6392588075248332,
+            "silhouette_non_singleton": 0.6925303748185694
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 40,
+            "singleton_clusters": 9,
+            "multi_tag_clusters": 31,
+            "singleton_tag_fraction": 0.057692307692307696,
+            "silhouette": 0.44278623075634727,
+            "silhouette_non_singleton": 0.4698955918230624
+          }
+        }
+      },
+      "matched_targets": {
+        "svd32_cut_0.7": 33,
+        "jaccard_cut_0.9": 101
+      }
+    },
+    "under_2000": {
+      "problems": 2473,
+      "original_active_tags": 139,
+      "compared_tags": 138,
+      "isolated_active_tags": [
+        {
+          "tag_id": "T073",
+          "tag": "文字列処理",
+          "problem_count": 162
+        }
+      ],
+      "unused_tags": 127,
+      "models": {
+        "jaccard": {
+          "cophenetic_correlation_in_own_space": 0.8902818057117174,
+          "distance_median": 1.0,
+          "distance_exactly_1_fraction": 0.8484079128319052,
+          "fit": null,
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 126,
+            "singleton_clusters": 115,
+            "multi_tag_clusters": 11,
+            "singleton_tag_fraction": 0.8333333333333334,
+            "silhouette": 0.06379453578418197,
+            "silhouette_non_singleton": 0.38276721470509184
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 112,
+            "singleton_clusters": 88,
+            "multi_tag_clusters": 24,
+            "singleton_tag_fraction": 0.6376811594202898,
+            "silhouette": 0.09333852130083814,
+            "silhouette_non_singleton": 0.25761431879031327
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 88,
+            "singleton_clusters": 54,
+            "multi_tag_clusters": 34,
+            "singleton_tag_fraction": 0.391304347826087,
+            "silhouette": 0.10649644856461861,
+            "silhouette_non_singleton": 0.17495845121330197
+          }
+        },
+        "raw_cosine": {
+          "cophenetic_correlation_in_own_space": 0.7958724878358999,
+          "distance_median": 1.0,
+          "distance_exactly_1_fraction": 0.8484079128319052,
+          "fit": null,
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 105,
+            "singleton_clusters": 78,
+            "multi_tag_clusters": 27,
+            "singleton_tag_fraction": 0.5652173913043478,
+            "silhouette": 0.15374291357544204,
+            "silhouette_non_singleton": 0.3536087012235167
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 81,
+            "singleton_clusters": 38,
+            "multi_tag_clusters": 43,
+            "singleton_tag_fraction": 0.2753623188405797,
+            "silhouette": 0.18528204509231766,
+            "silhouette_non_singleton": 0.25568922222739837
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 60,
+            "singleton_clusters": 24,
+            "multi_tag_clusters": 36,
+            "singleton_tag_fraction": 0.17391304347826086,
+            "silhouette": 0.16674012634873228,
+            "silhouette_non_singleton": 0.20184331084320228
+          }
+        },
+        "svd_32": {
+          "cophenetic_correlation_in_own_space": 0.6940808532480219,
+          "distance_median": 0.9955026022893729,
+          "distance_exactly_1_fraction": 0.0,
+          "fit": null,
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 30,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 30,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.4854592635066272,
+            "silhouette_non_singleton": 0.4854592635066272
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 28,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 28,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.47838918240783135,
+            "silhouette_non_singleton": 0.47838918240783135
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 20,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 20,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.3768614283984664,
+            "silhouette_non_singleton": 0.3768614283984664
+          }
+        },
+        "nmf_8": {
+          "cophenetic_correlation_in_own_space": 0.8537063719742525,
+          "distance_median": 0.939131659180498,
+          "distance_exactly_1_fraction": 0.2946154659896329,
+          "fit": {
+            "components": 8,
+            "initialization": "nndsvda",
+            "seed": 42,
+            "iterations": 119,
+            "max_iter": 5000,
+            "tolerance": 1e-05,
+            "converged": true,
+            "warnings": [],
+            "seconds": 0.08860620000000097,
+            "frobenius_reconstruction_error": 10.8430476385997,
+            "relative_squared_reconstruction_error": 0.851968710818424,
+            "active_components": 8,
+            "minimum_tag_vector_norm": 0.007998189721534142
+          },
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 8,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 8,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.7696103667626144,
+            "silhouette_non_singleton": 0.7696103667626144
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 7,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 7,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.6677049094271782,
+            "silhouette_non_singleton": 0.6677049094271782
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 2,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 2,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.23884577527623002,
+            "silhouette_non_singleton": 0.23884577527623002
+          }
+        },
+        "nmf_16": {
+          "cophenetic_correlation_in_own_space": 0.8667171916150133,
+          "distance_median": 0.9936395698292497,
+          "distance_exactly_1_fraction": 0.366232941923199,
+          "fit": {
+            "components": 16,
+            "initialization": "nndsvda",
+            "seed": 42,
+            "iterations": 212,
+            "max_iter": 5000,
+            "tolerance": 1e-05,
+            "converged": true,
+            "warnings": [],
+            "seconds": 0.4554860000000005,
+            "frobenius_reconstruction_error": 10.169339168083857,
+            "relative_squared_reconstruction_error": 0.7493873848951047,
+            "active_components": 16,
+            "minimum_tag_vector_norm": 0.013816676610649002
+          },
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 16,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 16,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.7513203079420568,
+            "silhouette_non_singleton": 0.7513203079420568
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 14,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 14,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.6983809177027522,
+            "silhouette_non_singleton": 0.6983809177027522
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 8,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 8,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.4272957101447646,
+            "silhouette_non_singleton": 0.4272957101447646
+          }
+        },
+        "nmf_32": {
+          "cophenetic_correlation_in_own_space": 0.8745605609252636,
+          "distance_median": 0.9999772973786019,
+          "distance_exactly_1_fraction": 0.4815402517719243,
+          "fit": {
+            "components": 32,
+            "initialization": "nndsvda",
+            "seed": 42,
+            "iterations": 238,
+            "max_iter": 5000,
+            "tolerance": 1e-05,
+            "converged": true,
+            "warnings": [],
+            "seconds": 1.030435500000003,
+            "frobenius_reconstruction_error": 8.997394382177262,
+            "relative_squared_reconstruction_error": 0.5866167077422821,
+            "active_components": 32,
+            "minimum_tag_vector_norm": 0.04337650188042519
+          },
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 32,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 32,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.7984915097367105,
+            "silhouette_non_singleton": 0.7984915097367105
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 29,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 29,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.7342215663950907,
+            "silhouette_non_singleton": 0.7342215663950907
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 20,
+            "singleton_clusters": 0,
+            "multi_tag_clusters": 20,
+            "singleton_tag_fraction": 0.0,
+            "silhouette": 0.49880131921954796,
+            "silhouette_non_singleton": 0.49880131921954796
+          }
+        },
+        "nmf_64": {
+          "cophenetic_correlation_in_own_space": 0.8756168855072847,
+          "distance_median": 1.0,
+          "distance_exactly_1_fraction": 0.5747381783560774,
+          "fit": {
+            "components": 64,
+            "initialization": "nndsvda",
+            "seed": 42,
+            "iterations": 175,
+            "max_iter": 5000,
+            "tolerance": 1e-05,
+            "converged": true,
+            "warnings": [],
+            "seconds": 3.420709599999995,
+            "frobenius_reconstruction_error": 6.881578176291336,
+            "relative_squared_reconstruction_error": 0.3431602767855738,
+            "active_components": 64,
+            "minimum_tag_vector_norm": 0.14623403687971956
+          },
+          "cut_0.7": {
+            "cut": 0.7,
+            "clusters": 64,
+            "singleton_clusters": 17,
+            "multi_tag_clusters": 47,
+            "singleton_tag_fraction": 0.12318840579710146,
+            "silhouette": 0.6937059030635792,
+            "silhouette_non_singleton": 0.7911687158906936
+          },
+          "cut_0.8": {
+            "cut": 0.8,
+            "clusters": 57,
+            "singleton_clusters": 16,
+            "multi_tag_clusters": 41,
+            "singleton_tag_fraction": 0.11594202898550725,
+            "silhouette": 0.6136840152185695,
+            "silhouette_non_singleton": 0.6941671647554312
+          },
+          "cut_0.9": {
+            "cut": 0.9,
+            "clusters": 42,
+            "singleton_clusters": 12,
+            "multi_tag_clusters": 30,
+            "singleton_tag_fraction": 0.08695652173913043,
+            "silhouette": 0.4373707851428676,
+            "silhouette_non_singleton": 0.4790251456326645
+          }
+        }
+      },
+      "matched_targets": {
+        "svd32_cut_0.7": 30,
+        "jaccard_cut_0.9": 88
+      }
+    }
+  },
+  "checks": [
+    "frozen_source_and_all_svd_artifacts_unchanged",
+    "same_tags_as_svd",
+    "nonnegative_factors",
+    "canonical_scale_preserves_WH",
+    "canonical_scale_invariant_to_factor_rescaling",
+    "stored_reconstruction_error_matches_actual_error",
+    "no_zero_norm_tag_vectors",
+    "valid_linkage"
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "extra_aliases": {
+    "T001": [
+      "Fenwick"
+    ],
+    "T005": [
+      "Union_Find",
+      "union-find"
+    ],
+    "T017": [
+      "bit DP",
+      "bitdp"
+    ],
+    "T020": [
+      "全方位 木 DP"
+    ],
+    "T022": [
+      "動的計画"
+    ],
+    "T027": [
+      "木上のDP",
+      "木上 DP"
+    ],
+    "T031": [
+      "二部グラフの最大マッチング",
+      "二部グラフ上の最大マッチング"
+    ],
+    "T071": [
+      "Z algorithm",
+      "Z-algorithm"
+    ],
+    "T075": [
+      "いもす"
+    ],
+    "T082": [
+      "半分全探索"
+    ],
+    "T086": [
+      "累積 和"
+    ],
+    "T097": [
+      "ユークリッド互除法"
+    ],
+    "T098": [
+      "オイラー関数",
+      "Euler totient"
+    ],
+    "T107": [
+      "Hadamard 変換",
+      "hadamard変換"
+    ],
+    "T127": [
+      "多項式の積"
+    ],
+    "T134": [
+      "素因数 分解"
+    ],
+    "T176": [
+      "繰り返し二乗",
+      "繰り返し自乗"
+    ],
+    "T178": [
+      "二部グラフかどうか",
+      "二部グラフであるか"
+    ],
+    "T253": [
+      "エラトステネスのふるい",
+      "エラトステネスの篩"
+    ]
+  },
+  "description_rules": {
+    "T022": "メモ化(?:再帰)?",
+    "T065": "(?:すべて|全て|全部)(?:の)?(?:組み合わせ|組合せ|場合|パターン|候補).{0,35}(?:試|調べ|列挙)|(?:二重|三重|多重)(?:の)?ループで",
+    "T076": "問題文(?:の|で)(?:通り|とおり)|そのまま(?:実装|実行|処理|行う)|順番に(?:処理|更新)|シミュレート",
+    "T077": "(?:小さい|大きい|昇|降)順に並べ(?:替え|る)|並び替え",
+    "T086": "(?:区間|部分)(?:の)?和を前計算",
+    "T162": "素数(?:である|かどうか|か否か).{0,20}(?:判定|調べ)|(?:判定|調べ).{0,20}素数",
+    "T264": "(?:割った|割り算の)(?:ときの)?(?:余り|あまり)|割り切れるか|倍数かどうか"
+  },
+  "code_rules": {
+    "T001": "(?i)fenwick(?:_tree)?|binary_indexed_tree",
+    "T002": "(?i)lazy_?seg(?:ment)?_?tree",
+    "T003": "(?i)(?:atcoder::)?segtree\\s*[<(]|segment_?tree",
+    "T005": "(?i)union_?find|disjoint_?set|(?:atcoder::)?dsu\\s*[<(]",
+    "T007": "(?:std::)?deque\\s*[<(]|from collections import[^\\n]*deque",
+    "T008": "(?:std::)?(?:unordered_)?map\\s*<|(?:collections\\.)?Counter\\(",
+    "T009": "(?:std::)?multiset\\s*<",
+    "T010": "priority_queue\\s*<|heapq\\.|heappush\\(|heappop\\(",
+    "T011": "(?<![A-Za-z_])(?:std::)?queue\\s*<",
+    "T012": "(?:std::)?(?:unordered_)?set\\s*<|(?<![A-Za-z_])set\\(",
+    "T013": "(?:std::)?stack\\s*<",
+    "T064": "(?:std::)?(?:lower_bound|upper_bound)\\s*\\(|bisect_(?:left|right)\\s*\\(",
+    "T069": "suffix_array\\(",
+    "T071": "z_algorithm\\(",
+    "T077": "(?<![A-Za-z_])(?:std::)?(?:stable_)?sort\\s*\\(|sorted\\s*\\(|\\.sort\\s*\\(",
+    "T117": "__builtin_popcount|\\.bit_count\\(",
+    "T132": "(?:atcoder::)?convolution(?:_ll)?\\(",
+    "T169": "two_sat\\s*[<(]",
+    "T170": "(?i)aho_?corasick",
+    "T176": "pow_mod\\s*\\(|mod_pow\\s*\\(|binpow\\s*\\(",
+    "T187": "(?i)dijkstra\\s*\\(",
+    "T196": "(?<![A-Za-z_])(?:fft|ntt)\\s*\\(",
+    "T208": "(?i)warshall_floyd|floyd_warshall",
+    "T032": "mf_graph\\s*<",
+    "T229": "(?i)dinic",
+    "T236": "\\.inv\\s*\\(|mod_inv\\s*\\(|inv_mod\\s*\\(",
+    "T253": "(?i)eratosthenes|prime_sieve"
+  },
+  "source_policy": "solution-scope-v3"
+}

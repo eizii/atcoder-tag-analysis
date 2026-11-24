@@ -1,0 +1,602 @@
+{
+  "created": "2026-11-24",
+  "source_version": "abc-all-266-semantic-v4",
+  "source_snapshot": "2026-11-05",
+  "clustered_objects": "tags",
+  "representation": "tag x problem binary; primary/alternative/supporting equal weight; no concept or proof labels",
+  "distance_metrics": [
+    "cosine",
+    "jaccard"
+  ],
+  "linkages": [
+    "average",
+    "single",
+    "complete"
+  ],
+  "cuts": [
+    0.0,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95,
+    1.0
+  ],
+  "display_cuts": [
+    0.7,
+    0.8,
+    0.9
+  ],
+  "matched_cluster_targets": [
+    40,
+    80
+  ],
+  "source_sha256": {
+    "output_v4\\problem_tag_matrix.csv": "41ce578c2fa63245a2abc045ed9c34083f68e6acfe4c306df4baf478c06c52f4",
+    "output_v4\\problems.csv": "d1cd6113693cf25c63ead6af2f9eb6858be8f6bac871cd2e99c1f91d51018206",
+    "output_v4\\all_problems_tagged.csv": "fe11ede807dd33e91a21b3685d7696db7a85c57c544a93e1cc60814749730f68",
+    "output_v4\\summary.json": "428658bee2b158036d6f4062993bfac57403bd7707c10595549900437c4ab920",
+    "taxonomy.json": "b3ef7280852ba3b9ba8b33e1c5e3e45af2ee9dfae6534787f9307825f6bcfaa0"
+  },
+  "versions": {
+    "python": "3.9.13",
+    "numpy": "2.0.2",
+    "scipy": "1.13.1",
+    "sklearn": "1.6.1",
+    "matplotlib": "3.9.4"
+  },
+  "tie_policy": "taxonomy tag-ID order; SciPy deterministic ties for recorded versions; no forced splitting of equal-height merges",
+  "paid_api_calls": 0,
+  "independent_human_validation": false,
+  "datasets": {
+    "all_difficulties": {
+      "problems": 3012,
+      "tagged_problems": 2692,
+      "zero_tag_problems": 320,
+      "active_tags": 194,
+      "unused_tags": 72,
+      "isolated_active_tags": [],
+      "models": {
+        "cosine_average": {
+          "cophenetic_correlation": 0.7937570716860843,
+          "cut_0_7": {
+            "dataset": "all_difficulties",
+            "metric": "cosine",
+            "linkage": "average",
+            "tags": 194,
+            "cut": 0.7,
+            "clusters": 139,
+            "multi_tag_clusters": 42,
+            "singleton_clusters": 97,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.020618556701030927,
+            "silhouette": 0.15177324895447333
+          },
+          "cut_0_8": {
+            "dataset": "all_difficulties",
+            "metric": "cosine",
+            "linkage": "average",
+            "tags": 194,
+            "cut": 0.8,
+            "clusters": 114,
+            "multi_tag_clusters": 51,
+            "singleton_clusters": 63,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.020618556701030927,
+            "silhouette": 0.1693857167218891
+          },
+          "cut_0_9": {
+            "dataset": "all_difficulties",
+            "metric": "cosine",
+            "linkage": "average",
+            "tags": 194,
+            "cut": 0.9,
+            "clusters": 72,
+            "multi_tag_clusters": 48,
+            "singleton_clusters": 24,
+            "largest_cluster_tags": 10,
+            "largest_cluster_fraction": 0.05154639175257732,
+            "silhouette": 0.14557644367768716
+          }
+        },
+        "cosine_single": {
+          "cophenetic_correlation": 0.42249520114736827,
+          "cut_0_7": {
+            "dataset": "all_difficulties",
+            "metric": "cosine",
+            "linkage": "single",
+            "tags": 194,
+            "cut": 0.7,
+            "clusters": 103,
+            "multi_tag_clusters": 27,
+            "singleton_clusters": 76,
+            "largest_cluster_tags": 20,
+            "largest_cluster_fraction": 0.10309278350515463,
+            "silhouette": 0.06616409692627928
+          },
+          "cut_0_8": {
+            "dataset": "all_difficulties",
+            "metric": "cosine",
+            "linkage": "single",
+            "tags": 194,
+            "cut": 0.8,
+            "clusters": 36,
+            "multi_tag_clusters": 7,
+            "singleton_clusters": 29,
+            "largest_cluster_tags": 152,
+            "largest_cluster_fraction": 0.7835051546391752,
+            "silhouette": -0.02067910301368348
+          },
+          "cut_0_9": {
+            "dataset": "all_difficulties",
+            "metric": "cosine",
+            "linkage": "single",
+            "tags": 194,
+            "cut": 0.9,
+            "clusters": 7,
+            "multi_tag_clusters": 1,
+            "singleton_clusters": 6,
+            "largest_cluster_tags": 188,
+            "largest_cluster_fraction": 0.9690721649484536,
+            "silhouette": 0.0052050907323854265
+          }
+        },
+        "cosine_complete": {
+          "cophenetic_correlation": 0.713487862685765,
+          "cut_0_7": {
+            "dataset": "all_difficulties",
+            "metric": "cosine",
+            "linkage": "complete",
+            "tags": 194,
+            "cut": 0.7,
+            "clusters": 140,
+            "multi_tag_clusters": 45,
+            "singleton_clusters": 95,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.020618556701030927,
+            "silhouette": 0.15386647735790696
+          },
+          "cut_0_8": {
+            "dataset": "all_difficulties",
+            "metric": "cosine",
+            "linkage": "complete",
+            "tags": 194,
+            "cut": 0.8,
+            "clusters": 119,
+            "multi_tag_clusters": 57,
+            "singleton_clusters": 62,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.020618556701030927,
+            "silhouette": 0.1709690293585776
+          },
+          "cut_0_9": {
+            "dataset": "all_difficulties",
+            "metric": "cosine",
+            "linkage": "complete",
+            "tags": 194,
+            "cut": 0.9,
+            "clusters": 96,
+            "multi_tag_clusters": 65,
+            "singleton_clusters": 31,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.020618556701030927,
+            "silhouette": 0.17873303620877096
+          }
+        },
+        "jaccard_average": {
+          "cophenetic_correlation": 0.8893678136144233,
+          "cut_0_7": {
+            "dataset": "all_difficulties",
+            "metric": "jaccard",
+            "linkage": "average",
+            "tags": 194,
+            "cut": 0.7,
+            "clusters": 172,
+            "multi_tag_clusters": 19,
+            "singleton_clusters": 153,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.020618556701030927,
+            "silhouette": 0.08008979873887015
+          },
+          "cut_0_8": {
+            "dataset": "all_difficulties",
+            "metric": "jaccard",
+            "linkage": "average",
+            "tags": 194,
+            "cut": 0.8,
+            "clusters": 155,
+            "multi_tag_clusters": 29,
+            "singleton_clusters": 126,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.020618556701030927,
+            "silhouette": 0.09425661799565227
+          },
+          "cut_0_9": {
+            "dataset": "all_difficulties",
+            "metric": "jaccard",
+            "linkage": "average",
+            "tags": 194,
+            "cut": 0.9,
+            "clusters": 120,
+            "multi_tag_clusters": 49,
+            "singleton_clusters": 71,
+            "largest_cluster_tags": 6,
+            "largest_cluster_fraction": 0.030927835051546393,
+            "silhouette": 0.10164814871566646
+          }
+        },
+        "jaccard_single": {
+          "cophenetic_correlation": 0.5767759802844534,
+          "cut_0_7": {
+            "dataset": "all_difficulties",
+            "metric": "jaccard",
+            "linkage": "single",
+            "tags": 194,
+            "cut": 0.7,
+            "clusters": 169,
+            "multi_tag_clusters": 18,
+            "singleton_clusters": 151,
+            "largest_cluster_tags": 6,
+            "largest_cluster_fraction": 0.030927835051546393,
+            "silhouette": 0.07644110107775506
+          },
+          "cut_0_8": {
+            "dataset": "all_difficulties",
+            "metric": "jaccard",
+            "linkage": "single",
+            "tags": 194,
+            "cut": 0.8,
+            "clusters": 146,
+            "multi_tag_clusters": 26,
+            "singleton_clusters": 120,
+            "largest_cluster_tags": 7,
+            "largest_cluster_fraction": 0.03608247422680412,
+            "silhouette": 0.07890148151391461
+          },
+          "cut_0_9": {
+            "dataset": "all_difficulties",
+            "metric": "jaccard",
+            "linkage": "single",
+            "tags": 194,
+            "cut": 0.9,
+            "clusters": 59,
+            "multi_tag_clusters": 14,
+            "singleton_clusters": 45,
+            "largest_cluster_tags": 68,
+            "largest_cluster_fraction": 0.35051546391752575,
+            "silhouette": 0.011673229085540873
+          }
+        },
+        "jaccard_complete": {
+          "cophenetic_correlation": 0.8396435183561648,
+          "cut_0_7": {
+            "dataset": "all_difficulties",
+            "metric": "jaccard",
+            "linkage": "complete",
+            "tags": 194,
+            "cut": 0.7,
+            "clusters": 174,
+            "multi_tag_clusters": 20,
+            "singleton_clusters": 154,
+            "largest_cluster_tags": 2,
+            "largest_cluster_fraction": 0.010309278350515464,
+            "silhouette": 0.07883673360415618
+          },
+          "cut_0_8": {
+            "dataset": "all_difficulties",
+            "metric": "jaccard",
+            "linkage": "complete",
+            "tags": 194,
+            "cut": 0.8,
+            "clusters": 160,
+            "multi_tag_clusters": 29,
+            "singleton_clusters": 131,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.020618556701030927,
+            "silhouette": 0.09069012568543927
+          },
+          "cut_0_9": {
+            "dataset": "all_difficulties",
+            "metric": "jaccard",
+            "linkage": "complete",
+            "tags": 194,
+            "cut": 0.9,
+            "clusters": 127,
+            "multi_tag_clusters": 54,
+            "singleton_clusters": 73,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.020618556701030927,
+            "silhouette": 0.10775483720783059
+          }
+        }
+      }
+    },
+    "under_2000": {
+      "problems": 2473,
+      "tagged_problems": 2159,
+      "zero_tag_problems": 314,
+      "active_tags": 166,
+      "unused_tags": 100,
+      "isolated_active_tags": [],
+      "models": {
+        "cosine_average": {
+          "cophenetic_correlation": 0.8198424592819145,
+          "cut_0_7": {
+            "dataset": "under_2000",
+            "metric": "cosine",
+            "linkage": "average",
+            "tags": 166,
+            "cut": 0.7,
+            "clusters": 113,
+            "multi_tag_clusters": 42,
+            "singleton_clusters": 71,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.024096385542168676,
+            "silhouette": 0.18841994637311435
+          },
+          "cut_0_8": {
+            "dataset": "under_2000",
+            "metric": "cosine",
+            "linkage": "average",
+            "tags": 166,
+            "cut": 0.8,
+            "clusters": 93,
+            "multi_tag_clusters": 47,
+            "singleton_clusters": 46,
+            "largest_cluster_tags": 5,
+            "largest_cluster_fraction": 0.030120481927710843,
+            "silhouette": 0.21176623977720438
+          },
+          "cut_0_9": {
+            "dataset": "under_2000",
+            "metric": "cosine",
+            "linkage": "average",
+            "tags": 166,
+            "cut": 0.9,
+            "clusters": 65,
+            "multi_tag_clusters": 44,
+            "singleton_clusters": 21,
+            "largest_cluster_tags": 8,
+            "largest_cluster_fraction": 0.04819277108433735,
+            "silhouette": 0.19686450962769503
+          }
+        },
+        "cosine_single": {
+          "cophenetic_correlation": 0.46874995998582886,
+          "cut_0_7": {
+            "dataset": "under_2000",
+            "metric": "cosine",
+            "linkage": "single",
+            "tags": 166,
+            "cut": 0.7,
+            "clusters": 83,
+            "multi_tag_clusters": 28,
+            "singleton_clusters": 55,
+            "largest_cluster_tags": 15,
+            "largest_cluster_fraction": 0.09036144578313253,
+            "silhouette": 0.12961391042268244
+          },
+          "cut_0_8": {
+            "dataset": "under_2000",
+            "metric": "cosine",
+            "linkage": "single",
+            "tags": 166,
+            "cut": 0.8,
+            "clusters": 42,
+            "multi_tag_clusters": 11,
+            "singleton_clusters": 31,
+            "largest_cluster_tags": 108,
+            "largest_cluster_fraction": 0.6506024096385542,
+            "silhouette": 0.036651538414342114
+          },
+          "cut_0_9": {
+            "dataset": "under_2000",
+            "metric": "cosine",
+            "linkage": "single",
+            "tags": 166,
+            "cut": 0.9,
+            "clusters": 11,
+            "multi_tag_clusters": 3,
+            "singleton_clusters": 8,
+            "largest_cluster_tags": 154,
+            "largest_cluster_fraction": 0.927710843373494,
+            "silhouette": 0.029296436964753335
+          }
+        },
+        "cosine_complete": {
+          "cophenetic_correlation": 0.7519025785121534,
+          "cut_0_7": {
+            "dataset": "under_2000",
+            "metric": "cosine",
+            "linkage": "complete",
+            "tags": 166,
+            "cut": 0.7,
+            "clusters": 115,
+            "multi_tag_clusters": 44,
+            "singleton_clusters": 71,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.024096385542168676,
+            "silhouette": 0.19129171198999312
+          },
+          "cut_0_8": {
+            "dataset": "under_2000",
+            "metric": "cosine",
+            "linkage": "complete",
+            "tags": 166,
+            "cut": 0.8,
+            "clusters": 103,
+            "multi_tag_clusters": 49,
+            "singleton_clusters": 54,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.024096385542168676,
+            "silhouette": 0.20324192261944973
+          },
+          "cut_0_9": {
+            "dataset": "under_2000",
+            "metric": "cosine",
+            "linkage": "complete",
+            "tags": 166,
+            "cut": 0.9,
+            "clusters": 83,
+            "multi_tag_clusters": 57,
+            "singleton_clusters": 26,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.024096385542168676,
+            "silhouette": 0.21473980120722927
+          }
+        },
+        "jaccard_average": {
+          "cophenetic_correlation": 0.9166345785000848,
+          "cut_0_7": {
+            "dataset": "under_2000",
+            "metric": "jaccard",
+            "linkage": "average",
+            "tags": 166,
+            "cut": 0.7,
+            "clusters": 146,
+            "multi_tag_clusters": 18,
+            "singleton_clusters": 128,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.024096385542168676,
+            "silhouette": 0.11066488525322732
+          },
+          "cut_0_8": {
+            "dataset": "under_2000",
+            "metric": "jaccard",
+            "linkage": "average",
+            "tags": 166,
+            "cut": 0.8,
+            "clusters": 129,
+            "multi_tag_clusters": 30,
+            "singleton_clusters": 99,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.024096385542168676,
+            "silhouette": 0.12733909614753128
+          },
+          "cut_0_9": {
+            "dataset": "under_2000",
+            "metric": "jaccard",
+            "linkage": "average",
+            "tags": 166,
+            "cut": 0.9,
+            "clusters": 102,
+            "multi_tag_clusters": 44,
+            "singleton_clusters": 58,
+            "largest_cluster_tags": 5,
+            "largest_cluster_fraction": 0.030120481927710843,
+            "silhouette": 0.13919730442884623
+          }
+        },
+        "jaccard_single": {
+          "cophenetic_correlation": 0.6145635511233821,
+          "cut_0_7": {
+            "dataset": "under_2000",
+            "metric": "jaccard",
+            "linkage": "single",
+            "tags": 166,
+            "cut": 0.7,
+            "clusters": 143,
+            "multi_tag_clusters": 18,
+            "singleton_clusters": 125,
+            "largest_cluster_tags": 5,
+            "largest_cluster_fraction": 0.030120481927710843,
+            "silhouette": 0.11526494630796309
+          },
+          "cut_0_8": {
+            "dataset": "under_2000",
+            "metric": "jaccard",
+            "linkage": "single",
+            "tags": 166,
+            "cut": 0.8,
+            "clusters": 114,
+            "multi_tag_clusters": 24,
+            "singleton_clusters": 90,
+            "largest_cluster_tags": 8,
+            "largest_cluster_fraction": 0.04819277108433735,
+            "silhouette": 0.10740553438867945
+          },
+          "cut_0_9": {
+            "dataset": "under_2000",
+            "metric": "jaccard",
+            "linkage": "single",
+            "tags": 166,
+            "cut": 0.9,
+            "clusters": 53,
+            "multi_tag_clusters": 16,
+            "singleton_clusters": 37,
+            "largest_cluster_tags": 79,
+            "largest_cluster_fraction": 0.4759036144578313,
+            "silhouette": 0.06299781269122395
+          }
+        },
+        "jaccard_complete": {
+          "cophenetic_correlation": 0.8748577110665234,
+          "cut_0_7": {
+            "dataset": "under_2000",
+            "metric": "jaccard",
+            "linkage": "complete",
+            "tags": 166,
+            "cut": 0.7,
+            "clusters": 146,
+            "multi_tag_clusters": 18,
+            "singleton_clusters": 128,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.024096385542168676,
+            "silhouette": 0.11066488525322732
+          },
+          "cut_0_8": {
+            "dataset": "under_2000",
+            "metric": "jaccard",
+            "linkage": "complete",
+            "tags": 166,
+            "cut": 0.8,
+            "clusters": 133,
+            "multi_tag_clusters": 29,
+            "singleton_clusters": 104,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.024096385542168676,
+            "silhouette": 0.12105282649267134
+          },
+          "cut_0_9": {
+            "dataset": "under_2000",
+            "metric": "jaccard",
+            "linkage": "complete",
+            "tags": 166,
+            "cut": 0.9,
+            "clusters": 107,
+            "multi_tag_clusters": 47,
+            "singleton_clusters": 60,
+            "largest_cluster_tags": 4,
+            "largest_cluster_fraction": 0.024096385542168676,
+            "silhouette": 0.13061258981206897
+          }
+        }
+      }
+    }
+  },
+  "checks": [
+    "source_hashes_unchanged",
+    "all_3012_ids_unique",
+    "binary_matrix",
+    "distances_match_independent_count_formulas",
+    "finite_distances",
+    "valid_monotone_linkages",
+    "cut_1_single_cluster",
+    "unused_tags_only_excluded",
+    "all_rare_and_isolated_used_tags_retained"
+  ]
+}

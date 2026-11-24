@@ -1,0 +1,305 @@
+﻿problem_id,tag_id,tag,action,review_scope,reason
+abc001_3,T264,剰余,add,full,風向の16区分を整数演算と剰余で循環させる解法。風速は丸めと区間判定であり、探索やDPを強制しない。
+abc005_3,T031,二部マッチング,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc008_1,T060,数え上げ,remove,full,閉じた整数区間の要素数T-S+1を計算するだけで、組合せ的な数え上げのアルゴリズムを必要としない。
+abc010_2,T076,シミュレーション,add,full,花びら枚数の2と3による剰余条件を満たすまで減らす。解説の占い手順の直接シミュレーションも制約内の別解。
+abc010_2,T264,剰余,add,full,花びら枚数の2と3による剰余条件を満たすまで減らす。解説の占い手順の直接シミュレーションも制約内の別解。
+abc010_3,T065,全探索,add,full,各候補の家について始点からの距離と終点までの距離の和を計算し、T*V以下かを全候補について調べる。経路の最適化アルゴリズムは使わない。
+abc010_4,T062,ヒューリスティック,remove,selected_tags,満点制約では最小カットを最大流で求める。DinicとEdmonds-Karpは実行可能な最大流の実装選択肢。全探索と剰余は部分点の列挙説明だけ、ヒューリスティックはアルゴリズム紹介表の速度の説明で解法として使わない。
+abc010_4,T065,全探索,remove,selected_tags,満点制約では最小カットを最大流で求める。DinicとEdmonds-Karpは実行可能な最大流の実装選択肢。全探索と剰余は部分点の列挙説明だけ、ヒューリスティックはアルゴリズム紹介表の速度の説明で解法として使わない。
+abc010_4,T264,剰余,remove,selected_tags,満点制約では最小カットを最大流で求める。DinicとEdmonds-Karpは実行可能な最大流の実装選択肢。全探索と剰余は部分点の列挙説明だけ、ヒューリスティックはアルゴリズム紹介表の速度の説明で解法として使わない。
+abc011_4,T022,基礎DP / 動的計画法入門,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc011_4,T065,全探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc011_4,T066,幅優先探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc011_4,T067,深さ優先探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc012_4,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc015_4,T059,XOR,remove,full,処理した枚数・使用枚数・幅を状態にする個数制約つきナップサックDP。DFSによる2^N列挙は満点制約に不適、XORは他問題との比較のための言及。
+abc015_4,T067,深さ優先探索,remove,full,処理した枚数・使用枚数・幅を状態にする個数制約つきナップサックDP。DFSによる2^N列挙は満点制約に不適、XORは他問題との比較のための言及。
+abc018_3,T065,全探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc018_3,T155,マンハッタン距離,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc021_c,T077,ソート,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc023_c,T060,数え上げ,add,full,行ごと・列ごとの飴数の度数分布から、和がKになる組の個数を計算する。飴のあるNマスだけ二重計数の補正を行えばO(R+C+N)。全R*Cマスの探索はしない。
+abc024_c,T076,シミュレーション,add,full,民族ごとに各日を走査し、現在地を含む移動区間内で目的地へ可能な限り近づける。区間内なら目的地へ到着し、そうでなければ端点へ動かすO(KD)シミュレーション。
+abc027_d,T022,基礎DP / 動的計画法入門,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc029_d,T028,桁DP,add,full,上位桁からN未満か・一致かと1の出現数を状態に桁DPし、最後に出現数で重み付けして合計できる。全整数列挙の部分点解法と分ける。これは問題文から構成した実行可能解法。
+abc029_d,T060,数え上げ,add,full,上位桁からN未満か・一致かと1の出現数を状態に桁DPし、最後に出現数で重み付けして合計できる。全整数列挙の部分点解法と分ける。これは問題文から構成した実行可能解法。
+abc031_c,T065,全探索,add,full,高橋の選択iを全列挙し、青木の選択jを左から全列挙して青木の得点が最大の最左jを採る。そのときの高橋の得点を最大化するO(N^3)。解説末尾の最小値という表記には従わず問題文の最大化に従う。
+abc031_c,T076,シミュレーション,add,full,高橋の選択iを全列挙し、青木の選択jを左から全列挙して青木の得点が最大の最左jを採る。そのときの高橋の得点を最大化するO(N^3)。解説末尾の最小値という表記には従わず問題文の最大化に従う。
+abc031_d,T065,全探索,add,full,各数字に対応する長さ1〜3を3^K通り列挙する。固定した長さで文字列を切り分け、同じ数字への割当の一致と連結の整合を検証する。
+abc031_d,T073,文字列処理,add,full,各数字に対応する長さ1〜3を3^K通り列挙する。固定した長さで文字列を切り分け、同じ数字への割当の一致と連結の整合を検証する。
+abc033_c,T073,文字列処理,add,full,文字列を+で分割し、0のない積の項を数える。一般の式評価や指数全探索を必要とせず、文字列の線形走査で解く。
+abc034_d,T064,二分探索,add,full,目標濃度xに対しw_i*(p_i-x)を降順にソートし、上位K個の和が非負なら達成可能。単調性に基づく実数二分探索で最大濃度を求める。
+abc034_d,T077,ソート,add,full,目標濃度xに対しw_i*(p_i-x)を降順にソートし、上位K個の和が非負なら達成可能。単調性に基づく実数二分探索で最大濃度を求める。
+abc036_c,T077,ソート,add,full,相異なる値を昇順に並べ、各値を0始まりの順位に写す座標圧縮。N=10^5に対しソートでO(N log N)で構成できる。
+abc036_c,T085,座標圧縮,add,full,相異なる値を昇順に並べ、各値を0始まりの順位に写す座標圧縮。N=10^5に対しソートでO(N log N)で構成できる。
+abc036_d,T027,木DP,add,full,N頂点N-1辺の連結グラフは木。各頂点を白・黒にした部分木の塗り方を状態にし、白は子の白黒の和、黒は子の白のみを掛け合わせるO(N)木DP。
+abc036_d,T060,数え上げ,add,full,N頂点N-1辺の連結グラフは木。各頂点を白・黒にした部分木の塗り方を状態にし、白は子の白黒の和、黒は子の白のみを掛け合わせるO(N)木DP。
+abc036_d,T260,木の塗り分け,add,full,N頂点N-1辺の連結グラフは木。各頂点を白・黒にした部分木の塗り方を状態にし、白は子の白黒の和、黒は子の白のみを掛け合わせるO(N)木DP。
+abc037_c,T060,数え上げ,add,full,累積和で各長さK区間の和をO(1)で求め、N-K+1区間を合計するO(N)解法。全区間の各要素を毎回足すO(NK)解法は採用しない。
+abc037_c,T086,累積和,add,full,累積和で各長さK区間の和をO(1)で求め、N-K+1区間を合計するO(N)解法。全区間の各要素を毎回足すO(NK)解法は採用しない。
+abc037_d,T022,基礎DP / 動的計画法入門,add,full,値の大小で辺を向けるとDAGになる。値の降順にdp[v]=1+sum(dp[u])を計算して全始点の経路数を足す。降順ソートはこの実装の補助。
+abc037_d,T060,数え上げ,add,full,値の大小で辺を向けるとDAGになる。値の降順にdp[v]=1+sum(dp[u])を計算して全始点の経路数を足す。降順ソートはこの実装の補助。
+abc037_d,T077,ソート,add,full,値の大小で辺を向けるとDAGになる。値の降順にdp[v]=1+sum(dp[u])を計算して全始点の経路数を足す。降順ソートはこの実装の補助。
+abc038_c,T060,数え上げ,add,full,右端を伸ばし、増加しなくなったら左端を現在位置へ移す。右端ごとの有効な左端数を加算するO(N)の二ポインタ法。単にLISを求める問題ではない。
+abc038_c,T083,尺取り法,add,full,右端を伸ばし、増加しなくなったら左端を現在位置へ移す。右端ごとの有効な左端数を加算するO(N)の二ポインタ法。単にLISを求める問題ではない。
+abc039_c,T065,全探索,add,full,白鍵の7候補を開始位置とする周期文字列と入力を比較する。周期表を用いる基本文字列処理と定数個の候補列挙。
+abc039_c,T073,文字列処理,add,full,白鍵の7候補を開始位置とする周期文字列と入力を比較する。周期表を用いる基本文字列処理と定数個の候補列挙。
+abc039_d,T076,シミュレーション,add,full,出力の白画素の周囲を元画像の白として確定し、残りを黒にした候補に問題の変換を実際に適用して一致を確認するO(HW)。文字列アルゴリズムとして扱わない。
+abc040_c,T022,基礎DP / 動的計画法入門,add,full,"dp[i]=min(dp[i-1]+abs(a[i]-a[i-1]),dp[i-2]+abs(a[i]-a[i-2]))。各柱までの最小費用をO(N)で計算する。"
+abc040_d,T005,Union-Find,add,full,道路年と問い合わせ閾値を降順に処理する。閾値より新しい道路だけUnion-Findで併合し、問い合わせ頂点の連結成分サイズを答える。各問い合わせでの全探索は不要。
+abc040_d,T077,ソート,add,full,道路年と問い合わせ閾値を降順に処理する。閾値より新しい道路だけUnion-Findで併合し、問い合わせ頂点の連結成分サイズを答える。各問い合わせでの全探索は不要。
+abc041_c,T077,ソート,add,full,身長と元の出席番号のペアを身長降順にソートし番号を出力する。O(N log N)。
+abc041_d,T017,bit DP,add,full,既に並べた頂点集合をビットマスクにし、すべての先行頂点が集合にある未配置頂点だけを末尾へ加えるO(N*2^N)集合DP。通常のトポロジカルソート一回とは区別。
+abc041_d,T060,数え上げ,add,full,既に並べた頂点集合をビットマスクにし、すべての先行頂点が集合にある未配置頂点だけを末尾へ加えるO(N*2^N)集合DP。通常のトポロジカルソート一回とは区別。
+arc064_b,T055,最短経路,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc064_b,T065,全探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc064_b,T160,約数の個数 / 約数和,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc064_b,T187,Dijkstra 法,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc065_b,T022,基礎DP / 動的計画法入門,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc065_b,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc065_b,T077,ソート,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc066_b,T016,Convex Hull Trick / Li Chao Tree,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc066_b,T081,分割統治,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc067_b,T022,基礎DP / 動的計画法入門,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc067_b,T075,imos 法,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc067_b,T080,再帰関数,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc067_b,T245,RMQ,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc068_b,T001,Binary Indexed Tree / Fenwick Tree,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc068_b,T086,累積和,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc069_b,T077,ソート,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc071_a,T022,基礎DP / 動的計画法入門,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc071_a,T086,累積和,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc071_a,T264,剰余,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc072_b,T007,Deque,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc072_b,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc072_b,T044,凸包,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc074_b,T011,Queue,remove,full,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。
+arc074_b,T022,基礎DP / 動的計画法入門,remove,full,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。
+arc074_b,T032,最大流,remove,full,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。
+arc074_b,T033,最小カット,remove,full,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。
+arc074_b,T060,数え上げ,remove,full,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。
+arc074_b,T077,ソート,remove,full,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。
+arc074_b,T230,Ford-Fulkerson / Edmonds-Karp,remove,full,分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。
+arc077_a,T075,imos 法,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc077_a,T080,再帰関数,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc077_a,T086,累積和,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc080_b,T003,Segment Tree,remove,full,蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。
+arc080_b,T010,Priority Queue / Heap,remove,full,蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。
+arc080_b,T011,Queue,remove,full,蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。
+arc080_b,T031,二部マッチング,remove,full,蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。
+arc080_b,T076,シミュレーション,add,full,蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。
+arc080_b,T118,マッチング,remove,full,蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。
+abc073_d,T077,ソート,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc084_b,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc088_d,T066,幅優先探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc088_d,T077,ソート,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc092_a,T031,二部マッチング,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc098_b,T005,Union-Find,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc098_b,T022,基礎DP / 動的計画法入門,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc098_b,T027,木DP,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc098_b,T077,ソート,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc099_c,T022,基礎DP / 動的計画法入門,add,full,"6の冪で引き出す額iを0〜Nで全列挙し、iの6進桁和とN-iの9進桁和を最小化する主解。金額dp[n]を硬貨1,6^k,9^kから更新するO(N log N)コインDPも実行可能な別解。"
+abc099_c,T065,全探索,add,full,"6の冪で引き出す額iを0〜Nで全列挙し、iの6進桁和とN-iの9進桁和を最小化する主解。金額dp[n]を硬貨1,6^k,9^kから更新するO(N log N)コインDPも実行可能な別解。"
+abc099_c,T264,剰余,add,full,"6の冪で引き出す額iを0〜Nで全列挙し、iの6進桁和とN-iの9進桁和を最小化する主解。金額dp[n]を硬貨1,6^k,9^kから更新するO(N log N)コインDPも実行可能な別解。"
+arc100_b,T022,基礎DP / 動的計画法入門,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc100_b,T060,数え上げ,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc100_b,T077,ソート,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc100_b,T083,尺取り法,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+arc100_b,T112,ゼータ変換,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc122_c,T073,文字列処理,add,full,ACの開始位置を1とした配列の累積和を作り、各区間を累積和の差で答える。各クエリで全文字を走査するシミュレーションは制限内に終わらない。
+abc122_c,T086,累積和,add,full,ACの開始位置を1とした配列の累積和を作り、各区間を累積和の差で答える。各クエリで全文字を走査するシミュレーションは制限内に終わらない。
+abc123_d,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc125_c,T097,Euclid の互除法,add,full,"左右の累積GCDを作り、iを除くGCDをgcd(L[i],R[i+1])で計算する。各GCDはユークリッド互除法で実装可能。累積和タグは和の計算を行わないので付けない。"
+abc137_d,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc141_d,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc142_f,T066,幅優先探索,add,full,DFSで閉路を見つけ、弦があればより短い閉路へ縮める主解。別解として各始点からBFSして最短有向閉路を求めると、弦があればより短い閉路を作れて矛盾するため条件を満たす。O(N(N+M))で実行可能。
+abc142_f,T067,深さ優先探索,add,full,DFSで閉路を見つけ、弦があればより短い閉路へ縮める主解。別解として各始点からBFSして最短有向閉路を求めると、弦があればより短い閉路を作れて矛盾するため条件を満たす。O(N(N+M))で実行可能。
+abc142_f,T182,閉路検出,add,full,DFSで閉路を見つけ、弦があればより短い閉路へ縮める主解。別解として各始点からBFSして最短有向閉路を求めると、弦があればより短い閉路を作れて矛盾するため条件を満たす。O(N(N+M))で実行可能。
+abc148_c,T065,全探索,add,full,"Aの倍数を順に列挙しBで割り切れる最初の数を求める解説主解はO(B)で実行可能。別解はユークリッド互除法でgcdを計算しA/gcd(A,B)*Bを求める。"
+abc148_c,T097,Euclid の互除法,add,full,"Aの倍数を順に列挙しBで割り切れる最初の数を求める解説主解はO(B)で実行可能。別解はユークリッド互除法でgcdを計算しA/gcd(A,B)*Bを求める。"
+abc148_c,T264,剰余,add,full,"Aの倍数を順に列挙しBで割り切れる最初の数を求める解説主解はO(B)で実行可能。別解はユークリッド互除法でgcdを計算しA/gcd(A,B)*Bを求める。"
+abc150_d,T060,数え上げ,add,full,a_iを割り切れる2の回数が全て同じことを確認し、a_i/2のLCMをユークリッド互除法で計算する。上限M以下のその奇数倍を数える。一般の素因数分解は不要。
+abc150_d,T097,Euclid の互除法,add,full,a_iを割り切れる2の回数が全て同じことを確認し、a_i/2のLCMをユークリッド互除法で計算する。上限M以下のその奇数倍を数える。一般の素因数分解は不要。
+abc150_d,T264,剰余,add,full,a_iを割り切れる2の回数が全て同じことを確認し、a_i/2のLCMをユークリッド互除法で計算する。上限M以下のその奇数倍を数える。一般の素因数分解は不要。
+abc152_d,T060,数え上げ,add,full,先頭桁i・末尾桁jの数の個数c[i][j]を集計し、c[i][j]*c[j][i]を足す。全整数ペアの二重全探索は不要。
+abc157_e,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc159_d,T060,数え上げ,add,full,"全体の同値ペア数sum(C(c_i,2))から、除いたボールの寄与c[A_k]-1を引く。二項係数は次数2の直接式で計算し、逆元や階乗テーブルは不要。"
+abc159_d,T177,二項係数,add,full,"全体の同値ペア数sum(C(c_i,2))から、除いたボールの寄与c[A_k]-1を引く。二項係数は次数2の直接式で計算し、逆元や階乗テーブルは不要。"
+abc162_e,T060,数え上げ,add,full,floor(K/d)^Nから真の倍数の個数を降順に引く約数上のメビウス反転。累乗は二分累乗で計算する。各数列に対するユークリッド互除法は行わない。
+abc162_e,T119,メビウス変換,add,full,floor(K/d)^Nから真の倍数の個数を降順に引く約数上のメビウス反転。累乗は二分累乗で計算する。各数列に対するユークリッド互除法は行わない。
+abc162_e,T176,二分累乗法,add,full,floor(K/d)^Nから真の倍数の個数を降順に引く約数上のメビウス反転。累乗は二分累乗で計算する。各数列に対するユークリッド互除法は行わない。
+abc164_f,T117,ビット演算,add,full,64個のビットを独立に処理し、行列のAND/OR条件から確定するマスを埋め、残る行列の少なくとも一つの0/1条件を満たすよう構築する。全行列を列挙しない。
+abc166_d,T065,全探索,add,full,"解説で証明された有限範囲のA,Bを全列挙し5乗差がXになる組を探す。Factorizationというタイトルだけで素因数分解を付けない。"
+abc171_d,T008,Map / 連想配列,add,full,値ごとの出現数と総和を維持して、置換ごとに総和へ(C-B)*count[B]を足し出現数を移す集約シミュレーション。配列で足りるが連想配列による実装も制約内。
+abc171_d,T076,シミュレーション,add,full,値ごとの出現数と総和を維持して、置換ごとに総和へ(C-B)*count[B]を足し出現数を移す集約シミュレーション。配列で足りるが連想配列による実装も制約内。
+abc172_c,T083,尺取り法,add,full,"両列の累積和を作り、Aから読む冊数iを増やすにつれてBの冊数jを減らす。jは全体でM回しか減らずO(N+M)。全(i,j)の二重全探索を除外。"
+abc172_c,T086,累積和,add,full,"両列の累積和を作り、Aから読む冊数iを増やすにつれてBの冊数jを減らす。jは全体でM回しか減らずO(N+M)。全(i,j)の二重全探索を除外。"
+abc178_d,T077,ソート,remove,selected_tags,DPで構成数を求める主解と、長さを固定して玉と仕切りによる二項係数を合計する別解。並び替え方の総数を数える説明はソートの実行を意味しない。
+abc178_d,T165,Stars and Bars,add,selected_tags,DPで構成数を求める主解と、長さを固定して玉と仕切りによる二項係数を合計する別解。並び替え方の総数を数える説明はソートの実行を意味しない。
+abc178_e,T155,マンハッタン距離,add,full,座標をx+yとx-yへ変換し、それぞれの最大値と最小値の差の大きい方を取るO(N)解法。一般の最近点対や全点対列挙は不要。
+abc179_f,T076,シミュレーション,add,full,行列方向の境界と初めて枠の外に出るときの停止位置を配列で記録する。各要素は一度だけ更新され全体O(N+Q)。この確認した主解ではセグメント木は不要。
+abc181_c,T065,全探索,add,full,3点の組を全列挙し、2ベクトルの外積が0かを整数演算で判定する。O(N^3)でN<=100に対応。三角形の符号付き面積は共線判定の補助として記録。
+abc181_c,T240,三角形の符号付き面積,add,full,3点の組を全列挙し、2ベクトルの外積が0かを整数演算で判定する。O(N^3)でN<=100に対応。三角形の符号付き面積は共線判定の補助として記録。
+abc181_f,T005,Union-Find,add,full,上下境界と釘を頂点にし、距離の昇順でUnion-Findで併合する。上下境界が初めて連結する距離の半分が求める限界半径。O(N^2 log N)の解説手順を確認。
+abc181_f,T077,ソート,add,full,上下境界と釘を頂点にし、距離の昇順でUnion-Findで併合する。上下境界が初めて連結する距離の半分が求める限界半径。O(N^2 log N)の解説手順を確認。
+abc182_d,T086,累積和,add,full,各区間の最終変位は累積和p_i、区間中の最大変位は累積和の累積最大q_i。現在座標+q_iの最大を取り、現在座標へp_iを加えるO(N)解法。O(N^2)の直接シミュレーションを避ける。
+abc184_d,T026,期待値DP,add,selected_tags,"(a,b,c)の状態を確率DPで進める解法に加え、終端の期待残り回数を0として各遷移の期待回数を逆向きに求める期待値DPもO(100^3)で実行可能。単なる確率の一回計算と分ける。"
+abc187_f,T017,bit DP,add,full,各頂点集合が完全グラフかを前計算し、集合を部分集合へ分割するbitDPで最小被覆数を求める。部分マスク列挙で全体O(3^N)。単なる2^N回の全探索とは区別。
+abc187_f,T193,部分マスク列挙,add,full,各頂点集合が完全グラフかを前計算し、集合を部分集合へ分割するbitDPで最小被覆数を求める。部分マスク列挙で全体O(3^N)。単なる2^N回の全探索とは区別。
+abc189_d,T022,基礎DP / 動的計画法入門,add,full,先頭i個までの論理式がTrue/Falseになる代入数を状態として各AND/ORを反映する2状態DP。2^(N+1)の代入全探索は不要。ビット集合の演算問題ではない。
+abc189_d,T060,数え上げ,add,full,先頭i個までの論理式がTrue/Falseになる代入数を状態として各AND/ORを反映する2状態DP。2^(N+1)の代入全探索は不要。ビット集合の演算問題ではない。
+abc191_d,T064,二分探索,add,full,入力を10^4倍して整数にし、円を横切る各整数xのみ列挙する。各列の有効yの上下限を整数平方根から求める。平方根を整数二分探索すれば境界誤差を避けられる。
+abc191_d,T065,全探索,add,full,入力を10^4倍して整数にし、円を横切る各整数xのみ列挙する。各列の有効yの上下限を整数平方根から求める。平方根を整数二分探索すれば境界誤差を避けられる。
+abc193_d,T060,数え上げ,add,full,裏向き2枚の数字を9*9通り列挙して勝敗を計算し、残存枚数に基づく重みを足す。多段の確率遷移を持たないため確率DPは付けない。
+abc193_d,T065,全探索,add,full,裏向き2枚の数字を9*9通り列挙して勝敗を計算し、残存枚数に基づく重みを足す。多段の確率遷移を持たないため確率DPは付けない。
+abc194_e,T154,MEX,add,full,値iの出現位置に番兵0とN+1を加える。連続出現間隔がMより大きいiの最小値が、長さMの区間で欠けうる最小値。O(N)でMEXの最小化を解く。
+abc196_e,T076,シミュレーション,add,full,"合成結果をmin(c,max(b,x+a))の3パラメータで持ち、各加算・min・max操作で更新する。最後に各問い合わせへ一回適用するO(N+Q)の集約シミュレーション。"
+abc199_f,T030,行列累乗,add,full,一操作後の期待値を表す遷移行列を構築し、そのK乗を二分累乗する。1/(2M)は法上の逆元で扱う。各ランダム経路の列挙や単なる確率DPではない。
+abc199_f,T176,二分累乗法,add,full,一操作後の期待値を表す遷移行列を構築し、そのK乗を二分累乗する。1/(2M)は法上の逆元で扱う。各ランダム経路の列挙や単なる確率DPではない。
+abc199_f,T236,モジュラ逆元,add,full,一操作後の期待値を表す遷移行列を構築し、そのK乗を二分累乗する。1/(2M)は法上の逆元で扱う。各ランダム経路の列挙や単なる確率DPではない。
+abc201_d,T022,基礎DP / 動的計画法入門,add,full,終端から各マスの得点差を逆順に計算し、高橋の手番では最大、青木では最小を取るミニマックスDP。純粋戦略の有限ゲーム探索でありミニマックス定理の名前だけとは異なる。
+abc201_d,T038,ミニマックス法,add,full,終端から各マスの得点差を逆順に計算し、高橋の手番では最大、青木では最小を取るミニマックスDP。純粋戦略の有限ゲーム探索でありミニマックス定理の名前だけとは異なる。
+abc201_d,T039,後退解析,add,full,終端から各マスの得点差を逆順に計算し、高橋の手番では最大、青木では最小を取るミニマックスDP。純粋戦略の有限ゲーム探索でありミニマックス定理の名前だけとは異なる。
+abc202_c,T060,数え上げ,add,full,"B[C[j]]の値ごとの頻度を配列に集計し、各A[i]に対応する頻度を合計するO(N)の数え上げ。全(i,j)列挙や連想配列は必要ない。"
+abc209_d,T066,幅優先探索,add,full,木を根からBFSまたはDFSで2色に塗り、問い合わせ両端の深さの偶奇が同じかで判定する。距離そのものやLCAを求める必要はない。保存解説が欠落していたため問題文からも確認。
+abc209_d,T067,深さ優先探索,add,full,木を根からBFSまたはDFSで2色に塗り、問い合わせ両端の深さの偶奇が同じかで判定する。距離そのものやLCAを求める必要はない。保存解説が欠落していたため問題文からも確認。
+abc209_d,T130,木 / 二分木,add,full,木を根からBFSまたはDFSで2色に塗り、問い合わせ両端の深さの偶奇が同じかで判定する。距離そのものやLCAを求める必要はない。保存解説が欠落していたため問題文からも確認。
+abc212_d,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc212_h,T108,XOR 畳み込み,add,selected_tags,山の石数のXORが0かでNimの勝敗を判定し、山の個数ごとのXOR畳み込みをWalsh-Hadamard変換で高速化する。通常のFFTとは分ける。
+abc213_f,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc217_e,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc217_h,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc223_d,T077,ソート,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc225_d,T076,シミュレーション,add,full,前後の車両番号を配列で管理して連結・分離をO(1)で更新し、出力時だけ先頭から辿る。出力総量が制限されるため実行可能。Union-Findは分離に対応しない。
+abc228_d,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc228_f,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc228_h,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc232_d,T022,基礎DP / 動的計画法入門,add,full,"各空きマスから右下へ進める最大歩数をdp[i][j]=1+max(dp[i+1][j],dp[i][j+1])で逆順に計算するO(HW)のDAG上DP。"
+abc234_d,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc239_h,T026,期待値DP,add,selected_tags,トーシェント関数は末尾の関連問題・Library Checkerの問題名に現れ、本問の解法では計算しない。実際には商を状態にした期待値のメモ化DPを用いる。
+abc239_h,T076,シミュレーション,remove,selected_tags,トーシェント関数は末尾の関連問題・Library Checkerの問題名に現れ、本問の解法では計算しない。実際には商を状態にした期待値のメモ化DPを用いる。
+abc239_h,T098,Euler の totient 関数,remove,selected_tags,トーシェント関数は末尾の関連問題・Library Checkerの問題名に現れ、本問の解法では計算しない。実際には商を状態にした期待値のメモ化DPを用いる。
+abc242_e,T060,数え上げ,add,full,前半が一致する回文は一意に決まる。前半を26進数の順位として数え、等しい前半から構成した回文がS以下かだけ追加判定する。一般の桁DPは不要。
+abc242_e,T073,文字列処理,add,full,前半が一致する回文は一意に決まる。前半を26進数の順位として数え、等しい前半から構成した回文がS以下かだけ追加判定する。一般の桁DPは不要。
+abc244_h,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc245_d,T127,多項式・形式的べき級数,add,full,最高次から係数を確定し引き算するO(NM)の多項式除算。別解はX=256などで多項式を評価して多倍長整数を割り、その桁から係数を復元する。FFTを必要としない。
+abc245_d,T171,多倍長整数,add,full,最高次から係数を確定し引き算するO(NM)の多項式除算。別解はX=256などで多項式を評価して多倍長整数を割り、その桁から係数を復元する。FFTを必要としない。
+abc245_g,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc247_h,T127,多項式・形式的べき級数,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc251_g,T180,凸多角形への点包含判定,add,full,凸多角形の各辺について全平行移動の半平面制約を最も厳しい一本へ集約し、問い合わせ点が全N本を満たすか外積で判定する。交差多角形の境界自体を構築する一般の半平面交差アルゴリズムとは分ける。
+abc251_g,T240,三角形の符号付き面積,add,full,凸多角形の各辺について全平行移動の半平面制約を最も厳しい一本へ集約し、問い合わせ点が全N本を満たすか外積で判定する。交差多角形の境界自体を構築する一般の半平面交差アルゴリズムとは分ける。
+abc252_f,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc253_c,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc253_f,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc266_e,T026,期待値DP,add,full,"残り回数tの最適期待値をE[t]=sum(max(d,E[t-1]),d=1..6)/6で更新する期待値DP。各出目に対する終了・続行の最適選択を含む。"
+abc269_h,T007,Deque,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc270_e,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc272_e,T154,MEX,add,full,MEXは高々Nなので、A_i+t*iが0以上N未満となる時刻tだけをバケットに追加する。総追加数O(N log N)から各時刻のMEXを求める。全M回で全要素を更新しない。
+abc275_h,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc278_c,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc279_e,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc281_e,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc281_h,T127,多項式・形式的べき級数,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc282_f,T095,Disjoint Sparse Table,remove,selected_tags,本問の構成は冪等な区間和集合に対応するSparse Table。Disjoint Sparse Tableの文は関連する改良データ構造の紹介で、提出する区間の構成手順としては示されていないため保留する。
+abc286_d,T150,ナップサック問題,add,selected_tags,枚数制限のある硬貨を二進分割して0/1部分和へ帰着する有界ナップサック型解法。単なる最小枚数問題ではない。
+abc288_d,T104,Schwartz-Zippel の補題,remove,selected_tags,Schwartz-Zippelはハッシュの衝突評価の一般化として言及されている。ここで用いる直接の衝突確率評価と区別し、同補題を解法の使用タグとして確定しない。
+abc291_e,T077,ソート,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc291_f,T055,最短経路,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc293_g,T060,数え上げ,add,full,"左端を平方根程度のブロックに分け、そのブロック内では右端順にクエリをソートするMo法。区間内の頻度cに対するC(c,3)を差分更新する。平方分割はクエリ順序の補助、Mo法自体は語彙外に記録。"
+abc293_g,T077,ソート,add,full,"左端を平方根程度のブロックに分け、そのブロック内では右端順にクエリをソートするMo法。区間内の頻度cに対するC(c,3)を差分更新する。平方分割はクエリ順序の補助、Mo法自体は語彙外に記録。"
+abc293_g,T084,Sqrt Decomposition / 平方分割,add,full,"左端を平方根程度のブロックに分け、そのブロック内では右端順にクエリをソートするMo法。区間内の頻度cに対するC(c,3)を差分更新する。平方分割はクエリ順序の補助、Mo法自体は語彙外に記録。"
+abc299_d,T064,二分探索,add,full,"両端の値が0と1という不変条件を保ち、中央の値に応じて片側半区間へ絞る。文字列全体の単調性を仮定しない二分探索で隣接する0,1を発見する。"
+abc299_g,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc301_c,T073,文字列処理,add,selected_tags,文字頻度を比較する主解と、文字種ごとに頂点をまとめた容量付き二部マッチングへの帰着を確認。文字ごとに全頂点を展開する二乗辺数の方法は満点解法に数えない。
+abc301_d,T117,ビット演算,add,full,?を0とした最小値を作り、上位ビットから1にしてもN以下なら立てる。ビット操作による貪欲解であり、すべての?の割当を列挙しない。
+abc303_h,T127,多項式・形式的べき級数,add,selected_tags,Prüferコードにおける出現回数が次数-1である性質で、次数制約つきラベル木を数列の数え上げに変換。指数型母関数の冪をNTTで求める。
+abc304_h,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc307_d,T013,Stack,add,full,文字を末尾へ積み、対応する開き括弧の位置もスタックで管理する。閉じ括弧でその開き括弧以降をpopする。各文字は高々一回追加・削除されO(N)。
+abc307_d,T073,文字列処理,add,full,文字を末尾へ積み、対応する開き括弧の位置もスタックで管理する。閉じ括弧でその開き括弧以降をpopする。各文字は高々一回追加・削除されO(N)。
+abc307_d,T128,括弧列,add,full,文字を末尾へ積み、対応する開き括弧の位置もスタックで管理する。閉じ括弧でその開き括弧以降をpopする。各文字は高々一回追加・削除されO(N)。
+abc307_f,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc308_f,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc314_f,T077,ソート,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc318_e,T060,数え上げ,add,full,"右端kごとに同じ値の過去位置の個数cと総和sを管理する。(k-1)*c-s-C(c,2)を足して全体O(N)。全三つ組の列挙はしない。"
+abc318_e,T177,二項係数,add,full,"右端kごとに同じ値の過去位置の個数cと総和sを管理する。(k-1)*c-s-C(c,2)を足して全体O(N)。全三つ組の列挙はしない。"
+abc322_f,T123,区間クエリ,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc324_c,T073,文字列処理,add,full,長さの差が高々1の場合に二本のポインタで文字列を比較し、一度だけ挿入・削除・置換によるミスマッチを許す。一般のLCSや二次元編集距離DPは不要。
+abc324_e,T060,数え上げ,add,full,各Sが含むTの最長接頭辞長Aと接尾辞長Bを二ポインタで求める。A_i+B_j>=|T|を満たす組はBの頻度の累積和から数えられ、全体O(総文字数+N+|T|)。
+abc324_e,T073,文字列処理,add,full,各Sが含むTの最長接頭辞長Aと接尾辞長Bを二ポインタで求める。A_i+B_j>=|T|を満たす組はBの頻度の累積和から数えられ、全体O(総文字数+N+|T|)。
+abc324_e,T086,累積和,add,full,各Sが含むTの最長接頭辞長Aと接尾辞長Bを二ポインタで求める。A_i+B_j>=|T|を満たす組はBの頻度の累積和から数えられ、全体O(総文字数+N+|T|)。
+abc324_g,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc325_d,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc327_d,T178,二部グラフ判定,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc328_e,T213,k組合せ列挙,add,selected_tags,N-1本の辺を組合せ列挙して木か確認する主解。別解の集合DPがPrimに似た頂点追加を行っても最小辺を貪欲に選ばず全コストを保持するため、Prim法そのものではない。
+abc328_e,T234,Prim 法,remove,selected_tags,N-1本の辺を組合せ列挙して木か確認する主解。別解の集合DPがPrimに似た頂点追加を行っても最小辺を貪欲に選ばず全コストを保持するため、Prim法そのものではない。
+abc329_d,T076,シミュレーション,add,full,得票数を配列で管理し、現在の当選者と新しい投票先だけを票数と番号で比較するO(N+M)のシミュレーション。ヒープは必要としない。
+abc331_e,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc337_e,T117,ビット演算,add,full,各ジュースの0始まり番号のビットiが1のときだけ友人iに飲ませる。症状のビット列から番号を復元する。全ての部分集合を探索する問題ではない。
+abc342_c,T073,文字列処理,add,full,元の26文字が現在どの文字へ写るかだけを更新し、最後にSを一回変換するO(26Q+N)の文字列処理。各クエリで全文字列を置換する方法を避ける。
+abc342_c,T076,シミュレーション,add,full,元の26文字が現在どの文字へ写るかだけを更新し、最後にSを一回変換するO(26Q+N)の文字列処理。各クエリで全文字列を置換する方法を避ける。
+abc342_g,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc346_c,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc346_e,T060,数え上げ,add,full,後ろから操作を走査し、既に処理した行列を記録する。初めて処理する行なら未処理の列数だけ色の個数へ加算し、列も同様に集約して数える。
+abc346_e,T076,シミュレーション,add,full,後ろから操作を走査し、既に処理した行列を記録する。初めて処理する行なら未処理の列数だけ色の個数へ加算し、列も同様に集約して数える。
+abc348_d,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc348_e,T020,全方位木DP,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc350_f,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc351_g,T020,全方位木DP,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc352_d,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc353_g,T001,Binary Indexed Tree / Fenwick Tree,add,selected_tags,位置ごとの最大報酬DPを同じ配列へ更新し、セグメント木で移動費を含む最大値を管理する。in-place更新が実際の実装手順である。
+abc354_g,T031,二部マッチング,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc357_c,T080,再帰関数,add,full,中央を白くし、残る8領域に小さい同じ図形を再帰的に描く。出力サイズに比例する分割統治による構築。図形を文字列で出力することだけで文字列アルゴリズムは付けない。
+abc357_c,T081,分割統治,add,full,中央を白くし、残る8領域に小さい同じ図形を再帰的に描く。出力サイズに比例する分割統治による構築。図形を文字列で出力することだけで文字列アルゴリズムは付けない。
+abc366_c,T008,Map / 連想配列,add,full,値ごとの個数と非ゼロの種類数を維持し、0から1または1から0へ変わったときだけ種類数を更新する。配列で足りるが連想配列による頻度管理も制約内の別実装。
+abc366_c,T076,シミュレーション,add,full,値ごとの個数と非ゼロの種類数を維持し、0から1または1から0へ変わったときだけ種類数を更新する。配列で足りるが連想配列による頻度管理も制約内の別実装。
+abc367_f,T104,Schwartz-Zippel の補題,remove,selected_tags,多重集合のランダム加算ハッシュについて、独立乱数の直接評価で十分な衝突保証を得られる。補題名の注記・証明可能性を、その補題を使うアルゴリズムとして扱わない。
+abc367_g,T107,Walsh-Hadamard 変換,add,selected_tags,XORごとの部分列個数をXOR畳み込みとHadamard変換で高速に計算する。畳み込みの種類を通常FFTと混同しない。
+abc367_g,T127,多項式・形式的べき級数,add,selected_tags,XORごとの部分列個数をXOR畳み込みとHadamard変換で高速に計算する。畳み込みの種類を通常FFTと混同しない。
+abc372_c,T073,文字列処理,add,full,更新位置を含む長さ3の部分文字列は高々3個なので、その箇所のABC一致数を更新前後で引き足しする。各クエリO(1)の文字列処理。
+abc373_f,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc374_g,T031,二部マッチング,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc376_e,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc376_g,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc379_f,T054,LCA,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc380_d,T117,ビット演算,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc384_d,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc384_e,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc384_e,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc385_g,T127,多項式・形式的べき級数,add,selected_tags,値の降順に要素を挿入し、両端・内部への挿入位置に応じた状態変化を数える挿入DPが本問の式の導出に用いられる。
+abc386_f,T263,LCS,remove,selected_tags,LCSは関連するブログ記事の表題に現れる。本問は挿入・削除・置換を許す編集距離の判定であり、最長共通部分列をそのまま計算するものではないためタグを除く。
+abc389_c,T011,Queue,add,full,追加された長さの累積和と削除済み個数のオフセットを管理する。前からk番目の頭の位置を二つの累積和の差で求める。FIFOという構造的性質を概念として記録。
+abc389_c,T086,累積和,add,full,追加された長さの累積和と削除済み個数のオフセットを管理する。前からk番目の頭の位置を二つの累積和の差で求める。FIFOという構造的性質を概念として記録。
+abc391_f,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc392_g,T127,多項式・形式的べき級数,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc395_d,T076,シミュレーション,add,full,鳩→内部の箱、箱→巣ラベル、巣ラベル→箱の3配列を持つ。巣全体の交換ではラベル対応だけ交換し、各問い合わせをO(1)で処理する集約シミュレーション。
+abc397_c,T012,Set,add,full,前からと後ろから出現済み値を管理し、各分割位置の左右の種類数を合計して最大を求める。Setを使って種類数を維持する実装もO(N log N)で実行可能。
+abc397_c,T060,数え上げ,add,full,前からと後ろから出現済み値を管理し、各分割位置の左右の種類数を合計して最大を求める。Setを使って種類数を維持する実装もO(N log N)で実行可能。
+abc399_g,T031,二部マッチング,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc401_e,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc401_g,T031,二部マッチング,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc407_e,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc409_f,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc413_b,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc414_f,T008,Map / 連想配列,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc418_f,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc419_b,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc423_d,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc424_e,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc428_e,T020,全方位木DP,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc434_e,T031,二部マッチング,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc436_c,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc439_f,T064,二分探索,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc443_d,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc446_f,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc448_g,T015,永続データ構造,add,selected_tags,この語は混合戦略零和ゲームの値の一意性を説明する定理名として現れる。純粋戦略ゲーム木を探索するミニマックス法とは区別し、同名部分の一致による付与を除く。 | Li Chao Treeを永続化して直線集合を管理し、包絡線の凸性から三分探索する別解。累積和の要領という説明は永続木の版を順に作る比喩で、区間和配列は計算しない。
+abc448_g,T038,ミニマックス法,remove,selected_tags,この語は混合戦略零和ゲームの値の一意性を説明する定理名として現れる。純粋戦略ゲーム木を探索するミニマックス法とは区別し、同名部分の一致による付与を除く。 | Li Chao Treeを永続化して直線集合を管理し、包絡線の凸性から三分探索する別解。累積和の要領という説明は永続木の版を順に作る比喩で、区間和配列は計算しない。
+abc448_g,T086,累積和,remove,selected_tags,この語は混合戦略零和ゲームの値の一意性を説明する定理名として現れる。純粋戦略ゲーム木を探索するミニマックス法とは区別し、同名部分の一致による付与を除く。 | Li Chao Treeを永続化して直線集合を管理し、包絡線の凸性から三分探索する別解。累積和の要領という説明は永続木の版を順に作る比喩で、区間和配列は計算しない。
+abc449_g,T132,畳み込み,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc449_g,T176,二分累乗法,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc451_c,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc456_e,T077,ソート,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc458_d,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc462_g,T127,多項式・形式的べき級数,add,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc466_f,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc471_d,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.
+abc481_f,T011,Queue,remove,none,V3 scoped evidence rules; removal is not a confirmed semantic false positive.

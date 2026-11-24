@@ -1,0 +1,8 @@
+﻿from record_resolution_0 import *
+put('abc445_c','T022:primary,T078:alternative,T005:alternative','i降順にans[i]=i(Ai=i)またはans[Ai]を決めるO(N)DP。Ai>=iなので固定点以外は必ず右へ進む。source1は関数を同時に10回合成する操作100回で10^100歩を直接計算。source2は親pointerをpath-halving経路圧縮し全O(N log N)で固定点探索。',anchor='後ろから求める')
+put('abc445_e','T134:primary,T223:supporting,T253:alternative,T008:supporting,T236:supporting,T176:supporting','最小素因数を線形篩/通常篩で前計算しAiを分解。各素数の最大・2番目指数（重複を込める）をmapで保持し全LCMをmod計算。除くAiが最大指数なら差分冪の逆元だけ掛ける。Ai<MODで逆元は存在。前計算O(Amax)、各ケースO(N log Amax*(log N+log MOD))等。本文の指数最大未満時に割る記述は逆で、コードの==が正しい。',anchor='素因数分解以外')
+put('abc446_e','T066:primary,T067:alternative,T011:supporting,T264:supporting,T078:alternative,T022:alternative,T080:supporting,T182:supporting','連続2剰余(x,y)から(y,(Ay+Bx)%M)へのfunctional graph。0を含む状態から逆辺BFS/DFSで全不適状態をO(M^2)に求め補集合を数える。source1はM^2歩以上の0訪問有無をdoublingでO(M^2 log M)。source2は未計算状態を仮OKとするメモ化再帰で閉路を処理しO(M^2)。木DPという記述は汎用テクニックの背景例。',anchor='辺の向きを逆')
+put('abc446_f','T067:primary,T010:alternative,T086:alternative','kを増やし誘導グラフ[1,k]で1からの到達集合を更新。既到達からkへの辺があればkから未到達・番号<=kだけDFS。各頂点/辺は定数回でO(N+M)。到達数=kならその集合の出辺先にある番号>kの異なる頂点数が必須削除数。出辺先フラグで数え、min入辺始点のprefix集計でも可。source1の頂点番号minheap優先探索ならO(N log N+M)。','増加する誘導グラフの到達可能性',anchor='深さ優先探索')
+put('abc446_g','T022:primary,T086:supporting,T003:alternative,T001:alternative,T015:alternative','値xの塊を貪欲最早位置で表し数列自体の重複を除く。末端pの出現回数Cに対し、前塊末端はJ(x,C-x)<q<J(x,C-x+1)の連続区間。dp[p]=その区間dp和なのでprefix和でO(N)、segtree/FenwickでもO(N log N)。source1は末尾値別distinct部分列DPをin-placeとmem[i]でO(N)更新。過去dp値を部分永続配列で取得するO(N log N)別解も可。',anchor='累積和によって')
+for pid,indices in {'abc445_c':'0,1,2','abc446_e':'0,1,2','abc446_f':'0,1','abc446_g':'0,1'}.items():rows[pid]['source_indices']=indices
+save()

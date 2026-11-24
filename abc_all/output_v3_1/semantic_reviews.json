@@ -1,0 +1,3825 @@
+{
+  "abc001_3": [
+    {
+      "problem_id": "abc001_3",
+      "scope": "full",
+      "accepted": {
+        "T264": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "条件分岐,丸め処理",
+      "source_indices": "0",
+      "evidence_quote": "((Dis * 10 + 1125) / 2250) % 16",
+      "reason": "風向の16区分を整数演算と剰余で循環させる解法。風速は丸めと区間判定であり、探索やDPを強制しない。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc001/editorial.pdf"
+      ],
+      "evidence_sha256": "60ac32d4a4c5505fde170074dfe7168af031f88e13f613a54b899c1ca1872147",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc010_2": [
+    {
+      "problem_id": "abc010_2",
+      "scope": "full",
+      "accepted": {
+        "T264": "primary",
+        "T076": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "あまりを利用する",
+      "reason": "花びら枚数の2と3による剰余条件を満たすまで減らす。解説の占い手順の直接シミュレーションも制約内の別解。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc010/editorial.pdf"
+      ],
+      "evidence_sha256": "6b3f010f63eab2451ff048892c24e70f8afac192f5d5227c28fa66072ab00554",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc010_3": [
+    {
+      "problem_id": "abc010_3",
+      "scope": "full",
+      "accepted": {
+        "T065": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "ユークリッド距離",
+      "source_indices": "0",
+      "evidence_quote": "寄り道出来る場所の候補が与えられます。",
+      "reason": "各候補の家について始点からの距離と終点までの距離の和を計算し、T*V以下かを全候補について調べる。経路の最適化アルゴリズムは使わない。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc010/editorial.pdf"
+      ],
+      "evidence_sha256": "2eecb5e17a0db4a42245d2166a5d28a342c65b7669b02e25b6f05ac0523aef2b",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc015_4": [
+    {
+      "problem_id": "abc015_4",
+      "scope": "full",
+      "accepted": {
+        "T150": "primary",
+        "T022": "supporting"
+      },
+      "rejected": [
+        "T059",
+        "T067"
+      ],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "非常に有名な「ナップサック問題」の亜種です",
+      "reason": "処理した枚数・使用枚数・幅を状態にする個数制約つきナップサックDP。DFSによる2^N列挙は満点制約に不適、XORは他問題との比較のための言及。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc015/editorial.pdf"
+      ],
+      "evidence_sha256": "0b76bdcb18d60b6e273aa8089c3d36b2729056858981e4aab35d8c01a363a909",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc031_d": [
+    {
+      "problem_id": "abc031_d",
+      "scope": "full",
+      "accepted": {
+        "T065": "primary",
+        "T073": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "文字列の長さが固定された場合どうなるでしょうか?",
+      "reason": "各数字に対応する長さ1〜3を3^K通り列挙する。固定した長さで文字列を切り分け、同じ数字への割当の一致と連結の整合を検証する。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc031/editorial.pdf"
+      ],
+      "evidence_sha256": "3f905f87c36225e498efd9185f91ad694b76175fa02c6729d4fc1bff4ac9826f",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc036_c": [
+    {
+      "problem_id": "abc036_c",
+      "scope": "full",
+      "accepted": {
+        "T085": "primary",
+        "T077": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "statement",
+      "evidence_quote": "大小関係を保存したまま座圧のデータを圧縮",
+      "reason": "相異なる値を昇順に並べ、各値を0始まりの順位に写す座標圧縮。N=10^5に対しソートでO(N log N)で構成できる。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc036/tasks/abc036_c"
+      ],
+      "evidence_sha256": "6d3ad4f5b96c8e9c1f1f9f87bb04c4a227b58ca334300840264b8424d0854945",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc036_d": [
+    {
+      "problem_id": "abc036_d",
+      "scope": "full",
+      "accepted": {
+        "T027": "primary",
+        "T060": "primary",
+        "T260": "concept"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "statement",
+      "evidence_quote": "両端の島が黒で塗られているような橋があってはいけません。",
+      "reason": "N頂点N-1辺の連結グラフは木。各頂点を白・黒にした部分木の塗り方を状態にし、白は子の白黒の和、黒は子の白のみを掛け合わせるO(N)木DP。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc036/tasks/abc036_d"
+      ],
+      "evidence_sha256": "77a8d49548cd86bda6006503a7073721b974fd1256e095ad0aa2a71f20029704",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc037_c": [
+    {
+      "problem_id": "abc037_c",
+      "scope": "full",
+      "accepted": {
+        "T086": "primary",
+        "T060": "concept"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "statement",
+      "evidence_quote": "長さ K の連続する部分列",
+      "reason": "累積和で各長さK区間の和をO(1)で求め、N-K+1区間を合計するO(N)解法。全区間の各要素を毎回足すO(NK)解法は採用しない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc037/tasks/abc037_c"
+      ],
+      "evidence_sha256": "56bc214de3040a70f71b218c26a10965a91b4b8417623f6f90914c416283c788",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc037_d": [
+    {
+      "problem_id": "abc037_d",
+      "scope": "full",
+      "accepted": {
+        "T022": "primary",
+        "T060": "primary",
+        "T077": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "statement",
+      "evidence_quote": "今いるマスより大きな整数が書かれたマスに移動",
+      "reason": "値の大小で辺を向けるとDAGになる。値の降順にdp[v]=1+sum(dp[u])を計算して全始点の経路数を足す。降順ソートはこの実装の補助。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc037/tasks/abc037_d"
+      ],
+      "evidence_sha256": "7d8c7cf48f9822eb40ea5d278a46e52b20645c62a9d1a4a35395ea64cd745837",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc038_c": [
+    {
+      "problem_id": "abc038_c",
+      "scope": "full",
+      "accepted": {
+        "T083": "primary",
+        "T060": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "statement",
+      "evidence_quote": "単調増加となるような (l,r) の数",
+      "reason": "右端を伸ばし、増加しなくなったら左端を現在位置へ移す。右端ごとの有効な左端数を加算するO(N)の二ポインタ法。単にLISを求める問題ではない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc038/tasks/abc038_c"
+      ],
+      "evidence_sha256": "9125f3f8f7e3e3105e39b949c703e645bc73e64f877888eaa084d53af69ce0fe",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc040_c": [
+    {
+      "problem_id": "abc040_c",
+      "scope": "full",
+      "accepted": {
+        "T022": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "statement",
+      "evidence_quote": "現在の柱から 1 個もしくは 2 個右にある柱",
+      "reason": "dp[i]=min(dp[i-1]+abs(a[i]-a[i-1]),dp[i-2]+abs(a[i]-a[i-2]))。各柱までの最小費用をO(N)で計算する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc040/tasks/abc040_c"
+      ],
+      "evidence_sha256": "9dcab76f91f73267e8aa515b71bcdbc78738f69f3f9a10fd85d301527e458471",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc041_d": [
+    {
+      "problem_id": "abc041_d",
+      "scope": "full",
+      "accepted": {
+        "T017": "primary",
+        "T060": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "トポロジカル順序の数え上げ",
+      "source_indices": "statement",
+      "evidence_quote": "2≦N≦16",
+      "reason": "既に並べた頂点集合をビットマスクにし、すべての先行頂点が集合にある未配置頂点だけを末尾へ加えるO(N*2^N)集合DP。通常のトポロジカルソート一回とは区別。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc041/tasks/abc041_d"
+      ],
+      "evidence_sha256": "bae205017064b35dbb3d3eb13b73c2ddf668c865a08951f343c852264da6207b",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "arc074_b": [
+    {
+      "problem_id": "arc074_b",
+      "scope": "full",
+      "accepted": {
+        "T010": "primary",
+        "T065": "supporting"
+      },
+      "rejected": [
+        "T011",
+        "T022",
+        "T032",
+        "T033",
+        "T060",
+        "T077",
+        "T230"
+      ],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "優先度付きキュー",
+      "reason": "分割位置kをN〜2Nで走査し、左の大きいN個と右の小さいN個の和をヒープで維持する。後続E・F問題のDP・フローを除去。毎回のソートはO(N^2 log N)で不適、通常のFIFOキューは用いない。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/arc074/editorial.pdf"
+      ],
+      "evidence_sha256": "3a7af057cd30f67d83b2319db5ced0ec4eb8476a769f9214ca81bc1915e91605",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "arc080_b": [
+    {
+      "problem_id": "arc080_b",
+      "scope": "full",
+      "accepted": {
+        "T076": "primary"
+      },
+      "rejected": [
+        "T003",
+        "T010",
+        "T011",
+        "T031",
+        "T118"
+      ],
+      "out_of_vocabulary": "構築",
+      "source_indices": "0",
+      "evidence_quote": "マスを順序付けした上で",
+      "reason": "蛇行して隣接する順番に全マスを並べ、指定された個数ずつ順に色を塗る。これで各色が連結になる。セグメント木とマッチングは後続E・F問題から混入していた。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/arc080/editorial.pdf"
+      ],
+      "evidence_sha256": "c87ccd622529e64b55f31ccbd43801b3a401218cf0db6283c79000fcde442913",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc023_c": [
+    {
+      "problem_id": "abc023_c",
+      "scope": "full",
+      "accepted": {
+        "T060": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "度数分布",
+      "source_indices": "0",
+      "evidence_quote": "飴がX 個ある行(列)がY 個ある",
+      "reason": "行ごと・列ごとの飴数の度数分布から、和がKになる組の個数を計算する。飴のあるNマスだけ二重計数の補正を行えばO(R+C+N)。全R*Cマスの探索はしない。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc023/editorial.pdf"
+      ],
+      "evidence_sha256": "c9f2a3a675e8f7dc136a2ee151015431b7d921dbe738f7c8d5c29a6d149ad9d1",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc024_c": [
+    {
+      "problem_id": "abc024_c",
+      "scope": "full",
+      "accepted": {
+        "T076": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "貪欲法",
+      "source_indices": "0",
+      "evidence_quote": "民族は近づく方向にのみ進めば良い",
+      "reason": "民族ごとに各日を走査し、現在地を含む移動区間内で目的地へ可能な限り近づける。区間内なら目的地へ到着し、そうでなければ端点へ動かすO(KD)シミュレーション。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc024/editorial.pdf"
+      ],
+      "evidence_sha256": "fbf072c43dd264d18478ea72d56f3d9ccbb46eed5b59e74b5115cf431e5098f3",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc028_c": [
+    {
+      "problem_id": "abc028_c",
+      "scope": "full",
+      "accepted": {},
+      "rejected": [],
+      "out_of_vocabulary": "基本算術,大小比較",
+      "source_indices": "0",
+      "evidence_quote": "max(A+D+E, B+C+E)",
+      "reason": "昇順で与えられる5数について第3位は二候補の大きい方と直接導ける。主解ではソートや全探索を行わず、閉形式を語彙外として記録。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc028/editorial.pdf"
+      ],
+      "evidence_sha256": "ed94b89a5ad6af27e3e654ffdcaeff887a59f7493816fc00a15fc9f240e395ef",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc029_d": [
+    {
+      "problem_id": "abc029_d",
+      "scope": "full",
+      "accepted": {
+        "T028": "primary",
+        "T060": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "statement",
+      "evidence_quote": "1 以上 N 以下のすべての整数を十進表記",
+      "reason": "上位桁からN未満か・一致かと1の出現数を状態に桁DPし、最後に出現数で重み付けして合計できる。全整数列挙の部分点解法と分ける。これは問題文から構成した実行可能解法。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc029/tasks/abc029_d"
+      ],
+      "evidence_sha256": "d8b5e42c65f5bafd7c1e158dd111efbdbc7948ef5361dde46f8202fb480959bb",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc031_c": [
+    {
+      "problem_id": "abc031_c",
+      "scope": "full",
+      "accepted": {
+        "T065": "primary",
+        "T076": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "青木君が自分の得点が最大となるように",
+      "reason": "高橋の選択iを全列挙し、青木の選択jを左から全列挙して青木の得点が最大の最左jを採る。そのときの高橋の得点を最大化するO(N^3)。解説末尾の最小値という表記には従わず問題文の最大化に従う。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc031/editorial.pdf"
+      ],
+      "evidence_sha256": "074ce41d446d7b34e5a19c4f5635610d575a551245a6440f63952a4c4d41d828",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc033_c": [
+    {
+      "problem_id": "abc033_c",
+      "scope": "full",
+      "accepted": {
+        "T073": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "+で区切られた部分それぞれに最低1つの0",
+      "reason": "文字列を+で分割し、0のない積の項を数える。一般の式評価や指数全探索を必要とせず、文字列の線形走査で解く。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc033/editorial.pdf"
+      ],
+      "evidence_sha256": "4c17ef42b0c52a5a8704a75b7f5c60e74dc0093e81e076e3a4e690fb69b59417",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc034_d": [
+    {
+      "problem_id": "abc034_d",
+      "scope": "full",
+      "accepted": {
+        "T064": "primary",
+        "T077": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "パラメトリック探索",
+      "source_indices": "statement",
+      "evidence_quote": "濃度として考えられる最大値",
+      "reason": "目標濃度xに対しw_i*(p_i-x)を降順にソートし、上位K個の和が非負なら達成可能。単調性に基づく実数二分探索で最大濃度を求める。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc034/tasks/abc034_d"
+      ],
+      "evidence_sha256": "aeb96119432553c9e4db2f7f5d543ce2af008060d05857b66263172eb440082c",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc039_c": [
+    {
+      "problem_id": "abc039_c",
+      "scope": "full",
+      "accepted": {
+        "T073": "primary",
+        "T065": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "statement",
+      "evidence_quote": "音階は \"ド ド# レ レ# ミ ファ ファ# ソ ソ# ラ ラ# シ\" を繰り返しています",
+      "reason": "白鍵の7候補を開始位置とする周期文字列と入力を比較する。周期表を用いる基本文字列処理と定数個の候補列挙。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc039/tasks/abc039_c"
+      ],
+      "evidence_sha256": "ad1696ba3025b61558256fa2a659028ea23dd199036057e32e68e6e1717f9c89",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc039_d": [
+    {
+      "problem_id": "abc039_d",
+      "scope": "full",
+      "accepted": {
+        "T076": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "構築,画像の収縮と膨張",
+      "source_indices": "statement",
+      "evidence_quote": "その画素と周り 8 方向の画素",
+      "reason": "出力の白画素の周囲を元画像の白として確定し、残りを黒にした候補に問題の変換を実際に適用して一致を確認するO(HW)。文字列アルゴリズムとして扱わない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc039/tasks/abc039_d"
+      ],
+      "evidence_sha256": "ffef81c262c9662c14e067280eb47871428ce03c46e287166be2fabddd844b7e",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc040_d": [
+    {
+      "problem_id": "abc040_d",
+      "scope": "full",
+      "accepted": {
+        "T005": "primary",
+        "T077": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "オフラインクエリ",
+      "source_indices": "statement",
+      "evidence_quote": "造られた年が w_j 年以前",
+      "reason": "道路年と問い合わせ閾値を降順に処理する。閾値より新しい道路だけUnion-Findで併合し、問い合わせ頂点の連結成分サイズを答える。各問い合わせでの全探索は不要。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc040/tasks/abc040_d"
+      ],
+      "evidence_sha256": "62ebd8e1c49a27b54a8bbc7c606616f77bbf63f9fbb41e263ee48dd29b7072dd",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc041_c": [
+    {
+      "problem_id": "abc041_c",
+      "scope": "full",
+      "accepted": {
+        "T077": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "statement",
+      "evidence_quote": "出席番号を背の高い方から順に出力",
+      "reason": "身長と元の出席番号のペアを身長降順にソートし番号を出力する。O(N log N)。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc041/tasks/abc041_c"
+      ],
+      "evidence_sha256": "752f2410cd2322abc9588501a50295a82eb7615cacb56ef836224a1cccf3bac5",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc125_c": [
+    {
+      "problem_id": "abc125_c",
+      "scope": "full",
+      "accepted": {
+        "T097": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "累積GCD",
+      "source_indices": "0",
+      "evidence_quote": "gcd は結合則が成り立ちます",
+      "reason": "左右の累積GCDを作り、iを除くGCDをgcd(L[i],R[i+1])で計算する。各GCDはユークリッド互除法で実装可能。累積和タグは和の計算を行わないので付けない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc125/tasks/abc125_c"
+      ],
+      "evidence_sha256": "2fa1d55de1958bd01181a527323d30443d29d00c931a05aa33e2e446d0d8d1ea",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc148_c": [
+    {
+      "problem_id": "abc148_c",
+      "scope": "full",
+      "accepted": {
+        "T065": "primary",
+        "T264": "supporting",
+        "T097": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "最小公倍数",
+      "source_indices": "0",
+      "evidence_quote": "高々B 回確認すれば十分",
+      "reason": "Aの倍数を順に列挙しBで割り切れる最初の数を求める解説主解はO(B)で実行可能。別解はユークリッド互除法でgcdを計算しA/gcd(A,B)*Bを求める。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc148/tasks/abc148_c"
+      ],
+      "evidence_sha256": "db8c6baa3addb5435b00005000eca64289ab1c20b0f352400a681862713e3272",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc150_d": [
+    {
+      "problem_id": "abc150_d",
+      "scope": "full",
+      "accepted": {
+        "T097": "supporting",
+        "T264": "supporting",
+        "T060": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "最小公倍数",
+      "source_indices": "0",
+      "evidence_quote": "最小公倍数",
+      "reason": "a_iを割り切れる2の回数が全て同じことを確認し、a_i/2のLCMをユークリッド互除法で計算する。上限M以下のその奇数倍を数える。一般の素因数分解は不要。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc150/tasks/abc150_d"
+      ],
+      "evidence_sha256": "ea9cf219ed27ebe89a720b0014d77f0faa480934ff51cb2b185016654728c2ae",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc172_c": [
+    {
+      "problem_id": "abc172_c",
+      "scope": "full",
+      "accepted": {
+        "T083": "primary",
+        "T086": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "j = best0 から始めることができます",
+      "reason": "両列の累積和を作り、Aから読む冊数iを増やすにつれてBの冊数jを減らす。jは全体でM回しか減らずO(N+M)。全(i,j)の二重全探索を除外。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc172/tasks/abc172_c"
+      ],
+      "evidence_sha256": "a9302d4bbb3bee3b6b2a1676f712ba54b1efa22fc29b5b542d878099cd86c3c7",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc178_e": [
+    {
+      "problem_id": "abc178_e",
+      "scope": "full",
+      "accepted": {
+        "T155": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "45度回転",
+      "source_indices": "statement",
+      "evidence_quote": "異なる二点間のマンハッタン距離",
+      "reason": "座標をx+yとx-yへ変換し、それぞれの最大値と最小値の差の大きい方を取るO(N)解法。一般の最近点対や全点対列挙は不要。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc178/tasks/abc178_e"
+      ],
+      "evidence_sha256": "8c227cb7a6e1e38bee51479bc580718edd809a48094ef7823311be7cfc468284",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc181_c": [
+    {
+      "problem_id": "abc181_c",
+      "scope": "full",
+      "accepted": {
+        "T065": "primary",
+        "T240": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "statement",
+      "evidence_quote": "相異なる 3 点であって、同一直線上",
+      "reason": "3点の組を全列挙し、2ベクトルの外積が0かを整数演算で判定する。O(N^3)でN<=100に対応。三角形の符号付き面積は共線判定の補助として記録。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc181/tasks/abc181_c"
+      ],
+      "evidence_sha256": "b69c3d6fd4f2f1179dac674845030ae35570b7156fd6b33b13fc662bc70155c7",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc187_f": [
+    {
+      "problem_id": "abc187_f",
+      "scope": "full",
+      "accepted": {
+        "T017": "primary",
+        "T193": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "クリーク被覆",
+      "source_indices": "0",
+      "evidence_quote": "下位集合から順に",
+      "reason": "各頂点集合が完全グラフかを前計算し、集合を部分集合へ分割するbitDPで最小被覆数を求める。部分マスク列挙で全体O(3^N)。単なる2^N回の全探索とは区別。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc187/editorial/488"
+      ],
+      "evidence_sha256": "fc2308f5f1db740d9af81eb4f53cacbf678a0a01702c6ac3255d9d0e6e09efc7",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc194_e": [
+    {
+      "problem_id": "abc194_e",
+      "scope": "full",
+      "accepted": {
+        "T154": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "出現位置間隔",
+      "source_indices": "0",
+      "evidence_quote": "計算量は",
+      "reason": "値iの出現位置に番兵0とN+1を加える。連続出現間隔がMより大きいiの最小値が、長さMの区間で欠けうる最小値。O(N)でMEXの最小化を解く。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc194/editorial/827"
+      ],
+      "evidence_sha256": "1e395ad87962e7265d8306f0a4c48efe5e7ea39032ceb7dd4b79368a09503a3f",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc199_f": [
+    {
+      "problem_id": "abc199_f",
+      "scope": "full",
+      "accepted": {
+        "T030": "primary",
+        "T176": "supporting",
+        "T236": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "期待値の線形性",
+      "source_indices": "0",
+      "evidence_quote": "全体で",
+      "reason": "一操作後の期待値を表す遷移行列を構築し、そのK乗を二分累乗する。1/(2M)は法上の逆元で扱う。各ランダム経路の列挙や単なる確率DPではない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc199/editorial/1167"
+      ],
+      "evidence_sha256": "f7acb2ebb0d68a32237e0a7571cfcb780878587a856e89d44418775bb0d154bf",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    },
+    {
+      "problem_id": "abc199_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "期待値を",
+      "reason": "各頂点の期待値ベクトルを一操作ごとの線形遷移で更新し、行列累乗でK回をまとめる。確率分布全体を保持する確率DPではなく、期待値の一次モーメントだけを伝播する高速化として記録する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc199/editorial/1167"
+      ],
+      "evidence_sha256": "f7acb2ebb0d68a32237e0a7571cfcb780878587a856e89d44418775bb0d154bf",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc201_d": [
+    {
+      "problem_id": "abc201_d",
+      "scope": "full",
+      "accepted": {
+        "T022": "primary",
+        "T038": "primary",
+        "T039": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "statement",
+      "evidence_quote": "両者とも自分の勝敗が最適になるように行動",
+      "reason": "終端から各マスの得点差を逆順に計算し、高橋の手番では最大、青木では最小を取るミニマックスDP。純粋戦略の有限ゲーム探索でありミニマックス定理の名前だけとは異なる。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc201/tasks/abc201_d"
+      ],
+      "evidence_sha256": "48f15d147a09c24755ad652ac6bcf77b41fa2a3c8cea43057e9784035c0ac0cc",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc225_d": [
+    {
+      "problem_id": "abc225_d",
+      "scope": "full",
+      "accepted": {
+        "T076": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "双方向連結リスト",
+      "source_indices": "0",
+      "evidence_quote": "自分の前部に連結している電車の番号",
+      "reason": "前後の車両番号を配列で管理して連結・分離をO(1)で更新し、出力時だけ先頭から辿る。出力総量が制限されるため実行可能。Union-Findは分離に対応しない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc225/editorial/2832"
+      ],
+      "evidence_sha256": "ec30b81f108bbeb59fef5dd31295a0a45ae9d9a5a1b4103616afba6c5ad72d34",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc266_e": [
+    {
+      "problem_id": "abc266_e",
+      "scope": "full",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "最適停止",
+      "source_indices": "0",
+      "evidence_quote": "スコアの期待値の最大値は残りのターン数にのみ依存",
+      "reason": "残り回数tの最適期待値をE[t]=sum(max(d,E[t-1]),d=1..6)/6で更新する期待値DP。各出目に対する終了・続行の最適選択を含む。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc266/editorial/4662"
+      ],
+      "evidence_sha256": "b4ea651836cdd08366f0f1c593c8ff74c04766dca76c07c2a586ea29af681dd8",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc099_c": [
+    {
+      "problem_id": "abc099_c",
+      "scope": "full",
+      "accepted": {
+        "T065": "primary",
+        "T264": "supporting",
+        "T022": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "いくら引き出すかを全通り試す",
+      "reason": "6の冪で引き出す額iを0〜Nで全列挙し、iの6進桁和とN-iの9進桁和を最小化する主解。金額dp[n]を硬貨1,6^k,9^kから更新するO(N log N)コインDPも実行可能な別解。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc099/editorial.pdf"
+      ],
+      "evidence_sha256": "c5741568f1bd6955f5dce2c98447dfec1e5e809a918f4afef4c96bc61c7ad9bb",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc122_c": [
+    {
+      "problem_id": "abc122_c",
+      "scope": "full",
+      "accepted": {
+        "T086": "primary",
+        "T073": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "問いの処理を始める前に構築",
+      "reason": "ACの開始位置を1とした配列の累積和を作り、各区間を累積和の差で答える。各クエリで全文字を走査するシミュレーションは制限内に終わらない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc122/tasks/abc122_c"
+      ],
+      "evidence_sha256": "ef23a894422397612faae9960bdfcadc4241606ac2d806fd193f16f6ad47dafe",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc152_d": [
+    {
+      "problem_id": "abc152_d",
+      "scope": "full",
+      "accepted": {
+        "T060": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "度数分布",
+      "source_indices": "0",
+      "evidence_quote": "ci,j × cj,i",
+      "reason": "先頭桁i・末尾桁jの数の個数c[i][j]を集計し、c[i][j]*c[j][i]を足す。全整数ペアの二重全探索は不要。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc152/tasks/abc152_d"
+      ],
+      "evidence_sha256": "16f8f9e0ac8319db3bca50ee803894478c15471f50315dba69a70e1789b23dec",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc159_d": [
+    {
+      "problem_id": "abc159_d",
+      "scope": "full",
+      "accepted": {
+        "T060": "primary",
+        "T177": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "この問題をO(N) で解く",
+      "reason": "全体の同値ペア数sum(C(c_i,2))から、除いたボールの寄与c[A_k]-1を引く。二項係数は次数2の直接式で計算し、逆元や階乗テーブルは不要。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc159/tasks/abc159_d"
+      ],
+      "evidence_sha256": "66358cc98bec2629c94f68323dbe7f1ab9f0e7a187bc4e74fe3604c07d52f675",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc162_e": [
+    {
+      "problem_id": "abc162_e",
+      "scope": "full",
+      "accepted": {
+        "T060": "primary",
+        "T119": "primary",
+        "T176": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "2X, 3X, ... の個数を引いて",
+      "reason": "floor(K/d)^Nから真の倍数の個数を降順に引く約数上のメビウス反転。累乗は二分累乗で計算する。各数列に対するユークリッド互除法は行わない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc162/tasks/abc162_e"
+      ],
+      "evidence_sha256": "b3f783ac216c306baf5f65f122fe01282a6d6accd345a538733baa4efc63689c",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc166_d": [
+    {
+      "problem_id": "abc166_d",
+      "scope": "full",
+      "accepted": {
+        "T065": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "候補が実際に式を満たすかどうか判定",
+      "reason": "解説で証明された有限範囲のA,Bを全列挙し5乗差がXになる組を探す。Factorizationというタイトルだけで素因数分解を付けない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc166/tasks/abc166_d"
+      ],
+      "evidence_sha256": "ea5bfd421c5e761ebb1744127295fe63055a3318c4bc4e734efd6e91bf4bbf67",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc171_d": [
+    {
+      "problem_id": "abc171_d",
+      "scope": "full",
+      "accepted": {
+        "T076": "primary",
+        "T008": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "度数分布",
+      "source_indices": "0",
+      "evidence_quote": "数列A そのものを操作する代わりに",
+      "reason": "値ごとの出現数と総和を維持して、置換ごとに総和へ(C-B)*count[B]を足し出現数を移す集約シミュレーション。配列で足りるが連想配列による実装も制約内。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc171/tasks/abc171_d"
+      ],
+      "evidence_sha256": "ffc966d35c42baf220cf172ae9bd71e86b3e2067c13c9d3c727cce2570af685a",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc179_f": [
+    {
+      "problem_id": "abc179_f",
+      "scope": "full",
+      "accepted": {
+        "T076": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "償却解析",
+      "source_indices": "0",
+      "evidence_quote": "すべてのクエリについての合計で",
+      "reason": "行列方向の境界と初めて枠の外に出るときの停止位置を配列で記録する。各要素は一度だけ更新され全体O(N+Q)。この確認した主解ではセグメント木は不要。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc179/editorial/122"
+      ],
+      "evidence_sha256": "aa38ca68a9259454d44addc03802569231e61c5a0bfe202ae09c22a7719e1ec6",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc182_d": [
+    {
+      "problem_id": "abc182_d",
+      "scope": "full",
+      "accepted": {
+        "T086": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "累積最大値",
+      "source_indices": "0",
+      "evidence_quote": "座標の最大値",
+      "reason": "各区間の最終変位は累積和p_i、区間中の最大変位は累積和の累積最大q_i。現在座標+q_iの最大を取り、現在座標へp_iを加えるO(N)解法。O(N^2)の直接シミュレーションを避ける。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc182/editorial/291"
+      ],
+      "evidence_sha256": "ffcbe3136785e682c61f1e2f08af21bb4cccdcaaed2bcd6fa8561a4a3af4d4b9",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc189_d": [
+    {
+      "problem_id": "abc189_d",
+      "scope": "full",
+      "accepted": {
+        "T022": "primary",
+        "T060": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "statement",
+      "evidence_quote": "S_i が AND なら",
+      "reason": "先頭i個までの論理式がTrue/Falseになる代入数を状態として各AND/ORを反映する2状態DP。2^(N+1)の代入全探索は不要。ビット集合の演算問題ではない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc189/tasks/abc189_d"
+      ],
+      "evidence_sha256": "48c2970f724b2c52323960ceb170411e63f268532d7233c8bae7500461036b27",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc193_d": [
+    {
+      "problem_id": "abc193_d",
+      "scope": "full",
+      "accepted": {
+        "T065": "primary",
+        "T060": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "確率の直接計算",
+      "source_indices": "statement",
+      "evidence_quote": "高橋くんの勝つ確率を求めてください。",
+      "reason": "裏向き2枚の数字を9*9通り列挙して勝敗を計算し、残存枚数に基づく重みを足す。多段の確率遷移を持たないため確率DPは付けない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc193/tasks/abc193_d"
+      ],
+      "evidence_sha256": "79b37f2da1b00b0a8c461067322de32137578251e2fce88c82c90eb59c517159",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc194_c": [
+    {
+      "problem_id": "abc194_c",
+      "scope": "full",
+      "accepted": {},
+      "rejected": [],
+      "out_of_vocabulary": "式変形,総和の直接計算",
+      "source_indices": "0",
+      "evidence_quote": "最後の式",
+      "reason": "二乗差の総和をN*sum(A_i^2)-sum(A_i)^2へ変形して一回ずつ総和を計算するO(N)解法。累積和配列を用いた区間計算は必要なく、語彙にない閉形式として残す。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc194/editorial/826"
+      ],
+      "evidence_sha256": "b08da91cd746e1b732c02baeafdb34fcb2c6860f975a9c4f0498c592ad518d31",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc202_c": [
+    {
+      "problem_id": "abc202_c",
+      "scope": "full",
+      "accepted": {
+        "T060": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "度数分布",
+      "source_indices": "0",
+      "evidence_quote": "前もって計算しておく",
+      "reason": "B[C[j]]の値ごとの頻度を配列に集計し、各A[i]に対応する頻度を合計するO(N)の数え上げ。全(i,j)列挙や連想配列は必要ない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc202/editorial/1859"
+      ],
+      "evidence_sha256": "823a1a3c9bdb8fd67f358fcb5cb2ee862a53c2bf37c1f5a0b741a0c2be916e07",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc209_d": [
+    {
+      "problem_id": "abc209_d",
+      "scope": "full",
+      "accepted": {
+        "T066": "primary",
+        "T067": "alternative",
+        "T130": "concept"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "木の二部グラフ性",
+      "source_indices": "statement",
+      "evidence_quote": "N 個の街と N-1 本の道路",
+      "reason": "木を根からBFSまたはDFSで2色に塗り、問い合わせ両端の深さの偶奇が同じかで判定する。距離そのものやLCAを求める必要はない。保存解説が欠落していたため問題文からも確認。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc209/tasks/abc209_d"
+      ],
+      "evidence_sha256": "6d67908c1754a381aad03b4765d8018fa4eafee062bb0167e183dba5806b109d",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc232_d": [
+    {
+      "problem_id": "abc232_d",
+      "scope": "full",
+      "accepted": {
+        "T022": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "大きい順",
+      "reason": "各空きマスから右下へ進める最大歩数をdp[i][j]=1+max(dp[i+1][j],dp[i][j+1])で逆順に計算するO(HW)のDAG上DP。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc232/editorial/3146"
+      ],
+      "evidence_sha256": "c2d49ae9fee64480639b387c971bc4546e94f800677d65f2051bc6904e3d963a",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc242_e": [
+    {
+      "problem_id": "abc242_e",
+      "scope": "full",
+      "accepted": {
+        "T073": "primary",
+        "T060": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "26進数",
+      "source_indices": "0",
+      "evidence_quote": "回文は、",
+      "reason": "前半が一致する回文は一意に決まる。前半を26進数の順位として数え、等しい前半から構成した回文がS以下かだけ追加判定する。一般の桁DPは不要。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc242/editorial/3516"
+      ],
+      "evidence_sha256": "12da6c033968933b05e73ae379df68217f9d4e6f78b4bc7dbc2dcf8e176e15bd",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc245_d": [
+    {
+      "problem_id": "abc245_d",
+      "scope": "full",
+      "accepted": {
+        "T127": "primary",
+        "T171": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "多項式の筆算",
+      "source_indices": "0,1",
+      "evidence_quote": "多項式の除算",
+      "reason": "最高次から係数を確定し引き算するO(NM)の多項式除算。別解はX=256などで多項式を評価して多倍長整数を割り、その桁から係数を復元する。FFTを必要としない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc245/editorial/3651",
+        "https://atcoder.jp/contests/abc245/editorial/3888"
+      ],
+      "evidence_sha256": "f3c95f3332696a77638e3e61edea9eaae6dd59afbd63c2dcb375c64bb0c56c51",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc272_e": [
+    {
+      "problem_id": "abc272_e",
+      "scope": "full",
+      "accepted": {
+        "T154": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "調和級数による計算量評価",
+      "source_indices": "0",
+      "evidence_quote": "調和級数より大事な値",
+      "reason": "MEXは高々Nなので、A_i+t*iが0以上N未満となる時刻tだけをバケットに追加する。総追加数O(N log N)から各時刻のMEXを求める。全M回で全要素を更新しない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc272/editorial/4982"
+      ],
+      "evidence_sha256": "0e4ad7c35a5a0ce4f60e751a8877f3bdcbdfbe67d1130b82af4c42087cfff3f4",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc299_d": [
+    {
+      "problem_id": "abc299_d",
+      "scope": "full",
+      "accepted": {
+        "T064": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "対話型問題",
+      "source_indices": "0",
+      "evidence_quote": "探索範囲の中央の位置",
+      "reason": "両端の値が0と1という不変条件を保ち、中央の値に応じて片側半区間へ絞る。文字列全体の単調性を仮定しない二分探索で隣接する0,1を発見する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc299/editorial/6245"
+      ],
+      "evidence_sha256": "043b800237d36d4da724e30b9185503fe46885daebf00f08d4df09fff785ccdc",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc301_d": [
+    {
+      "problem_id": "abc301_d",
+      "scope": "full",
+      "accepted": {
+        "T117": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "貪欲法",
+      "source_indices": "1",
+      "evidence_quote": "上から順に次を行えば答えが得られます",
+      "reason": "?を0とした最小値を作り、上位ビットから1にしてもN以下なら立てる。ビット操作による貪欲解であり、すべての?の割当を列挙しない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc301/editorial/6347"
+      ],
+      "evidence_sha256": "5bd7cc3ad96d50b7255c9376861560c5b122bbb8cfa79d0046c3b07391ac5d2a",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc307_d": [
+    {
+      "problem_id": "abc307_d",
+      "scope": "full",
+      "accepted": {
+        "T013": "primary",
+        "T073": "supporting",
+        "T128": "concept"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "末尾に追加する",
+      "reason": "文字を末尾へ積み、対応する開き括弧の位置もスタックで管理する。閉じ括弧でその開き括弧以降をpopする。各文字は高々一回追加・削除されO(N)。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc307/editorial/6647"
+      ],
+      "evidence_sha256": "1a65ee20daa96634aa8ae3696d229fe40a84d1655f4b2017a1a46765d361070a",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc133_e": [
+    {
+      "problem_id": "abc133_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T260": "concept",
+        "T067": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "DFS 的に色を塗っていく",
+      "reason": "親と祖父で使った色を除く選択肢を、根からDFSで子へ伝えながら掛け合わせる木の塗り分け問題。塗り方の概念とDFSの利用を確認。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc133/tasks/abc133_e"
+      ],
+      "evidence_sha256": "b1083915d2a1495d520f2ac67b6e4ab5d1edbc09764551125ba06b1eb6901b00",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc139_e": [
+    {
+      "problem_id": "abc139_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T182": "supporting",
+        "T067": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "閉路検出と最大パス長の算出",
+      "reason": "各試合を頂点、実施順の依存を辺とする有向グラフに帰着し、DFSで閉路の有無と最長パス長を調べる。閉路検出は実際の実行可能解法の一部。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc139/tasks/abc139_e"
+      ],
+      "evidence_sha256": "fcaafcf3061362cd64de90c8a5b0bae275cd98c13c0d11839ae730d24ace4900",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc184_d": [
+    {
+      "problem_id": "abc184_d",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary",
+        "T026": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "確率DP",
+      "reason": "(a,b,c)の状態を確率DPで進める解法に加え、終端の期待残り回数を0として各遷移の期待回数を逆向きに求める期待値DPもO(100^3)で実行可能。単なる確率の一回計算と分ける。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc184/editorial/152"
+      ],
+      "evidence_sha256": "168600c1f77b63a70fc73ca9717ce8f6bf5971519fd99c643fc06ce688976aef",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    },
+    {
+      "problem_id": "abc184_d",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary",
+        "T026": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "確率DP",
+      "reason": "状態(a,b,c)に到達する確率を遷移して終端時刻で重み付けする解法は確率DP。終端までの期待残り回数を逆向きに計算する実行可能な期待値DPも区別して残す。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc184/editorial/152"
+      ],
+      "evidence_sha256": "168600c1f77b63a70fc73ca9717ce8f6bf5971519fd99c643fc06ce688976aef",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc184_f": [
+    {
+      "problem_id": "abc184_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T262": "concept",
+        "T082": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "部分和問題",
+      "reason": "選ぶ問題の所要時間和を上限T以下で最大化する部分和型問題。N個を二分して和を列挙し組み合わせる半分全列挙が満点解法。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc184/editorial/354"
+      ],
+      "evidence_sha256": "17426fac383d7adb7bd2c6f53bae54a03e2807bf16c57d7ff25a577502fdf4bb",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc188_c": [
+    {
+      "problem_id": "abc188_c",
+      "scope": "selected_tags",
+      "accepted": {
+        "T114": "concept",
+        "T076": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "トーナメントをそのままシミュレート",
+      "reason": "隣接組の勝者だけを残して決勝まで進める実行可能なトーナメントの直接シミュレーション。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc188/editorial/481"
+      ],
+      "evidence_sha256": "33eeb154d69a9ba2825f603eca8a2f2885fd9c7001aa5290d8377a566b29c33d",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc199_d": [
+    {
+      "problem_id": "abc199_d",
+      "scope": "selected_tags",
+      "accepted": {
+        "T178": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "1,2",
+      "evidence_quote": "二部グラフ判定",
+      "reason": "一色に塗る頂点集合を固定し、残りのグラフを二色で塗れるか二部グラフ判定する別解が示されている。一般論としての名前だけではない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc199/editorial/1173",
+        "https://atcoder.jp/contests/abc199/editorial/1184"
+      ],
+      "evidence_sha256": "7d64562f799333885ce14aae87c4d46af266426c4c737c66033bd7cbd95cd824",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc204_d": [
+    {
+      "problem_id": "abc204_d",
+      "scope": "selected_tags",
+      "accepted": {
+        "T262": "primary",
+        "T022": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "部分和問題",
+      "reason": "料理を二つのオーブンへ分割し、片方に割り当てる時間和の到達可能性をDPで求める部分和問題。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc204/editorial/2013"
+      ],
+      "evidence_sha256": "3b07de0514f5bfa128ed62132ffec3ead76a6205787e089d9942830186d9be83",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc205_f": [
+    {
+      "problem_id": "abc205_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T230": "alternative",
+        "T229": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "Ford-Fulkerson",
+      "reason": "行・トークン・列を介する容量1のフローネットワークを構築する。最大流をFord-FulkersonまたはDinicで求める実行可能な代替実装として確認。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc205/editorial/2057"
+      ],
+      "evidence_sha256": "b86a5178ebb2addf70aea3eef5d0c7dff6685293bddf9406cb49a4cb53739b99",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc212_h": [
+    {
+      "problem_id": "abc212_h",
+      "scope": "selected_tags",
+      "accepted": {
+        "T107": "primary",
+        "T108": "primary",
+        "T037": "concept"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "アダマール変換を使う事で高速に計算",
+      "reason": "山の石数のXORが0かでNimの勝敗を判定し、山の個数ごとのXOR畳み込みをWalsh-Hadamard変換で高速化する。通常のFFTとは分ける。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc212/editorial/2359"
+      ],
+      "evidence_sha256": "6f310c9a7caecb756c3fa3b1c429626d121d2afdc019f57b4b37822792b0154d",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc222_g": [
+    {
+      "problem_id": "abc222_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T189": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "Baby-step Giant-step",
+      "reason": "2を並べた数の剰余条件を累乗の等式に直し、最小の指数をBSGSで求める離散対数への帰着が明示されている。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc222/editorial/2750"
+      ],
+      "evidence_sha256": "abf75c6e1567b0cc864712825110f980f4691b6411962db6510c13eb7588884d",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc227_h": [
+    {
+      "problem_id": "abc227_h",
+      "scope": "selected_tags",
+      "accepted": {
+        "T048": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "オイラー路を構築するのと同じ要領",
+      "reason": "訪問回数条件を満たす辺の使用回数を決めた後、オイラー路を構成する手順で実際の巡回順を復元する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc227/editorial/2915"
+      ],
+      "evidence_sha256": "f3b35c9dd1e3a74f4b26a138fc7dae138f02dfcdb27dfc8b957a3eef3704b385",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc239_h": [
+    {
+      "problem_id": "abc239_h",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [
+        "T098"
+      ],
+      "out_of_vocabulary": "商の値による状態圧縮",
+      "source_indices": "0",
+      "evidence_quote": "Sum of Totient Function",
+      "reason": "トーシェント関数は末尾の関連問題・Library Checkerの問題名に現れ、本問の解法では計算しない。実際には商を状態にした期待値のメモ化DPを用いる。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc239/editorial/3357"
+      ],
+      "evidence_sha256": "3c8cad1de7ff6ecf9ce80e3ab595e73e5610be2a68a1d22840d1661e7db84ab0",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc251_f": [
+    {
+      "problem_id": "abc251_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T046": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "DFS 木とは",
+      "reason": "要求される二本の全域木の一方を、DFSの探索辺からなるDFS木として構成する。探索木自体が出力の構成要素。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc251/editorial/3967"
+      ],
+      "evidence_sha256": "6ef1ddfbadd5bff5c1a533114a8a1a93efaf5a04dc0b6ef75d03b86b66007f5e",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc264_g": [
+    {
+      "problem_id": "abc264_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T175": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "Bellman-Ford 法によって",
+      "reason": "直近文字を状態とする重み付きグラフへ帰着し、Bellman-Fordで負閉路と最短距離を扱う。単なる最短路手法の例示ではない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc264/editorial/4580"
+      ],
+      "evidence_sha256": "e79306eeee2eca0d4326e0c9c20b37e3a83843580fef9ad79571105bb33abe3f",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc270_g": [
+    {
+      "problem_id": "abc270_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T189": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "元の問題は離散対数問題に帰着",
+      "reason": "一次漸化式を変換して累乗の一致問題としBSGSで離散対数を解く。A=0やA=1等の例外は別処理する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc270/editorial/4847"
+      ],
+      "evidence_sha256": "fc539f4818ed2d2e95c0d95947d3a4b7882985f2eff1736677c91c3ecba0cfe7",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc277_h": [
+    {
+      "problem_id": "abc277_h",
+      "scope": "selected_tags",
+      "accepted": {
+        "T169": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "2-SAT への帰着が行えます",
+      "reason": "制約を高々二リテラルの節に直し充足可能性を判定する帰着が示されている。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc277/editorial/5207"
+      ],
+      "evidence_sha256": "f40b63f44268bc652a99a86f44a1de9e081cb3cd508fa4f38e7bac5aa1671b0c",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc282_d": [
+    {
+      "problem_id": "abc282_d",
+      "scope": "selected_tags",
+      "accepted": {
+        "T178": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "二部グラフかどうかを判定",
+      "reason": "まず各連結成分を二色に塗れるか確認し、色ごとの頂点数から追加可能な辺を数える。本問で必要な判定処理。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc282/editorial/5397"
+      ],
+      "evidence_sha256": "63c1d1b70dc7c2f9e21cb57fb9555f9900c645a332bbe3ee57ba1a988c797878",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc282_f": [
+    {
+      "problem_id": "abc282_f",
+      "scope": "selected_tags",
+      "accepted": {},
+      "rejected": [
+        "T095"
+      ],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "Disjoint Sparse Table と呼ばれるものもあるので",
+      "reason": "本問の構成は冪等な区間和集合に対応するSparse Table。Disjoint Sparse Tableの文は関連する改良データ構造の紹介で、提出する区間の構成手順としては示されていないため保留する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc282/editorial/5403"
+      ],
+      "evidence_sha256": "14ffdb616cd8f02f3f5d588593a914350562244d24648c48113c69d09a632df4",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc284_h": [
+    {
+      "problem_id": "abc284_h",
+      "scope": "selected_tags",
+      "accepted": {
+        "T179": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "この問題に適用した式",
+      "reason": "ラベルを除いたグラフの軌道の個数をBurnside/Polyaの式で直接計算する解法である。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc284/editorial/5481"
+      ],
+      "evidence_sha256": "291bd55be5b82b5a982eb3d3f45d9abc6718405a5cde01a1b9262abded933a17",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc286_d": [
+    {
+      "problem_id": "abc286_d",
+      "scope": "selected_tags",
+      "accepted": {
+        "T262": "primary",
+        "T150": "concept"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "1",
+      "evidence_quote": "部分和問題として解くことができます",
+      "reason": "枚数制限のある硬貨を二進分割して0/1部分和へ帰着する有界ナップサック型解法。単なる最小枚数問題ではない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc286/editorial/5611"
+      ],
+      "evidence_sha256": "d49cb18fe950aaf9d64d0a5f175a8aa1db72c1434116f9809298866beb314b71",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc286_f": [
+    {
+      "problem_id": "abc286_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T122": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "中国剰余定理",
+      "reason": "互いに素な長さの置換サイクルで指数の剰余を読み出し、中国剰余定理で未知の指数を復元する対話型解法。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc286/editorial/5588"
+      ],
+      "evidence_sha256": "39dfdaac5d4bdb1a2e3c0f955b99069189210c101b6716657ff6b5a5f45865df",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc286_g": [
+    {
+      "problem_id": "abc286_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T048": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "オイラー路となっています",
+      "reason": "必須辺以外を縮約したグラフ上で、必須辺をちょうど一度ずつ通れるかをオイラー路の存在条件で判定する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc286/editorial/5573"
+      ],
+      "evidence_sha256": "f0dff1dab7c11b6594f14f74ce7f592bd58d545c7a75306abb07b119b0482964",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc288_d": [
+    {
+      "problem_id": "abc288_d",
+      "scope": "selected_tags",
+      "accepted": {},
+      "rejected": [
+        "T104"
+      ],
+      "out_of_vocabulary": "",
+      "source_indices": "2",
+      "evidence_quote": "後者の主張の一般化として",
+      "reason": "Schwartz-Zippelはハッシュの衝突評価の一般化として言及されている。ここで用いる直接の衝突確率評価と区別し、同補題を解法の使用タグとして確定しない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc288/editorial/5682"
+      ],
+      "evidence_sha256": "5b5992b498b5316bd6da3c2f107a3164a3f4b2a58f3c4f3e947a07fd12e5e3e7",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc301_c": [
+    {
+      "problem_id": "abc301_c",
+      "scope": "selected_tags",
+      "accepted": {
+        "T031": "alternative",
+        "T073": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0,1",
+      "evidence_quote": "同じ文字の頂点をまとめることで高速に解く",
+      "reason": "文字頻度を比較する主解と、文字種ごとに頂点をまとめた容量付き二部マッチングへの帰着を確認。文字ごとに全頂点を展開する二乗辺数の方法は満点解法に数えない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc301/editorial/6339",
+        "https://atcoder.jp/contests/abc301/editorial/6352"
+      ],
+      "evidence_sha256": "b36c04c281bf50ab999d457d36198e3744390ee40cf930cb7519e88bb96989c0",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc303_h": [
+    {
+      "problem_id": "abc303_h",
+      "scope": "selected_tags",
+      "accepted": {
+        "T244": "primary",
+        "T127": "primary",
+        "T196": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "得られる数列に出現する",
+      "reason": "Prüferコードにおける出現回数が次数-1である性質で、次数制約つきラベル木を数列の数え上げに変換。指数型母関数の冪をNTTで求める。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc303/editorial/6425"
+      ],
+      "evidence_sha256": "1c0a154b5670865c5348f2048af978e6589bdea63a8b280060807fc90154b282",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc317_g": [
+    {
+      "problem_id": "abc317_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T139": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "辺彩色問題だと思うことができます",
+      "reason": "必要なマッチング分割を二部グラフの辺彩色として解く高速化が本問への適用として提示されている。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc317/editorial/7023"
+      ],
+      "evidence_sha256": "67544f56c7164dddc54795ad7a0d3160f78061d335ba03b69f0e313956725b4f",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc323_g": [
+    {
+      "problem_id": "abc323_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T057": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "行列木定理、及び",
+      "reason": "辺重みを一次式とした行列木定理と行列式の計算で、全域木に関する条件を数え上げる。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc323/editorial/7356"
+      ],
+      "evidence_sha256": "254114d0f11ff447c505b13acc1b455c93b9cb88da996a62baf6c3c09f3f1eb1",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc328_e": [
+    {
+      "problem_id": "abc328_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T065": "primary",
+        "T213": "supporting"
+      },
+      "rejected": [
+        "T234"
+      ],
+      "out_of_vocabulary": "",
+      "source_indices": "0,1",
+      "evidence_quote": "プリム法のような感じ",
+      "reason": "N-1本の辺を組合せ列挙して木か確認する主解。別解の集合DPがPrimに似た頂点追加を行っても最小辺を貪欲に選ばず全コストを保持するため、Prim法そのものではない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc328/editorial/7645",
+        "https://atcoder.jp/contests/abc328/editorial/7671"
+      ],
+      "evidence_sha256": "59d70ae5ec576739b822dc63017c8cc6f986cb4edec273f7c74a0a97a3c009b4",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc334_g": [
+    {
+      "problem_id": "abc334_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T046": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "グラフの DFS 木を取り",
+      "reason": "DFS木の訪問順ordとlowを用いて頂点削除後の連結成分数を評価する。DFS木は関節点の構造解析に実際に用いられる。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc334/editorial/8980"
+      ],
+      "evidence_sha256": "4f961354192969477d5539f091e1fdd690193ef39764b6ef3288addd57074d99",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc335_g": [
+    {
+      "problem_id": "abc335_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T124": "analysis_concept"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "原始根",
+      "reason": "累乗で到達可能である条件を位数の整除関係へ変換する証明に原始根を使っている。原始根の探索を実装するという主張ではなく、証明の概念として記録する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc335/editorial/9017"
+      ],
+      "evidence_sha256": "ffd3d45c3ef6b20bd541fe1f5fe2d410af3e97f280569297f13351cc31487c75",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc349_g": [
+    {
+      "problem_id": "abc349_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T068": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "Manacher のアルゴリズムを応用",
+      "reason": "回文半径の重複を利用するManacherの考え方で必要な辺をO(N)本に削減する。本問の高速化への具体的な応用。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc349/editorial/9782"
+      ],
+      "evidence_sha256": "f3e62943c1bbbe86ec44f106242c1c4957d941cd363ac2ca9a2a8cfa0d7673c3",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc353_g": [
+    {
+      "problem_id": "abc353_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T019": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "2",
+      "evidence_quote": "インラインdp",
+      "reason": "位置ごとの最大報酬DPを同じ配列へ更新し、セグメント木で移動費を含む最大値を管理する。in-place更新が実際の実装手順である。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc353/editorial/10003"
+      ],
+      "evidence_sha256": "e093db4361ae99b56ea12d19a02df6bfdbacb701e1870788c30179ad9fe55703",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc448_g": [
+    {
+      "problem_id": "abc448_g",
+      "scope": "selected_tags",
+      "accepted": {},
+      "rejected": [
+        "T038"
+      ],
+      "out_of_vocabulary": "ミニマックス定理",
+      "source_indices": "0",
+      "evidence_quote": "ミニマックス定理",
+      "reason": "この語は混合戦略零和ゲームの値の一意性を説明する定理名として現れる。純粋戦略ゲーム木を探索するミニマックス法とは区別し、同名部分の一致による付与を除く。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc448/editorial/16719"
+      ],
+      "evidence_sha256": "84ab82b9a1011ac8b228e72b84c343e7195a537fd15a93887a5597d9a70a460a",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    },
+    {
+      "problem_id": "abc448_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T015": "supporting",
+        "T016": "alternative",
+        "T063": "supporting"
+      },
+      "rejected": [
+        "T086"
+      ],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "累積和の要領で",
+      "reason": "Li Chao Treeを永続化して直線集合を管理し、包絡線の凸性から三分探索する別解。累積和の要領という説明は永続木の版を順に作る比喩で、区間和配列は計算しない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc448/editorial/16719"
+      ],
+      "evidence_sha256": "84ab82b9a1011ac8b228e72b84c343e7195a537fd15a93887a5597d9a70a460a",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc359_f": [
+    {
+      "problem_id": "abc359_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T131": "primary",
+        "T244": "analysis_concept"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "木の次数列",
+      "reason": "木の実現可能な次数列が正で和2N-2である性質を使って最適化する。Prüferコードはこの次数列条件の証明として使い、列を構築・列挙する実装とは区別する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc359/editorial/10260"
+      ],
+      "evidence_sha256": "798513daa664fa56d3abfed5b07e5a543de920ecb1bcb0dde6c0b9ccc52ad7c0",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc362_g": [
+    {
+      "problem_id": "abc362_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T170": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "1",
+      "evidence_quote": "Aho Corasick 法を利用した別解",
+      "reason": "全パターンをAho-Corasickのオートマトンへ入れ、Sを走査してfailure link上の出現数を集計する線形時間の別解が示されている。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc362/editorial/10430"
+      ],
+      "evidence_sha256": "06e4d12504bf93174539a25f7cc560f1ed143948c5ceffbe222c96f4b6ab9cf6",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc367_f": [
+    {
+      "problem_id": "abc367_f",
+      "scope": "selected_tags",
+      "accepted": {},
+      "rejected": [
+        "T104"
+      ],
+      "out_of_vocabulary": "",
+      "source_indices": "1",
+      "evidence_quote": "Schwartz-Zippel lemma を用いずとも",
+      "reason": "多重集合のランダム加算ハッシュについて、独立乱数の直接評価で十分な衝突保証を得られる。補題名の注記・証明可能性を、その補題を使うアルゴリズムとして扱わない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc367/editorial/10713"
+      ],
+      "evidence_sha256": "3336a5fd7326032754c68fe2edc250096b136d720a228b4180f8aa05ad83af6a",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc367_g": [
+    {
+      "problem_id": "abc367_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T108": "primary",
+        "T107": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "xor 畳み込みおよび hadamard 変換",
+      "reason": "XORごとの部分列個数をXOR畳み込みとHadamard変換で高速に計算する。畳み込みの種類を通常FFTと混同しない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc367/editorial/10690"
+      ],
+      "evidence_sha256": "f31ecaa3294cd5aa47f9e499d323b0b943d7c4a6023240b1c9052dc010fc77db",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc373_g": [
+    {
+      "problem_id": "abc373_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T173": "alternative",
+        "T034": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "ハンガリアン法や最小費用流を用いて",
+      "reason": "点同士を結ぶ総距離が最小の完全マッチングは交差を除ける性質を利用する。最小重み割当をHungarianまたは最小費用流で求める二つの実装を確認。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc373/editorial/11045"
+      ],
+      "evidence_sha256": "ab487bf55b0f934a6e5efd8fe72794f26ae1dffb5e7ef27109e2281ce3d3475b",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc385_g": [
+    {
+      "problem_id": "abc385_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T024": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "挿入 DP による数え上げ",
+      "reason": "値の降順に要素を挿入し、両端・内部への挿入位置に応じた状態変化を数える挿入DPが本問の式の導出に用いられる。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc385/editorial/11656"
+      ],
+      "evidence_sha256": "d6f61b1ffa400786bd4152ccb6b82de77fba19b4dfec92fc2506222b9c5a8023",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc386_f": [
+    {
+      "problem_id": "abc386_f",
+      "scope": "selected_tags",
+      "accepted": {},
+      "rejected": [
+        "T263"
+      ],
+      "out_of_vocabulary": "編集距離",
+      "source_indices": "1",
+      "evidence_quote": "参考: 入力長に対して線形時間",
+      "reason": "LCSは関連するブログ記事の表題に現れる。本問は挿入・削除・置換を許す編集距離の判定であり、最長共通部分列をそのまま計算するものではないためタグを除く。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc386/editorial/11701"
+      ],
+      "evidence_sha256": "29aa85c7d4445b6bcfb3b72f55e097b595d56c9195a0c46f960e65f657afbc16",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc389_f": [
+    {
+      "problem_id": "abc389_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T019": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "インラインDP",
+      "reason": "遷移のDP配列をin-place化して同じ状態を更新する手順が実際の別解として説明されている。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc389/editorial/11966"
+      ],
+      "evidence_sha256": "e04687f29bc359f30e8f0c43bbb636edf1714b709c83da1424f48844605ba9af",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc391_g": [
+    {
+      "problem_id": "abc391_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T263": "primary",
+        "T022": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "最長共通部分列 (LCS)",
+      "reason": "Sに対するLCSのDP行を状態として、文字を追加したときの行の変化を追う数え上げ。LCSは参考問題名だけでなく中心となる状態定義。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc391/editorial/12087"
+      ],
+      "evidence_sha256": "30cfbd4b6d81b181fa516afbbb5e79a7af5bb8627068f0aabdb05bc242882702",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc393_g": [
+    {
+      "problem_id": "abc393_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T258": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "Stern-Brocot 木上の二分探索",
+      "reason": "有理数パラメータλの探索をStern-Brocot木上で行い、分母の大きさの制約を利用して候補を絞る。木の名前だけの背景言及ではない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc393/editorial/12192"
+      ],
+      "evidence_sha256": "3af7e649d5ef20f215471913311b06316dc0904ada5cc360e7ae888f8b5e3eb4",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc398_f": [
+    {
+      "problem_id": "abc398_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T068": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "Manacherのアルゴリズム",
+      "reason": "末尾に達する回文部分文字列をManacherの半径から見つけ、足りない接頭辞を反転して追加する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc398/editorial/12501"
+      ],
+      "evidence_sha256": "054521aff1e0f3a12762cba986caba96148644ba0d519f5e9fae79b081f44f5a",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc404_g": [
+    {
+      "problem_id": "abc404_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T175": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "Bellman-Ford 法で最短経路問題",
+      "reason": "累積和に対する差分制約を辺に変換し、Bellman-Fordで整合する最短距離を求める満点解法。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc404/editorial/12867"
+      ],
+      "evidence_sha256": "2a924746b3f273cf0345ece5190395c1d937bc07f25df711a3b0b16d4832e1cd",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc425_e": [
+    {
+      "problem_id": "abc425_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T122": "primary",
+        "T134": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "1",
+      "evidence_quote": "中国剰余定理の適用",
+      "reason": "法Mを素因数分解して素数冪ごとに答えを求め、中国剰余定理で再結合する。任意法で二項係数を扱うための実処理。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc425/editorial/14089"
+      ],
+      "evidence_sha256": "1f4c75a64222ddd871fadc90dfd0e34b05255c17275bc1bde755cc1a22dc49db",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc428_g": [
+    {
+      "problem_id": "abc428_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T179": "primary",
+        "T098": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "トーシェント関数などを適切に前計算",
+      "reason": "回転で同一視したネックレスをPolya/Burnsideで数え上げ、周期ごとの係数にトーシェントを用いる。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc428/editorial/14241"
+      ],
+      "evidence_sha256": "7768091a2a470d1f51a4dc13d7fefc792527970e2bc892aace24ec30137f9ae6",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc429_e": [
+    {
+      "problem_id": "abc429_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T092": "alternative",
+        "T079": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "1",
+      "evidence_quote": "color coding と呼ばれる手法を用いてこの問題を解く",
+      "reason": "色をランダムに割り当てたグラフで探索を繰り返すcolor codingの実行可能な別解として提示されている。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc429/editorial/14261"
+      ],
+      "evidence_sha256": "15c0d33a54083708b338b66d6d75a1edcd7181cf62bf33d82ef4f28a0f3d579d",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc433_g": [
+    {
+      "problem_id": "abc433_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T255": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "Suffix Automaton というデータ構造を用いて解く",
+      "reason": "部分文字列の同値類をSuffix Automatonでまとめ、状態ごとのゲームの勝敗を逆向きに計算する解法。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc433/editorial/14604"
+      ],
+      "evidence_sha256": "8f52f1b21687f3d38bd87f4d9bbbee8d336f2e3139c220c108d477495587f964",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc447_f": [
+    {
+      "problem_id": "abc447_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T131": "concept"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "次数列",
+      "reason": "ムカデグラフが含まれる条件を、内部頂点と両端頂点の必要次数を満たすパスの存在へ言い換える。次数条件は構造の判定に使う概念。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc447/editorial/16458"
+      ],
+      "evidence_sha256": "07e3da3502ecfa92597f4350097b371271cb071649ecc4b20e7bd2595781d19b",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc448_f": [
+    {
+      "problem_id": "abc448_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T115": "concept"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "ハミルトンサイクル",
+      "reason": "すべての地点を一度ずつ通って戻る閉路を出力する問題であり、Hamiltonian cycleは目的とする構造そのもの。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc448/editorial/16776"
+      ],
+      "evidence_sha256": "392eb72d9237c9083d3a402f566e7d12185e230d2ff48801ed06686d685b6bc0",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc451_f": [
+    {
+      "problem_id": "abc451_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T178": "primary",
+        "T005": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "2",
+      "evidence_quote": "頂点倍化を用いて二部グラフ判定",
+      "reason": "各頂点を白・黒の二つに複製しUnion-Findで制約を併合する二部グラフ判定。各連結成分の色数最小化も同じ構造に基づく。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc451/editorial/18130"
+      ],
+      "evidence_sha256": "3033ae2eac1f73bea1b238ed883c4238f65c3b7234cca347514428e275286be9",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc455_b": [
+    {
+      "problem_id": "abc455_b",
+      "scope": "selected_tags",
+      "accepted": {
+        "T068": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "1",
+      "evidence_quote": "これに対して Manacher のアルゴリズムを使います",
+      "reason": "横区間を文字列IDに分類し、縦方向の反転対応をManacherの対称性で数えるO(HW^2)の別解。B問題でも解説が示す高速な実行可能解法として残す。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc455/editorial/19457"
+      ],
+      "evidence_sha256": "de95c8cd115261ef31233ebff89d46ea733e5ba456b0e4d9faedf9f91dc179ab",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc476_g": [
+    {
+      "problem_id": "abc476_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T101": "analysis_concept"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "LYM 不等式より",
+      "reason": "許容される集合族の大きさの上界をLYM不等式で証明している。証明に用いる概念として確認し、参考記事名のSpernerと区別する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc476/editorial/25751"
+      ],
+      "evidence_sha256": "0e1483884f41b46a64766c007d0c1062c04fbbcdba8342d85b48174c78b8af52",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc178_d": [
+    {
+      "problem_id": "abc178_d",
+      "scope": "selected_tags",
+      "accepted": {
+        "T022": "primary",
+        "T177": "alternative",
+        "T165": "analysis_concept"
+      },
+      "rejected": [
+        "T077"
+      ],
+      "out_of_vocabulary": "",
+      "source_indices": "1",
+      "evidence_quote": "仕切り",
+      "reason": "DPで構成数を求める主解と、長さを固定して玉と仕切りによる二項係数を合計する別解。並び替え方の総数を数える説明はソートの実行を意味しない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc178/editorial/2430"
+      ],
+      "evidence_sha256": "67d88860d86e8266d20a17ea01148e42474391660f02b6d253945a3098b777bb",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc010_4": [
+    {
+      "problem_id": "abc010_4",
+      "scope": "selected_tags",
+      "accepted": {
+        "T032": "primary",
+        "T033": "primary",
+        "T229": "alternative",
+        "T230": "alternative"
+      },
+      "rejected": [
+        "T062",
+        "T065",
+        "T264"
+      ],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "最小カット最大フロー定理",
+      "reason": "満点制約では最小カットを最大流で求める。DinicとEdmonds-Karpは実行可能な最大流の実装選択肢。全探索と剰余は部分点の列挙説明だけ、ヒューリスティックはアルゴリズム紹介表の速度の説明で解法として使わない。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc010/editorial.pdf"
+      ],
+      "evidence_sha256": "c92a16a967557372d6daa5a50fdbfb55368d50eb5bdbd6e395a8114d2fe7ffe4",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc293_g": [
+    {
+      "problem_id": "abc293_g",
+      "scope": "full",
+      "accepted": {
+        "T084": "supporting",
+        "T077": "supporting",
+        "T060": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "Moのアルゴリズム",
+      "source_indices": "0",
+      "evidence_quote": "Mo のアルゴリズムによって本問題を解く",
+      "reason": "左端を平方根程度のブロックに分け、そのブロック内では右端順にクエリをソートするMo法。区間内の頻度cに対するC(c,3)を差分更新する。平方分割はクエリ順序の補助、Mo法自体は語彙外に記録。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc293/editorial/5947"
+      ],
+      "evidence_sha256": "c7242a588ed72b5ede4d28b2d8e9a9a7221b1ef979445460be28746fee7f2f59",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc318_e": [
+    {
+      "problem_id": "abc318_e",
+      "scope": "full",
+      "accepted": {
+        "T060": "primary",
+        "T177": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "位置の総和の維持",
+      "source_indices": "1",
+      "evidence_quote": "要素数",
+      "reason": "右端kごとに同じ値の過去位置の個数cと総和sを管理する。(k-1)*c-s-C(c,2)を足して全体O(N)。全三つ組の列挙はしない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc318/editorial/7094"
+      ],
+      "evidence_sha256": "003405ad91bbe192acafd3bd873dc390805da5afda104a188ab2c399d51ccb7f",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc324_c": [
+    {
+      "problem_id": "abc324_c",
+      "scope": "full",
+      "accepted": {
+        "T073": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "編集距離1の判定",
+      "source_indices": "statement",
+      "evidence_quote": "英小文字",
+      "reason": "長さの差が高々1の場合に二本のポインタで文字列を比較し、一度だけ挿入・削除・置換によるミスマッチを許す。一般のLCSや二次元編集距離DPは不要。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc324/tasks/abc324_c"
+      ],
+      "evidence_sha256": "cf22441872200f50306ce583e0fc97db3e10a899627366eb56206819f301f74f",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc324_e": [
+    {
+      "problem_id": "abc324_e",
+      "scope": "full",
+      "accepted": {
+        "T073": "supporting",
+        "T060": "primary",
+        "T086": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "部分列マッチング",
+      "source_indices": "0",
+      "evidence_quote": "個数",
+      "reason": "各Sが含むTの最長接頭辞長Aと接尾辞長Bを二ポインタで求める。A_i+B_j>=|T|を満たす組はBの頻度の累積和から数えられ、全体O(総文字数+N+|T|)。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc324/editorial/7407"
+      ],
+      "evidence_sha256": "6251f4b96de38d2fa43e8ffe11516843929279436d25e69c57b2dbb8a08ca990",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc329_d": [
+    {
+      "problem_id": "abc329_d",
+      "scope": "full",
+      "accepted": {
+        "T076": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "度数分布",
+      "source_indices": "0",
+      "evidence_quote": "投票先となった候補者に限られる",
+      "reason": "得票数を配列で管理し、現在の当選者と新しい投票先だけを票数と番号で比較するO(N+M)のシミュレーション。ヒープは必要としない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc329/editorial/7728"
+      ],
+      "evidence_sha256": "71ff8551f09e330e531d46277d648f43c3b0bc025e88c7e00b3e523205e3f11f",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc337_e": [
+    {
+      "problem_id": "abc337_e",
+      "scope": "full",
+      "accepted": {
+        "T117": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "情報量,対話型問題",
+      "source_indices": "0",
+      "evidence_quote": "二進数",
+      "reason": "各ジュースの0始まり番号のビットiが1のときだけ友人iに飲ませる。症状のビット列から番号を復元する。全ての部分集合を探索する問題ではない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc337/editorial/9140"
+      ],
+      "evidence_sha256": "1c7f2be626455a327cf464fb798d60b99143a16bd540d938c2f1f93b20e6dc25",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc342_c": [
+    {
+      "problem_id": "abc342_c",
+      "scope": "full",
+      "accepted": {
+        "T073": "primary",
+        "T076": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "文字写像の合成",
+      "source_indices": "0",
+      "evidence_quote": "はじめ",
+      "reason": "元の26文字が現在どの文字へ写るかだけを更新し、最後にSを一回変換するO(26Q+N)の文字列処理。各クエリで全文字列を置換する方法を避ける。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc342/editorial/9356"
+      ],
+      "evidence_sha256": "9f9a77ea693a4b6a934da6a6eb4b906bb03c2f6a9bb487f1045e8895dbb6dd38",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc346_e": [
+    {
+      "problem_id": "abc346_e",
+      "scope": "full",
+      "accepted": {
+        "T076": "primary",
+        "T060": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "逆順処理",
+      "source_indices": "0",
+      "evidence_quote": "操作を逆順から考える",
+      "reason": "後ろから操作を走査し、既に処理した行列を記録する。初めて処理する行なら未処理の列数だけ色の個数へ加算し、列も同様に集約して数える。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc346/editorial/9637"
+      ],
+      "evidence_sha256": "2eabf851c5ce2df98b595cbae62ed44982fcfd552996dae5cfe1b45374165eca",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc357_c": [
+    {
+      "problem_id": "abc357_c",
+      "scope": "full",
+      "accepted": {
+        "T080": "primary",
+        "T081": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "フラクタルの構築",
+      "source_indices": "statement",
+      "evidence_quote": "他の 8 個のブロック",
+      "reason": "中央を白くし、残る8領域に小さい同じ図形を再帰的に描く。出力サイズに比例する分割統治による構築。図形を文字列で出力することだけで文字列アルゴリズムは付けない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc357/tasks/abc357_c"
+      ],
+      "evidence_sha256": "f37928d1a9e4c2ce91492105cde9c8d1fd0cf5608022db5ca349eab7df517a6d",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc366_c": [
+    {
+      "problem_id": "abc366_c",
+      "scope": "full",
+      "accepted": {
+        "T076": "primary",
+        "T008": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "度数分布",
+      "source_indices": "0",
+      "evidence_quote": "現在の種類数および",
+      "reason": "値ごとの個数と非ゼロの種類数を維持し、0から1または1から0へ変わったときだけ種類数を更新する。配列で足りるが連想配列による頻度管理も制約内の別実装。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc366/editorial/10642"
+      ],
+      "evidence_sha256": "c09e242c069bfd6ab8a30dcda3fa5f5c55e1cb4922ee9aa5eb804cd16f3805bb",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc372_c": [
+    {
+      "problem_id": "abc372_c",
+      "scope": "full",
+      "accepted": {
+        "T073": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "差分更新",
+      "source_indices": "0",
+      "evidence_quote": "一文字を変えても",
+      "reason": "更新位置を含む長さ3の部分文字列は高々3個なので、その箇所のABC一致数を更新前後で引き足しする。各クエリO(1)の文字列処理。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc372/editorial/10972"
+      ],
+      "evidence_sha256": "2c1edf707f705baf4a0ec0467c684bd8d224dded7dadbd43be97069750836d7b",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc389_c": [
+    {
+      "problem_id": "abc389_c",
+      "scope": "full",
+      "accepted": {
+        "T086": "primary",
+        "T011": "concept"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "配列と先頭オフセット",
+      "source_indices": "0",
+      "evidence_quote": "追加される順番とヘビが列を抜ける順番は同じ",
+      "reason": "追加された長さの累積和と削除済み個数のオフセットを管理する。前からk番目の頭の位置を二つの累積和の差で求める。FIFOという構造的性質を概念として記録。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc389/editorial/11975"
+      ],
+      "evidence_sha256": "4a9accf9a26943f4c198a059ea53cde0af6c4ae422a8642832b1f8f170334132",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc395_d": [
+    {
+      "problem_id": "abc395_d",
+      "scope": "full",
+      "accepted": {
+        "T076": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "間接参照",
+      "source_indices": "0",
+      "evidence_quote": "仮想的な「ラベル鳩」",
+      "reason": "鳩→内部の箱、箱→巣ラベル、巣ラベル→箱の3配列を持つ。巣全体の交換ではラベル対応だけ交換し、各問い合わせをO(1)で処理する集約シミュレーション。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc395/editorial/12342"
+      ],
+      "evidence_sha256": "d9f0558bde554ebff7a1759c79b0c321cd0609c81a3c3f8f29cc66c909d5c719",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc397_c": [
+    {
+      "problem_id": "abc397_c",
+      "scope": "full",
+      "accepted": {
+        "T060": "primary",
+        "T012": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "前後の種類数",
+      "source_indices": "0",
+      "evidence_quote": "に含まれる整数の種類数",
+      "reason": "前からと後ろから出現済み値を管理し、各分割位置の左右の種類数を合計して最大を求める。Setを使って種類数を維持する実装もO(N log N)で実行可能。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc397/editorial/12456"
+      ],
+      "evidence_sha256": "a5c4dfba93022829b7ea5b76b0e06bd2e2db4f1ba9a95b6a2cab9377d478b682",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc142_f": [
+    {
+      "problem_id": "abc142_f",
+      "scope": "full",
+      "accepted": {
+        "T182": "primary",
+        "T067": "supporting",
+        "T066": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "誘導閉路",
+      "source_indices": "0",
+      "evidence_quote": "閉路をひとつ探し",
+      "reason": "DFSで閉路を見つけ、弦があればより短い閉路へ縮める主解。別解として各始点からBFSして最短有向閉路を求めると、弦があればより短い閉路を作れて矛盾するため条件を満たす。O(N(N+M))で実行可能。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc142/tasks/abc142_f"
+      ],
+      "evidence_sha256": "3fffa594e006612ceb8df895272623d34a2138a4eda0939003e9459a8a8f8eb2",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc164_f": [
+    {
+      "problem_id": "abc164_f",
+      "scope": "full",
+      "accepted": {
+        "T117": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "ビットごとの構築",
+      "source_indices": "0",
+      "evidence_quote": "各ビットの値は独立に決められる",
+      "reason": "64個のビットを独立に処理し、行列のAND/OR条件から確定するマスを埋め、残る行列の少なくとも一つの0/1条件を満たすよう構築する。全行列を列挙しない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc164/tasks/abc164_f"
+      ],
+      "evidence_sha256": "cb8d94f2d1199634b9d1bc6a4e893795340d24766502199592c56db22f7b0d04",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc181_f": [
+    {
+      "problem_id": "abc181_f",
+      "scope": "full",
+      "accepted": {
+        "T005": "primary",
+        "T077": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "ボトルネック連結性,幾何",
+      "source_indices": "0",
+      "evidence_quote": "距離の短い方から頂点対の間に辺を張っていく",
+      "reason": "上下境界と釘を頂点にし、距離の昇順でUnion-Findで併合する。上下境界が初めて連結する距離の半分が求める限界半径。O(N^2 log N)の解説手順を確認。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc181/editorial/267"
+      ],
+      "evidence_sha256": "713f4fcc2573248807e478b3061f682b395a68314e84ff1b535bf2880a23d1c3",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc191_d": [
+    {
+      "problem_id": "abc191_d",
+      "scope": "full",
+      "accepted": {
+        "T065": "primary",
+        "T064": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "整数平方根,固定小数点",
+      "source_indices": "0",
+      "evidence_quote": "すべての計算が整数で行える",
+      "reason": "入力を10^4倍して整数にし、円を横切る各整数xのみ列挙する。各列の有効yの上下限を整数平方根から求める。平方根を整数二分探索すれば境界誤差を避けられる。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc191/editorial/611"
+      ],
+      "evidence_sha256": "28ea4d8bde1a3d5ef1149b86a040db712db5a0f4cd49fe2fb5d5a5fa41544d9c",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc196_e": [
+    {
+      "problem_id": "abc196_e",
+      "scope": "full",
+      "accepted": {
+        "T076": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "関数合成,clamp",
+      "source_indices": "0",
+      "evidence_quote": "合成関数",
+      "reason": "合成結果をmin(c,max(b,x+a))の3パラメータで持ち、各加算・min・max操作で更新する。最後に各問い合わせへ一回適用するO(N+Q)の集約シミュレーション。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc196/editorial/948"
+      ],
+      "evidence_sha256": "bfaeab2f237f60d0b108edceb609d40944fee8310e837d9e1abd4efb5bd451e3",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc251_g": [
+    {
+      "problem_id": "abc251_g",
+      "scope": "full",
+      "accepted": {
+        "T180": "primary",
+        "T240": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "平行移動後の半平面制約",
+      "source_indices": "0",
+      "evidence_quote": "有向線分の左側",
+      "reason": "凸多角形の各辺について全平行移動の半平面制約を最も厳しい一本へ集約し、問い合わせ点が全N本を満たすか外積で判定する。交差多角形の境界自体を構築する一般の半平面交差アルゴリズムとは分ける。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc251/editorial/3961"
+      ],
+      "evidence_sha256": "638d2a73726f10ddd610266089e7a0aca568621d1da5247665d2b7250488d30c",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc001_1": [
+    {
+      "problem_id": "abc001_1",
+      "scope": "full",
+      "accepted": {},
+      "rejected": [],
+      "out_of_vocabulary": "基本算術",
+      "source_indices": "statement",
+      "evidence_quote": "H_1 - H_2",
+      "reason": "求める値は二つの入力の差だけである。算術の独立タグがないため、探索やシミュレーションに置き換えない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc001/tasks/abc001_1"
+      ],
+      "evidence_sha256": "08daaf1b79b0149cf47f8a1c30e60a747a05b7ad17a6584fca2d4cac1c4ba530",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc001_2": [
+    {
+      "problem_id": "abc001_2",
+      "scope": "full",
+      "accepted": {},
+      "rejected": [],
+      "out_of_vocabulary": "条件分岐,単位換算",
+      "source_indices": "0",
+      "evidence_quote": "距離によって場合分け",
+      "reason": "指定された距離の区間に従ってVVへ直接変換する。固定個数の条件分岐は独立タグがなく、数式処理以外の名前付き手法を必要としない。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc001/editorial.pdf"
+      ],
+      "evidence_sha256": "7d71498ccb064a13f7e7d19706ab776e62db3a83aa787ae7044dded687870b6a",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc002_1": [
+    {
+      "problem_id": "abc002_1",
+      "scope": "full",
+      "accepted": {},
+      "rejected": [],
+      "out_of_vocabulary": "大小比較",
+      "source_indices": "statement",
+      "evidence_quote": "大きい方の値を出力",
+      "reason": "二つの整数の比較だけであり、ソートや全探索のタグを付けない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc002/tasks/abc002_1"
+      ],
+      "evidence_sha256": "961d9ad9cf4fde857f3057cfc06be6d5640c0742cf9ec2ba1e8ccaebd8d7000d",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc003_1": [
+    {
+      "problem_id": "abc003_1",
+      "scope": "full",
+      "accepted": {},
+      "rejected": [],
+      "out_of_vocabulary": "期待値の直接計算",
+      "source_indices": "statement",
+      "evidence_quote": "平均いくら程度給料",
+      "reason": "一様分布の平均は(N+1)/2なので10000を掛ける。状態遷移を持つ期待値DPや確率DPは使わない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc003/tasks/abc003_1"
+      ],
+      "evidence_sha256": "5c1dc585908683b7d4b52f415cf1f0e6693082ad0417c3847d1ae870957d39ec",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc007_1": [
+    {
+      "problem_id": "abc007_1",
+      "scope": "full",
+      "accepted": {},
+      "rejected": [],
+      "out_of_vocabulary": "基本算術",
+      "source_indices": "statement",
+      "evidence_quote": "隣り合う木の間の数",
+      "reason": "木がn本一直線に並んでいると間隔はn-1個。木データ構造の問題ではない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc007/tasks/abc007_1"
+      ],
+      "evidence_sha256": "c0493be4e64de13af64b3a77659921fbca2e604e653096ca6537b6037a612618",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc008_1": [
+    {
+      "problem_id": "abc008_1",
+      "scope": "full",
+      "accepted": {},
+      "rejected": [
+        "T060"
+      ],
+      "out_of_vocabulary": "基本算術",
+      "source_indices": "statement",
+      "evidence_quote": "通し番号が S 以上 T 以下",
+      "reason": "閉じた整数区間の要素数T-S+1を計算するだけで、組合せ的な数え上げのアルゴリズムを必要としない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc008/tasks/abc008_1"
+      ],
+      "evidence_sha256": "9aa8ac6b67d53c2c77798e1dee28807703a6d7ed84f0346f8cdda684c5a1b84c",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc009_1": [
+    {
+      "problem_id": "abc009_1",
+      "scope": "full",
+      "accepted": {},
+      "rejected": [],
+      "out_of_vocabulary": "切り上げ計算",
+      "source_indices": "statement",
+      "evidence_quote": "合計で 2 個のダンボール",
+      "reason": "一往復で2個運べるので必要回数は(N+1)//2。各往復をシミュレートせず直接計算する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc009/tasks/abc009_1"
+      ],
+      "evidence_sha256": "7ea593ee62c73a542633590f5b952343927197492f7563becc9db84b761a2e86",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc011_4": [
+    {
+      "problem_id": "abc011_4",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "パスカルの三角形を使った確率の計算",
+      "reason": "満点解法は上下左右の回数を分け、二項分布B[n][k]=(B[n-1][k]+B[n-1][k-1])/2をO(N^2)で前計算して確率を組み合わせる。O(N^3)の位置DPは部分点だが、満点解法にも確率DPの前計算がある。",
+      "evidence_urls": [
+        "https://img.atcoder.jp/abc011/editorial.pdf"
+      ],
+      "evidence_sha256": "61adb6a8c2e0a3fa58da8ae34e716d14028fea1b04fb710a35cb8818c3497b3c",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc226_h": [
+    {
+      "problem_id": "abc226_h",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "個ある確率",
+      "reason": "区間[A,A+1]を固定し、見た変数の個数と区間より大きい個数・区間内の個数の同時分布をDPで計算する。期待値はその分布から積分公式を用いて求めるため、求める値が期待値でも中心のDPは確率DP。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc226/editorial/2879"
+      ],
+      "evidence_sha256": "2569ff057c0173d8890d9861dfa64d4f9231f67e2dfa6194a1cb80d2446d8ff0",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc243_f": [
+    {
+      "problem_id": "abc243_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "求める値は",
+      "reason": "アイテム数x・種類数y・抽選回数zごとの確率質量をz!で共通に割った値をDPで蓄積する。最後にK!を戻す確率DPであり、単にDPという文字があるだけで判定していない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc243/editorial/3508"
+      ],
+      "evidence_sha256": "dad8d424f332f6cbdb19d529ecc9cbe72bd6f02f59b00d230754688e88a7fdd0",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc271_g": [
+    {
+      "problem_id": "abc271_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "時である確率とします",
+      "reason": "アクセス回数と最終時刻を状態とする確率遷移を定義し、24状態の遷移行列の累乗で大きなNへ高速化する。高速化後も状態値は遷移確率。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc271/editorial/4931"
+      ],
+      "evidence_sha256": "95eb9f116d98d1cdba5d405b496b0c23517a7a07ddb57851363ad80bca3728ec",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc275_e": [
+    {
+      "problem_id": "abc275_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "にいる確率と定義した動的計画法",
+      "reason": "dp[回数][位置]をその位置にいる確率とする。各出目に1/Mを掛けて移し、折返しと吸収するゴールを扱う。O(NMK)で満点制約に対応する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc275/editorial/5116"
+      ],
+      "evidence_sha256": "d93dde2cc8b14a854b9ec66e47573b2bfd45f30ffe0b5c6d31436192382bd74c",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc277_g": [
+    {
+      "problem_id": "abc277_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "supporting",
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "すべてにわたる",
+      "reason": "頂点・歩数ごとの到達確率と、レベルおよび二乗の確率重み付きモーメントを同時に伝播する。dp[i][j][0][0]は通常の到達確率、他の成分は報酬期待値に必要なモーメント。確率DPを補助、期待値の伝播を主解として記録。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc277/editorial/5206"
+      ],
+      "evidence_sha256": "3c820ece46bbff6890b80720488e6786d1d65367406edfd149420b771c819ba3",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc280_e": [
+    {
+      "problem_id": "abc280_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary",
+        "T026": "alternative"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "余事象",
+      "reason": "公式解説はダメージ総和がちょうどiになる時刻が存在する確率p_iをp_i=1-(P/100)*p_(i-1)で計算するO(N)の確率DP。別解は残りHPの期待攻撃回数E_i=1+(1-p)E_(i-1)+pE_(i-2)をO(N)で計算する期待値DP。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc280/editorial/5331"
+      ],
+      "evidence_sha256": "f6de006aa188438e215071dd3aac846205c29f4946fe84238558dee41913f7d6",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc289_h": [
+    {
+      "problem_id": "abc289_h",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "俗に「除原理」と呼ばれている DP",
+      "reason": "f(t)を初めて集合する時刻の確率とし、g(t)から過去の初到達確率の畳み込みを引く確率DP。素朴なO(T^2)を分割統治FFTまたは形式的べき級数の除算で高速化する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc289/editorial/5712"
+      ],
+      "evidence_sha256": "5f08a5670e612d9f570d3349f5dae2e55ee2642510177bce82536bf08a45dc76",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc298_e": [
+    {
+      "problem_id": "abc298_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "高橋君の勝率とします",
+      "reason": "両者の位置と手番を状態にした勝率DP。出目ごとの次状態の勝率をPまたはQで割って平均する。位置の降順にO(N^2(P+Q))で求められる。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc298/editorial/6216"
+      ],
+      "evidence_sha256": "02340ba519166aa6c8346523d32cbb403f97ad91e8e5931993d34d7a498df9fa",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc299_h": [
+    {
+      "problem_id": "abc299_h",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "supporting",
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "これらは線形漸化式を持つ",
+      "reason": "残り距離rからの終了までの期待手数e(r)と、通過後の停止位置iの確率p_i(r)を線形漸化式で求める。大きなrは線形漸化式の高速計算と連立方程式で扱う。両方の状態量を明示的に使う。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc299/editorial/6260"
+      ],
+      "evidence_sha256": "79fe20e32e081fec0b91366886f6de2c3028efbaedfa160ffa168a13609595eb",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc300_e": [
+    {
+      "problem_id": "abc300_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "一致する確率",
+      "reason": "dp(n)を現在値nから最終値Nに一致する確率と定義する。出目1の自己ループを移項し、2n〜6nの確率の平均へ直してメモ化する。値は期待回数ではなく到達確率。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc300/editorial/6279"
+      ],
+      "evidence_sha256": "ddf129be467f67f61bfbe0f044bc375c122c8a1a8365528cd09a588df017c159",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc310_f": [
+    {
+      "problem_id": "abc310_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "集合が",
+      "reason": "到達可能な部分和集合Sをビットマスクで表し、サイコロi個後にその集合となる確率をDPで計算する。bitDPと確率DPを同時に満たす。出目11以上は状態不変の遷移へまとめる。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc310/editorial/6791"
+      ],
+      "evidence_sha256": "e359a0885a8ac71c221751bae6fa3a8c29964524aabe631faf1dd813d64a1374",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc323_e": [
+    {
+      "problem_id": "abc323_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0,1",
+      "evidence_quote": "曲が切り替わる",
+      "reason": "時刻tで曲が切り替わる確率p[t]をp[t]=sum(p[t-T_i])/Nで求める。時刻X+0.5を覆う曲1の開始確率を合計する。O(NX)の確率DP。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc323/editorial/7357",
+        "https://atcoder.jp/contests/abc323/editorial/7384"
+      ],
+      "evidence_sha256": "485c8fee3e5ec76716beaae2aa32fc1a35419c25480cd2d8658983056c195995",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc326_e": [
+    {
+      "problem_id": "abc326_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "確率を表現しています",
+      "reason": "A_iが支払われる確率p_i=sum(p_j,j<i)/NをDPと累積和で求める。答えはsum(A_i*p_i)という期待値だが、ここで実際に遷移させる状態量は確率。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc326/editorial/7538"
+      ],
+      "evidence_sha256": "5616a047979fc7e8684ece813abe890d87fbaff3f7b897f5b3e05b1472e3f983",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc333_f": [
+    {
+      "problem_id": "abc333_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "最後に残る確率と定義",
+      "reason": "残り人数iと列内順位jを状態として、その人が最後に残る確率を計算する。循環する待ち時間は等比級数で処理し、遷移を高速化した満点解法。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc333/editorial/7948"
+      ],
+      "evidence_sha256": "3de3de7c62c8351a72fa57f9abf605de7733b292510f8d86500fe6da3531225f",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc342_f": [
+    {
+      "problem_id": "abc342_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "確率",
+      "reason": "まずディーラーの最終点数分布p[i]を前向き確率DPで求める。その累積和から停止時の勝率q[i]を作り、自分の状態で続行と停止の最大を取る勝率DPを後ろ向きに解く。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc342/editorial/9345"
+      ],
+      "evidence_sha256": "2fcc1347e1c9223add5462a876d20bac48721b690b85b6f8d4fee08969e81bd6",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc360_e": [
+    {
+      "problem_id": "abc360_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "最も左にある確率",
+      "reason": "対称性で黒球が先頭かそれ以外かの2状態へ圧縮し、p_(i+1)=(1-p)p_i+q(1-p_i)という確率DPを解く。求める位置の期待値はこの確率から復元する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc360/editorial/10310"
+      ],
+      "evidence_sha256": "9cccbcc4075f2b8e06b96eab9fdf3590c3d5a301d0cef59738ba4eaead98bbf3",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc382_e": [
+    {
+      "problem_id": "abc382_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "supporting",
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "ちょうど",
+      "reason": "パック内のレア枚数分布g_jをBernoulli和の確率DPで計算し、必要残り枚数iからの期待パック数f_iを自己ループを移項した期待値DPで計算する。二段階で両方を使用する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc382/editorial/11483"
+      ],
+      "evidence_sha256": "b8c026a43b978e9b3d64f6d636a4e6c4955153d70e5e49b15c08ce2d3ba75fd0",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc404_f": [
+    {
+      "problem_id": "abc404_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T029": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "最適な行動をしたときの勝率",
+      "reason": "ターン数t・当たり回数kを状態にした最適勝率DP。各選択の結果の勝率を当たりボタンの一様分布で平均し、その最大値を採用する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc404/editorial/12846"
+      ],
+      "evidence_sha256": "f55039e305919e765746ff0b95e8fb1413f479ffc3160ea966357a2a173a3280",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc144_f": [
+    {
+      "problem_id": "abc144_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "移動回数の期待値",
+      "reason": "部屋iから終点までの期待移動回数を値とするDAG上の期待値DP。取り除く候補の辺を絞り、各候補で期待値をO(M)で再計算するO(NM)解法。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc144/tasks/abc144_f"
+      ],
+      "evidence_sha256": "535c3d2ff5576a275d4fde99cb6c7c8818391322ccac5a1eaca29fd5bb6fd151",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc189_f": [
+    {
+      "problem_id": "abc189_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "手数の期待値とします",
+      "reason": "マスiからゴールまでの期待手数f(i)を状態にする。振り出しに戻る循環を未知数X=f(0)の一次式として持つDP、または二分探索を使うDPで処理する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc189/editorial/541"
+      ],
+      "evidence_sha256": "0b9552c5a95bbddcf1fc351737a22a0c82424e89f981cd3f48d2601b67dd1ab6",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc263_e": [
+    {
+      "problem_id": "abc263_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "回数の期待値とした動的計画法",
+      "reason": "位置iからゴールまでの期待サイコロ回数をDPで計算する。0の目による自己ループを移項し、次の区間の期待値の平均を累積和で求める。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc263/editorial/4546"
+      ],
+      "evidence_sha256": "e115bae0d95fc45731351147e32972a3781388dce65ca0c8a031f13a632a8917",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc270_h": [
+    {
+      "problem_id": "abc270_h",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "期待値についての漸化式を立てる",
+      "reason": "カウンター状態を最大不足量kにまとめ、終了までの期待手数x_kの関係式を立てる。期待値の差y_kを使う漸化式を区間ごとに累乗で高速化し、10^18状態の逐次DPを避ける。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc270/editorial/4880"
+      ],
+      "evidence_sha256": "b9e38563745e4d9f56df4329fd59461d761794cbe829d63bf7602f68bad7c54d",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc314_e": [
+    {
+      "problem_id": "abc314_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "支払う金額の期待値",
+      "reason": "現在ポイントiから目標Mまでの最小期待費用e_iを状態にする。0点の自己ループを除き、ルーレットごとの費用と次状態の期待費用の平均を比較する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc314/editorial/6956"
+      ],
+      "evidence_sha256": "c0cf08632641193fec9d76312786f2e35bcb40d12a5df06b4c5fc392054c3eb7",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc332_f": [
+    {
+      "problem_id": "abc332_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "操作前の期待値",
+      "reason": "各操作の後のA_pの期待値E_pを、前の期待値へのアフィン変換として更新する。区間内の要素を確率的に一つ更新する過程の期待値伝播を遅延セグメント木で高速化する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc332/editorial/7890"
+      ],
+      "evidence_sha256": "dc124552bb840bb4c8e32d48100e6c66f13df75baf00ba5a05fd0745ffd9759f",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc350_e": [
+    {
+      "problem_id": "abc350_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0,1",
+      "evidence_quote": "求める期待値を",
+      "reason": "現在値Nから0までの最小期待費用f(N)をメモ化する。出目1の自己ループを移項し、決定的除算と確率的除算の期待費用の最小を取る。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc350/editorial/9812",
+        "https://atcoder.jp/contests/abc350/editorial/9841"
+      ],
+      "evidence_sha256": "d507d79b4ca197e0cb99deb24d44a1f12b7bb7f27f8166cd98fbf8c4c44c7c11",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc402_e": [
+    {
+      "problem_id": "abc402_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "得点の期待値の最大値",
+      "reason": "正解済み集合Tと残金xを状態とし、各問題に提出した場合の成功・失敗の条件付き期待得点を平均して最大化する期待値bitDP。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc402/editorial/12715"
+      ],
+      "evidence_sha256": "6d37bb862c8dcdfb302b9ca8b496ee368c420012a644e232bc431cc4c388be4b",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc409_g": [
+    {
+      "problem_id": "abc409_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "という漸化式が成り立つ",
+      "reason": "条件付けしたkの残り個数の期待値f(x)をf(x-1)から更新する一次モーメントのDPを前計算し、最終的な答えは畳み込みでまとめる。単に答えが期待値という理由では付けない。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc409/editorial/13172"
+      ],
+      "evidence_sha256": "1878271fbf1c24ae60e9b8ef3324fde42c1aa39d500e34d356379a9d9fef3b13",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc412_f": [
+    {
+      "problem_id": "abc412_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "回数の期待値を",
+      "reason": "現在保持している靴下の色iから終了するまでの期待回数dp_iを定義する。同じ状態に戻る確率を移項し、より有利な色の期待値から降順に求める。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc412/editorial/13390"
+      ],
+      "evidence_sha256": "33b16c4d52f5444006c14d4cf3839526ee907de0021e6e14b77e1cb028f72a4d",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc417_f": [
+    {
+      "problem_id": "abc417_f",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "supporting"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "確率変数",
+      "reason": "操作回数iと皿jの石数の期待値E[X_(i,j)]を、操作前の区間内期待値の和から更新する。遅延セグメント木による区間集約で高速化した期待値の伝播。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc417/editorial/13549"
+      ],
+      "evidence_sha256": "2b2414d60fd38133c40a359390fa27aae5738416e061be036462ddfe1429c3ef",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc421_e": [
+    {
+      "problem_id": "abc421_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "得点の期待値の最大値",
+      "reason": "残り振り直し回数kと保持した出目の多重集合Sを状態とし、次の出目の確率で重み付けした期待得点を計算する。キープする集合は期待値が最大のものを選ぶ。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc421/editorial/13731"
+      ],
+      "evidence_sha256": "4e8252cfed7d7830b2ed221f23f7bf607b19a0db46d1ebbc3fc52c04f9806f79",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc450_g": [
+    {
+      "problem_id": "abc450_g",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "これにより",
+      "reason": "符号積の期待値C_NをC_N=-1+(N-3)/(N-1)*C_(N-1)で更新する。全配列の確率分布を持たず、必要なモーメントだけをDPで求める。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc450/editorial/17336"
+      ],
+      "evidence_sha256": "87d14e2ce47a832189313d5f4c9f5332f876e1d80af183d5de3ef2de9e07a358",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ],
+  "abc470_e": [
+    {
+      "problem_id": "abc470_e",
+      "scope": "selected_tags",
+      "accepted": {
+        "T026": "primary"
+      },
+      "rejected": [],
+      "out_of_vocabulary": "",
+      "source_indices": "0",
+      "evidence_quote": "このあと取れるペアの個数の期待値",
+      "reason": "ライフL・未知ペア数C0・片方既知のペア数C1から今後取れるペア数の期待値をメモ化する。次の二枚の引き方を四種類へ分けて条件付き期待値を合成する。",
+      "evidence_urls": [
+        "https://atcoder.jp/contests/abc470/editorial/23855"
+      ],
+      "evidence_sha256": "5c616b90ce363508aa5a7e4f607242080756e673641756ac6164306d6c91d610",
+      "reviewer": "assistant",
+      "independent_human_review": false,
+      "review_date": "2026-11-23"
+    }
+  ]
+}

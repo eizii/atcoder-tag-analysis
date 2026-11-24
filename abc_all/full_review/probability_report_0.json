@@ -1,0 +1,30 @@
+﻿[
+  {
+    "problem_id": "abc011_4",
+    "accepted": "T029:supporting",
+    "removed": "",
+    "reason": "水平移動回数kを0..Nで列挙し、水平・垂直内の正方向回数を一意決定する二項確率の積を足す。Pascal確率B[n,k]=(B[n-1,k]+B[n-1,k-1])/2をO(N^2)前計算。位置のO(N^3)DPは部分点。",
+    "file": "shard_0.tsv"
+  },
+  {
+    "problem_id": "abc144_f",
+    "accepted": "T026:primary,T029:alternative",
+    "removed": "",
+    "reason": "DAGの後ろからE[i]=1+平均E[子]を計算。各頂点では最大Eの子への辺だけ削除候補にしN回再計算するO(NM)。別解は前方到達確率pもDPし、候補頂点の期待改善量p[i]*(最大E-平均E)/(次数-1)を評価してO(N+M)。",
+    "file": "shard_0.tsv"
+  },
+  {
+    "problem_id": "abc145_c",
+    "accepted": "T026:alternative",
+    "removed": "",
+    "reason": "N<=8なので全順列の道長平均をO(N!N)で計算。各点対の隣接確率2/Nから距離総和*2/NのO(N^2)別解もある。訪問済み集合と現在点から未訪問へ等確率に進む期待残距離DPもO(2^N N^2)で可能。",
+    "file": "shard_0.tsv"
+  },
+  {
+    "problem_id": "abc149_f",
+    "accepted": "T029:alternative",
+    "removed": "",
+    "reason": "辺削除後の両側頂点数s,N-sから辺採用確率(1-2^-s)(1-2^-(N-s))を求め線形性で穴あき期待値を得るO(N)。全方位で各頂点除去成分を求めても可。成分が全白の確率q=.5*prod(q子)を木上DPし、黒を含む側が2以上となる確率を合成する確率DP別解もO(N)。",
+    "file": "shard_0.tsv"
+  }
+]

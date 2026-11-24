@@ -1,0 +1,23 @@
+{
+  "checks_passed": true,
+  "comparisons": {
+    "wipeout_hidden_permutations": 7,
+    "wipeout_enumerated_histories": 5913,
+    "sugoroku_projected_survival": 35,
+    "half_baked_merge_vs_outcomes": 288,
+    "half_baked_single_pair_normalization": 1,
+    "separate_digits_expectation_vs_cuts": 363,
+    "removing_people_first_moment_vs_process": 252,
+    "dye_hessenberg_structure": 5,
+    "dye_potential_vs_full_markov": 26,
+    "anti_ddos_probability_states_vs_substitutions": 127,
+    "anti_ddos_full_alphabet": 5
+  },
+  "method": "Exact rational arithmetic; independent hidden outcomes, recursive random processes, and full absorbing Markov equations.",
+  "limitations": "Small instances validate state semantics and algebra, not production FFT implementations, asymptotic feasibility, dataset-wide precision, or recall.",
+  "source_issue": {
+    "problem_id": "abc481_g",
+    "detail": "定式化2の本文Mには選択確率1/2が見当たらない。保存済み実装のcmは1/2を含み、N=1の列挙と一致。レビューは本文の係数をそのまま転記せず、この正規化を使用。",
+    "minimum_witness": "A=1,B=2: E=3/2; omitted factor produces 3."
+  }
+}

@@ -1,0 +1,1163 @@
+﻿problem_id,reason,url,context,note,excluded_chars
+abc010_4,partial_score_section,https://img.atcoder.jp/abc010/editorial.pdf,"
+D問題 部分点１ アルゴリズム
+
+• 以下のような図を考える
+
+
+
+
+                 1                   7
+
+                        5      6
+                 2                   8
+
+          0
+
+                3
+                   ",,3758
+abc011_4,partial_score_section,https://img.atcoder.jp/abc011/editorial.pdf,"
+D問題 部分点１ アルゴリズム
+
+• 前処理
+   – ジャンプの距離がDなのは面倒！1にしたい！
+          • X /= D; Y /=D;しましょう。
+          • 割り切れなかったら、確実に(X,Y)にはたどり着けないので、答え
+      は0です。
+
+
+
+
+
+2014/6/21                                            ",,2462
+abc017_3,partial_score_section,https://img.atcoder.jp/abc017/editorial.pdf,"
+部分点解法1 (30点)
+
+• すべての区間の集合を考えます。
+• 各数字について、その数字を覆う区間が集合にあるかどうかを判定
+ します。
+• どの区間にも含まれなかった数字があれば成立、そうでなければ不
+ 成立です。
+• 全体の計算量はO(𝑁∗𝑀∗2𝑁) などになります。
+
+部分点解法2 (30+70点)
+
+• すべての区間の組み合わせは指数オーダー存在するので、他の方
+ 針を考える必要",,664
+abc017_4,partial_score_section,https://img.atcoder.jp/abc017/editorial.pdf,"
+部分点解法(30点)
+
+• この問題は動的計画法を用いて解くことができます。
+• dp[i] = (ある日の終了時点でi 番目のサプリメントまでを摂取する組
+ み合わせ数) と置きます。
+• このとき、各dp[i]については、i 以前のdp の値の組み合わせ「例で
+ 見るようにある連続したdpの値の合計」となります。
+• これは、i まで食べる日の前日にj まで食べた場合にj 以前の食べ
+ 方",,1750
+abc018_3,partial_score_section,https://img.atcoder.jp/abc018/editorial.pdf,"
+部分点解法1 (30点)
+
+• 最初に中心(x,y) を固定します。
+• その中心からマンハッタン距離が𝐾以下の範囲(問題文中に書か
+ れた、緑色に塗る範囲) について、そのマスに黒マスがあるかを1 マ
+ スずつ見ます。
+• 黒マスが1 つもないなら、答えに1 を加算します。
+• すべての候補について試すことで答えを求めることができます。
+• 全体の計算量はO(𝑅𝐶𝐾2) になります。
+
+満",,197
+abc018_4,partial_score_section,https://img.atcoder.jp/abc018/editorial.pdf,"
+部分点解法(30点)
+
+• 考えられるすべてのグループを考えます。
+• グループは全部で𝑁C 𝑃* 𝑀C 𝑄通りあるので、それらをすべて生成し、
+ 各チョコレートについてO(1) で判定することで正解できます。
+
+満点解法(30+70点)
+
+• グループの数自体は多く、すべてを考慮していると時間がかかって
+ しまいます。
+• 一方で女子だけ、男子だけの組み合わせを固定するくらいならそこ
+ ま",,108
+abc023_c,partial_score_section,https://img.atcoder.jp/abc023/editorial.pdf,"
+部分点解法(30点)
+
+• すべてのマスについて、そのマスに高橋君が移動した場合に何個の
+ 飴を獲得するのかを計算します。
+
+
+• 全体の計算量はO(𝑅𝐶𝑅+ 𝐶+ 𝑁) になります。
+
+満点解法(30+70点)
+
+• 最初に、元の問題と似た別の問題について考えます。
+
+
+• 問題：基本設定は一緒。違うのは、高橋君がいるマスに飴があった
+ 場合は、1 個分(C 問題元の設定) ではなく2 個",,95
+abc023_d,partial_score_section,https://img.atcoder.jp/abc023/editorial.pdf,"
+部分点解法(30点)
+
+• 越えてはならない高さX が定まっているとします。
+
+• このとき、風船𝑖は(𝑋−𝐻𝑖)/𝑆𝑖秒以内に割らなければならないとい
+ うことが分かります(もしも𝑋< 𝐻𝑖なら、このX では不可能であるこ
+ とが分かります)。
+
+部分点解法(30点)
+
+• 各風船をいつまでに割らなければならないかが分かったならば、実
+ 際に割る方法があるかを判定する際、貪欲法を用いること",,324
+abc025_d,partial_score_section,https://img.atcoder.jp/abc025/editorial.pdf,"
+部分点解法 (30点)
+
+• すべての置き方を試します。
+                            で条• 置き方は 𝑁! 通り (𝑁 は空きマスの個数)あり、それぞれ O(𝑁2)
+ 件を満たすかか判定できるので、計算量は O(𝑁2 ∗𝑁!) となります。
+• 空きマスが少ないデータセット 1 なら高速で解けますが、空きマスが
+ 多めのデータセット だとかなりの時間がかかってしま",,1193
+abc027_d,partial_score_section,https://img.atcoder.jp/abc027/editorial.pdf,"
+部分点解法
+
+• 1 ≤𝑆≤1,000 と小さい。
+ 動的計画法→
+
+• 𝑑𝑝何文字目座標≔(幸福度の最大値) を埋めていく。
+• 𝑑𝑝|𝑆| 0 が答え。
+
+• 𝑂( 𝑆2) で間に合う。
+
+満点解法
+
+• 1 ≤𝑆≤105 と大きいので、動的計画法では間に合わない。
+ もっと速い解法を考える。→
+
+• ロボットの正の向きへの移動を> 、負の向きへの移動を< と表すこ
+ とにする。
+
+考",,98
+abc031_a,shared_unsegmented_editorial,https://img.atcoder.jp/abc031/editorial.pdf,"数列ゲーム
+
+概要
+
+• 高橋君と青木君が数列で遊びます。
+• 最初に高橋君が要素の1 つに丸を付けて、その後青木君が別の要
+ 素1 つに丸を付けます。
+• 2 つの丸に囲まれた範囲(両端含む)を取り出し、左から交互に高橋
+ 君、青木君の得点に加算します。
+• 青木君が自分の得点が最大となるように丸をつける(複数あるならそ
+ れらのうち最も左に丸をつける)とき、高橋君が得られる最大得点を
+ 求めてください。
+• 2 ≦𝑁≦50
+
+青",,771
+abc031_d,partial_score_section,https://img.atcoder.jp/abc031/editorial.pdf,"
+部分点解法
+
+
+          … ,• 先に文字列𝑠1,          𝑠𝐾を決めて、それらが条件を満たすか判定しま
+ す。
+• データセット1 において最大(33+32 + 3)3 通りの組み合わせを試
+ すことになりますが、この大きさならば余り多くの時間をかけずに計
+ 算することができます。
+• 一方、データセット2 になってくると最大(263+262 + 26)9 通りを試
+ ",,505
+abc035_c,partial_score_section,https://img.atcoder.jp/abc035/editorial.pdf,"
+部分点(60点)
+ • N, Q ≦2,000       と小さい
+ • 愚直にひっくり返すのをシミュレーションしよう！
+ • 一回の操作につき最大でN 個の駒を裏返す
+ • 計算量はO(NQ)
+
+満点(100点) 考察
+ • 石の数も操作回数も多いので愚直にシミュレーション しては間に合わない
+ • まとめてシミュレーションのようなことは可能か？
+ • ここで
+    –   偶数回裏返",,101
+abc035_d,partial_score_section,https://img.atcoder.jp/abc035/editorial.pdf,"
+部分点(50点)
+ • 以下の2 種類の最短距離を全て求めよう！
+     1.    頂点1 から、頂点i への最短距離
+     2.    頂点i から、頂点1 への最短距離
+ • ワーシャルフロイド法を使うとO(N3)
+ • ダイクストラ法を使うとO(NMlogN)
+
+満点(100点) 考察
+ • 部分点と同様、以下の2 種類の最短距離を求めたい
+     1.    頂点1 から、",,140
+arc064_b,pdf_next_problem_boundary,https://img.atcoder.jp/arc064/editorial.pdf,"
+
+E : Cosmic Rays
+
+ 簡単のため，始点(xs, ys) および終点(xt, yt) にも半径0 のバリアが張られていると仮定します．すると，
+
+始点および終点はそれぞれあるバリアの中心に位置することになります．
+
+ 始点から終点までの最適経路を求めるとき，すぬけ君はバリアの中心どうしを結ぶ線分上のみを移動すると
+
+仮定してもよいことが分かります．なぜならば，あるバリアの境界から別のバリアの境界まで移動するとき
+
+は，そ",,3036
+arc065_b,pdf_next_problem_boundary,https://img.atcoder.jp/arc065/editorial.pdf,"
+
+E : Manhattan Compass
+
+  Let D be the distance between the two points initially pointed by the compass.
+
+ We have two things to do:
+
+    • Construct a graph with N vertices. Two vertices a and b are connected if the di",,2539
+arc066_b,pdf_next_problem_boundary,https://img.atcoder.jp/arc066/editorial.pdf,"
+
+E : Addition and Subtraction Hard
+
+ 簡単のため、最初の数の前に“+” という記号があるものとして扱います。まず、“+” のあとで開き括弧を挿
+
+入しても意味がないことがわかります。また、“-” のあとに開き括弧を必ず挿入しても問題ありません。なぜ
+
+なら、そこで開いた括弧を、次の数の直後で閉じれば、括弧をつけていないのと変わらないからです。また、
+
+同じ箇所に開き括弧を2 個以上挿入するのも無意味",,1839
+arc067_b,pdf_next_problem_boundary,https://img.atcoder.jp/arc067/editorial.pdf,"
+E : Grouping
+
+  DP[i][j] = i 人以下のグループのみで、j 人使っている場合の数
+
+ というDP を考えます。このDP の遷移は、以下のようになります。
+      ∑
+  DP[i][j] =   k∈(0,C,C+1,...D) DP[i −1][j −i × k] ×(n−j+i×k) P(i×k)/(i!)k/k!
+ これでは一見O(N 3) に見えますが、k の動く範囲はj/i 以下しか考えなくて",,1348
+abc053_b,pdf_next_problem_boundary,https://img.atcoder.jp/arc068/editorial.pdf,"
+C : X: Yet Another Dice Game
+
+  6 面サイコロに対して90◦回転をしたのち，上を向いている面に書かれた整数をy としてy 点
+
+得る，という操作を何度も繰り返して合計x 点以上得るために必要な最小の操作回数を求めよ，と
+
+いう問題です．
+
+ はじめ，1, 6 以外の面が上を向くように置き，6 の面と5 の面が交互に上を向くように転がすの
+
+が最適な操作手順です．このように操作を行ったときに必要な操作回",,255
+arc068_b,pdf_next_problem_boundary,https://img.atcoder.jp/arc068/editorial.pdf,"
+
+E : Snuke-Train
+
+ 数直線上を原点から一定間隔d で移動したとき何種類の区間を訪れることが可能かd =
+
+1, 2, 3, . . . , M について調べよ，という問題です．
+
+ 間隔d を固定して考えてみましょう．このときri −li + 1 > d を満たす区間は必ず1 回以上訪
+れなくてはなりません．また，ri −li + 1 ≤d を満たす区間は最大でも1 回しか訪れることはで
+
+きません．
+
+ 必ず1 回",,986
+arc069_b,pdf_next_problem_boundary,https://img.atcoder.jp/arc069/editorial.pdf,"
+E : Frequency
+ 「N 個の石の山からあるルールで石の山を取り除いて長さ∑ai の数列s を辞書順最小になるよ
+うに構成するとき，s に1, 2, 3, . . . , N がそれぞれ何回含まれるか？」という問題です．石を1 個
+
+取り除く山を選ぶときのルールは「(ai, i) が最大であるようなi を選ぶ」としてよいです(以下，
+これを単にルールと呼びます)．
+
+ ルールに従ったときs が辞書順最小の数列となることを示",,1530
+arc071_a,pdf_next_problem_boundary,https://img.atcoder.jp/arc071/editorial.pdf,"
+ D : 井井井/ ###
+
+  答えを数式で表すと以下のようになります。
+        ∑ ∑
+                                           (xj −xi)(yl −yk)
+                          1≤i<j≤n 1≤k<l≤m
+
+  これをそのまま計算すると計算量がO(n2m2) で間に合いません。
+   この式は次のように因数分解することができます。
+   ",,8680
+arc072_b,pdf_next_problem_boundary,https://img.atcoder.jp/arc072/editorial.pdf,"
+
+E : Alice in linear land
+
+   i 番目までの数を入力したときに目的地までの距離Ai を前もって計算しておきます。
+   i 番目に入力する数を自由に変更できるとき、その数の入力が終わった時点で∀x ∈[0, Bi] についてAlice
+が目的地x の距離にいるよう数を設定することができます。逆に、Pi より目的地に遠い場所に移動させるこ
+
+とはできません。
+
+ よって、i 番目以降の数を入力してもAlic",,5027
+arc074_b,pdf_next_problem_boundary,https://img.atcoder.jp/arc074/editorial.pdf,"
+
+E : RGB Sequence
+
+ この問題はO(N 3 + N 2M) 時間のDP で解けます．
+
+ 左から順番にマスの色を塗っていくことにします．既に色を塗ったマスのうち，最も右にある赤いマスの
+
+index (1-origin) をr とします．ただし，赤いマスが存在しなければr = 0 とします．同様に，緑のマス，青
+
+いマスについてもそれぞれg, b を定義します．この状態に対応する色の履歴の通り数をdp[r][g][b",,5572
+abc064_d,pdf_next_problem_boundary,https://img.atcoder.jp/abc064/editorial.pdf,"
+A: RGB Cards
+
+  The number that AtCoDeer reads is 100𝑎+ 10𝑏+ 𝑐. You can calculate with the
+remainder of 100𝑎+ 10𝑏+ 𝑐 divided by 4.
+
+
+C++ code example:
+
+B: Traveling AtCoDeer Problem
+
+  One of the optimal way of deliver",,2898
+abc066_a,pdf_next_problem_boundary,https://img.atcoder.jp/arc077/editorial.pdf,"
+
+  B : ss
+
+  偶文字列かどうかを調べるためには、文字列の前半と後半が全く同じかどう
+  かを調べれば良いです。
+   偶文字列の長さは必ず偶数長なので、偶数の文字列についてのみ調べれば
+  十分です。最長のものを探しているので、長さ|S| −2 の文字列、長さ|S| −4
+
+
+                                    1
+
+  の文字列、…という順に調べて、条件に合うものが見つかった時にその",,546
+arc077_a,pdf_next_problem_boundary,https://img.atcoder.jp/arc077/editorial.pdf,"
+
+ D : 11
+
+  数の種類がn 種で、項がn + 1 項あるので、必ず同じ数の項が複数存在しま
+  す1。また、すべての数が1 度以上現れるという制約から、同じ数である項は
+  ちょうど1 組であることが分かります。
+   同じ数があるので、単純にn + 1 個からk 個を選ぶ組合せn+1Ck を計算す
+  るだけでは答えが求められません。そこで、重複を除く方法を考えてみます。
+   同じ数が出てくるのはちょうど1 組だけなので",,9372
+arc080_b,pdf_next_problem_boundary,https://img.atcoder.jp/arc080/editorial.pdf,"
+
+
+
+
+E : Old Maid
+
+  p, q 上の位置を左から順に0, 1, ..., N −1 とします．辞書順で最小の列を求める問題では，「列の先頭から
+
+順に，その時点であり得る最小の値を確定していく」という方法が有効です．
+
+ まず，q0 としてあり得る最小の値を確定しましょう．q0 になり得るのは，p 上で偶数番目の要素です．こ
+れらのうち最小の要素をq0 として確定します．また，この要素のp 上の位置をi とします．次",,7484
+abc073_d,pdf_next_problem_boundary,https://img.atcoder.jp/abc073/editorial.pdf,"
+A:  September 9
+
+ N is a two-digit number,so you can get 100 points by output ”Yes” when ten’s digit
+or one’s digit (or both of them) of N is 9, ”No” otherwise.
+
+
+#include <cstdio >
+int N;
+int main ()
+{
+        scanf(""",,3486
+abc076_d,pdf_next_problem_boundary,https://img.atcoder.jp/abc076/editorial.pdf,"
+
+
+A: Rating Goal
+
+  Let 𝑎 the rating, and let 𝑏 the performance of the next contest. In this case, the
+rating will change to 0.5(𝑎+ 𝑏).
+  Takahashi’s current rating is 𝑅, and his rating goal is 𝐺. So, he wants to establ",,5827
+abc079_d,pdf_next_problem_boundary,https://img.atcoder.jp/abc079/editorial.pdf,"
+A:  Good Integer
+
+ N has 4 digits, so ﬁrst 3 or last 3 digits are same when N is good.
+  So, you can get 100 points by output ‘Yes‘ when at least one of these conditions are met, ’No’
+when they didn’t.
+
+#include <cstdi",,2437
+abc080_d,pdf_next_problem_boundary,https://img.atcoder.jp/abc080/editorial.pdf,"
+A:  Parking
+
+ When you choose plan 1 ,the fee will be A × N yen,and when you choose plan 2, the fee will
+be B yen.
+  So,it is good to print the smaller of A × N and B.
+
+#include <cstdio >
+int N,A,B;
+int main ()
+{
+     ",,3005
+abc084_d,pdf_next_problem_boundary,https://img.atcoder.jp/abc084/editorial.pdf,"
+A:  New Year
+
+  There are 48 −M hours until New Year at M o‘clock on 30th Monday,December.
+  So you can get 100 point by print 48 −M.
+
+#include <cstdio >
+int M;
+int main ()
+{
+         scanf (""%d"",&M);
+         printf (",,3886
+abc085_d,pdf_next_problem_boundary,https://img.atcoder.jp/abc085/editorial.pdf,"
+
+
+  A: Already 2018
+
+    To solve this problem, you need to go through the procedure below:
+
+       0. (Unnecessary for some languages) Declare a string variable S.
+
+       1. Receive S as a string from Standard Input.
+",,5879
+abc088_d,pdf_next_problem_boundary,https://img.atcoder.jp/abc088/editorial.pdf,"
+
+A: Infinite Coins
+  There are infinite number of 500-yen coins. So, to minimize the number of 1-
+yen coins, he has to maximize the number of 500-yen coins. In this case the number
+of 500-yen coin is “the quotient when ",,4284
+abc089_d,pdf_next_problem_boundary,https://img.atcoder.jp/abc089/editorial.pdf,"
+A:  Grouping 2
+
+  The maximum number of groups consisting of three or more students is ⌊N/3⌋.
+  So,you can get 100 points by print ⌊N/3⌋.
+
+#include <cstdio >
+int N;
+int main ()
+{
+         scanf (""%d"",&N);
+         prin",,3125
+abc096_d,pdf_next_problem_boundary,https://img.atcoder.jp/abc096/editorial.pdf,"
+
+
+A: Day of Takahashi
+
+   In this editorial, let 𝑝−𝑞 be “𝑝 -th month and 𝑞 -th day”. For example, 5 −5
+means May 5th, and 12 −31 means December 31st.
+
+
+  From 1 −1 to 𝑎−𝑏, there are at least 𝑎−1 Takahashis: 1 −1, 2 −2, ",,4048
+arc098_b,pdf_next_problem_boundary,https://img.atcoder.jp/arc098/editorial.pdf,"
+E : Range Minimum Queries
+
+ 取り除いく要素の最小値X を決めたとします。この条件のもので、乗り除く要素の最大値Y を
+
+最小化することを考えます。
+ 最小値がX という条件を守るためには、X より小さい要素を含むような区間に対して操作をす
+ることは出来ません。そこで、与えられた数列を、X より小さい要素の位置で切ると、いくつか
+
+の列に分割されます。分割されたあとの列の中で完結する操作は自由に行なえます。",,7903
+abc100_d,pdf_next_problem_boundary,https://img.atcoder.jp/abc100/editorial.pdf,"
+ A: Happy Birthday!           2321       3656        150        0:40     0ms     19 bytes
+
+ B: Ringo’s favorite numbers    1806       6710        280        1:40     0ms     22 bytes
+
+ C: *3 or /2                  1887 ",,7661
+arc100_b,pdf_next_problem_boundary,https://img.atcoder.jp/arc100/editorial.pdf,"
+E : Or Plus Max
+
+ 各x について、max Ai + Aj s.t. (i or j) = x が求められれば、あとは単に累積max を取れば良
+いので、この問題は簡単です。しかし、これを求めるのは難しいです。そこで代わりに、各x につい
+て、max Ai +Aj s.t. (i or j) ⊆x を求めます。ただしここで便宜的に、a ⊆b を、a をbit で表した
+ときの1 の位置が、b をbit で表したときの",,8591
+abc123_d,references_or_related_problem_section,,"参考文献
+[2] を参考にしてください。
+
+
+⚫
+数列 𝐴, 𝐵, 𝐶 (各形のキャンドルが付いたケーキ) を降順ソートする。そして、𝐴𝑖 が 𝑖 番目
+に美味しい ‘1’ の形のキャンドルが付いたケーキとなるようにする。𝐵𝑗, 𝐶𝑘 に関しても同様と
+する。
+⚫
+Priority Queue (優先度付きキュー) である 𝑄 を定義する。
+⚫
+𝑄 に (𝐴1 + 𝐵1 + 𝐶1, 1, 1, 1 ) を追加する。なお、𝐴1 + 𝐵1 ",,1373
+abc222_h,worked_example_not_target_problem,https://atcoder.jp/contests/abc222/editorial/2742,"例題：カタラン数 カタラン数 \(1,1,2,5,14,\dots\) の一般項を反転公式を使って求めてみましょう。 カタラン数 \(c_i\) の母関数を \(C(x)\) とします。 \(F(x)=C(x)-1\) とおくと \[F(x) = x(F(x) + 1)^2\] という関係式が成り立つので ( 漸化式を立てると従います ) 、 \[G(x) = \frac{x}{(x+1)^2}\] とおくと \(G(F(x)) = x",,542
+abc222_h,references_or_related_problem_section,https://atcoder.jp/contests/abc222/editorial/2742,"関連記事 形式的冪級数を学ぶ上でおすすめの文章やこの問題に関連する記事をいくつか紹介します。 maspy, 形式的べき級数解説 日本人が形式的冪級数を学びたい場合、真っ先に読むべきホームページです。形式的冪級数を平易な書き方で説明していて非常に読みやすく、練習問題も多く載っていて初心者の方が勉強しやすいつくりになっています。 37zigen, 指数型母関数入門 この解説では触れませんでしたが、母関数には通常型母関数のほかに 指数型母関数",,1076
+abc224_h,references_or_related_problem_section,https://atcoder.jp/contests/abc224/editorial/2812,関連記事 双対性についてより深く学びたい方は こちらのスライド をお読みください。,,41
+abc235_h,references_or_related_problem_section,https://atcoder.jp/contests/abc235/editorial/3250,参考文献： 木と計算量 前編 〜O(N^2)とO(NK)の木DP〜 ( snuke さんのブログ),,49
+abc256_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc256/editorial/4159,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - 2^N
+Java/Kotlinでは、
+\(2^N\)
+を表すために左シフトを用いることができます。
+また、
+\(a^b\)
+を表すために
+Math.pow
+を使う手もあります。
+ただし、
+Math.pow
+は実数を対象とするものなので、整数で扱う際には自作しておく方が無難です。
+今回の制約下では精度が足りてい",,5413
+abc256_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc256/editorial/4159,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - 2^N
+Java/Kotlinでは、
+\(2^N\)
+を表すために左シフトを用いることができます。
+また、
+\(a^b\)
+を表すために
+Math.pow
+を使う手もあります。
+ただし、
+Math.pow
+は実数を対象とするものなので、整数で扱う際には自作しておく方が無難です。
+今回の制約下では精度が足りてい",,5413
+abc256_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc256/editorial/4159,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - 2^N
+Java/Kotlinでは、
+\(2^N\)
+を表すために左シフトを用いることができます。
+また、
+\(a^b\)
+を表すために
+Math.pow
+を使う手もあります。
+ただし、
+Math.pow
+は実数を対象とするものなので、整数で扱う際には自作しておく方が無難です。
+今回の制約下では精度が足りてい",,5413
+abc256_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc256/editorial/4159,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - 2^N
+Java/Kotlinでは、
+\(2^N\)
+を表すために左シフトを用いることができます。
+また、
+\(a^b\)
+を表すために
+Math.pow
+を使う手もあります。
+ただし、
+Math.pow
+は実数を対象とするものなので、整数で扱う際には自作しておく方が無難です。
+今回の制約下では精度が足りてい",,5413
+abc256_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc256/editorial/4159,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - 2^N
+Java/Kotlinでは、
+\(2^N\)
+を表すために左シフトを用いることができます。
+また、
+\(a^b\)
+を表すために
+Math.pow
+を使う手もあります。
+ただし、
+Math.pow
+は実数を対象とするものなので、整数で扱う際には自作しておく方が無難です。
+今回の制約下では精度が足りてい",,5413
+abc257_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc257/editorial/4191,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A to Z String 2
+文字列を実際に構築して出力する場合、実装例は以下のようになります。
+ですが、
+\(1\)
+文字を出力するために文字列全体を構築するのは少々筋が悪いように感じます。
+\(X\)
+番目の文字は、
+\(\lceil \frac{X}{N} \rceil\)
+番目のアルファベットと表す",,3682
+abc257_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc257/editorial/4191,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A to Z String 2
+文字列を実際に構築して出力する場合、実装例は以下のようになります。
+ですが、
+\(1\)
+文字を出力するために文字列全体を構築するのは少々筋が悪いように感じます。
+\(X\)
+番目の文字は、
+\(\lceil \frac{X}{N} \rceil\)
+番目のアルファベットと表す",,3682
+abc257_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc257/editorial/4191,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A to Z String 2
+文字列を実際に構築して出力する場合、実装例は以下のようになります。
+ですが、
+\(1\)
+文字を出力するために文字列全体を構築するのは少々筋が悪いように感じます。
+\(X\)
+番目の文字は、
+\(\lceil \frac{X}{N} \rceil\)
+番目のアルファベットと表す",,3682
+abc257_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc257/editorial/4191,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A to Z String 2
+文字列を実際に構築して出力する場合、実装例は以下のようになります。
+ですが、
+\(1\)
+文字を出力するために文字列全体を構築するのは少々筋が悪いように感じます。
+\(X\)
+番目の文字は、
+\(\lceil \frac{X}{N} \rceil\)
+番目のアルファベットと表す",,3682
+abc257_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc257/editorial/4191,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A to Z String 2
+文字列を実際に構築して出力する場合、実装例は以下のようになります。
+ですが、
+\(1\)
+文字を出力するために文字列全体を構築するのは少々筋が悪いように感じます。
+\(X\)
+番目の文字は、
+\(\lceil \frac{X}{N} \rceil\)
+番目のアルファベットと表す",,3682
+abc257_f,shared_unsegmented_editorial,https://atcoder.jp/contests/abc257/editorial/4191,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A to Z String 2
+文字列を実際に構築して出力する場合、実装例は以下のようになります。
+ですが、
+\(1\)
+文字を出力するために文字列全体を構築するのは少々筋が悪いように感じます。
+\(X\)
+番目の文字は、
+\(\lceil \frac{X}{N} \rceil\)
+番目のアルファベットと表す",,3682
+abc258_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc258/editorial/4257,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - When?
+今が0時0分から
+\(X\)
+分経過していることが分かっているとき、時刻は
+\(\lfloor \frac{X}{60} \rfloor\)
+時
+\((X \bmod 60)\)
+分です。
+従って、これを出力すれば良いです。
+B問題 - Number Box
+高橋君は、最初のマスと移動方向を決める",,4231
+abc258_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc258/editorial/4257,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - When?
+今が0時0分から
+\(X\)
+分経過していることが分かっているとき、時刻は
+\(\lfloor \frac{X}{60} \rfloor\)
+時
+\((X \bmod 60)\)
+分です。
+従って、これを出力すれば良いです。
+B問題 - Number Box
+高橋君は、最初のマスと移動方向を決める",,4231
+abc258_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc258/editorial/4257,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - When?
+今が0時0分から
+\(X\)
+分経過していることが分かっているとき、時刻は
+\(\lfloor \frac{X}{60} \rfloor\)
+時
+\((X \bmod 60)\)
+分です。
+従って、これを出力すれば良いです。
+B問題 - Number Box
+高橋君は、最初のマスと移動方向を決める",,4231
+abc258_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc258/editorial/4257,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - When?
+今が0時0分から
+\(X\)
+分経過していることが分かっているとき、時刻は
+\(\lfloor \frac{X}{60} \rfloor\)
+時
+\((X \bmod 60)\)
+分です。
+従って、これを出力すれば良いです。
+B問題 - Number Box
+高橋君は、最初のマスと移動方向を決める",,4231
+abc258_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc258/editorial/4257,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - When?
+今が0時0分から
+\(X\)
+分経過していることが分かっているとき、時刻は
+\(\lfloor \frac{X}{60} \rfloor\)
+時
+\((X \bmod 60)\)
+分です。
+従って、これを出力すれば良いです。
+B問題 - Number Box
+高橋君は、最初のマスと移動方向を決める",,4231
+abc258_g,shared_unsegmented_editorial,https://atcoder.jp/contests/abc258/editorial/4257,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - When?
+今が0時0分から
+\(X\)
+分経過していることが分かっているとき、時刻は
+\(\lfloor \frac{X}{60} \rfloor\)
+時
+\((X \bmod 60)\)
+分です。
+従って、これを出力すれば良いです。
+B問題 - Number Box
+高橋君は、最初のマスと移動方向を決める",,4231
+abc259_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc259/editorial/4433,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Growth Record
+このように変数が幾つも出てくる問題では、図を書いてみることが有効です。
+例えば私の場合、格子状に線が入ったホワイトボードと8色のホワイトボードマーカーを常に用意しており、これに図を書いて考察することが多いです。
+さて、実際に図を書いてみると以下のような形になります。
+後は、この図か",,6182
+abc259_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc259/editorial/4433,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Growth Record
+このように変数が幾つも出てくる問題では、図を書いてみることが有効です。
+例えば私の場合、格子状に線が入ったホワイトボードと8色のホワイトボードマーカーを常に用意しており、これに図を書いて考察することが多いです。
+さて、実際に図を書いてみると以下のような形になります。
+後は、この図か",,6182
+abc259_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc259/editorial/4433,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Growth Record
+このように変数が幾つも出てくる問題では、図を書いてみることが有効です。
+例えば私の場合、格子状に線が入ったホワイトボードと8色のホワイトボードマーカーを常に用意しており、これに図を書いて考察することが多いです。
+さて、実際に図を書いてみると以下のような形になります。
+後は、この図か",,6182
+abc259_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc259/editorial/4433,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Growth Record
+このように変数が幾つも出てくる問題では、図を書いてみることが有効です。
+例えば私の場合、格子状に線が入ったホワイトボードと8色のホワイトボードマーカーを常に用意しており、これに図を書いて考察することが多いです。
+さて、実際に図を書いてみると以下のような形になります。
+後は、この図か",,6182
+abc259_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc259/editorial/4433,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Growth Record
+このように変数が幾つも出てくる問題では、図を書いてみることが有効です。
+例えば私の場合、格子状に線が入ったホワイトボードと8色のホワイトボードマーカーを常に用意しており、これに図を書いて考察することが多いです。
+さて、実際に図を書いてみると以下のような形になります。
+後は、この図か",,6182
+abc259_f,shared_unsegmented_editorial,https://atcoder.jp/contests/abc259/editorial/4433,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Growth Record
+このように変数が幾つも出てくる問題では、図を書いてみることが有効です。
+例えば私の場合、格子状に線が入ったホワイトボードと8色のホワイトボードマーカーを常に用意しており、これに図を書いて考察することが多いです。
+さて、実際に図を書いてみると以下のような形になります。
+後は、この図か",,6182
+abc260_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc260/editorial/4488,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A Unique Letter
+愚直に実装するならば条件式を並べれば良いですが、あえてそうではない実装を紹介します。
+\(F(x)\)
+を文字
+\(x\)
+の出現回数とします。
+この時、
+\(F(x)=1\)
+なる
+\(x\)
+が存在するかを判定すれば良いです。
+\(F(x)\)
+は写像なので、つまりMap(",,4416
+abc260_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc260/editorial/4488,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A Unique Letter
+愚直に実装するならば条件式を並べれば良いですが、あえてそうではない実装を紹介します。
+\(F(x)\)
+を文字
+\(x\)
+の出現回数とします。
+この時、
+\(F(x)=1\)
+なる
+\(x\)
+が存在するかを判定すれば良いです。
+\(F(x)\)
+は写像なので、つまりMap(",,4416
+abc260_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc260/editorial/4488,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A Unique Letter
+愚直に実装するならば条件式を並べれば良いですが、あえてそうではない実装を紹介します。
+\(F(x)\)
+を文字
+\(x\)
+の出現回数とします。
+この時、
+\(F(x)=1\)
+なる
+\(x\)
+が存在するかを判定すれば良いです。
+\(F(x)\)
+は写像なので、つまりMap(",,4416
+abc260_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc260/editorial/4488,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A Unique Letter
+愚直に実装するならば条件式を並べれば良いですが、あえてそうではない実装を紹介します。
+\(F(x)\)
+を文字
+\(x\)
+の出現回数とします。
+この時、
+\(F(x)=1\)
+なる
+\(x\)
+が存在するかを判定すれば良いです。
+\(F(x)\)
+は写像なので、つまりMap(",,4416
+abc260_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc260/editorial/4488,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A Unique Letter
+愚直に実装するならば条件式を並べれば良いですが、あえてそうではない実装を紹介します。
+\(F(x)\)
+を文字
+\(x\)
+の出現回数とします。
+この時、
+\(F(x)=1\)
+なる
+\(x\)
+が存在するかを判定すれば良いです。
+\(F(x)\)
+は写像なので、つまりMap(",,4416
+abc260_f,shared_unsegmented_editorial,https://atcoder.jp/contests/abc260/editorial/4488,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - A Unique Letter
+愚直に実装するならば条件式を並べれば良いですが、あえてそうではない実装を紹介します。
+\(F(x)\)
+を文字
+\(x\)
+の出現回数とします。
+この時、
+\(F(x)=1\)
+なる
+\(x\)
+が存在するかを判定すれば良いです。
+\(F(x)\)
+は写像なので、つまりMap(",,4416
+abc261_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc261/editorial/4499,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Intersection
+区間の共通集合は、
+\([\max(L_1, L_2), \min(R_1, R_2)]\)
+で求めることができます。
+この理由を確認しておきましょう。
+\(\max(L_1, L_2) \leq i \leq \min(R_1, R_2)\)
+を満たす任意の
+\(i\)
+に対して、",,1715
+abc261_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc261/editorial/4499,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Intersection
+区間の共通集合は、
+\([\max(L_1, L_2), \min(R_1, R_2)]\)
+で求めることができます。
+この理由を確認しておきましょう。
+\(\max(L_1, L_2) \leq i \leq \min(R_1, R_2)\)
+を満たす任意の
+\(i\)
+に対して、",,1715
+abc261_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc261/editorial/4499,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Intersection
+区間の共通集合は、
+\([\max(L_1, L_2), \min(R_1, R_2)]\)
+で求めることができます。
+この理由を確認しておきましょう。
+\(\max(L_1, L_2) \leq i \leq \min(R_1, R_2)\)
+を満たす任意の
+\(i\)
+に対して、",,1715
+abc261_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc261/editorial/4499,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Intersection
+区間の共通集合は、
+\([\max(L_1, L_2), \min(R_1, R_2)]\)
+で求めることができます。
+この理由を確認しておきましょう。
+\(\max(L_1, L_2) \leq i \leq \min(R_1, R_2)\)
+を満たす任意の
+\(i\)
+に対して、",,1715
+abc261_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc261/editorial/4499,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Intersection
+区間の共通集合は、
+\([\max(L_1, L_2), \min(R_1, R_2)]\)
+で求めることができます。
+この理由を確認しておきましょう。
+\(\max(L_1, L_2) \leq i \leq \min(R_1, R_2)\)
+を満たす任意の
+\(i\)
+に対して、",,1715
+abc261_f,shared_unsegmented_editorial,https://atcoder.jp/contests/abc261/editorial/4499,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+A問題 - Intersection
+区間の共通集合は、
+\([\max(L_1, L_2), \min(R_1, R_2)]\)
+で求めることができます。
+この理由を確認しておきましょう。
+\(\max(L_1, L_2) \leq i \leq \min(R_1, R_2)\)
+を満たす任意の
+\(i\)
+に対して、",,1715
+abc262_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc262/editorial/4539,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+作成中
+A問題 - World Cup
+\(Y\)
+から順に数字を増やしていき、
+\(4\)
+で割った余りが
+\(2\)
+になった値を出力すると答えが求まります。
+あるいは、直接計算で求めることもできます。
+答えから
+\(2\)
+を引いた値は、
+\(Y-2\)
+以上の最小の
+\(4\)
+の倍数を求める問題となっています。",,4690
+abc262_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc262/editorial/4539,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+作成中
+A問題 - World Cup
+\(Y\)
+から順に数字を増やしていき、
+\(4\)
+で割った余りが
+\(2\)
+になった値を出力すると答えが求まります。
+あるいは、直接計算で求めることもできます。
+答えから
+\(2\)
+を引いた値は、
+\(Y-2\)
+以上の最小の
+\(4\)
+の倍数を求める問題となっています。",,4690
+abc262_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc262/editorial/4539,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+作成中
+A問題 - World Cup
+\(Y\)
+から順に数字を増やしていき、
+\(4\)
+で割った余りが
+\(2\)
+になった値を出力すると答えが求まります。
+あるいは、直接計算で求めることもできます。
+答えから
+\(2\)
+を引いた値は、
+\(Y-2\)
+以上の最小の
+\(4\)
+の倍数を求める問題となっています。",,4690
+abc262_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc262/editorial/4539,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+作成中
+A問題 - World Cup
+\(Y\)
+から順に数字を増やしていき、
+\(4\)
+で割った余りが
+\(2\)
+になった値を出力すると答えが求まります。
+あるいは、直接計算で求めることもできます。
+答えから
+\(2\)
+を引いた値は、
+\(Y-2\)
+以上の最小の
+\(4\)
+の倍数を求める問題となっています。",,4690
+abc262_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc262/editorial/4539,"このユーザー解説はJava/Kotlinにおける実装例を紹介するものとなっています。
+A問題
+B問題
+C問題
+D問題
+作成中
+A問題 - World Cup
+\(Y\)
+から順に数字を増やしていき、
+\(4\)
+で割った余りが
+\(2\)
+になった値を出力すると答えが求まります。
+あるいは、直接計算で求めることもできます。
+答えから
+\(2\)
+を引いた値は、
+\(Y-2\)
+以上の最小の
+\(4\)
+の倍数を求める問題となっています。",,4690
+abc265_h,preface_before_explicit_solution_heading,https://atcoder.jp/contests/abc265/editorial/4577,はじめに、問題自体の解説を読みたい方は、ページ下方の「この問題の解説」から読むことを推奨します。 この問題はフーリエ変換・多次元フーリエ変換・アダマール変換などの変換を理解していると解ける問題です。以下の解説では 「通常の畳み込み(多項式の積)」「XOR 畳み込み」は一体どのような原理で動いているのか？ という点を理解して頂けることを目標として、前提知識の解説を行っていきます。 離散フーリエ変換 はじめに離散フーリエ変換の説明から始めて,,7147
+abc269_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc269/editorial/4860,"https://twitter.com/kyopro_friends/status/1571133784799744000
+(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",,100
+abc269_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc269/editorial/4860,"https://twitter.com/kyopro_friends/status/1571133784799744000
+(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",,100
+abc269_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc269/editorial/4860,"https://twitter.com/kyopro_friends/status/1571133784799744000
+(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",,100
+abc269_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc269/editorial/4860,"https://twitter.com/kyopro_friends/status/1571133784799744000
+(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",,100
+abc269_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc269/editorial/4860,"https://twitter.com/kyopro_friends/status/1571133784799744000
+(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",,100
+abc269_h,preface_before_explicit_solution_heading,https://atcoder.jp/contests/abc269/editorial/4838,"はじめに、問題自体の解説を読みたい方は、ページ下方の「この問題の解説」から読むことを推奨します。 はじめに、この問題を解くのに必要な 重軽分解 と呼ばれるテクニックを説明します。 重軽分解 重軽分解 (Heavy Light Decomposition, 以下 HLD と表記) とは、根付き木を いくつかのパスに分割するテクニックのことを言います。 HLD を利用して木をいくつかのパスに変換することで、列に対して適用できるアルゴリズムを",,2492
+abc269_f,shared_unsegmented_editorial,https://atcoder.jp/contests/abc269/editorial/4860,"https://twitter.com/kyopro_friends/status/1571133784799744000
+(※ツイート本文中でABC270と書いていますが、ABC269の間違いです)",,100
+abc269_g,references_or_related_problem_section,https://atcoder.jp/contests/abc269/editorial/4841,参考資料：CodeForces の記事 その1 その2 実装例(PyPy),,37
+abc278_h,references_or_related_problem_section,https://atcoder.jp/contests/abc278/editorial/5210,関連問題 q-二項係数を利用して解ける問題を (想定解・非想定解を問わず) 以下にまとめました。 (ネタバレ防止用に畳んでいます) ARC139 F ARC146 C CODE FESTIVAL 2016 Grand Final H :  rank を求める部分を除いて \(\mathrm{O}(N)\) で計算できます。 CodeForces Round #752 Div.1 F,,192
+abc280_c,references_or_related_problem_section,https://atcoder.jp/contests/abc280/editorial/5349,"References:
+https://en.cppreference.com/w/cpp/string/basic_string/operator_at
+https://en.cppreference.com/w/cpp/string
+https://en.cppreference.com/w/cpp/language/zero_initialization",,181
+abc284_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc284/editorial/5513,"https://twitter.com/kyopro_friends/status/1611950973215465472
+（ツイート中に「ABC285」とありますが、ABC284の誤りです）",,96
+abc284_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc284/editorial/5513,"https://twitter.com/kyopro_friends/status/1611950973215465472
+（ツイート中に「ABC285」とありますが、ABC284の誤りです）",,96
+abc284_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc284/editorial/5513,"https://twitter.com/kyopro_friends/status/1611950973215465472
+（ツイート中に「ABC285」とありますが、ABC284の誤りです）",,96
+abc284_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc284/editorial/5513,"https://twitter.com/kyopro_friends/status/1611950973215465472
+（ツイート中に「ABC285」とありますが、ABC284の誤りです）",,96
+abc284_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc284/editorial/5513,"https://twitter.com/kyopro_friends/status/1611950973215465472
+（ツイート中に「ABC285」とありますが、ABC284の誤りです）",,96
+abc284_f,shared_unsegmented_editorial,https://atcoder.jp/contests/abc284/editorial/5513,"https://twitter.com/kyopro_friends/status/1611950973215465472
+（ツイート中に「ABC285」とありますが、ABC284の誤りです）",,96
+abc285_g,references_or_related_problem_section,https://atcoder.jp/contests/abc285/editorial/5500,参考文献： 最小流量制限付き最大流 ( snuke さんのブログ) 『プログラミングコンテストチャレンジブック　第2版』P193,,64
+abc323_g,references_or_related_problem_section,https://atcoder.jp/contests/abc323/editorial/7356,参考資料 yukicoder DETERMINATION 解説 ：こちらの解説では決定的解法についても言及されています。 CF blog  comment,,77
+abc349_d,references_or_related_problem_section,https://atcoder.jp/contests/abc349/editorial/9797,"関連記事 1
+関連記事 2
+また、Rust のような言語では、整数に
+.next_power_of_two()
+や
+.is_power_of_two()
+のようなメソッドも用意されています（計算量規定はなさそうです）。
+提出 #52366131",,122
+abc367_e,references_or_related_problem_section,https://atcoder.jp/contests/abc367/editorial/10719,"参考文献
+[1]: Bender, Michael A., and Martın Farach-Colton. “The level ancestor problem simplified.”
+Theoretical Computer Science
+321, no. 1 (2004): 5–12.
+日本語解説記事もあります。
+Level Ancestor Problem - 37zigenのHP",,200
+abc370_g,references_or_related_problem_section,https://atcoder.jp/contests/abc370/editorial/10869,"参考文献 Library Checker : Problem proposal (Sum of Multiplicative Function) : 乗法的関数の prefix sum に関する先行研究がまとまっている。 OI-Wiki : 杜教篩, PowerfulNumber 篩などの解説がある。",,151
+abc414_a,shared_unsegmented_editorial,https://atcoder.jp/contests/abc414/editorial/13687,"注：ツイート内のE問題の解説は誤りです。
+https://x.com/kyopro_friends/status/1944032441515020378",,76
+abc414_b,shared_unsegmented_editorial,https://atcoder.jp/contests/abc414/editorial/13687,"注：ツイート内のE問題の解説は誤りです。
+https://x.com/kyopro_friends/status/1944032441515020378",,76
+abc414_c,shared_unsegmented_editorial,https://atcoder.jp/contests/abc414/editorial/13687,"注：ツイート内のE問題の解説は誤りです。
+https://x.com/kyopro_friends/status/1944032441515020378",,76
+abc414_d,shared_unsegmented_editorial,https://atcoder.jp/contests/abc414/editorial/13687,"注：ツイート内のE問題の解説は誤りです。
+https://x.com/kyopro_friends/status/1944032441515020378",,76
+abc414_e,shared_unsegmented_editorial,https://atcoder.jp/contests/abc414/editorial/13687,"注：ツイート内のE問題の解説は誤りです。
+https://x.com/kyopro_friends/status/1944032441515020378",,76
+abc418_g,references_or_related_problem_section,https://atcoder.jp/contests/abc418/editorial/13620,"参考資料 今回の出題および解説執筆は以下を参考にしました。 XX Open Cup Grand Prix of Tokyo J 問題 : Median Replace Hard 浅谈有限状态自动机及其应用(徐哲安, 2021 年信息学奥林匹克中国国家集训队论文集)",,132
+abc430_g,references_or_related_problem_section,https://atcoder.jp/contests/abc430/editorial/14300,参考文献 atcoder::lazy_segtree に1行書き足すだけの抽象化 Segment Tree Beats hitonanode さんによる記事、日本語 A simple introduction to “Segment tree beats” segment tree beats の初出記事、英語 ABC256Ex解説 Segment Tree Beats を用いて解ける問題の Nyaan さんによる公式解説記事 Segm,,905

@@ -1,0 +1,71 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import assert from "node:assert/strict";
+import { createRequire } from "node:module";
+import { pathToFileURL, fileURLToPath } from "node:url";
+const ROOT=path.dirname(fileURLToPath(import.meta.url));
+const OUT=path.join(ROOT,"svd32_under2000_cut02");
+const APP="C:/Users/ejham/theme2026-kaziru";
+const require=createRequire(path.join(APP,"package.json"));
+const Papa=require("papaparse");
+const React=require("react");
+const {renderToStaticMarkup}=require("react-dom/server");
+const {createServer}=await import(pathToFileURL(require.resolve("vite")).href);
+const catalog=JSON.parse(await fs.readFile(path.join(APP,"src/data/tagCatalog.json"),"utf8"));
+const topics=JSON.parse(await fs.readFile(path.join(APP,"src/data/problemTopics.json"),"utf8"));
+const csv=await fs.readFile(path.join(APP,"public/all_problems.csv"),"utf8");
+const parsed=Papa.parse(csv,{header:true,skipEmptyLines:true,dynamicTyping:true});
+assert.deepEqual(parsed.errors,[]);
+const rows=parsed.data.map(r=>({...r,diffCalc:Number(r.difficulty)}));
+assert.equal(rows.length,3391);
+assert.equal(new Set(rows.map(r=>r.problem_id)).size,1693);
+const server=await createServer({root:APP,server:{middlewareMode:true,hmr:false},appType:"custom",logLevel:"error"});
+try {
+  const stats=await server.ssrLoadModule("/src/utils/statistics.js");
+  const mds=await server.ssrLoadModule("/src/utils/classicalMds.js");
+  const swarm=await server.ssrLoadModule("/src/utils/beeswarm.js");
+  const peers=await server.ssrLoadModule("/src/utils/peerBaselines.js");
+  const {default:Main}=await server.ssrLoadModule("/src/components/Main.jsx");
+  const {default:Card}=await server.ssrLoadModule("/src/components/AlgorithmCard.jsx");
+  assert.equal(stats.MIN_PROBLEMS_PER_TAG,1);
+  const grouped=stats.groupByAlgorithm(rows,"tag");
+  const summary=stats.createSummary(grouped,stats.countBandsByAlgorithm(rows,"tag"));
+  assert.equal(summary.length,87);
+  for (const g of summary) assert.equal(g.n,catalog.clusters.find(c=>c.label===g.algo).problem_count);
+  const boundary=stats.createSummary({empty:[],one:[100],two:[100,200]},{});
+  assert.deepEqual(new Set(boundary.map(g=>g.algo)),new Set(["one","two"]));
+  for(const fraction of [.25,mds.DEFAULT_LOWER_FRACTION,.75]){
+    const positions=swarm.computeBeeswarm(mds.computeAnchoredClassicalMds(summary,grouped,fraction));
+    assert.equal(positions.length,87);
+    assert.ok(positions.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)&&Number.isFinite(p.r)));
+  }
+  const placed=swarm.computeBeeswarm(mds.computeAnchoredClassicalMds(summary,grouped,mds.DEFAULT_LOWER_FRACTION));
+  const props={summary:placed,allRows:rows,lowerFraction:mds.DEFAULT_LOWER_FRACTION,onLowerFractionChange(){},username:"",onUsernameChange(){},rate:1000,rateLoading:false,rateError:null,onFetchRate(){},onFetchSubmissions(){},onAutoOptimize(){},isOptimizing:false,isOptimized:false,submissionsMap:new Map([[rows[0].problem_id,true],[rows.at(-1).problem_id,false]]),submissionsLoaded:true,peerBaselines:{catalogCompatible:false,bands:{}}};
+  const markup=renderToStaticMarkup(React.createElement(Main,props));
+  assert.equal((markup.match(/class="pie-node(?: pie-node--selected)?"/g)||[]).length,87);
+  assert.ok(markup.includes("1693")&&markup.includes("SVDによる分類")&&!markup.includes("学習単位"));
+  assert.ok(!markup.includes("NaN")&&!markup.includes("Infinity"));
+  assert.ok(markup.includes("現在の分類に対応する同レート帯データは準備中"));
+  assert.ok(markup.includes("pie-node-progress"));
+  assert.equal((markup.match(/class="pie-node-peer-progress"/g)||[]).length,0);
+  for (const g of catalog.clusters) assert.ok(markup.includes('aria-label="'+g.label.replace(/&/g,"&amp;").replace(/"/g,"&quot;")+'"'));
+  const group=catalog.clusters.find(g=>g.member_tags.length>1);
+  const problems=rows.filter(r=>r.tag===group.label);
+  const card=renderToStaticMarkup(React.createElement(Card,{algo:summary.find(g=>g.algo===group.label),problems,submissionsMap:new Map([[problems[0].problem_id,true],[problems[1].problem_id,false]]),memberTags:group.detail_methods,definition:group.description,problemTopics:topics}));
+  assert.ok(card.includes("含まれる手法：")&&card.includes("problem-item--ac")&&card.includes("problem-item--wa"));
+  assert.equal((card.match(/class="problem-item(?: [^"]*)?"/g)||[]).length,group.problem_count);
+  const empty=renderToStaticMarkup(React.createElement(Main,{...props,summary:[]}));
+  assert.equal((empty.match(/class="pie-node(?: pie-node--selected)?"/g)||[]).length,0);
+  const originalFetch=globalThis.fetch;
+  try {
+    globalThis.fetch=async()=>({ok:true,json:async()=>({source:{taggingVersion:"semantic-learning-units-v1-20261105"},bands:{}})});
+    assert.equal((await peers.loadPeerBaselines(undefined,catalog.version)).catalogCompatible,false);
+    globalThis.fetch=async()=>({ok:true,json:async()=>({source:{taggingVersion:catalog.version},bands:{}})});
+    assert.equal((await peers.loadPeerBaselines(undefined,catalog.version)).catalogCompatible,true);
+  } finally {globalThis.fetch=originalFetch;}
+  const served=await fetch("http://127.0.0.1:5173/all_problems.csv");
+  assert.ok(served.ok);assert.equal(await served.text(),csv);
+  const verification={passed:true,version:catalog.version,rendered_nodes:87,displayed_problems:1693,single_problem_tags:catalog.clusters.filter(g=>g.problem_count===1).length,checks:["runtime PapaParse CSV","87 real React pie nodes","catalog counts match app summary","all singleton nodes visible","finite MDS/beeswarm coordinates at three settings","selected-group original tags and deduplicated problem list","personal progress ring and AC/WA card classes","incompatible peer baseline rejected; matching version accepted","empty render","development server serves new CSV"],browser_ui_check:"blocked: native pipe unavailable and browser access host unavailable"};
+  await fs.writeFile(path.join(OUT,"app_verification.json"),JSON.stringify(verification,null,2)+"\n");
+  console.log(JSON.stringify(verification,null,2));
+} finally {await server.close();}

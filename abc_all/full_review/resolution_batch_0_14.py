@@ -1,0 +1,8 @@
+﻿from record_resolution_0 import *
+put('abc447_e','T005:primary,T076:supporting,T201:concept','辺をM..1の降順に見て、追加しても全体連結にならない限り残す。DSU成分数が2になった後は成分間辺を全て削除し2^iを加算。2^iは全下位コスト和より大きいのでこの高位桁貪欲が正当。O((N+M)alpha N)。最小cutを一般フローで求める必要はない。',anchor='Union-Find')
+put('abc447_g','T003:primary,T065:supporting,T086:supporting,T120:supporting','prefix/suffixごとのジャンル相異なる面白さ上位4案をO(N)前計算。i4のジャンルc固定時、各i3=xの左3案最大M(x)を持つ。右側の2案を避けるにはジャンル別M上位4だけで十分なので、この情報をsegtreeでprefix取得。c変更でM(x)が変わるのはKxと左上位候補のO(1)ジャンルだけなので更新イベント総O(N)。全体O(N log N)。setは数学的集合で実装技法ではない。',anchor='事実 2')
+put('abc448_f','T084:primary,T077:supporting,T155:supporting,T062:analysis_concept','幅B≈W/sqrt Nの縦短冊へ分け、短冊番号順・各短冊内y昇降交互でsortして蛇行巡回し、地点1始まりへrotate。長さ上界W^2/B+NB+4W<=約9.87e9が1e10内、O(N log N)。Moはこの順序付けの由来でありクエリ処理を実行しない。','短冊状の幾何構築',anchor='合計',uncertainty='Hilbert/Z-order、MST DFS、2-opt等は元解説でも単独の距離保証不足に留保があり、全制約に通る別解としては採用しない。')
+put('abc448_g','T063:primary,T077:supporting,T013:supporting,T016:alternative,T015:supporting,T038:analysis_concept','BAN(i,j)後の値Vijは残る2列の混合率xに対するN-1直線上包絡線の最小。全直線の最小点を支持する高々2本を取り、その2本以外の削除値は不変、例外だけ包絡線を再計算し全3列O(N log N)。V行の種類は高々7なのでBAN段階を3×O(1)零和行列へ縮約し、確率単体上のconcave値を二重三分探索O(S^2)。別解はprefix/suffix永続Li Chaoの2本問合せを使い各Vを三分探索O(NSD)、深さD打切り誤差<=2^-D。','混合戦略零和ゲーム,線形計画,直線包絡線',anchor='部分問題の解法 1',uncertainty='2nd-max Li Chao、永続Line Container、一般LP/halfplane intersectionは方針の列挙のみなので追加採用していない。')
+put('abc449_d','T065:primary,T264:supporting,T060:supporting,T257:alternative','|x|>|y|側では偶数xを列挙しy範囲[D,U]∩[-|x|+1,|x|-1]の長さを加える。反対側は偶数yとx範囲で同様、O(R-L+U-D)。source2は第一象限prefix矩形を偶数層の等差和でO(1)算出し、対称性・包除で任意矩形に拡張するO(1)別解。',anchor='場合分けして')
+rows['abc449_d']['source_indices']='0,2'
+save()

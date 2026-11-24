@@ -1,0 +1,25 @@
+﻿problem_id	tag_id	role	decision	previously_present	reason
+abc275_e	T029	primary	accepted	True	dp[回数][位置]の確率を各ルーレット目へ1/Mで遷移し、端で反射・ゴールで吸収する。逆元を一度前計算してO(NMK+log MOD)。一般畳み込みは不要。
+abc277_g	T029	supporting	accepted	True	歩数・現在頂点と累積レベルの0/1/2次モーメントを確率重み付きDPで伝播し、色1頂点で二次モーメントを報酬へ加算する。0次は到達確率。隣接次数の逆元を前計算しO(K(N+M))。
+abc277_g	T026	primary	accepted	True	歩数・現在頂点と累積レベルの0/1/2次モーメントを確率重み付きDPで伝播し、色1頂点で二次モーメントを報酬へ加算する。0次は到達確率。隣接次数の逆元を前計算しO(K(N+M))。
+abc280_e	T029	primary	accepted	True	ちょうどiに達する確率p_i=1-(P/100)p_{i-1}を計算し期待攻撃回数を累積するO(N)。E_i=1+(1-p)E_{i-1}+pE_{i-2}の別解、線形漸化式を行列累乗する別解も実行可能。
+abc280_e	T026	alternative	accepted	True	ちょうどiに達する確率p_i=1-(P/100)p_{i-1}を計算し期待攻撃回数を累積するO(N)。E_i=1+(1-p)E_{i-1}+pE_{i-2}の別解、線形漸化式を行列累乗する別解も実行可能。
+abc289_h	T029	primary	accepted	True	時刻tに初めて会う確率f(t)=g(t)-sum_(u<t)f(u)h(t-u)を計算する。二項係数からg,hを前計算し、FPS逆元または分割統治FFTで確率DPをO(T log^2 T)程度へ高速化。
+abc298_e	T029	primary	accepted	True	両者位置i,jと次手番flagの勝率DPを終端から計算する。サイコロの全目を平均しO(N^2(P+Q))、範囲累積和ならO(N^2)。逆元を前計算する。gcdは使わない。
+abc299_h	T029	supporting	accepted	True	残りrの期待手数e(r)と6個の停止位置分布p_i(r)を線形漸化式で高速に計算する。円周10^9跨ぎの境界期待値6個を連立方程式で解き合成する。固定6面なので行列累乗でもO(log r)。
+abc299_h	T026	primary	accepted	True	残りrの期待手数e(r)と6個の停止位置分布p_i(r)を線形漸化式で高速に計算する。円周10^9跨ぎの境界期待値6個を連立方程式で解き合成する。固定6面なので行列累乗でもO(log r)。
+abc300_e	T029	primary	accepted	True	現在値nからNで終わる確率をメモ化する。目1の自己ループを除きdp(n)=sum_(k=2..6)dp(kn)/5。2,3,5の指数で到達する状態だけ計算しO(log^3 N)。
+abc301_f	T029	primary	accepted	True	接頭辞に異なる大文字が何種類あるか、重複大文字後か、小文字後かの29状態を持つ確率DP。固定文字/52種類の?の遷移を行い最後に52^qを掛け数へ戻す。O(29N)。
+abc310_f	T029	primary	accepted	True	作れる0..10の部分和集合を11bit maskにし、各サイコロの出目aでS union(S<<a)へ確率を遷移する。10超の目は状態不変へまとめO(N*2^11*10)。
+abc314_e	T026	primary	accepted	True	0得点の自己ループを除き、価格C*P/(P−Z)の非零ルーレットへ置換する。現在点iの最小期待費用を高い点から計算し選択肢の平均を最小化するO(M sum P)。
+abc319_c	T029	alternative	accepted	False	主解は全公開順9!を列挙し8本の3セル列で先に同数2セルが現れるか検査する。別解は公開セルmaskの確率を持ち、次セルで同数2個が先に揃う遷移を除くO(9*2^9)DP。3盤面の9!全列挙と独立照合済み。
+abc323_e	T029	primary	accepted	True	曲の開始確率p[t]を各長さT_iへ1/Nで遷移し、時刻Xに曲1を演奏する開始時刻区間の確率を足すO(NX)。曲長頻度の母関数から1/(1−sum x^T/N)を求めるFPS逆元別解も可。
+abc326_e	T029	primary	accepted	True	位置iまで到達してA_iを受け取る確率p_i=(sum_(j<i)p_j)/Nをprefix確率和で計算する。sum A_i*p_iを答えO(N)。報酬期待値をDP状態にはしない。
+abc332_f	T026	supporting	accepted	True	各位置の期待値を区間アフィン写像E←(1−1/len)E+X/lenで伝播しlazy segtreeでO((N+M)log N)。別解は位置を走査し操作時刻順の写像積を普通のsegtreeで保持しO(N+M log M)。
+abc333_f	T029	primary	accepted	True	dp[人数i][順位j]を生存確率とし、一周の待ち時間を等比級数で消去する。隣順位の加重和をO(1)差分更新しO(N^2)。別解は一次式積で各勝率を表し分割統治畳み込みによりO(N log^2 N)。
+abc342_f	T029	primary	accepted	True	ディーラーの点数分布pを確率DPの一様区間遷移で求めimosまたはprefix和で高速化。自分の停止勝率qと続行時平均を比較するr[i]=max(q[i],Σr[i+1..i+D]/D)を降順に計算しO(N+L+D)。
+abc345_g	T029	supporting	accepted	True	位置確率遷移の母関数Fの冪から未到達確率a_tを抽出しP_t=a_(t−1)−a_t。主高速解はLagrange反転とNewtonによる逆関数FPSでO(N log N)。別解はK大小で二項展開O(N^2/K)と分割統治畳み込みO(NK log^2 N)を使い分ける。
+abc350_e	T026	primary	accepted	True	期待費用f(n)はmin(X+f(floor(n/A)), (6Y+Σ_(d=2..6)f(floor(n/d)))/5)。サイコロ1の自己ループを移項し、nの商だけをメモ化する。異なる引数O(log^3 N)、辞書で計算する。
+abc360_e	T029	primary	accepted	True	対称性で黒球が先頭か否かに圧縮しp_(t+1)=(1−2/N)p_t+2/N^2、p0=1を解く。一般項と累乗でO(log K)、2×2行列累乗も可能。別出典の期待位置DP E_(t+1)=(N−2)E_t/N+(N+1)/Nも確認。
+abc360_e	T026	alternative	accepted	False	対称性で黒球が先頭か否かに圧縮しp_(t+1)=(1−2/N)p_t+2/N^2、p0=1を解く。一般項と累乗でO(log K)、2×2行列累乗も可能。別出典の期待位置DP E_(t+1)=(N−2)E_t/N+(N+1)/Nも確認。
+abc470_e	T026	primary	accepted	True	既知ペアを即回収し未知カードを優先する戦略が値によらず最適。f[ライフL][未知ペア数C0][片方既知数C1]を残回収ペア期待数とし、次2枚の相方既知/未知の4事象を確率重みで合成する。未知数2C0+C1が減るメモ化再帰O(LN^2)。最後に平均Aを掛ける。

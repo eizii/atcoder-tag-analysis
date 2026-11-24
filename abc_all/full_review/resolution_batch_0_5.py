@@ -1,0 +1,6 @@
+﻿from record_resolution_0 import *
+put('abc427_e','T066:primary,T055:concept,T086:supporting','残存ゴミは元盤面の矩形[lx,rx)*[ly,ry)を(dx,dy)移動したもの。風1回でずれと境界を更新し、Tへの衝突がある状態は除く。六変数状態BFSはO(H^3W^3)、ゴミ消滅は元矩形の2次元prefix和でO(1)判定。H,W<=12なので実行可能。',anchor='O(H^3W^3)')
+put('abc427_g','T064:primary,T081:supporting,T013:supporting,T083:supporting','各部分列を同じ初期テンション写像を持つ良い列(Pi+A<=Pi+1)へ変換。隣接不良(p,q)→(q-A,max(q,p-B))をまとめ、2良列を左右pointerで線形merge。長さ2冪のblockをstack上で二進桁繰上りのように合成し追加償却O(log M)。質問は各blockでPi+(i-1)B>=Tとなる最初の位置を二分探索し下がる回数から値更新、O(log^2 M)。元プレゼントを並替えて最適化する問題ではない。','等価な単調しきい値列への変換,二進ブロック合成',anchor='良い列')
+put('abc428_f','T064:primary,T013:supporting','左/右端が揃う連続番号群(l,r,g,x)をstackに保持。更新はprefix群をpopし最後の群を分割、新たな揃え群をpush。群数増加は1回につき高々1で更新総O(Q)。全区間の包含順は保存されるため、質問は群の代表区間と群内番号を二段階二分探索し含む最小番号kからN-k+1。O(N+Q log(N+Q))。','区間群の償却管理',anchor='リストの要素数ははじめ')
+put('abc428_g','T179:primary,T098:supporting,T022:supporting,T060:supporting,T236:supporting,T127:alternative,T132:supporting,T134:supporting,T253:supporting','長さ<=V=floor(log2 U)の積x列数A[len,x]を倍数DPでO(U log^2 U)。長さLの回転同値数は(1/L)sum_{d|L}phi(d)*A[L/d,x^(1/d)]で整数根の場合だけ足す。Dirichlet母関数別解はC=sum_d phi(d)/d*log(1/(1-A(ds)))。Omega(n)を微分重みに使いlogGの導関数=(DG)/Gを約数畳込み・逆元で計算しO(U log U)。Omegaとphiは篩、除算はmod逆元。','Dirichlet母関数,Omega重みの形式微分',anchor='ディリクレ母関数を用いた解法')
+save()

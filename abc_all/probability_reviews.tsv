@@ -1,0 +1,36 @@
+﻿problem_id	scope	accepted	rejected	out_of_vocabulary	source_indices	evidence_quote	reason
+abc011_4	selected_tags	T029:supporting			match	パスカルの三角形を使った確率の計算	満点解法は上下左右の回数を分け、二項分布B[n][k]=(B[n-1][k]+B[n-1][k-1])/2をO(N^2)で前計算して確率を組み合わせる。O(N^3)の位置DPは部分点だが、満点解法にも確率DPの前計算がある。
+abc184_d	selected_tags	T029:primary,T026:alternative			match	確率DP	状態(a,b,c)に到達する確率を遷移して終端時刻で重み付けする解法は確率DP。終端までの期待残り回数を逆向きに計算する実行可能な期待値DPも区別して残す。
+abc226_h	selected_tags	T029:primary			match	個ある確率	区間[A,A+1]を固定し、見た変数の個数と区間より大きい個数・区間内の個数の同時分布をDPで計算する。期待値はその分布から積分公式を用いて求めるため、求める値が期待値でも中心のDPは確率DP。
+abc243_f	selected_tags	T029:primary			match	求める値は	アイテム数x・種類数y・抽選回数zごとの確率質量をz!で共通に割った値をDPで蓄積する。最後にK!を戻す確率DPであり、単にDPという文字があるだけで判定していない。
+abc271_g	selected_tags	T029:primary			match	時である確率とします	アクセス回数と最終時刻を状態とする確率遷移を定義し、24状態の遷移行列の累乗で大きなNへ高速化する。高速化後も状態値は遷移確率。
+abc275_e	selected_tags	T029:primary			match	にいる確率と定義した動的計画法	dp[回数][位置]をその位置にいる確率とする。各出目に1/Mを掛けて移し、折返しと吸収するゴールを扱う。O(NMK)で満点制約に対応する。
+abc277_g	selected_tags	T029:supporting,T026:primary			match	すべてにわたる	頂点・歩数ごとの到達確率と、レベルおよび二乗の確率重み付きモーメントを同時に伝播する。dp[i][j][0][0]は通常の到達確率、他の成分は報酬期待値に必要なモーメント。確率DPを補助、期待値の伝播を主解として記録。
+abc280_e	selected_tags	T029:primary,T026:alternative			match	余事象	公式解説はダメージ総和がちょうどiになる時刻が存在する確率p_iをp_i=1-(P/100)*p_(i-1)で計算するO(N)の確率DP。別解は残りHPの期待攻撃回数E_i=1+(1-p)E_(i-1)+pE_(i-2)をO(N)で計算する期待値DP。
+abc289_h	selected_tags	T029:primary			match	俗に「除原理」と呼ばれている DP	f(t)を初めて集合する時刻の確率とし、g(t)から過去の初到達確率の畳み込みを引く確率DP。素朴なO(T^2)を分割統治FFTまたは形式的べき級数の除算で高速化する。
+abc298_e	selected_tags	T029:primary			match	高橋君の勝率とします	両者の位置と手番を状態にした勝率DP。出目ごとの次状態の勝率をPまたはQで割って平均する。位置の降順にO(N^2(P+Q))で求められる。
+abc299_h	selected_tags	T029:supporting,T026:primary			match	これらは線形漸化式を持つ	残り距離rからの終了までの期待手数e(r)と、通過後の停止位置iの確率p_i(r)を線形漸化式で求める。大きなrは線形漸化式の高速計算と連立方程式で扱う。両方の状態量を明示的に使う。
+abc300_e	selected_tags	T029:primary			match	一致する確率	dp(n)を現在値nから最終値Nに一致する確率と定義する。出目1の自己ループを移項し、2n〜6nの確率の平均へ直してメモ化する。値は期待回数ではなく到達確率。
+abc310_f	selected_tags	T029:primary			match	集合が	到達可能な部分和集合Sをビットマスクで表し、サイコロi個後にその集合となる確率をDPで計算する。bitDPと確率DPを同時に満たす。出目11以上は状態不変の遷移へまとめる。
+abc323_e	selected_tags	T029:primary			match	曲が切り替わる	時刻tで曲が切り替わる確率p[t]をp[t]=sum(p[t-T_i])/Nで求める。時刻X+0.5を覆う曲1の開始確率を合計する。O(NX)の確率DP。
+abc326_e	selected_tags	T029:primary			match	確率を表現しています	A_iが支払われる確率p_i=sum(p_j,j<i)/NをDPと累積和で求める。答えはsum(A_i*p_i)という期待値だが、ここで実際に遷移させる状態量は確率。
+abc333_f	selected_tags	T029:primary			match	最後に残る確率と定義	残り人数iと列内順位jを状態として、その人が最後に残る確率を計算する。循環する待ち時間は等比級数で処理し、遷移を高速化した満点解法。
+abc342_f	selected_tags	T029:primary			match	確率	まずディーラーの最終点数分布p[i]を前向き確率DPで求める。その累積和から停止時の勝率q[i]を作り、自分の状態で続行と停止の最大を取る勝率DPを後ろ向きに解く。
+abc360_e	selected_tags	T029:primary			match	最も左にある確率	対称性で黒球が先頭かそれ以外かの2状態へ圧縮し、p_(i+1)=(1-p)p_i+q(1-p_i)という確率DPを解く。求める位置の期待値はこの確率から復元する。
+abc382_e	selected_tags	T029:supporting,T026:primary			match	ちょうど	パック内のレア枚数分布g_jをBernoulli和の確率DPで計算し、必要残り枚数iからの期待パック数f_iを自己ループを移項した期待値DPで計算する。二段階で両方を使用する。
+abc404_f	selected_tags	T029:primary			match	最適な行動をしたときの勝率	ターン数t・当たり回数kを状態にした最適勝率DP。各選択の結果の勝率を当たりボタンの一様分布で平均し、その最大値を採用する。
+abc144_f	selected_tags	T026:primary			match	移動回数の期待値	部屋iから終点までの期待移動回数を値とするDAG上の期待値DP。取り除く候補の辺を絞り、各候補で期待値をO(M)で再計算するO(NM)解法。
+abc189_f	selected_tags	T026:primary			match	手数の期待値とします	マスiからゴールまでの期待手数f(i)を状態にする。振り出しに戻る循環を未知数X=f(0)の一次式として持つDP、または二分探索を使うDPで処理する。
+abc199_f	selected_tags	T026:supporting			match	期待値を	各頂点の期待値ベクトルを一操作ごとの線形遷移で更新し、行列累乗でK回をまとめる。確率分布全体を保持する確率DPではなく、期待値の一次モーメントだけを伝播する高速化として記録する。
+abc263_e	selected_tags	T026:primary			match	回数の期待値とした動的計画法	位置iからゴールまでの期待サイコロ回数をDPで計算する。0の目による自己ループを移項し、次の区間の期待値の平均を累積和で求める。
+abc270_h	selected_tags	T026:primary			match	期待値についての漸化式を立てる	カウンター状態を最大不足量kにまとめ、終了までの期待手数x_kの関係式を立てる。期待値の差y_kを使う漸化式を区間ごとに累乗で高速化し、10^18状態の逐次DPを避ける。
+abc314_e	selected_tags	T026:primary			match	支払う金額の期待値	現在ポイントiから目標Mまでの最小期待費用e_iを状態にする。0点の自己ループを除き、ルーレットごとの費用と次状態の期待費用の平均を比較する。
+abc332_f	selected_tags	T026:supporting			match	操作前の期待値	各操作の後のA_pの期待値E_pを、前の期待値へのアフィン変換として更新する。区間内の要素を確率的に一つ更新する過程の期待値伝播を遅延セグメント木で高速化する。
+abc350_e	selected_tags	T026:primary			match	求める期待値を	現在値Nから0までの最小期待費用f(N)をメモ化する。出目1の自己ループを移項し、決定的除算と確率的除算の期待費用の最小を取る。
+abc402_e	selected_tags	T026:primary			match	得点の期待値の最大値	正解済み集合Tと残金xを状態とし、各問題に提出した場合の成功・失敗の条件付き期待得点を平均して最大化する期待値bitDP。
+abc409_g	selected_tags	T026:supporting			match	という漸化式が成り立つ	条件付けしたkの残り個数の期待値f(x)をf(x-1)から更新する一次モーメントのDPを前計算し、最終的な答えは畳み込みでまとめる。単に答えが期待値という理由では付けない。
+abc412_f	selected_tags	T026:primary			match	回数の期待値を	現在保持している靴下の色iから終了するまでの期待回数dp_iを定義する。同じ状態に戻る確率を移項し、より有利な色の期待値から降順に求める。
+abc417_f	selected_tags	T026:supporting			match	確率変数	操作回数iと皿jの石数の期待値E[X_(i,j)]を、操作前の区間内期待値の和から更新する。遅延セグメント木による区間集約で高速化した期待値の伝播。
+abc421_e	selected_tags	T026:primary			match	得点の期待値の最大値	残り振り直し回数kと保持した出目の多重集合Sを状態とし、次の出目の確率で重み付けした期待得点を計算する。キープする集合は期待値が最大のものを選ぶ。
+abc450_g	selected_tags	T026:primary			match	これにより	符号積の期待値C_NをC_N=-1+(N-3)/(N-1)*C_(N-1)で更新する。全配列の確率分布を持たず、必要なモーメントだけをDPで求める。
+abc470_e	selected_tags	T026:primary			match	このあと取れるペアの個数の期待値	ライフL・未知ペア数C0・片方既知のペア数C1から今後取れるペア数の期待値をメモ化する。次の二枚の引き方を四種類へ分けて条件付き期待値を合成する。

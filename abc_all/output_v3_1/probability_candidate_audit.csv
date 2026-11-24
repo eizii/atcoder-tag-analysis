@@ -1,0 +1,99 @@
+﻿problem_id,title,url,status,probability_dp,expectation_dp,state_and_transition,evidence_quote,evidence_urls
+abc003_1,AtCoder社の給料,https://atcoder.jp/contests/abc003/tasks/abc003_1,other_reviewed_solution,not_assessed,not_assessed,一様な出目の平均(N+1)/2を直接計算する公式解法。期待値を求めるだけでは期待値DPとしない。,平均,
+abc008_3,コイン,https://atcoder.jp/contests/abc008/tasks/abc008_3,pending_semantic_review,not_assessed,not_assessed,,,
+abc011_4,大ジャンプ,https://atcoder.jp/contests/abc011/tasks/abc011_4,confirmed_dp,confirmed,not_assessed,満点解法は上下左右の回数を分け、二項分布B[n][k]=(B[n-1][k]+B[n-1][k-1])/2をO(N^2)で前計算して確率を組み合わせる。O(N^3)の位置DPは部分点だが、満点解法にも確率DPの前計算がある。,パスカルの三角形を使った確率の計算,https://img.atcoder.jp/abc011/editorial.pdf
+abc028_d,乱数生成,https://atcoder.jp/contests/abc028/tasks/abc028_d,pending_semantic_review,not_assessed,not_assessed,,,
+arc068_a,X: Yet Another Die Game,https://atcoder.jp/contests/abc053/tasks/arc068_a,pending_semantic_review,not_assessed,not_assessed,,,
+arc085_a,HSI,https://atcoder.jp/contests/abc078/tasks/arc085_a,pending_semantic_review,not_assessed,not_assessed,,,
+abc118_c,Monsters Battle Royale,https://atcoder.jp/contests/abc118/tasks/abc118_c,pending_semantic_review,not_assessed,not_assessed,,,
+abc126_c,Dice and Coin,https://atcoder.jp/contests/abc126/tasks/abc126_c,pending_semantic_review,not_assessed,not_assessed,,,
+abc142_a,Odds of Oddness,https://atcoder.jp/contests/abc142/tasks/abc142_a,pending_semantic_review,not_assessed,not_assessed,,,
+abc144_f,Fork in the Road,https://atcoder.jp/contests/abc144/tasks/abc144_f,confirmed_dp,not_assessed,confirmed,部屋iから終点までの期待移動回数を値とするDAG上の期待値DP。取り除く候補の辺を絞り、各候補で期待値をO(M)で再計算するO(NM)解法。,移動回数の期待値,https://atcoder.jp/contests/abc144/tasks/abc144_f
+abc149_f,Surrounded Nodes,https://atcoder.jp/contests/abc149/tasks/abc149_f,other_reviewed_solution,not_assessed,not_assessed,各辺が含まれる確率を部分木サイズから直接求める公式解法。木のサイズ計算を行っても、期待値を状態遷移させるDPとは区別する。,期待値の線形性,
+abc154_d,Dice in Line,https://atcoder.jp/contests/abc154/tasks/abc154_d,pending_semantic_review,not_assessed,not_assessed,,,
+abc160_f,Distributing Integers,https://atcoder.jp/contests/abc160/tasks/abc160_f,pending_semantic_review,not_assessed,not_assessed,,,
+abc179_b,Go to Jail,https://atcoder.jp/contests/abc179/tasks/abc179_b,pending_semantic_review,not_assessed,not_assessed,,,
+abc184_d,increment of coins,https://atcoder.jp/contests/abc184/tasks/abc184_d,confirmed_dp,confirmed,confirmed,"状態(a,b,c)に到達する確率を遷移して終端時刻で重み付けする解法は確率DP。終端までの期待残り回数を逆向きに計算する実行可能な期待値DPも区別して残す。",確率DP,https://atcoder.jp/contests/abc184/editorial/152
+abc189_f,Sugoroku2,https://atcoder.jp/contests/abc189/tasks/abc189_f,confirmed_dp,not_assessed,confirmed,マスiからゴールまでの期待手数f(i)を状態にする。振り出しに戻る循環を未知数X=f(0)の一次式として持つDP、または二分探索を使うDPで処理する。,手数の期待値とします,https://atcoder.jp/contests/abc189/editorial/541
+abc193_d,Poker,https://atcoder.jp/contests/abc193/tasks/abc193_d,pending_semantic_review,not_assessed,not_assessed,,,
+abc194_d,Journey,https://atcoder.jp/contests/abc194/tasks/abc194_d,other_reviewed_solution,not_assessed,not_assessed,訪問済み頂点数kから次の新頂点へ進む待ち時間N/(N-k)を足す公式解法。分布DPを計算していない。,答えは,
+abc199_f,Graph Smoothing,https://atcoder.jp/contests/abc199/tasks/abc199_f,confirmed_dp,not_assessed,confirmed,各頂点の期待値ベクトルを一操作ごとの線形遷移で更新し、行列累乗でK回をまとめる。確率分布全体を保持する確率DPではなく、期待値の一次モーメントだけを伝播する高速化として記録する。,期待値を,https://atcoder.jp/contests/abc199/editorial/1167
+abc202_a,Three Dice,https://atcoder.jp/contests/abc202/tasks/abc202_a,pending_semantic_review,not_assessed,not_assessed,,,
+abc203_a,Chinchirorin,https://atcoder.jp/contests/abc203/tasks/abc203_a,pending_semantic_review,not_assessed,not_assessed,,,
+abc208_a,Rolling Dice,https://atcoder.jp/contests/abc208/tasks/abc208_a,pending_semantic_review,not_assessed,not_assessed,,,
+abc215_g,Colorful Candies 2,https://atcoder.jp/contests/abc215/tasks/abc215_g,other_reviewed_solution,not_assessed,not_assessed,色が少なくとも一度現れる確率を二項係数で求めて足す公式解法。確率をDPの状態として遷移していない。,期待値の線形性,
+abc216_h,Random Robots,https://atcoder.jp/contests/abc216/tasks/abc216_h,pending_semantic_review,not_assessed,not_assessed,,,
+abc224_g,Roll or Increment,https://atcoder.jp/contests/abc224/tasks/abc224_g,other_reviewed_solution,not_assessed,not_assessed,最適な閾値を導いて期待費用A(X-1)/2+BN/Xを直接最適化する公式解法。状態数NのDPを実行しない。,相加・相乗平均,
+abc226_h,Random Kth Max,https://atcoder.jp/contests/abc226/tasks/abc226_h,confirmed_dp,confirmed,not_assessed,"区間[A,A+1]を固定し、見た変数の個数と区間より大きい個数・区間内の個数の同時分布をDPで計算する。期待値はその分布から積分公式を用いて求めるため、求める値が期待値でも中心のDPは確率DP。",個ある確率,https://atcoder.jp/contests/abc226/editorial/2879
+abc231_g,Balls in Boxes,https://atcoder.jp/contests/abc231/tasks/abc231_g,other_reviewed_solution,not_assessed,not_assessed,公式解説のDPは入力Aの基本対称式を計算する多項式係数DPであり、DPの状態量自体が期待値・確率ではない。期待値は別の組合せ式から合成する。,基本対称式の値の計算,
+abc238_h,Removing People,https://atcoder.jp/contests/abc238/tasks/abc238_h,pending_semantic_review,not_assessed,not_assessed,,,
+abc239_h,Dice Product 2,https://atcoder.jp/contests/abc239/tasks/abc239_h,confirmed_dp,not_assessed,confirmed,,,
+abc242_a,T-shirt,https://atcoder.jp/contests/abc242/tasks/abc242_a,pending_semantic_review,not_assessed,not_assessed,,,
+abc242_h,Random Painting,https://atcoder.jp/contests/abc242/tasks/abc242_h,pending_semantic_review,not_assessed,not_assessed,,,
+abc243_f,Lottery,https://atcoder.jp/contests/abc243/tasks/abc243_f,confirmed_dp,confirmed,not_assessed,アイテム数x・種類数y・抽選回数zごとの確率質量をz!で共通に割った値をDPで蓄積する。最後にK!を戻す確率DPであり、単にDPという文字があるだけで判定していない。,求める値は,https://atcoder.jp/contests/abc243/editorial/3508
+abc249_h,Dye Color,https://atcoder.jp/contests/abc249/tasks/abc249_h,pending_semantic_review,not_assessed,not_assessed,,,
+abc253_h,We Love Forest,https://atcoder.jp/contests/abc253/tasks/abc253_h,pending_semantic_review,not_assessed,not_assessed,,,
+abc257_h,Dice Sum 2,https://atcoder.jp/contests/abc257/tasks/abc257_h,pending_semantic_review,not_assessed,not_assessed,,,
+abc261_d,Flipping and Bonus,https://atcoder.jp/contests/abc261/tasks/abc261_d,pending_semantic_review,not_assessed,not_assessed,,,
+abc263_e,Sugoroku 3,https://atcoder.jp/contests/abc263/tasks/abc263_e,confirmed_dp,not_assessed,confirmed,位置iからゴールまでの期待サイコロ回数をDPで計算する。0の目による自己ループを移項し、次の区間の期待値の平均を累積和で求める。,回数の期待値とした動的計画法,https://atcoder.jp/contests/abc263/editorial/4546
+abc266_e,Throwing the Die,https://atcoder.jp/contests/abc266/tasks/abc266_e,confirmed_dp,not_assessed,confirmed,,,
+abc268_g,Random Student ID,https://atcoder.jp/contests/abc268/tasks/abc268_g,other_reviewed_solution,not_assessed,not_assessed,接頭辞関係なら確率0または1、それ以外なら1/2としTrieで人数を集計する。確率分布のDPではない。,各英小文字の扱いは対称,
+abc270_h,add 1 ,https://atcoder.jp/contests/abc270/tasks/abc270_h,confirmed_dp,not_assessed,confirmed,カウンター状態を最大不足量kにまとめ、終了までの期待手数x_kの関係式を立てる。期待値の差y_kを使う漸化式を区間ごとに累乗で高速化し、10^18状態の逐次DPを避ける。,期待値についての漸化式を立てる,https://atcoder.jp/contests/abc270/editorial/4880
+abc271_g,Access Counter,https://atcoder.jp/contests/abc271/tasks/abc271_g,confirmed_dp,confirmed,not_assessed,アクセス回数と最終時刻を状態とする確率遷移を定義し、24状態の遷移行列の累乗で大きなNへ高速化する。高速化後も状態値は遷移確率。,時である確率とします,https://atcoder.jp/contests/abc271/editorial/4931
+abc272_h,Flipping Coins 2,https://atcoder.jp/contests/abc272/tasks/abc272_h,pending_semantic_review,not_assessed,not_assessed,,,
+abc275_e,Sugoroku 4,https://atcoder.jp/contests/abc275/tasks/abc275_e,confirmed_dp,confirmed,not_assessed,dp[回数][位置]をその位置にいる確率とする。各出目に1/Mを掛けて移し、折返しと吸収するゴールを扱う。O(NMK)で満点制約に対応する。,にいる確率と定義した動的計画法,https://atcoder.jp/contests/abc275/editorial/5116
+abc276_f,Double Chance,https://atcoder.jp/contests/abc276/tasks/abc276_f,pending_semantic_review,not_assessed,not_assessed,,,
+abc277_g,Random Walk to Millionaire,https://atcoder.jp/contests/abc277/tasks/abc277_g,confirmed_dp,confirmed,confirmed,頂点・歩数ごとの到達確率と、レベルおよび二乗の確率重み付きモーメントを同時に伝播する。dp[i][j][0][0]は通常の到達確率、他の成分は報酬期待値に必要なモーメント。確率DPを補助、期待値の伝播を主解として記録。,すべてにわたる,https://atcoder.jp/contests/abc277/editorial/5206
+abc280_e,Critical Hit,https://atcoder.jp/contests/abc280/tasks/abc280_e,confirmed_dp,confirmed,confirmed,公式解説はダメージ総和がちょうどiになる時刻が存在する確率p_iをp_i=1-(P/100)*p_(i-1)で計算するO(N)の確率DP。別解は残りHPの期待攻撃回数E_i=1+(1-p)E_(i-1)+pE_(i-2)をO(N)で計算する期待値DP。,余事象,https://atcoder.jp/contests/abc280/editorial/5331
+abc289_h,Trio,https://atcoder.jp/contests/abc289/tasks/abc289_h,confirmed_dp,confirmed,not_assessed,f(t)を初めて集合する時刻の確率とし、g(t)から過去の初到達確率の畳み込みを引く確率DP。素朴なO(T^2)を分割統治FFTまたは形式的べき級数の除算で高速化する。,俗に「除原理」と呼ばれている DP,https://atcoder.jp/contests/abc289/editorial/5712
+abc295_e,Kth Number,https://atcoder.jp/contests/abc295/tasks/abc295_e,other_reviewed_solution,not_assessed,not_assessed,閾値ごとの二項確率を組合せ式で直接計算する公式解法。確率問題の全てを確率DPとラベルしない。,反復試行の確率,
+abc297_b,chess960,https://atcoder.jp/contests/abc297/tasks/abc297_b,pending_semantic_review,not_assessed,not_assessed,,,
+abc297_f,Minimum Bounding Box 2,https://atcoder.jp/contests/abc297/tasks/abc297_f,other_reviewed_solution,not_assessed,not_assessed,各マスが包囲長方形に含まれる塗り方を包除と二項係数で直接数える公式解法。期待値を状態として遷移しない。,包除原理,
+abc298_e,Unfair Sugoroku,https://atcoder.jp/contests/abc298/tasks/abc298_e,confirmed_dp,confirmed,not_assessed,両者の位置と手番を状態にした勝率DP。出目ごとの次状態の勝率をPまたはQで割って平均する。位置の降順にO(N^2(P+Q))で求められる。,高橋君の勝率とします,https://atcoder.jp/contests/abc298/editorial/6216
+abc299_h,Dice Sum Infinity,https://atcoder.jp/contests/abc299/tasks/abc299_h,confirmed_dp,confirmed,confirmed,残り距離rからの終了までの期待手数e(r)と、通過後の停止位置iの確率p_i(r)を線形漸化式で求める。大きなrは線形漸化式の高速計算と連立方程式で扱う。両方の状態量を明示的に使う。,これらは線形漸化式を持つ,https://atcoder.jp/contests/abc299/editorial/6260
+abc300_e,Dice Product 3,https://atcoder.jp/contests/abc300/tasks/abc300_e,confirmed_dp,confirmed,not_assessed,dp(n)を現在値nから最終値Nに一致する確率と定義する。出目1の自己ループを移項し、2n〜6nの確率の平均へ直してメモ化する。値は期待回数ではなく到達確率。,一致する確率,https://atcoder.jp/contests/abc300/editorial/6279
+abc308_c,Standings,https://atcoder.jp/contests/abc308/tasks/abc308_c,pending_semantic_review,not_assessed,not_assessed,,,
+abc310_f,Make 10 Again,https://atcoder.jp/contests/abc310/tasks/abc310_f,confirmed_dp,confirmed,not_assessed,到達可能な部分和集合Sをビットマスクで表し、サイコロi個後にその集合となる確率をDPで計算する。bitDPと確率DPを同時に満たす。出目11以上は状態不変の遷移へまとめる。,集合が,https://atcoder.jp/contests/abc310/editorial/6791
+abc310_g,Takahashi And Pass-The-Ball Game,https://atcoder.jp/contests/abc310/tasks/abc310_g,pending_semantic_review,not_assessed,not_assessed,,,
+abc313_f,Flip Machines,https://atcoder.jp/contests/abc313/tasks/abc313_f,pending_semantic_review,not_assessed,not_assessed,,,
+abc314_e,Roulettes,https://atcoder.jp/contests/abc314/tasks/abc314_e,confirmed_dp,not_assessed,confirmed,現在ポイントiから目標Mまでの最小期待費用e_iを状態にする。0点の自己ループを除き、ルーレットごとの費用と次状態の期待費用の平均を比較する。,支払う金額の期待値,https://atcoder.jp/contests/abc314/editorial/6956
+abc314_f,A Certain Game,https://atcoder.jp/contests/abc314/tasks/abc314_f,other_reviewed_solution,not_assessed,not_assessed,Union-Findで作る併合木の根から葉への勝率の和を求める公式解法。根からのパス和と、確率分布を遷移するDPを区別する。,期待値の線形性,
+abc319_c,False Hope,https://atcoder.jp/contests/abc319/tasks/abc319_c,other_reviewed_solution,not_assessed,not_assessed,公式解法は9!通りの公開順序を全列挙して成功割合を計算する。この公式解法の確認だけから確率DPを付けない。別解の有無は否定しない。,362880,
+abc321_g,Electric Circuit,https://atcoder.jp/contests/abc321/tasks/abc321_g,pending_semantic_review,not_assessed,not_assessed,,,
+abc323_e,Playlist,https://atcoder.jp/contests/abc323/tasks/abc323_e,confirmed_dp,confirmed,not_assessed,時刻tで曲が切り替わる確率p[t]をp[t]=sum(p[t-T_i])/Nで求める。時刻X+0.5を覆う曲1の開始確率を合計する。O(NX)の確率DP。,曲が切り替わる,https://atcoder.jp/contests/abc323/editorial/7357 | https://atcoder.jp/contests/abc323/editorial/7384
+abc326_e,"Revenge of ""The Salary of AtCoder Inc.""",https://atcoder.jp/contests/abc326/tasks/abc326_e,confirmed_dp,confirmed,not_assessed,"A_iが支払われる確率p_i=sum(p_j,j<i)/NをDPと累積和で求める。答えはsum(A_i*p_i)という期待値だが、ここで実際に遷移させる状態量は確率。",確率を表現しています,https://atcoder.jp/contests/abc326/editorial/7538
+abc331_g,Collect Them All,https://atcoder.jp/contests/abc331/tasks/abc331_g,pending_semantic_review,not_assessed,not_assessed,,,
+abc332_f,Random Update Query,https://atcoder.jp/contests/abc332/tasks/abc332_f,confirmed_dp,not_assessed,confirmed,各操作の後のA_pの期待値E_pを、前の期待値へのアフィン変換として更新する。区間内の要素を確率的に一つ更新する過程の期待値伝播を遅延セグメント木で高速化する。,操作前の期待値,https://atcoder.jp/contests/abc332/editorial/7890
+abc333_f,Bomb Game 2,https://atcoder.jp/contests/abc333/tasks/abc333_f,confirmed_dp,confirmed,not_assessed,残り人数iと列内順位jを状態として、その人が最後に残る確率を計算する。循環する待ち時間は等比級数で処理し、遷移を高速化した満点解法。,最後に残る確率と定義,https://atcoder.jp/contests/abc333/editorial/7948
+abc334_e,Christmas Color Grid 1,https://atcoder.jp/contests/abc334/tasks/abc334_e,pending_semantic_review,not_assessed,not_assessed,,,
+abc342_f,Black Jack,https://atcoder.jp/contests/abc342/tasks/abc342_f,confirmed_dp,confirmed,not_assessed,まずディーラーの最終点数分布p[i]を前向き確率DPで求める。その累積和から停止時の勝率q[i]を作り、自分の状態で続行と停止の最大を取る勝率DPを後ろ向きに解く。,確率,https://atcoder.jp/contests/abc342/editorial/9345
+abc345_g,Sugoroku 5,https://atcoder.jp/contests/abc345/tasks/abc345_g,pending_semantic_review,not_assessed,not_assessed,,,
+abc350_e,Toward 0,https://atcoder.jp/contests/abc350/tasks/abc350_e,confirmed_dp,not_assessed,confirmed,現在値Nから0までの最小期待費用f(N)をメモ化する。出目1の自己ループを移項し、決定的除算と確率的除算の期待費用の最小を取る。,求める期待値を,https://atcoder.jp/contests/abc350/editorial/9812 | https://atcoder.jp/contests/abc350/editorial/9841
+abc352_g,Socks 3,https://atcoder.jp/contests/abc352/tasks/abc352_g,other_reviewed_solution,not_assessed,not_assessed,公式解法は生存確率を基本対称多項式の係数から求める。非正規化の数え上げと多項式積から期待値へ変換する方法であり、確率DPとしての扱いはこの監査では保留する。,総積になります,
+abc355_g,Baseball,https://atcoder.jp/contests/abc355/tasks/abc355_g,other_reviewed_solution,not_assessed,not_assessed,公式解説のDP状態は固定辺数の最短路長で、重みが期待スコアというだけである。確率的遷移の平均を取る期待値DPとは区別する。,最短路長,
+abc360_e,Random Swaps of Balls,https://atcoder.jp/contests/abc360/tasks/abc360_e,confirmed_dp,confirmed,not_assessed,対称性で黒球が先頭かそれ以外かの2状態へ圧縮し、p_(i+1)=(1-p)p_i+q(1-p_i)という確率DPを解く。求める位置の期待値はこの確率から復元する。,最も左にある確率,https://atcoder.jp/contests/abc360/editorial/10310
+abc376_g,Treasure Hunting,https://atcoder.jp/contests/abc376/tasks/abc376_g,other_reviewed_solution,not_assessed,not_assessed,期待値を順列の重み付き順位和に変形し、木上の貪欲法で最適化する公式解法。期待値DPの自動付与はしない。,01 on Tree,
+abc380_g,Another Shuffle Window,https://atcoder.jp/contests/abc380/tasks/abc380_g,other_reviewed_solution,not_assessed,not_assessed,シャッフル区間内の各転倒ペアが1/2になる対称性と、区間転倒数の差分計算を使う。確率分布を持つDPではない。,一様ランダムにシャッフル,
+abc382_e,Expansion Packs,https://atcoder.jp/contests/abc382/tasks/abc382_e,confirmed_dp,confirmed,confirmed,パック内のレア枚数分布g_jをBernoulli和の確率DPで計算し、必要残り枚数iからの期待パック数f_iを自己ループを移項した期待値DPで計算する。二段階で両方を使用する。,ちょうど,https://atcoder.jp/contests/abc382/editorial/11483
+abc392_d,Doubles,https://atcoder.jp/contests/abc392/tasks/abc392_d,pending_semantic_review,not_assessed,not_assessed,,,
+abc402_e,Payment Required,https://atcoder.jp/contests/abc402/tasks/abc402_e,confirmed_dp,not_assessed,confirmed,正解済み集合Tと残金xを状態とし、各問題に提出した場合の成功・失敗の条件付き期待得点を平均して最大化する期待値bitDP。,得点の期待値の最大値,https://atcoder.jp/contests/abc402/editorial/12715
+abc404_f,Lost and Pound,https://atcoder.jp/contests/abc404/tasks/abc404_f,confirmed_dp,confirmed,not_assessed,ターン数t・当たり回数kを状態にした最適勝率DP。各選択の結果の勝率を当たりボタンの一様分布で平均し、その最大値を採用する。,最適な行動をしたときの勝率,https://atcoder.jp/contests/abc404/editorial/12846
+abc407_b,P(X or Y),https://atcoder.jp/contests/abc407/tasks/abc407_b,pending_semantic_review,not_assessed,not_assessed,,,
+abc409_g,Accumulation of Wealth,https://atcoder.jp/contests/abc409/tasks/abc409_g,confirmed_dp,not_assessed,confirmed,条件付けしたkの残り個数の期待値f(x)をf(x-1)から更新する一次モーメントのDPを前計算し、最終的な答えは畳み込みでまとめる。単に答えが期待値という理由では付けない。,という漸化式が成り立つ,https://atcoder.jp/contests/abc409/editorial/13172
+abc411_e,E [max],https://atcoder.jp/contests/abc411/tasks/abc411_e,other_reviewed_solution,not_assessed,not_assessed,最大値が閾値以下になる確率を各サイコロの累積確率の積として直接求め、値順に差分更新する公式解法。確率分布のDPを実行する方法とは区別する。,以下,
+abc412_f,Socks 4,https://atcoder.jp/contests/abc412/tasks/abc412_f,confirmed_dp,not_assessed,confirmed,現在保持している靴下の色iから終了するまでの期待回数dp_iを定義する。同じ状態に戻る確率を移項し、より有利な色の期待値から降順に求める。,回数の期待値を,https://atcoder.jp/contests/abc412/editorial/13390
+abc417_f,Random Gathering,https://atcoder.jp/contests/abc417/tasks/abc417_f,confirmed_dp,not_assessed,confirmed,"操作回数iと皿jの石数の期待値E[X_(i,j)]を、操作前の区間内期待値の和から更新する。遅延セグメント木による区間集約で高速化した期待値の伝播。",確率変数,https://atcoder.jp/contests/abc417/editorial/13549
+abc421_e,Yacht,https://atcoder.jp/contests/abc421/tasks/abc421_e,confirmed_dp,not_assessed,confirmed,残り振り直し回数kと保持した出目の多重集合Sを状態とし、次の出目の確率で重み付けした期待得点を計算する。キープする集合は期待値が最大のものを選ぶ。,得点の期待値の最大値,https://atcoder.jp/contests/abc421/editorial/13731
+abc439_g,Sugoroku 6,https://atcoder.jp/contests/abc439/tasks/abc439_g,pending_semantic_review,not_assessed,not_assessed,,,
+abc448_g,Conquest,https://atcoder.jp/contests/abc448/tasks/abc448_g,pending_semantic_review,not_assessed,not_assessed,,,
+abc450_g,Random Subtraction,https://atcoder.jp/contests/abc450/tasks/abc450_g,confirmed_dp,not_assessed,confirmed,符号積の期待値C_NをC_N=-1+(N-3)/(N-1)*C_(N-1)で更新する。全配列の確率分布を持たず、必要なモーメントだけをDPで求める。,これにより,https://atcoder.jp/contests/abc450/editorial/17336
+abc456_a,Dice,https://atcoder.jp/contests/abc456/tasks/abc456_a,pending_semantic_review,not_assessed,not_assessed,,,
+abc456_b,456,https://atcoder.jp/contests/abc456/tasks/abc456_b,pending_semantic_review,not_assessed,not_assessed,,,
+abc462_g,Completely Wrong,https://atcoder.jp/contests/abc462/tasks/abc462_g,pending_semantic_review,not_assessed,not_assessed,,,
+abc463_f,Senshuraku,https://atcoder.jp/contests/abc463/tasks/abc463_f,pending_semantic_review,not_assessed,not_assessed,,,
+abc463_g,Random Walk Distance,https://atcoder.jp/contests/abc463/tasks/abc463_g,pending_semantic_review,not_assessed,not_assessed,,,
+abc464_f,Random Vault Heist,https://atcoder.jp/contests/abc464/tasks/abc464_f,other_reviewed_solution,not_assessed,not_assessed,各部分集合への到達確率と次の取得金額の期待値を直接求め、半分全列挙で和を集計する公式解法。確率や期待値の状態DPは実行しない。,半分全列挙,
+abc470_e,Concentration,https://atcoder.jp/contests/abc470/tasks/abc470_e,confirmed_dp,not_assessed,confirmed,ライフL・未知ペア数C0・片方既知のペア数C1から今後取れるペア数の期待値をメモ化する。次の二枚の引き方を四種類へ分けて条件付き期待値を合成する。,このあと取れるペアの個数の期待値,https://atcoder.jp/contests/abc470/editorial/23855
+abc472_f,Centroid of a Slice,https://atcoder.jp/contests/abc472/tasks/abc472_f,pending_semantic_review,not_assessed,not_assessed,,,
+abc473_g,Wipeout,https://atcoder.jp/contests/abc473/tasks/abc473_g,pending_semantic_review,not_assessed,not_assessed,,,
+abc481_g,Half-Baked,https://atcoder.jp/contests/abc481/tasks/abc481_g,pending_semantic_review,not_assessed,not_assessed,,,
