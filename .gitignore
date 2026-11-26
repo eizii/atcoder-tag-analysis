@@ -18,3 +18,18 @@ __pycache__/
 # Local external repository checkout and linked worktree
 /repository_update/ac_analyze_test/
 /validation_sources/ac_analyze_test/
+
+# Reproducible retrieval model and embedding caches
+/abc_all/retrieval_model_cache/
+/abc_all/retrieval_trial/cache/
+# Large reproducible retrieval inputs (scripts and diagnostics stay versioned)
+/abc_all/retrieval_trial/output/llm_requests*.jsonl
+/abc_all/retrieval_trial/output/chunks.jsonl
+/abc_all/retrieval_trial/output/candidates.jsonl
+/abc_all/retrieval_trial/output/early_*.jsonl
+/abc_all/retrieval_trial/output/pilot_all266_requests.jsonl
+# Japanese definition experiment: large reproducible candidate/prompt files
+/abc_all/retrieval_trial/japanese_v2/output/candidates.jsonl
+/abc_all/retrieval_trial/japanese_v2/output/llm_requests*.jsonl
+/abc_all/retrieval_trial/japanese_v2/bilingual_output/candidates.jsonl
+/abc_all/retrieval_trial/japanese_v2/bilingual_output/llm_requests*.jsonl

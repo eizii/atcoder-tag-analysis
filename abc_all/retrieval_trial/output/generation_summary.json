@@ -1,0 +1,85 @@
+{
+  "created": "2026-11-26",
+  "task": "candidate generation only; final acceptance requires LLM or human verification",
+  "problem_count": 3012,
+  "taxonomy_count": 266,
+  "chunks": 19814,
+  "model": {
+    "model": "intfloat/multilingual-e5-small",
+    "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "files": {
+      "model_qint8_avx512_vnni.onnx": {
+        "sha256": "dd476dd0c2514e9b9be83aeb3853fac0763e0bdf4a71645407587d77c48a2d88",
+        "bytes": 118346824
+      },
+      "tokenizer.json": {
+        "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39",
+        "bytes": 17082730
+      }
+    }
+  },
+  "encoding": {
+    "definitions": {
+      "texts": 266,
+      "truncated": 0,
+      "seconds": 2.268440400000003,
+      "max_tokens": 256,
+      "prefix": "passage: "
+    },
+    "names": {
+      "texts": 266,
+      "truncated": 0,
+      "seconds": 0.5600803000000099,
+      "max_tokens": 256,
+      "prefix": "passage: "
+    },
+    "chunks": {
+      "texts": 19814,
+      "truncated": 0,
+      "seconds": 891.4503062,
+      "max_tokens": 256,
+      "prefix": "query: "
+    }
+  },
+  "embedding_dimension": 384,
+  "aggregation": "maximum cosine similarity over per-source overlapping chunks; exact scan of all tags",
+  "chunking": "420 characters; overlap64; shorten until query tokens <=256; no per-problem chunk cap",
+  "rule_policy": "solution-scope-v3",
+  "hybrid_policy": "union of embedding top20 and all accepted V3 rule hits",
+  "input_sha256": {
+    "manifest.json": "2207dfc26c4c585e083fdd5d231e39b1fe56e6f3e30ea79bb929f4cd16e23419",
+    "taxonomy.json": "b3ef7280852ba3b9ba8b33e1c5e3e45af2ee9dfae6534787f9307825f6bcfaa0",
+    "corpus_sources.jsonl": "10b22497419b479e3196a7e11e7b098cc645060218cca887d98108833906b952",
+    "precision_sources.jsonl": "cb0b9b8ab9d6fe63f6e602037107c6eba4c0798c0012916025a875c1a0fe24aa",
+    "tag_rules.json": "8185eecf0d46bd2ff6833917a12d96ca5b499b23f1eeb7d9fe77c1a51b573132",
+    "tag_all.py": "477b2acb26c879ecdf0d4779a4d91b41b2c3f3514060d1dc573616303ccfc68f",
+    "tag_precision.py": "589220f76f60f91c8ba85d1c9048b181780bda6176f49d06b64614687d1fc4af",
+    "precision_policy.py": "90b9440b3a2d11fc8487243c8ec04f4929b91b37ce5865a4bb935e591a4b4160",
+    "evidence_scope.py": "3e0e1fe9f90796e3dabb3856d54824a152bff05f0478a2402ec507ba2c5ee14d",
+    "tag_descriptions.tsv": "5bbe21378125a53982749211f0f7d59aca58c1e38bbff3f288448faee2d4f9f9",
+    "encoder.py": "d1877703bf22731ac6f04e21bf294ba451764d3f5348da1ad7bab964d098ae3c",
+    "generate.py": "274f14a1b37121d6ec96a7f187866a6f04ae55f6ef4b57654c61bc3a1542a95d"
+  },
+  "cache_key": "b659a3f003b1432b91e84b93112c4c8f87a82c4be08f2f832dd8a9fdd502e9da",
+  "elapsed_seconds": 980.5338578,
+  "candidate_counts": {
+    "rules": {
+      "mean": 1.6178618857901725,
+      "maximum": 12
+    },
+    "hybrid20": {
+      "mean": 20.838645418326692,
+      "maximum": 29
+    }
+  },
+  "remote_inference_calls": 0,
+  "paid_api_calls": 0,
+  "reference_labels_used_for_generation": false,
+  "pilot_size": 20,
+  "limitations": [
+    "prototype uses hand-authored tag definitions and existing manually engineered rules; not an untouched held-out benchmark",
+    "V4 will be an AI-generated silver reference only",
+    "all source chunks and statement views may include explanatory or negative concepts; LLM must reject them",
+    "ONNX int8 quantized inference; absolute cosine values are not probabilities"
+  ]
+}

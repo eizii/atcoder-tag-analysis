@@ -1,0 +1,192 @@
+T002|T003|parent|always|遅延セグメント木は区間集約を持つセグメント木の特殊化。
+T003|T123|parent|always|セグメント木で区間の問い合わせを処理する。
+T001|T123|support|always|Fenwick木の先頭区間の集約は区間クエリの候補になる。
+T004|T123|parent|always|Sparse Tableは静的な区間クエリを処理する。
+T006|T123|parent|always|Wavelet Matrixは区間内の値や順位を問い合わせる。
+T009|T012 T014|support|always|多重集合を順序付き集合や平衡木で実装する可能性を確認する。
+T015|T003|possible_variant|range_query|永続化する対象が区間集約なら永続セグメント木を確認する。
+T016|T022|support|always|凸包によるDP遷移の最適化に対応する基本DPを確認する。
+T017|T022 T117|support|always|部分集合DPは基本DPとマスク演算を使用する。
+T017|T060|support|counting|部分集合DPで条件を満たす構造の個数を保存しているか確認する。
+T019|T022|parent|always|上書きによる更新はDPの実装を具体化する。
+T020|T027|parent|always|全方位木DPは根を変える木DPである。
+T020|T067 T130|support|always|木の走査と親子の構造を使う実装を確認する。
+T021|T022|parent|always|区間を状態に持つDPは基本DPの特殊化。
+T023|T022|parent|always|戻すDPはDPの表の寄与を取り消す方法。
+T024|T022|parent|always|挿入DPは挿入位置による状態遷移を持つ。
+T025|T022|parent|always|文字列DPは文字位置等を状態に持つDP。
+T026|T022|parent|always|期待値を状態値とするDPは基本DPの特殊化。
+T026|T029|possible_variant|stochastic|期待値の漸化式に対して確率質量を配る別解が構成できるか確認する。
+T026|T236|support|modular|期待値を法で求める場合は除算の逆元を確認する。
+T027|T022|parent|always|木DPは部分木を状態にしたDP。
+T027|T067 T130|support|always|部分木の集約を行う木の走査を確認する。
+T028|T022|parent|always|桁DPは桁位置等を状態に持つDP。
+T029|T022|parent|always|確率を状態値とするDPは基本DPの特殊化。
+T029|T026|possible_variant|stochastic|確率過程について期待値を状態にする別解が成立するか確認する。
+T029|T236|support|modular|法上の確率遷移に必要な除算の逆元を確認する。
+T022|T026 T029|possible_variant|stochastic|確率過程のDPでは状態値が期待値か確率かを両方確認する。
+T022|T060|support|counting|個数を状態値として持つDPなら数え上げも候補にする。
+T030|T176 T136|support|always|行列累乗は繰り返し二乗と行列の演算を用いる。
+T031|T118|parent|always|二部マッチングはマッチングの特殊化。
+T031|T032|possible_variant|always|二部マッチングを容量1の最大流へ帰着する別解候補。
+T033|T032|support|always|最小カットを最大流との対応から計算する候補。
+T034|T032 T055|support|always|費用付きの流れと残余グラフの最短路を用いる実装を確認する。
+T035|T033|parent|always|二群への分類を最小カットへ帰着する。
+T036|T154 T059|support|always|Grundy数の計算にMEX、独立なゲームの合成にXORを使う。
+T037|T059|support|always|Nimの必勝条件や手の構築でXORを使う。
+T038|T022|possible_variant|always|重複局面をまとめるミニマックスDPの実装を確認する。
+T039|T210|support|always|グラフの局面の勝敗を逆向きに確定する場合を確認する。
+T043|T077 T240|support|always|偏角の比較に外積を、順序付けにソートを使う。
+T044|T077 T240|support|always|凸包の構築で点の整列と向きの判定を使う実装を確認する。
+T045|T130 T123|support|always|HLDは木のパスを列の区間へ変換する。
+T046|T067|parent|always|DFS木の構造を使うにはDFSを実行する。
+T047|T067 T130 T123|support|always|木の巡回で部分木を配列の区間へ対応させる。
+T048|T067 T013|support|always|Euler路の構築で辺の探索やスタックを使う候補を確認する。
+T050|T200|support|always|橋を除去して辺二重連結成分を得る。
+T051|T198 T046 T067|support|always|点二重連結成分をDFSとlowlinkで求める実装を確認する。
+T052|T067|support|always|強連結成分分解のDFSによる実装を確認する。
+T054|T130|support|always|LCAは根付き木の祖先関係を利用する。
+T057|T211 T136 T060|support|always|全域木の個数を行列式で計算する。
+T058|T080 T130|support|always|木を重心で再帰的に分割する。
+T061|T065 T117|parent|always|bit全探索はマスクを使う全列挙の特殊化。
+T061|T060|support|counting|条件を満たす部分集合を数える場合を確認する。
+T063|T064|possible_variant|always|離散の単峰関数で隣接値の比較が単調になる二分探索別解を確認する。
+T065|T017|possible_variant|subset_or_order|部分集合や順序の全探索を集合状態DPへまとめられるか確認する。実行可能性は未保証。
+T065|T029|possible_variant|stochastic|確率的な操作列の全探索を確率状態の遷移へまとめられるか確認する。実行可能性は未保証。
+T065|T060|support|counting|全ての候補のうち条件を満たすものの個数を数える場合を確認する。
+T066|T055|possible_variant|shortest_path|BFSで距離を求めているなら最短経路の一般タグを候補にする。到達判定だけなら採用しない。
+T066|T011|support|always|BFSの層順処理をFIFOキューで実装する。
+T067|T080 T013|support|always|DFSの再帰による実装か、明示的なスタックによる実装かを確認する。
+T069|T073|support|always|接尾辞配列による部分文字列の操作・比較を確認する。
+T070|T073|support|always|Trieの文字列の挿入と検索を確認する。
+T071|T073|support|always|Z配列で接頭辞一致を処理する。
+T072|T073|support|always|ハッシュ値による部分文字列の比較を行う。
+T074|T080 T073|support|always|再帰下降などの構文解析の実装を確認する。
+T075|T086|support|always|差分を累積して区間加算後の値を復元する。
+T081|T080|support|always|分割した部分問題を再帰的に解く実装を確認する。
+T082|T065|parent|always|半分全列挙は候補を二群に分ける全探索。
+T085|T077|support|always|座標の順位を得るための整列を確認する。
+T087|T112 T119|support|always|AND畳み込みに集合変換と逆変換を使う実装を確認する。
+T089|T070 T117|support|always|Binary Trieはビット列を格納するTrie。
+T091|T060|parent|always|Catalan数は特定構造の数え上げ。
+T092|T079 T017|support|always|color codingはランダム彩色と色集合DPを使う候補を確認する。
+T093|T060|support|always|巡回シフトの対応を使って個数を数える。
+T094|T143 T031|support|always|半順序集合の鎖分解を二部マッチングへ帰着する候補。
+T095|T123 T120|support|always|Disjoint Sparse Tableは結合的な区間集約を処理する。
+T096|T131 T077 T086|support|always|整列した次数列と累積値で実現条件を判定する実装を確認する。
+T098|T134|support|always|トーシェント関数を素因数から計算する候補。
+T100|T131 T077|support|always|次数の大きい頂点から次数列を更新する。
+T102|T060 T177|support|always|Narayana数を二項係数等で計算する候補。
+T103|T112 T119|support|always|OR畳み込みに集合変換と逆変換を使う実装を確認する。
+T106|T123 T084|support|always|Sqrt Treeは平方根の分割による区間集約を使う。
+T107|T108|support|xor_convolution|XOR畳み込みを求める目的で変換を使っているか確認する。
+T108|T107|support|always|XOR畳み込みをWalsh-Hadamard変換で計算する候補。
+T109|T022|support|always|DPの遷移や結合にmin-plus畳み込みを使う場合を確認する。
+T115|T017|possible_variant|always|訪問済み集合DPによるHamilton閉路の実行可能性を確認する。
+T116|T017|possible_variant|always|訪問済み集合DPによるHamilton路の実行可能性を確認する。
+T119|T112|support|always|総和の変換と逆変換の双方を使う実装を確認する。
+T122|T097 T194|support|always|法の整合性と合成にGCD・拡張互除法を使う候補。
+T127|T132 T196|support|always|多項式演算を高速な畳み込みで実装する場合を確認する。
+T128|T086|support|always|括弧の開閉残高の接頭辞和を利用する場合を確認する。
+T132|T127 T196|support|always|通常の畳み込みを多項式の積やFFT・NTTで計算する候補。
+T133|T123 T086|support|always|矩形クエリを二次元の累積値で処理する候補。
+T134|T162 T253|support|always|素数の表や素数判定を使う素因数分解の実装を確認する。
+T138|T136|support|always|転置原理は線形写像の演算を扱う。
+T144|T055 T007|support|always|0-1 BFSはDequeで最短距離を求める。
+T145|T097|support|always|連分数への展開に互除法型の剰余計算を使う。
+T147|T022 T081|support|always|DPの遷移探索を分割統治する。
+T148|T007 T043|support|always|半平面交差の角度順と両端キューによる実装を確認する。
+T149|T134|support|always|因数分解を再帰的な素因数分解へ利用する候補。
+T150|T022|parent|always|ナップサックは容量等を状態にするDP。
+T151|T021|parent|always|Knuthの最適化は区間DPの遷移を絞る。
+T152|T136|support|always|Croutの分解は行列の演算を利用する。
+T158|T044 T043|support|always|凸多角形のMinkowski和で凸包と辺の向きの順序を利用する候補。
+T160|T134|support|always|約数の個数・総和を素因数の指数から計算する候補。
+T163|T053 T054|support|always|最小全域木上の辺の交換や経路の問い合わせを使う候補。
+T164|T062 T079|parent|always|焼きなましは乱択を利用するヒューリスティック探索。
+T165|T060 T177|support|always|分配の数え上げを二項係数で求める。
+T166|T200 T067|support|always|橋の有無やDFSの辺の向きを強連結化に利用する候補。
+T169|T052|support|always|2-SATは含意グラフの強連結成分を使う。
+T170|T070 T073|support|always|Aho-CorasickはTrieと文字列の走査を使う。
+T172|T240|support|always|多角形の面積を外積の和で計算する。
+T173|T031|parent|always|Hungarian法は重み付きの二部マッチングを解く。
+T175|T055|parent|always|Bellman-Fordは負辺を許す最短路法。
+T177|T060|parent|always|二項係数は選択の個数を数える。
+T177|T236|support|modular|法上で階乗を割る二項係数の実装を確認する。
+T178|T066 T067|possible_variant|always|二色の伝播をBFSまたはDFSで行う実装を確認する。
+T179|T060|support|always|対称性で同一視した構造の個数を数える。
+T180|T161 T064 T240|support|always|凸多角形への包含を向きと二分探索で判定する実装を確認する。
+T181|T240|support|always|線分の交差判定に外積による向きを使う。
+T186|T060 T127|support|always|ラベル付きグラフの数え上げに母関数を使う候補。
+T187|T055|parent|always|Dijkstraは非負辺の最短路法。
+T188|T187|parent|always|疎グラフDijkstraはDijkstraのヒープ実装。
+T188|T010|support|always|疎グラフDijkstraは距離候補の優先度付きキューを使う。
+T189|T176 T008|support|always|Baby-step Giant-stepなどで累乗と値の対応表を使う候補。
+T190|T189 T124 T221|support|always|離散根を原始根・離散対数・指数の合同式へ帰着する候補。
+T191|T022 T117|support|always|輪郭状態をDPとビット等で管理する実装を確認する。
+T192|T055 T007|support|always|D'Esopo-Papeは両端キューで緩和を行う最短路法。
+T193|T061 T117|support|always|部分マスクの列挙はビットの集合列挙を使う。
+T194|T097 T090|support|always|拡張互除法はGCDと一次結合の係数を求める。
+T195|T134 T176|support|always|素数を法とする階乗の因数と累乗の処理を確認する。
+T196|T132 T127|support|always|FFT・NTTを多項式の積や畳み込みへ使う候補。
+T198|T046 T067|support|always|関節点の検出にDFS木とlowlinkを使う。
+T199|T005 T200|support|always|オンラインの橋管理に成分の併合と橋の更新を使う候補。
+T200|T046 T067|support|always|橋の検出にDFS木とlowlinkを使う。
+T201|T005 T066 T067|possible_variant|always|連結成分をUnion-Findまたはグラフ探索で求める候補。
+T202|T134|support|always|階乗内の素因数の指数を計算する。
+T203|T175 T208|possible_variant|always|負閉路を距離緩和や全点対最短路で検出する候補。
+T204|T043|support|always|平面グラフの各頂点の辺を角度順にたどる実装を確認する。
+T206|T013|support|always|ヒストグラムの最大長方形を単調スタックで求める候補。
+T207|T081 T266 T077|possible_variant|always|最近点対の分割統治・走査線と整列による解法候補。
+T208|T055|parent|always|Floyd-Warshallは全点対最短路法。
+T209|T032|support|always|下限制約付きフローを補助頂点を含む最大流へ帰着する候補。
+T211|T212 T136|support|always|行列式の計算で消去法と線形代数を使う。
+T212|T136|parent|always|Gauss消去は線形代数の具体的な計算法。
+T213|T065|parent|always|k個を選ぶ部分集合の全列挙は全探索。
+T214|T061 T117|support|always|Gray codeはマスクの全列挙とビットの差分更新を使う。
+T217|T181|support|always|複数線分の交差を個々の線分の判定から処理する候補。
+T220|T077|support|always|区間の和集合を端点順に処理する。
+T221|T097 T194 T236|support|always|線形合同式をGCDで簡約し、逆元や拡張互除法で解く。
+T222|T097 T194|support|always|一次不定方程式の整数解にGCDと拡張互除法を使う。
+T223|T162 T134|support|always|線形篩の素数表と最小素因数を判定や分解に使う候補。
+T224|T022 T064|possible_variant|always|LISを基本DPまたは末尾値の二分探索で求める候補。
+T225|T054|parent|always|祖先ダブリングによるLCAはLCAの特殊化。
+T225|T078|support|always|LCAに二の累乗個先の祖先を使う。
+T226|T054|parent|always|Farach-Colton-BenderによるLCAはLCAの特殊化。
+T226|T245|support|always|LCAを区間最小値へ帰着する。
+T227|T054|parent|always|TarjanオフラインLCAはLCAの特殊化。
+T227|T005 T067|support|always|DFSとUnion-Findで問い合わせへ答える。
+T229|T032|parent|always|Dinicは最大流の具体的な計算法。
+T229|T066 T067|support|always|レベルグラフのBFSとブロッキングフローのDFSを使う実装を確認する。
+T230|T032|parent|always|Ford-Fulkerson等は増加路による最大流法。
+T230|T066 T067|possible_variant|always|増加路をBFSまたはDFSで探索する実装を確認する。
+T231|T032|parent|always|push-relabelは最大流の具体的な計算法。
+T232|T231|parent|always|高速化したpush-relabelはpush-relabelの特殊化。
+T233|T053|parent|always|Kruskalは最小全域木の具体的な計算法。
+T233|T005 T077|support|always|辺の整列と成分併合を使う。
+T234|T053|parent|always|Primは最小全域木の具体的な計算法。
+T234|T010|support|always|木から外へ出る最小の辺をヒープで選ぶ実装を確認する。
+T235|T013 T011|support|always|最小値を返すスタックまたはキューのどちらを使うか確認する。
+T236|T176 T194|possible_variant|always|逆元をFermatの累乗または拡張互除法で求める候補。
+T237|T127|possible_variant|polynomial|Newton法を形式的べき級数の演算へ使う場合を確認する。
+T238|T030 T022|possible_variant|always|固定長の経路を行列累乗または層ごとのDPで求める候補。
+T241|T060 T172|support|always|格子点数と多角形の面積の関係を計算する。
+T242|T060|support|always|条件付きのビショップの配置数を数える場合を確認する。
+T243|T073|support|always|KMPは文字列の照合を行う。
+T244|T060 T130|support|always|ラベル付き木と列の対応で構築や数え上げを行う。
+T245|T004 T003|possible_variant|always|RMQを静的表または更新可能なセグメント木で処理する候補。
+T246|T072|parent|always|Rabin-Karpはローリングハッシュによる文字列照合。
+T247|T010 T079|support|always|ランダムな併合で優先度付きのヒープを管理する。
+T248|T212 T136|support|always|階数を消去法や基底による線形代数で求める候補。
+T251|T217 T266|parent|always|走査線による線分交差検出は線分交差と走査線の特殊化。
+T251|T181 T014|support|always|線分の交差判定と有効な線分の順序付き管理を使う候補。
+T252|T022|support|always|連続部分列の最適な末尾値を漸化式で求める候補。
+T254|T245 T054 T130|support|always|Cartesian木を作ってRMQをLCAへ帰着する。
+T255|T073|support|always|Suffix Automatonで部分文字列を扱う。
+T256|T073|support|always|Suffix Treeで接尾辞や部分文字列を扱う。
+T257|T060|parent|always|包含排除は重複を補正する数え上げ。
+T259|T014 T079|support|always|Treapはランダムな優先度を持つ平衡二分探索木。
+T260|T130 T027|support|always|木の彩色の構造や部分木DPを利用する候補。
+T262|T150 T022|possible_variant|always|部分和を容量を状態にするDPで解く候補。
+T263|T025|parent|always|LCSは文字列の接頭辞のDP。
+T265|T118|parent|always|一般グラフマッチングはマッチングの特殊化。

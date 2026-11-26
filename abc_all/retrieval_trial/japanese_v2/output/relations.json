@@ -1,0 +1,2576 @@
+[
+  {
+    "relation_id": "R001",
+    "source_tag_id": "T002",
+    "target_tag_id": "T003",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "遅延セグメント木は区間集約を持つセグメント木の特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R002",
+    "source_tag_id": "T003",
+    "target_tag_id": "T123",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "セグメント木で区間の問い合わせを処理する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R003",
+    "source_tag_id": "T001",
+    "target_tag_id": "T123",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Fenwick木の先頭区間の集約は区間クエリの候補になる。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R004",
+    "source_tag_id": "T004",
+    "target_tag_id": "T123",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Sparse Tableは静的な区間クエリを処理する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R005",
+    "source_tag_id": "T006",
+    "target_tag_id": "T123",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Wavelet Matrixは区間内の値や順位を問い合わせる。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R006",
+    "source_tag_id": "T009",
+    "target_tag_id": "T012",
+    "kind": "support",
+    "guard": "always",
+    "reason": "多重集合を順序付き集合や平衡木で実装する可能性を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R007",
+    "source_tag_id": "T009",
+    "target_tag_id": "T014",
+    "kind": "support",
+    "guard": "always",
+    "reason": "多重集合を順序付き集合や平衡木で実装する可能性を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R008",
+    "source_tag_id": "T015",
+    "target_tag_id": "T003",
+    "kind": "possible_variant",
+    "guard": "range_query",
+    "reason": "永続化する対象が区間集約なら永続セグメント木を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R009",
+    "source_tag_id": "T016",
+    "target_tag_id": "T022",
+    "kind": "support",
+    "guard": "always",
+    "reason": "凸包によるDP遷移の最適化に対応する基本DPを確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R010",
+    "source_tag_id": "T017",
+    "target_tag_id": "T022",
+    "kind": "support",
+    "guard": "always",
+    "reason": "部分集合DPは基本DPとマスク演算を使用する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R011",
+    "source_tag_id": "T017",
+    "target_tag_id": "T117",
+    "kind": "support",
+    "guard": "always",
+    "reason": "部分集合DPは基本DPとマスク演算を使用する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R012",
+    "source_tag_id": "T017",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "counting",
+    "reason": "部分集合DPで条件を満たす構造の個数を保存しているか確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R013",
+    "source_tag_id": "T019",
+    "target_tag_id": "T022",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "上書きによる更新はDPの実装を具体化する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R014",
+    "source_tag_id": "T020",
+    "target_tag_id": "T027",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "全方位木DPは根を変える木DPである。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R015",
+    "source_tag_id": "T020",
+    "target_tag_id": "T067",
+    "kind": "support",
+    "guard": "always",
+    "reason": "木の走査と親子の構造を使う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R016",
+    "source_tag_id": "T020",
+    "target_tag_id": "T130",
+    "kind": "support",
+    "guard": "always",
+    "reason": "木の走査と親子の構造を使う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R017",
+    "source_tag_id": "T021",
+    "target_tag_id": "T022",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "区間を状態に持つDPは基本DPの特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R018",
+    "source_tag_id": "T023",
+    "target_tag_id": "T022",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "戻すDPはDPの表の寄与を取り消す方法。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R019",
+    "source_tag_id": "T024",
+    "target_tag_id": "T022",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "挿入DPは挿入位置による状態遷移を持つ。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R020",
+    "source_tag_id": "T025",
+    "target_tag_id": "T022",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "文字列DPは文字位置等を状態に持つDP。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R021",
+    "source_tag_id": "T026",
+    "target_tag_id": "T022",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "期待値を状態値とするDPは基本DPの特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R022",
+    "source_tag_id": "T026",
+    "target_tag_id": "T029",
+    "kind": "possible_variant",
+    "guard": "stochastic",
+    "reason": "期待値の漸化式に対して確率質量を配る別解が構成できるか確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R023",
+    "source_tag_id": "T026",
+    "target_tag_id": "T236",
+    "kind": "support",
+    "guard": "modular",
+    "reason": "期待値を法で求める場合は除算の逆元を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R024",
+    "source_tag_id": "T027",
+    "target_tag_id": "T022",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "木DPは部分木を状態にしたDP。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R025",
+    "source_tag_id": "T027",
+    "target_tag_id": "T067",
+    "kind": "support",
+    "guard": "always",
+    "reason": "部分木の集約を行う木の走査を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R026",
+    "source_tag_id": "T027",
+    "target_tag_id": "T130",
+    "kind": "support",
+    "guard": "always",
+    "reason": "部分木の集約を行う木の走査を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R027",
+    "source_tag_id": "T028",
+    "target_tag_id": "T022",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "桁DPは桁位置等を状態に持つDP。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R028",
+    "source_tag_id": "T029",
+    "target_tag_id": "T022",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "確率を状態値とするDPは基本DPの特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R029",
+    "source_tag_id": "T029",
+    "target_tag_id": "T026",
+    "kind": "possible_variant",
+    "guard": "stochastic",
+    "reason": "確率過程について期待値を状態にする別解が成立するか確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R030",
+    "source_tag_id": "T029",
+    "target_tag_id": "T236",
+    "kind": "support",
+    "guard": "modular",
+    "reason": "法上の確率遷移に必要な除算の逆元を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R031",
+    "source_tag_id": "T022",
+    "target_tag_id": "T026",
+    "kind": "possible_variant",
+    "guard": "stochastic",
+    "reason": "確率過程のDPでは状態値が期待値か確率かを両方確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R032",
+    "source_tag_id": "T022",
+    "target_tag_id": "T029",
+    "kind": "possible_variant",
+    "guard": "stochastic",
+    "reason": "確率過程のDPでは状態値が期待値か確率かを両方確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R033",
+    "source_tag_id": "T022",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "counting",
+    "reason": "個数を状態値として持つDPなら数え上げも候補にする。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R034",
+    "source_tag_id": "T030",
+    "target_tag_id": "T176",
+    "kind": "support",
+    "guard": "always",
+    "reason": "行列累乗は繰り返し二乗と行列の演算を用いる。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R035",
+    "source_tag_id": "T030",
+    "target_tag_id": "T136",
+    "kind": "support",
+    "guard": "always",
+    "reason": "行列累乗は繰り返し二乗と行列の演算を用いる。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R036",
+    "source_tag_id": "T031",
+    "target_tag_id": "T118",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "二部マッチングはマッチングの特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R037",
+    "source_tag_id": "T031",
+    "target_tag_id": "T032",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "二部マッチングを容量1の最大流へ帰着する別解候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R038",
+    "source_tag_id": "T033",
+    "target_tag_id": "T032",
+    "kind": "support",
+    "guard": "always",
+    "reason": "最小カットを最大流との対応から計算する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R039",
+    "source_tag_id": "T034",
+    "target_tag_id": "T032",
+    "kind": "support",
+    "guard": "always",
+    "reason": "費用付きの流れと残余グラフの最短路を用いる実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R040",
+    "source_tag_id": "T034",
+    "target_tag_id": "T055",
+    "kind": "support",
+    "guard": "always",
+    "reason": "費用付きの流れと残余グラフの最短路を用いる実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R041",
+    "source_tag_id": "T035",
+    "target_tag_id": "T033",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "二群への分類を最小カットへ帰着する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R042",
+    "source_tag_id": "T036",
+    "target_tag_id": "T154",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Grundy数の計算にMEX、独立なゲームの合成にXORを使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R043",
+    "source_tag_id": "T036",
+    "target_tag_id": "T059",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Grundy数の計算にMEX、独立なゲームの合成にXORを使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R044",
+    "source_tag_id": "T037",
+    "target_tag_id": "T059",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Nimの必勝条件や手の構築でXORを使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R045",
+    "source_tag_id": "T038",
+    "target_tag_id": "T022",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "重複局面をまとめるミニマックスDPの実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R046",
+    "source_tag_id": "T039",
+    "target_tag_id": "T210",
+    "kind": "support",
+    "guard": "always",
+    "reason": "グラフの局面の勝敗を逆向きに確定する場合を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R047",
+    "source_tag_id": "T043",
+    "target_tag_id": "T077",
+    "kind": "support",
+    "guard": "always",
+    "reason": "偏角の比較に外積を、順序付けにソートを使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R048",
+    "source_tag_id": "T043",
+    "target_tag_id": "T240",
+    "kind": "support",
+    "guard": "always",
+    "reason": "偏角の比較に外積を、順序付けにソートを使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R049",
+    "source_tag_id": "T044",
+    "target_tag_id": "T077",
+    "kind": "support",
+    "guard": "always",
+    "reason": "凸包の構築で点の整列と向きの判定を使う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R050",
+    "source_tag_id": "T044",
+    "target_tag_id": "T240",
+    "kind": "support",
+    "guard": "always",
+    "reason": "凸包の構築で点の整列と向きの判定を使う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R051",
+    "source_tag_id": "T045",
+    "target_tag_id": "T130",
+    "kind": "support",
+    "guard": "always",
+    "reason": "HLDは木のパスを列の区間へ変換する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R052",
+    "source_tag_id": "T045",
+    "target_tag_id": "T123",
+    "kind": "support",
+    "guard": "always",
+    "reason": "HLDは木のパスを列の区間へ変換する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R053",
+    "source_tag_id": "T046",
+    "target_tag_id": "T067",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "DFS木の構造を使うにはDFSを実行する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R054",
+    "source_tag_id": "T047",
+    "target_tag_id": "T067",
+    "kind": "support",
+    "guard": "always",
+    "reason": "木の巡回で部分木を配列の区間へ対応させる。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R055",
+    "source_tag_id": "T047",
+    "target_tag_id": "T130",
+    "kind": "support",
+    "guard": "always",
+    "reason": "木の巡回で部分木を配列の区間へ対応させる。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R056",
+    "source_tag_id": "T047",
+    "target_tag_id": "T123",
+    "kind": "support",
+    "guard": "always",
+    "reason": "木の巡回で部分木を配列の区間へ対応させる。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R057",
+    "source_tag_id": "T048",
+    "target_tag_id": "T067",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Euler路の構築で辺の探索やスタックを使う候補を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R058",
+    "source_tag_id": "T048",
+    "target_tag_id": "T013",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Euler路の構築で辺の探索やスタックを使う候補を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R059",
+    "source_tag_id": "T050",
+    "target_tag_id": "T200",
+    "kind": "support",
+    "guard": "always",
+    "reason": "橋を除去して辺二重連結成分を得る。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R060",
+    "source_tag_id": "T051",
+    "target_tag_id": "T198",
+    "kind": "support",
+    "guard": "always",
+    "reason": "点二重連結成分をDFSとlowlinkで求める実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R061",
+    "source_tag_id": "T051",
+    "target_tag_id": "T046",
+    "kind": "support",
+    "guard": "always",
+    "reason": "点二重連結成分をDFSとlowlinkで求める実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R062",
+    "source_tag_id": "T051",
+    "target_tag_id": "T067",
+    "kind": "support",
+    "guard": "always",
+    "reason": "点二重連結成分をDFSとlowlinkで求める実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R063",
+    "source_tag_id": "T052",
+    "target_tag_id": "T067",
+    "kind": "support",
+    "guard": "always",
+    "reason": "強連結成分分解のDFSによる実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R064",
+    "source_tag_id": "T054",
+    "target_tag_id": "T130",
+    "kind": "support",
+    "guard": "always",
+    "reason": "LCAは根付き木の祖先関係を利用する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R065",
+    "source_tag_id": "T057",
+    "target_tag_id": "T211",
+    "kind": "support",
+    "guard": "always",
+    "reason": "全域木の個数を行列式で計算する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R066",
+    "source_tag_id": "T057",
+    "target_tag_id": "T136",
+    "kind": "support",
+    "guard": "always",
+    "reason": "全域木の個数を行列式で計算する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R067",
+    "source_tag_id": "T057",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "always",
+    "reason": "全域木の個数を行列式で計算する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R068",
+    "source_tag_id": "T058",
+    "target_tag_id": "T080",
+    "kind": "support",
+    "guard": "always",
+    "reason": "木を重心で再帰的に分割する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R069",
+    "source_tag_id": "T058",
+    "target_tag_id": "T130",
+    "kind": "support",
+    "guard": "always",
+    "reason": "木を重心で再帰的に分割する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R070",
+    "source_tag_id": "T061",
+    "target_tag_id": "T065",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "bit全探索はマスクを使う全列挙の特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R071",
+    "source_tag_id": "T061",
+    "target_tag_id": "T117",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "bit全探索はマスクを使う全列挙の特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R072",
+    "source_tag_id": "T061",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "counting",
+    "reason": "条件を満たす部分集合を数える場合を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R073",
+    "source_tag_id": "T063",
+    "target_tag_id": "T064",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "離散の単峰関数で隣接値の比較が単調になる二分探索別解を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R074",
+    "source_tag_id": "T065",
+    "target_tag_id": "T017",
+    "kind": "possible_variant",
+    "guard": "subset_or_order",
+    "reason": "部分集合や順序の全探索を集合状態DPへまとめられるか確認する。実行可能性は未保証。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R075",
+    "source_tag_id": "T065",
+    "target_tag_id": "T029",
+    "kind": "possible_variant",
+    "guard": "stochastic",
+    "reason": "確率的な操作列の全探索を確率状態の遷移へまとめられるか確認する。実行可能性は未保証。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R076",
+    "source_tag_id": "T065",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "counting",
+    "reason": "全ての候補のうち条件を満たすものの個数を数える場合を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R077",
+    "source_tag_id": "T066",
+    "target_tag_id": "T055",
+    "kind": "possible_variant",
+    "guard": "shortest_path",
+    "reason": "BFSで距離を求めているなら最短経路の一般タグを候補にする。到達判定だけなら採用しない。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R078",
+    "source_tag_id": "T066",
+    "target_tag_id": "T011",
+    "kind": "support",
+    "guard": "always",
+    "reason": "BFSの層順処理をFIFOキューで実装する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R079",
+    "source_tag_id": "T067",
+    "target_tag_id": "T080",
+    "kind": "support",
+    "guard": "always",
+    "reason": "DFSの再帰による実装か、明示的なスタックによる実装かを確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R080",
+    "source_tag_id": "T067",
+    "target_tag_id": "T013",
+    "kind": "support",
+    "guard": "always",
+    "reason": "DFSの再帰による実装か、明示的なスタックによる実装かを確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R081",
+    "source_tag_id": "T069",
+    "target_tag_id": "T073",
+    "kind": "support",
+    "guard": "always",
+    "reason": "接尾辞配列による部分文字列の操作・比較を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R082",
+    "source_tag_id": "T070",
+    "target_tag_id": "T073",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Trieの文字列の挿入と検索を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R083",
+    "source_tag_id": "T071",
+    "target_tag_id": "T073",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Z配列で接頭辞一致を処理する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R084",
+    "source_tag_id": "T072",
+    "target_tag_id": "T073",
+    "kind": "support",
+    "guard": "always",
+    "reason": "ハッシュ値による部分文字列の比較を行う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R085",
+    "source_tag_id": "T074",
+    "target_tag_id": "T080",
+    "kind": "support",
+    "guard": "always",
+    "reason": "再帰下降などの構文解析の実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R086",
+    "source_tag_id": "T074",
+    "target_tag_id": "T073",
+    "kind": "support",
+    "guard": "always",
+    "reason": "再帰下降などの構文解析の実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R087",
+    "source_tag_id": "T075",
+    "target_tag_id": "T086",
+    "kind": "support",
+    "guard": "always",
+    "reason": "差分を累積して区間加算後の値を復元する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R088",
+    "source_tag_id": "T081",
+    "target_tag_id": "T080",
+    "kind": "support",
+    "guard": "always",
+    "reason": "分割した部分問題を再帰的に解く実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R089",
+    "source_tag_id": "T082",
+    "target_tag_id": "T065",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "半分全列挙は候補を二群に分ける全探索。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R090",
+    "source_tag_id": "T085",
+    "target_tag_id": "T077",
+    "kind": "support",
+    "guard": "always",
+    "reason": "座標の順位を得るための整列を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R091",
+    "source_tag_id": "T087",
+    "target_tag_id": "T112",
+    "kind": "support",
+    "guard": "always",
+    "reason": "AND畳み込みに集合変換と逆変換を使う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R092",
+    "source_tag_id": "T087",
+    "target_tag_id": "T119",
+    "kind": "support",
+    "guard": "always",
+    "reason": "AND畳み込みに集合変換と逆変換を使う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R093",
+    "source_tag_id": "T089",
+    "target_tag_id": "T070",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Binary Trieはビット列を格納するTrie。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R094",
+    "source_tag_id": "T089",
+    "target_tag_id": "T117",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Binary Trieはビット列を格納するTrie。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R095",
+    "source_tag_id": "T091",
+    "target_tag_id": "T060",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Catalan数は特定構造の数え上げ。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R096",
+    "source_tag_id": "T092",
+    "target_tag_id": "T079",
+    "kind": "support",
+    "guard": "always",
+    "reason": "color codingはランダム彩色と色集合DPを使う候補を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R097",
+    "source_tag_id": "T092",
+    "target_tag_id": "T017",
+    "kind": "support",
+    "guard": "always",
+    "reason": "color codingはランダム彩色と色集合DPを使う候補を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R098",
+    "source_tag_id": "T093",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "always",
+    "reason": "巡回シフトの対応を使って個数を数える。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R099",
+    "source_tag_id": "T094",
+    "target_tag_id": "T143",
+    "kind": "support",
+    "guard": "always",
+    "reason": "半順序集合の鎖分解を二部マッチングへ帰着する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R100",
+    "source_tag_id": "T094",
+    "target_tag_id": "T031",
+    "kind": "support",
+    "guard": "always",
+    "reason": "半順序集合の鎖分解を二部マッチングへ帰着する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R101",
+    "source_tag_id": "T095",
+    "target_tag_id": "T123",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Disjoint Sparse Tableは結合的な区間集約を処理する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R102",
+    "source_tag_id": "T095",
+    "target_tag_id": "T120",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Disjoint Sparse Tableは結合的な区間集約を処理する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R103",
+    "source_tag_id": "T096",
+    "target_tag_id": "T131",
+    "kind": "support",
+    "guard": "always",
+    "reason": "整列した次数列と累積値で実現条件を判定する実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R104",
+    "source_tag_id": "T096",
+    "target_tag_id": "T077",
+    "kind": "support",
+    "guard": "always",
+    "reason": "整列した次数列と累積値で実現条件を判定する実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R105",
+    "source_tag_id": "T096",
+    "target_tag_id": "T086",
+    "kind": "support",
+    "guard": "always",
+    "reason": "整列した次数列と累積値で実現条件を判定する実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R106",
+    "source_tag_id": "T098",
+    "target_tag_id": "T134",
+    "kind": "support",
+    "guard": "always",
+    "reason": "トーシェント関数を素因数から計算する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R107",
+    "source_tag_id": "T100",
+    "target_tag_id": "T131",
+    "kind": "support",
+    "guard": "always",
+    "reason": "次数の大きい頂点から次数列を更新する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R108",
+    "source_tag_id": "T100",
+    "target_tag_id": "T077",
+    "kind": "support",
+    "guard": "always",
+    "reason": "次数の大きい頂点から次数列を更新する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R109",
+    "source_tag_id": "T102",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Narayana数を二項係数等で計算する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R110",
+    "source_tag_id": "T102",
+    "target_tag_id": "T177",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Narayana数を二項係数等で計算する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R111",
+    "source_tag_id": "T103",
+    "target_tag_id": "T112",
+    "kind": "support",
+    "guard": "always",
+    "reason": "OR畳み込みに集合変換と逆変換を使う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R112",
+    "source_tag_id": "T103",
+    "target_tag_id": "T119",
+    "kind": "support",
+    "guard": "always",
+    "reason": "OR畳み込みに集合変換と逆変換を使う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R113",
+    "source_tag_id": "T106",
+    "target_tag_id": "T123",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Sqrt Treeは平方根の分割による区間集約を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R114",
+    "source_tag_id": "T106",
+    "target_tag_id": "T084",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Sqrt Treeは平方根の分割による区間集約を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R115",
+    "source_tag_id": "T107",
+    "target_tag_id": "T108",
+    "kind": "support",
+    "guard": "xor_convolution",
+    "reason": "XOR畳み込みを求める目的で変換を使っているか確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R116",
+    "source_tag_id": "T108",
+    "target_tag_id": "T107",
+    "kind": "support",
+    "guard": "always",
+    "reason": "XOR畳み込みをWalsh-Hadamard変換で計算する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R117",
+    "source_tag_id": "T109",
+    "target_tag_id": "T022",
+    "kind": "support",
+    "guard": "always",
+    "reason": "DPの遷移や結合にmin-plus畳み込みを使う場合を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R118",
+    "source_tag_id": "T115",
+    "target_tag_id": "T017",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "訪問済み集合DPによるHamilton閉路の実行可能性を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R119",
+    "source_tag_id": "T116",
+    "target_tag_id": "T017",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "訪問済み集合DPによるHamilton路の実行可能性を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R120",
+    "source_tag_id": "T119",
+    "target_tag_id": "T112",
+    "kind": "support",
+    "guard": "always",
+    "reason": "総和の変換と逆変換の双方を使う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R121",
+    "source_tag_id": "T122",
+    "target_tag_id": "T097",
+    "kind": "support",
+    "guard": "always",
+    "reason": "法の整合性と合成にGCD・拡張互除法を使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R122",
+    "source_tag_id": "T122",
+    "target_tag_id": "T194",
+    "kind": "support",
+    "guard": "always",
+    "reason": "法の整合性と合成にGCD・拡張互除法を使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R123",
+    "source_tag_id": "T127",
+    "target_tag_id": "T132",
+    "kind": "support",
+    "guard": "always",
+    "reason": "多項式演算を高速な畳み込みで実装する場合を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R124",
+    "source_tag_id": "T127",
+    "target_tag_id": "T196",
+    "kind": "support",
+    "guard": "always",
+    "reason": "多項式演算を高速な畳み込みで実装する場合を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R125",
+    "source_tag_id": "T128",
+    "target_tag_id": "T086",
+    "kind": "support",
+    "guard": "always",
+    "reason": "括弧の開閉残高の接頭辞和を利用する場合を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R126",
+    "source_tag_id": "T132",
+    "target_tag_id": "T127",
+    "kind": "support",
+    "guard": "always",
+    "reason": "通常の畳み込みを多項式の積やFFT・NTTで計算する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R127",
+    "source_tag_id": "T132",
+    "target_tag_id": "T196",
+    "kind": "support",
+    "guard": "always",
+    "reason": "通常の畳み込みを多項式の積やFFT・NTTで計算する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R128",
+    "source_tag_id": "T133",
+    "target_tag_id": "T123",
+    "kind": "support",
+    "guard": "always",
+    "reason": "矩形クエリを二次元の累積値で処理する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R129",
+    "source_tag_id": "T133",
+    "target_tag_id": "T086",
+    "kind": "support",
+    "guard": "always",
+    "reason": "矩形クエリを二次元の累積値で処理する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R130",
+    "source_tag_id": "T134",
+    "target_tag_id": "T162",
+    "kind": "support",
+    "guard": "always",
+    "reason": "素数の表や素数判定を使う素因数分解の実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R131",
+    "source_tag_id": "T134",
+    "target_tag_id": "T253",
+    "kind": "support",
+    "guard": "always",
+    "reason": "素数の表や素数判定を使う素因数分解の実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R132",
+    "source_tag_id": "T138",
+    "target_tag_id": "T136",
+    "kind": "support",
+    "guard": "always",
+    "reason": "転置原理は線形写像の演算を扱う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R133",
+    "source_tag_id": "T144",
+    "target_tag_id": "T055",
+    "kind": "support",
+    "guard": "always",
+    "reason": "0-1 BFSはDequeで最短距離を求める。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R134",
+    "source_tag_id": "T144",
+    "target_tag_id": "T007",
+    "kind": "support",
+    "guard": "always",
+    "reason": "0-1 BFSはDequeで最短距離を求める。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R135",
+    "source_tag_id": "T145",
+    "target_tag_id": "T097",
+    "kind": "support",
+    "guard": "always",
+    "reason": "連分数への展開に互除法型の剰余計算を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R136",
+    "source_tag_id": "T147",
+    "target_tag_id": "T022",
+    "kind": "support",
+    "guard": "always",
+    "reason": "DPの遷移探索を分割統治する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R137",
+    "source_tag_id": "T147",
+    "target_tag_id": "T081",
+    "kind": "support",
+    "guard": "always",
+    "reason": "DPの遷移探索を分割統治する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R138",
+    "source_tag_id": "T148",
+    "target_tag_id": "T007",
+    "kind": "support",
+    "guard": "always",
+    "reason": "半平面交差の角度順と両端キューによる実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R139",
+    "source_tag_id": "T148",
+    "target_tag_id": "T043",
+    "kind": "support",
+    "guard": "always",
+    "reason": "半平面交差の角度順と両端キューによる実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R140",
+    "source_tag_id": "T149",
+    "target_tag_id": "T134",
+    "kind": "support",
+    "guard": "always",
+    "reason": "因数分解を再帰的な素因数分解へ利用する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R141",
+    "source_tag_id": "T150",
+    "target_tag_id": "T022",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "ナップサックは容量等を状態にするDP。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R142",
+    "source_tag_id": "T151",
+    "target_tag_id": "T021",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Knuthの最適化は区間DPの遷移を絞る。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R143",
+    "source_tag_id": "T152",
+    "target_tag_id": "T136",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Croutの分解は行列の演算を利用する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R144",
+    "source_tag_id": "T158",
+    "target_tag_id": "T044",
+    "kind": "support",
+    "guard": "always",
+    "reason": "凸多角形のMinkowski和で凸包と辺の向きの順序を利用する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R145",
+    "source_tag_id": "T158",
+    "target_tag_id": "T043",
+    "kind": "support",
+    "guard": "always",
+    "reason": "凸多角形のMinkowski和で凸包と辺の向きの順序を利用する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R146",
+    "source_tag_id": "T160",
+    "target_tag_id": "T134",
+    "kind": "support",
+    "guard": "always",
+    "reason": "約数の個数・総和を素因数の指数から計算する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R147",
+    "source_tag_id": "T163",
+    "target_tag_id": "T053",
+    "kind": "support",
+    "guard": "always",
+    "reason": "最小全域木上の辺の交換や経路の問い合わせを使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R148",
+    "source_tag_id": "T163",
+    "target_tag_id": "T054",
+    "kind": "support",
+    "guard": "always",
+    "reason": "最小全域木上の辺の交換や経路の問い合わせを使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R149",
+    "source_tag_id": "T164",
+    "target_tag_id": "T062",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "焼きなましは乱択を利用するヒューリスティック探索。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R150",
+    "source_tag_id": "T164",
+    "target_tag_id": "T079",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "焼きなましは乱択を利用するヒューリスティック探索。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R151",
+    "source_tag_id": "T165",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "always",
+    "reason": "分配の数え上げを二項係数で求める。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R152",
+    "source_tag_id": "T165",
+    "target_tag_id": "T177",
+    "kind": "support",
+    "guard": "always",
+    "reason": "分配の数え上げを二項係数で求める。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R153",
+    "source_tag_id": "T166",
+    "target_tag_id": "T200",
+    "kind": "support",
+    "guard": "always",
+    "reason": "橋の有無やDFSの辺の向きを強連結化に利用する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R154",
+    "source_tag_id": "T166",
+    "target_tag_id": "T067",
+    "kind": "support",
+    "guard": "always",
+    "reason": "橋の有無やDFSの辺の向きを強連結化に利用する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R155",
+    "source_tag_id": "T169",
+    "target_tag_id": "T052",
+    "kind": "support",
+    "guard": "always",
+    "reason": "2-SATは含意グラフの強連結成分を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R156",
+    "source_tag_id": "T170",
+    "target_tag_id": "T070",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Aho-CorasickはTrieと文字列の走査を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R157",
+    "source_tag_id": "T170",
+    "target_tag_id": "T073",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Aho-CorasickはTrieと文字列の走査を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R158",
+    "source_tag_id": "T172",
+    "target_tag_id": "T240",
+    "kind": "support",
+    "guard": "always",
+    "reason": "多角形の面積を外積の和で計算する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R159",
+    "source_tag_id": "T173",
+    "target_tag_id": "T031",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Hungarian法は重み付きの二部マッチングを解く。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R160",
+    "source_tag_id": "T175",
+    "target_tag_id": "T055",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Bellman-Fordは負辺を許す最短路法。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R161",
+    "source_tag_id": "T177",
+    "target_tag_id": "T060",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "二項係数は選択の個数を数える。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R162",
+    "source_tag_id": "T177",
+    "target_tag_id": "T236",
+    "kind": "support",
+    "guard": "modular",
+    "reason": "法上で階乗を割る二項係数の実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R163",
+    "source_tag_id": "T178",
+    "target_tag_id": "T066",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "二色の伝播をBFSまたはDFSで行う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R164",
+    "source_tag_id": "T178",
+    "target_tag_id": "T067",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "二色の伝播をBFSまたはDFSで行う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R165",
+    "source_tag_id": "T179",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "always",
+    "reason": "対称性で同一視した構造の個数を数える。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R166",
+    "source_tag_id": "T180",
+    "target_tag_id": "T161",
+    "kind": "support",
+    "guard": "always",
+    "reason": "凸多角形への包含を向きと二分探索で判定する実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R167",
+    "source_tag_id": "T180",
+    "target_tag_id": "T064",
+    "kind": "support",
+    "guard": "always",
+    "reason": "凸多角形への包含を向きと二分探索で判定する実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R168",
+    "source_tag_id": "T180",
+    "target_tag_id": "T240",
+    "kind": "support",
+    "guard": "always",
+    "reason": "凸多角形への包含を向きと二分探索で判定する実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R169",
+    "source_tag_id": "T181",
+    "target_tag_id": "T240",
+    "kind": "support",
+    "guard": "always",
+    "reason": "線分の交差判定に外積による向きを使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R170",
+    "source_tag_id": "T186",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "always",
+    "reason": "ラベル付きグラフの数え上げに母関数を使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R171",
+    "source_tag_id": "T186",
+    "target_tag_id": "T127",
+    "kind": "support",
+    "guard": "always",
+    "reason": "ラベル付きグラフの数え上げに母関数を使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R172",
+    "source_tag_id": "T187",
+    "target_tag_id": "T055",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Dijkstraは非負辺の最短路法。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R173",
+    "source_tag_id": "T188",
+    "target_tag_id": "T187",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "疎グラフDijkstraはDijkstraのヒープ実装。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R174",
+    "source_tag_id": "T188",
+    "target_tag_id": "T010",
+    "kind": "support",
+    "guard": "always",
+    "reason": "疎グラフDijkstraは距離候補の優先度付きキューを使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R175",
+    "source_tag_id": "T189",
+    "target_tag_id": "T176",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Baby-step Giant-stepなどで累乗と値の対応表を使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R176",
+    "source_tag_id": "T189",
+    "target_tag_id": "T008",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Baby-step Giant-stepなどで累乗と値の対応表を使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R177",
+    "source_tag_id": "T190",
+    "target_tag_id": "T189",
+    "kind": "support",
+    "guard": "always",
+    "reason": "離散根を原始根・離散対数・指数の合同式へ帰着する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R178",
+    "source_tag_id": "T190",
+    "target_tag_id": "T124",
+    "kind": "support",
+    "guard": "always",
+    "reason": "離散根を原始根・離散対数・指数の合同式へ帰着する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R179",
+    "source_tag_id": "T190",
+    "target_tag_id": "T221",
+    "kind": "support",
+    "guard": "always",
+    "reason": "離散根を原始根・離散対数・指数の合同式へ帰着する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R180",
+    "source_tag_id": "T191",
+    "target_tag_id": "T022",
+    "kind": "support",
+    "guard": "always",
+    "reason": "輪郭状態をDPとビット等で管理する実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R181",
+    "source_tag_id": "T191",
+    "target_tag_id": "T117",
+    "kind": "support",
+    "guard": "always",
+    "reason": "輪郭状態をDPとビット等で管理する実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R182",
+    "source_tag_id": "T192",
+    "target_tag_id": "T055",
+    "kind": "support",
+    "guard": "always",
+    "reason": "D'Esopo-Papeは両端キューで緩和を行う最短路法。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R183",
+    "source_tag_id": "T192",
+    "target_tag_id": "T007",
+    "kind": "support",
+    "guard": "always",
+    "reason": "D'Esopo-Papeは両端キューで緩和を行う最短路法。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R184",
+    "source_tag_id": "T193",
+    "target_tag_id": "T061",
+    "kind": "support",
+    "guard": "always",
+    "reason": "部分マスクの列挙はビットの集合列挙を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R185",
+    "source_tag_id": "T193",
+    "target_tag_id": "T117",
+    "kind": "support",
+    "guard": "always",
+    "reason": "部分マスクの列挙はビットの集合列挙を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R186",
+    "source_tag_id": "T194",
+    "target_tag_id": "T097",
+    "kind": "support",
+    "guard": "always",
+    "reason": "拡張互除法はGCDと一次結合の係数を求める。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R187",
+    "source_tag_id": "T194",
+    "target_tag_id": "T090",
+    "kind": "support",
+    "guard": "always",
+    "reason": "拡張互除法はGCDと一次結合の係数を求める。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R188",
+    "source_tag_id": "T195",
+    "target_tag_id": "T134",
+    "kind": "support",
+    "guard": "always",
+    "reason": "素数を法とする階乗の因数と累乗の処理を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R189",
+    "source_tag_id": "T195",
+    "target_tag_id": "T176",
+    "kind": "support",
+    "guard": "always",
+    "reason": "素数を法とする階乗の因数と累乗の処理を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R190",
+    "source_tag_id": "T196",
+    "target_tag_id": "T132",
+    "kind": "support",
+    "guard": "always",
+    "reason": "FFT・NTTを多項式の積や畳み込みへ使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R191",
+    "source_tag_id": "T196",
+    "target_tag_id": "T127",
+    "kind": "support",
+    "guard": "always",
+    "reason": "FFT・NTTを多項式の積や畳み込みへ使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R192",
+    "source_tag_id": "T198",
+    "target_tag_id": "T046",
+    "kind": "support",
+    "guard": "always",
+    "reason": "関節点の検出にDFS木とlowlinkを使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R193",
+    "source_tag_id": "T198",
+    "target_tag_id": "T067",
+    "kind": "support",
+    "guard": "always",
+    "reason": "関節点の検出にDFS木とlowlinkを使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R194",
+    "source_tag_id": "T199",
+    "target_tag_id": "T005",
+    "kind": "support",
+    "guard": "always",
+    "reason": "オンラインの橋管理に成分の併合と橋の更新を使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R195",
+    "source_tag_id": "T199",
+    "target_tag_id": "T200",
+    "kind": "support",
+    "guard": "always",
+    "reason": "オンラインの橋管理に成分の併合と橋の更新を使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R196",
+    "source_tag_id": "T200",
+    "target_tag_id": "T046",
+    "kind": "support",
+    "guard": "always",
+    "reason": "橋の検出にDFS木とlowlinkを使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R197",
+    "source_tag_id": "T200",
+    "target_tag_id": "T067",
+    "kind": "support",
+    "guard": "always",
+    "reason": "橋の検出にDFS木とlowlinkを使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R198",
+    "source_tag_id": "T201",
+    "target_tag_id": "T005",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "連結成分をUnion-Findまたはグラフ探索で求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R199",
+    "source_tag_id": "T201",
+    "target_tag_id": "T066",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "連結成分をUnion-Findまたはグラフ探索で求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R200",
+    "source_tag_id": "T201",
+    "target_tag_id": "T067",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "連結成分をUnion-Findまたはグラフ探索で求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R201",
+    "source_tag_id": "T202",
+    "target_tag_id": "T134",
+    "kind": "support",
+    "guard": "always",
+    "reason": "階乗内の素因数の指数を計算する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R202",
+    "source_tag_id": "T203",
+    "target_tag_id": "T175",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "負閉路を距離緩和や全点対最短路で検出する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R203",
+    "source_tag_id": "T203",
+    "target_tag_id": "T208",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "負閉路を距離緩和や全点対最短路で検出する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R204",
+    "source_tag_id": "T204",
+    "target_tag_id": "T043",
+    "kind": "support",
+    "guard": "always",
+    "reason": "平面グラフの各頂点の辺を角度順にたどる実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R205",
+    "source_tag_id": "T206",
+    "target_tag_id": "T013",
+    "kind": "support",
+    "guard": "always",
+    "reason": "ヒストグラムの最大長方形を単調スタックで求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R206",
+    "source_tag_id": "T207",
+    "target_tag_id": "T081",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "最近点対の分割統治・走査線と整列による解法候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R207",
+    "source_tag_id": "T207",
+    "target_tag_id": "T266",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "最近点対の分割統治・走査線と整列による解法候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R208",
+    "source_tag_id": "T207",
+    "target_tag_id": "T077",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "最近点対の分割統治・走査線と整列による解法候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R209",
+    "source_tag_id": "T208",
+    "target_tag_id": "T055",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Floyd-Warshallは全点対最短路法。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R210",
+    "source_tag_id": "T209",
+    "target_tag_id": "T032",
+    "kind": "support",
+    "guard": "always",
+    "reason": "下限制約付きフローを補助頂点を含む最大流へ帰着する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R211",
+    "source_tag_id": "T211",
+    "target_tag_id": "T212",
+    "kind": "support",
+    "guard": "always",
+    "reason": "行列式の計算で消去法と線形代数を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R212",
+    "source_tag_id": "T211",
+    "target_tag_id": "T136",
+    "kind": "support",
+    "guard": "always",
+    "reason": "行列式の計算で消去法と線形代数を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R213",
+    "source_tag_id": "T212",
+    "target_tag_id": "T136",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Gauss消去は線形代数の具体的な計算法。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R214",
+    "source_tag_id": "T213",
+    "target_tag_id": "T065",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "k個を選ぶ部分集合の全列挙は全探索。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R215",
+    "source_tag_id": "T214",
+    "target_tag_id": "T061",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Gray codeはマスクの全列挙とビットの差分更新を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R216",
+    "source_tag_id": "T214",
+    "target_tag_id": "T117",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Gray codeはマスクの全列挙とビットの差分更新を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R217",
+    "source_tag_id": "T217",
+    "target_tag_id": "T181",
+    "kind": "support",
+    "guard": "always",
+    "reason": "複数線分の交差を個々の線分の判定から処理する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R218",
+    "source_tag_id": "T220",
+    "target_tag_id": "T077",
+    "kind": "support",
+    "guard": "always",
+    "reason": "区間の和集合を端点順に処理する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R219",
+    "source_tag_id": "T221",
+    "target_tag_id": "T097",
+    "kind": "support",
+    "guard": "always",
+    "reason": "線形合同式をGCDで簡約し、逆元や拡張互除法で解く。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R220",
+    "source_tag_id": "T221",
+    "target_tag_id": "T194",
+    "kind": "support",
+    "guard": "always",
+    "reason": "線形合同式をGCDで簡約し、逆元や拡張互除法で解く。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R221",
+    "source_tag_id": "T221",
+    "target_tag_id": "T236",
+    "kind": "support",
+    "guard": "always",
+    "reason": "線形合同式をGCDで簡約し、逆元や拡張互除法で解く。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R222",
+    "source_tag_id": "T222",
+    "target_tag_id": "T097",
+    "kind": "support",
+    "guard": "always",
+    "reason": "一次不定方程式の整数解にGCDと拡張互除法を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R223",
+    "source_tag_id": "T222",
+    "target_tag_id": "T194",
+    "kind": "support",
+    "guard": "always",
+    "reason": "一次不定方程式の整数解にGCDと拡張互除法を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R224",
+    "source_tag_id": "T223",
+    "target_tag_id": "T162",
+    "kind": "support",
+    "guard": "always",
+    "reason": "線形篩の素数表と最小素因数を判定や分解に使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R225",
+    "source_tag_id": "T223",
+    "target_tag_id": "T134",
+    "kind": "support",
+    "guard": "always",
+    "reason": "線形篩の素数表と最小素因数を判定や分解に使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R226",
+    "source_tag_id": "T224",
+    "target_tag_id": "T022",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "LISを基本DPまたは末尾値の二分探索で求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R227",
+    "source_tag_id": "T224",
+    "target_tag_id": "T064",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "LISを基本DPまたは末尾値の二分探索で求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R228",
+    "source_tag_id": "T225",
+    "target_tag_id": "T054",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "祖先ダブリングによるLCAはLCAの特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R229",
+    "source_tag_id": "T225",
+    "target_tag_id": "T078",
+    "kind": "support",
+    "guard": "always",
+    "reason": "LCAに二の累乗個先の祖先を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R230",
+    "source_tag_id": "T226",
+    "target_tag_id": "T054",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Farach-Colton-BenderによるLCAはLCAの特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R231",
+    "source_tag_id": "T226",
+    "target_tag_id": "T245",
+    "kind": "support",
+    "guard": "always",
+    "reason": "LCAを区間最小値へ帰着する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R232",
+    "source_tag_id": "T227",
+    "target_tag_id": "T054",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "TarjanオフラインLCAはLCAの特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R233",
+    "source_tag_id": "T227",
+    "target_tag_id": "T005",
+    "kind": "support",
+    "guard": "always",
+    "reason": "DFSとUnion-Findで問い合わせへ答える。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R234",
+    "source_tag_id": "T227",
+    "target_tag_id": "T067",
+    "kind": "support",
+    "guard": "always",
+    "reason": "DFSとUnion-Findで問い合わせへ答える。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R235",
+    "source_tag_id": "T229",
+    "target_tag_id": "T032",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Dinicは最大流の具体的な計算法。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R236",
+    "source_tag_id": "T229",
+    "target_tag_id": "T066",
+    "kind": "support",
+    "guard": "always",
+    "reason": "レベルグラフのBFSとブロッキングフローのDFSを使う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R237",
+    "source_tag_id": "T229",
+    "target_tag_id": "T067",
+    "kind": "support",
+    "guard": "always",
+    "reason": "レベルグラフのBFSとブロッキングフローのDFSを使う実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R238",
+    "source_tag_id": "T230",
+    "target_tag_id": "T032",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Ford-Fulkerson等は増加路による最大流法。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R239",
+    "source_tag_id": "T230",
+    "target_tag_id": "T066",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "増加路をBFSまたはDFSで探索する実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R240",
+    "source_tag_id": "T230",
+    "target_tag_id": "T067",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "増加路をBFSまたはDFSで探索する実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R241",
+    "source_tag_id": "T231",
+    "target_tag_id": "T032",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "push-relabelは最大流の具体的な計算法。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R242",
+    "source_tag_id": "T232",
+    "target_tag_id": "T231",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "高速化したpush-relabelはpush-relabelの特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R243",
+    "source_tag_id": "T233",
+    "target_tag_id": "T053",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Kruskalは最小全域木の具体的な計算法。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R244",
+    "source_tag_id": "T233",
+    "target_tag_id": "T005",
+    "kind": "support",
+    "guard": "always",
+    "reason": "辺の整列と成分併合を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R245",
+    "source_tag_id": "T233",
+    "target_tag_id": "T077",
+    "kind": "support",
+    "guard": "always",
+    "reason": "辺の整列と成分併合を使う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R246",
+    "source_tag_id": "T234",
+    "target_tag_id": "T053",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Primは最小全域木の具体的な計算法。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R247",
+    "source_tag_id": "T234",
+    "target_tag_id": "T010",
+    "kind": "support",
+    "guard": "always",
+    "reason": "木から外へ出る最小の辺をヒープで選ぶ実装を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R248",
+    "source_tag_id": "T235",
+    "target_tag_id": "T013",
+    "kind": "support",
+    "guard": "always",
+    "reason": "最小値を返すスタックまたはキューのどちらを使うか確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R249",
+    "source_tag_id": "T235",
+    "target_tag_id": "T011",
+    "kind": "support",
+    "guard": "always",
+    "reason": "最小値を返すスタックまたはキューのどちらを使うか確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R250",
+    "source_tag_id": "T236",
+    "target_tag_id": "T176",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "逆元をFermatの累乗または拡張互除法で求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R251",
+    "source_tag_id": "T236",
+    "target_tag_id": "T194",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "逆元をFermatの累乗または拡張互除法で求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R252",
+    "source_tag_id": "T237",
+    "target_tag_id": "T127",
+    "kind": "possible_variant",
+    "guard": "polynomial",
+    "reason": "Newton法を形式的べき級数の演算へ使う場合を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R253",
+    "source_tag_id": "T238",
+    "target_tag_id": "T030",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "固定長の経路を行列累乗または層ごとのDPで求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R254",
+    "source_tag_id": "T238",
+    "target_tag_id": "T022",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "固定長の経路を行列累乗または層ごとのDPで求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R255",
+    "source_tag_id": "T241",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "always",
+    "reason": "格子点数と多角形の面積の関係を計算する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R256",
+    "source_tag_id": "T241",
+    "target_tag_id": "T172",
+    "kind": "support",
+    "guard": "always",
+    "reason": "格子点数と多角形の面積の関係を計算する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R257",
+    "source_tag_id": "T242",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "always",
+    "reason": "条件付きのビショップの配置数を数える場合を確認する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R258",
+    "source_tag_id": "T243",
+    "target_tag_id": "T073",
+    "kind": "support",
+    "guard": "always",
+    "reason": "KMPは文字列の照合を行う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R259",
+    "source_tag_id": "T244",
+    "target_tag_id": "T060",
+    "kind": "support",
+    "guard": "always",
+    "reason": "ラベル付き木と列の対応で構築や数え上げを行う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R260",
+    "source_tag_id": "T244",
+    "target_tag_id": "T130",
+    "kind": "support",
+    "guard": "always",
+    "reason": "ラベル付き木と列の対応で構築や数え上げを行う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R261",
+    "source_tag_id": "T245",
+    "target_tag_id": "T004",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "RMQを静的表または更新可能なセグメント木で処理する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R262",
+    "source_tag_id": "T245",
+    "target_tag_id": "T003",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "RMQを静的表または更新可能なセグメント木で処理する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R263",
+    "source_tag_id": "T246",
+    "target_tag_id": "T072",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "Rabin-Karpはローリングハッシュによる文字列照合。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R264",
+    "source_tag_id": "T247",
+    "target_tag_id": "T010",
+    "kind": "support",
+    "guard": "always",
+    "reason": "ランダムな併合で優先度付きのヒープを管理する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R265",
+    "source_tag_id": "T247",
+    "target_tag_id": "T079",
+    "kind": "support",
+    "guard": "always",
+    "reason": "ランダムな併合で優先度付きのヒープを管理する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R266",
+    "source_tag_id": "T248",
+    "target_tag_id": "T212",
+    "kind": "support",
+    "guard": "always",
+    "reason": "階数を消去法や基底による線形代数で求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R267",
+    "source_tag_id": "T248",
+    "target_tag_id": "T136",
+    "kind": "support",
+    "guard": "always",
+    "reason": "階数を消去法や基底による線形代数で求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R268",
+    "source_tag_id": "T251",
+    "target_tag_id": "T217",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "走査線による線分交差検出は線分交差と走査線の特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R269",
+    "source_tag_id": "T251",
+    "target_tag_id": "T266",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "走査線による線分交差検出は線分交差と走査線の特殊化。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R270",
+    "source_tag_id": "T251",
+    "target_tag_id": "T181",
+    "kind": "support",
+    "guard": "always",
+    "reason": "線分の交差判定と有効な線分の順序付き管理を使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R271",
+    "source_tag_id": "T251",
+    "target_tag_id": "T014",
+    "kind": "support",
+    "guard": "always",
+    "reason": "線分の交差判定と有効な線分の順序付き管理を使う候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R272",
+    "source_tag_id": "T252",
+    "target_tag_id": "T022",
+    "kind": "support",
+    "guard": "always",
+    "reason": "連続部分列の最適な末尾値を漸化式で求める候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R273",
+    "source_tag_id": "T254",
+    "target_tag_id": "T245",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Cartesian木を作ってRMQをLCAへ帰着する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R274",
+    "source_tag_id": "T254",
+    "target_tag_id": "T054",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Cartesian木を作ってRMQをLCAへ帰着する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R275",
+    "source_tag_id": "T254",
+    "target_tag_id": "T130",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Cartesian木を作ってRMQをLCAへ帰着する。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R276",
+    "source_tag_id": "T255",
+    "target_tag_id": "T073",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Suffix Automatonで部分文字列を扱う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R277",
+    "source_tag_id": "T256",
+    "target_tag_id": "T073",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Suffix Treeで接尾辞や部分文字列を扱う。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R278",
+    "source_tag_id": "T257",
+    "target_tag_id": "T060",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "包含排除は重複を補正する数え上げ。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R279",
+    "source_tag_id": "T259",
+    "target_tag_id": "T014",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Treapはランダムな優先度を持つ平衡二分探索木。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R280",
+    "source_tag_id": "T259",
+    "target_tag_id": "T079",
+    "kind": "support",
+    "guard": "always",
+    "reason": "Treapはランダムな優先度を持つ平衡二分探索木。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R281",
+    "source_tag_id": "T260",
+    "target_tag_id": "T130",
+    "kind": "support",
+    "guard": "always",
+    "reason": "木の彩色の構造や部分木DPを利用する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R282",
+    "source_tag_id": "T260",
+    "target_tag_id": "T027",
+    "kind": "support",
+    "guard": "always",
+    "reason": "木の彩色の構造や部分木DPを利用する候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R283",
+    "source_tag_id": "T262",
+    "target_tag_id": "T150",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "部分和を容量を状態にするDPで解く候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R284",
+    "source_tag_id": "T262",
+    "target_tag_id": "T022",
+    "kind": "possible_variant",
+    "guard": "always",
+    "reason": "部分和を容量を状態にするDPで解く候補。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R285",
+    "source_tag_id": "T263",
+    "target_tag_id": "T025",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "LCSは文字列の接頭辞のDP。",
+    "candidate_only": true
+  },
+  {
+    "relation_id": "R286",
+    "source_tag_id": "T265",
+    "target_tag_id": "T118",
+    "kind": "parent",
+    "guard": "always",
+    "reason": "一般グラフマッチングはマッチングの特殊化。",
+    "candidate_only": true
+  }
+]

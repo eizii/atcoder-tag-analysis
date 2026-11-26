@@ -1,0 +1,287 @@
+﻿relation_id,source_tag_id,source_tag,target_tag_id,target_tag,kind,guard,reason,candidate_only
+R001,T002,Lazy Segment Tree,T003,Segment Tree,parent,always,遅延セグメント木は区間集約を持つセグメント木の特殊化。,True
+R002,T003,Segment Tree,T123,区間クエリ,parent,always,セグメント木で区間の問い合わせを処理する。,True
+R003,T001,Binary Indexed Tree / Fenwick Tree,T123,区間クエリ,support,always,Fenwick木の先頭区間の集約は区間クエリの候補になる。,True
+R004,T004,Sparse Table,T123,区間クエリ,parent,always,Sparse Tableは静的な区間クエリを処理する。,True
+R005,T006,Wavelet Matrix,T123,区間クエリ,parent,always,Wavelet Matrixは区間内の値や順位を問い合わせる。,True
+R006,T009,Multiset,T012,Set,support,always,多重集合を順序付き集合や平衡木で実装する可能性を確認する。,True
+R007,T009,Multiset,T014,平衡二分探索木,support,always,多重集合を順序付き集合や平衡木で実装する可能性を確認する。,True
+R008,T015,永続データ構造,T003,Segment Tree,possible_variant,range_query,永続化する対象が区間集約なら永続セグメント木を確認する。,True
+R009,T016,Convex Hull Trick / Li Chao Tree,T022,基礎DP / 動的計画法入門,support,always,凸包によるDP遷移の最適化に対応する基本DPを確認する。,True
+R010,T017,bit DP,T022,基礎DP / 動的計画法入門,support,always,部分集合DPは基本DPとマスク演算を使用する。,True
+R011,T017,bit DP,T117,ビット演算,support,always,部分集合DPは基本DPとマスク演算を使用する。,True
+R012,T017,bit DP,T060,数え上げ,support,counting,部分集合DPで条件を満たす構造の個数を保存しているか確認する。,True
+R013,T019,インラインDP,T022,基礎DP / 動的計画法入門,parent,always,上書きによる更新はDPの実装を具体化する。,True
+R014,T020,全方位木DP,T027,木DP,parent,always,全方位木DPは根を変える木DPである。,True
+R015,T020,全方位木DP,T067,深さ優先探索,support,always,木の走査と親子の構造を使う実装を確認する。,True
+R016,T020,全方位木DP,T130,木 / 二分木,support,always,木の走査と親子の構造を使う実装を確認する。,True
+R017,T021,区間DP,T022,基礎DP / 動的計画法入門,parent,always,区間を状態に持つDPは基本DPの特殊化。,True
+R018,T023,戻すDP,T022,基礎DP / 動的計画法入門,parent,always,戻すDPはDPの表の寄与を取り消す方法。,True
+R019,T024,挿入DP,T022,基礎DP / 動的計画法入門,parent,always,挿入DPは挿入位置による状態遷移を持つ。,True
+R020,T025,文字列DP,T022,基礎DP / 動的計画法入門,parent,always,文字列DPは文字位置等を状態に持つDP。,True
+R021,T026,期待値DP,T022,基礎DP / 動的計画法入門,parent,always,期待値を状態値とするDPは基本DPの特殊化。,True
+R022,T026,期待値DP,T029,確率DP,possible_variant,stochastic,期待値の漸化式に対して確率質量を配る別解が構成できるか確認する。,True
+R023,T026,期待値DP,T236,モジュラ逆元,support,modular,期待値を法で求める場合は除算の逆元を確認する。,True
+R024,T027,木DP,T022,基礎DP / 動的計画法入門,parent,always,木DPは部分木を状態にしたDP。,True
+R025,T027,木DP,T067,深さ優先探索,support,always,部分木の集約を行う木の走査を確認する。,True
+R026,T027,木DP,T130,木 / 二分木,support,always,部分木の集約を行う木の走査を確認する。,True
+R027,T028,桁DP,T022,基礎DP / 動的計画法入門,parent,always,桁DPは桁位置等を状態に持つDP。,True
+R028,T029,確率DP,T022,基礎DP / 動的計画法入門,parent,always,確率を状態値とするDPは基本DPの特殊化。,True
+R029,T029,確率DP,T026,期待値DP,possible_variant,stochastic,確率過程について期待値を状態にする別解が成立するか確認する。,True
+R030,T029,確率DP,T236,モジュラ逆元,support,modular,法上の確率遷移に必要な除算の逆元を確認する。,True
+R031,T022,基礎DP / 動的計画法入門,T026,期待値DP,possible_variant,stochastic,確率過程のDPでは状態値が期待値か確率かを両方確認する。,True
+R032,T022,基礎DP / 動的計画法入門,T029,確率DP,possible_variant,stochastic,確率過程のDPでは状態値が期待値か確率かを両方確認する。,True
+R033,T022,基礎DP / 動的計画法入門,T060,数え上げ,support,counting,個数を状態値として持つDPなら数え上げも候補にする。,True
+R034,T030,行列累乗,T176,二分累乗法,support,always,行列累乗は繰り返し二乗と行列の演算を用いる。,True
+R035,T030,行列累乗,T136,線形代数,support,always,行列累乗は繰り返し二乗と行列の演算を用いる。,True
+R036,T031,二部マッチング,T118,マッチング,parent,always,二部マッチングはマッチングの特殊化。,True
+R037,T031,二部マッチング,T032,最大流,possible_variant,always,二部マッチングを容量1の最大流へ帰着する別解候補。,True
+R038,T033,最小カット,T032,最大流,support,always,最小カットを最大流との対応から計算する候補。,True
+R039,T034,最小費用流,T032,最大流,support,always,費用付きの流れと残余グラフの最短路を用いる実装を確認する。,True
+R040,T034,最小費用流,T055,最短経路,support,always,費用付きの流れと残余グラフの最短路を用いる実装を確認する。,True
+R041,T035,燃やす埋める,T033,最小カット,parent,always,二群への分類を最小カットへ帰着する。,True
+R042,T036,Grundy数 / Sprague-Grundy,T154,MEX,support,always,Grundy数の計算にMEX、独立なゲームの合成にXORを使う。,True
+R043,T036,Grundy数 / Sprague-Grundy,T059,XOR,support,always,Grundy数の計算にMEX、独立なゲームの合成にXORを使う。,True
+R044,T037,Nim,T059,XOR,support,always,Nimの必勝条件や手の構築でXORを使う。,True
+R045,T038,ミニマックス法,T022,基礎DP / 動的計画法入門,possible_variant,always,重複局面をまとめるミニマックスDPの実装を確認する。,True
+R046,T039,後退解析,T210,任意グラフ上のゲーム,support,always,グラフの局面の勝敗を逆向きに確定する場合を確認する。,True
+R047,T043,偏角ソート,T077,ソート,support,always,偏角の比較に外積を、順序付けにソートを使う。,True
+R048,T043,偏角ソート,T240,三角形の符号付き面積,support,always,偏角の比較に外積を、順序付けにソートを使う。,True
+R049,T044,凸包,T077,ソート,support,always,凸包の構築で点の整列と向きの判定を使う実装を確認する。,True
+R050,T044,凸包,T240,三角形の符号付き面積,support,always,凸包の構築で点の整列と向きの判定を使う実装を確認する。,True
+R051,T045,HLD,T130,木 / 二分木,support,always,HLDは木のパスを列の区間へ変換する。,True
+R052,T045,HLD,T123,区間クエリ,support,always,HLDは木のパスを列の区間へ変換する。,True
+R053,T046,DFS木,T067,深さ優先探索,parent,always,DFS木の構造を使うにはDFSを実行する。,True
+R054,T047,オイラーツアー,T067,深さ優先探索,support,always,木の巡回で部分木を配列の区間へ対応させる。,True
+R055,T047,オイラーツアー,T130,木 / 二分木,support,always,木の巡回で部分木を配列の区間へ対応させる。,True
+R056,T047,オイラーツアー,T123,区間クエリ,support,always,木の巡回で部分木を配列の区間へ対応させる。,True
+R057,T048,オイラー路,T067,深さ優先探索,support,always,Euler路の構築で辺の探索やスタックを使う候補を確認する。,True
+R058,T048,オイラー路,T013,Stack,support,always,Euler路の構築で辺の探索やスタックを使う候補を確認する。,True
+R059,T050,二重辺連結成分分解,T200,橋検出,support,always,橋を除去して辺二重連結成分を得る。,True
+R060,T051,二重頂点連結成分分解,T198,関節点検出,support,always,点二重連結成分をDFSとlowlinkで求める実装を確認する。,True
+R061,T051,二重頂点連結成分分解,T046,DFS木,support,always,点二重連結成分をDFSとlowlinkで求める実装を確認する。,True
+R062,T051,二重頂点連結成分分解,T067,深さ優先探索,support,always,点二重連結成分をDFSとlowlinkで求める実装を確認する。,True
+R063,T052,強連結成分分解,T067,深さ優先探索,support,always,強連結成分分解のDFSによる実装を確認する。,True
+R064,T054,LCA,T130,木 / 二分木,support,always,LCAは根付き木の祖先関係を利用する。,True
+R065,T057,行列木定理 / Kirchhoff の定理,T211,Gauss 消去と行列式,support,always,全域木の個数を行列式で計算する。,True
+R066,T057,行列木定理 / Kirchhoff の定理,T136,線形代数,support,always,全域木の個数を行列式で計算する。,True
+R067,T057,行列木定理 / Kirchhoff の定理,T060,数え上げ,support,always,全域木の個数を行列式で計算する。,True
+R068,T058,重心分解,T080,再帰関数,support,always,木を重心で再帰的に分割する。,True
+R069,T058,重心分解,T130,木 / 二分木,support,always,木を重心で再帰的に分割する。,True
+R070,T061,bit全探索,T065,全探索,parent,always,bit全探索はマスクを使う全列挙の特殊化。,True
+R071,T061,bit全探索,T117,ビット演算,parent,always,bit全探索はマスクを使う全列挙の特殊化。,True
+R072,T061,bit全探索,T060,数え上げ,support,counting,条件を満たす部分集合を数える場合を確認する。,True
+R073,T063,三分探索,T064,二分探索,possible_variant,always,離散の単峰関数で隣接値の比較が単調になる二分探索別解を確認する。,True
+R074,T065,全探索,T017,bit DP,possible_variant,subset_or_order,部分集合や順序の全探索を集合状態DPへまとめられるか確認する。実行可能性は未保証。,True
+R075,T065,全探索,T029,確率DP,possible_variant,stochastic,確率的な操作列の全探索を確率状態の遷移へまとめられるか確認する。実行可能性は未保証。,True
+R076,T065,全探索,T060,数え上げ,support,counting,全ての候補のうち条件を満たすものの個数を数える場合を確認する。,True
+R077,T066,幅優先探索,T055,最短経路,possible_variant,shortest_path,BFSで距離を求めているなら最短経路の一般タグを候補にする。到達判定だけなら採用しない。,True
+R078,T066,幅優先探索,T011,Queue,support,always,BFSの層順処理をFIFOキューで実装する。,True
+R079,T067,深さ優先探索,T080,再帰関数,support,always,DFSの再帰による実装か、明示的なスタックによる実装かを確認する。,True
+R080,T067,深さ優先探索,T013,Stack,support,always,DFSの再帰による実装か、明示的なスタックによる実装かを確認する。,True
+R081,T069,Suffix Array,T073,文字列処理,support,always,接尾辞配列による部分文字列の操作・比較を確認する。,True
+R082,T070,Trie,T073,文字列処理,support,always,Trieの文字列の挿入と検索を確認する。,True
+R083,T071,Z-Algorithm,T073,文字列処理,support,always,Z配列で接頭辞一致を処理する。,True
+R084,T072,Rolling Hash,T073,文字列処理,support,always,ハッシュ値による部分文字列の比較を行う。,True
+R085,T074,構文解析,T080,再帰関数,support,always,再帰下降などの構文解析の実装を確認する。,True
+R086,T074,構文解析,T073,文字列処理,support,always,再帰下降などの構文解析の実装を確認する。,True
+R087,T075,imos 法,T086,累積和,support,always,差分を累積して区間加算後の値を復元する。,True
+R088,T081,分割統治,T080,再帰関数,support,always,分割した部分問題を再帰的に解く実装を確認する。,True
+R089,T082,半分全列挙,T065,全探索,parent,always,半分全列挙は候補を二群に分ける全探索。,True
+R090,T085,座標圧縮,T077,ソート,support,always,座標の順位を得るための整列を確認する。,True
+R091,T087,AND 畳み込み,T112,ゼータ変換,support,always,AND畳み込みに集合変換と逆変換を使う実装を確認する。,True
+R092,T087,AND 畳み込み,T119,メビウス変換,support,always,AND畳み込みに集合変換と逆変換を使う実装を確認する。,True
+R093,T089,Binary Trie,T070,Trie,support,always,Binary Trieはビット列を格納するTrie。,True
+R094,T089,Binary Trie,T117,ビット演算,support,always,Binary Trieはビット列を格納するTrie。,True
+R095,T091,Catalan 数,T060,数え上げ,parent,always,Catalan数は特定構造の数え上げ。,True
+R096,T092,Color Coding,T079,乱択アルゴリズム,support,always,color codingはランダム彩色と色集合DPを使う候補を確認する。,True
+R097,T092,Color Coding,T017,bit DP,support,always,color codingはランダム彩色と色集合DPを使う候補を確認する。,True
+R098,T093,Cycle Lemma,T060,数え上げ,support,always,巡回シフトの対応を使って個数を数える。,True
+R099,T094,Dilworth の定理,T143,順序集合,support,always,半順序集合の鎖分解を二部マッチングへ帰着する候補。,True
+R100,T094,Dilworth の定理,T031,二部マッチング,support,always,半順序集合の鎖分解を二部マッチングへ帰着する候補。,True
+R101,T095,Disjoint Sparse Table,T123,区間クエリ,support,always,Disjoint Sparse Tableは結合的な区間集約を処理する。,True
+R102,T095,Disjoint Sparse Table,T120,モノイド,support,always,Disjoint Sparse Tableは結合的な区間集約を処理する。,True
+R103,T096,Erdos-Gallai の定理,T131,次数列,support,always,整列した次数列と累積値で実現条件を判定する実装を確認する。,True
+R104,T096,Erdos-Gallai の定理,T077,ソート,support,always,整列した次数列と累積値で実現条件を判定する実装を確認する。,True
+R105,T096,Erdos-Gallai の定理,T086,累積和,support,always,整列した次数列と累積値で実現条件を判定する実装を確認する。,True
+R106,T098,Euler の totient 関数,T134,素因数分解,support,always,トーシェント関数を素因数から計算する候補。,True
+R107,T100,Havel-Hakimi アルゴリズム,T131,次数列,support,always,次数の大きい頂点から次数列を更新する。,True
+R108,T100,Havel-Hakimi アルゴリズム,T077,ソート,support,always,次数の大きい頂点から次数列を更新する。,True
+R109,T102,Narayana 数,T060,数え上げ,support,always,Narayana数を二項係数等で計算する候補。,True
+R110,T102,Narayana 数,T177,二項係数,support,always,Narayana数を二項係数等で計算する候補。,True
+R111,T103,OR 畳み込み,T112,ゼータ変換,support,always,OR畳み込みに集合変換と逆変換を使う実装を確認する。,True
+R112,T103,OR 畳み込み,T119,メビウス変換,support,always,OR畳み込みに集合変換と逆変換を使う実装を確認する。,True
+R113,T106,Sqrt Tree,T123,区間クエリ,support,always,Sqrt Treeは平方根の分割による区間集約を使う。,True
+R114,T106,Sqrt Tree,T084,Sqrt Decomposition / 平方分割,support,always,Sqrt Treeは平方根の分割による区間集約を使う。,True
+R115,T107,Walsh-Hadamard 変換,T108,XOR 畳み込み,support,xor_convolution,XOR畳み込みを求める目的で変換を使っているか確認する。,True
+R116,T108,XOR 畳み込み,T107,Walsh-Hadamard 変換,support,always,XOR畳み込みをWalsh-Hadamard変換で計算する候補。,True
+R117,T109,min-plus 畳み込み,T022,基礎DP / 動的計画法入門,support,always,DPの遷移や結合にmin-plus畳み込みを使う場合を確認する。,True
+R118,T115,ハミルトンサイクル,T017,bit DP,possible_variant,always,訪問済み集合DPによるHamilton閉路の実行可能性を確認する。,True
+R119,T116,ハミルトンパス,T017,bit DP,possible_variant,always,訪問済み集合DPによるHamilton路の実行可能性を確認する。,True
+R120,T119,メビウス変換,T112,ゼータ変換,support,always,総和の変換と逆変換の双方を使う実装を確認する。,True
+R121,T122,中国剰余定理,T097,Euclid の互除法,support,always,法の整合性と合成にGCD・拡張互除法を使う候補。,True
+R122,T122,中国剰余定理,T194,拡張 Euclid の互除法,support,always,法の整合性と合成にGCD・拡張互除法を使う候補。,True
+R123,T127,多項式・形式的べき級数,T132,畳み込み,support,always,多項式演算を高速な畳み込みで実装する場合を確認する。,True
+R124,T127,多項式・形式的べき級数,T196,FFT,support,always,多項式演算を高速な畳み込みで実装する場合を確認する。,True
+R125,T128,括弧列,T086,累積和,support,always,括弧の開閉残高の接頭辞和を利用する場合を確認する。,True
+R126,T132,畳み込み,T127,多項式・形式的べき級数,support,always,通常の畳み込みを多項式の積やFFT・NTTで計算する候補。,True
+R127,T132,畳み込み,T196,FFT,support,always,通常の畳み込みを多項式の積やFFT・NTTで計算する候補。,True
+R128,T133,矩形クエリ,T123,区間クエリ,support,always,矩形クエリを二次元の累積値で処理する候補。,True
+R129,T133,矩形クエリ,T086,累積和,support,always,矩形クエリを二次元の累積値で処理する候補。,True
+R130,T134,素因数分解,T162,素数判定,support,always,素数の表や素数判定を使う素因数分解の実装を確認する。,True
+R131,T134,素因数分解,T253,エラトステネスの篩,support,always,素数の表や素数判定を使う素因数分解の実装を確認する。,True
+R132,T138,転置原理,T136,線形代数,support,always,転置原理は線形写像の演算を扱う。,True
+R133,T144,0-1 BFS,T055,最短経路,support,always,0-1 BFSはDequeで最短距離を求める。,True
+R134,T144,0-1 BFS,T007,Deque,support,always,0-1 BFSはDequeで最短距離を求める。,True
+R135,T145,連分数,T097,Euclid の互除法,support,always,連分数への展開に互除法型の剰余計算を使う。,True
+R136,T147,分割統治DP,T022,基礎DP / 動的計画法入門,support,always,DPの遷移探索を分割統治する。,True
+R137,T147,分割統治DP,T081,分割統治,support,always,DPの遷移探索を分割統治する。,True
+R138,T148,半平面交差,T007,Deque,support,always,半平面交差の角度順と両端キューによる実装を確認する。,True
+R139,T148,半平面交差,T043,偏角ソート,support,always,半平面交差の角度順と両端キューによる実装を確認する。,True
+R140,T149,整数因数分解,T134,素因数分解,support,always,因数分解を再帰的な素因数分解へ利用する候補。,True
+R141,T150,ナップサック問題,T022,基礎DP / 動的計画法入門,parent,always,ナップサックは容量等を状態にするDP。,True
+R142,T151,Knuth 最適化,T021,区間DP,parent,always,Knuthの最適化は区間DPの遷移を絞る。,True
+R143,T152,クラウト法と行列式,T136,線形代数,support,always,Croutの分解は行列の演算を利用する。,True
+R144,T158,凸多角形のミンコフスキー和,T044,凸包,support,always,凸多角形のMinkowski和で凸包と辺の向きの順序を利用する候補。,True
+R145,T158,凸多角形のミンコフスキー和,T043,偏角ソート,support,always,凸多角形のMinkowski和で凸包と辺の向きの順序を利用する候補。,True
+R146,T160,約数の個数 / 約数和,T134,素因数分解,support,always,約数の個数・総和を素因数の指数から計算する候補。,True
+R147,T163,次善最小全域木,T053,最小全域木,support,always,最小全域木上の辺の交換や経路の問い合わせを使う候補。,True
+R148,T163,次善最小全域木,T054,LCA,support,always,最小全域木上の辺の交換や経路の問い合わせを使う候補。,True
+R149,T164,焼きなまし法,T062,ヒューリスティック,parent,always,焼きなましは乱択を利用するヒューリスティック探索。,True
+R150,T164,焼きなまし法,T079,乱択アルゴリズム,parent,always,焼きなましは乱択を利用するヒューリスティック探索。,True
+R151,T165,Stars and Bars,T060,数え上げ,support,always,分配の数え上げを二項係数で求める。,True
+R152,T165,Stars and Bars,T177,二項係数,support,always,分配の数え上げを二項係数で求める。,True
+R153,T166,強連結方向付け,T200,橋検出,support,always,橋の有無やDFSの辺の向きを強連結化に利用する候補。,True
+R154,T166,強連結方向付け,T067,深さ優先探索,support,always,橋の有無やDFSの辺の向きを強連結化に利用する候補。,True
+R155,T169,2-SAT,T052,強連結成分分解,support,always,2-SATは含意グラフの強連結成分を使う。,True
+R156,T170,Aho-Corasick,T070,Trie,support,always,Aho-CorasickはTrieと文字列の走査を使う。,True
+R157,T170,Aho-Corasick,T073,文字列処理,support,always,Aho-CorasickはTrieと文字列の走査を使う。,True
+R158,T172,単純多角形の面積,T240,三角形の符号付き面積,support,always,多角形の面積を外積の和で計算する。,True
+R159,T173,割当問題 / ハンガリアン法,T031,二部マッチング,parent,always,Hungarian法は重み付きの二部マッチングを解く。,True
+R160,T175,Bellman-Ford 法,T055,最短経路,parent,always,Bellman-Fordは負辺を許す最短路法。,True
+R161,T177,二項係数,T060,数え上げ,parent,always,二項係数は選択の個数を数える。,True
+R162,T177,二項係数,T236,モジュラ逆元,support,modular,法上で階乗を割る二項係数の実装を確認する。,True
+R163,T178,二部グラフ判定,T066,幅優先探索,possible_variant,always,二色の伝播をBFSまたはDFSで行う実装を確認する。,True
+R164,T178,二部グラフ判定,T067,深さ優先探索,possible_variant,always,二色の伝播をBFSまたはDFSで行う実装を確認する。,True
+R165,T179,Burnside の補題 / Pólya 数え上げ,T060,数え上げ,support,always,対称性で同一視した構造の個数を数える。,True
+R166,T180,凸多角形への点包含判定,T161,点の位置判定,support,always,凸多角形への包含を向きと二分探索で判定する実装を確認する。,True
+R167,T180,凸多角形への点包含判定,T064,二分探索,support,always,凸多角形への包含を向きと二分探索で判定する実装を確認する。,True
+R168,T180,凸多角形への点包含判定,T240,三角形の符号付き面積,support,always,凸多角形への包含を向きと二分探索で判定する実装を確認する。,True
+R169,T181,線分交差判定,T240,三角形の符号付き面積,support,always,線分の交差判定に外積による向きを使う。,True
+R170,T186,ラベル付きグラフの数え上げ,T060,数え上げ,support,always,ラベル付きグラフの数え上げに母関数を使う候補。,True
+R171,T186,ラベル付きグラフの数え上げ,T127,多項式・形式的べき級数,support,always,ラベル付きグラフの数え上げに母関数を使う候補。,True
+R172,T187,Dijkstra 法,T055,最短経路,parent,always,Dijkstraは非負辺の最短路法。,True
+R173,T188,疎グラフ向け Dijkstra 法,T187,Dijkstra 法,parent,always,疎グラフDijkstraはDijkstraのヒープ実装。,True
+R174,T188,疎グラフ向け Dijkstra 法,T010,Priority Queue / Heap,support,always,疎グラフDijkstraは距離候補の優先度付きキューを使う。,True
+R175,T189,離散対数,T176,二分累乗法,support,always,Baby-step Giant-stepなどで累乗と値の対応表を使う候補。,True
+R176,T189,離散対数,T008,Map / 連想配列,support,always,Baby-step Giant-stepなどで累乗と値の対応表を使う候補。,True
+R177,T190,離散冪根,T189,離散対数,support,always,離散根を原始根・離散対数・指数の合同式へ帰着する候補。,True
+R178,T190,離散冪根,T124,原始根,support,always,離散根を原始根・離散対数・指数の合同式へ帰着する候補。,True
+R179,T190,離散冪根,T221,線形合同方程式,support,always,離散根を原始根・離散対数・指数の合同式へ帰着する候補。,True
+R180,T191,壊れたプロファイルDP,T022,基礎DP / 動的計画法入門,support,always,輪郭状態をDPとビット等で管理する実装を確認する。,True
+R181,T191,壊れたプロファイルDP,T117,ビット演算,support,always,輪郭状態をDPとビット等で管理する実装を確認する。,True
+R182,T192,D'Esopo-Pape 法,T055,最短経路,support,always,D'Esopo-Papeは両端キューで緩和を行う最短路法。,True
+R183,T192,D'Esopo-Pape 法,T007,Deque,support,always,D'Esopo-Papeは両端キューで緩和を行う最短路法。,True
+R184,T193,部分マスク列挙,T061,bit全探索,support,always,部分マスクの列挙はビットの集合列挙を使う。,True
+R185,T193,部分マスク列挙,T117,ビット演算,support,always,部分マスクの列挙はビットの集合列挙を使う。,True
+R186,T194,拡張 Euclid の互除法,T097,Euclid の互除法,support,always,拡張互除法はGCDと一次結合の係数を求める。,True
+R187,T194,拡張 Euclid の互除法,T090,Bézout の等式,support,always,拡張互除法はGCDと一次結合の係数を求める。,True
+R188,T195,p を法とした階乗,T134,素因数分解,support,always,素数を法とする階乗の因数と累乗の処理を確認する。,True
+R189,T195,p を法とした階乗,T176,二分累乗法,support,always,素数を法とする階乗の因数と累乗の処理を確認する。,True
+R190,T196,FFT,T132,畳み込み,support,always,FFT・NTTを多項式の積や畳み込みへ使う候補。,True
+R191,T196,FFT,T127,多項式・形式的べき級数,support,always,FFT・NTTを多項式の積や畳み込みへ使う候補。,True
+R192,T198,関節点検出,T046,DFS木,support,always,関節点の検出にDFS木とlowlinkを使う。,True
+R193,T198,関節点検出,T067,深さ優先探索,support,always,関節点の検出にDFS木とlowlinkを使う。,True
+R194,T199,オンライン橋検出,T005,Union-Find,support,always,オンラインの橋管理に成分の併合と橋の更新を使う候補。,True
+R195,T199,オンライン橋検出,T200,橋検出,support,always,オンラインの橋管理に成分の併合と橋の更新を使う候補。,True
+R196,T200,橋検出,T046,DFS木,support,always,橋の検出にDFS木とlowlinkを使う。,True
+R197,T200,橋検出,T067,深さ優先探索,support,always,橋の検出にDFS木とlowlinkを使う。,True
+R198,T201,連結成分分解,T005,Union-Find,possible_variant,always,連結成分をUnion-Findまたはグラフ探索で求める候補。,True
+R199,T201,連結成分分解,T066,幅優先探索,possible_variant,always,連結成分をUnion-Findまたはグラフ探索で求める候補。,True
+R200,T201,連結成分分解,T067,深さ優先探索,possible_variant,always,連結成分をUnion-Findまたはグラフ探索で求める候補。,True
+R201,T202,階乗の素因数指数,T134,素因数分解,support,always,階乗内の素因数の指数を計算する。,True
+R202,T203,負閉路検出,T175,Bellman-Ford 法,possible_variant,always,負閉路を距離緩和や全点対最短路で検出する候補。,True
+R203,T203,負閉路検出,T208,Floyd-Warshall 法,possible_variant,always,負閉路を距離緩和や全点対最短路で検出する候補。,True
+R204,T204,平面グラフの面探索,T043,偏角ソート,support,always,平面グラフの各頂点の辺を角度順にたどる実装を確認する。,True
+R205,T206,最大ゼロ部分行列,T013,Stack,support,always,ヒストグラムの最大長方形を単調スタックで求める候補。,True
+R206,T207,最近点対問題,T081,分割統治,possible_variant,always,最近点対の分割統治・走査線と整列による解法候補。,True
+R207,T207,最近点対問題,T266,平面走査,possible_variant,always,最近点対の分割統治・走査線と整列による解法候補。,True
+R208,T207,最近点対問題,T077,ソート,possible_variant,always,最近点対の分割統治・走査線と整列による解法候補。,True
+R209,T208,Floyd-Warshall 法,T055,最短経路,parent,always,Floyd-Warshallは全点対最短路法。,True
+R210,T209,需要付きフロー,T032,最大流,support,always,下限制約付きフローを補助頂点を含む最大流へ帰着する候補。,True
+R211,T211,Gauss 消去と行列式,T212,Gauss 消去と連立一次方程式,support,always,行列式の計算で消去法と線形代数を使う。,True
+R212,T211,Gauss 消去と行列式,T136,線形代数,support,always,行列式の計算で消去法と線形代数を使う。,True
+R213,T212,Gauss 消去と連立一次方程式,T136,線形代数,parent,always,Gauss消去は線形代数の具体的な計算法。,True
+R214,T213,k組合せ列挙,T065,全探索,parent,always,k個を選ぶ部分集合の全列挙は全探索。,True
+R215,T214,Gray code,T061,bit全探索,support,always,Gray codeはマスクの全列挙とビットの差分更新を使う。,True
+R216,T214,Gray code,T117,ビット演算,support,always,Gray codeはマスクの全列挙とビットの差分更新を使う。,True
+R217,T217,線分集合の交差,T181,線分交差判定,support,always,複数線分の交差を個々の線分の判定から処理する候補。,True
+R218,T220,線分和集合の長さ,T077,ソート,support,always,区間の和集合を端点順に処理する。,True
+R219,T221,線形合同方程式,T097,Euclid の互除法,support,always,線形合同式をGCDで簡約し、逆元や拡張互除法で解く。,True
+R220,T221,線形合同方程式,T194,拡張 Euclid の互除法,support,always,線形合同式をGCDで簡約し、逆元や拡張互除法で解く。,True
+R221,T221,線形合同方程式,T236,モジュラ逆元,support,always,線形合同式をGCDで簡約し、逆元や拡張互除法で解く。,True
+R222,T222,線形 Diophantine 方程式,T097,Euclid の互除法,support,always,一次不定方程式の整数解にGCDと拡張互除法を使う。,True
+R223,T222,線形 Diophantine 方程式,T194,拡張 Euclid の互除法,support,always,一次不定方程式の整数解にGCDと拡張互除法を使う。,True
+R224,T223,線形篩,T162,素数判定,support,always,線形篩の素数表と最小素因数を判定や分解に使う候補。,True
+R225,T223,線形篩,T134,素因数分解,support,always,線形篩の素数表と最小素因数を判定や分解に使う候補。,True
+R226,T224,LIS,T022,基礎DP / 動的計画法入門,possible_variant,always,LISを基本DPまたは末尾値の二分探索で求める候補。,True
+R227,T224,LIS,T064,二分探索,possible_variant,always,LISを基本DPまたは末尾値の二分探索で求める候補。,True
+R228,T225,Binary Lifting LCA,T054,LCA,parent,always,祖先ダブリングによるLCAはLCAの特殊化。,True
+R229,T225,Binary Lifting LCA,T078,ダブリング,support,always,LCAに二の累乗個先の祖先を使う。,True
+R230,T226,Farach-Colton and Bender LCA,T054,LCA,parent,always,Farach-Colton-BenderによるLCAはLCAの特殊化。,True
+R231,T226,Farach-Colton and Bender LCA,T245,RMQ,support,always,LCAを区間最小値へ帰着する。,True
+R232,T227,Tarjan オフライン LCA,T054,LCA,parent,always,TarjanオフラインLCAはLCAの特殊化。,True
+R233,T227,Tarjan オフライン LCA,T005,Union-Find,support,always,DFSとUnion-Findで問い合わせへ答える。,True
+R234,T227,Tarjan オフライン LCA,T067,深さ優先探索,support,always,DFSとUnion-Findで問い合わせへ答える。,True
+R235,T229,Dinic 法,T032,最大流,parent,always,Dinicは最大流の具体的な計算法。,True
+R236,T229,Dinic 法,T066,幅優先探索,support,always,レベルグラフのBFSとブロッキングフローのDFSを使う実装を確認する。,True
+R237,T229,Dinic 法,T067,深さ優先探索,support,always,レベルグラフのBFSとブロッキングフローのDFSを使う実装を確認する。,True
+R238,T230,Ford-Fulkerson / Edmonds-Karp,T032,最大流,parent,always,Ford-Fulkerson等は増加路による最大流法。,True
+R239,T230,Ford-Fulkerson / Edmonds-Karp,T066,幅優先探索,possible_variant,always,増加路をBFSまたはDFSで探索する実装を確認する。,True
+R240,T230,Ford-Fulkerson / Edmonds-Karp,T067,深さ優先探索,possible_variant,always,増加路をBFSまたはDFSで探索する実装を確認する。,True
+R241,T231,Push-Relabel 法,T032,最大流,parent,always,push-relabelは最大流の具体的な計算法。,True
+R242,T232,改良 Push-Relabel 法,T231,Push-Relabel 法,parent,always,高速化したpush-relabelはpush-relabelの特殊化。,True
+R243,T233,Kruskal 法,T053,最小全域木,parent,always,Kruskalは最小全域木の具体的な計算法。,True
+R244,T233,Kruskal 法,T005,Union-Find,support,always,辺の整列と成分併合を使う。,True
+R245,T233,Kruskal 法,T077,ソート,support,always,辺の整列と成分併合を使う。,True
+R246,T234,Prim 法,T053,最小全域木,parent,always,Primは最小全域木の具体的な計算法。,True
+R247,T234,Prim 法,T010,Priority Queue / Heap,support,always,木から外へ出る最小の辺をヒープで選ぶ実装を確認する。,True
+R248,T235,最小スタック / 最小キュー,T013,Stack,support,always,最小値を返すスタックまたはキューのどちらを使うか確認する。,True
+R249,T235,最小スタック / 最小キュー,T011,Queue,support,always,最小値を返すスタックまたはキューのどちらを使うか確認する。,True
+R250,T236,モジュラ逆元,T176,二分累乗法,possible_variant,always,逆元をFermatの累乗または拡張互除法で求める候補。,True
+R251,T236,モジュラ逆元,T194,拡張 Euclid の互除法,possible_variant,always,逆元をFermatの累乗または拡張互除法で求める候補。,True
+R252,T237,Newton 法,T127,多項式・形式的べき級数,possible_variant,polynomial,Newton法を形式的べき級数の演算へ使う場合を確認する。,True
+R253,T238,固定長パス数 / 固定長最短路,T030,行列累乗,possible_variant,always,固定長の経路を行列累乗または層ごとのDPで求める候補。,True
+R254,T238,固定長パス数 / 固定長最短路,T022,基礎DP / 動的計画法入門,possible_variant,always,固定長の経路を行列累乗または層ごとのDPで求める候補。,True
+R255,T241,Pick の定理,T060,数え上げ,support,always,格子点数と多角形の面積の関係を計算する。,True
+R256,T241,Pick の定理,T172,単純多角形の面積,support,always,格子点数と多角形の面積の関係を計算する。,True
+R257,T242,チェス盤上の Bishop 配置,T060,数え上げ,support,always,条件付きのビショップの配置数を数える場合を確認する。,True
+R258,T243,KMP 法,T073,文字列処理,support,always,KMPは文字列の照合を行う。,True
+R259,T244,Prüfer code,T060,数え上げ,support,always,ラベル付き木と列の対応で構築や数え上げを行う。,True
+R260,T244,Prüfer code,T130,木 / 二分木,support,always,ラベル付き木と列の対応で構築や数え上げを行う。,True
+R261,T245,RMQ,T004,Sparse Table,possible_variant,always,RMQを静的表または更新可能なセグメント木で処理する候補。,True
+R262,T245,RMQ,T003,Segment Tree,possible_variant,always,RMQを静的表または更新可能なセグメント木で処理する候補。,True
+R263,T246,Rabin-Karp 法,T072,Rolling Hash,parent,always,Rabin-Karpはローリングハッシュによる文字列照合。,True
+R264,T247,Randomized Heap,T010,Priority Queue / Heap,support,always,ランダムな併合で優先度付きのヒープを管理する。,True
+R265,T247,Randomized Heap,T079,乱択アルゴリズム,support,always,ランダムな併合で優先度付きのヒープを管理する。,True
+R266,T248,行列の階数,T212,Gauss 消去と連立一次方程式,support,always,階数を消去法や基底による線形代数で求める候補。,True
+R267,T248,行列の階数,T136,線形代数,support,always,階数を消去法や基底による線形代数で求める候補。,True
+R268,T251,交差線分対探索,T217,線分集合の交差,parent,always,走査線による線分交差検出は線分交差と走査線の特殊化。,True
+R269,T251,交差線分対探索,T266,平面走査,parent,always,走査線による線分交差検出は線分交差と走査線の特殊化。,True
+R270,T251,交差線分対探索,T181,線分交差判定,support,always,線分の交差判定と有効な線分の順序付き管理を使う候補。,True
+R271,T251,交差線分対探索,T014,平衡二分探索木,support,always,線分の交差判定と有効な線分の順序付き管理を使う候補。,True
+R272,T252,最大部分列和,T022,基礎DP / 動的計画法入門,support,always,連続部分列の最適な末尾値を漸化式で求める候補。,True
+R273,T254,LCA による RMQ,T245,RMQ,support,always,Cartesian木を作ってRMQをLCAへ帰着する。,True
+R274,T254,LCA による RMQ,T054,LCA,support,always,Cartesian木を作ってRMQをLCAへ帰着する。,True
+R275,T254,LCA による RMQ,T130,木 / 二分木,support,always,Cartesian木を作ってRMQをLCAへ帰着する。,True
+R276,T255,Suffix Automaton,T073,文字列処理,support,always,Suffix Automatonで部分文字列を扱う。,True
+R277,T256,Suffix Tree,T073,文字列処理,support,always,Suffix Treeで接尾辞や部分文字列を扱う。,True
+R278,T257,包除原理,T060,数え上げ,parent,always,包含排除は重複を補正する数え上げ。,True
+R279,T259,Treap,T014,平衡二分探索木,support,always,Treapはランダムな優先度を持つ平衡二分探索木。,True
+R280,T259,Treap,T079,乱択アルゴリズム,support,always,Treapはランダムな優先度を持つ平衡二分探索木。,True
+R281,T260,木の塗り分け,T130,木 / 二分木,support,always,木の彩色の構造や部分木DPを利用する候補。,True
+R282,T260,木の塗り分け,T027,木DP,support,always,木の彩色の構造や部分木DPを利用する候補。,True
+R283,T262,部分和問題,T150,ナップサック問題,possible_variant,always,部分和を容量を状態にするDPで解く候補。,True
+R284,T262,部分和問題,T022,基礎DP / 動的計画法入門,possible_variant,always,部分和を容量を状態にするDPで解く候補。,True
+R285,T263,LCS,T025,文字列DP,parent,always,LCSは文字列の接頭辞のDP。,True
+R286,T265,一般マッチング,T118,マッチング,parent,always,一般グラフマッチングはマッチングの特殊化。,True

@@ -1,0 +1,87 @@
+{
+  "reference": "V4 AI silver, not independent human gold or final LLM accuracy",
+  "reference_sha256": "c5c1368931f1fd297a241524f7fb8463cf2e08e766c95ff18a1cb79b6fd457e5",
+  "metrics": [
+    {
+      "method": "bilingual_seed20_each",
+      "candidate_count_mean": 35.147742363877825,
+      "candidate_count_p95": 39.0,
+      "candidate_count_max": 43,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 5418,
+      "micro_candidate_recall": 0.7029060716139076,
+      "macro_seen_tag_recall": 0.7942409392783505,
+      "all_tags_covered_nonempty_problems": 1135,
+      "all_tags_covered_nonempty_fraction": 0.42161961367013373
+    },
+    {
+      "method": "bilingual_expanded20_each",
+      "candidate_count_mean": 55.70650730411687,
+      "candidate_count_p95": 65.0,
+      "candidate_count_max": 73,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 6508,
+      "micro_candidate_recall": 0.8443175921120913,
+      "macro_seen_tag_recall": 0.8549231235489775,
+      "all_tags_covered_nonempty_problems": 1700,
+      "all_tags_covered_nonempty_fraction": 0.6315007429420505
+    },
+    {
+      "method": "en_budget_matched",
+      "candidate_count_mean": 55.70650730411687,
+      "candidate_count_p95": 65.0,
+      "candidate_count_max": 73,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 5841,
+      "micro_candidate_recall": 0.7577841203943955,
+      "macro_seen_tag_recall": 0.7941108487452297,
+      "all_tags_covered_nonempty_problems": 1330,
+      "all_tags_covered_nonempty_fraction": 0.49405646359583955
+    },
+    {
+      "method": "ja_budget_matched",
+      "candidate_count_mean": 55.70650730411687,
+      "candidate_count_p95": 65.0,
+      "candidate_count_max": 73,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 5568,
+      "micro_candidate_recall": 0.7223663725998962,
+      "macro_seen_tag_recall": 0.8369499654191337,
+      "all_tags_covered_nonempty_problems": 1170,
+      "all_tags_covered_nonempty_fraction": 0.4346210995542348
+    },
+    {
+      "method": "interleaved_budget_matched",
+      "candidate_count_mean": 55.70650730411687,
+      "candidate_count_p95": 65.0,
+      "candidate_count_max": 73,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 5770,
+      "micro_candidate_recall": 0.7485729112610275,
+      "macro_seen_tag_recall": 0.8308166898248072,
+      "all_tags_covered_nonempty_problems": 1285,
+      "all_tags_covered_nonempty_fraction": 0.4773402674591382
+    }
+  ],
+  "matched_budget_comparisons": [
+    {
+      "baseline": "en_budget_matched",
+      "gained_reference_pairs": 900,
+      "lost_reference_pairs": 233,
+      "exact_candidate_count_match_every_problem": true
+    },
+    {
+      "baseline": "ja_budget_matched",
+      "gained_reference_pairs": 1100,
+      "lost_reference_pairs": 160,
+      "exact_candidate_count_match_every_problem": true
+    },
+    {
+      "baseline": "interleaved_budget_matched",
+      "gained_reference_pairs": 876,
+      "lost_reference_pairs": 138,
+      "exact_candidate_count_match_every_problem": true
+    }
+  ],
+  "development_iteration_after_Japanese_only_diagnostics": true
+}

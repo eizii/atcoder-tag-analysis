@@ -1,0 +1,102 @@
+{
+  "prefix": "query: for both corpus and definitions",
+  "changed_only": "tag definition prefix, reuses original corpus chunk vectors",
+  "model": {
+    "model": "intfloat/multilingual-e5-small",
+    "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "files": {
+      "model_qint8_avx512_vnni.onnx": {
+        "sha256": "dd476dd0c2514e9b9be83aeb3853fac0763e0bdf4a71645407587d77c48a2d88",
+        "bytes": 118346824
+      },
+      "tokenizer.json": {
+        "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39",
+        "bytes": 17082730
+      }
+    }
+  },
+  "encoding": {
+    "texts": 266,
+    "truncated": 0,
+    "seconds": 2.0418547,
+    "max_tokens": 256,
+    "prefix": "query: "
+  },
+  "script_sha256": "8395f5e4b434eb9134b13a37a996f1222161035b4e5e47484a95c0ce17103716",
+  "exploratory_after_primary_diagnostic": true,
+  "elapsed_seconds": 7.4026122999999995,
+  "metrics": [
+    {
+      "method": "symmetric_definitions_top5",
+      "candidate_count_mean": 5.0,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 1333,
+      "micro_candidate_recall": 0.1729372080954852,
+      "all_tags_covered_nonempty_fraction": 0.07280832095096583,
+      "reference": "V4_AI_silver_not_human_gold"
+    },
+    {
+      "method": "symmetric_hybrid_top5",
+      "candidate_count_mean": 6.28652058432935,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 4486,
+      "micro_candidate_recall": 0.5819927348209653,
+      "all_tags_covered_nonempty_fraction": 0.2841753343239227,
+      "reference": "V4_AI_silver_not_human_gold"
+    },
+    {
+      "method": "symmetric_definitions_top10",
+      "candidate_count_mean": 10.0,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 1839,
+      "micro_candidate_recall": 0.23858329008822002,
+      "all_tags_covered_nonempty_fraction": 0.099925705794948,
+      "reference": "V4_AI_silver_not_human_gold"
+    },
+    {
+      "method": "symmetric_hybrid_top10",
+      "candidate_count_mean": 11.167994687915007,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 4677,
+      "micro_candidate_recall": 0.606772184743124,
+      "all_tags_covered_nonempty_fraction": 0.31426448736998513,
+      "reference": "V4_AI_silver_not_human_gold"
+    },
+    {
+      "method": "symmetric_definitions_top20",
+      "candidate_count_mean": 20.0,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 2476,
+      "micro_candidate_recall": 0.3212247016087182,
+      "all_tags_covered_nonempty_fraction": 0.1337295690936107,
+      "reference": "V4_AI_silver_not_human_gold"
+    },
+    {
+      "method": "symmetric_hybrid_top20",
+      "candidate_count_mean": 21.030876494023904,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 4948,
+      "micro_candidate_recall": 0.6419304618578101,
+      "all_tags_covered_nonempty_fraction": 0.3525260029717682,
+      "reference": "V4_AI_silver_not_human_gold"
+    },
+    {
+      "method": "symmetric_definitions_top40",
+      "candidate_count_mean": 40.0,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 3345,
+      "micro_candidate_recall": 0.4339647119875454,
+      "all_tags_covered_nonempty_fraction": 0.19465081723625557,
+      "reference": "V4_AI_silver_not_human_gold"
+    },
+    {
+      "method": "symmetric_hybrid_top40",
+      "candidate_count_mean": 40.84628154050465,
+      "reference_pairs": 7708,
+      "covered_reference_pairs": 5348,
+      "micro_candidate_recall": 0.6938245978204463,
+      "all_tags_covered_nonempty_fraction": 0.41196136701337294,
+      "reference": "V4_AI_silver_not_human_gold"
+    }
+  ]
+}
